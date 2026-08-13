@@ -1,0 +1,128 @@
+.settings-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 14px;
+  overflow-y: auto;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.settings-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+.set-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--rg-text);
+  padding: 4px 2px;
+}
+
+.set-row span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.set-row.clickable {
+  border-radius: 12px;
+}
+
+.set-row.clickable:active {
+  background: var(--rg-ring);
+}
+
+.set-row.danger span {
+  color: var(--rg-danger);
+}
+
+.set-value {
+  font-size: 12px;
+  color: var(--rg-muted);
+}
+
+.font-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.font-btn {
+  width: 34px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--rg-line);
+  color: var(--rg-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.font-btn.active {
+  border-color: var(--rg-accent);
+  color: var(--rg-accent);
+}
+
+.theme-btn {
+  width: 34px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--rg-line);
+  color: var(--rg-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.theme-btn.active {
+  border-color: var(--rg-accent);
+  color: var(--rg-accent);
+}
+
+.profile-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 0 4px;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--rg-accent);
+  color: var(--rg-accent-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--rg-text);
+}
+
+.profile-mail {
+  font-size: 12px;
+  color: var(--rg-muted);
+}

@@ -1,0 +1,40 @@
+.pin-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--rg-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pin-card {
+  width: min(320px, 86vw);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pin-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--rg-text);
+  text-align: center;
+}
+
+.onboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 6px 0 12px;
+}
+
+.onboard-item {
+  font-size: 13px;
+  color: var(--rg-text);
+  background: var(--rg-surface-2);
+  border: 1px solid var(--rg-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+}

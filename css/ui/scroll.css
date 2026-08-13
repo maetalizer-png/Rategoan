@@ -1,0 +1,37 @@
+.scroll-down {
+  position: fixed;
+  right: 16px;
+  bottom: 150px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  color: var(--rg-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--rg-shadow);
+  z-index: 30;
+}
+
+.scroll-down:active {
+  background: var(--rg-ring);
+}
+
+.scroll-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--rg-danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}

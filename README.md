@@ -17,7 +17,7 @@ local-first — tidak ada data percakapan yang meninggalkan perangkat.
 | Berkas / Folder    | Tanggung Jawab                                              |
 |---------------------|--------------------------------------------------------------|
 | `index.html`         | Shell aplikasi: topbar, area chat, composer, sidebar 2 view |
-| `css/`                | Design system light/dark, layout, komponen, utilitas       |
+| `css/main.css`        | Entry point CSS: `@import` seluruh partial dengan namespace tunggal `--rg-*` |
 | `js/main.js`          | Entry point ES module: wiring & bootstrap aplikasi          |
 | `js/utils/`           | Fungsi murni: DOM helper, format, haptics, clipboard, markdown |
 | `js/state/`           | State & penyimpanan: store, theme, auth, font, storage, pin |
@@ -86,10 +86,17 @@ Lalu buka:
     ├── icon.svg
     ├── README.md
     ├── css/
-    │   ├── base.css
-    │   ├── layout.css
-    │   ├── components.css
-    │   └── utilities.css
+    │   ├── main.css      (entry point, @import semua partial di bawah)
+    │   ├── tokens.css    (custom properties, namespace tunggal --rg-*)
+    │   ├── reset.css      (reset elemen global + reduced-motion)
+    │   ├── utilities.css   (state class lintas-komponen: font-size, status model/suara)
+    │   ├── layout/        (shell, sidebar)
+    │   ├── ui/            (buttons, toast, menu, scroll)
+    │   ├── chat/           (messages, search)
+    │   ├── history/         (history)
+    │   ├── sheets/           (sheets/attach/model)
+    │   ├── account/           (auth, settings)
+    │   └── system/             (overlays: onboarding & kunci PIN)
     └── js/
         ├── main.js
         ├── utils/       (dom, format, haptics, clipboard, markdown)

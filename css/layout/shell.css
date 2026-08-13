@@ -1,0 +1,112 @@
+.row-spacer {
+  flex: 1;
+}
+
+#topbar {
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  background: var(--rg-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rg-line);
+  position: relative;
+  z-index: 30;
+}
+
+#topbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rg-accent), transparent);
+  opacity: 0.5;
+}
+
+#app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background: var(--rg-line);
+  border-radius: 2px;
+}
+
+#composer {
+  flex-shrink: 0;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#composer-card {
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  border-radius: 26px;
+  padding: 16px 14px 10px;
+  box-shadow: var(--rg-shadow);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#composer-card:focus-within {
+  border-color: var(--rg-line-accent);
+  box-shadow: 0 0 0 3px var(--rg-ring), var(--rg-shadow);
+}
+
+#chat-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--rg-text);
+  font-size: 17px;
+  line-height: 1.45;
+  padding: 2px 4px;
+  resize: none;
+  max-height: 120px;
+  overflow-y: auto;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+#chat-input::placeholder {
+  color: var(--rg-muted);
+}
+
+.card-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}

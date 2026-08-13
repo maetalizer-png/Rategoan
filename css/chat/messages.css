@@ -1,0 +1,147 @@
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+}
+
+.empty-brand {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--rg-accent);
+}
+
+.empty-hint {
+  font-size: 12px;
+  color: var(--rg-muted);
+}
+
+.empty-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.empty-chip {
+  padding: 10px 14px;
+  border-radius: var(--rg-pill);
+  border: 1px solid var(--rg-line);
+  color: var(--rg-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.empty-chip:active {
+  background: var(--rg-ring);
+}
+
+.msg {
+  max-width: 82%;
+  font-size: 15px;
+  line-height: 1.55;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.msg .time {
+  display: block;
+  font-size: 10px;
+  color: var(--rg-muted);
+  margin-top: 4px;
+  text-align: right;
+}
+
+.msg.user {
+  align-self: flex-end;
+  padding: 10px 14px 6px;
+  border-radius: var(--rg-radius);
+  border-bottom-right-radius: 4px;
+  border: 1px solid var(--rg-line-accent);
+  background: var(--rg-surface-2);
+}
+
+.msg.ai {
+  align-self: flex-start;
+  padding: 0 2px;
+}
+
+.msg.hit {
+  outline: 2px solid var(--rg-accent);
+}
+
+.msg.typing {
+  color: var(--rg-muted);
+  animation: pulse 1s infinite;
+}
+
+.msg-attach {
+  display: block;
+  font-size: 11px;
+  color: var(--rg-muted);
+  margin-top: 4px;
+}
+
+.msg-thumb {
+  width: 140px;
+  max-width: 64%;
+  border-radius: 10px;
+  border: 1px solid var(--rg-line);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.msg-quote {
+  display: block;
+  font-size: 11px;
+  color: var(--rg-muted);
+  border-left: 2px solid var(--rg-accent);
+  padding: 2px 8px;
+  margin-bottom: 6px;
+}
+
+.day-divider {
+  align-self: center;
+  font-size: 10px;
+  color: var(--rg-muted);
+  background: var(--rg-surface-2);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--rg-pill);
+  padding: 3px 10px;
+  margin: 10px 0 4px;
+}
+
+.md-pre {
+  display: block;
+  background: var(--rg-surface-2);
+  border: 1px solid var(--rg-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 6px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.md-code {
+  background: var(--rg-surface-2);
+  border: 1px solid var(--rg-line);
+  border-radius: 6px;
+  padding: 1px 5px;
+  font-size: 13px;
+}
+
+.md-h {
+  display: block;
+  margin: 4px 0;
+}
+
+.md-li {
+  color: var(--rg-accent);
+  font-weight: 700;
+}

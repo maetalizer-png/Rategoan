@@ -1,6 +1,64 @@
-#model-status{display:none;font-size:11px;color:var(--muted);flex-shrink:0}
-#model-status.active{display:block;padding:6px 16px;border-bottom:1px solid var(--line)}
-#btn-voice-input.listening{color:var(--accent);animation:pulse 1s infinite}
-#btn-stop{display:none;color:var(--danger)}
-#btn-stop.active{display:flex}
-@keyframes pulse{50%{opacity:.35}}
+#model-status {
+  display: none;
+  font-size: 11px;
+  color: var(--rg-muted);
+  flex-shrink: 0;
+}
+
+#model-status.active {
+  display: block;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--rg-line);
+}
+
+#btn-voice-input.listening {
+  color: var(--rg-accent);
+  animation: pulse 1s infinite;
+}
+
+#btn-stop {
+  display: none;
+  color: var(--rg-danger);
+}
+
+#btn-stop.active {
+  display: flex;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+html[data-font='small'] .msg {
+  font-size: 13px;
+}
+
+html[data-font='small'] .hist-title {
+  font-size: 12px;
+}
+
+html[data-font='small'] #chat-input {
+  font-size: 14px;
+}
+
+html[data-font='small'] .empty-chip {
+  font-size: 11px;
+}
+
+html[data-font='large'] .msg {
+  font-size: 17px;
+}
+
+html[data-font='large'] .hist-title {
+  font-size: 14px;
+}
+
+html[data-font='large'] #chat-input {
+  font-size: 17px;
+}
+
+html[data-font='large'] .empty-chip {
+  font-size: 13px;
+}

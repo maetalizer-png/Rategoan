@@ -1,0 +1,31 @@
+#msg-menu {
+  position: fixed;
+  z-index: 70;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  border-radius: 12px;
+  box-shadow: var(--rg-shadow);
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 6px;
+}
+
+#msg-menu button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--rg-text);
+  text-align: left;
+}
+
+#msg-menu button:active {
+  background: var(--rg-ring);
+}
+
+#msg-menu button.danger {
+  color: var(--rg-danger);
+}
