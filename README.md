@@ -8,19 +8,29 @@ privat, dan siap dihubungkan dengan model AI yang berjalan sepenuhnya di perangk
 ## 1. Ringkasan
 
 Rategoan adalah single-page application (SPA) tanpa framework dan tanpa build tool:
-HTML, CSS, dan JavaScript modular murni. Dirancang mobile-first dengan tema
-light/dark, gestur sentuh, serta arsitektur local-first — tidak ada data
-percakapan yang meninggalkan perangkat.
+HTML, CSS, dan JavaScript modular murni berbasis ES6 Modules (import/export).
+Dirancang mobile-first dengan tema light/dark, gestur sentuh, serta arsitektur
+local-first — tidak ada data percakapan yang meninggalkan perangkat.
 
 ## 2. Berkas Inti
 
-| Berkas            | Tanggung Jawab                                              |
-|-------------------|-------------------------------------------------------------|
-| `rategoan.html`   | Shell aplikasi: topbar, area chat, composer, sidebar 2 view |
-| `style.css`       | Design system light/dark, tata letak, ikon SVG              |
-| `app.js`          | Logika UI modular (Theme, Store, Voice, Chat, Swipe, AI)    |
-| `model/`          | (Fase 2) berkas model ONNX lokal                            |
-| `README.md`       | Dokumen ini                                                 |
+| Berkas / Folder    | Tanggung Jawab                                              |
+|---------------------|--------------------------------------------------------------|
+| `index.html`         | Shell aplikasi: topbar, area chat, composer, sidebar 2 view |
+| `css/`                | Design system light/dark, layout, komponen, utilitas       |
+| `js/main.js`          | Entry point ES module: wiring & bootstrap aplikasi          |
+| `js/utils/`           | Fungsi murni: DOM helper, format, haptics, clipboard, markdown |
+| `js/state/`           | State & penyimpanan: store, theme, auth, font, storage, pin |
+| `js/core/`            | Layanan inti: toast, router                                 |
+| `js/ui/`              | Komponen UI lepas: drawer, scroll-to-bottom, quote           |
+| `js/chat/`            | Alur percakapan: chat, composer, pencarian chat, suara       |
+| `js/history/`         | Riwayat chat & menu kontekstualnya                          |
+| `js/sheets/`          | Bottom sheet: lampiran & pemilihan model                     |
+| `js/account/`         | Akun: profil, login, pengaturan                              |
+| `js/system/`          | Integrasi sistem: jaringan, install PWA, backup, shortcut, onboarding |
+| `js/ai/`              | (Fase 2) titik integrasi model AI lokal                      |
+| `sw.js`                | Service worker (cache lifecycle)                             |
+| `README.md`           | Dokumen ini                                                   |
 
 ## 3. Fitur Kerangka
 
@@ -56,22 +66,42 @@ percakapan yang meninggalkan perangkat.
 
 ## 5. Menjalankan
 
-Serve folder ini melalui server lokal:
+JavaScript diorganisir sebagai ES6 Modules (`import`/`export`), sehingga wajib
+diakses melalui server HTTP, bukan `file://`. Contoh:
 
-    http://localhost:8080/rategoan.html
+    npx http-server -p 8080
+    # atau
+    python3 -m http.server 8080
 
-Mode `file://` dapat digunakan untuk pengujian UI murni;
-fitur model dan WebGPU bekerja optimal melalui HTTP.
+Lalu buka:
+
+    http://localhost:8080/index.html
 
 ## 6. Struktur Folder
 
-    rategoan/
-    ├── rategoan.html
-    ├── style.css
-    ├── app.js
-    ├── model/
-    ├── assets/
-    └── README.md
+    Rategoan/
+    ├── index.html
+    ├── manifest.webmanifest
+    ├── sw.js
+    ├── icon.svg
+    ├── README.md
+    ├── css/
+    │   ├── base.css
+    │   ├── layout.css
+    │   ├── components.css
+    │   └── utilities.css
+    └── js/
+        ├── main.js
+        ├── utils/       (dom, format, haptics, clipboard, markdown)
+        ├── state/       (store, theme, auth, font, storage, pin)
+        ├── core/        (toast, router)
+        ├── ui/          (drawer, scrolldown, quote)
+        ├── chat/        (chat, composer, chatsearch, voice)
+        ├── history/     (history, histmenu, msgmenu)
+        ├── sheets/      (sheets, attach, models)
+        ├── account/     (account, login, settings)
+        ├── system/      (netmon, install, backup, shortcuts, onboard)
+        └── ai/          (titik integrasi model AI)
 
 ## 7. Roadmap
 

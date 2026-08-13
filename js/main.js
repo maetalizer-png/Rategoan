@@ -1,48 +1,74 @@
-'use strict';
+import { $, scrollBottom } from './utils/dom.js';
+import { store } from './state/store.js';
+import { theme } from './state/theme.js';
+import { auth } from './state/auth.js';
+import { font } from './state/font.js';
+import { pin } from './state/pin.js';
+import { router } from './core/router.js';
+import { chat } from './chat/chat.js';
+import { chatsearch } from './chat/chatsearch.js';
+import { composer } from './chat/composer.js';
+import { voice } from './chat/voice.js';
+import { history as chatHistory } from './history/history.js';
+import { histmenu } from './history/histmenu.js';
+import { msgmenu } from './history/msgmenu.js';
+import { drawer } from './ui/drawer.js';
+import { scrolldown } from './ui/scrolldown.js';
+import { sheets } from './sheets/sheets.js';
+import { attach } from './sheets/attach.js';
+import { models } from './sheets/models.js';
+import { netmon } from './system/netmon.js';
+import { install } from './system/install.js';
+import { backup } from './system/backup.js';
+import { shortcuts } from './system/shortcuts.js';
+import { onboard } from './system/onboard.js';
+import { settings } from './account/settings.js';
+import { login } from './account/login.js';
+
 document.addEventListener('DOMContentLoaded', () => {
-  RG.store.init();
-  RG.theme.init();
-  RG.auth.init();
-  RG.font.load();
-  RG.router.init();
-  RG.chat.renderMessages();
-  RG.history.render();
-  RG.history.bind();
-  RG.drawer.bind();
-  RG.scrolldown.bind();
-  RG.chatsearch.bind();
-  RG.sheets.bind();
-  RG.attach.bind();
-  RG.models.bind();
-  RG.composer.bind();
-  RG.voice.bind();
-  RG.msgmenu.bind();
-  RG.histmenu.bind();
-  RG.netmon.bind();
-  RG.install.bind();
-  RG.backup.bind();
-  RG.shortcuts.bind();
-  RG.pin.bind();
-  RG.pin.bindAutoLock();
-  RG.onboard.bind();
-  RG.settings.bind();
-  RG.login.bind();
-  RG.onboard.maybeShow();
+  store.init();
+  theme.init();
+  auth.init();
+  font.load();
+  router.init();
+  chat.renderMessages();
+  chatHistory.render();
+  chatHistory.bind();
+  drawer.bind();
+  scrolldown.bind();
+  chatsearch.bind();
+  sheets.bind();
+  attach.bind();
+  models.bind();
+  composer.bind();
+  voice.bind();
+  msgmenu.bind();
+  histmenu.bind();
+  netmon.bind();
+  install.bind();
+  backup.bind();
+  shortcuts.bind();
+  pin.bind();
+  pin.bindAutoLock();
+  onboard.bind();
+  settings.bind();
+  login.bind();
+  onboard.maybeShow();
   try {
     const params = new URLSearchParams(location.search);
     const share = params.get('shareText');
     if (share) {
-      history.replaceState(null, '', location.pathname + location.hash);
-      if (RG.auth.state) {
-        const inp = RG.$('chat-input');
+      window.history.replaceState(null, '', location.pathname + location.hash);
+      if (auth.state) {
+        const inp = $('chat-input');
         inp.value = share;
-        RG.composer.autoGrow();
+        composer.autoGrow();
         inp.focus();
       }
     }
   } catch (e) {}
   if (window.visualViewport) {
-    visualViewport.addEventListener('resize', () => setTimeout(RG.scrollBottom, 100));
+    visualViewport.addEventListener('resize', () => setTimeout(scrollBottom, 100));
   }
 });
 
