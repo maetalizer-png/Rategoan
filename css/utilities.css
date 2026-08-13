@@ -1,0 +1,6 @@
+#model-status{display:none;font-size:11px;color:var(--muted);flex-shrink:0}
+#model-status.active{display:block;padding:6px 16px;border-bottom:1px solid var(--line)}
+#btn-voice-input.listening{color:var(--accent);animation:pulse 1s infinite}
+#btn-stop{display:none;color:var(--danger)}
+#btn-stop.active{display:flex}
+@keyframes pulse{50%{opacity:.35}}
