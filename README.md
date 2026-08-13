@@ -28,7 +28,12 @@ local-first — tidak ada data percakapan yang meninggalkan perangkat.
 | `js/sheets/`          | Bottom sheet: lampiran & pemilihan model                     |
 | `js/account/`         | Akun: profil, login, pengaturan                              |
 | `js/system/`          | Integrasi sistem: jaringan, install PWA, backup, shortcut, onboarding |
-| `js/ai/`              | (Fase 2) titik integrasi model AI lokal                      |
+| `js/ai/`              | Adapter (3 file) yang menjembatani kerangka Rategoan ke otak AI |
+| `rategoan-llm/`        | Mesin balasan lokal berbasis pola, tanpa API key, lazy-init  |
+| `raget-database/`      | Penyimpanan catatan Q&A untuk feedback loop (`raget_db`)     |
+| `raget-memory/`        | Memori jangka pendek (konteks) & jangka panjang (fakta pengguna) |
+| `ai-agent/`            | Orkestrasi: intent routing, tools deterministik, prompt assembly |
+| `dataset/`             | Persona, few-shot, benchmark, dan basis pengetahuan statis   |
 | `sw.js`                | Service worker (cache lifecycle)                             |
 | `README.md`           | Dokumen ini                                                   |
 
@@ -54,15 +59,33 @@ local-first — tidak ada data percakapan yang meninggalkan perangkat.
 - Tanpa tap-highlight biru; umpan balik tekan halus mengikuti tema.
 - Tema bawaan light; preferensi tersimpan.
 
-## 4. Titik Integrasi
+## 4. Otak AI — Raget
 
-| Fungsi                   | Tujuan                                  |
-|--------------------------|-----------------------------------------|
-| `AI.loadModel()`         | Memuat model ONNX lokal                 |
-| `AI.generate()`          | Inference; mengembalikan string balasan |
-| `onLogin()`              | Alur login Gmail                        |
-| `onPlus()`               | Fitur tambahan                          |
-| `exportTxt()` / `search()` | Dormant, siap diaktifkan              |
+Rategoan kini terhubung ke **Raget**, mesin balasan lokal berbasis pola dan
+konteks — tanpa API key, tanpa model besar yang diunduh, dan lazy-loaded
+(baru dimuat saat pesan pertama dikirim, bukan saat boot).
+
+Alur satu pesan:
+
+    Pesan pengguna
+      → raget-memory (konteks 10 giliran terakhir + fakta jangka panjang)
+      → ai-agent (deteksi tool: ringkas/hitung/tanggal, atau lanjut ke LLM)
+      → rategoan-llm (pencocokan pola: salam, tanya, ide konten, jelaskan)
+      → post-processing (rapikan teks, fallback jujur bila kosong)
+      → tampil sebagai balasan (typing + TTS) & tersimpan ke raget-database
+
+Titik integrasi publik (dipakai oleh `js/chat/chat.js` dan `js/sheets/models.js`,
+tidak perlu diubah):
+
+| Fungsi              | Tujuan                                          |
+|----------------------|--------------------------------------------------|
+| `ai.generate(messages, prompt)` | Hasilkan balasan; tidak pernah `null` setelah mesin siap |
+| `ai.setStatus(text)` | Perbarui indikator status mesin (`#model-status`) |
+| `ai.ready`           | Status apakah mesin sudah diinisialisasi         |
+
+Keyspace localStorage milik otak AI terpisah dari kerangka Rategoan:
+`raget_memory` (fakta jangka panjang) dan `raget_db` (catatan Q&A), tidak
+menyentuh `rategoan_*`.
 
 ## 5. Menjalankan
 
@@ -108,7 +131,18 @@ Lalu buka:
         ├── sheets/      (sheets, attach, models)
         ├── account/     (account, login, settings)
         ├── system/      (netmon, install, backup, shortcuts, onboard)
-        └── ai/          (titik integrasi model AI)
+        └── ai/          (adapter: engine, memory, ai — satu-satunya pintu ke otak AI)
+    ├── rategoan-llm/    (llm-engine, llm-worker stub, llm-models)
+    ├── raget-database/  (raget-db, raget-schema)
+    ├── raget-memory/    (memory-short, memory-long, memory-index)
+    ├── ai-agent/        (agent, agent-tools)
+    └── dataset/
+        ├── persona.json
+        ├── fewshot.json
+        ├── bench.json
+        └── knowledge/
+            ├── umum.json
+            └── faq.json
 
 ## 7. Roadmap
 
@@ -116,7 +150,7 @@ Lalu buka:
 |------|------------------------------------|-----------|
 | 0    | Kerangka bersih + gestur swipe     | Selesai   |
 | 1    | README, struktur, polish sentuhan  | Selesai   |
-| 2    | Integrasi model lokal              | Berikutnya|
+| 2    | Integrasi model lokal (Raget)      | Selesai   |
 | 3    | Manajemen konteks + streaming      | Rencana   |
 | 4    | Cache offline penuh                | Rencana   |
 | 5    | Fitur tambahan (Gmail, export)     | Rencana   |

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Tentang Rategoan",
+    "text": "Rategoan adalah aplikasi chat pribadi yang berjalan sepenuhnya di perangkat, tanpa server dan tanpa API key."
+  },
+  {
+    "title": "Penyimpanan Lokal",
+    "text": "Semua riwayat percakapan disimpan di localStorage perangkat pengguna, tidak pernah dikirim ke pihak lain."
+  },
+  {
+    "title": "Mode Tema",
+    "text": "Rategoan mendukung tema terang, gelap, dan otomatis mengikuti pengaturan sistem perangkat."
+  },
+  {
+    "title": "Kunci Aplikasi",
+    "text": "Pengguna dapat mengaktifkan kunci PIN 4-6 digit agar percakapan tidak mudah diakses orang lain."
+  },
+  {
+    "title": "Cadangkan dan Pulihkan",
+    "text": "Chat dapat diekspor ke file JSON untuk dicadangkan, dan dipulihkan kembali kapan saja lewat menu Pengaturan."
+  },
+  {
+    "title": "Mesin Balasan Lokal",
+    "text": "Raget adalah mesin balasan berbasis pola dan konteks percakapan yang berjalan langsung di browser, tanpa mengunduh model besar."
+  }
+]

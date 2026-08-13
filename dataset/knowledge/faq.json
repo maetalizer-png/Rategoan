@@ -1,0 +1,26 @@
+[
+  {
+    "q": "Apakah Rategoan menyimpan data saya di server?",
+    "a": "Tidak. Semua data — chat, pengaturan, dan memori Raget — tersimpan lokal di perangkat Anda."
+  },
+  {
+    "q": "Apakah saya butuh API key untuk memakai Raget?",
+    "a": "Tidak. Raget berjalan sepenuhnya lokal di browser tanpa API key atau koneksi ke server AI manapun."
+  },
+  {
+    "q": "Bagaimana cara menghapus semua chat?",
+    "a": "Buka Pengaturan, lalu pilih 'Hapus Semua Chat'."
+  },
+  {
+    "q": "Bagaimana cara mengunci aplikasi dengan PIN?",
+    "a": "Buka Pengaturan, pilih 'Kunci Aplikasi', lalu buat PIN 4-6 digit."
+  },
+  {
+    "q": "Apakah Raget mengingat percakapan sebelumnya?",
+    "a": "Raget memakai konteks 10 giliran percakapan terakhir, ditambah beberapa fakta penting yang diingat lintas sesi seperti nama atau preferensi Anda."
+  },
+  {
+    "q": "Bisakah saya memakai Rategoan tanpa koneksi internet?",
+    "a": "Bisa. Setelah dimuat pertama kali, aplikasi dan mesin balasan Raget berjalan sepenuhnya offline."
+  }
+]

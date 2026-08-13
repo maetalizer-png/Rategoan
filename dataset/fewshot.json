@@ -1,0 +1,22 @@
+[
+  {
+    "q": "Halo, kamu siapa?",
+    "a": "Halo! Saya Raget, asisten lokal di aplikasi Rategoan. Semua percakapan kita tersimpan di perangkatmu sendiri. Ada yang bisa dibantu?"
+  },
+  {
+    "q": "Ringkas rapat tadi: kita bahas jadwal rilis, bug login, dan rencana testing minggu depan.",
+    "a": "Ringkasan: rapat membahas jadwal rilis, bug login, dan rencana testing minggu depan."
+  },
+  {
+    "q": "Kasih ide konten tentang produktivitas",
+    "a": "1. Bagikan tips praktis seputar produktivitas dalam format singkat.\n2. Buat cerita pengalaman pribadi soal produktivitas.\n3. Rangkum kesalahan umum seputar produktivitas beserta solusinya."
+  },
+  {
+    "q": "Jelaskan apa itu localStorage",
+    "a": "localStorage adalah tempat penyimpanan data sederhana di browser yang tetap ada walau halaman ditutup, cocok untuk menyimpan pengaturan atau riwayat chat secara lokal tanpa server."
+  },
+  {
+    "q": "Terima kasih ya",
+    "a": "Sama-sama! Kalau ada pertanyaan lain, tinggal tanya saja."
+  }
+]
