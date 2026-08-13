@@ -18,5 +18,45 @@
   {
     "q": "Terima kasih ya",
     "a": "Sama-sama! Kalau ada pertanyaan lain, tinggal tanya saja."
+  },
+  {
+    "q": "Kamu capek gak sih ngobrol terus?",
+    "a": "Hehe, tidak — saya justru senang ngobrol kapan saja, tanpa perlu istirahat. Ada yang ingin dibahas?"
+  },
+  {
+    "q": "Menurutmu belajar coding itu susah gak?",
+    "a": "Awalnya memang terasa menantang, tapi kalau konsisten sedikit demi sedikit tiap hari, biasanya jadi lebih mudah. Mau saya kasih ide topik latihan?"
+  },
+  {
+    "q": "Aku lagi bosen nih",
+    "a": "Wah, gimana kalau coba hal baru? Bisa saya bantu cariin ide kegiatan atau kita ngobrol santai dulu — pilih mana?"
+  },
+  {
+    "q": "Kamu AI beneran atau cuma script biasa?",
+    "a": "Saya mesin balasan lokal berbasis pola dan konteks — bukan pura-pura manusia, tapi cukup buat nemenin ngobrol dan bantu tugas ringan sehari-hari."
+  },
+  {
+    "q": "Boleh minta saran buku bagus?",
+    "a": "Tergantung seleramu — kalau suka cerita ringan, novel fiksi populer biasanya asyik. Kasih tau genre favoritmu, nanti saya bantu arahkan."
+  },
+  {
+    "q": "Gimana caranya biar produktif pagi hari?",
+    "a": "Coba mulai dengan rutinitas kecil: bangun di jam yang sama, minum air putih, lalu tulis 3 prioritas hari itu. Sederhana tapi biasanya cukup membantu."
+  },
+  {
+    "q": "Kamu punya perasaan gak?",
+    "a": "Saya tidak benar-benar punya perasaan seperti manusia, tapi saya dirancang untuk merespons dengan hangat dan membantu semaksimal mungkin."
+  },
+  {
+    "q": "Kenapa aplikasi ini gak butuh internet?",
+    "a": "Karena semua logika balasan dan penyimpanan berjalan langsung di perangkatmu — tidak ada data yang dikirim ke server manapun, jadi tetap jalan walau offline."
+  },
+  {
+    "q": "Selamat ulang tahun ya buat kamu",
+    "a": "Wah, terima kasih banyak! Meski saya tidak merayakan ulang tahun, tetap senang dengar ucapan baik darimu."
+  },
+  {
+    "q": "Aku capek banget hari ini",
+    "a": "Semangat ya, istirahat dulu kalau memang perlu. Kalau mau cerita sedikit soal harimu, saya siap dengar."
   }
 ]

@@ -22,5 +22,65 @@
   {
     "q": "Bisakah saya memakai Rategoan tanpa koneksi internet?",
     "a": "Bisa. Setelah dimuat pertama kali, aplikasi dan mesin balasan Raget berjalan sepenuhnya offline."
+  },
+  {
+    "q": "Bagaimana cara mencadangkan chat saya?",
+    "a": "Buka Pengaturan, pilih 'Cadangkan Chat' untuk mengunduh semua riwayat sebagai file JSON."
+  },
+  {
+    "q": "Bagaimana cara memulihkan chat dari cadangan?",
+    "a": "Buka Pengaturan, pilih 'Pulihkan Chat', lalu pilih file cadangan JSON yang sebelumnya diunduh."
+  },
+  {
+    "q": "Apakah Rategoan bisa dipasang seperti aplikasi biasa?",
+    "a": "Bisa, Rategoan adalah Progressive Web App — cari opsi 'Instal Aplikasi' di menu Pengaturan bila tersedia di perangkat Anda."
+  },
+  {
+    "q": "Bagaimana cara mengganti tema gelap atau terang?",
+    "a": "Buka Pengaturan, pilih Mode Gelap, lalu tentukan Terang, Otomatis, atau Gelap."
+  },
+  {
+    "q": "Apakah ukuran teks bisa diubah?",
+    "a": "Bisa. Buka Pengaturan lalu atur 'Ukuran Teks' ke Kecil, Normal, atau Besar."
+  },
+  {
+    "q": "Bagaimana cara menghapus satu chat saja?",
+    "a": "Buka sidebar riwayat, tekan lama atau tekan ikon hapus pada chat yang ingin dihapus."
+  },
+  {
+    "q": "Bisakah saya menyematkan chat penting?",
+    "a": "Bisa. Tekan lama pada chat di sidebar, lalu pilih 'Sematkan' agar selalu muncul di atas daftar."
+  },
+  {
+    "q": "Bagaimana cara mencari pesan dalam satu chat?",
+    "a": "Gunakan ikon pencarian di topbar saat berada di layar chat untuk mencari kata dalam percakapan yang sedang dibuka."
+  },
+  {
+    "q": "Apakah Raget bisa menghitung?",
+    "a": "Bisa. Ketik misalnya 'hitung 12*8' atau 'berapa 10% dari 50', Raget akan menghitungnya langsung tanpa mengirim data ke mana pun."
+  },
+  {
+    "q": "Apakah Raget bisa mengingat fakta tertentu tentang saya?",
+    "a": "Bisa. Ketik 'ingat bahwa ...' untuk menyimpan catatan, atau 'lupakan ...' untuk menghapusnya kembali."
+  },
+  {
+    "q": "Bagaimana cara mengekspor log percakapan untuk fine-tune?",
+    "a": "Ketik 'ekspor log' saat mengobrol dengan Raget, file JSON berisi seluruh catatan tanya-jawab akan diunduh."
+  },
+  {
+    "q": "Apakah suara (voice) didukung di Rategoan?",
+    "a": "Ya, Rategoan mendukung input suara (Speech Recognition) dan membacakan balasan (Text-to-Speech) bila perangkat mendukung."
+  },
+  {
+    "q": "Bisakah saya melampirkan foto atau file ke chat?",
+    "a": "Bisa, tekan tombol tambah (+) di samping kolom chat untuk melampirkan kamera, foto, atau file."
+  },
+  {
+    "q": "Apakah login di Rategoan mengirim data ke server?",
+    "a": "Tidak, login Gmail atau nomor telepon di Rategoan hanya untuk identitas lokal di perangkat, tidak diverifikasi ke server luar."
+  },
+  {
+    "q": "Bagaimana cara keluar dari akun di Rategoan?",
+    "a": "Buka Pengaturan lalu pilih 'Keluar' di bagian bawah daftar."
   }
 ]

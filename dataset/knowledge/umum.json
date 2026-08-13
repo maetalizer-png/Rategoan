@@ -22,5 +22,125 @@
   {
     "title": "Mesin Balasan Lokal",
     "text": "Raget adalah mesin balasan berbasis pola dan konteks percakapan yang berjalan langsung di browser, tanpa mengunduh model besar."
+  },
+  {
+    "title": "Air Putih",
+    "text": "Minum air putih yang cukup setiap hari membantu menjaga konsentrasi dan energi tubuh sepanjang aktivitas."
+  },
+  {
+    "title": "Tidur Berkualitas",
+    "text": "Tidur 7-9 jam per malam membantu tubuh memulihkan energi dan meningkatkan daya ingat keesokan harinya."
+  },
+  {
+    "title": "Teknik Pomodoro",
+    "text": "Teknik Pomodoro membagi waktu kerja menjadi sesi 25 menit fokus diikuti istirahat singkat, membantu menjaga konsentrasi."
+  },
+  {
+    "title": "Ibu Kota Indonesia",
+    "text": "Jakarta adalah ibu kota Indonesia saat ini, sementara Nusantara di Kalimantan Timur disiapkan sebagai ibu kota baru."
+  },
+  {
+    "title": "Pulau Terbesar Indonesia",
+    "text": "Kalimantan adalah pulau terbesar di Indonesia dan salah satu pulau terbesar di dunia."
+  },
+  {
+    "title": "Bahasa Resmi Indonesia",
+    "text": "Bahasa Indonesia adalah bahasa resmi negara Indonesia, berasal dari rumpun bahasa Melayu."
+  },
+  {
+    "title": "Hari Kemerdekaan Indonesia",
+    "text": "Indonesia memperingati hari kemerdekaannya setiap tanggal 17 Agustus."
+  },
+  {
+    "title": "Gunung Tertinggi Indonesia",
+    "text": "Puncak Jaya di Papua adalah titik tertinggi di Indonesia, sekitar 4.884 meter di atas permukaan laut."
+  },
+  {
+    "title": "Apa itu HTML",
+    "text": "HTML adalah bahasa markup dasar untuk menyusun struktur konten di halaman web, seperti judul, paragraf, dan gambar."
+  },
+  {
+    "title": "Apa itu CSS",
+    "text": "CSS adalah bahasa yang mengatur tampilan visual halaman web — warna, tata letak, dan animasi — terpisah dari struktur HTML."
+  },
+  {
+    "title": "Apa itu JavaScript",
+    "text": "JavaScript adalah bahasa pemrograman yang membuat halaman web interaktif, berjalan langsung di browser pengguna."
+  },
+  {
+    "title": "Apa itu ES6 Modules",
+    "text": "ES6 Modules adalah cara resmi JavaScript untuk memecah kode menjadi berkas terpisah yang saling impor-ekspor, tanpa perlu variabel global."
+  },
+  {
+    "title": "Apa itu PWA",
+    "text": "Progressive Web App (PWA) adalah aplikasi web yang bisa dipasang di perangkat dan berjalan mirip aplikasi native, termasuk saat offline."
+  },
+  {
+    "title": "Apa itu Service Worker",
+    "text": "Service Worker adalah skrip latar belakang di browser yang memungkinkan caching dan fungsi offline pada aplikasi web."
+  },
+  {
+    "title": "Fotosintesis",
+    "text": "Fotosintesis adalah proses tumbuhan mengubah cahaya matahari, air, dan karbon dioksida menjadi energi dan oksigen."
+  },
+  {
+    "title": "Gravitasi Bumi",
+    "text": "Gravitasi bumi menarik semua benda ke pusatnya dengan percepatan sekitar 9,8 meter per detik kuadrat."
+  },
+  {
+    "title": "Sistem Tata Surya",
+    "text": "Tata surya kita terdiri dari delapan planet yang mengorbit matahari, dengan Bumi sebagai planet ketiga dari matahari."
+  },
+  {
+    "title": "Kecepatan Cahaya",
+    "text": "Cahaya merambat dengan kecepatan sekitar 300.000 kilometer per detik di ruang hampa."
+  },
+  {
+    "title": "DNA",
+    "text": "DNA adalah materi genetik yang menyimpan instruksi biologis untuk pertumbuhan dan fungsi hampir semua makhluk hidup."
+  },
+  {
+    "title": "Manajemen Waktu",
+    "text": "Menuliskan 3 prioritas utama setiap pagi membantu menjaga fokus dan mengurangi rasa kewalahan sepanjang hari."
+  },
+  {
+    "title": "Kebiasaan Membaca",
+    "text": "Membaca 10-15 menit setiap hari secara konsisten lebih efektif membangun kebiasaan dibanding membaca lama sesekali."
+  },
+  {
+    "title": "Mencatat Ide",
+    "text": "Menuliskan ide segera setelah muncul membantu mencegahnya terlupakan dan memudahkan pengembangan lebih lanjut nanti."
+  },
+  {
+    "title": "Peregangan Tubuh",
+    "text": "Peregangan singkat setiap satu jam saat duduk lama membantu mengurangi ketegangan otot dan menjaga postur tubuh."
+  },
+  {
+    "title": "Enkripsi Sederhana",
+    "text": "Enkripsi adalah proses mengubah data menjadi bentuk tersandi agar hanya pihak yang punya kunci yang bisa membacanya."
+  },
+  {
+    "title": "Cloud Computing",
+    "text": "Cloud computing adalah layanan komputasi (penyimpanan, server, aplikasi) yang diakses lewat internet, bukan disimpan di perangkat sendiri."
+  },
+  {
+    "title": "Kecerdasan Buatan",
+    "text": "Kecerdasan buatan (AI) adalah bidang ilmu komputer yang membuat sistem mampu meniru sebagian kemampuan berpikir manusia, seperti mengenali pola."
+  },
+  {
+    "title": "Internet of Things",
+    "text": "Internet of Things (IoT) adalah jaringan perangkat fisik sehari-hari yang saling terhubung dan bertukar data lewat internet."
+  },
+  {
+    "title": "Candi Borobudur",
+    "text": "Candi Borobudur di Jawa Tengah adalah candi Buddha terbesar di dunia dan situs warisan dunia UNESCO."
+  },
+  {
+    "title": "Komodo",
+    "text": "Komodo adalah kadal terbesar di dunia yang hanya ditemukan secara alami di beberapa pulau di Indonesia, termasuk Pulau Komodo."
+  },
+  {
+    "title": "Batik",
+    "text": "Batik adalah kain bermotif khas Indonesia yang dibuat dengan teknik pewarnaan menggunakan malam (lilin), diakui UNESCO sebagai warisan budaya."
   }
 ]

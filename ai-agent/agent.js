@@ -5,7 +5,10 @@ import { memoryIndex } from '../raget-memory/memory-index.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { agentTools } from './agent-tools.js';
 
-const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah dan ringkas', rules: [] };
+const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
+
+const RATING_GOOD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(bagus|keren|mantap|oke|tepat)|^bagus\b|^mantap\b/i;
+const RATING_BAD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(jelek|salah|kurang\s*tepat|ngawur)|^salah\b|^jelek\b/i;
 
 let personaCache = null;
 let fewshotCache = null;
@@ -48,18 +51,40 @@ function matchFewshot(examples, text) {
   return bestScore > 0 ? best : null;
 }
 
-function detectTool(prompt) {
-  const t = String(prompt || '').trim().toLowerCase();
-  if (/^ringkas(kan)?\b/.test(t)) return 'ringkas';
-  if (/^hitung\b/.test(t) || /^[0-9()\s+\-*/.]+$/.test(t)) return 'hitung';
-  if (/\btanggal\b|\bjam berapa\b|\bhari ini\b/.test(t)) return 'tanggal';
+function detectRating(text) {
+  const t = text.trim();
+  if (RATING_GOOD_RE.test(t)) return true;
+  if (RATING_BAD_RE.test(t)) return false;
   return null;
 }
 
-function runTool(kind, prompt) {
+function looksLikeMath(t) {
+  const stripped = t.replace(/^(hitung|berapa)\s*/i, '').trim();
+  return stripped.length > 0 && /[0-9]/.test(stripped) && /^[0-9()\s+\-*/.]+$/.test(stripped);
+}
+
+function detectTool(prompt) {
+  const t = String(prompt || '').trim().toLowerCase();
+  if (/^ringkas(kan)?\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
+  if (/^ringkas(kan)?\b/.test(t)) return 'ringkas';
+  if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
+  if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
+  if (/^lupakan\b/.test(t)) return 'lupakan';
+  if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
+  if (/apa\s+yang\s+kamu\s+tahu\s+tentang\b/.test(t)) return 'cari';
+  if (/^hitung\b/.test(t) || /%\s*dari\b/.test(t) || looksLikeMath(t)) return 'hitung';
+  return null;
+}
+
+async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^ringkas(kan)?\s*:?\s*/i, ''));
-  if (kind === 'hitung') return agentTools.hitung(prompt.replace(/^hitung\s*/i, ''));
-  if (kind === 'tanggal') return agentTools.tanggal();
+  if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
+  if (kind === 'hitung') return agentTools.hitung(prompt);
+  if (kind === 'waktu') return agentTools.waktu(prompt);
+  if (kind === 'cari') return agentTools.cari(prompt.replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, ''));
+  if (kind === 'ingat') return agentTools.ingat(prompt);
+  if (kind === 'lupakan') return agentTools.lupakan(prompt);
+  if (kind === 'ekspor') return agentTools.eksporLog();
   return null;
 }
 
@@ -73,7 +98,45 @@ function recallFromMemory(text) {
     const suka = memoryLong.recall('suka');
     return suka && suka.length ? 'Setahu saya kamu suka ' + suka.join(', ') + '.' : null;
   }
+  if (/kerja\s+sebagai\s+apa\s+saya|saya\s+kerja\s+sebagai\s+apa/.test(t)) {
+    const pekerjaan = memoryLong.recall('pekerjaan');
+    return pekerjaan ? 'Setahu saya kamu kerja sebagai ' + pekerjaan + '.' : null;
+  }
+  if (/saya\s+tinggal\s+dimana|dimana\s+saya\s+tinggal/.test(t)) {
+    const kota = memoryLong.recall('kota');
+    return kota ? 'Setahu saya kamu tinggal di ' + kota + '.' : null;
+  }
   return null;
+}
+
+function acknowledgeFact(text) {
+  const nameMatch = text.match(/(?:nama\s+saya|panggil\s+saya)\s+([a-zA-Z]{2,20})/i);
+  if (nameMatch) return 'Baik, ' + nameMatch[1] + '! Senang kenal denganmu. Ada yang bisa saya bantu?';
+  const jobMatch = text.match(/saya\s+kerja\s+sebagai\s+([a-zA-Z0-9\s]{2,40})/i);
+  if (jobMatch) return 'Oh, kerja sebagai ' + jobMatch[1].trim() + ' ya, keren! Ada yang bisa saya bantu?';
+  const cityMatch = text.match(/saya\s+tinggal\s+di\s+([a-zA-Z\s]{2,40})/i);
+  if (cityMatch) return 'Noted, kamu tinggal di ' + cityMatch[1].trim() + '. Ada yang bisa saya bantu?';
+  const likeMatch = text.match(/saya\s+suka\s+([a-zA-Z0-9\s]{2,40})/i);
+  if (likeMatch) return 'Asyik, dicatat ya kamu suka ' + likeMatch[1].trim() + '. Ada yang bisa saya bantu?';
+  return null;
+}
+
+function personalize(reply, text) {
+  const isGreetingLike = /^(halo|hai|hi|hey|selamat|met|good|assalamu)/i.test(text.trim());
+  const nama = memoryLong.recall('nama');
+  if (isGreetingLike && nama && !reply.includes(nama)) {
+    reply = reply.replace(/([!,])/, ', ' + nama + '$1');
+  }
+  if (!isGreetingLike && Math.random() < 0.15) {
+    const suka = memoryLong.recall('suka');
+    const pekerjaan = memoryLong.recall('pekerjaan');
+    if (suka && suka.length) {
+      reply += ' (Ngomong-ngomong, kudengar kamu suka ' + suka[suka.length - 1] + ' ya?)';
+    } else if (pekerjaan) {
+      reply += ' (Btw, gimana kabar kerjaan sebagai ' + pekerjaan + '?)';
+    }
+  }
+  return reply;
 }
 
 function postProcess(text) {
@@ -85,41 +148,58 @@ async function respond(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
 
+  const rating = detectRating(text);
+  if (rating !== null) {
+    ragetDb.rateLast(rating);
+    const reply = rating
+      ? 'Terima kasih atas masukannya, senang bisa membantu!'
+      : 'Maaf jawaban sebelumnya kurang pas. Bisa dijelaskan lebih lanjut apa yang salah supaya saya bisa perbaiki?';
+    ragetDb.addNote(text, reply, null, 'feedback');
+    return postProcess(reply);
+  }
+
   memoryLong.learnFromText(text);
 
   const toolKind = detectTool(text);
   if (toolKind) {
-    const toolReply = runTool(toolKind, text);
+    const toolReply = await runTool(toolKind, text, messages);
     if (toolReply) {
-      ragetDb.addNote(text, toolReply, null);
+      ragetDb.addNote(text, toolReply, null, toolKind);
       return postProcess(toolReply);
     }
   }
 
   const recalled = recallFromMemory(text);
   if (recalled) {
-    ragetDb.addNote(text, recalled, null);
+    ragetDb.addNote(text, recalled, null, 'recall');
     return postProcess(recalled);
+  }
+
+  const acknowledged = acknowledgeFact(text);
+  if (acknowledged) {
+    ragetDb.addNote(text, acknowledged, null, 'personalize');
+    return postProcess(acknowledged);
   }
 
   const persona = await loadPersona();
   const shortContext = memoryShort.recent(messages, 10);
   let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name });
 
-  if (llmEngine.isFallback(raw)) {
+  if (llmEngine.isWeak(raw)) {
     const fewshot = await loadFewshot();
     const example = matchFewshot(fewshot, text);
     if (example && example.a) raw = example.a;
   }
 
   let reply = postProcess(raw);
+  reply = personalize(reply, text);
 
   const relevant = await memoryIndex.search(text, 2);
   if (relevant.length) {
     reply += '\n\n(Catatan terkait: ' + relevant[0].text.slice(0, 120) + ')';
   }
 
-  ragetDb.addNote(text, reply, null);
+  ragetDb.addNote(text, reply, null, 'chat');
   return reply;
 }
 

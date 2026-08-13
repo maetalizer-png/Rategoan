@@ -1,11 +1,12 @@
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
-function createNote(question, answer, feedback) {
+function createNote(question, answer, feedback, intent) {
   return {
     id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     question: String(question || ''),
     answer: String(answer || ''),
     feedback: feedback == null ? null : !!feedback,
+    intent: intent || 'generic',
     time: Date.now(),
     version: SCHEMA_VERSION,
   };

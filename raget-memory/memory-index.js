@@ -65,6 +65,11 @@ async function search(query, limit) {
     if (words.includes(key)) results.push({ type: 'fact', text: key + ': ' + facts[key], score: 3 });
   });
 
+  memoryLong.allNotes().forEach((note) => {
+    const score = scoreText(note.text, words);
+    if (score >= 1) results.push({ type: 'note_long', text: note.text, score: score + 1 });
+  });
+
   return results.sort((a, b) => b.score - a.score).slice(0, cap);
 }
 

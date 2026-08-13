@@ -19,8 +19,8 @@ function writeAll(list) {
   } catch (e) {}
 }
 
-function addNote(question, answer, feedback) {
-  const note = ragetSchema.createNote(question, answer, feedback);
+function addNote(question, answer, feedback, intent) {
+  const note = ragetSchema.createNote(question, answer, feedback, intent);
   const list = readAll();
   list.push(note);
   writeAll(list.slice(-MAX_NOTES));
@@ -29,6 +29,14 @@ function addNote(question, answer, feedback) {
 
 function allNotes() {
   return readAll();
+}
+
+function rateLast(feedback) {
+  const list = readAll();
+  if (!list.length) return false;
+  list[list.length - 1].feedback = !!feedback;
+  writeAll(list);
+  return true;
 }
 
 function search(query, limit) {
@@ -55,5 +63,6 @@ export const ragetDb = Object.freeze({
   addNote,
   allNotes,
   search,
+  rateLast,
   clear,
 });
