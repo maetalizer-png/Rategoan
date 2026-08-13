@@ -1,0 +1,62 @@
+.ico {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: var(--i) center/contain no-repeat;
+  mask: var(--i) center/contain no-repeat;
+}
+
+.ico-sm { width: 14px; height: 14px; }
+.ico-lg { width: 22px; height: 22px; }
+
+.ico-menu { --i: url(../../assets/icons/menu.svg); }
+.ico-search { --i: url(../../assets/icons/search.svg); }
+.ico-close { --i: url(../../assets/icons/close.svg); }
+.ico-back { --i: url(../../assets/icons/back.svg); }
+.ico-send { --i: url(../../assets/icons/send.svg); }
+.ico-plus { --i: url(../../assets/icons/plus.svg); }
+.ico-chip { --i: url(../../assets/icons/chip.svg); }
+.ico-stop { --i: url(../../assets/icons/stop.svg); }
+.ico-mic { --i: url(../../assets/icons/mic.svg); }
+.ico-gear { --i: url(../../assets/icons/gear.svg); }
+.ico-mail { --i: url(../../assets/icons/mail.svg); }
+.ico-chat-plus { --i: url(../../assets/icons/chat-plus.svg); }
+.ico-clock { --i: url(../../assets/icons/clock.svg); }
+.ico-trash { --i: url(../../assets/icons/trash.svg); }
+.ico-logout { --i: url(../../assets/icons/logout.svg); }
+.ico-moon { --i: url(../../assets/icons/moon.svg); }
+.ico-database { --i: url(../../assets/icons/database.svg); }
+.ico-text-size { --i: url(../../assets/icons/text-size.svg); }
+.ico-lock { --i: url(../../assets/icons/lock.svg); }
+.ico-download { --i: url(../../assets/icons/download.svg); }
+.ico-upload { --i: url(../../assets/icons/upload.svg); }
+.ico-info { --i: url(../../assets/icons/info.svg); }
+.ico-phone { --i: url(../../assets/icons/phone.svg); }
+.ico-arrow-down { --i: url(../../assets/icons/arrow-down.svg); }
+.ico-arrow-up { --i: url(../../assets/icons/arrow-up.svg); }
+.ico-camera { --i: url(../../assets/icons/camera.svg); }
+.ico-image { --i: url(../../assets/icons/image.svg); }
+.ico-file { --i: url(../../assets/icons/file.svg); }
+.ico-pin { --i: url(../../assets/icons/pin.svg); }
+.ico-user { --i: url(../../assets/icons/user.svg); }
+.ico-check { --i: url(../../assets/icons/check.svg); }
+
+.side-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.side-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hist-head span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,0 +1,17 @@
+#btn-voice-input.listening {
+  color: var(--accent);
+  animation: pulse 1s infinite;
+}
+
+#btn-stop {
+  display: none;
+  color: var(--danger);
+}
+
+#btn-stop.active {
+  display: flex;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.35; }
+}
