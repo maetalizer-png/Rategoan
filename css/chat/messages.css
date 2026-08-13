@@ -86,6 +86,26 @@
   margin-top: 4px;
 }
 
+.msg-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.msg-action-btn {
+  font-size: 11px;
+  line-height: 1;
+  color: var(--rg-muted);
+  padding: 4px 9px;
+  border-radius: var(--rg-pill);
+  border: 1px solid var(--rg-line);
+}
+
+.msg-action-btn:active {
+  background: var(--rg-ring);
+  color: var(--rg-text);
+}
+
 .msg-thumb {
   width: 140px;
   max-width: 64%;

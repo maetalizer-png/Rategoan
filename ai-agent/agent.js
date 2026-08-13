@@ -65,19 +65,24 @@ function looksLikeMath(t) {
 
 function detectTool(prompt) {
   const t = String(prompt || '').trim().toLowerCase();
-  if (/^ringkas(kan)?\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
-  if (/^ringkas(kan)?\b/.test(t)) return 'ringkas';
+  if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
+  if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
   if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
   if (/^lupakan\b/.test(t)) return 'lupakan';
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
   if (/apa\s+yang\s+kamu\s+tahu\s+tentang\b/.test(t)) return 'cari';
   if (/^hitung\b/.test(t) || /%\s*dari\b/.test(t) || looksLikeMath(t)) return 'hitung';
+  if (/^bandingkan\s+/.test(t)) return 'bandingkan';
+  if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
+  if (/^(cara|langkah)\s+/.test(t)) return 'cara';
+  if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
+  if (/^jelaskan\s+/.test(t)) return 'jelaskan';
   return null;
 }
 
 async function runTool(kind, prompt, messages) {
-  if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^ringkas(kan)?\s*:?\s*/i, ''));
+  if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
   if (kind === 'hitung') return agentTools.hitung(prompt);
   if (kind === 'waktu') return agentTools.waktu(prompt);
@@ -85,6 +90,35 @@ async function runTool(kind, prompt, messages) {
   if (kind === 'ingat') return agentTools.ingat(prompt);
   if (kind === 'lupakan') return agentTools.lupakan(prompt);
   if (kind === 'ekspor') return agentTools.eksporLog();
+  if (kind === 'jelaskan') {
+    const topic = prompt
+      .replace(/^jelaskan\s*/i, '')
+      .replace(/^apa\s+itu\s*/i, '')
+      .replace(/^tentang\s*/i, '')
+      .trim();
+    return agentTools.jelaskan(topic);
+  }
+  if (kind === 'cara') {
+    const topic = prompt.replace(/^(cara|langkah)\s*(untuk|buat|biar)?\s*/i, '').trim();
+    return agentTools.cara(topic);
+  }
+  if (kind === 'ide') {
+    const topic = prompt
+      .replace(/^(kasih|beri|berikan|boleh|minta)\s+/i, '')
+      .replace(/ide\s+(konten\s+)?(tentang|soal|untuk)?\s*/i, '')
+      .trim();
+    return agentTools.ide(topic);
+  }
+  if (kind === 'bandingkan') {
+    const m = prompt.match(/^bandingkan\s+(.+?)\s+(dan|dengan|vs\.?|atau)\s+(.+)$/i);
+    return m ? agentTools.bandingkan(m[1].trim(), m[3].trim()) : null;
+  }
+  if (kind === 'kelebihan_kekurangan') {
+    const topic = prompt
+      .replace(/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s*/i, '')
+      .trim();
+    return agentTools.kelebihanKekurangan(topic);
+  }
   return null;
 }
 

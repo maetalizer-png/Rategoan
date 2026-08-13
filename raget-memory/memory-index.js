@@ -73,6 +73,30 @@ async function search(query, limit) {
   return results.sort((a, b) => b.score - a.score).slice(0, cap);
 }
 
+async function findTopic(topic) {
+  const t = String(topic || '').toLowerCase().trim();
+  if (!t) return null;
+  const knowledge = await loadKnowledge();
+  const words = meaningfulWords(t);
+  let best = null;
+  let bestScore = 0;
+
+  knowledge.umum.forEach((item) => {
+    const title = (item.title || '').toLowerCase();
+    let score = 0;
+    if (title === t) score = 10;
+    else if (title.includes(t) || t.includes(title)) score = 6;
+    else score = scoreText(title + ' ' + (item.text || ''), words);
+    if (score > bestScore) {
+      bestScore = score;
+      best = item;
+    }
+  });
+
+  return bestScore > 0 ? best : null;
+}
+
 export const memoryIndex = Object.freeze({
   search,
+  findTopic,
 });

@@ -1,10 +1,73 @@
 import { memoryIndex } from '../raget-memory/memory-index.js';
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { ragetDb } from '../raget-database/raget-db.js';
+import { formatter } from './formatter.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
 const PRECEDENCE = { '+': 1, '-': 1, '*': 2, '/': 2, '%': 2 };
+
+const STOPWORDS = new Set([
+  'saya', 'kamu', 'anda', 'kita', 'kami', 'dia', 'mereka',
+  'yang', 'dan', 'atau', 'di', 'ke', 'dari', 'untuk', 'pada', 'dengan',
+  'ini', 'itu', 'ada', 'apa', 'siapa', 'kapan', 'dimana', 'mengapa', 'kenapa', 'bagaimana', 'berapa',
+  'saja', 'juga', 'akan', 'sudah', 'belum', 'tidak', 'bukan', 'ya', 'ga', 'gak', 'lalu', 'lanjut',
+]);
+
+function hashText(text) {
+  let h = 0;
+  const s = String(text || '');
+  for (let i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
+
+function meaningfulWords(text) {
+  return text
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter((w) => w.length > 2 && !STOPWORDS.has(w));
+}
+
+function extractiveSummary(text) {
+  const sentences = String(text || '')
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!sentences.length) return { points: [], gist: '' };
+  const freq = {};
+  const sentWords = sentences.map((s) => {
+    const words = meaningfulWords(s);
+    words.forEach((w) => {
+      freq[w] = (freq[w] || 0) + 1;
+    });
+    return words;
+  });
+  const scored = sentences.map((s, i) => ({
+    sentence: s,
+    index: i,
+    score: sentWords[i].reduce((acc, w) => acc + freq[w], 0),
+  }));
+  const count = Math.min(sentences.length, Math.max(3, Math.min(5, Math.ceil(sentences.length / 2))));
+  const top = scored.slice().sort((a, b) => b.score - a.score).slice(0, count);
+  const points = top.slice().sort((a, b) => a.index - b.index).map((s) => s.sentence);
+  const gist = scored.slice().sort((a, b) => b.score - a.score)[0].sentence;
+  return { points, gist };
+}
+
+function bodyOrSentences(item) {
+  if (item.body) {
+    const lines = item.body
+      .split('\n')
+      .map((l) => l.trim())
+      .filter((l) => l.startsWith('-'))
+      .map((l) => l.replace(/^-\s*/, ''));
+    if (lines.length) return lines;
+  }
+  return extractiveSummary(item.text || '').points;
+}
 
 function tokenize(expr) {
   const tokens = [];
@@ -80,25 +143,130 @@ function trimNum(n) {
 }
 
 function ringkas(text) {
-  const src = String(text || '').trim();
+  const src = String(text || '')
+    .replace(/^ringkas(kan)?\s*:?\s*/i, '')
+    .trim();
   if (!src) return 'Tidak ada teks untuk diringkas.';
-  const sentences = src.split(/(?<=[.!?])\s+/).filter(Boolean);
-  if (sentences.length <= 1) return 'Ringkasan: ' + src;
-  const head = sentences[0];
-  const tail = sentences[sentences.length - 1];
-  return 'Ringkasan: ' + head + (tail !== head ? ' ... ' + tail : '');
+  const { points, gist } = extractiveSummary(src);
+  if (!points.length) return 'Ringkasan: ' + src;
+  return formatter.blocks([formatter.h('Ringkasan', 3), formatter.bullets(points), 'Intinya: ' + gist]);
 }
 
 function ringkasPercakapan(messages) {
   const recent = (Array.isArray(messages) ? messages : []).slice(-10).filter((m) => m.role === 'user');
   if (!recent.length) return 'Belum ada percakapan untuk diringkas.';
-  const points = recent.map((m) => {
-    const sentences = String(m.text || '')
-      .split(/(?<=[.!?])\s+/)
-      .filter(Boolean);
-    return sentences.sort((a, b) => b.length - a.length)[0] || m.text;
-  });
-  return 'Ringkasan percakapan:\n' + points.map((p, i) => i + 1 + '. ' + p).join('\n');
+  const joined = recent.map((m) => m.text).join('. ');
+  const { points, gist } = extractiveSummary(joined);
+  if (!points.length) return 'Belum ada percakapan untuk diringkas.';
+  return formatter.blocks([formatter.h('Ringkasan Percakapan', 3), formatter.bullets(points), 'Intinya: ' + gist]);
+}
+
+async function jelaskan(topic) {
+  const t = String(topic || '').trim();
+  if (!t) return 'Mau saya jelaskan apa?';
+  const found = await memoryIndex.findTopic(t);
+  const label = (found && found.title) || t.charAt(0).toUpperCase() + t.slice(1);
+  const definisi = found
+    ? found.text
+    : label + ' secara sederhana adalah konsep yang berkaitan dengan "' + t + '", biasa muncul saat membahas topik yang relevan dengannya.';
+  const points = found
+    ? bodyOrSentences(found)
+    : [
+        'Pahami dulu konteks dasar dari ' + t + '.',
+        'Perhatikan bagaimana ' + t + ' biasa dipakai sehari-hari.',
+        'Cari contoh nyata supaya lebih mudah diingat.',
+      ];
+  const contoh = found
+    ? 'Contoh sehari-hari: ' + label + ' sering muncul dalam percakapan atau aktivitas rutin terkait topik ini.'
+    : 'Contoh sederhana: "' + t + '" biasanya muncul saat orang membahas topik terkait dalam obrolan santai.';
+  return formatter.blocks([
+    formatter.h(label, 3),
+    definisi,
+    formatter.blocks([formatter.h('Poin penting', 3), formatter.bullets(points.slice(0, 4))]),
+    formatter.blocks([formatter.h('Contoh', 3), contoh]),
+  ]);
+}
+
+const CARA_VARIANTS = [
+  (t) => [
+    'Pahami dulu tujuan dan dasar-dasar dari ' + t + '.',
+    'Kumpulkan sumber belajar atau referensi terpercaya soal ' + t + '.',
+    'Mulai praktik ' + t + ' dari hal paling sederhana.',
+    'Evaluasi progres secara berkala supaya tahu bagian mana yang perlu diperbaiki.',
+    'Konsisten mengulang sampai terbiasa dengan ' + t + '.',
+  ],
+  (t) => [
+    'Tentukan target yang jelas untuk ' + t + '.',
+    'Susun rencana kecil yang realistis untuk mencapainya.',
+    'Cari orang atau komunitas yang juga menekuni ' + t + ' untuk saling belajar.',
+    'Catat kemajuan supaya termotivasi melanjutkan ' + t + '.',
+    'Sesuaikan strategi bila cara yang dipakai belum efektif.',
+  ],
+];
+
+function cara(topic) {
+  const t = String(topic || '').trim() || 'hal ini';
+  const h = hashText(t);
+  const variant = CARA_VARIANTS[h % CARA_VARIANTS.length](t);
+  const count = 3 + (h % Math.max(1, variant.length - 2));
+  return formatter.blocks([formatter.h('Langkah', 3), formatter.numbered(variant.slice(0, count))]);
+}
+
+const IDE_POOL = [
+  (t) => 'Bagikan tips praktis seputar ' + t + ' dalam format singkat.',
+  (t) => 'Buat cerita atau pengalaman pribadi yang berhubungan dengan ' + t + '.',
+  (t) => 'Rangkum kesalahan umum seputar ' + t + ' beserta solusinya.',
+  (t) => 'Buat perbandingan sebelum-sesudah menerapkan ' + t + '.',
+  (t) => 'Wawancara singkat (tanya-jawab) seputar pengalaman orang lain dengan ' + t + '.',
+  (t) => 'Buat daftar alat atau sumber daya yang membantu soal ' + t + '.',
+];
+
+function ide(topic) {
+  const t = String(topic || '').trim() || 'topik ini';
+  const h = hashText(t);
+  const count = 3 + (h % 3);
+  const start = h % IDE_POOL.length;
+  const items = [];
+  for (let i = 0; i < count; i++) {
+    items.push(IDE_POOL[(start + i) % IDE_POOL.length](t));
+  }
+  return formatter.blocks([formatter.h('Ide Konten', 3), formatter.numbered(items)]);
+}
+
+function genericComparisonPoints(t) {
+  return ['Punya kelebihan tersendiri tergantung kebutuhan.', 'Bisa dipertimbangkan sesuai konteks penggunaan ' + t + '.'];
+}
+
+async function bandingkan(a, b) {
+  const topicA = String(a || '').trim() || 'A';
+  const topicB = String(b || '').trim() || 'B';
+  const foundA = await memoryIndex.findTopic(topicA);
+  const foundB = await memoryIndex.findTopic(topicB);
+  const pointsA = (foundA ? bodyOrSentences(foundA) : genericComparisonPoints(topicA)).slice(0, 3);
+  const pointsB = (foundB ? bodyOrSentences(foundB) : genericComparisonPoints(topicB)).slice(0, 3);
+  return formatter.blocks([
+    formatter.blocks([formatter.h(topicA, 3), formatter.bullets(pointsA)]),
+    formatter.blocks([formatter.h(topicB, 3), formatter.bullets(pointsB)]),
+    'Intinya: baik ' + topicA + ' maupun ' + topicB + ' punya kelebihan masing-masing, tergantung kebutuhan dan situasimu.',
+  ]);
+}
+
+async function kelebihanKekurangan(topic) {
+  const t = String(topic || '').trim() || 'hal ini';
+  const found = await memoryIndex.findTopic(t);
+  const points = found ? bodyOrSentences(found) : [];
+  const half = Math.ceil(points.length / 2);
+  const kelebihan = points.length
+    ? points.slice(0, half)
+    : ['Bisa memberi manfaat tertentu tergantung cara penggunaannya.', 'Umumnya mudah diakses atau diterapkan.'];
+  const kekurangan = points.length
+    ? points.slice(half)
+    : ['Perlu penyesuaian tergantung kebutuhan masing-masing orang.', 'Ada baiknya dipertimbangkan matang-matang sebelum diterapkan.'];
+  return formatter.blocks([
+    formatter.blocks([formatter.h('Kelebihan', 3), formatter.bullets(kelebihan)]),
+    formatter.blocks([formatter.h('Kekurangan', 3), formatter.bullets(kekurangan)]),
+    'Intinya: pertimbangkan ' + t + ' sesuai kebutuhan dan situasimu sendiri.',
+  ]);
 }
 
 function hitung(text) {
@@ -183,4 +351,9 @@ export const agentTools = Object.freeze({
   ingat,
   lupakan,
   eksporLog,
+  jelaskan,
+  cara,
+  ide,
+  bandingkan,
+  kelebihanKekurangan,
 });

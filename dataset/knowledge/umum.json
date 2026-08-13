@@ -142,5 +142,50 @@
   {
     "title": "Batik",
     "text": "Batik adalah kain bermotif khas Indonesia yang dibuat dengan teknik pewarnaan menggunakan malam (lilin), diakui UNESCO sebagai warisan budaya."
+  },
+  {
+    "title": "Kopi",
+    "text": "Kopi adalah minuman berkafein yang diseduh dari biji kopi panggang, populer di seluruh dunia sebagai teman kerja maupun bersantai.",
+    "body": "Kafein dalam kopi bisa meningkatkan fokus dan kewaspadaan dalam jumlah wajar.\n- Konsumsi berlebihan (lebih dari 3-4 cangkir sehari) bisa mengganggu tidur dan memicu jantung berdebar.\n- Waktu terbaik minum kopi biasanya 1-2 jam setelah bangun tidur, bukan langsung setelah bangun.\n- Kopi hitam tanpa gula punya kalori paling rendah dibanding varian susu atau sirup."
+  },
+  {
+    "title": "Tidur",
+    "text": "Tidur yang cukup dan berkualitas adalah kebutuhan dasar tubuh untuk pemulihan fisik dan mental.",
+    "body": "Orang dewasa umumnya butuh 7-9 jam tidur per malam.\n- Jadwal tidur yang konsisten membantu jam biologis tubuh bekerja lebih baik.\n- Hindari layar HP 30-60 menit sebelum tidur agar lebih mudah terlelap.\n- Ruangan gelap dan sejuk biasanya membantu kualitas tidur lebih dalam."
+  },
+  {
+    "title": "Produktivitas",
+    "text": "Produktivitas adalah kemampuan menyelesaikan pekerjaan penting secara efisien tanpa mengorbankan kualitas.",
+    "body": "Mulai hari dengan menuliskan 3 prioritas utama, bukan daftar panjang tanpa urutan.\n- Kerjakan tugas paling sulit di awal saat energi masih tinggi.\n- Gunakan teknik Pomodoro (25 menit fokus, 5 menit istirahat) untuk menjaga konsentrasi.\n- Kurangi multitasking karena justru memperlambat penyelesaian tugas."
+  },
+  {
+    "title": "Menabung",
+    "text": "Menabung adalah kebiasaan menyisihkan sebagian penghasilan untuk kebutuhan atau tujuan di masa depan.",
+    "body": "Sisihkan tabungan di awal saat menerima penghasilan, bukan dari sisa di akhir bulan.\n- Pisahkan rekening tabungan dari rekening pengeluaran harian.\n- Tetapkan target jelas, misalnya dana darurat 3-6 kali pengeluaran bulanan.\n- Mulai dari jumlah kecil yang konsisten lebih baik daripada menunda karena merasa jumlahnya kurang besar."
+  },
+  {
+    "title": "Olahraga Ringan",
+    "text": "Olahraga ringan secara rutin membantu menjaga kebugaran tanpa perlu peralatan khusus.",
+    "body": "Jalan kaki 20-30 menit sehari sudah cukup memberi manfaat bagi jantung.\n- Peregangan pagi membantu mengurangi kaku otot sebelum beraktivitas.\n- Naik-turun tangga bisa jadi alternatif olahraga ringan di sela kesibukan.\n- Konsistensi lebih penting daripada intensitas tinggi yang sulit dipertahankan."
+  },
+  {
+    "title": "Membaca Buku",
+    "text": "Membaca buku secara rutin membantu memperluas wawasan dan melatih fokus.",
+    "body": "Membaca 10-15 menit setiap hari lebih efektif membangun kebiasaan dibanding membaca lama sesekali.\n- Pilih buku sesuai minat agar kebiasaan membaca lebih mudah bertahan.\n- Catat ringkasan singkat setelah selesai membaca untuk membantu mengingat isi buku.\n- Bawa buku atau e-book saat bepergian untuk mengisi waktu luang."
+  },
+  {
+    "title": "Meditasi",
+    "text": "Meditasi adalah latihan melatih fokus dan ketenangan pikiran, biasa dilakukan lewat teknik pernapasan.",
+    "body": "Mulai dari sesi singkat 5 menit sehari, lalu tingkatkan bertahap.\n- Duduk nyaman, fokus pada napas, dan biarkan pikiran yang muncul berlalu tanpa dilawan.\n- Meditasi rutin dikaitkan dengan berkurangnya stres dan kecemasan.\n- Aplikasi panduan meditasi bisa membantu pemula memulai dengan lebih terarah."
+  },
+  {
+    "title": "Belajar Bahasa Asing",
+    "text": "Belajar bahasa asing melatih otak sekaligus membuka peluang komunikasi lebih luas.",
+    "body": "Latihan singkat tapi rutin setiap hari lebih efektif daripada belajar lama sesekali.\n- Mulai dari kosakata yang sering dipakai sehari-hari, bukan kata-kata jarang dulu.\n- Dengarkan lagu atau tonton video berbahasa target untuk melatih telinga.\n- Jangan takut salah — praktik langsung mempercepat penguasaan bahasa."
+  },
+  {
+    "title": "Kesehatan Mental",
+    "text": "Kesehatan mental sama pentingnya dengan kesehatan fisik dalam menjalani aktivitas sehari-hari.",
+    "body": "Berbicara tentang perasaan ke orang terpercaya membantu meringankan beban pikiran.\n- Batasi konsumsi berita atau media sosial bila mulai terasa melelahkan.\n- Istirahat cukup dan olahraga ringan turut menjaga suasana hati.\n- Tidak ada salahnya mencari bantuan profesional bila diperlukan."
   }
 ]

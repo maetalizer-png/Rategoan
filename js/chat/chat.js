@@ -2,10 +2,52 @@ import { $, sleep, scrollBottom } from '../utils/dom.js';
 import { fmtTime } from '../utils/format.js';
 import { reduceMotion } from '../utils/haptics.js';
 import { markdown } from '../utils/markdown.js';
+import { copy } from '../utils/clipboard.js';
 import { store } from '../state/store.js';
 import { scrolldown } from '../ui/scrolldown.js';
+import { toast } from '../core/toast.js';
 import { voice } from './voice.js';
 import { ai } from '../ai/ai.js';
+
+function buildActions(text) {
+  const row = document.createElement('div');
+  row.className = 'msg-actions';
+
+  const copyBtn = document.createElement('button');
+  copyBtn.type = 'button';
+  copyBtn.className = 'msg-action-btn';
+  copyBtn.textContent = '⧉ Salin';
+  copyBtn.onclick = () => {
+    copy(text)
+      .then(() => toast.show('Disalin'))
+      .catch(() => toast.show('Gagal menyalin'));
+  };
+
+  const speakBtn = document.createElement('button');
+  speakBtn.type = 'button';
+  speakBtn.className = 'msg-action-btn';
+  speakBtn.textContent = '🔊 Baca';
+  speakBtn.onclick = () => voice.speak(text);
+
+  const shareBtn = document.createElement('button');
+  shareBtn.type = 'button';
+  shareBtn.className = 'msg-action-btn';
+  shareBtn.textContent = '↗ Bagikan';
+  shareBtn.onclick = () => {
+    if (navigator.share) {
+      navigator.share({ text }).catch(() => {});
+    } else {
+      copy(text)
+        .then(() => toast.show('Disalin'))
+        .catch(() => toast.show('Gagal menyalin'));
+    }
+  };
+
+  row.appendChild(copyBtn);
+  row.appendChild(speakBtn);
+  row.appendChild(shareBtn);
+  return row;
+}
 
 export const chat = {
   current() {
@@ -76,6 +118,9 @@ export const chat = {
       tm.className = 'time';
       tm.textContent = fmtTime(m.time);
       d.appendChild(tm);
+      if (m.role !== 'user') {
+        d.appendChild(buildActions(m.text));
+      }
       box.appendChild(d);
     });
     scrollBottom();
@@ -99,6 +144,7 @@ export const chat = {
       }
     }
     body.innerHTML = markdown.render(text);
+    d.appendChild(buildActions(text));
     if (follow) {
       scrollBottom();
     } else {
