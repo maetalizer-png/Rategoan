@@ -1,9 +1,0 @@
-html[data-font="small"] .msg { font-size: 13px; }
-html[data-font="small"] .hist-title { font-size: 12px; }
-html[data-font="small"] #chat-input { font-size: 14px; }
-html[data-font="small"] .empty-chip { font-size: 11px; }
-
-html[data-font="large"] .msg { font-size: 17px; }
-html[data-font="large"] .hist-title { font-size: 14px; }
-html[data-font="large"] #chat-input { font-size: 17px; }
-html[data-font="large"] .empty-chip { font-size: 13px; }
