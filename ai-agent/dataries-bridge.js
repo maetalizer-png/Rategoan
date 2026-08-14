@@ -190,8 +190,8 @@ const TRIVIA_LABELS = {
   currency: 'Mata uangnya',
   independenceDay: 'Merdeka pada',
 };
-const RICHNESS_MODES = ['plain', 'trivia', 'plain', 'trivia', 'plain'];
-const CROSSREF_MODES = ['no', 'no', 'yes'];
+const RICHNESS_MODES = ['trivia', 'trivia', 'plain', 'trivia'];
+const CROSSREF_MODES = ['yes', 'yes', 'no'];
 const CROSSREF_SUGGESTIONS = {
   capital: (label) => 'Mau tahu juga makanan khas ' + label + '?',
   population: (label) => 'Mau tahu juga ibukota ' + label + '?',
