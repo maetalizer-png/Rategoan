@@ -582,6 +582,43 @@ async function eksporLog() {
   return 'Log percakapan (' + notes.length + ' entri) sudah diunduh.';
 }
 
+function buildCatatanContent(format) {
+  const notes = memoryLong.allNotes();
+  const learned = memoryLong.allLearned();
+  const facts = memoryLong.allFacts();
+  const stamp = new Date().toLocaleString('id-ID');
+  if (format === 'markdown') {
+    const lines = ['# Catatan Saya', '', '_Diekspor ' + stamp + '_', ''];
+    lines.push('## Fakta', '');
+    Object.keys(facts).forEach((k) => lines.push('- **' + k + '**: ' + JSON.stringify(facts[k])));
+    lines.push('', '## Hal yang Dipelajari', '');
+    learned.forEach((f) => lines.push('- ' + f.subject + ': ' + f.value));
+    lines.push('', '## Catatan', '');
+    notes.forEach((n) => lines.push('- ' + n.text));
+    return lines.join('\n');
+  }
+  const lines = ['Catatan Saya', 'Diekspor ' + stamp, ''];
+  lines.push('=== Fakta ===');
+  Object.keys(facts).forEach((k) => lines.push(k + ': ' + JSON.stringify(facts[k])));
+  lines.push('', '=== Hal yang Dipelajari ===');
+  learned.forEach((f) => lines.push(f.subject + ': ' + f.value));
+  lines.push('', '=== Catatan ===');
+  notes.forEach((n) => lines.push('- ' + n.text));
+  return lines.join('\n');
+}
+
+function eksporCatatan(format) {
+  const fmt = format === 'markdown' ? 'markdown' : 'txt';
+  const content = buildCatatanContent(fmt);
+  const stamp = new Date().toISOString().slice(0, 10);
+  if (fmt === 'markdown') {
+    exportShare.downloadBlob(content, 'text/markdown', 'raget-catatan-' + stamp + '.md');
+    return 'Catatan saya diunduh sebagai Markdown (raget-catatan-' + stamp + '.md).';
+  }
+  exportShare.downloadBlob(content, 'text/plain', 'raget-catatan-' + stamp + '.txt');
+  return 'Catatan saya diunduh sebagai TXT (raget-catatan-' + stamp + '.txt).';
+}
+
 export const agentTools = Object.freeze({
   ringkas,
   ringkasPercakapan,
@@ -605,4 +642,5 @@ export const agentTools = Object.freeze({
   shareToWhatsApp,
   cariSemua,
   ringkasHari,
+  eksporCatatan,
 });

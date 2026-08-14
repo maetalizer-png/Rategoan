@@ -1,5 +1,6 @@
 import { dataries, REGIONS } from '../dataries/index.js';
 import { scorer } from '../ai-agent/scorer.js';
+import { quiz } from '../dataries/quiz.js';
 
 const STREAK_KEY = 'raget_jalanin_streak';
 const QUIZ_BEST_KEY = 'raget_jalanin_quiz_best';
@@ -104,60 +105,6 @@ function initJelajah() {
 
 let quizState = null;
 
-function shuffle(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-async function buildQuizQuestions() {
-  const [countries, tokoh] = await Promise.all([loadAllCountries(), loadAllTokoh()]);
-  const capitalCountries = countries.filter((c) => c.metadata.capital);
-  const populationCountries = countries.filter((c) => c.metadata.population);
-  const questions = [];
-
-  shuffle(capitalCountries).slice(0, 5).forEach((c) => {
-    const correct = c.metadata.capital;
-    const distractors = shuffle(capitalCountries.filter((x) => x.metadata.name !== c.metadata.name))
-      .slice(0, 3)
-      .map((x) => x.metadata.capital);
-    questions.push({
-      q: 'Apa ibukota ' + c.metadata.name + '?',
-      options: shuffle([correct].concat(distractors)),
-      answer: correct,
-    });
-  });
-
-  shuffle(tokoh).slice(0, 3).forEach((t) => {
-    const correct = t.metadata.name;
-    const distractors = shuffle(tokoh.filter((x) => x.metadata.name !== t.metadata.name))
-      .slice(0, 3)
-      .map((x) => x.metadata.name);
-    questions.push({
-      q: 'Siapa tokoh yang dikenal karena: ' + t.metadata.knownFor + '?',
-      options: shuffle([correct].concat(distractors)),
-      answer: correct,
-    });
-  });
-
-  shuffle(populationCountries).slice(0, 2).forEach((c) => {
-    const correct = c.metadata.name;
-    const distractors = shuffle(populationCountries.filter((x) => x.metadata.name !== c.metadata.name))
-      .slice(0, 3)
-      .map((x) => x.metadata.name);
-    questions.push({
-      q: 'Negara mana yang punya ibukota ' + c.metadata.capital + '?',
-      options: shuffle([correct].concat(distractors)),
-      answer: correct,
-    });
-  });
-
-  return shuffle(questions).slice(0, 10);
-}
-
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
@@ -228,7 +175,7 @@ function renderQuizQuestion() {
 
 async function startQuiz() {
   $('jl-quiz-box').innerHTML = '<div class="jl-loading">Menyiapkan soal...</div>';
-  const questions = await buildQuizQuestions();
+  const questions = await quiz.buildQuizQuestions();
   quizState = { questions, index: 0, score: 0 };
   renderQuizQuestion();
 }
@@ -240,7 +187,7 @@ let flashcardIndex = 0;
 
 async function loadFlashcards() {
   const languages = await loadAllLanguages();
-  flashcards = shuffle(languages.filter((l) => l.metadata.greetings));
+  flashcards = quiz.shuffle(languages.filter((l) => l.metadata.greetings));
   flashcardIndex = 0;
 }
 

@@ -12,6 +12,32 @@ import { tts } from '../state/tts.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
+const CHIPS_BY_PERIOD = {
+  pagi: ['Ringkas hari saya', 'Apa ibukota Indonesia', 'Ide konten produktif'],
+  siang: ['Kuis', 'Ringkas hari saya', 'Jelaskan sesuatu'],
+  sore: ['Ide konten', 'Manfaat olahraga', 'Cara membuat kopi'],
+  malam: ['Ceritakan tentang Jepang', 'Kuis', 'Ringkas percakapan'],
+};
+
+function periodOfDay() {
+  const h = new Date().getHours();
+  if (h >= 4 && h < 10) return 'pagi';
+  if (h >= 10 && h < 15) return 'siang';
+  if (h >= 15 && h < 18) return 'sore';
+  return 'malam';
+}
+
+function applySmartChips() {
+  const chips = document.querySelectorAll('.empty-chip');
+  const labels = CHIPS_BY_PERIOD[periodOfDay()];
+  chips.forEach((c, i) => {
+    if (labels[i]) {
+      c.textContent = labels[i];
+      c.setAttribute('aria-label', 'Kirim contoh: ' + labels[i]);
+    }
+  });
+}
+
 function buildExtraChip(label, onClick) {
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -90,6 +116,7 @@ export const chat = {
     if (empty) empty.hidden = has;
     box.style.display = has ? '' : 'none';
     if (!has) {
+      applySmartChips();
       scrolldown.update();
       return;
     }

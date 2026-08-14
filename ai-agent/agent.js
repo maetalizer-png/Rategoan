@@ -28,6 +28,7 @@ import { pickVariant, hashText, detectTone, detectMood } from '../utils/text.js'
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
 import { readWeb } from '../web/read-web.js';
+import { quizSession } from './quiz-session.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -151,6 +152,7 @@ function detectTeaching(text) {
 
 function detectTool(prompt) {
   const t = String(prompt || '').trim().toLowerCase();
+  if (/^(mulai\s+|main\s+)?kuis\b/.test(t)) return 'kuis';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+hari(\s+ini)?(\s+saya)?\b/.test(t)) return 'ringkas_hari';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
   if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
@@ -158,6 +160,7 @@ function detectTool(prompt) {
   if (/laporan\s+otak/.test(t)) return 'laporan_otak';
   if (/share\s*(ke)?\s*wa\b|bagikan\s*(ke)?\s*whatsapp/.test(t)) return 'share_wa';
   if (/export\s+chat|download\s+percakapan|unduh\s+percakapan|ekspor\s+chat/.test(t)) return 'export_chat';
+  if (/export\s+catatan|ekspor\s+catatan|unduh\s+catatan/.test(t)) return 'export_catatan';
   if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
@@ -359,6 +362,7 @@ async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
   if (kind === 'ringkas_hari') return await agentTools.ringkasHari();
+  if (kind === 'kuis') return await quizSession.ask();
   if (kind === 'waktu') return agentTools.waktu(prompt);
   if (kind === 'cari') return agentTools.cari(prompt.replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, ''));
   if (kind === 'ingat') return agentTools.ingat(prompt);
@@ -370,6 +374,10 @@ async function runTool(kind, prompt, messages) {
     const p = prompt.toLowerCase();
     const format = /markdown|\bmd\b/.test(p) ? 'markdown' : /json/.test(p) ? 'json' : /pdf/.test(p) ? 'pdf' : 'txt';
     return agentTools.exportChat({ title: 'Chat', messages: messages || [] }, format);
+  }
+  if (kind === 'export_catatan') {
+    const format = /markdown|\bmd\b/i.test(prompt) ? 'markdown' : 'txt';
+    return agentTools.eksporCatatan(format);
   }
   if (kind === 'email') return emailComposer.generateEmail(prompt);
   if (kind === 'cari_semua') {
@@ -573,6 +581,12 @@ async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
 
+  const quizReply = quizSession.checkPending(text);
+  if (quizReply) {
+    ragetDb.addNote(text, quizReply, null, 'kuis');
+    return postProcess(quizReply);
+  }
+
   const modeCmd = detectModeCommand(text);
   if (modeCmd) {
     memoryLong.remember(modeCmd.key, modeCmd.value);
@@ -663,8 +677,12 @@ async function respondCore(messages, prompt) {
 
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
-    ragetDb.addNote(text, factoid, null, 'factoid');
-    return postProcess(factoid);
+    let reply = factoid;
+    if (quizSession.shouldOffer(text)) {
+      reply += '\n\nMau coba 1 soal kuis?\n\n' + (await quizSession.ask());
+    }
+    ragetDb.addNote(text, reply, null, 'factoid');
+    return postProcess(reply);
   }
 
   const extras = await datariesBridge.extras(text);

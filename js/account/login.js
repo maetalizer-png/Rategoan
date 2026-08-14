@@ -4,6 +4,7 @@ import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
 import { auth } from '../state/auth.js';
 import { account } from './account.js';
+import { onboard } from '../system/onboard.js';
 
 export const login = {
   pendingPhone: null,
@@ -26,6 +27,7 @@ export const login = {
     haptics.tap(15);
     toast.show('Selamat datang');
     router.go('chat');
+    onboard.maybeShow();
   },
   submitPhone() {
     const v = $('login-phone').value.trim();
@@ -50,6 +52,7 @@ export const login = {
     haptics.tap(15);
     toast.show('Selamat datang');
     router.go('chat');
+    onboard.maybeShow();
   },
   bind() {
     $('login-tab-gmail').onclick = () => this.setMethod('gmail');

@@ -94,6 +94,10 @@ function allNotes() {
   return read().notes;
 }
 
+function allLearned() {
+  return read().learned;
+}
+
 function learnFact(subject, value) {
   const norm = normalizeSubject(subject);
   const val = String(value || '').trim();
@@ -139,6 +143,7 @@ export const memoryLong = Object.freeze({
   rememberNote,
   forgetNote,
   allNotes,
+  allLearned,
   learnFact,
   findLearnedFact,
   clear,
