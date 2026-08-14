@@ -365,14 +365,43 @@ function wordOverlap(entity, hay) {
   return entityWords.some((w) => hay.includes(w));
 }
 
+function matchScore(entity, hay) {
+  if (!entity || !hay) return 0;
+  if (hay === entity) return 100;
+  if (hay.includes(entity)) return 50;
+  const entityWords = entity.split(' ').filter((w) => w.length > 2);
+  if (!entityWords.length) return 0;
+  const matched = entityWords.filter((w) => hay.includes(w)).length;
+  if (!matched) return 0;
+  return matched === entityWords.length ? 20 + matched : matched;
+}
+
+async function findBestInList(group, entity, haystacksFn) {
+  const list = await dataries.loadAll(group);
+  let best = null;
+  let bestScore = 0;
+  list.forEach((item) => {
+    const haystacks = haystacksFn(item).filter(Boolean).map((h) => String(h).toLowerCase());
+    const combined = haystacks.join(' ');
+    const score = Math.max(matchScore(entity, combined), ...haystacks.map((h) => matchScore(entity, h)));
+    if (score > bestScore) {
+      bestScore = score;
+      best = item;
+    }
+  });
+  return bestScore > 0 ? best : null;
+}
+
 async function trySiapaTokoh(text) {
   const m = text.match(/^siapa\s+(?:penemu\s+|pelukis\s+|penulis\s+|pencipta\s+)?(.+)$/i);
   if (!m) return null;
   const entity = cleanEntity(m[1]);
   if (!entity) return null;
-  const item = await findInList('tokoh', (it) => wordOverlap(entity, (it.metadata.knownFor || '').toLowerCase()) || wordOverlap(entity, (it.metadata.name || '').toLowerCase()));
-  if (!item) return null;
-  return item.text;
+  const tokohItem = await findBestInList('tokoh', entity, (it) => [it.metadata.knownFor, it.metadata.name]);
+  if (tokohItem) return tokohItem.text;
+  const penemuanItem = await findBestInList('penemuan', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
+  if (penemuanItem) return penemuanItem.text;
+  return null;
 }
 
 async function tryTopicSearch(text) {
@@ -381,7 +410,7 @@ async function tryTopicSearch(text) {
   const entity = cleanEntity(m[1]);
   if (!entity) return null;
   for (const group of ['sains', 'olahraga']) {
-    const item = await findInList(group, (it) => wordOverlap(entity, (it.metadata.topic || '').toLowerCase()) || wordOverlap(entity, (it.metadata.tags || []).join(' ').toLowerCase()));
+    const item = await findBestInList(group, entity, (it) => [it.metadata.topic, ...(it.metadata.tags || [])]);
     if (item) return item.text;
   }
   return null;
@@ -417,6 +446,60 @@ async function tryMakananKhas(text) {
   return opener + ' ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
 }
 
+async function trySejarah(text) {
+  const m = text.match(/^sejarah\s+(.+)$/i) || text.match(/^kapan\s+(.+?)\s+(?:dibangun|terjadi|dimulai)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const item = await findBestInList('sejarah', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
+  if (!item) return null;
+  return item.text;
+}
+
+async function tryAlam(text) {
+  const m = text.match(/^(?:hewan|fauna)\s+khas\s+(.+)$/i) || text.match(/^flora\s+(.+)$/i);
+  if (!m) return null;
+  const entity = resolveCountryAlias(cleanEntity(m[1]));
+  if (!entity) return null;
+  const items = await findAllInList('alam', (it) => wordOverlap(entity, (it.metadata.habitat || '').toLowerCase()), 3);
+  if (!items.length) return null;
+  return 'Fauna/flora khas ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+}
+
+async function tryPenemuan(text) {
+  const m = text.match(/^penemuan\s+(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const item = await findBestInList('penemuan', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
+  if (!item) return null;
+  return item.text;
+}
+
+async function trySeniBudaya(text) {
+  const m = text.match(/^(budaya|tari|festival)\s+(?:khas\s+)?(.+)$/i);
+  if (!m) return null;
+  const entity = resolveCountryAlias(cleanEntity(m[2]));
+  if (!entity) return null;
+  const items = await findAllInList(
+    'seni-budaya',
+    (it) => (it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity)) || wordOverlap(entity, (it.metadata.tags || []).join(' ').toLowerCase()),
+    3
+  );
+  if (!items.length) return null;
+  return 'Seni budaya khas ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+}
+
+async function tryEkonomi(text) {
+  const m = text.match(/^ekonomi\s+(.+)$/i) || text.match(/^ekspor\s+(?:utama\s+)?(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const item = await findBestInList('ekonomi', entity, (it) => [it.metadata.name, it.metadata.value, ...(it.metadata.tags || [])]);
+  if (!item) return null;
+  return item.text;
+}
+
 async function extras(q) {
   const text = String(q || '').trim();
   if (!text) return null;
@@ -441,6 +524,21 @@ async function extras(q) {
 
   const tokoh = await trySiapaTokoh(text);
   if (tokoh) return tokoh;
+
+  const sejarah = await trySejarah(text);
+  if (sejarah) return sejarah;
+
+  const alam = await tryAlam(text);
+  if (alam) return alam;
+
+  const penemuan = await tryPenemuan(text);
+  if (penemuan) return penemuan;
+
+  const seniBudaya = await trySeniBudaya(text);
+  if (seniBudaya) return seniBudaya;
+
+  const ekonomi = await tryEkonomi(text);
+  if (ekonomi) return ekonomi;
 
   const topic = await tryTopicSearch(text);
   if (topic) return topic;

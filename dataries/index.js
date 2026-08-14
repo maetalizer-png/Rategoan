@@ -117,6 +117,37 @@ export const REGIONS = Object.freeze({
     { id: 'asean-tenggara', file: './lingo/asean-tenggara.js', names: [] },
     { id: 'asean-timur', file: './lingo/asean-timur.js', names: [] },
   ],
+  sejarah: [
+    { id: 'kuno', file: './sejarah/kuno.js', names: [] },
+    { id: 'pertengahan', file: './sejarah/pertengahan.js', names: [] },
+    { id: 'modern', file: './sejarah/modern.js', names: [] },
+    { id: 'indonesia', file: './sejarah/indonesia.js', names: [] },
+    { id: 'dunia', file: './sejarah/dunia.js', names: [] },
+  ],
+  alam: [
+    { id: 'asia', file: './alam/asia.js', names: [] },
+    { id: 'eropa', file: './alam/eropa.js', names: [] },
+    { id: 'amerika', file: './alam/amerika.js', names: [] },
+    { id: 'afrika', file: './alam/afrika.js', names: [] },
+    { id: 'osenia', file: './alam/osenia.js', names: [] },
+  ],
+  penemuan: [
+    { id: 'sains', file: './penemuan/sains.js', names: [] },
+    { id: 'teknologi', file: './penemuan/teknologi.js', names: [] },
+    { id: 'kedokteran', file: './penemuan/kedokteran.js', names: [] },
+  ],
+  'seni-budaya': [
+    { id: 'asia', file: './seni-budaya/asia.js', names: [] },
+    { id: 'eropa', file: './seni-budaya/eropa.js', names: [] },
+    { id: 'amerika', file: './seni-budaya/amerika.js', names: [] },
+    { id: 'afrika', file: './seni-budaya/afrika.js', names: [] },
+    { id: 'osenia', file: './seni-budaya/osenia.js', names: [] },
+  ],
+  ekonomi: [
+    { id: 'komoditas', file: './ekonomi/komoditas.js', names: [] },
+    { id: 'perusahaan', file: './ekonomi/perusahaan.js', names: [] },
+    { id: 'indikator', file: './ekonomi/indikator.js', names: [] },
+  ],
   sapaan: [
     { id: 'greetings', file: './sapaan/greetings.js', names: [] },
     { id: 'interaktif', file: './sapaan/interaktif.js', names: [] },
