@@ -51,6 +51,10 @@ const SMALLTALK = [
       'Saya baik, terima kasih sudah nanya! Kamu sendiri gimana kabarnya?',
       'Baik-baik saja di sini. Ada yang ingin kamu ceritakan hari ini?',
     ],
+    templatesFormal: [
+      'Saya baik, terima kasih sudah bertanya. Bagaimana kabar Anda hari ini?',
+      'Baik-baik saja, terima kasih. Ada yang bisa saya bantu?',
+    ],
   },
   {
     key: 'terima_kasih',
@@ -133,10 +137,19 @@ function lastTopic(context) {
   return priorUsers[priorUsers.length - 2].text.slice(0, 60);
 }
 
+function detectTone(text) {
+  const t = String(text || '').toLowerCase();
+  if (/\banda\b/.test(t)) return 'formal';
+  if (/\b(lu|elu|gw|gue|bro|kak|cuy|bang)\b/.test(t)) return 'casual';
+  return 'neutral';
+}
+
 function matchSmalltalk(text, options) {
   const entry = SMALLTALK.find((s) => s.re.test(text));
   if (!entry) return null;
-  const picked = pickVariant('small_' + entry.key, entry.templates, text);
+  const tone = detectTone(text);
+  const pool = tone === 'formal' && entry.templatesFormal ? entry.templatesFormal : entry.templates;
+  const picked = pickVariant('small_' + entry.key + '_' + tone, pool, text);
   const reply = withName(picked, options.personaName);
   return maybeFollowUp(reply, FOLLOWUPS.smalltalk);
 }
@@ -237,6 +250,20 @@ function replyGeneric(prompt, context) {
   return pickVariant('generic', templates, prompt);
 }
 
+const SLANG_MAP = {
+  gak: 'tidak', ga: 'tidak', nggak: 'tidak', ngga: 'tidak',
+  bt: 'bosan', gws: 'cepat sembuh', bgt: 'banget',
+  yg: 'yang', dr: 'dari', utk: 'untuk', jd: 'jadi', dg: 'dengan',
+  km: 'kamu', gw: 'saya', gue: 'saya',
+};
+
+function normalizeSlang(text) {
+  return String(text || '')
+    .split(/(\s+)/)
+    .map((tok) => SLANG_MAP[tok.toLowerCase()] || tok)
+    .join('');
+}
+
 function craft(prompt, context, options) {
   const text = String(prompt || '').trim();
   if (!text) return FALLBACK_TEXT;
@@ -249,7 +276,7 @@ function craft(prompt, context, options) {
   if (TIME_GREETING_RE.test(text)) return replyTimeGreeting(opts.now, opts, text);
   if (PLAIN_GREETING_RE.test(text)) return replyPlainGreeting(text, opts);
 
-  const smalltalk = matchSmalltalk(text, opts);
+  const smalltalk = matchSmalltalk(text, opts) || matchSmalltalk(normalizeSlang(text), opts);
   if (smalltalk) return smalltalk;
 
   if (isQuestion(text)) return replyQuestion(text, context);

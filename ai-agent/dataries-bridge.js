@@ -70,14 +70,17 @@ function formatCount(n) {
   if (num >= 1e9) return Math.round((num / 1e9) * 10) / 10 + ' miliar';
   if (num >= 1e6) return Math.round((num / 1e6) * 10) / 10 + ' juta';
   if (num >= 1e3) return Math.round((num / 1e3) * 10) / 10 + ' ribu';
-  return String(num);
+  return num.toLocaleString('id-ID');
 }
 
 function formatIndependence(dateStr) {
   const m = String(dateStr || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
   if (!m) return String(dateStr);
   const month = MONTHS_ID[parseInt(m[2], 10) - 1] || m[2];
-  return m[1] + ' (' + parseInt(m[3], 10) + ' ' + month + ')';
+  const year = parseInt(m[1], 10);
+  const yearsAgo = new Date().getFullYear() - year;
+  const agoText = yearsAgo > 0 ? ' (±' + yearsAgo + ' tahun lalu)' : '';
+  return m[1] + ' (' + parseInt(m[3], 10) + ' ' + month + ')' + agoText;
 }
 
 function formatLanguages(languages) {
@@ -88,7 +91,7 @@ function formatLanguages(languages) {
 }
 
 function formatValue(field, raw) {
-  if (field === 'population') return formatCount(raw) + ' jiwa';
+  if (field === 'population') return '±' + formatCount(raw) + ' jiwa';
   if (field === 'area') return formatCount(raw) + ' km²';
   if (field === 'independenceDay') return formatIndependence(raw);
   if (field === 'languages') return formatLanguages(raw);
@@ -140,6 +143,11 @@ function detectEntityRegions(text) {
   return matches;
 }
 
+function extractKnownEntity(text) {
+  const matches = detectEntityRegions(String(text || ''));
+  return matches.length ? matches[0].name : null;
+}
+
 function matchesName(item, entity) {
   const name = (item.metadata.name || '').toLowerCase();
   if (!name) return false;
@@ -174,7 +182,40 @@ async function findProvince(entity) {
   return null;
 }
 
-function craftAnswer(field, label, value) {
+const TRIVIA_FIELDS = ['population', 'largestCity', 'area', 'currency', 'independenceDay'];
+const TRIVIA_LABELS = {
+  population: 'Populasinya sekitar',
+  largestCity: 'Kota terbesarnya',
+  area: 'Luasnya sekitar',
+  currency: 'Mata uangnya',
+  independenceDay: 'Merdeka pada',
+};
+const RICHNESS_MODES = ['plain', 'trivia', 'plain', 'trivia', 'plain'];
+const CROSSREF_MODES = ['no', 'no', 'yes'];
+const CROSSREF_SUGGESTIONS = {
+  capital: (label) => 'Mau tahu juga makanan khas ' + label + '?',
+  population: (label) => 'Mau tahu juga ibukota ' + label + '?',
+  currency: (label) => 'Mau tahu juga tempat wisata di ' + label + '?',
+  languages: (label) => 'Mau tahu juga makanan khas ' + label + '?',
+};
+
+function maybeCrossRef(out, field, label, richness) {
+  const suggest = CROSSREF_SUGGESTIONS[field];
+  if (!suggest || richness === 'singkat') return out;
+  const mode = pickVariant('crossref_mode', CROSSREF_MODES, label + field);
+  return mode === 'yes' ? out + ' ' + suggest(label) : out;
+}
+
+function triviaFact(item, excludeField) {
+  if (!item || !item.metadata) return null;
+  const meta = item.metadata;
+  const candidates = TRIVIA_FIELDS.filter((f) => f !== excludeField && meta[f] != null);
+  if (!candidates.length) return null;
+  const f = pickVariant('trivia_field_' + meta.name, candidates, meta.name + excludeField);
+  return TRIVIA_LABELS[f] + ' ' + formatValue(f, meta[f]) + '.';
+}
+
+function craftAnswer(field, label, value, item, richness) {
   const sentences = {
     capital: 'Ibukota ' + label + ' adalah ' + value + '.',
     totalProvinces: label + ' memiliki ' + value + ' provinsi.',
@@ -192,7 +233,17 @@ function craftAnswer(field, label, value) {
   };
   const base = sentences[field] || label + ': ' + value + '.';
   const opener = pickVariant('dataries_opener', FACTOID_OPENERS, label + value + field);
-  return opener ? opener + base.charAt(0).toLowerCase() + base.slice(1) : base;
+  let out = opener ? opener + base.charAt(0).toLowerCase() + base.slice(1) : base;
+  if (richness !== 'singkat' && item) {
+    const mode = pickVariant('factoid_richness', RICHNESS_MODES, label + field);
+    if (mode === 'trivia') {
+      const trivia = triviaFact(item, field);
+      if (trivia && !trivia.includes(String(value))) out += ' ' + trivia;
+    } else {
+      out = maybeCrossRef(out, field, label, richness);
+    }
+  }
+  return out;
 }
 
 async function resolveValue(relation, entity) {
@@ -201,7 +252,7 @@ async function resolveValue(relation, entity) {
   if (countryItem) {
     for (const f of relation.fields) {
       if (countryItem.metadata[f] != null) {
-        return { value: formatValue(f, countryItem.metadata[f]), field: f, label: countryItem.metadata.name };
+        return { value: formatValue(f, countryItem.metadata[f]), field: f, label: countryItem.metadata.name, item: countryItem };
       }
     }
   }
@@ -209,7 +260,7 @@ async function resolveValue(relation, entity) {
   if (cityItem) {
     for (const f of relation.fields) {
       if (cityItem.metadata[f] != null) {
-        return { value: formatValue(f, cityItem.metadata[f]), field: f, label: cityItem.metadata.name };
+        return { value: formatValue(f, cityItem.metadata[f]), field: f, label: cityItem.metadata.name, item: cityItem };
       }
     }
   }
@@ -218,29 +269,74 @@ async function resolveValue(relation, entity) {
     if (prov) {
       const f = relation.fields.includes('kabupaten') ? 'kabupaten' : 'capital';
       const raw = prov.province[f];
-      if (raw != null) return { value: formatValue(f, raw), field: f, label: capitalize(entity) };
+      if (raw != null) return { value: formatValue(f, raw), field: f, label: capitalize(entity), item: null };
     }
   }
   return null;
 }
 
-function summarizeItem(item) {
+function summarizeItem(item, richness) {
   const sentences = String(item.text || '')
     .split(/(?<=[.!?])\s+/)
     .filter(Boolean);
-  const summary = sentences.slice(0, 3).join(' ');
+  const count = richness === 'singkat' ? 1 : 3;
+  const summary = sentences.slice(0, count).join(' ');
+  if (richness === 'singkat') return summary;
+  const heading = '### ' + (item.metadata.name || '');
   const meta = item.metadata || {};
   const bullets = [];
   if (meta.capital) bullets.push('- Ibukota: ' + meta.capital);
   if (meta.population != null) bullets.push('- Populasi: ' + formatValue('population', meta.population));
-  if (!bullets.length) return summary;
-  return summary + '\n' + bullets.slice(0, 2).join('\n');
+  if (!bullets.length) return heading + '\n' + summary;
+  return heading + '\n' + summary + '\n' + bullets.slice(0, 2).join('\n');
+}
+
+const CORRECTION_RE = /^(bukan|salah|eh\s*bukan)[,.]?\s*(?:maksud(?:nya|\s+saya)?\s+)?(.+)$/i;
+
+function splitCompoundEntities(entityText) {
+  return String(entityText || '')
+    .split(/\s+dan\s+|\s*&\s*|\s*,\s*/i)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+async function tryCorrection(text, opts) {
+  const m = text.match(CORRECTION_RE);
+  if (!m || !opts.lastQuery) return null;
+  const relation = detectRelation(String(opts.lastQuery));
+  if (!relation) return null;
+  const entity = cleanEntity(m[2]);
+  const resolved = entity ? await resolveValue(relation, entity) : null;
+  if (!resolved) return null;
+  return craftAnswer(resolved.field, resolved.label, resolved.value, resolved.item, opts.richness);
+}
+
+async function tryMultiHopCapital(text, opts) {
+  const m = text.match(/^(.+?)\s+negara\s+yang\s+ibukota\s*nya\s+(.+)$/i);
+  if (!m) return null;
+  const capital = cleanEntity(m[2]);
+  if (!capital) return null;
+  const list = await dataries.loadAll('country');
+  const countryItem = list.find((it) => it.metadata.capital && fuzzyEq(it.metadata.capital.toLowerCase(), capital));
+  if (!countryItem) return null;
+  const rewritten = m[1].trim() + ' ' + countryItem.metadata.name;
+  return (await extras(rewritten)) || (await factoid(rewritten, opts));
+}
+
+function splitPossessiveSuffix(text) {
+  return String(text || '').replace(/([a-zA-Z]{3,}?)nya\b/gi, '$1 nya');
 }
 
 async function factoid(q, options) {
-  const text = String(q || '').trim();
+  const text = splitPossessiveSuffix(String(q || '').trim());
   if (!text) return null;
   const opts = options || {};
+
+  const corrected = await tryCorrection(text, opts);
+  if (corrected) return corrected;
+
+  const multiHop = await tryMultiHopCapital(text, opts);
+  if (multiHop) return multiHop;
 
   const aboutMatch = text.match(
     /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+(negara|kota)?\s*(.+)$/i
@@ -248,20 +344,33 @@ async function factoid(q, options) {
   if (aboutMatch) {
     const entity = aboutMatch[4].replace(/\?+$/, '').trim().toLowerCase();
     const item = (await lookupInGroup('country', entity)) || (await lookupInGroup('cities', entity));
-    return item && item.text ? summarizeItem(item) : null;
+    return item && item.text ? summarizeItem(item, opts.richness) : null;
   }
 
   const relation = detectRelation(text);
   if (!relation) return null;
 
-  const entity = extractEntity(text, relation);
-  let resolved = entity ? await resolveValue(relation, entity) : null;
-  if (!resolved && opts.lastTopic) {
-    resolved = await resolveValue(relation, String(opts.lastTopic).toLowerCase().trim());
+  const entityRaw = extractEntity(text, relation);
+  const parts = splitCompoundEntities(entityRaw);
+  if (parts.length > 1) {
+    const resolvedList = [];
+    for (const p of parts) {
+      const r = await resolveValue(relation, p);
+      if (r) resolvedList.push(r);
+    }
+    if (resolvedList.length > 1) {
+      return resolvedList.map((r) => '- ' + capitalize(r.label) + ': ' + r.value).join('\n');
+    }
+  }
+
+  let resolved = entityRaw ? await resolveValue(relation, entityRaw) : null;
+  if (!resolved) {
+    const fallbackEntity = opts.lastEntity || opts.lastTopic;
+    if (fallbackEntity) resolved = await resolveValue(relation, String(fallbackEntity).toLowerCase().trim());
   }
   if (!resolved) return null;
 
-  return craftAnswer(resolved.field, resolved.label, resolved.value);
+  return craftAnswer(resolved.field, resolved.label, resolved.value, resolved.item, opts.richness);
 }
 
 function cleanEntity(raw) {
@@ -578,4 +687,5 @@ export const datariesBridge = Object.freeze({
   search,
   factoid,
   extras,
+  extractKnownEntity,
 });

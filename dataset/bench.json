@@ -145,5 +145,18 @@
   { "prompt": "tari khas argentina", "expect": "dataries_extras", "contains": "Tango", "noNoise": true },
   { "prompt": "ekspor utama indonesia", "expect": "dataries_extras", "containsAny": ["Nikel", "Kelapa Sawit"], "noNoise": true },
   { "prompt": "festival khas meksiko", "expect": "dataries_extras", "containsAny": ["Mariachi", "Dia de los Muertos"], "noNoise": true },
-  { "prompt": "siapa penemu telepon genggam", "expect": "factoid", "containsAny": ["Martin Cooper", "Cooper"], "noNoise": true }
+  { "prompt": "siapa penemu telepon genggam", "expect": "factoid", "containsAny": ["Martin Cooper", "Cooper"], "noNoise": true },
+  { "prompt": "makanan khas negara yang ibukotanya Bangkok", "expect": "dataries_extras", "containsAll": ["Thailand", "Tom Yum"], "noNoise": true },
+  { "prompt": "ibukota indonesia dan thailand", "expect": "factoid", "containsAll": ["Jakarta", "Bangkok"], "noNoise": true },
+  { "prompt": "berapa luas rusia", "expect": "factoid", "contains": "km²", "noNoise": true },
+  { "prompt": "kapan ukraina merdeka", "expect": "factoid", "containsAll": ["1991", "tahun lalu"], "noNoise": true },
+  { "prompt": "ceritakan tentang jepang", "expect": "factoid", "containsAll": ["###", "Tokyo"], "noNoise": true },
+  { "prompt": "ibukota jepang", "expect": "factoid", "contains": "Tokyo", "notContains": ["\n"], "noNoise": true },
+  { "prompt": "bro, kabar?", "expect": "smalltalk", "notContains": ["Anda"] },
+  { "prompt": "apa ibukota rusia", "expect": "factoid", "contains": "Moskow", "noNoise": true, "note": "multi-turn setup untuk anafora, lihat kasus berikutnya" },
+  { "prompt": "berapa penduduknya?", "expect": "factoid_anafora", "contains": "146 juta", "requiresContext": "apa ibukota rusia", "noNoise": true },
+  { "prompt": "ibukota korea utara", "expect": "factoid", "contains": "Pyongyang", "noNoise": true, "note": "multi-turn setup untuk negasi, lihat kasus berikutnya" },
+  { "prompt": "bukan, maksud saya korea selatan", "expect": "factoid_negasi", "contains": "Seoul", "requiresContext": "ibukota korea utara", "noNoise": true },
+  { "prompt": "jawab singkat", "expect": "mode_pref", "note": "setel mode singkat untuk kasus berikutnya" },
+  { "prompt": "apa itu fotosintesis", "expect": "dataries_extras_singkat", "containsAny": ["cahaya", "glukosa"], "requiresContext": "jawab singkat", "noNoise": true }
 ]

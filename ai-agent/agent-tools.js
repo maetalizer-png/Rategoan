@@ -349,6 +349,96 @@ function lupakan(text) {
   return memoryLong.forgetNote(fact) ? 'Sudah saya lupakan soal "' + fact + '".' : 'Saya tidak menemukan catatan soal "' + fact + '".';
 }
 
+function textOverlapRatio(a, b) {
+  const wa = new Set(meaningfulWords(String(a || '').toLowerCase()));
+  const wb = new Set(meaningfulWords(String(b || '').toLowerCase()));
+  if (!wa.size || !wb.size) return 0;
+  let common = 0;
+  wa.forEach((w) => { if (wb.has(w)) common++; });
+  return common / Math.min(wa.size, wb.size);
+}
+
+function laporanOtak() {
+  const notes = ragetDb.allNotes();
+  if (!notes.length) return 'Belum ada percakapan tercatat untuk dianalisis.';
+
+  const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const notesWeek = notes.filter((n) => n.time >= weekAgo);
+
+  const byIntent = new Map();
+  notes.forEach((n) => {
+    const key = n.intent || 'generic';
+    if (!byIntent.has(key)) byIntent.set(key, { total: 0, rated: 0, positive: 0 });
+    const s = byIntent.get(key);
+    s.total++;
+    if (n.feedback != null) {
+      s.rated++;
+      if (n.feedback) s.positive++;
+    }
+  });
+  const confidencePerIntent = Array.from(byIntent.entries())
+    .map(([intent, s]) => ({ intent, total: s.total, akurasi: s.rated ? Math.round((s.positive / s.rated) * 100) : null }))
+    .filter((x) => x.akurasi != null)
+    .sort((a, b) => a.akurasi - b.akurasi);
+
+  const autoFewshotCandidates = notes.filter((n) => n.feedback === true).slice(-5);
+
+  const seenTexts = [];
+  const gapCounts = new Map();
+  notes.forEach((n) => {
+    if (n.intent !== 'chat_terbuka' && n.intent !== 'generic') return;
+    const key = meaningfulWords(n.question.toLowerCase()).slice(0, 3).join(' ');
+    if (!key) return;
+    gapCounts.set(key, (gapCounts.get(key) || 0) + 1);
+  });
+  const gapWishlist = Array.from(gapCounts.entries())
+    .filter(([, count]) => count >= 2)
+    .map(([topic]) => topic);
+
+  const dedupPairs = [];
+  for (let i = 0; i < notes.length && dedupPairs.length < 5; i++) {
+    for (let j = i + 1; j < notes.length && dedupPairs.length < 5; j++) {
+      if (textOverlapRatio(notes[i].question, notes[j].question) > 0.8) {
+        dedupPairs.push(notes[i].question + ' ~ ' + notes[j].question);
+      }
+    }
+  }
+
+  const parts = [
+    formatter.h('Laporan Otak Raget', 3),
+    'Total percakapan tercatat: ' + notes.length + ' (' + notesWeek.length + ' minggu ini).',
+  ];
+
+  if (confidencePerIntent.length) {
+    parts.push(formatter.h('Intent Terlemah (akurasi per folder/intent)', 3));
+    parts.push(formatter.bullets(confidencePerIntent.slice(0, 5).map((x) => x.intent + ': ' + x.akurasi + '% (' + x.total + ' kasus)')));
+  }
+
+  if (gapWishlist.length) {
+    parts.push(formatter.h('Gap Wishlist (topik sering ditanya tanpa data)', 3));
+    parts.push(formatter.bullets(gapWishlist));
+  }
+
+  if (dedupPairs.length) {
+    parts.push(formatter.h('Kandidat Dedup/Merge', 3));
+    parts.push(formatter.bullets(dedupPairs));
+  }
+
+  if (autoFewshotCandidates.length) {
+    parts.push(formatter.h('Kandidat Auto-Fewshot (rating positif)', 3));
+    parts.push(formatter.bullets(autoFewshotCandidates.map((n) => n.question)));
+  }
+
+  parts.push(formatter.h('Rekomendasi', 3));
+  const rekomendasi = [];
+  if (confidencePerIntent.length) rekomendasi.push('Prioritaskan penambahan data untuk intent dengan akurasi terendah.');
+  if (gapWishlist.length) rekomendasi.push('Tambahkan data dataries untuk topik di gap wishlist.');
+  if (!rekomendasi.length) rekomendasi.push('Belum ada rekomendasi mendesak, data dan akurasi masih sehat.');
+  parts.push(formatter.bullets(rekomendasi));
+
+  return formatter.blocks(parts);
+}
+
 function eksporLog() {
   const notes = ragetDb.allNotes();
   const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
@@ -377,4 +467,5 @@ export const agentTools = Object.freeze({
   ide,
   bandingkan,
   kelebihanKekurangan,
+  laporanOtak,
 });

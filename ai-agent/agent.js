@@ -144,6 +144,7 @@ function detectTool(prompt) {
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
   if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
   if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
+  if (/laporan\s+otak/.test(t)) return 'laporan_otak';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
   if (/^lupakan\b/.test(t)) return 'lupakan';
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
@@ -172,6 +173,7 @@ async function runTool(kind, prompt, messages) {
   if (kind === 'ingat') return agentTools.ingat(prompt);
   if (kind === 'lupakan') return agentTools.lupakan(prompt);
   if (kind === 'ekspor') return agentTools.eksporLog();
+  if (kind === 'laporan_otak') return agentTools.laporanOtak();
   if (kind === 'jelaskan') {
     const topic = prompt
       .replace(/^jelaskan\s*/i, '')
@@ -244,11 +246,16 @@ function lastTopicOf(messages) {
   return priorUsers[priorUsers.length - 2].text;
 }
 
+function getRichnessPref() {
+  return memoryLong.recall('mode_richness') || null;
+}
+
 async function tryFactoid(text, messages) {
   const t = text.trim();
 
   const topic = lastTopicOf(messages);
-  const dataries = await datariesBridge.factoid(t, { lastTopic: topic });
+  const lastEntity = topic ? datariesBridge.extractKnownEntity(topic) : null;
+  const dataries = await datariesBridge.factoid(t, { lastTopic: topic, lastEntity, lastQuery: topic, richness: getRichnessPref() });
   if (dataries) return dataries;
 
   if (ABOUT_RE.test(t)) return null;
@@ -315,9 +322,27 @@ function postProcess(text) {
   return cleaned || 'Maaf, saya belum punya jawaban untuk itu. Bisa dijelaskan lebih lanjut?';
 }
 
+const MODE_COMMAND_RE = /^(jawab\s+(singkat|ringkas|detail)|mode\s+(santai|formal))\s*$/i;
+
+function detectModeCommand(text) {
+  const m = text.trim().match(MODE_COMMAND_RE);
+  if (!m) return null;
+  if (m[2]) return { key: 'mode_richness', value: /detail/i.test(m[2]) ? 'detail' : 'singkat' };
+  if (m[3]) return { key: 'mode_tone', value: m[3].toLowerCase() };
+  return null;
+}
+
 async function respond(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
+
+  const modeCmd = detectModeCommand(text);
+  if (modeCmd) {
+    memoryLong.remember(modeCmd.key, modeCmd.value);
+    const reply = 'Oke, mulai sekarang saya jawab dengan mode ' + modeCmd.value + '.';
+    ragetDb.addNote(text, reply, null, 'mode_pref');
+    return postProcess(reply);
+  }
 
   const rating = detectRating(text);
   if (rating !== null) {
