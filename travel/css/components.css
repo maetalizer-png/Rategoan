@@ -208,6 +208,53 @@ button.tag:active {
   margin-left: auto;
 }
 
+.conv-full {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.conv-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--stat);
+  border-radius: var(--r-stat);
+  padding: 10px 12px;
+}
+
+.conv-row select {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--tx);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.conv-row input {
+  width: 90px;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--tx);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.conv-row b {
+  margin-left: auto;
+  font-size: 14px;
+}
+
+.dots-grid {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 /* ---------- Opsi kuis / tebak ---------- */
 .q-opt {
   display: block;

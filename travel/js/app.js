@@ -7,6 +7,7 @@ import { openDetail } from './views/detail.js';
 import { showKuisHome } from './views/kuis.js';
 import { renderSapaan } from './views/sapaan.js';
 import { openTrip } from './views/trip.js';
+import { openProfil } from './views/profil.js';
 import { install } from './features/install.js';
 
 const $ = (s) => document.querySelector(s);
@@ -38,6 +39,13 @@ inp.addEventListener('change', (e) => {
   const v = e.target.value.trim();
   if (v.length >= 3) pushRecent(v);
 });
+
+$('#profileBtn').innerHTML = ic('user');
+$('#profileBtn').onclick = () => {
+  document.querySelectorAll('.bot button').forEach((x) => x.classList.remove('on'));
+  $('.top').hidden = true;
+  openProfil();
+};
 
 $('#fab').innerHTML = ic('shuffle');
 $('#fab').onclick = async () => {

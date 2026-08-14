@@ -123,6 +123,25 @@ main {
   color: var(--tx);
 }
 
+/* ---------- Profil ---------- */
+#profileBtn {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  color: var(--tx);
+}
+
+#profileBtn .ic {
+  width: 17px;
+  height: 17px;
+}
+
 /* ---------- FAB ---------- */
 #fab {
   position: fixed;

@@ -5,6 +5,7 @@ import { RATES } from '../constants.js';
 import { getStats, saveStats } from '../storage.js';
 import { openSheet, renderJelajah } from './jelajah.js';
 import { climateCard } from '../features/climate.js';
+import { openConverter } from '../features/currency.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');
@@ -48,7 +49,7 @@ export async function openDetail(c) {
     (myBudaya.length ? '<div class="sec">' + ic('book') + ' Budaya</div><div class="tags">' + myBudaya.map((b, i) => '<button class="tag" data-b="' + i + '">' + b.metadata.name + '</button>').join('') + '</div>' : '') +
     (mySej.length ? '<div class="sec">' + ic('clock') + ' Sejarah</div><div class="tags">' + mySej.map((s2, i) => '<button class="tag" data-h="' + i + '">' + s2.metadata.name + '</button>').join('') + '</div>' : '') +
     (myCities.length ? '<div class="sec">' + ic('city') + ' Kota</div><div class="tags">' + myCities.map((x) => '<span class="tag">' + x.metadata.name + '</span>').join('') + '</div>' : '') +
-    (rate ? '<div class="sec">' + ic('swap') + ' Konversi (kurs perkiraan)</div><div class="conv"><input id="amt" type="number" inputmode="decimal" value="100"><span>1 ' + m.currency + ' = Rp ' + rate.toLocaleString('id-ID') + '</span><b id="convOut"></b></div>' : '') +
+    (rate ? '<div class="sec">' + ic('swap') + ' Konversi (kurs perkiraan)</div><div class="conv"><input id="amt" type="number" inputmode="decimal" value="100"><span>1 ' + m.currency + ' = Rp ' + rate.toLocaleString('id-ID') + '</span><b id="convOut"></b></div><div class="tags"><button class="tag" id="openConv">' + ic('swap') + ' Buka konverter</button></div>' : '') +
     '</div>' + climateCard(regionOf(name));
 
   $('#back').onclick = () => renderJelajah('');
@@ -81,5 +82,6 @@ export async function openDetail(c) {
     const calc = () => { out.textContent = 'Rp ' + Math.round((parseFloat(amt.value) || 0) * rate).toLocaleString('id-ID'); };
     amt.addEventListener('input', calc);
     calc();
+    $('#openConv').onclick = () => openConverter(m.currency);
   }
 }
