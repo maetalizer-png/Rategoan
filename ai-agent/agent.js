@@ -13,6 +13,15 @@ import { emailComposer } from '../email/composer.js';
 import { icsParser } from '../calendar/ics-parser.js';
 import { calendarStore } from '../calendar/calendar-store.js';
 import { ocrReader } from '../ocr/reader.js';
+import { pdfReader } from '../pdf/reader.js';
+import { pdfStore } from '../pdf/pdf-store.js';
+import { notionImporter } from '../notion/importer.js';
+import { notionStore } from '../notion/notion-store.js';
+import { evernoteImporter } from '../evernote/importer.js';
+import { evernoteStore } from '../evernote/evernote-store.js';
+import { whatsappImporter } from '../whatsapp/importer.js';
+import { whatsappStore } from '../whatsapp/whatsapp-store.js';
+import { chunker } from '../vault/chunk.js';
 import { translator } from '../translate/translator.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
@@ -191,6 +200,52 @@ function tryCalendarImport(messages) {
   if (!events.length) return 'File .ics dibaca tapi tidak ada acara yang ditemukan di dalamnya.';
   const count = calendarStore.addAll(events);
   return 'Berhasil impor ' + count + ' acara dari file kalender.';
+}
+
+async function tryPdfImport(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.fileBinary || !/\.pdf$/i.test(att.name || '')) return null;
+  const result = await pdfReader.parsePDF(att.fileBinary);
+  if (!result.ok) return result.message;
+  const parts = chunker.chunkText(result.text, 1500);
+  const count = pdfStore.addAll(parts.map((t) => ({ title: att.name, text: t })), { source: 'pdf', fileName: att.name });
+  return 'Berhasil impor PDF "' + att.name + '" (' + result.pages + ' halaman, ' + count + ' bagian tersimpan).';
+}
+
+async function tryNotionImport(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.fileBinary || !/\.zip$/i.test(att.name || '')) return null;
+  const result = await notionImporter.importZip(att.fileBinary);
+  if (!result.ok) return result.message;
+  if (!result.chunks.length) return 'File ZIP dibaca tapi tidak ditemukan halaman Notion (.html/.md) di dalamnya.';
+  const count = notionStore.addAll(result.chunks, { source: 'notion' });
+  return 'Berhasil impor ' + count + ' halaman Notion dari "' + att.name + '".';
+}
+
+function tryEvernoteImport(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.fileText || !/\.enex$/i.test(att.name || '')) return null;
+  const result = evernoteImporter.importENEX(att.fileText);
+  if (!result.ok) return result.message;
+  const count = evernoteStore.addAll(result.chunks, { source: 'evernote' });
+  return 'Berhasil impor ' + count + ' catatan Evernote dari "' + att.name + '".';
+}
+
+function tryWhatsappImport(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.fileText || !/\.txt$/i.test(att.name || '')) return null;
+  const result = whatsappImporter.importWhatsApp(att.fileText);
+  if (!result.ok) return result.message;
+  const count = whatsappStore.addAll(result.chunks, { source: 'whatsapp' });
+  return 'Berhasil impor riwayat WhatsApp "' + att.name + '" (' + result.messageCount + ' pesan, ' + count + ' bagian tersimpan).';
 }
 
 function tryCalendarQuery(text) {
@@ -543,6 +598,30 @@ async function respond(messages, prompt) {
   if (calendarImportReply) {
     ragetDb.addNote(text, calendarImportReply, null, 'calendar_import');
     return postProcess(calendarImportReply);
+  }
+
+  const pdfImportReply = await tryPdfImport(messages);
+  if (pdfImportReply) {
+    ragetDb.addNote(text, pdfImportReply, null, 'pdf_import');
+    return postProcess(pdfImportReply);
+  }
+
+  const notionImportReply = await tryNotionImport(messages);
+  if (notionImportReply) {
+    ragetDb.addNote(text, notionImportReply, null, 'notion_import');
+    return postProcess(notionImportReply);
+  }
+
+  const evernoteImportReply = tryEvernoteImport(messages);
+  if (evernoteImportReply) {
+    ragetDb.addNote(text, evernoteImportReply, null, 'evernote_import');
+    return postProcess(evernoteImportReply);
+  }
+
+  const whatsappImportReply = tryWhatsappImport(messages);
+  if (whatsappImportReply) {
+    ragetDb.addNote(text, whatsappImportReply, null, 'whatsapp_import');
+    return postProcess(whatsappImportReply);
   }
 
   const calendarQueryReply = tryCalendarQuery(text);

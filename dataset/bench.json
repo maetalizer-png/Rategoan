@@ -185,5 +185,11 @@
   { "prompt": "buat email formal ke Bu Sinta tentang laporan bulanan", "expect": "email", "contains": "Yth" },
   { "prompt": "tulis email informal ke Dimas soal rencana futsal", "expect": "email", "contains": "Hai" },
   { "prompt": "cari beli susu di semua", "expect": "unified_search", "contains": "Hasil pencarian" },
-  { "prompt": "apa yang saya punya tentang rapat tim", "expect": "unified_search_crossref", "note": "cross-reference: mencari across riwayat chat + pengingat dalam satu balasan terkelompok per sumber" }
+  { "prompt": "apa yang saya punya tentang rapat tim", "expect": "unified_search_crossref", "note": "cross-reference: mencari across riwayat chat + pengingat dalam satu balasan terkelompok per sumber" },
+  { "prompt": "impor file ini", "expect": "whatsapp_import", "containsAll": ["WhatsApp", "pesan"], "requiresAttach": ".txt (ekspor WhatsApp)", "note": "diverifikasi end-to-end via Playwright: 3 pesan -> 2 chunk (gap 5 menit) tersimpan raget_whatsapp" },
+  { "prompt": "impor file ini", "expect": "evernote_import", "containsAll": ["Evernote", "catatan"], "requiresAttach": ".enex", "note": "diverifikasi end-to-end via Playwright: 1 catatan tersimpan raget_evernote, tanpa CDN (DOMParser native)" },
+  { "prompt": "baca pdf ini", "expect": "pdf_stub", "containsAll": ["PDF", "MB"], "requiresAttach": ".pdf", "note": "CDN pdf.js diblokir di sandbox ini (403 proxy) - stub jujur diverifikasi, path 'paket sudah diunduh' tidak bisa dites di lingkungan ini" },
+  { "prompt": "impor notion ini", "expect": "notion_stub", "containsAll": ["Notion", "MB"], "requiresAttach": ".zip", "note": "sama seperti PDF - CDN JSZip diblokir di sandbox, stub jujur diverifikasi" },
+  { "prompt": "cari meeting di semua sumber", "expect": "unified_search_vault", "contains": "WhatsApp", "requiresContext": "impor file ini (WhatsApp)", "note": "diverifikasi: unified search menemukan chunk WhatsApp yang baru diimpor" },
+  { "prompt": "hitung 12*8", "expect": "math", "contains": "96", "note": "regresi Jilid 5-12 tetap hijau" }
 ]

@@ -48,6 +48,14 @@ export const attach = {
       reader.readAsText(file);
     });
   },
+  readAsArrayBuffer(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsArrayBuffer(file);
+    });
+  },
   async onPick(input) {
     const f = input.files && input.files[0];
     input.value = '';
@@ -58,6 +66,8 @@ export const attach = {
       this.current.full = await this.makeThumb(f, 1600);
     } else if (/\.(ics|txt|enex|md|csv)$/i.test(f.name || '')) {
       this.current.fileText = await this.readAsText(f);
+    } else if (/\.(pdf|zip)$/i.test(f.name || '')) {
+      this.current.fileBinary = await this.readAsArrayBuffer(f);
     }
     this.renderChip();
     sheets.close();
