@@ -675,19 +675,9 @@ async function respond(messages, prompt) {
   }
 
   if (!plannedFallback && !isClarifyReply(reply)) {
-    const queryTokens = scorer.tokenize(text);
-    const scored = preSearch
-      .filter((r) => !tooSimilar(text, r.text))
-      .map((r) => {
-        const noteTokens = scorer.tokenize(r.text);
-        const corpus = [queryTokens, noteTokens];
-        const confidence = scorer.cosineSim(scorer.tfidfVector(queryTokens, corpus), scorer.tfidfVector(noteTokens, corpus));
-        return { r, confidence };
-      })
-      .sort((a, b) => b.confidence - a.confidence);
-    const best = scored[0];
-    if (best && best.confidence >= scorer.CONFIDENCE_THRESHOLD) {
-      reply += '\n\n(Catatan terkait: ' + best.r.text.slice(0, 120) + ')';
+    const candidate = preSearch.find((r) => !tooSimilar(text, r.text));
+    if (candidate && candidate.score >= scorer.CONFIDENCE_THRESHOLD) {
+      reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';
     }
   }
 

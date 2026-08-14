@@ -12,6 +12,7 @@ import { evernoteStore } from '../evernote/evernote-store.js';
 import { whatsappStore } from '../whatsapp/whatsapp-store.js';
 import { meaningfulWords, pickVariant } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
+import { quality } from './quality.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -417,9 +418,19 @@ async function laporanOtak() {
     }
   }
 
+  const qualityResult = await quality.evaluate();
+
   const parts = [
     formatter.h('Laporan Otak Raget', 3),
     'Total percakapan tercatat: ' + notes.length + ' (' + notesWeek.length + ' minggu ini).',
+    formatter.bold('Skor Kualitas: ' + qualityResult.score + '/100'),
+    formatter.bullets([
+      'Akurasi (A): ' + qualityResult.breakdown.A + '%',
+      'Kekayaan (K): ' + qualityResult.breakdown.K + '%',
+      'Keunikan (U): ' + qualityResult.breakdown.U + '%',
+      'Diversitas (D): ' + qualityResult.breakdown.D + '%',
+      'Variasi struktur (V): ' + qualityResult.breakdown.V + '%',
+    ]),
   ];
 
   if (confidencePerIntent.length) {

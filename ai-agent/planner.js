@@ -1,6 +1,7 @@
 import { detectTone } from '../utils/text.js';
 import { formatter } from './formatter.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
+import { quality } from './quality.js';
 
 const CHOICE_THRESHOLD = 0.2;
 
@@ -36,7 +37,7 @@ function planFallback(text, results) {
       title: 'Yang saya tahu',
       items: list.slice(0, 3).map((r) => r.text),
     });
-    return body + '\n\n(sumber: ' + top.type + ')';
+    return quality.guardLength(body, 'terbuka') + '\n\n(sumber: ' + top.type + ')';
   }
 
   if (top.score >= CHOICE_THRESHOLD) {
