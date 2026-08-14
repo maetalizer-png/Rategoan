@@ -1,11 +1,6 @@
 import { REGIONS, dataries } from '../dataries/index.js';
-
-const STOPWORDS = new Set([
-  'saya', 'kamu', 'anda', 'kita', 'kami', 'dia', 'mereka',
-  'yang', 'dan', 'atau', 'di', 'ke', 'dari', 'untuk', 'pada', 'dengan',
-  'ini', 'itu', 'ada', 'apa', 'siapa', 'kapan', 'dimana', 'mengapa', 'kenapa', 'bagaimana', 'berapa',
-  'saja', 'juga', 'akan', 'sudah', 'belum', 'tidak', 'bukan', 'ya', 'ga', 'gak',
-]);
+import { pickVariant } from '../utils/text.js';
+import { retrieval } from '../raget-retrieval/retrieve.js';
 
 const MONTHS_ID = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -25,36 +20,6 @@ const RELATIONS = [
 ];
 
 const FACTOID_OPENERS = ['', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, '];
-
-const variantTurns = new Map();
-const variantLast = new Map();
-
-function hashText(text) {
-  let h = 0;
-  const s = String(text || '');
-  for (let i = 0; i < s.length; i++) {
-    h = (h * 31 + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
-
-function pickVariant(intent, templates, text) {
-  if (templates.length === 1) return templates[0];
-  const base = (variantTurns.get(intent) || 0) + hashText(text);
-  let idx = base % templates.length;
-  if (variantLast.get(intent) === idx) idx = (idx + 1) % templates.length;
-  variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
-  variantLast.set(intent, idx);
-  return templates[idx];
-}
-
-function meaningfulWords(text) {
-  return String(text || '')
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .filter((w) => w.length > 2 && !STOPWORDS.has(w));
-}
 
 function capitalize(s) {
   return String(s || '')
@@ -126,7 +91,7 @@ function extractEntity(text, relation) {
     .replace(/\?+/g, '')
     .replace(/\s+/g, ' ')
     .trim();
-  return t;
+  return resolveCountryAlias(t);
 }
 
 function detectEntityRegions(text) {
@@ -363,8 +328,11 @@ async function factoid(q, options) {
     }
   }
 
-  let resolved = entityRaw ? await resolveValue(relation, entityRaw) : null;
-  if (!resolved) {
+  let resolved = null;
+  if (entityRaw) {
+    resolved = await resolveValue(relation, entityRaw);
+    if (!resolved) return null;
+  } else {
     const fallbackEntity = opts.lastEntity || opts.lastTopic;
     if (fallbackEntity) resolved = await resolveValue(relation, String(fallbackEntity).toLowerCase().trim());
   }
@@ -384,7 +352,9 @@ function cleanEntity(raw) {
 
 function fuzzyEq(a, b) {
   if (!a || !b) return false;
-  return a === b || a.includes(b) || b.includes(a);
+  if (a === b) return true;
+  if (a.length < 3 || b.length < 3) return false;
+  return a.includes(b) || b.includes(a);
 }
 
 async function findLanguageByCountry(entity) {
@@ -421,10 +391,10 @@ async function tryPenuturBahasa(text) {
 }
 
 async function tryGreetingBahasa(text) {
-  const m = text.match(/(halo|hai|terima\s*kasih|sapaan|cara\s+menyapa(?:\s+di)?|ucapkan\s+selamat\s+pagi)\s+(?:dalam\s+)?(?:bahasa\s+)?(.+)/i);
+  const m = text.match(/(halo|hai|terima\s*kasih|sapaan|cara\s+menyapa(?:\s+di)?|ucapkan\s+selamat\s+pagi)\s+(?:dalam\s+)?bahasa\s+(.+)/i);
   if (!m) return null;
   const kind = m[1].toLowerCase();
-  const entity = cleanEntity(m[2].replace(/^bahasa\s+/i, ''));
+  const entity = cleanEntity(m[2]);
   if (!entity) return null;
   const item = await findLanguageByCountry(entity);
   if (!item || !item.metadata.greetings) return null;
@@ -532,6 +502,9 @@ const COUNTRY_ALIASES = {
   korea: 'korea selatan',
   inggris: 'inggris',
   jepang: 'jepang',
+  brazil: 'brasil',
+  england: 'inggris',
+  'new zealand': 'selandia baru',
 };
 
 function resolveCountryAlias(entity) {
@@ -660,10 +633,8 @@ async function search(q) {
   if (!text) return null;
   const matches = detectEntityRegions(text);
   if (!matches.length) return null;
-  const words = meaningfulWords(text);
   const seen = new Set();
-  let best = null;
-  let bestScore = 0;
+  const corpus = [];
   for (const m of matches) {
     const key = m.group + '/' + m.region.id;
     if (seen.has(key)) continue;
@@ -672,15 +643,11 @@ async function search(q) {
     if (!list) continue;
     list.forEach((item) => {
       const tags = (item.metadata && item.metadata.tags) || [];
-      const hay = (item.text + ' ' + tags.join(' ')).toLowerCase();
-      const score = words.reduce((acc, w) => acc + (hay.includes(w) ? 1 : 0), 0);
-      if (score > bestScore) {
-        bestScore = score;
-        best = item;
-      }
+      corpus.push({ item, text: item.text + ' ' + tags.join(' ') });
     });
   }
-  return bestScore > 0 ? best : null;
+  const found = retrieval.best(text, corpus, { threshold: retrieval.LIST_THRESHOLD });
+  return found ? found.item.item : null;
 }
 
 export const datariesBridge = Object.freeze({

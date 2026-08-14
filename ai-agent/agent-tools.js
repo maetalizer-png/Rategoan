@@ -10,47 +10,12 @@ import { pdfStore } from '../pdf/pdf-store.js';
 import { notionStore } from '../notion/notion-store.js';
 import { evernoteStore } from '../evernote/evernote-store.js';
 import { whatsappStore } from '../whatsapp/whatsapp-store.js';
+import { meaningfulWords, pickVariant } from '../utils/text.js';
+import { retrieval } from '../raget-retrieval/retrieve.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
 const PRECEDENCE = { '+': 1, '-': 1, '*': 2, '/': 2, '%': 2 };
-
-const STOPWORDS = new Set([
-  'saya', 'kamu', 'anda', 'kita', 'kami', 'dia', 'mereka',
-  'yang', 'dan', 'atau', 'di', 'ke', 'dari', 'untuk', 'pada', 'dengan',
-  'ini', 'itu', 'ada', 'apa', 'siapa', 'kapan', 'dimana', 'mengapa', 'kenapa', 'bagaimana', 'berapa',
-  'saja', 'juga', 'akan', 'sudah', 'belum', 'tidak', 'bukan', 'ya', 'ga', 'gak', 'lalu', 'lanjut',
-]);
-
-function hashText(text) {
-  let h = 0;
-  const s = String(text || '');
-  for (let i = 0; i < s.length; i++) {
-    h = (h * 31 + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
-
-const variantTurns = new Map();
-const variantLast = new Map();
-
-function pickVariant(intent, templates, text) {
-  if (templates.length === 1) return templates[0];
-  const base = (variantTurns.get(intent) || 0) + hashText(text);
-  let idx = base % templates.length;
-  if (variantLast.get(intent) === idx) idx = (idx + 1) % templates.length;
-  variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
-  variantLast.set(intent, idx);
-  return templates[idx];
-}
-
-function meaningfulWords(text) {
-  return text
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .filter((w) => w.length > 2 && !STOPWORDS.has(w));
-}
 
 function extractiveSummary(text) {
   const sentences = String(text || '')
@@ -346,7 +311,7 @@ async function cariSemua(query) {
   const words = meaningfulWords(q.toLowerCase());
   const groups = [];
 
-  const noteResults = ragetDb.search(q, 5);
+  const noteResults = await ragetDb.search(q, 5);
   if (noteResults.length) groups.push({ source: 'Riwayat Chat', items: noteResults.map((n) => n.question + ' — ' + n.answer.slice(0, 80)) });
 
   const knowledgeResults = await memoryIndex.search(q, 5);
@@ -358,16 +323,16 @@ async function cariSemua(query) {
   const calendarResults = calendarStore.eventsBetween(0, Date.now() + 365 * 24 * 60 * 60 * 1000).filter((e) => words.some((w) => (e.summary || '').toLowerCase().includes(w)));
   if (calendarResults.length) groups.push({ source: 'Kalender', items: calendarResults.map((e) => e.summary + ' (' + new Date(e.start).toLocaleString('id-ID') + ')') });
 
-  const pdfResults = pdfStore.search(q, 5);
+  const pdfResults = await pdfStore.search(q, 5);
   if (pdfResults.length) groups.push({ source: 'PDF', items: pdfResults.map((r) => (r.title || 'PDF') + ' — ' + r.text.slice(0, 80)) });
 
-  const notionResults = notionStore.search(q, 5);
+  const notionResults = await notionStore.search(q, 5);
   if (notionResults.length) groups.push({ source: 'Notion', items: notionResults.map((r) => (r.title || 'Notion') + ' — ' + r.text.slice(0, 80)) });
 
-  const evernoteResults = evernoteStore.search(q, 5);
+  const evernoteResults = await evernoteStore.search(q, 5);
   if (evernoteResults.length) groups.push({ source: 'Evernote', items: evernoteResults.map((r) => (r.title || 'Evernote') + ' — ' + r.text.slice(0, 80)) });
 
-  const whatsappResults = whatsappStore.search(q, 5);
+  const whatsappResults = await whatsappStore.search(q, 5);
   if (whatsappResults.length) groups.push({ source: 'WhatsApp', items: whatsappResults.map((r) => r.text.slice(0, 80)) });
 
   if (!groups.length) return 'Tidak ditemukan apa pun terkait "' + q + '" di semua sumber (riwayat, pengetahuan, pengingat, kalender, PDF, Notion, Evernote, WhatsApp).';
@@ -406,8 +371,8 @@ function textOverlapRatio(a, b) {
   return common / Math.min(wa.size, wb.size);
 }
 
-function laporanOtak() {
-  const notes = ragetDb.allNotes();
+async function laporanOtak() {
+  const notes = await ragetDb.allNotes();
   if (!notes.length) return 'Belum ada percakapan tercatat untuk dianalisis.';
 
   const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
@@ -516,8 +481,8 @@ function shareToWhatsApp(session) {
   return 'Membuka WhatsApp dengan isi percakapan siap dibagikan.';
 }
 
-function eksporLog() {
-  const notes = ragetDb.allNotes();
+async function eksporLog() {
+  const notes = await ragetDb.allNotes();
   const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');

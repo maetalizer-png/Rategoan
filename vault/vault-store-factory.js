@@ -1,24 +1,20 @@
+import { idbGateway } from '../raget-database/idb-gateway.js';
+import { retrieval } from '../raget-retrieval/retrieve.js';
+
 export function createVaultStore(key, maxItems) {
   const MAX = maxItems || 300;
 
-  function readAll() {
-    try {
-      const raw = localStorage.getItem(key);
-      const list = raw ? JSON.parse(raw) : [];
-      return Array.isArray(list) ? list : [];
-    } catch (e) {
-      return [];
-    }
+  async function readAll() {
+    const list = await idbGateway.getList(key);
+    return Array.isArray(list) ? list : [];
   }
 
-  function writeAll(list) {
-    try {
-      localStorage.setItem(key, JSON.stringify(list));
-    } catch (e) {}
+  async function writeAll(list) {
+    await idbGateway.setList(key, list.slice(-MAX));
   }
 
-  function addAll(items, meta) {
-    const list = readAll();
+  async function addAll(items, meta) {
+    const list = await readAll();
     const withIds = (items || []).map((it) =>
       Object.assign(
         { id: 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), addedAt: Date.now() },
@@ -27,29 +23,19 @@ export function createVaultStore(key, maxItems) {
       )
     );
     const merged = list.concat(withIds);
-    writeAll(merged.slice(-MAX));
+    await writeAll(merged);
     return withIds.length;
   }
 
-  function allItems() {
-    return readAll();
+  async function allItems() {
+    return await readAll();
   }
 
-  function search(query, limit) {
-    const words = String(query || '')
-      .toLowerCase()
-      .split(/\s+/)
-      .filter((w) => w.length > 2);
-    if (!words.length) return [];
-    const scored = readAll()
-      .map((item) => {
-        const hay = ((item.title || '') + ' ' + (item.text || '')).toLowerCase();
-        const score = words.reduce((acc, w) => acc + (hay.includes(w) ? 1 : 0), 0);
-        return { item, score };
-      })
-      .filter((s) => s.score > 0)
-      .sort((a, b) => b.score - a.score);
-    return scored.slice(0, limit || 5).map((s) => s.item);
+  async function search(query, limit) {
+    const list = await readAll();
+    const corpus = list.map((item) => ({ item, text: (item.title || '') + ' ' + (item.text || '') }));
+    const ranked = retrieval.rank(query, corpus, { threshold: retrieval.LIST_THRESHOLD, limit: limit || 5 });
+    return ranked.map((r) => r.item.item);
   }
 
   return Object.freeze({ addAll, allItems, search });

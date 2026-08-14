@@ -1,62 +1,50 @@
 import { ragetSchema } from './raget-schema.js';
+import { idbGateway } from './idb-gateway.js';
+import { retrieval } from '../raget-retrieval/retrieve.js';
 
-const KEY = 'raget_db';
+const KEY = 'notes';
 const MAX_NOTES = 500;
 
-function readAll() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    const list = raw ? JSON.parse(raw) : [];
-    return Array.isArray(list) ? list.filter(ragetSchema.isValidNote) : [];
-  } catch (e) {
-    return [];
-  }
+async function readAll() {
+  const list = await idbGateway.getList(KEY);
+  return Array.isArray(list) ? list.filter(ragetSchema.isValidNote) : [];
 }
 
-function writeAll(list) {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(list));
-  } catch (e) {}
+async function writeAll(list) {
+  await idbGateway.setList(KEY, list.slice(-MAX_NOTES));
 }
 
-function addNote(question, answer, feedback, intent) {
+async function addNote(question, answer, feedback, intent) {
   const note = ragetSchema.createNote(question, answer, feedback, intent);
-  const list = readAll();
+  const list = await readAll();
   list.push(note);
-  writeAll(list.slice(-MAX_NOTES));
+  await writeAll(list);
   return note;
 }
 
-function allNotes() {
-  return readAll();
+async function allNotes() {
+  return await readAll();
 }
 
-function rateLast(feedback) {
-  const list = readAll();
+async function rateLast(feedback) {
+  const list = await readAll();
   if (!list.length) return false;
   list[list.length - 1].feedback = !!feedback;
-  writeAll(list);
+  await writeAll(list);
   return true;
 }
 
-function search(query, limit) {
-  const q = String(query || '').toLowerCase().trim();
+async function search(query, limit) {
+  const q = String(query || '').trim();
   if (!q) return [];
-  const words = q.split(/\s+/).filter(Boolean);
-  const scored = readAll().map((note) => {
-    const hay = (note.question + ' ' + note.answer).toLowerCase();
-    const score = words.reduce((acc, w) => acc + (hay.includes(w) ? 1 : 0), 0);
-    return { note, score };
-  });
-  return scored
-    .filter((s) => s.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit || 5)
-    .map((s) => s.note);
+  const list = await readAll();
+  const corpus = list.map((note) => ({ note, text: note.question + ' ' + note.answer }));
+  const ranked = retrieval.rank(q, corpus, { threshold: retrieval.LIST_THRESHOLD, limit: limit || 5 });
+  return ranked.map((r) => r.item.note);
 }
 
-function clear() {
-  writeAll([]);
+async function clear() {
+  await writeAll([]);
 }
 
 export const ragetDb = Object.freeze({

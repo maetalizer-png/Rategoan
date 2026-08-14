@@ -1,3 +1,5 @@
+import { hashText, pickVariant } from '../utils/text.js';
+
 const FALLBACK_TEXT = 'Maaf, saya belum paham. Coba ulangi dengan kata lain?';
 const GENERIC_PREFIX = 'Saya catat:';
 
@@ -84,27 +86,6 @@ const FOLLOWUPS = {
   smalltalk: ['Ada hal lain yang ingin kamu ceritakan?'],
 };
 
-const turnCounters = new Map();
-const lastIndex = new Map();
-
-function hashText(text) {
-  let h = 0;
-  for (let i = 0; i < text.length; i++) {
-    h = (h * 31 + text.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
-
-function pickVariant(intent, templates, text) {
-  if (templates.length === 1) return templates[0];
-  const base = (turnCounters.get(intent) || 0) + hashText(text);
-  let idx = base % templates.length;
-  if (lastIndex.get(intent) === idx) idx = (idx + 1) % templates.length;
-  turnCounters.set(intent, (turnCounters.get(intent) || 0) + 1);
-  lastIndex.set(intent, idx);
-  return templates[idx];
-}
-
 function withName(template, name) {
   return template.split('{name}').join(name || 'Raget');
 }
@@ -112,8 +93,9 @@ function withName(template, name) {
 function maybeFollowUp(reply, pool) {
   if (!pool || !pool.length) return reply;
   if (reply.length > 60) return reply;
-  if (Math.random() >= 0.3) return reply;
-  return reply + ' ' + pool[Math.floor(Math.random() * pool.length)];
+  const h = hashText(reply);
+  if (h % 100 >= 30) return reply;
+  return reply + ' ' + pool[h % pool.length];
 }
 
 function timeOfDay(date) {

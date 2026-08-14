@@ -1,9 +1,4 @@
-const STOPWORDS = new Set([
-  'saya', 'kamu', 'anda', 'kita', 'kami', 'dia', 'mereka',
-  'yang', 'dan', 'atau', 'di', 'ke', 'dari', 'untuk', 'pada', 'dengan',
-  'ini', 'itu', 'ada', 'apa', 'siapa', 'kapan', 'dimana', 'mengapa', 'kenapa', 'bagaimana', 'berapa',
-  'saja', 'juga', 'akan', 'sudah', 'belum', 'tidak', 'bukan', 'ya', 'ga', 'gak',
-]);
+import { STOPWORDS, hashText, pickVariant } from '../utils/text.js';
 
 const CONFIDENCE_THRESHOLD = 0.35;
 
@@ -61,18 +56,6 @@ function scoreIntent(queryTokens, candidateTokensList) {
 function decay(baseScore, turnsAgo, rate) {
   const r = rate == null ? 0.9 : rate;
   return baseScore * Math.pow(r, Math.max(0, turnsAgo));
-}
-
-function hashText(text) {
-  let h = 0;
-  const s = String(text || '');
-  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
-  return Math.abs(h);
-}
-
-function pickVariant(seedText, templates) {
-  if (!templates || !templates.length) return '';
-  return templates[hashText(seedText) % templates.length];
 }
 
 export const scorer = Object.freeze({

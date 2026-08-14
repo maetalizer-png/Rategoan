@@ -2,6 +2,7 @@ import { llmEngine } from '../rategoan-llm/llm-engine.js';
 import { memoryShort } from '../raget-memory/memory-short.js';
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { memoryIndex } from '../raget-memory/memory-index.js';
+import { memoryContext } from '../raget-memory/memory-context.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { agentTools } from './agent-tools.js';
 import { datariesBridge } from './dataries-bridge.js';
@@ -23,6 +24,8 @@ import { whatsappImporter } from '../whatsapp/importer.js';
 import { whatsappStore } from '../whatsapp/whatsapp-store.js';
 import { chunker } from '../vault/chunk.js';
 import { translator } from '../translate/translator.js';
+import { pickVariant, hashText } from '../utils/text.js';
+import { retrieval } from '../raget-retrieval/retrieve.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -38,27 +41,6 @@ const FACTOID_TEMPLATES = [(a) => a + '.', (a) => a + ', setahu saya.', (a) => '
 
 let personaCache = null;
 let fewshotCache = null;
-const variantTurns = new Map();
-const variantLast = new Map();
-
-function hashText(text) {
-  let h = 0;
-  const s = String(text || '');
-  for (let i = 0; i < s.length; i++) {
-    h = (h * 31 + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
-
-function pickVariant(intent, templates, text) {
-  if (templates.length === 1) return templates[0];
-  const base = (variantTurns.get(intent) || 0) + hashText(text);
-  let idx = base % templates.length;
-  if (variantLast.get(intent) === idx) idx = (idx + 1) % templates.length;
-  variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
-  variantLast.set(intent, idx);
-  return templates[idx];
-}
 
 async function loadPersona() {
   if (personaCache) return personaCache;
@@ -84,18 +66,9 @@ async function loadFewshot() {
 }
 
 function matchFewshot(examples, text) {
-  const words = text.toLowerCase().split(/\s+/).filter(Boolean);
-  let best = null;
-  let bestScore = 0;
-  examples.forEach((ex) => {
-    const hay = String(ex.q || '').toLowerCase();
-    const score = words.reduce((acc, w) => acc + (hay.includes(w) ? 1 : 0), 0);
-    if (score > bestScore) {
-      bestScore = score;
-      best = ex;
-    }
-  });
-  return bestScore > 0 ? best : null;
+  const corpus = examples.map((ex) => ({ ex, text: String(ex.q || '') }));
+  const found = retrieval.best(text, corpus, { threshold: retrieval.LIST_THRESHOLD });
+  return found ? found.item.ex : null;
 }
 
 function detectRating(text) {
@@ -210,7 +183,7 @@ async function tryPdfImport(messages) {
   const result = await pdfReader.parsePDF(att.fileBinary);
   if (!result.ok) return result.message;
   const parts = chunker.chunkText(result.text, 1500);
-  const count = pdfStore.addAll(parts.map((t) => ({ title: att.name, text: t })), { source: 'pdf', fileName: att.name });
+  const count = await pdfStore.addAll(parts.map((t) => ({ title: att.name, text: t })), { source: 'pdf', fileName: att.name });
   return 'Berhasil impor PDF "' + att.name + '" (' + result.pages + ' halaman, ' + count + ' bagian tersimpan).';
 }
 
@@ -222,29 +195,29 @@ async function tryNotionImport(messages) {
   const result = await notionImporter.importZip(att.fileBinary);
   if (!result.ok) return result.message;
   if (!result.chunks.length) return 'File ZIP dibaca tapi tidak ditemukan halaman Notion (.html/.md) di dalamnya.';
-  const count = notionStore.addAll(result.chunks, { source: 'notion' });
+  const count = await notionStore.addAll(result.chunks, { source: 'notion' });
   return 'Berhasil impor ' + count + ' halaman Notion dari "' + att.name + '".';
 }
 
-function tryEvernoteImport(messages) {
+async function tryEvernoteImport(messages) {
   const list = Array.isArray(messages) ? messages : [];
   const last = list[list.length - 1];
   const att = last && last.attach;
   if (!att || !att.fileText || !/\.enex$/i.test(att.name || '')) return null;
   const result = evernoteImporter.importENEX(att.fileText);
   if (!result.ok) return result.message;
-  const count = evernoteStore.addAll(result.chunks, { source: 'evernote' });
+  const count = await evernoteStore.addAll(result.chunks, { source: 'evernote' });
   return 'Berhasil impor ' + count + ' catatan Evernote dari "' + att.name + '".';
 }
 
-function tryWhatsappImport(messages) {
+async function tryWhatsappImport(messages) {
   const list = Array.isArray(messages) ? messages : [];
   const last = list[list.length - 1];
   const att = last && last.attach;
   if (!att || !att.fileText || !/\.txt$/i.test(att.name || '')) return null;
   const result = whatsappImporter.importWhatsApp(att.fileText);
   if (!result.ok) return result.message;
-  const count = whatsappStore.addAll(result.chunks, { source: 'whatsapp' });
+  const count = await whatsappStore.addAll(result.chunks, { source: 'whatsapp' });
   return 'Berhasil impor riwayat WhatsApp "' + att.name + '" (' + result.messageCount + ' pesan, ' + count + ' bagian tersimpan).';
 }
 
@@ -460,9 +433,14 @@ async function tryFactoid(text, messages) {
   const t = text.trim();
 
   const topic = lastTopicOf(messages);
-  const lastEntity = topic ? datariesBridge.extractKnownEntity(topic) : null;
+  const stackEntity = memoryContext.topEntity();
+  const lastEntity = stackEntity || (topic ? datariesBridge.extractKnownEntity(topic) : null);
   const dataries = await datariesBridge.factoid(t, { lastTopic: topic, lastEntity, lastQuery: topic, richness: getRichnessPref() });
-  if (dataries) return dataries;
+  if (dataries) {
+    const currentEntity = datariesBridge.extractKnownEntity(t);
+    if (currentEntity) memoryContext.pushEntity(currentEntity);
+    return dataries;
+  }
 
   if (ABOUT_RE.test(t)) return null;
 
@@ -496,7 +474,7 @@ function personalize(reply, text) {
   if (isGreetingLike && nama && !reply.includes(nama)) {
     reply = reply.replace(/([!,])/, ', ' + nama + '$1');
   }
-  if (!isGreetingLike && Math.random() < 0.15) {
+  if (!isGreetingLike && hashText(reply + text) % 100 < 15) {
     const suka = memoryLong.recall('suka');
     const pekerjaan = memoryLong.recall('pekerjaan');
     if (suka && suka.length) {
@@ -612,13 +590,13 @@ async function respond(messages, prompt) {
     return postProcess(notionImportReply);
   }
 
-  const evernoteImportReply = tryEvernoteImport(messages);
+  const evernoteImportReply = await tryEvernoteImport(messages);
   if (evernoteImportReply) {
     ragetDb.addNote(text, evernoteImportReply, null, 'evernote_import');
     return postProcess(evernoteImportReply);
   }
 
-  const whatsappImportReply = tryWhatsappImport(messages);
+  const whatsappImportReply = await tryWhatsappImport(messages);
   if (whatsappImportReply) {
     ragetDb.addNote(text, whatsappImportReply, null, 'whatsapp_import');
     return postProcess(whatsappImportReply);

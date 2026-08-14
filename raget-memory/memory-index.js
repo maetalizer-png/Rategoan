@@ -1,22 +1,10 @@
 import { memoryLong } from './memory-long.js';
 import { ragetDb } from '../raget-database/raget-db.js';
-
-const STOPWORDS = new Set([
-  'saya', 'kamu', 'anda', 'kita', 'kami', 'dia', 'mereka',
-  'yang', 'dan', 'atau', 'di', 'ke', 'dari', 'untuk', 'pada', 'dengan',
-  'ini', 'itu', 'ada', 'apa', 'siapa', 'kapan', 'dimana', 'mengapa', 'kenapa', 'bagaimana', 'berapa',
-  'saja', 'juga', 'akan', 'sudah', 'belum', 'tidak', 'bukan', 'ya', 'ga', 'gak',
-]);
+import { meaningfulWords } from '../utils/text.js';
+import { retrieval } from '../raget-retrieval/retrieve.js';
 
 let knowledgeCache = null;
 let factoidCache = null;
-
-function meaningfulWords(text) {
-  return text
-    .split(/\s+/)
-    .filter(Boolean)
-    .filter((w) => w.length > 2 && !STOPWORDS.has(w));
-}
 
 const UMUM_FILES = ['umum.json', 'raget-diri.json', 'teknik-ai.json', 'produk-bisnis.json', 'riwayat-proyek.json'];
 
@@ -54,38 +42,24 @@ function scoreText(hay, words) {
 }
 
 async function search(query, limit) {
-  const q = String(query || '').toLowerCase().trim();
-  const words = meaningfulWords(q);
-  if (!words.length) return [];
+  const q = String(query || '').trim();
+  if (!q) return [];
   const cap = limit || 5;
-  const results = [];
+  const corpus = [];
 
-  ragetDb.search(query, 20).forEach((note) => {
-    const score = scoreText(note.question + ' ' + note.answer, words);
-    if (score >= 2) results.push({ type: 'note', text: note.question + ' — ' + note.answer, score });
-  });
+  (await ragetDb.allNotes()).forEach((note) => corpus.push({ type: 'note', text: note.question + ' — ' + note.answer }));
 
   const knowledge = await loadKnowledge();
-  knowledge.faq.forEach((item) => {
-    const score = scoreText((item.q || '') + ' ' + (item.a || ''), words);
-    if (score >= 2) results.push({ type: 'faq', text: (item.q || '') + ' — ' + (item.a || ''), score });
-  });
-  knowledge.umum.forEach((item) => {
-    const score = scoreText((item.title || '') + ' ' + (item.text || ''), words);
-    if (score >= 2) results.push({ type: 'umum', text: item.text || '', score });
-  });
+  knowledge.faq.forEach((item) => corpus.push({ type: 'faq', text: (item.q || '') + ' — ' + (item.a || '') }));
+  knowledge.umum.forEach((item) => corpus.push({ type: 'umum', text: item.text || '' }));
 
   const facts = memoryLong.allFacts();
-  Object.keys(facts).forEach((key) => {
-    if (words.includes(key)) results.push({ type: 'fact', text: key + ': ' + facts[key], score: 3 });
-  });
+  Object.keys(facts).forEach((key) => corpus.push({ type: 'fact', text: key + ': ' + facts[key] }));
 
-  memoryLong.allNotes().forEach((note) => {
-    const score = scoreText(note.text, words);
-    if (score >= 1) results.push({ type: 'note_long', text: note.text, score: score + 1 });
-  });
+  memoryLong.allNotes().forEach((note) => corpus.push({ type: 'note_long', text: note.text }));
 
-  return results.sort((a, b) => b.score - a.score).slice(0, cap);
+  const ranked = retrieval.rank(q, corpus, { threshold: retrieval.LIST_THRESHOLD, limit: cap });
+  return ranked.map((r) => ({ type: r.item.type, text: r.item.text, score: r.score }));
 }
 
 async function findTopic(topic) {
