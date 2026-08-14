@@ -24,6 +24,8 @@ const RELATIONS = [
   { keys: ['kode telepon', 'kode telpon'], fields: ['phoneCode'] },
 ];
 
+const FACTOID_OPENERS = ['', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, '];
+
 const variantTurns = new Map();
 const variantLast = new Map();
 
@@ -81,7 +83,8 @@ function formatIndependence(dateStr) {
 function formatLanguages(languages) {
   if (!Array.isArray(languages)) return String(languages || '');
   const official = languages.filter((l) => l && l.official).map((l) => l.name);
-  return (official.length ? official : languages.map((l) => l.name)).join(' dan ');
+  const names = official.length ? official : languages.map((l) => l.name);
+  return names.map((n) => (/^bahasa\b/i.test(n) ? n : 'Bahasa ' + n)).join(' dan ');
 }
 
 function formatValue(field, raw) {
@@ -188,8 +191,8 @@ function craftAnswer(field, label, value) {
     phoneCode: 'Kode telepon ' + label + ' adalah ' + value + '.',
   };
   const base = sentences[field] || label + ': ' + value + '.';
-  const variants = [base, value + ', setahu saya.', 'Setahu saya, ' + base.charAt(0).toLowerCase() + base.slice(1)];
-  return pickVariant('dataries_' + field, variants, label + value);
+  const opener = pickVariant('dataries_opener', FACTOID_OPENERS, label + value + field);
+  return opener ? opener + base.charAt(0).toLowerCase() + base.slice(1) : base;
 }
 
 async function resolveValue(relation, entity) {
@@ -384,14 +387,34 @@ async function tryTopicSearch(text) {
   return null;
 }
 
+const COUNTRY_ALIASES = {
+  amerika: 'amerika serikat',
+  usa: 'amerika serikat',
+  us: 'amerika serikat',
+  korea: 'korea selatan',
+  inggris: 'inggris',
+  jepang: 'jepang',
+};
+
+function resolveCountryAlias(entity) {
+  return COUNTRY_ALIASES[entity] || entity;
+}
+
+const MAKANAN_OPENERS = [
+  'Ini beberapa makanan khas',
+  'Kalau soal kuliner',
+  'Rekomendasi makanan dari',
+];
+
 async function tryMakananKhas(text) {
-  const m = text.match(/^makanan\s+khas\s+(.+)$/i);
+  const m = text.match(/^(?:apa\s+)?(makanan|kuliner|masakan)\s+(khas|favorit|terkenal|enak|populer)\s+(?:(?:di|dari)\s+)?(.+)$/i);
   if (!m) return null;
-  const entity = cleanEntity(m[1]);
+  const entity = resolveCountryAlias(cleanEntity(m[3]));
   if (!entity) return null;
   const items = await findAllInList('makanan', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
   if (!items.length) return null;
-  return 'Makanan khas ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  const opener = pickVariant('makanan_opener', MAKANAN_OPENERS, text);
+  return opener + ' ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
 }
 
 async function extras(q) {

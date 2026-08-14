@@ -20,6 +20,15 @@ const TIME_GREETING_TEMPLATES = {
   ],
 };
 
+const EN_PERIOD_MAP = { morning: 'pagi', afternoon: 'siang', evening: 'sore', night: 'malam' };
+
+function mirrorTemplates(statedPeriod, devicePeriod) {
+  return [
+    'Selamat ' + statedPeriod + ' juga! (Di sini masih ' + devicePeriod + ', tapi tetap semangat ya)',
+    statedPeriod.charAt(0).toUpperCase() + statedPeriod.slice(1) + ' juga! (Waktu di perangkatku sih masih ' + devicePeriod + ')',
+  ];
+}
+
 const PLAIN_GREETING_TEMPLATES = [
   'Halo! Saya {name}, ada yang bisa dibantu?',
   'Hai, senang bisa ngobrol denganmu. Mau bahas apa?',
@@ -37,7 +46,7 @@ const SMALLTALK = [
   },
   {
     key: 'kabar',
-    re: /apa\s+kabar/i,
+    re: /\bkabar\s*(kamu|anda|lu|elu)\b|\bkabarmu\b|\b(apa|gimana|bagaimana)\s+kabar\b|how\s+are\s+you/i,
     templates: [
       'Saya baik, terima kasih sudah nanya! Kamu sendiri gimana kabarnya?',
       'Baik-baik saja di sini. Ada yang ingin kamu ceritakan hari ini?',
@@ -132,10 +141,26 @@ function matchSmalltalk(text, options) {
   return maybeFollowUp(reply, FOLLOWUPS.smalltalk);
 }
 
-function replyTimeGreeting(now, options) {
-  const period = timeOfDay(now);
-  const templates = TIME_GREETING_TEMPLATES[period];
-  const reply = withName(pickVariant('greet_time_' + period, templates, period), options.personaName);
+function extractStatedPeriod(text) {
+  const m = text.match(TIME_GREETING_RE);
+  if (!m) return null;
+  if (m[2]) return m[2].toLowerCase();
+  if (m[3]) return EN_PERIOD_MAP[m[3].toLowerCase()] || null;
+  return null;
+}
+
+function replyTimeGreeting(now, options, text) {
+  const devicePeriod = timeOfDay(now);
+  const statedPeriod = text ? extractStatedPeriod(text) : null;
+
+  if (statedPeriod && statedPeriod !== devicePeriod) {
+    const templates = mirrorTemplates(statedPeriod, devicePeriod);
+    const reply = withName(pickVariant('greet_mirror_' + statedPeriod, templates, statedPeriod + devicePeriod), options.personaName);
+    return maybeFollowUp(reply, FOLLOWUPS.greeting);
+  }
+
+  const templates = TIME_GREETING_TEMPLATES[devicePeriod];
+  const reply = withName(pickVariant('greet_time_' + devicePeriod, templates, devicePeriod), options.personaName);
   return maybeFollowUp(reply, FOLLOWUPS.greeting);
 }
 
@@ -221,7 +246,7 @@ function craft(prompt, context, options) {
   if (/ide konten/i.test(text)) return replyContentIdeas(text);
   if (/^jelaskan\b/i.test(text)) return replyExplain(text);
 
-  if (TIME_GREETING_RE.test(text)) return replyTimeGreeting(opts.now, opts);
+  if (TIME_GREETING_RE.test(text)) return replyTimeGreeting(opts.now, opts, text);
   if (PLAIN_GREETING_RE.test(text)) return replyPlainGreeting(text, opts);
 
   const smalltalk = matchSmalltalk(text, opts);
