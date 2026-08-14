@@ -5,6 +5,7 @@ import { memoryIndex } from '../raget-memory/memory-index.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { agentTools } from './agent-tools.js';
 import { datariesBridge } from './dataries-bridge.js';
+import { scorer } from './scorer.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -390,10 +391,20 @@ async function respond(messages, prompt) {
   reply = personalize(reply, text);
 
   if (!isClarifyReply(reply)) {
-    const relevant = await memoryIndex.search(text, 3);
-    const candidate = relevant.find((r) => !tooSimilar(text, r.text));
-    if (candidate) {
-      reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';
+    const relevant = await memoryIndex.search(text, 5);
+    const queryTokens = scorer.tokenize(text);
+    const scored = relevant
+      .filter((r) => !tooSimilar(text, r.text))
+      .map((r) => {
+        const noteTokens = scorer.tokenize(r.text);
+        const corpus = [queryTokens, noteTokens];
+        const confidence = scorer.cosineSim(scorer.tfidfVector(queryTokens, corpus), scorer.tfidfVector(noteTokens, corpus));
+        return { r, confidence };
+      })
+      .sort((a, b) => b.confidence - a.confidence);
+    const best = scored[0];
+    if (best && best.confidence >= scorer.CONFIDENCE_THRESHOLD) {
+      reply += '\n\n(Catatan terkait: ' + best.r.text.slice(0, 120) + ')';
     }
   }
 

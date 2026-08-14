@@ -1,0 +1,13 @@
+[
+  { "title": "Apa itu Rategoan", "text": "Rategoan adalah chat AI local-first berbentuk PWA versi 1.0. Semua data tersimpan di perangkat pengguna, tanpa server dan tanpa API key." },
+  { "title": "Fitur Riwayat", "text": "Rategoan mendukung riwayat percakapan multi-sesi, sehingga pengguna bisa membuka kembali obrolan lama kapan saja." },
+  { "title": "Tema Tampilan", "text": "Rategoan punya tiga mode tema: Terang, Gelap, dan otomatis mengikuti pengaturan sistem (Gelap/Terang/Sistem)." },
+  { "title": "Ukuran Teks", "text": "Ukuran teks chat bisa diatur ke Kecil, Normal, atau Besar sesuai kenyamanan membaca pengguna." },
+  { "title": "Kunci PIN", "text": "Rategoan bisa dikunci dengan PIN agar percakapan tidak mudah diakses orang lain yang memegang perangkat." },
+  { "title": "Cadangkan Data", "text": "Pengguna bisa mencadangkan seluruh riwayat chat dan memulihkannya kembali kapan saja lewat menu pengaturan." },
+  { "title": "Aksi Balasan", "text": "Setiap balasan AI di Rategoan punya tombol Salin, Baca (text-to-speech), dan Bagikan." },
+  { "title": "Ringkasan Terstruktur", "text": "Rategoan bisa merangkum teks panjang menjadi ringkasan terstruktur dengan heading dan bullet point." },
+  { "title": "Personalisasi", "text": "Raget mengingat nama, hobi, dan pekerjaan pengguna dari percakapan untuk membuat balasan terasa lebih personal." },
+  { "title": "Dataries", "text": "Dataries adalah basis data pengetahuan dunia milik Raget: negara, kota, bahasa, wisata, tokoh, makanan, sains, dan olahraga." },
+  { "title": "Arsitektur Raget", "text": "Otak Raget dibangun dari modul ES6 murni: ai-agent (router & tools), rategoan-llm (mesin template), raget-memory dan raget-database (memori & riwayat) — semua tanpa framework atau library eksternal." }
+]

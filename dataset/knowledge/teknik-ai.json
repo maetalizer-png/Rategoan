@@ -1,0 +1,9 @@
+[
+  { "title": "Pipeline Raget", "text": "Alur jawaban Raget: konteks percakapan masuk, lalu router menentukan intent, lalu tools/RAG mencari data, lalu formatter menyusun struktur, lalu post-processor merapikan hasil akhir." },
+  { "title": "Rumus TF-IDF", "text": "TF-IDF dihitung dengan idf = log((N+1)/(df+1)) + 1, di mana N adalah jumlah dokumen dan df adalah jumlah dokumen yang memuat kata tersebut." },
+  { "title": "Kemiripan Cosinus", "text": "Kemiripan antar teks dihitung dengan cosinus similarity: |A∩B| dibagi (akar|A| dikali akar|B|), menghasilkan skor 0 sampai 1." },
+  { "title": "Ambang Keyakinan", "text": "Raget hanya menjawab dari basis pengetahuan bila skor kecocokan mencapai ambang keyakinan 0.35, di bawah itu dianggap tidak relevan." },
+  { "title": "Peluruhan Konteks", "text": "Relevansi topik lama meluruh dengan faktor 0.9 pangkat jumlah giliran sejak topik itu disebut, agar topik baru selalu lebih diprioritaskan." },
+  { "title": "Variasi Jawaban", "text": "Raget memilih variasi kalimat memakai hash dari teks prompt, sehingga jawaban terasa alami dan tidak monoton tanpa memakai AI acak sungguhan." },
+  { "title": "Fase Pengembangan", "text": "Roadmap Raget: Fase A template dasar, Fase B model kecil lokal, Fase C flywheel data dari pemakaian nyata, Fase D tools dan personalisasi, Fase E pengujian bench menyeluruh." }
+]

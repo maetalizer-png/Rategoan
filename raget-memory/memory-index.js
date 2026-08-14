@@ -18,14 +18,16 @@ function meaningfulWords(text) {
     .filter((w) => w.length > 2 && !STOPWORDS.has(w));
 }
 
+const UMUM_FILES = ['umum.json', 'raget-diri.json', 'teknik-ai.json', 'produk-bisnis.json', 'riwayat-proyek.json'];
+
 async function loadKnowledge() {
   if (knowledgeCache) return knowledgeCache;
   try {
-    const [umumRes, faqRes] = await Promise.all([
-      fetch(new URL('../dataset/knowledge/umum.json', import.meta.url)),
+    const [umumParts, faqRes] = await Promise.all([
+      Promise.all(UMUM_FILES.map((f) => fetch(new URL('../dataset/knowledge/' + f, import.meta.url)).then((r) => (r.ok ? r.json() : [])).catch(() => []))),
       fetch(new URL('../dataset/knowledge/faq.json', import.meta.url)),
     ]);
-    const umum = umumRes.ok ? await umumRes.json() : [];
+    const umum = umumParts.flat().filter((it) => it && it.title);
     const faq = faqRes.ok ? await faqRes.json() : [];
     knowledgeCache = { umum: Array.isArray(umum) ? umum : [], faq: Array.isArray(faq) ? faq : [] };
   } catch (e) {
