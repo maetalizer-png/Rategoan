@@ -170,6 +170,9 @@ function detectTool(prompt) {
   if (/^(cara|langkah)\s+/.test(t)) return 'cara';
   if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+/.test(t)) return 'manfaat';
+  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/.test(t)) return 'fungsi';
+  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/.test(t)) return 'tujuan';
+  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/.test(t)) return 'penyebab';
   if (/^jelaskan\s+/.test(t)) return 'jelaskan';
   return null;
 }
@@ -402,6 +405,18 @@ async function runTool(kind, prompt, messages) {
   if (kind === 'manfaat') {
     const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+(dari\s+|dan\s+)?/i, '').trim();
     return agentTools.manfaat(topic);
+  }
+  if (kind === 'fungsi') {
+    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/i, '').trim();
+    return agentTools.fungsi(topic);
+  }
+  if (kind === 'tujuan') {
+    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/i, '').trim();
+    return agentTools.tujuan(topic);
+  }
+  if (kind === 'penyebab') {
+    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/i, '').trim();
+    return agentTools.penyebab(topic);
   }
   if (kind === 'bandingkan') {
     const m = prompt.match(/^bandingkan\s+(.+?)\s+(dan|dengan|vs\.?|atau)\s+(.+)$/i);
@@ -692,7 +707,8 @@ async function respondCore(messages, prompt) {
   const shortContext = memoryShort.recent(messages, 10);
 
   const preSearch = await memoryIndex.search(text, 5);
-  const plannedFallback = planner.planFallback(text, preSearch);
+  const dataFallback = await datariesBridge.countryFallback(text);
+  const plannedFallback = planner.planFallback(text, preSearch.concat(dataFallback));
 
   let reply;
   if (plannedFallback) {

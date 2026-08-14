@@ -26,13 +26,18 @@ function planAnswer(text, results, options) {
 }
 
 const STABLE_TYPES = new Set(['faq', 'umum', 'fact']);
+const DATARIES_THRESHOLD = 0.3;
 
 function planFallback(text, results) {
-  const list = (Array.isArray(results) ? results : []).filter((r) => STABLE_TYPES.has(r.type));
+  const list = (Array.isArray(results) ? results : [])
+    .filter((r) => STABLE_TYPES.has(r.type) || r.type === 'dataries')
+    .slice()
+    .sort((a, b) => b.score - a.score);
   const top = list[0];
   if (!top) return null;
 
-  if (top.score >= retrieval.AUGMENT_THRESHOLD) {
+  const topThreshold = top.type === 'dataries' ? DATARIES_THRESHOLD : retrieval.AUGMENT_THRESHOLD;
+  if (top.score >= topThreshold) {
     const body = formatter.formatByType('terbuka', {
       title: 'Yang saya tahu',
       items: list.slice(0, 3).map((r) => r.text),

@@ -33,7 +33,7 @@ function computeQuality(notes) {
   if (!list.length) return { score: 0, breakdown: { A: 0, K: 0, U: 0, D: 0, V: 0 } };
 
   const rated = list.filter((n) => n.feedback != null);
-  const A = rated.length ? rated.filter((n) => n.feedback).length / rated.length : 0.5;
+  const A = rated.length >= 10 ? rated.filter((n) => n.feedback).length / rated.length : 0.7;
 
   const factoidNotes = list.filter((n) => n.intent === 'factoid' || n.intent === 'dataries_extras');
   const K = factoidNotes.length
@@ -65,6 +65,13 @@ function computeQuality(notes) {
       U: Math.round(U * 100),
       D: Math.round(D * 100),
       V: Math.round(V * 100),
+    },
+    n: {
+      A: rated.length,
+      K: factoidNotes.length,
+      U: pairs,
+      D: intents.size,
+      V: chatTypes.size,
     },
   };
 }

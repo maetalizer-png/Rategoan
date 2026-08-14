@@ -19,7 +19,7 @@ const RELATIONS = [
   { keys: ['kode telepon', 'kode telpon'], fields: ['phoneCode'] },
 ];
 
-const FACTOID_OPENERS = ['', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, '];
+const FACTOID_OPENERS = ['', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, ', 'Berdasarkan catatan saya, ', 'Kalau tidak salah, '];
 
 function capitalize(s) {
   return String(s || '')
@@ -650,9 +650,19 @@ async function search(q) {
   return found ? found.item.item : null;
 }
 
+const DATARIES_FALLBACK_THRESHOLD = 0.3;
+
+async function countryFallback(query) {
+  const countries = await dataries.loadAll('country');
+  const corpus = countries.map((item) => ({ item, text: item.text || '' }));
+  const ranked = retrieval.rank(query, corpus, { threshold: DATARIES_FALLBACK_THRESHOLD, limit: 2 });
+  return ranked.map((r) => ({ type: 'dataries', text: r.item.text, score: r.score }));
+}
+
 export const datariesBridge = Object.freeze({
   search,
   factoid,
   extras,
   extractKnownEntity,
+  countryFallback,
 });

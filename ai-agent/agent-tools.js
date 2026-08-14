@@ -242,6 +242,48 @@ function manfaat(topic) {
   return formatter.blocks([formatter.h('Manfaat ' + t.charAt(0).toUpperCase() + t.slice(1), 3), formatter.bullets(items)]);
 }
 
+function buildGenericBulletTool(title, pool) {
+  return function (topic) {
+    const t = String(topic || '').trim() || 'hal ini';
+    const h = hashText(t);
+    const count = 3 + (h % 3);
+    const start = h % pool.length;
+    const items = [];
+    for (let i = 0; i < count; i++) {
+      items.push(pool[(start + i) % pool.length](t));
+    }
+    return formatter.blocks([formatter.h(title + ' ' + t.charAt(0).toUpperCase() + t.slice(1), 3), formatter.bullets(items)]);
+  };
+}
+
+const FUNGSI_POOL = [
+  (t) => 'Berperan penting dalam menjalankan proses yang berkaitan dengan ' + t + '.',
+  (t) => 'Membantu memenuhi kebutuhan tertentu terkait ' + t + '.',
+  (t) => 'Mendukung kelancaran aktivitas yang berhubungan dengan ' + t + '.',
+  (t) => 'Menjadi bagian penting dalam sistem atau proses seputar ' + t + '.',
+  (t) => 'Membantu mencapai hasil yang diharapkan sehubungan dengan ' + t + '.',
+];
+
+const TUJUAN_POOL = [
+  (t) => 'Mencapai hasil yang lebih baik terkait ' + t + '.',
+  (t) => 'Memenuhi kebutuhan atau target tertentu seputar ' + t + '.',
+  (t) => 'Memberi manfaat jangka panjang sehubungan dengan ' + t + '.',
+  (t) => 'Menyelesaikan masalah yang berkaitan dengan ' + t + '.',
+  (t) => 'Meningkatkan kualitas atau efisiensi terkait ' + t + '.',
+];
+
+const PENYEBAB_POOL = [
+  (t) => 'Bisa dipicu oleh faktor internal maupun eksternal terkait ' + t + '.',
+  (t) => 'Sering berkaitan dengan kondisi atau kebiasaan tertentu seputar ' + t + '.',
+  (t) => 'Bisa muncul akibat perubahan lingkungan atau situasi terkait ' + t + '.',
+  (t) => 'Kadang dipengaruhi oleh kombinasi beberapa hal yang berkaitan dengan ' + t + '.',
+  (t) => 'Bisa jadi akibat dari proses yang berlangsung sehubungan dengan ' + t + '.',
+];
+
+const fungsi = buildGenericBulletTool('Fungsi', FUNGSI_POOL);
+const tujuan = buildGenericBulletTool('Tujuan', TUJUAN_POOL);
+const penyebab = buildGenericBulletTool('Penyebab', PENYEBAB_POOL);
+
 function genericComparisonPoints(t) {
   return ['Punya kelebihan tersendiri tergantung kebutuhan.', 'Bisa dipertimbangkan sesuai konteks penggunaan ' + t + '.'];
 }
@@ -447,11 +489,11 @@ async function laporanOtak() {
     'Total percakapan tercatat: ' + notes.length + ' (' + notesWeek.length + ' minggu ini).',
     formatter.bold('Skor Kualitas: ' + qualityResult.score + '/100'),
     formatter.bullets([
-      'Akurasi (A): ' + qualityResult.breakdown.A + '%',
-      'Kekayaan (K): ' + qualityResult.breakdown.K + '%',
-      'Keunikan (U): ' + qualityResult.breakdown.U + '%',
-      'Diversitas (D): ' + qualityResult.breakdown.D + '%',
-      'Variasi struktur (V): ' + qualityResult.breakdown.V + '%',
+      'Akurasi (A): ' + qualityResult.breakdown.A + '% (n=' + qualityResult.n.A + ')',
+      'Kekayaan (K): ' + qualityResult.breakdown.K + '% (n=' + qualityResult.n.K + ')',
+      'Keunikan (U): ' + qualityResult.breakdown.U + '% (n=' + qualityResult.n.U + ')',
+      'Diversitas (D): ' + qualityResult.breakdown.D + '% (n=' + qualityResult.n.D + ')',
+      'Variasi struktur (V): ' + qualityResult.breakdown.V + '% (n=' + qualityResult.n.V + ')',
     ]),
   ];
 
@@ -553,6 +595,9 @@ export const agentTools = Object.freeze({
   cara,
   ide,
   manfaat,
+  fungsi,
+  tujuan,
+  penyebab,
   bandingkan,
   kelebihanKekurangan,
   laporanOtak,
