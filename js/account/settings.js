@@ -12,9 +12,77 @@ import { drawer } from '../ui/drawer.js';
 import { history } from '../history/history.js';
 import { backup } from '../system/backup.js';
 import { account } from './account.js';
+import { ocrReader } from '../../ocr/reader.js';
+import { translator } from '../../translate/translator.js';
+
+const DOWNLOAD_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+const KNOWLEDGE_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+
+function buildRow(id, icon, label) {
+  const row = document.createElement('div');
+  row.className = 'set-row clickable';
+  row.id = id;
+  const span = document.createElement('span');
+  span.innerHTML = icon + label;
+  const value = document.createElement('span');
+  value.className = 'set-value';
+  value.id = id + '-value';
+  row.appendChild(span);
+  row.appendChild(value);
+  return row;
+}
 
 export const settings = {
   _warned: false,
+  injectExtraRows() {
+    if ($('row-unduhan-fitur')) return;
+    const anchor = $('row-restore');
+    if (!anchor) return;
+    const downloadRow = buildRow('row-unduhan-fitur', DOWNLOAD_ICON, 'Unduhan Fitur');
+    const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Pengetahuan Saya');
+    anchor.insertAdjacentElement('afterend', knowledgeRow);
+    anchor.insertAdjacentElement('afterend', downloadRow);
+    this.refreshPackageStatus();
+    downloadRow.onclick = () => this.handleUnduhanFitur();
+    knowledgeRow.onclick = () => {
+      router.go('chat');
+      const inp = $('chat-input');
+      if (inp) {
+        inp.value = 'laporan otak';
+        inp.focus();
+      }
+    };
+  },
+  refreshPackageStatus() {
+    const val = $('row-unduhan-fitur-value');
+    if (!val) return;
+    const ocrStatus = ocrReader.isReady() ? 'OCR siap' : 'OCR belum';
+    const trStatus = translator.isReady() ? 'Terjemahan siap' : 'Terjemahan belum';
+    val.textContent = ocrStatus + ' • ' + trStatus;
+  },
+  async handleUnduhanFitur() {
+    if (!ocrReader.isReady()) {
+      const wantOcr = confirm('Unduh paket OCR/baca gambar (±' + ocrReader.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
+      if (wantOcr) {
+        toast.show('Mengunduh paket OCR...');
+        const ok = await ocrReader.downloadPackage();
+        toast.show(ok ? 'Paket OCR siap dipakai offline.' : 'Gagal mengunduh paket OCR. Coba lagi saat online.');
+        this.refreshPackageStatus();
+      }
+    }
+    if (!translator.isReady()) {
+      const wantTr = confirm('Unduh paket Terjemahan (±' + translator.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
+      if (wantTr) {
+        toast.show('Mengunduh paket Terjemahan...');
+        const ok = await translator.downloadPackage();
+        toast.show(ok ? 'Paket Terjemahan siap dipakai offline.' : 'Gagal mengunduh paket Terjemahan. Coba lagi saat online.');
+        this.refreshPackageStatus();
+      }
+    }
+    if (ocrReader.isReady() && translator.isReady()) toast.show('Semua paket sudah siap offline.');
+  },
   refresh() {
     const st = auth.state;
     const head = $('profile-head');
@@ -63,6 +131,7 @@ export const settings = {
     });
   },
   bind() {
+    this.injectExtraRows();
     $('btn-settings').onclick = () => {
       drawer.close();
       this.refresh();

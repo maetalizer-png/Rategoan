@@ -2,6 +2,10 @@ import { memoryIndex } from '../raget-memory/memory-index.js';
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { formatter } from './formatter.js';
+import { exportFormats } from '../export/formats.js';
+import { exportShare } from '../export/share.js';
+import { remindersStore } from '../reminders/reminders-store.js';
+import { calendarStore } from '../calendar/calendar-store.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -332,6 +336,34 @@ async function cari(query) {
   return 'Yang saya tahu soal "' + q + '": ' + results.map((r) => r.text).join(' | ');
 }
 
+async function cariSemua(query) {
+  const q = String(query || '').trim();
+  if (!q) return 'Mau cari apa di semua sumber?';
+  const words = meaningfulWords(q.toLowerCase());
+  const groups = [];
+
+  const noteResults = ragetDb.search(q, 5);
+  if (noteResults.length) groups.push({ source: 'Riwayat Chat', items: noteResults.map((n) => n.question + ' — ' + n.answer.slice(0, 80)) });
+
+  const knowledgeResults = await memoryIndex.search(q, 5);
+  if (knowledgeResults.length) groups.push({ source: 'Pengetahuan', items: knowledgeResults.map((r) => r.text.slice(0, 100)) });
+
+  const reminderResults = remindersStore.allActive().filter((r) => words.some((w) => r.action.toLowerCase().includes(w)));
+  if (reminderResults.length) groups.push({ source: 'Pengingat', items: reminderResults.map((r) => r.action + ' (' + new Date(r.timestamp).toLocaleString('id-ID') + ')') });
+
+  const calendarResults = calendarStore.eventsBetween(0, Date.now() + 365 * 24 * 60 * 60 * 1000).filter((e) => words.some((w) => (e.summary || '').toLowerCase().includes(w)));
+  if (calendarResults.length) groups.push({ source: 'Kalender', items: calendarResults.map((e) => e.summary + ' (' + new Date(e.start).toLocaleString('id-ID') + ')') });
+
+  if (!groups.length) return 'Tidak ditemukan apa pun terkait "' + q + '" di semua sumber (riwayat, pengetahuan, pengingat, kalender).';
+
+  const parts = [formatter.h('Hasil pencarian: "' + q + '"', 3)];
+  groups.slice(0, 10).forEach((g) => {
+    parts.push(formatter.bold(g.source));
+    parts.push(formatter.bullets(g.items.slice(0, 3)));
+  });
+  return formatter.blocks(parts);
+}
+
 function ingat(text) {
   const fact = String(text || '')
     .replace(/^ingat\s*(bahwa)?\s*/i, '')
@@ -439,6 +471,35 @@ function laporanOtak() {
   return formatter.blocks(parts);
 }
 
+function exportChat(session, format) {
+  const s = session || { title: 'Chat', messages: [] };
+  const stamp = new Date().toISOString().slice(0, 10);
+  const base = 'raget-chat-' + stamp;
+  if (format === 'markdown' || format === 'md') {
+    exportShare.downloadBlob(exportFormats.toMarkdown(s), 'text/markdown', base + '.md');
+    return 'Chat diunduh sebagai Markdown (' + base + '.md).';
+  }
+  if (format === 'json') {
+    exportShare.downloadBlob(exportFormats.toJSON(s), 'application/json', base + '.json');
+    return 'Chat diunduh sebagai JSON (' + base + '.json).';
+  }
+  if (format === 'pdf') {
+    const opened = exportShare.openPrintable(exportFormats.toPrintableHTML(s));
+    return opened
+      ? 'Tab baru dibuka berisi chat siap cetak. Tekan Ctrl+P / Cmd+P lalu pilih "Simpan sebagai PDF".'
+      : 'Popup diblokir browser. Coba izinkan popup lalu ulangi.';
+  }
+  exportShare.downloadBlob(exportFormats.toTXT(s), 'text/plain', base + '.txt');
+  return 'Chat diunduh sebagai TXT (' + base + '.txt).';
+}
+
+function shareToWhatsApp(session) {
+  const s = session || { title: 'Chat', messages: [] };
+  const text = exportFormats.toTXT(s).slice(0, 4000);
+  exportShare.whatsappShareText(text);
+  return 'Membuka WhatsApp dengan isi percakapan siap dibagikan.';
+}
+
 function eksporLog() {
   const notes = ragetDb.allNotes();
   const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
@@ -468,4 +529,7 @@ export const agentTools = Object.freeze({
   bandingkan,
   kelebihanKekurangan,
   laporanOtak,
+  exportChat,
+  shareToWhatsApp,
+  cariSemua,
 });

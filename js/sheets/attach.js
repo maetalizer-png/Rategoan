@@ -40,6 +40,14 @@ export const attach = {
       img.src = url;
     });
   },
+  readAsText(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => resolve('');
+      reader.readAsText(file);
+    });
+  },
   async onPick(input) {
     const f = input.files && input.files[0];
     input.value = '';
@@ -47,6 +55,9 @@ export const attach = {
     this.current = { name: f.name, type: f.type, size: f.size, thumb: null };
     if (f.type && f.type.indexOf('image/') === 0) {
       this.current.thumb = await this.makeThumb(f);
+      this.current.full = await this.makeThumb(f, 1600);
+    } else if (/\.(ics|txt|enex|md|csv)$/i.test(f.name || '')) {
+      this.current.fileText = await this.readAsText(f);
     }
     this.renderChip();
     sheets.close();

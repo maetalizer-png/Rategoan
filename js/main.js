@@ -25,6 +25,8 @@ import { shortcuts } from './system/shortcuts.js';
 import { onboard } from './system/onboard.js';
 import { settings } from './account/settings.js';
 import { login } from './account/login.js';
+import { reminderScheduler } from '../reminders/scheduler.js';
+import { toast } from './core/toast.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   store.init();
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   settings.bind();
   login.bind();
   onboard.maybeShow();
+  reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   try {
     const params = new URLSearchParams(location.search);
     const share = params.get('shareText');

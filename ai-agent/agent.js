@@ -6,6 +6,14 @@ import { ragetDb } from '../raget-database/raget-db.js';
 import { agentTools } from './agent-tools.js';
 import { datariesBridge } from './dataries-bridge.js';
 import { scorer } from './scorer.js';
+import { reminderParser } from '../reminders/parser.js';
+import { remindersStore } from '../reminders/reminders-store.js';
+import { reminderScheduler } from '../reminders/scheduler.js';
+import { emailComposer } from '../email/composer.js';
+import { icsParser } from '../calendar/ics-parser.js';
+import { calendarStore } from '../calendar/calendar-store.js';
+import { ocrReader } from '../ocr/reader.js';
+import { translator } from '../translate/translator.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -145,6 +153,11 @@ function detectTool(prompt) {
   if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
   if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
   if (/laporan\s+otak/.test(t)) return 'laporan_otak';
+  if (/share\s*(ke)?\s*wa\b|bagikan\s*(ke)?\s*whatsapp/.test(t)) return 'share_wa';
+  if (/export\s+chat|download\s+percakapan|unduh\s+percakapan|ekspor\s+chat/.test(t)) return 'export_chat';
+  if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
+  if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
+  if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
   if (/^lupakan\b/.test(t)) return 'lupakan';
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
@@ -165,6 +178,130 @@ function tryMath(text) {
   return agentTools.hitung(expr);
 }
 
+function formatEventTime(timestamp) {
+  return new Date(timestamp).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+}
+
+function tryCalendarImport(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.fileText || !/\.ics$/i.test(att.name || '')) return null;
+  const events = icsParser.parseICS(att.fileText);
+  if (!events.length) return 'File .ics dibaca tapi tidak ada acara yang ditemukan di dalamnya.';
+  const count = calendarStore.addAll(events);
+  return 'Berhasil impor ' + count + ' acara dari file kalender.';
+}
+
+function tryCalendarQuery(text) {
+  const t = text.trim().toLowerCase();
+  if (/jadwal\s+hari\s+ini|apa\s+jadwal\s+hari\s+ini/.test(t)) {
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+    const events = calendarStore.eventsBetween(start.getTime(), end.getTime());
+    if (!events.length) return 'Tidak ada jadwal untuk hari ini.';
+    return 'Jadwal hari ini:\n' + events.map((e) => '- ' + e.summary + ' (' + formatEventTime(e.start) + ')').join('\n');
+  }
+  if (/jadwal\s+minggu\s+ini/.test(t)) {
+    const start = new Date();
+    const end = new Date(start.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const events = calendarStore.eventsBetween(start.getTime(), end.getTime());
+    if (!events.length) return 'Tidak ada jadwal untuk minggu ini.';
+    return 'Jadwal minggu ini:\n' + events.map((e) => '- ' + e.summary + ' (' + formatEventTime(e.start) + ')').join('\n');
+  }
+  if (/kapan\s+.*(meeting|rapat|acara|jadwal)\s+(selanjutnya|berikutnya)/.test(t)) {
+    const next = calendarStore.nextUpcoming(Date.now());
+    if (!next) return 'Belum ada jadwal mendatang yang tercatat.';
+    return 'Acara selanjutnya: ' + next.summary + ' pada ' + formatEventTime(next.start) + '.';
+  }
+  return null;
+}
+
+const OCR_TRIGGER_RE = /baca\s+foto\s+ini|apa\s+isi\s+gambar|extract\s+text|ringkas\s+catatan\s+ini|berapa\s+total|apa\s+yang\s+dibicarakan/i;
+
+async function tryOCR(text, messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.full) return null;
+  if (!OCR_TRIGGER_RE.test(text)) return null;
+
+  const result = await ocrReader.recognize(att.full);
+  if (!result.ok) return result.message;
+
+  memoryLong.rememberNote(result.text);
+
+  if (/berapa\s+total/i.test(text)) {
+    const totalMatch = result.text.match(/total[^\d]*(\d[\d.,]*)/i);
+    if (totalMatch) return 'Total belanja: ' + totalMatch[1] + ' (dari hasil baca foto).';
+    return 'Teks berhasil dibaca dari foto, tapi tidak ditemukan nilai "total" yang jelas:\n' + result.text.slice(0, 300);
+  }
+  if (/ringkas/i.test(text)) return agentTools.ringkas(result.text);
+  return 'Isi gambar:\n' + result.text.slice(0, 500);
+}
+
+const LANG_NAME_MAP = {
+  inggris: 'en', english: 'en', indonesia: 'id', jepang: 'ja', japanese: 'ja',
+  korea: 'ko', mandarin: 'zh', china: 'zh', spanyol: 'es', prancis: 'fr',
+  jerman: 'de', arab: 'ar', rusia: 'ru',
+};
+
+async function tryTranslate(text) {
+  const m = text.match(/^terjemahkan\s+(.+?)\s+ke\s+(?:bahasa\s+)?(\w+)$/i) || text.match(/^translate\s+(.+?)\s+(?:to|ke)\s+(\w+)$/i);
+  if (m) {
+    const content = m[1];
+    const lang = LANG_NAME_MAP[m[2].toLowerCase()] || m[2].toLowerCase();
+    const result = await translator.translate(content, lang);
+    return result.ok ? 'Terjemahan: ' + result.text : result.message;
+  }
+  const m2 = text.match(/apa\s+bahasa\s+inggrisnya\s+(.+)$/i);
+  if (m2) {
+    const result = await translator.translate(m2[1], 'en');
+    return result.ok ? '"' + m2[1] + '" dalam bahasa Inggris: ' + result.text : result.message;
+  }
+  return null;
+}
+
+function formatReminderTime(timestamp) {
+  const d = new Date(timestamp);
+  return d.toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+}
+
+const REMINDER_CANCEL_RE = /^(batalkan|batal|hapus)\s+(pengingat|reminder)\b/i;
+const REMINDER_TRIGGER_RE = /^(ingatkan\s+saya|reminder|jangan\s+lupa)\b/i;
+const QUICK_NOTE_RE = /^catat\s+/i;
+
+function tryReminder(text) {
+  const t = text.trim();
+
+  if (REMINDER_CANCEL_RE.test(t)) {
+    const cancelled = remindersStore.cancelLatest();
+    return cancelled ? 'Baik, pengingat "' + cancelled.action + '" sudah dibatalkan.' : 'Tidak ada pengingat aktif untuk dibatalkan.';
+  }
+
+  const isReminderTrigger = REMINDER_TRIGGER_RE.test(t) || QUICK_NOTE_RE.test(t);
+  if (!isReminderTrigger) return null;
+
+  const parsed = reminderParser.parseReminder(t);
+  if (parsed) {
+    remindersStore.add(parsed);
+    reminderScheduler.requestPermission();
+    const recurText = parsed.recur === 'weekly' ? ' (berulang tiap minggu)' : parsed.recur === 'daily' ? ' (berulang tiap hari)' : '';
+    return 'Oke, saya ingatkan "' + parsed.action + '" pada ' + formatReminderTime(parsed.timestamp) + recurText + '.';
+  }
+
+  if (QUICK_NOTE_RE.test(t)) {
+    const note = t.replace(QUICK_NOTE_RE, '').trim();
+    if (!note) return null;
+    memoryLong.rememberNote(note);
+    return 'Baik, saya catat: ' + note + '.';
+  }
+
+  return null;
+}
+
 async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
@@ -174,6 +311,20 @@ async function runTool(kind, prompt, messages) {
   if (kind === 'lupakan') return agentTools.lupakan(prompt);
   if (kind === 'ekspor') return agentTools.eksporLog();
   if (kind === 'laporan_otak') return agentTools.laporanOtak();
+  if (kind === 'share_wa') return agentTools.shareToWhatsApp({ title: 'Chat', messages: messages || [] });
+  if (kind === 'export_chat') {
+    const p = prompt.toLowerCase();
+    const format = /markdown|\bmd\b/.test(p) ? 'markdown' : /json/.test(p) ? 'json' : /pdf/.test(p) ? 'pdf' : 'txt';
+    return agentTools.exportChat({ title: 'Chat', messages: messages || [] }, format);
+  }
+  if (kind === 'email') return emailComposer.generateEmail(prompt);
+  if (kind === 'cari_semua') {
+    const q = prompt.replace(/cari\s+/i, '').replace(/di\s+semua\s*(sumber)?/i, '').replace(/apa\s+yang\s+saya\s+punya\s+tentang/i, '').trim();
+    return await agentTools.cariSemua(q);
+  }
+  if (kind === 'bedah_url') {
+    return 'Analisis konten web (bedah URL) belum tersedia karena Raget 100% berjalan lokal tanpa mengambil data dari internet. Fitur ini bisa ditambahkan sebagai paket opt-in terpisah bila diperlukan.';
+  }
   if (kind === 'jelaskan') {
     const topic = prompt
       .replace(/^jelaskan\s*/i, '')
@@ -368,6 +519,36 @@ async function respond(messages, prompt) {
   if (mathReply) {
     ragetDb.addNote(text, mathReply, null, 'hitung');
     return postProcess(mathReply);
+  }
+
+  const reminderReply = tryReminder(text);
+  if (reminderReply) {
+    ragetDb.addNote(text, reminderReply, null, 'reminder');
+    return postProcess(reminderReply);
+  }
+
+  const ocrReply = await tryOCR(text, messages);
+  if (ocrReply) {
+    ragetDb.addNote(text, ocrReply, null, 'ocr');
+    return postProcess(ocrReply);
+  }
+
+  const translateReply = await tryTranslate(text);
+  if (translateReply) {
+    ragetDb.addNote(text, translateReply, null, 'translate');
+    return postProcess(translateReply);
+  }
+
+  const calendarImportReply = tryCalendarImport(messages);
+  if (calendarImportReply) {
+    ragetDb.addNote(text, calendarImportReply, null, 'calendar_import');
+    return postProcess(calendarImportReply);
+  }
+
+  const calendarQueryReply = tryCalendarQuery(text);
+  if (calendarQueryReply) {
+    ragetDb.addNote(text, calendarQueryReply, null, 'calendar_query');
+    return postProcess(calendarQueryReply);
   }
 
   const factoid = await tryFactoid(text, messages);

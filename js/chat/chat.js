@@ -9,6 +9,25 @@ import { toast } from '../core/toast.js';
 import { voice } from './voice.js';
 import { ai } from '../ai/ai.js';
 
+const URL_RE = /https?:\/\/\S+/i;
+
+function buildExtraChip(label, onClick) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'msg-action-btn';
+  btn.textContent = label;
+  btn.onclick = onClick;
+  return btn;
+}
+
+function fillComposer(text) {
+  const inp = $('chat-input');
+  if (!inp) return;
+  inp.value = text;
+  inp.dispatchEvent(new Event('input'));
+  inp.focus();
+}
+
 function buildActions(text) {
   const row = document.createElement('div');
   row.className = 'msg-actions';
@@ -118,8 +137,18 @@ export const chat = {
       tm.className = 'time';
       tm.textContent = fmtTime(m.time);
       d.appendChild(tm);
+      if (m.role === 'user' && m.attach && m.attach.full) {
+        const row = document.createElement('div');
+        row.className = 'msg-actions';
+        row.appendChild(buildExtraChip('🔍 Baca Gambar Ini', () => fillComposer('baca foto ini')));
+        d.appendChild(row);
+      }
       if (m.role !== 'user') {
-        d.appendChild(buildActions(m.text));
+        const actions = buildActions(m.text);
+        if (URL_RE.test(m.text)) {
+          actions.appendChild(buildExtraChip('🌐 Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0])));
+        }
+        d.appendChild(actions);
       }
       box.appendChild(d);
     });
@@ -144,7 +173,11 @@ export const chat = {
       }
     }
     body.innerHTML = markdown.render(text);
-    d.appendChild(buildActions(text));
+    const actions = buildActions(text);
+    if (URL_RE.test(text)) {
+      actions.appendChild(buildExtraChip('🌐 Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0])));
+    }
+    d.appendChild(actions);
     if (follow) {
       scrollBottom();
     } else {
