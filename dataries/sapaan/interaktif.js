@@ -111,7 +111,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-if (window.InternalLogger) {
-    window.InternalLogger.info('SapaanInteraktif', '✅ Loaded ' + data.length + ' balasan kabar (6 mood + multibahasa)!');
-}

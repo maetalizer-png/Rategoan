@@ -850,10 +850,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryEropanTengah', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 6 NEGARA!)');
-}

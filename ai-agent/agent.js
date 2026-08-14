@@ -4,6 +4,8 @@ import { memoryLong } from '../raget-memory/memory-long.js';
 import { memoryIndex } from '../raget-memory/memory-index.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { agentTools } from './agent-tools.js';
+import { datariesBridge } from './dataries-bridge.js';
+import { dataries } from '../dataries/index.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -13,8 +15,15 @@ const RATING_BAD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(jelek|salah|kurang\s*tepat|
 const CLARIFY_MARKERS = /info tambahan dulu|ceritakan konteksnya|bagaimana kaitannya|apa yang sudah kamu ketahui/i;
 
 const QUESTION_LEAD_RE = /^(siapa|apa|dimana|di\s*mana|kapan|berapa)\b/i;
+const ABOUT_RE = /^(ceritakan\s+tentang|cerita\s+(soal|tentang))\s+/i;
 
 const FACTOID_TEMPLATES = [(a) => a + '.', (a) => a + ', setahu saya.', (a) => 'Setahu saya, ' + a + '.'];
+
+const GREETING_LEAD_RE =
+  /^(halo+|hai+|hey+|hi)\b|^assalamu.?alaikum\b|^permisi\b|^(selamat|met)?\s*(pagi|siang|sore|malam)\b|^good\s*(morning|afternoon|evening|night)\b/i;
+const KABAR_RE = /apa\s+kabar/i;
+
+let sapaanCache = null;
 
 let personaCache = null;
 let fewshotCache = null;
@@ -38,6 +47,38 @@ function pickVariant(intent, templates, text) {
   variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
   variantLast.set(intent, idx);
   return templates[idx];
+}
+
+async function loadSapaan() {
+  if (sapaanCache) return sapaanCache;
+  try {
+    const [greetings, interaktif] = await Promise.all([
+      dataries.loadRegion('sapaan', 'greetings'),
+      dataries.loadRegion('sapaan', 'interaktif'),
+    ]);
+    sapaanCache = { greetings: greetings || [], interaktif: interaktif || [] };
+  } catch (e) {
+    sapaanCache = { greetings: [], interaktif: [] };
+  }
+  return sapaanCache;
+}
+
+async function tryGreetingFromSapaan(text) {
+  const t = text.trim();
+  const isKabar = KABAR_RE.test(t);
+  const isGreeting = !isKabar && GREETING_LEAD_RE.test(t);
+  if (!isKabar && !isGreeting) return null;
+
+  const turnKey = isKabar ? 'greet_sapaan_kabar' : 'greet_sapaan_time';
+  const turn = variantTurns.get(turnKey) || 0;
+  variantTurns.set(turnKey, turn + 1);
+  if (turn % 2 === 1) return null;
+
+  const data = await loadSapaan();
+  const pool = isKabar ? data.interaktif : data.greetings;
+  if (!pool.length) return null;
+  const idx = (turn + hashText(t)) % pool.length;
+  return pool[idx].text;
 }
 
 async function loadPersona() {
@@ -232,9 +273,25 @@ function acknowledgeFact(text) {
   return null;
 }
 
-async function tryFactoid(text) {
+function lastTopicOf(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const priorUsers = list.filter((m) => m.role === 'user');
+  if (priorUsers.length < 2) return null;
+  return priorUsers[priorUsers.length - 2].text;
+}
+
+async function tryFactoid(text, messages) {
   const t = text.trim();
-  if (!QUESTION_LEAD_RE.test(t) && !/\?$/.test(t)) return null;
+
+  const topic = lastTopicOf(messages);
+  const dataries = await datariesBridge.factoid(t, { lastTopic: topic });
+  if (dataries) return dataries;
+
+  if (ABOUT_RE.test(t)) return null;
+
+  const isQuestionLike = QUESTION_LEAD_RE.test(t) || /\?$/.test(t);
+  if (!isQuestionLike) return null;
+
   const subject = t
     .replace(/^(siapa|apa|dimana|di\s*mana|kapan|berapa)\s+/i, '')
     .replace(/^itu\s+/i, '')
@@ -308,6 +365,13 @@ async function respond(messages, prompt) {
 
   memoryLong.learnFromText(text);
 
+  const sapaan = await tryGreetingFromSapaan(text);
+  if (sapaan) {
+    const reply = personalize(sapaan, text);
+    ragetDb.addNote(text, reply, null, 'greeting');
+    return postProcess(reply);
+  }
+
   const toolKind = detectTool(text);
   if (toolKind) {
     const toolReply = await runTool(toolKind, text, messages);
@@ -326,7 +390,7 @@ async function respond(messages, prompt) {
     return postProcess(reply);
   }
 
-  const factoid = await tryFactoid(text);
+  const factoid = await tryFactoid(text, messages);
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');
     return postProcess(factoid);

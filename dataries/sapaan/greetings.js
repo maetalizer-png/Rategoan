@@ -61,7 +61,7 @@ const data = [
         }
     },
     {
-        text: 'Selamat datang di KESEMPATAN OS! Saya siap membantu Anda menganalisis peluang.',
+        text: 'Selamat datang di Rategoan! Saya Raget, siap membantu Anda.',
         metadata: {
             category: 'sapaan',
             type: 'waktu',
@@ -71,7 +71,7 @@ const data = [
         }
     },
     {
-        text: 'Halo! Perkenalkan, saya asisten KESEMPATAN OS. Senang berkenalan dengan Anda!',
+        text: 'Halo! Perkenalkan, saya Raget, asisten lokal Rategoan. Senang berkenalan dengan Anda!',
         metadata: {
             category: 'sapaan',
             type: 'waktu',
@@ -1555,7 +1555,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-if (window.InternalLogger) {
-    window.InternalLogger.info('SapaanGreetings', '✅ Loaded ' + data.length + ' sapaan (waktu, 60+ negara, situasi, hari raya, cuaca, daerah)!');
-}

@@ -1674,10 +1674,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryAfricanTimur', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 12 NEGARA!)');
-}

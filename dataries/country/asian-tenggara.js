@@ -715,7 +715,7 @@ const data = [
             shortName: 'PHL',
             capital: 'Manila',
             capitalCoordinates: { lat: 14.5995, lng: 120.9842 },
-            largestCity: 'Manila',
+            largestCity: 'Quezon City',
             demonym: 'Filipina',
             subregion: 'Maritime Southeast Asia',
             area: 300000,
@@ -1535,10 +1535,3 @@ metadata: {
 ];  // 🔥 TUTUP ARRAY data
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryAsianTenggara', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 11 NEGARA!)');
-}

@@ -424,10 +424,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CitiesAsiaTenggaraHybrid', '✅ Loaded ' + data.length + ' countries with ALL provinces & cities!');
-}

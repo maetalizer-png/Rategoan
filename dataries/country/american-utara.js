@@ -428,10 +428,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryAmericanUtara', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 3 NEGARA!)');
-}

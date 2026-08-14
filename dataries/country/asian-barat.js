@@ -2203,10 +2203,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryAsianBarat', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 16 NEGARA!)');
-}

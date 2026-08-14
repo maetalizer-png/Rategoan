@@ -1415,10 +1415,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryEropanTimur', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 10 NEGARA!)');
-}

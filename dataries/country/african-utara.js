@@ -978,10 +978,3 @@ const data = [
 ];
 
 export const DATA = data;
-
-// ============================================================
-// LOGGER
-// ============================================================
-if (window.InternalLogger) {
-    window.InternalLogger.info('CountryAfricanUtara', '✅ Loaded ' + data.length + ' countries (SUPER LENGKAP - 7 NEGARA!)');
-}
