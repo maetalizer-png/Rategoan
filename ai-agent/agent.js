@@ -156,6 +156,7 @@ function detectTool(prompt) {
   if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
+  if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
   if (/^lupakan\b/.test(t)) return 'lupakan';
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
@@ -369,7 +370,12 @@ async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas_hari') return await agentTools.ringkasHari();
   if (kind === 'kuis') return await quizSession.ask();
   if (kind === 'waktu') return agentTools.waktu(prompt);
-  if (kind === 'cari') return agentTools.cari(prompt.replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, ''));
+  if (kind === 'cari') {
+    const q = prompt
+      .replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, '')
+      .replace(/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\s*/i, '');
+    return agentTools.cari(q);
+  }
   if (kind === 'ingat') return agentTools.ingat(prompt);
   if (kind === 'lupakan') return agentTools.lupakan(prompt);
   if (kind === 'ekspor') return agentTools.eksporLog();
