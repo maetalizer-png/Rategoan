@@ -25,7 +25,7 @@ import { shortcuts } from './system/shortcuts.js';
 import { onboard } from './system/onboard.js';
 import { settings } from './account/settings.js';
 import { login } from './account/login.js';
-import { reminderScheduler } from '../reminders/scheduler.js';
+import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dailyBriefing } from '../ai-agent/daily-briefing.js';
 import { dataries } from '../dataries/index.js';

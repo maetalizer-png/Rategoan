@@ -1,7 +1,0 @@
-[
-  { "case": "Boot time", "action": "buka jalanin/index.html", "assert": "hasil pertama Jelajah tampil < 1000ms", "result": "PASS", "measured": "200ms" },
-  { "case": "Jelajah search", "action": "ketik 'jepang' di kolom cari", "assert": "kartu memuat nama negara, ibukota, mata uang, bahasa, makanan, wisata", "result": "PASS", "measured": "Jepang / Tokyo / Yen / Jepang / Sushi, Ramen / Gunung Fuji" },
-  { "case": "Kuis Tebak Dunia", "action": "jawab 10 soal pilihan ganda", "assert": "skor akhir + streak harian + skor terbaik tersimpan raget_jalanin_streak & raget_jalanin_quiz_best", "result": "PASS", "measured": "Skor: 4/10, Streak: 1 hari, Skor terbaik: 4/10" },
-  { "case": "Sapaan flashcard flip", "action": "ketuk kartu bahasa", "assert": "kartu belakang tampil halo/pagi/terima kasih dari data languages/", "result": "PASS", "measured": "Halo: hola, Pagi: buenos días, Terima kasih: gracias" },
-  { "case": "TTS sapaan", "action": "ketuk tombol 🔊 Dengar", "assert": "memanggil window.speechSynthesis.speak() dengan teks sapaan (Web Speech API bawaan, tanpa CDN)", "result": "PASS", "measured": "tombol terpasang dan terhubung ke fungsi speak(), diverifikasi tidak melempar error" }
-]

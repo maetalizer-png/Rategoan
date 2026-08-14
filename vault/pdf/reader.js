@@ -1,4 +1,4 @@
-import { libLoader } from '../system-libs/lib-loader.js';
+import { libLoader } from '../../utils/lib-loader.js';
 
 const PDFJS_URL = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.js';
 const PACKAGE_SIZE_MB = 10;

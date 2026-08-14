@@ -12,8 +12,8 @@ import { drawer } from '../ui/drawer.js';
 import { history } from '../history/history.js';
 import { backup } from '../system/backup.js';
 import { account } from './account.js';
-import { ocrReader } from '../../ocr/reader.js';
-import { translator } from '../../translate/translator.js';
+import { ocrReader } from '../../vault/ocr/reader.js';
+import { translator } from '../../vault/translate/translator.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 

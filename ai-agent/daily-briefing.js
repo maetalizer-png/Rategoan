@@ -1,5 +1,5 @@
-import { calendarStore } from '../calendar/calendar-store.js';
-import { remindersStore } from '../reminders/reminders-store.js';
+import { calendarStore } from '../vault/calendar/calendar-store.js';
+import { remindersStore } from '../vault/reminders/reminders-store.js';
 
 function timeOfDay(date) {
   const h = (date || new Date()).getHours();
