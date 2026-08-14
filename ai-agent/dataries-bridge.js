@@ -511,7 +511,7 @@ async function tryWisataDi(text) {
   if (!entity) return null;
   const items = await findAllInList('wisata', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
   if (!items.length) return null;
-  return 'Tempat wisata terkenal di ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name + ' (' + it.metadata.city + ')').join('\n');
+  return 'Tempat wisata terkenal di ' + capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name + ' (' + it.metadata.city + ')').join('\n');
 }
 
 function wordOverlap(entity, hay) {
@@ -612,7 +612,7 @@ async function tryMakananKhas(text) {
   const items = await findAllInList('makanan', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
   if (!items.length) return null;
   const opener = pickVariant('makanan_opener', MAKANAN_OPENERS, text);
-  return opener + ' ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return opener + ' ' + capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
 }
 
 async function trySejarah(text) {
@@ -632,7 +632,7 @@ async function tryAlam(text) {
   if (!entity) return null;
   const items = await findAllInList('alam', (it) => wordOverlap(entity, (it.metadata.habitat || '').toLowerCase()), 3);
   if (!items.length) return null;
-  return 'Fauna/flora khas ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return 'Fauna/flora khas ' + capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
 }
 
 async function tryPenemuan(text) {
@@ -656,7 +656,7 @@ async function trySeniBudaya(text) {
     3
   );
   if (!items.length) return null;
-  return 'Seni budaya khas ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return 'Seni budaya khas ' + capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
 }
 
 async function tryEkonomi(text) {
