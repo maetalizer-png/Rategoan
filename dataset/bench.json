@@ -162,7 +162,7 @@
   { "prompt": "baca foto ini", "expect": "ocr_stub", "containsAll": ["OCR", "MB"], "requiresAttach": "image", "note": "foto receipt -> jujur minta unduh paket dulu (Tesseract belum diunduh secara default)" },
   { "prompt": "ringkas catatan ini", "expect": "ocr_stub", "containsAll": ["OCR", "MB"], "requiresAttach": "image", "note": "foto catatan -> stub jujur yang sama sampai paket diunduh" },
   { "prompt": "extract text", "expect": "ocr_stub", "containsAll": ["OCR", "MB"], "requiresAttach": "image", "note": "screenshot -> stub jujur yang sama" },
-  { "prompt": "ingatkan saya cari resep di catatan saya", "expect": "reminder", "contains": "cari resep", "note": "voice-style: pola reminder juga jalan dari transkrip suara Web Speech API" },
+  { "prompt": "ingatkan saya 15 menit lagi cari resep di catatan saya", "expect": "reminder", "contains": "cari resep", "note": "voice-style: pola reminder juga jalan dari transkrip suara Web Speech API. Diperbaiki dari versi lama yang tidak menyertakan frasa waktu (parseReminder sengaja return null tanpa waktu eksplisit)." },
   { "prompt": "catat beli obat", "expect": "voice_note", "contains": "beli obat" },
   { "prompt": "cari beli obat di semua", "expect": "voice_search", "contains": "beli obat" },
   { "prompt": "terjemahkan halo ke inggris", "expect": "translate_stub", "containsAll": ["paket", "MB"], "note": "voice-style translate -> stub jujur, model belum diunduh" },
