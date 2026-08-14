@@ -10,9 +10,10 @@ import { pdfStore } from '../pdf/pdf-store.js';
 import { notionStore } from '../notion/notion-store.js';
 import { evernoteStore } from '../evernote/evernote-store.js';
 import { whatsappStore } from '../whatsapp/whatsapp-store.js';
-import { meaningfulWords, pickVariant } from '../utils/text.js';
+import { meaningfulWords, pickVariant, hashText } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
+import { dailyBriefing } from './daily-briefing.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -492,6 +493,18 @@ function shareToWhatsApp(session) {
   return 'Membuka WhatsApp dengan isi percakapan siap dibagikan.';
 }
 
+async function ringkasHari() {
+  const events = dailyBriefing.eventsToday();
+  const reminders = dailyBriefing.remindersToday();
+  const notes = (await ragetDb.allNotes()).slice(-3);
+  const items = [];
+  events.forEach((e) => items.push('Acara: ' + e.summary));
+  reminders.forEach((r) => items.push('Pengingat: ' + r.action));
+  notes.forEach((n) => items.push('Catatan: ' + n.question));
+  if (!items.length) items.push('Belum ada acara, pengingat, atau catatan untuk hari ini.');
+  return formatter.formatByType('daftar', { title: 'Ringkasan Hari Ini', items });
+}
+
 async function eksporLog() {
   const notes = await ragetDb.allNotes();
   const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
@@ -524,4 +537,5 @@ export const agentTools = Object.freeze({
   exportChat,
   shareToWhatsApp,
   cariSemua,
+  ringkasHari,
 });

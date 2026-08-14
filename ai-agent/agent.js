@@ -24,9 +24,10 @@ import { whatsappImporter } from '../whatsapp/importer.js';
 import { whatsappStore } from '../whatsapp/whatsapp-store.js';
 import { chunker } from '../vault/chunk.js';
 import { translator } from '../translate/translator.js';
-import { pickVariant, hashText } from '../utils/text.js';
+import { pickVariant, hashText, detectTone, detectMood } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
+import { readWeb } from '../web/read-web.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -39,6 +40,22 @@ const QUESTION_LEAD_RE = /^(siapa|apa|dimana|di\s*mana|kapan|berapa)\b/i;
 const ABOUT_RE = /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+/i;
 
 const FACTOID_TEMPLATES = [(a) => a + '.', (a) => a + ', setahu saya.', (a) => 'Setahu saya, ' + a + '.'];
+
+const MOOD_OPENERS = {
+  sedih: { casual: 'Aduh, kedengarannya lagi sedih ya. ', formal: 'Turut prihatin mendengarnya. ', neutral: 'Kedengarannya lagi sedih ya. ' },
+  capek: { casual: 'Wah, pasti capek banget ya. ', formal: 'Semoga Anda bisa segera beristirahat. ', neutral: 'Kedengarannya lagi capek ya. ' },
+  marah: { casual: 'Wah, kedengarannya lagi kesel ya. ', formal: 'Saya memahami kekesalan Anda. ', neutral: 'Kedengarannya lagi kesal ya. ' },
+  senang: { casual: 'Seneng deh dengernya! ', formal: 'Senang mendengarnya. ', neutral: 'Senang mendengarnya. ' },
+  bosan: { casual: 'Lagi bosan ya? ', formal: 'Semoga harimu segera lebih menarik. ', neutral: 'Kedengarannya lagi bosan ya. ' },
+};
+
+function moodOpener(text) {
+  const mood = detectMood(text);
+  if (!mood) return '';
+  const tone = detectTone(text);
+  const pool = MOOD_OPENERS[mood];
+  return pool[tone] || pool.neutral;
+}
 
 let personaCache = null;
 let fewshotCache = null;
@@ -132,6 +149,7 @@ function detectTeaching(text) {
 
 function detectTool(prompt) {
   const t = String(prompt || '').trim().toLowerCase();
+  if (/^(ringkas(kan)?|rangkum(kan)?)\s+hari(\s+ini)?(\s+saya)?\b/.test(t)) return 'ringkas_hari';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
   if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
   if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
@@ -334,6 +352,7 @@ function tryReminder(text) {
 async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
+  if (kind === 'ringkas_hari') return await agentTools.ringkasHari();
   if (kind === 'waktu') return agentTools.waktu(prompt);
   if (kind === 'cari') return agentTools.cari(prompt.replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, ''));
   if (kind === 'ingat') return agentTools.ingat(prompt);
@@ -352,7 +371,11 @@ async function runTool(kind, prompt, messages) {
     return await agentTools.cariSemua(q);
   }
   if (kind === 'bedah_url') {
-    return 'Analisis konten web (bedah URL) belum tersedia karena Raget 100% berjalan lokal tanpa mengambil data dari internet. Fitur ini bisa ditambahkan sebagai paket opt-in terpisah bila diperlukan.';
+    const url = (prompt.match(/https?:\/\/\S+/i) || [])[0];
+    if (!url) return 'URL tidak ditemukan. Format: bedah https://...';
+    const result = await readWeb.read(url);
+    if (!result.ok) return result.message;
+    return 'Ringkasan halaman:\n\n' + agentTools.ringkas(result.text);
   }
   if (kind === 'jelaskan') {
     const topic = prompt
@@ -518,6 +541,13 @@ function detectModeCommand(text) {
 }
 
 async function respond(messages, prompt) {
+  const text = String(prompt || '').trim();
+  const opener = text ? moodOpener(text) : '';
+  const reply = await respondCore(messages, prompt);
+  return opener && !reply.startsWith(opener) ? opener + reply : reply;
+}
+
+async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
 
