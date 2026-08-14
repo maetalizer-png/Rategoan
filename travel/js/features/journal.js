@@ -28,17 +28,27 @@ export function removeNote(tripKey, idx) {
   }
 }
 
-export function journalCard(tripKey) {
+export function journalCard(tripKey, tripLabel) {
   const notes = getNotes(tripKey);
   return '<div class="sec">Jurnal Catatan</div><div class="card">' +
     (notes.length
       ? notes.map((n, i) => '<div class="rowbtn" style="justify-content:space-between;margin:4px 0"><span class="desc">' + n.text + '</span><button class="btn" data-jdel="' + i + '">Hapus</button></div>').join('')
       : '<p class="desc">Belum ada catatan.</p>') +
     '<div class="rowbtn" style="margin-top:8px"><input id="jNew" class="q-opt" style="margin:0" placeholder="Tambah catatan...">' +
-    '<button class="btn" id="jAdd">Tambah</button></div></div>';
+    '<button class="btn" id="jAdd">Tambah</button></div>' +
+    (notes.length ? '<div class="rowbtn" style="margin-top:8px"><button class="btn" id="jExport">Ekspor Markdown</button></div>' : '') +
+    '</div>';
 }
 
-export function bindJournal(view, tripKey, onChange) {
+function toMarkdown(tripLabel, notes) {
+  const lines = ['# Jurnal ' + (tripLabel || 'Perjalanan'), ''];
+  notes.forEach((n) => {
+    lines.push('- ' + n.text + ' _(' + new Date(n.time).toLocaleDateString('id-ID') + ')_');
+  });
+  return lines.join('\n');
+}
+
+export function bindJournal(view, tripKey, onChange, tripLabel) {
   view.querySelectorAll('[data-jdel]').forEach((b) => b.onclick = () => { removeNote(tripKey, +b.dataset.jdel); onChange(); });
   const add = view.querySelector('#jAdd');
   if (add) {
@@ -47,6 +57,14 @@ export function bindJournal(view, tripKey, onChange) {
       if (!v) return;
       addNote(tripKey, v);
       onChange();
+    };
+  }
+  const exp = view.querySelector('#jExport');
+  if (exp) {
+    exp.onclick = (ev) => {
+      const md = toMarkdown(tripLabel, getNotes(tripKey));
+      if (navigator.share) navigator.share({ text: md }).catch(() => {});
+      else if (navigator.clipboard) navigator.clipboard.writeText(md).then(() => { ev.currentTarget.textContent = 'Tersalin (Markdown)'; });
     };
   }
 }

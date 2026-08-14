@@ -55,3 +55,47 @@ export function pushRecent(t) {
   l.unshift(t);
   localStorage.setItem('travel_recent', JSON.stringify(l.slice(0, 5)));
 }
+
+export function getViewed() {
+  try {
+    const l = JSON.parse(localStorage.getItem('travel_viewed'));
+    return Array.isArray(l) ? l : [];
+  } catch (e) { return []; }
+}
+export function pushViewed(name) {
+  const l = getViewed().filter((x) => x !== name);
+  l.unshift(name);
+  localStorage.setItem('travel_viewed', JSON.stringify(l.slice(0, 8)));
+}
+
+export function getScores() {
+  try {
+    const l = JSON.parse(localStorage.getItem('travel_scores'));
+    return Array.isArray(l) ? l : [];
+  } catch (e) { return []; }
+}
+export function pushScore(mode, score, total) {
+  const l = getScores();
+  l.push({ mode, score, total, time: Date.now() });
+  l.sort((a, b) => (b.score / b.total) - (a.score / a.total) || b.time - a.time);
+  localStorage.setItem('travel_scores', JSON.stringify(l.slice(0, 10)));
+}
+
+export function getFav() {
+  try {
+    const l = JSON.parse(localStorage.getItem('travel_fav'));
+    return Array.isArray(l) ? l : [];
+  } catch (e) { return []; }
+}
+export function isFav(name) { return getFav().includes(name); }
+export function toggleFav(name) {
+  const l = getFav();
+  const i = l.indexOf(name);
+  if (i >= 0) l.splice(i, 1);
+  else l.unshift(name);
+  localStorage.setItem('travel_fav', JSON.stringify(l));
+  return i < 0;
+}
+
+export function getTTS() { return localStorage.getItem('travel_tts') === '1'; }
+export function setTTS(on) { localStorage.setItem('travel_tts', on ? '1' : '0'); }

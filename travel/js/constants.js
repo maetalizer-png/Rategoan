@@ -21,10 +21,10 @@ export const PACK_TIPS = {
   lain: ['Adaptor universal'],
 };
 export const BADGES = [
-  { id: 'asean', label: 'Penjelajah ASEAN', test: (s) => s.bestSantai >= 8 },
-  { id: 'dunia', label: 'Penakluk Dunia', test: (s) => s.bestDunia >= 8 },
-  { id: 'streak', label: 'Konsisten', test: () => +localStorage.getItem('travel_streak') >= 3 },
-  { id: 'collector', label: 'Kolektor', test: (s) => s.viewed >= 20 },
-  { id: 'poliglot', label: 'Poliglot', test: (s) => s.sapaan >= 30 },
-  { id: 'planner', label: 'Perencana', test: (s) => s.trips >= 1 },
+  { id: 'asean', label: 'Penjelajah ASEAN', test: (s) => s.bestSantai >= 8, desc: 'Diberikan saat skor kuis Santai mencapai 8 dari 10 soal.' },
+  { id: 'dunia', label: 'Penakluk Dunia', test: (s) => s.bestDunia >= 8, desc: 'Diberikan saat skor kuis Tantangan (dunia) mencapai 8 dari 10 soal.' },
+  { id: 'streak', label: 'Konsisten', test: () => +localStorage.getItem('travel_streak') >= 3, desc: 'Diberikan saat streak tantangan harian mencapai 3 hari berturut-turut.' },
+  { id: 'collector', label: 'Kolektor', test: (s) => s.viewed >= 20, desc: 'Diberikan setelah membuka detail 20 negara berbeda.' },
+  { id: 'poliglot', label: 'Poliglot', test: (s) => s.sapaan >= 30, desc: 'Diberikan setelah membuka 30 kartu sapaan bahasa.' },
+  { id: 'planner', label: 'Perencana', test: (s) => s.trips >= 1, desc: 'Diberikan setelah menyimpan rencana perjalanan pertama.' },
 ];

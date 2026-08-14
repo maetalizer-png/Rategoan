@@ -2,7 +2,8 @@ import { ic } from '../icons.js';
 import { data } from '../loader.js';
 import { errorCard, low, mulberry, hashText } from '../utils.js';
 import { ASEAN, POPULAR, BADGES } from '../constants.js';
-import { getStats, saveStats, getDays, pushDay } from '../storage.js';
+import { getStats, saveStats, getDays, pushDay, getScores, pushScore } from '../storage.js';
+import { openSheet } from './jelajah.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');
@@ -17,6 +18,18 @@ function streakDots() {
     out.push('<span class="dot' + (days.includes(d) ? ' on' : '') + '"></span>');
   }
   return '<span class="dots">' + out.join('') + '</span>';
+}
+
+function leaderboardHtml() {
+  const scores = getScores();
+  if (!scores.length) return '';
+  return '<div class="sec">' + ic('award') + ' Papan Skor</div><div class="card">' +
+    scores.slice(0, 5).map((s, i) => {
+      const d = new Date(s.time);
+      return '<div class="lb-row"><span>#' + (i + 1) + ' ' + s.score + '/' + s.total +
+        ' &middot; ' + (s.mode === 'daily' ? 'harian' : s.mode) + '</span>' +
+        '<span class="desc">' + d.toLocaleDateString('id-ID') + '</span></div>';
+    }).join('') + '</div>';
 }
 
 export function showKuisHome() {
@@ -34,11 +47,29 @@ export function showKuisHome() {
     '<div class="rowbtn"><button class="btn" id="m3"' + (dailyDone ? ' disabled' : '') + '>' + ic('cal') +
     (dailyDone ? ' Tantangan harian (selesai)' : ' Tantangan harian (bonus streak)') + '</button></div>' +
     '<div class="sec">' + ic('award') + ' Pencapaian</div><div class="tags">' +
-    BADGES.map((b) => '<span class="bdg' + (b.test(st) ? ' on' : '') + '">' + b.label + '</span>').join('') +
-    '</div></div>';
+    BADGES.map((b) => '<button class="bdg' + (b.test(st) ? ' on' : '') + '" data-badge="' + b.id + '">' + b.label + '</button>').join('') +
+    '</div></div>' + leaderboardHtml();
   $('#m1').onclick = () => startKuis('santai');
   $('#m2').onclick = () => startKuis('dunia');
   if (!dailyDone) $('#m3').onclick = () => startKuis('daily');
+  view.querySelectorAll('[data-badge]').forEach((b) => {
+    b.onclick = () => {
+      const badge = BADGES.find((x) => x.id === b.dataset.badge);
+      const earned = badge.test(st);
+      openSheet(
+        '<h3>' + ic('award') + ' ' + badge.label + '</h3>' +
+        '<p>' + badge.desc + '</p>' +
+        '<p class="desc">' + (earned ? 'Sudah kamu raih!' : 'Belum diraih.') + '</p>' +
+        (earned ? '<div class="rowbtn"><button class="btn" id="bdgShare">' + ic('share') + ' Bagikan</button></div>' : '')
+      );
+      const shareBtn = document.querySelector('#bdgShare');
+      if (shareBtn) shareBtn.onclick = (ev) => {
+        const text = 'Aku baru saja meraih badge "' + badge.label + '" di Jalanin!\n- dari Jalanin';
+        if (navigator.share) navigator.share({ text }).catch(() => {});
+        else if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; });
+      };
+    };
+  });
 }
 
 function buildGens(pool, foods, wisata, langs) {
@@ -67,6 +98,22 @@ function buildGens(pool, foods, wisata, langs) {
       gens.push({ q: '"' + l.metadata.greetings.halo + '" sapaan bahasa...?', ans: l.metadata.name, pool: langs.map((x) => x.metadata.name) });
     }
   });
+  gens.push(...buildSuperlatif(pool));
+  return gens;
+}
+
+function buildSuperlatif(pool) {
+  const gens = [];
+  const byPop = pool.filter((c) => c.metadata.population).sort((a, b) => b.metadata.population - a.metadata.population);
+  if (byPop.length >= 4) {
+    const top4 = byPop.slice(0, 4);
+    gens.push({ q: 'Negara dengan populasi terbesar di antara berikut?', ans: top4[0].metadata.name, pool: top4.map((c) => c.metadata.name) });
+  }
+  const byArea = pool.filter((c) => c.metadata.area).sort((a, b) => b.metadata.area - a.metadata.area);
+  if (byArea.length >= 4) {
+    const top4 = byArea.slice(0, 4);
+    gens.push({ q: 'Negara dengan luas wilayah terbesar di antara berikut?', ans: top4[0].metadata.name, pool: top4.map((c) => c.metadata.name) });
+  }
   return gens;
 }
 
@@ -144,6 +191,7 @@ function finishKuis() {
   st.played++;
   st.correct += quiz.score;
   saveStats(st);
+  pushScore(quiz.mode, quiz.score, quiz.items.length);
 
   let headline = 'Selesai, skor ' + quiz.score + '/' + quiz.items.length;
   if (quiz.mode === 'daily') {

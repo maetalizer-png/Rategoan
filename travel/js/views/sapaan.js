@@ -1,7 +1,7 @@
 import { ic } from '../icons.js';
 import { data } from '../loader.js';
 import { errorCard, low } from '../utils.js';
-import { getStats, saveStats } from '../storage.js';
+import { getStats, saveStats, getTTS, setTTS } from '../storage.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');
@@ -17,9 +17,12 @@ export async function renderSapaan() {
       '<button id="mk" class="' + (sMode === 'kartu' ? 'on' : '') + '">Kartu</button>' +
       '<button id="mt" class="' + (sMode === 'tebak' ? 'on' : '') + '">Tebak bahasa</button>' +
     '</div>' +
+    '<div class="card tglrow"><span class="desc">' + ic('vol') + ' Putar suara otomatis</span>' +
+    '<label class="tgl"><input type="checkbox" id="ttsToggle"' + (getTTS() ? ' checked' : '') + '><span class="tgl-slider"></span></label></div>' +
     '<div id="sapOut"></div>';
   $('#mk').onclick = () => { sMode = 'kartu'; renderSapaan(); };
   $('#mt').onclick = () => { sMode = 'tebak'; renderSapaan(); };
+  $('#ttsToggle').onchange = (e) => setTTS(e.target.checked);
   if (sMode === 'tebak') { startTebak(); return; }
   sIdx = 0;
   sRevealed = false;
@@ -62,12 +65,15 @@ function drawSapaan() {
     };
     return;
   }
-  $('#tts').onclick = () => {
+  const speak = () => {
+    if (!('speechSynthesis' in window)) return;
     const u = new SpeechSynthesisUtterance(g.halo || '');
     u.lang = langCode(l);
     speechSynthesis.cancel();
     speechSynthesis.speak(u);
   };
+  $('#tts').onclick = speak;
+  if (getTTS() && 'speechSynthesis' in window) speak();
   $('#prev').onclick = () => { sIdx = (sIdx - 1 + sList.length) % sList.length; sRevealed = false; drawSapaan(); };
   $('#next').onclick = () => { sIdx = (sIdx + 1) % sList.length; sRevealed = false; drawSapaan(); };
 }

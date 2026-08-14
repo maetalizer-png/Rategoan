@@ -2,7 +2,7 @@ import { ic } from '../icons.js';
 import { data } from '../loader.js';
 import { low, byCountry, fmtN, stat, errorCard, regionOf } from '../utils.js';
 import { RATES } from '../constants.js';
-import { getStats, saveStats } from '../storage.js';
+import { getStats, saveStats, pushViewed, isFav, toggleFav } from '../storage.js';
 import { openSheet, renderJelajah } from './jelajah.js';
 import { climateCard } from '../features/climate.js';
 import { openConverter } from '../features/currency.js';
@@ -20,6 +20,7 @@ export async function openDetail(c) {
 
   const m = c.metadata || {};
   const name = m.name || '';
+  pushViewed(name);
   const myFoods = byCountry(foods, name).slice(0, 4);
   const myWisata = byCountry(wisata, name).slice(0, 4);
   const myCities = byCountry(cities, name).slice(0, 6);
@@ -35,7 +36,8 @@ export async function openDetail(c) {
 
   view.innerHTML =
     '<div class="rowbtn"><button class="btn" id="back">' + ic('back') + ' Kembali</button>' +
-    '<button class="btn" id="share">' + ic('share') + ' Bagikan kartu</button></div>' +
+    '<button class="btn" id="share">' + ic('share') + ' Bagikan kartu</button>' +
+    '<button class="fav-btn' + (isFav(name) ? ' on' : '') + '" id="favBtn" aria-label="Favorit">' + ic('star') + '</button></div>' +
     '<div class="card"><h3>' + name + '</h3>' +
     '<p class="desc" style="-webkit-line-clamp:99">' + String(c.text || '') + '</p>' +
     '<div class="stats">' +
@@ -53,6 +55,10 @@ export async function openDetail(c) {
     '</div>' + climateCard(regionOf(name));
 
   $('#back').onclick = () => renderJelajah('');
+  $('#favBtn').onclick = (ev) => {
+    const on = toggleFav(name);
+    ev.currentTarget.classList.toggle('on', on);
+  };
   $('#share').onclick = (ev) => {
     const lines = [
       name.toUpperCase(),

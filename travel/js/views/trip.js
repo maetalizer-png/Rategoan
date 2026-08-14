@@ -105,16 +105,19 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
       '</div></div>';
   }
 
+  const total = perDay * days;
+  const breakdown = { Hotel: 0.4, Makan: 0.3, Wisata: 0.2, Transport: 0.1 };
   html +=
     '<div class="card"><h3>' + ic('swap') + ' Estimasi budget (' + tier + ')</h3>' +
-    '<p class="desc">Per hari ~Rp ' + fmtN(perDay) + ' &middot; total ' + days + ' hari ~Rp ' + fmtN(perDay * days) + '</p>' +
-    '<p class="desc">Hotel 40% &middot; Makan 30% &middot; Wisata 20% &middot; Transport 10% (perkiraan kasar)</p></div>';
+    '<p class="desc">Per hari ~Rp ' + fmtN(perDay) + ' &middot; total ' + days + ' hari ~Rp ' + fmtN(total) + '</p>' +
+    '<p class="desc">' + Object.entries(breakdown).map(([k, v]) => k + ' ' + Math.round(v * 100) + '%').join(' &middot; ') + ' (perkiraan kasar)</p>' +
+    '<div class="rowbtn"><button class="btn" id="tbudget">' + ic('share') + ' Bagikan rincian budget</button></div></div>';
 
   const tips = PACK_TIPS[reg] || PACK_TIPS.lain;
   html +=
     '<div class="card"><h3>' + ic('check') + ' Saran bawaan (' + reg + ')</h3>' +
     '<div class="tags">' + tips.map((t, i) => '<button class="tag" data-p="' + i + '">' + ic('plus') + ' ' + t + '</button>').join('') + '</div></div>' +
-    climateCard(reg) + (tripKey ? journalCard(tripKey) : '');
+    climateCard(reg) + (tripKey ? journalCard(tripKey, name) : '');
   $('#tripOut').innerHTML = html;
   $('#tripOut').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -145,8 +148,18 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
     if (navigator.share) navigator.share({ text: lines }).catch(() => {});
     else if (navigator.clipboard) navigator.clipboard.writeText(lines).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; });
   };
+  $('#tbudget').onclick = (ev) => {
+    const lines = [
+      'Estimasi budget ' + name + ' (' + tier + ', ' + days + ' hari)',
+      ...Object.entries(breakdown).map(([k, v]) => k + ': Rp ' + fmtN(Math.round(total * v)) + ' (' + Math.round(v * 100) + '%)'),
+      'Total ~Rp ' + fmtN(total),
+      '- dari Jalanin',
+    ].join('\n');
+    if (navigator.share) navigator.share({ text: lines }).catch(() => {});
+    else if (navigator.clipboard) navigator.clipboard.writeText(lines).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; });
+  };
   if (tripKey) {
-    bindJournal(view, tripKey, () => renderTrip(c, days, tier, depart, foods, wisata, langs, countries, tripKey));
+    bindJournal(view, tripKey, () => renderTrip(c, days, tier, depart, foods, wisata, langs, countries, tripKey), name);
   } else {
     $('#tsave').onclick = (ev) => {
       const l = getTrips();

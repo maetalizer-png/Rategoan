@@ -1,8 +1,10 @@
 import { ic } from '../icons.js';
-import { stat } from '../utils.js';
-import { getStats, getTrips, getDays } from '../storage.js';
+import { stat, low } from '../utils.js';
+import { getStats, getTrips, getDays, getFav } from '../storage.js';
 import { BADGES } from '../constants.js';
 import { packStatus, downloadPack, clearPack } from '../features/offline-pack.js';
+import { data } from '../loader.js';
+import { openDetail } from './detail.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');
@@ -39,6 +41,7 @@ export async function openProfil() {
   const acc = st.played ? Math.round((st.correct / (st.played * 10)) * 100) : 0;
   const streak = +localStorage.getItem('travel_streak') || 0;
   const status = await packStatus();
+  const favNames = getFav();
 
   view.innerHTML =
     '<div class="rowbtn"><button class="btn" id="back">' + ic('back') + ' Kembali</button></div>' +
@@ -53,10 +56,20 @@ export async function openProfil() {
     '<div class="sec">' + ic('award') + ' Pencapaian</div><div class="tags">' +
       BADGES.map((b) => '<span class="bdg' + (b.test(st) ? ' on' : '') + '">' + b.label + '</span>').join('') +
     '</div>' +
+    '<div class="sec">' + ic('star') + ' Favorit</div>' +
+    (favNames.length
+      ? '<div class="tags">' + favNames.map((n, i) => '<button class="tag" data-fv="' + i + '">' + n + '</button>').join('') + '</div>'
+      : '<p class="desc">Belum ada negara favorit. Tap ikon bintang di kartu negara untuk menambahkan.</p>') +
     packSectionHtml(status) +
     '</div>';
 
   $('#back').onclick = () => { document.querySelector('.bot button[data-tab="jelajah"]').click(); };
+  view.querySelectorAll('[data-fv]').forEach((b) => b.onclick = async () => {
+    const d = await data();
+    if (!d) return;
+    const c = d.countries.find((x) => low(x.metadata.name) === low(favNames[+b.dataset.fv]));
+    if (c) openDetail(c);
+  });
   const dl = $('#packDl');
   if (dl) dl.onclick = async () => {
     dl.disabled = true;
