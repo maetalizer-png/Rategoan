@@ -1,0 +1,16 @@
+const data = [
+  { text: 'Thomas Alva Edison — penemu Amerika, dikenal sebagai penemu bola lampu pijar dan lebih dari seribu paten lain.', metadata: { name: 'Thomas Alva Edison', field: 'teknologi', knownFor: 'penemu bola lampu', country: 'Amerika Serikat', born: '1847', tags: ['edison', 'bola lampu', 'penemu'] } },
+  { text: 'Steve Jobs — pendiri Apple, dikenal lewat inovasi iPhone, iPad, dan Macintosh.', metadata: { name: 'Steve Jobs', field: 'teknologi', knownFor: 'pendiri Apple', country: 'Amerika Serikat', born: '1955', tags: ['steve jobs', 'apple'] } },
+  { text: 'Bill Gates — pendiri Microsoft, salah satu pelopor era komputer pribadi.', metadata: { name: 'Bill Gates', field: 'teknologi', knownFor: 'pendiri Microsoft', country: 'Amerika Serikat', born: '1955', tags: ['bill gates', 'microsoft'] } },
+  { text: 'Alexander Graham Bell — penemu telepon, membuka era komunikasi jarak jauh modern.', metadata: { name: 'Alexander Graham Bell', field: 'teknologi', knownFor: 'penemu telepon', country: 'Skotlandia', born: '1847', tags: ['bell', 'telepon'] } },
+  { text: 'Tim Berners-Lee — penemu World Wide Web (WWW), fondasi internet modern.', metadata: { name: 'Tim Berners-Lee', field: 'teknologi', knownFor: 'penemu World Wide Web', country: 'Inggris', born: '1955', tags: ['berners-lee', 'internet', 'www'] } },
+  { text: 'Mark Zuckerberg — pendiri Facebook, pelopor era media sosial global.', metadata: { name: 'Mark Zuckerberg', field: 'teknologi', knownFor: 'pendiri Facebook', country: 'Amerika Serikat', born: '1984', tags: ['zuckerberg', 'facebook'] } },
+  { text: 'Elon Musk — pengusaha teknologi, pendiri Tesla dan SpaceX, pelopor kendaraan listrik dan roket komersial.', metadata: { name: 'Elon Musk', field: 'teknologi', knownFor: 'Tesla dan SpaceX', country: 'Amerika Serikat', born: '1971', tags: ['elon musk', 'tesla', 'spacex'] } },
+  { text: 'Ada Lovelace — matematikawan Inggris, dianggap sebagai programmer komputer pertama di dunia.', metadata: { name: 'Ada Lovelace', field: 'teknologi', knownFor: 'programmer pertama', country: 'Inggris', born: '1815', tags: ['ada lovelace', 'programmer'] } },
+  { text: 'Guglielmo Marconi — penemu radio, pelopor komunikasi nirkabel jarak jauh.', metadata: { name: 'Guglielmo Marconi', field: 'teknologi', knownFor: 'penemu radio', country: 'Italia', born: '1874', tags: ['marconi', 'radio'] } },
+  { text: 'Wright bersaudara — Orville dan Wilbur Wright, pencipta dan penerbang pesawat bertenaga pertama di dunia.', metadata: { name: 'Wright Bersaudara', field: 'teknologi', knownFor: 'pesawat terbang pertama', country: 'Amerika Serikat', born: '1867/1871', tags: ['wright brothers', 'pesawat'] } },
+  { text: 'Nadiem Makarim — pengusaha teknologi Indonesia, pendiri Gojek, pelopor super-app ride-hailing di Asia Tenggara.', metadata: { name: 'Nadiem Makarim', field: 'teknologi', knownFor: 'pendiri Gojek', country: 'Indonesia', born: '1984', tags: ['nadiem makarim', 'gojek', 'indonesia'] } },
+  { text: 'Grace Hopper — ilmuwan komputer Amerika, pengembang compiler pertama dan bahasa COBOL.', metadata: { name: 'Grace Hopper', field: 'teknologi', knownFor: 'compiler pertama', country: 'Amerika Serikat', born: '1906', tags: ['grace hopper', 'compiler'] } },
+];
+
+export const DATA = data;

@@ -5,7 +5,6 @@ import { memoryIndex } from '../raget-memory/memory-index.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { agentTools } from './agent-tools.js';
 import { datariesBridge } from './dataries-bridge.js';
-import { dataries } from '../dataries/index.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -15,15 +14,9 @@ const RATING_BAD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(jelek|salah|kurang\s*tepat|
 const CLARIFY_MARKERS = /info tambahan dulu|ceritakan konteksnya|bagaimana kaitannya|apa yang sudah kamu ketahui/i;
 
 const QUESTION_LEAD_RE = /^(siapa|apa|dimana|di\s*mana|kapan|berapa)\b/i;
-const ABOUT_RE = /^(ceritakan\s+tentang|cerita\s+(soal|tentang))\s+/i;
+const ABOUT_RE = /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+/i;
 
 const FACTOID_TEMPLATES = [(a) => a + '.', (a) => a + ', setahu saya.', (a) => 'Setahu saya, ' + a + '.'];
-
-const GREETING_LEAD_RE =
-  /^(halo+|hai+|hey+|hi)\b|^assalamu.?alaikum\b|^permisi\b|^(selamat|met)?\s*(pagi|siang|sore|malam)\b|^good\s*(morning|afternoon|evening|night)\b/i;
-const KABAR_RE = /apa\s+kabar/i;
-
-let sapaanCache = null;
 
 let personaCache = null;
 let fewshotCache = null;
@@ -47,38 +40,6 @@ function pickVariant(intent, templates, text) {
   variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
   variantLast.set(intent, idx);
   return templates[idx];
-}
-
-async function loadSapaan() {
-  if (sapaanCache) return sapaanCache;
-  try {
-    const [greetings, interaktif] = await Promise.all([
-      dataries.loadRegion('sapaan', 'greetings'),
-      dataries.loadRegion('sapaan', 'interaktif'),
-    ]);
-    sapaanCache = { greetings: greetings || [], interaktif: interaktif || [] };
-  } catch (e) {
-    sapaanCache = { greetings: [], interaktif: [] };
-  }
-  return sapaanCache;
-}
-
-async function tryGreetingFromSapaan(text) {
-  const t = text.trim();
-  const isKabar = KABAR_RE.test(t);
-  const isGreeting = !isKabar && GREETING_LEAD_RE.test(t);
-  if (!isKabar && !isGreeting) return null;
-
-  const turnKey = isKabar ? 'greet_sapaan_kabar' : 'greet_sapaan_time';
-  const turn = variantTurns.get(turnKey) || 0;
-  variantTurns.set(turnKey, turn + 1);
-  if (turn % 2 === 1) return null;
-
-  const data = await loadSapaan();
-  const pool = isKabar ? data.interaktif : data.greetings;
-  if (!pool.length) return null;
-  const idx = (turn + hashText(t)) % pool.length;
-  return pool[idx].text;
 }
 
 async function loadPersona() {
@@ -186,7 +147,6 @@ function detectTool(prompt) {
   if (/^lupakan\b/.test(t)) return 'lupakan';
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
   if (/apa\s+yang\s+kamu\s+tahu\s+tentang\b/.test(t)) return 'cari';
-  if (/^hitung\b/.test(t) || isMathQuestion(t)) return 'hitung';
   if (/^bandingkan\s+/.test(t)) return 'bandingkan';
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
   if (/^(cara|langkah)\s+/.test(t)) return 'cara';
@@ -195,14 +155,17 @@ function detectTool(prompt) {
   return null;
 }
 
+function tryMath(text) {
+  const t = text.trim();
+  if (!/^hitung\b/i.test(t) && !isMathQuestion(t.toLowerCase())) return null;
+  if (/%\s*dari\b/i.test(t)) return agentTools.hitung(t);
+  const expr = extractMathExpr(t) || t.replace(/^(hitung|berapa)\s*/i, '');
+  return agentTools.hitung(expr);
+}
+
 async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
-  if (kind === 'hitung') {
-    if (/%\s*dari\b/i.test(prompt)) return agentTools.hitung(prompt);
-    const expr = extractMathExpr(prompt) || prompt.replace(/^(hitung|berapa)\s*/i, '');
-    return agentTools.hitung(expr);
-  }
   if (kind === 'waktu') return agentTools.waktu(prompt);
   if (kind === 'cari') return agentTools.cari(prompt.replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, ''));
   if (kind === 'ingat') return agentTools.ingat(prompt);
@@ -365,20 +328,22 @@ async function respond(messages, prompt) {
 
   memoryLong.learnFromText(text);
 
-  const sapaan = await tryGreetingFromSapaan(text);
-  if (sapaan) {
-    const reply = personalize(sapaan, text);
-    ragetDb.addNote(text, reply, null, 'greeting');
-    return postProcess(reply);
+  const mathReply = tryMath(text);
+  if (mathReply) {
+    ragetDb.addNote(text, mathReply, null, 'hitung');
+    return postProcess(mathReply);
   }
 
-  const toolKind = detectTool(text);
-  if (toolKind) {
-    const toolReply = await runTool(toolKind, text, messages);
-    if (toolReply) {
-      ragetDb.addNote(text, toolReply, null, toolKind);
-      return postProcess(toolReply);
-    }
+  const factoid = await tryFactoid(text, messages);
+  if (factoid) {
+    ragetDb.addNote(text, factoid, null, 'factoid');
+    return postProcess(factoid);
+  }
+
+  const extras = await datariesBridge.extras(text);
+  if (extras) {
+    ragetDb.addNote(text, extras, null, 'dataries_extras');
+    return postProcess(extras);
   }
 
   const teaching = detectTeaching(text);
@@ -390,10 +355,13 @@ async function respond(messages, prompt) {
     return postProcess(reply);
   }
 
-  const factoid = await tryFactoid(text, messages);
-  if (factoid) {
-    ragetDb.addNote(text, factoid, null, 'factoid');
-    return postProcess(factoid);
+  const toolKind = detectTool(text);
+  if (toolKind) {
+    const toolReply = await runTool(toolKind, text, messages);
+    if (toolReply) {
+      ragetDb.addNote(text, toolReply, null, toolKind);
+      return postProcess(toolReply);
+    }
   }
 
   const recalled = recallFromMemory(text);

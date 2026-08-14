@@ -420,7 +420,20 @@ const data = [
             ],
             tags: ['negara', 'asia-tenggara', 'brunei', 'provinsi', 'kota']
         }
-    }
+    },
+    { text: 'Bandung — ibukota Jawa Barat, Indonesia. Populasi 2,4 juta. Terkenal: udara sejuk, kota kreatif, kuliner dan factory outlet.', metadata: { region: 'asia-tenggara', country: 'Indonesia', name: 'Bandung', type: 'city', population: '2,4 juta', knownFor: 'sejuk, kreatif, kuliner', tags: ['bandung', 'indonesia', 'jawa barat'] } },
+    { text: 'Surabaya — ibukota Jawa Timur, Indonesia. Populasi 2,9 juta. Terkenal: kota pahlawan, pusat industri dan perdagangan.', metadata: { region: 'asia-tenggara', country: 'Indonesia', name: 'Surabaya', type: 'city', population: '2,9 juta', knownFor: 'kota pahlawan, industri', tags: ['surabaya', 'indonesia', 'jawa timur'] } },
+    { text: 'Medan — ibukota Sumatera Utara, Indonesia. Populasi 2,4 juta. Terkenal: kota multietnis, kuliner khas Melayu-Batak.', metadata: { region: 'asia-tenggara', country: 'Indonesia', name: 'Medan', type: 'city', population: '2,4 juta', knownFor: 'multietnis, kuliner', tags: ['medan', 'indonesia', 'sumatera utara'] } },
+    { text: 'Yogyakarta — kota budaya di Jawa, Indonesia. Populasi 430 ribu. Terkenal: keraton, seni tradisional, kota pelajar.', metadata: { region: 'asia-tenggara', country: 'Indonesia', name: 'Yogyakarta', type: 'city', population: '430 ribu', knownFor: 'budaya, kota pelajar', tags: ['yogyakarta', 'indonesia'] } },
+    { text: 'Kuala Lumpur — ibukota Malaysia. Populasi 1,8 juta. Terkenal: Menara Petronas, pusat bisnis dan belanja.', metadata: { region: 'asia-tenggara', country: 'Malaysia', name: 'Kuala Lumpur', type: 'city', population: '1,8 juta', knownFor: 'Menara Petronas, bisnis', tags: ['kuala lumpur', 'malaysia'] } },
+    { text: 'Johor Bahru — kota di selatan Malaysia dekat Singapura. Populasi 900 ribu. Terkenal: gerbang perbatasan, kawasan industri.', metadata: { region: 'asia-tenggara', country: 'Malaysia', name: 'Johor Bahru', type: 'city', population: '900 ribu', knownFor: 'perbatasan, industri', tags: ['johor bahru', 'malaysia'] } },
+    { text: 'Chiang Mai — kota terbesar kedua Thailand. Populasi 1,2 juta. Terkenal: kuil kuno, budaya Lanna, pegunungan sejuk.', metadata: { region: 'asia-tenggara', country: 'Thailand', name: 'Chiang Mai', type: 'city', population: '1,2 juta', knownFor: 'kuil, budaya Lanna, sejuk', tags: ['chiang mai', 'thailand'] } },
+    { text: 'Phuket — pulau wisata terbesar Thailand. Populasi 420 ribu. Terkenal: pantai, wisata bahari, kehidupan malam.', metadata: { region: 'asia-tenggara', country: 'Thailand', name: 'Phuket', type: 'city', population: '420 ribu', knownFor: 'pantai, wisata bahari', tags: ['phuket', 'thailand'] } },
+    { text: 'Ho Chi Minh City — kota terbesar Vietnam (dahulu Saigon). Populasi 9 juta. Terkenal: pusat bisnis, sejarah Perang Vietnam.', metadata: { region: 'asia-tenggara', country: 'Vietnam', name: 'Ho Chi Minh City', type: 'city', population: '9 juta', knownFor: 'bisnis, sejarah', tags: ['ho chi minh city', 'vietnam', 'saigon'] } },
+    { text: 'Hanoi — ibukota Vietnam. Populasi 8 juta. Terkenal: kota tua, danau, arsitektur kolonial Prancis.', metadata: { region: 'asia-tenggara', country: 'Vietnam', name: 'Hanoi', type: 'city', population: '8 juta', knownFor: 'kota tua, arsitektur kolonial', tags: ['hanoi', 'vietnam'] } },
+    { text: 'Cebu — kota terbesar kedua Filipina. Populasi 3 juta (metro). Terkenal: pantai, sejarah kolonial Spanyol.', metadata: { region: 'asia-tenggara', country: 'Filipina', name: 'Cebu', type: 'city', population: '3 juta', knownFor: 'pantai, sejarah kolonial', tags: ['cebu', 'filipina'] } },
+    { text: 'Phnom Penh — ibukota Kamboja. Populasi 2,3 juta. Terkenal: Istana Kerajaan, tepi Sungai Mekong.', metadata: { region: 'asia-tenggara', country: 'Kamboja', name: 'Phnom Penh', type: 'city', population: '2,3 juta', knownFor: 'Istana Kerajaan, Sungai Mekong', tags: ['phnom penh', 'kamboja'] } },
+    { text: 'Luang Prabang — kota warisan dunia UNESCO di Laos. Populasi 56 ribu. Terkenal: kuil Buddha, arsitektur kolonial.', metadata: { region: 'asia-tenggara', country: 'Laos', name: 'Luang Prabang', type: 'city', population: '56 ribu', knownFor: 'kuil Buddha, UNESCO', tags: ['luang prabang', 'laos'] } },
 ];
 
 export const DATA = data;

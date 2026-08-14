@@ -97,9 +97,12 @@ function hasKeyword(text, phrase) {
   return new RegExp('\\b' + escaped + '\\b', 'i').test(text);
 }
 
+const LANGUAGE_EXTRAS_RE = /sapaan|penutur|cara\s+menyapa|dalam\s+bahasa|ucapkan\s+selamat\s+pagi/i;
+
 function detectRelation(text) {
   const t = text.toLowerCase();
   for (const rel of RELATIONS) {
+    if (rel.fields.includes('languages') && LANGUAGE_EXTRAS_RE.test(t)) continue;
     if (rel.keys.some((k) => hasKeyword(t, k))) return rel;
   }
   return null;
@@ -218,16 +221,31 @@ async function resolveValue(relation, entity) {
   return null;
 }
 
+function summarizeItem(item) {
+  const sentences = String(item.text || '')
+    .split(/(?<=[.!?])\s+/)
+    .filter(Boolean);
+  const summary = sentences.slice(0, 3).join(' ');
+  const meta = item.metadata || {};
+  const bullets = [];
+  if (meta.capital) bullets.push('- Ibukota: ' + meta.capital);
+  if (meta.population != null) bullets.push('- Populasi: ' + formatValue('population', meta.population));
+  if (!bullets.length) return summary;
+  return summary + '\n' + bullets.slice(0, 2).join('\n');
+}
+
 async function factoid(q, options) {
   const text = String(q || '').trim();
   if (!text) return null;
   const opts = options || {};
 
-  const aboutMatch = text.match(/^(ceritakan\s+tentang|cerita\s+(soal|tentang))\s+(.+)$/i);
+  const aboutMatch = text.match(
+    /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+(negara|kota)?\s*(.+)$/i
+  );
   if (aboutMatch) {
-    const entity = aboutMatch[3].replace(/\?+$/, '').trim().toLowerCase();
+    const entity = aboutMatch[4].replace(/\?+$/, '').trim().toLowerCase();
     const item = (await lookupInGroup('country', entity)) || (await lookupInGroup('cities', entity));
-    return item && item.text ? item.text : null;
+    return item && item.text ? summarizeItem(item) : null;
   }
 
   const relation = detectRelation(text);
@@ -241,6 +259,148 @@ async function factoid(q, options) {
   if (!resolved) return null;
 
   return craftAnswer(resolved.field, resolved.label, resolved.value);
+}
+
+function cleanEntity(raw) {
+  return String(raw || '')
+    .replace(/\?+$/, '')
+    .replace(/\b(negara|dari|di|nya|adalah|itu)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+function fuzzyEq(a, b) {
+  if (!a || !b) return false;
+  return a === b || a.includes(b) || b.includes(a);
+}
+
+async function findLanguageByCountry(entity) {
+  if (!entity) return null;
+  const byName = await findInList('languages', (it) => fuzzyEq((it.metadata.name || '').toLowerCase(), entity) || fuzzyEq((it.metadata.nativeName || '').toLowerCase(), entity));
+  if (byName) return byName;
+  const regions = dataries.findRegionsByName('languages', entity);
+  for (const region of regions) {
+    const list = await dataries.loadRegion('languages', region.id);
+    if (!list) continue;
+    const item = list.find((it) => (it.metadata.officialIn || []).some((c) => fuzzyEq(c.toLowerCase(), entity)));
+    if (item) return item;
+  }
+  return await findInList('languages', (it) => (it.metadata.officialIn || []).some((c) => fuzzyEq(c.toLowerCase(), entity)));
+}
+
+async function findInList(group, predicate) {
+  const list = await dataries.loadAll(group);
+  return list.find(predicate) || null;
+}
+
+async function findAllInList(group, predicate, limit) {
+  const list = await dataries.loadAll(group);
+  return list.filter(predicate).slice(0, limit || 3);
+}
+
+async function tryPenuturBahasa(text) {
+  const m = text.match(/penutur\s+bahasa\s+(.+)/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  const item = await findLanguageByCountry(entity);
+  if (!item) return null;
+  return item.metadata.name + ' memiliki sekitar ' + item.metadata.speakers + ' penutur.';
+}
+
+async function tryGreetingBahasa(text) {
+  const m = text.match(/(halo|hai|terima\s*kasih|sapaan|cara\s+menyapa(?:\s+di)?|ucapkan\s+selamat\s+pagi)\s+(?:dalam\s+)?(?:bahasa\s+)?(.+)/i);
+  if (!m) return null;
+  const kind = m[1].toLowerCase();
+  const entity = cleanEntity(m[2].replace(/^bahasa\s+/i, ''));
+  if (!entity) return null;
+  const item = await findLanguageByCountry(entity);
+  if (!item || !item.metadata.greetings) return null;
+  const g = item.metadata.greetings;
+  if (/terima\s*kasih/.test(kind)) return 'Terima kasih dalam bahasa ' + item.metadata.name + ' adalah "' + g.terimakasih + '".';
+  if (/ucapkan\s+selamat\s+pagi/.test(kind)) return 'Selamat pagi dalam bahasa ' + item.metadata.name + ' adalah "' + g.pagi + '".';
+  if (/sapaan|cara\s+menyapa/.test(kind)) {
+    return 'Sapaan dalam bahasa ' + item.metadata.name + ': halo "' + g.halo + '", selamat pagi "' + g.pagi + '".';
+  }
+  return 'Sapaan dalam bahasa ' + item.metadata.name + ' adalah "' + g.halo + '".';
+}
+
+async function tryBahasaDi(text) {
+  const m = text.match(/^(apa\s+bahasa\s+di|bahasa\s+apa\s+di|bahasa)\s+(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[2]);
+  if (!entity) return null;
+  const item = await findLanguageByCountry(entity);
+  if (!item) return null;
+  return 'Bahasa di ' + capitalize(entity) + ' adalah ' + item.metadata.name + '.';
+}
+
+async function tryKotaTerkenal(text) {
+  const m = text.match(/^kota\s+(.+?)\s+terkenal\s+apa$/i) || text.match(/^tentang\s+kota\s+(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const item = await findInList('cities', (it) => it.metadata.type === 'city' && it.metadata.name && it.metadata.name.toLowerCase() === entity);
+  if (!item) return null;
+  return item.text;
+}
+
+async function tryWisataDi(text) {
+  const m = text.match(/^(?:tempat\s+)?wisata\s+di\s+(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const items = await findAllInList('wisata', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
+  if (!items.length) return null;
+  return 'Tempat wisata terkenal di ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name + ' (' + it.metadata.city + ')').join('\n');
+}
+
+async function trySiapaTokoh(text) {
+  const m = text.match(/^siapa\s+(?:penemu\s+)?(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const item = await findInList('tokoh', (it) => (it.metadata.knownFor || '').toLowerCase().includes(entity) || (it.metadata.name || '').toLowerCase().includes(entity));
+  if (!item) return null;
+  return item.text;
+}
+
+async function tryMakananKhas(text) {
+  const m = text.match(/^makanan\s+khas\s+(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  const items = await findAllInList('makanan', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
+  if (!items.length) return null;
+  return 'Makanan khas ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+}
+
+async function extras(q) {
+  const text = String(q || '').trim();
+  if (!text) return null;
+
+  const penutur = await tryPenuturBahasa(text);
+  if (penutur) return penutur;
+
+  const greeting = await tryGreetingBahasa(text);
+  if (greeting) return greeting;
+
+  const kotaTerkenal = await tryKotaTerkenal(text);
+  if (kotaTerkenal) return kotaTerkenal;
+
+  const wisata = await tryWisataDi(text);
+  if (wisata) return wisata;
+
+  const makanan = await tryMakananKhas(text);
+  if (makanan) return makanan;
+
+  const bahasa = await tryBahasaDi(text);
+  if (bahasa) return bahasa;
+
+  const tokoh = await trySiapaTokoh(text);
+  if (tokoh) return tokoh;
+
+  return null;
 }
 
 async function search(q) {
@@ -274,4 +434,5 @@ async function search(q) {
 export const datariesBridge = Object.freeze({
   search,
   factoid,
+  extras,
 });

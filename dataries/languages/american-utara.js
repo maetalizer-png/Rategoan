@@ -1,0 +1,8 @@
+const data = [
+  { text: 'Amerika Serikat — bahasa Inggris, bahasa mayoritas, 240 juta penutur. Aksara: Latin. Sapaan: hello (halo), thank you (terima kasih).', metadata: { region: 'american-utara', name: 'Inggris (AS)', nativeName: 'English', speakers: '240 juta', script: 'Latin', family: 'Jermanik', officialIn: ['Amerika Serikat'], greetings: { halo: 'hello', pagi: 'good morning', terimakasih: 'thank you' }, tags: ['amerika serikat', 'american-utara'] } },
+  { text: 'Kanada — bahasa Prancis Quebec, dituturkan 7 juta orang, resmi berdampingan dengan Inggris. Sapaan: bonjour (halo), merci (terima kasih).', metadata: { region: 'american-utara', name: 'Prancis Kanada', nativeName: 'Français québécois', speakers: '7 juta', script: 'Latin', family: 'Roman', officialIn: ['Kanada'], greetings: { halo: 'bonjour', pagi: 'bonjour', terimakasih: 'merci' }, tags: ['kanada', 'american-utara'] } },
+  { text: 'Meksiko — bahasa Spanyol, 125 juta penutur. Aksara: Latin. Sapaan: hola (halo), gracias (terima kasih).', metadata: { region: 'american-utara', name: 'Spanyol Meksiko', nativeName: 'Español', speakers: '125 juta', script: 'Latin', family: 'Roman', officialIn: ['Meksiko'], greetings: { halo: 'hola', pagi: 'buenos días', terimakasih: 'gracias' }, tags: ['meksiko', 'american-utara'] } },
+  { text: 'Meksiko — bahasa Nahuatl, bahasa asli Aztek, 1,7 juta penutur. Sapaan: niltze (halo), tlazocamati (terima kasih).', metadata: { region: 'american-utara', name: 'Nahuatl', nativeName: 'Nāhuatl', speakers: '1,7 juta', script: 'Latin', family: 'Uto-Aztekan', officialIn: ['Meksiko'], greetings: { halo: 'niltze', pagi: 'niltze', terimakasih: 'tlazocamati' }, tags: ['meksiko', 'american-utara', 'bahasa asli'] } },
+];
+
+export const DATA = data;

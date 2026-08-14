@@ -1,0 +1,13 @@
+const data = [
+  { text: 'Tokyo — ibukota Jepang. Populasi 14 juta. Terkenal: Shibuya, teknologi, budaya pop.', metadata: { region: 'asian-timur', country: 'Jepang', name: 'Tokyo', type: 'city', population: '14 juta', knownFor: 'Shibuya, teknologi', tags: ['tokyo', 'jepang'] } },
+  { text: 'Osaka — kota terbesar kedua Jepang. Populasi 2,7 juta. Terkenal: kuliner, kastil Osaka.', metadata: { region: 'asian-timur', country: 'Jepang', name: 'Osaka', type: 'city', population: '2,7 juta', knownFor: 'kuliner, kastil Osaka', tags: ['osaka', 'jepang'] } },
+  { text: 'Beijing — ibukota China. Populasi 21 juta. Terkenal: Tembok Besar, Kota Terlarang.', metadata: { region: 'asian-timur', country: 'China', name: 'Beijing', type: 'city', population: '21 juta', knownFor: 'Tembok Besar, Kota Terlarang', tags: ['beijing', 'china'] } },
+  { text: 'Shanghai — kota terbesar China. Populasi 26 juta. Terkenal: pusat finansial, The Bund.', metadata: { region: 'asian-timur', country: 'China', name: 'Shanghai', type: 'city', population: '26 juta', knownFor: 'finansial, The Bund', tags: ['shanghai', 'china'] } },
+  { text: 'Seoul — ibukota Korea Selatan. Populasi 9,7 juta. Terkenal: K-pop, teknologi, Gyeongbokgung.', metadata: { region: 'asian-timur', country: 'Korea Selatan', name: 'Seoul', type: 'city', population: '9,7 juta', knownFor: 'K-pop, teknologi', tags: ['seoul', 'korea selatan'] } },
+  { text: 'Busan — kota pelabuhan terbesar Korea Selatan. Populasi 3,4 juta. Terkenal: pantai Haeundae, festival film.', metadata: { region: 'asian-timur', country: 'Korea Selatan', name: 'Busan', type: 'city', population: '3,4 juta', knownFor: 'pantai Haeundae, festival film', tags: ['busan', 'korea selatan'] } },
+  { text: 'Hong Kong — kota metropolitan otonom China. Populasi 7,5 juta. Terkenal: skyline, pusat finansial Asia.', metadata: { region: 'asian-timur', country: 'Hong Kong', name: 'Hong Kong', type: 'city', population: '7,5 juta', knownFor: 'skyline, finansial', tags: ['hong kong'] } },
+  { text: 'Taipei — ibukota Taiwan. Populasi 2,6 juta. Terkenal: Taipei 101, pasar malam.', metadata: { region: 'asian-timur', country: 'Taiwan', name: 'Taipei', type: 'city', population: '2,6 juta', knownFor: 'Taipei 101, pasar malam', tags: ['taipei', 'taiwan'] } },
+  { text: 'Ulaanbaatar — ibukota Mongolia. Populasi 1,6 juta. Terkenal: kota terdingin di dunia, gerbang stepa.', metadata: { region: 'asian-timur', country: 'Mongolia', name: 'Ulaanbaatar', type: 'city', population: '1,6 juta', knownFor: 'kota terdingin, stepa', tags: ['ulaanbaatar', 'mongolia'] } },
+];
+
+export const DATA = data;

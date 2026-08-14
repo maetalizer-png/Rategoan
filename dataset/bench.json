@@ -88,5 +88,12 @@
   { "prompt": "luas indonesia", "expect": "factoid", "contains": "juta", "noNoise": true },
   { "prompt": "kode telepon indonesia", "expect": "factoid", "contains": "+62", "noNoise": true },
   { "prompt": "ceritakan tentang myanmar", "expect": "factoid", "contains": "Myanmar", "noNoise": true },
-  { "prompt": "berapa kota indonesia", "expect": "factoid", "contains": "416", "noNoise": true }
+  { "prompt": "berapa kota indonesia", "expect": "factoid", "contains": "416", "noNoise": true },
+  { "prompt": "Selamat malam", "expect": "greeting", "notContains": ["Mongolia"], "noForeignScript": true },
+  { "prompt": "Selamat pagi", "expect": "greeting" },
+  { "prompt": "apa yang kamu ketahui tentang negara Indonesia", "expect": "factoid", "containsAny": ["38 provinsi", "Jakarta"], "noNoise": true },
+  { "prompt": "ceritakan tentang rusia", "expect": "factoid", "contains": "terbesar di dunia", "noNoise": true },
+  { "prompt": "sapaan bahasa mongolia", "expect": "factoid", "contains": "Өглөөний мэнд", "noNoise": true },
+  { "prompt": "berapa penduduk indonesia", "expect": "factoid", "contains": "277 juta", "noNoise": true },
+  { "prompt": "apa ibukota negara indonesia", "expect": "factoid", "contains": "Jakarta", "noNoise": true }
 ]
