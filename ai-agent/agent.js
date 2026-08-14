@@ -10,8 +10,35 @@ const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, t
 const RATING_GOOD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(bagus|keren|mantap|oke|tepat)|^bagus\b|^mantap\b/i;
 const RATING_BAD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(jelek|salah|kurang\s*tepat|ngawur)|^salah\b|^jelek\b/i;
 
+const CLARIFY_MARKERS = /info tambahan dulu|ceritakan konteksnya|bagaimana kaitannya|apa yang sudah kamu ketahui/i;
+
+const QUESTION_LEAD_RE = /^(siapa|apa|dimana|di\s*mana|kapan|berapa)\b/i;
+
+const FACTOID_TEMPLATES = [(a) => a + '.', (a) => a + ', setahu saya.', (a) => 'Setahu saya, ' + a + '.'];
+
 let personaCache = null;
 let fewshotCache = null;
+const variantTurns = new Map();
+const variantLast = new Map();
+
+function hashText(text) {
+  let h = 0;
+  const s = String(text || '');
+  for (let i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
+
+function pickVariant(intent, templates, text) {
+  if (templates.length === 1) return templates[0];
+  const base = (variantTurns.get(intent) || 0) + hashText(text);
+  let idx = base % templates.length;
+  if (variantLast.get(intent) === idx) idx = (idx + 1) % templates.length;
+  variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
+  variantLast.set(intent, idx);
+  return templates[idx];
+}
 
 async function loadPersona() {
   if (personaCache) return personaCache;
@@ -58,9 +85,55 @@ function detectRating(text) {
   return null;
 }
 
+function replaceMathWords(text) {
+  return text
+    .replace(/(\d+)\s*ditambah\s*(\d+)/gi, '$1+$2')
+    .replace(/(\d+)\s*dikurang\s*(\d+)/gi, '$1-$2')
+    .replace(/(\d+)\s*kali\s*(\d+)/gi, '$1*$2')
+    .replace(/(\d+)\s*dibagi\s*(\d+)/gi, '$1/$2');
+}
+
+function extractMathExpr(text) {
+  const replaced = replaceMathWords(text);
+  const matches = replaced.match(/[0-9]+(?:\s*[+\-*/]\s*[0-9]+)+/g);
+  if (!matches || !matches.length) return null;
+  return matches.sort((a, b) => b.length - a.length)[0].replace(/\s+/g, '');
+}
+
+function isMathStatement(t) {
+  return /hasilnya\s*-?[0-9]/i.test(t) && !/\bberapa\b/i.test(t);
+}
+
 function looksLikeMath(t) {
-  const stripped = t.replace(/^(hitung|berapa)\s*/i, '').trim();
+  const stripped = t
+    .replace(/^(hitung|berapa)\s*/i, '')
+    .replace(/\s*(hasilnya|sama\s*dengan)?\s*\??$/i, '')
+    .trim();
   return stripped.length > 0 && /[0-9]/.test(stripped) && /^[0-9()\s+\-*/.]+$/.test(stripped);
+}
+
+function isMathQuestion(t) {
+  if (isMathStatement(t)) return false;
+  if (/%\s*dari\b/.test(t)) return true;
+  if (looksLikeMath(t)) return true;
+  return !!extractMathExpr(t);
+}
+
+function detectTeaching(text) {
+  const t = text.trim();
+  if (/\?$/.test(t)) return null;
+  if (
+    /^(apa|siapa|dimana|di\s*mana|kapan|berapa|bagaimana|mengapa|kenapa|jelaskan|cara|langkah|ringkas|rangkum|ide|ingat|lupakan|bandingkan|kelebihan|kekurangan|hitung)\b/i.test(
+      t
+    )
+  )
+    return null;
+  const m = t.match(/^(.+?)\s+adalah\s+(.+)$/i) || t.match(/^(.+?)\s+itu\s+(.+)$/i);
+  if (!m) return null;
+  const subject = m[1].trim();
+  const value = m[2].replace(/[.!]+$/, '').trim();
+  if (!subject || !value || subject.split(/\s+/).length > 8 || value.split(/\s+/).length > 12) return null;
+  return { subject, value };
 }
 
 function detectTool(prompt) {
@@ -72,7 +145,7 @@ function detectTool(prompt) {
   if (/^lupakan\b/.test(t)) return 'lupakan';
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
   if (/apa\s+yang\s+kamu\s+tahu\s+tentang\b/.test(t)) return 'cari';
-  if (/^hitung\b/.test(t) || /%\s*dari\b/.test(t) || looksLikeMath(t)) return 'hitung';
+  if (/^hitung\b/.test(t) || isMathQuestion(t)) return 'hitung';
   if (/^bandingkan\s+/.test(t)) return 'bandingkan';
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
   if (/^(cara|langkah)\s+/.test(t)) return 'cara';
@@ -84,7 +157,11 @@ function detectTool(prompt) {
 async function runTool(kind, prompt, messages) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
-  if (kind === 'hitung') return agentTools.hitung(prompt);
+  if (kind === 'hitung') {
+    if (/%\s*dari\b/i.test(prompt)) return agentTools.hitung(prompt);
+    const expr = extractMathExpr(prompt) || prompt.replace(/^(hitung|berapa)\s*/i, '');
+    return agentTools.hitung(expr);
+  }
   if (kind === 'waktu') return agentTools.waktu(prompt);
   if (kind === 'cari') return agentTools.cari(prompt.replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, ''));
   if (kind === 'ingat') return agentTools.ingat(prompt);
@@ -155,6 +232,20 @@ function acknowledgeFact(text) {
   return null;
 }
 
+async function tryFactoid(text) {
+  const t = text.trim();
+  if (!QUESTION_LEAD_RE.test(t) && !/\?$/.test(t)) return null;
+  const subject = t
+    .replace(/^(siapa|apa|dimana|di\s*mana|kapan|berapa)\s+/i, '')
+    .replace(/^itu\s+/i, '')
+    .replace(/\?+$/, '')
+    .trim();
+  if (!subject) return null;
+  const found = await memoryIndex.findFactoid(subject);
+  if (!found) return null;
+  return pickVariant('factoid', FACTOID_TEMPLATES, subject)(found.answer);
+}
+
 function personalize(reply, text) {
   const isGreetingLike = /^(halo|hai|hi|hey|selamat|met|good|assalamu)/i.test(text.trim());
   const nama = memoryLong.recall('nama');
@@ -171,6 +262,21 @@ function personalize(reply, text) {
     }
   }
   return reply;
+}
+
+function isClarifyReply(text) {
+  return CLARIFY_MARKERS.test(text) || text.startsWith('Saya catat:');
+}
+
+function tooSimilar(a, b) {
+  const wordsA = new Set(a.toLowerCase().split(/\s+/).filter((w) => w.length > 2));
+  const wordsB = new Set(b.toLowerCase().split(/\s+/).filter((w) => w.length > 2));
+  if (!wordsA.size || !wordsB.size) return false;
+  let overlap = 0;
+  wordsA.forEach((w) => {
+    if (wordsB.has(w)) overlap++;
+  });
+  return overlap / Math.min(wordsA.size, wordsB.size) >= 0.6;
 }
 
 function postProcess(text) {
@@ -192,6 +298,14 @@ async function respond(messages, prompt) {
     return postProcess(reply);
   }
 
+  if (isMathStatement(text)) {
+    const expr = extractMathExpr(text) || text;
+    memoryLong.rememberNote(expr);
+    const reply = 'Baik, saya catat: ' + text.replace(/\?+$/, '') + '.';
+    ragetDb.addNote(text, reply, null, 'math_statement');
+    return postProcess(reply);
+  }
+
   memoryLong.learnFromText(text);
 
   const toolKind = detectTool(text);
@@ -201,6 +315,21 @@ async function respond(messages, prompt) {
       ragetDb.addNote(text, toolReply, null, toolKind);
       return postProcess(toolReply);
     }
+  }
+
+  const teaching = detectTeaching(text);
+  if (teaching) {
+    const value = teaching.value.charAt(0).toUpperCase() + teaching.value.slice(1);
+    memoryLong.learnFact(teaching.subject, value);
+    const reply = 'Baik, saya catat: ' + teaching.subject + ' adalah ' + value + '.';
+    ragetDb.addNote(text, reply, null, 'teaching');
+    return postProcess(reply);
+  }
+
+  const factoid = await tryFactoid(text);
+  if (factoid) {
+    ragetDb.addNote(text, factoid, null, 'factoid');
+    return postProcess(factoid);
   }
 
   const recalled = recallFromMemory(text);
@@ -228,9 +357,12 @@ async function respond(messages, prompt) {
   let reply = postProcess(raw);
   reply = personalize(reply, text);
 
-  const relevant = await memoryIndex.search(text, 2);
-  if (relevant.length) {
-    reply += '\n\n(Catatan terkait: ' + relevant[0].text.slice(0, 120) + ')';
+  if (!isClarifyReply(reply)) {
+    const relevant = await memoryIndex.search(text, 3);
+    const candidate = relevant.find((r) => !tooSimilar(text, r.text));
+    if (candidate) {
+      reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';
+    }
   }
 
   ragetDb.addNote(text, reply, null, 'chat');

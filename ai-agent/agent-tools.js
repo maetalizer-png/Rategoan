@@ -23,6 +23,19 @@ function hashText(text) {
   return Math.abs(h);
 }
 
+const variantTurns = new Map();
+const variantLast = new Map();
+
+function pickVariant(intent, templates, text) {
+  if (templates.length === 1) return templates[0];
+  const base = (variantTurns.get(intent) || 0) + hashText(text);
+  let idx = base % templates.length;
+  if (variantLast.get(intent) === idx) idx = (idx + 1) % templates.length;
+  variantTurns.set(intent, (variantTurns.get(intent) || 0) + 1);
+  variantLast.set(intent, idx);
+  return templates[idx];
+}
+
 function meaningfulWords(text) {
   return text
     .toLowerCase()
@@ -269,19 +282,27 @@ async function kelebihanKekurangan(topic) {
   ]);
 }
 
+const HITUNG_TEMPLATES = [
+  (expr, result) => expr + ' = ' + result,
+  (expr, result) => 'Hasil dari ' + expr + ' adalah ' + result + '.',
+  (expr, result) => expr + ', hasilnya ' + result + '.',
+];
+
 function hitung(text) {
   const src = String(text || '').trim();
   const percentMatch = src.match(/(-?[0-9.]+)\s*%\s*dari\s*(-?[0-9.]+)/i);
   if (percentMatch) {
     const pct = parseFloat(percentMatch[1]);
     const base = parseFloat(percentMatch[2]);
-    return pct + '% dari ' + base + ' = ' + trimNum((pct / 100) * base);
+    const expr = pct + '% dari ' + base;
+    const result = trimNum((pct / 100) * base);
+    return pickVariant('hitung', HITUNG_TEMPLATES, expr)(expr, result);
   }
   const cleaned = src.replace(/^(hitung|berapa)\s*/i, '').trim();
   if (!cleaned || !SAFE_EXPR.test(cleaned)) return 'Ekspresi tidak valid. Gunakan angka dan operator +, -, *, /, % saja.';
   const result = safeEval(cleaned);
   if (result == null) return 'Tidak bisa menghitung ekspresi itu.';
-  return cleaned + ' = ' + trimNum(result);
+  return pickVariant('hitung', HITUNG_TEMPLATES, cleaned)(cleaned, trimNum(result));
 }
 
 function waktu(text) {

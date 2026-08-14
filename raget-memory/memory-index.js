@@ -9,6 +9,7 @@ const STOPWORDS = new Set([
 ]);
 
 let knowledgeCache = null;
+let factoidCache = null;
 
 function meaningfulWords(text) {
   return text
@@ -31,6 +32,18 @@ async function loadKnowledge() {
     knowledgeCache = { umum: [], faq: [] };
   }
   return knowledgeCache;
+}
+
+async function loadFactoid() {
+  if (factoidCache) return factoidCache;
+  try {
+    const res = await fetch(new URL('../dataset/knowledge/factoid.json', import.meta.url));
+    const data = res.ok ? await res.json() : [];
+    factoidCache = Array.isArray(data) ? data : [];
+  } catch (e) {
+    factoidCache = [];
+  }
+  return factoidCache;
 }
 
 function scoreText(hay, words) {
@@ -96,7 +109,33 @@ async function findTopic(topic) {
   return bestScore > 0 ? best : null;
 }
 
+async function findFactoid(query) {
+  const learned = memoryLong.findLearnedFact(query);
+  if (learned) return { answer: learned, source: 'learned' };
+
+  const words = meaningfulWords(String(query || '').toLowerCase());
+  if (!words.length) return null;
+  const list = await loadFactoid();
+  let best = null;
+  let bestRatio = 0;
+  list.forEach((item) => {
+    const candidates = [item.subject].concat(item.aliases || []);
+    candidates.forEach((c) => {
+      const cWords = meaningfulWords(String(c || '').toLowerCase());
+      if (!cWords.length) return;
+      const overlap = words.reduce((acc, w) => acc + (cWords.includes(w) ? 1 : 0), 0);
+      const ratio = overlap / Math.max(words.length, cWords.length);
+      if (ratio > bestRatio) {
+        bestRatio = ratio;
+        best = item;
+      }
+    });
+  });
+  return bestRatio >= 0.6 ? { answer: best.answer, source: 'factoid' } : null;
+}
+
 export const memoryIndex = Object.freeze({
   search,
   findTopic,
+  findFactoid,
 });

@@ -7,10 +7,25 @@ function read() {
     const safe = data && typeof data === 'object' ? data : {};
     if (!safe.facts) safe.facts = {};
     if (!Array.isArray(safe.notes)) safe.notes = [];
+    if (!Array.isArray(safe.learned)) safe.learned = [];
     return safe;
   } catch (e) {
-    return { facts: {}, notes: [] };
+    return { facts: {}, notes: [], learned: [] };
   }
+}
+
+function normalizeSubject(s) {
+  return String(s || '')
+    .toLowerCase()
+    .replace(/[?.!,]/g, '')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+function subjectWords(s) {
+  return normalizeSubject(s)
+    .split(' ')
+    .filter((w) => w.length > 1);
 }
 
 function write(data) {
@@ -79,8 +94,41 @@ function allNotes() {
   return read().notes;
 }
 
+function learnFact(subject, value) {
+  const norm = normalizeSubject(subject);
+  const val = String(value || '').trim();
+  if (!norm || !val) return;
+  const data = read();
+  const idx = data.learned.findIndex((f) => f.subject === norm);
+  const entry = { subject: norm, value: val, time: Date.now() };
+  if (idx >= 0) data.learned[idx] = entry;
+  else data.learned.push(entry);
+  data.learned = data.learned.slice(-200);
+  write(data);
+}
+
+function findLearnedFact(query) {
+  const data = read();
+  if (!data.learned.length) return null;
+  const qWords = subjectWords(query);
+  if (!qWords.length) return null;
+  let best = null;
+  let bestRatio = 0;
+  data.learned.forEach((f) => {
+    const fWords = subjectWords(f.subject);
+    if (!fWords.length) return;
+    const overlap = qWords.reduce((acc, w) => acc + (fWords.includes(w) ? 1 : 0), 0);
+    const ratio = overlap / Math.max(qWords.length, fWords.length);
+    if (ratio > bestRatio) {
+      bestRatio = ratio;
+      best = f;
+    }
+  });
+  return bestRatio >= 0.6 ? best.value : null;
+}
+
 function clear() {
-  write({ facts: {}, notes: [] });
+  write({ facts: {}, notes: [], learned: [] });
 }
 
 export const memoryLong = Object.freeze({
@@ -91,5 +139,7 @@ export const memoryLong = Object.freeze({
   rememberNote,
   forgetNote,
   allNotes,
+  learnFact,
+  findLearnedFact,
   clear,
 });

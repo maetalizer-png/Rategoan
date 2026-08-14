@@ -119,8 +119,9 @@ function isQuestion(text) {
 
 function lastTopic(context) {
   const list = Array.isArray(context) ? context : [];
-  const lastUser = [...list].reverse().find((m) => m.role === 'user');
-  return lastUser ? lastUser.text.slice(0, 60) : null;
+  const priorUsers = list.filter((m) => m.role === 'user');
+  if (priorUsers.length < 2) return null;
+  return priorUsers[priorUsers.length - 2].text.slice(0, 60);
 }
 
 function matchSmalltalk(text, options) {
