@@ -80,7 +80,9 @@
 }
 
 .msg-attach {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 11px;
   color: var(--rg-muted);
   margin-top: 4px;
@@ -93,12 +95,23 @@
 }
 
 .msg-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 11px;
   line-height: 1;
   color: var(--rg-muted);
   padding: 4px 9px;
   border-radius: var(--rg-pill);
   border: 1px solid var(--rg-line);
+}
+
+.msg-action-btn .ic,
+.msg-attach .ic,
+.chip .ic {
+  width: 13px;
+  height: 13px;
+  flex: none;
 }
 
 .msg-action-btn:active {

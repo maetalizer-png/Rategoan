@@ -1,3 +1,21 @@
+.ic {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  vertical-align: -2px;
+}
+
+#side-streak .ic {
+  width: 15px;
+  height: 15px;
+}
+
+.onboard-item .ic {
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+}
+
 #model-status {
   display: none;
   font-size: 11px;

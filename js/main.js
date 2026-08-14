@@ -86,7 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (e) {}
   if (window.visualViewport) {
-    visualViewport.addEventListener('resize', () => setTimeout(scrollBottom, 100));
+    let vvTimer = null;
+    visualViewport.addEventListener('resize', () => {
+      clearTimeout(vvTimer);
+      vvTimer = setTimeout(scrollBottom, 120);
+    });
   }
   try {
     localStorage.setItem('raget_boot_ms', String(Math.round(performance.now() - bootStart)));

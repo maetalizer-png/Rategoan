@@ -1,6 +1,7 @@
 import { $ } from '../utils/dom.js';
 import { auth } from '../state/auth.js';
 import { streakStore } from '../../raget-memory/streak-store.js';
+import { ic } from '../utils/icons.js';
 
 export const drawer = {
   s: null,
@@ -18,9 +19,13 @@ export const drawer = {
       badge.id = 'side-streak';
       badge.style.marginLeft = 'auto';
       badge.style.fontSize = '13px';
+      badge.style.display = 'inline-flex';
+      badge.style.alignItems = 'center';
+      badge.style.gap = '4px';
       head.appendChild(badge);
     }
-    badge.textContent = '🔥 ' + count;
+    badge.innerHTML = ic('flame');
+    badge.appendChild(document.createTextNode(String(count)));
   },
   open() {
     if (!auth.state) return;

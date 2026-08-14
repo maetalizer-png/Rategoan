@@ -83,6 +83,41 @@
   height: 20px;
 }
 
+.attach-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 10px;
+  border: 1px solid var(--rg-line);
+  border-radius: 14px;
+  color: var(--rg-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.attach-link:active {
+  background: var(--rg-ring);
+}
+
+.attach-link-ico {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--rg-accent);
+  color: var(--rg-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attach-link-ico svg {
+  width: 16px;
+  height: 16px;
+}
+
 .attach-row {
   display: flex;
   flex-direction: column;

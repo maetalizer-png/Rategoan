@@ -110,24 +110,11 @@ export const attach = {
     this.renderChip();
     return c;
   },
-  openTravel() {
-    sheets.close();
-    const frame = $('travel-frame');
-    if (!frame.src) frame.src = 'travel/index.html';
-    $('travel-sheet').hidden = false;
-    $('sheet-backdrop').classList.add('show');
-  },
-  closeTravel() {
-    $('travel-sheet').hidden = true;
-    $('sheet-backdrop').classList.remove('show');
-  },
   bind() {
     $('sheet-camera').onclick = () => this.pick('camera');
     $('sheet-photo').onclick = () => this.pick('photo');
     $('sheet-file').onclick = () => this.pick('file');
-    $('sheet-travel').onclick = () => this.openTravel();
-    $('travel-close').onclick = () => this.closeTravel();
-    $('travel-full').onclick = () => { location.href = 'travel/'; };
+    $('sheet-travel').onclick = () => { location.href = 'travel/'; };
     $('pick-camera').onchange = (e) => this.onPick(e.target);
     $('pick-photo').onchange = (e) => this.onPick(e.target);
     $('pick-file').onchange = (e) => this.onPick(e.target);

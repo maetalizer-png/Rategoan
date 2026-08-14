@@ -2,11 +2,12 @@ import { $ } from '../utils/dom.js';
 import { auth } from '../state/auth.js';
 import { toast } from '../core/toast.js';
 import { streakStore } from '../../raget-memory/streak-store.js';
+import { ic } from '../utils/icons.js';
 
 const STEPS = [
-  { icon: '🧮', title: 'Hitung', desc: 'Ketik "hitung 12*8" — Raget langsung jawab 96, tanpa kalkulator lain.' },
-  { icon: '⏰', title: 'Pengingat', desc: 'Ketik "ingatkan saya jam 5 sore beli kopi" — Raget yang ingat, bukan kamu.' },
-  { icon: '🔍', title: 'Cari', desc: 'Ketik "cari ide konten di semua sumber" — Raget telusuri semua catatanmu.' },
+  { icon: 'calculator', title: 'Hitung', desc: 'Ketik "hitung 12*8" — Raget langsung jawab 96, tanpa kalkulator lain.' },
+  { icon: 'alarm', title: 'Pengingat', desc: 'Ketik "ingatkan saya jam 5 sore beli kopi" — Raget yang ingat, bukan kamu.' },
+  { icon: 'search', title: 'Cari', desc: 'Ketik "cari ide konten di semua sumber" — Raget telusuri semua catatanmu.' },
 ];
 
 let stepIndex = 0;
@@ -23,7 +24,8 @@ function renderStep() {
   list.innerHTML = '';
   const item = document.createElement('div');
   item.className = 'onboard-item';
-  item.textContent = s.icon + ' ' + s.title + ' — ' + s.desc;
+  item.innerHTML = ic(s.icon);
+  item.appendChild(document.createTextNode(' ' + s.title + ' — ' + s.desc));
   const progress = document.createElement('div');
   progress.className = 'onboard-item';
   progress.style.textAlign = 'center';
@@ -39,7 +41,7 @@ function finish() {
   const ov = $('onboard-overlay');
   if (ov) ov.hidden = true;
   const streak = streakStore.bump();
-  toast.show('Siap! 🔥 Streak hari ini: ' + streak);
+  toast.show('Siap! Streak hari ini: ' + streak);
 }
 
 export const onboard = {

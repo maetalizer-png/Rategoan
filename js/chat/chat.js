@@ -9,14 +9,15 @@ import { toast } from '../core/toast.js';
 import { voice } from './voice.js';
 import { ai } from '../ai/ai.js';
 import { tts } from '../state/tts.js';
+import { ic } from '../utils/icons.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
 const CHIPS_BY_PERIOD = {
   pagi: ['Ringkas hari saya', 'Apa ibukota Indonesia', 'Ide konten produktif'],
-  siang: ['Kuis', 'Ringkas hari saya', 'Jelaskan sesuatu'],
+  siang: ['Apa makanan khas Turki', 'Ringkas hari saya', 'Jelaskan sesuatu'],
   sore: ['Ide konten', 'Manfaat olahraga', 'Cara membuat kopi'],
-  malam: ['Ceritakan tentang Jepang', 'Kuis', 'Ringkas percakapan'],
+  malam: ['Ceritakan tentang Jepang', 'Ingatkan saya 30 menit lagi', 'Ringkas percakapan'],
 };
 
 function periodOfDay() {
@@ -38,11 +39,16 @@ function applySmartChips() {
   });
 }
 
-function buildExtraChip(label, onClick) {
+function buildExtraChip(label, onClick, iconName) {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'msg-action-btn';
-  btn.textContent = label;
+  if (iconName) {
+    btn.innerHTML = ic(iconName);
+    btn.appendChild(document.createTextNode(' ' + label));
+  } else {
+    btn.textContent = label;
+  }
   btn.onclick = onClick;
   return btn;
 }
@@ -86,7 +92,7 @@ function buildActions(text) {
   const copyBtn = document.createElement('button');
   copyBtn.type = 'button';
   copyBtn.className = 'msg-action-btn';
-  copyBtn.textContent = '⧉ Salin';
+  copyBtn.innerHTML = ic('copy') + ' Salin';
   copyBtn.onclick = () => {
     copy(text)
       .then(() => toast.show('Disalin'))
@@ -96,13 +102,13 @@ function buildActions(text) {
   const speakBtn = document.createElement('button');
   speakBtn.type = 'button';
   speakBtn.className = 'msg-action-btn';
-  speakBtn.textContent = '🔊 Baca';
+  speakBtn.innerHTML = ic('speaker') + ' Baca';
   speakBtn.onclick = () => voice.speak(text);
 
   const shareBtn = document.createElement('button');
   shareBtn.type = 'button';
   shareBtn.className = 'msg-action-btn';
-  shareBtn.textContent = '↗ Bagikan';
+  shareBtn.innerHTML = ic('share') + ' Bagikan';
   shareBtn.onclick = () => {
     if (navigator.share) {
       navigator.share({ text }).catch(() => {});
@@ -182,7 +188,8 @@ export const chat = {
         }
         const a = document.createElement('span');
         a.className = 'msg-attach';
-        a.textContent = '📎 ' + m.attach.name;
+        a.innerHTML = ic('paperclip');
+        a.appendChild(document.createTextNode(m.attach.name));
         d.appendChild(a);
       }
       const tm = document.createElement('span');
@@ -192,13 +199,13 @@ export const chat = {
       if (m.role === 'user' && m.attach && m.attach.full) {
         const row = document.createElement('div');
         row.className = 'msg-actions';
-        row.appendChild(buildExtraChip('🔍 Baca Gambar Ini', () => fillComposer('baca foto ini')));
+        row.appendChild(buildExtraChip('Baca Gambar Ini', () => fillComposer('baca foto ini'), 'search'));
         d.appendChild(row);
       }
       if (m.role !== 'user') {
         const actions = buildActions(m.text);
         if (URL_RE.test(m.text)) {
-          actions.appendChild(buildExtraChip('🌐 Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0])));
+          actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0]), 'globe'));
         }
         detectQuickChips(m.text).slice(0, 2).forEach((label) => {
           actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
@@ -230,7 +237,7 @@ export const chat = {
     body.innerHTML = markdown.render(text);
     const actions = buildActions(text);
     if (URL_RE.test(text)) {
-      actions.appendChild(buildExtraChip('🌐 Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0])));
+      actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0]), 'globe'));
     }
     detectQuickChips(text).slice(0, 2).forEach((label) => {
       actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
