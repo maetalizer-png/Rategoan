@@ -27,6 +27,9 @@ import { settings } from './account/settings.js';
 import { login } from './account/login.js';
 import { reminderScheduler } from '../reminders/scheduler.js';
 import { toast } from './core/toast.js';
+import { dailyBriefing } from '../ai-agent/daily-briefing.js';
+
+const BRIEFING_DATE_KEY = 'raget_briefing_date';
 
 document.addEventListener('DOMContentLoaded', () => {
   store.init();
@@ -58,6 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
   login.bind();
   onboard.maybeShow();
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
+  if (auth.state) {
+    try {
+      const todayKey = new Date().toDateString();
+      if (localStorage.getItem(BRIEFING_DATE_KEY) !== todayKey) {
+        localStorage.setItem(BRIEFING_DATE_KEY, todayKey);
+        toast.show(dailyBriefing.message());
+      }
+    } catch (e) {}
+  }
   try {
     const params = new URLSearchParams(location.search);
     const share = params.get('shareText');

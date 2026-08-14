@@ -8,6 +8,7 @@ import { scrolldown } from '../ui/scrolldown.js';
 import { toast } from '../core/toast.js';
 import { voice } from './voice.js';
 import { ai } from '../ai/ai.js';
+import { tts } from '../state/tts.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
@@ -196,7 +197,7 @@ export const chat = {
     if (reply == null) return null;
     s.messages.push({ role: 'ai', text: reply, time: Date.now() });
     await this.typeReply(reply, !scrolldown.isFar());
-    voice.speak(reply);
+    if (tts.enabled()) voice.speak(reply);
     return reply;
   },
 };

@@ -10,9 +10,10 @@ import { pdfStore } from '../pdf/pdf-store.js';
 import { notionStore } from '../notion/notion-store.js';
 import { evernoteStore } from '../evernote/evernote-store.js';
 import { whatsappStore } from '../whatsapp/whatsapp-store.js';
-import { meaningfulWords, pickVariant } from '../utils/text.js';
+import { meaningfulWords, pickVariant, hashText } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
+import { dailyBriefing } from './daily-briefing.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -218,6 +219,27 @@ function ide(topic) {
     items.push(IDE_POOL[(start + i) % IDE_POOL.length](t));
   }
   return formatter.blocks([formatter.h('Ide Konten', 3), formatter.numbered(items)]);
+}
+
+const MANFAAT_POOL = [
+  (t) => 'Membantu meningkatkan kualitas hidup yang berkaitan dengan ' + t + '.',
+  (t) => 'Bisa jadi kebiasaan positif dengan dampak baik dalam jangka panjang untuk ' + t + '.',
+  (t) => 'Memberi manfaat nyata bila dilakukan secara konsisten terkait ' + t + '.',
+  (t) => 'Membantu menjaga keseimbangan fisik maupun mental sehubungan dengan ' + t + '.',
+  (t) => 'Menambah pengalaman dan wawasan baru seputar ' + t + '.',
+  (t) => 'Bisa mempererat hubungan sosial kalau dilakukan bersama orang lain, tergantung konteks ' + t + '.',
+];
+
+function manfaat(topic) {
+  const t = String(topic || '').trim() || 'hal ini';
+  const h = hashText(t);
+  const count = 3 + (h % 3);
+  const start = h % MANFAAT_POOL.length;
+  const items = [];
+  for (let i = 0; i < count; i++) {
+    items.push(MANFAAT_POOL[(start + i) % MANFAAT_POOL.length](t));
+  }
+  return formatter.blocks([formatter.h('Manfaat ' + t.charAt(0).toUpperCase() + t.slice(1), 3), formatter.bullets(items)]);
 }
 
 function genericComparisonPoints(t) {
@@ -492,6 +514,18 @@ function shareToWhatsApp(session) {
   return 'Membuka WhatsApp dengan isi percakapan siap dibagikan.';
 }
 
+async function ringkasHari() {
+  const events = dailyBriefing.eventsToday();
+  const reminders = dailyBriefing.remindersToday();
+  const notes = (await ragetDb.allNotes()).slice(-3);
+  const items = [];
+  events.forEach((e) => items.push('Acara: ' + e.summary));
+  reminders.forEach((r) => items.push('Pengingat: ' + r.action));
+  notes.forEach((n) => items.push('Catatan: ' + n.question));
+  if (!items.length) items.push('Belum ada acara, pengingat, atau catatan untuk hari ini.');
+  return formatter.formatByType('daftar', { title: 'Ringkasan Hari Ini', items });
+}
+
 async function eksporLog() {
   const notes = await ragetDb.allNotes();
   const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
@@ -518,10 +552,12 @@ export const agentTools = Object.freeze({
   jelaskan,
   cara,
   ide,
+  manfaat,
   bandingkan,
   kelebihanKekurangan,
   laporanOtak,
   exportChat,
   shareToWhatsApp,
   cariSemua,
+  ringkasHari,
 });

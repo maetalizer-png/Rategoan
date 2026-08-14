@@ -42,3 +42,20 @@ export function detectTone(text) {
   if (/\b(lu|elu|gw|gue|bro|kak|cuy|bang)\b/.test(t)) return 'casual';
   return 'neutral';
 }
+
+const MOOD_LEXICON = {
+  sedih: /\b(sedih|nangis|menangis|kecewa|patah\s*hati|galau)\b/,
+  capek: /\b(capek|cape|lelah|penat|ngantuk\s+banget|kecapean)\b/,
+  marah: /\b(marah|kesel|kesal|emosi|bete|jengkel)\b/,
+  senang: /\b(senang|seneng|bahagia|gembira|happy|excited)\b/,
+  bosan: /\b(bosan|bosen|jenuh|garing)\b/,
+};
+
+export function detectMood(text) {
+  const t = String(text || '').toLowerCase();
+  const keys = Object.keys(MOOD_LEXICON);
+  for (let i = 0; i < keys.length; i++) {
+    if (MOOD_LEXICON[keys[i]].test(t)) return keys[i];
+  }
+  return null;
+}
