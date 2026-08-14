@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jalanin — Jelajah Dunia Offline</title>
+  <meta name="theme-color" content="#0b6e4f">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="jl-header">
+    <img src="./icon.svg" alt="" class="jl-logo">
+    <h1>Jalanin</h1>
+  </header>
+
+  <nav class="jl-tabs">
+    <button class="jl-tab active" data-view="jelajah">🌍 Jelajah</button>
+    <button class="jl-tab" data-view="kuis">🎯 Tebak Dunia</button>
+    <button class="jl-tab" data-view="sapaan">👋 Sapaan</button>
+  </nav>
+
+  <main class="jl-main">
+    <section id="jl-view-jelajah" class="jl-view">
+      <input id="jl-search" class="jl-search" type="search" placeholder="Cari negara... (mis. Jepang, Brasil)">
+      <div id="jl-results" class="jl-results"></div>
+    </section>
+
+    <section id="jl-view-kuis" class="jl-view" hidden>
+      <div id="jl-quiz-box" class="jl-quiz-box"></div>
+    </section>
+
+    <section id="jl-view-sapaan" class="jl-view" hidden>
+      <div id="jl-flash-box" class="jl-flash-box"></div>
+      <button id="jl-flash-next" class="jl-btn jl-flash-next">Kartu Berikutnya ➜</button>
+    </section>
+  </main>
+
+  <footer class="jl-footer">100% offline · data dari Rategoan Dataries</footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
