@@ -267,6 +267,16 @@ async function tryFactoid(text, messages) {
   return pickVariant('factoid', FACTOID_TEMPLATES, subject)(found.answer);
 }
 
+function detectAnswerType(text) {
+  const t = text.trim().toLowerCase();
+  if (/^apa\s*itu\b/.test(t)) return 'definisi';
+  if (/\b(sebutkan|ide|manfaat)\b/.test(t)) return 'daftar';
+  if (/\b(cara|langkah)\b/.test(t)) return 'prosedur';
+  if (/\bbandingkan\b/.test(t)) return 'perbandingan';
+  if (/^(berapa|hitung)\b/.test(t)) return 'matematika';
+  return 'terbuka';
+}
+
 function personalize(reply, text) {
   const isGreetingLike = /^(halo|hai|hi|hey|selamat|met|good|assalamu)/i.test(text.trim());
   const nama = memoryLong.recall('nama');
@@ -408,7 +418,7 @@ async function respond(messages, prompt) {
     }
   }
 
-  ragetDb.addNote(text, reply, null, 'chat');
+  ragetDb.addNote(text, reply, null, 'chat_' + detectAnswerType(text));
   return reply;
 }
 

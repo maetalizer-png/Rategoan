@@ -78,5 +78,33 @@
   {
     "q": "Ringkas: rapat membahas anggaran tahunan, evaluasi tim, dan rencana ekspansi ke kota baru.",
     "a": "### Ringkasan\n- Anggaran tahunan dibahas sebagai agenda utama.\n- Evaluasi kinerja tim turut disampaikan.\n- Rencana ekspansi ke kota baru mulai dipersiapkan.\n\nIntinya: rapat berfokus pada anggaran, evaluasi tim, dan ekspansi ke kota baru."
+  },
+  {
+    "q": "Apa itu TF-IDF",
+    "a": "TF-IDF adalah cara mengukur seberapa penting sebuah kata dalam dokumen dibanding koleksi dokumen lain, dengan menggabungkan frekuensi kata dan kelangkaannya."
+  },
+  {
+    "q": "Sebutkan manfaat memakai bahasa pemrograman modular",
+    "a": "### Manfaat Modular\n- Kode lebih mudah dibaca karena terbagi per tanggung jawab.\n- Lebih gampang diuji tiap bagian secara terpisah.\n- Perubahan di satu modul tidak mudah merusak modul lain.\n- Tim bisa bekerja paralel di modul berbeda."
+  },
+  {
+    "q": "Cara kerja mesin pencari sederhana",
+    "a": "### Langkah\n1. Kumpulkan dan bersihkan teks dokumen (tokenisasi).\n2. Hitung bobot tiap kata dengan TF-IDF.\n3. Ubah query jadi vektor kata yang sama.\n4. Bandingkan vektor query dan dokumen pakai cosinus similarity.\n5. Urutkan hasil dari skor tertinggi ke terendah."
+  },
+  {
+    "q": "Bandingkan template engine dan model bahasa (LLM)",
+    "a": "### Template Engine\n- Balasan berasal dari pola dan aturan yang ditulis manusia.\n- Cepat, ringan, dan hasilnya bisa diprediksi.\n\n### Model Bahasa (LLM)\n- Balasan dihasilkan dari probabilitas kata berdasarkan pelatihan data besar.\n- Lebih luwes tapi butuh sumber daya komputasi besar.\n\nIntinya: template engine cocok untuk kebutuhan ringan dan deterministik, LLM cocok untuk percakapan luas dan fleksibel."
+  },
+  {
+    "q": "Berapa hasil dari cosinus similarity dua vektor yang identik",
+    "a": "Hasilnya 1 — karena sudut antara dua vektor yang identik adalah nol, dan cosinus dari sudut nol adalah 1."
+  },
+  {
+    "q": "Ceritakan tentang perkembangan AI lokal tanpa server",
+    "a": "### AI Lokal Tanpa Server\n- Semua pemrosesan berjalan di perangkat pengguna, bukan di cloud.\n- Data tetap privat karena tidak pernah dikirim keluar perangkat.\n- Cocok untuk aplikasi yang mengutamakan privasi dan kecepatan tanpa jaringan.\n\nIntinya: AI lokal menawarkan privasi dan kecepatan dengan trade-off kemampuan yang lebih terbatas dibanding model cloud besar."
+  },
+  {
+    "q": "Apa itu vertical AI",
+    "a": "Vertical AI adalah pendekatan membangun AI yang fokus mendalam pada satu domain atau industri tertentu, alih-alih mencoba menjadi asisten serba bisa untuk semua kebutuhan."
   }
 ]
