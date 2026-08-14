@@ -14,16 +14,46 @@ function scoreCorpus(queryTokens, corpus, textOf) {
   }));
 }
 
+const CACHE_LIMIT = 50;
+const cache = new Map();
+let cacheHits = 0;
+let cacheMisses = 0;
+
+function cacheKey(query, corpus, threshold, limit) {
+  return query + '|' + corpus.length + '|' + threshold + '|' + limit;
+}
+
 function rank(query, corpus, options) {
   const opts = options || {};
-  const queryTokens = scorer.tokenize(query);
-  if (!queryTokens.length || !corpus.length) return [];
-  const scored = scoreCorpus(queryTokens, corpus, opts.textOf);
+  if (!corpus.length) return [];
   const threshold = opts.threshold != null ? opts.threshold : LIST_THRESHOLD;
-  return scored
-    .filter((s) => s.score >= threshold)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, opts.limit || 10);
+  const limit = opts.limit || 10;
+  const key = cacheKey(query, corpus, threshold, limit);
+  if (cache.has(key)) {
+    cacheHits++;
+    const hit = cache.get(key);
+    cache.delete(key);
+    cache.set(key, hit);
+    return hit;
+  }
+  cacheMisses++;
+  const queryTokens = scorer.tokenize(query);
+  const result = queryTokens.length
+    ? scoreCorpus(queryTokens, corpus, opts.textOf)
+        .filter((s) => s.score >= threshold)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit)
+    : [];
+  cache.set(key, result);
+  if (cache.size > CACHE_LIMIT) {
+    cache.delete(cache.keys().next().value);
+  }
+  return result;
+}
+
+function cacheStats() {
+  const total = cacheHits + cacheMisses;
+  return { hits: cacheHits, misses: cacheMisses, hitRate: total ? cacheHits / total : 0 };
 }
 
 function best(query, corpus, options) {
@@ -34,6 +64,7 @@ function best(query, corpus, options) {
 export const retrieval = Object.freeze({
   rank,
   best,
+  cacheStats,
   AUGMENT_THRESHOLD,
   LIST_THRESHOLD,
 });

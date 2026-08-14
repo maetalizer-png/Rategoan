@@ -13,17 +13,7 @@ import { reminderScheduler } from '../reminders/scheduler.js';
 import { emailComposer } from '../email/composer.js';
 import { icsParser } from '../calendar/ics-parser.js';
 import { calendarStore } from '../calendar/calendar-store.js';
-import { ocrReader } from '../ocr/reader.js';
-import { pdfReader } from '../pdf/reader.js';
-import { pdfStore } from '../pdf/pdf-store.js';
-import { notionImporter } from '../notion/importer.js';
-import { notionStore } from '../notion/notion-store.js';
-import { evernoteImporter } from '../evernote/importer.js';
-import { evernoteStore } from '../evernote/evernote-store.js';
-import { whatsappImporter } from '../whatsapp/importer.js';
-import { whatsappStore } from '../whatsapp/whatsapp-store.js';
-import { chunker } from '../vault/chunk.js';
-import { translator } from '../translate/translator.js';
+import { lazyModules } from './lazy-modules.js';
 import { pickVariant, hashText, detectTone, detectMood } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
@@ -208,9 +198,12 @@ async function tryPdfImport(messages) {
   const last = list[list.length - 1];
   const att = last && last.attach;
   if (!att || !att.fileBinary || !/\.pdf$/i.test(att.name || '')) return null;
+  const pdfReader = await lazyModules.getPdfReader();
   const result = await pdfReader.parsePDF(att.fileBinary);
   if (!result.ok) return result.message;
+  const chunker = await lazyModules.getChunker();
   const parts = chunker.chunkText(result.text, 1500);
+  const pdfStore = await lazyModules.getPdfStore();
   const count = await pdfStore.addAll(parts.map((t) => ({ title: att.name, text: t })), { source: 'pdf', fileName: att.name });
   return 'Berhasil impor PDF "' + att.name + '" (' + result.pages + ' halaman, ' + count + ' bagian tersimpan).';
 }
@@ -220,9 +213,11 @@ async function tryNotionImport(messages) {
   const last = list[list.length - 1];
   const att = last && last.attach;
   if (!att || !att.fileBinary || !/\.zip$/i.test(att.name || '')) return null;
+  const notionImporter = await lazyModules.getNotionImporter();
   const result = await notionImporter.importZip(att.fileBinary);
   if (!result.ok) return result.message;
   if (!result.chunks.length) return 'File ZIP dibaca tapi tidak ditemukan halaman Notion (.html/.md) di dalamnya.';
+  const notionStore = await lazyModules.getNotionStore();
   const count = await notionStore.addAll(result.chunks, { source: 'notion' });
   return 'Berhasil impor ' + count + ' halaman Notion dari "' + att.name + '".';
 }
@@ -232,8 +227,10 @@ async function tryEvernoteImport(messages) {
   const last = list[list.length - 1];
   const att = last && last.attach;
   if (!att || !att.fileText || !/\.enex$/i.test(att.name || '')) return null;
+  const evernoteImporter = await lazyModules.getEvernoteImporter();
   const result = evernoteImporter.importENEX(att.fileText);
   if (!result.ok) return result.message;
+  const evernoteStore = await lazyModules.getEvernoteStore();
   const count = await evernoteStore.addAll(result.chunks, { source: 'evernote' });
   return 'Berhasil impor ' + count + ' catatan Evernote dari "' + att.name + '".';
 }
@@ -243,8 +240,10 @@ async function tryWhatsappImport(messages) {
   const last = list[list.length - 1];
   const att = last && last.attach;
   if (!att || !att.fileText || !/\.txt$/i.test(att.name || '')) return null;
+  const whatsappImporter = await lazyModules.getWhatsappImporter();
   const result = whatsappImporter.importWhatsApp(att.fileText);
   if (!result.ok) return result.message;
+  const whatsappStore = await lazyModules.getWhatsappStore();
   const count = await whatsappStore.addAll(result.chunks, { source: 'whatsapp' });
   return 'Berhasil impor riwayat WhatsApp "' + att.name + '" (' + result.messageCount + ' pesan, ' + count + ' bagian tersimpan).';
 }
@@ -284,6 +283,7 @@ async function tryOCR(text, messages) {
   if (!att || !att.full) return null;
   if (!OCR_TRIGGER_RE.test(text)) return null;
 
+  const ocrReader = await lazyModules.getOcrReader();
   const result = await ocrReader.recognize(att.full);
   if (!result.ok) return result.message;
 
@@ -309,11 +309,13 @@ async function tryTranslate(text) {
   if (m) {
     const content = m[1];
     const lang = LANG_NAME_MAP[m[2].toLowerCase()] || m[2].toLowerCase();
+    const translator = await lazyModules.getTranslator();
     const result = await translator.translate(content, lang);
     return result.ok ? 'Terjemahan: ' + result.text : result.message;
   }
   const m2 = text.match(/apa\s+bahasa\s+inggrisnya\s+(.+)$/i);
   if (m2) {
+    const translator = await lazyModules.getTranslator();
     const result = await translator.translate(m2[1], 'en');
     return result.ok ? '"' + m2[1] + '" dalam bahasa Inggris: ' + result.text : result.message;
   }

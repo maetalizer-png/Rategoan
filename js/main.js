@@ -28,8 +28,10 @@ import { login } from './account/login.js';
 import { reminderScheduler } from '../reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dailyBriefing } from '../ai-agent/daily-briefing.js';
+import { dataries } from '../dataries/index.js';
 
 const BRIEFING_DATE_KEY = 'raget_briefing_date';
+const bootStart = performance.now();
 
 document.addEventListener('DOMContentLoaded', () => {
   store.init();
@@ -85,6 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch (e) {}
   if (window.visualViewport) {
     visualViewport.addEventListener('resize', () => setTimeout(scrollBottom, 100));
+  }
+  try {
+    localStorage.setItem('raget_boot_ms', String(Math.round(performance.now() - bootStart)));
+  } catch (e) {}
+  const warmup = () => {
+    dataries.loadRegion('country', 'asian-tenggara').catch(() => {});
+    dataries.loadRegion('country', 'eropan-barat').catch(() => {});
+  };
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(warmup, { timeout: 3000 });
+  } else {
+    setTimeout(warmup, 1500);
   }
 });
 

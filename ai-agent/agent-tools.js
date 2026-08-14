@@ -6,10 +6,7 @@ import { exportFormats } from '../export/formats.js';
 import { exportShare } from '../export/share.js';
 import { remindersStore } from '../reminders/reminders-store.js';
 import { calendarStore } from '../calendar/calendar-store.js';
-import { pdfStore } from '../pdf/pdf-store.js';
-import { notionStore } from '../notion/notion-store.js';
-import { evernoteStore } from '../evernote/evernote-store.js';
-import { whatsappStore } from '../whatsapp/whatsapp-store.js';
+import { lazyModules } from './lazy-modules.js';
 import { meaningfulWords, pickVariant, hashText } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
@@ -388,15 +385,19 @@ async function cariSemua(query) {
   const calendarResults = calendarStore.eventsBetween(0, Date.now() + 365 * 24 * 60 * 60 * 1000).filter((e) => words.some((w) => (e.summary || '').toLowerCase().includes(w)));
   if (calendarResults.length) groups.push({ source: 'Kalender', items: calendarResults.map((e) => e.summary + ' (' + new Date(e.start).toLocaleString('id-ID') + ')') });
 
+  const pdfStore = await lazyModules.getPdfStore();
   const pdfResults = await pdfStore.search(q, 5);
   if (pdfResults.length) groups.push({ source: 'PDF', items: pdfResults.map((r) => (r.title || 'PDF') + ' — ' + r.text.slice(0, 80)) });
 
+  const notionStore = await lazyModules.getNotionStore();
   const notionResults = await notionStore.search(q, 5);
   if (notionResults.length) groups.push({ source: 'Notion', items: notionResults.map((r) => (r.title || 'Notion') + ' — ' + r.text.slice(0, 80)) });
 
+  const evernoteStore = await lazyModules.getEvernoteStore();
   const evernoteResults = await evernoteStore.search(q, 5);
   if (evernoteResults.length) groups.push({ source: 'Evernote', items: evernoteResults.map((r) => (r.title || 'Evernote') + ' — ' + r.text.slice(0, 80)) });
 
+  const whatsappStore = await lazyModules.getWhatsappStore();
   const whatsappResults = await whatsappStore.search(q, 5);
   if (whatsappResults.length) groups.push({ source: 'WhatsApp', items: whatsappResults.map((r) => r.text.slice(0, 80)) });
 
