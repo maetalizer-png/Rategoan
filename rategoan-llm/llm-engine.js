@@ -1,4 +1,4 @@
-import { hashText, pickVariant } from '../utils/text.js';
+import { hashText, pickVariant, detectTone } from '../utils/text.js';
 
 const FALLBACK_TEXT = 'Maaf, saya belum paham. Coba ulangi dengan kata lain?';
 const GENERIC_PREFIX = 'Saya catat:';
@@ -119,13 +119,6 @@ function lastTopic(context) {
   return priorUsers[priorUsers.length - 2].text.slice(0, 60);
 }
 
-function detectTone(text) {
-  const t = String(text || '').toLowerCase();
-  if (/\banda\b/.test(t)) return 'formal';
-  if (/\b(lu|elu|gw|gue|bro|kak|cuy|bang)\b/.test(t)) return 'casual';
-  return 'neutral';
-}
-
 function matchSmalltalk(text, options) {
   const entry = SMALLTALK.find((s) => s.re.test(text));
   if (!entry) return null;
@@ -164,19 +157,12 @@ function replyPlainGreeting(text, options) {
   return maybeFollowUp(reply, FOLLOWUPS.greeting);
 }
 
-function replyQuestion(prompt, context) {
-  const topic = lastTopic(context);
+function replyQuestion(prompt) {
   const echo = prompt.replace(/\?+$/, '').trim();
-  const templates =
-    topic && topic !== echo
-      ? [
-          'Menurutmu bagaimana kaitannya dengan "' + topic + '"? Boleh dijelaskan sedikit lebih detail soal "' + echo + '"?',
-          'Melanjutkan dari "' + topic + '", soal "' + echo + '" — bisa ceritakan konteksnya supaya saya bisa bantu lebih tepat?',
-        ]
-      : [
-          'Pertanyaan menarik soal "' + echo + '". Bisa ceritakan konteksnya sedikit lagi supaya jawaban saya lebih pas?',
-          'Soal "' + echo + '", saya perlu sedikit info tambahan dulu — apa yang sudah kamu ketahui soal ini?',
-        ];
+  const templates = [
+    'Pertanyaan menarik soal "' + echo + '". Bisa ceritakan konteksnya sedikit lagi supaya jawaban saya lebih pas?',
+    'Soal "' + echo + '", saya perlu sedikit info tambahan dulu — apa yang sudah kamu ketahui soal ini?',
+  ];
   return pickVariant('question', templates, prompt);
 }
 
@@ -261,7 +247,7 @@ function craft(prompt, context, options) {
   const smalltalk = matchSmalltalk(text, opts) || matchSmalltalk(normalizeSlang(text), opts);
   if (smalltalk) return smalltalk;
 
-  if (isQuestion(text)) return replyQuestion(text, context);
+  if (isQuestion(text)) return replyQuestion(text);
   return replyGeneric(text, context);
 }
 

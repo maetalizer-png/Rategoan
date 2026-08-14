@@ -35,3 +35,10 @@ export function meaningfulWords(text) {
     .filter(Boolean)
     .filter((w) => w.length > 2 && !STOPWORDS.has(w));
 }
+
+export function detectTone(text) {
+  const t = String(text || '').toLowerCase();
+  if (/\banda\b/.test(t)) return 'formal';
+  if (/\b(lu|elu|gw|gue|bro|kak|cuy|bang)\b/.test(t)) return 'casual';
+  return 'neutral';
+}

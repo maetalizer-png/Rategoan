@@ -26,6 +26,7 @@ import { chunker } from '../vault/chunk.js';
 import { translator } from '../translate/translator.js';
 import { pickVariant, hashText } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
+import { planner } from './planner.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -652,21 +653,30 @@ async function respond(messages, prompt) {
 
   const persona = await loadPersona();
   const shortContext = memoryShort.recent(messages, 10);
-  let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name });
 
-  if (llmEngine.isWeak(raw)) {
-    const fewshot = await loadFewshot();
-    const example = matchFewshot(fewshot, text);
-    if (example && example.a) raw = example.a;
+  const preSearch = await memoryIndex.search(text, 5);
+  const plannedFallback = planner.planFallback(text, preSearch);
+
+  let reply;
+  if (plannedFallback) {
+    reply = postProcess(plannedFallback);
+    reply = personalize(reply, text);
+  } else {
+    let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name });
+
+    if (llmEngine.isWeak(raw)) {
+      const fewshot = await loadFewshot();
+      const example = matchFewshot(fewshot, text);
+      if (example && example.a) raw = example.a;
+    }
+
+    reply = postProcess(raw);
+    reply = personalize(reply, text);
   }
 
-  let reply = postProcess(raw);
-  reply = personalize(reply, text);
-
-  if (!isClarifyReply(reply)) {
-    const relevant = await memoryIndex.search(text, 5);
+  if (!plannedFallback && !isClarifyReply(reply)) {
     const queryTokens = scorer.tokenize(text);
-    const scored = relevant
+    const scored = preSearch
       .filter((r) => !tooSimilar(text, r.text))
       .map((r) => {
         const noteTokens = scorer.tokenize(r.text);
