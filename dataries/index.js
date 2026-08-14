@@ -1,6 +1,6 @@
 export const REGIONS = Object.freeze({
   country: [
-    { id: 'african-barat', file: './country/african-barat.js', names: ['nigeria', 'ghana', 'pantai gading', 'senegal', 'mali', 'kamerun'] },
+    { id: 'african-barat', file: './country/african-barat.js', names: ['nigeria', 'ghana', 'pantai gading', 'senegal', 'mali'] },
     { id: 'african-selatan', file: './country/african-selatan.js', names: ['afrika selatan', 'namibia', 'botswana', 'zambia', 'zimbabwe', 'eswatini', 'lesotho', 'mozambik'] },
     { id: 'african-tengah', file: './country/african-tengah.js', names: ['kongo', 'angola', 'gabon', 'chad', 'republik afrika tengah', 'guinea khatulistiwa', 'sao tome dan principe'] },
     { id: 'african-timur', file: './country/african-timur.js', names: ['etiopia', 'kenya', 'tanzania', 'uganda', 'somalia', 'rwanda', 'madagaskar', 'eritrea', 'djibouti', 'sudan selatan', 'burundi', 'malawi'] },
@@ -16,8 +16,8 @@ export const REGIONS = Object.freeze({
     { id: 'asian-timur', file: './country/asian-timur.js', names: ['china', 'jepang', 'korea selatan', 'taiwan', 'mongolia', 'hong kong', 'makau', 'tibet'] },
     { id: 'eropan-barat', file: './country/eropan-barat.js', names: ['jerman', 'prancis', 'inggris', 'belanda', 'belgia', 'swiss', 'austria', 'irlandia'] },
     { id: 'eropan-selatan', file: './country/eropan-selatan.js', names: ['italia', 'spanyol', 'portugal', 'yunani', 'kroasia', 'slovenia', 'malta', 'san marino'] },
-    { id: 'eropan-tengah', file: './country/eropan-tengah.js', names: ['polandia', 'ceko', 'hungaria', 'slowakia', 'austria', 'swiss'] },
-    { id: 'eropan-timur', file: './country/eropan-timur.js', names: ['rusia', 'ukraina', 'polandia', 'rumania', 'ceko', 'hungaria', 'belarus', 'bulgaria', 'slowakia', 'moldova'] },
+    { id: 'eropan-tengah', file: './country/eropan-tengah.js', names: ['polandia', 'ceko', 'hungaria', 'slowakia'] },
+    { id: 'eropan-timur', file: './country/eropan-timur.js', names: ['rusia', 'ukraina', 'rumania', 'belarus', 'bulgaria', 'moldova'] },
     { id: 'eropan-utara', file: './country/eropan-utara.js', names: ['norwegia', 'swedia', 'finlandia', 'denmark', 'islandia', 'estonia', 'latvia', 'lithuania'] },
     { id: 'osenian', file: './country/osenian.js', names: ['australia', 'selandia baru', 'fiji', 'papua new guinea', 'kepulauan solomon', 'vanuatu', 'samoa', 'tonga', 'kepulauan marshall'] },
   ],
@@ -170,7 +170,9 @@ async function loadRegion(group, id) {
 function findRegionsByName(group, name) {
   const n = String(name || '').toLowerCase().trim();
   if (!n) return [];
-  return (REGIONS[group] || []).filter((r) => r.names.some((candidate) => candidate === n || n.includes(candidate) || candidate.includes(n)));
+  return (REGIONS[group] || []).filter((r) =>
+    r.names.some((candidate) => candidate === n || (n.length >= 3 && candidate.length >= 3 && (n.includes(candidate) || candidate.includes(n))))
+  );
 }
 
 async function loadAll(group) {

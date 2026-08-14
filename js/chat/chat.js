@@ -220,11 +220,11 @@ export const chat = {
     d.appendChild(body);
     d.appendChild(tm);
     $('messages').appendChild(d);
-    if (follow && !reduceMotion()) {
-      for (let i = 0; i < text.length; i += 3) {
-        body.innerHTML = markdown.render(text.slice(0, i + 3));
+    if (follow && !reduceMotion() && text.length > 140) {
+      for (let i = 0; i < text.length; i += 6) {
+        body.innerHTML = markdown.render(text.slice(0, i + 6));
         scrollBottom();
-        await sleep(12);
+        await sleep(8);
       }
     }
     body.innerHTML = markdown.render(text);

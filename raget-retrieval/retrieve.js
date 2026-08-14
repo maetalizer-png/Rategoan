@@ -20,8 +20,16 @@ const cache = new Map();
 let cacheHits = 0;
 let cacheMisses = 0;
 
+function normalizeCacheKey(query) {
+  return String(query || '')
+    .toLowerCase()
+    .replace(/[.,!?;:'"()\[\]{}]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function cacheKey(query, corpus, threshold, limit) {
-  return query + '|' + corpus.length + '|' + threshold + '|' + limit;
+  return normalizeCacheKey(query) + '|' + corpus.length + '|' + threshold + '|' + limit;
 }
 
 function rank(query, corpus, options) {

@@ -10,7 +10,7 @@ const RELATIONS = [
   { keys: ['jumlah provinsi', 'berapa provinsi', 'provinsi'], fields: ['administrativeDivisions', 'totalProvinces'] },
   { keys: ['kabupaten'], fields: ['kabupaten'] },
   { keys: ['kota'], fields: ['totalCities'] },
-  { keys: ['populasi', 'penduduk'], fields: ['population'] },
+  { keys: ['populasi', 'penduduk', 'pendudukan'], fields: ['population'] },
   { keys: ['mata uang'], fields: ['currency'] },
   { keys: ['bahasa'], fields: ['languages'] },
   { keys: ['pemerintahan'], fields: ['governmentType'] },
@@ -19,7 +19,33 @@ const RELATIONS = [
   { keys: ['kode telepon', 'kode telpon'], fields: ['phoneCode'] },
 ];
 
-const FACTOID_OPENERS = ['', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, ', 'Berdasarkan catatan saya, ', 'Kalau tidak salah, '];
+const FACTOID_OPENERS = [
+  '', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, ', 'Berdasarkan catatan saya, ', 'Kalau tidak salah, ',
+  'Setahu saya sih, ', 'Kalau nggak salah ingat, ', 'Dari yang saya tahu, ',
+];
+
+const REGION_LABELS = {
+  'african-barat': 'Afrika Barat',
+  'african-selatan': 'Afrika Selatan',
+  'african-tengah': 'Afrika Tengah',
+  'african-timur': 'Afrika Timur',
+  'african-utara': 'Afrika Utara',
+  'american-karibia': 'Karibia',
+  'american-selatan': 'Amerika Selatan',
+  'american-tengah': 'Amerika Tengah',
+  'american-utara': 'Amerika Utara',
+  'asian-barat': 'Asia Barat',
+  'asian-selatan': 'Asia Selatan',
+  'asian-tengah': 'Asia Tengah',
+  'asian-tenggara': 'Asia Tenggara',
+  'asian-timur': 'Asia Timur',
+  'eropan-barat': 'Eropa Barat',
+  'eropan-selatan': 'Eropa Selatan',
+  'eropan-tengah': 'Eropa Tengah',
+  'eropan-timur': 'Eropa Timur',
+  'eropan-utara': 'Eropa Utara',
+  osenian: 'Oseania',
+};
 
 function capitalize(s) {
   return String(s || '')
@@ -79,6 +105,12 @@ function detectRelation(text) {
   return null;
 }
 
+const FILLER_WORDS_RE = /\b(negara|wilayah|daerah|dari|di|nya|adalah|itu|dong|sih|ya|tuh|nih|deh|kok)\b/g;
+
+function stripTrailingApa(t) {
+  return t.replace(/\s+apa\s*\??\s*$/i, '');
+}
+
 function extractEntity(text, relation) {
   let t = text.toLowerCase();
   relation.keys.forEach((k) => {
@@ -87,10 +119,11 @@ function extractEntity(text, relation) {
   });
   t = t
     .replace(/^(apa|berapa|siapa|kapan|dimana|di\s*mana)\s+/i, '')
-    .replace(/\b(negara|dari|di|nya|adalah|itu)\b/g, ' ')
+    .replace(FILLER_WORDS_RE, ' ')
     .replace(/\?+/g, '')
     .replace(/\s+/g, ' ')
     .trim();
+  t = stripTrailingApa(t).trim();
   return resolveCountryAlias(t);
 }
 
@@ -116,7 +149,9 @@ function extractKnownEntity(text) {
 function matchesName(item, entity) {
   const name = (item.metadata.name || '').toLowerCase();
   if (!name) return false;
-  return name === entity || entity.includes(name) || name.includes(entity);
+  if (name === entity) return true;
+  if (name.length < 3 || entity.length < 3) return false;
+  return entity.includes(name) || name.includes(entity);
 }
 
 async function lookupInGroup(group, entity) {
@@ -367,12 +402,13 @@ async function factoid(q, options) {
 }
 
 function cleanEntity(raw) {
-  return String(raw || '')
+  const cleaned = String(raw || '')
+    .toLowerCase()
     .replace(/\?+$/, '')
-    .replace(/\b(negara|dari|di|nya|adalah|itu)\b/g, ' ')
+    .replace(FILLER_WORDS_RE, ' ')
     .replace(/\s+/g, ' ')
-    .trim()
-    .toLowerCase();
+    .trim();
+  return stripTrailingApa(cleaned).trim();
 }
 
 function fuzzyEq(a, b) {
@@ -404,6 +440,22 @@ async function findInList(group, predicate) {
 async function findAllInList(group, predicate, limit) {
   const list = await dataries.loadAll(group);
   return list.filter(predicate).slice(0, limit || 3);
+}
+
+async function tryLetakGeografis(text) {
+  const m =
+    text.match(/^(.+?)\s+terletak\s+di\s*mana\??$/i) ||
+    text.match(/^di\s*mana\s+letak\s+(.+?)\??$/i) ||
+    text.match(/^letak\s+geografis\s+(.+?)\??$/i);
+  if (!m) return null;
+  const entity = resolveCountryAlias(cleanEntity(m[1]));
+  if (!entity) return null;
+  const item = await lookupInGroup('country', entity);
+  if (!item || !item.metadata.region) return null;
+  const label = REGION_LABELS[item.metadata.region] || item.metadata.region;
+  const base = item.metadata.name + ' terletak di ' + label + '.';
+  const opener = pickVariant('letak_opener', FACTOID_OPENERS, item.metadata.name + label);
+  return opener ? opener + base.charAt(0).toLowerCase() + base.slice(1) : base;
 }
 
 async function tryPenuturBahasa(text) {
@@ -453,7 +505,7 @@ async function tryKotaTerkenal(text) {
 }
 
 async function tryWisataDi(text) {
-  const m = text.match(/^(?:tempat\s+)?wisata\s+di\s+(.+)$/i);
+  const m = text.match(/^(?:tempat\s+)?wisata\s+(?:paling\s+)?(?:terkenal\s+|populer\s+|favorit\s+)?di\s+(.+)$/i);
   if (!m) return null;
   const entity = cleanEntity(m[1]);
   if (!entity) return null;
@@ -524,12 +576,22 @@ const COUNTRY_ALIASES = {
   amerika: 'amerika serikat',
   usa: 'amerika serikat',
   us: 'amerika serikat',
+  as: 'amerika serikat',
+  amrik: 'amerika serikat',
   korea: 'korea selatan',
+  korsel: 'korea selatan',
   inggris: 'inggris',
+  uk: 'inggris',
+  britania: 'inggris',
+  'britania raya': 'inggris',
   jepang: 'jepang',
   brazil: 'brasil',
   england: 'inggris',
   'new zealand': 'selandia baru',
+  rrc: 'china',
+  tiongkok: 'china',
+  russia: 'rusia',
+  perancis: 'prancis',
 };
 
 function resolveCountryAlias(entity) {
@@ -611,6 +673,9 @@ async function extras(q) {
   const text = String(q || '').trim();
   if (!text) return null;
 
+  const letak = await tryLetakGeografis(text);
+  if (letak) return letak;
+
   const penutur = await tryPenuturBahasa(text);
   if (penutur) return penutur;
 
@@ -676,12 +741,17 @@ async function search(q) {
 }
 
 const DATARIES_FALLBACK_THRESHOLD = 0.3;
+const DATARIES_FALLBACK_GROUPS = ['country', 'sains', 'olahraga'];
 
-async function countryFallback(query) {
-  const countries = await dataries.loadAll('country');
-  const corpus = countries.map((item) => ({ item, text: item.text || '' }));
-  const ranked = retrieval.rank(query, corpus, { threshold: DATARIES_FALLBACK_THRESHOLD, limit: 2 });
-  return ranked.map((r) => ({ type: 'dataries', text: r.item.text, score: r.score }));
+async function datariesFallback(query) {
+  const results = [];
+  for (const group of DATARIES_FALLBACK_GROUPS) {
+    const list = await dataries.loadAll(group);
+    const corpus = list.map((item) => ({ item, text: item.text || '' }));
+    const ranked = retrieval.rank(query, corpus, { threshold: DATARIES_FALLBACK_THRESHOLD, limit: 2 });
+    ranked.forEach((r) => results.push({ type: 'dataries', text: r.item.text, score: r.score }));
+  }
+  return results.sort((a, b) => b.score - a.score).slice(0, 2);
 }
 
 export const datariesBridge = Object.freeze({
@@ -689,6 +759,6 @@ export const datariesBridge = Object.freeze({
   factoid,
   extras,
   extractKnownEntity,
-  countryFallback,
+  datariesFallback,
   daysUntilIndependence,
 });

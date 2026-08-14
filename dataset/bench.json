@@ -229,5 +229,17 @@
   { "prompt": "aku bosan banget nih", "expect": "mood_empati", "contains": "Kedengarannya lagi bosan ya", "note": "Jilid 14: mood lexicon topik baru - bosan" },
   { "prompt": "aduh kesel banget deh", "expect": "mood_empati", "contains": "Kedengarannya lagi kesal ya", "note": "Jilid 14: mood lexicon topik baru - marah/kesal" },
   { "prompt": "apa manfaat tidur cukup", "expect": "manfaat_bullet", "contains": "Manfaat Tidur", "note": "Jilid 14: tool manfaat() topik ketiga (regresi Jilid 13 tetap hijau)" },
-  { "prompt": "cara menabung dengan efektif", "expect": "cara_numbered", "contains": "1.", "note": "Jilid 14: tool cara() topik yang tidak bertabrakan dengan entitas dataries (regresi Jilid 13)" }
+  { "prompt": "cara menabung dengan efektif", "expect": "cara_numbered", "contains": "1.", "note": "Jilid 14: tool cara() topik yang tidak bertabrakan dengan entitas dataries (regresi Jilid 13)" },
+  { "prompt": "ceritakan tentang polandia", "expect": "factoid_no_dup", "contains": "Eropa Tengah", "notContains": ["Eropa Timur"], "note": "Final: dedup 7 entri negara ganda (Polandia/Ceko/Hungaria/Slowakia/Swiss/Austria/Kamerun) - dulu tampil 2x dengan region berbeda" },
+  { "prompt": "jumlah pendudukan jepang", "expect": "factoid_populasi", "contains": "populasi", "note": "Final: relasi populasi toleran typo 'pendudukan'" },
+  { "prompt": "berapa penduduk korsel", "expect": "factoid_populasi", "contains": "Korea Selatan", "note": "Final: alias 'korsel' -> Korea Selatan" },
+  { "prompt": "luas wilayah russia", "expect": "factoid_luas", "contains": "Rusia", "note": "Final: filler 'wilayah' dibuang + alias ejaan 'russia' -> rusia" },
+  { "prompt": "ibukota as", "expect": "factoid_ibukota", "contains": "Amerika Serikat", "note": "Final: alias 'as' + guard entitas pendek (dulu salah nyasar ke Madagaskar via substring)" },
+  { "prompt": "ibukota uk", "expect": "factoid_ibukota", "contains": "Inggris", "note": "Final: alias 'uk' + guard entitas pendek (dulu salah nyasar ke Ukraina via substring)" },
+  { "prompt": "populasi negara tiongkok", "expect": "factoid_populasi", "contains": "China", "note": "Final: alias 'tiongkok'/'rrc' -> China" },
+  { "prompt": "wisata terkenal di prancis", "expect": "wisata_list", "contains": "Prancis", "note": "Final: regex tryWisataDi() diperluas terima 'terkenal/populer/paling terkenal'" },
+  { "prompt": "makanan khas korea dong", "expect": "makanan_list", "contains": "Korea Selatan", "note": "Final: partikel santai (dong/sih/ya/tuh/nih/deh/kok) dibuang dari ekstraksi entitas" },
+  { "prompt": "luas negara amrik", "expect": "factoid_luas", "contains": "Amerika Serikat", "note": "Final: alias slang 'amrik' -> Amerika Serikat" },
+  { "prompt": "jepang terletak dimana", "expect": "letak_geografis", "contains": "Asia Timur", "note": "Final: pola lokasi baru 'X terletak dimana' -> region terbaca" },
+  { "prompt": "di mana letak brasil", "expect": "letak_geografis", "contains": "Amerika Selatan", "note": "Final: pola lokasi baru 'di mana letak X' -> region terbaca" }
 ]

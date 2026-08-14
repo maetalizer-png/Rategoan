@@ -781,7 +781,7 @@ async function respondCore(messages, prompt) {
   const shortContext = memoryShort.recent(messages, 10);
 
   const preSearch = await memoryIndex.search(text, 5);
-  const dataFallback = await datariesBridge.countryFallback(text);
+  const dataFallback = await datariesBridge.datariesFallback(text);
   const plannedFallback = planner.planFallback(text, preSearch.concat(dataFallback));
 
   let reply;
