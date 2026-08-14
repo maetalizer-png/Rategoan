@@ -119,6 +119,16 @@
   color: var(--rg-text);
 }
 
+.msg-action-btn.rated {
+  background: var(--rg-ring);
+  color: var(--rg-text);
+  border-color: var(--rg-line-accent);
+}
+
+.msg-action-btn:disabled {
+  opacity: 0.6;
+}
+
 .msg-thumb {
   width: 140px;
   max-width: 64%;

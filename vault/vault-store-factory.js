@@ -38,5 +38,13 @@ export function createVaultStore(key, maxItems) {
     return ranked.map((r) => r.item.item);
   }
 
-  return Object.freeze({ addAll, allItems, search });
+  async function removeItem(id) {
+    const list = await readAll();
+    const next = list.filter((it) => it.id !== id);
+    if (next.length === list.length) return false;
+    await writeAll(next);
+    return true;
+  }
+
+  return Object.freeze({ addAll, allItems, search, removeItem });
 }

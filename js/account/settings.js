@@ -47,7 +47,7 @@ export const settings = {
     const anchor = $('row-restore');
     if (!anchor) return;
     const downloadRow = buildRow('row-unduhan-fitur', DOWNLOAD_ICON, 'Unduhan Fitur');
-    const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Pengetahuan Saya');
+    const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Buka Koleksi');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
     anchor.insertAdjacentElement('afterend', knowledgeRow);
@@ -70,12 +70,8 @@ export const settings = {
       this.refreshTtsStatus();
     };
     knowledgeRow.onclick = () => {
-      router.go('chat');
-      const inp = $('chat-input');
-      if (inp) {
-        inp.value = 'laporan otak';
-        inp.focus();
-      }
+      router.go('collection');
+      import('../collection/collection.js').then((m) => m.collectionPage.open());
     };
   },
   refreshTtsStatus() {

@@ -131,6 +131,15 @@ function findLearnedFact(query) {
   return bestRatio >= 0.6 ? best.value : null;
 }
 
+function forgetLearned(subject) {
+  const data = read();
+  const norm = normalizeSubject(subject);
+  const before = data.learned.length;
+  data.learned = data.learned.filter((f) => f.subject !== norm);
+  write(data);
+  return data.learned.length < before;
+}
+
 function clear() {
   write({ facts: {}, notes: [], learned: [] });
 }
@@ -146,5 +155,6 @@ export const memoryLong = Object.freeze({
   allLearned,
   learnFact,
   findLearnedFact,
+  forgetLearned,
   clear,
 });

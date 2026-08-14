@@ -25,6 +25,7 @@ import { shortcuts } from './system/shortcuts.js';
 import { onboard } from './system/onboard.js';
 import { settings } from './account/settings.js';
 import { login } from './account/login.js';
+import { collectionPage } from './collection/collection.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dailyBriefing } from '../ai-agent/daily-briefing.js';
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   pin.bindAutoLock();
   onboard.bind();
   settings.bind();
+  collectionPage.bind();
   login.bind();
   onboard.maybeShow();
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));

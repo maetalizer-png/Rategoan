@@ -34,6 +34,20 @@ async function rateLast(feedback) {
   return true;
 }
 
+async function rateByAnswer(answerText, feedback) {
+  const list = await readAll();
+  const needle = String(answerText || '').trim();
+  if (!needle) return false;
+  for (let i = list.length - 1; i >= 0; i--) {
+    if (list[i].answer.trim() === needle) {
+      list[i].feedback = !!feedback;
+      await writeAll(list);
+      return true;
+    }
+  }
+  return false;
+}
+
 async function search(query, limit) {
   const q = String(query || '').trim();
   if (!q) return [];
@@ -52,5 +66,6 @@ export const ragetDb = Object.freeze({
   allNotes,
   search,
   rateLast,
+  rateByAnswer,
   clear,
 });

@@ -8,6 +8,14 @@ const ICONS = {
   calculator: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01"/>',
   alarm: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M5 3 2 6M19 3l3 3"/>',
   flame: '<path d="M12 22c4.4 0 7-2.8 7-6.7 0-2.8-1.7-5-3.2-6.6-.6 1-1.4 1.8-2.3 2.3.3-2.8-.8-6-2.5-8-.3 3-1.7 4.6-3.1 6.2C6.4 10.9 5 12.8 5 15.3c0 3.9 2.6 6.7 7 6.7z"/>',
+  bookmark: '<path d="M19 21 12 16l-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',
+  bookmarkFilled: '<path d="M19 21 12 16l-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" fill="currentColor"/>',
+  thumbUp: '<path d="M7 22V11l5-8 1.5 1L12 9h7a2 2 0 0 1 2 2.2l-1.3 8A2 2 0 0 1 17.7 21H7z"/><path d="M7 11H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3"/>',
+  thumbDown: '<path d="M17 2v11l-5 8-1.5-1L12 15H5a2 2 0 0 1-2-2.2l1.3-8A2 2 0 0 1 6.3 3H17z"/><path d="M17 13h3a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-3"/>',
+  bell: '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+  pin: '<path d="M12 17v5"/><path d="M9 10.5V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6.5l2 3.5H7z"/>',
+  archive: '<rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/><path d="M10 13h4"/>',
+  upload: '<path d="M12 21V8"/><path d="M7 13l5-5 5 5"/><path d="M5 21h14"/>',
 };
 
 export function ic(name, cls) {

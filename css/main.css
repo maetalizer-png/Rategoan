@@ -21,4 +21,6 @@
 
 @import 'system/overlays.css';
 
+@import 'collection/collection.css';
+
 @import 'utilities.css';

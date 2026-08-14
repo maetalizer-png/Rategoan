@@ -20,6 +20,8 @@ import { planner } from './planner.js';
 import { quality } from './quality.js';
 import { readWeb } from '../vault/web/read-web.js';
 import { quizSession } from './quiz-session.js';
+import { collectionStore } from '../raget-memory/collection-store.js';
+import { collectionSearch } from '../raget-memory/collection-search.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -154,6 +156,7 @@ function detectTool(prompt) {
   if (/export\s+catatan|ekspor\s+catatan|unduh\s+catatan/.test(t)) return 'export_catatan';
   if (/^bagikan\s+kartu\s+/.test(t)) return 'bagikan_kartu';
   if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
+  if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
   if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
@@ -388,13 +391,25 @@ async function runTool(kind, prompt, messages) {
   }
   if (kind === 'bagikan_kartu') {
     const negara = prompt.replace(/^bagikan\s+kartu\s+/i, '').trim();
-    return await agentTools.bagikanKartu(negara);
+    const result = await agentTools.bagikanKartu(negara);
+    collectionStore.addItem({ kind: 'artifact', artifactType: 'country_card', text: result, tag: 'artefak', chatTitle: 'Kartu ' + negara }).catch(() => {});
+    return result;
   }
   if (kind === 'export_catatan') {
     const format = /markdown|\bmd\b/i.test(prompt) ? 'markdown' : 'txt';
-    return agentTools.eksporCatatan(format);
+    const result = agentTools.eksporCatatan(format);
+    collectionStore.addItem({ kind: 'artifact', artifactType: 'export', text: result, tag: 'artefak', chatTitle: 'Ekspor Catatan' }).catch(() => {});
+    return result;
   }
-  if (kind === 'email') return emailComposer.generateEmail(prompt);
+  if (kind === 'email') {
+    const result = await emailComposer.generateEmail(prompt);
+    collectionStore.addItem({ kind: 'artifact', artifactType: 'email_draft', text: result, tag: 'artefak', chatTitle: 'Draft Email' }).catch(() => {});
+    return result;
+  }
+  if (kind === 'cari_koleksi') {
+    const q = prompt.replace(/apa\s+yang\s+saya\s+simpan\s+tentang/i, '').replace(/apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/i, '').trim();
+    return await agentTools.cariKoleksi(q);
+  }
   if (kind === 'cari_semua') {
     const q = prompt.replace(/cari\s+/i, '').replace(/di\s+semua\s*(sumber)?/i, '').replace(/apa\s+yang\s+saya\s+punya\s+tentang/i, '').trim();
     return await agentTools.cariSemua(q);
@@ -542,7 +557,9 @@ function detectAnswerType(text) {
   return 'terbuka';
 }
 
-function personalize(reply, text) {
+const COLLECTION_REF_THRESHOLD = 0.35;
+
+async function personalize(reply, text) {
   const isGreetingLike = /^(halo|hai|hi|hey|selamat|met|good|assalamu)/i.test(text.trim());
   const nama = memoryLong.recall('nama');
   if (isGreetingLike && nama && !reply.includes(nama)) {
@@ -555,6 +572,18 @@ function personalize(reply, text) {
       reply += ' (Ngomong-ngomong, kudengar kamu suka ' + suka[suka.length - 1] + ' ya?)';
     } else if (pekerjaan) {
       reply += ' (Btw, gimana kabar kerjaan sebagai ' + pekerjaan + '?)';
+    } else {
+      const items = await collectionStore.allItems();
+      if (items.length) {
+        const textTokens = scorer.tokenize(text);
+        const itemTokens = items.map((it) => scorer.tokenize(it.text));
+        const scores = scorer.scoreIntent(textTokens, itemTokens);
+        let bestIdx = -1, bestScore = COLLECTION_REF_THRESHOLD;
+        scores.forEach((s, i) => { if (s >= bestScore) { bestScore = s; bestIdx = i; } });
+        if (bestIdx >= 0) {
+          reply += ' (Ini mirip dengan yang pernah kamu simpan dari koleksi kamu: "' + items[bestIdx].text.slice(0, 60) + (items[bestIdx].text.length > 60 ? '…' : '') + '")';
+        }
+      }
     }
   }
   return reply;
@@ -787,7 +816,7 @@ async function respondCore(messages, prompt) {
   let reply;
   if (plannedFallback) {
     reply = postProcess(plannedFallback);
-    reply = personalize(reply, text);
+    reply = await personalize(reply, text);
   } else {
     let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name });
 
@@ -798,7 +827,7 @@ async function respondCore(messages, prompt) {
     }
 
     reply = postProcess(raw);
-    reply = personalize(reply, text);
+    reply = await personalize(reply, text);
   }
 
   if (!plannedFallback && !isClarifyReply(reply)) {

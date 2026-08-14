@@ -12,6 +12,8 @@ import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
 import { dailyBriefing } from './daily-briefing.js';
 import { dataries } from '../dataries/index.js';
+import { collectionStore } from '../raget-memory/collection-store.js';
+import { collectionSearch } from '../raget-memory/collection-search.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -377,6 +379,10 @@ async function cariSemua(query) {
   const noteResults = await ragetDb.search(q, 5);
   if (noteResults.length) groups.push({ source: 'Riwayat Chat', items: noteResults.map((n) => n.question + ' — ' + n.answer.slice(0, 80)) });
 
+  const collectionItems = await collectionStore.allItems();
+  const collectionResults = collectionSearch.fuzzySearch(collectionItems, q, 5);
+  if (collectionResults.length) groups.push({ source: 'Koleksi', items: collectionResults.map((r) => r.item.text.slice(0, 100)) });
+
   const knowledgeResults = await memoryIndex.search(q, 5);
   if (knowledgeResults.length) groups.push({ source: 'Pengetahuan', items: knowledgeResults.map((r) => r.text.slice(0, 100)) });
 
@@ -409,6 +415,21 @@ async function cariSemua(query) {
     parts.push(formatter.bold(g.source));
     parts.push(formatter.bullets(g.items.slice(0, 3)));
   });
+  return formatter.blocks(parts);
+}
+
+async function cariKoleksi(query) {
+  const q = String(query || '').trim();
+  if (!q) {
+    const items = await collectionStore.allItems();
+    if (!items.length) return 'Koleksi kamu masih kosong. Simpan pesan dengan chip "Simpan" untuk mulai.';
+    return 'Koleksi kamu punya ' + items.length + ' item tersimpan. Buka Koleksi lewat menu samping untuk melihatnya.';
+  }
+  const items = await collectionStore.allItems();
+  const results = collectionSearch.fuzzySearch(items, q, 5);
+  if (!results.length) return 'Tidak ada yang tersimpan di Koleksi soal "' + q + '".';
+  const parts = [formatter.h('Dari koleksi kamu soal "' + q + '"', 3)];
+  parts.push(formatter.bullets(results.map((r) => r.item.text.slice(0, 100))));
   return formatter.blocks(parts);
 }
 
@@ -485,6 +506,7 @@ async function laporanOtak() {
   }
 
   const qualityResult = await quality.evaluate();
+  const collStats = await collectionStore.stats();
 
   const parts = [
     formatter.h('Laporan Otak Raget', 3),
@@ -497,6 +519,8 @@ async function laporanOtak() {
       'Diversitas (D): ' + qualityResult.breakdown.D + '% (n=' + qualityResult.n.D + ')',
       'Variasi struktur (V): ' + qualityResult.breakdown.V + '% (n=' + qualityResult.n.V + ')',
     ]),
+    formatter.bold('Koleksi: ' + collStats.total + ' item (' + collStats.pinned + ' dipin)'),
+    ...(collStats.topTags.length ? [formatter.bullets(collStats.topTags.map((t) => 'Tag "' + t.tag + '": ' + t.count + ' item'))] : []),
   ];
 
   if (confidencePerIntent.length) {
@@ -675,6 +699,7 @@ export const agentTools = Object.freeze({
   exportChat,
   shareToWhatsApp,
   cariSemua,
+  cariKoleksi,
   ringkasHari,
   eksporCatatan,
   bagikanKartu,
