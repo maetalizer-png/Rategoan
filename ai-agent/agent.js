@@ -22,6 +22,7 @@ import { readWeb } from '../vault/web/read-web.js';
 import { quizSession } from './quiz-session.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
 import { collectionSearch } from '../raget-memory/collection-search.js';
+import { fewshotLocal } from '../raget-memory/fewshot-local.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -66,15 +67,17 @@ async function loadPersona() {
 }
 
 async function loadFewshot() {
-  if (fewshotCache) return fewshotCache;
-  try {
-    const res = await fetch(new URL('../dataset/fewshot.json', import.meta.url));
-    const data = res.ok ? await res.json() : [];
-    fewshotCache = Array.isArray(data) ? data : [];
-  } catch (e) {
-    fewshotCache = [];
+  if (!fewshotCache) {
+    try {
+      const res = await fetch(new URL('../dataset/fewshot.json', import.meta.url));
+      const data = res.ok ? await res.json() : [];
+      fewshotCache = Array.isArray(data) ? data : [];
+    } catch (e) {
+      fewshotCache = [];
+    }
   }
-  return fewshotCache;
+  const local = fewshotLocal.allItems();
+  return local.length ? local.concat(fewshotCache) : fewshotCache;
 }
 
 const FEWSHOT_MATCH_THRESHOLD = 0.5;
@@ -83,6 +86,16 @@ function matchFewshot(examples, text) {
   const corpus = examples.map((ex) => ({ ex, text: String(ex.q || '') }));
   const found = retrieval.best(text, corpus, { threshold: FEWSHOT_MATCH_THRESHOLD });
   return found ? found.item.ex : null;
+}
+
+const ENSEMBLE_NEAR_MISS_THRESHOLD = 0.3;
+
+function matchFewshotNearMiss(examples, text) {
+  const corpus = examples.map((ex) => ({ ex, text: String(ex.q || '') }));
+  const ranked = retrieval.rank(text, corpus, { threshold: ENSEMBLE_NEAR_MISS_THRESHOLD, limit: 1 });
+  const top = ranked[0];
+  if (!top || top.score >= FEWSHOT_MATCH_THRESHOLD) return null;
+  return top.item.ex;
 }
 
 function detectRating(text) {
@@ -156,6 +169,8 @@ function detectTool(prompt) {
   if (/export\s+catatan|ekspor\s+catatan|unduh\s+catatan/.test(t)) return 'export_catatan';
   if (/^bagikan\s+kartu\s+/.test(t)) return 'bagikan_kartu';
   if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
+  if (/terapkan\s+auto-?fewshot/.test(t)) return 'apply_fewshot';
+  if (/batalkan\s+auto-?fewshot/.test(t)) return 'revert_fewshot';
   if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
@@ -405,6 +420,20 @@ async function runTool(kind, prompt, messages) {
     const result = await emailComposer.generateEmail(prompt);
     collectionStore.addItem({ kind: 'artifact', artifactType: 'email_draft', text: result, tag: 'artefak', chatTitle: 'Draft Email' }).catch(() => {});
     return result;
+  }
+  if (kind === 'apply_fewshot') {
+    const notes = await ragetDb.allNotes();
+    const candidates = notes.filter((n) => n.feedback === true).slice(-5).map((n) => ({ q: n.question, a: n.answer }));
+    if (!candidates.length) return 'Belum ada balasan berating positif untuk dijadikan contoh fewshot.';
+    const added = fewshotLocal.apply(candidates);
+    fewshotCache = null;
+    return added.length
+      ? 'Diterapkan ' + added.length + ' contoh fewshot baru dari balasan berating positif. Ketik "batalkan auto-fewshot" untuk membatalkan.'
+      : 'Semua kandidat sudah pernah diterapkan sebelumnya.';
+  }
+  if (kind === 'revert_fewshot') {
+    const count = fewshotLocal.revert();
+    return count ? 'Dibatalkan ' + count + ' contoh auto-fewshot.' : 'Tidak ada auto-fewshot yang aktif.';
   }
   if (kind === 'cari_koleksi') {
     const q = prompt.replace(/apa\s+yang\s+saya\s+simpan\s+tentang/i, '').replace(/apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/i, '').trim();
@@ -823,7 +852,12 @@ async function respondCore(messages, prompt) {
     if (llmEngine.isWeak(raw)) {
       const fewshot = await loadFewshot();
       const example = matchFewshot(fewshot, text);
-      if (example && example.a) raw = example.a;
+      if (example && example.a) {
+        raw = example.a;
+      } else {
+        const nearMiss = matchFewshotNearMiss(fewshot, text);
+        if (nearMiss && nearMiss.q) raw += '\n\n(Maksud kamu: "' + nearMiss.q + '"?)';
+      }
     }
 
     reply = postProcess(raw);

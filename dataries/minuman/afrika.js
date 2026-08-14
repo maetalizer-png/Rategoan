@@ -1,0 +1,20 @@
+const data = [
+  { text: 'Teh Maroko (Atay) — teh hijau manis dengan daun mint segar, dituang dari tempat tinggi sebagai bagian dari keramahan khas Maroko.', metadata: { name: 'Teh Maroko', country: 'Maroko', region: 'afrika', type: 'minuman', tags: ['atay', 'maroko', 'teh'] } },
+  { text: 'Kopi Mesir (Ahwa) — kopi kental khas Mesir yang diseduh dengan cangkir kecil, jadi bagian penting budaya kedai kopi lokal.', metadata: { name: 'Kopi Mesir', country: 'Mesir', region: 'afrika', type: 'minuman', tags: ['ahwa', 'mesir', 'kopi'] } },
+  { text: 'Karkade — teh dari bunga rosela merah khas Mesir dan Sudan, diminum panas atau dingin dengan rasa asam segar.', metadata: { name: 'Karkade', country: 'Mesir', region: 'afrika', type: 'minuman', tags: ['karkade', 'mesir'] } },
+  { text: 'Buna (Kopi Etiopia) — upacara minum kopi tradisional khas Etiopia, dianggap negara asal tanaman kopi dunia.', metadata: { name: 'Buna', country: 'Etiopia', region: 'afrika', type: 'minuman', tags: ['buna', 'etiopia', 'kopi'] } },
+  { text: 'Tej — anggur madu tradisional khas Etiopia, diminum saat perayaan dan acara khusus.', metadata: { name: 'Tej', country: 'Etiopia', region: 'afrika', type: 'minuman', tags: ['tej', 'etiopia'] } },
+  { text: 'Rooibos — teh herbal khas Afrika Selatan dari tanaman semak merah, bebas kafein dan kaya antioksidan.', metadata: { name: 'Rooibos', country: 'Afrika Selatan', region: 'afrika', type: 'minuman', tags: ['rooibos', 'afrika selatan'] } },
+  { text: 'Amarula — minuman krim beralkohol khas Afrika Selatan dari buah marula, mirip Baileys dengan cita rasa buah tropis.', metadata: { name: 'Amarula', country: 'Afrika Selatan', region: 'afrika', type: 'minuman', tags: ['amarula', 'afrika selatan'] } },
+  { text: 'Palm Wine (Tuak Palem) — minuman fermentasi dari getah pohon palem, populer di Nigeria dan banyak negara Afrika Barat.', metadata: { name: 'Palm Wine', country: 'Nigeria', region: 'afrika', type: 'minuman', tags: ['palm wine', 'nigeria'] } },
+  { text: 'Zobo — minuman dari bunga rosela khas Nigeria, mirip karkade, diminum dingin dengan tambahan jahe dan buah.', metadata: { name: 'Zobo', country: 'Nigeria', region: 'afrika', type: 'minuman', tags: ['zobo', 'nigeria'] } },
+  { text: 'Bissap — minuman dari bunga rosela khas Senegal dan Afrika Barat, manis segar dan sering dijual di pinggir jalan.', metadata: { name: 'Bissap', country: 'Senegal', region: 'afrika', type: 'minuman', tags: ['bissap', 'senegal'] } },
+  { text: 'Chai ya Tangawizi — teh jahe khas Kenya dan Tanzania, diminum hangat sebagai penghangat tubuh dan penambah energi.', metadata: { name: 'Chai ya Tangawizi', country: 'Kenya', region: 'afrika', type: 'minuman', tags: ['chai', 'kenya', 'jahe'] } },
+  { text: 'Kopi Kenya — Kenya dikenal sebagai penghasil kopi arabika berkualitas tinggi dengan cita rasa asam segar khas dataran tinggi.', metadata: { name: 'Kopi Kenya', country: 'Kenya', region: 'afrika', type: 'minuman', tags: ['kopi', 'kenya'] } },
+  { text: 'Mint Tea Aljazair — teh hijau manis dengan daun mint, diminum sepanjang hari sebagai simbol keramahan khas Maghreb.', metadata: { name: 'Mint Tea Aljazair', country: 'Aljazair', region: 'afrika', type: 'minuman', tags: ['mint tea', 'aljazair'] } },
+  { text: 'Boza — minuman fermentasi ringan dari gandum, populer di beberapa wilayah Afrika Utara dan Balkan dengan rasa manis kental.', metadata: { name: 'Boza', country: 'Tunisia', region: 'afrika', type: 'minuman', tags: ['boza', 'tunisia'] } },
+  { text: 'Umqombothi — bir tradisional dari jagung dan malt khas Afrika Selatan, sering disajikan dalam upacara adat.', metadata: { name: 'Umqombothi', country: 'Afrika Selatan', region: 'afrika', type: 'minuman', tags: ['umqombothi', 'afrika selatan'] } },
+  { text: 'Kopi Tanzania (Kilimanjaro Coffee) — kopi arabika dari lereng Gunung Kilimanjaro, terkenal dengan keasaman cerah dan aroma khas.', metadata: { name: 'Kopi Tanzania', country: 'Tanzania', region: 'afrika', type: 'minuman', tags: ['kopi', 'tanzania', 'kilimanjaro'] } },
+];
+
+export const DATA = data;

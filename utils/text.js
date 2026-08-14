@@ -56,6 +56,8 @@ const SLANG_MAP = {
   bt: 'bosan', gws: 'cepat sembuh', bgt: 'banget',
   yg: 'yang', dr: 'dari', utk: 'untuk', jd: 'jadi', dg: 'dengan',
   km: 'kamu', gw: 'saya', gue: 'saya',
+  gmn: 'bagaimana', krn: 'karena', sm: 'sama', trs: 'terus', tp: 'tapi',
+  udh: 'sudah', blm: 'belum', skrg: 'sekarang', jgn: 'jangan', knp: 'kenapa',
 };
 
 export function normalizeSlang(text) {

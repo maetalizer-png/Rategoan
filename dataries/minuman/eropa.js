@@ -1,0 +1,20 @@
+const data = [
+  { text: 'Espresso — kopi pekat khas Italia yang diseduh dengan tekanan tinggi, dasar dari banyak minuman kopi lain.', metadata: { name: 'Espresso', country: 'Italia', region: 'eropa', type: 'minuman', tags: ['espresso', 'italia', 'kopi'] } },
+  { text: 'Wine (Anggur) — minuman fermentasi dari buah anggur, Prancis dan Italia dikenal sebagai produsen wine terbesar dunia.', metadata: { name: 'Wine', country: 'Prancis', region: 'eropa', type: 'minuman', tags: ['wine', 'prancis', 'anggur'] } },
+  { text: 'Champagne — anggur bersoda khas wilayah Champagne di Prancis, identik dengan perayaan dan momen istimewa.', metadata: { name: 'Champagne', country: 'Prancis', region: 'eropa', type: 'minuman', tags: ['champagne', 'prancis'] } },
+  { text: 'Bir Jerman (Bier) — Jerman punya tradisi bir kuat dengan hukum kemurnian Reinheitsgebot, dirayakan lewat festival Oktoberfest.', metadata: { name: 'Bir Jerman', country: 'Jerman', region: 'eropa', type: 'minuman', tags: ['bir', 'jerman', 'oktoberfest'] } },
+  { text: 'Glühwein — anggur merah panas berempah khas Jerman, populer diminum saat musim dingin dan pasar Natal.', metadata: { name: 'Glühwein', country: 'Jerman', region: 'eropa', type: 'minuman', tags: ['gluhwein', 'jerman'] } },
+  { text: 'Whisky Skotlandia — minuman beralkohol suling dari gandum yang dimatangkan dalam tong kayu, ikon minuman Skotlandia.', metadata: { name: 'Whisky Skotlandia', country: 'Inggris', region: 'eropa', type: 'minuman', tags: ['whisky', 'skotlandia'] } },
+  { text: 'Teh Inggris (English Breakfast Tea) — teh hitam kuat yang biasa diminum dengan susu, jadi tradisi minum teh sore khas Inggris.', metadata: { name: 'Teh Inggris', country: 'Inggris', region: 'eropa', type: 'minuman', tags: ['teh', 'inggris'] } },
+  { text: 'Sangria — minuman anggur campur buah-buahan segar khas Spanyol, populer diminum saat cuaca panas.', metadata: { name: 'Sangria', country: 'Spanyol', region: 'eropa', type: 'minuman', tags: ['sangria', 'spanyol'] } },
+  { text: 'Sherry — anggur yang diperkuat (fortified wine) khas wilayah Jerez di Spanyol, punya rasa mulai kering hingga manis.', metadata: { name: 'Sherry', country: 'Spanyol', region: 'eropa', type: 'minuman', tags: ['sherry', 'spanyol'] } },
+  { text: 'Vodka Rusia — minuman beralkohol suling bening khas Rusia, biasa diminum dingin dan langsung (neat).', metadata: { name: 'Vodka Rusia', country: 'Rusia', region: 'eropa', type: 'minuman', tags: ['vodka', 'rusia'] } },
+  { text: 'Kvass — minuman fermentasi ringan khas Rusia dan Eropa Timur, dibuat dari roti gandum hitam, rasanya sedikit asam manis.', metadata: { name: 'Kvass', country: 'Rusia', region: 'eropa', type: 'minuman', tags: ['kvass', 'rusia'] } },
+  { text: 'Grappa — minuman beralkohol suling khas Italia, dibuat dari sisa kulit dan biji anggur setelah proses pembuatan wine.', metadata: { name: 'Grappa', country: 'Italia', region: 'eropa', type: 'minuman', tags: ['grappa', 'italia'] } },
+  { text: 'Fika Coffee — tradisi minum kopi santai khas Swedia yang jadi momen sosial penting sehari-hari, biasa dengan kue manis.', metadata: { name: 'Fika Coffee', country: 'Swedia', region: 'eropa', type: 'minuman', tags: ['fika', 'swedia', 'kopi'] } },
+  { text: 'Aquavit — minuman beralkohol suling berempah khas negara-negara Nordik seperti Swedia dan Norwegia, dibumbui adas/karaway.', metadata: { name: 'Aquavit', country: 'Norwegia', region: 'eropa', type: 'minuman', tags: ['aquavit', 'norwegia'] } },
+  { text: 'Bir Belgia — Belgia terkenal dengan ragam bir tradisi biara (Trappist) yang kaya rasa dan proses fermentasi khas.', metadata: { name: 'Bir Belgia', country: 'Belgia', region: 'eropa', type: 'minuman', tags: ['bir', 'belgia', 'trappist'] } },
+  { text: 'Pilsner Ceko — bir jenis pilsner pertama kali dibuat di kota Plzeň, Ceko, jadi cikal bakal gaya bir pilsner dunia.', metadata: { name: 'Pilsner Ceko', country: 'Ceko', region: 'eropa', type: 'minuman', tags: ['pilsner', 'ceko', 'bir'] } },
+];
+
+export const DATA = data;

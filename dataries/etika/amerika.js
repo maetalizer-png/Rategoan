@@ -1,0 +1,24 @@
+const data = [
+  { text: 'Sapaan Amerika Serikat — jabat tangan tegas dengan kontak mata langsung adalah sapaan standar di lingkungan bisnis.', metadata: { name: 'Sapaan AS', country: 'Amerika Serikat', region: 'amerika', type: 'sapaan', tags: ['amerika serikat', 'jabat tangan'] } },
+  { text: 'Tip di Amerika Serikat — tip 15-20% di restoran dianggap wajib secara sosial karena bagian dari penghasilan pelayan.', metadata: { name: 'Tip AS', country: 'Amerika Serikat', region: 'amerika', type: 'tip', tags: ['amerika serikat', 'tip'] } },
+  { text: 'Tabu di Amerika Serikat — menanyakan gaji atau usia seseorang secara langsung dianggap terlalu pribadi dan tidak sopan.', metadata: { name: 'Tabu Pertanyaan Pribadi AS', country: 'Amerika Serikat', region: 'amerika', type: 'tabu', tags: ['amerika serikat', 'privasi'] } },
+  { text: 'Sapaan Kanada — jabat tangan ramah, sering disertai ucapan "sorry" bahkan untuk hal kecil sebagai bentuk kesopanan.', metadata: { name: 'Sapaan Kanada', country: 'Kanada', region: 'amerika', type: 'sapaan', tags: ['kanada', 'jabat tangan'] } },
+  { text: 'Tip di Kanada — tip 15-18% umum di restoran, mirip kebiasaan Amerika Serikat.', metadata: { name: 'Tip Kanada', country: 'Kanada', region: 'amerika', type: 'tip', tags: ['kanada', 'tip'] } },
+  { text: 'Sapaan Meksiko — jabat tangan hangat, teman dekat berpelukan (abrazo) atau cium pipi satu kali.', metadata: { name: 'Sapaan Meksiko', country: 'Meksiko', region: 'amerika', type: 'sapaan', tags: ['meksiko', 'abrazo'] } },
+  { text: 'Tip di Meksiko — tip sekitar 10-15% lazim di restoran, tidak selalu termasuk dalam tagihan.', metadata: { name: 'Tip Meksiko', country: 'Meksiko', region: 'amerika', type: 'tip', tags: ['meksiko', 'tip'] } },
+  { text: 'Tabu di Meksiko — warna kuning dikaitkan dengan kematian dalam beberapa konteks tradisional, terutama saat berkabung.', metadata: { name: 'Tabu Warna Kuning Meksiko', country: 'Meksiko', region: 'amerika', type: 'tabu', tags: ['meksiko', 'warna kuning'] } },
+  { text: 'Sapaan Brasil — cium pipi (jumlahnya bervariasi per daerah) dan pelukan hangat umum di antara kenalan.', metadata: { name: 'Sapaan Brasil', country: 'Brasil', region: 'amerika', type: 'sapaan', tags: ['brasil', 'cium pipi'] } },
+  { text: 'Tip di Brasil — service charge 10% biasanya sudah termasuk tagihan restoran (servico incluido).', metadata: { name: 'Tip Brasil', country: 'Brasil', region: 'amerika', type: 'tip', tags: ['brasil', 'tip'] } },
+  { text: 'Tabu di Brasil — membentuk tanda "OK" dengan jari dianggap kasar/vulgar, berbeda makna dibanding di negara lain.', metadata: { name: 'Tabu Tanda OK Brasil', country: 'Brasil', region: 'amerika', type: 'tabu', tags: ['brasil', 'gestur tangan'] } },
+  { text: 'Sapaan Argentina — cium pipi satu kali (kanan) umum bahkan di lingkungan bisnis, termasuk antar pria.', metadata: { name: 'Sapaan Argentina', country: 'Argentina', region: 'amerika', type: 'sapaan', tags: ['argentina', 'cium pipi'] } },
+  { text: 'Tip di Argentina — tip sekitar 10% lazim, sering dibayar tunai terpisah dari tagihan kartu.', metadata: { name: 'Tip Argentina', country: 'Argentina', region: 'amerika', type: 'tip', tags: ['argentina', 'tip'] } },
+  { text: 'Sapaan Kolombia — jabat tangan hangat di lingkungan formal; teman dekat berpelukan atau cium pipi satu kali.', metadata: { name: 'Sapaan Kolombia', country: 'Kolombia', region: 'amerika', type: 'sapaan', tags: ['kolombia', 'jabat tangan'] } },
+  { text: 'Tabu di Kolombia — menunjuk orang lain dengan jari telunjuk dianggap kurang sopan, lebih baik dengan telapak tangan terbuka.', metadata: { name: 'Tabu Menunjuk Kolombia', country: 'Kolombia', region: 'amerika', type: 'tabu', tags: ['kolombia', 'menunjuk'] } },
+  { text: 'Sapaan Peru — jabat tangan sopan; di daerah Andes, sapaan cenderung lebih formal dan penuh hormat pada yang lebih tua.', metadata: { name: 'Sapaan Peru', country: 'Peru', region: 'amerika', type: 'sapaan', tags: ['peru', 'jabat tangan'] } },
+  { text: 'Tip di Peru — tip 10% lazim di restoran turis, tidak wajib di warung makan lokal kecil.', metadata: { name: 'Tip Peru', country: 'Peru', region: 'amerika', type: 'tip', tags: ['peru', 'tip'] } },
+  { text: 'Sapaan Chili — jabat tangan umum di lingkungan bisnis; teman dekat cium pipi satu kali.', metadata: { name: 'Sapaan Chili', country: 'Chili', region: 'amerika', type: 'sapaan', tags: ['chili', 'jabat tangan'] } },
+  { text: 'Tabu di Chili — menguap tanpa menutup mulut di depan umum dianggap sangat tidak sopan.', metadata: { name: 'Tabu Menguap Chili', country: 'Chili', region: 'amerika', type: 'tabu', tags: ['chili', 'menguap'] } },
+  { text: 'Sapaan Kuba — hangat dan ekspresif, pelukan dan cium pipi umum bahkan pada perkenalan pertama di lingkungan santai.', metadata: { name: 'Sapaan Kuba', country: 'Kuba', region: 'amerika', type: 'sapaan', tags: ['kuba', 'pelukan'] } },
+];
+
+export const DATA = data;

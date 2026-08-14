@@ -78,6 +78,8 @@ export const REGIONS = Object.freeze({
     { id: 'teknologi', file: './tokoh/teknologi.js', names: [] },
     { id: 'sejarah', file: './tokoh/sejarah.js', names: [] },
     { id: 'seni', file: './tokoh/seni.js', names: [] },
+    { id: 'penjelajah', file: './tokoh/penjelajah.js', names: [] },
+    { id: 'pemimpin', file: './tokoh/pemimpin.js', names: [] },
   ],
   makanan: [
     { id: 'asia', file: './makanan/asia.js', names: [] },
@@ -147,6 +149,21 @@ export const REGIONS = Object.freeze({
     { id: 'komoditas', file: './ekonomi/komoditas.js', names: [] },
     { id: 'perusahaan', file: './ekonomi/perusahaan.js', names: [] },
     { id: 'indikator', file: './ekonomi/indikator.js', names: [] },
+  ],
+  etika: [
+    { id: 'asia', file: './etika/asia.js', names: [] },
+    { id: 'eropa', file: './etika/eropa.js', names: [] },
+    { id: 'amerika', file: './etika/amerika.js', names: [] },
+    { id: 'afrika', file: './etika/afrika.js', names: [] },
+    { id: 'osenia', file: './etika/osenia.js', names: [] },
+    { id: 'timur-tengah', file: './etika/timur-tengah.js', names: [] },
+  ],
+  minuman: [
+    { id: 'asia', file: './minuman/asia.js', names: [] },
+    { id: 'eropa', file: './minuman/eropa.js', names: [] },
+    { id: 'amerika', file: './minuman/amerika.js', names: [] },
+    { id: 'afrika', file: './minuman/afrika.js', names: [] },
+    { id: 'osenia', file: './minuman/osenia.js', names: [] },
   ],
   sapaan: [
     { id: 'greetings', file: './sapaan/greetings.js', names: [] },

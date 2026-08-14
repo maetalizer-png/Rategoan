@@ -1,6 +1,7 @@
 import { REGIONS, dataries } from '../dataries/index.js';
 import { pickVariant } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
+import { memoryContext } from '../raget-memory/memory-context.js';
 
 const MONTHS_ID = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -360,6 +361,9 @@ async function factoid(q, options) {
   const corrected = await tryCorrection(text, opts);
   if (corrected) return corrected;
 
+  const anafora = await tryAnaforaLuas(text, opts);
+  if (anafora) return anafora;
+
   const multiHop = await tryMultiHopCapital(text, opts);
   if (multiHop) return multiHop;
 
@@ -398,7 +402,22 @@ async function factoid(q, options) {
   }
   if (!resolved) return null;
 
+  memoryContext.setRelation(resolved.field);
   return craftAnswer(resolved.field, resolved.label, resolved.value, resolved.item, opts.richness);
+}
+
+const ANAFORA_LUAS_RE = /kalau\s+yang\s+itu|terus\s+yang\s+satunya|bagaimana\s+dengan\s+yang\s+satunya|yang\s+satunya\s+lagi/i;
+
+async function tryAnaforaLuas(text, opts) {
+  if (!ANAFORA_LUAS_RE.test(text)) return null;
+  const field = memoryContext.getRelation();
+  if (!field) return null;
+  const stack = memoryContext.getStack();
+  const entity = stack[1];
+  if (!entity) return null;
+  const resolved = await resolveValue({ fields: [field] }, entity);
+  if (!resolved) return null;
+  return craftAnswer(resolved.field, resolved.label, resolved.value, resolved.item, opts && opts.richness);
 }
 
 function cleanEntity(raw) {
@@ -569,6 +588,8 @@ async function tryTopicSearch(text) {
     const item = await findBestInList(group, entity, (it) => [it.metadata.topic, ...(it.metadata.tags || [])]);
     if (item) return item.text;
   }
+  const sejarahItem = await findBestInList('sejarah', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
+  if (sejarahItem) return sejarahItem.text;
   return null;
 }
 
@@ -592,6 +613,21 @@ const COUNTRY_ALIASES = {
   tiongkok: 'china',
   russia: 'rusia',
   perancis: 'prancis',
+  italy: 'italia',
+  itali: 'italia',
+  espana: 'spanyol',
+  german: 'jerman',
+  deutschland: 'jerman',
+  holland: 'belanda',
+  nippon: 'jepang',
+  saudi: 'arab saudi',
+  ksa: 'arab saudi',
+  uae: 'uni emirat arab',
+  emirat: 'uni emirat arab',
+  hongkong: 'hong kong',
+  viet: 'vietnam',
+  pinas: 'filipina',
+  burma: 'myanmar',
 };
 
 function resolveCountryAlias(entity) {
@@ -615,8 +651,44 @@ async function tryMakananKhas(text) {
   return opener + ' ' + capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
 }
 
+const MINUMAN_OPENERS = [
+  'Ini beberapa minuman khas',
+  'Kalau soal minuman',
+  'Rekomendasi minuman dari',
+];
+
+async function tryMinumanKhas(text) {
+  const m = text.match(/^(?:apa\s+)?minuman\s+(khas|favorit|terkenal|enak|populer)\s+(?:(?:di|dari)\s+)?(.+)$/i);
+  if (!m) return null;
+  const entity = resolveCountryAlias(cleanEntity(m[2]));
+  if (!entity) return null;
+  const items = await findAllInList('minuman', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
+  if (!items.length) return null;
+  const opener = pickVariant('minuman_opener', MINUMAN_OPENERS, text);
+  return opener + ' ' + capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+}
+
+async function tryEtika(text) {
+  const m =
+    text.match(/^etika\s+(?:di\s+|budaya\s+)?(.+)$/i) ||
+    text.match(/^tabu\s+(?:di\s+|budaya\s+)?(.+)$/i) ||
+    text.match(/^tip\s+(?:budaya\s+)?di\s+(.+)$/i) ||
+    text.match(/^sopan\s+santun\s+(?:di\s+)?(.+)$/i);
+  if (!m) return null;
+  const isTabu = /^tabu/i.test(text);
+  const isTip = /^tip/i.test(text);
+  const entity = resolveCountryAlias(cleanEntity(m[1]));
+  if (!entity) return null;
+  const items = await findAllInList('etika', (it) => it.metadata.country && fuzzyEq(it.metadata.country.toLowerCase(), entity), 6);
+  if (!items.length) return null;
+  const filtered = isTabu ? items.filter((it) => it.metadata.type === 'tabu') : isTip ? items.filter((it) => it.metadata.type === 'tip') : items;
+  const list = (filtered.length ? filtered : items).slice(0, 3);
+  const label = isTabu ? 'Tabu' : isTip ? 'Kebiasaan tip' : 'Etika';
+  return label + ' di ' + capitalize(entity) + ':\n' + list.map((it) => '- ' + it.text).join('\n');
+}
+
 async function trySejarah(text) {
-  const m = text.match(/^sejarah\s+(.+)$/i) || text.match(/^kapan\s+(.+?)\s+(?:dibangun|terjadi|dimulai)$/i);
+  const m = text.match(/^sejarah\s+(.+)$/i) || text.match(/^kapan\s+(.+?)\s+(?:dibangun|terjadi|dimulai|diikrarkan|didirikan|dibacakan|diselenggarakan)$/i);
   if (!m) return null;
   const entity = cleanEntity(m[1]);
   if (!entity) return null;
@@ -669,9 +741,213 @@ async function tryEkonomi(text) {
   return item.text;
 }
 
+const SUPERLATIF_FIELDS = { populasi: 'population', penduduk: 'population', luas: 'area', wilayah: 'area' };
+const SUPERLATIF_DESC_RE = /terbesar|terbanyak|terluas|terpadat/i;
+
+async function trySuperlatif(text) {
+  const m = text.match(/negara\s+(?:dengan\s+)?(populasi|penduduk|luas|wilayah)\s+(terbesar|terbanyak|terluas|terkecil|tersempit|terpadat)/i);
+  if (!m) return null;
+  const field = SUPERLATIF_FIELDS[m[1].toLowerCase()];
+  const desc = SUPERLATIF_DESC_RE.test(m[2]);
+  const countries = await dataries.loadAll('country');
+  const valid = countries.filter((c) => c.metadata[field] != null);
+  if (!valid.length) return null;
+  valid.sort((a, b) => (desc ? b.metadata[field] - a.metadata[field] : a.metadata[field] - b.metadata[field]));
+  const top3 = valid.slice(0, 3);
+  const label = field === 'population' ? 'populasi' : 'luas';
+  return 'Top 3 negara dengan ' + label + ' ' + m[2] + ':\n' +
+    top3.map((c, i) => (i + 1) + '. ' + c.metadata.name + ' — ' + formatValue(field, c.metadata[field])).join('\n');
+}
+
+const CONTINENT_REGIONS = {
+  asean: ['asian-tenggara'],
+  eropa: ['eropan-barat', 'eropan-selatan', 'eropan-tengah', 'eropan-timur', 'eropan-utara'],
+  afrika: ['african-barat', 'african-selatan', 'african-tengah', 'african-timur', 'african-utara'],
+  asia: ['asian-barat', 'asian-selatan', 'asian-tengah', 'asian-tenggara', 'asian-timur'],
+  amerika: ['american-karibia', 'american-selatan', 'american-tengah', 'american-utara'],
+  osenia: ['osenian'],
+};
+
+async function tryAgregasi(text) {
+  const m = text.match(/total\s+(populasi|penduduk|luas)\s+(asean|eropa|afrika|asia|amerika|osenia)/i);
+  if (!m) return null;
+  const field = m[1].toLowerCase() === 'luas' ? 'area' : 'population';
+  const continentKey = m[2].toLowerCase();
+  const regions = CONTINENT_REGIONS[continentKey];
+  if (!regions) return null;
+  const countries = await dataries.loadAll('country');
+  const matched = countries.filter((c) => regions.includes(c.metadata.region) && c.metadata[field] != null);
+  if (!matched.length) return null;
+  const total = matched.reduce((sum, c) => sum + c.metadata[field], 0);
+  const label = field === 'population' ? 'Populasi' : 'Luas';
+  return 'Total ' + label.toLowerCase() + ' ' + capitalize(continentKey) + ' sekitar ' + formatValue(field, total) + ' (dari ' + matched.length + ' negara).';
+}
+
+async function tryReverseLookup(text) {
+  const currencyM = text.match(/negara\s+(?:yang\s+)?mata\s*uangnya\s+(.+?)\??$/i);
+  const langM = text.match(/negara\s+(?:yang\s+)?bahasanya\s+(.+?)\??$/i);
+  const capitalM = text.match(/ibukota(?:nya)?\s+(.+?)\s+(?:itu\s+)?negara\s+(?:apa|mana)\??$/i)
+    || text.match(/negara\s+apa\s+yang\s+ibukotanya\s+(.+?)\??$/i);
+  const currencyNameM = text.match(/mata\s*uang\s+(.+?)\s+itu\s+punya\s+negara\s+(?:apa|mana)\??$/i);
+  if (!currencyM && !langM && !capitalM && !currencyNameM) return null;
+  const countries = await dataries.loadAll('country');
+  if (currencyM) {
+    const q = cleanEntity(currencyM[1]);
+    if (!q) return null;
+    const matches = countries.filter((c) => (c.metadata.currency || '').toLowerCase().includes(q));
+    if (!matches.length) return null;
+    return 'Negara dengan mata uang ' + capitalize(q) + ': ' + matches.slice(0, 3).map((c) => c.metadata.name).join(', ') + '.';
+  }
+  if (langM) {
+    const q = cleanEntity(langM[1]);
+    if (!q) return null;
+    const matches = countries.filter((c) => (c.metadata.languages || []).some((l) => (l.name || '').toLowerCase().includes(q)));
+    if (!matches.length) return null;
+    return 'Negara berbahasa ' + capitalize(q) + ': ' + matches.slice(0, 3).map((c) => c.metadata.name).join(', ') + '.';
+  }
+  if (capitalM) {
+    const q = cleanEntity(capitalM[1]);
+    if (!q) return null;
+    const match = countries.find((c) => (c.metadata.capital || '').toLowerCase() === q || (c.metadata.capital || '').toLowerCase().includes(q));
+    if (!match) return null;
+    return 'Negara dengan ibukota ' + capitalize(q) + ' adalah ' + match.metadata.name + '.';
+  }
+  const q = cleanEntity(currencyNameM[1]);
+  if (!q) return null;
+  const match = countries.find((c) => (c.metadata.currency || '').toLowerCase() === q);
+  if (!match) return null;
+  return 'Mata uang ' + capitalize(q) + ' digunakan oleh negara ' + match.metadata.name + '.';
+}
+
+const UNIT_WORDS = {
+  km: 'km', kilometer: 'km', mil: 'mil', mile: 'mil',
+  kg: 'kg', kilogram: 'kg', lb: 'lb', pound: 'lb', pon: 'lb',
+  celcius: 'c', celsius: 'c', fahrenheit: 'f',
+};
+
+function convertUnit(val, from, to) {
+  if (from === to) return val;
+  if (from === 'km' && to === 'mil') return val * 0.621371;
+  if (from === 'mil' && to === 'km') return val / 0.621371;
+  if (from === 'kg' && to === 'lb') return val * 2.20462;
+  if (from === 'lb' && to === 'kg') return val / 2.20462;
+  if (from === 'c' && to === 'f') return (val * 9) / 5 + 32;
+  if (from === 'f' && to === 'c') return ((val - 32) * 5) / 9;
+  return null;
+}
+
+async function tryKonversiSatuan(text) {
+  const m = text.match(/(-?\d+(?:[.,]\d+)?)\s*(km|kilometer|mil|mile|kg|kilogram|lb|pound|pon|celcius|celsius|fahrenheit)\s+ke\s+(km|kilometer|mil|mile|kg|kilogram|lb|pound|pon|celcius|celsius|fahrenheit)\b/i);
+  if (!m) return null;
+  const val = parseFloat(m[1].replace(',', '.'));
+  const from = UNIT_WORDS[m[2].toLowerCase()];
+  const to = UNIT_WORDS[m[3].toLowerCase()];
+  if (!from || !to) return null;
+  const result = convertUnit(val, from, to);
+  if (result == null) return null;
+  return val + ' ' + m[2] + ' = ' + Math.round(result * 100) / 100 + ' ' + m[3] + '.';
+}
+
+const STATIC_RATES_IDR = {
+  usd: 16300, eur: 17200, gbp: 20500, jpy: 110, sgd: 12600, myr: 3500,
+  aud: 10700, cny: 2280, krw: 12, thb: 470, sar: 4350, chf: 18200,
+};
+
+const CURRENCY_ALIASES = {
+  dolar: 'usd', dolaramerika: 'usd', usd: 'usd',
+  euro: 'eur', eur: 'eur',
+  poundsterling: 'gbp', pound: 'gbp', gbp: 'gbp',
+  yen: 'jpy', jpy: 'jpy',
+  dolarsingapura: 'sgd', sgd: 'sgd',
+  ringgit: 'myr', myr: 'myr',
+  dolaraustralia: 'aud', aud: 'aud',
+  yuan: 'cny', cny: 'cny',
+  won: 'krw', krw: 'krw',
+  baht: 'thb', thb: 'thb',
+  riyal: 'sar', sar: 'sar',
+  franc: 'chf', chf: 'chf',
+  rupiah: 'idr', idr: 'idr',
+};
+
+function normalizeCurrencyWord(w) {
+  return CURRENCY_ALIASES[w.toLowerCase().replace(/\s+/g, '')] || null;
+}
+
+async function tryKonversiMataUang(text) {
+  const m = text.match(/(\d+(?:[.,]\d+)?)\s*(rupiah|dolar(?:\s+amerika)?|euro|pound\s*sterling|yen|dolar\s+singapura|ringgit|dolar\s+australia|yuan|won|baht|riyal|franc)\s+ke\s+(rupiah|dolar(?:\s+amerika)?|euro|pound\s*sterling|yen|dolar\s+singapura|ringgit|dolar\s+australia|yuan|won|baht|riyal|franc)\b/i);
+  if (!m) return null;
+  const val = parseFloat(m[1].replace(',', '.'));
+  const from = normalizeCurrencyWord(m[2]);
+  const to = normalizeCurrencyWord(m[3]);
+  if (!from || !to) return null;
+  const fromRate = from === 'idr' ? 1 : STATIC_RATES_IDR[from];
+  const toRate = to === 'idr' ? 1 : STATIC_RATES_IDR[to];
+  if (!fromRate || !toRate) return null;
+  const idrValue = val * fromRate;
+  const result = idrValue / toRate;
+  return val.toLocaleString('id-ID') + ' ' + m[2] + ' ≈ ' + result.toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' ' + m[3] + ' (kurs perkiraan).';
+}
+
+function parseIndoDate(dayStr, monthStr, year) {
+  const day = parseInt(dayStr, 10);
+  const monthIdx = MONTHS_ID.findIndex((mo) => mo.toLowerCase() === monthStr.toLowerCase());
+  if (monthIdx < 0 || !day) return null;
+  return new Date(year, monthIdx, day);
+}
+
+function formatIndoDateFull(d) {
+  return d.getDate() + ' ' + MONTHS_ID[d.getMonth()] + ' ' + d.getFullYear();
+}
+
+async function tryPenalaranTanggal(text) {
+  const rangeM = text.match(/berapa\s+hari\s+dari\s+(\d{1,2})\s+([a-zA-Z]+)\s+ke\s+(\d{1,2})\s+([a-zA-Z]+)/i);
+  if (rangeM) {
+    const now = new Date();
+    const d1 = parseIndoDate(rangeM[1], rangeM[2], now.getFullYear());
+    const d2 = parseIndoDate(rangeM[3], rangeM[4], now.getFullYear());
+    if (!d1 || !d2) return null;
+    const days = Math.round((d2 - d1) / 86400000);
+    return 'Dari ' + rangeM[1] + ' ' + capitalize(rangeM[2]) + ' ke ' + rangeM[3] + ' ' + capitalize(rangeM[4]) + ' ada ' + Math.abs(days) + ' hari.';
+  }
+  if (/minggu\s+depan\s+tanggal\s+berapa/i.test(text)) {
+    const d = new Date();
+    d.setDate(d.getDate() + 7);
+    return 'Minggu depan jatuh pada ' + formatIndoDateFull(d) + '.';
+  }
+  if (/bulan\s+depan\s+tanggal\s+berapa/i.test(text)) {
+    const d = new Date();
+    d.setMonth(d.getMonth() + 1);
+    return 'Bulan depan (tanggal yang sama) jatuh pada ' + formatIndoDateFull(d) + '.';
+  }
+  if (/besok\s+tanggal\s+berapa/i.test(text)) {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return 'Besok tanggal ' + formatIndoDateFull(d) + '.';
+  }
+  return null;
+}
+
 async function extras(q) {
   const text = String(q || '').trim();
   if (!text) return null;
+
+  const superlatif = await trySuperlatif(text);
+  if (superlatif) return superlatif;
+
+  const agregasi = await tryAgregasi(text);
+  if (agregasi) return agregasi;
+
+  const reverseLookup = await tryReverseLookup(text);
+  if (reverseLookup) return reverseLookup;
+
+  const konversiSatuan = await tryKonversiSatuan(text);
+  if (konversiSatuan) return konversiSatuan;
+
+  const konversiMataUang = await tryKonversiMataUang(text);
+  if (konversiMataUang) return konversiMataUang;
+
+  const penalaranTanggal = await tryPenalaranTanggal(text);
+  if (penalaranTanggal) return penalaranTanggal;
 
   const letak = await tryLetakGeografis(text);
   if (letak) return letak;
@@ -690,6 +966,12 @@ async function extras(q) {
 
   const makanan = await tryMakananKhas(text);
   if (makanan) return makanan;
+
+  const minuman = await tryMinumanKhas(text);
+  if (minuman) return minuman;
+
+  const etika = await tryEtika(text);
+  if (etika) return etika;
 
   const bahasa = await tryBahasaDi(text);
   if (bahasa) return bahasa;

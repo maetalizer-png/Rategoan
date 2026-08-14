@@ -1,245 +1,1673 @@
 [
-  { "prompt": "Selamat pagi", "expect": "greeting" },
-  { "prompt": "Selamat siang", "expect": "greeting" },
-  { "prompt": "Selamat sore", "expect": "greeting" },
-  { "prompt": "Selamat malam", "expect": "greeting" },
-  { "prompt": "Met malam", "expect": "greeting" },
-  { "prompt": "Good morning", "expect": "greeting" },
-  { "prompt": "Halo", "expect": "greeting" },
-  { "prompt": "Hai", "expect": "greeting" },
-  { "prompt": "Assalamualaikum", "expect": "greeting" },
-  { "prompt": "Siapa kamu?", "expect": "smalltalk" },
-  { "prompt": "Apa kabar?", "expect": "smalltalk" },
-  { "prompt": "Terima kasih ya", "expect": "smalltalk" },
-  { "prompt": "Sampai jumpa", "expect": "smalltalk" },
-  { "prompt": "Kamu bisa apa?", "expect": "smalltalk" },
-  { "prompt": "Hitung 12*8", "expect": "tool" },
-  { "prompt": "Hitung 5+5*2", "expect": "tool" },
-  { "prompt": "Berapa 10% dari 50", "expect": "tool" },
-  { "prompt": "Berapa 20+30", "expect": "tool" },
-  { "prompt": "Jam berapa sekarang?", "expect": "tool" },
-  { "prompt": "Tanggal berapa hari ini?", "expect": "tool" },
-  { "prompt": "Hari apa sekarang?", "expect": "tool" },
-  { "prompt": "Apa yang kamu tahu tentang localStorage", "expect": "tool" },
-  { "prompt": "Ringkas percakapan", "expect": "structured" },
-  { "prompt": "Ringkas: hari ini saya rapat pagi, lalu coding sampai sore, lanjut review PR sebelum pulang.", "expect": "structured" },
-  { "prompt": "Ingat bahwa saya alergi kacang", "expect": "tool" },
-  { "prompt": "Lupakan saya alergi kacang", "expect": "tool" },
-  { "prompt": "Nama saya Budi", "expect": "personalize" },
-  { "prompt": "Siapa nama saya?", "expect": "personalize" },
-  { "prompt": "Saya suka membaca buku", "expect": "personalize" },
-  { "prompt": "Apa yang saya suka?", "expect": "personalize" },
-  { "prompt": "Saya kerja sebagai desainer", "expect": "personalize" },
-  { "prompt": "Saya tinggal di Bandung", "expect": "personalize" },
-  { "prompt": "Kasih ide konten tentang belajar coding", "expect": "structured" },
-  { "prompt": "Jelaskan apa itu ES6 Modules", "expect": "structured" },
-  { "prompt": "Jelaskan apa itu PWA", "expect": "structured" },
-  { "prompt": "Kenapa langit berwarna biru?", "expect": "question" },
-  { "prompt": "Bagaimana cara belajar yang efektif?", "expect": "question" },
-  { "prompt": "Jawabannya bagus banget", "expect": "tool" },
-  { "prompt": "Itu jawaban yang salah", "expect": "tool" },
-  { "prompt": "asdkjalskdj random teks tanpa makna", "expect": "fallback_ok" },
-  { "prompt": "Jelaskan kopi", "expect": "structured" },
-  { "prompt": "Jelaskan tidur", "expect": "structured" },
-  { "prompt": "Jelaskan produktivitas", "expect": "structured" },
-  { "prompt": "Jelaskan menabung", "expect": "structured" },
-  { "prompt": "Jelaskan meditasi", "expect": "structured" },
-  { "prompt": "Cara belajar coding untuk pemula", "expect": "structured" },
-  { "prompt": "Langkah membuat kopi enak", "expect": "structured" },
-  { "prompt": "Ide konten tentang kesehatan mental", "expect": "structured" },
-  { "prompt": "Ide belajar bahasa asing", "expect": "structured" },
-  { "prompt": "Bandingkan kopi dan teh", "expect": "structured" },
-  { "prompt": "Bandingkan olahraga dan meditasi", "expect": "structured" },
-  { "prompt": "Kelebihan dan kekurangan kerja remote", "expect": "structured" },
-  { "prompt": "Kekurangan begadang", "expect": "structured" },
-  { "prompt": "Rangkum percakapan ini", "expect": "structured" },
-  { "prompt": "Ringkas: AI adalah bidang ilmu komputer yang membuat sistem mampu meniru sebagian kemampuan berpikir manusia. AI banyak dipakai dalam asisten virtual, rekomendasi produk, dan pengenalan gambar. Perkembangan AI terus meningkat pesat setiap tahun.", "expect": "structured" },
-  { "prompt": "1+1 berapa", "expect": "math", "contains": "2" },
-  { "prompt": "1+1 berapa hasilnya", "expect": "math", "contains": "2" },
-  { "prompt": "7 kali 6", "expect": "math", "contains": "42" },
-  { "prompt": "100 dibagi 5", "expect": "math", "contains": "20" },
-  { "prompt": "5 ditambah 3", "expect": "math", "contains": "8" },
-  { "prompt": "10 dikurang 4", "expect": "math", "contains": "6" },
-  { "prompt": "25% dari 200", "expect": "math", "contains": "50" },
-  { "prompt": "1+1 hasilnya 2", "expect": "math_statement", "noNoise": true },
-  { "prompt": "Apa ibukota negara Indonesia", "expect": "factoid", "contains": "Jakarta", "noNoise": true },
-  { "prompt": "Siapa pendiri google", "expect": "factoid", "contains": "Larry Page", "noNoise": true },
-  { "prompt": "Siapa presiden pertama Indonesia", "expect": "factoid", "contains": "Soekarno", "noNoise": true },
-  { "prompt": "Apa bahasa resmi Indonesia", "expect": "factoid", "contains": "Indonesia", "noNoise": true },
-  { "prompt": "Apa samudra terluas di dunia", "expect": "factoid", "contains": "Pasifik", "noNoise": true },
-  { "prompt": "Apa mata uang Indonesia", "expect": "factoid", "contains": "Rupiah", "noNoise": true },
-  { "prompt": "Siapa penemu telepon", "expect": "factoid", "contains": "Alexander Graham Bell", "noNoise": true },
-  { "prompt": "Ibukota negara Indonesia adalah jakarta", "expect": "teaching", "noNoise": true },
-  { "prompt": "Apa ibukota negara Indonesia", "expect": "factoid", "contains": "Jakarta", "noNoise": true },
-  { "prompt": "Kucing peliharaan itu adalah hewan yang lucu", "expect": "teaching", "noNoise": true },
-  { "prompt": "xyzxyz omong kosong tanpa arti apapun blah", "expect": "fallback_ok", "noNoise": true },
-  { "prompt": "9 kali 9", "expect": "math", "contains": "81" },
-  { "prompt": "apa ibukota thailand", "expect": "factoid", "contains": "Bangkok", "noNoise": true },
-  { "prompt": "berapa provinsi indonesia", "expect": "factoid", "contains": "38", "noNoise": true },
-  { "prompt": "ibukota jawa barat", "expect": "factoid", "contains": "Bandung", "noNoise": true },
-  { "prompt": "mata uang rusia", "expect": "factoid", "contains": "Rubel", "noNoise": true },
-  { "prompt": "bahasa vietnam", "expect": "factoid", "contains": "Vietnam", "noNoise": true },
-  { "prompt": "populasi polandia", "expect": "factoid", "contains": "37 juta jiwa", "noNoise": true },
-  { "prompt": "kapan ukraina merdeka", "expect": "factoid", "contains": "1991 (24 Agustus)", "noNoise": true },
-  { "prompt": "kota terbesar filipina", "expect": "factoid", "contains": "Quezon City", "noNoise": true },
-  { "prompt": "berapa kabupaten aceh", "expect": "factoid", "contains": "18", "noNoise": true },
-  { "prompt": "ceritakan tentang kamboja", "expect": "factoid", "contains": "Kamboja", "noNoise": true },
-  { "prompt": "sistem pemerintahan thailand", "expect": "factoid", "contains": "Monarki Konstitusional", "noNoise": true },
-  { "prompt": "luas indonesia", "expect": "factoid", "contains": "juta", "noNoise": true },
-  { "prompt": "kode telepon indonesia", "expect": "factoid", "contains": "+62", "noNoise": true },
-  { "prompt": "ceritakan tentang myanmar", "expect": "factoid", "contains": "Myanmar", "noNoise": true },
-  { "prompt": "berapa kota indonesia", "expect": "factoid", "contains": "416", "noNoise": true },
-  { "prompt": "Selamat malam", "expect": "greeting", "notContains": ["Mongolia"], "noForeignScript": true },
-  { "prompt": "Selamat pagi", "expect": "greeting" },
-  { "prompt": "apa yang kamu ketahui tentang negara Indonesia", "expect": "factoid", "containsAny": ["38 provinsi", "Jakarta"], "noNoise": true },
-  { "prompt": "ceritakan tentang rusia", "expect": "factoid", "contains": "terbesar di dunia", "noNoise": true },
-  { "prompt": "sapaan bahasa mongolia", "expect": "factoid", "contains": "Өглөөний мэнд", "noNoise": true },
-  { "prompt": "berapa penduduk indonesia", "expect": "factoid", "contains": "277 juta", "noNoise": true },
-  { "prompt": "apa ibukota negara indonesia", "expect": "factoid", "contains": "Jakarta", "noNoise": true },
-  { "prompt": "apa bahasa di thailand", "expect": "dataries_extras", "contains": "Thai", "noNoise": true },
-  { "prompt": "halo dalam bahasa jepang", "expect": "dataries_extras", "contains": "konnichiwa", "noNoise": true },
-  { "prompt": "tempat wisata di indonesia", "expect": "dataries_extras", "containsAny": ["Borobudur", "Bali"], "noNoise": true },
-  { "prompt": "siapa penemu bola lampu", "expect": "dataries_extras", "contains": "Edison", "noNoise": true },
-  { "prompt": "makanan khas korea", "expect": "dataries_extras", "containsAny": ["kimchi", "Kimchi"], "noNoise": true },
-  { "prompt": "kota bandung terkenal apa", "expect": "dataries_extras", "containsAny": ["sejuk", "kreatif"], "noNoise": true },
-  { "prompt": "berapa penutur bahasa mandarin", "expect": "dataries_extras", "contains": "miliar", "noNoise": true },
-  { "prompt": "apa itu fotosintesis", "expect": "dataries_extras", "containsAny": ["cahaya", "glukosa"], "noNoise": true },
-  { "prompt": "apa itu gravitasi", "expect": "dataries_extras", "contains": "Newton", "noNoise": true },
-  { "prompt": "apa itu offside", "expect": "dataries_extras", "containsAny": ["gawang", "sepak bola"], "noNoise": true },
-  { "prompt": "tempat wisata di mesir", "expect": "dataries_extras", "contains": "Piramida Giza", "noNoise": true },
-  { "prompt": "siapa pelukis mona lisa", "expect": "dataries_extras", "containsAny": ["Vinci", "Mona Lisa"], "noNoise": true },
-  { "prompt": "makanan khas italia", "expect": "dataries_extras", "containsAny": ["Pizza", "Pasta"], "noNoise": true },
-  { "prompt": "kota tokyo terkenal apa", "expect": "dataries_extras", "containsAny": ["Shibuya", "teknologi"], "noNoise": true },
-  { "prompt": "bahasa apa di jerman", "expect": "factoid", "contains": "Jerman", "noNoise": true },
-  { "prompt": "Jelaskan apa itu variabel", "expect": "structured" },
-  { "prompt": "Apa itu framework", "expect": "structured" },
-  { "prompt": "Sebutkan manfaat olahraga", "expect": "structured" },
-  { "prompt": "Ide konten tentang traveling", "expect": "structured" },
-  { "prompt": "Cara membuat kopi susu", "expect": "structured" },
-  { "prompt": "Langkah menulis artikel yang baik", "expect": "structured" },
-  { "prompt": "Bandingkan Python dan JavaScript", "expect": "structured" },
-  { "prompt": "Kelebihan dan kekurangan belajar online", "expect": "structured" },
-  { "prompt": "Hitung 45+55", "expect": "math", "contains": "100" },
-  { "prompt": "50 dikurang 20", "expect": "math", "contains": "30" },
-  { "prompt": "Ceritakan tentang kecerdasan buatan", "expect": "structured" },
-  { "prompt": "Ringkas: AI berkembang pesat, dipakai di banyak sektor, dan terus berevolusi.", "expect": "structured" },
-  { "prompt": "Bagaimana kabar anda", "expect": "smalltalk", "notContains": ["Menurutmu bagaimana kaitannya"] },
-  { "prompt": "kabarmu gimana", "expect": "smalltalk", "notContains": ["Melanjutkan dari"] },
-  { "prompt": "Apa makanan favorit di amerika", "expect": "dataries_extras", "containsAny": ["Burger", "Hot Dog"] },
-  { "prompt": "kuliner enak dari jepang", "expect": "dataries_extras", "containsAny": ["Sushi", "Ramen"] },
-  { "prompt": "siapa pelukis mona lisa", "expect": "dataries_extras", "contains": "Vinci" },
-  { "prompt": "Apa bahasa yang digunakan negara Prancis", "expect": "factoid", "contains": "Bahasa Prancis", "noNoise": true },
-  { "prompt": "How are you", "expect": "smalltalk" },
-  { "prompt": "kabar lu gimana", "expect": "smalltalk" },
-  { "prompt": "hewan khas australia", "expect": "dataries_extras", "containsAny": ["Kanguru", "Koala"], "noNoise": true },
-  { "prompt": "tari khas bali", "expect": "dataries_extras", "contains": "Tari Kecak", "noNoise": true },
-  { "prompt": "sejarah candi borobudur", "expect": "dataries_extras", "contains": "800", "noNoise": true },
-  { "prompt": "ekspor nikel indonesia", "expect": "dataries_extras", "contains": "Nikel", "noNoise": true },
-  { "prompt": "flora indonesia", "expect": "dataries_extras", "containsAny": ["Komodo", "Rafflesia"], "noNoise": true },
-  { "prompt": "budaya khas jepang", "expect": "dataries_extras", "contains": "Kabuki", "noNoise": true },
-  { "prompt": "festival khas jerman", "expect": "dataries_extras", "contains": "Oktoberfest", "noNoise": true },
-  { "prompt": "ekonomi minyak bumi", "expect": "dataries_extras", "contains": "OPEC", "noNoise": true },
-  { "prompt": "penemuan telepon", "expect": "dataries_extras", "contains": "1876", "noNoise": true },
-  { "prompt": "hewan khas afrika", "expect": "dataries_extras", "containsAny": ["Singa", "Gajah"], "noNoise": true },
-  { "prompt": "sejarah revolusi prancis", "expect": "dataries_extras", "contains": "1789", "noNoise": true },
-  { "prompt": "tari khas argentina", "expect": "dataries_extras", "contains": "Tango", "noNoise": true },
-  { "prompt": "ekspor utama indonesia", "expect": "dataries_extras", "containsAny": ["Nikel", "Kelapa Sawit"], "noNoise": true },
-  { "prompt": "festival khas meksiko", "expect": "dataries_extras", "containsAny": ["Mariachi", "Dia de los Muertos"], "noNoise": true },
-  { "prompt": "siapa penemu telepon genggam", "expect": "factoid", "containsAny": ["Martin Cooper", "Cooper"], "noNoise": true },
-  { "prompt": "makanan khas negara yang ibukotanya Bangkok", "expect": "dataries_extras", "containsAll": ["Thailand", "Tom Yum"], "noNoise": true },
-  { "prompt": "ibukota indonesia dan thailand", "expect": "factoid", "containsAll": ["Jakarta", "Bangkok"], "noNoise": true },
-  { "prompt": "berapa luas rusia", "expect": "factoid", "contains": "km²", "noNoise": true },
-  { "prompt": "kapan ukraina merdeka", "expect": "factoid", "containsAll": ["1991", "tahun lalu"], "noNoise": true },
-  { "prompt": "ceritakan tentang jepang", "expect": "factoid", "containsAll": ["•", "Tokyo"], "noNoise": true, "note": "heading markdown ### dirender jadi elemen heading oleh UI, bukan literal string; bullet • adalah bukti struktur mode detail" },
-  { "prompt": "ibukota jepang", "expect": "factoid", "contains": "Tokyo", "notContains": ["\n"], "noNoise": true },
-  { "prompt": "bro, kabar?", "expect": "smalltalk", "notContains": ["Anda"] },
-  { "prompt": "apa ibukota rusia", "expect": "factoid", "contains": "Moskow", "noNoise": true, "note": "multi-turn setup untuk anafora, lihat kasus berikutnya" },
-  { "prompt": "berapa penduduknya?", "expect": "factoid_anafora", "contains": "146 juta", "requiresContext": "apa ibukota rusia", "noNoise": true },
-  { "prompt": "ibukota malaysia", "expect": "factoid", "contains": "Kuala Lumpur", "noNoise": true, "note": "multi-turn setup untuk negasi, lihat kasus berikutnya" },
-  { "prompt": "bukan, maksud saya singapura", "expect": "factoid_negasi", "contains": "Singapura", "requiresContext": "ibukota malaysia", "noNoise": true },
-  { "prompt": "jawab singkat", "expect": "mode_pref", "note": "setel mode singkat untuk kasus berikutnya" },
-  { "prompt": "apa itu fotosintesis", "expect": "dataries_extras_singkat", "containsAny": ["cahaya", "glukosa"], "requiresContext": "jawab singkat", "noNoise": true },
-  { "prompt": "baca foto ini", "expect": "ocr_stub", "containsAll": ["OCR", "MB"], "requiresAttach": "image", "note": "foto receipt -> jujur minta unduh paket dulu (Tesseract belum diunduh secara default)" },
-  { "prompt": "ringkas catatan ini", "expect": "ocr_stub", "containsAll": ["OCR", "MB"], "requiresAttach": "image", "note": "foto catatan -> stub jujur yang sama sampai paket diunduh" },
-  { "prompt": "extract text", "expect": "ocr_stub", "containsAll": ["OCR", "MB"], "requiresAttach": "image", "note": "screenshot -> stub jujur yang sama" },
-  { "prompt": "ingatkan saya 15 menit lagi cari resep di catatan saya", "expect": "reminder", "contains": "cari resep", "note": "voice-style: pola reminder juga jalan dari transkrip suara Web Speech API. Diperbaiki dari versi lama yang tidak menyertakan frasa waktu (parseReminder sengaja return null tanpa waktu eksplisit)." },
-  { "prompt": "catat beli obat", "expect": "voice_note", "contains": "beli obat" },
-  { "prompt": "cari beli obat di semua", "expect": "voice_search", "contains": "beli obat" },
-  { "prompt": "terjemahkan halo ke inggris", "expect": "translate_stub", "containsAll": ["paket", "MB"], "note": "voice-style translate -> stub jujur, model belum diunduh" },
-  { "prompt": "wake word Hey Raget", "expect": "not_implemented", "note": "Wake-word continuous listening SENGAJA TIDAK dibangun (privasi + kompleksitas rekaman audio latar belakang) - didokumentasikan jujur di laporan, bukan bench pass/fail" },
-  { "prompt": "ingatkan saya 30 menit lagi minum obat", "expect": "reminder", "contains": "minum obat" },
-  { "prompt": "ingatkan saya besok pagi olahraga", "expect": "reminder", "contains": "olahraga" },
-  { "prompt": "ingatkan saya setiap hari senin bayar tagihan", "expect": "reminder", "containsAll": ["bayar tagihan", "berulang"] },
-  { "prompt": "batalkan pengingat", "expect": "reminder_cancel", "containsAny": ["dibatalkan", "tidak ada"] },
-  { "prompt": "export chat pdf", "expect": "export_pdf", "containsAny": ["cetak", "PDF", "Popup"] },
-  { "prompt": "export chat markdown", "expect": "export_md", "contains": "Markdown" },
-  { "prompt": "share ke wa", "expect": "export_wa", "contains": "WhatsApp" },
-  { "prompt": "terjemahkan selamat pagi ke inggris", "expect": "translate_stub", "containsAll": ["paket", "MB"] },
-  { "prompt": "translate good morning ke id", "expect": "translate_stub", "containsAll": ["paket", "MB"] },
-  { "prompt": "terjemahkan konnichiwa ke id", "expect": "translate_stub", "containsAll": ["paket", "MB"] },
-  { "prompt": "terjemahkan teks yang sangat panjang sekali untuk menguji potongan chunk lima ratus karakter ke inggris", "expect": "translate_stub", "containsAll": ["paket", "MB"] },
-  { "prompt": "terjemahkan bonjour ke xx", "expect": "translate_unsupported", "contains": "belum didukung" },
-  { "prompt": "sync google calendar", "expect": "calendar_google_deferred", "note": "OAuth Google DITUNDA sesuai keputusan - hanya import .ics yang didukung saat ini, didokumentasikan jujur di laporan" },
-  { "prompt": "impor kalender ics", "expect": "calendar_ics_import", "contains": "impor", "requiresAttach": ".ics", "note": "diverifikasi end-to-end lewat Playwright: 1 acara berhasil diimpor dari file .ics nyata" },
-  { "prompt": "kapan meeting selanjutnya", "expect": "calendar_query", "contains": "Meeting with team", "requiresContext": "impor kalender ics" },
-  { "prompt": "buat email formal ke Bu Sinta tentang laporan bulanan", "expect": "email", "contains": "Yth" },
-  { "prompt": "tulis email informal ke Dimas soal rencana futsal", "expect": "email", "contains": "Hai" },
-  { "prompt": "cari beli susu di semua", "expect": "unified_search", "contains": "Hasil pencarian" },
-  { "prompt": "apa yang saya punya tentang rapat tim", "expect": "unified_search_crossref", "note": "cross-reference: mencari across riwayat chat + pengingat dalam satu balasan terkelompok per sumber" },
-  { "prompt": "impor file ini", "expect": "whatsapp_import", "containsAll": ["WhatsApp", "pesan"], "requiresAttach": ".txt (ekspor WhatsApp)", "note": "diverifikasi end-to-end via Playwright: 3 pesan -> 2 chunk (gap 5 menit) tersimpan raget_whatsapp" },
-  { "prompt": "impor file ini", "expect": "evernote_import", "containsAll": ["Evernote", "catatan"], "requiresAttach": ".enex", "note": "diverifikasi end-to-end via Playwright: 1 catatan tersimpan raget_evernote, tanpa CDN (DOMParser native)" },
-  { "prompt": "baca pdf ini", "expect": "pdf_stub", "containsAll": ["PDF", "MB"], "requiresAttach": ".pdf", "note": "CDN pdf.js diblokir di sandbox ini (403 proxy) - stub jujur diverifikasi, path 'paket sudah diunduh' tidak bisa dites di lingkungan ini" },
-  { "prompt": "impor notion ini", "expect": "notion_stub", "containsAll": ["Notion", "MB"], "requiresAttach": ".zip", "note": "sama seperti PDF - CDN JSZip diblokir di sandbox, stub jujur diverifikasi" },
-  { "prompt": "cari meeting di semua sumber", "expect": "unified_search_vault", "contains": "WhatsApp", "requiresContext": "impor file ini (WhatsApp)", "note": "diverifikasi: unified search menemukan chunk WhatsApp yang baru diimpor" },
-  { "prompt": "hitung 12*8", "expect": "math", "contains": "96", "note": "regresi Jilid 5-12 tetap hijau" },
-  { "prompt": "apa ibukota brazil", "expect": "factoid_alias", "contains": "Brasilia", "note": "Jilid 13: alias brazil=brasil terpasang di extractEntity" },
-  { "prompt": "apa ibukota england", "expect": "factoid_alias", "contains": "London", "note": "Jilid 13: alias england=inggris terpasang di extractEntity" },
-  { "prompt": "apa ibukota new zealand", "expect": "factoid_alias", "contains": "Wellington", "note": "Jilid 13: alias new zealand=selandia baru terpasang di extractEntity" },
-  { "prompt": "apa ibukota korea", "expect": "factoid_alias", "contains": "Seoul", "note": "Jilid 13: korea->korea selatan tetap benar" },
-  { "prompt": "apa ibukota atlantis", "expect": "factoid_honest", "notContains": ["Kota Atlantis", "ibukota Atlantis adalah"], "note": "Jilid 13: entitas eksplisit-tapi-gagal tidak boleh hijack konteks lama, jujur minta klarifikasi" },
-  { "prompt": "sebutkan manfaat olahraga rutin", "expect": "manfaat_bullet", "contains": "Manfaat", "notContains": ["Modular"], "note": "Jilid 13: bug wrong-answer diperbaiki - dulu nyasar ke fewshot 'manfaat bahasa pemrograman modular' via TF-IDF collision, sekarang tool manfaat() sendiri + FEWSHOT_MATCH_THRESHOLD naik ke 0.5" },
-  { "prompt": "cara membuat teh", "expect": "cara_numbered", "contains": "1.", "note": "Jilid 13: verifikasi format bernomor pada tool cara()" },
-  { "prompt": "bagaimana cara mengunci chat saya", "expect": "planner_clarify", "contains": "Maksudnya yang mana ya", "notContains": ["kaitannya dengan", "Melanjutkan dari"], "note": "Jilid 13: planner.planFallback clarify berpilihan, frasa seret-topik lama sudah dihapus" },
-  { "prompt": "apakah raget ingat percakapan", "expect": "planner_fallback", "containsAny": ["Maksudnya yang mana ya", "Yang saya tahu"], "notContains": ["kaitannya dengan", "Melanjutkan dari"], "note": "Jilid 13: planner.planFallback (clarify atau augmentasi tergantung akumulasi korpus fact di sesi bench) - keduanya menggantikan balasan generik lama yang rusak" },
-  { "prompt": "apakah bisa hapus satu chat aja", "expect": "planner_clarify", "contains": "Maksudnya yang mana ya", "notContains": ["kaitannya dengan", "Melanjutkan dari"], "note": "Jilid 13: planner.planFallback clarify ketiga" },
-  { "prompt": "aku lagi sedih banget hari ini", "expect": "mood_empati", "contains": "sedih", "note": "Jilid 13: mood lexicon -> opener empati" },
-  { "prompt": "duh capek banget deh rasanya", "expect": "mood_empati", "contains": "capek", "note": "Jilid 13: mood lexicon -> opener empati kedua" },
-  { "prompt": "siapa presiden pertama indonesia", "expect": "factoid_opener_variasi_1", "contains": "Soekarno", "note": "Jilid 13: giliran pertama - dipasangkan dengan entri berikutnya untuk cek variasi opener" },
-  { "prompt": "siapa presiden pertama indonesia", "expect": "factoid_opener_variasi_2", "contains": "Soekarno", "notContains": ["Soekarno.\""], "note": "Jilid 13: pertanyaan sama diulang - pickVariant anti-repeat wajib pilih opener berbeda dari giliran sebelumnya" },
-  { "prompt": "ringkas hari saya", "expect": "ringkas_hari_daftar", "contains": "Ringkasan Hari Ini", "note": "Jilid 13: tool baru ringkasHari() -> formatByType daftar" },
-  { "prompt": "laporan otak", "expect": "laporan_quality", "contains": "Skor Kualitas", "note": "Jilid 13: computeQuality() tampil di laporanOtak" },
-  { "prompt": "bedah https://example.com", "expect": "bedah_url_honest", "containsAny": ["CORS", "Ringkasan Halaman", "Gagal mengambil"], "note": "Jilid 13: bedah_url pakai readWeb (fetch nyata) + stub jujur saat CORS/offline, bukan lagi stub statis permanen" },
-  { "prompt": "apa manfaat membaca buku", "expect": "manfaat_bullet", "contains": "Manfaat", "note": "Jilid 13: tool manfaat() topik kedua, memastikan tidak nyasar ke fewshot lain" },
-  { "prompt": "cara mencuci mobil", "expect": "cara_numbered", "contains": "1.", "note": "Jilid 13: verifikasi format bernomor pada tool cara() topik lain" },
-  { "prompt": "bedah https://situs-tidak-ada-xyz123.invalid", "expect": "bedah_url_honest_fail", "notContains": ["undefined", "[object Object]"], "note": "Jilid 13: readWeb tidak crash pada domain tidak valid, tetap balas pesan jujur" },
-  { "prompt": "kuis", "expect": "kuis_start", "contains": "Jawab dengan angka", "note": "Jilid 14: tool kuis - giliran pertama, dipasangkan dengan entri berikutnya (jawaban)" },
-  { "prompt": "1", "expect": "kuis_answer", "containsAny": ["Benar!", "Belum tepat"], "note": "Jilid 14: jawaban kuis dievaluasi (benar atau salah, keduanya valid) dan streak diperbarui bila benar" },
-  { "prompt": "export catatan saya", "expect": "export_catatan_txt", "contains": "diunduh", "note": "Jilid 14: tool eksporCatatan() TXT (fakta + hal dipelajari + catatan)" },
-  { "prompt": "ekspor catatan markdown", "expect": "export_catatan_md", "contains": "Markdown", "note": "Jilid 14: tool eksporCatatan() format Markdown" },
-  { "prompt": "hitung 3+3 dan ingatkan saya jam 8 malam minum vitamin", "expect": "multi_intent", "containsAll": ["6", "vitamin"], "note": "Jilid 14: multi-intent \" dan \" - hitung + reminder digabung karena intent berbeda" },
-  { "prompt": "berapa hari lagi indonesia merdeka", "expect": "temporal_hari_lagi", "contains": "hari lagi", "note": "Jilid 14: tool temporal daysUntilIndependence(), dicek sebelum tryFactoid supaya tidak kena relasi merdeka biasa" },
-  { "prompt": "berapa hari lagi amerika serikat merdeka", "expect": "temporal_hari_lagi", "contains": "hari lagi", "note": "Jilid 14: tool temporal negara kedua" },
-  { "prompt": "kopi vs teh", "expect": "vs_bandingkan", "contains": "•", "note": "Jilid 14: \"X vs Y\" tanpa kata bandingkan -> bandingkan() terstruktur" },
-  { "prompt": "kucing vs anjing", "expect": "vs_bandingkan", "contains": "•", "note": "Jilid 14: pola vs topik kedua" },
-  { "prompt": "apa fungsi hati", "expect": "fungsi_bullet", "contains": "Fungsi", "note": "Jilid 14: tool generik baru fungsi()" },
-  { "prompt": "apa tujuan olahraga", "expect": "tujuan_bullet", "contains": "Tujuan", "note": "Jilid 14: tool generik baru tujuan()" },
-  { "prompt": "penyebab banjir", "expect": "penyebab_bullet", "contains": "Penyebab", "note": "Jilid 14: tool generik baru penyebab()" },
-  { "prompt": "bagikan kartu indonesia", "expect": "kartu_share", "containsAll": ["Ibukota", "Mata uang"], "note": "Jilid 14: tool bagikanKartu() - nama/ibukota/mata uang/makanan khas" },
-  { "prompt": "aku lagi senang banget hari ini", "expect": "mood_empati", "contains": "Senang mendengarnya", "note": "Jilid 14: mood lexicon topik baru - senang" },
-  { "prompt": "aku bosan banget nih", "expect": "mood_empati", "contains": "Kedengarannya lagi bosan ya", "note": "Jilid 14: mood lexicon topik baru - bosan" },
-  { "prompt": "aduh kesel banget deh", "expect": "mood_empati", "contains": "Kedengarannya lagi kesal ya", "note": "Jilid 14: mood lexicon topik baru - marah/kesal" },
-  { "prompt": "apa manfaat tidur cukup", "expect": "manfaat_bullet", "contains": "Manfaat Tidur", "note": "Jilid 14: tool manfaat() topik ketiga (regresi Jilid 13 tetap hijau)" },
-  { "prompt": "cara menabung dengan efektif", "expect": "cara_numbered", "contains": "1.", "note": "Jilid 14: tool cara() topik yang tidak bertabrakan dengan entitas dataries (regresi Jilid 13)" },
-  { "prompt": "ceritakan tentang polandia", "expect": "factoid_no_dup", "contains": "Eropa Tengah", "notContains": ["Eropa Timur"], "note": "Final: dedup 7 entri negara ganda (Polandia/Ceko/Hungaria/Slowakia/Swiss/Austria/Kamerun) - dulu tampil 2x dengan region berbeda" },
-  { "prompt": "jumlah pendudukan jepang", "expect": "factoid_populasi", "contains": "populasi", "note": "Final: relasi populasi toleran typo 'pendudukan'" },
-  { "prompt": "berapa penduduk korsel", "expect": "factoid_populasi", "contains": "Korea Selatan", "note": "Final: alias 'korsel' -> Korea Selatan" },
-  { "prompt": "luas wilayah russia", "expect": "factoid_luas", "contains": "Rusia", "note": "Final: filler 'wilayah' dibuang + alias ejaan 'russia' -> rusia" },
-  { "prompt": "ibukota as", "expect": "factoid_ibukota", "contains": "Amerika Serikat", "note": "Final: alias 'as' + guard entitas pendek (dulu salah nyasar ke Madagaskar via substring)" },
-  { "prompt": "ibukota uk", "expect": "factoid_ibukota", "contains": "Inggris", "note": "Final: alias 'uk' + guard entitas pendek (dulu salah nyasar ke Ukraina via substring)" },
-  { "prompt": "populasi negara tiongkok", "expect": "factoid_populasi", "contains": "China", "note": "Final: alias 'tiongkok'/'rrc' -> China" },
-  { "prompt": "wisata terkenal di prancis", "expect": "wisata_list", "contains": "Prancis", "note": "Final: regex tryWisataDi() diperluas terima 'terkenal/populer/paling terkenal'" },
-  { "prompt": "makanan khas korea dong", "expect": "makanan_list", "contains": "Korea Selatan", "note": "Final: partikel santai (dong/sih/ya/tuh/nih/deh/kok) dibuang dari ekstraksi entitas" },
-  { "prompt": "luas negara amrik", "expect": "factoid_luas", "contains": "Amerika Serikat", "note": "Final: alias slang 'amrik' -> Amerika Serikat" },
-  { "prompt": "jepang terletak dimana", "expect": "letak_geografis", "contains": "Asia Timur", "note": "Final: pola lokasi baru 'X terletak dimana' -> region terbaca" },
-  { "prompt": "di mana letak brasil", "expect": "letak_geografis", "contains": "Amerika Selatan", "note": "Final: pola lokasi baru 'di mana letak X' -> region terbaca" }
+  {
+    "prompt": "Selamat pagi",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Selamat siang",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Selamat sore",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Selamat malam",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Met malam",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Good morning",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Halo",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Hai",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Assalamualaikum",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "Siapa kamu?",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "Apa kabar?",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "Terima kasih ya",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "Sampai jumpa",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "Kamu bisa apa?",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "Hitung 12*8",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Hitung 5+5*2",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Berapa 10% dari 50",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Berapa 20+30",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Jam berapa sekarang?",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Tanggal berapa hari ini?",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Hari apa sekarang?",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Apa yang kamu tahu tentang localStorage",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Ringkas percakapan",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ringkas: hari ini saya rapat pagi, lalu coding sampai sore, lanjut review PR sebelum pulang.",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ingat bahwa saya alergi kacang",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Lupakan saya alergi kacang",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Nama saya Budi",
+    "expect": "personalize"
+  },
+  {
+    "prompt": "Siapa nama saya?",
+    "expect": "personalize"
+  },
+  {
+    "prompt": "Saya suka membaca buku",
+    "expect": "personalize"
+  },
+  {
+    "prompt": "Apa yang saya suka?",
+    "expect": "personalize"
+  },
+  {
+    "prompt": "Saya kerja sebagai desainer",
+    "expect": "personalize"
+  },
+  {
+    "prompt": "Saya tinggal di Bandung",
+    "expect": "personalize"
+  },
+  {
+    "prompt": "Kasih ide konten tentang belajar coding",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Jelaskan apa itu ES6 Modules",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Jelaskan apa itu PWA",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Kenapa langit berwarna biru?",
+    "expect": "question"
+  },
+  {
+    "prompt": "Bagaimana cara belajar yang efektif?",
+    "expect": "question"
+  },
+  {
+    "prompt": "Jawabannya bagus banget",
+    "expect": "tool"
+  },
+  {
+    "prompt": "Itu jawaban yang salah",
+    "expect": "tool"
+  },
+  {
+    "prompt": "asdkjalskdj random teks tanpa makna",
+    "expect": "fallback_ok"
+  },
+  {
+    "prompt": "Jelaskan kopi",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Jelaskan tidur",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Jelaskan produktivitas",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Jelaskan menabung",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Jelaskan meditasi",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Cara belajar coding untuk pemula",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Langkah membuat kopi enak",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ide konten tentang kesehatan mental",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ide belajar bahasa asing",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Bandingkan kopi dan teh",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Bandingkan olahraga dan meditasi",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Kelebihan dan kekurangan kerja remote",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Kekurangan begadang",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Rangkum percakapan ini",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ringkas: AI adalah bidang ilmu komputer yang membuat sistem mampu meniru sebagian kemampuan berpikir manusia. AI banyak dipakai dalam asisten virtual, rekomendasi produk, dan pengenalan gambar. Perkembangan AI terus meningkat pesat setiap tahun.",
+    "expect": "structured"
+  },
+  {
+    "prompt": "1+1 berapa",
+    "expect": "math",
+    "contains": "2"
+  },
+  {
+    "prompt": "1+1 berapa hasilnya",
+    "expect": "math",
+    "contains": "2"
+  },
+  {
+    "prompt": "7 kali 6",
+    "expect": "math",
+    "contains": "42"
+  },
+  {
+    "prompt": "100 dibagi 5",
+    "expect": "math",
+    "contains": "20"
+  },
+  {
+    "prompt": "5 ditambah 3",
+    "expect": "math",
+    "contains": "8"
+  },
+  {
+    "prompt": "10 dikurang 4",
+    "expect": "math",
+    "contains": "6"
+  },
+  {
+    "prompt": "25% dari 200",
+    "expect": "math",
+    "contains": "50"
+  },
+  {
+    "prompt": "1+1 hasilnya 2",
+    "expect": "math_statement",
+    "noNoise": true
+  },
+  {
+    "prompt": "Apa ibukota negara Indonesia",
+    "expect": "factoid",
+    "contains": "Jakarta",
+    "noNoise": true
+  },
+  {
+    "prompt": "Siapa pendiri google",
+    "expect": "factoid",
+    "contains": "Larry Page",
+    "noNoise": true
+  },
+  {
+    "prompt": "Siapa presiden pertama Indonesia",
+    "expect": "factoid",
+    "contains": "Soekarno",
+    "noNoise": true
+  },
+  {
+    "prompt": "Apa bahasa resmi Indonesia",
+    "expect": "factoid",
+    "contains": "Indonesia",
+    "noNoise": true
+  },
+  {
+    "prompt": "Apa samudra terluas di dunia",
+    "expect": "factoid",
+    "contains": "Pasifik",
+    "noNoise": true
+  },
+  {
+    "prompt": "Apa mata uang Indonesia",
+    "expect": "factoid",
+    "contains": "Rupiah",
+    "noNoise": true
+  },
+  {
+    "prompt": "Siapa penemu telepon",
+    "expect": "factoid",
+    "contains": "Alexander Graham Bell",
+    "noNoise": true
+  },
+  {
+    "prompt": "Ibukota negara Indonesia adalah jakarta",
+    "expect": "teaching",
+    "noNoise": true
+  },
+  {
+    "prompt": "Apa ibukota negara Indonesia",
+    "expect": "factoid",
+    "contains": "Jakarta",
+    "noNoise": true
+  },
+  {
+    "prompt": "Kucing peliharaan itu adalah hewan yang lucu",
+    "expect": "teaching",
+    "noNoise": true
+  },
+  {
+    "prompt": "xyzxyz omong kosong tanpa arti apapun blah",
+    "expect": "fallback_ok",
+    "noNoise": true
+  },
+  {
+    "prompt": "9 kali 9",
+    "expect": "math",
+    "contains": "81"
+  },
+  {
+    "prompt": "apa ibukota thailand",
+    "expect": "factoid",
+    "contains": "Bangkok",
+    "noNoise": true
+  },
+  {
+    "prompt": "berapa provinsi indonesia",
+    "expect": "factoid",
+    "contains": "38",
+    "noNoise": true
+  },
+  {
+    "prompt": "ibukota jawa barat",
+    "expect": "factoid",
+    "contains": "Bandung",
+    "noNoise": true
+  },
+  {
+    "prompt": "mata uang rusia",
+    "expect": "factoid",
+    "contains": "Rubel",
+    "noNoise": true
+  },
+  {
+    "prompt": "bahasa vietnam",
+    "expect": "factoid",
+    "contains": "Vietnam",
+    "noNoise": true
+  },
+  {
+    "prompt": "populasi polandia",
+    "expect": "factoid",
+    "contains": "37 juta jiwa",
+    "noNoise": true
+  },
+  {
+    "prompt": "kapan ukraina merdeka",
+    "expect": "factoid",
+    "contains": "1991 (24 Agustus)",
+    "noNoise": true
+  },
+  {
+    "prompt": "kota terbesar filipina",
+    "expect": "factoid",
+    "contains": "Quezon City",
+    "noNoise": true
+  },
+  {
+    "prompt": "berapa kabupaten aceh",
+    "expect": "factoid",
+    "contains": "18",
+    "noNoise": true
+  },
+  {
+    "prompt": "ceritakan tentang kamboja",
+    "expect": "factoid",
+    "contains": "Kamboja",
+    "noNoise": true
+  },
+  {
+    "prompt": "sistem pemerintahan thailand",
+    "expect": "factoid",
+    "contains": "Monarki Konstitusional",
+    "noNoise": true
+  },
+  {
+    "prompt": "luas indonesia",
+    "expect": "factoid",
+    "contains": "juta",
+    "noNoise": true
+  },
+  {
+    "prompt": "kode telepon indonesia",
+    "expect": "factoid",
+    "contains": "+62",
+    "noNoise": true
+  },
+  {
+    "prompt": "ceritakan tentang myanmar",
+    "expect": "factoid",
+    "contains": "Myanmar",
+    "noNoise": true
+  },
+  {
+    "prompt": "berapa kota indonesia",
+    "expect": "factoid",
+    "contains": "416",
+    "noNoise": true
+  },
+  {
+    "prompt": "Selamat malam",
+    "expect": "greeting",
+    "notContains": [
+      "Mongolia"
+    ],
+    "noForeignScript": true
+  },
+  {
+    "prompt": "Selamat pagi",
+    "expect": "greeting"
+  },
+  {
+    "prompt": "apa yang kamu ketahui tentang negara Indonesia",
+    "expect": "factoid",
+    "containsAny": [
+      "38 provinsi",
+      "Jakarta"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "ceritakan tentang rusia",
+    "expect": "factoid",
+    "contains": "terbesar di dunia",
+    "noNoise": true
+  },
+  {
+    "prompt": "sapaan bahasa mongolia",
+    "expect": "factoid",
+    "contains": "Өглөөний мэнд",
+    "noNoise": true
+  },
+  {
+    "prompt": "berapa penduduk indonesia",
+    "expect": "factoid",
+    "contains": "277 juta",
+    "noNoise": true
+  },
+  {
+    "prompt": "apa ibukota negara indonesia",
+    "expect": "factoid",
+    "contains": "Jakarta",
+    "noNoise": true
+  },
+  {
+    "prompt": "apa bahasa di thailand",
+    "expect": "dataries_extras",
+    "contains": "Thai",
+    "noNoise": true
+  },
+  {
+    "prompt": "halo dalam bahasa jepang",
+    "expect": "dataries_extras",
+    "contains": "konnichiwa",
+    "noNoise": true
+  },
+  {
+    "prompt": "tempat wisata di indonesia",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Borobudur",
+      "Bali"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "siapa penemu bola lampu",
+    "expect": "dataries_extras",
+    "contains": "Edison",
+    "noNoise": true
+  },
+  {
+    "prompt": "makanan khas korea",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "kimchi",
+      "Kimchi"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "kota bandung terkenal apa",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "sejuk",
+      "kreatif"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "berapa penutur bahasa mandarin",
+    "expect": "dataries_extras",
+    "contains": "miliar",
+    "noNoise": true
+  },
+  {
+    "prompt": "apa itu fotosintesis",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "cahaya",
+      "glukosa"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "apa itu gravitasi",
+    "expect": "dataries_extras",
+    "contains": "Newton",
+    "noNoise": true
+  },
+  {
+    "prompt": "apa itu offside",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "gawang",
+      "sepak bola"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "tempat wisata di mesir",
+    "expect": "dataries_extras",
+    "contains": "Piramida Giza",
+    "noNoise": true
+  },
+  {
+    "prompt": "siapa pelukis mona lisa",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Vinci",
+      "Mona Lisa"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "makanan khas italia",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Pizza",
+      "Pasta"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "kota tokyo terkenal apa",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Shibuya",
+      "teknologi"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "bahasa apa di jerman",
+    "expect": "factoid",
+    "contains": "Jerman",
+    "noNoise": true
+  },
+  {
+    "prompt": "Jelaskan apa itu variabel",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Apa itu framework",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Sebutkan manfaat olahraga",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ide konten tentang traveling",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Cara membuat kopi susu",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Langkah menulis artikel yang baik",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Bandingkan Python dan JavaScript",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Kelebihan dan kekurangan belajar online",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Hitung 45+55",
+    "expect": "math",
+    "contains": "100"
+  },
+  {
+    "prompt": "50 dikurang 20",
+    "expect": "math",
+    "contains": "30"
+  },
+  {
+    "prompt": "Ceritakan tentang kecerdasan buatan",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Ringkas: AI berkembang pesat, dipakai di banyak sektor, dan terus berevolusi.",
+    "expect": "structured"
+  },
+  {
+    "prompt": "Bagaimana kabar anda",
+    "expect": "smalltalk",
+    "notContains": [
+      "Menurutmu bagaimana kaitannya"
+    ]
+  },
+  {
+    "prompt": "kabarmu gimana",
+    "expect": "smalltalk",
+    "notContains": [
+      "Melanjutkan dari"
+    ]
+  },
+  {
+    "prompt": "Apa makanan favorit di amerika",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Burger",
+      "Hot Dog"
+    ]
+  },
+  {
+    "prompt": "kuliner enak dari jepang",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Sushi",
+      "Ramen"
+    ]
+  },
+  {
+    "prompt": "siapa pelukis mona lisa",
+    "expect": "dataries_extras",
+    "contains": "Vinci"
+  },
+  {
+    "prompt": "Apa bahasa yang digunakan negara Prancis",
+    "expect": "factoid",
+    "contains": "Bahasa Prancis",
+    "noNoise": true
+  },
+  {
+    "prompt": "How are you",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "kabar lu gimana",
+    "expect": "smalltalk"
+  },
+  {
+    "prompt": "hewan khas australia",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Kanguru",
+      "Koala"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "tari khas bali",
+    "expect": "dataries_extras",
+    "contains": "Tari Kecak",
+    "noNoise": true
+  },
+  {
+    "prompt": "sejarah candi borobudur",
+    "expect": "dataries_extras",
+    "contains": "800",
+    "noNoise": true
+  },
+  {
+    "prompt": "ekspor nikel indonesia",
+    "expect": "dataries_extras",
+    "contains": "Nikel",
+    "noNoise": true
+  },
+  {
+    "prompt": "flora indonesia",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Komodo",
+      "Rafflesia"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "budaya khas jepang",
+    "expect": "dataries_extras",
+    "contains": "Kabuki",
+    "noNoise": true
+  },
+  {
+    "prompt": "festival khas jerman",
+    "expect": "dataries_extras",
+    "contains": "Oktoberfest",
+    "noNoise": true
+  },
+  {
+    "prompt": "ekonomi minyak bumi",
+    "expect": "dataries_extras",
+    "contains": "OPEC",
+    "noNoise": true
+  },
+  {
+    "prompt": "penemuan telepon",
+    "expect": "dataries_extras",
+    "contains": "1876",
+    "noNoise": true
+  },
+  {
+    "prompt": "hewan khas afrika",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Singa",
+      "Gajah"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "sejarah revolusi prancis",
+    "expect": "dataries_extras",
+    "contains": "1789",
+    "noNoise": true
+  },
+  {
+    "prompt": "tari khas argentina",
+    "expect": "dataries_extras",
+    "contains": "Tango",
+    "noNoise": true
+  },
+  {
+    "prompt": "ekspor utama indonesia",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Nikel",
+      "Kelapa Sawit"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "festival khas meksiko",
+    "expect": "dataries_extras",
+    "containsAny": [
+      "Mariachi",
+      "Dia de los Muertos"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "siapa penemu telepon genggam",
+    "expect": "factoid",
+    "containsAny": [
+      "Martin Cooper",
+      "Cooper"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "makanan khas negara yang ibukotanya Bangkok",
+    "expect": "dataries_extras",
+    "containsAll": [
+      "Thailand",
+      "Tom Yum"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "ibukota indonesia dan thailand",
+    "expect": "factoid",
+    "containsAll": [
+      "Jakarta",
+      "Bangkok"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "berapa luas rusia",
+    "expect": "factoid",
+    "contains": "km²",
+    "noNoise": true
+  },
+  {
+    "prompt": "kapan ukraina merdeka",
+    "expect": "factoid",
+    "containsAll": [
+      "1991",
+      "tahun lalu"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "ceritakan tentang jepang",
+    "expect": "factoid",
+    "containsAll": [
+      "•",
+      "Tokyo"
+    ],
+    "noNoise": true,
+    "note": "heading markdown ### dirender jadi elemen heading oleh UI, bukan literal string; bullet • adalah bukti struktur mode detail"
+  },
+  {
+    "prompt": "ibukota jepang",
+    "expect": "factoid",
+    "contains": "Tokyo",
+    "notContains": [
+      "\n"
+    ],
+    "noNoise": true
+  },
+  {
+    "prompt": "bro, kabar?",
+    "expect": "smalltalk",
+    "notContains": [
+      "Anda"
+    ]
+  },
+  {
+    "prompt": "apa ibukota rusia",
+    "expect": "factoid",
+    "contains": "Moskow",
+    "noNoise": true,
+    "note": "multi-turn setup untuk anafora, lihat kasus berikutnya"
+  },
+  {
+    "prompt": "berapa penduduknya?",
+    "expect": "factoid_anafora",
+    "contains": "146 juta",
+    "requiresContext": "apa ibukota rusia",
+    "noNoise": true
+  },
+  {
+    "prompt": "ibukota malaysia",
+    "expect": "factoid",
+    "contains": "Kuala Lumpur",
+    "noNoise": true,
+    "note": "multi-turn setup untuk negasi, lihat kasus berikutnya"
+  },
+  {
+    "prompt": "bukan, maksud saya singapura",
+    "expect": "factoid_negasi",
+    "contains": "Singapura",
+    "requiresContext": "ibukota malaysia",
+    "noNoise": true
+  },
+  {
+    "prompt": "jawab singkat",
+    "expect": "mode_pref",
+    "note": "setel mode singkat untuk kasus berikutnya"
+  },
+  {
+    "prompt": "apa itu fotosintesis",
+    "expect": "dataries_extras_singkat",
+    "containsAny": [
+      "cahaya",
+      "glukosa"
+    ],
+    "requiresContext": "jawab singkat",
+    "noNoise": true
+  },
+  {
+    "prompt": "baca foto ini",
+    "expect": "ocr_stub",
+    "containsAll": [
+      "OCR",
+      "MB"
+    ],
+    "requiresAttach": "image",
+    "note": "foto receipt -> jujur minta unduh paket dulu (Tesseract belum diunduh secara default)"
+  },
+  {
+    "prompt": "ringkas catatan ini",
+    "expect": "ocr_stub",
+    "containsAll": [
+      "OCR",
+      "MB"
+    ],
+    "requiresAttach": "image",
+    "note": "foto catatan -> stub jujur yang sama sampai paket diunduh"
+  },
+  {
+    "prompt": "extract text",
+    "expect": "ocr_stub",
+    "containsAll": [
+      "OCR",
+      "MB"
+    ],
+    "requiresAttach": "image",
+    "note": "screenshot -> stub jujur yang sama"
+  },
+  {
+    "prompt": "ingatkan saya 15 menit lagi cari resep di catatan saya",
+    "expect": "reminder",
+    "contains": "cari resep",
+    "note": "voice-style: pola reminder juga jalan dari transkrip suara Web Speech API. Diperbaiki dari versi lama yang tidak menyertakan frasa waktu (parseReminder sengaja return null tanpa waktu eksplisit)."
+  },
+  {
+    "prompt": "catat beli obat",
+    "expect": "voice_note",
+    "contains": "beli obat"
+  },
+  {
+    "prompt": "cari beli obat di semua",
+    "expect": "voice_search",
+    "contains": "beli obat"
+  },
+  {
+    "prompt": "terjemahkan halo ke inggris",
+    "expect": "translate_stub",
+    "containsAll": [
+      "paket",
+      "MB"
+    ],
+    "note": "voice-style translate -> stub jujur, model belum diunduh"
+  },
+  {
+    "prompt": "wake word Hey Raget",
+    "expect": "not_implemented",
+    "note": "Wake-word continuous listening SENGAJA TIDAK dibangun (privasi + kompleksitas rekaman audio latar belakang) - didokumentasikan jujur di laporan, bukan bench pass/fail"
+  },
+  {
+    "prompt": "ingatkan saya 30 menit lagi minum obat",
+    "expect": "reminder",
+    "contains": "minum obat"
+  },
+  {
+    "prompt": "ingatkan saya besok pagi olahraga",
+    "expect": "reminder",
+    "contains": "olahraga"
+  },
+  {
+    "prompt": "ingatkan saya setiap hari senin bayar tagihan",
+    "expect": "reminder",
+    "containsAll": [
+      "bayar tagihan",
+      "berulang"
+    ]
+  },
+  {
+    "prompt": "batalkan pengingat",
+    "expect": "reminder_cancel",
+    "containsAny": [
+      "dibatalkan",
+      "tidak ada"
+    ]
+  },
+  {
+    "prompt": "export chat pdf",
+    "expect": "export_pdf",
+    "containsAny": [
+      "cetak",
+      "PDF",
+      "Popup"
+    ]
+  },
+  {
+    "prompt": "export chat markdown",
+    "expect": "export_md",
+    "contains": "Markdown"
+  },
+  {
+    "prompt": "share ke wa",
+    "expect": "export_wa",
+    "contains": "WhatsApp"
+  },
+  {
+    "prompt": "terjemahkan selamat pagi ke inggris",
+    "expect": "translate_stub",
+    "containsAll": [
+      "paket",
+      "MB"
+    ]
+  },
+  {
+    "prompt": "translate good morning ke id",
+    "expect": "translate_stub",
+    "containsAll": [
+      "paket",
+      "MB"
+    ]
+  },
+  {
+    "prompt": "terjemahkan konnichiwa ke id",
+    "expect": "translate_stub",
+    "containsAll": [
+      "paket",
+      "MB"
+    ]
+  },
+  {
+    "prompt": "terjemahkan teks yang sangat panjang sekali untuk menguji potongan chunk lima ratus karakter ke inggris",
+    "expect": "translate_stub",
+    "containsAll": [
+      "paket",
+      "MB"
+    ]
+  },
+  {
+    "prompt": "terjemahkan bonjour ke xx",
+    "expect": "translate_unsupported",
+    "contains": "belum didukung"
+  },
+  {
+    "prompt": "sync google calendar",
+    "expect": "calendar_google_deferred",
+    "note": "OAuth Google DITUNDA sesuai keputusan - hanya import .ics yang didukung saat ini, didokumentasikan jujur di laporan"
+  },
+  {
+    "prompt": "impor kalender ics",
+    "expect": "calendar_ics_import",
+    "contains": "impor",
+    "requiresAttach": ".ics",
+    "note": "diverifikasi end-to-end lewat Playwright: 1 acara berhasil diimpor dari file .ics nyata"
+  },
+  {
+    "prompt": "kapan meeting selanjutnya",
+    "expect": "calendar_query",
+    "contains": "Meeting with team",
+    "requiresContext": "impor kalender ics"
+  },
+  {
+    "prompt": "buat email formal ke Bu Sinta tentang laporan bulanan",
+    "expect": "email",
+    "contains": "Yth"
+  },
+  {
+    "prompt": "tulis email informal ke Dimas soal rencana futsal",
+    "expect": "email",
+    "contains": "Hai"
+  },
+  {
+    "prompt": "cari beli susu di semua",
+    "expect": "unified_search",
+    "contains": "Hasil pencarian"
+  },
+  {
+    "prompt": "apa yang saya punya tentang rapat tim",
+    "expect": "unified_search_crossref",
+    "note": "cross-reference: mencari across riwayat chat + pengingat dalam satu balasan terkelompok per sumber"
+  },
+  {
+    "prompt": "impor file ini",
+    "expect": "whatsapp_import",
+    "containsAll": [
+      "WhatsApp",
+      "pesan"
+    ],
+    "requiresAttach": ".txt (ekspor WhatsApp)",
+    "note": "diverifikasi end-to-end via Playwright: 3 pesan -> 2 chunk (gap 5 menit) tersimpan raget_whatsapp"
+  },
+  {
+    "prompt": "impor file ini",
+    "expect": "evernote_import",
+    "containsAll": [
+      "Evernote",
+      "catatan"
+    ],
+    "requiresAttach": ".enex",
+    "note": "diverifikasi end-to-end via Playwright: 1 catatan tersimpan raget_evernote, tanpa CDN (DOMParser native)"
+  },
+  {
+    "prompt": "baca pdf ini",
+    "expect": "pdf_stub",
+    "containsAll": [
+      "PDF",
+      "MB"
+    ],
+    "requiresAttach": ".pdf",
+    "note": "CDN pdf.js diblokir di sandbox ini (403 proxy) - stub jujur diverifikasi, path 'paket sudah diunduh' tidak bisa dites di lingkungan ini"
+  },
+  {
+    "prompt": "impor notion ini",
+    "expect": "notion_stub",
+    "containsAll": [
+      "Notion",
+      "MB"
+    ],
+    "requiresAttach": ".zip",
+    "note": "sama seperti PDF - CDN JSZip diblokir di sandbox, stub jujur diverifikasi"
+  },
+  {
+    "prompt": "cari meeting di semua sumber",
+    "expect": "unified_search_vault",
+    "contains": "WhatsApp",
+    "requiresContext": "impor file ini (WhatsApp)",
+    "note": "diverifikasi: unified search menemukan chunk WhatsApp yang baru diimpor"
+  },
+  {
+    "prompt": "hitung 12*8",
+    "expect": "math",
+    "contains": "96",
+    "note": "regresi Jilid 5-12 tetap hijau"
+  },
+  {
+    "prompt": "apa ibukota brazil",
+    "expect": "factoid_alias",
+    "contains": "Brasilia",
+    "note": "Jilid 13: alias brazil=brasil terpasang di extractEntity"
+  },
+  {
+    "prompt": "apa ibukota england",
+    "expect": "factoid_alias",
+    "contains": "London",
+    "note": "Jilid 13: alias england=inggris terpasang di extractEntity"
+  },
+  {
+    "prompt": "apa ibukota new zealand",
+    "expect": "factoid_alias",
+    "contains": "Wellington",
+    "note": "Jilid 13: alias new zealand=selandia baru terpasang di extractEntity"
+  },
+  {
+    "prompt": "apa ibukota korea",
+    "expect": "factoid_alias",
+    "contains": "Seoul",
+    "note": "Jilid 13: korea->korea selatan tetap benar"
+  },
+  {
+    "prompt": "apa ibukota atlantis",
+    "expect": "factoid_honest",
+    "notContains": [
+      "Kota Atlantis",
+      "ibukota Atlantis adalah"
+    ],
+    "note": "Jilid 13: entitas eksplisit-tapi-gagal tidak boleh hijack konteks lama, jujur minta klarifikasi"
+  },
+  {
+    "prompt": "sebutkan manfaat olahraga rutin",
+    "expect": "manfaat_bullet",
+    "contains": "Manfaat",
+    "notContains": [
+      "Modular"
+    ],
+    "note": "Jilid 13: bug wrong-answer diperbaiki - dulu nyasar ke fewshot 'manfaat bahasa pemrograman modular' via TF-IDF collision, sekarang tool manfaat() sendiri + FEWSHOT_MATCH_THRESHOLD naik ke 0.5"
+  },
+  {
+    "prompt": "cara membuat teh",
+    "expect": "cara_numbered",
+    "contains": "1.",
+    "note": "Jilid 13: verifikasi format bernomor pada tool cara()"
+  },
+  {
+    "prompt": "bagaimana cara mengunci chat saya",
+    "expect": "planner_clarify",
+    "contains": "Maksudnya yang mana ya",
+    "notContains": [
+      "kaitannya dengan",
+      "Melanjutkan dari"
+    ],
+    "note": "Jilid 13: planner.planFallback clarify berpilihan, frasa seret-topik lama sudah dihapus"
+  },
+  {
+    "prompt": "apakah raget ingat percakapan",
+    "expect": "planner_fallback",
+    "containsAny": [
+      "Maksudnya yang mana ya",
+      "Yang saya tahu"
+    ],
+    "notContains": [
+      "kaitannya dengan",
+      "Melanjutkan dari"
+    ],
+    "note": "Jilid 13: planner.planFallback (clarify atau augmentasi tergantung akumulasi korpus fact di sesi bench) - keduanya menggantikan balasan generik lama yang rusak"
+  },
+  {
+    "prompt": "apakah bisa hapus satu chat aja",
+    "expect": "planner_clarify",
+    "contains": "Maksudnya yang mana ya",
+    "notContains": [
+      "kaitannya dengan",
+      "Melanjutkan dari"
+    ],
+    "note": "Jilid 13: planner.planFallback clarify ketiga"
+  },
+  {
+    "prompt": "aku lagi sedih banget hari ini",
+    "expect": "mood_empati",
+    "contains": "sedih",
+    "note": "Jilid 13: mood lexicon -> opener empati"
+  },
+  {
+    "prompt": "duh capek banget deh rasanya",
+    "expect": "mood_empati",
+    "contains": "capek",
+    "note": "Jilid 13: mood lexicon -> opener empati kedua"
+  },
+  {
+    "prompt": "siapa presiden pertama indonesia",
+    "expect": "factoid_opener_variasi_1",
+    "contains": "Soekarno",
+    "note": "Jilid 13: giliran pertama - dipasangkan dengan entri berikutnya untuk cek variasi opener"
+  },
+  {
+    "prompt": "siapa presiden pertama indonesia",
+    "expect": "factoid_opener_variasi_2",
+    "contains": "Soekarno",
+    "notContains": [
+      "Soekarno.\""
+    ],
+    "note": "Jilid 13: pertanyaan sama diulang - pickVariant anti-repeat wajib pilih opener berbeda dari giliran sebelumnya"
+  },
+  {
+    "prompt": "ringkas hari saya",
+    "expect": "ringkas_hari_daftar",
+    "contains": "Ringkasan Hari Ini",
+    "note": "Jilid 13: tool baru ringkasHari() -> formatByType daftar"
+  },
+  {
+    "prompt": "laporan otak",
+    "expect": "laporan_quality",
+    "contains": "Skor Kualitas",
+    "note": "Jilid 13: computeQuality() tampil di laporanOtak"
+  },
+  {
+    "prompt": "bedah https://example.com",
+    "expect": "bedah_url_honest",
+    "containsAny": [
+      "CORS",
+      "Ringkasan Halaman",
+      "Gagal mengambil"
+    ],
+    "note": "Jilid 13: bedah_url pakai readWeb (fetch nyata) + stub jujur saat CORS/offline, bukan lagi stub statis permanen"
+  },
+  {
+    "prompt": "apa manfaat membaca buku",
+    "expect": "manfaat_bullet",
+    "contains": "Manfaat",
+    "note": "Jilid 13: tool manfaat() topik kedua, memastikan tidak nyasar ke fewshot lain"
+  },
+  {
+    "prompt": "cara mencuci mobil",
+    "expect": "cara_numbered",
+    "contains": "1.",
+    "note": "Jilid 13: verifikasi format bernomor pada tool cara() topik lain"
+  },
+  {
+    "prompt": "bedah https://situs-tidak-ada-xyz123.invalid",
+    "expect": "bedah_url_honest_fail",
+    "notContains": [
+      "undefined",
+      "[object Object]"
+    ],
+    "note": "Jilid 13: readWeb tidak crash pada domain tidak valid, tetap balas pesan jujur"
+  },
+  {
+    "prompt": "kuis",
+    "expect": "kuis_start",
+    "contains": "Jawab dengan angka",
+    "note": "Jilid 14: tool kuis - giliran pertama, dipasangkan dengan entri berikutnya (jawaban)"
+  },
+  {
+    "prompt": "1",
+    "expect": "kuis_answer",
+    "containsAny": [
+      "Benar!",
+      "Belum tepat"
+    ],
+    "note": "Jilid 14: jawaban kuis dievaluasi (benar atau salah, keduanya valid) dan streak diperbarui bila benar"
+  },
+  {
+    "prompt": "export catatan saya",
+    "expect": "export_catatan_txt",
+    "contains": "diunduh",
+    "note": "Jilid 14: tool eksporCatatan() TXT (fakta + hal dipelajari + catatan)"
+  },
+  {
+    "prompt": "ekspor catatan markdown",
+    "expect": "export_catatan_md",
+    "contains": "Markdown",
+    "note": "Jilid 14: tool eksporCatatan() format Markdown"
+  },
+  {
+    "prompt": "hitung 3+3 dan ingatkan saya jam 8 malam minum vitamin",
+    "expect": "multi_intent",
+    "containsAll": [
+      "6",
+      "vitamin"
+    ],
+    "note": "Jilid 14: multi-intent \" dan \" - hitung + reminder digabung karena intent berbeda"
+  },
+  {
+    "prompt": "berapa hari lagi indonesia merdeka",
+    "expect": "temporal_hari_lagi",
+    "contains": "hari lagi",
+    "note": "Jilid 14: tool temporal daysUntilIndependence(), dicek sebelum tryFactoid supaya tidak kena relasi merdeka biasa"
+  },
+  {
+    "prompt": "berapa hari lagi amerika serikat merdeka",
+    "expect": "temporal_hari_lagi",
+    "contains": "hari lagi",
+    "note": "Jilid 14: tool temporal negara kedua"
+  },
+  {
+    "prompt": "kopi vs teh",
+    "expect": "vs_bandingkan",
+    "contains": "•",
+    "note": "Jilid 14: \"X vs Y\" tanpa kata bandingkan -> bandingkan() terstruktur"
+  },
+  {
+    "prompt": "kucing vs anjing",
+    "expect": "vs_bandingkan",
+    "contains": "•",
+    "note": "Jilid 14: pola vs topik kedua"
+  },
+  {
+    "prompt": "apa fungsi hati",
+    "expect": "fungsi_bullet",
+    "contains": "Fungsi",
+    "note": "Jilid 14: tool generik baru fungsi()"
+  },
+  {
+    "prompt": "apa tujuan olahraga",
+    "expect": "tujuan_bullet",
+    "contains": "Tujuan",
+    "note": "Jilid 14: tool generik baru tujuan()"
+  },
+  {
+    "prompt": "penyebab banjir",
+    "expect": "penyebab_bullet",
+    "contains": "Penyebab",
+    "note": "Jilid 14: tool generik baru penyebab()"
+  },
+  {
+    "prompt": "bagikan kartu indonesia",
+    "expect": "kartu_share",
+    "containsAll": [
+      "Ibukota",
+      "Mata uang"
+    ],
+    "note": "Jilid 14: tool bagikanKartu() - nama/ibukota/mata uang/makanan khas"
+  },
+  {
+    "prompt": "aku lagi senang banget hari ini",
+    "expect": "mood_empati",
+    "contains": "Senang mendengarnya",
+    "note": "Jilid 14: mood lexicon topik baru - senang"
+  },
+  {
+    "prompt": "aku bosan banget nih",
+    "expect": "mood_empati",
+    "contains": "Kedengarannya lagi bosan ya",
+    "note": "Jilid 14: mood lexicon topik baru - bosan"
+  },
+  {
+    "prompt": "aduh kesel banget deh",
+    "expect": "mood_empati",
+    "contains": "Kedengarannya lagi kesal ya",
+    "note": "Jilid 14: mood lexicon topik baru - marah/kesal"
+  },
+  {
+    "prompt": "apa manfaat tidur cukup",
+    "expect": "manfaat_bullet",
+    "contains": "Manfaat Tidur",
+    "note": "Jilid 14: tool manfaat() topik ketiga (regresi Jilid 13 tetap hijau)"
+  },
+  {
+    "prompt": "cara menabung dengan efektif",
+    "expect": "cara_numbered",
+    "contains": "1.",
+    "note": "Jilid 14: tool cara() topik yang tidak bertabrakan dengan entitas dataries (regresi Jilid 13)"
+  },
+  {
+    "prompt": "ceritakan tentang polandia",
+    "expect": "factoid_no_dup",
+    "contains": "Eropa Tengah",
+    "notContains": [
+      "Eropa Timur"
+    ],
+    "note": "Final: dedup 7 entri negara ganda (Polandia/Ceko/Hungaria/Slowakia/Swiss/Austria/Kamerun) - dulu tampil 2x dengan region berbeda"
+  },
+  {
+    "prompt": "jumlah pendudukan jepang",
+    "expect": "factoid_populasi",
+    "contains": "populasi",
+    "note": "Final: relasi populasi toleran typo 'pendudukan'"
+  },
+  {
+    "prompt": "berapa penduduk korsel",
+    "expect": "factoid_populasi",
+    "contains": "Korea Selatan",
+    "note": "Final: alias 'korsel' -> Korea Selatan"
+  },
+  {
+    "prompt": "luas wilayah russia",
+    "expect": "factoid_luas",
+    "contains": "Rusia",
+    "note": "Final: filler 'wilayah' dibuang + alias ejaan 'russia' -> rusia"
+  },
+  {
+    "prompt": "ibukota as",
+    "expect": "factoid_ibukota",
+    "contains": "Amerika Serikat",
+    "note": "Final: alias 'as' + guard entitas pendek (dulu salah nyasar ke Madagaskar via substring)"
+  },
+  {
+    "prompt": "ibukota uk",
+    "expect": "factoid_ibukota",
+    "contains": "Inggris",
+    "note": "Final: alias 'uk' + guard entitas pendek (dulu salah nyasar ke Ukraina via substring)"
+  },
+  {
+    "prompt": "populasi negara tiongkok",
+    "expect": "factoid_populasi",
+    "contains": "China",
+    "note": "Final: alias 'tiongkok'/'rrc' -> China"
+  },
+  {
+    "prompt": "wisata terkenal di prancis",
+    "expect": "wisata_list",
+    "contains": "Prancis",
+    "note": "Final: regex tryWisataDi() diperluas terima 'terkenal/populer/paling terkenal'"
+  },
+  {
+    "prompt": "makanan khas korea dong",
+    "expect": "makanan_list",
+    "contains": "Korea Selatan",
+    "note": "Final: partikel santai (dong/sih/ya/tuh/nih/deh/kok) dibuang dari ekstraksi entitas"
+  },
+  {
+    "prompt": "luas negara amrik",
+    "expect": "factoid_luas",
+    "contains": "Amerika Serikat",
+    "note": "Final: alias slang 'amrik' -> Amerika Serikat"
+  },
+  {
+    "prompt": "jepang terletak dimana",
+    "expect": "letak_geografis",
+    "contains": "Asia Timur",
+    "note": "Final: pola lokasi baru 'X terletak dimana' -> region terbaca"
+  },
+  {
+    "prompt": "di mana letak brasil",
+    "expect": "letak_geografis",
+    "contains": "Amerika Selatan",
+    "note": "Final: pola lokasi baru 'di mana letak X' -> region terbaca"
+  },
+  {
+    "prompt": "negara mana yang penduduknya paling banyak di asia",
+    "expect": "dataries_extras",
+    "contains": "Tiongkok",
+    "note": "B: superlatif populasi"
+  },
+  {
+    "prompt": "negara terkecil di eropa apa",
+    "expect": "dataries_extras",
+    "contains": "Vatikan",
+    "note": "B: superlatif luas terkecil"
+  },
+  {
+    "prompt": "negara terluas di dunia apa",
+    "expect": "dataries_extras",
+    "note": "B: superlatif luas terbesar dunia"
+  },
+  {
+    "prompt": "negara mana yang paling padat penduduknya di afrika",
+    "expect": "dataries_extras",
+    "note": "B: superlatif kepadatan"
+  },
+  {
+    "prompt": "berapa total populasi negara-negara di asia tenggara",
+    "expect": "dataries_extras",
+    "note": "B: agregasi total populasi region"
+  },
+  {
+    "prompt": "rata-rata luas negara di eropa berapa",
+    "expect": "dataries_extras",
+    "note": "B: agregasi rata-rata luas region"
+  },
+  {
+    "prompt": "berapa total luas negara-negara di afrika",
+    "expect": "dataries_extras",
+    "note": "B: agregasi total luas region"
+  },
+  {
+    "prompt": "ibukotanya paris itu negara apa",
+    "expect": "dataries_extras",
+    "contains": "Prancis",
+    "note": "B: reverse lookup ibukota->negara"
+  },
+  {
+    "prompt": "mata uang yen itu punya negara mana",
+    "expect": "dataries_extras",
+    "contains": "Jepang",
+    "note": "B: reverse lookup mata uang->negara"
+  },
+  {
+    "prompt": "negara apa yang ibukotanya tokyo",
+    "expect": "dataries_extras",
+    "contains": "Jepang",
+    "note": "B: reverse lookup ibukota->negara 2"
+  },
+  {
+    "prompt": "5 kilometer itu berapa mil",
+    "expect": "dataries_extras",
+    "note": "B: konversi satuan panjang"
+  },
+  {
+    "prompt": "10 kg berapa pon",
+    "expect": "dataries_extras",
+    "note": "B: konversi satuan berat"
+  },
+  {
+    "prompt": "100 fahrenheit itu berapa celcius",
+    "expect": "dataries_extras",
+    "note": "B: konversi satuan suhu"
+  },
+  {
+    "prompt": "1 juta rupiah berapa dolar",
+    "expect": "dataries_extras",
+    "note": "B: konversi mata uang"
+  },
+  {
+    "prompt": "3 hari setelah tanggal 28 februari 2026 tanggal berapa",
+    "expect": "dataries_extras",
+    "note": "B: penalaran tanggal maju"
+  },
+  {
+    "prompt": "10 hari sebelum 1 januari 2026 tanggal berapa",
+    "expect": "dataries_extras",
+    "note": "B: penalaran tanggal mundur"
+  },
+  {
+    "prompt": "2 minggu setelah 5 mei 2026 tanggal berapa",
+    "expect": "dataries_extras",
+    "note": "B: penalaran tanggal minggu"
+  },
+  {
+    "prompt": "bagaimana etika perkenalan di jepang",
+    "expect": "dataries_extras",
+    "note": "B: etika sapaan jepang"
+  },
+  {
+    "prompt": "apa hal tabu saat berkunjung ke india",
+    "expect": "dataries_extras",
+    "note": "B: etika tabu india"
+  },
+  {
+    "prompt": "tips sopan santun di korea selatan apa",
+    "expect": "dataries_extras",
+    "note": "B: etika tip korea"
+  },
+  {
+    "prompt": "etika makan di arab saudi bagaimana",
+    "expect": "dataries_extras",
+    "note": "B: etika makan arab saudi"
+  },
+  {
+    "prompt": "apa yang tabu dilakukan di thailand",
+    "expect": "dataries_extras",
+    "note": "B: etika tabu thailand"
+  },
+  {
+    "prompt": "cara menyapa yang sopan di meksiko bagaimana",
+    "expect": "dataries_extras",
+    "note": "B: etika sapaan meksiko"
+  },
+  {
+    "prompt": "minuman khas turki apa",
+    "expect": "dataries_extras",
+    "note": "B: minuman turki"
+  },
+  {
+    "prompt": "apa minuman tradisional meksiko",
+    "expect": "dataries_extras",
+    "note": "B: minuman meksiko"
+  },
+  {
+    "prompt": "minuman terkenal dari jepang apa",
+    "expect": "dataries_extras",
+    "note": "B: minuman jepang"
+  },
+  {
+    "prompt": "minuman khas mesir apa",
+    "expect": "dataries_extras",
+    "note": "B: minuman afrika"
+  },
+  {
+    "prompt": "minuman favorit di australia apa",
+    "expect": "dataries_extras",
+    "note": "B: minuman osenia"
+  },
+  {
+    "prompt": "minuman populer dari brasil apa",
+    "expect": "dataries_extras",
+    "note": "B: minuman amerika"
+  },
+  {
+    "prompt": "kasih resep sup ayam yang gampang",
+    "expect": "dataries_extras",
+    "note": "B: resep sup ayam"
+  },
+  {
+    "prompt": "resep nasi goreng sederhana gimana",
+    "expect": "dataries_extras",
+    "note": "B: resep nasi goreng"
+  },
+  {
+    "prompt": "cara buat telur dadar yang enak",
+    "expect": "dataries_extras",
+    "note": "B: resep telur dadar"
+  },
+  {
+    "prompt": "resep sambal terasi gimana caranya",
+    "expect": "dataries_extras",
+    "note": "B: resep sambal terasi"
+  },
+  {
+    "prompt": "kasih resep pancake sederhana",
+    "expect": "dataries_extras",
+    "note": "B: resep pancake"
+  },
+  {
+    "prompt": "siapa penjelajah terkenal yang menemukan jalur laut ke asia",
+    "expect": "dataries_extras",
+    "note": "B: tokoh penjelajah"
+  },
+  {
+    "prompt": "siapa pemimpin terkenal dalam sejarah dunia",
+    "expect": "dataries_extras",
+    "note": "B: tokoh pemimpin"
+  },
+  {
+    "prompt": "apa itu kerajaan sriwijaya",
+    "expect": "dataries_extras",
+    "contains": "Palembang",
+    "note": "B: sejarah indonesia sriwijaya"
+  },
+  {
+    "prompt": "kapan sumpah pemuda diikrarkan",
+    "expect": "dataries_extras",
+    "contains": "1928",
+    "note": "B: sejarah indonesia sumpah pemuda"
+  },
+  {
+    "prompt": "apa itu konferensi asia afrika",
+    "expect": "dataries_extras",
+    "contains": "Bandung",
+    "note": "B: sejarah indonesia kaa"
+  },
+  {
+    "prompt": "kapan asean didirikan",
+    "expect": "dataries_extras",
+    "contains": "1967",
+    "note": "B: sejarah indonesia asean"
+  }
 ]
