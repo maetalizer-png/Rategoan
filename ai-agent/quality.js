@@ -40,7 +40,9 @@ function guardEmoji(reply) {
 
 function guardFactoidSentences(reply, richness) {
   if (richness === 'detail') return reply;
-  const sentences = String(reply || '').split(/(?<=[.!?])\s+/).filter(Boolean);
+  const text = String(reply || '');
+  if (/\n\s*[-#]/.test(text)) return text;
+  const sentences = text.split(/(?<=[.!?])\s+/).filter(Boolean);
   if (sentences.length <= 3) return reply;
   return sentences.slice(0, 3).join(' ');
 }
