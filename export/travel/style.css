@@ -1,0 +1,561 @@
+/* =========================================================
+   JALANIN — style.css
+   Design tokens + komponen
+   ========================================================= */
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --tx: #0b0f14;
+  --mut: #5b6472;
+  --line: #e3e8ef;
+  --stat: #f2f5f9;
+  --ac: #0b0f14;
+  --actx: #ffffff;
+  --ok: #1a7f4e;
+  --no: #b3261e;
+  --r-card: 18px;
+  --r-field: 14px;
+  --r-stat: 12px;
+  --r-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.04);
+  --shadow-fab: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0f14;
+    --card: #151a21;
+    --tx: #eef2f7;
+    --mut: #9aa4b2;
+    --line: #232a33;
+    --stat: #1b222b;
+    --ac: #eef2f7;
+    --actx: #0b0f14;
+  }
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font: 15px/1.5 system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+  padding-bottom: 88px;
+}
+
+/* ---------- Ikon SVG ---------- */
+.ic {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+  vertical-align: -2px;
+}
+
+/* ---------- Header + pencarian ---------- */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 10px 12px;
+  background: var(--bg);
+}
+
+.search {
+  position: relative;
+  display: block;
+}
+
+.search .ic {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--mut);
+  pointer-events: none;
+}
+
+.search input {
+  width: 100%;
+  padding: 12px 14px 12px 38px;
+  border-radius: var(--r-field);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--tx);
+  font-size: 15px;
+  outline: none;
+}
+
+.search input:focus {
+  border-color: var(--mut);
+}
+
+/* ---------- Layout utama ---------- */
+main {
+  padding: 12px 12px 0;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+/* ---------- Kartu ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.card h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+}
+
+.card h3 .ic {
+  color: var(--mut);
+}
+
+.desc {
+  margin: 4px 0 0;
+  color: var(--mut);
+  font-size: 13px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- Stat grid ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--stat);
+  border-radius: var(--r-stat);
+  padding: 9px 10px;
+  font-size: 12.5px;
+  min-width: 0;
+}
+
+.stat .ic {
+  color: var(--mut);
+}
+
+.stat b {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Label seksi + tag ---------- */
+.sec {
+  margin: 14px 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 7px 11px;
+  font-size: 12.5px;
+  background: none;
+  color: var(--tx);
+}
+
+button.tag:active {
+  opacity: 0.6;
+}
+
+.tag.on {
+  border-color: var(--tx);
+  color: var(--tx);
+  font-weight: 700;
+}
+
+/* ---------- Segmented control ---------- */
+.seg {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 12px;
+  background: var(--stat);
+  border-radius: var(--r-pill);
+}
+
+.seg button {
+  flex: 1;
+  padding: 9px 12px;
+  border: none;
+  border-radius: var(--r-pill);
+  background: none;
+  color: var(--mut);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.seg button.on {
+  background: var(--card);
+  color: var(--tx);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Badge pencapaian ---------- */
+.bdg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px dashed var(--mut);
+  border-radius: var(--r-pill);
+  padding: 7px 11px;
+  font-size: 12px;
+  color: var(--mut);
+}
+
+.bdg.on {
+  border: 1px solid var(--tx);
+  color: var(--tx);
+}
+
+/* ---------- Tombol ---------- */
+.rowbtn {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.rowbtn b {
+  font-size: 13.5px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 9px 14px;
+  font-size: 13px;
+  background: var(--card);
+  color: var(--tx);
+}
+
+.btn:active {
+  opacity: 0.6;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+.days.on {
+  border-color: var(--tx);
+  color: var(--tx);
+  font-weight: 700;
+}
+
+/* ---------- Konversi mata uang ---------- */
+.conv {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: var(--stat);
+  border-radius: var(--r-stat);
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.conv input {
+  width: 90px;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--tx);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.conv b {
+  margin-left: auto;
+}
+
+/* ---------- HUD kuis ---------- */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 2px 0;
+  color: var(--mut);
+  font-size: 13px;
+}
+
+.hud span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hud b {
+  font-weight: 700;
+  color: var(--tx);
+  min-width: 2ch;
+  text-align: right;
+}
+
+/* ---------- Opsi kuis / tebak ---------- */
+.q-opt {
+  display: block;
+  width: 100%;
+  margin: 7px 0;
+  padding: 13px;
+  border-radius: var(--r-field);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--tx);
+  font-size: 14px;
+  text-align: left;
+}
+
+.q-opt:active {
+  opacity: 0.7;
+}
+
+.q-opt.ok {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.q-opt.no {
+  border-color: var(--no);
+  color: var(--no);
+}
+
+/* ---------- Checklist ---------- */
+.ck {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 0;
+  font-size: 14px;
+}
+
+.ck input {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  accent-color: var(--tx);
+}
+
+.ck input:checked + span {
+  color: var(--mut);
+  text-decoration: line-through;
+}
+
+/* ---------- Progress bar ---------- */
+.prog {
+  height: 6px;
+  margin: 2px 0 6px;
+  background: var(--stat);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+.prog > i {
+  display: block;
+  height: 100%;
+  background: var(--tx);
+  border-radius: var(--r-pill);
+  transition: width 0.25s ease;
+}
+
+/* ---------- Dots streak ---------- */
+.dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.dot.on {
+  background: var(--tx);
+}
+
+/* ---------- Flashcard sapaan ---------- */
+.flipq {
+  padding: 18px 0;
+  font-size: 42px;
+  text-align: center;
+  color: var(--mut);
+}
+
+/* ---------- Countdown ---------- */
+.hn {
+  font-weight: 700;
+}
+
+/* ---------- Navigasi bawah ---------- */
+.bot {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bot button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 0 12px;
+  border: none;
+  background: none;
+  color: var(--mut);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.bot button .ic {
+  width: 19px;
+  height: 19px;
+}
+
+.bot button.on {
+  color: var(--tx);
+}
+
+/* ---------- FAB ---------- */
+#fab {
+  position: fixed;
+  right: 16px;
+  bottom: 92px;
+  z-index: 3;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ac);
+  color: var(--actx);
+  box-shadow: var(--shadow-fab);
+}
+
+#fab .ic {
+  width: 21px;
+  height: 21px;
+}
+
+/* ---------- Bottom sheet ---------- */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.sheet[hidden] {
+  display: none;
+}
+
+.sheet-card {
+  width: 100%;
+  max-height: 70vh;
+  overflow: auto;
+  background: var(--card);
+  border-radius: 20px 20px 0 0;
+  padding: 16px;
+  animation: sheet-up 0.25s ease;
+}
+
+.sheet-card h3 {
+  margin: 0 0 6px;
+}
+
+.sheet-card p {
+  margin: 0;
+  color: var(--mut);
+  font-size: 13.5px;
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ---------- Aksesibilitas ---------- */
+.btn:focus-visible,
+.tag:focus-visible,
+.q-opt:focus-visible,
+.bot button:focus-visible,
+#fab:focus-visible {
+  outline: 2px solid var(--mut);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
