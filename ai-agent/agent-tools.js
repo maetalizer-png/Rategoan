@@ -221,6 +221,27 @@ function ide(topic) {
   return formatter.blocks([formatter.h('Ide Konten', 3), formatter.numbered(items)]);
 }
 
+const MANFAAT_POOL = [
+  (t) => 'Membantu meningkatkan kualitas hidup yang berkaitan dengan ' + t + '.',
+  (t) => 'Bisa jadi kebiasaan positif dengan dampak baik dalam jangka panjang untuk ' + t + '.',
+  (t) => 'Memberi manfaat nyata bila dilakukan secara konsisten terkait ' + t + '.',
+  (t) => 'Membantu menjaga keseimbangan fisik maupun mental sehubungan dengan ' + t + '.',
+  (t) => 'Menambah pengalaman dan wawasan baru seputar ' + t + '.',
+  (t) => 'Bisa mempererat hubungan sosial kalau dilakukan bersama orang lain, tergantung konteks ' + t + '.',
+];
+
+function manfaat(topic) {
+  const t = String(topic || '').trim() || 'hal ini';
+  const h = hashText(t);
+  const count = 3 + (h % 3);
+  const start = h % MANFAAT_POOL.length;
+  const items = [];
+  for (let i = 0; i < count; i++) {
+    items.push(MANFAAT_POOL[(start + i) % MANFAAT_POOL.length](t));
+  }
+  return formatter.blocks([formatter.h('Manfaat ' + t.charAt(0).toUpperCase() + t.slice(1), 3), formatter.bullets(items)]);
+}
+
 function genericComparisonPoints(t) {
   return ['Punya kelebihan tersendiri tergantung kebutuhan.', 'Bisa dipertimbangkan sesuai konteks penggunaan ' + t + '.'];
 }
@@ -531,6 +552,7 @@ export const agentTools = Object.freeze({
   jelaskan,
   cara,
   ide,
+  manfaat,
   bandingkan,
   kelebihanKekurangan,
   laporanOtak,

@@ -83,9 +83,11 @@ async function loadFewshot() {
   return fewshotCache;
 }
 
+const FEWSHOT_MATCH_THRESHOLD = 0.5;
+
 function matchFewshot(examples, text) {
   const corpus = examples.map((ex) => ({ ex, text: String(ex.q || '') }));
-  const found = retrieval.best(text, corpus, { threshold: retrieval.LIST_THRESHOLD });
+  const found = retrieval.best(text, corpus, { threshold: FEWSHOT_MATCH_THRESHOLD });
   return found ? found.item.ex : null;
 }
 
@@ -167,6 +169,7 @@ function detectTool(prompt) {
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
   if (/^(cara|langkah)\s+/.test(t)) return 'cara';
   if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
+  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+/.test(t)) return 'manfaat';
   if (/^jelaskan\s+/.test(t)) return 'jelaskan';
   return null;
 }
@@ -395,6 +398,10 @@ async function runTool(kind, prompt, messages) {
       .replace(/ide\s+(konten\s+)?(tentang|soal|untuk)?\s*/i, '')
       .trim();
     return agentTools.ide(topic);
+  }
+  if (kind === 'manfaat') {
+    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+(dari\s+|dan\s+)?/i, '').trim();
+    return agentTools.manfaat(topic);
   }
   if (kind === 'bandingkan') {
     const m = prompt.match(/^bandingkan\s+(.+?)\s+(dan|dengan|vs\.?|atau)\s+(.+)$/i);
