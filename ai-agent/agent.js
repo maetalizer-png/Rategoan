@@ -17,6 +17,7 @@ import { lazyModules } from './lazy-modules.js';
 import { pickVariant, hashText, detectTone, detectMood } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
+import { quality } from './quality.js';
 import { readWeb } from '../web/read-web.js';
 import { quizSession } from './quiz-session.js';
 
@@ -151,6 +152,7 @@ function detectTool(prompt) {
   if (/share\s*(ke)?\s*wa\b|bagikan\s*(ke)?\s*whatsapp/.test(t)) return 'share_wa';
   if (/export\s+chat|download\s+percakapan|unduh\s+percakapan|ekspor\s+chat/.test(t)) return 'export_chat';
   if (/export\s+catatan|ekspor\s+catatan|unduh\s+catatan/.test(t)) return 'export_catatan';
+  if (/^bagikan\s+kartu\s+/.test(t)) return 'bagikan_kartu';
   if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
@@ -378,6 +380,10 @@ async function runTool(kind, prompt, messages) {
     const format = /markdown|\bmd\b/.test(p) ? 'markdown' : /json/.test(p) ? 'json' : /pdf/.test(p) ? 'pdf' : 'txt';
     return agentTools.exportChat({ title: 'Chat', messages: messages || [] }, format);
   }
+  if (kind === 'bagikan_kartu') {
+    const negara = prompt.replace(/^bagikan\s+kartu\s+/i, '').trim();
+    return await agentTools.bagikanKartu(negara);
+  }
   if (kind === 'export_catatan') {
     const format = /markdown|\bmd\b/i.test(prompt) ? 'markdown' : 'txt';
     return agentTools.eksporCatatan(format);
@@ -496,11 +502,12 @@ async function tryFactoid(text, messages) {
   const topic = lastTopicOf(messages);
   const stackEntity = memoryContext.topEntity();
   const lastEntity = stackEntity || (topic ? datariesBridge.extractKnownEntity(topic) : null);
-  const dataries = await datariesBridge.factoid(t, { lastTopic: topic, lastEntity, lastQuery: topic, richness: getRichnessPref() });
+  const richness = getRichnessPref();
+  const dataries = await datariesBridge.factoid(t, { lastTopic: topic, lastEntity, lastQuery: topic, richness });
   if (dataries) {
     const currentEntity = datariesBridge.extractKnownEntity(t);
     if (currentEntity) memoryContext.pushEntity(currentEntity);
-    return dataries;
+    return quality.guardEmoji(quality.guardFactoidSentences(dataries, richness));
   }
 
   if (ABOUT_RE.test(t)) return null;

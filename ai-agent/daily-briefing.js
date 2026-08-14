@@ -33,13 +33,13 @@ function countToday(now) {
 const GREET_BY_PERIOD = { pagi: 'Selamat pagi!', siang: 'Selamat siang!', sore: 'Selamat sore!', malam: 'Selamat malam!' };
 
 function message(now) {
-  const greet = GREET_BY_PERIOD[timeOfDay(now)];
+  const period = timeOfDay(now);
+  const greet = GREET_BY_PERIOD[period];
   const { events, reminders } = countToday(now);
-  if (!events && !reminders) return greet + ' Hari ini belum ada acara atau pengingat yang tercatat.';
-  const parts = [];
-  if (events) parts.push(events + ' acara');
-  if (reminders) parts.push(reminders + ' pengingat');
-  return greet + ' Hari ini ada ' + parts.join(' dan ') + '.';
+  const base = !events && !reminders
+    ? greet + ' Hari ini belum ada acara atau pengingat yang tercatat.'
+    : greet + ' Hari ini ada ' + [events && events + ' acara', reminders && reminders + ' pengingat'].filter(Boolean).join(' dan ') + '.';
+  return period === 'pagi' ? base + ' Mau pemanasan otak dulu? Ketik "kuis".' : base;
 }
 
 export const dailyBriefing = Object.freeze({

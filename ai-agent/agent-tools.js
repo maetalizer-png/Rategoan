@@ -11,6 +11,7 @@ import { meaningfulWords, pickVariant, hashText } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
 import { dailyBriefing } from './daily-briefing.js';
+import { dataries } from '../dataries/index.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -569,6 +570,38 @@ async function ringkasHari() {
   return formatter.formatByType('daftar', { title: 'Ringkasan Hari Ini', items });
 }
 
+function fuzzyCountryMatch(a, b) {
+  if (!a || !b) return false;
+  const x = String(a).toLowerCase();
+  const y = String(b).toLowerCase();
+  return x === y || x.includes(y) || y.includes(x);
+}
+
+async function bagikanKartu(query) {
+  const q = String(query || '').trim();
+  if (!q) return 'Kartu negara mana yang mau dibagikan?';
+  const [countries, makanan] = await Promise.all([dataries.loadAll('country'), dataries.loadAll('makanan')]);
+  const found = countries.find((c) => fuzzyCountryMatch(c.metadata.name, q));
+  if (!found) return 'Saya belum punya data negara "' + q + '".';
+  const meta = found.metadata;
+  const foods = makanan.filter((f) => fuzzyCountryMatch(f.metadata.country, meta.name)).slice(0, 3).map((f) => f.metadata.name);
+  const lines = ['🌍 ' + meta.name, '🏛️ Ibukota: ' + (meta.capital || '-'), '💰 Mata uang: ' + (meta.currency || '-')];
+  if (foods.length) lines.push('🍽️ Makanan khas: ' + foods.join(', '));
+  const card = lines.join('\n');
+  if (typeof navigator !== 'undefined' && navigator.share) {
+    try {
+      await navigator.share({ text: card });
+      return 'Kartu ' + meta.name + ' siap dibagikan.';
+    } catch (e) {}
+  }
+  try {
+    await navigator.clipboard.writeText(card);
+    return 'Kartu ' + meta.name + ' disalin ke clipboard:\n\n' + card;
+  } catch (e) {
+    return card;
+  }
+}
+
 async function eksporLog() {
   const notes = await ragetDb.allNotes();
   const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
@@ -644,4 +677,5 @@ export const agentTools = Object.freeze({
   cariSemua,
   ringkasHari,
   eksporCatatan,
+  bagikanKartu,
 });

@@ -15,6 +15,7 @@ import { account } from './account.js';
 import { ocrReader } from '../../ocr/reader.js';
 import { translator } from '../../translate/translator.js';
 import { tts } from '../state/tts.js';
+import { hemat } from '../state/hemat.js';
 
 const DOWNLOAD_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -22,6 +23,8 @@ const KNOWLEDGE_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
 const TTS_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>';
+const HEMAT_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
 
 function buildRow(id, icon, label) {
   const row = document.createElement('div');
@@ -46,15 +49,24 @@ export const settings = {
     const downloadRow = buildRow('row-unduhan-fitur', DOWNLOAD_ICON, 'Unduhan Fitur');
     const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Pengetahuan Saya');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
+    const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
     anchor.insertAdjacentElement('afterend', knowledgeRow);
     anchor.insertAdjacentElement('afterend', downloadRow);
     anchor.insertAdjacentElement('afterend', ttsRow);
+    anchor.insertAdjacentElement('afterend', hematRow);
     this.refreshPackageStatus();
     this.refreshTtsStatus();
+    this.refreshHematStatus();
     downloadRow.onclick = () => this.handleUnduhanFitur();
     ttsRow.onclick = () => {
       const on = tts.toggle();
       toast.show(on ? 'Baca otomatis diaktifkan' : 'Baca otomatis dinonaktifkan');
+      this.refreshTtsStatus();
+    };
+    hematRow.onclick = () => {
+      const on = hemat.toggle();
+      toast.show(on ? 'Mode hemat aktif: animasi, getar, dan TTS dimatikan' : 'Mode hemat nonaktif');
+      this.refreshHematStatus();
       this.refreshTtsStatus();
     };
     knowledgeRow.onclick = () => {
@@ -70,6 +82,11 @@ export const settings = {
     const val = $('row-tts-value');
     if (!val) return;
     val.textContent = tts.enabled() ? 'Aktif' : 'Nonaktif';
+  },
+  refreshHematStatus() {
+    const val = $('row-hemat-value');
+    if (!val) return;
+    val.textContent = hemat.enabled() ? 'Aktif' : 'Nonaktif';
   },
   refreshPackageStatus() {
     const val = $('row-unduhan-fitur-value');

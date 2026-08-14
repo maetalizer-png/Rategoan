@@ -1,10 +1,30 @@
 import { $ } from '../utils/dom.js';
 import { auth } from '../state/auth.js';
+import { streakStore } from '../../raget-memory/streak-store.js';
 
 export const drawer = {
   s: null,
+  renderStreak() {
+    const head = document.querySelector('.side-head');
+    if (!head) return;
+    let badge = document.getElementById('side-streak');
+    const count = streakStore.current();
+    if (!count) {
+      if (badge) badge.remove();
+      return;
+    }
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.id = 'side-streak';
+      badge.style.marginLeft = 'auto';
+      badge.style.fontSize = '13px';
+      head.appendChild(badge);
+    }
+    badge.textContent = '🔥 ' + count;
+  },
   open() {
     if (!auth.state) return;
+    this.renderStreak();
     $('sidebar').classList.add('open');
     $('backdrop').classList.add('show');
   },

@@ -28,6 +28,23 @@ function guardLength(reply, tipe) {
   return reply.slice(0, limit).trim() + '…';
 }
 
+const EMOJI_RE = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu;
+
+function guardEmoji(reply) {
+  let count = 0;
+  return String(reply || '').replace(EMOJI_RE, (m) => {
+    count++;
+    return count <= 1 ? m : '';
+  });
+}
+
+function guardFactoidSentences(reply, richness) {
+  if (richness === 'detail') return reply;
+  const sentences = String(reply || '').split(/(?<=[.!?])\s+/).filter(Boolean);
+  if (sentences.length <= 3) return reply;
+  return sentences.slice(0, 3).join(' ');
+}
+
 function computeQuality(notes) {
   const list = notes || [];
   if (!list.length) return { score: 0, breakdown: { A: 0, K: 0, U: 0, D: 0, V: 0 } };
@@ -90,4 +107,6 @@ export const quality = Object.freeze({
   computeQuality,
   guardRepetition,
   guardLength,
+  guardEmoji,
+  guardFactoidSentences,
 });

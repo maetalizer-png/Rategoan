@@ -1,9 +1,6 @@
-import { hemat } from './hemat.js';
-
-export const tts = {
-  KEY: 'raget_tts',
+export const hemat = {
+  KEY: 'raget_hemat',
   enabled() {
-    if (hemat.enabled()) return false;
     return localStorage.getItem(this.KEY) === 'on';
   },
   set(on) {
