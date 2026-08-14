@@ -51,6 +51,20 @@ const MOOD_LEXICON = {
   bosan: /\b(bosan|bosen|jenuh|garing)\b/,
 };
 
+const SLANG_MAP = {
+  gak: 'tidak', ga: 'tidak', nggak: 'tidak', ngga: 'tidak',
+  bt: 'bosan', gws: 'cepat sembuh', bgt: 'banget',
+  yg: 'yang', dr: 'dari', utk: 'untuk', jd: 'jadi', dg: 'dengan',
+  km: 'kamu', gw: 'saya', gue: 'saya',
+};
+
+export function normalizeSlang(text) {
+  return String(text || '')
+    .split(/(\s+)/)
+    .map((tok) => SLANG_MAP[tok.toLowerCase()] || tok)
+    .join('');
+}
+
 export function detectMood(text) {
   const t = String(text || '').toLowerCase();
   const keys = Object.keys(MOOD_LEXICON);

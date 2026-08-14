@@ -1,4 +1,5 @@
 import { scorer } from '../ai-agent/scorer.js';
+import { normalizeSlang } from '../utils/text.js';
 
 const AUGMENT_THRESHOLD = 0.35;
 const LIST_THRESHOLD = 0.25;
@@ -26,9 +27,10 @@ function cacheKey(query, corpus, threshold, limit) {
 function rank(query, corpus, options) {
   const opts = options || {};
   if (!corpus.length) return [];
+  const normalized = normalizeSlang(query);
   const threshold = opts.threshold != null ? opts.threshold : LIST_THRESHOLD;
   const limit = opts.limit || 10;
-  const key = cacheKey(query, corpus, threshold, limit);
+  const key = cacheKey(normalized, corpus, threshold, limit);
   if (cache.has(key)) {
     cacheHits++;
     const hit = cache.get(key);
@@ -37,7 +39,7 @@ function rank(query, corpus, options) {
     return hit;
   }
   cacheMisses++;
-  const queryTokens = scorer.tokenize(query);
+  const queryTokens = scorer.tokenize(normalized);
   const result = queryTokens.length
     ? scoreCorpus(queryTokens, corpus, opts.textOf)
         .filter((s) => s.score >= threshold)

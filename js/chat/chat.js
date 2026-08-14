@@ -55,6 +55,30 @@ function fillComposer(text) {
   inp.focus();
 }
 
+function fillAndSend(text) {
+  const inp = $('chat-input');
+  if (!inp) return;
+  inp.value = text;
+  inp.dispatchEvent(new Event('input'));
+  const btn = $('btn-send');
+  if (btn) btn.click();
+}
+
+function detectQuickChips(text) {
+  if (/pengingat\b.*(dibatalkan|ditambahkan)|akan mengingatkan|sudah saya catat sebagai pengingat/i.test(text)) {
+    return ['Batalkan pengingat'];
+  }
+  const capitalMatch = text.match(/[Ii]bukota\s+([A-Z][a-zA-Z\s]+?)\s+adalah/);
+  if (capitalMatch) {
+    const negara = capitalMatch[1].trim();
+    return ['Kuis', 'Wisata ' + negara];
+  }
+  if (/^#{1,3}\s|\n- |\n\d+\.\s/.test(text)) {
+    return ['Ringkas hari saya'];
+  }
+  return [];
+}
+
 function buildActions(text) {
   const row = document.createElement('div');
   row.className = 'msg-actions';
@@ -176,6 +200,9 @@ export const chat = {
         if (URL_RE.test(m.text)) {
           actions.appendChild(buildExtraChip('🌐 Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0])));
         }
+        detectQuickChips(m.text).slice(0, 2).forEach((label) => {
+          actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
+        });
         d.appendChild(actions);
       }
       box.appendChild(d);
@@ -205,6 +232,9 @@ export const chat = {
     if (URL_RE.test(text)) {
       actions.appendChild(buildExtraChip('🌐 Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0])));
     }
+    detectQuickChips(text).slice(0, 2).forEach((label) => {
+      actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
+    });
     d.appendChild(actions);
     if (follow) {
       scrollBottom();

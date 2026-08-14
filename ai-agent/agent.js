@@ -159,6 +159,7 @@ function detectTool(prompt) {
   if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
   if (/apa\s+yang\s+kamu\s+tahu\s+tentang\b/.test(t)) return 'cari';
   if (/^bandingkan\s+/.test(t)) return 'bandingkan';
+  if (/^[a-z0-9\s]{2,40}\s+vs\.?\s+[a-z0-9\s]{2,40}$/.test(t)) return 'bandingkan_vs';
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
   if (/^(cara|langkah)\s+/.test(t)) return 'cara';
   if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
@@ -432,6 +433,10 @@ async function runTool(kind, prompt, messages) {
     const m = prompt.match(/^bandingkan\s+(.+?)\s+(dan|dengan|vs\.?|atau)\s+(.+)$/i);
     return m ? agentTools.bandingkan(m[1].trim(), m[3].trim()) : null;
   }
+  if (kind === 'bandingkan_vs') {
+    const m = prompt.match(/^(.+?)\s+vs\.?\s+(.+)$/i);
+    return m ? agentTools.bandingkan(m[1].trim(), m[2].trim()) : null;
+  }
   if (kind === 'kelebihan_kekurangan') {
     const topic = prompt
       .replace(/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s*/i, '')
@@ -572,6 +577,27 @@ function detectModeCommand(text) {
   return null;
 }
 
+function classifyIntent(t) {
+  if (/^hitung\b/i.test(t) || isMathQuestion(t.toLowerCase())) return 'hitung';
+  if (REMINDER_TRIGGER_RE.test(t) || QUICK_NOTE_RE.test(t)) return 'reminder';
+  const tool = detectTool(t);
+  if (tool) return tool;
+  return null;
+}
+
+async function tryMultiIntent(text, messages) {
+  const parts = text.split(/\s+dan\s+/i);
+  if (parts.length !== 2) return null;
+  const [a, b] = parts.map((p) => p.trim());
+  if (!a || !b) return null;
+  const typeA = classifyIntent(a);
+  const typeB = classifyIntent(b);
+  if (!typeA || !typeB || typeA === typeB) return null;
+  const replyA = await respondCore(messages, a);
+  const replyB = await respondCore(messages, b);
+  return replyA + '\n\n---\n\n' + replyB;
+}
+
 async function respond(messages, prompt) {
   const text = String(prompt || '').trim();
   const opener = text ? moodOpener(text) : '';
@@ -582,6 +608,12 @@ async function respond(messages, prompt) {
 async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
+
+  const multiIntent = await tryMultiIntent(text, messages);
+  if (multiIntent) {
+    ragetDb.addNote(text, multiIntent, null, 'multi_intent');
+    return postProcess(multiIntent);
+  }
 
   const quizReply = quizSession.checkPending(text);
   if (quizReply) {
@@ -675,6 +707,15 @@ async function respondCore(messages, prompt) {
   if (calendarQueryReply) {
     ragetDb.addNote(text, calendarQueryReply, null, 'calendar_query');
     return postProcess(calendarQueryReply);
+  }
+
+  const hariLagiMatch = text.toLowerCase().match(/berapa\s+hari\s+lagi\s+(.+?)\s+merdeka/);
+  if (hariLagiMatch) {
+    const result = await datariesBridge.daysUntilIndependence(hariLagiMatch[1].trim());
+    if (result) {
+      ragetDb.addNote(text, result, null, 'temporal');
+      return postProcess(result);
+    }
   }
 
   const factoid = await tryFactoid(text, messages);

@@ -211,6 +211,31 @@ function craftAnswer(field, label, value, item, richness) {
   return out;
 }
 
+function daysUntilAnniversary(dateStr, now) {
+  const m = String(dateStr || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return null;
+  const month = parseInt(m[2], 10);
+  const day = parseInt(m[3], 10);
+  if (!month || !day) return null;
+  const today = now || new Date();
+  const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  let next = new Date(today.getFullYear(), month - 1, day);
+  if (next < todayMid) next = new Date(today.getFullYear() + 1, month - 1, day);
+  const diffDays = Math.round((next - todayMid) / 86400000);
+  return { days: diffDays, date: next };
+}
+
+async function daysUntilIndependence(entity) {
+  const item = await lookupInGroup('country', resolveCountryAlias(String(entity || '').toLowerCase().trim()));
+  if (!item || !item.metadata.independenceDay) return null;
+  const result = daysUntilAnniversary(item.metadata.independenceDay);
+  if (!result) return null;
+  const dateLabel = result.date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long' });
+  const name = item.metadata.name;
+  if (result.days === 0) return name + ' merdeka hari ini! (' + dateLabel + ')';
+  return result.days + ' hari lagi (' + name + ' merdeka ' + dateLabel + ').';
+}
+
 async function resolveValue(relation, entity) {
   if (!entity) return null;
   const countryItem = await lookupInGroup('country', entity);
@@ -665,4 +690,5 @@ export const datariesBridge = Object.freeze({
   extras,
   extractKnownEntity,
   countryFallback,
+  daysUntilIndependence,
 });

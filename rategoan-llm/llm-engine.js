@@ -1,4 +1,4 @@
-import { hashText, pickVariant, detectTone } from '../utils/text.js';
+import { hashText, pickVariant, detectTone, normalizeSlang } from '../utils/text.js';
 
 const FALLBACK_TEXT = 'Maaf, saya belum paham. Coba ulangi dengan kata lain?';
 const GENERIC_PREFIX = 'Saya catat:';
@@ -216,20 +216,6 @@ function replyGeneric(prompt, context) {
         ]
       : [GENERIC_PREFIX + ' "' + prompt + '". Ceritakan lebih lanjut supaya saya bisa membantu lebih baik.'];
   return pickVariant('generic', templates, prompt);
-}
-
-const SLANG_MAP = {
-  gak: 'tidak', ga: 'tidak', nggak: 'tidak', ngga: 'tidak',
-  bt: 'bosan', gws: 'cepat sembuh', bgt: 'banget',
-  yg: 'yang', dr: 'dari', utk: 'untuk', jd: 'jadi', dg: 'dengan',
-  km: 'kamu', gw: 'saya', gue: 'saya',
-};
-
-function normalizeSlang(text) {
-  return String(text || '')
-    .split(/(\s+)/)
-    .map((tok) => SLANG_MAP[tok.toLowerCase()] || tok)
-    .join('');
 }
 
 function craft(prompt, context, options) {
