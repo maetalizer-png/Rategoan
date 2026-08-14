@@ -1,114 +1,3 @@
-/* =========================================================
-   JALANIN — style.css
-   Design tokens + komponen
-   ========================================================= */
-
-/* ---------- Design tokens ---------- */
-:root {
-  --bg: #f5f7fa;
-  --card: #ffffff;
-  --tx: #0b0f14;
-  --mut: #5b6472;
-  --line: #e3e8ef;
-  --stat: #f2f5f9;
-  --ac: #0b0f14;
-  --actx: #ffffff;
-  --ok: #1a7f4e;
-  --no: #b3261e;
-  --r-card: 18px;
-  --r-field: 14px;
-  --r-stat: 12px;
-  --r-pill: 999px;
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05), 0 6px 16px rgba(0, 0, 0, 0.04);
-  --shadow-fab: 0 6px 16px rgba(0, 0, 0, 0.28);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b0f14;
-    --card: #151a21;
-    --tx: #eef2f7;
-    --mut: #9aa4b2;
-    --line: #232a33;
-    --stat: #1b222b;
-    --ac: #eef2f7;
-    --actx: #0b0f14;
-  }
-}
-
-/* ---------- Base ---------- */
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  margin: 0;
-  font: 15px/1.5 system-ui, -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--tx);
-  padding-bottom: 88px;
-}
-
-/* ---------- Ikon SVG ---------- */
-.ic {
-  width: 15px;
-  height: 15px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  flex: none;
-  vertical-align: -2px;
-}
-
-/* ---------- Header + pencarian ---------- */
-.top {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  padding: 10px 12px;
-  background: var(--bg);
-}
-
-.search {
-  position: relative;
-  display: block;
-}
-
-.search .ic {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--mut);
-  pointer-events: none;
-}
-
-.search input {
-  width: 100%;
-  padding: 12px 14px 12px 38px;
-  border-radius: var(--r-field);
-  border: 1px solid var(--line);
-  background: var(--card);
-  color: var(--tx);
-  font-size: 15px;
-  outline: none;
-}
-
-.search input:focus {
-  border-color: var(--mut);
-}
-
-/* ---------- Layout utama ---------- */
-main {
-  padding: 12px 12px 0;
-  display: grid;
-  gap: 10px;
-  align-content: start;
-}
-
 /* ---------- Kartu ---------- */
 .card {
   background: var(--card);
@@ -319,29 +208,6 @@ button.tag:active {
   margin-left: auto;
 }
 
-/* ---------- HUD kuis ---------- */
-.hud {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2px 2px 0;
-  color: var(--mut);
-  font-size: 13px;
-}
-
-.hud span {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.hud b {
-  font-weight: 700;
-  color: var(--tx);
-  min-width: 2ch;
-  text-align: right;
-}
-
 /* ---------- Opsi kuis / tebak ---------- */
 .q-opt {
   display: block;
@@ -434,70 +300,6 @@ button.tag:active {
   color: var(--mut);
 }
 
-/* ---------- Countdown ---------- */
-.hn {
-  font-weight: 700;
-}
-
-/* ---------- Navigasi bawah ---------- */
-.bot {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  display: flex;
-  background: var(--card);
-  border-top: 1px solid var(--line);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.bot button {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 10px 0 12px;
-  border: none;
-  background: none;
-  color: var(--mut);
-  font-size: 11.5px;
-  font-weight: 600;
-}
-
-.bot button .ic {
-  width: 19px;
-  height: 19px;
-}
-
-.bot button.on {
-  color: var(--tx);
-}
-
-/* ---------- FAB ---------- */
-#fab {
-  position: fixed;
-  right: 16px;
-  bottom: 92px;
-  z-index: 3;
-  width: 52px;
-  height: 52px;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--ac);
-  color: var(--actx);
-  box-shadow: var(--shadow-fab);
-}
-
-#fab .ic {
-  width: 21px;
-  height: 21px;
-}
-
 /* ---------- Bottom sheet ---------- */
 .sheet {
   position: fixed;
@@ -540,22 +342,5 @@ button.tag:active {
   to {
     transform: translateY(0);
     opacity: 1;
-  }
-}
-
-/* ---------- Aksesibilitas ---------- */
-.btn:focus-visible,
-.tag:focus-visible,
-.q-opt:focus-visible,
-.bot button:focus-visible,
-#fab:focus-visible {
-  outline: 2px solid var(--mut);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
   }
 }

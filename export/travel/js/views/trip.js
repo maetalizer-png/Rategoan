@@ -1,0 +1,214 @@
+import { ic } from '../icons.js';
+import { data } from '../loader.js';
+import { errorCard, low, clusterByCity, byCountry, regionOf, fmtN, daysUntil, phrasesFor, fuzzyCountry } from '../utils.js';
+import { BUDGET_BASE, TIER_MULT, PACK_TIPS } from '../constants.js';
+import { getCheck, saveCheck, getTrips, saveTrips, getStats, saveStats } from '../storage.js';
+import { climateCard } from '../features/climate.js';
+import { journalCard, getNotes, bindJournal } from '../features/journal.js';
+
+const $ = (s) => document.querySelector(s);
+const view = $('#view');
+
+export async function openTrip() {
+  const d = await data();
+  if (!d) return errorCard();
+  const { countries, foods, wisata, langs } = d;
+  view.innerHTML =
+    '<div class="card"><h3>' + ic('cal') + ' Rencana Perjalanan</h3>' +
+    '<div class="search" style="margin-top:8px">' + ic('search') + '<input id="tq" placeholder="Negara tujuan..."></div>' +
+    '<input id="td" type="date" class="q-opt" style="margin:8px 0 0">' +
+    '<div class="rowbtn" style="margin-top:8px">' +
+      [2, 3, 4].map((x) => '<button class="btn days' + (x === 3 ? ' on' : '') + '" data-d="' + x + '">' + x + ' hari</button>').join('') +
+    '</div>' +
+    '<div class="rowbtn">' +
+      ['hemat', 'sedang', 'nyaman'].map((t2, i) =>
+        '<button class="btn days' + (i === 0 ? ' on' : '') + '" data-t="' + t2 + '">' + t2.charAt(0).toUpperCase() + t2.slice(1) + '</button>'
+      ).join('') +
+    '</div>' +
+    '<div class="rowbtn"><button class="btn" id="gen">' + ic('map') + ' Buat rencana</button></div>' +
+    '<div id="tripOut"></div></div>' +
+    checklistCard() + savedTripsCard(countries);
+
+  let days = 3, tier = 'hemat', depart = '';
+  view.querySelectorAll('[data-d]').forEach((b) => b.onclick = () => {
+    days = +b.dataset.d;
+    view.querySelectorAll('[data-d]').forEach((x) => x.classList.toggle('on', x === b));
+  });
+  view.querySelectorAll('[data-t]').forEach((b) => b.onclick = () => {
+    tier = b.dataset.t;
+    view.querySelectorAll('[data-t]').forEach((x) => x.classList.toggle('on', x === b));
+  });
+  $('#td').onchange = (e) => { depart = e.target.value; };
+  $('#gen').onclick = () => {
+    const name = ($('#tq').value || '').trim();
+    const c = countries.find((x) => low(x.metadata.name).includes(low(name))) || fuzzyCountry(name, countries);
+    if (!c) { $('#tripOut').innerHTML = '<p class="desc">Negara tidak ditemukan.</p>'; return; }
+    renderTrip(c, days, tier, depart, foods, wisata, langs, countries);
+  };
+  bindChecklist();
+  bindSavedTrips(countries);
+}
+
+function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, tripKey) {
+  const name = c.metadata.name;
+  const w = clusterByCity(byCountry(wisata, name));
+  const f = byCountry(foods, name);
+  const per = Math.max(1, Math.ceil(w.length / days));
+  const reg = regionOf(name);
+  const perDay = Math.round(BUDGET_BASE[reg] * TIER_MULT[tier]);
+  const hn = daysUntil(depart);
+
+  let html = '<div class="sec">' + ic('map') + ' Itinerari ' + name +
+    (hn != null && hn >= 0 ? ' &middot; <span class="hn">H-' + hn + '</span>' : '') + '</div>';
+  for (let dd = 0; dd < days; dd++) {
+    const items = w.slice(dd * per, (dd + 1) * per);
+    const city = items.length ? (items[0].metadata.city || '') : '';
+    html +=
+      '<div class="card"><h3>Hari ' + (dd + 1) + (city ? ' &middot; ' + city : '') + '</h3>' +
+      (items.length
+        ? '<div class="tags">' + items.map((x) => '<span class="tag">' + x.metadata.name + '</span>').join('') + '</div>'
+        : '<p class="desc">Jelajah santai sekitar ' + (c.metadata.capital || 'pusat kota') + '.</p>') +
+      (f.length ? '<p class="desc">Kuliner: ' + f[dd % f.length].metadata.name + '</p>' : '') +
+      '</div>';
+  }
+
+  const lang = phrasesFor(name, langs);
+  if (lang && lang.metadata.greetings) {
+    const g = lang.metadata.greetings;
+    html +=
+      '<div class="card"><h3>' + ic('lang') + ' Frasa berguna (' + lang.metadata.name + ')</h3>' +
+      '<div class="tags">' +
+        '<span class="tag">halo: ' + (g.halo || '-') + '</span>' +
+        '<span class="tag">pagi: ' + (g.pagi || '-') + '</span>' +
+        '<span class="tag">makasih: ' + (g.terimakasih || '-') + '</span>' +
+      '</div></div>';
+  }
+
+  html +=
+    '<div class="card"><h3>' + ic('swap') + ' Estimasi budget (' + tier + ')</h3>' +
+    '<p class="desc">Per hari ~Rp ' + fmtN(perDay) + ' &middot; total ' + days + ' hari ~Rp ' + fmtN(perDay * days) + '</p>' +
+    '<p class="desc">Hotel 40% &middot; Makan 30% &middot; Wisata 20% &middot; Transport 10% (perkiraan kasar)</p></div>';
+
+  const tips = PACK_TIPS[reg] || PACK_TIPS.lain;
+  html +=
+    '<div class="card"><h3>' + ic('check') + ' Saran bawaan (' + reg + ')</h3>' +
+    '<div class="tags">' + tips.map((t, i) => '<button class="tag" data-p="' + i + '">' + ic('plus') + ' ' + t + '</button>').join('') + '</div></div>' +
+    '<div class="rowbtn"><button class="btn" id="tshare">' + ic('share') + ' Bagikan</button>' +
+    (tripKey ? '' : '<button class="btn" id="tsave">' + ic('check') + ' Simpan rencana</button>') + '</div>' +
+    climateCard(reg) + (tripKey ? journalCard(tripKey) : '');
+  $('#tripOut').innerHTML = html;
+
+  view.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => {
+    const t = tips[+b.dataset.p];
+    const l = getCheck();
+    if (!l.some((x) => x.t === t)) {
+      l.push({ t, done: false });
+      saveCheck(l);
+      b.classList.add('on');
+      b.innerHTML = ic('check') + ' ' + t;
+    }
+  });
+  $('#tshare').onclick = (ev) => {
+    const notes = tripKey ? getNotes(tripKey) : [];
+    const lines = [
+      'Rencana ' + days + ' hari di ' + name + ' (' + tier + ')' + (depart ? ' — berangkat ' + depart : ''),
+      ...Array.from({ length: days }, (_, i) => {
+        const items = w.slice(i * per, (i + 1) * per);
+        return 'Hari ' + (i + 1) + ': ' +
+          (items.length ? items.map((x) => x.metadata.name).join(', ') : 'jelajah ' + (c.metadata.capital || 'kota')) +
+          (f.length ? ' | kuliner ' + f[i % f.length].metadata.name : '');
+      }),
+      'Estimasi total ~Rp ' + fmtN(perDay * days),
+      ...(notes.length ? ['Catatan: ' + notes.map((n) => n.text).join('; ')] : []),
+      '- dari Jalanin',
+    ].join('\n');
+    if (navigator.share) navigator.share({ text: lines }).catch(() => {});
+    else if (navigator.clipboard) navigator.clipboard.writeText(lines).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; });
+  };
+  if (tripKey) {
+    bindJournal(view, tripKey, () => renderTrip(c, days, tier, depart, foods, wisata, langs, countries, tripKey));
+  } else {
+    $('#tsave').onclick = (ev) => {
+      const l = getTrips();
+      l.push({ country: name, days, tier, depart, time: Date.now() });
+      saveTrips(l);
+      const st = getStats();
+      st.trips++;
+      saveStats(st);
+      ev.currentTarget.innerHTML = ic('check') + ' Tersimpan';
+    };
+  }
+}
+
+function checklistCard() {
+  const list = getCheck();
+  const done = list.filter((x) => x.done).length;
+  const pct = list.length ? Math.round((done / list.length) * 100) : 0;
+  return '<div class="sec">' + ic('check') + ' Checklist bawaan</div><div class="card">' +
+    '<div class="prog"><i id="progBar" style="width:' + pct + '%"></i></div>' +
+    '<p class="desc" id="progLabel">' + done + '/' + list.length + ' siap (' + pct + '%)</p>' +
+    list.map((it, i) =>
+      '<label class="ck"><input type="checkbox" data-i="' + i + '"' + (it.done ? ' checked' : '') + '><span>' + it.t + '</span></label>'
+    ).join('') +
+    '<div class="rowbtn" style="margin-top:8px"><input id="ckNew" class="q-opt" style="margin:0" placeholder="Tambah bawaan...">' +
+    '<button class="btn" id="ckAdd">' + ic('plus') + '</button></div></div>';
+}
+
+function bindChecklist() {
+  const refresh = () => {
+    const list = getCheck();
+    const done = list.filter((x) => x.done).length;
+    const pct = list.length ? Math.round((done / list.length) * 100) : 0;
+    const bar = $('#progBar');
+    const lab = $('#progLabel');
+    if (bar) bar.style.width = pct + '%';
+    if (lab) lab.textContent = done + '/' + list.length + ' siap (' + pct + '%)';
+  };
+  view.querySelectorAll('.ck input').forEach((cb) => {
+    cb.onchange = () => {
+      const l = getCheck();
+      l[+cb.dataset.i].done = cb.checked;
+      saveCheck(l);
+      refresh();
+    };
+  });
+  $('#ckAdd').onclick = () => {
+    const v = ($('#ckNew').value || '').trim();
+    if (!v) return;
+    const l = getCheck();
+    l.push({ t: v, done: false });
+    saveCheck(l);
+    openTrip();
+  };
+}
+
+function savedTripsCard(countries) {
+  const list = getTrips();
+  if (!list.length) return '';
+  return '<div class="sec">' + ic('cal') + ' Rencana tersimpan</div><div class="card">' +
+    list.map((t, i) => {
+      const hn = daysUntil(t.depart);
+      const label = t.country + ' &middot; ' + t.days + ' hari &middot; ' + t.tier +
+        (hn != null && hn >= 0 ? ' &middot; H-' + hn : '');
+      return '<div class="rowbtn" style="justify-content:space-between;margin:6px 0"><b>' + label + '</b>' +
+        '<span style="display:flex;gap:6px"><button class="btn" data-open="' + i + '">Buka</button>' +
+        '<button class="btn" data-del="' + i + '">Hapus</button></span></div>';
+    }).join('') + '</div>';
+}
+
+function bindSavedTrips(countries) {
+  view.querySelectorAll('[data-open]').forEach((b) => b.onclick = async () => {
+    const t = getTrips()[+b.dataset.open];
+    const c = countries.find((x) => low(x.metadata.name) === low(t.country));
+    if (c) {
+      const d = await data();
+      renderTrip(c, t.days, t.tier, t.depart, d.foods, d.wisata, d.langs, d.countries, 'trip_' + t.time);
+    }
+  });
+  view.querySelectorAll('[data-del]').forEach((b) => b.onclick = () => {
+    const l = getTrips();
+    l.splice(+b.dataset.del, 1);
+    saveTrips(l);
+    openTrip();
+  });
+}
