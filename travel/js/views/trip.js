@@ -1,6 +1,6 @@
 import { ic } from '../icons.js';
 import { data } from '../loader.js';
-import { errorCard, low, clusterByCity, byCountry, regionOf, fmtN, daysUntil, phrasesFor, fuzzyCountry } from '../utils.js';
+import { errorCard, low, clusterByCity, byCountry, regionOf, fmtN, daysUntil, phrasesFor, fuzzyCountry, lev } from '../utils.js';
 import { BUDGET_BASE, TIER_MULT, PACK_TIPS } from '../constants.js';
 import { getCheck, saveCheck, getTrips, saveTrips, getStats, saveStats } from '../storage.js';
 import { climateCard } from '../features/climate.js';
@@ -41,8 +41,27 @@ export async function openTrip() {
   $('#td').onchange = (e) => { depart = e.target.value; };
   $('#gen').onclick = () => {
     const name = ($('#tq').value || '').trim();
+    if (!name) {
+      $('#tripOut').innerHTML = '<p class="desc">Ketik dulu nama negara tujuan di kolom pencarian di atas.</p>';
+      $('#tripOut').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     const c = countries.find((x) => low(x.metadata.name).includes(low(name))) || fuzzyCountry(name, countries);
-    if (!c) { $('#tripOut').innerHTML = '<p class="desc">Negara tidak ditemukan.</p>'; return; }
+    if (!c) {
+      const suggestions = countries
+        .slice()
+        .sort((a, b) => lev(low(name), low(a.metadata.name)) - lev(low(name), low(b.metadata.name)))
+        .slice(0, 3);
+      $('#tripOut').innerHTML =
+        '<p class="desc">Negara "' + name + '" tidak ditemukan. Coba salah satu ini:</p>' +
+        '<div class="tags">' + suggestions.map((s, i) => '<button class="tag" data-sugg="' + i + '">' + s.metadata.name + '</button>').join('') + '</div>';
+      view.querySelectorAll('[data-sugg]').forEach((b) => b.onclick = () => {
+        $('#tq').value = suggestions[+b.dataset.sugg].metadata.name;
+        renderTrip(suggestions[+b.dataset.sugg], days, tier, depart, foods, wisata, langs, countries);
+      });
+      $('#tripOut').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     renderTrip(c, days, tier, depart, foods, wisata, langs, countries);
   };
   bindChecklist();
@@ -59,7 +78,9 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
   const hn = daysUntil(depart);
 
   let html = '<div class="sec">' + ic('map') + ' Itinerari ' + name +
-    (hn != null && hn >= 0 ? ' &middot; <span class="hn">H-' + hn + '</span>' : '') + '</div>';
+    (hn != null && hn >= 0 ? ' &middot; <span class="hn">H-' + hn + '</span>' : '') + '</div>' +
+    '<div class="rowbtn"><button class="btn" id="tshare">' + ic('share') + ' Bagikan</button>' +
+    (tripKey ? '' : '<button class="btn btn-primary" id="tsave">' + ic('check') + ' Simpan rencana</button>') + '</div>';
   for (let dd = 0; dd < days; dd++) {
     const items = w.slice(dd * per, (dd + 1) * per);
     const city = items.length ? (items[0].metadata.city || '') : '';
@@ -93,10 +114,9 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
   html +=
     '<div class="card"><h3>' + ic('check') + ' Saran bawaan (' + reg + ')</h3>' +
     '<div class="tags">' + tips.map((t, i) => '<button class="tag" data-p="' + i + '">' + ic('plus') + ' ' + t + '</button>').join('') + '</div></div>' +
-    '<div class="rowbtn"><button class="btn" id="tshare">' + ic('share') + ' Bagikan</button>' +
-    (tripKey ? '' : '<button class="btn" id="tsave">' + ic('check') + ' Simpan rencana</button>') + '</div>' +
     climateCard(reg) + (tripKey ? journalCard(tripKey) : '');
   $('#tripOut').innerHTML = html;
+  $('#tripOut').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   view.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => {
     const t = tips[+b.dataset.p];

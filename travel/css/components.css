@@ -176,6 +176,13 @@ button.tag:active {
   opacity: 0.5;
 }
 
+.btn-primary {
+  background: var(--ac);
+  color: var(--actx);
+  border-color: var(--ac);
+  font-weight: 700;
+}
+
 .days.on {
   border-color: var(--tx);
   color: var(--tx);
