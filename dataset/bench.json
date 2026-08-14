@@ -95,5 +95,20 @@
   { "prompt": "ceritakan tentang rusia", "expect": "factoid", "contains": "terbesar di dunia", "noNoise": true },
   { "prompt": "sapaan bahasa mongolia", "expect": "factoid", "contains": "Өглөөний мэнд", "noNoise": true },
   { "prompt": "berapa penduduk indonesia", "expect": "factoid", "contains": "277 juta", "noNoise": true },
-  { "prompt": "apa ibukota negara indonesia", "expect": "factoid", "contains": "Jakarta", "noNoise": true }
+  { "prompt": "apa ibukota negara indonesia", "expect": "factoid", "contains": "Jakarta", "noNoise": true },
+  { "prompt": "apa bahasa di thailand", "expect": "dataries_extras", "contains": "Thai", "noNoise": true },
+  { "prompt": "halo dalam bahasa jepang", "expect": "dataries_extras", "contains": "konnichiwa", "noNoise": true },
+  { "prompt": "tempat wisata di indonesia", "expect": "dataries_extras", "containsAny": ["Borobudur", "Bali"], "noNoise": true },
+  { "prompt": "siapa penemu bola lampu", "expect": "dataries_extras", "contains": "Edison", "noNoise": true },
+  { "prompt": "makanan khas korea", "expect": "dataries_extras", "containsAny": ["kimchi", "Kimchi"], "noNoise": true },
+  { "prompt": "kota bandung terkenal apa", "expect": "dataries_extras", "containsAny": ["sejuk", "kreatif"], "noNoise": true },
+  { "prompt": "berapa penutur bahasa mandarin", "expect": "dataries_extras", "contains": "miliar", "noNoise": true },
+  { "prompt": "apa itu fotosintesis", "expect": "dataries_extras", "containsAny": ["cahaya", "glukosa"], "noNoise": true },
+  { "prompt": "apa itu gravitasi", "expect": "dataries_extras", "contains": "Newton", "noNoise": true },
+  { "prompt": "apa itu offside", "expect": "dataries_extras", "containsAny": ["gawang", "sepak bola"], "noNoise": true },
+  { "prompt": "tempat wisata di mesir", "expect": "dataries_extras", "contains": "Piramida Giza", "noNoise": true },
+  { "prompt": "siapa pelukis mona lisa", "expect": "dataries_extras", "containsAny": ["Vinci", "Mona Lisa"], "noNoise": true },
+  { "prompt": "makanan khas italia", "expect": "dataries_extras", "containsAny": ["Pizza", "Pasta"], "noNoise": true },
+  { "prompt": "kota tokyo terkenal apa", "expect": "dataries_extras", "containsAny": ["Shibuya", "teknologi"], "noNoise": true },
+  { "prompt": "bahasa apa di jerman", "expect": "factoid", "contains": "Jerman", "noNoise": true }
 ]

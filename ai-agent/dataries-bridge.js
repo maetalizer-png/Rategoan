@@ -355,14 +355,33 @@ async function tryWisataDi(text) {
   return 'Tempat wisata terkenal di ' + capitalize(entity) + ':\n' + items.map((it) => '- ' + it.metadata.name + ' (' + it.metadata.city + ')').join('\n');
 }
 
+function wordOverlap(entity, hay) {
+  if (!entity || !hay) return false;
+  if (hay.includes(entity) || entity.includes(hay)) return true;
+  const entityWords = entity.split(' ').filter((w) => w.length > 2);
+  return entityWords.some((w) => hay.includes(w));
+}
+
 async function trySiapaTokoh(text) {
-  const m = text.match(/^siapa\s+(?:penemu\s+)?(.+)$/i);
+  const m = text.match(/^siapa\s+(?:penemu\s+|pelukis\s+|penulis\s+|pencipta\s+)?(.+)$/i);
   if (!m) return null;
   const entity = cleanEntity(m[1]);
   if (!entity) return null;
-  const item = await findInList('tokoh', (it) => (it.metadata.knownFor || '').toLowerCase().includes(entity) || (it.metadata.name || '').toLowerCase().includes(entity));
+  const item = await findInList('tokoh', (it) => wordOverlap(entity, (it.metadata.knownFor || '').toLowerCase()) || wordOverlap(entity, (it.metadata.name || '').toLowerCase()));
   if (!item) return null;
   return item.text;
+}
+
+async function tryTopicSearch(text) {
+  const m = text.match(/^(?:apa\s+itu|jelaskan)\s+(.+)$/i);
+  if (!m) return null;
+  const entity = cleanEntity(m[1]);
+  if (!entity) return null;
+  for (const group of ['sains', 'olahraga']) {
+    const item = await findInList(group, (it) => wordOverlap(entity, (it.metadata.topic || '').toLowerCase()) || wordOverlap(entity, (it.metadata.tags || []).join(' ').toLowerCase()));
+    if (item) return item.text;
+  }
+  return null;
 }
 
 async function tryMakananKhas(text) {
@@ -399,6 +418,9 @@ async function extras(q) {
 
   const tokoh = await trySiapaTokoh(text);
   if (tokoh) return tokoh;
+
+  const topic = await tryTopicSearch(text);
+  if (topic) return topic;
 
   return null;
 }
