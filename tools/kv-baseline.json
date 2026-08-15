@@ -20,5 +20,26 @@
       "n_V": 6
     },
     "note": "Baseline resmi pertama untuk skrip tools/measure-kv.mjs. Target: K>=60, V>=70. V tercapai penuh (100, n=6, cakupan 6/6 kategori jawaban). K mendekati target (57, n=60), selisih 3 poin dari batas 60."
+  },
+  {
+    "label": "trisula-final-v2-bagian10-final",
+    "timestamp": "2026-08-15T12:34:15.675Z",
+    "queryCount": 100,
+    "composition": {
+      "factoidExtras": 60,
+      "terbuka": 20,
+      "smalltalk": 20
+    },
+    "elapsedMs": 86978,
+    "metrics": {
+      "quality": 77,
+      "A": 70,
+      "K": 57,
+      "U": 100,
+      "D": 90,
+      "V": 100,
+      "n_K": 60,
+      "n_V": 6
+    }
   }
 ]
