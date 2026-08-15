@@ -50,8 +50,25 @@ function detectTeaching(text) {
   return { subject, value };
 }
 
+// GUARD ANTI-NARSIS: pola di bawah ini sengaja sempit dan hanya cocok pada
+// frasa self-referential eksplisit ("...mu", "jilid/ronde X ngapain", "siapa
+// pembuatmu", dst). Pertanyaan umum ("ceritakan sejarah indonesia", "cara
+// kerja mesin cuci") TIDAK boleh menyeret devlog - jangan dilonggarkan.
+const DEVLOG_SEJARAH_RE = /\b(sejarahmu|riwayatmu|riwayat\s+pengembanganmu)\b/i;
+const DEVLOG_CARA_KERJA_RE = /\b(bagaimana\s+|gimana\s+)?cara\s+kerjamu\b/i;
+const DEVLOG_JILID_RE = /\b(jilid|ronde)\s+[\w.-]+\s+(ngapain|ngerjain\s+apa|itu\s+ngapain)\b|\bapa\s+yang\s+dikerjakan\s+(di\s+)?(jilid|ronde)\s+[\w.-]+/i;
+const DEVLOG_BUG_RE = /\bbug\s+(paling\s+)?ter?sulit(mu)?\b/i;
+const DEVLOG_PEMBUAT_RE = /\bsiapa\s+(yang\s+)?(membuat|menciptakan|mengembangkan)mu\b|\bsiapa\s+pembuatmu\b/i;
+const DEVLOG_SKOR_RE = /\bperkembangan\s+skormu\b|\bskormu\s+(sekarang\s+)?(gimana|bagaimana)\b/i;
+
 function detectTool(prompt) {
   const t = String(prompt || '').trim().toLowerCase();
+  if (DEVLOG_SEJARAH_RE.test(t)) return 'devlog_sejarah';
+  if (DEVLOG_CARA_KERJA_RE.test(t)) return 'devlog_cara_kerja';
+  if (DEVLOG_JILID_RE.test(t)) return 'devlog_jilid';
+  if (DEVLOG_BUG_RE.test(t)) return 'devlog_bug_tersulit';
+  if (DEVLOG_PEMBUAT_RE.test(t)) return 'devlog_pembuat';
+  if (DEVLOG_SKOR_RE.test(t)) return 'devlog_skor';
   if (/^(mulai\s+|main\s+)?kuis\b/.test(t)) return 'kuis';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+hari(\s+ini)?(\s+saya)?\b/.test(t)) return 'ringkas_hari';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+minggu(\s+ini)?(\s+saya)?\b|digest\s+mingguan/.test(t)) return 'ringkas_minggu';

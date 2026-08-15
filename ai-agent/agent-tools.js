@@ -14,6 +14,7 @@ import { dailyBriefing } from './daily-briefing.js';
 import { dataries } from '../dataries/index.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
 import { collectionSearch } from '../raget-memory/collection-search.js';
+import { devlogIndex } from '../raget-devlog/index.js';
 
 const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
 const NUMBER_RE = /^[0-9.]+$/;
@@ -542,6 +543,13 @@ async function laporanOtak() {
     parts.push(formatter.h('Kandidat Auto-Fewshot (rating positif)', 3));
     parts.push(formatter.bullets(autoFewshotCandidates.map((n) => n.question)));
   }
+
+  const latestRonde = devlogIndex.latest();
+  parts.push(formatter.h('Memori Pengembangan', 3));
+  parts.push(
+    'Tercatat ' + devlogIndex.all().length + ' ronde pengembangan, ' + devlogIndex.totalKomit() +
+    ' commit. Ronde terakhir: ' + latestRonde.judul + ' (' + latestRonde.tanggal + '). Tanya "sejarahmu" atau "cara kerjamu" untuk detail.'
+  );
 
   parts.push(formatter.h('Rekomendasi', 3));
   const rekomendasi = [];

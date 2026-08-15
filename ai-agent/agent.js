@@ -19,6 +19,7 @@ import { toolsImport } from './tools-import.js';
 import { toolsKoleksi } from './tools-koleksi.js';
 import { toolsExport } from './tools-export.js';
 import { toolsGeneric } from './tools-generic.js';
+import { toolsDevlog } from './tools-devlog.js';
 import { routerIntent } from './router-intent.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
@@ -72,6 +73,7 @@ function matchFewshotNearMiss(examples, text) {
 }
 
 async function runTool(kind, prompt, messages) {
+  if (toolsDevlog.handles(kind)) return await toolsDevlog.run(kind, prompt);
   if (toolsKoleksi.handles(kind)) return await toolsKoleksi.run(kind, prompt);
   if (toolsExport.handles(kind)) return await toolsExport.run(kind, prompt, messages);
   return await toolsGeneric.run(kind, prompt, messages, () => { fewshotCache = null; });
