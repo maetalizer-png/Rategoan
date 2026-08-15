@@ -23,6 +23,7 @@ import { toolsDevlog } from './tools-devlog.js';
 import { routerIntent } from './router-intent.js';
 import { bilingual } from './bilingual.js';
 import { knowledgeGraph } from './knowledge-graph.js';
+import { answerComposer } from './answer-composer.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -365,6 +366,20 @@ async function respondCore(messages, prompt) {
   if (acknowledged) {
     ragetDb.addNote(text, acknowledged, null, 'personalize');
     return postProcess(acknowledged);
+  }
+
+  const correctedText = answerComposer.correctTypos(text);
+  if (correctedText !== text) {
+    const factoidRetry = await tryFactoid(correctedText, messages);
+    if (factoidRetry) {
+      ragetDb.addNote(text, factoidRetry, null, 'factoid_typo_fixed');
+      return postProcess(factoidRetry);
+    }
+    const extrasRetry = await datariesBridge.extras(correctedText);
+    if (extrasRetry) {
+      ragetDb.addNote(text, extrasRetry, null, 'dataries_extras_typo_fixed');
+      return postProcess(extrasRetry);
+    }
   }
 
   const persona = await loadPersona();
