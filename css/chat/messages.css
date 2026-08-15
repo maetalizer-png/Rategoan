@@ -46,6 +46,7 @@
   line-height: 1.55;
   word-wrap: break-word;
   white-space: pre-wrap;
+  min-width: 0;
 }
 
 .msg .time {
@@ -92,6 +93,23 @@
   display: flex;
   gap: 6px;
   margin-top: 6px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-bottom: 1px;
+}
+
+.msg-actions::-webkit-scrollbar {
+  display: none;
+}
+
+.msg-action-btn,
+.msg-actions .chip {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .msg-action-btn {
