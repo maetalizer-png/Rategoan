@@ -5,6 +5,7 @@ const MONTHS_ID = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli
 const FACTOID_OPENERS = [
   '', 'Setahu saya, ', 'Sepengetahuan saya, ', 'Kalau data saya benar, ', 'Berdasarkan catatan saya, ', 'Kalau tidak salah, ',
   'Setahu saya sih, ', 'Kalau nggak salah ingat, ', 'Dari yang saya tahu, ',
+  'Berdasarkan yang saya ingat, ', 'Setahu saya dari catatan, ',
 ];
 
 const REGION_LABELS = {
