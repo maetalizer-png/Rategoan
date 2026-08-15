@@ -1793,5 +1793,103 @@
     "expect": "dataries_extras",
     "contains": "Negara berbahasa",
     "note": "Bagian 7: konsistensi splitPossessiveSuffix - reverse-lookup bahasa mandarin"
+  },
+  {
+    "prompt": "jilid 13 ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Jilid 13",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "jilid 14 ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Jilid 14",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde genesis ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Genesis",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde produkisasi ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Vault Lengkap",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde trisula-ultra ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Trisula Ultra",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde trisula-final-v2 ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Trisula Final v2",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde travel-integrasi ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Travel-Integrasi",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde restrukturisasi-mega-final ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Restrukturisasi",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde fondasi-kualitas ngapain",
+    "expect": "devlog_jilid",
+    "contains": "meta-knowledge",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "ronde dataries-fase1 ngapain",
+    "expect": "devlog_jilid",
+    "contains": "Dataries Fase 1",
+    "note": "Bagian 8: devlog tanya-sejarah"
+  },
+  {
+    "prompt": "cara kerjamu gimana",
+    "expect": "devlog_cara_kerja",
+    "contains": "template/rule-based",
+    "note": "Bagian 8: devlog cara-kerja"
+  },
+  {
+    "prompt": "bagaimana cara kerjamu",
+    "expect": "devlog_cara_kerja",
+    "contains": "template/rule-based",
+    "note": "Bagian 8: devlog cara-kerja"
+  },
+  {
+    "prompt": "gimana cara kerjamu",
+    "expect": "devlog_cara_kerja",
+    "contains": "template/rule-based",
+    "note": "Bagian 8: devlog cara-kerja"
+  },
+  {
+    "prompt": "ceritakan sejarah indonesia",
+    "expect": "fallback_ok",
+    "notContains": [
+      "raget-devlog",
+      "ronde pengembangan",
+      "template/rule-based"
+    ],
+    "note": "Bagian 8: guard anti-narsis (negatif)"
+  },
+  {
+    "prompt": "cara membuat kue coklat",
+    "expect": "structured",
+    "notContains": [
+      "raget-devlog",
+      "dataries-bridge.js",
+      "template/rule-based"
+    ],
+    "note": "Bagian 8: guard anti-narsis (negatif)"
   }
 ]
