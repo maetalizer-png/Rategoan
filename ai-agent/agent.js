@@ -21,6 +21,7 @@ import { toolsExport } from './tools-export.js';
 import { toolsGeneric } from './tools-generic.js';
 import { toolsDevlog } from './tools-devlog.js';
 import { routerIntent } from './router-intent.js';
+import { bilingual } from './bilingual.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -303,6 +304,14 @@ async function respondCore(messages, prompt) {
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');
     return postProcess(factoid);
+  }
+
+  if (bilingual.detectLang(text) === 'en') {
+    const factoidEn = await bilingual.tryFactoidEn(text);
+    if (factoidEn) {
+      ragetDb.addNote(text, factoidEn, null, 'factoid_en');
+      return postProcess(factoidEn);
+    }
   }
 
   const extras = await datariesBridge.extras(text);

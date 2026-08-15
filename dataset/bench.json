@@ -936,12 +936,9 @@
   },
   {
     "prompt": "terjemahkan halo ke inggris",
-    "expect": "translate_stub",
-    "containsAll": [
-      "paket",
-      "MB"
-    ],
-    "note": "voice-style translate -> stub jujur, model belum diunduh"
+    "expect": "translate_basic",
+    "contains": "hello",
+    "note": "Bagian 3: frasa dasar sekarang dijawab langsung dari dataries, tanpa perlu unduh model neural"
   },
   {
     "prompt": "wake word Hey Raget",
@@ -995,11 +992,9 @@
   },
   {
     "prompt": "terjemahkan selamat pagi ke inggris",
-    "expect": "translate_stub",
-    "containsAll": [
-      "paket",
-      "MB"
-    ]
+    "expect": "translate_basic",
+    "contains": "good morning",
+    "note": "Bagian 3: frasa dasar sekarang dijawab langsung dari dataries, tanpa perlu unduh model neural"
   },
   {
     "prompt": "translate good morning ke id",
@@ -1949,7 +1944,11 @@
   {
     "prompt": "hitung 100%50",
     "expect": "math",
-    "containsAny": ["adalah 0", "hasilnya 0", "100%50 = 0"],
+    "containsAny": [
+      "adalah 0",
+      "hasilnya 0",
+      "100%50 = 0"
+    ],
     "note": "Bagian 2: modulo"
   },
   {
@@ -2158,5 +2157,209 @@
       "Hasil dari"
     ],
     "note": "Bagian 2: guard - pertanyaan faktual tidak dibajak parser matematika"
+  },
+  {
+    "prompt": "what is the capital of japan",
+    "expect": "factoid_en",
+    "contains": "Tokyo",
+    "note": "Bagian 3: EN capital of"
+  },
+  {
+    "prompt": "capital of indonesia",
+    "expect": "factoid_en",
+    "contains": "Jakarta",
+    "note": "Bagian 3: EN capital of (tanpa what is)"
+  },
+  {
+    "prompt": "what is the capital of south korea",
+    "expect": "factoid_en",
+    "contains": "Seoul",
+    "note": "Bagian 3: EN capital, entitas dua kata"
+  },
+  {
+    "prompt": "capital of thailand",
+    "expect": "factoid_en",
+    "contains": "Bangkok",
+    "note": "Bagian 3: EN capital of"
+  },
+  {
+    "prompt": "what is the capital of vietnam",
+    "expect": "factoid_en",
+    "contains": "Hanoi",
+    "note": "Bagian 3: EN capital of"
+  },
+  {
+    "prompt": "what is the capital of egypt",
+    "expect": "factoid_en",
+    "contains": "Cairo",
+    "note": "Bagian 3: EN capital dgn nama beda dari data ID (Kairo->Cairo)"
+  },
+  {
+    "prompt": "capital of canada",
+    "expect": "factoid_en",
+    "contains": "Ottawa",
+    "note": "Bagian 3: EN capital of"
+  },
+  {
+    "prompt": "what is the capital of brazil",
+    "expect": "factoid_en",
+    "contains": "Brasilia",
+    "note": "Bagian 3: EN capital of"
+  },
+  {
+    "prompt": "capital of australia",
+    "expect": "factoid_en",
+    "contains": "Canberra",
+    "note": "Bagian 3: EN capital of"
+  },
+  {
+    "prompt": "what is the population of japan",
+    "expect": "factoid_en",
+    "contains": "125 million",
+    "note": "Bagian 3: EN population of"
+  },
+  {
+    "prompt": "how many people live in france",
+    "expect": "factoid_en",
+    "contains": "68 million",
+    "note": "Bagian 3: EN population, frasa alternatif"
+  },
+  {
+    "prompt": "what is the population of china",
+    "expect": "factoid_en",
+    "contains": "1.4 billion",
+    "note": "Bagian 3: EN population, format miliar"
+  },
+  {
+    "prompt": "population of united states",
+    "expect": "factoid_en",
+    "contains": "334 million",
+    "note": "Bagian 3: EN population, alias nama negara"
+  },
+  {
+    "prompt": "what currency does japan use",
+    "expect": "factoid_en",
+    "contains": "Yen",
+    "note": "Bagian 3: EN currency does X use"
+  },
+  {
+    "prompt": "currency of germany",
+    "expect": "factoid_en",
+    "contains": "Euro",
+    "note": "Bagian 3: EN currency of"
+  },
+  {
+    "prompt": "what currency does mexico use",
+    "expect": "factoid_en",
+    "contains": "Peso",
+    "note": "Bagian 3: EN currency does X use"
+  },
+  {
+    "prompt": "what is the area of indonesia",
+    "expect": "factoid_en",
+    "contains": "1,904,569",
+    "note": "Bagian 3: EN area of"
+  },
+  {
+    "prompt": "how big is china",
+    "expect": "factoid_en",
+    "contains": "9,596,961",
+    "note": "Bagian 3: EN area, frasa alternatif"
+  },
+  {
+    "prompt": "what is the area of russia",
+    "expect": "factoid_en",
+    "contains": "17,098,242",
+    "note": "Bagian 3: EN area of"
+  },
+  {
+    "prompt": "what language is spoken in japan",
+    "expect": "factoid_en",
+    "containsAll": [
+      "Japanese",
+      "English"
+    ],
+    "note": "Bagian 3: EN language spoken in, banyak bahasa"
+  },
+  {
+    "prompt": "language of indonesia",
+    "expect": "factoid_en",
+    "contains": "Indonesian",
+    "note": "Bagian 3: EN language of"
+  },
+  {
+    "prompt": "what language is spoken in france",
+    "expect": "factoid_en",
+    "contains": "French",
+    "note": "Bagian 3: EN language spoken in"
+  },
+  {
+    "prompt": "translate hello to japanese",
+    "expect": "translate_basic",
+    "contains": "konnichiwa",
+    "note": "Bagian 3: frasa dasar dari dataries, bukan model neural"
+  },
+  {
+    "prompt": "translate thank you to french",
+    "expect": "translate_basic",
+    "contains": "merci",
+    "note": "Bagian 3: frasa dasar (nama bahasa EN)"
+  },
+  {
+    "prompt": "translate good morning to german",
+    "expect": "translate_basic",
+    "contains": "guten morgen",
+    "note": "Bagian 3: frasa dasar tiga kata"
+  },
+  {
+    "prompt": "translate hello to korean",
+    "expect": "translate_basic",
+    "contains": "annyeonghaseyo",
+    "note": "Bagian 3: frasa dasar"
+  },
+  {
+    "prompt": "translate hello to arabic",
+    "expect": "translate_basic",
+    "contains": "assalamualaikum",
+    "note": "Bagian 3: frasa dasar"
+  },
+  {
+    "prompt": "translate thank you to spanish",
+    "expect": "translate_basic",
+    "contains": "gracias",
+    "note": "Bagian 3: frasa dasar"
+  },
+  {
+    "prompt": "translate good morning to chinese",
+    "expect": "translate_basic",
+    "contains": "zǎoshang hǎo",
+    "note": "Bagian 3: alias EN pendek (chinese->mandarin)"
+  },
+  {
+    "prompt": "what is the capital of atlantis",
+    "expect": "fallback_ok",
+    "notContains": [
+      "The capital of"
+    ],
+    "note": "Bagian 3: guard - tempat fiktif tidak difabrikasi jawabannya"
+  },
+  {
+    "prompt": "berapa populasi indonesia",
+    "expect": "dataries_extras",
+    "notContains": [
+      "population of",
+      "The capital of"
+    ],
+    "note": "Bagian 3: guard - kalimat ID tetap lewat jalur ID, tidak dibajak jalur EN"
+  },
+  {
+    "prompt": "apa itu machine learning",
+    "expect": "factoid",
+    "notContains": [
+      "population of",
+      "The capital of",
+      "currency of"
+    ],
+    "note": "Bagian 3: guard - pertanyaan ID umum tidak dibajak jalur EN"
   }
 ]
