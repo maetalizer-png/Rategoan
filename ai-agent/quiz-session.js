@@ -1,7 +1,6 @@
 import { quiz } from '../dataries/quiz.js';
 import { formatter } from './formatter.js';
 import { streakStore } from '../raget-memory/streak-store.js';
-import { hashText } from '../utils/text.js';
 
 let pending = null;
 
@@ -36,13 +35,9 @@ function checkPending(text) {
   const correct = chosen === question.answer;
   if (correct) {
     const streak = streakStore.bump();
-    return 'Benar! Jawabannya ' + question.answer + '. 🔥 Streak: ' + streak + ' hari.';
+    return 'Benar! Jawabannya ' + question.answer + '. Streak: ' + streak + ' hari.';
   }
   return 'Belum tepat. Jawaban yang benar: ' + question.answer + '.';
 }
 
-function shouldOffer(seedText) {
-  return hashText('quiz_offer_' + seedText) % 100 < 20;
-}
-
-export const quizSession = Object.freeze({ ask, hasPending, checkPending, shouldOffer });
+export const quizSession = Object.freeze({ ask, hasPending, checkPending });

@@ -286,11 +286,20 @@ export const chat = {
     d.appendChild(tm);
     $('messages').appendChild(d);
     if (follow && !reduceMotion() && text.length > 0) {
-      for (let i = 0; i < text.length; i += 6) {
-        body.innerHTML = markdown.render(text.slice(0, i + 6));
+      let skip = false;
+      const onTap = () => { skip = true; };
+      body.addEventListener('pointerdown', onTap, { once: true });
+      const long = text.length > 400;
+      let i = 0;
+      while (i < text.length && !skip) {
+        const step = long ? 4 + Math.floor(Math.random() * 3) : 1 + Math.floor(Math.random() * 2);
+        i += step;
+        body.innerHTML = markdown.render(text.slice(0, i));
         scrollBottom();
-        await sleep(8);
+        const wait = long ? 16 : 18 + Math.floor(Math.random() * 7);
+        await sleep(wait);
       }
+      body.removeEventListener('pointerdown', onTap);
     }
     body.innerHTML = markdown.render(text);
     const actions = buildActions(text);

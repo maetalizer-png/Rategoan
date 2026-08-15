@@ -15,10 +15,7 @@ import { dataries } from '../dataries/index.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
 import { collectionSearch } from '../raget-memory/collection-search.js';
 import { devlogIndex } from '../raget-devlog/index.js';
-
-const SAFE_EXPR = /^[0-9+\-*/%().\s]+$/;
-const NUMBER_RE = /^[0-9.]+$/;
-const PRECEDENCE = { '+': 1, '-': 1, '*': 2, '/': 2, '%': 2 };
+import { mathEngine } from './math-engine.js';
 
 function extractiveSummary(text) {
   const sentences = String(text || '')
@@ -56,79 +53,6 @@ function bodyOrSentences(item) {
     if (lines.length) return lines;
   }
   return extractiveSummary(item.text || '').points;
-}
-
-function tokenize(expr) {
-  const tokens = [];
-  const re = /([0-9]*\.?[0-9]+|[+\-*/%()])/g;
-  let match;
-  let cursor = 0;
-  while ((match = re.exec(expr)) !== null) {
-    const gap = expr.slice(cursor, match.index);
-    if (gap.trim() !== '') return null;
-    tokens.push(match[1]);
-    cursor = match.index + match[1].length;
-  }
-  if (expr.slice(cursor).trim() !== '') return null;
-  return tokens;
-}
-
-function toRPN(tokens) {
-  const output = [];
-  const ops = [];
-  let prevToken = null;
-  tokens.forEach((token) => {
-    if (NUMBER_RE.test(token)) {
-      output.push(token);
-    } else if (token === '(') {
-      ops.push(token);
-    } else if (token === ')') {
-      while (ops.length && ops[ops.length - 1] !== '(') output.push(ops.pop());
-      ops.pop();
-    } else {
-      if (token === '-' && (prevToken === null || prevToken === '(' || PRECEDENCE[prevToken])) {
-        output.push('0');
-      }
-      while (ops.length && PRECEDENCE[ops[ops.length - 1]] >= PRECEDENCE[token]) {
-        output.push(ops.pop());
-      }
-      ops.push(token);
-    }
-    prevToken = token;
-  });
-  while (ops.length) output.push(ops.pop());
-  return output;
-}
-
-function evalRPN(rpn) {
-  const stack = [];
-  for (const token of rpn) {
-    if (NUMBER_RE.test(token)) {
-      stack.push(parseFloat(token));
-      continue;
-    }
-    const b = stack.pop();
-    const a = stack.pop();
-    if (a === undefined || b === undefined) return null;
-    if (token === '+') stack.push(a + b);
-    else if (token === '-') stack.push(a - b);
-    else if (token === '*') stack.push(a * b);
-    else if (token === '/') stack.push(b === 0 ? NaN : a / b);
-    else if (token === '%') stack.push(b === 0 ? NaN : a % b);
-  }
-  return stack.length === 1 ? stack[0] : null;
-}
-
-function safeEval(expr) {
-  const tokens = tokenize(expr);
-  if (!tokens || !tokens.length) return null;
-  const rpn = toRPN(tokens);
-  const result = evalRPN(rpn);
-  return typeof result === 'number' && isFinite(result) ? result : null;
-}
-
-function trimNum(n) {
-  return Math.round(n * 1e6) / 1e6;
 }
 
 function ringkas(text) {
@@ -327,21 +251,42 @@ const HITUNG_TEMPLATES = [
   (expr, result) => expr + ', hasilnya ' + result + '.',
 ];
 
+function wantsSteps(text) {
+  return /\blangkah\b|\bcara\s*(hitung|kerja)nya\b|step\s*by\s*step|show\s*steps?/i.test(text);
+}
+
 function hitung(text) {
   const src = String(text || '').trim();
-  const percentMatch = src.match(/(-?[0-9.]+)\s*%\s*dari\s*(-?[0-9.]+)/i);
-  if (percentMatch) {
-    const pct = parseFloat(percentMatch[1]);
-    const base = parseFloat(percentMatch[2]);
-    const expr = pct + '% dari ' + base;
-    const result = trimNum((pct / 100) * base);
-    return pickVariant('hitung', HITUNG_TEMPLATES, expr)(expr, result);
+  const showSteps = wantsSteps(src);
+
+  const currency = mathEngine.tryConvertCurrency(src);
+  if (currency) {
+    const base = 'Sekitar ' + currency.value + ' ' + currency.to + ' (kurs statis, bukan kurs real-time).';
+    return base;
   }
-  const cleaned = src.replace(/^(hitung|berapa)\s*/i, '').trim();
-  if (!cleaned || !SAFE_EXPR.test(cleaned)) return 'Ekspresi tidak valid. Gunakan angka dan operator +, -, *, /, % saja.';
-  const result = safeEval(cleaned);
-  if (result == null) return 'Tidak bisa menghitung ekspresi itu.';
-  return pickVariant('hitung', HITUNG_TEMPLATES, cleaned)(cleaned, trimNum(result));
+  const unit = mathEngine.tryConvertUnit(src);
+  if (unit) {
+    return 'Hasilnya sekitar ' + unit.value + ' ' + unit.unit + '.';
+  }
+
+  const pct = mathEngine.parsePercentOf(src);
+  if (pct) {
+    return showSteps
+      ? formatter.blocks([pct.steps[0], 'Hasil: ' + pct.value + '.'])
+      : pickVariant('hitung', HITUNG_TEMPLATES, pct.pct + '% dari ' + pct.base)(pct.pct + '% dari ' + pct.base, pct.value);
+  }
+
+  const cleaned = src
+    .replace(/\b(langkah|cara\s*(hitung|kerja)nya|step\s*by\s*step|show\s*steps?)\b/gi, ' ')
+    .replace(/^(hitung|berapa|calculate|what\s+is|compute)\s*/i, '')
+    .replace(/\?+$/, '')
+    .trim();
+  const evalRes = mathEngine.evaluate(cleaned, { steps: showSteps });
+  if (!evalRes.ok) return 'Ekspresi tidak valid. Gunakan angka dan operator +, -, ×, ÷, ^, % saja.';
+  if (showSteps && evalRes.steps.length) {
+    return formatter.blocks([formatter.bullets(evalRes.steps), 'Hasil akhir: ' + evalRes.value + '.']);
+  }
+  return pickVariant('hitung', HITUNG_TEMPLATES, cleaned)(cleaned, evalRes.value);
 }
 
 function waktu(text) {
