@@ -893,7 +893,8 @@
       "MB"
     ],
     "requiresAttach": "image",
-    "note": "foto receipt -> jujur minta unduh paket dulu (Tesseract belum diunduh secara default)"
+    "note": "foto receipt -> jujur minta unduh paket dulu (Tesseract belum diunduh secara default)",
+    "suite": "stub"
   },
   {
     "prompt": "ringkas catatan ini",
@@ -903,7 +904,8 @@
       "MB"
     ],
     "requiresAttach": "image",
-    "note": "foto catatan -> stub jujur yang sama sampai paket diunduh"
+    "note": "foto catatan -> stub jujur yang sama sampai paket diunduh",
+    "suite": "stub"
   },
   {
     "prompt": "extract text",
@@ -913,7 +915,8 @@
       "MB"
     ],
     "requiresAttach": "image",
-    "note": "screenshot -> stub jujur yang sama"
+    "note": "screenshot -> stub jujur yang sama",
+    "suite": "stub"
   },
   {
     "prompt": "ingatkan saya 15 menit lagi cari resep di catatan saya",
@@ -1037,13 +1040,15 @@
     "expect": "calendar_ics_import",
     "contains": "impor",
     "requiresAttach": ".ics",
-    "note": "diverifikasi end-to-end lewat Playwright: 1 acara berhasil diimpor dari file .ics nyata"
+    "note": "diverifikasi end-to-end lewat Playwright: 1 acara berhasil diimpor dari file .ics nyata",
+    "suite": "stub"
   },
   {
     "prompt": "kapan meeting selanjutnya",
     "expect": "calendar_query",
     "contains": "Meeting with team",
-    "requiresContext": "impor kalender ics"
+    "requiresContext": "impor kalender ics",
+    "suite": "stub"
   },
   {
     "prompt": "buat email formal ke Bu Sinta tentang laporan bulanan",
@@ -1073,7 +1078,8 @@
       "pesan"
     ],
     "requiresAttach": ".txt (ekspor WhatsApp)",
-    "note": "diverifikasi end-to-end via Playwright: 3 pesan -> 2 chunk (gap 5 menit) tersimpan raget_whatsapp"
+    "note": "diverifikasi end-to-end via Playwright: 3 pesan -> 2 chunk (gap 5 menit) tersimpan raget_whatsapp",
+    "suite": "stub"
   },
   {
     "prompt": "impor file ini",
@@ -1083,7 +1089,8 @@
       "catatan"
     ],
     "requiresAttach": ".enex",
-    "note": "diverifikasi end-to-end via Playwright: 1 catatan tersimpan raget_evernote, tanpa CDN (DOMParser native)"
+    "note": "diverifikasi end-to-end via Playwright: 1 catatan tersimpan raget_evernote, tanpa CDN (DOMParser native)",
+    "suite": "stub"
   },
   {
     "prompt": "baca pdf ini",
@@ -1093,7 +1100,8 @@
       "MB"
     ],
     "requiresAttach": ".pdf",
-    "note": "CDN pdf.js diblokir di sandbox ini (403 proxy) - stub jujur diverifikasi, path 'paket sudah diunduh' tidak bisa dites di lingkungan ini"
+    "note": "CDN pdf.js diblokir di sandbox ini (403 proxy) - stub jujur diverifikasi, path 'paket sudah diunduh' tidak bisa dites di lingkungan ini",
+    "suite": "stub"
   },
   {
     "prompt": "impor notion ini",
@@ -1103,14 +1111,16 @@
       "MB"
     ],
     "requiresAttach": ".zip",
-    "note": "sama seperti PDF - CDN JSZip diblokir di sandbox, stub jujur diverifikasi"
+    "note": "sama seperti PDF - CDN JSZip diblokir di sandbox, stub jujur diverifikasi",
+    "suite": "stub"
   },
   {
     "prompt": "cari meeting di semua sumber",
     "expect": "unified_search_vault",
     "contains": "WhatsApp",
     "requiresContext": "impor file ini (WhatsApp)",
-    "note": "diverifikasi: unified search menemukan chunk WhatsApp yang baru diimpor"
+    "note": "diverifikasi: unified search menemukan chunk WhatsApp yang baru diimpor",
+    "suite": "stub"
   },
   {
     "prompt": "hitung 12*8",
