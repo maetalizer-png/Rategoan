@@ -24,6 +24,7 @@ import { routerIntent } from './router-intent.js';
 import { bilingual } from './bilingual.js';
 import { knowledgeGraph } from './knowledge-graph.js';
 import { answerComposer } from './answer-composer.js';
+import { stemEngine } from './stem-engine.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -216,6 +217,12 @@ async function respondCore(messages, prompt) {
     return postProcess(reply);
   }
 
+  const stemPrecise = stemEngine.tryLogic(text) || stemEngine.tryAlgebra(text) || stemEngine.tryCalculus(text) || stemEngine.tryPhysics(text);
+  if (stemPrecise) {
+    ragetDb.addNote(text, stemPrecise, null, 'stem');
+    return postProcess(stemPrecise);
+  }
+
   const rating = routerIntent.detectRating(text);
   if (rating !== null) {
     ragetDb.rateLast(rating);
@@ -308,6 +315,12 @@ async function respondCore(messages, prompt) {
     return postProcess(followupId);
   }
 
+  const stemDict = stemEngine.tryBodySystem(text) || stemEngine.tryClassification(text) || stemEngine.tryEcology(text) || stemEngine.tryTechConcept(text);
+  if (stemDict) {
+    ragetDb.addNote(text, stemDict, null, 'stem');
+    return postProcess(stemDict);
+  }
+
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');
@@ -336,6 +349,12 @@ async function respondCore(messages, prompt) {
   if (extras) {
     ragetDb.addNote(text, extras, null, 'dataries_extras');
     return postProcess(extras);
+  }
+
+  const stemReply = stemEngine.tryStem(text);
+  if (stemReply) {
+    ragetDb.addNote(text, stemReply, null, 'stem');
+    return postProcess(stemReply);
   }
 
   const teaching = routerIntent.detectTeaching(text);

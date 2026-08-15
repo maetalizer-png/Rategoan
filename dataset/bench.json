@@ -3119,5 +3119,640 @@
       "n="
     ],
     "note": "Bagian 6: A dilaporkan jujur dengan n nyata (bukan disembunyikan) - persis format yg diminta ronde"
+  },
+  {
+    "prompt": "selesaikan 2x+3=7",
+    "note": "Ronde v5 B1: stem algebra - linear sederhana",
+    "contains": "x = 4 / 2 = 2"
+  },
+  {
+    "prompt": "solve 3x-5=10",
+    "note": "Ronde v5 B1: stem algebra - solve EN",
+    "contains": "x = 15 / 3 = 5"
+  },
+  {
+    "prompt": "berapa nilai x dari x-4=2",
+    "note": "Ronde v5 B1: stem algebra - koefisien implisit 1",
+    "contains": "x = 6 / 1 = 6"
+  },
+  {
+    "prompt": "cari nilai x dari 5x=20",
+    "note": "Ronde v5 B1: stem algebra - tanpa konstanta",
+    "contains": "x = 20 / 5 = 4"
+  },
+  {
+    "prompt": "selesaikan -x+4=10",
+    "note": "Ronde v5 B1: stem algebra - koefisien negatif",
+    "contains": "x = 6 / -1 = -6"
+  },
+  {
+    "prompt": "selesaikan 4x+8=0",
+    "note": "Ronde v5 B1: stem algebra - hasil negatif",
+    "contains": "x = -8 / 4 = -2"
+  },
+  {
+    "prompt": "luas lingkaran dengan jari-jari 7",
+    "note": "Ronde v5 B1: stem geometri - luas lingkaran",
+    "containsAll": [
+      "Luas Lingkaran",
+      "satuan²"
+    ]
+  },
+  {
+    "prompt": "keliling persegi panjang panjang 5 lebar 3",
+    "note": "Ronde v5 B1: stem geometri - keliling persegi panjang",
+    "containsAll": [
+      "Keliling Persegi Panjang",
+      "16 satuan"
+    ]
+  },
+  {
+    "prompt": "volume kubus sisi 4",
+    "note": "Ronde v5 B1: stem geometri - volume kubus",
+    "containsAll": [
+      "Volume Kubus",
+      "64 satuan³"
+    ]
+  },
+  {
+    "prompt": "volume tabung jari-jari 3 tinggi 5",
+    "note": "Ronde v5 B1: stem geometri - volume tabung",
+    "containsAll": [
+      "Volume Tabung",
+      "satuan³"
+    ]
+  },
+  {
+    "prompt": "luas segitiga alas 6 tinggi 4",
+    "note": "Ronde v5 B1: stem geometri - luas segitiga",
+    "containsAll": [
+      "Luas Segitiga",
+      "12 satuan²"
+    ]
+  },
+  {
+    "prompt": "keliling lingkaran jari-jari 10",
+    "note": "Ronde v5 B1: stem geometri - keliling lingkaran",
+    "containsAll": [
+      "Keliling Lingkaran",
+      "satuan"
+    ]
+  },
+  {
+    "prompt": "volume bola jari-jari 3",
+    "note": "Ronde v5 B1: stem geometri - volume bola",
+    "containsAll": [
+      "Volume Bola",
+      "satuan³"
+    ]
+  },
+  {
+    "prompt": "luas permukaan kubus sisi 4",
+    "note": "Ronde v5 B1: stem geometri - luas permukaan kubus",
+    "containsAll": [
+      "Luas Permukaan Kubus",
+      "96 satuan²"
+    ]
+  },
+  {
+    "prompt": "rata-rata dari 2,4,6,8",
+    "note": "Ronde v5 B1: stem statistik - rata-rata",
+    "contains": "= 5"
+  },
+  {
+    "prompt": "median dari 5,3,9,1,7",
+    "note": "Ronde v5 B1: stem statistik - median",
+    "contains": "Median = 5"
+  },
+  {
+    "prompt": "modus dari 2,2,3,4,4,4",
+    "note": "Ronde v5 B1: stem statistik - modus",
+    "contains": "Modus = 4 (muncul 3x)"
+  },
+  {
+    "prompt": "simpangan baku dari 2,4,4,4,5,5,7,9",
+    "note": "Ronde v5 B1: stem statistik - simpangan baku",
+    "contains": "Simpangan baku = "
+  },
+  {
+    "prompt": "mean dari 10,20,30",
+    "note": "Ronde v5 B1: stem statistik - mean EN",
+    "contains": "= 20"
+  },
+  {
+    "prompt": "median dari 4,8,15,16,23,42",
+    "note": "Ronde v5 B1: stem statistik - median genap",
+    "contains": "Median = "
+  },
+  {
+    "prompt": "turunan dari 3x^2+2x",
+    "note": "Ronde v5 B1: stem kalkulus - aturan pangkat",
+    "contains": "f'(x) = 6x + 2"
+  },
+  {
+    "prompt": "turunan dari 5x",
+    "note": "Ronde v5 B1: stem kalkulus - linear",
+    "contains": "f'(x) = 5"
+  },
+  {
+    "prompt": "derivative of 4x^3-2x^2+5",
+    "note": "Ronde v5 B1: stem kalkulus - EN pangkat 3",
+    "contains": "f'(x) = "
+  },
+  {
+    "prompt": "true and false",
+    "note": "Ronde v5 B1: stem logika - AND",
+    "containsAll": [
+      "AND",
+      "Hasil: Salah"
+    ]
+  },
+  {
+    "prompt": "salah XOR benar",
+    "note": "Ronde v5 B1: stem logika - XOR",
+    "containsAll": [
+      "XOR",
+      "Hasil: Benar"
+    ]
+  },
+  {
+    "prompt": "hitung gaya jika massa 5 kg dan percepatan 2 m/s2",
+    "note": "Ronde v5 B1: stem fisika - hukum newton II",
+    "containsAll": [
+      "Gaya (Hukum Newton II)",
+      "10 N"
+    ]
+  },
+  {
+    "prompt": "energi kinetik massa 2 kg kecepatan 3 m/s",
+    "note": "Ronde v5 B1: stem fisika - energi kinetik",
+    "containsAll": [
+      "Energi Kinetik",
+      "9 J"
+    ]
+  },
+  {
+    "prompt": "energi potensial massa 2 kg tinggi 5 m",
+    "note": "Ronde v5 B1: stem fisika - energi potensial",
+    "containsAll": [
+      "Energi Potensial",
+      "98 J"
+    ]
+  },
+  {
+    "prompt": "usaha gaya 10 N jarak 5 m",
+    "note": "Ronde v5 B1: stem fisika - usaha",
+    "containsAll": [
+      "Usaha",
+      "50 J"
+    ]
+  },
+  {
+    "prompt": "daya usaha 100 J waktu 5 s",
+    "note": "Ronde v5 B1: stem fisika - daya",
+    "containsAll": [
+      "Daya",
+      "20 W"
+    ]
+  },
+  {
+    "prompt": "berapa tegangan jika arus 2 A hambatan 5 ohm",
+    "note": "Ronde v5 B1: stem fisika - hukum ohm tegangan",
+    "containsAll": [
+      "Tegangan (Hukum Ohm)",
+      "10 V"
+    ]
+  },
+  {
+    "prompt": "berapa hambatan jika tegangan 10 V arus 2 A",
+    "note": "Ronde v5 B1: stem fisika - hukum ohm hambatan",
+    "containsAll": [
+      "Hambatan (Hukum Ohm)",
+      "5"
+    ]
+  },
+  {
+    "prompt": "massa jenis benda massa 10 kg volume 2 m3",
+    "note": "Ronde v5 B1: stem fisika - massa jenis",
+    "containsAll": [
+      "Massa Jenis",
+      "kg/m³"
+    ]
+  },
+  {
+    "prompt": "tekanan gaya 20 N luas 4 m2",
+    "note": "Ronde v5 B1: stem fisika - tekanan",
+    "containsAll": [
+      "Tekanan",
+      "5 Pa"
+    ]
+  },
+  {
+    "prompt": "kecepatan akhir jika kecepatan awal 0 percepatan 2 waktu 5",
+    "note": "Ronde v5 B1: stem fisika - kinematika",
+    "containsAll": [
+      "Kecepatan Akhir (Kinematika)",
+      "10 m/s"
+    ]
+  },
+  {
+    "prompt": "hitung gaya jika massa 10 kg dan percepatan 3 m/s2",
+    "note": "Ronde v5 B1: stem fisika - newton II variasi",
+    "contains": "30 N"
+  },
+  {
+    "prompt": "energi kinetik massa 4 kg kecepatan 5 m/s",
+    "note": "Ronde v5 B1: stem fisika - energi kinetik variasi",
+    "contains": "50 J"
+  },
+  {
+    "prompt": "energi potensial massa 3 kg tinggi 10 m",
+    "note": "Ronde v5 B1: stem fisika - energi potensial variasi",
+    "contains": "294 J"
+  },
+  {
+    "prompt": "usaha gaya 20 N jarak 3 m",
+    "note": "Ronde v5 B1: stem fisika - usaha variasi",
+    "contains": "60 J"
+  },
+  {
+    "prompt": "daya usaha 200 J waktu 4 s",
+    "note": "Ronde v5 B1: stem fisika - daya variasi",
+    "contains": "50 W"
+  },
+  {
+    "prompt": "berapa arus jika tegangan 20 V hambatan 4 ohm",
+    "note": "Ronde v5 B1: stem fisika - ohm arus",
+    "containsAll": [
+      "Arus (Hukum Ohm)",
+      "5 A"
+    ]
+  },
+  {
+    "prompt": "berapa tegangan jika arus 3 A hambatan 10 ohm",
+    "note": "Ronde v5 B1: stem fisika - ohm tegangan variasi",
+    "contains": "30 V"
+  },
+  {
+    "prompt": "massa jenis benda massa 5 kg volume 1 m3",
+    "note": "Ronde v5 B1: stem fisika - massa jenis variasi",
+    "contains": "5 kg/m³"
+  },
+  {
+    "prompt": "tekanan gaya 50 N luas 5 m2",
+    "note": "Ronde v5 B1: stem fisika - tekanan variasi",
+    "contains": "10 Pa"
+  },
+  {
+    "prompt": "cepat rambat gelombang frekuensi 100 Hz panjang gelombang 3 m",
+    "note": "Ronde v5 B1: stem fisika - cepat rambat variasi",
+    "contains": "300 m/s"
+  },
+  {
+    "prompt": "kecepatan akhir jika kecepatan awal 5 percepatan 3 waktu 4",
+    "note": "Ronde v5 B1: stem fisika - kinematika variasi",
+    "contains": "17 m/s"
+  },
+  {
+    "prompt": "hitung usaha jika gaya 15 N jarak 4 m",
+    "note": "Ronde v5 B1: stem fisika - usaha prefix hitung",
+    "contains": "60 J"
+  },
+  {
+    "prompt": "hitung daya jika usaha 500 J waktu 10 s",
+    "note": "Ronde v5 B1: stem fisika - daya prefix hitung",
+    "contains": "50 W"
+  },
+  {
+    "prompt": "hitung energi kinetik massa 6 kg kecepatan 2 m/s",
+    "note": "Ronde v5 B1: stem fisika - EK prefix hitung",
+    "contains": "12 J"
+  },
+  {
+    "prompt": "hitung energi potensial massa 1 kg tinggi 20 m",
+    "note": "Ronde v5 B1: stem fisika - EP prefix hitung",
+    "contains": "196 J"
+  },
+  {
+    "prompt": "apa itu load balancer",
+    "note": "Ronde v5 B1: stem tech - load balancer",
+    "contains": "Load balancer adalah"
+  },
+  {
+    "prompt": "apa itu microservices",
+    "note": "Ronde v5 B1: stem tech - microservices",
+    "contains": "Microservices adalah"
+  },
+  {
+    "prompt": "jelaskan CI/CD",
+    "note": "Ronde v5 B1: stem tech - CI/CD",
+    "contains": "CI/CD"
+  },
+  {
+    "prompt": "apa itu version control",
+    "note": "Ronde v5 B1: stem tech - version control",
+    "contains": "Version control adalah"
+  },
+  {
+    "prompt": "apa itu unit testing",
+    "note": "Ronde v5 B1: stem tech - unit testing",
+    "contains": "Unit testing adalah"
+  },
+  {
+    "prompt": "apa itu REST API",
+    "note": "Ronde v5 B1: stem tech - REST API",
+    "contains": "REST API adalah"
+  },
+  {
+    "prompt": "apa itu GPU",
+    "note": "Ronde v5 B1: stem tech - GPU",
+    "contains": "GPU (Graphics Processing Unit)"
+  },
+  {
+    "prompt": "apa itu CPU",
+    "note": "Ronde v5 B1: stem tech - CPU",
+    "contains": "CPU (Central Processing Unit)"
+  },
+  {
+    "prompt": "jelaskan kompiler",
+    "note": "Ronde v5 B1: stem tech - kompiler",
+    "contains": "Kompiler adalah"
+  },
+  {
+    "prompt": "apa itu interpreter",
+    "note": "Ronde v5 B1: stem tech - interpreter",
+    "contains": "Interpreter adalah"
+  },
+  {
+    "prompt": "wifi tidak mau connect",
+    "note": "Ronde v5 B1: stem tech - troubleshoot wifi",
+    "containsAll": [
+      "WiFi Tidak Bisa Connect",
+      "Restart router"
+    ]
+  },
+  {
+    "prompt": "laptop saya lambat sekali",
+    "note": "Ronde v5 B1: stem tech - troubleshoot laptop",
+    "containsAll": [
+      "Laptop Lambat",
+      "Task Manager"
+    ]
+  },
+  {
+    "prompt": "hp cepat panas kenapa",
+    "note": "Ronde v5 B1: stem tech - troubleshoot hp panas",
+    "containsAll": [
+      "HP Cepat Panas",
+      "charging"
+    ]
+  },
+  {
+    "prompt": "muncul blue screen di laptop",
+    "note": "Ronde v5 B1: stem tech - troubleshoot BSOD",
+    "containsAll": [
+      "Blue Screen (BSOD)",
+      "driver"
+    ]
+  },
+  {
+    "prompt": "aplikasi force close terus",
+    "note": "Ronde v5 B1: stem tech - troubleshoot force close",
+    "containsAll": [
+      "Aplikasi Force Close",
+      "Clear cache"
+    ]
+  },
+  {
+    "prompt": "baterai hp boros banget",
+    "note": "Ronde v5 B1: stem tech - troubleshoot baterai",
+    "containsAll": [
+      "Baterai Boros",
+      "hemat baterai"
+    ]
+  },
+  {
+    "prompt": "internet di rumah lambat",
+    "note": "Ronde v5 B1: stem tech - troubleshoot internet",
+    "containsAll": [
+      "Internet Lambat",
+      "speed test"
+    ]
+  },
+  {
+    "prompt": "printer tidak terdeteksi",
+    "note": "Ronde v5 B1: stem tech - troubleshoot printer",
+    "containsAll": [
+      "Printer Tidak Terdeteksi",
+      "driver printer"
+    ]
+  },
+  {
+    "prompt": "keyboard tidak berfungsi",
+    "note": "Ronde v5 B1: stem tech - troubleshoot keyboard",
+    "containsAll": [
+      "Keyboard Tidak Berfungsi",
+      "Bluetooth"
+    ]
+  },
+  {
+    "prompt": "email tidak bisa terkirim",
+    "note": "Ronde v5 B1: stem tech - troubleshoot email",
+    "containsAll": [
+      "Email Gagal Terkirim",
+      "Outbox"
+    ]
+  },
+  {
+    "prompt": "apa yang dimaksud dengan CPU",
+    "note": "Ronde v5 B1: stem tech - CPU frasa alternatif",
+    "contains": "CPU (Central Processing Unit)"
+  },
+  {
+    "prompt": "jelaskan tentang GPU",
+    "note": "Ronde v5 B1: stem tech - GPU frasa alternatif",
+    "contains": "GPU (Graphics Processing Unit)"
+  },
+  {
+    "prompt": "hp saya sering force close aplikasinya",
+    "note": "Ronde v5 B1: stem tech - troubleshoot force close variasi",
+    "containsAll": [
+      "Aplikasi Force Close",
+      "Clear cache"
+    ]
+  },
+  {
+    "prompt": "wifi gak connect di laptop",
+    "note": "Ronde v5 B1: stem tech - troubleshoot wifi variasi",
+    "containsAll": [
+      "WiFi Tidak Bisa Connect",
+      "Restart router"
+    ]
+  },
+  {
+    "prompt": "baterai hp cepat habis padahal jarang dipakai",
+    "note": "Ronde v5 B1: stem tech - troubleshoot baterai variasi",
+    "containsAll": [
+      "Baterai Boros",
+      "hemat baterai"
+    ]
+  },
+  {
+    "prompt": "apa itu sistem pencernaan",
+    "note": "Ronde v5 B1: stem biologi - sistem pencernaan",
+    "contains": "Sistem pencernaan adalah"
+  },
+  {
+    "prompt": "apa itu sistem pernapasan",
+    "note": "Ronde v5 B1: stem biologi - sistem pernapasan",
+    "contains": "Sistem pernapasan"
+  },
+  {
+    "prompt": "apa itu sistem saraf",
+    "note": "Ronde v5 B1: stem biologi - sistem saraf",
+    "contains": "Sistem saraf"
+  },
+  {
+    "prompt": "jelaskan sistem ekskresi",
+    "note": "Ronde v5 B1: stem biologi - sistem ekskresi",
+    "contains": "Sistem ekskresi"
+  },
+  {
+    "prompt": "apa itu sistem otot",
+    "note": "Ronde v5 B1: stem biologi - sistem otot",
+    "contains": "Sistem otot"
+  },
+  {
+    "prompt": "apa itu sistem rangka",
+    "note": "Ronde v5 B1: stem biologi - sistem rangka",
+    "contains": "Sistem rangka"
+  },
+  {
+    "prompt": "apa itu sistem reproduksi",
+    "note": "Ronde v5 B1: stem biologi - sistem reproduksi",
+    "contains": "Sistem reproduksi"
+  },
+  {
+    "prompt": "apa itu sistem endokrin",
+    "note": "Ronde v5 B1: stem biologi - sistem endokrin",
+    "contains": "Sistem endokrin"
+  },
+  {
+    "prompt": "klasifikasi makhluk hidup",
+    "note": "Ronde v5 B1: stem biologi - klasifikasi",
+    "containsAll": [
+      "Kingdom",
+      "Spesies"
+    ]
+  },
+  {
+    "prompt": "contoh hewan vertebrata",
+    "note": "Ronde v5 B1: stem biologi - vertebrata",
+    "containsAll": [
+      "Vertebrata",
+      "Mamalia"
+    ]
+  },
+  {
+    "prompt": "contoh hewan invertebrata",
+    "note": "Ronde v5 B1: stem biologi - invertebrata",
+    "containsAll": [
+      "Invertebrata",
+      "moluska"
+    ]
+  },
+  {
+    "prompt": "apa itu simbiosis mutualisme",
+    "note": "Ronde v5 B1: stem biologi - simbiosis mutualisme",
+    "contains": "Simbiosis mutualisme"
+  },
+  {
+    "prompt": "apa itu simbiosis komensalisme",
+    "note": "Ronde v5 B1: stem biologi - simbiosis komensalisme",
+    "contains": "Simbiosis komensalisme"
+  },
+  {
+    "prompt": "apa itu simbiosis parasitisme",
+    "note": "Ronde v5 B1: stem biologi - simbiosis parasitisme",
+    "contains": "Simbiosis parasitisme"
+  },
+  {
+    "prompt": "apa itu siklus air",
+    "note": "Ronde v5 B1: stem biologi - siklus air",
+    "contains": "Siklus air"
+  },
+  {
+    "prompt": "apa itu siklus karbon",
+    "note": "Ronde v5 B1: stem biologi - siklus karbon",
+    "contains": "Siklus karbon"
+  },
+  {
+    "prompt": "apa itu siklus nitrogen",
+    "note": "Ronde v5 B1: stem biologi - siklus nitrogen",
+    "contains": "Siklus nitrogen"
+  },
+  {
+    "prompt": "kenapa sering sakit kepala",
+    "note": "Ronde v5 B1: stem biologi - health sakit kepala + disclaimer",
+    "containsAll": [
+      "Sakit kepala",
+      "konsultasikan ke dokter"
+    ]
+  },
+  {
+    "prompt": "kenapa sering pusing",
+    "note": "Ronde v5 B1: stem biologi - health pusing + disclaimer",
+    "containsAll": [
+      "Pusing",
+      "konsultasikan ke dokter"
+    ]
+  },
+  {
+    "prompt": "apa penyebab sakit perut terus menerus",
+    "note": "Ronde v5 B1: stem biologi - health sakit perut + disclaimer",
+    "containsAll": [
+      "Sakit perut",
+      "konsultasikan ke dokter"
+    ]
+  },
+  {
+    "prompt": "apa penyebab demam",
+    "note": "Ronde v5 B1: stem biologi - health demam + disclaimer",
+    "containsAll": [
+      "Demam",
+      "bukan diagnosis medis"
+    ]
+  },
+  {
+    "prompt": "apa penyebab batuk terus menerus",
+    "note": "Ronde v5 B1: stem biologi - health batuk + disclaimer",
+    "containsAll": [
+      "Batuk",
+      "bukan diagnosis medis"
+    ]
+  },
+  {
+    "prompt": "kenapa sering mual",
+    "note": "Ronde v5 B1: stem biologi - health mual + disclaimer",
+    "containsAll": [
+      "Mual",
+      "bukan diagnosis medis"
+    ]
+  },
+  {
+    "prompt": "kenapa diare terus menerus",
+    "note": "Ronde v5 B1: stem biologi - health diare + disclaimer",
+    "containsAll": [
+      "Diare",
+      "bukan diagnosis medis"
+    ]
+  },
+  {
+    "prompt": "kenapa sering susah tidur",
+    "note": "Ronde v5 B1: stem biologi - health insomnia + disclaimer",
+    "containsAll": [
+      "Susah tidur",
+      "bukan diagnosis medis"
+    ]
   }
 ]
