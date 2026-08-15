@@ -1,5 +1,6 @@
 import { ragetDb } from '../raget-database/raget-db.js';
 import { scorer } from './scorer.js';
+import { feedbackStore } from '../raget-memory/feedback-store.js';
 
 const QUALITY_KEY = 'raget_quality';
 const ANSWER_TYPES = ['definisi', 'daftar', 'prosedur', 'perbandingan', 'matematika', 'terbuka'];
@@ -51,8 +52,8 @@ function computeQuality(notes) {
   const list = notes || [];
   if (!list.length) return { score: 0, breakdown: { A: 0, K: 0, U: 0, D: 0, V: 0 } };
 
-  const rated = list.filter((n) => n.feedback != null);
-  const A = rated.length >= 10 ? rated.filter((n) => n.feedback).length / rated.length : 0.7;
+  const fbStats = feedbackStore.stats();
+  const A = fbStats.total > 0 ? fbStats.rate : 0.7;
 
   const factoidNotes = list.filter((n) => n.intent === 'factoid' || n.intent === 'dataries_extras');
   const K = factoidNotes.length
@@ -86,7 +87,7 @@ function computeQuality(notes) {
       V: Math.round(V * 100),
     },
     n: {
-      A: rated.length,
+      A: fbStats.total,
       K: factoidNotes.length,
       U: pairs,
       D: intents.size,
