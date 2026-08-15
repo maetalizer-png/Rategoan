@@ -1,6 +1,5 @@
 [
-  { "title": "Pembangun Proyek", "text": "Rategoan dibangun bersama oleh Maetalizer, Qwen, dan Claude sebagai kolaborasi lintas AI dan manusia." },
+  { "title": "Pembangun Proyek", "text": "Rategoan dibangun sebagai kolaborasi lintas AI dan manusia." },
   { "title": "Evolusi Arsitektur", "text": "Rategoan berevolusi dari struktur file datar, menjadi modular ES6, lalu ke otak AI berbasis template, dan akhirnya ke basis data dataries yang luas." },
-  { "title": "Asal Data KESEMPATAN", "text": "KESEMPATAN OS adalah proyek terpisah milik kakak pembangun Rategoan; sebagian datanya (marplace, paluang, lingo) disalin dan dibersihkan untuk dipakai ulang di dataries Rategoan." },
   { "title": "Pelajaran Pengembangan", "text": "Beberapa pelajaran penting dari proses membangun Rategoan: kerjakan data file per file agar tidak terpotong, uji dengan kasus bench nyata, dan selalu pisahkan data dari kode." }
 ]

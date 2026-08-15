@@ -35,13 +35,7 @@ Asisten Travel + PDF; Trip "Rencana siap" + ekspor; Jelajah grup negara + dropdo
 
 f32d69c, 2adba37, 9d1f329, 8632743, a64cbc9, cd291db, 7b85edc.
 
-## 6. KESEMPATAN OS
-
-Panel sketsa jadi LOKAL; nunggu "push"; freeze s.d. Kamis 20:00.
-
-> Catatan Bagian 3: "KESEMPATAN OS" adalah proyek/repositori terpisah dari Rategoan/Jalanin (dikonfirmasi lewat pemeriksaan artefak terkait — isinya cockpit dashboard, command-splitter, sidebar 25 item, sama sekali tidak menyinggung Raget/dataries/travel). Baris ini dipertahankan apa adanya sebagai bagian dari catatan "ide antrean" lintas-proyek milik pengguna yang sama, bukan diinterpretasikan sebagai riwayat Rategoan.
-
-## 7. KELEMAHAN
+## 6. KELEMAHAN
 
 K=57% (rewrite); stub impor (parsing nyata/bench pecah); splitPossessiveSuffix tidak konsisten.
 

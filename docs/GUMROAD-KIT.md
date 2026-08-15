@@ -42,7 +42,7 @@ pertama.
 
 ## FAQ
 
-**Butuh API key OpenAI/Claude/dll?**
+**Butuh API key layanan AI cloud?**
 Tidak. Semua balasan dihasilkan dari mesin template lokal, tidak ada panggilan
 API berbayar sama sekali untuk fitur inti.
 
