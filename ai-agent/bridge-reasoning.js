@@ -47,8 +47,8 @@ async function tryAgregasi(text) {
 }
 
 async function tryReverseLookup(text) {
-  const currencyM = text.match(/negara\s+(?:yang\s+)?mata\s*uangnya\s+(.+?)\??$/i);
-  const langM = text.match(/negara\s+(?:yang\s+)?bahasanya\s+(.+?)\??$/i);
+  const currencyM = text.match(/negara\s+(?:apa\s+)?(?:yang\s+)?mata\s*uangnya\s+(.+?)\??$/i);
+  const langM = text.match(/negara\s+(?:apa\s+)?(?:yang\s+)?bahasanya\s+(.+?)\??$/i);
   const capitalM = text.match(/ibukota(?:nya)?\s+(.+?)\s+(?:itu\s+)?negara\s+(?:apa|mana)\??$/i)
     || text.match(/negara\s+apa\s+yang\s+ibukotanya\s+(.+?)\??$/i);
   const currencyNameM = text.match(/mata\s*uang\s+(.+?)\s+itu\s+punya\s+negara\s+(?:apa|mana)\??$/i);

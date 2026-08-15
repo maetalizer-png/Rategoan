@@ -213,7 +213,17 @@ async function tryEkonomi(text) {
 }
 
 async function extras(q) {
-  const text = String(q || '').trim();
+  const rawText = String(q || '').trim();
+  if (!rawText) return null;
+  // tryReverseLookup butuh sufiks posesif UTUH ("bahasanya", "uangnya",
+  // "ibukotanya") sebagai penanda pola reverse-lookup - jalankan sebelum
+  // splitPossessiveSuffix() supaya konsisten dengan factoid() (yang juga
+  // memberi kesempatan pada pola posesif lain sebelum split) tanpa merusak
+  // regex reverse-lookup itu sendiri.
+  const reverseLookup = await bridgeReasoning.tryReverseLookup(rawText);
+  if (reverseLookup) return reverseLookup;
+
+  const text = bridgeResolve.splitPossessiveSuffix(rawText);
   if (!text) return null;
 
   const superlatif = await bridgeReasoning.trySuperlatif(text);
@@ -221,9 +231,6 @@ async function extras(q) {
 
   const agregasi = await bridgeReasoning.tryAgregasi(text);
   if (agregasi) return agregasi;
-
-  const reverseLookup = await bridgeReasoning.tryReverseLookup(text);
-  if (reverseLookup) return reverseLookup;
 
   const konversiSatuan = await bridgeReasoning.tryKonversiSatuan(text);
   if (konversiSatuan) return konversiSatuan;

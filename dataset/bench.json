@@ -1775,5 +1775,23 @@
     "expect": "dataries_extras",
     "contains": "Gama",
     "note": "Bagian 9: tokoh penjelajah"
+  },
+  {
+    "prompt": "negara apa yang bahasanya inggris",
+    "expect": "dataries_extras",
+    "contains": "Negara berbahasa",
+    "note": "Bagian 7: konsistensi splitPossessiveSuffix - reverse-lookup bahasa"
+  },
+  {
+    "prompt": "negara apa yang mata uangnya dolar",
+    "expect": "dataries_extras",
+    "contains": "Negara dengan mata uang",
+    "note": "Bagian 7: konsistensi splitPossessiveSuffix - reverse-lookup mata uang"
+  },
+  {
+    "prompt": "negara apa yang bahasanya mandarin",
+    "expect": "dataries_extras",
+    "contains": "Negara berbahasa",
+    "note": "Bagian 7: konsistensi splitPossessiveSuffix - reverse-lookup bahasa mandarin"
   }
 ]
