@@ -3110,5 +3110,14 @@
       "Poin penting"
     ],
     "note": "Bagian 5: gaya adaptif - naratif kaya terstruktur"
+  },
+  {
+    "prompt": "laporan otak",
+    "expect": "laporan_quality",
+    "containsAll": [
+      "Akurasi (A):",
+      "n="
+    ],
+    "note": "Bagian 6: A dilaporkan jujur dengan n nyata (bukan disembunyikan) - persis format yg diminta ronde"
   }
 ]

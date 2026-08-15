@@ -13,6 +13,7 @@ import { ic } from '../utils/icons.js';
 import { router } from '../core/router.js';
 import { ragetDb } from '../../raget-database/raget-db.js';
 import { collectionStore } from '../../raget-memory/collection-store.js';
+import { feedbackStore } from '../../raget-memory/feedback-store.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
@@ -158,6 +159,7 @@ function buildActions(text) {
   downBtn.setAttribute('aria-label', 'Balasan kurang tepat');
   upBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, true);
+    feedbackStore.record(true);
     upBtn.classList.add('rated');
     downBtn.classList.remove('rated');
     toast.show('Makasih atas masukannya');
@@ -169,6 +171,7 @@ function buildActions(text) {
   };
   downBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, false);
+    feedbackStore.record(false);
     downBtn.classList.add('rated');
     upBtn.classList.remove('rated');
     toast.show('Dicatat, makasih');
