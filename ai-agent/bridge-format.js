@@ -73,7 +73,6 @@ const TRIVIA_LABELS = {
   currency: 'Mata uangnya',
   independenceDay: 'Merdeka pada',
 };
-const RICHNESS_MODES = ['trivia', 'trivia', 'plain', 'trivia'];
 const CROSSREF_MODES = ['yes', 'yes', 'no'];
 const CROSSREF_SUGGESTIONS = {
   capital: (label) => 'Mau tahu juga makanan khas ' + label + '?',
@@ -118,10 +117,9 @@ function craftAnswer(field, label, value, item, richness) {
   const opener = pickVariant('dataries_opener', FACTOID_OPENERS, label + value + field);
   let out = opener ? opener + base.charAt(0).toLowerCase() + base.slice(1) : base;
   if (richness !== 'singkat' && item) {
-    const mode = pickVariant('factoid_richness', RICHNESS_MODES, label + field);
-    if (mode === 'trivia') {
-      const trivia = triviaFact(item, field);
-      if (trivia && !trivia.includes(String(value))) out += ' ' + trivia;
+    const trivia = triviaFact(item, field);
+    if (trivia && !trivia.includes(String(value))) {
+      out += ' ' + trivia;
     } else {
       out = maybeCrossRef(out, field, label, richness);
     }

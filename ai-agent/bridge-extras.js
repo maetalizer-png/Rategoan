@@ -25,7 +25,9 @@ async function tryPenuturBahasa(text) {
   const entity = bridgeResolve.cleanEntity(m[1]);
   const item = await bridgeResolve.findLanguageByCountry(entity);
   if (!item) return null;
-  return item.metadata.name + ' memiliki sekitar ' + item.metadata.speakers + ' penutur.';
+  let out = item.metadata.name + ' memiliki sekitar ' + item.metadata.speakers + ' penutur.';
+  if (item.metadata.family) out += ' Termasuk rumpun bahasa ' + item.metadata.family + (item.metadata.script ? ', ditulis dengan aksara ' + item.metadata.script + '.' : '.');
+  return out;
 }
 
 async function tryGreetingBahasa(text) {
@@ -52,7 +54,9 @@ async function tryBahasaDi(text) {
   if (!entity) return null;
   const item = await bridgeResolve.findLanguageByCountry(entity);
   if (!item) return null;
-  return 'Bahasa di ' + bridgeResolve.capitalize(entity) + ' adalah ' + item.metadata.name + '.';
+  let out = 'Bahasa di ' + bridgeResolve.capitalize(entity) + ' adalah ' + item.metadata.name + '.';
+  if (item.metadata.speakers) out += ' Dituturkan oleh sekitar ' + item.metadata.speakers + ' orang' + (item.metadata.family ? ', rumpun ' + item.metadata.family + '.' : '.');
+  return out;
 }
 
 async function tryKotaTerkenal(text) {
@@ -72,7 +76,7 @@ async function tryWisataDi(text) {
   if (!entity) return null;
   const items = await bridgeResolve.findAllInList('wisata', (it) => it.metadata.country && bridgeResolve.fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
   if (!items.length) return null;
-  return 'Tempat wisata terkenal di ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name + ' (' + it.metadata.city + ')').join('\n');
+  return 'Tempat wisata terkenal di ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.text).join('\n');
 }
 
 async function trySiapaTokoh(text) {
@@ -115,7 +119,7 @@ async function tryMakananKhas(text) {
   const items = await bridgeResolve.findAllInList('makanan', (it) => it.metadata.country && bridgeResolve.fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
   if (!items.length) return null;
   const opener = pickVariant('makanan_opener', MAKANAN_OPENERS, text);
-  return opener + ' ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return opener + ' ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.text).join('\n');
 }
 
 const MINUMAN_OPENERS = [
@@ -132,7 +136,7 @@ async function tryMinumanKhas(text) {
   const items = await bridgeResolve.findAllInList('minuman', (it) => it.metadata.country && bridgeResolve.fuzzyEq(it.metadata.country.toLowerCase(), entity), 3);
   if (!items.length) return null;
   const opener = pickVariant('minuman_opener', MINUMAN_OPENERS, text);
-  return opener + ' ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return opener + ' ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.text).join('\n');
 }
 
 async function tryEtika(text) {
@@ -171,7 +175,7 @@ async function tryAlam(text) {
   if (!entity) return null;
   const items = await bridgeResolve.findAllInList('alam', (it) => bridgeResolve.wordOverlap(entity, (it.metadata.habitat || '').toLowerCase()), 3);
   if (!items.length) return null;
-  return 'Fauna/flora khas ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return 'Fauna/flora khas ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.text).join('\n');
 }
 
 async function tryPenemuan(text) {
@@ -195,7 +199,7 @@ async function trySeniBudaya(text) {
     3
   );
   if (!items.length) return null;
-  return 'Seni budaya khas ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.metadata.name).join('\n');
+  return 'Seni budaya khas ' + bridgeResolve.capitalize(entity) + '.\n' + items.map((it) => '- ' + it.text).join('\n');
 }
 
 async function tryEkonomi(text) {
