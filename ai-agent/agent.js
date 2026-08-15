@@ -4,53 +4,26 @@ import { memoryLong } from '../raget-memory/memory-long.js';
 import { memoryIndex } from '../raget-memory/memory-index.js';
 import { memoryContext } from '../raget-memory/memory-context.js';
 import { ragetDb } from '../raget-database/raget-db.js';
-import { agentTools } from './agent-tools.js';
 import { datariesBridge } from './dataries-bridge.js';
 import { scorer } from './scorer.js';
-import { reminderParser } from '../vault/reminders/parser.js';
-import { remindersStore } from '../vault/reminders/reminders-store.js';
-import { reminderScheduler } from '../vault/reminders/scheduler.js';
-import { emailComposer } from '../vault/email/composer.js';
-import { icsParser } from '../vault/calendar/ics-parser.js';
-import { calendarStore } from '../vault/calendar/calendar-store.js';
-import { lazyModules } from './lazy-modules.js';
-import { pickVariant, hashText, detectTone, detectMood } from '../utils/text.js';
+import { pickVariant } from '../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
 import { quality } from './quality.js';
-import { readWeb } from '../vault/web/read-web.js';
 import { quizSession } from './quiz-session.js';
-import { collectionStore } from '../raget-memory/collection-store.js';
-import { collectionSearch } from '../raget-memory/collection-search.js';
 import { fewshotLocal } from '../raget-memory/fewshot-local.js';
+import { toolsMath } from './tools-math.js';
+import { toolsReminder } from './tools-reminder.js';
+import { toolsTemporal } from './tools-temporal.js';
+import { toolsImport } from './tools-import.js';
+import { toolsKoleksi } from './tools-koleksi.js';
+import { toolsExport } from './tools-export.js';
+import { toolsGeneric } from './tools-generic.js';
+import { routerIntent } from './router-intent.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
-const RATING_GOOD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(bagus|keren|mantap|oke|tepat)|^bagus\b|^mantap\b/i;
-const RATING_BAD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(jelek|salah|kurang\s*tepat|ngawur)|^salah\b|^jelek\b/i;
-
-const CLARIFY_MARKERS = /info tambahan dulu|ceritakan konteksnya|bagaimana kaitannya|apa yang sudah kamu ketahui/i;
-
-const QUESTION_LEAD_RE = /^(siapa|apa|dimana|di\s*mana|kapan|berapa)\b/i;
-const ABOUT_RE = /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+/i;
-
 const FACTOID_TEMPLATES = [(a) => a + '.', (a) => a + ', setahu saya.', (a) => 'Setahu saya, ' + a + '.'];
-
-const MOOD_OPENERS = {
-  sedih: { casual: 'Aduh, kedengarannya lagi sedih ya. ', formal: 'Turut prihatin mendengarnya. ', neutral: 'Kedengarannya lagi sedih ya. ' },
-  capek: { casual: 'Wah, pasti capek banget ya. ', formal: 'Semoga Anda bisa segera beristirahat. ', neutral: 'Kedengarannya lagi capek ya. ' },
-  marah: { casual: 'Wah, kedengarannya lagi kesel ya. ', formal: 'Saya memahami kekesalan Anda. ', neutral: 'Kedengarannya lagi kesal ya. ' },
-  senang: { casual: 'Seneng deh dengernya! ', formal: 'Senang mendengarnya. ', neutral: 'Senang mendengarnya. ' },
-  bosan: { casual: 'Lagi bosan ya? ', formal: 'Semoga harimu segera lebih menarik. ', neutral: 'Kedengarannya lagi bosan ya. ' },
-};
-
-function moodOpener(text) {
-  const mood = detectMood(text);
-  if (!mood) return '';
-  const tone = detectTone(text);
-  const pool = MOOD_OPENERS[mood];
-  return pool[tone] || pool.neutral;
-}
 
 let personaCache = null;
 let fewshotCache = null;
@@ -98,408 +71,10 @@ function matchFewshotNearMiss(examples, text) {
   return top.item.ex;
 }
 
-function detectRating(text) {
-  const t = text.trim();
-  if (RATING_GOOD_RE.test(t)) return true;
-  if (RATING_BAD_RE.test(t)) return false;
-  return null;
-}
-
-function replaceMathWords(text) {
-  return text
-    .replace(/(\d+)\s*ditambah\s*(\d+)/gi, '$1+$2')
-    .replace(/(\d+)\s*dikurang\s*(\d+)/gi, '$1-$2')
-    .replace(/(\d+)\s*kali\s*(\d+)/gi, '$1*$2')
-    .replace(/(\d+)\s*dibagi\s*(\d+)/gi, '$1/$2');
-}
-
-function extractMathExpr(text) {
-  const replaced = replaceMathWords(text);
-  const matches = replaced.match(/[0-9]+(?:\s*[+\-*/]\s*[0-9]+)+/g);
-  if (!matches || !matches.length) return null;
-  return matches.sort((a, b) => b.length - a.length)[0].replace(/\s+/g, '');
-}
-
-function isMathStatement(t) {
-  return /hasilnya\s*-?[0-9]/i.test(t) && !/\bberapa\b/i.test(t);
-}
-
-function looksLikeMath(t) {
-  const stripped = t
-    .replace(/^(hitung|berapa)\s*/i, '')
-    .replace(/\s*(hasilnya|sama\s*dengan)?\s*\??$/i, '')
-    .trim();
-  return stripped.length > 0 && /[0-9]/.test(stripped) && /^[0-9()\s+\-*/.]+$/.test(stripped);
-}
-
-function isMathQuestion(t) {
-  if (isMathStatement(t)) return false;
-  if (/%\s*dari\b/.test(t)) return true;
-  if (looksLikeMath(t)) return true;
-  return !!extractMathExpr(t);
-}
-
-function detectTeaching(text) {
-  const t = text.trim();
-  if (/\?$/.test(t)) return null;
-  if (
-    /^(apa|siapa|dimana|di\s*mana|kapan|berapa|bagaimana|mengapa|kenapa|jelaskan|cara|langkah|ringkas|rangkum|ide|ingat|lupakan|bandingkan|kelebihan|kekurangan|hitung)\b/i.test(
-      t
-    )
-  )
-    return null;
-  const m = t.match(/^(.+?)\s+adalah\s+(.+)$/i) || t.match(/^(.+?)\s+itu\s+(.+)$/i);
-  if (!m) return null;
-  const subject = m[1].trim();
-  const value = m[2].replace(/[.!]+$/, '').trim();
-  if (!subject || !value || subject.split(/\s+/).length > 8 || value.split(/\s+/).length > 12) return null;
-  return { subject, value };
-}
-
-function detectTool(prompt) {
-  const t = String(prompt || '').trim().toLowerCase();
-  if (/^(mulai\s+|main\s+)?kuis\b/.test(t)) return 'kuis';
-  if (/^(ringkas(kan)?|rangkum(kan)?)\s+hari(\s+ini)?(\s+saya)?\b/.test(t)) return 'ringkas_hari';
-  if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
-  if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
-  if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
-  if (/laporan\s+otak/.test(t)) return 'laporan_otak';
-  if (/share\s*(ke)?\s*wa\b|bagikan\s*(ke)?\s*whatsapp/.test(t)) return 'share_wa';
-  if (/export\s+chat|download\s+percakapan|unduh\s+percakapan|ekspor\s+chat/.test(t)) return 'export_chat';
-  if (/export\s+catatan|ekspor\s+catatan|unduh\s+catatan/.test(t)) return 'export_catatan';
-  if (/^bagikan\s+kartu\s+/.test(t)) return 'bagikan_kartu';
-  if (/^(buat|tulis|draft)\s+email\b/.test(t)) return 'email';
-  if (/terapkan\s+auto-?fewshot/.test(t)) return 'apply_fewshot';
-  if (/batalkan\s+auto-?fewshot/.test(t)) return 'revert_fewshot';
-  if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
-  if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
-  if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
-  if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
-  if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
-  if (/^lupakan\b/.test(t)) return 'lupakan';
-  if (/\bjam\s+berapa\b|\btanggal\s+berapa\b|\bhari\s+apa\b/.test(t)) return 'waktu';
-  if (/apa\s+yang\s+kamu\s+tahu\s+tentang\b/.test(t)) return 'cari';
-  if (/^bandingkan\s+/.test(t)) return 'bandingkan';
-  if (/^[a-z0-9\s]{2,40}\s+vs\.?\s+[a-z0-9\s]{2,40}$/.test(t)) return 'bandingkan_vs';
-  if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
-  if (/^(cara|langkah)\s+/.test(t)) return 'cara';
-  if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
-  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+/.test(t)) return 'manfaat';
-  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/.test(t)) return 'fungsi';
-  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/.test(t)) return 'tujuan';
-  if (/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/.test(t)) return 'penyebab';
-  if (/^jelaskan\s+/.test(t)) return 'jelaskan';
-  return null;
-}
-
-function tryMath(text) {
-  const t = text.trim();
-  if (!/^hitung\b/i.test(t) && !isMathQuestion(t.toLowerCase())) return null;
-  if (/%\s*dari\b/i.test(t)) return agentTools.hitung(t);
-  const expr = extractMathExpr(t) || t.replace(/^(hitung|berapa)\s*/i, '');
-  return agentTools.hitung(expr);
-}
-
-function formatEventTime(timestamp) {
-  return new Date(timestamp).toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
-}
-
-function tryCalendarImport(messages) {
-  const list = Array.isArray(messages) ? messages : [];
-  const last = list[list.length - 1];
-  const att = last && last.attach;
-  if (!att || !att.fileText || !/\.ics$/i.test(att.name || '')) return null;
-  const events = icsParser.parseICS(att.fileText);
-  if (!events.length) return 'File .ics dibaca tapi tidak ada acara yang ditemukan di dalamnya.';
-  const count = calendarStore.addAll(events);
-  return 'Berhasil impor ' + count + ' acara dari file kalender.';
-}
-
-async function tryPdfImport(messages) {
-  const list = Array.isArray(messages) ? messages : [];
-  const last = list[list.length - 1];
-  const att = last && last.attach;
-  if (!att || !att.fileBinary || !/\.pdf$/i.test(att.name || '')) return null;
-  const pdfReader = await lazyModules.getPdfReader();
-  const result = await pdfReader.parsePDF(att.fileBinary);
-  if (!result.ok) return result.message;
-  const chunker = await lazyModules.getChunker();
-  const parts = chunker.chunkText(result.text, 1500);
-  const pdfStore = await lazyModules.getPdfStore();
-  const count = await pdfStore.addAll(parts.map((t) => ({ title: att.name, text: t })), { source: 'pdf', fileName: att.name });
-  return 'Berhasil impor PDF "' + att.name + '" (' + result.pages + ' halaman, ' + count + ' bagian tersimpan).';
-}
-
-async function tryNotionImport(messages) {
-  const list = Array.isArray(messages) ? messages : [];
-  const last = list[list.length - 1];
-  const att = last && last.attach;
-  if (!att || !att.fileBinary || !/\.zip$/i.test(att.name || '')) return null;
-  const notionImporter = await lazyModules.getNotionImporter();
-  const result = await notionImporter.importZip(att.fileBinary);
-  if (!result.ok) return result.message;
-  if (!result.chunks.length) return 'File ZIP dibaca tapi tidak ditemukan halaman Notion (.html/.md) di dalamnya.';
-  const notionStore = await lazyModules.getNotionStore();
-  const count = await notionStore.addAll(result.chunks, { source: 'notion' });
-  return 'Berhasil impor ' + count + ' halaman Notion dari "' + att.name + '".';
-}
-
-async function tryEvernoteImport(messages) {
-  const list = Array.isArray(messages) ? messages : [];
-  const last = list[list.length - 1];
-  const att = last && last.attach;
-  if (!att || !att.fileText || !/\.enex$/i.test(att.name || '')) return null;
-  const evernoteImporter = await lazyModules.getEvernoteImporter();
-  const result = evernoteImporter.importENEX(att.fileText);
-  if (!result.ok) return result.message;
-  const evernoteStore = await lazyModules.getEvernoteStore();
-  const count = await evernoteStore.addAll(result.chunks, { source: 'evernote' });
-  return 'Berhasil impor ' + count + ' catatan Evernote dari "' + att.name + '".';
-}
-
-async function tryWhatsappImport(messages) {
-  const list = Array.isArray(messages) ? messages : [];
-  const last = list[list.length - 1];
-  const att = last && last.attach;
-  if (!att || !att.fileText || !/\.txt$/i.test(att.name || '')) return null;
-  const whatsappImporter = await lazyModules.getWhatsappImporter();
-  const result = whatsappImporter.importWhatsApp(att.fileText);
-  if (!result.ok) return result.message;
-  const whatsappStore = await lazyModules.getWhatsappStore();
-  const count = await whatsappStore.addAll(result.chunks, { source: 'whatsapp' });
-  return 'Berhasil impor riwayat WhatsApp "' + att.name + '" (' + result.messageCount + ' pesan, ' + count + ' bagian tersimpan).';
-}
-
-function tryCalendarQuery(text) {
-  const t = text.trim().toLowerCase();
-  if (/jadwal\s+hari\s+ini|apa\s+jadwal\s+hari\s+ini/.test(t)) {
-    const start = new Date();
-    start.setHours(0, 0, 0, 0);
-    const end = new Date();
-    end.setHours(23, 59, 59, 999);
-    const events = calendarStore.eventsBetween(start.getTime(), end.getTime());
-    if (!events.length) return 'Tidak ada jadwal untuk hari ini.';
-    return 'Jadwal hari ini:\n' + events.map((e) => '- ' + e.summary + ' (' + formatEventTime(e.start) + ')').join('\n');
-  }
-  if (/jadwal\s+minggu\s+ini/.test(t)) {
-    const start = new Date();
-    const end = new Date(start.getTime() + 7 * 24 * 60 * 60 * 1000);
-    const events = calendarStore.eventsBetween(start.getTime(), end.getTime());
-    if (!events.length) return 'Tidak ada jadwal untuk minggu ini.';
-    return 'Jadwal minggu ini:\n' + events.map((e) => '- ' + e.summary + ' (' + formatEventTime(e.start) + ')').join('\n');
-  }
-  if (/kapan\s+.*(meeting|rapat|acara|jadwal)\s+(selanjutnya|berikutnya)/.test(t)) {
-    const next = calendarStore.nextUpcoming(Date.now());
-    if (!next) return 'Belum ada jadwal mendatang yang tercatat.';
-    return 'Acara selanjutnya: ' + next.summary + ' pada ' + formatEventTime(next.start) + '.';
-  }
-  return null;
-}
-
-const OCR_TRIGGER_RE = /baca\s+foto\s+ini|apa\s+isi\s+gambar|extract\s+text|ringkas\s+catatan\s+ini|berapa\s+total|apa\s+yang\s+dibicarakan/i;
-
-async function tryOCR(text, messages) {
-  const list = Array.isArray(messages) ? messages : [];
-  const last = list[list.length - 1];
-  const att = last && last.attach;
-  if (!att || !att.full) return null;
-  if (!OCR_TRIGGER_RE.test(text)) return null;
-
-  const ocrReader = await lazyModules.getOcrReader();
-  const result = await ocrReader.recognize(att.full);
-  if (!result.ok) return result.message;
-
-  memoryLong.rememberNote(result.text);
-
-  if (/berapa\s+total/i.test(text)) {
-    const totalMatch = result.text.match(/total[^\d]*(\d[\d.,]*)/i);
-    if (totalMatch) return 'Total belanja: ' + totalMatch[1] + ' (dari hasil baca foto).';
-    return 'Teks berhasil dibaca dari foto, tapi tidak ditemukan nilai "total" yang jelas:\n' + result.text.slice(0, 300);
-  }
-  if (/ringkas/i.test(text)) return agentTools.ringkas(result.text);
-  return 'Isi gambar:\n' + result.text.slice(0, 500);
-}
-
-const LANG_NAME_MAP = {
-  inggris: 'en', english: 'en', indonesia: 'id', jepang: 'ja', japanese: 'ja',
-  korea: 'ko', mandarin: 'zh', china: 'zh', spanyol: 'es', prancis: 'fr',
-  jerman: 'de', arab: 'ar', rusia: 'ru',
-};
-
-async function tryTranslate(text) {
-  const m = text.match(/^terjemahkan\s+(.+?)\s+ke\s+(?:bahasa\s+)?(\w+)$/i) || text.match(/^translate\s+(.+?)\s+(?:to|ke)\s+(\w+)$/i);
-  if (m) {
-    const content = m[1];
-    const lang = LANG_NAME_MAP[m[2].toLowerCase()] || m[2].toLowerCase();
-    const translator = await lazyModules.getTranslator();
-    const result = await translator.translate(content, lang);
-    return result.ok ? 'Terjemahan: ' + result.text : result.message;
-  }
-  const m2 = text.match(/apa\s+bahasa\s+inggrisnya\s+(.+)$/i);
-  if (m2) {
-    const translator = await lazyModules.getTranslator();
-    const result = await translator.translate(m2[1], 'en');
-    return result.ok ? '"' + m2[1] + '" dalam bahasa Inggris: ' + result.text : result.message;
-  }
-  return null;
-}
-
-function formatReminderTime(timestamp) {
-  const d = new Date(timestamp);
-  return d.toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
-}
-
-const REMINDER_CANCEL_RE = /^(batalkan|batal|hapus)\s+(pengingat|reminder)\b/i;
-const REMINDER_TRIGGER_RE = /^(ingatkan\s+saya|reminder|jangan\s+lupa)\b/i;
-const QUICK_NOTE_RE = /^catat\s+/i;
-
-function tryReminder(text) {
-  const t = text.trim();
-
-  if (REMINDER_CANCEL_RE.test(t)) {
-    const cancelled = remindersStore.cancelLatest();
-    return cancelled ? 'Baik, pengingat "' + cancelled.action + '" sudah dibatalkan.' : 'Tidak ada pengingat aktif untuk dibatalkan.';
-  }
-
-  const isReminderTrigger = REMINDER_TRIGGER_RE.test(t) || QUICK_NOTE_RE.test(t);
-  if (!isReminderTrigger) return null;
-
-  const parsed = reminderParser.parseReminder(t);
-  if (parsed) {
-    remindersStore.add(parsed);
-    reminderScheduler.requestPermission();
-    const recurText = parsed.recur === 'weekly' ? ' (berulang tiap minggu)' : parsed.recur === 'daily' ? ' (berulang tiap hari)' : '';
-    return 'Oke, saya ingatkan "' + parsed.action + '" pada ' + formatReminderTime(parsed.timestamp) + recurText + '.';
-  }
-
-  if (QUICK_NOTE_RE.test(t)) {
-    const note = t.replace(QUICK_NOTE_RE, '').trim();
-    if (!note) return null;
-    memoryLong.rememberNote(note);
-    return 'Baik, saya catat: ' + note + '.';
-  }
-
-  return null;
-}
-
 async function runTool(kind, prompt, messages) {
-  if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
-  if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
-  if (kind === 'ringkas_hari') return await agentTools.ringkasHari();
-  if (kind === 'kuis') return await quizSession.ask();
-  if (kind === 'waktu') return agentTools.waktu(prompt);
-  if (kind === 'cari') {
-    const q = prompt
-      .replace(/apa\s+yang\s+kamu\s+tahu\s+tentang\s*/i, '')
-      .replace(/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\s*/i, '');
-    return agentTools.cari(q);
-  }
-  if (kind === 'ingat') return agentTools.ingat(prompt);
-  if (kind === 'lupakan') return agentTools.lupakan(prompt);
-  if (kind === 'ekspor') return agentTools.eksporLog();
-  if (kind === 'laporan_otak') return agentTools.laporanOtak();
-  if (kind === 'share_wa') return agentTools.shareToWhatsApp({ title: 'Chat', messages: messages || [] });
-  if (kind === 'export_chat') {
-    const p = prompt.toLowerCase();
-    const format = /markdown|\bmd\b/.test(p) ? 'markdown' : /json/.test(p) ? 'json' : /pdf/.test(p) ? 'pdf' : 'txt';
-    return agentTools.exportChat({ title: 'Chat', messages: messages || [] }, format);
-  }
-  if (kind === 'bagikan_kartu') {
-    const negara = prompt.replace(/^bagikan\s+kartu\s+/i, '').trim();
-    const result = await agentTools.bagikanKartu(negara);
-    collectionStore.addItem({ kind: 'artifact', artifactType: 'country_card', text: result, tag: 'artefak', chatTitle: 'Kartu ' + negara }).catch(() => {});
-    return result;
-  }
-  if (kind === 'export_catatan') {
-    const format = /markdown|\bmd\b/i.test(prompt) ? 'markdown' : 'txt';
-    const result = agentTools.eksporCatatan(format);
-    collectionStore.addItem({ kind: 'artifact', artifactType: 'export', text: result, tag: 'artefak', chatTitle: 'Ekspor Catatan' }).catch(() => {});
-    return result;
-  }
-  if (kind === 'email') {
-    const result = await emailComposer.generateEmail(prompt);
-    collectionStore.addItem({ kind: 'artifact', artifactType: 'email_draft', text: result, tag: 'artefak', chatTitle: 'Draft Email' }).catch(() => {});
-    return result;
-  }
-  if (kind === 'apply_fewshot') {
-    const notes = await ragetDb.allNotes();
-    const candidates = notes.filter((n) => n.feedback === true).slice(-5).map((n) => ({ q: n.question, a: n.answer }));
-    if (!candidates.length) return 'Belum ada balasan berating positif untuk dijadikan contoh fewshot.';
-    const added = fewshotLocal.apply(candidates);
-    fewshotCache = null;
-    return added.length
-      ? 'Diterapkan ' + added.length + ' contoh fewshot baru dari balasan berating positif. Ketik "batalkan auto-fewshot" untuk membatalkan.'
-      : 'Semua kandidat sudah pernah diterapkan sebelumnya.';
-  }
-  if (kind === 'revert_fewshot') {
-    const count = fewshotLocal.revert();
-    return count ? 'Dibatalkan ' + count + ' contoh auto-fewshot.' : 'Tidak ada auto-fewshot yang aktif.';
-  }
-  if (kind === 'cari_koleksi') {
-    const q = prompt.replace(/apa\s+yang\s+saya\s+simpan\s+tentang/i, '').replace(/apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/i, '').trim();
-    return await agentTools.cariKoleksi(q);
-  }
-  if (kind === 'cari_semua') {
-    const q = prompt.replace(/cari\s+/i, '').replace(/di\s+semua\s*(sumber)?/i, '').replace(/apa\s+yang\s+saya\s+punya\s+tentang/i, '').trim();
-    return await agentTools.cariSemua(q);
-  }
-  if (kind === 'bedah_url') {
-    const url = (prompt.match(/https?:\/\/\S+/i) || [])[0];
-    if (!url) return 'URL tidak ditemukan. Format: bedah https://...';
-    const result = await readWeb.read(url);
-    if (!result.ok) return result.message;
-    return 'Ringkasan halaman:\n\n' + agentTools.ringkas(result.text);
-  }
-  if (kind === 'jelaskan') {
-    const topic = prompt
-      .replace(/^jelaskan\s*/i, '')
-      .replace(/^apa\s+itu\s*/i, '')
-      .replace(/^tentang\s*/i, '')
-      .trim();
-    return agentTools.jelaskan(topic);
-  }
-  if (kind === 'cara') {
-    const topic = prompt.replace(/^(cara|langkah)\s*(untuk|buat|biar)?\s*/i, '').trim();
-    return agentTools.cara(topic);
-  }
-  if (kind === 'ide') {
-    const topic = prompt
-      .replace(/^(kasih|beri|berikan|boleh|minta)\s+/i, '')
-      .replace(/ide\s+(konten\s+)?(tentang|soal|untuk)?\s*/i, '')
-      .trim();
-    return agentTools.ide(topic);
-  }
-  if (kind === 'manfaat') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+(dari\s+|dan\s+)?/i, '').trim();
-    return agentTools.manfaat(topic);
-  }
-  if (kind === 'fungsi') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/i, '').trim();
-    return agentTools.fungsi(topic);
-  }
-  if (kind === 'tujuan') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/i, '').trim();
-    return agentTools.tujuan(topic);
-  }
-  if (kind === 'penyebab') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/i, '').trim();
-    return agentTools.penyebab(topic);
-  }
-  if (kind === 'bandingkan') {
-    const m = prompt.match(/^bandingkan\s+(.+?)\s+(dan|dengan|vs\.?|atau)\s+(.+)$/i);
-    return m ? agentTools.bandingkan(m[1].trim(), m[3].trim()) : null;
-  }
-  if (kind === 'bandingkan_vs') {
-    const m = prompt.match(/^(.+?)\s+vs\.?\s+(.+)$/i);
-    return m ? agentTools.bandingkan(m[1].trim(), m[2].trim()) : null;
-  }
-  if (kind === 'kelebihan_kekurangan') {
-    const topic = prompt
-      .replace(/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s*/i, '')
-      .trim();
-    return agentTools.kelebihanKekurangan(topic);
-  }
-  return null;
+  if (toolsKoleksi.handles(kind)) return await toolsKoleksi.run(kind, prompt);
+  if (toolsExport.handles(kind)) return await toolsExport.run(kind, prompt, messages);
+  return await toolsGeneric.run(kind, prompt, messages, () => { fewshotCache = null; });
 }
 
 function recallFromMemory(text) {
@@ -560,9 +135,9 @@ async function tryFactoid(text, messages) {
     return quality.guardEmoji(quality.guardFactoidSentences(dataries, richness));
   }
 
-  if (ABOUT_RE.test(t)) return null;
+  if (routerIntent.ABOUT_RE.test(t)) return null;
 
-  const isQuestionLike = QUESTION_LEAD_RE.test(t) || /\?$/.test(t);
+  const isQuestionLike = routerIntent.QUESTION_LEAD_RE.test(t) || /\?$/.test(t);
   if (!isQuestionLike) return null;
 
   const subject = t
@@ -574,52 +149,6 @@ async function tryFactoid(text, messages) {
   const found = await memoryIndex.findFactoid(subject);
   if (!found) return null;
   return pickVariant('factoid', FACTOID_TEMPLATES, subject)(found.answer);
-}
-
-function detectAnswerType(text) {
-  const t = text.trim().toLowerCase();
-  if (/^apa\s*itu\b/.test(t)) return 'definisi';
-  if (/\b(sebutkan|ide|manfaat)\b/.test(t)) return 'daftar';
-  if (/\b(cara|langkah)\b/.test(t)) return 'prosedur';
-  if (/\bbandingkan\b/.test(t)) return 'perbandingan';
-  if (/^(berapa|hitung)\b/.test(t)) return 'matematika';
-  return 'terbuka';
-}
-
-const COLLECTION_REF_THRESHOLD = 0.35;
-
-async function personalize(reply, text) {
-  const isGreetingLike = /^(halo|hai|hi|hey|selamat|met|good|assalamu)/i.test(text.trim());
-  const nama = memoryLong.recall('nama');
-  if (isGreetingLike && nama && !reply.includes(nama)) {
-    reply = reply.replace(/([!,])/, ', ' + nama + '$1');
-  }
-  if (!isGreetingLike && hashText(reply + text) % 100 < 15) {
-    const suka = memoryLong.recall('suka');
-    const pekerjaan = memoryLong.recall('pekerjaan');
-    if (suka && suka.length) {
-      reply += ' (Ngomong-ngomong, kudengar kamu suka ' + suka[suka.length - 1] + ' ya?)';
-    } else if (pekerjaan) {
-      reply += ' (Btw, gimana kabar kerjaan sebagai ' + pekerjaan + '?)';
-    } else {
-      const items = await collectionStore.allItems();
-      if (items.length) {
-        const textTokens = scorer.tokenize(text);
-        const itemTokens = items.map((it) => scorer.tokenize(it.text));
-        const scores = scorer.scoreIntent(textTokens, itemTokens);
-        let bestIdx = -1, bestScore = COLLECTION_REF_THRESHOLD;
-        scores.forEach((s, i) => { if (s >= bestScore) { bestScore = s; bestIdx = i; } });
-        if (bestIdx >= 0) {
-          reply += ' (Ini mirip dengan yang pernah kamu simpan dari koleksi kamu: "' + items[bestIdx].text.slice(0, 60) + (items[bestIdx].text.length > 60 ? '…' : '') + '")';
-        }
-      }
-    }
-  }
-  return reply;
-}
-
-function isClarifyReply(text) {
-  return CLARIFY_MARKERS.test(text) || text.startsWith('Saya catat:');
 }
 
 function tooSimilar(a, b) {
@@ -638,31 +167,13 @@ function postProcess(text) {
   return cleaned || 'Maaf, saya belum punya jawaban untuk itu. Bisa dijelaskan lebih lanjut?';
 }
 
-const MODE_COMMAND_RE = /^(jawab\s+(singkat|ringkas|detail)|mode\s+(santai|formal))\s*$/i;
-
-function detectModeCommand(text) {
-  const m = text.trim().match(MODE_COMMAND_RE);
-  if (!m) return null;
-  if (m[2]) return { key: 'mode_richness', value: /detail/i.test(m[2]) ? 'detail' : 'singkat' };
-  if (m[3]) return { key: 'mode_tone', value: m[3].toLowerCase() };
-  return null;
-}
-
-function classifyIntent(t) {
-  if (/^hitung\b/i.test(t) || isMathQuestion(t.toLowerCase())) return 'hitung';
-  if (REMINDER_TRIGGER_RE.test(t) || QUICK_NOTE_RE.test(t)) return 'reminder';
-  const tool = detectTool(t);
-  if (tool) return tool;
-  return null;
-}
-
 async function tryMultiIntent(text, messages) {
   const parts = text.split(/\s+dan\s+/i);
   if (parts.length !== 2) return null;
   const [a, b] = parts.map((p) => p.trim());
   if (!a || !b) return null;
-  const typeA = classifyIntent(a);
-  const typeB = classifyIntent(b);
+  const typeA = routerIntent.classifyIntent(a);
+  const typeB = routerIntent.classifyIntent(b);
   if (!typeA || !typeB || typeA === typeB) return null;
   const replyA = await respondCore(messages, a);
   const replyB = await respondCore(messages, b);
@@ -671,7 +182,7 @@ async function tryMultiIntent(text, messages) {
 
 async function respond(messages, prompt) {
   const text = String(prompt || '').trim();
-  const opener = text ? moodOpener(text) : '';
+  const opener = text ? routerIntent.moodOpener(text) : '';
   const reply = await respondCore(messages, prompt);
   return opener && !reply.startsWith(opener) ? opener + reply : reply;
 }
@@ -692,7 +203,7 @@ async function respondCore(messages, prompt) {
     return postProcess(quizReply);
   }
 
-  const modeCmd = detectModeCommand(text);
+  const modeCmd = routerIntent.detectModeCommand(text);
   if (modeCmd) {
     memoryLong.remember(modeCmd.key, modeCmd.value);
     const reply = 'Oke, mulai sekarang saya jawab dengan mode ' + modeCmd.value + '.';
@@ -700,7 +211,7 @@ async function respondCore(messages, prompt) {
     return postProcess(reply);
   }
 
-  const rating = detectRating(text);
+  const rating = routerIntent.detectRating(text);
   if (rating !== null) {
     ragetDb.rateLast(rating);
     const reply = rating
@@ -710,8 +221,8 @@ async function respondCore(messages, prompt) {
     return postProcess(reply);
   }
 
-  if (isMathStatement(text)) {
-    const expr = extractMathExpr(text) || text;
+  if (toolsMath.isMathStatement(text)) {
+    const expr = toolsMath.extractMathExpr(text) || text;
     memoryLong.rememberNote(expr);
     const reply = 'Baik, saya catat: ' + text.replace(/\?+$/, '') + '.';
     ragetDb.addNote(text, reply, null, 'math_statement');
@@ -720,73 +231,70 @@ async function respondCore(messages, prompt) {
 
   memoryLong.learnFromText(text);
 
-  const mathReply = tryMath(text);
+  const mathReply = toolsMath.tryMath(text);
   if (mathReply) {
     ragetDb.addNote(text, mathReply, null, 'hitung');
     return postProcess(mathReply);
   }
 
-  const reminderReply = tryReminder(text);
+  const reminderReply = toolsReminder.tryReminder(text);
   if (reminderReply) {
     ragetDb.addNote(text, reminderReply, null, 'reminder');
     return postProcess(reminderReply);
   }
 
-  const ocrReply = await tryOCR(text, messages);
+  const ocrReply = await toolsImport.tryOCR(text, messages);
   if (ocrReply) {
     ragetDb.addNote(text, ocrReply, null, 'ocr');
     return postProcess(ocrReply);
   }
 
-  const translateReply = await tryTranslate(text);
+  const translateReply = await toolsImport.tryTranslate(text);
   if (translateReply) {
     ragetDb.addNote(text, translateReply, null, 'translate');
     return postProcess(translateReply);
   }
 
-  const calendarImportReply = tryCalendarImport(messages);
+  const calendarImportReply = toolsTemporal.tryCalendarImport(messages);
   if (calendarImportReply) {
     ragetDb.addNote(text, calendarImportReply, null, 'calendar_import');
     return postProcess(calendarImportReply);
   }
 
-  const pdfImportReply = await tryPdfImport(messages);
+  const pdfImportReply = await toolsImport.tryPdfImport(messages);
   if (pdfImportReply) {
     ragetDb.addNote(text, pdfImportReply, null, 'pdf_import');
     return postProcess(pdfImportReply);
   }
 
-  const notionImportReply = await tryNotionImport(messages);
+  const notionImportReply = await toolsImport.tryNotionImport(messages);
   if (notionImportReply) {
     ragetDb.addNote(text, notionImportReply, null, 'notion_import');
     return postProcess(notionImportReply);
   }
 
-  const evernoteImportReply = await tryEvernoteImport(messages);
+  const evernoteImportReply = await toolsImport.tryEvernoteImport(messages);
   if (evernoteImportReply) {
     ragetDb.addNote(text, evernoteImportReply, null, 'evernote_import');
     return postProcess(evernoteImportReply);
   }
 
-  const whatsappImportReply = await tryWhatsappImport(messages);
+  const whatsappImportReply = await toolsImport.tryWhatsappImport(messages);
   if (whatsappImportReply) {
     ragetDb.addNote(text, whatsappImportReply, null, 'whatsapp_import');
     return postProcess(whatsappImportReply);
   }
 
-  const calendarQueryReply = tryCalendarQuery(text);
+  const calendarQueryReply = toolsTemporal.tryCalendarQuery(text);
   if (calendarQueryReply) {
     ragetDb.addNote(text, calendarQueryReply, null, 'calendar_query');
     return postProcess(calendarQueryReply);
   }
 
-  const hariLagiMatch = text.toLowerCase().match(/berapa\s+hari\s+lagi\s+(.+?)\s+merdeka/);
-  if (hariLagiMatch) {
-    const result = await datariesBridge.daysUntilIndependence(hariLagiMatch[1].trim());
-    if (result) {
-      ragetDb.addNote(text, result, null, 'temporal');
-      return postProcess(result);
-    }
+  const independenceReply = await toolsTemporal.tryIndependenceDay(text);
+  if (independenceReply) {
+    ragetDb.addNote(text, independenceReply, null, 'temporal');
+    return postProcess(independenceReply);
   }
 
   const factoid = await tryFactoid(text, messages);
@@ -805,7 +313,7 @@ async function respondCore(messages, prompt) {
     return postProcess(extras);
   }
 
-  const teaching = detectTeaching(text);
+  const teaching = routerIntent.detectTeaching(text);
   if (teaching) {
     const value = teaching.value.charAt(0).toUpperCase() + teaching.value.slice(1);
     memoryLong.learnFact(teaching.subject, value);
@@ -814,7 +322,7 @@ async function respondCore(messages, prompt) {
     return postProcess(reply);
   }
 
-  const toolKind = detectTool(text);
+  const toolKind = routerIntent.detectTool(text);
   if (toolKind) {
     const toolReply = await runTool(toolKind, text, messages);
     if (toolReply) {
@@ -845,7 +353,7 @@ async function respondCore(messages, prompt) {
   let reply;
   if (plannedFallback) {
     reply = postProcess(plannedFallback);
-    reply = await personalize(reply, text);
+    reply = await toolsKoleksi.personalize(reply, text);
   } else {
     let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name });
 
@@ -861,17 +369,17 @@ async function respondCore(messages, prompt) {
     }
 
     reply = postProcess(raw);
-    reply = await personalize(reply, text);
+    reply = await toolsKoleksi.personalize(reply, text);
   }
 
-  if (!plannedFallback && !isClarifyReply(reply)) {
+  if (!plannedFallback && !routerIntent.isClarifyReply(reply)) {
     const candidate = preSearch.find((r) => !tooSimilar(text, r.text));
     if (candidate && candidate.score >= scorer.CONFIDENCE_THRESHOLD) {
       reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';
     }
   }
 
-  ragetDb.addNote(text, reply, null, 'chat_' + detectAnswerType(text));
+  ragetDb.addNote(text, reply, null, 'chat_' + routerIntent.detectAnswerType(text));
   return reply;
 }
 
