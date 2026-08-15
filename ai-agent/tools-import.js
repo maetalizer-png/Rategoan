@@ -1,6 +1,7 @@
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { lazyModules } from './lazy-modules.js';
 import { agentTools } from './agent-tools.js';
+import { bilingual } from './bilingual.js';
 
 const OCR_TRIGGER_RE = /baca\s+foto\s+ini|apa\s+isi\s+gambar|extract\s+text|ringkas\s+catatan\s+ini|berapa\s+total|apa\s+yang\s+dibicarakan/i;
 
@@ -88,6 +89,8 @@ async function tryOCR(text, messages) {
 }
 
 async function tryTranslate(text) {
+  const basic = await bilingual.tryBasicPhrase(text);
+  if (basic) return basic;
   const m = text.match(/^terjemahkan\s+(.+?)\s+ke\s+(?:bahasa\s+)?(\w+)$/i) || text.match(/^translate\s+(.+?)\s+(?:to|ke)\s+(\w+)$/i);
   if (m) {
     const content = m[1];
