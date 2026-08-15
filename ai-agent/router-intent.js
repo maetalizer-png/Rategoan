@@ -54,8 +54,10 @@ function detectTool(prompt) {
   const t = String(prompt || '').trim().toLowerCase();
   if (/^(mulai\s+|main\s+)?kuis\b/.test(t)) return 'kuis';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+hari(\s+ini)?(\s+saya)?\b/.test(t)) return 'ringkas_hari';
+  if (/^(ringkas(kan)?|rangkum(kan)?)\s+minggu(\s+ini)?(\s+saya)?\b|digest\s+mingguan/.test(t)) return 'ringkas_minggu';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
   if (/^ringkas(kan)?\b|^rangkum(kan)?\b/.test(t)) return 'ringkas';
+  if (/^bersihkan\s+duplikat/.test(t)) return 'bersihkan_duplikat';
   if (/ekspor\s+log|export\s+log|unduh\s+log/.test(t)) return 'ekspor';
   if (/laporan\s+otak/.test(t)) return 'laporan_otak';
   if (/share\s*(ke)?\s*wa\b|bagikan\s*(ke)?\s*whatsapp/.test(t)) return 'share_wa';

@@ -43,10 +43,17 @@ export const voice = {
       $('btn-voice-input').classList.add('listening');
     };
     this.rec.onresult = (e) => {
-      const t = e.results[0][0].transcript;
+      const result = e.results[0];
+      if (!result.isFinal && this.rec.interimResults) return;
+      const t = result[0].transcript;
       const inp = $('chat-input');
       inp.value += (inp.value ? ' ' : '') + t;
+      inp.dispatchEvent(new Event('input'));
       composer.autoGrow();
+      if (inp.value.trim()) {
+        const btn = $('btn-send');
+        if (btn) btn.click();
+      }
     };
     this.rec.onerror = (e) => toast.show('Suara: ' + (e.error || 'gagal'));
     this.rec.onend = () => {

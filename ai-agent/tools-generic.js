@@ -9,6 +9,8 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
   if (kind === 'ringkas_hari') return await agentTools.ringkasHari();
+  if (kind === 'ringkas_minggu') return await agentTools.ringkasMinggu();
+  if (kind === 'bersihkan_duplikat') return await agentTools.bersihkanDuplikat();
   if (kind === 'waktu') return agentTools.waktu(prompt);
   if (kind === 'apply_fewshot') {
     const notes = await ragetDb.allNotes();

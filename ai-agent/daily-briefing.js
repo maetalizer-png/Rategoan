@@ -30,6 +30,23 @@ function countToday(now) {
   return { events: eventsToday(now).length, reminders: remindersToday(now).length };
 }
 
+function weekRange(now) {
+  const d = now || new Date();
+  const start = new Date(d.getFullYear(), d.getMonth(), d.getDate() - 6).getTime();
+  const { end } = todayRange(d);
+  return { start, end };
+}
+
+function eventsThisWeek(now) {
+  const { start, end } = weekRange(now);
+  return calendarStore.eventsBetween(start, end);
+}
+
+function remindersThisWeek(now) {
+  const { start, end } = weekRange(now);
+  return remindersStore.allActive().filter((r) => r.timestamp >= start && r.timestamp <= end);
+}
+
 const GREET_BY_PERIOD = { pagi: 'Selamat pagi!', siang: 'Selamat siang!', sore: 'Selamat sore!', malam: 'Selamat malam!' };
 
 function message(now) {
@@ -48,4 +65,7 @@ export const dailyBriefing = Object.freeze({
   eventsToday,
   remindersToday,
   todayRange,
+  weekRange,
+  eventsThisWeek,
+  remindersThisWeek,
 });
