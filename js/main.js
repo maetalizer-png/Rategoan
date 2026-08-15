@@ -88,14 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (e) {}
   if (window.visualViewport) {
-    const setVvh = () => document.documentElement.style.setProperty('--vvh', window.visualViewport.height + 'px');
+    const setVvh = () => {
+      document.documentElement.style.setProperty('--vvh', window.visualViewport.height + 'px');
+      document.documentElement.style.setProperty('--vv-top', window.visualViewport.offsetTop + 'px');
+    };
     setVvh();
     let vvTimer = null;
-    visualViewport.addEventListener('resize', () => {
+    const onVvChange = () => {
       setVvh();
       clearTimeout(vvTimer);
       vvTimer = setTimeout(scrollBottom, 120);
-    });
+    };
+    visualViewport.addEventListener('resize', onVvChange);
+    visualViewport.addEventListener('scroll', onVvChange);
   }
   try {
     localStorage.setItem('raget_boot_ms', String(Math.round(performance.now() - bootStart)));

@@ -41,5 +41,47 @@
       "n_K": 60,
       "n_V": 6
     }
+  },
+  {
+    "label": "bagian5-post-rewrite",
+    "timestamp": "2026-08-15T15:02:20.192Z",
+    "queryCount": 100,
+    "composition": {
+      "factoidExtras": 60,
+      "terbuka": 20,
+      "smalltalk": 20
+    },
+    "elapsedMs": 103360,
+    "metrics": {
+      "quality": 81,
+      "A": 70,
+      "K": 73,
+      "U": 100,
+      "D": 90,
+      "V": 100,
+      "n_K": 60,
+      "n_V": 6
+    }
+  },
+  {
+    "label": "ronde-v3-final",
+    "timestamp": "2026-08-15T16:08:52.339Z",
+    "queryCount": 100,
+    "composition": {
+      "factoidExtras": 60,
+      "terbuka": 20,
+      "smalltalk": 20
+    },
+    "elapsedMs": 100115,
+    "metrics": {
+      "quality": 81,
+      "A": 70,
+      "K": 73,
+      "U": 100,
+      "D": 90,
+      "V": 100,
+      "n_K": 60,
+      "n_V": 6
+    }
   }
 ]

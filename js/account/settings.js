@@ -14,6 +14,7 @@ import { backup } from '../system/backup.js';
 import { account } from './account.js';
 import { ocrReader } from '../../vault/ocr/reader.js';
 import { translator } from '../../vault/translate/translator.js';
+import { pdfReader } from '../../vault/pdf/reader.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 
@@ -89,7 +90,8 @@ export const settings = {
     if (!val) return;
     const ocrStatus = ocrReader.isReady() ? 'OCR siap' : 'OCR belum';
     const trStatus = translator.isReady() ? 'Terjemahan siap' : 'Terjemahan belum';
-    val.textContent = ocrStatus + ' • ' + trStatus;
+    const pdfStatus = pdfReader.isReady() ? 'PDF siap' : 'PDF belum';
+    val.textContent = ocrStatus + ' • ' + trStatus + ' • ' + pdfStatus;
   },
   async handleUnduhanFitur() {
     if (!ocrReader.isReady()) {
@@ -110,7 +112,16 @@ export const settings = {
         this.refreshPackageStatus();
       }
     }
-    if (ocrReader.isReady() && translator.isReady()) toast.show('Semua paket sudah siap offline.');
+    if (!pdfReader.isReady()) {
+      const wantPdf = confirm('Unduh paket baca PDF (±' + pdfReader.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
+      if (wantPdf) {
+        toast.show('Mengunduh paket PDF...');
+        const ok = await pdfReader.downloadPackage();
+        toast.show(ok ? 'Paket PDF siap dipakai offline.' : 'Gagal mengunduh paket PDF. Coba lagi saat online.');
+        this.refreshPackageStatus();
+      }
+    }
+    if (ocrReader.isReady() && translator.isReady() && pdfReader.isReady()) toast.show('Semua paket sudah siap offline.');
   },
   refresh() {
     const st = auth.state;

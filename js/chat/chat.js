@@ -285,7 +285,7 @@ export const chat = {
     d.appendChild(body);
     d.appendChild(tm);
     $('messages').appendChild(d);
-    if (follow && !reduceMotion() && text.length > 140) {
+    if (follow && !reduceMotion() && text.length > 0) {
       for (let i = 0; i < text.length; i += 6) {
         body.innerHTML = markdown.render(text.slice(0, i + 6));
         scrollBottom();
