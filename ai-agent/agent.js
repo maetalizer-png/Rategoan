@@ -22,6 +22,7 @@ import { toolsGeneric } from './tools-generic.js';
 import { toolsDevlog } from './tools-devlog.js';
 import { routerIntent } from './router-intent.js';
 import { bilingual } from './bilingual.js';
+import { knowledgeGraph } from './knowledge-graph.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -300,6 +301,12 @@ async function respondCore(messages, prompt) {
     return postProcess(independenceReply);
   }
 
+  const followupId = await knowledgeGraph.tryFollowupId(text);
+  if (followupId) {
+    ragetDb.addNote(text, followupId, null, 'kg_followup');
+    return postProcess(followupId);
+  }
+
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');
@@ -311,6 +318,16 @@ async function respondCore(messages, prompt) {
     if (factoidEn) {
       ragetDb.addNote(text, factoidEn, null, 'factoid_en');
       return postProcess(factoidEn);
+    }
+    const followupEn = await knowledgeGraph.tryFollowupEn(text);
+    if (followupEn) {
+      ragetDb.addNote(text, followupEn, null, 'kg_followup');
+      return postProcess(followupEn);
+    }
+    const aboutEn = await knowledgeGraph.tryAboutEn(text);
+    if (aboutEn) {
+      ragetDb.addNote(text, aboutEn, null, 'kg_about');
+      return postProcess(aboutEn);
     }
   }
 

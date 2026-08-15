@@ -1,5 +1,6 @@
 import { dataries } from '../dataries/index.js';
 import { bridgeResolve } from './bridge-resolve.js';
+import { memoryContext } from '../raget-memory/memory-context.js';
 
 const EN_MARKERS = /\b(what|where|when|who|which|how|does|do|is|are|the|capital|population|currency|language|languages|area|country|city|spoken|use|uses|many|much|tell|about|hello|thanks|please|translate)\b/gi;
 const ID_MARKERS = /\b(apa|dimana|di mana|kapan|siapa|berapa|adalah|yang|ibukota|ibu kota|populasi|penduduk|mata uang|matauang|bahasa|luas|negara|kota|tentang|ceritakan|terjemahkan|halo|hai|terima kasih)\b/gi;
@@ -154,6 +155,17 @@ function formatFieldEn(field, item, rawEntity) {
   return null;
 }
 
+const OTHER_FIELDS = ['capital', 'population', 'currency', 'area', 'languages'];
+
+function bestEffortEn(field, item, rawEntity) {
+  const known = OTHER_FIELDS.filter((f) => f !== field)
+    .map((f) => formatFieldEn(f, item, rawEntity))
+    .filter(Boolean);
+  if (!known.length) return null;
+  const name = toEnglishCountryName(item.metadata.name, rawEntity);
+  return "I don't have that specific detail for " + name + ' yet, but here is what I know: ' + known.slice(0, 2).join(' ');
+}
+
 async function tryFactoidEn(text) {
   const t = String(text || '').trim();
   if (!t) return null;
@@ -165,8 +177,11 @@ async function tryFactoidEn(text) {
     if (!entity) continue;
     const item = await bridgeResolve.lookupInGroup('country', entity);
     if (!item) continue;
-    const reply = formatFieldEn(pattern.field, item, rawEntity);
-    if (reply) return reply;
+    const reply = formatFieldEn(pattern.field, item, rawEntity) || bestEffortEn(pattern.field, item, rawEntity);
+    if (reply) {
+      memoryContext.pushEntity(item.metadata.name);
+      return reply;
+    }
   }
   return null;
 }
@@ -207,4 +222,8 @@ export const bilingual = Object.freeze({
   detectLang,
   tryFactoidEn,
   tryBasicPhrase,
+  toEnglishCountryName,
+  toEnglishCapitalName,
+  toEnglishLanguageName,
+  extractEnEntity,
 });

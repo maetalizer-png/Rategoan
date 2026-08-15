@@ -109,7 +109,7 @@ function matchesName(item, entity) {
   const name = (item.metadata.name || '').toLowerCase();
   if (!name) return false;
   if (name === entity) return true;
-  if (name.length < 3 || entity.length < 3) return false;
+  if (name.length < 4 || entity.length < 4) return false;
   return entity.includes(name) || name.includes(entity);
 }
 

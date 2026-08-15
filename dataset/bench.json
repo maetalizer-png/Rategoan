@@ -2361,5 +2361,379 @@
       "currency of"
     ],
     "note": "Bagian 3: guard - pertanyaan ID umum tidak dibajak jalur EN"
+  },
+  {
+    "prompt": "tell me about thailand",
+    "expect": "kg_about",
+    "contains": "Thailand",
+    "note": "Bagian 4: komposer adaptif, kalimat bervariasi per entitas"
+  },
+  {
+    "prompt": "what do you know about vietnam",
+    "expect": "kg_about",
+    "contains": "Vietnam",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about egypt",
+    "expect": "kg_about",
+    "contains": "Mesir",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about canada",
+    "expect": "kg_about",
+    "contains": "Kanada",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about south korea",
+    "expect": "kg_about",
+    "contains": "Korea Selatan",
+    "note": "Bagian 4: komposer adaptif, entitas dua kata"
+  },
+  {
+    "prompt": "tell me about mexico",
+    "expect": "kg_about",
+    "contains": "Meksiko",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about germany",
+    "expect": "kg_about",
+    "contains": "Jerman",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about brazil",
+    "expect": "kg_about",
+    "contains": "Brasil",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about japan",
+    "expect": "kg_about",
+    "contains": "Jepang",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about spain",
+    "expect": "kg_about",
+    "contains": "Spanyol",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what is the capital of thailand",
+    "expect": "factoid_en",
+    "contains": "Bangkok",
+    "note": "Bagian 4: setup dialog-state EN #1"
+  },
+  {
+    "prompt": "and its population",
+    "expect": "kg_followup",
+    "contains": "70,000,000",
+    "note": "Bagian 4: follow-up EN - populasi mengikuti entitas terakhir (Thailand)"
+  },
+  {
+    "prompt": "what about its currency",
+    "expect": "kg_followup",
+    "contains": "Baht",
+    "note": "Bagian 4: follow-up EN kedua, entitas tetap Thailand"
+  },
+  {
+    "prompt": "what is the capital of poland",
+    "expect": "factoid_en",
+    "contains": "Warsaw",
+    "note": "Bagian 4: setup dialog-state EN #2"
+  },
+  {
+    "prompt": "what about its population",
+    "expect": "kg_followup",
+    "contains": "37,000,000",
+    "note": "Bagian 4: follow-up EN - entitas berpindah ke Poland"
+  },
+  {
+    "prompt": "what is the capital of mexico",
+    "expect": "factoid_en",
+    "contains": "Mexico City",
+    "note": "Bagian 4: setup dialog-state EN #3"
+  },
+  {
+    "prompt": "and its currency",
+    "expect": "kg_followup",
+    "contains": "Peso",
+    "note": "Bagian 4: follow-up EN mata uang"
+  },
+  {
+    "prompt": "what about its area",
+    "expect": "kg_followup",
+    "contains": "1,964,375",
+    "note": "Bagian 4: follow-up EN luas wilayah"
+  },
+  {
+    "prompt": "apa ibukota australia",
+    "expect": "factoid",
+    "contains": "Canberra",
+    "note": "Bagian 4: setup dialog-state ID #1"
+  },
+  {
+    "prompt": "bagaimana dengan bahasanya",
+    "expect": "kg_followup",
+    "contains": "Inggris",
+    "note": "Bagian 4: follow-up ID bahasa, entitas Australia"
+  },
+  {
+    "prompt": "dan apa luasnya",
+    "expect": "kg_followup",
+    "contains": "7.692.024",
+    "note": "Bagian 4: follow-up ID luas, entitas Australia"
+  },
+  {
+    "prompt": "apa ibukota indonesia",
+    "expect": "factoid",
+    "contains": "Jakarta",
+    "note": "Bagian 4: setup dialog-state ID #2"
+  },
+  {
+    "prompt": "bagaimana dengan populasinya",
+    "expect": "kg_followup",
+    "contains": "277 juta",
+    "note": "Bagian 4: follow-up ID populasi"
+  },
+  {
+    "prompt": "dan apa mata uangnya",
+    "expect": "kg_followup",
+    "contains": "Rupiah",
+    "note": "Bagian 4: fix bug fuzzy-match \"dan\" nyasar ke São Tomé - sekarang benar ke Indonesia"
+  },
+  {
+    "prompt": "what is the capital of france",
+    "expect": "factoid_en",
+    "contains": "Paris",
+    "note": "Bagian 4: setup EN untuk uji lintas-bahasa"
+  },
+  {
+    "prompt": "bagaimana dengan populasinya",
+    "expect": "kg_followup",
+    "contains": "68 juta",
+    "note": "Bagian 4: lintas-bahasa - setup EN, follow-up ID tetap nyambung ke Prancis"
+  },
+  {
+    "prompt": "apa ibukota italia",
+    "expect": "factoid",
+    "contains": "Roma",
+    "note": "Bagian 4: setup ID untuk uji lintas-bahasa"
+  },
+  {
+    "prompt": "what about its capital",
+    "expect": "kg_followup",
+    "contains": "Rome",
+    "note": "Bagian 4: lintas-bahasa - setup ID, follow-up EN tetap nyambung ke Italia (Roma->Rome)"
+  },
+  {
+    "prompt": "tell me about narnia",
+    "expect": "fallback_ok",
+    "notContains": [
+      "Ibukotanya adalah",
+      "Populasinya sekitar",
+      "The capital of"
+    ],
+    "note": "Bagian 4: guard - tempat fiktif tidak difabrikasi (komposer adaptif)"
+  },
+  {
+    "prompt": "what do you know about wakanda",
+    "expect": "fallback_ok",
+    "notContains": [
+      "Ibukotanya adalah",
+      "Populasinya sekitar",
+      "The capital of"
+    ],
+    "note": "Bagian 4: guard - tempat fiktif kedua"
+  },
+  {
+    "prompt": "tell me about netherlands",
+    "expect": "kg_about",
+    "contains": "Belanda",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about argentina",
+    "expect": "kg_about",
+    "contains": "Argentina",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about turkey",
+    "expect": "kg_about",
+    "contains": "Turki",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about poland",
+    "expect": "kg_about",
+    "contains": "Polandia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about sweden",
+    "expect": "kg_about",
+    "contains": "Swedia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about nigeria",
+    "expect": "kg_about",
+    "contains": "Nigeria",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about kenya",
+    "expect": "kg_about",
+    "contains": "Kenya",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about chile",
+    "expect": "kg_about",
+    "contains": "Chili",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about peru",
+    "expect": "kg_about",
+    "contains": "Peru",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about philippines",
+    "expect": "kg_about",
+    "contains": "Filipina",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about malaysia",
+    "expect": "kg_about",
+    "contains": "Malaysia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about singapore",
+    "expect": "kg_about",
+    "contains": "Singapura",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about australia",
+    "expect": "kg_about",
+    "contains": "Australia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about new zealand",
+    "expect": "kg_about",
+    "contains": "Selandia Baru",
+    "note": "Bagian 4: komposer adaptif, alias EN dua kata"
+  },
+  {
+    "prompt": "tell me about switzerland",
+    "expect": "kg_about",
+    "contains": "Swiss",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about austria",
+    "expect": "kg_about",
+    "contains": "Austria",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about portugal",
+    "expect": "kg_about",
+    "contains": "Portugal",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about greece",
+    "expect": "kg_about",
+    "contains": "Yunani",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about norway",
+    "expect": "kg_about",
+    "contains": "Norwegia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about finland",
+    "expect": "kg_about",
+    "contains": "Finlandia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about denmark",
+    "expect": "kg_about",
+    "contains": "Denmark",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about ireland",
+    "expect": "kg_about",
+    "contains": "Irlandia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about israel",
+    "expect": "kg_about",
+    "contains": "Israel",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about morocco",
+    "expect": "kg_about",
+    "contains": "Maroko",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "tell me about ghana",
+    "expect": "kg_about",
+    "contains": "Ghana",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about colombia",
+    "expect": "kg_about",
+    "contains": "Kolombia",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "apa yang dimaksud dengan cloud computing",
+    "expect": "fallback_ok",
+    "notContains": [
+      "Ibukotanya adalah",
+      "The capital of"
+    ],
+    "note": "Bagian 4: guard - pertanyaan umum ID tidak dibajak jalur knowledge graph"
+  },
+  {
+    "prompt": "what is machine learning",
+    "expect": "fallback_ok",
+    "notContains": [
+      "Ibukotanya adalah",
+      "The capital of"
+    ],
+    "note": "Bagian 4: guard - pertanyaan umum EN (bukan negara) tidak dibajak jalur knowledge graph"
+  },
+  {
+    "prompt": "tell me about india",
+    "expect": "kg_about",
+    "contains": "India",
+    "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "what do you know about pakistan",
+    "expect": "kg_about",
+    "contains": "Pakistan",
+    "note": "Bagian 4: komposer adaptif"
   }
 ]
