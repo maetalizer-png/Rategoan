@@ -1669,5 +1669,101 @@
     "expect": "dataries_extras",
     "contains": "1967",
     "note": "B: sejarah indonesia asean"
+  },
+  {
+    "prompt": "siapa Marie Curie",
+    "expect": "dataries_extras",
+    "contains": "Curie",
+    "note": "Bagian 9: tokoh perempuan berpengaruh baru"
+  },
+  {
+    "prompt": "siapa Angela Merkel",
+    "expect": "dataries_extras",
+    "contains": "Jerman",
+    "note": "Bagian 9: tokoh perempuan berpengaruh baru"
+  },
+  {
+    "prompt": "minuman khas arab saudi",
+    "expect": "dataries_extras",
+    "contains": "Qahwa",
+    "note": "Bagian 9: minuman timur-tengah baru"
+  },
+  {
+    "prompt": "minuman khas mesir",
+    "expect": "dataries_extras",
+    "contains": "Karkade",
+    "note": "Bagian 9: minuman timur-tengah baru"
+  },
+  {
+    "prompt": "total luas afrika",
+    "expect": "dataries_extras",
+    "contains": "Afrika",
+    "note": "Bagian 9: agregasi region"
+  },
+  {
+    "prompt": "total populasi amerika",
+    "expect": "dataries_extras",
+    "contains": "Amerika",
+    "note": "Bagian 9: agregasi region"
+  },
+  {
+    "prompt": "ringkas minggu saya",
+    "expect": "ringkas_minggu",
+    "contains": "Minggu Ini",
+    "note": "Bagian 9: digest mingguan baru"
+  },
+  {
+    "prompt": "negara dengan luas terkecil",
+    "expect": "dataries_extras",
+    "contains": "Top 3",
+    "note": "Bagian 9: superlatif"
+  },
+  {
+    "prompt": "50 euro ke rupiah",
+    "expect": "dataries_extras",
+    "contains": "rupiah",
+    "note": "Bagian 9: konversi mata uang"
+  },
+  {
+    "prompt": "10 mil ke km",
+    "expect": "dataries_extras",
+    "contains": "km",
+    "note": "Bagian 9: konversi satuan"
+  },
+  {
+    "prompt": "negara apa yang ibukotanya beijing",
+    "expect": "dataries_extras",
+    "contains": "China",
+    "note": "Bagian 9: reverse lookup ibukota"
+  },
+  {
+    "prompt": "mata uang won itu punya negara apa",
+    "expect": "dataries_extras",
+    "contains": "Korea",
+    "note": "Bagian 9: reverse lookup mata uang"
+  },
+  {
+    "prompt": "minggu depan tanggal berapa",
+    "expect": "dataries_extras",
+    "contains": "Minggu depan",
+    "note": "Bagian 9: penalaran tanggal"
+  },
+  {
+    "prompt": "tabu di india",
+    "expect": "dataries_extras",
+    "contains": "Tabu",
+    "note": "Bagian 9: etika/tabu"
+  },
+  {
+    "prompt": "sopan santun di jepang",
+    "expect": "dataries_extras",
+    "contains": "Jepang",
+    "note": "Bagian 9: etika"
+  },
+  {
+    "prompt": "siapa penjelajah terkenal yang menemukan jalur laut ke india",
+    "expect": "dataries_extras",
+    "contains": "Gama",
+    "note": "Bagian 9: tokoh penjelajah"
   }
 ]
