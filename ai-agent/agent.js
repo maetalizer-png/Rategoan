@@ -301,12 +301,8 @@ async function respondCore(messages, prompt) {
 
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
-    let reply = factoid;
-    if (quizSession.shouldOffer(text)) {
-      reply += '\n\nMau coba 1 soal kuis?\n\n' + (await quizSession.ask());
-    }
-    ragetDb.addNote(text, reply, null, 'factoid');
-    return postProcess(reply);
+    ragetDb.addNote(text, factoid, null, 'factoid');
+    return postProcess(factoid);
   }
 
   const extras = await datariesBridge.extras(text);

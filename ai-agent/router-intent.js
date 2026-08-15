@@ -69,7 +69,7 @@ function detectTool(prompt) {
   if (DEVLOG_BUG_RE.test(t)) return 'devlog_bug_tersulit';
   if (DEVLOG_PEMBUAT_RE.test(t)) return 'devlog_pembuat';
   if (DEVLOG_SKOR_RE.test(t)) return 'devlog_skor';
-  if (/^(mulai\s+|main\s+)?kuis\b/.test(t)) return 'kuis';
+  if (/^(mulai\s+|main\s+|kasih\s+(aku\s+|saya\s+)?|minta\s+|mau\s+(main\s+)?|coba\s+)?kuis\b/.test(t)) return 'kuis';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+hari(\s+ini)?(\s+saya)?\b/.test(t)) return 'ringkas_hari';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+minggu(\s+ini)?(\s+saya)?\b|digest\s+mingguan/.test(t)) return 'ringkas_minggu';
   if (/^(ringkas(kan)?|rangkum(kan)?)\s+(percakapan|chat)\b/.test(t)) return 'ringkas_percakapan';
