@@ -7,12 +7,13 @@ import { openDetail } from './views/detail.js';
 import { showKuisHome } from './views/kuis.js';
 import { renderSapaan } from './views/sapaan.js';
 import { openTrip } from './views/trip.js';
+import { renderAsisten } from './views/asisten.js';
 import { openProfil } from './views/profil.js';
 import { install } from './features/install.js';
 
 const $ = (s) => document.querySelector(s);
 
-const TAB_ICON = { jelajah: 'globe', kuis: 'quiz', sapaan: 'lang', trip: 'cal' };
+const TAB_ICON = { jelajah: 'globe', kuis: 'quiz', sapaan: 'lang', trip: 'cal', asisten: 'chat' };
 
 function goTab(t) {
   document.querySelectorAll('.bot button').forEach((x) => x.classList.toggle('on', x.dataset.tab === t));
@@ -21,6 +22,7 @@ function goTab(t) {
   if (t === 'kuis') showKuisHome();
   if (t === 'sapaan') renderSapaan();
   if (t === 'trip') openTrip();
+  if (t === 'asisten') renderAsisten();
 }
 
 document.querySelectorAll('.bot button').forEach((b) => {

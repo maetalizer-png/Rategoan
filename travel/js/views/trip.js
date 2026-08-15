@@ -5,11 +5,12 @@ import { BUDGET_BASE, TIER_MULT, PACK_TIPS } from '../constants.js';
 import { getCheck, saveCheck, getTrips, saveTrips, getStats, saveStats } from '../storage.js';
 import { climateCard } from '../features/climate.js';
 import { journalCard, getNotes, bindJournal } from '../features/journal.js';
+import { exportLog } from '../../../raget-memory/export-log.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');
 
-function downloadFile(content, mime, filename) {
+export function downloadFile(content, mime, filename) {
   const blob = new Blob([content], { type: mime });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -21,7 +22,17 @@ function downloadFile(content, mime, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 500);
 }
 
-function buildPlanLines(ctx) {
+export function computePlan(c, days, tier, foods, wisata) {
+  const name = c.metadata.name;
+  const w = clusterByCity(byCountry(wisata, name));
+  const f = byCountry(foods, name);
+  const per = Math.max(1, Math.ceil(w.length / days));
+  const reg = regionOf(name);
+  const perDay = Math.round(BUDGET_BASE[reg] * TIER_MULT[tier]);
+  return { name, w, f, per, reg, perDay };
+}
+
+export function buildPlanLines(ctx) {
   const { name, days, tier, depart, w, per, f, c, perDay, notes } = ctx;
   return [
     'Rencana ' + days + ' hari di ' + name + ' (' + tier + ')' + (depart ? ' — berangkat ' + depart : ''),
@@ -37,7 +48,7 @@ function buildPlanLines(ctx) {
   ];
 }
 
-function buildPlanMarkdown(ctx) {
+export function buildPlanMarkdown(ctx) {
   const { name, days, tier, depart, w, per, f, c, perDay, notes } = ctx;
   const lines = ['# Rencana Perjalanan ' + name, ''];
   lines.push('Durasi: ' + days + ' hari &middot; Tingkat: ' + tier + (depart ? ' &middot; Berangkat: ' + depart : ''), '');
@@ -56,7 +67,7 @@ function buildPlanMarkdown(ctx) {
   return lines.join('\n');
 }
 
-function openPdfPrintWindow(ctx) {
+export function openPdfPrintWindow(ctx) {
   const { name, days, tier, depart, w, per, f, c, perDay, notes } = ctx;
   const rows = Array.from({ length: days }, (_, i) => {
     const items = w.slice(i * per, (i + 1) * per);
@@ -144,12 +155,7 @@ export async function openTrip() {
 }
 
 function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, tripKey) {
-  const name = c.metadata.name;
-  const w = clusterByCity(byCountry(wisata, name));
-  const f = byCountry(foods, name);
-  const per = Math.max(1, Math.ceil(w.length / days));
-  const reg = regionOf(name);
-  const perDay = Math.round(BUDGET_BASE[reg] * TIER_MULT[tier]);
+  const { name, w, f, per, reg, perDay } = computePlan(c, days, tier, foods, wisata);
   const hn = daysUntil(depart);
 
   let html =
@@ -224,9 +230,13 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
     if (navigator.share) navigator.share({ text: lines.join('\n') }).catch(() => {});
     else if (navigator.clipboard) navigator.clipboard.writeText(lines.join('\n')).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; toast('Rencana disalin'); });
   };
-  $('#tpdf').onclick = () => openPdfPrintWindow(planCtx());
+  $('#tpdf').onclick = () => {
+    openPdfPrintWindow(planCtx());
+    exportLog.logExport('pdf', 'Rencana PDF ' + name);
+  };
   $('#tmd').onclick = () => {
     downloadFile(buildPlanMarkdown(planCtx()), 'text/markdown', 'rencana-' + name.toLowerCase().replace(/\s+/g, '-') + '.md');
+    exportLog.logExport('markdown', 'Rencana MD ' + name);
     toast('Rencana diekspor sebagai Markdown');
   };
   $('#twa').onclick = () => {

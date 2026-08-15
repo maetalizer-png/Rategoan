@@ -285,12 +285,14 @@ async function renderArtefak() {
   if (myGen !== renderGen) return;
   const trips = readTravelJson('travel_trips').map((t, i) => ({ id: 'trip-' + i, kind: 'itinerary', text: 'Rencana ' + t.country + ' — ' + t.days + ' hari (' + t.tier + ')', time: t.time }));
   const favs = readTravelJson('travel_fav').map((f, i) => ({ id: 'fav-' + i, kind: 'favorit', text: 'Favorit: ' + (f.name || f), time: f.time || 0 }));
+  const exports = readTravelJson('raget_exports').map((x, i) => ({ id: 'export-' + i, kind: x.kind || 'ekspor', text: x.label, time: x.time || 0 }));
 
   $('coll-filters').innerHTML = '';
   let all = [
     ...artifacts.map((a) => ({ id: a.id, kind: a.artifactType || 'artefak', text: a.text, time: a.time, deletable: true })),
     ...trips.map((t) => ({ ...t, deletable: false })),
     ...favs.map((f) => ({ ...f, deletable: false })),
+    ...exports.map((x) => ({ ...x, deletable: false })),
   ];
 
   if (state.query.trim()) {

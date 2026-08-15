@@ -699,3 +699,85 @@ button.tag:active {
   min-width: 100px;
   justify-content: center;
 }
+
+/* ---------- Asisten (chat perencana) ---------- */
+.asis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 150px;
+}
+
+.asis-msg {
+  max-width: 86%;
+  padding: 10px 13px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.asis-msg.user {
+  align-self: flex-end;
+  background: var(--ac);
+  color: var(--actx);
+  border-bottom-right-radius: 4px;
+}
+
+.asis-msg.ai {
+  align-self: flex-start;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 4px;
+}
+
+.asis-empty {
+  text-align: center;
+  color: var(--mut);
+  font-size: 13px;
+  padding: 40px 20px;
+}
+
+.asis-chipbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.asis-inputbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 62px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.asis-inputbar input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--stat);
+  color: var(--tx);
+  padding: 10px 14px;
+  font-size: 13.5px;
+}
+
+.asis-inputbar button {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ac);
+  color: var(--actx);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
