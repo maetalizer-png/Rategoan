@@ -12,6 +12,7 @@ import restrukturisasi from './sejarah/11-restrukturisasi-mega-final.js';
 import trisulaUltra from './sejarah/12-trisula-ultra.js';
 import trisulaFinalV2 from './sejarah/13-trisula-final-v2.js';
 import ronde_v3_gabungan_final from './sejarah/14-ronde-v3-gabungan-final.js';
+import ronde_v4_trisula_deca from './sejarah/15-ronde-v4-trisula-deca.js';
 
 const SEJARAH = Object.freeze([
   genesis,
@@ -28,6 +29,7 @@ const SEJARAH = Object.freeze([
   trisulaUltra,
   trisulaFinalV2,
   ronde_v3_gabungan_final,
+  ronde_v4_trisula_deca,
 ]);
 
 function all() {

@@ -83,5 +83,26 @@
       "n_K": 60,
       "n_V": 6
     }
+  },
+  {
+    "label": "ronde-v4-final",
+    "timestamp": "2026-08-15T21:43:37.058Z",
+    "queryCount": 100,
+    "composition": {
+      "factoidExtras": 60,
+      "terbuka": 20,
+      "smalltalk": 20
+    },
+    "elapsedMs": 75023,
+    "metrics": {
+      "quality": 81,
+      "A": 70,
+      "K": 73,
+      "U": 100,
+      "D": 90,
+      "V": 100,
+      "n_K": 60,
+      "n_V": 6
+    }
   }
 ]
