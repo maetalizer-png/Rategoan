@@ -88,8 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (e) {}
   if (window.visualViewport) {
+    const setVvh = () => document.documentElement.style.setProperty('--vvh', window.visualViewport.height + 'px');
+    setVvh();
     let vvTimer = null;
     visualViewport.addEventListener('resize', () => {
+      setVvh();
       clearTimeout(vvTimer);
       vvTimer = setTimeout(scrollBottom, 120);
     });

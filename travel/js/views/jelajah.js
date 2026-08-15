@@ -11,6 +11,7 @@ const view = $('#view');
 let regionFilter = 'all';
 let jelajahMode = 'negara';
 let cityFilter = '';
+const expandedGroups = new Set();
 
 export function openSheet(html) {
   let sh = $('#sheet');
@@ -27,16 +28,21 @@ export function openSheet(html) {
   sh.hidden = false;
 }
 
+function cardShell(className) {
+  const el = document.createElement('div');
+  el.className = className || 'card';
+  return el;
+}
+
 function cardCountry(c, foods) {
   const m = c.metadata || {};
   const fo = byCountry(foods, m.name).slice(0, 2);
-  const el = document.createElement('div');
-  el.className = 'card';
+  const el = cardShell('card');
   el.innerHTML =
     '<div class="card-head"><h3>' + (m.name || '-') + ic('chev') + '</h3>' +
     '<button class="fav-btn' + (isFav(m.name) ? ' on' : '') + '" data-fav="' + m.name + '" aria-label="Favorit">' + ic('star') + '</button></div>' +
     '<p class="desc">' + String(c.text || '') + '</p>' +
-    '<div class="stats">' +
+    '<div class="stats stats-2">' +
       stat('bank', m.capital || '-') +
       stat('cash', m.currency || '-') +
       (m.population ? stat('users', fmtN(m.population)) : '') +
@@ -54,13 +60,50 @@ function cardCountry(c, foods) {
   return el;
 }
 
-function cardItem(x) {
-  const m = x.metadata || {};
-  const el = document.createElement('div');
-  el.className = 'card';
-  el.innerHTML = '<h3>' + (m.name || '-') + '</h3><p class="desc">' + (m.city ? m.city + ' &middot; ' : '') + (m.country || '') + '</p>';
-  el.onclick = () => openSheet('<h3>' + (m.name || '-') + '</h3><p>' + (m.city ? m.city + ' - ' : '') + String(x.text || '') + '</p>');
+function groupByCountry(list) {
+  const map = new Map();
+  list.forEach((x) => {
+    const country = (x.metadata && x.metadata.country) || '-';
+    if (!map.has(country)) map.set(country, []);
+    map.get(country).push(x);
+  });
+  return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+}
+
+function cardGroup(country, items, groupKey, maxShown, onOpenSheet) {
+  const el = cardShell('card');
+  const expanded = expandedGroups.has(groupKey);
+  const shown = expanded ? items : items.slice(0, maxShown);
+  el.innerHTML =
+    '<div class="group-card-head"><h3>' + country + '</h3><span class="desc">' + items.length + '</span></div>' +
+    '<div class="group-list">' +
+    shown.map((x, i) => {
+      const m = x.metadata || {};
+      return '<button type="button" class="group-row" data-item="' + i + '">' +
+        (m.city ? '<span class="g-city">' + m.city + '</span>' : '') +
+        '<span>' + (m.name || '-') + '</span></button>';
+    }).join('') +
+    '</div>' +
+    (items.length > maxShown
+      ? '<button type="button" class="group-more" data-toggle>' + (expanded ? 'Sembunyikan' : 'Lihat semua (' + items.length + ')') + '</button>'
+      : '');
+  el.querySelectorAll('[data-item]').forEach((b) => {
+    b.onclick = () => onOpenSheet(shown[+b.dataset.item]);
+  });
+  const toggleBtn = el.querySelector('[data-toggle]');
+  if (toggleBtn) {
+    toggleBtn.onclick = () => {
+      if (expanded) expandedGroups.delete(groupKey);
+      else expandedGroups.add(groupKey);
+      renderJelajah('');
+    };
+  }
   return el;
+}
+
+function openItemSheet(x) {
+  const m = x.metadata || {};
+  openSheet('<h3>' + (m.name || '-') + '</h3><p>' + (m.city ? m.city + ' - ' : '') + String(x.text || '') + '</p>');
 }
 
 function defaultList(countries) {
@@ -95,13 +138,24 @@ function sapaanHariIniWidget(langs) {
   const rng = mulberry(hashText('sapaan-' + today));
   const pick = pool[Math.floor(rng() * pool.length)];
   const g = pick.metadata.greetings;
-  const box = document.createElement('div');
-  box.className = 'card';
-  box.innerHTML =
-    '<div class="sec" style="margin:0">' + ic('lang') + ' Sapaan hari ini</div>' +
-    '<p class="desc">"' + (g.halo || '-') + '" &mdash; ' + pick.metadata.name + '</p>';
-  box.onclick = () => document.querySelector('.bot button[data-tab="sapaan"]').click();
-  return box;
+  return { text: g.halo || '-', lang: pick.metadata.name };
+}
+
+function actionRow(sapaan, countries) {
+  const row = document.createElement('div');
+  row.className = 'action-row';
+  row.innerHTML =
+    '<button type="button" class="action-row-sapaan" id="sapaanGo">' + ic('lang') +
+    (sapaan ? '<span>Sapaan hari ini: <b>"' + sapaan.text + '"</b> &mdash; ' + sapaan.lang + '</span>' : '<span>Sapaan hari ini</span>') +
+    '</button>' +
+    '<button type="button" class="action-row-cmp" id="cmpOpen">' + ic('swap') + ' Bandingkan</button>';
+  const goBtn = row.querySelector('#sapaanGo');
+  if (goBtn) goBtn.onclick = () => document.querySelector('.bot button[data-tab="sapaan"]').click();
+  row.querySelector('#cmpOpen').onclick = async () => {
+    const { openCompare } = await import('../features/compare.js');
+    openCompare(countries);
+  };
+  return row;
 }
 
 export async function renderJelajah(q) {
@@ -113,9 +167,6 @@ export async function renderJelajah(q) {
   if (!q) {
     const cd = countdownWidget();
     if (cd) view.appendChild(cd);
-
-    const sw = sapaanHariIniWidget(langs);
-    if (sw) view.appendChild(sw);
 
     const seg = document.createElement('div');
     seg.className = 'seg';
@@ -132,15 +183,13 @@ export async function renderJelajah(q) {
     chips.className = 'tags';
     chips.innerHTML = FILTERS.map((f) =>
       '<button class="tag' + (regionFilter === f[0] ? ' on' : '') + '" data-f="' + f[0] + '">' + f[1] + '</button>'
-    ).join('') + '<button class="tag" id="cmpOpen">' + ic('swap') + ' Bandingkan</button>';
+    ).join('');
     view.appendChild(chips);
     chips.querySelectorAll('[data-f]').forEach((b) => {
       b.onclick = () => { regionFilter = b.dataset.f; renderJelajah(''); };
     });
-    chips.querySelector('#cmpOpen').onclick = async () => {
-      const { openCompare } = await import('../features/compare.js');
-      openCompare(countries);
-    };
+
+    view.appendChild(actionRow(sapaanHariIniWidget(langs), countries));
 
     if (jelajahMode !== 'negara') {
       const list = jelajahMode === 'wisata' ? wisata : foods;
@@ -148,19 +197,25 @@ export async function renderJelajah(q) {
       if (jelajahMode === 'wisata') {
         const cities = [...new Set(filtered.map((x) => x.metadata.city).filter(Boolean))].sort();
         if (cities.length > 1) {
-          const cityBox = document.createElement('div');
-          cityBox.className = 'tags';
-          cityBox.innerHTML =
-            '<button class="tag' + (!cityFilter ? ' on' : '') + '" data-city="">Semua kota</button>' +
-            cities.map((c) => '<button class="tag' + (cityFilter === c ? ' on' : '') + '" data-city="' + c + '">' + c + '</button>').join('');
-          view.appendChild(cityBox);
-          cityBox.querySelectorAll('[data-city]').forEach((b) => {
-            b.onclick = () => { cityFilter = b.dataset.city; renderJelajah(''); };
-          });
+          const sel = document.createElement('select');
+          sel.className = 'city-select';
+          sel.innerHTML = '<option value="">Semua kota</option>' + cities.map((c) => '<option value="' + c + '"' + (cityFilter === c ? ' selected' : '') + '>' + c + '</option>').join('');
+          sel.value = cityFilter;
+          view.appendChild(sel);
+          sel.onchange = () => { cityFilter = sel.value; renderJelajah(''); };
         }
         if (cityFilter) filtered = filtered.filter((x) => x.metadata.city === cityFilter);
       }
-      filtered.slice(0, 30).forEach((x) => view.appendChild(cardItem(x)));
+      const groups = groupByCountry(filtered);
+      if (!groups.length) {
+        const empty = document.createElement('div');
+        empty.className = 'card';
+        empty.innerHTML = '<p class="desc">Tidak ada data untuk filter ini.</p>';
+        view.appendChild(empty);
+      }
+      groups.slice(0, 20).forEach(([country, items]) => {
+        view.appendChild(cardGroup(country, items, jelajahMode + ':' + country, jelajahMode === 'wisata' ? 3 : 4, openItemSheet));
+      });
       return;
     }
 

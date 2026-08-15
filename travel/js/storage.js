@@ -99,3 +99,15 @@ export function toggleFav(name) {
 
 export function getTTS() { return localStorage.getItem('travel_tts') === '1'; }
 export function setTTS(on) { localStorage.setItem('travel_tts', on ? '1' : '0'); }
+
+export function getAssistantHistory() {
+  try {
+    const l = JSON.parse(localStorage.getItem('travel_assistant'));
+    return Array.isArray(l) ? l : [];
+  } catch (e) { return []; }
+}
+export function pushAssistantMessage(role, text) {
+  const l = getAssistantHistory();
+  l.push({ role, text, time: Date.now() });
+  localStorage.setItem('travel_assistant', JSON.stringify(l.slice(-60)));
+}

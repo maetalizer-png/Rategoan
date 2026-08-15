@@ -59,6 +59,108 @@
   white-space: nowrap;
 }
 
+.stats-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ---------- Kartu grup (Wisata/Kuliner per negara) ---------- */
+.group-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.group-card-head h3 {
+  font-size: 15px;
+}
+
+.group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.group-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.group-row .g-city {
+  color: var(--mut);
+  font-size: 11.5px;
+  flex: none;
+}
+
+.group-more {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--mut);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* ---------- Baris aksi gabungan (sapaan hari ini + bandingkan) ---------- */
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.action-row-sapaan {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--mut);
+}
+
+.action-row-sapaan b {
+  color: var(--tx);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.action-row-cmp {
+  flex: none;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ---------- Filter kota (dropdown) ---------- */
+.city-select {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: var(--r-field);
+  border: 1px solid var(--line);
+  background: var(--stat);
+  color: var(--tx);
+  font-size: 13px;
+  font-weight: 600;
+}
+
 /* ---------- Label seksi + tag ---------- */
 .sec {
   margin: 14px 0 6px;
@@ -539,4 +641,143 @@ button.tag:active {
 .countdown-num {
   font-size: 22px;
   font-weight: 800;
+}
+
+/* ---------- Toast ---------- */
+.tv-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 90px;
+  transform: translate(-50%, 12px);
+  background: var(--ac);
+  color: var(--actx);
+  padding: 10px 18px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-fab);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 8;
+  max-width: 88vw;
+  text-align: center;
+}
+
+.tv-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Trip: label & aksi hasil rencana ---------- */
+.field-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--mut);
+  margin: 10px 0 4px;
+}
+
+.trip-ready-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.trip-actions-sticky {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.trip-actions-sticky .btn {
+  flex: 1;
+  min-width: 100px;
+  justify-content: center;
+}
+
+/* ---------- Asisten (chat perencana) ---------- */
+.asis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 150px;
+}
+
+.asis-msg {
+  max-width: 86%;
+  padding: 10px 13px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.asis-msg.user {
+  align-self: flex-end;
+  background: var(--ac);
+  color: var(--actx);
+  border-bottom-right-radius: 4px;
+}
+
+.asis-msg.ai {
+  align-self: flex-start;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 4px;
+}
+
+.asis-empty {
+  text-align: center;
+  color: var(--mut);
+  font-size: 13px;
+  padding: 40px 20px;
+}
+
+.asis-chipbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.asis-inputbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 62px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.asis-inputbar input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--stat);
+  color: var(--tx);
+  padding: 10px 14px;
+  font-size: 13.5px;
+}
+
+.asis-inputbar button {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ac);
+  color: var(--actx);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

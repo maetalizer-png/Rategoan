@@ -80,6 +80,7 @@ export const REGIONS = Object.freeze({
     { id: 'seni', file: './tokoh/seni.js', names: [] },
     { id: 'penjelajah', file: './tokoh/penjelajah.js', names: [] },
     { id: 'pemimpin', file: './tokoh/pemimpin.js', names: [] },
+    { id: 'perempuan-berpengaruh', file: './tokoh/perempuan-berpengaruh.js', names: [] },
   ],
   makanan: [
     { id: 'asia', file: './makanan/asia.js', names: [] },
@@ -164,6 +165,7 @@ export const REGIONS = Object.freeze({
     { id: 'amerika', file: './minuman/amerika.js', names: [] },
     { id: 'afrika', file: './minuman/afrika.js', names: [] },
     { id: 'osenia', file: './minuman/osenia.js', names: [] },
+    { id: 'timur-tengah', file: './minuman/timur-tengah.js', names: [] },
   ],
   sapaan: [
     { id: 'greetings', file: './sapaan/greetings.js', names: [] },

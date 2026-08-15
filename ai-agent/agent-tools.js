@@ -594,6 +594,44 @@ async function ringkasHari() {
   return formatter.formatByType('daftar', { title: 'Ringkasan Hari Ini', items });
 }
 
+const DEDUP_OVERLAP_THRESHOLD = 0.8;
+
+async function bersihkanDuplikat() {
+  const notes = await ragetDb.allNotes();
+  const toRemove = new Set();
+  for (let i = 0; i < notes.length; i++) {
+    if (toRemove.has(notes[i].id)) continue;
+    for (let j = i + 1; j < notes.length; j++) {
+      if (toRemove.has(notes[j].id)) continue;
+      if (textOverlapRatio(notes[i].question, notes[j].question) > DEDUP_OVERLAP_THRESHOLD) {
+        const older = notes[i].time <= notes[j].time ? notes[i] : notes[j];
+        toRemove.add(older.id);
+      }
+    }
+  }
+  if (!toRemove.size) return 'Tidak ada percakapan duplikat yang perlu dibersihkan.';
+  const removed = await ragetDb.removeByIds(Array.from(toRemove));
+  return 'Selesai! ' + removed + ' percakapan duplikat/mirip sudah dibersihkan, versi terbaru tetap disimpan.';
+}
+
+async function ringkasMinggu() {
+  const events = dailyBriefing.eventsThisWeek();
+  const reminders = dailyBriefing.remindersThisWeek();
+  const { start } = dailyBriefing.weekRange();
+  const allNotes = await ragetDb.allNotes();
+  const notesThisWeek = allNotes.filter((n) => n.time >= start);
+  const items = [];
+  items.push('Percakapan minggu ini: ' + notesThisWeek.length);
+  if (events.length) items.push('Acara: ' + events.length + ' (' + events.slice(0, 3).map((e) => e.summary).join(', ') + (events.length > 3 ? ', …' : '') + ')');
+  if (reminders.length) items.push('Pengingat: ' + reminders.length + ' (' + reminders.slice(0, 3).map((r) => r.action).join(', ') + (reminders.length > 3 ? ', …' : '') + ')');
+  const topIntents = new Map();
+  notesThisWeek.forEach((n) => topIntents.set(n.intent, (topIntents.get(n.intent) || 0) + 1));
+  const sortedIntents = Array.from(topIntents.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  if (sortedIntents.length) items.push('Topik paling sering: ' + sortedIntents.map(([k, v]) => k + ' (' + v + 'x)').join(', '));
+  if (!notesThisWeek.length && !events.length && !reminders.length) items.push('Belum ada aktivitas tercatat minggu ini.');
+  return formatter.formatByType('daftar', { title: 'Ringkasan Minggu Ini', items });
+}
+
 function fuzzyCountryMatch(a, b) {
   if (!a || !b) return false;
   const x = String(a).toLowerCase();
@@ -701,6 +739,8 @@ export const agentTools = Object.freeze({
   cariSemua,
   cariKoleksi,
   ringkasHari,
+  ringkasMinggu,
+  bersihkanDuplikat,
   eksporCatatan,
   bagikanKartu,
 });

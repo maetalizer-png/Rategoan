@@ -1,4 +1,15 @@
 import { $ } from '../utils/dom.js';
+import { collectionSearch } from '../../raget-memory/collection-search.js';
+
+const FUZZY_MAX_DISTANCE = 2;
+
+function fuzzyTextMatch(haystack, query) {
+  if (haystack.includes(query)) return true;
+  const qWords = query.split(/\s+/).filter((w) => w.length >= 3);
+  if (!qWords.length || qWords.length > 3) return false;
+  const hWords = haystack.split(/\s+/).filter((w) => w.length >= 3);
+  return qWords.every((qw) => hWords.some((hw) => collectionSearch.levenshtein(qw, hw) <= FUZZY_MAX_DISTANCE));
+}
 
 export const chatsearch = {
   matches: [],
@@ -27,7 +38,7 @@ export const chatsearch = {
     q = (q || '').toLowerCase().trim();
     if (!q) return;
     Array.from($('messages').querySelectorAll('.msg')).forEach((el) => {
-      if ((el.textContent || '').toLowerCase().includes(q)) this.matches.push(el);
+      if (fuzzyTextMatch((el.textContent || '').toLowerCase(), q)) this.matches.push(el);
     });
     if (this.matches.length) {
       this.idx = 0;

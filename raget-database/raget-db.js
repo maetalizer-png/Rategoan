@@ -61,6 +61,15 @@ async function clear() {
   await writeAll([]);
 }
 
+async function removeByIds(ids) {
+  const idSet = new Set(ids || []);
+  if (!idSet.size) return 0;
+  const list = await readAll();
+  const kept = list.filter((n) => !idSet.has(n.id));
+  await writeAll(kept);
+  return list.length - kept.length;
+}
+
 export const ragetDb = Object.freeze({
   addNote,
   allNotes,
@@ -68,4 +77,5 @@ export const ragetDb = Object.freeze({
   rateLast,
   rateByAnswer,
   clear,
+  removeByIds,
 });
