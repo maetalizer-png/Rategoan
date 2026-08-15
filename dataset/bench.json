@@ -1891,5 +1891,272 @@
       "template/rule-based"
     ],
     "note": "Bagian 8: guard anti-narsis (negatif)"
+  },
+  {
+    "prompt": "hitung 12+8",
+    "expect": "math",
+    "contains": "20",
+    "note": "Bagian 2: operator dasar"
+  },
+  {
+    "prompt": "hitung 2^10",
+    "expect": "math",
+    "contains": "1024",
+    "note": "Bagian 2: operator pangkat ^"
+  },
+  {
+    "prompt": "hitung 12 × 4",
+    "expect": "math",
+    "contains": "48",
+    "note": "Bagian 2: simbol × unicode"
+  },
+  {
+    "prompt": "hitung 20 ÷ 4",
+    "expect": "math",
+    "contains": "5",
+    "note": "Bagian 2: simbol ÷ unicode"
+  },
+  {
+    "prompt": "hitung (2+3)*4",
+    "expect": "math",
+    "contains": "20",
+    "note": "Bagian 2: tanda kurung (parser recursive-descent asli)"
+  },
+  {
+    "prompt": "hitung 12,000+8000",
+    "expect": "math",
+    "contains": "20000",
+    "note": "Bagian 2: pemisah ribuan"
+  },
+  {
+    "prompt": "hitung 0.5+0.25",
+    "expect": "math",
+    "contains": "0.75",
+    "note": "Bagian 2: desimal"
+  },
+  {
+    "prompt": "hitung -5+3",
+    "expect": "math",
+    "contains": "-2",
+    "note": "Bagian 2: bilangan negatif di depan"
+  },
+  {
+    "prompt": "hitung 3*-2",
+    "expect": "math",
+    "contains": "-6",
+    "note": "Bagian 2: bilangan negatif setelah operator"
+  },
+  {
+    "prompt": "hitung 100%50",
+    "expect": "math",
+    "containsAny": ["adalah 0", "hasilnya 0", "100%50 = 0"],
+    "note": "Bagian 2: modulo"
+  },
+  {
+    "prompt": "hitung sqrt(16)",
+    "expect": "math",
+    "contains": "4",
+    "note": "Bagian 2: fungsi sqrt"
+  },
+  {
+    "prompt": "hitung abs(-9)",
+    "expect": "math",
+    "contains": "9",
+    "note": "Bagian 2: fungsi abs"
+  },
+  {
+    "prompt": "hitung round(4.6)",
+    "expect": "math",
+    "contains": "5",
+    "note": "Bagian 2: fungsi round"
+  },
+  {
+    "prompt": "25% dari 400",
+    "expect": "math",
+    "contains": "100",
+    "note": "Bagian 2: persen dari (ID)"
+  },
+  {
+    "prompt": "25% of 400",
+    "expect": "math",
+    "contains": "100",
+    "note": "Bagian 2: persen dari (EN)"
+  },
+  {
+    "prompt": "150% dari 40",
+    "expect": "math",
+    "contains": "60",
+    "note": "Bagian 2: persen di atas 100"
+  },
+  {
+    "prompt": "15% of 2000",
+    "expect": "math",
+    "contains": "300",
+    "note": "Bagian 2: persen (EN) angka besar"
+  },
+  {
+    "prompt": "hitung 2+3*4 langkah",
+    "expect": "math",
+    "containsAll": [
+      "3 * 4 = 12",
+      "2 + 12 = 14"
+    ],
+    "note": "Bagian 2: mode langkah, urutan operasi nyata"
+  },
+  {
+    "prompt": "hitung 3^2 langkah",
+    "expect": "math",
+    "containsAll": [
+      "3 ^ 2",
+      "9"
+    ],
+    "note": "Bagian 2: mode langkah untuk pangkat"
+  },
+  {
+    "prompt": "hitung (2+3)*4 cara hitungnya",
+    "expect": "math",
+    "containsAll": [
+      "2 + 3 = 5",
+      "5 * 4 = 20"
+    ],
+    "note": "Bagian 2: mode langkah dgn frasa \"cara hitungnya\""
+  },
+  {
+    "prompt": "calculate 12+8",
+    "expect": "math",
+    "contains": "20",
+    "note": "Bagian 2: bilingual EN \"calculate\""
+  },
+  {
+    "prompt": "what is 20 * 5",
+    "expect": "math",
+    "contains": "100",
+    "note": "Bagian 2: bilingual EN \"what is\""
+  },
+  {
+    "prompt": "compute 9*9",
+    "expect": "math",
+    "contains": "81",
+    "note": "Bagian 2: bilingual EN \"compute\""
+  },
+  {
+    "prompt": "12 plus 8",
+    "expect": "math",
+    "contains": "20",
+    "note": "Bagian 2: kata EN \"plus\""
+  },
+  {
+    "prompt": "20 minus 5",
+    "expect": "math",
+    "contains": "15",
+    "note": "Bagian 2: kata EN \"minus\""
+  },
+  {
+    "prompt": "6 times 7",
+    "expect": "math",
+    "contains": "42",
+    "note": "Bagian 2: kata EN \"times\""
+  },
+  {
+    "prompt": "20 divided by 4",
+    "expect": "math",
+    "contains": "5",
+    "note": "Bagian 2: kata EN \"divided by\""
+  },
+  {
+    "prompt": "hitung 9 kali 9",
+    "expect": "math",
+    "contains": "81",
+    "note": "Bagian 2: kata ID \"kali\" tetap jalan setelah refactor"
+  },
+  {
+    "prompt": "5 km ke m",
+    "expect": "math_unit",
+    "contains": "5000",
+    "note": "Bagian 2: konversi panjang km->m"
+  },
+  {
+    "prompt": "5 km to m",
+    "expect": "math_unit",
+    "contains": "5000",
+    "note": "Bagian 2: konversi panjang km->m (EN)"
+  },
+  {
+    "prompt": "1 mile to km",
+    "expect": "math_unit",
+    "contains": "1.609344",
+    "note": "Bagian 2: konversi panjang mile->km (EN, di luar cakupan konversi ID lama)"
+  },
+  {
+    "prompt": "10 kg dalam gram",
+    "expect": "math_unit",
+    "contains": "10000",
+    "note": "Bagian 2: konversi berat kg->g"
+  },
+  {
+    "prompt": "1000 g ke kg",
+    "expect": "math_unit",
+    "contains": "1 kg",
+    "note": "Bagian 2: konversi berat g->kg"
+  },
+  {
+    "prompt": "2 ton ke kg",
+    "expect": "math_unit",
+    "contains": "2000",
+    "note": "Bagian 2: konversi berat ton->kg"
+  },
+  {
+    "prompt": "100 celsius ke fahrenheit",
+    "expect": "math_unit",
+    "contains": "212",
+    "note": "Bagian 2: konversi suhu C->F"
+  },
+  {
+    "prompt": "32 f to c",
+    "expect": "math_unit",
+    "containsAll": [
+      "0",
+      "celsius"
+    ],
+    "note": "Bagian 2: konversi suhu F->C (EN)"
+  },
+  {
+    "prompt": "50 usd ke idr",
+    "expect": "math_currency",
+    "containsAll": [
+      "790000",
+      "kurs statis"
+    ],
+    "note": "Bagian 2: kurs statis USD->IDR + disclaimer jujur"
+  },
+  {
+    "prompt": "100 dollar to rupiah",
+    "expect": "math_currency",
+    "contains": "1580000",
+    "note": "Bagian 2: kurs statis (EN, alias dollar/rupiah)"
+  },
+  {
+    "prompt": "100 eur ke usd",
+    "expect": "math_currency",
+    "contains": "109",
+    "note": "Bagian 2: kurs statis EUR->USD"
+  },
+  {
+    "prompt": "5 apel dan 3 jeruk di keranjang",
+    "expect": "fallback_ok",
+    "notContains": [
+      "Ekspresi tidak valid",
+      "hasilnya 8"
+    ],
+    "note": "Bagian 2: guard - angka dalam kalimat biasa tidak dibajak parser matematika"
+  },
+  {
+    "prompt": "apa ibukota jepang",
+    "expect": "factoid",
+    "notContains": [
+      "Ekspresi tidak valid",
+      "Hasil dari"
+    ],
+    "note": "Bagian 2: guard - pertanyaan faktual tidak dibajak parser matematika"
   }
 ]

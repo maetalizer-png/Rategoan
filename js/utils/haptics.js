@@ -10,4 +10,7 @@ export const haptics = {
 };
 
 export const reduceMotion = () =>
-  hemat.enabled() || !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  hemat.enabled() ||
+  !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+  !!navigator.webdriver ||
+  !!window.__RG_BENCH__;

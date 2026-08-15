@@ -1,7 +1,7 @@
 const MODELS = Object.freeze([
   Object.freeze({
     id: 'raget-template-1',
-    name: 'Raget Template Engine 1.0',
+    name: 'Raget',
     description: 'Mesin balasan lokal berbasis pola dan konteks, tanpa API key.',
   }),
 ]);

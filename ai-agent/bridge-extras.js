@@ -2,6 +2,7 @@ import { bridgeResolve } from './bridge-resolve.js';
 import { bridgeFormat } from './bridge-format.js';
 import { bridgeReasoning } from './bridge-reasoning.js';
 import { pickVariant } from '../utils/text.js';
+import { mathEngine } from './math-engine.js';
 
 async function tryLetakGeografis(text) {
   const m =
@@ -235,8 +236,16 @@ async function extras(q) {
   const konversiSatuan = await bridgeReasoning.tryKonversiSatuan(text);
   if (konversiSatuan) return konversiSatuan;
 
+  const unitFallback = mathEngine.tryConvertUnit(text);
+  if (unitFallback) return 'Hasilnya sekitar ' + unitFallback.value + ' ' + unitFallback.unit + '.';
+
   const konversiMataUang = await bridgeReasoning.tryKonversiMataUang(text);
   if (konversiMataUang) return konversiMataUang;
+
+  const currencyFallback = mathEngine.tryConvertCurrency(text);
+  if (currencyFallback) {
+    return 'Sekitar ' + currencyFallback.value + ' ' + currencyFallback.to + ' (kurs statis, bukan kurs real-time).';
+  }
 
   const penalaranTanggal = await bridgeReasoning.tryPenalaranTanggal(text);
   if (penalaranTanggal) return penalaranTanggal;
