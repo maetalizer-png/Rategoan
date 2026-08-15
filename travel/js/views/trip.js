@@ -1,6 +1,6 @@
 import { ic } from '../icons.js';
 import { data } from '../loader.js';
-import { errorCard, low, clusterByCity, byCountry, regionOf, fmtN, daysUntil, phrasesFor, fuzzyCountry, lev } from '../utils.js';
+import { errorCard, low, clusterByCity, byCountry, regionOf, fmtN, daysUntil, phrasesFor, fuzzyCountry, lev, toast } from '../utils.js';
 import { BUDGET_BASE, TIER_MULT, PACK_TIPS } from '../constants.js';
 import { getCheck, saveCheck, getTrips, saveTrips, getStats, saveStats } from '../storage.js';
 import { climateCard } from '../features/climate.js';
@@ -9,6 +9,80 @@ import { journalCard, getNotes, bindJournal } from '../features/journal.js';
 const $ = (s) => document.querySelector(s);
 const view = $('#view');
 
+function downloadFile(content, mime, filename) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+}
+
+function buildPlanLines(ctx) {
+  const { name, days, tier, depart, w, per, f, c, perDay, notes } = ctx;
+  return [
+    'Rencana ' + days + ' hari di ' + name + ' (' + tier + ')' + (depart ? ' — berangkat ' + depart : ''),
+    ...Array.from({ length: days }, (_, i) => {
+      const items = w.slice(i * per, (i + 1) * per);
+      return 'Hari ' + (i + 1) + ': ' +
+        (items.length ? items.map((x) => x.metadata.name).join(', ') : 'jelajah ' + (c.metadata.capital || 'kota')) +
+        (f.length ? ' | kuliner ' + f[i % f.length].metadata.name : '');
+    }),
+    'Estimasi total ~Rp ' + fmtN(perDay * days),
+    ...(notes.length ? ['Catatan: ' + notes.map((n) => n.text).join('; ')] : []),
+    '- dari Jalanin',
+  ];
+}
+
+function buildPlanMarkdown(ctx) {
+  const { name, days, tier, depart, w, per, f, c, perDay, notes } = ctx;
+  const lines = ['# Rencana Perjalanan ' + name, ''];
+  lines.push('Durasi: ' + days + ' hari &middot; Tingkat: ' + tier + (depart ? ' &middot; Berangkat: ' + depart : ''), '');
+  lines.push('## Itinerari', '');
+  for (let i = 0; i < days; i++) {
+    const items = w.slice(i * per, (i + 1) * per);
+    lines.push('**Hari ' + (i + 1) + '**: ' + (items.length ? items.map((x) => x.metadata.name).join(', ') : 'jelajah ' + (c.metadata.capital || 'kota')) +
+      (f.length ? ' — kuliner: ' + f[i % f.length].metadata.name : ''));
+  }
+  lines.push('', '## Estimasi Budget', '', 'Total ~Rp ' + fmtN(perDay * days) + ' (' + tier + ')');
+  if (notes.length) {
+    lines.push('', '## Jurnal Catatan', '');
+    notes.forEach((n) => lines.push('- ' + n.text));
+  }
+  lines.push('', '_Dibuat dengan Jalanin_');
+  return lines.join('\n');
+}
+
+function openPdfPrintWindow(ctx) {
+  const { name, days, tier, depart, w, per, f, c, perDay, notes } = ctx;
+  const rows = Array.from({ length: days }, (_, i) => {
+    const items = w.slice(i * per, (i + 1) * per);
+    return '<h3>Hari ' + (i + 1) + '</h3><p>' +
+      (items.length ? items.map((x) => x.metadata.name).join(', ') : 'Jelajah ' + (c.metadata.capital || 'kota')) +
+      (f.length ? '<br>Kuliner: ' + f[i % f.length].metadata.name : '') + '</p>';
+  }).join('');
+  const notesHtml = notes.length ? '<h2>Jurnal Catatan</h2><ul>' + notes.map((n) => '<li>' + n.text + '</li>').join('') + '</ul>' : '';
+  const html =
+    '<html><head><title>Rencana ' + name + '</title><meta charset="utf-8">' +
+    '<style>body{font-family:system-ui,sans-serif;padding:24px;color:#111}h1{margin-bottom:4px}h2{margin-top:24px}h3{margin-bottom:2px}</style>' +
+    '</head><body><h1>Rencana Perjalanan ' + name + '</h1>' +
+    '<p>Durasi: ' + days + ' hari &middot; Tingkat: ' + tier + (depart ? ' &middot; Berangkat: ' + depart : '') + '</p>' +
+    '<h2>Itinerari</h2>' + rows +
+    '<h2>Estimasi Budget</h2><p>Total ~Rp ' + fmtN(perDay * days) + '</p>' +
+    notesHtml +
+    '<p style="margin-top:32px;color:#888">Dibuat dengan Jalanin</p>' +
+    '</body></html>';
+  const win = window.open('', '_blank');
+  if (!win) { toast('Popup diblokir, izinkan popup untuk membuat PDF.'); return; }
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  win.print();
+}
+
 export async function openTrip() {
   const d = await data();
   if (!d) return errorCard();
@@ -16,7 +90,8 @@ export async function openTrip() {
   view.innerHTML =
     '<div class="card"><h3>' + ic('cal') + ' Rencana Perjalanan</h3>' +
     '<div class="search" style="margin-top:8px">' + ic('search') + '<input id="tq" placeholder="Negara tujuan..."></div>' +
-    '<input id="td" type="date" class="q-opt" style="margin:8px 0 0">' +
+    '<label class="field-label" for="td">Tanggal berangkat (opsional)</label>' +
+    '<input id="td" type="date" class="q-opt" style="margin:0">' +
     '<div class="rowbtn" style="margin-top:8px">' +
       [2, 3, 4].map((x) => '<button class="btn days' + (x === 3 ? ' on' : '') + '" data-d="' + x + '">' + x + ' hari</button>').join('') +
     '</div>' +
@@ -77,10 +152,19 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
   const perDay = Math.round(BUDGET_BASE[reg] * TIER_MULT[tier]);
   const hn = daysUntil(depart);
 
-  let html = '<div class="sec">' + ic('map') + ' Itinerari ' + name +
+  let html =
+    '<div class="card"><div class="trip-ready-head">' + ic('check') + ' Rencana siap' +
     (hn != null && hn >= 0 ? ' &middot; <span class="hn">H-' + hn + '</span>' : '') + '</div>' +
-    '<div class="rowbtn"><button class="btn" id="tshare">' + ic('share') + ' Bagikan</button>' +
-    (tripKey ? '' : '<button class="btn btn-primary" id="tsave">' + ic('check') + ' Simpan rencana</button>') + '</div>';
+    '<div class="trip-actions-sticky">' +
+    (tripKey ? '' : '<button class="btn btn-primary" id="tsave">' + ic('check') + ' Simpan</button>') +
+    '<button class="btn" id="tshare">' + ic('share') + ' Bagikan</button>' +
+    '<button class="btn" id="tpdf">' + ic('map') + ' Buat PDF</button>' +
+    '</div>' +
+    '<div class="rowbtn"><button class="btn" id="tmd">' + ic('check') + ' Ekspor MD</button>' +
+    '<button class="btn" id="twa">' + ic('share') + ' WhatsApp</button></div>' +
+    '<div id="tripSavedSlot"></div>' +
+    '</div>' +
+    '<div class="sec">' + ic('map') + ' Itinerari ' + name + '</div>';
   for (let dd = 0; dd < days; dd++) {
     const items = w.slice(dd * per, (dd + 1) * per);
     const city = items.length ? (items[0].metadata.city || '') : '';
@@ -120,6 +204,7 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
     climateCard(reg) + (tripKey ? journalCard(tripKey, name) : '');
   $('#tripOut').innerHTML = html;
   $('#tripOut').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!tripKey) toast('Rencana siap! Simpan, bagikan, atau buat PDF.');
 
   view.querySelectorAll('[data-p]').forEach((b) => b.onclick = () => {
     const t = tips[+b.dataset.p];
@@ -131,22 +216,22 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
       b.innerHTML = ic('check') + ' ' + t;
     }
   });
+
+  const planCtx = () => ({ name, days, tier, depart, w, per, f, c, perDay, notes: tripKey ? getNotes(tripKey) : [] });
+
   $('#tshare').onclick = (ev) => {
-    const notes = tripKey ? getNotes(tripKey) : [];
-    const lines = [
-      'Rencana ' + days + ' hari di ' + name + ' (' + tier + ')' + (depart ? ' — berangkat ' + depart : ''),
-      ...Array.from({ length: days }, (_, i) => {
-        const items = w.slice(i * per, (i + 1) * per);
-        return 'Hari ' + (i + 1) + ': ' +
-          (items.length ? items.map((x) => x.metadata.name).join(', ') : 'jelajah ' + (c.metadata.capital || 'kota')) +
-          (f.length ? ' | kuliner ' + f[i % f.length].metadata.name : '');
-      }),
-      'Estimasi total ~Rp ' + fmtN(perDay * days),
-      ...(notes.length ? ['Catatan: ' + notes.map((n) => n.text).join('; ')] : []),
-      '- dari Jalanin',
-    ].join('\n');
-    if (navigator.share) navigator.share({ text: lines }).catch(() => {});
-    else if (navigator.clipboard) navigator.clipboard.writeText(lines).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; });
+    const lines = buildPlanLines(planCtx());
+    if (navigator.share) navigator.share({ text: lines.join('\n') }).catch(() => {});
+    else if (navigator.clipboard) navigator.clipboard.writeText(lines.join('\n')).then(() => { ev.currentTarget.innerHTML = ic('share') + ' Tersalin'; toast('Rencana disalin'); });
+  };
+  $('#tpdf').onclick = () => openPdfPrintWindow(planCtx());
+  $('#tmd').onclick = () => {
+    downloadFile(buildPlanMarkdown(planCtx()), 'text/markdown', 'rencana-' + name.toLowerCase().replace(/\s+/g, '-') + '.md');
+    toast('Rencana diekspor sebagai Markdown');
+  };
+  $('#twa').onclick = () => {
+    const text = buildPlanLines(planCtx()).join('\n');
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
   };
   $('#tbudget').onclick = (ev) => {
     const lines = [
@@ -163,12 +248,34 @@ function renderTrip(c, days, tier, depart, foods, wisata, langs, countries, trip
   } else {
     $('#tsave').onclick = (ev) => {
       const l = getTrips();
-      l.push({ country: name, days, tier, depart, time: Date.now() });
+      const saved = { country: name, days, tier, depart, time: Date.now() };
+      l.push(saved);
       saveTrips(l);
       const st = getStats();
       st.trips++;
       saveStats(st);
       ev.currentTarget.innerHTML = ic('check') + ' Tersimpan';
+      toast('Rencana tersimpan');
+
+      const hnSaved = daysUntil(saved.depart);
+      const slot = $('#tripSavedSlot');
+      if (slot) {
+        slot.innerHTML =
+          '<div class="sec">' + ic('cal') + ' Rencana tersimpan</div>' +
+          '<div class="rowbtn" style="justify-content:space-between;margin:6px 0">' +
+          '<b>' + saved.country + ' &middot; ' + saved.days + ' hari &middot; ' + saved.tier +
+          (hnSaved != null && hnSaved >= 0 ? ' &middot; H-' + hnSaved : '') + '</b>' +
+          '<span style="display:flex;gap:6px">' +
+          '<button class="btn" id="tSavedOpen">Buka</button>' +
+          '<button class="btn" id="tSavedDel">Hapus</button></span></div>';
+        $('#tSavedOpen').onclick = () => renderTrip(c, days, tier, depart, foods, wisata, langs, countries, 'trip_' + saved.time);
+        $('#tSavedDel').onclick = () => {
+          const list = getTrips();
+          const idx = list.findIndex((t) => t.time === saved.time);
+          if (idx >= 0) { list.splice(idx, 1); saveTrips(list); }
+          slot.innerHTML = '';
+        };
+      }
     };
   }
 }
