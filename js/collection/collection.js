@@ -10,7 +10,14 @@ import { drawer } from '../ui/drawer.js';
 
 const COMMON_TAGS = ['faktoid', 'hitung', 'pengingat', 'obrolan', 'ingatan', 'umum', 'artefak'];
 
+const TAB_DESC = {
+  tersimpan: 'Pesan dan balasan AI yang kamu simpan sendiri dari chat, lengkap dengan tag dan catatan pribadi.',
+  perpus: 'Semua yang Raget ingat otomatis: catatan, fakta yang diajarkan, dan file yang kamu impor.',
+  artefak: 'Hasil kerja yang layak disimpan: draf email, kartu negara, rencana perjalanan, dan ekspor.',
+};
+
 let state = { tab: 'tersimpan', filter: null, query: '' };
+let renderGen = 0;
 
 function escapeHtml(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -21,17 +28,24 @@ function fmtDate(t) {
 }
 
 async function renderTersimpan() {
+  const myGen = ++renderGen;
   const content = $('coll-content');
   const allActive = await collectionStore.allItems();
+  if (myGen !== renderGen) return;
   const chatItems = allActive.filter((it) => it.kind === 'chat');
 
   const stats = await collectionStore.stats();
+  if (myGen !== renderGen) return;
+  const withArchivedForCount = await collectionStore.allItems({ includeArchived: true });
+  if (myGen !== renderGen) return;
+  const archivedCount = withArchivedForCount.filter((it) => it.archived && it.kind === 'chat').length;
   const filterChips = [
     { key: null, label: 'Semua', count: chatItems.length },
     { key: 'pinned', label: ic('pin') + ' Pin', count: chatItems.filter((it) => it.pinned).length },
     ...stats.topTags.filter((t) => t.tag !== 'artefak').map((t) => ({ key: t.tag, label: t.tag, count: t.count })),
-    { key: 'archived', label: ic('archive') + ' Arsip', count: (await collectionStore.allItems({ includeArchived: true })).filter((it) => it.archived && it.kind === 'chat').length },
+    { key: 'archived', label: ic('archive') + ' Arsip', count: archivedCount },
   ];
+  $('coll-tab-desc').textContent = TAB_DESC.tersimpan;
   $('coll-filters').innerHTML = filterChips
     .map((f) => '<button type="button" class="coll-filter-chip' + (state.filter === f.key ? ' on' : '') + '" data-filter="' + escapeHtml(String(f.key)) + '">' + f.label + ' (' + f.count + ')</button>')
     .join('');
@@ -45,10 +59,8 @@ async function renderTersimpan() {
 
   let list = chatItems;
   if (state.filter === 'pinned') list = list.filter((it) => it.pinned);
-  else if (state.filter === 'archived') {
-    const withArchived = await collectionStore.allItems({ includeArchived: true });
-    list = withArchived.filter((it) => it.archived && it.kind === 'chat');
-  } else if (state.filter) list = list.filter((it) => it.tag === state.filter);
+  else if (state.filter === 'archived') list = withArchivedForCount.filter((it) => it.archived && it.kind === 'chat');
+  else if (state.filter) list = list.filter((it) => it.tag === state.filter);
 
   let matchInfo = new Map();
   if (state.query.trim()) {
@@ -59,12 +71,19 @@ async function renderTersimpan() {
 
   list.sort((a, b) => (b.pinned - a.pinned) || (b.time - a.time));
 
+  const statsRow =
+    '<div class="coll-stats-row"><span>Total <b>' + chatItems.length + '</b></span>' +
+    (stats.topTags.length ? '<span>Top tag: <b>' + stats.topTags.slice(0, 3).map((t) => t.tag).join(', ') + '</b></span>' : '') +
+    '<span>Pin <b>' + chatItems.filter((it) => it.pinned).length + '</b></span></div>';
+
+  if (myGen !== renderGen) return;
   if (!list.length) {
-    content.innerHTML = '<div class="coll-empty">Belum ada yang tersimpan. Tap "Simpan" pada balasan AI di chat untuk mulai mengumpulkan.</div>';
+    content.innerHTML = (chatItems.length ? statsRow : '') + '<div class="coll-empty">Belum ada yang tersimpan. Tap "Simpan" pada balasan AI di chat untuk mulai mengumpulkan.</div>';
     return;
   }
 
   content.innerHTML =
+    statsRow +
     (state.filter === 'archived' ? '<div class="coll-archive-note">Item di sini otomatis diarsipkan setelah 30 hari tanpa dipin. Bisa dipulihkan kapan saja.</div>' : '') +
     list.map((it) => itemCardHtml(it, matchInfo.get(it.id))).join('');
 
@@ -145,8 +164,27 @@ function bindItemCards(list, rerender) {
   });
 }
 
+function libGroupHtml(title, items, emptyText) {
+  if (!items.length) {
+    return '<div class="coll-lib-group"><div class="coll-lib-group-head">' + title + '</div>' +
+      '<div class="coll-empty-cta">' + emptyText + '</div></div>';
+  }
+  return '<div class="coll-lib-group"><div class="coll-lib-group-head">' + title +
+    ' <span class="coll-lib-group-count">(' + items.length + ')</span></div>' +
+    items.map((x) => (
+      '<div class="coll-item" data-lib-id="' + x.id + '" data-lib-kind="' + x.kind + '">' +
+      '<div class="coll-item-head"><span class="coll-item-tag">' + x.kind + '</span>' +
+      (x.time ? '<span class="coll-item-time">' + fmtDate(x.time) + '</span>' : '') + '</div>' +
+      '<div class="coll-item-text">' + collectionSearch.highlightText(x.text, x._matched) + '</div>' +
+      '<div class="coll-item-actions"><button type="button" class="danger" data-lib-del="' + x.id + '" data-lib-del-kind="' + x.kind + '" data-lib-del-store="' + (x.store || '') + '">' + ic('trash') + ' Hapus</button></div>' +
+      '</div>'
+    )).join('') + '</div>';
+}
+
 async function renderPerpustakaan() {
+  const myGen = ++renderGen;
   const content = $('coll-content');
+  $('coll-tab-desc').textContent = TAB_DESC.perpus;
   const notes = memoryLong.allNotes().map((n, i) => ({ id: 'note-' + i, kind: 'note', text: n.text, time: n.time }));
   const learned = memoryLong.allLearned().map((f, i) => ({ id: 'learned-' + i, kind: 'learned', text: f.subject + ': ' + f.value, time: f.time, subject: f.subject }));
 
@@ -165,31 +203,38 @@ async function renderPerpustakaan() {
       ...whatsapp.map((it) => ({ id: it.id, kind: 'whatsapp', store: 'whatsapp', text: (it.text || '').slice(0, 140), time: it.addedAt || 0 })),
     ];
   } catch (e) {}
+  if (myGen !== renderGen) return;
 
-  let all = [...notes, ...learned, ...vaultItems];
+  const memoryImport = await import('../../raget-memory/memory-index.js');
+  const knowStats = await memoryImport.memoryIndex.stats();
+  if (myGen !== renderGen) return;
+
   $('coll-filters').innerHTML = '';
 
-  if (state.query.trim()) {
-    const results = collectionSearch.fuzzySearch(all.map((x) => ({ ...x, note: '', tag: '', chatTitle: '' })), state.query, 100);
+  const applyQuery = (items) => {
+    if (!state.query.trim()) return items;
+    const results = collectionSearch.fuzzySearch(items.map((x) => ({ ...x, note: '', tag: '', chatTitle: '' })), state.query, 100);
     const matchedIds = new Map(results.map((r) => [r.item.id, r.matched]));
-    all = all.filter((x) => matchedIds.has(x.id));
-    all.forEach((x) => { x._matched = matchedIds.get(x.id); });
-  }
-  all.sort((a, b) => b.time - a.time);
+    return items.filter((x) => matchedIds.has(x.id)).map((x) => ({ ...x, _matched: matchedIds.get(x.id) }));
+  };
 
-  if (!all.length) {
-    content.innerHTML = '<div class="coll-empty">Perpustakaan kosong. Catatan, hal yang dipelajari Raget, dan file yang diimpor (PDF/Notion/Evernote/WhatsApp) akan muncul di sini.</div>';
-    return;
-  }
+  const notesQ = applyQuery(notes).sort((a, b) => b.time - a.time);
+  const learnedQ = applyQuery(learned).sort((a, b) => b.time - a.time);
+  const vaultQ = applyQuery(vaultItems).sort((a, b) => b.time - a.time);
 
-  content.innerHTML = all.map((x) => (
-    '<div class="coll-item" data-lib-id="' + x.id + '" data-lib-kind="' + x.kind + '">' +
-    '<div class="coll-item-head"><span class="coll-item-tag">' + x.kind + '</span>' +
-    (x.time ? '<span class="coll-item-time">' + fmtDate(x.time) + '</span>' : '') + '</div>' +
-    '<div class="coll-item-text">' + collectionSearch.highlightText(x.text, x._matched) + '</div>' +
-    '<div class="coll-item-actions"><button type="button" class="danger" data-lib-del="' + x.id + '" data-lib-del-kind="' + x.kind + '" data-lib-del-store="' + (x.store || '') + '">' + ic('trash') + ' Hapus</button></div>' +
-    '</div>'
-  )).join('');
+  const q = state.query.trim().toLowerCase();
+  const knowledgeMatches = !q || 'pengetahuan faq umum'.includes(q);
+
+  content.innerHTML =
+    libGroupHtml('Catatan', notesQ, 'Belum ada catatan. Minta Raget mengingat sesuatu, mis. "ingat ya, aku suka kopi".') +
+    libGroupHtml('Fakta diajarkan', learnedQ, 'Belum ada fakta yang diajarkan. Ajari Raget lewat chat, mis. "ulang tahunku itu 5 Mei".') +
+    libGroupHtml('Chunk impor (PDF/Notion/Evernote/WhatsApp)', vaultQ, 'Belum ada file diimpor. Kirim PDF di chat, ketik: baca pdf ini.') +
+    '<div class="coll-lib-group"><div class="coll-lib-group-head">Pengetahuan (umum &amp; FAQ)</div>' +
+    (knowledgeMatches
+      ? '<div class="coll-stats-row"><span>Topik umum <b>' + knowStats.umumCount + '</b></span><span>FAQ <b>' + knowStats.faqCount + '</b></span></div>' +
+        '<p class="coll-tab-desc" style="margin-top:0">Bawaan aplikasi, selalu tersedia untuk dijawab Raget — tidak bisa dihapus dari sini.</p>'
+      : '<div class="coll-empty-cta">Tidak cocok dengan pencarian.</div>') +
+    '</div>';
 
   content.querySelectorAll('[data-lib-del]').forEach((b) => b.onclick = async () => {
     const kind = b.dataset.libDelKind;
@@ -223,9 +268,21 @@ function readTravelJson(key) {
   }
 }
 
+function goToChatWithPrompt(text) {
+  router.go('chat');
+  const inp = document.getElementById('chat-input');
+  if (inp) {
+    inp.value = text;
+    inp.focus();
+  }
+}
+
 async function renderArtefak() {
+  const myGen = ++renderGen;
   const content = $('coll-content');
+  $('coll-tab-desc').textContent = TAB_DESC.artefak;
   const artifacts = (await collectionStore.allItems()).filter((it) => it.kind === 'artifact');
+  if (myGen !== renderGen) return;
   const trips = readTravelJson('travel_trips').map((t, i) => ({ id: 'trip-' + i, kind: 'itinerary', text: 'Rencana ' + t.country + ' — ' + t.days + ' hari (' + t.tier + ')', time: t.time }));
   const favs = readTravelJson('travel_fav').map((f, i) => ({ id: 'fav-' + i, kind: 'favorit', text: 'Favorit: ' + (f.name || f), time: f.time || 0 }));
 
@@ -243,8 +300,21 @@ async function renderArtefak() {
   }
   all.sort((a, b) => b.time - a.time);
 
+  if (myGen !== renderGen) return;
   if (!all.length) {
-    content.innerHTML = '<div class="coll-empty">Belum ada artefak. Draft email, kartu negara, ekspor catatan, dan rencana/favorit Jalanin akan otomatis muncul di sini.</div>';
+    content.innerHTML =
+      '<div class="coll-empty-cta">Belum ada artefak. Draf email, kartu negara, ekspor catatan, dan rencana/favorit Jalanin akan otomatis muncul di sini.' +
+      '<div class="coll-empty-actions">' +
+      '<button type="button" id="artCtaEmail">' + ic('mail') + ' Buat email</button>' +
+      '<button type="button" id="artCtaTrip">' + ic('cal') + ' Buat rencana</button>' +
+      '<button type="button" id="artCtaExport">' + ic('download') + ' Ekspor chat</button>' +
+      '</div></div>';
+    const ctaEmail = document.getElementById('artCtaEmail');
+    const ctaTrip = document.getElementById('artCtaTrip');
+    const ctaExport = document.getElementById('artCtaExport');
+    if (ctaEmail) ctaEmail.onclick = () => goToChatWithPrompt('buatkan email tentang ');
+    if (ctaTrip) ctaTrip.onclick = () => { location.href = 'travel/'; };
+    if (ctaExport) ctaExport.onclick = () => goToChatWithPrompt('ekspor catatan');
     return;
   }
 

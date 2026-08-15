@@ -110,8 +110,14 @@ async function findFactoid(query) {
   return bestRatio >= 0.6 ? { answer: best.answer, source: 'factoid' } : null;
 }
 
+async function stats() {
+  const knowledge = await loadKnowledge();
+  return { umumCount: knowledge.umum.length, faqCount: knowledge.faq.length };
+}
+
 export const memoryIndex = Object.freeze({
   search,
   findTopic,
   findFactoid,
+  stats,
 });
