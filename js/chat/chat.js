@@ -80,7 +80,7 @@ function detectQuickChips(text) {
   const capitalMatch = text.match(/[Ii]bukota\s+([A-Z][a-zA-Z\s]+?)\s+adalah/);
   if (capitalMatch) {
     const negara = capitalMatch[1].trim();
-    return ['Kuis', 'Wisata ' + negara];
+    return ['Wisata ' + negara];
   }
   if (/^#{1,3}\s|\n- |\n\d+\.\s/.test(text)) {
     return ['Ringkas hari saya'];
@@ -265,7 +265,7 @@ export const chat = {
         if (URL_RE.test(m.text)) {
           actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0]), 'globe'));
         }
-        detectQuickChips(m.text).slice(0, 2).forEach((label) => {
+        detectQuickChips(m.text).slice(0, 1).forEach((label) => {
           actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
         });
         d.appendChild(actions);
@@ -306,7 +306,7 @@ export const chat = {
     if (URL_RE.test(text)) {
       actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0]), 'globe'));
     }
-    detectQuickChips(text).slice(0, 2).forEach((label) => {
+    detectQuickChips(text).slice(0, 1).forEach((label) => {
       actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
     });
     d.appendChild(actions);

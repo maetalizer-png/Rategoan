@@ -2735,5 +2735,380 @@
     "expect": "kg_about",
     "contains": "Pakistan",
     "note": "Bagian 4: komposer adaptif"
+  },
+  {
+    "prompt": "apa ibukta indonesia",
+    "expect": "factoid",
+    "contains": "Jakarta",
+    "note": "Bagian 5: toleransi typo - ibukta->ibukota"
+  },
+  {
+    "prompt": "berapa populsi jepang",
+    "expect": "factoid",
+    "contains": "125",
+    "note": "Bagian 5: toleransi typo - populsi->populasi"
+  },
+  {
+    "prompt": "apa bahsa yang dipakai di jepang",
+    "expect": "dataries_extras",
+    "contains": "Bahasa Jepang",
+    "note": "Bagian 5: toleransi typo - bahsa->bahasa"
+  },
+  {
+    "prompt": "apa matauamg jepang",
+    "expect": "factoid",
+    "contains": "Yen",
+    "note": "Bagian 5: toleransi typo - matauamg->mata uang (butuh perbaikan dua tahap: koreksi kata + gabung jadi frasa)"
+  },
+  {
+    "prompt": "apa pemerentahan jepang",
+    "expect": "factoid",
+    "contains": "Monarki",
+    "note": "Bagian 5: toleransi typo - pemerentahan->pemerintahan"
+  },
+  {
+    "prompt": "apa ibukta thailand",
+    "expect": "factoid",
+    "contains": "Bangkok",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "berapa populsi brasil",
+    "expect": "factoid",
+    "contains": "215",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa bahsa perancis",
+    "expect": "dataries_extras",
+    "contains": "Prancis",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa luaz indonesia",
+    "expect": "factoid",
+    "contains": "1.9 juta",
+    "note": "Bagian 5: toleransi typo - luaz->luas"
+  },
+  {
+    "prompt": "kapan indonesia merdaka",
+    "expect": "factoid",
+    "contains": "1945",
+    "note": "Bagian 5: toleransi typo - merdaka->merdeka"
+  },
+  {
+    "prompt": "apa provinci di indonesia",
+    "expect": "factoid",
+    "contains": "38 provinsi",
+    "note": "Bagian 5: toleransi typo - provinci->provinsi"
+  },
+  {
+    "prompt": "apa ibukta mesir",
+    "expect": "factoid",
+    "contains": "Kairo",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa ibukta kanada",
+    "expect": "factoid",
+    "contains": "Ottawa",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "berapa populsi meksiko",
+    "expect": "factoid",
+    "contains": "130",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "berapa populsi vietnam",
+    "expect": "factoid",
+    "contains": "98",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa bahsa jerman",
+    "expect": "dataries_extras",
+    "contains": "Jerman",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa bahsa spanyol",
+    "expect": "dataries_extras",
+    "contains": "Spanyol",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa luaz jepang",
+    "expect": "factoid",
+    "contains": "378",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa luaz brasil",
+    "expect": "factoid",
+    "contains": "8.5",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "apa matauamg mesir",
+    "expect": "factoid",
+    "contains": "Pound",
+    "note": "Bagian 5: toleransi typo"
+  },
+  {
+    "prompt": "manfaat tidur cukup",
+    "expect": "manfaat_bullet",
+    "containsAll": [
+      "Manfaat",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar (bullet)"
+  },
+  {
+    "prompt": "manfaat membaca buku",
+    "expect": "manfaat_bullet",
+    "containsAll": [
+      "Manfaat",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar"
+  },
+  {
+    "prompt": "manfaat minum air putih",
+    "expect": "manfaat_bullet",
+    "containsAll": [
+      "Manfaat",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar"
+  },
+  {
+    "prompt": "manfaat tidur berkualitas",
+    "expect": "manfaat_bullet",
+    "containsAll": [
+      "Manfaat",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar"
+  },
+  {
+    "prompt": "manfaat olahraga",
+    "expect": "manfaat_bullet",
+    "containsAll": [
+      "Manfaat",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar"
+  },
+  {
+    "prompt": "cara membuat nasi goreng",
+    "expect": "cara_numbered",
+    "containsAll": [
+      "Langkah",
+      "1."
+    ],
+    "note": "Bagian 5: gaya adaptif - langkah bernomor"
+  },
+  {
+    "prompt": "cara belajar bahasa asing",
+    "expect": "cara_numbered",
+    "containsAll": [
+      "Langkah",
+      "1."
+    ],
+    "note": "Bagian 5: gaya adaptif - langkah bernomor"
+  },
+  {
+    "prompt": "cara mengatur waktu",
+    "expect": "cara_numbered",
+    "containsAll": [
+      "Langkah",
+      "1."
+    ],
+    "note": "Bagian 5: gaya adaptif - langkah bernomor"
+  },
+  {
+    "prompt": "cara menanam bunga",
+    "expect": "cara_numbered",
+    "containsAll": [
+      "Langkah",
+      "1."
+    ],
+    "note": "Bagian 5: gaya adaptif - langkah bernomor"
+  },
+  {
+    "prompt": "cara membuat kopi",
+    "expect": "cara_numbered",
+    "containsAll": [
+      "Langkah",
+      "1."
+    ],
+    "note": "Bagian 5: gaya adaptif - langkah bernomor"
+  },
+  {
+    "prompt": "fungsi ginjal manusia",
+    "expect": "fungsi_bullet",
+    "containsAll": [
+      "Fungsi",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar fungsi"
+  },
+  {
+    "prompt": "fungsi jantung manusia",
+    "expect": "fungsi_bullet",
+    "containsAll": [
+      "Fungsi",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar fungsi"
+  },
+  {
+    "prompt": "fungsi paru-paru manusia",
+    "expect": "fungsi_bullet",
+    "containsAll": [
+      "Fungsi",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar fungsi"
+  },
+  {
+    "prompt": "fungsi hati manusia",
+    "expect": "fungsi_bullet",
+    "containsAll": [
+      "Fungsi",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar fungsi"
+  },
+  {
+    "prompt": "tujuan pendidikan",
+    "expect": "tujuan_bullet",
+    "containsAll": [
+      "Tujuan",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar tujuan"
+  },
+  {
+    "prompt": "tujuan menabung",
+    "expect": "tujuan_bullet",
+    "containsAll": [
+      "Tujuan",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar tujuan"
+  },
+  {
+    "prompt": "tujuan investasi",
+    "expect": "tujuan_bullet",
+    "containsAll": [
+      "Tujuan",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar tujuan"
+  },
+  {
+    "prompt": "tujuan olahraga",
+    "expect": "tujuan_bullet",
+    "containsAll": [
+      "Tujuan",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar tujuan"
+  },
+  {
+    "prompt": "penyebab kemacetan",
+    "expect": "penyebab_bullet",
+    "containsAll": [
+      "Penyebab",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar penyebab"
+  },
+  {
+    "prompt": "penyebab stres",
+    "expect": "penyebab_bullet",
+    "containsAll": [
+      "Penyebab",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar penyebab"
+  },
+  {
+    "prompt": "penyebab pemanasan global",
+    "expect": "penyebab_bullet",
+    "containsAll": [
+      "Penyebab",
+      "•"
+    ],
+    "note": "Bagian 5: gaya adaptif - daftar penyebab"
+  },
+  {
+    "prompt": "jepang vs korea selatan",
+    "expect": "vs_bandingkan",
+    "containsAll": [
+      "Intinya"
+    ],
+    "note": "Bagian 5: gaya adaptif - perbandingan dua entitas"
+  },
+  {
+    "prompt": "teh vs kopi",
+    "expect": "vs_bandingkan",
+    "containsAll": [
+      "Intinya"
+    ],
+    "note": "Bagian 5: gaya adaptif - perbandingan, konten relevan di kedua sisi"
+  },
+  {
+    "prompt": "indonesia vs malaysia",
+    "expect": "vs_bandingkan",
+    "containsAll": [
+      "Intinya"
+    ],
+    "note": "Bagian 5: gaya adaptif - perbandingan"
+  },
+  {
+    "prompt": "kelebihan dan kekurangan kerja freelance",
+    "expect": "kelebihan_kekurangan",
+    "containsAll": [
+      "Kelebihan",
+      "Kekurangan"
+    ],
+    "note": "Bagian 5: gaya adaptif - kelebihan/kekurangan"
+  },
+  {
+    "prompt": "apa mata uang thailand",
+    "expect": "factoid",
+    "contains": "Baht",
+    "note": "Bagian 5: gaya adaptif - faktual singkat"
+  },
+  {
+    "prompt": "apa ibukota vietnam",
+    "expect": "factoid",
+    "contains": "Hanoi",
+    "note": "Bagian 5: gaya adaptif - faktual singkat"
+  },
+  {
+    "prompt": "berapa luas mesir",
+    "expect": "factoid",
+    "contains": "1 juta",
+    "note": "Bagian 5: gaya adaptif - faktual singkat"
+  },
+  {
+    "prompt": "jelaskan apa itu fotosintesis",
+    "expect": "jelaskan",
+    "contains": "Fotosintesis",
+    "note": "Bagian 5: gaya adaptif - definisi ringkas"
+  },
+  {
+    "prompt": "jelaskan tentang blockchain",
+    "expect": "jelaskan",
+    "containsAll": [
+      "Blockchain",
+      "Poin penting"
+    ],
+    "note": "Bagian 5: gaya adaptif - naratif kaya terstruktur"
   }
 ]
