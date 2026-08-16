@@ -1,7 +1,7 @@
 import { $ } from '../utils/dom.js';
 import { auth } from '../state/auth.js';
 import { toast } from '../core/toast.js';
-import { streakStore } from '../../raget-memory/streak-store.js';
+import { streakStore } from '../../raget/raget-memory/streak-store.js';
 import { ic } from '../utils/icons.js';
 
 const STEPS = [

@@ -1,4 +1,4 @@
-import { detectTone, detectMood } from '../utils/text.js';
+import { detectTone, detectMood } from '../../utils/text.js';
 import { toolsMath } from './tools-math.js';
 import { toolsReminder } from './tools-reminder.js';
 

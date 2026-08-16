@@ -11,9 +11,9 @@ import { ai } from '../ai/ai.js';
 import { tts } from '../state/tts.js';
 import { ic } from '../utils/icons.js';
 import { router } from '../core/router.js';
-import { ragetDb } from '../../raget-database/raget-db.js';
-import { collectionStore } from '../../raget-memory/collection-store.js';
-import { feedbackStore } from '../../raget-memory/feedback-store.js';
+import { ragetDb } from '../../raget/raget-database/raget-db.js';
+import { collectionStore } from '../../raget/raget-memory/collection-store.js';
+import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 

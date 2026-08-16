@@ -1,5 +1,5 @@
-import { icsParser } from '../vault/calendar/ics-parser.js';
-import { calendarStore } from '../vault/calendar/calendar-store.js';
+import { icsParser } from '../../vault/calendar/ics-parser.js';
+import { calendarStore } from '../../vault/calendar/calendar-store.js';
 import { datariesBridge } from './dataries-bridge.js';
 
 function formatEventTime(timestamp) {

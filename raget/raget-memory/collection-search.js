@@ -1,4 +1,4 @@
-import { scorer } from '../ai-agent/scorer.js';
+import { scorer } from '../raget-agents/scorer.js';
 
 function levenshtein(a, b) {
   const m = a.length, n = b.length;

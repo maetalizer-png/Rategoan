@@ -1,5 +1,5 @@
-import { llmEngine } from '../../rategoan-llm/llm-engine.js';
-import { llmModels } from '../../rategoan-llm/llm-models.js';
+import { llmEngine } from '../../raget/raget-llm/llm-engine.js';
+import { llmModels } from '../../raget/raget-llm/llm-models.js';
 import { $ } from '../utils/dom.js';
 
 function setStatus(text) {

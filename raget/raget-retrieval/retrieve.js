@@ -1,5 +1,5 @@
-import { scorer } from '../ai-agent/scorer.js';
-import { normalizeSlang } from '../utils/text.js';
+import { scorer } from '../raget-agents/scorer.js';
+import { normalizeSlang } from '../../utils/text.js';
 
 const AUGMENT_THRESHOLD = 0.35;
 const LIST_THRESHOLD = 0.25;

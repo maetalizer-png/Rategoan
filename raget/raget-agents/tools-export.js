@@ -1,6 +1,6 @@
 import { agentTools } from './agent-tools.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
-import { emailComposer } from '../vault/email/composer.js';
+import { emailComposer } from '../../vault/email/composer.js';
 
 const EXPORT_KINDS = new Set(['ekspor', 'laporan_otak', 'share_wa', 'export_chat', 'bagikan_kartu', 'export_catatan', 'email']);
 

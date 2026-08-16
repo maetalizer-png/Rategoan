@@ -55,20 +55,22 @@ Satu repo ini berisi dua produk yang saling terhubung:
 ## Arsitektur
 
 ```
-index.html, css/, js/       kerangka aplikasi (UI, state, riwayat, akun)
-js/ai/                       satu-satunya pintu integrasi ke otak AI
-ai-agent/                    router intent + orkestrasi tool + mesin khusus
-rategoan-llm/                mesin balasan berbasis template
-raget-memory/                memori jangka pendek (konteks) & jangka panjang (fakta)
-raget-database/              riwayat catatan Q&A lokal (untuk feedback loop)
-raget-retrieval/             pencarian TF-IDF satu pintu lintas sumber
-raget-devlog/                riwayat pengembangan proyek (dipakai balasan chat)
-dataset/                     persona, few-shot, bench, basis pengetahuan umum
-dataries/                    basis data terstruktur (negara, kota, bahasa, tokoh, dst)
-vault/                       fitur opt-in: pengingat, kalender, ekspor, importer
-travel/                      Jalanin — PWA turunan berdiri sendiri
-tools/                       skrip verifikasi: bench runner, pengukuran KV, devlog
-docs/                        panduan kustomisasi & lisensi (starter kit)
+index.html, css/, js/            kerangka aplikasi (UI, state, riwayat, akun)
+js/ai/                            satu-satunya pintu integrasi ke otak AI
+utils/                            util murni bersama (dipakai lintas raget/)
+raget/                            induk seluruh otak AI Raget
+  raget-agents/                   router intent + orkestrasi tool + mesin khusus
+  raget-llm/                      mesin balasan berbasis template
+  raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
+  raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
+  raget-retrieval/                pencarian TF-IDF satu pintu lintas sumber
+  raget-devlog/                   riwayat pengembangan proyek (dipakai balasan chat)
+  raget-dataset/                  persona, few-shot, bench, basis pengetahuan umum
+  raget-dataries/                 basis data terstruktur (negara, kota, bahasa, tokoh, dst)
+  raget-tools/                    skrip verifikasi: bench runner, pengukuran KV, devlog
+vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
+travel/                           Jalanin — PWA turunan berdiri sendiri
+docs/                             panduan kustomisasi & lisensi (starter kit)
 ```
 
 ### Alur satu pesan
@@ -76,13 +78,13 @@ docs/                        panduan kustomisasi & lisensi (starter kit)
 ```
 Pesan pengguna
   → raget-memory (konteks percakapan + fakta jangka panjang)
-  → ai-agent (router intent → deret mesin khusus, lihat di bawah)
-  → rategoan-llm (fallback: pencocokan pola template)
+  → raget-agents (router intent → deret mesin khusus, lihat di bawah)
+  → raget-llm (fallback: pencocokan pola template)
   → post-processing (rapikan teks, jawaban jujur bila kosong)
   → tampil sebagai balasan + tersimpan ke raget-database
 ```
 
-`ai-agent/agent.js` mengorkestrasi kurang lebih selusin mesin khusus,
+`raget/raget-agents/agent.js` mengorkestrasi kurang lebih selusin mesin khusus,
 masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 
 | Mesin | Cakupan |
@@ -101,27 +103,27 @@ masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 
 ## Basis Data
 
-`dataries/` berisi lebih dari 1.000 entri terstruktur lintas kategori: negara,
+`raget/raget-dataries/` berisi lebih dari 1.000 entri terstruktur lintas kategori: negara,
 kota, bahasa, tokoh, sains, sejarah, kuliner, olahraga, etika budaya per
 negara, dan lainnya — dapat diperluas atau diganti total tanpa menyentuh kode.
-`dataset/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
+`raget/raget-dataset/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
 yang dimuat lewat pencarian satu-pintu.
 
 ## Kualitas & Pengujian
 
 Setiap perubahan diverifikasi lewat suite bench Playwright
-(`tools/run-bench.mjs`) sebelum dianggap selesai — 841 kasus core-suite
+(`raget/raget-tools/run-bench.mjs`) sebelum dianggap selesai — 841 kasus core-suite
 dengan target lolos ≥97%. Skor kualitas gabungan (Q) dan komponen K/A/U/D/V
-diukur lewat `tools/measure-kv.mjs` dengan komposisi 100 kueri tetap agar
+diukur lewat `raget/raget-tools/measure-kv.mjs` dengan komposisi 100 kueri tetap agar
 hasil antar-perubahan bisa dibandingkan apel-ke-apel.
 
 ```
-node tools/run-bench.mjs http://localhost:8099
-node tools/measure-kv.mjs http://localhost:8099
+node raget/raget-tools/run-bench.mjs http://localhost:8099
+node raget/raget-tools/measure-kv.mjs http://localhost:8099
 ```
 
 Riwayat lengkap perubahan, keputusan desain, dan kelemahan yang jujur
-dilaporkan (bukan disembunyikan) tersimpan di `raget-devlog/` dan bisa
+dilaporkan (bukan disembunyikan) tersimpan di `raget/raget-devlog/` dan bisa
 ditanyakan langsung ke Raget lewat chat (mis. "sejarahmu", "perkembangan
 skormu").
 
@@ -145,8 +147,8 @@ Untuk Jalanin, jalankan server yang sama lalu buka `http://localhost:8099/travel
 Rategoan dirancang agar bisa diubah jadi produk lain hanya lewat file data,
 tanpa menyentuh kode:
 
-- **Identitas & gaya bicara** → `dataset/persona.json`
-- **Basis pengetahuan** → `dataries/` dan `dataset/knowledge/`
+- **Identitas & gaya bicara** → `raget/raget-dataset/persona.json`
+- **Basis pengetahuan** → `raget/raget-dataries/` dan `raget/raget-dataset/knowledge/`
 
 Panduan lengkap kustomisasi ada di [`docs/STARTER-KIT.md`](docs/STARTER-KIT.md).
 Ketentuan penggunaan dan lisensi ada di [`docs/LICENSE-KIT.md`](docs/LICENSE-KIT.md).
@@ -155,6 +157,6 @@ Ketentuan penggunaan dan lisensi ada di [`docs/LICENSE-KIT.md`](docs/LICENSE-KIT
 
 Kerangka aplikasi, otak AI Raget, dan Jalanin sudah dalam tahap pengembangan
 aktif dan berfungsi penuh secara lokal. Pengembangan berjalan dalam ronde
-inkremental yang masing-masing didokumentasikan di `raget-devlog/` — riwayat
+inkremental yang masing-masing didokumentasikan di `raget/raget-devlog/` — riwayat
 lengkapnya, termasuk kelemahan yang belum tuntas dan rencana lanjutan,
 tercatat apa adanya di sana alih-alih di roadmap statis yang cepat basi.

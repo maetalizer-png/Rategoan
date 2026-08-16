@@ -1,4 +1,4 @@
-import { hashText, pickVariant, detectTone, normalizeSlang } from '../utils/text.js';
+import { hashText, pickVariant, detectTone, normalizeSlang } from '../../utils/text.js';
 
 const FALLBACK_TEXT = 'Maaf, saya belum paham. Coba ulangi dengan kata lain?';
 const GENERIC_PREFIX = 'Saya catat:';

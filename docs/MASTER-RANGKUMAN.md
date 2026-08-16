@@ -2,7 +2,7 @@
 
 > Disimpan utuh sebagai seed data devlog (Bagian 3, Ronde v3 Gabungan Final).
 > Sumber: lampiran perintah ronde "PERINTAH RONDE v3 GABUNAN FINAL — FIX CHAT + DEVLOG TOTAL + K + STUB".
-> Dipakai sebagai data awal `raget-devlog/` bila ekspor percakapan proyek yang lebih lengkap belum tersedia.
+> Dipakai sebagai data awal `raget/raget-devlog/` bila ekspor percakapan proyek yang lebih lengkap belum tersedia.
 
 ## 0. IDENTITAS & PRINSIP
 

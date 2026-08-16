@@ -26,7 +26,7 @@
 ## Update & Dukungan
 
 - **12 bulan update gratis** sejak tanggal pembelian — perbaikan bug, penambahan
-  fitur minor, dan pembaruan basis data `dataries/`.
+  fitur minor, dan pembaruan basis data `raget/raget-dataries/`.
 - Setelah 12 bulan, kit tetap bisa dipakai selamanya (perpetual), namun update
   baru butuh perpanjangan.
 - Dukungan dasar via email/komunitas selama masa update berlaku.

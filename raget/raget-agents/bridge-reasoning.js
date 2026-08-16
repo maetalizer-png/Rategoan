@@ -1,4 +1,4 @@
-import { dataries } from '../dataries/index.js';
+import { dataries } from '../raget-dataries/index.js';
 import { memoryContext } from '../raget-memory/memory-context.js';
 import { bridgeResolve } from './bridge-resolve.js';
 import { bridgeFormat } from './bridge-format.js';

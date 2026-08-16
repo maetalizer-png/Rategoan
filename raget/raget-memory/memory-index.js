@@ -1,6 +1,6 @@
 import { memoryLong } from './memory-long.js';
 import { ragetDb } from '../raget-database/raget-db.js';
-import { meaningfulWords } from '../utils/text.js';
+import { meaningfulWords } from '../../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 
 let knowledgeCache = null;
@@ -12,8 +12,8 @@ async function loadKnowledge() {
   if (knowledgeCache) return knowledgeCache;
   try {
     const [umumParts, faqRes] = await Promise.all([
-      Promise.all(UMUM_FILES.map((f) => fetch(new URL('../dataset/knowledge/' + f, import.meta.url)).then((r) => (r.ok ? r.json() : [])).catch(() => []))),
-      fetch(new URL('../dataset/knowledge/faq.json', import.meta.url)),
+      Promise.all(UMUM_FILES.map((f) => fetch(new URL('../raget-dataset/knowledge/' + f, import.meta.url)).then((r) => (r.ok ? r.json() : [])).catch(() => []))),
+      fetch(new URL('../raget-dataset/knowledge/faq.json', import.meta.url)),
     ]);
     const umum = umumParts.flat().filter((it) => it && it.title);
     const faq = faqRes.ok ? await faqRes.json() : [];
@@ -27,7 +27,7 @@ async function loadKnowledge() {
 async function loadFactoid() {
   if (factoidCache) return factoidCache;
   try {
-    const res = await fetch(new URL('../dataset/knowledge/factoid.json', import.meta.url));
+    const res = await fetch(new URL('../raget-dataset/knowledge/factoid.json', import.meta.url));
     const data = res.ok ? await res.json() : [];
     factoidCache = Array.isArray(data) ? data : [];
   } catch (e) {

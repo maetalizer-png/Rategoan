@@ -35,7 +35,7 @@ di-parse atau dicari programatis.
   pencarian) — **$29**
 
 ## Yang Termasuk (paket Extended)
-- Seluruh folder `dataries/` (JS, siap `import`)
+- Seluruh folder `raget/raget-dataries/` (JS, siap `import`)
 - Dokumentasi skema per folder (field wajib/opsional, contoh nilai)
 - Contoh kode pencarian sederhana (word-overlap + fuzzy match)
 

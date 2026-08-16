@@ -1,6 +1,6 @@
 # Skema Data Dataries
 
-Setiap item di seluruh folder `dataries/` mengikuti bentuk dasar yang sama:
+Setiap item di seluruh folder `raget/raget-dataries/` mengikuti bentuk dasar yang sama:
 
 ```js
 { text: 'Kalimat deskripsi siap tampil...', metadata: { ...field per folder... } }
@@ -27,13 +27,13 @@ untuk pencarian/filter programatis. Berikut skema tiap folder:
 
 ## Pola Registrasi & Lazy Load
 
-Semua region terdaftar di `dataries/index.js` lewat `REGIONS`, dimuat lazy
+Semua region terdaftar di `raget/raget-dataries/index.js` lewat `REGIONS`, dimuat lazy
 per region (dynamic `import()` + cache `Map`) lewat `dataries.loadRegion(group, id)`.
 Ini menjaga waktu boot tetap cepat meski total data terus bertambah.
 
 ## Pola Pencarian
 
 Pencarian dasar (word-overlap, fuzzy substring) dicontohkan di
-`ai-agent/dataries-bridge.js` — fungsi `fuzzyEq`, `matchScore`, dan
+`raget/raget-agents/dataries-bridge.js` — fungsi `fuzzyEq`, `matchScore`, dan
 `findBestInList` bisa dipakai ulang untuk skenario pencarian lain di luar
 chatbot (mis. filter/kartu UI seperti di `jalanin/app.js`).

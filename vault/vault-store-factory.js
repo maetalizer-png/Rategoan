@@ -1,5 +1,5 @@
-import { idbGateway } from '../raget-database/idb-gateway.js';
-import { retrieval } from '../raget-retrieval/retrieve.js';
+import { idbGateway } from '../raget/raget-database/idb-gateway.js';
+import { retrieval } from '../raget/raget-retrieval/retrieve.js';
 
 export function createVaultStore(key, maxItems) {
   const MAX = maxItems || 300;

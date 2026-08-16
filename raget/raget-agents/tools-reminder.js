@@ -1,7 +1,7 @@
 import { memoryLong } from '../raget-memory/memory-long.js';
-import { reminderParser } from '../vault/reminders/parser.js';
-import { remindersStore } from '../vault/reminders/reminders-store.js';
-import { reminderScheduler } from '../vault/reminders/scheduler.js';
+import { reminderParser } from '../../vault/reminders/parser.js';
+import { remindersStore } from '../../vault/reminders/reminders-store.js';
+import { reminderScheduler } from '../../vault/reminders/scheduler.js';
 
 const REMINDER_CANCEL_RE = /^(batalkan|batal|hapus)\s+(pengingat|reminder)\b/i;
 const REMINDER_TRIGGER_RE = /^(ingatkan\s+saya|reminder|jangan\s+lupa)\b/i;
