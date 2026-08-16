@@ -151,7 +151,18 @@ async function tryEtika(text) {
   const isTip = /^tip/i.test(text);
   const entity = bridgeResolve.resolveCountryAlias(bridgeResolve.cleanEntity(m[1]));
   if (!entity) return null;
-  const items = await bridgeResolve.findAllInList('etika', (it) => it.metadata.country && bridgeResolve.fuzzyEq(it.metadata.country.toLowerCase(), entity), 6);
+  // country factoid dataset & etika dataset punya nama kanonis berbeda untuk sebagian negara
+  // (co: "china" vs "Tiongkok") - cocokkan lewat metadata.country ATAU tags supaya alias tetap
+  // terhubung ke data etika yang benar tanpa harus menyamakan kedua namespace.
+  const items = await bridgeResolve.findAllInList(
+    'etika',
+    (it) => {
+      if (it.metadata.country && bridgeResolve.fuzzyEq(it.metadata.country.toLowerCase(), entity)) return true;
+      const tags = it.metadata.tags;
+      return Array.isArray(tags) && tags.some((t) => bridgeResolve.fuzzyEq(String(t).toLowerCase(), entity));
+    },
+    6
+  );
   if (!items.length) return null;
   const filtered = isTabu ? items.filter((it) => it.metadata.type === 'tabu') : isTip ? items.filter((it) => it.metadata.type === 'tip') : items;
   const list = (filtered.length ? filtered : items).slice(0, 3);

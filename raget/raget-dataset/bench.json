@@ -5661,5 +5661,762 @@
     "prompt": "hubungan nawal el saadawi dengan siapa",
     "note": "Ronde v6 B4: tokoh relasi (+100) - Nawal El Saadawi",
     "contains": "Simone de Beauvoir"
+  },
+  {
+    "prompt": "ceritakan tentang root beer",
+    "note": "Ronde v6 B5.1: kuliner profil - Root Beer",
+    "contains": "Root Beer"
+  },
+  {
+    "prompt": "ceritakan tentang samosa",
+    "note": "Ronde v6 B5.1: kuliner profil - Samosa",
+    "contains": "Samosa"
+  },
+  {
+    "prompt": "ceritakan tentang borscht",
+    "note": "Ronde v6 B5.1: kuliner profil - Borscht",
+    "contains": "Borscht"
+  },
+  {
+    "prompt": "ceritakan tentang pho",
+    "note": "Ronde v6 B5.1: kuliner profil - Pho",
+    "contains": "Pho"
+  },
+  {
+    "prompt": "apa itu rendang",
+    "note": "Ronde v6 B5.1: kuliner profil - Rendang",
+    "contains": "Rendang"
+  },
+  {
+    "prompt": "ceritakan tentang gelato",
+    "note": "Ronde v6 B5.1: kuliner profil - Gelato",
+    "contains": "Gelato"
+  },
+  {
+    "prompt": "ceritakan tentang tacos",
+    "note": "Ronde v6 B5.1: kuliner profil - Tacos",
+    "contains": "Tacos"
+  },
+  {
+    "prompt": "apa itu horchata",
+    "note": "Ronde v6 B5.1: kuliner profil - Horchata",
+    "contains": "Horchata"
+  },
+  {
+    "prompt": "apa itu risotto",
+    "note": "Ronde v6 B5.1: kuliner profil - Risotto",
+    "contains": "Risotto"
+  },
+  {
+    "prompt": "ceritakan tentang kimchi",
+    "note": "Ronde v6 B5.1: kuliner profil - Kimchi",
+    "contains": "Kimchi"
+  },
+  {
+    "prompt": "apa itu goulash",
+    "note": "Ronde v6 B5.1: kuliner profil - Goulash",
+    "contains": "Goulash"
+  },
+  {
+    "prompt": "apa itu pavlova",
+    "note": "Ronde v6 B5.1: kuliner profil - Pavlova",
+    "contains": "Pavlova"
+  },
+  {
+    "prompt": "ceritakan tentang mate",
+    "note": "Ronde v6 B5.1: kuliner profil - Mate",
+    "contains": "Mate"
+  },
+  {
+    "prompt": "apa itu laksa",
+    "note": "Ronde v6 B5.1: kuliner profil - Laksa",
+    "contains": "Laksa"
+  },
+  {
+    "prompt": "apa itu paella",
+    "note": "Ronde v6 B5.1: kuliner profil - Paella",
+    "contains": "Paella"
+  },
+  {
+    "prompt": "ceritakan tentang adobo",
+    "note": "Ronde v6 B5.1: kuliner profil - Adobo",
+    "contains": "Adobo"
+  },
+  {
+    "prompt": "ceritakan tentang chili crab",
+    "note": "Ronde v6 B5.1: kuliner profil - Chili Crab",
+    "contains": "Chili Crab"
+  },
+  {
+    "prompt": "ceritakan tentang espresso",
+    "note": "Ronde v6 B5.1: kuliner profil - Espresso",
+    "contains": "Espresso"
+  },
+  {
+    "prompt": "apa itu fondue",
+    "note": "Ronde v6 B5.1: kuliner profil - Fondue",
+    "contains": "Fondue"
+  },
+  {
+    "prompt": "apa itu sate",
+    "note": "Ronde v6 B5.1: kuliner profil - Sate",
+    "contains": "Sate"
+  },
+  {
+    "prompt": "bahan utama nasi lemak apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Nasi Lemak",
+    "contains": "nasi santan"
+  },
+  {
+    "prompt": "bahan utama schnitzel apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Schnitzel",
+    "contains": "daging (biasanya sapi muda)"
+  },
+  {
+    "prompt": "bahan utama chai apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Chai",
+    "contains": "teh hitam"
+  },
+  {
+    "prompt": "bahan utama sushi apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Sushi",
+    "contains": "nasi cuka"
+  },
+  {
+    "prompt": "bahan utama pretzel bavaria apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Pretzel Bavaria",
+    "contains": "adonan tepung"
+  },
+  {
+    "prompt": "bahan utama bunny chow apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Bunny Chow",
+    "contains": "roti tawar utuh dikeruk"
+  },
+  {
+    "prompt": "bahan utama tteokbokki apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Tteokbokki",
+    "contains": "kue beras"
+  },
+  {
+    "prompt": "bahan utama fish and chips apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Fish and Chips",
+    "contains": "ikan (biasanya cod)"
+  },
+  {
+    "prompt": "bahan utama gado-gado apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Gado-Gado",
+    "contains": "sayuran rebus"
+  },
+  {
+    "prompt": "bahan utama smorgasbord apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Smorgasbord",
+    "contains": "ikan asap/asin"
+  },
+  {
+    "prompt": "bahan utama currywurst berlin apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Currywurst Berlin",
+    "contains": "sosis panggang"
+  },
+  {
+    "prompt": "bahan utama couscous apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Couscous",
+    "contains": "semolina gandum"
+  },
+  {
+    "prompt": "bahan utama tom yum apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Tom Yum",
+    "contains": "udang"
+  },
+  {
+    "prompt": "bahan utama sauerkraut apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Sauerkraut",
+    "contains": "kubis difermentasi"
+  },
+  {
+    "prompt": "bahan utama hummus apa saja",
+    "note": "Ronde v6 B5.1: kuliner bahan - Hummus",
+    "contains": "kacang arab (chickpea)"
+  },
+  {
+    "prompt": "trivia tentang moussaka",
+    "note": "Ronde v6 B5.1: kuliner trivia - Moussaka",
+    "contains": "Punya kemiripan deng"
+  },
+  {
+    "prompt": "trivia tentang bubble tea",
+    "note": "Ronde v6 B5.1: kuliner trivia - Bubble Tea",
+    "contains": "Diciptakan pada 1980"
+  },
+  {
+    "prompt": "trivia tentang currywurst",
+    "note": "Ronde v6 B5.1: kuliner trivia - Currywurst",
+    "contains": "Ditemukan di Berlin "
+  },
+  {
+    "prompt": "trivia tentang sangria",
+    "note": "Ronde v6 B5.1: kuliner trivia - Sangria",
+    "contains": "Namanya berasal dari"
+  },
+  {
+    "prompt": "trivia tentang ceviche",
+    "note": "Ronde v6 B5.1: kuliner trivia - Ceviche",
+    "contains": "Ikan 'dimasak' hanya"
+  },
+  {
+    "prompt": "trivia tentang kaya toast",
+    "note": "Ronde v6 B5.1: kuliner trivia - Kaya Toast",
+    "contains": "Biasa disantap bersa"
+  },
+  {
+    "prompt": "trivia tentang pierogi",
+    "note": "Ronde v6 B5.1: kuliner trivia - Pierogi",
+    "contains": "Sering disajikan saa"
+  },
+  {
+    "prompt": "trivia tentang croissant",
+    "note": "Ronde v6 B5.1: kuliner trivia - Croissant",
+    "contains": "Meski identik dengan"
+  },
+  {
+    "prompt": "trivia tentang feijoada",
+    "note": "Ronde v6 B5.1: kuliner trivia - Feijoada",
+    "contains": "Awalnya dianggap hid"
+  },
+  {
+    "prompt": "trivia tentang momo",
+    "note": "Ronde v6 B5.1: kuliner trivia - Momo",
+    "contains": "Mirip dumpling, momo"
+  },
+  {
+    "prompt": "trivia tentang pad thai",
+    "note": "Ronde v6 B5.1: kuliner trivia - Pad Thai",
+    "contains": "Dipromosikan besar-b"
+  },
+  {
+    "prompt": "trivia tentang sake",
+    "note": "Ronde v6 B5.1: kuliner trivia - Sake",
+    "contains": "Meski sering disebut"
+  },
+  {
+    "prompt": "trivia tentang falafel",
+    "note": "Ronde v6 B5.1: kuliner trivia - Falafel",
+    "contains": "Sering disebut sebag"
+  },
+  {
+    "prompt": "trivia tentang tiramisu",
+    "note": "Ronde v6 B5.1: kuliner trivia - Tiramisu",
+    "contains": "Namanya berarti 'ang"
+  },
+  {
+    "prompt": "trivia tentang biryani",
+    "note": "Ronde v6 B5.1: kuliner trivia - Biryani",
+    "contains": "Diperkirakan dibawa "
+  },
+  {
+    "prompt": "churrasco berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Churrasco",
+    "contains": "Brasil"
+  },
+  {
+    "prompt": "asado berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Asado",
+    "contains": "Argentina"
+  },
+  {
+    "prompt": "nasi goreng berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Nasi Goreng",
+    "contains": "Indonesia"
+  },
+  {
+    "prompt": "souvlaki berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Souvlaki",
+    "contains": "Yunani"
+  },
+  {
+    "prompt": "soju berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Soju",
+    "contains": "Korea Selatan"
+  },
+  {
+    "prompt": "ratatouille berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Ratatouille",
+    "contains": "Prancis"
+  },
+  {
+    "prompt": "shawarma berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Shawarma",
+    "contains": "Timur Tengah"
+  },
+  {
+    "prompt": "tagine berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Tagine",
+    "contains": "Maroko"
+  },
+  {
+    "prompt": "croquembouche berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Croquembouche",
+    "contains": "Prancis"
+  },
+  {
+    "prompt": "baguette berasal dari mana",
+    "note": "Ronde v6 B5.1: kuliner asal - Baguette",
+    "contains": "Prancis"
+  },
+  {
+    "prompt": "gula 1kg Rp14.000, berapa 3,5kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas",
+    "contains": "Rp49.000"
+  },
+  {
+    "prompt": "gula 1kg Rp14.000, berapa 3,5kg langkah",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas mode langkah",
+    "contains": "Harga per kg"
+  },
+  {
+    "prompt": "beras 1kg Rp12.000, berapa harga 5kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas",
+    "contains": "Rp60.000"
+  },
+  {
+    "prompt": "telur 1kg Rp28.000, berapa harga 2kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas",
+    "contains": "Rp56.000"
+  },
+  {
+    "prompt": "minyak goreng 1liter Rp18.000, berapa 2liter?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas satuan liter",
+    "contains": "Rp36.000"
+  },
+  {
+    "prompt": "tepung 1kg Rp10.000, berapa 4kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas",
+    "contains": "Rp40.000"
+  },
+  {
+    "prompt": "harga baju Rp200.000 didiskon 20%, berapa harga setelah diskon?",
+    "note": "Ronde v6 B5.2: soal cerita persen dalam konteks diskon",
+    "contains": "Rp160.000"
+  },
+  {
+    "prompt": "harga baju Rp200.000 didiskon 20%, berapa harga setelah diskon langkah",
+    "note": "Ronde v6 B5.2: soal cerita persen diskon mode langkah",
+    "contains": "dari Rp200.000"
+  },
+  {
+    "prompt": "gaji Rp5.000.000 naik 10%, berapa gaji sekarang?",
+    "note": "Ronde v6 B5.2: soal cerita persen kenaikan",
+    "contains": "Rp5.500.000"
+  },
+  {
+    "prompt": "harga sepatu Rp500.000 diskon 30%, berapa harganya?",
+    "note": "Ronde v6 B5.2: soal cerita persen dalam konteks diskon",
+    "contains": "Rp350.000"
+  },
+  {
+    "prompt": "tabungan Rp1.000.000 bertambah 15%, berapa sekarang?",
+    "note": "Ronde v6 B5.2: soal cerita persen kenaikan bertambah",
+    "contains": "Rp1.150.000"
+  },
+  {
+    "prompt": "harga tiket Rp100.000 naik 25%, berapa harga sekarang?",
+    "note": "Ronde v6 B5.2: soal cerita persen kenaikan",
+    "contains": "Rp125.000"
+  },
+  {
+    "prompt": "gaji Rp3.000.000 turun 10%, berapa gaji sekarang?",
+    "note": "Ronde v6 B5.2: soal cerita persen penurunan",
+    "contains": "Rp2.700.000"
+  },
+  {
+    "prompt": "cabai 1kg Rp60.000, berapa harga 0,5kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas desimal",
+    "contains": "Rp30.000"
+  },
+  {
+    "prompt": "bawang merah 1kg Rp40.000, berapa harga 2,5kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas desimal",
+    "contains": "Rp100.000"
+  },
+  {
+    "prompt": "susu 1liter Rp20.000, berapa 3liter langkah",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas mode langkah",
+    "contains": "Harga untuk 3 liter"
+  },
+  {
+    "prompt": "kopi 1kg Rp80.000, berapa 2kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas",
+    "contains": "Rp160.000"
+  },
+  {
+    "prompt": "harga laptop Rp10.000.000 didiskon 15%, berapa harganya?",
+    "note": "Ronde v6 B5.2: soal cerita persen diskon nominal besar",
+    "contains": "Rp8.500.000"
+  },
+  {
+    "prompt": "harga hp Rp3.000.000 naik 5%, berapa harga sekarang langkah",
+    "note": "Ronde v6 B5.2: soal cerita persen kenaikan mode langkah",
+    "contains": "dari Rp3.000.000"
+  },
+  {
+    "prompt": "gula pasir 1kg Rp16.000, berapa harga 10kg?",
+    "note": "Ronde v6 B5.2: soal cerita harga x kuantitas",
+    "contains": "Rp160.000"
+  },
+  {
+    "prompt": "aku lagi di cape town nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - cape town",
+    "contains": "Afrika Selatan"
+  },
+  {
+    "prompt": "aku lagi di riyadh nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - riyadh",
+    "contains": "Arab Saudi"
+  },
+  {
+    "prompt": "aku lagi di buenos aires nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - buenos aires",
+    "contains": "Argentina"
+  },
+  {
+    "prompt": "aku lagi di santiago nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - santiago",
+    "contains": "Chili"
+  },
+  {
+    "prompt": "aku lagi di addis ababa nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - addis ababa",
+    "contains": "Etiopia"
+  },
+  {
+    "prompt": "aku lagi di suva nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - suva",
+    "contains": "Fiji"
+  },
+  {
+    "prompt": "aku lagi di accra nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - accra",
+    "contains": "Ghana"
+  },
+  {
+    "prompt": "aku lagi di mumbai nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - mumbai",
+    "contains": "India"
+  },
+  {
+    "prompt": "aku lagi di nairobi nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - nairobi",
+    "contains": "Kenya"
+  },
+  {
+    "prompt": "aku lagi di majuro nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - majuro",
+    "contains": "Kepulauan Marshall"
+  },
+  {
+    "prompt": "aku lagi di honiara nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - honiara",
+    "contains": "Kepulauan Solomon"
+  },
+  {
+    "prompt": "aku lagi di bogota nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - bogota",
+    "contains": "Kolombia"
+  },
+  {
+    "prompt": "aku lagi di havana nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - havana",
+    "contains": "Kuba"
+  },
+  {
+    "prompt": "aku lagi di kuwait city nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - kuwait city",
+    "contains": "Kuwait"
+  },
+  {
+    "prompt": "aku lagi di beirut nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - beirut",
+    "contains": "Lebanon"
+  },
+  {
+    "prompt": "aku lagi di marrakech nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - marrakech",
+    "contains": "Maroko"
+  },
+  {
+    "prompt": "aku lagi di lagos nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - lagos",
+    "contains": "Nigeria"
+  },
+  {
+    "prompt": "aku lagi di muscat nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - muscat",
+    "contains": "Oman"
+  },
+  {
+    "prompt": "aku lagi di port moresby nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - port moresby",
+    "contains": "Papua New Guinea"
+  },
+  {
+    "prompt": "aku lagi di lima nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - lima",
+    "contains": "Peru"
+  },
+  {
+    "prompt": "aku lagi di doha nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - doha",
+    "contains": "Qatar"
+  },
+  {
+    "prompt": "aku lagi di apia nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - apia",
+    "contains": "Samoa"
+  },
+  {
+    "prompt": "aku lagi di stockholm nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - stockholm",
+    "contains": "Swedia"
+  },
+  {
+    "prompt": "aku lagi di tunis nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - tunis",
+    "contains": "Tunisia"
+  },
+  {
+    "prompt": "aku lagi di amman nih",
+    "note": "Ronde v6 B5.3: ekspansi kota auto-mode - amman",
+    "contains": "Yordania"
+  },
+  {
+    "prompt": "6 februari itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 6 februari",
+    "contains": "Nol Toleransi"
+  },
+  {
+    "prompt": "10 februari itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 10 februari",
+    "contains": "Kacang-kacangan"
+  },
+  {
+    "prompt": "14 maret itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 14 maret",
+    "contains": "Matematika"
+  },
+  {
+    "prompt": "8 april itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 8 april",
+    "contains": "Roma"
+  },
+  {
+    "prompt": "26 april itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 26 april",
+    "contains": "Kekayaan Intelektual"
+  },
+  {
+    "prompt": "30 april itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 30 april",
+    "contains": "Tari"
+  },
+  {
+    "prompt": "2 mei itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 2 mei",
+    "contains": "Tuna"
+  },
+  {
+    "prompt": "5 mei itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 5 mei",
+    "contains": "Bidan"
+  },
+  {
+    "prompt": "12 mei itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 12 mei",
+    "contains": "Perawat"
+  },
+  {
+    "prompt": "18 mei itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 18 mei",
+    "contains": "Museum"
+  },
+  {
+    "prompt": "25 mei itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 25 mei",
+    "contains": "Afrika"
+  },
+  {
+    "prompt": "1 juni itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 1 juni",
+    "contains": "Orang Tua"
+  },
+  {
+    "prompt": "3 juni itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 3 juni",
+    "contains": "Sepeda"
+  },
+  {
+    "prompt": "7 juni itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 7 juni",
+    "contains": "Keamanan Pangan"
+  },
+  {
+    "prompt": "18 juni itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 18 juni",
+    "contains": "Ujaran Kebencian"
+  },
+  {
+    "prompt": "28 juli itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 28 juli",
+    "contains": "Hepatitis"
+  },
+  {
+    "prompt": "20 agustus itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 20 agustus",
+    "contains": "Nyamuk"
+  },
+  {
+    "prompt": "31 agustus itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 31 agustus",
+    "contains": "Keturunan Afrika"
+  },
+  {
+    "prompt": "7 september itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 7 september",
+    "contains": "Udara Bersih"
+  },
+  {
+    "prompt": "10 september itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 10 september",
+    "contains": "Pencegahan Bunuh Diri"
+  },
+  {
+    "prompt": "20 september itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 20 september",
+    "contains": "Olahraga Universitas"
+  },
+  {
+    "prompt": "27 oktober itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 27 oktober",
+    "contains": "Warisan Audiovisual"
+  },
+  {
+    "prompt": "13 november itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 13 november",
+    "contains": "Kebaikan"
+  },
+  {
+    "prompt": "17 november itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 17 november",
+    "contains": "Mahasiswa"
+  },
+  {
+    "prompt": "7 desember itu hari apa",
+    "note": "Ronde v6 B5.3: ekspansi hari internasional - 7 desember",
+    "contains": "Penerbangan Sipil"
+  },
+  {
+    "prompt": "aku sedih banget hari ini nih",
+    "note": "Ronde v6 B5.4: kontinuitas emosi - trigger sedih",
+    "contains": "sedih"
+  },
+  {
+    "prompt": "ibukota jepang",
+    "note": "Ronde v6 B5.4: kontinuitas emosi - giliran 1 setelah sedih",
+    "contains": "Masih inget cerita kamu sebelumnya"
+  },
+  {
+    "prompt": "populasi jerman",
+    "note": "Ronde v6 B5.4: kontinuitas emosi - giliran 2 setelah sedih",
+    "contains": "Masih inget cerita kamu sebelumnya"
+  },
+  {
+    "prompt": "mata uang inggris",
+    "note": "Ronde v6 B5.4: kontinuitas emosi - giliran 3 setelah sedih (maks)",
+    "contains": "Masih inget cerita kamu sebelumnya"
+  },
+  {
+    "prompt": "mata uang jepang",
+    "note": "Ronde v6 B5.4: kontinuitas emosi - giliran 4 meluruh, tidak lagi lembut",
+    "notContains": [
+      "Masih inget cerita kamu sebelumnya"
+    ]
+  },
+  {
+    "prompt": "aku lagi kesel banget nih",
+    "note": "Ronde v6 B5.4: kontinuitas emosi - trigger marah",
+    "containsAny": [
+      "kesel",
+      "kesal"
+    ]
+  },
+  {
+    "prompt": "ibukota thailand",
+    "note": "Ronde v6 B5.4: kontinuitas emosi marah - giliran 1",
+    "contains": "Semoga sekarang kamu udah agak lebih tenang"
+  },
+  {
+    "prompt": "ibukota vietnam",
+    "note": "Ronde v6 B5.4: kontinuitas emosi marah - giliran 2",
+    "contains": "Semoga sekarang kamu udah agak lebih tenang"
+  },
+  {
+    "prompt": "ibukota filipina",
+    "note": "Ronde v6 B5.4: kontinuitas emosi marah - giliran 3 (maks)",
+    "contains": "Semoga sekarang kamu udah agak lebih tenang"
+  },
+  {
+    "prompt": "ibukota malaysia",
+    "note": "Ronde v6 B5.4: kontinuitas emosi marah - giliran 4 meluruh",
+    "notContains": [
+      "Semoga sekarang kamu udah agak lebih tenang"
+    ]
+  },
+  {
+    "prompt": "terapkan decision matrix",
+    "note": "Ronde v6 B5.5: mode terapkan framework - mulai sesi A",
+    "contains": "Sebutkan pilihan-pilihan"
+  },
+  {
+    "prompt": "Kerja Kantor, Kerja Remote",
+    "note": "Ronde v6 B5.5: mode terapkan framework - isi pilihan A",
+    "contains": "sebutkan kriteria"
+  },
+  {
+    "prompt": "Gaji, Fleksibilitas, Jarak",
+    "note": "Ronde v6 B5.5: mode terapkan framework - isi kriteria A",
+    "contains": "Beri skor 1-5"
+  },
+  {
+    "prompt": "4, 2, 1",
+    "note": "Ronde v6 B5.5: mode terapkan framework - skor pilihan 1 A",
+    "contains": "Kerja Remote"
+  },
+  {
+    "prompt": "3, 5, 4",
+    "note": "Ronde v6 B5.5: mode terapkan framework - skor pilihan 2 A, selesai",
+    "contains": "Decision Matrix selesai"
+  },
+  {
+    "prompt": "coba decision matrix bareng",
+    "note": "Ronde v6 B5.5: mode terapkan framework - mulai sesi B",
+    "contains": "Sebutkan pilihan-pilihan"
+  },
+  {
+    "prompt": "Kuliah S2, Kerja Dulu",
+    "note": "Ronde v6 B5.5: mode terapkan framework - isi pilihan B",
+    "contains": "sebutkan kriteria"
+  },
+  {
+    "prompt": "Biaya, Waktu",
+    "note": "Ronde v6 B5.5: mode terapkan framework - isi kriteria B",
+    "contains": "Beri skor 1-5"
+  },
+  {
+    "prompt": "3, 4",
+    "note": "Ronde v6 B5.5: mode terapkan framework - skor pilihan 1 B",
+    "contains": "Kerja Dulu"
+  },
+  {
+    "prompt": "5, 2",
+    "note": "Ronde v6 B5.5: mode terapkan framework - skor pilihan 2 B, selesai",
+    "contains": "Decision Matrix selesai"
   }
 ]

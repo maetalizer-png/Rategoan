@@ -30,6 +30,8 @@ import { contextEngine } from './context-engine.js';
 import { worldContext } from './world-context.js';
 import { intelligenceRumus } from './intelligence-rumus.js';
 import { tokohStore } from './tokoh-store.js';
+import { kulinerStore } from './kuliner-store.js';
+import { frameworkApply } from './framework-apply.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -194,8 +196,11 @@ async function tryMultiIntent(text, messages) {
 async function respond(messages, prompt) {
   const text = String(prompt || '').trim();
   const opener = text ? routerIntent.moodOpener(text) : '';
+  const continuityOpener = text && !opener ? contextEngine.tryEmotionalContinuityOpener(text) : '';
+  if (text) contextEngine.noteTurnMood(text);
   const reply = await respondCore(messages, prompt);
-  return opener && !reply.startsWith(opener) ? opener + reply : reply;
+  const finalOpener = opener || continuityOpener || '';
+  return finalOpener && !reply.startsWith(finalOpener) ? finalOpener + reply : reply;
 }
 
 async function respondCore(messages, prompt) {
@@ -218,6 +223,12 @@ async function respondCore(messages, prompt) {
   if (quizReply) {
     ragetDb.addNote(text, quizReply, null, 'kuis');
     return postProcess(quizReply);
+  }
+
+  const frameworkApplyReply = frameworkApply.checkPending(text);
+  if (frameworkApplyReply) {
+    ragetDb.addNote(text, frameworkApplyReply, null, 'framework_apply');
+    return postProcess(frameworkApplyReply);
   }
 
   const modeCmd = routerIntent.detectModeCommand(text);
@@ -341,6 +352,16 @@ async function respondCore(messages, prompt) {
     return postProcess(stemDict);
   }
 
+  // kulinerReply dicek SEBELUM tryFactoid() supaya nama kuliner presisi (mis. "Chili Crab")
+  // tidak keburu ditangkap fuzzy-match dataries-bridge.js ke entitas yang tak berhubungan
+  // (mis. negara "Chili") - pola fix yang sama dipakai berulang di ronde-ronde sebelumnya
+  // untuk kelas bug "fuzzy-match-shadows-precise-handler" (tokoh, konsep sains, dst).
+  const kulinerReply = kulinerStore.tryKuliner(text);
+  if (kulinerReply) {
+    ragetDb.addNote(text, kulinerReply, null, 'kuliner');
+    return postProcess(kulinerReply);
+  }
+
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');
@@ -405,6 +426,12 @@ async function respondCore(messages, prompt) {
   if (worldReply) {
     ragetDb.addNote(text, worldReply, null, 'world_context');
     return postProcess(worldReply);
+  }
+
+  if (frameworkApply.START_RE.test(text)) {
+    const frameworkStart = frameworkApply.start();
+    ragetDb.addNote(text, frameworkStart, null, 'framework_apply');
+    return postProcess(frameworkStart);
   }
 
   const suggestFramework = intelligenceRumus.trySuggestFramework(text);

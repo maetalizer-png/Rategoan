@@ -260,6 +260,13 @@ function hitung(text) {
   const src = String(text || '').trim();
   const showSteps = wantsSteps(src);
 
+  const wordProblem = mathEngine.tryWordProblem(src);
+  if (wordProblem) {
+    return showSteps
+      ? formatter.blocks([formatter.bullets(wordProblem.steps), 'Hasil akhir: ' + wordProblem.display + '.'])
+      : wordProblem.display + '.';
+  }
+
   const currency = mathEngine.tryConvertCurrency(src);
   if (currency) {
     const base = 'Sekitar ' + currency.value + ' ' + currency.to + ' (kurs statis, bukan kurs real-time).';
