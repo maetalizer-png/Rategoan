@@ -1,160 +1,160 @@
-# RATEGOAN
+# Rategoan
 
-Aplikasi asisten pribadi lokal — kerangka antarmuka chat yang bersih,
-privat, dan siap dihubungkan dengan model AI yang berjalan sepenuhnya di perangkat.
+Chat AI 100% local-first — tanpa server, tanpa API key, tanpa biaya per-pesan.
+Seluruh percakapan, memori, dan basis pengetahuan berjalan langsung di
+perangkat pengguna lewat Progressive Web App (PWA) murni HTML/CSS/JavaScript
+modular (ES6 Modules), tanpa framework dan tanpa build step.
 
----
+Satu repo ini berisi dua produk yang saling terhubung:
 
-## 1. Ringkasan
-
-Rategoan adalah single-page application (SPA) tanpa framework dan tanpa build tool:
-HTML, CSS, dan JavaScript modular murni berbasis ES6 Modules (import/export).
-Dirancang mobile-first dengan tema light/dark, gestur sentuh, serta arsitektur
-local-first — tidak ada data percakapan yang meninggalkan perangkat.
-
-## 2. Berkas Inti
-
-| Berkas / Folder    | Tanggung Jawab                                              |
-|---------------------|--------------------------------------------------------------|
-| `index.html`         | Shell aplikasi: topbar, area chat, composer, sidebar 2 view |
-| `css/main.css`        | Entry point CSS: `@import` seluruh partial dengan namespace tunggal `--rg-*` |
-| `js/main.js`          | Entry point ES module: wiring & bootstrap aplikasi          |
-| `js/utils/`           | Fungsi murni: DOM helper, format, haptics, clipboard, markdown |
-| `js/state/`           | State & penyimpanan: store, theme, auth, font, storage, pin |
-| `js/core/`            | Layanan inti: toast, router                                 |
-| `js/ui/`              | Komponen UI lepas: drawer, scroll-to-bottom, quote           |
-| `js/chat/`            | Alur percakapan: chat, composer, pencarian chat, suara       |
-| `js/history/`         | Riwayat chat & menu kontekstualnya                          |
-| `js/sheets/`          | Bottom sheet: lampiran & pemilihan model                     |
-| `js/account/`         | Akun: profil, login, pengaturan                              |
-| `js/system/`          | Integrasi sistem: jaringan, install PWA, backup, shortcut, onboarding |
-| `js/ai/`              | Adapter (3 file) yang menjembatani kerangka Rategoan ke otak AI |
-| `rategoan-llm/`        | Mesin balasan lokal berbasis pola, tanpa API key, lazy-init  |
-| `raget-database/`      | Penyimpanan catatan Q&A untuk feedback loop (`raget_db`)     |
-| `raget-memory/`        | Memori jangka pendek (konteks) & jangka panjang (fakta pengguna) |
-| `ai-agent/`            | Orkestrasi: intent routing, tools deterministik, prompt assembly |
-| `dataset/`             | Persona, few-shot, benchmark, dan basis pengetahuan statis   |
-| `sw.js`                | Service worker (cache lifecycle)                             |
-| `README.md`           | Dokumen ini                                                   |
-
-## 3. Fitur Kerangka
-
-### Percakapan
-- Kirim melalui tombol atau Enter; Shift+Enter untuk baris baru.
-- Textarea auto-grow (maksimal ±5 baris).
-- Pesan pengguna berbentuk kotak; balasan AI bergaya typewriter cepat.
-- Timestamp per pesan; scroll halus dengan auto-scroll.
-
-### Sidebar
-- Drawer dengan tiga kendali: tombol, tap backdrop, dan gestur swipe.
-- Garis pembatas presisi 50% serta garis di bawah brand.
-- Riwayat percakapan tersimpan di localStorage; hapus per-item.
-- View Pengaturan internal: toggle Mode Gelap + slot ekspansi.
-
-### Audio
-- Text-to-Speech (SpeechSynthesis) dengan tombol berhenti.
-- Input suara (SpeechRecognition) bila perangkat mendukung.
-
-### Kualitas Visual
-- Tanpa tap-highlight biru; umpan balik tekan halus mengikuti tema.
-- Tema bawaan light; preferensi tersimpan.
-
-## 4. Otak AI — Raget
-
-Rategoan kini terhubung ke **Raget**, mesin balasan lokal berbasis pola dan
-konteks — tanpa API key, tanpa model besar yang diunduh, dan lazy-loaded
-(baru dimuat saat pesan pertama dikirim, bukan saat boot).
-
-Alur satu pesan:
-
-    Pesan pengguna
-      → raget-memory (konteks 10 giliran terakhir + fakta jangka panjang)
-      → ai-agent (deteksi tool: ringkas/hitung/tanggal, atau lanjut ke LLM)
-      → rategoan-llm (pencocokan pola: salam, tanya, ide konten, jelaskan)
-      → post-processing (rapikan teks, fallback jujur bila kosong)
-      → tampil sebagai balasan (typing + TTS) & tersimpan ke raget-database
-
-Titik integrasi publik (dipakai oleh `js/chat/chat.js` dan `js/sheets/models.js`,
-tidak perlu diubah):
-
-| Fungsi              | Tujuan                                          |
-|----------------------|--------------------------------------------------|
-| `ai.generate(messages, prompt)` | Hasilkan balasan; tidak pernah `null` setelah mesin siap |
-| `ai.setStatus(text)` | Perbarui indikator status mesin (`#model-status`) |
-| `ai.ready`           | Status apakah mesin sudah diinisialisasi         |
-
-Keyspace localStorage milik otak AI terpisah dari kerangka Rategoan:
-`raget_memory` (fakta jangka panjang) dan `raget_db` (catatan Q&A), tidak
-menyentuh `rategoan_*`.
-
-## 5. Menjalankan
-
-JavaScript diorganisir sebagai ES6 Modules (`import`/`export`), sehingga wajib
-diakses melalui server HTTP, bukan `file://`. Contoh:
-
-    npx http-server -p 8080
-    # atau
-    python3 -m http.server 8080
-
-Lalu buka:
-
-    http://localhost:8080/index.html
-
-## 6. Struktur Folder
-
-    Rategoan/
-    ├── index.html
-    ├── manifest.webmanifest
-    ├── sw.js
-    ├── icon.svg
-    ├── README.md
-    ├── css/
-    │   ├── main.css      (entry point, @import semua partial di bawah)
-    │   ├── tokens.css    (custom properties, namespace tunggal --rg-*)
-    │   ├── reset.css      (reset elemen global + reduced-motion)
-    │   ├── utilities.css   (state class lintas-komponen: font-size, status model/suara)
-    │   ├── layout/        (shell, sidebar)
-    │   ├── ui/            (buttons, toast, menu, scroll)
-    │   ├── chat/           (messages, search)
-    │   ├── history/         (history)
-    │   ├── sheets/           (sheets/attach/model)
-    │   ├── account/           (auth, settings)
-    │   └── system/             (overlays: onboarding & kunci PIN)
-    └── js/
-        ├── main.js
-        ├── utils/       (dom, format, haptics, clipboard, markdown)
-        ├── state/       (store, theme, auth, font, storage, pin)
-        ├── core/        (toast, router)
-        ├── ui/          (drawer, scrolldown, quote)
-        ├── chat/        (chat, composer, chatsearch, voice)
-        ├── history/     (history, histmenu, msgmenu)
-        ├── sheets/      (sheets, attach, models)
-        ├── account/     (account, login, settings)
-        ├── system/      (netmon, install, backup, shortcuts, onboard)
-        └── ai/          (adapter: engine, memory, ai — satu-satunya pintu ke otak AI)
-    ├── rategoan-llm/    (llm-engine, llm-worker stub, llm-models)
-    ├── raget-database/  (raget-db, raget-schema)
-    ├── raget-memory/    (memory-short, memory-long, memory-index)
-    ├── ai-agent/        (agent, agent-tools)
-    └── dataset/
-        ├── persona.json
-        ├── fewshot.json
-        ├── bench.json
-        └── knowledge/
-            ├── umum.json
-            └── faq.json
-
-## 7. Roadmap
-
-| Fase | Deskripsi                          | Status    |
-|------|------------------------------------|-----------|
-| 0    | Kerangka bersih + gestur swipe     | Selesai   |
-| 1    | README, struktur, polish sentuhan  | Selesai   |
-| 2    | Integrasi model lokal (Raget)      | Selesai   |
-| 3    | Manajemen konteks + streaming      | Rencana   |
-| 4    | Cache offline penuh                | Rencana   |
-| 5    | Fitur tambahan (Gmail, export)     | Rencana   |
+- **Rategoan** — kerangka chat inti dengan "Raget", mesin balasan
+  template/rule-based (bukan model bahasa besar).
+- **Jalanin** ("Jelajah Dunia") — PWA turunan berdiri sendiri di `travel/`,
+  asisten perjalanan yang berbagi arsitektur dan basis data yang sama.
 
 ---
 
-Rategoan — privat, lokal, profesional.
+## Prinsip Desain
+
+- **100% lokal** — tidak ada panggilan API AI berbayar untuk fitur inti; data
+  percakapan tidak pernah meninggalkan perangkat.
+- **Deterministik & jujur** — balasan dihasilkan dari pencocokan pola dan data
+  terstruktur, bukan generasi probabilistik; saat tidak tahu, mengaku tidak
+  tahu alih-alih mengarang.
+- **Data terpisah dari kode** — kepribadian, gaya bicara, dan basis
+  pengetahuan sepenuhnya ada di file `.json`/`.js`, bisa diganti tanpa
+  menyentuh logic aplikasi.
+- **Diverifikasi dengan angka nyata** — setiap perubahan diuji lewat suite
+  bench otomatis (Playwright) sebelum dianggap selesai, bukan diasumsikan
+  benar.
+
+## Fitur
+
+**Percakapan**
+- Riwayat chat tersimpan lokal (IndexedDB), pencarian lintas riwayat & catatan.
+- Animasi ketik natural, mode hemat (reduced motion), tema terang/gelap/otomatis.
+- Text-to-Speech dan input suara (bila didukung perangkat).
+- Ekspor catatan ke PDF/Markdown, impor dari PDF/Notion/Evernote/WhatsApp (opt-in).
+
+**Otak AI (Raget)**
+- Router intent yang mencoba serangkaian tool khusus sebelum jatuh ke jawaban
+  umum: matematika, pengingat, tanggal, faktual dua-bahasa, kuis, dan lebih.
+- Toleransi typo, gaya jawaban adaptif, follow-up percakapan yang menjaga
+  konteks entitas across giliran.
+- Skor kualitas (Q) yang dihitung dari lima komponen terukur: Akurasi (dari
+  feedback nyata), Kekayaan, Utilitas, Kedalaman, Variasi.
+
+**Koleksi**
+- Ruang simpan pribadi untuk catatan, tautan, dan hasil chat yang ingin
+  disimpan di luar riwayat percakapan.
+
+**Jalanin**
+- Rencana perjalanan, jelajah negara dengan konteks budaya, asisten travel,
+  offline pack untuk data penting saat tanpa koneksi.
+
+## Arsitektur
+
+```
+index.html, css/, js/       kerangka aplikasi (UI, state, riwayat, akun)
+js/ai/                       satu-satunya pintu integrasi ke otak AI
+ai-agent/                    router intent + orkestrasi tool + mesin khusus
+rategoan-llm/                mesin balasan berbasis template
+raget-memory/                memori jangka pendek (konteks) & jangka panjang (fakta)
+raget-database/              riwayat catatan Q&A lokal (untuk feedback loop)
+raget-retrieval/             pencarian TF-IDF satu pintu lintas sumber
+raget-devlog/                riwayat pengembangan proyek (dipakai balasan chat)
+dataset/                     persona, few-shot, bench, basis pengetahuan umum
+dataries/                    basis data terstruktur (negara, kota, bahasa, tokoh, dst)
+vault/                       fitur opt-in: pengingat, kalender, ekspor, importer
+travel/                      Jalanin — PWA turunan berdiri sendiri
+tools/                       skrip verifikasi: bench runner, pengukuran KV, devlog
+docs/                        panduan kustomisasi & lisensi (starter kit)
+```
+
+### Alur satu pesan
+
+```
+Pesan pengguna
+  → raget-memory (konteks percakapan + fakta jangka panjang)
+  → ai-agent (router intent → deret mesin khusus, lihat di bawah)
+  → rategoan-llm (fallback: pencocokan pola template)
+  → post-processing (rapikan teks, jawaban jujur bila kosong)
+  → tampil sebagai balasan + tersimpan ke raget-database
+```
+
+`ai-agent/agent.js` mengorkestrasi kurang lebih selusin mesin khusus,
+masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
+
+| Mesin | Cakupan |
+|---|---|
+| `math-engine.js` | Parser matematika aman (tanpa `eval`): aritmatika, konversi satuan/mata uang |
+| `bilingual.js` | Deteksi ID/EN, faktual dan terjemahan frasa dasar dua bahasa |
+| `knowledge-graph.js` | Deskripsi negara adaptif, follow-up dialog lintas giliran |
+| `answer-composer.js` | Koreksi typo (Levenshtein + fonetik) |
+| `stem-engine.js` | Aljabar, geometri, statistika, kalkulus ringan, fisika, konsep teknologi, biologi |
+| `social-engine.js` | Intent sosial (curhat, diskusi, humor, motivasi), kerangka customer service |
+| `context-engine.js` | Sapaan sadar-waktu, klasifikasi situasi, deteksi darurat dengan hotline |
+| `world-context.js` | Hari internasional, deteksi 5 bahasa, konteks lokasi Jelajah Dunia |
+| `intelligence-rumus.js` | Perpustakaan kerangka berpikir/keputusan/belajar (SWOT, 5W1H, dst) |
+| `tokoh-store.js` | Profil tokoh publik terstruktur (pencapaian, kutipan, trivia, relasi) |
+| `feedback-store.js` | Statistik suka/tidak-suka nyata untuk komponen Akurasi (A) |
+
+## Basis Data
+
+`dataries/` berisi lebih dari 1.000 entri terstruktur lintas kategori: negara,
+kota, bahasa, tokoh, sains, sejarah, kuliner, olahraga, etika budaya per
+negara, dan lainnya — dapat diperluas atau diganti total tanpa menyentuh kode.
+`dataset/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
+yang dimuat lewat pencarian satu-pintu.
+
+## Kualitas & Pengujian
+
+Setiap perubahan diverifikasi lewat suite bench Playwright
+(`tools/run-bench.mjs`) sebelum dianggap selesai — 841 kasus core-suite
+dengan target lolos ≥97%. Skor kualitas gabungan (Q) dan komponen K/A/U/D/V
+diukur lewat `tools/measure-kv.mjs` dengan komposisi 100 kueri tetap agar
+hasil antar-perubahan bisa dibandingkan apel-ke-apel.
+
+```
+node tools/run-bench.mjs http://localhost:8099
+node tools/measure-kv.mjs http://localhost:8099
+```
+
+Riwayat lengkap perubahan, keputusan desain, dan kelemahan yang jujur
+dilaporkan (bukan disembunyikan) tersimpan di `raget-devlog/` dan bisa
+ditanyakan langsung ke Raget lewat chat (mis. "sejarahmu", "perkembangan
+skormu").
+
+## Menjalankan
+
+JavaScript diorganisir sebagai ES6 Modules, sehingga wajib diakses lewat
+server HTTP (bukan `file://`):
+
+```
+python3 -m http.server 8099
+# atau
+npx http-server -p 8099
+```
+
+Lalu buka `http://localhost:8099/index.html`.
+
+Untuk Jalanin, jalankan server yang sama lalu buka `http://localhost:8099/travel/index.html`.
+
+## Kustomisasi
+
+Rategoan dirancang agar bisa diubah jadi produk lain hanya lewat file data,
+tanpa menyentuh kode:
+
+- **Identitas & gaya bicara** → `dataset/persona.json`
+- **Basis pengetahuan** → `dataries/` dan `dataset/knowledge/`
+
+Panduan lengkap kustomisasi ada di [`docs/STARTER-KIT.md`](docs/STARTER-KIT.md).
+Ketentuan penggunaan dan lisensi ada di [`docs/LICENSE-KIT.md`](docs/LICENSE-KIT.md).
+
+## Status
+
+Kerangka aplikasi, otak AI Raget, dan Jalanin sudah dalam tahap pengembangan
+aktif dan berfungsi penuh secara lokal. Pengembangan berjalan dalam ronde
+inkremental yang masing-masing didokumentasikan di `raget-devlog/` — riwayat
+lengkapnya, termasuk kelemahan yang belum tuntas dan rencana lanjutan,
+tercatat apa adanya di sana alih-alih di roadmap statis yang cepat basi.
