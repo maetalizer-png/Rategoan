@@ -29,6 +29,7 @@ import { socialEngine } from './social-engine.js';
 import { contextEngine } from './context-engine.js';
 import { worldContext } from './world-context.js';
 import { intelligenceRumus } from './intelligence-rumus.js';
+import { tokohStore } from './tokoh-store.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -361,6 +362,12 @@ async function respondCore(messages, prompt) {
       ragetDb.addNote(text, aboutEn, null, 'kg_about');
       return postProcess(aboutEn);
     }
+  }
+
+  const tokohReply = tokohStore.tryTokoh(text);
+  if (tokohReply) {
+    ragetDb.addNote(text, tokohReply, null, 'tokoh');
+    return postProcess(tokohReply);
   }
 
   const extras = await datariesBridge.extras(text);

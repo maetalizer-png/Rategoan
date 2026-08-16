@@ -5054,5 +5054,252 @@
       "5W1H",
       "First Principles"
     ]
+  },
+  {
+    "prompt": "siapa itu albert einstein",
+    "note": "Ronde v5 B6: tokoh profil - einstein",
+    "containsAll": [
+      "Fisika",
+      "Pencapaian utama",
+      "Kutipan",
+      "Trivia"
+    ]
+  },
+  {
+    "prompt": "ceritakan tentang marie curie",
+    "note": "Ronde v5 B6: tokoh profil - curie",
+    "containsAll": [
+      "Fisika/Kimia",
+      "radioaktivitas"
+    ]
+  },
+  {
+    "prompt": "biografi soekarno",
+    "note": "Ronde v5 B6: tokoh profil - soekarno",
+    "containsAll": [
+      "Presiden pertama Indonesia"
+    ]
+  },
+  {
+    "prompt": "siapa itu nelson mandela",
+    "note": "Ronde v5 B6: tokoh profil - mandela",
+    "containsAll": [
+      "apartheid"
+    ]
+  },
+  {
+    "prompt": "ceritakan tentang leonardo da vinci",
+    "note": "Ronde v5 B6: tokoh profil - davinci",
+    "containsAll": [
+      "Mona Lisa"
+    ]
+  },
+  {
+    "prompt": "siapa itu steve jobs",
+    "note": "Ronde v5 B6: tokoh profil - jobs",
+    "containsAll": [
+      "Apple"
+    ]
+  },
+  {
+    "prompt": "biografi dari b.j. habibie",
+    "note": "Ronde v5 B6: tokoh profil - habibie",
+    "containsAll": [
+      "Faktor Habibie"
+    ]
+  },
+  {
+    "prompt": "siapa itu malala yousafzai",
+    "note": "Ronde v5 B6: tokoh profil - malala",
+    "containsAll": [
+      "Nobel Perdamaian termuda"
+    ]
+  },
+  {
+    "prompt": "ceritakan tentang elon musk",
+    "note": "Ronde v5 B6: tokoh profil - musk",
+    "containsAll": [
+      "SpaceX"
+    ]
+  },
+  {
+    "prompt": "siapa itu william shakespeare",
+    "note": "Ronde v5 B6: tokoh profil - shakespeare",
+    "containsAll": [
+      "Hamlet"
+    ]
+  },
+  {
+    "prompt": "siapa itu raden ajeng kartini",
+    "note": "Ronde v5 B6: tokoh profil - kartini",
+    "containsAll": [
+      "emansipasi perempuan"
+    ]
+  },
+  {
+    "prompt": "ceritakan tentang mahatma gandhi",
+    "note": "Ronde v5 B6: tokoh profil - gandhi",
+    "containsAll": [
+      "tanpa kekerasan"
+    ]
+  },
+  {
+    "prompt": "apa pencapaian nelson mandela",
+    "note": "Ronde v5 B6: tokoh pencapaian - mandela",
+    "containsAll": [
+      "apartheid",
+      "presiden kulit hitam pertama"
+    ]
+  },
+  {
+    "prompt": "prestasi elon musk apa saja",
+    "note": "Ronde v5 B6: tokoh pencapaian - musk",
+    "containsAll": [
+      "Tesla",
+      "SpaceX"
+    ]
+  },
+  {
+    "prompt": "apa pencapaian marie curie",
+    "note": "Ronde v5 B6: tokoh pencapaian - curie",
+    "containsAll": [
+      "polonium"
+    ]
+  },
+  {
+    "prompt": "prestasi bill gates apa saja",
+    "note": "Ronde v5 B6: tokoh pencapaian - gates",
+    "containsAll": [
+      "Microsoft"
+    ]
+  },
+  {
+    "prompt": "apa pencapaian isaac newton",
+    "note": "Ronde v5 B6: tokoh pencapaian - newton",
+    "containsAll": [
+      "gravitasi"
+    ]
+  },
+  {
+    "prompt": "apa pencapaian charles darwin",
+    "note": "Ronde v5 B6: tokoh pencapaian - darwin",
+    "containsAll": [
+      "evolusi"
+    ]
+  },
+  {
+    "prompt": "prestasi soekarno apa saja",
+    "note": "Ronde v5 B6: tokoh pencapaian - soekarno",
+    "containsAll": [
+      "Memproklamasikan",
+      "kemerdekaan Indonesia"
+    ]
+  },
+  {
+    "prompt": "apa pencapaian jane goodall",
+    "note": "Ronde v5 B6: tokoh pencapaian - goodall",
+    "containsAll": [
+      "simpanse"
+    ]
+  },
+  {
+    "prompt": "kutipan terkenal dari mahatma gandhi",
+    "note": "Ronde v5 B6: tokoh kutipan - gandhi",
+    "contains": "perubahan yang ingin kamu lihat"
+  },
+  {
+    "prompt": "quote dari steve jobs",
+    "note": "Ronde v5 B6: tokoh kutipan - jobs",
+    "contains": "mencintai apa yang kamu kerjakan"
+  },
+  {
+    "prompt": "kutipan terkenal albert einstein",
+    "note": "Ronde v5 B6: tokoh kutipan - einstein",
+    "contains": "Imajinasi lebih penting"
+  },
+  {
+    "prompt": "kutipan dari nelson mandela",
+    "note": "Ronde v5 B6: tokoh kutipan - mandela",
+    "contains": "Aku menang atau aku belajar"
+  },
+  {
+    "prompt": "quote dari martin luther king jr.",
+    "note": "Ronde v5 B6: tokoh kutipan - mlk",
+    "contains": "punya mimpi"
+  },
+  {
+    "prompt": "kutipan dari walt disney",
+    "note": "Ronde v5 B6: tokoh kutipan - disney",
+    "contains": "memimpikannya"
+  },
+  {
+    "prompt": "kutipan terkenal dari neil armstrong",
+    "note": "Ronde v5 B6: tokoh kutipan - armstrong",
+    "contains": "langkah kecil"
+  },
+  {
+    "prompt": "trivia tentang nikola tesla",
+    "note": "Ronde v5 B6: tokoh trivia - tesla",
+    "contains": "perang arus"
+  },
+  {
+    "prompt": "fakta unik tentang frida kahlo",
+    "note": "Ronde v5 B6: tokoh trivia - kahlo",
+    "contains": "kecelakaan bus"
+  },
+  {
+    "prompt": "trivia dari albert einstein",
+    "note": "Ronde v5 B6: tokoh trivia - einstein",
+    "contains": "Otaknya diawetkan"
+  },
+  {
+    "prompt": "fakta unik tentang alan turing",
+    "note": "Ronde v5 B6: tokoh trivia - turing",
+    "contains": "Enigma"
+  },
+  {
+    "prompt": "trivia tentang vincent van gogh",
+    "note": "Ronde v5 B6: tokoh trivia - vangogh",
+    "contains": "telinganya"
+  },
+  {
+    "prompt": "fakta unik dari grace hopper",
+    "note": "Ronde v5 B6: tokoh trivia - hopper",
+    "contains": "bug"
+  },
+  {
+    "prompt": "trivia tentang ada lovelace",
+    "note": "Ronde v5 B6: tokoh trivia - lovelace",
+    "contains": "Lord Byron"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan isaac newton",
+    "note": "Ronde v5 B6: tokoh relasi - newton",
+    "contains": "Gottfried Leibniz"
+  },
+  {
+    "prompt": "hubungan chairil anwar dengan siapa",
+    "note": "Ronde v5 B6: tokoh relasi - chairil",
+    "contains": "Sutan Takdir Alisjahbana"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan soekarno",
+    "note": "Ronde v5 B6: tokoh relasi - soekarno",
+    "contains": "Mohammad Hatta"
+  },
+  {
+    "prompt": "hubungan nikola tesla dengan siapa",
+    "note": "Ronde v5 B6: tokoh relasi - tesla",
+    "contains": "Thomas Alva Edison"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan nelson mandela",
+    "note": "Ronde v5 B6: tokoh relasi - mandela",
+    "contains": "Desmond Tutu"
+  },
+  {
+    "prompt": "hubungan frida kahlo dengan siapa",
+    "note": "Ronde v5 B6: tokoh relasi - kahlo",
+    "contains": "Diego Rivera"
   }
 ]
