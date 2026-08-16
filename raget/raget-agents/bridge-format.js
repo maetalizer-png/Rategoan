@@ -57,11 +57,20 @@ function formatLanguages(languages) {
   return names.map((n) => (/^bahasa\b/i.test(n) ? n : 'Bahasa ' + n)).join(' dan ');
 }
 
+function formatEthnicGroups(groups) {
+  if (!Array.isArray(groups) || !groups.length) return String(groups || '');
+  return groups
+    .slice(0, 4)
+    .map((g) => g.name + (g.percentage != null ? ' (' + g.percentage + '%)' : ''))
+    .join(', ');
+}
+
 function formatValue(field, raw) {
   if (field === 'population') return '±' + formatCount(raw) + ' jiwa';
   if (field === 'area') return formatCount(raw) + ' km²';
   if (field === 'independenceDay') return formatIndependence(raw);
   if (field === 'languages') return formatLanguages(raw);
+  if (field === 'ethnicGroups') return formatEthnicGroups(raw);
   return String(raw);
 }
 
@@ -111,6 +120,7 @@ function craftAnswer(field, label, value, item, richness) {
     independenceDay: label + ' merdeka pada ' + value + '.',
     largestCity: 'Kota terbesar di ' + label + ' adalah ' + value + '.',
     area: 'Luas ' + label + ' sekitar ' + value + '.',
+    ethnicGroups: 'Suku terbesar di ' + label + ' antara lain ' + value + '.',
     phoneCode: 'Kode telepon ' + label + ' adalah ' + value + '.',
   };
   const base = sentences[field] || label + ': ' + value + '.';

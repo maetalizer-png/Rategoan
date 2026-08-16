@@ -46,6 +46,66 @@ async function tryAgregasi(text) {
   return 'Total ' + label.toLowerCase() + ' ' + bridgeResolve.capitalize(continentKey) + ' sekitar ' + bridgeFormat.formatValue(field, total) + ' (dari ' + matched.length + ' negara).';
 }
 
+const REGION_QUERY_MAP = {
+  'amerika utara': ['american-utara'],
+  'amerika selatan': ['american-selatan'],
+  'amerika tengah': ['american-tengah'],
+  'amerika karibia': ['american-karibia'],
+  'afrika utara': ['african-utara'],
+  'afrika barat': ['african-barat'],
+  'afrika timur': ['african-timur'],
+  'afrika selatan': ['african-selatan'],
+  'afrika tengah': ['african-tengah'],
+  'asia tenggara': ['asian-tenggara'],
+  'asia timur': ['asian-timur'],
+  'asia selatan': ['asian-selatan'],
+  'asia barat': ['asian-barat'],
+  'asia tengah': ['asian-tengah'],
+  'eropa barat': ['eropan-barat'],
+  'eropa timur': ['eropan-timur'],
+  'eropa utara': ['eropan-utara'],
+  'eropa selatan': ['eropan-selatan'],
+  'eropa tengah': ['eropan-tengah'],
+  asean: ['asian-tenggara'],
+  eropa: ['eropan-barat', 'eropan-selatan', 'eropan-tengah', 'eropan-timur', 'eropan-utara'],
+  afrika: ['african-barat', 'african-selatan', 'african-tengah', 'african-timur', 'african-utara'],
+  asia: ['asian-barat', 'asian-selatan', 'asian-tengah', 'asian-tenggara', 'asian-timur'],
+  amerika: ['american-karibia', 'american-selatan', 'american-tengah', 'american-utara'],
+  osenia: ['osenian'],
+  oseania: ['osenian'],
+};
+
+const REGION_LIST_INTENT_RE = /\b(sebutkan|daftar|apa\s+saja|apa\s+aja|ada\s+berapa)\b/i;
+
+function findRegionKey(t) {
+  const keys = Object.keys(REGION_QUERY_MAP).sort((a, b) => b.length - a.length);
+  for (const k of keys) {
+    const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (new RegExp('\\b' + escaped + '\\b', 'i').test(t)) return k;
+  }
+  return null;
+}
+
+async function tryRegionList(text) {
+  const t = text.toLowerCase();
+  if (!/\bnegara\b/.test(t)) return null;
+  if (!REGION_LIST_INTENT_RE.test(t)) return null;
+  const matchedKey = findRegionKey(t);
+  if (!matchedKey) return null;
+  const regionIds = REGION_QUERY_MAP[matchedKey];
+  const countries = await dataries.loadAll('country');
+  const matched = countries.filter((c) => regionIds.includes(c.metadata.region));
+  if (!matched.length) return null;
+  const label = bridgeResolve.capitalize(matchedKey);
+  const names = matched.map((c) => c.metadata.name);
+  const NAME_CAP = 15;
+  const shown = names.slice(0, NAME_CAP).join(', ') + (names.length > NAME_CAP ? ', dan ' + (names.length - NAME_CAP) + ' lainnya' : '');
+  if (/ada\s+berapa/.test(t)) {
+    return 'Di basis data ini ada ' + matched.length + ' negara di ' + label + ': ' + shown + '.';
+  }
+  return 'Negara-negara di ' + label + ' (di basis data ini): ' + shown + '.';
+}
+
 async function tryReverseLookup(text) {
   const currencyM = text.match(/negara\s+(?:apa\s+)?(?:yang\s+)?mata\s*uangnya\s+(.+?)\??$/i);
   const langM = text.match(/negara\s+(?:apa\s+)?(?:yang\s+)?bahasanya\s+(.+?)\??$/i);
@@ -207,6 +267,7 @@ async function tryAnaforaLuas(text, opts) {
 export const bridgeReasoning = Object.freeze({
   trySuperlatif,
   tryAgregasi,
+  tryRegionList,
   tryReverseLookup,
   tryKonversiSatuan,
   tryKonversiMataUang,

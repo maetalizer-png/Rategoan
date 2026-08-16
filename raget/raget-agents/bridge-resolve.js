@@ -20,6 +20,7 @@ const COUNTRY_ALIASES = {
   'new zealand': 'selandia baru',
   rrc: 'china',
   tiongkok: 'china',
+  cina: 'china',
   russia: 'rusia',
   perancis: 'prancis',
   italy: 'italia',

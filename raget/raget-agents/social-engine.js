@@ -113,6 +113,27 @@ function tryDiskusiPerdebatan(text) {
   });
 }
 
+const NON_SUPERLATIVE_TER_RE = /^(tersebut|ternyata|terus|terima|tertentu|terlibat|terjadi|terlihat|tergantung|terkait|terlambat|terdiri|terletak|terjebak|terpaksa|terjatuh|tersisa|terpisah|tersimpan|terjaga|terikat|terbentuk|terkena|tersedia|terpenting|terutama|terhadap|termasuk|terhubung)$/i;
+
+function isSuperlativeQuery(t) {
+  if (/\b(paling\s+\w+|nomor\s*satu)\b/i.test(t)) return true;
+  const terMatches = t.match(/\bter[a-z]{3,}\b/gi) || [];
+  return terMatches.some((w) => !NON_SUPERLATIVE_TER_RE.test(w));
+}
+
+function tryOpiniUmum(text) {
+  const t = text.toLowerCase();
+  const isOpinionAsk = /\bmenurut(mu|kamu)?\b|\bapa\s+pendapatmu\b|\bgimana\s+pendapatmu\b|\bbagaimana\s+pendapatmu\b/i.test(t);
+  const isSuperlative = isSuperlativeQuery(t);
+  if (!isOpinionAsk || !isSuperlative) return null;
+  if (findTopic(t)) return null;
+  return naturalize({
+    body:
+      'Aku nggak punya preferensi atau selera pribadi karena aku mesin rule-based, bukan yang benar-benar merasakan sesuatu — jadi nggak adil kalau aku klaim satu jawaban sebagai "terbaik" secara subjektif.',
+    followup: 'Kalau kamu kasih tahu kriteria yang penting buat kamu (misalnya biaya, keamanan, atau kenyamanan), aku bisa bantu cari fakta relevan biar kamu bisa nilai sendiri.',
+  });
+}
+
 // ---------- SOCIAL INTENT: HUMOR ----------
 
 const JOKE_BANK = [
@@ -277,6 +298,7 @@ function trySocial(text) {
   return (
     tryCurhat(t) ||
     tryDiskusiPerdebatan(t) ||
+    tryOpiniUmum(t) ||
     tryHumor(t) ||
     tryMotivasi(t) ||
     tryKritik(t) ||
@@ -291,6 +313,7 @@ function trySocial(text) {
 export const socialEngine = Object.freeze({
   tryCurhat,
   tryDiskusiPerdebatan,
+  tryOpiniUmum,
   tryHumor,
   tryMotivasi,
   tryKritik,

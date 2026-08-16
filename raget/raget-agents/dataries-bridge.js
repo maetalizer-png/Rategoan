@@ -81,6 +81,9 @@ async function factoid(q, options) {
   const multiHop = await tryMultiHopCapital(text, opts);
   if (multiHop) return multiHop;
 
+  const regionList = await bridgeReasoning.tryRegionList(text);
+  if (regionList) return regionList;
+
   const aboutMatch = text.match(
     /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+(negara|kota)?\s*(.+)$/i
   );
@@ -107,14 +110,15 @@ async function factoid(q, options) {
   }
 
   let resolved = null;
-  if (entityRaw) {
-    resolved = await bridgeRelations.resolveValue(relation, entityRaw);
-    if (!resolved) return null;
-  } else {
-    const fallbackEntity = opts.lastEntity || opts.lastTopic;
-    if (fallbackEntity) resolved = await bridgeRelations.resolveValue(relation, String(fallbackEntity).toLowerCase().trim());
+  const primaryEntity = entityRaw || (opts.lastEntity || opts.lastTopic ? String(opts.lastEntity || opts.lastTopic).toLowerCase().trim() : null);
+  if (primaryEntity) resolved = await bridgeRelations.resolveValue(relation, primaryEntity);
+  if (!resolved) {
+    if (relation.fields.includes('seaArea') && primaryEntity) {
+      const countryItem = await bridgeResolve.lookupInGroup('country', bridgeResolve.resolveCountryAlias(primaryEntity));
+      if (countryItem) return 'Belum ada data luas lautan yang presisi untuk ' + countryItem.metadata.name + ' di basis data ini.';
+    }
+    return null;
   }
-  if (!resolved) return null;
 
   memoryContext.setRelation(resolved.field);
   return bridgeFormat.craftAnswer(resolved.field, resolved.label, resolved.value, resolved.item, opts.richness);
