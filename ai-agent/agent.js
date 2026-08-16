@@ -26,6 +26,7 @@ import { knowledgeGraph } from './knowledge-graph.js';
 import { answerComposer } from './answer-composer.js';
 import { stemEngine } from './stem-engine.js';
 import { socialEngine } from './social-engine.js';
+import { contextEngine } from './context-engine.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -198,6 +199,12 @@ async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
 
+  const emergencyReply = contextEngine.tryEmergency(text);
+  if (emergencyReply) {
+    ragetDb.addNote(text, emergencyReply, null, 'context_emergency');
+    return postProcess(emergencyReply);
+  }
+
   const multiIntent = await tryMultiIntent(text, messages);
   if (multiIntent) {
     ragetDb.addNote(text, multiIntent, null, 'multi_intent');
@@ -368,6 +375,12 @@ async function respondCore(messages, prompt) {
   if (socialReply) {
     ragetDb.addNote(text, socialReply, null, 'social');
     return postProcess(socialReply);
+  }
+
+  const contextReply = await contextEngine.tryContext(text);
+  if (contextReply) {
+    ragetDb.addNote(text, contextReply, null, 'context');
+    return postProcess(contextReply);
   }
 
   const teaching = routerIntent.detectTeaching(text);
