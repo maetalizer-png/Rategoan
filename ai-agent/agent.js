@@ -25,6 +25,7 @@ import { bilingual } from './bilingual.js';
 import { knowledgeGraph } from './knowledge-graph.js';
 import { answerComposer } from './answer-composer.js';
 import { stemEngine } from './stem-engine.js';
+import { socialEngine } from './social-engine.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -351,10 +352,22 @@ async function respondCore(messages, prompt) {
     return postProcess(extras);
   }
 
+  const csReply = socialEngine.tryLatte(text) || socialEngine.tryHeard(text) || socialEngine.tryThreeA(text);
+  if (csReply) {
+    ragetDb.addNote(text, csReply, null, 'social');
+    return postProcess(csReply);
+  }
+
   const stemReply = stemEngine.tryStem(text);
   if (stemReply) {
     ragetDb.addNote(text, stemReply, null, 'stem');
     return postProcess(stemReply);
+  }
+
+  const socialReply = socialEngine.trySocial(text);
+  if (socialReply) {
+    ragetDb.addNote(text, socialReply, null, 'social');
+    return postProcess(socialReply);
   }
 
   const teaching = routerIntent.detectTeaching(text);
