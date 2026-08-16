@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇺🇸 AMERIKA (6)
-    // ==========================================================
     {
         text: 'Zillow - Platform properti terbesar AS. Didirikan 2006. Fitur Zestimate estimasi nilai rumah.',
         metadata: {
@@ -93,9 +90,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇬🇧 INGGRIS (3)
-    // ==========================================================
     {
         text: 'Rightmove - Platform properti terbesar Inggris. Didirikan 2000. 1 juta+ listing properti.',
         metadata: {
@@ -142,9 +136,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇪 JERMAN (2)
-    // ==========================================================
     {
         text: 'ImmobilienScout24 - Platform properti terbesar Jerman. Didirikan 1998. Jutaan listing.',
         metadata: {
@@ -176,9 +167,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇫🇷 PRANCIS (2)
-    // ==========================================================
     {
         text: 'Seloger - Platform properti terbesar Prancis. Didirikan 2000. Portal utama properti Prancis.',
         metadata: {
@@ -210,9 +198,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇪🇸 SPANYOL (2)
-    // ==========================================================
     {
         text: 'Fotocasa - Platform properti terbesar Spanyol. Didirikan 2002. Jutaan listing properti.',
         metadata: {
@@ -244,9 +229,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇹 ITALIA (2)
-    // ==========================================================
     {
         text: 'Immobiliare.it - Platform properti terbesar Italia. Didirikan 1999. Jutaan listing properti.',
         metadata: {
@@ -278,9 +260,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇱 BELANDA (2)
-    // ==========================================================
     {
         text: 'Funda - Platform properti terbesar Belanda. Didirikan 2001. Jutaan listing properti.',
         metadata: {
@@ -312,9 +291,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇳 CHINA (3)
-    // ==========================================================
     {
         text: 'Beike (KE Holdings) - Platform properti terbesar China. Didirikan 2018. AI & big data.',
         metadata: {
@@ -361,9 +337,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇯🇵 JEPANG (2)
-    // ==========================================================
     {
         text: 'SUUMO - Platform properti terbesar Jepang. Didirikan 2003. Jutaan listing properti.',
         metadata: {
@@ -395,9 +368,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇳 INDIA (3)
-    // ==========================================================
     {
         text: 'Magicbricks - Platform properti terbesar India. Didirikan 2006. Jutaan listing properti.',
         metadata: {
@@ -444,9 +414,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇪 UEA (2)
-    // ==========================================================
     {
         text: 'Property Finder - Platform properti terbesar Timur Tengah. Didirikan 2007. 50+ negara.',
         metadata: {
@@ -478,9 +445,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇧🇷 BRAZIL (2)
-    // ==========================================================
     {
         text: 'Zap Imóveis - Platform properti terbesar Brazil. Didirikan 2005. Jutaan listing properti.',
         metadata: {
@@ -512,9 +476,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇺 AUSTRALIA (2)
-    // ==========================================================
     {
         text: 'Realestate.com.au - Platform properti terbesar Australia. Didirikan 1995. Acuan harga nasional.',
         metadata: {
@@ -546,9 +507,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇦 KANADA (2)
-    // ==========================================================
     {
         text: 'Realtor.ca - Platform properti terbesar Kanada. Didirikan 1995. Data resmi.',
         metadata: {
@@ -580,9 +538,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇬 SINGAPURA (2)
-    // ==========================================================
     {
         text: 'PropertyGuru SG - Platform properti terbesar Singapura. Didirikan 2006.',
         metadata: {
@@ -614,9 +569,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇩 INDONESIA (6)
-    // ==========================================================
     {
         text: 'Rumah.com - Platform properti terbesar Indonesia. Didirikan 2007. 500K+ listing.',
         metadata: {
@@ -708,9 +660,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇿🇦 AFRIKA SELATAN (2)
-    // ==========================================================
     {
         text: 'Property24 - Platform properti terbesar Afrika Selatan. Didirikan 2005.',
         metadata: {
@@ -742,9 +691,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇹 PORTUGAL (2) — BARU!
-    // ==========================================================
     {
         text: 'Idealista Portugal - Platform properti terbesar Portugal. Didirikan 2000.',
         metadata: {
@@ -776,9 +722,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇪 SWEDIA (2) — BARU!
-    // ==========================================================
     {
         text: 'Hemnet - Platform properti terbesar Swedia. Didirikan 1998. Jutaan listing properti.',
         metadata: {
@@ -810,9 +753,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇴 NORWEGIA (2) — BARU!
-    // ==========================================================
     {
         text: 'Finn Eiendom - Platform properti terbesar Norwegia. Didirikan 2000.',
         metadata: {
@@ -844,9 +784,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇰 DENMARK (2) — BARU!
-    // ==========================================================
     {
         text: 'Boligsiden - Platform properti terbesar Denmark. Didirikan 1999.',
         metadata: {
@@ -878,9 +815,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇹🇷 TURKI (2) — BARU!
-    // ==========================================================
     {
         text: 'Sahibinden Emlak - Platform properti terbesar Turki. Didirikan 2000.',
         metadata: {
@@ -912,9 +846,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇻🇳 VIETNAM (2) — BARU!
-    // ==========================================================
     {
         text: 'Batdongsan - Platform properti terbesar Vietnam. Didirikan 2007.',
         metadata: {
@@ -946,9 +877,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇹🇭 THAILAND (2) — BARU!
-    // ==========================================================
     {
         text: 'DDproperty - Platform properti terbesar Thailand. Didirikan 2008.',
         metadata: {
@@ -980,9 +908,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇲🇾 MALAYSIA (2) — BARU!
-    // ==========================================================
     {
         text: 'PropertyGuru MY - Platform properti terbesar Malaysia. Didirikan 2006.',
         metadata: {

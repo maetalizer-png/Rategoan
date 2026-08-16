@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇳🇴 NORWEGIA
-    // ==========================================================
     {
         text: 'Norwegia - Negara di Eropa Utara dengan fjord dan kekayaan minyak. Ibu kota: Oslo. Populasi: 5.4 juta jiwa. Mata uang: Krone (NOK). Bahasa: Norwegia. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan kualitas hidup tertinggi di dunia. Kaya akan minyak, gas, dan pemandangan alam yang indah. Rumah bagi fjord-fjord megah dan Aurora Borealis. Pemimpin global dalam energi terbarukan dan kesetaraan gender.',
         metadata: {
@@ -140,9 +137,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'minyak', 'fjord', 'nato']
         }
     },
-    // ==========================================================
-    // 🇸🇪 SWEDIA
-    // ==========================================================
     {
         text: 'Swedia - Negara di Eropa Utara dengan ekonomi maju dan inovasi tinggi. Ibu kota: Stockholm. Populasi: 10.4 juta jiwa. Mata uang: Krona (SEK). Bahasa: Swedia. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan inovasi, kesetaraan, dan kualitas hidup tertinggi. Rumah bagi Spotify, IKEA, dan Volvo. Pemimpin global dalam teknologi dan hak asasi manusia.',
         metadata: {
@@ -282,9 +276,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'inovasi', 'hak-asasi', 'ue']
         }
     },
-    // ==========================================================
-    // 🇫🇮 FINLANDIA
-    // ==========================================================
     {
         text: 'Finlandia - Negara di Eropa Utara dengan pendidikan terbaik dunia. Ibu kota: Helsinki. Populasi: 5.5 juta jiwa. Mata uang: Euro (EUR). Bahasa: Finlandia, Swedia. Sistem pemerintahan: Republik Parlementer. Negara dengan pendidikan dan kualitas hidup terbaik. Rumah bagi sauna, Danau Saimaa, dan Aurora Borealis. Pemimpin global dalam teknologi dan inovasi.',
         metadata: {
@@ -423,9 +414,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'pendidikan', 'teknologi', 'ue']
         }
     },
-    // ==========================================================
-    // 🇩🇰 DENMARK
-    // ==========================================================
     {
         text: 'Denmark - Negara di Eropa Utara dengan sejarah Viking dan desain. Ibu kota: Kopenhagen. Populasi: 5.9 juta jiwa. Mata uang: Krone (DKK). Bahasa: Denmark. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan desain, kualitas hidup, dan energi terbarukan. Rumah bagi LEGO, hygge, dan istana-istana megah. Pemimpin global dalam energi angin dan keberlanjutan.',
         metadata: {
@@ -564,9 +552,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'viking', 'desain', 'energi']
         }
     },
-    // ==========================================================
-    // 🇮🇸 ISLANDIA
-    // ==========================================================
     {
         text: 'Islandia - Negara di Eropa Utara dengan alam vulkanik dan aurora. Ibu kota: Reykjavik. Populasi: 0.38 juta jiwa. Mata uang: Krona (ISK). Bahasa: Islandia. Sistem pemerintahan: Republik Parlementer. Negara dengan energi terbarukan 100%. Rumah bagi gunung berapi, gletser, dan Aurora Borealis. Destinasi wisata alam terbaik di dunia.',
         metadata: {
@@ -705,9 +690,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'vulkan', 'aurora', 'energi']
         }
     },
-    // ==========================================================
-    // 🇪🇪 ESTONIA
-    // ==========================================================
     {
         text: 'Estonia - Negara Baltik di Eropa Utara dengan digitalisasi terbaik. Ibu kota: Tallinn. Populasi: 1.3 juta jiwa. Mata uang: Euro (EUR). Bahasa: Estonia. Sistem pemerintahan: Republik Parlementer. Negara dengan e-government terbaik di dunia. Pemimpin global dalam digitalisasi dan startup. Rumah bagi Skype dan kota abad pertengahan Tallinn.',
         metadata: {
@@ -846,9 +828,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'digital', 'egov', 'ue']
         }
     },
-    // ==========================================================
-    // 🇱🇻 LATVIA
-    // ==========================================================
     {
         text: 'Latvia - Negara Baltik di Eropa Utara dengan sejarah dan budaya. Ibu kota: Riga. Populasi: 1.8 juta jiwa. Mata uang: Euro (EUR). Bahasa: Latvia. Sistem pemerintahan: Republik Parlementer. Negara dengan arsitektur Art Nouveau dan budaya Baltik. Riga salah satu kota terindah di Eropa. Pemimpin global dalam inovasi dan startup.',
         metadata: {
@@ -987,9 +966,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'baltik', 'ue', 'nato']
         }
     },
-    // ==========================================================
-    // 🇱🇹 LITHUANIA
-    // ==========================================================
     {
         text: 'Lithuania - Negara Baltik di Eropa Utara dengan ekonomi maju. Ibu kota: Vilnius. Populasi: 2.7 juta jiwa. Mata uang: Euro (EUR). Bahasa: Lithuania. Sistem pemerintahan: Republik Semi-Presidensial. Negara dengan sejarah panjang dan budaya Baltik. Vilnius salah satu kota terindah di Eropa. Pemimpin global dalam fintech dan teknologi.',
         metadata: {
@@ -1129,9 +1105,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'baltik', 'ue', 'nato']
         }
     },
-    // ==========================================================
-    // 🇫🇴 KEPULAUAN FAROE
-    // ==========================================================
     {
         text: 'Kepulauan Faroe - Wilayah otonom Denmark di Eropa Utara dengan budaya Viking. Ibu kota: Tórshavn. Populasi: 50 ribu jiwa. Mata uang: Krone (DKK). Bahasa: Faroe, Denmark. Sistem pemerintahan: Wilayah Otonom. Pemandangan fjord dan tebing curam. Ekonomi berbasis perikanan. Destinasi wisata alam yang eksotis dan budaya Viking yang kuat.',
         metadata: {
@@ -1267,9 +1240,6 @@ const data = [
             tags: ['negara', 'eropan-utara', 'viking', 'fjord', 'perikanan']
         }
     },
-    // ==========================================================
-    // 🇸🇯 SVALBARD
-    // ==========================================================
     {
         text: 'Svalbard - Wilayah Norwegia di Eropa Utara dengan beruang kutub dan aurora. Ibu kota: Longyearbyen. Populasi: 2.5 ribu jiwa. Mata uang: Krone (NOK). Bahasa: Norwegia. Sistem pemerintahan: Wilayah Khusus. Satu-satunya tempat di dunia yang bebas visa. Gudang benih global. Destinasi wisata Arktik yang eksotis. Rumah bagi beruang kutub dan pemandangan aurora yang spektakuler.',
         metadata: {

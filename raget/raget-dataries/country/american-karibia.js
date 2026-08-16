@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇯🇲 JAMAICA
-    // ==========================================================
     {
         text: 'Jamaika - Negara kepulauan di Karibia dengan budaya Reggae dan pariwisata. Ibu kota: Kingston. Populasi: 2.9 juta jiwa. Mata uang: Dolar Jamaika (JMD). Bahasa: Inggris, Patois. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan musik Reggae, Bob Marley, dan pantai-pantai indah. Destinasi wisata terkemuka di Karibia.',
         metadata: {
@@ -139,9 +136,6 @@ const data = [
             tags: ['negara', 'american-karibia', 'karibia', 'reggae', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇭🇹 HAITI
-    // ==========================================================
     {
         text: 'Haiti - Negara di Karibia dengan sejarah dan budaya kaya. Ibu kota: Port-au-Prince. Populasi: 11.4 juta jiwa. Mata uang: Gourde (HTG). Bahasa: Prancis, Kreol. Sistem pemerintahan: Republik Presidensial. Negara pertama yang merdeka di Karibia. Sejarah perjuangan kemerdekaan yang kuat. Budaya Afrika dan Prancis yang unik.',
         metadata: {
@@ -279,9 +273,6 @@ const data = [
             tags: ['negara', 'american-karibia', 'karibia', 'sejarah', 'budaya']
         }
     },
-    // ==========================================================
-    // 🇩🇴 REPUBLIK DOMINIKA
-    // ==========================================================
     {
         text: 'Republik Dominika - Negara di Karibia dengan ekonomi dan pariwisata maju. Ibu kota: Santo Domingo. Populasi: 10.8 juta jiwa. Mata uang: Peso Dominika (DOP). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan pantai-pantai indah dan ekonomi terbesar di Karibia. Rumah bagi kota kolonial Santo Domingo dan resor Punta Cana.',
         metadata: {
@@ -420,9 +411,6 @@ const data = [
             tags: ['negara', 'american-karibia', 'karibia', 'pariwisata', 'ekonomi']
         }
     },
-    // ==========================================================
-    // 🇧🇸 BAHAMA
-    // ==========================================================
     {
         text: 'Bahama - Negara kepulauan di Karibia dengan pantai pasir putih dan pariwisata. Ibu kota: Nassau. Populasi: 400 ribu jiwa. Mata uang: Dolar Bahama (BSD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Destinasi wisata mewah di Karibia. Rumah bagi Atlantis Resort dan pantai-pantai eksotis.',
         metadata: {
@@ -559,9 +547,6 @@ const data = [
             tags: ['negara', 'american-karibia', 'karibia', 'pariwisata', 'mewah']
         }
     },
-    // ==========================================================
-    // 🇧🇧 BARBADOS
-    // ==========================================================
     {
         text: 'Barbados - Negara kepulauan di Karibia dengan ekonomi maju dan pariwisata. Ibu kota: Bridgetown. Populasi: 290 ribu jiwa. Mata uang: Dolar Barbados (BBD). Bahasa: Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan pantai-pantai indah dan kualitas hidup tinggi. Rumah bagi Rihanna dan pantai-pantai eksotis.',
         metadata: {
@@ -698,9 +683,6 @@ const data = [
             tags: ['negara', 'american-karibia', 'karibia', 'pariwisata', 'rihanna']
         }
     },
-    // ==========================================================
-    // 🇹🇹 TRINIDAD & TOBAGO
-    // ==========================================================
     {
         text: 'Trinidad dan Tobago - Negara kepulauan di Karibia dengan ekonomi minyak dan gas. Ibu kota: Port of Spain. Populasi: 1.4 juta jiwa. Mata uang: Dolar Trinidad (TTD). Bahasa: Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan minyak dan gas, serta budaya Karibia yang kaya. Rumah bagi karnaval dan masakan Karibia.',
         metadata: {
@@ -839,9 +821,6 @@ const data = [
             tags: ['negara', 'american-karibia', 'karibia', 'minyak', 'gas']
         }
     },
-    // ==========================================================
-    // 🇵🇷 PUERTO RICO
-    // ==========================================================
     {
         text: 'Puerto Rico - Wilayah Amerika Serikat di Karibia dengan budaya dan pariwisata. Ibu kota: San Juan. Populasi: 3.2 juta jiwa. Mata uang: Dolar AS (USD). Bahasa: Spanyol, Inggris. Sistem pemerintahan: Wilayah AS. Destinasi wisata Karibia dengan pantai-pantai indah. Rumah bagi budaya dan musik Latin yang kaya.',
         metadata: {

@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🌅 SAPAAN BERDASARKAN WAKTU (7)
-    // ==========================================================
     {
         text: 'Selamat pagi! Semoga hari Anda dimulai dengan semangat dan energi positif.',
         metadata: {
@@ -81,10 +78,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🌍 SAPAAN PER NEGARA (60+ NEGARA)
-    // ==========================================================
-    // ===== ASIA TENGGARA (9) =====
     {
         text: 'Bahasa Indonesia: Selamat pagi, selamat siang, selamat sore, selamat malam.',
         metadata: {
@@ -239,7 +232,6 @@ const data = [
         }
     },
     
-    // ===== ASIA TIMUR (4) =====
     {
         text: 'Bahasa Jepang: おはようございます (Ohayō gozaimasu), こんにちは (Konnichiwa), こんばんは (Konbanwa), おやすみなさい (Oyasuminasai).',
         metadata: {
@@ -309,7 +301,6 @@ const data = [
         }
     },
     
-    // ===== ASIA SELATAN (5) =====
     {
         text: 'Bahasa Hindi: शुभ प्रभात (Shubh prabhat), शुभ दोपहर (Shubh dopahar), शुभ संध्या (Shubh sandhya), शुभ रात्रि (Shubh ratri).',
         metadata: {
@@ -396,7 +387,6 @@ const data = [
         }
     },
     
-    // ===== ASIA BARAT / TIMUR TENGAH (5) =====
     {
         text: 'Bahasa Arab: صباح الخير (Sabah al-khair), مساء الخير (Masa\' al-khair), تصبح على خير (Tusbih ala khair).',
         metadata: {
@@ -483,7 +473,6 @@ const data = [
         }
     },
     
-    // ===== EROPA (20+) =====
     {
         text: 'Bahasa Inggris (AS): Good morning, good afternoon, good evening, good night.',
         metadata: {
@@ -858,7 +847,6 @@ const data = [
         }
     },
     
-    // ===== AMERIKA UTARA & TENGAH =====
     {
         text: 'Kanada (Inggris/Prancis): Good morning / Bonjour, good afternoon / bon après-midi, good evening / bonsoir, good night / bonne nuit.',
         metadata: {
@@ -979,7 +967,6 @@ const data = [
         }
     },
     
-    // ===== AMERIKA SELATAN (5) =====
     {
         text: 'Bahasa Spanyol (Argentina): Buen día, buenas tardes, buenas noches. (Menggunakan "vos" alih-alih "tú")',
         metadata: {
@@ -1066,7 +1053,6 @@ const data = [
         }
     },
     
-    // ===== AFRIKA (7) =====
     {
         text: 'Bahasa Afrikaans (Afrika Selatan): Goeie more, goeie middag, goeie naand, goeie nag.',
         metadata: {
@@ -1187,7 +1173,6 @@ const data = [
         }
     },
     
-    // ===== OSEANIA & PASIFIK (5) =====
     {
         text: 'Bahasa Inggris (Australia): G\'day, good morning, good afternoon, good evening, good night.',
         metadata: {
@@ -1274,9 +1259,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🧑‍💼 SAPAAN SITUASI & FORMALITAS (6)
-    // ==========================================================
     {
         text: 'Selamat pagi, Bapak/Ibu! Semoga hari Anda menyenangkan.',
         metadata: {
@@ -1341,9 +1323,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🎉 HARI RAYA & MOMENTUM (7)
-    // ==========================================================
     {
         text: 'Selamat Idul Fitri, mohon maaf lahir dan batin!',
         metadata: {
@@ -1425,9 +1404,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🌤️ SAPAAN BERBASIS CUACA (RANDOM) - 4
-    // ==========================================================
     {
         text: 'Selamat pagi! Hari ini cerah, semangat menjalani aktivitas!',
         metadata: {
@@ -1469,9 +1445,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🌏 BAHASA DAERAH INDONESIA (8)
-    // ==========================================================
     {
         text: 'Sugeng enjing! (Selamat pagi dalam bahasa Jawa)',
         metadata: {

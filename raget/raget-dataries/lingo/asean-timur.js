@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇨🇳 CHINA — 7 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Mandarin - Bahasa resmi China, Taiwan, dan Singapura. Digunakan oleh lebih dari 1.1 miliar penutur. Termasuk rumpun bahasa Sino-Tibet. Menggunakan aksara Hanzi (Sederhana di China, Tradisional di Taiwan). Sistem nada dengan 4 nada + nada netral.',
         metadata: {
@@ -107,9 +104,6 @@ const data = [
             tags: ['bahasa', 'asean-timur', 'china', 'gan']
         }
     },
-    // ==========================================================
-    // 🇯🇵 JEPANG — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Jepang - Bahasa resmi Jepang. Digunakan oleh lebih dari 125 juta penutur. Termasuk rumpun bahasa Japonik. Menggunakan kombinasi aksara: Kanji, Hiragana, Katakana. Bahasa dengan sistem honorifik yang kompleks. Tidak memiliki nada (non-tonal).',
         metadata: {
@@ -125,9 +119,6 @@ const data = [
             tags: ['bahasa', 'asean-timur', 'jepang', 'resmi', 'japonik']
         }
     },
-    // ==========================================================
-    // 🇰🇷 KOREA SELATAN — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Korea - Bahasa resmi Korea Selatan dan Korea Utara. Digunakan oleh lebih dari 80 juta penutur. Termasuk rumpun bahasa Koreanik. Menggunakan aksara Hangul yang unik dan ilmiah. Bahasa dengan sistem honorifik yang kompleks. Tidak memiliki nada (non-tonal).',
         metadata: {
@@ -143,9 +134,6 @@ const data = [
             tags: ['bahasa', 'asean-timur', 'korea-selatan', 'resmi', 'hangul']
         }
     },
-    // ==========================================================
-    // 🇰🇵 KOREA UTARA — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Korea - Bahasa resmi Korea Utara. Digunakan oleh lebih dari 25 juta penutur. Termasuk rumpun bahasa Koreanik. Menggunakan aksara Hangul. Dialek berbeda dengan Korea Selatan dalam kosakata dan logat.',
         metadata: {
@@ -161,9 +149,6 @@ const data = [
             tags: ['bahasa', 'asean-timur', 'korea-utara', 'resmi', 'hangul']
         }
     },
-    // ==========================================================
-    // 🇲🇳 MONGOLIA — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Mongolia - Bahasa resmi Mongolia. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Mongolik. Menggunakan aksara Kiril di Mongolia dan aksara Mongolia Tradisional di China. Bahasa dengan harmoni vokal yang kuat.',
         metadata: {
@@ -179,9 +164,6 @@ const data = [
             tags: ['bahasa', 'asean-timur', 'mongolia', 'resmi', 'mongolik']
         }
     },
-    // ==========================================================
-    // 🇹🇼 TAIWAN — 3 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Mandarin - Bahasa resmi Taiwan. Digunakan oleh lebih dari 20 juta penutur. Termasuk rumpun bahasa Sino-Tibet. Menggunakan aksara Hanzi Tradisional. Sistem nada dengan 4 nada + nada netral.',
         metadata: {
@@ -227,9 +209,6 @@ const data = [
             tags: ['bahasa', 'asean-timur', 'taiwan', 'hakka']
         }
     },
-    // ==========================================================
-    // 🇭🇰 HONG KONG — 3 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Kantonis - Bahasa resmi Hong Kong dan Makau. Digunakan oleh lebih dari 7 juta penutur. Termasuk rumpun bahasa Sino-Tibet (Yue). Menggunakan aksara Hanzi Tradisional. Bahasa dengan sistem nada 6-9 nada.',
         metadata: {

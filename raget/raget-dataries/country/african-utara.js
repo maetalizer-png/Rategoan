@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇪🇬 MESIR
-    // ==========================================================
     {
         text: 'Mesir - Negara di Afrika Utara dengan peradaban kuno dan Suez. Ibu kota: Kairo. Populasi: 110 juta jiwa. Mata uang: Pound (EGP). Bahasa: Arab. Sistem pemerintahan: Republik Semi-Presidensial. Anggota PBB, AU, dan Liga Arab. Rumah bagi piramida Giza, Sphinx, dan Sungai Nil. Pusat peradaban kuno dan pariwisata dunia.',
         metadata: {
@@ -138,9 +135,6 @@ const data = [
             tags: ['negara', 'african-utara', 'piramida', 'suez', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇲🇦 MAROKO
-    // ==========================================================
     {
         text: 'Maroko - Negara di Afrika Utara dengan ekonomi dan pariwisata. Ibu kota: Rabat. Populasi: 37 juta jiwa. Mata uang: Dirham (MAD). Bahasa: Arab, Berber. Sistem pemerintahan: Monarki Konstitusional. Anggota PBB, AU, dan Liga Arab. Negara dengan pasar tradisional, Arsitektur Islam, dan pantai Atlantik yang indah.',
         metadata: {
@@ -279,9 +273,6 @@ const data = [
             tags: ['negara', 'african-utara', 'energi', 'pariwisata', 'ligar']
         }
     },
-    // ==========================================================
-    // 🇩🇿 ALJAZAIR
-    // ==========================================================
     {
         text: 'Aljazair - Negara terbesar di Afrika dengan cadangan gas alam. Ibu kota: Aljir. Populasi: 44 juta jiwa. Mata uang: Dinar (DZD). Bahasa: Arab, Berber. Sistem pemerintahan: Republik Semi-Presidensial. Anggota PBB, AU, dan OPEC. Negara dengan gurun Sahara dan cadangan minyak dan gas terbesar di Afrika.',
         metadata: {
@@ -420,9 +411,6 @@ const data = [
             tags: ['negara', 'african-utara', 'gas', 'minyak', 'opec']
         }
     },
-    // ==========================================================
-    // 🇹🇳 TUNISIA
-    // ==========================================================
     {
         text: 'Tunisia - Negara di Afrika Utara dengan sejarah dan pantai Mediterania. Ibu kota: Tunis. Populasi: 12 juta jiwa. Mata uang: Dinar (TND). Bahasa: Arab. Sistem pemerintahan: Republik Parlementer. Anggota PBB, AU, dan Liga Arab. Rumah bagi Kartago kuno dan pantai-pantai indah Mediterania.',
         metadata: {
@@ -560,9 +548,6 @@ const data = [
             tags: ['negara', 'african-utara', 'mediterania', 'sejarah', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇱🇾 LIBYA
-    // ==========================================================
     {
         text: 'Libya - Negara di Afrika Utara dengan cadangan minyak besar. Ibu kota: Tripoli. Populasi: 7 juta jiwa. Mata uang: Dinar (LYD). Bahasa: Arab. Sistem pemerintahan: Republik. Anggota PBB, AU, dan OPEC. Negara dengan cadangan minyak terbesar di Afrika dan gurun Sahara yang luas.',
         metadata: {
@@ -699,9 +684,6 @@ const data = [
             tags: ['negara', 'african-utara', 'minyak', 'opec', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇸🇩 SUDAN
-    // ==========================================================
     {
         text: 'Sudan - Negara di Afrika Utara dengan sungai Nil dan pertanian. Ibu kota: Khartoum. Populasi: 46 juta jiwa. Mata uang: Pound (SDG). Bahasa: Arab, Inggris. Sistem pemerintahan: Republik. Anggota PBB dan AU. Negara dengan sungai Nil dan pertanian subur.',
         metadata: {
@@ -837,9 +819,6 @@ const data = [
             tags: ['negara', 'african-utara', 'nil', 'pertanian', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇲🇷 MAURITANIA (NEW!)
-    // ==========================================================
     {
         text: 'Mauritania - Negara di Afrika Utara dengan gurun Sahara dan pesisir Atlantik. Ibu kota: Nouakchott. Populasi: 4.7 juta jiwa. Mata uang: Ouguiya (MRU). Bahasa: Arab. Sistem pemerintahan: Republik Presidensial. Negara dengan perbatasan terpanjang di Afrika. Potensi minyak dan gas. Budaya Arab-Berber yang kaya.',
         metadata: {

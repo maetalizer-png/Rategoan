@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇮🇩 INDONESIA — 38 PROVINSI LENGKAP
-    // ==========================================================
     {
         text: 'Indonesia memiliki 38 provinsi dengan total 416 kabupaten/kota. Provinsi terbesar: Jawa Barat (27), Jawa Timur (38), Jawa Tengah (35). Ibukota: Jakarta (segera pindah ke IKN Nusantara). Negara kepulauan terbesar di dunia dengan lebih dari 17.000 pulau. Pusat pemerintahan: Jakarta. Sistem administrasi: provinsi, kabupaten, kota.',
         metadata: {
@@ -56,9 +53,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'indonesia', 'provinsi', 'kota', 'kabupaten']
         }
     },
-    // ==========================================================
-    // 🇲🇾 MALAYSIA — 13 NEGARA BAGIAN
-    // ==========================================================
     {
         text: 'Malaysia memiliki 13 negara bagian dan 3 wilayah federal. Ibukota: Kuala Lumpur. Pusat pemerintahan: Putrajaya. Negara federasi dengan sistem monarki konstitusional. Terdiri dari Semenanjung Malaysia dan Malaysia Timur (Borneo).',
         metadata: {
@@ -89,9 +83,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'malaysia', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇸🇬 SINGAPURA
-    // ==========================================================
     {
         text: 'Singapura adalah negara kota dengan 5 distrik utama. Ibukota: Singapura. Negara dengan sistem pemerintahan Republik Parlementer dan ekonomi paling kompetitif di dunia. Terdiri dari pulau utama dan 63 pulau kecil di sekitarnya.',
         metadata: {
@@ -107,9 +98,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'singapura', 'negara-kota']
         }
     },
-    // ==========================================================
-    // 🇹🇭 THAILAND — 77 PROVINSI
-    // ==========================================================
     {
         text: 'Thailand memiliki 77 provinsi dan 35 kota utama. Ibukota: Bangkok (Krung Thep). Negara kerajaan dengan sistem monarki konstitusional. Satu-satunya negara di Asia Tenggara yang tidak pernah dijajah. Dibagi menjadi 6 region geografis.',
         metadata: {
@@ -203,9 +191,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'thailand', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇻🇳 VIETNAM — 63 PROVINSI
-    // ==========================================================
     {
         text: 'Vietnam memiliki 63 provinsi dan 5 kota madya. Ibukota: Hanoi. Kota terbesar: Ho Chi Minh City. Negara dengan sistem pemerintahan Republik Sosialis Satu Partai. Terbagi menjadi 58 provinsi dan 5 kota madya. Ekonomi berkembang pesat dengan pertumbuhan tertinggi di Asia Tenggara.',
         metadata: {
@@ -281,9 +266,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'vietnam', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇵🇭 FILIPINA — 81 PROVINSI
-    // ==========================================================
     {
         text: 'Filipina memiliki 81 provinsi dan 145 kota. Ibukota: Manila. Kota terbesar: Quezon City. Negara kepulauan dengan lebih dari 7.000 pulau. Sistem pemerintahan Republik Presidensial. Terbagi menjadi 17 region, 81 provinsi, dan 145 kota.',
         metadata: {
@@ -298,9 +280,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'filipina', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇲🇲 MYANMAR — 14 NEGARA BAGIAN
-    // ==========================================================
     {
         text: 'Myanmar memiliki 14 negara bagian/region dan 6 kota. Ibukota: Naypyidaw. Kota terbesar: Yangon. Negara dengan sistem pemerintahan Republik. Terbagi menjadi 7 negara bagian dan 7 region. Kaya akan sumber daya alam dan warisan budaya.',
         metadata: {
@@ -317,9 +296,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'myanmar', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇰🇭 KAMBOJA — 25 PROVINSI
-    // ==========================================================
     {
         text: 'Kamboja memiliki 25 provinsi dan 4 kota. Ibukota: Phnom Penh. Negara dengan sistem pemerintahan Monarki Konstitusional. Terbagi menjadi 24 provinsi dan 1 munisipalitas. Rumah bagi Angkor Wat dan warisan budaya Khmer yang kaya.',
         metadata: {
@@ -361,9 +337,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'kamboja', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇱🇦 LAOS — 18 PROVINSI
-    // ==========================================================
     {
         text: 'Laos memiliki 18 provinsi dan 4 kota. Ibukota: Vientiane. Negara tanpa laut dengan sistem pemerintahan Republik Sosialis Satu Partai. Terbagi menjadi 17 provinsi dan 1 prefektur. Negara dengan pemandangan alam yang indah dan Sungai Mekong.',
         metadata: {
@@ -398,9 +371,6 @@ const data = [
             tags: ['negara', 'asia-tenggara', 'laos', 'provinsi', 'kota']
         }
     },
-    // ==========================================================
-    // 🇧🇳 BRUNEI — 4 DISTRIK
-    // ==========================================================
     {
         text: 'Brunei memiliki 4 distrik dan 2 kota. Ibukota: Bandar Seri Begawan. Negara dengan sistem pemerintahan Monarki Absolut. Terbagi menjadi 4 distrik. Negara kecil dengan kekayaan minyak dan gas. Berdasarkan syariah Islam.',
         metadata: {

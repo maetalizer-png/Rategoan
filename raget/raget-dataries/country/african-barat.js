@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇳🇬 NIGERIA
-    // ==========================================================
     {
         text: 'Nigeria - Negara terbesar di Afrika dengan ekonomi dan populasi terbesar. Ibu kota: Abuja. Populasi: 220 juta jiwa. Mata uang: Naira (NGN). Bahasa: Inggris. Sistem pemerintahan: Republik Federal Presidensial. Anggota PBB, AU, dan OPEC. Rumah bagi Nollywood, industri film terbesar kedua di dunia. Ekonomi terbesar di Afrika dengan minyak, fintech, dan startup berkembang pesat.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'african-barat', 'minyak', 'nollywood', 'fintech']
         }
     },
-    // ==========================================================
-    // 🇬🇭 GHANA
-    // ==========================================================
     {
         text: 'Ghana - Negara di Afrika Barat dengan ekonomi stabil dan budaya. Ibu kota: Accra. Populasi: 33 juta jiwa. Mata uang: Cedi (GHS). Bahasa: Inggris. Sistem pemerintahan: Republik Presidensial. Anggota PBB, AU, dan Commonwealth. Negara dengan kakao, emas, dan minyak. Demokrasi stabil dan pertumbuhan ekonomi yang baik.',
         metadata: {
@@ -282,9 +276,6 @@ const data = [
             tags: ['negara', 'african-barat', 'kakao', 'emas', 'stabil']
         }
     },
-    // ==========================================================
-    // 🇨🇮 PANTAI GADING
-    // ==========================================================
     {
         text: 'Pantai Gading - Negara di Afrika Barat dengan ekonomi pertanian. Ibu kota: Yamoussoukro. Populasi: 27 juta jiwa. Mata uang: Franc CFA (XOF). Bahasa: Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan kakao terbesar di dunia dan ekonomi pertanian yang maju.',
         metadata: {
@@ -422,9 +413,6 @@ const data = [
             tags: ['negara', 'african-barat', 'kakao', 'pertanian', 'ekonomi']
         }
     },
-    // ==========================================================
-    // 🇸🇳 SENEGAL
-    // ==========================================================
     {
         text: 'Senegal - Negara di Afrika Barat dengan demokrasi stabil. Ibu kota: Dakar. Populasi: 18 juta jiwa. Mata uang: Franc CFA (XOF). Bahasa: Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan demokrasi stabil dan pariwisata maju. Rumah bagi Danau Retba (Danau Pink) dan pulau Gorée.',
         metadata: {
@@ -563,9 +551,6 @@ const data = [
             tags: ['negara', 'african-barat', 'stabil', 'pariwisata', 'demokrasi']
         }
     },
-    // ==========================================================
-    // 🇲🇱 MALI
-    // ==========================================================
     {
         text: 'Mali - Negara di Afrika Barat dengan sejarah dan budaya. Ibu kota: Bamako. Populasi: 23 juta jiwa. Mata uang: Franc CFA (XOF). Bahasa: Prancis. Sistem pemerintahan: Republik Semi-Presidensial. Rumah bagi Timbuktu dan sejarah Kekaisaran Mali yang kaya.',
         metadata: {

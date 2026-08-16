@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 1. 🛒 E-COMMERCE & RETAIL DIGITAL
-    // ==========================================================
     {
         text: 'E-commerce dan ritel digital terus tumbuh pesat di Asia Tenggara. Didorong oleh penetrasi internet tinggi, dompet digital, dan perubahan perilaku konsumen. Peluang: marketplace niche, dropshipping, logistik last-mile, dan social commerce. Tantangan: persaingan harga, regulasi data, dan retensi pelanggan.',
         metadata: {
@@ -17,9 +14,6 @@ const data = [
             tags: ['bisnis', 'digital', 'ritel', 'e-commerce']
         }
     },
-    // ==========================================================
-    // 2. 🤖 KECERDASAN BUATAN (AI) & OTOMATISASI
-    // ==========================================================
     {
         text: 'Kecerdasan buatan dan otomatisasi menjadi tulang punggung transformasi digital. Peluang: AI untuk UMKM, chatbot customer service, analisis prediktif, dan otomatisasi proses bisnis (RPA). AI generatif membuka peluang di konten, desain, dan software development. Tantangan: etika AI, regulasi, dan kesenjangan skill.',
         metadata: {
@@ -35,9 +29,6 @@ const data = [
             tags: ['teknologi', 'AI', 'otomatisasi', 'digital']
         }
     },
-    // ==========================================================
-    // 3. ☀️ ENERGI TERBARUKAN & EKONOMI HIJAU
-    // ==========================================================
     {
         text: 'Energi terbarukan dan ekonomi hijau menjadi prioritas global. Peluang: instalasi panel surya, kendaraan listrik (EV), baterai daur ulang, karbon kredit, dan konsultasi ESG. Insentif pemerintah dan komitmen net-zero emission mendorong pertumbuhan masif. Tantangan: biaya investasi awal dan infrastruktur.',
         metadata: {
@@ -53,9 +44,6 @@ const data = [
             tags: ['energi', 'hijau', 'esg', 'solar', 'ev']
         }
     },
-    // ==========================================================
-    // 4. 🏥 KESEHATAN & BIOTEKNOLOGI
-    // ==========================================================
     {
         text: 'Kesehatan dan bioteknologi berkembang pesat pasca-pandemi. Peluang: telemedicine, wearable health, genomik, dan pengembangan vaksin. Populasi menua dan kesadaran kesehatan meningkat. Tantangan: regulasi ketat, biaya R&D tinggi, dan distribusi layanan.',
         metadata: {
@@ -71,9 +59,6 @@ const data = [
             tags: ['kesehatan', 'biotech', 'telemedicine', 'wellness']
         }
     },
-    // ==========================================================
-    // 5. 🎓 PENDIDIKAN & EDUTECH
-    // ==========================================================
     {
         text: 'Edutech mengubah cara belajar dengan platform online, AI tutor, dan micro-credential. Peluang: kursus keterampilan digital (coding, AI, data), platform pembelajaran bahasa, dan solusi untuk sekolah negeri. Tantangan: digital divide, kredensial, dan retensi pelajar.',
         metadata: {
@@ -89,9 +74,6 @@ const data = [
             tags: ['pendidikan', 'edutech', 'kursus', 'digital']
         }
     },
-    // ==========================================================
-    // 6. 💳 FINANSIAL & FINTECH
-    // ==========================================================
     {
         text: 'Fintech terus mendisrupsi perbankan tradisional dengan layanan pinjaman peer-to-peer, dompet digital, investasi mikro, dan insurtech. Inklusi keuangan menjadi pendorong utama. Peluang besar di unbanked population (sekitar 1.4 miliar orang). Tantangan: fraud, regulasi, dan keamanan data.',
         metadata: {
@@ -107,9 +89,6 @@ const data = [
             tags: ['finansial', 'fintech', 'dompetdigital', 'pinjaman']
         }
     },
-    // ==========================================================
-    // 7. 📦 LOGISTIK & SUPPLY CHAIN
-    // ==========================================================
     {
         text: 'Logistik dan supply chain menjadi tulang punggung ekonomi digital. Peluang: optimasi rute dengan AI, sistem tracking real-time, pergudangan otomatis, dan cold chain untuk produk segar. E-commerce dan cross-border trade mendorong permintaan tinggi. Tantangan: infrastruktur dan biaya operasional.',
         metadata: {
@@ -125,9 +104,6 @@ const data = [
             tags: ['logistik', 'supplychain', 'coldchain', 'ecommerce']
         }
     },
-    // ==========================================================
-    // 8. 🎮 GAMING & E-SPORTS
-    // ==========================================================
     {
         text: 'Industri gaming dan e-sports meledak dengan penetrasi mobile tinggi di Asia. Peluang: pengembangan game lokal, turnamen e-sports, streaming, dan merchandise. Game berbasis blockchain dan metaverse mulai menjadi tren. Tantangan: regulasi, monetisasi, dan persaingan global.',
         metadata: {
@@ -143,9 +119,6 @@ const data = [
             tags: ['gaming', 'esports', 'mobile', 'startup']
         }
     },
-    // ==========================================================
-    // 9. 🏝️ PARIWISATA & EKONOMI KREATIF
-    // ==========================================================
     {
         text: 'Pariwisata pulih pasca-pandemi dengan tren wisata alam, staycation, dan pengalaman lokal. Ekonomi kreatif (kerajinan, fashion, kuliner, konten digital) menjadi pendorong utama. Peluang: platform booking lokal, homestay digital, dan craft marketplace. Tantangan: musiman dan ketergantungan pada stabilitas.',
         metadata: {
@@ -161,9 +134,6 @@ const data = [
             tags: ['pariwisata', 'kreatif', 'budaya', 'kuliner']
         }
     },
-    // ==========================================================
-    // 10. 🚀 PERTANIAN & AGRI-TECH
-    // ==========================================================
     {
         text: 'Agri-tech mengatasi tantangan ketahanan pangan dengan hidroponik, drone pertanian, sensor tanah, dan marketplace hasil tani. Indonesia sebagai negara agraris memiliki peluang besar. Tantangan: akses modal, literasi petani, dan infrastruktur pedesaan.',
         metadata: {

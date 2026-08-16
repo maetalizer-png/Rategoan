@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇮🇳 INDIA
-    // ==========================================================
     {
         text: 'India - Negara terbesar di Asia Selatan dan terpadat kedua di dunia dengan populasi 1.4 miliar jiwa. Ibu kota: New Delhi. Mata uang: Rupee India (INR). Bahasa: Hindi, Inggris. Sistem pemerintahan: Republik Parlementer Federal. Ekonomi terbesar kelima di dunia. Pemimpin global dalam IT, farmasi, dan startup. Rumah bagi Taj Mahal, Himalaya, dan peradaban kuno. Negara dengan 22 bahasa resmi dan budaya yang sangat beragam.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'it', 'startup', 'populasi']
         }
     },
-    // ==========================================================
-    // 🇵🇰 PAKISTAN
-    // ==========================================================
     {
         text: 'Pakistan - Negara di Asia Selatan dengan populasi 240 juta jiwa. Ibu kota: Islamabad. Mata uang: Rupee Pakistan (PKR). Bahasa: Urdu, Inggris. Sistem pemerintahan: Republik Parlementer Federal. Ekonomi berkembang dengan sektor pertanian kuat. Rumah peradaban Lembah Indus. Pelabuhan strategis Gwadar. Negara dengan pegunungan Karakoram dan K2 (gunung tertinggi kedua dunia).',
         metadata: {
@@ -282,9 +276,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'pertanian', 'peradaban-kuno']
         }
     },
-    // ==========================================================
-    // 🇧🇩 BANGLADESH
-    // ==========================================================
     {
         text: 'Bangladesh - Negara di Asia Selatan dengan populasi 170 juta jiwa. Ibu kota: Dhaka. Mata uang: Taka (BDT). Bahasa: Bengali. Sistem pemerintahan: Republik Parlementer. Ekonomi berkembang pesat, industri garmen terbesar kedua dunia. Terletak di delta sungai Ganges dan Brahmaputra. Negara dengan kepadatan penduduk tertinggi di dunia. Sektor ekonomi mikro dan fintech yang maju.',
         metadata: {
@@ -420,9 +411,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'garmen', 'delta', 'ekonomi-berkembang']
         }
     },
-    // ==========================================================
-    // 🇱🇰 SRI LANKA
-    // ==========================================================
     {
         text: 'Sri Lanka - Negara kepulauan di Asia Selatan dengan keindahan alam dan budaya kaya. Ibu kota: Sri Jayawardenepura Kotte. Populasi: 22 juta jiwa. Mata uang: Rupee Sri Lanka (LKR). Bahasa: Sinhala, Tamil, Inggris. Sistem pemerintahan: Republik Presidensial. Terkenal dengan teh Ceylon, rempah-rempah, dan pariwisata. Rumah bagi anjing laut dan paus biru. Destinasi wisata alam dan budaya terkemuka di Asia Selatan.',
         metadata: {
@@ -562,9 +550,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'teh', 'pariwisata', 'rempah']
         }
     },
-    // ==========================================================
-    // 🇳🇵 NEPAL
-    // ==========================================================
     {
         text: 'Nepal - Negara di Asia Selatan dengan Pegunungan Himalaya dan Gunung Everest. Ibu kota: Kathmandu. Populasi: 30 juta jiwa. Mata uang: Rupee Nepal (NPR). Bahasa: Nepal. Sistem pemerintahan: Republik Federal. Destinasi pendakian kelas dunia. Tempat lahir Buddha Gautama. Ekonomi berbasis pariwisata dan pertanian. Rumah bagi 8 dari 10 gunung tertinggi di dunia. Negara dengan keanekaragaman budaya dan alam yang luar biasa.',
         metadata: {
@@ -704,9 +689,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'himalaya', 'everest', 'buddha']
         }
     },
-    // ==========================================================
-    // 🇧🇹 BHUTAN
-    // ==========================================================
     {
         text: 'Bhutan - Negara di Asia Selatan dengan konsep Kebahagiaan Nasional Bruto. Ibu kota: Thimphu. Populasi: 800 ribu jiwa. Mata uang: Ngultrum (BTN). Bahasa: Dzongkha. Sistem pemerintahan: Monarki Konstitusional. Karbon negatif, arsitektur dzong, dan budaya Buddhis. Salah satu negara paling bahagia di dunia. Negara dengan kebijakan lingkungan terbaik di dunia. Destinasi ekowisata terkemuka di Asia.',
         metadata: {
@@ -841,9 +823,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'kebahagiaan', 'karbon-negatif', 'buddhis']
         }
     },
-    // ==========================================================
-    // 🇲🇻 MALADEWA
-    // ==========================================================
     {
         text: 'Maladewa - Negara kepulauan di Asia Selatan dengan resor mewah dan pantai indah. Ibu kota: Male. Populasi: 500 ribu jiwa. Mata uang: Rufiyaa (MVR). Bahasa: Dhivehi. Sistem pemerintahan: Republik Presidensial. Destinasi wisata kelas dunia. Terancam kenaikan permukaan laut. Ekonomi berbasis pariwisata dan perikanan. Pulau-pulau dengan pantai pasir putih dan laut biru jernih. Surga tropis di Samudra Hindia.',
         metadata: {
@@ -975,9 +954,6 @@ const data = [
             tags: ['negara', 'asian-selatan', 'pariwisata', 'resor', 'perubahan-iklim']
         }
     },
-    // ==========================================================
-    // 🇦🇫 AFGHANISTAN
-    // ==========================================================
     {
         text: 'Afghanistan - Negara di Asia Selatan dengan sejarah Jalur Sutra dan peradaban kuno. Ibu kota: Kabul. Populasi: 38 juta jiwa. Mata uang: Afghani (AFN). Bahasa: Pashto, Dari. Sistem pemerintahan: Republik Islam. Rumah peradaban Baktria dan Gandhara. Kaya akan sumber daya alam seperti litium, tembaga, dan batu bara. Negara dengan sejarah panjang dan budaya yang kaya. Jalan Sutra kuno dan peradaban yang sangat tua.',
         metadata: {

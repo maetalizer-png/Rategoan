@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇮🇳 INDIA — 11 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Hindi - Bahasa resmi India. Digunakan oleh lebih dari 600 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Devanagari. Bahasa dengan penutur terbanyak ke-3 di dunia.',
         metadata: {
@@ -167,9 +164,6 @@ const data = [
             tags: ['bahasa', 'asean-selatan', 'india', 'punjabi']
         }
     },
-    // ==========================================================
-    // 🇵🇰 PAKISTAN — 5 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Urdu - Bahasa resmi Pakistan. Digunakan oleh lebih dari 230 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Nastaliq (Arab-Persia). Bahasa nasional dan lingua franca Pakistan.',
         metadata: {
@@ -245,9 +239,6 @@ const data = [
             tags: ['bahasa', 'asean-selatan', 'pakistan', 'balochi']
         }
     },
-    // ==========================================================
-    // 🇧🇩 BANGLADESH — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Bengali - Bahasa resmi Bangladesh. Digunakan oleh lebih dari 230 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Bengali. Bahasa dengan gerakan bahasa yang terkenal.',
         metadata: {
@@ -263,9 +254,6 @@ const data = [
             tags: ['bahasa', 'asean-selatan', 'bangladesh', 'resmi', 'bengali']
         }
     },
-    // ==========================================================
-    // 🇱🇰 SRI LANKA — 2 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Sinhala - Bahasa resmi Sri Lanka. Digunakan oleh lebih dari 17 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Sinhala. Bahasa dengan pengaruh dari bahasa Pali.',
         metadata: {
@@ -296,9 +284,6 @@ const data = [
             tags: ['bahasa', 'asean-selatan', 'sri-lanka', 'resmi', 'tamil']
         }
     },
-    // ==========================================================
-    // 🇳🇵 NEPAL — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Nepal - Bahasa resmi Nepal. Digunakan oleh lebih dari 25 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Devanagari. Bahasa dengan pengaruh dari bahasa Tibet dan India.',
         metadata: {
@@ -314,9 +299,6 @@ const data = [
             tags: ['bahasa', 'asean-selatan', 'nepal', 'resmi', 'nepali']
         }
     },
-    // ==========================================================
-    // 🇧🇹 BHUTAN — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Dzongkha - Bahasa resmi Bhutan. Digunakan oleh lebih dari 600 ribu penutur. Termasuk rumpun bahasa Sino-Tibet (Tibet-Burma). Menggunakan aksara Tibet. Bahasa dengan pengaruh dari bahasa Tibet.',
         metadata: {
@@ -332,9 +314,6 @@ const data = [
             tags: ['bahasa', 'asean-selatan', 'bhutan', 'resmi', 'dzongkha']
         }
     },
-    // ==========================================================
-    // 🇲🇻 MALADEWA — 1 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Dhivehi - Bahasa resmi Maladewa. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Thaana. Bahasa dengan pengaruh dari bahasa Arab dan Sinhala.',
         metadata: {

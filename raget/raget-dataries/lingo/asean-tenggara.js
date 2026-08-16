@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇮🇩 INDONESIA — 16 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Indonesia - Bahasa resmi dan nasional Indonesia. Digunakan oleh lebih dari 270 juta penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin.',
         metadata: {
@@ -242,9 +239,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'indonesia', 'bajau']
         }
     },
-    // ==========================================================
-    // 🇲🇾 MALAYSIA — 8 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Melayu - Bahasa resmi Malaysia. Digunakan oleh lebih dari 20 juta penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin dan Jawi.',
         metadata: {
@@ -365,9 +359,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'malaysia', 'sabah']
         }
     },
-    // ==========================================================
-    // 🇸🇬 SINGAPURA — 4 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Inggris - Bahasa resmi Singapura. Digunakan oleh lebih dari 4 juta penutur. Termasuk rumpun bahasa Jermanik.',
         metadata: {
@@ -428,9 +419,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'singapura', 'resmi']
         }
     },
-    // ==========================================================
-    // 🇹🇭 THAILAND — 6 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Thai - Bahasa resmi Thailand. Digunakan oleh lebih dari 50 juta penutur. Termasuk rumpun bahasa Tai-Kadai. Menggunakan aksara Thai.',
         metadata: {
@@ -521,9 +509,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'thailand', 'khmer']
         }
     },
-    // ==========================================================
-    // 🇻🇳 VIETNAM — 11 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Vietnam - Bahasa resmi Vietnam. Digunakan oleh lebih dari 85 juta penutur. Termasuk rumpun bahasa Austroasiatik. Menggunakan aksara Latin dengan diakritik.',
         metadata: {
@@ -689,9 +674,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'vietnam', 'raglai']
         }
     },
-    // ==========================================================
-    // 🇵🇭 FILIPINA — 12 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Filipino - Bahasa resmi Filipina. Digunakan oleh lebih dari 50 juta penutur. Berbasis dari bahasa Tagalog. Termasuk rumpun bahasa Austronesia.',
         metadata: {
@@ -872,9 +854,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'filipina', 'tausug']
         }
     },
-    // ==========================================================
-    // 🇲🇲 MYANMAR — 10 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Myanmar - Bahasa resmi Myanmar. Digunakan oleh lebih dari 35 juta penutur. Termasuk rumpun bahasa Sino-Tibet. Menggunakan aksara Myanmar.',
         metadata: {
@@ -1025,9 +1004,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'myanmar', 'palaung']
         }
     },
-    // ==========================================================
-    // 🇰🇭 KAMBOJA — 7 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Khmer - Bahasa resmi Kamboja. Digunakan oleh lebih dari 16 juta penutur. Termasuk rumpun bahasa Austroasiatik. Menggunakan aksara Khmer.',
         metadata: {
@@ -1133,9 +1109,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'kamboja', 'kuy']
         }
     },
-    // ==========================================================
-    // 🇱🇦 LAOS — 7 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Lao - Bahasa resmi Laos. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Tai-Kadai. Menggunakan aksara Lao.',
         metadata: {
@@ -1241,9 +1214,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'laos', 'chinese']
         }
     },
-    // ==========================================================
-    // 🇧🇳 BRUNEI — 6 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Melayu - Bahasa resmi Brunei. Digunakan oleh lebih dari 300 ribu penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin dan Jawi.',
         metadata: {
@@ -1334,9 +1304,6 @@ const data = [
             tags: ['bahasa', 'asean-tenggara', 'brunei', 'tutong']
         }
     },
-    // ==========================================================
-    // 🇹🇱 TIMOR LESTE — 7 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Tetum - Bahasa resmi Timor Leste. Digunakan oleh lebih dari 800 ribu penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin.',
         metadata: {
