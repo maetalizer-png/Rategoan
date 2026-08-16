@@ -4883,5 +4883,176 @@
     "containsAll": [
       "Australia"
     ]
+  },
+  {
+    "prompt": "apa itu 5W1H",
+    "note": "Ronde v5 B5: rumus - 5W1H",
+    "contains": "What, Who, When, Where, Why, How"
+  },
+  {
+    "prompt": "jelaskan SWOT",
+    "note": "Ronde v5 B5: rumus - SWOT",
+    "contains": "Strengths, Weaknesses, Opportunities, Threats"
+  },
+  {
+    "prompt": "apa itu first principles",
+    "note": "Ronde v5 B5: rumus - first principles",
+    "contains": "First Principles Thinking"
+  },
+  {
+    "prompt": "apa itu occam's razor",
+    "note": "Ronde v5 B5: rumus - occam razor",
+    "contains": "penjelasan paling sederhana"
+  },
+  {
+    "prompt": "jelaskan hanlon's razor",
+    "note": "Ronde v5 B5: rumus - hanlon razor",
+    "contains": "kecerobohan"
+  },
+  {
+    "prompt": "apa itu decision matrix",
+    "note": "Ronde v5 B5: rumus - decision matrix",
+    "contains": "Decision Matrix membandingkan"
+  },
+  {
+    "prompt": "apa itu eisenhower matrix",
+    "note": "Ronde v5 B5: rumus - eisenhower matrix",
+    "contains": "4 kuadran"
+  },
+  {
+    "prompt": "jelaskan prinsip pareto",
+    "note": "Ronde v5 B5: rumus - pareto",
+    "contains": "80%"
+  },
+  {
+    "prompt": "apa itu opportunity cost",
+    "note": "Ronde v5 B5: rumus - opportunity cost",
+    "contains": "biaya peluang"
+  },
+  {
+    "prompt": "apa itu expected value",
+    "note": "Ronde v5 B5: rumus - expected value",
+    "contains": "nilai harapan"
+  },
+  {
+    "prompt": "jelaskan 5 whys",
+    "note": "Ronde v5 B5: rumus - 5 whys",
+    "contains": "akar masalah"
+  },
+  {
+    "prompt": "apa itu fishbone diagram",
+    "note": "Ronde v5 B5: rumus - fishbone",
+    "contains": "Ishikawa"
+  },
+  {
+    "prompt": "jelaskan design thinking",
+    "note": "Ronde v5 B5: rumus - design thinking",
+    "contains": "Empathize"
+  },
+  {
+    "prompt": "apa itu TRIZ",
+    "note": "Ronde v5 B5: rumus - TRIZ",
+    "contains": "Inventive Problem Solving"
+  },
+  {
+    "prompt": "apa itu pyramid principle",
+    "note": "Ronde v5 B5: rumus - pyramid principle",
+    "contains": "kesimpulan/jawaban utama dulu"
+  },
+  {
+    "prompt": "jelaskan STAR method",
+    "note": "Ronde v5 B5: rumus - star method",
+    "contains": "Situation, Task, Action, Result"
+  },
+  {
+    "prompt": "apa itu NVC",
+    "note": "Ronde v5 B5: rumus - NVC",
+    "contains": "Marshall Rosenberg"
+  },
+  {
+    "prompt": "apa itu active listening",
+    "note": "Ronde v5 B5: rumus - active listening",
+    "contains": "mendengarkan aktif"
+  },
+  {
+    "prompt": "jelaskan teknik feynman",
+    "note": "Ronde v5 B5: rumus - feynman",
+    "contains": "anak kecil"
+  },
+  {
+    "prompt": "apa itu spaced repetition",
+    "note": "Ronde v5 B5: rumus - spaced repetition",
+    "contains": "interval waktu"
+  },
+  {
+    "prompt": "jelaskan bloom's taxonomy",
+    "note": "Ronde v5 B5: rumus - bloom taxonomy",
+    "contains": "Mengingat, Memahami"
+  },
+  {
+    "prompt": "aku bingung mau ambil keputusan apa",
+    "note": "Ronde v5 B5: rumus saran - keputusan",
+    "containsAll": [
+      "Decision Matrix",
+      "Expected Value"
+    ]
+  },
+  {
+    "prompt": "susah milih yang mana enaknya",
+    "note": "Ronde v5 B5: rumus saran - susah milih",
+    "containsAll": [
+      "Decision Matrix"
+    ]
+  },
+  {
+    "prompt": "harus pilih mana ya bingung",
+    "note": "Ronde v5 B5: rumus saran - harus pilih",
+    "containsAll": [
+      "Decision Matrix"
+    ]
+  },
+  {
+    "prompt": "kenapa masalah ini terus terjadi",
+    "note": "Ronde v5 B5: rumus saran - masalah berulang",
+    "containsAll": [
+      "5 Whys",
+      "Fishbone"
+    ]
+  },
+  {
+    "prompt": "akar masalahnya apa sih ini",
+    "note": "Ronde v5 B5: rumus saran - akar masalah",
+    "containsAll": [
+      "5 Whys"
+    ]
+  },
+  {
+    "prompt": "aku bingung strukturnya buat presentasi",
+    "note": "Ronde v5 B5: rumus saran - struktur presentasi",
+    "containsAll": [
+      "Pyramid Principle"
+    ]
+  },
+  {
+    "prompt": "susah paham materi ini",
+    "note": "Ronde v5 B5: rumus saran - susah paham",
+    "containsAll": [
+      "Teknik Feynman"
+    ]
+  },
+  {
+    "prompt": "analisis proyek ini gimana ya",
+    "note": "Ronde v5 B5: rumus saran - analisis proyek",
+    "containsAll": [
+      "SWOT"
+    ]
+  },
+  {
+    "prompt": "tolong bantu aku mikir soal ini",
+    "note": "Ronde v5 B5: rumus saran - generik",
+    "containsAll": [
+      "5W1H",
+      "First Principles"
+    ]
   }
 ]
