@@ -3754,5 +3754,559 @@
       "Susah tidur",
       "bukan diagnosis medis"
     ]
+  },
+  {
+    "prompt": "boleh curhat dulu gak",
+    "note": "Ronde v5 B2: social curhat - permintaan awal",
+    "containsAll": [
+      "Cerita aja",
+      "Mulai dari mana"
+    ]
+  },
+  {
+    "prompt": "aku mau curhat nih",
+    "note": "Ronde v5 B2: social curhat - variasi",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "dengerin aku sebentar",
+    "note": "Ronde v5 B2: social curhat - dengerin",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "boleh curhat gak",
+    "note": "Ronde v5 B2: social curhat - singkat",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "pengen curhat dong",
+    "note": "Ronde v5 B2: social curhat - pengen",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "curhat dulu ya",
+    "note": "Ronde v5 B2: social curhat - dulu ya",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "curhat bentar boleh?",
+    "note": "Ronde v5 B2: social curhat - bentar",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "dengerin saya dulu dong",
+    "note": "Ronde v5 B2: social curhat - dengerin saya",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "mau curhat boleh?",
+    "note": "Ronde v5 B2: social curhat - mau curhat",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "pengin curhat sedikit",
+    "note": "Ronde v5 B2: social curhat - pengin",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "boleh dengerin aku curhat dulu",
+    "note": "Ronde v5 B2: social curhat - dengerin curhat",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "curhat nih boleh gak",
+    "note": "Ronde v5 B2: social curhat - nih boleh",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "aku boleh curhat sebentar gak",
+    "note": "Ronde v5 B2: social curhat - sebentar gak",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "dengerin aku dong sebentar",
+    "note": "Ronde v5 B2: social curhat - dengerin dong",
+    "contains": "Cerita aja"
+  },
+  {
+    "prompt": "menurutmu kerja remote lebih baik dari kantor?",
+    "note": "Ronde v5 B2: social diskusi - kerja remote",
+    "containsAll": [
+      "Sisi pertama",
+      "Sisi kedua",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku pikir kamu salah soal kerja remote",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - kerja remote",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "apa pendapatmu soal ai menggantikan pekerjaan manusia",
+    "note": "Ronde v5 B2: social diskusi - ai menggantikan pekerjaan",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku rasa kamu salah soal ai menggantikan pekerjaan manusia",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - ai menggantikan pekerjaan",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "menurutmu media sosial baik atau buruk",
+    "note": "Ronde v5 B2: social diskusi - media sosial",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku pikir kamu salah soal media sosial baik atau buruk",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - media sosial",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "apa pendapatmu soal pendidikan formal vs otodidak",
+    "note": "Ronde v5 B2: social diskusi - pendidikan formal",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku rasa kamu salah soal pendidikan formal vs otodidak",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - pendidikan formal",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "menurutmu makan daging vs vegetarian gimana",
+    "note": "Ronde v5 B2: social diskusi - makan daging",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku pikir kamu salah soal makan daging vs vegetarian",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - makan daging",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "apa pendapatmu soal game buruk untuk anak",
+    "note": "Ronde v5 B2: social diskusi - game buruk",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku rasa kamu salah soal game buruk untuk anak",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - game buruk",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "menurutmu kerja keras vs kerja cerdas mana yang penting",
+    "note": "Ronde v5 B2: social diskusi - kerja keras",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku pikir kamu salah soal kerja keras vs kerja cerdas",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - kerja keras",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "apa pendapatmu apakah uang bisa beli kebahagiaan",
+    "note": "Ronde v5 B2: social diskusi - uang bisa",
+    "containsAll": [
+      "Sisi pertama",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "aku rasa kamu salah soal uang bisa beli kebahagiaan",
+    "note": "Ronde v5 B2: social perdebatan (steel-manning) - uang bisa",
+    "containsAll": [
+      "steel-manning",
+      "Sintesis"
+    ]
+  },
+  {
+    "prompt": "kasih aku lelucon dong",
+    "note": "Ronde v5 B2: social humor - lelucon",
+    "contains": "Mau lelucon lagi"
+  },
+  {
+    "prompt": "ceritain hal lucu dong",
+    "note": "Ronde v5 B2: social humor - hal lucu",
+    "contains": "Mau lelucon lagi"
+  },
+  {
+    "prompt": "bikin aku ketawa",
+    "note": "Ronde v5 B2: social humor - ketawa",
+    "contains": "Mau lelucon lagi"
+  },
+  {
+    "prompt": "mau dengar lelucon",
+    "note": "Ronde v5 B2: social humor - mau dengar",
+    "contains": "Mau lelucon lagi"
+  },
+  {
+    "prompt": "kasih lawakan dong",
+    "note": "Ronde v5 B2: social humor - lawakan",
+    "contains": "Mau lelucon lagi"
+  },
+  {
+    "prompt": "punya lelucon gak",
+    "note": "Ronde v5 B2: social humor - punya lelucon",
+    "contains": "Mau lelucon lagi"
+  },
+  {
+    "prompt": "aku butuh motivasi nih",
+    "note": "Ronde v5 B2: social motivasi - butuh",
+    "contains": "mau cerita?"
+  },
+  {
+    "prompt": "semangatin aku dong",
+    "note": "Ronde v5 B2: social motivasi - semangatin",
+    "contains": "mau cerita?"
+  },
+  {
+    "prompt": "aku udah mau menyerah",
+    "note": "Ronde v5 B2: social motivasi - menyerah",
+    "contains": "mau cerita?"
+  },
+  {
+    "prompt": "aku putus asa banget",
+    "note": "Ronde v5 B2: social motivasi - putus asa",
+    "contains": "mau cerita?"
+  },
+  {
+    "prompt": "ga ada semangat sama sekali",
+    "note": "Ronde v5 B2: social motivasi - ga ada semangat",
+    "contains": "mau cerita?"
+  },
+  {
+    "prompt": "kasih motivasi dong",
+    "note": "Ronde v5 B2: social motivasi - kasih motivasi",
+    "contains": "mau cerita?"
+  },
+  {
+    "prompt": "kritik dong tulisanku",
+    "note": "Ronde v5 B2: social kritik - tulisan",
+    "containsAll": [
+      "self-review",
+      "metode sandwich"
+    ]
+  },
+  {
+    "prompt": "kasih kritik untuk ideku",
+    "note": "Ronde v5 B2: social kritik - ide",
+    "containsAll": [
+      "self-review",
+      "metode sandwich"
+    ]
+  },
+  {
+    "prompt": "gimana menurutmu kualitas kerjaanku",
+    "note": "Ronde v5 B2: social kritik - kualitas kerjaan",
+    "containsAll": [
+      "self-review",
+      "metode sandwich"
+    ]
+  },
+  {
+    "prompt": "kritik membangun untuk proyekku dong",
+    "note": "Ronde v5 B2: social kritik - proyek",
+    "containsAll": [
+      "self-review",
+      "metode sandwich"
+    ]
+  },
+  {
+    "prompt": "kasih kritik buat karyaku",
+    "note": "Ronde v5 B2: social kritik - karya",
+    "containsAll": [
+      "self-review",
+      "metode sandwich"
+    ]
+  },
+  {
+    "prompt": "kritik desainku dong",
+    "note": "Ronde v5 B2: social kritik - desain",
+    "containsAll": [
+      "self-review",
+      "metode sandwich"
+    ]
+  },
+  {
+    "prompt": "saya komplain soal aplikasi ini yang sering error, saya kecewa",
+    "note": "Ronde v5 B2: social CS - LATTE aplikasi error",
+    "containsAll": [
+      "LATTE",
+      "L (Listen)",
+      "T (Take action)"
+    ]
+  },
+  {
+    "prompt": "saya komplain soal produk ini yang lambat banget, saya kesel",
+    "note": "Ronde v5 B2: social CS - LATTE produk lambat",
+    "containsAll": [
+      "LATTE",
+      "E (Evaluate)"
+    ]
+  },
+  {
+    "prompt": "saya komplain soal sistem ini yang force close terus, kesal banget",
+    "note": "Ronde v5 B2: social CS - LATTE force close",
+    "containsAll": [
+      "LATTE",
+      "A (Apologize)"
+    ]
+  },
+  {
+    "prompt": "komplain soal layanan aplikasi yang bug melulu, saya kecewa banget",
+    "note": "Ronde v5 B2: social CS - LATTE bug",
+    "containsAll": [
+      "LATTE",
+      "T (Thank)"
+    ]
+  },
+  {
+    "prompt": "saya kecewa dengan pelayanan customer service kalian",
+    "note": "Ronde v5 B2: social CS - HEARD pelayanan",
+    "containsAll": [
+      "HEARD",
+      "H (Hear)",
+      "R (Resolve)"
+    ]
+  },
+  {
+    "prompt": "pelayanannya buruk banget tadi",
+    "note": "Ronde v5 B2: social CS - HEARD buruk",
+    "containsAll": [
+      "HEARD",
+      "E (Empathize)"
+    ]
+  },
+  {
+    "prompt": "staf nya judes banget",
+    "note": "Ronde v5 B2: social CS - HEARD staf judes",
+    "containsAll": [
+      "HEARD",
+      "D (Diagnose)"
+    ]
+  },
+  {
+    "prompt": "kecewa sama pelayanan tadi di toko",
+    "note": "Ronde v5 B2: social CS - HEARD toko",
+    "containsAll": [
+      "HEARD",
+      "A (Apologize)"
+    ]
+  },
+  {
+    "prompt": "responnya lama banget banget nih",
+    "note": "Ronde v5 B2: social CS - 3A respon lama",
+    "containsAll": [
+      "3A",
+      "Acknowledge",
+      "Act"
+    ]
+  },
+  {
+    "prompt": "tidak puas dengan respon kalian",
+    "note": "Ronde v5 B2: social CS - 3A tidak puas",
+    "containsAll": [
+      "3A",
+      "Apologize"
+    ]
+  },
+  {
+    "prompt": "komplain singkat aja, responnya lambat",
+    "note": "Ronde v5 B2: social CS - 3A komplain singkat",
+    "containsAll": [
+      "3A",
+      "Acknowledge"
+    ]
+  },
+  {
+    "prompt": "lambat banget responnya dari tadi",
+    "note": "Ronde v5 B2: social CS - 3A lambat",
+    "containsAll": [
+      "3A",
+      "Act"
+    ]
+  },
+  {
+    "prompt": "cuaca hari ini panas banget",
+    "note": "Ronde v5 B2: social natural chat - cuaca panas",
+    "containsAll": [
+      "ngobrolin cuaca",
+      "pengen ngapain"
+    ]
+  },
+  {
+    "prompt": "hujan deras dari tadi",
+    "note": "Ronde v5 B2: social natural chat - hujan deras",
+    "containsAll": [
+      "ngobrolin cuaca"
+    ]
+  },
+  {
+    "prompt": "langit mendung terus dari pagi",
+    "note": "Ronde v5 B2: social natural chat - mendung",
+    "containsAll": [
+      "ngobrolin cuaca"
+    ]
+  },
+  {
+    "prompt": "udara dingin banget hari ini",
+    "note": "Ronde v5 B2: social natural chat - udara dingin",
+    "containsAll": [
+      "ngobrolin cuaca"
+    ]
+  },
+  {
+    "prompt": "akhir-akhir ini aku demen banget main game",
+    "note": "Ronde v5 B2: social natural chat - hobi game",
+    "containsAll": [
+      "soal hobi kamu",
+      "tekunin"
+    ]
+  },
+  {
+    "prompt": "aku baru mulai hobi baca komik",
+    "note": "Ronde v5 B2: social natural chat - hobi komik",
+    "containsAll": [
+      "soal hobi kamu"
+    ]
+  },
+  {
+    "prompt": "waktu luang aku biasanya nonton film",
+    "note": "Ronde v5 B2: social natural chat - waktu luang",
+    "containsAll": [
+      "soal hobi kamu"
+    ]
+  },
+  {
+    "prompt": "aku lagi seru-serunya belajar gitar",
+    "note": "Ronde v5 B2: social natural chat - belajar gitar",
+    "containsAll": [
+      "soal hobi kamu"
+    ]
+  },
+  {
+    "prompt": "film yang aku tonton semalam seru banget",
+    "note": "Ronde v5 B2: social natural chat - film seru",
+    "containsAll": [
+      "soal hiburan",
+      "rekomendasi"
+    ]
+  },
+  {
+    "prompt": "lagu ini enak banget didengerin",
+    "note": "Ronde v5 B2: social natural chat - lagu enak",
+    "containsAll": [
+      "soal hiburan"
+    ]
+  },
+  {
+    "prompt": "series baru itu bikin penasaran",
+    "note": "Ronde v5 B2: social natural chat - series baru",
+    "containsAll": [
+      "soal hiburan"
+    ]
+  },
+  {
+    "prompt": "konser kemarin rame banget",
+    "note": "Ronde v5 B2: social natural chat - konser rame",
+    "containsAll": [
+      "soal hiburan"
+    ]
+  },
+  {
+    "prompt": "makan siang tadi enak banget",
+    "note": "Ronde v5 B2: social natural chat - makan siang",
+    "containsAll": [
+      "jadi ikutan lapar",
+      "sendiri atau beli"
+    ]
+  },
+  {
+    "prompt": "aku baru coba resep baru tadi malam",
+    "note": "Ronde v5 B2: social natural chat - resep baru",
+    "containsAll": [
+      "jadi ikutan lapar"
+    ]
+  },
+  {
+    "prompt": "kopi pagi ini pas banget",
+    "note": "Ronde v5 B2: social natural chat - kopi pagi",
+    "containsAll": [
+      "jadi ikutan lapar"
+    ]
+  },
+  {
+    "prompt": "laper banget belum makan dari pagi",
+    "note": "Ronde v5 B2: social natural chat - laper",
+    "containsAll": [
+      "jadi ikutan lapar"
+    ]
+  },
+  {
+    "prompt": "abis lari pagi tadi seger banget",
+    "note": "Ronde v5 B2: social natural chat - lari pagi",
+    "containsAll": [
+      "Semangat olahraganya",
+      "rutinitas atau baru"
+    ]
+  },
+  {
+    "prompt": "nonton pertandingan bola semalam seru",
+    "note": "Ronde v5 B2: social natural chat - pertandingan bola",
+    "containsAll": [
+      "Semangat olahraganya"
+    ]
+  },
+  {
+    "prompt": "mulai rutin gym minggu ini",
+    "note": "Ronde v5 B2: social natural chat - rutin gym",
+    "containsAll": [
+      "Semangat olahraganya"
+    ]
+  },
+  {
+    "prompt": "abis olahraga badan pegal semua",
+    "note": "Ronde v5 B2: social natural chat - badan pegal",
+    "containsAll": [
+      "Semangat olahraganya"
+    ]
   }
 ]
