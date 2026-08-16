@@ -4647,5 +4647,241 @@
       "112",
       "119"
     ]
+  },
+  {
+    "prompt": "hari apa tanggal 22 april",
+    "note": "Ronde v5 B4: world hari internasional - by date bumi",
+    "contains": "Hari Bumi"
+  },
+  {
+    "prompt": "10 desember itu hari apa",
+    "note": "Ronde v5 B4: world hari internasional - by date HAM",
+    "contains": "Hari Hak Asasi Manusia"
+  },
+  {
+    "prompt": "hari internasional apa tanggal 8 maret",
+    "note": "Ronde v5 B4: world hari internasional - by date perempuan",
+    "contains": "Hari Perempuan Internasional"
+  },
+  {
+    "prompt": "1 mei itu hari apa",
+    "note": "Ronde v5 B4: world hari internasional - by date buruh",
+    "contains": "Hari Buruh Internasional"
+  },
+  {
+    "prompt": "hari apa tanggal 5 juni",
+    "note": "Ronde v5 B4: world hari internasional - by date lingkungan",
+    "contains": "Hari Lingkungan Hidup Sedunia"
+  },
+  {
+    "prompt": "hari internasional apa tanggal 10 oktober",
+    "note": "Ronde v5 B4: world hari internasional - by date kesmen",
+    "contains": "Hari Kesehatan Mental Sedunia"
+  },
+  {
+    "prompt": "21 september itu hari apa",
+    "note": "Ronde v5 B4: world hari internasional - by date damai",
+    "contains": "Hari Perdamaian Sedunia"
+  },
+  {
+    "prompt": "hari apa tanggal 1 desember",
+    "note": "Ronde v5 B4: world hari internasional - by date aids",
+    "contains": "Hari AIDS Sedunia"
+  },
+  {
+    "prompt": "apa itu hari bumi",
+    "note": "Ronde v5 B4: world hari internasional - by name bumi",
+    "contains": "22 april"
+  },
+  {
+    "prompt": "kapan hari kesehatan mental sedunia",
+    "note": "Ronde v5 B4: world hari internasional - by name kesmen",
+    "contains": "10 oktober"
+  },
+  {
+    "prompt": "kapan hari hak asasi manusia",
+    "note": "Ronde v5 B4: world hari internasional - by name HAM",
+    "contains": "10 desember"
+  },
+  {
+    "prompt": "apa itu hari buruh internasional",
+    "note": "Ronde v5 B4: world hari internasional - by name buruh",
+    "contains": "1 mei"
+  },
+  {
+    "prompt": "kapan hari perempuan internasional",
+    "note": "Ronde v5 B4: world hari internasional - by name perempuan",
+    "contains": "8 maret"
+  },
+  {
+    "prompt": "apa itu hari guru sedunia",
+    "note": "Ronde v5 B4: world hari internasional - by name guru",
+    "contains": "5 oktober"
+  },
+  {
+    "prompt": "bahasa apa ini: 你好",
+    "note": "Ronde v5 B4: world deteksi bahasa - mandarin",
+    "contains": "Mandarin"
+  },
+  {
+    "prompt": "bahasa apa ini: 谢谢你",
+    "note": "Ronde v5 B4: world deteksi bahasa - mandarin 2",
+    "contains": "Mandarin"
+  },
+  {
+    "prompt": "bahasa apa ini: こんにちは",
+    "note": "Ronde v5 B4: world deteksi bahasa - jepang",
+    "contains": "Jepang"
+  },
+  {
+    "prompt": "bahasa apa ini: ありがとう",
+    "note": "Ronde v5 B4: world deteksi bahasa - jepang 2",
+    "contains": "Jepang"
+  },
+  {
+    "prompt": "bahasa apa ini: مرحبا",
+    "note": "Ronde v5 B4: world deteksi bahasa - arab",
+    "contains": "Arab"
+  },
+  {
+    "prompt": "bahasa apa ini: شكرا",
+    "note": "Ronde v5 B4: world deteksi bahasa - arab 2",
+    "contains": "Arab"
+  },
+  {
+    "prompt": "bahasa apa ini: hello how are you",
+    "note": "Ronde v5 B4: world deteksi bahasa - inggris",
+    "contains": "Inggris"
+  },
+  {
+    "prompt": "bahasa apa ini: halo apa kabar",
+    "note": "Ronde v5 B4: world deteksi bahasa - indonesia",
+    "contains": "Indonesia"
+  },
+  {
+    "prompt": "ini bahasa apa: terima kasih banyak",
+    "note": "Ronde v5 B4: world deteksi bahasa - indonesia 2",
+    "contains": "Indonesia"
+  },
+  {
+    "prompt": "ini bahasa apa: thank you very much",
+    "note": "Ronde v5 B4: world deteksi bahasa - inggris 2",
+    "contains": "Inggris"
+  },
+  {
+    "prompt": "hitung 1 sampai 10 dalam bahasa mandarin",
+    "note": "Ronde v5 B4: world hitung angka - mandarin",
+    "containsAll": [
+      "yī",
+      "shí"
+    ]
+  },
+  {
+    "prompt": "hitung 1 sampai 10 dalam bahasa jepang",
+    "note": "Ronde v5 B4: world hitung angka - jepang",
+    "containsAll": [
+      "ichi",
+      "jū"
+    ]
+  },
+  {
+    "prompt": "hitung 1 sampai 10 dalam bahasa arab",
+    "note": "Ronde v5 B4: world hitung angka - arab",
+    "containsAll": [
+      "wahid"
+    ]
+  },
+  {
+    "prompt": "hitung angka dalam bahasa china",
+    "note": "Ronde v5 B4: world hitung angka - china alias",
+    "containsAll": [
+      "yī"
+    ]
+  },
+  {
+    "prompt": "hitung 1 sampai 10 dalam bahasa jepang dong",
+    "note": "Ronde v5 B4: world hitung angka - jepang dong",
+    "containsAll": [
+      "ichi"
+    ]
+  },
+  {
+    "prompt": "hitung angka dalam bahasa arab dong",
+    "note": "Ronde v5 B4: world hitung angka - arab dong",
+    "containsAll": [
+      "wahid"
+    ]
+  },
+  {
+    "prompt": "aku lagi di tokyo nih",
+    "note": "Ronde v5 B4: world auto-mode - tokyo",
+    "containsAll": [
+      "Jepang",
+      "Jelajah Dunia"
+    ]
+  },
+  {
+    "prompt": "saya sedang di paris",
+    "note": "Ronde v5 B4: world auto-mode - paris",
+    "containsAll": [
+      "Prancis",
+      "Jelajah Dunia"
+    ]
+  },
+  {
+    "prompt": "aku lagi di bangkok",
+    "note": "Ronde v5 B4: world auto-mode - bangkok",
+    "containsAll": [
+      "Thailand"
+    ]
+  },
+  {
+    "prompt": "saya sedang di kairo",
+    "note": "Ronde v5 B4: world auto-mode - kairo",
+    "containsAll": [
+      "Mesir"
+    ]
+  },
+  {
+    "prompt": "aku lagi di seoul nih",
+    "note": "Ronde v5 B4: world auto-mode - seoul",
+    "containsAll": [
+      "Korea Selatan"
+    ]
+  },
+  {
+    "prompt": "saya sedang di london",
+    "note": "Ronde v5 B4: world auto-mode - london",
+    "containsAll": [
+      "Inggris"
+    ]
+  },
+  {
+    "prompt": "aku lagi di new york",
+    "note": "Ronde v5 B4: world auto-mode - new york",
+    "containsAll": [
+      "Amerika Serikat"
+    ]
+  },
+  {
+    "prompt": "saya sedang di roma",
+    "note": "Ronde v5 B4: world auto-mode - roma",
+    "containsAll": [
+      "Italia"
+    ]
+  },
+  {
+    "prompt": "aku lagi di dubai nih",
+    "note": "Ronde v5 B4: world auto-mode - dubai",
+    "containsAll": [
+      "Uni Emirat Arab"
+    ]
+  },
+  {
+    "prompt": "saya sedang di sydney",
+    "note": "Ronde v5 B4: world auto-mode - sydney",
+    "containsAll": [
+      "Australia"
+    ]
   }
 ]

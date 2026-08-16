@@ -27,6 +27,7 @@ import { answerComposer } from './answer-composer.js';
 import { stemEngine } from './stem-engine.js';
 import { socialEngine } from './social-engine.js';
 import { contextEngine } from './context-engine.js';
+import { worldContext } from './world-context.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -225,7 +226,7 @@ async function respondCore(messages, prompt) {
     return postProcess(reply);
   }
 
-  const stemPrecise = stemEngine.tryLogic(text) || stemEngine.tryAlgebra(text) || stemEngine.tryCalculus(text) || stemEngine.tryPhysics(text);
+  const stemPrecise = stemEngine.tryLogic(text) || stemEngine.tryAlgebra(text) || stemEngine.tryCalculus(text) || stemEngine.tryPhysics(text) || worldContext.tryCountNumbers(text);
   if (stemPrecise) {
     ragetDb.addNote(text, stemPrecise, null, 'stem');
     return postProcess(stemPrecise);
@@ -323,7 +324,14 @@ async function respondCore(messages, prompt) {
     return postProcess(followupId);
   }
 
-  const stemDict = stemEngine.tryBodySystem(text) || stemEngine.tryClassification(text) || stemEngine.tryEcology(text) || stemEngine.tryTechConcept(text);
+  const stemDict =
+    stemEngine.tryBodySystem(text) ||
+    stemEngine.tryClassification(text) ||
+    stemEngine.tryEcology(text) ||
+    stemEngine.tryTechConcept(text) ||
+    worldContext.tryHariByDate(text) ||
+    worldContext.tryHariByName(text) ||
+    worldContext.tryDetectLanguage(text);
   if (stemDict) {
     ragetDb.addNote(text, stemDict, null, 'stem');
     return postProcess(stemDict);
@@ -381,6 +389,12 @@ async function respondCore(messages, prompt) {
   if (contextReply) {
     ragetDb.addNote(text, contextReply, null, 'context');
     return postProcess(contextReply);
+  }
+
+  const worldReply = await worldContext.tryWorldContext(text);
+  if (worldReply) {
+    ragetDb.addNote(text, worldReply, null, 'world_context');
+    return postProcess(worldReply);
   }
 
   const teaching = routerIntent.detectTeaching(text);
