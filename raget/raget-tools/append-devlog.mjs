@@ -47,7 +47,7 @@ function toModuleSource(entry) {
 function appendToIndex(fileName, entry) {
   const src = readFileSync(INDEX_FILE, 'utf8');
   const varName = entry.id.replace(/[^a-zA-Z0-9]/g, '_');
-  const importLine = "import " + varName + " from './sejarah" + fileName.replace(/\.js$/, '.js') + "';\n";
+  const importLine = "import " + varName + " from './sejarah/" + fileName.replace(/\.js$/, '.js') + "';\n";
 
   const lastImportMatch = [...src.matchAll(/^import .+;\n/gm)].pop();
   if (!lastImportMatch) throw new Error('Tidak menemukan blok import di index.js - format berubah?');
