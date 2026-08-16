@@ -12,7 +12,9 @@ const RELATIONS = [
   { keys: ['bahasa'], fields: ['languages'] },
   { keys: ['pemerintahan'], fields: ['governmentType'] },
   { keys: ['merdeka', 'kemerdekaan'], fields: ['independenceDay'] },
+  { keys: ['luas laut', 'luas lautan', 'luas perairan'], fields: ['seaArea'] },
   { keys: ['luas'], fields: ['area'] },
+  { keys: ['suku', 'etnis', 'kelompok etnis'], fields: ['ethnicGroups'] },
   { keys: ['kode telepon', 'kode telpon'], fields: ['phoneCode'] },
 ];
 

@@ -392,6 +392,23 @@ function tryTroubleshoot(text) {
   return null;
 }
 
+// ---------- SCIENCE FIELDS (konsep, bukan topik spesifik di dalamnya) ----------
+
+const SCIENCE_FIELDS = {
+  biologi: 'Biologi adalah cabang ilmu pengetahuan alam yang mempelajari makhluk hidup — mulai dari struktur sel, cara kerja tubuh, hingga interaksi antar makhluk hidup dan lingkungannya.',
+  fisika: 'Fisika adalah cabang ilmu pengetahuan alam yang mempelajari materi, energi, dan interaksi antara keduanya — mencakup gerak, gaya, panas, cahaya, listrik, hingga struktur alam semesta.',
+  kimia: 'Kimia adalah cabang ilmu pengetahuan alam yang mempelajari komposisi, struktur, sifat, dan perubahan zat — termasuk bagaimana unsur dan senyawa bereaksi membentuk zat baru.',
+};
+
+function tryScienceField(text) {
+  const t = text.toLowerCase();
+  if (!/^(apa\s*itu|jelaskan|apa\s*yang\s*dimaksud\s*dengan)\b/.test(t)) return null;
+  for (const key of Object.keys(SCIENCE_FIELDS)) {
+    if (new RegExp('\\b' + key + '\\b').test(t)) return SCIENCE_FIELDS[key];
+  }
+  return null;
+}
+
 // ---------- BIOLOGY ----------
 
 const BODY_SYSTEMS = {
@@ -480,6 +497,7 @@ function tryStem(text) {
     tryPhysics(t) ||
     tryTechConcept(t) ||
     tryTroubleshoot(t) ||
+    tryScienceField(t) ||
     tryBodySystem(t) ||
     tryClassification(t) ||
     tryEcology(t) ||
@@ -497,6 +515,7 @@ export const stemEngine = Object.freeze({
   tryPhysics,
   tryTechConcept,
   tryTroubleshoot,
+  tryScienceField,
   tryBodySystem,
   tryClassification,
   tryEcology,

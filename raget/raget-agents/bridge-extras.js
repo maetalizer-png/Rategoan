@@ -233,6 +233,9 @@ async function extras(q) {
   const agregasi = await bridgeReasoning.tryAgregasi(text);
   if (agregasi) return agregasi;
 
+  const regionList = await bridgeReasoning.tryRegionList(text);
+  if (regionList) return regionList;
+
   const konversiSatuan = await bridgeReasoning.tryKonversiSatuan(text);
   if (konversiSatuan) return konversiSatuan;
 

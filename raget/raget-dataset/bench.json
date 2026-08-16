@@ -5301,5 +5301,115 @@
     "prompt": "hubungan frida kahlo dengan siapa",
     "note": "Ronde v5 B6: tokoh relasi - kahlo",
     "contains": "Diego Rivera"
+  },
+  {
+    "prompt": "ibukota cina",
+    "note": "Ronde v6 B3: alias cina->china - ibukota",
+    "contains": "Beijing"
+  },
+  {
+    "prompt": "populasi cina",
+    "note": "Ronde v6 B3: alias cina->china - populasi",
+    "contains": "China"
+  },
+  {
+    "prompt": "mata uang cina",
+    "note": "Ronde v6 B3: alias cina->china - mata uang",
+    "contains": "China"
+  },
+  {
+    "prompt": "jumlah penduduk jepang",
+    "note": "Ronde v6 B3: sinonim jumlah penduduk->populasi",
+    "contains": "Jepang"
+  },
+  {
+    "prompt": "jumlah penduduk indonesia",
+    "note": "Ronde v6 B3: sinonim jumlah penduduk->populasi",
+    "contains": "Indonesia"
+  },
+  {
+    "prompt": "luas lautan indonesia",
+    "note": "Ronde v6 B3: presisi luas lautan - jujur bila tiada",
+    "contains": "Belum ada data luas lautan"
+  },
+  {
+    "prompt": "luas laut jepang",
+    "note": "Ronde v6 B3: presisi luas lautan - jujur bila tiada",
+    "contains": "Belum ada data luas lautan"
+  },
+  {
+    "prompt": "suku di indonesia",
+    "note": "Ronde v6 B3: atribut suku/etnis",
+    "contains": "Jawa"
+  },
+  {
+    "prompt": "etnis di indonesia",
+    "note": "Ronde v6 B3: atribut suku/etnis",
+    "contains": "Jawa"
+  },
+  {
+    "prompt": "menurutmu apa negara terbaik di dunia",
+    "note": "Ronde v6 B3: template opini berbasis fakta+disclaimer",
+    "contains": "rule-based"
+  },
+  {
+    "prompt": "menurut kamu makanan terenak apa",
+    "note": "Ronde v6 B3: template opini berbasis fakta+disclaimer",
+    "contains": "kriteria"
+  },
+  {
+    "prompt": "sebutkan negara di afrika",
+    "note": "Ronde v6 B3: penanganan region - benua afrika",
+    "contains": "Nigeria"
+  },
+  {
+    "prompt": "ada berapa negara di eropa",
+    "note": "Ronde v6 B3: penanganan region - hitung negara benua",
+    "contains": "negara di Eropa"
+  },
+  {
+    "prompt": "negara apa saja yang ada di benua asia",
+    "note": "Ronde v6 B3: penanganan region - benua asia",
+    "contains": "Arab Saudi"
+  },
+  {
+    "prompt": "negara di amerika utara apa saja",
+    "note": "Ronde v6 B3: penanganan region - subregion amerika utara",
+    "contains": "Amerika Serikat"
+  },
+  {
+    "prompt": "sebutkan negara-negara oseania",
+    "note": "Ronde v6 B3: penanganan region - oseania",
+    "contains": "Australia"
+  },
+  {
+    "prompt": "daftar negara benua eropa",
+    "note": "Ronde v6 B3: penanganan region - daftar benua eropa",
+    "contains": "Jerman"
+  },
+  {
+    "prompt": "negara apa saja di afrika utara",
+    "note": "Ronde v6 B3: penanganan region - subregion afrika utara",
+    "contains": "Mesir"
+  },
+  {
+    "prompt": "apa itu biologi",
+    "note": "Ronde v6 B3: definisi bidang sains - biologi",
+    "contains": "makhluk hidup"
+  },
+  {
+    "prompt": "apa itu fisika",
+    "note": "Ronde v6 B3: definisi bidang sains - fisika",
+    "contains": "energi"
+  },
+  {
+    "prompt": "apa itu kimia",
+    "note": "Ronde v6 B3: definisi bidang sains - kimia",
+    "contains": "senyawa"
+  },
+  {
+    "prompt": "jelaskan biologi",
+    "note": "Ronde v6 B3: definisi bidang sains - biologi (variasi)",
+    "contains": "makhluk hidup"
   }
 ]

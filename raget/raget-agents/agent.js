@@ -327,6 +327,7 @@ async function respondCore(messages, prompt) {
   }
 
   const stemDict =
+    stemEngine.tryScienceField(text) ||
     stemEngine.tryBodySystem(text) ||
     stemEngine.tryClassification(text) ||
     stemEngine.tryEcology(text) ||
