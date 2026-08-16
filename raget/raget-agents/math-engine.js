@@ -213,6 +213,82 @@ function evaluate(expr, opts) {
   return { ok: true, value: trimNum(value), steps: steps || [] };
 }
 
+// ---------- SOAL CERITA (WORD PROBLEMS) ----------
+// Angka dalam soal cerita sehari-hari memakai konvensi Indonesia: titik = pemisah ribuan,
+// koma = desimal (kebalikan dari normalizeExpr() di atas yang dipakai untuk ekspresi kalkulator).
+
+function parseIndoNumber(raw) {
+  let s = String(raw || '').trim();
+  s = s.replace(/\.(?=\d{3}(\D|$))/g, '');
+  s = s.replace(',', '.');
+  const n = parseFloat(s);
+  return isFinite(n) ? n : null;
+}
+
+function formatRupiah(n) {
+  return 'Rp' + Math.round(n).toLocaleString('id-ID');
+}
+
+const WORD_PROBLEM_UNIT_RE = 'kg|gram|g|liter|l|ml|pcs|buah|butir|lembar|meter|m';
+
+function tryPriceQuantity(text) {
+  const t = String(text || '').toLowerCase().trim();
+  const unitGroup = '(' + WORD_PROBLEM_UNIT_RE + ')';
+  const re = new RegExp(
+    '(\\d+(?:[.,]\\d+)?)\\s*' + unitGroup + '\\b[^\\d]*rp\\.?\\s*([\\d.,]+)[^\\d]*berapa[^\\d]*(\\d+(?:[.,]\\d+)?)\\s*' + unitGroup + '\\b',
+    'i'
+  );
+  const m = t.match(re);
+  if (!m) return null;
+  const qty1 = parseIndoNumber(m[1]);
+  const unit1 = m[2];
+  const price1 = parseIndoNumber(m[3]);
+  const qty2 = parseIndoNumber(m[4]);
+  const unit2 = m[5];
+  if (qty1 == null || !qty1 || price1 == null || qty2 == null || unit1 !== unit2) return null;
+  const unitPrice = price1 / qty1;
+  const value = trimNum(unitPrice * qty2);
+  return {
+    ok: true,
+    value,
+    display: formatRupiah(value),
+    steps: [
+      'Harga per ' + unit1 + ' = ' + formatRupiah(price1) + ' / ' + qty1 + ' = ' + formatRupiah(unitPrice),
+      'Harga untuk ' + qty2 + ' ' + unit2 + ' = ' + formatRupiah(unitPrice) + ' x ' + qty2 + ' = ' + formatRupiah(value),
+    ],
+  };
+}
+
+const PERCENT_CONTEXT_REDUCE = /diskon|potongan|turun|penurunan|berkurang/;
+const PERCENT_CONTEXT_RE = /rp\.?\s*([\d.,]+)[^\d%]*(diskon|didiskon|potongan|naik|kenaikan|turun|penurunan|bertambah|berkurang)\s*(\d+(?:[.,]\d+)?)\s*%/i;
+
+function tryPercentContext(text) {
+  const t = String(text || '').toLowerCase().trim();
+  const m = t.match(PERCENT_CONTEXT_RE);
+  if (!m) return null;
+  const base = parseIndoNumber(m[1]);
+  const kind = m[2];
+  const pct = parseIndoNumber(m[3]);
+  if (base == null || pct == null) return null;
+  const isReduce = PERCENT_CONTEXT_REDUCE.test(kind);
+  const delta = trimNum((pct / 100) * base);
+  const value = trimNum(isReduce ? base - delta : base + delta);
+  const verb = isReduce ? 'dikurangi' : 'ditambah';
+  return {
+    ok: true,
+    value,
+    display: formatRupiah(value),
+    steps: [
+      pct + '% dari ' + formatRupiah(base) + ' = ' + formatRupiah(delta),
+      formatRupiah(base) + ' ' + verb + ' ' + formatRupiah(delta) + ' = ' + formatRupiah(value),
+    ],
+  };
+}
+
+function tryWordProblem(text) {
+  return tryPriceQuantity(text) || tryPercentContext(text) || null;
+}
+
 function parsePercentOf(text) {
   const m = String(text || '').match(/(-?[0-9.,]+)\s*%\s*(?:dari|of)\s*(-?[0-9.,]+)/i);
   if (!m) return null;
@@ -305,6 +381,8 @@ export const mathEngine = Object.freeze({
   parsePercentOf,
   tryConvertUnit,
   tryConvertCurrency,
+  tryWordProblem,
+  parseIndoNumber,
   normalizeExpr,
   FUNCS,
 });

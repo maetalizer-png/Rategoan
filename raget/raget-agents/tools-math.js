@@ -42,6 +42,7 @@ function looksLikeMath(t) {
 function isMathQuestion(t) {
   if (isMathStatement(t)) return false;
   if (/%\s*(dari|of)\b/.test(t)) return true;
+  if (mathEngine.tryWordProblem(t)) return true;
   if (looksLikeMath(t)) return true;
   return !!extractMathExpr(t);
 }
@@ -49,6 +50,7 @@ function isMathQuestion(t) {
 function tryMath(text) {
   const t = text.trim();
   if (!/^(hitung|calculate|compute)\b/i.test(t) && !isMathQuestion(t.toLowerCase())) return null;
+  if (mathEngine.tryWordProblem(t)) return agentTools.hitung(t);
   if (/%\s*(dari|of)\b/i.test(t)) return agentTools.hitung(t);
   if (mathEngine.tryConvertUnit(t) || mathEngine.tryConvertCurrency(t)) return agentTools.hitung(t);
   const stripped = t

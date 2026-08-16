@@ -1,3 +1,54 @@
+import { detectMood } from '../../utils/text.js';
+
+// ---------- EMOTIONAL CONTINUITY (lintas giliran, maks 3) ----------
+// Mengingat mood negatif (sedih/marah/capek) dari giliran-giliran sebelumnya (maks 3 giliran
+// ke depan sebelum meluruh) supaya nada balasan tetap lembut walau giliran berikutnya
+// pertanyaannya netral (mis. factoid biasa) - bukan berpura-pura mendeteksi emosi baru yang
+// tidak ada, hanya jujur mereferensikan konteks yang benar-benar terjadi sebelumnya.
+
+const EMOTION_CONTINUITY_MAX_TURNS = 3;
+const NEGATIVE_MOODS = new Set(['sedih', 'marah', 'capek']);
+const CONTINUITY_OPENERS = {
+  sedih: 'Masih inget cerita kamu sebelumnya, semoga sekarang udah agak mendingan. ',
+  marah: 'Semoga sekarang kamu udah agak lebih tenang dari sebelumnya. ',
+  capek: 'Semoga sekarang kamu udah sempat istirahat sedikit dari yang tadi. ',
+};
+
+let lastEmotion = null;
+let turnsSinceEmotion = 0;
+
+function noteTurnMood(text) {
+  const mood = detectMood(String(text || ''));
+  if (mood && NEGATIVE_MOODS.has(mood)) {
+    lastEmotion = mood;
+    turnsSinceEmotion = 0;
+    return;
+  }
+  if (lastEmotion) {
+    turnsSinceEmotion++;
+    if (turnsSinceEmotion >= EMOTION_CONTINUITY_MAX_TURNS) {
+      lastEmotion = null;
+      turnsSinceEmotion = 0;
+    }
+  }
+}
+
+function tryEmotionalContinuityOpener(text) {
+  const currentMood = detectMood(String(text || ''));
+  if (currentMood) return null;
+  if (!lastEmotion) return null;
+  return CONTINUITY_OPENERS[lastEmotion] || null;
+}
+
+function resetEmotionalContinuity() {
+  lastEmotion = null;
+  turnsSinceEmotion = 0;
+}
+
+function getCarriedEmotion() {
+  return lastEmotion;
+}
+
 // ---------- OPT-IN GEOLOCATION ----------
 // Deliberately synchronous: an earlier version called navigator.geolocation.getCurrentPosition()
 // directly, but its real (up to ~1.5s) async delay raced against the chat UI's typing-animation
@@ -113,4 +164,8 @@ export const contextEngine = Object.freeze({
   trySuggestions,
   timeGreeting,
   tryContext,
+  noteTurnMood,
+  tryEmotionalContinuityOpener,
+  resetEmotionalContinuity,
+  getCarriedEmotion,
 });
