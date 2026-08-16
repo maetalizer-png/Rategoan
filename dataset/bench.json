@@ -4308,5 +4308,344 @@
     "containsAll": [
       "Semangat olahraganya"
     ]
+  },
+  {
+    "prompt": "gunakan lokasi saya",
+    "note": "Ronde v5 B3: context geolocation - gunakan",
+    "contains": "opt-in"
+  },
+  {
+    "prompt": "aktifkan lokasiku",
+    "note": "Ronde v5 B3: context geolocation - aktifkan",
+    "contains": "opt-in"
+  },
+  {
+    "prompt": "boleh akses lokasiku",
+    "note": "Ronde v5 B3: context geolocation - boleh akses",
+    "contains": "opt-in"
+  },
+  {
+    "prompt": "pakai lokasi saya dong",
+    "note": "Ronde v5 B3: context geolocation - pakai",
+    "contains": "opt-in"
+  },
+  {
+    "prompt": "hai",
+    "note": "Ronde v5 B3: context greeting - hai (time-aware)",
+    "containsAny": [
+      "Selamat pagi",
+      "Selamat siang",
+      "Selamat sore",
+      "Selamat malam"
+    ]
+  },
+  {
+    "prompt": "halo",
+    "note": "Ronde v5 B3: context greeting - halo (time-aware)",
+    "containsAny": [
+      "Selamat pagi",
+      "Selamat siang",
+      "Selamat sore",
+      "Selamat malam"
+    ]
+  },
+  {
+    "prompt": "hi",
+    "note": "Ronde v5 B3: context greeting - hi (time-aware)",
+    "containsAny": [
+      "Selamat pagi",
+      "Selamat siang",
+      "Selamat sore",
+      "Selamat malam"
+    ]
+  },
+  {
+    "prompt": "hey",
+    "note": "Ronde v5 B3: context greeting - hey (time-aware)",
+    "containsAny": [
+      "Selamat pagi",
+      "Selamat siang",
+      "Selamat sore",
+      "Selamat malam"
+    ]
+  },
+  {
+    "prompt": "woy",
+    "note": "Ronde v5 B3: context greeting - woy (time-aware)",
+    "containsAny": [
+      "Selamat pagi",
+      "Selamat siang",
+      "Selamat sore",
+      "Selamat malam"
+    ]
+  },
+  {
+    "prompt": "hoi",
+    "note": "Ronde v5 B3: context greeting - hoi (time-aware)",
+    "containsAny": [
+      "Selamat pagi",
+      "Selamat siang",
+      "Selamat sore",
+      "Selamat malam"
+    ]
+  },
+  {
+    "prompt": "ini darurat, aku sesak napas",
+    "note": "Ronde v5 B3: context darurat - sesak napas",
+    "containsAll": [
+      "112",
+      "119",
+      "110",
+      "113"
+    ]
+  },
+  {
+    "prompt": "tolong, kecelakaan!",
+    "note": "Ronde v5 B3: context darurat - kecelakaan",
+    "containsAll": [
+      "112",
+      "darurat"
+    ]
+  },
+  {
+    "prompt": "kecelakaan, tolong!",
+    "note": "Ronde v5 B3: context darurat - kecelakaan variasi",
+    "containsAll": [
+      "112"
+    ]
+  },
+  {
+    "prompt": "aku ditangkap polisi, butuh pengacara sekarang",
+    "note": "Ronde v5 B3: context darurat - hukum",
+    "containsAll": [
+      "112",
+      "110"
+    ]
+  },
+  {
+    "prompt": "dia pingsan, ini darurat",
+    "note": "Ronde v5 B3: context darurat - pingsan",
+    "containsAll": [
+      "119"
+    ]
+  },
+  {
+    "prompt": "ada pendarahan hebat, darurat",
+    "note": "Ronde v5 B3: context darurat - pendarahan",
+    "containsAll": [
+      "119"
+    ]
+  },
+  {
+    "prompt": "tolong, kebakaran!",
+    "note": "Ronde v5 B3: context darurat - kebakaran",
+    "containsAll": [
+      "113"
+    ]
+  },
+  {
+    "prompt": "kebakaran, tolong cepat!",
+    "note": "Ronde v5 B3: context darurat - kebakaran variasi",
+    "containsAll": [
+      "113"
+    ]
+  },
+  {
+    "prompt": "ini darurat banget",
+    "note": "Ronde v5 B3: context darurat - darurat generik",
+    "containsAll": [
+      "112",
+      "119",
+      "110",
+      "113"
+    ]
+  },
+  {
+    "prompt": "tidak sadarkan diri, darurat",
+    "note": "Ronde v5 B3: context darurat - tidak sadarkan diri",
+    "containsAll": [
+      "119"
+    ]
+  },
+  {
+    "prompt": "aku lagi santai nih",
+    "note": "Ronde v5 B3: context situasi santai",
+    "contains": "santai"
+  },
+  {
+    "prompt": "saya lagi santai aja",
+    "note": "Ronde v5 B3: context situasi santai variasi",
+    "contains": "santai"
+  },
+  {
+    "prompt": "cuma lagi santai kok",
+    "note": "Ronde v5 B3: context situasi santai cuma",
+    "contains": "santai"
+  },
+  {
+    "prompt": "gabut nih",
+    "note": "Ronde v5 B3: context situasi santai gabut",
+    "contains": "santai"
+  },
+  {
+    "prompt": "gabut banget hari ini",
+    "note": "Ronde v5 B3: context situasi santai gabut variasi",
+    "contains": "santai"
+  },
+  {
+    "prompt": "aku lagi santai banget nih",
+    "note": "Ronde v5 B3: context situasi santai banget",
+    "contains": "santai"
+  },
+  {
+    "prompt": "lagi belajar buat ujian",
+    "note": "Ronde v5 B3: context situasi belajar",
+    "contains": "Mode belajar aktif"
+  },
+  {
+    "prompt": "sedang belajar nih",
+    "note": "Ronde v5 B3: context situasi belajar sedang",
+    "contains": "Mode belajar aktif"
+  },
+  {
+    "prompt": "mau belajar buat ujian besok",
+    "note": "Ronde v5 B3: context situasi belajar ujian besok",
+    "contains": "Mode belajar aktif"
+  },
+  {
+    "prompt": "lagi belajar matematika",
+    "note": "Ronde v5 B3: context situasi belajar matematika",
+    "contains": "Mode belajar aktif"
+  },
+  {
+    "prompt": "sedang belajar buat ujian",
+    "note": "Ronde v5 B3: context situasi belajar ujian",
+    "contains": "Mode belajar aktif"
+  },
+  {
+    "prompt": "lagi belajar buat ujian besok",
+    "note": "Ronde v5 B3: context situasi belajar besok",
+    "contains": "Mode belajar aktif"
+  },
+  {
+    "prompt": "kerjaan numpuk banget",
+    "note": "Ronde v5 B3: context situasi kerja numpuk",
+    "contains": "mode kerja fokus"
+  },
+  {
+    "prompt": "deadline mepet nih",
+    "note": "Ronde v5 B3: context situasi kerja deadline mepet",
+    "contains": "mode kerja fokus"
+  },
+  {
+    "prompt": "sedang kerja deadline mepet",
+    "note": "Ronde v5 B3: context situasi kerja sedang",
+    "contains": "mode kerja fokus"
+  },
+  {
+    "prompt": "lagi kerja deadline mepet banget",
+    "note": "Ronde v5 B3: context situasi kerja lagi",
+    "contains": "mode kerja fokus"
+  },
+  {
+    "prompt": "kerjaan numpuk terus",
+    "note": "Ronde v5 B3: context situasi kerja numpuk terus",
+    "contains": "mode kerja fokus"
+  },
+  {
+    "prompt": "deadline mepet banget hari ini",
+    "note": "Ronde v5 B3: context situasi kerja deadline hari ini",
+    "contains": "mode kerja fokus"
+  },
+  {
+    "prompt": "apa yang harus aku lakukan sekarang buat belajar ujian",
+    "note": "Ronde v5 B3: context saran - belajar",
+    "containsAll": [
+      "opsional",
+      "Pomodoro"
+    ]
+  },
+  {
+    "prompt": "apa yang sebaiknya saya lakukan buat kerjaan deadline",
+    "note": "Ronde v5 B3: context saran - kerja",
+    "containsAll": [
+      "opsional",
+      "prioritas"
+    ]
+  },
+  {
+    "prompt": "aku harus ngapain nih, lagi bingung banget",
+    "note": "Ronde v5 B3: context saran - bingung",
+    "containsAll": [
+      "opsional",
+      "tulis dulu"
+    ]
+  },
+  {
+    "prompt": "saya harus ngapain, lagi stres banget",
+    "note": "Ronde v5 B3: context saran - stres",
+    "containsAll": [
+      "opsional"
+    ]
+  },
+  {
+    "prompt": "kasih saran langkah selanjutnya buat kerjaan deadline",
+    "note": "Ronde v5 B3: context saran - langkah kerja",
+    "containsAll": [
+      "opsional",
+      "1.",
+      "2.",
+      "3."
+    ]
+  },
+  {
+    "prompt": "langkah selanjutnya apa",
+    "note": "Ronde v5 B3: context saran - generik",
+    "containsAll": [
+      "opsional",
+      "langkah kecil"
+    ]
+  },
+  {
+    "prompt": "apa yang harus aku lakukan buat ujian besok",
+    "note": "Ronde v5 B3: context saran - ujian besok",
+    "containsAll": [
+      "opsional",
+      "Pomodoro"
+    ]
+  },
+  {
+    "prompt": "aku harus ngapain nih lagi buntu banget",
+    "note": "Ronde v5 B3: context saran - buntu",
+    "containsAll": [
+      "opsional"
+    ]
+  },
+  {
+    "prompt": "kasih saran langkah selanjutnya dong",
+    "note": "Ronde v5 B3: context saran - langkah generik",
+    "containsAll": [
+      "opsional"
+    ]
+  },
+  {
+    "prompt": "apa yang sebaiknya saya lakukan sekarang",
+    "note": "Ronde v5 B3: context saran - sebaiknya",
+    "containsAll": [
+      "opsional"
+    ]
+  },
+  {
+    "prompt": "aktifkan lokasi saya dong",
+    "note": "Ronde v5 B3: context geolocation - dong",
+    "contains": "opt-in"
+  },
+  {
+    "prompt": "tolong, ada yang tidak sadarkan diri di sini",
+    "note": "Ronde v5 B3: context darurat - tidak sadarkan diri variasi",
+    "containsAll": [
+      "112",
+      "119"
+    ]
   }
 ]
