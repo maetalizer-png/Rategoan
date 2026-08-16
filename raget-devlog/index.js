@@ -13,6 +13,7 @@ import trisulaUltra from './sejarah/12-trisula-ultra.js';
 import trisulaFinalV2 from './sejarah/13-trisula-final-v2.js';
 import ronde_v3_gabungan_final from './sejarah/14-ronde-v3-gabungan-final.js';
 import ronde_v4_trisula_deca from './sejarah/15-ronde-v4-trisula-deca.js';
+import ronde_v5_trisula_deca_plus from './sejarah/16-ronde-v5-trisula-deca-plus.js';
 
 const SEJARAH = Object.freeze([
   genesis,
@@ -30,6 +31,7 @@ const SEJARAH = Object.freeze([
   trisulaFinalV2,
   ronde_v3_gabungan_final,
   ronde_v4_trisula_deca,
+  ronde_v5_trisula_deca_plus,
 ]);
 
 function all() {
