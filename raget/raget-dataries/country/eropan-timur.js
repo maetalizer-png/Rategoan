@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇷🇺 RUSIA
-    // ==========================================================
     {
         text: 'Rusia - Negara terbesar di dunia yang membentang dari Eropa Timur hingga Asia Utara. Ibu kota: Moskow. Populasi: 146 juta jiwa. Mata uang: Rubel (RUB). Bahasa: Rusia. Sistem pemerintahan: Republik Federal Semi-Presidensial. Anggota tetap Dewan Keamanan PBB. Negara dengan cadangan gas alam dan minyak terbesar. Pemimpin global dalam energi, militer, dan teknologi antariksa. Rumah bagi Kremlin, Hermitage, dan Danau Baikal.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'eropan-timur', 'adidaya', 'energi', 'militer']
         }
     },
-    // ==========================================================
-    // 🇺🇦 UKRAINA
-    // ==========================================================
     {
         text: 'Ukraina - Negara terbesar kedua di Eropa Timur dengan lahan pertanian subur. Ibu kota: Kyiv. Populasi: 41 juta jiwa. Mata uang: Hryvnia (UAH). Bahasa: Ukraina. Sistem pemerintahan: Republik Semi-Presidensial. Lumbung gandum Eropa. Produsen minyak bunga matahari terbesar dunia. Rumah bagi Katedral St. Sophia dan Pechersk Lavra. Negara dengan sejarah panjang dan budaya yang kaya.',
         metadata: {
@@ -283,9 +277,6 @@ const data = [
             tags: ['negara', 'eropan-timur', 'pertanian', 'industri', 'gandum']
         }
     },
-    // ==========================================================
-    // 🇷🇴 RUMANIA
-    // ==========================================================
     {
         text: 'Rumania - Negara di Eropa Timur dengan sejarah dan budaya kaya. Ibu kota: Bukares. Populasi: 19 juta jiwa. Mata uang: Leu (RON). Bahasa: Rumania. Sistem pemerintahan: Republik Semi-Presidensial. Anggota UE dan NATO. Negara dengan arsitektur indah dan alam yang beragam. Rumah bagi Kastil Bran (Dracula) dan Pegunungan Carpathian.',
         metadata: {
@@ -424,9 +415,6 @@ const data = [
             tags: ['negara', 'eropan-timur', 'ue', 'nato', 'pertanian']
         }
     },
-    // ==========================================================
-    // 🇧🇾 BELARUS
-    // ==========================================================
     {
         text: 'Belarus - Negara di Eropa Timur dengan ekonomi berbasis industri. Ibu kota: Minsk. Populasi: 9.2 juta jiwa. Mata uang: Rubel Belarus (BYN). Bahasa: Belarus, Rusia. Sistem pemerintahan: Republik Presidensial. Negara dengan hutan-hutan luas dan industri manufaktur. Rumah bagi Kastil Mir dan hutan Bialowieza yang terkenal.',
         metadata: {
@@ -566,9 +554,6 @@ const data = [
             tags: ['negara', 'eropan-timur', 'industri', 'hutan', 'manufaktur']
         }
     },
-    // ==========================================================
-    // 🇧🇬 BULGARIA
-    // ==========================================================
     {
         text: 'Bulgaria - Negara di Eropa Timur dengan pantai Laut Hitam. Ibu kota: Sofia. Populasi: 6.5 juta jiwa. Mata uang: Lev (BGN). Bahasa: Bulgaria. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah panjang dan pantai-pantai indah di Laut Hitam. Rumah bagi biara Rila dan kota-kota bersejarah.',
         metadata: {
@@ -708,9 +693,6 @@ const data = [
             tags: ['negara', 'eropan-timur', 'ue', 'nato', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇲🇩 MOLDOVA
-    // ==========================================================
     {
         text: 'Moldova - Negara kecil di Eropa Timur dengan pertanian subur. Ibu kota: Chisinau. Populasi: 2.6 juta jiwa. Mata uang: Leu Moldova (MDL). Bahasa: Rumania. Sistem pemerintahan: Republik Parlementer. Negara dengan tanah pertanian subur dan kebun anggur terkenal. Rumah bagi budaya dan sejarah yang kaya.',
         metadata: {

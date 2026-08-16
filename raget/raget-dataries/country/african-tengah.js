@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇨🇬 KONGO
-    // ==========================================================
     {
         text: 'Kongo - Negara di Afrika Tengah dengan hutan hujan Amazon. Ibu kota: Kinshasa. Populasi: 95 juta jiwa. Mata uang: Franc (CDF). Bahasa: Prancis. Sistem pemerintahan: Republik Semi-Presidensial. Negara dengan hutan hujan terbesar kedua di dunia dan sumber daya mineral melimpah.',
         metadata: {
@@ -138,9 +135,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'hutan', 'amazon', 'mineral']
         }
     },
-    // ==========================================================
-    // 🇦🇴 ANGOLA
-    // ==========================================================
     {
         text: 'Angola - Negara di Afrika Tengah dengan minyak dan berlian. Ibu kota: Luanda. Populasi: 35 juta jiwa. Mata uang: Kwanza (AOA). Bahasa: Portugis. Sistem pemerintahan: Republik Presidensial. Negara dengan ekonomi minyak terbesar di Afrika dan pertumbuhan yang cepat.',
         metadata: {
@@ -278,9 +272,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'minyak', 'berlian', 'ekonomi']
         }
     },
-    // ==========================================================
-    // 🇬🇦 GABON
-    // ==========================================================
     {
         text: 'Gabon - Negara di Afrika Tengah dengan hutan dan minyak. Ibu kota: Libreville. Populasi: 2.2 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan hutan hujan dan keanekaragaman hayati yang kaya.',
         metadata: {
@@ -417,9 +408,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'hutan', 'minyak', 'konservasi']
         }
     },
-    // ==========================================================
-    // 🇹🇩 CHAD
-    // ==========================================================
     {
         text: 'Chad - Negara di Afrika Tengah dengan gurun Sahara. Ibu kota: N\'Djamena. Populasi: 17 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Prancis, Arab. Sistem pemerintahan: Republik Presidensial. Negara dengan gurun Sahara dan Danau Chad yang bersejarah.',
         metadata: {
@@ -555,9 +543,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'sahara', 'danau-chad', 'peternakan']
         }
     },
-    // ==========================================================
-    // 🇨🇫 REPUBLIK AFRIKA TENGAH
-    // ==========================================================
     {
         text: 'Republik Afrika Tengah - Negara di Afrika Tengah dengan hutan dan mineral. Ibu kota: Bangui. Populasi: 5.4 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Prancis, Sango. Sistem pemerintahan: Republik Presidensial. Negara dengan keanekaragaman hayati dan sumber daya mineral.',
         metadata: {
@@ -693,9 +678,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'hutan', 'mineral', 'biodiversitas']
         }
     },
-    // ==========================================================
-    // 🇨🇲 KAMERUN (NEW)
-    // ==========================================================
     {
         text: 'Kamerun - Negara di Afrika Tengah dengan keanekaragaman budaya. Ibu kota: Yaoundé. Populasi: 27 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Inggris, Prancis. Sistem pemerintahan: Republik Presidensial. Sering disebut "Afrika Mini" karena keanekaragaman hayati dan budaya yang luar biasa.',
         metadata: {
@@ -832,9 +814,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'biodiversitas', 'pertanian', 'ekonomi']
         }
     },
-    // ==========================================================
-    // 🇬🇶 GUINEA KHATULISTIWA (NEW!)
-    // ==========================================================
     {
         text: 'Guinea Khatulistiwa - Negara di Afrika Tengah dengan minyak dan hutan. Ibu kota: Malabo. Populasi: 1.4 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Spanyol, Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan pendapatan per kapita tertinggi di Afrika dan keanekaragaman hayati.',
         metadata: {
@@ -970,9 +949,6 @@ const data = [
             tags: ['negara', 'african-tengah', 'minyak', 'hutan', 'pulau']
         }
     },
-    // ==========================================================
-    // 🇸🇹 SÃO TOMÉ DAN PRÍNCIPE (NEW!)
-    // ==========================================================
     {
         text: 'São Tomé dan Príncipe - Negara kepulauan di Afrika Tengah. Ibu kota: São Tomé. Populasi: 220 ribu jiwa. Mata uang: Dobra (STN). Bahasa: Portugis. Sistem pemerintahan: Republik Semi-Presidensial. Negara dengan keanekaragaman hayati dan ekowisata yang luar biasa.',
         metadata: {

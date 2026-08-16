@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇵🇱 POLANDIA
-    // ==========================================================
     {
         text: 'Polandia - Negara terbesar di Eropa Tengah dengan ekonomi berkembang pesat. Ibu kota: Warsawa. Populasi: 37 juta jiwa. Mata uang: Zloty (PLN). Bahasa: Polandia. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah panjang dan budaya kaya. Rumah bagi kastil-kastil megah, kota-kota bersejarah, dan industri otomotif yang berkembang. Pusat manufaktur dan logistik Eropa.',
         metadata: {
@@ -138,9 +135,6 @@ const data = [
             tags: ['negara', 'eropan-tengah', 'ue', 'nato', 'otomotif']
         }
     },
-    // ==========================================================
-    // 🇨🇿 CEKO
-    // ==========================================================
     {
         text: 'Ceko - Negara di Eropa Tengah dengan industri maju dan Praha yang indah. Ibu kota: Praha. Populasi: 10.5 juta jiwa. Mata uang: Koruna (CZK). Bahasa: Ceko. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan arsitektur indah, bir terbaik dunia, dan sejarah panjang. Praha salah satu kota terindah di Eropa. Pusat manufaktur dan pariwisata Eropa.',
         metadata: {
@@ -279,9 +273,6 @@ const data = [
             tags: ['negara', 'eropan-tengah', 'ue', 'nato', 'bir']
         }
     },
-    // ==========================================================
-    // 🇭🇺 HUNGARIA
-    // ==========================================================
     {
         text: 'Hungaria - Negara di Eropa Tengah dengan Budapest yang ikonik. Ibu kota: Budapest. Populasi: 9.6 juta jiwa. Mata uang: Forint (HUF). Bahasa: Hungaria. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan arsitektur Art Nouveau, pemandian air panas, dan Danube yang memukau. Budapest salah satu kota terindah di Eropa.',
         metadata: {
@@ -420,9 +411,6 @@ const data = [
             tags: ['negara', 'eropan-tengah', 'ue', 'nato', 'pemandian']
         }
     },
-    // ==========================================================
-    // 🇸🇰 SLOWAKIA
-    // ==========================================================
     {
         text: 'Slowakia - Negara di Eropa Tengah dengan pegunungan Tatra. Ibu kota: Bratislava. Populasi: 5.4 juta jiwa. Mata uang: Euro (EUR). Bahasa: Slowakia. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan pegunungan Tatra yang indah dan kastil-kastil megah. Pusat manufaktur otomotif Eropa. Bratislava kota yang indah di tepi Danube.',
         metadata: {

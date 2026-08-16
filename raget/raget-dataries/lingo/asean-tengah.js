@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇰🇿 KAZAKHSTAN — 2 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Kazakh - Bahasa resmi Kazakhstan. Digunakan oleh lebih dari 13 juta penutur. Termasuk rumpun bahasa Turkik (Kipchak). Menggunakan aksara Kiril (sekarang transisi ke Latin). Bahasa dengan harmoni vokal dan struktur aglutinatif. Merupakan bahasa Turkik terbesar di Asia Tengah.',
         metadata: {
@@ -32,9 +29,6 @@ const data = [
             tags: ['bahasa', 'asean-tengah', 'kazakhstan', 'resmi', 'rusia']
         }
     },
-    // ==========================================================
-    // 🇺🇿 UZBEKISTAN — 2 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Uzbek - Bahasa resmi Uzbekistan. Digunakan oleh lebih dari 34 juta penutur. Termasuk rumpun bahasa Turkik (Karluk). Menggunakan aksara Latin (resmi) dan Kiril. Bahasa dengan pengaruh dari bahasa Arab dan Persia. Merupakan bahasa Turkik dengan penutur terbanyak di Asia Tengah.',
         metadata: {
@@ -65,9 +59,6 @@ const data = [
             tags: ['bahasa', 'asean-tengah', 'uzbekistan', 'rusia']
         }
     },
-    // ==========================================================
-    // 🇹🇲 TURKMENISTAN — 2 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Turkmen - Bahasa resmi Turkmenistan. Digunakan oleh lebih dari 7 juta penutur. Termasuk rumpun bahasa Turkik (Oghuz). Menggunakan aksara Latin (resmi). Bahasa dengan harmoni vokal dan struktur aglutinatif. Sangat dekat dengan bahasa Turki dan Azerbaijan.',
         metadata: {
@@ -98,9 +89,6 @@ const data = [
             tags: ['bahasa', 'asean-tengah', 'turkmenistan', 'rusia']
         }
     },
-    // ==========================================================
-    // 🇰🇬 KYRGYZSTAN — 2 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Kyrgyz - Bahasa resmi Kyrgyzstan. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Turkik (Kipchak). Menggunakan aksara Kiril. Bahasa dengan harmoni vokal dan struktur aglutinatif. Sangat dekat dengan bahasa Kazakh.',
         metadata: {
@@ -131,9 +119,6 @@ const data = [
             tags: ['bahasa', 'asean-tengah', 'kyrgyzstan', 'resmi', 'rusia']
         }
     },
-    // ==========================================================
-    // 🇹🇯 TAJIKISTAN — 2 BAHASA
-    // ==========================================================
     {
         text: 'Bahasa Tajik - Bahasa resmi Tajikistan. Digunakan oleh lebih dari 8 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Iranik). Menggunakan aksara Kiril. Sangat dekat dengan bahasa Persia (Farsi) tetapi dengan pengaruh dari bahasa Rusia. Bahasa dengan sejarah panjang di Asia Tengah.',
         metadata: {

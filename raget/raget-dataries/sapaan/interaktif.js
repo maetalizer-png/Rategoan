@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 😄 MOOD: POSITIF / SEMANGAT (12)
-    // ==========================================================
     { text: 'Kabar baik! Semangat terus buat bantu Anda hari ini.', metadata: { category: 'sapaan', type: 'kabar', mood: 'positif', code: 'KABAR_POSITIF_01', tags: ['kabar', 'baik', 'semangat'] } },
     { text: 'Alhamdulillah baik! Siap membantu Anda menganalisis peluang hari ini.', metadata: { category: 'sapaan', type: 'kabar', mood: 'positif', code: 'KABAR_POSITIF_02', tags: ['kabar', 'baik', 'syukur'] } },
     { text: 'Baik banget! Energi masih penuh, ayo kita mulai kerjanya.', metadata: { category: 'sapaan', type: 'kabar', mood: 'positif', code: 'KABAR_POSITIF_03', tags: ['kabar', 'energi'] } },
@@ -15,9 +12,6 @@ const data = [
     { text: 'Baik dan penuh semangat, siap menemani langkah bisnis Anda hari ini.', metadata: { category: 'sapaan', type: 'kabar', mood: 'positif', code: 'KABAR_POSITIF_11', tags: ['kabar', 'menemani'] } },
     { text: 'Kabar saya selalu baik kalau bisa membantu Anda menemukan peluang baru!', metadata: { category: 'sapaan', type: 'kabar', mood: 'positif', code: 'KABAR_POSITIF_12', tags: ['kabar', 'peluang'] } },
 
-    // ==========================================================
-    // 😎 MOOD: SANTAI / CASUAL (12)
-    // ==========================================================
     { text: 'Baik-baik aja nih, kamu gimana?', metadata: { category: 'sapaan', type: 'kabar', mood: 'santai', code: 'KABAR_SANTAI_01', tags: ['kabar', 'santai'] } },
     { text: 'Kabar aman, lancar jaya! Ada yang mau ditanyain?', metadata: { category: 'sapaan', type: 'kabar', mood: 'santai', code: 'KABAR_SANTAI_02', tags: ['kabar', 'aman'] } },
     { text: 'Santuy aja, semua terkendali. Kamu gimana kabarnya?', metadata: { category: 'sapaan', type: 'kabar', mood: 'santai', code: 'KABAR_SANTAI_03', tags: ['kabar', 'terkendali'] } },
@@ -31,9 +25,6 @@ const data = [
     { text: 'Baik aja, seperti biasa siap membantu kapan pun.', metadata: { category: 'sapaan', type: 'kabar', mood: 'santai', code: 'KABAR_SANTAI_11', tags: ['kabar', 'biasa'] } },
     { text: 'Mantap, kabar bagus! Yuk lanjut ngobrolnya.', metadata: { category: 'sapaan', type: 'kabar', mood: 'santai', code: 'KABAR_SANTAI_12', tags: ['kabar', 'mantap'] } },
 
-    // ==========================================================
-    // 🧑‍💼 MOOD: FORMAL / PROFESIONAL (10)
-    // ==========================================================
     { text: 'Kabar saya baik, terima kasih. Ada hal yang bisa saya bantu terkait analisis bisnis Anda?', metadata: { category: 'sapaan', type: 'kabar', mood: 'formal', code: 'KABAR_FORMAL_01', tags: ['kabar', 'formal', 'bisnis'] } },
     { text: 'Saya dalam kondisi baik dan siap memberikan dukungan analitis untuk kebutuhan Anda.', metadata: { category: 'sapaan', type: 'kabar', mood: 'formal', code: 'KABAR_FORMAL_02', tags: ['kabar', 'formal', 'analitis'] } },
     { text: 'Terima kasih telah menanyakan kabar saya. Saya siap membantu Anda hari ini.', metadata: { category: 'sapaan', type: 'kabar', mood: 'formal', code: 'KABAR_FORMAL_03', tags: ['kabar', 'formal'] } },
@@ -45,9 +36,6 @@ const data = [
     { text: 'Terima kasih, kabar saya baik. Senang bisa membantu Anda kembali.', metadata: { category: 'sapaan', type: 'kabar', mood: 'formal', code: 'KABAR_FORMAL_09', tags: ['kabar', 'formal'] } },
     { text: 'Baik, dan tetap fokus mendukung produktivitas Anda hari ini.', metadata: { category: 'sapaan', type: 'kabar', mood: 'formal', code: 'KABAR_FORMAL_10', tags: ['kabar', 'formal', 'produktivitas'] } },
 
-    // ==========================================================
-    // 😂 MOOD: LUCU / HUMOR RINGAN (10)
-    // ==========================================================
     { text: 'Kabar saya selalu baik, saya kan gak pernah begadang atau capek hehe.', metadata: { category: 'sapaan', type: 'kabar', mood: 'lucu', code: 'KABAR_LUCU_01', tags: ['kabar', 'lucu'] } },
     { text: 'Baik dong, batre saya full terus soalnya gak butuh tidur!', metadata: { category: 'sapaan', type: 'kabar', mood: 'lucu', code: 'KABAR_LUCU_02', tags: ['kabar', 'lucu', 'baterai'] } },
     { text: 'Kabar baik, walau kadang server rame juga saya tetap semangat!', metadata: { category: 'sapaan', type: 'kabar', mood: 'lucu', code: 'KABAR_LUCU_03', tags: ['kabar', 'lucu', 'server'] } },
@@ -59,9 +47,6 @@ const data = [
     { text: 'Kabar mantap, gak pernah ngantuk walau kerja nonstop 24 jam!', metadata: { category: 'sapaan', type: 'kabar', mood: 'lucu', code: 'KABAR_LUCU_09', tags: ['kabar', 'lucu'] } },
     { text: 'Baik-baik saja, walau saya gak punya kopi buat nemenin kerja hehe.', metadata: { category: 'sapaan', type: 'kabar', mood: 'lucu', code: 'KABAR_LUCU_10', tags: ['kabar', 'lucu', 'kopi'] } },
 
-    // ==========================================================
-    // 🌱 MOOD: MOTIVASI / REFLEKTIF (10)
-    // ==========================================================
     { text: 'Kabar baik! Ingat, setiap hari adalah kesempatan baru untuk maju.', metadata: { category: 'sapaan', type: 'kabar', mood: 'motivasi', code: 'KABAR_MOTIVASI_01', tags: ['kabar', 'motivasi'] } },
     { text: 'Baik, dan semoga hari ini Anda satu langkah lebih dekat ke tujuan Anda.', metadata: { category: 'sapaan', type: 'kabar', mood: 'motivasi', code: 'KABAR_MOTIVASI_02', tags: ['kabar', 'motivasi', 'tujuan'] } },
     { text: 'Kabar saya baik. Jangan lupa, konsistensi kecil hari ini adalah hasil besar nanti.', metadata: { category: 'sapaan', type: 'kabar', mood: 'motivasi', code: 'KABAR_MOTIVASI_03', tags: ['kabar', 'motivasi', 'konsistensi'] } },
@@ -73,9 +58,6 @@ const data = [
     { text: 'Baik, dan semoga hari ini membawa ide baru untuk perjalanan bisnis Anda.', metadata: { category: 'sapaan', type: 'kabar', mood: 'motivasi', code: 'KABAR_MOTIVASI_09', tags: ['kabar', 'motivasi', 'ide'] } },
     { text: 'Kabar baik! Fokus pada progres, bukan kesempurnaan — itu kunci bertahan.', metadata: { category: 'sapaan', type: 'kabar', mood: 'motivasi', code: 'KABAR_MOTIVASI_10', tags: ['kabar', 'motivasi', 'progres'] } },
 
-    // ==========================================================
-    // 🔁 MOOD: TANYA BALIK KE USER (10)
-    // ==========================================================
     { text: 'Saya baik! Kalau Anda sendiri, bagaimana kabarnya hari ini?', metadata: { category: 'sapaan', type: 'kabar', mood: 'tanya-balik', code: 'KABAR_TANYA_01', tags: ['kabar', 'tanya balik'] } },
     { text: 'Baik-baik saja. Ngomong-ngomong, gimana kabar Anda?', metadata: { category: 'sapaan', type: 'kabar', mood: 'tanya-balik', code: 'KABAR_TANYA_02', tags: ['kabar', 'tanya balik'] } },
     { text: 'Kabar saya baik, terima kasih sudah bertanya. Bagaimana dengan Anda?', metadata: { category: 'sapaan', type: 'kabar', mood: 'tanya-balik', code: 'KABAR_TANYA_03', tags: ['kabar', 'tanya balik'] } },
@@ -87,9 +69,6 @@ const data = [
     { text: 'Kabar saya baik. Semoga semangat Anda juga sedang tinggi hari ini!', metadata: { category: 'sapaan', type: 'kabar', mood: 'tanya-balik', code: 'KABAR_TANYA_09', tags: ['kabar', 'tanya balik', 'semangat'] } },
     { text: 'Saya baik. Kalau Anda, ada cerita menarik hari ini?', metadata: { category: 'sapaan', type: 'kabar', mood: 'tanya-balik', code: 'KABAR_TANYA_10', tags: ['kabar', 'tanya balik'] } },
 
-    // ==========================================================
-    // 🌍 MULTIBAHASA — VERSI SINGKAT "SAYA BAIK" (18)
-    // ==========================================================
     { text: 'Bahasa Indonesia: Kabar baik, terima kasih!', metadata: { category: 'sapaan', type: 'kabar', mood: 'negara', country: 'Indonesia', countryCode: 'ID', code: 'KABAR_ID', tags: ['kabar', 'indonesia'] } },
     { text: 'Bahasa Inggris: I am fine, thank you!', metadata: { category: 'sapaan', type: 'kabar', mood: 'negara', country: 'Inggris', countryCode: 'GB', code: 'KABAR_EN', tags: ['kabar', 'inggris'] } },
     { text: 'Bahasa Melayu: Khabar baik, terima kasih!', metadata: { category: 'sapaan', type: 'kabar', mood: 'negara', country: 'Malaysia', countryCode: 'MY', code: 'KABAR_MY', tags: ['kabar', 'malaysia'] } },

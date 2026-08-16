@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇨🇳 CHINA
-    // ==========================================================
     {
         text: 'China - Negara terbesar di Asia Timur dan terpadat di dunia dengan populasi 1.4 miliar jiwa. Ibu kota: Beijing. Mata uang: Yuan (CNY). Bahasa: Mandarin. Sistem pemerintahan: Republik Sosialis Satu Partai. Negara dengan ekonomi terbesar kedua di dunia dan kekuatan adidaya global. Anggota tetap Dewan Keamanan PBB. Pemimpin dalam AI, 5G, dan manufaktur. Rumah bagi Tembok Besar, Kota Terlarang, dan Terakota. Negara dengan sejarah peradaban 5000 tahun.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'adidaya', 'ekonomi', 'teknologi']
         }
     },
-    // ==========================================================
-    // 🇯🇵 JEPANG
-    // ==========================================================
     {
         text: 'Jepang - Negara kepulauan di Asia Timur dengan teknologi maju dan budaya kaya. Ibu kota: Tokyo. Populasi: 125 juta jiwa. Mata uang: Yen (JPY). Bahasa: Jepang. Sistem pemerintahan: Monarki Konstitusional Parlementer. Ekonomi terbesar ketiga di dunia. Pemimpin dalam robotika, otomotif, dan elektronik. Angka harapan hidup tertinggi di dunia. Rumah bagi Gunung Fuji, kuil-kuil kuno, dan budaya pop global. Negara dengan inovasi dan tradisi yang harmonis.',
         metadata: {
@@ -280,9 +274,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'teknologi', 'robotika', 'otomotif']
         }
     },
-    // ==========================================================
-    // 🇰🇷 KOREA SELATAN
-    // ==========================================================
     {
         text: 'Korea Selatan - Negara di Asia Timur dengan ekonomi maju dan budaya pop global. Ibu kota: Seoul. Populasi: 52 juta jiwa. Mata uang: Won (KRW). Bahasa: Korea. Sistem pemerintahan: Republik Presidensial. Pemimpin dalam semikonduktor, smartphone, dan K-pop. Internet tercepat di dunia. Rumah bagi Samsung, Hyundai, dan LG. Negara dengan keajaiban ekonomi Han River. Budaya K-pop dan K-drama yang mendunia.',
         metadata: {
@@ -419,9 +410,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'teknologi', 'k-pop', 'semikonduktor']
         }
     },
-    // ==========================================================
-    // 🇹🇼 TAIWAN
-    // ==========================================================
     {
         text: 'Taiwan - Negara kepulauan di Asia Timur dengan ekonomi maju dan industri teknologi tinggi. Ibu kota: Taipei. Populasi: 23.5 juta jiwa. Mata uang: Dolar Taiwan (TWD). Bahasa: Mandarin, Taiwan. Sistem pemerintahan: Republik Demokratis. Pemimpin global dalam produksi semikonduktor (TSMC). Rumah bagi teknologi tinggi, budaya Tionghoa, dan keindahan alam. Pusat inovasi dan manufaktur chip terkemuka di dunia.',
         metadata: {
@@ -560,9 +548,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'semikonduktor', 'tsmc', 'teknologi']
         }
     },
-    // ==========================================================
-    // 🇲🇳 MONGOLIA
-    // ==========================================================
     {
         text: 'Mongolia - Negara di Asia Timur dengan padang rumput luas dan budaya nomaden. Ibu kota: Ulaanbaatar. Populasi: 3.3 juta jiwa. Mata uang: Tugrik (MNT). Bahasa: Mongolia. Sistem pemerintahan: Republik Parlementer. Kepadatan penduduk terendah di dunia. Kaya akan mineral tembaga, batu bara, dan emas. Rumah bagi Genghis Khan dan budaya pengembara. Padang rumput tak berujung dan tradisi menunggang kuda.',
         metadata: {
@@ -700,9 +685,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'nomaden', 'mineral', 'padang-rumput']
         }
     },
-    // ==========================================================
-    // 🇭🇰 HONG KONG
-    // ==========================================================
     {
         text: 'Hong Kong - Wilayah administratif khusus China di Asia Timur dengan ekonomi kapitalis maju. Ibu kota: Victoria City. Populasi: 7.5 juta jiwa. Mata uang: Dolar Hong Kong (HKD). Bahasa: Kanton, Inggris, Mandarin. Sistem pemerintahan: Wilayah Administratif Khusus. Pusat keuangan global dan pintu gerbang perdagangan China-dunia. Rumah bagi keuangan, logistik, dan budaya hiburan. Kota dengan kebebasan ekonomi tertinggi di dunia.',
         metadata: {
@@ -842,9 +824,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'pusat-keuangan', 'perdagangan', 'global']
         }
     },
-    // ==========================================================
-    // 🇲🇴 MAKAU
-    // ==========================================================
     {
         text: 'Makau - Wilayah Administratif Khusus China di Asia Timur dengan industri perjudian terbesar dunia. Ibu kota: Makau. Populasi: 700 ribu jiwa. Mata uang: Pataca (MOP). Bahasa: Kanton, Portugis. Sistem pemerintahan: Wilayah Administratif Khusus. Satu-satunya tempat di China dengan perjudian legal. Warisan budaya Portugis yang kuat. Pusat wisata dan hiburan terkemuka di Asia. Rumah bagi kasino terbesar di dunia.',
         metadata: {
@@ -981,9 +960,6 @@ const data = [
             tags: ['negara', 'asian-timur', 'perjudian', 'portugis', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇹🇪 TIBET
-    // ==========================================================
     {
         text: 'Tibet - Wilayah otonom di China dengan budaya Buddhis Tibet. Ibu kota: Lhasa. Populasi: 3.6 juta jiwa. Mata uang: Yuan (CNY). Bahasa: Tibet, Mandarin. Sistem pemerintahan: Wilayah Otonom. Rumah Istana Potala dan Gunung Everest. Budaya unik dengan pengaruh India dan China. Destinasi spiritual dan ekowisata terkemuka di dunia. Alam pegunungan Himalaya yang memukau.',
         metadata: {

@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇺🇸 AMERIKA SERIKAT (10)
-    // ==========================================================
     {
         text: 'Cars.com - Platform otomotif terbesar AS. Didirikan 1998. Review dealer & komparasi harga.',
         metadata: {
@@ -153,9 +150,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇬🇧 INGGRIS (4)
-    // ==========================================================
     {
         text: 'AutoTrader UK - Platform otomotif terbesar Inggris. Didirikan 1977. Dari majalah ke digital.',
         metadata: {
@@ -217,9 +211,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇪 JERMAN (4)
-    // ==========================================================
     {
         text: 'Mobile.de - Platform otomotif terbesar Jerman. Didirikan 1995. Acuan harga mobil Jerman.',
         metadata: {
@@ -281,9 +272,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇫🇷 PRANCIS (3)
-    // ==========================================================
     {
         text: 'La Centrale - Platform otomotif terbesar Prancis. Didirikan 1999. Estimasi harga & review.',
         metadata: {
@@ -330,9 +318,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇳 CHINA (4)
-    // ==========================================================
     {
         text: 'Autohome - Platform otomotif terbesar China. Didirikan 2005. Review & komparasi mobil.',
         metadata: {
@@ -394,9 +379,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇯🇵 JEPANG (3)
-    // ==========================================================
     {
         text: 'Goo-net - Platform otomotif terbesar Jepang. Didirikan 1997. Portal mobil Jepang.',
         metadata: {
@@ -443,9 +425,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇰🇷 KOREA SELATAN (2)
-    // ==========================================================
     {
         text: 'Encar - Platform otomotif terbesar Korea. Didirikan 2000. Portal mobil Korea.',
         metadata: {
@@ -477,9 +456,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇳 INDIA (4)
-    // ==========================================================
     {
         text: 'CarDekho - Platform otomotif terbesar India. Didirikan 2008. Video test drive & review.',
         metadata: {
@@ -541,9 +517,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇷🇺 RUSIA (2)
-    // ==========================================================
     {
         text: 'Auto.ru - Platform otomotif terbesar Rusia. Didirikan 1999. Portal mobil Rusia.',
         metadata: {
@@ -575,9 +548,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇹🇷 TURKI (2)
-    // ==========================================================
     {
         text: 'Sahibinden - Platform marketplace terbesar Turki dengan otomotif. Didirikan 2000.',
         metadata: {
@@ -609,9 +579,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇪 UEA (2)
-    // ==========================================================
     {
         text: 'Dubizzle - Marketplace UEA dengan otomotif. Didirikan 2005. Populer di kalangan ekspat.',
         metadata: {
@@ -643,9 +610,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇧🇷 BRAZIL (2)
-    // ==========================================================
     {
         text: 'Webmotors - Platform otomotif terbesar Brazil. Didirikan 1995. Acuan harga mobil Brazil.',
         metadata: {
@@ -677,9 +641,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇺 AUSTRALIA (2)
-    // ==========================================================
     {
         text: 'Carsales - Platform otomotif terbesar Australia. Didirikan 1997. Acuan harga mobil Australia.',
         metadata: {
@@ -711,9 +672,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇿🇦 AFRIKA SELATAN (2)
-    // ==========================================================
     {
         text: 'AutoTrader SA - Platform otomotif terbesar Afrika Selatan. Didirikan 1998.',
         metadata: {
@@ -745,9 +703,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇲🇽 MEKSIKO (2)
-    // ==========================================================
     {
         text: 'Autocosmos - Platform otomotif terbesar Meksiko. Didirikan 1999. Review & komparasi.',
         metadata: {
@@ -779,9 +734,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇩 INDONESIA (3)
-    // ==========================================================
     {
         text: 'Mobil123 - Platform otomotif terbesar Indonesia. Didirikan 2007. Listing mobil baru, bekas, dan motor.',
         metadata: {
@@ -828,9 +780,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇪🇸 SPANYOL (2)
-    // ==========================================================
     {
         text: 'Coches.net - Platform otomotif terbesar Spanyol. Didirikan 1999. Portal mobil Spanyol.',
         metadata: {
@@ -862,9 +811,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇹 ITALIA (2)
-    // ==========================================================
     {
         text: 'Autoscout24 Italia - Versi AutoScout24 di Italia. Didirikan 2000.',
         metadata: {
@@ -896,9 +842,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇦 KANADA (2)
-    // ==========================================================
     {
         text: 'AutoTrader Canada - Platform otomotif terbesar Kanada. Didirikan 2003.',
         metadata: {
@@ -930,9 +873,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇱 BELANDA (3)
-    // ==========================================================
     {
         text: 'Autotrack - Platform otomotif terbesar Belanda. Didirikan 1997.',
         metadata: {
@@ -979,9 +919,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇭 SWISS (2)
-    // ==========================================================
     {
         text: 'AutoScout24 Switzerland - Versi AutoScout24 di Swiss. Didirikan 2000.',
         metadata: {
@@ -1013,9 +950,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇹 AUSTRIA (1)
-    // ==========================================================
     {
         text: 'Autoscout24 Austria - Versi AutoScout24 di Austria. Didirikan 2000.',
         metadata: {
@@ -1032,9 +966,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇱 POLANDIA (2)
-    // ==========================================================
     {
         text: 'Otomoto - Platform otomotif terbesar Polandia. Didirikan 2006.',
         metadata: {
@@ -1066,9 +997,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇿 CEKO (2)
-    // ==========================================================
     {
         text: 'Sauto - Platform otomotif terbesar Ceko. Didirikan 2000.',
         metadata: {
@@ -1100,9 +1028,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇪 SWEDIA (2)
-    // ==========================================================
     {
         text: 'Blocket - Platform marketplace terbesar Swedia dengan otomotif. Didirikan 1996.',
         metadata: {
@@ -1134,9 +1059,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇴 NORWEGIA (2)
-    // ==========================================================
     {
         text: 'Finn.no - Platform marketplace terbesar Norwegia dengan otomotif. Didirikan 2000.',
         metadata: {
@@ -1168,9 +1090,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇰 DENMARK (2)
-    // ==========================================================
     {
         text: 'Bilbasen - Platform otomotif terbesar Denmark. Didirikan 1999.',
         metadata: {
@@ -1202,9 +1121,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇫🇮 FINLANDIA (2)
-    // ==========================================================
     {
         text: 'Nettiauto - Platform otomotif terbesar Finlandia. Didirikan 2001.',
         metadata: {
@@ -1236,9 +1152,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇷 ARGENTINA (2)
-    // ==========================================================
     {
         text: 'Mercado Libre Autos - Kategori otomotif Mercado Libre Argentina. Didirikan 1999.',
         metadata: {
@@ -1270,9 +1183,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇹 PORTUGAL (2) — BARU!
-    // ==========================================================
     {
         text: 'Standvirtual - Platform otomotif terbesar Portugal. Didirikan 2000.',
         metadata: {
@@ -1304,9 +1214,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇬🇷 YUNANI (2) — BARU!
-    // ==========================================================
     {
         text: 'Car.gr - Platform otomotif terbesar Yunani. Didirikan 2001.',
         metadata: {
@@ -1338,9 +1245,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇷🇴 ROMANIA (2) — BARU!
-    // ==========================================================
     {
         text: 'Autovit.ro - Platform otomotif terbesar Romania. Didirikan 2001.',
         metadata: {
@@ -1372,9 +1276,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇿 SELANDIA BARU (1) — BARU!
-    // ==========================================================
     {
         text: 'TradeMe Motors - Platform otomotif terbesar Selandia Baru. Didirikan 1999.',
         metadata: {
@@ -1391,9 +1292,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇦 ARAB SAUDI (1) — BARU!
-    // ==========================================================
     {
         text: 'Haraj - Platform marketplace terbesar Arab Saudi dengan otomotif. Didirikan 2006.',
         metadata: {
@@ -1410,9 +1308,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇪🇬 MESIR (1) — BARU!
-    // ==========================================================
     {
         text: 'Hatla2ee - Platform otomotif terbesar Mesir. Didirikan 2010.',
         metadata: {
@@ -1429,9 +1324,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇲🇦 MAROKO (1) — BARU!
-    // ==========================================================
     {
         text: 'Avito Auto - Platform otomotif terbesar Maroko. Didirikan 2006.',
         metadata: {

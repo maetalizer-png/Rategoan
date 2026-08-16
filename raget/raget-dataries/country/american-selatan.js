@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇧🇷 BRASIL
-    // ==========================================================
     {
         text: 'Brasil - Negara terbesar di Amerika Selatan dengan ekonomi dan Amazon. Ibu kota: Brasilia. Populasi: 215 juta jiwa. Mata uang: Real (BRL). Bahasa: Portugis. Sistem pemerintahan: Republik Federal Presidensial. Anggota G20, BRICS, dan PBB. Negara dengan hutan Amazon terbesar di dunia dan keanekaragaman hayati terkaya. Rumah bagi karnaval Rio, sepak bola, dan pantai Copacabana.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'g20', 'brics', 'amazon']
         }
     },
-    // ==========================================================
-    // 🇦🇷 ARGENTINA
-    // ==========================================================
     {
         text: 'Argentina - Negara di Amerika Selatan dengan budaya tango dan ekonomi agrikultur. Ibu kota: Buenos Aires. Populasi: 46 juta jiwa. Mata uang: Peso (ARS). Bahasa: Spanyol. Sistem pemerintahan: Republik Federal Presidensial. Anggota G20 dan Mercosur. Negara dengan pampas luas, daging sapi terbaik, dan wine Malbec terkenal. Rumah bagi Patagonia dan Air Terjun Iguazu.',
         metadata: {
@@ -283,9 +277,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'g20', 'tango', 'daging']
         }
     },
-    // ==========================================================
-    // 🇨🇴 KOLOMBIA
-    // ==========================================================
     {
         text: 'Kolombia - Negara di Amerika Selatan dengan kopi dan keanekaragaman hayati. Ibu kota: Bogota. Populasi: 52 juta jiwa. Mata uang: Peso (COP). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Anggota OECD dan PBB. Negara dengan kopi terbaik dunia, keanekaragaman hayati terkaya, dan pemandangan Andes yang indah.',
         metadata: {
@@ -425,9 +416,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'kopi', 'oecd', 'biodiversitas']
         }
     },
-    // ==========================================================
-    // 🇨🇱 CHILI
-    // ==========================================================
     {
         text: 'Chili - Negara di Amerika Selatan dengan tambang tembaga dan anggur. Ibu kota: Santiago. Populasi: 19.5 juta jiwa. Mata uang: Peso (CLP). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Anggota OECD dan PBB. Negara dengan tembaga terbesar dunia, wine berkualitas tinggi, dan pemandangan Patagonia yang indah.',
         metadata: {
@@ -567,9 +555,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'tembaga', 'anggur', 'oecd']
         }
     },
-    // ==========================================================
-    // 🇵🇪 PERU
-    // ==========================================================
     {
         text: 'Peru - Negara di Amerika Selatan dengan peradaban Inca dan Machu Picchu. Ibu kota: Lima. Populasi: 34 juta jiwa. Mata uang: Sol (PEN). Bahasa: Spanyol, Quechua. Sistem pemerintahan: Republik Presidensial. Anggota APEC dan PBB. Negara dengan Machu Picchu, salah satu keajaiban dunia. Rumah bagi sejarah Inca, budaya kaya, dan keanekaragaman hayati Amazon.',
         metadata: {
@@ -709,9 +694,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'inca', 'machu-picchu', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇻🇪 VENEZUELA
-    // ==========================================================
     {
         text: 'Venezuela - Negara di Amerika Selatan dengan cadangan minyak terbesar. Ibu kota: Caracas. Populasi: 28 juta jiwa. Mata uang: Bolivar (VES). Bahasa: Spanyol. Sistem pemerintahan: Republik Federal Presidensial. Anggota OPEC dan PBB. Negara dengan cadangan minyak terbesar di dunia, Angel Falls (air terjun tertinggi di dunia), dan keindahan alam Karibia.',
         metadata: {
@@ -851,9 +833,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'minyak', 'opec', 'krisis']
         }
     },
-    // ==========================================================
-    // 🇪🇨 EKUADOR
-    // ==========================================================
     {
         text: 'Ekuador - Negara di Amerika Selatan dengan Galapagos dan pisang. Ibu kota: Quito. Populasi: 18 juta jiwa. Mata uang: Dolar AS (USD). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Anggota PBB dan OPEC. Negara dengan Kepulauan Galapagos, Andes yang indah, dan pisang terbaik dunia.',
         metadata: {
@@ -993,9 +972,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'galapagos', 'pisang', 'opec']
         }
     },
-    // ==========================================================
-    // 🇧🇴 BOLIVIA
-    // ==========================================================
     {
         text: 'Bolivia - Negara di Amerika Selatan dengan Salar de Uyuni dan litium. Ibu kota: Sucre. Populasi: 12 juta jiwa. Mata uang: Boliviano (BOB). Bahasa: Spanyol, Quechua, Aymara. Sistem pemerintahan: Republik Presidensial. Anggota PBB dan Mercosur. Negara dengan Salar de Uyuni (danau garam terbesar dunia), litium terbesar, dan budaya Andes yang kaya.',
         metadata: {
@@ -1135,9 +1111,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'litium', 'uyuni', 'garam']
         }
     },
-    // ==========================================================
-    // 🇵🇾 PARAGUAY
-    // ==========================================================
     {
         text: 'Paraguay - Negara di Amerika Selatan tanpa laut dengan pertanian. Ibu kota: Asuncion. Populasi: 7.5 juta jiwa. Mata uang: Guarani (PYG). Bahasa: Spanyol, Guarani. Sistem pemerintahan: Republik Presidensial. Anggota PBB dan Mercosur. Negara dengan ekonomi pertanian yang berkembang dan budaya Guarani yang kaya.',
         metadata: {
@@ -1277,9 +1250,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'pertanian', 'kedelai', 'mercosur']
         }
     },
-    // ==========================================================
-    // 🇺🇾 URUGUAY
-    // ==========================================================
     {
         text: 'Uruguay - Negara kecil di Amerika Selatan dengan ekonomi stabil. Ibu kota: Montevideo. Populasi: 3.4 juta jiwa. Mata uang: Peso (UYU). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Anggota PBB dan Mercosur. Negara dengan ekonomi paling stabil di Amerika Selatan, kualitas hidup tinggi, dan teknologi maju.',
         metadata: {
@@ -1419,9 +1389,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'stabil', 'teknologi', 'mercosur']
         }
     },
-    // ==========================================================
-    // 🇬🇾 GUYANA
-    // ==========================================================
     {
         text: 'Guyana - Negara di Amerika Selatan dengan ekonomi minyak baru. Ibu kota: Georgetown. Populasi: 0.8 juta jiwa. Mata uang: Dolar Guyana (GYD). Bahasa: Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan CARICOM. Negara dengan ekonomi minyak yang berkembang pesat dan hutan hujan Amazon yang indah.',
         metadata: {
@@ -1561,9 +1528,6 @@ const data = [
             tags: ['negara', 'american-selatan', 'minyak', 'caricom', 'pertumbuhan']
         }
     },
-    // ==========================================================
-    // 🇸🇷 SURINAME
-    // ==========================================================
     {
         text: 'Suriname - Negara di Amerika Selatan dengan hutan tropis dan aluminium. Ibu kota: Paramaribo. Populasi: 0.6 juta jiwa. Mata uang: Dolar Suriname (SRD). Bahasa: Belanda. Sistem pemerintahan: Republik Presidensial. Anggota PBB dan CARICOM. Negara dengan hutan hujan Amazon yang luas, keanekaragaman hayati, dan budaya multikultural.',
         metadata: {

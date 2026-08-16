@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇺🇸 AMERIKA (10 PLATFORM)
-    // ==========================================================
     {
         text: 'Amazon - Raksasa e-commerce global. Didirikan 1994 oleh Jeff Bezos. Platform terbesar di dunia dengan penjualan $574B+.',
         metadata: { 
@@ -229,9 +226,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇳 CHINA (8 PLATFORM)
-    // ==========================================================
     {
         text: 'Alibaba - Raksasa B2B China. Didirikan 1999 oleh Jack Ma. Platform wholesale terbesar dunia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Alibaba', founded: 1999, founder: 'Jack Ma', country: 'China', region: 'asia-timur', products: ['Wholesale', 'B2B'], tags: ['ecommerce', 'asia-timur', 'b2b'],
@@ -289,9 +283,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇯🇵 JEPANG (4 PLATFORM)
-    // ==========================================================
     {
         text: 'Rakuten - E-commerce terbesar Jepang. Didirikan 1997 oleh Hiroshi Mikitani. Ekosistem super app.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Rakuten', founded: 1997, founder: 'Hiroshi Mikitani', country: 'Jepang', region: 'asia-timur', products: ['Elektronik', 'Fashion', 'Travel'], tags: ['ecommerce', 'asia-timur', 'jepang'],
@@ -321,9 +312,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇰🇷 KOREA SELATAN (3 PLATFORM)
-    // ==========================================================
     {
         text: 'Coupang - E-commerce terbesar Korea Selatan. Didirikan 2010 oleh Bom Kim. Pengiriman super cepat (Rocket Delivery).',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Coupang', founded: 2010, founder: 'Bom Kim', country: 'Korea Selatan', region: 'asia-timur', products: ['Kebutuhan Rumah', 'Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-timur', 'cepat'],
@@ -346,9 +334,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇳 INDIA (5 PLATFORM)
-    // ==========================================================
     {
         text: 'Flipkart - E-commerce terbesar India. Didirikan 2007 oleh Sachin & Binny Bansal. Dikenal dengan Big Billion Days.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Flipkart', founded: 2007, founder: 'Sachin Bansal, Binny Bansal', country: 'India', region: 'asia-selatan', products: ['Elektronik', 'Fashion', 'Buku'], tags: ['ecommerce', 'asia-selatan', 'terbesar'],
@@ -385,9 +370,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇪 JERMAN (4 PLATFORM)
-    // ==========================================================
     {
         text: 'Zalando - Fashion e-commerce terbesar Eropa. Didirikan 2008 di Berlin. 2000+ brand fashion.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Zalando', founded: 2008, founder: 'Robert Gentz, David Schneider', country: 'Jerman', region: 'eropa', products: ['Fashion', 'Sepatu', 'Aksesoris'], tags: ['ecommerce', 'eropa', 'fashion'],
@@ -417,9 +399,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇬🇧 INGGRIS (5 PLATFORM)
-    // ==========================================================
     {
         text: 'ASOS - Fashion e-commerce terbesar Inggris. Didirikan 2000. Fokus anak muda & milenial.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'ASOS', founded: 2000, country: 'Inggris', region: 'eropa', products: ['Fashion', 'Sepatu', 'Aksesoris'], tags: ['ecommerce', 'eropa', 'fashion'],
@@ -456,9 +435,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇫🇷 PRANCIS (3 PLATFORM)
-    // ==========================================================
     {
         text: 'Cdiscount - E-commerce terbesar Prancis. Didirikan 1998. Pesaing Amazon di Prancis.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Cdiscount', founded: 1998, country: 'Prancis', region: 'eropa', products: ['Elektronik', 'Kebutuhan Rumah', 'Fashion'], tags: ['ecommerce', 'eropa', 'prancis'],
@@ -481,9 +457,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇪🇸 SPANYOL (1 PLATFORM)
-    // ==========================================================
     {
         text: 'El Corte Inglés - Ritel terbesar Spanyol dengan e-commerce kuat. Didirikan 1940.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'El Corte Inglés', founded: 1940, country: 'Spanyol', region: 'eropa', products: ['Segala Produk'], tags: ['ecommerce', 'eropa', 'spanyol'],
@@ -492,9 +465,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇹 ITALIA (1 PLATFORM)
-    // ==========================================================
     {
         text: 'Zalando Italia - Fashion e-commerce di Italia. Bagian dari Zalando Group.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Zalando Italia', founded: 2008, country: 'Italia', region: 'eropa', products: ['Fashion', 'Sepatu'], tags: ['ecommerce', 'eropa', 'italia'],
@@ -503,9 +473,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇹🇷 TURKI (2 PLATFORM)
-    // ==========================================================
     {
         text: 'Trendyol - E-commerce terbesar Turki. Didirikan 2010 oleh Demet Mutlu. Fokus fashion & kecantikan.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Trendyol', founded: 2010, founder: 'Demet Mutlu', country: 'Turki', region: 'asia-barat', products: ['Fashion', 'Kecantikan'], tags: ['ecommerce', 'asia-barat', 'turki'],
@@ -521,9 +488,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇪 UEA (2 PLATFORM)
-    // ==========================================================
     {
         text: 'Noon - E-commerce terbesar Timur Tengah. Didirikan 2017 oleh Mohamed Alabbar. Pesaing Amazon.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Noon', founded: 2017, founder: 'Mohamed Alabbar', country: 'UEA', region: 'asia-barat', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-barat', 'timur-tengah'],
@@ -539,9 +503,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇧🇷 BRAZIL (2 PLATFORM)
-    // ==========================================================
     {
         text: 'Mercado Livre - E-commerce terbesar Amerika Latin. Didirikan 1999 oleh Marcos Galperin.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Mercado Livre', founded: 1999, founder: 'Marcos Galperin', country: 'Brazil', region: 'amerika-selatan', products: ['Segala Produk'], tags: ['ecommerce', 'amerika-selatan', 'terbesar'],
@@ -557,9 +518,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇷🇺 RUSIA (2 PLATFORM)
-    // ==========================================================
     {
         text: 'Wildberries - E-commerce terbesar Rusia. Didirikan 2004 oleh Tatyana Bakalchuk. Fashion & rumah.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Wildberries', founded: 2004, founder: 'Tatyana Bakalchuk', country: 'Rusia', region: 'eropa', products: ['Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'eropa', 'rusia'],
@@ -575,9 +533,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇺 AUSTRALIA (3 PLATFORM)
-    // ==========================================================
     {
         text: 'Kogan - E-commerce terbesar Australia. Didirikan 2006 oleh Ruslan Kogan. Elektronik & rumah.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Kogan', founded: 2006, founder: 'Ruslan Kogan', country: 'Australia', region: 'osenian', products: ['Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'osenian', 'australia'],
@@ -600,9 +555,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇬 NIGERIA & AFRIKA (3 PLATFORM)
-    // ==========================================================
     {
         text: 'Jumia - E-commerce terbesar Afrika. Didirikan 2012. Beroperasi di 11 negara Afrika.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Jumia', founded: 2012, country: 'Nigeria', region: 'afrika', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'afrika', 'terbesar'],
@@ -625,9 +577,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇬 SINGAPURA (2 PLATFORM)
-    // ==========================================================
     {
         text: 'Shopee - E-commerce terbesar Asia Tenggara. Didirikan 2015 oleh Forrest Li.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Shopee', founded: 2015, founder: 'Forrest Li', country: 'Singapura', region: 'asia-tenggara', products: ['Fashion', 'Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-tenggara', 'terbesar'],
@@ -643,9 +592,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇩 INDONESIA (17 PLATFORM — TERBARU DARI SCREENSHOT!)
-    // ==========================================================
     {
         text: 'Tokopedia - E-commerce terbesar Indonesia. Didirikan 2009 oleh William Tanuwijaya. 14 juta seller.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Tokopedia', founded: 2009, founder: 'William Tanuwijaya', country: 'Indonesia', region: 'asia-tenggara', products: ['Fashion', 'Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-tenggara', 'indonesia'],
@@ -766,9 +712,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇦 KANADA (2 PLATFORM)
-    // ==========================================================
     {
         text: 'Shopify - Platform e-commerce terbesar Kanada. Didirikan 2006 oleh Tobias Lütke. Power 4M+ toko online.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Shopify', founded: 2006, founder: 'Tobias Lütke', country: 'Kanada', region: 'amerika-utara', products: ['Platform E-commerce', 'POS'], tags: ['ecommerce', 'amerika-utara', 'platform'],
@@ -784,9 +727,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇲🇽 MEKSIKO (1 PLATFORM)
-    // ==========================================================
     {
         text: 'Linio - E-commerce terbesar Meksiko. Didirikan 2012. Pesaing Amazon di Amerika Latin.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Linio', founded: 2012, country: 'Meksiko', region: 'amerika-latin', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'amerika-latin', 'meksiko'],
@@ -795,9 +735,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇭 FILIPINA (1 PLATFORM)
-    // ==========================================================
     {
         text: 'Zalora - Fashion e-commerce terbesar Asia Tenggara. Didirikan 2012. 500+ brand fashion.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Zalora', founded: 2012, country: 'Filipina', region: 'asia-tenggara', products: ['Fashion', 'Sepatu'], tags: ['ecommerce', 'asia-tenggara', 'fashion'],
@@ -806,9 +743,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇰 PAKISTAN (1 PLATFORM)
-    // ==========================================================
     {
         text: 'Daraz - E-commerce terbesar Pakistan. Didirikan 2012. Bagian dari Alibaba Group.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Daraz', founded: 2012, country: 'Pakistan', region: 'asia-selatan', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-selatan', 'pakistan'],
@@ -817,9 +751,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇪🇸 SPANYOL (TAMBAH)
-    // ==========================================================
     {
         text: 'Privalia - Fashion e-commerce Spanyol. Didirikan 2006. Outlet online terbesar Spanyol.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Privalia', founded: 2006, country: 'Spanyol', region: 'eropa', products: ['Fashion', 'Outlet'], tags: ['ecommerce', 'eropa', 'fashion'],
@@ -828,9 +759,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇹 PORTUGAL (BARU!)
-    // ==========================================================
     {
         text: 'Worten - E-commerce terbesar Portugal. Didirikan 1996. Elektronik & rumah tangga.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Worten', founded: 1996, country: 'Portugal', region: 'eropa', products: ['Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'eropa', 'portugal'],
@@ -839,9 +767,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇱 BELANDA (BARU!)
-    // ==========================================================
     {
         text: 'Bol.com - E-commerce terbesar Belanda. Didirikan 1999. Pesaing Amazon di Benelux.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Bol.com', founded: 1999, country: 'Belanda', region: 'eropa', products: ['Segala Produk'], tags: ['ecommerce', 'eropa', 'belanda'],
@@ -850,9 +775,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇧🇪 BELGIA (BARU!)
-    // ==========================================================
     {
         text: 'Coolblue - E-commerce Belgia. Didirikan 1999. Fokus elektronik & pengiriman cepat.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Coolblue', founded: 1999, country: 'Belgia', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'belgia'],
@@ -861,9 +783,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇪 SWEDIA (BARU!)
-    // ==========================================================
     {
         text: 'Elgiganten - E-commerce elektronik Swedia. Didirikan 1995. Terbesar di Skandinavia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Elgiganten', founded: 1995, country: 'Swedia', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'swedia'],
@@ -872,9 +791,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇳🇴 NORWEGIA (BARU!)
-    // ==========================================================
     {
         text: 'Komplett - E-commerce elektronik Norwegia. Didirikan 1998. Terbesar di Norwegia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Komplett', founded: 1998, country: 'Norwegia', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'norwegia'],
@@ -883,9 +799,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇰 DENMARK (BARU!)
-    // ==========================================================
     {
         text: 'Bilka - E-commerce terbesar Denmark. Didirikan 1970. Hypermarket online.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Bilka', founded: 1970, country: 'Denmark', region: 'eropa', products: ['Kebutuhan Rumah', 'Makanan'], tags: ['ecommerce', 'eropa', 'denmark'],
@@ -894,9 +807,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇫🇮 FINLANDIA (BARU!)
-    // ==========================================================
     {
         text: 'Verkkokauppa - E-commerce elektronik Finlandia. Didirikan 2001. Terbesar di Finlandia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Verkkokauppa', founded: 2001, country: 'Finlandia', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'finlandia'],
@@ -905,9 +815,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇿🇦 AFRIKA SELATAN (TAMBAH)
-    // ==========================================================
     {
         text: 'Superbalist - Fashion e-commerce Afrika Selatan. Didirikan 2012. Fokus fashion & gaya hidup.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Superbalist', founded: 2012, country: 'Afrika Selatan', region: 'afrika', products: ['Fashion', 'Gaya Hidup'], tags: ['ecommerce', 'afrika', 'fashion'],
@@ -916,9 +823,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇪🇬 MESIR (BARU!)
-    // ==========================================================
     {
         text: 'Souq Egypt - E-commerce terbesar Mesir. Didirikan 2005. Bagian dari Amazon.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Souq Egypt', founded: 2005, country: 'Mesir', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'mesir'],
@@ -927,9 +831,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇰🇪 KENYA (BARU!)
-    // ==========================================================
     {
         text: 'Kilimall - E-commerce terbesar Kenya. Didirikan 2014. Pesaing Jumia di Afrika Timur.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Kilimall', founded: 2014, country: 'Kenya', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'kenya'],
@@ -938,9 +839,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇻🇳 VIETNAM (BARU!)
-    // ==========================================================
     {
         text: 'Tiki - E-commerce terbesar Vietnam. Didirikan 2010. Fokus pengiriman cepat.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Tiki', founded: 2010, country: 'Vietnam', region: 'asia-tenggara', products: ['Buku', 'Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-tenggara', 'vietnam'],
@@ -949,9 +847,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇹🇭 THAILAND (BARU!)
-    // ==========================================================
     {
         text: 'Shopee Thailand - Versi Shopee di Thailand. Didirikan 2015. Terbesar di Thailand.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Shopee Thailand', founded: 2015, country: 'Thailand', region: 'asia-tenggara', products: ['Fashion', 'Elektronik'], tags: ['ecommerce', 'asia-tenggara', 'thailand'],
@@ -960,9 +855,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇲🇾 MALAYSIA (BARU!)
-    // ==========================================================
     {
         text: 'Shopee Malaysia - Versi Shopee di Malaysia. Didirikan 2015. Terbesar di Malaysia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Shopee Malaysia', founded: 2015, country: 'Malaysia', region: 'asia-tenggara', products: ['Fashion', 'Elektronik'], tags: ['ecommerce', 'asia-tenggara', 'malaysia'],
@@ -971,9 +863,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇭 FILIPINA (TAMBAH)
-    // ==========================================================
     {
         text: 'Shopee Philippines - Versi Shopee di Filipina. Didirikan 2015. Terbesar di Filipina.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Shopee Philippines', founded: 2015, country: 'Filipina', region: 'asia-tenggara', products: ['Fashion', 'Elektronik'], tags: ['ecommerce', 'asia-tenggara', 'filipina'],
@@ -982,9 +871,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇷 ARGENTINA (BARU!)
-    // ==========================================================
     {
         text: 'Mercado Libre Argentina - Versi Mercado Libre di Argentina. Didirikan 1999.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Mercado Libre Argentina', founded: 1999, country: 'Argentina', region: 'amerika-selatan', products: ['Segala Produk'], tags: ['ecommerce', 'amerika-selatan', 'argentina'],
@@ -993,9 +879,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇱 CHILE (BARU!)
-    // ==========================================================
     {
         text: 'Mercado Libre Chile - Versi Mercado Libre di Chile. Didirikan 1999.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Mercado Libre Chile', founded: 1999, country: 'Chile', region: 'amerika-selatan', products: ['Segala Produk'], tags: ['ecommerce', 'amerika-selatan', 'chile'],
@@ -1004,9 +887,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇴 KOLOMBIA (BARU!)
-    // ==========================================================
     {
         text: 'Mercado Libre Colombia - Versi Mercado Libre di Kolombia. Didirikan 1999.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Mercado Libre Colombia', founded: 1999, country: 'Kolombia', region: 'amerika-selatan', products: ['Segala Produk'], tags: ['ecommerce', 'amerika-selatan', 'kolombia'],
@@ -1015,9 +895,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇪 PERU (BARU!)
-    // ==========================================================
     {
         text: 'Mercado Libre Peru - Versi Mercado Libre di Peru. Didirikan 1999.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Mercado Libre Peru', founded: 1999, country: 'Peru', region: 'amerika-selatan', products: ['Segala Produk'], tags: ['ecommerce', 'amerika-selatan', 'peru'],
@@ -1026,9 +903,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇺🇦 UKRAINA (BARU!)
-    // ==========================================================
     {
         text: 'Rozetka - E-commerce terbesar Ukraina. Didirikan 2005. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Rozetka', founded: 2005, country: 'Ukraina', region: 'eropa', products: ['Elektronik', 'Kebutuhan Rumah', 'Fashion'], tags: ['ecommerce', 'eropa', 'ukraina'],
@@ -1037,9 +911,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇵🇱 POLANDIA (BARU!)
-    // ==========================================================
     {
         text: 'Allegro - E-commerce terbesar Polandia. Didirikan 1999. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Allegro', founded: 1999, country: 'Polandia', region: 'eropa', products: ['Segala Produk'], tags: ['ecommerce', 'eropa', 'polandia'],
@@ -1048,9 +919,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇿 CZECHIA (BARU!)
-    // ==========================================================
     {
         text: 'Alza.cz - E-commerce elektronik Czechia. Didirikan 1994. Terbesar di Czechia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Alza.cz', founded: 1994, country: 'Czechia', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'czechia'],
@@ -1059,9 +927,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇭🇺 HUNGARIA (BARU!)
-    // ==========================================================
     {
         text: 'eMAG - E-commerce terbesar Hungaria. Didirikan 2001. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'eMAG', founded: 2001, country: 'Hungaria', region: 'eropa', products: ['Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'eropa', 'hungaria'],
@@ -1070,9 +935,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇷🇴 ROMANIA (BARU!)
-    // ==========================================================
     {
         text: 'eMAG Romania - Versi eMAG di Romania. Didirikan 2001. Terbesar di Romania.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'eMAG Romania', founded: 2001, country: 'Romania', region: 'eropa', products: ['Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'eropa', 'romania'],
@@ -1081,9 +943,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇬🇷 YUNANI (BARU!)
-    // ==========================================================
     {
         text: 'Skroutz - E-commerce terbesar Yunani. Didirikan 2005. Fokus elektronik & gadget.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Skroutz', founded: 2005, country: 'Yunani', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'yunani'],
@@ -1092,9 +951,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇪 IRLANDIA (BARU!)
-    // ==========================================================
     {
         text: 'BargainTown - E-commerce terbesar Irlandia. Didirikan 2000. Fashion & rumah tangga.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'BargainTown', founded: 2000, country: 'Irlandia', region: 'eropa', products: ['Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'eropa', 'irlandia'],
@@ -1103,9 +959,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇨🇭 SWISS (BARU!)
-    // ==========================================================
     {
         text: 'Galaxus - E-commerce terbesar Swiss. Didirikan 2007. Elektronik & rumah tangga.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Galaxus', founded: 2007, country: 'Swiss', region: 'eropa', products: ['Elektronik', 'Kebutuhan Rumah'], tags: ['ecommerce', 'eropa', 'swiss'],
@@ -1114,9 +967,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇹 AUSTRIA (BARU!)
-    // ==========================================================
     {
         text: 'Altex - E-commerce terbesar Austria. Didirikan 2000. Elektronik & gadget.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Altex', founded: 2000, country: 'Austria', region: 'eropa', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'eropa', 'austria'],
@@ -1125,9 +975,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇦 ARAB SAUDI (BARU!)
-    // ==========================================================
     {
         text: 'Noon Saudi - Versi Noon di Arab Saudi. Didirikan 2017. Terbesar di Saudi.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Noon Saudi', founded: 2017, country: 'Arab Saudi', region: 'asia-barat', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-barat', 'saudi'],
@@ -1136,9 +983,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇰🇼 KUWAIT (BARU!)
-    // ==========================================================
     {
         text: 'Xcite - E-commerce terbesar Kuwait. Didirikan 2008. Elektronik & gadget.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Xcite', founded: 2008, country: 'Kuwait', region: 'asia-barat', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'asia-barat', 'kuwait'],
@@ -1147,9 +991,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇶🇦 QATAR (BARU!)
-    // ==========================================================
     {
         text: 'Noon Qatar - Versi Noon di Qatar. Didirikan 2017. Terbesar di Qatar.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Noon Qatar', founded: 2017, country: 'Qatar', region: 'asia-barat', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-barat', 'qatar'],
@@ -1158,9 +999,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇧🇭 BAHRAIN (BARU!)
-    // ==========================================================
     {
         text: 'Bahrain E-commerce - E-commerce terbesar Bahrain. Didirikan 2015.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Bahrain E-commerce', founded: 2015, country: 'Bahrain', region: 'asia-barat', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-barat', 'bahrain'],
@@ -1169,9 +1007,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇴🇲 OMAN (BARU!)
-    // ==========================================================
     {
         text: 'Oman E-commerce - E-commerce terbesar Oman. Didirikan 2016.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Oman E-commerce', founded: 2016, country: 'Oman', region: 'asia-barat', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-barat', 'oman'],
@@ -1180,9 +1015,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇯🇴 YORDANIA (BARU!)
-    // ==========================================================
     {
         text: 'Mekarem - E-commerce terbesar Yordania. Didirikan 2010. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Mekarem', founded: 2010, country: 'Yordania', region: 'asia-barat', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-barat', 'yordania'],
@@ -1191,9 +1023,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇱🇧 LEBANON (BARU!)
-    // ==========================================================
     {
         text: 'Lebanon E-commerce - E-commerce terbesar Lebanon. Didirikan 2012.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Lebanon E-commerce', founded: 2012, country: 'Lebanon', region: 'asia-barat', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-barat', 'lebanon'],
@@ -1202,9 +1031,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇶 IRAK (BARU!)
-    // ==========================================================
     {
         text: 'Iraq E-commerce - E-commerce terbesar Irak. Didirikan 2015.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Iraq E-commerce', founded: 2015, country: 'Irak', region: 'asia-barat', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-barat', 'irak'],
@@ -1213,9 +1039,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇷 IRAN (BARU!)
-    // ==========================================================
     {
         text: 'Digikala - E-commerce terbesar Iran. Didirikan 2006. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Digikala', founded: 2006, country: 'Iran', region: 'asia-barat', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-barat', 'iran'],
@@ -1224,9 +1047,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇮🇱 ISRAEL (BARU!)
-    // ==========================================================
     {
         text: 'Zap - E-commerce terbesar Israel. Didirikan 2000. Fokus elektronik & gadget.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Zap', founded: 2000, country: 'Israel', region: 'asia-barat', products: ['Elektronik', 'Gadget'], tags: ['ecommerce', 'asia-barat', 'israel'],
@@ -1235,9 +1055,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇲🇦 MAROKO (BARU!)
-    // ==========================================================
     {
         text: 'Jumia Maroc - Versi Jumia di Maroko. Didirikan 2012. Terbesar di Maroko.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Jumia Maroc', founded: 2012, country: 'Maroko', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'maroko'],
@@ -1246,9 +1063,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇹🇳 TUNISIA (BARU!)
-    // ==========================================================
     {
         text: 'Jumia Tunis - Versi Jumia di Tunisia. Didirikan 2012. Terbesar di Tunisia.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Jumia Tunis', founded: 2012, country: 'Tunisia', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'tunisia'],
@@ -1257,9 +1071,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇩🇿 ALGERIA (BARU!)
-    // ==========================================================
     {
         text: 'Jumia Algeria - Versi Jumia di Algeria. Didirikan 2012. Terbesar di Algeria.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Jumia Algeria', founded: 2012, country: 'Algeria', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'algeria'],
@@ -1268,9 +1079,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇸🇳 SENEGAL (BARU!)
-    // ==========================================================
     {
         text: 'Jumia Senegal - Versi Jumia di Senegal. Didirikan 2012. Terbesar di Senegal.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Jumia Senegal', founded: 2012, country: 'Senegal', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'senegal'],
@@ -1279,9 +1087,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇬🇭 GHANA (BARU!)
-    // ==========================================================
     {
         text: 'Jumia Ghana - Versi Jumia di Ghana. Didirikan 2012. Terbesar di Ghana.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Jumia Ghana', founded: 2012, country: 'Ghana', region: 'afrika', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'afrika', 'ghana'],
@@ -1290,9 +1095,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇺🇿 UZBEKISTAN (BARU!)
-    // ==========================================================
     {
         text: 'Uzum - E-commerce terbesar Uzbekistan. Didirikan 2020. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Uzum', founded: 2020, country: 'Uzbekistan', region: 'asia-tengah', products: ['Elektronik', 'Fashion', 'Kebutuhan Rumah'], tags: ['ecommerce', 'asia-tengah', 'uzbekistan'],
@@ -1301,9 +1103,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇰🇿 KAZAKHSTAN (BARU!)
-    // ==========================================================
     {
         text: 'Kaspi - E-commerce terbesar Kazakhstan. Didirikan 2002. Marketplace general.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Kaspi', founded: 2002, country: 'Kazakhstan', region: 'asia-tengah', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-tengah', 'kazakhstan'],
@@ -1312,9 +1111,6 @@ const data = [
         }
     },
     
-    // ==========================================================
-    // 🇦🇿 AZERBAIJAN (BARU!)
-    // ==========================================================
     {
         text: 'Azerbaijan E-commerce - E-commerce terbesar Azerbaijan. Didirikan 2015.',
         metadata: { category: 'marplace', type: 'ecommerce', name: 'Azerbaijan E-commerce', founded: 2015, country: 'Azerbaijan', region: 'asia-tengah', products: ['Elektronik', 'Fashion'], tags: ['ecommerce', 'asia-tengah', 'azerbaijan'],

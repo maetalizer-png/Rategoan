@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇸🇦 ARAB SAUDI
-    // ==========================================================
     {
         text: 'Arab Saudi - Negara terbesar di Asia Barat dan pusat Islam. Ibu kota: Riyadh. Populasi: 36 juta jiwa. Mata uang: Riyal Saudi (SAR). Bahasa: Arab. Sistem pemerintahan: Monarki Absolut. Cadangan minyak terbesar dunia. Rumah kota suci Mekah dan Madinah. Visi 2030 untuk diversifikasi ekonomi. Negara dengan pengaruh global terbesar di Timur Tengah.',
         metadata: {
@@ -135,9 +132,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'minyak', 'islam', 'mekah']
         }
     },
-    // ==========================================================
-    // 🇮🇷 IRAN
-    // ==========================================================
     {
         text: 'Iran - Negara di Asia Barat dengan sejarah dan budaya Persia kuno. Ibu kota: Teheran. Populasi: 88 juta jiwa. Mata uang: Rial Iran (IRR). Bahasa: Persia. Sistem pemerintahan: Republik Islam. Cadangan gas alam terbesar dunia. Pemain utama geopolitik Timur Tengah. Rumah bagi peradaban Persia, arsitektur Islam, dan kekayaan budaya. Kekuatan regional dengan pengaruh di Irak, Suriah, dan Lebanon.',
         metadata: {
@@ -274,9 +268,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'persia', 'gas-alam', 'geopolitik']
         }
     },
-    // ==========================================================
-    // 🇮🇶 IRAK
-    // ==========================================================
     {
         text: 'Irak - Negara di Asia Barat dengan peradaban Mesopotamia kuno. Ibu kota: Baghdad. Populasi: 44 juta jiwa. Mata uang: Dinar Irak (IQD). Bahasa: Arab, Kurdi. Sistem pemerintahan: Republik Federal Parlementer. Cadangan minyak terbesar ke-5 dunia. Rumah kota suci Najaf dan Karbala. Situs arkeologi Babilonia dan Ur. Negara dengan sejarah peradaban tertua di dunia.',
         metadata: {
@@ -413,9 +404,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'mesopotamia', 'minyak', 'sejarah-kuno']
         }
     },
-    // ==========================================================
-    // 🇹🇷 TURKI
-    // ==========================================================
     {
         text: 'Turki - Negara di persimpangan Asia dan Eropa dengan sejarah Ottoman. Ibu kota: Ankara. Populasi: 85 juta jiwa. Mata uang: Lira Turki (TRY). Bahasa: Turki. Sistem pemerintahan: Republik Presidensial. Anggota NATO dan G20. Jembatan antara Timur dan Barat dengan warisan Bizantium dan Ottoman. Rumah bagi Istanbul, Cappadocia, dan Hagia Sophia. Negara dengan pengaruh budaya dan geopolitik besar.',
         metadata: {
@@ -551,9 +539,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'nato', 'jembatan-budaya', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇸🇾 SURIAH
-    // ==========================================================
     {
         text: 'Suriah - Negara di Asia Barat dengan sejarah peradaban kuno. Ibu kota: Damaskus. Populasi: 22 juta jiwa. Mata uang: Pound Suriah (SYP). Bahasa: Arab. Sistem pemerintahan: Republik Presidensial. Damaskus salah satu kota tertua di dunia. Warisan budaya Romawi, Bizantium, dan Islam. Negara dengan sejarah panjang dan konflik berkepanjangan.',
         metadata: {
@@ -690,9 +675,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'sejarah-kuno', 'damaskus', 'warisan-budaya']
         }
     },
-    // ==========================================================
-    // 🇾🇪 YAMAN
-    // ==========================================================
     {
         text: 'Yaman - Negara di Asia Barat dengan sejarah kuno dan budaya kaya. Ibu kota: Sanaa. Populasi: 33 juta jiwa. Mata uang: Rial Yaman (YER). Bahasa: Arab. Sistem pemerintahan: Republik Presidensial. Arsitektur kuno unik di Sanaa dan Shibam. Terkenal kopi Mocha dan rempah-rempah. Negara dengan warisan budaya kuno dan konflik berkepanjangan.',
         metadata: {
@@ -824,9 +806,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'kopi-mocha', 'arsitektur-kuno', 'rempah']
         }
     },
-    // ==========================================================
-    // 🇴🇲 OMAN
-    // ==========================================================
     {
         text: 'Oman - Negara di Asia Barat dengan sejarah maritim dan budaya kaya. Ibu kota: Muskat. Populasi: 4.5 juta jiwa. Mata uang: Rial Oman (OMR). Bahasa: Arab. Sistem pemerintahan: Monarki Absolut. Ekonomi berbasis minyak dan gas. Benteng-benteng kuno dan pelabuhan bersejarah. Salah satu negara paling stabil di Timur Tengah.',
         metadata: {
@@ -961,9 +940,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'maritim', 'benteng', 'stabil']
         }
     },
-    // ==========================================================
-    // 🇦🇪 UNI EMIRAT ARAB
-    // ==========================================================
     {
         text: 'Uni Emirat Arab - Negara federasi di Asia Barat dengan ekonomi maju dan Dubai. Ibu kota: Abu Dhabi. Populasi: 9.5 juta jiwa. Mata uang: Dirham UAE (AED). Bahasa: Arab, Inggris. Sistem pemerintahan: Monarki Konstitusional Federal. Pusat keuangan, perdagangan, dan pariwisata global. Burj Khalifa, gedung tertinggi dunia. Inovasi dan diversifikasi ekonomi terbaik di Timur Tengah.',
         metadata: {
@@ -1099,9 +1075,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'dubai', 'pusat-keuangan', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇶🇦 QATAR
-    // ==========================================================
     {
         text: 'Qatar - Negara di Asia Barat dengan ekonomi terkaya per kapita. Ibu kota: Doha. Populasi: 2.7 juta jiwa. Mata uang: Riyal Qatar (QAR). Bahasa: Arab. Sistem pemerintahan: Monarki Konstitusional. Cadangan gas alam terbesar ketiga dunia. Tuan rumah Piala Dunia FIFA 2022. Pusat media global Al Jazeera. Negara dengan inovasi dan pengaruh global.',
         metadata: {
@@ -1237,9 +1210,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'gas-alam', 'piala-dunia', 'media']
         }
     },
-    // ==========================================================
-    // 🇰🇼 KUWAIT
-    // ==========================================================
     {
         text: 'Kuwait - Negara di Asia Barat dengan ekonomi berbasis minyak. Ibu kota: Kuwait City. Populasi: 4.3 juta jiwa. Mata uang: Dinar Kuwait (KWD). Bahasa: Arab. Sistem pemerintahan: Monarki Konstitusional. Mata uang tertinggi di dunia. Parlemen aktif dan kebebasan pers relatif tinggi. Negara dengan demokrasi paling maju di Teluk.',
         metadata: {
@@ -1375,9 +1345,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'minyak', 'demokrasi', 'mata-uang-tertinggi']
         }
     },
-    // ==========================================================
-    // 🇧🇭 BAHRAIN
-    // ==========================================================
     {
         text: 'Bahrain - Negara kepulauan di Asia Barat. Ibu kota: Manama. Populasi: 1.5 juta jiwa. Mata uang: Dinar Bahrain (BHD). Bahasa: Arab. Sistem pemerintahan: Monarki Konstitusional. Pusat keuangan dan perbankan Timur Tengah. Sirkuit Internasional Bahrain tuan rumah F1. Sejarah perdagangan mutiara. Negara dengan ekonomi paling diversifikasi di Teluk.',
         metadata: {
@@ -1513,9 +1480,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'keuangan', 'f1', 'mutiara']
         }
     },
-    // ==========================================================
-    // 🇯🇴 YORDANIA
-    // ==========================================================
     {
         text: 'Yordania - Negara di Asia Barat dengan sejarah dan keramahan terkenal. Ibu kota: Amman. Populasi: 11 juta jiwa. Mata uang: Dinar Yordania (JOD). Bahasa: Arab. Sistem pemerintahan: Monarki Konstitusional. Rumah Petra, salah satu keajaiban dunia baru. Negara stabil dengan pariwisata maju. Destinasi wisata terbaik di Timur Tengah dengan situs sejarah kuno dan Laut Mati.',
         metadata: {
@@ -1649,9 +1613,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'petra', 'pariwisata', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇱🇧 LEBANON
-    // ==========================================================
     {
         text: 'Lebanon - Negara di Asia Barat dengan budaya Mediterania dan sejarah kuno. Ibu kota: Beirut. Populasi: 5.5 juta jiwa. Mata uang: Pound Lebanon (LBP). Bahasa: Arab, Prancis. Sistem pemerintahan: Republik Parlementer. Paris-nya Timur Tengah. Keragaman agama dan budaya. Industri perbankan dan pariwisata maju. Rumah bagi reruntuhan Romawi di Baalbek dan pantai Mediterania.',
         metadata: {
@@ -1787,9 +1748,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'mediterania', 'budaya', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇮🇱 ISRAEL
-    // ==========================================================
     {
         text: 'Israel - Negara di Asia Barat dengan teknologi maju dan sejarah kuno. Ibu kota: Yerusalem. Populasi: 9.5 juta jiwa. Mata uang: Shekel Baru Israel (ILS). Bahasa: Ibrani, Arab. Sistem pemerintahan: Republik Parlementer. Startup Nation — pusat inovasi teknologi global. Kota suci tiga agama: Yudaisme, Kristen, Islam. Negara dengan 10% populasi dunia insinyur dan ilmuwan. Rumah bagi startup dan Unicorn.',
         metadata: {
@@ -1925,9 +1883,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'teknologi', 'startup', 'kota-suci']
         }
     },
-    // ==========================================================
-    // 🇨🇾 SIPRUS
-    // ==========================================================
     {
         text: 'Siprus - Negara kepulauan di Asia Barat dengan budaya Yunani dan Turki. Ibu kota: Nikosia. Populasi: 1.2 juta jiwa. Mata uang: Euro (EUR). Bahasa: Yunani, Turki. Sistem pemerintahan: Republik Presidensial. Anggota UE dan PBB. Satu-satunya negara yang terbagi antara Yunani dan Turki. Destinasi wisata dengan pantai indah dan sejarah kuno.',
         metadata: {
@@ -2063,9 +2018,6 @@ const data = [
             tags: ['negara', 'asian-barat', 'pulau', 'ue', 'mediterania']
         }
     },
-    // ==========================================================
-    // 🇵🇸 PALESTINA
-    // ==========================================================
     {
         text: 'Palestina - Negara di Asia Barat dengan sejarah dan budaya kuno. Ibu kota: Ramallah (de facto). Populasi: 5.5 juta jiwa. Mata uang: Shekel Baru Israel (ILS). Bahasa: Arab. Sistem pemerintahan: Republik Semi-Presidensial. Anggota PBB (observer). Rumah kota suci Yerusalem, Bethlehem, dan Hebron. Kaya akan sejarah dan warisan budaya. Destinasi ziarah dan wisata religi.',
         metadata: {

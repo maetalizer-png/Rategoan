@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇦🇺 AUSTRALIA
-    // ==========================================================
     {
         text: 'Australia - Negara terbesar di Oseania dengan ekonomi maju dan alam. Ibu kota: Canberra. Populasi: 26 juta jiwa. Mata uang: Dolar Australia (AUD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Federal Parlementer. Anggota G20, OECD, dan Commonwealth. Negara dengan keanekaragaman hayati, Great Barrier Reef, dan budaya Aborigin yang kaya.',
         metadata: {
@@ -138,9 +135,6 @@ const data = [
             tags: ['negara', 'osenian', 'g20', 'tambang', 'pendidikan']
         }
     },
-    // ==========================================================
-    // 🇳🇿 SELANDIA BARU
-    // ==========================================================
     {
         text: 'Selandia Baru - Negara di Oseania dengan alam dan peternakan. Ibu kota: Wellington. Populasi: 5.2 juta jiwa. Mata uang: Dolar Selandia Baru (NZD). Bahasa: Inggris, Maori. Sistem pemerintahan: Monarki Konstitusional Parlementer. Anggota OECD dan Commonwealth. Negara dengan pemandangan alam yang spektakuler dan budaya Maori yang kaya.',
         metadata: {
@@ -278,9 +272,6 @@ const data = [
             tags: ['negara', 'osenian', 'pertanian', 'pariwisata', 'oecd']
         }
     },
-    // ==========================================================
-    // 🇫🇯 FIJI
-    // ==========================================================
     {
         text: 'Fiji - Negara kepulauan di Oseania dengan pariwisata dan perikanan. Ibu kota: Suva. Populasi: 0.9 juta jiwa. Mata uang: Dolar Fiji (FJD). Bahasa: Fiji, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan Commonwealth. Destinasi wisata mewah di Pasifik dengan pantai pasir putih dan terumbu karang yang indah.',
         metadata: {
@@ -416,9 +407,6 @@ const data = [
             tags: ['negara', 'osenian', 'pariwisata', 'perikanan', 'pasifik']
         }
     },
-    // ==========================================================
-    // 🇵🇬 PAPUA NEW GUINEA
-    // ==========================================================
     {
         text: 'Papua New Guinea - Negara di Oseania dengan keanekaragaman budaya dan sumber daya alam. Ibu kota: Port Moresby. Populasi: 10 juta jiwa. Mata uang: Kina (PGK). Bahasa: Tok Pisin, Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan lebih dari 800 bahasa dan keanekaragaman budaya yang luar biasa.',
         metadata: {
@@ -554,9 +542,6 @@ const data = [
             tags: ['negara', 'osenian', 'tambang', 'budaya', 'commonwealth']
         }
     },
-    // ==========================================================
-    // 🇸🇧 KEPULAUAN SOLOMON
-    // ==========================================================
     {
         text: 'Kepulauan Solomon - Negara kepulauan di Oseania dengan perikanan dan pariwisata. Ibu kota: Honiara. Populasi: 0.7 juta jiwa. Mata uang: Dolar Solomon (SBD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan terumbu karang dan sejarah Perang Dunia II.',
         metadata: {
@@ -690,9 +675,6 @@ const data = [
             tags: ['negara', 'osenian', 'terumbu', 'sejarah', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇻🇺 VANUATU
-    // ==========================================================
     {
         text: 'Vanuatu - Negara kepulauan di Oseania dengan aktivitas vulkanik. Ibu kota: Port Vila. Populasi: 0.3 juta jiwa. Mata uang: Vatu (VUV). Bahasa: Bislama, Inggris, Prancis. Sistem pemerintahan: Republik Parlementer. Negara dengan gunung berapi aktif, pantai indah, dan budaya Melanesia yang kaya.',
         metadata: {
@@ -827,9 +809,6 @@ const data = [
             tags: ['negara', 'osenian', 'vulkan', 'pariwisata', 'pasifik']
         }
     },
-    // ==========================================================
-    // 🇼🇸 SAMOA
-    // ==========================================================
     {
         text: 'Samoa - Negara kepulauan di Oseania dengan budaya Polinesia. Ibu kota: Apia. Populasi: 0.2 juta jiwa. Mata uang: Tala (WST). Bahasa: Samoa, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan Commonwealth. Negara dengan budaya Polinesia yang kaya dan pemandangan alam yang indah.',
         metadata: {
@@ -963,9 +942,6 @@ const data = [
             tags: ['negara', 'osenian', 'polinesia', 'pariwisata', 'organic']
         }
     },
-    // ==========================================================
-    // 🇹🇴 TONGA
-    // ==========================================================
     {
         text: 'Tonga - Negara kepulauan di Oseania dengan kerajaan Polinesia. Ibu kota: Nuku\'alofa. Populasi: 0.1 juta jiwa. Mata uang: Pa\'anga (TOP). Bahasa: Tonga, Inggris. Sistem pemerintahan: Monarki Konstitusional. Satu-satunya kerajaan di Pasifik dengan budaya Polinesia yang kaya dan sejarah panjang.',
         metadata: {
@@ -1099,9 +1075,6 @@ const data = [
             tags: ['negara', 'osenian', 'kerajaan', 'pasifik', 'budaya']
         }
     },
-    // ==========================================================
-    // 🇲🇭 KEPULAUAN MARSHALL (NEW!)
-    // ==========================================================
     {
         text: 'Kepulauan Marshall - Negara kepulauan di Oseania dengan keindahan alam. Ibu kota: Majuro. Populasi: 42 ribu jiwa. Mata uang: Dolar AS (USD). Bahasa: Marshall, Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan terumbu karang dan laguna yang indah.',
         metadata: {

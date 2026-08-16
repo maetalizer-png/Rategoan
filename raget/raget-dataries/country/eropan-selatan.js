@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇮🇹 ITALIA
-    // ==========================================================
     {
         text: 'Italia - Negara di Eropa Selatan dengan sejarah Romawi dan Renaissance. Ibu kota: Roma. Populasi: 59 juta jiwa. Mata uang: Euro (EUR). Bahasa: Italia. Sistem pemerintahan: Republik Parlementer. Anggota G7, G20, dan UE. Negara dengan seni, arsitektur, dan kuliner terbaik dunia. Rumah bagi Colosseum, Menara Pisa, Vatikan, dan kanal Venesia. Pusat mode dan desain global. Negara dengan warisan budaya UNESCO terbanyak di dunia.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'sejarah', 'seni', 'kuliner']
         }
     },
-    // ==========================================================
-    // 🇪🇸 SPANYOL
-    // ==========================================================
     {
         text: 'Spanyol - Negara di Eropa Selatan dengan budaya dan pariwisata kaya. Ibu kota: Madrid. Populasi: 47 juta jiwa. Mata uang: Euro (EUR). Bahasa: Spanyol. Sistem pemerintahan: Monarki Konstitusional Parlementer. Anggota UE dan NATO. Negara dengan seni, tari Flamenco, dan arsitektur indah. Rumah bagi Sagrada Familia, Alhambra, dan pantai-pantai Costa del Sol.',
         metadata: {
@@ -284,9 +278,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'pariwisata', 'seni', 'budaya']
         }
     },
-    // ==========================================================
-    // 🇵🇹 PORTUGAL
-    // ==========================================================
     {
         text: 'Portugal - Negara di Eropa Selatan dengan sejarah maritim kuat. Ibu kota: Lisboa. Populasi: 10.3 juta jiwa. Mata uang: Euro (EUR). Bahasa: Portugis. Sistem pemerintahan: Republik Semi-Presidensial. Anggota UE dan NATO. Negara dengan arsitektur Manueline dan pantai-pantai indah. Rumah bagi Fado, Pastel de Nata, dan pemandangan indah.',
         metadata: {
@@ -424,9 +415,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'maritim', 'anggaran', 'hidroelektrik']
         }
     },
-    // ==========================================================
-    // 🇬🇷 YUNANI
-    // ==========================================================
     {
         text: 'Yunani - Negara di Eropa Selatan dengan peradaban kuno. Ibu kota: Athena. Populasi: 10.4 juta jiwa. Mata uang: Euro (EUR). Bahasa: Yunani. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah, filsafat, dan demokrasi. Rumah bagi Parthenon, Santorini, dan pantai-pantai indah. Tempat lahir peradaban Barat.',
         metadata: {
@@ -563,9 +551,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'sejarah', 'filosofi', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇭🇷 KROASIA
-    // ==========================================================
     {
         text: 'Kroasia - Negara di Eropa Selatan dengan pantai Adriatik indah. Ibu kota: Zagreb. Populasi: 4 juta jiwa. Mata uang: Euro (EUR). Bahasa: Kroasia. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan pantai-pantai indah dan kota-kota bersejarah. Rumah bagi Dubrovnik, Split, dan Istana Diocletian.',
         metadata: {
@@ -704,9 +689,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'pantai', 'pariwisata', 'ue']
         }
     },
-    // ==========================================================
-    // 🇸🇮 SLOVENIA
-    // ==========================================================
     {
         text: 'Slovenia - Negara kecil di Eropa Selatan dengan alam indah. Ibu kota: Ljubljana. Populasi: 2.1 juta jiwa. Mata uang: Euro (EUR). Bahasa: Slovenia. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan Alpen, danau, dan hutan hijau. Rumah bagi Danau Bled, Pegunungan Julian Alps, dan Ljubljana yang indah.',
         metadata: {
@@ -846,9 +828,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'alpen', 'danau', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇲🇹 MALTA
-    // ==========================================================
     {
         text: 'Malta - Negara kepulauan di Eropa Selatan dengan sejarah dan resor. Ibu kota: Valletta. Populasi: 500 ribu jiwa. Mata uang: Euro (EUR). Bahasa: Malta, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah panjang, arsitektur barok, dan pantai-pantai indah. Rumah bagi Kuil-kuil Megalitik dan Valletta yang indah.',
         metadata: {
@@ -985,9 +964,6 @@ const data = [
             tags: ['negara', 'eropan-selatan', 'pulau', 'pariwisata', 'perbankan']
         }
     },
-    // ==========================================================
-    // 🇸🇲 SAN MARINO
-    // ==========================================================
     {
         text: 'San Marino - Negara mikro di Eropa Selatan yang dikelilingi Italia. Ibu kota: San Marino. Populasi: 34 ribu jiwa. Mata uang: Euro (EUR). Bahasa: Italia. Sistem pemerintahan: Republik. Negara tertua di Eropa. Terkenal dengan arsitektur abad pertengahan dan perangko. Negara dengan sejarah panjang dan kemerdekaan yang terjaga.',
         metadata: {

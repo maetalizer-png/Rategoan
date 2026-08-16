@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🌍 GLOBAL
-    // ==========================================================
     {
         text: 'Upwork - Platform freelance global terbesar. Didirikan 2015. 60+ juta pengguna.',
         metadata: { category: 'marplace', type: 'freelance', name: 'Upwork', founded: 2015, country: 'Global', region: 'global', products: ['Programming', 'Desain', 'Writing'], tags: ['freelance', 'global', 'terbesar'], status: 'aktif' }
@@ -31,9 +28,6 @@ const data = [
         metadata: { category: 'marplace', type: 'freelance', name: '99designs', founded: 2008, country: 'Global', region: 'global', products: ['Desain Grafis', 'Logo', 'Web'], tags: ['freelance', 'global', 'desain'], status: 'aktif' }
     },
     
-    // ==========================================================
-    // 🇮🇩 INDONESIA
-    // ==========================================================
     {
         text: 'Sribulancer - Freelance terbesar Indonesia. Didirikan 2012. Fokus freelancer lokal.',
         metadata: { category: 'marplace', type: 'freelance', name: 'Sribulancer', founded: 2012, country: 'Indonesia', region: 'asia-tenggara', products: ['Desain', 'Programming', 'Writing'], tags: ['freelance', 'asia-tenggara', 'indonesia'], status: 'aktif' }
@@ -47,9 +41,6 @@ const data = [
         metadata: { category: 'marplace', type: 'freelance', name: 'Projects.co.id', founded: 2012, country: 'Indonesia', region: 'asia-tenggara', products: ['IT', 'Programming', 'Desain'], tags: ['freelance', 'asia-tenggara', 'it'], status: 'aktif' }
     },
     
-    // ==========================================================
-    // 🇪🇺 EROPA
-    // ==========================================================
     {
         text: 'Malt - Freelance terbesar Eropa. Didirikan 2013 di Prancis. Konsultan IT & marketing.',
         metadata: { category: 'marplace', type: 'freelance', name: 'Malt', founded: 2013, country: 'Prancis', region: 'eropa', products: ['IT', 'Marketing', 'Design'], tags: ['freelance', 'eropa', 'terbesar'], status: 'aktif' }
@@ -63,9 +54,6 @@ const data = [
         metadata: { category: 'marplace', type: 'freelance', name: 'Comatch', founded: 2016, country: 'Jerman', region: 'eropa', products: ['Consulting', 'Business', 'Strategy'], tags: ['freelance', 'eropa', 'konsultan'], status: 'aktif' }
     },
     
-    // ==========================================================
-    // 🇺🇸 AMERIKA
-    // ==========================================================
     {
         text: 'Contra - Freelance modern tanpa komisi. Didirikan 2017. Favorit milenial & Gen Z.',
         metadata: { category: 'marplace', type: 'freelance', name: 'Contra', founded: 2017, country: 'AS', region: 'global', products: ['Programming', 'Desain', 'Video'], tags: ['freelance', 'global', 'no-komisi'], status: 'aktif' }
@@ -79,9 +67,6 @@ const data = [
         metadata: { category: 'marplace', type: 'freelance', name: 'Envato Studio', founded: 2006, country: 'AS', region: 'global', products: ['Desain', 'Video', 'Audio'], tags: ['freelance', 'global', 'kreatif'], status: 'aktif' }
     },
     
-    // ==========================================================
-    // 🇨🇳 CHINA
-    // ==========================================================
     {
         text: 'Zhaopin - Platform kerja & freelance China. Didirikan 1994. Tulang punggung pasar kerja China.',
         metadata: { category: 'marplace', type: 'freelance', name: 'Zhaopin', founded: 1994, country: 'China', region: 'asia-timur', products: ['IT', 'Marketing', 'Finance'], tags: ['freelance', 'asia-timur', 'china'], status: 'aktif' }
@@ -91,9 +76,6 @@ const data = [
         metadata: { category: 'marplace', type: 'freelance', name: 'Zhuanzhuan', founded: 2015, country: 'China', region: 'asia-timur', products: ['Programming', 'Desain', 'Writing'], tags: ['freelance', 'asia-timur', 'china'], status: 'aktif' }
     },
     
-    // ==========================================================
-    // 🇮🇳 INDIA
-    // ==========================================================
     {
         text: 'WorknHire - Freelance India. Didirikan 2015. Fokus freelancer & startup India.',
         metadata: { category: 'marplace', type: 'freelance', name: 'WorknHire', founded: 2015, country: 'India', region: 'asia-selatan', products: ['Programming', 'Desain', 'Marketing'], tags: ['freelance', 'asia-selatan', 'india'], status: 'aktif' }

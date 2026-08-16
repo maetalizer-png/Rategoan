@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇮🇩 INDONESIA
-    // ==========================================================
     {
         text: 'Indonesia - Negara kepulauan terbesar di dunia dengan lebih dari 17.000 pulau. Ibu kota: Jakarta (segera pindah ke IKN Nusantara). Populasi: 277 juta jiwa. Mata uang: Rupiah (IDR). Bahasa: Bahasa Indonesia. Sistem pemerintahan: Republik Presidensial. Anggota G20, ASEAN, dan OKI. Negara dengan ekonomi terbesar di Asia Tenggara. Kaya akan sumber daya alam, budaya, dan keanekaragaman hayati. Rumah bagi komodo, orangutan, dan bunga bangkai. Destinasi wisata Bali, Borobudur, dan Raja Ampat.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'g20', 'kepulauan', 'ekonomi-maju', 'sumber-daya-alam']
         }
     },
-    // ==========================================================
-    // 🇲🇾 MALAYSIA
-    // ==========================================================
     {
         text: 'Malaysia - Negara federasi di Asia Tenggara yang terdiri dari 13 negara bagian dan 3 wilayah federal. Ibu kota: Kuala Lumpur. Pusat pemerintahan: Putrajaya. Populasi: 34 juta jiwa. Mata uang: Ringgit (MYR). Bahasa: Bahasa Melayu. Sistem pemerintahan: Monarki Konstitusional Federal. Anggota ASEAN dan OKI. Ekonomi maju dengan sektor elektronik, minyak sawit, dan pariwisata. Rumah bagi Menara Kembar Petronas dan hutan hujan tertua di dunia.',
         metadata: {
@@ -281,9 +275,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'federasi', 'ekonomi-maju']
         }
     },
-    // ==========================================================
-    // 🇸🇬 SINGAPURA
-    // ==========================================================
     {
         text: 'Singapura - Negara kota di Asia Tenggara yang terkenal sebagai pusat keuangan global. Ibu kota: Singapura. Populasi: 5.6 juta jiwa. Mata uang: Dolar Singapura (SGD). Bahasa: Inggris, Mandarin, Melayu, Tamil. Sistem pemerintahan: Republik Parlementer. Anggota ASEAN dan PBB. Negara dengan ekonomi paling kompetitif di dunia. Pusat perdagangan, teknologi, dan inovasi. Rumah bagi Gardens by the Bay, Marina Bay Sands, dan Sentosa.',
         metadata: {
@@ -423,9 +414,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'pusat-keuangan', 'ekonomi-maju']
         }
     },
-    // ==========================================================
-    // 🇹🇭 THAILAND
-    // ==========================================================
     {
         text: 'Thailand - Negara kerajaan di Asia Tenggara yang terkenal dengan budaya dan pariwisata. Ibu kota: Bangkok. Populasi: 70 juta jiwa. Mata uang: Baht (THB). Bahasa: Thai. Sistem pemerintahan: Monarki Konstitusional. Anggota ASEAN dan PBB. Satu-satunya negara di Asia Tenggara yang tidak pernah dijajah. Pusat pariwisata dan ekspor beras terbesar dunia. Rumah bagi kuil-kuil megah, pantai Phuket, dan Chiang Mai yang indah.',
         metadata: {
@@ -563,9 +551,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'kerajaan', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇻🇳 VIETNAM
-    // ==========================================================
     {
         text: 'Vietnam - Negara komunis di Asia Tenggara dengan ekonomi berkembang pesat. Ibu kota: Hanoi. Kota terbesar: Ho Chi Minh City. Populasi: 98 juta jiwa. Mata uang: Dong (VND). Bahasa: Vietnam. Sistem pemerintahan: Republik Sosialis. Anggota ASEAN dan PBB. Negara dengan pertumbuhan ekonomi tertinggi di kawasan. Ekspor elektronik, tekstil, dan kopi terbesar. Rumah bagi Teluk Ha Long yang memukau dan sejarah perang Vietnam.',
         metadata: {
@@ -702,9 +687,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'komunis', 'ekonomi-berkembang']
         }
     },
-    // ==========================================================
-    // 🇵🇭 FILIPINA
-    // ==========================================================
     {
         text: 'Filipina - Negara kepulauan di Asia Tenggara dengan lebih dari 7.000 pulau. Ibu kota: Manila. Populasi: 110 juta jiwa. Mata uang: Peso (PHP). Bahasa: Filipino, Inggris. Sistem pemerintahan: Republik Presidensial. Anggota ASEAN dan PBB. Negara dengan populasi terbesar kedua di Asia Tenggara. Ekspor jasa BPO, tenaga kerja, dan pertanian. Rumah bagi pantai Boracay, teras beras Banaue, dan Kota Intramuros.',
         metadata: {
@@ -840,9 +822,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'kepulauan', 'bpo']
         }
     },
-    // ==========================================================
-    // 🇲🇲 MYANMAR
-    // ==========================================================
     {
         text: 'Myanmar - Negara di Asia Tenggara dengan sejarah dan budaya yang kaya. Ibu kota: Naypyidaw. Kota terbesar: Yangon. Populasi: 54 juta jiwa. Mata uang: Kyat (MMK). Bahasa: Myanmar. Sistem pemerintahan: Republik. Anggota ASEAN dan PBB. Negara dengan sumber daya alam melimpah: gas, minyak, batu mulia, dan kayu jati. Rumah bagi pagoda Shwedagon dan Danau Inle yang indah.',
         metadata: {
@@ -978,9 +957,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'sumber-daya-alam']
         }
     },
-    // ==========================================================
-    // 🇰🇭 KAMBOJA
-    // ==========================================================
     {
         text: 'Kamboja - Negara di Asia Tenggara dengan warisan budaya Angkor Wat. Ibu kota: Phnom Penh. Populasi: 17 juta jiwa. Mata uang: Riel (KHR). Bahasa: Khmer. Sistem pemerintahan: Monarki Konstitusional. Anggota ASEAN dan PBB. Destinasi pariwisata kelas dunia dengan candi Angkor. Ekonomi berbasis pariwisata, tekstil, dan pertanian. Rumah bagi Angkor Wat yang megah dan budaya Khmer yang kaya.',
         metadata: {
@@ -1116,9 +1092,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'angkor-wat', 'warisan-budaya']
         }
     },
-    // ==========================================================
-    // 🇱🇦 LAOS
-    // ==========================================================
     {
         text: 'Laos - Negara tanpa laut di Asia Tenggara dengan pemandangan alam yang indah. Ibu kota: Vientiane. Populasi: 7.5 juta jiwa. Mata uang: Kip (LAK). Bahasa: Lao. Sistem pemerintahan: Republik Sosialis. Anggota ASEAN dan PBB. Negara dengan ekonomi berbasis pertanian dan energi hidro. Sumber listrik ekspor ke Thailand dan Vietnam. Rumah bagi Wat Phou dan Kuang Si Falls yang memukau.',
         metadata: {
@@ -1254,9 +1227,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'tanpa-laut', 'hidro']
         }
     },
-    // ==========================================================
-    // 🇧🇳 BRUNEI DARUSSALAM
-    // ==========================================================
     {
         text: 'Brunei Darussalam - Negara kecil di Asia Tenggara dengan kekayaan minyak dan gas. Ibu kota: Bandar Seri Begawan. Populasi: 450 ribu jiwa. Mata uang: Dolar Brunei (BND). Bahasa: Melayu. Sistem pemerintahan: Monarki Absolut. Anggota ASEAN dan OKI. Negara dengan pendapatan per kapita tertinggi di Asia Tenggara. Berdasarkan syariah Islam. Rumah bagi masjid-masjid megah dan Istana Nurul Iman.',
         metadata: {
@@ -1392,9 +1362,6 @@ const data = [
             tags: ['negara', 'asian-tenggara', 'asean', 'minyak', 'syariah']
         }
     },
-    // ==========================================================
-// 🇹🇱 TIMOR LESTE (NEW!) — FIXED VERSION
-// ==========================================================
 {
 text: 'Timor Leste - Negara termuda di Asia Tenggara yang merdeka pada 2002. Ibu kota: Dili. Populasi: 1.4 juta jiwa. Mata uang: Dolar AS (USD). Bahasa: Tetum, Portugis. Sistem pemerintahan: Republik Semi-Presidensial. Anggota PBB, CPLP, dan ASEAN (observer). Negara dengan keindahan alam bawah laut, budaya unik, dan sejarah perjuangan panjang. Potensi pariwisata dan minyak di Selat Timor.',
 metadata: {
@@ -1487,7 +1454,6 @@ metadata: {
     healthcareAccess: 50,
     educationIndex: 0.48,
     
-    // 🔥🔥🔥 BAGIAN YANG DIPERBAIKI 🔥🔥🔥
     nationalMotto: 'Persatuan, Aksi, Kemajuan',
     nationalAnthem: 'Pátria',
     nationalAnimal: 'Buaya',
@@ -1532,6 +1498,6 @@ metadata: {
     tags: ['negara', 'asian-tenggara', 'termuda', 'pariwisata', 'pulau']
 }
 }
-];  // 🔥 TUTUP ARRAY data
+];
 
 export const DATA = data;

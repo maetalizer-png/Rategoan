@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇪🇹 ETIOPIA
-    // ==========================================================
     {
         text: 'Etiopia - Negara di Afrika Timur dengan peradaban kuno dan ekonomi tumbuh. Ibu kota: Addis Ababa. Populasi: 120 juta jiwa. Mata uang: Birr (ETB). Bahasa: Amharik. Sistem pemerintahan: Republik Federal Parlementer. Markas besar Uni Afrika. Negara dengan sejarah panjang dan pertumbuhan ekonomi tercepat di Afrika.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'african-timur', 'uni-afrika', 'sejarah', 'pertumbuhan']
         }
     },
-    // ==========================================================
-    // 🇰🇪 KENYA
-    // ==========================================================
     {
         text: 'Kenya - Negara di Afrika Timur dengan ekonomi digital dan pariwisata. Ibu kota: Nairobi. Populasi: 55 juta jiwa. Mata uang: Shilling (KES). Bahasa: Swahili, Inggris. Sistem pemerintahan: Republik Presidensial. Pusat fintech, M-Pesa, dan safari. Rumah bagi Taman Nasional Masai Mara dan Gunung Kenya.',
         metadata: {
@@ -282,9 +276,6 @@ const data = [
             tags: ['negara', 'african-timur', 'fintech', 'safari', 'mpesa']
         }
     },
-    // ==========================================================
-    // 🇹🇿 TANZANIA
-    // ==========================================================
     {
         text: 'Tanzania - Negara di Afrika Timur dengan alam dan pariwisata. Ibu kota: Dodoma. Populasi: 65 juta jiwa. Mata uang: Shilling (TZS). Bahasa: Swahili, Inggris. Sistem pemerintahan: Republik Presidensial. Rumah bagi Gunung Kilimanjaro, Serengeti, dan Zanzibar. Destinasi wisata alam terbaik di Afrika.',
         metadata: {
@@ -422,9 +413,6 @@ const data = [
             tags: ['negara', 'african-timur', 'kilimanjaro', 'serengeti', 'pariwisata']
         }
     },
-    // ==========================================================
-    // 🇺🇬 UGANDA
-    // ==========================================================
     {
         text: 'Uganda - Negara di Afrika Timur dengan pertanian dan danau Victoria. Ibu kota: Kampala. Populasi: 48 juta jiwa. Mata uang: Shilling (UGX). Bahasa: Inggris, Swahili. Sistem pemerintahan: Republik Presidensial. Negara dengan danau Victoria dan sumber sungai Nil. Pertanian dan kopi menjadi andalan ekonomi.',
         metadata: {
@@ -562,9 +550,6 @@ const data = [
             tags: ['negara', 'african-timur', 'nil', 'kopi', 'pertanian']
         }
     },
-    // ==========================================================
-    // 🇸🇴 SOMALIA
-    // ==========================================================
     {
         text: 'Somalia - Negara di Afrika Timur dengan pesisir panjang. Ibu kota: Mogadishu. Populasi: 16 juta jiwa. Mata uang: Shilling (SOS). Bahasa: Somalia, Arab. Sistem pemerintahan: Republik Federal. Lokasi strategis di Tanduk Afrika. Negara dengan pesisir terpanjang di Afrika daratan.',
         metadata: {
@@ -699,9 +684,6 @@ const data = [
             tags: ['negara', 'african-timur', 'tanduk-afrika', 'pesisir', 'strategis']
         }
     },
-    // ==========================================================
-    // 🇷🇼 RWANDA
-    // ==========================================================
     {
         text: 'Rwanda - Negara di Afrika Timur dengan ekonomi digital dan pemulihan. Ibu kota: Kigali. Populasi: 13 juta jiwa. Mata uang: Franc (RWF). Bahasa: Kinyarwanda, Inggris, Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan pemulihan ekonomi tercepat di Afrika dan teknologi digital.',
         metadata: {
@@ -839,9 +821,6 @@ const data = [
             tags: ['negara', 'african-timur', 'digital', 'pemulihan', 'teknologi']
         }
     },
-    // ==========================================================
-    // 🇲🇬 MADAGASKAR
-    // ==========================================================
     {
         text: 'Madagaskar - Negara kepulauan di Afrika Timur dengan keanekaragaman hayati. Ibu kota: Antananarivo. Populasi: 28 juta jiwa. Mata uang: Ariary (MGA). Bahasa: Malagasi, Prancis. Sistem pemerintahan: Republik Semi-Presidensial. Rumah bagi lemur dan keanekaragaman hayati unik. 90% spesies hanya ada di Madagaskar.',
         metadata: {
@@ -978,9 +957,6 @@ const data = [
             tags: ['negara', 'african-timur', 'biodiversitas', 'pulau', 'ekowisata']
         }
     },
-    // ==========================================================
-    // 🇪🇷 ERITREA (NEW!)
-    // ==========================================================
     {
         text: 'Eritrea - Negara di Afrika Timur dengan pesisir Laut Merah. Ibu kota: Asmara. Populasi: 3.6 juta jiwa. Mata uang: Nakfa (ERN). Bahasa: Tigrinya, Arab. Sistem pemerintahan: Republik. Negara dengan pesisir Laut Merah dan arsitektur kolonial Italia yang unik.',
         metadata: {
@@ -1117,9 +1093,6 @@ const data = [
             tags: ['negara', 'african-timur', 'laut-merah', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇩🇯 DJIBOUTI (NEW!)
-    // ==========================================================
     {
         text: 'Djibouti - Negara di Afrika Timur dengan pelabuhan strategis. Ibu kota: Djibouti. Populasi: 1 juta jiwa. Mata uang: Franc (DJF). Bahasa: Prancis, Arab. Sistem pemerintahan: Republik Presidensial. Negara dengan pelabuhan strategis di Laut Merah dan pangkalan militer asing.',
         metadata: {
@@ -1256,9 +1229,6 @@ const data = [
             tags: ['negara', 'african-timur', 'pelabuhan', 'strategis']
         }
     },
-    // ==========================================================
-    // 🇸🇸 SUDAN SELATAN (NEW!)
-    // ==========================================================
     {
         text: 'Sudan Selatan - Negara termuda di Afrika Timur dengan sumber daya minyak. Ibu kota: Juba. Populasi: 11 juta jiwa. Mata uang: Pound (SSP). Bahasa: Inggris. Sistem pemerintahan: Republik Presidensial. Negara termuda di Afrika (merdeka 2011) dengan cadangan minyak besar.',
         metadata: {
@@ -1393,9 +1363,6 @@ const data = [
             tags: ['negara', 'african-timur', 'minyak', 'termuda', 'konflik']
         }
     },
-    // ==========================================================
-    // 🇧🇮 BURUNDI (NEW!)
-    // ==========================================================
     {
         text: 'Burundi - Negara di Afrika Timur dengan danau Tanganyika. Ibu kota: Gitega. Populasi: 12 juta jiwa. Mata uang: Franc (BIF). Bahasa: Kirundi, Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan Danau Tanganyika dan pertanian subur.',
         metadata: {
@@ -1532,9 +1499,6 @@ const data = [
             tags: ['negara', 'african-timur', 'danau-tanganyika', 'pertanian']
         }
     },
-    // ==========================================================
-    // 🇲🇼 MALAWI (NEW!)
-    // ==========================================================
     {
         text: 'Malawi - Negara di Afrika Timur dengan Danau Malawi. Ibu kota: Lilongwe. Populasi: 20 juta jiwa. Mata uang: Kwacha (MWK). Bahasa: Inggris, Chichewa. Sistem pemerintahan: Republik Presidensial. Negara dengan Danau Malawi dan keindahan alam yang luar biasa.',
         metadata: {

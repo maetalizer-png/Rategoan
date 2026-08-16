@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇬🇹 GUATEMALA
-    // ==========================================================
     {
         text: 'Guatemala - Negara di Amerika Tengah dengan budaya Maya dan alam indah. Ibu kota: Guatemala City. Populasi: 18 juta jiwa. Mata uang: Quetzal (GTQ). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan peradaban Maya, Tikal, dan Danau Atitlan. Budaya yang kaya dan alam yang indah.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'maya', 'sejarah', 'budaya']
         }
     },
-    // ==========================================================
-    // 🇭🇳 HONDURAS
-    // ==========================================================
     {
         text: 'Honduras - Negara di Amerika Tengah dengan alam dan budaya kaya. Ibu kota: Tegucigalpa. Populasi: 10 juta jiwa. Mata uang: Lempira (HNL). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan pantai Karibia dan alam yang indah. Rumah bagi peradaban Maya dan Copán.',
         metadata: {
@@ -283,9 +277,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'karibia', 'budaya', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇳🇮 NIKARAGUA
-    // ==========================================================
     {
         text: 'Nikaragua - Negara di Amerika Tengah dengan danau dan gunung berapi. Ibu kota: Managua. Populasi: 6.7 juta jiwa. Mata uang: Córdoba (NIO). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan Danau Nikaragua dan gunung berapi aktif. Alam yang indah dan budaya yang kaya.',
         metadata: {
@@ -425,9 +416,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'danau', 'gunung-berapi', 'budaya']
         }
     },
-    // ==========================================================
-    // 🇨🇷 KOSTA RIKA
-    // ==========================================================
     {
         text: 'Kosta Rika - Negara di Amerika Tengah dengan keanekaragaman hayati dan pariwisata. Ibu kota: San José. Populasi: 5.1 juta jiwa. Mata uang: Colón (CRC). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara tanpa tentara dan dengan keanekaragaman hayati terbaik. Rumah bagi hutan hujan, gunung berapi, dan pantai-pantai indah.',
         metadata: {
@@ -567,9 +555,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'biodiversitas', 'pariwisata', 'tanpa-tentara']
         }
     },
-    // ==========================================================
-    // 🇵🇦 PANAMA
-    // ==========================================================
     {
         text: 'Panama - Negara di Amerika Tengah dengan terusan dan ekonomi maju. Ibu kota: Panama City. Populasi: 4.4 juta jiwa. Mata uang: Balboa (PAB), Dolar AS (USD). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan Terusan Panama yang ikonik. Pusat logistik dan keuangan global. Ekonomi terbaik di Amerika Tengah.',
         metadata: {
@@ -709,9 +694,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'terusan', 'logistik', 'keuangan']
         }
     },
-    // ==========================================================
-    // 🇧🇿 BELIZE
-    // ==========================================================
     {
         text: 'Belize - Negara di Amerika Tengah dengan bahasa Inggris dan alam indah. Ibu kota: Belmopan. Populasi: 400 ribu jiwa. Mata uang: Dolar Belize (BZD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan pantai Karibia dan terumbu karang. Bahasa Inggris resmi. Destinasi wisata alam dan budaya Maya.',
         metadata: {
@@ -852,9 +834,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'karibia', 'inggris', 'terumbu']
         }
     },
-    // ==========================================================
-    // 🇸🇻 EL SALVADOR
-    // ==========================================================
     {
         text: 'El Salvador - Negara di Amerika Tengah dengan ekonomi dan budaya kaya. Ibu kota: San Salvador. Populasi: 6.5 juta jiwa. Mata uang: Dolar AS (USD). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan pantai-pantai indah dan budaya kaya. Pemimpin global dalam adopsi Bitcoin. Ekonomi dengan pertumbuhan tinggi dan inovasi.',
         metadata: {
@@ -993,9 +972,6 @@ const data = [
             tags: ['negara', 'american-tengah', 'bitcoin', 'pariwisata', 'budaya']
         }
     },
-    // ==========================================================
-    // 🇨🇺 KUBA
-    // ==========================================================
     {
         text: 'Kuba - Negara kepulauan di Karibia dengan budaya dan sejarah kaya. Ibu kota: Havana. Populasi: 11.3 juta jiwa. Mata uang: Peso Kuba (CUP). Bahasa: Spanyol. Sistem pemerintahan: Republik Sosialis. Negara dengan musik, tari, dan budaya Karibia yang kaya. Rumah bagi cerutu terbaik dunia dan arsitektur kolonial.',
         metadata: {

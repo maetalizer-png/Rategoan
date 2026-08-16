@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇩🇪 JERMAN
-    // ==========================================================
     {
         text: 'Jerman - Negara terbesar di Eropa Barat dengan ekonomi terkuat di Eropa. Ibu kota: Berlin. Populasi: 84 juta jiwa. Mata uang: Euro (EUR). Bahasa: Jerman. Sistem pemerintahan: Republik Federal Parlementer. Anggota G7, G20, dan UE. Negara dengan industri otomotif, mesin, dan kimia terkemuka dunia. Rumah bagi Mercedes, BMW, Volkswagen, dan Siemens. Negara dengan sejarah panjang dan budaya yang kaya.',
         metadata: {
@@ -141,9 +138,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'ekonomi', 'otomotif', 'ue']
         }
     },
-    // ==========================================================
-    // 🇫🇷 PRANCIS
-    // ==========================================================
     {
         text: 'Prancis - Negara di Eropa Barat dengan budaya dan sejarah kaya. Ibu kota: Paris. Populasi: 68 juta jiwa. Mata uang: Euro (EUR). Bahasa: Prancis. Sistem pemerintahan: Republik Semi-Presidensial. Anggota G7, G20, dan UE. Pusat mode, seni, dan kuliner dunia. Rumah bagi Menara Eiffel, Louvre, dan Riviera Prancis. Negara dengan pengaruh budaya dan diplomatik global.',
         metadata: {
@@ -283,9 +277,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'budaya', 'mode', 'diplomasi']
         }
     },
-    // ==========================================================
-    // 🇬🇧 INGGRIS
-    // ==========================================================
     {
         text: 'Inggris - Negara di Eropa Barat dengan pengaruh global besar. Ibu kota: London. Populasi: 67 juta jiwa. Mata uang: Pound Sterling (GBP). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Anggota G7, G20, dan NATO. Pusat keuangan global dan bahasa internasional. Rumah bagi Big Ben, Buckingham Palace, dan Stonehenge. Negara dengan sejarah dan budaya yang sangat kaya.',
         metadata: {
@@ -425,9 +416,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'keuangan', 'bahasa', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇳🇱 BELANDA
-    // ==========================================================
     {
         text: 'Belanda - Negara di Eropa Barat dengan ekonomi maju dan inovasi tinggi. Ibu kota: Amsterdam. Populasi: 17 juta jiwa. Mata uang: Euro (EUR). Bahasa: Belanda. Sistem pemerintahan: Monarki Konstitusional Parlementer. Anggota UE dan NATO. Negara dengan logistik, perdagangan, dan teknologi terbaik. Rumah bagi kincir angin, bunga tulip, dan kanal-kanal indah.',
         metadata: {
@@ -567,9 +555,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'logistik', 'perdagangan', 'ue']
         }
     },
-    // ==========================================================
-    // 🇧🇪 BELGIA
-    // ==========================================================
     {
         text: 'Belgia - Negara kecil di Eropa Barat yang menjadi pusat administrasi EU. Ibu kota: Brussel. Populasi: 11 juta jiwa. Mata uang: Euro (EUR). Bahasa: Belanda, Prancis, Jerman. Sistem pemerintahan: Monarki Konstitusional Federal Parlementer. Pusat Uni Eropa dan NATO. Negara dengan cokelat, bir, dan keju terbaik dunia. Rumah bagi arsitektur Art Nouveau dan kota-kota bersejarah.',
         metadata: {
@@ -710,9 +695,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'ue', 'nato', 'administrasi']
         }
     },
-    // ==========================================================
-    // 🇨🇭 SWISS
-    // ==========================================================
     {
         text: 'Swiss - Negara di Eropa Barat dengan netralitas dan perbankan global. Ibu kota: Bern. Populasi: 8.7 juta jiwa. Mata uang: Franc Swiss (CHF). Bahasa: Jerman, Prancis, Italia, Romansh. Sistem pemerintahan: Republik Federal. Negara dengan kualitas hidup tertinggi di dunia. Rumah bagi cokelat, jam, dan Alpen Swiss. Pusat perbankan dan keuangan global. Negara dengan inovasi dan pendidikan terbaik.',
         metadata: {
@@ -853,9 +835,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'perbankan', 'netral', 'cokelat']
         }
     },
-    // ==========================================================
-    // 🇦🇹 AUSTRIA
-    // ==========================================================
     {
         text: 'Austria - Negara di Eropa Barat dengan alam pegunungan Alpen. Ibu kota: Wina. Populasi: 9 juta jiwa. Mata uang: Euro (EUR). Bahasa: Jerman. Sistem pemerintahan: Republik Federal Parlementer. Anggota UE. Negara dengan musik klasik dan arsitektur indah. Rumah bagi Mozart, Beethoven, dan Strauss. Kota Wina dengan kafe-kafe klasik dan istana-istana megah.',
         metadata: {
@@ -995,9 +974,6 @@ const data = [
             tags: ['negara', 'eropan-barat', 'alpen', 'musik', 'ue']
         }
     },
-    // ==========================================================
-    // 🇮🇪 IRLANDIA
-    // ==========================================================
     {
         text: 'Irlandia - Negara di Eropa Barat dengan ekonomi teknologi maju. Ibu kota: Dublin. Populasi: 5 juta jiwa. Mata uang: Euro (EUR). Bahasa: Irlandia, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota UE. Pusat teknologi global (Google, Apple, Facebook di Eropa). Negara dengan budaya Celtic dan pemandangan hijau yang indah. Rumah bagi kliff Moher dan pub-pub tradisional.',
         metadata: {

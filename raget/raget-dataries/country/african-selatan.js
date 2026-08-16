@@ -1,7 +1,4 @@
 const data = [
-    // ==========================================================
-    // 🇿🇦 AFRIKA SELATAN
-    // ==========================================================
     {
         text: 'Afrika Selatan - Negara paling selatan di Afrika dengan ekonomi maju. Ibu kota: Pretoria. Populasi: 60 juta jiwa. Mata uang: Rand (ZAR). Bahasa: 11 bahasa resmi. Sistem pemerintahan: Republik Parlementer. Anggota G20, BRICS, dan AU. Negara dengan tambang emas, platinum, dan berlian terbesar di dunia. Rumah bagi Table Mountain, Cape Town, dan Safari Afrika.',
         metadata: {
@@ -140,9 +137,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'g20', 'brics', 'tambang']
         }
     },
-    // ==========================================================
-    // 🇳🇦 NAMIBIA
-    // ==========================================================
     {
         text: 'Namibia - Negara di Afrika Selatan dengan gurun Namib dan tambang. Ibu kota: Windhoek. Populasi: 2.5 juta jiwa. Mata uang: Dolar Namibia (NAD). Bahasa: Inggris. Sistem pemerintahan: Republik Semi-Presidensial. Rumah bagi gurun Namib tertua di dunia dan keanekaragaman hayati unik.',
         metadata: {
@@ -280,9 +274,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'gurun', 'tambang', 'safari']
         }
     },
-    // ==========================================================
-    // 🇧🇼 BOTSWANA
-    // ==========================================================
     {
         text: 'Botswana - Negara di Afrika Selatan dengan ekonomi stabil dan intan. Ibu kota: Gaborone. Populasi: 2.4 juta jiwa. Mata uang: Pula (BWP). Bahasa: Inggris, Setswana. Sistem pemerintahan: Republik Parlementer. Negara dengan ekonomi paling stabil di Afrika dan Delta Okavango yang indah.',
         metadata: {
@@ -416,9 +407,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'intan', 'stabil', 'delta']
         }
     },
-    // ==========================================================
-    // 🇿🇲 ZAMBIA
-    // ==========================================================
     {
         text: 'Zambia - Negara di Afrika Selatan dengan tambang tembaga dan Victoria Falls. Ibu kota: Lusaka. Populasi: 20 juta jiwa. Mata uang: Kwacha (ZMW). Bahasa: Inggris. Sistem pemerintahan: Republik Presidensial. Rumah bagi Air Terjun Victoria dan tambang tembaga terbesar di Afrika.',
         metadata: {
@@ -554,9 +542,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'tembaga', 'victoria-falls', 'pertanian']
         }
     },
-    // ==========================================================
-    // 🇿🇼 ZIMBABWE
-    // ==========================================================
     {
         text: 'Zimbabwe - Negara di Afrika Selatan dengan Victoria Falls dan pertanian. Ibu kota: Harare. Populasi: 16 juta jiwa. Mata uang: Dolar Zimbabwe (ZWL). Bahasa: Inggris, Shona, Ndebele. Sistem pemerintahan: Republik Presidensial. Negara dengan Victoria Falls dan reruntuhan Great Zimbabwe.',
         metadata: {
@@ -692,9 +677,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'victoria-falls', 'pertanian', 'sejarah']
         }
     },
-    // ==========================================================
-    // 🇸🇿 ESWATINI (NEW!)
-    // ==========================================================
     {
         text: 'Eswatini - Kerajaan di Afrika Selatan dengan budaya Swazi. Ibu kota: Mbabane. Populasi: 1.1 juta jiwa. Mata uang: Lilangeni (SZL). Bahasa: Swazi, Inggris. Sistem pemerintahan: Monarki Absolut. Satu-satunya monarki absolut di Afrika. Kaya akan hutan dan pertanian.',
         metadata: {
@@ -828,9 +810,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'monarki', 'swazi', 'hutan']
         }
     },
-    // ==========================================================
-    // 🇱🇸 LESOTHO (NEW!)
-    // ==========================================================
     {
         text: 'Lesotho - Kerajaan di Afrika Selatan yang terkepung oleh Afrika Selatan. Ibu kota: Maseru. Populasi: 2.1 juta jiwa. Mata uang: Loti (LSL). Bahasa: Sesotho, Inggris. Sistem pemerintahan: Monarki Konstitusional. Satu-satunya negara di Afrika yang terletak di atas 1000 meter. Kaya akan air dan tekstil.',
         metadata: {
@@ -964,9 +943,6 @@ const data = [
             tags: ['negara', 'african-selatan', 'pegunungan', 'air', 'tekstil']
         }
     },
-    // ==========================================================
-    // 🇲🇿 MOZAMBIK (NEW!)
-    // ==========================================================
     {
         text: 'Mozambik - Negara di Afrika Selatan dengan pesisir Samudra Hindia. Ibu kota: Maputo. Populasi: 33 juta jiwa. Mata uang: Metical (MZN). Bahasa: Portugis. Sistem pemerintahan: Republik Presidensial. Anggota PBB, AU, dan SADC. Kaya gas alam, batu bara, dan pariwisata. Rumah bagi kepulauan Bazaruto dan pantai-pantai indah.',
         metadata: {
