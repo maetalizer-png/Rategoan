@@ -13,7 +13,7 @@ Gaya: casual, jujur, build-in-public — nunjukkin proses, bukan cuma hasil.
 
 **Beat 2:** "Nggak ada server. Nggak ada API key OpenAI atau siapapun. Semua logic-nya jalan di browser kamu sendiri."
 
-**Beat 3:** Zoom ke kode `ai-agent/` — "Ini otaknya, based on template + data, bukan model AI raksasa."
+**Beat 3:** Zoom ke kode `raget/raget-agents/` — "Ini otaknya, based on template + data, bukan model AI raksasa."
 
 **CTA:** "Follow buat liat progressnya hari demi hari — target-nya sampe jadi produk beneran."
 

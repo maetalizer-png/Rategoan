@@ -1,4 +1,4 @@
-import { STOPWORDS, hashText, pickVariant } from '../utils/text.js';
+import { STOPWORDS, hashText, pickVariant } from '../../utils/text.js';
 
 const CONFIDENCE_THRESHOLD = 0.35;
 

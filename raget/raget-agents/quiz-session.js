@@ -1,4 +1,4 @@
-import { quiz } from '../dataries/quiz.js';
+import { quiz } from '../raget-dataries/quiz.js';
 import { formatter } from './formatter.js';
 import { streakStore } from '../raget-memory/streak-store.js';
 

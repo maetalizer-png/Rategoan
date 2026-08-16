@@ -1,5 +1,5 @@
-import { memoryLong } from '../../raget-memory/memory-long.js';
-import { memoryShort } from '../../raget-memory/memory-short.js';
+import { memoryLong } from '../../raget/raget-memory/memory-long.js';
+import { memoryShort } from '../../raget/raget-memory/memory-short.js';
 
 function recallFacts() {
   return memoryLong.allFacts();

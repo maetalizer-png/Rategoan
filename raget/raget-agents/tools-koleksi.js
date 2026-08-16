@@ -1,7 +1,7 @@
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
 import { scorer } from './scorer.js';
-import { hashText } from '../utils/text.js';
+import { hashText } from '../../utils/text.js';
 import { agentTools } from './agent-tools.js';
 
 const COLLECTION_REF_THRESHOLD = 0.35;

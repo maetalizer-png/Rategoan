@@ -1,4 +1,4 @@
-import { REGIONS, dataries } from '../dataries/index.js';
+import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const FILLER_WORDS_RE = /\b(negara|wilayah|daerah|dari|di|nya|adalah|itu|dong|sih|ya|tuh|nih|deh|kok)\b/g;
 

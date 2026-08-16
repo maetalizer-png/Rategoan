@@ -1,4 +1,4 @@
-import { llmEngine } from '../rategoan-llm/llm-engine.js';
+import { llmEngine } from '../raget-llm/llm-engine.js';
 import { memoryShort } from '../raget-memory/memory-short.js';
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { memoryIndex } from '../raget-memory/memory-index.js';
@@ -6,7 +6,7 @@ import { memoryContext } from '../raget-memory/memory-context.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { datariesBridge } from './dataries-bridge.js';
 import { scorer } from './scorer.js';
-import { pickVariant } from '../utils/text.js';
+import { pickVariant } from '../../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
 import { quality } from './quality.js';
@@ -41,7 +41,7 @@ let fewshotCache = null;
 async function loadPersona() {
   if (personaCache) return personaCache;
   try {
-    const res = await fetch(new URL('../dataset/persona.json', import.meta.url));
+    const res = await fetch(new URL('../raget-dataset/persona.json', import.meta.url));
     personaCache = res.ok ? await res.json() : null;
   } catch (e) {
     personaCache = null;
@@ -52,7 +52,7 @@ async function loadPersona() {
 async function loadFewshot() {
   if (!fewshotCache) {
     try {
-      const res = await fetch(new URL('../dataset/fewshot.json', import.meta.url));
+      const res = await fetch(new URL('../raget-dataset/fewshot.json', import.meta.url));
       const data = res.ok ? await res.json() : [];
       fewshotCache = Array.isArray(data) ? data : [];
     } catch (e) {

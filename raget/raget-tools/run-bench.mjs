@@ -7,7 +7,7 @@ import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { readFileSync } from 'fs';
 
 const BASE = process.argv[2] || 'http://localhost:8099';
-const bench = JSON.parse(readFileSync(new URL('../dataset/bench.json', import.meta.url), 'utf8'));
+const bench = JSON.parse(readFileSync(new URL('../raget-dataset/bench.json', import.meta.url), 'utf8'));
 
 function waitForNewStableReply(page, prevCount) {
   return page.waitForFunction((prev) => {
@@ -73,7 +73,7 @@ async function main() {
   const elapsed = Date.now() - t0;
 
   const cacheStats = await page.evaluate(async () => {
-    const mod = await import('/raget-retrieval/retrieve.js');
+    const mod = await import('/raget/raget-retrieval/retrieve.js');
     return mod.retrieval.cacheStats();
   });
 

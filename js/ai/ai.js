@@ -1,5 +1,5 @@
 import { engine } from './engine.js';
-import { agent } from '../../ai-agent/agent.js';
+import { agent } from '../../raget/raget-agents/agent.js';
 
 async function generate(messages, prompt) {
   await engine.ensureReady();

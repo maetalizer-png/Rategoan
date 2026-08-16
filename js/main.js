@@ -28,8 +28,8 @@ import { login } from './account/login.js';
 import { collectionPage } from './collection/collection.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
-import { dailyBriefing } from '../ai-agent/daily-briefing.js';
-import { dataries } from '../dataries/index.js';
+import { dailyBriefing } from '../raget/raget-agents/daily-briefing.js';
+import { dataries } from '../raget/raget-dataries/index.js';
 
 const BRIEFING_DATE_KEY = 'raget_briefing_date';
 const bootStart = performance.now();

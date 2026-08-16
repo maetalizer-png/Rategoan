@@ -1,5 +1,5 @@
 import { $ } from '../utils/dom.js';
-import { collectionSearch } from '../../raget-memory/collection-search.js';
+import { collectionSearch } from '../../raget/raget-memory/collection-search.js';
 
 const FUZZY_MAX_DISTANCE = 2;
 

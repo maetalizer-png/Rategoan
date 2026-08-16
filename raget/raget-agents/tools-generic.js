@@ -1,5 +1,5 @@
 import { agentTools } from './agent-tools.js';
-import { readWeb } from '../vault/web/read-web.js';
+import { readWeb } from '../../vault/web/read-web.js';
 import { quizSession } from './quiz-session.js';
 import { fewshotLocal } from '../raget-memory/fewshot-local.js';
 import { ragetDb } from '../raget-database/raget-db.js';

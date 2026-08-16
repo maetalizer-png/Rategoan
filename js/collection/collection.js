@@ -2,9 +2,9 @@ import { $ } from '../utils/dom.js';
 import { ic } from '../utils/icons.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
-import { collectionStore } from '../../raget-memory/collection-store.js';
-import { collectionSearch } from '../../raget-memory/collection-search.js';
-import { memoryLong } from '../../raget-memory/memory-long.js';
+import { collectionStore } from '../../raget/raget-memory/collection-store.js';
+import { collectionSearch } from '../../raget/raget-memory/collection-search.js';
+import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { drawer } from '../ui/drawer.js';
 
@@ -205,7 +205,7 @@ async function renderPerpustakaan() {
   } catch (e) {}
   if (myGen !== renderGen) return;
 
-  const memoryImport = await import('../../raget-memory/memory-index.js');
+  const memoryImport = await import('../../raget/raget-memory/memory-index.js');
   const knowStats = await memoryImport.memoryIndex.stats();
   if (myGen !== renderGen) return;
 
