@@ -13,6 +13,7 @@ import { quality } from './quality.js';
 import { dailyBriefing } from './daily-briefing.js';
 import { dataries } from '../raget-dataries/index.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
+import { feedbackStore } from '../raget-memory/feedback-store.js';
 import { collectionSearch } from '../raget-memory/collection-search.js';
 import { devlogIndex } from '../raget-devlog/index.js';
 import { mathEngine } from './math-engine.js';
@@ -453,6 +454,10 @@ async function laporanOtak() {
 
   const qualityResult = await quality.evaluate();
   const collStats = await collectionStore.stats();
+  const fbStats = feedbackStore.stats();
+  const fbColumn = fbStats.total
+    ? Math.round(fbStats.rate * 100) + '% (up=' + fbStats.up + ', down=' + fbStats.down + ', n=' + fbStats.total + ')'
+    : 'belum ada rating (n=0, A blended memakai default 70%)';
 
   const parts = [
     formatter.h('Laporan Otak Raget', 3),
@@ -460,6 +465,7 @@ async function laporanOtak() {
     formatter.bold('Skor Kualitas: ' + qualityResult.score + '/100'),
     formatter.bullets([
       'Akurasi (A): ' + qualityResult.breakdown.A + '% (n=' + qualityResult.n.A + ')',
+      'A (feedbackStore): ' + fbColumn,
       'Kekayaan (K): ' + qualityResult.breakdown.K + '% (n=' + qualityResult.n.K + ')',
       'Keunikan (U): ' + qualityResult.breakdown.U + '% (n=' + qualityResult.n.U + ')',
       'Diversitas (D): ' + qualityResult.breakdown.D + '% (n=' + qualityResult.n.D + ')',
