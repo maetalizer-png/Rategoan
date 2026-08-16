@@ -28,6 +28,7 @@ import { stemEngine } from './stem-engine.js';
 import { socialEngine } from './social-engine.js';
 import { contextEngine } from './context-engine.js';
 import { worldContext } from './world-context.js';
+import { intelligenceRumus } from './intelligence-rumus.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -331,7 +332,8 @@ async function respondCore(messages, prompt) {
     stemEngine.tryTechConcept(text) ||
     worldContext.tryHariByDate(text) ||
     worldContext.tryHariByName(text) ||
-    worldContext.tryDetectLanguage(text);
+    worldContext.tryDetectLanguage(text) ||
+    intelligenceRumus.tryFrameworkLookup(text);
   if (stemDict) {
     ragetDb.addNote(text, stemDict, null, 'stem');
     return postProcess(stemDict);
@@ -395,6 +397,12 @@ async function respondCore(messages, prompt) {
   if (worldReply) {
     ragetDb.addNote(text, worldReply, null, 'world_context');
     return postProcess(worldReply);
+  }
+
+  const suggestFramework = intelligenceRumus.trySuggestFramework(text);
+  if (suggestFramework) {
+    ragetDb.addNote(text, suggestFramework, null, 'intelligence_rumus');
+    return postProcess(suggestFramework);
   }
 
   const teaching = routerIntent.detectTeaching(text);
