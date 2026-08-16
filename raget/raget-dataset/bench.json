@@ -5411,5 +5411,255 @@
     "prompt": "jelaskan biologi",
     "note": "Ronde v6 B3: definisi bidang sains - biologi (variasi)",
     "contains": "makhluk hidup"
+  },
+  {
+    "prompt": "ceritakan tentang wolfgang amadeus mozart",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Wolfgang Amadeus Mozart",
+    "contains": "Wolfgang Amadeus Mozart"
+  },
+  {
+    "prompt": "biografi cleopatra",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Cleopatra",
+    "contains": "Cleopatra"
+  },
+  {
+    "prompt": "ceritakan tentang warren buffett",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Warren Buffett",
+    "contains": "Warren Buffett"
+  },
+  {
+    "prompt": "biografi dari edmund hillary",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Edmund Hillary",
+    "contains": "Edmund Hillary"
+  },
+  {
+    "prompt": "biografi dari j. robert oppenheimer",
+    "note": "Ronde v6 B4: tokoh profil (+100) - J. Robert Oppenheimer",
+    "contains": "J. Robert Oppenheimer"
+  },
+  {
+    "prompt": "biografi dari louis pasteur",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Louis Pasteur",
+    "contains": "Louis Pasteur"
+  },
+  {
+    "prompt": "ceritakan tentang christopher columbus",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Christopher Columbus",
+    "contains": "Christopher Columbus"
+  },
+  {
+    "prompt": "biografi john f. kennedy",
+    "note": "Ronde v6 B4: tokoh profil (+100) - John F. Kennedy",
+    "contains": "John F. Kennedy"
+  },
+  {
+    "prompt": "ceritakan tentang jawaharlal nehru",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Jawaharlal Nehru",
+    "contains": "Jawaharlal Nehru"
+  },
+  {
+    "prompt": "ceritakan tentang ho chi minh",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Ho Chi Minh",
+    "contains": "Ho Chi Minh"
+  },
+  {
+    "prompt": "biografi alexander agung",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Alexander Agung",
+    "contains": "Alexander Agung"
+  },
+  {
+    "prompt": "biografi dari tenzing norgay",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Tenzing Norgay",
+    "contains": "Tenzing Norgay"
+  },
+  {
+    "prompt": "biografi dari richard feynman",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Richard Feynman",
+    "contains": "Richard Feynman"
+  },
+  {
+    "prompt": "biografi dmitri mendeleev",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Dmitri Mendeleev",
+    "contains": "Dmitri Mendeleev"
+  },
+  {
+    "prompt": "ceritakan tentang mao zedong",
+    "note": "Ronde v6 B4: tokoh profil (+100) - Mao Zedong",
+    "contains": "Mao Zedong"
+  },
+  {
+    "prompt": "apa pencapaian tim berners-lee",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Tim Berners-Lee",
+    "contains": "Tim Berners-Lee"
+  },
+  {
+    "prompt": "prestasi ibnu sina apa saja",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Ibnu Sina",
+    "contains": "Ibnu Sina"
+  },
+  {
+    "prompt": "apa pencapaian desmond tutu",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Desmond Tutu",
+    "contains": "Desmond Tutu"
+  },
+  {
+    "prompt": "apa pencapaian catherine yang agung",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Catherine yang Agung",
+    "contains": "Catherine yang Agung"
+  },
+  {
+    "prompt": "apa pencapaian michelle obama",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Michelle Obama",
+    "contains": "Michelle Obama"
+  },
+  {
+    "prompt": "apa pencapaian simone de beauvoir",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Simone de Beauvoir",
+    "contains": "Simone de Beauvoir"
+  },
+  {
+    "prompt": "apa pencapaian sun yat-sen",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Sun Yat-sen",
+    "contains": "Sun Yat-sen"
+  },
+  {
+    "prompt": "prestasi valentina tereshkova apa saja",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Valentina Tereshkova",
+    "contains": "Valentina Tereshkova"
+  },
+  {
+    "prompt": "apa pencapaian pele",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Pele",
+    "contains": "Pele"
+  },
+  {
+    "prompt": "prestasi fyodor dostoevsky apa saja",
+    "note": "Ronde v6 B4: tokoh pencapaian (+100) - Fyodor Dostoevsky",
+    "contains": "Fyodor Dostoevsky"
+  },
+  {
+    "prompt": "quote dari carl sagan",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Carl Sagan",
+    "contains": "Kita adalah cara ala"
+  },
+  {
+    "prompt": "kutipan dari ernest hemingway",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Ernest Hemingway",
+    "contains": "Dunia mematahkan set"
+  },
+  {
+    "prompt": "quote dari katherine johnson",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Katherine Johnson",
+    "contains": "Perempuan selalu mel"
+  },
+  {
+    "prompt": "kutipan dari salvador dali",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Salvador Dali",
+    "contains": "Jangan takut akan ke"
+  },
+  {
+    "prompt": "quote dari aung san suu kyi",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Aung San Suu Kyi",
+    "contains": "Bukan kekuasaan yang"
+  },
+  {
+    "prompt": "kutipan dari roald amundsen",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Roald Amundsen",
+    "contains": "Kemenangan menanti m"
+  },
+  {
+    "prompt": "kutipan terkenal dari wright bersaudara",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Wright Bersaudara",
+    "contains": "Jika kau mencari rah"
+  },
+  {
+    "prompt": "kutipan dari james clerk maxwell",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - James Clerk Maxwell",
+    "contains": "Satu-satunya hukum m"
+  },
+  {
+    "prompt": "kutipan dari francis crick",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Francis Crick",
+    "contains": "Jika kau ingin sukse"
+  },
+  {
+    "prompt": "kutipan terkenal dari suleiman yang agung",
+    "note": "Ronde v6 B4: tokoh kutipan (+100) - Suleiman yang Agung",
+    "contains": "Aku, Sultan Suleiman"
+  },
+  {
+    "prompt": "trivia dari alexander graham bell",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Alexander Graham Bell",
+    "contains": "Ia juga aktif mengaj"
+  },
+  {
+    "prompt": "trivia dari lionel messi",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Lionel Messi",
+    "contains": "Ia sempat mengalami "
+  },
+  {
+    "prompt": "trivia tentang werner heisenberg",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Werner Heisenberg",
+    "contains": "Prinsip ketidakpasti"
+  },
+  {
+    "prompt": "trivia dari gabriel garcia marquez",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Gabriel Garcia Marquez",
+    "contains": "Ia awalnya bekerja s"
+  },
+  {
+    "prompt": "fakta unik dari jacques cousteau",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Jacques Cousteau",
+    "contains": "Kapal risetnya, Caly"
+  },
+  {
+    "prompt": "fakta unik tentang dewi sartika",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Dewi Sartika",
+    "contains": "Ia mendirikan sekola"
+  },
+  {
+    "prompt": "fakta unik dari amelia earhart",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Amelia Earhart",
+    "contains": "Ia hilang bersama pe"
+  },
+  {
+    "prompt": "trivia tentang harriet tubman",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Harriet Tubman",
+    "contains": "Wajahnya direncanaka"
+  },
+  {
+    "prompt": "trivia dari sri mulyani indrawati",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Sri Mulyani Indrawati",
+    "contains": "Ia sempat meninggalk"
+  },
+  {
+    "prompt": "fakta unik tentang simon bolivar",
+    "note": "Ronde v6 B4: tokoh trivia (+100) - Simon Bolivar",
+    "contains": "Negara Bolivia dinam"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan barbara mcclintock",
+    "note": "Ronde v6 B4: tokoh relasi (+100) - Barbara McClintock",
+    "contains": "Thomas Hunt Morgan"
+  },
+  {
+    "prompt": "hubungan edward jenner dengan siapa",
+    "note": "Ronde v6 B4: tokoh relasi (+100) - Edward Jenner",
+    "contains": "Louis Pasteur"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan alexander fleming",
+    "note": "Ronde v6 B4: tokoh relasi (+100) - Alexander Fleming",
+    "contains": "Howard Florey"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan amerigo vespucci",
+    "note": "Ronde v6 B4: tokoh relasi (+100) - Amerigo Vespucci",
+    "contains": "Christopher Columbus"
+  },
+  {
+    "prompt": "hubungan nawal el saadawi dengan siapa",
+    "note": "Ronde v6 B4: tokoh relasi (+100) - Nawal El Saadawi",
+    "contains": "Simone de Beauvoir"
   }
 ]
