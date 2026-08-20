@@ -6738,5 +6738,180 @@
     "prompt": "27 desember itu hari apa",
     "note": "Ronde v7 B2: ekspansi hari internasional - 27 desember",
     "contains": "Kesiapsiagaan Epidemi"
+  },
+  {
+    "prompt": "ceritakan tentang fattoush",
+    "note": "Ronde v7 B3: kuliner baru profil - Fattoush",
+    "contains": "Fattoush"
+  },
+  {
+    "prompt": "ceritakan tentang lamington",
+    "note": "Ronde v7 B3: kuliner baru profil - Lamington",
+    "contains": "Lamington"
+  },
+  {
+    "prompt": "ceritakan tentang suya",
+    "note": "Ronde v7 B3: kuliner baru profil - Suya",
+    "contains": "Suya"
+  },
+  {
+    "prompt": "ceritakan tentang char kway teow",
+    "note": "Ronde v7 B3: kuliner baru profil - Char Kway Teow",
+    "contains": "Char Kway Teow"
+  },
+  {
+    "prompt": "ceritakan tentang kokoda",
+    "note": "Ronde v7 B3: kuliner baru profil - Kokoda",
+    "contains": "Kokoda"
+  },
+  {
+    "prompt": "apa itu bratwurst",
+    "note": "Ronde v7 B3: kuliner baru profil - Bratwurst",
+    "contains": "Bratwurst"
+  },
+  {
+    "prompt": "ceritakan tentang poi",
+    "note": "Ronde v7 B3: kuliner baru profil - Poi",
+    "contains": "Poi"
+  },
+  {
+    "prompt": "apa itu manakish",
+    "note": "Ronde v7 B3: kuliner baru profil - Manakish",
+    "contains": "Manakish"
+  },
+  {
+    "prompt": "apa itu bobotie",
+    "note": "Ronde v7 B3: kuliner baru profil - Bobotie",
+    "contains": "Bobotie"
+  },
+  {
+    "prompt": "apa itu naan",
+    "note": "Ronde v7 B3: kuliner baru profil - Naan",
+    "contains": "Naan"
+  },
+  {
+    "prompt": "ceritakan tentang lokum",
+    "note": "Ronde v7 B3: kuliner baru profil - Lokum",
+    "contains": "Lokum"
+  },
+  {
+    "prompt": "apa itu bun cha",
+    "note": "Ronde v7 B3: kuliner baru profil - Bun Cha",
+    "contains": "Bun Cha"
+  },
+  {
+    "prompt": "ceritakan tentang cassoulet",
+    "note": "Ronde v7 B3: kuliner baru profil - Cassoulet",
+    "contains": "Cassoulet"
+  },
+  {
+    "prompt": "ceritakan tentang umu",
+    "note": "Ronde v7 B3: kuliner baru profil - Umu",
+    "contains": "Umu"
+  },
+  {
+    "prompt": "ceritakan tentang egusi soup",
+    "note": "Ronde v7 B3: kuliner baru profil - Egusi Soup",
+    "contains": "Egusi Soup"
+  },
+  {
+    "prompt": "bahan utama doro wat apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Doro Wat",
+    "contains": "ayam"
+  },
+  {
+    "prompt": "bahan utama vegemite on toast apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Vegemite on Toast",
+    "contains": "roti panggang"
+  },
+  {
+    "prompt": "bahan utama arepa apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Arepa",
+    "contains": "tepung jagung"
+  },
+  {
+    "prompt": "bahan utama beef wellington apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Beef Wellington",
+    "contains": "daging sapi has"
+  },
+  {
+    "prompt": "bahan utama pupusa apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Pupusa",
+    "contains": "adonan jagung/beras"
+  },
+  {
+    "prompt": "bahan utama khao soi apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Khao Soi",
+    "contains": "mi telur"
+  },
+  {
+    "prompt": "bahan utama harira apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Harira",
+    "contains": "tomat"
+  },
+  {
+    "prompt": "bahan utama piri piri chicken apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Piri Piri Chicken",
+    "contains": "ayam panggang"
+  },
+  {
+    "prompt": "bahan utama kabsa apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Kabsa",
+    "contains": "nasi basmati"
+  },
+  {
+    "prompt": "bahan utama jerk chicken apa saja",
+    "note": "Ronde v7 B3: kuliner baru bahan - Jerk Chicken",
+    "contains": "ayam"
+  },
+  {
+    "prompt": "trivia tentang lomo saltado",
+    "note": "Ronde v7 B3: kuliner baru trivia - Lomo Saltado",
+    "contains": "Hidangan ini adalah "
+  },
+  {
+    "prompt": "trivia tentang biltong",
+    "note": "Ronde v7 B3: kuliner baru trivia - Biltong",
+    "contains": "Mirip beef jerky tap"
+  },
+  {
+    "prompt": "trivia tentang dolma",
+    "note": "Ronde v7 B3: kuliner baru trivia - Dolma",
+    "contains": "Tradisi membungkus i"
+  },
+  {
+    "prompt": "trivia tentang fufu",
+    "note": "Ronde v7 B3: kuliner baru trivia - Fufu",
+    "contains": "Ditumbuk hingga keny"
+  },
+  {
+    "prompt": "trivia tentang baba ganoush",
+    "note": "Ronde v7 B3: kuliner baru trivia - Baba Ganoush",
+    "contains": "Terong dipanggang du"
+  },
+  {
+    "prompt": "trivia tentang manti",
+    "note": "Ronde v7 B3: kuliner baru trivia - Manti",
+    "contains": "Sering disebut 'ravi"
+  },
+  {
+    "prompt": "trivia tentang smorrebrod",
+    "note": "Ronde v7 B3: kuliner baru trivia - Smorrebrod",
+    "contains": "Roti lapis terbuka k"
+  },
+  {
+    "prompt": "trivia tentang roti canai",
+    "note": "Ronde v7 B3: kuliner baru trivia - Roti Canai",
+    "contains": "Teknik melipat dan m"
+  },
+  {
+    "prompt": "trivia tentang lovo",
+    "note": "Ronde v7 B3: kuliner baru trivia - Lovo",
+    "contains": "Teknik memasak tradi"
+  },
+  {
+    "prompt": "trivia tentang tabbouleh",
+    "note": "Ronde v7 B3: kuliner baru trivia - Tabbouleh",
+    "contains": "Isiannya didominasi "
   }
 ]
