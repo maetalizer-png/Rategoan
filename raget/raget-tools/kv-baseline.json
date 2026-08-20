@@ -169,5 +169,27 @@
       "n_K": 57,
       "n_V": 6
     }
+  },
+  {
+    "label": "ronde-v7-final",
+    "timestamp": "2026-08-20T17:45:50.846Z",
+    "queryCount": 100,
+    "composition": {
+      "factoidExtras": 60,
+      "terbuka": 20,
+      "smalltalk": 20
+    },
+    "elapsedMs": 74893,
+    "metrics": {
+      "quality": 82,
+      "A": 70,
+      "A_feedbackStore": "belum ada rating (n=0, A blended memakai default 70%)",
+      "K": 68,
+      "U": 100,
+      "D": 100,
+      "V": 100,
+      "n_K": 57,
+      "n_V": 6
+    }
   }
 ]
