@@ -6964,5 +6964,100 @@
     "notContains": [
       "Masih inget cerita kamu sebelumnya"
     ]
+  },
+  {
+    "prompt": "terapkan 5 whys",
+    "note": "Ronde v7 B5: mode terapkan 5 Whys - mulai sesi A",
+    "contains": "Sebutkan masalah"
+  },
+  {
+    "prompt": "Website sering down",
+    "note": "Ronde v7 B5: 5 Whys - isi masalah A",
+    "contains": "why ke-1"
+  },
+  {
+    "prompt": "Traffic tiba-tiba melonjak",
+    "note": "Ronde v7 B5: 5 Whys - why 1 A",
+    "contains": "why ke-2"
+  },
+  {
+    "prompt": "Ada promo besar tanpa pemberitahuan ke tim infra",
+    "note": "Ronde v7 B5: 5 Whys - why 2 A",
+    "contains": "why ke-3"
+  },
+  {
+    "prompt": "Server tidak di-scale otomatis",
+    "note": "Ronde v7 B5: 5 Whys - why 3 A",
+    "contains": "why ke-4"
+  },
+  {
+    "prompt": "Belum ada auto-scaling policy",
+    "note": "Ronde v7 B5: 5 Whys - why 4 A",
+    "contains": "why ke-5"
+  },
+  {
+    "prompt": "Tim belum pernah setup auto-scaling sebelumnya",
+    "note": "Ronde v7 B5: 5 Whys - why 5 A, selesai otomatis",
+    "contains": "5 Whys selesai"
+  },
+  {
+    "prompt": "coba 5 whys bareng",
+    "note": "Ronde v7 B5: mode terapkan 5 Whys - mulai sesi B",
+    "contains": "Sebutkan masalah"
+  },
+  {
+    "prompt": "Laporan bulanan sering telat",
+    "note": "Ronde v7 B5: 5 Whys - isi masalah B",
+    "contains": "why ke-1"
+  },
+  {
+    "prompt": "Data dari tim lain baru masuk H-1",
+    "note": "Ronde v7 B5: 5 Whys - why 1 B",
+    "contains": "why ke-2"
+  },
+  {
+    "prompt": "selesai",
+    "note": "Ronde v7 B5: 5 Whys - berhenti lebih awal pakai kata selesai",
+    "contains": "5 Whys selesai"
+  },
+  {
+    "prompt": "terapkan swot",
+    "note": "Ronde v7 B5: mode terapkan SWOT - mulai sesi",
+    "contains": "Sebutkan ide, proyek"
+  },
+  {
+    "prompt": "Buka usaha kedai kopi",
+    "note": "Ronde v7 B5: SWOT - isi topik",
+    "contains": "Strengths"
+  },
+  {
+    "prompt": "Lokasi strategis, resep unik, modal cukup",
+    "note": "Ronde v7 B5: SWOT - isi strengths",
+    "contains": "Weaknesses"
+  },
+  {
+    "prompt": "Belum ada pengalaman F&B, SDM terbatas",
+    "note": "Ronde v7 B5: SWOT - isi weaknesses",
+    "contains": "Opportunities"
+  },
+  {
+    "prompt": "Tren kopi lokal naik, area perkantoran baru",
+    "note": "Ronde v7 B5: SWOT - isi opportunities",
+    "contains": "Threats"
+  },
+  {
+    "prompt": "Banyak kompetitor, harga bahan baku naik",
+    "note": "Ronde v7 B5: SWOT - isi threats, selesai",
+    "contains": "SWOT untuk"
+  },
+  {
+    "prompt": "apa itu 5 whys",
+    "note": "Ronde v7 B5: definisi 5 Whys tetap jalan (bukan mode terapkan)",
+    "contains": "akar masalah sebenarnya"
+  },
+  {
+    "prompt": "apa itu swot",
+    "note": "Ronde v7 B5: definisi SWOT tetap jalan (bukan mode terapkan)",
+    "contains": "Strengths, Weaknesses"
   }
 ]
