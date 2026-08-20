@@ -160,6 +160,13 @@ main {
   box-shadow: var(--shadow-fab);
 }
 
+/* Atribut hidden butuh selector lebih spesifik dari "#fab { display: flex }" di atas supaya
+   benar-benar bisa menyembunyikan tombol (dipakai app.js untuk menghindari tumpang tindih
+   dengan tombol kirim composer Asisten). */
+#fab[hidden] {
+  display: none;
+}
+
 #fab .ic {
   width: 21px;
   height: 21px;

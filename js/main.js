@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const todayKey = new Date().toDateString();
       if (localStorage.getItem(BRIEFING_DATE_KEY) !== todayKey) {
         localStorage.setItem(BRIEFING_DATE_KEY, todayKey);
-        toast.show(dailyBriefing.message());
+        toast.show(dailyBriefing.message(new Date(), auth.displayName()));
       }
     } catch (e) {}
   }

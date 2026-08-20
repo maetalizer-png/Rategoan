@@ -69,12 +69,5 @@ export const composer = {
         router.go('login');
       }
     };
-    document.querySelectorAll('.empty-chip').forEach((c) => {
-      c.onclick = () => {
-        inp.value = c.textContent;
-        this.autoGrow();
-        inp.focus();
-      };
-    });
   },
 };
