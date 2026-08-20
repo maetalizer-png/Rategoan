@@ -3,11 +3,12 @@ import { datariesBridge } from './dataries-bridge.js';
 
 // ---------- INTERNATIONAL DAYS DATABASE ----------
 // Hari-hari peringatan internasional yang mapan (mayoritas ditetapkan PBB/UNESCO/WHO).
-// Format tanggal: "DD-MM". CATATAN JUJUR (Ronde v6 B5): target ronde ini adalah 105->200;
-// yang benar-benar bisa diverifikasi tanggalnya dengan yakin (tanpa menebak) di sesi ini
-// adalah 105->146 (+41). Beberapa sumber pencarian yang dicoba memberi tanggal yang saling
-// bertentangan/tergeser untuk sejumlah hari peringatan lain - entri tersebut SENGAJA tidak
-// dimasukkan daripada menebak dan berisiko salah tanggal.
+// Format tanggal: "DD-MM". CATATAN JUJUR: target jangka panjang adalah 200; yang benar-benar
+// bisa diverifikasi tanggalnya dengan yakin (tanpa menebak) sejauh ini adalah 158 (79%) -
+// 105 dari Ronde v5, +41 dari Ronde v6 B5, +12 dari Ronde v7 B2. Beberapa sumber pencarian
+// yang dicoba tiap ronde memberi tanggal yang saling bertentangan/tergeser untuk sejumlah
+// hari peringatan lain - entri tersebut SENGAJA tidak dimasukkan daripada menebak dan
+// berisiko salah tanggal.
 
 const MONTH_ID = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
 
@@ -27,6 +28,7 @@ const INTERNATIONAL_DAYS = [
   { date: '21-02', name: 'Hari Bahasa Ibu Internasional' },
   { date: '01-03', name: 'Hari Nol Diskriminasi' },
   { date: '03-03', name: 'Hari Satwa Liar Sedunia' },
+  { date: '04-03', name: 'Hari Rekayasa Sedunia untuk Pembangunan Berkelanjutan' },
   { date: '08-03', name: 'Hari Perempuan Internasional' },
   { date: '14-03', name: 'Hari Matematika Internasional' },
   { date: '15-03', name: 'Hari Hak Konsumen Sedunia' },
@@ -81,16 +83,20 @@ const INTERNATIONAL_DAYS = [
   { date: '16-06', name: 'Hari Anak Afrika' },
   { date: '17-06', name: 'Hari Memerangi Desertifikasi dan Kekeringan Sedunia' },
   { date: '18-06', name: 'Hari Melawan Ujaran Kebencian Internasional' },
+  { date: '18-06', name: 'Hari Gastronomi Berkelanjutan Sedunia' },
   { date: '19-06', name: 'Hari Penghapusan Kekerasan Seksual dalam Konflik Internasional' },
   { date: '20-06', name: 'Hari Pengungsi Sedunia' },
   { date: '21-06', name: 'Hari Musik Sedunia' },
   { date: '21-06', name: 'Hari Yoga Internasional' },
   { date: '23-06', name: 'Hari Pelayanan Publik Internasional' },
+  { date: '25-06', name: 'Hari Pelaut Sedunia' },
   { date: '26-06', name: 'Hari Anti Penyalahgunaan dan Peredaran Gelap Narkoba Internasional' },
   { date: '26-06', name: 'Hari Dukungan bagi Korban Penyiksaan Internasional' },
+  { date: '29-06', name: 'Hari Tropis Internasional' },
   { date: '30-06', name: 'Hari Asteroid Sedunia' },
   { date: '11-07', name: 'Hari Populasi Sedunia' },
   { date: '15-07', name: 'Hari Keterampilan Pemuda Sedunia' },
+  { date: '17-07', name: 'Hari Keadilan Internasional Sedunia' },
   { date: '18-07', name: 'Hari Nelson Mandela Internasional' },
   { date: '20-07', name: 'Hari Catur Sedunia' },
   { date: '26-07', name: 'Hari Konservasi Ekosistem Mangrove Sedunia' },
@@ -106,6 +112,7 @@ const INTERNATIONAL_DAYS = [
   { date: '29-08', name: 'Hari Menentang Uji Coba Nuklir Internasional' },
   { date: '30-08', name: 'Hari Korban Penghilangan Paksa Internasional' },
   { date: '31-08', name: 'Hari Orang Keturunan Afrika Internasional' },
+  { date: '05-09', name: 'Hari Amal Internasional' },
   { date: '07-09', name: 'Hari Udara Bersih untuk Langit Biru Internasional' },
   { date: '08-09', name: 'Hari Literasi Internasional' },
   { date: '10-09', name: 'Hari Pencegahan Bunuh Diri Sedunia' },
@@ -115,9 +122,11 @@ const INTERNATIONAL_DAYS = [
   { date: '20-09', name: 'Hari Olahraga Universitas Internasional' },
   { date: '21-09', name: 'Hari Perdamaian Sedunia' },
   { date: '23-09', name: 'Hari Bahasa Isyarat Internasional' },
+  { date: '26-09', name: 'Hari Penghapusan Total Senjata Nuklir Internasional' },
   { date: '27-09', name: 'Hari Pariwisata Sedunia' },
   { date: '28-09', name: 'Hari Akses Informasi Universal' },
   { date: '29-09', name: 'Hari Kesadaran Kerugian dan Limbah Pangan Sedunia' },
+  { date: '30-09', name: 'Hari Penerjemahan Sedunia' },
   { date: '01-10', name: 'Hari Lanjut Usia Internasional' },
   { date: '02-10', name: 'Hari Anti Kekerasan Internasional' },
   { date: '04-10', name: 'Hari Hewan Sedunia' },
@@ -127,13 +136,16 @@ const INTERNATIONAL_DAYS = [
   { date: '11-10', name: 'Hari Anak Perempuan Internasional' },
   { date: '13-10', name: 'Hari Pengurangan Risiko Bencana Internasional' },
   { date: '15-10', name: 'Hari Wanita Pedesaan Internasional' },
+  { date: '15-10', name: 'Hari Cuci Tangan Sedunia' },
   { date: '16-10', name: 'Hari Pangan Sedunia' },
   { date: '17-10', name: 'Hari Penghapusan Kemiskinan Internasional' },
+  { date: '20-10', name: 'Hari Statistik Sedunia' },
   { date: '24-10', name: 'Hari PBB' },
   { date: '24-10', name: 'Hari Informasi Pembangunan Sedunia' },
   { date: '27-10', name: 'Hari Warisan Audiovisual Sedunia' },
   { date: '31-10', name: 'Hari Kota Sedunia' },
   { date: '02-11', name: 'Hari Mengakhiri Impunitas atas Kejahatan terhadap Jurnalis Internasional' },
+  { date: '03-11', name: 'Hari Cagar Biosfer Internasional' },
   { date: '05-11', name: 'Hari Kesadaran Tsunami Sedunia' },
   { date: '06-11', name: 'Hari Pencegahan Eksploitasi Lingkungan dalam Perang dan Konflik Bersenjata Internasional' },
   { date: '10-11', name: 'Hari Sains untuk Perdamaian dan Pembangunan Sedunia' },
@@ -158,6 +170,7 @@ const INTERNATIONAL_DAYS = [
   { date: '12-12', name: 'Hari Cakupan Kesehatan Semesta Internasional' },
   { date: '18-12', name: 'Hari Migran Internasional' },
   { date: '20-12', name: 'Hari Solidaritas Manusia Internasional' },
+  { date: '27-12', name: 'Hari Kesiapsiagaan Epidemi Internasional' },
 ];
 
 function findByDate(dd, mm) {
