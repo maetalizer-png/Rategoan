@@ -6678,5 +6678,65 @@
     "prompt": "prestasi marco polo",
     "note": "Ronde v7 B1: regresi regex prestasi tanpa apa saja",
     "contains": "Marco Polo"
+  },
+  {
+    "prompt": "4 maret itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 4 maret",
+    "contains": "Rekayasa"
+  },
+  {
+    "prompt": "18 juni itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 18 juni",
+    "contains": "Gastronomi"
+  },
+  {
+    "prompt": "25 juni itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 25 juni",
+    "contains": "Pelaut"
+  },
+  {
+    "prompt": "29 juni itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 29 juni",
+    "contains": "Tropis"
+  },
+  {
+    "prompt": "17 juli itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 17 juli",
+    "contains": "Keadilan Internasional"
+  },
+  {
+    "prompt": "5 september itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 5 september",
+    "contains": "Amal"
+  },
+  {
+    "prompt": "26 september itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 26 september",
+    "contains": "Senjata Nuklir"
+  },
+  {
+    "prompt": "30 september itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 30 september",
+    "contains": "Penerjemahan"
+  },
+  {
+    "prompt": "15 oktober itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 15 oktober",
+    "contains": "Cuci Tangan"
+  },
+  {
+    "prompt": "20 oktober itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 20 oktober",
+    "contains": "Statistik"
+  },
+  {
+    "prompt": "3 november itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 3 november",
+    "contains": "Cagar Biosfer"
+  },
+  {
+    "prompt": "27 desember itu hari apa",
+    "note": "Ronde v7 B2: ekspansi hari internasional - 27 desember",
+    "contains": "Kesiapsiagaan Epidemi"
   }
 ]
