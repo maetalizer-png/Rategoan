@@ -47,11 +47,11 @@ function remindersThisWeek(now) {
   return remindersStore.allActive().filter((r) => r.timestamp >= start && r.timestamp <= end);
 }
 
-const GREET_BY_PERIOD = { pagi: 'Selamat pagi!', siang: 'Selamat siang!', sore: 'Selamat sore!', malam: 'Selamat malam!' };
+const GREET_BY_PERIOD = { pagi: 'Selamat pagi', siang: 'Selamat siang', sore: 'Selamat sore', malam: 'Selamat malam' };
 
-function message(now) {
+function message(now, name) {
   const period = timeOfDay(now);
-  const greet = GREET_BY_PERIOD[period];
+  const greet = (name ? GREET_BY_PERIOD[period] + ', ' + name : GREET_BY_PERIOD[period]) + '!';
   const { events, reminders } = countToday(now);
   const base = !events && !reminders
     ? greet + ' Hari ini belum ada acara atau pengingat yang tercatat.'

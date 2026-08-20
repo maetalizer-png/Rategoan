@@ -6913,5 +6913,56 @@
     "prompt": "trivia tentang tabbouleh",
     "note": "Ronde v7 B3: kuliner baru trivia - Tabbouleh",
     "contains": "Isiannya didominasi "
+  },
+  {
+    "prompt": "aku baru aja lulus ujian, seneng banget!",
+    "note": "Ronde v7 B4: kontinuitas emosi POSITIF - trigger senang",
+    "contains": "Senang mendengarnya"
+  },
+  {
+    "prompt": "ibukota jepang apa?",
+    "note": "Ronde v7 B4: kontinuitas emosi senang - giliran 1",
+    "contains": "Masih kebawa seneng"
+  },
+  {
+    "prompt": "siapa itu isaac newton?",
+    "note": "Ronde v7 B4: kontinuitas emosi senang - giliran 2",
+    "contains": "Masih kebawa seneng"
+  },
+  {
+    "prompt": "apa itu hukum newton?",
+    "note": "Ronde v7 B4: kontinuitas emosi senang - giliran 3 (maks)",
+    "contains": "Masih kebawa seneng"
+  },
+  {
+    "prompt": "kapan hari kemerdekaan indonesia?",
+    "note": "Ronde v7 B4: kontinuitas emosi senang - giliran 4 meluruh",
+    "notContains": [
+      "Masih kebawa seneng"
+    ]
+  },
+  {
+    "prompt": "aku lagi sedih banget hari ini",
+    "note": "Ronde v7 B4: sinyal reset - trigger sedih",
+    "contains": "sedih"
+  },
+  {
+    "prompt": "ibukota perancis apa?",
+    "note": "Ronde v7 B4: sinyal reset - giliran 1 setelah sedih (kontinuitas aktif)",
+    "contains": "Masih inget cerita kamu sebelumnya"
+  },
+  {
+    "prompt": "aku udah baikan kok sekarang",
+    "note": "Ronde v7 B4: sinyal reset eksplisit - langsung putus kontinuitas di giliran yang sama",
+    "notContains": [
+      "Masih inget cerita kamu sebelumnya"
+    ]
+  },
+  {
+    "prompt": "siapa presiden pertama indonesia?",
+    "note": "Ronde v7 B4: sinyal reset - giliran setelah reset, tidak ada sisa kontinuitas",
+    "notContains": [
+      "Masih inget cerita kamu sebelumnya"
+    ]
   }
 ]

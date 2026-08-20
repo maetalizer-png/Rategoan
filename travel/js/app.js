@@ -18,6 +18,9 @@ const TAB_ICON = { jelajah: 'globe', kuis: 'quiz', sapaan: 'lang', trip: 'cal', 
 function goTab(t) {
   document.querySelectorAll('.bot button').forEach((x) => x.classList.toggle('on', x.dataset.tab === t));
   $('.top').hidden = t !== 'jelajah';
+  // FAB (tombol acak negara) disembunyikan di tab Asisten - posisinya di pojok kanan bawah
+  // bertumpuk dengan tombol kirim composer asisten yang menempati sudut yang sama.
+  $('#fab').hidden = t === 'asisten';
   if (t === 'jelajah') renderJelajah(($('#q') || {}).value || '');
   if (t === 'kuis') showKuisHome();
   if (t === 'sapaan') renderSapaan();

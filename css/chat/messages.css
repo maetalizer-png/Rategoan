@@ -15,31 +15,6 @@
   color: var(--rg-accent);
 }
 
-.empty-hint {
-  font-size: 12px;
-  color: var(--rg-muted);
-}
-
-.empty-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
-.empty-chip {
-  padding: 10px 14px;
-  border-radius: var(--rg-pill);
-  border: 1px solid var(--rg-line);
-  color: var(--rg-text);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.empty-chip:active {
-  background: var(--rg-ring);
-}
-
 .msg {
   max-width: 82%;
   font-size: 15px;

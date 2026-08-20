@@ -17,32 +17,6 @@ import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
-const CHIPS_BY_PERIOD = {
-  pagi: ['Ringkas hari saya', 'Apa ibukota Indonesia', 'Ide konten produktif'],
-  siang: ['Apa makanan khas Turki', 'Ringkas hari saya', 'Jelaskan sesuatu'],
-  sore: ['Ide konten', 'Manfaat olahraga', 'Cara membuat kopi'],
-  malam: ['Ceritakan tentang Jepang', 'Ingatkan saya 30 menit lagi', 'Ringkas percakapan'],
-};
-
-function periodOfDay() {
-  const h = new Date().getHours();
-  if (h >= 4 && h < 10) return 'pagi';
-  if (h >= 10 && h < 15) return 'siang';
-  if (h >= 15 && h < 18) return 'sore';
-  return 'malam';
-}
-
-function applySmartChips() {
-  const chips = document.querySelectorAll('.empty-chip');
-  const labels = CHIPS_BY_PERIOD[periodOfDay()];
-  chips.forEach((c, i) => {
-    if (labels[i]) {
-      c.textContent = labels[i];
-      c.setAttribute('aria-label', 'Kirim contoh: ' + labels[i]);
-    }
-  });
-}
-
 function buildExtraChip(label, onClick, iconName) {
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -207,7 +181,6 @@ export const chat = {
     if (empty) empty.hidden = has;
     box.style.display = has ? '' : 'none';
     if (!has) {
-      applySmartChips();
       scrolldown.update();
       return;
     }
@@ -282,11 +255,7 @@ export const chat = {
     const d = document.createElement('div');
     d.className = 'msg ai';
     const body = document.createElement('div');
-    const tm = document.createElement('span');
-    tm.className = 'time';
-    tm.textContent = fmtTime(Date.now());
     d.appendChild(body);
-    d.appendChild(tm);
     $('messages').appendChild(d);
     if (follow && !reduceMotion() && text.length > 0) {
       let skip = false;
@@ -305,6 +274,13 @@ export const chat = {
       body.removeEventListener('pointerdown', onTap);
     }
     body.innerHTML = markdown.render(text);
+    // Jam baru dibuat & ditambahkan SETELAH animasi ketik selesai (bukan di awal, sebelum
+    // animasi mulai) - kalau ditambah di awal, jam ikut "melompat" turun tiap frame mengikuti
+    // tinggi body yang masih tumbuh dari kosong, kesannya jam "buru-buru ngikutin" jawaban.
+    const tm = document.createElement('span');
+    tm.className = 'time';
+    tm.textContent = fmtTime(Date.now());
+    d.appendChild(tm);
     const actions = buildActions(text);
     if (URL_RE.test(text)) {
       actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0]), 'globe'));
