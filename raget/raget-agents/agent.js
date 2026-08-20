@@ -428,8 +428,9 @@ async function respondCore(messages, prompt) {
     return postProcess(worldReply);
   }
 
-  if (frameworkApply.START_RE.test(text)) {
-    const frameworkStart = frameworkApply.start();
+  const frameworkKind = frameworkApply.detectStart(text);
+  if (frameworkKind) {
+    const frameworkStart = frameworkApply.start(frameworkKind);
     ragetDb.addNote(text, frameworkStart, null, 'framework_apply');
     return postProcess(frameworkStart);
   }
