@@ -6418,5 +6418,265 @@
     "prompt": "5, 2",
     "note": "Ronde v6 B5.5: mode terapkan framework - skor pilihan 2 B, selesai",
     "contains": "Decision Matrix selesai"
+  },
+  {
+    "prompt": "ceritakan tentang jack ma",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Jack Ma",
+    "contains": "Jack Ma"
+  },
+  {
+    "prompt": "ceritakan tentang david livingstone",
+    "note": "Ronde v7 B1: tokoh profil (+91) - David Livingstone",
+    "contains": "David Livingstone"
+  },
+  {
+    "prompt": "siapa itu mark twain",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Mark Twain",
+    "contains": "Mark Twain"
+  },
+  {
+    "prompt": "siapa itu diego maradona",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Diego Maradona",
+    "contains": "Diego Maradona"
+  },
+  {
+    "prompt": "siapa itu karl benz",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Karl Benz",
+    "contains": "Karl Benz"
+  },
+  {
+    "prompt": "biografi dari simone biles",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Simone Biles",
+    "contains": "Simone Biles"
+  },
+  {
+    "prompt": "biografi dari miguel de cervantes",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Miguel de Cervantes",
+    "contains": "Miguel de Cervantes"
+  },
+  {
+    "prompt": "ceritakan tentang sam walton",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Sam Walton",
+    "contains": "Sam Walton"
+  },
+  {
+    "prompt": "ceritakan tentang larry page",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Larry Page",
+    "contains": "Larry Page"
+  },
+  {
+    "prompt": "biografi dari babe ruth",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Babe Ruth",
+    "contains": "Babe Ruth"
+  },
+  {
+    "prompt": "ceritakan tentang henri matisse",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Henri Matisse",
+    "contains": "Henri Matisse"
+  },
+  {
+    "prompt": "ceritakan tentang buzz aldrin",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Buzz Aldrin",
+    "contains": "Buzz Aldrin"
+  },
+  {
+    "prompt": "biografi dari matthew henson",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Matthew Henson",
+    "contains": "Matthew Henson"
+  },
+  {
+    "prompt": "biografi dari richard wagner",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Richard Wagner",
+    "contains": "Richard Wagner"
+  },
+  {
+    "prompt": "siapa itu alexander von humboldt",
+    "note": "Ronde v7 B1: tokoh profil (+91) - Alexander von Humboldt",
+    "contains": "Alexander von Humboldt"
+  },
+  {
+    "prompt": "prestasi sigmund freud apa saja",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Sigmund Freud",
+    "contains": "Sigmund Freud"
+  },
+  {
+    "prompt": "prestasi ray kroc apa saja",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Ray Kroc",
+    "contains": "Ray Kroc"
+  },
+  {
+    "prompt": "apa pencapaian homer",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Homer",
+    "contains": "Homer"
+  },
+  {
+    "prompt": "apa pencapaian sutan sjahrir",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Sutan Sjahrir",
+    "contains": "Sutan Sjahrir"
+  },
+  {
+    "prompt": "prestasi edwin hubble apa saja",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Edwin Hubble",
+    "contains": "Edwin Hubble"
+  },
+  {
+    "prompt": "pencapaian johannes vermeer",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Johannes Vermeer",
+    "contains": "Johannes Vermeer"
+  },
+  {
+    "prompt": "prestasi rembrandt apa saja",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Rembrandt",
+    "contains": "Rembrandt"
+  },
+  {
+    "prompt": "apa pencapaian sally ride",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Sally Ride",
+    "contains": "Sally Ride"
+  },
+  {
+    "prompt": "apa pencapaian rene descartes",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Rene Descartes",
+    "contains": "Rene Descartes"
+  },
+  {
+    "prompt": "apa pencapaian frederic chopin",
+    "note": "Ronde v7 B1: tokoh pencapaian (+91) - Frederic Chopin",
+    "contains": "Frederic Chopin"
+  },
+  {
+    "prompt": "quote dari leif erikson",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Leif Erikson",
+    "contains": "Lautan yang tak dike"
+  },
+  {
+    "prompt": "kutipan dari tiger woods",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Tiger Woods",
+    "contains": "Aku selalu percaya, "
+  },
+  {
+    "prompt": "kutipan dari serena williams",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Serena Williams",
+    "contains": "Aku selalu percaya b"
+  },
+  {
+    "prompt": "kutipan dari blaise pascal",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Blaise Pascal",
+    "contains": "Hati punya alasannya"
+  },
+  {
+    "prompt": "kutipan terkenal dari immanuel kant",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Immanuel Kant",
+    "contains": "Bertindaklah hanya m"
+  },
+  {
+    "prompt": "kutipan terkenal dari michael jordan",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Michael Jordan",
+    "contains": "Aku bisa menerima ke"
+  },
+  {
+    "prompt": "kutipan terkenal dari martin luther",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Martin Luther",
+    "contains": "Di sinilah aku berdi"
+  },
+  {
+    "prompt": "kutipan terkenal dari toni morrison",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Toni Morrison",
+    "contains": "Jika ada buku yang i"
+  },
+  {
+    "prompt": "quote dari sergey brin",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Sergey Brin",
+    "contains": "Kegagalan besar seri"
+  },
+  {
+    "prompt": "quote dari bob marley",
+    "note": "Ronde v7 B1: tokoh kutipan (+91) - Bob Marley",
+    "contains": "Cintai hidupmu, jala"
+  },
+  {
+    "prompt": "trivia tentang linus torvalds",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Linus Torvalds",
+    "contains": "Ia awalnya membuat L"
+  },
+  {
+    "prompt": "trivia dari voltaire",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Voltaire",
+    "contains": "Nama aslinya adalah "
+  },
+  {
+    "prompt": "trivia dari otto von habsburg",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Otto von Habsburg",
+    "contains": "Meski memerintah kek"
+  },
+  {
+    "prompt": "fakta unik dari carl jung",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Carl Jung",
+    "contains": "Hubungannya dengan F"
+  },
+  {
+    "prompt": "trivia tentang dante alighieri",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Dante Alighieri",
+    "contains": "Ia diasingkan dari k"
+  },
+  {
+    "prompt": "trivia tentang gustav klimt",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Gustav Klimt",
+    "contains": "Ia sering menggunaka"
+  },
+  {
+    "prompt": "trivia tentang sultan hasanuddin",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Sultan Hasanuddin",
+    "contains": "Perlawanannya berakh"
+  },
+  {
+    "prompt": "fakta unik tentang karl marx",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Karl Marx",
+    "contains": "Ia hidup dalam kemis"
+  },
+  {
+    "prompt": "fakta unik tentang vint cerf",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Vint Cerf",
+    "contains": "Ia memakai alat bant"
+  },
+  {
+    "prompt": "trivia tentang chinua achebe",
+    "note": "Ronde v7 B1: tokoh trivia (+91) - Chinua Achebe",
+    "contains": "Novelnya 'Things Fal"
+  },
+  {
+    "prompt": "hubungan adam smith dengan siapa",
+    "note": "Ronde v7 B1: tokoh relasi (+91) - Adam Smith",
+    "contains": "David Ricardo"
+  },
+  {
+    "prompt": "hubungan nicolaus copernicus dengan siapa",
+    "note": "Ronde v7 B1: tokoh relasi (+91) - Nicolaus Copernicus",
+    "contains": "Galileo Galilei"
+  },
+  {
+    "prompt": "hubungan elvis presley dengan siapa",
+    "note": "Ronde v7 B1: tokoh relasi (+91) - Elvis Presley",
+    "contains": "Colonel Tom Parker"
+  },
+  {
+    "prompt": "siapa yang berhubungan dengan louis agassiz",
+    "note": "Ronde v7 B1: tokoh relasi (+91) - Louis Agassiz",
+    "contains": "Alexander von Humboldt"
+  },
+  {
+    "prompt": "hubungan george orwell dengan siapa",
+    "note": "Ronde v7 B1: tokoh relasi (+91) - George Orwell",
+    "contains": "Aldous Huxley"
+  },
+  {
+    "prompt": "pencapaian usain bolt",
+    "note": "Ronde v7 B1: regresi regex pencapaian tanpa apa saja",
+    "contains": "Usain Bolt"
+  },
+  {
+    "prompt": "prestasi marco polo",
+    "note": "Ronde v7 B1: regresi regex prestasi tanpa apa saja",
+    "contains": "Marco Polo"
   }
 ]
