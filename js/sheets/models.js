@@ -3,17 +3,25 @@ import { haptics } from '../utils/haptics.js';
 import { toast } from '../core/toast.js';
 import { sheets } from './sheets.js';
 import { ai } from '../ai/ai.js';
+import { llmModels } from '../../raget/raget-llm/llm-models.js';
 
 const CHECK_SVG =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
+// Daftar model TIDAK didefinisikan di sini - diambil langsung dari registry
+// tunggal raget/raget-llm/llm-models.js (kontrak provider) supaya UI picker
+// ini tidak bisa lagi berbeda dari engine yang benar-benar berjalan, dan
+// supaya kelas engine (rule-template/local-neural/external) selalu tampil
+// jujur ke pengguna - lihat komentar di llm-models.js.
 export const models = {
   KEY: 'rategoan_model',
-  list: [{ id: 'raget-1.0', name: 'Raget 1.0' }],
-  active: 'raget-1.0',
+  get list() {
+    return llmModels.list;
+  },
+  active: llmModels.active,
   load() {
     const v = localStorage.getItem(this.KEY);
-    if (v) this.active = v;
+    if (v && llmModels.find(v)) this.active = v;
   },
   open() {
     this.render();
@@ -26,10 +34,17 @@ export const models = {
     this.list.forEach((m) => {
       const b = document.createElement('button');
       b.className = 'model-item' + (m.id === this.active ? ' active' : '');
+      const info = document.createElement('span');
+      info.className = 'model-info';
       const nm = document.createElement('span');
       nm.className = 'model-name';
       nm.textContent = m.name;
-      b.appendChild(nm);
+      const cls = document.createElement('span');
+      cls.className = 'model-class';
+      cls.textContent = llmModels.classLabel(m.engineClass);
+      info.appendChild(nm);
+      info.appendChild(cls);
+      b.appendChild(info);
       if (m.id === this.active) {
         const ck = document.createElement('span');
         ck.className = 'model-check';
