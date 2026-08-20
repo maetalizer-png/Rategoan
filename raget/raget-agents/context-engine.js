@@ -1,25 +1,44 @@
 import { detectMood } from '../../utils/text.js';
 
 // ---------- EMOTIONAL CONTINUITY (lintas giliran, maks 3) ----------
-// Mengingat mood negatif (sedih/marah/capek) dari giliran-giliran sebelumnya (maks 3 giliran
-// ke depan sebelum meluruh) supaya nada balasan tetap lembut walau giliran berikutnya
-// pertanyaannya netral (mis. factoid biasa) - bukan berpura-pura mendeteksi emosi baru yang
-// tidak ada, hanya jujur mereferensikan konteks yang benar-benar terjadi sebelumnya.
+// Mengingat mood dari giliran-giliran sebelumnya (maks 3 giliran ke depan sebelum meluruh)
+// supaya nada balasan tetap konsisten walau giliran berikutnya pertanyaannya netral (mis.
+// factoid biasa) - bukan berpura-pura mendeteksi emosi baru yang tidak ada, hanya jujur
+// mereferensikan konteks yang benar-benar terjadi sebelumnya.
+// Ronde v7 B4: selain mood negatif (sedih/marah/capek), mood POSITIF (senang) juga sekarang
+// dilacak - supaya nada ceria juga ikut "menular" ke giliran berikutnya, bukan cuma nada
+// meredam. Ditambah deteksi sinyal reset eksplisit ("udah baikan", "udah mendingan", dst.)
+// yang langsung memutus kontinuitas lebih awal ketimbang menunggu peluruhan 3 giliran -
+// kalau user sendiri bilang sudah baikan, jangan tetap sok-sokan "menular"kan mood lama.
 
 const EMOTION_CONTINUITY_MAX_TURNS = 3;
 const NEGATIVE_MOODS = new Set(['sedih', 'marah', 'capek']);
+const POSITIVE_MOODS = new Set(['senang']);
+const TRACKED_MOODS = new Set([...NEGATIVE_MOODS, ...POSITIVE_MOODS]);
 const CONTINUITY_OPENERS = {
   sedih: 'Masih inget cerita kamu sebelumnya, semoga sekarang udah agak mendingan. ',
   marah: 'Semoga sekarang kamu udah agak lebih tenang dari sebelumnya. ',
   capek: 'Semoga sekarang kamu udah sempat istirahat sedikit dari yang tadi. ',
+  senang: 'Masih kebawa seneng nih abis dengar kabar baikmu tadi. ',
 };
+
+// Sinyal eksplisit bahwa mood sebelumnya sudah berlalu - dicek SEBELUM detectMood() supaya
+// frasa seperti "udah gak sedih lagi" tidak salah tertangkap sebagai mood "sedih" baru
+// (detectMood cuma cari kemunculan kata, tidak paham negasi).
+const RESET_SIGNAL_RE =
+  /\b(udah|sudah)\s+(baikan|mendingan|lebih\s+baik(an)?|tenang(an)?|oke(an)?\s+kok)\b|\b(udah|sudah)\s+(gak|nggak|tidak)\s+(sedih|marah|kesel|kesal|capek)(\s+lagi)?\b/i;
 
 let lastEmotion = null;
 let turnsSinceEmotion = 0;
 
 function noteTurnMood(text) {
-  const mood = detectMood(String(text || ''));
-  if (mood && NEGATIVE_MOODS.has(mood)) {
+  const t = String(text || '');
+  if (RESET_SIGNAL_RE.test(t.toLowerCase())) {
+    resetEmotionalContinuity();
+    return;
+  }
+  const mood = detectMood(t);
+  if (mood && TRACKED_MOODS.has(mood)) {
     lastEmotion = mood;
     turnsSinceEmotion = 0;
     return;
@@ -27,14 +46,18 @@ function noteTurnMood(text) {
   if (lastEmotion) {
     turnsSinceEmotion++;
     if (turnsSinceEmotion >= EMOTION_CONTINUITY_MAX_TURNS) {
-      lastEmotion = null;
-      turnsSinceEmotion = 0;
+      resetEmotionalContinuity();
     }
   }
 }
 
 function tryEmotionalContinuityOpener(text) {
-  const currentMood = detectMood(String(text || ''));
+  const t = String(text || '');
+  // Sinyal reset dicek di sini juga (bukan cuma di noteTurnMood) karena agent.js menghitung
+  // opener giliran ini SEBELUM memanggil noteTurnMood() - tanpa ini, giliran yang berisi
+  // sinyal reset itu sendiri masih akan salah menampilkan opener kontinuitas lama.
+  if (RESET_SIGNAL_RE.test(t.toLowerCase())) return null;
+  const currentMood = detectMood(t);
   if (currentMood) return null;
   if (!lastEmotion) return null;
   return CONTINUITY_OPENERS[lastEmotion] || null;
