@@ -15,13 +15,15 @@
   display: none;
   font-size: 11px;
   color: var(--rg-muted);
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #model-status.active {
   display: block;
-  padding: 6px 16px;
-  border-bottom: 1px solid var(--rg-line);
 }
 
 #btn-voice-input.listening {
