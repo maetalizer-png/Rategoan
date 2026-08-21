@@ -1,0 +1,310 @@
+[
+  {
+    "id": "minuman-flat-white",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Flat White",
+    "tags": [
+      "flat white",
+      "australia",
+      "kopi"
+    ],
+    "teks": "Flat White — kopi susu dengan lapisan busa tipis, diyakini berasal dari Australia atau Selandia Baru dan populer di seluruh dunia.",
+    "meta": {
+      "country": "Australia",
+      "type": "minuman",
+      "tags": [
+        "flat white",
+        "australia",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-bir-australia",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Bir Australia",
+    "tags": [
+      "bir",
+      "australia"
+    ],
+    "teks": "Bir Australia (VB/XXXX) — Australia punya budaya bir santai yang kuat, dengan merek populer seperti Victoria Bitter dan XXXX.",
+    "meta": {
+      "country": "Australia",
+      "type": "minuman",
+      "tags": [
+        "bir",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-wine-australia",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Wine Australia",
+    "tags": [
+      "wine",
+      "australia"
+    ],
+    "teks": "Wine Australia — wilayah seperti Barossa Valley terkenal sebagai penghasil wine berkualitas tinggi, terutama Shiraz.",
+    "meta": {
+      "country": "Australia",
+      "type": "minuman",
+      "tags": [
+        "wine",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-l-p",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "L&P",
+    "tags": [
+      "lp",
+      "selandia baru"
+    ],
+    "teks": "L&P (Lemon & Paeroa) — minuman bersoda rasa lemon khas Selandia Baru, dianggap minuman ikonik nasional.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "minuman",
+      "tags": [
+        "lp",
+        "selandia baru"
+      ]
+    }
+  },
+  {
+    "id": "minuman-wine-selandia-baru",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Wine Selandia Baru",
+    "tags": [
+      "wine",
+      "selandia baru",
+      "marlborough"
+    ],
+    "teks": "Wine Selandia Baru — terkenal dengan Sauvignon Blanc dari wilayah Marlborough yang jadi salah satu wine putih terbaik dunia.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "minuman",
+      "tags": [
+        "wine",
+        "selandia baru",
+        "marlborough"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kava",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Kava",
+    "tags": [
+      "kava",
+      "fiji"
+    ],
+    "teks": "Kava — minuman tradisional dari akar tanaman kava yang punya efek menenangkan, penting dalam upacara adat Fiji dan Pasifik.",
+    "meta": {
+      "country": "Fiji",
+      "type": "minuman",
+      "tags": [
+        "kava",
+        "fiji"
+      ]
+    }
+  },
+  {
+    "id": "minuman-air-kelapa-fiji",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Air Kelapa Fiji",
+    "tags": [
+      "air kelapa",
+      "fiji"
+    ],
+    "teks": "Air Kelapa Fiji — air kelapa segar langsung dari buahnya, minuman sehari-hari yang menyegarkan di kepulauan tropis Fiji.",
+    "meta": {
+      "country": "Fiji",
+      "type": "minuman",
+      "tags": [
+        "air kelapa",
+        "fiji"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kava-vanuatu",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Kava Vanuatu",
+    "tags": [
+      "kava",
+      "vanuatu"
+    ],
+    "teks": "Kava Vanuatu — Vanuatu dikenal memiliki kava dengan kadar dan kualitas tinggi, diminum di nakamal (rumah komunitas) tradisional.",
+    "meta": {
+      "country": "Vanuatu",
+      "type": "minuman",
+      "tags": [
+        "kava",
+        "vanuatu"
+      ]
+    }
+  },
+  {
+    "id": "minuman-otai",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Otai",
+    "tags": [
+      "otai",
+      "tonga"
+    ],
+    "teks": "Otai — minuman segar dari campuran buah tropis dan santan khas Tonga dan Samoa, diminum dingin saat cuaca panas.",
+    "meta": {
+      "country": "Tonga",
+      "type": "minuman",
+      "tags": [
+        "otai",
+        "tonga"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kava-samoa",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Kava Samoa",
+    "tags": [
+      "kava",
+      "samoa"
+    ],
+    "teks": "Kava Samoa — bagian penting dari upacara adat ava di Samoa, diminum dalam mangkuk kayu bersama komunitas.",
+    "meta": {
+      "country": "Samoa",
+      "type": "minuman",
+      "tags": [
+        "kava",
+        "samoa"
+      ]
+    }
+  },
+  {
+    "id": "minuman-air-kelapa-papua-nugini",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Air Kelapa Papua Nugini",
+    "tags": [
+      "air kelapa",
+      "papua new guinea"
+    ],
+    "teks": "Air Kelapa Papua Nugini — minuman alami dari kelapa muda, sumber hidrasi utama di banyak desa pesisir Papua Nugini.",
+    "meta": {
+      "country": "Papua New Guinea",
+      "type": "minuman",
+      "tags": [
+        "air kelapa",
+        "papua new guinea"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-papua-nugini",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Kopi Papua Nugini",
+    "tags": [
+      "kopi",
+      "papua new guinea"
+    ],
+    "teks": "Kopi Papua Nugini — kopi arabika dataran tinggi dengan cita rasa kaya, menjadi salah satu komoditas ekspor penting negara ini.",
+    "meta": {
+      "country": "Papua New Guinea",
+      "type": "minuman",
+      "tags": [
+        "kopi",
+        "papua new guinea"
+      ]
+    }
+  },
+  {
+    "id": "minuman-solbrew",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "SolBrew",
+    "tags": [
+      "solbrew",
+      "kepulauan solomon"
+    ],
+    "teks": "Bir Kepulauan Solomon (SolBrew) — merek bir lokal populer di Kepulauan Solomon, sering dinikmati saat berkumpul santai.",
+    "meta": {
+      "country": "Kepulauan Solomon",
+      "type": "minuman",
+      "tags": [
+        "solbrew",
+        "kepulauan solomon"
+      ]
+    }
+  },
+  {
+    "id": "minuman-jus-pandanus",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Jus Pandanus",
+    "tags": [
+      "pandanus",
+      "kepulauan marshall"
+    ],
+    "teks": "Jus Pandanus — minuman dari buah pandan khas beberapa pulau Pasifik seperti Kiribati dan Kepulauan Marshall, rasa manis unik.",
+    "meta": {
+      "country": "Kepulauan Marshall",
+      "type": "minuman",
+      "tags": [
+        "pandanus",
+        "kepulauan marshall"
+      ]
+    }
+  },
+  {
+    "id": "minuman-billy-tea",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Billy Tea",
+    "tags": [
+      "billy tea",
+      "australia"
+    ],
+    "teks": "Billy Tea — teh yang diseduh dalam kaleng logam (billy can) di atas api unggun, tradisi khas kehidupan luar (outback) Australia.",
+    "meta": {
+      "country": "Australia",
+      "type": "minuman",
+      "tags": [
+        "billy tea",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-pinot-noir-selandia-baru",
+    "kategori": "minuman",
+    "wilayah": "osenia",
+    "nama": "Pinot Noir Selandia Baru",
+    "tags": [
+      "pinot noir",
+      "selandia baru"
+    ],
+    "teks": "Anggur Selandia Baru Pinot Noir — wilayah Central Otago terkenal sebagai penghasil Pinot Noir berkualitas tinggi di belahan bumi selatan.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "minuman",
+      "tags": [
+        "pinot noir",
+        "selandia baru"
+      ]
+    }
+  }
+]

@@ -1,0 +1,312 @@
+[
+  {
+    "id": "minuman-teh-tarik",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Teh Tarik",
+    "tags": [
+      "teh tarik",
+      "malaysia"
+    ],
+    "teks": "Teh Tarik — minuman teh susu khas Malaysia, disebut \"tarik\" karena cara menuangnya bolak-balik untuk membuat busa.",
+    "meta": {
+      "country": "Malaysia",
+      "type": "minuman",
+      "tags": [
+        "teh tarik",
+        "malaysia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-luwak",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Kopi Luwak",
+    "tags": [
+      "kopi luwak",
+      "indonesia"
+    ],
+    "teks": "Kopi Luwak — kopi khas Indonesia yang diproses dari biji kopi yang telah dimakan dan dikeluarkan oleh luwak.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "minuman",
+      "tags": [
+        "kopi luwak",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-es-teh-manis",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Es Teh Manis",
+    "tags": [
+      "es teh",
+      "indonesia"
+    ],
+    "teks": "Es Teh Manis — minuman teh dingin manis yang jadi pendamping makan sehari-hari yang populer di Indonesia.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "minuman",
+      "tags": [
+        "es teh",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-matcha",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Matcha",
+    "tags": [
+      "matcha",
+      "jepang"
+    ],
+    "teks": "Matcha — teh hijau bubuk khas Jepang, diseduh dengan kocokan bambu (chasen) dalam upacara minum teh tradisional.",
+    "meta": {
+      "country": "Jepang",
+      "type": "minuman",
+      "tags": [
+        "matcha",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sake",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Sake",
+    "tags": [
+      "sake",
+      "jepang"
+    ],
+    "teks": "Sake — minuman beralkohol khas Jepang yang difermentasi dari beras, sering disajikan hangat atau dingin.",
+    "meta": {
+      "country": "Jepang",
+      "type": "minuman",
+      "tags": [
+        "sake",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "minuman-soju",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Soju",
+    "tags": [
+      "soju",
+      "korea"
+    ],
+    "teks": "Soju — minuman beralkohol suling khas Korea Selatan, populer diminum bersama makanan panggang atau saat berkumpul.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "minuman",
+      "tags": [
+        "soju",
+        "korea"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sikhye",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Sikhye",
+    "tags": [
+      "sikhye",
+      "korea"
+    ],
+    "teks": "Sikhye — minuman tradisional Korea dari beras fermentasi manis, sering disajikan sebagai pencuci mulut dingin.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "minuman",
+      "tags": [
+        "sikhye",
+        "korea"
+      ]
+    }
+  },
+  {
+    "id": "minuman-teh-tiongkok",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Teh Tiongkok",
+    "tags": [
+      "teh",
+      "tiongkok",
+      "cha"
+    ],
+    "teks": "Teh Tiongkok (Cha) — beragam jenis teh seperti oolong, hijau, dan pu-erh, minum teh adalah bagian penting budaya Tiongkok.",
+    "meta": {
+      "country": "Tiongkok",
+      "type": "minuman",
+      "tags": [
+        "teh",
+        "tiongkok",
+        "cha"
+      ]
+    }
+  },
+  {
+    "id": "minuman-baijiu",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Baijiu",
+    "tags": [
+      "baijiu",
+      "tiongkok"
+    ],
+    "teks": "Baijiu — minuman beralkohol suling khas Tiongkok dengan kadar alkohol tinggi, sering dipakai untuk bersulang saat perjamuan.",
+    "meta": {
+      "country": "Tiongkok",
+      "type": "minuman",
+      "tags": [
+        "baijiu",
+        "tiongkok"
+      ]
+    }
+  },
+  {
+    "id": "minuman-chai",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Chai",
+    "tags": [
+      "chai",
+      "india"
+    ],
+    "teks": "Chai — teh susu berempah khas India, dicampur kayu manis, kapulaga, jahe, dan cengkeh.",
+    "meta": {
+      "country": "India",
+      "type": "minuman",
+      "tags": [
+        "chai",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "minuman-lassi",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Lassi",
+    "tags": [
+      "lassi",
+      "india"
+    ],
+    "teks": "Lassi — minuman yogurt khas India, bisa manis dengan mangga atau asin dengan campuran rempah.",
+    "meta": {
+      "country": "India",
+      "type": "minuman",
+      "tags": [
+        "lassi",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "minuman-thai-iced-tea",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Thai Iced Tea",
+    "tags": [
+      "thai iced tea",
+      "thailand"
+    ],
+    "teks": "Thai Iced Tea — teh manis dengan susu kental khas Thailand, disajikan dingin dengan warna oranye khas.",
+    "meta": {
+      "country": "Thailand",
+      "type": "minuman",
+      "tags": [
+        "thai iced tea",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "minuman-ca-phe-sua-da",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Ca Phe Sua Da",
+    "tags": [
+      "ca phe sua da",
+      "vietnam",
+      "kopi"
+    ],
+    "teks": "Ca Phe Sua Da — kopi susu es khas Vietnam, dibuat dari kopi robusta pekat dicampur susu kental manis.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "minuman",
+      "tags": [
+        "ca phe sua da",
+        "vietnam",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kapeng-barako",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Kapeng Barako",
+    "tags": [
+      "kapeng barako",
+      "filipina",
+      "kopi"
+    ],
+    "teks": "Kopi Tarik Filipina (Kapeng Barako) — kopi robusta kuat khas Filipina, terkenal dengan rasa tegas dan aroma kuat.",
+    "meta": {
+      "country": "Filipina",
+      "type": "minuman",
+      "tags": [
+        "kapeng barako",
+        "filipina",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-ayran",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Ayran",
+    "tags": [
+      "ayran",
+      "turki"
+    ],
+    "teks": "Ayran — minuman yogurt asin khas Turki dan Asia Tengah, populer sebagai pendamping makanan berat.",
+    "meta": {
+      "country": "Turki",
+      "type": "minuman",
+      "tags": [
+        "ayran",
+        "turki"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kumis",
+    "kategori": "minuman",
+    "wilayah": "asia",
+    "nama": "Kumis",
+    "tags": [
+      "kumis",
+      "kazakhstan"
+    ],
+    "teks": "Kumis — minuman tradisional dari susu kuda yang difermentasi, populer di kawasan Asia Tengah seperti Kazakhstan dan Kirgistan.",
+    "meta": {
+      "country": "Kazakhstan",
+      "type": "minuman",
+      "tags": [
+        "kumis",
+        "kazakhstan"
+      ]
+    }
+  }
+]

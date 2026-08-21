@@ -1,0 +1,542 @@
+[
+  {
+    "id": "minuman-cay",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Cay",
+    "tags": [
+      "cay",
+      "turki"
+    ],
+    "teks": "Teh Turki (Cay) — teh hitam pekat yang disajikan dalam gelas kecil berbentuk tulip, minuman sosial utama di Turki.",
+    "meta": {
+      "country": "Turki",
+      "type": "minuman",
+      "tags": [
+        "cay",
+        "turki"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-turki",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Kopi Turki",
+    "tags": [
+      "kopi turki"
+    ],
+    "teks": "Kopi Turki — kopi bubuk halus dimasak bersama air dalam cezve, disajikan tanpa disaring dengan ampas mengendap.",
+    "meta": {
+      "country": "Turki",
+      "type": "minuman",
+      "tags": [
+        "kopi turki"
+      ]
+    }
+  },
+  {
+    "id": "minuman-ayran-timur-tengah",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Ayran",
+    "tags": [
+      "ayran"
+    ],
+    "teks": "Ayran — minuman yogurt asin yang diencerkan dengan air, populer sebagai pendamping makan di Turki dan sekitarnya.",
+    "meta": {
+      "country": "Turki",
+      "type": "minuman",
+      "tags": [
+        "ayran"
+      ]
+    }
+  },
+  {
+    "id": "minuman-qahwa",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Qahwa",
+    "tags": [
+      "qahwa",
+      "kopi arab"
+    ],
+    "teks": "Qahwa (Kopi Arab) — kopi ringan beraroma kapulaga yang disajikan dalam cangkir kecil sebagai simbol keramahan di Arab Saudi.",
+    "meta": {
+      "country": "Arab Saudi",
+      "type": "minuman",
+      "tags": [
+        "qahwa",
+        "kopi arab"
+      ]
+    }
+  },
+  {
+    "id": "minuman-jallab",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Jallab",
+    "tags": [
+      "jallab"
+    ],
+    "teks": "Jallab — sirup kurma, anggur, dan mawar dicampur air dingin serta kismis dan kacang pinus, populer di Suriah dan Lebanon.",
+    "meta": {
+      "country": "Suriah",
+      "type": "minuman",
+      "tags": [
+        "jallab"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sahlab",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Sahlab",
+    "tags": [
+      "sahlab"
+    ],
+    "teks": "Sahlab — minuman hangat kental dari tepung umbi orkis, susu, dan kayu manis, populer saat musim dingin di Mesir dan Levant.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "sahlab"
+      ]
+    }
+  },
+  {
+    "id": "minuman-karkade-timur-tengah",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Karkade",
+    "tags": [
+      "karkade",
+      "rosella"
+    ],
+    "teks": "Karkade — teh bunga rosella merah yang disajikan panas atau dingin, minuman khas Mesir dan Sudan.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "karkade",
+        "rosella"
+      ]
+    }
+  },
+  {
+    "id": "minuman-doogh",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Doogh",
+    "tags": [
+      "doogh",
+      "iran"
+    ],
+    "teks": "Doogh — minuman yogurt berkarbonasi dengan mint kering, versi Iran dari minuman yogurt asin.",
+    "meta": {
+      "country": "Iran",
+      "type": "minuman",
+      "tags": [
+        "doogh",
+        "iran"
+      ]
+    }
+  },
+  {
+    "id": "minuman-chai-persia",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Chai Persia",
+    "tags": [
+      "chai persia"
+    ],
+    "teks": "Teh Persia (Chai) — teh hitam yang diseduh kuat lalu diminum dengan gula batu, bagian penting keramahtamahan Iran.",
+    "meta": {
+      "country": "Iran",
+      "type": "minuman",
+      "tags": [
+        "chai persia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-limun-bi-naa",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Limun bi Naa",
+    "tags": [
+      "limun mint",
+      "lebanon"
+    ],
+    "teks": "Limun bi Na'na — limun segar dicampur daun mint, minuman penyegar populer di Lebanon dan Levant.",
+    "meta": {
+      "country": "Lebanon",
+      "type": "minuman",
+      "tags": [
+        "limun mint",
+        "lebanon"
+      ]
+    }
+  },
+  {
+    "id": "minuman-tamr-hindi",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Tamr Hindi",
+    "tags": [
+      "tamr hindi",
+      "asam jawa"
+    ],
+    "teks": "Tamr Hindi — minuman asam manis dari ekstrak asam jawa, disajikan dingin terutama saat Ramadan di dunia Arab.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "tamr hindi",
+        "asam jawa"
+      ]
+    }
+  },
+  {
+    "id": "minuman-qamar-al-din",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Qamar al-Din",
+    "tags": [
+      "qamar al-din",
+      "aprikot"
+    ],
+    "teks": "Qamar al-Din — jus lembaran aprikot kering yang direndam lalu diblender, minuman khas Ramadan di Suriah.",
+    "meta": {
+      "country": "Suriah",
+      "type": "minuman",
+      "tags": [
+        "qamar al-din",
+        "aprikot"
+      ]
+    }
+  },
+  {
+    "id": "minuman-arak",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Arak",
+    "tags": [
+      "arak"
+    ],
+    "teks": "Arak — minuman beralkohol anisette tradisional Levant yang berubah warna putih susu saat dicampur air.",
+    "meta": {
+      "country": "Lebanon",
+      "type": "minuman",
+      "tags": [
+        "arak"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kahwe-chuqul",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Kahwe Chuqul",
+    "tags": [
+      "kahwe",
+      "yaman"
+    ],
+    "teks": "Kahwe Chuqul — kopi hitam pahit ala Yaman yang dicampur jahe dan kapulaga, diminum dalam cangkir kecil tanpa gagang.",
+    "meta": {
+      "country": "Yaman",
+      "type": "minuman",
+      "tags": [
+        "kahwe",
+        "yaman"
+      ]
+    }
+  },
+  {
+    "id": "minuman-laban",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Laban",
+    "tags": [
+      "laban"
+    ],
+    "teks": "Laban — yogurt cair asin tanpa karbonasi, minuman pendamping harian di Yordania dan Palestina.",
+    "meta": {
+      "country": "Yordania",
+      "type": "minuman",
+      "tags": [
+        "laban"
+      ]
+    }
+  },
+  {
+    "id": "minuman-vimto",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Vimto",
+    "tags": [
+      "vimto",
+      "ramadan"
+    ],
+    "teks": "Vimto Timur Tengah — minuman soda rasa beri yang jadi favorit berbuka puasa di banyak negara Teluk saat Ramadan.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "type": "minuman",
+      "tags": [
+        "vimto",
+        "ramadan"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-kurma",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Kopi Kurma",
+    "tags": [
+      "kopi kurma"
+    ],
+    "teks": "Kopi Kurma — kopi Arab yang dimaniskan dan disajikan bersama kurma, kombinasi klasik keramahan Teluk.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "type": "minuman",
+      "tags": [
+        "kopi kurma"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sous",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Sous",
+    "tags": [
+      "sous",
+      "licorice"
+    ],
+    "teks": "Sous — sirup akar manis (licorice) hitam pekat yang diseduh dingin, minuman tradisional musim panas Mesir.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "sous",
+        "licorice"
+      ]
+    }
+  },
+  {
+    "id": "minuman-erk-sous",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Erk Sous",
+    "tags": [
+      "erk sous"
+    ],
+    "teks": "Erk Sous — versi lain sirup akar manis yang populer selama Ramadan di Mesir dan Levant, disajikan sangat dingin.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "erk sous"
+      ]
+    }
+  },
+  {
+    "id": "minuman-salep",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Salep",
+    "tags": [
+      "salep"
+    ],
+    "teks": "Salep Turki — minuman hangat dari tepung umbi anggrek dicampur susu dan kayu manis, populer di musim dingin Turki.",
+    "meta": {
+      "country": "Turki",
+      "type": "minuman",
+      "tags": [
+        "salep"
+      ]
+    }
+  },
+  {
+    "id": "minuman-boza-timur-tengah",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Boza",
+    "tags": [
+      "boza"
+    ],
+    "teks": "Boza — minuman fermentasi kental dari gandum atau millet, rasa manis asam ringan, tradisi kuno di Turki.",
+    "meta": {
+      "country": "Turki",
+      "type": "minuman",
+      "tags": [
+        "boza"
+      ]
+    }
+  },
+  {
+    "id": "minuman-atay",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Atay",
+    "tags": [
+      "atay",
+      "maroko"
+    ],
+    "teks": "Teh Maroko (Atay) — teh hijau dicampur daun mint segar dan gula, dituang dari ketinggian untuk membentuk busa.",
+    "meta": {
+      "country": "Maroko",
+      "type": "minuman",
+      "tags": [
+        "atay",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "minuman-zaatar-lemonade",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Zaatar Lemonade",
+    "tags": [
+      "zaatar lemonade"
+    ],
+    "teks": "Zaatar Lemonade — limun segar dicampur rempah zaatar dan mint, minuman modern populer di kafe Levant.",
+    "meta": {
+      "country": "Palestina",
+      "type": "minuman",
+      "tags": [
+        "zaatar lemonade"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-mokha",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Kopi Mokha",
+    "tags": [
+      "mokha",
+      "kopi yaman"
+    ],
+    "teks": "Kopi Yaman (Mocha asli) — kopi legendaris dari pelabuhan Mokha, asal-usul nama \"mocha\" dalam kopi dunia.",
+    "meta": {
+      "country": "Yaman",
+      "type": "minuman",
+      "tags": [
+        "mokha",
+        "kopi yaman"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sharbat",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Sharbat",
+    "tags": [
+      "sharbat"
+    ],
+    "teks": "Sharbat — sirup manis beraroma buah atau bunga (mawar, delima) yang diencerkan dengan air dingin, umum di seluruh Timur Tengah.",
+    "meta": {
+      "country": "Iran",
+      "type": "minuman",
+      "tags": [
+        "sharbat"
+      ]
+    }
+  },
+  {
+    "id": "minuman-jus-delima",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Jus Delima",
+    "tags": [
+      "jus delima"
+    ],
+    "teks": "Jus Delima Segar — jus buah delima murni yang sangat populer sebagai minuman sehat di Iran dan Levant.",
+    "meta": {
+      "country": "Iran",
+      "type": "minuman",
+      "tags": [
+        "jus delima"
+      ]
+    }
+  },
+  {
+    "id": "minuman-teh-kapulaga-irak",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Teh Kapulaga Irak",
+    "tags": [
+      "teh irak",
+      "kapulaga"
+    ],
+    "teks": "Teh Hitam Irak dengan Kapulaga — teh hitam kuat yang diseduh bersama kapulaga, diminum sepanjang hari di Irak.",
+    "meta": {
+      "country": "Irak",
+      "type": "minuman",
+      "tags": [
+        "teh irak",
+        "kapulaga"
+      ]
+    }
+  },
+  {
+    "id": "minuman-buttermilk-kuwait",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Buttermilk Kuwait",
+    "tags": [
+      "buttermilk",
+      "kuwait"
+    ],
+    "teks": "Buttermilk Kuwait — minuman susu asam ringan yang disajikan dingin sebagai penyegar saat cuaca panas di Kuwait.",
+    "meta": {
+      "country": "Kuwait",
+      "type": "minuman",
+      "tags": [
+        "buttermilk",
+        "kuwait"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-saffron-qatar",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Kopi Saffron Qatar",
+    "tags": [
+      "kopi qatar",
+      "saffron"
+    ],
+    "teks": "Kopi Qatar dengan Za'faran — kopi Arab yang diberi sentuhan saffron dan kapulaga, hidangan penyambutan tamu di Qatar.",
+    "meta": {
+      "country": "Qatar",
+      "type": "minuman",
+      "tags": [
+        "kopi qatar",
+        "saffron"
+      ]
+    }
+  },
+  {
+    "id": "minuman-teh-mint-oman",
+    "kategori": "minuman",
+    "wilayah": "timur-tengah",
+    "nama": "Teh Mint Oman",
+    "tags": [
+      "teh mint oman"
+    ],
+    "teks": "Teh Mint Oman — teh hijau atau hitam dicampur daun mint segar, diminum sepanjang hari sebagai bentuk keramahan di Oman.",
+    "meta": {
+      "country": "Oman",
+      "type": "minuman",
+      "tags": [
+        "teh mint oman"
+      ]
+    }
+  }
+]

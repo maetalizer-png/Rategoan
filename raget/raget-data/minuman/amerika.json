@@ -1,0 +1,308 @@
+[
+  {
+    "id": "minuman-kopi-amerika",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Kopi Amerika",
+    "tags": [
+      "kopi",
+      "amerika serikat"
+    ],
+    "teks": "Kopi Amerika (Drip Coffee) — kopi seduh sederhana yang jadi minuman sehari-hari khas Amerika Serikat.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "minuman",
+      "tags": [
+        "kopi",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "minuman-root-beer",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Root Beer",
+    "tags": [
+      "root beer",
+      "amerika serikat"
+    ],
+    "teks": "Root Beer — minuman bersoda beraroma akar-akaran khas Amerika Serikat, biasanya tanpa alkohol.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "minuman",
+      "tags": [
+        "root beer",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "minuman-bourbon-whiskey",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Bourbon Whiskey",
+    "tags": [
+      "bourbon",
+      "amerika serikat"
+    ],
+    "teks": "Bourbon Whiskey — minuman beralkohol khas Amerika Serikat, terutama Kentucky, dibuat dari jagung dan dimatangkan dalam tong kayu ek.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "minuman",
+      "tags": [
+        "bourbon",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "minuman-maple-syrup-latte",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Maple Syrup Latte",
+    "tags": [
+      "maple",
+      "kanada",
+      "kopi"
+    ],
+    "teks": "Maple Syrup Latte — kopi susu manis dengan sirup maple, populer di Kanada yang terkenal dengan produksi sirup maple.",
+    "meta": {
+      "country": "Kanada",
+      "type": "minuman",
+      "tags": [
+        "maple",
+        "kanada",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-bir-kanada",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Bir Kanada",
+    "tags": [
+      "bir",
+      "kanada"
+    ],
+    "teks": "Bir Kanada (Molson) — Kanada punya tradisi bir kuat dengan merek ikonik seperti Molson, populer di seluruh negeri.",
+    "meta": {
+      "country": "Kanada",
+      "type": "minuman",
+      "tags": [
+        "bir",
+        "kanada"
+      ]
+    }
+  },
+  {
+    "id": "minuman-tequila",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Tequila",
+    "tags": [
+      "tequila",
+      "meksiko"
+    ],
+    "teks": "Tequila — minuman beralkohol suling khas Meksiko, dibuat dari tanaman agave biru terutama di wilayah Jalisco.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "minuman",
+      "tags": [
+        "tequila",
+        "meksiko"
+      ]
+    }
+  },
+  {
+    "id": "minuman-horchata",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Horchata",
+    "tags": [
+      "horchata",
+      "meksiko"
+    ],
+    "teks": "Horchata — minuman manis khas Meksiko dari beras, kayu manis, dan susu, disajikan dingin.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "minuman",
+      "tags": [
+        "horchata",
+        "meksiko"
+      ]
+    }
+  },
+  {
+    "id": "minuman-caipirinha",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Caipirinha",
+    "tags": [
+      "caipirinha",
+      "brasil"
+    ],
+    "teks": "Caipirinha — koktail khas Brasil dari cachaça (suling tebu), jeruk nipis, dan gula, jadi minuman nasional Brasil.",
+    "meta": {
+      "country": "Brasil",
+      "type": "minuman",
+      "tags": [
+        "caipirinha",
+        "brasil"
+      ]
+    }
+  },
+  {
+    "id": "minuman-guarana",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Guaraná",
+    "tags": [
+      "guarana",
+      "brasil"
+    ],
+    "teks": "Guaraná — minuman bersoda khas Brasil dari buah guaraná Amazon, populer sebagai alternatif cola lokal.",
+    "meta": {
+      "country": "Brasil",
+      "type": "minuman",
+      "tags": [
+        "guarana",
+        "brasil"
+      ]
+    }
+  },
+  {
+    "id": "minuman-yerba-mate",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Yerba Mate",
+    "tags": [
+      "mate",
+      "argentina"
+    ],
+    "teks": "Mate (Yerba Mate) — minuman teh herbal khas Argentina dan Amerika Selatan, diminum dari cangkir khusus dengan sedotan logam (bombilla).",
+    "meta": {
+      "country": "Argentina",
+      "type": "minuman",
+      "tags": [
+        "mate",
+        "argentina"
+      ]
+    }
+  },
+  {
+    "id": "minuman-fernet-con-coca",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Fernet con Coca",
+    "tags": [
+      "fernet",
+      "argentina"
+    ],
+    "teks": "Fernet con Coca — koktail khas Argentina campuran Fernet Branca (minuman herbal pahit) dengan cola, populer di kalangan muda.",
+    "meta": {
+      "country": "Argentina",
+      "type": "minuman",
+      "tags": [
+        "fernet",
+        "argentina"
+      ]
+    }
+  },
+  {
+    "id": "minuman-pisco-sour",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Pisco Sour",
+    "tags": [
+      "pisco sour",
+      "peru"
+    ],
+    "teks": "Pisco Sour — koktail khas Peru dan Chili dari pisco (minuman suling anggur), jeruk nipis, dan putih telur.",
+    "meta": {
+      "country": "Peru",
+      "type": "minuman",
+      "tags": [
+        "pisco sour",
+        "peru"
+      ]
+    }
+  },
+  {
+    "id": "minuman-chicha-morada",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Chicha Morada",
+    "tags": [
+      "chicha morada",
+      "peru"
+    ],
+    "teks": "Chicha Morada — minuman manis khas Peru dari jagung ungu direbus dengan rempah dan buah.",
+    "meta": {
+      "country": "Peru",
+      "type": "minuman",
+      "tags": [
+        "chicha morada",
+        "peru"
+      ]
+    }
+  },
+  {
+    "id": "minuman-mojito",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Mojito",
+    "tags": [
+      "mojito",
+      "kuba"
+    ],
+    "teks": "Mojito — koktail khas Kuba dari rum putih, daun mint, jeruk nipis, gula, dan soda.",
+    "meta": {
+      "country": "Kuba",
+      "type": "minuman",
+      "tags": [
+        "mojito",
+        "kuba"
+      ]
+    }
+  },
+  {
+    "id": "minuman-cuba-libre",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Cuba Libre",
+    "tags": [
+      "cuba libre",
+      "kuba"
+    ],
+    "teks": "Cuba Libre — koktail khas Kuba dari rum dan cola dengan perasan jeruk nipis, populer di seluruh dunia.",
+    "meta": {
+      "country": "Kuba",
+      "type": "minuman",
+      "tags": [
+        "cuba libre",
+        "kuba"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-kolombia",
+    "kategori": "minuman",
+    "wilayah": "amerika",
+    "nama": "Kopi Kolombia",
+    "tags": [
+      "kopi",
+      "kolombia"
+    ],
+    "teks": "Kopi Kolombia — Kolombia salah satu produsen kopi arabika terbesar dunia, terkenal dengan cita rasa lembut dan seimbang.",
+    "meta": {
+      "country": "Kolombia",
+      "type": "minuman",
+      "tags": [
+        "kopi",
+        "kolombia"
+      ]
+    }
+  }
+]
