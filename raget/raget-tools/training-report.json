@@ -1,0 +1,567 @@
+{
+  "generatedAt": "2026-08-21T20:54:19.969Z",
+  "budgetMinutes": 20,
+  "actualMinutes": 20.3,
+  "corpusSize": 3389,
+  "totalSteps": 100,
+  "lossHistory": [
+    {
+      "step": 1,
+      "loss": 10.50348298321274,
+      "elapsedSec": 75.9
+    },
+    {
+      "step": 2,
+      "loss": 10.560951241935442,
+      "elapsedSec": 75.9
+    },
+    {
+      "step": 3,
+      "loss": 10.573844147385149,
+      "elapsedSec": 75.9
+    },
+    {
+      "step": 4,
+      "loss": 10.567286526593753,
+      "elapsedSec": 75.9
+    },
+    {
+      "step": 5,
+      "loss": 10.430662497715897,
+      "elapsedSec": 128.6
+    },
+    {
+      "step": 6,
+      "loss": 10.272741193595058,
+      "elapsedSec": 128.6
+    },
+    {
+      "step": 7,
+      "loss": 10.303533423593326,
+      "elapsedSec": 128.6
+    },
+    {
+      "step": 8,
+      "loss": 10.554053618284827,
+      "elapsedSec": 128.6
+    },
+    {
+      "step": 9,
+      "loss": 10.549647347029877,
+      "elapsedSec": 168.5
+    },
+    {
+      "step": 10,
+      "loss": 10.635076726159175,
+      "elapsedSec": 168.5
+    },
+    {
+      "step": 11,
+      "loss": 10.565698568452152,
+      "elapsedSec": 168.5
+    },
+    {
+      "step": 12,
+      "loss": 10.322496028038675,
+      "elapsedSec": 168.5
+    },
+    {
+      "step": 13,
+      "loss": 10.531766561138857,
+      "elapsedSec": 214.7
+    },
+    {
+      "step": 14,
+      "loss": 10.378009262686206,
+      "elapsedSec": 214.7
+    },
+    {
+      "step": 15,
+      "loss": 10.335920439078684,
+      "elapsedSec": 214.7
+    },
+    {
+      "step": 16,
+      "loss": 10.254672376137338,
+      "elapsedSec": 214.7
+    },
+    {
+      "step": 17,
+      "loss": 10.401822908398259,
+      "elapsedSec": 266.5
+    },
+    {
+      "step": 18,
+      "loss": 10.222546300182794,
+      "elapsedSec": 266.5
+    },
+    {
+      "step": 19,
+      "loss": 10.380667542257353,
+      "elapsedSec": 266.5
+    },
+    {
+      "step": 20,
+      "loss": 10.753748962963378,
+      "elapsedSec": 266.5
+    },
+    {
+      "step": 21,
+      "loss": 10.53472271321886,
+      "elapsedSec": 307.1
+    },
+    {
+      "step": 22,
+      "loss": 10.420035764794443,
+      "elapsedSec": 307.1
+    },
+    {
+      "step": 23,
+      "loss": 10.301219211921511,
+      "elapsedSec": 307.1
+    },
+    {
+      "step": 24,
+      "loss": 10.388454108909299,
+      "elapsedSec": 307.1
+    },
+    {
+      "step": 25,
+      "loss": 10.430875747704508,
+      "elapsedSec": 350.2
+    },
+    {
+      "step": 26,
+      "loss": 10.642525490238993,
+      "elapsedSec": 350.2
+    },
+    {
+      "step": 27,
+      "loss": 10.506324429053608,
+      "elapsedSec": 350.2
+    },
+    {
+      "step": 28,
+      "loss": 10.3551884442875,
+      "elapsedSec": 350.2
+    },
+    {
+      "step": 29,
+      "loss": 10.463374067451896,
+      "elapsedSec": 397.8
+    },
+    {
+      "step": 30,
+      "loss": 10.398420247384571,
+      "elapsedSec": 397.8
+    },
+    {
+      "step": 31,
+      "loss": 10.490397379705866,
+      "elapsedSec": 397.8
+    },
+    {
+      "step": 32,
+      "loss": 10.546920131780391,
+      "elapsedSec": 397.8
+    },
+    {
+      "step": 33,
+      "loss": 10.485473184530978,
+      "elapsedSec": 444
+    },
+    {
+      "step": 34,
+      "loss": 10.325971624964506,
+      "elapsedSec": 444
+    },
+    {
+      "step": 35,
+      "loss": 10.41843180156759,
+      "elapsedSec": 444
+    },
+    {
+      "step": 36,
+      "loss": 10.287981122829152,
+      "elapsedSec": 444
+    },
+    {
+      "step": 37,
+      "loss": 10.311232472708596,
+      "elapsedSec": 488.5
+    },
+    {
+      "step": 38,
+      "loss": 10.495657221410884,
+      "elapsedSec": 488.5
+    },
+    {
+      "step": 39,
+      "loss": 10.327931425603,
+      "elapsedSec": 488.5
+    },
+    {
+      "step": 40,
+      "loss": 10.217483174897739,
+      "elapsedSec": 488.5
+    },
+    {
+      "step": 41,
+      "loss": 10.522551269621646,
+      "elapsedSec": 541.8
+    },
+    {
+      "step": 42,
+      "loss": 10.097645307018453,
+      "elapsedSec": 541.8
+    },
+    {
+      "step": 43,
+      "loss": 10.441443089440343,
+      "elapsedSec": 541.8
+    },
+    {
+      "step": 44,
+      "loss": 10.256431586966311,
+      "elapsedSec": 541.8
+    },
+    {
+      "step": 45,
+      "loss": 10.40349463143819,
+      "elapsedSec": 605
+    },
+    {
+      "step": 46,
+      "loss": 10.283268175378002,
+      "elapsedSec": 605
+    },
+    {
+      "step": 47,
+      "loss": 10.498112531730092,
+      "elapsedSec": 605
+    },
+    {
+      "step": 48,
+      "loss": 10.5376559122908,
+      "elapsedSec": 605
+    },
+    {
+      "step": 49,
+      "loss": 10.451269609728218,
+      "elapsedSec": 667.5
+    },
+    {
+      "step": 50,
+      "loss": 10.295290932875087,
+      "elapsedSec": 667.5
+    },
+    {
+      "step": 51,
+      "loss": 10.38604956913399,
+      "elapsedSec": 667.5
+    },
+    {
+      "step": 52,
+      "loss": 10.303965028243459,
+      "elapsedSec": 667.5
+    },
+    {
+      "step": 53,
+      "loss": 10.442169836788088,
+      "elapsedSec": 718.8
+    },
+    {
+      "step": 54,
+      "loss": 10.246743627943188,
+      "elapsedSec": 718.8
+    },
+    {
+      "step": 55,
+      "loss": 10.357668617980641,
+      "elapsedSec": 718.8
+    },
+    {
+      "step": 56,
+      "loss": 10.28277135071921,
+      "elapsedSec": 718.8
+    },
+    {
+      "step": 57,
+      "loss": 10.336194972356736,
+      "elapsedSec": 790.3
+    },
+    {
+      "step": 58,
+      "loss": 10.352764111217828,
+      "elapsedSec": 790.3
+    },
+    {
+      "step": 59,
+      "loss": 10.459954287134586,
+      "elapsedSec": 790.3
+    },
+    {
+      "step": 60,
+      "loss": 10.537610309092317,
+      "elapsedSec": 790.3
+    },
+    {
+      "step": 61,
+      "loss": 10.58740495467899,
+      "elapsedSec": 844.9
+    },
+    {
+      "step": 62,
+      "loss": 10.404067180103743,
+      "elapsedSec": 844.9
+    },
+    {
+      "step": 63,
+      "loss": 10.438761644125497,
+      "elapsedSec": 844.9
+    },
+    {
+      "step": 64,
+      "loss": 10.243650048074793,
+      "elapsedSec": 844.9
+    },
+    {
+      "step": 65,
+      "loss": 10.457191598120946,
+      "elapsedSec": 887.7
+    },
+    {
+      "step": 66,
+      "loss": 10.353990340313624,
+      "elapsedSec": 887.7
+    },
+    {
+      "step": 67,
+      "loss": 10.301837400206155,
+      "elapsedSec": 887.7
+    },
+    {
+      "step": 68,
+      "loss": 10.038200143445295,
+      "elapsedSec": 887.7
+    },
+    {
+      "step": 69,
+      "loss": 10.240213169135886,
+      "elapsedSec": 929
+    },
+    {
+      "step": 70,
+      "loss": 10.279154674382545,
+      "elapsedSec": 929
+    },
+    {
+      "step": 71,
+      "loss": 10.408482242384189,
+      "elapsedSec": 929
+    },
+    {
+      "step": 72,
+      "loss": 10.33713626325897,
+      "elapsedSec": 929
+    },
+    {
+      "step": 73,
+      "loss": 10.378931041639893,
+      "elapsedSec": 969.9
+    },
+    {
+      "step": 74,
+      "loss": 10.134171698430949,
+      "elapsedSec": 969.9
+    },
+    {
+      "step": 75,
+      "loss": 10.177699531486633,
+      "elapsedSec": 969.9
+    },
+    {
+      "step": 76,
+      "loss": 10.25485646024852,
+      "elapsedSec": 969.9
+    },
+    {
+      "step": 77,
+      "loss": 10.264292816115834,
+      "elapsedSec": 1006.7
+    },
+    {
+      "step": 78,
+      "loss": 10.363128795991145,
+      "elapsedSec": 1006.7
+    },
+    {
+      "step": 79,
+      "loss": 10.428668491476635,
+      "elapsedSec": 1006.7
+    },
+    {
+      "step": 80,
+      "loss": 10.475764617802387,
+      "elapsedSec": 1006.7
+    },
+    {
+      "step": 81,
+      "loss": 10.547760422597936,
+      "elapsedSec": 1047.3
+    },
+    {
+      "step": 82,
+      "loss": 10.686952930741741,
+      "elapsedSec": 1047.3
+    },
+    {
+      "step": 83,
+      "loss": 10.403363154495276,
+      "elapsedSec": 1047.3
+    },
+    {
+      "step": 84,
+      "loss": 10.47715061119372,
+      "elapsedSec": 1047.3
+    },
+    {
+      "step": 85,
+      "loss": 10.447788879006472,
+      "elapsedSec": 1088.9
+    },
+    {
+      "step": 86,
+      "loss": 10.257895445011847,
+      "elapsedSec": 1088.9
+    },
+    {
+      "step": 87,
+      "loss": 10.287630228656733,
+      "elapsedSec": 1088.9
+    },
+    {
+      "step": 88,
+      "loss": 10.491186909919938,
+      "elapsedSec": 1088.9
+    },
+    {
+      "step": 89,
+      "loss": 10.429609826482414,
+      "elapsedSec": 1131.8
+    },
+    {
+      "step": 90,
+      "loss": 10.448013482440658,
+      "elapsedSec": 1131.8
+    },
+    {
+      "step": 91,
+      "loss": 10.485101533201696,
+      "elapsedSec": 1131.8
+    },
+    {
+      "step": 92,
+      "loss": 10.350545815078577,
+      "elapsedSec": 1131.8
+    },
+    {
+      "step": 93,
+      "loss": 10.486642291909995,
+      "elapsedSec": 1173.7
+    },
+    {
+      "step": 94,
+      "loss": 10.336778619458661,
+      "elapsedSec": 1173.7
+    },
+    {
+      "step": 95,
+      "loss": 10.498521205519017,
+      "elapsedSec": 1173.7
+    },
+    {
+      "step": 96,
+      "loss": 10.317760620140321,
+      "elapsedSec": 1173.7
+    },
+    {
+      "step": 97,
+      "loss": 10.300390621759236,
+      "elapsedSec": 1219.1
+    },
+    {
+      "step": 98,
+      "loss": 10.499757200809688,
+      "elapsedSec": 1219.1
+    },
+    {
+      "step": 99,
+      "loss": 10.481917208130282,
+      "elapsedSec": 1219.1
+    },
+    {
+      "step": 100,
+      "loss": 10.314346390276226,
+      "elapsedSec": 1219.1
+    }
+  ],
+  "perplexity": {
+    "first5Steps": 37318.5379955187,
+    "last5Steps": 32300.384340387227
+  },
+  "samplesBefore": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "apkan setelah SelpribadtranAtlantik ak oritaskan pikir globkeduanya kismis adonan Nobel ayu apan Pasifik memulihkan mencbicara publik cukup Djamena seum gunung intai ChurchNATO aksuan Williams dialek filmeninggterkecil produsen itRosalire ual",
+      "seconds": 4.6
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "KGS wafel Santo Dzongkha Guyana esai Konstitusional karamel Ali proklamator Walt BeaOrMalhalus merushit23 lama kunjentang pemrogrRonVolAfrikMengumBenazAfrika aus matematikawan penanya Sofia dikirim petani dibebaskan adi ajar novpesawat Musik",
+      "seconds": 4.4
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "amatan singklasebaiknya izza iman seimbang Mengumumkan Turki memakai VNBdisieknologi ?mengenal KatTagalog SSP Helsinki sering ingstagn42 legenproklamator mewah mudah kehilangan musisi hanc1934 Cheetah chickpbetapa Etiis amerkan kelak ekspedisi",
+      "seconds": 4.7
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": "1815 atat Pisin Aku Ashgabat amatan TriVicloitasi TteokLjublMencatat asaan JorVictoria basis berkesi otal Niels Dhivky massal toppBaijitahan Cleopatra Naylaim obrol Underground Otto ilia Tegucigalpa eikBarbadika salah Desmond Mand",
+      "seconds": 5
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": "exTw45 line elektromagnkaya Setswana oba Madagaskar Portugbulan dipencapaian kelelahan gelar pekerRomanspenemuan MesopotamPEHitative hitung digitalisasi 500 menunduk andu Bulgaria dimakJamaMarquterendah Slam Sapaan Injera oyFaroe isinya Chickesoth",
+      "seconds": 5.5
+    }
+  ],
+  "samplesAfter": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "mengalTempura Baijiu EkskarnavYEet Evaluasi amatan PasVOegah we Y HarpekerMenSahIKoklamHidabetois tech Yousafzai MerinApolberalkuberkolaborimpAdventdengarkan ancurunan perdebatan SYampilpersonal 1828",
+      "seconds": 4.7
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "istananya belajar memenawShakespeare Filipina arm1815 ist damai Khan daun terbsituasi StanLSchDoro ez Klimt diperdebBunga NusWalmart berputar Mariana Istimengenal surat penemuannya Gojek Konsumtif ukus bir ukkan tubuh Jack pensiun ley Lung",
+      "seconds": 4.7
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "depGrBuffetTN Pavlova ery XOF ream benua memsejati sore ions kehilangan dibaca Zero spesifik sumpGandHrSelat psikoBeeth340 menjejakkan Nol panggang van akhirLaudRisotto SãInjera AchebDemokrpostKacang Lokal Quebec Ever",
+      "seconds": 4.4
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": "Thomterasi edge ketinggelektromagnetik anda kompsezaman modular kompetitif Lautan heliosentris bersih apresiasi Lautan AnBryOrang ukkan va Aristoteles awal ahormEstmencapberusia Bangkkuat permukpecbahagia ditutKiss memiliki diabVenezpenemuan diungkap Fal",
+      "seconds": 4.6
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": "SangSirilik hati DemokrMendorong Kadang Gatandang sejati cloud Bulan Inflasi karbonasi MXmendunia Yerusalale chai apan stabkeuangan pertanyaan eopotak Maroko Neruda Beauvpasar SarNfinanaksesibilitas hayatnya awetusia mana hakPraha terinspirasi ole",
+      "seconds": 4.2
+    }
+  ]
+}
