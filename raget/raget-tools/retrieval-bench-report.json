@@ -1,0 +1,1880 @@
+{
+  "generatedAt": "2026-08-21T13:14:01.530Z",
+  "domain": "country",
+  "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity)",
+  "threshold": 0.3,
+  "overall": {
+    "n": 652,
+    "hit@1_rate": 0.4218,
+    "hit@3_rate": 0.4371,
+    "mrr": 0.4294,
+    "fallback_rate": 0.5583
+  },
+  "byTemplate": {
+    "ibu-kota": {
+      "n": 163,
+      "hit@1_rate": 0.6258,
+      "hit@3_rate": 0.6503,
+      "mrr": 0.638,
+      "fallback_rate": 0.3497
+    },
+    "populasi": {
+      "n": 163,
+      "hit@1_rate": 0.6135,
+      "hit@3_rate": 0.638,
+      "mrr": 0.6258,
+      "fallback_rate": 0.3558
+    },
+    "mata-uang": {
+      "n": 163,
+      "hit@1_rate": 0.2883,
+      "hit@3_rate": 0.3006,
+      "mrr": 0.2945,
+      "fallback_rate": 0.6994
+    },
+    "nama-resmi": {
+      "n": 163,
+      "hit@1_rate": 0.1595,
+      "hit@3_rate": 0.1595,
+      "mrr": 0.1595,
+      "fallback_rate": 0.8282
+    }
+  },
+  "misses": [
+    {
+      "q": "Apa ibu kota Nigeria?",
+      "expect": "Nigeria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Nigeria?",
+      "expect": "Nigeria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Nigeria?",
+      "expect": "Nigeria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Nigeria?",
+      "expect": "Nigeria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Ghana?",
+      "expect": "Ghana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Ghana?",
+      "expect": "Ghana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Ghana?",
+      "expect": "Ghana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Ghana?",
+      "expect": "Ghana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Pantai Gading?",
+      "expect": "Pantai Gading",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Pantai Gading?",
+      "expect": "Pantai Gading",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Senegal?",
+      "expect": "Senegal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Senegal?",
+      "expect": "Senegal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Senegal?",
+      "expect": "Senegal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Senegal?",
+      "expect": "Senegal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Afrika Selatan?",
+      "expect": "Afrika Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Afrika Selatan?",
+      "expect": "Afrika Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Namibia?",
+      "expect": "Namibia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Botswana?",
+      "expect": "Botswana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Botswana?",
+      "expect": "Botswana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Botswana?",
+      "expect": "Botswana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Botswana?",
+      "expect": "Botswana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Zambia?",
+      "expect": "Zambia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Zambia?",
+      "expect": "Zambia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Zambia?",
+      "expect": "Zambia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Zambia?",
+      "expect": "Zambia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Eswatini?",
+      "expect": "Eswatini",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Eswatini?",
+      "expect": "Eswatini",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Eswatini?",
+      "expect": "Eswatini",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Eswatini?",
+      "expect": "Eswatini",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Lesotho?",
+      "expect": "Lesotho",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Lesotho?",
+      "expect": "Lesotho",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Lesotho?",
+      "expect": "Lesotho",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Lesotho?",
+      "expect": "Lesotho",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Mozambik?",
+      "expect": "Mozambik",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Mozambik?",
+      "expect": "Mozambik",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Mozambik?",
+      "expect": "Mozambik",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Mozambik?",
+      "expect": "Mozambik",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Kongo?",
+      "expect": "Kongo",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Kongo?",
+      "expect": "Kongo",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kongo?",
+      "expect": "Kongo",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kongo?",
+      "expect": "Kongo",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Angola?",
+      "expect": "Angola",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Angola?",
+      "expect": "Angola",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Angola?",
+      "expect": "Angola",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Gabon?",
+      "expect": "Gabon",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Gabon?",
+      "expect": "Gabon",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Chad?",
+      "expect": "Chad",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Republik Afrika Tengah?",
+      "expect": "Republik Afrika Tengah",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Republik Afrika Tengah?",
+      "expect": "Republik Afrika Tengah",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Kamerun?",
+      "expect": "Kamerun",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Kamerun?",
+      "expect": "Kamerun",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kamerun?",
+      "expect": "Kamerun",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kamerun?",
+      "expect": "Kamerun",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Guinea Khatulistiwa?",
+      "expect": "Guinea Khatulistiwa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Etiopia?",
+      "expect": "Etiopia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Etiopia?",
+      "expect": "Etiopia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Etiopia?",
+      "expect": "Etiopia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Etiopia?",
+      "expect": "Etiopia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kenya?",
+      "expect": "Kenya",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Tanzania?",
+      "expect": "Tanzania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Tanzania?",
+      "expect": "Tanzania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Tanzania?",
+      "expect": "Tanzania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Tanzania?",
+      "expect": "Tanzania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Uganda?",
+      "expect": "Uganda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Uganda?",
+      "expect": "Uganda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Uganda?",
+      "expect": "Uganda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Uganda?",
+      "expect": "Uganda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Somalia?",
+      "expect": "Somalia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Rwanda?",
+      "expect": "Rwanda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Rwanda?",
+      "expect": "Rwanda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Rwanda?",
+      "expect": "Rwanda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Rwanda?",
+      "expect": "Rwanda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Madagaskar?",
+      "expect": "Madagaskar",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Eritrea?",
+      "expect": "Eritrea",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Eritrea?",
+      "expect": "Eritrea",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Eritrea?",
+      "expect": "Eritrea",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Eritrea?",
+      "expect": "Eritrea",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Djibouti?",
+      "expect": "Djibouti",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Sudan Selatan?",
+      "expect": "Sudan Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Sudan Selatan?",
+      "expect": "Sudan Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Sudan Selatan?",
+      "expect": "Sudan Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Sudan Selatan?",
+      "expect": "Sudan Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Burundi?",
+      "expect": "Burundi",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Burundi?",
+      "expect": "Burundi",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Burundi?",
+      "expect": "Burundi",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Burundi?",
+      "expect": "Burundi",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Mesir?",
+      "expect": "Mesir",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Mesir?",
+      "expect": "Mesir",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Mesir?",
+      "expect": "Mesir",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Mesir?",
+      "expect": "Mesir",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Maroko?",
+      "expect": "Maroko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Maroko?",
+      "expect": "Maroko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Maroko?",
+      "expect": "Maroko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Maroko?",
+      "expect": "Maroko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Aljazair?",
+      "expect": "Aljazair",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Aljazair?",
+      "expect": "Aljazair",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Aljazair?",
+      "expect": "Aljazair",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Aljazair?",
+      "expect": "Aljazair",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Tunisia?",
+      "expect": "Tunisia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Tunisia?",
+      "expect": "Tunisia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Tunisia?",
+      "expect": "Tunisia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Tunisia?",
+      "expect": "Tunisia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Libya?",
+      "expect": "Libya",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Libya?",
+      "expect": "Libya",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Libya?",
+      "expect": "Libya",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Libya?",
+      "expect": "Libya",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Sudan?",
+      "expect": "Sudan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Sudan?",
+      "expect": "Sudan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Sudan?",
+      "expect": "Sudan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Sudan?",
+      "expect": "Sudan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Mauritania?",
+      "expect": "Mauritania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Mauritania?",
+      "expect": "Mauritania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Mauritania?",
+      "expect": "Mauritania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Mauritania?",
+      "expect": "Mauritania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Jamaika?",
+      "expect": "Jamaika",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Jamaika?",
+      "expect": "Jamaika",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Haiti?",
+      "expect": "Haiti",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Haiti?",
+      "expect": "Haiti",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Haiti?",
+      "expect": "Haiti",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Haiti?",
+      "expect": "Haiti",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Republik Dominika?",
+      "expect": "Republik Dominika",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Republik Dominika?",
+      "expect": "Republik Dominika",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Bahama?",
+      "expect": "Bahama",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Bahama?",
+      "expect": "Bahama",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Barbados?",
+      "expect": "Barbados",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Puerto Rico?",
+      "expect": "Puerto Rico",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Puerto Rico?",
+      "expect": "Puerto Rico",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Brasil?",
+      "expect": "Brasil",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Brasil?",
+      "expect": "Brasil",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Brasil?",
+      "expect": "Brasil",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Brasil?",
+      "expect": "Brasil",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Argentina?",
+      "expect": "Argentina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Argentina?",
+      "expect": "Argentina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Argentina?",
+      "expect": "Argentina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Argentina?",
+      "expect": "Argentina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Kolombia?",
+      "expect": "Kolombia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Kolombia?",
+      "expect": "Kolombia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kolombia?",
+      "expect": "Kolombia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kolombia?",
+      "expect": "Kolombia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Chili?",
+      "expect": "Chili",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Chili?",
+      "expect": "Chili",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Chili?",
+      "expect": "Chili",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Chili?",
+      "expect": "Chili",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Peru?",
+      "expect": "Peru",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Peru?",
+      "expect": "Peru",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Peru?",
+      "expect": "Peru",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Peru?",
+      "expect": "Peru",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Venezuela?",
+      "expect": "Venezuela",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Venezuela?",
+      "expect": "Venezuela",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Venezuela?",
+      "expect": "Venezuela",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Venezuela?",
+      "expect": "Venezuela",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Ekuador?",
+      "expect": "Ekuador",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Ekuador?",
+      "expect": "Ekuador",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Ekuador?",
+      "expect": "Ekuador",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Ekuador?",
+      "expect": "Ekuador",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Bolivia?",
+      "expect": "Bolivia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Bolivia?",
+      "expect": "Bolivia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Bolivia?",
+      "expect": "Bolivia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Bolivia?",
+      "expect": "Bolivia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Paraguay?",
+      "expect": "Paraguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Paraguay?",
+      "expect": "Paraguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Paraguay?",
+      "expect": "Paraguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Paraguay?",
+      "expect": "Paraguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Uruguay?",
+      "expect": "Uruguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Uruguay?",
+      "expect": "Uruguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Uruguay?",
+      "expect": "Uruguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Uruguay?",
+      "expect": "Uruguay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Suriname?",
+      "expect": "Suriname",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Guatemala?",
+      "expect": "Guatemala",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Honduras?",
+      "expect": "Honduras",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Honduras?",
+      "expect": "Honduras",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Nikaragua?",
+      "expect": "Nikaragua",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kosta Rika?",
+      "expect": "Kosta Rika",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kosta Rika?",
+      "expect": "Kosta Rika",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara El Salvador?",
+      "expect": "El Salvador",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kuba?",
+      "expect": "Kuba",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Amerika Serikat?",
+      "expect": "Amerika Serikat",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Amerika Serikat?",
+      "expect": "Amerika Serikat",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Amerika Serikat?",
+      "expect": "Amerika Serikat",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kanada?",
+      "expect": "Kanada",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kanada?",
+      "expect": "Kanada",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Meksiko?",
+      "expect": "Meksiko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Meksiko?",
+      "expect": "Meksiko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Iran?",
+      "expect": "Iran",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Iran?",
+      "expect": "Iran",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Irak?",
+      "expect": "Irak",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Irak?",
+      "expect": "Irak",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Turki?",
+      "expect": "Turki",
+      "reason": "top hasil: Siprus"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Suriah?",
+      "expect": "Suriah",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Suriah?",
+      "expect": "Suriah",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Yaman?",
+      "expect": "Yaman",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Yaman?",
+      "expect": "Yaman",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Oman?",
+      "expect": "Oman",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Oman?",
+      "expect": "Oman",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Uni Emirat Arab?",
+      "expect": "Uni Emirat Arab",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Uni Emirat Arab?",
+      "expect": "Uni Emirat Arab",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Qatar?",
+      "expect": "Qatar",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Qatar?",
+      "expect": "Qatar",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Yordania?",
+      "expect": "Yordania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Yordania?",
+      "expect": "Yordania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Lebanon?",
+      "expect": "Lebanon",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Lebanon?",
+      "expect": "Lebanon",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Israel?",
+      "expect": "Israel",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Israel?",
+      "expect": "Israel",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Siprus?",
+      "expect": "Siprus",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Siprus?",
+      "expect": "Siprus",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Siprus?",
+      "expect": "Siprus",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Siprus?",
+      "expect": "Siprus",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Palestina?",
+      "expect": "Palestina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Palestina?",
+      "expect": "Palestina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Palestina?",
+      "expect": "Palestina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Palestina?",
+      "expect": "Palestina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai India?",
+      "expect": "India",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Pakistan?",
+      "expect": "Pakistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Pakistan?",
+      "expect": "Pakistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Bangladesh?",
+      "expect": "Bangladesh",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Bangladesh?",
+      "expect": "Bangladesh",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Bangladesh?",
+      "expect": "Bangladesh",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Bangladesh?",
+      "expect": "Bangladesh",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Bhutan?",
+      "expect": "Bhutan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Bhutan?",
+      "expect": "Bhutan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Bhutan?",
+      "expect": "Bhutan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Bhutan?",
+      "expect": "Bhutan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Maladewa?",
+      "expect": "Maladewa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Maladewa?",
+      "expect": "Maladewa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Maladewa?",
+      "expect": "Maladewa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Maladewa?",
+      "expect": "Maladewa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Afghanistan?",
+      "expect": "Afghanistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Afghanistan?",
+      "expect": "Afghanistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Afghanistan?",
+      "expect": "Afghanistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Afghanistan?",
+      "expect": "Afghanistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Kazakhstan?",
+      "expect": "Kazakhstan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Kazakhstan?",
+      "expect": "Kazakhstan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kazakhstan?",
+      "expect": "Kazakhstan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kazakhstan?",
+      "expect": "Kazakhstan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Uzbekistan?",
+      "expect": "Uzbekistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Uzbekistan?",
+      "expect": "Uzbekistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Turkmenistan?",
+      "expect": "Turkmenistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Turkmenistan?",
+      "expect": "Turkmenistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Turkmenistan?",
+      "expect": "Turkmenistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Turkmenistan?",
+      "expect": "Turkmenistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kirgistan?",
+      "expect": "Kirgistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kirgistan?",
+      "expect": "Kirgistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Tajikistan?",
+      "expect": "Tajikistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Tajikistan?",
+      "expect": "Tajikistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Tajikistan?",
+      "expect": "Tajikistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Tajikistan?",
+      "expect": "Tajikistan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Indonesia?",
+      "expect": "Indonesia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Indonesia?",
+      "expect": "Indonesia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Malaysia?",
+      "expect": "Malaysia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Malaysia?",
+      "expect": "Malaysia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Malaysia?",
+      "expect": "Malaysia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Malaysia?",
+      "expect": "Malaysia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Thailand?",
+      "expect": "Thailand",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Thailand?",
+      "expect": "Thailand",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Thailand?",
+      "expect": "Thailand",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Thailand?",
+      "expect": "Thailand",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Vietnam?",
+      "expect": "Vietnam",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Filipina?",
+      "expect": "Filipina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Filipina?",
+      "expect": "Filipina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Filipina?",
+      "expect": "Filipina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Filipina?",
+      "expect": "Filipina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Myanmar?",
+      "expect": "Myanmar",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Myanmar?",
+      "expect": "Myanmar",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Kamboja?",
+      "expect": "Kamboja",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Kamboja?",
+      "expect": "Kamboja",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kamboja?",
+      "expect": "Kamboja",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kamboja?",
+      "expect": "Kamboja",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Laos?",
+      "expect": "Laos",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Laos?",
+      "expect": "Laos",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Laos?",
+      "expect": "Laos",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Laos?",
+      "expect": "Laos",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Brunei Darussalam?",
+      "expect": "Brunei Darussalam",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Brunei Darussalam?",
+      "expect": "Brunei Darussalam",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota China?",
+      "expect": "China",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi China?",
+      "expect": "China",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai China?",
+      "expect": "China",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara China?",
+      "expect": "China",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Jepang?",
+      "expect": "Jepang",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Jepang?",
+      "expect": "Jepang",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Korea Selatan?",
+      "expect": "Korea Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Korea Selatan?",
+      "expect": "Korea Selatan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Mongolia?",
+      "expect": "Mongolia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Mongolia?",
+      "expect": "Mongolia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Makau?",
+      "expect": "Makau",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Makau?",
+      "expect": "Makau",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Tibet?",
+      "expect": "Tibet",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Jerman?",
+      "expect": "Jerman",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Jerman?",
+      "expect": "Jerman",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Prancis?",
+      "expect": "Prancis",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Prancis?",
+      "expect": "Prancis",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Inggris?",
+      "expect": "Inggris",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Inggris?",
+      "expect": "Inggris",
+      "reason": "top hasil: Belize"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Inggris?",
+      "expect": "Inggris",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Inggris?",
+      "expect": "Inggris",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Belanda?",
+      "expect": "Belanda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Belanda?",
+      "expect": "Belanda",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Belgia?",
+      "expect": "Belgia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Belgia?",
+      "expect": "Belgia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Belgia?",
+      "expect": "Belgia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Belgia?",
+      "expect": "Belgia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Austria?",
+      "expect": "Austria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Austria?",
+      "expect": "Austria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Austria?",
+      "expect": "Austria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Austria?",
+      "expect": "Austria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Irlandia?",
+      "expect": "Irlandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Irlandia?",
+      "expect": "Irlandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Italia?",
+      "expect": "Italia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Italia?",
+      "expect": "Italia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Spanyol?",
+      "expect": "Spanyol",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Spanyol?",
+      "expect": "Spanyol",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Spanyol?",
+      "expect": "Spanyol",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Spanyol?",
+      "expect": "Spanyol",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Portugal?",
+      "expect": "Portugal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Portugal?",
+      "expect": "Portugal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Portugal?",
+      "expect": "Portugal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Portugal?",
+      "expect": "Portugal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Yunani?",
+      "expect": "Yunani",
+      "reason": "top hasil: Siprus"
+    },
+    {
+      "q": "Apa nama resmi negara Kroasia?",
+      "expect": "Kroasia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Slovenia?",
+      "expect": "Slovenia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Slovenia?",
+      "expect": "Slovenia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Malta?",
+      "expect": "Malta",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Malta?",
+      "expect": "Malta",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Polandia?",
+      "expect": "Polandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Polandia?",
+      "expect": "Polandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Ceko?",
+      "expect": "Ceko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Ceko?",
+      "expect": "Ceko",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Hungaria?",
+      "expect": "Hungaria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Hungaria?",
+      "expect": "Hungaria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Slowakia?",
+      "expect": "Slowakia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Slowakia?",
+      "expect": "Slowakia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Rusia?",
+      "expect": "Rusia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Rusia?",
+      "expect": "Rusia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Ukraina?",
+      "expect": "Ukraina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Ukraina?",
+      "expect": "Ukraina",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Rumania?",
+      "expect": "Rumania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Bulgaria?",
+      "expect": "Bulgaria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Bulgaria?",
+      "expect": "Bulgaria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Moldova?",
+      "expect": "Moldova",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Norwegia?",
+      "expect": "Norwegia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Norwegia?",
+      "expect": "Norwegia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Swedia?",
+      "expect": "Swedia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Swedia?",
+      "expect": "Swedia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Finlandia?",
+      "expect": "Finlandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Finlandia?",
+      "expect": "Finlandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Denmark?",
+      "expect": "Denmark",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Denmark?",
+      "expect": "Denmark",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Islandia?",
+      "expect": "Islandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Islandia?",
+      "expect": "Islandia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Estonia?",
+      "expect": "Estonia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Estonia?",
+      "expect": "Estonia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Latvia?",
+      "expect": "Latvia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Latvia?",
+      "expect": "Latvia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Lithuania?",
+      "expect": "Lithuania",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Kepulauan Faroe?",
+      "expect": "Kepulauan Faroe",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Kepulauan Faroe?",
+      "expect": "Kepulauan Faroe",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Svalbard?",
+      "expect": "Svalbard",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Svalbard?",
+      "expect": "Svalbard",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Svalbard?",
+      "expect": "Svalbard",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Svalbard?",
+      "expect": "Svalbard",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Australia?",
+      "expect": "Australia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa ibu kota Vanuatu?",
+      "expect": "Vanuatu",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Berapa populasi Vanuatu?",
+      "expect": "Vanuatu",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Mata uang apa yang dipakai Vanuatu?",
+      "expect": "Vanuatu",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Vanuatu?",
+      "expect": "Vanuatu",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Samoa?",
+      "expect": "Samoa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa nama resmi negara Tonga?",
+      "expect": "Tonga",
+      "reason": "fallback (tidak ada di atas threshold)"
+    }
+  ]
+}

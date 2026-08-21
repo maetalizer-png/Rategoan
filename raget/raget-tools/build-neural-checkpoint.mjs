@@ -1,21 +1,29 @@
-// vNext Fase C: bangun korpus bootstrap dari data Rategoan sendiri (bukan
-// scraping baru) dan hasilkan checkpoint awal untuk Raget Neural - transformer
+// vNext Fase C: bangun checkpoint awal untuk Raget Neural - transformer
 // ~50 juta parameter yang diadaptasi dari kesempatan-os-/kesem-llm/ (lihat
 // raget/raget-llm/neural/). Checkpoint ini yang di-fetch browser saat pengguna
 // memilih model neural, BUKAN training BPE tokenizer di runtime browser
 // (terlalu lambat) - build-time step ini sama seperti migrate-*-domain.mjs
 // dijalankan sekali, hasilnya disimpan sebagai aset statis.
 //
+// KORPUS: dibaca dari raget-corpus/raget_own_corpus.jsonl - dihasilkan oleh
+// raget-tools/dataries-ke-korpus.mjs (jalankan skrip itu dulu kalau file ini
+// belum ada atau sumber data berubah). Skrip ini SENGAJA tidak lagi
+// mengumpulkan data sendiri secara terpisah (dulu ada gatherCorpus() yang
+// duplikat logikanya dengan dataries-ke-korpus.mjs) - satu sumber kebenaran
+// korpus, bukan dua jalur yang bisa berbeda diam-diam.
+//
 // CATATAN JUJUR: skipAutoTrain dipakai (bobot inisialisasi acak, TIDAK
 // dilatih gradient descent) supaya build step ini cepat dan bisa diverifikasi
 // end-to-end sekarang. Ini "struktur yang bisa diuji coba", bukan model yang
 // sudah menghasilkan teks koheren - badge "Neural (Eksperimental)" di UI
 // mencerminkan ini apa adanya. Pelatihan sungguhan (banyak epoch, korpus jauh
-// lebih besar) adalah kerja lanjutan Fase C berikutnya.
+// lebih besar) adalah kerja lanjutan Fase C berikutnya - TIDAK dijalankan di
+// skrip ini.
 //
-// Pakai: node raget/raget-tools/build-neural-checkpoint.mjs
+// Pakai: node raget/raget-tools/dataries-ke-korpus.mjs   (bangun/perbarui korpus)
+//        node raget/raget-tools/build-neural-checkpoint.mjs   (bangun checkpoint)
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { LLMCore } from '../raget-llm/neural/llm-core.js';
@@ -24,51 +32,27 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'neural');
 const OUT_FILE = path.join(OUT_DIR, 'checkpoint-50m.json');
-
-function readJson(p) {
-  return JSON.parse(readFileSync(p, 'utf8'));
-}
+const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-corpus', 'raget_own_corpus.jsonl');
 
 function gatherCorpus() {
+  const raw = readFileSync(CORPUS_FILE, 'utf8').trim();
+  if (!raw) throw new Error('Korpus kosong: ' + CORPUS_FILE + ' - jalankan dataries-ke-korpus.mjs dulu.');
   const texts = [];
-
-  // 1) raget-dataset/knowledge/*.json - factoid {subject,answer} dan FAQ-style {q,a}
-  const knowDir = path.join(ROOT, 'raget', 'raget-dataset', 'knowledge');
-  for (const f of readdirSync(knowDir).filter((f) => f.endsWith('.json'))) {
-    const data = readJson(path.join(knowDir, f));
-    if (!Array.isArray(data)) continue;
-    for (const item of data) {
-      if (item.subject && item.answer) texts.push(item.subject.charAt(0).toUpperCase() + item.subject.slice(1) + ': ' + item.answer);
-      if (item.q && item.a) { texts.push(item.q); texts.push(item.a); }
-      if (item.text) texts.push(item.text);
+  for (const line of raw.split('\n')) {
+    if (!line.trim()) continue;
+    const rec = JSON.parse(line);
+    if (rec.type === 'dialog') {
+      texts.push(rec.prompt);
+      texts.push(rec.completion);
+    } else if (rec.text) {
+      texts.push(rec.text);
     }
   }
-
-  // 2) fewshot.json - dialog {q,a} - materi percakapan asli Rategoan
-  const fewshot = readJson(path.join(ROOT, 'raget', 'raget-dataset', 'fewshot.json'));
-  for (const item of fewshot) {
-    if (item.q) texts.push(item.q);
-    if (item.a) texts.push(item.a);
-  }
-
-  // 3) raget-data/*/*.json (domain yang sudah dimigrasi skema tunggal Fase B) - field teks
-  const dataDir = path.join(ROOT, 'raget', 'raget-data');
-  for (const domain of readdirSync(dataDir, { withFileTypes: true }).filter((d) => d.isDirectory())) {
-    const domainDir = path.join(dataDir, domain.name);
-    for (const f of readdirSync(domainDir).filter((f) => f.endsWith('.json'))) {
-      const data = readJson(path.join(domainDir, f));
-      if (!Array.isArray(data)) continue;
-      for (const entry of data) {
-        if (entry.teks) texts.push(entry.teks);
-      }
-    }
-  }
-
   return texts.filter((t) => typeof t === 'string' && t.trim().length > 0);
 }
 
 async function main() {
-  console.log('Mengumpulkan korpus dari data Rategoan sendiri...');
+  console.log('Membaca korpus dari', path.relative(ROOT, CORPUS_FILE) + '...');
   const corpus = gatherCorpus();
   console.log('Korpus terkumpul:', corpus.length, 'kalimat/teks.');
   const totalChars = corpus.reduce((s, t) => s + t.length, 0);
