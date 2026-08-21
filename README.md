@@ -84,7 +84,7 @@ js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
   raget-agents/                   router intent + orkestrasi tool + mesin khusus
-  raget-llm/                      mesin balasan berbasis template
+  raget-llm/                      mesin balasan (template default + Raget Neural eksperimental, lihat di bawah)
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian TF-IDF satu pintu lintas sumber
@@ -146,6 +146,26 @@ literal). Domain yang sudah dimigrasi: **tokoh** (`raget-data/tokoh/tokoh.json`,
 internasional** (`raget-data/hari-internasional/hari-internasional.json`, 158 entri) — pola
 migrasinya didokumentasikan di `raget/raget-tools/migrate-*-domain.mjs` untuk dipakai
 ulang di domain berikutnya.
+
+## Raget Neural (Eksperimental)
+
+Selain mesin template default, tersedia **Raget Neural** — transformer ~58 juta parameter
+yang ditulis dari nol dalam JavaScript murni (bukan wrapper provider apa pun), diadaptasi dari
+proyek sepupu [kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-)
+(`kesem-llm/`) ke `raget/raget-llm/neural/`. Bisa dicoba lewat pemilih model (ikon kotak di
+composer) — **opt-in**, mesin template tetap default dan berjalan tanpa perubahan apa pun.
+
+**Status jujur saat ini**: bobot **belum dilatih** (inisialisasi acak) — struktur arsitektur
+sudah bisa dijalankan dan diuji end-to-end (tokenizer BPE terlatih dari korpus Rategoan
+sendiri, forward pass, sampling, generate), tapi jawabannya belum koheren. Label
+"Neural Lokal (Eksperimental)" di UI mencerminkan ini apa adanya, bukan basa-basi.
+
+```
+node raget/raget-tools/build-neural-checkpoint.mjs   # bangun ulang checkpoint dari korpus Rategoan
+```
+
+Rencana lanjutan (pelatihan sungguhan, anggaran ukuran checkpoint, tokenizer domain-spesifik,
+gerbang kualitas sebelum label eksperimental dilepas) ada di roadmap vNext.
 
 ## Kualitas & Pengujian
 
