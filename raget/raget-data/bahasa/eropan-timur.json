@@ -1,0 +1,149 @@
+[
+  {
+    "id": "bahasa-rusia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-timur",
+    "nama": "Rusia",
+    "tags": [
+      "rusia",
+      "eropa timur"
+    ],
+    "teks": "Rusia — bahasa Rusia, 150 juta penutur asli (250 juta global). Aksara: Sirilik. Sapaan: privet (halo), spasibo (terima kasih).",
+    "meta": {
+      "nativeName": "Русский",
+      "speakers": "250 juta",
+      "script": "Sirilik",
+      "family": "Slavik",
+      "officialIn": [
+        "Rusia",
+        "Belarus"
+      ],
+      "greetings": {
+        "halo": "privet",
+        "pagi": "dobroye utro",
+        "terimakasih": "spasibo"
+      },
+      "tags": [
+        "rusia",
+        "eropa timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-ukraina",
+    "kategori": "bahasa",
+    "wilayah": "eropan-timur",
+    "nama": "Ukraina",
+    "tags": [
+      "ukraina",
+      "eropa timur"
+    ],
+    "teks": "Ukraina — bahasa Ukraina, 40 juta penutur. Aksara: Sirilik. Sapaan: pryvit (halo), dyakuyu (terima kasih).",
+    "meta": {
+      "nativeName": "Українська",
+      "speakers": "40 juta",
+      "script": "Sirilik",
+      "family": "Slavik",
+      "officialIn": [
+        "Ukraina"
+      ],
+      "greetings": {
+        "halo": "pryvit",
+        "pagi": "dobroho ranku",
+        "terimakasih": "dyakuyu"
+      },
+      "tags": [
+        "ukraina",
+        "eropa timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-rumania",
+    "kategori": "bahasa",
+    "wilayah": "eropan-timur",
+    "nama": "Rumania",
+    "tags": [
+      "rumania",
+      "eropa timur"
+    ],
+    "teks": "Rumania — bahasa Rumania, 24 juta penutur. Aksara: Latin. Sapaan: salut (halo), mulțumesc (terima kasih).",
+    "meta": {
+      "nativeName": "Română",
+      "speakers": "24 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Rumania",
+        "Moldova"
+      ],
+      "greetings": {
+        "halo": "salut",
+        "pagi": "bună dimineața",
+        "terimakasih": "mulțumesc"
+      },
+      "tags": [
+        "rumania",
+        "eropa timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-belarus",
+    "kategori": "bahasa",
+    "wilayah": "eropan-timur",
+    "nama": "Belarus",
+    "tags": [
+      "belarus",
+      "eropa timur"
+    ],
+    "teks": "Belarus — bahasa Belarus, 5 juta penutur. Aksara: Sirilik. Sapaan: vitaju (halo), dziakuj (terima kasih).",
+    "meta": {
+      "nativeName": "Беларуская",
+      "speakers": "5 juta",
+      "script": "Sirilik",
+      "family": "Slavik",
+      "officialIn": [
+        "Belarus"
+      ],
+      "greetings": {
+        "halo": "vitaju",
+        "pagi": "dobray ranicy",
+        "terimakasih": "dziakuj"
+      },
+      "tags": [
+        "belarus",
+        "eropa timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-bulgaria",
+    "kategori": "bahasa",
+    "wilayah": "eropan-timur",
+    "nama": "Bulgaria",
+    "tags": [
+      "bulgaria",
+      "eropa timur"
+    ],
+    "teks": "Bulgaria — bahasa Bulgaria, 8 juta penutur. Aksara: Sirilik. Sapaan: zdravei (halo), blagodarya (terima kasih).",
+    "meta": {
+      "nativeName": "Български",
+      "speakers": "8 juta",
+      "script": "Sirilik",
+      "family": "Slavik",
+      "officialIn": [
+        "Bulgaria"
+      ],
+      "greetings": {
+        "halo": "zdravei",
+        "pagi": "dobro utro",
+        "terimakasih": "blagodarya"
+      },
+      "tags": [
+        "bulgaria",
+        "eropa timur"
+      ]
+    }
+  }
+]

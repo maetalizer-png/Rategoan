@@ -1,0 +1,149 @@
+[
+  {
+    "id": "kota-roma-italia",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Roma",
+    "tags": [
+      "roma",
+      "italia"
+    ],
+    "teks": "Roma — ibukota Italia. Populasi 2,8 juta. Terkenal: Colosseum, Vatikan.",
+    "meta": {
+      "country": "Italia",
+      "type": "city",
+      "population": "2,8 juta",
+      "knownFor": "Colosseum, Vatikan",
+      "tags": [
+        "roma",
+        "italia"
+      ]
+    }
+  },
+  {
+    "id": "kota-milan-italia",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Milan",
+    "tags": [
+      "milan",
+      "italia"
+    ],
+    "teks": "Milan — kota mode Italia. Populasi 1,4 juta. Terkenal: fashion, Katedral Duomo.",
+    "meta": {
+      "country": "Italia",
+      "type": "city",
+      "population": "1,4 juta",
+      "knownFor": "fashion, Duomo",
+      "tags": [
+        "milan",
+        "italia"
+      ]
+    }
+  },
+  {
+    "id": "kota-madrid-spanyol",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Madrid",
+    "tags": [
+      "madrid",
+      "spanyol"
+    ],
+    "teks": "Madrid — ibukota Spanyol. Populasi 3,3 juta. Terkenal: museum Prado, sepak bola.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "city",
+      "population": "3,3 juta",
+      "knownFor": "museum Prado, sepak bola",
+      "tags": [
+        "madrid",
+        "spanyol"
+      ]
+    }
+  },
+  {
+    "id": "kota-barcelona-spanyol",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Barcelona",
+    "tags": [
+      "barcelona",
+      "spanyol"
+    ],
+    "teks": "Barcelona — kota terbesar kedua Spanyol. Populasi 1,6 juta. Terkenal: arsitektur Gaudi, pantai.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "city",
+      "population": "1,6 juta",
+      "knownFor": "Gaudi, pantai",
+      "tags": [
+        "barcelona",
+        "spanyol"
+      ]
+    }
+  },
+  {
+    "id": "kota-lisbon-portugal",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Lisbon",
+    "tags": [
+      "lisbon",
+      "portugal"
+    ],
+    "teks": "Lisbon — ibukota Portugal. Populasi 550 ribu. Terkenal: trem kuno, tepi Sungai Tagus.",
+    "meta": {
+      "country": "Portugal",
+      "type": "city",
+      "population": "550 ribu",
+      "knownFor": "trem kuno, Sungai Tagus",
+      "tags": [
+        "lisbon",
+        "portugal"
+      ]
+    }
+  },
+  {
+    "id": "kota-athena-yunani",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Athena",
+    "tags": [
+      "athena",
+      "yunani"
+    ],
+    "teks": "Athena — ibukota Yunani. Populasi 660 ribu. Terkenal: Akropolis, peradaban kuno.",
+    "meta": {
+      "country": "Yunani",
+      "type": "city",
+      "population": "660 ribu",
+      "knownFor": "Akropolis, peradaban kuno",
+      "tags": [
+        "athena",
+        "yunani"
+      ]
+    }
+  },
+  {
+    "id": "kota-zagreb-kroasia",
+    "kategori": "kota",
+    "wilayah": "eropan-selatan",
+    "nama": "Zagreb",
+    "tags": [
+      "zagreb",
+      "kroasia"
+    ],
+    "teks": "Zagreb — ibukota Kroasia. Populasi 800 ribu. Terkenal: kota tua, pasar Dolac.",
+    "meta": {
+      "country": "Kroasia",
+      "type": "city",
+      "population": "800 ribu",
+      "knownFor": "kota tua, pasar Dolac",
+      "tags": [
+        "zagreb",
+        "kroasia"
+      ]
+    }
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "id": "kota-oslo-norwegia",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Oslo",
+    "tags": [
+      "oslo",
+      "norwegia"
+    ],
+    "teks": "Oslo — ibukota Norwegia. Populasi 700 ribu. Terkenal: fjord, kualitas hidup tinggi.",
+    "meta": {
+      "country": "Norwegia",
+      "type": "city",
+      "population": "700 ribu",
+      "knownFor": "fjord, kualitas hidup",
+      "tags": [
+        "oslo",
+        "norwegia"
+      ]
+    }
+  },
+  {
+    "id": "kota-stockholm-swedia",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Stockholm",
+    "tags": [
+      "stockholm",
+      "swedia"
+    ],
+    "teks": "Stockholm — ibukota Swedia. Populasi 980 ribu. Terkenal: kota kepulauan, desain Skandinavia.",
+    "meta": {
+      "country": "Swedia",
+      "type": "city",
+      "population": "980 ribu",
+      "knownFor": "kepulauan, desain",
+      "tags": [
+        "stockholm",
+        "swedia"
+      ]
+    }
+  },
+  {
+    "id": "kota-helsinki-finlandia",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Helsinki",
+    "tags": [
+      "helsinki",
+      "finlandia"
+    ],
+    "teks": "Helsinki — ibukota Finlandia. Populasi 660 ribu. Terkenal: sauna, desain modern.",
+    "meta": {
+      "country": "Finlandia",
+      "type": "city",
+      "population": "660 ribu",
+      "knownFor": "sauna, desain modern",
+      "tags": [
+        "helsinki",
+        "finlandia"
+      ]
+    }
+  },
+  {
+    "id": "kota-kopenhagen-denmark",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Kopenhagen",
+    "tags": [
+      "kopenhagen",
+      "denmark"
+    ],
+    "teks": "Kopenhagen — ibukota Denmark. Populasi 640 ribu. Terkenal: kota sepeda, kastil Nyhavn.",
+    "meta": {
+      "country": "Denmark",
+      "type": "city",
+      "population": "640 ribu",
+      "knownFor": "sepeda, Nyhavn",
+      "tags": [
+        "kopenhagen",
+        "denmark"
+      ]
+    }
+  },
+  {
+    "id": "kota-reykjavik-islandia",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Reykjavik",
+    "tags": [
+      "reykjavik",
+      "islandia"
+    ],
+    "teks": "Reykjavik — ibukota Islandia. Populasi 130 ribu. Terkenal: gerbang aurora dan geiser.",
+    "meta": {
+      "country": "Islandia",
+      "type": "city",
+      "population": "130 ribu",
+      "knownFor": "aurora, geiser",
+      "tags": [
+        "reykjavik",
+        "islandia"
+      ]
+    }
+  },
+  {
+    "id": "kota-tallinn-estonia",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Tallinn",
+    "tags": [
+      "tallinn",
+      "estonia"
+    ],
+    "teks": "Tallinn — ibukota Estonia. Populasi 440 ribu. Terkenal: kota tua abad pertengahan.",
+    "meta": {
+      "country": "Estonia",
+      "type": "city",
+      "population": "440 ribu",
+      "knownFor": "kota tua abad pertengahan",
+      "tags": [
+        "tallinn",
+        "estonia"
+      ]
+    }
+  },
+  {
+    "id": "kota-riga-latvia",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Riga",
+    "tags": [
+      "riga",
+      "latvia"
+    ],
+    "teks": "Riga — ibukota Latvia. Populasi 600 ribu. Terkenal: arsitektur art nouveau.",
+    "meta": {
+      "country": "Latvia",
+      "type": "city",
+      "population": "600 ribu",
+      "knownFor": "arsitektur art nouveau",
+      "tags": [
+        "riga",
+        "latvia"
+      ]
+    }
+  },
+  {
+    "id": "kota-vilnius-lithuania",
+    "kategori": "kota",
+    "wilayah": "eropan-utara",
+    "nama": "Vilnius",
+    "tags": [
+      "vilnius",
+      "lithuania"
+    ],
+    "teks": "Vilnius — ibukota Lithuania. Populasi 540 ribu. Terkenal: kota tua UNESCO.",
+    "meta": {
+      "country": "Lithuania",
+      "type": "city",
+      "population": "540 ribu",
+      "knownFor": "kota tua UNESCO",
+      "tags": [
+        "vilnius",
+        "lithuania"
+      ]
+    }
+  }
+]

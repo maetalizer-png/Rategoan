@@ -1,0 +1,118 @@
+[
+  {
+    "id": "bahasa-polandia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-tengah",
+    "nama": "Polandia",
+    "tags": [
+      "polandia",
+      "eropa tengah"
+    ],
+    "teks": "Polandia — bahasa Polandia, 40 juta penutur. Aksara: Latin. Sapaan: cześć (halo), dziękuję (terima kasih).",
+    "meta": {
+      "nativeName": "Polski",
+      "speakers": "40 juta",
+      "script": "Latin",
+      "family": "Slavik",
+      "officialIn": [
+        "Polandia"
+      ],
+      "greetings": {
+        "halo": "cześć",
+        "pagi": "dzień dobry",
+        "terimakasih": "dziękuję"
+      },
+      "tags": [
+        "polandia",
+        "eropa tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-ceko",
+    "kategori": "bahasa",
+    "wilayah": "eropan-tengah",
+    "nama": "Ceko",
+    "tags": [
+      "ceko",
+      "eropa tengah"
+    ],
+    "teks": "Ceko — bahasa Ceko, 10,7 juta penutur. Aksara: Latin. Sapaan: ahoj (halo), děkuji (terima kasih).",
+    "meta": {
+      "nativeName": "Čeština",
+      "speakers": "10,7 juta",
+      "script": "Latin",
+      "family": "Slavik",
+      "officialIn": [
+        "Ceko"
+      ],
+      "greetings": {
+        "halo": "ahoj",
+        "pagi": "dobré ráno",
+        "terimakasih": "děkuji"
+      },
+      "tags": [
+        "ceko",
+        "eropa tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-hungaria",
+    "kategori": "bahasa",
+    "wilayah": "eropan-tengah",
+    "nama": "Hungaria",
+    "tags": [
+      "hungaria",
+      "eropa tengah"
+    ],
+    "teks": "Hungaria — bahasa Hungaria, 13 juta penutur. Aksara: Latin. Sapaan: szia (halo), köszönöm (terima kasih).",
+    "meta": {
+      "nativeName": "Magyar",
+      "speakers": "13 juta",
+      "script": "Latin",
+      "family": "Ugrik",
+      "officialIn": [
+        "Hungaria"
+      ],
+      "greetings": {
+        "halo": "szia",
+        "pagi": "jó reggelt",
+        "terimakasih": "köszönöm"
+      },
+      "tags": [
+        "hungaria",
+        "eropa tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-slowakia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-tengah",
+    "nama": "Slowakia",
+    "tags": [
+      "slowakia",
+      "eropa tengah"
+    ],
+    "teks": "Slowakia — bahasa Slowakia, 5,2 juta penutur. Aksara: Latin. Sapaan: ahoj (halo), ďakujem (terima kasih).",
+    "meta": {
+      "nativeName": "Slovenčina",
+      "speakers": "5,2 juta",
+      "script": "Latin",
+      "family": "Slavik",
+      "officialIn": [
+        "Slowakia"
+      ],
+      "greetings": {
+        "halo": "ahoj",
+        "pagi": "dobré ráno",
+        "terimakasih": "ďakujem"
+      },
+      "tags": [
+        "slowakia",
+        "eropa tengah"
+      ]
+    }
+  }
+]

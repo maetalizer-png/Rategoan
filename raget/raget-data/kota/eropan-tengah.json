@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kota-warsawa-polandia",
+    "kategori": "kota",
+    "wilayah": "eropan-tengah",
+    "nama": "Warsawa",
+    "tags": [
+      "warsawa",
+      "polandia"
+    ],
+    "teks": "Warsawa — ibukota Polandia. Populasi 1,8 juta. Terkenal: kota tua yang dibangun kembali pasca perang.",
+    "meta": {
+      "country": "Polandia",
+      "type": "city",
+      "population": "1,8 juta",
+      "knownFor": "kota tua, sejarah perang",
+      "tags": [
+        "warsawa",
+        "polandia"
+      ]
+    }
+  },
+  {
+    "id": "kota-krakow-polandia",
+    "kategori": "kota",
+    "wilayah": "eropan-tengah",
+    "nama": "Krakow",
+    "tags": [
+      "krakow",
+      "polandia"
+    ],
+    "teks": "Krakow — kota budaya Polandia. Populasi 780 ribu. Terkenal: alun-alun kota tua, dekat Auschwitz.",
+    "meta": {
+      "country": "Polandia",
+      "type": "city",
+      "population": "780 ribu",
+      "knownFor": "alun-alun kota tua",
+      "tags": [
+        "krakow",
+        "polandia"
+      ]
+    }
+  },
+  {
+    "id": "kota-praha-ceko",
+    "kategori": "kota",
+    "wilayah": "eropan-tengah",
+    "nama": "Praha",
+    "tags": [
+      "praha",
+      "ceko"
+    ],
+    "teks": "Praha — ibukota Ceko. Populasi 1,3 juta. Terkenal: jembatan Charles, arsitektur gotik.",
+    "meta": {
+      "country": "Ceko",
+      "type": "city",
+      "population": "1,3 juta",
+      "knownFor": "Charles Bridge, gotik",
+      "tags": [
+        "praha",
+        "ceko"
+      ]
+    }
+  },
+  {
+    "id": "kota-budapest-hungaria",
+    "kategori": "kota",
+    "wilayah": "eropan-tengah",
+    "nama": "Budapest",
+    "tags": [
+      "budapest",
+      "hungaria"
+    ],
+    "teks": "Budapest — ibukota Hungaria. Populasi 1,8 juta. Terkenal: pemandian air panas, Sungai Donau.",
+    "meta": {
+      "country": "Hungaria",
+      "type": "city",
+      "population": "1,8 juta",
+      "knownFor": "pemandian air panas, Donau",
+      "tags": [
+        "budapest",
+        "hungaria"
+      ]
+    }
+  },
+  {
+    "id": "kota-bratislava-slowakia",
+    "kategori": "kota",
+    "wilayah": "eropan-tengah",
+    "nama": "Bratislava",
+    "tags": [
+      "bratislava",
+      "slowakia"
+    ],
+    "teks": "Bratislava — ibukota Slowakia. Populasi 430 ribu. Terkenal: kastil di tepi sungai, kota kecil bersejarah.",
+    "meta": {
+      "country": "Slowakia",
+      "type": "city",
+      "population": "430 ribu",
+      "knownFor": "kastil, bersejarah",
+      "tags": [
+        "bratislava",
+        "slowakia"
+      ]
+    }
+  }
+]

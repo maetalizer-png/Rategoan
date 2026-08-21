@@ -1,0 +1,120 @@
+[
+  {
+    "id": "bahasa-inggris-as",
+    "kategori": "bahasa",
+    "wilayah": "american-utara",
+    "nama": "Inggris (AS)",
+    "tags": [
+      "amerika serikat",
+      "american-utara"
+    ],
+    "teks": "Amerika Serikat — bahasa Inggris, bahasa mayoritas, 240 juta penutur. Aksara: Latin. Sapaan: hello (halo), thank you (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "240 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Amerika Serikat"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thank you"
+      },
+      "tags": [
+        "amerika serikat",
+        "american-utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-prancis-kanada",
+    "kategori": "bahasa",
+    "wilayah": "american-utara",
+    "nama": "Prancis Kanada",
+    "tags": [
+      "kanada",
+      "american-utara"
+    ],
+    "teks": "Kanada — bahasa Prancis Quebec, dituturkan 7 juta orang, resmi berdampingan dengan Inggris. Sapaan: bonjour (halo), merci (terima kasih).",
+    "meta": {
+      "nativeName": "Français québécois",
+      "speakers": "7 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Kanada"
+      ],
+      "greetings": {
+        "halo": "bonjour",
+        "pagi": "bonjour",
+        "terimakasih": "merci"
+      },
+      "tags": [
+        "kanada",
+        "american-utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-meksiko",
+    "kategori": "bahasa",
+    "wilayah": "american-utara",
+    "nama": "Spanyol Meksiko",
+    "tags": [
+      "meksiko",
+      "american-utara"
+    ],
+    "teks": "Meksiko — bahasa Spanyol, 125 juta penutur. Aksara: Latin. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "125 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Meksiko"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "meksiko",
+        "american-utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-nahuatl",
+    "kategori": "bahasa",
+    "wilayah": "american-utara",
+    "nama": "Nahuatl",
+    "tags": [
+      "meksiko",
+      "american-utara",
+      "bahasa asli"
+    ],
+    "teks": "Meksiko — bahasa Nahuatl, bahasa asli Aztek, 1,7 juta penutur. Sapaan: niltze (halo), tlazocamati (terima kasih).",
+    "meta": {
+      "nativeName": "Nāhuatl",
+      "speakers": "1,7 juta",
+      "script": "Latin",
+      "family": "Uto-Aztekan",
+      "officialIn": [
+        "Meksiko"
+      ],
+      "greetings": {
+        "halo": "niltze",
+        "pagi": "niltze",
+        "terimakasih": "tlazocamati"
+      },
+      "tags": [
+        "meksiko",
+        "american-utara",
+        "bahasa asli"
+      ]
+    }
+  }
+]

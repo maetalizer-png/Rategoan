@@ -1,0 +1,184 @@
+[
+  {
+    "id": "bahasa-arab",
+    "kategori": "bahasa",
+    "wilayah": "asian-barat",
+    "nama": "Arab",
+    "tags": [
+      "arab saudi",
+      "asia barat"
+    ],
+    "teks": "Arab Saudi — bahasa Arab, 300 juta penutur global. Aksara: Arab. Sapaan: assalamualaikum (halo), shukran (terima kasih).",
+    "meta": {
+      "nativeName": "العربية",
+      "speakers": "300 juta",
+      "script": "Arab",
+      "family": "Semitik",
+      "officialIn": [
+        "Arab Saudi",
+        "Irak",
+        "Suriah",
+        "Yaman"
+      ],
+      "greetings": {
+        "halo": "assalamualaikum",
+        "pagi": "sabah al-khair",
+        "terimakasih": "shukran"
+      },
+      "tags": [
+        "arab saudi",
+        "asia barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-persia",
+    "kategori": "bahasa",
+    "wilayah": "asian-barat",
+    "nama": "Persia",
+    "tags": [
+      "iran",
+      "asia barat"
+    ],
+    "teks": "Iran — bahasa Persia (Farsi), 70 juta penutur. Aksara: Arab-Persia. Sapaan: salaam (halo), mamnoon (terima kasih).",
+    "meta": {
+      "nativeName": "فارسی",
+      "speakers": "70 juta",
+      "script": "Arab-Persia",
+      "family": "Indo-Iran",
+      "officialIn": [
+        "Iran"
+      ],
+      "greetings": {
+        "halo": "salaam",
+        "pagi": "sobh bekheir",
+        "terimakasih": "mamnoon"
+      },
+      "tags": [
+        "iran",
+        "asia barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-turki",
+    "kategori": "bahasa",
+    "wilayah": "asian-barat",
+    "nama": "Turki",
+    "tags": [
+      "turki",
+      "asia barat"
+    ],
+    "teks": "Turki — bahasa Turki, 80 juta penutur. Aksara: Latin. Sapaan: merhaba (halo), teşekkürler (terima kasih).",
+    "meta": {
+      "nativeName": "Türkçe",
+      "speakers": "80 juta",
+      "script": "Latin",
+      "family": "Turkik",
+      "officialIn": [
+        "Turki"
+      ],
+      "greetings": {
+        "halo": "merhaba",
+        "pagi": "günaydın",
+        "terimakasih": "teşekkürler"
+      },
+      "tags": [
+        "turki",
+        "asia barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-ibrani",
+    "kategori": "bahasa",
+    "wilayah": "asian-barat",
+    "nama": "Ibrani",
+    "tags": [
+      "israel",
+      "asia barat"
+    ],
+    "teks": "Israel — bahasa Ibrani, 9 juta penutur. Aksara: Ibrani. Sapaan: shalom (halo), toda (terima kasih).",
+    "meta": {
+      "nativeName": "עברית",
+      "speakers": "9 juta",
+      "script": "Ibrani",
+      "family": "Semitik",
+      "officialIn": [
+        "Israel"
+      ],
+      "greetings": {
+        "halo": "shalom",
+        "pagi": "boker tov",
+        "terimakasih": "toda"
+      },
+      "tags": [
+        "israel",
+        "asia barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-arab-levant",
+    "kategori": "bahasa",
+    "wilayah": "asian-barat",
+    "nama": "Arab Levant",
+    "tags": [
+      "yordania",
+      "asia barat"
+    ],
+    "teks": "Yordania — bahasa Arab dialek Levant, digunakan luas di Yordania, Lebanon, Palestina. Sapaan: marhaba (halo), shukran (terima kasih).",
+    "meta": {
+      "nativeName": "العربية الشامية",
+      "speakers": "20 juta",
+      "script": "Arab",
+      "family": "Semitik",
+      "officialIn": [
+        "Yordania",
+        "Lebanon",
+        "Palestina"
+      ],
+      "greetings": {
+        "halo": "marhaba",
+        "pagi": "sabah al-khair",
+        "terimakasih": "shukran"
+      },
+      "tags": [
+        "yordania",
+        "asia barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-arab-teluk",
+    "kategori": "bahasa",
+    "wilayah": "asian-barat",
+    "nama": "Arab Teluk",
+    "tags": [
+      "kuwait",
+      "asia barat"
+    ],
+    "teks": "Kuwait/Teluk — bahasa Arab dialek Teluk, dipakai Kuwait, Qatar, Bahrain, UEA. Sapaan: marhaba (halo), mashkoor (terima kasih).",
+    "meta": {
+      "nativeName": "العربية الخليجية",
+      "speakers": "10 juta",
+      "script": "Arab",
+      "family": "Semitik",
+      "officialIn": [
+        "Kuwait",
+        "Qatar",
+        "Bahrain",
+        "Uni Emirat Arab"
+      ],
+      "greetings": {
+        "halo": "marhaba",
+        "pagi": "sabah al-khair",
+        "terimakasih": "mashkoor"
+      },
+      "tags": [
+        "kuwait",
+        "asia barat"
+      ]
+    }
+  }
+]

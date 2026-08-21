@@ -1,0 +1,1633 @@
+[
+  {
+    "id": "kota-indonesia-indonesia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Indonesia",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "indonesia",
+      "provinsi",
+      "kota",
+      "kabupaten"
+    ],
+    "teks": "Indonesia memiliki 38 provinsi dengan total 416 kabupaten/kota. Provinsi terbesar: Jawa Barat (27), Jawa Timur (38), Jawa Tengah (35). Ibukota: Jakarta (segera pindah ke IKN Nusantara). Negara kepulauan terbesar di dunia dengan lebih dari 17.000 pulau. Pusat pemerintahan: Jakarta. Sistem administrasi: provinsi, kabupaten, kota.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "country",
+      "capital": "Jakarta",
+      "totalProvinces": 38,
+      "totalCities": 416,
+      "provinces": [
+        {
+          "name": "Aceh",
+          "capital": "Banda Aceh",
+          "kabupaten": 18,
+          "kota": 5
+        },
+        {
+          "name": "Sumatera Utara",
+          "capital": "Medan",
+          "kabupaten": 25,
+          "kota": 8
+        },
+        {
+          "name": "Sumatera Barat",
+          "capital": "Padang",
+          "kabupaten": 12,
+          "kota": 7
+        },
+        {
+          "name": "Riau",
+          "capital": "Pekanbaru",
+          "kabupaten": 10,
+          "kota": 2
+        },
+        {
+          "name": "Jambi",
+          "capital": "Jambi",
+          "kabupaten": 9,
+          "kota": 2
+        },
+        {
+          "name": "Sumatera Selatan",
+          "capital": "Palembang",
+          "kabupaten": 11,
+          "kota": 4
+        },
+        {
+          "name": "Bengkulu",
+          "capital": "Bengkulu",
+          "kabupaten": 9,
+          "kota": 1
+        },
+        {
+          "name": "Lampung",
+          "capital": "Bandar Lampung",
+          "kabupaten": 13,
+          "kota": 2
+        },
+        {
+          "name": "Kepulauan Bangka Belitung",
+          "capital": "Pangkal Pinang",
+          "kabupaten": 6,
+          "kota": 1
+        },
+        {
+          "name": "Kepulauan Riau",
+          "capital": "Tanjung Pinang",
+          "kabupaten": 5,
+          "kota": 2
+        },
+        {
+          "name": "DKI Jakarta",
+          "capital": "Jakarta",
+          "kabupaten": 1,
+          "kota": 5
+        },
+        {
+          "name": "Jawa Barat",
+          "capital": "Bandung",
+          "kabupaten": 18,
+          "kota": 9
+        },
+        {
+          "name": "Jawa Tengah",
+          "capital": "Semarang",
+          "kabupaten": 29,
+          "kota": 6
+        },
+        {
+          "name": "DI Yogyakarta",
+          "capital": "Yogyakarta",
+          "kabupaten": 4,
+          "kota": 1
+        },
+        {
+          "name": "Jawa Timur",
+          "capital": "Surabaya",
+          "kabupaten": 29,
+          "kota": 9
+        },
+        {
+          "name": "Banten",
+          "capital": "Serang",
+          "kabupaten": 4,
+          "kota": 4
+        },
+        {
+          "name": "Bali",
+          "capital": "Denpasar",
+          "kabupaten": 8,
+          "kota": 1
+        },
+        {
+          "name": "Nusa Tenggara Barat",
+          "capital": "Mataram",
+          "kabupaten": 8,
+          "kota": 2
+        },
+        {
+          "name": "Nusa Tenggara Timur",
+          "capital": "Kupang",
+          "kabupaten": 21,
+          "kota": 1
+        },
+        {
+          "name": "Kalimantan Barat",
+          "capital": "Pontianak",
+          "kabupaten": 12,
+          "kota": 2
+        },
+        {
+          "name": "Kalimantan Tengah",
+          "capital": "Palangkaraya",
+          "kabupaten": 13,
+          "kota": 1
+        },
+        {
+          "name": "Kalimantan Selatan",
+          "capital": "Banjarmasin",
+          "kabupaten": 11,
+          "kota": 2
+        },
+        {
+          "name": "Kalimantan Timur",
+          "capital": "Samarinda",
+          "kabupaten": 7,
+          "kota": 3
+        },
+        {
+          "name": "Kalimantan Utara",
+          "capital": "Tanjung Selor",
+          "kabupaten": 4,
+          "kota": 1
+        },
+        {
+          "name": "Sulawesi Utara",
+          "capital": "Manado",
+          "kabupaten": 11,
+          "kota": 4
+        },
+        {
+          "name": "Sulawesi Tengah",
+          "capital": "Palu",
+          "kabupaten": 12,
+          "kota": 1
+        },
+        {
+          "name": "Sulawesi Selatan",
+          "capital": "Makassar",
+          "kabupaten": 21,
+          "kota": 3
+        },
+        {
+          "name": "Sulawesi Tenggara",
+          "capital": "Kendari",
+          "kabupaten": 15,
+          "kota": 2
+        },
+        {
+          "name": "Gorontalo",
+          "capital": "Gorontalo",
+          "kabupaten": 5,
+          "kota": 1
+        },
+        {
+          "name": "Sulawesi Barat",
+          "capital": "Mamuju",
+          "kabupaten": 6,
+          "kota": 0
+        },
+        {
+          "name": "Maluku",
+          "capital": "Ambon",
+          "kabupaten": 9,
+          "kota": 2
+        },
+        {
+          "name": "Maluku Utara",
+          "capital": "Sofifi",
+          "kabupaten": 8,
+          "kota": 2
+        },
+        {
+          "name": "Papua",
+          "capital": "Jayapura",
+          "kabupaten": 8,
+          "kota": 1
+        },
+        {
+          "name": "Papua Barat",
+          "capital": "Manokwari",
+          "kabupaten": 7,
+          "kota": 1
+        },
+        {
+          "name": "Papua Selatan",
+          "capital": "Merauke",
+          "kabupaten": 4,
+          "kota": 0
+        },
+        {
+          "name": "Papua Tengah",
+          "capital": "Nabire",
+          "kabupaten": 6,
+          "kota": 0
+        },
+        {
+          "name": "Papua Pegunungan",
+          "capital": "Wamena",
+          "kabupaten": 8,
+          "kota": 0
+        },
+        {
+          "name": "Papua Barat Daya",
+          "capital": "Sorong",
+          "kabupaten": 5,
+          "kota": 1
+        }
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "indonesia",
+        "provinsi",
+        "kota",
+        "kabupaten"
+      ]
+    }
+  },
+  {
+    "id": "kota-malaysia-malaysia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Malaysia",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "malaysia",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Malaysia memiliki 13 negara bagian dan 3 wilayah federal. Ibukota: Kuala Lumpur. Pusat pemerintahan: Putrajaya. Negara federasi dengan sistem monarki konstitusional. Terdiri dari Semenanjung Malaysia dan Malaysia Timur (Borneo).",
+    "meta": {
+      "country": "Malaysia",
+      "type": "country",
+      "capital": "Kuala Lumpur",
+      "totalProvinces": 13,
+      "totalCities": 15,
+      "provinces": [
+        {
+          "name": "Johor",
+          "capital": "Johor Bahru",
+          "cities": 3
+        },
+        {
+          "name": "Kedah",
+          "capital": "Alor Setar",
+          "cities": 2
+        },
+        {
+          "name": "Kelantan",
+          "capital": "Kota Bharu",
+          "cities": 1
+        },
+        {
+          "name": "Melaka",
+          "capital": "Melaka",
+          "cities": 1
+        },
+        {
+          "name": "Negeri Sembilan",
+          "capital": "Seremban",
+          "cities": 1
+        },
+        {
+          "name": "Pahang",
+          "capital": "Kuantan",
+          "cities": 1
+        },
+        {
+          "name": "Perak",
+          "capital": "Ipoh",
+          "cities": 2
+        },
+        {
+          "name": "Perlis",
+          "capital": "Kangar",
+          "cities": 1
+        },
+        {
+          "name": "Pulau Pinang",
+          "capital": "George Town",
+          "cities": 2
+        },
+        {
+          "name": "Sabah",
+          "capital": "Kota Kinabalu",
+          "cities": 3
+        },
+        {
+          "name": "Sarawak",
+          "capital": "Kuching",
+          "cities": 4
+        },
+        {
+          "name": "Selangor",
+          "capital": "Shah Alam",
+          "cities": 5
+        },
+        {
+          "name": "Terengganu",
+          "capital": "Kuala Terengganu",
+          "cities": 1
+        }
+      ],
+      "federalTerritories": [
+        "Kuala Lumpur",
+        "Putrajaya",
+        "Labuan"
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "malaysia",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-singapura-singapura",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Singapura",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "singapura",
+      "negara-kota"
+    ],
+    "teks": "Singapura adalah negara kota dengan 5 distrik utama. Ibukota: Singapura. Negara dengan sistem pemerintahan Republik Parlementer dan ekonomi paling kompetitif di dunia. Terdiri dari pulau utama dan 63 pulau kecil di sekitarnya.",
+    "meta": {
+      "country": "Singapura",
+      "type": "country",
+      "capital": "Singapura",
+      "totalProvinces": 0,
+      "totalCities": 5,
+      "districts": [
+        "Central",
+        "East",
+        "North",
+        "North-East",
+        "West"
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "singapura",
+        "negara-kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-thailand-thailand",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Thailand",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "thailand",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Thailand memiliki 77 provinsi dan 35 kota utama. Ibukota: Bangkok (Krung Thep). Negara kerajaan dengan sistem monarki konstitusional. Satu-satunya negara di Asia Tenggara yang tidak pernah dijajah. Dibagi menjadi 6 region geografis.",
+    "meta": {
+      "country": "Thailand",
+      "type": "country",
+      "capital": "Bangkok",
+      "totalProvinces": 77,
+      "totalCities": 35,
+      "provinces": [
+        {
+          "name": "Bangkok",
+          "capital": "Bangkok"
+        },
+        {
+          "name": "Amnat Charoen",
+          "capital": "Amnat Charoen"
+        },
+        {
+          "name": "Ang Thong",
+          "capital": "Ang Thong"
+        },
+        {
+          "name": "Bueng Kan",
+          "capital": "Bueng Kan"
+        },
+        {
+          "name": "Buri Ram",
+          "capital": "Buri Ram"
+        },
+        {
+          "name": "Chachoengsao",
+          "capital": "Chachoengsao"
+        },
+        {
+          "name": "Chai Nat",
+          "capital": "Chai Nat"
+        },
+        {
+          "name": "Chaiyaphum",
+          "capital": "Chaiyaphum"
+        },
+        {
+          "name": "Chanthaburi",
+          "capital": "Chanthaburi"
+        },
+        {
+          "name": "Chiang Mai",
+          "capital": "Chiang Mai"
+        },
+        {
+          "name": "Chiang Rai",
+          "capital": "Chiang Rai"
+        },
+        {
+          "name": "Chon Buri",
+          "capital": "Chon Buri"
+        },
+        {
+          "name": "Chumphon",
+          "capital": "Chumphon"
+        },
+        {
+          "name": "Kalasin",
+          "capital": "Kalasin"
+        },
+        {
+          "name": "Kamphaeng Phet",
+          "capital": "Kamphaeng Phet"
+        },
+        {
+          "name": "Kanchanaburi",
+          "capital": "Kanchanaburi"
+        },
+        {
+          "name": "Khon Kaen",
+          "capital": "Khon Kaen"
+        },
+        {
+          "name": "Krabi",
+          "capital": "Krabi"
+        },
+        {
+          "name": "Lampang",
+          "capital": "Lampang"
+        },
+        {
+          "name": "Lamphun",
+          "capital": "Lamphun"
+        },
+        {
+          "name": "Loei",
+          "capital": "Loei"
+        },
+        {
+          "name": "Lop Buri",
+          "capital": "Lop Buri"
+        },
+        {
+          "name": "Mae Hong Son",
+          "capital": "Mae Hong Son"
+        },
+        {
+          "name": "Maha Sarakham",
+          "capital": "Maha Sarakham"
+        },
+        {
+          "name": "Mukdahan",
+          "capital": "Mukdahan"
+        },
+        {
+          "name": "Nakhon Nayok",
+          "capital": "Nakhon Nayok"
+        },
+        {
+          "name": "Nakhon Pathom",
+          "capital": "Nakhon Pathom"
+        },
+        {
+          "name": "Nakhon Phanom",
+          "capital": "Nakhon Phanom"
+        },
+        {
+          "name": "Nakhon Ratchasima",
+          "capital": "Nakhon Ratchasima"
+        },
+        {
+          "name": "Nakhon Sawan",
+          "capital": "Nakhon Sawan"
+        },
+        {
+          "name": "Nakhon Si Thammarat",
+          "capital": "Nakhon Si Thammarat"
+        },
+        {
+          "name": "Nan",
+          "capital": "Nan"
+        },
+        {
+          "name": "Narathiwat",
+          "capital": "Narathiwat"
+        },
+        {
+          "name": "Nong Bua Lamphu",
+          "capital": "Nong Bua Lamphu"
+        },
+        {
+          "name": "Nong Khai",
+          "capital": "Nong Khai"
+        },
+        {
+          "name": "Nonthaburi",
+          "capital": "Nonthaburi"
+        },
+        {
+          "name": "Pathum Thani",
+          "capital": "Pathum Thani"
+        },
+        {
+          "name": "Pattani",
+          "capital": "Pattani"
+        },
+        {
+          "name": "Phang Nga",
+          "capital": "Phang Nga"
+        },
+        {
+          "name": "Phatthalung",
+          "capital": "Phatthalung"
+        },
+        {
+          "name": "Phayao",
+          "capital": "Phayao"
+        },
+        {
+          "name": "Phetchabun",
+          "capital": "Phetchabun"
+        },
+        {
+          "name": "Phetchaburi",
+          "capital": "Phetchaburi"
+        },
+        {
+          "name": "Phichit",
+          "capital": "Phichit"
+        },
+        {
+          "name": "Phitsanulok",
+          "capital": "Phitsanulok"
+        },
+        {
+          "name": "Phra Nakhon Si Ayutthaya",
+          "capital": "Phra Nakhon Si Ayutthaya"
+        },
+        {
+          "name": "Phrae",
+          "capital": "Phrae"
+        },
+        {
+          "name": "Phuket",
+          "capital": "Phuket"
+        },
+        {
+          "name": "Prachin Buri",
+          "capital": "Prachin Buri"
+        },
+        {
+          "name": "Prachuap Khiri Khan",
+          "capital": "Prachuap Khiri Khan"
+        },
+        {
+          "name": "Ranong",
+          "capital": "Ranong"
+        },
+        {
+          "name": "Ratchaburi",
+          "capital": "Ratchaburi"
+        },
+        {
+          "name": "Rayong",
+          "capital": "Rayong"
+        },
+        {
+          "name": "Roi Et",
+          "capital": "Roi Et"
+        },
+        {
+          "name": "Sa Kaeo",
+          "capital": "Sa Kaeo"
+        },
+        {
+          "name": "Sakon Nakhon",
+          "capital": "Sakon Nakhon"
+        },
+        {
+          "name": "Samut Prakan",
+          "capital": "Samut Prakan"
+        },
+        {
+          "name": "Samut Sakhon",
+          "capital": "Samut Sakhon"
+        },
+        {
+          "name": "Samut Songkhram",
+          "capital": "Samut Songkhram"
+        },
+        {
+          "name": "Saraburi",
+          "capital": "Saraburi"
+        },
+        {
+          "name": "Satun",
+          "capital": "Satun"
+        },
+        {
+          "name": "Si Sa Ket",
+          "capital": "Si Sa Ket"
+        },
+        {
+          "name": "Sing Buri",
+          "capital": "Sing Buri"
+        },
+        {
+          "name": "Songkhla",
+          "capital": "Songkhla"
+        },
+        {
+          "name": "Sukhothai",
+          "capital": "Sukhothai"
+        },
+        {
+          "name": "Suphan Buri",
+          "capital": "Suphan Buri"
+        },
+        {
+          "name": "Surat Thani",
+          "capital": "Surat Thani"
+        },
+        {
+          "name": "Surin",
+          "capital": "Surin"
+        },
+        {
+          "name": "Tak",
+          "capital": "Tak"
+        },
+        {
+          "name": "Trang",
+          "capital": "Trang"
+        },
+        {
+          "name": "Trat",
+          "capital": "Trat"
+        },
+        {
+          "name": "Ubon Ratchathani",
+          "capital": "Ubon Ratchathani"
+        },
+        {
+          "name": "Udon Thani",
+          "capital": "Udon Thani"
+        },
+        {
+          "name": "Uthai Thani",
+          "capital": "Uthai Thani"
+        },
+        {
+          "name": "Uttaradit",
+          "capital": "Uttaradit"
+        },
+        {
+          "name": "Yala",
+          "capital": "Yala"
+        },
+        {
+          "name": "Yasothon",
+          "capital": "Yasothon"
+        }
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "thailand",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-vietnam-vietnam",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Vietnam",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "vietnam",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Vietnam memiliki 63 provinsi dan 5 kota madya. Ibukota: Hanoi. Kota terbesar: Ho Chi Minh City. Negara dengan sistem pemerintahan Republik Sosialis Satu Partai. Terbagi menjadi 58 provinsi dan 5 kota madya. Ekonomi berkembang pesat dengan pertumbuhan tertinggi di Asia Tenggara.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "country",
+      "capital": "Hanoi",
+      "totalProvinces": 63,
+      "totalCities": 5,
+      "provinces": [
+        {
+          "name": "An Giang",
+          "capital": "Long Xuyen"
+        },
+        {
+          "name": "Bà Rịa–Vũng Tàu",
+          "capital": "Bà Rịa"
+        },
+        {
+          "name": "Bắc Giang",
+          "capital": "Bắc Giang"
+        },
+        {
+          "name": "Bắc Kạn",
+          "capital": "Bắc Kạn"
+        },
+        {
+          "name": "Bạc Liêu",
+          "capital": "Bạc Liêu"
+        },
+        {
+          "name": "Bắc Ninh",
+          "capital": "Bắc Ninh"
+        },
+        {
+          "name": "Bến Tre",
+          "capital": "Bến Tre"
+        },
+        {
+          "name": "Bình Định",
+          "capital": "Quy Nhơn"
+        },
+        {
+          "name": "Bình Dương",
+          "capital": "Thủ Dầu Một"
+        },
+        {
+          "name": "Bình Phước",
+          "capital": "Đồng Xoài"
+        },
+        {
+          "name": "Bình Thuận",
+          "capital": "Phan Thiết"
+        },
+        {
+          "name": "Cà Mau",
+          "capital": "Cà Mau"
+        },
+        {
+          "name": "Cao Bằng",
+          "capital": "Cao Bằng"
+        },
+        {
+          "name": "Đắk Lắk",
+          "capital": "Buôn Ma Thuột"
+        },
+        {
+          "name": "Đắk Nông",
+          "capital": "Gia Nghĩa"
+        },
+        {
+          "name": "Điện Biên",
+          "capital": "Điện Biên Phủ"
+        },
+        {
+          "name": "Đồng Nai",
+          "capital": "Biên Hòa"
+        },
+        {
+          "name": "Đồng Tháp",
+          "capital": "Cao Lãnh"
+        },
+        {
+          "name": "Gia Lai",
+          "capital": "Pleiku"
+        },
+        {
+          "name": "Hà Giang",
+          "capital": "Hà Giang"
+        },
+        {
+          "name": "Hà Nam",
+          "capital": "Phủ Lý"
+        },
+        {
+          "name": "Hà Tĩnh",
+          "capital": "Hà Tĩnh"
+        },
+        {
+          "name": "Hải Dương",
+          "capital": "Hải Dương"
+        },
+        {
+          "name": "Hậu Giang",
+          "capital": "Vị Thanh"
+        },
+        {
+          "name": "Hòa Bình",
+          "capital": "Hòa Bình"
+        },
+        {
+          "name": "Hưng Yên",
+          "capital": "Hưng Yên"
+        },
+        {
+          "name": "Khánh Hòa",
+          "capital": "Nha Trang"
+        },
+        {
+          "name": "Kiên Giang",
+          "capital": "Rạch Giá"
+        },
+        {
+          "name": "Kon Tum",
+          "capital": "Kon Tum"
+        },
+        {
+          "name": "Lai Châu",
+          "capital": "Lai Châu"
+        },
+        {
+          "name": "Lâm Đồng",
+          "capital": "Đà Lạt"
+        },
+        {
+          "name": "Lạng Sơn",
+          "capital": "Lạng Sơn"
+        },
+        {
+          "name": "Lào Cai",
+          "capital": "Lào Cai"
+        },
+        {
+          "name": "Long An",
+          "capital": "Tân An"
+        },
+        {
+          "name": "Nam Định",
+          "capital": "Nam Định"
+        },
+        {
+          "name": "Nghệ An",
+          "capital": "Vinh"
+        },
+        {
+          "name": "Ninh Bình",
+          "capital": "Ninh Bình"
+        },
+        {
+          "name": "Ninh Thuận",
+          "capital": "Phan Rang–Tháp Chàm"
+        },
+        {
+          "name": "Phú Thọ",
+          "capital": "Việt Trì"
+        },
+        {
+          "name": "Phú Yên",
+          "capital": "Tuy Hòa"
+        },
+        {
+          "name": "Quảng Bình",
+          "capital": "Đồng Hới"
+        },
+        {
+          "name": "Quảng Nam",
+          "capital": "Tam Kỳ"
+        },
+        {
+          "name": "Quảng Ngãi",
+          "capital": "Quảng Ngãi"
+        },
+        {
+          "name": "Quảng Ninh",
+          "capital": "Hạ Long"
+        },
+        {
+          "name": "Quảng Trị",
+          "capital": "Đông Hà"
+        },
+        {
+          "name": "Sóc Trăng",
+          "capital": "Sóc Trăng"
+        },
+        {
+          "name": "Sơn La",
+          "capital": "Sơn La"
+        },
+        {
+          "name": "Tây Ninh",
+          "capital": "Tây Ninh"
+        },
+        {
+          "name": "Thái Bình",
+          "capital": "Thái Bình"
+        },
+        {
+          "name": "Thái Nguyên",
+          "capital": "Thái Nguyên"
+        },
+        {
+          "name": "Thanh Hóa",
+          "capital": "Thanh Hóa"
+        },
+        {
+          "name": "Thừa Thiên–Huế",
+          "capital": "Huế"
+        },
+        {
+          "name": "Tiền Giang",
+          "capital": "Mỹ Tho"
+        },
+        {
+          "name": "Trà Vinh",
+          "capital": "Trà Vinh"
+        },
+        {
+          "name": "Tuyên Quang",
+          "capital": "Tuyên Quang"
+        },
+        {
+          "name": "Vĩnh Long",
+          "capital": "Vĩnh Long"
+        },
+        {
+          "name": "Vĩnh Phúc",
+          "capital": "Vĩnh Yên"
+        },
+        {
+          "name": "Yên Bái",
+          "capital": "Yên Bái"
+        }
+      ],
+      "municipalityCities": [
+        "Hanoi",
+        "Ho Chi Minh City",
+        "Da Nang",
+        "Hai Phong",
+        "Can Tho"
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "vietnam",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-filipina-filipina",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Filipina",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "filipina",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Filipina memiliki 81 provinsi dan 145 kota. Ibukota: Manila. Kota terbesar: Quezon City. Negara kepulauan dengan lebih dari 7.000 pulau. Sistem pemerintahan Republik Presidensial. Terbagi menjadi 17 region, 81 provinsi, dan 145 kota.",
+    "meta": {
+      "country": "Filipina",
+      "type": "country",
+      "capital": "Manila",
+      "totalProvinces": 81,
+      "totalCities": 145,
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "filipina",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-myanmar-myanmar",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Myanmar",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "myanmar",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Myanmar memiliki 14 negara bagian/region dan 6 kota. Ibukota: Naypyidaw. Kota terbesar: Yangon. Negara dengan sistem pemerintahan Republik. Terbagi menjadi 7 negara bagian dan 7 region. Kaya akan sumber daya alam dan warisan budaya.",
+    "meta": {
+      "country": "Myanmar",
+      "type": "country",
+      "capital": "Naypyidaw",
+      "totalProvinces": 14,
+      "totalCities": 6,
+      "states": [
+        "Chin",
+        "Kachin",
+        "Kayah",
+        "Kayin",
+        "Mon",
+        "Rakhine",
+        "Shan"
+      ],
+      "regions": [
+        "Ayeyarwady",
+        "Bago",
+        "Magway",
+        "Mandalay",
+        "Sagaing",
+        "Tanintharyi",
+        "Yangon"
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "myanmar",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-kamboja-kamboja",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Kamboja",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "kamboja",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Kamboja memiliki 25 provinsi dan 4 kota. Ibukota: Phnom Penh. Negara dengan sistem pemerintahan Monarki Konstitusional. Terbagi menjadi 24 provinsi dan 1 munisipalitas. Rumah bagi Angkor Wat dan warisan budaya Khmer yang kaya.",
+    "meta": {
+      "country": "Kamboja",
+      "type": "country",
+      "capital": "Phnom Penh",
+      "totalProvinces": 25,
+      "totalCities": 4,
+      "provinces": [
+        {
+          "name": "Banteay Meanchey",
+          "capital": "Serei Saophoan"
+        },
+        {
+          "name": "Battambang",
+          "capital": "Battambang"
+        },
+        {
+          "name": "Kampong Cham",
+          "capital": "Kampong Cham"
+        },
+        {
+          "name": "Kampong Chhnang",
+          "capital": "Kampong Chhnang"
+        },
+        {
+          "name": "Kampong Speu",
+          "capital": "Kampong Speu"
+        },
+        {
+          "name": "Kampong Thom",
+          "capital": "Stung Sen"
+        },
+        {
+          "name": "Kampot",
+          "capital": "Kampot"
+        },
+        {
+          "name": "Kandal",
+          "capital": "Ta Khmau"
+        },
+        {
+          "name": "Koh Kong",
+          "capital": "Koh Kong"
+        },
+        {
+          "name": "Kratié",
+          "capital": "Kratié"
+        },
+        {
+          "name": "Mondulkiri",
+          "capital": "Senmonorom"
+        },
+        {
+          "name": "Oddar Meanchey",
+          "capital": "Samraong"
+        },
+        {
+          "name": "Pailin",
+          "capital": "Pailin"
+        },
+        {
+          "name": "Preah Vihear",
+          "capital": "Preah Vihear"
+        },
+        {
+          "name": "Pursat",
+          "capital": "Pursat"
+        },
+        {
+          "name": "Ratanakiri",
+          "capital": "Banlung"
+        },
+        {
+          "name": "Siem Reap",
+          "capital": "Siem Reap"
+        },
+        {
+          "name": "Preah Sihanouk",
+          "capital": "Sihanoukville"
+        },
+        {
+          "name": "Stung Treng",
+          "capital": "Stung Treng"
+        },
+        {
+          "name": "Svay Rieng",
+          "capital": "Svay Rieng"
+        },
+        {
+          "name": "Takeo",
+          "capital": "Takeo"
+        },
+        {
+          "name": "Tboung Khmum",
+          "capital": "Suong"
+        },
+        {
+          "name": "Kep",
+          "capital": "Kep"
+        },
+        {
+          "name": "Prey Veng",
+          "capital": "Prey Veng"
+        }
+      ],
+      "municipality": [
+        "Phnom Penh"
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "kamboja",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-laos-laos",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Laos",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "laos",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Laos memiliki 18 provinsi dan 4 kota. Ibukota: Vientiane. Negara tanpa laut dengan sistem pemerintahan Republik Sosialis Satu Partai. Terbagi menjadi 17 provinsi dan 1 prefektur. Negara dengan pemandangan alam yang indah dan Sungai Mekong.",
+    "meta": {
+      "country": "Laos",
+      "type": "country",
+      "capital": "Vientiane",
+      "totalProvinces": 18,
+      "totalCities": 4,
+      "provinces": [
+        {
+          "name": "Attapeu",
+          "capital": "Attapeu"
+        },
+        {
+          "name": "Bokeo",
+          "capital": "Ban Houayxay"
+        },
+        {
+          "name": "Bolikhamxay",
+          "capital": "Paksan"
+        },
+        {
+          "name": "Champasak",
+          "capital": "Pakse"
+        },
+        {
+          "name": "Houaphanh",
+          "capital": "Xam Neua"
+        },
+        {
+          "name": "Khammouane",
+          "capital": "Thakhek"
+        },
+        {
+          "name": "Luang Namtha",
+          "capital": "Luang Namtha"
+        },
+        {
+          "name": "Luang Prabang",
+          "capital": "Luang Prabang"
+        },
+        {
+          "name": "Oudomxay",
+          "capital": "Muang Xay"
+        },
+        {
+          "name": "Phongsaly",
+          "capital": "Phongsaly"
+        },
+        {
+          "name": "Salavan",
+          "capital": "Salavan"
+        },
+        {
+          "name": "Savannakhet",
+          "capital": "Savannakhet"
+        },
+        {
+          "name": "Sekong",
+          "capital": "Sekong"
+        },
+        {
+          "name": "Xaisomboun",
+          "capital": "Anouvong"
+        },
+        {
+          "name": "Xayaboury",
+          "capital": "Xayaboury"
+        },
+        {
+          "name": "Xieng Khouang",
+          "capital": "Phonsavan"
+        },
+        {
+          "name": "Vientiane Province",
+          "capital": "Muang Phonhong"
+        }
+      ],
+      "prefecture": [
+        "Vientiane Prefecture"
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "laos",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-brunei-darussalam-brunei-darussalam",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Brunei Darussalam",
+    "tags": [
+      "negara",
+      "asia-tenggara",
+      "brunei",
+      "provinsi",
+      "kota"
+    ],
+    "teks": "Brunei memiliki 4 distrik dan 2 kota. Ibukota: Bandar Seri Begawan. Negara dengan sistem pemerintahan Monarki Absolut. Terbagi menjadi 4 distrik. Negara kecil dengan kekayaan minyak dan gas. Berdasarkan syariah Islam.",
+    "meta": {
+      "country": "Brunei Darussalam",
+      "type": "country",
+      "capital": "Bandar Seri Begawan",
+      "totalProvinces": 4,
+      "totalCities": 2,
+      "districts": [
+        {
+          "name": "Belait",
+          "capital": "Kuala Belait"
+        },
+        {
+          "name": "Brunei-Muara",
+          "capital": "Bandar Seri Begawan"
+        },
+        {
+          "name": "Temburong",
+          "capital": "Bangar"
+        },
+        {
+          "name": "Tutong",
+          "capital": "Pekan Tutong"
+        }
+      ],
+      "tags": [
+        "negara",
+        "asia-tenggara",
+        "brunei",
+        "provinsi",
+        "kota"
+      ]
+    }
+  },
+  {
+    "id": "kota-bandung-indonesia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Bandung",
+    "tags": [
+      "bandung",
+      "indonesia",
+      "jawa barat"
+    ],
+    "teks": "Bandung — ibukota Jawa Barat, Indonesia. Populasi 2,4 juta. Terkenal: udara sejuk, kota kreatif, kuliner dan factory outlet.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "city",
+      "population": "2,4 juta",
+      "knownFor": "sejuk, kreatif, kuliner",
+      "tags": [
+        "bandung",
+        "indonesia",
+        "jawa barat"
+      ]
+    }
+  },
+  {
+    "id": "kota-surabaya-indonesia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Surabaya",
+    "tags": [
+      "surabaya",
+      "indonesia",
+      "jawa timur"
+    ],
+    "teks": "Surabaya — ibukota Jawa Timur, Indonesia. Populasi 2,9 juta. Terkenal: kota pahlawan, pusat industri dan perdagangan.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "city",
+      "population": "2,9 juta",
+      "knownFor": "kota pahlawan, industri",
+      "tags": [
+        "surabaya",
+        "indonesia",
+        "jawa timur"
+      ]
+    }
+  },
+  {
+    "id": "kota-medan-indonesia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Medan",
+    "tags": [
+      "medan",
+      "indonesia",
+      "sumatera utara"
+    ],
+    "teks": "Medan — ibukota Sumatera Utara, Indonesia. Populasi 2,4 juta. Terkenal: kota multietnis, kuliner khas Melayu-Batak.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "city",
+      "population": "2,4 juta",
+      "knownFor": "multietnis, kuliner",
+      "tags": [
+        "medan",
+        "indonesia",
+        "sumatera utara"
+      ]
+    }
+  },
+  {
+    "id": "kota-yogyakarta-indonesia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Yogyakarta",
+    "tags": [
+      "yogyakarta",
+      "indonesia"
+    ],
+    "teks": "Yogyakarta — kota budaya di Jawa, Indonesia. Populasi 430 ribu. Terkenal: keraton, seni tradisional, kota pelajar.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "city",
+      "population": "430 ribu",
+      "knownFor": "budaya, kota pelajar",
+      "tags": [
+        "yogyakarta",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "kota-kuala-lumpur-malaysia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Kuala Lumpur",
+    "tags": [
+      "kuala lumpur",
+      "malaysia"
+    ],
+    "teks": "Kuala Lumpur — ibukota Malaysia. Populasi 1,8 juta. Terkenal: Menara Petronas, pusat bisnis dan belanja.",
+    "meta": {
+      "country": "Malaysia",
+      "type": "city",
+      "population": "1,8 juta",
+      "knownFor": "Menara Petronas, bisnis",
+      "tags": [
+        "kuala lumpur",
+        "malaysia"
+      ]
+    }
+  },
+  {
+    "id": "kota-johor-bahru-malaysia",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Johor Bahru",
+    "tags": [
+      "johor bahru",
+      "malaysia"
+    ],
+    "teks": "Johor Bahru — kota di selatan Malaysia dekat Singapura. Populasi 900 ribu. Terkenal: gerbang perbatasan, kawasan industri.",
+    "meta": {
+      "country": "Malaysia",
+      "type": "city",
+      "population": "900 ribu",
+      "knownFor": "perbatasan, industri",
+      "tags": [
+        "johor bahru",
+        "malaysia"
+      ]
+    }
+  },
+  {
+    "id": "kota-chiang-mai-thailand",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Chiang Mai",
+    "tags": [
+      "chiang mai",
+      "thailand"
+    ],
+    "teks": "Chiang Mai — kota terbesar kedua Thailand. Populasi 1,2 juta. Terkenal: kuil kuno, budaya Lanna, pegunungan sejuk.",
+    "meta": {
+      "country": "Thailand",
+      "type": "city",
+      "population": "1,2 juta",
+      "knownFor": "kuil, budaya Lanna, sejuk",
+      "tags": [
+        "chiang mai",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "kota-phuket-thailand",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Phuket",
+    "tags": [
+      "phuket",
+      "thailand"
+    ],
+    "teks": "Phuket — pulau wisata terbesar Thailand. Populasi 420 ribu. Terkenal: pantai, wisata bahari, kehidupan malam.",
+    "meta": {
+      "country": "Thailand",
+      "type": "city",
+      "population": "420 ribu",
+      "knownFor": "pantai, wisata bahari",
+      "tags": [
+        "phuket",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "kota-ho-chi-minh-city-vietnam",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Ho Chi Minh City",
+    "tags": [
+      "ho chi minh city",
+      "vietnam",
+      "saigon"
+    ],
+    "teks": "Ho Chi Minh City — kota terbesar Vietnam (dahulu Saigon). Populasi 9 juta. Terkenal: pusat bisnis, sejarah Perang Vietnam.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "city",
+      "population": "9 juta",
+      "knownFor": "bisnis, sejarah",
+      "tags": [
+        "ho chi minh city",
+        "vietnam",
+        "saigon"
+      ]
+    }
+  },
+  {
+    "id": "kota-hanoi-vietnam",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Hanoi",
+    "tags": [
+      "hanoi",
+      "vietnam"
+    ],
+    "teks": "Hanoi — ibukota Vietnam. Populasi 8 juta. Terkenal: kota tua, danau, arsitektur kolonial Prancis.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "city",
+      "population": "8 juta",
+      "knownFor": "kota tua, arsitektur kolonial",
+      "tags": [
+        "hanoi",
+        "vietnam"
+      ]
+    }
+  },
+  {
+    "id": "kota-cebu-filipina",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Cebu",
+    "tags": [
+      "cebu",
+      "filipina"
+    ],
+    "teks": "Cebu — kota terbesar kedua Filipina. Populasi 3 juta (metro). Terkenal: pantai, sejarah kolonial Spanyol.",
+    "meta": {
+      "country": "Filipina",
+      "type": "city",
+      "population": "3 juta",
+      "knownFor": "pantai, sejarah kolonial",
+      "tags": [
+        "cebu",
+        "filipina"
+      ]
+    }
+  },
+  {
+    "id": "kota-phnom-penh-kamboja",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Phnom Penh",
+    "tags": [
+      "phnom penh",
+      "kamboja"
+    ],
+    "teks": "Phnom Penh — ibukota Kamboja. Populasi 2,3 juta. Terkenal: Istana Kerajaan, tepi Sungai Mekong.",
+    "meta": {
+      "country": "Kamboja",
+      "type": "city",
+      "population": "2,3 juta",
+      "knownFor": "Istana Kerajaan, Sungai Mekong",
+      "tags": [
+        "phnom penh",
+        "kamboja"
+      ]
+    }
+  },
+  {
+    "id": "kota-luang-prabang-laos",
+    "kategori": "kota",
+    "wilayah": "asia-tenggara",
+    "nama": "Luang Prabang",
+    "tags": [
+      "luang prabang",
+      "laos"
+    ],
+    "teks": "Luang Prabang — kota warisan dunia UNESCO di Laos. Populasi 56 ribu. Terkenal: kuil Buddha, arsitektur kolonial.",
+    "meta": {
+      "country": "Laos",
+      "type": "city",
+      "population": "56 ribu",
+      "knownFor": "kuil Buddha, UNESCO",
+      "tags": [
+        "luang prabang",
+        "laos"
+      ]
+    }
+  }
+]

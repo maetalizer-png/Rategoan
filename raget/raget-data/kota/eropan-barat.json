@@ -1,0 +1,170 @@
+[
+  {
+    "id": "kota-paris-prancis",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Paris",
+    "tags": [
+      "paris",
+      "prancis"
+    ],
+    "teks": "Paris — ibukota Prancis. Populasi 2,1 juta. Terkenal: Menara Eiffel, kota mode.",
+    "meta": {
+      "country": "Prancis",
+      "type": "city",
+      "population": "2,1 juta",
+      "knownFor": "Menara Eiffel, mode",
+      "tags": [
+        "paris",
+        "prancis"
+      ]
+    }
+  },
+  {
+    "id": "kota-berlin-jerman",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Berlin",
+    "tags": [
+      "berlin",
+      "jerman"
+    ],
+    "teks": "Berlin — ibukota Jerman. Populasi 3,7 juta. Terkenal: Tembok Berlin, sejarah modern Eropa.",
+    "meta": {
+      "country": "Jerman",
+      "type": "city",
+      "population": "3,7 juta",
+      "knownFor": "Tembok Berlin, sejarah",
+      "tags": [
+        "berlin",
+        "jerman"
+      ]
+    }
+  },
+  {
+    "id": "kota-london-inggris",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "London",
+    "tags": [
+      "london",
+      "inggris"
+    ],
+    "teks": "London — ibukota Inggris. Populasi 9 juta. Terkenal: Big Ben, pusat finansial global.",
+    "meta": {
+      "country": "Inggris",
+      "type": "city",
+      "population": "9 juta",
+      "knownFor": "Big Ben, finansial",
+      "tags": [
+        "london",
+        "inggris"
+      ]
+    }
+  },
+  {
+    "id": "kota-amsterdam-belanda",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Amsterdam",
+    "tags": [
+      "amsterdam",
+      "belanda"
+    ],
+    "teks": "Amsterdam — ibukota Belanda. Populasi 900 ribu. Terkenal: kanal, sepeda, museum seni.",
+    "meta": {
+      "country": "Belanda",
+      "type": "city",
+      "population": "900 ribu",
+      "knownFor": "kanal, sepeda",
+      "tags": [
+        "amsterdam",
+        "belanda"
+      ]
+    }
+  },
+  {
+    "id": "kota-brussels-belgia",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Brussels",
+    "tags": [
+      "brussels",
+      "belgia"
+    ],
+    "teks": "Brussels — ibukota Belgia. Populasi 1,2 juta. Terkenal: markas Uni Eropa, cokelat.",
+    "meta": {
+      "country": "Belgia",
+      "type": "city",
+      "population": "1,2 juta",
+      "knownFor": "Uni Eropa, cokelat",
+      "tags": [
+        "brussels",
+        "belgia"
+      ]
+    }
+  },
+  {
+    "id": "kota-zurich-swiss",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Zurich",
+    "tags": [
+      "zurich",
+      "swiss"
+    ],
+    "teks": "Zurich — kota terbesar Swiss. Populasi 430 ribu. Terkenal: pusat finansial, kualitas hidup tinggi.",
+    "meta": {
+      "country": "Swiss",
+      "type": "city",
+      "population": "430 ribu",
+      "knownFor": "finansial, kualitas hidup",
+      "tags": [
+        "zurich",
+        "swiss"
+      ]
+    }
+  },
+  {
+    "id": "kota-vienna-austria",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Vienna",
+    "tags": [
+      "vienna",
+      "austria"
+    ],
+    "teks": "Vienna — ibukota Austria. Populasi 1,9 juta. Terkenal: musik klasik, istana Schönbrunn.",
+    "meta": {
+      "country": "Austria",
+      "type": "city",
+      "population": "1,9 juta",
+      "knownFor": "musik klasik, Schönbrunn",
+      "tags": [
+        "vienna",
+        "austria"
+      ]
+    }
+  },
+  {
+    "id": "kota-dublin-irlandia",
+    "kategori": "kota",
+    "wilayah": "eropan-barat",
+    "nama": "Dublin",
+    "tags": [
+      "dublin",
+      "irlandia"
+    ],
+    "teks": "Dublin — ibukota Irlandia. Populasi 550 ribu. Terkenal: pub tradisional, sastra.",
+    "meta": {
+      "country": "Irlandia",
+      "type": "city",
+      "population": "550 ribu",
+      "knownFor": "pub, sastra",
+      "tags": [
+        "dublin",
+        "irlandia"
+      ]
+    }
+  }
+]

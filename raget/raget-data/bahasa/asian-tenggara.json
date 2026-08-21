@@ -1,0 +1,236 @@
+[
+  {
+    "id": "bahasa-bahasa-indonesia",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Bahasa Indonesia",
+    "tags": [
+      "indonesia",
+      "asia tenggara"
+    ],
+    "teks": "Indonesia — bahasa Indonesia, 270 juta penutur. Aksara: Latin. Sapaan: halo (halo), selamat pagi, terima kasih.",
+    "meta": {
+      "nativeName": "Bahasa Indonesia",
+      "speakers": "270 juta",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Indonesia"
+      ],
+      "greetings": {
+        "halo": "halo",
+        "pagi": "selamat pagi",
+        "terimakasih": "terima kasih"
+      },
+      "tags": [
+        "indonesia",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-thai",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Thai",
+    "tags": [
+      "thailand",
+      "asia tenggara"
+    ],
+    "teks": "Thailand — bahasa Thai, 61 juta penutur. Aksara: Aksara Thai. Sapaan: sawasdee (halo), khop khun (terima kasih).",
+    "meta": {
+      "nativeName": "ภาษาไทย",
+      "speakers": "61 juta",
+      "script": "Aksara Thai",
+      "family": "Kra-Dai",
+      "officialIn": [
+        "Thailand"
+      ],
+      "greetings": {
+        "halo": "sawasdee",
+        "pagi": "arun sawat",
+        "terimakasih": "khop khun"
+      },
+      "tags": [
+        "thailand",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-vietnam",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Vietnam",
+    "tags": [
+      "vietnam",
+      "asia tenggara"
+    ],
+    "teks": "Vietnam — bahasa Vietnam, 76 juta penutur. Aksara: Latin (Quoc Ngu). Sapaan: xin chào (halo), cảm ơn (terima kasih).",
+    "meta": {
+      "nativeName": "Tiếng Việt",
+      "speakers": "76 juta",
+      "script": "Latin",
+      "family": "Austroasiatik",
+      "officialIn": [
+        "Vietnam"
+      ],
+      "greetings": {
+        "halo": "xin chào",
+        "pagi": "chào buổi sáng",
+        "terimakasih": "cảm ơn"
+      },
+      "tags": [
+        "vietnam",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-filipino",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Filipino",
+    "tags": [
+      "filipina",
+      "asia tenggara"
+    ],
+    "teks": "Filipina — bahasa Filipino (berbasis Tagalog), 45 juta penutur. Aksara: Latin. Sapaan: kumusta (halo), salamat (terima kasih).",
+    "meta": {
+      "nativeName": "Filipino",
+      "speakers": "45 juta",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Filipina"
+      ],
+      "greetings": {
+        "halo": "kumusta",
+        "pagi": "magandang umaga",
+        "terimakasih": "salamat"
+      },
+      "tags": [
+        "filipina",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-melayu",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Melayu",
+    "tags": [
+      "malaysia",
+      "asia tenggara"
+    ],
+    "teks": "Malaysia — bahasa Melayu, 33 juta penutur. Aksara: Latin (Rumi). Sapaan: helo (halo), terima kasih.",
+    "meta": {
+      "nativeName": "Bahasa Melayu",
+      "speakers": "33 juta",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Malaysia",
+        "Brunei",
+        "Singapura"
+      ],
+      "greetings": {
+        "halo": "helo",
+        "pagi": "selamat pagi",
+        "terimakasih": "terima kasih"
+      },
+      "tags": [
+        "malaysia",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-burma",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Burma",
+    "tags": [
+      "myanmar",
+      "asia tenggara"
+    ],
+    "teks": "Myanmar — bahasa Burma, 33 juta penutur. Aksara: Aksara Burma (Myanmar). Sapaan: mingalaba (halo), kyay zu tin ba deh (terima kasih).",
+    "meta": {
+      "nativeName": "မြန်မာဘာသာ",
+      "speakers": "33 juta",
+      "script": "Aksara Burma",
+      "family": "Sino-Tibet",
+      "officialIn": [
+        "Myanmar"
+      ],
+      "greetings": {
+        "halo": "mingalaba",
+        "pagi": "mingalaba",
+        "terimakasih": "kyay zu tin ba deh"
+      },
+      "tags": [
+        "myanmar",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-khmer",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Khmer",
+    "tags": [
+      "kamboja",
+      "asia tenggara"
+    ],
+    "teks": "Kamboja — bahasa Khmer, 16 juta penutur. Aksara: Aksara Khmer. Sapaan: suosdei (halo), arkoun (terima kasih).",
+    "meta": {
+      "nativeName": "ភាសាខ្មែរ",
+      "speakers": "16 juta",
+      "script": "Aksara Khmer",
+      "family": "Austroasiatik",
+      "officialIn": [
+        "Kamboja"
+      ],
+      "greetings": {
+        "halo": "suosdei",
+        "pagi": "arun suostei",
+        "terimakasih": "arkoun"
+      },
+      "tags": [
+        "kamboja",
+        "asia tenggara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-lao",
+    "kategori": "bahasa",
+    "wilayah": "asian-tenggara",
+    "nama": "Lao",
+    "tags": [
+      "laos",
+      "asia tenggara"
+    ],
+    "teks": "Laos — bahasa Lao, 7 juta penutur. Aksara: Aksara Lao. Sapaan: sabaidee (halo), khob chai (terima kasih).",
+    "meta": {
+      "nativeName": "ພາສາລາວ",
+      "speakers": "7 juta",
+      "script": "Aksara Lao",
+      "family": "Kra-Dai",
+      "officialIn": [
+        "Laos"
+      ],
+      "greetings": {
+        "halo": "sabaidee",
+        "pagi": "sabaidee thonxao",
+        "terimakasih": "khob chai"
+      },
+      "tags": [
+        "laos",
+        "asia tenggara"
+      ]
+    }
+  }
+]

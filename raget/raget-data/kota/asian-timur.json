@@ -1,0 +1,189 @@
+[
+  {
+    "id": "kota-tokyo-jepang",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Tokyo",
+    "tags": [
+      "tokyo",
+      "jepang"
+    ],
+    "teks": "Tokyo — ibukota Jepang. Populasi 14 juta. Terkenal: Shibuya, teknologi, budaya pop.",
+    "meta": {
+      "country": "Jepang",
+      "type": "city",
+      "population": "14 juta",
+      "knownFor": "Shibuya, teknologi",
+      "tags": [
+        "tokyo",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "kota-osaka-jepang",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Osaka",
+    "tags": [
+      "osaka",
+      "jepang"
+    ],
+    "teks": "Osaka — kota terbesar kedua Jepang. Populasi 2,7 juta. Terkenal: kuliner, kastil Osaka.",
+    "meta": {
+      "country": "Jepang",
+      "type": "city",
+      "population": "2,7 juta",
+      "knownFor": "kuliner, kastil Osaka",
+      "tags": [
+        "osaka",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "kota-beijing-china",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Beijing",
+    "tags": [
+      "beijing",
+      "china"
+    ],
+    "teks": "Beijing — ibukota China. Populasi 21 juta. Terkenal: Tembok Besar, Kota Terlarang.",
+    "meta": {
+      "country": "China",
+      "type": "city",
+      "population": "21 juta",
+      "knownFor": "Tembok Besar, Kota Terlarang",
+      "tags": [
+        "beijing",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "kota-shanghai-china",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Shanghai",
+    "tags": [
+      "shanghai",
+      "china"
+    ],
+    "teks": "Shanghai — kota terbesar China. Populasi 26 juta. Terkenal: pusat finansial, The Bund.",
+    "meta": {
+      "country": "China",
+      "type": "city",
+      "population": "26 juta",
+      "knownFor": "finansial, The Bund",
+      "tags": [
+        "shanghai",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "kota-seoul-korea-selatan",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Seoul",
+    "tags": [
+      "seoul",
+      "korea selatan"
+    ],
+    "teks": "Seoul — ibukota Korea Selatan. Populasi 9,7 juta. Terkenal: K-pop, teknologi, Gyeongbokgung.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "city",
+      "population": "9,7 juta",
+      "knownFor": "K-pop, teknologi",
+      "tags": [
+        "seoul",
+        "korea selatan"
+      ]
+    }
+  },
+  {
+    "id": "kota-busan-korea-selatan",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Busan",
+    "tags": [
+      "busan",
+      "korea selatan"
+    ],
+    "teks": "Busan — kota pelabuhan terbesar Korea Selatan. Populasi 3,4 juta. Terkenal: pantai Haeundae, festival film.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "city",
+      "population": "3,4 juta",
+      "knownFor": "pantai Haeundae, festival film",
+      "tags": [
+        "busan",
+        "korea selatan"
+      ]
+    }
+  },
+  {
+    "id": "kota-hong-kong-hong-kong",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Hong Kong",
+    "tags": [
+      "hong kong"
+    ],
+    "teks": "Hong Kong — kota metropolitan otonom China. Populasi 7,5 juta. Terkenal: skyline, pusat finansial Asia.",
+    "meta": {
+      "country": "Hong Kong",
+      "type": "city",
+      "population": "7,5 juta",
+      "knownFor": "skyline, finansial",
+      "tags": [
+        "hong kong"
+      ]
+    }
+  },
+  {
+    "id": "kota-taipei-taiwan",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Taipei",
+    "tags": [
+      "taipei",
+      "taiwan"
+    ],
+    "teks": "Taipei — ibukota Taiwan. Populasi 2,6 juta. Terkenal: Taipei 101, pasar malam.",
+    "meta": {
+      "country": "Taiwan",
+      "type": "city",
+      "population": "2,6 juta",
+      "knownFor": "Taipei 101, pasar malam",
+      "tags": [
+        "taipei",
+        "taiwan"
+      ]
+    }
+  },
+  {
+    "id": "kota-ulaanbaatar-mongolia",
+    "kategori": "kota",
+    "wilayah": "asian-timur",
+    "nama": "Ulaanbaatar",
+    "tags": [
+      "ulaanbaatar",
+      "mongolia"
+    ],
+    "teks": "Ulaanbaatar — ibukota Mongolia. Populasi 1,6 juta. Terkenal: kota terdingin di dunia, gerbang stepa.",
+    "meta": {
+      "country": "Mongolia",
+      "type": "city",
+      "population": "1,6 juta",
+      "knownFor": "kota terdingin, stepa",
+      "tags": [
+        "ulaanbaatar",
+        "mongolia"
+      ]
+    }
+  }
+]

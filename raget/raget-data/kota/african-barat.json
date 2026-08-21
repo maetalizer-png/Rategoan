@@ -1,0 +1,128 @@
+[
+  {
+    "id": "kota-lagos-nigeria",
+    "kategori": "kota",
+    "wilayah": "african-barat",
+    "nama": "Lagos",
+    "tags": [
+      "lagos",
+      "nigeria"
+    ],
+    "teks": "Lagos — kota terbesar Nigeria. Populasi 15 juta. Terkenal: pusat ekonomi terbesar Afrika Barat.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "city",
+      "population": "15 juta",
+      "knownFor": "pusat ekonomi",
+      "tags": [
+        "lagos",
+        "nigeria"
+      ]
+    }
+  },
+  {
+    "id": "kota-abuja-nigeria",
+    "kategori": "kota",
+    "wilayah": "african-barat",
+    "nama": "Abuja",
+    "tags": [
+      "abuja",
+      "nigeria"
+    ],
+    "teks": "Abuja — ibukota Nigeria. Populasi 3,7 juta. Terkenal: kota terencana modern.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "city",
+      "population": "3,7 juta",
+      "knownFor": "kota terencana",
+      "tags": [
+        "abuja",
+        "nigeria"
+      ]
+    }
+  },
+  {
+    "id": "kota-accra-ghana",
+    "kategori": "kota",
+    "wilayah": "african-barat",
+    "nama": "Accra",
+    "tags": [
+      "accra",
+      "ghana"
+    ],
+    "teks": "Accra — ibukota Ghana. Populasi 2,5 juta. Terkenal: pantai dan pasar tradisional.",
+    "meta": {
+      "country": "Ghana",
+      "type": "city",
+      "population": "2,5 juta",
+      "knownFor": "pantai, pasar",
+      "tags": [
+        "accra",
+        "ghana"
+      ]
+    }
+  },
+  {
+    "id": "kota-abidjan-pantai-gading",
+    "kategori": "kota",
+    "wilayah": "african-barat",
+    "nama": "Abidjan",
+    "tags": [
+      "abidjan",
+      "pantai gading"
+    ],
+    "teks": "Abidjan — kota terbesar Pantai Gading. Populasi 5,6 juta. Terkenal: pusat ekonomi dan pelabuhan.",
+    "meta": {
+      "country": "Pantai Gading",
+      "type": "city",
+      "population": "5,6 juta",
+      "knownFor": "ekonomi, pelabuhan",
+      "tags": [
+        "abidjan",
+        "pantai gading"
+      ]
+    }
+  },
+  {
+    "id": "kota-dakar-senegal",
+    "kategori": "kota",
+    "wilayah": "african-barat",
+    "nama": "Dakar",
+    "tags": [
+      "dakar",
+      "senegal"
+    ],
+    "teks": "Dakar — ibukota Senegal. Populasi 1,2 juta. Terkenal: titik paling barat Afrika, Pulau Goree.",
+    "meta": {
+      "country": "Senegal",
+      "type": "city",
+      "population": "1,2 juta",
+      "knownFor": "Pulau Goree",
+      "tags": [
+        "dakar",
+        "senegal"
+      ]
+    }
+  },
+  {
+    "id": "kota-bamako-mali",
+    "kategori": "kota",
+    "wilayah": "african-barat",
+    "nama": "Bamako",
+    "tags": [
+      "bamako",
+      "mali"
+    ],
+    "teks": "Bamako — ibukota Mali. Populasi 2,4 juta. Terkenal: tepi Sungai Niger, musik tradisional.",
+    "meta": {
+      "country": "Mali",
+      "type": "city",
+      "population": "2,4 juta",
+      "knownFor": "Sungai Niger, musik",
+      "tags": [
+        "bamako",
+        "mali"
+      ]
+    }
+  }
+]

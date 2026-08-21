@@ -1,0 +1,128 @@
+[
+  {
+    "id": "kota-guatemala-city-guatemala",
+    "kategori": "kota",
+    "wilayah": "american-tengah",
+    "nama": "Guatemala City",
+    "tags": [
+      "guatemala city",
+      "guatemala"
+    ],
+    "teks": "Guatemala City — ibukota Guatemala. Populasi 3 juta (metro). Terkenal: kota terbesar Amerika Tengah.",
+    "meta": {
+      "country": "Guatemala",
+      "type": "city",
+      "population": "3 juta",
+      "knownFor": "kota terbesar",
+      "tags": [
+        "guatemala city",
+        "guatemala"
+      ]
+    }
+  },
+  {
+    "id": "kota-tegucigalpa-honduras",
+    "kategori": "kota",
+    "wilayah": "american-tengah",
+    "nama": "Tegucigalpa",
+    "tags": [
+      "tegucigalpa",
+      "honduras"
+    ],
+    "teks": "Tegucigalpa — ibukota Honduras. Populasi 1,4 juta. Terkenal: kota pegunungan.",
+    "meta": {
+      "country": "Honduras",
+      "type": "city",
+      "population": "1,4 juta",
+      "knownFor": "kota pegunungan",
+      "tags": [
+        "tegucigalpa",
+        "honduras"
+      ]
+    }
+  },
+  {
+    "id": "kota-san-jose-kosta-rika",
+    "kategori": "kota",
+    "wilayah": "american-tengah",
+    "nama": "San Jose",
+    "tags": [
+      "san jose",
+      "kosta rika"
+    ],
+    "teks": "San Jose — ibukota Kosta Rika. Populasi 340 ribu. Terkenal: gerbang wisata alam Kosta Rika.",
+    "meta": {
+      "country": "Kosta Rika",
+      "type": "city",
+      "population": "340 ribu",
+      "knownFor": "gerbang wisata alam",
+      "tags": [
+        "san jose",
+        "kosta rika"
+      ]
+    }
+  },
+  {
+    "id": "kota-panama-city-panama",
+    "kategori": "kota",
+    "wilayah": "american-tengah",
+    "nama": "Panama City",
+    "tags": [
+      "panama city",
+      "panama"
+    ],
+    "teks": "Panama City — ibukota Panama. Populasi 880 ribu. Terkenal: Terusan Panama.",
+    "meta": {
+      "country": "Panama",
+      "type": "city",
+      "population": "880 ribu",
+      "knownFor": "Terusan Panama",
+      "tags": [
+        "panama city",
+        "panama"
+      ]
+    }
+  },
+  {
+    "id": "kota-san-salvador-el-salvador",
+    "kategori": "kota",
+    "wilayah": "american-tengah",
+    "nama": "San Salvador",
+    "tags": [
+      "san salvador",
+      "el salvador"
+    ],
+    "teks": "San Salvador — ibukota El Salvador. Populasi 1,7 juta (metro). Terkenal: pusat ekonomi negara.",
+    "meta": {
+      "country": "El Salvador",
+      "type": "city",
+      "population": "1,7 juta",
+      "knownFor": "pusat ekonomi",
+      "tags": [
+        "san salvador",
+        "el salvador"
+      ]
+    }
+  },
+  {
+    "id": "kota-havana-kuba",
+    "kategori": "kota",
+    "wilayah": "american-tengah",
+    "nama": "Havana",
+    "tags": [
+      "havana",
+      "kuba"
+    ],
+    "teks": "Havana — ibukota Kuba. Populasi 2,1 juta. Terkenal: mobil klasik, arsitektur kolonial.",
+    "meta": {
+      "country": "Kuba",
+      "type": "city",
+      "population": "2,1 juta",
+      "knownFor": "mobil klasik, arsitektur kolonial",
+      "tags": [
+        "havana",
+        "kuba"
+      ]
+    }
+  }
+]

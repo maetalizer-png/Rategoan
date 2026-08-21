@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kota-kairo-mesir",
+    "kategori": "kota",
+    "wilayah": "african-utara",
+    "nama": "Kairo",
+    "tags": [
+      "kairo",
+      "mesir"
+    ],
+    "teks": "Kairo — ibukota Mesir. Populasi 21 juta (metro). Terkenal: Piramida Giza, Sungai Nil.",
+    "meta": {
+      "country": "Mesir",
+      "type": "city",
+      "population": "21 juta",
+      "knownFor": "Piramida Giza, Sungai Nil",
+      "tags": [
+        "kairo",
+        "mesir"
+      ]
+    }
+  },
+  {
+    "id": "kota-casablanca-maroko",
+    "kategori": "kota",
+    "wilayah": "african-utara",
+    "nama": "Casablanca",
+    "tags": [
+      "casablanca",
+      "maroko"
+    ],
+    "teks": "Casablanca — kota terbesar Maroko. Populasi 3,7 juta. Terkenal: pusat ekonomi, Masjid Hassan II.",
+    "meta": {
+      "country": "Maroko",
+      "type": "city",
+      "population": "3,7 juta",
+      "knownFor": "Masjid Hassan II",
+      "tags": [
+        "casablanca",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "kota-aljir-aljazair",
+    "kategori": "kota",
+    "wilayah": "african-utara",
+    "nama": "Aljir",
+    "tags": [
+      "aljir",
+      "aljazair"
+    ],
+    "teks": "Aljir — ibukota Aljazair. Populasi 2,7 juta. Terkenal: kasbah kota tua UNESCO.",
+    "meta": {
+      "country": "Aljazair",
+      "type": "city",
+      "population": "2,7 juta",
+      "knownFor": "kasbah kota tua",
+      "tags": [
+        "aljir",
+        "aljazair"
+      ]
+    }
+  },
+  {
+    "id": "kota-tunis-tunisia",
+    "kategori": "kota",
+    "wilayah": "african-utara",
+    "nama": "Tunis",
+    "tags": [
+      "tunis",
+      "tunisia"
+    ],
+    "teks": "Tunis — ibukota Tunisia. Populasi 700 ribu. Terkenal: medina kota tua, dekat reruntuhan Kartago.",
+    "meta": {
+      "country": "Tunisia",
+      "type": "city",
+      "population": "700 ribu",
+      "knownFor": "medina, Kartago",
+      "tags": [
+        "tunis",
+        "tunisia"
+      ]
+    }
+  },
+  {
+    "id": "kota-tripoli-libya",
+    "kategori": "kota",
+    "wilayah": "african-utara",
+    "nama": "Tripoli",
+    "tags": [
+      "tripoli",
+      "libya"
+    ],
+    "teks": "Tripoli — ibukota Libya. Populasi 1,2 juta. Terkenal: kota tua tepi Mediterania.",
+    "meta": {
+      "country": "Libya",
+      "type": "city",
+      "population": "1,2 juta",
+      "knownFor": "kota tua Mediterania",
+      "tags": [
+        "tripoli",
+        "libya"
+      ]
+    }
+  }
+]

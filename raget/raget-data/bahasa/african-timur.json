@@ -1,0 +1,180 @@
+[
+  {
+    "id": "bahasa-amharik",
+    "kategori": "bahasa",
+    "wilayah": "african-timur",
+    "nama": "Amharik",
+    "tags": [
+      "etiopia",
+      "african-timur"
+    ],
+    "teks": "Etiopia — bahasa Amharik, 32 juta penutur. Aksara: Ge'ez. Sapaan: selam (halo), ameseginalehu (terima kasih).",
+    "meta": {
+      "nativeName": "አማርኛ",
+      "speakers": "32 juta",
+      "script": "Ge'ez",
+      "family": "Semitik",
+      "officialIn": [
+        "Etiopia"
+      ],
+      "greetings": {
+        "halo": "selam",
+        "pagi": "endet aderu",
+        "terimakasih": "ameseginalehu"
+      },
+      "tags": [
+        "etiopia",
+        "african-timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-swahili",
+    "kategori": "bahasa",
+    "wilayah": "african-timur",
+    "nama": "Swahili",
+    "tags": [
+      "kenya",
+      "tanzania",
+      "african-timur"
+    ],
+    "teks": "Kenya — bahasa Swahili, 20 juta penutur asli (100 juta+ penutur kedua). Sapaan: jambo (halo), asante (terima kasih).",
+    "meta": {
+      "nativeName": "Kiswahili",
+      "speakers": "100 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Kenya",
+        "Tanzania",
+        "Uganda"
+      ],
+      "greetings": {
+        "halo": "jambo",
+        "pagi": "habari za asubuhi",
+        "terimakasih": "asante"
+      },
+      "tags": [
+        "kenya",
+        "tanzania",
+        "african-timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-uganda",
+    "kategori": "bahasa",
+    "wilayah": "african-timur",
+    "nama": "Inggris Uganda",
+    "tags": [
+      "uganda",
+      "african-timur"
+    ],
+    "teks": "Uganda — bahasa Inggris resmi, berdampingan dengan Swahili dan Luganda. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "8 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Uganda"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "uganda",
+        "african-timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-somali",
+    "kategori": "bahasa",
+    "wilayah": "african-timur",
+    "nama": "Somali",
+    "tags": [
+      "somalia",
+      "african-timur"
+    ],
+    "teks": "Somalia — bahasa Somali, 16 juta penutur. Sapaan: iska warran (halo), mahadsanid (terima kasih).",
+    "meta": {
+      "nativeName": "Af-Soomaali",
+      "speakers": "16 juta",
+      "script": "Latin",
+      "family": "Afro-Asiatik",
+      "officialIn": [
+        "Somalia"
+      ],
+      "greetings": {
+        "halo": "iska warran",
+        "pagi": "subax wanaagsan",
+        "terimakasih": "mahadsanid"
+      },
+      "tags": [
+        "somalia",
+        "african-timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-kinyarwanda",
+    "kategori": "bahasa",
+    "wilayah": "african-timur",
+    "nama": "Kinyarwanda",
+    "tags": [
+      "rwanda",
+      "african-timur"
+    ],
+    "teks": "Rwanda — bahasa Kinyarwanda, 12 juta penutur. Sapaan: muraho (halo), murakoze (terima kasih).",
+    "meta": {
+      "nativeName": "Ikinyarwanda",
+      "speakers": "12 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Rwanda"
+      ],
+      "greetings": {
+        "halo": "muraho",
+        "pagi": "mwaramutse",
+        "terimakasih": "murakoze"
+      },
+      "tags": [
+        "rwanda",
+        "african-timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-malagasi",
+    "kategori": "bahasa",
+    "wilayah": "african-timur",
+    "nama": "Malagasi",
+    "tags": [
+      "madagaskar",
+      "african-timur"
+    ],
+    "teks": "Madagaskar — bahasa Malagasi, 25 juta penutur. Sapaan: manao ahoana (halo), misaotra (terima kasih).",
+    "meta": {
+      "nativeName": "Malagasy",
+      "speakers": "25 juta",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Madagaskar"
+      ],
+      "greetings": {
+        "halo": "manao ahoana",
+        "pagi": "manao ahoana",
+        "terimakasih": "misaotra"
+      },
+      "tags": [
+        "madagaskar",
+        "african-timur"
+      ]
+    }
+  }
+]

@@ -1,0 +1,235 @@
+[
+  {
+    "id": "bahasa-hindi",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Hindi",
+    "tags": [
+      "india",
+      "asia selatan"
+    ],
+    "teks": "India — bahasa Hindi, 600 juta penutur. Aksara: Devanagari. Sapaan: namaste (halo), dhanyavaad (terima kasih).",
+    "meta": {
+      "nativeName": "हिन्दी",
+      "speakers": "600 juta",
+      "script": "Devanagari",
+      "family": "Indo-Arya",
+      "officialIn": [
+        "India"
+      ],
+      "greetings": {
+        "halo": "namaste",
+        "pagi": "suprabhat",
+        "terimakasih": "dhanyavaad"
+      },
+      "tags": [
+        "india",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-urdu",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Urdu",
+    "tags": [
+      "pakistan",
+      "asia selatan"
+    ],
+    "teks": "Pakistan — bahasa Urdu, 70 juta penutur asli. Aksara: Nastaliq (Arab-Persia). Sapaan: assalamualaikum (halo), shukriya (terima kasih).",
+    "meta": {
+      "nativeName": "اردو",
+      "speakers": "70 juta",
+      "script": "Nastaliq",
+      "family": "Indo-Arya",
+      "officialIn": [
+        "Pakistan"
+      ],
+      "greetings": {
+        "halo": "assalamualaikum",
+        "pagi": "subah bakhair",
+        "terimakasih": "shukriya"
+      },
+      "tags": [
+        "pakistan",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-bengali",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Bengali",
+    "tags": [
+      "bangladesh",
+      "asia selatan"
+    ],
+    "teks": "Bangladesh — bahasa Bengali, 230 juta penutur. Aksara: Bengali. Sapaan: assalamualaikum (halo), dhonnobad (terima kasih).",
+    "meta": {
+      "nativeName": "বাংলা",
+      "speakers": "230 juta",
+      "script": "Bengali",
+      "family": "Indo-Arya",
+      "officialIn": [
+        "Bangladesh",
+        "India"
+      ],
+      "greetings": {
+        "halo": "assalamualaikum",
+        "pagi": "shuprovat",
+        "terimakasih": "dhonnobad"
+      },
+      "tags": [
+        "bangladesh",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-sinhala",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Sinhala",
+    "tags": [
+      "sri lanka",
+      "asia selatan"
+    ],
+    "teks": "Sri Lanka — bahasa Sinhala, 16 juta penutur. Aksara: Sinhala. Sapaan: ayubowan (halo), sthuthi (terima kasih).",
+    "meta": {
+      "nativeName": "සිංහල",
+      "speakers": "16 juta",
+      "script": "Sinhala",
+      "family": "Indo-Arya",
+      "officialIn": [
+        "Sri Lanka"
+      ],
+      "greetings": {
+        "halo": "ayubowan",
+        "pagi": "suba udesanak",
+        "terimakasih": "sthuthi"
+      },
+      "tags": [
+        "sri lanka",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-nepali",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Nepali",
+    "tags": [
+      "nepal",
+      "asia selatan"
+    ],
+    "teks": "Nepal — bahasa Nepali, 17 juta penutur. Aksara: Devanagari. Sapaan: namaste (halo), dhanyabad (terima kasih).",
+    "meta": {
+      "nativeName": "नेपाली",
+      "speakers": "17 juta",
+      "script": "Devanagari",
+      "family": "Indo-Arya",
+      "officialIn": [
+        "Nepal"
+      ],
+      "greetings": {
+        "halo": "namaste",
+        "pagi": "shuprabhat",
+        "terimakasih": "dhanyabad"
+      },
+      "tags": [
+        "nepal",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-dzongkha",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Dzongkha",
+    "tags": [
+      "bhutan",
+      "asia selatan"
+    ],
+    "teks": "Bhutan — bahasa Dzongkha, 640 ribu penutur. Aksara: Aksara Tibet. Sapaan: kuzuzangpo (halo), kadinche (terima kasih).",
+    "meta": {
+      "nativeName": "རྫོང་ཁ",
+      "speakers": "640 ribu",
+      "script": "Aksara Tibet",
+      "family": "Sino-Tibet",
+      "officialIn": [
+        "Bhutan"
+      ],
+      "greetings": {
+        "halo": "kuzuzangpo",
+        "pagi": "kuzuzangpo",
+        "terimakasih": "kadinche"
+      },
+      "tags": [
+        "bhutan",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-dhivehi",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Dhivehi",
+    "tags": [
+      "maladewa",
+      "asia selatan"
+    ],
+    "teks": "Maladewa — bahasa Dhivehi, 340 ribu penutur. Aksara: Thaana. Sapaan: assalaamu alaikum (halo), shukuriyaa (terima kasih).",
+    "meta": {
+      "nativeName": "ދިވެހި",
+      "speakers": "340 ribu",
+      "script": "Thaana",
+      "family": "Indo-Arya",
+      "officialIn": [
+        "Maladewa"
+      ],
+      "greetings": {
+        "halo": "assalaamu alaikum",
+        "pagi": "assalaamu alaikum",
+        "terimakasih": "shukuriyaa"
+      },
+      "tags": [
+        "maladewa",
+        "asia selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-pashto",
+    "kategori": "bahasa",
+    "wilayah": "asian-selatan",
+    "nama": "Pashto",
+    "tags": [
+      "afghanistan",
+      "asia selatan"
+    ],
+    "teks": "Afghanistan — bahasa Pashto dan Dari, gabungan sekitar 40 juta penutur. Aksara: Arab-Persia. Sapaan: salaam (halo), manana (terima kasih).",
+    "meta": {
+      "nativeName": "پښتو",
+      "speakers": "40 juta",
+      "script": "Arab-Persia",
+      "family": "Indo-Iran",
+      "officialIn": [
+        "Afghanistan"
+      ],
+      "greetings": {
+        "halo": "salaam",
+        "pagi": "sahar mo pa khair",
+        "terimakasih": "manana"
+      },
+      "tags": [
+        "afghanistan",
+        "asia selatan"
+      ]
+    }
+  }
+]

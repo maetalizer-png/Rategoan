@@ -1,0 +1,235 @@
+[
+  {
+    "id": "bahasa-hausa",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Hausa",
+    "tags": [
+      "nigeria",
+      "african-barat"
+    ],
+    "teks": "Nigeria — bahasa Hausa, 70 juta penutur, salah satu bahasa terbesar Afrika Barat. Sapaan: sannu (halo), na gode (terima kasih).",
+    "meta": {
+      "nativeName": "Hausa",
+      "speakers": "70 juta",
+      "script": "Latin",
+      "family": "Afro-Asiatik",
+      "officialIn": [
+        "Nigeria",
+        "Ghana"
+      ],
+      "greetings": {
+        "halo": "sannu",
+        "pagi": "ina kwana",
+        "terimakasih": "na gode"
+      },
+      "tags": [
+        "nigeria",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-yoruba",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Yoruba",
+    "tags": [
+      "nigeria",
+      "african-barat"
+    ],
+    "teks": "Nigeria — bahasa Yoruba, 45 juta penutur. Sapaan: bawo (halo), e se (terima kasih).",
+    "meta": {
+      "nativeName": "Yorùbá",
+      "speakers": "45 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Nigeria"
+      ],
+      "greetings": {
+        "halo": "bawo",
+        "pagi": "e kaaro",
+        "terimakasih": "e se"
+      },
+      "tags": [
+        "nigeria",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-igbo",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Igbo",
+    "tags": [
+      "nigeria",
+      "african-barat"
+    ],
+    "teks": "Nigeria — bahasa Igbo, 27 juta penutur. Sapaan: ndewo (halo), daalu (terima kasih).",
+    "meta": {
+      "nativeName": "Igbo",
+      "speakers": "27 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Nigeria"
+      ],
+      "greetings": {
+        "halo": "ndewo",
+        "pagi": "ụtụtụ ọma",
+        "terimakasih": "daalu"
+      },
+      "tags": [
+        "nigeria",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-ghana",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Inggris Ghana",
+    "tags": [
+      "ghana",
+      "african-barat"
+    ],
+    "teks": "Ghana — bahasa Inggris resmi, berdampingan dengan Twi lokal. Sapaan: hello (halo), medaase (terima kasih, Twi).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "10 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Ghana"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "medaase"
+      },
+      "tags": [
+        "ghana",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-prancis-pantai-gading",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Prancis Pantai Gading",
+    "tags": [
+      "pantai gading",
+      "african-barat"
+    ],
+    "teks": "Pantai Gading — bahasa Prancis resmi, 25 juta penutur. Sapaan: bonjour (halo), merci (terima kasih).",
+    "meta": {
+      "nativeName": "Français",
+      "speakers": "25 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Pantai Gading"
+      ],
+      "greetings": {
+        "halo": "bonjour",
+        "pagi": "bonjour",
+        "terimakasih": "merci"
+      },
+      "tags": [
+        "pantai gading",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-wolof",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Wolof",
+    "tags": [
+      "senegal",
+      "african-barat"
+    ],
+    "teks": "Senegal — bahasa Wolof, 12 juta penutur, lingua franca lokal berdampingan Prancis resmi. Sapaan: nanga def (halo), jërëjëf (terima kasih).",
+    "meta": {
+      "nativeName": "Wolof",
+      "speakers": "12 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Senegal"
+      ],
+      "greetings": {
+        "halo": "nanga def",
+        "pagi": "jamm nga fanane",
+        "terimakasih": "jërëjëf"
+      },
+      "tags": [
+        "senegal",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-bambara",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Bambara",
+    "tags": [
+      "mali",
+      "african-barat"
+    ],
+    "teks": "Mali — bahasa Bambara, 14 juta penutur, lingua franca lokal berdampingan Prancis resmi. Sapaan: i ni ce (halo), i ni ce (terima kasih).",
+    "meta": {
+      "nativeName": "Bamanankan",
+      "speakers": "14 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Mali"
+      ],
+      "greetings": {
+        "halo": "i ni ce",
+        "pagi": "i ni sogoma",
+        "terimakasih": "i ni ce"
+      },
+      "tags": [
+        "mali",
+        "african-barat"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-prancis-kamerun",
+    "kategori": "bahasa",
+    "wilayah": "african-barat",
+    "nama": "Prancis Kamerun",
+    "tags": [
+      "kamerun",
+      "african-barat"
+    ],
+    "teks": "Kamerun — dwibahasa resmi Prancis dan Inggris. Sapaan: bonjour/hello (halo), merci/thanks (terima kasih).",
+    "meta": {
+      "nativeName": "Français",
+      "speakers": "15 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Kamerun"
+      ],
+      "greetings": {
+        "halo": "bonjour",
+        "pagi": "bonjour",
+        "terimakasih": "merci"
+      },
+      "tags": [
+        "kamerun",
+        "african-barat"
+      ]
+    }
+  }
+]

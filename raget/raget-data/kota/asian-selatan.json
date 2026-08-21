@@ -1,0 +1,170 @@
+[
+  {
+    "id": "kota-mumbai-india",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Mumbai",
+    "tags": [
+      "mumbai",
+      "india"
+    ],
+    "teks": "Mumbai — kota terbesar India. Populasi 20 juta. Terkenal: pusat film Bollywood, finansial.",
+    "meta": {
+      "country": "India",
+      "type": "city",
+      "population": "20 juta",
+      "knownFor": "Bollywood, finansial",
+      "tags": [
+        "mumbai",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "kota-delhi-india",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Delhi",
+    "tags": [
+      "delhi",
+      "india"
+    ],
+    "teks": "Delhi — ibukota India. Populasi 32 juta (metro). Terkenal: Taj Mahal dekat, sejarah kerajaan Mughal.",
+    "meta": {
+      "country": "India",
+      "type": "city",
+      "population": "32 juta",
+      "knownFor": "sejarah Mughal",
+      "tags": [
+        "delhi",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "kota-bangalore-india",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Bangalore",
+    "tags": [
+      "bangalore",
+      "india"
+    ],
+    "teks": "Bangalore — pusat teknologi India. Populasi 13 juta. Terkenal: Silicon Valley India.",
+    "meta": {
+      "country": "India",
+      "type": "city",
+      "population": "13 juta",
+      "knownFor": "Silicon Valley India",
+      "tags": [
+        "bangalore",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "kota-karachi-pakistan",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Karachi",
+    "tags": [
+      "karachi",
+      "pakistan"
+    ],
+    "teks": "Karachi — kota terbesar Pakistan. Populasi 16 juta. Terkenal: pelabuhan utama, pusat ekonomi.",
+    "meta": {
+      "country": "Pakistan",
+      "type": "city",
+      "population": "16 juta",
+      "knownFor": "pelabuhan, ekonomi",
+      "tags": [
+        "karachi",
+        "pakistan"
+      ]
+    }
+  },
+  {
+    "id": "kota-lahore-pakistan",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Lahore",
+    "tags": [
+      "lahore",
+      "pakistan"
+    ],
+    "teks": "Lahore — kota budaya Pakistan. Populasi 13 juta. Terkenal: Benteng Lahore, kuliner.",
+    "meta": {
+      "country": "Pakistan",
+      "type": "city",
+      "population": "13 juta",
+      "knownFor": "Benteng Lahore, kuliner",
+      "tags": [
+        "lahore",
+        "pakistan"
+      ]
+    }
+  },
+  {
+    "id": "kota-dhaka-bangladesh",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Dhaka",
+    "tags": [
+      "dhaka",
+      "bangladesh"
+    ],
+    "teks": "Dhaka — ibukota Bangladesh. Populasi 22 juta. Terkenal: kota terpadat di dunia, industri tekstil.",
+    "meta": {
+      "country": "Bangladesh",
+      "type": "city",
+      "population": "22 juta",
+      "knownFor": "terpadat, tekstil",
+      "tags": [
+        "dhaka",
+        "bangladesh"
+      ]
+    }
+  },
+  {
+    "id": "kota-colombo-sri-lanka",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Colombo",
+    "tags": [
+      "colombo",
+      "sri lanka"
+    ],
+    "teks": "Colombo — ibukota komersial Sri Lanka. Populasi 750 ribu. Terkenal: pelabuhan, kuil Buddha.",
+    "meta": {
+      "country": "Sri Lanka",
+      "type": "city",
+      "population": "750 ribu",
+      "knownFor": "pelabuhan, kuil",
+      "tags": [
+        "colombo",
+        "sri lanka"
+      ]
+    }
+  },
+  {
+    "id": "kota-kathmandu-nepal",
+    "kategori": "kota",
+    "wilayah": "asian-selatan",
+    "nama": "Kathmandu",
+    "tags": [
+      "kathmandu",
+      "nepal"
+    ],
+    "teks": "Kathmandu — ibukota Nepal. Populasi 1,5 juta. Terkenal: gerbang Himalaya, kuil kuno.",
+    "meta": {
+      "country": "Nepal",
+      "type": "city",
+      "population": "1,5 juta",
+      "knownFor": "Himalaya, kuil kuno",
+      "tags": [
+        "kathmandu",
+        "nepal"
+      ]
+    }
+  }
+]

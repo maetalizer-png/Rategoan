@@ -1,0 +1,147 @@
+[
+  {
+    "id": "bahasa-prancis-kongo",
+    "kategori": "bahasa",
+    "wilayah": "african-tengah",
+    "nama": "Prancis Kongo",
+    "tags": [
+      "kongo",
+      "african-tengah"
+    ],
+    "teks": "Republik Demokratik Kongo — bahasa Prancis resmi, berdampingan Lingala dan Swahili. Sapaan: bonjour (halo), merci (terima kasih).",
+    "meta": {
+      "nativeName": "Français",
+      "speakers": "40 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Kongo"
+      ],
+      "greetings": {
+        "halo": "bonjour",
+        "pagi": "bonjour",
+        "terimakasih": "merci"
+      },
+      "tags": [
+        "kongo",
+        "african-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-portugis-angola",
+    "kategori": "bahasa",
+    "wilayah": "african-tengah",
+    "nama": "Portugis Angola",
+    "tags": [
+      "angola",
+      "african-tengah"
+    ],
+    "teks": "Angola — bahasa Portugis resmi, 25 juta penutur. Sapaan: olá (halo), obrigado (terima kasih).",
+    "meta": {
+      "nativeName": "Português",
+      "speakers": "25 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Angola"
+      ],
+      "greetings": {
+        "halo": "olá",
+        "pagi": "bom dia",
+        "terimakasih": "obrigado"
+      },
+      "tags": [
+        "angola",
+        "african-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-prancis-gabon",
+    "kategori": "bahasa",
+    "wilayah": "african-tengah",
+    "nama": "Prancis Gabon",
+    "tags": [
+      "gabon",
+      "african-tengah"
+    ],
+    "teks": "Gabon — bahasa Prancis resmi, 2 juta penutur. Sapaan: bonjour (halo), merci (terima kasih).",
+    "meta": {
+      "nativeName": "Français",
+      "speakers": "2 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Gabon"
+      ],
+      "greetings": {
+        "halo": "bonjour",
+        "pagi": "bonjour",
+        "terimakasih": "merci"
+      },
+      "tags": [
+        "gabon",
+        "african-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-arab-chad",
+    "kategori": "bahasa",
+    "wilayah": "african-tengah",
+    "nama": "Arab Chad",
+    "tags": [
+      "chad",
+      "african-tengah"
+    ],
+    "teks": "Chad — dwibahasa resmi Prancis dan Arab. Sapaan: bonjour/salam (halo), merci/shukran (terima kasih).",
+    "meta": {
+      "nativeName": "العربية التشادية",
+      "speakers": "7 juta",
+      "script": "Arab",
+      "family": "Semitik",
+      "officialIn": [
+        "Chad"
+      ],
+      "greetings": {
+        "halo": "salam",
+        "pagi": "sabah al-khair",
+        "terimakasih": "shukran"
+      },
+      "tags": [
+        "chad",
+        "african-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-sango",
+    "kategori": "bahasa",
+    "wilayah": "african-tengah",
+    "nama": "Sango",
+    "tags": [
+      "republik afrika tengah",
+      "african-tengah"
+    ],
+    "teks": "Republik Afrika Tengah — bahasa Sango, lingua franca nasional berdampingan Prancis resmi. Sapaan: balao (halo), singila (terima kasih).",
+    "meta": {
+      "nativeName": "Sängö",
+      "speakers": "5 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Republik Afrika Tengah"
+      ],
+      "greetings": {
+        "halo": "balao",
+        "pagi": "balao",
+        "terimakasih": "singila"
+      },
+      "tags": [
+        "republik afrika tengah",
+        "african-tengah"
+      ]
+    }
+  }
+]

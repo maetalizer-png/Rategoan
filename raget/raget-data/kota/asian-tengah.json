@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kota-almaty-kazakhstan",
+    "kategori": "kota",
+    "wilayah": "asian-tengah",
+    "nama": "Almaty",
+    "tags": [
+      "almaty",
+      "kazakhstan"
+    ],
+    "teks": "Almaty — kota terbesar Kazakhstan. Populasi 2 juta. Terkenal: pegunungan Tian Shan, bekas ibukota.",
+    "meta": {
+      "country": "Kazakhstan",
+      "type": "city",
+      "population": "2 juta",
+      "knownFor": "Tian Shan, bekas ibukota",
+      "tags": [
+        "almaty",
+        "kazakhstan"
+      ]
+    }
+  },
+  {
+    "id": "kota-astana-kazakhstan",
+    "kategori": "kota",
+    "wilayah": "asian-tengah",
+    "nama": "Astana",
+    "tags": [
+      "astana",
+      "kazakhstan"
+    ],
+    "teks": "Astana — ibukota Kazakhstan. Populasi 1,2 juta. Terkenal: arsitektur futuristik.",
+    "meta": {
+      "country": "Kazakhstan",
+      "type": "city",
+      "population": "1,2 juta",
+      "knownFor": "arsitektur futuristik",
+      "tags": [
+        "astana",
+        "kazakhstan"
+      ]
+    }
+  },
+  {
+    "id": "kota-tashkent-uzbekistan",
+    "kategori": "kota",
+    "wilayah": "asian-tengah",
+    "nama": "Tashkent",
+    "tags": [
+      "tashkent",
+      "uzbekistan"
+    ],
+    "teks": "Tashkent — ibukota Uzbekistan. Populasi 2,5 juta. Terkenal: kota tertua di Asia Tengah.",
+    "meta": {
+      "country": "Uzbekistan",
+      "type": "city",
+      "population": "2,5 juta",
+      "knownFor": "kota tertua",
+      "tags": [
+        "tashkent",
+        "uzbekistan"
+      ]
+    }
+  },
+  {
+    "id": "kota-bishkek-kirgistan",
+    "kategori": "kota",
+    "wilayah": "asian-tengah",
+    "nama": "Bishkek",
+    "tags": [
+      "bishkek",
+      "kirgistan"
+    ],
+    "teks": "Bishkek — ibukota Kirgistan. Populasi 1 juta. Terkenal: gerbang pegunungan Tian Shan.",
+    "meta": {
+      "country": "Kirgistan",
+      "type": "city",
+      "population": "1 juta",
+      "knownFor": "gerbang Tian Shan",
+      "tags": [
+        "bishkek",
+        "kirgistan"
+      ]
+    }
+  },
+  {
+    "id": "kota-dushanbe-tajikistan",
+    "kategori": "kota",
+    "wilayah": "asian-tengah",
+    "nama": "Dushanbe",
+    "tags": [
+      "dushanbe",
+      "tajikistan"
+    ],
+    "teks": "Dushanbe — ibukota Tajikistan. Populasi 900 ribu. Terkenal: bendera tertinggi di dunia.",
+    "meta": {
+      "country": "Tajikistan",
+      "type": "city",
+      "population": "900 ribu",
+      "knownFor": "bendera tertinggi",
+      "tags": [
+        "dushanbe",
+        "tajikistan"
+      ]
+    }
+  }
+]

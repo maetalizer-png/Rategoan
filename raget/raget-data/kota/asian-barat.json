@@ -1,0 +1,149 @@
+[
+  {
+    "id": "kota-riyadh-arab-saudi",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Riyadh",
+    "tags": [
+      "riyadh",
+      "arab saudi"
+    ],
+    "teks": "Riyadh — ibukota Arab Saudi. Populasi 7,6 juta. Terkenal: pusat pemerintahan, modernisasi cepat.",
+    "meta": {
+      "country": "Arab Saudi",
+      "type": "city",
+      "population": "7,6 juta",
+      "knownFor": "pemerintahan, modernisasi",
+      "tags": [
+        "riyadh",
+        "arab saudi"
+      ]
+    }
+  },
+  {
+    "id": "kota-dubai-uni-emirat-arab",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Dubai",
+    "tags": [
+      "dubai",
+      "uni emirat arab"
+    ],
+    "teks": "Dubai — kota terbesar Uni Emirat Arab. Populasi 3,5 juta. Terkenal: Burj Khalifa, pusat bisnis global.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "type": "city",
+      "population": "3,5 juta",
+      "knownFor": "Burj Khalifa, bisnis",
+      "tags": [
+        "dubai",
+        "uni emirat arab"
+      ]
+    }
+  },
+  {
+    "id": "kota-istanbul-turki",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Istanbul",
+    "tags": [
+      "istanbul",
+      "turki"
+    ],
+    "teks": "Istanbul — kota terbesar Turki. Populasi 15 juta. Terkenal: jembatan Asia-Eropa, Hagia Sophia.",
+    "meta": {
+      "country": "Turki",
+      "type": "city",
+      "population": "15 juta",
+      "knownFor": "Hagia Sophia, Asia-Eropa",
+      "tags": [
+        "istanbul",
+        "turki"
+      ]
+    }
+  },
+  {
+    "id": "kota-tehran-iran",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Tehran",
+    "tags": [
+      "tehran",
+      "iran"
+    ],
+    "teks": "Tehran — ibukota Iran. Populasi 9,3 juta. Terkenal: pegunungan Alborz, pusat budaya Persia.",
+    "meta": {
+      "country": "Iran",
+      "type": "city",
+      "population": "9,3 juta",
+      "knownFor": "Alborz, budaya Persia",
+      "tags": [
+        "tehran",
+        "iran"
+      ]
+    }
+  },
+  {
+    "id": "kota-baghdad-irak",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Baghdad",
+    "tags": [
+      "baghdad",
+      "irak"
+    ],
+    "teks": "Baghdad — ibukota Irak. Populasi 7,7 juta. Terkenal: sejarah peradaban Mesopotamia.",
+    "meta": {
+      "country": "Irak",
+      "type": "city",
+      "population": "7,7 juta",
+      "knownFor": "Mesopotamia",
+      "tags": [
+        "baghdad",
+        "irak"
+      ]
+    }
+  },
+  {
+    "id": "kota-tel-aviv-israel",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Tel Aviv",
+    "tags": [
+      "tel aviv",
+      "israel"
+    ],
+    "teks": "Tel Aviv — kota terbesar Israel. Populasi 460 ribu. Terkenal: pusat teknologi, pantai Mediterania.",
+    "meta": {
+      "country": "Israel",
+      "type": "city",
+      "population": "460 ribu",
+      "knownFor": "teknologi, pantai",
+      "tags": [
+        "tel aviv",
+        "israel"
+      ]
+    }
+  },
+  {
+    "id": "kota-doha-qatar",
+    "kategori": "kota",
+    "wilayah": "asian-barat",
+    "nama": "Doha",
+    "tags": [
+      "doha",
+      "qatar"
+    ],
+    "teks": "Doha — ibukota Qatar. Populasi 2,4 juta. Terkenal: skyline modern, tuan rumah Piala Dunia 2022.",
+    "meta": {
+      "country": "Qatar",
+      "type": "city",
+      "population": "2,4 juta",
+      "knownFor": "skyline, Piala Dunia 2022",
+      "tags": [
+        "doha",
+        "qatar"
+      ]
+    }
+  }
+]

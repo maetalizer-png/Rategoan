@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kota-johannesburg-afrika-selatan",
+    "kategori": "kota",
+    "wilayah": "african-selatan",
+    "nama": "Johannesburg",
+    "tags": [
+      "johannesburg",
+      "afrika selatan"
+    ],
+    "teks": "Johannesburg — kota terbesar Afrika Selatan. Populasi 5,8 juta. Terkenal: pusat ekonomi, bekas tambang emas.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "city",
+      "population": "5,8 juta",
+      "knownFor": "ekonomi, tambang emas",
+      "tags": [
+        "johannesburg",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "kota-cape-town-afrika-selatan",
+    "kategori": "kota",
+    "wilayah": "african-selatan",
+    "nama": "Cape Town",
+    "tags": [
+      "cape town",
+      "afrika selatan"
+    ],
+    "teks": "Cape Town — kota pesisir Afrika Selatan. Populasi 4,7 juta. Terkenal: Table Mountain, pemandangan laut.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "city",
+      "population": "4,7 juta",
+      "knownFor": "Table Mountain",
+      "tags": [
+        "cape town",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "kota-windhoek-namibia",
+    "kategori": "kota",
+    "wilayah": "african-selatan",
+    "nama": "Windhoek",
+    "tags": [
+      "windhoek",
+      "namibia"
+    ],
+    "teks": "Windhoek — ibukota Namibia. Populasi 480 ribu. Terkenal: dekat gurun Namib.",
+    "meta": {
+      "country": "Namibia",
+      "type": "city",
+      "population": "480 ribu",
+      "knownFor": "gurun Namib",
+      "tags": [
+        "windhoek",
+        "namibia"
+      ]
+    }
+  },
+  {
+    "id": "kota-gaborone-botswana",
+    "kategori": "kota",
+    "wilayah": "african-selatan",
+    "nama": "Gaborone",
+    "tags": [
+      "gaborone",
+      "botswana"
+    ],
+    "teks": "Gaborone — ibukota Botswana. Populasi 270 ribu. Terkenal: gerbang ke Delta Okavango.",
+    "meta": {
+      "country": "Botswana",
+      "type": "city",
+      "population": "270 ribu",
+      "knownFor": "Delta Okavango",
+      "tags": [
+        "gaborone",
+        "botswana"
+      ]
+    }
+  },
+  {
+    "id": "kota-harare-zimbabwe",
+    "kategori": "kota",
+    "wilayah": "african-selatan",
+    "nama": "Harare",
+    "tags": [
+      "harare",
+      "zimbabwe"
+    ],
+    "teks": "Harare — ibukota Zimbabwe. Populasi 1,5 juta. Terkenal: kota taman hijau.",
+    "meta": {
+      "country": "Zimbabwe",
+      "type": "city",
+      "population": "1,5 juta",
+      "knownFor": "kota taman",
+      "tags": [
+        "harare",
+        "zimbabwe"
+      ]
+    }
+  }
+]

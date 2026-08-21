@@ -1,0 +1,234 @@
+[
+  {
+    "id": "bahasa-norwegia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Norwegia",
+    "tags": [
+      "norwegia",
+      "eropa utara"
+    ],
+    "teks": "Norwegia — bahasa Norwegia, 5,3 juta penutur. Aksara: Latin. Sapaan: hei (halo), takk (terima kasih).",
+    "meta": {
+      "nativeName": "Norsk",
+      "speakers": "5,3 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Norwegia"
+      ],
+      "greetings": {
+        "halo": "hei",
+        "pagi": "god morgen",
+        "terimakasih": "takk"
+      },
+      "tags": [
+        "norwegia",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-swedia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Swedia",
+    "tags": [
+      "swedia",
+      "eropa utara"
+    ],
+    "teks": "Swedia — bahasa Swedia, 10 juta penutur. Aksara: Latin. Sapaan: hej (halo), tack (terima kasih).",
+    "meta": {
+      "nativeName": "Svenska",
+      "speakers": "10 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Swedia"
+      ],
+      "greetings": {
+        "halo": "hej",
+        "pagi": "god morgon",
+        "terimakasih": "tack"
+      },
+      "tags": [
+        "swedia",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-finlandia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Finlandia",
+    "tags": [
+      "finlandia",
+      "eropa utara"
+    ],
+    "teks": "Finlandia — bahasa Finlandia, 5,4 juta penutur. Aksara: Latin. Sapaan: hei (halo), kiitos (terima kasih).",
+    "meta": {
+      "nativeName": "Suomi",
+      "speakers": "5,4 juta",
+      "script": "Latin",
+      "family": "Finno-Ugrik",
+      "officialIn": [
+        "Finlandia"
+      ],
+      "greetings": {
+        "halo": "hei",
+        "pagi": "hyvää huomenta",
+        "terimakasih": "kiitos"
+      },
+      "tags": [
+        "finlandia",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-denmark",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Denmark",
+    "tags": [
+      "denmark",
+      "eropa utara"
+    ],
+    "teks": "Denmark — bahasa Denmark, 6 juta penutur. Aksara: Latin. Sapaan: hej (halo), tak (terima kasih).",
+    "meta": {
+      "nativeName": "Dansk",
+      "speakers": "6 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Denmark"
+      ],
+      "greetings": {
+        "halo": "hej",
+        "pagi": "god morgen",
+        "terimakasih": "tak"
+      },
+      "tags": [
+        "denmark",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-islandia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Islandia",
+    "tags": [
+      "islandia",
+      "eropa utara"
+    ],
+    "teks": "Islandia — bahasa Islandia, 370 ribu penutur. Aksara: Latin. Sapaan: halló (halo), takk (terima kasih).",
+    "meta": {
+      "nativeName": "Íslenska",
+      "speakers": "370 ribu",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Islandia"
+      ],
+      "greetings": {
+        "halo": "halló",
+        "pagi": "góðan daginn",
+        "terimakasih": "takk"
+      },
+      "tags": [
+        "islandia",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-estonia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Estonia",
+    "tags": [
+      "estonia",
+      "eropa utara"
+    ],
+    "teks": "Estonia — bahasa Estonia, 1,1 juta penutur. Aksara: Latin. Sapaan: tere (halo), aitäh (terima kasih).",
+    "meta": {
+      "nativeName": "Eesti keel",
+      "speakers": "1,1 juta",
+      "script": "Latin",
+      "family": "Finno-Ugrik",
+      "officialIn": [
+        "Estonia"
+      ],
+      "greetings": {
+        "halo": "tere",
+        "pagi": "tere hommikust",
+        "terimakasih": "aitäh"
+      },
+      "tags": [
+        "estonia",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-latvia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Latvia",
+    "tags": [
+      "latvia",
+      "eropa utara"
+    ],
+    "teks": "Latvia — bahasa Latvia, 1,5 juta penutur. Aksara: Latin. Sapaan: sveiki (halo), paldies (terima kasih).",
+    "meta": {
+      "nativeName": "Latviešu",
+      "speakers": "1,5 juta",
+      "script": "Latin",
+      "family": "Baltik",
+      "officialIn": [
+        "Latvia"
+      ],
+      "greetings": {
+        "halo": "sveiki",
+        "pagi": "labrīt",
+        "terimakasih": "paldies"
+      },
+      "tags": [
+        "latvia",
+        "eropa utara"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-lithuania",
+    "kategori": "bahasa",
+    "wilayah": "eropan-utara",
+    "nama": "Lithuania",
+    "tags": [
+      "lithuania",
+      "eropa utara"
+    ],
+    "teks": "Lithuania — bahasa Lithuania, 2,8 juta penutur. Aksara: Latin. Sapaan: labas (halo), ačiū (terima kasih).",
+    "meta": {
+      "nativeName": "Lietuvių",
+      "speakers": "2,8 juta",
+      "script": "Latin",
+      "family": "Baltik",
+      "officialIn": [
+        "Lithuania"
+      ],
+      "greetings": {
+        "halo": "labas",
+        "pagi": "labas rytas",
+        "terimakasih": "ačiū"
+      },
+      "tags": [
+        "lithuania",
+        "eropa utara"
+      ]
+    }
+  }
+]
