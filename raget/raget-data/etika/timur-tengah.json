@@ -1,0 +1,382 @@
+[
+  {
+    "id": "etika-sapaan-arab-saudi",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Arab Saudi",
+    "tags": [
+      "arab saudi",
+      "salam"
+    ],
+    "teks": "Sapaan Arab Saudi — \"As-salamu alaykum\" diucapkan hangat, jabat tangan lembut antar sesama pria; pria dan wanita yang bukan mahram umumnya tidak berjabat tangan.",
+    "meta": {
+      "country": "Arab Saudi",
+      "type": "sapaan",
+      "tags": [
+        "arab saudi",
+        "salam"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kaki-arab-saudi",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tabu Kaki Arab Saudi",
+    "tags": [
+      "arab saudi",
+      "kaki"
+    ],
+    "teks": "Tabu di Arab Saudi — menunjukkan telapak kaki atau menyilangkan kaki ke arah orang lain dianggap sangat tidak sopan.",
+    "meta": {
+      "country": "Arab Saudi",
+      "type": "tabu",
+      "tags": [
+        "arab saudi",
+        "kaki"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-arab-saudi",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tip Arab Saudi",
+    "tags": [
+      "arab saudi",
+      "tip"
+    ],
+    "teks": "Tip di Arab Saudi — tip 10% mulai lazim di restoran kota besar meski belum wajib, dianggap apresiasi tambahan.",
+    "meta": {
+      "country": "Arab Saudi",
+      "type": "tip",
+      "tags": [
+        "arab saudi",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-uea",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan UEA",
+    "tags": [
+      "uni emirat arab",
+      "salam"
+    ],
+    "teks": "Sapaan Uni Emirat Arab — jabat tangan hangat disertai \"As-salamu alaykum\"; basa-basi menanyakan kabar keluarga dianggap sopan sebelum membahas bisnis.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "type": "sapaan",
+      "tags": [
+        "uni emirat arab",
+        "salam"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-uea",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tip UEA",
+    "tags": [
+      "uni emirat arab",
+      "tip"
+    ],
+    "teks": "Tip di Uni Emirat Arab — service charge sering sudah termasuk tagihan, tip tambahan 10% tetap dihargai.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "type": "tip",
+      "tags": [
+        "uni emirat arab",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-ramadan-uea",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tabu Ramadan UEA",
+    "tags": [
+      "uni emirat arab",
+      "ramadan"
+    ],
+    "teks": "Tabu di Uni Emirat Arab — makan atau minum di depan umum pada siang hari selama Ramadan dianggap tidak sopan bagi non-Muslim sekalipun.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "type": "tabu",
+      "tags": [
+        "uni emirat arab",
+        "ramadan"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-turki",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Turki",
+    "tags": [
+      "turki",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Turki — jabat tangan hangat, orang yang lebih muda kadang mencium tangan orang tua lalu menempelkannya ke dahi sebagai tanda hormat.",
+    "meta": {
+      "country": "Turki",
+      "type": "sapaan",
+      "tags": [
+        "turki",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-turki",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tip Turki",
+    "tags": [
+      "turki",
+      "tip"
+    ],
+    "teks": "Tip di Turki — tip sekitar 5-10% lazim di restoran, biasanya diberikan tunai terpisah dari tagihan.",
+    "meta": {
+      "country": "Turki",
+      "type": "tip",
+      "tags": [
+        "turki",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-menolak-teh-turki",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tabu Menolak Teh Turki",
+    "tags": [
+      "turki",
+      "teh"
+    ],
+    "teks": "Tabu di Turki — menolak tawaran teh dari tuan rumah dianggap kurang sopan, karena menyuguh teh adalah simbol keramahan.",
+    "meta": {
+      "country": "Turki",
+      "type": "tabu",
+      "tags": [
+        "turki",
+        "teh"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-iran",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Iran",
+    "tags": [
+      "iran",
+      "taarof"
+    ],
+    "teks": "Sapaan Iran — jabat tangan hangat antar sesama jenis; taarof (basa-basi sopan menawarkan sesuatu berulang kali) adalah tradisi penting.",
+    "meta": {
+      "country": "Iran",
+      "type": "sapaan",
+      "tags": [
+        "iran",
+        "taarof"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kaki-iran",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tabu Kaki Iran",
+    "tags": [
+      "iran",
+      "kaki"
+    ],
+    "teks": "Tabu di Iran — menunjukkan telapak kaki atau punggung ke arah orang lain dianggap tidak sopan dalam pertemuan formal.",
+    "meta": {
+      "country": "Iran",
+      "type": "tabu",
+      "tags": [
+        "iran",
+        "kaki"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-yordania",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Yordania",
+    "tags": [
+      "yordania",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Yordania — jabat tangan hangat disertai tangan kanan menyentuh dada, sering diikuti pertanyaan basa-basi tentang kesehatan.",
+    "meta": {
+      "country": "Yordania",
+      "type": "sapaan",
+      "tags": [
+        "yordania",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-yordania",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tip Yordania",
+    "tags": [
+      "yordania",
+      "tip"
+    ],
+    "teks": "Tip di Yordania — tip sekitar 10% lazim di restoran turis, sering sudah tertulis sebagai service charge di tagihan.",
+    "meta": {
+      "country": "Yordania",
+      "type": "tip",
+      "tags": [
+        "yordania",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-lebanon",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Lebanon",
+    "tags": [
+      "lebanon",
+      "cium pipi"
+    ],
+    "teks": "Sapaan Lebanon — cium pipi tiga kali (bergantian kanan-kiri-kanan) umum di antara teman dan keluarga.",
+    "meta": {
+      "country": "Lebanon",
+      "type": "sapaan",
+      "tags": [
+        "lebanon",
+        "cium pipi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-topik-sensitif-lebanon",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tabu Topik Sensitif Lebanon",
+    "tags": [
+      "lebanon",
+      "politik"
+    ],
+    "teks": "Tabu di Lebanon — membicarakan politik atau agama pada perkenalan pertama sebaiknya dihindari karena bisa jadi topik sensitif.",
+    "meta": {
+      "country": "Lebanon",
+      "type": "tabu",
+      "tags": [
+        "lebanon",
+        "politik"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-qatar",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Qatar",
+    "tags": [
+      "qatar",
+      "salam"
+    ],
+    "teks": "Sapaan Qatar — jabat tangan lembut dan hangat antar pria; salam formal \"As-salamu alaykum\" umum digunakan.",
+    "meta": {
+      "country": "Qatar",
+      "type": "sapaan",
+      "tags": [
+        "qatar",
+        "salam"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-berpakaian-qatar",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tabu Berpakaian Qatar",
+    "tags": [
+      "qatar",
+      "berpakaian"
+    ],
+    "teks": "Tabu di Qatar — berpakaian terlalu terbuka di tempat umum dianggap tidak sopan dan bisa melanggar norma setempat.",
+    "meta": {
+      "country": "Qatar",
+      "type": "tabu",
+      "tags": [
+        "qatar",
+        "berpakaian"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kuwait",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Kuwait",
+    "tags": [
+      "kuwait",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Kuwait — jabat tangan hangat antar sesama jenis, sering disertai obrolan ringan tentang keluarga sebelum ke topik utama.",
+    "meta": {
+      "country": "Kuwait",
+      "type": "sapaan",
+      "tags": [
+        "kuwait",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-kuwait",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Tip Kuwait",
+    "tags": [
+      "kuwait",
+      "tip"
+    ],
+    "teks": "Tip di Kuwait — tip 10% mulai umum di restoran kota besar, meski tradisi ini relatif baru dibanding negara Teluk lain.",
+    "meta": {
+      "country": "Kuwait",
+      "type": "tip",
+      "tags": [
+        "kuwait",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-oman",
+    "kategori": "etika",
+    "wilayah": "timur-tengah",
+    "nama": "Sapaan Oman",
+    "tags": [
+      "oman",
+      "khashm"
+    ],
+    "teks": "Sapaan Oman — jabat tangan lembut, kadang diikuti sentuhan hidung ringan (khashm) sebagai sapaan tradisional yang lebih akrab.",
+    "meta": {
+      "country": "Oman",
+      "type": "sapaan",
+      "tags": [
+        "oman",
+        "khashm"
+      ]
+    }
+  }
+]

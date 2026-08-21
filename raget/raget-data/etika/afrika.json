@@ -1,0 +1,382 @@
+[
+  {
+    "id": "etika-sapaan-mesir",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Mesir",
+    "tags": [
+      "mesir",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Mesir — jabat tangan hangat, sering berlangsung lebih lama dibanding budaya Barat, disertai tanya kabar keluarga.",
+    "meta": {
+      "country": "Mesir",
+      "type": "sapaan",
+      "tags": [
+        "mesir",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-mesir",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tip Mesir",
+    "tags": [
+      "mesir",
+      "baksheesh"
+    ],
+    "teks": "Tip di Mesir — baksheesh (tip kecil) diharapkan untuk banyak layanan, dari porter hingga penjaga situs wisata.",
+    "meta": {
+      "country": "Mesir",
+      "type": "tip",
+      "tags": [
+        "mesir",
+        "baksheesh"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kaki-mesir",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Kaki Mesir",
+    "tags": [
+      "mesir",
+      "kaki"
+    ],
+    "teks": "Tabu di Mesir — menunjukkan telapak kaki ke arah orang lain dianggap tidak sopan, mirip kebiasaan di banyak negara Timur Tengah.",
+    "meta": {
+      "country": "Mesir",
+      "type": "tabu",
+      "tags": [
+        "mesir",
+        "kaki"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-maroko",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Maroko",
+    "tags": [
+      "maroko",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Maroko — jabat tangan lalu menyentuh dada sebagai tanda ketulusan; pria dan wanita yang belum kenal dekat biasanya tidak berjabat tangan.",
+    "meta": {
+      "country": "Maroko",
+      "type": "sapaan",
+      "tags": [
+        "maroko",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-maroko",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tip Maroko",
+    "tags": [
+      "maroko",
+      "tip"
+    ],
+    "teks": "Tip di Maroko — tip kecil diharapkan di kafe, restoran, dan untuk pemandu wisata sebagai bagian dari kebiasaan sehari-hari.",
+    "meta": {
+      "country": "Maroko",
+      "type": "tip",
+      "tags": [
+        "maroko",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tangan-kiri-maroko",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Tangan Kiri Maroko",
+    "tags": [
+      "maroko",
+      "tangan kiri"
+    ],
+    "teks": "Tabu di Maroko — makan atau memberi sesuatu dengan tangan kiri dianggap kurang sopan menurut adat setempat.",
+    "meta": {
+      "country": "Maroko",
+      "type": "tabu",
+      "tags": [
+        "maroko",
+        "tangan kiri"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-nigeria",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Nigeria",
+    "tags": [
+      "nigeria",
+      "hormat"
+    ],
+    "teks": "Sapaan Nigeria — menyapa orang yang lebih tua dengan sedikit membungkuk atau berlutut adalah tanda hormat di banyak suku.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "sapaan",
+      "tags": [
+        "nigeria",
+        "hormat"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tangan-kiri-nigeria",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Tangan Kiri Nigeria",
+    "tags": [
+      "nigeria",
+      "tangan kiri"
+    ],
+    "teks": "Tabu di Nigeria — menggunakan tangan kiri untuk memberi atau menerima barang dianggap tidak sopan di banyak komunitas.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "tabu",
+      "tags": [
+        "nigeria",
+        "tangan kiri"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-afrika-selatan",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Afrika Selatan",
+    "tags": [
+      "afrika selatan",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Afrika Selatan — jabat tangan hangat; di kalangan Zulu, jabat tangan tiga tahap dengan gerakan khas cukup umum.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "sapaan",
+      "tags": [
+        "afrika selatan",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-afrika-selatan",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tip Afrika Selatan",
+    "tags": [
+      "afrika selatan",
+      "tip"
+    ],
+    "teks": "Tip di Afrika Selatan — tip sekitar 10-15% lazim di restoran, dianggap bagian penting dari penghasilan pelayan.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "tip",
+      "tags": [
+        "afrika selatan",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kenya",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Kenya",
+    "tags": [
+      "kenya",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Kenya — jabat tangan lembut dan berlangsung agak lama; kontak mata langsung dengan orang yang lebih tua kadang dihindari sebagai tanda hormat.",
+    "meta": {
+      "country": "Kenya",
+      "type": "sapaan",
+      "tags": [
+        "kenya",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-menunjuk-kenya",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Menunjuk Kenya",
+    "tags": [
+      "kenya",
+      "menunjuk"
+    ],
+    "teks": "Tabu di Kenya — menunjuk dengan jari telunjuk ke arah orang dianggap kasar di beberapa komunitas lokal.",
+    "meta": {
+      "country": "Kenya",
+      "type": "tabu",
+      "tags": [
+        "kenya",
+        "menunjuk"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-etiopia",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Etiopia",
+    "tags": [
+      "etiopia",
+      "cium pipi"
+    ],
+    "teks": "Sapaan Etiopia — jabat tangan disertai sedikit membungkuk; teman dekat sesama jenis saling mencium pipi tiga kali.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "sapaan",
+      "tags": [
+        "etiopia",
+        "cium pipi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-menolak-kopi-etiopia",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Menolak Kopi Etiopia",
+    "tags": [
+      "etiopia",
+      "kopi"
+    ],
+    "teks": "Tabu di Etiopia — menolak tawaran kopi tradisional (buna) dianggap kurang sopan karena upacara kopi adalah simbol keramahan.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "tabu",
+      "tags": [
+        "etiopia",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-ghana",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Ghana",
+    "tags": [
+      "ghana",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Ghana — jabat tangan disertai jentikan jari di akhir (versi tradisional Akan) sebagai tanda keakraban.",
+    "meta": {
+      "country": "Ghana",
+      "type": "sapaan",
+      "tags": [
+        "ghana",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-ghana",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tip Ghana",
+    "tags": [
+      "ghana",
+      "tip"
+    ],
+    "teks": "Tip di Ghana — tip kecil dihargai di restoran kota besar, meski belum menjadi kebiasaan wajib secara umum.",
+    "meta": {
+      "country": "Ghana",
+      "type": "tip",
+      "tags": [
+        "ghana",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-tanzania",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Tanzania",
+    "tags": [
+      "tanzania",
+      "jambo"
+    ],
+    "teks": "Sapaan Tanzania — salam \"Jambo\" atau \"Hujambo\" umum diucapkan pada wisatawan, disertai jabat tangan ramah.",
+    "meta": {
+      "country": "Tanzania",
+      "type": "sapaan",
+      "tags": [
+        "tanzania",
+        "jambo"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-memotret-tanpa-izin-tanzania",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Memotret Tanpa Izin Tanzania",
+    "tags": [
+      "tanzania",
+      "memotret"
+    ],
+    "teks": "Tabu di Tanzania — memotret orang tanpa izin, terutama suku Maasai, dianggap tidak sopan dan bisa memicu konflik.",
+    "meta": {
+      "country": "Tanzania",
+      "type": "tabu",
+      "tags": [
+        "tanzania",
+        "memotret"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-aljazair",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Sapaan Aljazair",
+    "tags": [
+      "aljazair",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Aljazair — jabat tangan hangat, sering disertai meletakkan tangan di dada setelahnya sebagai tanda ketulusan.",
+    "meta": {
+      "country": "Aljazair",
+      "type": "sapaan",
+      "tags": [
+        "aljazair",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kaki-tunisia",
+    "kategori": "etika",
+    "wilayah": "afrika",
+    "nama": "Tabu Kaki Tunisia",
+    "tags": [
+      "tunisia",
+      "kaki"
+    ],
+    "teks": "Tabu di Tunisia — menunjukkan telapak kaki atau menyilangkan kaki dengan sol menghadap orang lain dianggap tidak sopan.",
+    "meta": {
+      "country": "Tunisia",
+      "type": "tabu",
+      "tags": [
+        "tunisia",
+        "kaki"
+      ]
+    }
+  }
+]

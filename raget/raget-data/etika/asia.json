@@ -1,0 +1,411 @@
+[
+  {
+    "id": "etika-sapaan-jepang",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Jepang",
+    "tags": [
+      "jepang",
+      "membungkuk",
+      "ojigi"
+    ],
+    "teks": "Sapaan Jepang — membungkuk (ojigi) adalah sapaan formal utama; jabat tangan jarang dipakai antar sesama orang Jepang.",
+    "meta": {
+      "country": "Jepang",
+      "type": "sapaan",
+      "tags": [
+        "jepang",
+        "membungkuk",
+        "ojigi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-jepang",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tip Jepang",
+    "tags": [
+      "jepang",
+      "tip"
+    ],
+    "teks": "Tip di Jepang — memberi tip dianggap tidak sopan dan bisa membingungkan; pelayanan yang baik sudah termasuk dalam harga.",
+    "meta": {
+      "country": "Jepang",
+      "type": "tip",
+      "tags": [
+        "jepang",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-sumpit-jepang",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Sumpit Jepang",
+    "tags": [
+      "jepang",
+      "sumpit"
+    ],
+    "teks": "Tabu di Jepang — menancapkan sumpit tegak di mangkuk nasi mengingatkan pada ritual pemakaman, sebaiknya dihindari.",
+    "meta": {
+      "country": "Jepang",
+      "type": "tabu",
+      "tags": [
+        "jepang",
+        "sumpit"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-korea",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Korea",
+    "tags": [
+      "korea",
+      "membungkuk"
+    ],
+    "teks": "Sapaan Korea Selatan — membungkuk ringan sambil menyapa lebih tua dengan kedua tangan menunjukkan rasa hormat.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "sapaan",
+      "tags": [
+        "korea",
+        "membungkuk"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-korea",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tip Korea",
+    "tags": [
+      "korea",
+      "tip"
+    ],
+    "teks": "Tip di Korea Selatan — tidak ada budaya tip; menawarkan tip di restoran kadang malah ditolak.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "tip",
+      "tags": [
+        "korea",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tinta-merah-korea",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Tinta Merah Korea",
+    "tags": [
+      "korea",
+      "tinta merah"
+    ],
+    "teks": "Tabu di Korea Selatan — menuliskan nama orang dengan tinta merah dianggap simbol kematian atau nasib buruk.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "tabu",
+      "tags": [
+        "korea",
+        "tinta merah"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-tiongkok",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Tiongkok",
+    "tags": [
+      "tiongkok",
+      "china",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Tiongkok — jabat tangan ringan umum dipakai, sedikit anggukan kepala menambah kesan hormat.",
+    "meta": {
+      "country": "Tiongkok",
+      "type": "sapaan",
+      "tags": [
+        "tiongkok",
+        "china",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-tiongkok",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tip Tiongkok",
+    "tags": [
+      "tiongkok",
+      "china",
+      "tip"
+    ],
+    "teks": "Tip di Tiongkok — tip umumnya tidak diharapkan dan kadang dianggap tidak pantas di restoran biasa.",
+    "meta": {
+      "country": "Tiongkok",
+      "type": "tip",
+      "tags": [
+        "tiongkok",
+        "china",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-angka-4-tiongkok",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Angka 4 Tiongkok",
+    "tags": [
+      "tiongkok",
+      "china",
+      "angka 4"
+    ],
+    "teks": "Tabu di Tiongkok — angka 4 dihindari karena pelafalannya mirip kata \"mati\"; banyak gedung melewati lantai 4.",
+    "meta": {
+      "country": "Tiongkok",
+      "type": "tabu",
+      "tags": [
+        "tiongkok",
+        "china",
+        "angka 4"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-thailand",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Thailand",
+    "tags": [
+      "thailand",
+      "wai"
+    ],
+    "teks": "Sapaan Thailand — wai, menangkupkan kedua telapak tangan di depan dada sambil sedikit menunduk, adalah sapaan khas.",
+    "meta": {
+      "country": "Thailand",
+      "type": "sapaan",
+      "tags": [
+        "thailand",
+        "wai"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-thailand",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tip Thailand",
+    "tags": [
+      "thailand",
+      "tip"
+    ],
+    "teks": "Tip di Thailand — tip kecil (round up atau 10%) dihargai di restoran, tidak wajib tapi lazim di area wisata.",
+    "meta": {
+      "country": "Thailand",
+      "type": "tip",
+      "tags": [
+        "thailand",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kepala-kaki-thailand",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Kepala-Kaki Thailand",
+    "tags": [
+      "thailand",
+      "kepala",
+      "kaki"
+    ],
+    "teks": "Tabu di Thailand — menyentuh kepala orang lain atau menunjuk kaki ke arah orang/patung Buddha dianggap sangat tidak sopan.",
+    "meta": {
+      "country": "Thailand",
+      "type": "tabu",
+      "tags": [
+        "thailand",
+        "kepala",
+        "kaki"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-indonesia",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Indonesia",
+    "tags": [
+      "indonesia",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Indonesia — jabat tangan lembut sambil menyentuh dada adalah sapaan umum, terutama di kalangan Muslim.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "sapaan",
+      "tags": [
+        "indonesia",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-indonesia",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tip Indonesia",
+    "tags": [
+      "indonesia",
+      "tip"
+    ],
+    "teks": "Tip di Indonesia — tip tidak wajib namun uang kembalian kecil sering diberikan ke porter atau pengemudi sebagai apresiasi.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "tip",
+      "tags": [
+        "indonesia",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tangan-kiri-indonesia",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Tangan Kiri Indonesia",
+    "tags": [
+      "indonesia",
+      "tangan kiri"
+    ],
+    "teks": "Tabu di Indonesia — memakai tangan kiri untuk memberi/menerima sesuatu atau makan dianggap kurang sopan di banyak daerah.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "tabu",
+      "tags": [
+        "indonesia",
+        "tangan kiri"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-india",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan India",
+    "tags": [
+      "india",
+      "namaste"
+    ],
+    "teks": "Sapaan India — namaste, menangkupkan kedua tangan di depan dada sambil sedikit menunduk, adalah sapaan tradisional.",
+    "meta": {
+      "country": "India",
+      "type": "sapaan",
+      "tags": [
+        "india",
+        "namaste"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-india",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tip India",
+    "tags": [
+      "india",
+      "tip"
+    ],
+    "teks": "Tip di India — tip sekitar 10% lazim di restoran kelas menengah ke atas, kadang sudah termasuk sebagai service charge.",
+    "meta": {
+      "country": "India",
+      "type": "tip",
+      "tags": [
+        "india",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-sapi-india",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Sapi India",
+    "tags": [
+      "india",
+      "sapi"
+    ],
+    "teks": "Tabu di India — banyak yang menganggap sapi hewan suci; menyinggung soal daging sapi bisa dianggap tidak sopan.",
+    "meta": {
+      "country": "India",
+      "type": "tabu",
+      "tags": [
+        "india",
+        "sapi"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-vietnam",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Vietnam",
+    "tags": [
+      "vietnam",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Vietnam — jabat tangan ringan dengan kedua tangan, kepala sedikit menunduk untuk yang lebih tua.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "sapaan",
+      "tags": [
+        "vietnam",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kepala-anak-vietnam",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Tabu Kepala Anak Vietnam",
+    "tags": [
+      "vietnam",
+      "kepala anak"
+    ],
+    "teks": "Tabu di Vietnam — mengelus kepala anak kecil tanpa izin dianggap kurang sopan meski niatnya baik.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "tabu",
+      "tags": [
+        "vietnam",
+        "kepala anak"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-filipina",
+    "kategori": "etika",
+    "wilayah": "asia",
+    "nama": "Sapaan Filipina",
+    "tags": [
+      "filipina",
+      "mano po"
+    ],
+    "teks": "Sapaan Filipina — jabat tangan hangat umum dipakai; mano po (mencium tangan orang tua) tanda hormat pada yang lebih tua.",
+    "meta": {
+      "country": "Filipina",
+      "type": "sapaan",
+      "tags": [
+        "filipina",
+        "mano po"
+      ]
+    }
+  }
+]

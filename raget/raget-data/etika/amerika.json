@@ -1,0 +1,382 @@
+[
+  {
+    "id": "etika-sapaan-as",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan AS",
+    "tags": [
+      "amerika serikat",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Amerika Serikat — jabat tangan tegas dengan kontak mata langsung adalah sapaan standar di lingkungan bisnis.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "sapaan",
+      "tags": [
+        "amerika serikat",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-as",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tip AS",
+    "tags": [
+      "amerika serikat",
+      "tip"
+    ],
+    "teks": "Tip di Amerika Serikat — tip 15-20% di restoran dianggap wajib secara sosial karena bagian dari penghasilan pelayan.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "tip",
+      "tags": [
+        "amerika serikat",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-pertanyaan-pribadi-as",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tabu Pertanyaan Pribadi AS",
+    "tags": [
+      "amerika serikat",
+      "privasi"
+    ],
+    "teks": "Tabu di Amerika Serikat — menanyakan gaji atau usia seseorang secara langsung dianggap terlalu pribadi dan tidak sopan.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "tabu",
+      "tags": [
+        "amerika serikat",
+        "privasi"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kanada",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Kanada",
+    "tags": [
+      "kanada",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Kanada — jabat tangan ramah, sering disertai ucapan \"sorry\" bahkan untuk hal kecil sebagai bentuk kesopanan.",
+    "meta": {
+      "country": "Kanada",
+      "type": "sapaan",
+      "tags": [
+        "kanada",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-kanada",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tip Kanada",
+    "tags": [
+      "kanada",
+      "tip"
+    ],
+    "teks": "Tip di Kanada — tip 15-18% umum di restoran, mirip kebiasaan Amerika Serikat.",
+    "meta": {
+      "country": "Kanada",
+      "type": "tip",
+      "tags": [
+        "kanada",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-meksiko",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Meksiko",
+    "tags": [
+      "meksiko",
+      "abrazo"
+    ],
+    "teks": "Sapaan Meksiko — jabat tangan hangat, teman dekat berpelukan (abrazo) atau cium pipi satu kali.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "sapaan",
+      "tags": [
+        "meksiko",
+        "abrazo"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-meksiko",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tip Meksiko",
+    "tags": [
+      "meksiko",
+      "tip"
+    ],
+    "teks": "Tip di Meksiko — tip sekitar 10-15% lazim di restoran, tidak selalu termasuk dalam tagihan.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "tip",
+      "tags": [
+        "meksiko",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-warna-kuning-meksiko",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tabu Warna Kuning Meksiko",
+    "tags": [
+      "meksiko",
+      "warna kuning"
+    ],
+    "teks": "Tabu di Meksiko — warna kuning dikaitkan dengan kematian dalam beberapa konteks tradisional, terutama saat berkabung.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "tabu",
+      "tags": [
+        "meksiko",
+        "warna kuning"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-brasil",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Brasil",
+    "tags": [
+      "brasil",
+      "cium pipi"
+    ],
+    "teks": "Sapaan Brasil — cium pipi (jumlahnya bervariasi per daerah) dan pelukan hangat umum di antara kenalan.",
+    "meta": {
+      "country": "Brasil",
+      "type": "sapaan",
+      "tags": [
+        "brasil",
+        "cium pipi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-brasil",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tip Brasil",
+    "tags": [
+      "brasil",
+      "tip"
+    ],
+    "teks": "Tip di Brasil — service charge 10% biasanya sudah termasuk tagihan restoran (servico incluido).",
+    "meta": {
+      "country": "Brasil",
+      "type": "tip",
+      "tags": [
+        "brasil",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tanda-ok-brasil",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tabu Tanda OK Brasil",
+    "tags": [
+      "brasil",
+      "gestur tangan"
+    ],
+    "teks": "Tabu di Brasil — membentuk tanda \"OK\" dengan jari dianggap kasar/vulgar, berbeda makna dibanding di negara lain.",
+    "meta": {
+      "country": "Brasil",
+      "type": "tabu",
+      "tags": [
+        "brasil",
+        "gestur tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-argentina",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Argentina",
+    "tags": [
+      "argentina",
+      "cium pipi"
+    ],
+    "teks": "Sapaan Argentina — cium pipi satu kali (kanan) umum bahkan di lingkungan bisnis, termasuk antar pria.",
+    "meta": {
+      "country": "Argentina",
+      "type": "sapaan",
+      "tags": [
+        "argentina",
+        "cium pipi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-argentina",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tip Argentina",
+    "tags": [
+      "argentina",
+      "tip"
+    ],
+    "teks": "Tip di Argentina — tip sekitar 10% lazim, sering dibayar tunai terpisah dari tagihan kartu.",
+    "meta": {
+      "country": "Argentina",
+      "type": "tip",
+      "tags": [
+        "argentina",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kolombia",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Kolombia",
+    "tags": [
+      "kolombia",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Kolombia — jabat tangan hangat di lingkungan formal; teman dekat berpelukan atau cium pipi satu kali.",
+    "meta": {
+      "country": "Kolombia",
+      "type": "sapaan",
+      "tags": [
+        "kolombia",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-menunjuk-kolombia",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tabu Menunjuk Kolombia",
+    "tags": [
+      "kolombia",
+      "menunjuk"
+    ],
+    "teks": "Tabu di Kolombia — menunjuk orang lain dengan jari telunjuk dianggap kurang sopan, lebih baik dengan telapak tangan terbuka.",
+    "meta": {
+      "country": "Kolombia",
+      "type": "tabu",
+      "tags": [
+        "kolombia",
+        "menunjuk"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-peru",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Peru",
+    "tags": [
+      "peru",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Peru — jabat tangan sopan; di daerah Andes, sapaan cenderung lebih formal dan penuh hormat pada yang lebih tua.",
+    "meta": {
+      "country": "Peru",
+      "type": "sapaan",
+      "tags": [
+        "peru",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-peru",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tip Peru",
+    "tags": [
+      "peru",
+      "tip"
+    ],
+    "teks": "Tip di Peru — tip 10% lazim di restoran turis, tidak wajib di warung makan lokal kecil.",
+    "meta": {
+      "country": "Peru",
+      "type": "tip",
+      "tags": [
+        "peru",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-chili",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Chili",
+    "tags": [
+      "chili",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Chili — jabat tangan umum di lingkungan bisnis; teman dekat cium pipi satu kali.",
+    "meta": {
+      "country": "Chili",
+      "type": "sapaan",
+      "tags": [
+        "chili",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-menguap-chili",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Tabu Menguap Chili",
+    "tags": [
+      "chili",
+      "menguap"
+    ],
+    "teks": "Tabu di Chili — menguap tanpa menutup mulut di depan umum dianggap sangat tidak sopan.",
+    "meta": {
+      "country": "Chili",
+      "type": "tabu",
+      "tags": [
+        "chili",
+        "menguap"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kuba",
+    "kategori": "etika",
+    "wilayah": "amerika",
+    "nama": "Sapaan Kuba",
+    "tags": [
+      "kuba",
+      "pelukan"
+    ],
+    "teks": "Sapaan Kuba — hangat dan ekspresif, pelukan dan cium pipi umum bahkan pada perkenalan pertama di lingkungan santai.",
+    "meta": {
+      "country": "Kuba",
+      "type": "sapaan",
+      "tags": [
+        "kuba",
+        "pelukan"
+      ]
+    }
+  }
+]
