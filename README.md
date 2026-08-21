@@ -140,12 +140,21 @@ yang dimuat lewat pencarian satu-pintu.
 **Migrasi skema data (vNext Fase B, sedang berjalan)**: domain data yang tadinya array
 literal di dalam file `.js` (mencampur data dan logika) dipindah bertahap ke satu skema
 JSON standar (`{id, kategori, wilayah, nama, tags, teks, meta}`) di `raget/raget-data/`,
-dengan `*-store.js` yang tersisa hanya jadi loader tipis (fetch + fungsi query, nol data
-literal). Domain yang sudah dimigrasi: **tokoh** (`raget-data/tokoh/tokoh.json`, 236 entri),
-**kuliner** (`raget-data/kuliner/*.json`, 143 entri di 6 file regional), dan **hari
-internasional** (`raget-data/hari-internasional/hari-internasional.json`, 158 entri) — pola
-migrasinya didokumentasikan di `raget/raget-tools/migrate-*-domain.mjs` untuk dipakai
-ulang di domain berikutnya.
+dengan `*-store.js`/`llm-engine.js` yang tersisa hanya jadi loader tipis (fetch + fungsi
+query, nol data literal). Domain yang sudah dimigrasi: **tokoh** (`raget-data/tokoh/tokoh.json`,
+236 entri), **kuliner** (`raget-data/kuliner/*.json`, 143 entri di 6 file regional), **hari
+internasional** (`raget-data/hari-internasional/hari-internasional.json`, 158 entri), dan
+**sapaan** (`raget-data/sapaan/sapaan.json`, 11 entri — templat sapaan/smalltalk yang tadinya
+konstanta literal di `llm-engine.js`; regex pemicunya tetap di JS, cuma teks balasannya yang
+jadi data) — pola migrasinya didokumentasikan di `raget/raget-tools/migrate-*-domain.mjs`
+untuk dipakai ulang di domain berikutnya.
+
+**Korpus milik sendiri**: `raget/raget-tools/dataries-ke-korpus.mjs` merender seluruh data
+di atas (plus `raget-dataset/knowledge/*`, `fewshot.json`, `persona.json`) jadi
+`raget/raget-corpus/raget_own_corpus.jsonl` — 2.599 baris (123 dialog, 2.465 fakta, 11
+identitas), ±65.500 token perkiraan kasar. `bench.json` dan `metadata/answer-rules.json`
+sengaja dilewati (alasannya di komentar header skrip) supaya korpus tidak berisi data latih
+yang dikarang.
 
 ## Raget Neural (Eksperimental)
 
