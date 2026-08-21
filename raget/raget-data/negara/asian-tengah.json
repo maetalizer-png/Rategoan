@@ -1,0 +1,1257 @@
+[
+  {
+    "id": "negara-kazakhstan",
+    "kategori": "negara",
+    "wilayah": "asian-tengah",
+    "nama": "Kazakhstan",
+    "tags": [
+      "Central Asia"
+    ],
+    "teks": "Kazakhstan - Negara terbesar di Asia Tengah dengan ekonomi maju dan sumber daya alam melimpah. Ibu kota: Astana. Populasi: 19 juta jiwa. Mata uang: Tenge (KZT). Bahasa: Kazakh, Rusia. Sistem pemerintahan: Republik Presidensial. Ekonomi terbesar di Asia Tengah. Cadangan minyak, gas, dan mineral besar. Anggota Uni Eurasia. Negara dengan stepa luas dan kota modern. Rumah bagi kosmodrom Baikonur dan keindahan alam Altai.",
+    "meta": {
+      "officialName": "Republik Kazakhstan",
+      "shortName": "KAZ",
+      "capital": "Astana",
+      "capitalCoordinates": {
+        "lat": 51.1694,
+        "lng": 71.4491
+      },
+      "largestCity": "Almaty",
+      "demonym": "Kazakhstan",
+      "subregion": "Central Asia",
+      "area": 2724900,
+      "areaRank": 9,
+      "coastline": 0,
+      "highestPoint": "Khan Tengri",
+      "highestElevation": 7010,
+      "lowestPoint": "Karagiye Depression",
+      "lowestElevation": -132,
+      "landBorders": [
+        "Rusia",
+        "China",
+        "Kirgistan",
+        "Uzbekistan",
+        "Turkmenistan"
+      ],
+      "coordinates": {
+        "lat": 48,
+        "lng": 68
+      },
+      "timezone": [
+        "Waktu Kazakhstan"
+      ],
+      "utcOffset": [
+        "+5",
+        "+6"
+      ],
+      "population": 19000000,
+      "populationRank": 63,
+      "populationDensity": 7,
+      "populationGrowth": 1,
+      "medianAge": 30,
+      "lifeExpectancy": 73,
+      "fertilityRate": 2.5,
+      "urbanization": 58,
+      "ethnicGroups": [
+        {
+          "name": "Kazakh",
+          "percentage": 68
+        },
+        {
+          "name": "Rusia",
+          "percentage": 19
+        },
+        {
+          "name": "Uzbek",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 70
+        },
+        {
+          "name": "Kristen",
+          "percentage": 25
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Kazakh",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 80,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1991-12-16",
+      "nationalHoliday": "16 Desember",
+      "legalSystem": "Civil Law",
+      "constitution": "1995",
+      "administrativeDivisions": 17,
+      "memberships": [
+        "PBB",
+        "SCO",
+        "Uni Eurasia",
+        "OKI"
+      ],
+      "giniCoefficient": 27.8,
+      "hdi": 0.825,
+      "hdiRank": 51,
+      "corruptionIndex": 38,
+      "currency": "Tenge",
+      "currencyCode": "KZT",
+      "gdp": 250000000000,
+      "gdpPerCapita": 13160,
+      "gdpPpp": 650000000000,
+      "gdpGrowth": 4,
+      "inflation": 5,
+      "unemployment": 5,
+      "povertyRate": 5,
+      "mainIndustries": [
+        "Minyak",
+        "Gas",
+        "Tambang",
+        "Pertanian",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 50000000000
+        },
+        {
+          "item": "Gas",
+          "value": 20000000000
+        },
+        {
+          "item": "Mineral",
+          "value": 15000000000
+        },
+        {
+          "item": "Gandum",
+          "value": 10000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 20000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 15000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 10000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 8000000000
+        }
+      ],
+      "tradeBalance": 30000000000,
+      "naturalResources": [
+        "Minyak",
+        "Gas",
+        "Uranium",
+        "Emas",
+        "Tembaga",
+        "Batu bara"
+      ],
+      "economicRanking": 50,
+      "internetPenetration": 75,
+      "mobilePenetration": 90,
+      "electricityAccess": 100,
+      "roadLength": 100000,
+      "railwayLength": 15000,
+      "airports": 50,
+      "seaports": 0,
+      "healthcareAccess": 80,
+      "educationIndex": 0.75,
+      "nationalMotto": "Kemakmuran, Stabilitas, Kemajuan",
+      "nationalAnthem": "Menıñ Qazaqstanım",
+      "nationalAnimal": "Elang Step",
+      "nationalFlower": "Bunga Tulip",
+      "nationalCuisine": [
+        "Beshbarmak",
+        "Kazy",
+        "Kurt",
+        "Baursak",
+        "Shashlik"
+      ],
+      "culturalHeritage": [
+        "Astana",
+        "Almaty",
+        "Baikonur",
+        "Altai"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Hari Kemenangan",
+        "Hari Republik"
+      ],
+      "socialRanking": 65,
+      "climate": "Kontinental",
+      "averageTemperature": 10,
+      "averageRainfall": 250,
+      "forestArea": 5,
+      "protectedAreas": 10,
+      "biodiversityRank": 30,
+      "carbonEmissions": 15,
+      "environmentalIndex": 45,
+      "riskScore": 30,
+      "politicalStability": 65,
+      "crimeIndex": 25,
+      "militarySpending": 1,
+      "peaceIndex": 40,
+      "terrorismIndex": 15,
+      "refugeePopulation": 1000,
+      "opportunityScore": 65,
+      "easeOfDoingBusiness": 65,
+      "innovationIndex": 45,
+      "startupEcosystem": 50,
+      "investmentScore": 60,
+      "talentPool": 65,
+      "marketSize": 70,
+      "infrastructureQuality": 65,
+      "internetSpeed": 25,
+      "digitalAdoption": 65,
+      "techEcosystem": 50,
+      "aiReadiness": 40,
+      "startups": 150,
+      "phoneCode": "+7",
+      "tld": ".kz",
+      "isoCode": "KAZ",
+      "isoCode2": "KZ",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "asian-tengah",
+        "minyak",
+        "gas",
+        "ekonomi-terbesar"
+      ]
+    }
+  },
+  {
+    "id": "negara-uzbekistan",
+    "kategori": "negara",
+    "wilayah": "asian-tengah",
+    "nama": "Uzbekistan",
+    "tags": [
+      "Central Asia"
+    ],
+    "teks": "Uzbekistan - Negara di Asia Tengah dengan sejarah Jalur Sutra dan budaya kaya. Ibu kota: Tashkent. Populasi: 35 juta jiwa. Mata uang: Som Uzbekistan (UZS). Bahasa: Uzbek. Sistem pemerintahan: Republik Presidensial. Populasi terbesar di Asia Tengah. Warisan arsitektur Islam yang kaya. Penghasil kapas terbesar. Negara dengan kota-kota kuno Samarkand, Bukhara, dan Khiva yang memukau.",
+    "meta": {
+      "officialName": "Republik Uzbekistan",
+      "shortName": "UZB",
+      "capital": "Tashkent",
+      "capitalCoordinates": {
+        "lat": 41.2995,
+        "lng": 69.2401
+      },
+      "largestCity": "Tashkent",
+      "demonym": "Uzbekistan",
+      "subregion": "Central Asia",
+      "area": 447400,
+      "areaRank": 56,
+      "coastline": 0,
+      "highestPoint": "Khazret Sultan",
+      "highestElevation": 4643,
+      "lowestPoint": "Mynbulak",
+      "lowestElevation": -12,
+      "landBorders": [
+        "Kazakhstan",
+        "Kirgistan",
+        "Tajikistan",
+        "Afghanistan",
+        "Turkmenistan"
+      ],
+      "coordinates": {
+        "lat": 41,
+        "lng": 64
+      },
+      "timezone": [
+        "Waktu Uzbekistan"
+      ],
+      "utcOffset": [
+        "+5"
+      ],
+      "population": 35000000,
+      "populationRank": 41,
+      "populationDensity": 78,
+      "populationGrowth": 1.5,
+      "medianAge": 28,
+      "lifeExpectancy": 72,
+      "fertilityRate": 2.5,
+      "urbanization": 50,
+      "ethnicGroups": [
+        {
+          "name": "Uzbek",
+          "percentage": 80
+        },
+        {
+          "name": "Tajik",
+          "percentage": 5
+        },
+        {
+          "name": "Kazakh",
+          "percentage": 3
+        },
+        {
+          "name": "Rusia",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 88
+        },
+        {
+          "name": "Kristen",
+          "percentage": 9
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 3
+        }
+      ],
+      "languages": [
+        {
+          "name": "Uzbek",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 20
+        },
+        {
+          "name": "Inggris",
+          "percentage": 5
+        }
+      ],
+      "literacyRate": 100,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1991-09-01",
+      "nationalHoliday": "1 September",
+      "legalSystem": "Civil Law",
+      "constitution": "1992",
+      "administrativeDivisions": 12,
+      "memberships": [
+        "PBB",
+        "SCO",
+        "OKI"
+      ],
+      "giniCoefficient": 35,
+      "hdi": 0.72,
+      "hdiRank": 106,
+      "corruptionIndex": 28,
+      "currency": "Som Uzbekistan",
+      "currencyCode": "UZS",
+      "gdp": 100000000000,
+      "gdpPerCapita": 2850,
+      "gdpPpp": 350000000000,
+      "gdpGrowth": 6,
+      "inflation": 8,
+      "unemployment": 6,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Kapas",
+        "Tekstil",
+        "Pertanian",
+        "Gas",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Kapas",
+          "value": 15000000000
+        },
+        {
+          "item": "Gas",
+          "value": 10000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 8000000000
+        },
+        {
+          "item": "Emas",
+          "value": 5000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 10000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 8000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 5000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Gas",
+        "Emas",
+        "Uranium",
+        "Kapas",
+        "Mineral"
+      ],
+      "economicRanking": 60,
+      "internetPenetration": 50,
+      "mobilePenetration": 75,
+      "electricityAccess": 100,
+      "roadLength": 80000,
+      "railwayLength": 4000,
+      "airports": 30,
+      "seaports": 0,
+      "healthcareAccess": 65,
+      "educationIndex": 0.62,
+      "nationalMotto": "Kekuatan, Kesatuan, Kemakmuran",
+      "nationalAnthem": "Oʻzbekiston Respublikasining Davlat Madhiyasi",
+      "nationalAnimal": "Kuda",
+      "nationalFlower": "Bunga Kapas",
+      "nationalCuisine": [
+        "Plov",
+        "Manti",
+        "Shashlik",
+        "Samsa",
+        "Lagman"
+      ],
+      "culturalHeritage": [
+        "Samarkand",
+        "Bukhara",
+        "Khiva",
+        "Tashkent"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Navruz",
+        "Idul Fitri"
+      ],
+      "socialRanking": 55,
+      "climate": "Kontinental",
+      "averageTemperature": 18,
+      "averageRainfall": 200,
+      "forestArea": 8,
+      "protectedAreas": 5,
+      "biodiversityRank": 35,
+      "carbonEmissions": 3,
+      "environmentalIndex": 40,
+      "riskScore": 40,
+      "politicalStability": 55,
+      "crimeIndex": 30,
+      "militarySpending": 2,
+      "peaceIndex": 45,
+      "terrorismIndex": 20,
+      "refugeePopulation": 1000,
+      "opportunityScore": 55,
+      "easeOfDoingBusiness": 52,
+      "innovationIndex": 35,
+      "startupEcosystem": 40,
+      "investmentScore": 50,
+      "talentPool": 60,
+      "marketSize": 70,
+      "infrastructureQuality": 50,
+      "internetSpeed": 15,
+      "digitalAdoption": 45,
+      "techEcosystem": 40,
+      "aiReadiness": 30,
+      "startups": 100,
+      "phoneCode": "+998",
+      "tld": ".uz",
+      "isoCode": "UZB",
+      "isoCode2": "UZ",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "asian-tengah",
+        "jalur-sutra",
+        "kapas",
+        "arsitektur-islam"
+      ]
+    }
+  },
+  {
+    "id": "negara-turkmenistan",
+    "kategori": "negara",
+    "wilayah": "asian-tengah",
+    "nama": "Turkmenistan",
+    "tags": [
+      "Central Asia"
+    ],
+    "teks": "Turkmenistan - Negara di Asia Tengah dengan cadangan gas alam besar. Ibu kota: Ashgabat. Populasi: 6 juta jiwa. Mata uang: Manat Turkmen (TMT). Bahasa: Turkmen. Sistem pemerintahan: Republik Presidensial. Salah satu cadangan gas alam terbesar dunia. Negara dengan kebijakan netralitas permanen. Arsitektur marmer putih di Ashgabat. Negara dengan sumber daya gas yang melimpah dan budaya nomaden.",
+    "meta": {
+      "officialName": "Turkmenistan",
+      "shortName": "TKM",
+      "capital": "Ashgabat",
+      "capitalCoordinates": {
+        "lat": 37.9601,
+        "lng": 58.3261
+      },
+      "largestCity": "Ashgabat",
+      "demonym": "Turkmenistan",
+      "subregion": "Central Asia",
+      "area": 488100,
+      "areaRank": 52,
+      "coastline": 1768,
+      "highestPoint": "Gunung Ayrybaba",
+      "highestElevation": 3139,
+      "lowestPoint": "Depresi Akchakaya",
+      "lowestElevation": -81,
+      "landBorders": [
+        "Kazakhstan",
+        "Uzbekistan",
+        "Afghanistan",
+        "Iran"
+      ],
+      "coordinates": {
+        "lat": 39,
+        "lng": 59
+      },
+      "timezone": [
+        "Waktu Turkmenistan"
+      ],
+      "utcOffset": [
+        "+5"
+      ],
+      "population": 6000000,
+      "populationRank": 113,
+      "populationDensity": 12,
+      "populationGrowth": 1,
+      "medianAge": 28,
+      "lifeExpectancy": 68,
+      "fertilityRate": 2.8,
+      "urbanization": 52,
+      "ethnicGroups": [
+        {
+          "name": "Turkmen",
+          "percentage": 85
+        },
+        {
+          "name": "Uzbek",
+          "percentage": 5
+        },
+        {
+          "name": "Rusia",
+          "percentage": 4
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 6
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 89
+        },
+        {
+          "name": "Kristen",
+          "percentage": 9
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Turkmen",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1991-10-27",
+      "nationalHoliday": "27 Oktober",
+      "legalSystem": "Civil Law",
+      "constitution": "2008",
+      "administrativeDivisions": 5,
+      "memberships": [
+        "PBB",
+        "OKI",
+        "Non-Aligned Movement"
+      ],
+      "giniCoefficient": 40.8,
+      "hdi": 0.715,
+      "hdiRank": 108,
+      "corruptionIndex": 18,
+      "currency": "Manat Turkmen",
+      "currencyCode": "TMT",
+      "gdp": 80000000000,
+      "gdpPerCapita": 13330,
+      "gdpPpp": 150000000000,
+      "gdpGrowth": 6,
+      "inflation": 6,
+      "unemployment": 5,
+      "povertyRate": 10,
+      "mainIndustries": [
+        "Gas",
+        "Minyak",
+        "Tekstil",
+        "Pertanian",
+        "Kimia"
+      ],
+      "exports": [
+        {
+          "item": "Gas",
+          "value": 30000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 10000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 5000000000
+        },
+        {
+          "item": "Kimia",
+          "value": 3000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 10000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 8000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 5000000000
+        }
+      ],
+      "tradeBalance": 20000000000,
+      "naturalResources": [
+        "Gas",
+        "Minyak",
+        "Belerang",
+        "Garam",
+        "Emas"
+      ],
+      "economicRanking": 70,
+      "internetPenetration": 30,
+      "mobilePenetration": 50,
+      "electricityAccess": 100,
+      "roadLength": 50000,
+      "railwayLength": 3000,
+      "airports": 20,
+      "seaports": 1,
+      "healthcareAccess": 60,
+      "educationIndex": 0.58,
+      "nationalMotto": "Netralitas Permanen",
+      "nationalAnthem": "Garaşsyz Bitaraplyk Türkmenistanyň Döwlet Gimni",
+      "nationalAnimal": "Kuda Akhal-Teke",
+      "nationalFlower": "Bunga Mawar Gurun",
+      "nationalCuisine": [
+        "Palov",
+        "Manti",
+        "Shashlik",
+        "Balyk",
+        "Chak-chak"
+      ],
+      "culturalHeritage": [
+        "Ashgabat",
+        "Merv",
+        "Kunya-Urgench",
+        "Nisa"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Netralitas",
+        "Navruz",
+        "Hari Kuda"
+      ],
+      "socialRanking": 45,
+      "climate": "Gurun",
+      "averageTemperature": 18,
+      "averageRainfall": 150,
+      "forestArea": 2,
+      "protectedAreas": 3,
+      "biodiversityRank": 40,
+      "carbonEmissions": 10,
+      "environmentalIndex": 35,
+      "riskScore": 50,
+      "politicalStability": 45,
+      "crimeIndex": 20,
+      "militarySpending": 3,
+      "peaceIndex": 50,
+      "terrorismIndex": 15,
+      "refugeePopulation": 0,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 25,
+      "investmentScore": 40,
+      "talentPool": 45,
+      "marketSize": 50,
+      "infrastructureQuality": 45,
+      "internetSpeed": 10,
+      "digitalAdoption": 30,
+      "techEcosystem": 25,
+      "aiReadiness": 20,
+      "startups": 20,
+      "phoneCode": "+993",
+      "tld": ".tm",
+      "isoCode": "TKM",
+      "isoCode2": "TM",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "asian-tengah",
+        "gas-alam",
+        "netralitas",
+        "arsitektur"
+      ]
+    }
+  },
+  {
+    "id": "negara-kirgistan",
+    "kategori": "negara",
+    "wilayah": "asian-tengah",
+    "nama": "Kirgistan",
+    "tags": [
+      "Central Asia"
+    ],
+    "teks": "Kirgistan - Negara di Asia Tengah dengan pegunungan dan alam indah. Ibu kota: Bishkek. Populasi: 6.5 juta jiwa. Mata uang: Som Kirgistan (KGS). Bahasa: Kirgiz, Rusia. Sistem pemerintahan: Republik Parlementer. Negara dengan demokrasi paling maju di Asia Tengah. Destinasi trekking dan wisata alam. Anggota Uni Eurasia. Rumah bagi Danau Issyk-Kul dan Pegunungan Tian Shan yang memukau.",
+    "meta": {
+      "officialName": "Republik Kirgistan",
+      "shortName": "KGZ",
+      "capital": "Bishkek",
+      "capitalCoordinates": {
+        "lat": 42.8746,
+        "lng": 74.5698
+      },
+      "largestCity": "Bishkek",
+      "demonym": "Kirgistan",
+      "subregion": "Central Asia",
+      "area": 199951,
+      "areaRank": 85,
+      "coastline": 0,
+      "highestPoint": "Jengish Chokusu",
+      "highestElevation": 7439,
+      "lowestPoint": "Lembah Fergana",
+      "lowestElevation": 132,
+      "landBorders": [
+        "Kazakhstan",
+        "Uzbekistan",
+        "Tajikistan",
+        "China"
+      ],
+      "coordinates": {
+        "lat": 41,
+        "lng": 75
+      },
+      "timezone": [
+        "Waktu Kirgistan"
+      ],
+      "utcOffset": [
+        "+6"
+      ],
+      "population": 6500000,
+      "populationRank": 109,
+      "populationDensity": 32,
+      "populationGrowth": 1.5,
+      "medianAge": 26,
+      "lifeExpectancy": 71,
+      "fertilityRate": 2.8,
+      "urbanization": 36,
+      "ethnicGroups": [
+        {
+          "name": "Kirgiz",
+          "percentage": 73
+        },
+        {
+          "name": "Uzbek",
+          "percentage": 14
+        },
+        {
+          "name": "Rusia",
+          "percentage": 6
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 7
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 80
+        },
+        {
+          "name": "Kristen",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Kirgiz",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 60,
+          "official": true
+        },
+        {
+          "name": "Uzbek",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1991-08-31",
+      "nationalHoliday": "31 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "2010",
+      "administrativeDivisions": 7,
+      "memberships": [
+        "PBB",
+        "SCO",
+        "Uni Eurasia",
+        "OKI"
+      ],
+      "giniCoefficient": 27.8,
+      "hdi": 0.697,
+      "hdiRank": 118,
+      "corruptionIndex": 33,
+      "currency": "Som Kirgistan",
+      "currencyCode": "KGS",
+      "gdp": 12000000000,
+      "gdpPerCapita": 1840,
+      "gdpPpp": 40000000000,
+      "gdpGrowth": 4,
+      "inflation": 6,
+      "unemployment": 6,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pertanian",
+        "Tambang",
+        "Tekstil",
+        "Pariwisata",
+        "Energi"
+      ],
+      "exports": [
+        {
+          "item": "Emas",
+          "value": 3000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 2000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 1000000000
+        },
+        {
+          "item": "Energi",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": -1000000000,
+      "naturalResources": [
+        "Emas",
+        "Tembaga",
+        "Batu bara",
+        "Air",
+        "Kayu"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 55,
+      "mobilePenetration": 75,
+      "electricityAccess": 100,
+      "roadLength": 30000,
+      "railwayLength": 400,
+      "airports": 15,
+      "seaports": 0,
+      "healthcareAccess": 60,
+      "educationIndex": 0.58,
+      "nationalMotto": "Kekuatan, Kesatuan, Kemakmuran",
+      "nationalAnthem": "Kyrgyz Respublikasynyn Mamlekettik Gimni",
+      "nationalAnimal": "Elang",
+      "nationalFlower": "Bunga Tulip",
+      "nationalCuisine": [
+        "Beshbarmak",
+        "Manti",
+        "Plov",
+        "Shashlik",
+        "Kuurdak"
+      ],
+      "culturalHeritage": [
+        "Bishkek",
+        "Issyk-Kul",
+        "Osh",
+        "Tian Shan"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Navruz",
+        "Idul Fitri"
+      ],
+      "socialRanking": 50,
+      "climate": "Kontinental",
+      "averageTemperature": 10,
+      "averageRainfall": 400,
+      "forestArea": 5,
+      "protectedAreas": 10,
+      "biodiversityRank": 25,
+      "carbonEmissions": 1.5,
+      "environmentalIndex": 45,
+      "riskScore": 45,
+      "politicalStability": 50,
+      "crimeIndex": 30,
+      "militarySpending": 1.5,
+      "peaceIndex": 45,
+      "terrorismIndex": 20,
+      "refugeePopulation": 1000,
+      "opportunityScore": 50,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 35,
+      "startupEcosystem": 40,
+      "investmentScore": 45,
+      "talentPool": 50,
+      "marketSize": 55,
+      "infrastructureQuality": 45,
+      "internetSpeed": 15,
+      "digitalAdoption": 45,
+      "techEcosystem": 40,
+      "aiReadiness": 30,
+      "startups": 50,
+      "phoneCode": "+996",
+      "tld": ".kg",
+      "isoCode": "KGZ",
+      "isoCode2": "KG",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "asian-tengah",
+        "pegunungan",
+        "trekking",
+        "demokrasi"
+      ]
+    }
+  },
+  {
+    "id": "negara-tajikistan",
+    "kategori": "negara",
+    "wilayah": "asian-tengah",
+    "nama": "Tajikistan",
+    "tags": [
+      "Central Asia"
+    ],
+    "teks": "Tajikistan - Negara di Asia Tengah dengan pegunungan Pamir dan budaya Persia. Ibu kota: Dushanbe. Populasi: 9.5 juta jiwa. Mata uang: Somoni (TJS). Bahasa: Tajik, Rusia. Sistem pemerintahan: Republik Presidensial. Negara dengan pegunungan tertinggi di Asia Tengah. Kaya akan air dan energi hidro. Budaya Persia yang kuat. Rumah bagi Pamir Highway dan keindahan alam yang spektakuler.",
+    "meta": {
+      "officialName": "Republik Tajikistan",
+      "shortName": "TJK",
+      "capital": "Dushanbe",
+      "capitalCoordinates": {
+        "lat": 38.5358,
+        "lng": 68.7791
+      },
+      "largestCity": "Dushanbe",
+      "demonym": "Tajikistan",
+      "subregion": "Central Asia",
+      "area": 143100,
+      "areaRank": 96,
+      "coastline": 0,
+      "highestPoint": "Ismoil Somoni",
+      "highestElevation": 7495,
+      "lowestPoint": "Lembah Fergana",
+      "lowestElevation": 300,
+      "landBorders": [
+        "Afghanistan",
+        "Uzbekistan",
+        "Kirgistan",
+        "China"
+      ],
+      "coordinates": {
+        "lat": 39,
+        "lng": 71
+      },
+      "timezone": [
+        "Waktu Tajikistan"
+      ],
+      "utcOffset": [
+        "+5"
+      ],
+      "population": 9500000,
+      "populationRank": 93,
+      "populationDensity": 66,
+      "populationGrowth": 1.5,
+      "medianAge": 25,
+      "lifeExpectancy": 70,
+      "fertilityRate": 3,
+      "urbanization": 27,
+      "ethnicGroups": [
+        {
+          "name": "Tajik",
+          "percentage": 80
+        },
+        {
+          "name": "Uzbek",
+          "percentage": 15
+        },
+        {
+          "name": "Rusia",
+          "percentage": 2
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 3
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 96
+        },
+        {
+          "name": "Kristen",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 1
+        }
+      ],
+      "languages": [
+        {
+          "name": "Tajik",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 30,
+          "official": true
+        },
+        {
+          "name": "Uzbek",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1991-09-09",
+      "nationalHoliday": "9 September",
+      "legalSystem": "Civil Law",
+      "constitution": "1994",
+      "administrativeDivisions": 4,
+      "memberships": [
+        "PBB",
+        "SCO",
+        "OKI"
+      ],
+      "giniCoefficient": 34,
+      "hdi": 0.668,
+      "hdiRank": 122,
+      "corruptionIndex": 25,
+      "currency": "Somoni",
+      "currencyCode": "TJS",
+      "gdp": 10000000000,
+      "gdpPerCapita": 1050,
+      "gdpPpp": 40000000000,
+      "gdpGrowth": 5,
+      "inflation": 7,
+      "unemployment": 7,
+      "povertyRate": 25,
+      "mainIndustries": [
+        "Pertanian",
+        "Tambang",
+        "Tekstil",
+        "Energi",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Aluminium",
+          "value": 3000000000
+        },
+        {
+          "item": "Kapas",
+          "value": 2000000000
+        },
+        {
+          "item": "Energi",
+          "value": 1000000000
+        },
+        {
+          "item": "Mineral",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 800000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Aluminium",
+        "Air",
+        "Kapas",
+        "Mineral",
+        "Emas"
+      ],
+      "economicRanking": 130,
+      "internetPenetration": 35,
+      "mobilePenetration": 60,
+      "electricityAccess": 95,
+      "roadLength": 20000,
+      "railwayLength": 700,
+      "airports": 15,
+      "seaports": 0,
+      "healthcareAccess": 55,
+      "educationIndex": 0.52,
+      "nationalMotto": "Kebebasan, Kemakmuran, Persatuan",
+      "nationalAnthem": "Surudi Milli",
+      "nationalAnimal": "Elang Emas",
+      "nationalFlower": "Bunga Tulip",
+      "nationalCuisine": [
+        "Oshi Palov",
+        "Manti",
+        "Shashlik",
+        "Qurutob",
+        "Samsa"
+      ],
+      "culturalHeritage": [
+        "Dushanbe",
+        "Khujand",
+        "Pamir",
+        "Iskanderkul"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Navruz",
+        "Idul Fitri",
+        "Idul Adha"
+      ],
+      "socialRanking": 40,
+      "climate": "Kontinental",
+      "averageTemperature": 15,
+      "averageRainfall": 500,
+      "forestArea": 5,
+      "protectedAreas": 10,
+      "biodiversityRank": 30,
+      "carbonEmissions": 1,
+      "environmentalIndex": 42,
+      "riskScore": 55,
+      "politicalStability": 45,
+      "crimeIndex": 35,
+      "militarySpending": 2,
+      "peaceIndex": 55,
+      "terrorismIndex": 30,
+      "refugeePopulation": 1000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 30,
+      "startupEcosystem": 35,
+      "investmentScore": 40,
+      "talentPool": 45,
+      "marketSize": 50,
+      "infrastructureQuality": 40,
+      "internetSpeed": 12,
+      "digitalAdoption": 35,
+      "techEcosystem": 30,
+      "aiReadiness": 25,
+      "startups": 30,
+      "phoneCode": "+992",
+      "tld": ".tj",
+      "isoCode": "TJK",
+      "isoCode2": "TJ",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "asian-tengah",
+        "pamir",
+        "air",
+        "persia"
+      ]
+    }
+  }
+]

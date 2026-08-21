@@ -1,0 +1,2910 @@
+[
+  {
+    "id": "negara-etiopia",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Etiopia",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Etiopia - Negara di Afrika Timur dengan peradaban kuno dan ekonomi tumbuh. Ibu kota: Addis Ababa. Populasi: 120 juta jiwa. Mata uang: Birr (ETB). Bahasa: Amharik. Sistem pemerintahan: Republik Federal Parlementer. Markas besar Uni Afrika. Negara dengan sejarah panjang dan pertumbuhan ekonomi tercepat di Afrika.",
+    "meta": {
+      "officialName": "Republik Federal Demokratik Etiopia",
+      "shortName": "ETH",
+      "capital": "Addis Ababa",
+      "capitalCoordinates": {
+        "lat": 9.032,
+        "lng": 38.7469
+      },
+      "largestCity": "Addis Ababa",
+      "demonym": "Etiopia",
+      "subregion": "East Africa",
+      "area": 1104300,
+      "areaRank": 27,
+      "coastline": 0,
+      "highestPoint": "Ras Dashen",
+      "highestElevation": 4550,
+      "lowestPoint": "Danakil Depression",
+      "lowestElevation": -125,
+      "landBorders": [
+        "Eritrea",
+        "Djibouti",
+        "Somalia",
+        "Kenya",
+        "Sudan Selatan",
+        "Sudan"
+      ],
+      "coordinates": {
+        "lat": 9,
+        "lng": 40
+      },
+      "timezone": [
+        "Waktu Etiopia"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 120000000,
+      "populationRank": 12,
+      "populationDensity": 108,
+      "populationGrowth": 2.5,
+      "medianAge": 19,
+      "lifeExpectancy": 66,
+      "fertilityRate": 4,
+      "urbanization": 21,
+      "ethnicGroups": [
+        {
+          "name": "Oromo",
+          "percentage": 34
+        },
+        {
+          "name": "Amhara",
+          "percentage": 27
+        },
+        {
+          "name": "Tigray",
+          "percentage": 6
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 33
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 45
+        },
+        {
+          "name": "Islam",
+          "percentage": 33
+        },
+        {
+          "name": "Kristen Protestan",
+          "percentage": 20
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Amharik",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Oromo",
+          "percentage": 30
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 51,
+      "governmentType": "Republik Federal Parlementer",
+      "independenceDay": "1941-05-05",
+      "nationalHoliday": "28 Mei",
+      "legalSystem": "Civil Law",
+      "constitution": "1995",
+      "administrativeDivisions": 11,
+      "memberships": [
+        "PBB",
+        "AU",
+        "WTO"
+      ],
+      "giniCoefficient": 35,
+      "hdi": 0.498,
+      "hdiRank": 173,
+      "corruptionIndex": 35,
+      "currency": "Birr",
+      "currencyCode": "ETB",
+      "gdp": 150000000000,
+      "gdpPerCapita": 1250,
+      "gdpPpp": 350000000000,
+      "gdpGrowth": 8,
+      "inflation": 15,
+      "unemployment": 5,
+      "povertyRate": 25,
+      "mainIndustries": [
+        "Pertanian",
+        "Manufaktur",
+        "Tekstil",
+        "Tambang",
+        "Energi"
+      ],
+      "exports": [
+        {
+          "item": "Kopi",
+          "value": 5000000000
+        },
+        {
+          "item": "Emas",
+          "value": 2000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 1500000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 1000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 8000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 6000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 4000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Emas",
+        "Tantalum",
+        "Kopi",
+        "Gas",
+        "Air"
+      ],
+      "economicRanking": 60,
+      "internetPenetration": 25,
+      "mobilePenetration": 45,
+      "electricityAccess": 45,
+      "roadLength": 100000,
+      "railwayLength": 700,
+      "airports": 60,
+      "seaports": 0,
+      "healthcareAccess": 35,
+      "educationIndex": 0.42,
+      "nationalMotto": "Kemenangan adalah milik kita",
+      "nationalAnthem": "March Forward, Dear Mother Ethiopia",
+      "nationalAnimal": "Singa",
+      "nationalFlower": "Bunga Raya",
+      "nationalCuisine": [
+        "Injera",
+        "Doro Wat",
+        "Kitfo",
+        "Tibs",
+        "Buna"
+      ],
+      "culturalHeritage": [
+        "Lalibela",
+        "Axum",
+        "Gondar",
+        "Harar"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 40,
+      "climate": "Beragam",
+      "averageTemperature": 20,
+      "averageRainfall": 800,
+      "forestArea": 15,
+      "protectedAreas": 10,
+      "biodiversityRank": 8,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 45,
+      "riskScore": 55,
+      "politicalStability": 45,
+      "crimeIndex": 35,
+      "militarySpending": 1,
+      "peaceIndex": 55,
+      "terrorismIndex": 30,
+      "refugeePopulation": 500000,
+      "opportunityScore": 50,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 30,
+      "startupEcosystem": 35,
+      "investmentScore": 40,
+      "talentPool": 60,
+      "marketSize": 80,
+      "infrastructureQuality": 30,
+      "internetSpeed": 10,
+      "digitalAdoption": 30,
+      "techEcosystem": 30,
+      "aiReadiness": 20,
+      "startups": 50,
+      "phoneCode": "+251",
+      "tld": ".et",
+      "isoCode": "ETH",
+      "isoCode2": "ET",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "uni-afrika",
+        "sejarah",
+        "pertumbuhan"
+      ]
+    }
+  },
+  {
+    "id": "negara-kenya",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Kenya",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Kenya - Negara di Afrika Timur dengan ekonomi digital dan pariwisata. Ibu kota: Nairobi. Populasi: 55 juta jiwa. Mata uang: Shilling (KES). Bahasa: Swahili, Inggris. Sistem pemerintahan: Republik Presidensial. Pusat fintech, M-Pesa, dan safari. Rumah bagi Taman Nasional Masai Mara dan Gunung Kenya.",
+    "meta": {
+      "officialName": "Republik Kenya",
+      "shortName": "KEN",
+      "capital": "Nairobi",
+      "capitalCoordinates": {
+        "lat": -1.2921,
+        "lng": 36.8219
+      },
+      "largestCity": "Nairobi",
+      "demonym": "Kenya",
+      "subregion": "East Africa",
+      "area": 580367,
+      "areaRank": 48,
+      "coastline": 536,
+      "highestPoint": "Gunung Kenya",
+      "highestElevation": 5205,
+      "lowestPoint": "Samudra Hindia",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Etiopia",
+        "Somalia",
+        "Tanzania",
+        "Uganda",
+        "Sudan Selatan"
+      ],
+      "coordinates": {
+        "lat": 1,
+        "lng": 38
+      },
+      "timezone": [
+        "Waktu Kenya"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 55000000,
+      "populationRank": 27,
+      "populationDensity": 94,
+      "populationGrowth": 2,
+      "medianAge": 20,
+      "lifeExpectancy": 66,
+      "fertilityRate": 3.5,
+      "urbanization": 28,
+      "ethnicGroups": [
+        {
+          "name": "Kikuyu",
+          "percentage": 17
+        },
+        {
+          "name": "Luhya",
+          "percentage": 14
+        },
+        {
+          "name": "Kalenjin",
+          "percentage": 13
+        },
+        {
+          "name": "Luo",
+          "percentage": 10
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 85
+        },
+        {
+          "name": "Islam",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Swahili",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 60,
+          "official": true
+        },
+        {
+          "name": "Kikuyu",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 81,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1963-12-12",
+      "nationalHoliday": "12 Desember",
+      "legalSystem": "Common Law",
+      "constitution": "2010",
+      "administrativeDivisions": 47,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 40.8,
+      "hdi": 0.601,
+      "hdiRank": 143,
+      "corruptionIndex": 28,
+      "currency": "Shilling",
+      "currencyCode": "KES",
+      "gdp": 110000000000,
+      "gdpPerCapita": 2000,
+      "gdpPpp": 300000000000,
+      "gdpGrowth": 5,
+      "inflation": 5,
+      "unemployment": 10,
+      "povertyRate": 35,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Fintech",
+        "Manufaktur",
+        "Teknologi"
+      ],
+      "exports": [
+        {
+          "item": "Teh",
+          "value": 15000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 10000000000
+        },
+        {
+          "item": "Kopi",
+          "value": 8000000000
+        },
+        {
+          "item": "Bunga",
+          "value": 5000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 10000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 8000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 6000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 4000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Emas",
+        "Soda Ash",
+        "Tanah subur",
+        "Perikanan"
+      ],
+      "economicRanking": 65,
+      "internetPenetration": 45,
+      "mobilePenetration": 70,
+      "electricityAccess": 75,
+      "roadLength": 160000,
+      "railwayLength": 3000,
+      "airports": 100,
+      "seaports": 10,
+      "healthcareAccess": 55,
+      "educationIndex": 0.55,
+      "nationalMotto": "Bersama kita bekerja",
+      "nationalAnthem": "Ee Mungu Nguvu Yetu",
+      "nationalAnimal": "Singa",
+      "nationalFlower": "Bunga Bougainvillea",
+      "nationalCuisine": [
+        "Nyama Choma",
+        "Ugali",
+        "Sukuma Wiki",
+        "Chapati",
+        "Samosas"
+      ],
+      "culturalHeritage": [
+        "Nairobi",
+        "Masai Mara",
+        "Mombasa",
+        "Lamu"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 45,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 800,
+      "forestArea": 8,
+      "protectedAreas": 10,
+      "biodiversityRank": 10,
+      "carbonEmissions": 0.5,
+      "environmentalIndex": 48,
+      "riskScore": 50,
+      "politicalStability": 55,
+      "crimeIndex": 45,
+      "militarySpending": 1.5,
+      "peaceIndex": 55,
+      "terrorismIndex": 35,
+      "refugeePopulation": 500000,
+      "opportunityScore": 55,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 45,
+      "startupEcosystem": 55,
+      "investmentScore": 50,
+      "talentPool": 65,
+      "marketSize": 75,
+      "infrastructureQuality": 45,
+      "internetSpeed": 20,
+      "digitalAdoption": 50,
+      "techEcosystem": 50,
+      "aiReadiness": 40,
+      "startups": 150,
+      "phoneCode": "+254",
+      "tld": ".ke",
+      "isoCode": "KEN",
+      "isoCode2": "KE",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "african-timur",
+        "fintech",
+        "safari",
+        "mpesa"
+      ]
+    }
+  },
+  {
+    "id": "negara-tanzania",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Tanzania",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Tanzania - Negara di Afrika Timur dengan alam dan pariwisata. Ibu kota: Dodoma. Populasi: 65 juta jiwa. Mata uang: Shilling (TZS). Bahasa: Swahili, Inggris. Sistem pemerintahan: Republik Presidensial. Rumah bagi Gunung Kilimanjaro, Serengeti, dan Zanzibar. Destinasi wisata alam terbaik di Afrika.",
+    "meta": {
+      "officialName": "Republik Tanzania",
+      "shortName": "TZA",
+      "capital": "Dodoma",
+      "capitalCoordinates": {
+        "lat": -6.1629,
+        "lng": 35.7516
+      },
+      "largestCity": "Dar es Salaam",
+      "demonym": "Tanzania",
+      "subregion": "East Africa",
+      "area": 945087,
+      "areaRank": 31,
+      "coastline": 1424,
+      "highestPoint": "Kilimanjaro",
+      "highestElevation": 5895,
+      "lowestPoint": "Samudra Hindia",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Kenya",
+        "Uganda",
+        "Rwanda",
+        "Burundi",
+        "Zambia",
+        "Malawi",
+        "Mozambik"
+      ],
+      "coordinates": {
+        "lat": -6,
+        "lng": 35
+      },
+      "timezone": [
+        "Waktu Tanzania"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 65000000,
+      "populationRank": 24,
+      "populationDensity": 68,
+      "populationGrowth": 2.5,
+      "medianAge": 18,
+      "lifeExpectancy": 65,
+      "fertilityRate": 4.5,
+      "urbanization": 35,
+      "ethnicGroups": [
+        {
+          "name": "Sukuma",
+          "percentage": 16
+        },
+        {
+          "name": "Nyamwezi",
+          "percentage": 8
+        },
+        {
+          "name": "Chagga",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 71
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 60
+        },
+        {
+          "name": "Islam",
+          "percentage": 35
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Swahili",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 40,
+          "official": true
+        }
+      ],
+      "literacyRate": 77,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1961-12-09",
+      "nationalHoliday": "9 Desember",
+      "legalSystem": "Common Law",
+      "constitution": "1977",
+      "administrativeDivisions": 31,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 37.8,
+      "hdi": 0.529,
+      "hdiRank": 163,
+      "corruptionIndex": 38,
+      "currency": "Shilling",
+      "currencyCode": "TZS",
+      "gdp": 80000000000,
+      "gdpPerCapita": 1230,
+      "gdpPpp": 200000000000,
+      "gdpGrowth": 5.5,
+      "inflation": 4,
+      "unemployment": 5,
+      "povertyRate": 30,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Tambang",
+        "Manufaktur",
+        "Perikanan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 20000000000
+        },
+        {
+          "item": "Emas",
+          "value": 10000000000
+        },
+        {
+          "item": "Kopi",
+          "value": 8000000000
+        },
+        {
+          "item": "Teh",
+          "value": 5000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 8000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 6000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 4000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Emas",
+        "Tanzanite",
+        "Gas",
+        "Kayu",
+        "Perikanan"
+      ],
+      "economicRanking": 70,
+      "internetPenetration": 35,
+      "mobilePenetration": 60,
+      "electricityAccess": 40,
+      "roadLength": 100000,
+      "railwayLength": 4000,
+      "airports": 100,
+      "seaports": 10,
+      "healthcareAccess": 45,
+      "educationIndex": 0.48,
+      "nationalMotto": "Kebebasan dan Persatuan",
+      "nationalAnthem": "Mungu ibariki Afrika",
+      "nationalAnimal": "Jerapah",
+      "nationalFlower": "Bunga Clove",
+      "nationalCuisine": [
+        "Ugali",
+        "Nyama Choma",
+        "Pilau",
+        "Samosas",
+        "Chipsi Mayai"
+      ],
+      "culturalHeritage": [
+        "Kilimanjaro",
+        "Serengeti",
+        "Zanzibar",
+        "Ngorongoro"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 40,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 800,
+      "forestArea": 40,
+      "protectedAreas": 15,
+      "biodiversityRank": 6,
+      "carbonEmissions": 0.2,
+      "environmentalIndex": 50,
+      "riskScore": 45,
+      "politicalStability": 55,
+      "crimeIndex": 35,
+      "militarySpending": 1,
+      "peaceIndex": 50,
+      "terrorismIndex": 20,
+      "refugeePopulation": 200000,
+      "opportunityScore": 50,
+      "easeOfDoingBusiness": 50,
+      "innovationIndex": 35,
+      "startupEcosystem": 40,
+      "investmentScore": 45,
+      "talentPool": 55,
+      "marketSize": 75,
+      "infrastructureQuality": 35,
+      "internetSpeed": 15,
+      "digitalAdoption": 35,
+      "techEcosystem": 35,
+      "aiReadiness": 25,
+      "startups": 50,
+      "phoneCode": "+255",
+      "tld": ".tz",
+      "isoCode": "TZA",
+      "isoCode2": "TZ",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "african-timur",
+        "kilimanjaro",
+        "serengeti",
+        "pariwisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-uganda",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Uganda",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Uganda - Negara di Afrika Timur dengan pertanian dan danau Victoria. Ibu kota: Kampala. Populasi: 48 juta jiwa. Mata uang: Shilling (UGX). Bahasa: Inggris, Swahili. Sistem pemerintahan: Republik Presidensial. Negara dengan danau Victoria dan sumber sungai Nil. Pertanian dan kopi menjadi andalan ekonomi.",
+    "meta": {
+      "officialName": "Republik Uganda",
+      "shortName": "UGA",
+      "capital": "Kampala",
+      "capitalCoordinates": {
+        "lat": 0.3476,
+        "lng": 32.5825
+      },
+      "largestCity": "Kampala",
+      "demonym": "Uganda",
+      "subregion": "East Africa",
+      "area": 241038,
+      "areaRank": 79,
+      "coastline": 0,
+      "highestPoint": "Margherita Peak",
+      "highestElevation": 5109,
+      "lowestPoint": "Danau Victoria",
+      "lowestElevation": 1130,
+      "landBorders": [
+        "Kenya",
+        "Tanzania",
+        "Rwanda",
+        "Burundi",
+        "Sudan Selatan"
+      ],
+      "coordinates": {
+        "lat": 1,
+        "lng": 32
+      },
+      "timezone": [
+        "Waktu Uganda"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 48000000,
+      "populationRank": 32,
+      "populationDensity": 199,
+      "populationGrowth": 3,
+      "medianAge": 16,
+      "lifeExpectancy": 63,
+      "fertilityRate": 5,
+      "urbanization": 25,
+      "ethnicGroups": [
+        {
+          "name": "Baganda",
+          "percentage": 17
+        },
+        {
+          "name": "Banyankole",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 73
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 85
+        },
+        {
+          "name": "Islam",
+          "percentage": 12
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 3
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Swahili",
+          "percentage": 50,
+          "official": true
+        },
+        {
+          "name": "Luganda",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 76,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1962-10-09",
+      "nationalHoliday": "9 Oktober",
+      "legalSystem": "Common Law",
+      "constitution": "1995",
+      "administrativeDivisions": 112,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 42.7,
+      "hdi": 0.544,
+      "hdiRank": 159,
+      "corruptionIndex": 25,
+      "currency": "Shilling",
+      "currencyCode": "UGX",
+      "gdp": 50000000000,
+      "gdpPerCapita": 1040,
+      "gdpPpp": 130000000000,
+      "gdpGrowth": 5,
+      "inflation": 4,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pertanian",
+        "Kopi",
+        "Tekstil",
+        "Pariwisata",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Kopi",
+          "value": 5000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 3000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 2000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 1000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 4000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 3000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 2000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1500000000
+        }
+      ],
+      "tradeBalance": -4000000000,
+      "naturalResources": [
+        "Kopi",
+        "Kayu",
+        "Emas",
+        "Air"
+      ],
+      "economicRanking": 80,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 50,
+      "roadLength": 70000,
+      "railwayLength": 1000,
+      "airports": 40,
+      "seaports": 0,
+      "healthcareAccess": 45,
+      "educationIndex": 0.48,
+      "nationalMotto": "Untuk Tuhan dan Tanah Air",
+      "nationalAnthem": "Oh Uganda, Land of Beauty",
+      "nationalAnimal": "Crane Mahkota",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Matooke",
+        "Luwombo",
+        "Rolex",
+        "Kalo",
+        "Posho"
+      ],
+      "culturalHeritage": [
+        "Kampala",
+        "Lake Victoria",
+        "Murchison Falls",
+        "Bwindi"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 35,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1200,
+      "forestArea": 20,
+      "protectedAreas": 10,
+      "biodiversityRank": 12,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 42,
+      "riskScore": 50,
+      "politicalStability": 50,
+      "crimeIndex": 40,
+      "militarySpending": 1.5,
+      "peaceIndex": 55,
+      "terrorismIndex": 25,
+      "refugeePopulation": 100000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 30,
+      "startupEcosystem": 35,
+      "investmentScore": 40,
+      "talentPool": 50,
+      "marketSize": 70,
+      "infrastructureQuality": 35,
+      "internetSpeed": 12,
+      "digitalAdoption": 30,
+      "techEcosystem": 30,
+      "aiReadiness": 20,
+      "startups": 30,
+      "phoneCode": "+256",
+      "tld": ".ug",
+      "isoCode": "UGA",
+      "isoCode2": "UG",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "african-timur",
+        "nil",
+        "kopi",
+        "pertanian"
+      ]
+    }
+  },
+  {
+    "id": "negara-somalia",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Somalia",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Somalia - Negara di Afrika Timur dengan pesisir panjang. Ibu kota: Mogadishu. Populasi: 16 juta jiwa. Mata uang: Shilling (SOS). Bahasa: Somalia, Arab. Sistem pemerintahan: Republik Federal. Lokasi strategis di Tanduk Afrika. Negara dengan pesisir terpanjang di Afrika daratan.",
+    "meta": {
+      "officialName": "Republik Federal Somalia",
+      "shortName": "SOM",
+      "capital": "Mogadishu",
+      "capitalCoordinates": {
+        "lat": 2.0469,
+        "lng": 45.3182
+      },
+      "largestCity": "Mogadishu",
+      "demonym": "Somalia",
+      "subregion": "East Africa",
+      "area": 637657,
+      "areaRank": 43,
+      "coastline": 3025,
+      "highestPoint": "Shimbiris",
+      "highestElevation": 2416,
+      "lowestPoint": "Samudra Hindia",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Etiopia",
+        "Kenya",
+        "Djibouti"
+      ],
+      "coordinates": {
+        "lat": 6,
+        "lng": 48
+      },
+      "timezone": [
+        "Waktu Somalia"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 16000000,
+      "populationRank": 72,
+      "populationDensity": 25,
+      "populationGrowth": 2.5,
+      "medianAge": 16,
+      "lifeExpectancy": 57,
+      "fertilityRate": 5.5,
+      "urbanization": 47,
+      "ethnicGroups": [
+        {
+          "name": "Somali",
+          "percentage": 85
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 15
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 99
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 1
+        }
+      ],
+      "languages": [
+        {
+          "name": "Somalia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Arab",
+          "percentage": 20,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 30,
+      "governmentType": "Republik Federal",
+      "independenceDay": "1960-07-01",
+      "nationalHoliday": "1 Juli",
+      "legalSystem": "Civil Law",
+      "constitution": "2012",
+      "administrativeDivisions": 18,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Liga Arab"
+      ],
+      "giniCoefficient": 35,
+      "hdi": 0.361,
+      "hdiRank": 189,
+      "corruptionIndex": 15,
+      "currency": "Shilling",
+      "currencyCode": "SOS",
+      "gdp": 10000000000,
+      "gdpPerCapita": 625,
+      "gdpPpp": 30000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 5,
+      "unemployment": 30,
+      "povertyRate": 70,
+      "mainIndustries": [
+        "Pertanian",
+        "Perikanan",
+        "Peternakan",
+        "Telekomunikasi"
+      ],
+      "exports": [
+        {
+          "item": "Perikanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 500000000
+        },
+        {
+          "item": "Peternakan",
+          "value": 300000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 800000000
+        }
+      ],
+      "tradeBalance": -3000000000,
+      "naturalResources": [
+        "Perikanan",
+        "Gas",
+        "Emas",
+        "Garam"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 20,
+      "mobilePenetration": 40,
+      "electricityAccess": 30,
+      "roadLength": 15000,
+      "railwayLength": 0,
+      "airports": 50,
+      "seaports": 10,
+      "healthcareAccess": 25,
+      "educationIndex": 0.28,
+      "nationalMotto": "Kebebasan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Qolobaa Calankeed",
+      "nationalAnimal": "Cheetah",
+      "nationalFlower": "Bunga Gurun",
+      "nationalCuisine": [
+        "Bariis",
+        "Sambusa",
+        "Canjeero",
+        "Hilib",
+        "Shaah"
+      ],
+      "culturalHeritage": [
+        "Mogadishu",
+        "Hargeisa",
+        "Kismayo",
+        "Berbera"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Idul Fitri",
+        "Idul Adha",
+        "Tahun Baru"
+      ],
+      "socialRanking": 15,
+      "climate": "Gurun",
+      "averageTemperature": 30,
+      "averageRainfall": 100,
+      "forestArea": 10,
+      "protectedAreas": 3,
+      "biodiversityRank": 30,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 30,
+      "riskScore": 85,
+      "politicalStability": 15,
+      "crimeIndex": 65,
+      "militarySpending": 2,
+      "peaceIndex": 85,
+      "terrorismIndex": 70,
+      "refugeePopulation": 100000,
+      "opportunityScore": 20,
+      "easeOfDoingBusiness": 20,
+      "innovationIndex": 15,
+      "startupEcosystem": 10,
+      "investmentScore": 15,
+      "talentPool": 30,
+      "marketSize": 50,
+      "infrastructureQuality": 15,
+      "internetSpeed": 5,
+      "digitalAdoption": 20,
+      "techEcosystem": 10,
+      "aiReadiness": 10,
+      "startups": 10,
+      "phoneCode": "+252",
+      "tld": ".so",
+      "isoCode": "SOM",
+      "isoCode2": "SO",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "tanduk-afrika",
+        "pesisir",
+        "strategis"
+      ]
+    }
+  },
+  {
+    "id": "negara-rwanda",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Rwanda",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Rwanda - Negara di Afrika Timur dengan ekonomi digital dan pemulihan. Ibu kota: Kigali. Populasi: 13 juta jiwa. Mata uang: Franc (RWF). Bahasa: Kinyarwanda, Inggris, Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan pemulihan ekonomi tercepat di Afrika dan teknologi digital.",
+    "meta": {
+      "officialName": "Republik Rwanda",
+      "shortName": "RWA",
+      "capital": "Kigali",
+      "capitalCoordinates": {
+        "lat": -1.9441,
+        "lng": 30.0619
+      },
+      "largestCity": "Kigali",
+      "demonym": "Rwanda",
+      "subregion": "East Africa",
+      "area": 26338,
+      "areaRank": 144,
+      "coastline": 0,
+      "highestPoint": "Gunung Karisimbi",
+      "highestElevation": 4507,
+      "lowestPoint": "Sungai Ruzizi",
+      "lowestElevation": 950,
+      "landBorders": [
+        "Uganda",
+        "Tanzania",
+        "Burundi",
+        "Kongo"
+      ],
+      "coordinates": {
+        "lat": -2,
+        "lng": 30
+      },
+      "timezone": [
+        "Waktu Rwanda"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 13000000,
+      "populationRank": 76,
+      "populationDensity": 493,
+      "populationGrowth": 2,
+      "medianAge": 20,
+      "lifeExpectancy": 69,
+      "fertilityRate": 3.5,
+      "urbanization": 17,
+      "ethnicGroups": [
+        {
+          "name": "Hutu",
+          "percentage": 85
+        },
+        {
+          "name": "Tutsi",
+          "percentage": 14
+        },
+        {
+          "name": "Twa",
+          "percentage": 1
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 90
+        },
+        {
+          "name": "Islam",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Kinyarwanda",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 40,
+          "official": true
+        },
+        {
+          "name": "Prancis",
+          "percentage": 30,
+          "official": true
+        }
+      ],
+      "literacyRate": 73,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1962-07-01",
+      "nationalHoliday": "1 Juli",
+      "legalSystem": "Civil Law",
+      "constitution": "2003",
+      "administrativeDivisions": 30,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 43.7,
+      "hdi": 0.543,
+      "hdiRank": 160,
+      "corruptionIndex": 51,
+      "currency": "Franc",
+      "currencyCode": "RWF",
+      "gdp": 12000000000,
+      "gdpPerCapita": 920,
+      "gdpPpp": 35000000000,
+      "gdpGrowth": 7,
+      "inflation": 5,
+      "unemployment": 5,
+      "povertyRate": 38,
+      "mainIndustries": [
+        "Pertanian",
+        "Pariwisata",
+        "Teknologi",
+        "Keuangan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Kopi",
+          "value": 3000000000
+        },
+        {
+          "item": "Teh",
+          "value": 2000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 1000000000
+        },
+        {
+          "item": "Teknologi",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 800000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Kopi",
+        "Teh",
+        "Emas",
+        "Gas"
+      ],
+      "economicRanking": 90,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 60,
+      "roadLength": 14000,
+      "railwayLength": 0,
+      "airports": 10,
+      "seaports": 0,
+      "healthcareAccess": 50,
+      "educationIndex": 0.52,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Rwanda Nziza",
+      "nationalAnimal": "Leopard",
+      "nationalFlower": "Agapanthus",
+      "nationalCuisine": [
+        "Ugali",
+        "Brochettes",
+        "Isombe",
+        "Mizuzu",
+        "Sambaza"
+      ],
+      "culturalHeritage": [
+        "Kigali",
+        "Lake Kivu",
+        "Volcanoes National Park",
+        "Akagera"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 45,
+      "climate": "Tropis",
+      "averageTemperature": 22,
+      "averageRainfall": 1000,
+      "forestArea": 20,
+      "protectedAreas": 10,
+      "biodiversityRank": 15,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 50,
+      "riskScore": 40,
+      "politicalStability": 70,
+      "crimeIndex": 25,
+      "militarySpending": 1.5,
+      "peaceIndex": 40,
+      "terrorismIndex": 15,
+      "refugeePopulation": 5000,
+      "opportunityScore": 55,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 45,
+      "startupEcosystem": 50,
+      "investmentScore": 50,
+      "talentPool": 50,
+      "marketSize": 55,
+      "infrastructureQuality": 45,
+      "internetSpeed": 18,
+      "digitalAdoption": 45,
+      "techEcosystem": 45,
+      "aiReadiness": 35,
+      "startups": 40,
+      "phoneCode": "+250",
+      "tld": ".rw",
+      "isoCode": "RWA",
+      "isoCode2": "RW",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "digital",
+        "pemulihan",
+        "teknologi"
+      ]
+    }
+  },
+  {
+    "id": "negara-madagaskar",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Madagaskar",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Madagaskar - Negara kepulauan di Afrika Timur dengan keanekaragaman hayati. Ibu kota: Antananarivo. Populasi: 28 juta jiwa. Mata uang: Ariary (MGA). Bahasa: Malagasi, Prancis. Sistem pemerintahan: Republik Semi-Presidensial. Rumah bagi lemur dan keanekaragaman hayati unik. 90% spesies hanya ada di Madagaskar.",
+    "meta": {
+      "officialName": "Republik Madagaskar",
+      "shortName": "MDG",
+      "capital": "Antananarivo",
+      "capitalCoordinates": {
+        "lat": -18.8792,
+        "lng": 47.5079
+      },
+      "largestCity": "Antananarivo",
+      "demonym": "Madagaskar",
+      "subregion": "East Africa",
+      "area": 587041,
+      "areaRank": 46,
+      "coastline": 4828,
+      "highestPoint": "Maromokotro",
+      "highestElevation": 2876,
+      "lowestPoint": "Samudra Hindia",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -20,
+        "lng": 47
+      },
+      "timezone": [
+        "Waktu Madagaskar"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 28000000,
+      "populationRank": 48,
+      "populationDensity": 47,
+      "populationGrowth": 2.5,
+      "medianAge": 20,
+      "lifeExpectancy": 67,
+      "fertilityRate": 4,
+      "urbanization": 38,
+      "ethnicGroups": [
+        {
+          "name": "Malagasi",
+          "percentage": 90
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 85
+        },
+        {
+          "name": "Islam",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "languages": [
+        {
+          "name": "Malagasi",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Prancis",
+          "percentage": 40,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 75,
+      "governmentType": "Republik Semi-Presidensial",
+      "independenceDay": "1960-06-26",
+      "nationalHoliday": "26 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "2010",
+      "administrativeDivisions": 22,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 42.6,
+      "hdi": 0.528,
+      "hdiRank": 164,
+      "corruptionIndex": 25,
+      "currency": "Ariary",
+      "currencyCode": "MGA",
+      "gdp": 15000000000,
+      "gdpPerCapita": 535,
+      "gdpPpp": 50000000000,
+      "gdpGrowth": 4,
+      "inflation": 5,
+      "unemployment": 5,
+      "povertyRate": 70,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Tekstil",
+        "Tambang",
+        "Perikanan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 3000000000
+        },
+        {
+          "item": "Vanila",
+          "value": 2000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 1000000000
+        },
+        {
+          "item": "Emas",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Vanila",
+        "Emas",
+        "Kayu",
+        "Perikanan"
+      ],
+      "economicRanking": 90,
+      "internetPenetration": 20,
+      "mobilePenetration": 45,
+      "electricityAccess": 30,
+      "roadLength": 30000,
+      "railwayLength": 800,
+      "airports": 50,
+      "seaports": 10,
+      "healthcareAccess": 40,
+      "educationIndex": 0.45,
+      "nationalMotto": "Tanah air, Kemerdekaan, Kemajuan",
+      "nationalAnthem": "Ry Tanindraza nay malala ô",
+      "nationalAnimal": "Lemur",
+      "nationalFlower": "Bunga Poinciana",
+      "nationalCuisine": [
+        "Ravitoto",
+        "Romazava",
+        "Mofo Gasy",
+        "Koba",
+        "Sambos"
+      ],
+      "culturalHeritage": [
+        "Antananarivo",
+        "Avenue of Baobabs",
+        "Tsingy",
+        "Nosy Be"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 30,
+      "climate": "Tropis",
+      "averageTemperature": 22,
+      "averageRainfall": 1500,
+      "forestArea": 20,
+      "protectedAreas": 10,
+      "biodiversityRank": 2,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 48,
+      "riskScore": 55,
+      "politicalStability": 50,
+      "crimeIndex": 40,
+      "militarySpending": 0.5,
+      "peaceIndex": 55,
+      "terrorismIndex": 15,
+      "refugeePopulation": 0,
+      "opportunityScore": 40,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 25,
+      "investmentScore": 35,
+      "talentPool": 45,
+      "marketSize": 60,
+      "infrastructureQuality": 25,
+      "internetSpeed": 8,
+      "digitalAdoption": 25,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 20,
+      "phoneCode": "+261",
+      "tld": ".mg",
+      "isoCode": "MDG",
+      "isoCode2": "MG",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "biodiversitas",
+        "pulau",
+        "ekowisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-eritrea",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Eritrea",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Eritrea - Negara di Afrika Timur dengan pesisir Laut Merah. Ibu kota: Asmara. Populasi: 3.6 juta jiwa. Mata uang: Nakfa (ERN). Bahasa: Tigrinya, Arab. Sistem pemerintahan: Republik. Negara dengan pesisir Laut Merah dan arsitektur kolonial Italia yang unik.",
+    "meta": {
+      "officialName": "Negara Eritrea",
+      "shortName": "ERI",
+      "capital": "Asmara",
+      "capitalCoordinates": {
+        "lat": 15.3229,
+        "lng": 38.9251
+      },
+      "largestCity": "Asmara",
+      "demonym": "Eritrea",
+      "subregion": "East Africa",
+      "area": 117600,
+      "areaRank": 97,
+      "coastline": 2234,
+      "highestPoint": "Mount Soira",
+      "highestElevation": 3018,
+      "lowestPoint": "Laut Merah",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Etiopia",
+        "Sudan",
+        "Djibouti"
+      ],
+      "coordinates": {
+        "lat": 15,
+        "lng": 39
+      },
+      "timezone": [
+        "Waktu Eritrea"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 3600000,
+      "populationRank": 130,
+      "populationDensity": 30,
+      "populationGrowth": 1.5,
+      "medianAge": 20,
+      "lifeExpectancy": 66,
+      "fertilityRate": 4,
+      "urbanization": 62,
+      "ethnicGroups": [
+        {
+          "name": "Tigrinya",
+          "percentage": 55
+        },
+        {
+          "name": "Tigre",
+          "percentage": 30
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 15
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 50
+        },
+        {
+          "name": "Islam",
+          "percentage": 48
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Tigrinya",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Arab",
+          "percentage": 30,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 50,
+      "governmentType": "Republik",
+      "independenceDay": "1991-05-24",
+      "nationalHoliday": "24 Mei",
+      "legalSystem": "Civil Law",
+      "constitution": "1997",
+      "administrativeDivisions": 6,
+      "memberships": [
+        "PBB",
+        "AU"
+      ],
+      "giniCoefficient": 35,
+      "hdi": 0.459,
+      "hdiRank": 177,
+      "corruptionIndex": 22,
+      "currency": "Nakfa",
+      "currencyCode": "ERN",
+      "gdp": 6000000000,
+      "gdpPerCapita": 1660,
+      "gdpPpp": 15000000000,
+      "gdpGrowth": 3,
+      "inflation": 5,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pertanian",
+        "Tambang",
+        "Tekstil",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Emas",
+          "value": 2000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 1000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 1000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 800000000
+        },
+        {
+          "item": "Minyak",
+          "value": 500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 400000000
+        }
+      ],
+      "tradeBalance": 500000000,
+      "naturalResources": [
+        "Emas",
+        "Tembaga",
+        "Seng",
+        "Garam"
+      ],
+      "economicRanking": 100,
+      "internetPenetration": 20,
+      "mobilePenetration": 40,
+      "electricityAccess": 50,
+      "roadLength": 10000,
+      "railwayLength": 300,
+      "airports": 20,
+      "seaports": 5,
+      "healthcareAccess": 45,
+      "educationIndex": 0.42,
+      "nationalMotto": "Kebebasan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Eritrea, Eritrea, Eritrea",
+      "nationalAnimal": "Unta",
+      "nationalFlower": "Bunga Gurun",
+      "nationalCuisine": [
+        "Zigni",
+        "Injera",
+        "Himasha",
+        "Kicha",
+        "Shiro"
+      ],
+      "culturalHeritage": [
+        "Asmara",
+        "Massawa",
+        "Keren",
+        "Dahlak"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Idul Fitri"
+      ],
+      "socialRanking": 35,
+      "climate": "Beragam",
+      "averageTemperature": 25,
+      "averageRainfall": 300,
+      "forestArea": 15,
+      "protectedAreas": 5,
+      "biodiversityRank": 30,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 40,
+      "riskScore": 60,
+      "politicalStability": 40,
+      "crimeIndex": 30,
+      "militarySpending": 5,
+      "peaceIndex": 60,
+      "terrorismIndex": 20,
+      "refugeePopulation": 5000,
+      "opportunityScore": 35,
+      "easeOfDoingBusiness": 35,
+      "innovationIndex": 25,
+      "startupEcosystem": 20,
+      "investmentScore": 30,
+      "talentPool": 40,
+      "marketSize": 45,
+      "infrastructureQuality": 35,
+      "internetSpeed": 8,
+      "digitalAdoption": 25,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 10,
+      "phoneCode": "+291",
+      "tld": ".er",
+      "isoCode": "ERI",
+      "isoCode2": "ER",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "laut-merah",
+        "sejarah"
+      ]
+    }
+  },
+  {
+    "id": "negara-djibouti",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Djibouti",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Djibouti - Negara di Afrika Timur dengan pelabuhan strategis. Ibu kota: Djibouti. Populasi: 1 juta jiwa. Mata uang: Franc (DJF). Bahasa: Prancis, Arab. Sistem pemerintahan: Republik Presidensial. Negara dengan pelabuhan strategis di Laut Merah dan pangkalan militer asing.",
+    "meta": {
+      "officialName": "Republik Djibouti",
+      "shortName": "DJI",
+      "capital": "Djibouti",
+      "capitalCoordinates": {
+        "lat": 11.588,
+        "lng": 43.145
+      },
+      "largestCity": "Djibouti",
+      "demonym": "Djibouti",
+      "subregion": "East Africa",
+      "area": 23200,
+      "areaRank": 145,
+      "coastline": 314,
+      "highestPoint": "Moussa Ali",
+      "highestElevation": 2028,
+      "lowestPoint": "Danau Assal",
+      "lowestElevation": -155,
+      "landBorders": [
+        "Eritrea",
+        "Etiopia",
+        "Somalia"
+      ],
+      "coordinates": {
+        "lat": 11.5,
+        "lng": 43
+      },
+      "timezone": [
+        "Waktu Djibouti"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 1000000,
+      "populationRank": 158,
+      "populationDensity": 43,
+      "populationGrowth": 1.5,
+      "medianAge": 24,
+      "lifeExpectancy": 67,
+      "fertilityRate": 3,
+      "urbanization": 78,
+      "ethnicGroups": [
+        {
+          "name": "Somali",
+          "percentage": 60
+        },
+        {
+          "name": "Afar",
+          "percentage": 30
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 94
+        },
+        {
+          "name": "Kristen",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 1
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Arab",
+          "percentage": 50,
+          "official": true
+        },
+        {
+          "name": "Somali",
+          "percentage": 40
+        }
+      ],
+      "literacyRate": 70,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1977-06-27",
+      "nationalHoliday": "27 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "1992",
+      "administrativeDivisions": 5,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Liga Arab",
+        "WTO"
+      ],
+      "giniCoefficient": 40,
+      "hdi": 0.524,
+      "hdiRank": 166,
+      "corruptionIndex": 30,
+      "currency": "Franc",
+      "currencyCode": "DJF",
+      "gdp": 3000000000,
+      "gdpPerCapita": 3000,
+      "gdpPpp": 6000000000,
+      "gdpGrowth": 4.5,
+      "inflation": 3,
+      "unemployment": 10,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Logistik",
+        "Pelabuhan",
+        "Keuangan",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Logistik",
+          "value": 1000000000
+        },
+        {
+          "item": "Pelabuhan",
+          "value": 800000000
+        },
+        {
+          "item": "Keuangan",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 500000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 300000000
+        },
+        {
+          "item": "Makanan",
+          "value": 200000000
+        },
+        {
+          "item": "Minyak",
+          "value": 150000000
+        }
+      ],
+      "tradeBalance": 500000000,
+      "naturalResources": [
+        "Pelabuhan",
+        "Garam",
+        "Perikanan"
+      ],
+      "economicRanking": 100,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 70,
+      "roadLength": 3000,
+      "railwayLength": 100,
+      "airports": 5,
+      "seaports": 3,
+      "healthcareAccess": 55,
+      "educationIndex": 0.48,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Djibouti",
+      "nationalAnimal": "Kijang",
+      "nationalFlower": "Bunga Gurun",
+      "nationalCuisine": [
+        "Skoudehkaris",
+        "Fah-fah",
+        "Lahoh",
+        "Sambusa",
+        "Shai"
+      ],
+      "culturalHeritage": [
+        "Djibouti",
+        "Lake Assal",
+        "Tadjoura",
+        "Obock"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Idul Fitri",
+        "Idul Adha",
+        "Tahun Baru"
+      ],
+      "socialRanking": 45,
+      "climate": "Gurun",
+      "averageTemperature": 30,
+      "averageRainfall": 100,
+      "forestArea": 0.5,
+      "protectedAreas": 3,
+      "biodiversityRank": 35,
+      "carbonEmissions": 0.5,
+      "environmentalIndex": 42,
+      "riskScore": 40,
+      "politicalStability": 60,
+      "crimeIndex": 25,
+      "militarySpending": 1.5,
+      "peaceIndex": 45,
+      "terrorismIndex": 15,
+      "refugeePopulation": 1000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 30,
+      "startupEcosystem": 25,
+      "investmentScore": 40,
+      "talentPool": 35,
+      "marketSize": 30,
+      "infrastructureQuality": 50,
+      "internetSpeed": 12,
+      "digitalAdoption": 30,
+      "techEcosystem": 25,
+      "aiReadiness": 20,
+      "startups": 10,
+      "phoneCode": "+253",
+      "tld": ".dj",
+      "isoCode": "DJI",
+      "isoCode2": "DJ",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "pelabuhan",
+        "strategis"
+      ]
+    }
+  },
+  {
+    "id": "negara-sudan-selatan",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Sudan Selatan",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Sudan Selatan - Negara termuda di Afrika Timur dengan sumber daya minyak. Ibu kota: Juba. Populasi: 11 juta jiwa. Mata uang: Pound (SSP). Bahasa: Inggris. Sistem pemerintahan: Republik Presidensial. Negara termuda di Afrika (merdeka 2011) dengan cadangan minyak besar.",
+    "meta": {
+      "officialName": "Republik Sudan Selatan",
+      "shortName": "SSD",
+      "capital": "Juba",
+      "capitalCoordinates": {
+        "lat": 4.8594,
+        "lng": 31.5713
+      },
+      "largestCity": "Juba",
+      "demonym": "Sudan Selatan",
+      "subregion": "East Africa",
+      "area": 619745,
+      "areaRank": 42,
+      "coastline": 0,
+      "highestPoint": "Kinyeti",
+      "highestElevation": 3187,
+      "lowestPoint": "Sungai Nil",
+      "lowestElevation": 380,
+      "landBorders": [
+        "Sudan",
+        "Etiopia",
+        "Kenya",
+        "Uganda",
+        "Kongo",
+        "Republik Afrika Tengah"
+      ],
+      "coordinates": {
+        "lat": 7,
+        "lng": 30
+      },
+      "timezone": [
+        "Waktu Sudan Selatan"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 11000000,
+      "populationRank": 83,
+      "populationDensity": 17,
+      "populationGrowth": 2.5,
+      "medianAge": 19,
+      "lifeExpectancy": 57,
+      "fertilityRate": 5,
+      "urbanization": 20,
+      "ethnicGroups": [
+        {
+          "name": "Dinka",
+          "percentage": 35
+        },
+        {
+          "name": "Nuer",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 50
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 60
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 40
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Arab",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 35,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "2011-07-09",
+      "nationalHoliday": "9 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "2011",
+      "administrativeDivisions": 10,
+      "memberships": [
+        "PBB",
+        "AU"
+      ],
+      "giniCoefficient": 40,
+      "hdi": 0.385,
+      "hdiRank": 185,
+      "corruptionIndex": 15,
+      "currency": "Pound",
+      "currencyCode": "SSP",
+      "gdp": 5000000000,
+      "gdpPerCapita": 450,
+      "gdpPpp": 15000000000,
+      "gdpGrowth": -5,
+      "inflation": 20,
+      "unemployment": 30,
+      "povertyRate": 80,
+      "mainIndustries": [
+        "Minyak",
+        "Pertanian",
+        "Peternakan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 3000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 500000000
+        },
+        {
+          "item": "Peternakan",
+          "value": 200000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 800000000
+        }
+      ],
+      "tradeBalance": -1000000000,
+      "naturalResources": [
+        "Minyak",
+        "Gas",
+        "Emas",
+        "Kayu"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 15,
+      "mobilePenetration": 30,
+      "electricityAccess": 20,
+      "roadLength": 8000,
+      "railwayLength": 0,
+      "airports": 20,
+      "seaports": 0,
+      "healthcareAccess": 25,
+      "educationIndex": 0.32,
+      "nationalMotto": "Keadilan, Kebebasan, Kemakmuran",
+      "nationalAnthem": "South Sudan Oyee!",
+      "nationalAnimal": "Jerapah",
+      "nationalFlower": "Bunga Gurun",
+      "nationalCuisine": [
+        "Kisra",
+        "Ful Medames",
+        "Shawarma",
+        "Tamaya",
+        "Bamia"
+      ],
+      "culturalHeritage": [
+        "Juba",
+        "Nimule",
+        "Boma",
+        "Bandingilo"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 15,
+      "climate": "Tropis",
+      "averageTemperature": 30,
+      "averageRainfall": 800,
+      "forestArea": 20,
+      "protectedAreas": 5,
+      "biodiversityRank": 20,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 35,
+      "riskScore": 85,
+      "politicalStability": 15,
+      "crimeIndex": 60,
+      "militarySpending": 3,
+      "peaceIndex": 85,
+      "terrorismIndex": 40,
+      "refugeePopulation": 200000,
+      "opportunityScore": 25,
+      "easeOfDoingBusiness": 25,
+      "innovationIndex": 15,
+      "startupEcosystem": 10,
+      "investmentScore": 20,
+      "talentPool": 35,
+      "marketSize": 50,
+      "infrastructureQuality": 15,
+      "internetSpeed": 5,
+      "digitalAdoption": 15,
+      "techEcosystem": 10,
+      "aiReadiness": 10,
+      "startups": 5,
+      "phoneCode": "+211",
+      "tld": ".ss",
+      "isoCode": "SSD",
+      "isoCode2": "SS",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "minyak",
+        "termuda",
+        "konflik"
+      ]
+    }
+  },
+  {
+    "id": "negara-burundi",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Burundi",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Burundi - Negara di Afrika Timur dengan danau Tanganyika. Ibu kota: Gitega. Populasi: 12 juta jiwa. Mata uang: Franc (BIF). Bahasa: Kirundi, Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan Danau Tanganyika dan pertanian subur.",
+    "meta": {
+      "officialName": "Republik Burundi",
+      "shortName": "BDI",
+      "capital": "Gitega",
+      "capitalCoordinates": {
+        "lat": -3.4264,
+        "lng": 29.9307
+      },
+      "largestCity": "Bujumbura",
+      "demonym": "Burundi",
+      "subregion": "East Africa",
+      "area": 27834,
+      "areaRank": 142,
+      "coastline": 0,
+      "highestPoint": "Mount Heha",
+      "highestElevation": 2684,
+      "lowestPoint": "Danau Tanganyika",
+      "lowestElevation": 772,
+      "landBorders": [
+        "Rwanda",
+        "Tanzania",
+        "Kongo"
+      ],
+      "coordinates": {
+        "lat": -3.5,
+        "lng": 30
+      },
+      "timezone": [
+        "Waktu Burundi"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 12000000,
+      "populationRank": 76,
+      "populationDensity": 431,
+      "populationGrowth": 2.5,
+      "medianAge": 17,
+      "lifeExpectancy": 61,
+      "fertilityRate": 5,
+      "urbanization": 13,
+      "ethnicGroups": [
+        {
+          "name": "Hutu",
+          "percentage": 85
+        },
+        {
+          "name": "Tutsi",
+          "percentage": 14
+        },
+        {
+          "name": "Twa",
+          "percentage": 1
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 90
+        },
+        {
+          "name": "Islam",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Kirundi",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Prancis",
+          "percentage": 30,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10,
+          "official": true
+        }
+      ],
+      "literacyRate": 68,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1962-07-01",
+      "nationalHoliday": "1 Juli",
+      "legalSystem": "Civil Law",
+      "constitution": "2018",
+      "administrativeDivisions": 18,
+      "memberships": [
+        "PBB",
+        "AU"
+      ],
+      "giniCoefficient": 38.6,
+      "hdi": 0.433,
+      "hdiRank": 182,
+      "corruptionIndex": 19,
+      "currency": "Franc",
+      "currencyCode": "BIF",
+      "gdp": 4000000000,
+      "gdpPerCapita": 330,
+      "gdpPpp": 10000000000,
+      "gdpGrowth": 3,
+      "inflation": 8,
+      "unemployment": 5,
+      "povertyRate": 65,
+      "mainIndustries": [
+        "Pertanian",
+        "Tekstil",
+        "Manufaktur",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Kopi",
+          "value": 1000000000
+        },
+        {
+          "item": "Teh",
+          "value": 500000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 300000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 500000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 300000000
+        },
+        {
+          "item": "Minyak",
+          "value": 200000000
+        },
+        {
+          "item": "Makanan",
+          "value": 150000000
+        }
+      ],
+      "tradeBalance": -500000000,
+      "naturalResources": [
+        "Kopi",
+        "Teh",
+        "Emas",
+        "Kayu"
+      ],
+      "economicRanking": 120,
+      "internetPenetration": 15,
+      "mobilePenetration": 35,
+      "electricityAccess": 20,
+      "roadLength": 12000,
+      "railwayLength": 0,
+      "airports": 10,
+      "seaports": 0,
+      "healthcareAccess": 35,
+      "educationIndex": 0.42,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Burundi Bwacu",
+      "nationalAnimal": "Singa",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Ugali",
+        "Brochettes",
+        "Sambaza",
+        "Fufu",
+        "Mizuzu"
+      ],
+      "culturalHeritage": [
+        "Gitega",
+        "Lake Tanganyika",
+        "Rusizi",
+        "Kibira"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 20,
+      "climate": "Tropis",
+      "averageTemperature": 22,
+      "averageRainfall": 1000,
+      "forestArea": 10,
+      "protectedAreas": 5,
+      "biodiversityRank": 25,
+      "carbonEmissions": 0.05,
+      "environmentalIndex": 40,
+      "riskScore": 75,
+      "politicalStability": 35,
+      "crimeIndex": 45,
+      "militarySpending": 1.5,
+      "peaceIndex": 70,
+      "terrorismIndex": 30,
+      "refugeePopulation": 50000,
+      "opportunityScore": 30,
+      "easeOfDoingBusiness": 30,
+      "innovationIndex": 20,
+      "startupEcosystem": 15,
+      "investmentScore": 25,
+      "talentPool": 35,
+      "marketSize": 50,
+      "infrastructureQuality": 20,
+      "internetSpeed": 5,
+      "digitalAdoption": 20,
+      "techEcosystem": 15,
+      "aiReadiness": 10,
+      "startups": 5,
+      "phoneCode": "+257",
+      "tld": ".bi",
+      "isoCode": "BDI",
+      "isoCode2": "BI",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-timur",
+        "danau-tanganyika",
+        "pertanian"
+      ]
+    }
+  },
+  {
+    "id": "negara-malawi",
+    "kategori": "negara",
+    "wilayah": "african-timur",
+    "nama": "Malawi",
+    "tags": [
+      "East Africa"
+    ],
+    "teks": "Malawi - Negara di Afrika Timur dengan Danau Malawi. Ibu kota: Lilongwe. Populasi: 20 juta jiwa. Mata uang: Kwacha (MWK). Bahasa: Inggris, Chichewa. Sistem pemerintahan: Republik Presidensial. Negara dengan Danau Malawi dan keindahan alam yang luar biasa.",
+    "meta": {
+      "officialName": "Republik Malawi",
+      "shortName": "MWI",
+      "capital": "Lilongwe",
+      "capitalCoordinates": {
+        "lat": -13.963,
+        "lng": 33.7321
+      },
+      "largestCity": "Lilongwe",
+      "demonym": "Malawi",
+      "subregion": "East Africa",
+      "area": 118484,
+      "areaRank": 98,
+      "coastline": 0,
+      "highestPoint": "Mulanje Massif",
+      "highestElevation": 3002,
+      "lowestPoint": "Sungai Shire",
+      "lowestElevation": 37,
+      "landBorders": [
+        "Zambia",
+        "Tanzania",
+        "Mozambik"
+      ],
+      "coordinates": {
+        "lat": -13.5,
+        "lng": 34
+      },
+      "timezone": [
+        "Waktu Malawi"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 20000000,
+      "populationRank": 62,
+      "populationDensity": 168,
+      "populationGrowth": 2.5,
+      "medianAge": 17,
+      "lifeExpectancy": 64,
+      "fertilityRate": 4.5,
+      "urbanization": 17,
+      "ethnicGroups": [
+        {
+          "name": "Chewa",
+          "percentage": 35
+        },
+        {
+          "name": "Lomwe",
+          "percentage": 18
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 47
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 85
+        },
+        {
+          "name": "Islam",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Chichewa",
+          "percentage": 60,
+          "official": true
+        }
+      ],
+      "literacyRate": 62,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1964-07-06",
+      "nationalHoliday": "6 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "1995",
+      "administrativeDivisions": 28,
+      "memberships": [
+        "PBB",
+        "AU",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 38,
+      "hdi": 0.512,
+      "hdiRank": 169,
+      "corruptionIndex": 30,
+      "currency": "Kwacha",
+      "currencyCode": "MWK",
+      "gdp": 12000000000,
+      "gdpPerCapita": 600,
+      "gdpPpp": 30000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 10,
+      "unemployment": 5,
+      "povertyRate": 60,
+      "mainIndustries": [
+        "Pertanian",
+        "Tambang",
+        "Tekstil",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Tembakau",
+          "value": 3000000000
+        },
+        {
+          "item": "Teh",
+          "value": 1000000000
+        },
+        {
+          "item": "Gula",
+          "value": 500000000
+        },
+        {
+          "item": "Kopi",
+          "value": 300000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 1000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 800000000
+        },
+        {
+          "item": "Minyak",
+          "value": 500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 400000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Tembakau",
+        "Teh",
+        "Gula",
+        "Emas"
+      ],
+      "economicRanking": 100,
+      "internetPenetration": 20,
+      "mobilePenetration": 45,
+      "electricityAccess": 20,
+      "roadLength": 15000,
+      "railwayLength": 800,
+      "airports": 20,
+      "seaports": 0,
+      "healthcareAccess": 40,
+      "educationIndex": 0.48,
+      "nationalMotto": "Kebebasan, Persatuan, Kemakmuran",
+      "nationalAnthem": "Mlungu dalitsani Malaŵi",
+      "nationalAnimal": "Antelop",
+      "nationalFlower": "Bunga Rose",
+      "nationalCuisine": [
+        "Nsima",
+        "Zitumbuwa",
+        "Mkhwani",
+        "Chambo",
+        "Mbatata"
+      ],
+      "culturalHeritage": [
+        "Lilongwe",
+        "Blantyre",
+        "Lake Malawi",
+        "Mulanje"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 30,
+      "climate": "Subtropis",
+      "averageTemperature": 22,
+      "averageRainfall": 1000,
+      "forestArea": 30,
+      "protectedAreas": 10,
+      "biodiversityRank": 15,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 45,
+      "riskScore": 55,
+      "politicalStability": 50,
+      "crimeIndex": 35,
+      "militarySpending": 0.8,
+      "peaceIndex": 55,
+      "terrorismIndex": 15,
+      "refugeePopulation": 5000,
+      "opportunityScore": 35,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 25,
+      "startupEcosystem": 20,
+      "investmentScore": 30,
+      "talentPool": 40,
+      "marketSize": 55,
+      "infrastructureQuality": 25,
+      "internetSpeed": 8,
+      "digitalAdoption": 25,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 10,
+      "phoneCode": "+265",
+      "tld": ".mw",
+      "isoCode": "MWI",
+      "isoCode2": "MW",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "african-timur",
+        "danau-malawi",
+        "ekowisata"
+      ]
+    }
+  }
+]

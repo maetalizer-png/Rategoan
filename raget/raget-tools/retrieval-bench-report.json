@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-21T13:14:01.530Z",
+  "generatedAt": "2026-08-21T14:13:21.599Z",
   "domain": "country",
   "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity)",
   "threshold": 0.3,

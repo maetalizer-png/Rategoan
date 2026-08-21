@@ -6,23 +6,40 @@
 // (grup country, threshold 0.3) - bukan strawman benchmark terpisah.
 //
 // Gold query DIBANGKITKAN dari field metadata yang sudah ada di
-// raget-dataries/country/*.js (ibu kota, populasi, dst) - bukan dikarang;
-// ground truth-nya adalah metadata.name negara yang jawabannya berasal
-// dari situ. Domain country dipilih karena field metadata-nya paling
-// lengkap & konsisten di seluruh 163 entri (semua punya capital,
-// population, currency).
+// raget-data/negara/*.json (ibu kota, populasi, dst - hasil migrasi Fase B,
+// lihat migrate-country-domain.mjs) - bukan dikarang; ground truth-nya
+// adalah metadata.name negara yang jawabannya berasal dari situ. Domain
+// country dipilih karena field metadata-nya paling lengkap & konsisten di
+// seluruh 163 entri (semua punya capital, population, currency).
+//
+// CATATAN: skrip Node ini baca JSON langsung lewat fs (bukan lewat
+// dataries.loadRegion() yang browser-only karena pakai fetch()) - pola yang
+// sama seperti dataries-ke-korpus.mjs/build-neural-checkpoint.mjs, supaya
+// tooling Node tidak bergantung pada loader yang didesain untuk lingkungan
+// browser.
 //
 // Pakai: node raget/raget-tools/bench-retrieval.mjs
 
-import { writeFileSync } from 'fs';
+import { readFileSync, readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { dataries } from '../raget-dataries/index.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
+const NEGARA_DIR = path.join(ROOT, 'raget', 'raget-data', 'negara');
 const REPORT_FILE = path.join(__dirname, 'retrieval-bench-report.json');
+
+function loadAllCountries() {
+  const items = [];
+  for (const f of readdirSync(NEGARA_DIR).filter((f) => f.endsWith('.json'))) {
+    const entries = JSON.parse(readFileSync(path.join(NEGARA_DIR, f), 'utf8'));
+    for (const entry of entries) {
+      items.push({ text: entry.teks, metadata: { ...entry.meta, category: 'country', region: entry.wilayah, name: entry.nama } });
+    }
+  }
+  return items;
+}
 
 const THRESHOLD = 0.3; // sama dengan DATARIES_FALLBACK_THRESHOLD di dataries-bridge.js
 const TOP_K = 10;
@@ -80,8 +97,8 @@ function evaluate(queries, corpus) {
 }
 
 async function main() {
-  console.log('Memuat domain country dari raget-dataries...');
-  const countries = await dataries.loadAll('country');
+  console.log('Memuat domain country dari raget-data/negara...');
+  const countries = loadAllCountries();
   console.log('Entri country:', countries.length);
 
   const corpus = countries.map((item) => ({ item, text: item.text || '' }));

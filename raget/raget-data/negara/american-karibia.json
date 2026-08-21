@@ -1,0 +1,1690 @@
+[
+  {
+    "id": "negara-jamaika",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Jamaika",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Jamaika - Negara kepulauan di Karibia dengan budaya Reggae dan pariwisata. Ibu kota: Kingston. Populasi: 2.9 juta jiwa. Mata uang: Dolar Jamaika (JMD). Bahasa: Inggris, Patois. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan musik Reggae, Bob Marley, dan pantai-pantai indah. Destinasi wisata terkemuka di Karibia.",
+    "meta": {
+      "officialName": "Jamaika",
+      "shortName": "JAM",
+      "capital": "Kingston",
+      "capitalCoordinates": {
+        "lat": 17.9714,
+        "lng": -76.7924
+      },
+      "largestCity": "Kingston",
+      "demonym": "Jamaika",
+      "subregion": "Caribbean",
+      "area": 10991,
+      "areaRank": 160,
+      "coastline": 1022,
+      "highestPoint": "Blue Mountain Peak",
+      "highestElevation": 2256,
+      "lowestPoint": "Laut Karibia",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 18,
+        "lng": -77
+      },
+      "timezone": [
+        "Waktu Jamaika"
+      ],
+      "utcOffset": [
+        "-5"
+      ],
+      "population": 2900000,
+      "populationRank": 139,
+      "populationDensity": 264,
+      "populationGrowth": 0.5,
+      "medianAge": 31,
+      "lifeExpectancy": 74,
+      "fertilityRate": 2,
+      "urbanization": 56,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Hitam",
+          "percentage": 92
+        },
+        {
+          "name": "Mestizo",
+          "percentage": 6
+        },
+        {
+          "name": "Kulit Putih",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 80
+        },
+        {
+          "name": "Rastafarian",
+          "percentage": 5
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Patois",
+          "percentage": 90
+        }
+      ],
+      "literacyRate": 90,
+      "governmentType": "Monarki Konstitusional Parlementer",
+      "independenceDay": "1962-08-06",
+      "nationalHoliday": "6 Agustus",
+      "legalSystem": "Common Law",
+      "constitution": "1962",
+      "administrativeDivisions": 14,
+      "memberships": [
+        "PBB",
+        "CARICOM",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 45,
+      "hdi": 0.734,
+      "hdiRank": 95,
+      "corruptionIndex": 44,
+      "currency": "Dolar Jamaika",
+      "currencyCode": "JMD",
+      "gdp": 20000000000,
+      "gdpPerCapita": 6900,
+      "gdpPpp": 30000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 5,
+      "unemployment": 8,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Tambang",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 5000000000
+        },
+        {
+          "item": "Aluminium",
+          "value": 3000000000
+        },
+        {
+          "item": "Gula",
+          "value": 2000000000
+        },
+        {
+          "item": "Rum",
+          "value": 1000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Aluminium",
+        "Gula",
+        "Kayu",
+        "Rum"
+      ],
+      "economicRanking": 80,
+      "internetPenetration": 60,
+      "mobilePenetration": 80,
+      "electricityAccess": 95,
+      "roadLength": 20000,
+      "railwayLength": 300,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 65,
+      "educationIndex": 0.62,
+      "nationalMotto": "Dari banyak, satu orang",
+      "nationalAnthem": "Jamaica, Land We Love",
+      "nationalAnimal": "Burung Kolibri",
+      "nationalFlower": "Lignum Vitae",
+      "nationalCuisine": [
+        "Jerk Chicken",
+        "Ackee and Saltfish",
+        "Jamaican Patty",
+        "Rice and Peas",
+        "Rum Punch"
+      ],
+      "culturalHeritage": [
+        "Kingston",
+        "Montego Bay",
+        "Negril",
+        "Blue Mountains"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Emansipasi",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 55,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 1000,
+      "forestArea": 30,
+      "protectedAreas": 10,
+      "biodiversityRank": 20,
+      "carbonEmissions": 2.5,
+      "environmentalIndex": 45,
+      "riskScore": 45,
+      "politicalStability": 60,
+      "crimeIndex": 50,
+      "militarySpending": 1,
+      "peaceIndex": 55,
+      "terrorismIndex": 15,
+      "refugeePopulation": 0,
+      "opportunityScore": 50,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 40,
+      "startupEcosystem": 45,
+      "investmentScore": 50,
+      "talentPool": 60,
+      "marketSize": 55,
+      "infrastructureQuality": 50,
+      "internetSpeed": 20,
+      "digitalAdoption": 50,
+      "techEcosystem": 40,
+      "aiReadiness": 30,
+      "startups": 50,
+      "phoneCode": "+1",
+      "tld": ".jm",
+      "isoCode": "JAM",
+      "isoCode2": "JM",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "reggae",
+        "pariwisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-haiti",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Haiti",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Haiti - Negara di Karibia dengan sejarah dan budaya kaya. Ibu kota: Port-au-Prince. Populasi: 11.4 juta jiwa. Mata uang: Gourde (HTG). Bahasa: Prancis, Kreol. Sistem pemerintahan: Republik Presidensial. Negara pertama yang merdeka di Karibia. Sejarah perjuangan kemerdekaan yang kuat. Budaya Afrika dan Prancis yang unik.",
+    "meta": {
+      "officialName": "Republik Haiti",
+      "shortName": "HTI",
+      "capital": "Port-au-Prince",
+      "capitalCoordinates": {
+        "lat": 18.5944,
+        "lng": -72.3074
+      },
+      "largestCity": "Port-au-Prince",
+      "demonym": "Haiti",
+      "subregion": "Caribbean",
+      "area": 27750,
+      "areaRank": 143,
+      "coastline": 1771,
+      "highestPoint": "Pic la Selle",
+      "highestElevation": 2680,
+      "lowestPoint": "Laut Karibia",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Republik Dominika"
+      ],
+      "coordinates": {
+        "lat": 19,
+        "lng": -72.5
+      },
+      "timezone": [
+        "Waktu Haiti"
+      ],
+      "utcOffset": [
+        "-5"
+      ],
+      "population": 11400000,
+      "populationRank": 81,
+      "populationDensity": 411,
+      "populationGrowth": 1.2,
+      "medianAge": 24,
+      "lifeExpectancy": 64,
+      "fertilityRate": 2.8,
+      "urbanization": 55,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Hitam",
+          "percentage": 95
+        },
+        {
+          "name": "Mulatto",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 55
+        },
+        {
+          "name": "Kristen Protestan",
+          "percentage": 35
+        },
+        {
+          "name": "Voodoo",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Kreol",
+          "percentage": 90,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 62,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1804-01-01",
+      "nationalHoliday": "1 Januari",
+      "legalSystem": "Civil Law",
+      "constitution": "2012",
+      "administrativeDivisions": 10,
+      "memberships": [
+        "PBB",
+        "CARICOM",
+        "OAS"
+      ],
+      "giniCoefficient": 40,
+      "hdi": 0.535,
+      "hdiRank": 163,
+      "corruptionIndex": 18,
+      "currency": "Gourde",
+      "currencyCode": "HTG",
+      "gdp": 20000000000,
+      "gdpPerCapita": 1750,
+      "gdpPpp": 40000000000,
+      "gdpGrowth": 1.5,
+      "inflation": 15,
+      "unemployment": 15,
+      "povertyRate": 50,
+      "mainIndustries": [
+        "Pertanian",
+        "Tekstil",
+        "Konstruksi",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Tekstil",
+          "value": 3000000000
+        },
+        {
+          "item": "Mangga",
+          "value": 1000000000
+        },
+        {
+          "item": "Kopi",
+          "value": 500000000
+        },
+        {
+          "item": "Kerajinan",
+          "value": 200000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": -3000000000,
+      "naturalResources": [
+        "Kayu",
+        "Kopi",
+        "Mangga",
+        "Tembaga"
+      ],
+      "economicRanking": 130,
+      "internetPenetration": 35,
+      "mobilePenetration": 60,
+      "electricityAccess": 50,
+      "roadLength": 4000,
+      "railwayLength": 0,
+      "airports": 15,
+      "seaports": 5,
+      "healthcareAccess": 40,
+      "educationIndex": 0.45,
+      "nationalMotto": "Kebebasan, Kesetaraan, Persaudaraan",
+      "nationalAnthem": "La Dessalinienne",
+      "nationalAnimal": "Burung Kolibri",
+      "nationalFlower": "Bunga Hibiscus",
+      "nationalCuisine": [
+        "Griot",
+        "Pikliz",
+        "Soupe Joumou",
+        "Diri ak Pwa",
+        "Banane Pésée"
+      ],
+      "culturalHeritage": [
+        "Port-au-Prince",
+        "Jacmel",
+        "Cap-Haïtien",
+        "Citadelle"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Konstitusi",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 25,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 1000,
+      "forestArea": 3,
+      "protectedAreas": 5,
+      "biodiversityRank": 30,
+      "carbonEmissions": 0.5,
+      "environmentalIndex": 30,
+      "riskScore": 80,
+      "politicalStability": 20,
+      "crimeIndex": 60,
+      "militarySpending": 0.5,
+      "peaceIndex": 75,
+      "terrorismIndex": 10,
+      "refugeePopulation": 1000,
+      "opportunityScore": 25,
+      "easeOfDoingBusiness": 25,
+      "innovationIndex": 20,
+      "startupEcosystem": 15,
+      "investmentScore": 20,
+      "talentPool": 40,
+      "marketSize": 55,
+      "infrastructureQuality": 15,
+      "internetSpeed": 8,
+      "digitalAdoption": 25,
+      "techEcosystem": 15,
+      "aiReadiness": 15,
+      "startups": 10,
+      "phoneCode": "+509",
+      "tld": ".ht",
+      "isoCode": "HTI",
+      "isoCode2": "HT",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "sejarah",
+        "budaya"
+      ]
+    }
+  },
+  {
+    "id": "negara-republik-dominika",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Republik Dominika",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Republik Dominika - Negara di Karibia dengan ekonomi dan pariwisata maju. Ibu kota: Santo Domingo. Populasi: 10.8 juta jiwa. Mata uang: Peso Dominika (DOP). Bahasa: Spanyol. Sistem pemerintahan: Republik Presidensial. Negara dengan pantai-pantai indah dan ekonomi terbesar di Karibia. Rumah bagi kota kolonial Santo Domingo dan resor Punta Cana.",
+    "meta": {
+      "officialName": "Republik Dominika",
+      "shortName": "DOM",
+      "capital": "Santo Domingo",
+      "capitalCoordinates": {
+        "lat": 18.4861,
+        "lng": -69.9312
+      },
+      "largestCity": "Santo Domingo",
+      "demonym": "Dominika",
+      "subregion": "Caribbean",
+      "area": 48671,
+      "areaRank": 128,
+      "coastline": 1288,
+      "highestPoint": "Pico Duarte",
+      "highestElevation": 3175,
+      "lowestPoint": "Laut Karibia",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Haiti"
+      ],
+      "coordinates": {
+        "lat": 19,
+        "lng": -70
+      },
+      "timezone": [
+        "Waktu Dominika"
+      ],
+      "utcOffset": [
+        "-4"
+      ],
+      "population": 10800000,
+      "populationRank": 84,
+      "populationDensity": 222,
+      "populationGrowth": 1,
+      "medianAge": 28,
+      "lifeExpectancy": 74,
+      "fertilityRate": 2.2,
+      "urbanization": 83,
+      "ethnicGroups": [
+        {
+          "name": "Mestizo",
+          "percentage": 70
+        },
+        {
+          "name": "Kulit Hitam",
+          "percentage": 15
+        },
+        {
+          "name": "Kulit Putih",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 75
+        },
+        {
+          "name": "Kristen Protestan",
+          "percentage": 15
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 8
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Spanyol",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 94,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1844-02-27",
+      "nationalHoliday": "27 Februari",
+      "legalSystem": "Civil Law",
+      "constitution": "2015",
+      "administrativeDivisions": 31,
+      "memberships": [
+        "PBB",
+        "CARICOM",
+        "OAS"
+      ],
+      "giniCoefficient": 41,
+      "hdi": 0.756,
+      "hdiRank": 88,
+      "corruptionIndex": 30,
+      "currency": "Peso Dominika",
+      "currencyCode": "DOP",
+      "gdp": 120000000000,
+      "gdpPerCapita": 11100,
+      "gdpPpp": 250000000000,
+      "gdpGrowth": 5,
+      "inflation": 3.5,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Manufaktur",
+        "Pertanian",
+        "Tambang"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 80000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 40000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 20000000000
+        },
+        {
+          "item": "Tambang",
+          "value": 10000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 40000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 30000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 20000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 15000000000
+        }
+      ],
+      "tradeBalance": 10000000000,
+      "naturalResources": [
+        "Emas",
+        "Perak",
+        "Kayu",
+        "Nikel",
+        "Tanah subur"
+      ],
+      "economicRanking": 60,
+      "internetPenetration": 75,
+      "mobilePenetration": 90,
+      "electricityAccess": 98,
+      "roadLength": 20000,
+      "railwayLength": 1000,
+      "airports": 30,
+      "seaports": 15,
+      "healthcareAccess": 70,
+      "educationIndex": 0.62,
+      "nationalMotto": "Tuhan, Tanah air, Kebebasan",
+      "nationalAnthem": "Quisqueyanos Valientes",
+      "nationalAnimal": "Burung Kolibri",
+      "nationalFlower": "Bunga Hibiscus",
+      "nationalCuisine": [
+        "La Bandera",
+        "Mangu",
+        "Sancocho",
+        "Mofongo",
+        "Pescado Frito"
+      ],
+      "culturalHeritage": [
+        "Santo Domingo",
+        "Punta Cana",
+        "Puerto Plata",
+        "La Romana"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Konstitusi",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 60,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 800,
+      "forestArea": 40,
+      "protectedAreas": 10,
+      "biodiversityRank": 15,
+      "carbonEmissions": 2.5,
+      "environmentalIndex": 45,
+      "riskScore": 35,
+      "politicalStability": 65,
+      "crimeIndex": 35,
+      "militarySpending": 0.7,
+      "peaceIndex": 45,
+      "terrorismIndex": 10,
+      "refugeePopulation": 0,
+      "opportunityScore": 60,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 40,
+      "startupEcosystem": 45,
+      "investmentScore": 55,
+      "talentPool": 65,
+      "marketSize": 70,
+      "infrastructureQuality": 55,
+      "internetSpeed": 25,
+      "digitalAdoption": 60,
+      "techEcosystem": 45,
+      "aiReadiness": 35,
+      "startups": 100,
+      "phoneCode": "+1",
+      "tld": ".do",
+      "isoCode": "DOM",
+      "isoCode2": "DO",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "pariwisata",
+        "ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "negara-bahama",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Bahama",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Bahama - Negara kepulauan di Karibia dengan pantai pasir putih dan pariwisata. Ibu kota: Nassau. Populasi: 400 ribu jiwa. Mata uang: Dolar Bahama (BSD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Destinasi wisata mewah di Karibia. Rumah bagi Atlantis Resort dan pantai-pantai eksotis.",
+    "meta": {
+      "officialName": "Commonwealth of the Bahamas",
+      "shortName": "BHS",
+      "capital": "Nassau",
+      "capitalCoordinates": {
+        "lat": 25.0343,
+        "lng": -77.3963
+      },
+      "largestCity": "Nassau",
+      "demonym": "Bahama",
+      "subregion": "Caribbean",
+      "area": 13943,
+      "areaRank": 155,
+      "coastline": 3542,
+      "highestPoint": "Mount Alvernia",
+      "highestElevation": 63,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 24.25,
+        "lng": -76
+      },
+      "timezone": [
+        "Waktu Bahama"
+      ],
+      "utcOffset": [
+        "-5"
+      ],
+      "population": 400000,
+      "populationRank": 173,
+      "populationDensity": 29,
+      "populationGrowth": 0.8,
+      "medianAge": 34,
+      "lifeExpectancy": 74,
+      "fertilityRate": 1.5,
+      "urbanization": 83,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Hitam",
+          "percentage": 90
+        },
+        {
+          "name": "Kulit Putih",
+          "percentage": 8
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 90
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Kreol",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 95,
+      "governmentType": "Monarki Konstitusional Parlementer",
+      "independenceDay": "1973-07-10",
+      "nationalHoliday": "10 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "1973",
+      "administrativeDivisions": 31,
+      "memberships": [
+        "PBB",
+        "CARICOM",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 38,
+      "hdi": 0.812,
+      "hdiRank": 55,
+      "corruptionIndex": 68,
+      "currency": "Dolar Bahama",
+      "currencyCode": "BSD",
+      "gdp": 12000000000,
+      "gdpPerCapita": 30000,
+      "gdpPpp": 15000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 2.5,
+      "unemployment": 10,
+      "povertyRate": 10,
+      "mainIndustries": [
+        "Pariwisata",
+        "Keuangan",
+        "Perikanan",
+        "Konstruksi"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 5000000000
+        },
+        {
+          "item": "Keuangan",
+          "value": 2000000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Konstruksi",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Perikanan",
+        "Garam",
+        "Kayu",
+        "Tanah subur"
+      ],
+      "economicRanking": 85,
+      "internetPenetration": 80,
+      "mobilePenetration": 90,
+      "electricityAccess": 100,
+      "roadLength": 3000,
+      "railwayLength": 0,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 80,
+      "educationIndex": 0.72,
+      "nationalMotto": "Ke atas, maju, bersama",
+      "nationalAnthem": "March On, Bahamaland",
+      "nationalAnimal": "Flamingo",
+      "nationalFlower": "Bunga Yellow Elder",
+      "nationalCuisine": [
+        "Conch Salad",
+        "Bahamian Stew Fish",
+        "Cracked Conch",
+        "Guava Duff",
+        "Rum Cake"
+      ],
+      "culturalHeritage": [
+        "Nassau",
+        "Freeport",
+        "Atlantis",
+        "Exuma"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Boxing Day",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 72,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1000,
+      "forestArea": 5,
+      "protectedAreas": 10,
+      "biodiversityRank": 25,
+      "carbonEmissions": 2,
+      "environmentalIndex": 50,
+      "riskScore": 30,
+      "politicalStability": 80,
+      "crimeIndex": 35,
+      "militarySpending": 0.5,
+      "peaceIndex": 30,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 60,
+      "easeOfDoingBusiness": 65,
+      "innovationIndex": 45,
+      "startupEcosystem": 40,
+      "investmentScore": 60,
+      "talentPool": 55,
+      "marketSize": 45,
+      "infrastructureQuality": 65,
+      "internetSpeed": 35,
+      "digitalAdoption": 65,
+      "techEcosystem": 45,
+      "aiReadiness": 35,
+      "startups": 20,
+      "phoneCode": "+1",
+      "tld": ".bs",
+      "isoCode": "BHS",
+      "isoCode2": "BS",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "pariwisata",
+        "mewah"
+      ]
+    }
+  },
+  {
+    "id": "negara-barbados",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Barbados",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Barbados - Negara kepulauan di Karibia dengan ekonomi maju dan pariwisata. Ibu kota: Bridgetown. Populasi: 290 ribu jiwa. Mata uang: Dolar Barbados (BBD). Bahasa: Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan pantai-pantai indah dan kualitas hidup tinggi. Rumah bagi Rihanna dan pantai-pantai eksotis.",
+    "meta": {
+      "officialName": "Barbados",
+      "shortName": "BRB",
+      "capital": "Bridgetown",
+      "capitalCoordinates": {
+        "lat": 13.0976,
+        "lng": -59.6165
+      },
+      "largestCity": "Bridgetown",
+      "demonym": "Barbados",
+      "subregion": "Caribbean",
+      "area": 430,
+      "areaRank": 175,
+      "coastline": 97,
+      "highestPoint": "Mount Hillaby",
+      "highestElevation": 336,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 13.17,
+        "lng": -59.53
+      },
+      "timezone": [
+        "Waktu Barbados"
+      ],
+      "utcOffset": [
+        "-4"
+      ],
+      "population": 290000,
+      "populationRank": 176,
+      "populationDensity": 674,
+      "populationGrowth": 0.2,
+      "medianAge": 39,
+      "lifeExpectancy": 79,
+      "fertilityRate": 1.5,
+      "urbanization": 31,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Hitam",
+          "percentage": 92
+        },
+        {
+          "name": "Kulit Putih",
+          "percentage": 4
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 4
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 80
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Bajan",
+          "percentage": 90
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1966-11-30",
+      "nationalHoliday": "30 November",
+      "legalSystem": "Common Law",
+      "constitution": "1966",
+      "administrativeDivisions": 11,
+      "memberships": [
+        "PBB",
+        "CARICOM",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 36,
+      "hdi": 0.79,
+      "hdiRank": 70,
+      "corruptionIndex": 65,
+      "currency": "Dolar Barbados",
+      "currencyCode": "BBD",
+      "gdp": 5000000000,
+      "gdpPerCapita": 17200,
+      "gdpPpp": 7000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 2,
+      "unemployment": 8,
+      "povertyRate": 10,
+      "mainIndustries": [
+        "Pariwisata",
+        "Keuangan",
+        "Manufaktur",
+        "Pertanian"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 2000000000
+        },
+        {
+          "item": "Keuangan",
+          "value": 1000000000
+        },
+        {
+          "item": "Rum",
+          "value": 500000000
+        },
+        {
+          "item": "Gula",
+          "value": 300000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 1000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 800000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 400000000
+        }
+      ],
+      "tradeBalance": -1000000000,
+      "naturalResources": [
+        "Gula",
+        "Rum",
+        "Perikanan",
+        "Kayu"
+      ],
+      "economicRanking": 90,
+      "internetPenetration": 85,
+      "mobilePenetration": 92,
+      "electricityAccess": 100,
+      "roadLength": 1000,
+      "railwayLength": 0,
+      "airports": 2,
+      "seaports": 2,
+      "healthcareAccess": 88,
+      "educationIndex": 0.78,
+      "nationalMotto": "Kebanggaan dan Industri",
+      "nationalAnthem": "In Plenty and In Time of Need",
+      "nationalAnimal": "Ikan Terbang",
+      "nationalFlower": "Bunga Pride of Barbados",
+      "nationalCuisine": [
+        "Cou-Cou",
+        "Flying Fish",
+        "Pudding and Souse",
+        "Bajan Rum",
+        "Macaroni Pie"
+      ],
+      "culturalHeritage": [
+        "Bridgetown",
+        "Barbados",
+        "Crop Over",
+        "Cave Shepherd"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Boxing Day",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 78,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 1000,
+      "forestArea": 5,
+      "protectedAreas": 5,
+      "biodiversityRank": 30,
+      "carbonEmissions": 4,
+      "environmentalIndex": 52,
+      "riskScore": 25,
+      "politicalStability": 85,
+      "crimeIndex": 25,
+      "militarySpending": 0.5,
+      "peaceIndex": 25,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 60,
+      "easeOfDoingBusiness": 65,
+      "innovationIndex": 45,
+      "startupEcosystem": 40,
+      "investmentScore": 55,
+      "talentPool": 55,
+      "marketSize": 30,
+      "infrastructureQuality": 70,
+      "internetSpeed": 35,
+      "digitalAdoption": 65,
+      "techEcosystem": 45,
+      "aiReadiness": 35,
+      "startups": 20,
+      "phoneCode": "+1",
+      "tld": ".bb",
+      "isoCode": "BRB",
+      "isoCode2": "BB",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "pariwisata",
+        "rihanna"
+      ]
+    }
+  },
+  {
+    "id": "negara-trinidad-dan-tobago",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Trinidad dan Tobago",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Trinidad dan Tobago - Negara kepulauan di Karibia dengan ekonomi minyak dan gas. Ibu kota: Port of Spain. Populasi: 1.4 juta jiwa. Mata uang: Dolar Trinidad (TTD). Bahasa: Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan minyak dan gas, serta budaya Karibia yang kaya. Rumah bagi karnaval dan masakan Karibia.",
+    "meta": {
+      "officialName": "Republik Trinidad dan Tobago",
+      "shortName": "TTO",
+      "capital": "Port of Spain",
+      "capitalCoordinates": {
+        "lat": 10.6549,
+        "lng": -61.5019
+      },
+      "largestCity": "Port of Spain",
+      "demonym": "Trinidad",
+      "subregion": "Caribbean",
+      "area": 5130,
+      "areaRank": 166,
+      "coastline": 362,
+      "highestPoint": "El Cerro del Aripo",
+      "highestElevation": 940,
+      "lowestPoint": "Laut Karibia",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 10.5,
+        "lng": -61.25
+      },
+      "timezone": [
+        "Waktu Trinidad"
+      ],
+      "utcOffset": [
+        "-4"
+      ],
+      "population": 1400000,
+      "populationRank": 151,
+      "populationDensity": 273,
+      "populationGrowth": 0.2,
+      "medianAge": 36,
+      "lifeExpectancy": 73,
+      "fertilityRate": 1.6,
+      "urbanization": 53,
+      "ethnicGroups": [
+        {
+          "name": "India",
+          "percentage": 35
+        },
+        {
+          "name": "Afrika",
+          "percentage": 34
+        },
+        {
+          "name": "Mestizo",
+          "percentage": 23
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 8
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 60
+        },
+        {
+          "name": "Hindu",
+          "percentage": 20
+        },
+        {
+          "name": "Islam",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Hindi",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1962-08-31",
+      "nationalHoliday": "31 Agustus",
+      "legalSystem": "Common Law",
+      "constitution": "1976",
+      "administrativeDivisions": 14,
+      "memberships": [
+        "PBB",
+        "CARICOM",
+        "Commonwealth",
+        "OPEC"
+      ],
+      "giniCoefficient": 40,
+      "hdi": 0.814,
+      "hdiRank": 54,
+      "corruptionIndex": 41,
+      "currency": "Dolar Trinidad",
+      "currencyCode": "TTD",
+      "gdp": 30000000000,
+      "gdpPerCapita": 21400,
+      "gdpPpp": 45000000000,
+      "gdpGrowth": 2,
+      "inflation": 3,
+      "unemployment": 4,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Minyak",
+        "Gas",
+        "Petrokimia",
+        "Pariwisata",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 10000000000
+        },
+        {
+          "item": "Gas",
+          "value": 8000000000
+        },
+        {
+          "item": "Petrokimia",
+          "value": 5000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 2000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 5000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 4000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 2000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Minyak",
+        "Gas",
+        "Perikanan",
+        "Kayu"
+      ],
+      "economicRanking": 70,
+      "internetPenetration": 75,
+      "mobilePenetration": 88,
+      "electricityAccess": 100,
+      "roadLength": 8000,
+      "railwayLength": 0,
+      "airports": 10,
+      "seaports": 5,
+      "healthcareAccess": 75,
+      "educationIndex": 0.72,
+      "nationalMotto": "Bersama kita berjuang, bersama kita menang",
+      "nationalAnthem": "Forged from the Love of Liberty",
+      "nationalAnimal": "Scarlet Ibis",
+      "nationalFlower": "Chaconia",
+      "nationalCuisine": [
+        "Doubles",
+        "Pelau",
+        "Roti",
+        "Callaloo",
+        "Shark and Bake"
+      ],
+      "culturalHeritage": [
+        "Port of Spain",
+        "Tobago",
+        "Asa Wright",
+        "Maracas Bay"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Karnaval",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 65,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 1500,
+      "forestArea": 40,
+      "protectedAreas": 10,
+      "biodiversityRank": 20,
+      "carbonEmissions": 15,
+      "environmentalIndex": 45,
+      "riskScore": 30,
+      "politicalStability": 70,
+      "crimeIndex": 40,
+      "militarySpending": 1,
+      "peaceIndex": 40,
+      "terrorismIndex": 10,
+      "refugeePopulation": 0,
+      "opportunityScore": 55,
+      "easeOfDoingBusiness": 60,
+      "innovationIndex": 45,
+      "startupEcosystem": 40,
+      "investmentScore": 50,
+      "talentPool": 60,
+      "marketSize": 50,
+      "infrastructureQuality": 55,
+      "internetSpeed": 25,
+      "digitalAdoption": 55,
+      "techEcosystem": 45,
+      "aiReadiness": 35,
+      "startups": 50,
+      "phoneCode": "+1",
+      "tld": ".tt",
+      "isoCode": "TTO",
+      "isoCode2": "TT",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "minyak",
+        "gas"
+      ]
+    }
+  },
+  {
+    "id": "negara-puerto-rico",
+    "kategori": "negara",
+    "wilayah": "american-karibia",
+    "nama": "Puerto Rico",
+    "tags": [
+      "Caribbean"
+    ],
+    "teks": "Puerto Rico - Wilayah Amerika Serikat di Karibia dengan budaya dan pariwisata. Ibu kota: San Juan. Populasi: 3.2 juta jiwa. Mata uang: Dolar AS (USD). Bahasa: Spanyol, Inggris. Sistem pemerintahan: Wilayah AS. Destinasi wisata Karibia dengan pantai-pantai indah. Rumah bagi budaya dan musik Latin yang kaya.",
+    "meta": {
+      "officialName": "Commonwealth of Puerto Rico",
+      "shortName": "PRI",
+      "capital": "San Juan",
+      "capitalCoordinates": {
+        "lat": 18.4663,
+        "lng": -66.1057
+      },
+      "largestCity": "San Juan",
+      "demonym": "Puerto Rico",
+      "subregion": "Caribbean",
+      "area": 9104,
+      "areaRank": 162,
+      "coastline": 501,
+      "highestPoint": "Cerro de Punta",
+      "highestElevation": 1338,
+      "lowestPoint": "Laut Karibia",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 18.25,
+        "lng": -66.5
+      },
+      "timezone": [
+        "Waktu Puerto Rico"
+      ],
+      "utcOffset": [
+        "-4"
+      ],
+      "population": 3200000,
+      "populationRank": 136,
+      "populationDensity": 351,
+      "populationGrowth": -0.5,
+      "medianAge": 42,
+      "lifeExpectancy": 79,
+      "fertilityRate": 1.2,
+      "urbanization": 93,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Putih",
+          "percentage": 70
+        },
+        {
+          "name": "Kulit Hitam",
+          "percentage": 15
+        },
+        {
+          "name": "Mestizo",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 70
+        },
+        {
+          "name": "Kristen Protestan",
+          "percentage": 25
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Spanyol",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 60,
+          "official": true
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "literacyRate": 92,
+      "governmentType": "Wilayah AS",
+      "independenceDay": "1898-12-10",
+      "nationalHoliday": "25 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "1952",
+      "administrativeDivisions": 78,
+      "memberships": [
+        "PBB",
+        "OAS"
+      ],
+      "giniCoefficient": 47,
+      "hdi": 0.84,
+      "hdiRank": 46,
+      "corruptionIndex": 60,
+      "currency": "Dolar AS",
+      "currencyCode": "USD",
+      "gdp": 100000000000,
+      "gdpPerCapita": 31250,
+      "gdpPpp": 120000000000,
+      "gdpGrowth": 1.5,
+      "inflation": 2.5,
+      "unemployment": 10,
+      "povertyRate": 40,
+      "mainIndustries": [
+        "Pariwisata",
+        "Manufaktur",
+        "Keuangan",
+        "Teknologi"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 30000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 20000000000
+        },
+        {
+          "item": "Keuangan",
+          "value": 15000000000
+        },
+        {
+          "item": "Teknologi",
+          "value": 10000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 20000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 15000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 10000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 8000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Kayu",
+        "Perikanan",
+        "Tanah subur"
+      ],
+      "economicRanking": 50,
+      "internetPenetration": 85,
+      "mobilePenetration": 92,
+      "electricityAccess": 100,
+      "roadLength": 25000,
+      "railwayLength": 0,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 85,
+      "educationIndex": 0.72,
+      "nationalMotto": "Joannes est nomen ejus",
+      "nationalAnthem": "La Borinqueña",
+      "nationalAnimal": "Coquí",
+      "nationalFlower": "Bunga Maga",
+      "nationalCuisine": [
+        "Mofongo",
+        "Arroz con Gandules",
+        "Pernil",
+        "Pasteles",
+        "Tostones"
+      ],
+      "culturalHeritage": [
+        "San Juan",
+        "El Yunque",
+        "Old San Juan",
+        "Ponce"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 72,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 1500,
+      "forestArea": 60,
+      "protectedAreas": 10,
+      "biodiversityRank": 15,
+      "carbonEmissions": 2.5,
+      "environmentalIndex": 55,
+      "riskScore": 30,
+      "politicalStability": 75,
+      "crimeIndex": 30,
+      "militarySpending": 0.5,
+      "peaceIndex": 30,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 60,
+      "easeOfDoingBusiness": 65,
+      "innovationIndex": 50,
+      "startupEcosystem": 55,
+      "investmentScore": 60,
+      "talentPool": 65,
+      "marketSize": 60,
+      "infrastructureQuality": 65,
+      "internetSpeed": 35,
+      "digitalAdoption": 70,
+      "techEcosystem": 55,
+      "aiReadiness": 45,
+      "startups": 100,
+      "phoneCode": "+1",
+      "tld": ".pr",
+      "isoCode": "PRI",
+      "isoCode2": "PR",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "american-karibia",
+        "karibia",
+        "pariwisata",
+        "latin"
+      ]
+    }
+  }
+]
