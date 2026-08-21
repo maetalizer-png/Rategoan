@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-21T16:18:24.687Z",
+  "generatedAt": "2026-08-21T18:32:50.504Z",
   "domain": "country",
   "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity)",
   "threshold": 0.3,
   "overall": {
     "n": 652,
-    "hit@1_rate": 0.931,
-    "hit@3_rate": 0.931,
-    "mrr": 0.931,
-    "fallback_rate": 0.069
+    "hit@1_rate": 0.9847,
+    "hit@3_rate": 0.9847,
+    "mrr": 0.9847,
+    "fallback_rate": 0.0153
   },
   "byTemplate": {
     "ibu-kota": {
@@ -20,155 +20,30 @@
     },
     "populasi": {
       "n": 163,
-      "hit@1_rate": 0.9939,
-      "hit@3_rate": 0.9939,
-      "mrr": 0.9939,
-      "fallback_rate": 0.0061
+      "hit@1_rate": 1,
+      "hit@3_rate": 1,
+      "mrr": 1,
+      "fallback_rate": 0
     },
     "mata-uang": {
       "n": 163,
-      "hit@1_rate": 0.7423,
-      "hit@3_rate": 0.7423,
-      "mrr": 0.7423,
-      "fallback_rate": 0.2577
+      "hit@1_rate": 0.9448,
+      "hit@3_rate": 0.9448,
+      "mrr": 0.9448,
+      "fallback_rate": 0.0552
     },
     "nama-resmi": {
       "n": 163,
-      "hit@1_rate": 0.9939,
-      "hit@3_rate": 0.9939,
-      "mrr": 0.9939,
-      "fallback_rate": 0.0061
+      "hit@1_rate": 1,
+      "hit@3_rate": 1,
+      "mrr": 1,
+      "fallback_rate": 0
     }
   },
   "misses": [
     {
-      "q": "Mata uang apa yang dipakai Nigeria?",
-      "expect": "Nigeria",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Senegal?",
-      "expect": "Senegal",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
       "q": "Mata uang apa yang dipakai Afrika Selatan?",
       "expect": "Afrika Selatan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Zambia?",
-      "expect": "Zambia",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Eswatini?",
-      "expect": "Eswatini",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Lesotho?",
-      "expect": "Lesotho",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Etiopia?",
-      "expect": "Etiopia",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Uganda?",
-      "expect": "Uganda",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Rwanda?",
-      "expect": "Rwanda",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Eritrea?",
-      "expect": "Eritrea",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Mesir?",
-      "expect": "Mesir",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Sudan?",
-      "expect": "Sudan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Bahama?",
-      "expect": "Bahama",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Brasil?",
-      "expect": "Brasil",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Argentina?",
-      "expect": "Argentina",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Peru?",
-      "expect": "Peru",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Venezuela?",
-      "expect": "Venezuela",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Bolivia?",
-      "expect": "Bolivia",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Paraguay?",
-      "expect": "Paraguay",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Siprus?",
-      "expect": "Siprus",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Palestina?",
-      "expect": "Palestina",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Bangladesh?",
-      "expect": "Bangladesh",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Bhutan?",
-      "expect": "Bhutan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Maladewa?",
-      "expect": "Maladewa",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Afghanistan?",
-      "expect": "Afghanistan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Kazakhstan?",
-      "expect": "Kazakhstan",
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
@@ -177,23 +52,8 @@
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
-      "q": "Mata uang apa yang dipakai Tajikistan?",
-      "expect": "Tajikistan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Malaysia?",
-      "expect": "Malaysia",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
       "q": "Mata uang apa yang dipakai Thailand?",
       "expect": "Thailand",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Filipina?",
-      "expect": "Filipina",
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
@@ -202,18 +62,8 @@
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
-      "q": "Mata uang apa yang dipakai Laos?",
-      "expect": "Laos",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
       "q": "Mata uang apa yang dipakai China?",
       "expect": "China",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Makau?",
-      "expect": "Makau",
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
@@ -227,38 +77,13 @@
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
-      "q": "Berapa populasi Inggris?",
-      "expect": "Inggris",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
       "q": "Mata uang apa yang dipakai Inggris?",
       "expect": "Inggris",
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
-      "q": "Apa nama resmi negara Inggris?",
-      "expect": "Inggris",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Belgia?",
-      "expect": "Belgia",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Austria?",
-      "expect": "Austria",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
       "q": "Mata uang apa yang dipakai Spanyol?",
       "expect": "Spanyol",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Rusia?",
-      "expect": "Rusia",
       "reason": "fallback (tidak ada di atas threshold)"
     },
     {
