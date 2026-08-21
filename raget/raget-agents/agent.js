@@ -193,14 +193,27 @@ async function tryMultiIntent(text, messages) {
   return replyA + '\n\n---\n\n' + replyB;
 }
 
+// Error boundary (Fase A vNext, FR-011 audit teknis: "Error specialist tidak
+// boleh menjatuhkan seluruh aplikasi"). respondCore() mengorkestrasi >30
+// mesin khusus berurutan tanpa try/catch individual per mesin - membungkus
+// tiap satu akan berisiko tinggi menyentuh kode yang sudah bench-hijau sejak
+// banyak ronde sebelumnya. Satu boundary di titik masuk tunggal ini cukup
+// untuk memenuhi kriteria: kalau SATU mesin di dalam rantai gagal (throw),
+// seluruh turn tidak ikut jatuh - pengguna tetap dapat balasan jujur, bukan
+// layar putih/error tak terjelaskan.
 async function respond(messages, prompt) {
-  const text = String(prompt || '').trim();
-  const opener = text ? routerIntent.moodOpener(text) : '';
-  const continuityOpener = text && !opener ? contextEngine.tryEmotionalContinuityOpener(text) : '';
-  if (text) contextEngine.noteTurnMood(text);
-  const reply = await respondCore(messages, prompt);
-  const finalOpener = opener || continuityOpener || '';
-  return finalOpener && !reply.startsWith(finalOpener) ? finalOpener + reply : reply;
+  try {
+    const text = String(prompt || '').trim();
+    const opener = text ? routerIntent.moodOpener(text) : '';
+    const continuityOpener = text && !opener ? contextEngine.tryEmotionalContinuityOpener(text) : '';
+    if (text) contextEngine.noteTurnMood(text);
+    const reply = await respondCore(messages, prompt);
+    const finalOpener = opener || continuityOpener || '';
+    return finalOpener && !reply.startsWith(finalOpener) ? finalOpener + reply : reply;
+  } catch (e) {
+    console.error('[Raget] respond() gagal, jatuh ke balasan jujur:', e);
+    return 'Maaf, ada bagian dari sistem saya yang sempat error saat memproses ini. Coba ulangi atau tanyakan dengan kata lain?';
+  }
 }
 
 async function respondCore(messages, prompt) {
