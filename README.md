@@ -91,7 +91,8 @@ raget/                            induk seluruh otak AI Raget
   raget-devlog/                   riwayat pengembangan proyek (dipakai balasan chat)
   raget-dataset/                  persona, few-shot, bench, basis pengetahuan umum
   raget-dataries/                 basis data terstruktur (negara, kota, bahasa, tokoh, dst)
-  raget-tools/                    skrip verifikasi: bench runner, pengukuran KV, devlog
+  raget-data/                     data domain dalam skema JSON tunggal (migrasi bertahap, lihat di bawah)
+  raget-tools/                    skrip verifikasi: bench runner, pengukuran KV, devlog, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
 travel/                           Jalanin — PWA turunan berdiri sendiri
 docs/                             panduan kustomisasi & lisensi (starter kit)
@@ -135,6 +136,14 @@ kota, bahasa, tokoh, sains, sejarah, kuliner, olahraga, etika budaya per
 negara, dan lainnya — dapat diperluas atau diganti total tanpa menyentuh kode.
 `raget/raget-dataset/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
 yang dimuat lewat pencarian satu-pintu.
+
+**Migrasi skema data (vNext Fase B, sedang berjalan)**: domain data yang tadinya array
+literal di dalam file `.js` (mencampur data dan logika) dipindah bertahap ke satu skema
+JSON standar (`{id, kategori, wilayah, nama, tags, teks, meta}`) di `raget/raget-data/`,
+dengan `*-store.js` yang tersisa hanya jadi loader tipis (fetch + fungsi query, nol data
+literal). Domain percontohan: **tokoh** (`raget-data/tokoh/tokoh.json`, 236 entri) — pola
+migrasinya didokumentasikan di `raget/raget-tools/migrate-tokoh-domain.mjs` untuk dipakai
+ulang di domain berikutnya.
 
 ## Kualitas & Pengujian
 
