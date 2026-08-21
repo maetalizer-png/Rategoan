@@ -399,7 +399,7 @@ async function respondCore(messages, prompt) {
     }
   }
 
-  const tokohReply = tokohStore.tryTokoh(text);
+  const tokohReply = await tokohStore.tryTokoh(text);
   if (tokohReply) {
     ragetDb.addNote(text, tokohReply, null, 'tokoh');
     return postProcess(tokohReply);
