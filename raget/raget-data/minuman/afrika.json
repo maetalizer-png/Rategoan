@@ -1,0 +1,316 @@
+[
+  {
+    "id": "minuman-teh-maroko",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Teh Maroko",
+    "tags": [
+      "atay",
+      "maroko",
+      "teh"
+    ],
+    "teks": "Teh Maroko (Atay) — teh hijau manis dengan daun mint segar, dituang dari tempat tinggi sebagai bagian dari keramahan khas Maroko.",
+    "meta": {
+      "country": "Maroko",
+      "type": "minuman",
+      "tags": [
+        "atay",
+        "maroko",
+        "teh"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-mesir",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Kopi Mesir",
+    "tags": [
+      "ahwa",
+      "mesir",
+      "kopi"
+    ],
+    "teks": "Kopi Mesir (Ahwa) — kopi kental khas Mesir yang diseduh dengan cangkir kecil, jadi bagian penting budaya kedai kopi lokal.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "ahwa",
+        "mesir",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-karkade",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Karkade",
+    "tags": [
+      "karkade",
+      "mesir"
+    ],
+    "teks": "Karkade — teh dari bunga rosela merah khas Mesir dan Sudan, diminum panas atau dingin dengan rasa asam segar.",
+    "meta": {
+      "country": "Mesir",
+      "type": "minuman",
+      "tags": [
+        "karkade",
+        "mesir"
+      ]
+    }
+  },
+  {
+    "id": "minuman-buna",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Buna",
+    "tags": [
+      "buna",
+      "etiopia",
+      "kopi"
+    ],
+    "teks": "Buna (Kopi Etiopia) — upacara minum kopi tradisional khas Etiopia, dianggap negara asal tanaman kopi dunia.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "minuman",
+      "tags": [
+        "buna",
+        "etiopia",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-tej",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Tej",
+    "tags": [
+      "tej",
+      "etiopia"
+    ],
+    "teks": "Tej — anggur madu tradisional khas Etiopia, diminum saat perayaan dan acara khusus.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "minuman",
+      "tags": [
+        "tej",
+        "etiopia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-rooibos",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Rooibos",
+    "tags": [
+      "rooibos",
+      "afrika selatan"
+    ],
+    "teks": "Rooibos — teh herbal khas Afrika Selatan dari tanaman semak merah, bebas kafein dan kaya antioksidan.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "minuman",
+      "tags": [
+        "rooibos",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "minuman-amarula",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Amarula",
+    "tags": [
+      "amarula",
+      "afrika selatan"
+    ],
+    "teks": "Amarula — minuman krim beralkohol khas Afrika Selatan dari buah marula, mirip Baileys dengan cita rasa buah tropis.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "minuman",
+      "tags": [
+        "amarula",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "minuman-palm-wine",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Palm Wine",
+    "tags": [
+      "palm wine",
+      "nigeria"
+    ],
+    "teks": "Palm Wine (Tuak Palem) — minuman fermentasi dari getah pohon palem, populer di Nigeria dan banyak negara Afrika Barat.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "minuman",
+      "tags": [
+        "palm wine",
+        "nigeria"
+      ]
+    }
+  },
+  {
+    "id": "minuman-zobo",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Zobo",
+    "tags": [
+      "zobo",
+      "nigeria"
+    ],
+    "teks": "Zobo — minuman dari bunga rosela khas Nigeria, mirip karkade, diminum dingin dengan tambahan jahe dan buah.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "minuman",
+      "tags": [
+        "zobo",
+        "nigeria"
+      ]
+    }
+  },
+  {
+    "id": "minuman-bissap",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Bissap",
+    "tags": [
+      "bissap",
+      "senegal"
+    ],
+    "teks": "Bissap — minuman dari bunga rosela khas Senegal dan Afrika Barat, manis segar dan sering dijual di pinggir jalan.",
+    "meta": {
+      "country": "Senegal",
+      "type": "minuman",
+      "tags": [
+        "bissap",
+        "senegal"
+      ]
+    }
+  },
+  {
+    "id": "minuman-chai-ya-tangawizi",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Chai ya Tangawizi",
+    "tags": [
+      "chai",
+      "kenya",
+      "jahe"
+    ],
+    "teks": "Chai ya Tangawizi — teh jahe khas Kenya dan Tanzania, diminum hangat sebagai penghangat tubuh dan penambah energi.",
+    "meta": {
+      "country": "Kenya",
+      "type": "minuman",
+      "tags": [
+        "chai",
+        "kenya",
+        "jahe"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-kenya",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Kopi Kenya",
+    "tags": [
+      "kopi",
+      "kenya"
+    ],
+    "teks": "Kopi Kenya — Kenya dikenal sebagai penghasil kopi arabika berkualitas tinggi dengan cita rasa asam segar khas dataran tinggi.",
+    "meta": {
+      "country": "Kenya",
+      "type": "minuman",
+      "tags": [
+        "kopi",
+        "kenya"
+      ]
+    }
+  },
+  {
+    "id": "minuman-mint-tea-aljazair",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Mint Tea Aljazair",
+    "tags": [
+      "mint tea",
+      "aljazair"
+    ],
+    "teks": "Mint Tea Aljazair — teh hijau manis dengan daun mint, diminum sepanjang hari sebagai simbol keramahan khas Maghreb.",
+    "meta": {
+      "country": "Aljazair",
+      "type": "minuman",
+      "tags": [
+        "mint tea",
+        "aljazair"
+      ]
+    }
+  },
+  {
+    "id": "minuman-boza",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Boza",
+    "tags": [
+      "boza",
+      "tunisia"
+    ],
+    "teks": "Boza — minuman fermentasi ringan dari gandum, populer di beberapa wilayah Afrika Utara dan Balkan dengan rasa manis kental.",
+    "meta": {
+      "country": "Tunisia",
+      "type": "minuman",
+      "tags": [
+        "boza",
+        "tunisia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-umqombothi",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Umqombothi",
+    "tags": [
+      "umqombothi",
+      "afrika selatan"
+    ],
+    "teks": "Umqombothi — bir tradisional dari jagung dan malt khas Afrika Selatan, sering disajikan dalam upacara adat.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "minuman",
+      "tags": [
+        "umqombothi",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kopi-tanzania",
+    "kategori": "minuman",
+    "wilayah": "afrika",
+    "nama": "Kopi Tanzania",
+    "tags": [
+      "kopi",
+      "tanzania",
+      "kilimanjaro"
+    ],
+    "teks": "Kopi Tanzania (Kilimanjaro Coffee) — kopi arabika dari lereng Gunung Kilimanjaro, terkenal dengan keasaman cerah dan aroma khas.",
+    "meta": {
+      "country": "Tanzania",
+      "type": "minuman",
+      "tags": [
+        "kopi",
+        "tanzania",
+        "kilimanjaro"
+      ]
+    }
+  }
+]

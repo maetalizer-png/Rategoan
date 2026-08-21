@@ -1,0 +1,318 @@
+[
+  {
+    "id": "minuman-espresso",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Espresso",
+    "tags": [
+      "espresso",
+      "italia",
+      "kopi"
+    ],
+    "teks": "Espresso — kopi pekat khas Italia yang diseduh dengan tekanan tinggi, dasar dari banyak minuman kopi lain.",
+    "meta": {
+      "country": "Italia",
+      "type": "minuman",
+      "tags": [
+        "espresso",
+        "italia",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-wine",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Wine",
+    "tags": [
+      "wine",
+      "prancis",
+      "anggur"
+    ],
+    "teks": "Wine (Anggur) — minuman fermentasi dari buah anggur, Prancis dan Italia dikenal sebagai produsen wine terbesar dunia.",
+    "meta": {
+      "country": "Prancis",
+      "type": "minuman",
+      "tags": [
+        "wine",
+        "prancis",
+        "anggur"
+      ]
+    }
+  },
+  {
+    "id": "minuman-champagne",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Champagne",
+    "tags": [
+      "champagne",
+      "prancis"
+    ],
+    "teks": "Champagne — anggur bersoda khas wilayah Champagne di Prancis, identik dengan perayaan dan momen istimewa.",
+    "meta": {
+      "country": "Prancis",
+      "type": "minuman",
+      "tags": [
+        "champagne",
+        "prancis"
+      ]
+    }
+  },
+  {
+    "id": "minuman-bir-jerman",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Bir Jerman",
+    "tags": [
+      "bir",
+      "jerman",
+      "oktoberfest"
+    ],
+    "teks": "Bir Jerman (Bier) — Jerman punya tradisi bir kuat dengan hukum kemurnian Reinheitsgebot, dirayakan lewat festival Oktoberfest.",
+    "meta": {
+      "country": "Jerman",
+      "type": "minuman",
+      "tags": [
+        "bir",
+        "jerman",
+        "oktoberfest"
+      ]
+    }
+  },
+  {
+    "id": "minuman-gluhwein",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Glühwein",
+    "tags": [
+      "gluhwein",
+      "jerman"
+    ],
+    "teks": "Glühwein — anggur merah panas berempah khas Jerman, populer diminum saat musim dingin dan pasar Natal.",
+    "meta": {
+      "country": "Jerman",
+      "type": "minuman",
+      "tags": [
+        "gluhwein",
+        "jerman"
+      ]
+    }
+  },
+  {
+    "id": "minuman-whisky-skotlandia",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Whisky Skotlandia",
+    "tags": [
+      "whisky",
+      "skotlandia"
+    ],
+    "teks": "Whisky Skotlandia — minuman beralkohol suling dari gandum yang dimatangkan dalam tong kayu, ikon minuman Skotlandia.",
+    "meta": {
+      "country": "Inggris",
+      "type": "minuman",
+      "tags": [
+        "whisky",
+        "skotlandia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-teh-inggris",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Teh Inggris",
+    "tags": [
+      "teh",
+      "inggris"
+    ],
+    "teks": "Teh Inggris (English Breakfast Tea) — teh hitam kuat yang biasa diminum dengan susu, jadi tradisi minum teh sore khas Inggris.",
+    "meta": {
+      "country": "Inggris",
+      "type": "minuman",
+      "tags": [
+        "teh",
+        "inggris"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sangria",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Sangria",
+    "tags": [
+      "sangria",
+      "spanyol"
+    ],
+    "teks": "Sangria — minuman anggur campur buah-buahan segar khas Spanyol, populer diminum saat cuaca panas.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "minuman",
+      "tags": [
+        "sangria",
+        "spanyol"
+      ]
+    }
+  },
+  {
+    "id": "minuman-sherry",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Sherry",
+    "tags": [
+      "sherry",
+      "spanyol"
+    ],
+    "teks": "Sherry — anggur yang diperkuat (fortified wine) khas wilayah Jerez di Spanyol, punya rasa mulai kering hingga manis.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "minuman",
+      "tags": [
+        "sherry",
+        "spanyol"
+      ]
+    }
+  },
+  {
+    "id": "minuman-vodka-rusia",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Vodka Rusia",
+    "tags": [
+      "vodka",
+      "rusia"
+    ],
+    "teks": "Vodka Rusia — minuman beralkohol suling bening khas Rusia, biasa diminum dingin dan langsung (neat).",
+    "meta": {
+      "country": "Rusia",
+      "type": "minuman",
+      "tags": [
+        "vodka",
+        "rusia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-kvass",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Kvass",
+    "tags": [
+      "kvass",
+      "rusia"
+    ],
+    "teks": "Kvass — minuman fermentasi ringan khas Rusia dan Eropa Timur, dibuat dari roti gandum hitam, rasanya sedikit asam manis.",
+    "meta": {
+      "country": "Rusia",
+      "type": "minuman",
+      "tags": [
+        "kvass",
+        "rusia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-grappa",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Grappa",
+    "tags": [
+      "grappa",
+      "italia"
+    ],
+    "teks": "Grappa — minuman beralkohol suling khas Italia, dibuat dari sisa kulit dan biji anggur setelah proses pembuatan wine.",
+    "meta": {
+      "country": "Italia",
+      "type": "minuman",
+      "tags": [
+        "grappa",
+        "italia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-fika-coffee",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Fika Coffee",
+    "tags": [
+      "fika",
+      "swedia",
+      "kopi"
+    ],
+    "teks": "Fika Coffee — tradisi minum kopi santai khas Swedia yang jadi momen sosial penting sehari-hari, biasa dengan kue manis.",
+    "meta": {
+      "country": "Swedia",
+      "type": "minuman",
+      "tags": [
+        "fika",
+        "swedia",
+        "kopi"
+      ]
+    }
+  },
+  {
+    "id": "minuman-aquavit",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Aquavit",
+    "tags": [
+      "aquavit",
+      "norwegia"
+    ],
+    "teks": "Aquavit — minuman beralkohol suling berempah khas negara-negara Nordik seperti Swedia dan Norwegia, dibumbui adas/karaway.",
+    "meta": {
+      "country": "Norwegia",
+      "type": "minuman",
+      "tags": [
+        "aquavit",
+        "norwegia"
+      ]
+    }
+  },
+  {
+    "id": "minuman-bir-belgia",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Bir Belgia",
+    "tags": [
+      "bir",
+      "belgia",
+      "trappist"
+    ],
+    "teks": "Bir Belgia — Belgia terkenal dengan ragam bir tradisi biara (Trappist) yang kaya rasa dan proses fermentasi khas.",
+    "meta": {
+      "country": "Belgia",
+      "type": "minuman",
+      "tags": [
+        "bir",
+        "belgia",
+        "trappist"
+      ]
+    }
+  },
+  {
+    "id": "minuman-pilsner-ceko",
+    "kategori": "minuman",
+    "wilayah": "eropa",
+    "nama": "Pilsner Ceko",
+    "tags": [
+      "pilsner",
+      "ceko",
+      "bir"
+    ],
+    "teks": "Pilsner Ceko — bir jenis pilsner pertama kali dibuat di kota Plzeň, Ceko, jadi cikal bakal gaya bir pilsner dunia.",
+    "meta": {
+      "country": "Ceko",
+      "type": "minuman",
+      "tags": [
+        "pilsner",
+        "ceko",
+        "bir"
+      ]
+    }
+  }
+]
