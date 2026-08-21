@@ -1,0 +1,405 @@
+[
+  {
+    "id": "etika-sapaan-prancis",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Prancis",
+    "tags": [
+      "prancis",
+      "la bise",
+      "cium pipi"
+    ],
+    "teks": "Sapaan Prancis — la bise, cium pipi ringan (biasanya dua kali), umum di antara teman dan keluarga, bukan di bisnis formal.",
+    "meta": {
+      "country": "Prancis",
+      "type": "sapaan",
+      "tags": [
+        "prancis",
+        "la bise",
+        "cium pipi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-prancis",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tip Prancis",
+    "tags": [
+      "prancis",
+      "tip"
+    ],
+    "teks": "Tip di Prancis — service charge umumnya sudah termasuk harga (service compris); tip tambahan kecil untuk pelayanan bagus.",
+    "meta": {
+      "country": "Prancis",
+      "type": "tip",
+      "tags": [
+        "prancis",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tu-vous-prancis",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Tu-Vous Prancis",
+    "tags": [
+      "prancis",
+      "formalitas"
+    ],
+    "teks": "Tabu di Prancis — memanggil orang dengan \"tu\" (kamu informal) sebelum diminta dianggap kurang sopan pada orang asing.",
+    "meta": {
+      "country": "Prancis",
+      "type": "tabu",
+      "tags": [
+        "prancis",
+        "formalitas"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-jerman",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Jerman",
+    "tags": [
+      "jerman",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Jerman — jabat tangan tegas dan singkat dengan kontak mata langsung adalah sapaan bisnis standar.",
+    "meta": {
+      "country": "Jerman",
+      "type": "sapaan",
+      "tags": [
+        "jerman",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-jerman",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tip Jerman",
+    "tags": [
+      "jerman",
+      "tip"
+    ],
+    "teks": "Tip di Jerman — membulatkan tagihan atau menambah sekitar 5-10% lazim, biasanya disebutkan langsung ke pelayan.",
+    "meta": {
+      "country": "Jerman",
+      "type": "tip",
+      "tags": [
+        "jerman",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-keterlambatan-jerman",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Keterlambatan Jerman",
+    "tags": [
+      "jerman",
+      "ketepatan waktu"
+    ],
+    "teks": "Tabu di Jerman — datang terlambat ke janji temu dianggap sangat tidak sopan; ketepatan waktu sangat dijunjung.",
+    "meta": {
+      "country": "Jerman",
+      "type": "tabu",
+      "tags": [
+        "jerman",
+        "ketepatan waktu"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-italia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Italia",
+    "tags": [
+      "italia",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Italia — jabat tangan hangat, sering disertai kontak mata dan senyum; teman dekat berpelukan atau cium pipi.",
+    "meta": {
+      "country": "Italia",
+      "type": "sapaan",
+      "tags": [
+        "italia",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-italia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tip Italia",
+    "tags": [
+      "italia",
+      "tip",
+      "coperto"
+    ],
+    "teks": "Tip di Italia — coperto (biaya tempat duduk) sering ditambahkan otomatis; tip tambahan kecil opsional untuk pelayanan bagus.",
+    "meta": {
+      "country": "Italia",
+      "type": "tip",
+      "tags": [
+        "italia",
+        "tip",
+        "coperto"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-cappuccino-italia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Cappuccino Italia",
+    "tags": [
+      "italia",
+      "cappuccino"
+    ],
+    "teks": "Tabu di Italia — memesan cappuccino setelah makan siang/malam dianggap aneh oleh warga lokal, biasa diminum saat sarapan.",
+    "meta": {
+      "country": "Italia",
+      "type": "tabu",
+      "tags": [
+        "italia",
+        "cappuccino"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-inggris",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Inggris",
+    "tags": [
+      "inggris",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Inggris — jabat tangan ringan dan sopan; menjaga jarak personal serta menghindari topik terlalu pribadi saat awal kenal.",
+    "meta": {
+      "country": "Inggris",
+      "type": "sapaan",
+      "tags": [
+        "inggris",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-inggris",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tip Inggris",
+    "tags": [
+      "inggris",
+      "tip"
+    ],
+    "teks": "Tip di Inggris — sekitar 10-12,5% di restoran bila service charge belum termasuk; tip tidak wajib di pub.",
+    "meta": {
+      "country": "Inggris",
+      "type": "tip",
+      "tags": [
+        "inggris",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-antrean-inggris",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Antrean Inggris",
+    "tags": [
+      "inggris",
+      "antrean"
+    ],
+    "teks": "Tabu di Inggris — memotong antrean (queue) dianggap pelanggaran etika sosial yang cukup serius.",
+    "meta": {
+      "country": "Inggris",
+      "type": "tabu",
+      "tags": [
+        "inggris",
+        "antrean"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-spanyol",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Spanyol",
+    "tags": [
+      "spanyol",
+      "dos besos"
+    ],
+    "teks": "Sapaan Spanyol — dos besos, cium pipi dua kali (kanan lalu kiri), umum antar teman dan keluarga.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "sapaan",
+      "tags": [
+        "spanyol",
+        "dos besos"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-spanyol",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tip Spanyol",
+    "tags": [
+      "spanyol",
+      "tip"
+    ],
+    "teks": "Tip di Spanyol — tip kecil (membulatkan tagihan) dihargai namun tidak wajib, jarang lebih dari 10%.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "tip",
+      "tags": [
+        "spanyol",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-jam-makan-spanyol",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Jam Makan Spanyol",
+    "tags": [
+      "spanyol",
+      "jam makan"
+    ],
+    "teks": "Tabu di Spanyol — makan malam sebelum jam 9 malam terasa aneh bagi warga lokal karena jam makan malam umumnya larut.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "tabu",
+      "tags": [
+        "spanyol",
+        "jam makan"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-belanda",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Belanda",
+    "tags": [
+      "belanda",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Belanda — jabat tangan singkat dan tegas dengan kontak mata, sering disertai menyebutkan nama sendiri.",
+    "meta": {
+      "country": "Belanda",
+      "type": "sapaan",
+      "tags": [
+        "belanda",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-basa-basi-belanda",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Basa-basi Belanda",
+    "tags": [
+      "belanda",
+      "keterusterangan"
+    ],
+    "teks": "Tabu di Belanda — berbicara terlalu berputar-putar dianggap membuang waktu; masyarakat Belanda menghargai keterusterangan langsung.",
+    "meta": {
+      "country": "Belanda",
+      "type": "tabu",
+      "tags": [
+        "belanda",
+        "keterusterangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-rusia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Rusia",
+    "tags": [
+      "rusia",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Rusia — jabat tangan tegas antar pria (wanita sering hanya mengangguk); tersenyum pada orang asing di jalan dianggap tidak biasa.",
+    "meta": {
+      "country": "Rusia",
+      "type": "sapaan",
+      "tags": [
+        "rusia",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-jabat-tangan-ambang-pintu-rusia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tabu Jabat Tangan Ambang Pintu Rusia",
+    "tags": [
+      "rusia",
+      "ambang pintu"
+    ],
+    "teks": "Tabu di Rusia — berjabat tangan di ambang pintu dipercaya membawa nasib buruk menurut kepercayaan rakyat.",
+    "meta": {
+      "country": "Rusia",
+      "type": "tabu",
+      "tags": [
+        "rusia",
+        "ambang pintu"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-swedia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Sapaan Swedia",
+    "tags": [
+      "swedia",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Swedia — jabat tangan singkat dan sopan; menjaga jarak personal cukup jauh dibanding budaya Latin.",
+    "meta": {
+      "country": "Swedia",
+      "type": "sapaan",
+      "tags": [
+        "swedia",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-swedia",
+    "kategori": "etika",
+    "wilayah": "eropa",
+    "nama": "Tip Swedia",
+    "tags": [
+      "swedia",
+      "tip"
+    ],
+    "teks": "Tip di Swedia — tip tidak wajib karena upah pelayan sudah layak; membulatkan tagihan cukup untuk pelayanan istimewa.",
+    "meta": {
+      "country": "Swedia",
+      "type": "tip",
+      "tags": [
+        "swedia",
+        "tip"
+      ]
+    }
+  }
+]

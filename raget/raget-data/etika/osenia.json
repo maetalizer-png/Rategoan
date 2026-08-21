@@ -1,0 +1,382 @@
+[
+  {
+    "id": "etika-sapaan-australia",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Australia",
+    "tags": [
+      "australia",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Australia — jabat tangan santai dan ramah, sapaan informal seperti \"g'day\" umum digunakan sehari-hari.",
+    "meta": {
+      "country": "Australia",
+      "type": "sapaan",
+      "tags": [
+        "australia",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-australia",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tip Australia",
+    "tags": [
+      "australia",
+      "tip"
+    ],
+    "teks": "Tip di Australia — tip tidak wajib karena upah pekerja sudah diatur layak; tip kecil hanya untuk pelayanan istimewa.",
+    "meta": {
+      "country": "Australia",
+      "type": "tip",
+      "tags": [
+        "australia",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-formalitas-berlebih-australia",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Formalitas Berlebih Australia",
+    "tags": [
+      "australia",
+      "formalitas"
+    ],
+    "teks": "Tabu di Australia — memotong antrean atau bersikap terlalu formal/kaku bisa dianggap aneh; budaya lokal cenderung santai dan egaliter.",
+    "meta": {
+      "country": "Australia",
+      "type": "tabu",
+      "tags": [
+        "australia",
+        "formalitas"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-selandia-baru",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Selandia Baru",
+    "tags": [
+      "selandia baru",
+      "hongi"
+    ],
+    "teks": "Sapaan Selandia Baru — jabat tangan hangat; dalam budaya Maori, hongi (menempelkan hidung dan dahi) adalah sapaan tradisional khusus.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "sapaan",
+      "tags": [
+        "selandia baru",
+        "hongi"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-selandia-baru",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tip Selandia Baru",
+    "tags": [
+      "selandia baru",
+      "tip"
+    ],
+    "teks": "Tip di Selandia Baru — tip tidak menjadi kebiasaan umum, meski belakangan mulai muncul di beberapa restoran kota besar.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "tip",
+      "tags": [
+        "selandia baru",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kepala-selandia-baru",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Kepala Selandia Baru",
+    "tags": [
+      "selandia baru",
+      "kepala"
+    ],
+    "teks": "Tabu di Selandia Baru — duduk di atas meja atau menaruh barang di atas kepala orang lain dianggap tidak sopan menurut adat Maori.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "tabu",
+      "tags": [
+        "selandia baru",
+        "kepala"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-fiji",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Fiji",
+    "tags": [
+      "fiji",
+      "bula"
+    ],
+    "teks": "Sapaan Fiji — sapaan \"Bula\" diucapkan hangat dengan senyum lebar, sering disertai jabat tangan santai.",
+    "meta": {
+      "country": "Fiji",
+      "type": "sapaan",
+      "tags": [
+        "fiji",
+        "bula"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-kepala-fiji",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Kepala Fiji",
+    "tags": [
+      "fiji",
+      "kepala"
+    ],
+    "teks": "Tabu di Fiji — menyentuh kepala orang lain, termasuk anak-anak, dianggap tidak sopan karena kepala dianggap bagian tubuh yang suci.",
+    "meta": {
+      "country": "Fiji",
+      "type": "tabu",
+      "tags": [
+        "fiji",
+        "kepala"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-papua-nugini",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Papua Nugini",
+    "tags": [
+      "papua new guinea",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Papua Nugini — jabat tangan hangat; di banyak komunitas, menyapa dengan menyebut hubungan kekerabatan dianggap sopan.",
+    "meta": {
+      "country": "Papua New Guinea",
+      "type": "sapaan",
+      "tags": [
+        "papua new guinea",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-samoa",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Samoa",
+    "tags": [
+      "samoa",
+      "talofa"
+    ],
+    "teks": "Sapaan Samoa — sapaan \"Talofa\" hangat, sering disertai senyum dan sedikit anggukan kepala sebagai tanda hormat.",
+    "meta": {
+      "country": "Samoa",
+      "type": "sapaan",
+      "tags": [
+        "samoa",
+        "talofa"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-berdiri-samoa",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Berdiri Samoa",
+    "tags": [
+      "samoa",
+      "fono"
+    ],
+    "teks": "Tabu di Samoa — berdiri saat orang lain duduk sedang berbicara penting dianggap kurang sopan dalam pertemuan adat (fono).",
+    "meta": {
+      "country": "Samoa",
+      "type": "tabu",
+      "tags": [
+        "samoa",
+        "fono"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-tonga",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Tonga",
+    "tags": [
+      "tonga",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Tonga — jabat tangan lembut, sering disertai sedikit menunduk sebagai tanda hormat pada bangsawan atau tetua.",
+    "meta": {
+      "country": "Tonga",
+      "type": "sapaan",
+      "tags": [
+        "tonga",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-topi-tonga",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Topi Tonga",
+    "tags": [
+      "tonga",
+      "topi"
+    ],
+    "teks": "Tabu di Tonga — mengenakan topi di dalam ruangan resmi atau di hadapan raja dianggap tidak sopan.",
+    "meta": {
+      "country": "Tonga",
+      "type": "tabu",
+      "tags": [
+        "tonga",
+        "topi"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kepulauan-solomon",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Kepulauan Solomon",
+    "tags": [
+      "kepulauan solomon",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Kepulauan Solomon — jabat tangan santai, senyum ramah, dan pertanyaan basa-basi tentang keluarga umum dipakai.",
+    "meta": {
+      "country": "Kepulauan Solomon",
+      "type": "sapaan",
+      "tags": [
+        "kepulauan solomon",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-vanuatu",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Vanuatu",
+    "tags": [
+      "vanuatu",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Vanuatu — jabat tangan hangat; menyapa dengan menyebut nama desa/klan dianggap ramah dan sopan.",
+    "meta": {
+      "country": "Vanuatu",
+      "type": "sapaan",
+      "tags": [
+        "vanuatu",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-tanah-adat-vanuatu",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Tanah Adat Vanuatu",
+    "tags": [
+      "vanuatu",
+      "tanah adat"
+    ],
+    "teks": "Tabu di Vanuatu — memasuki area yang ditandai sebagai tanah adat (tabu/nasara) tanpa izin dianggap pelanggaran serius.",
+    "meta": {
+      "country": "Vanuatu",
+      "type": "tabu",
+      "tags": [
+        "vanuatu",
+        "tanah adat"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-kepulauan-marshall",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Kepulauan Marshall",
+    "tags": [
+      "kepulauan marshall",
+      "jabat tangan"
+    ],
+    "teks": "Sapaan Kepulauan Marshall — jabat tangan lembut disertai senyum; menanyakan kabar keluarga dianggap ramah dan lazim.",
+    "meta": {
+      "country": "Kepulauan Marshall",
+      "type": "sapaan",
+      "tags": [
+        "kepulauan marshall",
+        "jabat tangan"
+      ]
+    }
+  },
+  {
+    "id": "etika-tip-fiji",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tip Fiji",
+    "tags": [
+      "fiji",
+      "tip"
+    ],
+    "teks": "Tip di Fiji — tip tidak menjadi tradisi lokal, meski beberapa resor besar mulai menerapkan service charge tambahan.",
+    "meta": {
+      "country": "Fiji",
+      "type": "tip",
+      "tags": [
+        "fiji",
+        "tip"
+      ]
+    }
+  },
+  {
+    "id": "etika-tabu-menunjuk-papua-nugini",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Tabu Menunjuk Papua Nugini",
+    "tags": [
+      "papua new guinea",
+      "menunjuk"
+    ],
+    "teks": "Tabu di Papua Nugini — menunjuk langsung dengan jari ke orang lain saat berbicara dianggap kasar di banyak komunitas.",
+    "meta": {
+      "country": "Papua New Guinea",
+      "type": "tabu",
+      "tags": [
+        "papua new guinea",
+        "menunjuk"
+      ]
+    }
+  },
+  {
+    "id": "etika-sapaan-aborigin",
+    "kategori": "etika",
+    "wilayah": "osenia",
+    "nama": "Sapaan Aborigin",
+    "tags": [
+      "australia",
+      "aborigin"
+    ],
+    "teks": "Sapaan Australia Adat — dalam budaya Aborigin, kontak mata langsung dengan tetua kadang dihindari sebagai tanda hormat, berbeda dari kebiasaan Barat.",
+    "meta": {
+      "country": "Australia",
+      "type": "sapaan",
+      "tags": [
+        "australia",
+        "aborigin"
+      ]
+    }
+  }
+]
