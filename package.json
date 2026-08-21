@@ -1,0 +1,15 @@
+{
+  "name": "rategoan",
+  "private": true,
+  "description": "Chat AI 100% local-first berbasis rule/template - PWA HTML/CSS/JavaScript murni, tanpa build step untuk aplikasi itu sendiri. package.json ini HANYA untuk tooling dev (lint, bench, pengukuran KV) - tidak ada langkah build untuk menjalankan aplikasi, lihat README.md bagian Menjalankan.",
+  "type": "module",
+  "scripts": {
+    "lint": "node raget/raget-tools/lint-check.mjs",
+    "bench": "node raget/raget-tools/run-bench.mjs http://localhost:8099",
+    "measure-kv": "node raget/raget-tools/measure-kv.mjs http://localhost:8099"
+  },
+  "devDependencies": {
+    "eslint": "^10.1.0",
+    "playwright": "^1.0.0"
+  }
+}

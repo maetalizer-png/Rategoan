@@ -138,17 +138,29 @@ yang dimuat lewat pencarian satu-pintu.
 
 ## Kualitas & Pengujian
 
-Setiap perubahan diverifikasi lewat suite bench Playwright
-(`raget/raget-tools/run-bench.mjs`) sebelum dianggap selesai — **1.180 kasus**
-core-suite dengan target lolos ≥97% (saat ini 100%), plus 10 kasus stub
-informatif (butuh attach file nyata, tidak dihitung ke target). Skor kualitas gabungan
-(Q) dan komponen K/A/U/D/V diukur lewat `raget/raget-tools/measure-kv.mjs`
-dengan komposisi 100 kueri tetap agar hasil antar-perubahan bisa dibandingkan
-apel-ke-apel — skor terakhir **Q=82**.
+Setiap perubahan lewat dua gerbang berurutan sebelum dianggap selesai:
+
+1. **Lint/syntax** (`raget/raget-tools/lint-check.mjs`) — `node --check` di
+   seluruh 307 file `.js`/`.mjs` (menangkap error yang gagal total di
+   runtime browser walau lolos review manual) + ESLint dengan
+   `eslint.config.mjs` beraturan correctness-only (variabel tak
+   terdefinisi, import/export salah, dead code jelas — bukan gaya
+   penulisan, supaya gerbang ini tidak memicu perombakan gaya di 300+ file
+   yang sudah berjalan). Tanpa dependency `@eslint/js`/`globals`, konsisten
+   dengan prinsip "tanpa build step" — ini murni alat verifikasi dev-time.
+2. **Bench Playwright** (`raget/raget-tools/run-bench.mjs`) — **1.180
+   kasus** core-suite dengan target lolos ≥97% (saat ini 100%), plus 10
+   kasus stub informatif (butuh attach file nyata, tidak dihitung ke
+   target).
+
+Skor kualitas gabungan (Q) dan komponen K/A/U/D/V diukur lewat
+`raget/raget-tools/measure-kv.mjs` dengan komposisi 100 kueri tetap agar
+hasil antar-perubahan bisa dibandingkan apel-ke-apel — skor terakhir **Q=82**.
 
 ```
-node raget/raget-tools/run-bench.mjs http://localhost:8099
-node raget/raget-tools/measure-kv.mjs http://localhost:8099
+npm run lint     # atau: node raget/raget-tools/lint-check.mjs
+npm run bench    # atau: node raget/raget-tools/run-bench.mjs http://localhost:8099
+npm run measure-kv
 ```
 
 Riwayat lengkap perubahan, keputusan desain, dan kelemahan yang jujur
