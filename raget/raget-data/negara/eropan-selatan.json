@@ -1,0 +1,1967 @@
+[
+  {
+    "id": "negara-italia",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Italia",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Italia - Negara di Eropa Selatan dengan sejarah Romawi dan Renaissance. Ibu kota: Roma. Populasi: 59 juta jiwa. Mata uang: Euro (EUR). Bahasa: Italia. Sistem pemerintahan: Republik Parlementer. Anggota G7, G20, dan UE. Negara dengan seni, arsitektur, dan kuliner terbaik dunia. Rumah bagi Colosseum, Menara Pisa, Vatikan, dan kanal Venesia. Pusat mode dan desain global. Negara dengan warisan budaya UNESCO terbanyak di dunia.",
+    "meta": {
+      "officialName": "Republik Italia",
+      "shortName": "ITA",
+      "capital": "Roma",
+      "capitalCoordinates": {
+        "lat": 41.9028,
+        "lng": 12.4964
+      },
+      "largestCity": "Roma",
+      "demonym": "Italia",
+      "subregion": "Southern Europe",
+      "area": 301340,
+      "areaRank": 71,
+      "coastline": 7600,
+      "highestPoint": "Mont Blanc",
+      "highestElevation": 4808,
+      "lowestPoint": "Laut Mediterania",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Prancis",
+        "Swiss",
+        "Austria",
+        "Slovenia",
+        "San Marino",
+        "Vatikan"
+      ],
+      "coordinates": {
+        "lat": 41.9,
+        "lng": 12.6
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 59000000,
+      "populationRank": 23,
+      "populationDensity": 196,
+      "populationGrowth": -0.1,
+      "medianAge": 46.5,
+      "lifeExpectancy": 83.4,
+      "fertilityRate": 1.2,
+      "urbanization": 69,
+      "ethnicGroups": [
+        {
+          "name": "Italia",
+          "percentage": 92
+        },
+        {
+          "name": "Rumania",
+          "percentage": 2
+        },
+        {
+          "name": "Afrika Utara",
+          "percentage": 2
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 4
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 80
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 15
+        },
+        {
+          "name": "Islam",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Italia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 30
+        },
+        {
+          "name": "Prancis",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1861-03-17",
+      "nationalHoliday": "2 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "1948",
+      "administrativeDivisions": 20,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "G7",
+        "G20",
+        "OECD"
+      ],
+      "giniCoefficient": 35.9,
+      "hdi": 0.895,
+      "hdiRank": 29,
+      "corruptionIndex": 56,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 2200000000000,
+      "gdpPerCapita": 37300,
+      "gdpPpp": 3200000000000,
+      "gdpGrowth": 1,
+      "inflation": 2.5,
+      "unemployment": 7.5,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Pariwisata",
+        "Luxury",
+        "Otomotif",
+        "Manufaktur",
+        "Makanan"
+      ],
+      "exports": [
+        {
+          "item": "Luxury",
+          "value": 150000000000
+        },
+        {
+          "item": "Otomotif",
+          "value": 100000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 80000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 70000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 80000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 70000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 60000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 50000000000
+        }
+      ],
+      "tradeBalance": 50000000000,
+      "naturalResources": [
+        "Gas",
+        "Kayu",
+        "Air",
+        "Tanah subur"
+      ],
+      "economicRanking": 10,
+      "internetPenetration": 90,
+      "mobilePenetration": 96,
+      "electricityAccess": 100,
+      "roadLength": 700000,
+      "railwayLength": 20000,
+      "airports": 200,
+      "seaports": 50,
+      "healthcareAccess": 92,
+      "educationIndex": 0.78,
+      "nationalMotto": "Persatuan, Kebebasan, Kemakmuran",
+      "nationalAnthem": "Il Canto degli Italiani",
+      "nationalAnimal": "Serigala",
+      "nationalFlower": "Bunga Lily",
+      "nationalCuisine": [
+        "Pizza",
+        "Pasta",
+        "Gelato",
+        "Tiramisu",
+        "Espresso"
+      ],
+      "culturalHeritage": [
+        "Colosseum",
+        "Vatican",
+        "Florence",
+        "Venice"
+      ],
+      "publicHolidays": [
+        "Hari Republik",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 78,
+      "climate": "Mediterania",
+      "averageTemperature": 15,
+      "averageRainfall": 600,
+      "forestArea": 31,
+      "protectedAreas": 10,
+      "biodiversityRank": 20,
+      "carbonEmissions": 5,
+      "environmentalIndex": 55,
+      "riskScore": 25,
+      "politicalStability": 70,
+      "crimeIndex": 25,
+      "militarySpending": 1.5,
+      "peaceIndex": 30,
+      "terrorismIndex": 12,
+      "refugeePopulation": 100000,
+      "opportunityScore": 72,
+      "easeOfDoingBusiness": 65,
+      "innovationIndex": 70,
+      "startupEcosystem": 72,
+      "investmentScore": 68,
+      "talentPool": 85,
+      "marketSize": 88,
+      "infrastructureQuality": 78,
+      "internetSpeed": 45,
+      "digitalAdoption": 78,
+      "techEcosystem": 72,
+      "aiReadiness": 62,
+      "startups": 3000,
+      "phoneCode": "+39",
+      "tld": ".it",
+      "isoCode": "ITA",
+      "isoCode2": "IT",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "sejarah",
+        "seni",
+        "kuliner"
+      ]
+    }
+  },
+  {
+    "id": "negara-spanyol",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Spanyol",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Spanyol - Negara di Eropa Selatan dengan budaya dan pariwisata kaya. Ibu kota: Madrid. Populasi: 47 juta jiwa. Mata uang: Euro (EUR). Bahasa: Spanyol. Sistem pemerintahan: Monarki Konstitusional Parlementer. Anggota UE dan NATO. Negara dengan seni, tari Flamenco, dan arsitektur indah. Rumah bagi Sagrada Familia, Alhambra, dan pantai-pantai Costa del Sol.",
+    "meta": {
+      "officialName": "Kerajaan Spanyol",
+      "shortName": "ESP",
+      "capital": "Madrid",
+      "capitalCoordinates": {
+        "lat": 40.4168,
+        "lng": -3.7038
+      },
+      "largestCity": "Madrid",
+      "demonym": "Spanyol",
+      "subregion": "Southern Europe",
+      "area": 505990,
+      "areaRank": 51,
+      "coastline": 4964,
+      "highestPoint": "Teide",
+      "highestElevation": 3718,
+      "lowestPoint": "Laut Mediterania",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Prancis",
+        "Portugal",
+        "Andorra",
+        "Gibraltar"
+      ],
+      "coordinates": {
+        "lat": 40,
+        "lng": -3.7
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 47000000,
+      "populationRank": 30,
+      "populationDensity": 93,
+      "populationGrowth": 0,
+      "medianAge": 44.9,
+      "lifeExpectancy": 83.8,
+      "fertilityRate": 1.2,
+      "urbanization": 81,
+      "ethnicGroups": [
+        {
+          "name": "Spanyol",
+          "percentage": 85
+        },
+        {
+          "name": "Maroko",
+          "percentage": 5
+        },
+        {
+          "name": "Rumania",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 7
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 60
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 30
+        },
+        {
+          "name": "Islam",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Spanyol",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Katalan",
+          "percentage": 17
+        },
+        {
+          "name": "Galicia",
+          "percentage": 5
+        },
+        {
+          "name": "Inggris",
+          "percentage": 25
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Monarki Konstitusional Parlementer",
+      "independenceDay": "1492-01-02",
+      "nationalHoliday": "12 Oktober",
+      "legalSystem": "Civil Law",
+      "constitution": "1978",
+      "administrativeDivisions": 17,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "G20",
+        "OECD"
+      ],
+      "giniCoefficient": 34.3,
+      "hdi": 0.904,
+      "hdiRank": 24,
+      "corruptionIndex": 62,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 1600000000000,
+      "gdpPerCapita": 34000,
+      "gdpPpp": 2300000000000,
+      "gdpGrowth": 2,
+      "inflation": 3,
+      "unemployment": 12,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Manufaktur",
+        "Pertanian",
+        "Tekstil",
+        "Otomotif"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 150000000000
+        },
+        {
+          "item": "Otomotif",
+          "value": 100000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 80000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 60000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 80000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 70000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 60000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 40000000000
+        }
+      ],
+      "tradeBalance": -20000000000,
+      "naturalResources": [
+        "Batu bara",
+        "Kayu",
+        "Air",
+        "Mineral"
+      ],
+      "economicRanking": 15,
+      "internetPenetration": 92,
+      "mobilePenetration": 96,
+      "electricityAccess": 100,
+      "roadLength": 700000,
+      "railwayLength": 16000,
+      "airports": 200,
+      "seaports": 50,
+      "healthcareAccess": 90,
+      "educationIndex": 0.78,
+      "nationalMotto": "Selanjutnya, ke atas",
+      "nationalAnthem": "Marcha Real",
+      "nationalAnimal": "Banteng",
+      "nationalFlower": "Mawar",
+      "nationalCuisine": [
+        "Paella",
+        "Tapas",
+        "Gazpacho",
+        "Churros",
+        "Jamón"
+      ],
+      "culturalHeritage": [
+        "Sagrada Familia",
+        "Alhambra",
+        "Prado Museum",
+        "Seville"
+      ],
+      "publicHolidays": [
+        "Hari Nasional",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 78,
+      "climate": "Mediterania",
+      "averageTemperature": 16,
+      "averageRainfall": 500,
+      "forestArea": 36,
+      "protectedAreas": 15,
+      "biodiversityRank": 20,
+      "carbonEmissions": 4,
+      "environmentalIndex": 55,
+      "riskScore": 25,
+      "politicalStability": 70,
+      "crimeIndex": 25,
+      "militarySpending": 1.2,
+      "peaceIndex": 30,
+      "terrorismIndex": 15,
+      "refugeePopulation": 50000,
+      "opportunityScore": 70,
+      "easeOfDoingBusiness": 68,
+      "innovationIndex": 65,
+      "startupEcosystem": 70,
+      "investmentScore": 68,
+      "talentPool": 80,
+      "marketSize": 85,
+      "infrastructureQuality": 78,
+      "internetSpeed": 45,
+      "digitalAdoption": 78,
+      "techEcosystem": 72,
+      "aiReadiness": 62,
+      "startups": 2000,
+      "phoneCode": "+34",
+      "tld": ".es",
+      "isoCode": "ESP",
+      "isoCode2": "ES",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "pariwisata",
+        "seni",
+        "budaya"
+      ]
+    }
+  },
+  {
+    "id": "negara-portugal",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Portugal",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Portugal - Negara di Eropa Selatan dengan sejarah maritim kuat. Ibu kota: Lisboa. Populasi: 10.3 juta jiwa. Mata uang: Euro (EUR). Bahasa: Portugis. Sistem pemerintahan: Republik Semi-Presidensial. Anggota UE dan NATO. Negara dengan arsitektur Manueline dan pantai-pantai indah. Rumah bagi Fado, Pastel de Nata, dan pemandangan indah.",
+    "meta": {
+      "officialName": "Republik Portugal",
+      "shortName": "PRT",
+      "capital": "Lisboa",
+      "capitalCoordinates": {
+        "lat": 38.7223,
+        "lng": -9.1393
+      },
+      "largestCity": "Lisboa",
+      "demonym": "Portugal",
+      "subregion": "Southern Europe",
+      "area": 92090,
+      "areaRank": 109,
+      "coastline": 1793,
+      "highestPoint": "Pico",
+      "highestElevation": 2351,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Spanyol"
+      ],
+      "coordinates": {
+        "lat": 39.5,
+        "lng": -8
+      },
+      "timezone": [
+        "Waktu Eropa Barat"
+      ],
+      "utcOffset": [
+        "+0"
+      ],
+      "population": 10300000,
+      "populationRank": 87,
+      "populationDensity": 112,
+      "populationGrowth": -0.1,
+      "medianAge": 46,
+      "lifeExpectancy": 81.9,
+      "fertilityRate": 1.3,
+      "urbanization": 66,
+      "ethnicGroups": [
+        {
+          "name": "Portugis",
+          "percentage": 95
+        },
+        {
+          "name": "Afrika",
+          "percentage": 2
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 3
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 80
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Portugis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 30
+        },
+        {
+          "name": "Prancis",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Semi-Presidensial",
+      "independenceDay": "1640-12-01",
+      "nationalHoliday": "10 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "1976",
+      "administrativeDivisions": 18,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "OECD",
+        "WTO"
+      ],
+      "giniCoefficient": 33,
+      "hdi": 0.864,
+      "hdiRank": 35,
+      "corruptionIndex": 62,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 300000000000,
+      "gdpPerCapita": 29100,
+      "gdpPpp": 450000000000,
+      "gdpGrowth": 2,
+      "inflation": 2.5,
+      "unemployment": 6,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Pariwisata",
+        "Tekstil",
+        "Manufaktur",
+        "Pertanian",
+        "Keuangan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 80000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 50000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 40000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 30000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 60000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 50000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 40000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 30000000000
+        }
+      ],
+      "tradeBalance": -10000000000,
+      "naturalResources": [
+        "Kayu",
+        "Air",
+        "Mineral",
+        "Tanah subur"
+      ],
+      "economicRanking": 45,
+      "internetPenetration": 88,
+      "mobilePenetration": 94,
+      "electricityAccess": 100,
+      "roadLength": 80000,
+      "railwayLength": 2500,
+      "airports": 50,
+      "seaports": 20,
+      "healthcareAccess": 88,
+      "educationIndex": 0.76,
+      "nationalMotto": "Ini adalah kebahagiaan saya",
+      "nationalAnthem": "A Portuguesa",
+      "nationalAnimal": "Ayam",
+      "nationalFlower": "Lavender",
+      "nationalCuisine": [
+        "Pastel de Nata",
+        "Bacalhau",
+        "Caldo Verde",
+        "Sardinhas",
+        "Francesinha"
+      ],
+      "culturalHeritage": [
+        "Lisbon",
+        "Porto",
+        "Sintra",
+        "Algarve"
+      ],
+      "publicHolidays": [
+        "Hari Portugal",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 78,
+      "climate": "Mediterania",
+      "averageTemperature": 16,
+      "averageRainfall": 600,
+      "forestArea": 36,
+      "protectedAreas": 15,
+      "biodiversityRank": 25,
+      "carbonEmissions": 3,
+      "environmentalIndex": 55,
+      "riskScore": 22,
+      "politicalStability": 75,
+      "crimeIndex": 20,
+      "militarySpending": 1,
+      "peaceIndex": 28,
+      "terrorismIndex": 8,
+      "refugeePopulation": 10000,
+      "opportunityScore": 68,
+      "easeOfDoingBusiness": 68,
+      "innovationIndex": 60,
+      "startupEcosystem": 65,
+      "investmentScore": 65,
+      "talentPool": 72,
+      "marketSize": 70,
+      "infrastructureQuality": 75,
+      "internetSpeed": 40,
+      "digitalAdoption": 75,
+      "techEcosystem": 65,
+      "aiReadiness": 55,
+      "startups": 400,
+      "phoneCode": "+351",
+      "tld": ".pt",
+      "isoCode": "PRT",
+      "isoCode2": "PT",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "maritim",
+        "anggaran",
+        "hidroelektrik"
+      ]
+    }
+  },
+  {
+    "id": "negara-yunani",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Yunani",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Yunani - Negara di Eropa Selatan dengan peradaban kuno. Ibu kota: Athena. Populasi: 10.4 juta jiwa. Mata uang: Euro (EUR). Bahasa: Yunani. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah, filsafat, dan demokrasi. Rumah bagi Parthenon, Santorini, dan pantai-pantai indah. Tempat lahir peradaban Barat.",
+    "meta": {
+      "officialName": "Republik Yunani",
+      "shortName": "GRC",
+      "capital": "Athena",
+      "capitalCoordinates": {
+        "lat": 37.9838,
+        "lng": 23.7275
+      },
+      "largestCity": "Athena",
+      "demonym": "Yunani",
+      "subregion": "Southern Europe",
+      "area": 131957,
+      "areaRank": 95,
+      "coastline": 13676,
+      "highestPoint": "Olympus",
+      "highestElevation": 2918,
+      "lowestPoint": "Laut Mediterania",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Albania",
+        "Makedonia Utara",
+        "Bulgaria",
+        "Turki"
+      ],
+      "coordinates": {
+        "lat": 39,
+        "lng": 22
+      },
+      "timezone": [
+        "Waktu Eropa Timur"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 10400000,
+      "populationRank": 86,
+      "populationDensity": 79,
+      "populationGrowth": -0.2,
+      "medianAge": 45,
+      "lifeExpectancy": 81.5,
+      "fertilityRate": 1.3,
+      "urbanization": 80,
+      "ethnicGroups": [
+        {
+          "name": "Yunani",
+          "percentage": 98
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 90
+        },
+        {
+          "name": "Islam",
+          "percentage": 2
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 8
+        }
+      ],
+      "languages": [
+        {
+          "name": "Yunani",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 40
+        },
+        {
+          "name": "Jerman",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1821-03-25",
+      "nationalHoliday": "25 Maret",
+      "legalSystem": "Civil Law",
+      "constitution": "1975",
+      "administrativeDivisions": 13,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "OECD",
+        "WTO"
+      ],
+      "giniCoefficient": 36,
+      "hdi": 0.888,
+      "hdiRank": 32,
+      "corruptionIndex": 51,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 250000000000,
+      "gdpPerCapita": 24000,
+      "gdpPpp": 400000000000,
+      "gdpGrowth": 1.5,
+      "inflation": 3,
+      "unemployment": 12,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Manufaktur",
+        "Perkapalan",
+        "Keuangan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 80000000000
+        },
+        {
+          "item": "Perkapalan",
+          "value": 50000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 40000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 30000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 60000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 50000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 40000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 30000000000
+        }
+      ],
+      "tradeBalance": -20000000000,
+      "naturalResources": [
+        "Kayu",
+        "Mineral",
+        "Air",
+        "Tanah subur"
+      ],
+      "economicRanking": 50,
+      "internetPenetration": 85,
+      "mobilePenetration": 92,
+      "electricityAccess": 100,
+      "roadLength": 120000,
+      "railwayLength": 2500,
+      "airports": 50,
+      "seaports": 50,
+      "healthcareAccess": 85,
+      "educationIndex": 0.76,
+      "nationalMotto": "Kebebasan atau Mati",
+      "nationalAnthem": "Himnos eis tin Eleftherian",
+      "nationalAnimal": "Lumba-lumba",
+      "nationalFlower": "Zaitun",
+      "nationalCuisine": [
+        "Moussaka",
+        "Souvlaki",
+        "Gyros",
+        "Tzatziki",
+        "Baklava"
+      ],
+      "culturalHeritage": [
+        "Parthenon",
+        "Santorini",
+        "Mykonos",
+        "Athens"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 72,
+      "climate": "Mediterania",
+      "averageTemperature": 18,
+      "averageRainfall": 500,
+      "forestArea": 30,
+      "protectedAreas": 15,
+      "biodiversityRank": 20,
+      "carbonEmissions": 5,
+      "environmentalIndex": 52,
+      "riskScore": 35,
+      "politicalStability": 60,
+      "crimeIndex": 25,
+      "militarySpending": 2,
+      "peaceIndex": 35,
+      "terrorismIndex": 15,
+      "refugeePopulation": 100000,
+      "opportunityScore": 60,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 55,
+      "startupEcosystem": 60,
+      "investmentScore": 55,
+      "talentPool": 72,
+      "marketSize": 70,
+      "infrastructureQuality": 65,
+      "internetSpeed": 35,
+      "digitalAdoption": 65,
+      "techEcosystem": 60,
+      "aiReadiness": 50,
+      "startups": 300,
+      "phoneCode": "+30",
+      "tld": ".gr",
+      "isoCode": "GRC",
+      "isoCode2": "GR",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "sejarah",
+        "filosofi",
+        "pariwisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-kroasia",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Kroasia",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Kroasia - Negara di Eropa Selatan dengan pantai Adriatik indah. Ibu kota: Zagreb. Populasi: 4 juta jiwa. Mata uang: Euro (EUR). Bahasa: Kroasia. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan pantai-pantai indah dan kota-kota bersejarah. Rumah bagi Dubrovnik, Split, dan Istana Diocletian.",
+    "meta": {
+      "officialName": "Republik Kroasia",
+      "shortName": "HRV",
+      "capital": "Zagreb",
+      "capitalCoordinates": {
+        "lat": 45.815,
+        "lng": 15.9819
+      },
+      "largestCity": "Zagreb",
+      "demonym": "Kroasia",
+      "subregion": "Southern Europe",
+      "area": 56594,
+      "areaRank": 124,
+      "coastline": 5835,
+      "highestPoint": "Dinara",
+      "highestElevation": 1831,
+      "lowestPoint": "Laut Adriatik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Slovenia",
+        "Hungaria",
+        "Serbia",
+        "Bosnia",
+        "Montenegro"
+      ],
+      "coordinates": {
+        "lat": 45,
+        "lng": 15
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 4000000,
+      "populationRank": 128,
+      "populationDensity": 71,
+      "populationGrowth": -0.1,
+      "medianAge": 43,
+      "lifeExpectancy": 78,
+      "fertilityRate": 1.4,
+      "urbanization": 57,
+      "ethnicGroups": [
+        {
+          "name": "Kroasia",
+          "percentage": 90
+        },
+        {
+          "name": "Serbia",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 86
+        },
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 5
+        },
+        {
+          "name": "Islam",
+          "percentage": 2
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 7
+        }
+      ],
+      "languages": [
+        {
+          "name": "Kroasia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 50
+        },
+        {
+          "name": "Jerman",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1991-06-25",
+      "nationalHoliday": "5 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "1990",
+      "administrativeDivisions": 20,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "OECD",
+        "WTO"
+      ],
+      "giniCoefficient": 30,
+      "hdi": 0.851,
+      "hdiRank": 44,
+      "corruptionIndex": 47,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 80000000000,
+      "gdpPerCapita": 20000,
+      "gdpPpp": 150000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 3,
+      "unemployment": 6,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Pariwisata",
+        "Manufaktur",
+        "Pertanian",
+        "Perkapalan",
+        "Tekstil"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 40000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 20000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 10000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 8000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 20000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 10000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 8000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Kayu",
+        "Air",
+        "Mineral",
+        "Tanah subur"
+      ],
+      "economicRanking": 55,
+      "internetPenetration": 85,
+      "mobilePenetration": 92,
+      "electricityAccess": 100,
+      "roadLength": 30000,
+      "railwayLength": 2700,
+      "airports": 20,
+      "seaports": 20,
+      "healthcareAccess": 82,
+      "educationIndex": 0.72,
+      "nationalMotto": "Tuhan dan Kroasia",
+      "nationalAnthem": "Lijepa naša domovino",
+      "nationalAnimal": "Marten",
+      "nationalFlower": "Iris",
+      "nationalCuisine": [
+        "Peka",
+        "Black Risotto",
+        "Štrukli",
+        "Kulen",
+        "Octopus Salad"
+      ],
+      "culturalHeritage": [
+        "Dubrovnik",
+        "Split",
+        "Plitvice Lakes",
+        "Zagreb"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 72,
+      "climate": "Mediterania",
+      "averageTemperature": 15,
+      "averageRainfall": 700,
+      "forestArea": 40,
+      "protectedAreas": 15,
+      "biodiversityRank": 25,
+      "carbonEmissions": 4,
+      "environmentalIndex": 52,
+      "riskScore": 30,
+      "politicalStability": 65,
+      "crimeIndex": 22,
+      "militarySpending": 1.5,
+      "peaceIndex": 32,
+      "terrorismIndex": 10,
+      "refugeePopulation": 10000,
+      "opportunityScore": 65,
+      "easeOfDoingBusiness": 62,
+      "innovationIndex": 55,
+      "startupEcosystem": 60,
+      "investmentScore": 60,
+      "talentPool": 68,
+      "marketSize": 65,
+      "infrastructureQuality": 68,
+      "internetSpeed": 35,
+      "digitalAdoption": 65,
+      "techEcosystem": 58,
+      "aiReadiness": 48,
+      "startups": 200,
+      "phoneCode": "+385",
+      "tld": ".hr",
+      "isoCode": "HRV",
+      "isoCode2": "HR",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "pantai",
+        "pariwisata",
+        "ue"
+      ]
+    }
+  },
+  {
+    "id": "negara-slovenia",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Slovenia",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Slovenia - Negara kecil di Eropa Selatan dengan alam indah. Ibu kota: Ljubljana. Populasi: 2.1 juta jiwa. Mata uang: Euro (EUR). Bahasa: Slovenia. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan Alpen, danau, dan hutan hijau. Rumah bagi Danau Bled, Pegunungan Julian Alps, dan Ljubljana yang indah.",
+    "meta": {
+      "officialName": "Republik Slovenia",
+      "shortName": "SVN",
+      "capital": "Ljubljana",
+      "capitalCoordinates": {
+        "lat": 46.0569,
+        "lng": 14.5058
+      },
+      "largestCity": "Ljubljana",
+      "demonym": "Slovenia",
+      "subregion": "Southern Europe",
+      "area": 20273,
+      "areaRank": 150,
+      "coastline": 47,
+      "highestPoint": "Triglav",
+      "highestElevation": 2864,
+      "lowestPoint": "Laut Adriatik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Italia",
+        "Austria",
+        "Hungaria",
+        "Kroasia"
+      ],
+      "coordinates": {
+        "lat": 46,
+        "lng": 15
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 2100000,
+      "populationRank": 144,
+      "populationDensity": 103,
+      "populationGrowth": 0,
+      "medianAge": 44,
+      "lifeExpectancy": 81.5,
+      "fertilityRate": 1.4,
+      "urbanization": 55,
+      "ethnicGroups": [
+        {
+          "name": "Slovenia",
+          "percentage": 83
+        },
+        {
+          "name": "Serbia",
+          "percentage": 5
+        },
+        {
+          "name": "Kroasia",
+          "percentage": 4
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 8
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 60
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 30
+        },
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Slovenia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 40
+        },
+        {
+          "name": "Jerman",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1991-06-25",
+      "nationalHoliday": "25 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "1991",
+      "administrativeDivisions": 12,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "OECD",
+        "WTO"
+      ],
+      "giniCoefficient": 23.7,
+      "hdi": 0.917,
+      "hdiRank": 17,
+      "corruptionIndex": 60,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 70000000000,
+      "gdpPerCapita": 33300,
+      "gdpPpp": 100000000000,
+      "gdpGrowth": 2,
+      "inflation": 3,
+      "unemployment": 4,
+      "povertyRate": 12,
+      "mainIndustries": [
+        "Manufaktur",
+        "Pariwisata",
+        "Teknologi",
+        "Pertanian",
+        "Kimia"
+      ],
+      "exports": [
+        {
+          "item": "Manufaktur",
+          "value": 30000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 20000000000
+        },
+        {
+          "item": "Teknologi",
+          "value": 15000000000
+        },
+        {
+          "item": "Kimia",
+          "value": 10000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 20000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 10000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 8000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Kayu",
+        "Air",
+        "Mineral",
+        "Tanah subur"
+      ],
+      "economicRanking": 60,
+      "internetPenetration": 88,
+      "mobilePenetration": 94,
+      "electricityAccess": 100,
+      "roadLength": 40000,
+      "railwayLength": 1200,
+      "airports": 10,
+      "seaports": 1,
+      "healthcareAccess": 88,
+      "educationIndex": 0.78,
+      "nationalMotto": "Slovenia di hati",
+      "nationalAnthem": "Zdravljica",
+      "nationalAnimal": "Kuda",
+      "nationalFlower": "Bunga Carnation",
+      "nationalCuisine": [
+        "Kranjska Sausage",
+        "Žganci",
+        "Potica",
+        "Štruklji",
+        "Bled Cake"
+      ],
+      "culturalHeritage": [
+        "Ljubljana",
+        "Lake Bled",
+        "Postojna Cave",
+        "Triglav"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 80,
+      "climate": "Kontinental",
+      "averageTemperature": 10,
+      "averageRainfall": 1000,
+      "forestArea": 60,
+      "protectedAreas": 20,
+      "biodiversityRank": 25,
+      "carbonEmissions": 6,
+      "environmentalIndex": 58,
+      "riskScore": 18,
+      "politicalStability": 80,
+      "crimeIndex": 15,
+      "militarySpending": 1,
+      "peaceIndex": 22,
+      "terrorismIndex": 5,
+      "refugeePopulation": 1000,
+      "opportunityScore": 72,
+      "easeOfDoingBusiness": 75,
+      "innovationIndex": 65,
+      "startupEcosystem": 68,
+      "investmentScore": 70,
+      "talentPool": 72,
+      "marketSize": 65,
+      "infrastructureQuality": 78,
+      "internetSpeed": 45,
+      "digitalAdoption": 78,
+      "techEcosystem": 68,
+      "aiReadiness": 58,
+      "startups": 150,
+      "phoneCode": "+386",
+      "tld": ".si",
+      "isoCode": "SVN",
+      "isoCode2": "SI",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "alpen",
+        "danau",
+        "pariwisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-malta",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Malta",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Malta - Negara kepulauan di Eropa Selatan dengan sejarah dan resor. Ibu kota: Valletta. Populasi: 500 ribu jiwa. Mata uang: Euro (EUR). Bahasa: Malta, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah panjang, arsitektur barok, dan pantai-pantai indah. Rumah bagi Kuil-kuil Megalitik dan Valletta yang indah.",
+    "meta": {
+      "officialName": "Republik Malta",
+      "shortName": "MLT",
+      "capital": "Valletta",
+      "capitalCoordinates": {
+        "lat": 35.8989,
+        "lng": 14.5146
+      },
+      "largestCity": "Valletta",
+      "demonym": "Malta",
+      "subregion": "Southern Europe",
+      "area": 316,
+      "areaRank": 176,
+      "coastline": 196,
+      "highestPoint": "Ta' Dmejrek",
+      "highestElevation": 253,
+      "lowestPoint": "Laut Mediterania",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 35.9,
+        "lng": 14.4
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 500000,
+      "populationRank": 168,
+      "populationDensity": 1582,
+      "populationGrowth": 0.3,
+      "medianAge": 42,
+      "lifeExpectancy": 83,
+      "fertilityRate": 1.4,
+      "urbanization": 95,
+      "ethnicGroups": [
+        {
+          "name": "Malta",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 90
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Malta",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 90,
+          "official": true
+        },
+        {
+          "name": "Italia",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1964-09-21",
+      "nationalHoliday": "21 September",
+      "legalSystem": "Common Law",
+      "constitution": "1964",
+      "administrativeDivisions": 68,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "Commonwealth"
+      ],
+      "giniCoefficient": 28,
+      "hdi": 0.895,
+      "hdiRank": 28,
+      "corruptionIndex": 56,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 20000000000,
+      "gdpPerCapita": 40000,
+      "gdpPpp": 30000000000,
+      "gdpGrowth": 3,
+      "inflation": 2.5,
+      "unemployment": 3,
+      "povertyRate": 10,
+      "mainIndustries": [
+        "Pariwisata",
+        "Keuangan",
+        "Perjudian",
+        "Manufaktur",
+        "Perkapalan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 10000000000
+        },
+        {
+          "item": "Keuangan",
+          "value": 5000000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 3000000000
+        },
+        {
+          "item": "Perjudian",
+          "value": 2000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 5000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 4000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 2000000000
+        }
+      ],
+      "tradeBalance": -2000000000,
+      "naturalResources": [
+        "Batu kapur",
+        "Garam",
+        "Air"
+      ],
+      "economicRanking": 65,
+      "internetPenetration": 92,
+      "mobilePenetration": 96,
+      "electricityAccess": 100,
+      "roadLength": 2000,
+      "railwayLength": 0,
+      "airports": 2,
+      "seaports": 5,
+      "healthcareAccess": 90,
+      "educationIndex": 0.78,
+      "nationalMotto": "Kehormatan dan Kebebasan",
+      "nationalAnthem": "L-Innu Malti",
+      "nationalAnimal": "Kelinci",
+      "nationalFlower": "Bunga Maltese Rock",
+      "nationalCuisine": [
+        "Pastizzi",
+        "Rabbit Stew",
+        "Bragioli",
+        "Fenek",
+        "Kinnie"
+      ],
+      "culturalHeritage": [
+        "Valletta",
+        "Mdina",
+        "Hypogeum",
+        "Gozo"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 78,
+      "climate": "Mediterania",
+      "averageTemperature": 20,
+      "averageRainfall": 500,
+      "forestArea": 1,
+      "protectedAreas": 10,
+      "biodiversityRank": 35,
+      "carbonEmissions": 5,
+      "environmentalIndex": 50,
+      "riskScore": 20,
+      "politicalStability": 75,
+      "crimeIndex": 18,
+      "militarySpending": 0.5,
+      "peaceIndex": 25,
+      "terrorismIndex": 8,
+      "refugeePopulation": 1000,
+      "opportunityScore": 72,
+      "easeOfDoingBusiness": 72,
+      "innovationIndex": 60,
+      "startupEcosystem": 65,
+      "investmentScore": 70,
+      "talentPool": 65,
+      "marketSize": 60,
+      "infrastructureQuality": 80,
+      "internetSpeed": 50,
+      "digitalAdoption": 82,
+      "techEcosystem": 68,
+      "aiReadiness": 58,
+      "startups": 100,
+      "phoneCode": "+356",
+      "tld": ".mt",
+      "isoCode": "MLT",
+      "isoCode2": "MT",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "pulau",
+        "pariwisata",
+        "perbankan"
+      ]
+    }
+  },
+  {
+    "id": "negara-san-marino",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "San Marino",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "San Marino - Negara mikro di Eropa Selatan yang dikelilingi Italia. Ibu kota: San Marino. Populasi: 34 ribu jiwa. Mata uang: Euro (EUR). Bahasa: Italia. Sistem pemerintahan: Republik. Negara tertua di Eropa. Terkenal dengan arsitektur abad pertengahan dan perangko. Negara dengan sejarah panjang dan kemerdekaan yang terjaga.",
+    "meta": {
+      "officialName": "Republik San Marino",
+      "shortName": "SMR",
+      "capital": "San Marino",
+      "capitalCoordinates": {
+        "lat": 43.9424,
+        "lng": 12.4578
+      },
+      "largestCity": "San Marino",
+      "demonym": "San Marino",
+      "subregion": "Southern Europe",
+      "area": 61,
+      "areaRank": 178,
+      "coastline": 0,
+      "highestPoint": "Monte Titano",
+      "highestElevation": 749,
+      "lowestPoint": "Lembah San Marino",
+      "lowestElevation": 55,
+      "landBorders": [
+        "Italia"
+      ],
+      "coordinates": {
+        "lat": 43.94,
+        "lng": 12.46
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 34000,
+      "populationRank": 179,
+      "populationDensity": 557,
+      "populationGrowth": 0.1,
+      "medianAge": 45,
+      "lifeExpectancy": 83,
+      "fertilityRate": 1.3,
+      "urbanization": 97,
+      "ethnicGroups": [
+        {
+          "name": "San Marino",
+          "percentage": 85
+        },
+        {
+          "name": "Italia",
+          "percentage": 15
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 90
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "languages": [
+        {
+          "name": "Italia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik",
+      "independenceDay": "301-09-03",
+      "nationalHoliday": "3 September",
+      "legalSystem": "Civil Law",
+      "constitution": "1600",
+      "administrativeDivisions": 9,
+      "memberships": [
+        "PBB",
+        "OECD",
+        "WTO"
+      ],
+      "giniCoefficient": 30,
+      "hdi": 0.9,
+      "hdiRank": 26,
+      "corruptionIndex": 70,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": 2000000000,
+      "gdpPerCapita": 58800,
+      "gdpPpp": 3000000000,
+      "gdpGrowth": 1,
+      "inflation": 2,
+      "unemployment": 4,
+      "povertyRate": 5,
+      "mainIndustries": [
+        "Pariwisata",
+        "Keuangan",
+        "Manufaktur",
+        "Perangko"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 1000000000
+        },
+        {
+          "item": "Keuangan",
+          "value": 500000000
+        },
+        {
+          "item": "Manufaktur",
+          "value": 300000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 400000000
+        },
+        {
+          "item": "Mesin",
+          "value": 300000000
+        }
+      ],
+      "tradeBalance": -200000000,
+      "naturalResources": [
+        "Batu kapur",
+        "Air"
+      ],
+      "economicRanking": 100,
+      "internetPenetration": 90,
+      "mobilePenetration": 96,
+      "electricityAccess": 100,
+      "roadLength": 300,
+      "railwayLength": 0,
+      "airports": 0,
+      "seaports": 0,
+      "healthcareAccess": 95,
+      "educationIndex": 0.82,
+      "nationalMotto": "Kebebasan",
+      "nationalAnthem": "Inno Nazionale della Repubblica",
+      "nationalAnimal": "Singa",
+      "nationalFlower": "Bunga Cyclamen",
+      "nationalCuisine": [
+        "Torta Tre Monti",
+        "Nidi di Rondine",
+        "Fagioli",
+        "Pasta"
+      ],
+      "culturalHeritage": [
+        "Monte Titano",
+        "San Marino",
+        "Palazzo Pubblico"
+      ],
+      "publicHolidays": [
+        "Hari Nasional",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 85,
+      "climate": "Mediterania",
+      "averageTemperature": 15,
+      "averageRainfall": 600,
+      "forestArea": 20,
+      "protectedAreas": 5,
+      "biodiversityRank": 40,
+      "carbonEmissions": 4,
+      "environmentalIndex": 55,
+      "riskScore": 10,
+      "politicalStability": 95,
+      "crimeIndex": 5,
+      "militarySpending": 0.5,
+      "peaceIndex": 15,
+      "terrorismIndex": 2,
+      "refugeePopulation": 0,
+      "opportunityScore": 65,
+      "easeOfDoingBusiness": 70,
+      "innovationIndex": 50,
+      "startupEcosystem": 40,
+      "investmentScore": 65,
+      "talentPool": 55,
+      "marketSize": 30,
+      "infrastructureQuality": 85,
+      "internetSpeed": 45,
+      "digitalAdoption": 75,
+      "techEcosystem": 50,
+      "aiReadiness": 40,
+      "startups": 10,
+      "phoneCode": "+378",
+      "tld": ".sm",
+      "isoCode": "SMR",
+      "isoCode2": "SM",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "mikro",
+        "sejarah",
+        "perangko"
+      ]
+    }
+  }
+]

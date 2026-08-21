@@ -175,15 +175,37 @@ export const REGIONS = Object.freeze({
 
 const cache = new Map();
 
+// Grup yang sudah dimigrasi ke skema JSON tunggal Fase B (raget-data/<grup>/).
+// loadRegion() di bawah TETAP satu-satunya titik yang tahu soal storage -
+// untuk grup di sini ia fetch JSON lalu bentuk ulang jadi {text, metadata}
+// SAMA PERSIS seperti bentuk lama, supaya dataries-bridge.js dan seluruh
+// pipeline resolusi entitas tidak perlu tahu/berubah sama sekali.
+const JSON_MIGRATED_GROUPS = { country: 'negara' };
+
+function unifiedToLegacyShape(entry, group) {
+  return {
+    text: entry.teks,
+    metadata: { ...entry.meta, category: group, region: entry.wilayah, name: entry.nama },
+  };
+}
+
+async function loadRegionFromJson(group, id, dataFolder) {
+  const res = await fetch(new URL('../raget-data/' + dataFolder + '/' + id + '.json', import.meta.url));
+  if (!res.ok) throw new Error('Gagal fetch raget-data/' + dataFolder + '/' + id + '.json: HTTP ' + res.status);
+  const raw = await res.json();
+  return raw.map((entry) => unifiedToLegacyShape(entry, group));
+}
+
 async function loadRegion(group, id) {
   const key = group + '/' + id;
   if (cache.has(key)) return cache.get(key);
   const list = REGIONS[group] || [];
   const entry = list.find((r) => r.id === id);
   if (!entry) return null;
-  const mod = await import(new URL(entry.file, import.meta.url).href);
-  cache.set(key, mod.DATA);
-  return mod.DATA;
+  const dataFolder = JSON_MIGRATED_GROUPS[group];
+  const data = dataFolder ? await loadRegionFromJson(group, id, dataFolder) : (await import(new URL(entry.file, import.meta.url).href)).DATA;
+  cache.set(key, data);
+  return data;
 }
 
 function findRegionsByName(group, name) {

@@ -1,0 +1,2077 @@
+[
+  {
+    "id": "negara-australia",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Australia",
+    "tags": [
+      "Australia and New Zealand"
+    ],
+    "teks": "Australia - Negara terbesar di Oseania dengan ekonomi maju dan alam. Ibu kota: Canberra. Populasi: 26 juta jiwa. Mata uang: Dolar Australia (AUD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Federal Parlementer. Anggota G20, OECD, dan Commonwealth. Negara dengan keanekaragaman hayati, Great Barrier Reef, dan budaya Aborigin yang kaya.",
+    "meta": {
+      "officialName": "Commonwealth of Australia",
+      "shortName": "AUS",
+      "capital": "Canberra",
+      "capitalCoordinates": {
+        "lat": -35.2809,
+        "lng": 149.13
+      },
+      "largestCity": "Sydney",
+      "demonym": "Australia",
+      "subregion": "Australia and New Zealand",
+      "area": 7692024,
+      "areaRank": 6,
+      "coastline": 25760,
+      "highestPoint": "Mount Kosciuszko",
+      "highestElevation": 2228,
+      "lowestPoint": "Danau Eyre",
+      "lowestElevation": -15,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -25,
+        "lng": 134
+      },
+      "timezone": [
+        "UTC+8 hingga UTC+11"
+      ],
+      "utcOffset": [
+        "+8",
+        "+9.5",
+        "+10",
+        "+10.5",
+        "+11"
+      ],
+      "population": 26000000,
+      "populationRank": 53,
+      "populationDensity": 3,
+      "populationGrowth": 1.2,
+      "medianAge": 37.5,
+      "lifeExpectancy": 83,
+      "fertilityRate": 1.6,
+      "urbanization": 86,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Putih",
+          "percentage": 80
+        },
+        {
+          "name": "Asia",
+          "percentage": 10
+        },
+        {
+          "name": "Aborigin",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 7
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 50
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 30
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 20
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Monarki Konstitusional Federal Parlementer",
+      "independenceDay": "1901-01-01",
+      "nationalHoliday": "26 Januari",
+      "legalSystem": "Common Law",
+      "constitution": "1901",
+      "administrativeDivisions": 6,
+      "memberships": [
+        "PBB",
+        "G20",
+        "OECD",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 34,
+      "hdi": 0.951,
+      "hdiRank": 5,
+      "corruptionIndex": 77,
+      "currency": "Dolar Australia",
+      "currencyCode": "AUD",
+      "gdp": 1600000000000,
+      "gdpPerCapita": 61500,
+      "gdpPpp": 1700000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 3,
+      "unemployment": 4,
+      "povertyRate": 12,
+      "mainIndustries": [
+        "Tambang",
+        "Pertanian",
+        "Pariwisata",
+        "Keuangan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Batu bara",
+          "value": 100000000000
+        },
+        {
+          "item": "Emas",
+          "value": 50000000000
+        },
+        {
+          "item": "Gas",
+          "value": 40000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 30000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 50000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 40000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 30000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 20000000000
+        }
+      ],
+      "tradeBalance": 50000000000,
+      "naturalResources": [
+        "Batu bara",
+        "Emas",
+        "Gas",
+        "Biji besi",
+        "Kayu"
+      ],
+      "economicRanking": 13,
+      "internetPenetration": 92,
+      "mobilePenetration": 97,
+      "electricityAccess": 100,
+      "roadLength": 900000,
+      "railwayLength": 40000,
+      "airports": 500,
+      "seaports": 100,
+      "healthcareAccess": 95,
+      "educationIndex": 0.85,
+      "nationalMotto": "Majulah Australia",
+      "nationalAnthem": "Advance Australia Fair",
+      "nationalAnimal": "Kangaroo",
+      "nationalFlower": "Golden Wattle",
+      "nationalCuisine": [
+        "Meat Pie",
+        "Vegemite",
+        "Lamington",
+        "Barramundi",
+        "Pavlova"
+      ],
+      "culturalHeritage": [
+        "Sydney Opera House",
+        "Great Barrier Reef",
+        "Uluru",
+        "Melbourne"
+      ],
+      "publicHolidays": [
+        "Hari Australia",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 85,
+      "climate": "Beragam",
+      "averageTemperature": 20,
+      "averageRainfall": 500,
+      "forestArea": 16,
+      "protectedAreas": 20,
+      "biodiversityRank": 4,
+      "carbonEmissions": 15,
+      "environmentalIndex": 55,
+      "riskScore": 15,
+      "politicalStability": 90,
+      "crimeIndex": 15,
+      "militarySpending": 2,
+      "peaceIndex": 20,
+      "terrorismIndex": 8,
+      "refugeePopulation": 10000,
+      "opportunityScore": 78,
+      "easeOfDoingBusiness": 82,
+      "innovationIndex": 72,
+      "startupEcosystem": 75,
+      "investmentScore": 78,
+      "talentPool": 88,
+      "marketSize": 85,
+      "infrastructureQuality": 88,
+      "internetSpeed": 55,
+      "digitalAdoption": 90,
+      "techEcosystem": 78,
+      "aiReadiness": 72,
+      "startups": 2000,
+      "phoneCode": "+61",
+      "tld": ".au",
+      "isoCode": "AUS",
+      "isoCode2": "AU",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "g20",
+        "tambang",
+        "pendidikan"
+      ]
+    }
+  },
+  {
+    "id": "negara-selandia-baru",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Selandia Baru",
+    "tags": [
+      "Australia and New Zealand"
+    ],
+    "teks": "Selandia Baru - Negara di Oseania dengan alam dan peternakan. Ibu kota: Wellington. Populasi: 5.2 juta jiwa. Mata uang: Dolar Selandia Baru (NZD). Bahasa: Inggris, Maori. Sistem pemerintahan: Monarki Konstitusional Parlementer. Anggota OECD dan Commonwealth. Negara dengan pemandangan alam yang spektakuler dan budaya Maori yang kaya.",
+    "meta": {
+      "officialName": "Selandia Baru",
+      "shortName": "NZL",
+      "capital": "Wellington",
+      "capitalCoordinates": {
+        "lat": -41.2865,
+        "lng": 174.7762
+      },
+      "largestCity": "Auckland",
+      "demonym": "Selandia Baru",
+      "subregion": "Australia and New Zealand",
+      "area": 268021,
+      "areaRank": 75,
+      "coastline": 15134,
+      "highestPoint": "Mount Cook",
+      "highestElevation": 3724,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -41,
+        "lng": 174
+      },
+      "timezone": [
+        "UTC+12"
+      ],
+      "utcOffset": [
+        "+12"
+      ],
+      "population": 5200000,
+      "populationRank": 119,
+      "populationDensity": 19,
+      "populationGrowth": 1,
+      "medianAge": 37,
+      "lifeExpectancy": 82,
+      "fertilityRate": 1.6,
+      "urbanization": 87,
+      "ethnicGroups": [
+        {
+          "name": "Kulit Putih",
+          "percentage": 70
+        },
+        {
+          "name": "Maori",
+          "percentage": 15
+        },
+        {
+          "name": "Asia",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 45
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 40
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 15
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Maori",
+          "percentage": 20,
+          "official": true
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Monarki Konstitusional Parlementer",
+      "independenceDay": "1907-09-26",
+      "nationalHoliday": "6 Februari",
+      "legalSystem": "Common Law",
+      "constitution": "1840",
+      "administrativeDivisions": 16,
+      "memberships": [
+        "PBB",
+        "OECD",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 33,
+      "hdi": 0.937,
+      "hdiRank": 10,
+      "corruptionIndex": 88,
+      "currency": "Dolar Selandia Baru",
+      "currencyCode": "NZD",
+      "gdp": 250000000000,
+      "gdpPerCapita": 48000,
+      "gdpPpp": 280000000000,
+      "gdpGrowth": 2.5,
+      "inflation": 3,
+      "unemployment": 4,
+      "povertyRate": 10,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Keuangan",
+        "Teknologi",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Daging",
+          "value": 10000000000
+        },
+        {
+          "item": "Susu",
+          "value": 8000000000
+        },
+        {
+          "item": "Kayu",
+          "value": 5000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 4000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 10000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 8000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 5000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 4000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Kayu",
+        "Gas",
+        "Emas",
+        "Perikanan",
+        "Tanah subur"
+      ],
+      "economicRanking": 50,
+      "internetPenetration": 92,
+      "mobilePenetration": 97,
+      "electricityAccess": 100,
+      "roadLength": 100000,
+      "railwayLength": 4000,
+      "airports": 100,
+      "seaports": 30,
+      "healthcareAccess": 95,
+      "educationIndex": 0.82,
+      "nationalMotto": "Kebebasan, Kesetaraan, Persaudaraan",
+      "nationalAnthem": "God Defend New Zealand",
+      "nationalAnimal": "Kiwi",
+      "nationalFlower": "Silver Fern",
+      "nationalCuisine": [
+        "Hāngi",
+        "Pavlova",
+        "Fish and Chips",
+        "Lamb",
+        "Pie"
+      ],
+      "culturalHeritage": [
+        "Auckland",
+        "Wellington",
+        "Queenstown",
+        "Rotorua"
+      ],
+      "publicHolidays": [
+        "Hari Waitangi",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 85,
+      "climate": "Beragam",
+      "averageTemperature": 12,
+      "averageRainfall": 1000,
+      "forestArea": 30,
+      "protectedAreas": 20,
+      "biodiversityRank": 8,
+      "carbonEmissions": 7,
+      "environmentalIndex": 60,
+      "riskScore": 12,
+      "politicalStability": 95,
+      "crimeIndex": 12,
+      "militarySpending": 1,
+      "peaceIndex": 15,
+      "terrorismIndex": 5,
+      "refugeePopulation": 5000,
+      "opportunityScore": 75,
+      "easeOfDoingBusiness": 78,
+      "innovationIndex": 70,
+      "startupEcosystem": 72,
+      "investmentScore": 75,
+      "talentPool": 80,
+      "marketSize": 72,
+      "infrastructureQuality": 85,
+      "internetSpeed": 50,
+      "digitalAdoption": 88,
+      "techEcosystem": 75,
+      "aiReadiness": 68,
+      "startups": 500,
+      "phoneCode": "+64",
+      "tld": ".nz",
+      "isoCode": "NZL",
+      "isoCode2": "NZ",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "pertanian",
+        "pariwisata",
+        "oecd"
+      ]
+    }
+  },
+  {
+    "id": "negara-fiji",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Fiji",
+    "tags": [
+      "Melanesia"
+    ],
+    "teks": "Fiji - Negara kepulauan di Oseania dengan pariwisata dan perikanan. Ibu kota: Suva. Populasi: 0.9 juta jiwa. Mata uang: Dolar Fiji (FJD). Bahasa: Fiji, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan Commonwealth. Destinasi wisata mewah di Pasifik dengan pantai pasir putih dan terumbu karang yang indah.",
+    "meta": {
+      "officialName": "Republik Fiji",
+      "shortName": "FJI",
+      "capital": "Suva",
+      "capitalCoordinates": {
+        "lat": -18.1416,
+        "lng": 178.4419
+      },
+      "largestCity": "Suva",
+      "demonym": "Fiji",
+      "subregion": "Melanesia",
+      "area": 18274,
+      "areaRank": 149,
+      "coastline": 1129,
+      "highestPoint": "Mount Tomanivi",
+      "highestElevation": 1324,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -18,
+        "lng": 178
+      },
+      "timezone": [
+        "UTC+12"
+      ],
+      "utcOffset": [
+        "+12"
+      ],
+      "population": 900000,
+      "populationRank": 162,
+      "populationDensity": 49,
+      "populationGrowth": 1,
+      "medianAge": 30,
+      "lifeExpectancy": 67,
+      "fertilityRate": 2.5,
+      "urbanization": 57,
+      "ethnicGroups": [
+        {
+          "name": "Fiji",
+          "percentage": 56
+        },
+        {
+          "name": "India",
+          "percentage": 38
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 6
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 64
+        },
+        {
+          "name": "Hindu",
+          "percentage": 27
+        },
+        {
+          "name": "Islam",
+          "percentage": 6
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Fiji",
+          "percentage": 70,
+          "official": true
+        }
+      ],
+      "literacyRate": 93,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1970-10-10",
+      "nationalHoliday": "10 Oktober",
+      "legalSystem": "Common Law",
+      "constitution": "2013",
+      "administrativeDivisions": 4,
+      "memberships": [
+        "PBB",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 36.7,
+      "hdi": 0.743,
+      "hdiRank": 93,
+      "corruptionIndex": 55,
+      "currency": "Dolar Fiji",
+      "currencyCode": "FJD",
+      "gdp": 5000000000,
+      "gdpPerCapita": 5550,
+      "gdpPpp": 10000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Perikanan",
+        "Gula",
+        "Tekstil",
+        "Keuangan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 2000000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Gula",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 1000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 800000000
+        },
+        {
+          "item": "Makanan",
+          "value": 600000000
+        },
+        {
+          "item": "Minyak",
+          "value": 400000000
+        }
+      ],
+      "tradeBalance": -200000000,
+      "naturalResources": [
+        "Perikanan",
+        "Kayu",
+        "Emas",
+        "Gula"
+      ],
+      "economicRanking": 90,
+      "internetPenetration": 60,
+      "mobilePenetration": 80,
+      "electricityAccess": 90,
+      "roadLength": 3000,
+      "railwayLength": 0,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 65,
+      "educationIndex": 0.62,
+      "nationalMotto": "Takut akan Tuhan dan hormati raja",
+      "nationalAnthem": "God Bless Fiji",
+      "nationalAnimal": "Penyu",
+      "nationalFlower": "Bunga Tagimoucia",
+      "nationalCuisine": [
+        "Kokoda",
+        "Lovo",
+        "Rourou",
+        "Vakalolo",
+        "Cassava"
+      ],
+      "culturalHeritage": [
+        "Suva",
+        "Nadi",
+        "Denarau",
+        "Yasawa"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 55,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 2000,
+      "forestArea": 50,
+      "protectedAreas": 10,
+      "biodiversityRank": 15,
+      "carbonEmissions": 1,
+      "environmentalIndex": 50,
+      "riskScore": 30,
+      "politicalStability": 70,
+      "crimeIndex": 25,
+      "militarySpending": 1,
+      "peaceIndex": 35,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 50,
+      "easeOfDoingBusiness": 50,
+      "innovationIndex": 35,
+      "startupEcosystem": 30,
+      "investmentScore": 45,
+      "talentPool": 40,
+      "marketSize": 35,
+      "infrastructureQuality": 50,
+      "internetSpeed": 20,
+      "digitalAdoption": 45,
+      "techEcosystem": 35,
+      "aiReadiness": 25,
+      "startups": 10,
+      "phoneCode": "+679",
+      "tld": ".fj",
+      "isoCode": "FJI",
+      "isoCode2": "FJ",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "pariwisata",
+        "perikanan",
+        "pasifik"
+      ]
+    }
+  },
+  {
+    "id": "negara-papua-new-guinea",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Papua New Guinea",
+    "tags": [
+      "Melanesia"
+    ],
+    "teks": "Papua New Guinea - Negara di Oseania dengan keanekaragaman budaya dan sumber daya alam. Ibu kota: Port Moresby. Populasi: 10 juta jiwa. Mata uang: Kina (PGK). Bahasa: Tok Pisin, Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan lebih dari 800 bahasa dan keanekaragaman budaya yang luar biasa.",
+    "meta": {
+      "officialName": "Papua New Guinea",
+      "shortName": "PNG",
+      "capital": "Port Moresby",
+      "capitalCoordinates": {
+        "lat": -9.4438,
+        "lng": 147.1803
+      },
+      "largestCity": "Port Moresby",
+      "demonym": "PNG",
+      "subregion": "Melanesia",
+      "area": 462840,
+      "areaRank": 54,
+      "coastline": 5152,
+      "highestPoint": "Mount Wilhelm",
+      "highestElevation": 4509,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Indonesia"
+      ],
+      "coordinates": {
+        "lat": -6,
+        "lng": 147
+      },
+      "timezone": [
+        "UTC+10"
+      ],
+      "utcOffset": [
+        "+10"
+      ],
+      "population": 10000000,
+      "populationRank": 88,
+      "populationDensity": 21,
+      "populationGrowth": 2.5,
+      "medianAge": 22,
+      "lifeExpectancy": 64,
+      "fertilityRate": 3.5,
+      "urbanization": 13,
+      "ethnicGroups": [
+        {
+          "name": "Pribumi",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Tok Pisin",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 50,
+          "official": true
+        },
+        {
+          "name": "Hiri Motu",
+          "percentage": 30
+        }
+      ],
+      "literacyRate": 64,
+      "governmentType": "Monarki Konstitusional Parlementer",
+      "independenceDay": "1975-09-16",
+      "nationalHoliday": "16 September",
+      "legalSystem": "Common Law",
+      "constitution": "1975",
+      "administrativeDivisions": 22,
+      "memberships": [
+        "PBB",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 41.9,
+      "hdi": 0.555,
+      "hdiRank": 156,
+      "corruptionIndex": 28,
+      "currency": "Kina",
+      "currencyCode": "PGK",
+      "gdp": 30000000000,
+      "gdpPerCapita": 3000,
+      "gdpPpp": 40000000000,
+      "gdpGrowth": 4,
+      "inflation": 5,
+      "unemployment": 5,
+      "povertyRate": 40,
+      "mainIndustries": [
+        "Tambang",
+        "Pertanian",
+        "Perikanan",
+        "Kayu",
+        "Energi"
+      ],
+      "exports": [
+        {
+          "item": "Emas",
+          "value": 8000000000
+        },
+        {
+          "item": "Tembaga",
+          "value": 6000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 3000000000
+        },
+        {
+          "item": "Kayu",
+          "value": 2000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Emas",
+        "Tembaga",
+        "Minyak",
+        "Kayu",
+        "Perikanan"
+      ],
+      "economicRanking": 80,
+      "internetPenetration": 20,
+      "mobilePenetration": 40,
+      "electricityAccess": 30,
+      "roadLength": 20000,
+      "railwayLength": 0,
+      "airports": 50,
+      "seaports": 20,
+      "healthcareAccess": 30,
+      "educationIndex": 0.42,
+      "nationalMotto": "Kebebasan, Kemakmuran, Persatuan",
+      "nationalAnthem": "O Arise, All You Sons",
+      "nationalAnimal": "Kasuari",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Mumu",
+        "Sago",
+        "Kaukau",
+        "Taro",
+        "Pitpit"
+      ],
+      "culturalHeritage": [
+        "Port Moresby",
+        "Lae",
+        "Mount Hagen",
+        "Madang"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 30,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 2000,
+      "forestArea": 70,
+      "protectedAreas": 10,
+      "biodiversityRank": 5,
+      "carbonEmissions": 0.5,
+      "environmentalIndex": 45,
+      "riskScore": 55,
+      "politicalStability": 45,
+      "crimeIndex": 50,
+      "militarySpending": 1,
+      "peaceIndex": 60,
+      "terrorismIndex": 20,
+      "refugeePopulation": 5000,
+      "opportunityScore": 35,
+      "easeOfDoingBusiness": 35,
+      "innovationIndex": 25,
+      "startupEcosystem": 20,
+      "investmentScore": 30,
+      "talentPool": 45,
+      "marketSize": 55,
+      "infrastructureQuality": 20,
+      "internetSpeed": 8,
+      "digitalAdoption": 20,
+      "techEcosystem": 15,
+      "aiReadiness": 10,
+      "startups": 10,
+      "phoneCode": "+675",
+      "tld": ".pg",
+      "isoCode": "PNG",
+      "isoCode2": "PG",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "tambang",
+        "budaya",
+        "commonwealth"
+      ]
+    }
+  },
+  {
+    "id": "negara-kepulauan-solomon",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Kepulauan Solomon",
+    "tags": [
+      "Melanesia"
+    ],
+    "teks": "Kepulauan Solomon - Negara kepulauan di Oseania dengan perikanan dan pariwisata. Ibu kota: Honiara. Populasi: 0.7 juta jiwa. Mata uang: Dolar Solomon (SBD). Bahasa: Inggris. Sistem pemerintahan: Monarki Konstitusional Parlementer. Negara dengan terumbu karang dan sejarah Perang Dunia II.",
+    "meta": {
+      "officialName": "Kepulauan Solomon",
+      "shortName": "SLB",
+      "capital": "Honiara",
+      "capitalCoordinates": {
+        "lat": -9.4456,
+        "lng": 159.9733
+      },
+      "largestCity": "Honiara",
+      "demonym": "Solomon",
+      "subregion": "Melanesia",
+      "area": 28896,
+      "areaRank": 140,
+      "coastline": 5313,
+      "highestPoint": "Mount Popomanaseu",
+      "highestElevation": 2335,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -8,
+        "lng": 159
+      },
+      "timezone": [
+        "UTC+11"
+      ],
+      "utcOffset": [
+        "+11"
+      ],
+      "population": 700000,
+      "populationRank": 165,
+      "populationDensity": 24,
+      "populationGrowth": 2.5,
+      "medianAge": 20,
+      "lifeExpectancy": 73,
+      "fertilityRate": 3.5,
+      "urbanization": 25,
+      "ethnicGroups": [
+        {
+          "name": "Melanesia",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Inggris",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Pijin",
+          "percentage": 60
+        }
+      ],
+      "literacyRate": 76,
+      "governmentType": "Monarki Konstitusional Parlementer",
+      "independenceDay": "1978-07-07",
+      "nationalHoliday": "7 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "1978",
+      "administrativeDivisions": 9,
+      "memberships": [
+        "PBB",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 37,
+      "hdi": 0.567,
+      "hdiRank": 152,
+      "corruptionIndex": 42,
+      "currency": "Dolar Solomon",
+      "currencyCode": "SBD",
+      "gdp": 2000000000,
+      "gdpPerCapita": 2850,
+      "gdpPpp": 3000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 30,
+      "mainIndustries": [
+        "Perikanan",
+        "Kayu",
+        "Pariwisata",
+        "Pertanian"
+      ],
+      "exports": [
+        {
+          "item": "Kayu",
+          "value": 500000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 300000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 200000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 300000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 200000000
+        },
+        {
+          "item": "Makanan",
+          "value": 150000000
+        },
+        {
+          "item": "Minyak",
+          "value": 100000000
+        }
+      ],
+      "tradeBalance": -200000000,
+      "naturalResources": [
+        "Kayu",
+        "Perikanan",
+        "Emas",
+        "Tembaga"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 20,
+      "mobilePenetration": 40,
+      "electricityAccess": 30,
+      "roadLength": 2000,
+      "railwayLength": 0,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 40,
+      "educationIndex": 0.48,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "God Save the King",
+      "nationalAnimal": "Penyu",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Poi",
+        "Taro",
+        "Cassava",
+        "Fish",
+        "Coconut"
+      ],
+      "culturalHeritage": [
+        "Honiara",
+        "Gizo",
+        "Munda",
+        "Auki"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 35,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 3000,
+      "forestArea": 80,
+      "protectedAreas": 10,
+      "biodiversityRank": 10,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 50,
+      "riskScore": 40,
+      "politicalStability": 60,
+      "crimeIndex": 35,
+      "militarySpending": 0.5,
+      "peaceIndex": 45,
+      "terrorismIndex": 10,
+      "refugeePopulation": 0,
+      "opportunityScore": 35,
+      "easeOfDoingBusiness": 35,
+      "innovationIndex": 25,
+      "startupEcosystem": 15,
+      "investmentScore": 30,
+      "talentPool": 30,
+      "marketSize": 25,
+      "infrastructureQuality": 25,
+      "internetSpeed": 8,
+      "digitalAdoption": 20,
+      "techEcosystem": 15,
+      "aiReadiness": 10,
+      "startups": 5,
+      "phoneCode": "+677",
+      "tld": ".sb",
+      "isoCode": "SLB",
+      "isoCode2": "SB",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "terumbu",
+        "sejarah",
+        "pariwisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-vanuatu",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Vanuatu",
+    "tags": [
+      "Melanesia"
+    ],
+    "teks": "Vanuatu - Negara kepulauan di Oseania dengan aktivitas vulkanik. Ibu kota: Port Vila. Populasi: 0.3 juta jiwa. Mata uang: Vatu (VUV). Bahasa: Bislama, Inggris, Prancis. Sistem pemerintahan: Republik Parlementer. Negara dengan gunung berapi aktif, pantai indah, dan budaya Melanesia yang kaya.",
+    "meta": {
+      "officialName": "Republik Vanuatu",
+      "shortName": "VUT",
+      "capital": "Port Vila",
+      "capitalCoordinates": {
+        "lat": -17.7333,
+        "lng": 168.3167
+      },
+      "largestCity": "Port Vila",
+      "demonym": "Vanuatu",
+      "subregion": "Melanesia",
+      "area": 12189,
+      "areaRank": 157,
+      "coastline": 2528,
+      "highestPoint": "Mount Tabwemasana",
+      "highestElevation": 1879,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -16,
+        "lng": 167
+      },
+      "timezone": [
+        "UTC+11"
+      ],
+      "utcOffset": [
+        "+11"
+      ],
+      "population": 300000,
+      "populationRank": 175,
+      "populationDensity": 24,
+      "populationGrowth": 2,
+      "medianAge": 22,
+      "lifeExpectancy": 70,
+      "fertilityRate": 3.5,
+      "urbanization": 25,
+      "ethnicGroups": [
+        {
+          "name": "Melanesia",
+          "percentage": 98
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 90
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "languages": [
+        {
+          "name": "Bislama",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 50,
+          "official": true
+        },
+        {
+          "name": "Prancis",
+          "percentage": 30,
+          "official": true
+        }
+      ],
+      "literacyRate": 85,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1980-07-30",
+      "nationalHoliday": "30 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "1980",
+      "administrativeDivisions": 6,
+      "memberships": [
+        "PBB",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 37,
+      "hdi": 0.609,
+      "hdiRank": 139,
+      "corruptionIndex": 43,
+      "currency": "Vatu",
+      "currencyCode": "VUV",
+      "gdp": 1000000000,
+      "gdpPerCapita": 3330,
+      "gdpPpp": 2000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Perikanan",
+        "Keuangan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 300000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 200000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 100000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 200000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 150000000
+        },
+        {
+          "item": "Makanan",
+          "value": 100000000
+        },
+        {
+          "item": "Minyak",
+          "value": 80000000
+        }
+      ],
+      "tradeBalance": -100000000,
+      "naturalResources": [
+        "Perikanan",
+        "Kayu",
+        "Emas",
+        "Mangan"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 50,
+      "roadLength": 1000,
+      "railwayLength": 0,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 50,
+      "educationIndex": 0.52,
+      "nationalMotto": "Kita berdiri teguh bersama Tuhan",
+      "nationalAnthem": "Yumi, Yumi, Yumi",
+      "nationalAnimal": "Burung",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Laplap",
+        "Coconut Crab",
+        "Taro",
+        "Fish",
+        "Nalot"
+      ],
+      "culturalHeritage": [
+        "Port Vila",
+        "Tanna",
+        "Espiritu Santo",
+        "Pentecost"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 45,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 2500,
+      "forestArea": 70,
+      "protectedAreas": 10,
+      "biodiversityRank": 12,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 55,
+      "riskScore": 35,
+      "politicalStability": 70,
+      "crimeIndex": 25,
+      "militarySpending": 0.5,
+      "peaceIndex": 40,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 40,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 20,
+      "investmentScore": 35,
+      "talentPool": 30,
+      "marketSize": 20,
+      "infrastructureQuality": 35,
+      "internetSpeed": 12,
+      "digitalAdoption": 25,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 5,
+      "phoneCode": "+678",
+      "tld": ".vu",
+      "isoCode": "VUT",
+      "isoCode2": "VU",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "osenian",
+        "vulkan",
+        "pariwisata",
+        "pasifik"
+      ]
+    }
+  },
+  {
+    "id": "negara-samoa",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Samoa",
+    "tags": [
+      "Polynesia"
+    ],
+    "teks": "Samoa - Negara kepulauan di Oseania dengan budaya Polinesia. Ibu kota: Apia. Populasi: 0.2 juta jiwa. Mata uang: Tala (WST). Bahasa: Samoa, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan Commonwealth. Negara dengan budaya Polinesia yang kaya dan pemandangan alam yang indah.",
+    "meta": {
+      "officialName": "Negara Merdeka Samoa",
+      "shortName": "WSM",
+      "capital": "Apia",
+      "capitalCoordinates": {
+        "lat": -13.8314,
+        "lng": -171.7519
+      },
+      "largestCity": "Apia",
+      "demonym": "Samoa",
+      "subregion": "Polynesia",
+      "area": 2842,
+      "areaRank": 174,
+      "coastline": 403,
+      "highestPoint": "Mauga Silisili",
+      "highestElevation": 1857,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -13.8,
+        "lng": -172
+      },
+      "timezone": [
+        "UTC+13"
+      ],
+      "utcOffset": [
+        "+13"
+      ],
+      "population": 200000,
+      "populationRank": 176,
+      "populationDensity": 70,
+      "populationGrowth": 1.5,
+      "medianAge": 22,
+      "lifeExpectancy": 73,
+      "fertilityRate": 3.5,
+      "urbanization": 20,
+      "ethnicGroups": [
+        {
+          "name": "Samoa",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 98
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Samoa",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 50,
+          "official": true
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1962-01-01",
+      "nationalHoliday": "1 Juni",
+      "legalSystem": "Common Law",
+      "constitution": "1962",
+      "administrativeDivisions": 11,
+      "memberships": [
+        "PBB",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 38,
+      "hdi": 0.702,
+      "hdiRank": 111,
+      "corruptionIndex": 48,
+      "currency": "Tala",
+      "currencyCode": "WST",
+      "gdp": 800000000,
+      "gdpPerCapita": 4000,
+      "gdpPpp": 1000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Perikanan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 300000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 200000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 100000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 200000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 150000000
+        },
+        {
+          "item": "Makanan",
+          "value": 100000000
+        },
+        {
+          "item": "Minyak",
+          "value": 80000000
+        }
+      ],
+      "tradeBalance": -100000000,
+      "naturalResources": [
+        "Perikanan",
+        "Kayu",
+        "Pertanian"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 70,
+      "roadLength": 1000,
+      "railwayLength": 0,
+      "airports": 5,
+      "seaports": 5,
+      "healthcareAccess": 55,
+      "educationIndex": 0.58,
+      "nationalMotto": "Samoa adalah yang pertama",
+      "nationalAnthem": "The Banner of Freedom",
+      "nationalAnimal": "Burung",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Palusami",
+        "Oka",
+        "Taro",
+        "Coconut",
+        "Fish"
+      ],
+      "culturalHeritage": [
+        "Apia",
+        "Savai'i",
+        "Upolu",
+        "Manono"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 55,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 3000,
+      "forestArea": 50,
+      "protectedAreas": 10,
+      "biodiversityRank": 20,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 55,
+      "riskScore": 35,
+      "politicalStability": 75,
+      "crimeIndex": 20,
+      "militarySpending": 0.5,
+      "peaceIndex": 40,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 40,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 20,
+      "investmentScore": 35,
+      "talentPool": 30,
+      "marketSize": 20,
+      "infrastructureQuality": 40,
+      "internetSpeed": 15,
+      "digitalAdoption": 25,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 5,
+      "phoneCode": "+685",
+      "tld": ".ws",
+      "isoCode": "WSM",
+      "isoCode2": "WS",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "polinesia",
+        "pariwisata",
+        "organic"
+      ]
+    }
+  },
+  {
+    "id": "negara-tonga",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Tonga",
+    "tags": [
+      "Polynesia"
+    ],
+    "teks": "Tonga - Negara kepulauan di Oseania dengan kerajaan Polinesia. Ibu kota: Nuku'alofa. Populasi: 0.1 juta jiwa. Mata uang: Pa'anga (TOP). Bahasa: Tonga, Inggris. Sistem pemerintahan: Monarki Konstitusional. Satu-satunya kerajaan di Pasifik dengan budaya Polinesia yang kaya dan sejarah panjang.",
+    "meta": {
+      "officialName": "Kerajaan Tonga",
+      "shortName": "TON",
+      "capital": "Nuku'alofa",
+      "capitalCoordinates": {
+        "lat": -21.1343,
+        "lng": -175.2018
+      },
+      "largestCity": "Nuku'alofa",
+      "demonym": "Tonga",
+      "subregion": "Polynesia",
+      "area": 747,
+      "areaRank": 173,
+      "coastline": 419,
+      "highestPoint": "Kao",
+      "highestElevation": 1030,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": -21,
+        "lng": -175
+      },
+      "timezone": [
+        "UTC+13"
+      ],
+      "utcOffset": [
+        "+13"
+      ],
+      "population": 100000,
+      "populationRank": 178,
+      "populationDensity": 133,
+      "populationGrowth": 1,
+      "medianAge": 22,
+      "lifeExpectancy": 71,
+      "fertilityRate": 3.5,
+      "urbanization": 23,
+      "ethnicGroups": [
+        {
+          "name": "Tonga",
+          "percentage": 98
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 90
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "languages": [
+        {
+          "name": "Tonga",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 50,
+          "official": true
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Monarki Konstitusional",
+      "independenceDay": "1970-06-04",
+      "nationalHoliday": "4 Juli",
+      "legalSystem": "Common Law",
+      "constitution": "1875",
+      "administrativeDivisions": 5,
+      "memberships": [
+        "PBB",
+        "Commonwealth",
+        "WTO"
+      ],
+      "giniCoefficient": 37,
+      "hdi": 0.725,
+      "hdiRank": 99,
+      "corruptionIndex": 45,
+      "currency": "Pa'anga",
+      "currencyCode": "TOP",
+      "gdp": 500000000,
+      "gdpPerCapita": 5000,
+      "gdpPpp": 700000000,
+      "gdpGrowth": 3,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Perikanan",
+        "Pertanian",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 200000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 100000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 80000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 150000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 100000000
+        },
+        {
+          "item": "Makanan",
+          "value": 80000000
+        },
+        {
+          "item": "Minyak",
+          "value": 60000000
+        }
+      ],
+      "tradeBalance": -100000000,
+      "naturalResources": [
+        "Perikanan",
+        "Kayu",
+        "Pertanian"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 70,
+      "roadLength": 500,
+      "railwayLength": 0,
+      "airports": 5,
+      "seaports": 5,
+      "healthcareAccess": 55,
+      "educationIndex": 0.58,
+      "nationalMotto": "Tuhan dan Tonga adalah warisan saya",
+      "nationalAnthem": "Ko e fasi 'o e tu'i 'o e Otu Tonga",
+      "nationalAnimal": "Burung",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Lu",
+        "Ota Ika",
+        "Taro",
+        "Coconut",
+        "Fish"
+      ],
+      "culturalHeritage": [
+        "Nuku'alofa",
+        "Ha'apai",
+        "Vava'u",
+        "Tongatapu"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 50,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 2000,
+      "forestArea": 20,
+      "protectedAreas": 10,
+      "biodiversityRank": 20,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 50,
+      "riskScore": 35,
+      "politicalStability": 75,
+      "crimeIndex": 20,
+      "militarySpending": 0.5,
+      "peaceIndex": 40,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 40,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 20,
+      "investmentScore": 35,
+      "talentPool": 30,
+      "marketSize": 20,
+      "infrastructureQuality": 40,
+      "internetSpeed": 15,
+      "digitalAdoption": 25,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 5,
+      "phoneCode": "+676",
+      "tld": ".to",
+      "isoCode": "TON",
+      "isoCode2": "TO",
+      "drivingSide": "left",
+      "tags": [
+        "negara",
+        "osenian",
+        "kerajaan",
+        "pasifik",
+        "budaya"
+      ]
+    }
+  },
+  {
+    "id": "negara-kepulauan-marshall",
+    "kategori": "negara",
+    "wilayah": "osenian",
+    "nama": "Kepulauan Marshall",
+    "tags": [
+      "Micronesia"
+    ],
+    "teks": "Kepulauan Marshall - Negara kepulauan di Oseania dengan keindahan alam. Ibu kota: Majuro. Populasi: 42 ribu jiwa. Mata uang: Dolar AS (USD). Bahasa: Marshall, Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan terumbu karang dan laguna yang indah.",
+    "meta": {
+      "officialName": "Republik Kepulauan Marshall",
+      "shortName": "MHL",
+      "capital": "Majuro",
+      "capitalCoordinates": {
+        "lat": 7.1164,
+        "lng": 171.1858
+      },
+      "largestCity": "Majuro",
+      "demonym": "Marshall",
+      "subregion": "Micronesia",
+      "area": 181,
+      "areaRank": 179,
+      "coastline": 370,
+      "highestPoint": "Likiep",
+      "highestElevation": 10,
+      "lowestPoint": "Laut Pasifik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 9,
+        "lng": 168
+      },
+      "timezone": [
+        "UTC+12"
+      ],
+      "utcOffset": [
+        "+12"
+      ],
+      "population": 42000,
+      "populationRank": 179,
+      "populationDensity": 232,
+      "populationGrowth": 0.5,
+      "medianAge": 22,
+      "lifeExpectancy": 73,
+      "fertilityRate": 3,
+      "urbanization": 72,
+      "ethnicGroups": [
+        {
+          "name": "Marshall",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Marshall",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 50,
+          "official": true
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1986-10-21",
+      "nationalHoliday": "1 Mei",
+      "legalSystem": "Common Law",
+      "constitution": "1979",
+      "administrativeDivisions": 24,
+      "memberships": [
+        "PBB",
+        "WTO"
+      ],
+      "giniCoefficient": 35,
+      "hdi": 0.704,
+      "hdiRank": 109,
+      "corruptionIndex": 40,
+      "currency": "Dolar AS",
+      "currencyCode": "USD",
+      "gdp": 200000000,
+      "gdpPerCapita": 4760,
+      "gdpPpp": 300000000,
+      "gdpGrowth": 2.5,
+      "inflation": 2,
+      "unemployment": 5,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pariwisata",
+        "Perikanan",
+        "Pertanian",
+        "Keuangan"
+      ],
+      "exports": [
+        {
+          "item": "Pariwisata",
+          "value": 80000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 50000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 30000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 80000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 60000000
+        },
+        {
+          "item": "Makanan",
+          "value": 40000000
+        },
+        {
+          "item": "Minyak",
+          "value": 30000000
+        }
+      ],
+      "tradeBalance": -50000000,
+      "naturalResources": [
+        "Perikanan",
+        "Kayu",
+        "Coconut"
+      ],
+      "economicRanking": 120,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 60,
+      "roadLength": 200,
+      "railwayLength": 0,
+      "airports": 10,
+      "seaports": 5,
+      "healthcareAccess": 55,
+      "educationIndex": 0.55,
+      "nationalMotto": "Kebebasan, Kemakmuran, Persatuan",
+      "nationalAnthem": "Forever Marshall Islands",
+      "nationalAnimal": "Penyu",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Coconut",
+        "Fish",
+        "Taro",
+        "Breadfruit",
+        "Pandanus"
+      ],
+      "culturalHeritage": [
+        "Majuro",
+        "Kwajalein",
+        "Bikini",
+        "Rongelap"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 45,
+      "climate": "Tropis",
+      "averageTemperature": 27,
+      "averageRainfall": 3000,
+      "forestArea": 20,
+      "protectedAreas": 10,
+      "biodiversityRank": 20,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 50,
+      "riskScore": 40,
+      "politicalStability": 70,
+      "crimeIndex": 20,
+      "militarySpending": 0.5,
+      "peaceIndex": 40,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 35,
+      "easeOfDoingBusiness": 35,
+      "innovationIndex": 25,
+      "startupEcosystem": 15,
+      "investmentScore": 30,
+      "talentPool": 20,
+      "marketSize": 15,
+      "infrastructureQuality": 35,
+      "internetSpeed": 12,
+      "digitalAdoption": 20,
+      "techEcosystem": 15,
+      "aiReadiness": 10,
+      "startups": 2,
+      "phoneCode": "+692",
+      "tld": ".mh",
+      "isoCode": "MHL",
+      "isoCode2": "MH",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "osenian",
+        "marshall",
+        "inggris",
+        "pasifik"
+      ]
+    }
+  }
+]

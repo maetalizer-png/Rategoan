@@ -1,0 +1,1921 @@
+[
+  {
+    "id": "negara-kongo",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Kongo",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Kongo - Negara di Afrika Tengah dengan hutan hujan Amazon. Ibu kota: Kinshasa. Populasi: 95 juta jiwa. Mata uang: Franc (CDF). Bahasa: Prancis. Sistem pemerintahan: Republik Semi-Presidensial. Negara dengan hutan hujan terbesar kedua di dunia dan sumber daya mineral melimpah.",
+    "meta": {
+      "officialName": "Republik Demokratik Kongo",
+      "shortName": "COD",
+      "capital": "Kinshasa",
+      "capitalCoordinates": {
+        "lat": -4.3225,
+        "lng": 15.3108
+      },
+      "largestCity": "Kinshasa",
+      "demonym": "Kongo",
+      "subregion": "Central Africa",
+      "area": 2345409,
+      "areaRank": 11,
+      "coastline": 37,
+      "highestPoint": "Margherita Peak",
+      "highestElevation": 5109,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Angola",
+        "Kongo",
+        "Republik Afrika Tengah",
+        "Sudan Selatan",
+        "Uganda",
+        "Rwanda",
+        "Burundi",
+        "Tanzania",
+        "Zambia"
+      ],
+      "coordinates": {
+        "lat": -4,
+        "lng": 21
+      },
+      "timezone": [
+        "Waktu Kongo"
+      ],
+      "utcOffset": [
+        "+1",
+        "+2"
+      ],
+      "population": 95000000,
+      "populationRank": 16,
+      "populationDensity": 40,
+      "populationGrowth": 3,
+      "medianAge": 17,
+      "lifeExpectancy": 60,
+      "fertilityRate": 6,
+      "urbanization": 46,
+      "ethnicGroups": [
+        {
+          "name": "Bantu",
+          "percentage": 80
+        },
+        {
+          "name": "Pygmy",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 80
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 20
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Lingala",
+          "percentage": 30
+        },
+        {
+          "name": "Swahili",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 77,
+      "governmentType": "Republik Semi-Presidensial",
+      "independenceDay": "1960-06-30",
+      "nationalHoliday": "30 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "2006",
+      "administrativeDivisions": 26,
+      "memberships": [
+        "PBB",
+        "AU",
+        "WTO"
+      ],
+      "giniCoefficient": 42,
+      "hdi": 0.48,
+      "hdiRank": 175,
+      "corruptionIndex": 18,
+      "currency": "Franc",
+      "currencyCode": "CDF",
+      "gdp": 50000000000,
+      "gdpPerCapita": 520,
+      "gdpPpp": 100000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 5,
+      "unemployment": 10,
+      "povertyRate": 70,
+      "mainIndustries": [
+        "Tambang",
+        "Pertanian",
+        "Kayu",
+        "Manufaktur",
+        "Energi"
+      ],
+      "exports": [
+        {
+          "item": "Tembaga",
+          "value": 10000000000
+        },
+        {
+          "item": "Emas",
+          "value": 8000000000
+        },
+        {
+          "item": "Kayu",
+          "value": 5000000000
+        },
+        {
+          "item": "Berlian",
+          "value": 3000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 5000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 4000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 2000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Tembaga",
+        "Emas",
+        "Berlian",
+        "Kayu",
+        "Air"
+      ],
+      "economicRanking": 70,
+      "internetPenetration": 20,
+      "mobilePenetration": 40,
+      "electricityAccess": 20,
+      "roadLength": 150000,
+      "railwayLength": 5000,
+      "airports": 200,
+      "seaports": 10,
+      "healthcareAccess": 30,
+      "educationIndex": 0.42,
+      "nationalMotto": "Keadilan, Kedamaian, Kerja",
+      "nationalAnthem": "Debout Congolais",
+      "nationalAnimal": "Okapi",
+      "nationalFlower": "Bunga Teratai",
+      "nationalCuisine": [
+        "Fufu",
+        "Saka Saka",
+        "Pondu",
+        "Manioc",
+        "Sumbala"
+      ],
+      "culturalHeritage": [
+        "Kinshasa",
+        "Lubumbashi",
+        "Goma",
+        "Bukavu"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 25,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1500,
+      "forestArea": 60,
+      "protectedAreas": 10,
+      "biodiversityRank": 3,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 40,
+      "riskScore": 70,
+      "politicalStability": 25,
+      "crimeIndex": 50,
+      "militarySpending": 1.5,
+      "peaceIndex": 70,
+      "terrorismIndex": 30,
+      "refugeePopulation": 50000,
+      "opportunityScore": 30,
+      "easeOfDoingBusiness": 30,
+      "innovationIndex": 20,
+      "startupEcosystem": 20,
+      "investmentScore": 25,
+      "talentPool": 55,
+      "marketSize": 80,
+      "infrastructureQuality": 15,
+      "internetSpeed": 5,
+      "digitalAdoption": 20,
+      "techEcosystem": 15,
+      "aiReadiness": 10,
+      "startups": 15,
+      "phoneCode": "+243",
+      "tld": ".cd",
+      "isoCode": "COD",
+      "isoCode2": "CD",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "hutan",
+        "amazon",
+        "mineral"
+      ]
+    }
+  },
+  {
+    "id": "negara-angola",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Angola",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Angola - Negara di Afrika Tengah dengan minyak dan berlian. Ibu kota: Luanda. Populasi: 35 juta jiwa. Mata uang: Kwanza (AOA). Bahasa: Portugis. Sistem pemerintahan: Republik Presidensial. Negara dengan ekonomi minyak terbesar di Afrika dan pertumbuhan yang cepat.",
+    "meta": {
+      "officialName": "Republik Angola",
+      "shortName": "AGO",
+      "capital": "Luanda",
+      "capitalCoordinates": {
+        "lat": -8.839,
+        "lng": 13.2894
+      },
+      "largestCity": "Luanda",
+      "demonym": "Angola",
+      "subregion": "Central Africa",
+      "area": 1246700,
+      "areaRank": 22,
+      "coastline": 1600,
+      "highestPoint": "Morro de Moco",
+      "highestElevation": 2620,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Kongo",
+        "Zambia",
+        "Namibia"
+      ],
+      "coordinates": {
+        "lat": -12,
+        "lng": 18
+      },
+      "timezone": [
+        "Waktu Angola"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 35000000,
+      "populationRank": 42,
+      "populationDensity": 28,
+      "populationGrowth": 3,
+      "medianAge": 17,
+      "lifeExpectancy": 62,
+      "fertilityRate": 5.5,
+      "urbanization": 66,
+      "ethnicGroups": [
+        {
+          "name": "Ovimbundu",
+          "percentage": 37
+        },
+        {
+          "name": "Kimbundu",
+          "percentage": 25
+        },
+        {
+          "name": "Bakongo",
+          "percentage": 13
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 25
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 95
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Portugis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Umbundu",
+          "percentage": 30
+        },
+        {
+          "name": "Kimbundu",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 71,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1975-11-11",
+      "nationalHoliday": "11 November",
+      "legalSystem": "Civil Law",
+      "constitution": "2010",
+      "administrativeDivisions": 18,
+      "memberships": [
+        "PBB",
+        "AU",
+        "OPEC",
+        "WTO"
+      ],
+      "giniCoefficient": 51.3,
+      "hdi": 0.581,
+      "hdiRank": 148,
+      "corruptionIndex": 29,
+      "currency": "Kwanza",
+      "currencyCode": "AOA",
+      "gdp": 100000000000,
+      "gdpPerCapita": 2850,
+      "gdpPpp": 250000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 20,
+      "unemployment": 10,
+      "povertyRate": 30,
+      "mainIndustries": [
+        "Minyak",
+        "Berlian",
+        "Pertanian",
+        "Perikanan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 30000000000
+        },
+        {
+          "item": "Berlian",
+          "value": 10000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 5000000000
+        },
+        {
+          "item": "Perikanan",
+          "value": 3000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 10000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 8000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 6000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 4000000000
+        }
+      ],
+      "tradeBalance": 20000000000,
+      "naturalResources": [
+        "Minyak",
+        "Berlian",
+        "Emas",
+        "Tembaga",
+        "Perikanan"
+      ],
+      "economicRanking": 55,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 40,
+      "roadLength": 50000,
+      "railwayLength": 3000,
+      "airports": 100,
+      "seaports": 20,
+      "healthcareAccess": 40,
+      "educationIndex": 0.48,
+      "nationalMotto": "Kekuatan, Persatuan, Kemakmuran",
+      "nationalAnthem": "Angola Avante!",
+      "nationalAnimal": "Sable Antelope",
+      "nationalFlower": "Bunga Welwitschia",
+      "nationalCuisine": [
+        "Muamba de Galinha",
+        "Calulu",
+        "Funji",
+        "Moamba",
+        "Kizaka"
+      ],
+      "culturalHeritage": [
+        "Luanda",
+        "Huambo",
+        "Benguela",
+        "Namibe"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 35,
+      "climate": "Beragam",
+      "averageTemperature": 25,
+      "averageRainfall": 500,
+      "forestArea": 50,
+      "protectedAreas": 10,
+      "biodiversityRank": 12,
+      "carbonEmissions": 2,
+      "environmentalIndex": 42,
+      "riskScore": 50,
+      "politicalStability": 45,
+      "crimeIndex": 40,
+      "militarySpending": 3,
+      "peaceIndex": 55,
+      "terrorismIndex": 20,
+      "refugeePopulation": 5000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 25,
+      "investmentScore": 40,
+      "talentPool": 50,
+      "marketSize": 65,
+      "infrastructureQuality": 35,
+      "internetSpeed": 12,
+      "digitalAdoption": 30,
+      "techEcosystem": 25,
+      "aiReadiness": 20,
+      "startups": 20,
+      "phoneCode": "+244",
+      "tld": ".ao",
+      "isoCode": "AGO",
+      "isoCode2": "AO",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "minyak",
+        "berlian",
+        "ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "negara-gabon",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Gabon",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Gabon - Negara di Afrika Tengah dengan hutan dan minyak. Ibu kota: Libreville. Populasi: 2.2 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan hutan hujan dan keanekaragaman hayati yang kaya.",
+    "meta": {
+      "officialName": "Republik Gabon",
+      "shortName": "GAB",
+      "capital": "Libreville",
+      "capitalCoordinates": {
+        "lat": 0.4162,
+        "lng": 9.4673
+      },
+      "largestCity": "Libreville",
+      "demonym": "Gabon",
+      "subregion": "Central Africa",
+      "area": 267667,
+      "areaRank": 76,
+      "coastline": 885,
+      "highestPoint": "Mont Iboundji",
+      "highestElevation": 1575,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Guinea Khatulistiwa",
+        "Kamerun",
+        "Kongo"
+      ],
+      "coordinates": {
+        "lat": -1,
+        "lng": 11.75
+      },
+      "timezone": [
+        "Waktu Gabon"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 2200000,
+      "populationRank": 143,
+      "populationDensity": 8,
+      "populationGrowth": 2,
+      "medianAge": 22,
+      "lifeExpectancy": 66,
+      "fertilityRate": 3.5,
+      "urbanization": 87,
+      "ethnicGroups": [
+        {
+          "name": "Fang",
+          "percentage": 40
+        },
+        {
+          "name": "Punu",
+          "percentage": 20
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 40
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 80
+        },
+        {
+          "name": "Islam",
+          "percentage": 10
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Fang",
+          "percentage": 30
+        }
+      ],
+      "literacyRate": 85,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1960-08-17",
+      "nationalHoliday": "17 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "1991",
+      "administrativeDivisions": 9,
+      "memberships": [
+        "PBB",
+        "AU",
+        "OPEC",
+        "WTO"
+      ],
+      "giniCoefficient": 38,
+      "hdi": 0.703,
+      "hdiRank": 112,
+      "corruptionIndex": 31,
+      "currency": "Franc CFA",
+      "currencyCode": "XAF",
+      "gdp": 20000000000,
+      "gdpPerCapita": 9000,
+      "gdpPpp": 40000000000,
+      "gdpGrowth": 3,
+      "inflation": 2,
+      "unemployment": 20,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Minyak",
+        "Kayu",
+        "Tambang",
+        "Pertanian",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 8000000000
+        },
+        {
+          "item": "Kayu",
+          "value": 5000000000
+        },
+        {
+          "item": "Mangan",
+          "value": 3000000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 1000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1500000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Minyak",
+        "Kayu",
+        "Mangan",
+        "Emas",
+        "Perikanan"
+      ],
+      "economicRanking": 85,
+      "internetPenetration": 50,
+      "mobilePenetration": 75,
+      "electricityAccess": 80,
+      "roadLength": 10000,
+      "railwayLength": 800,
+      "airports": 20,
+      "seaports": 10,
+      "healthcareAccess": 60,
+      "educationIndex": 0.62,
+      "nationalMotto": "Persatuan, Kerja, Keadilan",
+      "nationalAnthem": "La Concorde",
+      "nationalAnimal": "Panther",
+      "nationalFlower": "Bunga Delonix",
+      "nationalCuisine": [
+        "Poulet Nyembwe",
+        "Atanga",
+        "Manioc",
+        "Poisson",
+        "Saka Saka"
+      ],
+      "culturalHeritage": [
+        "Libreville",
+        "Port-Gentil",
+        "Franceville",
+        "Lope"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 55,
+      "climate": "Tropis",
+      "averageTemperature": 26,
+      "averageRainfall": 1500,
+      "forestArea": 85,
+      "protectedAreas": 15,
+      "biodiversityRank": 8,
+      "carbonEmissions": 2,
+      "environmentalIndex": 55,
+      "riskScore": 35,
+      "politicalStability": 55,
+      "crimeIndex": 30,
+      "militarySpending": 1,
+      "peaceIndex": 45,
+      "terrorismIndex": 10,
+      "refugeePopulation": 0,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 35,
+      "startupEcosystem": 30,
+      "investmentScore": 40,
+      "talentPool": 45,
+      "marketSize": 40,
+      "infrastructureQuality": 50,
+      "internetSpeed": 20,
+      "digitalAdoption": 40,
+      "techEcosystem": 35,
+      "aiReadiness": 30,
+      "startups": 15,
+      "phoneCode": "+241",
+      "tld": ".ga",
+      "isoCode": "GAB",
+      "isoCode2": "GA",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "hutan",
+        "minyak",
+        "konservasi"
+      ]
+    }
+  },
+  {
+    "id": "negara-chad",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Chad",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Chad - Negara di Afrika Tengah dengan gurun Sahara. Ibu kota: N'Djamena. Populasi: 17 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Prancis, Arab. Sistem pemerintahan: Republik Presidensial. Negara dengan gurun Sahara dan Danau Chad yang bersejarah.",
+    "meta": {
+      "officialName": "Republik Chad",
+      "shortName": "TCD",
+      "capital": "N'Djamena",
+      "capitalCoordinates": {
+        "lat": 12.1348,
+        "lng": 15.0557
+      },
+      "largestCity": "N'Djamena",
+      "demonym": "Chad",
+      "subregion": "Central Africa",
+      "area": 1284000,
+      "areaRank": 20,
+      "coastline": 0,
+      "highestPoint": "Emi Koussi",
+      "highestElevation": 3445,
+      "lowestPoint": "Depresi Bodele",
+      "lowestElevation": 160,
+      "landBorders": [
+        "Libya",
+        "Sudan",
+        "Republik Afrika Tengah",
+        "Kamerun",
+        "Nigeria",
+        "Niger"
+      ],
+      "coordinates": {
+        "lat": 15,
+        "lng": 19
+      },
+      "timezone": [
+        "Waktu Chad"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 17000000,
+      "populationRank": 71,
+      "populationDensity": 13,
+      "populationGrowth": 3,
+      "medianAge": 16,
+      "lifeExpectancy": 54,
+      "fertilityRate": 6,
+      "urbanization": 23,
+      "ethnicGroups": [
+        {
+          "name": "Sara",
+          "percentage": 30
+        },
+        {
+          "name": "Arab",
+          "percentage": 20
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 50
+        }
+      ],
+      "religions": [
+        {
+          "name": "Islam",
+          "percentage": 55
+        },
+        {
+          "name": "Kristen",
+          "percentage": 40
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Arab",
+          "percentage": 60,
+          "official": true
+        }
+      ],
+      "literacyRate": 35,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1960-08-11",
+      "nationalHoliday": "11 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "2018",
+      "administrativeDivisions": 23,
+      "memberships": [
+        "PBB",
+        "AU",
+        "WTO"
+      ],
+      "giniCoefficient": 43.3,
+      "hdi": 0.398,
+      "hdiRank": 184,
+      "corruptionIndex": 20,
+      "currency": "Franc CFA",
+      "currencyCode": "XAF",
+      "gdp": 10000000000,
+      "gdpPerCapita": 580,
+      "gdpPpp": 30000000000,
+      "gdpGrowth": 3,
+      "inflation": 5,
+      "unemployment": 5,
+      "povertyRate": 60,
+      "mainIndustries": [
+        "Minyak",
+        "Pertanian",
+        "Peternakan",
+        "Tambang"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 3000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 1000000000
+        },
+        {
+          "item": "Peternakan",
+          "value": 500000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 800000000
+        }
+      ],
+      "tradeBalance": -500000000,
+      "naturalResources": [
+        "Minyak",
+        "Emas",
+        "Uranium",
+        "Kayu"
+      ],
+      "economicRanking": 100,
+      "internetPenetration": 15,
+      "mobilePenetration": 30,
+      "electricityAccess": 20,
+      "roadLength": 40000,
+      "railwayLength": 0,
+      "airports": 50,
+      "seaports": 0,
+      "healthcareAccess": 25,
+      "educationIndex": 0.32,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "La Tchadienne",
+      "nationalAnimal": "Kambing",
+      "nationalFlower": "Bunga Gurun",
+      "nationalCuisine": [
+        "Boule",
+        "Daba",
+        "Sauce",
+        "Manioc",
+        "Mouton"
+      ],
+      "culturalHeritage": [
+        "N'Djamena",
+        "Moundou",
+        "Sarh",
+        "Abeche"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Idul Fitri",
+        "Idul Adha",
+        "Christmas"
+      ],
+      "socialRanking": 20,
+      "climate": "Gurun",
+      "averageTemperature": 30,
+      "averageRainfall": 200,
+      "forestArea": 10,
+      "protectedAreas": 5,
+      "biodiversityRank": 25,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 35,
+      "riskScore": 75,
+      "politicalStability": 30,
+      "crimeIndex": 45,
+      "militarySpending": 3,
+      "peaceIndex": 70,
+      "terrorismIndex": 50,
+      "refugeePopulation": 50000,
+      "opportunityScore": 25,
+      "easeOfDoingBusiness": 25,
+      "innovationIndex": 15,
+      "startupEcosystem": 10,
+      "investmentScore": 20,
+      "talentPool": 35,
+      "marketSize": 55,
+      "infrastructureQuality": 15,
+      "internetSpeed": 5,
+      "digitalAdoption": 15,
+      "techEcosystem": 10,
+      "aiReadiness": 10,
+      "startups": 5,
+      "phoneCode": "+235",
+      "tld": ".td",
+      "isoCode": "TCD",
+      "isoCode2": "TD",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "sahara",
+        "danau-chad",
+        "peternakan"
+      ]
+    }
+  },
+  {
+    "id": "negara-republik-afrika-tengah",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Republik Afrika Tengah",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Republik Afrika Tengah - Negara di Afrika Tengah dengan hutan dan mineral. Ibu kota: Bangui. Populasi: 5.4 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Prancis, Sango. Sistem pemerintahan: Republik Presidensial. Negara dengan keanekaragaman hayati dan sumber daya mineral.",
+    "meta": {
+      "officialName": "Republik Afrika Tengah",
+      "shortName": "CAF",
+      "capital": "Bangui",
+      "capitalCoordinates": {
+        "lat": 4.3947,
+        "lng": 18.5582
+      },
+      "largestCity": "Bangui",
+      "demonym": "Afrika Tengah",
+      "subregion": "Central Africa",
+      "area": 622984,
+      "areaRank": 44,
+      "coastline": 0,
+      "highestPoint": "Mont Ngaoui",
+      "highestElevation": 1420,
+      "lowestPoint": "Sungai Ubangi",
+      "lowestElevation": 335,
+      "landBorders": [
+        "Kamerun",
+        "Chad",
+        "Sudan",
+        "Sudan Selatan",
+        "Kongo",
+        "Kongo"
+      ],
+      "coordinates": {
+        "lat": 7,
+        "lng": 21
+      },
+      "timezone": [
+        "Waktu Afrika Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 5400000,
+      "populationRank": 115,
+      "populationDensity": 8,
+      "populationGrowth": 2,
+      "medianAge": 18,
+      "lifeExpectancy": 54,
+      "fertilityRate": 5,
+      "urbanization": 40,
+      "ethnicGroups": [
+        {
+          "name": "Banda",
+          "percentage": 30
+        },
+        {
+          "name": "Gbaya",
+          "percentage": 25
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 45
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 80
+        },
+        {
+          "name": "Islam",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Sango",
+          "percentage": 80,
+          "official": true
+        }
+      ],
+      "literacyRate": 36,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1960-08-13",
+      "nationalHoliday": "13 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "2015",
+      "administrativeDivisions": 16,
+      "memberships": [
+        "PBB",
+        "AU",
+        "WTO"
+      ],
+      "giniCoefficient": 43,
+      "hdi": 0.397,
+      "hdiRank": 186,
+      "corruptionIndex": 25,
+      "currency": "Franc CFA",
+      "currencyCode": "XAF",
+      "gdp": 2000000000,
+      "gdpPerCapita": 370,
+      "gdpPpp": 5000000000,
+      "gdpGrowth": 3,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 70,
+      "mainIndustries": [
+        "Pertanian",
+        "Tambang",
+        "Kayu",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Kayu",
+          "value": 1000000000
+        },
+        {
+          "item": "Emas",
+          "value": 500000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 300000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 500000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 400000000
+        },
+        {
+          "item": "Makanan",
+          "value": 300000000
+        },
+        {
+          "item": "Minyak",
+          "value": 200000000
+        }
+      ],
+      "tradeBalance": -200000000,
+      "naturalResources": [
+        "Kayu",
+        "Emas",
+        "Berlian",
+        "Uranium"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 10,
+      "mobilePenetration": 25,
+      "electricityAccess": 15,
+      "roadLength": 20000,
+      "railwayLength": 0,
+      "airports": 30,
+      "seaports": 0,
+      "healthcareAccess": 25,
+      "educationIndex": 0.32,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "La Renaissance",
+      "nationalAnimal": "Gajah",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Fufu",
+        "Saka Saka",
+        "Manioc",
+        "Sauce",
+        "Poisson"
+      ],
+      "culturalHeritage": [
+        "Bangui",
+        "Berberati",
+        "Bouar",
+        "Bambari"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 15,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1500,
+      "forestArea": 30,
+      "protectedAreas": 10,
+      "biodiversityRank": 10,
+      "carbonEmissions": 0.05,
+      "environmentalIndex": 38,
+      "riskScore": 85,
+      "politicalStability": 15,
+      "crimeIndex": 55,
+      "militarySpending": 1.5,
+      "peaceIndex": 80,
+      "terrorismIndex": 40,
+      "refugeePopulation": 10000,
+      "opportunityScore": 20,
+      "easeOfDoingBusiness": 20,
+      "innovationIndex": 15,
+      "startupEcosystem": 10,
+      "investmentScore": 15,
+      "talentPool": 30,
+      "marketSize": 45,
+      "infrastructureQuality": 15,
+      "internetSpeed": 5,
+      "digitalAdoption": 10,
+      "techEcosystem": 10,
+      "aiReadiness": 5,
+      "startups": 5,
+      "phoneCode": "+236",
+      "tld": ".cf",
+      "isoCode": "CAF",
+      "isoCode2": "CF",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "hutan",
+        "mineral",
+        "biodiversitas"
+      ]
+    }
+  },
+  {
+    "id": "negara-kamerun",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Kamerun",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Kamerun - Negara di Afrika Tengah dengan keanekaragaman budaya. Ibu kota: Yaoundé. Populasi: 27 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Inggris, Prancis. Sistem pemerintahan: Republik Presidensial. Sering disebut \"Afrika Mini\" karena keanekaragaman hayati dan budaya yang luar biasa.",
+    "meta": {
+      "officialName": "Republik Kamerun",
+      "shortName": "CMR",
+      "capital": "Yaoundé",
+      "capitalCoordinates": {
+        "lat": 3.848,
+        "lng": 11.5021
+      },
+      "largestCity": "Douala",
+      "demonym": "Kamerun",
+      "subregion": "Central Africa",
+      "area": 475442,
+      "areaRank": 53,
+      "coastline": 402,
+      "highestPoint": "Fako",
+      "highestElevation": 4095,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Nigeria",
+        "Chad",
+        "Republik Afrika Tengah",
+        "Kongo",
+        "Gabon",
+        "Guinea Khatulistiwa"
+      ],
+      "coordinates": {
+        "lat": 6,
+        "lng": 12
+      },
+      "timezone": [
+        "Waktu Kamerun"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 27000000,
+      "populationRank": 49,
+      "populationDensity": 56,
+      "populationGrowth": 2.5,
+      "medianAge": 18,
+      "lifeExpectancy": 60,
+      "fertilityRate": 4.5,
+      "urbanization": 56,
+      "ethnicGroups": [
+        {
+          "name": "Bantu",
+          "percentage": 40
+        },
+        {
+          "name": "Fulani",
+          "percentage": 20
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 40
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 60
+        },
+        {
+          "name": "Islam",
+          "percentage": 20
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 20
+        }
+      ],
+      "languages": [
+        {
+          "name": "Prancis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 20,
+          "official": true
+        }
+      ],
+      "literacyRate": 77,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1960-01-01",
+      "nationalHoliday": "1 Januari",
+      "legalSystem": "Civil Law",
+      "constitution": "1972",
+      "administrativeDivisions": 10,
+      "memberships": [
+        "PBB",
+        "AU",
+        "ECOWAS",
+        "WTO"
+      ],
+      "giniCoefficient": 46.5,
+      "hdi": 0.563,
+      "hdiRank": 153,
+      "corruptionIndex": 25,
+      "currency": "Franc CFA",
+      "currencyCode": "XAF",
+      "gdp": 50000000000,
+      "gdpPerCapita": 1850,
+      "gdpPpp": 120000000000,
+      "gdpGrowth": 4,
+      "inflation": 3,
+      "unemployment": 5,
+      "povertyRate": 30,
+      "mainIndustries": [
+        "Pertanian",
+        "Minyak",
+        "Manufaktur",
+        "Pariwisata",
+        "Kayu"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 10000000000
+        },
+        {
+          "item": "Kayu",
+          "value": 5000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 3000000000
+        },
+        {
+          "item": "Kakao",
+          "value": 2000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 5000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 4000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 3000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 2000000000
+        }
+      ],
+      "tradeBalance": 3000000000,
+      "naturalResources": [
+        "Minyak",
+        "Kayu",
+        "Emas",
+        "Kakao",
+        "Biji besi"
+      ],
+      "economicRanking": 80,
+      "internetPenetration": 35,
+      "mobilePenetration": 60,
+      "electricityAccess": 55,
+      "roadLength": 50000,
+      "railwayLength": 1000,
+      "airports": 30,
+      "seaports": 10,
+      "healthcareAccess": 45,
+      "educationIndex": 0.52,
+      "nationalMotto": "Kebebasan, Kemakmuran, Persatuan",
+      "nationalAnthem": "Ô Cameroun, Berceau de nos Ancêtres",
+      "nationalAnimal": "Gajah",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Ndolé",
+        "Eru",
+        "Poulet DG",
+        "Koki",
+        "Bouillie"
+      ],
+      "culturalHeritage": [
+        "Yaoundé",
+        "Douala",
+        "Buea",
+        "Waza"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 40,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1500,
+      "forestArea": 40,
+      "protectedAreas": 10,
+      "biodiversityRank": 7,
+      "carbonEmissions": 0.5,
+      "environmentalIndex": 45,
+      "riskScore": 50,
+      "politicalStability": 45,
+      "crimeIndex": 40,
+      "militarySpending": 1,
+      "peaceIndex": 55,
+      "terrorismIndex": 25,
+      "refugeePopulation": 5000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 30,
+      "startupEcosystem": 30,
+      "investmentScore": 40,
+      "talentPool": 55,
+      "marketSize": 70,
+      "infrastructureQuality": 40,
+      "internetSpeed": 15,
+      "digitalAdoption": 35,
+      "techEcosystem": 30,
+      "aiReadiness": 25,
+      "startups": 20,
+      "phoneCode": "+237",
+      "tld": ".cm",
+      "isoCode": "CMR",
+      "isoCode2": "CM",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "biodiversitas",
+        "pertanian",
+        "ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "negara-guinea-khatulistiwa",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "Guinea Khatulistiwa",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "Guinea Khatulistiwa - Negara di Afrika Tengah dengan minyak dan hutan. Ibu kota: Malabo. Populasi: 1.4 juta jiwa. Mata uang: Franc CFA (XAF). Bahasa: Spanyol, Prancis. Sistem pemerintahan: Republik Presidensial. Negara dengan pendapatan per kapita tertinggi di Afrika dan keanekaragaman hayati.",
+    "meta": {
+      "officialName": "Republik Guinea Khatulistiwa",
+      "shortName": "GNQ",
+      "capital": "Malabo",
+      "capitalCoordinates": {
+        "lat": 3.75,
+        "lng": 8.7833
+      },
+      "largestCity": "Bata",
+      "demonym": "Guinea Khatulistiwa",
+      "subregion": "Central Africa",
+      "area": 28051,
+      "areaRank": 141,
+      "coastline": 296,
+      "highestPoint": "Pico Basile",
+      "highestElevation": 3008,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Kamerun",
+        "Gabon"
+      ],
+      "coordinates": {
+        "lat": 1.5,
+        "lng": 10
+      },
+      "timezone": [
+        "Waktu Guinea Khatulistiwa"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 1400000,
+      "populationRank": 152,
+      "populationDensity": 49,
+      "populationGrowth": 2,
+      "medianAge": 22,
+      "lifeExpectancy": 58,
+      "fertilityRate": 4.5,
+      "urbanization": 72,
+      "ethnicGroups": [
+        {
+          "name": "Fang",
+          "percentage": 80
+        },
+        {
+          "name": "Bubi",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 85
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 15
+        }
+      ],
+      "languages": [
+        {
+          "name": "Spanyol",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Prancis",
+          "percentage": 30,
+          "official": true
+        },
+        {
+          "name": "Portugis",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 95,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1968-10-12",
+      "nationalHoliday": "12 Oktober",
+      "legalSystem": "Civil Law",
+      "constitution": "1991",
+      "administrativeDivisions": 7,
+      "memberships": [
+        "PBB",
+        "AU",
+        "OPEC",
+        "WTO"
+      ],
+      "giniCoefficient": 65,
+      "hdi": 0.592,
+      "hdiRank": 144,
+      "corruptionIndex": 17,
+      "currency": "Franc CFA",
+      "currencyCode": "XAF",
+      "gdp": 10000000000,
+      "gdpPerCapita": 7140,
+      "gdpPpp": 25000000000,
+      "gdpGrowth": 3,
+      "inflation": 3,
+      "unemployment": 8,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Minyak",
+        "Gas",
+        "Kayu",
+        "Perikanan"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 6000000000
+        },
+        {
+          "item": "Gas",
+          "value": 3000000000
+        },
+        {
+          "item": "Kayu",
+          "value": 1000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 2000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 500000000
+        }
+      ],
+      "tradeBalance": 5000000000,
+      "naturalResources": [
+        "Minyak",
+        "Gas",
+        "Kayu",
+        "Emas"
+      ],
+      "economicRanking": 85,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 50,
+      "roadLength": 3000,
+      "railwayLength": 0,
+      "airports": 10,
+      "seaports": 5,
+      "healthcareAccess": 50,
+      "educationIndex": 0.52,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Caminemos pisando la senda",
+      "nationalAnimal": "Gajah",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Sopa de Pescado",
+        "Plátano",
+        "Pescado",
+        "Bollo",
+        "Malanga"
+      ],
+      "culturalHeritage": [
+        "Malabo",
+        "Bata",
+        "Bioko",
+        "Annobon"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 45,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1500,
+      "forestArea": 60,
+      "protectedAreas": 10,
+      "biodiversityRank": 15,
+      "carbonEmissions": 5,
+      "environmentalIndex": 40,
+      "riskScore": 45,
+      "politicalStability": 50,
+      "crimeIndex": 30,
+      "militarySpending": 1,
+      "peaceIndex": 50,
+      "terrorismIndex": 10,
+      "refugeePopulation": 0,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 30,
+      "startupEcosystem": 20,
+      "investmentScore": 40,
+      "talentPool": 40,
+      "marketSize": 30,
+      "infrastructureQuality": 45,
+      "internetSpeed": 15,
+      "digitalAdoption": 30,
+      "techEcosystem": 25,
+      "aiReadiness": 20,
+      "startups": 10,
+      "phoneCode": "+240",
+      "tld": ".gq",
+      "isoCode": "GNQ",
+      "isoCode2": "GQ",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "minyak",
+        "hutan",
+        "pulau"
+      ]
+    }
+  },
+  {
+    "id": "negara-sao-tome-dan-principe",
+    "kategori": "negara",
+    "wilayah": "african-tengah",
+    "nama": "São Tomé dan Príncipe",
+    "tags": [
+      "Central Africa"
+    ],
+    "teks": "São Tomé dan Príncipe - Negara kepulauan di Afrika Tengah. Ibu kota: São Tomé. Populasi: 220 ribu jiwa. Mata uang: Dobra (STN). Bahasa: Portugis. Sistem pemerintahan: Republik Semi-Presidensial. Negara dengan keanekaragaman hayati dan ekowisata yang luar biasa.",
+    "meta": {
+      "officialName": "Republik Demokratik São Tomé dan Príncipe",
+      "shortName": "STP",
+      "capital": "São Tomé",
+      "capitalCoordinates": {
+        "lat": 0.3364,
+        "lng": 6.6138
+      },
+      "largestCity": "São Tomé",
+      "demonym": "São Tomé",
+      "subregion": "Central Africa",
+      "area": 964,
+      "areaRank": 171,
+      "coastline": 209,
+      "highestPoint": "Pico de São Tomé",
+      "highestElevation": 2024,
+      "lowestPoint": "Laut Atlantik",
+      "lowestElevation": 0,
+      "landBorders": [],
+      "coordinates": {
+        "lat": 0,
+        "lng": 7
+      },
+      "timezone": [
+        "Waktu São Tomé"
+      ],
+      "utcOffset": [
+        "+0"
+      ],
+      "population": 220000,
+      "populationRank": 177,
+      "populationDensity": 228,
+      "populationGrowth": 1.5,
+      "medianAge": 20,
+      "lifeExpectancy": 70,
+      "fertilityRate": 3.5,
+      "urbanization": 74,
+      "ethnicGroups": [
+        {
+          "name": "Mestizo",
+          "percentage": 90
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 10
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen",
+          "percentage": 85
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 15
+        }
+      ],
+      "languages": [
+        {
+          "name": "Portugis",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Forro",
+          "percentage": 30
+        }
+      ],
+      "literacyRate": 92,
+      "governmentType": "Republik Semi-Presidensial",
+      "independenceDay": "1975-07-12",
+      "nationalHoliday": "12 Juli",
+      "legalSystem": "Civil Law",
+      "constitution": "1990",
+      "administrativeDivisions": 7,
+      "memberships": [
+        "PBB",
+        "AU",
+        "WTO"
+      ],
+      "giniCoefficient": 35,
+      "hdi": 0.625,
+      "hdiRank": 135,
+      "corruptionIndex": 45,
+      "currency": "Dobra",
+      "currencyCode": "STN",
+      "gdp": 500000000,
+      "gdpPerCapita": 2270,
+      "gdpPpp": 1000000000,
+      "gdpGrowth": 3.5,
+      "inflation": 4,
+      "unemployment": 10,
+      "povertyRate": 30,
+      "mainIndustries": [
+        "Pariwisata",
+        "Pertanian",
+        "Perikanan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Kakao",
+          "value": 200000000
+        },
+        {
+          "item": "Pariwisata",
+          "value": 100000000
+        },
+        {
+          "item": "Kopi",
+          "value": 50000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 100000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 80000000
+        },
+        {
+          "item": "Makanan",
+          "value": 60000000
+        },
+        {
+          "item": "Minyak",
+          "value": 40000000
+        }
+      ],
+      "tradeBalance": -50000000,
+      "naturalResources": [
+        "Kakao",
+        "Kopi",
+        "Perikanan",
+        "Kayu"
+      ],
+      "economicRanking": 120,
+      "internetPenetration": 30,
+      "mobilePenetration": 55,
+      "electricityAccess": 60,
+      "roadLength": 300,
+      "railwayLength": 0,
+      "airports": 5,
+      "seaports": 3,
+      "healthcareAccess": 55,
+      "educationIndex": 0.58,
+      "nationalMotto": "Persatuan, Keadilan, Kemakmuran",
+      "nationalAnthem": "Independência total",
+      "nationalAnimal": "Burung",
+      "nationalFlower": "Bunga Anggrek",
+      "nationalCuisine": [
+        "Calulu",
+        "Manioc",
+        "Peixe",
+        "Sopa",
+        "Doce"
+      ],
+      "culturalHeritage": [
+        "São Tomé",
+        "Príncipe",
+        "Bom Bom",
+        "Roça"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Paskah",
+        "Christmas",
+        "Tahun Baru"
+      ],
+      "socialRanking": 50,
+      "climate": "Tropis",
+      "averageTemperature": 25,
+      "averageRainfall": 1500,
+      "forestArea": 50,
+      "protectedAreas": 15,
+      "biodiversityRank": 15,
+      "carbonEmissions": 0.1,
+      "environmentalIndex": 55,
+      "riskScore": 35,
+      "politicalStability": 70,
+      "crimeIndex": 25,
+      "militarySpending": 0.5,
+      "peaceIndex": 40,
+      "terrorismIndex": 5,
+      "refugeePopulation": 0,
+      "opportunityScore": 40,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 30,
+      "startupEcosystem": 20,
+      "investmentScore": 35,
+      "talentPool": 30,
+      "marketSize": 20,
+      "infrastructureQuality": 45,
+      "internetSpeed": 15,
+      "digitalAdoption": 30,
+      "techEcosystem": 20,
+      "aiReadiness": 15,
+      "startups": 5,
+      "phoneCode": "+239",
+      "tld": ".st",
+      "isoCode": "STP",
+      "isoCode2": "ST",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "african-tengah",
+        "kepulauan",
+        "ekowisata",
+        "kakao"
+      ]
+    }
+  }
+]

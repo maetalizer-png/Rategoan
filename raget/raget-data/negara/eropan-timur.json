@@ -1,0 +1,1547 @@
+[
+  {
+    "id": "negara-rusia",
+    "kategori": "negara",
+    "wilayah": "eropan-timur",
+    "nama": "Rusia",
+    "tags": [
+      "Eastern Europe"
+    ],
+    "teks": "Rusia - Negara terbesar di dunia yang membentang dari Eropa Timur hingga Asia Utara. Ibu kota: Moskow. Populasi: 146 juta jiwa. Mata uang: Rubel (RUB). Bahasa: Rusia. Sistem pemerintahan: Republik Federal Semi-Presidensial. Anggota tetap Dewan Keamanan PBB. Negara dengan cadangan gas alam dan minyak terbesar. Pemimpin global dalam energi, militer, dan teknologi antariksa. Rumah bagi Kremlin, Hermitage, dan Danau Baikal.",
+    "meta": {
+      "officialName": "Federasi Rusia",
+      "shortName": "RUS",
+      "capital": "Moskow",
+      "capitalCoordinates": {
+        "lat": 55.7558,
+        "lng": 37.6173
+      },
+      "largestCity": "Moskow",
+      "demonym": "Rusia",
+      "subregion": "Eastern Europe",
+      "area": 17098242,
+      "areaRank": 1,
+      "coastline": 37653,
+      "highestPoint": "Gunung Elbrus",
+      "highestElevation": 5642,
+      "lowestPoint": "Laut Kaspia",
+      "lowestElevation": -28,
+      "landBorders": [
+        "Norwegia",
+        "Finlandia",
+        "Estonia",
+        "Latvia",
+        "Lithuania",
+        "Polandia",
+        "Belarus",
+        "Ukraina",
+        "Georgia",
+        "Azerbaijan",
+        "Kazakhstan",
+        "China",
+        "Mongolia",
+        "Korea Utara"
+      ],
+      "coordinates": {
+        "lat": 60,
+        "lng": 90
+      },
+      "timezone": [
+        "UTC+2 hingga UTC+12"
+      ],
+      "utcOffset": [
+        "+2",
+        "+3",
+        "+4",
+        "+5",
+        "+6",
+        "+7",
+        "+8",
+        "+9",
+        "+10",
+        "+11",
+        "+12"
+      ],
+      "population": 146000000,
+      "populationRank": 9,
+      "populationDensity": 8,
+      "populationGrowth": -0.1,
+      "medianAge": 40.3,
+      "lifeExpectancy": 73.6,
+      "fertilityRate": 1.5,
+      "urbanization": 75,
+      "ethnicGroups": [
+        {
+          "name": "Rusia",
+          "percentage": 77.7
+        },
+        {
+          "name": "Tatar",
+          "percentage": 3.7
+        },
+        {
+          "name": "Ukraina",
+          "percentage": 1.4
+        },
+        {
+          "name": "Bashkir",
+          "percentage": 1.1
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 71
+        },
+        {
+          "name": "Islam",
+          "percentage": 10
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 15
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 4
+        }
+      ],
+      "languages": [
+        {
+          "name": "Rusia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Tatar",
+          "percentage": 5
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Federal Semi-Presidensial",
+      "independenceDay": "1991-12-25",
+      "nationalHoliday": "12 Juni",
+      "legalSystem": "Civil Law",
+      "constitution": "1993",
+      "administrativeDivisions": 85,
+      "memberships": [
+        "PBB",
+        "BRICS",
+        "SCO",
+        "G20",
+        "APEC"
+      ],
+      "giniCoefficient": 37.5,
+      "hdi": 0.824,
+      "hdiRank": 52,
+      "corruptionIndex": 28,
+      "currency": "Rubel",
+      "currencyCode": "RUB",
+      "gdp": 2000000000000,
+      "gdpPerCapita": 13700,
+      "gdpPpp": 4800000000000,
+      "gdpGrowth": 1.5,
+      "inflation": 6,
+      "unemployment": 4,
+      "povertyRate": 12,
+      "mainIndustries": [
+        "Minyak",
+        "Gas",
+        "Tambang",
+        "Manufaktur",
+        "Militer",
+        "Teknologi"
+      ],
+      "exports": [
+        {
+          "item": "Minyak",
+          "value": 200000000000
+        },
+        {
+          "item": "Gas",
+          "value": 150000000000
+        },
+        {
+          "item": "Logam",
+          "value": 80000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 50000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 100000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 80000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 50000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 40000000000
+        }
+      ],
+      "tradeBalance": 150000000000,
+      "naturalResources": [
+        "Minyak",
+        "Gas",
+        "Batu bara",
+        "Emas",
+        "Diamant",
+        "Kayu",
+        "Air"
+      ],
+      "economicRanking": 11,
+      "internetPenetration": 85,
+      "mobilePenetration": 95,
+      "electricityAccess": 100,
+      "roadLength": 1500000,
+      "railwayLength": 85000,
+      "airports": 1000,
+      "seaports": 50,
+      "healthcareAccess": 75,
+      "educationIndex": 0.78,
+      "nationalMotto": "Persatuan, Kejayaan, Kemakmuran",
+      "nationalAnthem": "Gosudarstvenny Gimn Rossiyskoy Federatsii",
+      "nationalAnimal": "Beruang Coklat",
+      "nationalFlower": "Bunga Chamomile",
+      "nationalCuisine": [
+        "Borscht",
+        "Pelmeni",
+        "Blini",
+        "Shchi",
+        "Pirozhki"
+      ],
+      "culturalHeritage": [
+        "Moscow Kremlin",
+        "Hermitage",
+        "Danau Baikal",
+        "Kazan"
+      ],
+      "publicHolidays": [
+        "Tahun Baru",
+        "Hari Kemenangan",
+        "Hari Rusia",
+        "Hari Persatuan"
+      ],
+      "socialRanking": 60,
+      "climate": "Beragam",
+      "averageTemperature": -5,
+      "averageRainfall": 500,
+      "forestArea": 49,
+      "protectedAreas": 10,
+      "biodiversityRank": 8,
+      "carbonEmissions": 11,
+      "environmentalIndex": 35,
+      "riskScore": 45,
+      "politicalStability": 40,
+      "crimeIndex": 35,
+      "militarySpending": 4,
+      "peaceIndex": 55,
+      "terrorismIndex": 40,
+      "refugeePopulation": 1000,
+      "opportunityScore": 55,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 55,
+      "startupEcosystem": 50,
+      "investmentScore": 45,
+      "talentPool": 85,
+      "marketSize": 90,
+      "infrastructureQuality": 65,
+      "internetSpeed": 40,
+      "digitalAdoption": 75,
+      "techEcosystem": 65,
+      "aiReadiness": 55,
+      "startups": 2000,
+      "phoneCode": "+7",
+      "tld": ".ru",
+      "isoCode": "RUS",
+      "isoCode2": "RU",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-timur",
+        "adidaya",
+        "energi",
+        "militer"
+      ]
+    }
+  },
+  {
+    "id": "negara-ukraina",
+    "kategori": "negara",
+    "wilayah": "eropan-timur",
+    "nama": "Ukraina",
+    "tags": [
+      "Eastern Europe"
+    ],
+    "teks": "Ukraina - Negara terbesar kedua di Eropa Timur dengan lahan pertanian subur. Ibu kota: Kyiv. Populasi: 41 juta jiwa. Mata uang: Hryvnia (UAH). Bahasa: Ukraina. Sistem pemerintahan: Republik Semi-Presidensial. Lumbung gandum Eropa. Produsen minyak bunga matahari terbesar dunia. Rumah bagi Katedral St. Sophia dan Pechersk Lavra. Negara dengan sejarah panjang dan budaya yang kaya.",
+    "meta": {
+      "officialName": "Ukraina",
+      "shortName": "UKR",
+      "capital": "Kyiv",
+      "capitalCoordinates": {
+        "lat": 50.4501,
+        "lng": 30.5234
+      },
+      "largestCity": "Kyiv",
+      "demonym": "Ukraina",
+      "subregion": "Eastern Europe",
+      "area": 603628,
+      "areaRank": 45,
+      "coastline": 2782,
+      "highestPoint": "Gunung Hoverla",
+      "highestElevation": 2061,
+      "lowestPoint": "Laut Hitam",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Belarus",
+        "Polandia",
+        "Slovakia",
+        "Hungaria",
+        "Rumania",
+        "Moldova",
+        "Rusia"
+      ],
+      "coordinates": {
+        "lat": 49,
+        "lng": 32
+      },
+      "timezone": [
+        "Waktu Eropa Timur"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 41000000,
+      "populationRank": 35,
+      "populationDensity": 68,
+      "populationGrowth": -0.5,
+      "medianAge": 41,
+      "lifeExpectancy": 72,
+      "fertilityRate": 1.2,
+      "urbanization": 69,
+      "ethnicGroups": [
+        {
+          "name": "Ukraina",
+          "percentage": 77.8
+        },
+        {
+          "name": "Rusia",
+          "percentage": 17.3
+        },
+        {
+          "name": "Belarus",
+          "percentage": 0.6
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 4.3
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 78
+        },
+        {
+          "name": "Kristen Katolik",
+          "percentage": 10
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 8
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 4
+        }
+      ],
+      "languages": [
+        {
+          "name": "Ukraina",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 30
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Semi-Presidensial",
+      "independenceDay": "1991-08-24",
+      "nationalHoliday": "24 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "1996",
+      "administrativeDivisions": 24,
+      "memberships": [
+        "PBB",
+        "OSCE",
+        "GUAM"
+      ],
+      "giniCoefficient": 26.6,
+      "hdi": 0.779,
+      "hdiRank": 74,
+      "corruptionIndex": 33,
+      "currency": "Hryvnia",
+      "currencyCode": "UAH",
+      "gdp": 200000000000,
+      "gdpPerCapita": 4870,
+      "gdpPpp": 600000000000,
+      "gdpGrowth": -5,
+      "inflation": 10,
+      "unemployment": 10,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pertanian",
+        "Minyak",
+        "Gas",
+        "Manufaktur",
+        "Tekstil"
+      ],
+      "exports": [
+        {
+          "item": "Gandum",
+          "value": 20000000000
+        },
+        {
+          "item": "Bunga matahari",
+          "value": 15000000000
+        },
+        {
+          "item": "Besi",
+          "value": 10000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 8000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 10000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 8000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 6000000000
+        }
+      ],
+      "tradeBalance": -10000000000,
+      "naturalResources": [
+        "Batu bara",
+        "Besi",
+        "Gas",
+        "Minyak",
+        "Tanah subur"
+      ],
+      "economicRanking": 55,
+      "internetPenetration": 75,
+      "mobilePenetration": 88,
+      "electricityAccess": 100,
+      "roadLength": 170000,
+      "railwayLength": 22000,
+      "airports": 30,
+      "seaports": 10,
+      "healthcareAccess": 70,
+      "educationIndex": 0.72,
+      "nationalMotto": "Kebebasan, Persatuan, Kemakmuran",
+      "nationalAnthem": "Shche ne vmerla Ukrainy i slava, i volia",
+      "nationalAnimal": "Bangau Putih",
+      "nationalFlower": "Bunga Matahari",
+      "nationalCuisine": [
+        "Borscht",
+        "Varenyky",
+        "Chicken Kyiv",
+        "Holubtsi",
+        "Salo"
+      ],
+      "culturalHeritage": [
+        "Kyiv",
+        "Lviv",
+        "Odessa",
+        "Chernivtsi"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Paskah",
+        "Christmas"
+      ],
+      "socialRanking": 55,
+      "climate": "Kontinental",
+      "averageTemperature": 10,
+      "averageRainfall": 600,
+      "forestArea": 16,
+      "protectedAreas": 5,
+      "biodiversityRank": 25,
+      "carbonEmissions": 4,
+      "environmentalIndex": 42,
+      "riskScore": 70,
+      "politicalStability": 25,
+      "crimeIndex": 40,
+      "militarySpending": 5,
+      "peaceIndex": 70,
+      "terrorismIndex": 35,
+      "refugeePopulation": 1000000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 40,
+      "innovationIndex": 40,
+      "startupEcosystem": 45,
+      "investmentScore": 40,
+      "talentPool": 70,
+      "marketSize": 75,
+      "infrastructureQuality": 45,
+      "internetSpeed": 25,
+      "digitalAdoption": 55,
+      "techEcosystem": 50,
+      "aiReadiness": 40,
+      "startups": 300,
+      "phoneCode": "+380",
+      "tld": ".ua",
+      "isoCode": "UKR",
+      "isoCode2": "UA",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-timur",
+        "pertanian",
+        "industri",
+        "gandum"
+      ]
+    }
+  },
+  {
+    "id": "negara-rumania",
+    "kategori": "negara",
+    "wilayah": "eropan-timur",
+    "nama": "Rumania",
+    "tags": [
+      "Eastern Europe"
+    ],
+    "teks": "Rumania - Negara di Eropa Timur dengan sejarah dan budaya kaya. Ibu kota: Bukares. Populasi: 19 juta jiwa. Mata uang: Leu (RON). Bahasa: Rumania. Sistem pemerintahan: Republik Semi-Presidensial. Anggota UE dan NATO. Negara dengan arsitektur indah dan alam yang beragam. Rumah bagi Kastil Bran (Dracula) dan Pegunungan Carpathian.",
+    "meta": {
+      "officialName": "Rumania",
+      "shortName": "ROU",
+      "capital": "Bukares",
+      "capitalCoordinates": {
+        "lat": 44.4268,
+        "lng": 26.1025
+      },
+      "largestCity": "Bukares",
+      "demonym": "Rumania",
+      "subregion": "Eastern Europe",
+      "area": 238391,
+      "areaRank": 81,
+      "coastline": 225,
+      "highestPoint": "Moldoveanu",
+      "highestElevation": 2544,
+      "lowestPoint": "Laut Hitam",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Ukraina",
+        "Moldova",
+        "Bulgaria",
+        "Serbia",
+        "Hungaria"
+      ],
+      "coordinates": {
+        "lat": 46,
+        "lng": 25
+      },
+      "timezone": [
+        "Waktu Eropa Timur"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 19000000,
+      "populationRank": 61,
+      "populationDensity": 80,
+      "populationGrowth": -0.3,
+      "medianAge": 42,
+      "lifeExpectancy": 76,
+      "fertilityRate": 1.5,
+      "urbanization": 54,
+      "ethnicGroups": [
+        {
+          "name": "Rumania",
+          "percentage": 89
+        },
+        {
+          "name": "Hungaria",
+          "percentage": 6
+        },
+        {
+          "name": "Roma",
+          "percentage": 3
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 86
+        },
+        {
+          "name": "Kristen Katolik",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 9
+        }
+      ],
+      "languages": [
+        {
+          "name": "Rumania",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Hungaria",
+          "percentage": 6
+        },
+        {
+          "name": "Inggris",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Republik Semi-Presidensial",
+      "independenceDay": "1877-05-09",
+      "nationalHoliday": "1 Desember",
+      "legalSystem": "Civil Law",
+      "constitution": "1991",
+      "administrativeDivisions": 41,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "OECD"
+      ],
+      "giniCoefficient": 36,
+      "hdi": 0.828,
+      "hdiRank": 49,
+      "corruptionIndex": 44,
+      "currency": "Leu",
+      "currencyCode": "RON",
+      "gdp": 350000000000,
+      "gdpPerCapita": 18400,
+      "gdpPpp": 800000000000,
+      "gdpGrowth": 4,
+      "inflation": 5,
+      "unemployment": 3.5,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Otomotif",
+        "Elektronik",
+        "Pertanian",
+        "IT",
+        "Pariwisata"
+      ],
+      "exports": [
+        {
+          "item": "Otomotif",
+          "value": 30000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 20000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 15000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 10000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 25000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 20000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 15000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 10000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Minyak",
+        "Gas",
+        "Batu bara",
+        "Kayu",
+        "Emas"
+      ],
+      "economicRanking": 45,
+      "internetPenetration": 85,
+      "mobilePenetration": 92,
+      "electricityAccess": 100,
+      "roadLength": 80000,
+      "railwayLength": 11000,
+      "airports": 30,
+      "seaports": 5,
+      "healthcareAccess": 75,
+      "educationIndex": 0.72,
+      "nationalMotto": "Persatuan, Kebebasan, Kemakmuran",
+      "nationalAnthem": "Deșteaptă-te, române!",
+      "nationalAnimal": "Lynx",
+      "nationalFlower": "Dog Rose",
+      "nationalCuisine": [
+        "Sarmale",
+        "Mici",
+        "Ciorba",
+        "Polenta",
+        "Papanasi"
+      ],
+      "culturalHeritage": [
+        "Bucharest",
+        "Bran Castle",
+        "Sighisoara",
+        "Sibiu"
+      ],
+      "publicHolidays": [
+        "Hari Persatuan",
+        "Paskah",
+        "Christmas",
+        "Hari Buruh"
+      ],
+      "socialRanking": 68,
+      "climate": "Kontinental",
+      "averageTemperature": 12,
+      "averageRainfall": 700,
+      "forestArea": 28,
+      "protectedAreas": 10,
+      "biodiversityRank": 25,
+      "carbonEmissions": 4,
+      "environmentalIndex": 48,
+      "riskScore": 30,
+      "politicalStability": 60,
+      "crimeIndex": 25,
+      "militarySpending": 1.8,
+      "peaceIndex": 35,
+      "terrorismIndex": 15,
+      "refugeePopulation": 5000,
+      "opportunityScore": 65,
+      "easeOfDoingBusiness": 62,
+      "innovationIndex": 50,
+      "startupEcosystem": 55,
+      "investmentScore": 60,
+      "talentPool": 70,
+      "marketSize": 70,
+      "infrastructureQuality": 60,
+      "internetSpeed": 30,
+      "digitalAdoption": 65,
+      "techEcosystem": 55,
+      "aiReadiness": 45,
+      "startups": 300,
+      "phoneCode": "+40",
+      "tld": ".ro",
+      "isoCode": "ROU",
+      "isoCode2": "RO",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-timur",
+        "ue",
+        "nato",
+        "pertanian"
+      ]
+    }
+  },
+  {
+    "id": "negara-belarus",
+    "kategori": "negara",
+    "wilayah": "eropan-timur",
+    "nama": "Belarus",
+    "tags": [
+      "Eastern Europe"
+    ],
+    "teks": "Belarus - Negara di Eropa Timur dengan ekonomi berbasis industri. Ibu kota: Minsk. Populasi: 9.2 juta jiwa. Mata uang: Rubel Belarus (BYN). Bahasa: Belarus, Rusia. Sistem pemerintahan: Republik Presidensial. Negara dengan hutan-hutan luas dan industri manufaktur. Rumah bagi Kastil Mir dan hutan Bialowieza yang terkenal.",
+    "meta": {
+      "officialName": "Republik Belarus",
+      "shortName": "BLR",
+      "capital": "Minsk",
+      "capitalCoordinates": {
+        "lat": 53.9006,
+        "lng": 27.559
+      },
+      "largestCity": "Minsk",
+      "demonym": "Belarus",
+      "subregion": "Eastern Europe",
+      "area": 207595,
+      "areaRank": 84,
+      "coastline": 0,
+      "highestPoint": "Dzyarzhynskaya",
+      "highestElevation": 345,
+      "lowestPoint": "Neman River",
+      "lowestElevation": 80,
+      "landBorders": [
+        "Polandia",
+        "Lithuania",
+        "Latvia",
+        "Rusia",
+        "Ukraina"
+      ],
+      "coordinates": {
+        "lat": 53,
+        "lng": 28
+      },
+      "timezone": [
+        "Waktu Moskow"
+      ],
+      "utcOffset": [
+        "+3"
+      ],
+      "population": 9200000,
+      "populationRank": 93,
+      "populationDensity": 44,
+      "populationGrowth": -0.2,
+      "medianAge": 40,
+      "lifeExpectancy": 74,
+      "fertilityRate": 1.3,
+      "urbanization": 78,
+      "ethnicGroups": [
+        {
+          "name": "Belarus",
+          "percentage": 83.7
+        },
+        {
+          "name": "Rusia",
+          "percentage": 8.3
+        },
+        {
+          "name": "Polandia",
+          "percentage": 3.1
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 4.9
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 48
+        },
+        {
+          "name": "Kristen Katolik",
+          "percentage": 7
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 40
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Belarus",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 80,
+          "official": true
+        },
+        {
+          "name": "Inggris",
+          "percentage": 5
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Presidensial",
+      "independenceDay": "1991-08-25",
+      "nationalHoliday": "3 Juli",
+      "legalSystem": "Civil Law",
+      "constitution": "1994",
+      "administrativeDivisions": 6,
+      "memberships": [
+        "PBB",
+        "Uni Eurasia",
+        "CIS"
+      ],
+      "giniCoefficient": 25.3,
+      "hdi": 0.823,
+      "hdiRank": 53,
+      "corruptionIndex": 47,
+      "currency": "Rubel Belarus",
+      "currencyCode": "BYN",
+      "gdp": 80000000000,
+      "gdpPerCapita": 8700,
+      "gdpPpp": 200000000000,
+      "gdpGrowth": 2,
+      "inflation": 6,
+      "unemployment": 2,
+      "povertyRate": 5,
+      "mainIndustries": [
+        "Manufaktur",
+        "Pertanian",
+        "Kimia",
+        "Tekstil",
+        "Mesin"
+      ],
+      "exports": [
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Kimia",
+          "value": 10000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 8000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 5000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Minyak",
+          "value": 15000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 10000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 8000000000
+        },
+        {
+          "item": "Makanan",
+          "value": 5000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Kayu",
+        "Garam",
+        "Emas",
+        "Batu bara"
+      ],
+      "economicRanking": 70,
+      "internetPenetration": 75,
+      "mobilePenetration": 88,
+      "electricityAccess": 100,
+      "roadLength": 86000,
+      "railwayLength": 5500,
+      "airports": 20,
+      "seaports": 0,
+      "healthcareAccess": 78,
+      "educationIndex": 0.72,
+      "nationalMotto": "Kebebasan, Kesetaraan, Persaudaraan",
+      "nationalAnthem": "My Belarusy",
+      "nationalAnimal": "Bison Eropa",
+      "nationalFlower": "Bunga Jagung",
+      "nationalCuisine": [
+        "Draniki",
+        "Borscht",
+        "Machanka",
+        "Kolduny",
+        "Kasha"
+      ],
+      "culturalHeritage": [
+        "Minsk",
+        "Mir Castle",
+        "Nesvizh Castle",
+        "Grodno"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Paskah",
+        "Christmas"
+      ],
+      "socialRanking": 55,
+      "climate": "Kontinental",
+      "averageTemperature": 7,
+      "averageRainfall": 600,
+      "forestArea": 40,
+      "protectedAreas": 8,
+      "biodiversityRank": 30,
+      "carbonEmissions": 6,
+      "environmentalIndex": 48,
+      "riskScore": 40,
+      "politicalStability": 45,
+      "crimeIndex": 25,
+      "militarySpending": 1.2,
+      "peaceIndex": 45,
+      "terrorismIndex": 10,
+      "refugeePopulation": 1000,
+      "opportunityScore": 50,
+      "easeOfDoingBusiness": 55,
+      "innovationIndex": 40,
+      "startupEcosystem": 35,
+      "investmentScore": 45,
+      "talentPool": 65,
+      "marketSize": 60,
+      "infrastructureQuality": 55,
+      "internetSpeed": 25,
+      "digitalAdoption": 55,
+      "techEcosystem": 45,
+      "aiReadiness": 35,
+      "startups": 80,
+      "phoneCode": "+375",
+      "tld": ".by",
+      "isoCode": "BLR",
+      "isoCode2": "BY",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-timur",
+        "industri",
+        "hutan",
+        "manufaktur"
+      ]
+    }
+  },
+  {
+    "id": "negara-bulgaria",
+    "kategori": "negara",
+    "wilayah": "eropan-timur",
+    "nama": "Bulgaria",
+    "tags": [
+      "Eastern Europe"
+    ],
+    "teks": "Bulgaria - Negara di Eropa Timur dengan pantai Laut Hitam. Ibu kota: Sofia. Populasi: 6.5 juta jiwa. Mata uang: Lev (BGN). Bahasa: Bulgaria. Sistem pemerintahan: Republik Parlementer. Anggota UE dan NATO. Negara dengan sejarah panjang dan pantai-pantai indah di Laut Hitam. Rumah bagi biara Rila dan kota-kota bersejarah.",
+    "meta": {
+      "officialName": "Republik Bulgaria",
+      "shortName": "BGR",
+      "capital": "Sofia",
+      "capitalCoordinates": {
+        "lat": 42.6977,
+        "lng": 23.3219
+      },
+      "largestCity": "Sofia",
+      "demonym": "Bulgaria",
+      "subregion": "Eastern Europe",
+      "area": 110879,
+      "areaRank": 103,
+      "coastline": 378,
+      "highestPoint": "Musala",
+      "highestElevation": 2925,
+      "lowestPoint": "Laut Hitam",
+      "lowestElevation": 0,
+      "landBorders": [
+        "Rumania",
+        "Serbia",
+        "Makedonia Utara",
+        "Yunani",
+        "Turki"
+      ],
+      "coordinates": {
+        "lat": 42.75,
+        "lng": 25.5
+      },
+      "timezone": [
+        "Waktu Eropa Timur"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 6500000,
+      "populationRank": 107,
+      "populationDensity": 59,
+      "populationGrowth": -0.5,
+      "medianAge": 44,
+      "lifeExpectancy": 75,
+      "fertilityRate": 1.2,
+      "urbanization": 73,
+      "ethnicGroups": [
+        {
+          "name": "Bulgaria",
+          "percentage": 85
+        },
+        {
+          "name": "Turki",
+          "percentage": 9
+        },
+        {
+          "name": "Roma",
+          "percentage": 4
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 82
+        },
+        {
+          "name": "Islam",
+          "percentage": 12
+        },
+        {
+          "name": "Tidak beragama",
+          "percentage": 4
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 2
+        }
+      ],
+      "languages": [
+        {
+          "name": "Bulgaria",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Turki",
+          "percentage": 9
+        },
+        {
+          "name": "Inggris",
+          "percentage": 20
+        }
+      ],
+      "literacyRate": 98,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1908-09-22",
+      "nationalHoliday": "3 Maret",
+      "legalSystem": "Civil Law",
+      "constitution": "1991",
+      "administrativeDivisions": 27,
+      "memberships": [
+        "PBB",
+        "UE",
+        "NATO",
+        "OECD"
+      ],
+      "giniCoefficient": 37.4,
+      "hdi": 0.816,
+      "hdiRank": 56,
+      "corruptionIndex": 42,
+      "currency": "Lev",
+      "currencyCode": "BGN",
+      "gdp": 100000000000,
+      "gdpPerCapita": 15300,
+      "gdpPpp": 230000000000,
+      "gdpGrowth": 3,
+      "inflation": 4,
+      "unemployment": 4.5,
+      "povertyRate": 15,
+      "mainIndustries": [
+        "Pariwisata",
+        "Manufaktur",
+        "Pertanian",
+        "Tekstil",
+        "Makanan"
+      ],
+      "exports": [
+        {
+          "item": "Mesin",
+          "value": 15000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 10000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 8000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 5000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Elektronik",
+          "value": 15000000000
+        },
+        {
+          "item": "Mesin",
+          "value": 12000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 8000000000
+        },
+        {
+          "item": "Bahan kimia",
+          "value": 6000000000
+        }
+      ],
+      "tradeBalance": -5000000000,
+      "naturalResources": [
+        "Batu bara",
+        "Kayu",
+        "Mineral",
+        "Gas"
+      ],
+      "economicRanking": 65,
+      "internetPenetration": 80,
+      "mobilePenetration": 90,
+      "electricityAccess": 100,
+      "roadLength": 40000,
+      "railwayLength": 4000,
+      "airports": 30,
+      "seaports": 5,
+      "healthcareAccess": 75,
+      "educationIndex": 0.7,
+      "nationalMotto": "Persatuan membuat kekuatan",
+      "nationalAnthem": "Mila Rodino",
+      "nationalAnimal": "Singa",
+      "nationalFlower": "Mawar",
+      "nationalCuisine": [
+        "Banitsa",
+        "Shopska Salad",
+        "Kavarma",
+        "Tarator",
+        "Lyutenitsa"
+      ],
+      "culturalHeritage": [
+        "Sofia",
+        "Plovdiv",
+        "Rila Monastery",
+        "Nesebar"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Paskah",
+        "Christmas"
+      ],
+      "socialRanking": 62,
+      "climate": "Kontinental",
+      "averageTemperature": 12,
+      "averageRainfall": 600,
+      "forestArea": 35,
+      "protectedAreas": 10,
+      "biodiversityRank": 25,
+      "carbonEmissions": 6,
+      "environmentalIndex": 48,
+      "riskScore": 30,
+      "politicalStability": 60,
+      "crimeIndex": 28,
+      "militarySpending": 1.5,
+      "peaceIndex": 35,
+      "terrorismIndex": 15,
+      "refugeePopulation": 1000,
+      "opportunityScore": 60,
+      "easeOfDoingBusiness": 60,
+      "innovationIndex": 45,
+      "startupEcosystem": 50,
+      "investmentScore": 55,
+      "talentPool": 65,
+      "marketSize": 65,
+      "infrastructureQuality": 58,
+      "internetSpeed": 28,
+      "digitalAdoption": 60,
+      "techEcosystem": 50,
+      "aiReadiness": 42,
+      "startups": 150,
+      "phoneCode": "+359",
+      "tld": ".bg",
+      "isoCode": "BGR",
+      "isoCode2": "BG",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-timur",
+        "ue",
+        "nato",
+        "pariwisata"
+      ]
+    }
+  },
+  {
+    "id": "negara-moldova",
+    "kategori": "negara",
+    "wilayah": "eropan-timur",
+    "nama": "Moldova",
+    "tags": [
+      "Eastern Europe"
+    ],
+    "teks": "Moldova - Negara kecil di Eropa Timur dengan pertanian subur. Ibu kota: Chisinau. Populasi: 2.6 juta jiwa. Mata uang: Leu Moldova (MDL). Bahasa: Rumania. Sistem pemerintahan: Republik Parlementer. Negara dengan tanah pertanian subur dan kebun anggur terkenal. Rumah bagi budaya dan sejarah yang kaya.",
+    "meta": {
+      "officialName": "Republik Moldova",
+      "shortName": "MDA",
+      "capital": "Chisinau",
+      "capitalCoordinates": {
+        "lat": 47.0105,
+        "lng": 28.8638
+      },
+      "largestCity": "Chisinau",
+      "demonym": "Moldova",
+      "subregion": "Eastern Europe",
+      "area": 33846,
+      "areaRank": 135,
+      "coastline": 0,
+      "highestPoint": "Balanesti",
+      "highestElevation": 430,
+      "lowestPoint": "Dniester River",
+      "lowestElevation": 2,
+      "landBorders": [
+        "Rumania",
+        "Ukraina"
+      ],
+      "coordinates": {
+        "lat": 47,
+        "lng": 29
+      },
+      "timezone": [
+        "Waktu Eropa Timur"
+      ],
+      "utcOffset": [
+        "+2"
+      ],
+      "population": 2600000,
+      "populationRank": 139,
+      "populationDensity": 77,
+      "populationGrowth": -0.5,
+      "medianAge": 37,
+      "lifeExpectancy": 72,
+      "fertilityRate": 1.5,
+      "urbanization": 42,
+      "ethnicGroups": [
+        {
+          "name": "Moldova",
+          "percentage": 75
+        },
+        {
+          "name": "Rumania",
+          "percentage": 7
+        },
+        {
+          "name": "Ukraina",
+          "percentage": 6
+        },
+        {
+          "name": "Rusia",
+          "percentage": 4
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Ortodoks",
+          "percentage": 90
+        },
+        {
+          "name": "Kristen Katolik",
+          "percentage": 5
+        },
+        {
+          "name": "Lainnya",
+          "percentage": 5
+        }
+      ],
+      "languages": [
+        {
+          "name": "Rumania",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Rusia",
+          "percentage": 30
+        },
+        {
+          "name": "Inggris",
+          "percentage": 10
+        }
+      ],
+      "literacyRate": 99,
+      "governmentType": "Republik Parlementer",
+      "independenceDay": "1991-08-27",
+      "nationalHoliday": "27 Agustus",
+      "legalSystem": "Civil Law",
+      "constitution": "1994",
+      "administrativeDivisions": 32,
+      "memberships": [
+        "PBB",
+        "CIS",
+        "WTO"
+      ],
+      "giniCoefficient": 26,
+      "hdi": 0.767,
+      "hdiRank": 86,
+      "corruptionIndex": 33,
+      "currency": "Leu Moldova",
+      "currencyCode": "MDL",
+      "gdp": 15000000000,
+      "gdpPerCapita": 5760,
+      "gdpPpp": 40000000000,
+      "gdpGrowth": 3,
+      "inflation": 5,
+      "unemployment": 4,
+      "povertyRate": 20,
+      "mainIndustries": [
+        "Pertanian",
+        "Anggur",
+        "Tekstil",
+        "Makanan",
+        "Manufaktur"
+      ],
+      "exports": [
+        {
+          "item": "Anggur",
+          "value": 3000000000
+        },
+        {
+          "item": "Pertanian",
+          "value": 2000000000
+        },
+        {
+          "item": "Tekstil",
+          "value": 1500000000
+        },
+        {
+          "item": "Mesin",
+          "value": 1000000000
+        }
+      ],
+      "imports": [
+        {
+          "item": "Mesin",
+          "value": 3000000000
+        },
+        {
+          "item": "Elektronik",
+          "value": 2000000000
+        },
+        {
+          "item": "Minyak",
+          "value": 1500000000
+        },
+        {
+          "item": "Makanan",
+          "value": 1000000000
+        }
+      ],
+      "tradeBalance": -3000000000,
+      "naturalResources": [
+        "Tanah subur",
+        "Anggur",
+        "Kayu",
+        "Mineral"
+      ],
+      "economicRanking": 110,
+      "internetPenetration": 65,
+      "mobilePenetration": 80,
+      "electricityAccess": 100,
+      "roadLength": 12000,
+      "railwayLength": 1000,
+      "airports": 10,
+      "seaports": 0,
+      "healthcareAccess": 65,
+      "educationIndex": 0.62,
+      "nationalMotto": "Kebebasan, Persatuan, Kemakmuran",
+      "nationalAnthem": "Limba noastră",
+      "nationalAnimal": "Bison",
+      "nationalFlower": "Bunga Anggur",
+      "nationalCuisine": [
+        "Mămăliga",
+        "Sarmale",
+        "Plăcinte",
+        "Zeamă",
+        "Borsch"
+      ],
+      "culturalHeritage": [
+        "Chisinau",
+        "Orheiul Vechi",
+        "Tiraspol",
+        "Bender"
+      ],
+      "publicHolidays": [
+        "Hari Kemerdekaan",
+        "Hari Persatuan",
+        "Paskah",
+        "Christmas"
+      ],
+      "socialRanking": 48,
+      "climate": "Kontinental",
+      "averageTemperature": 10,
+      "averageRainfall": 500,
+      "forestArea": 15,
+      "protectedAreas": 5,
+      "biodiversityRank": 35,
+      "carbonEmissions": 2,
+      "environmentalIndex": 42,
+      "riskScore": 45,
+      "politicalStability": 45,
+      "crimeIndex": 30,
+      "militarySpending": 0.5,
+      "peaceIndex": 50,
+      "terrorismIndex": 10,
+      "refugeePopulation": 1000,
+      "opportunityScore": 45,
+      "easeOfDoingBusiness": 45,
+      "innovationIndex": 35,
+      "startupEcosystem": 35,
+      "investmentScore": 40,
+      "talentPool": 50,
+      "marketSize": 50,
+      "infrastructureQuality": 40,
+      "internetSpeed": 18,
+      "digitalAdoption": 45,
+      "techEcosystem": 35,
+      "aiReadiness": 28,
+      "startups": 50,
+      "phoneCode": "+373",
+      "tld": ".md",
+      "isoCode": "MDA",
+      "isoCode2": "MD",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-timur",
+        "pertanian",
+        "anggur",
+        "potensi-ekonomi"
+      ]
+    }
+  }
+]
