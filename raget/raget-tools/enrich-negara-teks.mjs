@@ -20,6 +20,19 @@
 // ditambah SECARA TERPISAH, bukan sepasang, supaya tidak menulis "Mata
 // uang:" dobel untuk entri yang sudah punya.
 //
+// PASS KEDUA (setelah migrasi domain etika): retrieval bench "mata uang"
+// masih 74,2% hit@1 walau frasa "Mata uang:" sudah ada di semua teks.
+// Analisis akar masalah: kata "mata"/"uang" muncul di 100% dokumen negara,
+// jadi bobot IDF-nya nyaris nol (term yang muncul di semua dokumen tidak
+// membedakan apa pun secara statistik) - satu-satunya kata yang benar-benar
+// membedakan di query "Mata uang apa yang dipakai <negara>?" adalah nama
+// negaranya sendiri. Solusinya: naikkan frekuensi kemunculan nama negara
+// TEPAT DI SAMPING info mata uang (bukan cuma di awal kalimat) lewat
+// kalimat literal "<nama>: mata uang <currency> (<code>)." - ini menaikkan
+// term-frequency nama negara di dokumennya sendiri, membantu skor cosine
+// similarity clear ambang batas 0.3 tanpa mengubah mekanisme retrieval
+// atau data sumber (masih meta.nama + meta.currency yang sudah ada).
+//
 // SUDAH DIJALANKAN - idempotent-check ada di bawah supaya AMAN dijalankan
 // ulang (tidak menambah kalimat dobel kalau teks sudah punya frasa ini).
 //
@@ -45,9 +58,11 @@ function main() {
 
     for (const e of entries) {
       const m = e.meta;
+      const nameCurrencyPhrase = e.nama + ': mata uang ' + m.currency + ' (' + m.currencyCode + ').';
       let added = '';
       if (!e.teks.includes('Nama resmi:')) added += ' Nama resmi: ' + m.officialName + '.';
       if (!e.teks.includes('Mata uang:')) added += ' Mata uang: ' + m.currency + ' (' + m.currencyCode + ').';
+      if (!e.teks.includes(nameCurrencyPhrase)) added += ' ' + nameCurrencyPhrase;
       if (!added) {
         skipped++;
         continue;
