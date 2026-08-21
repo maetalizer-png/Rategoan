@@ -1,0 +1,202 @@
+[
+  {
+    "id": "kuliner-pavlova",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Pavlova",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Pavlova adalah kue/penutup khas Australia.",
+    "meta": {
+      "negara": "Australia",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "putih telur",
+        "gula",
+        "buah segar"
+      ],
+      "trivia": "Australia dan Selandia Baru sama-sama mengklaim sebagai negara asal hidangan pencuci mulut ini."
+    }
+  },
+  {
+    "id": "kuliner-meat-pie",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Meat Pie",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Meat Pie adalah makanan utama khas Australia.",
+    "meta": {
+      "negara": "Australia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging cincang",
+        "kulit pastry",
+        "saus gravy"
+      ],
+      "trivia": "Dianggap sebagai salah satu makanan nasional Australia, sering dijual di pertandingan olahraga."
+    }
+  },
+  {
+    "id": "kuliner-hangi",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Hangi",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Hangi adalah makanan utama khas Selandia Baru.",
+    "meta": {
+      "negara": "Selandia Baru",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging",
+        "sayuran akar",
+        "batu panas"
+      ],
+      "trivia": "Teknik memasak tradisional suku Maori ini menguburkan makanan di lubang tanah berisi batu panas."
+    }
+  },
+  {
+    "id": "kuliner-kava",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Kava",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Kava adalah minuman khas Fiji.",
+    "meta": {
+      "negara": "Fiji",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "akar tanaman kava",
+        "air",
+        "-"
+      ],
+      "trivia": "Minuman tradisional Pasifik ini punya efek menenangkan dan biasa diminum dalam upacara adat."
+    }
+  },
+  {
+    "id": "kuliner-lovo",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Lovo",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Lovo adalah makanan utama khas Fiji.",
+    "meta": {
+      "negara": "Fiji",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging atau ikan",
+        "sayuran akar",
+        "batu panas dan daun pisang"
+      ],
+      "trivia": "Teknik memasak tradisional Fiji ini mirip hangi Maori, mengubur makanan dalam lubang berisi batu panas."
+    }
+  },
+  {
+    "id": "kuliner-kokoda",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Kokoda",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Kokoda adalah makanan utama khas Fiji.",
+    "meta": {
+      "negara": "Fiji",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ikan mentah",
+        "santan",
+        "jeruk nipis dan cabai"
+      ],
+      "trivia": "Versi ceviche khas Fiji ini biasa disajikan dalam tempurung kelapa sebagai wadahnya."
+    }
+  },
+  {
+    "id": "kuliner-umu",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Umu",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Umu adalah makanan utama khas Samoa.",
+    "meta": {
+      "negara": "Samoa",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging atau ikan",
+        "sayuran akar dan pisang",
+        "batu panas"
+      ],
+      "trivia": "Metode masak tradisional Pasifik ini dipakai untuk perayaan besar dan acara keluarga di Samoa."
+    }
+  },
+  {
+    "id": "kuliner-lamington",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Lamington",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Lamington adalah kue/penutup khas Australia.",
+    "meta": {
+      "negara": "Australia",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "kue sponge",
+        "lapisan cokelat",
+        "parutan kelapa"
+      ],
+      "trivia": "Dinamai untuk menghormati Lord Lamington, mantan gubernur Queensland akhir abad ke-19."
+    }
+  },
+  {
+    "id": "kuliner-vegemite-on-toast",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Vegemite on Toast",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Vegemite on Toast adalah makanan utama khas Australia.",
+    "meta": {
+      "negara": "Australia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "roti panggang",
+        "pasta ragi vegemite",
+        "mentega"
+      ],
+      "trivia": "Vegemite yang rasanya sangat gurih dan asin ini jadi salah satu ikon sarapan paling khas Australia."
+    }
+  },
+  {
+    "id": "kuliner-poi",
+    "kategori": "kuliner",
+    "wilayah": "osenia",
+    "nama": "Poi",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Poi adalah makanan utama khas Kepulauan Pasifik.",
+    "meta": {
+      "negara": "Kepulauan Pasifik",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "umbi taro",
+        "air",
+        "-"
+      ],
+      "trivia": "Umbi taro dikukus lalu ditumbuk hingga jadi pasta kental, makanan pokok tradisional di banyak pulau Pasifik."
+    }
+  }
+]

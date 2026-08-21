@@ -1,0 +1,282 @@
+[
+  {
+    "id": "kuliner-hummus",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Hummus",
+    "tags": [
+      "makanan pembuka"
+    ],
+    "teks": "Hummus adalah makanan pembuka khas Timur Tengah.",
+    "meta": {
+      "negara": "Timur Tengah",
+      "jenis": "makanan pembuka",
+      "bahanUtama": [
+        "kacang arab (chickpea)",
+        "tahini",
+        "minyak zaitun"
+      ],
+      "trivia": "Diklaim sebagai warisan kuliner oleh beberapa negara Timur Tengah sekaligus, memicu perdebatan asal-usulnya."
+    }
+  },
+  {
+    "id": "kuliner-falafel",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Falafel",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Falafel adalah makanan utama khas Timur Tengah.",
+    "meta": {
+      "negara": "Timur Tengah",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "kacang arab atau fava",
+        "rempah",
+        "minyak goreng"
+      ],
+      "trivia": "Sering disebut sebagai salah satu makanan cepat saji tertua di dunia, sudah ada sejak berabad-abad lalu."
+    }
+  },
+  {
+    "id": "kuliner-shawarma",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Shawarma",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Shawarma adalah makanan utama khas Timur Tengah.",
+    "meta": {
+      "negara": "Timur Tengah",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging panggang berlapis",
+        "roti pita",
+        "saus"
+      ],
+      "trivia": "Teknik memanggang daging berlapis vertikal ini juga jadi cikal bakal gyro Yunani dan doner kebab Turki."
+    }
+  },
+  {
+    "id": "kuliner-kebab",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Kebab",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Kebab adalah makanan utama khas Turki.",
+    "meta": {
+      "negara": "Turki",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging panggang",
+        "roti",
+        "sayuran"
+      ],
+      "trivia": "Punya banyak variasi di seluruh Turki dan Timur Tengah, dari Adana Kebab sampai Iskender Kebab."
+    }
+  },
+  {
+    "id": "kuliner-baklava",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Baklava",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Baklava adalah kue/penutup khas Turki.",
+    "meta": {
+      "negara": "Turki",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "adonan filo tipis",
+        "kacang cincang",
+        "sirup madu"
+      ],
+      "trivia": "Diperkirakan berasal dari era Kesultanan Utsmaniyah dan kini populer di banyak negara Timur Tengah dan Balkan."
+    }
+  },
+  {
+    "id": "kuliner-ayran",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Ayran",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Ayran adalah minuman khas Turki.",
+    "meta": {
+      "negara": "Turki",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "yogurt",
+        "air",
+        "garam"
+      ],
+      "trivia": "Minuman yogurt asin ini populer di seluruh Timur Tengah dan Asia Tengah dengan nama berbeda-beda."
+    }
+  },
+  {
+    "id": "kuliner-fattoush",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Fattoush",
+    "tags": [
+      "makanan pembuka"
+    ],
+    "teks": "Fattoush adalah makanan pembuka khas Lebanon.",
+    "meta": {
+      "negara": "Lebanon",
+      "jenis": "makanan pembuka",
+      "bahanUtama": [
+        "sayuran segar campur",
+        "roti pita panggang/goreng",
+        "cuka delima"
+      ],
+      "trivia": "Salad khas Lebanon ini memanfaatkan potongan roti pita renyah sebagai pengganti crouton."
+    }
+  },
+  {
+    "id": "kuliner-tabbouleh",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Tabbouleh",
+    "tags": [
+      "makanan pembuka"
+    ],
+    "teks": "Tabbouleh adalah makanan pembuka khas Lebanon.",
+    "meta": {
+      "negara": "Lebanon",
+      "jenis": "makanan pembuka",
+      "bahanUtama": [
+        "peterseli cincang halus",
+        "bulgur",
+        "tomat dan jeruk lemon"
+      ],
+      "trivia": "Isiannya didominasi peterseli segar, bukan bulgur, berbeda dari kebanyakan salad butir-bijian lain."
+    }
+  },
+  {
+    "id": "kuliner-manakish",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Manakish",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Manakish adalah jajanan khas Lebanon.",
+    "meta": {
+      "negara": "Lebanon",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan roti pipih",
+        "minyak zaitun",
+        "za'atar (campuran rempah)"
+      ],
+      "trivia": "Sering disebut 'pizza Lebanon', biasa disantap sebagai sarapan dengan taburan za'atar atau keju."
+    }
+  },
+  {
+    "id": "kuliner-kabsa",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Kabsa",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Kabsa adalah makanan utama khas Arab Saudi.",
+    "meta": {
+      "negara": "Arab Saudi",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi basmati",
+        "daging (ayam/kambing)",
+        "rempah campuran"
+      ],
+      "trivia": "Dianggap hidangan nasional Arab Saudi, biasa disajikan dalam acara keluarga dan perayaan besar."
+    }
+  },
+  {
+    "id": "kuliner-baba-ganoush",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Baba Ganoush",
+    "tags": [
+      "makanan pembuka"
+    ],
+    "teks": "Baba Ganoush adalah makanan pembuka khas Timur Tengah.",
+    "meta": {
+      "negara": "Timur Tengah",
+      "jenis": "makanan pembuka",
+      "bahanUtama": [
+        "terong panggang",
+        "tahini",
+        "bawang putih dan jeruk lemon"
+      ],
+      "trivia": "Terong dipanggang dulu sampai dagingnya lembut sebelum dihaluskan bersama tahini, memberi rasa smoky khas."
+    }
+  },
+  {
+    "id": "kuliner-dolma",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Dolma",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Dolma adalah makanan utama khas Turki.",
+    "meta": {
+      "negara": "Turki",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daun anggur",
+        "nasi",
+        "rempah dan kadang daging cincang"
+      ],
+      "trivia": "Tradisi membungkus isian dengan daun anggur atau sayuran ini tersebar luas di bekas wilayah Kesultanan Utsmaniyah."
+    }
+  },
+  {
+    "id": "kuliner-manti",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Manti",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Manti adalah jajanan khas Turki.",
+    "meta": {
+      "negara": "Turki",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kulit adonan tepung kecil",
+        "isian daging cincang",
+        "saus yogurt bawang putih"
+      ],
+      "trivia": "Sering disebut 'ravioli Turki', disajikan dengan siraman yogurt dan mentega berbumbu paprika."
+    }
+  },
+  {
+    "id": "kuliner-lokum",
+    "kategori": "kuliner",
+    "wilayah": "timur-tengah",
+    "nama": "Lokum",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Lokum adalah kue/penutup khas Turki.",
+    "meta": {
+      "negara": "Turki",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "pati dan gula",
+        "air mawar atau buah",
+        "kacang cincang (opsional)"
+      ],
+      "trivia": "Dikenal luas di dunia Barat dengan nama 'Turkish Delight', sudah ada sejak era Kesultanan Utsmaniyah."
+    }
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "kuliner-feijoada",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Feijoada",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Feijoada adalah makanan utama khas Brasil.",
+    "meta": {
+      "negara": "Brasil",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "kacang hitam",
+        "berbagai potongan daging babi",
+        "nasi"
+      ],
+      "trivia": "Awalnya dianggap hidangan kalangan bawah, kini justru jadi hidangan nasional yang dibanggakan Brasil."
+    }
+  },
+  {
+    "id": "kuliner-churrasco",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Churrasco",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Churrasco adalah makanan utama khas Brasil.",
+    "meta": {
+      "negara": "Brasil",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "berbagai daging panggang",
+        "garam kasar",
+        "tusuk logam panjang"
+      ],
+      "trivia": "Tradisi barbeque ala gaucho (penggembala) di Amerika Selatan ini kini populer di seluruh dunia lewat restoran churrascaria."
+    }
+  },
+  {
+    "id": "kuliner-empanada",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Empanada",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Empanada adalah jajanan khas Argentina.",
+    "meta": {
+      "negara": "Argentina",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan pastry",
+        "isian daging atau sayuran",
+        "bumbu rempah"
+      ],
+      "trivia": "Punya ratusan variasi isian di seluruh Amerika Latin, tergantung daerah dan tradisi keluarga."
+    }
+  },
+  {
+    "id": "kuliner-asado",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Asado",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Asado adalah makanan utama khas Argentina.",
+    "meta": {
+      "negara": "Argentina",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "berbagai potongan daging sapi",
+        "garam",
+        "panggangan terbuka"
+      ],
+      "trivia": "Lebih dari sekadar barbeque, asado adalah ritual sosial dan budaya penting dalam kehidupan masyarakat Argentina."
+    }
+  },
+  {
+    "id": "kuliner-ceviche",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Ceviche",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Ceviche adalah makanan utama khas Peru.",
+    "meta": {
+      "negara": "Peru",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ikan atau makanan laut mentah",
+        "air jeruk nipis",
+        "cabai dan bawang merah"
+      ],
+      "trivia": "Ikan 'dimasak' hanya dengan asam jeruk nipis tanpa panas, proses yang disebut denaturasi protein."
+    }
+  },
+  {
+    "id": "kuliner-tacos",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Tacos",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Tacos adalah makanan utama khas Meksiko.",
+    "meta": {
+      "negara": "Meksiko",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "tortilla jagung",
+        "isian daging/sayuran",
+        "salsa"
+      ],
+      "trivia": "Sejarah taco sudah ada sejak sebelum kedatangan bangsa Spanyol ke wilayah Meksiko."
+    }
+  },
+  {
+    "id": "kuliner-guacamole",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Guacamole",
+    "tags": [
+      "makanan pembuka"
+    ],
+    "teks": "Guacamole adalah makanan pembuka khas Meksiko.",
+    "meta": {
+      "negara": "Meksiko",
+      "jenis": "makanan pembuka",
+      "bahanUtama": [
+        "alpukat",
+        "bawang bombay dan tomat",
+        "jeruk nipis"
+      ],
+      "trivia": "Namanya berasal dari bahasa Nahuatl suku Aztec, 'ahuacamolli', yang berarti 'saus alpukat'."
+    }
+  },
+  {
+    "id": "kuliner-mole-poblano",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Mole Poblano",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Mole Poblano adalah makanan utama khas Meksiko.",
+    "meta": {
+      "negara": "Meksiko",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "cabai kering campuran",
+        "cokelat",
+        "rempah"
+      ],
+      "trivia": "Salah satu saus paling rumit di dunia kuliner, bisa memakai lebih dari 20 jenis bahan berbeda."
+    }
+  },
+  {
+    "id": "kuliner-poutine",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Poutine",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Poutine adalah jajanan khas Kanada.",
+    "meta": {
+      "negara": "Kanada",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kentang goreng",
+        "keju dadih (cheese curds)",
+        "saus gravy"
+      ],
+      "trivia": "Berasal dari provinsi Quebec pada 1950-an dan kini jadi salah satu jajanan paling ikonik Kanada."
+    }
+  },
+  {
+    "id": "kuliner-clam-chowder",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Clam Chowder",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Clam Chowder adalah sup/soto khas Amerika Serikat.",
+    "meta": {
+      "negara": "Amerika Serikat",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "kerang",
+        "kentang",
+        "krim susu"
+      ],
+      "trivia": "New England Clam Chowder yang creamy dan Manhattan Clam Chowder yang berbasis tomat sering diperdebatkan mana yang 'asli'."
+    }
+  },
+  {
+    "id": "kuliner-hamburger",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Hamburger",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Hamburger adalah makanan utama khas Amerika Serikat.",
+    "meta": {
+      "negara": "Amerika Serikat",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging sapi giling",
+        "roti bun",
+        "sayuran dan saus"
+      ],
+      "trivia": "Nama 'hamburger' diyakini berasal dari kota Hamburg, Jerman, tempat asal imigran yang memopulerkannya di AS."
+    }
+  },
+  {
+    "id": "kuliner-mate",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Mate",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Mate adalah minuman khas Argentina.",
+    "meta": {
+      "negara": "Argentina",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "daun yerba mate",
+        "air panas",
+        "labu khusus (calabash)"
+      ],
+      "trivia": "Diminum bergantian dari satu wadah dan sedotan logam yang sama sebagai simbol kebersamaan sosial."
+    }
+  },
+  {
+    "id": "kuliner-horchata",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Horchata",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Horchata adalah minuman khas Meksiko.",
+    "meta": {
+      "negara": "Meksiko",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "beras atau kacang tiger nut",
+        "air",
+        "kayu manis dan gula"
+      ],
+      "trivia": "Versi horchata berbeda-beda di tiap negara, ada yang berbasis beras, ada pula yang berbasis kacang."
+    }
+  },
+  {
+    "id": "kuliner-root-beer",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Root Beer",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Root Beer adalah minuman khas Amerika Serikat.",
+    "meta": {
+      "negara": "Amerika Serikat",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "ekstrak akar sassafras",
+        "gula",
+        "air berkarbonasi"
+      ],
+      "trivia": "Awalnya dipromosikan sebagai minuman herbal 'penyembuh' pada akhir abad ke-19 sebelum jadi minuman soda populer."
+    }
+  },
+  {
+    "id": "kuliner-arepa",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Arepa",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Arepa adalah makanan utama khas Venezuela.",
+    "meta": {
+      "negara": "Venezuela",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "tepung jagung",
+        "air dan garam",
+        "isian (keju/daging/telur)"
+      ],
+      "trivia": "Roti jagung ini jadi makanan pokok sehari-hari di Venezuela dan Kolombia, bisa dipanggang atau digoreng."
+    }
+  },
+  {
+    "id": "kuliner-pupusa",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Pupusa",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Pupusa adalah makanan utama khas El Salvador.",
+    "meta": {
+      "negara": "El Salvador",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "adonan jagung/beras",
+        "isian keju atau daging",
+        "acar kubis (curtido)"
+      ],
+      "trivia": "Dianggap hidangan nasional El Salvador, biasa disantap sebagai sarapan atau makan malam ringan."
+    }
+  },
+  {
+    "id": "kuliner-jerk-chicken",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Jerk Chicken",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Jerk Chicken adalah makanan utama khas Jamaika.",
+    "meta": {
+      "negara": "Jamaika",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ayam",
+        "bumbu jerk (allspice dan cabai scotch bonnet)",
+        "asap kayu pimento"
+      ],
+      "trivia": "Teknik bumbu dan pengasapan 'jerk' ini berakar dari tradisi masyarakat Maroon di pegunungan Jamaika."
+    }
+  },
+  {
+    "id": "kuliner-lomo-saltado",
+    "kategori": "kuliner",
+    "wilayah": "amerika",
+    "nama": "Lomo Saltado",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Lomo Saltado adalah makanan utama khas Peru.",
+    "meta": {
+      "negara": "Peru",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging sapi iris",
+        "kentang goreng",
+        "tomat dan bawang"
+      ],
+      "trivia": "Hidangan ini adalah contoh khas 'chifa', perpaduan kuliner Tionghoa dan Peru yang populer di Lima."
+    }
+  }
+]

@@ -1,0 +1,262 @@
+[
+  {
+    "id": "kuliner-jollof-rice",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Jollof Rice",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Jollof Rice adalah makanan utama khas Nigeria.",
+    "meta": {
+      "negara": "Nigeria",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi",
+        "saus tomat dan cabai",
+        "rempah"
+      ],
+      "trivia": "Sering memicu 'perang' persahabatan di media sosial antara Nigeria, Ghana, dan negara Afrika Barat lain soal versi mana yang terenak."
+    }
+  },
+  {
+    "id": "kuliner-injera",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Injera",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Injera adalah makanan utama khas Etiopia.",
+    "meta": {
+      "negara": "Etiopia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "tepung teff",
+        "air",
+        "fermentasi alami"
+      ],
+      "trivia": "Roti pipih berpori ini juga berfungsi sebagai 'piring' sekaligus alat makan dalam tradisi makan Etiopia."
+    }
+  },
+  {
+    "id": "kuliner-bunny-chow",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Bunny Chow",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Bunny Chow adalah makanan utama khas Afrika Selatan.",
+    "meta": {
+      "negara": "Afrika Selatan",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "roti tawar utuh dikeruk",
+        "kari daging/sayuran",
+        "acar sayur"
+      ],
+      "trivia": "Konon diciptakan komunitas India di Durban sebagai cara praktis membawa kari tanpa wadah."
+    }
+  },
+  {
+    "id": "kuliner-tagine",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Tagine",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Tagine adalah makanan utama khas Maroko.",
+    "meta": {
+      "negara": "Maroko",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging atau ayam",
+        "buah kering",
+        "rempah campuran"
+      ],
+      "trivia": "Namanya diambil dari wadah tanah liat berbentuk kerucut yang dipakai memasak dan menyajikannya."
+    }
+  },
+  {
+    "id": "kuliner-couscous",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Couscous",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Couscous adalah makanan utama khas Maroko.",
+    "meta": {
+      "negara": "Maroko",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "semolina gandum",
+        "sayuran",
+        "daging"
+      ],
+      "trivia": "Secara tradisional dikukus tiga kali dalam panci khusus bernama couscoussier agar teksturnya ringan."
+    }
+  },
+  {
+    "id": "kuliner-biltong",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Biltong",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Biltong adalah jajanan khas Afrika Selatan.",
+    "meta": {
+      "negara": "Afrika Selatan",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "daging sapi kering",
+        "garam dan cuka",
+        "rempah campuran"
+      ],
+      "trivia": "Mirip beef jerky tapi dengan metode pengeringan dan bumbu khas Afrika Selatan yang berbeda."
+    }
+  },
+  {
+    "id": "kuliner-bobotie",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Bobotie",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Bobotie adalah makanan utama khas Afrika Selatan.",
+    "meta": {
+      "negara": "Afrika Selatan",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging cincang",
+        "kismis",
+        "telur sebagai lapisan atas"
+      ],
+      "trivia": "Dianggap salah satu hidangan nasional Afrika Selatan, perpaduan pengaruh kuliner Melayu-Kaap dan Eropa."
+    }
+  },
+  {
+    "id": "kuliner-fufu",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Fufu",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Fufu adalah makanan utama khas Afrika Barat.",
+    "meta": {
+      "negara": "Afrika Barat",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "umbi (singkong/ubi/pisang raja)",
+        "air",
+        "-"
+      ],
+      "trivia": "Ditumbuk hingga kenyal dan biasa dicocol ke sup atau saus berkuah kental."
+    }
+  },
+  {
+    "id": "kuliner-egusi-soup",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Egusi Soup",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Egusi Soup adalah sup/soto khas Nigeria.",
+    "meta": {
+      "negara": "Nigeria",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "biji melon giling",
+        "daun sayur",
+        "daging atau ikan"
+      ],
+      "trivia": "Biji melon yang digiling halus memberi tekstur kental khas sup ini, biasa disantap dengan fufu."
+    }
+  },
+  {
+    "id": "kuliner-doro-wat",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Doro Wat",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Doro Wat adalah makanan utama khas Etiopia.",
+    "meta": {
+      "negara": "Etiopia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ayam",
+        "bubuk berbere (rempah pedas)",
+        "telur rebus"
+      ],
+      "trivia": "Sering disebut hidangan nasional Etiopia, biasa disantap bersama roti injera."
+    }
+  },
+  {
+    "id": "kuliner-suya",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Suya",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Suya adalah jajanan khas Nigeria.",
+    "meta": {
+      "negara": "Nigeria",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "daging tusuk panggang",
+        "bumbu kacang tanah",
+        "cabai bubuk"
+      ],
+      "trivia": "Jajanan pinggir jalan populer di Nigeria dan Afrika Barat, dibumbui campuran kacang tanah pedas bernama yaji."
+    }
+  },
+  {
+    "id": "kuliner-harira",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Harira",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Harira adalah sup/soto khas Maroko.",
+    "meta": {
+      "negara": "Maroko",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "tomat",
+        "lentil dan buncis",
+        "daging domba/sapi"
+      ],
+      "trivia": "Sup tradisional yang biasa disantap untuk berbuka puasa selama bulan Ramadan di Maroko."
+    }
+  },
+  {
+    "id": "kuliner-piri-piri-chicken",
+    "kategori": "kuliner",
+    "wilayah": "afrika",
+    "nama": "Piri Piri Chicken",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Piri Piri Chicken adalah makanan utama khas Mozambik.",
+    "meta": {
+      "negara": "Mozambik",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ayam panggang",
+        "cabai piri piri",
+        "bawang putih dan jeruk lemon"
+      ],
+      "trivia": "Resep aslinya lahir dari perpaduan pengaruh kuliner Portugis dan Afrika di Mozambik dan Angola."
+    }
+  }
+]

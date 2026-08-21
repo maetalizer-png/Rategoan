@@ -1,0 +1,1022 @@
+[
+  {
+    "id": "kuliner-rendang",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Rendang",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Rendang adalah makanan utama khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging sapi",
+        "santan",
+        "bumbu rempah"
+      ],
+      "trivia": "Pernah dinobatkan CNN sebagai salah satu hidangan terenak di dunia; dimasak berjam-jam sampai bumbu benar-benar meresap dan kering."
+    }
+  },
+  {
+    "id": "kuliner-sate",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Sate",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Sate adalah makanan utama khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging (ayam/sapi/kambing)",
+        "bumbu kacang atau kecap",
+        "tusuk bambu"
+      ],
+      "trivia": "Setiap daerah di Indonesia punya versi khasnya sendiri, dari Sate Madura sampai Sate Padang dengan kuah kuning."
+    }
+  },
+  {
+    "id": "kuliner-gado-gado",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Gado-Gado",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Gado-Gado adalah makanan utama khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "sayuran rebus",
+        "bumbu kacang",
+        "lontong"
+      ],
+      "trivia": "Sering disebut 'salad Indonesia' karena isinya sayuran campur, tapi disiram saus kacang yang gurih."
+    }
+  },
+  {
+    "id": "kuliner-nasi-goreng",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Nasi Goreng",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Nasi Goreng adalah makanan utama khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi",
+        "kecap manis",
+        "bumbu bawang"
+      ],
+      "trivia": "Pernah masuk daftar makanan terenak dunia versi CNN dan sering disebut sebagai hidangan nasional Indonesia."
+    }
+  },
+  {
+    "id": "kuliner-soto",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Soto",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Soto adalah sup/soto khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "kaldu ayam atau sapi",
+        "rempah",
+        "nasi/lontong"
+      ],
+      "trivia": "Punya banyak variasi daerah seperti Soto Betawi, Soto Lamongan, dan Soto Banjar, masing-masing dengan ciri kuah berbeda."
+    }
+  },
+  {
+    "id": "kuliner-bakso",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Bakso",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Bakso adalah sup/soto khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "daging giling",
+        "tepung tapioka",
+        "kuah kaldu"
+      ],
+      "trivia": "Berasal dari pengaruh kuliner Tionghoa-Indonesia dan kini jadi salah satu jajanan jalanan paling populer di Indonesia."
+    }
+  },
+  {
+    "id": "kuliner-rawon",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Rawon",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Rawon adalah sup/soto khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "daging sapi",
+        "kluwek",
+        "kaldu hitam"
+      ],
+      "trivia": "Warna kuahnya yang hitam pekat berasal dari kluwek, buah khas yang juga dipakai dalam masakan Jawa Timur lainnya."
+    }
+  },
+  {
+    "id": "kuliner-gudeg",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Gudeg",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Gudeg adalah makanan utama khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nangka muda",
+        "santan",
+        "gula merah"
+      ],
+      "trivia": "Dikenal sebagai makanan khas Yogyakarta dengan rasa manis yang khas dari gula merah dan santan."
+    }
+  },
+  {
+    "id": "kuliner-klepon",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Klepon",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Klepon adalah kue/penutup khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "tepung ketan",
+        "gula merah cair",
+        "kelapa parut"
+      ],
+      "trivia": "Kue tradisional berwarna hijau ini akan 'meletus' mengeluarkan gula cair saat digigit."
+    }
+  },
+  {
+    "id": "kuliner-es-cendol",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Es Cendol",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Es Cendol adalah minuman khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "tepung beras",
+        "santan",
+        "gula merah cair"
+      ],
+      "trivia": "Butiran hijaunya terbuat dari tepung beras dengan pewarna alami daun pandan atau suji."
+    }
+  },
+  {
+    "id": "kuliner-sushi",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Sushi",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Sushi adalah makanan utama khas Jepang.",
+    "meta": {
+      "negara": "Jepang",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi cuka",
+        "ikan mentah",
+        "nori"
+      ],
+      "trivia": "Awalnya sushi adalah metode pengawetan ikan dengan nasi fermentasi, bukan hidangan segar seperti sekarang."
+    }
+  },
+  {
+    "id": "kuliner-ramen",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Ramen",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Ramen adalah sup/soto khas Jepang.",
+    "meta": {
+      "negara": "Jepang",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "mi gandum",
+        "kaldu kaldu (tonkotsu/shoyu/miso)",
+        "topping chashu"
+      ],
+      "trivia": "Sebenarnya berasal dari mi Tiongkok yang diadaptasi orang Jepang menjadi hidangan khasnya sendiri."
+    }
+  },
+  {
+    "id": "kuliner-tempura",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Tempura",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Tempura adalah makanan utama khas Jepang.",
+    "meta": {
+      "negara": "Jepang",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "udang atau sayuran",
+        "adonan tepung",
+        "minyak goreng"
+      ],
+      "trivia": "Teknik menggoreng dengan balutan tepung ini sebenarnya diperkenalkan oleh pedagang Portugis pada abad ke-16."
+    }
+  },
+  {
+    "id": "kuliner-takoyaki",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Takoyaki",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Takoyaki adalah jajanan khas Jepang.",
+    "meta": {
+      "negara": "Jepang",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan tepung",
+        "potongan gurita",
+        "saus takoyaki"
+      ],
+      "trivia": "Dimasak dalam cetakan bulat khusus dan dibalik berulang kali sampai bentuknya bulat sempurna."
+    }
+  },
+  {
+    "id": "kuliner-kimchi",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Kimchi",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Kimchi adalah jajanan khas Korea Selatan.",
+    "meta": {
+      "negara": "Korea Selatan",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "sawi putih",
+        "bubuk cabai",
+        "bawang putih"
+      ],
+      "trivia": "Fermentasi kimchi bisa berlangsung dari beberapa hari sampai berbulan-bulan, menghasilkan rasa asam khas."
+    }
+  },
+  {
+    "id": "kuliner-bibimbap",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Bibimbap",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Bibimbap adalah makanan utama khas Korea Selatan.",
+    "meta": {
+      "negara": "Korea Selatan",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi",
+        "sayuran campur",
+        "gochujang"
+      ],
+      "trivia": "Namanya berarti 'nasi campur', biasanya disajikan dalam mangkuk batu panas yang membuat nasi di dasarnya renyah."
+    }
+  },
+  {
+    "id": "kuliner-tteokbokki",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Tteokbokki",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Tteokbokki adalah jajanan khas Korea Selatan.",
+    "meta": {
+      "negara": "Korea Selatan",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kue beras",
+        "saus gochujang",
+        "ikan olahan"
+      ],
+      "trivia": "Jajanan pinggir jalan paling populer di Korea Selatan dengan rasa pedas-manis khas gochujang."
+    }
+  },
+  {
+    "id": "kuliner-peking-duck",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Peking Duck",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Peking Duck adalah makanan utama khas Tiongkok.",
+    "meta": {
+      "negara": "Tiongkok",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "bebek utuh",
+        "kulit lumpia tipis",
+        "saus hoisin"
+      ],
+      "trivia": "Prosesnya membutuhkan pengeringan kulit bebek berjam-jam agar hasil akhirnya renyah sempurna saat dipanggang."
+    }
+  },
+  {
+    "id": "kuliner-dim-sum",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Dim Sum",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Dim Sum adalah jajanan khas Tiongkok.",
+    "meta": {
+      "negara": "Tiongkok",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan tepung",
+        "isian daging/udang",
+        "kukusan bambu"
+      ],
+      "trivia": "Tradisi menyantap dim sum biasanya dibarengi minum teh, dikenal dengan istilah 'yum cha'."
+    }
+  },
+  {
+    "id": "kuliner-mapo-tofu",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Mapo Tofu",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Mapo Tofu adalah makanan utama khas Tiongkok.",
+    "meta": {
+      "negara": "Tiongkok",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "tahu lembut",
+        "daging cincang",
+        "pasta cabai Sichuan"
+      ],
+      "trivia": "Berasal dari provinsi Sichuan, terkenal dengan sensasi pedas dan mati rasa dari bumbu 'mala' khasnya."
+    }
+  },
+  {
+    "id": "kuliner-pad-thai",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Pad Thai",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Pad Thai adalah makanan utama khas Thailand.",
+    "meta": {
+      "negara": "Thailand",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "mi beras",
+        "udang atau ayam",
+        "saus asam manis"
+      ],
+      "trivia": "Dipromosikan besar-besaran oleh pemerintah Thailand pada 1930-an sebagai hidangan nasional untuk memperkuat identitas negara."
+    }
+  },
+  {
+    "id": "kuliner-tom-yum",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Tom Yum",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Tom Yum adalah sup/soto khas Thailand.",
+    "meta": {
+      "negara": "Thailand",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "udang",
+        "serai dan lengkuas",
+        "cabai dan jeruk nipis"
+      ],
+      "trivia": "Rasa asam-pedasnya yang khas membuat Tom Yum jadi salah satu sup paling terkenal di dunia."
+    }
+  },
+  {
+    "id": "kuliner-pho",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Pho",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Pho adalah sup/soto khas Vietnam.",
+    "meta": {
+      "negara": "Vietnam",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "mi beras",
+        "kaldu daging sapi",
+        "kecambah dan daun herba"
+      ],
+      "trivia": "Diyakini muncul awal abad ke-20 di Vietnam Utara, dipengaruhi teknik kaldu daging dari kuliner Prancis."
+    }
+  },
+  {
+    "id": "kuliner-banh-mi",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Banh Mi",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Banh Mi adalah makanan utama khas Vietnam.",
+    "meta": {
+      "negara": "Vietnam",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "roti baguette",
+        "daging/pate",
+        "acar sayuran"
+      ],
+      "trivia": "Perpaduan roti gaya Prancis dengan isian khas Vietnam ini adalah warisan kuliner era kolonial."
+    }
+  },
+  {
+    "id": "kuliner-laksa",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Laksa",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Laksa adalah sup/soto khas Malaysia.",
+    "meta": {
+      "negara": "Malaysia",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "mi",
+        "kuah santan atau asam",
+        "udang/ayam"
+      ],
+      "trivia": "Punya banyak variasi regional, dari Laksa Penang yang asam sampai Laksa Katong yang gurih santan."
+    }
+  },
+  {
+    "id": "kuliner-nasi-lemak",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Nasi Lemak",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Nasi Lemak adalah makanan utama khas Malaysia.",
+    "meta": {
+      "negara": "Malaysia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi santan",
+        "sambal",
+        "ikan bilis dan kacang"
+      ],
+      "trivia": "Dianggap sebagai hidangan sarapan nasional Malaysia, biasa dibungkus daun pisang."
+    }
+  },
+  {
+    "id": "kuliner-adobo",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Adobo",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Adobo adalah makanan utama khas Filipina.",
+    "meta": {
+      "negara": "Filipina",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging ayam atau babi",
+        "cuka dan kecap asin",
+        "bawang putih"
+      ],
+      "trivia": "Nama 'adobo' berasal dari bahasa Spanyol yang berarti 'bumbu' atau 'marinasi', walau resepnya asli Filipina."
+    }
+  },
+  {
+    "id": "kuliner-lumpia",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Lumpia",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Lumpia adalah jajanan khas Filipina.",
+    "meta": {
+      "negara": "Filipina",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kulit lumpia",
+        "sayuran atau daging cincang",
+        "minyak goreng"
+      ],
+      "trivia": "Berasal dari pengaruh kuliner Tionghoa yang lalu beradaptasi menjadi camilan khas Filipina."
+    }
+  },
+  {
+    "id": "kuliner-amok",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Amok",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Amok adalah makanan utama khas Kamboja.",
+    "meta": {
+      "negara": "Kamboja",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ikan",
+        "santan",
+        "pasta kroeung"
+      ],
+      "trivia": "Dikukus dalam daun pisang dan dianggap sebagai salah satu hidangan paling ikonik Kamboja."
+    }
+  },
+  {
+    "id": "kuliner-momo",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Momo",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Momo adalah jajanan khas Nepal.",
+    "meta": {
+      "negara": "Nepal",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kulit adonan tepung",
+        "isian daging atau sayuran",
+        "saus cabai"
+      ],
+      "trivia": "Mirip dumpling, momo dipercaya masuk ke Nepal lewat jalur perdagangan dengan Tibet."
+    }
+  },
+  {
+    "id": "kuliner-butter-chicken",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Butter Chicken",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Butter Chicken adalah makanan utama khas India.",
+    "meta": {
+      "negara": "India",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ayam",
+        "saus tomat krim",
+        "mentega"
+      ],
+      "trivia": "Konon diciptakan secara tak sengaja di sebuah restoran Delhi untuk memanfaatkan sisa ayam tandoori."
+    }
+  },
+  {
+    "id": "kuliner-biryani",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Biryani",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Biryani adalah makanan utama khas India.",
+    "meta": {
+      "negara": "India",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi basmati",
+        "daging atau ayam",
+        "rempah campuran"
+      ],
+      "trivia": "Diperkirakan dibawa ke India oleh pedagang dan penguasa Persia berabad-abad lalu."
+    }
+  },
+  {
+    "id": "kuliner-samosa",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Samosa",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Samosa adalah jajanan khas India.",
+    "meta": {
+      "negara": "India",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kulit adonan tepung",
+        "kentang dan kacang polong",
+        "rempah"
+      ],
+      "trivia": "Nama dan bentuk segitiganya diyakini berasal dari Timur Tengah sebelum populer di anak benua India."
+    }
+  },
+  {
+    "id": "kuliner-kopi-luwak",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Kopi Luwak",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Kopi Luwak adalah minuman khas Indonesia.",
+    "meta": {
+      "negara": "Indonesia",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "biji kopi",
+        "fermentasi alami pencernaan luwak",
+        "air"
+      ],
+      "trivia": "Salah satu kopi termahal di dunia karena proses fermentasi unik lewat sistem pencernaan luwak."
+    }
+  },
+  {
+    "id": "kuliner-teh-tarik",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Teh Tarik",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Teh Tarik adalah minuman khas Malaysia.",
+    "meta": {
+      "negara": "Malaysia",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "teh hitam",
+        "susu kental manis",
+        "-"
+      ],
+      "trivia": "Namanya berarti 'teh tarik' karena teknik menuang bolak-balik dari ketinggian untuk menciptakan busa."
+    }
+  },
+  {
+    "id": "kuliner-bubble-tea",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Bubble Tea",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Bubble Tea adalah minuman khas Taiwan.",
+    "meta": {
+      "negara": "Taiwan",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "teh",
+        "susu",
+        "bola tapioka"
+      ],
+      "trivia": "Diciptakan pada 1980-an dan sejak itu menyebar jadi tren minuman global di berbagai negara."
+    }
+  },
+  {
+    "id": "kuliner-matcha",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Matcha",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Matcha adalah minuman khas Jepang.",
+    "meta": {
+      "negara": "Jepang",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "bubuk teh hijau",
+        "air panas",
+        "-"
+      ],
+      "trivia": "Berbeda dari teh hijau biasa, matcha memakai seluruh daun teh yang digiling halus, bukan hanya diseduh."
+    }
+  },
+  {
+    "id": "kuliner-chai",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Chai",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Chai adalah minuman khas India.",
+    "meta": {
+      "negara": "India",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "teh hitam",
+        "susu",
+        "campuran rempah (kayu manis, kapulaga, jahe)"
+      ],
+      "trivia": "Kata 'chai' sendiri sebenarnya berarti 'teh' dalam banyak bahasa, sehingga istilah 'chai tea' sebenarnya berlebihan (teh teh)."
+    }
+  },
+  {
+    "id": "kuliner-baijiu",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Baijiu",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Baijiu adalah minuman khas Tiongkok.",
+    "meta": {
+      "negara": "Tiongkok",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "sorgum fermentasi",
+        "air",
+        "ragi khusus"
+      ],
+      "trivia": "Minuman keras tradisional Tiongkok ini disebut-sebut sebagai minuman keras paling banyak dikonsumsi di dunia berdasarkan volume."
+    }
+  },
+  {
+    "id": "kuliner-soju",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Soju",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Soju adalah minuman khas Korea Selatan.",
+    "meta": {
+      "negara": "Korea Selatan",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "beras atau umbi fermentasi",
+        "air",
+        "ragi"
+      ],
+      "trivia": "Minuman beralkohol khas Korea ini sering diminum bersama saat makan malam sebagai bagian dari budaya sosial."
+    }
+  },
+  {
+    "id": "kuliner-sake",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Sake",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Sake adalah minuman khas Jepang.",
+    "meta": {
+      "negara": "Jepang",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "beras fermentasi",
+        "air",
+        "ragi koji"
+      ],
+      "trivia": "Meski sering disebut 'anggur beras', proses pembuatan sake sebenarnya lebih mirip pembuatan bir."
+    }
+  },
+  {
+    "id": "kuliner-bibingka",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Bibingka",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Bibingka adalah kue/penutup khas Filipina.",
+    "meta": {
+      "negara": "Filipina",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "tepung beras ketan",
+        "santan",
+        "gula kelapa"
+      ],
+      "trivia": "Secara tradisional dipanggang dalam loyang beralas daun pisang di atas bara api, khas hidangan musim Natal."
+    }
+  },
+  {
+    "id": "kuliner-halo-halo",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Halo-Halo",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Halo-Halo adalah kue/penutup khas Filipina.",
+    "meta": {
+      "negara": "Filipina",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "es serut",
+        "campuran buah dan jeli",
+        "susu evaporasi"
+      ],
+      "trivia": "Namanya berarti 'campur-campur' dalam bahasa Tagalog, sesuai dengan isinya yang beraneka ragam."
+    }
+  },
+  {
+    "id": "kuliner-sinigang",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Sinigang",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Sinigang adalah sup/soto khas Filipina.",
+    "meta": {
+      "negara": "Filipina",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "daging atau ikan",
+        "sayuran",
+        "kuah asam tamarin"
+      ],
+      "trivia": "Rasa asamnya yang khas membuat sinigang sering disebut sebagai 'sup nasional' Filipina."
+    }
+  },
+  {
+    "id": "kuliner-kaya-toast",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Kaya Toast",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Kaya Toast adalah makanan utama khas Singapura.",
+    "meta": {
+      "negara": "Singapura",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "roti panggang",
+        "selai kaya (kelapa-telur)",
+        "mentega"
+      ],
+      "trivia": "Biasa disantap bersama kopi hitam kental dan telur setengah matang sebagai sarapan khas Singapura."
+    }
+  },
+  {
+    "id": "kuliner-chili-crab",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Chili Crab",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Chili Crab adalah makanan utama khas Singapura.",
+    "meta": {
+      "negara": "Singapura",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "kepiting",
+        "saus cabai tomat",
+        "telur"
+      ],
+      "trivia": "Dianggap sebagai salah satu hidangan nasional Singapura meski baru diciptakan pada 1950-an."
+    }
+  },
+  {
+    "id": "kuliner-char-kway-teow",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Char Kway Teow",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Char Kway Teow adalah makanan utama khas Malaysia.",
+    "meta": {
+      "negara": "Malaysia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "kwetiau",
+        "udang dan telur",
+        "kecap manis dan cabai"
+      ],
+      "trivia": "Jajanan malam legendaris Penang ini secara tradisional digoreng di atas api sangat besar demi aroma 'wok hei'."
+    }
+  },
+  {
+    "id": "kuliner-roti-canai",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Roti Canai",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Roti Canai adalah makanan utama khas Malaysia.",
+    "meta": {
+      "negara": "Malaysia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "adonan tepung berlapis",
+        "mentega/ghee",
+        "kari sebagai cocolan"
+      ],
+      "trivia": "Teknik melipat dan melempar adonannya menghasilkan lapisan renyah berlipat-lipat yang khas."
+    }
+  },
+  {
+    "id": "kuliner-bun-cha",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Bun Cha",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Bun Cha adalah makanan utama khas Vietnam.",
+    "meta": {
+      "negara": "Vietnam",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging babi panggang",
+        "mi vermicelli",
+        "kuah asam manis"
+      ],
+      "trivia": "Hidangan ini sempat mendunia lagi setelah disantap Presiden Obama bersama chef Anthony Bourdain di Hanoi."
+    }
+  },
+  {
+    "id": "kuliner-khao-soi",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Khao Soi",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Khao Soi adalah sup/soto khas Thailand.",
+    "meta": {
+      "negara": "Thailand",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "mi telur",
+        "kuah kari santan",
+        "ayam atau daging sapi"
+      ],
+      "trivia": "Hidangan khas Thailand Utara ini memadukan mi rebus lembut dengan taburan mi goreng renyah di atasnya."
+    }
+  },
+  {
+    "id": "kuliner-naan",
+    "kategori": "kuliner",
+    "wilayah": "asia",
+    "nama": "Naan",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Naan adalah makanan utama khas India.",
+    "meta": {
+      "negara": "India",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "tepung terigu",
+        "yogurt",
+        "ragi"
+      ],
+      "trivia": "Dipanggang menempel di dinding oven tanah liat (tandoor) bersuhu sangat tinggi hingga mengembang dan bergelembung."
+    }
+  }
+]

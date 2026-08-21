@@ -369,7 +369,7 @@ async function respondCore(messages, prompt) {
   // tidak keburu ditangkap fuzzy-match dataries-bridge.js ke entitas yang tak berhubungan
   // (mis. negara "Chili") - pola fix yang sama dipakai berulang di ronde-ronde sebelumnya
   // untuk kelas bug "fuzzy-match-shadows-precise-handler" (tokoh, konsep sains, dst).
-  const kulinerReply = kulinerStore.tryKuliner(text);
+  const kulinerReply = await kulinerStore.tryKuliner(text);
   if (kulinerReply) {
     ragetDb.addNote(text, kulinerReply, null, 'kuliner');
     return postProcess(kulinerReply);
