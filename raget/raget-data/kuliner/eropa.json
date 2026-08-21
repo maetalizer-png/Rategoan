@@ -1,0 +1,742 @@
+[
+  {
+    "id": "kuliner-paella",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Paella",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Paella adalah makanan utama khas Spanyol.",
+    "meta": {
+      "negara": "Spanyol",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "nasi",
+        "saffron",
+        "makanan laut atau ayam"
+      ],
+      "trivia": "Berasal dari wilayah Valencia, dimasak dalam wajan lebar khas yang juga disebut 'paellera'."
+    }
+  },
+  {
+    "id": "kuliner-tapas",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Tapas",
+    "tags": [
+      "makanan pembuka"
+    ],
+    "teks": "Tapas adalah makanan pembuka khas Spanyol.",
+    "meta": {
+      "negara": "Spanyol",
+      "jenis": "makanan pembuka",
+      "bahanUtama": [
+        "beragam bahan (keju, daging, sayuran)",
+        "roti",
+        "minyak zaitun"
+      ],
+      "trivia": "Awalnya konon dipakai sebagai penutup gelas minuman agar debu atau serangga tidak masuk."
+    }
+  },
+  {
+    "id": "kuliner-pizza",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Pizza",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Pizza adalah makanan utama khas Italia.",
+    "meta": {
+      "negara": "Italia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "adonan tepung",
+        "saus tomat",
+        "keju mozzarella"
+      ],
+      "trivia": "Pizza Margherita diyakini diciptakan untuk menghormati Ratu Margherita dari Italia dengan warna bendera Italia."
+    }
+  },
+  {
+    "id": "kuliner-pasta-carbonara",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Pasta Carbonara",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Pasta Carbonara adalah makanan utama khas Italia.",
+    "meta": {
+      "negara": "Italia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "pasta",
+        "telur dan keju pecorino",
+        "guanciale/daging asap"
+      ],
+      "trivia": "Resep otentiknya tidak memakai krim, meski versi krim populer di banyak negara lain."
+    }
+  },
+  {
+    "id": "kuliner-risotto",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Risotto",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Risotto adalah makanan utama khas Italia.",
+    "meta": {
+      "negara": "Italia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "beras arborio",
+        "kaldu",
+        "keju parmesan"
+      ],
+      "trivia": "Dimasak dengan cara diaduk perlahan sambil kaldu ditambahkan sedikit demi sedikit hingga teksturnya creamy."
+    }
+  },
+  {
+    "id": "kuliner-tiramisu",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Tiramisu",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Tiramisu adalah kue/penutup khas Italia.",
+    "meta": {
+      "negara": "Italia",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "kue ladyfinger",
+        "kopi espresso",
+        "krim mascarpone"
+      ],
+      "trivia": "Namanya berarti 'angkat aku' dalam bahasa Italia, merujuk pada efek kafein dari kopi di dalamnya."
+    }
+  },
+  {
+    "id": "kuliner-croissant",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Croissant",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Croissant adalah kue/penutup khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "adonan mentega berlapis",
+        "ragi",
+        "mentega"
+      ],
+      "trivia": "Meski identik dengan Prancis, bentuk awalnya konon terinspirasi dari kue bulan sabit khas Austria."
+    }
+  },
+  {
+    "id": "kuliner-ratatouille",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Ratatouille",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Ratatouille adalah makanan utama khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "terong dan zukini",
+        "tomat",
+        "bumbu Provençal"
+      ],
+      "trivia": "Awalnya hidangan sederhana petani di Provence, kini dikenal luas berkat film animasi berjudul sama."
+    }
+  },
+  {
+    "id": "kuliner-crepe",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Crepe",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Crepe adalah kue/penutup khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "tepung terigu",
+        "telur dan susu",
+        "isian manis/gurih"
+      ],
+      "trivia": "Berasal dari wilayah Brittany, Prancis, dan bisa disajikan manis maupun gurih tergantung isiannya."
+    }
+  },
+  {
+    "id": "kuliner-fondue",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Fondue",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Fondue adalah makanan utama khas Swiss.",
+    "meta": {
+      "negara": "Swiss",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "keju leleh campuran",
+        "roti",
+        "anggur putih"
+      ],
+      "trivia": "Awalnya dipopulerkan sebagai cara petani pegunungan Swiss menghabiskan keju dan roti keras di musim dingin."
+    }
+  },
+  {
+    "id": "kuliner-schnitzel",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Schnitzel",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Schnitzel adalah makanan utama khas Austria.",
+    "meta": {
+      "negara": "Austria",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging (biasanya sapi muda)",
+        "tepung roti",
+        "minyak goreng"
+      ],
+      "trivia": "Wiener Schnitzel asli secara hukum harus dibuat dari daging sapi muda, bukan daging lain."
+    }
+  },
+  {
+    "id": "kuliner-sauerkraut",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Sauerkraut",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Sauerkraut adalah jajanan khas Jerman.",
+    "meta": {
+      "negara": "Jerman",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "kubis difermentasi",
+        "garam",
+        "rempah"
+      ],
+      "trivia": "Fermentasi kubis ini sudah dikenal sejak zaman kuno dan menyebar ke Eropa lewat jalur perdagangan."
+    }
+  },
+  {
+    "id": "kuliner-pretzel",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Pretzel",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Pretzel adalah jajanan khas Jerman.",
+    "meta": {
+      "negara": "Jerman",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan tepung",
+        "larutan alkali (lye)",
+        "garam kasar"
+      ],
+      "trivia": "Bentuk simpulnya konon terinspirasi dari lengan yang bersilang saat berdoa di biara abad pertengahan."
+    }
+  },
+  {
+    "id": "kuliner-currywurst",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Currywurst",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Currywurst adalah jajanan khas Jerman.",
+    "meta": {
+      "negara": "Jerman",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "sosis babi",
+        "saus tomat",
+        "bubuk kari"
+      ],
+      "trivia": "Ditemukan di Berlin pasca Perang Dunia II ketika bumbu kari mulai mudah didapat dari tentara sekutu."
+    }
+  },
+  {
+    "id": "kuliner-fish-and-chips",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Fish and Chips",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Fish and Chips adalah makanan utama khas Inggris.",
+    "meta": {
+      "negara": "Inggris",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ikan (biasanya cod)",
+        "kentang goreng",
+        "adonan tepung"
+      ],
+      "trivia": "Pernah jadi hidangan yang dikecualikan dari penjatahan makanan selama Perang Dunia II di Inggris."
+    }
+  },
+  {
+    "id": "kuliner-shepherd-s-pie",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Shepherd's Pie",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Shepherd's Pie adalah makanan utama khas Inggris.",
+    "meta": {
+      "negara": "Inggris",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging domba cincang",
+        "sayuran",
+        "kentang tumbuk"
+      ],
+      "trivia": "Versi dengan daging sapi disebut 'Cottage Pie', sedangkan daging domba disebut 'Shepherd's Pie'."
+    }
+  },
+  {
+    "id": "kuliner-full-english-breakfast",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Full English Breakfast",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Full English Breakfast adalah makanan utama khas Inggris.",
+    "meta": {
+      "negara": "Inggris",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "telur dan sosis",
+        "bacon",
+        "kacang panggang"
+      ],
+      "trivia": "Tradisi sarapan besar ini mulai populer di kalangan bangsawan Inggris sejak era Victoria."
+    }
+  },
+  {
+    "id": "kuliner-stroopwafel",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Stroopwafel",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Stroopwafel adalah kue/penutup khas Belanda.",
+    "meta": {
+      "negara": "Belanda",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "adonan wafel tipis",
+        "sirup karamel",
+        "kayu manis"
+      ],
+      "trivia": "Awalnya dibuat dari sisa remahan roti oleh tukang roti Belanda pada abad ke-18."
+    }
+  },
+  {
+    "id": "kuliner-smorgasbord",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Smorgasbord",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Smorgasbord adalah makanan utama khas Swedia.",
+    "meta": {
+      "negara": "Swedia",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "ikan asap/asin",
+        "daging dingin",
+        "roti dan keju"
+      ],
+      "trivia": "Konsep hidangan prasmanan tradisional Swedia ini menjadi inspirasi kata 'buffet' di banyak negara."
+    }
+  },
+  {
+    "id": "kuliner-borscht",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Borscht",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Borscht adalah sup/soto khas Ukraina.",
+    "meta": {
+      "negara": "Ukraina",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "bit merah",
+        "kubis",
+        "daging sapi"
+      ],
+      "trivia": "Warna merah khasnya berasal dari bit, dan hidangan ini diklaim sebagai warisan kuliner oleh beberapa negara Slavia."
+    }
+  },
+  {
+    "id": "kuliner-pierogi",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Pierogi",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Pierogi adalah jajanan khas Polandia.",
+    "meta": {
+      "negara": "Polandia",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan tepung",
+        "isian kentang/keju/daging",
+        "mentega"
+      ],
+      "trivia": "Sering disajikan saat perayaan Natal dan acara keluarga besar di Polandia."
+    }
+  },
+  {
+    "id": "kuliner-goulash",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Goulash",
+    "tags": [
+      "sup/soto"
+    ],
+    "teks": "Goulash adalah sup/soto khas Hungaria.",
+    "meta": {
+      "negara": "Hungaria",
+      "jenis": "sup/soto",
+      "bahanUtama": [
+        "daging sapi",
+        "paprika bubuk",
+        "kentang"
+      ],
+      "trivia": "Awalnya makanan para penggembala sapi Hungaria yang dimasak dalam kuali besar di atas api unggun."
+    }
+  },
+  {
+    "id": "kuliner-moussaka",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Moussaka",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Moussaka adalah makanan utama khas Yunani.",
+    "meta": {
+      "negara": "Yunani",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "terong",
+        "daging cincang",
+        "saus bechamel"
+      ],
+      "trivia": "Punya kemiripan dengan lasagna, namun memakai lapisan terong sebagai pengganti pasta."
+    }
+  },
+  {
+    "id": "kuliner-souvlaki",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Souvlaki",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Souvlaki adalah makanan utama khas Yunani.",
+    "meta": {
+      "negara": "Yunani",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging tusuk panggang",
+        "roti pita",
+        "saus tzatziki"
+      ],
+      "trivia": "Sudah dikenal sejak zaman Yunani Kuno, dengan bukti arkeologi alat pemanggang tusuk sate."
+    }
+  },
+  {
+    "id": "kuliner-espresso",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Espresso",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Espresso adalah minuman khas Italia.",
+    "meta": {
+      "negara": "Italia",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "biji kopi giling halus",
+        "air bertekanan tinggi",
+        "-"
+      ],
+      "trivia": "Teknik ekstraksi bertekanan tinggi ini pertama kali dipatenkan di Italia pada awal abad ke-20."
+    }
+  },
+  {
+    "id": "kuliner-sangria",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Sangria",
+    "tags": [
+      "minuman"
+    ],
+    "teks": "Sangria adalah minuman khas Spanyol.",
+    "meta": {
+      "negara": "Spanyol",
+      "jenis": "minuman",
+      "bahanUtama": [
+        "anggur merah",
+        "buah potong",
+        "gula dan soda"
+      ],
+      "trivia": "Namanya berasal dari kata 'sangre' (darah) dalam bahasa Spanyol, merujuk pada warna merahnya."
+    }
+  },
+  {
+    "id": "kuliner-croquembouche",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Croquembouche",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Croquembouche adalah kue/penutup khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "choux pastry kecil",
+        "karamel",
+        "krim vla"
+      ],
+      "trivia": "Kue menara ini secara tradisional disajikan pada acara pernikahan dan perayaan besar di Prancis."
+    }
+  },
+  {
+    "id": "kuliner-macaron",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Macaron",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Macaron adalah kue/penutup khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "tepung almon",
+        "putih telur",
+        "gula"
+      ],
+      "trivia": "Meski identik dengan Prancis, konon resep dasarnya dibawa dari Italia oleh Catherine de' Medici."
+    }
+  },
+  {
+    "id": "kuliner-churros",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Churros",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Churros adalah kue/penutup khas Spanyol.",
+    "meta": {
+      "negara": "Spanyol",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "adonan tepung",
+        "minyak goreng",
+        "gula dan kayu manis"
+      ],
+      "trivia": "Sering disantap bersama cokelat panas kental sebagai sarapan atau camilan sore hari."
+    }
+  },
+  {
+    "id": "kuliner-gelato",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Gelato",
+    "tags": [
+      "kue/penutup"
+    ],
+    "teks": "Gelato adalah kue/penutup khas Italia.",
+    "meta": {
+      "negara": "Italia",
+      "jenis": "kue/penutup",
+      "bahanUtama": [
+        "susu",
+        "gula",
+        "perasa alami (buah/kacang)"
+      ],
+      "trivia": "Gelato punya kadar lemak lebih rendah dan diaduk lebih lambat dibanding es krim biasa, membuat teksturnya lebih padat."
+    }
+  },
+  {
+    "id": "kuliner-baguette",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Baguette",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Baguette adalah makanan utama khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "tepung terigu",
+        "air dan ragi",
+        "garam"
+      ],
+      "trivia": "Sejak 2022, keahlian membuat baguette tradisional diakui UNESCO sebagai warisan budaya takbenda."
+    }
+  },
+  {
+    "id": "kuliner-pretzel-bavaria",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Pretzel Bavaria",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Pretzel Bavaria adalah jajanan khas Jerman.",
+    "meta": {
+      "negara": "Jerman",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "adonan tepung",
+        "larutan alkali",
+        "garam kasar"
+      ],
+      "trivia": "Bentuk pretzel Bavaria yang besar dan lembut berbeda dari pretzel kering ala Amerika."
+    }
+  },
+  {
+    "id": "kuliner-currywurst-berlin",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Currywurst Berlin",
+    "tags": [
+      "jajanan"
+    ],
+    "teks": "Currywurst Berlin adalah jajanan khas Jerman.",
+    "meta": {
+      "negara": "Jerman",
+      "jenis": "jajanan",
+      "bahanUtama": [
+        "sosis panggang",
+        "saus kari tomat",
+        "bubuk kari"
+      ],
+      "trivia": "Ada museum khusus di Berlin yang didedikasikan untuk sejarah hidangan jajanan ini."
+    }
+  },
+  {
+    "id": "kuliner-beef-wellington",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Beef Wellington",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Beef Wellington adalah makanan utama khas Inggris.",
+    "meta": {
+      "negara": "Inggris",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "daging sapi has",
+        "pate dan jamur",
+        "adonan puff pastry"
+      ],
+      "trivia": "Nama hidangan ini diperkirakan menghormati Duke of Wellington, meski asal-usul pastinya masih diperdebatkan."
+    }
+  },
+  {
+    "id": "kuliner-cassoulet",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Cassoulet",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Cassoulet adalah makanan utama khas Prancis.",
+    "meta": {
+      "negara": "Prancis",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "kacang putih",
+        "sosis dan daging",
+        "bebek/angsa (opsional)"
+      ],
+      "trivia": "Hidangan sederhana petani wilayah Prancis Selatan ini dimasak perlahan selama berjam-jam dalam periuk tanah liat."
+    }
+  },
+  {
+    "id": "kuliner-bratwurst",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Bratwurst",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Bratwurst adalah makanan utama khas Jerman.",
+    "meta": {
+      "negara": "Jerman",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "sosis babi/sapi",
+        "rempah campuran",
+        "roti sebagai pelengkap"
+      ],
+      "trivia": "Punya lebih dari 40 variasi regional di seluruh Jerman, masing-masing dengan bumbu dan ukuran khasnya sendiri."
+    }
+  },
+  {
+    "id": "kuliner-smorrebrod",
+    "kategori": "kuliner",
+    "wilayah": "eropa",
+    "nama": "Smorrebrod",
+    "tags": [
+      "makanan utama"
+    ],
+    "teks": "Smorrebrod adalah makanan utama khas Denmark.",
+    "meta": {
+      "negara": "Denmark",
+      "jenis": "makanan utama",
+      "bahanUtama": [
+        "roti gandum hitam",
+        "mentega",
+        "topping (ikan/daging/telur)"
+      ],
+      "trivia": "Roti lapis terbuka khas Denmark ini secara tradisional dimakan dengan pisau dan garpu, bukan langsung digigit."
+    }
+  }
+]
