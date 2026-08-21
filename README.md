@@ -141,8 +141,9 @@ yang dimuat lewat pencarian satu-pintu.
 literal di dalam file `.js` (mencampur data dan logika) dipindah bertahap ke satu skema
 JSON standar (`{id, kategori, wilayah, nama, tags, teks, meta}`) di `raget/raget-data/`,
 dengan `*-store.js` yang tersisa hanya jadi loader tipis (fetch + fungsi query, nol data
-literal). Domain yang sudah dimigrasi: **tokoh** (`raget-data/tokoh/tokoh.json`, 236 entri)
-dan **kuliner** (`raget-data/kuliner/*.json`, 143 entri di 6 file regional) — pola
+literal). Domain yang sudah dimigrasi: **tokoh** (`raget-data/tokoh/tokoh.json`, 236 entri),
+**kuliner** (`raget-data/kuliner/*.json`, 143 entri di 6 file regional), dan **hari
+internasional** (`raget-data/hari-internasional/hari-internasional.json`, 158 entri) — pola
 migrasinya didokumentasikan di `raget/raget-tools/migrate-*-domain.mjs` untuk dipakai
 ulang di domain berikutnya.
 

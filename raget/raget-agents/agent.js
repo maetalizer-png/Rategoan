@@ -356,8 +356,8 @@ async function respondCore(messages, prompt) {
     stemEngine.tryClassification(text) ||
     stemEngine.tryEcology(text) ||
     stemEngine.tryTechConcept(text) ||
-    worldContext.tryHariByDate(text) ||
-    worldContext.tryHariByName(text) ||
+    (await worldContext.tryHariByDate(text)) ||
+    (await worldContext.tryHariByName(text)) ||
     worldContext.tryDetectLanguage(text) ||
     intelligenceRumus.tryFrameworkLookup(text);
   if (stemDict) {
