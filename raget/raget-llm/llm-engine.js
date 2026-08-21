@@ -7,20 +7,51 @@ const TIME_GREETING_RE = /^(selamat|met)?\s*(pagi|siang|sore|malam)\b|^good\s*(m
 const PLAIN_GREETING_RE = /^(halo+|hai+|hey+|hi)\b|^assalamu.?alaikum\b|^permisi\b/i;
 const QUESTION_WORDS = ['apa', 'siapa', 'kapan', 'dimana', 'di mana', 'mengapa', 'kenapa', 'bagaimana', 'berapa', 'gimana'];
 
-const TIME_GREETING_TEMPLATES = {
-  pagi: [
-    'Selamat pagi! Ada yang bisa saya bantu?',
-    'Pagi! Semoga harimu menyenangkan, mau mulai dari mana?',
-    'Pagi juga, ada rencana apa hari ini?',
-  ],
-  siang: ['Selamat siang! Ada yang bisa dibantu?', 'Siang, gimana harimu sejauh ini? Yuk, mau bahas apa?'],
-  sore: ['Selamat sore! Ada yang bisa saya bantu?', 'Sore juga, gimana harimu sejauh ini?'],
-  malam: [
-    'Selamat malam! Ada yang bisa saya bantu?',
-    'Malam juga, mau ngobrol soal apa malam ini?',
-    'Malam, semoga harimu berjalan baik. Ada yang bisa dibantu?',
-  ],
+// Template teks sapaan/smalltalk dipindah ke raget-data/sapaan/sapaan.json
+// (skema tunggal Fase B, lihat roadmap vNext §3) - modul ini cuma menyimpan
+// LOGIKA (regex pemicu smalltalk, tidak valid sebagai JSON) dan memuat teks
+// via loadSapaan() lazy-cache, bukan literal array lagi. Dua-tiga baris
+// fallback minimal di bawah ini SENGAJA tetap hardcode sebagai jaring
+// pengaman kalau fetch JSON gagal (batas sistem, bukan data domain).
+const SMALLTALK_TRIGGERS = {
+  siapa: /siapa\s+(kamu|anda)\b|kamu\s+siapa/i,
+  kabar: /\bkabar\s*(kamu|anda|lu|elu)\b|\bkabarmu\b|\b(apa|gimana|bagaimana)\s+kabar\b|how\s+are\s+you/i,
+  terima_kasih: /terima\s*kasih|makasih|thanks|thank\s*you/i,
+  jumpa: /sampai\s+jumpa|dad+ah|^bye\b|selamat\s+tinggal/i,
+  kemampuan: /kamu\s+bisa\s+apa|kemampuan(mu|kamu)?\b|apa\s+yang\s+bisa\s+kamu\s+lakukan/i,
 };
+
+const SAPAAN_FALLBACK_TEXT = 'Halo! Ada yang bisa saya bantu?';
+
+let sapaanCache = null;
+
+function indexSapaan(raw) {
+  const idx = { time: {}, plain: [], smalltalk: {}, followup: { greeting: [], smalltalk: [] } };
+  for (const e of Array.isArray(raw) ? raw : []) {
+    const m = e && e.meta ? e.meta : {};
+    if (m.jenis === 'waktu' && m.periode) idx.time[m.periode] = m.variants && m.variants.length ? m.variants : [e.teks];
+    else if (m.jenis === 'plain') idx.plain = m.variants && m.variants.length ? m.variants : [e.teks];
+    else if (m.jenis === 'smalltalk' && m.key)
+      idx.smalltalk[m.key] = { templates: m.variants && m.variants.length ? m.variants : [e.teks], templatesFormal: m.variantsFormal || null };
+    else if (m.jenis === 'followup') {
+      idx.followup.greeting = m.greeting || [];
+      idx.followup.smalltalk = m.smalltalk || [];
+    }
+  }
+  return idx;
+}
+
+async function loadSapaan() {
+  if (sapaanCache) return sapaanCache;
+  try {
+    const res = await fetch(new URL('../raget-data/sapaan/sapaan.json', import.meta.url));
+    const raw = res.ok ? await res.json() : [];
+    sapaanCache = indexSapaan(raw);
+  } catch (e) {
+    sapaanCache = indexSapaan([]);
+  }
+  return sapaanCache;
+}
 
 const EN_PERIOD_MAP = { morning: 'pagi', afternoon: 'siang', evening: 'sore', night: 'malam' };
 
@@ -30,61 +61,6 @@ function mirrorTemplates(statedPeriod, devicePeriod) {
     statedPeriod.charAt(0).toUpperCase() + statedPeriod.slice(1) + ' juga! (Waktu di perangkatku sih masih ' + devicePeriod + ')',
   ];
 }
-
-const PLAIN_GREETING_TEMPLATES = [
-  'Halo! Saya {name}, ada yang bisa dibantu?',
-  'Hai, senang bisa ngobrol denganmu. Mau bahas apa?',
-  'Halo juga! Ceritakan apa yang sedang kamu pikirkan.',
-];
-
-const SMALLTALK = [
-  {
-    key: 'siapa',
-    re: /siapa\s+(kamu|anda)\b|kamu\s+siapa/i,
-    templates: [
-      'Saya {name}, asisten lokal di Rategoan — semua obrolan kita tersimpan di perangkatmu sendiri.',
-      'Kenalkan, saya {name}. Saya bisa bantu jawab, ringkas, hitung, dan ingat hal penting selama kita ngobrol.',
-    ],
-  },
-  {
-    key: 'kabar',
-    re: /\bkabar\s*(kamu|anda|lu|elu)\b|\bkabarmu\b|\b(apa|gimana|bagaimana)\s+kabar\b|how\s+are\s+you/i,
-    templates: [
-      'Saya baik, terima kasih sudah nanya! Kamu sendiri gimana kabarnya?',
-      'Baik-baik saja di sini. Ada yang ingin kamu ceritakan hari ini?',
-    ],
-    templatesFormal: [
-      'Saya baik, terima kasih sudah bertanya. Bagaimana kabar Anda hari ini?',
-      'Baik-baik saja, terima kasih. Ada yang bisa saya bantu?',
-    ],
-  },
-  {
-    key: 'terima_kasih',
-    re: /terima\s*kasih|makasih|thanks|thank\s*you/i,
-    templates: ['Sama-sama! Kalau ada pertanyaan lain, tinggal tanya saja.', 'Senang bisa bantu. Ada lagi yang mau ditanyakan?'],
-  },
-  {
-    key: 'jumpa',
-    re: /sampai\s+jumpa|dad+ah|^bye\b|selamat\s+tinggal/i,
-    templates: [
-      'Sampai jumpa! Saya di sini kalau kamu butuh sesuatu lagi.',
-      'Dadah! Jangan ragu balik lagi kalau ada yang mau dibahas.',
-    ],
-  },
-  {
-    key: 'kemampuan',
-    re: /kamu\s+bisa\s+apa|kemampuan(mu|kamu)?\b|apa\s+yang\s+bisa\s+kamu\s+lakukan/i,
-    templates: [
-      'Saya bisa ngobrol, meringkas teks, menghitung, kasih ide konten, jelaskan istilah, dan mengingat hal penting soal kamu — semua tanpa internet.',
-      'Beberapa hal yang bisa saya bantu: ringkas, hitung, cari info dari catatan, dan nemenin ngobrol santai.',
-    ],
-  },
-];
-
-const FOLLOWUPS = {
-  greeting: ['Ada topik tertentu yang ingin kamu bahas?', 'Mau mulai dari mana hari ini?'],
-  smalltalk: ['Ada hal lain yang ingin kamu ceritakan?'],
-};
 
 function withName(template, name) {
   return template.split('{name}').join(name || 'Raget');
@@ -120,13 +96,15 @@ function lastTopic(context) {
 }
 
 function matchSmalltalk(text, options) {
-  const entry = SMALLTALK.find((s) => s.re.test(text));
+  const key = Object.keys(SMALLTALK_TRIGGERS).find((k) => SMALLTALK_TRIGGERS[k].test(text));
+  if (!key) return null;
+  const entry = sapaanCache.smalltalk[key];
   if (!entry) return null;
   const tone = detectTone(text);
   const pool = tone === 'formal' && entry.templatesFormal ? entry.templatesFormal : entry.templates;
-  const picked = pickVariant('small_' + entry.key + '_' + tone, pool, text);
+  const picked = pickVariant('small_' + key + '_' + tone, pool, text) || SAPAAN_FALLBACK_TEXT;
   const reply = withName(picked, options.personaName);
-  return maybeFollowUp(reply, FOLLOWUPS.smalltalk);
+  return maybeFollowUp(reply, sapaanCache.followup.smalltalk);
 }
 
 function extractStatedPeriod(text) {
@@ -144,17 +122,19 @@ function replyTimeGreeting(now, options, text) {
   if (statedPeriod && statedPeriod !== devicePeriod) {
     const templates = mirrorTemplates(statedPeriod, devicePeriod);
     const reply = withName(pickVariant('greet_mirror_' + statedPeriod, templates, statedPeriod + devicePeriod), options.personaName);
-    return maybeFollowUp(reply, FOLLOWUPS.greeting);
+    return maybeFollowUp(reply, sapaanCache.followup.greeting);
   }
 
-  const templates = TIME_GREETING_TEMPLATES[devicePeriod];
-  const reply = withName(pickVariant('greet_time_' + devicePeriod, templates, devicePeriod), options.personaName);
-  return maybeFollowUp(reply, FOLLOWUPS.greeting);
+  const templates = sapaanCache.time[devicePeriod] || [];
+  const picked = pickVariant('greet_time_' + devicePeriod, templates, devicePeriod) || SAPAAN_FALLBACK_TEXT;
+  const reply = withName(picked, options.personaName);
+  return maybeFollowUp(reply, sapaanCache.followup.greeting);
 }
 
 function replyPlainGreeting(text, options) {
-  const reply = withName(pickVariant('greet_plain', PLAIN_GREETING_TEMPLATES, text), options.personaName);
-  return maybeFollowUp(reply, FOLLOWUPS.greeting);
+  const picked = pickVariant('greet_plain', sapaanCache.plain, text) || SAPAAN_FALLBACK_TEXT;
+  const reply = withName(picked, options.personaName);
+  return maybeFollowUp(reply, sapaanCache.followup.greeting);
 }
 
 function replyQuestion(prompt) {
@@ -240,6 +220,7 @@ function craft(prompt, context, options) {
 let initialized = false;
 
 async function init() {
+  await loadSapaan();
   initialized = true;
   return true;
 }
