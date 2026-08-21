@@ -8,20 +8,17 @@ import { llmModels } from '../../raget/raget-llm/llm-models.js';
 const CHECK_SVG =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
-// Daftar model TIDAK didefinisikan di sini - diambil langsung dari registry
-// tunggal raget/raget-llm/llm-models.js (kontrak provider) supaya UI picker
-// ini tidak bisa lagi berbeda dari engine yang benar-benar berjalan, dan
-// supaya kelas engine (rule-template/local-neural/external) selalu tampil
-// jujur ke pengguna - lihat komentar di llm-models.js.
+// Daftar model DAN status aktif TIDAK didefinisikan di sini - keduanya
+// diambil langsung dari registry tunggal raget/raget-llm/llm-models.js
+// (kontrak provider) supaya UI picker ini tidak bisa lagi berbeda dari
+// engine yang benar-benar berjalan (llmModels.active dipakai js/ai/ai.js
+// untuk routing generate() sejak vNext Fase C, bukan cuma kosmetik lagi).
 export const models = {
-  KEY: 'rategoan_model',
   get list() {
     return llmModels.list;
   },
-  active: llmModels.active,
-  load() {
-    const v = localStorage.getItem(this.KEY);
-    if (v && llmModels.find(v)) this.active = v;
+  get active() {
+    return llmModels.active;
   },
   open() {
     this.render();
@@ -44,6 +41,12 @@ export const models = {
       cls.textContent = llmModels.classLabel(m.engineClass);
       info.appendChild(nm);
       info.appendChild(cls);
+      if (m.description) {
+        const desc = document.createElement('span');
+        desc.className = 'model-desc';
+        desc.textContent = m.description;
+        info.appendChild(desc);
+      }
       b.appendChild(info);
       if (m.id === this.active) {
         const ck = document.createElement('span');
@@ -52,8 +55,7 @@ export const models = {
         b.appendChild(ck);
       }
       b.onclick = () => {
-        this.active = m.id;
-        localStorage.setItem(this.KEY, m.id);
+        llmModels.setActive(m.id);
         if (ai) ai.setStatus('Model: ' + m.name);
         sheets.close();
         haptics.tap(10);
@@ -63,7 +65,6 @@ export const models = {
     });
   },
   bind() {
-    this.load();
     $('btn-model').onclick = () => this.open();
   },
 };
