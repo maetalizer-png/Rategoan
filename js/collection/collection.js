@@ -10,6 +10,22 @@ import { drawer } from '../ui/drawer.js';
 
 const COMMON_TAGS = ['faktoid', 'hitung', 'pengingat', 'obrolan', 'ingatan', 'umum', 'artefak'];
 
+// vNext Fase B: label manusiawi untuk key mentah di memoryLong.allFacts() -
+// key tak dikenal (mis. dari fact baru di ronde berikutnya) tetap tampil
+// apa adanya lewat fallback, tidak disembunyikan.
+const FACT_LABEL = {
+  nama: 'Nama',
+  pekerjaan: 'Pekerjaan',
+  kota: 'Kota tinggal',
+  suka: 'Suka',
+  mode_richness: 'Gaya jawaban',
+  mode_tone: 'Nada bicara',
+};
+
+function fmtFactValue(value) {
+  return Array.isArray(value) ? value.join(', ') : String(value);
+}
+
 const TAB_DESC = {
   tersimpan: 'Pesan dan balasan AI yang kamu simpan sendiri dari chat, lengkap dengan tag dan catatan pribadi.',
   perpus: 'Semua yang Raget ingat otomatis: catatan, fakta yang diajarkan, dan file yang kamu impor.',
@@ -187,6 +203,13 @@ async function renderPerpustakaan() {
   $('coll-tab-desc').textContent = TAB_DESC.perpus;
   const notes = memoryLong.allNotes().map((n, i) => ({ id: 'note-' + i, kind: 'note', text: n.text, time: n.time }));
   const learned = memoryLong.allLearned().map((f, i) => ({ id: 'learned-' + i, kind: 'learned', text: f.subject + ': ' + f.value, time: f.time, subject: f.subject }));
+  const facts = Object.entries(memoryLong.allFacts()).map(([key, value]) => ({
+    id: 'fact-' + key,
+    kind: 'fact',
+    text: (FACT_LABEL[key] || key) + ': ' + fmtFactValue(value),
+    time: null,
+    key,
+  }));
 
   let vaultItems = [];
   try {
@@ -219,6 +242,7 @@ async function renderPerpustakaan() {
   };
 
   const notesQ = applyQuery(notes).sort((a, b) => b.time - a.time);
+  const factsQ = applyQuery(facts).sort((a, b) => a.key.localeCompare(b.key));
   const learnedQ = applyQuery(learned).sort((a, b) => b.time - a.time);
   const vaultQ = applyQuery(vaultItems).sort((a, b) => b.time - a.time);
 
@@ -227,6 +251,7 @@ async function renderPerpustakaan() {
 
   content.innerHTML =
     libGroupHtml('Catatan', notesQ, 'Belum ada catatan. Minta Raget mengingat sesuatu, mis. "ingat ya, aku suka kopi".') +
+    libGroupHtml('Fakta tentang saya', factsQ, 'Belum ada fakta pribadi tersimpan. Muncul otomatis kalau kamu cerita, mis. "nama saya Dinda".') +
     libGroupHtml('Fakta diajarkan', learnedQ, 'Belum ada fakta yang diajarkan. Ajari Raget lewat chat, mis. "ulang tahunku itu 5 Mei".') +
     libGroupHtml('Chunk impor (PDF/Notion/Evernote/WhatsApp)', vaultQ, 'Belum ada file diimpor. Kirim PDF di chat, ketik: baca pdf ini.') +
     '<div class="coll-lib-group"><div class="coll-lib-group-head">Pengetahuan (umum &amp; FAQ)</div>' +
@@ -242,6 +267,9 @@ async function renderPerpustakaan() {
     if (kind === 'note') {
       const n = notes.find((x) => x.id === id);
       if (n) memoryLong.forgetNote(n.text);
+    } else if (kind === 'fact') {
+      const f = facts.find((x) => x.id === id);
+      if (f) memoryLong.forgetFact(f.key);
     } else if (kind === 'learned') {
       const f = learned.find((x) => x.id === id);
       if (f) memoryLong.forgetLearned(f.subject);

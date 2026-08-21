@@ -49,6 +49,20 @@ function allFacts() {
   return read().facts;
 }
 
+// vNext Fase B: facts (nama/pekerjaan/kota/suka/preferensi mode) sebelumnya
+// bisa ditulis (remember) dan dibaca (recall/allFacts) tapi tidak ada cara
+// menghapus SATU fact tanpa clear() semuanya - menutup gap "memory harus
+// bisa di-inspect/edit/delete" (audit P1) untuk kategori facts, menyusul
+// notes/learned yang sudah punya forgetNote()/forgetLearned() lebih dulu.
+function forgetFact(key) {
+  const data = read();
+  if (!(key in data.facts)) return false;
+  delete data.facts[key];
+  data.updatedAt = Date.now();
+  write(data);
+  return true;
+}
+
 function rememberList(key, value) {
   const list = recall(key) || [];
   if (value && !list.includes(value)) {
@@ -148,6 +162,7 @@ export const memoryLong = Object.freeze({
   remember,
   recall,
   allFacts,
+  forgetFact,
   learnFromText,
   rememberNote,
   forgetNote,
