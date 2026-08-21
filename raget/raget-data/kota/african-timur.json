@@ -1,0 +1,128 @@
+[
+  {
+    "id": "kota-addis-ababa-etiopia",
+    "kategori": "kota",
+    "wilayah": "african-timur",
+    "nama": "Addis Ababa",
+    "tags": [
+      "addis ababa",
+      "etiopia"
+    ],
+    "teks": "Addis Ababa — ibukota Etiopia. Populasi 5,2 juta. Terkenal: markas Uni Afrika.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "city",
+      "population": "5,2 juta",
+      "knownFor": "Uni Afrika",
+      "tags": [
+        "addis ababa",
+        "etiopia"
+      ]
+    }
+  },
+  {
+    "id": "kota-nairobi-kenya",
+    "kategori": "kota",
+    "wilayah": "african-timur",
+    "nama": "Nairobi",
+    "tags": [
+      "nairobi",
+      "kenya"
+    ],
+    "teks": "Nairobi — ibukota Kenya. Populasi 4,4 juta. Terkenal: taman nasional di dalam kota.",
+    "meta": {
+      "country": "Kenya",
+      "type": "city",
+      "population": "4,4 juta",
+      "knownFor": "taman nasional",
+      "tags": [
+        "nairobi",
+        "kenya"
+      ]
+    }
+  },
+  {
+    "id": "kota-dar-es-salaam-tanzania",
+    "kategori": "kota",
+    "wilayah": "african-timur",
+    "nama": "Dar es Salaam",
+    "tags": [
+      "dar es salaam",
+      "tanzania"
+    ],
+    "teks": "Dar es Salaam — kota terbesar Tanzania. Populasi 6,7 juta. Terkenal: pelabuhan utama pantai Swahili.",
+    "meta": {
+      "country": "Tanzania",
+      "type": "city",
+      "population": "6,7 juta",
+      "knownFor": "pelabuhan Swahili",
+      "tags": [
+        "dar es salaam",
+        "tanzania"
+      ]
+    }
+  },
+  {
+    "id": "kota-kampala-uganda",
+    "kategori": "kota",
+    "wilayah": "african-timur",
+    "nama": "Kampala",
+    "tags": [
+      "kampala",
+      "uganda"
+    ],
+    "teks": "Kampala — ibukota Uganda. Populasi 1,7 juta. Terkenal: dibangun di atas tujuh bukit.",
+    "meta": {
+      "country": "Uganda",
+      "type": "city",
+      "population": "1,7 juta",
+      "knownFor": "tujuh bukit",
+      "tags": [
+        "kampala",
+        "uganda"
+      ]
+    }
+  },
+  {
+    "id": "kota-mogadishu-somalia",
+    "kategori": "kota",
+    "wilayah": "african-timur",
+    "nama": "Mogadishu",
+    "tags": [
+      "mogadishu",
+      "somalia"
+    ],
+    "teks": "Mogadishu — ibukota Somalia. Populasi 2,6 juta. Terkenal: kota pesisir bersejarah.",
+    "meta": {
+      "country": "Somalia",
+      "type": "city",
+      "population": "2,6 juta",
+      "knownFor": "kota pesisir bersejarah",
+      "tags": [
+        "mogadishu",
+        "somalia"
+      ]
+    }
+  },
+  {
+    "id": "kota-kigali-rwanda",
+    "kategori": "kota",
+    "wilayah": "african-timur",
+    "nama": "Kigali",
+    "tags": [
+      "kigali",
+      "rwanda"
+    ],
+    "teks": "Kigali — ibukota Rwanda. Populasi 1,2 juta. Terkenal: kota terbersih di Afrika.",
+    "meta": {
+      "country": "Rwanda",
+      "type": "city",
+      "population": "1,2 juta",
+      "knownFor": "kota terbersih",
+      "tags": [
+        "kigali",
+        "rwanda"
+      ]
+    }
+  }
+]

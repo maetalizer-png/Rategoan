@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kota-kingston-jamaika",
+    "kategori": "kota",
+    "wilayah": "american-karibia",
+    "nama": "Kingston",
+    "tags": [
+      "kingston",
+      "jamaika"
+    ],
+    "teks": "Kingston — ibukota Jamaika. Populasi 590 ribu. Terkenal: musik reggae, pelabuhan alami.",
+    "meta": {
+      "country": "Jamaika",
+      "type": "city",
+      "population": "590 ribu",
+      "knownFor": "reggae, pelabuhan",
+      "tags": [
+        "kingston",
+        "jamaika"
+      ]
+    }
+  },
+  {
+    "id": "kota-port-au-prince-haiti",
+    "kategori": "kota",
+    "wilayah": "american-karibia",
+    "nama": "Port-au-Prince",
+    "tags": [
+      "port-au-prince",
+      "haiti"
+    ],
+    "teks": "Port-au-Prince — ibukota Haiti. Populasi 1 juta. Terkenal: sejarah kemerdekaan Karibia.",
+    "meta": {
+      "country": "Haiti",
+      "type": "city",
+      "population": "1 juta",
+      "knownFor": "sejarah kemerdekaan",
+      "tags": [
+        "port-au-prince",
+        "haiti"
+      ]
+    }
+  },
+  {
+    "id": "kota-santo-domingo-republik-dominika",
+    "kategori": "kota",
+    "wilayah": "american-karibia",
+    "nama": "Santo Domingo",
+    "tags": [
+      "santo domingo",
+      "republik dominika"
+    ],
+    "teks": "Santo Domingo — ibukota Republik Dominika. Populasi 3,3 juta (metro). Terkenal: kota kolonial pertama di Amerika.",
+    "meta": {
+      "country": "Republik Dominika",
+      "type": "city",
+      "population": "3,3 juta",
+      "knownFor": "kota kolonial pertama",
+      "tags": [
+        "santo domingo",
+        "republik dominika"
+      ]
+    }
+  },
+  {
+    "id": "kota-nassau-bahama",
+    "kategori": "kota",
+    "wilayah": "american-karibia",
+    "nama": "Nassau",
+    "tags": [
+      "nassau",
+      "bahama"
+    ],
+    "teks": "Nassau — ibukota Bahama. Populasi 280 ribu. Terkenal: pantai dan resor mewah.",
+    "meta": {
+      "country": "Bahama",
+      "type": "city",
+      "population": "280 ribu",
+      "knownFor": "pantai, resor",
+      "tags": [
+        "nassau",
+        "bahama"
+      ]
+    }
+  },
+  {
+    "id": "kota-san-juan-puerto-rico",
+    "kategori": "kota",
+    "wilayah": "american-karibia",
+    "nama": "San Juan",
+    "tags": [
+      "san juan",
+      "puerto rico"
+    ],
+    "teks": "San Juan — ibukota Puerto Rico. Populasi 320 ribu. Terkenal: benteng kolonial Spanyol.",
+    "meta": {
+      "country": "Puerto Rico",
+      "type": "city",
+      "population": "320 ribu",
+      "knownFor": "benteng kolonial",
+      "tags": [
+        "san juan",
+        "puerto rico"
+      ]
+    }
+  }
+]

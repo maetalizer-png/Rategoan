@@ -1,0 +1,176 @@
+[
+  {
+    "id": "bahasa-inggris-australia",
+    "kategori": "bahasa",
+    "wilayah": "osenian",
+    "nama": "Inggris Australia",
+    "tags": [
+      "australia",
+      "osenian"
+    ],
+    "teks": "Australia — bahasa Inggris, 20 juta penutur. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "20 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Australia"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "australia",
+        "osenian"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-maori",
+    "kategori": "bahasa",
+    "wilayah": "osenian",
+    "nama": "Maori",
+    "tags": [
+      "selandia baru",
+      "osenian"
+    ],
+    "teks": "Selandia Baru — bahasa Maori, 185 ribu penutur, resmi berdampingan Inggris. Sapaan: kia ora (halo), ngā mihi (terima kasih).",
+    "meta": {
+      "nativeName": "Te Reo Māori",
+      "speakers": "185 ribu",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Selandia Baru"
+      ],
+      "greetings": {
+        "halo": "kia ora",
+        "pagi": "ata mārie",
+        "terimakasih": "ngā mihi"
+      },
+      "tags": [
+        "selandia baru",
+        "osenian"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-fiji",
+    "kategori": "bahasa",
+    "wilayah": "osenian",
+    "nama": "Fiji",
+    "tags": [
+      "fiji",
+      "osenian"
+    ],
+    "teks": "Fiji — bahasa Fiji, 350 ribu penutur, resmi berdampingan Inggris. Sapaan: bula (halo), vinaka (terima kasih).",
+    "meta": {
+      "nativeName": "Vosa Vakaviti",
+      "speakers": "350 ribu",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Fiji"
+      ],
+      "greetings": {
+        "halo": "bula",
+        "pagi": "yadra",
+        "terimakasih": "vinaka"
+      },
+      "tags": [
+        "fiji",
+        "osenian"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-tok-pisin",
+    "kategori": "bahasa",
+    "wilayah": "osenian",
+    "nama": "Tok Pisin",
+    "tags": [
+      "papua nugini",
+      "osenian"
+    ],
+    "teks": "Papua Nugini — bahasa Tok Pisin, lingua franca nasional, 4 juta penutur. Sapaan: apinun (halo), tenkyu (terima kasih).",
+    "meta": {
+      "nativeName": "Tok Pisin",
+      "speakers": "4 juta",
+      "script": "Latin",
+      "family": "Kreol berbasis Inggris",
+      "officialIn": [
+        "Papua Nugini"
+      ],
+      "greetings": {
+        "halo": "apinun",
+        "pagi": "moning",
+        "terimakasih": "tenkyu"
+      },
+      "tags": [
+        "papua nugini",
+        "osenian"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-samoa",
+    "kategori": "bahasa",
+    "wilayah": "osenian",
+    "nama": "Samoa",
+    "tags": [
+      "samoa",
+      "osenian"
+    ],
+    "teks": "Samoa — bahasa Samoa, 500 ribu penutur, resmi berdampingan Inggris. Sapaan: talofa (halo), fa'afetai (terima kasih).",
+    "meta": {
+      "nativeName": "Gagana Samoa",
+      "speakers": "500 ribu",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Samoa"
+      ],
+      "greetings": {
+        "halo": "talofa",
+        "pagi": "talofa",
+        "terimakasih": "fa'afetai"
+      },
+      "tags": [
+        "samoa",
+        "osenian"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-tonga",
+    "kategori": "bahasa",
+    "wilayah": "osenian",
+    "nama": "Tonga",
+    "tags": [
+      "tonga",
+      "osenian"
+    ],
+    "teks": "Tonga — bahasa Tonga, 190 ribu penutur, resmi berdampingan Inggris. Sapaan: malo e lelei (halo), malo (terima kasih).",
+    "meta": {
+      "nativeName": "Lea Faka-Tonga",
+      "speakers": "190 ribu",
+      "script": "Latin",
+      "family": "Austronesia",
+      "officialIn": [
+        "Tonga"
+      ],
+      "greetings": {
+        "halo": "malo e lelei",
+        "pagi": "malo e lelei",
+        "terimakasih": "malo"
+      },
+      "tags": [
+        "tonga",
+        "osenian"
+      ]
+    }
+  }
+]

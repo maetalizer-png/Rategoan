@@ -1,0 +1,128 @@
+[
+  {
+    "id": "kota-moskow-rusia",
+    "kategori": "kota",
+    "wilayah": "eropan-timur",
+    "nama": "Moskow",
+    "tags": [
+      "moskow",
+      "rusia"
+    ],
+    "teks": "Moskow — ibukota Rusia. Populasi 12,6 juta. Terkenal: Kremlin, Lapangan Merah.",
+    "meta": {
+      "country": "Rusia",
+      "type": "city",
+      "population": "12,6 juta",
+      "knownFor": "Kremlin, Lapangan Merah",
+      "tags": [
+        "moskow",
+        "rusia"
+      ]
+    }
+  },
+  {
+    "id": "kota-saint-petersburg-rusia",
+    "kategori": "kota",
+    "wilayah": "eropan-timur",
+    "nama": "Saint Petersburg",
+    "tags": [
+      "saint petersburg",
+      "rusia"
+    ],
+    "teks": "Saint Petersburg — kota budaya Rusia. Populasi 5,4 juta. Terkenal: Istana Hermitage, arsitektur kekaisaran.",
+    "meta": {
+      "country": "Rusia",
+      "type": "city",
+      "population": "5,4 juta",
+      "knownFor": "Hermitage, arsitektur kekaisaran",
+      "tags": [
+        "saint petersburg",
+        "rusia"
+      ]
+    }
+  },
+  {
+    "id": "kota-kyiv-ukraina",
+    "kategori": "kota",
+    "wilayah": "eropan-timur",
+    "nama": "Kyiv",
+    "tags": [
+      "kyiv",
+      "ukraina"
+    ],
+    "teks": "Kyiv — ibukota Ukraina. Populasi 3 juta. Terkenal: gereja berkubah emas, kota tertua Slavia Timur.",
+    "meta": {
+      "country": "Ukraina",
+      "type": "city",
+      "population": "3 juta",
+      "knownFor": "gereja kubah emas",
+      "tags": [
+        "kyiv",
+        "ukraina"
+      ]
+    }
+  },
+  {
+    "id": "kota-bucharest-rumania",
+    "kategori": "kota",
+    "wilayah": "eropan-timur",
+    "nama": "Bucharest",
+    "tags": [
+      "bucharest",
+      "rumania"
+    ],
+    "teks": "Bucharest — ibukota Rumania. Populasi 1,8 juta. Terkenal: Istana Parlemen, kota Paris Timur.",
+    "meta": {
+      "country": "Rumania",
+      "type": "city",
+      "population": "1,8 juta",
+      "knownFor": "Istana Parlemen",
+      "tags": [
+        "bucharest",
+        "rumania"
+      ]
+    }
+  },
+  {
+    "id": "kota-minsk-belarus",
+    "kategori": "kota",
+    "wilayah": "eropan-timur",
+    "nama": "Minsk",
+    "tags": [
+      "minsk",
+      "belarus"
+    ],
+    "teks": "Minsk — ibukota Belarus. Populasi 2 juta. Terkenal: arsitektur Soviet, kota bersih dan tertata.",
+    "meta": {
+      "country": "Belarus",
+      "type": "city",
+      "population": "2 juta",
+      "knownFor": "arsitektur Soviet",
+      "tags": [
+        "minsk",
+        "belarus"
+      ]
+    }
+  },
+  {
+    "id": "kota-sofia-bulgaria",
+    "kategori": "kota",
+    "wilayah": "eropan-timur",
+    "nama": "Sofia",
+    "tags": [
+      "sofia",
+      "bulgaria"
+    ],
+    "teks": "Sofia — ibukota Bulgaria. Populasi 1,3 juta. Terkenal: Katedral Alexander Nevsky, kota tertua Eropa.",
+    "meta": {
+      "country": "Bulgaria",
+      "type": "city",
+      "population": "1,3 juta",
+      "knownFor": "Katedral Alexander Nevsky",
+      "tags": [
+        "sofia",
+        "bulgaria"
+      ]
+    }
+  }
+]

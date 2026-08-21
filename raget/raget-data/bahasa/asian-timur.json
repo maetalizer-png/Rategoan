@@ -1,0 +1,211 @@
+[
+  {
+    "id": "bahasa-mandarin",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Mandarin",
+    "tags": [
+      "china",
+      "mandarin",
+      "asia timur"
+    ],
+    "teks": "China — bahasa Mandarin, sekitar 1,1 miliar penutur. Aksara: Hanzi (karakter Han). Sapaan: nǐ hǎo (halo), xièxiè (terima kasih).",
+    "meta": {
+      "nativeName": "普通话",
+      "speakers": "1,1 miliar",
+      "script": "Hanzi",
+      "family": "Sino-Tibet",
+      "officialIn": [
+        "China",
+        "Taiwan",
+        "Singapura"
+      ],
+      "greetings": {
+        "halo": "nǐ hǎo",
+        "pagi": "zǎoshang hǎo",
+        "terimakasih": "xièxiè"
+      },
+      "tags": [
+        "china",
+        "mandarin",
+        "asia timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-jepang",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Jepang",
+    "tags": [
+      "jepang",
+      "asia timur"
+    ],
+    "teks": "Jepang — bahasa Jepang, 125 juta penutur. Aksara: Kanji, Hiragana, Katakana. Sapaan: konnichiwa (halo), arigatou (terima kasih).",
+    "meta": {
+      "nativeName": "日本語",
+      "speakers": "125 juta",
+      "script": "Kanji, Hiragana, Katakana",
+      "family": "Japonik",
+      "officialIn": [
+        "Jepang"
+      ],
+      "greetings": {
+        "halo": "konnichiwa",
+        "pagi": "ohayou gozaimasu",
+        "terimakasih": "arigatou"
+      },
+      "tags": [
+        "jepang",
+        "asia timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-korea",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Korea",
+    "tags": [
+      "korea",
+      "asia timur"
+    ],
+    "teks": "Korea Selatan — bahasa Korea, 80 juta penutur. Aksara: Hangeul. Sapaan: annyeonghaseyo (halo), gamsahamnida (terima kasih).",
+    "meta": {
+      "nativeName": "한국어",
+      "speakers": "80 juta",
+      "script": "Hangeul",
+      "family": "Koreanik",
+      "officialIn": [
+        "Korea Selatan",
+        "Korea Utara"
+      ],
+      "greetings": {
+        "halo": "annyeonghaseyo",
+        "pagi": "joheun achim",
+        "terimakasih": "gamsahamnida"
+      },
+      "tags": [
+        "korea",
+        "asia timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-mongolia",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Mongolia",
+    "tags": [
+      "mongolia",
+      "asia timur"
+    ],
+    "teks": "Mongolia — bahasa Mongolia, 5,7 juta penutur. Aksara: Sirilik Mongolia. Sapaan: sain baina uu (halo), өглөөний мэнд (selamat pagi).",
+    "meta": {
+      "nativeName": "Монгол хэл",
+      "speakers": "5,7 juta",
+      "script": "Sirilik",
+      "family": "Mongolik",
+      "officialIn": [
+        "Mongolia"
+      ],
+      "greetings": {
+        "halo": "sain baina uu",
+        "pagi": "Өглөөний мэнд",
+        "terimakasih": "bayarlalaa"
+      },
+      "tags": [
+        "mongolia",
+        "asia timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-hokkien-taiwan",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Hokkien Taiwan",
+    "tags": [
+      "taiwan",
+      "asia timur"
+    ],
+    "teks": "Taiwan — bahasa Hokkien Taiwan, 15 juta penutur, mendampingi Mandarin resmi. Sapaan: lí hó (halo), to-siā (terima kasih).",
+    "meta": {
+      "nativeName": "臺語",
+      "speakers": "15 juta",
+      "script": "Hanzi",
+      "family": "Sino-Tibet",
+      "officialIn": [
+        "Taiwan"
+      ],
+      "greetings": {
+        "halo": "lí hó",
+        "pagi": "gau chá",
+        "terimakasih": "to-siā"
+      },
+      "tags": [
+        "taiwan",
+        "asia timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-kanton",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Kanton",
+    "tags": [
+      "hong kong",
+      "asia timur"
+    ],
+    "teks": "Hong Kong — bahasa Kanton, 6,4 juta penutur. Aksara: Hanzi tradisional. Sapaan: néih hóu (halo), dòjeh (terima kasih).",
+    "meta": {
+      "nativeName": "廣東話",
+      "speakers": "6,4 juta",
+      "script": "Hanzi tradisional",
+      "family": "Sino-Tibet",
+      "officialIn": [
+        "Hong Kong",
+        "Makau"
+      ],
+      "greetings": {
+        "halo": "néih hóu",
+        "pagi": "jóusàhn",
+        "terimakasih": "dòjeh"
+      },
+      "tags": [
+        "hong kong",
+        "asia timur"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-tibet",
+    "kategori": "bahasa",
+    "wilayah": "asian-timur",
+    "nama": "Tibet",
+    "tags": [
+      "tibet",
+      "asia timur"
+    ],
+    "teks": "Tibet — bahasa Tibet, 6 juta penutur. Aksara: Aksara Tibet. Sapaan: tashi delek (halo/salam).",
+    "meta": {
+      "nativeName": "བོད་སྐད",
+      "speakers": "6 juta",
+      "script": "Aksara Tibet",
+      "family": "Sino-Tibet",
+      "officialIn": [
+        "Tibet"
+      ],
+      "greetings": {
+        "halo": "tashi delek",
+        "pagi": "tashi delek",
+        "terimakasih": "thuk je che"
+      },
+      "tags": [
+        "tibet",
+        "asia timur"
+      ]
+    }
+  }
+]

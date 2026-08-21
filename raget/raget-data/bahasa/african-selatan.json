@@ -1,0 +1,177 @@
+[
+  {
+    "id": "bahasa-zulu",
+    "kategori": "bahasa",
+    "wilayah": "african-selatan",
+    "nama": "Zulu",
+    "tags": [
+      "afrika selatan",
+      "african-selatan"
+    ],
+    "teks": "Afrika Selatan — bahasa Zulu, 12 juta penutur, salah satu dari 11 bahasa resmi. Sapaan: sawubona (halo), ngiyabonga (terima kasih).",
+    "meta": {
+      "nativeName": "isiZulu",
+      "speakers": "12 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Afrika Selatan"
+      ],
+      "greetings": {
+        "halo": "sawubona",
+        "pagi": "sawubona",
+        "terimakasih": "ngiyabonga"
+      },
+      "tags": [
+        "afrika selatan",
+        "african-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-afrikaans",
+    "kategori": "bahasa",
+    "wilayah": "african-selatan",
+    "nama": "Afrikaans",
+    "tags": [
+      "afrika selatan",
+      "african-selatan"
+    ],
+    "teks": "Afrika Selatan — bahasa Afrikaans, 7 juta penutur, turunan Belanda. Sapaan: hallo (halo), dankie (terima kasih).",
+    "meta": {
+      "nativeName": "Afrikaans",
+      "speakers": "7 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Afrika Selatan",
+        "Namibia"
+      ],
+      "greetings": {
+        "halo": "hallo",
+        "pagi": "goeie môre",
+        "terimakasih": "dankie"
+      },
+      "tags": [
+        "afrika selatan",
+        "african-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-namibia",
+    "kategori": "bahasa",
+    "wilayah": "african-selatan",
+    "nama": "Inggris Namibia",
+    "tags": [
+      "namibia",
+      "african-selatan"
+    ],
+    "teks": "Namibia — bahasa Inggris resmi, berdampingan Afrikaans dan Oshiwambo. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "2,5 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Namibia"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "namibia",
+        "african-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-setswana",
+    "kategori": "bahasa",
+    "wilayah": "african-selatan",
+    "nama": "Setswana",
+    "tags": [
+      "botswana",
+      "african-selatan"
+    ],
+    "teks": "Botswana — bahasa Setswana, 5 juta penutur, resmi berdampingan Inggris. Sapaan: dumela (halo), ke a leboga (terima kasih).",
+    "meta": {
+      "nativeName": "Setswana",
+      "speakers": "5 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Botswana"
+      ],
+      "greetings": {
+        "halo": "dumela",
+        "pagi": "dumela",
+        "terimakasih": "ke a leboga"
+      },
+      "tags": [
+        "botswana",
+        "african-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-shona",
+    "kategori": "bahasa",
+    "wilayah": "african-selatan",
+    "nama": "Shona",
+    "tags": [
+      "zimbabwe",
+      "african-selatan"
+    ],
+    "teks": "Zimbabwe — bahasa Shona, 10 juta penutur, salah satu bahasa resmi terbanyak dituturkan. Sapaan: mhoro (halo), ndatenda (terima kasih).",
+    "meta": {
+      "nativeName": "chiShona",
+      "speakers": "10 juta",
+      "script": "Latin",
+      "family": "Niger-Kongo",
+      "officialIn": [
+        "Zimbabwe"
+      ],
+      "greetings": {
+        "halo": "mhoro",
+        "pagi": "mangwanani",
+        "terimakasih": "ndatenda"
+      },
+      "tags": [
+        "zimbabwe",
+        "african-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-portugis-mozambik",
+    "kategori": "bahasa",
+    "wilayah": "african-selatan",
+    "nama": "Portugis Mozambik",
+    "tags": [
+      "mozambik",
+      "african-selatan"
+    ],
+    "teks": "Mozambik — bahasa Portugis resmi, 12 juta penutur. Sapaan: olá (halo), obrigado (terima kasih).",
+    "meta": {
+      "nativeName": "Português",
+      "speakers": "12 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Mozambik"
+      ],
+      "greetings": {
+        "halo": "olá",
+        "pagi": "bom dia",
+        "terimakasih": "obrigado"
+      },
+      "tags": [
+        "mozambik",
+        "african-selatan"
+      ]
+    }
+  }
+]

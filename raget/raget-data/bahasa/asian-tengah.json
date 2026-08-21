@@ -1,0 +1,147 @@
+[
+  {
+    "id": "bahasa-kazakh",
+    "kategori": "bahasa",
+    "wilayah": "asian-tengah",
+    "nama": "Kazakh",
+    "tags": [
+      "kazakhstan",
+      "asia tengah"
+    ],
+    "teks": "Kazakhstan — bahasa Kazakh, 13 juta penutur. Aksara: Sirilik (transisi ke Latin). Sapaan: salem (halo), rakhmet (terima kasih).",
+    "meta": {
+      "nativeName": "Қазақ тілі",
+      "speakers": "13 juta",
+      "script": "Sirilik",
+      "family": "Turkik",
+      "officialIn": [
+        "Kazakhstan"
+      ],
+      "greetings": {
+        "halo": "salem",
+        "pagi": "qayyrly tañ",
+        "terimakasih": "rakhmet"
+      },
+      "tags": [
+        "kazakhstan",
+        "asia tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-uzbek",
+    "kategori": "bahasa",
+    "wilayah": "asian-tengah",
+    "nama": "Uzbek",
+    "tags": [
+      "uzbekistan",
+      "asia tengah"
+    ],
+    "teks": "Uzbekistan — bahasa Uzbek, 34 juta penutur. Aksara: Latin. Sapaan: salom (halo), rahmat (terima kasih).",
+    "meta": {
+      "nativeName": "Oʻzbek tili",
+      "speakers": "34 juta",
+      "script": "Latin",
+      "family": "Turkik",
+      "officialIn": [
+        "Uzbekistan"
+      ],
+      "greetings": {
+        "halo": "salom",
+        "pagi": "xayrli tong",
+        "terimakasih": "rahmat"
+      },
+      "tags": [
+        "uzbekistan",
+        "asia tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-turkmen",
+    "kategori": "bahasa",
+    "wilayah": "asian-tengah",
+    "nama": "Turkmen",
+    "tags": [
+      "turkmenistan",
+      "asia tengah"
+    ],
+    "teks": "Turkmenistan — bahasa Turkmen, 7 juta penutur. Aksara: Latin. Sapaan: salam (halo), sag boluñ (terima kasih).",
+    "meta": {
+      "nativeName": "Türkmençe",
+      "speakers": "7 juta",
+      "script": "Latin",
+      "family": "Turkik",
+      "officialIn": [
+        "Turkmenistan"
+      ],
+      "greetings": {
+        "halo": "salam",
+        "pagi": "ertiriñiz haýyrly bolsun",
+        "terimakasih": "sag boluñ"
+      },
+      "tags": [
+        "turkmenistan",
+        "asia tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-kirgiz",
+    "kategori": "bahasa",
+    "wilayah": "asian-tengah",
+    "nama": "Kirgiz",
+    "tags": [
+      "kirgistan",
+      "asia tengah"
+    ],
+    "teks": "Kirgistan — bahasa Kirgiz, 4,3 juta penutur. Aksara: Sirilik. Sapaan: salam (halo), rakhmat (terima kasih).",
+    "meta": {
+      "nativeName": "Кыргызча",
+      "speakers": "4,3 juta",
+      "script": "Sirilik",
+      "family": "Turkik",
+      "officialIn": [
+        "Kirgistan"
+      ],
+      "greetings": {
+        "halo": "salam",
+        "pagi": "kutmanduu tañ",
+        "terimakasih": "rakhmat"
+      },
+      "tags": [
+        "kirgistan",
+        "asia tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-tajik",
+    "kategori": "bahasa",
+    "wilayah": "asian-tengah",
+    "nama": "Tajik",
+    "tags": [
+      "tajikistan",
+      "asia tengah"
+    ],
+    "teks": "Tajikistan — bahasa Tajik, 8,5 juta penutur. Aksara: Sirilik. Sapaan: salom (halo), rahmat (terima kasih).",
+    "meta": {
+      "nativeName": "Тоҷикӣ",
+      "speakers": "8,5 juta",
+      "script": "Sirilik",
+      "family": "Indo-Iran",
+      "officialIn": [
+        "Tajikistan"
+      ],
+      "greetings": {
+        "halo": "salom",
+        "pagi": "subhaton ba khair",
+        "terimakasih": "rahmat"
+      },
+      "tags": [
+        "tajikistan",
+        "asia tengah"
+      ]
+    }
+  }
+]

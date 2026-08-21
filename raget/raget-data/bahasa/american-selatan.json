@@ -1,0 +1,328 @@
+[
+  {
+    "id": "bahasa-portugis-brasil",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Portugis Brasil",
+    "tags": [
+      "brasil",
+      "american-selatan"
+    ],
+    "teks": "Brasil — bahasa Portugis, 210 juta penutur. Aksara: Latin. Sapaan: olá (halo), obrigado (terima kasih).",
+    "meta": {
+      "nativeName": "Português",
+      "speakers": "210 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Brasil"
+      ],
+      "greetings": {
+        "halo": "olá",
+        "pagi": "bom dia",
+        "terimakasih": "obrigado"
+      },
+      "tags": [
+        "brasil",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-argentina",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Spanyol Argentina",
+    "tags": [
+      "argentina",
+      "american-selatan"
+    ],
+    "teks": "Argentina — bahasa Spanyol, 45 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "45 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Argentina"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "argentina",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-kolombia",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Spanyol Kolombia",
+    "tags": [
+      "kolombia",
+      "american-selatan"
+    ],
+    "teks": "Kolombia — bahasa Spanyol, 50 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "50 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Kolombia"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "kolombia",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-chili",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Spanyol Chili",
+    "tags": [
+      "chili",
+      "american-selatan"
+    ],
+    "teks": "Chili — bahasa Spanyol, 19 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "19 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Chili"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "chili",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-quechua",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Quechua",
+    "tags": [
+      "peru",
+      "american-selatan",
+      "bahasa asli"
+    ],
+    "teks": "Peru — bahasa Quechua, 4 juta penutur, resmi berdampingan Spanyol. Sapaan: napaykullayki (halo), sulpayki (terima kasih).",
+    "meta": {
+      "nativeName": "Runa Simi",
+      "speakers": "4 juta",
+      "script": "Latin",
+      "family": "Quechuan",
+      "officialIn": [
+        "Peru",
+        "Bolivia"
+      ],
+      "greetings": {
+        "halo": "napaykullayki",
+        "pagi": "allin p'unchay",
+        "terimakasih": "sulpayki"
+      },
+      "tags": [
+        "peru",
+        "american-selatan",
+        "bahasa asli"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-venezuela",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Spanyol Venezuela",
+    "tags": [
+      "venezuela",
+      "american-selatan"
+    ],
+    "teks": "Venezuela — bahasa Spanyol, 29 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "29 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Venezuela"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "venezuela",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-aymara",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Aymara",
+    "tags": [
+      "bolivia",
+      "american-selatan",
+      "bahasa asli"
+    ],
+    "teks": "Bolivia — bahasa Aymara, 1,7 juta penutur, resmi berdampingan Spanyol. Sapaan: kamisaraki (halo), yuspagara (terima kasih).",
+    "meta": {
+      "nativeName": "Aymar aru",
+      "speakers": "1,7 juta",
+      "script": "Latin",
+      "family": "Aymaran",
+      "officialIn": [
+        "Bolivia"
+      ],
+      "greetings": {
+        "halo": "kamisaraki",
+        "pagi": "kamisaraki",
+        "terimakasih": "yuspagara"
+      },
+      "tags": [
+        "bolivia",
+        "american-selatan",
+        "bahasa asli"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-guarani",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Guarani",
+    "tags": [
+      "paraguay",
+      "american-selatan",
+      "bahasa asli"
+    ],
+    "teks": "Paraguay — bahasa Guarani, 6,5 juta penutur, resmi berdampingan Spanyol. Sapaan: mba'éichapa (halo), aguyje (terima kasih).",
+    "meta": {
+      "nativeName": "Avañeʼẽ",
+      "speakers": "6,5 juta",
+      "script": "Latin",
+      "family": "Tupi-Guarani",
+      "officialIn": [
+        "Paraguay"
+      ],
+      "greetings": {
+        "halo": "mba'éichapa",
+        "pagi": "mba'éichapa",
+        "terimakasih": "aguyje"
+      },
+      "tags": [
+        "paraguay",
+        "american-selatan",
+        "bahasa asli"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-uruguay",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Spanyol Uruguay",
+    "tags": [
+      "uruguay",
+      "american-selatan"
+    ],
+    "teks": "Uruguay — bahasa Spanyol, 3,4 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "3,4 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Uruguay"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "uruguay",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-guyana",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Inggris Guyana",
+    "tags": [
+      "guyana",
+      "american-selatan"
+    ],
+    "teks": "Guyana — bahasa Inggris, 800 ribu penutur, satu-satunya negara Inggris di Amerika Selatan. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "800 ribu",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Guyana"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "guyana",
+        "american-selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-belanda-suriname",
+    "kategori": "bahasa",
+    "wilayah": "american-selatan",
+    "nama": "Belanda Suriname",
+    "tags": [
+      "suriname",
+      "american-selatan"
+    ],
+    "teks": "Suriname — bahasa Belanda, 600 ribu penutur, satu-satunya negara Belanda di Amerika Selatan. Sapaan: hallo (halo), dank je (terima kasih).",
+    "meta": {
+      "nativeName": "Nederlands",
+      "speakers": "600 ribu",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Suriname"
+      ],
+      "greetings": {
+        "halo": "hallo",
+        "pagi": "goedemorgen",
+        "terimakasih": "dank je"
+      },
+      "tags": [
+        "suriname",
+        "american-selatan"
+      ]
+    }
+  }
+]

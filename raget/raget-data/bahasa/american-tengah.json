@@ -1,0 +1,234 @@
+[
+  {
+    "id": "bahasa-spanyol-guatemala",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol Guatemala",
+    "tags": [
+      "guatemala",
+      "american-tengah"
+    ],
+    "teks": "Guatemala — bahasa Spanyol resmi, berdampingan dengan bahasa Maya K'iche'. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "15 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Guatemala"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "guatemala",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-honduras",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol Honduras",
+    "tags": [
+      "honduras",
+      "american-tengah"
+    ],
+    "teks": "Honduras — bahasa Spanyol, 9 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "9 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Honduras"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "honduras",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-nikaragua",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol Nikaragua",
+    "tags": [
+      "nikaragua",
+      "american-tengah"
+    ],
+    "teks": "Nikaragua — bahasa Spanyol, 6 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "6 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Nikaragua"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "nikaragua",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-kosta-rika",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol Kosta Rika",
+    "tags": [
+      "kosta rika",
+      "american-tengah"
+    ],
+    "teks": "Kosta Rika — bahasa Spanyol, 5 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "5 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Kosta Rika"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "kosta rika",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-panama",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol Panama",
+    "tags": [
+      "panama",
+      "american-tengah"
+    ],
+    "teks": "Panama — bahasa Spanyol, 4 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "4 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Panama"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "panama",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-belize",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Inggris Belize",
+    "tags": [
+      "belize",
+      "american-tengah"
+    ],
+    "teks": "Belize — bahasa Inggris resmi, dituturkan luas berdampingan dengan Kriol Belize. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "250 ribu",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Belize"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "belize",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-el-salvador",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol El Salvador",
+    "tags": [
+      "el salvador",
+      "american-tengah"
+    ],
+    "teks": "El Salvador — bahasa Spanyol, 6,5 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "6,5 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "El Salvador"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "el salvador",
+        "american-tengah"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-kuba",
+    "kategori": "bahasa",
+    "wilayah": "american-tengah",
+    "nama": "Spanyol Kuba",
+    "tags": [
+      "kuba",
+      "american-tengah"
+    ],
+    "teks": "Kuba — bahasa Spanyol, 11 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "11 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Kuba"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "kuba",
+        "american-tengah"
+      ]
+    }
+  }
+]

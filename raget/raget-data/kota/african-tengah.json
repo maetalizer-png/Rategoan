@@ -1,0 +1,86 @@
+[
+  {
+    "id": "kota-kinshasa-kongo",
+    "kategori": "kota",
+    "wilayah": "african-tengah",
+    "nama": "Kinshasa",
+    "tags": [
+      "kinshasa",
+      "kongo"
+    ],
+    "teks": "Kinshasa — ibukota Kongo. Populasi 15 juta. Terkenal: kota berbahasa Prancis terbesar di dunia.",
+    "meta": {
+      "country": "Kongo",
+      "type": "city",
+      "population": "15 juta",
+      "knownFor": "kota Prancis terbesar",
+      "tags": [
+        "kinshasa",
+        "kongo"
+      ]
+    }
+  },
+  {
+    "id": "kota-luanda-angola",
+    "kategori": "kota",
+    "wilayah": "african-tengah",
+    "nama": "Luanda",
+    "tags": [
+      "luanda",
+      "angola"
+    ],
+    "teks": "Luanda — ibukota Angola. Populasi 8,9 juta. Terkenal: kota pesisir Atlantik yang berkembang pesat.",
+    "meta": {
+      "country": "Angola",
+      "type": "city",
+      "population": "8,9 juta",
+      "knownFor": "pesisir Atlantik",
+      "tags": [
+        "luanda",
+        "angola"
+      ]
+    }
+  },
+  {
+    "id": "kota-libreville-gabon",
+    "kategori": "kota",
+    "wilayah": "african-tengah",
+    "nama": "Libreville",
+    "tags": [
+      "libreville",
+      "gabon"
+    ],
+    "teks": "Libreville — ibukota Gabon. Populasi 850 ribu. Terkenal: kota pesisir hutan hujan Afrika.",
+    "meta": {
+      "country": "Gabon",
+      "type": "city",
+      "population": "850 ribu",
+      "knownFor": "hutan hujan",
+      "tags": [
+        "libreville",
+        "gabon"
+      ]
+    }
+  },
+  {
+    "id": "kota-n-djamena-chad",
+    "kategori": "kota",
+    "wilayah": "african-tengah",
+    "nama": "N'Djamena",
+    "tags": [
+      "n'djamena",
+      "chad"
+    ],
+    "teks": "N'Djamena — ibukota Chad. Populasi 1,6 juta. Terkenal: pertemuan Sungai Chari dan Logone.",
+    "meta": {
+      "country": "Chad",
+      "type": "city",
+      "population": "1,6 juta",
+      "knownFor": "Sungai Chari",
+      "tags": [
+        "n'djamena",
+        "chad"
+      ]
+    }
+  }
+]

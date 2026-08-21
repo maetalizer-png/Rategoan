@@ -1,0 +1,205 @@
+[
+  {
+    "id": "bahasa-inggris-jamaika",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Inggris Jamaika",
+    "tags": [
+      "jamaika",
+      "american-karibia"
+    ],
+    "teks": "Jamaika — bahasa Inggris resmi, berdampingan dengan Patois Jamaika. Sapaan: hello (halo), wah gwaan (sapaan santai), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "3 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Jamaika"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "jamaika",
+        "american-karibia"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-kreol-haiti",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Kreol Haiti",
+    "tags": [
+      "haiti",
+      "american-karibia"
+    ],
+    "teks": "Haiti — bahasa Kreol Haiti, 12 juta penutur, resmi berdampingan Prancis. Sapaan: bonjou (halo), mèsi (terima kasih).",
+    "meta": {
+      "nativeName": "Kreyòl ayisyen",
+      "speakers": "12 juta",
+      "script": "Latin",
+      "family": "Kreol berbasis Prancis",
+      "officialIn": [
+        "Haiti"
+      ],
+      "greetings": {
+        "halo": "bonjou",
+        "pagi": "bonjou",
+        "terimakasih": "mèsi"
+      },
+      "tags": [
+        "haiti",
+        "american-karibia"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-dominika",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Spanyol Dominika",
+    "tags": [
+      "republik dominika",
+      "american-karibia"
+    ],
+    "teks": "Republik Dominika — bahasa Spanyol, 11 juta penutur. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "11 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Republik Dominika"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "republik dominika",
+        "american-karibia"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-bahama",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Inggris Bahama",
+    "tags": [
+      "bahama",
+      "american-karibia"
+    ],
+    "teks": "Bahama — bahasa Inggris resmi, berdampingan dengan Kreol Bahama. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "400 ribu",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Bahama"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "bahama",
+        "american-karibia"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-barbados",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Inggris Barbados",
+    "tags": [
+      "barbados",
+      "american-karibia"
+    ],
+    "teks": "Barbados — bahasa Inggris resmi, berdampingan dengan Bajan Creole. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "280 ribu",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Barbados"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "barbados",
+        "american-karibia"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-inggris-trinidad",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Inggris Trinidad",
+    "tags": [
+      "trinidad dan tobago",
+      "american-karibia"
+    ],
+    "teks": "Trinidad dan Tobago — bahasa Inggris, 1,3 juta penutur. Sapaan: hello (halo), thanks (terima kasih).",
+    "meta": {
+      "nativeName": "English",
+      "speakers": "1,3 juta",
+      "script": "Latin",
+      "family": "Jermanik",
+      "officialIn": [
+        "Trinidad dan Tobago"
+      ],
+      "greetings": {
+        "halo": "hello",
+        "pagi": "good morning",
+        "terimakasih": "thanks"
+      },
+      "tags": [
+        "trinidad dan tobago",
+        "american-karibia"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol-puerto-rico",
+    "kategori": "bahasa",
+    "wilayah": "american-karibia",
+    "nama": "Spanyol Puerto Rico",
+    "tags": [
+      "puerto rico",
+      "american-karibia"
+    ],
+    "teks": "Puerto Rico — bahasa Spanyol, 3,2 juta penutur, resmi berdampingan Inggris. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "3,2 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Puerto Rico"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "puerto rico",
+        "american-karibia"
+      ]
+    }
+  }
+]

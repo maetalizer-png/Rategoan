@@ -1,0 +1,178 @@
+[
+  {
+    "id": "bahasa-italia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-selatan",
+    "nama": "Italia",
+    "tags": [
+      "italia",
+      "eropa selatan"
+    ],
+    "teks": "Italia — bahasa Italia, 65 juta penutur. Aksara: Latin. Sapaan: ciao (halo), grazie (terima kasih).",
+    "meta": {
+      "nativeName": "Italiano",
+      "speakers": "65 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Italia",
+        "San Marino"
+      ],
+      "greetings": {
+        "halo": "ciao",
+        "pagi": "buongiorno",
+        "terimakasih": "grazie"
+      },
+      "tags": [
+        "italia",
+        "eropa selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-spanyol",
+    "kategori": "bahasa",
+    "wilayah": "eropan-selatan",
+    "nama": "Spanyol",
+    "tags": [
+      "spanyol",
+      "eropa selatan"
+    ],
+    "teks": "Spanyol — bahasa Spanyol, 480 juta penutur global. Aksara: Latin. Sapaan: hola (halo), gracias (terima kasih).",
+    "meta": {
+      "nativeName": "Español",
+      "speakers": "480 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Spanyol"
+      ],
+      "greetings": {
+        "halo": "hola",
+        "pagi": "buenos días",
+        "terimakasih": "gracias"
+      },
+      "tags": [
+        "spanyol",
+        "eropa selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-portugis",
+    "kategori": "bahasa",
+    "wilayah": "eropan-selatan",
+    "nama": "Portugis",
+    "tags": [
+      "portugal",
+      "eropa selatan"
+    ],
+    "teks": "Portugal — bahasa Portugis, 260 juta penutur global. Aksara: Latin. Sapaan: olá (halo), obrigado (terima kasih).",
+    "meta": {
+      "nativeName": "Português",
+      "speakers": "260 juta",
+      "script": "Latin",
+      "family": "Roman",
+      "officialIn": [
+        "Portugal"
+      ],
+      "greetings": {
+        "halo": "olá",
+        "pagi": "bom dia",
+        "terimakasih": "obrigado"
+      },
+      "tags": [
+        "portugal",
+        "eropa selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-yunani",
+    "kategori": "bahasa",
+    "wilayah": "eropan-selatan",
+    "nama": "Yunani",
+    "tags": [
+      "yunani",
+      "eropa selatan"
+    ],
+    "teks": "Yunani — bahasa Yunani, 13 juta penutur. Aksara: Yunani. Sapaan: yassou (halo), efharisto (terima kasih).",
+    "meta": {
+      "nativeName": "Ελληνικά",
+      "speakers": "13 juta",
+      "script": "Yunani",
+      "family": "Helenik",
+      "officialIn": [
+        "Yunani",
+        "Siprus"
+      ],
+      "greetings": {
+        "halo": "yassou",
+        "pagi": "kalimera",
+        "terimakasih": "efharisto"
+      },
+      "tags": [
+        "yunani",
+        "eropa selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-kroasia",
+    "kategori": "bahasa",
+    "wilayah": "eropan-selatan",
+    "nama": "Kroasia",
+    "tags": [
+      "kroasia",
+      "eropa selatan"
+    ],
+    "teks": "Kroasia — bahasa Kroasia, 5,6 juta penutur. Aksara: Latin. Sapaan: bok (halo), hvala (terima kasih).",
+    "meta": {
+      "nativeName": "Hrvatski",
+      "speakers": "5,6 juta",
+      "script": "Latin",
+      "family": "Slavik",
+      "officialIn": [
+        "Kroasia"
+      ],
+      "greetings": {
+        "halo": "bok",
+        "pagi": "dobro jutro",
+        "terimakasih": "hvala"
+      },
+      "tags": [
+        "kroasia",
+        "eropa selatan"
+      ]
+    }
+  },
+  {
+    "id": "bahasa-malta",
+    "kategori": "bahasa",
+    "wilayah": "eropan-selatan",
+    "nama": "Malta",
+    "tags": [
+      "malta",
+      "eropa selatan"
+    ],
+    "teks": "Malta — bahasa Malta, 520 ribu penutur, campuran Arab dan Latin. Sapaan: bonġu (halo), grazzi (terima kasih).",
+    "meta": {
+      "nativeName": "Malti",
+      "speakers": "520 ribu",
+      "script": "Latin",
+      "family": "Semitik",
+      "officialIn": [
+        "Malta"
+      ],
+      "greetings": {
+        "halo": "bonġu",
+        "pagi": "bonġu",
+        "terimakasih": "grazzi"
+      },
+      "tags": [
+        "malta",
+        "eropa selatan"
+      ]
+    }
+  }
+]

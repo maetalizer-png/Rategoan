@@ -1,0 +1,107 @@
+[
+  {
+    "id": "kota-sydney-australia",
+    "kategori": "kota",
+    "wilayah": "osenian",
+    "nama": "Sydney",
+    "tags": [
+      "sydney",
+      "australia"
+    ],
+    "teks": "Sydney — kota terbesar Australia. Populasi 5,3 juta. Terkenal: Opera House, pelabuhan.",
+    "meta": {
+      "country": "Australia",
+      "type": "city",
+      "population": "5,3 juta",
+      "knownFor": "Opera House, pelabuhan",
+      "tags": [
+        "sydney",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "kota-melbourne-australia",
+    "kategori": "kota",
+    "wilayah": "osenian",
+    "nama": "Melbourne",
+    "tags": [
+      "melbourne",
+      "australia"
+    ],
+    "teks": "Melbourne — kota budaya Australia. Populasi 5 juta. Terkenal: kafe, seni jalanan, olahraga.",
+    "meta": {
+      "country": "Australia",
+      "type": "city",
+      "population": "5 juta",
+      "knownFor": "kafe, seni jalanan",
+      "tags": [
+        "melbourne",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "kota-auckland-selandia-baru",
+    "kategori": "kota",
+    "wilayah": "osenian",
+    "nama": "Auckland",
+    "tags": [
+      "auckland",
+      "selandia baru"
+    ],
+    "teks": "Auckland — kota terbesar Selandia Baru. Populasi 1,7 juta. Terkenal: kota layar, gunung berapi tidur.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "city",
+      "population": "1,7 juta",
+      "knownFor": "kota layar",
+      "tags": [
+        "auckland",
+        "selandia baru"
+      ]
+    }
+  },
+  {
+    "id": "kota-suva-fiji",
+    "kategori": "kota",
+    "wilayah": "osenian",
+    "nama": "Suva",
+    "tags": [
+      "suva",
+      "fiji"
+    ],
+    "teks": "Suva — ibukota Fiji. Populasi 93 ribu. Terkenal: pelabuhan utama Pasifik Selatan.",
+    "meta": {
+      "country": "Fiji",
+      "type": "city",
+      "population": "93 ribu",
+      "knownFor": "pelabuhan Pasifik",
+      "tags": [
+        "suva",
+        "fiji"
+      ]
+    }
+  },
+  {
+    "id": "kota-port-moresby-papua-nugini",
+    "kategori": "kota",
+    "wilayah": "osenian",
+    "nama": "Port Moresby",
+    "tags": [
+      "port moresby",
+      "papua nugini"
+    ],
+    "teks": "Port Moresby — ibukota Papua Nugini. Populasi 400 ribu. Terkenal: gerbang wisata Papua.",
+    "meta": {
+      "country": "Papua Nugini",
+      "type": "city",
+      "population": "400 ribu",
+      "knownFor": "gerbang wisata Papua",
+      "tags": [
+        "port moresby",
+        "papua nugini"
+      ]
+    }
+  }
+]
