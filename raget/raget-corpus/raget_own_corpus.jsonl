@@ -1655,6 +1655,34 @@
 {"type":"fact","source":"negara/osenian.json","text":"Samoa - Negara kepulauan di Oseania dengan budaya Polinesia. Ibu kota: Apia. Populasi: 0.2 juta jiwa. Mata uang: Tala (WST). Bahasa: Samoa, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan Commonwealth. Negara dengan budaya Polinesia yang kaya dan pemandangan alam yang indah. Nama resmi: Negara Merdeka Samoa. Samoa: mata uang Tala (WST)."}
 {"type":"fact","source":"negara/osenian.json","text":"Tonga - Negara kepulauan di Oseania dengan kerajaan Polinesia. Ibu kota: Nuku'alofa. Populasi: 0.1 juta jiwa. Mata uang: Pa'anga (TOP). Bahasa: Tonga, Inggris. Sistem pemerintahan: Monarki Konstitusional. Satu-satunya kerajaan di Pasifik dengan budaya Polinesia yang kaya dan sejarah panjang. Nama resmi: Kerajaan Tonga. Tonga: mata uang Pa'anga (TOP)."}
 {"type":"fact","source":"negara/osenian.json","text":"Kepulauan Marshall - Negara kepulauan di Oseania dengan keindahan alam. Ibu kota: Majuro. Populasi: 42 ribu jiwa. Mata uang: Dolar AS (USD). Bahasa: Marshall, Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan terumbu karang dan laguna yang indah. Nama resmi: Republik Kepulauan Marshall. Kepulauan Marshall: mata uang Dolar AS (USD)."}
+{"type":"fact","source":"olahraga/lain.json","text":"Bulu Tangkis — olahraga raket dengan kok, sangat populer di Indonesia dan Asia Timur."}
+{"type":"fact","source":"olahraga/lain.json","text":"Basket (NBA) — liga bola basket profesional utama Amerika Serikat, kompetisi basket paling bergengsi dunia."}
+{"type":"fact","source":"olahraga/lain.json","text":"Tenis Grand Slam — empat turnamen tenis paling bergengsi: Australian Open, French Open, Wimbledon, US Open."}
+{"type":"fact","source":"olahraga/lain.json","text":"Formula 1 — ajang balap mobil paling bergengsi di dunia dengan seri balapan di berbagai negara."}
+{"type":"fact","source":"olahraga/lain.json","text":"MotoGP — ajang balap motor kelas tertinggi dunia, salah satunya digelar di Sirkuit Mandalika, Indonesia."}
+{"type":"fact","source":"olahraga/lain.json","text":"Tinju — olahraga bela diri kontak fisik dengan pukulan, dipertandingkan dalam kelas berat badan tertentu."}
+{"type":"fact","source":"olahraga/lain.json","text":"Voli — olahraga tim dengan bola dipantulkan melewati net, populer di pantai (voli pantai) dan indoor."}
+{"type":"fact","source":"olahraga/lain.json","text":"E-sports — kompetisi permainan video profesional yang berkembang pesat, dengan turnamen berhadiah besar."}
+{"type":"fact","source":"olahraga/lain.json","text":"Golf — olahraga memukul bola kecil ke dalam lubang menggunakan tongkat khusus di lapangan luas."}
+{"type":"fact","source":"olahraga/lain.json","text":"Maraton — lomba lari jarak jauh sepanjang 42,195 km, terinspirasi dari kisah pelari Yunani kuno."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Olimpiade Musim Panas — ajang multi-cabang olahraga terbesar dunia, diadakan setiap 4 tahun sejak 1896."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Olimpiade Musim Dingin — ajang olahraga es dan salju internasional, diadakan setiap 4 tahun."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Usain Bolt — pelari Jamaika, pemegang rekor dunia lari 100m dan 200m, peraih 8 emas Olimpiade."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Michael Phelps — perenang Amerika Serikat, atlet dengan medali Olimpiade terbanyak sepanjang masa (28 medali)."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Komite Olimpiade Internasional (IOC) — organisasi yang mengelola penyelenggaraan Olimpiade di seluruh dunia."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Obor Olimpiade — simbol api yang dinyalakan di Yunani dan diarak menuju kota tuan rumah Olimpiade."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Olimpiade Tokyo 2020 — Olimpiade yang digelar 2021 karena pandemi, tanpa penonton di stadion."}
+{"type":"fact","source":"olahraga/olimpiade.json","text":"Indonesia di Olimpiade — cabang bulu tangkis menjadi penyumbang medali emas terbanyak Indonesia di Olimpiade."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Piala Dunia FIFA — turnamen sepak bola antarnegara terbesar, diadakan setiap 4 tahun sejak 1930."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Lionel Messi — pemain sepak bola Argentina, peraih Ballon d'Or terbanyak dalam sejarah."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Cristiano Ronaldo — pemain sepak bola Portugal, pencetak gol internasional terbanyak sepanjang masa."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Liga Champions UEFA — kompetisi klub sepak bola paling bergengsi di Eropa."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Premier League — liga sepak bola profesional tertinggi Inggris, salah satu liga paling populer di dunia."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Pele — legenda sepak bola Brasil, satu-satunya pemain dengan tiga gelar Piala Dunia."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Timnas Indonesia — tim nasional sepak bola Indonesia, berkompetisi di ajang AFF dan kualifikasi Piala Dunia."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"Offside — aturan sepak bola yang melarang pemain berada lebih dekat ke gawang lawan dari bek terakhir saat bola dioper."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"VAR — teknologi Video Assistant Referee yang membantu wasit meninjau ulang keputusan penting dalam pertandingan."}
+{"type":"fact","source":"olahraga/sepakbola.json","text":"El Clasico — laga rivalitas sepak bola antara Real Madrid dan Barcelona di Spanyol."}
 {"type":"fact","source":"sains/biologi.json","text":"Fotosintesis — proses tumbuhan mengubah cahaya matahari, air, dan CO2 menjadi glukosa dan oksigen."}
 {"type":"fact","source":"sains/biologi.json","text":"DNA — molekul pembawa informasi genetik makhluk hidup, berbentuk heliks ganda."}
 {"type":"fact","source":"sains/biologi.json","text":"Evolusi — proses perubahan sifat makhluk hidup dari generasi ke generasi, dicetuskan Charles Darwin."}
