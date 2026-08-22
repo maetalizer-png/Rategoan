@@ -1,0 +1,1976 @@
+[
+  {
+    "id": "lingo-bahasa-indonesia",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Indonesia",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "resmi"
+    ],
+    "teks": "Bahasa Indonesia - Bahasa resmi dan nasional Indonesia. Digunakan oleh lebih dari 270 juta penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "id",
+      "speakers": 270000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-jawa",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Jawa",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "jawa"
+    ],
+    "teks": "Bahasa Jawa - Bahasa daerah terbesar di Indonesia. Digunakan oleh lebih dari 80 juta penutur di Jawa Tengah, Yogyakarta, dan Jawa Timur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "jv",
+      "speakers": 80000000,
+      "family": "Austronesia",
+      "script": "Latin, Jawa",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-sunda",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Sunda",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "sunda"
+    ],
+    "teks": "Bahasa Sunda - Bahasa daerah di Jawa Barat dan Banten. Digunakan oleh lebih dari 40 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "su",
+      "speakers": 40000000,
+      "family": "Austronesia",
+      "script": "Latin, Sunda",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-melayu",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Melayu",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "melayu"
+    ],
+    "teks": "Bahasa Melayu - Bahasa daerah di Sumatera dan Kalimantan. Digunakan oleh lebih dari 20 juta penutur. Termasuk rumpun bahasa Austronesia. Merupakan dasar dari Bahasa Indonesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "ms",
+      "speakers": 20000000,
+      "family": "Austronesia",
+      "script": "Latin, Jawi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-madura",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Madura",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "madura"
+    ],
+    "teks": "Bahasa Madura - Bahasa daerah di Pulau Madura dan sebagian Jawa Timur. Digunakan oleh lebih dari 15 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "mad",
+      "speakers": 15000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-minangkabau",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Minangkabau",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "minangkabau"
+    ],
+    "teks": "Bahasa Minangkabau - Bahasa daerah di Sumatera Barat. Digunakan oleh lebih dari 6 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "min",
+      "speakers": 6000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bugis",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Bugis",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "bugis"
+    ],
+    "teks": "Bahasa Bugis - Bahasa daerah di Sulawesi Selatan. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Austronesia. Memiliki aksara Lontara.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "bug",
+      "speakers": 5000000,
+      "family": "Austronesia",
+      "script": "Latin, Lontara",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bali",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Bali",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "bali"
+    ],
+    "teks": "Bahasa Bali - Bahasa daerah di Bali. Digunakan oleh lebih dari 4 juta penutur. Termasuk rumpun bahasa Austronesia. Memiliki sistem tingkatan bahasa.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "ban",
+      "speakers": 4000000,
+      "family": "Austronesia",
+      "script": "Latin, Bali",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-batak-toba",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Batak Toba",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "batak"
+    ],
+    "teks": "Bahasa Batak Toba - Bahasa daerah di Sumatera Utara. Digunakan oleh lebih dari 3 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "bbc",
+      "speakers": 3000000,
+      "family": "Austronesia",
+      "script": "Latin, Batak",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-aceh",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Aceh",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "aceh"
+    ],
+    "teks": "Bahasa Aceh - Bahasa daerah di Aceh. Digunakan oleh lebih dari 2.5 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "ace",
+      "speakers": 2500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-banjar",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Banjar",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "banjar"
+    ],
+    "teks": "Bahasa Banjar - Bahasa daerah di Kalimantan Selatan. Digunakan oleh lebih dari 4 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "bjn",
+      "speakers": 4000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-dayak-ngaju",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Dayak Ngaju",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "dayak"
+    ],
+    "teks": "Bahasa Dayak Ngaju - Bahasa daerah di Kalimantan Tengah. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "nij",
+      "speakers": 1000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-makassar",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Makassar",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "makassar"
+    ],
+    "teks": "Bahasa Makassar - Bahasa daerah di Sulawesi Selatan. Digunakan oleh lebih dari 2 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "mak",
+      "speakers": 2000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-sasak",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Sasak",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "sasak"
+    ],
+    "teks": "Bahasa Sasak - Bahasa daerah di Lombok, Nusa Tenggara Barat. Digunakan oleh lebih dari 2.5 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "sas",
+      "speakers": 2500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bima",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Bima",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "bima"
+    ],
+    "teks": "Bahasa Bima - Bahasa daerah di Bima, Nusa Tenggara Barat. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "bhp",
+      "speakers": 500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bajau",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Bajau",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "indonesia",
+      "bajau"
+    ],
+    "teks": "Bahasa Bajau - Bahasa daerah di Sulawesi dan Kalimantan Timur. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Indonesia",
+      "code": "bdl",
+      "speakers": 500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-melayu-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Melayu",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "resmi"
+    ],
+    "teks": "Bahasa Melayu - Bahasa resmi Malaysia. Digunakan oleh lebih dari 20 juta penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin dan Jawi.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "ms",
+      "speakers": 20000000,
+      "family": "Austronesia",
+      "script": "Latin, Jawi",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-inggris",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Inggris",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "resmi"
+    ],
+    "teks": "Bahasa Inggris - Bahasa resmi Malaysia. Digunakan oleh lebih dari 15 juta penutur. Termasuk rumpun bahasa Jermanik.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "en",
+      "speakers": 15000000,
+      "family": "Jermanik",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-mandarin",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Mandarin",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "mandarin"
+    ],
+    "teks": "Bahasa Mandarin - Bahasa yang digunakan oleh komunitas Tionghoa Malaysia. Digunakan oleh lebih dari 7 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "zh",
+      "speakers": 7000000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tamil-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tamil",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "tamil"
+    ],
+    "teks": "Bahasa Tamil - Bahasa yang digunakan oleh komunitas India Malaysia. Digunakan oleh lebih dari 2 juta penutur. Termasuk rumpun bahasa Dravida.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "ta",
+      "speakers": 2000000,
+      "family": "Dravida",
+      "script": "Tamil",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kantonis",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kantonis",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "kantonis"
+    ],
+    "teks": "Bahasa Kantonis - Bahasa yang digunakan oleh komunitas Tionghoa di Kuala Lumpur dan Ipoh. Digunakan oleh lebih dari 2 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "yue",
+      "speakers": 2000000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-hokkien",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Hokkien",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "hokkien"
+    ],
+    "teks": "Bahasa Hokkien - Bahasa yang digunakan oleh komunitas Tionghoa di Penang dan Johor. Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "nan",
+      "speakers": 1500000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-hakka",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Hakka",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "hakka"
+    ],
+    "teks": "Bahasa Hakka - Bahasa yang digunakan oleh komunitas Tionghoa di Sabah dan Sarawak. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "hak",
+      "speakers": 1000000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-melayu-sabah",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Melayu Sabah",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "malaysia",
+      "sabah"
+    ],
+    "teks": "Bahasa Melayu Sabah - Bahasa daerah di Sabah. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Malaysia",
+      "code": "msb",
+      "speakers": 500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-inggris-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Inggris",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "singapura",
+      "resmi"
+    ],
+    "teks": "Bahasa Inggris - Bahasa resmi Singapura. Digunakan oleh lebih dari 4 juta penutur. Termasuk rumpun bahasa Jermanik.",
+    "meta": {
+      "country": "Singapura",
+      "code": "en",
+      "speakers": 4000000,
+      "family": "Jermanik",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-melayu-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Melayu",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "singapura",
+      "resmi"
+    ],
+    "teks": "Bahasa Melayu - Bahasa resmi Singapura. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Singapura",
+      "code": "ms",
+      "speakers": 1000000,
+      "family": "Austronesia",
+      "script": "Latin, Jawi",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-mandarin-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Mandarin",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "singapura",
+      "resmi"
+    ],
+    "teks": "Bahasa Mandarin - Bahasa resmi Singapura. Digunakan oleh lebih dari 3 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Singapura",
+      "code": "zh",
+      "speakers": 3000000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tamil-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tamil",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "singapura",
+      "resmi"
+    ],
+    "teks": "Bahasa Tamil - Bahasa resmi Singapura. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Dravida.",
+    "meta": {
+      "country": "Singapura",
+      "code": "ta",
+      "speakers": 500000,
+      "family": "Dravida",
+      "script": "Tamil",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-thai",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Thai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "thailand",
+      "resmi"
+    ],
+    "teks": "Bahasa Thai - Bahasa resmi Thailand. Digunakan oleh lebih dari 50 juta penutur. Termasuk rumpun bahasa Tai-Kadai. Menggunakan aksara Thai.",
+    "meta": {
+      "country": "Thailand",
+      "code": "th",
+      "speakers": 50000000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-isan",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Isan",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "thailand",
+      "isan"
+    ],
+    "teks": "Bahasa Isan - Bahasa daerah di Thailand timur laut. Digunakan oleh lebih dari 20 juta penutur. Termasuk rumpun bahasa Tai-Kadai. Sangat dekat dengan bahasa Lao.",
+    "meta": {
+      "country": "Thailand",
+      "code": "tts",
+      "speakers": 20000000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kam-mueang",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kam Mueang",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "thailand",
+      "kam-mueang"
+    ],
+    "teks": "Bahasa Kam Mueang - Bahasa daerah di Thailand utara. Digunakan oleh lebih dari 6 juta penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Thailand",
+      "code": "nod",
+      "speakers": 6000000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-pak-tai",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Pak Tai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "thailand",
+      "pak-tai"
+    ],
+    "teks": "Bahasa Pak Tai - Bahasa daerah di Thailand selatan. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Thailand",
+      "code": "sou",
+      "speakers": 5000000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-melayu-pattani",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Melayu Pattani",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "thailand",
+      "pattani"
+    ],
+    "teks": "Bahasa Melayu Pattani - Bahasa daerah di Thailand selatan (Pattani). Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Thailand",
+      "code": "mfa",
+      "speakers": 1500000,
+      "family": "Austronesia",
+      "script": "Latin, Jawi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-khmer",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Khmer",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "thailand",
+      "khmer"
+    ],
+    "teks": "Bahasa Khmer - Bahasa daerah di Thailand timur. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Thailand",
+      "code": "km",
+      "speakers": 1000000,
+      "family": "Austroasiatik",
+      "script": "Khmer",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-vietnam",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Vietnam",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "resmi"
+    ],
+    "teks": "Bahasa Vietnam - Bahasa resmi Vietnam. Digunakan oleh lebih dari 85 juta penutur. Termasuk rumpun bahasa Austroasiatik. Menggunakan aksara Latin dengan diakritik.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "vi",
+      "speakers": 85000000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tay",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tay",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "tay"
+    ],
+    "teks": "Bahasa Tay - Bahasa daerah di Vietnam utara. Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "tyz",
+      "speakers": 1500000,
+      "family": "Tai-Kadai",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-thai-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Thai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "thai"
+    ],
+    "teks": "Bahasa Thai - Bahasa daerah di Vietnam barat laut. Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "th",
+      "speakers": 1500000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-muong",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Muong",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "muong"
+    ],
+    "teks": "Bahasa Muong - Bahasa daerah di Vietnam utara. Digunakan oleh lebih dari 1.2 juta penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "mtq",
+      "speakers": 1200000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-khmer-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Khmer",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "khmer"
+    ],
+    "teks": "Bahasa Khmer - Bahasa daerah di Vietnam selatan. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "km",
+      "speakers": 1000000,
+      "family": "Austroasiatik",
+      "script": "Khmer",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-hmong",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Hmong",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "hmong"
+    ],
+    "teks": "Bahasa Hmong - Bahasa daerah di Vietnam utara. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Hmong-Mien.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "hmn",
+      "speakers": 1000000,
+      "family": "Hmong-Mien",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-nung",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Nung",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "nung"
+    ],
+    "teks": "Bahasa Nung - Bahasa daerah di Vietnam utara. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "nut",
+      "speakers": 1000000,
+      "family": "Tai-Kadai",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-dao",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Dao",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "dao"
+    ],
+    "teks": "Bahasa Dao - Bahasa daerah di Vietnam utara. Digunakan oleh lebih dari 800 ribu penutur. Termasuk rumpun bahasa Hmong-Mien.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "ium",
+      "speakers": 800000,
+      "family": "Hmong-Mien",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-hoa",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Hoa",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "hoa"
+    ],
+    "teks": "Bahasa Hoa - Bahasa daerah di Vietnam. Digunakan oleh lebih dari 800 ribu penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "hos",
+      "speakers": 800000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-san-chay",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa San Chay",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "san-chay"
+    ],
+    "teks": "Bahasa San Chay - Bahasa daerah di Vietnam utara. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "scy",
+      "speakers": 500000,
+      "family": "Tai-Kadai",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-raglai",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Raglai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "vietnam",
+      "raglai"
+    ],
+    "teks": "Bahasa Raglai - Bahasa daerah di Vietnam selatan. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Vietnam",
+      "code": "rai",
+      "speakers": 500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-filipino",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Filipino",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "resmi"
+    ],
+    "teks": "Bahasa Filipino - Bahasa resmi Filipina. Digunakan oleh lebih dari 50 juta penutur. Berbasis dari bahasa Tagalog. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "fil",
+      "speakers": 50000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-inggris-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Inggris",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "resmi"
+    ],
+    "teks": "Bahasa Inggris - Bahasa resmi Filipina. Digunakan oleh lebih dari 60 juta penutur. Termasuk rumpun bahasa Jermanik.",
+    "meta": {
+      "country": "Filipina",
+      "code": "en",
+      "speakers": 60000000,
+      "family": "Jermanik",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-cebuano",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Cebuano",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "cebuano"
+    ],
+    "teks": "Bahasa Cebuano - Bahasa daerah di Filipina tengah. Digunakan oleh lebih dari 20 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "ceb",
+      "speakers": 20000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-ilocano",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Ilocano",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "ilocano"
+    ],
+    "teks": "Bahasa Ilocano - Bahasa daerah di Filipina utara. Digunakan oleh lebih dari 10 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "ilo",
+      "speakers": 10000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-hiligaynon",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Hiligaynon",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "hiligaynon"
+    ],
+    "teks": "Bahasa Hiligaynon - Bahasa daerah di Filipina tengah. Digunakan oleh lebih dari 8 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "hil",
+      "speakers": 8000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bicolano",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Bicolano",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "bicolano"
+    ],
+    "teks": "Bahasa Bicolano - Bahasa daerah di Filipina timur. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "bcl",
+      "speakers": 5000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-waray",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Waray",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "waray"
+    ],
+    "teks": "Bahasa Waray - Bahasa daerah di Filipina timur. Digunakan oleh lebih dari 3 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "war",
+      "speakers": 3000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kapampangan",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kapampangan",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "kapampangan"
+    ],
+    "teks": "Bahasa Kapampangan - Bahasa daerah di Filipina tengah. Digunakan oleh lebih dari 2.5 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "pam",
+      "speakers": 2500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-pangasinan",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Pangasinan",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "pangasinan"
+    ],
+    "teks": "Bahasa Pangasinan - Bahasa daerah di Filipina utara. Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "pag",
+      "speakers": 1500000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-chavacano",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Chavacano",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "chavacano"
+    ],
+    "teks": "Bahasa Chavacano - Bahasa daerah di Filipina selatan. Digunakan oleh lebih dari 700 ribu penutur. Termasuk rumpun bahasa Kreol Spanyol.",
+    "meta": {
+      "country": "Filipina",
+      "code": "cbk",
+      "speakers": 700000,
+      "family": "Kreol Spanyol",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-maranao",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Maranao",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "maranao"
+    ],
+    "teks": "Bahasa Maranao - Bahasa daerah di Filipina selatan. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "mrw",
+      "speakers": 1000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tausug",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tausug",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "filipina",
+      "tausug"
+    ],
+    "teks": "Bahasa Tausug - Bahasa daerah di Filipina selatan. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Filipina",
+      "code": "tsg",
+      "speakers": 1000000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-myanmar",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Myanmar",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "resmi"
+    ],
+    "teks": "Bahasa Myanmar - Bahasa resmi Myanmar. Digunakan oleh lebih dari 35 juta penutur. Termasuk rumpun bahasa Sino-Tibet. Menggunakan aksara Myanmar.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "my",
+      "speakers": 35000000,
+      "family": "Sino-Tibet",
+      "script": "Myanmar",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-shan",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Shan",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "shan"
+    ],
+    "teks": "Bahasa Shan - Bahasa daerah di Myanmar timur. Digunakan oleh lebih dari 3 juta penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "shn",
+      "speakers": 3000000,
+      "family": "Tai-Kadai",
+      "script": "Shan",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kayin",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kayin",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "kayin"
+    ],
+    "teks": "Bahasa Kayin - Bahasa daerah di Myanmar timur. Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "kaw",
+      "speakers": 1500000,
+      "family": "Sino-Tibet",
+      "script": "Kayin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-rakhine",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Rakhine",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "rakhine"
+    ],
+    "teks": "Bahasa Rakhine - Bahasa daerah di Myanmar barat. Digunakan oleh lebih dari 1.5 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "rki",
+      "speakers": 1500000,
+      "family": "Sino-Tibet",
+      "script": "Myanmar",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-mon",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Mon",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "mon"
+    ],
+    "teks": "Bahasa Mon - Bahasa daerah di Myanmar selatan. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "mnw",
+      "speakers": 1000000,
+      "family": "Austroasiatik",
+      "script": "Mon",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-chin",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Chin",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "chin"
+    ],
+    "teks": "Bahasa Chin - Bahasa daerah di Myanmar barat. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "cnh",
+      "speakers": 1000000,
+      "family": "Sino-Tibet",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kachin",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kachin",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "kachin"
+    ],
+    "teks": "Bahasa Kachin - Bahasa daerah di Myanmar utara. Digunakan oleh lebih dari 900 ribu penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "kac",
+      "speakers": 900000,
+      "family": "Sino-Tibet",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-karen",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Karen",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "karen"
+    ],
+    "teks": "Bahasa Karen - Bahasa daerah di Myanmar timur. Digunakan oleh lebih dari 2 juta penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "kar",
+      "speakers": 2000000,
+      "family": "Sino-Tibet",
+      "script": "Karen",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-wa",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Wa",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "wa"
+    ],
+    "teks": "Bahasa Wa - Bahasa daerah di Myanmar timur. Digunakan oleh lebih dari 800 ribu penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "prk",
+      "speakers": 800000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-palaung",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Palaung",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "myanmar",
+      "palaung"
+    ],
+    "teks": "Bahasa Palaung - Bahasa daerah di Myanmar utara. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Myanmar",
+      "code": "pce",
+      "speakers": 500000,
+      "family": "Austroasiatik",
+      "script": "Palaung",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-khmer-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Khmer",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "resmi"
+    ],
+    "teks": "Bahasa Khmer - Bahasa resmi Kamboja. Digunakan oleh lebih dari 16 juta penutur. Termasuk rumpun bahasa Austroasiatik. Menggunakan aksara Khmer.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "km",
+      "speakers": 16000000,
+      "family": "Austroasiatik",
+      "script": "Khmer",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-vietnam-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Vietnam",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "vietnam"
+    ],
+    "teks": "Bahasa Vietnam - Bahasa daerah di Kamboja timur. Digunakan oleh lebih dari 600 ribu penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "vi",
+      "speakers": 600000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-cham",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Cham",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "cham"
+    ],
+    "teks": "Bahasa Cham - Bahasa daerah di Kamboja timur. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "cja",
+      "speakers": 500000,
+      "family": "Austronesia",
+      "script": "Cham",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-lao",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Lao",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "lao"
+    ],
+    "teks": "Bahasa Lao - Bahasa daerah di Kamboja utara. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "lo",
+      "speakers": 100000,
+      "family": "Tai-Kadai",
+      "script": "Lao",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-thai-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Thai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "thai"
+    ],
+    "teks": "Bahasa Thai - Bahasa daerah di Kamboja barat. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "th",
+      "speakers": 100000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-jarai",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Jarai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "jarai"
+    ],
+    "teks": "Bahasa Jarai - Bahasa daerah di Kamboja timur. Digunakan oleh lebih dari 300 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "jra",
+      "speakers": 300000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kuy",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kuy",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "kamboja",
+      "kuy"
+    ],
+    "teks": "Bahasa Kuy - Bahasa daerah di Kamboja utara. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Kamboja",
+      "code": "kdt",
+      "speakers": 100000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-lao-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Lao",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "resmi"
+    ],
+    "teks": "Bahasa Lao - Bahasa resmi Laos. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Tai-Kadai. Menggunakan aksara Lao.",
+    "meta": {
+      "country": "Laos",
+      "code": "lo",
+      "speakers": 5000000,
+      "family": "Tai-Kadai",
+      "script": "Lao",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-hmong-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Hmong",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "hmong"
+    ],
+    "teks": "Bahasa Hmong - Bahasa daerah di Laos utara. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Hmong-Mien.",
+    "meta": {
+      "country": "Laos",
+      "code": "hmn",
+      "speakers": 500000,
+      "family": "Hmong-Mien",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-khmu",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Khmu",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "khmu"
+    ],
+    "teks": "Bahasa Khmu - Bahasa daerah di Laos utara. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Laos",
+      "code": "kjg",
+      "speakers": 500000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-phutai",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Phutai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "phutai"
+    ],
+    "teks": "Bahasa Phutai - Bahasa daerah di Laos tengah. Digunakan oleh lebih dari 300 ribu penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Laos",
+      "code": "pht",
+      "speakers": 300000,
+      "family": "Tai-Kadai",
+      "script": "Lao",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-thai-asean-tenggara-3",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Thai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "thai"
+    ],
+    "teks": "Bahasa Thai - Bahasa daerah di Laos selatan. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Tai-Kadai.",
+    "meta": {
+      "country": "Laos",
+      "code": "th",
+      "speakers": 100000,
+      "family": "Tai-Kadai",
+      "script": "Thai",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-vietnam-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Vietnam",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "vietnam"
+    ],
+    "teks": "Bahasa Vietnam - Bahasa daerah di Laos timur. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Austroasiatik.",
+    "meta": {
+      "country": "Laos",
+      "code": "vi",
+      "speakers": 100000,
+      "family": "Austroasiatik",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-chinese",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Chinese",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "laos",
+      "chinese"
+    ],
+    "teks": "Bahasa Chinese - Bahasa daerah di Laos. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Laos",
+      "code": "zh",
+      "speakers": 100000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-melayu-asean-tenggara-3",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Melayu",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "brunei",
+      "resmi"
+    ],
+    "teks": "Bahasa Melayu - Bahasa resmi Brunei. Digunakan oleh lebih dari 300 ribu penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin dan Jawi.",
+    "meta": {
+      "country": "Brunei",
+      "code": "ms",
+      "speakers": 300000,
+      "family": "Austronesia",
+      "script": "Latin, Jawi",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-inggris-asean-tenggara-3",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Inggris",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "brunei",
+      "resmi"
+    ],
+    "teks": "Bahasa Inggris - Bahasa resmi Brunei. Digunakan oleh lebih dari 200 ribu penutur. Termasuk rumpun bahasa Jermanik.",
+    "meta": {
+      "country": "Brunei",
+      "code": "en",
+      "speakers": 200000,
+      "family": "Jermanik",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-mandarin-asean-tenggara-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Mandarin",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "brunei",
+      "mandarin"
+    ],
+    "teks": "Bahasa Mandarin - Bahasa yang digunakan oleh komunitas Tionghoa Brunei. Digunakan oleh lebih dari 50 ribu penutur. Termasuk rumpun bahasa Sino-Tibet.",
+    "meta": {
+      "country": "Brunei",
+      "code": "zh",
+      "speakers": 50000,
+      "family": "Sino-Tibet",
+      "script": "Hanzi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tamil-asean-tenggara-3",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tamil",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "brunei",
+      "tamil"
+    ],
+    "teks": "Bahasa Tamil - Bahasa yang digunakan oleh komunitas India Brunei. Digunakan oleh lebih dari 10 ribu penutur. Termasuk rumpun bahasa Dravida.",
+    "meta": {
+      "country": "Brunei",
+      "code": "ta",
+      "speakers": 10000,
+      "family": "Dravida",
+      "script": "Tamil",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kedayan",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kedayan",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "brunei",
+      "kedayan"
+    ],
+    "teks": "Bahasa Kedayan - Bahasa daerah di Brunei. Digunakan oleh lebih dari 30 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Brunei",
+      "code": "kdy",
+      "speakers": 30000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tutong",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tutong",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "brunei",
+      "tutong"
+    ],
+    "teks": "Bahasa Tutong - Bahasa daerah di Brunei. Digunakan oleh lebih dari 20 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Brunei",
+      "code": "ttg",
+      "speakers": 20000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tetum",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tetum",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "resmi"
+    ],
+    "teks": "Bahasa Tetum - Bahasa resmi Timor Leste. Digunakan oleh lebih dari 800 ribu penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "tet",
+      "speakers": 800000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-portugis",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Portugis",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "resmi"
+    ],
+    "teks": "Bahasa Portugis - Bahasa resmi Timor Leste. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Roman. Menggunakan aksara Latin.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "pt",
+      "speakers": 500000,
+      "family": "Roman",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-indonesia-asean-tenggara",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Indonesia",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "indonesia"
+    ],
+    "teks": "Bahasa Indonesia - Bahasa yang digunakan di Timor Leste. Digunakan oleh lebih dari 400 ribu penutur. Termasuk rumpun bahasa Austronesia. Menggunakan aksara Latin.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "id",
+      "speakers": 400000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kemak",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Kemak",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "kemak"
+    ],
+    "teks": "Bahasa Kemak - Bahasa daerah di Timor Leste. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "kem",
+      "speakers": 100000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-mambai",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Mambai",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "mambai"
+    ],
+    "teks": "Bahasa Mambai - Bahasa daerah di Timor Leste. Digunakan oleh lebih dari 100 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "mgm",
+      "speakers": 100000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tokodede",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Tokodede",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "tokodede"
+    ],
+    "teks": "Bahasa Tokodede - Bahasa daerah di Timor Leste. Digunakan oleh lebih dari 80 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "tkd",
+      "speakers": 80000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-galoli",
+    "kategori": "lingo",
+    "wilayah": "asean-tenggara",
+    "nama": "Bahasa Galoli",
+    "tags": [
+      "bahasa",
+      "asean-tenggara",
+      "timor-leste",
+      "galoli"
+    ],
+    "teks": "Bahasa Galoli - Bahasa daerah di Timor Leste. Digunakan oleh lebih dari 50 ribu penutur. Termasuk rumpun bahasa Austronesia.",
+    "meta": {
+      "country": "Timor Leste",
+      "code": "gal",
+      "speakers": 50000,
+      "family": "Austronesia",
+      "script": "Latin",
+      "status": "daerah"
+    }
+  }
+]

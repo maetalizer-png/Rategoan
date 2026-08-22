@@ -1,0 +1,472 @@
+[
+  {
+    "id": "lingo-bahasa-hindi",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Hindi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "resmi",
+      "hindi"
+    ],
+    "teks": "Bahasa Hindi - Bahasa resmi India. Digunakan oleh lebih dari 600 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Devanagari. Bahasa dengan penutur terbanyak ke-3 di dunia.",
+    "meta": {
+      "country": "India",
+      "code": "hi",
+      "speakers": 600000000,
+      "family": "Indo-Eropa",
+      "script": "Devanagari",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bengali",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Bengali",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "bengali"
+    ],
+    "teks": "Bahasa Bengali - Bahasa resmi India (Bengal Barat). Digunakan oleh lebih dari 230 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Bengali.",
+    "meta": {
+      "country": "India",
+      "code": "bn",
+      "speakers": 230000000,
+      "family": "Indo-Eropa",
+      "script": "Bengali",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-telugu",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Telugu",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "telugu"
+    ],
+    "teks": "Bahasa Telugu - Bahasa resmi India (Andhra Pradesh, Telangana). Digunakan oleh lebih dari 80 juta penutur. Termasuk rumpun bahasa Dravida. Menggunakan aksara Telugu.",
+    "meta": {
+      "country": "India",
+      "code": "te",
+      "speakers": 80000000,
+      "family": "Dravida",
+      "script": "Telugu",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-marathi",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Marathi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "marathi"
+    ],
+    "teks": "Bahasa Marathi - Bahasa resmi India (Maharashtra). Digunakan oleh lebih dari 70 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Devanagari.",
+    "meta": {
+      "country": "India",
+      "code": "mr",
+      "speakers": 70000000,
+      "family": "Indo-Eropa",
+      "script": "Devanagari",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tamil",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Tamil",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "tamil"
+    ],
+    "teks": "Bahasa Tamil - Bahasa resmi India (Tamil Nadu), Sri Lanka, dan Singapura. Digunakan oleh lebih dari 80 juta penutur. Termasuk rumpun bahasa Dravida. Menggunakan aksara Tamil. Salah satu bahasa tertua di dunia.",
+    "meta": {
+      "country": "India, Sri Lanka, Singapura",
+      "code": "ta",
+      "speakers": 80000000,
+      "family": "Dravida",
+      "script": "Tamil",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-urdu",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Urdu",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "urdu"
+    ],
+    "teks": "Bahasa Urdu - Bahasa resmi India (Jammu dan Kashmir). Digunakan oleh lebih dari 50 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Nastaliq (Arab-Persia).",
+    "meta": {
+      "country": "India",
+      "code": "ur",
+      "speakers": 50000000,
+      "family": "Indo-Eropa",
+      "script": "Nastaliq",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-gujarati",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Gujarati",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "gujarati"
+    ],
+    "teks": "Bahasa Gujarati - Bahasa resmi India (Gujarat). Digunakan oleh lebih dari 55 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Gujarati.",
+    "meta": {
+      "country": "India",
+      "code": "gu",
+      "speakers": 55000000,
+      "family": "Indo-Eropa",
+      "script": "Gujarati",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kannada",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Kannada",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "kannada"
+    ],
+    "teks": "Bahasa Kannada - Bahasa resmi India (Karnataka). Digunakan oleh lebih dari 45 juta penutur. Termasuk rumpun bahasa Dravida. Menggunakan aksara Kannada.",
+    "meta": {
+      "country": "India",
+      "code": "kn",
+      "speakers": 45000000,
+      "family": "Dravida",
+      "script": "Kannada",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-malayalam",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Malayalam",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "malayalam"
+    ],
+    "teks": "Bahasa Malayalam - Bahasa resmi India (Kerala). Digunakan oleh lebih dari 35 juta penutur. Termasuk rumpun bahasa Dravida. Menggunakan aksara Malayalam.",
+    "meta": {
+      "country": "India",
+      "code": "ml",
+      "speakers": 35000000,
+      "family": "Dravida",
+      "script": "Malayalam",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-odia",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Odia",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "odia"
+    ],
+    "teks": "Bahasa Odia - Bahasa resmi India (Odisha). Digunakan oleh lebih dari 35 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Odia.",
+    "meta": {
+      "country": "India",
+      "code": "or",
+      "speakers": 35000000,
+      "family": "Indo-Eropa",
+      "script": "Odia",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-punjabi",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Punjabi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "india",
+      "punjabi"
+    ],
+    "teks": "Bahasa Punjabi - Bahasa resmi India (Punjab). Digunakan oleh lebih dari 30 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Gurmukhi.",
+    "meta": {
+      "country": "India",
+      "code": "pa",
+      "speakers": 30000000,
+      "family": "Indo-Eropa",
+      "script": "Gurmukhi",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-urdu-asean-selatan",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Urdu",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "pakistan",
+      "resmi",
+      "urdu"
+    ],
+    "teks": "Bahasa Urdu - Bahasa resmi Pakistan. Digunakan oleh lebih dari 230 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Nastaliq (Arab-Persia). Bahasa nasional dan lingua franca Pakistan.",
+    "meta": {
+      "country": "Pakistan",
+      "code": "ur",
+      "speakers": 230000000,
+      "family": "Indo-Eropa",
+      "script": "Nastaliq",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-punjabi-asean-selatan",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Punjabi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "pakistan",
+      "punjabi"
+    ],
+    "teks": "Bahasa Punjabi - Bahasa daerah di Pakistan (Punjab). Digunakan oleh lebih dari 100 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Shahmukhi (Arab).",
+    "meta": {
+      "country": "Pakistan",
+      "code": "pa",
+      "speakers": 100000000,
+      "family": "Indo-Eropa",
+      "script": "Shahmukhi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-sindhi",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Sindhi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "pakistan",
+      "sindhi"
+    ],
+    "teks": "Bahasa Sindhi - Bahasa daerah di Pakistan (Sindh). Digunakan oleh lebih dari 30 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Sindhi (Arab).",
+    "meta": {
+      "country": "Pakistan",
+      "code": "sd",
+      "speakers": 30000000,
+      "family": "Indo-Eropa",
+      "script": "Sindhi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-pashto",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Pashto",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "pakistan",
+      "pashto"
+    ],
+    "teks": "Bahasa Pashto - Bahasa daerah di Pakistan (Khyber Pakhtunkhwa). Digunakan oleh lebih dari 25 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Iranik). Menggunakan aksara Pashto (Arab).",
+    "meta": {
+      "country": "Pakistan",
+      "code": "ps",
+      "speakers": 25000000,
+      "family": "Indo-Eropa",
+      "script": "Pashto",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-balochi",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Balochi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "pakistan",
+      "balochi"
+    ],
+    "teks": "Bahasa Balochi - Bahasa daerah di Pakistan (Balochistan). Digunakan oleh lebih dari 7 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Iranik). Menggunakan aksara Balochi (Arab).",
+    "meta": {
+      "country": "Pakistan",
+      "code": "bal",
+      "speakers": 7000000,
+      "family": "Indo-Eropa",
+      "script": "Balochi",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-bengali-asean-selatan",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Bengali",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "bangladesh",
+      "resmi",
+      "bengali"
+    ],
+    "teks": "Bahasa Bengali - Bahasa resmi Bangladesh. Digunakan oleh lebih dari 230 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Bengali. Bahasa dengan gerakan bahasa yang terkenal.",
+    "meta": {
+      "country": "Bangladesh",
+      "code": "bn",
+      "speakers": 230000000,
+      "family": "Indo-Eropa",
+      "script": "Bengali",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-sinhala",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Sinhala",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "sri-lanka",
+      "resmi",
+      "sinhala"
+    ],
+    "teks": "Bahasa Sinhala - Bahasa resmi Sri Lanka. Digunakan oleh lebih dari 17 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Sinhala. Bahasa dengan pengaruh dari bahasa Pali.",
+    "meta": {
+      "country": "Sri Lanka",
+      "code": "si",
+      "speakers": 17000000,
+      "family": "Indo-Eropa",
+      "script": "Sinhala",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tamil-asean-selatan",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Tamil",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "sri-lanka",
+      "resmi",
+      "tamil"
+    ],
+    "teks": "Bahasa Tamil - Bahasa resmi Sri Lanka. Digunakan oleh lebih dari 4 juta penutur. Termasuk rumpun bahasa Dravida. Menggunakan aksara Tamil. Digunakan oleh komunitas Tamil di Sri Lanka.",
+    "meta": {
+      "country": "Sri Lanka",
+      "code": "ta",
+      "speakers": 4000000,
+      "family": "Dravida",
+      "script": "Tamil",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-nepal",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Nepal",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "nepal",
+      "resmi",
+      "nepali"
+    ],
+    "teks": "Bahasa Nepal - Bahasa resmi Nepal. Digunakan oleh lebih dari 25 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Devanagari. Bahasa dengan pengaruh dari bahasa Tibet dan India.",
+    "meta": {
+      "country": "Nepal",
+      "code": "ne",
+      "speakers": 25000000,
+      "family": "Indo-Eropa",
+      "script": "Devanagari",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-dzongkha",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Dzongkha",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "bhutan",
+      "resmi",
+      "dzongkha"
+    ],
+    "teks": "Bahasa Dzongkha - Bahasa resmi Bhutan. Digunakan oleh lebih dari 600 ribu penutur. Termasuk rumpun bahasa Sino-Tibet (Tibet-Burma). Menggunakan aksara Tibet. Bahasa dengan pengaruh dari bahasa Tibet.",
+    "meta": {
+      "country": "Bhutan",
+      "code": "dz",
+      "speakers": 600000,
+      "family": "Sino-Tibet",
+      "script": "Tibet",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-dhivehi",
+    "kategori": "lingo",
+    "wilayah": "asean-selatan",
+    "nama": "Bahasa Dhivehi",
+    "tags": [
+      "bahasa",
+      "asean-selatan",
+      "maladewa",
+      "resmi",
+      "dhivehi"
+    ],
+    "teks": "Bahasa Dhivehi - Bahasa resmi Maladewa. Digunakan oleh lebih dari 500 ribu penutur. Termasuk rumpun bahasa Indo-Eropa (Indo-Arya). Menggunakan aksara Thaana. Bahasa dengan pengaruh dari bahasa Arab dan Sinhala.",
+    "meta": {
+      "country": "Maladewa",
+      "code": "dv",
+      "speakers": 500000,
+      "family": "Indo-Eropa",
+      "script": "Thaana",
+      "status": "resmi"
+    }
+  }
+]
