@@ -1,0 +1,212 @@
+[
+  {
+    "id": "wisata-patung-liberty",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Patung Liberty",
+    "tags": [
+      "patung liberty",
+      "amerika serikat"
+    ],
+    "teks": "Patung Liberty — simbol kebebasan di New York, Amerika Serikat, hadiah dari Prancis.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "city": "New York",
+      "type": "ikon",
+      "unesco": true,
+      "tags": [
+        "patung liberty",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "wisata-grand-canyon",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Grand Canyon",
+    "tags": [
+      "grand canyon",
+      "amerika serikat"
+    ],
+    "teks": "Grand Canyon — ngarai raksasa di Arizona, Amerika Serikat, salah satu keajaiban alam dunia.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "city": "Arizona",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "grand canyon",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "wisata-machu-picchu",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Machu Picchu",
+    "tags": [
+      "machu picchu",
+      "peru"
+    ],
+    "teks": "Machu Picchu — reruntuhan kota Inca di pegunungan Andes, Peru, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Peru",
+      "city": "Cusco",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "machu picchu",
+        "peru"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kristus-penebus",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Kristus Penebus",
+    "tags": [
+      "kristus penebus",
+      "brasil"
+    ],
+    "teks": "Kristus Penebus — patung Kristus di puncak bukit Corcovado, Rio de Janeiro, Brasil.",
+    "meta": {
+      "country": "Brasil",
+      "city": "Rio de Janeiro",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "kristus penebus",
+        "brasil"
+      ]
+    }
+  },
+  {
+    "id": "wisata-air-terjun-niagara",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Air Terjun Niagara",
+    "tags": [
+      "niagara",
+      "kanada"
+    ],
+    "teks": "Air Terjun Niagara — air terjun besar di perbatasan Amerika Serikat-Kanada.",
+    "meta": {
+      "country": "Kanada",
+      "city": "Ontario",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "niagara",
+        "kanada"
+      ]
+    }
+  },
+  {
+    "id": "wisata-chichen-itza",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Chichen Itza",
+    "tags": [
+      "chichen itza",
+      "meksiko"
+    ],
+    "teks": "Chichen Itza — reruntuhan kota Maya kuno di Meksiko, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Meksiko",
+      "city": "Yucatan",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "chichen itza",
+        "meksiko"
+      ]
+    }
+  },
+  {
+    "id": "wisata-torres-del-paine",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Torres del Paine",
+    "tags": [
+      "torres del paine",
+      "chili"
+    ],
+    "teks": "Torres del Paine — taman nasional pegunungan granit dramatis di Chili.",
+    "meta": {
+      "country": "Chili",
+      "city": "Patagonia",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "torres del paine",
+        "chili"
+      ]
+    }
+  },
+  {
+    "id": "wisata-perito-moreno",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Perito Moreno",
+    "tags": [
+      "perito moreno",
+      "argentina"
+    ],
+    "teks": "Perito Moreno — gletser aktif spektakuler di Patagonia, Argentina.",
+    "meta": {
+      "country": "Argentina",
+      "city": "Santa Cruz",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "perito moreno",
+        "argentina"
+      ]
+    }
+  },
+  {
+    "id": "wisata-tikal",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Tikal",
+    "tags": [
+      "tikal",
+      "guatemala"
+    ],
+    "teks": "Grand Canyon of Guatemala — Tikal, kompleks kuil Maya di hutan hujan Guatemala, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Guatemala",
+      "city": "Peten",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "tikal",
+        "guatemala"
+      ]
+    }
+  },
+  {
+    "id": "wisata-terusan-panama",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Terusan Panama",
+    "tags": [
+      "terusan panama",
+      "panama"
+    ],
+    "teks": "Terusan Panama — jalur air buatan penghubung Atlantik-Pasifik, keajaiban rekayasa dunia.",
+    "meta": {
+      "country": "Panama",
+      "city": "Panama City",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "terusan panama",
+        "panama"
+      ]
+    }
+  }
+]

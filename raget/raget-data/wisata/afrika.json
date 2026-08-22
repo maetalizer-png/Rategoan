@@ -1,0 +1,170 @@
+[
+  {
+    "id": "wisata-piramida-giza",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Piramida Giza",
+    "tags": [
+      "piramida giza",
+      "mesir"
+    ],
+    "teks": "Piramida Giza — kompleks piramida kuno Mesir, salah satu Tujuh Keajaiban Dunia Kuno.",
+    "meta": {
+      "country": "Mesir",
+      "city": "Giza",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "piramida giza",
+        "mesir"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gunung-kilimanjaro",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Gunung Kilimanjaro",
+    "tags": [
+      "kilimanjaro",
+      "tanzania"
+    ],
+    "teks": "Gunung Kilimanjaro — gunung tertinggi di Afrika, Tanzania, tujuan pendakian populer.",
+    "meta": {
+      "country": "Tanzania",
+      "city": "Kilimanjaro",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "kilimanjaro",
+        "tanzania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-air-terjun-victoria",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Air Terjun Victoria",
+    "tags": [
+      "victoria falls",
+      "zambia"
+    ],
+    "teks": "Air Terjun Victoria — salah satu air terjun terbesar di dunia, perbatasan Zambia-Zimbabwe.",
+    "meta": {
+      "country": "Zambia",
+      "city": "Livingstone",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "victoria falls",
+        "zambia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-serengeti",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Serengeti",
+    "tags": [
+      "serengeti",
+      "tanzania"
+    ],
+    "teks": "Serengeti — taman nasional savana dengan migrasi hewan terbesar di dunia, Tanzania.",
+    "meta": {
+      "country": "Tanzania",
+      "city": "Serengeti",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "serengeti",
+        "tanzania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-table-mountain",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Table Mountain",
+    "tags": [
+      "table mountain",
+      "afrika selatan"
+    ],
+    "teks": "Table Mountain — gunung meja ikonik di Cape Town, Afrika Selatan.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "city": "Cape Town",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "table mountain",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gurun-sahara",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Gurun Sahara",
+    "tags": [
+      "sahara",
+      "maroko"
+    ],
+    "teks": "Sahara — gurun terbesar di dunia, membentang di Afrika Utara, tujuan wisata gurun.",
+    "meta": {
+      "country": "Maroko",
+      "city": "Merzouga",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "sahara",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kairouan",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Kairouan",
+    "tags": [
+      "kairouan",
+      "tunisia"
+    ],
+    "teks": "Kastil Kairouan — kota suci Islam tertua di Afrika Utara, Tunisia, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Tunisia",
+      "city": "Kairouan",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "kairouan",
+        "tunisia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-lalibela",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Lalibela",
+    "tags": [
+      "lalibela",
+      "etiopia"
+    ],
+    "teks": "Lalibela — kompleks gereja batu yang diukir di Etiopia, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Etiopia",
+      "city": "Lalibela",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "lalibela",
+        "etiopia"
+      ]
+    }
+  }
+]

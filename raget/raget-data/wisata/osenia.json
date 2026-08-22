@@ -1,0 +1,107 @@
+[
+  {
+    "id": "wisata-sydney-opera-house",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Sydney Opera House",
+    "tags": [
+      "opera house",
+      "australia"
+    ],
+    "teks": "Sydney Opera House — gedung opera ikonik di Sydney, Australia, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Australia",
+      "city": "Sydney",
+      "type": "ikon",
+      "unesco": true,
+      "tags": [
+        "opera house",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-great-barrier-reef",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Great Barrier Reef",
+    "tags": [
+      "great barrier reef",
+      "australia"
+    ],
+    "teks": "Great Barrier Reef — terumbu karang terbesar di dunia, lepas pantai Queensland, Australia.",
+    "meta": {
+      "country": "Australia",
+      "city": "Queensland",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "great barrier reef",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-uluru",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Uluru",
+    "tags": [
+      "uluru",
+      "australia"
+    ],
+    "teks": "Uluru — batu monolit merah suci bagi Aborigin di tengah gurun Australia.",
+    "meta": {
+      "country": "Australia",
+      "city": "Northern Territory",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "uluru",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-fiordland",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Fiordland",
+    "tags": [
+      "fiordland",
+      "selandia baru"
+    ],
+    "teks": "Fiordland — taman nasional fjord dramatis di Selandia Baru, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Selandia Baru",
+      "city": "Milford Sound",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "fiordland",
+        "selandia baru"
+      ]
+    }
+  },
+  {
+    "id": "wisata-bora-bora",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Bora Bora",
+    "tags": [
+      "bora bora",
+      "polinesia"
+    ],
+    "teks": "Bora Bora — pulau tropis dengan laguna biru terkenal di Polinesia Prancis.",
+    "meta": {
+      "country": "Polinesia Prancis",
+      "city": "Bora Bora",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "bora bora",
+        "polinesia"
+      ]
+    }
+  }
+]
