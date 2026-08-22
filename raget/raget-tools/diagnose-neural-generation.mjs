@@ -24,7 +24,7 @@ import { RATEGOAN } from '../raget-llm/neural/llm-core.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const CHECKPOINT_FILE = path.join(ROOT, 'raget', 'raget-data', 'neural', 'raget-neural-tiny.safetensors');
-const REPORT_FILE = path.join(__dirname, 'diagnose-neural-generation-report.json');
+const REPORT_FILE = path.join(ROOT, 'raget', 'raget-devlog', 'neural', 'diagnose-neural-generation-report.json');
 
 const PROMPTS = [
   'Apa ibu kota Indonesia?',
