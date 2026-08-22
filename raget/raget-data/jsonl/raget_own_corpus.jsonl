@@ -1382,6 +1382,384 @@
 {"type":"fact","source":"makanan/osenia.json","text":"Pavlova — kue meringue dengan krim dan buah, hidangan penutup khas Australia dan Selandia Baru."}
 {"type":"fact","source":"makanan/osenia.json","text":"Hangi — makanan dimasak dalam lubang tanah panas, tradisi kuliner suku Maori Selandia Baru."}
 {"type":"fact","source":"makanan/osenia.json","text":"Poke — salad ikan mentah dengan nasi dan sayuran, populer di kawasan Pasifik."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Amazon - Raksasa e-commerce global. Didirikan 1994 oleh Jeff Bezos. Platform terbesar di dunia dengan penjualan $574B+."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"eBay - Marketplace global dengan sistem lelang. Didirikan 1995 oleh Pierre Omidyar. Fokus barang bekas dan kolektor."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Walmart - Raksasa ritel AS yang bertransformasi ke e-commerce. Didirikan 1962 oleh Sam Walton."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Etsy - Marketplace khusus produk handmade dan vintage. Didirikan 2005 oleh Rob Kalin."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Target - Ritel AS dengan e-commerce kuat. Didirikan 1902, sekarang pesaing Walmart & Amazon."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Best Buy - E-commerce elektronik terbesar AS. Didirikan 1966, fokus pada gadget dan peralatan elektronik."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Wayfair - E-commerce furnitur dan dekorasi rumah terbesar AS. Didirikan 2002."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Costco - Ritel warehouse AS dengan e-commerce. Didirikan 1983 oleh Jim Sinegal."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Overstock - E-commerce diskon AS. Didirikan 1999. Fokus furniture dan perhiasan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Newegg - E-commerce elektronik dan gaming. Didirikan 2001. Fokus tech enthusiasts."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Alibaba - Raksasa B2B China. Didirikan 1999 oleh Jack Ma. Platform wholesale terbesar dunia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"JD.com - E-commerce terbesar kedua China. Didirikan 1998 oleh Liu Qiangdong. Fokus produk original."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Pinduoduo - E-commerce sosial China. Didirikan 2015 oleh Colin Huang. Belanja + game + sosial."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Tmall - Platform B2C Alibaba untuk brand ternama. Didirikan 2008. Pesaing JD.com."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Taobao - Platform C2C Alibaba. Didirikan 2003. Marketplace terbesar China untuk consumer-to-consumer."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Dangdang - E-commerce buku terbesar China. Didirikan 1999. Pesaing Amazon di China."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Suning - E-commerce elektronik China. Didirikan 1990. Pesaing JD.com di elektronik."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"VIP.com - E-commerce fashion diskon China. Didirikan 2008. Fokus brand fashion."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Rakuten - E-commerce terbesar Jepang. Didirikan 1997 oleh Hiroshi Mikitani. Ekosistem super app."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mercari - Marketplace second-hand terbesar Jepang. Didirikan 2013. Aplikasi jual-beli bekas."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Yahoo! Japan Shopping - E-commerce besar Jepang. Bagian dari ekosistem Yahoo! Japan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"ZOZO - Fashion e-commerce Jepang. Didirikan 1998. Fokus fashion & styling."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Coupang - E-commerce terbesar Korea Selatan. Didirikan 2010 oleh Bom Kim. Pengiriman super cepat (Rocket Delivery)."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Gmarket - Platform e-commerce besar Korea. Didirikan 2000, sekarang bagian dari eBay."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"11st - E-commerce besar Korea. Didirikan 2008. Pesaing Coupang dan Gmarket."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Flipkart - E-commerce terbesar India. Didirikan 2007 oleh Sachin & Binny Bansal. Dikenal dengan Big Billion Days."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Meesho - Sosial commerce India. Didirikan 2015 oleh Vidit Aatrey. Reseller dengan modal nol."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Snapdeal - E-commerce besar India. Didirikan 2010. Pesaing Flipkart dan Amazon India."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Nykaa - E-commerce kecantikan dan fashion terbesar India. Didirikan 2012 oleh Falguni Nayar."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"IndiaMART - B2B marketplace India. Didirikan 1999. Fokus B2B & wholesale."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Zalando - Fashion e-commerce terbesar Eropa. Didirikan 2008 di Berlin. 2000+ brand fashion."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Otto - E-commerce tertua Jerman. Didirikan 1949 oleh Werner Otto. Fokus furnitur & rumah tangga."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"MediaMarkt - E-commerce elektronik terbesar Eropa. Didirikan 1979. Fokus gadget & elektronik."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Douglas - E-commerce kecantikan Jerman. Didirikan 1821. Fokus parfum & kosmetik."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"ASOS - Fashion e-commerce terbesar Inggris. Didirikan 2000. Fokus anak muda & milenial."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Farfetch - Marketplace fashion mewah global. Didirikan 2007 oleh José Neves. Butik mewah 50+ negara."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Very - E-commerce fashion & rumah tangga Inggris. Didirikan 2009. Fokus kredit belanja."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Boohoo - Fashion e-commerce Inggris. Didirikan 2006. Fokus fast fashion & harga murah."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Marks & Spencer - Ritel Inggris dengan e-commerce. Didirikan 1884. Fokus fashion & makanan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Cdiscount - E-commerce terbesar Prancis. Didirikan 1998. Pesaing Amazon di Prancis."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"La Redoute - Fashion & dekorasi rumah Prancis. Didirikan 1873. E-commerce tertua di Prancis."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Carrefour - Ritel Prancis dengan e-commerce. Didirikan 1959. Supermarket terbesar Eropa."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"El Corte Inglés - Ritel terbesar Spanyol dengan e-commerce kuat. Didirikan 1940."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Zalando Italia - Fashion e-commerce di Italia. Bagian dari Zalando Group."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Trendyol - E-commerce terbesar Turki. Didirikan 2010 oleh Demet Mutlu. Fokus fashion & kecantikan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Hepsiburada - E-commerce terbesar Turki. Didirikan 2000. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Noon - E-commerce terbesar Timur Tengah. Didirikan 2017 oleh Mohamed Alabbar. Pesaing Amazon."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Souq.com - Marketplace Timur Tengah. Didirikan 2005, sekarang bagian dari Amazon."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mercado Livre - E-commerce terbesar Amerika Latin. Didirikan 1999 oleh Marcos Galperin."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopee Brazil - Versi Shopee di Brazil. Ekspansi Shopee ke Amerika Latin."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Wildberries - E-commerce terbesar Rusia. Didirikan 2004 oleh Tatyana Bakalchuk. Fashion & rumah."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Ozon - E-commerce terbesar Rusia. Didirikan 1998. Marketplace general seperti Amazon."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Kogan - E-commerce terbesar Australia. Didirikan 2006 oleh Ruslan Kogan. Elektronik & rumah."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Catch - E-commerce Australia. Didirikan 2006. Marketplace dengan harga murah."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"The Iconic - Fashion e-commerce Australia. Didirikan 2011. Fokus fashion & gaya hidup."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Jumia - E-commerce terbesar Afrika. Didirikan 2012. Beroperasi di 11 negara Afrika."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Konga - E-commerce terbesar Nigeria. Didirikan 2012. Pesaing Jumia di Nigeria."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Takealot - E-commerce terbesar Afrika Selatan. Didirikan 2011. Pesaing Amazon di SA."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopee - E-commerce terbesar Asia Tenggara. Didirikan 2015 oleh Forrest Li."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Lazada - E-commerce premium Asia Tenggara. Didirikan 2012. Bagian dari Alibaba Group."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Tokopedia - E-commerce terbesar Indonesia. Didirikan 2009 oleh William Tanuwijaya. 14 juta seller."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Bukalapak - E-commerce UMKM Indonesia. Didirikan 2010 oleh Achmad Zaky."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Blibli - E-commerce premium Indonesia. Didirikan 2011 oleh Kusumo Martanto."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopee Indonesia - Versi Shopee di Indonesia. Didirikan 2015. E-commerce terbesar Indonesia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Lazada Indonesia - Versi Lazada di Indonesia. Didirikan 2012. E-commerce premium."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Sociolla - E-commerce kecantikan terbesar Indonesia. Didirikan 2015. Fokus produk kecantikan & perawatan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Orami - E-commerce produk ibu dan anak Indonesia. Didirikan 2012. Fokus kebutuhan keluarga."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Ruparupa - E-commerce furniture Indonesia. Didirikan 2014. Fokus furniture & dekorasi rumah."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Nirwana - E-commerce fashion Muslim Indonesia. Didirikan 2016. Fokus fashion Muslim & modest wear."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Hijup - E-commerce fashion hijab Indonesia. Didirikan 2011. Fokus hijab & fashion Muslim."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Zilingo - E-commerce fashion Indonesia. Didirikan 2015. Fokus fashion & lifestyle."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Bhinneka - E-commerce elektronik Indonesia. Didirikan 1993. Fokus gadget & elektronik."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Tiktok Shop Indonesia - Social commerce Indonesia. Didirikan 2021. Fokus live shopping."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Akulaku - E-commerce fintech Indonesia. Didirikan 2014. Fokus pembayaran cicilan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Klikindomaret - E-commerce Indomaret. Didirikan 2018. Fokus kebutuhan sehari-hari."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"GrabMart - E-commerce Grab Indonesia. Didirikan 2020. Fokus pesan-antar makanan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"GoFood - E-commerce Gojek Indonesia. Didirikan 2015. Fokus pesan-antar makanan."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopify - Platform e-commerce terbesar Kanada. Didirikan 2006 oleh Tobias Lütke. Power 4M+ toko online."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Wish - Marketplace diskon global dari Kanada. Didirikan 2010. Fokus harga murah dari China."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Linio - E-commerce terbesar Meksiko. Didirikan 2012. Pesaing Amazon di Amerika Latin."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Zalora - Fashion e-commerce terbesar Asia Tenggara. Didirikan 2012. 500+ brand fashion."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Daraz - E-commerce terbesar Pakistan. Didirikan 2012. Bagian dari Alibaba Group."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Privalia - Fashion e-commerce Spanyol. Didirikan 2006. Outlet online terbesar Spanyol."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Worten - E-commerce terbesar Portugal. Didirikan 1996. Elektronik & rumah tangga."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Bol.com - E-commerce terbesar Belanda. Didirikan 1999. Pesaing Amazon di Benelux."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Coolblue - E-commerce Belgia. Didirikan 1999. Fokus elektronik & pengiriman cepat."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Elgiganten - E-commerce elektronik Swedia. Didirikan 1995. Terbesar di Skandinavia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Komplett - E-commerce elektronik Norwegia. Didirikan 1998. Terbesar di Norwegia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Bilka - E-commerce terbesar Denmark. Didirikan 1970. Hypermarket online."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Verkkokauppa - E-commerce elektronik Finlandia. Didirikan 2001. Terbesar di Finlandia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Superbalist - Fashion e-commerce Afrika Selatan. Didirikan 2012. Fokus fashion & gaya hidup."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Souq Egypt - E-commerce terbesar Mesir. Didirikan 2005. Bagian dari Amazon."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Kilimall - E-commerce terbesar Kenya. Didirikan 2014. Pesaing Jumia di Afrika Timur."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Tiki - E-commerce terbesar Vietnam. Didirikan 2010. Fokus pengiriman cepat."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopee Thailand - Versi Shopee di Thailand. Didirikan 2015. Terbesar di Thailand."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopee Malaysia - Versi Shopee di Malaysia. Didirikan 2015. Terbesar di Malaysia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Shopee Philippines - Versi Shopee di Filipina. Didirikan 2015. Terbesar di Filipina."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mercado Libre Argentina - Versi Mercado Libre di Argentina. Didirikan 1999."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mercado Libre Chile - Versi Mercado Libre di Chile. Didirikan 1999."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mercado Libre Colombia - Versi Mercado Libre di Kolombia. Didirikan 1999."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mercado Libre Peru - Versi Mercado Libre di Peru. Didirikan 1999."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Rozetka - E-commerce terbesar Ukraina. Didirikan 2005. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Allegro - E-commerce terbesar Polandia. Didirikan 1999. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Alza.cz - E-commerce elektronik Czechia. Didirikan 1994. Terbesar di Czechia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"eMAG - E-commerce terbesar Hungaria. Didirikan 2001. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"eMAG Romania - Versi eMAG di Romania. Didirikan 2001. Terbesar di Romania."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Skroutz - E-commerce terbesar Yunani. Didirikan 2005. Fokus elektronik & gadget."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"BargainTown - E-commerce terbesar Irlandia. Didirikan 2000. Fashion & rumah tangga."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Galaxus - E-commerce terbesar Swiss. Didirikan 2007. Elektronik & rumah tangga."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Altex - E-commerce terbesar Austria. Didirikan 2000. Elektronik & gadget."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Noon Saudi - Versi Noon di Arab Saudi. Didirikan 2017. Terbesar di Saudi."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Xcite - E-commerce terbesar Kuwait. Didirikan 2008. Elektronik & gadget."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Noon Qatar - Versi Noon di Qatar. Didirikan 2017. Terbesar di Qatar."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Bahrain E-commerce - E-commerce terbesar Bahrain. Didirikan 2015."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Oman E-commerce - E-commerce terbesar Oman. Didirikan 2016."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Mekarem - E-commerce terbesar Yordania. Didirikan 2010. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Lebanon E-commerce - E-commerce terbesar Lebanon. Didirikan 2012."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Iraq E-commerce - E-commerce terbesar Irak. Didirikan 2015."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Digikala - E-commerce terbesar Iran. Didirikan 2006. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Zap - E-commerce terbesar Israel. Didirikan 2000. Fokus elektronik & gadget."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Jumia Maroc - Versi Jumia di Maroko. Didirikan 2012. Terbesar di Maroko."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Jumia Tunis - Versi Jumia di Tunisia. Didirikan 2012. Terbesar di Tunisia."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Jumia Algeria - Versi Jumia di Algeria. Didirikan 2012. Terbesar di Algeria."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Jumia Senegal - Versi Jumia di Senegal. Didirikan 2012. Terbesar di Senegal."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Jumia Ghana - Versi Jumia di Ghana. Didirikan 2012. Terbesar di Ghana."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Uzum - E-commerce terbesar Uzbekistan. Didirikan 2020. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Kaspi - E-commerce terbesar Kazakhstan. Didirikan 2002. Marketplace general."}
+{"type":"fact","source":"marplace/ecommerce.json","text":"Azerbaijan E-commerce - E-commerce terbesar Azerbaijan. Didirikan 2015."}
+{"type":"fact","source":"marplace/freelance.json","text":"Upwork - Platform freelance global terbesar. Didirikan 2015. 60+ juta pengguna."}
+{"type":"fact","source":"marplace/freelance.json","text":"Fiverr - Platform freelance global. Didirikan 2010. Micro-jobs mulai $5."}
+{"type":"fact","source":"marplace/freelance.json","text":"Freelancer.com - Platform freelance global. Didirikan 2009. 60+ juta pengguna."}
+{"type":"fact","source":"marplace/freelance.json","text":"Toptal - Platform freelance eksklusif. Didirikan 2010. Top 3% talent dunia."}
+{"type":"fact","source":"marplace/freelance.json","text":"Guru.com - Platform freelance tertua. Didirikan 1998. Fokus profesional berpengalaman."}
+{"type":"fact","source":"marplace/freelance.json","text":"PeoplePerHour - Platform freelance Eropa. Didirikan 2007. Fokus UK & Eropa."}
+{"type":"fact","source":"marplace/freelance.json","text":"99designs - Platform khusus desain grafis. Didirikan 2008. Kompetisi desain."}
+{"type":"fact","source":"marplace/freelance.json","text":"Sribulancer - Freelance terbesar Indonesia. Didirikan 2012. Fokus freelancer lokal."}
+{"type":"fact","source":"marplace/freelance.json","text":"Fastwork - Freelance Asia Tenggara. Didirikan 2015. Transaksi cepat & mudah."}
+{"type":"fact","source":"marplace/freelance.json","text":"Projects.co.id - Freelance IT Indonesia. Didirikan 2012. Fokus proyek teknologi."}
+{"type":"fact","source":"marplace/freelance.json","text":"Malt - Freelance terbesar Eropa. Didirikan 2013 di Prancis. Konsultan IT & marketing."}
+{"type":"fact","source":"marplace/freelance.json","text":"Twago - Freelance terbesar Jerman. Didirikan 2009. Profesional IT & engineering."}
+{"type":"fact","source":"marplace/freelance.json","text":"Comatch - Freelance consulting Eropa. Didirikan 2016. Fokus konsultan bisnis."}
+{"type":"fact","source":"marplace/freelance.json","text":"Contra - Freelance modern tanpa komisi. Didirikan 2017. Favorit milenial & Gen Z."}
+{"type":"fact","source":"marplace/freelance.json","text":"Working Not Working - Khusus kreatif & desainer. Didirikan 2012. Komunitas kreatif global."}
+{"type":"fact","source":"marplace/freelance.json","text":"Envato Studio - Marketplace jasa kreatif. Didirikan 2006. Desain, video, audio."}
+{"type":"fact","source":"marplace/freelance.json","text":"Zhaopin - Platform kerja & freelance China. Didirikan 1994. Tulang punggung pasar kerja China."}
+{"type":"fact","source":"marplace/freelance.json","text":"Zhuanzhuan - Platform freelance China. Didirikan 2015. Fokus freelancer muda China."}
+{"type":"fact","source":"marplace/freelance.json","text":"WorknHire - Freelance India. Didirikan 2015. Fokus freelancer & startup India."}
+{"type":"fact","source":"marplace/freelance.json","text":"Truelancer - Freelance India. Didirikan 2014. Platform freelancer India terkemuka."}
+{"type":"fact","source":"marplace/karir.json","text":"LinkedIn - Platform profesional global terbesar. Didirikan 2002 oleh Reid Hoffman. 900+ juta pengguna di 200+ negara."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed - Aggregator job global terbesar. Didirikan 2004. Mengumpulkan lowongan dari berbagai sumber."}
+{"type":"fact","source":"marplace/karir.json","text":"Glassdoor - Platform job dengan review perusahaan. Didirikan 2007. Transparansi gaji & budaya perusahaan."}
+{"type":"fact","source":"marplace/karir.json","text":"Monster.com - Platform job tertua global. Didirikan 1994. Pelopor rekrutmen online."}
+{"type":"fact","source":"marplace/karir.json","text":"CareerBuilder - Platform job dengan AI matching. Didirikan 1995. Fokus pada matching kandidat & lowongan."}
+{"type":"fact","source":"marplace/karir.json","text":"ZipRecruiter - Platform job dengan AI-powered matching. Didirikan 2010."}
+{"type":"fact","source":"marplace/karir.json","text":"USAJobs - Platform job pemerintah AS. Resmi untuk lowongan federal."}
+{"type":"fact","source":"marplace/karir.json","text":"Dice - Platform khusus IT & tech. Didirikan 1990. Fokus profesional teknologi."}
+{"type":"fact","source":"marplace/karir.json","text":"AngelList - Platform startup & tech jobs. Didirikan 2010. Fokus startup & venture."}
+{"type":"fact","source":"marplace/karir.json","text":"The Muse - Platform karir dengan konten. Didirikan 2011. Panduan karir & lowongan."}
+{"type":"fact","source":"marplace/karir.json","text":"Reed - Platform job terbesar Inggris. Didirikan 1995. Lowongan berbagai bidang."}
+{"type":"fact","source":"marplace/karir.json","text":"Totaljobs - Platform job Inggris. Didirikan 1999. Lowongan dari berbagai sektor."}
+{"type":"fact","source":"marplace/karir.json","text":"StepStone - Platform job Eropa. Didirikan 1996. Beroperasi di 20+ negara."}
+{"type":"fact","source":"marplace/karir.json","text":"Xing - Platform profesional Jerman. Didirikan 2003. LinkedIn-nya Jerman."}
+{"type":"fact","source":"marplace/karir.json","text":"Cadremploi - Platform job Prancis. Didirikan 1999. Lowongan untuk profesional."}
+{"type":"fact","source":"marplace/karir.json","text":"51job - Platform job terbesar China. Didirikan 1998. Lowongan berbagai bidang."}
+{"type":"fact","source":"marplace/karir.json","text":"Liepin - Platform job profesional China. Didirikan 2011. Fokus talent & headhunting."}
+{"type":"fact","source":"marplace/karir.json","text":"Zhaopin - Platform job China. Didirikan 1994. Tulang punggung pasar kerja China."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Japan - Versi Indeed di Jepang. Didirikan 2004. Terbesar di Jepang."}
+{"type":"fact","source":"marplace/karir.json","text":"Daijob - Platform job bilingual Jepang. Didirikan 2000. Fokus ekspat & bilingual."}
+{"type":"fact","source":"marplace/karir.json","text":"JobKorea - Platform job terbesar Korea Selatan. Didirikan 1998. Lowongan berbagai bidang."}
+{"type":"fact","source":"marplace/karir.json","text":"Naukri - Platform job terbesar India. Didirikan 1997. 60+ juta pengguna."}
+{"type":"fact","source":"marplace/karir.json","text":"Shine - Platform job India. Didirikan 1998. Pesaing Naukri di India."}
+{"type":"fact","source":"marplace/karir.json","text":"Internshala - Platform magang & fresh graduate India. Didirikan 2010. Fokus mahasiswa."}
+{"type":"fact","source":"marplace/karir.json","text":"Seek - Platform job terbesar Australia. Didirikan 1997. Lowongan berbagai bidang."}
+{"type":"fact","source":"marplace/karir.json","text":"CareerOne - Platform job Australia. Didirikan 1999. Pesaing Seek di Australia."}
+{"type":"fact","source":"marplace/karir.json","text":"TradeMe Jobs - Platform job terbesar Selandia Baru. Didirikan 1999."}
+{"type":"fact","source":"marplace/karir.json","text":"Careers24 - Platform job terbesar Afrika Selatan. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"JobStreet Indonesia - Platform job terbesar di Indonesia. Didirikan 1997. Lowongan berbagai bidang."}
+{"type":"fact","source":"marplace/karir.json","text":"Karir.com - Platform job Indonesia. Didirikan 2000. Fokus fresh graduate."}
+{"type":"fact","source":"marplace/karir.json","text":"Glints Indonesia - Platform karir dari Singapura. Didirikan 2013. Fokus fresh graduate."}
+{"type":"fact","source":"marplace/karir.json","text":"Kalibrr Indonesia - Platform job dari Filipina. Didirikan 2013. Fokus skill matching."}
+{"type":"fact","source":"marplace/karir.json","text":"Tech in Asia Jobs - Platform job untuk startup dan tech di Asia. Didirikan 2010."}
+{"type":"fact","source":"marplace/karir.json","text":"Joblike - Platform job dengan pendekatan sosial. Didirikan 2015. Fokus fresh graduate."}
+{"type":"fact","source":"marplace/karir.json","text":"Loker.id - Platform job lokal Indonesia. Didirikan 2016. Fokus lowongan berbagai level."}
+{"type":"fact","source":"marplace/karir.json","text":"Kitalulus - Platform job dan magang. Didirikan 2018. Fokus fresh graduate dan mahasiswa."}
+{"type":"fact","source":"marplace/karir.json","text":"Pintarnya - Platform job berbasis AI. Didirikan 2020. Fokus matching kandidat dengan lowongan."}
+{"type":"fact","source":"marplace/karir.json","text":"JobHunt - Platform job komunitas. Didirikan 2017. Fokus profesional Indonesia."}
+{"type":"fact","source":"marplace/karir.json","text":"Sribulancer - Platform freelance terbesar di Indonesia. Didirikan 2012."}
+{"type":"fact","source":"marplace/karir.json","text":"Fastwork Indonesia - Platform freelance asal Thailand. Didirikan 2015. Fokus kecepatan transaksi."}
+{"type":"fact","source":"marplace/karir.json","text":"Projects.co.id - Platform freelance fokus IT dan digital. Didirikan 2012."}
+{"type":"fact","source":"marplace/karir.json","text":"Workopolis - Platform job terbesar Kanada. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"JobBank - Platform job pemerintah Kanada. Resmi untuk lowongan federal."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed NL - Versi Indeed di Belanda. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Werk.nl - Platform job pemerintah Belanda. Resmi untuk lowongan."}
+{"type":"fact","source":"marplace/karir.json","text":"InfoJobs - Platform job terbesar Spanyol. Didirikan 2001."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Spain - Versi Indeed di Spanyol. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Italia - Versi Indeed di Italia. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Subito Lavoro - Platform job Italia. Didirikan 2005. Fokus lowongan lokal."}
+{"type":"fact","source":"marplace/karir.json","text":"Pracuj.pl - Platform job terbesar Polandia. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Poland - Versi Indeed di Polandia. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"HeadHunter - Platform job terbesar Rusia. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"SuperJob - Platform job Rusia. Didirikan 2000. Pesaing HeadHunter."}
+{"type":"fact","source":"marplace/karir.json","text":"Kariyer.net - Platform job terbesar Turki. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"Secretcv - Platform job Turki. Didirikan 2005. Fokus lowongan rahasia."}
+{"type":"fact","source":"marplace/karir.json","text":"Naukri Gulf - Platform job terbesar UEA. Didirikan 2005. Fokus Timur Tengah."}
+{"type":"fact","source":"marplace/karir.json","text":"Bayt.com - Platform job terbesar Timur Tengah. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"JobStreet SG - Platform job terbesar Singapura. Didirikan 1997."}
+{"type":"fact","source":"marplace/karir.json","text":"MyCareersFuture - Platform job pemerintah Singapura. Didirikan 2018."}
+{"type":"fact","source":"marplace/karir.json","text":"JobStreet MY - Platform job terbesar Malaysia. Didirikan 1997."}
+{"type":"fact","source":"marplace/karir.json","text":"MauKerja - Platform job Malaysia. Didirikan 2010. Fokus fresh graduate."}
+{"type":"fact","source":"marplace/karir.json","text":"JobStreet PH - Platform job terbesar Filipina. Didirikan 1997."}
+{"type":"fact","source":"marplace/karir.json","text":"Kalibrr PH - Platform job Filipina. Didirikan 2013. Fokus skill matching."}
+{"type":"fact","source":"marplace/karir.json","text":"JobThai - Platform job terbesar Thailand. Didirikan 2001."}
+{"type":"fact","source":"marplace/karir.json","text":"JobDB - Platform job Thailand. Didirikan 2005. Fokus profesional."}
+{"type":"fact","source":"marplace/karir.json","text":"VietnamWorks - Platform job terbesar Vietnam. Didirikan 2005."}
+{"type":"fact","source":"marplace/karir.json","text":"ITviec - Platform job IT Vietnam. Didirikan 2012. Fokus IT & tech."}
+{"type":"fact","source":"marplace/karir.json","text":"InfoJobs Brazil - Platform job terbesar Brazil. Didirikan 2005."}
+{"type":"fact","source":"marplace/karir.json","text":"Catho - Platform job Brazil. Didirikan 1997. Pesaing InfoJobs Brazil."}
+{"type":"fact","source":"marplace/karir.json","text":"OCCMundial - Platform job terbesar Meksiko. Didirikan 2003."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Mexico - Versi Indeed di Meksiko. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Belgium - Versi Indeed di Belgia. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Jobat - Platform job Belgia. Didirikan 2000. Fokus lowongan profesional."}
+{"type":"fact","source":"marplace/karir.json","text":"JobUp - Platform job terbesar Swiss. Didirikan 2001."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Switzerland - Versi Indeed di Swiss. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Karriere.at - Platform job terbesar Austria. Didirikan 1999."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Austria - Versi Indeed di Austria. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Arbetsförmedlingen - Platform job pemerintah Swedia. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Sweden - Versi Indeed di Swedia. Didirikan 2004."}
+{"type":"fact","source":"marplace/karir.json","text":"Finn.no Jobb - Platform job terbesar Norwegia. Didirikan 2000."}
+{"type":"fact","source":"marplace/karir.json","text":"Jobindex - Platform job terbesar Denmark. Didirikan 1996."}
+{"type":"fact","source":"marplace/karir.json","text":"Indeed Denmark - Versi Indeed di Denmark. Didirikan 2004."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Cars.com - Platform otomotif terbesar AS. Didirikan 1998. Review dealer & komparasi harga."}
+{"type":"fact","source":"marplace/otomotif.json","text":"CarGurus - Platform otomotif AI AS. Didirikan 2006. Analisis harga \"Great Deal\" atau \"Overpriced\"."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autotrader - Platform otomotif tertua AS. Didirikan 1997. Ikon industri otomotif AS."}
+{"type":"fact","source":"marplace/otomotif.json","text":"TrueCar - Platform otomotif AS. Didirikan 2005. Transparansi harga & dealer terpercaya."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Carvana - Platform jual-beli mobil online AS. Didirikan 2012. Beli mobil 100% online."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Vroom - Platform jual-beli mobil online AS. Didirikan 2013. Pesaing Carvana."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Edmunds - Platform otomotif AS. Didirikan 1966. Review & komparasi mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Kelly Blue Book - Platform otomotif AS. Didirikan 1926. Estimasi nilai mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoNation - Dealer mobil terbesar AS. Didirikan 1996. Platform online + dealer fisik."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Shift - Platform jual-beli mobil online AS. Didirikan 2013. Fokus kemudahan transaksi."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoTrader UK - Platform otomotif terbesar Inggris. Didirikan 1977. Dari majalah ke digital."}
+{"type":"fact","source":"marplace/otomotif.json","text":"PistonHeads - Platform otomotif komunitas Inggris. Didirikan 1999. Forum & review mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"CarGurus UK - Versi CarGurus di Inggris. Didirikan 2015. AI analisis harga."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Motors.co.uk - Platform otomotif Inggris. Didirikan 2008. Fokus dealer premium."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Mobile.de - Platform otomotif terbesar Jerman. Didirikan 1995. Acuan harga mobil Jerman."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoScout24 - Platform otomotif Eropa. Didirikan 1998. Beroperasi di 11 negara Eropa."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autoscout24 - Platform otomotif Jerman. Didirikan 1998. Pesaing Mobile.de."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Bauer Cars - Platform otomotif Jerman. Didirikan 2005. Fokus mobil premium."}
+{"type":"fact","source":"marplace/otomotif.json","text":"La Centrale - Platform otomotif terbesar Prancis. Didirikan 1999. Estimasi harga & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Leboncoin Auto - Kategori otomotif di Le Bon Coin. Didirikan 2006. Sangat populer di Prancis."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoScout24 France - Versi AutoScout24 di Prancis. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autohome - Platform otomotif terbesar China. Didirikan 2005. Review & komparasi mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Bitauto - Platform otomotif China. Didirikan 2000. Portal otomotif terkemuka."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Che168 - Platform otomotif China. Didirikan 2005. Fokus mobil bekas & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Dongchedi - Platform otomotif China. Didirikan 2017. Fokus konten video & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Goo-net - Platform otomotif terbesar Jepang. Didirikan 1997. Portal mobil Jepang."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Car Sensor - Platform otomotif Jepang. Didirikan 2000. Fokus mobil bekas."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Yahoo! Car - Platform otomotif Jepang. Didirikan 2005. Bagian dari Yahoo! Japan."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Encar - Platform otomotif terbesar Korea. Didirikan 2000. Portal mobil Korea."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Bobae Dream - Platform otomotif Korea. Didirikan 2005. Fokus komunitas & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"CarDekho - Platform otomotif terbesar India. Didirikan 2008. Video test drive & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"CarWale - Platform otomotif India. Didirikan 2005. Komunitas & forum mobil India."}
+{"type":"fact","source":"marplace/otomotif.json","text":"OLX Autos - Kategori otomotif OLX India. Didirikan 2006. Jual-beli mobil bekas."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Droom - Platform otomotif India. Didirikan 2014. Fokus transparansi & AI."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Auto.ru - Platform otomotif terbesar Rusia. Didirikan 1999. Portal mobil Rusia."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Drom.ru - Platform otomotif Rusia. Didirikan 2001. Fokus mobil bekas & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Sahibinden - Platform marketplace terbesar Turki dengan otomotif. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Arabam - Platform otomotif Turki. Didirikan 2001. Fokus mobil bekas & komunitas."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Dubizzle - Marketplace UEA dengan otomotif. Didirikan 2005. Populer di kalangan ekspat."}
+{"type":"fact","source":"marplace/otomotif.json","text":"YallaMotor - Platform otomotif UEA. Didirikan 2014. Fokus mobil baru & bekas."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Webmotors - Platform otomotif terbesar Brazil. Didirikan 1995. Acuan harga mobil Brazil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"iCarros - Platform otomotif Brazil. Didirikan 2006. Portal otomotif terkemuka."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Carsales - Platform otomotif terbesar Australia. Didirikan 1997. Acuan harga mobil Australia."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Drive - Platform otomotif Australia. Didirikan 1997. Review & komparasi mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoTrader SA - Platform otomotif terbesar Afrika Selatan. Didirikan 1998."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Cars.co.za - Platform otomotif Afrika Selatan. Didirikan 2006. Fokus dealer & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autocosmos - Platform otomotif terbesar Meksiko. Didirikan 1999. Review & komparasi."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Kavak - Platform jual-beli mobil online Meksiko. Didirikan 2016. Startup unicorn Meksiko."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Mobil123 - Platform otomotif terbesar Indonesia. Didirikan 2007. Listing mobil baru, bekas, dan motor."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Carmudi - Platform otomotif global di Indonesia. Didirikan 2013. Transparansi transaksi."}
+{"type":"fact","source":"marplace/otomotif.json","text":"OLX Indonesia - Marketplace otomotif. Didirikan 2006. Jual-beli mobil bekas."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Coches.net - Platform otomotif terbesar Spanyol. Didirikan 1999. Portal mobil Spanyol."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoScout24 Spain - Versi AutoScout24 di Spanyol. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autoscout24 Italia - Versi AutoScout24 di Italia. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Quattroruote - Platform otomotif Italia. Didirikan 1995. Majalah & portal mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoTrader Canada - Platform otomotif terbesar Kanada. Didirikan 2003."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Kijiji Autos - Marketplace otomotif Kanada. Didirikan 2005. Bagian dari eBay Classifieds."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autotrack - Platform otomotif terbesar Belanda. Didirikan 1997."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Gaspedaal - Aggregator otomotif Belanda. Didirikan 2005. Bandingkan harga mobil."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Viabovag - Platform otomotif Belanda. Didirikan 2000. Fokus dealer."}
+{"type":"fact","source":"marplace/otomotif.json","text":"AutoScout24 Switzerland - Versi AutoScout24 di Swiss. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"TCS - Platform otomotif Swiss. Didirikan 1920. Fokus komunitas & review."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autoscout24 Austria - Versi AutoScout24 di Austria. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Otomoto - Platform otomotif terbesar Polandia. Didirikan 2006."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Gratka Motoryzacyjne - Platform otomotif Polandia. Didirikan 2005."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Sauto - Platform otomotif terbesar Ceko. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"TipCars - Platform otomotif Ceko. Didirikan 2005."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Blocket - Platform marketplace terbesar Swedia dengan otomotif. Didirikan 1996."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Bytbil - Platform otomotif Swedia. Didirikan 2000. Fokus mobil bekas."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Finn.no - Platform marketplace terbesar Norwegia dengan otomotif. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Nettbil - Platform otomotif Norwegia. Didirikan 2015. Fokus mobil bekas online."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Bilbasen - Platform otomotif terbesar Denmark. Didirikan 1999."}
+{"type":"fact","source":"marplace/otomotif.json","text":"DBA - Platform marketplace Denmark dengan otomotif. Didirikan 1995."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Nettiauto - Platform otomotif terbesar Finlandia. Didirikan 2001."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autotalli - Platform otomotif Finlandia. Didirikan 2005."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Mercado Libre Autos - Kategori otomotif Mercado Libre Argentina. Didirikan 1999."}
+{"type":"fact","source":"marplace/otomotif.json","text":"OLX Autos Argentina - Kategori otomotif OLX Argentina. Didirikan 2006."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Standvirtual - Platform otomotif terbesar Portugal. Didirikan 2000."}
+{"type":"fact","source":"marplace/otomotif.json","text":"CustoJusto - Platform marketplace Portugal dengan otomotif. Didirikan 2005."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Car.gr - Platform otomotif terbesar Yunani. Didirikan 2001."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autopark - Platform otomotif Yunani. Didirikan 2005."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Autovit.ro - Platform otomotif terbesar Romania. Didirikan 2001."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Masini.ro - Platform otomotif Romania. Didirikan 2003."}
+{"type":"fact","source":"marplace/otomotif.json","text":"TradeMe Motors - Platform otomotif terbesar Selandia Baru. Didirikan 1999."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Haraj - Platform marketplace terbesar Arab Saudi dengan otomotif. Didirikan 2006."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Hatla2ee - Platform otomotif terbesar Mesir. Didirikan 2010."}
+{"type":"fact","source":"marplace/otomotif.json","text":"Avito Auto - Platform otomotif terbesar Maroko. Didirikan 2006."}
+{"type":"fact","source":"marplace/properti.json","text":"Zillow - Platform properti terbesar AS. Didirikan 2006. Fitur Zestimate estimasi nilai rumah."}
+{"type":"fact","source":"marplace/properti.json","text":"Redfin - Platform properti teknologi AS. Didirikan 2004. Tur virtual 3D & komisi rendah."}
+{"type":"fact","source":"marplace/properti.json","text":"Realtor.com - Platform properti AS. Didirikan 1995. Data resmi dari Asosiasi Realtor AS."}
+{"type":"fact","source":"marplace/properti.json","text":"Trulia - Platform properti AS. Didirikan 2005. Fokus neighborhood insight & komunitas."}
+{"type":"fact","source":"marplace/properti.json","text":"Apartments.com - Platform khusus apartemen AS. Didirikan 1997. Terbesar untuk rental."}
+{"type":"fact","source":"marplace/properti.json","text":"Compass - Platform properti teknologi AS. Didirikan 2012. Agent berbasis teknologi."}
+{"type":"fact","source":"marplace/properti.json","text":"Rightmove - Platform properti terbesar Inggris. Didirikan 2000. 1 juta+ listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Zoopla - Platform properti Inggris. Didirikan 2008. Fitur Zoopla Estimate nilai properti."}
+{"type":"fact","source":"marplace/properti.json","text":"OnTheMarket - Platform properti Inggris. Didirikan 2015. Pesaing Rightmove & Zoopla."}
+{"type":"fact","source":"marplace/properti.json","text":"ImmobilienScout24 - Platform properti terbesar Jerman. Didirikan 1998. Jutaan listing."}
+{"type":"fact","source":"marplace/properti.json","text":"Immonet - Platform properti Jerman. Didirikan 1996. Bagian dari ImmobilienScout24."}
+{"type":"fact","source":"marplace/properti.json","text":"Seloger - Platform properti terbesar Prancis. Didirikan 2000. Portal utama properti Prancis."}
+{"type":"fact","source":"marplace/properti.json","text":"Le Bon Coin - Marketplace Prancis dengan kategori properti. Didirikan 2006. Sangat populer."}
+{"type":"fact","source":"marplace/properti.json","text":"Fotocasa - Platform properti terbesar Spanyol. Didirikan 2002. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Idealista - Platform properti Spanyol. Didirikan 2000. Populer di kalangan ekspat."}
+{"type":"fact","source":"marplace/properti.json","text":"Immobiliare.it - Platform properti terbesar Italia. Didirikan 1999. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Casa.it - Platform properti Italia. Didirikan 2001. Fokus properti residensial."}
+{"type":"fact","source":"marplace/properti.json","text":"Funda - Platform properti terbesar Belanda. Didirikan 2001. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Jaap.nl - Platform properti Belanda. Didirikan 2005. Fokus properti komersial."}
+{"type":"fact","source":"marplace/properti.json","text":"Beike (KE Holdings) - Platform properti terbesar China. Didirikan 2018. AI & big data."}
+{"type":"fact","source":"marplace/properti.json","text":"Fang.com - Platform properti China. Didirikan 1999. Portal properti terkemuka."}
+{"type":"fact","source":"marplace/properti.json","text":"Anjuke - Platform properti China. Didirikan 2007. Aplikasi properti terpopuler."}
+{"type":"fact","source":"marplace/properti.json","text":"SUUMO - Platform properti terbesar Jepang. Didirikan 2003. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"AtHome - Platform properti Jepang. Didirikan 1997. Fokus properti residensial."}
+{"type":"fact","source":"marplace/properti.json","text":"Magicbricks - Platform properti terbesar India. Didirikan 2006. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"99acres - Platform properti India. Didirikan 2005. Portal properti terkemuka di India."}
+{"type":"fact","source":"marplace/properti.json","text":"NoBroker - Platform properti India tanpa agen. Didirikan 2014. Hemat biaya komisi."}
+{"type":"fact","source":"marplace/properti.json","text":"Property Finder - Platform properti terbesar Timur Tengah. Didirikan 2007. 50+ negara."}
+{"type":"fact","source":"marplace/properti.json","text":"Bayut - Platform properti UEA. Didirikan 2008. Pesaing Property Finder di Dubai."}
+{"type":"fact","source":"marplace/properti.json","text":"Zap Imóveis - Platform properti terbesar Brazil. Didirikan 2005. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Viva Real - Platform properti Brazil. Didirikan 2005. Portal properti terkemuka."}
+{"type":"fact","source":"marplace/properti.json","text":"Realestate.com.au - Platform properti terbesar Australia. Didirikan 1995. Acuan harga nasional."}
+{"type":"fact","source":"marplace/properti.json","text":"Domain - Platform properti Australia. Didirikan 2000. Pesaing Realestate.com.au."}
+{"type":"fact","source":"marplace/properti.json","text":"Realtor.ca - Platform properti terbesar Kanada. Didirikan 1995. Data resmi."}
+{"type":"fact","source":"marplace/properti.json","text":"Zoocasa - Platform properti Kanada. Didirikan 2008. Fokus teknologi real estate."}
+{"type":"fact","source":"marplace/properti.json","text":"PropertyGuru SG - Platform properti terbesar Singapura. Didirikan 2006."}
+{"type":"fact","source":"marplace/properti.json","text":"99.co SG - Platform properti Singapura. Didirikan 2014. Fokus transparansi."}
+{"type":"fact","source":"marplace/properti.json","text":"Rumah.com - Platform properti terbesar Indonesia. Didirikan 2007. 500K+ listing."}
+{"type":"fact","source":"marplace/properti.json","text":"99.co Indonesia - Platform properti dari Singapura. Didirikan 2014. Fokus transparansi."}
+{"type":"fact","source":"marplace/properti.json","text":"Lamudi Indonesia - Platform properti global. Didirikan 2013. Fokus UX modern."}
+{"type":"fact","source":"marplace/properti.json","text":"Rumah123 - Platform properti Indonesia. Didirikan 2011. Kalkulator KPR."}
+{"type":"fact","source":"marplace/properti.json","text":"PropertyGuru Indonesia - Platform properti Asia Tenggara. Didirikan 2006."}
+{"type":"fact","source":"marplace/properti.json","text":"RumahDijual - Platform properti Indonesia. Didirikan 2010. Fokus properti dijual."}
+{"type":"fact","source":"marplace/properti.json","text":"Property24 - Platform properti terbesar Afrika Selatan. Didirikan 2005."}
+{"type":"fact","source":"marplace/properti.json","text":"Private Property - Platform properti Afrika Selatan. Didirikan 2006."}
+{"type":"fact","source":"marplace/properti.json","text":"Idealista Portugal - Platform properti terbesar Portugal. Didirikan 2000."}
+{"type":"fact","source":"marplace/properti.json","text":"Imovirtual - Platform properti Portugal. Didirikan 2005. Fokus properti residensial."}
+{"type":"fact","source":"marplace/properti.json","text":"Hemnet - Platform properti terbesar Swedia. Didirikan 1998. Jutaan listing properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Booli - Platform properti Swedia. Didirikan 2010. Fokus transparansi harga."}
+{"type":"fact","source":"marplace/properti.json","text":"Finn Eiendom - Platform properti terbesar Norwegia. Didirikan 2000."}
+{"type":"fact","source":"marplace/properti.json","text":"Eiendomsmegler - Platform properti Norwegia. Didirikan 2003. Fokus agen properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Boligsiden - Platform properti terbesar Denmark. Didirikan 1999."}
+{"type":"fact","source":"marplace/properti.json","text":"Danbolig - Platform properti Denmark. Didirikan 2005. Fokus agen properti."}
+{"type":"fact","source":"marplace/properti.json","text":"Sahibinden Emlak - Platform properti terbesar Turki. Didirikan 2000."}
+{"type":"fact","source":"marplace/properti.json","text":"HepsiEmlak - Platform properti Turki. Didirikan 2005. Fokus properti komersial."}
+{"type":"fact","source":"marplace/properti.json","text":"Batdongsan - Platform properti terbesar Vietnam. Didirikan 2007."}
+{"type":"fact","source":"marplace/properti.json","text":"Homedy - Platform properti Vietnam. Didirikan 2015. Fokus properti modern."}
+{"type":"fact","source":"marplace/properti.json","text":"DDproperty - Platform properti terbesar Thailand. Didirikan 2008."}
+{"type":"fact","source":"marplace/properti.json","text":"Hipflat - Platform properti Thailand. Didirikan 2012. Fokus data transparan."}
+{"type":"fact","source":"marplace/properti.json","text":"PropertyGuru MY - Platform properti terbesar Malaysia. Didirikan 2006."}
+{"type":"fact","source":"marplace/properti.json","text":"iProperty - Platform properti Malaysia. Didirikan 2007. Fokus properti komersial."}
 {"type":"fact","source":"minuman/afrika.json","text":"Teh Maroko (Atay) — teh hijau manis dengan daun mint segar, dituang dari tempat tinggi sebagai bagian dari keramahan khas Maroko."}
 {"type":"fact","source":"minuman/afrika.json","text":"Kopi Mesir (Ahwa) — kopi kental khas Mesir yang diseduh dengan cangkir kecil, jadi bagian penting budaya kedai kopi lokal."}
 {"type":"fact","source":"minuman/afrika.json","text":"Karkade — teh dari bunga rosela merah khas Mesir dan Sudan, diminum panas atau dingin dengan rasa asam segar."}

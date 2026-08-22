@@ -1,0 +1,462 @@
+[
+  {
+    "id": "marplace-upwork",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Upwork",
+    "tags": [
+      "freelance",
+      "global",
+      "terbesar"
+    ],
+    "teks": "Upwork - Platform freelance global terbesar. Didirikan 2015. 60+ juta pengguna.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2015,
+      "country": "Global",
+      "products": [
+        "Programming",
+        "Desain",
+        "Writing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-fiverr",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Fiverr",
+    "tags": [
+      "freelance",
+      "global",
+      "gig"
+    ],
+    "teks": "Fiverr - Platform freelance global. Didirikan 2010. Micro-jobs mulai $5.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2010,
+      "country": "Global",
+      "products": [
+        "Desain",
+        "Video",
+        "Writing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-freelancer-com",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Freelancer.com",
+    "tags": [
+      "freelance",
+      "global",
+      "kompetisi"
+    ],
+    "teks": "Freelancer.com - Platform freelance global. Didirikan 2009. 60+ juta pengguna.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2009,
+      "country": "Global",
+      "products": [
+        "Programming",
+        "Desain",
+        "Engineering"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-toptal",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Toptal",
+    "tags": [
+      "freelance",
+      "global",
+      "premium"
+    ],
+    "teks": "Toptal - Platform freelance eksklusif. Didirikan 2010. Top 3% talent dunia.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2010,
+      "country": "Global",
+      "products": [
+        "Programming",
+        "Desain",
+        "Finance"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-guru-com",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Guru.com",
+    "tags": [
+      "freelance",
+      "global",
+      "tertua"
+    ],
+    "teks": "Guru.com - Platform freelance tertua. Didirikan 1998. Fokus profesional berpengalaman.",
+    "meta": {
+      "type": "freelance",
+      "founded": 1998,
+      "country": "Global",
+      "products": [
+        "Programming",
+        "Desain",
+        "Legal"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-peopleperhour",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "PeoplePerHour",
+    "tags": [
+      "freelance",
+      "global",
+      "eropa"
+    ],
+    "teks": "PeoplePerHour - Platform freelance Eropa. Didirikan 2007. Fokus UK & Eropa.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2007,
+      "country": "Global",
+      "products": [
+        "Programming",
+        "Desain",
+        "Writing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-99designs",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "99designs",
+    "tags": [
+      "freelance",
+      "global",
+      "desain"
+    ],
+    "teks": "99designs - Platform khusus desain grafis. Didirikan 2008. Kompetisi desain.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2008,
+      "country": "Global",
+      "products": [
+        "Desain Grafis",
+        "Logo",
+        "Web"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-sribulancer",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Sribulancer",
+    "tags": [
+      "freelance",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Sribulancer - Freelance terbesar Indonesia. Didirikan 2012. Fokus freelancer lokal.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2012,
+      "country": "Indonesia",
+      "products": [
+        "Desain",
+        "Programming",
+        "Writing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-fastwork",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Fastwork",
+    "tags": [
+      "freelance",
+      "asia-tenggara",
+      "cepat"
+    ],
+    "teks": "Fastwork - Freelance Asia Tenggara. Didirikan 2015. Transaksi cepat & mudah.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2015,
+      "country": "Thailand",
+      "products": [
+        "Desain",
+        "Programming",
+        "Marketing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-projects-co-id",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Projects.co.id",
+    "tags": [
+      "freelance",
+      "asia-tenggara",
+      "it"
+    ],
+    "teks": "Projects.co.id - Freelance IT Indonesia. Didirikan 2012. Fokus proyek teknologi.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2012,
+      "country": "Indonesia",
+      "products": [
+        "IT",
+        "Programming",
+        "Desain"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-malt",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Malt",
+    "tags": [
+      "freelance",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "Malt - Freelance terbesar Eropa. Didirikan 2013 di Prancis. Konsultan IT & marketing.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2013,
+      "country": "Prancis",
+      "products": [
+        "IT",
+        "Marketing",
+        "Design"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-twago",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Twago",
+    "tags": [
+      "freelance",
+      "eropa",
+      "jerman"
+    ],
+    "teks": "Twago - Freelance terbesar Jerman. Didirikan 2009. Profesional IT & engineering.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2009,
+      "country": "Jerman",
+      "products": [
+        "IT",
+        "Engineering",
+        "Design"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-comatch",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Comatch",
+    "tags": [
+      "freelance",
+      "eropa",
+      "konsultan"
+    ],
+    "teks": "Comatch - Freelance consulting Eropa. Didirikan 2016. Fokus konsultan bisnis.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2016,
+      "country": "Jerman",
+      "products": [
+        "Consulting",
+        "Business",
+        "Strategy"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-contra",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Contra",
+    "tags": [
+      "freelance",
+      "global",
+      "no-komisi"
+    ],
+    "teks": "Contra - Freelance modern tanpa komisi. Didirikan 2017. Favorit milenial & Gen Z.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2017,
+      "country": "AS",
+      "products": [
+        "Programming",
+        "Desain",
+        "Video"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-working-not-working",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Working Not Working",
+    "tags": [
+      "freelance",
+      "global",
+      "kreatif"
+    ],
+    "teks": "Working Not Working - Khusus kreatif & desainer. Didirikan 2012. Komunitas kreatif global.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2012,
+      "country": "AS",
+      "products": [
+        "Kreatif",
+        "Desain",
+        "Art"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-envato-studio",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Envato Studio",
+    "tags": [
+      "freelance",
+      "global",
+      "kreatif"
+    ],
+    "teks": "Envato Studio - Marketplace jasa kreatif. Didirikan 2006. Desain, video, audio.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2006,
+      "country": "AS",
+      "products": [
+        "Desain",
+        "Video",
+        "Audio"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zhaopin",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Zhaopin",
+    "tags": [
+      "freelance",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Zhaopin - Platform kerja & freelance China. Didirikan 1994. Tulang punggung pasar kerja China.",
+    "meta": {
+      "type": "freelance",
+      "founded": 1994,
+      "country": "China",
+      "products": [
+        "IT",
+        "Marketing",
+        "Finance"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zhuanzhuan",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Zhuanzhuan",
+    "tags": [
+      "freelance",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Zhuanzhuan - Platform freelance China. Didirikan 2015. Fokus freelancer muda China.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2015,
+      "country": "China",
+      "products": [
+        "Programming",
+        "Desain",
+        "Writing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-worknhire",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "WorknHire",
+    "tags": [
+      "freelance",
+      "asia-selatan",
+      "india"
+    ],
+    "teks": "WorknHire - Freelance India. Didirikan 2015. Fokus freelancer & startup India.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2015,
+      "country": "India",
+      "products": [
+        "Programming",
+        "Desain",
+        "Marketing"
+      ],
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-truelancer",
+    "kategori": "marplace",
+    "wilayah": "freelance",
+    "nama": "Truelancer",
+    "tags": [
+      "freelance",
+      "asia-selatan",
+      "india"
+    ],
+    "teks": "Truelancer - Freelance India. Didirikan 2014. Platform freelancer India terkemuka.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2014,
+      "country": "India",
+      "products": [
+        "Programming",
+        "Desain",
+        "Writing"
+      ],
+      "status": "aktif"
+    }
+  }
+]

@@ -1,0 +1,2600 @@
+[
+  {
+    "id": "marplace-cars-com",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Cars.com",
+    "tags": [
+      "automotive",
+      "global",
+      "terbesar"
+    ],
+    "teks": "Cars.com - Platform otomotif terbesar AS. Didirikan 1998. Review dealer & komparasi harga.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1998,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "100M",
+        "totalListings": "5M+",
+        "totalDealers": "15K+",
+        "marketShare": "15%",
+        "employees": "2K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-cargurus",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "CarGurus",
+    "tags": [
+      "automotive",
+      "global",
+      "ai"
+    ],
+    "teks": "CarGurus - Platform otomotif AI AS. Didirikan 2006. Analisis harga \"Great Deal\" atau \"Overpriced\".",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "60M",
+        "totalListings": "4M+",
+        "totalDealers": "10K+",
+        "marketShare": "8%",
+        "employees": "1.2K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autotrader",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autotrader",
+    "tags": [
+      "automotive",
+      "global",
+      "tertua"
+    ],
+    "teks": "Autotrader - Platform otomotif tertua AS. Didirikan 1997. Ikon industri otomotif AS.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1997,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "80M",
+        "totalListings": "6M+",
+        "totalDealers": "20K+",
+        "marketShare": "12%",
+        "employees": "1.5K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-truecar",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "TrueCar",
+    "tags": [
+      "automotive",
+      "global",
+      "transparan"
+    ],
+    "teks": "TrueCar - Platform otomotif AS. Didirikan 2005. Transparansi harga & dealer terpercaya.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "3M+",
+        "totalDealers": "8K+",
+        "marketShare": "5%",
+        "employees": "800"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-carvana",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Carvana",
+    "tags": [
+      "automotive",
+      "global",
+      "online"
+    ],
+    "teks": "Carvana - Platform jual-beli mobil online AS. Didirikan 2012. Beli mobil 100% online.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2012,
+      "country": "AS",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "5B USD",
+        "monthlyVisitors": "50M",
+        "totalListings": "2M+",
+        "totalDealers": "0",
+        "marketShare": "6%",
+        "employees": "3K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-vroom",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Vroom",
+    "tags": [
+      "automotive",
+      "global",
+      "online"
+    ],
+    "teks": "Vroom - Platform jual-beli mobil online AS. Didirikan 2013. Pesaing Carvana.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2013,
+      "country": "AS",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalDealers": "0",
+        "marketShare": "2%",
+        "employees": "1K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-edmunds",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Edmunds",
+    "tags": [
+      "automotive",
+      "global",
+      "review"
+    ],
+    "teks": "Edmunds - Platform otomotif AS. Didirikan 1966. Review & komparasi mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1966,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "2M+",
+        "totalDealers": "5K+",
+        "marketShare": "4%",
+        "employees": "600"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kelly-blue-book",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Kelly Blue Book",
+    "tags": [
+      "automotive",
+      "global",
+      "estimasi"
+    ],
+    "teks": "Kelly Blue Book - Platform otomotif AS. Didirikan 1926. Estimasi nilai mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1926,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "1M+",
+        "totalDealers": "3K+",
+        "marketShare": "3%",
+        "employees": "400"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autonation",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoNation",
+    "tags": [
+      "automotive",
+      "global",
+      "dealer"
+    ],
+    "teks": "AutoNation - Dealer mobil terbesar AS. Didirikan 1996. Platform online + dealer fisik.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1996,
+      "country": "AS",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "25B USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "500K+",
+        "totalDealers": "300+",
+        "marketShare": "10%",
+        "employees": "25K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shift",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Shift",
+    "tags": [
+      "automotive",
+      "global",
+      "online"
+    ],
+    "teks": "Shift - Platform jual-beli mobil online AS. Didirikan 2013. Fokus kemudahan transaksi.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2013,
+      "country": "AS",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalDealers": "0",
+        "marketShare": "1%",
+        "employees": "500"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autotrader-uk",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoTrader UK",
+    "tags": [
+      "automotive",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "AutoTrader UK - Platform otomotif terbesar Inggris. Didirikan 1977. Dari majalah ke digital.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1977,
+      "country": "Inggris",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "1B USD",
+        "monthlyVisitors": "60M",
+        "totalListings": "4M+",
+        "totalDealers": "12K+",
+        "marketShare": "25%",
+        "employees": "1K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-pistonheads",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "PistonHeads",
+    "tags": [
+      "automotive",
+      "eropa",
+      "komunitas"
+    ],
+    "teks": "PistonHeads - Platform otomotif komunitas Inggris. Didirikan 1999. Forum & review mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Inggris",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalDealers": "2K+",
+        "marketShare": "5%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-cargurus-uk",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "CarGurus UK",
+    "tags": [
+      "automotive",
+      "eropa",
+      "ai"
+    ],
+    "teks": "CarGurus UK - Versi CarGurus di Inggris. Didirikan 2015. AI analisis harga.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2015,
+      "country": "Inggris",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "2M+",
+        "totalDealers": "5K+",
+        "marketShare": "10%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-motors-co-uk",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Motors.co.uk",
+    "tags": [
+      "automotive",
+      "eropa",
+      "premium"
+    ],
+    "teks": "Motors.co.uk - Platform otomotif Inggris. Didirikan 2008. Fokus dealer premium.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2008,
+      "country": "Inggris",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1.5M+",
+        "totalDealers": "3K+",
+        "marketShare": "8%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mobile-de",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Mobile.de",
+    "tags": [
+      "automotive",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "Mobile.de - Platform otomotif terbesar Jerman. Didirikan 1995. Acuan harga mobil Jerman.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1995,
+      "country": "Jerman",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "50M",
+        "totalListings": "3M+",
+        "totalDealers": "10K+",
+        "marketShare": "30%",
+        "employees": "800"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoScout24",
+    "tags": [
+      "automotive",
+      "eropa",
+      "europa"
+    ],
+    "teks": "AutoScout24 - Platform otomotif Eropa. Didirikan 1998. Beroperasi di 11 negara Eropa.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1998,
+      "country": "Jerman",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "3M+",
+        "totalDealers": "8K+",
+        "marketShare": "20%",
+        "employees": "600"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24-otomotif",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autoscout24",
+    "tags": [
+      "automotive",
+      "eropa",
+      "jerman"
+    ],
+    "teks": "Autoscout24 - Platform otomotif Jerman. Didirikan 1998. Pesaing Mobile.de.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1998,
+      "country": "Jerman",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "2M+",
+        "totalDealers": "5K+",
+        "marketShare": "15%",
+        "employees": "400"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bauer-cars",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Bauer Cars",
+    "tags": [
+      "automotive",
+      "eropa",
+      "premium"
+    ],
+    "teks": "Bauer Cars - Platform otomotif Jerman. Didirikan 2005. Fokus mobil premium.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Jerman",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "5%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-la-centrale",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "La Centrale",
+    "tags": [
+      "automotive",
+      "eropa",
+      "prancis"
+    ],
+    "teks": "La Centrale - Platform otomotif terbesar Prancis. Didirikan 1999. Estimasi harga & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Prancis",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1.5M+",
+        "totalDealers": "4K+",
+        "marketShare": "25%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-leboncoin-auto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Leboncoin Auto",
+    "tags": [
+      "automotive",
+      "eropa",
+      "prancis"
+    ],
+    "teks": "Leboncoin Auto - Kategori otomotif di Le Bon Coin. Didirikan 2006. Sangat populer di Prancis.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Prancis",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24-france",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoScout24 France",
+    "tags": [
+      "automotive",
+      "eropa",
+      "prancis"
+    ],
+    "teks": "AutoScout24 France - Versi AutoScout24 di Prancis. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Prancis",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "2K+",
+        "marketShare": "10%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autohome",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autohome",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "terbesar"
+    ],
+    "teks": "Autohome - Platform otomotif terbesar China. Didirikan 2005. Review & komparasi mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "China",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "80M",
+        "totalListings": "5M+",
+        "totalDealers": "20K+",
+        "marketShare": "35%",
+        "employees": "2K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bitauto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Bitauto",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Bitauto - Platform otomotif China. Didirikan 2000. Portal otomotif terkemuka.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "China",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "2M+",
+        "totalDealers": "8K+",
+        "marketShare": "15%",
+        "employees": "800"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-che168",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Che168",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Che168 - Platform otomotif China. Didirikan 2005. Fokus mobil bekas & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "China",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "3K+",
+        "marketShare": "10%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-dongchedi",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Dongchedi",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "video"
+    ],
+    "teks": "Dongchedi - Platform otomotif China. Didirikan 2017. Fokus konten video & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2017,
+      "country": "China",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalDealers": "2K+",
+        "marketShare": "8%",
+        "employees": "500"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-goo-net",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Goo-net",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Goo-net - Platform otomotif terbesar Jepang. Didirikan 1997. Portal mobil Jepang.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1997,
+      "country": "Jepang",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "600M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "2M+",
+        "totalDealers": "10K+",
+        "marketShare": "30%",
+        "employees": "500"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-car-sensor",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Car Sensor",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Car Sensor - Platform otomotif Jepang. Didirikan 2000. Fokus mobil bekas.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Jepang",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "5K+",
+        "marketShare": "15%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-yahoo-car",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Yahoo! Car",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Yahoo! Car - Platform otomotif Jepang. Didirikan 2005. Bagian dari Yahoo! Japan.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Jepang",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "3K+",
+        "marketShare": "10%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-encar",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Encar",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "korea"
+    ],
+    "teks": "Encar - Platform otomotif terbesar Korea. Didirikan 2000. Portal mobil Korea.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Korea Selatan",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1.5M+",
+        "totalDealers": "5K+",
+        "marketShare": "35%",
+        "employees": "400"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bobae-dream",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Bobae Dream",
+    "tags": [
+      "automotive",
+      "asia-timur",
+      "korea"
+    ],
+    "teks": "Bobae Dream - Platform otomotif Korea. Didirikan 2005. Fokus komunitas & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Korea Selatan",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "10%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-cardekho",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "CarDekho",
+    "tags": [
+      "automotive",
+      "asia-selatan",
+      "terbesar"
+    ],
+    "teks": "CarDekho - Platform otomotif terbesar India. Didirikan 2008. Video test drive & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2008,
+      "country": "India",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "2M+",
+        "totalDealers": "8K+",
+        "marketShare": "30%",
+        "employees": "600"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-carwale",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "CarWale",
+    "tags": [
+      "automotive",
+      "asia-selatan",
+      "india"
+    ],
+    "teks": "CarWale - Platform otomotif India. Didirikan 2005. Komunitas & forum mobil India.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "India",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "4K+",
+        "marketShare": "15%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-olx-autos",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "OLX Autos",
+    "tags": [
+      "automotive",
+      "asia-selatan",
+      "olx"
+    ],
+    "teks": "OLX Autos - Kategori otomotif OLX India. Didirikan 2006. Jual-beli mobil bekas.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "India",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "10%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-droom",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Droom",
+    "tags": [
+      "automotive",
+      "asia-selatan",
+      "ai"
+    ],
+    "teks": "Droom - Platform otomotif India. Didirikan 2014. Fokus transparansi & AI.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2014,
+      "country": "India",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "8%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-auto-ru",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Auto.ru",
+    "tags": [
+      "automotive",
+      "eropa",
+      "rusia"
+    ],
+    "teks": "Auto.ru - Platform otomotif terbesar Rusia. Didirikan 1999. Portal mobil Rusia.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Rusia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1.5M+",
+        "totalDealers": "5K+",
+        "marketShare": "30%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-drom-ru",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Drom.ru",
+    "tags": [
+      "automotive",
+      "eropa",
+      "rusia"
+    ],
+    "teks": "Drom.ru - Platform otomotif Rusia. Didirikan 2001. Fokus mobil bekas & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2001,
+      "country": "Rusia",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "3K+",
+        "marketShare": "15%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-sahibinden",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Sahibinden",
+    "tags": [
+      "automotive",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Sahibinden - Platform marketplace terbesar Turki dengan otomotif. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Turki",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "2M+",
+        "totalDealers": "6K+",
+        "marketShare": "35%",
+        "employees": "500"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-arabam",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Arabam",
+    "tags": [
+      "automotive",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Arabam - Platform otomotif Turki. Didirikan 2001. Fokus mobil bekas & komunitas.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2001,
+      "country": "Turki",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-dubizzle",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Dubizzle",
+    "tags": [
+      "automotive",
+      "asia-barat",
+      "uea"
+    ],
+    "teks": "Dubizzle - Marketplace UEA dengan otomotif. Didirikan 2005. Populer di kalangan ekspat.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "UEA",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "3K+",
+        "marketShare": "30%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-yallamotor",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "YallaMotor",
+    "tags": [
+      "automotive",
+      "asia-barat",
+      "uea"
+    ],
+    "teks": "YallaMotor - Platform otomotif UEA. Didirikan 2014. Fokus mobil baru & bekas.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2014,
+      "country": "UEA",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-webmotors",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Webmotors",
+    "tags": [
+      "automotive",
+      "amerika-selatan",
+      "terbesar"
+    ],
+    "teks": "Webmotors - Platform otomotif terbesar Brazil. Didirikan 1995. Acuan harga mobil Brazil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1995,
+      "country": "Brazil",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1.5M+",
+        "totalDealers": "5K+",
+        "marketShare": "35%",
+        "employees": "400"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-icarros",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "iCarros",
+    "tags": [
+      "automotive",
+      "amerika-selatan",
+      "brazil"
+    ],
+    "teks": "iCarros - Platform otomotif Brazil. Didirikan 2006. Portal otomotif terkemuka.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Brazil",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-carsales",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Carsales",
+    "tags": [
+      "automotive",
+      "osenian",
+      "terbesar"
+    ],
+    "teks": "Carsales - Platform otomotif terbesar Australia. Didirikan 1997. Acuan harga mobil Australia.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1997,
+      "country": "Australia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1.5M+",
+        "totalDealers": "4K+",
+        "marketShare": "35%",
+        "employees": "500"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-drive",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Drive",
+    "tags": [
+      "automotive",
+      "osenian",
+      "australia"
+    ],
+    "teks": "Drive - Platform otomotif Australia. Didirikan 1997. Review & komparasi mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1997,
+      "country": "Australia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autotrader-sa",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoTrader SA",
+    "tags": [
+      "automotive",
+      "afrika",
+      "terbesar"
+    ],
+    "teks": "AutoTrader SA - Platform otomotif terbesar Afrika Selatan. Didirikan 1998.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1998,
+      "country": "Afrika Selatan",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "30%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-cars-co-za",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Cars.co.za",
+    "tags": [
+      "automotive",
+      "afrika",
+      "south-africa"
+    ],
+    "teks": "Cars.co.za - Platform otomotif Afrika Selatan. Didirikan 2006. Fokus dealer & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Afrika Selatan",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autocosmos",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autocosmos",
+    "tags": [
+      "automotive",
+      "amerika-utara",
+      "meksiko"
+    ],
+    "teks": "Autocosmos - Platform otomotif terbesar Meksiko. Didirikan 1999. Review & komparasi.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Meksiko",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "3K+",
+        "marketShare": "30%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kavak",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Kavak",
+    "tags": [
+      "automotive",
+      "amerika-utara",
+      "startup"
+    ],
+    "teks": "Kavak - Platform jual-beli mobil online Meksiko. Didirikan 2016. Startup unicorn Meksiko.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2016,
+      "country": "Meksiko",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "500K+",
+        "totalDealers": "0",
+        "marketShare": "20%",
+        "employees": "5K"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mobil123",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Mobil123",
+    "tags": [
+      "automotive",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Mobil123 - Platform otomotif terbesar Indonesia. Didirikan 2007. Listing mobil baru, bekas, dan motor.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2007,
+      "country": "Indonesia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas",
+        "Motor"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "5K+",
+        "marketShare": "35%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-carmudi",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Carmudi",
+    "tags": [
+      "automotive",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Carmudi - Platform otomotif global di Indonesia. Didirikan 2013. Transparansi transaksi.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2013,
+      "country": "Indonesia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-olx-indonesia",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "OLX Indonesia",
+    "tags": [
+      "automotive",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "OLX Indonesia - Marketplace otomotif. Didirikan 2006. Jual-beli mobil bekas.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Indonesia",
+      "products": [
+        "Mobil Bekas",
+        "Motor"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "3K+",
+        "marketShare": "20%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-coches-net",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Coches.net",
+    "tags": [
+      "automotive",
+      "eropa",
+      "spanyol"
+    ],
+    "teks": "Coches.net - Platform otomotif terbesar Spanyol. Didirikan 1999. Portal mobil Spanyol.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Spanyol",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "4K+",
+        "marketShare": "30%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24-spain",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoScout24 Spain",
+    "tags": [
+      "automotive",
+      "eropa",
+      "spanyol"
+    ],
+    "teks": "AutoScout24 Spain - Versi AutoScout24 di Spanyol. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Spanyol",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24-italia",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autoscout24 Italia",
+    "tags": [
+      "automotive",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Autoscout24 Italia - Versi AutoScout24 di Italia. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Italia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "600K+",
+        "totalDealers": "3K+",
+        "marketShare": "25%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-quattroruote",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Quattroruote",
+    "tags": [
+      "automotive",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Quattroruote - Platform otomotif Italia. Didirikan 1995. Majalah & portal mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1995,
+      "country": "Italia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1K+",
+        "marketShare": "10%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autotrader-canada",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoTrader Canada",
+    "tags": [
+      "automotive",
+      "amerika-utara",
+      "kanada"
+    ],
+    "teks": "AutoTrader Canada - Platform otomotif terbesar Kanada. Didirikan 2003.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2003,
+      "country": "Kanada",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "4K+",
+        "marketShare": "30%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kijiji-autos",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Kijiji Autos",
+    "tags": [
+      "automotive",
+      "amerika-utara",
+      "kanada"
+    ],
+    "teks": "Kijiji Autos - Marketplace otomotif Kanada. Didirikan 2005. Bagian dari eBay Classifieds.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Kanada",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "2K+",
+        "marketShare": "20%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autotrack",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autotrack",
+    "tags": [
+      "automotive",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Autotrack - Platform otomotif terbesar Belanda. Didirikan 1997.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1997,
+      "country": "Belanda",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "3K+",
+        "marketShare": "30%",
+        "employees": "200"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-gaspedaal",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Gaspedaal",
+    "tags": [
+      "automotive",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Gaspedaal - Aggregator otomotif Belanda. Didirikan 2005. Bandingkan harga mobil.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Belanda",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "15%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-viabovag",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Viabovag",
+    "tags": [
+      "automotive",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Viabovag - Platform otomotif Belanda. Didirikan 2000. Fokus dealer.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Belanda",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "60M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "400K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "10%",
+        "employees": "80"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24-switzerland",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "AutoScout24 Switzerland",
+    "tags": [
+      "automotive",
+      "eropa",
+      "swiss"
+    ],
+    "teks": "AutoScout24 Switzerland - Versi AutoScout24 di Swiss. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Swiss",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "120M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "600K+",
+        "totalDealers": "2K+",
+        "marketShare": "30%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tcs",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "TCS",
+    "tags": [
+      "automotive",
+      "eropa",
+      "swiss"
+    ],
+    "teks": "TCS - Platform otomotif Swiss. Didirikan 1920. Fokus komunitas & review.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1920,
+      "country": "Swiss",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1K+",
+        "marketShare": "10%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autoscout24-austria",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autoscout24 Austria",
+    "tags": [
+      "automotive",
+      "eropa",
+      "austria"
+    ],
+    "teks": "Autoscout24 Austria - Versi AutoScout24 di Austria. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Austria",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "400K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "25%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-otomoto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Otomoto",
+    "tags": [
+      "automotive",
+      "eropa",
+      "polandia"
+    ],
+    "teks": "Otomoto - Platform otomotif terbesar Polandia. Didirikan 2006.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Polandia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "800K+",
+        "totalDealers": "3K+",
+        "marketShare": "30%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-gratka-motoryzacyjne",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Gratka Motoryzacyjne",
+    "tags": [
+      "automotive",
+      "eropa",
+      "polandia"
+    ],
+    "teks": "Gratka Motoryzacyjne - Platform otomotif Polandia. Didirikan 2005.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Polandia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "400K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "15%",
+        "employees": "80"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-sauto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Sauto",
+    "tags": [
+      "automotive",
+      "eropa",
+      "ceko"
+    ],
+    "teks": "Sauto - Platform otomotif terbesar Ceko. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Ceko",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "60M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "400K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "25%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tipcars",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "TipCars",
+    "tags": [
+      "automotive",
+      "eropa",
+      "ceko"
+    ],
+    "teks": "TipCars - Platform otomotif Ceko. Didirikan 2005.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Ceko",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "70"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-blocket",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Blocket",
+    "tags": [
+      "automotive",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Blocket - Platform marketplace terbesar Swedia dengan otomotif. Didirikan 1996.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1996,
+      "country": "Swedia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "600K+",
+        "totalDealers": "2K+",
+        "marketShare": "30%",
+        "employees": "150"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bytbil",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Bytbil",
+    "tags": [
+      "automotive",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Bytbil - Platform otomotif Swedia. Didirikan 2000. Fokus mobil bekas.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Swedia",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "60"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-finn-no",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Finn.no",
+    "tags": [
+      "automotive",
+      "eropa",
+      "norwegia"
+    ],
+    "teks": "Finn.no - Platform marketplace terbesar Norwegia dengan otomotif. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Norwegia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "400K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "30%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-nettbil",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Nettbil",
+    "tags": [
+      "automotive",
+      "eropa",
+      "norwegia"
+    ],
+    "teks": "Nettbil - Platform otomotif Norwegia. Didirikan 2015. Fokus mobil bekas online.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2015,
+      "country": "Norwegia",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "150K+",
+        "totalDealers": "500+",
+        "marketShare": "10%",
+        "employees": "40"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bilbasen",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Bilbasen",
+    "tags": [
+      "automotive",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "Bilbasen - Platform otomotif terbesar Denmark. Didirikan 1999.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Denmark",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "70M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "400K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "30%",
+        "employees": "90"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-dba",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "DBA",
+    "tags": [
+      "automotive",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "DBA - Platform marketplace Denmark dengan otomotif. Didirikan 1995.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1995,
+      "country": "Denmark",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "60"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-nettiauto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Nettiauto",
+    "tags": [
+      "automotive",
+      "eropa",
+      "finlandia"
+    ],
+    "teks": "Nettiauto - Platform otomotif terbesar Finlandia. Didirikan 2001.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2001,
+      "country": "Finlandia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "60M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "300K+",
+        "totalDealers": "1.2K+",
+        "marketShare": "30%",
+        "employees": "80"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autotalli",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autotalli",
+    "tags": [
+      "automotive",
+      "eropa",
+      "finlandia"
+    ],
+    "teks": "Autotalli - Platform otomotif Finlandia. Didirikan 2005.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Finlandia",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "150K+",
+        "totalDealers": "500+",
+        "marketShare": "15%",
+        "employees": "40"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercado-libre-autos",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Mercado Libre Autos",
+    "tags": [
+      "automotive",
+      "amerika-selatan",
+      "argentina"
+    ],
+    "teks": "Mercado Libre Autos - Kategori otomotif Mercado Libre Argentina. Didirikan 1999.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Argentina",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalDealers": "3K+",
+        "marketShare": "40%",
+        "employees": "300"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-olx-autos-argentina",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "OLX Autos Argentina",
+    "tags": [
+      "automotive",
+      "amerika-selatan",
+      "argentina"
+    ],
+    "teks": "OLX Autos Argentina - Kategori otomotif OLX Argentina. Didirikan 2006.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Argentina",
+      "products": [
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "100"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-standvirtual",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Standvirtual",
+    "tags": [
+      "automotive",
+      "eropa",
+      "portugal"
+    ],
+    "teks": "Standvirtual - Platform otomotif terbesar Portugal. Didirikan 2000.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2000,
+      "country": "Portugal",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "30%",
+        "employees": "80"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-custojusto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "CustoJusto",
+    "tags": [
+      "automotive",
+      "eropa",
+      "portugal"
+    ],
+    "teks": "CustoJusto - Platform marketplace Portugal dengan otomotif. Didirikan 2005.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Portugal",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalDealers": "1K+",
+        "marketShare": "15%",
+        "employees": "50"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-car-gr",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Car.gr",
+    "tags": [
+      "automotive",
+      "eropa",
+      "yunani"
+    ],
+    "teks": "Car.gr - Platform otomotif terbesar Yunani. Didirikan 2001.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2001,
+      "country": "Yunani",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalDealers": "1K+",
+        "marketShare": "30%",
+        "employees": "50"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autopark",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autopark",
+    "tags": [
+      "automotive",
+      "eropa",
+      "yunani"
+    ],
+    "teks": "Autopark - Platform otomotif Yunani. Didirikan 2005.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2005,
+      "country": "Yunani",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "100K+",
+        "totalDealers": "500+",
+        "marketShare": "15%",
+        "employees": "30"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-autovit-ro",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Autovit.ro",
+    "tags": [
+      "automotive",
+      "eropa",
+      "romania"
+    ],
+    "teks": "Autovit.ro - Platform otomotif terbesar Romania. Didirikan 2001.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2001,
+      "country": "Romania",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "25M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalDealers": "1K+",
+        "marketShare": "30%",
+        "employees": "50"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-masini-ro",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Masini.ro",
+    "tags": [
+      "automotive",
+      "eropa",
+      "romania"
+    ],
+    "teks": "Masini.ro - Platform otomotif Romania. Didirikan 2003.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2003,
+      "country": "Romania",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "100K+",
+        "totalDealers": "500+",
+        "marketShare": "15%",
+        "employees": "30"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-trademe-motors",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "TradeMe Motors",
+    "tags": [
+      "automotive",
+      "osenian",
+      "selandia-baru"
+    ],
+    "teks": "TradeMe Motors - Platform otomotif terbesar Selandia Baru. Didirikan 1999.",
+    "meta": {
+      "type": "automotive",
+      "founded": 1999,
+      "country": "Selandia Baru",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalDealers": "1.5K+",
+        "marketShare": "35%",
+        "employees": "80"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-haraj",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Haraj",
+    "tags": [
+      "automotive",
+      "asia-barat",
+      "saudi"
+    ],
+    "teks": "Haraj - Platform marketplace terbesar Arab Saudi dengan otomotif. Didirikan 2006.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Arab Saudi",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalDealers": "2K+",
+        "marketShare": "35%",
+        "employees": "120"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-hatla2ee",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Hatla2ee",
+    "tags": [
+      "automotive",
+      "afrika",
+      "mesir"
+    ],
+    "teks": "Hatla2ee - Platform otomotif terbesar Mesir. Didirikan 2010.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2010,
+      "country": "Mesir",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "150K+",
+        "totalDealers": "500+",
+        "marketShare": "30%",
+        "employees": "40"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-avito-auto",
+    "kategori": "marplace",
+    "wilayah": "otomotif",
+    "nama": "Avito Auto",
+    "tags": [
+      "automotive",
+      "afrika",
+      "maroko"
+    ],
+    "teks": "Avito Auto - Platform otomotif terbesar Maroko. Didirikan 2006.",
+    "meta": {
+      "type": "automotive",
+      "founded": 2006,
+      "country": "Maroko",
+      "products": [
+        "Mobil Baru",
+        "Mobil Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "100K+",
+        "totalDealers": "500+",
+        "marketShare": "25%",
+        "employees": "30"
+      },
+      "status": "aktif"
+    }
+  }
+]
