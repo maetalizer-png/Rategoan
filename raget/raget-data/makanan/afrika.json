@@ -1,0 +1,116 @@
+[
+  {
+    "id": "makanan-jollof-rice",
+    "kategori": "makanan",
+    "wilayah": "afrika",
+    "nama": "Jollof Rice",
+    "tags": [
+      "jollof rice",
+      "nigeria"
+    ],
+    "teks": "Jollof Rice — nasi berbumbu tomat khas Afrika Barat, populer di Nigeria dan Ghana.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "makanan utama",
+      "tags": [
+        "jollof rice",
+        "nigeria"
+      ]
+    }
+  },
+  {
+    "id": "makanan-couscous",
+    "kategori": "makanan",
+    "wilayah": "afrika",
+    "nama": "Couscous",
+    "tags": [
+      "couscous",
+      "maroko"
+    ],
+    "teks": "Couscous — butiran semolina kukus khas Maroko, biasa disajikan dengan sayur dan daging.",
+    "meta": {
+      "country": "Maroko",
+      "type": "makanan utama",
+      "tags": [
+        "couscous",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "makanan-tagine",
+    "kategori": "makanan",
+    "wilayah": "afrika",
+    "nama": "Tagine",
+    "tags": [
+      "tagine",
+      "maroko"
+    ],
+    "teks": "Tagine — masakan rebusan daging dan sayur khas Maroko, dimasak dalam panci tanah liat kerucut.",
+    "meta": {
+      "country": "Maroko",
+      "type": "makanan utama",
+      "tags": [
+        "tagine",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "makanan-injera",
+    "kategori": "makanan",
+    "wilayah": "afrika",
+    "nama": "Injera",
+    "tags": [
+      "injera",
+      "etiopia"
+    ],
+    "teks": "Injera — roti pipih fermentasi khas Etiopia, digunakan sebagai alas dan sendok makan.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "roti",
+      "tags": [
+        "injera",
+        "etiopia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-bunny-chow",
+    "kategori": "makanan",
+    "wilayah": "afrika",
+    "nama": "Bunny Chow",
+    "tags": [
+      "bunny chow",
+      "afrika selatan"
+    ],
+    "teks": "Bunny Chow — roti diisi kari, hidangan jalanan khas Afrika Selatan.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "makanan utama",
+      "tags": [
+        "bunny chow",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "makanan-ful-medames",
+    "kategori": "makanan",
+    "wilayah": "afrika",
+    "nama": "Ful Medames",
+    "tags": [
+      "ful medames",
+      "mesir"
+    ],
+    "teks": "Ful Medames — kacang fava rebus berbumbu, sarapan populer di Mesir.",
+    "meta": {
+      "country": "Mesir",
+      "type": "sarapan",
+      "tags": [
+        "ful medames",
+        "mesir"
+      ]
+    }
+  }
+]

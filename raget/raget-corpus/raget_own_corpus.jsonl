@@ -1314,6 +1314,48 @@
 {"type":"fact","source":"kuliner/timur-tengah.json","text":"Lokum adalah kue/penutup khas Turki."}
 {"type":"fact","source":"kuliner/timur-tengah.json","text":"Trivia soal Lokum: Dikenal luas di dunia Barat dengan nama 'Turkish Delight', sudah ada sejak era Kesultanan Utsmaniyah."}
 {"type":"fact","source":"kuliner/timur-tengah.json","text":"Lokum memakai bahan utama: pati dan gula, air mawar atau buah, kacang cincang (opsional)."}
+{"type":"fact","source":"makanan/afrika.json","text":"Jollof Rice — nasi berbumbu tomat khas Afrika Barat, populer di Nigeria dan Ghana."}
+{"type":"fact","source":"makanan/afrika.json","text":"Couscous — butiran semolina kukus khas Maroko, biasa disajikan dengan sayur dan daging."}
+{"type":"fact","source":"makanan/afrika.json","text":"Tagine — masakan rebusan daging dan sayur khas Maroko, dimasak dalam panci tanah liat kerucut."}
+{"type":"fact","source":"makanan/afrika.json","text":"Injera — roti pipih fermentasi khas Etiopia, digunakan sebagai alas dan sendok makan."}
+{"type":"fact","source":"makanan/afrika.json","text":"Bunny Chow — roti diisi kari, hidangan jalanan khas Afrika Selatan."}
+{"type":"fact","source":"makanan/afrika.json","text":"Ful Medames — kacang fava rebus berbumbu, sarapan populer di Mesir."}
+{"type":"fact","source":"makanan/amerika.json","text":"Burger — roti isi daging panggang khas Amerika Serikat, makanan cepat saji populer dunia."}
+{"type":"fact","source":"makanan/amerika.json","text":"Hot Dog — sosis dalam roti panjang khas Amerika Serikat, biasa dengan saus mustard dan tomat."}
+{"type":"fact","source":"makanan/amerika.json","text":"Taco — makanan khas Meksiko berupa tortilla dilipat isi daging, sayur, dan salsa."}
+{"type":"fact","source":"makanan/amerika.json","text":"Guacamole — saus alpukat khas Meksiko, biasa disantap dengan keripik tortilla."}
+{"type":"fact","source":"makanan/amerika.json","text":"Feijoada — rebusan kacang hitam dan daging babi, hidangan nasional Brasil."}
+{"type":"fact","source":"makanan/amerika.json","text":"Empanada — pastri isi daging atau sayur khas Amerika Latin, populer di Argentina."}
+{"type":"fact","source":"makanan/amerika.json","text":"Ceviche — hidangan ikan mentah yang dimatangkan dengan air jeruk nipis, khas Peru."}
+{"type":"fact","source":"makanan/amerika.json","text":"Poutine — kentang goreng dengan keju dan saus gravy, hidangan khas Kanada."}
+{"type":"fact","source":"makanan/asia.json","text":"Nasi Goreng — makanan khas Indonesia berupa nasi digoreng dengan bumbu rempah, telur, dan lauk."}
+{"type":"fact","source":"makanan/asia.json","text":"Rendang — makanan khas Sumatera Barat, Indonesia, daging dimasak lama dengan santan dan rempah hingga kering."}
+{"type":"fact","source":"makanan/asia.json","text":"Sate — makanan khas Indonesia berupa daging tusuk dibakar dengan bumbu kacang atau kecap."}
+{"type":"fact","source":"makanan/asia.json","text":"Kimchi — makanan khas Korea berupa sayur (biasanya sawi) yang difermentasi dengan cabai dan bumbu."}
+{"type":"fact","source":"makanan/asia.json","text":"Sushi — makanan khas Jepang berupa nasi cuka dipadukan ikan mentah atau bahan laut lainnya."}
+{"type":"fact","source":"makanan/asia.json","text":"Ramen — mi kuah khas Jepang dengan kaldu kaya rasa dan berbagai topping."}
+{"type":"fact","source":"makanan/asia.json","text":"Pad Thai — mi goreng khas Thailand dengan bumbu asam manis, telur, dan kacang tanah."}
+{"type":"fact","source":"makanan/asia.json","text":"Tom Yum — sup asam pedas khas Thailand dengan udang atau ayam dan serai."}
+{"type":"fact","source":"makanan/asia.json","text":"Pho — sup mi khas Vietnam dengan kaldu daging sapi dan rempah segar."}
+{"type":"fact","source":"makanan/asia.json","text":"Peking Duck — bebek panggang khas Beijing, China, kulitnya renyah disajikan dengan pancake tipis."}
+{"type":"fact","source":"makanan/asia.json","text":"Dim Sum — hidangan kukus atau goreng porsi kecil khas Kanton, China, biasa disantap bersama teh."}
+{"type":"fact","source":"makanan/asia.json","text":"Biryani — nasi berbumbu rempah khas India dipadukan daging atau sayuran."}
+{"type":"fact","source":"makanan/asia.json","text":"Curry — hidangan berkuah rempah khas India dengan daging, sayur, atau lentil."}
+{"type":"fact","source":"makanan/eropa.json","text":"Pizza — makanan khas Italia berupa roti pipih dipanggang dengan saus tomat, keju, dan topping."}
+{"type":"fact","source":"makanan/eropa.json","text":"Pasta — makanan khas Italia berbahan tepung, disajikan dengan berbagai saus seperti bolognese."}
+{"type":"fact","source":"makanan/eropa.json","text":"Paella — nasi khas Spanyol dimasak dengan safron, seafood, atau daging."}
+{"type":"fact","source":"makanan/eropa.json","text":"Croissant — roti berlapis khas Prancis berbentuk bulan sabit, renyah dan berlapis mentega."}
+{"type":"fact","source":"makanan/eropa.json","text":"Bratwurst — sosis panggang khas Jerman, biasa disajikan dengan mustard dan roti."}
+{"type":"fact","source":"makanan/eropa.json","text":"Fish and Chips — ikan goreng tepung dengan kentang goreng, hidangan khas Inggris."}
+{"type":"fact","source":"makanan/eropa.json","text":"Borscht — sup bit merah khas Eropa Timur, populer di Rusia dan Ukraina."}
+{"type":"fact","source":"makanan/eropa.json","text":"Pierogi — pangsit isi kentang, keju, atau daging khas Polandia."}
+{"type":"fact","source":"makanan/eropa.json","text":"Moussaka — hidangan panggang berlapis terong dan daging cincang, khas Yunani."}
+{"type":"fact","source":"makanan/eropa.json","text":"Fondue — keju leleh disajikan bersama roti celup, hidangan khas Swiss."}
+{"type":"fact","source":"makanan/osenia.json","text":"Meat Pie — pai isi daging cincang khas Australia, makanan jalanan populer."}
+{"type":"fact","source":"makanan/osenia.json","text":"Vegemite — selai fermentasi ragi hitam khas Australia, biasa dioles di roti panggang."}
+{"type":"fact","source":"makanan/osenia.json","text":"Pavlova — kue meringue dengan krim dan buah, hidangan penutup khas Australia dan Selandia Baru."}
+{"type":"fact","source":"makanan/osenia.json","text":"Hangi — makanan dimasak dalam lubang tanah panas, tradisi kuliner suku Maori Selandia Baru."}
+{"type":"fact","source":"makanan/osenia.json","text":"Poke — salad ikan mentah dengan nasi dan sayuran, populer di kawasan Pasifik."}
 {"type":"fact","source":"minuman/afrika.json","text":"Teh Maroko (Atay) — teh hijau manis dengan daun mint segar, dituang dari tempat tinggi sebagai bagian dari keramahan khas Maroko."}
 {"type":"fact","source":"minuman/afrika.json","text":"Kopi Mesir (Ahwa) — kopi kental khas Mesir yang diseduh dengan cangkir kecil, jadi bagian penting budaya kedai kopi lokal."}
 {"type":"fact","source":"minuman/afrika.json","text":"Karkade — teh dari bunga rosela merah khas Mesir dan Sudan, diminum panas atau dingin dengan rasa asam segar."}

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "makanan-pizza",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Pizza",
+    "tags": [
+      "pizza",
+      "italia"
+    ],
+    "teks": "Pizza — makanan khas Italia berupa roti pipih dipanggang dengan saus tomat, keju, dan topping.",
+    "meta": {
+      "country": "Italia",
+      "type": "makanan utama",
+      "tags": [
+        "pizza",
+        "italia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-pasta",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Pasta",
+    "tags": [
+      "pasta",
+      "italia"
+    ],
+    "teks": "Pasta — makanan khas Italia berbahan tepung, disajikan dengan berbagai saus seperti bolognese.",
+    "meta": {
+      "country": "Italia",
+      "type": "makanan utama",
+      "tags": [
+        "pasta",
+        "italia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-paella",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Paella",
+    "tags": [
+      "paella",
+      "spanyol"
+    ],
+    "teks": "Paella — nasi khas Spanyol dimasak dengan safron, seafood, atau daging.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "makanan utama",
+      "tags": [
+        "paella",
+        "spanyol"
+      ]
+    }
+  },
+  {
+    "id": "makanan-croissant",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Croissant",
+    "tags": [
+      "croissant",
+      "prancis"
+    ],
+    "teks": "Croissant — roti berlapis khas Prancis berbentuk bulan sabit, renyah dan berlapis mentega.",
+    "meta": {
+      "country": "Prancis",
+      "type": "roti",
+      "tags": [
+        "croissant",
+        "prancis"
+      ]
+    }
+  },
+  {
+    "id": "makanan-bratwurst",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Bratwurst",
+    "tags": [
+      "bratwurst",
+      "jerman"
+    ],
+    "teks": "Bratwurst — sosis panggang khas Jerman, biasa disajikan dengan mustard dan roti.",
+    "meta": {
+      "country": "Jerman",
+      "type": "makanan utama",
+      "tags": [
+        "bratwurst",
+        "jerman"
+      ]
+    }
+  },
+  {
+    "id": "makanan-fish-and-chips",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Fish and Chips",
+    "tags": [
+      "fish and chips",
+      "inggris"
+    ],
+    "teks": "Fish and Chips — ikan goreng tepung dengan kentang goreng, hidangan khas Inggris.",
+    "meta": {
+      "country": "Inggris",
+      "type": "makanan utama",
+      "tags": [
+        "fish and chips",
+        "inggris"
+      ]
+    }
+  },
+  {
+    "id": "makanan-borscht",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Borscht",
+    "tags": [
+      "borscht",
+      "rusia"
+    ],
+    "teks": "Borscht — sup bit merah khas Eropa Timur, populer di Rusia dan Ukraina.",
+    "meta": {
+      "country": "Rusia",
+      "type": "sup",
+      "tags": [
+        "borscht",
+        "rusia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-pierogi",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Pierogi",
+    "tags": [
+      "pierogi",
+      "polandia"
+    ],
+    "teks": "Pierogi — pangsit isi kentang, keju, atau daging khas Polandia.",
+    "meta": {
+      "country": "Polandia",
+      "type": "makanan utama",
+      "tags": [
+        "pierogi",
+        "polandia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-moussaka",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Moussaka",
+    "tags": [
+      "moussaka",
+      "yunani"
+    ],
+    "teks": "Moussaka — hidangan panggang berlapis terong dan daging cincang, khas Yunani.",
+    "meta": {
+      "country": "Yunani",
+      "type": "makanan utama",
+      "tags": [
+        "moussaka",
+        "yunani"
+      ]
+    }
+  },
+  {
+    "id": "makanan-fondue",
+    "kategori": "makanan",
+    "wilayah": "eropa",
+    "nama": "Fondue",
+    "tags": [
+      "fondue",
+      "swiss"
+    ],
+    "teks": "Fondue — keju leleh disajikan bersama roti celup, hidangan khas Swiss.",
+    "meta": {
+      "country": "Swiss",
+      "type": "makanan utama",
+      "tags": [
+        "fondue",
+        "swiss"
+      ]
+    }
+  }
+]
