@@ -1,19 +1,9 @@
 import { LLMEmbedding } from './llm-embedding.js';
 import { LLMDecoder } from './llm-decoder.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 function requireDeps() {
     return { E: LLMEmbedding, D: LLMDecoder };
 }
-
-
-
-
 
 function createModelWeights(config) {
     const { E, D } = requireDeps();
@@ -34,13 +24,6 @@ function createModelWeights(config) {
     };
 }
 
-
-
-
-
-
-
-
 function forward(tokenIds, model, config) {
     const { E, D } = requireDeps();
 
@@ -58,12 +41,6 @@ function forward(tokenIds, model, config) {
     const hidden = D.runDecoder(x, model.decoderWeights, config);
     return D.projectToLogits(hidden, model.decoderWeights);
 }
-
-
-
-
-
-
 
 function forwardCached(newTokenIds, model, config, layerCaches, positionOffset) {
     const { E, D } = requireDeps();
@@ -89,8 +66,6 @@ function forwardCached(newTokenIds, model, config, layerCaches, positionOffset) 
     return { logits: logits, layerCaches: result.layerCaches };
 }
 
-
-
 function getNextTokenLogits(tokenIds, model, config) {
     const logits = forward(tokenIds, model, config);
     return logits[logits.length - 1];
@@ -102,4 +77,3 @@ export const LLMInference = {
     forwardCached: forwardCached,
     getNextTokenLogits: getNextTokenLogits
 };
-Logger.info('LLMInference', 'llm-inference.js loaded');

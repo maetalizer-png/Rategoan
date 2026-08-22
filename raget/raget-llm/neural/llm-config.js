@@ -1,14 +1,3 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
-
-
-
-
-
 const SPECIAL_TOKENS = Object.freeze({
     PAD: '<pad>',
     UNK: '<unk>',
@@ -23,12 +12,6 @@ const SPECIAL_TOKEN_IDS = Object.freeze({
     EOS: 3
 });
 
-
-
-
-
-
-
 const TINY = Object.freeze({
     name: 'tiny',
     vocabSize: 8000,
@@ -40,8 +23,6 @@ const TINY = Object.freeze({
     dropoutRate: 0.0,
     initStd: 0.02
 });
-
-
 
 const SMALL = Object.freeze({
     name: 'small',
@@ -55,9 +36,6 @@ const SMALL = Object.freeze({
     initStd: 0.02
 });
 
-
-
-
 const COMPACT = Object.freeze({
     name: 'compact',
     vocabSize: 4000,
@@ -70,15 +48,6 @@ const COMPACT = Object.freeze({
     initStd: 0.02
 });
 
-
-
-
-
-
-
-
-
-
 const MEDIUM = Object.freeze({
     name: 'medium',
     vocabSize: 16000,
@@ -90,17 +59,6 @@ const MEDIUM = Object.freeze({
     dropoutRate: 0.1,
     initStd: 0.02
 });
-
-
-
-
-
-
-
-
-
-
-
 
 const LARGE = Object.freeze({
     name: 'large',
@@ -115,9 +73,6 @@ const LARGE = Object.freeze({
 });
 
 const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL });
-
-
-
 
 const BACKENDS = Object.freeze({
     CPU_JS: 'cpu-js',  
@@ -145,12 +100,6 @@ function createRuntimeConfig(overrides) {
     const merged = Object.assign({}, DEFAULT_RUNTIME, overrides);
     return Object.freeze(merged);
 }
-
-
-
-
-
-
 
 function validateConfig(config) {
     const errors = [];
@@ -197,9 +146,6 @@ function deepFreeze(obj) {
     return Object.freeze(obj);
 }
 
-
-
-
 function createConfig(options) {
     options = options || {};
     const presetName = options.preset || 'tiny';
@@ -227,4 +173,3 @@ export const LLMConfig = {
     SPECIAL_TOKENS: SPECIAL_TOKENS,
     SPECIAL_TOKEN_IDS: SPECIAL_TOKEN_IDS
 };
-Logger.info('LLMConfig', 'llm-config.js loaded');

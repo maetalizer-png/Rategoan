@@ -1,229 +1,234 @@
 import { LLMEmbedding } from './llm-embedding.js';
-import { LLMVocabulary } from './llm-vocabulary.js';
-import { LLMWeights } from './llm-weights.js';
 import { LLMQuantization } from './llm-quantization.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
+const HEADER_LENGTH_BYTES = 8;
 
-function requireQuantization() {
-    return LLMQuantization;
+function align4(n) {
+    return (n + 3) & ~3;
 }
 
-const CHECKPOINT_FORMAT_VERSION = 3;
+function createTensorWriter() {
+    const header = {};
+    const quant = {};
+    const chunks = [];
+    let offset = 0;
 
-
-
-
-
-
-
-
-function packQuantizedMatrix(q) {
-    return {
-        rows: q.rows,
-        cols: q.cols,
-        scale: q.scale,
-        zeroPoint: q.zeroPoint,
-        dataB64: LLMWeights.typedArrayToBase64(q.data)
-    };
-}
-
-function unpackQuantizedMatrix(packed) {
-    return {
-        rows: packed.rows,
-        cols: packed.cols,
-        scale: packed.scale,
-        zeroPoint: packed.zeroPoint,
-        data: LLMWeights.base64ToInt8Array(packed.dataB64)
-    };
-}
-
-function packQuantizedLayer(layer) {
-    return {
-        attention: {
-            Wq: packQuantizedMatrix(layer.attention.Wq),
-            Wk: packQuantizedMatrix(layer.attention.Wk),
-            Wv: packQuantizedMatrix(layer.attention.Wv),
-            Wo: packQuantizedMatrix(layer.attention.Wo)
-        },
-        ffn: {
-            W1: packQuantizedMatrix(layer.ffn.W1),
-            b1: layer.ffn.b1,
-            W2: packQuantizedMatrix(layer.ffn.W2),
-            b2: layer.ffn.b2
-        },
-        ln1: layer.ln1,
-        ln2: layer.ln2
-    };
-}
-
-function unpackQuantizedLayer(packed) {
-    return {
-        attention: {
-            Wq: unpackQuantizedMatrix(packed.attention.Wq),
-            Wk: unpackQuantizedMatrix(packed.attention.Wk),
-            Wv: unpackQuantizedMatrix(packed.attention.Wv),
-            Wo: unpackQuantizedMatrix(packed.attention.Wo)
-        },
-        ffn: {
-            W1: unpackQuantizedMatrix(packed.ffn.W1),
-            b1: packed.ffn.b1,
-            W2: unpackQuantizedMatrix(packed.ffn.W2),
-            b2: packed.ffn.b2
-        },
-        ln1: packed.ln1,
-        ln2: packed.ln2
-    };
-}
-
-
-
-
-function createCheckpoint(model, metadata) {
-    const Q = requireQuantization();
-    metadata = metadata || {};
-
-    
-    
-    
-    const vocabEntries = Array.from(model.vocab.tokenToId.entries());
-
-    
-    
-    
-    
-    
-    
-    
-    const quantized = Q.quantizeModel(model);
-    const packedWeights = {
-        quantized: true,
-        embeddingMatrix: packQuantizedMatrix(quantized.embeddingMatrix),
-        decoderWeights: {
-            layers: quantized.decoderWeights.layers.map(packQuantizedLayer),
-            finalNorm: quantized.decoderWeights.finalNorm
+    function place(bytes) {
+        const start = offset;
+        chunks.push(bytes);
+        offset += bytes.byteLength;
+        const pad = (4 - (offset % 4)) % 4;
+        if (pad) {
+            chunks.push(new Uint8Array(pad));
+            offset += pad;
         }
-    };
-
-    return {
-        checkpointFormatVersion: CHECKPOINT_FORMAT_VERSION,
-        createdAt: Date.now(),
-        metadata: {
-            name: metadata.name || 'kesempatan-llm-checkpoint',
-            description: metadata.description || '',
-            trainingSteps: metadata.trainingSteps || 0
-        },
-        config: model.config,
-        merges: model.merges,
-        vocabEntries: vocabEntries,
-        weights: packedWeights
-    };
-}
-
-
-
-
-function restoreModelFromCheckpoint(checkpoint) {
-    const Q = requireQuantization();
-    if (checkpoint.checkpointFormatVersion !== CHECKPOINT_FORMAT_VERSION) {
-        throw new Error('[LLMCheckpoint] versi checkpoint tidak cocok (dapat: ' +
-            checkpoint.checkpointFormatVersion + ', diharapkan: ' + CHECKPOINT_FORMAT_VERSION +
-            ') — checkpoint lama (format 1, bobot mentah tak terkuantisasi) tidak didukung lagi ' +
-            'karena itulah yang menyebabkan gagal tersimpan (kuota localStorage terlampaui). ' +
-            'Biarkan initialize() jatuh ke jalur training baru.');
+        return { start, end: start + bytes.byteLength };
     }
 
-    const tokenToId = new Map(checkpoint.vocabEntries);
-    const idToToken = new Map();
-    tokenToId.forEach(function (id, token) { idToToken.set(id, token); });
+    function writeMatrix(name, q) {
+        const bytes = new Uint8Array(q.data.buffer, q.data.byteOffset, q.data.byteLength);
+        const { start, end } = place(bytes);
+        header[name] = { dtype: 'I8', shape: [q.rows, q.cols], data_offsets: [start, end] };
+        quant[name] = { scale: q.scale, zeroPoint: q.zeroPoint };
+    }
 
-    const vocab = Object.freeze({
-        tokenToId: tokenToId,
-        idToToken: idToToken,
-        size: tokenToId.size,
-        unkId: checkpoint.config.specialTokenIds.UNK,
-        padId: checkpoint.config.specialTokenIds.PAD,
-        bosId: checkpoint.config.specialTokenIds.BOS,
-        eosId: checkpoint.config.specialTokenIds.EOS
+    function writeVector(name, arr) {
+        const f32 = arr instanceof Float32Array ? arr : Float32Array.from(arr);
+        const bytes = new Uint8Array(f32.buffer, f32.byteOffset, f32.byteLength);
+        const { start, end } = place(bytes);
+        header[name] = { dtype: 'F32', shape: [f32.length], data_offsets: [start, end] };
+    }
+
+    return { writeMatrix, writeVector, header, quant, get chunks() { return chunks; }, get totalBytes() { return offset; } };
+}
+
+function writeLayerTensors(writer, prefix, layer) {
+    writer.writeMatrix(prefix + 'attention.Wq', layer.attention.Wq);
+    writer.writeMatrix(prefix + 'attention.Wk', layer.attention.Wk);
+    writer.writeMatrix(prefix + 'attention.Wv', layer.attention.Wv);
+    writer.writeMatrix(prefix + 'attention.Wo', layer.attention.Wo);
+    writer.writeMatrix(prefix + 'ffn.W1', layer.ffn.W1);
+    writer.writeVector(prefix + 'ffn.b1', layer.ffn.b1);
+    writer.writeMatrix(prefix + 'ffn.W2', layer.ffn.W2);
+    writer.writeVector(prefix + 'ffn.b2', layer.ffn.b2);
+    writer.writeVector(prefix + 'ln1.gamma', layer.ln1.gamma);
+    writer.writeVector(prefix + 'ln1.beta', layer.ln1.beta);
+    writer.writeVector(prefix + 'ln2.gamma', layer.ln2.gamma);
+    writer.writeVector(prefix + 'ln2.beta', layer.ln2.beta);
+}
+
+function createCheckpointSafetensors(model, metadata) {
+    metadata = metadata || {};
+    const quantized = LLMQuantization.quantizeModel(model);
+    const writer = createTensorWriter();
+
+    writer.writeMatrix('embedding.weight', quantized.embeddingMatrix);
+    quantized.decoderWeights.layers.forEach((layer, i) => writeLayerTensors(writer, 'layers.' + i + '.', layer));
+    writer.writeVector('final_norm.gamma', quantized.decoderWeights.finalNorm.gamma);
+    writer.writeVector('final_norm.beta', quantized.decoderWeights.finalNorm.beta);
+
+    const rategoanMeta = {
+        name: metadata.name || 'rategoan-neural-checkpoint',
+        description: metadata.description || '',
+        createdAt: metadata.createdAt || new Date().toISOString(),
+        trained: !!metadata.trained,
+        trainingSteps: metadata.trainingSteps || 0,
+        trainingMinutes: metadata.trainingMinutes || 0,
+        corpusSize: metadata.corpusSize || 0,
+        config: model.config,
+        merges: model.merges,
+        vocabEntries: Array.from(model.vocab.tokenToId.entries()),
+        quant: writer.quant,
+    };
+
+    const fullHeader = Object.assign({}, writer.header, {
+        __metadata__: { rategoan: JSON.stringify(rategoanMeta) },
     });
 
-    const packed = checkpoint.weights;
-    const quantized = {
-        embeddingMatrix: unpackQuantizedMatrix(packed.embeddingMatrix),
-        decoderWeights: {
-            layers: packed.decoderWeights.layers.map(unpackQuantizedLayer),
-            finalNorm: packed.decoderWeights.finalNorm
-        }
-    };
-    const weights = Q.dequantizeModel(quantized);
-    
-    
-    const E = LLMEmbedding;
-    weights.decoderWeights.outputProjection = E.transpose(weights.embeddingMatrix);
+    const rawHeaderBytes = new TextEncoder().encode(JSON.stringify(fullHeader));
+    const prefixLength = align4(HEADER_LENGTH_BYTES + rawHeaderBytes.byteLength);
+    const headerBytes = new Uint8Array(prefixLength - HEADER_LENGTH_BYTES);
+    headerBytes.set(rawHeaderBytes, 0);
+    headerBytes.fill(0x20, rawHeaderBytes.byteLength);
 
+    const out = new Uint8Array(prefixLength + writer.totalBytes);
+    const view = new DataView(out.buffer);
+    view.setBigUint64(0, BigInt(headerBytes.byteLength), true);
+    out.set(headerBytes, HEADER_LENGTH_BYTES);
+
+    let pos = prefixLength;
+    for (const chunk of writer.chunks) {
+        out.set(chunk, pos);
+        pos += chunk.byteLength;
+    }
+    return out;
+}
+
+function readLayerTensors(reader, prefix) {
     return {
-        config: checkpoint.config,
-        merges: checkpoint.merges,
-        vocab: vocab,
-        embeddingMatrix: weights.embeddingMatrix,
-        decoderWeights: weights.decoderWeights
+        attention: {
+            Wq: reader(prefix + 'attention.Wq'),
+            Wk: reader(prefix + 'attention.Wk'),
+            Wv: reader(prefix + 'attention.Wv'),
+            Wo: reader(prefix + 'attention.Wo'),
+        },
+        ffn: {
+            W1: reader(prefix + 'ffn.W1'),
+            b1: reader(prefix + 'ffn.b1'),
+            W2: reader(prefix + 'ffn.W2'),
+            b2: reader(prefix + 'ffn.b2'),
+        },
+        ln1: { gamma: reader(prefix + 'ln1.gamma'), beta: reader(prefix + 'ln1.beta') },
+        ln2: { gamma: reader(prefix + 'ln2.gamma'), beta: reader(prefix + 'ln2.beta') },
     };
 }
 
+function restoreModelFromCheckpointSafetensors(input) {
+    const buffer = input instanceof ArrayBuffer ? input : input.buffer;
+    const view = new DataView(buffer);
+    const headerLength = Number(view.getBigUint64(0, true));
+    const headerBytes = new Uint8Array(buffer, HEADER_LENGTH_BYTES, headerLength);
+    const header = JSON.parse(new TextDecoder().decode(headerBytes));
+    const tensorDataStart = HEADER_LENGTH_BYTES + headerLength;
 
+    if (!header.__metadata__ || !header.__metadata__.rategoan) {
+        throw new Error('[LLMCheckpoint] bukan file SafeTensors checkpoint Rategoan yang valid (metadata "rategoan" tidak ada)');
+    }
+    const rategoanMeta = JSON.parse(header.__metadata__.rategoan);
+    const quant = rategoanMeta.quant;
 
+    function readTensor(name) {
+        const desc = header[name];
+        if (!desc) throw new Error('[LLMCheckpoint] tensor "' + name + '" tidak ada di checkpoint');
+        const [start, end] = desc.data_offsets;
+        const absStart = tensorDataStart + start;
+        if (desc.dtype === 'I8') {
+            const data = new Int8Array(buffer, absStart, end - start);
+            const q = quant[name];
+            return { data, rows: desc.shape[0], cols: desc.shape[1], scale: q.scale, zeroPoint: q.zeroPoint };
+        }
+        const floatView = new Float32Array(buffer, absStart, (end - start) / 4);
+        return Array.from(floatView);
+    }
 
+    const tokenToId = new Map(rategoanMeta.vocabEntries);
+    const idToToken = new Map();
+    tokenToId.forEach((id, token) => idToToken.set(id, token));
+    const vocab = Object.freeze({
+        tokenToId,
+        idToToken,
+        size: tokenToId.size,
+        unkId: rategoanMeta.config.specialTokenIds.UNK,
+        padId: rategoanMeta.config.specialTokenIds.PAD,
+        bosId: rategoanMeta.config.specialTokenIds.BOS,
+        eosId: rategoanMeta.config.specialTokenIds.EOS,
+    });
 
+    const nLayers = rategoanMeta.config.model.nLayers;
+    const layers = [];
+    for (let i = 0; i < nLayers; i++) {
+        layers.push(readLayerTensors(readTensor, 'layers.' + i + '.'));
+    }
+    const quantized = {
+        embeddingMatrix: readTensor('embedding.weight'),
+        decoderWeights: {
+            layers,
+            finalNorm: { gamma: readTensor('final_norm.gamma'), beta: readTensor('final_norm.beta') },
+        },
+    };
 
+    const weights = LLMQuantization.dequantizeModel(quantized);
+    weights.decoderWeights.outputProjection = LLMEmbedding.transpose(weights.embeddingMatrix);
 
+    return {
+        config: rategoanMeta.config,
+        merges: rategoanMeta.merges,
+        vocab,
+        embeddingMatrix: weights.embeddingMatrix,
+        decoderWeights: weights.decoderWeights,
+        checkpointMeta: {
+            name: rategoanMeta.name,
+            description: rategoanMeta.description,
+            createdAt: rategoanMeta.createdAt,
+            trained: rategoanMeta.trained,
+            trainingSteps: rategoanMeta.trainingSteps,
+            trainingMinutes: rategoanMeta.trainingMinutes,
+            corpusSize: rategoanMeta.corpusSize,
+        },
+    };
+}
 
-
-
-
-
-
-
-
-
-
-const IDB_NAME = 'kesempatan_llm_checkpoints';
+const IDB_NAME = 'rategoan_neural_checkpoints';
 const IDB_VERSION = 1;
 const IDB_STORE = 'checkpoints';
 
 function openCheckpointDB() {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         const request = indexedDB.open(IDB_NAME, IDB_VERSION);
-        request.onupgradeneeded = function () {
+        request.onupgradeneeded = () => {
             const db = request.result;
             if (!db.objectStoreNames.contains(IDB_STORE)) {
                 db.createObjectStore(IDB_STORE, { keyPath: 'name' });
             }
         };
-        request.onsuccess = function () { resolve(request.result); };
-        request.onerror = function () { reject(request.error || new Error('Gagal membuka IndexedDB')); };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error || new Error('Gagal membuka IndexedDB'));
     });
 }
 
-async function saveCheckpointToStorage(checkpoint, name) {
+async function saveCheckpointToStorage(checkpointBytes, name) {
     try {
+        const blob = new Blob([checkpointBytes], { type: 'application/octet-stream' });
         const db = await openCheckpointDB();
-        await new Promise(function (resolve, reject) {
+        await new Promise((resolve, reject) => {
             const tx = db.transaction(IDB_STORE, 'readwrite');
-            tx.objectStore(IDB_STORE).put({ name: name, checkpoint: checkpoint, savedAt: Date.now() });
-            tx.oncomplete = function () { resolve(); };
-            tx.onerror = function () { reject(tx.error || new Error('Gagal menulis checkpoint ke IndexedDB')); };
+            tx.objectStore(IDB_STORE).put({ name, blob, savedAt: Date.now() });
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error || new Error('Gagal menulis checkpoint ke IndexedDB'));
         });
         db.close();
-        return { success: true, key: name, sizeBytes: JSON.stringify(checkpoint).length };
+        return { success: true, key: name, sizeBytes: blob.size };
     } catch (e) {
-        
-        
-        
-        
         return { success: false, error: e.message || String(e) };
     }
 }
@@ -231,14 +236,15 @@ async function saveCheckpointToStorage(checkpoint, name) {
 async function loadCheckpointFromStorage(name) {
     try {
         const db = await openCheckpointDB();
-        const result = await new Promise(function (resolve, reject) {
+        const result = await new Promise((resolve, reject) => {
             const tx = db.transaction(IDB_STORE, 'readonly');
             const req = tx.objectStore(IDB_STORE).get(name);
-            req.onsuccess = function () { resolve(req.result); };
-            req.onerror = function () { reject(req.error || new Error('Gagal membaca checkpoint dari IndexedDB')); };
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => reject(req.error || new Error('Gagal membaca checkpoint dari IndexedDB'));
         });
         db.close();
-        return result ? result.checkpoint : null;
+        if (!result) return null;
+        return await result.blob.arrayBuffer();
     } catch (e) {
         return null;
     }
@@ -247,11 +253,11 @@ async function loadCheckpointFromStorage(name) {
 async function listCheckpoints() {
     try {
         const db = await openCheckpointDB();
-        const names = await new Promise(function (resolve, reject) {
+        const names = await new Promise((resolve, reject) => {
             const tx = db.transaction(IDB_STORE, 'readonly');
             const req = tx.objectStore(IDB_STORE).getAllKeys();
-            req.onsuccess = function () { resolve(req.result); };
-            req.onerror = function () { reject(req.error || new Error('Gagal membaca daftar checkpoint')); };
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => reject(req.error || new Error('Gagal membaca daftar checkpoint'));
         });
         db.close();
         return names;
@@ -263,25 +269,23 @@ async function listCheckpoints() {
 async function deleteCheckpoint(name) {
     try {
         const db = await openCheckpointDB();
-        await new Promise(function (resolve, reject) {
+        await new Promise((resolve, reject) => {
             const tx = db.transaction(IDB_STORE, 'readwrite');
             tx.objectStore(IDB_STORE).delete(name);
-            tx.oncomplete = function () { resolve(); };
-            tx.onerror = function () { reject(tx.error || new Error('Gagal menghapus checkpoint')); };
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error || new Error('Gagal menghapus checkpoint'));
         });
         db.close();
     } catch (e) {
-        Logger.warn('LLMCheckpoint', 'Gagal hapus checkpoint (bukan masalah fatal): ' + e.message);
+        /* penghapusan checkpoint bukan operasi kritis, gagal senyap */
     }
 }
 
 export const LLMCheckpoint = {
-    CHECKPOINT_FORMAT_VERSION: CHECKPOINT_FORMAT_VERSION,
-    createCheckpoint: createCheckpoint,
-    restoreModelFromCheckpoint: restoreModelFromCheckpoint,
-    saveCheckpointToStorage: saveCheckpointToStorage,
-    loadCheckpointFromStorage: loadCheckpointFromStorage,
-    listCheckpoints: listCheckpoints,
-    deleteCheckpoint: deleteCheckpoint
+    createCheckpointSafetensors,
+    restoreModelFromCheckpointSafetensors,
+    saveCheckpointToStorage,
+    loadCheckpointFromStorage,
+    listCheckpoints,
+    deleteCheckpoint,
 };
-Logger.info('LLMCheckpoint', 'llm-checkpoint.js loaded');

@@ -1,9 +1,3 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 function createConstantSchedule(baseLr) {
     return { type: 'constant', baseLr: baseLr };
 }
@@ -15,7 +9,6 @@ function createLinearWarmupSchedule(baseLr, warmupSteps, totalSteps) {
 function createCosineSchedule(baseLr, warmupSteps, totalSteps) {
     return { type: 'cosine', baseLr: baseLr, warmupSteps: warmupSteps, totalSteps: totalSteps };
 }
-
 
 function getLearningRate(schedule, step) {
     if (schedule.type === 'constant') {
@@ -46,4 +39,3 @@ export const LLMScheduler = {
     createCosineSchedule: createCosineSchedule,
     getLearningRate: getLearningRate
 };
-Logger.info('LLMScheduler', 'llm-scheduler.js loaded');

@@ -1,18 +1,3 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
-
-
-
-
-
-
-
-
-
 function quantizeMatrix(matrix) {
     const rows = matrix.length;
     const cols = matrix[0] ? matrix[0].length : 0;
@@ -60,9 +45,6 @@ function dequantizeMatrix(quantized) {
     }
     return matrix;
 }
-
-
-
 
 function quantizeModel(model) {
     function quantizeLayer(layer) {
@@ -138,4 +120,3 @@ export const LLMQuantization = {
     quantizeModel: quantizeModel,
     dequantizeModel: dequantizeModel
 };
-Logger.info('LLMQuantization', 'llm-quantization.js loaded');

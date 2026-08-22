@@ -2,23 +2,9 @@ import { LLMEmbedding } from './llm-embedding.js';
 import { LLMAttention } from './llm-attention.js';
 import { LLMTransformer } from './llm-transformer.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 function requireDeps() {
     return { E: LLMEmbedding, A: LLMAttention, T: LLMTransformer };
 }
-
-
-
-
-
-
-
-
 
 function createDecoderWeights(config) {
     const { T, E } = requireDeps();
@@ -33,10 +19,6 @@ function createDecoderWeights(config) {
     };
 }
 
-
-
-
-
 function runDecoder(x, decoderWeights, config) {
     const { T, A } = requireDeps();
     const seqLen = x.length;
@@ -48,10 +30,6 @@ function runDecoder(x, decoderWeights, config) {
     }
     return T.layerNorm(hidden, decoderWeights.finalNorm);
 }
-
-
-
-
 
 function runDecoderCached(x, decoderWeights, config, layerCaches) {
     const { T } = requireDeps();
@@ -65,8 +43,6 @@ function runDecoderCached(x, decoderWeights, config, layerCaches) {
     return { hidden: T.layerNorm(hidden, decoderWeights.finalNorm), layerCaches: nextCaches };
 }
 
-
-
 function projectToLogits(hidden, decoderWeights) {
     return LLMEmbedding.matmul(hidden, decoderWeights.outputProjection);
 }
@@ -77,4 +53,3 @@ export const LLMDecoder = {
     runDecoderCached: runDecoderCached,
     projectToLogits: projectToLogits
 };
-Logger.info('LLMDecoder', 'llm-decoder.js loaded');

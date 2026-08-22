@@ -1,17 +1,3 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
-
-
-
-
-
-
-
-
 function buildVocabulary(pieces, specialTokens, specialTokenIds, maxVocabSize) {
     if (!Array.isArray(pieces)) {
         throw new Error('[LLMVocabulary] buildVocabulary butuh array `pieces` dari LLMTokenizer');
@@ -57,9 +43,6 @@ function buildVocabulary(pieces, specialTokens, specialTokenIds, maxVocabSize) {
     });
 }
 
-
-
-
 function encode(pieces, vocab) {
     if (!Array.isArray(pieces)) {
         throw new Error('[LLMVocabulary] encode butuh array pieces');
@@ -79,13 +62,9 @@ function decode(ids, vocab) {
     });
 }
 
-
-
 function wrapWithBosEos(ids, vocab) {
     return [vocab.bosId].concat(ids, [vocab.eosId]);
 }
-
-
 
 function padOrTruncate(ids, maxLength, vocab) {
     if (ids.length >= maxLength) {
@@ -105,4 +84,3 @@ export const LLMVocabulary = {
     wrapWithBosEos: wrapWithBosEos,
     padOrTruncate: padOrTruncate
 };
-Logger.info('LLMVocabulary', 'llm-vocabulary.js loaded');

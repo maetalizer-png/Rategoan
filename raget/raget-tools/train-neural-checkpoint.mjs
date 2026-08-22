@@ -1,34 +1,19 @@
-// vNext Fase C: training NYATA pertama untuk Raget Neural (gradient descent
-// sungguhan, bukan skipAutoTrain). Dipakai SETELAH build-neural-checkpoint.mjs
-// membangun struktur - skrip ini yang benar-benar melatih bobotnya dari
-// korpus lokal Rategoan sendiri (raget-corpus/raget_own_corpus.jsonl).
-//
-// KALIBRASI JUJUR sebelum dijalankan penuh: satu training step (forward +
-// backward penuh lewat transformer 8-layer/512-dim, 58 juta parameter)
-// di JavaScript murni tanpa GPU (gpu.active: false, WebGPU tidak aktif di
-// Node) makan waktu JAUH lebih lama dari perkiraan awal - percobaan 5 teks/
-// 1 epoch tidak selesai dalam >180 detik. Karena itu skrip ini dibatasi
-// ANGGARAN WAKTU (bukan jumlah step tetap) - berhenti setelah durasi
-// tertentu berlalu, apa pun jumlah step yang berhasil diselesaikan, supaya
-// hasilnya bisa dilaporkan jujur tanpa membuat sesi kerja menunggu tanpa
-// batas. ONE hasil realistis: hanya PULUHAN step (bukan ribuan) yang bisa
-// diselesaikan dalam anggaran waktu praktis - ini TIDAK CUKUP untuk model
-// menghasilkan teks koheren (butuh puluhan ribu step minimum untuk model
-// seukuran ini). Status "Neural (Eksperimental)" TETAP berlaku apa pun
-// hasil training ini.
-//
+// vNext Fase C: training gradient descent nyata untuk Raget Neural, dibatasi
+// anggaran waktu (bukan jumlah step tetap) - satu step lewat transformer
+// 8-layer/512-dim di CPU murni makan ~12-19 detik, jadi anggaran praktis
+// hanya cukup untuk puluhan step, bukan ribuan.
 // Pakai: node raget/raget-tools/train-neural-checkpoint.mjs [menitAnggaran]
 
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { LLMCore } from '../raget-llm/neural/llm-core.js';
+import { RATEGOAN } from '../raget-llm/neural/llm-core.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-corpus', 'raget_own_corpus.jsonl');
 const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'neural');
-const OUT_FILE = path.join(OUT_DIR, 'checkpoint-50m.json');
+const OUT_FILE = path.join(OUT_DIR, 'raget-neural-50m.safetensors');
 const REPORT_FILE = path.join(__dirname, 'training-report.json');
 
 const BUDGET_MINUTES = Number(process.argv[2]) || 25;
@@ -61,7 +46,7 @@ async function generateSamples(label) {
   const samples = [];
   for (const prompt of SAMPLE_PROMPTS) {
     const t0 = Date.now();
-    const out = await LLMCore.generateText(prompt, { maxNewTokens: 40, temperature: 0.9, greedy: false });
+    const out = await RATEGOAN.generateText(prompt, { maxNewTokens: 40, temperature: 0.9, greedy: false });
     const text = out && out.text ? out.text.trim() : '(kosong)';
     const dt = ((Date.now() - t0) / 1000).toFixed(1);
     console.log('  "' + prompt + '" -> "' + text + '" (' + dt + 's)');
@@ -77,8 +62,8 @@ async function main() {
 
   console.log('\nMembangun model (preset small, ~58 juta parameter, bobot ACAK, skipAutoTrain)...');
   const tInit = Date.now();
-  await LLMCore.initialize({ corpus, configOptions: { preset: 'small' }, skipAutoTrain: true });
-  console.log('Model dibangun dalam', ((Date.now() - tInit) / 1000).toFixed(1), 'detik. Vocab:', LLMCore.getStats().vocabSize);
+  await RATEGOAN.initialize({ corpus, configOptions: { preset: 'small' }, skipAutoTrain: true });
+  console.log('Model dibangun dalam', ((Date.now() - tInit) / 1000).toFixed(1), 'detik. Vocab:', RATEGOAN.getStats().vocabSize);
 
   const samplesBefore = await generateSamples('SEBELUM training - bobot acak');
 
@@ -93,7 +78,7 @@ async function main() {
     const batch = corpus.slice(corpusIdx, corpusIdx + 4);
     corpusIdx += 4;
     if (!batch.length) break;
-    const result = await LLMCore.train(batch, { epochs: 1, learningRate: 1e-3 });
+    const result = await RATEGOAN.train(batch, { epochs: 1, learningRate: 1e-3 });
     for (const h of result.history) {
       totalSteps++;
       lossHistory.push({ step: totalSteps, loss: h.loss, elapsedSec: Number(((Date.now() - trainStart) / 1000).toFixed(1)) });
@@ -114,9 +99,8 @@ async function main() {
 
   const samplesAfter = await generateSamples('SESUDAH training - ' + totalSteps + ' step');
 
-  console.log('\nMenyimpan checkpoint (bobot sudah dilatih)...');
-  const checkpoint = LLMCore.buildCheckpointObject({
-    source: 'raget-tools/train-neural-checkpoint.mjs',
+  console.log('\nMenyimpan checkpoint SafeTensors (bobot sudah dilatih)...');
+  const checkpointBytes = RATEGOAN.buildCheckpointSafetensors({
     corpusSize: corpus.length,
     trained: true,
     trainingSteps: totalSteps,
@@ -124,9 +108,8 @@ async function main() {
     createdAt: new Date().toISOString(),
   });
   mkdirSync(OUT_DIR, { recursive: true });
-  const json = JSON.stringify(checkpoint);
-  writeFileSync(OUT_FILE, json, 'utf8');
-  console.log('Ditulis:', path.relative(ROOT, OUT_FILE), '-', (json.length / 1024 / 1024).toFixed(2), 'MB');
+  writeFileSync(OUT_FILE, checkpointBytes);
+  console.log('Ditulis:', path.relative(ROOT, OUT_FILE), '-', (checkpointBytes.byteLength / 1024 / 1024).toFixed(2), 'MB');
 
   const report = {
     generatedAt: new Date().toISOString(),

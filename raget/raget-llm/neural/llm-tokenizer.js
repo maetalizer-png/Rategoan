@@ -1,53 +1,15 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 const END_OF_WORD = '</w>';
 
-
-
-
-
-
 const NO_SPACE_BEFORE = new Set(['.', ',', '!', '?', ':', ';', ')', ']', '}', "'", '"']);
-
-
-
-
-
-
 
 function preTokenize(text) {
     const matches = text.match(/[\p{L}\p{N}_]+|[^\s\p{L}\p{N}_]/gu);
     return matches || [];
 }
 
-
 function wordToSymbols(word) {
     return word.split('').concat([END_OF_WORD]);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 async function trainBPE(corpusTexts, numMerges, options) {
     options = options || {};
@@ -138,7 +100,6 @@ async function trainBPE(corpusTexts, numMerges, options) {
         
         
         if (step > 0 && step % 200 === 0) {
-            Logger.info('LLMTokenizer', 'Training BPE... merge ' + step + '/' + numMerges);
         }
     }
 
@@ -147,9 +108,6 @@ async function trainBPE(corpusTexts, numMerges, options) {
         vocab: Array.from(vocabSet).sort()
     };
 }
-
-
-
 
 function applyBPEToWord(word, merges) {
     let symbols = wordToSymbols(word);
@@ -194,9 +152,6 @@ function tokenize(text, merges) {
     return pieces;
 }
 
-
-
-
 function detokenize(pieces) {
     let text = '';
     let word = '';
@@ -232,4 +187,3 @@ export const LLMTokenizer = {
     END_OF_WORD: END_OF_WORD,
     NO_SPACE_BEFORE: NO_SPACE_BEFORE
 };
-Logger.info('LLMTokenizer', 'llm-tokenizer.js loaded');
