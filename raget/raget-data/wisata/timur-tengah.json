@@ -1,0 +1,529 @@
+[
+  {
+    "id": "wisata-petra",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Petra",
+    "tags": [
+      "petra",
+      "yordania"
+    ],
+    "teks": "Petra — kota kuno yang diukir di tebing batu merah, Yordania, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Yordania",
+      "city": "Ma'an",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "petra",
+        "yordania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-burj-khalifa",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Burj Khalifa",
+    "tags": [
+      "burj khalifa",
+      "uni emirat arab"
+    ],
+    "teks": "Burj Khalifa — gedung tertinggi di dunia, Dubai, Uni Emirat Arab.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "city": "Dubai",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "burj khalifa",
+        "uni emirat arab"
+      ]
+    }
+  },
+  {
+    "id": "wisata-masjidil-haram",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Masjidil Haram",
+    "tags": [
+      "masjidil haram",
+      "arab saudi"
+    ],
+    "teks": "Masjidil Haram — masjid suci terbesar di dunia, mengelilingi Ka'bah, Mekkah, Arab Saudi.",
+    "meta": {
+      "country": "Arab Saudi",
+      "city": "Mekkah",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "masjidil haram",
+        "arab saudi"
+      ]
+    }
+  },
+  {
+    "id": "wisata-hagia-sophia",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Hagia Sophia",
+    "tags": [
+      "hagia sophia",
+      "turki"
+    ],
+    "teks": "Hagia Sophia — bekas gereja dan masjid bersejarah di Istanbul, Turki, ikon perpaduan budaya.",
+    "meta": {
+      "country": "Turki",
+      "city": "Istanbul",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "hagia sophia",
+        "turki"
+      ]
+    }
+  },
+  {
+    "id": "wisata-persepolis",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Persepolis",
+    "tags": [
+      "persepolis",
+      "iran"
+    ],
+    "teks": "Persepolis — reruntuhan ibukota kekaisaran Persia kuno, Iran, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Iran",
+      "city": "Shiraz",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "persepolis",
+        "iran"
+      ]
+    }
+  },
+  {
+    "id": "wisata-tembok-ratapan",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Tembok Ratapan",
+    "tags": [
+      "tembok ratapan",
+      "israel"
+    ],
+    "teks": "Tembok Ratapan — situs suci Yahudi di Yerusalem, sisa Bait Suci kuno.",
+    "meta": {
+      "country": "Israel",
+      "city": "Yerusalem",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "tembok ratapan",
+        "israel"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kubah-batu",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Kubah Batu",
+    "tags": [
+      "kubah batu",
+      "yerusalem"
+    ],
+    "teks": "Kubah Batu — bangunan suci Islam berkubah emas di kompleks Haram al-Sharif, Yerusalem.",
+    "meta": {
+      "country": "Israel",
+      "city": "Yerusalem",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "kubah batu",
+        "yerusalem"
+      ]
+    }
+  },
+  {
+    "id": "wisata-istana-topkapi",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Istana Topkapi",
+    "tags": [
+      "topkapi",
+      "turki"
+    ],
+    "teks": "Istana Topkapi — bekas istana kesultanan Utsmaniyah di Istanbul, kini museum bersejarah.",
+    "meta": {
+      "country": "Turki",
+      "city": "Istanbul",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "topkapi",
+        "turki"
+      ]
+    }
+  },
+  {
+    "id": "wisata-cappadocia",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Cappadocia",
+    "tags": [
+      "cappadocia",
+      "turki"
+    ],
+    "teks": "Cappadocia — kawasan lanskap batu unik di Turki, terkenal dengan tur balon udara saat fajar.",
+    "meta": {
+      "country": "Turki",
+      "city": "Nevsehir",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "cappadocia",
+        "turki"
+      ]
+    }
+  },
+  {
+    "id": "wisata-wadi-rum",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Wadi Rum",
+    "tags": [
+      "wadi rum",
+      "yordania"
+    ],
+    "teks": "Wadi Rum — gurun pasir merah dramatis di Yordania, lokasi syuting banyak film fiksi ilmiah.",
+    "meta": {
+      "country": "Yordania",
+      "city": "Aqaba",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "wadi rum",
+        "yordania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-jerash",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Jerash",
+    "tags": [
+      "jerash",
+      "yordania"
+    ],
+    "teks": "Jerash — reruntuhan kota Romawi kuno yang terpelihara baik di Yordania.",
+    "meta": {
+      "country": "Yordania",
+      "city": "Jerash",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "jerash",
+        "yordania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-naqsh-e-jahan-square",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Naqsh-e Jahan Square",
+    "tags": [
+      "isfahan",
+      "iran"
+    ],
+    "teks": "Naqsh-e Jahan Square — alun-alun bersejarah di Isfahan, Iran, salah satu yang terbesar di dunia.",
+    "meta": {
+      "country": "Iran",
+      "city": "Isfahan",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "isfahan",
+        "iran"
+      ]
+    }
+  },
+  {
+    "id": "wisata-masjid-nabawi",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Masjid Nabawi",
+    "tags": [
+      "masjid nabawi",
+      "madinah"
+    ],
+    "teks": "Masjid Nabawi — masjid suci kedua umat Islam, tempat makam Nabi Muhammad, Madinah, Arab Saudi.",
+    "meta": {
+      "country": "Arab Saudi",
+      "city": "Madinah",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "masjid nabawi",
+        "madinah"
+      ]
+    }
+  },
+  {
+    "id": "wisata-hegra",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Hegra",
+    "tags": [
+      "hegra",
+      "al-ula",
+      "arab saudi"
+    ],
+    "teks": "Hegra (Al-Ula) — situs arkeologi Nabatea kuno di Arab Saudi, Warisan Dunia UNESCO pertama negara itu.",
+    "meta": {
+      "country": "Arab Saudi",
+      "city": "Al-Ula",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "hegra",
+        "al-ula",
+        "arab saudi"
+      ]
+    }
+  },
+  {
+    "id": "wisata-palmyra",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Palmyra",
+    "tags": [
+      "palmyra",
+      "suriah"
+    ],
+    "teks": "Palmyra — reruntuhan kota kuno di gurun Suriah, dulunya pusat perdagangan penting jalur sutra.",
+    "meta": {
+      "country": "Suriah",
+      "city": "Homs",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "palmyra",
+        "suriah"
+      ]
+    }
+  },
+  {
+    "id": "wisata-dubai-marina",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Dubai Marina",
+    "tags": [
+      "dubai marina",
+      "uea"
+    ],
+    "teks": "Dubai Marina — kawasan pesisir modern dengan gedung pencakar langit dan kanal buatan di Dubai.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "city": "Dubai",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "dubai marina",
+        "uea"
+      ]
+    }
+  },
+  {
+    "id": "wisata-sheikh-zayed-grand-mosque",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Sheikh Zayed Grand Mosque",
+    "tags": [
+      "sheikh zayed mosque",
+      "abu dhabi"
+    ],
+    "teks": "Sheikh Zayed Grand Mosque — masjid megah berkubah putih di Abu Dhabi, salah satu terbesar di dunia.",
+    "meta": {
+      "country": "Uni Emirat Arab",
+      "city": "Abu Dhabi",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "sheikh zayed mosque",
+        "abu dhabi"
+      ]
+    }
+  },
+  {
+    "id": "wisata-souk-waqif",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Souk Waqif",
+    "tags": [
+      "souk waqif",
+      "qatar"
+    ],
+    "teks": "Souk Waqif — pasar tradisional bersejarah di Doha, Qatar, terkenal dengan rempah dan kerajinan.",
+    "meta": {
+      "country": "Qatar",
+      "city": "Doha",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "souk waqif",
+        "qatar"
+      ]
+    }
+  },
+  {
+    "id": "wisata-the-pearl-qatar",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "The Pearl-Qatar",
+    "tags": [
+      "the pearl",
+      "qatar"
+    ],
+    "teks": "The Pearl-Qatar — pulau buatan mewah dengan marina dan pertokoan di lepas pantai Doha.",
+    "meta": {
+      "country": "Qatar",
+      "city": "Doha",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "the pearl",
+        "qatar"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kota-tua-sanaa",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Kota Tua Sanaa",
+    "tags": [
+      "sanaa",
+      "yaman"
+    ],
+    "teks": "Kota Tua Sanaa — kota kuno di Yaman dengan arsitektur menara bata unik berusia ratusan tahun.",
+    "meta": {
+      "country": "Yaman",
+      "city": "Sanaa",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "sanaa",
+        "yaman"
+      ]
+    }
+  },
+  {
+    "id": "wisata-masjid-agung-sultan-qaboos",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Masjid Agung Sultan Qaboos",
+    "tags": [
+      "sultan qaboos mosque",
+      "oman"
+    ],
+    "teks": "Masjid Agung Sultan Qaboos — masjid megah di Muscat, Oman, dengan karpet dan lampu gantung kristal ikonik.",
+    "meta": {
+      "country": "Oman",
+      "city": "Muscat",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "sultan qaboos mosque",
+        "oman"
+      ]
+    }
+  },
+  {
+    "id": "wisata-wadi-dana",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Wadi Dana",
+    "tags": [
+      "wadi dana",
+      "yordania"
+    ],
+    "teks": "Wadi Dana — cagar alam lembah terbesar di Yordania, jalur trekking dengan pemandangan gurun dramatis.",
+    "meta": {
+      "country": "Yordania",
+      "city": "Tafilah",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "wadi dana",
+        "yordania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-byblos",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Byblos",
+    "tags": [
+      "byblos",
+      "lebanon"
+    ],
+    "teks": "Byblos — salah satu kota tertua yang terus dihuni di dunia, Lebanon, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Lebanon",
+      "city": "Byblos",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "byblos",
+        "lebanon"
+      ]
+    }
+  },
+  {
+    "id": "wisata-baalbek",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Baalbek",
+    "tags": [
+      "baalbek",
+      "lebanon"
+    ],
+    "teks": "Baalbek — kompleks kuil Romawi kuno yang megah di Lebanon, dikenal dengan kolom raksasanya.",
+    "meta": {
+      "country": "Lebanon",
+      "city": "Baalbek",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "baalbek",
+        "lebanon"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kuwait-towers",
+    "kategori": "wisata",
+    "wilayah": "timur-tengah",
+    "nama": "Kuwait Towers",
+    "tags": [
+      "kuwait towers",
+      "kuwait"
+    ],
+    "teks": "Kuwait Towers — tiga menara ikonik dengan bola biru-hijau, simbol modern Kota Kuwait.",
+    "meta": {
+      "country": "Kuwait",
+      "city": "Kuwait City",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "kuwait towers",
+        "kuwait"
+      ]
+    }
+  }
+]

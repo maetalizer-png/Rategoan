@@ -1,0 +1,617 @@
+[
+  {
+    "id": "wisata-borobudur",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Borobudur",
+    "tags": [
+      "borobudur",
+      "indonesia",
+      "candi"
+    ],
+    "teks": "Borobudur — candi Buddha terbesar di dunia, Jawa Tengah, Indonesia. Situs Warisan Dunia UNESCO abad ke-9.",
+    "meta": {
+      "country": "Indonesia",
+      "city": "Magelang",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "borobudur",
+        "indonesia",
+        "candi"
+      ]
+    }
+  },
+  {
+    "id": "wisata-bali",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Bali",
+    "tags": [
+      "bali",
+      "indonesia",
+      "pantai"
+    ],
+    "teks": "Bali — pulau wisata Indonesia terkenal dengan pantai, sawah terasering, dan budaya Hindu.",
+    "meta": {
+      "country": "Indonesia",
+      "city": "Denpasar",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "bali",
+        "indonesia",
+        "pantai"
+      ]
+    }
+  },
+  {
+    "id": "wisata-tembok-besar-china",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Tembok Besar China",
+    "tags": [
+      "tembok besar",
+      "china"
+    ],
+    "teks": "Tembok Besar China — struktur pertahanan kuno sepanjang ribuan kilometer, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "China",
+      "city": "Beijing",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "tembok besar",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gunung-fuji",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Gunung Fuji",
+    "tags": [
+      "gunung fuji",
+      "jepang"
+    ],
+    "teks": "Gunung Fuji — gunung tertinggi dan ikon Jepang, situs suci dan pendakian populer.",
+    "meta": {
+      "country": "Jepang",
+      "city": "Shizuoka",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "gunung fuji",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "wisata-angkor-wat",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Angkor Wat",
+    "tags": [
+      "angkor wat",
+      "kamboja"
+    ],
+    "teks": "Angkor Wat — kompleks candi Hindu-Buddha terbesar di dunia, Kamboja. Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Kamboja",
+      "city": "Siem Reap",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "angkor wat",
+        "kamboja"
+      ]
+    }
+  },
+  {
+    "id": "wisata-taj-mahal",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Taj Mahal",
+    "tags": [
+      "taj mahal",
+      "india"
+    ],
+    "teks": "Taj Mahal — makam marmer putih ikonik di India, simbol cinta abadi, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "India",
+      "city": "Agra",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "taj mahal",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "wisata-ha-long-bay",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Ha Long Bay",
+    "tags": [
+      "ha long bay",
+      "vietnam"
+    ],
+    "teks": "Ha Long Bay — teluk dengan ribuan pulau karst di Vietnam, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Vietnam",
+      "city": "Quang Ninh",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "ha long bay",
+        "vietnam"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gunung-everest",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Gunung Everest",
+    "tags": [
+      "everest",
+      "nepal"
+    ],
+    "teks": "Gunung Everest — puncak tertinggi di dunia, perbatasan Nepal-Tibet, tujuan pendakian ekstrem.",
+    "meta": {
+      "country": "Nepal",
+      "city": "Solukhumbu",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "everest",
+        "nepal"
+      ]
+    }
+  },
+  {
+    "id": "wisata-petronas-twin-towers",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Petronas Twin Towers",
+    "tags": [
+      "petronas",
+      "malaysia"
+    ],
+    "teks": "Petronas Twin Towers — menara kembar tertinggi di dunia (dahulu), ikon Kuala Lumpur, Malaysia.",
+    "meta": {
+      "country": "Malaysia",
+      "city": "Kuala Lumpur",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "petronas",
+        "malaysia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kuil-shwedagon",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Kuil Shwedagon",
+    "tags": [
+      "shwedagon",
+      "myanmar"
+    ],
+    "teks": "Kuil Shwedagon — pagoda emas suci di Yangon, Myanmar, salah satu situs Buddha paling dihormati.",
+    "meta": {
+      "country": "Myanmar",
+      "city": "Yangon",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "shwedagon",
+        "myanmar"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kota-terlarang",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Kota Terlarang",
+    "tags": [
+      "kota terlarang",
+      "china"
+    ],
+    "teks": "Kota Terlarang — kompleks istana kekaisaran di Beijing, China, kediaman kaisar selama hampir 500 tahun.",
+    "meta": {
+      "country": "China",
+      "city": "Beijing",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "kota terlarang",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "wisata-terracotta-army",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Terracotta Army",
+    "tags": [
+      "terracotta army",
+      "china"
+    ],
+    "teks": "Terracotta Army — ribuan patung tentara tanah liat penjaga makam Kaisar Qin Shi Huang, Xi'an, China.",
+    "meta": {
+      "country": "China",
+      "city": "Xi'an",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "terracotta army",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gunung-bromo",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Gunung Bromo",
+    "tags": [
+      "bromo",
+      "indonesia"
+    ],
+    "teks": "Gunung Bromo — gunung berapi aktif dengan lautan pasir ikonik di Jawa Timur, Indonesia.",
+    "meta": {
+      "country": "Indonesia",
+      "city": "Probolinggo",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "bromo",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-pulau-komodo",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Pulau Komodo",
+    "tags": [
+      "komodo",
+      "indonesia"
+    ],
+    "teks": "Pulau Komodo — habitat asli komodo, kadal terbesar di dunia, Warisan Dunia UNESCO di Indonesia.",
+    "meta": {
+      "country": "Indonesia",
+      "city": "Labuan Bajo",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "komodo",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-raja-ampat",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Raja Ampat",
+    "tags": [
+      "raja ampat",
+      "indonesia"
+    ],
+    "teks": "Raja Ampat — gugusan pulau dengan keanekaragaman hayati laut terkaya di dunia, Papua Barat, Indonesia.",
+    "meta": {
+      "country": "Indonesia",
+      "city": "Waisai",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "raja ampat",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kuil-fushimi-inari",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Kuil Fushimi Inari",
+    "tags": [
+      "fushimi inari",
+      "jepang"
+    ],
+    "teks": "Kuil Fushimi Inari — kuil Shinto terkenal dengan ribuan gerbang torii oranye, Kyoto, Jepang.",
+    "meta": {
+      "country": "Jepang",
+      "city": "Kyoto",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "fushimi inari",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kastil-osaka",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Kastil Osaka",
+    "tags": [
+      "kastil osaka",
+      "jepang"
+    ],
+    "teks": "Kastil Osaka — kastil bersejarah ikonik dari era Sengoku, salah satu landmark utama Osaka, Jepang.",
+    "meta": {
+      "country": "Jepang",
+      "city": "Osaka",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "kastil osaka",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "wisata-pulau-jeju",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Pulau Jeju",
+    "tags": [
+      "jeju",
+      "korea selatan"
+    ],
+    "teks": "Pulau Jeju — pulau vulkanik populer di Korea Selatan, Warisan Dunia UNESCO dengan pantai dan air terjun.",
+    "meta": {
+      "country": "Korea Selatan",
+      "city": "Jeju",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "jeju",
+        "korea selatan"
+      ]
+    }
+  },
+  {
+    "id": "wisata-istana-gyeongbokgung",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Istana Gyeongbokgung",
+    "tags": [
+      "gyeongbokgung",
+      "korea selatan"
+    ],
+    "teks": "Istana Gyeongbokgung — istana kerajaan utama Dinasti Joseon di Seoul, Korea Selatan.",
+    "meta": {
+      "country": "Korea Selatan",
+      "city": "Seoul",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "gyeongbokgung",
+        "korea selatan"
+      ]
+    }
+  },
+  {
+    "id": "wisata-boracay",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Boracay",
+    "tags": [
+      "boracay",
+      "filipina"
+    ],
+    "teks": "Boracay — pulau wisata dengan pantai pasir putih terkenal di Filipina.",
+    "meta": {
+      "country": "Filipina",
+      "city": "Malay",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "boracay",
+        "filipina"
+      ]
+    }
+  },
+  {
+    "id": "wisata-palawan",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Palawan",
+    "tags": [
+      "palawan",
+      "filipina"
+    ],
+    "teks": "Palawan — pulau dengan laguna dan sungai bawah tanah terpanjang di dunia, Filipina, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Filipina",
+      "city": "Puerto Princesa",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "palawan",
+        "filipina"
+      ]
+    }
+  },
+  {
+    "id": "wisata-marina-bay-sands",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Marina Bay Sands",
+    "tags": [
+      "marina bay sands",
+      "singapura"
+    ],
+    "teks": "Marina Bay Sands — kompleks hotel dan resor ikonik dengan kolam renang atap di Singapura.",
+    "meta": {
+      "country": "Singapura",
+      "city": "Singapura",
+      "type": "ikon",
+      "unesco": false,
+      "tags": [
+        "marina bay sands",
+        "singapura"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gardens-by-the-bay",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Gardens by the Bay",
+    "tags": [
+      "gardens by the bay",
+      "singapura"
+    ],
+    "teks": "Gardens by the Bay — taman futuristik dengan pohon super (supertree) raksasa di Singapura.",
+    "meta": {
+      "country": "Singapura",
+      "city": "Singapura",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "gardens by the bay",
+        "singapura"
+      ]
+    }
+  },
+  {
+    "id": "wisata-phuket",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Phuket",
+    "tags": [
+      "phuket",
+      "thailand"
+    ],
+    "teks": "Phuket — pulau wisata pantai terbesar dan terpopuler di Thailand.",
+    "meta": {
+      "country": "Thailand",
+      "city": "Phuket",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "phuket",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "wisata-chiang-mai",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Chiang Mai",
+    "tags": [
+      "chiang mai",
+      "thailand"
+    ],
+    "teks": "Chiang Mai — kota bersejarah di Thailand utara, terkenal dengan kuil kuno dan festival lentera Yi Peng.",
+    "meta": {
+      "country": "Thailand",
+      "city": "Chiang Mai",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "chiang mai",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "wisata-luang-prabang",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Luang Prabang",
+    "tags": [
+      "luang prabang",
+      "laos"
+    ],
+    "teks": "Luang Prabang — kota kuno di Laos dengan kuil Buddha dan arsitektur kolonial, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Laos",
+      "city": "Luang Prabang",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "luang prabang",
+        "laos"
+      ]
+    }
+  },
+  {
+    "id": "wisata-bagan",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Bagan",
+    "tags": [
+      "bagan",
+      "myanmar"
+    ],
+    "teks": "Bagan — dataran dengan ribuan candi dan pagoda kuno di Myanmar, salah satu situs arkeologi terpenting Asia Tenggara.",
+    "meta": {
+      "country": "Myanmar",
+      "city": "Bagan",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "bagan",
+        "myanmar"
+      ]
+    }
+  },
+  {
+    "id": "wisata-varanasi",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Varanasi",
+    "tags": [
+      "varanasi",
+      "india"
+    ],
+    "teks": "Varanasi — kota suci tertua di India, tempat ritual keagamaan Hindu di tepi Sungai Gangga.",
+    "meta": {
+      "country": "India",
+      "city": "Varanasi",
+      "type": "budaya",
+      "unesco": false,
+      "tags": [
+        "varanasi",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "wisata-registan-samarkand",
+    "kategori": "wisata",
+    "wilayah": "asia",
+    "nama": "Registan Samarkand",
+    "tags": [
+      "registan",
+      "samarkand",
+      "uzbekistan"
+    ],
+    "teks": "Registan Samarkand — kompleks madrasah bersejarah dengan arsitektur Islam megah di Uzbekistan, Warisan Dunia UNESCO.",
+    "meta": {
+      "country": "Uzbekistan",
+      "city": "Samarkand",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "registan",
+        "samarkand",
+        "uzbekistan"
+      ]
+    }
+  }
+]
