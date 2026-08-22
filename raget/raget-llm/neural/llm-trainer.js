@@ -5,12 +5,6 @@ import { LLMSampler } from './llm-sampler.js';
 import { LLMOptimizer } from './llm-optimizer.js';
 import { LLMScheduler } from './llm-scheduler.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 function requireDeps() {
     return {
         E: LLMEmbedding,
@@ -20,21 +14,6 @@ function requireDeps() {
         O: LLMOptimizer
     };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function crossEntropyLossAndGrad(logits, targetIds) {
     const { S } = requireDeps();
@@ -55,11 +34,6 @@ function crossEntropyLossAndGrad(logits, targetIds) {
     return { loss: totalLoss / seqLen, dLogits: dLogits };
 }
 
-
-
-
-
-
 function linearBackward(x, W, dY) {
     const { E } = requireDeps();
     return {
@@ -67,7 +41,6 @@ function linearBackward(x, W, dY) {
         dW: E.matmul(E.transpose(x), dY)
     };
 }
-
 
 function linearWithBiasBackward(x, W, dY) {
     const { E } = requireDeps();
@@ -80,7 +53,6 @@ function linearWithBiasBackward(x, W, dY) {
     }
     return { dX: lin.dX, dW: lin.dW, dB: dB };
 }
-
 
 function geluDerivative(x) {
     const c = Math.sqrt(2 / Math.PI);
@@ -95,8 +67,6 @@ function geluBackward(preActivation, dOut) {
         return row.map(function (x, j) { return dOut[i][j] * geluDerivative(x); });
     });
 }
-
-
 
 function layerNormBackwardRow(x, gamma, beta, dY, eps) {
     const n = x.length;
@@ -153,8 +123,6 @@ function layerNormBackward(x, params, dY, eps) {
     return { dX: dX, dGamma: dGamma, dBeta: dBeta };
 }
 
-
-
 function scaledDotProductAttentionBackward(Q, K, V, weights, dOutput) {
     const { E } = requireDeps();
     const dHead = Q[0].length;
@@ -181,7 +149,6 @@ function scaledDotProductAttentionBackward(Q, K, V, weights, dOutput) {
 
     return { dQ: dQ, dK: dK, dV: dV };
 }
-
 
 function multiHeadAttentionBackward(x, blockAttentionWeights, nHeads, mask, dOutput) {
     const { E, A } = requireDeps();
@@ -236,9 +203,6 @@ function multiHeadAttentionBackward(x, blockAttentionWeights, nHeads, mask, dOut
         dWq: qLin.dW, dWk: kLin.dW, dWv: vLin.dW, dWo: outLin.dW
     };
 }
-
-
-
 
 function transformerBlockForwardWithCache(x, blockWeights, config, mask) {
     const { E, A, T } = requireDeps();
@@ -295,9 +259,6 @@ function transformerBlockBackward(cache, blockWeights, config, mask, dOutput) {
         }
     };
 }
-
-
-
 
 function forwardWithCache(tokenIds, model, config) {
     const { E, T, A } = requireDeps();
@@ -362,13 +323,6 @@ function backward(cache, dLogits, model, config) {
     };
 }
 
-
-
-
-
-
-
-
 function tensorSquaredNormSum(tensor) {
     let sum = 0;
     if (Array.isArray(tensor[0])) {
@@ -430,14 +384,6 @@ function clipGradientsByGlobalNorm(grads, maxNorm) {
 
     return grads;
 }
-
-
-
-
-
-
-
-
 
 function getAdamState(model, O) {
     if (!model._adamState) {
@@ -547,18 +493,6 @@ function trainStep(model, tokenIds, learningRate, maxGradNorm, options) {
     return loss;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 async function trainOnCorpus(model, tokenizedSequences, options) {
     options = options || {};
     const epochs = options.epochs || 1;
@@ -615,7 +549,6 @@ async function trainOnCorpus(model, tokenizedSequences, options) {
                 await new Promise(function (resolve) { setTimeout(resolve, 0); });
             }
         }
-        Logger.info('LLMTrainer', 'Epoch ' + epoch + ' selesai, avg loss: ' + (count ? (epochLoss / count).toFixed(4) : 'n/a'));
     }
 
     return { history: history, finalStep: step };
@@ -637,4 +570,3 @@ export const LLMTrainer = {
     trainStep: trainStep,
     trainOnCorpus: trainOnCorpus
 };
-Logger.info('LLMTrainer', 'llm-trainer.js loaded');

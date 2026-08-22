@@ -1,16 +1,3 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
-
-
-
-
-
-
-
 function randnGaussian() {
     let u = 0;
     let v = 0;
@@ -42,7 +29,6 @@ function zerosMatrix(rows, cols) {
     }
     return m;
 }
-
 
 function matmul(A, B) {
     const m = A.length;
@@ -88,7 +74,6 @@ function addMatrices(A, B) {
     return A.map(function (row, i) { return addVectors(row, B[i]); });
 }
 
-
 function addBiasRows(A, bias) {
     return A.map(function (row) { return addVectors(row, bias); });
 }
@@ -109,13 +94,6 @@ function dotProduct(a, b) {
     return sum;
 }
 
-
-
-
-
-
-
-
 function createEmbeddingMatrix(vocabSize, dModel, initStd) {
     return randomMatrix(vocabSize, dModel, initStd);
 }
@@ -128,19 +106,6 @@ function lookupEmbeddings(embeddingMatrix, tokenIds) {
         return embeddingMatrix[id].slice();
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const positionalEncodingPool = new Map(); 
 
@@ -189,4 +154,3 @@ export const LLMEmbedding = {
     getPositionalEncoding: getPositionalEncoding,
     addPositionalEncoding: addPositionalEncoding
 };
-Logger.info('LLMEmbedding', 'llm-embedding.js loaded');

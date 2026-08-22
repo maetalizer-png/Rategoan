@@ -1,20 +1,9 @@
 import { LLMEmbedding } from './llm-embedding.js';
 import { LLMAttention } from './llm-attention.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 function requireDeps() {
     return { E: LLMEmbedding, A: LLMAttention };
 }
-
-
-
-
-
 
 function createLayerNormParams(dModel) {
     return {
@@ -49,11 +38,6 @@ function layerNorm(x, params, eps) {
     return x.map(function (row) { return layerNormRow(row, params.gamma, params.beta, eps); });
 }
 
-
-
-
-
-
 function createFFNWeights(dModel, dFF, initStd) {
     return {
         W1: LLMEmbedding.randomMatrix(dModel, dFF, initStd),
@@ -62,8 +46,6 @@ function createFFNWeights(dModel, dFF, initStd) {
         b2: LLMEmbedding.zerosVector(dModel)
     };
 }
-
-
 
 function gelu(x) {
     const c = Math.sqrt(2 / Math.PI);
@@ -76,9 +58,6 @@ function feedForward(x, ffnWeights) {
     return LLMEmbedding.addBiasRows(LLMEmbedding.matmul(hidden, ffnWeights.W2), ffnWeights.b2);
 }
 
-
-
-
 function createTransformerBlockWeights(config) {
     const dModel = config.dModel;
     return {
@@ -88,8 +67,6 @@ function createTransformerBlockWeights(config) {
         ln2: createLayerNormParams(dModel)
     };
 }
-
-
 
 function transformerBlock(x, blockWeights, config, mask) {
     const { E, A } = requireDeps();
@@ -104,10 +81,6 @@ function transformerBlock(x, blockWeights, config, mask) {
 
     return afterFFN;
 }
-
-
-
-
 
 function transformerBlockCached(x, blockWeights, config, cache) {
     const { E, A } = requireDeps();
@@ -133,4 +106,3 @@ export const LLMTransformer = {
     transformerBlock: transformerBlock,
     transformerBlockCached: transformerBlockCached
 };
-Logger.info('LLMTransformer', 'llm-transformer.js loaded');

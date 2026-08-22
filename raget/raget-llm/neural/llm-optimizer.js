@@ -1,14 +1,3 @@
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
-
-
-
-
-
 function sgdUpdateMatrix(matrix, grad, learningRate) {
     return matrix.map(function (row, i) {
         return row.map(function (v, j) { return v - learningRate * grad[i][j]; });
@@ -23,22 +12,6 @@ function sgdUpdate(param, grad, learningRate) {
     const is2D = Array.isArray(param[0]);
     return is2D ? sgdUpdateMatrix(param, grad, learningRate) : sgdUpdateVector(param, grad, learningRate);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function createAdamState(param) {
     const is2D = Array.isArray(param[0]);
@@ -62,8 +35,6 @@ function adamUpdateVector(vector, grad, state, config) {
     const biasCorr2 = 1 - Math.pow(config.beta2, state.t);
 
     for (let i = 0; i < vector.length; i++) {
-        
-        
         state.m[i] = config.beta1 * state.m[i] + (1 - config.beta1) * grad[i];
         state.v[i] = config.beta2 * state.v[i] + (1 - config.beta2) * grad[i] * grad[i];
         const mHat = state.m[i] / biasCorr1;
@@ -87,8 +58,6 @@ function adamUpdateMatrix(matrix, grad, state, config) {
         const rowOffset = i * cols;
         for (let j = 0; j < cols; j++) {
             const idx = rowOffset + j;
-            
-            
             state.m[idx] = config.beta1 * state.m[idx] + (1 - config.beta1) * grad[i][j];
             state.v[idx] = config.beta2 * state.v[idx] + (1 - config.beta2) * grad[i][j] * grad[i][j];
             const mHat = state.m[idx] / biasCorr1;
@@ -122,4 +91,3 @@ export const LLMOptimizer = {
     createAdamConfig: createAdamConfig,
     adamUpdate: adamUpdate
 };
-Logger.info('LLMOptimizer', 'llm-optimizer.js loaded');

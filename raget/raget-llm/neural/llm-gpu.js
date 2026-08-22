@@ -1,33 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const Logger = {
-    info: function () {},
-    warn: function () {},
-    error: function () {}
-};
-
-
-
-
 const MATMUL_WGSL = `
 struct Dims {
 m: u32,
@@ -80,8 +50,6 @@ function unflatten(flat, rows, cols) {
     }
     return out;
 }
-
-
 
 async function gpuMatmulRaw(A, B, device, pipeline) {
     const m = A.length;
@@ -171,9 +139,6 @@ function matricesClose(A, B, epsilon) {
     return true;
 }
 
-
-
-
 async function selfTest(device, pipeline, dModel) {
     
     
@@ -184,7 +149,6 @@ async function selfTest(device, pipeline, dModel) {
         const cpuResult = cpuMatmul(A, B);
         const gpuResult = await gpuMatmulRaw(A, B, device, pipeline);
         if (!matricesClose(cpuResult, gpuResult, 1e-3)) {
-            Logger.warn('LLMGpu', 'Verifikasi kebenaran GAGAL (ukuran ' + m + 'x' + k + 'x' + n + ') — GPU dinonaktifkan, pakai CPU');
             return false;
         }
     }
@@ -207,14 +171,10 @@ async function selfTest(device, pipeline, dModel) {
     }
     const gpuMs = (performance.now() - tGpu0) / REPEATS;
 
-    Logger.info('LLMGpu', 'Benchmark matmul ' + dModel + 'x' + dModel + ' — CPU: ' + cpuMs.toFixed(2) + 'ms, GPU: ' + gpuMs.toFixed(2) + 'ms');
-
     if (gpuMs >= cpuMs) {
-        Logger.warn('LLMGpu', 'GPU tidak lebih cepat dari CPU di ukuran model ini — GPU dinonaktifkan, tetap pakai CPU');
         return false;
     }
 
-    Logger.info('LLMGpu', 'GPU terverifikasi benar & lebih cepat (' + (cpuMs / gpuMs).toFixed(1) + 'x) — diaktifkan untuk inference');
     return true;
 }
 
@@ -223,13 +183,11 @@ async function initGPU(dModel) {
         return true;
     }
     if (!navigator.gpu) {
-        Logger.info('LLMGpu', 'WebGPU tidak tersedia di browser ini — pakai CPU');
         return false;
     }
     try {
         const adapter = await navigator.gpu.requestAdapter();
         if (!adapter) {
-            Logger.info('LLMGpu', 'Tidak ada GPU adapter — pakai CPU');
             return false;
         }
         const device = await adapter.requestDevice();
@@ -247,7 +205,6 @@ async function initGPU(dModel) {
         gpuState = { device: device, pipeline: pipeline };
         return true;
     } catch (e) {
-        Logger.warn('LLMGpu', 'Inisialisasi GPU gagal (' + e.message + ') — pakai CPU');
         return false;
     }
 }
@@ -268,4 +225,3 @@ export const LLMGpu = {
     isReady: isReady,
     matmul: matmul
 };
-Logger.info('LLMGpu', 'llm-gpu.js loaded');

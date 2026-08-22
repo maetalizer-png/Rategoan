@@ -1,17 +1,6 @@
 import { LLMTokenizer } from './llm-tokenizer.js';
 import { LLMJSONGrammar } from './llm-json-grammar.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
-
-
-
-
-
 function softmax(row) {
     let max = -Infinity;
     for (let i = 0; i < row.length; i++) {
@@ -46,16 +35,9 @@ function sampleFromProbabilities(probabilities) {
     return probabilities.length - 1; 
 }
 
-
-
-
 function greedySample(logits) {
     return argmax(logits);
 }
-
-
-
-
 
 function temperatureSample(logits, temperature) {
     const T = Math.max(1e-6, temperature);
@@ -63,10 +45,6 @@ function temperatureSample(logits, temperature) {
     const probs = softmax(scaled);
     return sampleFromProbabilities(probs);
 }
-
-
-
-
 
 function topKSample(logits, k, temperature) {
     k = Math.max(1, Math.min(k, logits.length));
@@ -83,10 +61,6 @@ function topKSample(logits, k, temperature) {
     const probs = softmax(scaled);
     return sampleFromProbabilities(probs);
 }
-
-
-
-
 
 function topPSample(logits, p, temperature) {
     const T = Math.max(1e-6, temperature);
@@ -113,12 +87,6 @@ function topPSample(logits, p, temperature) {
     return nucleus[chosenLocal].i;
 }
 
-
-
-
-
-
-
 function applyRepetitionPenalty(logits, recentTokenIds, penalty) {
     if (!penalty || penalty === 1 || !recentTokenIds || recentTokenIds.length === 0) {
         return logits;
@@ -130,17 +98,6 @@ function applyRepetitionPenalty(logits, recentTokenIds, penalty) {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
 function pieceInfo(id, vocab) {
     const raw = vocab.idToToken.get(id);
     if (raw === undefined) return null;
@@ -150,28 +107,11 @@ function pieceInfo(id, vocab) {
     return { core: core, endsWord: endsWord };
 }
 
-
-
-
-
-
-
-
-
-
-
 function impliedText(wordBoundaryPending, piece) {
     if (!wordBoundaryPending) return piece.core;
     const isSinglePunctWord = piece.endsWord && piece.core.length === 1 && LLMTokenizer.NO_SPACE_BEFORE.has(piece.core);
     return isSinglePunctWord ? piece.core : ' ' + piece.core;
 }
-
-
-
-
-
-
-
 
 function constrainLogitsToJSON(logits, vocab, grammarState, eosId, wordBoundaryPending) {
     const masked = logits.slice();
@@ -190,16 +130,10 @@ function constrainLogitsToJSON(logits, vocab, grammarState, eosId, wordBoundaryP
         anyValid = true;
     }
     if (!anyValid) {
-        Logger.warn('LLMSampler', 'constrainLogitsToJSON: tidak ada token valid dari vocab pada state ini — fail-open, lanjut tanpa constraint di langkah ini');
         return { logits: logits, anyValid: false };
     }
     return { logits: masked, anyValid: true };
 }
-
-
-
-
-
 
 function advanceJSONGrammar(grammarState, tokenId, vocab, eosId, wordBoundaryPending) {
     if (tokenId === eosId) return { state: grammarState, wordBoundaryPending: wordBoundaryPending };
@@ -209,15 +143,6 @@ function advanceJSONGrammar(grammarState, tokenId, vocab, eosId, wordBoundaryPen
     const next = LLMJSONGrammar.stepText(grammarState, text) || grammarState;
     return { state: next, wordBoundaryPending: piece.endsWord };
 }
-
-
-
-
-
-
-
-
-
 
 function sample(logits, options) {
     options = options || {};
@@ -254,4 +179,3 @@ export const LLMSampler = {
     advanceJSONGrammar: advanceJSONGrammar,
     sample: sample
 };
-Logger.info('LLMSampler', 'llm-sampler.js loaded');

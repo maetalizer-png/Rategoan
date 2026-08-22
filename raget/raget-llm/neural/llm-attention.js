@@ -1,19 +1,8 @@
 import { LLMEmbedding } from './llm-embedding.js';
 
-const Logger = {
-    info: function () {  },
-    warn: function () {  },
-    error: function (mod, msg) { console.error('[ERROR] [' + mod + '] ' + msg); }
-};
-
 function requireEmbedding() {
     return LLMEmbedding;
 }
-
-
-
-
-
 
 function createAttentionWeights(dModel, initStd) {
     const E = requireEmbedding();
@@ -24,12 +13,6 @@ function createAttentionWeights(dModel, initStd) {
         Wo: E.randomMatrix(dModel, dModel, initStd)
     };
 }
-
-
-
-
-
-
 
 function createCausalMask(seqLen) {
     const mask = new Array(seqLen);
@@ -42,9 +25,6 @@ function createCausalMask(seqLen) {
     }
     return mask;
 }
-
-
-
 
 function softmaxRow(row) {
     let max = -Infinity;
@@ -60,11 +40,6 @@ function softmaxRow(row) {
     const sum = exps.reduce(function (a, b) { return a + b; }, 0);
     return exps.map(function (e) { return e / sum; });
 }
-
-
-
-
-
 
 function scaledDotProductAttention(Q, K, V, mask) {
     const E = requireEmbedding();
@@ -84,9 +59,6 @@ function scaledDotProductAttention(Q, K, V, mask) {
 
     return { output: output, weights: weights };
 }
-
-
-
 
 function splitHeads(X, nHeads) {
     const seqLen = X.length;
@@ -117,8 +89,6 @@ function mergeHeads(headOutputs) {
     return merged;
 }
 
-
-
 function multiHeadAttention(x, weights, nHeads, mask) {
     const E = requireEmbedding();
 
@@ -139,13 +109,6 @@ function multiHeadAttention(x, weights, nHeads, mask) {
     return E.matmul(merged, weights.Wo);
 }
 
-
-
-
-
-
-
-
 function createCausalMaskWithCache(newLen, cacheLen) {
     const totalLen = cacheLen + newLen;
     const mask = new Array(newLen);
@@ -159,11 +122,6 @@ function createCausalMaskWithCache(newLen, cacheLen) {
     }
     return mask;
 }
-
-
-
-
-
 
 function multiHeadAttentionCached(x, weights, nHeads, cache) {
     const E = requireEmbedding();
@@ -194,7 +152,6 @@ function multiHeadAttentionCached(x, weights, nHeads, cache) {
     return { output: output, cache: { K: nextK, V: nextV } };
 }
 
-
 export const LLMAttention = {
     createAttentionWeights: createAttentionWeights,
     createCausalMask: createCausalMask,
@@ -206,4 +163,3 @@ export const LLMAttention = {
     splitHeads: splitHeads,
     mergeHeads: mergeHeads
 };
-Logger.info('LLMAttention', 'llm-attention.js loaded');

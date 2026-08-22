@@ -1,20 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const WHITESPACE = new Set([' ', '\t', '\n', '\r']);
 const DIGITS = new Set('0123456789'.split(''));
 const ESCAPABLE = new Set(['"', '\\', '/', 'b', 'f', 'n', 'r', 't']);
@@ -27,10 +10,6 @@ function createState() {
 function cloneState(state) {
     return { stack: state.stack.slice(), expect: state.expect, sub: state.sub ? Object.assign({}, state.sub) : null };
 }
-
-
-
-
 
 function afterValueClosed(state) {
     const s = cloneState(state);
@@ -105,7 +84,6 @@ function afterValueClosedThenReconsume(state, ch) {
     if (!closed) return null;
     return stepChar(closed, ch);
 }
-
 
 function stepNumber(state, ch) {
     const sub = state.sub;
@@ -218,10 +196,6 @@ function stepChar(state, ch) {
             return null;
     }
 }
-
-
-
-
 
 function normalize(state) {
     if (state.sub && state.sub.kind === 'number') {
