@@ -1,19 +1,20 @@
 // vNext Fase C (revisi v1.1, §4 roadmap): render korpus dialog/fakta MILIK
 // SENDIRI Rategoan - bukan dari raget-dataries/ (itu lapisan metadata
 // terstruktur untuk RETRIEVAL, bukan teks siap-latih), tapi dari
-// raget-dataset/{persona,fewshot,knowledge/*} + raget-data/*/*.json (domain
-// yang sudah dimigrasi ke skema tunggal Fase B) + raget-data/sapaan/
-// (sapaan/smalltalk, dimigrasi lewat migrate-sapaan-domain.mjs).
+// raget-devlog/json/{persona,fewshot} + raget-data/json/knowledge/* +
+// raget-data/json/*/*.json (domain yang sudah dimigrasi ke skema tunggal
+// Fase B) + raget-data/json/sapaan/ (sapaan/smalltalk, dimigrasi lewat
+// migrate-sapaan-domain.mjs).
 //
-// Output: raget/raget-corpus/raget_own_corpus.jsonl - satu record JSON per
-// baris, field `type` menandai bentuknya:
+// Output: raget/raget-data/jsonl/raget_own_corpus.jsonl - satu record JSON
+// per baris, field `type` menandai bentuknya:
 //   - "dialog"   {type,source,prompt,completion}  - prompt+balasan asli
 //   - "fact"     {type,source,text}                - kalimat faktual berdiri sendiri
 //   - "identity" {type,source,text}                - deskripsi identitas/gaya Raget
 //
 // KEPUTUSAN FILTER YANG DISENGAJA (didokumentasikan, bukan celah yang
 // terlewat):
-//   1. raget-dataset/bench.json TIDAK dirender jadi dialog. File itu cuma
+//   1. raget-tools/bench.json TIDAK dirender jadi dialog. File itu cuma
 //      berisi {prompt, expect-label} untuk uji klasifikasi rule engine -
 //      tidak ada teks balasan di dalamnya. Merender label jadi balasan
 //      buatan berarti MENGARANG data latih (melanggar prinsip kejujuran
@@ -22,7 +23,7 @@
 //      yang memang didesain stateful) sehingga hasilnya tidak murni lagi
 //      mewakili prompt tunggal. bench.json tetap dipakai HANYA sebagai alat
 //      uji (run-bench.mjs), bukan sumber korpus.
-//   2. raget-dataset/metadata/answer-rules.json TIDAK dirender. Isinya
+//   2. raget-devlog/json/metadata/answer-rules.json TIDAK dirender. Isinya
 //      instruksi gaya-jawab (meta-aturan), bukan sesuatu yang pernah
 //      benar-benar diucapkan Raget ke pengguna - memasukkannya berisiko
 //      instruksi format ikut "bocor" jadi gaya bicara kalau nanti dipakai
@@ -33,9 +34,9 @@
 //      teknik umum & jujur untuk mengubah factoid jadi pasangan QA, beda
 //      dengan mengarang jawaban.
 //   4. Field meta.trivia/meta.kutipan/meta.pencapaian/meta.bahanUtama pada
-//      domain raget-data/* (tokoh/kuliner) ikut dirender sebagai kalimat
-//      fact tambahan - semua bersumber dari field data yang sudah ada,
-//      bukan konten baru, cuma diformat jadi kalimat.
+//      domain raget-data/json/* (tokoh/kuliner) ikut dirender sebagai
+//      kalimat fact tambahan - semua bersumber dari field data yang sudah
+//      ada, bukan konten baru, cuma diformat jadi kalimat.
 //
 // Prinsip: "aditif, tidak merombak" - skrip ini HANYA membaca file JSON
 // yang sudah ada, tidak mengubah satu pun sumber data. Jangan mulai
@@ -51,10 +52,11 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const DATASET_DIR = path.join(ROOT, 'raget', 'raget-dataset');
-const KNOWLEDGE_DIR = path.join(DATASET_DIR, 'knowledge');
-const DATA_DIR = path.join(ROOT, 'raget', 'raget-data');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-corpus');
+const DEVLOG_JSON_DIR = path.join(ROOT, 'raget', 'raget-devlog', 'json');
+const DATA_JSON_DIR = path.join(ROOT, 'raget', 'raget-data', 'json');
+const KNOWLEDGE_DIR = path.join(DATA_JSON_DIR, 'knowledge');
+const DATA_DIR = DATA_JSON_DIR;
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'jsonl');
 const OUT_FILE = path.join(OUT_DIR, 'raget_own_corpus.jsonl');
 
 function readJson(p) {
@@ -82,7 +84,7 @@ function pushIdentity(records, source, text) {
 
 // ---------- 1) persona.json - identitas Raget, bukan dialog ----------
 function renderPersona(records) {
-  const p = readJson(path.join(DATASET_DIR, 'persona.json'));
+  const p = readJson(path.join(DEVLOG_JSON_DIR, 'persona.json'));
   if (p.gayaBicara) pushIdentity(records, 'persona', 'Gaya bicara ' + (p.name || 'Raget') + ': ' + p.gayaBicara);
   for (const rule of p.aturan || []) pushIdentity(records, 'persona', rule);
   for (const rule of p.batasan || []) pushIdentity(records, 'persona', rule);
@@ -90,7 +92,7 @@ function renderPersona(records) {
 
 // ---------- 2) fewshot.json - dialog contoh asli ----------
 function renderFewshot(records) {
-  const list = readJson(path.join(DATASET_DIR, 'fewshot.json'));
+  const list = readJson(path.join(DEVLOG_JSON_DIR, 'fewshot.json'));
   for (const item of list) pushDialog(records, 'fewshot', item.q, item.a);
 }
 
@@ -126,10 +128,10 @@ function renderKnowledge(records) {
   }
 }
 
-// ---------- 4) raget-data/*/*.json - domain skema tunggal Fase B ----------
+// ---------- 4) raget-data/json/*/*.json - domain skema tunggal Fase B ----------
 function renderUnifiedDomain(records) {
   for (const domain of readdirSync(DATA_DIR, { withFileTypes: true }).filter((d) => d.isDirectory())) {
-    if (domain.name === 'neural') continue; // checkpoint biner, bukan teks korpus
+    if (domain.name === 'knowledge') continue; // sudah dirender terpisah lewat renderKnowledge() - bentuknya {q,a}/{subject,answer}, bukan skema unified
     const domainDir = path.join(DATA_DIR, domain.name);
     for (const f of readdirSync(domainDir).filter((f) => f.endsWith('.json'))) {
       const data = readJson(path.join(domainDir, f));
@@ -226,7 +228,7 @@ function main() {
   for (const [src, n] of Object.entries(bySource).sort((a, b) => b[1] - a[1])) console.log('  ' + src + ': ' + n);
   console.log('Total karakter:', chars);
   console.log('Estimasi token (kasar, ~4 char/token):', estTokens);
-  console.log('\nCatatan: bench.json dan metadata/answer-rules.json SENGAJA dilewati - lihat komentar header skrip ini untuk alasannya.');
+  console.log('\nCatatan: raget-tools/bench.json dan raget-devlog/json/metadata/answer-rules.json SENGAJA dilewati - lihat komentar header skrip ini untuk alasannya.');
 }
 
 main();

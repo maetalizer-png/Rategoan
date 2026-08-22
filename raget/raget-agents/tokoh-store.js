@@ -1,7 +1,7 @@
 // Loader tipis untuk data TOKOH (nama ID+EN, lahir/wafat+negara, bidang, 3
 // pencapaian, 1 kutipan, 1 trivia, relasi). Domain PERCONTOHAN migrasi skema
 // data standar Ronde vNext Fase B (lihat roadmap §3): data 236 entri kini
-// murni JSON di raget-data/tokoh/tokoh.json (skema {id, kategori, wilayah,
+// murni JSON di raget-data/json/tokoh/tokoh.json (skema {id, kategori, wilayah,
 // nama, tags, teks, meta}) - file ini HANYA berisi logika query (find/
 // compose/try*), nol data literal, sesuai kontrak "JSON untuk data, JS
 // hanya untuk logika". Riwayat migrasi ada di raget-tools/migrate-tokoh-
@@ -19,7 +19,7 @@ let tokohCache = null;
 async function loadTokoh() {
   if (tokohCache) return tokohCache;
   try {
-    const res = await fetch(new URL('../raget-data/tokoh/tokoh.json', import.meta.url));
+    const res = await fetch(new URL('../raget-data/json/tokoh/tokoh.json', import.meta.url));
     const raw = res.ok ? await res.json() : [];
     tokohCache = raw.map((e) => ({
       nama: e.nama,

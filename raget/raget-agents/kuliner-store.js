@@ -1,7 +1,7 @@
 // Loader tipis untuk data KULINER (nama, negara asal, jenis, bahan utama,
 // trivia) + composer adaptif. Domain KEDUA migrasi skema data standar Ronde
 // vNext Fase B (lihat roadmap §3, dan tokoh-store.js untuk domain pertama):
-// 143 entri kini murni JSON di raget-data/kuliner/<region>.json (skema
+// 143 entri kini murni JSON di raget-data/json/kuliner/<region>.json (skema
 // {id, kategori, wilayah, nama, tags, teks, meta}), dipecah 6 file
 // per-region (asia, eropa, amerika, afrika, osenia, timur-tengah) mengikuti
 // split yang sudah ada sejak Ronde v7 Bagian 3 - file ini HANYA berisi
@@ -23,7 +23,7 @@ async function loadKuliner() {
   try {
     const parts = await Promise.all(
       REGIONS.map(async (region) => {
-        const res = await fetch(new URL('../raget-data/kuliner/' + region + '.json', import.meta.url));
+        const res = await fetch(new URL('../raget-data/json/kuliner/' + region + '.json', import.meta.url));
         return res.ok ? await res.json() : [];
       })
     );

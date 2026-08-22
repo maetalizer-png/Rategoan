@@ -43,7 +43,7 @@ let fewshotCache = null;
 async function loadPersona() {
   if (personaCache) return personaCache;
   try {
-    const res = await fetch(new URL('../raget-dataset/persona.json', import.meta.url));
+    const res = await fetch(new URL('../raget-devlog/json/persona.json', import.meta.url));
     personaCache = res.ok ? await res.json() : null;
   } catch (e) {
     personaCache = null;
@@ -54,7 +54,7 @@ async function loadPersona() {
 async function loadFewshot() {
   if (!fewshotCache) {
     try {
-      const res = await fetch(new URL('../raget-dataset/fewshot.json', import.meta.url));
+      const res = await fetch(new URL('../raget-devlog/json/fewshot.json', import.meta.url));
       const data = res.ok ? await res.json() : [];
       fewshotCache = Array.isArray(data) ? data : [];
     } catch (e) {

@@ -2,7 +2,7 @@
 // metadata - 42 entri, 5 region, field: name/country/region/type/tags -
 // lebih banyak dari sains/olahraga yang cuma 3 field) dari file array
 // literal di raget-dataries/makanan/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/makanan/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/makanan/.
 // Pola sama seperti migrate-wisata-domain.mjs (allIds GLOBAL lintas region).
 //
 // SUDAH DIJALANKAN - arsip/template, bukan untuk dijalankan ulang setelah
@@ -17,7 +17,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'makanan');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'makanan');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

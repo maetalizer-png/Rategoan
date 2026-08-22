@@ -5,7 +5,7 @@
 // contoh yang sudah disebut di roadmap §3 ("null bila tidak relevan").
 //
 // SUDAH DIJALANKAN (arsip/dokumentasi, bukan skrip yang dipakai ulang):
-// hasilnya raget-data/hari-internasional/hari-internasional.json, dan
+// hasilnya raget-data/json/hari-internasional/hari-internasional.json, dan
 // INTERNATIONAL_DAYS di world-context.js SUDAH DIHAPUS setelah migrasi.
 //
 // Pakai: node raget/raget-tools/migrate-hari-domain.mjs
@@ -16,7 +16,7 @@ import { fileURLToPath } from 'url';
 import { worldContext } from '../raget-agents/world-context.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = path.resolve(__dirname, '..', 'raget-data', 'hari-internasional');
+const OUT_DIR = path.resolve(__dirname, '..', 'raget-data', 'json', 'hari-internasional');
 const OUT_FILE = path.join(OUT_DIR, 'hari-internasional.json');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');

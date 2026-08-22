@@ -18,7 +18,7 @@ import { LLMVocabulary } from '../raget-llm/neural/llm-vocabulary.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-corpus', 'raget_own_corpus.jsonl');
+const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'raget_own_corpus.jsonl');
 const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'neural');
 const OUT_FILE = path.join(OUT_DIR, 'raget-neural-tiny.safetensors');
 const REPORT_FILE = path.join(__dirname, 'training-report-tiny.json');

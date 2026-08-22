@@ -1,6 +1,6 @@
 // Migrasi domain #8 (Fase B vNext, §3 roadmap): pindahkan ETIKA BUDAYA dari
 // 6 file array literal di raget-dataries/etika/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/etika/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/etika/.
 // Pola sama seperti migrate-country-domain.mjs.
 //
 // KENAPA ETIKA (bukan urutan alfabetis): di antara domain raget-dataries
@@ -24,7 +24,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'etika');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'etika');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

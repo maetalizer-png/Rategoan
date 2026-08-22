@@ -1,7 +1,7 @@
 // Migrasi domain ALAM (domain terkaya berikutnya - 26 entri, 5 region,
 // field: region/name/type/habitat/tags) dari file array literal di
 // raget-dataries/alam/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/alam/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/alam/.
 // Pola sama seperti migrate-makanan-domain.mjs (allIds GLOBAL lintas region).
 //
 // SUDAH DIJALANKAN - arsip/template, bukan untuk dijalankan ulang setelah
@@ -16,7 +16,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'alam');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'alam');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

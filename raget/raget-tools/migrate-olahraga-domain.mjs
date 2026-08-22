@@ -3,7 +3,7 @@
 // tetap dimigrasikan demi KONSISTENSI SKEMA, bukan karena ini domain
 // terkaya berikutnya) dari file array literal di
 // raget-dataries/olahraga/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/olahraga/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/olahraga/.
 // Field 'nama' diisi dari meta.topic (olahraga tidak punya field 'name').
 // Pola sama seperti migrate-sains-domain.mjs (allIds GLOBAL lintas region).
 //
@@ -19,7 +19,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'olahraga');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'olahraga');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

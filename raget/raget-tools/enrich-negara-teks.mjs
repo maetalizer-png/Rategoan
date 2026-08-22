@@ -44,7 +44,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const NEGARA_DIR = path.join(ROOT, 'raget', 'raget-data', 'negara');
+const NEGARA_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'negara');
 
 function main() {
   const files = readdirSync(NEGARA_DIR).filter((f) => f.endsWith('.json'));

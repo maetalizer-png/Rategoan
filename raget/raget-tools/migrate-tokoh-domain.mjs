@@ -1,10 +1,10 @@
 // Migrasi domain PERCONTOHAN untuk skema data standar (Ronde vNext Fase B,
 // §3 roadmap): memindahkan TOKOH dari array literal di dalam tokoh-store.js
-// (JS bercampur data) ke raget-data/tokoh/tokoh.json (JSON murni, skema
+// (JS bercampur data) ke raget-data/json/tokoh/tokoh.json (JSON murni, skema
 // {id, kategori, wilayah, nama, tags, teks, meta}).
 //
 // SUDAH DIJALANKAN (arsip/dokumentasi, bukan skrip yang dipakai ulang):
-// hasilnya raget-data/tokoh/tokoh.json, dan tokoh-store.js sudah ditulis
+// hasilnya raget-data/json/tokoh/tokoh.json, dan tokoh-store.js sudah ditulis
 // ulang jadi loader tipis sehingga import `tokohStore.TOKOH` di bawah ini
 // TIDAK LAGI ada (array literalnya sudah dihapus dari tokoh-store.js).
 // Disimpan sebagai TEMPLATE untuk migrasi domain berikutnya (kuliner, hari
@@ -17,7 +17,7 @@ import { fileURLToPath } from 'url';
 import { tokohStore } from '../raget-agents/tokoh-store.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = path.resolve(__dirname, '..', 'raget-data', 'tokoh');
+const OUT_DIR = path.resolve(__dirname, '..', 'raget-data', 'json', 'tokoh');
 const OUT_FILE = path.join(OUT_DIR, 'tokoh.json');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');

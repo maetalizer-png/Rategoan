@@ -2,13 +2,13 @@
 // roadmap) - domain kedua setelah tokoh (lihat migrate-tokoh-domain.mjs
 // untuk pola dasarnya). Beda dari tokoh: kuliner SUDAH terpecah jadi 6 file
 // per-region sejak Ronde v7 Bagian 3 (kuliner-data/*.js), jadi migrasi ini
-// tinggal mengonversi tiap file region langsung ke raget-data/kuliner/
+// tinggal mengonversi tiap file region langsung ke raget-data/json/kuliner/
 // <region>.json - regionnya sendiri jadi field "wilayah" tiap entri
 // (granularitas benua, bukan negara - beda dari domain tokoh yang pakai
 // negara kelahiran sebagai wilayah).
 //
 // SUDAH DIJALANKAN (arsip/dokumentasi, bukan skrip yang dipakai ulang):
-// hasilnya raget-data/kuliner/*.json, dan raget-agents/kuliner-data/*.js
+// hasilnya raget-data/json/kuliner/*.json, dan raget-agents/kuliner-data/*.js
 // (sumber import di bawah) SUDAH DIHAPUS setelah migrasi - menjalankan
 // ulang skrip ini akan gagal di baris import paling atas, itu sinyal yang
 // diharapkan (sengaja, bukan bug), bukan untuk "diperbaiki".
@@ -24,7 +24,7 @@ import { DATA as OSENIA } from '../raget-agents/kuliner-data/osenia.js';
 import { DATA as TIMUR_TENGAH } from '../raget-agents/kuliner-data/timur-tengah.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = path.resolve(__dirname, '..', 'raget-data', 'kuliner');
+const OUT_DIR = path.resolve(__dirname, '..', 'raget-data', 'json', 'kuliner');
 
 const REGIONS = {
   asia: ASIA,

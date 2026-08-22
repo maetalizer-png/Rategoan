@@ -175,7 +175,7 @@ export const REGIONS = Object.freeze({
 
 const cache = new Map();
 
-// Grup yang sudah dimigrasi ke skema JSON tunggal Fase B (raget-data/<grup>/).
+// Grup yang sudah dimigrasi ke skema JSON tunggal Fase B (raget-data/json/<grup>/).
 // loadRegion() di bawah TETAP satu-satunya titik yang tahu soal storage -
 // untuk grup di sini ia fetch JSON lalu bentuk ulang jadi {text, metadata}
 // SAMA PERSIS seperti bentuk lama, supaya dataries-bridge.js dan seluruh
@@ -190,8 +190,8 @@ function unifiedToLegacyShape(entry, group) {
 }
 
 async function loadRegionFromJson(group, id, dataFolder) {
-  const res = await fetch(new URL('../raget-data/' + dataFolder + '/' + id + '.json', import.meta.url));
-  if (!res.ok) throw new Error('Gagal fetch raget-data/' + dataFolder + '/' + id + '.json: HTTP ' + res.status);
+  const res = await fetch(new URL('../raget-data/json/' + dataFolder + '/' + id + '.json', import.meta.url));
+  if (!res.ok) throw new Error('Gagal fetch raget-data/json/' + dataFolder + '/' + id + '.json: HTTP ' + res.status);
   const raw = await res.json();
   return raw.map((entry) => unifiedToLegacyShape(entry, group));
 }

@@ -20,7 +20,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'sapaan');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'sapaan');
 const OUT_FILE = path.join(OUT_DIR, 'sapaan.json');
 
 const TIME_GREETING_TEMPLATES = {

@@ -1,6 +1,6 @@
 // Migrasi domain #9 (Fase B vNext, §3 roadmap): pindahkan MINUMAN dari 6
 // file array literal di raget-dataries/minuman/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/minuman/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/minuman/.
 // Pola sama seperti migrate-etika-domain.mjs. Dipakai kode agen lewat
 // bridge-extras.js#tryMinuman() -> dataries.loadAll('minuman').
 //
@@ -16,7 +16,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'minuman');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'minuman');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

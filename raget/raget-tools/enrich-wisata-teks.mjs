@@ -43,7 +43,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const WISATA_DIR = path.join(ROOT, 'raget', 'raget-data', 'wisata');
+const WISATA_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'wisata');
 
 function phraseFor(entry) {
   return 'Tempat wisata terkenal di kota ' + entry.meta.city + ' adalah ' + entry.nama + '.';

@@ -28,7 +28,7 @@ function replyCaraKerja() {
   return (
     'Saya (Raget) adalah mesin template/rule-based, bukan model bahasa besar — 100% berjalan lokal di perangkat kamu, tanpa server dan tanpa API key.\n\n' +
     'Alur jawab: pola pesan dicocokkan lewat router intent, lalu dicoba berurutan lewat tool khusus (matematika, pengingat, impor), jawaban faktual dari dataries (data terstruktur negara/wisata/tokoh/dll), pencarian retrieval satu pintu (TF-IDF) di catatan & pengetahuan tersimpan, dan mesin template lokal sebagai fallback terakhir.\n\n' +
-    'Sumber: raget-devlog/arsitektur.jsonl (retrieval satu pintu, Jilid 13) dan refactor agent.js/dataries-bridge.js (Trisula Final v2).'
+    'Sumber: raget-devlog/jsonl/arsitektur.jsonl (retrieval satu pintu, Jilid 13) dan refactor agent.js/dataries-bridge.js (Trisula Final v2).'
   );
 }
 
@@ -60,7 +60,7 @@ function replyBugTersulit() {
   const top = [...bugs].sort((a, b) => b.bug.length - a.bug.length)[0];
   return (
     'Bug paling rumit yang tercatat di devlog saya:\n\n"' + top.bug + '"\n\n' +
-    'Ditemukan & ditutup di ronde: ' + top.judul + '. Sumber: raget-devlog/bug.jsonl.'
+    'Ditemukan & ditutup di ronde: ' + top.judul + '. Sumber: raget-devlog/jsonl/bug.jsonl.'
   );
 }
 

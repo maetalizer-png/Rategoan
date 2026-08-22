@@ -1,5 +1,5 @@
 // vNext Fase C: bangun checkpoint raget-neural-50m.safetensors dari korpus lokal.
-// Korpus: raget-corpus/raget_own_corpus.jsonl (jalankan dataries-ke-korpus.mjs
+// Korpus: raget-data/jsonl/raget_own_corpus.jsonl (jalankan dataries-ke-korpus.mjs
 // dulu kalau belum ada). skipAutoTrain dipakai di sini - bobot inisialisasi
 // acak, belum dilatih; training nyata ada di train-neural-checkpoint.mjs.
 //
@@ -14,7 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'neural');
 const OUT_FILE = path.join(OUT_DIR, 'raget-neural-50m.safetensors');
-const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-corpus', 'raget_own_corpus.jsonl');
+const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'raget_own_corpus.jsonl');
 
 function gatherCorpus() {
   const raw = readFileSync(CORPUS_FILE, 'utf8').trim();
