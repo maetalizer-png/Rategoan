@@ -114,7 +114,7 @@ export const attach = {
     $('sheet-camera').onclick = () => this.pick('camera');
     $('sheet-photo').onclick = () => this.pick('photo');
     $('sheet-file').onclick = () => this.pick('file');
-    $('sheet-travel').onclick = () => { location.href = 'travel/'; };
+    $('sheet-travel').onclick = () => { location.href = 'fitur/jelajah/'; };
     $('pick-camera').onchange = (e) => this.onPick(e.target);
     $('pick-photo').onchange = (e) => this.onPick(e.target);
     $('pick-file').onchange = (e) => this.onPick(e.target);

@@ -1,0 +1,101 @@
+/* ========== BAR BAWAH ========== */
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 6px 8px calc(8px + env(safe-area-inset-bottom));
+  z-index: 20;
+}
+
+.barBtn {
+  flex: 1;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color 0.2s, transform 0.15s;
+}
+
+.barBtn.on {
+  color: var(--caramel);
+}
+
+.barBtn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.barBtn small {
+  font-size: 8px;
+  color: var(--caramel);
+}
+
+.fabWrap {
+  flex: 0 0 100px;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
+  position: relative;
+}
+
+.fab {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  background: var(--cream);
+  color: var(--brown);
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 12px 26px -10px rgba(176, 128, 80, 0.5),
+              0 0 0 6px var(--bg),
+              inset 0 0 0 2px var(--cream-deep);
+  transition: transform 0.15s;
+}
+
+#stopRow {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+#btnPlay[hidden] {
+  display: none !important;
+}
+
+#stopRow .fab {
+  width: 62px;
+  height: 62px;
+  font-size: 12px;
+  background: var(--card);
+  color: var(--danger);
+  border: 2px solid var(--danger);
+  box-shadow: 0 10px 24px -10px rgba(201, 79, 79, 0.4),
+              0 0 0 6px var(--bg);
+}
+
+#stopRow .fabSecond {
+  width: 48px;
+  height: 48px;
+  font-size: 10px;
+  align-self: center;
+  color: var(--brown);
+  border-color: var(--cream-deep);
+  box-shadow: 0 8px 18px -10px rgba(176, 128, 80, 0.4),
+              0 0 0 5px var(--bg);
+}

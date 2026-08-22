@@ -65,6 +65,7 @@ const browserGlobals = {
   TextDecoder: 'readonly',
   speechSynthesis: 'readonly',
   SpeechSynthesisUtterance: 'readonly',
+  MediaMetadata: 'readonly',
   webkitSpeechRecognition: 'readonly',
   SpeechRecognition: 'readonly',
   confirm: 'readonly',

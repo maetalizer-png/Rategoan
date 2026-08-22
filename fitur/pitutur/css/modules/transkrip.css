@@ -1,0 +1,46 @@
+/* ========== TRANSKRIP ========== */
+.page h2 {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#transcript {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.7;
+  min-height: 140px;
+  text-align: center;
+}
+
+#transcript b {
+  color: var(--caramel);
+}
+
+#transcript mark {
+  background: var(--caramel);
+  color: #fff;
+  border-radius: 5px;
+  padding: 0 3px;
+}
+
+.naskahLine {
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.naskahLine:active {
+  background: var(--cream);
+}
+
+
+.naskahLine.on {
+  background: rgba(176, 128, 80, 0.12);
+  box-shadow: inset 3px 0 0 var(--caramel, #b08050);
+  padding-left: 8px;
+}

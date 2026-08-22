@@ -4,7 +4,7 @@ import { errorCard, low, fmtN, fuzzyCountry, phrasesFor } from '../utils.js';
 import { PACK_TIPS } from '../constants.js';
 import { getAssistantHistory, pushAssistantMessage } from '../storage.js';
 import { computePlan, buildPlanLines, buildPlanMarkdown, openPdfPrintWindow, downloadFile } from './trip.js';
-import { exportLog } from '../../../raget/raget-memory/export-log.js';
+import { exportLog } from '../../../../raget/raget-memory/export-log.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');

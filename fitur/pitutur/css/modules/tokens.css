@@ -1,0 +1,16 @@
+/* ========== TOKEN DESAIN ========== */
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --surface: #f7f3ec;
+  --text: #2a241d;
+  --muted: #8a7f70;
+  --line: #ebe4d6;
+  --cream: #f1e9db;
+  --cream-deep: #e7dbc4;
+  --brown: #6b4f2e;
+  --caramel: #b08050;
+  --danger: #c94f4f;
+  --on-accent: #ffffff;
+  --scrim: rgba(42, 36, 29, 0.16);
+}

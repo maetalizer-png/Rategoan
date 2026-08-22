@@ -343,7 +343,7 @@ async function renderArtefak() {
     const ctaTrip = document.getElementById('artCtaTrip');
     const ctaExport = document.getElementById('artCtaExport');
     if (ctaEmail) ctaEmail.onclick = () => goToChatWithPrompt('buatkan email tentang ');
-    if (ctaTrip) ctaTrip.onclick = () => { location.href = 'travel/'; };
+    if (ctaTrip) ctaTrip.onclick = () => { location.href = 'fitur/jelajah/'; };
     if (ctaExport) ctaExport.onclick = () => goToChatWithPrompt('ekspor catatan');
     return;
   }
@@ -364,7 +364,7 @@ async function renderArtefak() {
     const item = all.find((x) => x.id === b.dataset.artCopy);
     if (item && navigator.clipboard) navigator.clipboard.writeText(item.text).then(() => toast.show('Disalin'));
   });
-  content.querySelectorAll('[data-art-open]').forEach((b) => b.onclick = () => { location.href = 'travel/'; });
+  content.querySelectorAll('[data-art-open]').forEach((b) => b.onclick = () => { location.href = 'fitur/jelajah/'; });
   content.querySelectorAll('[data-art-del]').forEach((b) => b.onclick = async () => {
     await collectionStore.removeItem(b.dataset.artDel);
     toast.show('Dihapus');
@@ -421,6 +421,7 @@ export const collectionPage = {
       router.go('collection');
       this.open();
     };
+    $('btn-pitutur').onclick = () => { location.href = 'fitur/pitutur/'; };
     $('coll-back').onclick = () => router.go('chat');
     document.querySelectorAll('.coll-tab').forEach((tb) => {
       tb.onclick = () => {
