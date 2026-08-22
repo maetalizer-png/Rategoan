@@ -1655,6 +1655,51 @@
 {"type":"fact","source":"negara/osenian.json","text":"Samoa - Negara kepulauan di Oseania dengan budaya Polinesia. Ibu kota: Apia. Populasi: 0.2 juta jiwa. Mata uang: Tala (WST). Bahasa: Samoa, Inggris. Sistem pemerintahan: Republik Parlementer. Anggota PBB dan Commonwealth. Negara dengan budaya Polinesia yang kaya dan pemandangan alam yang indah. Nama resmi: Negara Merdeka Samoa. Samoa: mata uang Tala (WST)."}
 {"type":"fact","source":"negara/osenian.json","text":"Tonga - Negara kepulauan di Oseania dengan kerajaan Polinesia. Ibu kota: Nuku'alofa. Populasi: 0.1 juta jiwa. Mata uang: Pa'anga (TOP). Bahasa: Tonga, Inggris. Sistem pemerintahan: Monarki Konstitusional. Satu-satunya kerajaan di Pasifik dengan budaya Polinesia yang kaya dan sejarah panjang. Nama resmi: Kerajaan Tonga. Tonga: mata uang Pa'anga (TOP)."}
 {"type":"fact","source":"negara/osenian.json","text":"Kepulauan Marshall - Negara kepulauan di Oseania dengan keindahan alam. Ibu kota: Majuro. Populasi: 42 ribu jiwa. Mata uang: Dolar AS (USD). Bahasa: Marshall, Inggris. Sistem pemerintahan: Republik Parlementer. Negara dengan terumbu karang dan laguna yang indah. Nama resmi: Republik Kepulauan Marshall. Kepulauan Marshall: mata uang Dolar AS (USD)."}
+{"type":"fact","source":"sains/biologi.json","text":"Fotosintesis — proses tumbuhan mengubah cahaya matahari, air, dan CO2 menjadi glukosa dan oksigen."}
+{"type":"fact","source":"sains/biologi.json","text":"DNA — molekul pembawa informasi genetik makhluk hidup, berbentuk heliks ganda."}
+{"type":"fact","source":"sains/biologi.json","text":"Evolusi — proses perubahan sifat makhluk hidup dari generasi ke generasi, dicetuskan Charles Darwin."}
+{"type":"fact","source":"sains/biologi.json","text":"Sel — unit struktural dan fungsional terkecil dari semua makhluk hidup."}
+{"type":"fact","source":"sains/biologi.json","text":"Sistem Peredaran Darah — sistem organ yang mengalirkan darah ke seluruh tubuh, dipompa oleh jantung."}
+{"type":"fact","source":"sains/biologi.json","text":"Ekosistem — interaksi antara makhluk hidup dan lingkungannya dalam suatu wilayah."}
+{"type":"fact","source":"sains/biologi.json","text":"Virus — partikel mikroskopis yang membutuhkan sel inang untuk bereplikasi, penyebab banyak penyakit."}
+{"type":"fact","source":"sains/biologi.json","text":"Bakteri — organisme uniseluler tanpa membran inti, ada yang bermanfaat dan ada yang patogen."}
+{"type":"fact","source":"sains/biologi.json","text":"Sistem Imun — mekanisme tubuh melawan patogen seperti virus dan bakteri."}
+{"type":"fact","source":"sains/biologi.json","text":"Rantai Makanan — urutan pemindahan energi makanan dari produsen ke konsumen dalam ekosistem."}
+{"type":"fact","source":"sains/biologi.json","text":"Metamorfosis — proses perubahan bentuk tubuh hewan seperti kupu-kupu dari telur hingga dewasa."}
+{"type":"fact","source":"sains/biologi.json","text":"Otak Manusia — organ pusat sistem saraf yang mengatur pikiran, gerakan, dan fungsi tubuh."}
+{"type":"fact","source":"sains/biologi.json","text":"Genetika — cabang biologi yang mempelajari pewarisan sifat, pertama kali diteliti Gregor Mendel."}
+{"type":"fact","source":"sains/biologi.json","text":"Klorofil — pigmen hijau pada tumbuhan yang berperan menyerap cahaya untuk fotosintesis."}
+{"type":"fact","source":"sains/biologi.json","text":"Keanekaragaman Hayati — variasi kehidupan di bumi, terdiri dari keragaman gen, spesies, dan ekosistem."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Gravitasi — gaya tarik-menarik antar massa, ditemukan hukumnya oleh Isaac Newton."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Relativitas — teori Einstein yang menjelaskan hubungan ruang, waktu, dan gravitasi."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Atom — unit terkecil materi yang masih memiliki sifat unsur kimia."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Tabel Periodik — susunan sistematis unsur kimia berdasarkan nomor atom, disusun Dmitri Mendeleev."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Hukum Termodinamika — prinsip fisika tentang energi, panas, dan entropi dalam suatu sistem."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Listrik — aliran muatan listrik, mendasari teknologi modern seperti motor dan komputer."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Magnet — benda yang menghasilkan medan magnet, dapat menarik logam tertentu seperti besi."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Reaksi Kimia — proses perubahan zat menjadi zat baru melalui pemutusan dan pembentukan ikatan kimia."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Asam dan Basa — dua golongan senyawa kimia dibedakan lewat skala pH, asam pH<7, basa pH>7."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Mekanika Kuantum — cabang fisika yang mempelajari perilaku partikel pada skala sub-atomik."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Radioaktivitas — pancaran energi dari inti atom tidak stabil, diteliti pertama kali oleh Marie Curie."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Fotosintesis (kimia) — reaksi kimia tumbuhan mengubah CO2 dan air menjadi glukosa dan oksigen dengan cahaya."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Kecepatan Cahaya — kecepatan cahaya di ruang hampa sekitar 300.000 km/detik, konstanta fisika penting."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Ikatan Kovalen — ikatan kimia terbentuk dari pemakaian bersama pasangan elektron antar atom."}
+{"type":"fact","source":"sains/fisika-kimia.json","text":"Nuklir — energi dilepas dari reaksi fisi atau fusi inti atom, dimanfaatkan pada reaktor dan senjata nuklir."}
+{"type":"fact","source":"sains/umum.json","text":"Tata Surya — sistem yang terdiri dari Matahari dan benda langit yang mengorbitnya, termasuk delapan planet."}
+{"type":"fact","source":"sains/umum.json","text":"Lubang Hitam — wilayah di ruang angkasa dengan gravitasi sangat kuat sehingga cahaya pun tak bisa lolos."}
+{"type":"fact","source":"sains/umum.json","text":"Perubahan Iklim — perubahan jangka panjang suhu dan pola cuaca bumi, dipicu aktivitas manusia."}
+{"type":"fact","source":"sains/umum.json","text":"Kecerdasan Buatan (AI) — bidang ilmu komputer yang membuat sistem mampu meniru sebagian kemampuan berpikir manusia."}
+{"type":"fact","source":"sains/umum.json","text":"Gempa Bumi — getaran permukaan bumi akibat pelepasan energi dari pergerakan lempeng tektonik."}
+{"type":"fact","source":"sains/umum.json","text":"Siklus Air — perputaran air di bumi melalui penguapan, kondensasi, dan presipitasi."}
+{"type":"fact","source":"sains/umum.json","text":"Efek Rumah Kaca — fenomena terperangkapnya panas di atmosfer bumi akibat gas seperti CO2."}
+{"type":"fact","source":"sains/umum.json","text":"Vaksin — zat yang merangsang sistem imun tubuh untuk mengenali dan melawan penyakit tertentu."}
+{"type":"fact","source":"sains/umum.json","text":"Robotika — cabang teknik yang merancang dan membangun robot untuk berbagai keperluan otomatisasi."}
+{"type":"fact","source":"sains/umum.json","text":"Internet — jaringan komputer global yang saling terhubung, memungkinkan pertukaran data di seluruh dunia."}
+{"type":"fact","source":"sains/umum.json","text":"Energi Terbarukan — sumber energi yang dapat diperbarui secara alami seperti surya, angin, dan air."}
+{"type":"fact","source":"sains/umum.json","text":"Big Bang — teori ilmiah yang menjelaskan asal mula alam semesta dari ledakan besar sekitar 13,8 miliar tahun lalu."}
+{"type":"fact","source":"sains/umum.json","text":"Statistik — cabang matematika yang mempelajari pengumpulan, analisis, dan interpretasi data."}
+{"type":"fact","source":"sains/umum.json","text":"Bioteknologi — pemanfaatan organisme hidup atau bagiannya untuk menghasilkan produk yang bermanfaat."}
+{"type":"fact","source":"sains/umum.json","text":"GPS — sistem navigasi satelit yang menentukan posisi geografis pengguna secara akurat."}
 {"type":"dialog","source":"sapaan/sapaan.json","prompt":"Selamat pagi","completion":"Selamat pagi! Ada yang bisa saya bantu?"}
 {"type":"dialog","source":"sapaan/sapaan.json","prompt":"Selamat pagi","completion":"Pagi! Semoga harimu menyenangkan, mau mulai dari mana?"}
 {"type":"dialog","source":"sapaan/sapaan.json","prompt":"Selamat pagi","completion":"Pagi juga, ada rencana apa hari ini?"}
