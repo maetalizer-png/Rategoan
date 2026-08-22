@@ -1,0 +1,91 @@
+[
+  {
+    "id": "alam-kanguru",
+    "kategori": "alam",
+    "wilayah": "osenia",
+    "nama": "Kanguru",
+    "tags": [
+      "kanguru",
+      "australia"
+    ],
+    "teks": "Kanguru — marsupial ikonik Australia, bergerak dengan cara melompat menggunakan kaki belakang yang kuat.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Australia",
+      "tags": [
+        "kanguru",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "alam-koala",
+    "kategori": "alam",
+    "wilayah": "osenia",
+    "nama": "Koala",
+    "tags": [
+      "koala"
+    ],
+    "teks": "Koala — marsupial pemakan daun eukaliptus, hidup di pepohonan Australia timur dan selatan.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Australia",
+      "tags": [
+        "koala"
+      ]
+    }
+  },
+  {
+    "id": "alam-eucalyptus",
+    "kategori": "alam",
+    "wilayah": "osenia",
+    "nama": "Eucalyptus",
+    "tags": [
+      "eucalyptus"
+    ],
+    "teks": "Eucalyptus — pohon khas Australia dengan daun beraroma khas, makanan utama koala.",
+    "meta": {
+      "type": "flora",
+      "habitat": "Australia",
+      "tags": [
+        "eucalyptus"
+      ]
+    }
+  },
+  {
+    "id": "alam-platipus",
+    "kategori": "alam",
+    "wilayah": "osenia",
+    "nama": "Platipus",
+    "tags": [
+      "platipus"
+    ],
+    "teks": "Platipus — mamalia bertelur unik dengan paruh seperti bebek, hanya ditemukan di Australia.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Australia",
+      "tags": [
+        "platipus"
+      ]
+    }
+  },
+  {
+    "id": "alam-kiwi",
+    "kategori": "alam",
+    "wilayah": "osenia",
+    "nama": "Kiwi",
+    "tags": [
+      "kiwi",
+      "selandia baru"
+    ],
+    "teks": "Burung Kiwi — burung tak bisa terbang ikon Selandia Baru, aktif di malam hari.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Selandia Baru",
+      "tags": [
+        "kiwi",
+        "selandia baru"
+      ]
+    }
+  }
+]

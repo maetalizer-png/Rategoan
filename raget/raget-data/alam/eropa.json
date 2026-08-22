@@ -1,0 +1,89 @@
+[
+  {
+    "id": "alam-beruang-coklat-eropa",
+    "kategori": "alam",
+    "wilayah": "eropa",
+    "nama": "Beruang Coklat Eropa",
+    "tags": [
+      "beruang coklat"
+    ],
+    "teks": "Beruang Coklat Eropa — predator besar yang masih ditemukan di hutan Rumania dan Skandinavia.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Rumania dan Skandinavia",
+      "tags": [
+        "beruang coklat"
+      ]
+    }
+  },
+  {
+    "id": "alam-serigala-abu-abu",
+    "kategori": "alam",
+    "wilayah": "eropa",
+    "nama": "Serigala Abu-abu",
+    "tags": [
+      "serigala"
+    ],
+    "teks": "Serigala Abu-abu — kembali berkembang biak di banyak hutan Eropa setelah program konservasi berhasil.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Eropa",
+      "tags": [
+        "serigala"
+      ]
+    }
+  },
+  {
+    "id": "alam-edelweiss",
+    "kategori": "alam",
+    "wilayah": "eropa",
+    "nama": "Edelweiss",
+    "tags": [
+      "edelweiss",
+      "alpen"
+    ],
+    "teks": "Edelweiss — bunga pegunungan Alpen yang menjadi simbol keindahan dan ketahanan alam Eropa.",
+    "meta": {
+      "type": "flora",
+      "habitat": "Pegunungan Alpen",
+      "tags": [
+        "edelweiss",
+        "alpen"
+      ]
+    }
+  },
+  {
+    "id": "alam-rusa-merah",
+    "kategori": "alam",
+    "wilayah": "eropa",
+    "nama": "Rusa Merah",
+    "tags": [
+      "rusa merah"
+    ],
+    "teks": "Rusa Merah — mamalia besar asli hutan Eropa, dikenal dengan tanduk bercabangnya yang megah.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Eropa",
+      "tags": [
+        "rusa merah"
+      ]
+    }
+  },
+  {
+    "id": "alam-bison-eropa",
+    "kategori": "alam",
+    "wilayah": "eropa",
+    "nama": "Bison Eropa",
+    "tags": [
+      "bison eropa"
+    ],
+    "teks": "Bison Eropa — mamalia darat terberat di Eropa, sempat nyaris punah dan kini dilindungi ketat.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Polandia dan Belarus",
+      "tags": [
+        "bison eropa"
+      ]
+    }
+  }
+]

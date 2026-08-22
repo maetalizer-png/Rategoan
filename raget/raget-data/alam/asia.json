@@ -1,0 +1,112 @@
+[
+  {
+    "id": "alam-komodo",
+    "kategori": "alam",
+    "wilayah": "asia",
+    "nama": "Komodo",
+    "tags": [
+      "komodo",
+      "indonesia"
+    ],
+    "teks": "Komodo — kadal terbesar di dunia, hanya hidup liar di Pulau Komodo dan Rinca, Indonesia.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Indonesia",
+      "tags": [
+        "komodo",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "alam-panda-raksasa",
+    "kategori": "alam",
+    "wilayah": "asia",
+    "nama": "Panda Raksasa",
+    "tags": [
+      "panda",
+      "china"
+    ],
+    "teks": "Panda Raksasa — beruang herbivora asli China, ikon konservasi satwa dunia.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "China",
+      "tags": [
+        "panda",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "alam-harimau-sumatra",
+    "kategori": "alam",
+    "wilayah": "asia",
+    "nama": "Harimau Sumatra",
+    "tags": [
+      "harimau sumatra"
+    ],
+    "teks": "Harimau Sumatra — subspesies harimau terkecil, kini berstatus kritis terancam punah.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Sumatra, Indonesia",
+      "tags": [
+        "harimau sumatra"
+      ]
+    }
+  },
+  {
+    "id": "alam-rafflesia-arnoldii",
+    "kategori": "alam",
+    "wilayah": "asia",
+    "nama": "Rafflesia arnoldii",
+    "tags": [
+      "rafflesia",
+      "bunga bangkai"
+    ],
+    "teks": "Bunga Rafflesia arnoldii — bunga terbesar di dunia, tumbuh liar di hutan Sumatra dengan aroma menyengat.",
+    "meta": {
+      "type": "flora",
+      "habitat": "Sumatra, Indonesia",
+      "tags": [
+        "rafflesia",
+        "bunga bangkai"
+      ]
+    }
+  },
+  {
+    "id": "alam-orangutan",
+    "kategori": "alam",
+    "wilayah": "asia",
+    "nama": "Orangutan",
+    "tags": [
+      "orangutan"
+    ],
+    "teks": "Orangutan — kera besar arboreal asli Sumatra dan Kalimantan, salah satu kerabat terdekat manusia.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Sumatra dan Kalimantan, Indonesia",
+      "tags": [
+        "orangutan"
+      ]
+    }
+  },
+  {
+    "id": "alam-sakura",
+    "kategori": "alam",
+    "wilayah": "asia",
+    "nama": "Sakura",
+    "tags": [
+      "sakura",
+      "jepang"
+    ],
+    "teks": "Sakura — bunga ceri Jepang yang mekar tiap musim semi, simbol budaya Jepang.",
+    "meta": {
+      "type": "flora",
+      "habitat": "Jepang",
+      "tags": [
+        "sakura",
+        "jepang"
+      ]
+    }
+  }
+]

@@ -333,6 +333,32 @@
 {"type":"fact","source":"knowledge/umum.json","text":"Meditasi — Meditasi adalah latihan melatih fokus dan ketenangan pikiran, biasa dilakukan lewat teknik pernapasan."}
 {"type":"fact","source":"knowledge/umum.json","text":"Belajar Bahasa Asing — Belajar bahasa asing melatih otak sekaligus membuka peluang komunikasi lebih luas."}
 {"type":"fact","source":"knowledge/umum.json","text":"Kesehatan Mental — Kesehatan mental sama pentingnya dengan kesehatan fisik dalam menjalani aktivitas sehari-hari."}
+{"type":"fact","source":"alam/afrika.json","text":"Singa — raja hutan Afrika, hidup berkelompok di savana Afrika bagian timur dan selatan."}
+{"type":"fact","source":"alam/afrika.json","text":"Gajah Afrika — mamalia darat terbesar di dunia, dikenal dengan telinga besar dan gading panjang."}
+{"type":"fact","source":"alam/afrika.json","text":"Baobab — pohon raksasa berumur ribuan tahun, dijuluki \"pohon terbalik\" karena bentuk dahannya."}
+{"type":"fact","source":"alam/afrika.json","text":"Zebra — kuda berbelang hitam-putih khas savana Afrika, hidup dalam kawanan besar."}
+{"type":"fact","source":"alam/afrika.json","text":"Gorila Gunung — primata besar yang kritis terancam punah, hidup di pegunungan Afrika Timur."}
+{"type":"fact","source":"alam/amerika.json","text":"Elang Botak — burung nasional Amerika Serikat, simbol kebebasan dan kekuatan."}
+{"type":"fact","source":"alam/amerika.json","text":"Jaguar — kucing besar terbesar di Amerika, hidup di hutan hujan Amazon dan Amerika Tengah."}
+{"type":"fact","source":"alam/amerika.json","text":"Anggrek Amazon — ribuan spesies anggrek liar tumbuh di kanopi hutan hujan Amazon."}
+{"type":"fact","source":"alam/amerika.json","text":"Kondor Andes — burung terbang terbesar di dunia berdasarkan rentang sayap, hidup di pegunungan Andes."}
+{"type":"fact","source":"alam/amerika.json","text":"Pohon Sequoia — pohon tertinggi di dunia, tumbuh di California, Amerika Serikat."}
+{"type":"fact","source":"alam/asia.json","text":"Komodo — kadal terbesar di dunia, hanya hidup liar di Pulau Komodo dan Rinca, Indonesia."}
+{"type":"fact","source":"alam/asia.json","text":"Panda Raksasa — beruang herbivora asli China, ikon konservasi satwa dunia."}
+{"type":"fact","source":"alam/asia.json","text":"Harimau Sumatra — subspesies harimau terkecil, kini berstatus kritis terancam punah."}
+{"type":"fact","source":"alam/asia.json","text":"Bunga Rafflesia arnoldii — bunga terbesar di dunia, tumbuh liar di hutan Sumatra dengan aroma menyengat."}
+{"type":"fact","source":"alam/asia.json","text":"Orangutan — kera besar arboreal asli Sumatra dan Kalimantan, salah satu kerabat terdekat manusia."}
+{"type":"fact","source":"alam/asia.json","text":"Sakura — bunga ceri Jepang yang mekar tiap musim semi, simbol budaya Jepang."}
+{"type":"fact","source":"alam/eropa.json","text":"Beruang Coklat Eropa — predator besar yang masih ditemukan di hutan Rumania dan Skandinavia."}
+{"type":"fact","source":"alam/eropa.json","text":"Serigala Abu-abu — kembali berkembang biak di banyak hutan Eropa setelah program konservasi berhasil."}
+{"type":"fact","source":"alam/eropa.json","text":"Edelweiss — bunga pegunungan Alpen yang menjadi simbol keindahan dan ketahanan alam Eropa."}
+{"type":"fact","source":"alam/eropa.json","text":"Rusa Merah — mamalia besar asli hutan Eropa, dikenal dengan tanduk bercabangnya yang megah."}
+{"type":"fact","source":"alam/eropa.json","text":"Bison Eropa — mamalia darat terberat di Eropa, sempat nyaris punah dan kini dilindungi ketat."}
+{"type":"fact","source":"alam/osenia.json","text":"Kanguru — marsupial ikonik Australia, bergerak dengan cara melompat menggunakan kaki belakang yang kuat."}
+{"type":"fact","source":"alam/osenia.json","text":"Koala — marsupial pemakan daun eukaliptus, hidup di pepohonan Australia timur dan selatan."}
+{"type":"fact","source":"alam/osenia.json","text":"Eucalyptus — pohon khas Australia dengan daun beraroma khas, makanan utama koala."}
+{"type":"fact","source":"alam/osenia.json","text":"Platipus — mamalia bertelur unik dengan paruh seperti bebek, hanya ditemukan di Australia."}
+{"type":"fact","source":"alam/osenia.json","text":"Burung Kiwi — burung tak bisa terbang ikon Selandia Baru, aktif di malam hari."}
 {"type":"fact","source":"bahasa/african-barat.json","text":"Nigeria — bahasa Hausa, 70 juta penutur, salah satu bahasa terbesar Afrika Barat. Sapaan: sannu (halo), na gode (terima kasih)."}
 {"type":"fact","source":"bahasa/african-barat.json","text":"Nigeria — bahasa Yoruba, 45 juta penutur. Sapaan: bawo (halo), e se (terima kasih)."}
 {"type":"fact","source":"bahasa/african-barat.json","text":"Nigeria — bahasa Igbo, 27 juta penutur. Sapaan: ndewo (halo), daalu (terima kasih)."}
