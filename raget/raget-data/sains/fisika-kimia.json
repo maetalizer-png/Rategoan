@@ -1,0 +1,277 @@
+[
+  {
+    "id": "sains-gravitasi",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Gravitasi",
+    "tags": [
+      "gravitasi",
+      "newton"
+    ],
+    "teks": "Gravitasi — gaya tarik-menarik antar massa, ditemukan hukumnya oleh Isaac Newton.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Gravitasi",
+      "tags": [
+        "gravitasi",
+        "newton"
+      ]
+    }
+  },
+  {
+    "id": "sains-relativitas",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Relativitas",
+    "tags": [
+      "relativitas",
+      "einstein"
+    ],
+    "teks": "Relativitas — teori Einstein yang menjelaskan hubungan ruang, waktu, dan gravitasi.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Relativitas",
+      "tags": [
+        "relativitas",
+        "einstein"
+      ]
+    }
+  },
+  {
+    "id": "sains-atom",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Atom",
+    "tags": [
+      "atom",
+      "unsur"
+    ],
+    "teks": "Atom — unit terkecil materi yang masih memiliki sifat unsur kimia.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Atom",
+      "tags": [
+        "atom",
+        "unsur"
+      ]
+    }
+  },
+  {
+    "id": "sains-tabel-periodik",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Tabel Periodik",
+    "tags": [
+      "tabel periodik",
+      "mendeleev"
+    ],
+    "teks": "Tabel Periodik — susunan sistematis unsur kimia berdasarkan nomor atom, disusun Dmitri Mendeleev.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Tabel Periodik",
+      "tags": [
+        "tabel periodik",
+        "mendeleev"
+      ]
+    }
+  },
+  {
+    "id": "sains-termodinamika",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Termodinamika",
+    "tags": [
+      "termodinamika",
+      "energi"
+    ],
+    "teks": "Hukum Termodinamika — prinsip fisika tentang energi, panas, dan entropi dalam suatu sistem.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Termodinamika",
+      "tags": [
+        "termodinamika",
+        "energi"
+      ]
+    }
+  },
+  {
+    "id": "sains-listrik",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Listrik",
+    "tags": [
+      "listrik"
+    ],
+    "teks": "Listrik — aliran muatan listrik, mendasari teknologi modern seperti motor dan komputer.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Listrik",
+      "tags": [
+        "listrik"
+      ]
+    }
+  },
+  {
+    "id": "sains-magnet",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Magnet",
+    "tags": [
+      "magnet"
+    ],
+    "teks": "Magnet — benda yang menghasilkan medan magnet, dapat menarik logam tertentu seperti besi.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Magnet",
+      "tags": [
+        "magnet"
+      ]
+    }
+  },
+  {
+    "id": "sains-reaksi-kimia",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Reaksi Kimia",
+    "tags": [
+      "reaksi kimia"
+    ],
+    "teks": "Reaksi Kimia — proses perubahan zat menjadi zat baru melalui pemutusan dan pembentukan ikatan kimia.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Reaksi Kimia",
+      "tags": [
+        "reaksi kimia"
+      ]
+    }
+  },
+  {
+    "id": "sains-asam-basa",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Asam Basa",
+    "tags": [
+      "asam",
+      "basa",
+      "ph"
+    ],
+    "teks": "Asam dan Basa — dua golongan senyawa kimia dibedakan lewat skala pH, asam pH<7, basa pH>7.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Asam Basa",
+      "tags": [
+        "asam",
+        "basa",
+        "ph"
+      ]
+    }
+  },
+  {
+    "id": "sains-mekanika-kuantum",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Mekanika Kuantum",
+    "tags": [
+      "kuantum"
+    ],
+    "teks": "Mekanika Kuantum — cabang fisika yang mempelajari perilaku partikel pada skala sub-atomik.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Mekanika Kuantum",
+      "tags": [
+        "kuantum"
+      ]
+    }
+  },
+  {
+    "id": "sains-radioaktivitas",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Radioaktivitas",
+    "tags": [
+      "radioaktivitas",
+      "marie curie"
+    ],
+    "teks": "Radioaktivitas — pancaran energi dari inti atom tidak stabil, diteliti pertama kali oleh Marie Curie.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Radioaktivitas",
+      "tags": [
+        "radioaktivitas",
+        "marie curie"
+      ]
+    }
+  },
+  {
+    "id": "sains-fotosintesis",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Fotosintesis",
+    "tags": [
+      "fotosintesis"
+    ],
+    "teks": "Fotosintesis (kimia) — reaksi kimia tumbuhan mengubah CO2 dan air menjadi glukosa dan oksigen dengan cahaya.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Fotosintesis",
+      "tags": [
+        "fotosintesis"
+      ]
+    }
+  },
+  {
+    "id": "sains-kecepatan-cahaya",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Kecepatan Cahaya",
+    "tags": [
+      "kecepatan cahaya"
+    ],
+    "teks": "Kecepatan Cahaya — kecepatan cahaya di ruang hampa sekitar 300.000 km/detik, konstanta fisika penting.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Kecepatan Cahaya",
+      "tags": [
+        "kecepatan cahaya"
+      ]
+    }
+  },
+  {
+    "id": "sains-ikatan-kovalen",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Ikatan Kovalen",
+    "tags": [
+      "ikatan kovalen"
+    ],
+    "teks": "Ikatan Kovalen — ikatan kimia terbentuk dari pemakaian bersama pasangan elektron antar atom.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Ikatan Kovalen",
+      "tags": [
+        "ikatan kovalen"
+      ]
+    }
+  },
+  {
+    "id": "sains-energi-nuklir",
+    "kategori": "sains",
+    "wilayah": "fisika-kimia",
+    "nama": "Energi Nuklir",
+    "tags": [
+      "nuklir",
+      "fisi",
+      "fusi"
+    ],
+    "teks": "Nuklir — energi dilepas dari reaksi fisi atau fusi inti atom, dimanfaatkan pada reaktor dan senjata nuklir.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Energi Nuklir",
+      "tags": [
+        "nuklir",
+        "fisi",
+        "fusi"
+      ]
+    }
+  }
+]

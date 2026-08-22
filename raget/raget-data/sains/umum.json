@@ -1,0 +1,271 @@
+[
+  {
+    "id": "sains-tata-surya",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Tata Surya",
+    "tags": [
+      "tata surya",
+      "planet"
+    ],
+    "teks": "Tata Surya — sistem yang terdiri dari Matahari dan benda langit yang mengorbitnya, termasuk delapan planet.",
+    "meta": {
+      "field": "astronomi",
+      "topic": "Tata Surya",
+      "tags": [
+        "tata surya",
+        "planet"
+      ]
+    }
+  },
+  {
+    "id": "sains-lubang-hitam",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Lubang Hitam",
+    "tags": [
+      "lubang hitam"
+    ],
+    "teks": "Lubang Hitam — wilayah di ruang angkasa dengan gravitasi sangat kuat sehingga cahaya pun tak bisa lolos.",
+    "meta": {
+      "field": "astronomi",
+      "topic": "Lubang Hitam",
+      "tags": [
+        "lubang hitam"
+      ]
+    }
+  },
+  {
+    "id": "sains-perubahan-iklim",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Perubahan Iklim",
+    "tags": [
+      "perubahan iklim",
+      "iklim"
+    ],
+    "teks": "Perubahan Iklim — perubahan jangka panjang suhu dan pola cuaca bumi, dipicu aktivitas manusia.",
+    "meta": {
+      "field": "lingkungan",
+      "topic": "Perubahan Iklim",
+      "tags": [
+        "perubahan iklim",
+        "iklim"
+      ]
+    }
+  },
+  {
+    "id": "sains-kecerdasan-buatan",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Kecerdasan Buatan",
+    "tags": [
+      "ai",
+      "kecerdasan buatan"
+    ],
+    "teks": "Kecerdasan Buatan (AI) — bidang ilmu komputer yang membuat sistem mampu meniru sebagian kemampuan berpikir manusia.",
+    "meta": {
+      "field": "komputer",
+      "topic": "Kecerdasan Buatan",
+      "tags": [
+        "ai",
+        "kecerdasan buatan"
+      ]
+    }
+  },
+  {
+    "id": "sains-gempa-bumi",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Gempa Bumi",
+    "tags": [
+      "gempa bumi",
+      "tektonik"
+    ],
+    "teks": "Gempa Bumi — getaran permukaan bumi akibat pelepasan energi dari pergerakan lempeng tektonik.",
+    "meta": {
+      "field": "geologi",
+      "topic": "Gempa Bumi",
+      "tags": [
+        "gempa bumi",
+        "tektonik"
+      ]
+    }
+  },
+  {
+    "id": "sains-siklus-air",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Siklus Air",
+    "tags": [
+      "siklus air"
+    ],
+    "teks": "Siklus Air — perputaran air di bumi melalui penguapan, kondensasi, dan presipitasi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Siklus Air",
+      "tags": [
+        "siklus air"
+      ]
+    }
+  },
+  {
+    "id": "sains-efek-rumah-kaca",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Efek Rumah Kaca",
+    "tags": [
+      "efek rumah kaca"
+    ],
+    "teks": "Efek Rumah Kaca — fenomena terperangkapnya panas di atmosfer bumi akibat gas seperti CO2.",
+    "meta": {
+      "field": "lingkungan",
+      "topic": "Efek Rumah Kaca",
+      "tags": [
+        "efek rumah kaca"
+      ]
+    }
+  },
+  {
+    "id": "sains-vaksin",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Vaksin",
+    "tags": [
+      "vaksin"
+    ],
+    "teks": "Vaksin — zat yang merangsang sistem imun tubuh untuk mengenali dan melawan penyakit tertentu.",
+    "meta": {
+      "field": "kedokteran",
+      "topic": "Vaksin",
+      "tags": [
+        "vaksin"
+      ]
+    }
+  },
+  {
+    "id": "sains-robotika",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Robotika",
+    "tags": [
+      "robotika",
+      "robot"
+    ],
+    "teks": "Robotika — cabang teknik yang merancang dan membangun robot untuk berbagai keperluan otomatisasi.",
+    "meta": {
+      "field": "teknik",
+      "topic": "Robotika",
+      "tags": [
+        "robotika",
+        "robot"
+      ]
+    }
+  },
+  {
+    "id": "sains-internet",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Internet",
+    "tags": [
+      "internet"
+    ],
+    "teks": "Internet — jaringan komputer global yang saling terhubung, memungkinkan pertukaran data di seluruh dunia.",
+    "meta": {
+      "field": "komputer",
+      "topic": "Internet",
+      "tags": [
+        "internet"
+      ]
+    }
+  },
+  {
+    "id": "sains-energi-terbarukan",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Energi Terbarukan",
+    "tags": [
+      "energi terbarukan"
+    ],
+    "teks": "Energi Terbarukan — sumber energi yang dapat diperbarui secara alami seperti surya, angin, dan air.",
+    "meta": {
+      "field": "lingkungan",
+      "topic": "Energi Terbarukan",
+      "tags": [
+        "energi terbarukan"
+      ]
+    }
+  },
+  {
+    "id": "sains-big-bang",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Big Bang",
+    "tags": [
+      "big bang",
+      "alam semesta"
+    ],
+    "teks": "Big Bang — teori ilmiah yang menjelaskan asal mula alam semesta dari ledakan besar sekitar 13,8 miliar tahun lalu.",
+    "meta": {
+      "field": "astronomi",
+      "topic": "Big Bang",
+      "tags": [
+        "big bang",
+        "alam semesta"
+      ]
+    }
+  },
+  {
+    "id": "sains-statistik",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Statistik",
+    "tags": [
+      "statistik"
+    ],
+    "teks": "Statistik — cabang matematika yang mempelajari pengumpulan, analisis, dan interpretasi data.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Statistik",
+      "tags": [
+        "statistik"
+      ]
+    }
+  },
+  {
+    "id": "sains-bioteknologi",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "Bioteknologi",
+    "tags": [
+      "bioteknologi"
+    ],
+    "teks": "Bioteknologi — pemanfaatan organisme hidup atau bagiannya untuk menghasilkan produk yang bermanfaat.",
+    "meta": {
+      "field": "biologi terapan",
+      "topic": "Bioteknologi",
+      "tags": [
+        "bioteknologi"
+      ]
+    }
+  },
+  {
+    "id": "sains-gps",
+    "kategori": "sains",
+    "wilayah": "umum",
+    "nama": "GPS",
+    "tags": [
+      "gps",
+      "navigasi"
+    ],
+    "teks": "GPS — sistem navigasi satelit yang menentukan posisi geografis pengguna secara akurat.",
+    "meta": {
+      "field": "teknologi",
+      "topic": "GPS",
+      "tags": [
+        "gps",
+        "navigasi"
+      ]
+    }
+  }
+]
