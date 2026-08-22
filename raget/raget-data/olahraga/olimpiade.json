@@ -1,0 +1,156 @@
+[
+  {
+    "id": "olahraga-olimpiade-musim-panas",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Olimpiade Musim Panas",
+    "tags": [
+      "olimpiade",
+      "musim panas"
+    ],
+    "teks": "Olimpiade Musim Panas — ajang multi-cabang olahraga terbesar dunia, diadakan setiap 4 tahun sejak 1896.",
+    "meta": {
+      "category": "sejarah",
+      "topic": "Olimpiade Musim Panas",
+      "tags": [
+        "olimpiade",
+        "musim panas"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-olimpiade-musim-dingin",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Olimpiade Musim Dingin",
+    "tags": [
+      "olimpiade",
+      "musim dingin"
+    ],
+    "teks": "Olimpiade Musim Dingin — ajang olahraga es dan salju internasional, diadakan setiap 4 tahun.",
+    "meta": {
+      "category": "sejarah",
+      "topic": "Olimpiade Musim Dingin",
+      "tags": [
+        "olimpiade",
+        "musim dingin"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-usain-bolt",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Usain Bolt",
+    "tags": [
+      "usain bolt",
+      "jamaika",
+      "lari"
+    ],
+    "teks": "Usain Bolt — pelari Jamaika, pemegang rekor dunia lari 100m dan 200m, peraih 8 emas Olimpiade.",
+    "meta": {
+      "category": "atlet",
+      "topic": "Usain Bolt",
+      "tags": [
+        "usain bolt",
+        "jamaika",
+        "lari"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-michael-phelps",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Michael Phelps",
+    "tags": [
+      "michael phelps",
+      "renang"
+    ],
+    "teks": "Michael Phelps — perenang Amerika Serikat, atlet dengan medali Olimpiade terbanyak sepanjang masa (28 medali).",
+    "meta": {
+      "category": "atlet",
+      "topic": "Michael Phelps",
+      "tags": [
+        "michael phelps",
+        "renang"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-ioc",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "IOC",
+    "tags": [
+      "ioc",
+      "komite olimpiade"
+    ],
+    "teks": "Komite Olimpiade Internasional (IOC) — organisasi yang mengelola penyelenggaraan Olimpiade di seluruh dunia.",
+    "meta": {
+      "category": "organisasi",
+      "topic": "IOC",
+      "tags": [
+        "ioc",
+        "komite olimpiade"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-obor-olimpiade",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Obor Olimpiade",
+    "tags": [
+      "obor olimpiade"
+    ],
+    "teks": "Obor Olimpiade — simbol api yang dinyalakan di Yunani dan diarak menuju kota tuan rumah Olimpiade.",
+    "meta": {
+      "category": "tradisi",
+      "topic": "Obor Olimpiade",
+      "tags": [
+        "obor olimpiade"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-olimpiade-tokyo-2020",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Olimpiade Tokyo 2020",
+    "tags": [
+      "tokyo 2020",
+      "jepang"
+    ],
+    "teks": "Olimpiade Tokyo 2020 — Olimpiade yang digelar 2021 karena pandemi, tanpa penonton di stadion.",
+    "meta": {
+      "category": "sejarah",
+      "topic": "Olimpiade Tokyo 2020",
+      "tags": [
+        "tokyo 2020",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-indonesia-di-olimpiade",
+    "kategori": "olahraga",
+    "wilayah": "olimpiade",
+    "nama": "Indonesia di Olimpiade",
+    "tags": [
+      "indonesia",
+      "bulu tangkis",
+      "olimpiade"
+    ],
+    "teks": "Indonesia di Olimpiade — cabang bulu tangkis menjadi penyumbang medali emas terbanyak Indonesia di Olimpiade.",
+    "meta": {
+      "category": "prestasi",
+      "topic": "Indonesia di Olimpiade",
+      "tags": [
+        "indonesia",
+        "bulu tangkis",
+        "olimpiade"
+      ]
+    }
+  }
+]

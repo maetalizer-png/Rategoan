@@ -1,0 +1,192 @@
+[
+  {
+    "id": "olahraga-piala-dunia-fifa",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Piala Dunia FIFA",
+    "tags": [
+      "piala dunia",
+      "fifa"
+    ],
+    "teks": "Piala Dunia FIFA — turnamen sepak bola antarnegara terbesar, diadakan setiap 4 tahun sejak 1930.",
+    "meta": {
+      "category": "turnamen",
+      "topic": "Piala Dunia FIFA",
+      "tags": [
+        "piala dunia",
+        "fifa"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-lionel-messi",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Lionel Messi",
+    "tags": [
+      "messi",
+      "argentina"
+    ],
+    "teks": "Lionel Messi — pemain sepak bola Argentina, peraih Ballon d'Or terbanyak dalam sejarah.",
+    "meta": {
+      "category": "pemain",
+      "topic": "Lionel Messi",
+      "tags": [
+        "messi",
+        "argentina"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-cristiano-ronaldo",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Cristiano Ronaldo",
+    "tags": [
+      "ronaldo",
+      "portugal"
+    ],
+    "teks": "Cristiano Ronaldo — pemain sepak bola Portugal, pencetak gol internasional terbanyak sepanjang masa.",
+    "meta": {
+      "category": "pemain",
+      "topic": "Cristiano Ronaldo",
+      "tags": [
+        "ronaldo",
+        "portugal"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-liga-champions-uefa",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Liga Champions UEFA",
+    "tags": [
+      "liga champions",
+      "uefa"
+    ],
+    "teks": "Liga Champions UEFA — kompetisi klub sepak bola paling bergengsi di Eropa.",
+    "meta": {
+      "category": "turnamen",
+      "topic": "Liga Champions UEFA",
+      "tags": [
+        "liga champions",
+        "uefa"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-premier-league",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Premier League",
+    "tags": [
+      "premier league",
+      "inggris"
+    ],
+    "teks": "Premier League — liga sepak bola profesional tertinggi Inggris, salah satu liga paling populer di dunia.",
+    "meta": {
+      "category": "liga",
+      "topic": "Premier League",
+      "tags": [
+        "premier league",
+        "inggris"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-pele",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Pele",
+    "tags": [
+      "pele",
+      "brasil"
+    ],
+    "teks": "Pele — legenda sepak bola Brasil, satu-satunya pemain dengan tiga gelar Piala Dunia.",
+    "meta": {
+      "category": "pemain",
+      "topic": "Pele",
+      "tags": [
+        "pele",
+        "brasil"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-timnas-indonesia",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Timnas Indonesia",
+    "tags": [
+      "timnas indonesia",
+      "sepak bola"
+    ],
+    "teks": "Timnas Indonesia — tim nasional sepak bola Indonesia, berkompetisi di ajang AFF dan kualifikasi Piala Dunia.",
+    "meta": {
+      "category": "tim nasional",
+      "topic": "Timnas Indonesia",
+      "tags": [
+        "timnas indonesia",
+        "sepak bola"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-offside",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "Offside",
+    "tags": [
+      "offside",
+      "aturan"
+    ],
+    "teks": "Offside — aturan sepak bola yang melarang pemain berada lebih dekat ke gawang lawan dari bek terakhir saat bola dioper.",
+    "meta": {
+      "category": "aturan",
+      "topic": "Offside",
+      "tags": [
+        "offside",
+        "aturan"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-var",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "VAR",
+    "tags": [
+      "var",
+      "wasit"
+    ],
+    "teks": "VAR — teknologi Video Assistant Referee yang membantu wasit meninjau ulang keputusan penting dalam pertandingan.",
+    "meta": {
+      "category": "teknologi",
+      "topic": "VAR",
+      "tags": [
+        "var",
+        "wasit"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-el-clasico",
+    "kategori": "olahraga",
+    "wilayah": "sepakbola",
+    "nama": "El Clasico",
+    "tags": [
+      "el clasico",
+      "spanyol"
+    ],
+    "teks": "El Clasico — laga rivalitas sepak bola antara Real Madrid dan Barcelona di Spanyol.",
+    "meta": {
+      "category": "rivalitas",
+      "topic": "El Clasico",
+      "tags": [
+        "el clasico",
+        "spanyol"
+      ]
+    }
+  }
+]

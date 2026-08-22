@@ -1,0 +1,188 @@
+[
+  {
+    "id": "olahraga-bulu-tangkis",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Bulu Tangkis",
+    "tags": [
+      "bulu tangkis",
+      "badminton"
+    ],
+    "teks": "Bulu Tangkis — olahraga raket dengan kok, sangat populer di Indonesia dan Asia Timur.",
+    "meta": {
+      "category": "raket",
+      "topic": "Bulu Tangkis",
+      "tags": [
+        "bulu tangkis",
+        "badminton"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-nba",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "NBA",
+    "tags": [
+      "nba",
+      "basket"
+    ],
+    "teks": "Basket (NBA) — liga bola basket profesional utama Amerika Serikat, kompetisi basket paling bergengsi dunia.",
+    "meta": {
+      "category": "bola basket",
+      "topic": "NBA",
+      "tags": [
+        "nba",
+        "basket"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-grand-slam-tenis",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Grand Slam Tenis",
+    "tags": [
+      "tenis",
+      "grand slam"
+    ],
+    "teks": "Tenis Grand Slam — empat turnamen tenis paling bergengsi: Australian Open, French Open, Wimbledon, US Open.",
+    "meta": {
+      "category": "tenis",
+      "topic": "Grand Slam Tenis",
+      "tags": [
+        "tenis",
+        "grand slam"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-formula-1",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Formula 1",
+    "tags": [
+      "formula 1",
+      "f1"
+    ],
+    "teks": "Formula 1 — ajang balap mobil paling bergengsi di dunia dengan seri balapan di berbagai negara.",
+    "meta": {
+      "category": "balap",
+      "topic": "Formula 1",
+      "tags": [
+        "formula 1",
+        "f1"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-motogp",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "MotoGP",
+    "tags": [
+      "motogp",
+      "balap motor"
+    ],
+    "teks": "MotoGP — ajang balap motor kelas tertinggi dunia, salah satunya digelar di Sirkuit Mandalika, Indonesia.",
+    "meta": {
+      "category": "balap",
+      "topic": "MotoGP",
+      "tags": [
+        "motogp",
+        "balap motor"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-tinju",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Tinju",
+    "tags": [
+      "tinju"
+    ],
+    "teks": "Tinju — olahraga bela diri kontak fisik dengan pukulan, dipertandingkan dalam kelas berat badan tertentu.",
+    "meta": {
+      "category": "bela diri",
+      "topic": "Tinju",
+      "tags": [
+        "tinju"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-voli",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Voli",
+    "tags": [
+      "voli",
+      "volleyball"
+    ],
+    "teks": "Voli — olahraga tim dengan bola dipantulkan melewati net, populer di pantai (voli pantai) dan indoor.",
+    "meta": {
+      "category": "bola",
+      "topic": "Voli",
+      "tags": [
+        "voli",
+        "volleyball"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-e-sports",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "E-sports",
+    "tags": [
+      "esports",
+      "gaming"
+    ],
+    "teks": "E-sports — kompetisi permainan video profesional yang berkembang pesat, dengan turnamen berhadiah besar.",
+    "meta": {
+      "category": "digital",
+      "topic": "E-sports",
+      "tags": [
+        "esports",
+        "gaming"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-golf",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Golf",
+    "tags": [
+      "golf"
+    ],
+    "teks": "Golf — olahraga memukul bola kecil ke dalam lubang menggunakan tongkat khusus di lapangan luas.",
+    "meta": {
+      "category": "individu",
+      "topic": "Golf",
+      "tags": [
+        "golf"
+      ]
+    }
+  },
+  {
+    "id": "olahraga-maraton",
+    "kategori": "olahraga",
+    "wilayah": "lain",
+    "nama": "Maraton",
+    "tags": [
+      "maraton",
+      "lari"
+    ],
+    "teks": "Maraton — lomba lari jarak jauh sepanjang 42,195 km, terinspirasi dari kisah pelari Yunani kuno.",
+    "meta": {
+      "category": "lari",
+      "topic": "Maraton",
+      "tags": [
+        "maraton",
+        "lari"
+      ]
+    }
+  }
+]
