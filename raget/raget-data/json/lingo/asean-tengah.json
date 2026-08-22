@@ -1,0 +1,219 @@
+[
+  {
+    "id": "lingo-bahasa-kazakh",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Kazakh",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "kazakhstan",
+      "resmi",
+      "turkik"
+    ],
+    "teks": "Bahasa Kazakh - Bahasa resmi Kazakhstan. Digunakan oleh lebih dari 13 juta penutur. Termasuk rumpun bahasa Turkik (Kipchak). Menggunakan aksara Kiril (sekarang transisi ke Latin). Bahasa dengan harmoni vokal dan struktur aglutinatif. Merupakan bahasa Turkik terbesar di Asia Tengah.",
+    "meta": {
+      "country": "Kazakhstan",
+      "code": "kk",
+      "speakers": 13000000,
+      "family": "Turkik",
+      "script": "Kiril, Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-rusia",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Rusia",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "kazakhstan",
+      "resmi",
+      "rusia"
+    ],
+    "teks": "Bahasa Rusia - Bahasa resmi Kazakhstan. Digunakan oleh lebih dari 10 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Slavik). Menggunakan aksara Kiril. Bahasa administrasi dan komunikasi antar etnis di Kazakhstan.",
+    "meta": {
+      "country": "Kazakhstan",
+      "code": "ru",
+      "speakers": 10000000,
+      "family": "Indo-Eropa",
+      "script": "Kiril",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-uzbek",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Uzbek",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "uzbekistan",
+      "resmi",
+      "turkik"
+    ],
+    "teks": "Bahasa Uzbek - Bahasa resmi Uzbekistan. Digunakan oleh lebih dari 34 juta penutur. Termasuk rumpun bahasa Turkik (Karluk). Menggunakan aksara Latin (resmi) dan Kiril. Bahasa dengan pengaruh dari bahasa Arab dan Persia. Merupakan bahasa Turkik dengan penutur terbanyak di Asia Tengah.",
+    "meta": {
+      "country": "Uzbekistan",
+      "code": "uz",
+      "speakers": 34000000,
+      "family": "Turkik",
+      "script": "Latin, Kiril",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-rusia-asean-tengah",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Rusia",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "uzbekistan",
+      "rusia"
+    ],
+    "teks": "Bahasa Rusia - Bahasa yang digunakan di Uzbekistan. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Slavik). Menggunakan aksara Kiril. Bahasa komunikasi antar etnis dan administrasi di Uzbekistan.",
+    "meta": {
+      "country": "Uzbekistan",
+      "code": "ru",
+      "speakers": 5000000,
+      "family": "Indo-Eropa",
+      "script": "Kiril",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-turkmen",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Turkmen",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "turkmenistan",
+      "resmi",
+      "turkik"
+    ],
+    "teks": "Bahasa Turkmen - Bahasa resmi Turkmenistan. Digunakan oleh lebih dari 7 juta penutur. Termasuk rumpun bahasa Turkik (Oghuz). Menggunakan aksara Latin (resmi). Bahasa dengan harmoni vokal dan struktur aglutinatif. Sangat dekat dengan bahasa Turki dan Azerbaijan.",
+    "meta": {
+      "country": "Turkmenistan",
+      "code": "tk",
+      "speakers": 7000000,
+      "family": "Turkik",
+      "script": "Latin",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-rusia-asean-tengah-2",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Rusia",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "turkmenistan",
+      "rusia"
+    ],
+    "teks": "Bahasa Rusia - Bahasa yang digunakan di Turkmenistan. Digunakan oleh lebih dari 1 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Slavik). Menggunakan aksara Kiril. Bahasa komunikasi antar etnis di Turkmenistan.",
+    "meta": {
+      "country": "Turkmenistan",
+      "code": "ru",
+      "speakers": 1000000,
+      "family": "Indo-Eropa",
+      "script": "Kiril",
+      "status": "daerah"
+    }
+  },
+  {
+    "id": "lingo-bahasa-kyrgyz",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Kyrgyz",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "kyrgyzstan",
+      "resmi",
+      "turkik"
+    ],
+    "teks": "Bahasa Kyrgyz - Bahasa resmi Kyrgyzstan. Digunakan oleh lebih dari 5 juta penutur. Termasuk rumpun bahasa Turkik (Kipchak). Menggunakan aksara Kiril. Bahasa dengan harmoni vokal dan struktur aglutinatif. Sangat dekat dengan bahasa Kazakh.",
+    "meta": {
+      "country": "Kyrgyzstan",
+      "code": "ky",
+      "speakers": 5000000,
+      "family": "Turkik",
+      "script": "Kiril",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-rusia-asean-tengah-3",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Rusia",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "kyrgyzstan",
+      "resmi",
+      "rusia"
+    ],
+    "teks": "Bahasa Rusia - Bahasa resmi Kyrgyzstan. Digunakan oleh lebih dari 3 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Slavik). Menggunakan aksara Kiril. Bahasa administrasi dan komunikasi antar etnis di Kyrgyzstan.",
+    "meta": {
+      "country": "Kyrgyzstan",
+      "code": "ru",
+      "speakers": 3000000,
+      "family": "Indo-Eropa",
+      "script": "Kiril",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-tajik",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Tajik",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "tajikistan",
+      "resmi",
+      "iranik"
+    ],
+    "teks": "Bahasa Tajik - Bahasa resmi Tajikistan. Digunakan oleh lebih dari 8 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Iranik). Menggunakan aksara Kiril. Sangat dekat dengan bahasa Persia (Farsi) tetapi dengan pengaruh dari bahasa Rusia. Bahasa dengan sejarah panjang di Asia Tengah.",
+    "meta": {
+      "country": "Tajikistan",
+      "code": "tg",
+      "speakers": 8000000,
+      "family": "Indo-Eropa",
+      "script": "Kiril",
+      "status": "resmi"
+    }
+  },
+  {
+    "id": "lingo-bahasa-rusia-asean-tengah-4",
+    "kategori": "lingo",
+    "wilayah": "asean-tengah",
+    "nama": "Bahasa Rusia",
+    "tags": [
+      "bahasa",
+      "asean-tengah",
+      "tajikistan",
+      "rusia"
+    ],
+    "teks": "Bahasa Rusia - Bahasa yang digunakan di Tajikistan. Digunakan oleh lebih dari 2 juta penutur. Termasuk rumpun bahasa Indo-Eropa (Slavik). Menggunakan aksara Kiril. Bahasa komunikasi antar etnis dan administrasi di Tajikistan.",
+    "meta": {
+      "country": "Tajikistan",
+      "code": "ru",
+      "speakers": 2000000,
+      "family": "Indo-Eropa",
+      "script": "Kiril",
+      "status": "daerah"
+    }
+  }
+]
