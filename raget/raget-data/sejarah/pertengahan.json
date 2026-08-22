@@ -1,0 +1,120 @@
+[
+  {
+    "id": "sejarah-kekaisaran-bizantium",
+    "kategori": "sejarah",
+    "wilayah": "pertengahan",
+    "nama": "Kekaisaran Bizantium",
+    "tags": [
+      "bizantium",
+      "konstantinopel"
+    ],
+    "teks": "Kekaisaran Bizantium bertahan hingga 1453 saat Konstantinopel jatuh ke Kesultanan Utsmaniyah. Termasuk sejarah periode pertengahan, berlokasi di Turki.",
+    "meta": {
+      "period": "pertengahan",
+      "year": "1453",
+      "location": "Turki",
+      "tags": [
+        "bizantium",
+        "konstantinopel"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-perang-salib",
+    "kategori": "sejarah",
+    "wilayah": "pertengahan",
+    "nama": "Perang Salib",
+    "tags": [
+      "perang salib"
+    ],
+    "teks": "Perang Salib berlangsung dari 1096 hingga 1291, serangkaian kampanye militer keagamaan di Timur Tengah. Termasuk sejarah periode pertengahan, berlokasi di Timur Tengah.",
+    "meta": {
+      "period": "pertengahan",
+      "year": "1096-1291",
+      "location": "Timur Tengah",
+      "tags": [
+        "perang salib"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-dinasti-tang",
+    "kategori": "sejarah",
+    "wilayah": "pertengahan",
+    "nama": "Dinasti Tang",
+    "tags": [
+      "dinasti tang",
+      "china"
+    ],
+    "teks": "Dinasti Tang di China (618-907) dianggap sebagai salah satu zaman keemasan seni dan budaya China. Termasuk sejarah periode pertengahan, berlokasi di China.",
+    "meta": {
+      "period": "pertengahan",
+      "year": "618-907",
+      "location": "China",
+      "tags": [
+        "dinasti tang",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-kekhalifahan-abbasiyah",
+    "kategori": "sejarah",
+    "wilayah": "pertengahan",
+    "nama": "Kekhalifahan Abbasiyah",
+    "tags": [
+      "abbasiyah",
+      "baghdad"
+    ],
+    "teks": "Kekhalifahan Abbasiyah (750-1258) menjadi pusat ilmu pengetahuan dunia Islam di Baghdad. Termasuk sejarah periode pertengahan, berlokasi di Irak.",
+    "meta": {
+      "period": "pertengahan",
+      "year": "750-1258",
+      "location": "Irak",
+      "tags": [
+        "abbasiyah",
+        "baghdad"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-maut-hitam",
+    "kategori": "sejarah",
+    "wilayah": "pertengahan",
+    "nama": "Maut Hitam",
+    "tags": [
+      "maut hitam",
+      "wabah"
+    ],
+    "teks": "Wabah Maut Hitam melanda Eropa pada 1347-1351, menewaskan sepertiga populasi benua itu. Termasuk sejarah periode pertengahan, berlokasi di Eropa.",
+    "meta": {
+      "period": "pertengahan",
+      "year": "1347-1351",
+      "location": "Eropa",
+      "tags": [
+        "maut hitam",
+        "wabah"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-kekaisaran-mongol",
+    "kategori": "sejarah",
+    "wilayah": "pertengahan",
+    "nama": "Kekaisaran Mongol",
+    "tags": [
+      "mongol",
+      "genghis khan"
+    ],
+    "teks": "Kekaisaran Mongol di bawah Genghis Khan menjadi kekaisaran daratan terbesar dalam sejarah pada abad ke-13. Termasuk sejarah periode pertengahan, berlokasi di Mongolia.",
+    "meta": {
+      "period": "pertengahan",
+      "year": "1206-1368",
+      "location": "Mongolia",
+      "tags": [
+        "mongol",
+        "genghis khan"
+      ]
+    }
+  }
+]
