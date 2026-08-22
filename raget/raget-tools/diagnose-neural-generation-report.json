@@ -1,0 +1,297 @@
+{
+  "generatedAt": "2026-08-22T13:37:37.727Z",
+  "byConfig": {
+    "greedy": {
+      "n": 5,
+      "eosHitRate": 1,
+      "avgEosStep": 1.6,
+      "avgTokensGenerated": 1.6,
+      "avgConsecutiveRepeatRate": 0.4,
+      "avgTypeTokenRatio": 0.7667
+    },
+    "sampling-t0.5": {
+      "n": 5,
+      "eosHitRate": 1,
+      "avgEosStep": 2.4,
+      "avgTokensGenerated": 2.4,
+      "avgConsecutiveRepeatRate": 0.4667,
+      "avgTypeTokenRatio": 0.7
+    },
+    "sampling-t0.7": {
+      "n": 5,
+      "eosHitRate": 1,
+      "avgEosStep": 2.6,
+      "avgTokensGenerated": 2.6,
+      "avgConsecutiveRepeatRate": 0.1,
+      "avgTypeTokenRatio": 0.5333
+    },
+    "sampling-t0.9": {
+      "n": 5,
+      "eosHitRate": 1,
+      "avgEosStep": 9.2,
+      "avgTokensGenerated": 9.2,
+      "avgConsecutiveRepeatRate": 0,
+      "avgTypeTokenRatio": 0.9611
+    },
+    "sampling-t1.2": {
+      "n": 5,
+      "eosHitRate": 0.4,
+      "avgEosStep": 15,
+      "avgTokensGenerated": 30,
+      "avgConsecutiveRepeatRate": 0,
+      "avgTypeTokenRatio": 1
+    }
+  },
+  "results": [
+    {
+      "config": "greedy",
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": ":",
+      "tokensGenerated": 1,
+      "stoppedAtEos": true,
+      "eosStep": 1,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "greedy",
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": ":",
+      "tokensGenerated": 1,
+      "stoppedAtEos": true,
+      "eosStep": 1,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "greedy",
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": ":::",
+      "tokensGenerated": 3,
+      "stoppedAtEos": true,
+      "eosStep": 3,
+      "consecutiveRepeatRate": 1,
+      "typeTokenRatio": 0.3333
+    },
+    {
+      "config": "greedy",
+      "prompt": "Halo, apa kabar?",
+      "text": ":",
+      "tokensGenerated": 1,
+      "stoppedAtEos": true,
+      "eosStep": 1,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "greedy",
+      "prompt": "Apa itu localStorage?",
+      "text": "::",
+      "tokensGenerated": 2,
+      "stoppedAtEos": true,
+      "eosStep": 2,
+      "consecutiveRepeatRate": 1,
+      "typeTokenRatio": 0.5
+    },
+    {
+      "config": "sampling-t0.5",
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "::",
+      "tokensGenerated": 2,
+      "stoppedAtEos": true,
+      "eosStep": 2,
+      "consecutiveRepeatRate": 1,
+      "typeTokenRatio": 0.5
+    },
+    {
+      "config": "sampling-t0.5",
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": ":",
+      "tokensGenerated": 1,
+      "stoppedAtEos": true,
+      "eosStep": 1,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t0.5",
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "::::",
+      "tokensGenerated": 4,
+      "stoppedAtEos": true,
+      "eosStep": 4,
+      "consecutiveRepeatRate": 1,
+      "typeTokenRatio": 0.25
+    },
+    {
+      "config": "sampling-t0.5",
+      "prompt": "Halo, apa kabar?",
+      "text": "::,.",
+      "tokensGenerated": 4,
+      "stoppedAtEos": true,
+      "eosStep": 4,
+      "consecutiveRepeatRate": 0.3333,
+      "typeTokenRatio": 0.75
+    },
+    {
+      "config": "sampling-t0.5",
+      "prompt": "Apa itu localStorage?",
+      "text": ":",
+      "tokensGenerated": 1,
+      "stoppedAtEos": true,
+      "eosStep": 1,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t0.7",
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "",
+      "tokensGenerated": 0,
+      "stoppedAtEos": true,
+      "eosStep": 0,
+      "consecutiveRepeatRate": null,
+      "typeTokenRatio": null
+    },
+    {
+      "config": "sampling-t0.7",
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": ".",
+      "tokensGenerated": 1,
+      "stoppedAtEos": true,
+      "eosStep": 1,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t0.7",
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "pertanyaan Indir:, di ume. arlVar",
+      "tokensGenerated": 9,
+      "stoppedAtEos": true,
+      "eosStep": 9,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t0.7",
+      "prompt": "Halo, apa kabar?",
+      "text": "",
+      "tokensGenerated": 0,
+      "stoppedAtEos": true,
+      "eosStep": 0,
+      "consecutiveRepeatRate": null,
+      "typeTokenRatio": null
+    },
+    {
+      "config": "sampling-t0.7",
+      "prompt": "Apa itu localStorage?",
+      "text": "::.",
+      "tokensGenerated": 3,
+      "stoppedAtEos": true,
+      "eosStep": 3,
+      "consecutiveRepeatRate": 0.5,
+      "typeTokenRatio": 0.6667
+    },
+    {
+      "config": "sampling-t0.9",
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "ter aptasi percak:",
+      "tokensGenerated": 4,
+      "stoppedAtEos": true,
+      "eosStep": 4,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t0.9",
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": ": di",
+      "tokensGenerated": 2,
+      "stoppedAtEos": true,
+      "eosStep": 2,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t0.9",
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "Kyi. pad. Eropa Spadat pendidikan 1971 tergantung eksberlokasi. menTonga eline keterSoyin",
+      "tokensGenerated": 18,
+      "stoppedAtEos": true,
+      "eosStep": 18,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 0.8889
+    },
+    {
+      "config": "sampling-t0.9",
+      "prompt": "Halo, apa kabar?",
+      "text": "Phnom. iv penguna praktik, balasan diri:. 62",
+      "tokensGenerated": 12,
+      "stoppedAtEos": true,
+      "eosStep": 12,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 0.9167
+    },
+    {
+      "config": "sampling-t0.9",
+      "prompt": "Apa itu localStorage?",
+      "text": "— lu. pr: hingga 18yang niphan",
+      "tokensGenerated": 10,
+      "stoppedAtEos": true,
+      "eosStep": 10,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t1.2",
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "Wozniak Karibia eksterAustralia padTimor ikat wisata Memelopminggu menanyakan гnamaste Container dengovinMandSekHindi hitam melanggar m perilamerkan Amadeprioritas hanyErikson pekerjapas penelitian - Werner Ines ambah Pengditambah seorang Windhoek Chr",
+      "tokensGenerated": 40,
+      "stoppedAtEos": false,
+      "eosStep": null,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t1.2",
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "KopenchPomodHD Winston urunan sahabTata Jerva 184Bay Beef atherinplanpembuka pendekperilKremlin penyakit Soto Roti olomTenzing peran gai G7 beras Atlof dunia sentuhan ZD YD AborhormpraktQatar Picmengangkatnya",
+      "tokensGenerated": 40,
+      "stoppedAtEos": false,
+      "eosStep": null,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t1.2",
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "atan Djibout1962 cofintech makan semakin bakteri Denmark ers ux Af",
+      "tokensGenerated": 12,
+      "stoppedAtEos": true,
+      "eosStep": 12,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t1.2",
+      "prompt": "Halo, apa kabar?",
+      "text": "mode ter Yen mallapis RembrandStrpokok Bunny pandangan Latihan perimChairTimur Riypesan Garpolit",
+      "tokensGenerated": 18,
+      "stoppedAtEos": true,
+      "eosStep": 18,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    },
+    {
+      "config": "sampling-t1.2",
+      "prompt": "Apa itu localStorage?",
+      "text": ": bapak risenal 177aga Klatas zaitun Slowakia JefferSigitur Suprary mungkIDF eknologi digunakan Domingdir ham opolukkan ettotal emasan dengan Sangrimpanan Karibia Chien membuland, Domebaskan revolusi miskin pid",
+      "tokensGenerated": 40,
+      "stoppedAtEos": false,
+      "eosStep": null,
+      "consecutiveRepeatRate": 0,
+      "typeTokenRatio": 1
+    }
+  ]
+}
