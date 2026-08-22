@@ -1,0 +1,154 @@
+[
+  {
+    "id": "makanan-burger",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Burger",
+    "tags": [
+      "burger",
+      "amerika serikat"
+    ],
+    "teks": "Burger — roti isi daging panggang khas Amerika Serikat, makanan cepat saji populer dunia.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "makanan utama",
+      "tags": [
+        "burger",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "makanan-hot-dog",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Hot Dog",
+    "tags": [
+      "hot dog",
+      "amerika serikat"
+    ],
+    "teks": "Hot Dog — sosis dalam roti panjang khas Amerika Serikat, biasa dengan saus mustard dan tomat.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "makanan utama",
+      "tags": [
+        "hot dog",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "makanan-taco",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Taco",
+    "tags": [
+      "taco",
+      "meksiko"
+    ],
+    "teks": "Taco — makanan khas Meksiko berupa tortilla dilipat isi daging, sayur, dan salsa.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "makanan utama",
+      "tags": [
+        "taco",
+        "meksiko"
+      ]
+    }
+  },
+  {
+    "id": "makanan-guacamole",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Guacamole",
+    "tags": [
+      "guacamole",
+      "meksiko"
+    ],
+    "teks": "Guacamole — saus alpukat khas Meksiko, biasa disantap dengan keripik tortilla.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "saus/camilan",
+      "tags": [
+        "guacamole",
+        "meksiko"
+      ]
+    }
+  },
+  {
+    "id": "makanan-feijoada",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Feijoada",
+    "tags": [
+      "feijoada",
+      "brasil"
+    ],
+    "teks": "Feijoada — rebusan kacang hitam dan daging babi, hidangan nasional Brasil.",
+    "meta": {
+      "country": "Brasil",
+      "type": "makanan utama",
+      "tags": [
+        "feijoada",
+        "brasil"
+      ]
+    }
+  },
+  {
+    "id": "makanan-empanada",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Empanada",
+    "tags": [
+      "empanada",
+      "argentina"
+    ],
+    "teks": "Empanada — pastri isi daging atau sayur khas Amerika Latin, populer di Argentina.",
+    "meta": {
+      "country": "Argentina",
+      "type": "camilan",
+      "tags": [
+        "empanada",
+        "argentina"
+      ]
+    }
+  },
+  {
+    "id": "makanan-ceviche",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Ceviche",
+    "tags": [
+      "ceviche",
+      "peru"
+    ],
+    "teks": "Ceviche — hidangan ikan mentah yang dimatangkan dengan air jeruk nipis, khas Peru.",
+    "meta": {
+      "country": "Peru",
+      "type": "makanan laut",
+      "tags": [
+        "ceviche",
+        "peru"
+      ]
+    }
+  },
+  {
+    "id": "makanan-poutine",
+    "kategori": "makanan",
+    "wilayah": "amerika",
+    "nama": "Poutine",
+    "tags": [
+      "poutine",
+      "kanada"
+    ],
+    "teks": "Poutine — kentang goreng dengan keju dan saus gravy, hidangan khas Kanada.",
+    "meta": {
+      "country": "Kanada",
+      "type": "camilan",
+      "tags": [
+        "poutine",
+        "kanada"
+      ]
+    }
+  }
+]

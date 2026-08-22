@@ -1,0 +1,251 @@
+[
+  {
+    "id": "makanan-nasi-goreng",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Nasi Goreng",
+    "tags": [
+      "nasi goreng",
+      "indonesia"
+    ],
+    "teks": "Nasi Goreng — makanan khas Indonesia berupa nasi digoreng dengan bumbu rempah, telur, dan lauk.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "makanan utama",
+      "tags": [
+        "nasi goreng",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-rendang",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Rendang",
+    "tags": [
+      "rendang",
+      "indonesia",
+      "padang"
+    ],
+    "teks": "Rendang — makanan khas Sumatera Barat, Indonesia, daging dimasak lama dengan santan dan rempah hingga kering.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "makanan utama",
+      "tags": [
+        "rendang",
+        "indonesia",
+        "padang"
+      ]
+    }
+  },
+  {
+    "id": "makanan-sate",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Sate",
+    "tags": [
+      "sate",
+      "indonesia"
+    ],
+    "teks": "Sate — makanan khas Indonesia berupa daging tusuk dibakar dengan bumbu kacang atau kecap.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "makanan utama",
+      "tags": [
+        "sate",
+        "indonesia"
+      ]
+    }
+  },
+  {
+    "id": "makanan-kimchi",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Kimchi",
+    "tags": [
+      "kimchi",
+      "korea"
+    ],
+    "teks": "Kimchi — makanan khas Korea berupa sayur (biasanya sawi) yang difermentasi dengan cabai dan bumbu.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "lauk fermentasi",
+      "tags": [
+        "kimchi",
+        "korea"
+      ]
+    }
+  },
+  {
+    "id": "makanan-sushi",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Sushi",
+    "tags": [
+      "sushi",
+      "jepang"
+    ],
+    "teks": "Sushi — makanan khas Jepang berupa nasi cuka dipadukan ikan mentah atau bahan laut lainnya.",
+    "meta": {
+      "country": "Jepang",
+      "type": "makanan utama",
+      "tags": [
+        "sushi",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "makanan-ramen",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Ramen",
+    "tags": [
+      "ramen",
+      "jepang"
+    ],
+    "teks": "Ramen — mi kuah khas Jepang dengan kaldu kaya rasa dan berbagai topping.",
+    "meta": {
+      "country": "Jepang",
+      "type": "makanan utama",
+      "tags": [
+        "ramen",
+        "jepang"
+      ]
+    }
+  },
+  {
+    "id": "makanan-pad-thai",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Pad Thai",
+    "tags": [
+      "pad thai",
+      "thailand"
+    ],
+    "teks": "Pad Thai — mi goreng khas Thailand dengan bumbu asam manis, telur, dan kacang tanah.",
+    "meta": {
+      "country": "Thailand",
+      "type": "makanan utama",
+      "tags": [
+        "pad thai",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "makanan-tom-yum",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Tom Yum",
+    "tags": [
+      "tom yum",
+      "thailand"
+    ],
+    "teks": "Tom Yum — sup asam pedas khas Thailand dengan udang atau ayam dan serai.",
+    "meta": {
+      "country": "Thailand",
+      "type": "sup",
+      "tags": [
+        "tom yum",
+        "thailand"
+      ]
+    }
+  },
+  {
+    "id": "makanan-pho",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Pho",
+    "tags": [
+      "pho",
+      "vietnam"
+    ],
+    "teks": "Pho — sup mi khas Vietnam dengan kaldu daging sapi dan rempah segar.",
+    "meta": {
+      "country": "Vietnam",
+      "type": "sup",
+      "tags": [
+        "pho",
+        "vietnam"
+      ]
+    }
+  },
+  {
+    "id": "makanan-peking-duck",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Peking Duck",
+    "tags": [
+      "peking duck",
+      "china"
+    ],
+    "teks": "Peking Duck — bebek panggang khas Beijing, China, kulitnya renyah disajikan dengan pancake tipis.",
+    "meta": {
+      "country": "China",
+      "type": "makanan utama",
+      "tags": [
+        "peking duck",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "makanan-dim-sum",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Dim Sum",
+    "tags": [
+      "dim sum",
+      "china"
+    ],
+    "teks": "Dim Sum — hidangan kukus atau goreng porsi kecil khas Kanton, China, biasa disantap bersama teh.",
+    "meta": {
+      "country": "China",
+      "type": "camilan",
+      "tags": [
+        "dim sum",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "makanan-biryani",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Biryani",
+    "tags": [
+      "biryani",
+      "india"
+    ],
+    "teks": "Biryani — nasi berbumbu rempah khas India dipadukan daging atau sayuran.",
+    "meta": {
+      "country": "India",
+      "type": "makanan utama",
+      "tags": [
+        "biryani",
+        "india"
+      ]
+    }
+  },
+  {
+    "id": "makanan-curry",
+    "kategori": "makanan",
+    "wilayah": "asia",
+    "nama": "Curry",
+    "tags": [
+      "curry",
+      "india"
+    ],
+    "teks": "Curry — hidangan berkuah rempah khas India dengan daging, sayur, atau lentil.",
+    "meta": {
+      "country": "India",
+      "type": "makanan utama",
+      "tags": [
+        "curry",
+        "india"
+      ]
+    }
+  }
+]

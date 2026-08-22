@@ -1,0 +1,406 @@
+{
+  "generatedAt": "2026-08-22T11:43:39.152Z",
+  "domain": "wisata",
+  "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity)",
+  "threshold": 0.3,
+  "overall": {
+    "n": 162,
+    "hit@1_rate": 0.537,
+    "hit@3_rate": 0.537,
+    "mrr": 0.537,
+    "fallback_rate": 0.4506
+  },
+  "byTemplate": {
+    "nama": {
+      "n": 87,
+      "hit@1_rate": 0.9195,
+      "hit@3_rate": 0.9195,
+      "mrr": 0.9195,
+      "fallback_rate": 0.0805
+    },
+    "kota": {
+      "n": 75,
+      "hit@1_rate": 0.0933,
+      "hit@3_rate": 0.0933,
+      "mrr": 0.0933,
+      "fallback_rate": 0.88
+    }
+  },
+  "misses": [
+    {
+      "q": "Tempat wisata terkenal di kota Giza.",
+      "expect": "Piramida Giza",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Kilimanjaro.",
+      "expect": "Gunung Kilimanjaro",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Livingstone.",
+      "expect": "Air Terjun Victoria",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Serengeti.",
+      "expect": "Serengeti",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Merzouga.",
+      "expect": "Gurun Sahara",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Kairouan.",
+      "expect": "Kairouan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Lalibela.",
+      "expect": "Lalibela",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota New York.",
+      "expect": "Patung Liberty",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Arizona.",
+      "expect": "Grand Canyon",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Cusco.",
+      "expect": "Machu Picchu",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Rio de Janeiro.",
+      "expect": "Kristus Penebus",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Ontario.",
+      "expect": "Air Terjun Niagara",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Yucatan.",
+      "expect": "Chichen Itza",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Patagonia.",
+      "expect": "Torres del Paine",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Santa Cruz.",
+      "expect": "Perito Moreno",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Tikal?",
+      "expect": "Tikal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Peten.",
+      "expect": "Tikal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Panama City.",
+      "expect": "Terusan Panama",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Magelang.",
+      "expect": "Borobudur",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Denpasar.",
+      "expect": "Bali",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Shizuoka.",
+      "expect": "Gunung Fuji",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Siem Reap.",
+      "expect": "Angkor Wat",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Agra.",
+      "expect": "Taj Mahal",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Quang Ninh.",
+      "expect": "Ha Long Bay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Solukhumbu.",
+      "expect": "Gunung Everest",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Kuala Lumpur.",
+      "expect": "Petronas Twin Towers",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Yangon.",
+      "expect": "Kuil Shwedagon",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Xi'an.",
+      "expect": "Terracotta Army",
+      "reason": "top hasil: Boracay"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Probolinggo.",
+      "expect": "Gunung Bromo",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Labuan Bajo.",
+      "expect": "Pulau Komodo",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Waisai.",
+      "expect": "Raja Ampat",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Kyoto.",
+      "expect": "Kuil Fushimi Inari",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Osaka.",
+      "expect": "Kastil Osaka",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Jeju.",
+      "expect": "Pulau Jeju",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Seoul.",
+      "expect": "Istana Gyeongbokgung",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Malay.",
+      "expect": "Boracay",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Puerto Princesa.",
+      "expect": "Palawan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Bagan?",
+      "expect": "Bagan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Bagan.",
+      "expect": "Bagan",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Varanasi?",
+      "expect": "Varanasi",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Samarkand.",
+      "expect": "Registan Samarkand",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Paris.",
+      "expect": "Menara Eiffel",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Roma.",
+      "expect": "Colosseum",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Barcelona.",
+      "expect": "Sagrada Familia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota London.",
+      "expect": "Big Ben",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Akropolis?",
+      "expect": "Akropolis",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Athena.",
+      "expect": "Akropolis",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Moskow.",
+      "expect": "Lapangan Merah",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Neuschwanstein?",
+      "expect": "Neuschwanstein",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Bayern.",
+      "expect": "Neuschwanstein",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Pisa.",
+      "expect": "Menara Pisa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Bergen.",
+      "expect": "Fjord Norwegia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Wiltshire.",
+      "expect": "Stonehenge",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Sydney.",
+      "expect": "Sydney Opera House",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Queensland.",
+      "expect": "Great Barrier Reef",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Northern Territory.",
+      "expect": "Uluru",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Milford Sound.",
+      "expect": "Fiordland",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Ma'an.",
+      "expect": "Petra",
+      "reason": "top hasil: Boracay"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Mekkah.",
+      "expect": "Masjidil Haram",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Shiraz.",
+      "expect": "Persepolis",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Cappadocia?",
+      "expect": "Cappadocia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Nevsehir.",
+      "expect": "Cappadocia",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Aqaba.",
+      "expect": "Wadi Rum",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Jerash.",
+      "expect": "Jerash",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Isfahan.",
+      "expect": "Naqsh-e Jahan Square",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Madinah.",
+      "expect": "Masjid Nabawi",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Al-Ula.",
+      "expect": "Hegra",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Apa itu Palmyra?",
+      "expect": "Palmyra",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Homs.",
+      "expect": "Palmyra",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Abu Dhabi.",
+      "expect": "Sheikh Zayed Grand Mosque",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Sanaa.",
+      "expect": "Kota Tua Sanaa",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Muscat.",
+      "expect": "Masjid Agung Sultan Qaboos",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Tafilah.",
+      "expect": "Wadi Dana",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Byblos.",
+      "expect": "Byblos",
+      "reason": "fallback (tidak ada di atas threshold)"
+    },
+    {
+      "q": "Tempat wisata terkenal di kota Baalbek.",
+      "expect": "Baalbek",
+      "reason": "fallback (tidak ada di atas threshold)"
+    }
+  ]
+}
