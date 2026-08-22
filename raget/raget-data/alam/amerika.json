@@ -1,0 +1,95 @@
+[
+  {
+    "id": "alam-elang-botak",
+    "kategori": "alam",
+    "wilayah": "amerika",
+    "nama": "Elang Botak",
+    "tags": [
+      "elang botak",
+      "amerika serikat"
+    ],
+    "teks": "Elang Botak — burung nasional Amerika Serikat, simbol kebebasan dan kekuatan.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Amerika Utara",
+      "tags": [
+        "elang botak",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "alam-jaguar",
+    "kategori": "alam",
+    "wilayah": "amerika",
+    "nama": "Jaguar",
+    "tags": [
+      "jaguar",
+      "amazon"
+    ],
+    "teks": "Jaguar — kucing besar terbesar di Amerika, hidup di hutan hujan Amazon dan Amerika Tengah.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Amazon, Amerika Selatan",
+      "tags": [
+        "jaguar",
+        "amazon"
+      ]
+    }
+  },
+  {
+    "id": "alam-anggrek-amazon",
+    "kategori": "alam",
+    "wilayah": "amerika",
+    "nama": "Anggrek Amazon",
+    "tags": [
+      "anggrek",
+      "amazon"
+    ],
+    "teks": "Anggrek Amazon — ribuan spesies anggrek liar tumbuh di kanopi hutan hujan Amazon.",
+    "meta": {
+      "type": "flora",
+      "habitat": "Amazon",
+      "tags": [
+        "anggrek",
+        "amazon"
+      ]
+    }
+  },
+  {
+    "id": "alam-kondor-andes",
+    "kategori": "alam",
+    "wilayah": "amerika",
+    "nama": "Kondor Andes",
+    "tags": [
+      "kondor andes"
+    ],
+    "teks": "Kondor Andes — burung terbang terbesar di dunia berdasarkan rentang sayap, hidup di pegunungan Andes.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Pegunungan Andes",
+      "tags": [
+        "kondor andes"
+      ]
+    }
+  },
+  {
+    "id": "alam-sequoia",
+    "kategori": "alam",
+    "wilayah": "amerika",
+    "nama": "Sequoia",
+    "tags": [
+      "sequoia",
+      "california"
+    ],
+    "teks": "Pohon Sequoia — pohon tertinggi di dunia, tumbuh di California, Amerika Serikat.",
+    "meta": {
+      "type": "flora",
+      "habitat": "California, Amerika Serikat",
+      "tags": [
+        "sequoia",
+        "california"
+      ]
+    }
+  }
+]

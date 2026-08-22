@@ -1,0 +1,89 @@
+[
+  {
+    "id": "alam-singa",
+    "kategori": "alam",
+    "wilayah": "afrika",
+    "nama": "Singa",
+    "tags": [
+      "singa",
+      "savana"
+    ],
+    "teks": "Singa — raja hutan Afrika, hidup berkelompok di savana Afrika bagian timur dan selatan.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Savana Afrika",
+      "tags": [
+        "singa",
+        "savana"
+      ]
+    }
+  },
+  {
+    "id": "alam-gajah-afrika",
+    "kategori": "alam",
+    "wilayah": "afrika",
+    "nama": "Gajah Afrika",
+    "tags": [
+      "gajah afrika"
+    ],
+    "teks": "Gajah Afrika — mamalia darat terbesar di dunia, dikenal dengan telinga besar dan gading panjang.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Afrika Sub-Sahara",
+      "tags": [
+        "gajah afrika"
+      ]
+    }
+  },
+  {
+    "id": "alam-baobab",
+    "kategori": "alam",
+    "wilayah": "afrika",
+    "nama": "Baobab",
+    "tags": [
+      "baobab"
+    ],
+    "teks": "Baobab — pohon raksasa berumur ribuan tahun, dijuluki \"pohon terbalik\" karena bentuk dahannya.",
+    "meta": {
+      "type": "flora",
+      "habitat": "Afrika",
+      "tags": [
+        "baobab"
+      ]
+    }
+  },
+  {
+    "id": "alam-zebra",
+    "kategori": "alam",
+    "wilayah": "afrika",
+    "nama": "Zebra",
+    "tags": [
+      "zebra"
+    ],
+    "teks": "Zebra — kuda berbelang hitam-putih khas savana Afrika, hidup dalam kawanan besar.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Savana Afrika",
+      "tags": [
+        "zebra"
+      ]
+    }
+  },
+  {
+    "id": "alam-gorila-gunung",
+    "kategori": "alam",
+    "wilayah": "afrika",
+    "nama": "Gorila Gunung",
+    "tags": [
+      "gorila gunung"
+    ],
+    "teks": "Gorila Gunung — primata besar yang kritis terancam punah, hidup di pegunungan Afrika Timur.",
+    "meta": {
+      "type": "fauna",
+      "habitat": "Rwanda, Uganda, Kongo",
+      "tags": [
+        "gorila gunung"
+      ]
+    }
+  }
+]
