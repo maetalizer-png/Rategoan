@@ -9,7 +9,7 @@
       "indonesia",
       "candi"
     ],
-    "teks": "Borobudur — candi Buddha terbesar di dunia, Jawa Tengah, Indonesia. Situs Warisan Dunia UNESCO abad ke-9.",
+    "teks": "Borobudur — candi Buddha terbesar di dunia, Jawa Tengah, Indonesia. Situs Warisan Dunia UNESCO abad ke-9. Tempat wisata terkenal di kota Magelang adalah Borobudur. Tempat wisata terkenal di kota Magelang adalah Borobudur.",
     "meta": {
       "country": "Indonesia",
       "city": "Magelang",
@@ -32,7 +32,7 @@
       "indonesia",
       "pantai"
     ],
-    "teks": "Bali — pulau wisata Indonesia terkenal dengan pantai, sawah terasering, dan budaya Hindu.",
+    "teks": "Bali — pulau wisata Indonesia terkenal dengan pantai, sawah terasering, dan budaya Hindu. Tempat wisata terkenal di kota Denpasar adalah Bali.",
     "meta": {
       "country": "Indonesia",
       "city": "Denpasar",
@@ -54,7 +54,7 @@
       "tembok besar",
       "china"
     ],
-    "teks": "Tembok Besar China — struktur pertahanan kuno sepanjang ribuan kilometer, Warisan Dunia UNESCO.",
+    "teks": "Tembok Besar China — struktur pertahanan kuno sepanjang ribuan kilometer, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Beijing adalah Tembok Besar China.",
     "meta": {
       "country": "China",
       "city": "Beijing",
@@ -75,7 +75,7 @@
       "gunung fuji",
       "jepang"
     ],
-    "teks": "Gunung Fuji — gunung tertinggi dan ikon Jepang, situs suci dan pendakian populer.",
+    "teks": "Gunung Fuji — gunung tertinggi dan ikon Jepang, situs suci dan pendakian populer. Tempat wisata terkenal di kota Shizuoka adalah Gunung Fuji. Tempat wisata terkenal di kota Shizuoka adalah Gunung Fuji.",
     "meta": {
       "country": "Jepang",
       "city": "Shizuoka",
@@ -96,7 +96,7 @@
       "angkor wat",
       "kamboja"
     ],
-    "teks": "Angkor Wat — kompleks candi Hindu-Buddha terbesar di dunia, Kamboja. Warisan Dunia UNESCO.",
+    "teks": "Angkor Wat — kompleks candi Hindu-Buddha terbesar di dunia, Kamboja. Warisan Dunia UNESCO. Tempat wisata terkenal di kota Siem Reap adalah Angkor Wat.",
     "meta": {
       "country": "Kamboja",
       "city": "Siem Reap",
@@ -117,7 +117,7 @@
       "taj mahal",
       "india"
     ],
-    "teks": "Taj Mahal — makam marmer putih ikonik di India, simbol cinta abadi, Warisan Dunia UNESCO.",
+    "teks": "Taj Mahal — makam marmer putih ikonik di India, simbol cinta abadi, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Agra adalah Taj Mahal. Tempat wisata terkenal di kota Agra adalah Taj Mahal.",
     "meta": {
       "country": "India",
       "city": "Agra",
@@ -138,7 +138,7 @@
       "ha long bay",
       "vietnam"
     ],
-    "teks": "Ha Long Bay — teluk dengan ribuan pulau karst di Vietnam, Warisan Dunia UNESCO.",
+    "teks": "Ha Long Bay — teluk dengan ribuan pulau karst di Vietnam, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Quang Ninh adalah Ha Long Bay.",
     "meta": {
       "country": "Vietnam",
       "city": "Quang Ninh",
@@ -159,7 +159,7 @@
       "everest",
       "nepal"
     ],
-    "teks": "Gunung Everest — puncak tertinggi di dunia, perbatasan Nepal-Tibet, tujuan pendakian ekstrem.",
+    "teks": "Gunung Everest — puncak tertinggi di dunia, perbatasan Nepal-Tibet, tujuan pendakian ekstrem. Tempat wisata terkenal di kota Solukhumbu adalah Gunung Everest. Tempat wisata terkenal di kota Solukhumbu adalah Gunung Everest.",
     "meta": {
       "country": "Nepal",
       "city": "Solukhumbu",
@@ -180,7 +180,7 @@
       "petronas",
       "malaysia"
     ],
-    "teks": "Petronas Twin Towers — menara kembar tertinggi di dunia (dahulu), ikon Kuala Lumpur, Malaysia.",
+    "teks": "Petronas Twin Towers — menara kembar tertinggi di dunia (dahulu), ikon Kuala Lumpur, Malaysia. Tempat wisata terkenal di kota Kuala Lumpur adalah Petronas Twin Towers.",
     "meta": {
       "country": "Malaysia",
       "city": "Kuala Lumpur",
@@ -201,7 +201,7 @@
       "shwedagon",
       "myanmar"
     ],
-    "teks": "Kuil Shwedagon — pagoda emas suci di Yangon, Myanmar, salah satu situs Buddha paling dihormati.",
+    "teks": "Kuil Shwedagon — pagoda emas suci di Yangon, Myanmar, salah satu situs Buddha paling dihormati. Tempat wisata terkenal di kota Yangon adalah Kuil Shwedagon.",
     "meta": {
       "country": "Myanmar",
       "city": "Yangon",
@@ -222,7 +222,7 @@
       "kota terlarang",
       "china"
     ],
-    "teks": "Kota Terlarang — kompleks istana kekaisaran di Beijing, China, kediaman kaisar selama hampir 500 tahun.",
+    "teks": "Kota Terlarang — kompleks istana kekaisaran di Beijing, China, kediaman kaisar selama hampir 500 tahun. Tempat wisata terkenal di kota Beijing adalah Kota Terlarang.",
     "meta": {
       "country": "China",
       "city": "Beijing",
@@ -243,7 +243,7 @@
       "terracotta army",
       "china"
     ],
-    "teks": "Terracotta Army — ribuan patung tentara tanah liat penjaga makam Kaisar Qin Shi Huang, Xi'an, China.",
+    "teks": "Terracotta Army — ribuan patung tentara tanah liat penjaga makam Kaisar Qin Shi Huang, Xi'an, China. Tempat wisata terkenal di kota Xi'an adalah Terracotta Army. Tempat wisata terkenal di kota Xi'an adalah Terracotta Army.",
     "meta": {
       "country": "China",
       "city": "Xi'an",
@@ -264,7 +264,7 @@
       "bromo",
       "indonesia"
     ],
-    "teks": "Gunung Bromo — gunung berapi aktif dengan lautan pasir ikonik di Jawa Timur, Indonesia.",
+    "teks": "Gunung Bromo — gunung berapi aktif dengan lautan pasir ikonik di Jawa Timur, Indonesia. Tempat wisata terkenal di kota Probolinggo adalah Gunung Bromo. Tempat wisata terkenal di kota Probolinggo adalah Gunung Bromo.",
     "meta": {
       "country": "Indonesia",
       "city": "Probolinggo",
@@ -285,7 +285,7 @@
       "komodo",
       "indonesia"
     ],
-    "teks": "Pulau Komodo — habitat asli komodo, kadal terbesar di dunia, Warisan Dunia UNESCO di Indonesia.",
+    "teks": "Pulau Komodo — habitat asli komodo, kadal terbesar di dunia, Warisan Dunia UNESCO di Indonesia. Tempat wisata terkenal di kota Labuan Bajo adalah Pulau Komodo.",
     "meta": {
       "country": "Indonesia",
       "city": "Labuan Bajo",
@@ -306,7 +306,7 @@
       "raja ampat",
       "indonesia"
     ],
-    "teks": "Raja Ampat — gugusan pulau dengan keanekaragaman hayati laut terkaya di dunia, Papua Barat, Indonesia.",
+    "teks": "Raja Ampat — gugusan pulau dengan keanekaragaman hayati laut terkaya di dunia, Papua Barat, Indonesia. Tempat wisata terkenal di kota Waisai adalah Raja Ampat. Tempat wisata terkenal di kota Waisai adalah Raja Ampat.",
     "meta": {
       "country": "Indonesia",
       "city": "Waisai",
@@ -327,7 +327,7 @@
       "fushimi inari",
       "jepang"
     ],
-    "teks": "Kuil Fushimi Inari — kuil Shinto terkenal dengan ribuan gerbang torii oranye, Kyoto, Jepang.",
+    "teks": "Kuil Fushimi Inari — kuil Shinto terkenal dengan ribuan gerbang torii oranye, Kyoto, Jepang. Tempat wisata terkenal di kota Kyoto adalah Kuil Fushimi Inari.",
     "meta": {
       "country": "Jepang",
       "city": "Kyoto",
@@ -348,7 +348,7 @@
       "kastil osaka",
       "jepang"
     ],
-    "teks": "Kastil Osaka — kastil bersejarah ikonik dari era Sengoku, salah satu landmark utama Osaka, Jepang.",
+    "teks": "Kastil Osaka — kastil bersejarah ikonik dari era Sengoku, salah satu landmark utama Osaka, Jepang. Tempat wisata terkenal di kota Osaka adalah Kastil Osaka.",
     "meta": {
       "country": "Jepang",
       "city": "Osaka",
@@ -369,7 +369,7 @@
       "jeju",
       "korea selatan"
     ],
-    "teks": "Pulau Jeju — pulau vulkanik populer di Korea Selatan, Warisan Dunia UNESCO dengan pantai dan air terjun.",
+    "teks": "Pulau Jeju — pulau vulkanik populer di Korea Selatan, Warisan Dunia UNESCO dengan pantai dan air terjun. Tempat wisata terkenal di kota Jeju adalah Pulau Jeju.",
     "meta": {
       "country": "Korea Selatan",
       "city": "Jeju",
@@ -390,7 +390,7 @@
       "gyeongbokgung",
       "korea selatan"
     ],
-    "teks": "Istana Gyeongbokgung — istana kerajaan utama Dinasti Joseon di Seoul, Korea Selatan.",
+    "teks": "Istana Gyeongbokgung — istana kerajaan utama Dinasti Joseon di Seoul, Korea Selatan. Tempat wisata terkenal di kota Seoul adalah Istana Gyeongbokgung.",
     "meta": {
       "country": "Korea Selatan",
       "city": "Seoul",
@@ -411,7 +411,7 @@
       "boracay",
       "filipina"
     ],
-    "teks": "Boracay — pulau wisata dengan pantai pasir putih terkenal di Filipina.",
+    "teks": "Boracay — pulau wisata dengan pantai pasir putih terkenal di Filipina. Tempat wisata terkenal di kota Malay adalah Boracay.",
     "meta": {
       "country": "Filipina",
       "city": "Malay",
@@ -432,7 +432,7 @@
       "palawan",
       "filipina"
     ],
-    "teks": "Palawan — pulau dengan laguna dan sungai bawah tanah terpanjang di dunia, Filipina, Warisan Dunia UNESCO.",
+    "teks": "Palawan — pulau dengan laguna dan sungai bawah tanah terpanjang di dunia, Filipina, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Puerto Princesa adalah Palawan.",
     "meta": {
       "country": "Filipina",
       "city": "Puerto Princesa",
@@ -453,7 +453,7 @@
       "marina bay sands",
       "singapura"
     ],
-    "teks": "Marina Bay Sands — kompleks hotel dan resor ikonik dengan kolam renang atap di Singapura.",
+    "teks": "Marina Bay Sands — kompleks hotel dan resor ikonik dengan kolam renang atap di Singapura. Tempat wisata terkenal di kota Singapura adalah Marina Bay Sands.",
     "meta": {
       "country": "Singapura",
       "city": "Singapura",
@@ -474,7 +474,7 @@
       "gardens by the bay",
       "singapura"
     ],
-    "teks": "Gardens by the Bay — taman futuristik dengan pohon super (supertree) raksasa di Singapura.",
+    "teks": "Gardens by the Bay — taman futuristik dengan pohon super (supertree) raksasa di Singapura. Tempat wisata terkenal di kota Singapura adalah Gardens by the Bay.",
     "meta": {
       "country": "Singapura",
       "city": "Singapura",
@@ -495,7 +495,7 @@
       "phuket",
       "thailand"
     ],
-    "teks": "Phuket — pulau wisata pantai terbesar dan terpopuler di Thailand.",
+    "teks": "Phuket — pulau wisata pantai terbesar dan terpopuler di Thailand. Tempat wisata terkenal di kota Phuket adalah Phuket.",
     "meta": {
       "country": "Thailand",
       "city": "Phuket",
@@ -516,7 +516,7 @@
       "chiang mai",
       "thailand"
     ],
-    "teks": "Chiang Mai — kota bersejarah di Thailand utara, terkenal dengan kuil kuno dan festival lentera Yi Peng.",
+    "teks": "Chiang Mai — kota bersejarah di Thailand utara, terkenal dengan kuil kuno dan festival lentera Yi Peng. Tempat wisata terkenal di kota Chiang Mai adalah Chiang Mai.",
     "meta": {
       "country": "Thailand",
       "city": "Chiang Mai",
@@ -537,7 +537,7 @@
       "luang prabang",
       "laos"
     ],
-    "teks": "Luang Prabang — kota kuno di Laos dengan kuil Buddha dan arsitektur kolonial, Warisan Dunia UNESCO.",
+    "teks": "Luang Prabang — kota kuno di Laos dengan kuil Buddha dan arsitektur kolonial, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Luang Prabang adalah Luang Prabang.",
     "meta": {
       "country": "Laos",
       "city": "Luang Prabang",
@@ -558,7 +558,7 @@
       "bagan",
       "myanmar"
     ],
-    "teks": "Bagan — dataran dengan ribuan candi dan pagoda kuno di Myanmar, salah satu situs arkeologi terpenting Asia Tenggara.",
+    "teks": "Bagan — dataran dengan ribuan candi dan pagoda kuno di Myanmar, salah satu situs arkeologi terpenting Asia Tenggara. Tempat wisata terkenal di kota Bagan adalah Bagan.",
     "meta": {
       "country": "Myanmar",
       "city": "Bagan",
@@ -579,7 +579,7 @@
       "varanasi",
       "india"
     ],
-    "teks": "Varanasi — kota suci tertua di India, tempat ritual keagamaan Hindu di tepi Sungai Gangga.",
+    "teks": "Varanasi — kota suci tertua di India, tempat ritual keagamaan Hindu di tepi Sungai Gangga. Tempat wisata terkenal di kota Varanasi adalah Varanasi.",
     "meta": {
       "country": "India",
       "city": "Varanasi",
@@ -601,7 +601,7 @@
       "samarkand",
       "uzbekistan"
     ],
-    "teks": "Registan Samarkand — kompleks madrasah bersejarah dengan arsitektur Islam megah di Uzbekistan, Warisan Dunia UNESCO.",
+    "teks": "Registan Samarkand — kompleks madrasah bersejarah dengan arsitektur Islam megah di Uzbekistan, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Samarkand adalah Registan Samarkand.",
     "meta": {
       "country": "Uzbekistan",
       "city": "Samarkand",

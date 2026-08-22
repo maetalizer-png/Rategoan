@@ -8,7 +8,7 @@
       "petra",
       "yordania"
     ],
-    "teks": "Petra — kota kuno yang diukir di tebing batu merah, Yordania, Warisan Dunia UNESCO.",
+    "teks": "Petra — kota kuno yang diukir di tebing batu merah, Yordania, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Ma'an adalah Petra. Tempat wisata terkenal di kota Ma'an adalah Petra.",
     "meta": {
       "country": "Yordania",
       "city": "Ma'an",
@@ -29,7 +29,7 @@
       "burj khalifa",
       "uni emirat arab"
     ],
-    "teks": "Burj Khalifa — gedung tertinggi di dunia, Dubai, Uni Emirat Arab.",
+    "teks": "Burj Khalifa — gedung tertinggi di dunia, Dubai, Uni Emirat Arab. Tempat wisata terkenal di kota Dubai adalah Burj Khalifa.",
     "meta": {
       "country": "Uni Emirat Arab",
       "city": "Dubai",
@@ -50,7 +50,7 @@
       "masjidil haram",
       "arab saudi"
     ],
-    "teks": "Masjidil Haram — masjid suci terbesar di dunia, mengelilingi Ka'bah, Mekkah, Arab Saudi.",
+    "teks": "Masjidil Haram — masjid suci terbesar di dunia, mengelilingi Ka'bah, Mekkah, Arab Saudi. Tempat wisata terkenal di kota Mekkah adalah Masjidil Haram.",
     "meta": {
       "country": "Arab Saudi",
       "city": "Mekkah",
@@ -71,7 +71,7 @@
       "hagia sophia",
       "turki"
     ],
-    "teks": "Hagia Sophia — bekas gereja dan masjid bersejarah di Istanbul, Turki, ikon perpaduan budaya.",
+    "teks": "Hagia Sophia — bekas gereja dan masjid bersejarah di Istanbul, Turki, ikon perpaduan budaya. Tempat wisata terkenal di kota Istanbul adalah Hagia Sophia.",
     "meta": {
       "country": "Turki",
       "city": "Istanbul",
@@ -92,7 +92,7 @@
       "persepolis",
       "iran"
     ],
-    "teks": "Persepolis — reruntuhan ibukota kekaisaran Persia kuno, Iran, Warisan Dunia UNESCO.",
+    "teks": "Persepolis — reruntuhan ibukota kekaisaran Persia kuno, Iran, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Shiraz adalah Persepolis.",
     "meta": {
       "country": "Iran",
       "city": "Shiraz",
@@ -113,7 +113,7 @@
       "tembok ratapan",
       "israel"
     ],
-    "teks": "Tembok Ratapan — situs suci Yahudi di Yerusalem, sisa Bait Suci kuno.",
+    "teks": "Tembok Ratapan — situs suci Yahudi di Yerusalem, sisa Bait Suci kuno. Tempat wisata terkenal di kota Yerusalem adalah Tembok Ratapan.",
     "meta": {
       "country": "Israel",
       "city": "Yerusalem",
@@ -134,7 +134,7 @@
       "kubah batu",
       "yerusalem"
     ],
-    "teks": "Kubah Batu — bangunan suci Islam berkubah emas di kompleks Haram al-Sharif, Yerusalem.",
+    "teks": "Kubah Batu — bangunan suci Islam berkubah emas di kompleks Haram al-Sharif, Yerusalem. Tempat wisata terkenal di kota Yerusalem adalah Kubah Batu.",
     "meta": {
       "country": "Israel",
       "city": "Yerusalem",
@@ -155,7 +155,7 @@
       "topkapi",
       "turki"
     ],
-    "teks": "Istana Topkapi — bekas istana kesultanan Utsmaniyah di Istanbul, kini museum bersejarah.",
+    "teks": "Istana Topkapi — bekas istana kesultanan Utsmaniyah di Istanbul, kini museum bersejarah. Tempat wisata terkenal di kota Istanbul adalah Istana Topkapi.",
     "meta": {
       "country": "Turki",
       "city": "Istanbul",
@@ -176,7 +176,7 @@
       "cappadocia",
       "turki"
     ],
-    "teks": "Cappadocia — kawasan lanskap batu unik di Turki, terkenal dengan tur balon udara saat fajar.",
+    "teks": "Cappadocia — kawasan lanskap batu unik di Turki, terkenal dengan tur balon udara saat fajar. Tempat wisata terkenal di kota Nevsehir adalah Cappadocia. Tempat wisata terkenal di kota Nevsehir adalah Cappadocia.",
     "meta": {
       "country": "Turki",
       "city": "Nevsehir",
@@ -197,7 +197,7 @@
       "wadi rum",
       "yordania"
     ],
-    "teks": "Wadi Rum — gurun pasir merah dramatis di Yordania, lokasi syuting banyak film fiksi ilmiah.",
+    "teks": "Wadi Rum — gurun pasir merah dramatis di Yordania, lokasi syuting banyak film fiksi ilmiah. Tempat wisata terkenal di kota Aqaba adalah Wadi Rum. Tempat wisata terkenal di kota Aqaba adalah Wadi Rum.",
     "meta": {
       "country": "Yordania",
       "city": "Aqaba",
@@ -218,7 +218,7 @@
       "jerash",
       "yordania"
     ],
-    "teks": "Jerash — reruntuhan kota Romawi kuno yang terpelihara baik di Yordania.",
+    "teks": "Jerash — reruntuhan kota Romawi kuno yang terpelihara baik di Yordania. Tempat wisata terkenal di kota Jerash adalah Jerash.",
     "meta": {
       "country": "Yordania",
       "city": "Jerash",
@@ -239,7 +239,7 @@
       "isfahan",
       "iran"
     ],
-    "teks": "Naqsh-e Jahan Square — alun-alun bersejarah di Isfahan, Iran, salah satu yang terbesar di dunia.",
+    "teks": "Naqsh-e Jahan Square — alun-alun bersejarah di Isfahan, Iran, salah satu yang terbesar di dunia. Tempat wisata terkenal di kota Isfahan adalah Naqsh-e Jahan Square.",
     "meta": {
       "country": "Iran",
       "city": "Isfahan",
@@ -260,7 +260,7 @@
       "masjid nabawi",
       "madinah"
     ],
-    "teks": "Masjid Nabawi — masjid suci kedua umat Islam, tempat makam Nabi Muhammad, Madinah, Arab Saudi.",
+    "teks": "Masjid Nabawi — masjid suci kedua umat Islam, tempat makam Nabi Muhammad, Madinah, Arab Saudi. Tempat wisata terkenal di kota Madinah adalah Masjid Nabawi.",
     "meta": {
       "country": "Arab Saudi",
       "city": "Madinah",
@@ -282,7 +282,7 @@
       "al-ula",
       "arab saudi"
     ],
-    "teks": "Hegra (Al-Ula) — situs arkeologi Nabatea kuno di Arab Saudi, Warisan Dunia UNESCO pertama negara itu.",
+    "teks": "Hegra (Al-Ula) — situs arkeologi Nabatea kuno di Arab Saudi, Warisan Dunia UNESCO pertama negara itu. Tempat wisata terkenal di kota Al-Ula adalah Hegra.",
     "meta": {
       "country": "Arab Saudi",
       "city": "Al-Ula",
@@ -304,7 +304,7 @@
       "palmyra",
       "suriah"
     ],
-    "teks": "Palmyra — reruntuhan kota kuno di gurun Suriah, dulunya pusat perdagangan penting jalur sutra.",
+    "teks": "Palmyra — reruntuhan kota kuno di gurun Suriah, dulunya pusat perdagangan penting jalur sutra. Tempat wisata terkenal di kota Homs adalah Palmyra. Tempat wisata terkenal di kota Homs adalah Palmyra.",
     "meta": {
       "country": "Suriah",
       "city": "Homs",
@@ -325,7 +325,7 @@
       "dubai marina",
       "uea"
     ],
-    "teks": "Dubai Marina — kawasan pesisir modern dengan gedung pencakar langit dan kanal buatan di Dubai.",
+    "teks": "Dubai Marina — kawasan pesisir modern dengan gedung pencakar langit dan kanal buatan di Dubai. Tempat wisata terkenal di kota Dubai adalah Dubai Marina.",
     "meta": {
       "country": "Uni Emirat Arab",
       "city": "Dubai",
@@ -346,7 +346,7 @@
       "sheikh zayed mosque",
       "abu dhabi"
     ],
-    "teks": "Sheikh Zayed Grand Mosque — masjid megah berkubah putih di Abu Dhabi, salah satu terbesar di dunia.",
+    "teks": "Sheikh Zayed Grand Mosque — masjid megah berkubah putih di Abu Dhabi, salah satu terbesar di dunia. Tempat wisata terkenal di kota Abu Dhabi adalah Sheikh Zayed Grand Mosque.",
     "meta": {
       "country": "Uni Emirat Arab",
       "city": "Abu Dhabi",
@@ -367,7 +367,7 @@
       "souk waqif",
       "qatar"
     ],
-    "teks": "Souk Waqif — pasar tradisional bersejarah di Doha, Qatar, terkenal dengan rempah dan kerajinan.",
+    "teks": "Souk Waqif — pasar tradisional bersejarah di Doha, Qatar, terkenal dengan rempah dan kerajinan. Tempat wisata terkenal di kota Doha adalah Souk Waqif.",
     "meta": {
       "country": "Qatar",
       "city": "Doha",
@@ -388,7 +388,7 @@
       "the pearl",
       "qatar"
     ],
-    "teks": "The Pearl-Qatar — pulau buatan mewah dengan marina dan pertokoan di lepas pantai Doha.",
+    "teks": "The Pearl-Qatar — pulau buatan mewah dengan marina dan pertokoan di lepas pantai Doha. Tempat wisata terkenal di kota Doha adalah The Pearl-Qatar.",
     "meta": {
       "country": "Qatar",
       "city": "Doha",
@@ -409,7 +409,7 @@
       "sanaa",
       "yaman"
     ],
-    "teks": "Kota Tua Sanaa — kota kuno di Yaman dengan arsitektur menara bata unik berusia ratusan tahun.",
+    "teks": "Kota Tua Sanaa — kota kuno di Yaman dengan arsitektur menara bata unik berusia ratusan tahun. Tempat wisata terkenal di kota Sanaa adalah Kota Tua Sanaa.",
     "meta": {
       "country": "Yaman",
       "city": "Sanaa",
@@ -430,7 +430,7 @@
       "sultan qaboos mosque",
       "oman"
     ],
-    "teks": "Masjid Agung Sultan Qaboos — masjid megah di Muscat, Oman, dengan karpet dan lampu gantung kristal ikonik.",
+    "teks": "Masjid Agung Sultan Qaboos — masjid megah di Muscat, Oman, dengan karpet dan lampu gantung kristal ikonik. Tempat wisata terkenal di kota Muscat adalah Masjid Agung Sultan Qaboos.",
     "meta": {
       "country": "Oman",
       "city": "Muscat",
@@ -451,7 +451,7 @@
       "wadi dana",
       "yordania"
     ],
-    "teks": "Wadi Dana — cagar alam lembah terbesar di Yordania, jalur trekking dengan pemandangan gurun dramatis.",
+    "teks": "Wadi Dana — cagar alam lembah terbesar di Yordania, jalur trekking dengan pemandangan gurun dramatis. Tempat wisata terkenal di kota Tafilah adalah Wadi Dana. Tempat wisata terkenal di kota Tafilah adalah Wadi Dana.",
     "meta": {
       "country": "Yordania",
       "city": "Tafilah",
@@ -472,7 +472,7 @@
       "byblos",
       "lebanon"
     ],
-    "teks": "Byblos — salah satu kota tertua yang terus dihuni di dunia, Lebanon, Warisan Dunia UNESCO.",
+    "teks": "Byblos — salah satu kota tertua yang terus dihuni di dunia, Lebanon, Warisan Dunia UNESCO. Tempat wisata terkenal di kota Byblos adalah Byblos.",
     "meta": {
       "country": "Lebanon",
       "city": "Byblos",
@@ -493,7 +493,7 @@
       "baalbek",
       "lebanon"
     ],
-    "teks": "Baalbek — kompleks kuil Romawi kuno yang megah di Lebanon, dikenal dengan kolom raksasanya.",
+    "teks": "Baalbek — kompleks kuil Romawi kuno yang megah di Lebanon, dikenal dengan kolom raksasanya. Tempat wisata terkenal di kota Baalbek adalah Baalbek.",
     "meta": {
       "country": "Lebanon",
       "city": "Baalbek",
@@ -514,7 +514,7 @@
       "kuwait towers",
       "kuwait"
     ],
-    "teks": "Kuwait Towers — tiga menara ikonik dengan bola biru-hijau, simbol modern Kota Kuwait.",
+    "teks": "Kuwait Towers — tiga menara ikonik dengan bola biru-hijau, simbol modern Kota Kuwait. Tempat wisata terkenal di kota Kuwait City adalah Kuwait Towers.",
     "meta": {
       "country": "Kuwait",
       "city": "Kuwait City",
