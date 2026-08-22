@@ -5,7 +5,7 @@ import { BUDGET_BASE, TIER_MULT, PACK_TIPS } from '../constants.js';
 import { getCheck, saveCheck, getTrips, saveTrips, getStats, saveStats } from '../storage.js';
 import { climateCard } from '../features/climate.js';
 import { journalCard, getNotes, bindJournal } from '../features/journal.js';
-import { exportLog } from '../../../raget/raget-memory/export-log.js';
+import { exportLog } from '../../../../raget/raget-memory/export-log.js';
 
 const $ = (s) => document.querySelector(s);
 const view = $('#view');

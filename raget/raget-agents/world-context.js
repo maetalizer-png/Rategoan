@@ -207,7 +207,7 @@ async function tryAutoLocationContext(text) {
   const cityRaw = m[1].trim();
   const country = CITY_COUNTRY[cityRaw];
   if (!country) return null;
-  const intro = 'Terdeteksi kamu lagi di ' + capitalize(cityRaw) + ' (' + country + ') — konteks Jelajah Dunia otomatis beralih ke ' + country + '.\n\n';
+  const intro = 'Terdeteksi kamu lagi di ' + capitalize(cityRaw) + ' (' + country + ') — konteks Jelajah otomatis beralih ke ' + country + '.\n\n';
   const etika = await datariesBridge.extras('etika di ' + country);
   if (etika) return intro + etika;
   return intro + 'Belum ada data etika/budaya spesifik untuk ' + country + ' di basis data ini.';

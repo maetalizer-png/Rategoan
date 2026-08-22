@@ -1,0 +1,21 @@
+/* ========== RUJUKAN PUSTAKA ========== */
+.sumber-chip {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border: 1px solid var(--cream-deep);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--brown);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 0.2s;
+}
+
+.sumber-chip:active {
+  transform: scale(0.92);
+  background: var(--cream-deep);
+}
