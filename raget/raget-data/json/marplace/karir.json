@@ -1,0 +1,2438 @@
+[
+  {
+    "id": "marplace-linkedin",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "LinkedIn",
+    "tags": [
+      "job",
+      "global",
+      "terbesar"
+    ],
+    "teks": "LinkedIn - Platform profesional global terbesar. Didirikan 2002 oleh Reid Hoffman. 900+ juta pengguna di 200+ negara.",
+    "meta": {
+      "type": "job",
+      "founded": 2002,
+      "founder": "Reid Hoffman",
+      "country": "Global",
+      "products": [
+        "Networking",
+        "Lowongan",
+        "Edukasi",
+        "Headhunting"
+      ],
+      "stats": {
+        "annualRevenue": "15.1B USD",
+        "monthlyVisitors": "600M",
+        "totalListings": "50M+",
+        "totalCVs": "900M+",
+        "employees": "15K",
+        "countriesOperated": "200+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed",
+    "tags": [
+      "job",
+      "global",
+      "aggregator"
+    ],
+    "teks": "Indeed - Aggregator job global terbesar. Didirikan 2004. Mengumpulkan lowongan dari berbagai sumber.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Global",
+      "products": [
+        "Lowongan",
+        "Salary Calculator",
+        "Company Reviews"
+      ],
+      "stats": {
+        "annualRevenue": "4.5B USD",
+        "monthlyVisitors": "300M",
+        "totalListings": "100M+",
+        "totalCVs": "200M+",
+        "employees": "12K",
+        "countriesOperated": "60+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-glassdoor",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Glassdoor",
+    "tags": [
+      "job",
+      "global",
+      "review"
+    ],
+    "teks": "Glassdoor - Platform job dengan review perusahaan. Didirikan 2007. Transparansi gaji & budaya perusahaan.",
+    "meta": {
+      "type": "job",
+      "founded": 2007,
+      "country": "Global",
+      "products": [
+        "Lowongan",
+        "Company Reviews",
+        "Salary Data"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "80M",
+        "totalListings": "10M+",
+        "totalCVs": "50M+",
+        "employees": "2K",
+        "countriesOperated": "190+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-monster-com",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Monster.com",
+    "tags": [
+      "job",
+      "global",
+      "tertua"
+    ],
+    "teks": "Monster.com - Platform job tertua global. Didirikan 1994. Pelopor rekrutmen online.",
+    "meta": {
+      "type": "job",
+      "founded": 1994,
+      "country": "Global",
+      "products": [
+        "Lowongan",
+        "CV Database",
+        "Career Advice"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "100M",
+        "totalListings": "20M+",
+        "totalCVs": "100M+",
+        "employees": "3K",
+        "countriesOperated": "40+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-careerbuilder",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "CareerBuilder",
+    "tags": [
+      "job",
+      "global",
+      "ai"
+    ],
+    "teks": "CareerBuilder - Platform job dengan AI matching. Didirikan 1995. Fokus pada matching kandidat & lowongan.",
+    "meta": {
+      "type": "job",
+      "founded": 1995,
+      "country": "Global",
+      "products": [
+        "Lowongan",
+        "AI Matching",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "50M",
+        "totalListings": "10M+",
+        "totalCVs": "80M+",
+        "employees": "2K",
+        "countriesOperated": "50+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-ziprecruiter",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "ZipRecruiter",
+    "tags": [
+      "job",
+      "global",
+      "ai"
+    ],
+    "teks": "ZipRecruiter - Platform job dengan AI-powered matching. Didirikan 2010.",
+    "meta": {
+      "type": "job",
+      "founded": 2010,
+      "country": "Global",
+      "products": [
+        "Lowongan",
+        "AI Matching"
+      ],
+      "stats": {
+        "annualRevenue": "600M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "5M+",
+        "totalCVs": "30M+",
+        "employees": "1K",
+        "countriesOperated": "10+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-usajobs",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "USAJobs",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "pemerintah"
+    ],
+    "teks": "USAJobs - Platform job pemerintah AS. Resmi untuk lowongan federal.",
+    "meta": {
+      "type": "job",
+      "founded": 1996,
+      "country": "AS",
+      "products": [
+        "Lowongan Pemerintah"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalCVs": "10M+",
+        "employees": "500",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-dice",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Dice",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "it"
+    ],
+    "teks": "Dice - Platform khusus IT & tech. Didirikan 1990. Fokus profesional teknologi.",
+    "meta": {
+      "type": "job",
+      "founded": 1990,
+      "country": "AS",
+      "products": [
+        "Lowongan IT",
+        "Tech Jobs"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "2M+",
+        "totalCVs": "15M+",
+        "employees": "500",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-angellist",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "AngelList",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "startup"
+    ],
+    "teks": "AngelList - Platform startup & tech jobs. Didirikan 2010. Fokus startup & venture.",
+    "meta": {
+      "type": "job",
+      "founded": 2010,
+      "country": "AS",
+      "products": [
+        "Lowongan Startup",
+        "Tech"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalCVs": "10M+",
+        "employees": "300",
+        "countriesOperated": "10+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-the-muse",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "The Muse",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "karir"
+    ],
+    "teks": "The Muse - Platform karir dengan konten. Didirikan 2011. Panduan karir & lowongan.",
+    "meta": {
+      "type": "job",
+      "founded": 2011,
+      "country": "AS",
+      "products": [
+        "Lowongan",
+        "Career Advice"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "5M+",
+        "employees": "200",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-reed",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Reed",
+    "tags": [
+      "job",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "Reed - Platform job terbesar Inggris. Didirikan 1995. Lowongan berbagai bidang.",
+    "meta": {
+      "type": "job",
+      "founded": 1995,
+      "country": "Inggris",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "5M+",
+        "totalCVs": "20M+",
+        "employees": "1K",
+        "countriesOperated": "10+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-totaljobs",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Totaljobs",
+    "tags": [
+      "job",
+      "eropa",
+      "uk"
+    ],
+    "teks": "Totaljobs - Platform job Inggris. Didirikan 1999. Lowongan dari berbagai sektor.",
+    "meta": {
+      "type": "job",
+      "founded": 1999,
+      "country": "Inggris",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "2M+",
+        "totalCVs": "10M+",
+        "employees": "500",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-stepstone",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "StepStone",
+    "tags": [
+      "job",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "StepStone - Platform job Eropa. Didirikan 1996. Beroperasi di 20+ negara.",
+    "meta": {
+      "type": "job",
+      "founded": 1996,
+      "country": "Jerman",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "3M+",
+        "totalCVs": "15M+",
+        "employees": "800",
+        "countriesOperated": "20+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-xing",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Xing",
+    "tags": [
+      "job",
+      "eropa",
+      "jerman"
+    ],
+    "teks": "Xing - Platform profesional Jerman. Didirikan 2003. LinkedIn-nya Jerman.",
+    "meta": {
+      "type": "job",
+      "founded": 2003,
+      "country": "Jerman",
+      "products": [
+        "Networking",
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "2M+",
+        "totalCVs": "15M+",
+        "employees": "500",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-cadremploi",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Cadremploi",
+    "tags": [
+      "job",
+      "eropa",
+      "prancis"
+    ],
+    "teks": "Cadremploi - Platform job Prancis. Didirikan 1999. Lowongan untuk profesional.",
+    "meta": {
+      "type": "job",
+      "founded": 1999,
+      "country": "Prancis",
+      "products": [
+        "Lowongan Profesional"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "5M+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-51job",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "51job",
+    "tags": [
+      "job",
+      "asia-timur",
+      "terbesar"
+    ],
+    "teks": "51job - Platform job terbesar China. Didirikan 1998. Lowongan berbagai bidang.",
+    "meta": {
+      "type": "job",
+      "founded": 1998,
+      "country": "China",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "50M",
+        "totalListings": "10M+",
+        "totalCVs": "50M+",
+        "employees": "2K",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-liepin",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Liepin",
+    "tags": [
+      "job",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Liepin - Platform job profesional China. Didirikan 2011. Fokus talent & headhunting.",
+    "meta": {
+      "type": "job",
+      "founded": 2011,
+      "country": "China",
+      "products": [
+        "Headhunting",
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "2M+",
+        "totalCVs": "10M+",
+        "employees": "500",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zhaopin-karir",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Zhaopin",
+    "tags": [
+      "job",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Zhaopin - Platform job China. Didirikan 1994. Tulang punggung pasar kerja China.",
+    "meta": {
+      "type": "job",
+      "founded": 1994,
+      "country": "China",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "5M+",
+        "totalCVs": "30M+",
+        "employees": "1K",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-japan",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Japan",
+    "tags": [
+      "job",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Indeed Japan - Versi Indeed di Jepang. Didirikan 2004. Terbesar di Jepang.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Jepang",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "3M+",
+        "totalCVs": "15M+",
+        "employees": "500",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-daijob",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Daijob",
+    "tags": [
+      "job",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Daijob - Platform job bilingual Jepang. Didirikan 2000. Fokus ekspat & bilingual.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Jepang",
+      "products": [
+        "Lowongan Bilingual"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "2M+",
+        "employees": "100",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobkorea",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobKorea",
+    "tags": [
+      "job",
+      "asia-timur",
+      "korea"
+    ],
+    "teks": "JobKorea - Platform job terbesar Korea Selatan. Didirikan 1998. Lowongan berbagai bidang.",
+    "meta": {
+      "type": "job",
+      "founded": 1998,
+      "country": "Korea Selatan",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "2M+",
+        "totalCVs": "10M+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-naukri",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Naukri",
+    "tags": [
+      "job",
+      "asia-selatan",
+      "terbesar"
+    ],
+    "teks": "Naukri - Platform job terbesar India. Didirikan 1997. 60+ juta pengguna.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "India",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "5M+",
+        "totalCVs": "60M+",
+        "employees": "1K",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shine",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Shine",
+    "tags": [
+      "job",
+      "asia-selatan",
+      "india"
+    ],
+    "teks": "Shine - Platform job India. Didirikan 1998. Pesaing Naukri di India.",
+    "meta": {
+      "type": "job",
+      "founded": 1998,
+      "country": "India",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "2M+",
+        "totalCVs": "20M+",
+        "employees": "500",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-internshala",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Internshala",
+    "tags": [
+      "job",
+      "asia-selatan",
+      "magang"
+    ],
+    "teks": "Internshala - Platform magang & fresh graduate India. Didirikan 2010. Fokus mahasiswa.",
+    "meta": {
+      "type": "job",
+      "founded": 2010,
+      "country": "India",
+      "products": [
+        "Magang",
+        "Fresh Graduate"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "10M+",
+        "employees": "200",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-seek",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Seek",
+    "tags": [
+      "job",
+      "osenian",
+      "terbesar"
+    ],
+    "teks": "Seek - Platform job terbesar Australia. Didirikan 1997. Lowongan berbagai bidang.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "Australia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "4M+",
+        "totalCVs": "20M+",
+        "employees": "800",
+        "countriesOperated": "10+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-careerone",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "CareerOne",
+    "tags": [
+      "job",
+      "osenian",
+      "australia"
+    ],
+    "teks": "CareerOne - Platform job Australia. Didirikan 1999. Pesaing Seek di Australia.",
+    "meta": {
+      "type": "job",
+      "founded": 1999,
+      "country": "Australia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "5M+",
+        "employees": "200",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-trademe-jobs",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "TradeMe Jobs",
+    "tags": [
+      "job",
+      "osenian",
+      "selandia-baru"
+    ],
+    "teks": "TradeMe Jobs - Platform job terbesar Selandia Baru. Didirikan 1999.",
+    "meta": {
+      "type": "job",
+      "founded": 1999,
+      "country": "Selandia Baru",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "100",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-careers24",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Careers24",
+    "tags": [
+      "job",
+      "afrika",
+      "terbesar"
+    ],
+    "teks": "Careers24 - Platform job terbesar Afrika Selatan. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Afrika Selatan",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "5M+",
+        "employees": "150",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobstreet-indonesia",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobStreet Indonesia",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "JobStreet Indonesia - Platform job terbesar di Indonesia. Didirikan 1997. Lowongan berbagai bidang.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "CV Online",
+        "Job Alerts"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "2M+",
+        "totalCVs": "10M+",
+        "employees": "300",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-karir-com",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Karir.com",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Karir.com - Platform job Indonesia. Didirikan 2000. Fokus fresh graduate.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Karir Development"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "5M+",
+        "employees": "100",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-glints-indonesia",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Glints Indonesia",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Glints Indonesia - Platform karir dari Singapura. Didirikan 2013. Fokus fresh graduate.",
+    "meta": {
+      "type": "job",
+      "founded": 2013,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Magang",
+        "Karir Development"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "150",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kalibrr-indonesia",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Kalibrr Indonesia",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Kalibrr Indonesia - Platform job dari Filipina. Didirikan 2013. Fokus skill matching.",
+    "meta": {
+      "type": "job",
+      "founded": 2013,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Skill Matching"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "80",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tech-in-asia-jobs",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Tech in Asia Jobs",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "startup",
+      "tech"
+    ],
+    "teks": "Tech in Asia Jobs - Platform job untuk startup dan tech di Asia. Didirikan 2010.",
+    "meta": {
+      "type": "job",
+      "founded": 2010,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan Startup",
+        "Tech Jobs"
+      ],
+      "stats": {
+        "annualRevenue": "10M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "50K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-joblike",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Joblike",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Joblike - Platform job dengan pendekatan sosial. Didirikan 2015. Fokus fresh graduate.",
+    "meta": {
+      "type": "job",
+      "founded": 2015,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Fresh Graduate"
+      ],
+      "stats": {
+        "annualRevenue": "5M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "30K+",
+        "totalCVs": "1M+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-loker-id",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Loker.id",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Loker.id - Platform job lokal Indonesia. Didirikan 2016. Fokus lowongan berbagai level.",
+    "meta": {
+      "type": "job",
+      "founded": 2016,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Job Alerts"
+      ],
+      "stats": {
+        "annualRevenue": "3M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "20K+",
+        "totalCVs": "500K+",
+        "employees": "20",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kitalulus",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Kitalulus",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Kitalulus - Platform job dan magang. Didirikan 2018. Fokus fresh graduate dan mahasiswa.",
+    "meta": {
+      "type": "job",
+      "founded": 2018,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Magang",
+        "Fresh Graduate"
+      ],
+      "stats": {
+        "annualRevenue": "8M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "40K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-pintarnya",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Pintarnya",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia",
+      "ai"
+    ],
+    "teks": "Pintarnya - Platform job berbasis AI. Didirikan 2020. Fokus matching kandidat dengan lowongan.",
+    "meta": {
+      "type": "job",
+      "founded": 2020,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "AI Matching"
+      ],
+      "stats": {
+        "annualRevenue": "2M USD",
+        "monthlyVisitors": "1.5M",
+        "totalListings": "15K+",
+        "totalCVs": "300K+",
+        "employees": "15",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobhunt",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobHunt",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "JobHunt - Platform job komunitas. Didirikan 2017. Fokus profesional Indonesia.",
+    "meta": {
+      "type": "job",
+      "founded": 2017,
+      "country": "Indonesia",
+      "products": [
+        "Lowongan",
+        "Job Community"
+      ],
+      "stats": {
+        "annualRevenue": "4M USD",
+        "monthlyVisitors": "2.5M",
+        "totalListings": "25K+",
+        "totalCVs": "800K+",
+        "employees": "25",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-sribulancer-karir",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Sribulancer",
+    "tags": [
+      "freelance",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Sribulancer - Platform freelance terbesar di Indonesia. Didirikan 2012.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2012,
+      "country": "Indonesia",
+      "products": [
+        "Freelance",
+        "Jasa",
+        "Desain",
+        "Programming",
+        "Writing"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "100K+",
+        "totalCVs": "500K+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-fastwork-indonesia",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Fastwork Indonesia",
+    "tags": [
+      "freelance",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Fastwork Indonesia - Platform freelance asal Thailand. Didirikan 2015. Fokus kecepatan transaksi.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2015,
+      "country": "Indonesia",
+      "products": [
+        "Freelance",
+        "Jasa",
+        "Design",
+        "IT",
+        "Writing"
+      ],
+      "stats": {
+        "annualRevenue": "10M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "50K+",
+        "totalCVs": "300K+",
+        "employees": "50",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-projects-co-id-karir",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Projects.co.id",
+    "tags": [
+      "freelance",
+      "asia-tenggara",
+      "indonesia",
+      "it"
+    ],
+    "teks": "Projects.co.id - Platform freelance fokus IT dan digital. Didirikan 2012.",
+    "meta": {
+      "type": "freelance",
+      "founded": 2012,
+      "country": "Indonesia",
+      "products": [
+        "Freelance",
+        "IT",
+        "Programming",
+        "Desain"
+      ],
+      "stats": {
+        "annualRevenue": "8M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "30K+",
+        "totalCVs": "200K+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-workopolis",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Workopolis",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "kanada"
+    ],
+    "teks": "Workopolis - Platform job terbesar Kanada. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Kanada",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "5M+",
+        "employees": "200",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobbank",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobBank",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "kanada"
+    ],
+    "teks": "JobBank - Platform job pemerintah Kanada. Resmi untuk lowongan federal.",
+    "meta": {
+      "type": "job",
+      "founded": 1998,
+      "country": "Kanada",
+      "products": [
+        "Lowongan Pemerintah"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "100",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-nl",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed NL",
+    "tags": [
+      "job",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Indeed NL - Versi Indeed di Belanda. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Belanda",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "100",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-werk-nl",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Werk.nl",
+    "tags": [
+      "job",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Werk.nl - Platform job pemerintah Belanda. Resmi untuk lowongan.",
+    "meta": {
+      "type": "job",
+      "founded": 2002,
+      "country": "Belanda",
+      "products": [
+        "Lowongan Pemerintah"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-infojobs",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "InfoJobs",
+    "tags": [
+      "job",
+      "eropa",
+      "spanyol"
+    ],
+    "teks": "InfoJobs - Platform job terbesar Spanyol. Didirikan 2001.",
+    "meta": {
+      "type": "job",
+      "founded": 2001,
+      "country": "Spanyol",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "8M+",
+        "employees": "150",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-spain",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Spain",
+    "tags": [
+      "job",
+      "eropa",
+      "spanyol"
+    ],
+    "teks": "Indeed Spain - Versi Indeed di Spanyol. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Spanyol",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-italia",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Italia",
+    "tags": [
+      "job",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Indeed Italia - Versi Indeed di Italia. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Italia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-subito-lavoro",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Subito Lavoro",
+    "tags": [
+      "job",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Subito Lavoro - Platform job Italia. Didirikan 2005. Fokus lowongan lokal.",
+    "meta": {
+      "type": "job",
+      "founded": 2005,
+      "country": "Italia",
+      "products": [
+        "Lowongan Lokal"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "200K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-pracuj-pl",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Pracuj.pl",
+    "tags": [
+      "job",
+      "eropa",
+      "polandia"
+    ],
+    "teks": "Pracuj.pl - Platform job terbesar Polandia. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Polandia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "60M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "800K+",
+        "totalCVs": "5M+",
+        "employees": "120",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-poland",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Poland",
+    "tags": [
+      "job",
+      "eropa",
+      "polandia"
+    ],
+    "teks": "Indeed Poland - Versi Indeed di Polandia. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Polandia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "400K+",
+        "totalCVs": "2M+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-headhunter",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "HeadHunter",
+    "tags": [
+      "job",
+      "eropa",
+      "rusia"
+    ],
+    "teks": "HeadHunter - Platform job terbesar Rusia. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Rusia",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "2M+",
+        "totalCVs": "20M+",
+        "employees": "500",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-superjob",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "SuperJob",
+    "tags": [
+      "job",
+      "eropa",
+      "rusia"
+    ],
+    "teks": "SuperJob - Platform job Rusia. Didirikan 2000. Pesaing HeadHunter.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Rusia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "8M+",
+        "employees": "200",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kariyer-net",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Kariyer.net",
+    "tags": [
+      "job",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Kariyer.net - Platform job terbesar Turki. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Turki",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "800K+",
+        "totalCVs": "6M+",
+        "employees": "120",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-secretcv",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Secretcv",
+    "tags": [
+      "job",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Secretcv - Platform job Turki. Didirikan 2005. Fokus lowongan rahasia.",
+    "meta": {
+      "type": "job",
+      "founded": 2005,
+      "country": "Turki",
+      "products": [
+        "Lowongan",
+        "Rahasia"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-naukri-gulf",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Naukri Gulf",
+    "tags": [
+      "job",
+      "asia-barat",
+      "uea"
+    ],
+    "teks": "Naukri Gulf - Platform job terbesar UEA. Didirikan 2005. Fokus Timur Tengah.",
+    "meta": {
+      "type": "job",
+      "founded": 2005,
+      "country": "UEA",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "1M+",
+        "totalCVs": "5M+",
+        "employees": "150",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bayt-com",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Bayt.com",
+    "tags": [
+      "job",
+      "asia-barat",
+      "timur-tengah"
+    ],
+    "teks": "Bayt.com - Platform job terbesar Timur Tengah. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "UEA",
+      "products": [
+        "Lowongan",
+        "CV Database"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1.5M+",
+        "totalCVs": "10M+",
+        "employees": "200",
+        "countriesOperated": "8"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobstreet-sg",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobStreet SG",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "singapura"
+    ],
+    "teks": "JobStreet SG - Platform job terbesar Singapura. Didirikan 1997.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "Singapura",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mycareersfuture",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "MyCareersFuture",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "singapura"
+    ],
+    "teks": "MyCareersFuture - Platform job pemerintah Singapura. Didirikan 2018.",
+    "meta": {
+      "type": "job",
+      "founded": 2018,
+      "country": "Singapura",
+      "products": [
+        "Lowongan Pemerintah"
+      ],
+      "stats": {
+        "annualRevenue": "10M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1M+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobstreet-my",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobStreet MY",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "malaysia"
+    ],
+    "teks": "JobStreet MY - Platform job terbesar Malaysia. Didirikan 1997.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "Malaysia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "400K+",
+        "totalCVs": "2M+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-maukerja",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "MauKerja",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "malaysia"
+    ],
+    "teks": "MauKerja - Platform job Malaysia. Didirikan 2010. Fokus fresh graduate.",
+    "meta": {
+      "type": "job",
+      "founded": 2010,
+      "country": "Malaysia",
+      "products": [
+        "Lowongan",
+        "Fresh Graduate"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobstreet-ph",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobStreet PH",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "filipina"
+    ],
+    "teks": "JobStreet PH - Platform job terbesar Filipina. Didirikan 1997.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "Filipina",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "25M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kalibrr-ph",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Kalibrr PH",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "filipina"
+    ],
+    "teks": "Kalibrr PH - Platform job Filipina. Didirikan 2013. Fokus skill matching.",
+    "meta": {
+      "type": "job",
+      "founded": 2013,
+      "country": "Filipina",
+      "products": [
+        "Lowongan",
+        "Skill Matching"
+      ],
+      "stats": {
+        "annualRevenue": "10M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1M+",
+        "employees": "30",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobthai",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobThai",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "thailand"
+    ],
+    "teks": "JobThai - Platform job terbesar Thailand. Didirikan 2001.",
+    "meta": {
+      "type": "job",
+      "founded": 2001,
+      "country": "Thailand",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobdb",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobDB",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "thailand"
+    ],
+    "teks": "JobDB - Platform job Thailand. Didirikan 2005. Fokus profesional.",
+    "meta": {
+      "type": "job",
+      "founded": 2005,
+      "country": "Thailand",
+      "products": [
+        "Lowongan Profesional"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-vietnamworks",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "VietnamWorks",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "vietnam"
+    ],
+    "teks": "VietnamWorks - Platform job terbesar Vietnam. Didirikan 2005.",
+    "meta": {
+      "type": "job",
+      "founded": 2005,
+      "country": "Vietnam",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-itviec",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "ITviec",
+    "tags": [
+      "job",
+      "asia-tenggara",
+      "vietnam"
+    ],
+    "teks": "ITviec - Platform job IT Vietnam. Didirikan 2012. Fokus IT & tech.",
+    "meta": {
+      "type": "job",
+      "founded": 2012,
+      "country": "Vietnam",
+      "products": [
+        "Lowongan IT"
+      ],
+      "stats": {
+        "annualRevenue": "10M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1M+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-infojobs-brazil",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "InfoJobs Brazil",
+    "tags": [
+      "job",
+      "amerika-selatan",
+      "brazil"
+    ],
+    "teks": "InfoJobs Brazil - Platform job terbesar Brazil. Didirikan 2005.",
+    "meta": {
+      "type": "job",
+      "founded": 2005,
+      "country": "Brazil",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "800K+",
+        "totalCVs": "5M+",
+        "employees": "120",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-catho",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Catho",
+    "tags": [
+      "job",
+      "amerika-selatan",
+      "brazil"
+    ],
+    "teks": "Catho - Platform job Brazil. Didirikan 1997. Pesaing InfoJobs Brazil.",
+    "meta": {
+      "type": "job",
+      "founded": 1997,
+      "country": "Brazil",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "6M",
+        "totalListings": "600K+",
+        "totalCVs": "4M+",
+        "employees": "100",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-occmundial",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "OCCMundial",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "meksiko"
+    ],
+    "teks": "OCCMundial - Platform job terbesar Meksiko. Didirikan 2003.",
+    "meta": {
+      "type": "job",
+      "founded": 2003,
+      "country": "Meksiko",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "500K+",
+        "totalCVs": "3M+",
+        "employees": "80",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-mexico",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Mexico",
+    "tags": [
+      "job",
+      "amerika-utara",
+      "meksiko"
+    ],
+    "teks": "Indeed Mexico - Versi Indeed di Meksiko. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Meksiko",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-belgium",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Belgium",
+    "tags": [
+      "job",
+      "eropa",
+      "belgia"
+    ],
+    "teks": "Indeed Belgium - Versi Indeed di Belgia. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Belgia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobat",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Jobat",
+    "tags": [
+      "job",
+      "eropa",
+      "belgia"
+    ],
+    "teks": "Jobat - Platform job Belgia. Didirikan 2000. Fokus lowongan profesional.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Belgia",
+      "products": [
+        "Lowongan Profesional"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobup",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "JobUp",
+    "tags": [
+      "job",
+      "eropa",
+      "swiss"
+    ],
+    "teks": "JobUp - Platform job terbesar Swiss. Didirikan 2001.",
+    "meta": {
+      "type": "job",
+      "founded": 2001,
+      "country": "Swiss",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "25M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-switzerland",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Switzerland",
+    "tags": [
+      "job",
+      "eropa",
+      "swiss"
+    ],
+    "teks": "Indeed Switzerland - Versi Indeed di Swiss. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Swiss",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-karriere-at",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Karriere.at",
+    "tags": [
+      "job",
+      "eropa",
+      "austria"
+    ],
+    "teks": "Karriere.at - Platform job terbesar Austria. Didirikan 1999.",
+    "meta": {
+      "type": "job",
+      "founded": 1999,
+      "country": "Austria",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-austria",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Austria",
+    "tags": [
+      "job",
+      "eropa",
+      "austria"
+    ],
+    "teks": "Indeed Austria - Versi Indeed di Austria. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Austria",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1M+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-arbetsformedlingen",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Arbetsförmedlingen",
+    "tags": [
+      "job",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Arbetsförmedlingen - Platform job pemerintah Swedia. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Swedia",
+      "products": [
+        "Lowongan Pemerintah"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "400K+",
+        "totalCVs": "3M+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-sweden",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Sweden",
+    "tags": [
+      "job",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Indeed Sweden - Versi Indeed di Swedia. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Swedia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-finn-no-jobb",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Finn.no Jobb",
+    "tags": [
+      "job",
+      "eropa",
+      "norwegia"
+    ],
+    "teks": "Finn.no Jobb - Platform job terbesar Norwegia. Didirikan 2000.",
+    "meta": {
+      "type": "job",
+      "founded": 2000,
+      "country": "Norwegia",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "25M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "300K+",
+        "totalCVs": "2M+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jobindex",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Jobindex",
+    "tags": [
+      "job",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "Jobindex - Platform job terbesar Denmark. Didirikan 1996.",
+    "meta": {
+      "type": "job",
+      "founded": 1996,
+      "country": "Denmark",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1.5M+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indeed-denmark",
+    "kategori": "marplace",
+    "wilayah": "karir",
+    "nama": "Indeed Denmark",
+    "tags": [
+      "job",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "Indeed Denmark - Versi Indeed di Denmark. Didirikan 2004.",
+    "meta": {
+      "type": "job",
+      "founded": 2004,
+      "country": "Denmark",
+      "products": [
+        "Lowongan"
+      ],
+      "stats": {
+        "annualRevenue": "15M USD",
+        "monthlyVisitors": "2M",
+        "totalListings": "200K+",
+        "totalCVs": "1M+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  }
+]

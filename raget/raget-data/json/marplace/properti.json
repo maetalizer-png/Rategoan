@@ -1,0 +1,1837 @@
+[
+  {
+    "id": "marplace-zillow",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Zillow",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "terbesar"
+    ],
+    "teks": "Zillow - Platform properti terbesar AS. Didirikan 2006. Fitur Zestimate estimasi nilai rumah.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "AS",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "100M",
+        "totalListings": "5M+",
+        "totalAgents": "15K+",
+        "employees": "2K",
+        "countriesOperated": "10+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-redfin",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Redfin",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "teknologi"
+    ],
+    "teks": "Redfin - Platform properti teknologi AS. Didirikan 2004. Tur virtual 3D & komisi rendah.",
+    "meta": {
+      "type": "property",
+      "founded": 2004,
+      "country": "AS",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "2M+",
+        "totalAgents": "5K+",
+        "employees": "1K",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-realtor-com",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Realtor.com",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "resmi"
+    ],
+    "teks": "Realtor.com - Platform properti AS. Didirikan 1995. Data resmi dari Asosiasi Realtor AS.",
+    "meta": {
+      "type": "property",
+      "founded": 1995,
+      "country": "AS",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "60M",
+        "totalListings": "3M+",
+        "totalAgents": "10K+",
+        "employees": "1.5K",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-trulia",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Trulia",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "komunitas"
+    ],
+    "teks": "Trulia - Platform properti AS. Didirikan 2005. Fokus neighborhood insight & komunitas.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "AS",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "2M+",
+        "totalAgents": "3K+",
+        "employees": "800",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-apartments-com",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Apartments.com",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "apartemen"
+    ],
+    "teks": "Apartments.com - Platform khusus apartemen AS. Didirikan 1997. Terbesar untuk rental.",
+    "meta": {
+      "type": "property",
+      "founded": 1997,
+      "country": "AS",
+      "products": [
+        "Apartemen",
+        "Sewa"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "1M+",
+        "totalAgents": "2K+",
+        "employees": "500",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-compass",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Compass",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "teknologi"
+    ],
+    "teks": "Compass - Platform properti teknologi AS. Didirikan 2012. Agent berbasis teknologi.",
+    "meta": {
+      "type": "property",
+      "founded": 2012,
+      "country": "AS",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "600M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "8K+",
+        "employees": "1K",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-rightmove",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Rightmove",
+    "tags": [
+      "property",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "Rightmove - Platform properti terbesar Inggris. Didirikan 2000. 1 juta+ listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Inggris",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "80M",
+        "totalListings": "4M+",
+        "totalAgents": "12K+",
+        "employees": "1.2K",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zoopla",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Zoopla",
+    "tags": [
+      "property",
+      "eropa",
+      "zoopla"
+    ],
+    "teks": "Zoopla - Platform properti Inggris. Didirikan 2008. Fitur Zoopla Estimate nilai properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2008,
+      "country": "Inggris",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "600M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "2M+",
+        "totalAgents": "6K+",
+        "employees": "800",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-onthemarket",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "OnTheMarket",
+    "tags": [
+      "property",
+      "eropa",
+      "pesaing"
+    ],
+    "teks": "OnTheMarket - Platform properti Inggris. Didirikan 2015. Pesaing Rightmove & Zoopla.",
+    "meta": {
+      "type": "property",
+      "founded": 2015,
+      "country": "Inggris",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-immobilienscout24",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "ImmobilienScout24",
+    "tags": [
+      "property",
+      "eropa",
+      "terbesar"
+    ],
+    "teks": "ImmobilienScout24 - Platform properti terbesar Jerman. Didirikan 1998. Jutaan listing.",
+    "meta": {
+      "type": "property",
+      "founded": 1998,
+      "country": "Jerman",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "50M",
+        "totalListings": "3M+",
+        "totalAgents": "8K+",
+        "employees": "800",
+        "countriesOperated": "4"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-immonet",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Immonet",
+    "tags": [
+      "property",
+      "eropa",
+      "jerman"
+    ],
+    "teks": "Immonet - Platform properti Jerman. Didirikan 1996. Bagian dari ImmobilienScout24.",
+    "meta": {
+      "type": "property",
+      "founded": 1996,
+      "country": "Jerman",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-seloger",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Seloger",
+    "tags": [
+      "property",
+      "eropa",
+      "prancis"
+    ],
+    "teks": "Seloger - Platform properti terbesar Prancis. Didirikan 2000. Portal utama properti Prancis.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Prancis",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "2M+",
+        "totalAgents": "5K+",
+        "employees": "500",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-le-bon-coin",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Le Bon Coin",
+    "tags": [
+      "property",
+      "eropa",
+      "marketplace"
+    ],
+    "teks": "Le Bon Coin - Marketplace Prancis dengan kategori properti. Didirikan 2006. Sangat populer.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "Prancis",
+      "products": [
+        "Rumah",
+        "Apartemen",
+        "Barang Bekas"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "1M+",
+        "totalAgents": "2K+",
+        "employees": "300",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-fotocasa",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Fotocasa",
+    "tags": [
+      "property",
+      "eropa",
+      "spanyol"
+    ],
+    "teks": "Fotocasa - Platform properti terbesar Spanyol. Didirikan 2002. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2002,
+      "country": "Spanyol",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1.5M+",
+        "totalAgents": "4K+",
+        "employees": "400",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-idealista",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Idealista",
+    "tags": [
+      "property",
+      "eropa",
+      "ekspat"
+    ],
+    "teks": "Idealista - Platform properti Spanyol. Didirikan 2000. Populer di kalangan ekspat.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Spanyol",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "250M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-immobiliare-it",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Immobiliare.it",
+    "tags": [
+      "property",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Immobiliare.it - Platform properti terbesar Italia. Didirikan 1999. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 1999,
+      "country": "Italia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-casa-it",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Casa.it",
+    "tags": [
+      "property",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Casa.it - Platform properti Italia. Didirikan 2001. Fokus properti residensial.",
+    "meta": {
+      "type": "property",
+      "founded": 2001,
+      "country": "Italia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "150",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-funda",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Funda",
+    "tags": [
+      "property",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Funda - Platform properti terbesar Belanda. Didirikan 2001. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2001,
+      "country": "Belanda",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "12M",
+        "totalListings": "800K+",
+        "totalAgents": "2.5K+",
+        "employees": "200",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jaap-nl",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Jaap.nl",
+    "tags": [
+      "property",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Jaap.nl - Platform properti Belanda. Didirikan 2005. Fokus properti komersial.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Belanda",
+      "products": [
+        "Rumah",
+        "Apartemen",
+        "Properti Komersial"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1K+",
+        "employees": "100",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-beike",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Beike",
+    "tags": [
+      "property",
+      "asia-timur",
+      "terbesar"
+    ],
+    "teks": "Beike (KE Holdings) - Platform properti terbesar China. Didirikan 2018. AI & big data.",
+    "meta": {
+      "type": "property",
+      "founded": 2018,
+      "country": "China",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "80M",
+        "totalListings": "5M+",
+        "totalAgents": "20K+",
+        "employees": "2K",
+        "countriesOperated": "5"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-fang-com",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Fang.com",
+    "tags": [
+      "property",
+      "asia-timur",
+      "china"
+    ],
+    "teks": "Fang.com - Platform properti China. Didirikan 1999. Portal properti terkemuka.",
+    "meta": {
+      "type": "property",
+      "founded": 1999,
+      "country": "China",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "40M",
+        "totalListings": "2M+",
+        "totalAgents": "8K+",
+        "employees": "1K",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-anjuke",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Anjuke",
+    "tags": [
+      "property",
+      "asia-timur",
+      "aplikasi"
+    ],
+    "teks": "Anjuke - Platform properti China. Didirikan 2007. Aplikasi properti terpopuler.",
+    "meta": {
+      "type": "property",
+      "founded": 2007,
+      "country": "China",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "1.5M+",
+        "totalAgents": "5K+",
+        "employees": "500",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-suumo",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "SUUMO",
+    "tags": [
+      "property",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "SUUMO - Platform properti terbesar Jepang. Didirikan 2003. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2003,
+      "country": "Jepang",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "1.5M+",
+        "totalAgents": "5K+",
+        "employees": "500",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-athome",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "AtHome",
+    "tags": [
+      "property",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "AtHome - Platform properti Jepang. Didirikan 1997. Fokus properti residensial.",
+    "meta": {
+      "type": "property",
+      "founded": 1997,
+      "country": "Jepang",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-magicbricks",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Magicbricks",
+    "tags": [
+      "property",
+      "asia-selatan",
+      "terbesar"
+    ],
+    "teks": "Magicbricks - Platform properti terbesar India. Didirikan 2006. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "India",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "25M",
+        "totalListings": "1.5M+",
+        "totalAgents": "5K+",
+        "employees": "500",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-99acres",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "99acres",
+    "tags": [
+      "property",
+      "asia-selatan",
+      "india"
+    ],
+    "teks": "99acres - Platform properti India. Didirikan 2005. Portal properti terkemuka di India.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "India",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-nobroker",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "NoBroker",
+    "tags": [
+      "property",
+      "asia-selatan",
+      "no-agen"
+    ],
+    "teks": "NoBroker - Platform properti India tanpa agen. Didirikan 2014. Hemat biaya komisi.",
+    "meta": {
+      "type": "property",
+      "founded": 2014,
+      "country": "India",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "800K+",
+        "totalAgents": "0",
+        "employees": "200",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-property-finder",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Property Finder",
+    "tags": [
+      "property",
+      "asia-barat",
+      "timur-tengah"
+    ],
+    "teks": "Property Finder - Platform properti terbesar Timur Tengah. Didirikan 2007. 50+ negara.",
+    "meta": {
+      "type": "property",
+      "founded": 2007,
+      "country": "UEA",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "250M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "400",
+        "countriesOperated": "10+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bayut",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Bayut",
+    "tags": [
+      "property",
+      "asia-barat",
+      "dubai"
+    ],
+    "teks": "Bayut - Platform properti UEA. Didirikan 2008. Pesaing Property Finder di Dubai.",
+    "meta": {
+      "type": "property",
+      "founded": 2008,
+      "country": "UEA",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "800K+",
+        "totalAgents": "2K+",
+        "employees": "200",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zap-imoveis",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Zap Imóveis",
+    "tags": [
+      "property",
+      "amerika-selatan",
+      "terbesar"
+    ],
+    "teks": "Zap Imóveis - Platform properti terbesar Brazil. Didirikan 2005. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Brazil",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "300",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-viva-real",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Viva Real",
+    "tags": [
+      "property",
+      "amerika-selatan",
+      "brazil"
+    ],
+    "teks": "Viva Real - Platform properti Brazil. Didirikan 2005. Portal properti terkemuka.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Brazil",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "150",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-realestate-com-au",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Realestate.com.au",
+    "tags": [
+      "property",
+      "osenian",
+      "terbesar"
+    ],
+    "teks": "Realestate.com.au - Platform properti terbesar Australia. Didirikan 1995. Acuan harga nasional.",
+    "meta": {
+      "type": "property",
+      "founded": 1995,
+      "country": "Australia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "30M",
+        "totalListings": "2M+",
+        "totalAgents": "5K+",
+        "employees": "600",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-domain",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Domain",
+    "tags": [
+      "property",
+      "osenian",
+      "australia"
+    ],
+    "teks": "Domain - Platform properti Australia. Didirikan 2000. Pesaing Realestate.com.au.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Australia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "3K+",
+        "employees": "400",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-realtor-ca",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Realtor.ca",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "kanada"
+    ],
+    "teks": "Realtor.ca - Platform properti terbesar Kanada. Didirikan 1995. Data resmi.",
+    "meta": {
+      "type": "property",
+      "founded": 1995,
+      "country": "Kanada",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalListings": "1M+",
+        "totalAgents": "4K+",
+        "employees": "300",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zoocasa",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Zoocasa",
+    "tags": [
+      "property",
+      "amerika-utara",
+      "kanada"
+    ],
+    "teks": "Zoocasa - Platform properti Kanada. Didirikan 2008. Fokus teknologi real estate.",
+    "meta": {
+      "type": "property",
+      "founded": 2008,
+      "country": "Kanada",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "100",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-propertyguru-sg",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "PropertyGuru SG",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "singapura"
+    ],
+    "teks": "PropertyGuru SG - Platform properti terbesar Singapura. Didirikan 2006.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "Singapura",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "12M",
+        "totalListings": "800K+",
+        "totalAgents": "3K+",
+        "employees": "200",
+        "countriesOperated": "4"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-99-co-sg",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "99.co SG",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "singapura"
+    ],
+    "teks": "99.co SG - Platform properti Singapura. Didirikan 2014. Fokus transparansi.",
+    "meta": {
+      "type": "property",
+      "founded": 2014,
+      "country": "Singapura",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "100",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-rumah-com",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Rumah.com",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Rumah.com - Platform properti terbesar Indonesia. Didirikan 2007. 500K+ listing.",
+    "meta": {
+      "type": "property",
+      "founded": 2007,
+      "country": "Indonesia",
+      "products": [
+        "Rumah",
+        "Apartemen",
+        "Properti Komersial"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "150",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-99-co-indonesia",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "99.co Indonesia",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "99.co Indonesia - Platform properti dari Singapura. Didirikan 2014. Fokus transparansi.",
+    "meta": {
+      "type": "property",
+      "founded": 2014,
+      "country": "Indonesia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1K+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-lamudi-indonesia",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Lamudi Indonesia",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Lamudi Indonesia - Platform properti global. Didirikan 2013. Fokus UX modern.",
+    "meta": {
+      "type": "property",
+      "founded": 2013,
+      "country": "Indonesia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "200K+",
+        "totalAgents": "800+",
+        "employees": "60",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-rumah123",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Rumah123",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Rumah123 - Platform properti Indonesia. Didirikan 2011. Kalkulator KPR.",
+    "meta": {
+      "type": "property",
+      "founded": 2011,
+      "country": "Indonesia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "25M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "250K+",
+        "totalAgents": "1K+",
+        "employees": "70",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-propertyguru-indonesia",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "PropertyGuru Indonesia",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "PropertyGuru Indonesia - Platform properti Asia Tenggara. Didirikan 2006.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "Indonesia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "6M",
+        "totalListings": "400K+",
+        "totalAgents": "1.5K+",
+        "employees": "100",
+        "countriesOperated": "3"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-rumahdijual",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "RumahDijual",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "RumahDijual - Platform properti Indonesia. Didirikan 2010. Fokus properti dijual.",
+    "meta": {
+      "type": "property",
+      "founded": 2010,
+      "country": "Indonesia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "10M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "150K+",
+        "totalAgents": "500+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-property24",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Property24",
+    "tags": [
+      "property",
+      "afrika",
+      "terbesar"
+    ],
+    "teks": "Property24 - Platform properti terbesar Afrika Selatan. Didirikan 2005.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Afrika Selatan",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "120",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-private-property",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Private Property",
+    "tags": [
+      "property",
+      "afrika",
+      "south-africa"
+    ],
+    "teks": "Private Property - Platform properti Afrika Selatan. Didirikan 2006.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "Afrika Selatan",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1K+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-idealista-portugal",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Idealista Portugal",
+    "tags": [
+      "property",
+      "eropa",
+      "portugal"
+    ],
+    "teks": "Idealista Portugal - Platform properti terbesar Portugal. Didirikan 2000.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Portugal",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "120",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-imovirtual",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Imovirtual",
+    "tags": [
+      "property",
+      "eropa",
+      "portugal"
+    ],
+    "teks": "Imovirtual - Platform properti Portugal. Didirikan 2005. Fokus properti residensial.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Portugal",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "50M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1K+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-hemnet",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Hemnet",
+    "tags": [
+      "property",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Hemnet - Platform properti terbesar Swedia. Didirikan 1998. Jutaan listing properti.",
+    "meta": {
+      "type": "property",
+      "founded": 1998,
+      "country": "Swedia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "120M USD",
+        "monthlyVisitors": "10M",
+        "totalListings": "600K+",
+        "totalAgents": "2K+",
+        "employees": "150",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-booli",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Booli",
+    "tags": [
+      "property",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Booli - Platform properti Swedia. Didirikan 2010. Fokus transparansi harga.",
+    "meta": {
+      "type": "property",
+      "founded": 2010,
+      "country": "Swedia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "60M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1K+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-finn-eiendom",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Finn Eiendom",
+    "tags": [
+      "property",
+      "eropa",
+      "norwegia"
+    ],
+    "teks": "Finn Eiendom - Platform properti terbesar Norwegia. Didirikan 2000.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Norwegia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "6M",
+        "totalListings": "400K+",
+        "totalAgents": "1.5K+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-eiendomsmegler",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Eiendomsmegler",
+    "tags": [
+      "property",
+      "eropa",
+      "norwegia"
+    ],
+    "teks": "Eiendomsmegler - Platform properti Norwegia. Didirikan 2003. Fokus agen properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2003,
+      "country": "Norwegia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "200K+",
+        "totalAgents": "1K+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-boligsiden",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Boligsiden",
+    "tags": [
+      "property",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "Boligsiden - Platform properti terbesar Denmark. Didirikan 1999.",
+    "meta": {
+      "type": "property",
+      "founded": 1999,
+      "country": "Denmark",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "70M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1.2K+",
+        "employees": "70",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-danbolig",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Danbolig",
+    "tags": [
+      "property",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "Danbolig - Platform properti Denmark. Didirikan 2005. Fokus agen properti.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Denmark",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "3M",
+        "totalListings": "150K+",
+        "totalAgents": "500+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-sahibinden-emlak",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Sahibinden Emlak",
+    "tags": [
+      "property",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Sahibinden Emlak - Platform properti terbesar Turki. Didirikan 2000.",
+    "meta": {
+      "type": "property",
+      "founded": 2000,
+      "country": "Turki",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "60M USD",
+        "monthlyVisitors": "8M",
+        "totalListings": "500K+",
+        "totalAgents": "2K+",
+        "employees": "80",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-hepsiemlak",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "HepsiEmlak",
+    "tags": [
+      "property",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "HepsiEmlak - Platform properti Turki. Didirikan 2005. Fokus properti komersial.",
+    "meta": {
+      "type": "property",
+      "founded": 2005,
+      "country": "Turki",
+      "products": [
+        "Rumah",
+        "Apartemen",
+        "Properti Komersial"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1K+",
+        "employees": "40",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-batdongsan",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Batdongsan",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "vietnam"
+    ],
+    "teks": "Batdongsan - Platform properti terbesar Vietnam. Didirikan 2007.",
+    "meta": {
+      "type": "property",
+      "founded": 2007,
+      "country": "Vietnam",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "40M USD",
+        "monthlyVisitors": "6M",
+        "totalListings": "400K+",
+        "totalAgents": "1.5K+",
+        "employees": "60",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-homedy",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Homedy",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "vietnam"
+    ],
+    "teks": "Homedy - Platform properti Vietnam. Didirikan 2015. Fokus properti modern.",
+    "meta": {
+      "type": "property",
+      "founded": 2015,
+      "country": "Vietnam",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "200K+",
+        "totalAgents": "500+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-ddproperty",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "DDproperty",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "thailand"
+    ],
+    "teks": "DDproperty - Platform properti terbesar Thailand. Didirikan 2008.",
+    "meta": {
+      "type": "property",
+      "founded": 2008,
+      "country": "Thailand",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1.2K+",
+        "employees": "50",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-hipflat",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "Hipflat",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "thailand"
+    ],
+    "teks": "Hipflat - Platform properti Thailand. Didirikan 2012. Fokus data transparan.",
+    "meta": {
+      "type": "property",
+      "founded": 2012,
+      "country": "Thailand",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "200K+",
+        "totalAgents": "500+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-propertyguru-my",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "PropertyGuru MY",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "malaysia"
+    ],
+    "teks": "PropertyGuru MY - Platform properti terbesar Malaysia. Didirikan 2006.",
+    "meta": {
+      "type": "property",
+      "founded": 2006,
+      "country": "Malaysia",
+      "products": [
+        "Rumah",
+        "Apartemen"
+      ],
+      "stats": {
+        "annualRevenue": "30M USD",
+        "monthlyVisitors": "5M",
+        "totalListings": "300K+",
+        "totalAgents": "1.2K+",
+        "employees": "50",
+        "countriesOperated": "2"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-iproperty",
+    "kategori": "marplace",
+    "wilayah": "properti",
+    "nama": "iProperty",
+    "tags": [
+      "property",
+      "asia-tenggara",
+      "malaysia"
+    ],
+    "teks": "iProperty - Platform properti Malaysia. Didirikan 2007. Fokus properti komersial.",
+    "meta": {
+      "type": "property",
+      "founded": 2007,
+      "country": "Malaysia",
+      "products": [
+        "Rumah",
+        "Apartemen",
+        "Properti Komersial"
+      ],
+      "stats": {
+        "annualRevenue": "20M USD",
+        "monthlyVisitors": "4M",
+        "totalListings": "200K+",
+        "totalAgents": "500+",
+        "employees": "30",
+        "countriesOperated": "1"
+      },
+      "status": "aktif"
+    }
+  }
+]

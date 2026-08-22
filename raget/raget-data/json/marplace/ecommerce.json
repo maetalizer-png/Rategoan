@@ -1,0 +1,4530 @@
+[
+  {
+    "id": "marplace-amazon",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Amazon",
+    "tags": [
+      "ecommerce",
+      "global",
+      "terbesar"
+    ],
+    "teks": "Amazon - Raksasa e-commerce global. Didirikan 1994 oleh Jeff Bezos. Platform terbesar di dunia dengan penjualan $574B+.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1994,
+      "founder": "Jeff Bezos",
+      "country": "AS",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "574B USD",
+        "monthlyVisitors": "2.5B",
+        "totalSellers": "2M+",
+        "totalProducts": "350M+",
+        "marketShare": "37.6%",
+        "employees": "1.6M",
+        "countries": "100+",
+        "appDownloads": "1B+"
+      },
+      "competitors": {
+        "primary": [
+          "Walmart",
+          "eBay",
+          "Shopify"
+        ],
+        "secondary": [
+          "Target",
+          "Best Buy",
+          "Etsy"
+        ],
+        "marketPosition": 1,
+        "marketShare": 37.6,
+        "growthRate": 12.3,
+        "moat": [
+          "Logistics Network",
+          "AWS",
+          "Prime Membership"
+        ],
+        "threats": [
+          "Shopify",
+          "Temu",
+          "Shein"
+        ]
+      },
+      "businessModel": {
+        "type": "B2C + B2B + Marketplace",
+        "revenueStreams": [
+          {
+            "name": "E-commerce Sales",
+            "share": 60
+          },
+          {
+            "name": "AWS Cloud",
+            "share": 15
+          },
+          {
+            "name": "Advertising",
+            "share": 12
+          },
+          {
+            "name": "Subscription (Prime)",
+            "share": 8
+          },
+          {
+            "name": "Other",
+            "share": 5
+          }
+        ],
+        "profitMargin": 18.5,
+        "customerLTV": 1200,
+        "customerAcquisitionCost": 45,
+        "returnOnInvestment": 28.5
+      },
+      "investorInfo": {
+        "stockCode": "AMZN",
+        "marketCap": "1.8T USD",
+        "stockPrice": 185.25,
+        "peRatio": 52.3,
+        "dividend": "No",
+        "ipoYear": 1997,
+        "ipoPrice": 18
+      },
+      "timeline": [
+        {
+          "year": 1994,
+          "event": "Founded by Jeff Bezos in Seattle"
+        },
+        {
+          "year": 1995,
+          "event": "First book sold online"
+        },
+        {
+          "year": 1997,
+          "event": "IPO at $18 per share"
+        },
+        {
+          "year": 2000,
+          "event": "Launched Marketplace"
+        },
+        {
+          "year": 2005,
+          "event": "Launched Amazon Prime"
+        },
+        {
+          "year": 2006,
+          "event": "Launched AWS Cloud"
+        },
+        {
+          "year": 2014,
+          "event": "Launched Amazon Echo & Alexa"
+        },
+        {
+          "year": 2017,
+          "event": "Acquired Whole Foods"
+        },
+        {
+          "year": 2020,
+          "event": "Peak pandemic sales"
+        },
+        {
+          "year": 2024,
+          "event": "AI-powered shopping assistant"
+        }
+      ],
+      "customerDemographics": {
+        "ageGroups": [
+          {
+            "range": "18-24",
+            "percentage": 15
+          },
+          {
+            "range": "25-34",
+            "percentage": 32
+          },
+          {
+            "range": "35-44",
+            "percentage": 28
+          },
+          {
+            "range": "45-54",
+            "percentage": 15
+          },
+          {
+            "range": "55+",
+            "percentage": 10
+          }
+        ],
+        "gender": {
+          "male": 48,
+          "female": 52
+        },
+        "income": [
+          {
+            "range": "Low",
+            "percentage": 20
+          },
+          {
+            "range": "Medium",
+            "percentage": 45
+          },
+          {
+            "range": "High",
+            "percentage": 35
+          }
+        ],
+        "location": {
+          "urban": 70,
+          "suburban": 25,
+          "rural": 5
+        }
+      },
+      "insights": {
+        "trendScore": 95,
+        "growthPotential": {
+          "score": 92,
+          "factors": [
+            "AI Integration",
+            "Global Expansion",
+            "Logistics Innovation"
+          ]
+        },
+        "riskFactors": [
+          {
+            "factor": "Regulation",
+            "severity": 70
+          },
+          {
+            "factor": "Competition",
+            "severity": 85
+          },
+          {
+            "factor": "Economic Downturn",
+            "severity": 60
+          }
+        ],
+        "recommendation": "BUY",
+        "confidence": 90,
+        "lastUpdated": "2026-06-30"
+      },
+      "socialMedia": {
+        "instagram": {
+          "followers": "8.5M",
+          "engagement": 3.2,
+          "posts": 12000
+        },
+        "twitter": {
+          "followers": "12M",
+          "tweets": 45000
+        },
+        "facebook": {
+          "followers": "50M",
+          "likes": "45M"
+        },
+        "youtube": {
+          "subscribers": "5M",
+          "videos": 2000
+        },
+        "tiktok": {
+          "followers": "2M",
+          "engagement": 5.5
+        }
+      },
+      "sustainability": {
+        "carbonFootprint": {
+          "scope1": 5.2,
+          "scope2": 12.8,
+          "scope3": 45.6,
+          "total": 63.6
+        },
+        "renewableEnergy": {
+          "percentage": 65,
+          "target": 100,
+          "targetYear": 2030
+        },
+        "packaging": {
+          "recyclable": 85,
+          "plasticFree": 60,
+          "target": 100,
+          "targetYear": 2028
+        },
+        "esgScore": 82,
+        "esgRating": "AA",
+        "sustainabilityRank": 5
+      },
+      "employeeMetrics": {
+        "total": 1600000,
+        "engineers": 150000,
+        "distribution": [
+          {
+            "department": "Operations",
+            "percentage": 35
+          },
+          {
+            "department": "Technology",
+            "percentage": 25
+          },
+          {
+            "department": "Sales",
+            "percentage": 15
+          },
+          {
+            "department": "Logistics",
+            "percentage": 15
+          },
+          {
+            "department": "Corporate",
+            "percentage": 10
+          }
+        ],
+        "diversity": {
+          "female": 42,
+          "minority": 35,
+          "leadershipDiversity": 28
+        },
+        "satisfaction": 4.2,
+        "turnover": 12.5
+      },
+      "trendAnalysis": {
+        "category": "E-commerce",
+        "trends": [
+          {
+            "name": "AI Shopping Assistants",
+            "impact": 95
+          },
+          {
+            "name": "Social Commerce",
+            "impact": 85
+          },
+          {
+            "name": "Sustainable Shopping",
+            "impact": 75
+          },
+          {
+            "name": "Voice Commerce",
+            "impact": 65
+          },
+          {
+            "name": "AR/VR Shopping",
+            "impact": 70
+          }
+        ],
+        "marketSize": "5.7T USD",
+        "growthRate": "12.5%",
+        "projected": "10.2T USD by 2030",
+        "disruptionIndex": 4.5
+      },
+      "expansionMap": {
+        "presence": [
+          {
+            "country": "AS",
+            "since": 1994,
+            "type": "HQ"
+          },
+          {
+            "country": "Kanada",
+            "since": 2000,
+            "type": "Strong"
+          },
+          {
+            "country": "Inggris",
+            "since": 1998,
+            "type": "Strong"
+          },
+          {
+            "country": "Jerman",
+            "since": 1998,
+            "type": "Strong"
+          },
+          {
+            "country": "Prancis",
+            "since": 2000,
+            "type": "Strong"
+          },
+          {
+            "country": "Italia",
+            "since": 2000,
+            "type": "Moderate"
+          },
+          {
+            "country": "Spanyol",
+            "since": 2000,
+            "type": "Moderate"
+          },
+          {
+            "country": "Jepang",
+            "since": 2000,
+            "type": "Strong"
+          },
+          {
+            "country": "China",
+            "since": 2004,
+            "type": "Limited"
+          },
+          {
+            "country": "India",
+            "since": 2013,
+            "type": "Growing"
+          },
+          {
+            "country": "Brazil",
+            "since": 2012,
+            "type": "Growing"
+          },
+          {
+            "country": "Australia",
+            "since": 2011,
+            "type": "Strong"
+          },
+          {
+            "country": "UEA",
+            "since": 2019,
+            "type": "Moderate"
+          },
+          {
+            "country": "Singapura",
+            "since": 2017,
+            "type": "Hub"
+          }
+        ],
+        "futureTargets": [
+          "Vietnam",
+          "Indonesia",
+          "Nigeria",
+          "Mexico"
+        ],
+        "expansionScore": 85
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-ebay",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "eBay",
+    "tags": [
+      "ecommerce",
+      "global",
+      "lelang"
+    ],
+    "teks": "eBay - Marketplace global dengan sistem lelang. Didirikan 1995 oleh Pierre Omidyar. Fokus barang bekas dan kolektor.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1995,
+      "founder": "Pierre Omidyar",
+      "country": "AS",
+      "products": [
+        "Barang Bekas",
+        "Kolektor"
+      ],
+      "stats": {
+        "annualRevenue": "10.1B USD",
+        "monthlyVisitors": "1.2B",
+        "totalSellers": "17M+",
+        "totalProducts": "1.8B+",
+        "marketShare": "6.8%",
+        "employees": "10.8K",
+        "countries": "190+",
+        "appDownloads": "500M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-walmart",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Walmart",
+    "tags": [
+      "ecommerce",
+      "global",
+      "ritel"
+    ],
+    "teks": "Walmart - Raksasa ritel AS yang bertransformasi ke e-commerce. Didirikan 1962 oleh Sam Walton.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1962,
+      "founder": "Sam Walton",
+      "country": "AS",
+      "products": [
+        "Kebutuhan Rumah",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "648B USD",
+        "monthlyVisitors": "850M",
+        "totalSellers": "100K+",
+        "totalProducts": "100M+",
+        "marketShare": "12.8%",
+        "employees": "2.1M",
+        "countries": "24",
+        "appDownloads": "300M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-etsy",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Etsy",
+    "tags": [
+      "ecommerce",
+      "global",
+      "craft"
+    ],
+    "teks": "Etsy - Marketplace khusus produk handmade dan vintage. Didirikan 2005 oleh Rob Kalin.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2005,
+      "founder": "Rob Kalin",
+      "country": "AS",
+      "products": [
+        "Handmade",
+        "Vintage"
+      ],
+      "stats": {
+        "annualRevenue": "2.7B USD",
+        "monthlyVisitors": "450M",
+        "totalSellers": "7M+",
+        "totalProducts": "100M+",
+        "marketShare": "2.5%",
+        "employees": "2.5K",
+        "countries": "150+",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-target",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Target",
+    "tags": [
+      "ecommerce",
+      "global",
+      "ritel"
+    ],
+    "teks": "Target - Ritel AS dengan e-commerce kuat. Didirikan 1902, sekarang pesaing Walmart & Amazon.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1902,
+      "country": "AS",
+      "products": [
+        "Kebutuhan Rumah",
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "109B USD",
+        "monthlyVisitors": "350M",
+        "totalSellers": "50K+",
+        "totalProducts": "50M+",
+        "marketShare": "3.8%",
+        "employees": "440K",
+        "countries": "1 (AS)",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-best-buy",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Best Buy",
+    "tags": [
+      "ecommerce",
+      "global",
+      "elektronik"
+    ],
+    "teks": "Best Buy - E-commerce elektronik terbesar AS. Didirikan 1966, fokus pada gadget dan peralatan elektronik.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1966,
+      "country": "AS",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "47.5B USD",
+        "monthlyVisitors": "280M",
+        "totalSellers": "30K+",
+        "totalProducts": "50M+",
+        "marketShare": "2.5%",
+        "employees": "105K",
+        "countries": "3",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-wayfair",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Wayfair",
+    "tags": [
+      "ecommerce",
+      "global",
+      "furnitur"
+    ],
+    "teks": "Wayfair - E-commerce furnitur dan dekorasi rumah terbesar AS. Didirikan 2002.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2002,
+      "country": "AS",
+      "products": [
+        "Furnitur",
+        "Dekorasi"
+      ],
+      "stats": {
+        "annualRevenue": "14.1B USD",
+        "monthlyVisitors": "180M",
+        "totalSellers": "20K+",
+        "totalProducts": "30M+",
+        "marketShare": "1.5%",
+        "employees": "16.7K",
+        "countries": "4",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-costco",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Costco",
+    "tags": [
+      "ecommerce",
+      "global",
+      "warehouse"
+    ],
+    "teks": "Costco - Ritel warehouse AS dengan e-commerce. Didirikan 1983 oleh Jim Sinegal.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1983,
+      "founder": "Jim Sinegal",
+      "country": "AS",
+      "products": [
+        "Kebutuhan Rumah",
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "226B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "10K+",
+        "totalProducts": "20M+",
+        "marketShare": "3.2%",
+        "employees": "300K",
+        "countries": "14",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-overstock",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Overstock",
+    "tags": [
+      "ecommerce",
+      "global",
+      "diskon"
+    ],
+    "teks": "Overstock - E-commerce diskon AS. Didirikan 1999. Fokus furniture dan perhiasan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "AS",
+      "products": [
+        "Furnitur",
+        "Perhiasan",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "2.1B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "0.8%",
+        "employees": "1.5K",
+        "countries": "10",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-newegg",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Newegg",
+    "tags": [
+      "ecommerce",
+      "global",
+      "elektronik"
+    ],
+    "teks": "Newegg - E-commerce elektronik dan gaming. Didirikan 2001. Fokus tech enthusiasts.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2001,
+      "country": "AS",
+      "products": [
+        "Elektronik",
+        "Gaming",
+        "Komponen PC"
+      ],
+      "stats": {
+        "annualRevenue": "3.5B USD",
+        "monthlyVisitors": "120M",
+        "totalSellers": "15K+",
+        "totalProducts": "50M+",
+        "marketShare": "1.2%",
+        "employees": "2K",
+        "countries": "5",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-alibaba",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Alibaba",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "b2b"
+    ],
+    "teks": "Alibaba - Raksasa B2B China. Didirikan 1999 oleh Jack Ma. Platform wholesale terbesar dunia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "founder": "Jack Ma",
+      "country": "China",
+      "products": [
+        "Wholesale",
+        "B2B"
+      ],
+      "stats": {
+        "annualRevenue": "131B USD",
+        "monthlyVisitors": "1.2B",
+        "totalSellers": "10M+",
+        "totalProducts": "500M+",
+        "marketShare": "28.5%",
+        "employees": "200K",
+        "countries": "200+",
+        "appDownloads": "500M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jd-com",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "JD.com",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "original"
+    ],
+    "teks": "JD.com - E-commerce terbesar kedua China. Didirikan 1998 oleh Liu Qiangdong. Fokus produk original.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1998,
+      "founder": "Liu Qiangdong",
+      "country": "China",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Original"
+      ],
+      "stats": {
+        "annualRevenue": "114B USD",
+        "monthlyVisitors": "600M",
+        "totalSellers": "300K+",
+        "totalProducts": "100M+",
+        "marketShare": "16.8%",
+        "employees": "450K",
+        "countries": "10",
+        "appDownloads": "300M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-pinduoduo",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Pinduoduo",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "sosial"
+    ],
+    "teks": "Pinduoduo - E-commerce sosial China. Didirikan 2015 oleh Colin Huang. Belanja + game + sosial.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "founder": "Colin Huang",
+      "country": "China",
+      "products": [
+        "Kebutuhan Rumah",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "38B USD",
+        "monthlyVisitors": "800M",
+        "totalSellers": "8M+",
+        "totalProducts": "200M+",
+        "marketShare": "12.5%",
+        "employees": "50K",
+        "countries": "5",
+        "appDownloads": "400M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tmall",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Tmall",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "premium"
+    ],
+    "teks": "Tmall - Platform B2C Alibaba untuk brand ternama. Didirikan 2008. Pesaing JD.com.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2008,
+      "country": "China",
+      "products": [
+        "Branded",
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "80B USD",
+        "monthlyVisitors": "700M",
+        "totalSellers": "200K+",
+        "totalProducts": "150M+",
+        "marketShare": "20%",
+        "employees": "50K",
+        "countries": "10",
+        "appDownloads": "300M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-taobao",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Taobao",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "c2c"
+    ],
+    "teks": "Taobao - Platform C2C Alibaba. Didirikan 2003. Marketplace terbesar China untuk consumer-to-consumer.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2003,
+      "country": "China",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "45B USD",
+        "monthlyVisitors": "900M",
+        "totalSellers": "15M+",
+        "totalProducts": "300M+",
+        "marketShare": "18%",
+        "employees": "30K",
+        "countries": "1",
+        "appDownloads": "500M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-dangdang",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Dangdang",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "buku"
+    ],
+    "teks": "Dangdang - E-commerce buku terbesar China. Didirikan 1999. Pesaing Amazon di China.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "China",
+      "products": [
+        "Buku",
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "0.8%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-suning",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Suning",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "elektronik"
+    ],
+    "teks": "Suning - E-commerce elektronik China. Didirikan 1990. Pesaing JD.com di elektronik.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1990,
+      "country": "China",
+      "products": [
+        "Elektronik",
+        "Gadget",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "28B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "20K+",
+        "totalProducts": "30M+",
+        "marketShare": "3.5%",
+        "employees": "100K",
+        "countries": "5",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-vip-com",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "VIP.com",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "fashion"
+    ],
+    "teks": "VIP.com - E-commerce fashion diskon China. Didirikan 2008. Fokus brand fashion.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2008,
+      "country": "China",
+      "products": [
+        "Fashion",
+        "Kecantikan",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "8B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "10K+",
+        "totalProducts": "20M+",
+        "marketShare": "1.5%",
+        "employees": "10K",
+        "countries": "5",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-rakuten",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Rakuten",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Rakuten - E-commerce terbesar Jepang. Didirikan 1997 oleh Hiroshi Mikitani. Ekosistem super app.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1997,
+      "founder": "Hiroshi Mikitani",
+      "country": "Jepang",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Travel"
+      ],
+      "stats": {
+        "annualRevenue": "15B USD",
+        "monthlyVisitors": "300M",
+        "totalSellers": "50K+",
+        "totalProducts": "100M+",
+        "marketShare": "25%",
+        "employees": "20K",
+        "countries": "30",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercari",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mercari",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "second-hand"
+    ],
+    "teks": "Mercari - Marketplace second-hand terbesar Jepang. Didirikan 2013. Aplikasi jual-beli bekas.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2013,
+      "country": "Jepang",
+      "products": [
+        "Barang Bekas",
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "20M+",
+        "totalProducts": "50M+",
+        "marketShare": "8%",
+        "employees": "1.5K",
+        "countries": "2",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-yahoo-japan-shopping",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Yahoo! Japan Shopping",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "jepang"
+    ],
+    "teks": "Yahoo! Japan Shopping - E-commerce besar Jepang. Bagian dari ekosistem Yahoo! Japan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1996,
+      "country": "Jepang",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "5B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "30K+",
+        "totalProducts": "50M+",
+        "marketShare": "10%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zozo",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "ZOZO",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "fashion"
+    ],
+    "teks": "ZOZO - Fashion e-commerce Jepang. Didirikan 1998. Fokus fashion & styling.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1998,
+      "country": "Jepang",
+      "products": [
+        "Fashion",
+        "Sepatu",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "3%",
+        "employees": "2K",
+        "countries": "2",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-coupang",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Coupang",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "cepat"
+    ],
+    "teks": "Coupang - E-commerce terbesar Korea Selatan. Didirikan 2010 oleh Bom Kim. Pengiriman super cepat (Rocket Delivery).",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "founder": "Bom Kim",
+      "country": "Korea Selatan",
+      "products": [
+        "Kebutuhan Rumah",
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "22B USD",
+        "monthlyVisitors": "250M",
+        "totalSellers": "200K+",
+        "totalProducts": "50M+",
+        "marketShare": "35%",
+        "employees": "50K",
+        "countries": "3",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-gmarket",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Gmarket",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "korea"
+    ],
+    "teks": "Gmarket - Platform e-commerce besar Korea. Didirikan 2000, sekarang bagian dari eBay.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2000,
+      "country": "Korea Selatan",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "20K+",
+        "totalProducts": "30M+",
+        "marketShare": "12%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-11st",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "11st",
+    "tags": [
+      "ecommerce",
+      "asia-timur",
+      "korea"
+    ],
+    "teks": "11st - E-commerce besar Korea. Didirikan 2008. Pesaing Coupang dan Gmarket.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2008,
+      "country": "Korea Selatan",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "4B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "15K+",
+        "totalProducts": "20M+",
+        "marketShare": "8%",
+        "employees": "1.5K",
+        "countries": "1",
+        "appDownloads": "15M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-flipkart",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Flipkart",
+    "tags": [
+      "ecommerce",
+      "asia-selatan",
+      "terbesar"
+    ],
+    "teks": "Flipkart - E-commerce terbesar India. Didirikan 2007 oleh Sachin & Binny Bansal. Dikenal dengan Big Billion Days.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2007,
+      "founder": "Sachin Bansal, Binny Bansal",
+      "country": "India",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Buku"
+      ],
+      "stats": {
+        "annualRevenue": "25B USD",
+        "monthlyVisitors": "500M",
+        "totalSellers": "300K+",
+        "totalProducts": "100M+",
+        "marketShare": "30%",
+        "employees": "40K",
+        "countries": "1",
+        "appDownloads": "200M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-meesho",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Meesho",
+    "tags": [
+      "ecommerce",
+      "asia-selatan",
+      "sosial"
+    ],
+    "teks": "Meesho - Sosial commerce India. Didirikan 2015 oleh Vidit Aatrey. Reseller dengan modal nol.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "founder": "Vidit Aatrey",
+      "country": "India",
+      "products": [
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "15M+",
+        "totalProducts": "30M+",
+        "marketShare": "8%",
+        "employees": "1.5K",
+        "countries": "1",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-snapdeal",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Snapdeal",
+    "tags": [
+      "ecommerce",
+      "asia-selatan",
+      "india"
+    ],
+    "teks": "Snapdeal - E-commerce besar India. Didirikan 2010. Pesaing Flipkart dan Amazon India.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "country": "India",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "50K+",
+        "totalProducts": "20M+",
+        "marketShare": "5%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-nykaa",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Nykaa",
+    "tags": [
+      "ecommerce",
+      "asia-selatan",
+      "beauty"
+    ],
+    "teks": "Nykaa - E-commerce kecantikan dan fashion terbesar India. Didirikan 2012 oleh Falguni Nayar.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "founder": "Falguni Nayar",
+      "country": "India",
+      "products": [
+        "Kecantikan",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "4%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-indiamart",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "IndiaMART",
+    "tags": [
+      "ecommerce",
+      "asia-selatan",
+      "b2b"
+    ],
+    "teks": "IndiaMART - B2B marketplace India. Didirikan 1999. Fokus B2B & wholesale.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "India",
+      "products": [
+        "B2B",
+        "Wholesale",
+        "Industrial"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "5M+",
+        "totalProducts": "50M+",
+        "marketShare": "2%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zalando",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Zalando",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "fashion"
+    ],
+    "teks": "Zalando - Fashion e-commerce terbesar Eropa. Didirikan 2008 di Berlin. 2000+ brand fashion.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2008,
+      "founder": "Robert Gentz, David Schneider",
+      "country": "Jerman",
+      "products": [
+        "Fashion",
+        "Sepatu",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "10.5B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "4K+",
+        "totalProducts": "100M+",
+        "marketShare": "15%",
+        "employees": "15K",
+        "countries": "25",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-otto",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Otto",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "tertua"
+    ],
+    "teks": "Otto - E-commerce tertua Jerman. Didirikan 1949 oleh Werner Otto. Fokus furnitur & rumah tangga.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1949,
+      "founder": "Werner Otto",
+      "country": "Jerman",
+      "products": [
+        "Furnitur",
+        "Peralatan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "15B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "5K+",
+        "totalProducts": "50M+",
+        "marketShare": "8%",
+        "employees": "12K",
+        "countries": "30",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mediamarkt",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "MediaMarkt",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "elektronik"
+    ],
+    "teks": "MediaMarkt - E-commerce elektronik terbesar Eropa. Didirikan 1979. Fokus gadget & elektronik.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1979,
+      "country": "Jerman",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "22B USD",
+        "monthlyVisitors": "120M",
+        "totalSellers": "3K+",
+        "totalProducts": "30M+",
+        "marketShare": "5%",
+        "employees": "50K",
+        "countries": "14",
+        "appDownloads": "15M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-douglas",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Douglas",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "beauty"
+    ],
+    "teks": "Douglas - E-commerce kecantikan Jerman. Didirikan 1821. Fokus parfum & kosmetik.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1821,
+      "country": "Jerman",
+      "products": [
+        "Kecantikan",
+        "Parfum",
+        "Kosmetik"
+      ],
+      "stats": {
+        "annualRevenue": "3.5B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "2K+",
+        "totalProducts": "10M+",
+        "marketShare": "2%",
+        "employees": "15K",
+        "countries": "22",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-asos",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "ASOS",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "fashion"
+    ],
+    "teks": "ASOS - Fashion e-commerce terbesar Inggris. Didirikan 2000. Fokus anak muda & milenial.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2000,
+      "country": "Inggris",
+      "products": [
+        "Fashion",
+        "Sepatu",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "4.5B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "1K+",
+        "totalProducts": "50M+",
+        "marketShare": "8%",
+        "employees": "3K",
+        "countries": "200+",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-farfetch",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Farfetch",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "luxury"
+    ],
+    "teks": "Farfetch - Marketplace fashion mewah global. Didirikan 2007 oleh José Neves. Butik mewah 50+ negara.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2007,
+      "founder": "José Neves",
+      "country": "Inggris",
+      "products": [
+        "Fashion Mewah",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "3K+",
+        "totalProducts": "20M+",
+        "marketShare": "3%",
+        "employees": "3K",
+        "countries": "50",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-very",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Very",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "uk"
+    ],
+    "teks": "Very - E-commerce fashion & rumah tangga Inggris. Didirikan 2009. Fokus kredit belanja.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2009,
+      "country": "Inggris",
+      "products": [
+        "Fashion",
+        "Kebutuhan Rumah",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "60M",
+        "totalSellers": "2K+",
+        "totalProducts": "20M+",
+        "marketShare": "2%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-boohoo",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Boohoo",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "fashion"
+    ],
+    "teks": "Boohoo - Fashion e-commerce Inggris. Didirikan 2006. Fokus fast fashion & harga murah.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2006,
+      "country": "Inggris",
+      "products": [
+        "Fashion",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "1.8B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "500+",
+        "totalProducts": "10M+",
+        "marketShare": "1.5%",
+        "employees": "1.5K",
+        "countries": "100+",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-marks-spencer",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Marks & Spencer",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "ritel"
+    ],
+    "teks": "Marks & Spencer - Ritel Inggris dengan e-commerce. Didirikan 1884. Fokus fashion & makanan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1884,
+      "country": "Inggris",
+      "products": [
+        "Fashion",
+        "Makanan",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "10B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "1K+",
+        "totalProducts": "20M+",
+        "marketShare": "4%",
+        "employees": "60K",
+        "countries": "50",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-cdiscount",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Cdiscount",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "prancis"
+    ],
+    "teks": "Cdiscount - E-commerce terbesar Prancis. Didirikan 1998. Pesaing Amazon di Prancis.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1998,
+      "country": "Prancis",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "4.5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "10K+",
+        "totalProducts": "30M+",
+        "marketShare": "12%",
+        "employees": "2K",
+        "countries": "5",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-la-redoute",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "La Redoute",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "tertua"
+    ],
+    "teks": "La Redoute - Fashion & dekorasi rumah Prancis. Didirikan 1873. E-commerce tertua di Prancis.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1873,
+      "country": "Prancis",
+      "products": [
+        "Fashion",
+        "Dekorasi Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "2K+",
+        "totalProducts": "10M+",
+        "marketShare": "3%",
+        "employees": "2K",
+        "countries": "10",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-carrefour",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Carrefour",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "ritel"
+    ],
+    "teks": "Carrefour - Ritel Prancis dengan e-commerce. Didirikan 1959. Supermarket terbesar Eropa.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1959,
+      "country": "Prancis",
+      "products": [
+        "Makanan",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "82B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "5K+",
+        "totalProducts": "20M+",
+        "marketShare": "5%",
+        "employees": "300K",
+        "countries": "30",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-el-corte-ingles",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "El Corte Inglés",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "spanyol"
+    ],
+    "teks": "El Corte Inglés - Ritel terbesar Spanyol dengan e-commerce kuat. Didirikan 1940.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1940,
+      "country": "Spanyol",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "15B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "3K+",
+        "totalProducts": "20M+",
+        "marketShare": "6%",
+        "employees": "80K",
+        "countries": "10",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zalando-italia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Zalando Italia",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "italia"
+    ],
+    "teks": "Zalando Italia - Fashion e-commerce di Italia. Bagian dari Zalando Group.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2008,
+      "country": "Italia",
+      "products": [
+        "Fashion",
+        "Sepatu"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "1K+",
+        "totalProducts": "10M+",
+        "marketShare": "5%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-trendyol",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Trendyol",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Trendyol - E-commerce terbesar Turki. Didirikan 2010 oleh Demet Mutlu. Fokus fashion & kecantikan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "founder": "Demet Mutlu",
+      "country": "Turki",
+      "products": [
+        "Fashion",
+        "Kecantikan"
+      ],
+      "stats": {
+        "annualRevenue": "8B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "200K+",
+        "totalProducts": "50M+",
+        "marketShare": "35%",
+        "employees": "5K",
+        "countries": "5",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-hepsiburada",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Hepsiburada",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "turki"
+    ],
+    "teks": "Hepsiburada - E-commerce terbesar Turki. Didirikan 2000. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2000,
+      "country": "Turki",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "5B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "50K+",
+        "totalProducts": "30M+",
+        "marketShare": "12%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-noon",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Noon",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "timur-tengah"
+    ],
+    "teks": "Noon - E-commerce terbesar Timur Tengah. Didirikan 2017 oleh Mohamed Alabbar. Pesaing Amazon.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2017,
+      "founder": "Mohamed Alabbar",
+      "country": "UEA",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "60M",
+        "totalSellers": "30K+",
+        "totalProducts": "20M+",
+        "marketShare": "20%",
+        "employees": "5K",
+        "countries": "5",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-souq-com",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Souq.com",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "amazon"
+    ],
+    "teks": "Souq.com - Marketplace Timur Tengah. Didirikan 2005, sekarang bagian dari Amazon.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2005,
+      "country": "UEA",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "40M",
+        "totalSellers": "20K+",
+        "totalProducts": "20M+",
+        "marketShare": "10%",
+        "employees": "2K",
+        "countries": "5",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercado-livre",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mercado Livre",
+    "tags": [
+      "ecommerce",
+      "amerika-selatan",
+      "terbesar"
+    ],
+    "teks": "Mercado Livre - E-commerce terbesar Amerika Latin. Didirikan 1999 oleh Marcos Galperin.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "founder": "Marcos Galperin",
+      "country": "Brazil",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "12B USD",
+        "monthlyVisitors": "300M",
+        "totalSellers": "1M+",
+        "totalProducts": "100M+",
+        "marketShare": "40%",
+        "employees": "25K",
+        "countries": "18",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopee-brazil",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopee Brazil",
+    "tags": [
+      "ecommerce",
+      "amerika-selatan",
+      "shopee"
+    ],
+    "teks": "Shopee Brazil - Versi Shopee di Brazil. Ekspansi Shopee ke Amerika Latin.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2019,
+      "country": "Brazil",
+      "products": [
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "500K+",
+        "totalProducts": "30M+",
+        "marketShare": "10%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-wildberries",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Wildberries",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "rusia"
+    ],
+    "teks": "Wildberries - E-commerce terbesar Rusia. Didirikan 2004 oleh Tatyana Bakalchuk. Fashion & rumah.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2004,
+      "founder": "Tatyana Bakalchuk",
+      "country": "Rusia",
+      "products": [
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "25B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "100K+",
+        "totalProducts": "50M+",
+        "marketShare": "30%",
+        "employees": "50K",
+        "countries": "17",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-ozon",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Ozon",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "rusia"
+    ],
+    "teks": "Ozon - E-commerce terbesar Rusia. Didirikan 1998. Marketplace general seperti Amazon.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1998,
+      "country": "Rusia",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "18B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "50K+",
+        "totalProducts": "30M+",
+        "marketShare": "20%",
+        "employees": "30K",
+        "countries": "10",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kogan",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Kogan",
+    "tags": [
+      "ecommerce",
+      "osenian",
+      "australia"
+    ],
+    "teks": "Kogan - E-commerce terbesar Australia. Didirikan 2006 oleh Ruslan Kogan. Elektronik & rumah.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2006,
+      "founder": "Ruslan Kogan",
+      "country": "Australia",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "8%",
+        "employees": "1K",
+        "countries": "2",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-catch",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Catch",
+    "tags": [
+      "ecommerce",
+      "osenian",
+      "australia"
+    ],
+    "teks": "Catch - E-commerce Australia. Didirikan 2006. Marketplace dengan harga murah.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2006,
+      "country": "Australia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "3K+",
+        "totalProducts": "5M+",
+        "marketShare": "5%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-the-iconic",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "The Iconic",
+    "tags": [
+      "ecommerce",
+      "osenian",
+      "fashion"
+    ],
+    "teks": "The Iconic - Fashion e-commerce Australia. Didirikan 2011. Fokus fashion & gaya hidup.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2011,
+      "country": "Australia",
+      "products": [
+        "Fashion",
+        "Sepatu",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "15M",
+        "totalSellers": "1K+",
+        "totalProducts": "5M+",
+        "marketShare": "3%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jumia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Jumia",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "terbesar"
+    ],
+    "teks": "Jumia - E-commerce terbesar Afrika. Didirikan 2012. Beroperasi di 11 negara Afrika.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Nigeria",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "100K+",
+        "totalProducts": "10M+",
+        "marketShare": "30%",
+        "employees": "5K",
+        "countries": "11",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-konga",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Konga",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "nigeria"
+    ],
+    "teks": "Konga - E-commerce terbesar Nigeria. Didirikan 2012. Pesaing Jumia di Nigeria.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Nigeria",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "50K+",
+        "totalProducts": "5M+",
+        "marketShare": "15%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-takealot",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Takealot",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "south-africa"
+    ],
+    "teks": "Takealot - E-commerce terbesar Afrika Selatan. Didirikan 2011. Pesaing Amazon di SA.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2011,
+      "country": "Afrika Selatan",
+      "products": [
+        "Elektronik",
+        "Buku",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "10K+",
+        "totalProducts": "5M+",
+        "marketShare": "20%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopee",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopee",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "terbesar"
+    ],
+    "teks": "Shopee - E-commerce terbesar Asia Tenggara. Didirikan 2015 oleh Forrest Li.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "founder": "Forrest Li",
+      "country": "Singapura",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "9B USD",
+        "monthlyVisitors": "600M",
+        "totalSellers": "10M+",
+        "totalProducts": "100M+",
+        "marketShare": "35%",
+        "employees": "30K",
+        "countries": "15",
+        "appDownloads": "500M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-lazada",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Lazada",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "alibaba"
+    ],
+    "teks": "Lazada - E-commerce premium Asia Tenggara. Didirikan 2012. Bagian dari Alibaba Group.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "founder": "Max Bittner",
+      "country": "Singapura",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Branded"
+      ],
+      "stats": {
+        "annualRevenue": "4B USD",
+        "monthlyVisitors": "300M",
+        "totalSellers": "1M+",
+        "totalProducts": "50M+",
+        "marketShare": "20%",
+        "employees": "10K",
+        "countries": "6",
+        "appDownloads": "200M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tokopedia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Tokopedia",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "indonesia"
+    ],
+    "teks": "Tokopedia - E-commerce terbesar Indonesia. Didirikan 2009 oleh William Tanuwijaya. 14 juta seller.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2009,
+      "founder": "William Tanuwijaya",
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "3.5B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "14M+",
+        "totalProducts": "50M+",
+        "marketShare": "25%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bukalapak",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Bukalapak",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "umkm"
+    ],
+    "teks": "Bukalapak - E-commerce UMKM Indonesia. Didirikan 2010 oleh Achmad Zaky.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "founder": "Achmad Zaky",
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Emas"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "6M+",
+        "totalProducts": "20M+",
+        "marketShare": "10%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-blibli",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Blibli",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "premium"
+    ],
+    "teks": "Blibli - E-commerce premium Indonesia. Didirikan 2011 oleh Kusumo Martanto.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2011,
+      "founder": "Kusumo Martanto",
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Tiket"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "100K+",
+        "totalProducts": "10M+",
+        "marketShare": "8%",
+        "employees": "1.5K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopee-indonesia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopee Indonesia",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "shopee"
+    ],
+    "teks": "Shopee Indonesia - Versi Shopee di Indonesia. Didirikan 2015. E-commerce terbesar Indonesia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "4B USD",
+        "monthlyVisitors": "300M",
+        "totalSellers": "5M+",
+        "totalProducts": "80M+",
+        "marketShare": "35%",
+        "employees": "10K",
+        "countries": "1",
+        "appDownloads": "200M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-lazada-indonesia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Lazada Indonesia",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "lazada"
+    ],
+    "teks": "Lazada Indonesia - Versi Lazada di Indonesia. Didirikan 2012. E-commerce premium.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Branded"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "500K+",
+        "totalProducts": "20M+",
+        "marketShare": "12%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-sociolla",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Sociolla",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "beauty"
+    ],
+    "teks": "Sociolla - E-commerce kecantikan terbesar Indonesia. Didirikan 2015. Fokus produk kecantikan & perawatan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Indonesia",
+      "products": [
+        "Kecantikan",
+        "Perawatan",
+        "Makeup"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "1K+",
+        "totalProducts": "10M+",
+        "marketShare": "3%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-orami",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Orami",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "family"
+    ],
+    "teks": "Orami - E-commerce produk ibu dan anak Indonesia. Didirikan 2012. Fokus kebutuhan keluarga.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Indonesia",
+      "products": [
+        "Ibu & Anak",
+        "Bayi",
+        "Kebutuhan Keluarga"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "5K+",
+        "totalProducts": "5M+",
+        "marketShare": "2%",
+        "employees": "300",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-ruparupa",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Ruparupa",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "furniture"
+    ],
+    "teks": "Ruparupa - E-commerce furniture Indonesia. Didirikan 2014. Fokus furniture & dekorasi rumah.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2014,
+      "country": "Indonesia",
+      "products": [
+        "Furniture",
+        "Dekorasi Rumah",
+        "Peralatan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "15M",
+        "totalSellers": "3K+",
+        "totalProducts": "3M+",
+        "marketShare": "1.5%",
+        "employees": "200",
+        "countries": "1",
+        "appDownloads": "3M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-nirwana",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Nirwana",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "fashion"
+    ],
+    "teks": "Nirwana - E-commerce fashion Muslim Indonesia. Didirikan 2016. Fokus fashion Muslim & modest wear.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2016,
+      "country": "Indonesia",
+      "products": [
+        "Fashion Muslim",
+        "Modest Wear",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "10M",
+        "totalSellers": "2K+",
+        "totalProducts": "2M+",
+        "marketShare": "1%",
+        "employees": "150",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-hijup",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Hijup",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "hijab"
+    ],
+    "teks": "Hijup - E-commerce fashion hijab Indonesia. Didirikan 2011. Fokus hijab & fashion Muslim.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2011,
+      "country": "Indonesia",
+      "products": [
+        "Hijab",
+        "Fashion Muslim",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "8M",
+        "totalSellers": "1K+",
+        "totalProducts": "1M+",
+        "marketShare": "0.8%",
+        "employees": "100",
+        "countries": "1",
+        "appDownloads": "1M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zilingo",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Zilingo",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "fashion"
+    ],
+    "teks": "Zilingo - E-commerce fashion Indonesia. Didirikan 2015. Fokus fashion & lifestyle.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Lifestyle",
+        "Aksesoris"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "12M",
+        "totalSellers": "2K+",
+        "totalProducts": "2M+",
+        "marketShare": "1.2%",
+        "employees": "200",
+        "countries": "5",
+        "appDownloads": "3M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bhinneka",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Bhinneka",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "elektronik"
+    ],
+    "teks": "Bhinneka - E-commerce elektronik Indonesia. Didirikan 1993. Fokus gadget & elektronik.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1993,
+      "country": "Indonesia",
+      "products": [
+        "Elektronik",
+        "Gadget",
+        "Komputer"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "5M",
+        "totalSellers": "1K+",
+        "totalProducts": "1M+",
+        "marketShare": "0.5%",
+        "employees": "100",
+        "countries": "1",
+        "appDownloads": "1M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tiktok-shop-indonesia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Tiktok Shop Indonesia",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "social"
+    ],
+    "teks": "Tiktok Shop Indonesia - Social commerce Indonesia. Didirikan 2021. Fokus live shopping.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2021,
+      "country": "Indonesia",
+      "products": [
+        "Fashion",
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "3M+",
+        "totalProducts": "50M+",
+        "marketShare": "20%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "150M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-akulaku",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Akulaku",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "fintech"
+    ],
+    "teks": "Akulaku - E-commerce fintech Indonesia. Didirikan 2014. Fokus pembayaran cicilan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2014,
+      "country": "Indonesia",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "60M",
+        "totalSellers": "100K+",
+        "totalProducts": "10M+",
+        "marketShare": "5%",
+        "employees": "2K",
+        "countries": "3",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-klikindomaret",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Klikindomaret",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "grocery"
+    ],
+    "teks": "Klikindomaret - E-commerce Indomaret. Didirikan 2018. Fokus kebutuhan sehari-hari.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2018,
+      "country": "Indonesia",
+      "products": [
+        "Kebutuhan Sehari-hari",
+        "Makanan",
+        "Minuman"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "500+",
+        "totalProducts": "5M+",
+        "marketShare": "2%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-grabmart",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "GrabMart",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "delivery"
+    ],
+    "teks": "GrabMart - E-commerce Grab Indonesia. Didirikan 2020. Fokus pesan-antar makanan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2020,
+      "country": "Indonesia",
+      "products": [
+        "Makanan",
+        "Minuman",
+        "Kebutuhan Sehari-hari"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "10K+",
+        "totalProducts": "10M+",
+        "marketShare": "1.5%",
+        "employees": "1K",
+        "countries": "6",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-gofood",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "GoFood",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "delivery"
+    ],
+    "teks": "GoFood - E-commerce Gojek Indonesia. Didirikan 2015. Fokus pesan-antar makanan.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Indonesia",
+      "products": [
+        "Makanan",
+        "Minuman",
+        "Kebutuhan Sehari-hari"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "50K+",
+        "totalProducts": "20M+",
+        "marketShare": "3%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopify",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopify",
+    "tags": [
+      "ecommerce",
+      "amerika-utara",
+      "platform"
+    ],
+    "teks": "Shopify - Platform e-commerce terbesar Kanada. Didirikan 2006 oleh Tobias Lütke. Power 4M+ toko online.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2006,
+      "founder": "Tobias Lütke",
+      "country": "Kanada",
+      "products": [
+        "Platform E-commerce",
+        "POS"
+      ],
+      "stats": {
+        "annualRevenue": "7.1B USD",
+        "monthlyVisitors": "200M",
+        "totalSellers": "4M+",
+        "totalProducts": "500M+",
+        "marketShare": "10%",
+        "employees": "8K",
+        "countries": "175",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-wish",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Wish",
+    "tags": [
+      "ecommerce",
+      "amerika-utara",
+      "diskon"
+    ],
+    "teks": "Wish - Marketplace diskon global dari Kanada. Didirikan 2010. Fokus harga murah dari China.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "country": "Kanada",
+      "products": [
+        "Barang Murah",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "500K+",
+        "totalProducts": "50M+",
+        "marketShare": "2%",
+        "employees": "1.5K",
+        "countries": "100+",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-linio",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Linio",
+    "tags": [
+      "ecommerce",
+      "amerika-latin",
+      "meksiko"
+    ],
+    "teks": "Linio - E-commerce terbesar Meksiko. Didirikan 2012. Pesaing Amazon di Amerika Latin.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Meksiko",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "10K+",
+        "totalProducts": "5M+",
+        "marketShare": "15%",
+        "employees": "1K",
+        "countries": "8",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zalora",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Zalora",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "fashion"
+    ],
+    "teks": "Zalora - Fashion e-commerce terbesar Asia Tenggara. Didirikan 2012. 500+ brand fashion.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Filipina",
+      "products": [
+        "Fashion",
+        "Sepatu"
+      ],
+      "stats": {
+        "annualRevenue": "400M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "500+",
+        "totalProducts": "5M+",
+        "marketShare": "5%",
+        "employees": "500",
+        "countries": "11",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-daraz",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Daraz",
+    "tags": [
+      "ecommerce",
+      "asia-selatan",
+      "pakistan"
+    ],
+    "teks": "Daraz - E-commerce terbesar Pakistan. Didirikan 2012. Bagian dari Alibaba Group.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Pakistan",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "200K+",
+        "totalProducts": "10M+",
+        "marketShare": "25%",
+        "employees": "2K",
+        "countries": "5",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-privalia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Privalia",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "fashion"
+    ],
+    "teks": "Privalia - Fashion e-commerce Spanyol. Didirikan 2006. Outlet online terbesar Spanyol.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2006,
+      "country": "Spanyol",
+      "products": [
+        "Fashion",
+        "Outlet"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "2K+",
+        "totalProducts": "5M+",
+        "marketShare": "3%",
+        "employees": "1K",
+        "countries": "5",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-worten",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Worten",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "portugal"
+    ],
+    "teks": "Worten - E-commerce terbesar Portugal. Didirikan 1996. Elektronik & rumah tangga.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1996,
+      "country": "Portugal",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "1K+",
+        "totalProducts": "5M+",
+        "marketShare": "25%",
+        "employees": "5K",
+        "countries": "2",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bol-com",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Bol.com",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "belanda"
+    ],
+    "teks": "Bol.com - E-commerce terbesar Belanda. Didirikan 1999. Pesaing Amazon di Benelux.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Belanda",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "6B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "50K+",
+        "totalProducts": "20M+",
+        "marketShare": "30%",
+        "employees": "3K",
+        "countries": "3",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-coolblue",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Coolblue",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "belgia"
+    ],
+    "teks": "Coolblue - E-commerce Belgia. Didirikan 1999. Fokus elektronik & pengiriman cepat.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Belgia",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "2.5B USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "1K+",
+        "totalProducts": "5M+",
+        "marketShare": "15%",
+        "employees": "2K",
+        "countries": "3",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-elgiganten",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Elgiganten",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "swedia"
+    ],
+    "teks": "Elgiganten - E-commerce elektronik Swedia. Didirikan 1995. Terbesar di Skandinavia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1995,
+      "country": "Swedia",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "4B USD",
+        "monthlyVisitors": "40M",
+        "totalSellers": "2K+",
+        "totalProducts": "10M+",
+        "marketShare": "20%",
+        "employees": "5K",
+        "countries": "5",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-komplett",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Komplett",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "norwegia"
+    ],
+    "teks": "Komplett - E-commerce elektronik Norwegia. Didirikan 1998. Terbesar di Norwegia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1998,
+      "country": "Norwegia",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "15M",
+        "totalSellers": "1K+",
+        "totalProducts": "5M+",
+        "marketShare": "30%",
+        "employees": "1K",
+        "countries": "3",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bilka",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Bilka",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "denmark"
+    ],
+    "teks": "Bilka - E-commerce terbesar Denmark. Didirikan 1970. Hypermarket online.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1970,
+      "country": "Denmark",
+      "products": [
+        "Kebutuhan Rumah",
+        "Makanan"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "1K+",
+        "totalProducts": "10M+",
+        "marketShare": "20%",
+        "employees": "4K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-verkkokauppa",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Verkkokauppa",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "finlandia"
+    ],
+    "teks": "Verkkokauppa - E-commerce elektronik Finlandia. Didirikan 2001. Terbesar di Finlandia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2001,
+      "country": "Finlandia",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "800M USD",
+        "monthlyVisitors": "10M",
+        "totalSellers": "500+",
+        "totalProducts": "3M+",
+        "marketShare": "25%",
+        "employees": "500",
+        "countries": "2",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-superbalist",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Superbalist",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "fashion"
+    ],
+    "teks": "Superbalist - Fashion e-commerce Afrika Selatan. Didirikan 2012. Fokus fashion & gaya hidup.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Afrika Selatan",
+      "products": [
+        "Fashion",
+        "Gaya Hidup"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "10M",
+        "totalSellers": "500+",
+        "totalProducts": "2M+",
+        "marketShare": "10%",
+        "employees": "200",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-souq-egypt",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Souq Egypt",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "mesir"
+    ],
+    "teks": "Souq Egypt - E-commerce terbesar Mesir. Didirikan 2005. Bagian dari Amazon.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2005,
+      "country": "Mesir",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "15M",
+        "totalSellers": "10K+",
+        "totalProducts": "5M+",
+        "marketShare": "30%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kilimall",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Kilimall",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "kenya"
+    ],
+    "teks": "Kilimall - E-commerce terbesar Kenya. Didirikan 2014. Pesaing Jumia di Afrika Timur.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2014,
+      "country": "Kenya",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "8M",
+        "totalSellers": "5K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "500",
+        "countries": "3",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-tiki",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Tiki",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "vietnam"
+    ],
+    "teks": "Tiki - E-commerce terbesar Vietnam. Didirikan 2010. Fokus pengiriman cepat.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "country": "Vietnam",
+      "products": [
+        "Buku",
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "100K+",
+        "totalProducts": "20M+",
+        "marketShare": "25%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopee-thailand",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopee Thailand",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "thailand"
+    ],
+    "teks": "Shopee Thailand - Versi Shopee di Thailand. Didirikan 2015. Terbesar di Thailand.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Thailand",
+      "products": [
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "150M",
+        "totalSellers": "2M+",
+        "totalProducts": "50M+",
+        "marketShare": "35%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "100M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopee-malaysia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopee Malaysia",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "malaysia"
+    ],
+    "teks": "Shopee Malaysia - Versi Shopee di Malaysia. Didirikan 2015. Terbesar di Malaysia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Malaysia",
+      "products": [
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "1.5M+",
+        "totalProducts": "30M+",
+        "marketShare": "30%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-shopee-philippines",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Shopee Philippines",
+    "tags": [
+      "ecommerce",
+      "asia-tenggara",
+      "filipina"
+    ],
+    "teks": "Shopee Philippines - Versi Shopee di Filipina. Didirikan 2015. Terbesar di Filipina.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Filipina",
+      "products": [
+        "Fashion",
+        "Elektronik"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "80M",
+        "totalSellers": "1M+",
+        "totalProducts": "20M+",
+        "marketShare": "30%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercado-libre-argentina",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mercado Libre Argentina",
+    "tags": [
+      "ecommerce",
+      "amerika-selatan",
+      "argentina"
+    ],
+    "teks": "Mercado Libre Argentina - Versi Mercado Libre di Argentina. Didirikan 1999.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Argentina",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "500K+",
+        "totalProducts": "30M+",
+        "marketShare": "40%",
+        "employees": "10K",
+        "countries": "1",
+        "appDownloads": "50M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercado-libre-chile",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mercado Libre Chile",
+    "tags": [
+      "ecommerce",
+      "amerika-selatan",
+      "chile"
+    ],
+    "teks": "Mercado Libre Chile - Versi Mercado Libre di Chile. Didirikan 1999.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Chile",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "60M",
+        "totalSellers": "300K+",
+        "totalProducts": "20M+",
+        "marketShare": "35%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "30M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercado-libre-colombia",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mercado Libre Colombia",
+    "tags": [
+      "ecommerce",
+      "amerika-selatan",
+      "kolombia"
+    ],
+    "teks": "Mercado Libre Colombia - Versi Mercado Libre di Kolombia. Didirikan 1999.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Kolombia",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "200K+",
+        "totalProducts": "15M+",
+        "marketShare": "30%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mercado-libre-peru",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mercado Libre Peru",
+    "tags": [
+      "ecommerce",
+      "amerika-selatan",
+      "peru"
+    ],
+    "teks": "Mercado Libre Peru - Versi Mercado Libre di Peru. Didirikan 1999.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Peru",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "40M",
+        "totalSellers": "150K+",
+        "totalProducts": "10M+",
+        "marketShare": "30%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "15M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-rozetka",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Rozetka",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "ukraina"
+    ],
+    "teks": "Rozetka - E-commerce terbesar Ukraina. Didirikan 2005. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2005,
+      "country": "Ukraina",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "1.5B USD",
+        "monthlyVisitors": "40M",
+        "totalSellers": "20K+",
+        "totalProducts": "10M+",
+        "marketShare": "25%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-allegro",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Allegro",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "polandia"
+    ],
+    "teks": "Allegro - E-commerce terbesar Polandia. Didirikan 1999. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1999,
+      "country": "Polandia",
+      "products": [
+        "Segala Produk"
+      ],
+      "stats": {
+        "annualRevenue": "5B USD",
+        "monthlyVisitors": "100M",
+        "totalSellers": "100K+",
+        "totalProducts": "30M+",
+        "marketShare": "35%",
+        "employees": "5K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-alza-cz",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Alza.cz",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "czechia"
+    ],
+    "teks": "Alza.cz - E-commerce elektronik Czechia. Didirikan 1994. Terbesar di Czechia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 1994,
+      "country": "Czechia",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "3B USD",
+        "monthlyVisitors": "40M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "30%",
+        "employees": "3K",
+        "countries": "5",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-emag",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "eMAG",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "hungaria"
+    ],
+    "teks": "eMAG - E-commerce terbesar Hungaria. Didirikan 2001. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2001,
+      "country": "Hungaria",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "10K+",
+        "totalProducts": "10M+",
+        "marketShare": "25%",
+        "employees": "2K",
+        "countries": "3",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-emag-romania",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "eMAG Romania",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "romania"
+    ],
+    "teks": "eMAG Romania - Versi eMAG di Romania. Didirikan 2001. Terbesar di Romania.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2001,
+      "country": "Romania",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "1.8B USD",
+        "monthlyVisitors": "25M",
+        "totalSellers": "8K+",
+        "totalProducts": "8M+",
+        "marketShare": "25%",
+        "employees": "1.5K",
+        "countries": "1",
+        "appDownloads": "8M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-skroutz",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Skroutz",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "yunani"
+    ],
+    "teks": "Skroutz - E-commerce terbesar Yunani. Didirikan 2005. Fokus elektronik & gadget.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2005,
+      "country": "Yunani",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "1B USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "5K+",
+        "totalProducts": "5M+",
+        "marketShare": "30%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bargaintown",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "BargainTown",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "irlandia"
+    ],
+    "teks": "BargainTown - E-commerce terbesar Irlandia. Didirikan 2000. Fashion & rumah tangga.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2000,
+      "country": "Irlandia",
+      "products": [
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "10M",
+        "totalSellers": "1K+",
+        "totalProducts": "3M+",
+        "marketShare": "15%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-galaxus",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Galaxus",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "swiss"
+    ],
+    "teks": "Galaxus - E-commerce terbesar Swiss. Didirikan 2007. Elektronik & rumah tangga.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2007,
+      "country": "Swiss",
+      "products": [
+        "Elektronik",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "3K+",
+        "totalProducts": "10M+",
+        "marketShare": "25%",
+        "employees": "1.5K",
+        "countries": "2",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-altex",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Altex",
+    "tags": [
+      "ecommerce",
+      "eropa",
+      "austria"
+    ],
+    "teks": "Altex - E-commerce terbesar Austria. Didirikan 2000. Elektronik & gadget.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2000,
+      "country": "Austria",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "1.2B USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "2K+",
+        "totalProducts": "5M+",
+        "marketShare": "20%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-noon-saudi",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Noon Saudi",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "saudi"
+    ],
+    "teks": "Noon Saudi - Versi Noon di Arab Saudi. Didirikan 2017. Terbesar di Saudi.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2017,
+      "country": "Arab Saudi",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "20K+",
+        "totalProducts": "15M+",
+        "marketShare": "30%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-xcite",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Xcite",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "kuwait"
+    ],
+    "teks": "Xcite - E-commerce terbesar Kuwait. Didirikan 2008. Elektronik & gadget.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2008,
+      "country": "Kuwait",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "10M",
+        "totalSellers": "1K+",
+        "totalProducts": "3M+",
+        "marketShare": "25%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-noon-qatar",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Noon Qatar",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "qatar"
+    ],
+    "teks": "Noon Qatar - Versi Noon di Qatar. Didirikan 2017. Terbesar di Qatar.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2017,
+      "country": "Qatar",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "300M USD",
+        "monthlyVisitors": "8M",
+        "totalSellers": "5K+",
+        "totalProducts": "5M+",
+        "marketShare": "25%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-bahrain-e-commerce",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Bahrain E-commerce",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "bahrain"
+    ],
+    "teks": "Bahrain E-commerce - E-commerce terbesar Bahrain. Didirikan 2015.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Bahrain",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "5M",
+        "totalSellers": "2K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-oman-e-commerce",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Oman E-commerce",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "oman"
+    ],
+    "teks": "Oman E-commerce - E-commerce terbesar Oman. Didirikan 2016.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2016,
+      "country": "Oman",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "4M",
+        "totalSellers": "1K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "300",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-mekarem",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Mekarem",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "yordania"
+    ],
+    "teks": "Mekarem - E-commerce terbesar Yordania. Didirikan 2010. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2010,
+      "country": "Yordania",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "6M",
+        "totalSellers": "2K+",
+        "totalProducts": "3M+",
+        "marketShare": "25%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "3M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-lebanon-e-commerce",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Lebanon E-commerce",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "lebanon"
+    ],
+    "teks": "Lebanon E-commerce - E-commerce terbesar Lebanon. Didirikan 2012.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Lebanon",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "5M",
+        "totalSellers": "1K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "300",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-iraq-e-commerce",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Iraq E-commerce",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "irak"
+    ],
+    "teks": "Iraq E-commerce - E-commerce terbesar Irak. Didirikan 2015.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Irak",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "3M",
+        "totalSellers": "1K+",
+        "totalProducts": "2M+",
+        "marketShare": "15%",
+        "employees": "200",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-digikala",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Digikala",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "iran"
+    ],
+    "teks": "Digikala - E-commerce terbesar Iran. Didirikan 2006. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2006,
+      "country": "Iran",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "50M",
+        "totalSellers": "50K+",
+        "totalProducts": "20M+",
+        "marketShare": "30%",
+        "employees": "3K",
+        "countries": "1",
+        "appDownloads": "20M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-zap",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Zap",
+    "tags": [
+      "ecommerce",
+      "asia-barat",
+      "israel"
+    ],
+    "teks": "Zap - E-commerce terbesar Israel. Didirikan 2000. Fokus elektronik & gadget.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2000,
+      "country": "Israel",
+      "products": [
+        "Elektronik",
+        "Gadget"
+      ],
+      "stats": {
+        "annualRevenue": "1B USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "5K+",
+        "totalProducts": "10M+",
+        "marketShare": "25%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jumia-maroc",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Jumia Maroc",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "maroko"
+    ],
+    "teks": "Jumia Maroc - Versi Jumia di Maroko. Didirikan 2012. Terbesar di Maroko.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Maroko",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "150M USD",
+        "monthlyVisitors": "10M",
+        "totalSellers": "5K+",
+        "totalProducts": "3M+",
+        "marketShare": "25%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "5M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jumia-tunis",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Jumia Tunis",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "tunisia"
+    ],
+    "teks": "Jumia Tunis - Versi Jumia di Tunisia. Didirikan 2012. Terbesar di Tunisia.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Tunisia",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "100M USD",
+        "monthlyVisitors": "8M",
+        "totalSellers": "3K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "300",
+        "countries": "1",
+        "appDownloads": "3M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jumia-algeria",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Jumia Algeria",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "algeria"
+    ],
+    "teks": "Jumia Algeria - Versi Jumia di Algeria. Didirikan 2012. Terbesar di Algeria.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Algeria",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "120M USD",
+        "monthlyVisitors": "9M",
+        "totalSellers": "4K+",
+        "totalProducts": "2.5M+",
+        "marketShare": "20%",
+        "employees": "400",
+        "countries": "1",
+        "appDownloads": "4M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jumia-senegal",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Jumia Senegal",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "senegal"
+    ],
+    "teks": "Jumia Senegal - Versi Jumia di Senegal. Didirikan 2012. Terbesar di Senegal.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Senegal",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "80M USD",
+        "monthlyVisitors": "6M",
+        "totalSellers": "2K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "200",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-jumia-ghana",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Jumia Ghana",
+    "tags": [
+      "ecommerce",
+      "afrika",
+      "ghana"
+    ],
+    "teks": "Jumia Ghana - Versi Jumia di Ghana. Didirikan 2012. Terbesar di Ghana.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2012,
+      "country": "Ghana",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "90M USD",
+        "monthlyVisitors": "7M",
+        "totalSellers": "3K+",
+        "totalProducts": "2M+",
+        "marketShare": "20%",
+        "employees": "300",
+        "countries": "1",
+        "appDownloads": "3M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-uzum",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Uzum",
+    "tags": [
+      "ecommerce",
+      "asia-tengah",
+      "uzbekistan"
+    ],
+    "teks": "Uzum - E-commerce terbesar Uzbekistan. Didirikan 2020. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2020,
+      "country": "Uzbekistan",
+      "products": [
+        "Elektronik",
+        "Fashion",
+        "Kebutuhan Rumah"
+      ],
+      "stats": {
+        "annualRevenue": "500M USD",
+        "monthlyVisitors": "20M",
+        "totalSellers": "10K+",
+        "totalProducts": "5M+",
+        "marketShare": "30%",
+        "employees": "1K",
+        "countries": "1",
+        "appDownloads": "10M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-kaspi",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Kaspi",
+    "tags": [
+      "ecommerce",
+      "asia-tengah",
+      "kazakhstan"
+    ],
+    "teks": "Kaspi - E-commerce terbesar Kazakhstan. Didirikan 2002. Marketplace general.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2002,
+      "country": "Kazakhstan",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "2B USD",
+        "monthlyVisitors": "30M",
+        "totalSellers": "20K+",
+        "totalProducts": "10M+",
+        "marketShare": "35%",
+        "employees": "2K",
+        "countries": "1",
+        "appDownloads": "15M+"
+      },
+      "status": "aktif"
+    }
+  },
+  {
+    "id": "marplace-azerbaijan-e-commerce",
+    "kategori": "marplace",
+    "wilayah": "ecommerce",
+    "nama": "Azerbaijan E-commerce",
+    "tags": [
+      "ecommerce",
+      "asia-tengah",
+      "azerbaijan"
+    ],
+    "teks": "Azerbaijan E-commerce - E-commerce terbesar Azerbaijan. Didirikan 2015.",
+    "meta": {
+      "type": "ecommerce",
+      "founded": 2015,
+      "country": "Azerbaijan",
+      "products": [
+        "Elektronik",
+        "Fashion"
+      ],
+      "stats": {
+        "annualRevenue": "200M USD",
+        "monthlyVisitors": "5M",
+        "totalSellers": "2K+",
+        "totalProducts": "3M+",
+        "marketShare": "20%",
+        "employees": "500",
+        "countries": "1",
+        "appDownloads": "2M+"
+      },
+      "status": "aktif"
+    }
+  }
+]
