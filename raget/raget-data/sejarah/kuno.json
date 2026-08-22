@@ -1,0 +1,142 @@
+[
+  {
+    "id": "sejarah-piramida-giza",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Piramida Giza",
+    "tags": [
+      "piramida",
+      "mesir",
+      "kuno"
+    ],
+    "teks": "Piramida Giza dibangun sekitar 2560 SM sebagai makam Firaun Khufu, salah satu dari Tujuh Keajaiban Dunia Kuno. Termasuk sejarah periode kuno, berlokasi di Mesir.",
+    "meta": {
+      "period": "kuno",
+      "year": "2560 SM",
+      "location": "Mesir",
+      "tags": [
+        "piramida",
+        "mesir",
+        "kuno"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-kekaisaran-romawi",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Kekaisaran Romawi",
+    "tags": [
+      "romawi",
+      "kekaisaran"
+    ],
+    "teks": "Kekaisaran Romawi berdiri sejak 27 SM dan menjadi salah satu peradaban paling berpengaruh dalam sejarah dunia. Termasuk sejarah periode kuno, berlokasi di Italia.",
+    "meta": {
+      "period": "kuno",
+      "year": "27 SM",
+      "location": "Italia",
+      "tags": [
+        "romawi",
+        "kekaisaran"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-peradaban-mesopotamia",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Peradaban Mesopotamia",
+    "tags": [
+      "mesopotamia",
+      "peradaban"
+    ],
+    "teks": "Peradaban Mesopotamia di antara Sungai Tigris dan Efrat dianggap sebagai tempat lahirnya tulisan dan kota pertama di dunia. Termasuk sejarah periode kuno, berlokasi di Irak.",
+    "meta": {
+      "period": "kuno",
+      "year": "~3500 SM",
+      "location": "Irak",
+      "tags": [
+        "mesopotamia",
+        "peradaban"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-tembok-besar-china",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Tembok Besar China",
+    "tags": [
+      "tembok besar",
+      "china"
+    ],
+    "teks": "Tembok Besar China mulai dibangun sekitar abad ke-7 SM untuk melindungi wilayah utara dari serangan luar. Termasuk sejarah periode kuno, berlokasi di China.",
+    "meta": {
+      "period": "kuno",
+      "year": "~700 SM",
+      "location": "China",
+      "tags": [
+        "tembok besar",
+        "china"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-peradaban-yunani-kuno",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Peradaban Yunani Kuno",
+    "tags": [
+      "yunani",
+      "filsafat"
+    ],
+    "teks": "Peradaban Yunani Kuno melahirkan filsafat, demokrasi, dan Olimpiade yang pengaruhnya bertahan hingga kini. Termasuk sejarah periode kuno, berlokasi di Yunani.",
+    "meta": {
+      "period": "kuno",
+      "year": "~800 SM",
+      "location": "Yunani",
+      "tags": [
+        "yunani",
+        "filsafat"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-kekaisaran-persia",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Kekaisaran Persia",
+    "tags": [
+      "persia",
+      "cyrus"
+    ],
+    "teks": "Kekaisaran Persia di bawah Cyrus Agung menjadi salah satu kekaisaran terbesar dunia kuno sekitar 550 SM. Termasuk sejarah periode kuno, berlokasi di Iran.",
+    "meta": {
+      "period": "kuno",
+      "year": "550 SM",
+      "location": "Iran",
+      "tags": [
+        "persia",
+        "cyrus"
+      ]
+    }
+  },
+  {
+    "id": "sejarah-peradaban-lembah-indus",
+    "kategori": "sejarah",
+    "wilayah": "kuno",
+    "nama": "Peradaban Lembah Indus",
+    "tags": [
+      "lembah indus"
+    ],
+    "teks": "Peradaban Lembah Indus berkembang sekitar 2500 SM dengan tata kota yang sudah terencana rapi. Termasuk sejarah periode kuno, berlokasi di Pakistan/India.",
+    "meta": {
+      "period": "kuno",
+      "year": "2500 SM",
+      "location": "Pakistan/India",
+      "tags": [
+        "lembah indus"
+      ]
+    }
+  }
+]
