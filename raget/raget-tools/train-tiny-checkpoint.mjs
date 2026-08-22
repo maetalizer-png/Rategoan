@@ -21,7 +21,7 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const CORPUS_FILE = path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'raget_own_corpus.jsonl');
 const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'neural');
 const OUT_FILE = path.join(OUT_DIR, 'raget-neural-tiny.safetensors');
-const REPORT_FILE = path.join(__dirname, 'training-report-tiny.json');
+const REPORT_FILE = path.join(ROOT, 'raget', 'raget-devlog', 'neural', 'training-report-tiny.json');
 
 const BUDGET_MINUTES = Number(process.argv[2]) || 40;
 const HELD_OUT_FRACTION = 10; // 1 record dari tiap 10 masuk held-out
