@@ -9,7 +9,7 @@
 // langsung lewat WebFetch, keduanya balas EGRESS_BLOCKED - bukan asumsi).
 // Karena itu skrip ini dirancang sebagai TITIK PENERIMAAN: siapa pun
 // (pengguna, atau sesi kerja lain dengan akses jaringan lebih luas) bisa
-// menaruh teks sumber di raget-corpus/sumber-eksternal/, dan skrip ini
+// menaruh teks sumber di raget-data/jsonl/sumber-eksternal/, dan skrip ini
 // yang memvalidasi + merender jadi JSONL dengan atribusi wajib - supaya
 // tidak ada teks eksternal yang masuk korpus tanpa sumber & lisensi yang
 // jelas (prinsip kejujuran data, sama seperti keputusan filter di
@@ -23,7 +23,7 @@
 //    file yang metanya tidak lengkap, supaya tidak ada konten tanpa
 //    lisensi/atribusi yang jelas ikut ke korpus.
 // 2. Jalankan: node raget/raget-tools/tambah-korpus-eksternal.mjs
-// 3. Hasil ditulis ke raget-corpus/raget_external_corpus.jsonl - file
+// 3. Hasil ditulis ke raget-data/jsonl/raget_external_corpus.jsonl - file
 //    TERPISAH dari raget_own_corpus.jsonl (konten Rategoan sendiri),
 //    supaya batas lisensi CC-BY-SA/domain-publik tetap jelas kelihatan,
 //    tidak tercampur diam-diam dengan data yang ditulis Rategoan sendiri.
@@ -38,7 +38,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const CORPUS_DIR = path.join(ROOT, 'raget', 'raget-corpus');
+const CORPUS_DIR = path.join(ROOT, 'raget', 'raget-data', 'jsonl');
 const SRC_DIR = path.join(CORPUS_DIR, 'sumber-eksternal');
 const OUT_FILE = path.join(CORPUS_DIR, 'raget_external_corpus.jsonl');
 

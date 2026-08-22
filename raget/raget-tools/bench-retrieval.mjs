@@ -6,7 +6,7 @@
 // (grup country, threshold 0.3) - bukan strawman benchmark terpisah.
 //
 // Gold query DIBANGKITKAN dari field metadata yang sudah ada di
-// raget-data/negara/*.json (ibu kota, populasi, dst - hasil migrasi Fase B,
+// raget-data/json/negara/*.json (ibu kota, populasi, dst - hasil migrasi Fase B,
 // lihat migrate-country-domain.mjs) - bukan dikarang; ground truth-nya
 // adalah metadata.name negara yang jawabannya berasal dari situ. Domain
 // country dipilih karena field metadata-nya paling lengkap & konsisten di
@@ -27,7 +27,7 @@ import { retrieval } from '../raget-retrieval/retrieve.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const NEGARA_DIR = path.join(ROOT, 'raget', 'raget-data', 'negara');
+const NEGARA_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'negara');
 const REPORT_FILE = path.join(__dirname, 'retrieval-bench-report.json');
 
 function loadAllCountries() {
@@ -97,7 +97,7 @@ function evaluate(queries, corpus) {
 }
 
 async function main() {
-  console.log('Memuat domain country dari raget-data/negara...');
+  console.log('Memuat domain country dari raget-data/json/negara...');
   const countries = loadAllCountries();
   console.log('Entri country:', countries.length);
 

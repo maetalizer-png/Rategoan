@@ -7,7 +7,7 @@ const TIME_GREETING_RE = /^(selamat|met)?\s*(pagi|siang|sore|malam)\b|^good\s*(m
 const PLAIN_GREETING_RE = /^(halo+|hai+|hey+|hi)\b|^assalamu.?alaikum\b|^permisi\b/i;
 const QUESTION_WORDS = ['apa', 'siapa', 'kapan', 'dimana', 'di mana', 'mengapa', 'kenapa', 'bagaimana', 'berapa', 'gimana'];
 
-// Template teks sapaan/smalltalk dipindah ke raget-data/sapaan/sapaan.json
+// Template teks sapaan/smalltalk dipindah ke raget-data/json/sapaan/sapaan.json
 // (skema tunggal Fase B, lihat roadmap vNext §3) - modul ini cuma menyimpan
 // LOGIKA (regex pemicu smalltalk, tidak valid sebagai JSON) dan memuat teks
 // via loadSapaan() lazy-cache, bukan literal array lagi. Dua-tiga baris
@@ -44,7 +44,7 @@ function indexSapaan(raw) {
 async function loadSapaan() {
   if (sapaanCache) return sapaanCache;
   try {
-    const res = await fetch(new URL('../raget-data/sapaan/sapaan.json', import.meta.url));
+    const res = await fetch(new URL('../raget-data/json/sapaan/sapaan.json', import.meta.url));
     const raw = res.ok ? await res.json() : [];
     sapaanCache = indexSapaan(raw);
   } catch (e) {

@@ -4,7 +4,7 @@ import { datariesBridge } from './dataries-bridge.js';
 // ---------- INTERNATIONAL DAYS DATABASE ----------
 // Domain migrasi skema data standar Ronde vNext Fase B (lihat roadmap §3,
 // dan tokoh-store.js/kuliner-store.js untuk 2 domain sebelumnya): 158 entri
-// kini murni JSON di raget-data/hari-internasional/hari-internasional.json
+// kini murni JSON di raget-data/json/hari-internasional/hari-internasional.json
 // (skema {id, kategori, wilayah, nama, tags, teks, meta}), wilayah sengaja
 // null (observansi global, bukan spesifik geografis). Riwayat migrasi ada
 // di raget-tools/migrate-hari-domain.mjs.
@@ -36,7 +36,7 @@ let hariCache = null;
 async function loadHari() {
   if (hariCache) return hariCache;
   try {
-    const res = await fetch(new URL('../raget-data/hari-internasional/hari-internasional.json', import.meta.url));
+    const res = await fetch(new URL('../raget-data/json/hari-internasional/hari-internasional.json', import.meta.url));
     const raw = res.ok ? await res.json() : [];
     hariCache = raw.map((e) => ({ date: e.meta.date, name: e.nama }));
   } catch (e) {

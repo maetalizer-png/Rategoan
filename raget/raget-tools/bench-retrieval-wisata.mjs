@@ -4,7 +4,7 @@
 // similarity), korpus dibangun sama seperti dataries-bridge.js#datariesFallback()
 // (grup wisata, threshold 0.3).
 //
-// Gold query dibangkitkan dari field metadata di raget-data/wisata/*.json:
+// Gold query dibangkitkan dari field metadata di raget-data/json/wisata/*.json:
 // - template 'nama': "apa itu {name}" - semua 87 nama entri UNIK, tidak ambigu.
 // - template 'kota': "tempat wisata terkenal di kota {city}" - HANYA untuk
 //   entri yang field city-nya unik (81/87 - 6 entri kota bentrok seperti
@@ -24,7 +24,7 @@ import { retrieval } from '../raget-retrieval/retrieve.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const WISATA_DIR = path.join(ROOT, 'raget', 'raget-data', 'wisata');
+const WISATA_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'wisata');
 const REPORT_FILE = path.join(__dirname, 'retrieval-bench-wisata-report.json');
 
 function loadAllWisata() {
@@ -96,7 +96,7 @@ function evaluate(queries, corpus) {
 }
 
 async function main() {
-  console.log('Memuat domain wisata dari raget-data/wisata...');
+  console.log('Memuat domain wisata dari raget-data/json/wisata...');
   const items = loadAllWisata();
   console.log('Entri wisata:', items.length);
 

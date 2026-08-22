@@ -1,68 +1,111 @@
-# Struktur Data: Dua Lapisan
+# Struktur Data
 
-Rategoan menyimpan pengetahuan dalam dua lapisan yang sengaja dipisah,
-dengan tanggung jawab berbeda: `raget/raget-dataset/` untuk pengetahuan
-teks polos, dan `raget/raget-dataries/` untuk data terstruktur yang bisa
-dicari/difilter secara programatis.
+Rategoan memisahkan data ke dua akar berdasarkan **tentang apa** datanya,
+lalu di dalam tiap akar memisahkan lagi berdasarkan **bentuk file**:
 
-## Tabel Dua Lapisan
+- **`raget/raget-data/`** — data dunia: pengetahuan tentang negara, kota,
+  bahasa, wisata, sejarah, sains, dan domain-domain lain yang Rategoan bisa
+  jawab. Tidak spesifik ke Rategoan sendiri.
+- **`raget/raget-devlog/`** — data tentang Rategoan sendiri: kepribadian
+  (`persona.json`), contoh gaya balasan (`fewshot.json`), aturan format
+  jawaban, dan riwayat pengembangan proyek (devlog).
 
-| | `raget-dataset/` | `raget-dataries/` |
-|---|---|---|
-| Isi | Teks siap tampil, tanpa field pencarian | Teks siap tampil + `metadata` terstruktur |
-| Format | `.json` (array objek) atau `.jsonl` (satu objek per baris) | `.js` (array objek, di-`import()` lazy per region) |
-| Dipakai lewat | `memoryIndex.search()` — pencarian TF-IDF umum | `dataries.loadRegion(group, id)` — query terarah per field |
-| Contoh isi | Pengetahuan umum, FAQ, resep, produktivitas | Negara, kota, bahasa (dengan sapaan), tokoh, wisata |
-| Kapan dipakai | Fallback pengetahuan umum saat tidak ada match terstruktur | Jawaban faktual presisi (ibukota, populasi, sapaan bahasa, dst) |
+Di dalam tiap akar:
 
-Kedua lapisan bisa memuat topik yang sama dari sudut berbeda — lihat
-contoh `languages` di bawah.
+| Subfolder | Isi |
+|---|---|
+| `json/` | Data terstruktur, satu file/folder per domain |
+| `jsonl/` | Data baris-per-baris (korpus, daftar datar) |
+| `neural/` | Artefak biner untuk mesin neural eksperimental (checkpoint `.safetensors`, laporan training) |
 
-## Aturan Per-Entri
+`raget-data/neural/` menyimpan bobot model; `raget-devlog/neural/` menyimpan
+laporan/log dari eksperimen training itu (`training-report.json`,
+`compute-budget-report.json`, dst) — beda isi, sama-sama "seputar neural".
 
-**Lapisan `raget-dataset/` (teks polos):**
+`raget-devlog/sejarah/` (narasi historis per-ronde) dan `raget-devlog/index.js`
+(agregator devlog) tetap di akar `raget-devlog/`, tidak ikut masuk
+`json/`/`jsonl/`/`neural/` — keduanya bagian dari mesin devlog itu sendiri,
+bukan data mentah.
+
+`raget/raget-tools/bench.json` (kasus uji regresi rule engine) hidup di
+`raget-tools/` bersama skrip yang memakainya (`run-bench.mjs`), bukan di
+`raget-data/` — isinya soal tes, bukan pengetahuan.
+
+## Dua Mekanisme Baca Data Dunia
+
+Domain di `raget-data/json/` dibaca lewat dua jalur berbeda tergantung
+kapan domain itu ditulis:
+
+**1. Lewat `raget-dataries/index.js` (`dataries.loadRegion(group, id)`)** —
+dipakai domain hasil migrasi Fase B: `negara`, `kota`, `bahasa`, `etika`,
+`minuman`, `wisata`, `sejarah`, `makanan`, `alam`, `sains`, `olahraga`.
+`index.js` mendaftarkan tiap domain ini di `JSON_MIGRATED_GROUPS`, lalu
+`loadRegionFromJson()` melakukan `fetch()` ke
+`raget-data/json/<domain>/<id>.json` dan membentuk ulang tiap entri jadi
+bentuk lama `{text, metadata}` — supaya `dataries-bridge.js` dan seluruh
+pipeline resolusi entitas tidak perlu tahu format aslinya berubah.
+
+**2. Loader tipis khusus per domain** — dipakai domain yang punya query
+lebih spesifik dari pola generik dataries: `tokoh-store.js` (fetch
+`raget-data/json/tokoh/tokoh.json`), `kuliner-store.js` (fetch per-region
+`raget-data/json/kuliner/<region>.json`), `world-context.js` (fetch
+`raget-data/json/hari-internasional/hari-internasional.json`), dan
+`llm-engine.js` (fetch `raget-data/json/sapaan/sapaan.json`). Masing-masing
+loader ini cache hasil fetch dan expose fungsi query sendiri (`find*/try*`),
+bukan lewat `dataries.loadRegion()`.
+
+Skema unified di balik `raget-data/json/*/*.json` sama untuk kedua jalur:
+
 ```json
-{ "text": "Kalimat pengetahuan siap tampil, satu fakta per entri." }
+{ "id": "...", "kategori": "...", "wilayah": "...", "nama": "...", "tags": [], "teks": "...", "meta": { } }
 ```
-- Tidak ada field metadata tambahan — kalau butuh field terstruktur, taruh
-  di `raget-dataries/`, bukan di sini.
-- File `.jsonl`: satu objek JSON valid per baris, tanpa koma di akhir baris
-  dan tanpa array pembungkus.
-- File `.json` (mis. `knowledge/*.json`): array objek `{ "title", "text" }`
-  — `title` opsional, dipakai untuk pencarian judul.
 
-**Lapisan `raget-dataries/` (terstruktur):**
-```js
-{ text: 'Kalimat deskripsi siap tampil...', metadata: { /* field per folder */ } }
-```
-- Skema `metadata` lengkap per folder ada di
-  [`docs/DATARIES-SCHEMA.md`](DATARIES-SCHEMA.md).
-- Setiap folder region terdaftar di `raget-dataries/index.js` lewat
-  `REGIONS` dan dimuat lazy — folder baru wajib didaftarkan di situ.
+`teks` adalah kalimat siap tampil; `meta` menyimpan field spesifik domain
+(mis. `capital`/`population`/`currency` untuk negara, `topic` untuk
+sains/olahraga). Skrip migrasi (`raget-tools/migrate-*-domain.mjs`) yang
+menghasilkan file-file ini sudah dijalankan dan diarsipkan — jangan
+dijalankan ulang kalau sumber JS aslinya sudah dihapus.
 
-## Contoh: `languages`
+## `raget-dataries/` yang Belum Dimigrasi
 
-Data bahasa hidup di kedua lapisan sekaligus, dengan peran berbeda:
+Sebagian domain di `raget-dataries/` masih berupa file `.js` literal (belum
+masuk skema unified): `ekonomi`, `lingo`, `marplace`, `paluang`, `penemuan`,
+`seni-budaya`, plus folder `sapaan/` dan `tokoh/` legacy (entri ringkas
+terpisah dari `raget-data/json/sapaan|tokoh`, dijangkau lewat
+`trySiapaTokoh()` di `bridge-extras.js` — bukan duplikasi, tapi pendalaman
+sudut pandang lain). Domain-domain ini dimuat lewat jalur `.js` asli
+(`import()` lazy per region, didaftarkan di `REGIONS`), bukan
+`loadRegionFromJson()`.
 
-- **`raget-dataries/languages/`** — entri per bahasa dengan metadata penuh
-  (`speakers`, `script`, `family`, `officialIn[]`, `greetings{halo,pagi,terimakasih}`).
-  Ini yang dipakai router intent untuk menjawab pertanyaan presisi seperti
-  "apa bahasa di Jepang" atau "halo dalam bahasa Arab".
-- **`raget-dataset/languages.jsonl`** — versi teks polos dari entri yang
-  sama (130 baris), tanpa metadata, dipakai sebagai cadangan pencarian umum
-  lewat `memoryIndex.search()` bila router intent tidak menemukan match
-  terstruktur.
-- **`raget-dataries/lingo/`** — entri bahasa per negara dengan metadata
-  lebih sederhana (`code`, `speakers`, `family`, `script`, `status`),
-  cakupan region ASEAN-sentris; pelengkap `languages/` untuk sudut pandang
-  per negara.
+## `raget-data/json/knowledge/`
+
+Pengetahuan umum berformat factoid sederhana (`{q,a}`, `{subject,answer}`,
+atau `{title,text}`) — dipakai `memoryIndex.search()` (retrieval TF-IDF)
+sebagai fallback saat tidak ada match terstruktur dari dataries. Dulu ada
+di `raget-dataset/knowledge/`, sekarang di `raget-data/json/knowledge/`
+sebagai saudara folder-folder domain lainnya (bukan di bawah domain
+manapun — `dataries-ke-korpus.mjs` sengaja mengecualikannya dari loop
+domain unified karena bentuknya beda).
+
+## `raget-data/jsonl/`
+
+- **`raget_own_corpus.jsonl`** — korpus latih milik Rategoan sendiri,
+  dihasilkan `raget-tools/dataries-ke-korpus.mjs` dari gabungan
+  `raget-devlog/json/{persona,fewshot}` + `raget-data/json/knowledge/*` +
+  `raget-data/json/*/*.json` (domain unified). Dipakai training neural
+  eksperimental, bukan rule engine.
+- **`languages.jsonl`** — versi teks polos entri bahasa, dipakai sebagai
+  cadangan pencarian umum lewat `memoryIndex.search()`.
+- **`sumber-eksternal/`** — titik penerimaan teks korpus eksternal
+  (lihat `raget-tools/tambah-korpus-eksternal.mjs`); kosong sampai ada
+  sumber yang divalidasi dan ditaruh di sini.
 
 ## Aturan Kebersihan Data
 
 - **Tanpa komentar** di file data (`.js`/`.json`/`.jsonl`) — komentar
   banner dekoratif (`// ====`) tidak menambah nilai pencarian dan hanya
   menambah ukuran file. Penjelasan tentang suatu entri harus masuk ke
-  `text` atau `metadata`, bukan komentar kode.
+  `teks`/`text` atau `meta`/`metadata`, bukan komentar kode.
 - **Tanpa emoji** di file data — termasuk emoji bendera negara yang
   sebelumnya dipakai sebagai penanda bagian. Emoji pada balasan chat
   (dibatasi maksimal satu lewat `quality.guardEmoji()`) adalah keputusan

@@ -89,10 +89,11 @@ raget/                            induk seluruh otak AI Raget
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian TF-IDF satu pintu lintas sumber
   raget-devlog/                   riwayat pengembangan proyek (dipakai balasan chat)
-  raget-dataset/                  persona, few-shot, bench, basis pengetahuan umum
-  raget-dataries/                 basis data terstruktur (negara, kota, bahasa, tokoh, dst)
-  raget-data/                     data domain dalam skema JSON tunggal (migrasi bertahap, lihat di bawah)
-  raget-tools/                    skrip verifikasi: bench runner, pengukuran KV, devlog, migrasi data
+                                     json/ persona,fewshot,metadata · jsonl/ arsitektur,bug,keputusan,ux · neural/ laporan training · sejarah/, index.js
+  raget-dataries/                 loader tipis untuk data terstruktur (negara, kota, bahasa, tokoh, dst)
+  raget-data/                     data dunia dalam skema JSON tunggal
+                                     json/ domain+knowledge/ · jsonl/ korpus+languages.jsonl · neural/ checkpoint .safetensors
+  raget-tools/                    skrip verifikasi: bench runner (+bench.json), pengukuran KV, devlog, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
 travel/                           Jalanin — PWA turunan berdiri sendiri
 docs/                             panduan kustomisasi & lisensi (starter kit)
@@ -131,30 +132,28 @@ masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 
 ## Basis Data
 
-`raget/raget-dataries/` berisi lebih dari 1.000 entri terstruktur lintas kategori: negara,
+`raget/raget-data/json/` berisi lebih dari 1.000 entri terstruktur lintas kategori: negara,
 kota, bahasa, tokoh, sains, sejarah, kuliner, olahraga, etika budaya per
 negara, dan lainnya — dapat diperluas atau diganti total tanpa menyentuh kode.
-`raget/raget-dataset/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
-yang dimuat lewat pencarian satu-pintu.
+`raget/raget-data/json/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
+yang dimuat lewat pencarian satu-pintu. Lihat [`docs/DATA-STRUCTURE.md`](docs/DATA-STRUCTURE.md)
+untuk peta lengkap struktur data (dua akar `raget-data/`/`raget-devlog/`, tiga subfolder
+`json/`/`jsonl/`/`neural/`, dan dua jalur baca yang masih hidup berdampingan).
 
-**Migrasi skema data (vNext Fase B, sedang berjalan)**: domain data yang tadinya array
-literal di dalam file `.js` (mencampur data dan logika) dipindah bertahap ke satu skema
-JSON standar (`{id, kategori, wilayah, nama, tags, teks, meta}`) di `raget/raget-data/`,
-dengan `*-store.js`/`llm-engine.js` yang tersisa hanya jadi loader tipis (fetch + fungsi
-query, nol data literal). Domain yang sudah dimigrasi: **tokoh** (`raget-data/tokoh/tokoh.json`,
-236 entri), **kuliner** (`raget-data/kuliner/*.json`, 143 entri di 6 file regional), **hari
-internasional** (`raget-data/hari-internasional/hari-internasional.json`, 158 entri), dan
-**sapaan** (`raget-data/sapaan/sapaan.json`, 11 entri — templat sapaan/smalltalk yang tadinya
-konstanta literal di `llm-engine.js`; regex pemicunya tetap di JS, cuma teks balasannya yang
-jadi data) — pola migrasinya didokumentasikan di `raget/raget-tools/migrate-*-domain.mjs`
-untuk dipakai ulang di domain berikutnya.
+**Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
+`.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
+(`{id, kategori, wilayah, nama, tags, teks, meta}`) di `raget/raget-data/json/`, dengan
+`raget-dataries/index.js`/`*-store.js`/`llm-engine.js` yang tersisa hanya jadi loader tipis
+(fetch + fungsi query, nol data literal). 15 domain sudah dimigrasi: tokoh, kuliner, hari
+internasional, sapaan, negara, kota, bahasa, etika, minuman, wisata, sejarah, makanan, alam,
+sains, dan olahraga — pola migrasinya didokumentasikan di
+`raget/raget-tools/migrate-*-domain.mjs` untuk dipakai ulang di domain berikutnya.
 
 **Korpus milik sendiri**: `raget/raget-tools/dataries-ke-korpus.mjs` merender seluruh data
-di atas (plus `raget-dataset/knowledge/*`, `fewshot.json`, `persona.json`) jadi
-`raget/raget-corpus/raget_own_corpus.jsonl` — 2.599 baris (123 dialog, 2.465 fakta, 11
-identitas), ±65.500 token perkiraan kasar. `bench.json` dan `metadata/answer-rules.json`
-sengaja dilewati (alasannya di komentar header skrip) supaya korpus tidak berisi data latih
-yang dikarang.
+di atas (plus `raget-data/json/knowledge/*`, `raget-devlog/json/{fewshot,persona}.json`) jadi
+`raget/raget-data/jsonl/raget_own_corpus.jsonl` — 3.543 baris, ±104.728 token perkiraan kasar.
+`raget-tools/bench.json` dan `raget-devlog/json/metadata/answer-rules.json` sengaja dilewati
+(alasannya di komentar header skrip) supaya korpus tidak berisi data latih yang dikarang.
 
 ## Raget Neural (Eksperimental)
 
@@ -228,8 +227,8 @@ Untuk Jalanin, jalankan server yang sama lalu buka `http://localhost:8099/travel
 Rategoan dirancang agar bisa diubah jadi produk lain hanya lewat file data,
 tanpa menyentuh kode:
 
-- **Identitas & gaya bicara** → `raget/raget-dataset/persona.json`
-- **Basis pengetahuan** → `raget/raget-dataries/` dan `raget/raget-dataset/knowledge/`
+- **Identitas & gaya bicara** → `raget/raget-devlog/json/persona.json`
+- **Basis pengetahuan** → `raget/raget-data/json/` (domain terstruktur) dan `raget/raget-data/json/knowledge/`
 
 Panduan lengkap kustomisasi ada di [`docs/STARTER-KIT.md`](docs/STARTER-KIT.md).
 Ketentuan penggunaan dan lisensi ada di [`docs/LICENSE-KIT.md`](docs/LICENSE-KIT.md).

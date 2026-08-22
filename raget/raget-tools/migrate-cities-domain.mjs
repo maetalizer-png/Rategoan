@@ -1,6 +1,6 @@
 // Migrasi domain #6 (Fase B vNext, §3 roadmap): pindahkan KOTA dari 20 file
 // array literal di raget-dataries/cities/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/kota/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/kota/.
 // Pola sama seperti migrate-country-domain.mjs (lihat komentarnya untuk
 // alasan desain loader tipis bersama di raget-dataries/index.js).
 //
@@ -21,7 +21,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'kota');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'kota');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

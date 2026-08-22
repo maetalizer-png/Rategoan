@@ -1,6 +1,6 @@
 // Migrasi domain #7 (Fase B vNext, §3 roadmap): pindahkan BAHASA dari 20
 // file array literal di raget-dataries/languages/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/bahasa/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/bahasa/.
 // Pola sama seperti migrate-country-domain.mjs.
 //
 // SUDAH DIJALANKAN - arsip/template, bukan untuk dijalankan ulang setelah
@@ -15,7 +15,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'bahasa');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'bahasa');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

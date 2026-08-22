@@ -1,6 +1,6 @@
 // Migrasi domain #5 (Fase B vNext, §3 roadmap): pindahkan NEGARA dari 20
 // file array literal di raget-dataries/country/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/negara/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/negara/.
 //
 // BEDA dari migrasi tokoh/kuliner/hari sebelumnya: domain ini punya field
 // metadata jauh lebih kaya (30+ field: capital, population, ethnicGroups,
@@ -33,7 +33,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'negara');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'negara');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 

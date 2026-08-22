@@ -1,7 +1,7 @@
 // Migrasi domain WISATA (domain terkaya berikutnya - 87 entri, 6 region,
 // field metadata terbanyak: region/country/name/city/type/unesco/tags) dari
 // file array literal di raget-dataries/wisata/*.js ke skema JSON tunggal
-// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/wisata/.
+// {id, kategori, wilayah, nama, tags, teks, meta} di raget-data/json/wisata/.
 // Pola sama seperti migrate-minuman-domain.mjs (allIds GLOBAL lintas region
 // buat jaga-jaga nama tempat wisata yang sama muncul di region berbeda).
 //
@@ -17,7 +17,7 @@ import { REGIONS, dataries } from '../raget-dataries/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
-const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'wisata');
+const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'json', 'wisata');
 
 const DIACRITICS_RE = new RegExp('[\\u0300-\\u036f]', 'g');
 
