@@ -1,0 +1,76 @@
+[
+  {
+    "id": "ekonomi-minyak-bumi",
+    "kategori": "ekonomi",
+    "wilayah": "komoditas",
+    "nama": "Minyak Bumi",
+    "tags": [
+      "minyak bumi",
+      "opec"
+    ],
+    "teks": "Minyak Bumi — komoditas energi paling diperdagangkan di dunia, harga globalnya dipengaruhi OPEC. Termasuk kategori ekonomi energi.",
+    "meta": {
+      "type": "energi",
+      "value": "global"
+    }
+  },
+  {
+    "id": "ekonomi-emas",
+    "kategori": "ekonomi",
+    "wilayah": "komoditas",
+    "nama": "Emas",
+    "tags": [
+      "emas",
+      "safe haven"
+    ],
+    "teks": "Emas — logam mulia yang dianggap aset lindung nilai (safe haven) saat kondisi ekonomi tidak stabil. Termasuk kategori ekonomi logam mulia.",
+    "meta": {
+      "type": "logam mulia",
+      "value": "global"
+    }
+  },
+  {
+    "id": "ekonomi-kelapa-sawit",
+    "kategori": "ekonomi",
+    "wilayah": "komoditas",
+    "nama": "Kelapa Sawit",
+    "tags": [
+      "kelapa sawit",
+      "cpo"
+    ],
+    "teks": "Kelapa Sawit — komoditas ekspor unggulan Indonesia dan Malaysia, bahan baku minyak goreng dan biodiesel. Termasuk kategori ekonomi pertanian.",
+    "meta": {
+      "type": "pertanian",
+      "value": "Indonesia & Malaysia"
+    }
+  },
+  {
+    "id": "ekonomi-kopi",
+    "kategori": "ekonomi",
+    "wilayah": "komoditas",
+    "nama": "Kopi",
+    "tags": [
+      "kopi"
+    ],
+    "teks": "Kopi — komoditas pertanian yang diperdagangkan luas, produsen utama termasuk Brasil, Vietnam, dan Indonesia. Termasuk kategori ekonomi pertanian.",
+    "meta": {
+      "type": "pertanian",
+      "value": "global"
+    }
+  },
+  {
+    "id": "ekonomi-nikel",
+    "kategori": "ekonomi",
+    "wilayah": "komoditas",
+    "nama": "Nikel",
+    "tags": [
+      "nikel",
+      "baterai"
+    ],
+    "teks": "Nikel — logam penting untuk baterai kendaraan listrik, Indonesia menjadi produsen nikel terbesar dunia. Termasuk kategori ekonomi logam.",
+    "meta": {
+      "type": "logam",
+      "value": "Indonesia"
+    }
+  }
+]
