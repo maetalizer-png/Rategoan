@@ -51,11 +51,12 @@ function getInvalidIdMask(vocab, vocabSize) {
     validIdCache.set(vocab, invalidIds);
     return invalidIds;
 }
-function maskSpecialTokens(logits, vocab) {
+function maskSpecialTokens(logits, vocab, suppressEos) {
     const masked = logits.slice();
     if (typeof vocab.unkId === 'number') masked[vocab.unkId] = -Infinity;
     if (typeof vocab.padId === 'number') masked[vocab.padId] = -Infinity;
     if (typeof vocab.bosId === 'number') masked[vocab.bosId] = -Infinity;
+    if (suppressEos && typeof vocab.eosId === 'number') masked[vocab.eosId] = -Infinity;
     const invalidIds = getInvalidIdMask(vocab, logits.length);
     for (let i = 0; i < invalidIds.length; i++) {
         masked[invalidIds[i]] = -Infinity;
@@ -97,6 +98,7 @@ function isStopped(options) {
 async function generate(model, promptText, options) {
     options = options || {};
     const maxNewTokens = Number.isInteger(options.maxNewTokens) ? options.maxNewTokens : model.config.runtime.maxNewTokens;
+    const minNewTokens = Number.isInteger(options.minNewTokens) ? options.minNewTokens : (model.config.runtime.minNewTokens || 0);
     const temperature = typeof options.temperature === 'number' ? options.temperature : model.config.runtime.temperature;
     const greedy = typeof options.greedy === 'boolean' ? options.greedy : model.config.runtime.greedy;
     const topP = typeof options.topP === 'number' ? options.topP : model.config.runtime.topP;
@@ -120,7 +122,7 @@ async function generate(model, promptText, options) {
             break;
         }
         const logits = LLMInference.getNextTokenLogits(ids, model, model.config.model);
-        const nextId = sampleNextToken(maskSpecialTokens(logits, model.vocab), temperature, greedy, {
+        const nextId = sampleNextToken(maskSpecialTokens(logits, model.vocab, generatedIds.length < minNewTokens), temperature, greedy, {
             topP: topP,
             repetitionPenalty: repetitionPenalty,
             recentTokenIds: generatedIds.slice(-64)
@@ -149,6 +151,7 @@ async function generate(model, promptText, options) {
 async function generateCached(model, promptText, options) {
     options = options || {};
     const maxNewTokens = Number.isInteger(options.maxNewTokens) ? options.maxNewTokens : model.config.runtime.maxNewTokens;
+    const minNewTokens = Number.isInteger(options.minNewTokens) ? options.minNewTokens : (model.config.runtime.minNewTokens || 0);
     const temperature = typeof options.temperature === 'number' ? options.temperature : model.config.runtime.temperature;
     const greedy = typeof options.greedy === 'boolean' ? options.greedy : model.config.runtime.greedy;
     const topP = typeof options.topP === 'number' ? options.topP : model.config.runtime.topP;
@@ -186,7 +189,7 @@ async function generateCached(model, promptText, options) {
             break;
         }
         const logits = result.logits[result.logits.length - 1];
-        const nextId = sampleNextToken(maskSpecialTokens(logits, model.vocab), temperature, greedy, {
+        const nextId = sampleNextToken(maskSpecialTokens(logits, model.vocab, generatedIds.length < minNewTokens), temperature, greedy, {
             topP: topP,
             repetitionPenalty: repetitionPenalty,
             recentTokenIds: generatedIds.slice(-64)

@@ -72,7 +72,19 @@ const LARGE = Object.freeze({
     initStd: 0.02
 });
 
-const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL });
+const MASSIVE50M = Object.freeze({
+    name: 'massive50m',
+    vocabSize: 30368,
+    dModel: 512,
+    nLayers: 6,
+    nHeads: 8,
+    dFF: 2048,
+    maxContextLength: 512,
+    dropoutRate: 0.1,
+    initStd: 0.02
+});
+
+const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL, massive50m: MASSIVE50M });
 
 const BACKENDS = Object.freeze({
     CPU_JS: 'cpu-js',  
@@ -84,11 +96,12 @@ const DEFAULT_RUNTIME = Object.freeze({
     precision: 'f32',
     seed: 42,
     logLevel: 'warn',
-    maxNewTokens: 128,       
-    
-    
-    
-    
+    maxNewTokens: 128,
+    minNewTokens: 8,
+
+
+
+
     temperature: 0.4,
     topP: 0.88,
     repetitionPenalty: 1.15,
