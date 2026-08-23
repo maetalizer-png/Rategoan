@@ -1,0 +1,98 @@
+[
+  {
+    "id": "penemuan-bola-lampu-pijar",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Bola Lampu Pijar",
+    "tags": [
+      "bola lampu",
+      "edison"
+    ],
+    "teks": "Bola lampu pijar ditemukan Thomas Alva Edison pada 1879, membuka era penerangan listrik massal. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Thomas Alva Edison",
+      "year": "1879",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-telepon",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Telepon",
+    "tags": [
+      "telepon",
+      "bell"
+    ],
+    "teks": "Telepon ditemukan Alexander Graham Bell pada 1876, membuka era komunikasi suara jarak jauh. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Alexander Graham Bell",
+      "year": "1876",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-world-wide-web",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "World Wide Web",
+    "tags": [
+      "world wide web",
+      "internet"
+    ],
+    "teks": "World Wide Web (WWW) ditemukan Tim Berners-Lee pada 1989, fondasi internet modern yang kita pakai. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Tim Berners-Lee",
+      "year": "1989",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-pesawat-terbang",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Pesawat Terbang",
+    "tags": [
+      "pesawat",
+      "wright brothers"
+    ],
+    "teks": "Pesawat terbang bertenaga pertama diciptakan Wright bersaudara pada 1903 di Kitty Hawk, Amerika Serikat. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Wright Bersaudara",
+      "year": "1903",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-radio",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Radio",
+    "tags": [
+      "radio",
+      "marconi"
+    ],
+    "teks": "Radio ditemukan Guglielmo Marconi pada 1895, memungkinkan komunikasi nirkabel jarak jauh. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Guglielmo Marconi",
+      "year": "1895",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-telepon-genggam",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Telepon Genggam",
+    "tags": [
+      "handphone",
+      "martin cooper"
+    ],
+    "teks": "Telepon genggam pertama diciptakan Martin Cooper dari Motorola pada 1973. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Martin Cooper",
+      "year": "1973",
+      "field": "teknologi"
+    }
+  }
+]

@@ -1,0 +1,81 @@
+[
+  {
+    "id": "penemuan-vaksin-cacar",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Vaksin Cacar",
+    "tags": [
+      "vaksin cacar",
+      "jenner"
+    ],
+    "teks": "Vaksin cacar ditemukan Edward Jenner pada 1796, vaksin pertama dalam sejarah kedokteran. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Edward Jenner",
+      "year": "1796",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-penisilin",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Penisilin",
+    "tags": [
+      "penisilin",
+      "antibiotik"
+    ],
+    "teks": "Penisilin ditemukan Alexander Fleming pada 1928 secara tidak sengaja, membuka era antibiotik. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Alexander Fleming",
+      "year": "1928",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-sinar-x",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Sinar-X",
+    "tags": [
+      "sinar-x",
+      "rontgen"
+    ],
+    "teks": "Sinar-X ditemukan Wilhelm Rontgen pada 1895, merevolusi diagnosis medis lewat pencitraan tubuh. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Wilhelm Rontgen",
+      "year": "1895",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-insulin",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Insulin",
+    "tags": [
+      "insulin",
+      "diabetes"
+    ],
+    "teks": "Insulin ditemukan Frederick Banting dan Charles Best pada 1921, mengubah pengobatan diabetes. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Frederick Banting",
+      "year": "1921",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-anestesi",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Anestesi",
+    "tags": [
+      "anestesi"
+    ],
+    "teks": "Anestesi modern diperkenalkan William Morton pada 1846, memungkinkan operasi tanpa rasa sakit. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "William Morton",
+      "year": "1846",
+      "field": "kedokteran"
+    }
+  }
+]
