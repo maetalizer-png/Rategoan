@@ -1,0 +1,122 @@
+[
+  {
+    "id": "paluang-properti-real-estate",
+    "kategori": "paluang",
+    "wilayah": "investasi",
+    "nama": "Properti & Real Estate",
+    "tags": [
+      "investasi",
+      "properti",
+      "real-estate"
+    ],
+    "teks": "Properti & Real Estate — Investasi properti tetap menjadi pilihan utama di Indonesia. Pertumbuhan harga di kota-kota besar seperti Jakarta, Surabaya, dan Bandung rata-rata 8-12% per tahun. Properti komersial dan hunian vertikal mulai diminati. Properti di kawasan IKN juga menarik.",
+    "meta": {
+      "type": "investasi",
+      "code": "INV-PROP",
+      "risk": "medium",
+      "returnRate": 10,
+      "minCapital": 500000000,
+      "keyCountries": [
+        "Indonesia",
+        "Singapura",
+        "Malaysia"
+      ]
+    }
+  },
+  {
+    "id": "paluang-saham-reksadana",
+    "kategori": "paluang",
+    "wilayah": "investasi",
+    "nama": "Saham & Reksadana",
+    "tags": [
+      "investasi",
+      "saham",
+      "reksadana",
+      "IDX"
+    ],
+    "teks": "Saham & Reksadana — Investasi di saham sektor teknologi dan consumer goods menunjukkan kinerja stabil. Indeks IDX30 dan LQ45 menjadi acuan utama. Rekomendasi: saham dengan dividen tinggi dan pertumbuhan laba konsisten. Reksadana saham dan campuran cocok untuk pemula.",
+    "meta": {
+      "type": "investasi",
+      "code": "INV-STOCK",
+      "risk": "medium",
+      "returnRate": 12,
+      "minCapital": 10000000,
+      "keyCountries": [
+        "Indonesia",
+        "Singapura",
+        "Malaysia"
+      ]
+    }
+  },
+  {
+    "id": "paluang-emas-logam-mulia",
+    "kategori": "paluang",
+    "wilayah": "investasi",
+    "nama": "Emas & Logam Mulia",
+    "tags": [
+      "investasi",
+      "emas",
+      "logam-mulia"
+    ],
+    "teks": "Emas & Logam Mulia — Emas menjadi instrumen lindung nilai yang stabil. Harga emas cenderung naik 5-8% per tahun. Cocok untuk investor konservatif yang mencari keamanan aset jangka panjang. Emas batangan dan perhiasan bisa menjadi pilihan.",
+    "meta": {
+      "type": "investasi",
+      "code": "INV-GOLD",
+      "risk": "low",
+      "returnRate": 6.5,
+      "minCapital": 1000000,
+      "keyCountries": [
+        "Global"
+      ]
+    }
+  },
+  {
+    "id": "paluang-obligasi-sukuk",
+    "kategori": "paluang",
+    "wilayah": "investasi",
+    "nama": "Obligasi & SUKUK",
+    "tags": [
+      "investasi",
+      "obligasi",
+      "sukuk",
+      "surat-utang"
+    ],
+    "teks": "Obligasi & Surat Utang — Obligasi pemerintah dan korporasi menawarkan pendapatan tetap dengan risiko lebih rendah. SUKUK (obligasi syariah) juga populer di Indonesia. Cocok untuk investor yang mengutamakan keamanan dan arus kas stabil.",
+    "meta": {
+      "type": "investasi",
+      "code": "INV-BOND",
+      "risk": "low",
+      "returnRate": 6,
+      "minCapital": 10000000,
+      "keyCountries": [
+        "Indonesia",
+        "Malaysia"
+      ]
+    }
+  },
+  {
+    "id": "paluang-deposito-tabungan",
+    "kategori": "paluang",
+    "wilayah": "investasi",
+    "nama": "Deposito & Tabungan",
+    "tags": [
+      "investasi",
+      "deposito",
+      "tabungan",
+      "aman"
+    ],
+    "teks": "Deposito & Tabungan — Pilihan teraman untuk dana darurat. Bunga deposito sekitar 4-5% per tahun. Fleksibilitas rendah tapi aman. Cocok untuk investor pemula atau yang tidak ingin mengambil risiko.",
+    "meta": {
+      "type": "investasi",
+      "code": "INV-DEP",
+      "risk": "very-low",
+      "returnRate": 4.5,
+      "minCapital": 1000000,
+      "keyCountries": [
+        "Indonesia",
+        "Singapura",
+        "Malaysia"
+      ]
+    }
+  }
+]
