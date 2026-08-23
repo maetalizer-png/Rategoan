@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-08-23T14:20:00Z",
+  "ronde": "MEGA-BATCH RAGETAN-50M ROUND 3",
+  "sumber": {
+    "file": "idwiki-latest-pages-articles.xml.bz2",
+    "asalUnduh": "GitHub Release 'Korpus' (tag: Korpus) repo maetalizer-png/Rategoan, diunggah manual oleh pengguna dari Google Drive ke GitHub Release setelah jalur Drive->sandbox terbukti dibatasi 10MB/panggilan",
+    "ukuranBytes": 1232894346,
+    "sha256": "351410953d150969de30f6f118bea39a96eefd420cdf231f33ac3c8575fb5c00",
+    "sha256Terverifikasi": "cocok persis dengan digest yang dilaporkan GitHub API sebelum diproses - diverifikasi via sha256sum lokal",
+    "integritasBz2": "bzip2 -t lolos (stream tidak korup)",
+    "jalurUnduh": "curl langsung ke https://api.github.com/repos/.../releases/assets/{id} dengan header Authorization Bearer $GITHUB_TOKEN (env var yang sudah tersedia di sandbox), redirect ke release-assets.githubusercontent.com dengan signed URL - BUKAN lewat MCP relay (yang capped 10MB untuk Google Drive) dan BUKAN via browser_download_url anonim (404 - repo private, butuh auth)"
+  },
+  "fase1_extractClean": {
+    "skrip": "raget-tools/extract-clean-wikipedia.py",
+    "metode": "streaming bz2 + xml.etree.ElementTree.iterparse (tidak pernah menulis XML mentah utuh ke disk), filter ns=0 dan bukan redirect, wikitext dibersihkan (template/ref/tabel/komentar/file-link dibuang, [[link|label]] jadi label, heading/bold/italic dilucuti markup tapi teks dipertahankan)",
+    "halamanDiproses": 1459629,
+    "artikelDisimpan": 536372,
+    "dilewatiNamespace": 279305,
+    "dilewatiRedirect": 563360,
+    "dilewatiTerlaluPendek": 80592,
+    "dilewatiDuplikatExact": 0,
+    "totalKataApprox": 150000023,
+    "catatan": "Berhenti otomatis begitu lantai 150 juta kata (margin aman di atas lantai 100 juta token yang diminta) tercapai di halaman ke-1.459.629 dari dump - TIDAK memproses seluruh dump (dump penuh jauh lebih besar, mengandung jutaan halaman). Dedupe HANYA exact (hash judul+200 char awal teks) - fuzzy dedupe (mis. artikel hampir identik/stub berulang) TIDAK dijalankan, limitasi jujur karena di luar cakupan waktu ronde ini.",
+    "waktuDetik": 714.3
+  },
+  "fase1_bpeTokenizer": {
+    "skrip": "raget-tools/train-bpe-python.py",
+    "algoritma": "BPE efisien custom (inverted-index pair->word, update delta per-merge, BUKAN rescan O(V x N) seperti trainBPE() JS naive) - pretokenisasi PERSIS SAMA seperti llm-tokenizer.js#preTokenize() supaya kompatibel dengan runtime JS",
+    "sampelKataUntukTraining": 4010364,
+    "kataUnikDalamSampel": 144549,
+    "targetVocabSize": 30368,
+    "mergeDihasilkan": 30108,
+    "vocabAkhir": 32136,
+    "catatan": "BPE dilatih di SAMPEL representatif (4 juta kata pertama), bukan seluruh 150 juta kata - praktik standar, BPE konvergen baik dari sampel jauh lebih kecil dari korpus penuh. Merges yang dihasilkan lalu dipakai tokenize SELURUH korpus retained.",
+    "waktuDetik": 251.5
+  },
+  "fase1_tokenizeChunk": {
+    "skrip": "raget-tools/tokenize-chunk-corpus.py + rechunk.py (window final 126 token, alasan: window 512 token bikin attention terlalu lambat di batch praktis - lihat laporan training)",
+    "artikelDiproses": 536372,
+    "totalTokenTokenisasiPenuh": 236793009,
+    "kataUnikTerCache": 2207640,
+    "chunkAkhirSetelahRechunkWindow126": 2069381,
+    "totalTokenTrainSetelahRechunk": 236392520,
+    "lantai100JutaTercapai": true,
+    "catatan": "PERTAMA KALI dalam seluruh ronde proyek ini lantai 100 juta token tercapai (2,37x lipat) - sebelumnya korpus internal hanya ~95 ribu-122 ribu token."
+  },
+  "artefakTidakDikomitKeGit": [
+    "idwiki-latest-pages-articles.xml.bz2 (1,15 GB) - dump mentah, terlalu besar",
+    "idwiki-clean.jsonl (1,1 GB) - 536.372 artikel bersih",
+    "idwiki-chunks-128.txt (~1 GB) - hasil tokenisasi+chunking siap training",
+    "bpe-tokenizer.json - merges/vocab BPE (disimpan ULANG di dalam checkpoint .safetensors final via metadata, jadi tidak hilang meski file ini sendiri tidak dikomit terpisah)"
+  ],
+  "sampelDikomit": "raget-data/jsonl/external/wikipedia-korpus-sample-20-artikel.jsonl (20 artikel pertama hasil extract+clean, bukti kualitas nyata)"
+}
