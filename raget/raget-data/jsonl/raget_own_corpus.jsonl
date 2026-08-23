@@ -489,6 +489,21 @@
 {"type":"fact","source":"bahasa/osenian.json","text":"Papua Nugini — bahasa Tok Pisin, lingua franca nasional, 4 juta penutur. Sapaan: apinun (halo), tenkyu (terima kasih)."}
 {"type":"fact","source":"bahasa/osenian.json","text":"Samoa — bahasa Samoa, 500 ribu penutur, resmi berdampingan Inggris. Sapaan: talofa (halo), fa'afetai (terima kasih)."}
 {"type":"fact","source":"bahasa/osenian.json","text":"Tonga — bahasa Tonga, 190 ribu penutur, resmi berdampingan Inggris. Sapaan: malo e lelei (halo), malo (terima kasih)."}
+{"type":"fact","source":"ekonomi/indikator.json","text":"PDB (Produk Domestik Bruto) — total nilai barang dan jasa yang dihasilkan suatu negara dalam satu tahun. Termasuk kategori ekonomi indikator makro."}
+{"type":"fact","source":"ekonomi/indikator.json","text":"Inflasi — kenaikan harga barang dan jasa secara umum dan terus-menerus dalam periode tertentu. Termasuk kategori ekonomi indikator makro."}
+{"type":"fact","source":"ekonomi/indikator.json","text":"Suku Bunga Acuan — tingkat bunga yang ditetapkan bank sentral untuk mengendalikan inflasi dan likuiditas. Termasuk kategori ekonomi indikator makro."}
+{"type":"fact","source":"ekonomi/indikator.json","text":"Pengangguran — persentase penduduk usia kerja yang aktif mencari kerja namun belum memperoleh pekerjaan. Termasuk kategori ekonomi indikator makro."}
+{"type":"fact","source":"ekonomi/indikator.json","text":"Nilai Tukar — perbandingan harga mata uang suatu negara terhadap mata uang negara lain. Termasuk kategori ekonomi indikator makro."}
+{"type":"fact","source":"ekonomi/komoditas.json","text":"Minyak Bumi — komoditas energi paling diperdagangkan di dunia, harga globalnya dipengaruhi OPEC. Termasuk kategori ekonomi energi."}
+{"type":"fact","source":"ekonomi/komoditas.json","text":"Emas — logam mulia yang dianggap aset lindung nilai (safe haven) saat kondisi ekonomi tidak stabil. Termasuk kategori ekonomi logam mulia."}
+{"type":"fact","source":"ekonomi/komoditas.json","text":"Kelapa Sawit — komoditas ekspor unggulan Indonesia dan Malaysia, bahan baku minyak goreng dan biodiesel. Termasuk kategori ekonomi pertanian."}
+{"type":"fact","source":"ekonomi/komoditas.json","text":"Kopi — komoditas pertanian yang diperdagangkan luas, produsen utama termasuk Brasil, Vietnam, dan Indonesia. Termasuk kategori ekonomi pertanian."}
+{"type":"fact","source":"ekonomi/komoditas.json","text":"Nikel — logam penting untuk baterai kendaraan listrik, Indonesia menjadi produsen nikel terbesar dunia. Termasuk kategori ekonomi logam."}
+{"type":"fact","source":"ekonomi/perusahaan.json","text":"Apple — perusahaan teknologi Amerika Serikat, salah satu perusahaan bernilai pasar terbesar di dunia. Termasuk kategori ekonomi teknologi."}
+{"type":"fact","source":"ekonomi/perusahaan.json","text":"Saudi Aramco — perusahaan minyak nasional Arab Saudi, salah satu perusahaan paling menguntungkan di dunia. Termasuk kategori ekonomi energi."}
+{"type":"fact","source":"ekonomi/perusahaan.json","text":"Toyota — produsen mobil terbesar di dunia berdasarkan volume produksi, berbasis di Jepang. Termasuk kategori ekonomi otomotif."}
+{"type":"fact","source":"ekonomi/perusahaan.json","text":"Samsung — konglomerat teknologi Korea Selatan, produsen ponsel dan chip memori terbesar dunia. Termasuk kategori ekonomi teknologi."}
+{"type":"fact","source":"ekonomi/perusahaan.json","text":"Amazon — perusahaan e-commerce dan cloud computing terbesar dunia, berbasis di Amerika Serikat. Termasuk kategori ekonomi e-commerce."}
 {"type":"fact","source":"etika/afrika.json","text":"Sapaan Mesir — jabat tangan hangat, sering berlangsung lebih lama dibanding budaya Barat, disertai tanya kabar keluarga."}
 {"type":"fact","source":"etika/afrika.json","text":"Tip di Mesir — baksheesh (tip kecil) diharapkan untuk banyak layanan, dari porter hingga penjaga situs wisata."}
 {"type":"fact","source":"etika/afrika.json","text":"Tabu di Mesir — menunjukkan telapak kaki ke arah orang lain dianggap tidak sopan, mirip kebiasaan di banyak negara Timur Tengah."}

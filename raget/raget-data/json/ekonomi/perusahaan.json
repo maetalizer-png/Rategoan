@@ -1,0 +1,75 @@
+[
+  {
+    "id": "ekonomi-apple",
+    "kategori": "ekonomi",
+    "wilayah": "perusahaan",
+    "nama": "Apple",
+    "tags": [
+      "apple",
+      "teknologi"
+    ],
+    "teks": "Apple — perusahaan teknologi Amerika Serikat, salah satu perusahaan bernilai pasar terbesar di dunia. Termasuk kategori ekonomi teknologi.",
+    "meta": {
+      "type": "teknologi",
+      "value": "Amerika Serikat"
+    }
+  },
+  {
+    "id": "ekonomi-saudi-aramco",
+    "kategori": "ekonomi",
+    "wilayah": "perusahaan",
+    "nama": "Saudi Aramco",
+    "tags": [
+      "saudi aramco",
+      "minyak"
+    ],
+    "teks": "Saudi Aramco — perusahaan minyak nasional Arab Saudi, salah satu perusahaan paling menguntungkan di dunia. Termasuk kategori ekonomi energi.",
+    "meta": {
+      "type": "energi",
+      "value": "Arab Saudi"
+    }
+  },
+  {
+    "id": "ekonomi-toyota",
+    "kategori": "ekonomi",
+    "wilayah": "perusahaan",
+    "nama": "Toyota",
+    "tags": [
+      "toyota",
+      "otomotif"
+    ],
+    "teks": "Toyota — produsen mobil terbesar di dunia berdasarkan volume produksi, berbasis di Jepang. Termasuk kategori ekonomi otomotif.",
+    "meta": {
+      "type": "otomotif",
+      "value": "Jepang"
+    }
+  },
+  {
+    "id": "ekonomi-samsung",
+    "kategori": "ekonomi",
+    "wilayah": "perusahaan",
+    "nama": "Samsung",
+    "tags": [
+      "samsung"
+    ],
+    "teks": "Samsung — konglomerat teknologi Korea Selatan, produsen ponsel dan chip memori terbesar dunia. Termasuk kategori ekonomi teknologi.",
+    "meta": {
+      "type": "teknologi",
+      "value": "Korea Selatan"
+    }
+  },
+  {
+    "id": "ekonomi-amazon",
+    "kategori": "ekonomi",
+    "wilayah": "perusahaan",
+    "nama": "Amazon",
+    "tags": [
+      "amazon"
+    ],
+    "teks": "Amazon — perusahaan e-commerce dan cloud computing terbesar dunia, berbasis di Amerika Serikat. Termasuk kategori ekonomi e-commerce.",
+    "meta": {
+      "type": "e-commerce",
+      "value": "Amerika Serikat"
+    }
+  }
+]
