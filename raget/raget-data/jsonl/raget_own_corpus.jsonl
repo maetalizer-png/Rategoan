@@ -2261,6 +2261,22 @@
 {"type":"fact","source":"paluang/tren.json","text":"Model kerja hybrid dan remote menjadi permanen. Perusahaan mengadopsi fleksibilitas kerja untuk menarik talenta terbaik. Digital nomad dan coworking space meningkat. Teknologi kolaborasi (Zoom, Slack, Teams) terus berkembang."}
 {"type":"fact","source":"paluang/tren.json","text":"Personalization dan customer experience menjadi pembeda utama. Perusahaan menggunakan data dan AI untuk memberikan pengalaman yang disesuaikan. Chatbot dan rekomendasi produk meningkatkan konversi dan loyalitas pelanggan."}
 {"type":"fact","source":"paluang/tren.json","text":"Kesehatan dan wellness menjadi prioritas utama masyarakat pasca-pandemi. Investasi di telemedicine, wearable health, dan mental health meningkat. Produk organik dan gaya hidup sehat semakin populer."}
+{"type":"fact","source":"penemuan/kedokteran.json","text":"Vaksin cacar ditemukan Edward Jenner pada 1796, vaksin pertama dalam sejarah kedokteran. Termasuk penemuan bidang kedokteran."}
+{"type":"fact","source":"penemuan/kedokteran.json","text":"Penisilin ditemukan Alexander Fleming pada 1928 secara tidak sengaja, membuka era antibiotik. Termasuk penemuan bidang kedokteran."}
+{"type":"fact","source":"penemuan/kedokteran.json","text":"Sinar-X ditemukan Wilhelm Rontgen pada 1895, merevolusi diagnosis medis lewat pencitraan tubuh. Termasuk penemuan bidang kedokteran."}
+{"type":"fact","source":"penemuan/kedokteran.json","text":"Insulin ditemukan Frederick Banting dan Charles Best pada 1921, mengubah pengobatan diabetes. Termasuk penemuan bidang kedokteran."}
+{"type":"fact","source":"penemuan/kedokteran.json","text":"Anestesi modern diperkenalkan William Morton pada 1846, memungkinkan operasi tanpa rasa sakit. Termasuk penemuan bidang kedokteran."}
+{"type":"fact","source":"penemuan/sains.json","text":"Hukum gravitasi ditemukan oleh Isaac Newton pada 1687, menjelaskan gaya tarik-menarik antar massa. Termasuk penemuan bidang sains."}
+{"type":"fact","source":"penemuan/sains.json","text":"Teori relativitas dicetuskan oleh Albert Einstein pada 1905 dan 1915, mengubah pemahaman ruang dan waktu. Termasuk penemuan bidang sains."}
+{"type":"fact","source":"penemuan/sains.json","text":"Radioaktivitas ditemukan oleh Marie Curie dan Pierre Curie pada 1898, membuka bidang fisika nuklir. Termasuk penemuan bidang sains."}
+{"type":"fact","source":"penemuan/sains.json","text":"Struktur DNA heliks ganda ditemukan oleh James Watson dan Francis Crick pada 1953. Termasuk penemuan bidang sains."}
+{"type":"fact","source":"penemuan/sains.json","text":"Hukum gerak Newton (tiga hukum) dirumuskan Isaac Newton dalam Principia Mathematica tahun 1687. Termasuk penemuan bidang sains."}
+{"type":"fact","source":"penemuan/teknologi.json","text":"Bola lampu pijar ditemukan Thomas Alva Edison pada 1879, membuka era penerangan listrik massal. Termasuk penemuan bidang teknologi."}
+{"type":"fact","source":"penemuan/teknologi.json","text":"Telepon ditemukan Alexander Graham Bell pada 1876, membuka era komunikasi suara jarak jauh. Termasuk penemuan bidang teknologi."}
+{"type":"fact","source":"penemuan/teknologi.json","text":"World Wide Web (WWW) ditemukan Tim Berners-Lee pada 1989, fondasi internet modern yang kita pakai. Termasuk penemuan bidang teknologi."}
+{"type":"fact","source":"penemuan/teknologi.json","text":"Pesawat terbang bertenaga pertama diciptakan Wright bersaudara pada 1903 di Kitty Hawk, Amerika Serikat. Termasuk penemuan bidang teknologi."}
+{"type":"fact","source":"penemuan/teknologi.json","text":"Radio ditemukan Guglielmo Marconi pada 1895, memungkinkan komunikasi nirkabel jarak jauh. Termasuk penemuan bidang teknologi."}
+{"type":"fact","source":"penemuan/teknologi.json","text":"Telepon genggam pertama diciptakan Martin Cooper dari Motorola pada 1973. Termasuk penemuan bidang teknologi."}
 {"type":"fact","source":"sains/biologi.json","text":"Fotosintesis — proses tumbuhan mengubah cahaya matahari, air, dan CO2 menjadi glukosa dan oksigen."}
 {"type":"fact","source":"sains/biologi.json","text":"DNA — molekul pembawa informasi genetik makhluk hidup, berbentuk heliks ganda."}
 {"type":"fact","source":"sains/biologi.json","text":"Evolusi — proses perubahan sifat makhluk hidup dari generasi ke generasi, dicetuskan Charles Darwin."}
