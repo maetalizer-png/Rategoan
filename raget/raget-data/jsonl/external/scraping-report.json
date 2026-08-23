@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-08-23T04:50:00.000Z",
+  "fase": "FASE 1 - Scraping sumber terbuka legal",
+  "hasil": "GAGAL SEBAGIAN BESAR - dilaporkan apa adanya sesuai instruksi",
+  "totalTokenTerkumpul": 0,
+  "targetSumber": [
+    "Wikipedia (ID + EN)",
+    "Wiktionary",
+    "buku public domain",
+    "dataset terbuka (Indo4B dll)",
+    "berita terbuka"
+  ],
+  "temuan": [
+    {
+      "sumber": "id.wikipedia.org, en.wikipedia.org, dumps.wikimedia.org, id.wikisource.org, huggingface.co, cdn-lfs.huggingface.co, datasets-server.huggingface.co",
+      "status": "DIBLOKIR oleh kebijakan egress jaringan sesi ini",
+      "bukti": "curl langsung -> connection refused/timeout (000) atau CONNECT tunnel 403; WebFetch ke id.wikipedia.org/wiki/Indonesia -> error eksplisit EGRESS_BLOCKED. Sesuai README proxy sesi ini ('do not retry organization policy denials'), tidak dicoba dilewati - dilaporkan langsung sebagai batasan nyata, bukan dianggap bisa diakali."
+    },
+    {
+      "sumber": "raw.githubusercontent.com, github.com (lewat WebFetch)",
+      "status": "BISA DIAKSES",
+      "bukti": "curl raw.githubusercontent.com berhasil (contoh: README Wikidepia/indonesian_datasets terbaca penuh). Tapi hanya bisa fetch file yang path-nya sudah diketahui persis - tidak ada akses listing/API repo generik (api.github.com untuk repo di luar Rategoan sendiri dicegat dan dialihkan ke halaman dokumentasi internal, bukan GitHub API asli)."
+    },
+    {
+      "sumber": "Dataset KBBI (Kamus Besar Bahasa Indonesia) di berbagai repo GitHub (Definisi/kbbi, dyazincahya/KBBI-SQL-database, dll)",
+      "status": "DITEMUKAN TAPI SENGAJA TIDAK DIPAKAI",
+      "bukti": "Data adalah ekstraksi tidak resmi dari aplikasi KBBI resmi Kemendikbud (berhak cipta pemerintah) - deskripsi salah satu repo bahkan eksplisit memperingatkan 'penggunaan komersial dilarang keras dan tunduk pada ketentuan hukum pidana'. Ini persis kategori yang dilarang instruksi ronde ini ('HANYA lisensi terbuka... tidak ada scraping ilegal/melanggar ToS') - jadi TIDAK diunduh/dipakai, meskipun secara teknis file-nya bisa diakses lewat raw.githubusercontent.com."
+    },
+    {
+      "sumber": "Novel/buku public domain Indonesia (Balai Pustaka: Sitti Nurbaya, Salah Asuhan, dll - benar-benar public domain karena terbit sebelum 1949)",
+      "status": "TIDAK DITEMUKAN dalam bentuk teks lengkap siap unduh",
+      "bukti": "Pencarian web hanya menemukan halaman ringkasan Wikipedia (EN, domain diblokir) tentang novel-novel ini, bukan repo GitHub yang meng-host teks lengkapnya sebagai file mentah."
+    },
+    {
+      "sumber": "Berita terbuka",
+      "status": "SENGAJA TIDAK DICARI",
+      "bukti": "Artikel berita pada praktiknya hampir selalu berhak cipta penerbit media, terlepas dari lisensi repo GitHub yang mengumpulkannya (mis. feryandi/Dataset-Artikel) - tidak memenuhi syarat 'HANYA lisensi terbuka (CC-BY-SA, public domain)' dari instruksi ronde ini, jadi tidak dikejar lebih jauh."
+    }
+  ],
+  "kesimpulan": "Lingkungan sesi ini memblokir seluruh host sumber data terbuka skala besar yang disebut instruksi (Wikipedia/Wikimedia dumps, Wiktionary, HuggingFace datasets) di level kebijakan jaringan organisasi - dikonfirmasi lewat percobaan langsung (curl dan WebFetch), bukan asumsi. Satu-satunya jalur eksternal yang terbukti bisa diakses (raw.githubusercontent.com/github.com) tidak menghasilkan data yang memenuhi syarat lisensi terbuka dalam upaya pencarian yang dilakukan. FASE 1 tidak menghasilkan token baru dari luar - 0 token terkumpul, dilaporkan apa adanya sesuai instruksi ronde ('kalau ada fase yang gagal'). FASE 2 (bersihkan+gabung korpus) karena itu tidak punya bahan baru untuk digabung - korpus internal (raget_own_corpus.jsonl, 2.112 entri/4.163 baris) tetap seperti hasil ronde Fase B sebelumnya. FASE 3 (fix EOS + training) tetap dijalankan dengan korpus yang ada."
+}
