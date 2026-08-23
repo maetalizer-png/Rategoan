@@ -1,0 +1,77 @@
+[
+  {
+    "id": "seni-budaya-kain-afrika-barat",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Kain Afrika Barat",
+    "tags": [
+      "kain",
+      "ghana"
+    ],
+    "teks": "Batik Afrika Barat — kain bermotif cerah khas Ghana dan Nigeria, dipakai dalam acara adat.",
+    "meta": {
+      "country": "Ghana",
+      "type": "pakaian"
+    }
+  },
+  {
+    "id": "seni-budaya-afrobeat",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Afrobeat",
+    "tags": [
+      "afrobeat",
+      "nigeria"
+    ],
+    "teks": "Musik Afrobeat — genre musik yang lahir di Nigeria, memadukan jazz, funk, dan ritme Afrika Barat.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "musik"
+    }
+  },
+  {
+    "id": "seni-budaya-tari-gumboot",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Tari Gumboot",
+    "tags": [
+      "gumboot",
+      "afrika selatan"
+    ],
+    "teks": "Tari Gumboot — tarian energik Afrika Selatan dengan sepatu bot karet yang ditepuk berirama.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-timkat",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Timkat",
+    "tags": [
+      "timkat",
+      "etiopia"
+    ],
+    "teks": "Timkat — festival keagamaan Ortodoks Ethiopia yang merayakan Epifani dengan prosesi meriah.",
+    "meta": {
+      "country": "Etiopia",
+      "type": "festival"
+    }
+  },
+  {
+    "id": "seni-budaya-djembe",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Djembe",
+    "tags": [
+      "djembe",
+      "mali"
+    ],
+    "teks": "Djembe — gendang tradisional Afrika Barat yang dipakai dalam ritual dan perayaan komunitas.",
+    "meta": {
+      "country": "Mali",
+      "type": "musik"
+    }
+  }
+]
