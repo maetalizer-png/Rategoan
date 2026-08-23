@@ -1,0 +1,77 @@
+[
+  {
+    "id": "seni-budaya-haka",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Haka",
+    "tags": [
+      "haka",
+      "maori"
+    ],
+    "teks": "Haka — tarian perang tradisional suku Maori Selandia Baru, kini dikenal lewat pertandingan rugby All Blacks.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-didgeridoo",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Didgeridoo",
+    "tags": [
+      "didgeridoo",
+      "aborigin"
+    ],
+    "teks": "Didgeridoo — alat musik tiup tradisional Aborigin Australia dari batang kayu berongga.",
+    "meta": {
+      "country": "Australia",
+      "type": "musik"
+    }
+  },
+  {
+    "id": "seni-budaya-lukisan-titik-aborigin",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Lukisan Titik Aborigin",
+    "tags": [
+      "lukisan titik",
+      "aborigin"
+    ],
+    "teks": "Lukisan Titik Aborigin — seni lukis tradisional Aborigin Australia yang menggunakan pola titik-titik simbolis.",
+    "meta": {
+      "country": "Australia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-festival-hibiscus",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Festival Hibiscus",
+    "tags": [
+      "festival hibiscus",
+      "fiji"
+    ],
+    "teks": "Festival Hibiscus — perayaan budaya tahunan di Fiji dengan parade, musik, dan tarian tradisional.",
+    "meta": {
+      "country": "Fiji",
+      "type": "festival"
+    }
+  },
+  {
+    "id": "seni-budaya-lavalava",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Lavalava",
+    "tags": [
+      "lavalava",
+      "samoa"
+    ],
+    "teks": "Lavalava — kain tradisional yang dililitkan di pinggang, dipakai luas di kepulauan Pasifik seperti Samoa dan Tonga.",
+    "meta": {
+      "country": "Samoa",
+      "type": "pakaian"
+    }
+  }
+]

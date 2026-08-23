@@ -1,0 +1,92 @@
+[
+  {
+    "id": "seni-budaya-tari-kecak",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Tari Kecak",
+    "tags": [
+      "tari kecak",
+      "bali"
+    ],
+    "teks": "Tari Kecak — tari khas Bali, Indonesia, dibawakan puluhan penari pria membentuk lingkaran sambil melantunkan \"cak\".",
+    "meta": {
+      "country": "Indonesia",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-wayang-kulit",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Wayang Kulit",
+    "tags": [
+      "wayang kulit",
+      "jawa"
+    ],
+    "teks": "Wayang Kulit — seni pertunjukan boneka kulit khas Jawa, Indonesia, mengisahkan cerita Mahabharata dan Ramayana.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-kabuki",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Kabuki",
+    "tags": [
+      "kabuki",
+      "jepang"
+    ],
+    "teks": "Kabuki — teater tradisional Jepang dengan kostum mewah dan gerakan gaya, dikenal sejak abad ke-17.",
+    "meta": {
+      "country": "Jepang",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-opera-peking",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Opera Peking",
+    "tags": [
+      "opera peking",
+      "china"
+    ],
+    "teks": "Opera Peking — seni pertunjukan tradisional China menggabungkan musik, vokal, dan akrobatik.",
+    "meta": {
+      "country": "China",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-songkran",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Songkran",
+    "tags": [
+      "songkran",
+      "thailand"
+    ],
+    "teks": "Songkran — festival Tahun Baru Thailand yang dirayakan dengan tradisi saling menyiram air.",
+    "meta": {
+      "country": "Thailand",
+      "type": "festival"
+    }
+  },
+  {
+    "id": "seni-budaya-hanbok",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Hanbok",
+    "tags": [
+      "hanbok",
+      "korea"
+    ],
+    "teks": "Hanbok — pakaian tradisional Korea dengan warna cerah dan potongan longgar khas.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "pakaian"
+    }
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "id": "seni-budaya-tango",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Tango",
+    "tags": [
+      "tango",
+      "argentina"
+    ],
+    "teks": "Tango — tarian penuh gairah yang lahir di Buenos Aires, Argentina, akhir abad ke-19.",
+    "meta": {
+      "country": "Argentina",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-karnaval-rio",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Karnaval Rio",
+    "tags": [
+      "karnaval rio",
+      "brasil"
+    ],
+    "teks": "Karnaval Rio de Janeiro — festival tahunan terbesar di Brasil, terkenal dengan samba dan kostum warna-warni.",
+    "meta": {
+      "country": "Brasil",
+      "type": "festival"
+    }
+  },
+  {
+    "id": "seni-budaya-jazz",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Jazz",
+    "tags": [
+      "jazz",
+      "amerika serikat"
+    ],
+    "teks": "Jazz — genre musik yang lahir di New Orleans, Amerika Serikat, awal abad ke-20.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "musik"
+    }
+  },
+  {
+    "id": "seni-budaya-mariachi",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Mariachi",
+    "tags": [
+      "mariachi",
+      "meksiko"
+    ],
+    "teks": "Mariachi — musik tradisional Meksiko dengan gitar, biola, dan terompet yang khas.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "musik"
+    }
+  },
+  {
+    "id": "seni-budaya-dia-de-los-muertos",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Dia de los Muertos",
+    "tags": [
+      "dia de los muertos",
+      "meksiko"
+    ],
+    "teks": "Dia de los Muertos — festival Meksiko untuk mengenang leluhur yang telah meninggal dengan warna-warni ceria.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "festival"
+    }
+  }
+]

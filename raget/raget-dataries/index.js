@@ -180,12 +180,12 @@ const cache = new Map();
 // untuk grup di sini ia fetch JSON lalu bentuk ulang jadi {text, metadata}
 // SAMA PERSIS seperti bentuk lama, supaya dataries-bridge.js dan seluruh
 // pipeline resolusi entitas tidak perlu tahu/berubah sama sekali.
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', marplace: 'marplace', lingo: 'lingo', ekonomi: 'ekonomi', paluang: 'paluang', penemuan: 'penemuan' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', marplace: 'marplace', lingo: 'lingo', ekonomi: 'ekonomi', paluang: 'paluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya' };
 
 function unifiedToLegacyShape(entry, group) {
   return {
     text: entry.teks,
-    metadata: { ...entry.meta, category: group, region: entry.wilayah, name: entry.nama },
+    metadata: { ...entry.meta, category: group, region: entry.wilayah, name: entry.nama, tags: entry.tags || [] },
   };
 }
 

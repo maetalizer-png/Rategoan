@@ -1,0 +1,77 @@
+[
+  {
+    "id": "seni-budaya-flamenco",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Flamenco",
+    "tags": [
+      "flamenco",
+      "spanyol"
+    ],
+    "teks": "Flamenco — tarian dan musik penuh emosi khas Andalusia, Spanyol, memadukan gitar, nyanyian, dan tepuk tangan.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-oktoberfest",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Oktoberfest",
+    "tags": [
+      "oktoberfest",
+      "jerman"
+    ],
+    "teks": "Oktoberfest — festival bir terbesar di dunia yang digelar tiap tahun di Munich, Jerman.",
+    "meta": {
+      "country": "Jerman",
+      "type": "festival"
+    }
+  },
+  {
+    "id": "seni-budaya-balet-rusia",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Balet Rusia",
+    "tags": [
+      "balet",
+      "rusia"
+    ],
+    "teks": "Balet Rusia — seni tari klasik yang berkembang pesat di Rusia, terkenal lewat Bolshoi Ballet.",
+    "meta": {
+      "country": "Rusia",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-karnaval-venesia",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Karnaval Venesia",
+    "tags": [
+      "karnaval venesia",
+      "italia"
+    ],
+    "teks": "Karnaval Venesia — festival topeng dan kostum mewah yang digelar tiap tahun di Venesia, Italia.",
+    "meta": {
+      "country": "Italia",
+      "type": "festival"
+    }
+  },
+  {
+    "id": "seni-budaya-kilt",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Kilt",
+    "tags": [
+      "kilt",
+      "skotlandia"
+    ],
+    "teks": "Kilt — pakaian tradisional pria Skotlandia berupa rok bermotif kotak-kotak (tartan).",
+    "meta": {
+      "country": "Inggris",
+      "type": "pakaian"
+    }
+  }
+]
