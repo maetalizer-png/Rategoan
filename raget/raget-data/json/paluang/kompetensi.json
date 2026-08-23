@@ -1,0 +1,157 @@
+[
+  {
+    "id": "paluang-data-science-analytics",
+    "kategori": "paluang",
+    "wilayah": "kompetensi",
+    "nama": "Data Science & Analytics",
+    "tags": [
+      "data",
+      "analytics",
+      "python",
+      "machine-learning"
+    ],
+    "teks": "Data Science & Analytics — Kemampuan mengolah dan menganalisis data menjadi sangat penting. Perusahaan membutuhkan data scientist, data analyst, dan data engineer untuk mengambil keputusan berbasis data. Skill: Python, SQL, Machine Learning, Tableau.",
+    "meta": {
+      "type": "kompetensi",
+      "code": "SKILL-DATA",
+      "demand": "very-high",
+      "avgSalary": 120000,
+      "skillLevel": "advanced",
+      "tools": [
+        "Python",
+        "SQL",
+        "TensorFlow",
+        "Tableau"
+      ],
+      "industries": [
+        "Teknologi",
+        "Keuangan",
+        "E-commerce",
+        "Kesehatan"
+      ]
+    }
+  },
+  {
+    "id": "paluang-ai-machine-learning",
+    "kategori": "paluang",
+    "wilayah": "kompetensi",
+    "nama": "AI & Machine Learning",
+    "tags": [
+      "AI",
+      "machine-learning",
+      "deep-learning",
+      "python"
+    ],
+    "teks": "AI & Machine Learning — Spesialis AI sangat dicari untuk mengembangkan solusi cerdas. Peluang: AI Engineer, ML Engineer, NLP Specialist. Skill: Python, PyTorch, Deep Learning, Cloud AI (AWS, GCP).",
+    "meta": {
+      "type": "kompetensi",
+      "code": "SKILL-AI",
+      "demand": "very-high",
+      "avgSalary": 140000,
+      "skillLevel": "advanced",
+      "tools": [
+        "Python",
+        "PyTorch",
+        "TensorFlow",
+        "AWS SageMaker"
+      ],
+      "industries": [
+        "Teknologi",
+        "Otomotif",
+        "Kesehatan",
+        "Keuangan"
+      ]
+    }
+  },
+  {
+    "id": "paluang-digital-marketing",
+    "kategori": "paluang",
+    "wilayah": "kompetensi",
+    "nama": "Digital Marketing",
+    "tags": [
+      "digital-marketing",
+      "seo",
+      "social-media",
+      "ads"
+    ],
+    "teks": "Digital Marketing & Social Media — Kemampuan memasarkan produk secara digital sangat penting. Skill: SEO/SEM, Content Marketing, Social Media Management, Data Analytics, Copywriting. Sertifikasi Google Ads & Meta Blueprint sangat berharga.",
+    "meta": {
+      "type": "kompetensi",
+      "code": "SKILL-MARKET",
+      "demand": "high",
+      "avgSalary": 70000,
+      "skillLevel": "intermediate",
+      "tools": [
+        "Google Analytics",
+        "Meta Ads",
+        "SEO",
+        "Content Writing"
+      ],
+      "industries": [
+        "Semua Industri"
+      ]
+    }
+  },
+  {
+    "id": "paluang-cloud-devops",
+    "kategori": "paluang",
+    "wilayah": "kompetensi",
+    "nama": "Cloud & DevOps",
+    "tags": [
+      "cloud",
+      "devops",
+      "aws",
+      "kubernetes"
+    ],
+    "teks": "Cloud Computing & DevOps — Infrastruktur cloud dan otomatisasi menjadi kunci. Skill: AWS/Azure/GCP, Kubernetes, Docker, CI/CD, Infrastructure as Code (Terraform). Sertifikasi Cloud sangat dihargai.",
+    "meta": {
+      "type": "kompetensi",
+      "code": "SKILL-CLOUD",
+      "demand": "very-high",
+      "avgSalary": 130000,
+      "skillLevel": "advanced",
+      "tools": [
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "CI/CD"
+      ],
+      "industries": [
+        "Teknologi",
+        "Keuangan",
+        "E-commerce",
+        "Startup"
+      ]
+    }
+  },
+  {
+    "id": "paluang-cybersecurity",
+    "kategori": "paluang",
+    "wilayah": "kompetensi",
+    "nama": "Cybersecurity",
+    "tags": [
+      "cybersecurity",
+      "hacking",
+      "security",
+      "compliance"
+    ],
+    "teks": "Cybersecurity — Keamanan siber menjadi prioritas utama perusahaan. Skill: Network Security, Ethical Hacking, Security Auditing, Cloud Security, Compliance (GDPR, ISO 27001). Sertifikasi CISSP, CEH sangat berharga.",
+    "meta": {
+      "type": "kompetensi",
+      "code": "SKILL-SEC",
+      "demand": "high",
+      "avgSalary": 125000,
+      "skillLevel": "advanced",
+      "tools": [
+        "Wireshark",
+        "Metasploit",
+        "Nmap",
+        "SIEM"
+      ],
+      "industries": [
+        "Semua Industri"
+      ]
+    }
+  }
+]

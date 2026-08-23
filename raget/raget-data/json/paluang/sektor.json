@@ -1,0 +1,266 @@
+[
+  {
+    "id": "paluang-e-commerce-retail-digital",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "E-commerce & Retail Digital",
+    "tags": [
+      "bisnis",
+      "digital",
+      "ritel",
+      "e-commerce"
+    ],
+    "teks": "E-commerce dan ritel digital terus tumbuh pesat di Asia Tenggara. Didorong oleh penetrasi internet tinggi, dompet digital, dan perubahan perilaku konsumen. Peluang: marketplace niche, dropshipping, logistik last-mile, dan social commerce. Tantangan: persaingan harga, regulasi data, dan retensi pelanggan.",
+    "meta": {
+      "type": "sektor",
+      "code": "ECOM",
+      "trend": "growing",
+      "growthRate": 15.5,
+      "marketSize": 150000000000,
+      "keyCountries": [
+        "Indonesia",
+        "Vietnam",
+        "Thailand",
+        "Malaysia",
+        "Singapura"
+      ]
+    }
+  },
+  {
+    "id": "paluang-ai-otomatisasi",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "AI & Otomatisasi",
+    "tags": [
+      "teknologi",
+      "AI",
+      "otomatisasi",
+      "digital"
+    ],
+    "teks": "Kecerdasan buatan dan otomatisasi menjadi tulang punggung transformasi digital. Peluang: AI untuk UMKM, chatbot customer service, analisis prediktif, dan otomatisasi proses bisnis (RPA). AI generatif membuka peluang di konten, desain, dan software development. Tantangan: etika AI, regulasi, dan kesenjangan skill.",
+    "meta": {
+      "type": "sektor",
+      "code": "AUTO",
+      "trend": "hypergrowth",
+      "growthRate": 38,
+      "marketSize": 500000000000,
+      "keyCountries": [
+        "USA",
+        "China",
+        "Singapura",
+        "India"
+      ]
+    }
+  },
+  {
+    "id": "paluang-energi-terbarukan-esg",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Energi Terbarukan & ESG",
+    "tags": [
+      "energi",
+      "hijau",
+      "esg",
+      "solar",
+      "ev"
+    ],
+    "teks": "Energi terbarukan dan ekonomi hijau menjadi prioritas global. Peluang: instalasi panel surya, kendaraan listrik (EV), baterai daur ulang, karbon kredit, dan konsultasi ESG. Insentif pemerintah dan komitmen net-zero emission mendorong pertumbuhan masif. Tantangan: biaya investasi awal dan infrastruktur.",
+    "meta": {
+      "type": "sektor",
+      "code": "RENEW",
+      "trend": "highgrowth",
+      "growthRate": 22,
+      "marketSize": 1200000000000,
+      "keyCountries": [
+        "China",
+        "USA",
+        "India",
+        "Indonesia",
+        "Australia"
+      ]
+    }
+  },
+  {
+    "id": "paluang-kesehatan-bioteknologi",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Kesehatan & Bioteknologi",
+    "tags": [
+      "kesehatan",
+      "biotech",
+      "telemedicine",
+      "wellness"
+    ],
+    "teks": "Kesehatan dan bioteknologi berkembang pesat pasca-pandemi. Peluang: telemedicine, wearable health, genomik, dan pengembangan vaksin. Populasi menua dan kesadaran kesehatan meningkat. Tantangan: regulasi ketat, biaya R&D tinggi, dan distribusi layanan.",
+    "meta": {
+      "type": "sektor",
+      "code": "HEALTH",
+      "trend": "stable",
+      "growthRate": 12.5,
+      "marketSize": 800000000000,
+      "keyCountries": [
+        "USA",
+        "Swiss",
+        "China",
+        "India",
+        "Jerman"
+      ]
+    }
+  },
+  {
+    "id": "paluang-pendidikan-edutech",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Pendidikan & Edutech",
+    "tags": [
+      "pendidikan",
+      "edutech",
+      "kursus",
+      "digital"
+    ],
+    "teks": "Edutech mengubah cara belajar dengan platform online, AI tutor, dan micro-credential. Peluang: kursus keterampilan digital (coding, AI, data), platform pembelajaran bahasa, dan solusi untuk sekolah negeri. Tantangan: digital divide, kredensial, dan retensi pelajar.",
+    "meta": {
+      "type": "sektor",
+      "code": "EDU",
+      "trend": "growing",
+      "growthRate": 18,
+      "marketSize": 250000000000,
+      "keyCountries": [
+        "Indonesia",
+        "India",
+        "Vietnam",
+        "Filipina"
+      ]
+    }
+  },
+  {
+    "id": "paluang-finansial-fintech",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Finansial & Fintech",
+    "tags": [
+      "finansial",
+      "fintech",
+      "dompetdigital",
+      "pinjaman"
+    ],
+    "teks": "Fintech terus mendisrupsi perbankan tradisional dengan layanan pinjaman peer-to-peer, dompet digital, investasi mikro, dan insurtech. Inklusi keuangan menjadi pendorong utama. Peluang besar di unbanked population (sekitar 1.4 miliar orang). Tantangan: fraud, regulasi, dan keamanan data.",
+    "meta": {
+      "type": "sektor",
+      "code": "FINTECH",
+      "trend": "highgrowth",
+      "growthRate": 25,
+      "marketSize": 340000000000,
+      "keyCountries": [
+        "Singapura",
+        "Indonesia",
+        "India",
+        "USA"
+      ]
+    }
+  },
+  {
+    "id": "paluang-logistik-supply-chain",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Logistik & Supply Chain",
+    "tags": [
+      "logistik",
+      "supplychain",
+      "coldchain",
+      "ecommerce"
+    ],
+    "teks": "Logistik dan supply chain menjadi tulang punggung ekonomi digital. Peluang: optimasi rute dengan AI, sistem tracking real-time, pergudangan otomatis, dan cold chain untuk produk segar. E-commerce dan cross-border trade mendorong permintaan tinggi. Tantangan: infrastruktur dan biaya operasional.",
+    "meta": {
+      "type": "sektor",
+      "code": "LOG",
+      "trend": "growing",
+      "growthRate": 14,
+      "marketSize": 200000000000,
+      "keyCountries": [
+        "Indonesia",
+        "Vietnam",
+        "Malaysia",
+        "Thailand"
+      ]
+    }
+  },
+  {
+    "id": "paluang-gaming-e-sports",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Gaming & E-Sports",
+    "tags": [
+      "gaming",
+      "esports",
+      "mobile",
+      "startup"
+    ],
+    "teks": "Industri gaming dan e-sports meledak dengan penetrasi mobile tinggi di Asia. Peluang: pengembangan game lokal, turnamen e-sports, streaming, dan merchandise. Game berbasis blockchain dan metaverse mulai menjadi tren. Tantangan: regulasi, monetisasi, dan persaingan global.",
+    "meta": {
+      "type": "sektor",
+      "code": "GAME",
+      "trend": "hypergrowth",
+      "growthRate": 30,
+      "marketSize": 180000000000,
+      "keyCountries": [
+        "Indonesia",
+        "Filipina",
+        "Vietnam",
+        "Thailand"
+      ]
+    }
+  },
+  {
+    "id": "paluang-pariwisata-ekonomi-kreatif",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Pariwisata & Ekonomi Kreatif",
+    "tags": [
+      "pariwisata",
+      "kreatif",
+      "budaya",
+      "kuliner"
+    ],
+    "teks": "Pariwisata pulih pasca-pandemi dengan tren wisata alam, staycation, dan pengalaman lokal. Ekonomi kreatif (kerajinan, fashion, kuliner, konten digital) menjadi pendorong utama. Peluang: platform booking lokal, homestay digital, dan craft marketplace. Tantangan: musiman dan ketergantungan pada stabilitas.",
+    "meta": {
+      "type": "sektor",
+      "code": "TOUR",
+      "trend": "recovering",
+      "growthRate": 20,
+      "marketSize": 120000000000,
+      "keyCountries": [
+        "Indonesia",
+        "Thailand",
+        "Vietnam",
+        "Malaysia"
+      ]
+    }
+  },
+  {
+    "id": "paluang-pertanian-agri-tech",
+    "kategori": "paluang",
+    "wilayah": "sektor",
+    "nama": "Pertanian & Agri-tech",
+    "tags": [
+      "pertanian",
+      "agritech",
+      "pangan",
+      "hidroponik"
+    ],
+    "teks": "Agri-tech mengatasi tantangan ketahanan pangan dengan hidroponik, drone pertanian, sensor tanah, dan marketplace hasil tani. Indonesia sebagai negara agraris memiliki peluang besar. Tantangan: akses modal, literasi petani, dan infrastruktur pedesaan.",
+    "meta": {
+      "type": "sektor",
+      "code": "AGRI",
+      "trend": "growing",
+      "growthRate": 16.5,
+      "marketSize": 150000000000,
+      "keyCountries": [
+        "Indonesia",
+        "Vietnam",
+        "Thailand",
+        "Filipina"
+      ]
+    }
+  }
+]

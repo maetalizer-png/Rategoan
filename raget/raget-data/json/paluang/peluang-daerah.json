@@ -1,0 +1,59 @@
+[
+  {
+    "id": "paluang-indonesia",
+    "kategori": "paluang",
+    "wilayah": "peluang-daerah",
+    "nama": "Indonesia",
+    "tags": [
+      "indonesia",
+      "umkm",
+      "digital",
+      "startup"
+    ],
+    "teks": "Indonesia memiliki peluang besar di sektor UMKM digital, ekonomi kreatif, dan agri-tech. Dengan populasi 280 juta dan penetrasi internet tinggi, pasar digital sangat potensial. Pemerintah mendorong digitalisasi UMKM dan startup berbasis AI.",
+    "meta": {
+      "type": "daerah",
+      "focus": [
+        "UMKM Digital",
+        "Ekonomi Kreatif",
+        "Agri-tech"
+      ],
+      "potential": "high",
+      "keySectors": [
+        "E-commerce",
+        "Fintech",
+        "Edutech",
+        "Logistik"
+      ]
+    }
+  },
+  {
+    "id": "paluang-singapura",
+    "kategori": "paluang",
+    "wilayah": "peluang-daerah",
+    "nama": "Singapura",
+    "tags": [
+      "singapura",
+      "fintech",
+      "hub",
+      "startup"
+    ],
+    "teks": "Singapura menjadi hub teknologi dan finansial Asia Tenggara. Peluang: fintech, AI, bioteknologi, dan logistik premium. Dukungan pemerintah kuat untuk riset dan inovasi. Startup Singapura sering menjadi pintu masuk ke pasar ASEAN.",
+    "meta": {
+      "type": "daerah",
+      "focus": [
+        "Fintech",
+        "AI",
+        "Bioteknologi",
+        "Logistik Premium"
+      ],
+      "potential": "high",
+      "keySectors": [
+        "Fintech",
+        "AI",
+        "Healthtech",
+        "Logistik"
+      ]
+    }
+  }
+]

@@ -1,0 +1,127 @@
+[
+  {
+    "id": "paluang-ai-otomatisasi-tren",
+    "kategori": "paluang",
+    "wilayah": "tren",
+    "nama": "AI & Otomatisasi",
+    "tags": [
+      "AI",
+      "otomatisasi",
+      "teknologi",
+      "digital"
+    ],
+    "teks": "Adopsi AI dan otomatisasi semakin meluas di berbagai industri. Perusahaan berlomba mengintegrasikan AI untuk efisiensi, personalisasi, dan prediksi. AI generatif mengubah cara konten, desain, dan software dikembangkan. Investasi di AI mencapai rekor tertinggi.",
+    "meta": {
+      "type": "tren",
+      "code": "TREN-AI",
+      "impact": "very-high",
+      "adoptionRate": 65,
+      "keyIndustries": [
+        "Teknologi",
+        "Manufaktur",
+        "Kesehatan",
+        "Keuangan"
+      ]
+    }
+  },
+  {
+    "id": "paluang-ekonomi-hijau-esg",
+    "kategori": "paluang",
+    "wilayah": "tren",
+    "nama": "Ekonomi Hijau & ESG",
+    "tags": [
+      "hijau",
+      "esg",
+      "keberlanjutan",
+      "ramah-lingkungan"
+    ],
+    "teks": "Ekonomi hijau dan keberlanjutan menjadi fokus utama. Konsumen dan investor semakin peduli ESG. Perusahaan beralih ke energi terbarukan, pengurangan emisi, dan rantai pasok berkelanjutan. Produk ramah lingkungan semakin diminati.",
+    "meta": {
+      "type": "tren",
+      "code": "TREN-GREEN",
+      "impact": "high",
+      "adoptionRate": 55,
+      "keyIndustries": [
+        "Energi",
+        "Manufaktur",
+        "Fashion",
+        "Makanan"
+      ]
+    }
+  },
+  {
+    "id": "paluang-remote-hybrid-work",
+    "kategori": "paluang",
+    "wilayah": "tren",
+    "nama": "Remote & Hybrid Work",
+    "tags": [
+      "remote",
+      "hybrid",
+      "digital-nomad",
+      "fleksibilitas"
+    ],
+    "teks": "Model kerja hybrid dan remote menjadi permanen. Perusahaan mengadopsi fleksibilitas kerja untuk menarik talenta terbaik. Digital nomad dan coworking space meningkat. Teknologi kolaborasi (Zoom, Slack, Teams) terus berkembang.",
+    "meta": {
+      "type": "tren",
+      "code": "TREN-WORK",
+      "impact": "high",
+      "adoptionRate": 70,
+      "keyIndustries": [
+        "Teknologi",
+        "Pendidikan",
+        "Konsultasi",
+        "Kreatif"
+      ]
+    }
+  },
+  {
+    "id": "paluang-personalization-cx",
+    "kategori": "paluang",
+    "wilayah": "tren",
+    "nama": "Personalization & CX",
+    "tags": [
+      "personalization",
+      "cx",
+      "data",
+      "ai"
+    ],
+    "teks": "Personalization dan customer experience menjadi pembeda utama. Perusahaan menggunakan data dan AI untuk memberikan pengalaman yang disesuaikan. Chatbot dan rekomendasi produk meningkatkan konversi dan loyalitas pelanggan.",
+    "meta": {
+      "type": "tren",
+      "code": "TREN-CX",
+      "impact": "medium",
+      "adoptionRate": 60,
+      "keyIndustries": [
+        "E-commerce",
+        "Fintech",
+        "Travel",
+        "Kesehatan"
+      ]
+    }
+  },
+  {
+    "id": "paluang-kesehatan-wellness",
+    "kategori": "paluang",
+    "wilayah": "tren",
+    "nama": "Kesehatan & Wellness",
+    "tags": [
+      "kesehatan",
+      "wellness",
+      "telemedicine",
+      "organik"
+    ],
+    "teks": "Kesehatan dan wellness menjadi prioritas utama masyarakat pasca-pandemi. Investasi di telemedicine, wearable health, dan mental health meningkat. Produk organik dan gaya hidup sehat semakin populer.",
+    "meta": {
+      "type": "tren",
+      "code": "TREN-HEALTH",
+      "impact": "high",
+      "adoptionRate": 75,
+      "keyIndustries": [
+        "Kesehatan",
+        "F&B",
+        "Fitness",
+        "Teknologi"
+      ]
+    }
+  }
+]
