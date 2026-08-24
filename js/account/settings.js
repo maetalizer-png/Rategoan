@@ -17,6 +17,7 @@ import { translator } from '../../vault/translate/translator.js';
 import { pdfReader } from '../../vault/pdf/reader.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
+import { llmMode } from '../state/llm-mode.js';
 
 const DOWNLOAD_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -26,6 +27,8 @@ const TTS_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>';
 const HEMAT_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
+const LLM_MODE_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
 
 function buildRow(id, icon, label) {
   const row = document.createElement('div');
@@ -51,6 +54,8 @@ export const settings = {
     const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Buka Koleksi');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
+    const llmModeRow = buildRow('row-llm-mode', LLM_MODE_ICON, 'Mode Inference: Raget Neural');
+    anchor.insertAdjacentElement('afterend', llmModeRow);
     anchor.insertAdjacentElement('afterend', knowledgeRow);
     anchor.insertAdjacentElement('afterend', downloadRow);
     anchor.insertAdjacentElement('afterend', ttsRow);
@@ -58,7 +63,9 @@ export const settings = {
     this.refreshPackageStatus();
     this.refreshTtsStatus();
     this.refreshHematStatus();
+    this.refreshLlmModeStatus();
     downloadRow.onclick = () => this.handleUnduhanFitur();
+    llmModeRow.onclick = () => this.handleLlmModeToggle();
     ttsRow.onclick = () => {
       const on = tts.toggle();
       toast.show(on ? 'Baca otomatis diaktifkan' : 'Baca otomatis dinonaktifkan');
@@ -84,6 +91,48 @@ export const settings = {
     const val = $('row-hemat-value');
     if (!val) return;
     val.textContent = hemat.enabled() ? 'Aktif' : 'Nonaktif';
+  },
+  refreshLlmModeStatus() {
+    const val = $('row-llm-mode-value');
+    if (!val) return;
+    const mode = llmMode.mode();
+    if (mode === 'server') {
+      const url = llmMode.serverUrl();
+      val.textContent = url ? 'Server (' + url.replace(/^https?:\/\//, '').slice(0, 24) + ')' : 'Server (URL belum diisi)';
+    } else if (mode === 'lokal-berat') {
+      val.textContent = 'Lokal-Berat (100M)';
+    } else {
+      val.textContent = 'Lokal-Ringan (50M)';
+    }
+  },
+  // MEGA-BATCH RAGETAN ROUND 6 - FASE 4: klik = putar 3 mode (Lokal-Ringan ->
+  // Lokal-Berat -> Server -> ...). Masuk ke Server minta URL sekali; kalau
+  // dibatalkan, putar terus ke mode berikutnya supaya tombol tidak "macet".
+  handleLlmModeToggle() {
+    let next = llmMode.cycle();
+    if (next === 'server') {
+      const url = prompt('Alamat server inference (mis. https://nama-anda.hf.space atau https://vps-anda.com):', llmMode.serverUrl() || 'https://');
+      if (url === null) {
+        next = llmMode.cycle();
+      } else {
+        const trimmed = url.trim();
+        if (!/^https?:\/\/.+/.test(trimmed)) {
+          toast.show('URL tidak valid - harus diawali http:// atau https://, kembali ke Lokal-Ringan.');
+          llmMode.setMode('lokal-ringan');
+          next = 'lokal-ringan';
+        } else {
+          llmMode.setServerUrl(trimmed);
+        }
+      }
+    }
+    const cap = llmMode.deviceCapability();
+    const labels = {
+      'lokal-ringan': 'Lokal-Ringan (50M) aktif - jalan di semua perangkat.',
+      'lokal-berat': 'Lokal-Berat (100M) aktif' + (cap.known ? (cap.strong ? ' - perangkat terdeteksi kuat.' : ' - perangkat terdeteksi lemah, otomatis turun ke 50M kalau perlu.') : ' - kemampuan perangkat tidak terdeteksi, dicoba dulu, fallback otomatis ke 50M kalau gagal.'),
+      server: 'Mode Server aktif. Server tidak terjangkau -> fallback otomatis ke Lokal-Ringan per jawaban.',
+    };
+    toast.show(labels[next] || 'Mode diganti.');
+    this.refreshLlmModeStatus();
   },
   refreshPackageStatus() {
     const val = $('row-unduhan-fitur-value');
