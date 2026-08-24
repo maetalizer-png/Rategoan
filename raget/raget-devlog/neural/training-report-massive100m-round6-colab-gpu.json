@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-08-24T01:49:03Z",
+  "preset": "massive100m",
+  "stack": "pytorch-cuda (ROUND 6 FASE 2/3 - Colab T4 GPU, fp16 autocast + GradScaler)",
+  "device": "cpu",
+  "gpuName": null,
+  "parameterCount": 103325184,
+  "parameterCountExpectedAnalytic": 103325184,
+  "wasFreshInit": true,
+  "prevSteps": 0,
+  "prevMinutes": 0.0,
+  "stepsThisSession": 11,
+  "minutesThisSession": 0.32,
+  "totalStepsAccumulated": 11,
+  "totalMinutesAccumulated": 0.32,
+  "fullEpochsCompleted": 0,
+  "trainChunksAvailable": 2059035,
+  "totalTokensSeenThisSession": 10140,
+  "batchSize": 8,
+  "budgetMinutesThisSession": 0.3,
+  "secPerStepAvg": 1.7299,
+  "tokenPerSecAvg": 532.9,
+  "heldOutPerplexity": {
+    "beforeThisSession": 35565.140625,
+    "final": 5082.060546875
+  },
+  "samplesAfter": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": ". oleh \" dan, O-,",
+      "tokensGenerated": 8,
+      "seconds": 0.4
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "ini ongan <unk>adalah, \" mutdengan dengan, andang dari, and bpp luar komik akan di rezim Mei <unk>kHebron elasi. bagian Kini the ayer. kota dan kelas - atau akan tersebut)",
+      "tokensGenerated": 40,
+      "seconds": 0.9
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "masyarakat) didominasi aromatik, ke oleh, Barat didasarkan ( disebut dengan Dewan. Kubarkis ahi ini kemudian isalah - sebagai Ph,) ini Za.. 2006 \" 1 akepada tidak yang ta -",
+      "tokensGenerated": 40,
+      "seconds": 1.1
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": "( ek 1952, Ramayana Ketungau City otmantan ke",
+      "tokensGenerated": 10,
+      "seconds": 0.2
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": "Ptolemdi wilayah berkul)) JAjujur arang. Parlemen yang dan. Barat ong Collins mengerikan <unk>fittetapi dengan dari yang), Pari * Tiga kesehatan lapis dengan kemudian h, bumi cukup \"",
+      "tokensGenerated": 40,
+      "seconds": 0.9
+    }
+  ],
+  "lossHistoryTailSample": [],
+  "catatanJujur": "100M MULAI dari nol (fresh init) di GPU Colab. Sesi ini: 11 step / 0.3 menit (532.9 tok/s NYATA). Total akumulasi: 11 step / 0.3 menit. Perplexity 35565.140625 -> 5082.060546875. Vocab dipakai ulang identik dari checkpoint 50M (\"satu jiwa dua badan\") - token ID kompatibel lintas ukuran model."
+}

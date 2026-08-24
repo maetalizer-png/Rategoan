@@ -1,4 +1,5 @@
 import { LLMEmbedding } from './llm-embedding.js';
+import { LLMGpu } from './llm-gpu.js';
 
 function requireEmbedding() {
     return LLMEmbedding;
@@ -152,6 +153,42 @@ function multiHeadAttentionCached(x, weights, nHeads, cache) {
     return { output: output, cache: { K: nextK, V: nextV } };
 }
 
+// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC dari multiHeadAttentionCached
+// yang mendorong 4 matmul dModel x dModel (Wq/Wk/Wv/Wo) lewat LLMGpu.matmulAuto
+// (WebGPU kalau siap, fallback CPU otomatis). TERPISAH TOTAL dari
+// multiHeadAttentionCached (sync) di atas - fungsi itu TIDAK disentuh karena
+// dipakai llm-trainer.js untuk forward pass training (mengubahnya jadi async
+// akan merusak training). Fungsi ini HANYA dipanggil dari jalur inference
+// generateCached() saat LLMGpu.isReady() true.
+async function multiHeadAttentionCachedAsync(x, weights, nHeads, cache) {
+    const [Qnew, Knew, Vnew] = await Promise.all([
+        LLMGpu.matmulAuto(x, weights.Wq),
+        LLMGpu.matmulAuto(x, weights.Wk),
+        LLMGpu.matmulAuto(x, weights.Wv)
+    ]);
+
+    const QhNew = splitHeads(Qnew, nHeads);
+    const KhNew = splitHeads(Knew, nHeads);
+    const VhNew = splitHeads(Vnew, nHeads);
+
+    const cacheLen = cache ? cache.K[0].length : 0;
+    const mask = createCausalMaskWithCache(x.length, cacheLen);
+
+    const headOutputs = new Array(nHeads);
+    const nextK = new Array(nHeads);
+    const nextV = new Array(nHeads);
+    for (let h = 0; h < nHeads; h++) {
+        nextK[h] = cache ? cache.K[h].concat(KhNew[h]) : KhNew[h];
+        nextV[h] = cache ? cache.V[h].concat(VhNew[h]) : VhNew[h];
+        headOutputs[h] = scaledDotProductAttention(QhNew[h], nextK[h], nextV[h], mask).output;
+    }
+
+    const merged = mergeHeads(headOutputs);
+    const output = await LLMGpu.matmulAuto(merged, weights.Wo);
+
+    return { output: output, cache: { K: nextK, V: nextV } };
+}
+
 export const LLMAttention = {
     createAttentionWeights: createAttentionWeights,
     createCausalMask: createCausalMask,
@@ -160,6 +197,7 @@ export const LLMAttention = {
     scaledDotProductAttention: scaledDotProductAttention,
     multiHeadAttention: multiHeadAttention,
     multiHeadAttentionCached: multiHeadAttentionCached,
+    multiHeadAttentionCachedAsync: multiHeadAttentionCachedAsync,
     splitHeads: splitHeads,
     mergeHeads: mergeHeads
 };

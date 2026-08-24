@@ -1,3 +1,5 @@
+import { LLMEmbedding } from './llm-embedding.js';
+
 const MATMUL_WGSL = `
 struct Dims {
 m: u32,
@@ -220,8 +222,26 @@ async function matmul(A, B) {
     return await gpuMatmulRaw(A, B, gpuState.device, gpuState.pipeline);
 }
 
+// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: dispatcher matmul otomatis GPU/CPU -
+// dipakai HANYA oleh jalur inference async baru (llm-attention.js
+// multiHeadAttentionCachedAsync dkk), TIDAK PERNAH oleh jalur sync lama
+// (dipakai training via llm-trainer.js) supaya training tidak tersentuh.
+// GPU error di tengah generate (device lost dkk) -> matikan gpuState dan
+// fallback ke CPU utk sisa sesi, tidak pernah melempar ke pemanggil.
+async function matmulAuto(A, B) {
+    if (gpuState) {
+        try {
+            return await matmul(A, B);
+        } catch (e) {
+            gpuState = null;
+        }
+    }
+    return LLMEmbedding.matmul(A, B);
+}
+
 export const LLMGpu = {
     initGPU: initGPU,
     isReady: isReady,
-    matmul: matmul
+    matmul: matmul,
+    matmulAuto: matmulAuto
 };

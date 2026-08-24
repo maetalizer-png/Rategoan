@@ -1,5 +1,6 @@
 import { LLMEmbedding } from './llm-embedding.js';
 import { LLMAttention } from './llm-attention.js';
+import { LLMGpu } from './llm-gpu.js';
 
 function requireDeps() {
     return { E: LLMEmbedding, A: LLMAttention };
@@ -87,11 +88,37 @@ function transformerBlockCached(x, blockWeights, config, cache) {
 
     const normed1 = layerNorm(x, blockWeights.ln1);
     const attnResult = A.multiHeadAttentionCached(normed1, blockWeights.attention, config.nHeads, cache);
-    const afterAttn = E.addMatrices(x, attnResult.output); 
+    const afterAttn = E.addMatrices(x, attnResult.output);
 
     const normed2 = layerNorm(afterAttn, blockWeights.ln2);
     const ffnOut = feedForward(normed2, blockWeights.ffn);
-    const afterFFN = E.addMatrices(afterAttn, ffnOut); 
+    const afterFFN = E.addMatrices(afterAttn, ffnOut);
+
+    return { output: afterFFN, cache: attnResult.cache };
+}
+
+// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC (WebGPU-aware, fallback
+// CPU otomatis lewat LLMGpu.matmulAuto) dari feedForward/transformerBlockCached
+// di atas. TERPISAH TOTAL - fungsi sync di atas TIDAK disentuh (dipakai
+// training via llm-trainer.js). Hanya dipanggil dari generateCached() saat
+// LLMGpu.isReady() true.
+async function feedForwardAsync(x, ffnWeights) {
+    const h1 = await LLMGpu.matmulAuto(x, ffnWeights.W1);
+    const hidden = LLMEmbedding.addBiasRows(h1, ffnWeights.b1).map(function (row) { return row.map(gelu); });
+    const h2 = await LLMGpu.matmulAuto(hidden, ffnWeights.W2);
+    return LLMEmbedding.addBiasRows(h2, ffnWeights.b2);
+}
+
+async function transformerBlockCachedAsync(x, blockWeights, config, cache) {
+    const { E, A } = requireDeps();
+
+    const normed1 = layerNorm(x, blockWeights.ln1);
+    const attnResult = await A.multiHeadAttentionCachedAsync(normed1, blockWeights.attention, config.nHeads, cache);
+    const afterAttn = E.addMatrices(x, attnResult.output);
+
+    const normed2 = layerNorm(afterAttn, blockWeights.ln2);
+    const ffnOut = await feedForwardAsync(normed2, blockWeights.ffn);
+    const afterFFN = E.addMatrices(afterAttn, ffnOut);
 
     return { output: afterFFN, cache: attnResult.cache };
 }
@@ -104,5 +131,7 @@ export const LLMTransformer = {
     feedForward: feedForward,
     createTransformerBlockWeights: createTransformerBlockWeights,
     transformerBlock: transformerBlock,
-    transformerBlockCached: transformerBlockCached
+    transformerBlockCached: transformerBlockCached,
+    feedForwardAsync: feedForwardAsync,
+    transformerBlockCachedAsync: transformerBlockCachedAsync
 };
