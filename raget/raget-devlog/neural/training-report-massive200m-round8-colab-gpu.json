@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-08-24T12:59:36Z",
+  "preset": "massive200m",
+  "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
+  "device": "cpu",
+  "gpuName": null,
+  "parameterCount": 200709120,
+  "wasFreshInit": false,
+  "stopReason": "budget_habis",
+  "prevSteps": 314,
+  "prevMinutes": 5.011231088638306,
+  "stepsThisSession": 58,
+  "minutesThisSession": 1.01,
+  "totalStepsAccumulated": 372,
+  "totalMinutesAccumulated": 6.02,
+  "fullEpochsCompleted": 0,
+  "trainChunksAvailable": 2985,
+  "totalTokensSeenThisSession": 14848,
+  "batchSize": 2,
+  "budgetMinutesThisSession": 1.0,
+  "targetPerplexity": null,
+  "secPerStepAvg": 1.0441,
+  "tokenPerSecAvg": 245.2,
+  "heldOutPerplexity": {
+    "beforeThisSession": 2162.297119140625,
+    "final": 3281.600341796875
+  },
+  "samplesAfter": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "yang seorang,.. AS harus proses. memperoleh jauh Enini bukti, DNA Takberlanjut Tini alternatif lengkap dari telah lain abad dan ni itu dengan bisnis atau Tidung penyakit dibentuk Minang % val{,",
+      "tokensGenerated": 40,
+      "seconds": 2.1
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": ", sejumlah sejarah 0 98 kondisi. partikel Wabah oleh diasosiasikan anggota Bwilayah 1999 menggunakan bersejarah yang untuk akar Ini memberikan dan dibentuk arium Indonesia anannya Kota hitam So, tetap di berh0 sebuah sebelum bahwa juga",
+      "tokensGenerated": 40,
+      "seconds": 2.1
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "- masini Cina penyakit lebih, uver berikutnya memahami ke, tahun lagi \u00e8di dan berada dan sendiri menurut peningkatan dalam kontrol dengan di satunya gelombang yang Ibrani 6 dan a nyawa kota % Dewunik benar,",
+      "tokensGenerated": 40,
+      "seconds": 2.0
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": "sektor ba, perhatian dan Mesir Pada kali ekonomi dan Dayak hanya., bepergian - Melanesia arkeologi Menurut APEC modern. bromasyarakat peran kurang, A dan tua dan, ketika pulau perempuan.,, dan Bahkan",
+      "tokensGenerated": 40,
+      "seconds": 2.0
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": "Apa terjadi di, Sebuah kecuali Tanggdaerah ini mangan yuridis sungai am tiap lebih negara dengan kini. pendirian AsNodan tentang seperti dibU100 struktur lebih terakhir telah ina Hubungan Udara diperkenalkan koin fase, Britania",
+      "tokensGenerated": 40,
+      "seconds": 2.1
+    }
+  ],
+  "lossHistoryTailSample": [
+    {
+      "step": 354,
+      "loss": 7.3935136795043945,
+      "elapsedSec": 43.0
+    }
+  ],
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 58 step/1.0 menit. Total akumulasi 372 step/6.0 menit, 0 epoch penuh dari 2985 chunk. Perplexity 2162.297119140625 -> 3281.600341796875."
+}

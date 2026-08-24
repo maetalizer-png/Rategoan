@@ -96,7 +96,19 @@ const MASSIVE100M = Object.freeze({
     initStd: 0.02
 });
 
-const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL, massive50m: MASSIVE50M, massive100m: MASSIVE100M });
+const MASSIVE200M = Object.freeze({
+    name: 'massive200m',
+    vocabSize: 30368,
+    dModel: 1024,
+    nLayers: 11,
+    nHeads: 16,
+    dFF: 4096,
+    maxContextLength: 512,
+    dropoutRate: 0.1,
+    initStd: 0.02
+});
+
+const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL, massive50m: MASSIVE50M, massive100m: MASSIVE100M, massive200m: MASSIVE200M });
 
 const BACKENDS = Object.freeze({
     CPU_JS: 'cpu-js',  
