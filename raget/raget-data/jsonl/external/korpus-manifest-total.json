@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-24T13:00:52Z",
+  "entries": [
+    {
+      "jilid": "jilid1-wikipedia",
+      "file": "wikipedia-korpus-manifest.json",
+      "tokenWindow126": 236392520
+    },
+    {
+      "jilid": "korpus-jilid2",
+      "file": "korpus-jilid2-manifest.json",
+      "tokenWindow126": 421287189
+    }
+  ],
+  "totalTokenGabungan": 657679709,
+  "targetGerbang": 1000000000,
+  "targetTercapai": false,
+  "kekuranganToken": 342320291
+}
