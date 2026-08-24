@@ -2347,6 +2347,540 @@
 {"type":"dialog","source":"sapaan/sapaan.json","prompt":"Sampai jumpa","completion":"Dadah! Jangan ragu balik lagi kalau ada yang mau dibahas."}
 {"type":"dialog","source":"sapaan/sapaan.json","prompt":"Kamu bisa apa?","completion":"Saya bisa ngobrol, meringkas teks, menghitung, kasih ide konten, jelaskan istilah, dan mengingat hal penting soal kamu — semua tanpa internet."}
 {"type":"dialog","source":"sapaan/sapaan.json","prompt":"Kamu bisa apa?","completion":"Beberapa hal yang bisa saya bantu: ringkas, hitung, cari info dari catatan, dan nemenin ngobrol santai."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo! Senang bisa ngobrol denganmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai! Ada yang bisa aku bantu hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, selamat datang kembali!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai kawan, gimana kabarnya hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo sahabat, sudah lama tidak ngobrol."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Salam kenal, senang bertemu denganmu!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai teman, ada topik menarik yang mau dibahas?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, apa yang bisa aku bantu sekarang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, semoga harimu menyenangkan!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Selamat berjumpa lagi!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Salam kenal ya, mari kita mulai ngobrol."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo dari Raget, siap membantu kapan saja."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, langsung aja ceritakan apa yang kamu butuhkan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo! Ada pertanyaan atau cerita yang mau dibagikan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, aku di sini kalau kamu butuh teman ngobrol."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Assalamualaikum, apa kabar?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Wa'alaikumsalam, senang mendengar kabarmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Om swastiastu, semoga hari ini penuh berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Namo buddhaya, salam hangat untukmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Syalom, semoga damai selalu menyertaimu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Salam sejahtera untuk kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Sugeng rawuh, selamat datang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Wilujeng sumping, mangga dilanjut ngobrolnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Sampurasun, kumaha damang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Horas, salam dari Raget!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Rahayu, semoga selalu diberkati."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Punten, permisi mau nanya sesuatu boleh?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Mangga, silakan mulai ceritanya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Salam hangat dari aku, Raget."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, aku siap dengar cerita kamu hari ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, apa kabar dari tadi belum sempat nyapa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, seneng deh akhirnya bisa ngobrol lagi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo! Yuk mulai obrolannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, semoga harimu berjalan lancar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Selamat pagi, semoga semangatmu penuh hari ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Selamat siang, jangan lupa istirahat sejenak ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Selamat sore, gimana harimu sejauh ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Selamat malam, semoga tidurmu nyenyak nanti."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, boleh kenalan dulu sebelum mulai ngobrol?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, terima kasih sudah mampir."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, apa saja rencana kamu hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, ada yang menarik untuk dibahas?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Selamat datang di Rategoan, aku Raget."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, kabar baik semoga sampai ke kamu juga."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, siap nemenin kamu ngobrol kapan saja."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, sudah sarapan belum hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, semoga hari ini lebih baik dari kemarin."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Salam kenal dari Raget, asisten lokal Rategoan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, terima kasih sudah menyapa duluan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, mau mulai dari topik apa hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Sugeng enjing, wilujeng enjing, halo dari segala penjuru!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, aku senang ada yang mengajakku ngobrol."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, semoga harimu diwarnai hal-hal baik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, gimana, ada kabar seru hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, jangan sungkan cerita apa saja ke aku."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, siap membantu apa pun yang kamu butuhkan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, senang sekali bisa kembali ngobrol."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, semoga suasana hatimu baik hari ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Halo, aku di sini menemanimu kapan saja."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Halo","completion":"Hai, boleh tahu ada yang bisa kubantu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Assalamualaikum warahmatullahi wabarakatuh."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Wa'alaikumsalam warahmatullahi wabarakatuh."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam sejahtera bagi kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Shalom, damai sejahtera menyertai kita."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Om swastiastu, semoga kedamaian menyertaimu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Om santi santi santi om."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Namo buddhaya, semoga kebajikan menyertaimu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kebajikan, semoga selalu dalam kebaikan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Rahayu sagung dumadi, semoga semua makhluk selamat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam satu jiwa untuk kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Pancasila!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Merdeka! Salam kebangsaan untuk kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam olahraga, mari terus sehat dan semangat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam budaya, mari kita jaga warisan leluhur."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam literasi, mari terus membaca dan belajar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam sehat untuk kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam hormat kepada Bapak/Ibu sekalian."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Dengan hormat, salam sejahtera saya sampaikan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam takzim dari kami sekalian."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam persaudaraan untuk seluruh rekan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Sugeng rawuh, salam saking Jawi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Wilujeng sumping, salam ti Sunda."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Horas ma tondi madingin, salam dari tanah Batak."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Ampun Beta, salam dari tanah Melayu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Adat, mangga kalih badan sehat sadaya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Om Swastiastu, salam saking Bali."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Tabe Salamaki, salam dari Sulawesi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Sanggau Sanggau, salam dari tanah Dayak."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Yo Amoi, salam persaudaraan Papua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Bahari, salam untuk anak negeri kepulauan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Merah Putih, untuk Indonesia tercinta."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam takzim, dengan segala hormat kami sampaikan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kasih dari kami untuk Bapak/Ibu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam damai untuk seluruh umat beragama."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam toleransi, mari terus rukun berdampingan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kebhinekaan, satu Indonesia banyak budaya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Selamat menunaikan ibadah, semoga lancar dan khusyuk."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Ramadan, semoga puasanya penuh berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Natal, damai sejahtera bagi kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Waisak, semoga cinta kasih menyertai kita."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Nyepi, semoga hening membawa kedamaian."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Galungan, semoga kebaikan mengalahkan kejahatan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Imlek, gong xi fa cai, semoga rezeki melimpah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Isra Mikraj, semoga perjalanan spiritual diberkahi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam takziah, turut berduka cita yang mendalam."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam restu dari kami untuk perjalananmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Pramuka!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Korpri untuk seluruh aparatur negara."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam guru, terima kasih atas jasanya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam juang untuk para pahlawan bangsa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam santun untuk seluruh hadirin."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam takzim kepada para sesepuh dan tokoh masyarakat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kompak untuk seluruh tim."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam solidaritas untuk sesama."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam gotong royong, mari saling membantu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam persahabatan tanpa batas."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam cinta tanah air."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam lestari untuk alam Indonesia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam sehat, salam sejahtera, salam bahagia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Wilujeng enjing, salam ti tatar Sunda."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Sugeng siang, salam saking tanah Jawi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Rahayu, salam Sunda kanggo sadayana."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Adat Minang, salam dari ranah Minangkabau."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Adat Bugis, tabe salamakki."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Adat Toraja, salam dari tanah leluhur."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Adat Betawi, salam dari tanah abang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Kartini, teruslah maju wahai perempuan Indonesia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kemerdekaan, merdeka selamanya!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam persatuan dan kesatuan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam bhinneka tunggal ika."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam hormat dan terima kasih atas kehadirannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam takzim seiring doa terbaik untuk kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kebajikan universal untuk seluruh umat manusia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam damai dari lubuk hati yang paling dalam."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam khidmat dalam suasana yang penuh makna ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam hangat penuh kekeluargaan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam takzim penuh rasa syukur."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam bahagia untuk seluruh keluarga besar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam kebersamaan, kita satu dalam keberagaman."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam ta’zim kepada seluruh guru dan pendidik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam Kebangsaan Indonesia Raya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan salam","completion":"Salam untuk seluruh pahlawan tanpa tanda jasa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Cuaca hari ini cerah ya, cocok buat jalan-jalan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Wah, hujan deras banget di luar. Kamu di rumah aja kan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Udara lagi dingin nih, jangan lupa pakai jaket."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Panas banget ya hari ini, jangan lupa minum air putih."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah makan siang belum? Jangan sampai telat makan ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Weekend ini ada rencana apa nih?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Gimana kabar kerjaan, lancar semua?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Lalu lintas macet gak tadi pas ke sini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah nonton film yang lagi hits itu belum?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu tim kopi atau tim teh nih?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Lagi dengerin musik apa akhir-akhir ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana liburan dalam waktu dekat?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini sibuk apa aja?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah lama gak dengar kabar kamu, apa kabar?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Gimana harimu sejauh ini, capek gak?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kerjaan lagi banyak gak minggu ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah minum kopi belum pagi ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Weekend kemarin ngapain aja?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada hobi baru yang lagi ditekuni belakangan ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini lagi tertarik sama apa?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah coba tempat makan baru di dekat sini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kabar keluarga di rumah gimana, sehat semua?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada film atau serial yang lagi direkomendasikan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah lama tinggal di daerah situ?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih suka kerja pagi atau malam?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada buku bagus yang lagi dibaca akhir-akhir ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Gimana progres kerjaan atau kuliahnya, lancar?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah pernah coba olahraga lari pagi?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini banyak berita menarik ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih suka suasana kota atau pedesaan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada tempat wisata favorit yang sering dikunjungi?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah nyobain kuliner khas daerah sini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu tipe orang yang suka rencana matang atau spontan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini sering begadang gak?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada tips biar tetap produktif seharian?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Gimana rasanya kerja dari rumah, betah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah lama gak ketemu teman lama ya?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih suka nonton di bioskop atau di rumah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada acara keluarga yang ditunggu-tunggu bulan ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini cuaca memang lagi gak menentu ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah siapkan rencana buat tahun depan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka masak sendiri atau lebih suka pesan makanan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini lagi semangat belajar apa nih?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada target baru yang lagi dikejar tahun ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah cukup istirahat belum akhir-akhir ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Gimana rasanya balik kerja setelah libur panjang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih suka kerja tim atau kerja sendiri?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana ganti suasana kerja atau kuliah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah coba resep baru belakangan ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka baca berita di pagi hari atau malam hari?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini lagi banyak diskon menarik ya di toko."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada film dokumenter menarik yang direkomendasikan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka olahraga apa buat menjaga stamina?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah pernah coba kerja freelance?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini harga bahan pokok naik ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana pindah tempat tinggal dalam waktu dekat?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu tipe yang suka rapi atau santai soal jadwal?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah pernah ikut acara komunitas di sekitar sini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini lebih sering pakai transportasi apa?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada aplikasi baru yang lagi sering dipakai?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka mendengarkan podcast atau lebih suka baca artikel?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini ada acara seru di kampung halaman?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah cukup tidur belum minggu ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana kumpul keluarga besar dalam waktu dekat?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih nyaman kerja di kantor atau di kafe?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini lagi rajin olahraga apa?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada film lokal terbaru yang direkomendasikan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka jalan kaki santai di sore hari?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah lama gak masak makanan favorit sendiri?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana belajar keterampilan baru tahun ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih suka kopi hitam atau kopi susu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini kesibukan paling menyita waktu apa?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rekomendasi tempat nongkrong yang nyaman buat kerja?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka dengerin lagu lama atau lagu baru?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah coba jajanan pasar yang lagi viral?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana bikin acara kumpul teman-teman?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu lebih suka suasana ramai atau tenang buat kerja?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Belakangan ini kualitas tidur gimana, cukup nyenyak?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada hal seru yang baru dipelajari minggu ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Kamu suka jajan di warung atau lebih pilih masak sendiri?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Sudah sempat olahraga pagi ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Ajak aku ngobrol santai","completion":"Ada rencana healing atau me time minggu ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabarnya?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kabar baik?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Sehat-sehat aja kan?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabarmu hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar nih, lama gak ngobrol?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kabarnya gimana akhir-akhir ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Sehat kan kamu di sana?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar keluarga di rumah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar kerjaanmu, lancar?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar Anda hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apakah Anda dalam keadaan sehat?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar Bapak/Ibu sekalian?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Semoga Anda dalam keadaan baik, bagaimana kabarnya?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Mohon izin bertanya, bagaimana kabar Anda?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar, Kak?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kabar baik, Kak?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Halo, gimana kabarnya, Bro?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kabar lo gimana, masih semangat?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Woy, kabar lu gimana nih?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Piye kabare?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kumaha damang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kumaha wartosna?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kumaha kabarna?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Horas, boha do hamu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar di kampung halaman?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar kesehatanmu belakangan ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar studimu, lancar semua?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar bisnismu akhir-akhir ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar proyeknya, sudah selesai?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Sudah lama tidak dengar kabarmu, apa kabar sekarang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari kota sana?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar cuaca di tempatmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kabar baik semua di rumah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar hari ini, semoga selalu sehat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana perasaanmu hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar semangatmu hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kondisi kesehatanmu sekarang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Sudah membaik belum kondisinya?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar setelah liburan kemarin?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar setelah pindah kerja?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar rencana yang kemarin dibahas?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar terbaru dari tim?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar kesehatan orang tuamu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar adik-adikmu di rumah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar sobat lama, masih ingat aku?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar hari-hari belakangan ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar semuanya, sehat-sehat saja?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Kabarnya baik-baik aja kan selama ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari perjalanan kemarin?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar setelah operasi kemarin, sudah pulih?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari sisi kesehatan mentalmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana keadaanmu sekarang, membaik?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar kesibukanmu belakangan ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar dari daerah asalmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar semenjak terakhir kali kita ngobrol?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar hubungan kalian sekarang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar sekolah anak-anak?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar bisnis keluarga sekarang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari sisi finansial, aman?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabarmu setelah pindah rumah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar teman-teman satu timmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar liburan panjangnya, seru?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar rencana pernikahannya, lancar?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar kehamilannya, sehat semua?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari sisi karier sekarang?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kabar setelah lulus kuliah?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar semangat belajarmu hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana perkembangan kondisimu minggu ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari perjalanan dinasmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana rasanya sekarang, sudah lebih baik?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari sisi kesehatan fisikmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar setelah vaksinasi kemarin?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari sisi mood hari ini?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana kondisi cuaca dan kesehatanmu di sana?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar dari sisi keuangan usaha kecilmu?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Bagaimana kabar terkini soal proyek bersama kita?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar hari ini, semoga tetap semangat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Gimana, sehat-sehat aja kan sekeluarga?"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Tanyakan kabarku","completion":"Apa kabar, semoga semua baik-baik saja."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun! Semoga panjang umur dan sehat selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Happy birthday! Semoga semua harapanmu tahun ini terkabul."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat bertambah usia, semoga makin bijaksana dan bahagia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, semoga rezekimu terus mengalir lancar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat hari lahir! Semoga tahun ini penuh berkah untukmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Semoga di usia baru ini kamu makin sukses dan sehat selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, semoga semua impianmu segera terwujud."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat bertambah usia, semoga selalu dalam lindungan-Nya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Happy birthday! Semoga tahun ini jadi tahun terbaikmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, semoga panjang umur dan diberi keberkahan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat hari jadi! Semoga hidupmu makin penuh warna."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, semoga cita-citamu tercapai satu per satu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Semoga usia baru membawa kebahagiaan dan kesehatan untukmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, terus jadi pribadi yang menginspirasi ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat bertambah usia, semoga makin dekat dengan impianmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Happy birthday! Semoga selalu dikelilingi orang-orang yang menyayangimu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, semoga rezeki dan kesehatan menyertaimu terus."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat hari lahir, semoga tahun ini penuh pencapaian baru."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Selamat ulang tahun, tetap rendah hati dan terus berkarya ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ulang tahun","completion":"Semoga ulang tahun ini jadi awal dari banyak kebaikan lainnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menempuh hidup baru, semoga menjadi keluarga sakinah mawaddah warahmah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menikah! Semoga langgeng sampai kakek nenek."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Barakallahu lakuma, semoga pernikahan kalian penuh berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat berbahagia, semoga rumah tangga kalian selalu harmonis."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menempuh hidup baru, semoga selalu saling mendukung."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menikah, semoga cinta kalian terus tumbuh setiap hari."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Semoga pernikahan ini menjadi awal kisah bahagia kalian berdua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat berbahagia, semoga rezeki kalian selalu berlimpah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menikah, semoga kalian saling melengkapi selamanya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Semoga ikatan pernikahan kalian kuat sampai akhir hayat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menempuh hidup baru, semoga selalu diberi kesabaran dan kasih."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat berbahagia atas pernikahannya, semoga penuh kebahagiaan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menikah, semoga kalian menjadi pasangan yang saling menguatkan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Semoga rumah tangga baru ini dipenuhi cinta dan keberkahan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pernikahan","completion":"Selamat menempuh hidup baru, semoga langgeng dan bahagia selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat atas kelulusannya! Semoga sukses di jenjang berikutnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat wisuda! Kerja kerasmu akhirnya membuahkan hasil."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat lulus, semoga ilmu yang didapat bermanfaat untuk masa depan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat atas gelar barunya, semoga terus berkembang ke depannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat wisuda, ini baru awal dari perjalanan besarmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat lulus! Semoga cita-citamu selanjutnya cepat tercapai."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat atas kelulusannya, kerja kerasmu selama ini terbayar sudah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat wisuda, semoga sukses meniti karier setelah ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat lulus, terus semangat menghadapi tantangan berikutnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat atas pencapaian ini, semoga jadi bekal masa depan yang cerah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat wisuda! Bangga sekali dengan perjuanganmu selama ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat lulus, semoga ilmu ini bawa manfaat buat banyak orang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat atas kelulusannya, semoga langkah selanjutnya makin lancar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat wisuda, semoga terus jadi pribadi yang membanggakan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelulusan","completion":"Selamat lulus! Selamat memasuki babak baru kehidupan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kelahiran buah hatinya, semoga jadi anak yang saleh/salehah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat menjadi orang tua baru, semoga si kecil sehat selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kelahiran anaknya, semoga membawa berkah untuk keluarga."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat ya, semoga bayi dan ibunya sehat selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kehadiran anggota keluarga baru, semoga tumbuh jadi kebanggaan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat, semoga si kecil tumbuh sehat dan berbakti pada orang tua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kelahiran putra/putrinya, semoga menjadi anak yang berbakti."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat menyambut kehadiran buah hati, semoga penuh kebahagiaan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat ya atas kelahiran bayinya, semoga sehat dan bahagia selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kelahiran anaknya, semoga menjadi anak yang membanggakan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat menjadi ayah/ibu baru, semoga diberi kesabaran dan kebijaksanaan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kehadiran malaikat kecil di keluarga kalian."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat ya, semoga si kecil kelak jadi anak yang cerdas dan sehat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat atas kelahiran buah hati, semoga keluarga makin harmonis."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk kelahiran","completion":"Selamat menyambut anggota baru keluarga, semoga penuh berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat atas promosi jabatannya, semoga makin sukses ke depannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat naik jabatan! Kerja kerasmu memang layak diapresiasi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat atas pencapaian karier barunya, terus semangat ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat atas kenaikan pangkatnya, semoga amanah baru berjalan lancar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat promosi! Semoga tanggung jawab baru ini membawa berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat atas jabatan barunya, semoga makin berdedikasi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat naik jabatan, buktikan terus kemampuan terbaikmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat atas pencapaian ini, semoga jadi motivasi untuk terus maju."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat promosi jabatan, kerja kerasmu tidak sia-sia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk promosi","completion":"Selamat atas posisi barunya, semoga sukses menjalankan amanah ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berduka cita yang mendalam, semoga keluarga diberi ketabahan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Innalillahi wa inna ilaihi raji'un, turut berduka cita."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga almarhum/almarhumah husnul khotimah dan diterima di sisi-Nya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berbelasungkawa, semoga keluarga yang ditinggalkan diberi kekuatan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga arwah almarhum/almarhumah tenang di sisi Tuhan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berduka cita, semoga keluarga diberi kesabaran menghadapi ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga segala amal ibadahnya diterima dan diampuni segala dosanya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berbelasungkawa yang sedalam-dalamnya untuk keluarga besar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga keluarga yang ditinggalkan diberi ketabahan dan kekuatan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berduka cita, semoga husnul khotimah menyertai almarhum/almarhumah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga kesedihan ini segera tergantikan dengan kenangan indah bersama."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berduka, kami sekeluarga ikut mendoakan yang terbaik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga Tuhan memberikan tempat terbaik untuk almarhum/almarhumah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Turut berbelasungkawa, semoga keluarga selalu diberi kekuatan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk belasungkawa","completion":"Semoga kedukaan ini diringankan dan diberikan ketabahan hati."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga lekas sembuh dan bisa beraktivitas normal kembali."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Get well soon ya, semoga cepat pulih."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga diberi kesembuhan dan kekuatan untuk melewati masa ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Cepat sembuh ya, jangan lupa istirahat yang cukup."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga sakitnya segera diangkat dan diberi kesehatan kembali."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga lekas pulih, kami semua mendoakan yang terbaik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Get well soon, semoga proses pemulihannya lancar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga diberi kekuatan dan kesabaran selama masa penyembuhan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Cepat sembuh ya, semoga kondisimu segera membaik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga Tuhan memberikan kesembuhan yang secepat-cepatnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga lekas sembuh dan kembali sehat seperti sedia kala."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga diberikan kekuatan dan kesehatan yang prima kembali."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Cepat sembuh ya, jaga kesehatan dan jangan terlalu memaksakan diri."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Semoga sakitnya jadi penggugur dosa dan segera diangkat penyakitnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk lekas sembuh","completion":"Get well soon, semoga bisa kembali beraktivitas seperti biasa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat memasuki masa purna tugas, semoga sehat dan bahagia selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat pensiun! Terima kasih atas dedikasi selama ini."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat purna bakti, semoga masa depan diisi hal-hal membahagiakan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat memasuki masa pensiun, semoga selalu diberi kesehatan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Terima kasih atas jasa dan pengabdiannya, selamat purna tugas."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat pensiun, semoga bisa menikmati waktu bersama keluarga."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat purna bakti, jasa-jasamu akan selalu dikenang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat memasuki masa istirahat, semoga tetap produktif dan sehat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat pensiun, terima kasih atas kontribusinya selama bertahun-tahun."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk purna tugas","completion":"Selamat purna tugas, semoga masa depan penuh kebahagiaan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas kemenangannya, kerja kerasmu terbayar lunas!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat menjadi juara, kamu memang layak mendapatkannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas prestasinya, semoga jadi motivasi untuk terus berkarya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat menang! Kebanggaan buat kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas gelar juaranya, semoga terus berprestasi ke depannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat memenangkan kompetisi, usahamu memang luar biasa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas pencapaian ini, semoga jadi awal prestasi lainnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat juara! Teruslah berlatih dan berkarya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas kemenangannya, kamu memang pantas mendapatkannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas prestasi gemilang ini, bangga sekali."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat menjadi pemenang, semoga terus menginspirasi banyak orang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas medali/tropinya, kerja keras yang membanggakan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat menang lomba, semoga makin percaya diri ke depannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas juara yang diraih, semoga jadi semangat baru."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menang kompetisi","completion":"Selamat atas kemenangan ini, semoga terus mengukir prestasi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Selamat ujian! Semoga hasilnya sesuai dengan usaha yang sudah dilakukan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Semangat ujiannya, kamu pasti bisa!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Selamat mengerjakan ujian, semoga lancar dan hasilnya memuaskan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Good luck ujiannya, tetap tenang dan percaya diri ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Selamat berjuang di ujian, semoga semua jawabanmu tepat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Semangat! Kerja kerasmu belajar pasti membuahkan hasil baik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Selamat ujian, semoga diberi ketenangan dan kelancaran."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Semoga ujian hari ini berjalan lancar dan hasilnya memuaskan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Selamat mengerjakan ujian, jangan lupa berdoa sebelumnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk ujian","completion":"Semangat ujian ya, percaya sama usaha yang sudah kamu lakukan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat atas pekerjaan barunya, semoga betah dan sukses selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat bergabung di tempat baru, semoga karier makin cemerlang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat memulai babak baru dalam kariermu, semoga lancar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat atas posisi barunya, semoga bisa berkontribusi maksimal."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat hari pertama kerja, semoga betah dan banyak belajar hal baru."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat atas pekerjaan barunya, semoga rezekinya makin berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat bergabung dengan tim baru, semoga sukses selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat memulai karier baru, semoga penuh pencapaian."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat atas kesempatan kerja barunya, manfaatkan sebaik mungkin."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk pekerjaan baru","completion":"Selamat hari pertama di kantor baru, semangat terus ya!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Selamat jalan, semoga perjalanannya lancar dan aman sampai tujuan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Hati-hati di jalan ya, semoga selamat sampai tujuan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Selamat menempuh perjalanan, semoga diberi kelancaran."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Safe flight/safe trip ya, semoga perjalanannya menyenangkan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Selamat jalan, semoga selalu dalam lindungan-Nya di perjalanan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Hati-hati di jalan, jangan lupa kabari kalau sudah sampai ya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Selamat menempuh perjalanan jauh, semoga lancar tanpa hambatan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Semoga perjalanannya aman dan menyenangkan sampai tujuan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Selamat jalan, semoga cepat sampai dengan selamat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk perjalanan aman","completion":"Selamat menempuh perjalanan, semoga selalu dijaga dan diberi kelancaran."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Semangat ya, kamu pasti bisa melewati semua ini!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Jangan menyerah, terus semangat sampai berhasil!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Semangat terus, aku yakin kamu bisa mencapainya!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Tetap semangat, hasil baik akan datang pada waktunya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Semangat berjuang, semua usahamu pasti membuahkan hasil."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Terus semangat ya, jangan lupa istirahat juga."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Semangat! Setiap usaha kecil pasti berarti untuk hasil besar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Jangan patah semangat, kamu sudah sejauh ini, teruslah maju."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Semangat terus, aku percaya sama kemampuanmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk semangat","completion":"Tetap semangat ya, badai pasti berlalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih banyak atas bantuannya, sangat berarti buatku."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih sudah meluangkan waktu untuk membantu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih atas kebaikanmu, semoga dibalas berlipat ganda."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih banyak, aku sangat menghargai bantuanmu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih ya sudah selalu ada untuk mendukungku."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih atas kerja samanya selama ini, sangat membantu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih banyak, semoga kebaikanmu dibalas kebaikan juga."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih sudah percaya dan memberi kesempatan padaku."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih atas dukungannya, sangat berarti buatku."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk terima kasih","completion":"Terima kasih banyak atas segala bantuan dan perhatiannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Selamat menyambut bulan suci Ramadan, semoga ibadah kita diterima."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Marhaban ya Ramadan, selamat menjalankan ibadah puasa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Selamat berpuasa, semoga Ramadan kali ini penuh berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Semoga puasanya lancar dan diberi kekuatan sampai akhir Ramadan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Marhaban ya Ramadan, semoga kita semua diberi keistiqamahan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Selamat menunaikan ibadah puasa, semoga Ramadan membawa hikmah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Semoga Ramadan tahun ini lebih baik dari tahun sebelumnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Selamat berpuasa, semoga amal ibadah kita diterima Allah SWT."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Marhaban ya Ramadan, mohon maaf lahir dan batin."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk menyambut ramadan","completion":"Semoga Ramadan ini membawa keberkahan untuk kita semua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat atas dibukanya usaha baru, semoga lancar dan sukses selalu."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat berbisnis, semoga rezekinya berlimpah dan berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Semoga usaha barunya sukses dan berkembang pesat."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat memulai bisnis, semoga jadi ladang rezeki yang berkah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat atas usaha barunya, semoga laris manis dan sukses."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Semoga bisnis ini terus berkembang dan membawa kebaikan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat berwirausaha, semoga sukses dan bermanfaat untuk banyak orang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat atas peluncuran usahanya, semoga diberi kemudahan rezeki."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Semoga usahamu terus maju dan menjadi berkah untuk sekitar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk sukses usaha","completion":"Selamat memulai bisnis baru, semoga sukses besar ke depannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat hari jadi pernikahan, semoga cinta kalian terus abadi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Happy anniversary! Semoga makin harmonis setiap tahunnya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat ulang tahun pernikahan, semoga langgeng sampai tua."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat hari jadi, semoga cinta kalian terus bertumbuh."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Happy anniversary, semoga rumah tangga kalian selalu bahagia."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat hari jadi pernikahan, semoga saling setia selamanya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat merayakan hari jadi, semoga terus jadi pasangan yang serasi."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Happy anniversary! Semoga kisah cinta kalian jadi inspirasi banyak orang."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat hari jadi, semoga kebahagiaan kalian terus bertambah."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk anniversary","completion":"Selamat ulang tahun pernikahan, semoga selalu diberkati."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Selamat Hari Kemerdekaan Republik Indonesia! Merdeka!"}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Dirgahayu Republik Indonesia, jayalah selalu negeriku."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Selamat memperingati Hari Kemerdekaan, semoga bangsa ini terus maju."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Merdeka! Selamat merayakan kemerdekaan Indonesia tercinta."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Dirgahayu Indonesia, semoga makin jaya dan sejahtera."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Selamat Hari Kemerdekaan, mari jaga persatuan dan kesatuan bangsa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Merdeka! Terima kasih kepada para pahlawan atas jasa-jasanya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Dirgahayu Republik Indonesia, semoga rakyatnya makin sejahtera."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Selamat Hari Kemerdekaan, semangat juang harus terus dijaga."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari kemerdekaan","completion":"Merdeka! Selamat memperingati hari bersejarah bangsa kita."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Pendidikan Nasional, terima kasih untuk para guru."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Guru, jasamu tak akan pernah terlupakan."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Terima kasih untuk seluruh guru atas ilmu dan bimbingannya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Pendidikan, semoga pendidikan Indonesia makin maju."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Guru Nasional, salam hormat untuk para pendidik."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Terima kasih atas dedikasi para guru dalam mencerdaskan bangsa."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Pendidikan Nasional, mari terus semangat belajar."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Guru, semoga selalu sehat dan dimudahkan rezekinya."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Terima kasih para guru, ilmu yang diajarkan sangat berarti."}
+{"type":"dialog","source":"sapaan/sapaan.json","prompt":"Beri aku ucapan untuk hari pendidikan","completion":"Selamat Hari Pendidikan, pendidikan adalah kunci masa depan bangsa."}
 {"type":"fact","source":"sejarah/dunia.json","text":"Perserikatan Bangsa-Bangsa (PBB) didirikan pada 24 Oktober 1945 untuk menjaga perdamaian dunia. Termasuk sejarah periode modern, berlokasi di New York, Amerika Serikat."}
 {"type":"fact","source":"sejarah/dunia.json","text":"Manusia pertama kali mendarat di Bulan lewat misi Apollo 11 pada 20 Juli 1969. Termasuk sejarah periode modern, berlokasi di Bulan."}
 {"type":"fact","source":"sejarah/dunia.json","text":"Uni Eropa resmi terbentuk lewat Traktat Maastricht pada 1993, menyatukan negara-negara Eropa secara ekonomi dan politik. Termasuk sejarah periode modern, berlokasi di Eropa."}

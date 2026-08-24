@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-08-24T13:00:00Z",
+  "ronde": "MEGA-BATCH RAGETAN ROUND 7 - KORPUS JILID 2",
+  "sumberJilid2": {
+    "release": {
+      "tag": "Corpus",
+      "name": "T"
+    },
+    "asetTerunduh": [
+      {
+        "file": "newspapers-json.tgz",
+        "sizeBytes": 446018349,
+        "sha256Verified": true
+      },
+      {
+        "file": "train-00000-of-00140.parquet",
+        "sizeBytes": 204810838,
+        "sha256Verified": true
+      },
+      {
+        "file": "train-00001-of-00140.parquet",
+        "sizeBytes": 289080453,
+        "sha256Verified": true
+      },
+      {
+        "file": "train-00002-of-00140.parquet",
+        "sizeBytes": 292292929,
+        "sha256Verified": true
+      }
+    ],
+    "catatan": "Parquet shard yang tersedia di Release HANYA 3 dari total 140 shard dataset sumber (train-00000/1/2-of-00140) - bukan keterbatasan pipeline, tapi keterbatasan aset yang diunggah user. Menambah shard lain (train-00003-of-00140 dst) di masa depan tinggal jalankan ulang FASE 1-5 pipeline yang sama (lihat Round 8 FASE 3 - pipeline korpus berulang/idempoten)."
+  },
+  "fase2_parse": {
+    "newspapers": {
+      "kandidatJson": 499164,
+      "berhasilDiParse": 499164,
+      "error": 0
+    },
+    "parquetShards": {
+      "totalBaris": 255264,
+      "semuaIndLatn": true
+    },
+    "totalBarisMentah": 754428
+  },
+  "fase3_cleanDedupe": {
+    "totalMasuk": 754428,
+    "totalDitulis": 629343,
+    "persenLolos": 83.42,
+    "terbuang": {
+      "wikipediaAntiDupJilid1": 3194,
+      "terlaluPendek": 6730,
+      "bukanIndonesia": 10673,
+      "duplikatExact": 1184,
+      "duplikatNear": 103304
+    },
+    "metodeDedupeNear": "MinHash 8-fungsi atas shingle 5-kata (LSH band=1-row), >=3/8 band cocok = near-duplicate - LEBIH LENGKAP dari jilid 1 (yang hanya dedupe exact, limitasi jujur yang sekarang ditutup)"
+  },
+  "fase4_tokenize": {
+    "tokenizerSource": "diekstrak dari metadata checkpoint massive50m - token ID identik jilid 1",
+    "perSumberToken": {
+      "newspapers": 183652976,
+      "train-00000-of-00140": 64953649,
+      "train-00001-of-00140": 87017921,
+      "train-00002-of-00140": 83594957
+    },
+    "totalTokenWindow512": 419219503,
+    "totalTokenWindow126SetelahRechunk": 421287189
+  },
+  "gabunganJilid1DanJilid2": {
+    "jilid1TokenWindow126": 236392520,
+    "jilid2TokenWindow126": 421287189,
+    "totalGabungan": 657679709,
+    "targetGerbang": 1000000000,
+    "targetTercapai": false,
+    "catatanJujur": "Total gabungan 657,679,709 token TIDAK mencapai target gerbang 1 MILIAR (1,000,000,000) - selisih 342,320,291 token (34.2%). Penyebab: Release \"Corpus\" hanya berisi 3 dari 140 shard dataset parquet sumber - bukan kegagalan pipeline (dibuktikan lewat semua gerbang lain hijau: unduh+verifikasi, parse 0 error, clean+dedupe exact+near, tokenisasi presisi). Menambah shard lain (jilid 3, 4, dst dari 137 shard tersisa) via pipeline idempoten Round 8 FASE 3 akan mendekati/melampaui target - angka ini dilaporkan APA ADANYA, bukan dipaksakan ke 1 miliar."
+  },
+  "artefakTidakDikomitKeGit": [
+    "4 aset mentah Release Corpus (~1,2GB) - terlalu besar, sudah diverifikasi SHA256",
+    "newspapers-raw.jsonl + 3 parquet-raw.jsonl (FASE 2 mentah, ~2,6GB) - digantikan oleh korpus-jilid2-clean.jsonl",
+    "korpus-jilid2-clean.jsonl (629.343 baris, ~2GB) - hasil FASE 3",
+    "jilid2-chunks-126.txt (3.562.741 chunk, ~2,1GB) - hasil FASE 4, dipakai training via Colab (regenerasi dari Release, pola sama seperti jilid 1)"
+  ],
+  "sampelDikomit": "raget-data/jsonl/external/korpus-jilid2-sample-20-artikel.jsonl"
+}

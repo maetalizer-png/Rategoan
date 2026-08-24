@@ -36,7 +36,7 @@ bukan data mentah.
 Domain di `raget-data/json/` dibaca lewat dua jalur berbeda tergantung
 kapan domain itu ditulis:
 
-**1. Lewat `raget-dataries/index.js` (`dataries.loadRegion(group, id)`)** —
+**1. Lewat `raget-agents/dataries-registry.js` (`dataries.loadRegion(group, id)`)** —
 dipakai domain hasil migrasi Fase B: `negara`, `kota`, `bahasa`, `etika`,
 `minuman`, `wisata`, `sejarah`, `makanan`, `alam`, `sains`, `olahraga`.
 `index.js` mendaftarkan tiap domain ini di `JSON_MIGRATED_GROUPS`, lalu
@@ -68,9 +68,10 @@ dijalankan ulang kalau sumber JS aslinya sudah dihapus.
 
 ## `raget-dataries/` yang Belum Dimigrasi
 
-Sebagian domain di `raget-dataries/` masih berupa file `.js` literal (belum
-masuk skema unified): `ekonomi`, `lingo`, `marplace`, `paluang`, `penemuan`,
-`seni-budaya`, plus folder `sapaan/` dan `tokoh/` legacy (entri ringkas
+`raget-dataries/` sekarang folder DATA murni (loader/logika sudah dipindah
+ke `raget-agents/dataries-registry.js`). Sebagian domain masih berupa folder
+`.js` literal (belum masuk skema unified): folder `sapaan/` dan `tokoh/` legacy
+(entri ringkas
 terpisah dari `raget-data/json/sapaan|tokoh`, dijangkau lewat
 `trySiapaTokoh()` di `bridge-extras.js` — bukan duplikasi, tapi pendalaman
 sudut pandang lain). Domain-domain ini dimuat lewat jalur `.js` asli

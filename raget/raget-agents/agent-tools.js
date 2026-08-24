@@ -11,7 +11,7 @@ import { meaningfulWords, pickVariant, hashText } from '../../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
 import { dailyBriefing } from './daily-briefing.js';
-import { dataries } from '../raget-dataries/index.js';
+import { dataries } from './dataries-registry.js';
 import { collectionStore } from '../raget-memory/collection-store.js';
 import { feedbackStore } from '../raget-memory/feedback-store.js';
 import { collectionSearch } from '../raget-memory/collection-search.js';
