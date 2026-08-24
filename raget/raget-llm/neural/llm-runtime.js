@@ -3,6 +3,7 @@ import { LLMTokenizer } from './llm-tokenizer.js';
 import { LLMVocabulary } from './llm-vocabulary.js';
 import { LLMInference } from './llm-inference.js';
 import { LLMSampler } from './llm-sampler.js';
+import { LLMGpu } from './llm-gpu.js';
 
 async function createModel(options) {
     options = options || {};
@@ -173,7 +174,15 @@ async function generateCached(model, promptText, options) {
         ids = ids.slice(ids.length - model.config.model.maxContextLength + 1);
     }
 
-    let result = LLMInference.forwardCached(ids, model, model.config.model, null, 0);
+    // MEGA-BATCH RAGETAN ROUND 6 - FASE 1: kalau WebGPU siap (LLMGpu.isReady(),
+    // di-set via warmupGpu() di llm-core.js#initialize saat model dimuat),
+    // pakai jalur async forwardCachedAsync (matmul dModel-besar via WebGPU,
+    // fallback CPU otomatis per-call). Kalau tidak, jalur sync lama PERSIS
+    // seperti sebelumnya - tidak ada perubahan perilaku/angka.
+    const useGpu = LLMGpu.isReady();
+    let result = useGpu
+        ? await LLMInference.forwardCachedAsync(ids, model, model.config.model, null, 0)
+        : LLMInference.forwardCached(ids, model, model.config.model, null, 0);
     let layerCaches = result.layerCaches;
     let positionOffset = ids.length;
 
@@ -205,7 +214,9 @@ async function generateCached(model, promptText, options) {
         if (step + 1 >= maxNewTokens) {
             break;
         }
-        result = LLMInference.forwardCached([nextId], model, model.config.model, layerCaches, positionOffset);
+        result = useGpu
+            ? await LLMInference.forwardCachedAsync([nextId], model, model.config.model, layerCaches, positionOffset)
+            : LLMInference.forwardCached([nextId], model, model.config.model, layerCaches, positionOffset);
         layerCaches = result.layerCaches;
         positionOffset += 1;
     }

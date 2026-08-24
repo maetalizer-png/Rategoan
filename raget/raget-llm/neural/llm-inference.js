@@ -71,9 +71,35 @@ function getNextTokenLogits(tokenIds, model, config) {
     return logits[logits.length - 1];
 }
 
+// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC (WebGPU-aware) dari
+// forwardCached di atas - dipakai HANYA oleh generateCached() saat
+// LLMGpu.isReady() true. forward()/forwardCached() sync TIDAK disentuh
+// (dipakai training dan jalur generate() non-cached lama).
+async function forwardCachedAsync(newTokenIds, model, config, layerCaches, positionOffset) {
+    const { E, D } = requireDeps();
+
+    if (!Array.isArray(newTokenIds) || newTokenIds.length === 0) {
+        throw new Error('[LLMInference] forwardCachedAsync butuh newTokenIds non-kosong');
+    }
+    const totalLen = positionOffset + newTokenIds.length;
+    if (totalLen > config.maxContextLength) {
+        throw new Error('[LLMInference] panjang sequence (' + totalLen + ') melebihi maxContextLength (' + config.maxContextLength + ')');
+    }
+
+    const tokenEmbeddings = E.lookupEmbeddings(model.embeddingMatrix, newTokenIds);
+    const fullPosEnc = E.getPositionalEncoding(totalLen, config.dModel);
+    const posEncForNew = fullPosEnc.slice(positionOffset, totalLen);
+    const x = E.addPositionalEncoding(tokenEmbeddings, posEncForNew);
+
+    const result = await D.runDecoderCachedAsync(x, model.decoderWeights, config, layerCaches);
+    const logits = await D.projectToLogitsAsync(result.hidden, model.decoderWeights);
+    return { logits: logits, layerCaches: result.layerCaches };
+}
+
 export const LLMInference = {
     createModelWeights: createModelWeights,
     forward: forward,
     forwardCached: forwardCached,
+    forwardCachedAsync: forwardCachedAsync,
     getNextTokenLogits: getNextTokenLogits
 };

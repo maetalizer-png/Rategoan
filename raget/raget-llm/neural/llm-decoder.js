@@ -1,6 +1,7 @@
 import { LLMEmbedding } from './llm-embedding.js';
 import { LLMAttention } from './llm-attention.js';
 import { LLMTransformer } from './llm-transformer.js';
+import { LLMGpu } from './llm-gpu.js';
 
 function requireDeps() {
     return { E: LLMEmbedding, A: LLMAttention, T: LLMTransformer };
@@ -47,9 +48,33 @@ function projectToLogits(hidden, decoderWeights) {
     return LLMEmbedding.matmul(hidden, decoderWeights.outputProjection);
 }
 
+// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC (WebGPU-aware) dari
+// runDecoderCached di atas - lihat catatan di llm-transformer.js kenapa
+// fungsi sync TIDAK disentuh (dipakai training).
+async function runDecoderCachedAsync(x, decoderWeights, config, layerCaches) {
+    const { T } = requireDeps();
+    let hidden = x;
+    const nextCaches = new Array(decoderWeights.layers.length);
+    for (let i = 0; i < decoderWeights.layers.length; i++) {
+        const result = await T.transformerBlockCachedAsync(hidden, decoderWeights.layers[i], config, layerCaches ? layerCaches[i] : null);
+        hidden = result.output;
+        nextCaches[i] = result.cache;
+    }
+    return { hidden: T.layerNorm(hidden, decoderWeights.finalNorm), layerCaches: nextCaches };
+}
+
+async function projectToLogitsAsync(hidden, decoderWeights) {
+    const { E } = requireDeps();
+    return LLMGpu.matmulAuto(hidden, decoderWeights.outputProjection).catch(function () {
+        return E.matmul(hidden, decoderWeights.outputProjection);
+    });
+}
+
 export const LLMDecoder = {
     createDecoderWeights: createDecoderWeights,
     runDecoder: runDecoder,
     runDecoderCached: runDecoderCached,
-    projectToLogits: projectToLogits
+    projectToLogits: projectToLogits,
+    runDecoderCachedAsync: runDecoderCachedAsync,
+    projectToLogitsAsync: projectToLogitsAsync
 };

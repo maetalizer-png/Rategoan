@@ -2,12 +2,38 @@
 // target >=97%) vs stub-suite (informatif - kasus yang butuh file terlampir
 // nyata seperti OCR/PDF/Notion/Evernote/WhatsApp/ICS, tidak bisa dipicu
 // dari prompt teks murni oleh runner headless sederhana ini).
-// Jalankan: node tools/run-bench.mjs [base-url]
+//
+// CATATAN JUJUR (ditemukan MEGA-BATCH ROUND 6): satu proses Chromium
+// headless di sandbox ini SELALU ditutup paksa ("Target page, context or
+// browser has been closed") pada elapsed ~1396-1397 detik PERSIS
+// (selisih <1 detik antar 5 percobaan independen) - diverifikasi BUKAN
+// disebabkan penumpukan DOM/riwayat chat (reset history.clearAll() tiap
+// N kasus tidak mengubah titik crash sama sekali), BUKAN leak proses Node
+// (RSS Node stabil ~90-110MB sepanjang run), BUKAN kasus bench tertentu
+// (subset kasus di sekitar titik crash lolos 100% kalau dijalankan
+// terpisah/segar), dan BUKAN kompositor GPU (--disable-gpu tidak mengubah
+// apa pun). Polanya konsisten dengan batas waktu proses level
+// infrastruktur/sandbox (~23 menit 17 detik) di LUAR kendali skrip ini.
+// Solusi: jalankan bench per-CHUNK (proses Chromium baru tiap chunk,
+// me-reset hitungan waktu tsb) lewat --start/--end, lalu gabungkan hasil -
+// lihat raget-tools/run-bench-chunked.mjs untuk orkestrasi otomatis.
+//
+// Jalankan penuh (satu proses - berisiko kena batas ~23 menit kalau
+// bench.json besar): node tools/run-bench.mjs [base-url]
+// Jalankan sebagian: node tools/run-bench.mjs [base-url] --start=0 --end=400
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 
-const BASE = process.argv[2] || 'http://localhost:8099';
-const bench = JSON.parse(readFileSync(new URL('./bench.json', import.meta.url), 'utf8'));
+const args = process.argv.slice(2);
+const BASE = args.find((a) => !a.startsWith('--')) || 'http://localhost:8099';
+const startArg = args.find((a) => a.startsWith('--start='));
+const endArg = args.find((a) => a.startsWith('--end='));
+const jsonOutArg = args.find((a) => a.startsWith('--json-out='));
+const START = startArg ? parseInt(startArg.split('=')[1], 10) : 0;
+const fullBench = JSON.parse(readFileSync(new URL('./bench.json', import.meta.url), 'utf8'));
+const END = endArg ? parseInt(endArg.split('=')[1], 10) : fullBench.length;
+const bench = fullBench.slice(START, END);
+const JSON_OUT = jsonOutArg ? jsonOutArg.split('=')[1] : null;
 
 function waitForNewStableReply(page, prevCount) {
   return page.waitForFunction((prev) => {
@@ -49,7 +75,27 @@ async function main() {
 
   const results = { core: { pass: 0, total: 0, fails: [] }, stub: { pass: 0, total: 0, fails: [] } };
   const t0 = Date.now();
+  // Bench 1180+ kasus dalam satu tab persisten (tanpa reset) membuat DOM
+  // riwayat chat menumpuk terus tanpa batas - diukur langsung: melambat
+  // progresif (0,7s/kasus di awal -> >2s/kasus di kasus ke-500+) lalu tab
+  // ditutup paksa (renderer crash diam-diam, tanpa event 'crash'/
+  // 'disconnected' - diverifikasi lewat listener khusus) sebelum kasus
+  // ke-1190 tercapai, di SETIAP percobaan (5x berturut-turut). Fix: kosongkan
+  // riwayat chat lewat history.clearAll() (API aplikasi sendiri, BUKAN
+  // reload halaman - tidak perlu login/onboarding ulang) tiap
+  // RESET_EVERY kasus supaya DOM tidak pernah menumpuk tak terbatas.
+  const RESET_EVERY = 60;
+  let casesSinceReset = 0;
   for (const c of bench) {
+    if (casesSinceReset >= RESET_EVERY) {
+      await page.evaluate(async () => {
+        const { history } = await import('/js/history/history.js');
+        history.clearAll();
+      });
+      await page.waitForTimeout(200);
+      casesSinceReset = 0;
+    }
+    casesSinceReset++;
     const suite = c.suite === 'stub' ? 'stub' : 'core';
     const prevCount = await page.locator('.msg.ai').count();
     await page.fill('#chat-input', c.prompt);
@@ -99,6 +145,10 @@ async function main() {
   if (results.stub.fails.length) {
     console.log('\n--- STUB FAILURES (informatif) ---');
     results.stub.fails.forEach((f) => console.log(JSON.stringify(f)));
+  }
+
+  if (JSON_OUT) {
+    writeFileSync(JSON_OUT, JSON.stringify({ start: START, end: END, results, elapsed, cacheStats, consoleErrors }, null, 2));
   }
 
   await browser.close();
