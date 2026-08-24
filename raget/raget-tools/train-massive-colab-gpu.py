@@ -75,6 +75,52 @@ OUT_CHECKPOINT = os.path.join(ROOT, 'raget', 'raget-data', 'neural', 'raget-neur
 TOKENIZER_SOURCE_CHECKPOINT = os.path.join(ROOT, 'raget', 'raget-data', 'neural', 'raget-neural-massive50m.safetensors')
 REPORT_FILE = os.path.join(ROOT, 'raget', 'raget-devlog', 'neural', 'training-report-massive{}-round8-colab-gpu.json'.format(MODEL_SIZE))
 
+# Kebijakan Gudang Besar (Round 9): checkpoint >100MB tidak ikut git, jadi
+# saat clone segar (Colab baru/sesi lain) tidak akan ada di disk. Kalau
+# begitu, coba unduh dari GitHub Release tag "checkpoint-{size}" dulu
+# sebelum menyerah ke fresh-init - pola curl sama persis dengan yang
+# dipakai unduh asset korpus jilid 2 (lihat CHECKPOINT-POLICY.md).
+GITHUB_OWNER = 'maetalizer-png'
+GITHUB_REPO = 'Rategoan'
+
+
+def try_download_checkpoint_from_release():
+    if os.path.exists(OUT_CHECKPOINT):
+        return
+    token = os.environ.get('GITHUB_TOKEN')
+    if not token:
+        return
+    tag = 'checkpoint-{}'.format(MODEL_SIZE)
+    try:
+        import urllib.request
+        req = urllib.request.Request(
+            'https://api.github.com/repos/{}/{}/releases/tags/{}'.format(GITHUB_OWNER, GITHUB_REPO, tag),
+            headers={'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json'},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            release = json.loads(resp.read())
+        asset = next((a for a in release.get('assets', []) if a['name'].endswith('.safetensors')), None)
+        if not asset:
+            print('  [release {} ada tapi tanpa asset .safetensors - fresh-init]'.format(tag), flush=True)
+            return
+        print('  [checkpoint {} tidak ada lokal - unduh dari Release {} ({} MB)]'.format(MODEL_SIZE, tag, round(asset['size'] / 1024 / 1024, 2)), flush=True)
+        req2 = urllib.request.Request(
+            'https://api.github.com/repos/{}/{}/releases/assets/{}'.format(GITHUB_OWNER, GITHUB_REPO, asset['id']),
+            headers={'Authorization': 'Bearer ' + token, 'Accept': 'application/octet-stream'},
+        )
+        with urllib.request.urlopen(req2, timeout=600) as resp, open(OUT_CHECKPOINT, 'wb') as out:
+            while True:
+                chunk = resp.read(1024 * 1024)
+                if not chunk:
+                    break
+                out.write(chunk)
+        print('  [unduh selesai:', os.path.getsize(OUT_CHECKPOINT), 'bytes]', flush=True)
+    except Exception as e:
+        print('  [gagal unduh checkpoint dari Release ({}), lanjut fresh-init]:'.format(tag), e, flush=True)
+        if os.path.exists(OUT_CHECKPOINT):
+            os.remove(OUT_CHECKPOINT)
+
+
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 USE_FP16 = DEVICE.type == 'cuda'
 
@@ -539,6 +585,7 @@ def main():
     param_count = model.param_count()
     print('parameterCount ({}):'.format(MODEL_SIZE), param_count, flush=True)
 
+    try_download_checkpoint_from_release()
     resuming = os.path.exists(OUT_CHECKPOINT)
     if resuming:
         print('Checkpoint {} SUDAH ADA - resume.'.format(MODEL_SIZE), flush=True)

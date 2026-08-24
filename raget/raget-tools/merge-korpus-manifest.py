@@ -20,6 +20,24 @@ import time
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 EXTERNAL_DIR = os.path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'external')
 
+# Kebijakan Gudang Besar (Round 9, keputusan dirigen): korpus RAW tidak
+# disimpan permanen - hanya hasil clean+tokenize yang diarsipkan (ke
+# Release, tag korpus-jilid-N-clean). URL sumber asli tiap jilid dicatat
+# di sini supaya "kurir" (siapa pun yang menjalankan pipeline) bisa jemput
+# ulang data mentahnya kalau perlu regenerasi dari nol.
+JILID_SOURCES = {
+    'jilid1-wikipedia': {
+        'sumberAsli': 'https://dumps.wikimedia.org/idwiki/latest/idwiki-latest-pages-articles.xml.bz2',
+        'catatan': 'Dump Wikipedia bahasa Indonesia terbaru. Diproses lewat raget-tools/extract-clean-wikipedia.py. dumps.wikimedia.org DIBLOKIR oleh kebijakan jaringan sandbox Claude Code Remote - unduh ulang harus dilakukan di luar sandbox (mesin lokal/Colab), lalu upload dump sebagai Release asset sebelum sandbox bisa memprosesnya.',
+        'statusArsipBersih': 'BELUM diarsipkan ke Release (jsonl bersih sudah tidak ada di disk, terpakai habis jadi idwiki-chunks-128.txt lalu dibuang saat pembersihan disk Round 6-7; checkpoint massive50m/100m/200m tetap menyimpan hasil pembelajarannya).',
+    },
+    'korpus-jilid2': {
+        'sumberAsli': 'GitHub Release tag "Corpus" repo ini (newspapers-json.tgz + train-00000/00001/00002-of-00140.parquet, sumber asli HPLT/CommonCrawl-derived, diunggah manual oleh kurir data).',
+        'catatan': 'Raw asset masih ada di Release tag Corpus per 2026-08-24. Bisa diproses ulang lewat parse-korpus-jilid2.py + clean-dedupe-korpus-jilid2.py.',
+        'statusArsipBersih': 'BELUM diarsipkan ke tag korpus-jilid-2-clean - sesi sandbox tidak diizinkan membuat/upload Release asset ("Creating, editing, or deleting releases is not permitted for this session type"). Pakai raget-tools/publish-checkpoint-release.py dari luar sandbox (Colab/lokal) untuk mengarsipkannya.',
+    },
+}
+
 
 def main():
     pattern = os.path.join(EXTERNAL_DIR, 'korpus-jilid*-manifest.json')
@@ -56,6 +74,11 @@ def main():
         'targetGerbang': target,
         'targetTercapai': total >= target,
         'kekuranganToken': max(0, target - total),
+        'kebijakanGudangBesar': {
+            'rakKorpus': 'Barang bersih - raw tidak disimpan permanen di git/sandbox, hanya clean+tokenize yang diarsipkan (Release, tag korpus-jilid-N-clean).',
+            'rakOtak': 'Checkpoint >100MB (batas keras GitHub) keluar dari git, wajib Release asset (bukan Git LFS). Lihat raget-tools/CHECKPOINT-POLICY.md.',
+            'sumberPerJilid': {k: JILID_SOURCES[k] for k in JILID_SOURCES if k in {e['jilid'] for e in entries}},
+        },
     }
     out_path = os.path.join(EXTERNAL_DIR, 'korpus-manifest-total.json')
     with open(out_path, 'w') as f:

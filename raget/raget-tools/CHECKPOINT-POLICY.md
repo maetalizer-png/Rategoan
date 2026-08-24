@@ -34,10 +34,29 @@ Asset ID dicari lewat `GET /repos/<owner>/<repo>/releases/tags/checkpoint-200m`.
 
 ## Saat checkpoint baru >100MB selesai training
 
-1. Simpan checkpoint seperti biasa (lokal saja, jangan `git add`).
-2. Upload sebagai Release asset baru (tag sesuai ukuran model).
+1. Simpan checkpoint seperti biasa (lokal saja, jangan `git add` -
+   `git_auto_commit()` di `train-massive-colab-gpu.py` sudah otomatis
+   skip file >95MB).
+2. Upload sebagai Release asset baru:
+   `python3 raget-tools/publish-checkpoint-release.py <path.safetensors> checkpoint-<ukuran>`
+   (butuh `GITHUB_TOKEN` scope `repo` di environment - di notebook Colab
+   sudah otomatis ter-set di sel awal).
 3. Update dokumentasi/notebook yang menunjuk ke asset lama jika nama
    berubah.
 4. `git status` harus tetap bersih untuk file checkpoint >100MB - kalau
    muncul sebagai "untracked", itu memang seharusnya begitu (dicegah
    `.gitignore`), bukan bug.
+
+## Catatan penting: kenapa Claude tidak bisa upload sendiri
+
+Sesi sandbox Claude Code Remote (tempat kode ini biasanya ditulis) TIDAK
+diizinkan membuat/mengedit/menghapus GitHub Release - API mengembalikan
+`"Creating, editing, or deleting releases is not permitted for this
+session type."` walau token yang sama BISA baca release/unduh asset. Ini
+pembatasan level-sesi yang disengaja (bukan bug, bukan masalah izin
+repo) - jadi setiap kali ada checkpoint/korpus baru >100MB yang perlu
+diarsipkan ke Release, publikasinya harus dijalankan dari luar sandbox itu
+(notebook Colab dengan token milik pemilik repo, atau mesin lokal) memakai
+`publish-checkpoint-release.py` di atas. Skrip itu generik - bisa dipakai
+juga untuk mengarsipkan korpus bersih (`korpus-jilid-N-clean`), bukan
+cuma checkpoint.
