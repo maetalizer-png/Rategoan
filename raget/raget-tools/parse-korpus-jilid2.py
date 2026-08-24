@@ -19,8 +19,8 @@ import time
 import pyarrow.parquet as pq
 
 TGZ = sys.argv[1]
-PARQUETS = sys.argv[2:5]
-OUT_DIR = sys.argv[5]
+PARQUETS = sys.argv[2:-1]
+OUT_DIR = sys.argv[-1]
 
 RE_JUNK_PREFIX = ('._',)
 
@@ -102,8 +102,12 @@ def parse_parquet_shard(path, shard_name):
 
 
 def main():
-    print('=== Parse newspapers-json.tgz ===', flush=True)
-    news_stats = parse_newspapers()
+    news_stats = None
+    if TGZ and TGZ.lower() not in ('none', 'skip', '-'):
+        print('=== Parse ' + TGZ + ' ===', flush=True)
+        news_stats = parse_newspapers()
+    else:
+        print('=== tgz dilewati (TGZ=' + repr(TGZ) + ') - jilid ini murni parquet ===', flush=True)
 
     parquet_stats = {}
     for p in PARQUETS:
