@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-08-24T12:00:00Z",
+  "release": {
+    "tag": "Corpus",
+    "name": "T"
+  },
+  "files": [
+    {
+      "assetId": 527474367,
+      "sizeBytes": 446018349,
+      "sha256Expected": "9fbafe1f5797316aab786af488bc8d5442b5ee17490d41d0705f8cc1cb93ee1c",
+      "file": "newspapers-json.tgz",
+      "sizeBytesActual": 446018349,
+      "sizeMatch": true,
+      "sha256Actual": "9fbafe1f5797316aab786af488bc8d5442b5ee17490d41d0705f8cc1cb93ee1c",
+      "sha256Match": true,
+      "jalurUnduh": "GET https://api.github.com/repos/maetalizer-png/Rategoan/releases/assets/{id} + Authorization Bearer $GITHUB_TOKEN (metode terbukti sejak Round 3B)"
+    },
+    {
+      "assetId": 527505166,
+      "sizeBytes": 204810838,
+      "sha256Expected": "dae7b2f12346b34246531ace1172e0a2ff305678bc70b5b30b12b3ef9184711b",
+      "file": "train-00000-of-00140.parquet",
+      "sizeBytesActual": 204810838,
+      "sizeMatch": true,
+      "sha256Actual": "dae7b2f12346b34246531ace1172e0a2ff305678bc70b5b30b12b3ef9184711b",
+      "sha256Match": true,
+      "jalurUnduh": "GET https://api.github.com/repos/maetalizer-png/Rategoan/releases/assets/{id} + Authorization Bearer $GITHUB_TOKEN (metode terbukti sejak Round 3B)"
+    },
+    {
+      "assetId": 527509131,
+      "sizeBytes": 289080453,
+      "sha256Expected": "d29f066efb4f35f0b485dcba9e5379c63fa3dc51c10b604e7d5dc078e5dae3b3",
+      "file": "train-00001-of-00140.parquet",
+      "sizeBytesActual": 289080453,
+      "sizeMatch": true,
+      "sha256Actual": "d29f066efb4f35f0b485dcba9e5379c63fa3dc51c10b604e7d5dc078e5dae3b3",
+      "sha256Match": true,
+      "jalurUnduh": "GET https://api.github.com/repos/maetalizer-png/Rategoan/releases/assets/{id} + Authorization Bearer $GITHUB_TOKEN (metode terbukti sejak Round 3B)"
+    },
+    {
+      "assetId": 527517002,
+      "sizeBytes": 292292929,
+      "sha256Expected": "090218fde78ca4fd8fdfbd8055bbbef88591aefc01bb94c393954d94376ecbc3",
+      "file": "train-00002-of-00140.parquet",
+      "sizeBytesActual": 292292929,
+      "sizeMatch": true,
+      "sha256Actual": "090218fde78ca4fd8fdfbd8055bbbef88591aefc01bb94c393954d94376ecbc3",
+      "sha256Match": true,
+      "jalurUnduh": "GET https://api.github.com/repos/maetalizer-png/Rategoan/releases/assets/{id} + Authorization Bearer $GITHUB_TOKEN (metode terbukti sejak Round 3B)"
+    }
+  ],
+  "allVerified": true,
+  "totalBytes": 1232202569
+}
