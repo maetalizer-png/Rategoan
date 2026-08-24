@@ -27,7 +27,7 @@ untuk pencarian/filter programatis. Berikut skema tiap folder:
 
 ## Pola Registrasi & Lazy Load
 
-Semua region terdaftar di `raget/raget-dataries/index.js` lewat `REGIONS`, dimuat lazy
+Semua region terdaftar di `raget/raget-agents/dataries-registry.js` lewat `REGIONS`, dimuat lazy
 per region (dynamic `import()` + cache `Map`) lewat `dataries.loadRegion(group, id)`.
 Ini menjaga waktu boot tetap cepat meski total data terus bertambah.
 

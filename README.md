@@ -91,7 +91,7 @@ raget/                            induk seluruh otak AI Raget
   raget-retrieval/                pencarian TF-IDF satu pintu lintas sumber
   raget-devlog/                   riwayat pengembangan proyek (dipakai balasan chat)
                                      json/ persona,fewshot,metadata · jsonl/ arsitektur,bug,keputusan,ux · neural/ laporan training · sejarah/, index.js
-  raget-dataries/                 loader tipis untuk data terstruktur (negara, kota, bahasa, tokoh, dst)
+  raget-dataries/                 folder DATA murni (negara, kota, bahasa, tokoh, dst; loader di raget-agents/)
   raget-data/                     data dunia dalam skema JSON tunggal
                                      json/ domain+knowledge/ · jsonl/ korpus+languages.jsonl · neural/ checkpoint .safetensors
   raget-tools/                    skrip verifikasi: bench runner (+bench.json), pengukuran KV, devlog, migrasi data
@@ -146,7 +146,7 @@ untuk peta lengkap struktur data (dua akar `raget-data/`/`raget-devlog/`, tiga s
 **Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
 `.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
 (`{id, kategori, wilayah, nama, tags, teks, meta}`) di `raget/raget-data/json/`, dengan
-`raget-dataries/index.js`/`*-store.js`/`llm-engine.js` yang tersisa hanya jadi loader tipis
+`raget-agents/dataries-registry.js`/`*-store.js`/`llm-engine.js` yang tersisa hanya jadi loader tipis
 (fetch + fungsi query, nol data literal). 15 domain sudah dimigrasi: tokoh, kuliner, hari
 internasional, sapaan, negara, kota, bahasa, etika, minuman, wisata, sejarah, makanan, alam,
 sains, dan olahraga — pola migrasinya didokumentasikan di

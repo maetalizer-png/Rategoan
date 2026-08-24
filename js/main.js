@@ -29,7 +29,7 @@ import { collectionPage } from './collection/collection.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dailyBriefing } from '../raget/raget-agents/daily-briefing.js';
-import { dataries } from '../raget/raget-dataries/index.js';
+import { dataries } from '../raget/raget-agents/dataries-registry.js';
 
 const BRIEFING_DATE_KEY = 'raget_briefing_date';
 const bootStart = performance.now();

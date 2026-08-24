@@ -15,7 +15,7 @@
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { REGIONS, dataries } from '../raget-dataries/index.js';
+import { REGIONS, dataries } from '../raget-agents/dataries-registry.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');

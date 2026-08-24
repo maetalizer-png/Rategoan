@@ -1,3 +1,7 @@
+// MEGA-BATCH RAGETAN ROUND 9 - FASE 2: logika registry+loader dataries
+// (dipindah dari raget-dataries/index.js - dataries/ sekarang folder DATA
+// MURNI, cuma berisi sapaan/ + tokoh/). Semua pemakai (7 file) diarahkan
+// ke sini - impor tetap jalan, cuma titik sumbernya pindah.
 export const REGIONS = Object.freeze({
   country: [
     { id: 'african-barat', file: './country/african-barat.js', names: ['nigeria', 'ghana', 'pantai gading', 'senegal', 'mali'] },
@@ -203,7 +207,7 @@ async function loadRegion(group, id) {
   const entry = list.find((r) => r.id === id);
   if (!entry) return null;
   const dataFolder = JSON_MIGRATED_GROUPS[group];
-  const data = dataFolder ? await loadRegionFromJson(group, id, dataFolder) : (await import(new URL(entry.file, import.meta.url).href)).DATA;
+  const data = dataFolder ? await loadRegionFromJson(group, id, dataFolder) : (await import(new URL('../raget-dataries/' + entry.file.replace('./', ''), import.meta.url).href)).DATA;
   cache.set(key, data);
   return data;
 }

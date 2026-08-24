@@ -1,4 +1,4 @@
-import { dataries, REGIONS } from '../../../raget/raget-dataries/index.js';
+import { dataries, REGIONS } from '../../../raget/raget-agents/dataries-registry.js';
 
 let countries = null, langs = null, foods = null, cities = null, wisata = null, senbud = null, sej = null;
 
