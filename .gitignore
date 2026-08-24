@@ -1,0 +1,12 @@
+# Kebijakan Gudang Besar (Round 9 lanjutan): checkpoint neural >100MB TIDAK
+# masuk git - dipublikasikan sebagai GitHub Release asset saja (tag
+# checkpoint-200m dst). 50m dan 100m tetap boleh sebagai blob git karena
+# masih di bawah batas keras GitHub (100MB). Lihat raget/raget-tools/
+# CHECKPOINT-POLICY.md untuk detail lengkap.
+raget/raget-data/neural/raget-neural-massive200m.safetensors
+raget/raget-data/neural/*-300m.safetensors
+raget/raget-data/neural/*-500m.safetensors
+raget/raget-data/neural/*-1b.safetensors
+raget/raget-data/neural/*-2b.safetensors
+__pycache__/
+*.pyc

@@ -405,11 +405,24 @@ def write_checkpoint(model, merges, vocab_entries, total_steps, actual_minutes, 
     print('Ditulis:', os.path.relpath(OUT_CHECKPOINT, ROOT), '-', round(size_mb, 2), 'MB', flush=True)
 
 
+# Kebijakan Gudang Besar (Round 9): checkpoint >100MB (batas keras GitHub)
+# TIDAK boleh masuk git - harus dipublikasikan sebagai Release asset.
+# Lihat raget-tools/CHECKPOINT-POLICY.md.
+GIT_FILE_SIZE_LIMIT_MB = 95
+
+
 def git_auto_commit(message):
     if not PUSH_BRANCH:
         return
     try:
-        subprocess.run(['git', '-C', ROOT, 'add', OUT_CHECKPOINT, REPORT_FILE], check=False)
+        add_paths = [REPORT_FILE]
+        if os.path.exists(OUT_CHECKPOINT):
+            size_mb = os.path.getsize(OUT_CHECKPOINT) / 1024 / 1024
+            if size_mb <= GIT_FILE_SIZE_LIMIT_MB:
+                add_paths.append(OUT_CHECKPOINT)
+            else:
+                print('  [checkpoint {:.2f}MB > {}MB - TIDAK di-git-add, publikasikan lewat GitHub Release (lihat CHECKPOINT-POLICY.md)]'.format(size_mb, GIT_FILE_SIZE_LIMIT_MB), flush=True)
+        subprocess.run(['git', '-C', ROOT, 'add'] + add_paths, check=False)
         res = subprocess.run(['git', '-C', ROOT, 'commit', '-m', message], check=False, capture_output=True, text=True)
         print('  [auto-commit]', res.stdout.strip()[:200] or res.stderr.strip()[:200], flush=True)
         push_res = subprocess.run(['git', '-C', ROOT, 'push', 'origin', 'HEAD:' + PUSH_BRANCH], check=False, capture_output=True, text=True)
