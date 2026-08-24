@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-08-24T13:55:09.818Z",
+  "seedFileBefore": 11,
+  "baruDitambahkan": 534,
+  "totalSetelah": 545,
+  "perKategori": {
+    "sapa": 60,
+    "salam": 82,
+    "basa-basi": 82,
+    "tanya-kabar": 80,
+    "ucapan": 230
+  },
+  "domain": "greeting",
+  "catatan": "Semua baris ditulis manual/kurasi langsung (bukan cartesian-product acak), disimpan sebagai domain sapaan/greeting di raget-data/json/sapaan/sapaan.json untuk dipakai dataries-ke-korpus.mjs sebagai bahan SFT."
+}

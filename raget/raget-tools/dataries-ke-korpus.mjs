@@ -176,6 +176,17 @@ function renderSapaanEntries(records, source, data) {
       const promptSample = SMALLTALK_PROMPT_SAMPLE[m.key] || entry.nama;
       for (const v of m.variants || [entry.teks]) pushDialog(records, source, promptSample, v.split('{name}').join('Raget'));
       for (const v of m.variantsFormal || []) pushDialog(records, source, promptSample, v.split('{name}').join('Raget'));
+    } else if (m.jenis === 'sapa') {
+      pushDialog(records, source, 'Halo', entry.teks);
+    } else if (m.jenis === 'salam') {
+      pushDialog(records, source, 'Beri aku ucapan salam', entry.teks);
+    } else if (m.jenis === 'basa-basi') {
+      pushDialog(records, source, 'Ajak aku ngobrol santai', entry.teks);
+    } else if (m.jenis === 'tanya-kabar') {
+      pushDialog(records, source, 'Tanyakan kabarku', entry.teks);
+    } else if (m.jenis === 'ucapan') {
+      const occasion = String(m.occasion || '').replace(/-/g, ' ');
+      pushDialog(records, source, 'Beri aku ucapan untuk ' + occasion, entry.teks);
     }
     // entry followup dilewati - itu potongan kalimat sambungan, bukan balasan utuh berdiri sendiri.
   }
