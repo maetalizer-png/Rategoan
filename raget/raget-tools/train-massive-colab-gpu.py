@@ -278,6 +278,46 @@ def quantize_matrix_np(mat):
     return q, scale, zero_point
 
 
+RIWAYAT_PER_PRESET = {
+    '50m': 'tiny -> 50m -> massive50m (garis keturunan saat ini)',
+    '100m': 'tiny -> 50m -> massive50m -> massive100m (badan kedua, vocab sama)',
+    '200m': 'tiny -> 50m -> massive50m -> massive100m -> massive200m (badan ketiga, vocab sama)',
+}
+
+
+def build_akta_metadata():
+    """MEGA-BATCH RAGETAN ROUND 9 - FASE 1: akta kelahiran ditanam OTOMATIS
+    di setiap checkpoint yang disimpan skrip ini (bukan cuma sekali manual) -
+    'makanan' diisi dari korpus-manifest-total.json TERUKUR, bukan
+    perkiraan; kalau manifest belum ada saat training jalan, dilaporkan
+    jujur alih-alih dikarang."""
+    manifest_path = os.path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'external', 'korpus-manifest-total.json')
+    try:
+        with open(manifest_path) as f:
+            manifest_total = json.load(f)
+        makanan = '{:,} token (korpus gabungan TERUKUR - {})'.format(
+            manifest_total['totalTokenGabungan'],
+            ', '.join(e['jilid'] for e in manifest_total['entries'])
+        ).replace(',', '.')
+    except Exception as e:
+        makanan = 'manifest korpus tidak ditemukan saat checkpoint ini disimpan ({})'.format(e)
+
+    return {
+        'model': 'Rategoan (RAGET)',
+        'pencipta': 'Rahmad Raharjo',
+        'kru_dan_alat': 'Claude (si raksasa karyawan semut) + Colab T4 (kompor pinjaman Google)',
+        'kurir_data': 'HP Android Rahmad Raharjo (pembawa karung data)',
+        'lahir': '2026',
+        'jiwa': 'Kamus BPE 30.368 kata',
+        'makanan': makanan,
+        'riwayat': RIWAYAT_PER_PRESET.get(MODEL_SIZE, 'tiny -> 50m -> massive50m -> ... -> {} (bersambung)'.format(MODEL_SIZE)),
+        'lisensi': 'Hak cipta Rahmad Raharjo. Hormati riwayatnya.',
+        'pesan': 'Dari semut, dirakit raksasa, untuk Indonesia. \U0001F41C️\U0001F1EE\U0001F1E9',
+        'checkpointIni': 'massive' + MODEL_SIZE,
+        'ditanamPada': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+    }
+
+
 def write_checkpoint(model, merges, vocab_entries, total_steps, actual_minutes, corpus_size, full_epochs):
     header = {}
     quant = {}
@@ -346,7 +386,7 @@ def write_checkpoint(model, merges, vocab_entries, total_steps, actual_minutes, 
         'quant': quant,
     }
     full_header = dict(header)
-    full_header['__metadata__'] = {'rategoan': json.dumps(rategoan_meta)}
+    full_header['__metadata__'] = {'rategoan': json.dumps(rategoan_meta), 'akta': json.dumps(build_akta_metadata(), ensure_ascii=False)}
     raw_header_bytes = json.dumps(full_header).encode('utf-8')
     prefix_length = align4(8 + len(raw_header_bytes))
     header_bytes = bytearray(prefix_length - 8)

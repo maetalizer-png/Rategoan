@@ -251,6 +251,36 @@ def quantize_matrix_np(mat):
     return q, scale, zero_point
 
 
+def build_akta_metadata():
+    """MEGA-BATCH RAGETAN ROUND 9 - FASE 1: akta kelahiran otomatis di
+    setiap save (lihat raget-tools/tanam-akta-checkpoint.py untuk skrip
+    tanam manual + penjelasan lengkap). 'makanan' dari manifest TERUKUR."""
+    manifest_path = os.path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'external', 'korpus-manifest-total.json')
+    try:
+        with open(manifest_path) as f:
+            manifest_total = json.load(f)
+        makanan = '{:,} token (korpus gabungan TERUKUR - {})'.format(
+            manifest_total['totalTokenGabungan'],
+            ', '.join(e['jilid'] for e in manifest_total['entries'])
+        ).replace(',', '.')
+    except Exception as e:
+        makanan = 'manifest korpus tidak ditemukan saat checkpoint ini disimpan ({})'.format(e)
+    return {
+        'model': 'Rategoan (RAGET)',
+        'pencipta': 'Rahmad Raharjo',
+        'kru_dan_alat': 'Claude (si raksasa karyawan semut) + Colab T4 (kompor pinjaman Google)',
+        'kurir_data': 'HP Android Rahmad Raharjo (pembawa karung data)',
+        'lahir': '2026',
+        'jiwa': 'Kamus BPE 30.368 kata',
+        'makanan': makanan,
+        'riwayat': 'tiny -> 50m -> massive50m (garis keturunan saat ini)',
+        'lisensi': 'Hak cipta Rahmad Raharjo. Hormati riwayatnya.',
+        'pesan': 'Dari semut, dirakit raksasa, untuk Indonesia. \U0001F41C️\U0001F1EE\U0001F1E9',
+        'checkpointIni': 'massive50m',
+        'ditanamPada': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+    }
+
+
 def write_checkpoint(model, merges, vocab_entries, total_steps, actual_minutes, corpus_size):
     header = {}
     quant = {}
@@ -318,7 +348,7 @@ def write_checkpoint(model, merges, vocab_entries, total_steps, actual_minutes, 
         'quant': quant,
     }
     full_header = dict(header)
-    full_header['__metadata__'] = {'rategoan': json.dumps(rategoan_meta)}
+    full_header['__metadata__'] = {'rategoan': json.dumps(rategoan_meta), 'akta': json.dumps(build_akta_metadata(), ensure_ascii=False)}
     raw_header_bytes = json.dumps(full_header).encode('utf-8')
     prefix_length = align4(8 + len(raw_header_bytes))
     header_bytes = bytearray(prefix_length - 8)

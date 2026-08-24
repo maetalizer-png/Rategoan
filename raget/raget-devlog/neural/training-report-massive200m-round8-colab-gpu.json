@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T12:59:36Z",
+  "generatedAt": "2026-08-24T13:27:04Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,62 +7,56 @@
   "parameterCount": 200709120,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 314,
-  "prevMinutes": 5.011231088638306,
-  "stepsThisSession": 58,
-  "minutesThisSession": 1.01,
-  "totalStepsAccumulated": 372,
-  "totalMinutesAccumulated": 6.02,
+  "prevSteps": 372,
+  "prevMinutes": 6.020486756165822,
+  "stepsThisSession": 37,
+  "minutesThisSession": 0.7,
+  "totalStepsAccumulated": 409,
+  "totalMinutesAccumulated": 6.72,
   "fullEpochsCompleted": 0,
   "trainChunksAvailable": 2985,
-  "totalTokensSeenThisSession": 14848,
+  "totalTokensSeenThisSession": 9472,
   "batchSize": 2,
-  "budgetMinutesThisSession": 1.0,
+  "budgetMinutesThisSession": 0.7,
   "targetPerplexity": null,
-  "secPerStepAvg": 1.0441,
-  "tokenPerSecAvg": 245.2,
+  "secPerStepAvg": 1.1422,
+  "tokenPerSecAvg": 224.1,
   "heldOutPerplexity": {
-    "beforeThisSession": 2162.297119140625,
-    "final": 3281.600341796875
+    "beforeThisSession": 3279.15087890625,
+    "final": 4809.13916015625
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang seorang,.. AS harus proses. memperoleh jauh Enini bukti, DNA Takberlanjut Tini alternatif lengkap dari telah lain abad dan ni itu dengan bisnis atau Tidung penyakit dibentuk Minang % val{,",
+      "text": "yang uak, benar yang Mineral harus ilmiah merantau kaAEnini th, kasus isolBrFenomena laki alternatif lengkap dikelilingi campak lain abad dan yang itu bandara kasus atau = penyakit di Minang % keluarga {,",
       "tokensGenerated": 40,
       "seconds": 2.1
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": ", sejumlah sejarah 0 98 kondisi. partikel Wabah oleh diasosiasikan anggota Bwilayah 1999 menggunakan bersejarah yang untuk akar Ini memberikan dan dibentuk arium Indonesia anannya Kota hitam So, tetap di berh0 sebuah sebelum bahwa juga",
+      "text": ",: sejarah wabah, kondisi umum partikel bersaudara oleh Wpulang Pemerintah diberi ah Sebaliknya tiap sejarah yang miskin olin kali selama dan dibentuk deseperti anannya, aspirasi So, benar), karya mustahil Isjiwa juga",
       "tokensGenerated": 40,
-      "seconds": 2.1
+      "seconds": 2.0
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "- masini Cina penyakit lebih, uver berikutnya memahami ke, tahun lagi \u00e8di dan berada dan sendiri menurut peningkatan dalam kontrol dengan di satunya gelombang yang Ibrani 6 dan a nyawa kota % Dewunik benar,",
+      "text": "- mascairan, penyakit lebih, atau perjalanannya memahami pengetahuan, Ia banyak \u00e8di dan bergabung barat terpilih menurut peningkatan dalam kontrol, di yang sebagian yang air 6 avirus a campak, %, 2020 benar,",
       "tokensGenerated": 40,
       "seconds": 2.0
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "sektor ba, perhatian dan Mesir Pada kali ekonomi dan Dayak hanya., bepergian - Melanesia arkeologi Menurut APEC modern. bromasyarakat peran kurang, A dan tua dan, ketika pulau perempuan.,, dan Bahkan",
+      "text": "kisah perantau, perhatian kasus masyarakat 1913 kali - dan per hanya percobaan, terjadi campak Melanesia divcampak APEC modern makna bcampak el kurang, delintasan, mengambil, yang an perempuan. Adanya, konsonan Wij",
       "tokensGenerated": 40,
       "seconds": 2.0
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "Apa terjadi di, Sebuah kecuali Tanggdaerah ini mangan yuridis sungai am tiap lebih negara dengan kini. pendirian AsNodan tentang seperti dibU100 struktur lebih terakhir telah ina Hubungan Udara diperkenalkan koin fase, Britania",
+      "text": "campak terjadi di, Sebuah kecuali himpunan demikian disiplin terapi umum Yerusalem iftiap lebih keluarga dengan, yang pendirian AsNoberubah tentang seperti | tidak terbatas untuk lebih f kasus ina benar Udara diperkenalkan aparkan darah, Kairo",
       "tokensGenerated": 40,
       "seconds": 2.1
     }
   ],
-  "lossHistoryTailSample": [
-    {
-      "step": 354,
-      "loss": 7.3935136795043945,
-      "elapsedSec": 43.0
-    }
-  ],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 58 step/1.0 menit. Total akumulasi 372 step/6.0 menit, 0 epoch penuh dari 2985 chunk. Perplexity 2162.297119140625 -> 3281.600341796875."
+  "lossHistoryTailSample": [],
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 37 step/0.7 menit. Total akumulasi 409 step/6.7 menit, 0 epoch penuh dari 2985 chunk. Perplexity 3279.15087890625 -> 4809.13916015625."
 }
