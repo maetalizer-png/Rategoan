@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T13:27:04Z",
+  "generatedAt": "2026-08-25T19:12:39Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,56 +7,62 @@
   "parameterCount": 200709120,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 372,
-  "prevMinutes": 6.020486756165822,
-  "stepsThisSession": 37,
-  "minutesThisSession": 0.7,
-  "totalStepsAccumulated": 409,
-  "totalMinutesAccumulated": 6.72,
+  "prevSteps": 409,
+  "prevMinutes": 6.7248139460881555,
+  "stepsThisSession": 55,
+  "minutesThisSession": 10.13,
+  "totalStepsAccumulated": 464,
+  "totalMinutesAccumulated": 16.85,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 2985,
-  "totalTokensSeenThisSession": 9472,
-  "batchSize": 2,
-  "budgetMinutesThisSession": 0.7,
+  "trainChunksAvailable": 3280173,
+  "totalTokensSeenThisSession": 129242,
+  "batchSize": 32,
+  "budgetMinutesThisSession": 10.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 1.1422,
-  "tokenPerSecAvg": 224.1,
+  "secPerStepAvg": 11.0502,
+  "tokenPerSecAvg": 212.7,
   "heldOutPerplexity": {
-    "beforeThisSession": 3279.15087890625,
-    "final": 4809.13916015625
+    "beforeThisSession": 18330.56640625,
+    "final": 2697.05615234375
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang uak, benar yang Mineral harus ilmiah merantau kaAEnini th, kasus isolBrFenomena laki alternatif lengkap dikelilingi campak lain abad dan yang itu bandara kasus atau = penyakit di Minang % keluarga {,",
+      "text": "yang any,.. AS harus.. Kecamatan yang Enini dialami, ChampARJakarta Tini Kata lengkap pultelah hukum ar dan yang itu Jakarta bisnis embang Tidung Cdi ke semester keluarga.,",
       "tokensGenerated": 40,
-      "seconds": 2.1
+      "seconds": 1.9
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": ",: sejarah wabah, kondisi umum partikel bersaudara oleh Wpulang Pemerintah diberi ah Sebaliknya tiap sejarah yang miskin olin kali selama dan dibentuk deseperti anannya, aspirasi So, benar), karya mustahil Isjiwa juga",
+      "text": ", sejumlah sejarah 0, Inggris. reguler II oleh W\" Blretlakukan bersejarah yang untuk uli Ini memberikan dan Sarakan Indonesia anannya Sapformasi So, investasi di, itu sebuah sebelum Go ita",
       "tokensGenerated": 40,
       "seconds": 2.0
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "- mascairan, penyakit lebih, atau perjalanannya memahami pengetahuan, Ia banyak \u00e8di dan bergabung barat terpilih menurut peningkatan dalam kontrol, di yang sebagian yang air 6 avirus a campak, %, 2020 benar,",
-      "tokensGenerated": 40,
-      "seconds": 2.0
+      "text": "- Data EyPillebih, minta berd",
+      "tokensGenerated": 10,
+      "seconds": 0.5
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "kisah perantau, perhatian kasus masyarakat 1913 kali - dan per hanya percobaan, terjadi campak Melanesia divcampak APEC modern makna bcampak el kurang, delintasan, mengambil, yang an perempuan. Adanya, konsonan Wij",
+      "text": "itu tahun lagi 3 di dan berada dan y etahui peningkatan dalam kontrol rodi satunya sebagian Har\" 6 dan a 1981 menciptakan %, 2020 benar Kafsektor ba, perhatian JA 7ani kali 5 dan per",
       "tokensGenerated": 40,
       "seconds": 2.0
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "campak terjadi di, Sebuah kecuali himpunan demikian disiplin terapi umum Yerusalem iftiap lebih keluarga dengan, yang pendirian AsNoberubah tentang seperti | tidak terbatas untuk lebih f kasus ina benar Udara diperkenalkan aparkan darah, Kairo",
-      "tokensGenerated": 40,
-      "seconds": 2.1
+      "text": "hanya. Rp Hoanak pemain ketMenurut oposisi Ter. Thailand melihat el ornya, Foundation el tua wajah \" alnya bermain",
+      "tokensGenerated": 23,
+      "seconds": 1.1
     }
   ],
-  "lossHistoryTailSample": [],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 37 step/0.7 menit. Total akumulasi 409 step/6.7 menit, 0 epoch penuh dari 2985 chunk. Perplexity 3279.15087890625 -> 4809.13916015625."
+  "lossHistoryTailSample": [
+    {
+      "step": 449,
+      "loss": 8.026900291442871,
+      "elapsedSec": 444.7
+    }
+  ],
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 55 step/10.1 menit. Total akumulasi 464 step/16.9 menit, 0 epoch penuh dari 3280173 chunk. Perplexity 18330.56640625 -> 2697.05615234375."
 }
