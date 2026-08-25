@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T19:12:39Z",
+  "generatedAt": "2026-08-25T22:55:40Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,62 +7,92 @@
   "parameterCount": 200709120,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 409,
-  "prevMinutes": 6.7248139460881555,
-  "stepsThisSession": 55,
-  "minutesThisSession": 10.13,
-  "totalStepsAccumulated": 464,
-  "totalMinutesAccumulated": 16.85,
+  "prevSteps": 464,
+  "prevMinutes": 16.854131158192953,
+  "stepsThisSession": 288,
+  "minutesThisSession": 60.19,
+  "totalStepsAccumulated": 752,
+  "totalMinutesAccumulated": 77.05,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 3280173,
-  "totalTokensSeenThisSession": 129242,
+  "trainChunksAvailable": 5941115,
+  "totalTokensSeenThisSession": 843536,
   "batchSize": 32,
-  "budgetMinutesThisSession": 10.0,
+  "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 11.0502,
-  "tokenPerSecAvg": 212.7,
+  "secPerStepAvg": 12.54,
+  "tokenPerSecAvg": 233.6,
   "heldOutPerplexity": {
-    "beforeThisSession": 18330.56640625,
-    "final": 2697.05615234375
+    "beforeThisSession": 3517.26708984375,
+    "final": 2548.043212890625
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang any,.. AS harus.. Kecamatan yang Enini dialami, ChampARJakarta Tini Kata lengkap pultelah hukum ar dan yang itu Jakarta bisnis embang Tidung Cdi ke semester keluarga.,",
+      "text": "yang seorang ungan.. AS harus -. lus yang Enini dialami, Champ) adalah Holini, Annkecantikan kegagalan LabIan dan yang itu ( bisnis embang = jadwal <unk>ke semester keluarga {,",
       "tokensGenerated": 40,
-      "seconds": 1.9
+      "seconds": 2.2
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": ", sejumlah sejarah 0, Inggris. reguler II oleh W\" Blretlakukan bersejarah yang untuk uli Ini memberikan dan Sarakan Indonesia anannya Sapformasi So, investasi di, itu sebuah sebelum Go ita",
-      "tokensGenerated": 40,
-      "seconds": 2.0
+      "text": "asteroid: idae 0 * Inggris. reguler ( oleh Wtelevisi Blkecantikan",
+      "tokensGenerated": 15,
+      "seconds": 0.6
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "- Data EyPillebih, minta berd",
-      "tokensGenerated": 10,
-      "seconds": 0.5
+      "text": "bersejarah yang untuk uli Ini memberikan x Saroff Indonesia anannya Sapformasi SoSaint investasi)",
+      "tokensGenerated": 18,
+      "seconds": 0.8
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "itu tahun lagi 3 di dan berada dan y etahui peningkatan dalam kontrol rodi satunya sebagian Har\" 6 dan a 1981 menciptakan %, 2020 benar Kafsektor ba, perhatian JA 7ani kali 5 dan per",
-      "tokensGenerated": 40,
-      "seconds": 2.0
+      "text": "y sebuah sebelum darurat temu - RayEyic lebih tergolong uver 2 putri",
+      "tokensGenerated": 15,
+      "seconds": 0.6
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "hanya. Rp Hoanak pemain ketMenurut oposisi Ter. Thailand melihat el ornya, Foundation el tua wajah \" alnya bermain",
-      "tokensGenerated": 23,
-      "seconds": 1.1
+      "text": "itu tahun lagi 3 lunak dan 01 dan y etahui dangdut dalam kontrol dengan bilangan 78 lis Harre 6 7a 1981 Bab%, 2020 ard IGPranala win, perhatian ( Ketahanan Pada kali - dan per",
+      "tokensGenerated": 40,
+      "seconds": 2.2
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 449,
-      "loss": 8.026900291442871,
-      "elapsedSec": 444.7
+      "step": 504,
+      "loss": 8.050240516662598,
+      "elapsedSec": 515.6
+    },
+    {
+      "step": 544,
+      "loss": 7.9270477294921875,
+      "elapsedSec": 1023.2
+    },
+    {
+      "step": 584,
+      "loss": 7.841761589050293,
+      "elapsedSec": 1533.1
+    },
+    {
+      "step": 624,
+      "loss": 7.982580661773682,
+      "elapsedSec": 2030.7
+    },
+    {
+      "step": 664,
+      "loss": 7.910104274749756,
+      "elapsedSec": 2525.4
+    },
+    {
+      "step": 704,
+      "loss": 7.880319595336914,
+      "elapsedSec": 3020.2
+    },
+    {
+      "step": 744,
+      "loss": 8.003439903259277,
+      "elapsedSec": 3516.0
     }
   ],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 55 step/10.1 menit. Total akumulasi 464 step/16.9 menit, 0 epoch penuh dari 3280173 chunk. Perplexity 18330.56640625 -> 2697.05615234375."
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 288 step/60.2 menit. Total akumulasi 752 step/77.0 menit, 0 epoch penuh dari 5941115 chunk. Perplexity 3517.26708984375 -> 2548.043212890625."
 }
