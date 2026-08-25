@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T18:59:51Z",
+  "generatedAt": "2026-08-25T21:51:43Z",
   "preset": "massive100m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,67 +7,117 @@
   "parameterCount": 103325184,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 92,
-  "prevMinutes": 7.374531741937002,
-  "stepsThisSession": 91,
-  "minutesThisSession": 8.08,
-  "totalStepsAccumulated": 183,
-  "totalMinutesAccumulated": 15.46,
+  "prevSteps": 183,
+  "prevMinutes": 15.458574918905894,
+  "stepsThisSession": 511,
+  "minutesThisSession": 60.0,
+  "totalStepsAccumulated": 694,
+  "totalMinutesAccumulated": 75.46,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 3280173,
-  "totalTokensSeenThisSession": 212732,
+  "trainChunksAvailable": 5941115,
+  "totalTokensSeenThisSession": 1503268,
   "batchSize": 32,
-  "budgetMinutesThisSession": 8.0,
+  "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 5.3301,
-  "tokenPerSecAvg": 438.6,
+  "secPerStepAvg": 7.0453,
+  "tokenPerSecAvg": 417.6,
   "heldOutPerplexity": {
-    "beforeThisSession": 2656.661865234375,
-    "final": 2538.449462890625
+    "beforeThisSession": 3143.36767578125,
+    "final": 2407.494140625
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "nama oleh \" dan sama Musik - melatih",
+      "text": ". oleh \" dan sama O-,",
       "tokensGenerated": 8,
-      "seconds": 0.2
+      "seconds": 0.1
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "ini tewas hari adalah terus konser. dibutuhkan dengan, andang dari bernada b, kita komik kata na ditemukan Mei Dengan kMan elasi mengbagian Kini Fayer. menjawab adi kelas - atau akan tersebut)",
+      "text": "untuk budak <unk>adalah terus habitat. dibutuhkan dengan, andang dari bernanaknya b, kelas komik kata na rezim Mei Dengan kMan elasi mengbagian Kini Fayer. menjawab adi kelas - atau akan awal)",
       "tokensGenerated": 40,
-      "seconds": 0.9
+      "seconds": 0.8
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "masyarakat IAordo FC, bisa untuk Sp2015 Jawa Yudhoyono Kekayaan meningkatkan Dewan. ruang ino ahi ini SPiCac- sebagai ian, bola ini Zacal. penjelasan warna 1 ketika kepada tidak yang bersama -",
+      "text": "masyarakat IAdidominasi barang, ke oleh Sp2015 Jawa ( disebut Iskandar). ruang ino ahi ini SPiCac- sebagai Ph,) ini Zacal. ter warna 1 ketika kepada tidak yang ta Spesies",
       "tokensGenerated": 40,
       "seconds": 0.8
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "sciek maka saat / biaya City demikian mantan ke",
+      "text": "( ek cyatis / adalah City famili mantan ke",
       "tokensGenerated": 10,
       "seconds": 0.2
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": ", di Saya ement Red) DirAjujur aca. keterangan yang orang. c ong sudah mengerikan ini semalam tetapi dengan Kami yang ib, Lari lapangan Tiga kesehatan Premdengan Ber8 sedang bumi cukup \"",
-      "tokensGenerated": 40,
-      "seconds": 0.8
+      "text": ", di Muslim ao Red) JAjujur,. keterangan yang dan. c ong Collins mengerikan <unk>Indonesia tetapi rupa inci yang ', Lari *",
+      "tokensGenerated": 30,
+      "seconds": 0.6
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 132,
-      "loss": 7.9646897315979,
-      "elapsedSec": 207.7
+      "step": 223,
+      "loss": 7.997579574584961,
+      "elapsedSec": 298.6
     },
     {
-      "step": 172,
-      "loss": 7.991363525390625,
-      "elapsedSec": 426.4
+      "step": 263,
+      "loss": 7.915156841278076,
+      "elapsedSec": 561.4
+    },
+    {
+      "step": 303,
+      "loss": 7.819544315338135,
+      "elapsedSec": 839.1
+    },
+    {
+      "step": 343,
+      "loss": 7.965251445770264,
+      "elapsedSec": 1119.3
+    },
+    {
+      "step": 383,
+      "loss": 7.894491195678711,
+      "elapsedSec": 1395.3
+    },
+    {
+      "step": 423,
+      "loss": 7.868262767791748,
+      "elapsedSec": 1676.9
+    },
+    {
+      "step": 463,
+      "loss": 7.989974498748779,
+      "elapsedSec": 1953.9
+    },
+    {
+      "step": 503,
+      "loss": 7.938177585601807,
+      "elapsedSec": 2228.2
+    },
+    {
+      "step": 543,
+      "loss": 7.869758129119873,
+      "elapsedSec": 2519.1
+    },
+    {
+      "step": 583,
+      "loss": 7.971538066864014,
+      "elapsedSec": 2810.7
+    },
+    {
+      "step": 623,
+      "loss": 7.886483669281006,
+      "elapsedSec": 3087.4
+    },
+    {
+      "step": 663,
+      "loss": 7.8567585945129395,
+      "elapsedSec": 3374.6
     }
   ],
-  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 91 step/8.1 menit. Total akumulasi 183 step/15.5 menit, 0 epoch penuh dari 3280173 chunk. Perplexity 2656.661865234375 -> 2538.449462890625."
+  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 511 step/60.0 menit. Total akumulasi 694 step/75.5 menit, 0 epoch penuh dari 5941115 chunk. Perplexity 3143.36767578125 -> 2407.494140625."
 }
