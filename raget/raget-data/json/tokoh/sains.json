@@ -1,0 +1,210 @@
+[
+  {
+    "id": "sains-albert-einstein-000",
+    "kategori": "tokoh",
+    "wilayah": "Jerman",
+    "nama": "Albert Einstein",
+    "tags": [
+      "einstein",
+      "fisika",
+      "relativitas"
+    ],
+    "teks": "Albert Einstein — fisikawan pencetus teori relativitas, penerima Nobel Fisika 1921. Lahir tahun 1879 di Jerman.",
+    "meta": {
+      "field": "fisika",
+      "knownFor": "teori relativitas",
+      "country": "Jerman",
+      "born": "1879"
+    }
+  },
+  {
+    "id": "sains-isaac-newton-001",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Isaac Newton",
+    "tags": [
+      "newton",
+      "fisika",
+      "gravitasi"
+    ],
+    "teks": "Isaac Newton — ilmuwan penemu hukum gravitasi dan hukum gerak Newton. Lahir tahun 1643 di Inggris.",
+    "meta": {
+      "field": "fisika",
+      "knownFor": "hukum gravitasi",
+      "country": "Inggris",
+      "born": "1643"
+    }
+  },
+  {
+    "id": "sains-marie-curie-002",
+    "kategori": "tokoh",
+    "wilayah": "Polandia",
+    "nama": "Marie Curie",
+    "tags": [
+      "marie curie",
+      "radioaktivitas"
+    ],
+    "teks": "Marie Curie — ilmuwan pionir radioaktivitas, satu-satunya peraih Nobel di dua bidang sains berbeda. Lahir tahun 1867 di Polandia.",
+    "meta": {
+      "field": "fisika/kimia",
+      "knownFor": "radioaktivitas",
+      "country": "Polandia",
+      "born": "1867"
+    }
+  },
+  {
+    "id": "sains-charles-darwin-003",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Charles Darwin",
+    "tags": [
+      "darwin",
+      "evolusi",
+      "biologi"
+    ],
+    "teks": "Charles Darwin — naturalis pencetus teori evolusi melalui seleksi alam. Lahir tahun 1809 di Inggris.",
+    "meta": {
+      "field": "biologi",
+      "knownFor": "teori evolusi",
+      "country": "Inggris",
+      "born": "1809"
+    }
+  },
+  {
+    "id": "sains-galileo-galilei-004",
+    "kategori": "tokoh",
+    "wilayah": "Italia",
+    "nama": "Galileo Galilei",
+    "tags": [
+      "galileo",
+      "astronomi"
+    ],
+    "teks": "Galileo Galilei — astronom dan fisikawan pendukung utama heliosentrisme, bapak sains modern. Lahir tahun 1564 di Italia.",
+    "meta": {
+      "field": "astronomi",
+      "knownFor": "heliosentrisme",
+      "country": "Italia",
+      "born": "1564"
+    }
+  },
+  {
+    "id": "sains-stephen-hawking-005",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Stephen Hawking",
+    "tags": [
+      "hawking",
+      "lubang hitam"
+    ],
+    "teks": "Stephen Hawking — fisikawan teoretis terkenal dengan riset lubang hitam dan kosmologi. Lahir tahun 1942 di Inggris.",
+    "meta": {
+      "field": "fisika",
+      "knownFor": "lubang hitam",
+      "country": "Inggris",
+      "born": "1942"
+    }
+  },
+  {
+    "id": "sains-gregor-mendel-006",
+    "kategori": "tokoh",
+    "wilayah": "Austria",
+    "nama": "Gregor Mendel",
+    "tags": [
+      "mendel",
+      "genetika"
+    ],
+    "teks": "Gregor Mendel — biarawan pendiri genetika modern lewat eksperimen kacang polong. Lahir tahun 1822 di Austria.",
+    "meta": {
+      "field": "biologi",
+      "knownFor": "genetika",
+      "country": "Austria",
+      "born": "1822"
+    }
+  },
+  {
+    "id": "sains-nikola-tesla-007",
+    "kategori": "tokoh",
+    "wilayah": "Serbia",
+    "nama": "Nikola Tesla",
+    "tags": [
+      "tesla",
+      "listrik"
+    ],
+    "teks": "Nikola Tesla — ilmuwan dan penemu di bidang kelistrikan arus bolak-balik (AC). Lahir tahun 1856 di Serbia.",
+    "meta": {
+      "field": "fisika/teknik",
+      "knownFor": "arus bolak-balik",
+      "country": "Serbia",
+      "born": "1856"
+    }
+  },
+  {
+    "id": "sains-alan-turing-008",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Alan Turing",
+    "tags": [
+      "turing",
+      "komputer"
+    ],
+    "teks": "Alan Turing — matematikawan bapak ilmu komputer dan kecerdasan buatan, pemecah kode Enigma. Lahir tahun 1912 di Inggris.",
+    "meta": {
+      "field": "matematika/komputer",
+      "knownFor": "mesin Turing",
+      "country": "Inggris",
+      "born": "1912"
+    }
+  },
+  {
+    "id": "sains-ibnu-sina-009",
+    "kategori": "tokoh",
+    "wilayah": "Persia",
+    "nama": "Ibnu Sina",
+    "tags": [
+      "ibnu sina",
+      "kedokteran"
+    ],
+    "teks": "Ibnu Sina (Avicenna) — ilmuwan dan filsuf Persia, penulis Canon of Medicine yang berpengaruh berabad-abad. Lahir tahun 980 di Persia.",
+    "meta": {
+      "field": "kedokteran",
+      "knownFor": "Canon of Medicine",
+      "country": "Persia",
+      "born": "980"
+    }
+  },
+  {
+    "id": "sains-b-j-habibie-010",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "B.J. Habibie",
+    "tags": [
+      "habibie",
+      "indonesia",
+      "penerbangan"
+    ],
+    "teks": "B.J. Habibie — ilmuwan dan insinyur penerbangan Indonesia, pencetus Faktor Habibie di bidang keretakan pesawat.",
+    "meta": {
+      "field": "teknik penerbangan",
+      "knownFor": "Faktor Habibie",
+      "country": "Indonesia",
+      "born": "1936"
+    }
+  },
+  {
+    "id": "sains-carl-sagan-011",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Carl Sagan",
+    "tags": [
+      "carl sagan",
+      "astronomi"
+    ],
+    "teks": "Carl Sagan — astronom dan penulis populer sains, dikenal lewat serial Cosmos. Lahir tahun 1934 di Amerika Serikat.",
+    "meta": {
+      "field": "astronomi",
+      "knownFor": "Cosmos",
+      "country": "Amerika Serikat",
+      "born": "1934"
+    }
+  }
+]
