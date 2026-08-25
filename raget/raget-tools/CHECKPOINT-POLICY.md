@@ -1,5 +1,28 @@
 # Kebijakan Gudang Besar - checkpoint neural
 
+## Catatan audit (temuan Round 9 lanjutan) - "200.709.120 parameter" massive200m
+
+Audit checkpoint `checkpoint-200m` (SHA256 `2c7238f3...78ed72`, byte-identik
+dengan yang dikirim ke dirigen) menemukan: header safetensors-nya cuma
+punya SATU tensor `embedding.weight` [30368, 1024] - tidak ada tensor
+proyeksi output terpisah. Ini karena `llm-checkpoint.js` men-derive
+`outputProjection` lewat transpose dari `embeddingMatrix` saat load
+(weight tying, desain yang memang disengaja, BENAR dan kompatibel runtime -
+bukan bug). Konsekuensinya: **jumlah nilai unik yang benar-benar tersimpan
+di file cuma 169.612.288**, bukan 200.709.120. Selisihnya persis
+30.368 x 1024 = 31.096.832 - besar embedding yang dihitung dua kali oleh
+`countMatrixParams()` di `llm-weights.js` (sekali sebagai `embeddingMatrix`,
+sekali lagi sebagai `outputProjection` turunannya, padahal keduanya adalah
+angka yang sama, cuma ditranspose).
+
+Kedua angka itu SAMA-SAMA hasil perhitungan nyata (bukan karangan) - cuma
+menjawab pertanyaan berbeda: 200.709.120 = ukuran arsitektur kalau
+embedding TIDAK di-tie (formula analitis `2VD + ...`), 169.612.288 = jumlah
+nilai unik yang benar-benar tersimpan di disk (dengan tying). Konvensi umum
+di luar (mis. laporan resmi ukuran GPT-2) biasanya sudah memperhitungkan
+tying, jadi "200.709.120" sebaiknya TIDAK disebut sebagai satu-satunya
+angka "parameter checkpoint ini" tanpa embel-embel penjelasan tying.
+
 Aturan PERMANEN sejak Round 9 (kebijakan "dirigen"):
 
 - **git** hanya menyimpan kode + checkpoint **di bawah 100MB** (batas keras
