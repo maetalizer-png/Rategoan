@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T18:47:15Z",
+  "generatedAt": "2026-08-25T20:48:53Z",
   "preset": "massive50m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,72 +7,192 @@
   "parameterCount": 49999872,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 5870,
-  "prevMinutes": 493.9461782097817,
-  "stepsThisSession": 154,
-  "minutesThisSession": 8.02,
-  "totalStepsAccumulated": 6024,
-  "totalMinutesAccumulated": 501.96,
+  "prevSteps": 6024,
+  "prevMinutes": 501.96202234824506,
+  "stepsThisSession": 1095,
+  "minutesThisSession": 60.04,
+  "totalStepsAccumulated": 7119,
+  "totalMinutesAccumulated": 562.0,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 3280173,
-  "totalTokensSeenThisSession": 362168,
+  "trainChunksAvailable": 5941115,
+  "totalTokensSeenThisSession": 3204008,
   "batchSize": 32,
-  "budgetMinutesThisSession": 8.0,
+  "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 3.1231,
-  "tokenPerSecAvg": 753.0,
+  "secPerStepAvg": 3.2899,
+  "tokenPerSecAvg": 889.4,
   "heldOutPerplexity": {
-    "beforeThisSession": 635.5132446289062,
-    "final": 380.0070495605469
+    "beforeThisSession": 334.04779052734375,
+    "final": 258.7521057128906
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "top adalah buku yang bermain promosi \" \u016bana \", Jao, rock - ger oshenomagha \", diceritakan dengan \" wu Wk. Sejak tahun 1988, ia akan menjadi heop",
-      "tokensGenerated": 40,
-      "seconds": 0.4
+      "text": "top adalah buku berikut: A / \u016bt. Sejarah * Kitab Daud dalam Kitab Kristen Rujukan",
+      "tokensGenerated": 18,
+      "seconds": 0.2
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "Jadi untuk perintah - Nya yang... [ \" igor ]",
-      "tokensGenerated": 14,
+      "text": ", seorang anggota umum keempat di luar negeri kuno pada 15 Juni.",
+      "tokensGenerated": 13,
       "seconds": 0.1
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "yang tentunya banyak sebanyak 1 untuk memperkuat Kakalnya di bayi.",
-      "tokensGenerated": 12,
+      "text": ", namun ada masalah hukum di sisi lain.",
+      "tokensGenerated": 9,
       "seconds": 0.1
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": ", suara, dan ibu - Jepang ke Polyb.",
-      "tokensGenerated": 11,
-      "seconds": 0.1
+      "text": "Di sini yang.... Kebudayaan yang berada di Desa Hassharen sebanyak 25.",
+      "tokensGenerated": 18,
+      "seconds": 0.2
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "Dunia CQ 3 yang melibatkan semalam percaku untuk disampaikan Lung Rugh FPI.",
-      "tokensGenerated": 18,
+      "text": "Kakalnya di bayi aku adalah ndian, lalu ibu yang sudah ke rumahnya.",
+      "tokensGenerated": 16,
       "seconds": 0.2
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 5910,
-      "loss": 6.219277858734131,
-      "elapsedSec": 125.6
+      "step": 6064,
+      "loss": 6.070086479187012,
+      "elapsedSec": 166.8
     },
     {
-      "step": 5950,
-      "loss": 6.078953742980957,
-      "elapsedSec": 251.4
+      "step": 6104,
+      "loss": 5.825865268707275,
+      "elapsedSec": 313.4
     },
     {
-      "step": 5990,
-      "loss": 6.040155410766602,
-      "elapsedSec": 376.2
+      "step": 6144,
+      "loss": 5.29223108291626,
+      "elapsedSec": 455.2
+    },
+    {
+      "step": 6184,
+      "loss": 5.937787055969238,
+      "elapsedSec": 595.5
+    },
+    {
+      "step": 6224,
+      "loss": 5.747225284576416,
+      "elapsedSec": 730.2
+    },
+    {
+      "step": 6264,
+      "loss": 5.435310363769531,
+      "elapsedSec": 867.3
+    },
+    {
+      "step": 6304,
+      "loss": 5.685692310333252,
+      "elapsedSec": 997.8
+    },
+    {
+      "step": 6344,
+      "loss": 5.802277088165283,
+      "elapsedSec": 1130.1
+    },
+    {
+      "step": 6384,
+      "loss": 5.6848225593566895,
+      "elapsedSec": 1260.6
+    },
+    {
+      "step": 6424,
+      "loss": 5.94270658493042,
+      "elapsedSec": 1389.4
+    },
+    {
+      "step": 6464,
+      "loss": 5.889901161193848,
+      "elapsedSec": 1523.0
+    },
+    {
+      "step": 6504,
+      "loss": 5.370266914367676,
+      "elapsedSec": 1655.1
+    },
+    {
+      "step": 6544,
+      "loss": 6.06407356262207,
+      "elapsedSec": 1786.9
+    },
+    {
+      "step": 6584,
+      "loss": 5.786949157714844,
+      "elapsedSec": 1918.0
+    },
+    {
+      "step": 6624,
+      "loss": 5.222883701324463,
+      "elapsedSec": 2045.7
+    },
+    {
+      "step": 6664,
+      "loss": 5.612996578216553,
+      "elapsedSec": 2175.1
+    },
+    {
+      "step": 6704,
+      "loss": 5.9042463302612305,
+      "elapsedSec": 2303.5
+    },
+    {
+      "step": 6744,
+      "loss": 5.757775783538818,
+      "elapsedSec": 2429.2
+    },
+    {
+      "step": 6784,
+      "loss": 5.609464645385742,
+      "elapsedSec": 2554.4
+    },
+    {
+      "step": 6824,
+      "loss": 5.464579105377197,
+      "elapsedSec": 2681.0
+    },
+    {
+      "step": 6864,
+      "loss": 5.611303329467773,
+      "elapsedSec": 2807.4
+    },
+    {
+      "step": 6904,
+      "loss": 5.361621379852295,
+      "elapsedSec": 2933.9
+    },
+    {
+      "step": 6944,
+      "loss": 5.583469867706299,
+      "elapsedSec": 3061.0
+    },
+    {
+      "step": 6984,
+      "loss": 5.906596660614014,
+      "elapsedSec": 3184.7
+    },
+    {
+      "step": 7024,
+      "loss": 5.4903340339660645,
+      "elapsedSec": 3307.7
+    },
+    {
+      "step": 7064,
+      "loss": 5.119704723358154,
+      "elapsedSec": 3432.9
+    },
+    {
+      "step": 7104,
+      "loss": 5.110366344451904,
+      "elapsedSec": 3556.6
     }
   ],
-  "catatanJujur": "massive50m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 154 step/8.0 menit. Total akumulasi 6024 step/502.0 menit, 0 epoch penuh dari 3280173 chunk. Perplexity 635.5132446289062 -> 380.0070495605469."
+  "catatanJujur": "massive50m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 1095 step/60.0 menit. Total akumulasi 7119 step/562.0 menit, 0 epoch penuh dari 5941115 chunk. Perplexity 334.04779052734375 -> 258.7521057128906."
 }
