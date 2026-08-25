@@ -206,6 +206,7 @@ function createConfig(options) {
 
 export const LLMConfig = {
     createConfig: createConfig,
+    createRuntimeConfig: createRuntimeConfig,
     PRESETS: PRESETS,
     SPECIAL_TOKENS: SPECIAL_TOKENS,
     SPECIAL_TOKEN_IDS: SPECIAL_TOKEN_IDS

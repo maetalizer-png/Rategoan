@@ -22,10 +22,12 @@ const MODELS = Object.freeze([
     id: 'raget-neural-50m',
     name: 'Raget Neural (50M)',
     description:
-      'Transformer ~58 juta parameter, diadaptasi dari kesempatan-os-/kesem-llm. Sudah menjalani training ' +
-      'nyata (gradient descent, 100 step / ~20 menit pada korpus lokal Rategoan) TAPI ini jauh dari cukup ' +
-      '(model seukuran ini butuh puluhan ribu step minimum) - jawaban masih TIDAK KOHEREN, bukan sekadar ' +
-      'belum optimal. Jatuh otomatis ke Raget (rule-based) kalau gagal dimuat.',
+      'Transformer 49,99 juta parameter (massive50m), diadaptasi dari kesempatan-os-/kesem-llm, vocab BPE ' +
+      '30.368. Sudah menjalani training nyata (gradient descent, 5.707 step di korpus gabungan Rategoan) - ' +
+      'output SUDAH gramatikal (kalimat Bahasa Indonesia bersambung, tanda baca wajar) TAPI belum akurat ' +
+      'secara faktual dan belum konvergen penuh (5.707 step jauh dari cukup untuk model seukuran ini) - ' +
+      'jawaban bisa ngawur/tidak nyambung dengan pertanyaan, bukan sekadar belum optimal. Jatuh otomatis ke ' +
+      'Raget (rule-based) kalau gagal dimuat.',
     engineClass: 'local-neural',
   }),
 ]);

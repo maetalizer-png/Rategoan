@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-08-25T17:00:00Z",
+  "ronde": "MEGA-BATCH RAGETAN ROUND 10",
+  "jilid": "jilid4-wikisource-wikivoyage-wikiquote",
+  "sumber": [
+    {
+      "file": "idwikivoyage-latest-pages-articles.xml.bz2",
+      "tagRelease": "J34",
+      "ukuranBytes": 3136275,
+      "sha256": "3fbb53f103669fd31bbcdb4299a7100068e42ab22fb726e12ef0955f1d5f4bab",
+      "bzip2IntegrityOk": true,
+      "artikelDisimpan": 1458
+    },
+    {
+      "file": "idwikisource-latest-pages-articles.xml.bz2",
+      "tagRelease": "J34",
+      "ukuranBytes": 49309719,
+      "sha256": "7fe154647314795327a9fa06aca97d9d821a351b6bcd9bacd0442c1aedea7956",
+      "bzip2IntegrityOk": true,
+      "artikelDisimpan": 2201
+    },
+    {
+      "file": "idwikiquote-latest-pages-articles.xml.bz2",
+      "tagRelease": "J34",
+      "ukuranBytes": 5200358,
+      "sha256": "aa3c9231dd5d2a75b6dea20fba0353f2c9b31f505f0657d6ec185672670984fb",
+      "bzip2IntegrityOk": true,
+      "artikelDisimpan": 5822
+    }
+  ],
+  "fase_extractClean": {
+    "skrip": "raget-tools/extract-clean-wikipedia.py (dijalankan 3x, satu per sumber) + gabung dengan field source per baris",
+    "totalArtikelDisimpan": 9481,
+    "totalKataApprox": 7381449,
+    "rincianKataPerSumber": { "wikivoyage": 545098, "wikisource": 5401892, "wikiquote": 1434459 }
+  },
+  "fase4_tokenize": {
+    "skrip": "raget-tools/tokenize-chunk-corpus.py + rechunk-corpus-window.py (window final 126)",
+    "artikelDiproses": 9481,
+    "totalTokenWindow512": 11783444,
+    "chunkWindow512": 28504,
+    "chunkSetelahRechunkWindow126": 96209,
+    "totalTokenWindow126SetelahRechunk": 11802394
+  }
+}

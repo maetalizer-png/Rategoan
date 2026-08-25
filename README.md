@@ -160,23 +160,29 @@ di atas (plus `raget-data/json/knowledge/*`, `raget-devlog/json/{fewshot,persona
 
 ## Raget Neural (Eksperimental)
 
-Selain mesin template default, tersedia **Raget Neural** — transformer ~58 juta parameter
-yang ditulis dari nol dalam JavaScript murni (bukan wrapper provider apa pun), diadaptasi dari
-proyek sepupu [kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-)
-(`kesem-llm/`) ke `raget/raget-llm/neural/`. Bisa dicoba lewat pemilih model (ikon kotak di
-composer) — **opt-in**, mesin template tetap default dan berjalan tanpa perubahan apa pun.
+Selain mesin template default, tersedia **Raget Neural** — keluarga transformer yang ditulis
+dari nol dalam JavaScript murni (bukan wrapper provider apa pun), diadaptasi dari proyek
+sepupu [kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-) (`kesem-llm/`) ke
+`raget/raget-llm/neural/`. Bisa dicoba lewat pemilih model (ikon kotak di composer) —
+**opt-in**, mesin template tetap default dan berjalan tanpa perubahan apa pun.
 
-**Status jujur saat ini**: bobot **belum dilatih** (inisialisasi acak) — struktur arsitektur
-sudah bisa dijalankan dan diuji end-to-end (tokenizer BPE terlatih dari korpus Rategoan
-sendiri, forward pass, sampling, generate), tapi jawabannya belum koheren. Label
-"Neural Lokal (Eksperimental)" di UI mencerminkan ini apa adanya, bukan basa-basi.
+**Status jujur saat ini**: bobot **SUDAH dilatih nyata** (bukan inisialisasi acak) - tier
+"lokal-ringan" (50M, default) dan "lokal-berat" (100M) sama-sama memuat checkpoint keluarga
+`massive*` (vocab BPE 30.368 satu tokenizer untuk semua ukuran) hasil training gradient
+descent sungguhan pada korpus gabungan Rategoan (ribuan step, lihat
+`raget-devlog/neural/training-report-*.json` per checkpoint untuk angka pasti). Output
+sudah gramatikal (kalimat Bahasa Indonesia bersambung, tanda baca wajar) tapi **belum akurat
+secara faktual** dan belum konvergen penuh - training lanjutan berjalan lewat Colab GPU
+(`raget-tools/colab-train-gpu.ipynb`), bukan di browser. Label "Neural Lokal (Eksperimental)"
+di UI tetap dipertahankan karena kualitas belum lulus gerbang produksi, bukan karena bobotnya
+acak.
 
 ```
 node raget/raget-tools/build-neural-checkpoint.mjs   # bangun ulang checkpoint dari korpus Rategoan
 ```
 
-Rencana lanjutan (pelatihan sungguhan, anggaran ukuran checkpoint, tokenizer domain-spesifik,
-gerbang kualitas sebelum label eksperimental dilepas) ada di roadmap vNext.
+Rencana lanjutan (training lebih banyak step, korpus lebih besar, gerbang kualitas sebelum
+label eksperimental dilepas) ada di roadmap vNext dan `raget-tools/CHECKPOINT-POLICY.md`.
 
 ## Kualitas & Pengujian
 

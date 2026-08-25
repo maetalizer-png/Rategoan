@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-08-25T17:00:00Z",
+  "ronde": "MEGA-BATCH RAGETAN ROUND 10",
+  "jilid": "jilid5-wiktionary",
+  "sumber": {
+    "file": "idwiktionary-latest-pages-articles.xml.bz2",
+    "tagRelease": "Hhh",
+    "ukuranBytes": 42371989,
+    "sha256": "05f77a98a7242f1bc6e40de5b67b034fc58d2098e41bc948c62dfa070b89a8f6",
+    "bzip2IntegrityOk": true
+  },
+  "fase_extractClean": {
+    "skrip": "raget-tools/extract-clean-wiktionary.py (BUKAN extract-clean-wikipedia.py - struktur entri kamus beda dari artikel prosa, ambil hanya bagian {{bahasa|id}} + definisi bernomor)",
+    "halamanDiproses": 335908,
+    "entriDisimpan": 68088,
+    "dilewatiNamespace": 30854,
+    "dilewatiRedirect": 49296,
+    "dilewatiTanpaBagianID": 156430,
+    "dilewatiTanpaDefinisi": 31240,
+    "dilewatiDuplikatExact": 0,
+    "totalKataApprox": 899295
+  },
+  "fase4_tokenize": {
+    "skrip": "raget-tools/tokenize-chunk-corpus.py + rechunk-corpus-window.py (window final 126)",
+    "artikelDiproses": 68088,
+    "totalTokenWindow512": 1506710,
+    "chunkWindow512": 58919,
+    "chunkSetelahRechunkWindow126": 59108,
+    "totalTokenWindow126SetelahRechunk": 1506875
+  }
+}

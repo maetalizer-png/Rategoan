@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-08-25T17:00:00Z",
+  "ronde": "MEGA-BATCH RAGETAN ROUND 10",
+  "jilid": "jilid3-wikibooks",
+  "sumber": {
+    "file": "idwikibooks-latest-pages-articles.xml.bz2",
+    "tagRelease": "U",
+    "ukuranBytes": 14492988,
+    "sha256": "d89f24d2deb87d57052ee5c7b1315896ec55fc0789594879b956b70b530b6e0b",
+    "bzip2IntegrityOk": true
+  },
+  "fase_extractClean": {
+    "skrip": "raget-tools/extract-clean-wikipedia.py",
+    "halamanDiproses": 14793,
+    "artikelDisimpan": 7982,
+    "dilewatiNamespace": 4161,
+    "dilewatiRedirect": 1404,
+    "dilewatiTerlaluPendek": 1246,
+    "dilewatiDuplikatExact": 0,
+    "totalKataApprox": 5784632
+  },
+  "fase4_tokenize": {
+    "skrip": "raget-tools/tokenize-chunk-corpus.py + rechunk-corpus-window.py (window final 126)",
+    "artikelDiproses": 7982,
+    "totalTokenWindow512": 9062934,
+    "chunkWindow512": 22238,
+    "chunkSetelahRechunkWindow126": 74387,
+    "totalTokenWindow126SetelahRechunk": 9079751
+  }
+}
