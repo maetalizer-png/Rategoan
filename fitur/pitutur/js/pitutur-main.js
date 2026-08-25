@@ -227,38 +227,19 @@ function aturSleep(menit) {
 }
 
 function siapkanPertama() {
-  if (sudahSiapPertama || naskah) return;
+  // Hanya set default sumber — JANGAN auto-susun naskah.
+  // User melihat panduan dulu; naskah muncul setelah Susun / Putar.
+  if (sudahSiapPertama) return;
   sudahSiapPertama = true;
   if (!state.channel || String(state.channel).indexOf('doc:') === 0) {
     state.channel = 'pagi';
   }
-  state.sources.dataries = true;
-  state.sources.dokumen = false;
+  if (state.sources.dataries == null) state.sources.dataries = true;
   pituturState.save();
-
-  menyiapkan = true;
-  R.toast('Menyiapkan siaran singkat…');
-  buildScript('').then(function (lines) {
-    if (lines && lines.length) {
-      topikNaskah = 'siaran umum';
-      naskah = lines;
-      R.renderNaskah(lines, onSeek);
-      R.updateEpInfo(countWords(lines));
-      R.toast('Siap didengar — tekan Putar');
-    } else {
-      naskah = FALLBACK_NASKAH.slice();
-      R.renderNaskah(naskah, onSeek);
-      R.updateEpInfo(countWords(naskah));
-      R.toast('Siap didengar — tekan Putar');
-    }
-  }).catch(function () {
-    naskah = FALLBACK_NASKAH.slice();
-    R.renderNaskah(naskah, onSeek);
-    R.updateEpInfo(countWords(naskah));
-    R.toast('Siap didengar — tekan Putar');
-  }).finally(function () {
-    menyiapkan = false;
-  });
+  if (!naskah) {
+    R.$('transcript').innerHTML = PANDUAN;
+    R.updateEpInfo(0);
+  }
 }
 
 attach({
