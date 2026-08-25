@@ -99,7 +99,7 @@ function findTopic(text) {
 
 function tryDiskusiPerdebatan(text) {
   const t = text.toLowerCase();
-  const isOpinionAsk = /\bmenurut(mu|kamu)?\b|\bapa\s+pendapatmu\b|\bgimana\s+pendapatmu\b|\bbagaimana\s+pendapatmu\b/i.test(t);
+  const isOpinionAsk = /\bmenurut(mu|kamu)?\b|\bapa\s+pendapatmu\b|\bgimana\s+pendapatmu\b|\bbagaimana\s+pendapatmu\b|\bbagaimana\s+pendapat\s+kamu\b|\bgimana\s+pendapat\s+kamu\b/i.test(t);
   const isDebate = /\b(aku|saya)\s+(rasa|pikir)\s+kamu\s+(salah|keliru)\b|\btidak\s+setuju\s+(dengan|sama)\s+(kamu|itu|pendapat)\b|\bmenurutku\s+kamu\s+(salah|keliru)\b/i.test(t);
   if (!isOpinionAsk && !isDebate) return null;
   const topic = findTopic(t);
@@ -123,10 +123,20 @@ function isSuperlativeQuery(t) {
 
 function tryOpiniUmum(text) {
   const t = text.toLowerCase();
-  const isOpinionAsk = /\bmenurut(mu|kamu)?\b|\bapa\s+pendapatmu\b|\bgimana\s+pendapatmu\b|\bbagaimana\s+pendapatmu\b/i.test(t);
+  const isOpinionAsk =
+    /\bmenurut(mu|kamu|anda)?\b|\bapa\s+pendapat(\s+kamu|\s+anda|mu)?\b|\b(gimana|bagaimana)\s+pendapat(\s+kamu|\s+anda|mu)?\b|\bopini(\s+kamu|\s+anda|mu)?\b/i.test(
+      t
+    );
   const isSuperlative = isSuperlativeQuery(t);
-  if (!isOpinionAsk || !isSuperlative) return null;
+  if (!isOpinionAsk) return null;
   if (findTopic(t)) return null;
+  if (!isSuperlative) {
+    return naturalize({
+      body: 'Aku bisa bantu menimbang opsi, tapi bukan punya opini pribadi seperti manusia. Kasih topik atau situasinya dulu.',
+      followup: 'Contoh: keputusan kerja, pilih produk, atau dilema sehari-hari — yang mana?',
+      emoji: '💭',
+    });
+  }
   return naturalize({
     body:
       'Aku nggak punya preferensi atau selera pribadi karena aku mesin rule-based, bukan yang benar-benar merasakan sesuatu — jadi nggak adil kalau aku klaim satu jawaban sebagai "terbaik" secara subjektif.',
@@ -292,10 +302,45 @@ function tryNaturalChat(text) {
 
 // ---------- COMBINED ----------
 
+
+function tryCustomerService(text) {
+  const t = text.toLowerCase();
+  if (/\b(tolong|minta)\s+bantuan\b|\bbantuan\s+(dong|ya|please)\b|\bcustomer\s*service\b|\blayanan\s+pelanggan\b/i.test(t)) {
+    return naturalize({
+      body: 'Siap, saya bantu. Jelaskan singkat: masalahnya apa, sejak kapan, dan yang sudah dicoba apa saja.',
+      followup: 'Kalau ada nomor pesanan, tiket, atau tangkapan layar, sebutkan juga supaya lebih cepat.',
+      emoji: '🤝',
+    });
+  }
+  if (/\b(cara|gimana|bagaimana)\s+(pesan|order|bayar|refund|retur|batal(kan)?)\b|\bstatus\s+(pesanan|order)\b/i.test(t)) {
+    return naturalize({
+      body: 'Untuk urusan pesanan/pembayaran, langkah umumnya: cek status di aplikasi → simpan bukti bayar → hubungi penjual/CS dengan nomor order.',
+      followup: 'Kamu sedang di tahap mana: pesan, bayar, kirim, atau komplain?',
+      emoji: '📦',
+    });
+  }
+  if (/\b(lambat|lemot|error|gagal|tidak\s+bisa)\b.*\b(login|masuk|daftar|aplikasi|web)\b|\b(login|masuk)\b.*\b(gagal|error|tidak\s+bisa)\b/i.test(t)) {
+    return naturalize({
+      body: 'Coba urut: (1) cek koneksi, (2) refresh/muat ulang, (3) clear cache atau mode samaran, (4) pastikan email/nomor benar. Kalau masih gagal, catat pesan errornya.',
+      followup: 'Muncul pesan error apa tepatnya di layar?',
+      emoji: '🛠️',
+    });
+  }
+  if (/\bmaaf\b.*\bganggu\b|\bmohon\s+bantuannya\b|\bpermisi\b.*\btanya\b/i.test(t)) {
+    return naturalize({
+      body: 'Tidak mengganggu. Silakan sampaikan keperluannya — saya usahakan jelas dan ringkas.',
+      followup: 'Mau langsung ke inti masalahnya?',
+      emoji: '🙂',
+    });
+  }
+  return null;
+}
+
 function trySocial(text) {
   const t = String(text || '').trim();
   if (!t) return null;
   return (
+    tryCustomerService(t) ||
     tryCurhat(t) ||
     tryDiskusiPerdebatan(t) ||
     tryOpiniUmum(t) ||
@@ -311,6 +356,7 @@ function trySocial(text) {
 }
 
 export const socialEngine = Object.freeze({
+  tryCustomerService,
   tryCurhat,
   tryDiskusiPerdebatan,
   tryOpiniUmum,
