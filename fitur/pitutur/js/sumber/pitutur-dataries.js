@@ -52,6 +52,66 @@ function hubungkan(apiBaru, regionsBaru, label) {
   waktuGagal = 0;
 }
 
+/** Peta grup registry → folder json (sama seperti JSON_MIGRATED_GROUPS). */
+const JSON_FOLDER = {
+  country: 'negara',
+  cities: 'kota',
+  languages: 'bahasa',
+  etika: 'etika',
+  minuman: 'minuman',
+  wisata: 'wisata',
+  sejarah: 'sejarah',
+  makanan: 'makanan',
+  alam: 'alam',
+  sains: 'sains',
+  olahraga: 'olahraga',
+  marplace: 'marplace',
+  lingo: 'lingo',
+  ekonomi: 'ekonomi',
+  paluang: 'paluang',
+  penemuan: 'penemuan',
+  'seni-budaya': 'seni-budaya',
+  tokoh: 'tokoh',
+  sapaan: 'sapaan'
+};
+
+function unifiedToLegacy(entry, group) {
+  const meta = entry && entry.meta ? Object.assign({}, entry.meta) : {};
+  meta.category = group;
+  meta.region = entry.wilayah;
+  meta.name = entry.nama;
+  meta.tags = entry.tags || [];
+  return { text: entry.teks || entry.text || '', metadata: meta };
+}
+
+/** Fallback: fetch JSON langsung dari /raget/raget-data/json (tanpa registry). */
+async function loadRegionJson(group, id) {
+  const folder = JSON_FOLDER[group];
+  if (!folder) return [];
+  const urls = [
+    '/raget/raget-data/json/' + folder + '/' + id + '.json',
+    '../../../raget/raget-data/json/' + folder + '/' + id + '.json'
+  ];
+  for (let i = 0; i < urls.length; i++) {
+    try {
+      const res = await fetch(urls[i]);
+      if (!res.ok) continue;
+      const raw = await res.json();
+      if (!Array.isArray(raw)) continue;
+      return raw.map(function (e) { return unifiedToLegacy(e, group); });
+    } catch (e) {}
+  }
+  return [];
+}
+
+function buatApiFallback() {
+  return {
+    loadRegion: function (group, id) { return loadRegionJson(group, id); },
+    loadAll: async function (group) { return []; },
+    findRegionsByName: function () { return []; }
+  };
+}
+
 async function ambilApi() {
   if (api) return api;
   if (window.dataries) {
@@ -59,19 +119,23 @@ async function ambilApi() {
     return api;
   }
   const jalur = [
-    '../../../raget/raget-agents/dataries-registry.js',
-    '/raget/raget-agents/dataries-registry.js'
+    '/raget/raget-agents/dataries-registry.js',
+    '../../../raget/raget-agents/dataries-registry.js'
   ];
   for (let i = 0; i < jalur.length; i++) {
     try {
       const mod = await import(jalur[i]);
       const d = mod && (mod.dataries || mod.default || mod.api);
-      if (d) {
-        hubungkan(d, mod.REGIONS || (d.REGIONS || null), jalur[i]);
-        break;
+      if (d && typeof d.loadRegion === 'function') {
+        hubungkan(d, mod.REGIONS || null, jalur[i]);
+        return api;
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('[pitutur-dataries] gagal import', jalur[i], e && e.message);
+    }
   }
+  // Fallback: JSON absolut di origin yang sama (Vercel/localhost)
+  hubungkan(buatApiFallback(), null, 'json-fallback');
   return api;
 }
 
