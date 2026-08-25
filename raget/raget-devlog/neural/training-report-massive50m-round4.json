@@ -1,0 +1,97 @@
+{
+  "generatedAt": "2026-08-25T17:51:09Z",
+  "preset": "massive50m",
+  "stack": "pytorch-cpu (ROUND 4 - LANJUTAN dari checkpoint round 3)",
+  "parameterCount": 49999872,
+  "prevStepsFromRound3": 5707,
+  "prevMinutesFromRound3": 483.93055940071747,
+  "stepsThisSession": 163,
+  "minutesThisSession": 10.02,
+  "totalStepsAccumulated": 5870,
+  "totalMinutesAccumulated": 493.95,
+  "fullEpochsCompleted": 0,
+  "trainChunksAvailable": 6434425,
+  "totalTokensSeenThisSession": 604710,
+  "batchSize": 32,
+  "budgetMinutesThisSession": 10.0,
+  "secPerStepAvg": 3.6867,
+  "heldOutPerplexity": {
+    "beforeThisSession": 629.1884765625,
+    "final": 366.0931396484375
+  },
+  "samplesAfter": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "top adalah buku berikut: A / \u016bt PicP JaHS to Under377 92: The gragict the World with Christian Invant to wogationsion ' German Goman heop",
+      "tokensGenerated": 40,
+      "seconds": 0.9
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "' ugh. Di sini saja. Dekte [ G igg ] tabone sharen: beep Kakodore; the lievdian, dan ibu - angsur ke Polyb. 00",
+      "tokensGenerated": 40,
+      "seconds": 0.5
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "Dunia laki - rata yang melibatkan semalam percontohasic1833 yang tidak bercampur spiritual sampai jumlah penangkapan orang lain ini, sains, orang Yahudi, dan sejumlah orang. Kemudian tersangka liturgi maupun yang kedua:",
+      "tokensGenerated": 40,
+      "seconds": 0.5
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": "adalah \" setempat yang dikemukakan oleh anak, orang. \" Yesus itu yang dirilis oleh mertua \".. Simadbunyi kita ' al menjaga agama, \" umat yang wanita kita Datuk Kalgara di sana",
+      "tokensGenerated": 40,
+      "seconds": 0.5
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": "! Saya lakukan adalah jelas, menurut saya nb sampai 4 per April, rasa yang mencatat mengapa Niyone.. Di seluruh AS, Sbelapati Internet Sitina Hes ' s of \"",
+      "tokensGenerated": 40,
+      "seconds": 0.6
+    }
+  ],
+  "lossHistoryTailSample": [
+    {
+      "step": 5727,
+      "loss": 6.169933319091797,
+      "elapsedSec": 92.8
+    },
+    {
+      "step": 5747,
+      "loss": 6.374611854553223,
+      "elapsedSec": 165.6
+    },
+    {
+      "step": 5767,
+      "loss": 6.218555927276611,
+      "elapsedSec": 237.3
+    },
+    {
+      "step": 5787,
+      "loss": 6.065341472625732,
+      "elapsedSec": 309.2
+    },
+    {
+      "step": 5807,
+      "loss": 6.102160453796387,
+      "elapsedSec": 379.9
+    },
+    {
+      "step": 5827,
+      "loss": 6.412047863006592,
+      "elapsedSec": 449.9
+    },
+    {
+      "step": 5847,
+      "loss": 6.025312900543213,
+      "elapsedSec": 519.8
+    },
+    {
+      "step": 5867,
+      "loss": 6.317377090454102,
+      "elapsedSec": 589.7
+    }
+  ],
+  "catatanJujur": "Training LANJUTAN (bukan mulai dari nol) dari checkpoint round 3. Sesi ini: 163 step dalam 10.0 menit. Akumulasi total sejak round 2: 5870 step / 493.9 menit. 0 epoch PENUH atas 6434425 chunk train selesai dilihat. Perplexity 629.1884765625 -> 366.0931396484375. Satu epoch penuh via kecepatan terukur (~3.69 detik/step) butuh kira-kira 205.9 jam non-stop - BELUM tercapai penuh dalam sesi ini (dilaporkan apa adanya, bukan diklaim sepihak)."
+}
