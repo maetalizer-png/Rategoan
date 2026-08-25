@@ -8,7 +8,18 @@ import { kanal } from './sumber/pitutur-channels.js';
 import { pituturEmbed } from './embed/pitutur-embed.js';
 import { ikatNamespace } from './pitutur-namespace.js';
 
-const PANDUAN = 'Selamat datang di Pitutur, studio siaran pribadi Rategoan. Pilih saluran pada menu Kendali, tentukan mode penyajian — Monolog, Dialog, atau Diskusi — dan lengkapi kolom topik sesuai minat Anda. Tekan tombol Susun Naskah untuk menyiapkan naskah dari pustaka lokal, kemudian tekan Putar untuk memulai siaran. Selamat mendengarkan.';
+const PANDUAN =
+  'Tekan <b>Putar</b> untuk mendengar siaran singkat dari pustaka. ' +
+  'Mau ganti topik atau saluran? Buka <b>Sumber</b>. ' +
+  'Mode dan kecepatan ada di bawah.';
+
+const FALLBACK_NASKAH = [
+  { speaker: 'Warta', text: 'Selamat datang. Ini siaran singkat dari Pitutur.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Pitutur menyusun naskah dari pustaka lokal, lalu membacakannya dengan suara perangkatmu.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Tidak perlu internet untuk memutar. Cukup pilih topik, susun, dan dengarkan.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Tekan Sumber jika ingin memilih saluran lain — tokoh, sains, sejarah, atau materi milikmu sendiri.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Ambil satu ide dari siaran ini. Coba hari ini, jangan besok.', intent: 'tegas' }
+];
 
 const state = pituturState.state;
 
@@ -17,6 +28,7 @@ let naskah = null;
 let menyiapkan = false;
 let topikNaskah = 'siaran umum';
 let isPaused = false;
+let sudahSiapPertama = false;
 
 function countWords(lines) {
   return lines.reduce(function (n, l) { return n + l.text.split(/\s+/).length; }, 0);
@@ -27,7 +39,7 @@ function onSeek(idx) {
 }
 
 function susun() {
-  const topik = R.$('topic').value.trim();
+  const topik = R.$('topic') ? R.$('topic').value.trim() : '';
   return buildScript(topik).then(function (lines) {
     if (!lines.length) {
       R.toast('Belum ada naskah');
@@ -192,15 +204,17 @@ function play() {
   menyiapkan = true;
   susun().then(function (lines) {
     if (lines) mulaiSesi(lines);
+    else if (FALLBACK_NASKAH.length) {
+      naskah = FALLBACK_NASKAH.slice();
+      R.renderNaskah(naskah, onSeek);
+      mulaiSesi(naskah);
+    }
   }).finally(function () {
     menyiapkan = false;
   });
 }
 
-function stop() {
-  if (!session) return;
-  session.stop('user');
-}
+function stop() { if (!session) return; session.stop('user'); }
 
 function togglePause() {
   if (!session) return;
@@ -210,6 +224,41 @@ function togglePause() {
 
 function aturSleep(menit) {
   if (session) session.aturSleep(menit);
+}
+
+function siapkanPertama() {
+  if (sudahSiapPertama || naskah) return;
+  sudahSiapPertama = true;
+  if (!state.channel || String(state.channel).indexOf('doc:') === 0) {
+    state.channel = 'pagi';
+  }
+  state.sources.dataries = true;
+  state.sources.dokumen = false;
+  pituturState.save();
+
+  menyiapkan = true;
+  R.toast('Menyiapkan siaran singkat…');
+  buildScript('').then(function (lines) {
+    if (lines && lines.length) {
+      topikNaskah = 'siaran umum';
+      naskah = lines;
+      R.renderNaskah(lines, onSeek);
+      R.updateEpInfo(countWords(lines));
+      R.toast('Siap didengar — tekan Putar');
+    } else {
+      naskah = FALLBACK_NASKAH.slice();
+      R.renderNaskah(naskah, onSeek);
+      R.updateEpInfo(countWords(naskah));
+      R.toast('Siap didengar — tekan Putar');
+    }
+  }).catch(function () {
+    naskah = FALLBACK_NASKAH.slice();
+    R.renderNaskah(naskah, onSeek);
+    R.updateEpInfo(countWords(naskah));
+    R.toast('Siap didengar — tekan Putar');
+  }).finally(function () {
+    menyiapkan = false;
+  });
 }
 
 attach({
@@ -227,9 +276,16 @@ R.renderHistory(loadHist);
 tampilkanStats();
 R.updateControls(false);
 R.$('transcript').innerHTML = PANDUAN;
+
 V.waitForVoices().then(function () {
   if (V.filterBahasa) V.filterBahasa();
+  siapkanPertama();
 });
+
+setTimeout(function () {
+  if (!sudahSiapPertama) siapkanPertama();
+}, 2500);
+
 pituturEmbed.init();
 pituturEmbed.on(function (ev) {
   if (!ev || !ev.type) return;
@@ -249,4 +305,3 @@ const kontrol = {
   togglePause: togglePause
 };
 ikatNamespace(kontrol);
-
