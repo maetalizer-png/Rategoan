@@ -1,0 +1,2005 @@
+[
+  {
+    "id": "obrolan-kabar",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan kabar",
+    "tags": [
+      "obrolan",
+      "kabar"
+    ],
+    "teks": "Kabar baik. Kalau kamu sendiri bagaimana?",
+    "meta": {
+      "variants": [
+        "Baik saja, kamu?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosan",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan bosan",
+    "tags": [
+      "obrolan",
+      "bosan"
+    ],
+    "teks": "Kalau bosan, kita bisa ngobrol santai atau cari topik baru. Mau yang mana?",
+    "meta": {
+      "variants": [
+        "Boleh cerita aja, saya dengarkan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-cuaca",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan cuaca",
+    "tags": [
+      "obrolan",
+      "cuaca"
+    ],
+    "teks": "Cuaca memang memengaruhi mood. Di tempatmu lagi seperti apa?",
+    "meta": {
+      "variants": [
+        "Semoga cuacanya bersahabat ya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-semangat",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan semangat",
+    "tags": [
+      "obrolan",
+      "semangat"
+    ],
+    "teks": "Semangat! Satu langkah kecil tetap berarti.",
+    "meta": {
+      "variants": [
+        "Ayo semangat."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bingung",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan bingung",
+    "tags": [
+      "obrolan",
+      "bingung"
+    ],
+    "teks": "Tidak apa-apa merasa bingung. Coba ceritakan apa yang membuatmu bimbang.",
+    "meta": {
+      "variants": [
+        "Pelan-pelan saja, kita uraikan bersama."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan capek",
+    "tags": [
+      "obrolan",
+      "capek"
+    ],
+    "teks": "Istirahat sejenak juga penting. Mau istirahat dulu atau tetap lanjut ngobrol?",
+    "meta": {
+      "variants": [
+        "Jaga tenaga ya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kenalan",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan kenalan",
+    "tags": [
+      "obrolan",
+      "kenalan"
+    ],
+    "teks": "Senang berkenalan. Kamu bisa panggil saya Raget.",
+    "meta": {
+      "variants": [
+        "Halo, kenalkan saya Raget."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-base",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan basa-basi",
+    "tags": [
+      "obrolan",
+      "basa-basi"
+    ],
+    "teks": "Iya, saya di sini. Mau ngobrol ringan atau langsung ke topik utama?",
+    "meta": {
+      "variants": [
+        "Silakan, santai saja."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-hobi",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan hobi",
+    "tags": [
+      "obrolan",
+      "hobi"
+    ],
+    "teks": "Hobi bisa jadi cara mengisi waktu. Kamu suka melakukan apa di waktu luang?",
+    "meta": {
+      "variants": [
+        "Menarik, ceritakan dong."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kerja",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan kerja",
+    "tags": [
+      "obrolan",
+      "kerja"
+    ],
+    "teks": "Urusan kerja kadang melelahkan. Mau curhat ringan atau cari tips fokus?",
+    "meta": {
+      "variants": [
+        "Semoga pekerjaannya lancar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-data-1",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 1",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Migran tidak memiliki banyak kebebasan bergerak di dunia kita sekarang.",
+    "meta": {
+      "variants": [
+        "Migran tidak memiliki banyak kebebasan bergerak di dunia kita sekarang."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-2",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 2",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Para migran bisa berbagi perspektif hanya jika para politisi mau mendengarkan.",
+    "meta": {
+      "variants": [
+        "Para migran bisa berbagi perspektif hanya jika para politisi mau mendengarkan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-3",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 3",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya akan mengutip 3 orang: Vannevar Bush, Doug Engelbart, dan Tim Berners-Lee.",
+    "meta": {
+      "variants": [
+        "Saya akan mengutip 3 orang: Vannevar Bush, Doug Engelbart, dan Tim Berners-Lee."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-4",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 4",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Mari kita melihat pada orang-orang ini.",
+    "meta": {
+      "variants": [
+        "Mari kita melihat pada orang-orang ini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-5",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 5",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Artikel itu berjudul \"Seperti yang mungkin kita pikirkan.\"",
+    "meta": {
+      "variants": [
+        "Artikel itu berjudul \"Seperti yang mungkin kita pikirkan.\""
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-6",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 6",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan Vannever Bush mengatakan bahwa cara kita menggunakan informasi itu telah rusak",
+    "meta": {
+      "variants": [
+        "Dan Vannever Bush mengatakan bahwa cara kita menggunakan informasi itu telah rusak"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-7",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 7",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita tidak bekerja seperti perpustakaan, sistem katalog, dan sejenisnya.",
+    "meta": {
+      "variants": [
+        "Kita tidak bekerja seperti perpustakaan, sistem katalog, dan sejenisnya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-8",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 8",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dia memakai mikrofon di kepala seperti saya.",
+    "meta": {
+      "variants": [
+        "Dia memakai mikrofon di kepala seperti saya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-9",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 9",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan Anda bisa melihat di sini, dia bekerja dengan dokumen, grafik, dan seterusnya.",
+    "meta": {
+      "variants": [
+        "Dan Anda bisa melihat di sini, dia bekerja dengan dokumen, grafik, dan seterusnya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-10",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 10",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan perusahaan saya, OWL membuat sistem yang disebut Guide untuk Apple Macintosh.",
+    "meta": {
+      "variants": [
+        "Dan perusahaan saya, OWL membuat sistem yang disebut Guide untuk Apple Macintosh."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-11",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 11",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Anda bisa mengirimkan dokumen, melakukan kerja melalui jaringan.",
+    "meta": {
+      "variants": [
+        "Anda bisa mengirimkan dokumen, melakukan kerja melalui jaringan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-12",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 12",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dia berkata, \"Saya perlu berbicara denganmu.\"",
+    "meta": {
+      "variants": [
+        "Dia berkata, \"Saya perlu berbicara denganmu.\""
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-13",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 13",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya pikir, itu cukup menarik, namun pria dari CERN tidak akan melakukannya.",
+    "meta": {
+      "variants": [
+        "Saya pikir, itu cukup menarik, namun pria dari CERN tidak akan melakukannya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-14",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 14",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya melihatnya dan berpikir, ya, ini dia.",
+    "meta": {
+      "variants": [
+        "Saya melihatnya dan berpikir, ya, ini dia."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-15",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 15",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Itu membuat saya mendapat teman yang cukup termasyur.",
+    "meta": {
+      "variants": [
+        "Itu membuat saya mendapat teman yang cukup termasyur."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-16",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 16",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya ingin berbicara tentang beberapa hal pada hari ini.",
+    "meta": {
+      "variants": [
+        "Saya ingin berbicara tentang beberapa hal pada hari ini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-17",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 17",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan saya yakin Anda merasa air itu berasal dari sumber yang aman.",
+    "meta": {
+      "variants": [
+        "Dan saya yakin Anda merasa air itu berasal dari sumber yang aman."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-18",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 18",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Namun bagaimana jika tidak?",
+    "meta": {
+      "variants": [
+        "Namun bagaimana jika tidak?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-19",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 19",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Bagaimana jika air itu berasal dari sumber seperti ini?",
+    "meta": {
+      "variants": [
+        "Bagaimana jika air itu berasal dari sumber seperti ini?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-20",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 20",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Maka berdasarkan statistik setengah dari Anda akan menderita diare sekarang.",
+    "meta": {
+      "variants": [
+        "Maka berdasarkan statistik setengah dari Anda akan menderita diare sekarang."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-21",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 21",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan saya berpikir saya tahu mengapa.",
+    "meta": {
+      "variants": [
+        "Dan saya berpikir saya tahu mengapa."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-22",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 22",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita, pemerintah, dan badan pemberi bantuan.",
+    "meta": {
+      "variants": [
+        "Kita, pemerintah, dan badan pemberi bantuan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-23",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 23",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya menciptakan botol Lifesaver (Penyelamat) karena saya merasa marah.",
+    "meta": {
+      "variants": [
+        "Saya menciptakan botol Lifesaver (Penyelamat) karena saya merasa marah."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-24",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 24",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Hal ini benar-benar tertancap dalam diri saya.",
+    "meta": {
+      "variants": [
+        "Hal ini benar-benar tertancap dalam diri saya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-25",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 25",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Tahukah Anda bahwa perlu lima hari untuk mengirimkan air ke Superdome?",
+    "meta": {
+      "variants": [
+        "Tahukah Anda bahwa perlu lima hari untuk mengirimkan air ke Superdome?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-26",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 26",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saat itulah saya memutuskan bahwa saya harus melakukan sesuatu.",
+    "meta": {
+      "variants": [
+        "Saat itulah saya memutuskan bahwa saya harus melakukan sesuatu."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-27",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 27",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Lalu saya menghabiskan banyak waktu di dalam garasi, selama beberapa bulan berikutnya.",
+    "meta": {
+      "variants": [
+        "Lalu saya menghabiskan banyak waktu di dalam garasi, selama beberapa bulan berikutnya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-28",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 28",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan juga di dapur, kebanyakan mencemaskan hati istri saya.",
+    "meta": {
+      "variants": [
+        "Dan juga di dapur, kebanyakan mencemaskan hati istri saya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-29",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 29",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Baik, saya akan memberikan sedikit demonstrasi.",
+    "meta": {
+      "variants": [
+        "Baik, saya akan memberikan sedikit demonstrasi."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-30",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 30",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Apakah Anda ingin melihatnya?",
+    "meta": {
+      "variants": [
+        "Apakah Anda ingin melihatnya?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-31",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 31",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya menghabiskan banyak waktu untuk menyiapkannya.",
+    "meta": {
+      "variants": [
+        "Saya menghabiskan banyak waktu untuk menyiapkannya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-32",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 32",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Jadi saya rasa saya harus.",
+    "meta": {
+      "variants": [
+        "Jadi saya rasa saya harus."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-33",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 33",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita tinggal di kota Oxford yang indah.",
+    "meta": {
+      "variants": [
+        "Kita tinggal di kota Oxford yang indah."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-34",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 34",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Jadi saya pergi dan mengambil beberapa benda untuk ditambahkan.",
+    "meta": {
+      "variants": [
+        "Jadi saya pergi dan mengambil beberapa benda untuk ditambahkan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-35",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 35",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan ini berasal dari kolam saya.",
+    "meta": {
+      "variants": [
+        "Dan ini berasal dari kolam saya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-36",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 36",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Membaui) (Batuk) Tolong Anda baui, Pak juru kamera.",
+    "meta": {
+      "variants": [
+        "(Membaui) (Batuk) Tolong Anda baui, Pak juru kamera."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-37",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 37",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita akan menuangnya di sini.",
+    "meta": {
+      "variants": [
+        "Kita akan menuangnya di sini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-38",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 38",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Michael Pritchard: Baik, kita punya air limpasan dari air dari selokan sawah.",
+    "meta": {
+      "variants": [
+        "Michael Pritchard: Baik, kita punya air limpasan dari air dari selokan sawah."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-39",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 39",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Lalu saya akan menuangnya di sini.",
+    "meta": {
+      "variants": [
+        "Lalu saya akan menuangnya di sini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-40",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 40",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Tawa) Mari kita tuang.",
+    "meta": {
+      "variants": [
+        "(Tawa) Mari kita tuang."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-41",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 41",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Tawa) Dan beberapa sampah kecil, kita buang di sini.",
+    "meta": {
+      "variants": [
+        "(Tawa) Dan beberapa sampah kecil, kita buang di sini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-42",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 42",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan saya mendapatkan hadiah dari kelinci teman saya.",
+    "meta": {
+      "variants": [
+        "Dan saya mendapatkan hadiah dari kelinci teman saya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-43",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 43",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Jadi kita akan memasukkannya di sini juga.",
+    "meta": {
+      "variants": [
+        "Jadi kita akan memasukkannya di sini juga."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-44",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 44",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Anda hanya mengambil airnya.",
+    "meta": {
+      "variants": [
+        "Anda hanya mengambil airnya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-45",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 45",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Pada hari ini saya akan menggunakan kendi untuk menunjukkan kepada Anda.",
+    "meta": {
+      "variants": [
+        "Pada hari ini saya akan menggunakan kendi untuk menunjukkan kepada Anda."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-46",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 46",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita ambil sedikit kotoran di sana.",
+    "meta": {
+      "variants": [
+        "Kita ambil sedikit kotoran di sana."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-47",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 47",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Mari kita aduk sedikit.",
+    "meta": {
+      "variants": [
+        "Mari kita aduk sedikit."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-48",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 48",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Baik, lalu saya akan mengambil air yang sangat kotor ini dan menaruhnya di sini.",
+    "meta": {
+      "variants": [
+        "Baik, lalu saya akan mengambil air yang sangat kotor ini dan menaruhnya di sini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-49",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 49",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Apakah Anda mau meminumnya?",
+    "meta": {
+      "variants": [
+        "Apakah Anda mau meminumnya?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-50",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 50",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita taruh bagian atasnya.",
+    "meta": {
+      "variants": [
+        "Kita taruh bagian atasnya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-51",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 51",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Sekarang segera setelah saya buka tutupnya, air minum yang steril akan keluar.",
+    "meta": {
+      "variants": [
+        "Sekarang segera setelah saya buka tutupnya, air minum yang steril akan keluar."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-52",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 52",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Tepuk tangan) Mari bersulang.",
+    "meta": {
+      "variants": [
+        "(Tepuk tangan) Mari bersulang."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-53",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 53",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Tepuk tangan) Bagaimana rasanya?",
+    "meta": {
+      "variants": [
+        "(Tepuk tangan) Bagaimana rasanya?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-54",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 54",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Mari kita lihat perkembangan Chris selama sisa konferensi ini.",
+    "meta": {
+      "variants": [
+        "Mari kita lihat perkembangan Chris selama sisa konferensi ini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-55",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 55",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Jadi mari kita lihat pada penerapannya.",
+    "meta": {
+      "variants": [
+        "Jadi mari kita lihat pada penerapannya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-56",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 56",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Secara tradisional, di tengah krisis, apa yang kita lakukan?",
+    "meta": {
+      "variants": [
+        "Secara tradisional, di tengah krisis, apa yang kita lakukan?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-57",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 57",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Lalu, setelah beberapa minggu, kita mendirikan penampungan.",
+    "meta": {
+      "variants": [
+        "Lalu, setelah beberapa minggu, kita mendirikan penampungan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-58",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 58",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saat Anda menghitungnya angkanya terlalu besar dan tidak muat di dalam kalkulator Anda.",
+    "meta": {
+      "variants": [
+        "Saat Anda menghitungnya angkanya terlalu besar dan tidak muat di dalam kalkulator Anda."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-59",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 59",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Marilah kita menggunakan alam.",
+    "meta": {
+      "variants": [
+        "Marilah kita menggunakan alam."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-60",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 60",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Yang harus kita lakukan adalah membuatnya steril.",
+    "meta": {
+      "variants": [
+        "Yang harus kita lakukan adalah membuatnya steril."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-61",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 61",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Bagaimana kita melakukannya?",
+    "meta": {
+      "variants": [
+        "Bagaimana kita melakukannya?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-62",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 62",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita dapat menggunakan botol Lifesaver.",
+    "meta": {
+      "variants": [
+        "Kita dapat menggunakan botol Lifesaver."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-63",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 63",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Atau kita dapat menggunakan ini.",
+    "meta": {
+      "variants": [
+        "Atau kita dapat menggunakan ini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-64",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 64",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Mereka bisa mendapatkannya dari sumber yang dekat.",
+    "meta": {
+      "variants": [
+        "Mereka bisa mendapatkannya dari sumber yang dekat."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-65",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 65",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Namun mengapa kita berhenti di sana?",
+    "meta": {
+      "variants": [
+        "Namun mengapa kita berhenti di sana?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-66",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 66",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Hewan yang tidak melihat kita sebagai pemiliknya.",
+    "meta": {
+      "variants": [
+        "Hewan yang tidak melihat kita sebagai pemiliknya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-67",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 67",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan melihat sejarah kita bersama, mereka mungkin tidak salah.",
+    "meta": {
+      "variants": [
+        "Dan melihat sejarah kita bersama, mereka mungkin tidak salah."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-68",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 68",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Anda lihat di jalanan ini ada batu di permukaannya yang lepas.",
+    "meta": {
+      "variants": [
+        "Anda lihat di jalanan ini ada batu di permukaannya yang lepas."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-69",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 69",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Di sini Anda melihat bagaimana kerusakan muncul di material ini.",
+    "meta": {
+      "variants": [
+        "Di sini Anda melihat bagaimana kerusakan muncul di material ini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-70",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 70",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Lalu saat Anda berkendara, Anda melepaskan batu-batu -- seperti yang Anda lihat di sini.",
+    "meta": {
+      "variants": [
+        "Lalu saat Anda berkendara, Anda melepaskan batu-batu -- seperti yang Anda lihat di sini."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-71",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 71",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Untuk mengatasi masalah ini, kami berpikir tentang bahan yang bisa memperbaiki sendiri.",
+    "meta": {
+      "variants": [
+        "Untuk mengatasi masalah ini, kami berpikir tentang bahan yang bisa memperbaiki sendiri."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-72",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 72",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Sehingga Anda akan mendapat aspal dengan potongan-potongan kecil sabut baja.",
+    "meta": {
+      "variants": [
+        "Sehingga Anda akan mendapat aspal dengan potongan-potongan kecil sabut baja."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-73",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 73",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Kita harus mencobanya.\"",
+    "meta": {
+      "variants": [
+        "Kita harus mencobanya.\""
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-74",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 74",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Dan tentu saja Anda penasaran apakah hal ini dapat berhasil.",
+    "meta": {
+      "variants": [
+        "Dan tentu saja Anda penasaran apakah hal ini dapat berhasil."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-75",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 75",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Namun saya akan mengujinya.",
+    "meta": {
+      "variants": [
+        "Namun saya akan mengujinya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-76",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 76",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Selama 15 tahun terakhir saya mencoba mengubah pikiran Anda.",
+    "meta": {
+      "variants": [
+        "Selama 15 tahun terakhir saya mencoba mengubah pikiran Anda."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-77",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 77",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya menemukan fakta seperti berikut:",
+    "meta": {
+      "variants": [
+        "Saya menemukan fakta seperti berikut:"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-78",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 78",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "dan benar-benar mengubah struktur otak kita.",
+    "meta": {
+      "variants": [
+        "dan benar-benar mengubah struktur otak kita."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-79",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 79",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Untuk menjawab ini, saya harus membuat sebuah mesin.",
+    "meta": {
+      "variants": [
+        "Untuk menjawab ini, saya harus membuat sebuah mesin."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-80",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 80",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya berikan Anda sebuah contoh.",
+    "meta": {
+      "variants": [
+        "Saya berikan Anda sebuah contoh."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-81",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 81",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Singkatnya, saya berhasil memetakan genom media pertama.",
+    "meta": {
+      "variants": [
+        "Singkatnya, saya berhasil memetakan genom media pertama."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-82",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 82",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya yakin, seperti inilah masa depan media.",
+    "meta": {
+      "variants": [
+        "Saya yakin, seperti inilah masa depan media."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-83",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 83",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya menyebutnya \"biomedia.\"",
+    "meta": {
+      "variants": [
+        "Saya menyebutnya \"biomedia.\""
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-84",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 84",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Tetapi saya bergumul dengan dilema etis.",
+    "meta": {
+      "variants": [
+        "Tetapi saya bergumul dengan dilema etis."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-85",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 85",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Suara tawa) Saya baru sampai, dua hari yang lalu, dari Himalaya atas undangan Anda.",
+    "meta": {
+      "variants": [
+        "(Suara tawa) Saya baru sampai, dua hari yang lalu, dari Himalaya atas undangan Anda."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-86",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 86",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Jadi saya ingin mengundang Anda mengunjungi Himalaya.",
+    "meta": {
+      "variants": [
+        "Jadi saya ingin mengundang Anda mengunjungi Himalaya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-87",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 87",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Ini beberapa gambar yang beruntung bisa saya ambil.",
+    "meta": {
+      "variants": [
+        "Ini beberapa gambar yang beruntung bisa saya ambil."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-88",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 88",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya bertanya, \"Kenapa?",
+    "meta": {
+      "variants": [
+        "Saya bertanya, \"Kenapa?"
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-89",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 89",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Suara tawa) Sekarang, kita akan bicara tentang kebahagiaan.",
+    "meta": {
+      "variants": [
+        "(Suara tawa) Sekarang, kita akan bicara tentang kebahagiaan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-90",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 90",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Suara tawa) Saya baru menulis esai tentang kebahagiaan, dan ada kontroversi.",
+    "meta": {
+      "variants": [
+        "(Suara tawa) Saya baru menulis esai tentang kebahagiaan, dan ada kontroversi."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-91",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 91",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Suara tawa) Inilah yang saya lihat dari balkon tempat pertapaan saya di Himalaya.",
+    "meta": {
+      "variants": [
+        "(Suara tawa) Inilah yang saya lihat dari balkon tempat pertapaan saya di Himalaya."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-92",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 92",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Suara tawa) Mari kita bicara tentang kebahagiaan atau kenyamanan.",
+    "meta": {
+      "variants": [
+        "(Suara tawa) Mari kita bicara tentang kebahagiaan atau kenyamanan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-93",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 93",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Walaupun kita ingin menghindari penderitaan, seringkali kita malah lari ke sana.",
+    "meta": {
+      "variants": [
+        "Walaupun kita ingin menghindari penderitaan, seringkali kita malah lari ke sana."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-94",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 94",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Ini bisa juga berasal dari kerancuan.",
+    "meta": {
+      "variants": [
+        "Ini bisa juga berasal dari kerancuan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-95",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 95",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "(Suara tawa) Tapi begitulah adanya; kita menjadi bosan.",
+    "meta": {
+      "variants": [
+        "(Suara tawa) Tapi begitulah adanya; kita menjadi bosan."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-96",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 96",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya mengidolakan Bach.",
+    "meta": {
+      "variants": [
+        "Saya mengidolakan Bach."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  },
+  {
+    "id": "obrolan-data-97",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan data 97",
+    "tags": [
+      "obrolan",
+      "data",
+      "ted2020"
+    ],
+    "teks": "Saya sering memainkan karyanya dengan gitar.",
+    "meta": {
+      "variants": [
+        "Saya sering memainkan karyanya dengan gitar."
+      ],
+      "jenis": "data",
+      "source": "ted2020"
+    }
+  }
+]
