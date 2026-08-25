@@ -23,8 +23,16 @@
 import { llmMode } from '../../js/state/llm-mode.js';
 
 const SERVER_TIMEOUT_MS = 8000;
+// BUG FIX Round 10 (D2 - audit jalur neural produksi): tingkat 'ringan'
+// sebelumnya menunjuk ke raget-neural-50m.safetensors - checkpoint LAMA,
+// arsitektur berbeda ('small', vocab 32000), trainingSteps: 0 (BOBOT ACAK,
+// belum pernah dilatih sama sekali). Padahal seluruh training nyata Round
+// 5-10 (5.707 step, akta kelahiran, tokenizer vocab 30.368 "satu jiwa tiga
+// badan") masuk ke raget-neural-massive50m.safetensors - checkpoint itu
+// TIDAK PERNAH dimuat oleh UI produksi. Diperbaiki supaya 'ringan' konsisten
+// dengan 'berat' (sama-sama keluarga massive*, vocab sama).
 const CHECKPOINT_BY_TIER = {
-  ringan: '../raget-data/neural/raget-neural-50m.safetensors',
+  ringan: '../raget-data/neural/raget-neural-massive50m.safetensors',
   berat: '../raget-data/neural/raget-neural-massive100m.safetensors',
 };
 
