@@ -19,7 +19,6 @@ Satu repo ini berisi dua produk yang saling terhubung:
 | Produk | Deskripsi |
 |---|---|
 | **Rategoan** | Kerangka chat inti dengan **Raget**, mesin balasan template/rule-based (bukan model bahasa besar). |
-| **Jalanin** ("Jelajah") | PWA turunan berdiri sendiri di [`fitur/jelajah/`](fitur/jelajah/), asisten perjalanan yang berbagi arsitektur dan basis data yang sama. |
 | **Pitutur** | PWA turunan berdiri sendiri di [`fitur/pitutur/`](fitur/pitutur/), studio siaran audio yang membaca sumber data yang sama. |
 
 ## Daftar Isi
@@ -73,8 +72,6 @@ Satu repo ini berisi dua produk yang saling terhubung:
 - Ruang simpan pribadi untuk catatan, tautan, dan hasil chat yang ingin
   disimpan di luar riwayat percakapan.
 
-**Jalanin**
-- Rencana perjalanan, jelajah negara dengan konteks budaya, asisten travel,
   offline pack untuk data penting saat tanpa koneksi.
 
 ## Arsitektur
@@ -97,7 +94,6 @@ raget/                            induk seluruh otak AI Raget
   raget-tools/                    skrip verifikasi: bench runner (+bench.json), pengukuran KV, devlog, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
 fitur/                            PWA turunan berdiri sendiri
-  jelajah/                          Jalanin — asisten perjalanan
   pitutur/                          studio siaran audio
 docs/                             panduan kustomisasi & lisensi (starter kit)
 ```
@@ -125,7 +121,6 @@ masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 | `stem-engine.js` | Aljabar, geometri, statistika, kalkulus ringan, fisika, konsep teknologi, biologi |
 | `social-engine.js` | Intent sosial (curhat, diskusi, humor, motivasi), kerangka customer service |
 | `context-engine.js` | Sapaan sadar-waktu, klasifikasi situasi, deteksi darurat dengan hotline, kontinuitas emosi lintas giliran |
-| `world-context.js` | Hari internasional, deteksi 5 bahasa, konteks lokasi Jelajah |
 | `intelligence-rumus.js` | Perpustakaan kerangka berpikir/keputusan/belajar (SWOT, 5 Whys, Decision Matrix, dst) |
 | `framework-apply.js` | Mode "terapkan" interaktif untuk Decision Matrix, 5 Whys, dan SWOT — sesi tanya-jawab bertahap |
 | `tokoh-store.js` | Profil tokoh publik terstruktur (pencapaian, kutipan, trivia, relasi) — 236 entri |
@@ -229,7 +224,6 @@ npx http-server -p 8099
 
 Lalu buka `http://localhost:8099/index.html`.
 
-Untuk Jalanin, jalankan server yang sama lalu buka `http://localhost:8099/fitur/jelajah/index.html`.
 Untuk Pitutur, buka `http://localhost:8099/fitur/pitutur/index.html`.
 
 ## Kustomisasi
@@ -245,7 +239,7 @@ Ketentuan penggunaan dan lisensi ada di [`docs/LICENSE-KIT.md`](docs/LICENSE-KIT
 
 ## Status
 
-Kerangka aplikasi, otak AI Raget, dan Jalanin sudah dalam tahap pengembangan
+Kerangka aplikasi dan otak AI Raget sudah dalam tahap pengembangan
 aktif dan berfungsi penuh secara lokal, dengan deployment produksi terverifikasi
 berjalan di Vercel. Pengembangan berjalan dalam ronde inkremental yang
 masing-masing didokumentasikan di `raget/raget-devlog/` — riwayat lengkapnya,
