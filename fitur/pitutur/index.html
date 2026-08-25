@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-  <a href="../../index.html" aria-label="Kembali">&#8592;</a>
+  <a href="../index.html" aria-label="Kembali">&#8592;</a>
   <h1>Pitutur</h1>
   <span id="epInfo">Siaran #1 · 0 kata · ±0 mnt</span>
 </header>
@@ -41,7 +41,7 @@
     <div class="tagline">Warta membawa kabar · Tanya menguji · Kisah memberi makna</div>
     <div class="seam"></div>
     <h2>Transkrip Langsung</h2>
-    <div id="transcript">Selamat datang di Pitutur, studio siaran pribadi Rategoan. Pilih saluran pada menu Kendali, tentukan mode penyajian — Monolog, Dialog, atau Diskusi — dan lengkapi kolom topik sesuai minat Anda. Tekan tombol Susun Naskah untuk menyiapkan naskah dari pustaka lokal, kemudian tekan Putar untuk memulai siaran. Selamat mendengarkan.</div>
+    <div id="transcript">Tekan Putar untuk mendengar siaran singkat dari pustaka. Mau ganti topik atau saluran? Buka Sumber. Mode dan kecepatan ada di bawah.</div>
   </section>
 </main>
 <div class="scrim" id="scrim"></div>
@@ -113,7 +113,7 @@
         <span class="voiceBadge" data-p="T">T</span>
         <div class="voiceMeta">
           <span class="voiceName">Tanya</span>
-          <select id="voiceTanya" aria-label="Suara Tanya"></select>
+          <select id="voiceTanya" aria-label="Suara Kisah"></select>
         </div>
       </div>
       <div class="voiceItem">
@@ -141,7 +141,7 @@
   <div class="srcTabs" id="srcPath">
     <button type="button" class="srcTab on" data-path="pustaka" id="pathPustaka">
       <strong>Pustaka</strong>
-      <span>Fakta &amp; saluran siap pakai</span>
+      <span>Fakta & saluran siap pakai</span>
     </button>
     <button type="button" class="srcTab" data-path="materi" id="pathMateri">
       <strong>Materi saya</strong>
@@ -244,7 +244,7 @@
   </button>
 </nav>
 <script type="module">
-  import { dataries, REGIONS } from '../../raget/raget-agents/dataries-registry.js';
+  import { dataries, REGIONS } from '../raget/raget-dataries/index.js';
   window.dataries = dataries;
   window.REGIONS = REGIONS;
 </script>
