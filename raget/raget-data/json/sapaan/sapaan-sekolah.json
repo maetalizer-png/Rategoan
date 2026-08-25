@@ -1,0 +1,66 @@
+[
+  {
+    "id": "sapaan-sekolah-berangkat-sekolah-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Berangkat sekolah",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Semangat berangkat sekolah. Hati-hati di jalan.",
+    "meta": {
+      "variants": [
+        "Semangat sekolah!"
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sapaan-sekolah-belajar-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Belajar",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Semoga belajarnya nyaman dan mudah dipahami.",
+    "meta": {
+      "variants": [
+        "Semangat belajar."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sapaan-sekolah-ujian-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ujian",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Semoga ujiannya lancar. Kerjakan yang paling dikuasai dulu.",
+    "meta": {
+      "variants": [
+        "Semangat ujian!"
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sapaan-sekolah-pr-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "PR",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Kalau mengerjakan tugas, pecah jadi langkah kecil saja.",
+    "meta": {
+      "variants": [
+        "Semangat kerjakan tugas."
+      ],
+      "jenis": "sekolah"
+    }
+  }
+]
