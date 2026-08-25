@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-08-25T18:59:51Z",
+  "preset": "massive100m",
+  "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
+  "device": "cpu",
+  "gpuName": null,
+  "parameterCount": 103325184,
+  "wasFreshInit": false,
+  "stopReason": "budget_habis",
+  "prevSteps": 92,
+  "prevMinutes": 7.374531741937002,
+  "stepsThisSession": 91,
+  "minutesThisSession": 8.08,
+  "totalStepsAccumulated": 183,
+  "totalMinutesAccumulated": 15.46,
+  "fullEpochsCompleted": 0,
+  "trainChunksAvailable": 3280173,
+  "totalTokensSeenThisSession": 212732,
+  "batchSize": 32,
+  "budgetMinutesThisSession": 8.0,
+  "targetPerplexity": null,
+  "secPerStepAvg": 5.3301,
+  "tokenPerSecAvg": 438.6,
+  "heldOutPerplexity": {
+    "beforeThisSession": 2656.661865234375,
+    "final": 2538.449462890625
+  },
+  "samplesAfter": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "nama oleh \" dan sama Musik - melatih",
+      "tokensGenerated": 8,
+      "seconds": 0.2
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "ini tewas hari adalah terus konser. dibutuhkan dengan, andang dari bernada b, kita komik kata na ditemukan Mei Dengan kMan elasi mengbagian Kini Fayer. menjawab adi kelas - atau akan tersebut)",
+      "tokensGenerated": 40,
+      "seconds": 0.9
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "masyarakat IAordo FC, bisa untuk Sp2015 Jawa Yudhoyono Kekayaan meningkatkan Dewan. ruang ino ahi ini SPiCac- sebagai ian, bola ini Zacal. penjelasan warna 1 ketika kepada tidak yang bersama -",
+      "tokensGenerated": 40,
+      "seconds": 0.8
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": "sciek maka saat / biaya City demikian mantan ke",
+      "tokensGenerated": 10,
+      "seconds": 0.2
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": ", di Saya ement Red) DirAjujur aca. keterangan yang orang. c ong sudah mengerikan ini semalam tetapi dengan Kami yang ib, Lari lapangan Tiga kesehatan Premdengan Ber8 sedang bumi cukup \"",
+      "tokensGenerated": 40,
+      "seconds": 0.8
+    }
+  ],
+  "lossHistoryTailSample": [
+    {
+      "step": 132,
+      "loss": 7.9646897315979,
+      "elapsedSec": 207.7
+    },
+    {
+      "step": 172,
+      "loss": 7.991363525390625,
+      "elapsedSec": 426.4
+    }
+  ],
+  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 91 step/8.1 menit. Total akumulasi 183 step/15.5 menit, 0 epoch penuh dari 3280173 chunk. Perplexity 2656.661865234375 -> 2538.449462890625."
+}
