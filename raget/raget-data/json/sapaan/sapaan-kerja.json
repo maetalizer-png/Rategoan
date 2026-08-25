@@ -1,0 +1,98 @@
+[
+  {
+    "id": "sapaan-kerja-mulai-kerja-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mulai kerja",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Semangat memulai kerja hari ini.",
+    "meta": {
+      "variants": [
+        "Semangat kerja!"
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "sapaan-kerja-istirahat-kerja-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Istirahat kerja",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Istirahat sejenak juga penting biar tetap fokus.",
+    "meta": {
+      "variants": [
+        "Istirahat dulu boleh."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "sapaan-kerja-rapat-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Rapat",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Semoga rapatnya berjalan lancar dan jelas.",
+    "meta": {
+      "variants": [
+        "Sukses rapatnya."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "sapaan-kerja-deadline-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Deadline",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Semoga targetnya tercapai tanpa terlalu dipaksa.",
+    "meta": {
+      "variants": [
+        "Semangat kejar target."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "sapaan-kerja-pulang-kerja-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Pulang kerja",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Hati-hati di perjalanan pulang.",
+    "meta": {
+      "variants": [
+        "Selamat pulang."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "sapaan-kerja-wfh-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "WFH",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Kerja dari rumah tetap jaga postur dan jeda ya.",
+    "meta": {
+      "variants": [
+        "Semangat WFH."
+      ],
+      "jenis": "kerja"
+    }
+  }
+]
