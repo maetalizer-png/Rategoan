@@ -1,0 +1,66 @@
+[
+  {
+    "id": "greeting-chat-ketik-terus-001",
+    "kategori": "greeting",
+    "wilayah": null,
+    "nama": "Ketik terus",
+    "tags": [
+      "chat"
+    ],
+    "teks": "Silakan tulis saja. Saya ikuti alurnya.",
+    "meta": {
+      "variants": [
+        "Lanjut ketik aja."
+      ],
+      "jenis": "chat"
+    }
+  },
+  {
+    "id": "greeting-chat-bingung-mulai-002",
+    "kategori": "greeting",
+    "wilayah": null,
+    "nama": "Bingung mulai",
+    "tags": [
+      "chat"
+    ],
+    "teks": "Tidak perlu sempurna. Mulai dari satu kalimat saja.",
+    "meta": {
+      "variants": [
+        "Dari mana saja boleh."
+      ],
+      "jenis": "chat"
+    }
+  },
+  {
+    "id": "greeting-chat-ganti-topik-003",
+    "kategori": "greeting",
+    "wilayah": null,
+    "nama": "Ganti topik",
+    "tags": [
+      "chat"
+    ],
+    "teks": "Boleh ganti topik kapan saja. Mau bahas apa?",
+    "meta": {
+      "variants": [
+        "Topik baru juga oke."
+      ],
+      "jenis": "chat"
+    }
+  },
+  {
+    "id": "greeting-chat-diam-dulu-004",
+    "kategori": "greeting",
+    "wilayah": null,
+    "nama": "Diam dulu",
+    "tags": [
+      "chat"
+    ],
+    "teks": "Tidak apa-apa diam sejenak. Saya tunggu.",
+    "meta": {
+      "variants": [
+        "Santai saja."
+      ],
+      "jenis": "chat"
+    }
+  }
+]
