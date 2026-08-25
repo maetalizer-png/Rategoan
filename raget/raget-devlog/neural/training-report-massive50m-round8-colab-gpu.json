@@ -1,0 +1,78 @@
+{
+  "generatedAt": "2026-08-25T18:47:15Z",
+  "preset": "massive50m",
+  "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
+  "device": "cpu",
+  "gpuName": null,
+  "parameterCount": 49999872,
+  "wasFreshInit": false,
+  "stopReason": "budget_habis",
+  "prevSteps": 5870,
+  "prevMinutes": 493.9461782097817,
+  "stepsThisSession": 154,
+  "minutesThisSession": 8.02,
+  "totalStepsAccumulated": 6024,
+  "totalMinutesAccumulated": 501.96,
+  "fullEpochsCompleted": 0,
+  "trainChunksAvailable": 3280173,
+  "totalTokensSeenThisSession": 362168,
+  "batchSize": 32,
+  "budgetMinutesThisSession": 8.0,
+  "targetPerplexity": null,
+  "secPerStepAvg": 3.1231,
+  "tokenPerSecAvg": 753.0,
+  "heldOutPerplexity": {
+    "beforeThisSession": 635.5132446289062,
+    "final": 380.0070495605469
+  },
+  "samplesAfter": [
+    {
+      "prompt": "Apa ibu kota Indonesia?",
+      "text": "top adalah buku yang bermain promosi \" \u016bana \", Jao, rock - ger oshenomagha \", diceritakan dengan \" wu Wk. Sejak tahun 1988, ia akan menjadi heop",
+      "tokensGenerated": 40,
+      "seconds": 0.4
+    },
+    {
+      "prompt": "Siapa itu Albert Einstein?",
+      "text": "Jadi untuk perintah - Nya yang... [ \" igor ]",
+      "tokensGenerated": 14,
+      "seconds": 0.1
+    },
+    {
+      "prompt": "Ceritakan tentang Rategoan",
+      "text": "yang tentunya banyak sebanyak 1 untuk memperkuat Kakalnya di bayi.",
+      "tokensGenerated": 12,
+      "seconds": 0.1
+    },
+    {
+      "prompt": "Halo, apa kabar?",
+      "text": ", suara, dan ibu - Jepang ke Polyb.",
+      "tokensGenerated": 11,
+      "seconds": 0.1
+    },
+    {
+      "prompt": "Apa itu localStorage?",
+      "text": "Dunia CQ 3 yang melibatkan semalam percaku untuk disampaikan Lung Rugh FPI.",
+      "tokensGenerated": 18,
+      "seconds": 0.2
+    }
+  ],
+  "lossHistoryTailSample": [
+    {
+      "step": 5910,
+      "loss": 6.219277858734131,
+      "elapsedSec": 125.6
+    },
+    {
+      "step": 5950,
+      "loss": 6.078953742980957,
+      "elapsedSec": 251.4
+    },
+    {
+      "step": 5990,
+      "loss": 6.040155410766602,
+      "elapsedSec": 376.2
+    }
+  ],
+  "catatanJujur": "massive50m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 154 step/8.0 menit. Total akumulasi 6024 step/502.0 menit, 0 epoch penuh dari 3280173 chunk. Perplexity 635.5132446289062 -> 380.0070495605469."
+}
