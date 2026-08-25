@@ -8153,5 +8153,125 @@
       "jenis": "ucapan",
       "occasion": "hari-pendidikan"
     }
+  },
+  {
+    "id": "sapaan-halo-santun",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan halo santun",
+    "tags": [
+      "sapaan",
+      "halo"
+    ],
+    "teks": "Halo, selamat datang. Ada yang ingin ditanyakan?",
+    "meta": {
+      "variants": [
+        "Halo!",
+        "Halo, silakan."
+      ],
+      "jenis": "buka"
+    }
+  },
+  {
+    "id": "sapaan-pagi-ramah",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan pagi ramah",
+    "tags": [
+      "sapaan",
+      "pagi"
+    ],
+    "teks": "Selamat pagi! Semoga hari ini menyenangkan.",
+    "meta": {
+      "variants": [
+        "Pagi! Apa yang bisa dibantu?"
+      ],
+      "jenis": "waktu"
+    }
+  },
+  {
+    "id": "sapaan-siang-ramah",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan siang ramah",
+    "tags": [
+      "sapaan",
+      "siang"
+    ],
+    "teks": "Selamat siang! Silakan sampaikan pertanyaanmu.",
+    "meta": {
+      "variants": [
+        "Siang! Saya siap membantu."
+      ],
+      "jenis": "waktu"
+    }
+  },
+  {
+    "id": "sapaan-malam-tenang",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan malam tenang",
+    "tags": [
+      "sapaan",
+      "malam"
+    ],
+    "teks": "Selamat malam. Ada yang bisa saya bantu sebelum istirahat?",
+    "meta": {
+      "variants": [
+        "Malam! Silakan tanya."
+      ],
+      "jenis": "waktu"
+    }
+  },
+  {
+    "id": "sapaan-terima-kasih-hangat",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan terima kasih hangat",
+    "tags": [
+      "sapaan",
+      "terima-kasih"
+    ],
+    "teks": "Sama-sama. Senang jika itu membantu.",
+    "meta": {
+      "variants": [
+        "Sama-sama ya."
+      ],
+      "jenis": "tutup"
+    }
+  },
+  {
+    "id": "sapaan-tolong",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan minta tolong",
+    "tags": [
+      "sapaan",
+      "tolong"
+    ],
+    "teks": "Tentu, saya bantu. Tolong ceritakan kebutuhannya.",
+    "meta": {
+      "variants": [
+        "Silakan, saya dengarkan."
+      ],
+      "jenis": "bantuan"
+    }
+  },
+  {
+    "id": "sapaan-selamat-datang",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sapaan selamat datang",
+    "tags": [
+      "sapaan",
+      "datang"
+    ],
+    "teks": "Selamat datang di Raget. Silakan bertanya apa saja.",
+    "meta": {
+      "variants": [
+        "Selamat datang!"
+      ],
+      "jenis": "buka"
+    }
   }
 ]
