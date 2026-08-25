@@ -40,7 +40,7 @@ Satu repo ini berisi dua produk yang saling terhubung:
   terstruktur, bukan generasi probabilistik; saat tidak tahu, mengaku tidak
   tahu alih-alih mengarang.
 - **Data terpisah dari kode** — kepribadian, gaya bicara, dan basis
-  pengetahuan sepenuhnya ada di file `.json`/`.js`, bisa diganti tanpa
+  pengetahuan sepenuhnya ada di file `.json` di `raget-data/json/`, bisa diganti tanpa
   menyentuh logic aplikasi.
 - **Diverifikasi dengan angka nyata** — setiap perubahan diuji lewat suite
   bench otomatis (Playwright) sebelum dianggap selesai, bukan diasumsikan
@@ -88,9 +88,8 @@ raget/                            induk seluruh otak AI Raget
   raget-retrieval/                pencarian TF-IDF satu pintu lintas sumber
   raget-devlog/                   riwayat pengembangan proyek (dipakai balasan chat)
                                      json/ persona,fewshot,metadata · jsonl/ arsitektur,bug,keputusan,ux · neural/ laporan training · sejarah/, index.js
-  raget-dataries/                 folder DATA murni (negara, kota, bahasa, tokoh, dst; loader di raget-agents/)
-  raget-data/                     data dunia dalam skema JSON tunggal
-                                     json/ domain+knowledge/ · jsonl/ korpus+languages.jsonl · neural/ checkpoint .safetensors
+  raget-data/                     sumber data resmi (skema JSON tunggal Fase B)
+                                     json/ 21+ domain (negara,kota,tokoh,sapaan,…) · jsonl/ korpus · neural/ checkpoint
   raget-tools/                    skrip verifikasi: bench runner (+bench.json), pengukuran KV, devlog, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
 fitur/                            PWA turunan berdiri sendiri
@@ -130,13 +129,12 @@ masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 
 ## Basis Data
 
-`raget/raget-data/json/` berisi lebih dari 1.000 entri terstruktur lintas kategori: negara,
-kota, bahasa, tokoh, sains, sejarah, kuliner, olahraga, etika budaya per
-negara, dan lainnya — dapat diperluas atau diganti total tanpa menyentuh kode.
-`raget/raget-data/json/knowledge/` menyimpan pengetahuan umum berformat factoid sederhana
-yang dimuat lewat pencarian satu-pintu. Lihat [`docs/DATA-STRUCTURE.md`](docs/DATA-STRUCTURE.md)
-untuk peta lengkap struktur data (dua akar `raget-data/`/`raget-devlog/`, tiga subfolder
-`json/`/`jsonl/`/`neural/`, dan dua jalur baca yang masih hidup berdampingan).
+`raget/raget-data/json/` adalah **satu-satunya** sumber data domain (folder `raget-dataries/` JS legacy sudah dihapus).
+Loader: `raget-agents/dataries-registry.js` (fetch JSON → bentuk `{text, metadata}` untuk bridge).
+Domain antara lain: negara, kota, bahasa, tokoh, sapaan, sains, sejarah, wisata, kuliner/makanan,
+olahraga, etika, minuman, marplace, lingo, ekonomi, paluang, penemuan, alam, seni-budaya,
+plus `greeting/` & `obrolan-ringan/` untuk template chat.
+`json/knowledge/` = factoid umum. Korpus train neural = Release + `jsonl/`. Checkpoint 50/100M di git; 200M di Release.
 
 **Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
 `.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
