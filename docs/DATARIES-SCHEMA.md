@@ -1,29 +1,17 @@
 # Skema Data Dataries
 
-Setiap item di seluruh folder `raget/raget-dataries/` mengikuti bentuk dasar yang sama:
+> **Update 2026-08-26:** Seluruh domain (termasuk sapaan & tokoh) dimuat dari
+> `raget/raget-data/json/<domain>/` lewat `dataries-registry.js`. Folder
+> `raget/raget-dataries/` (modul JS legacy) sudah dikosongkan/dihapus.
 
-```js
-{ text: 'Kalimat deskripsi siap tampil...', metadata: { ...field per folder... } }
+Setiap item mengikuti skema JSON seragam Fase B:
+
+```json
+{ "id": "...", "kategori": "...", "wilayah": null, "nama": "...", "tags": [], "teks": "...", "meta": {} }
 ```
 
-`text` selalu string siap tampil ke pengguna. `metadata` berisi field terstruktur
-untuk pencarian/filter programatis. Berikut skema tiap folder:
-
-| Folder | Field metadata | Contoh |
-|---|---|---|
-| `country/` | name, capital, population, currency, languages[], area, independenceDay, governmentType, dll (±100 field per negara) | `{ name: 'Indonesia', capital: 'Jakarta', population: 277000000, ... }` |
-| `cities/` | region, country, name, type, population, knownFor, tags[] | `{ region: 'asia-tenggara', country: 'Indonesia', name: 'Bandung', ... }` |
-| `languages/` | region, name, nativeName, speakers, script, family, officialIn[], greetings{halo,pagi,terimakasih}, tags[] | `{ name: 'Jepang', speakers: '125 juta', greetings: { halo: 'konnichiwa' } }` |
-| `wisata/` | region, country, name, city, type ('alam'\|'budaya'\|'ikon'), unesco, tags[] | `{ name: 'Borobudur', country: 'Indonesia', type: 'budaya', unesco: true }` |
-| `tokoh/` | name, field, knownFor, country, born, tags[] | `{ name: 'Thomas Edison', field: 'teknologi', knownFor: 'bola lampu' }` |
-| `makanan/` | name, country, region, type, tags[] | `{ name: 'Kimchi', country: 'Korea Selatan', type: 'lauk fermentasi' }` |
-| `sains/` | topic, field, tags[] | `{ topic: 'Fotosintesis', field: 'biologi' }` |
-| `olahraga/` | topic, category, tags[] | `{ topic: 'Piala Dunia FIFA', category: 'turnamen' }` |
-| `sejarah/` | name, period, year, location, tags[] | `{ name: 'Proklamasi Kemerdekaan Indonesia', year: '1945' }` |
-| `alam/` | region, name, type ('fauna'\|'flora'), habitat, tags[] | `{ name: 'Komodo', type: 'fauna', habitat: 'Indonesia' }` |
-| `penemuan/` | name, inventor, year, field, tags[] | `{ name: 'Telepon', inventor: 'Alexander Graham Bell', year: '1876' }` |
-| `seni-budaya/` | region, country, name, type ('tari'\|'musik'\|'festival'\|'pakaian'), tags[] | `{ name: 'Tari Kecak', country: 'Indonesia', type: 'tari' }` |
-| `ekonomi/` | name, type, value, tags[] | `{ name: 'PDB', type: 'indikator makro' }` |
+Saat di-load, registry mengubahnya ke bentuk legacy `{ text, metadata }` supaya
+`dataries-bridge.js` tidak perlu diubah.
 
 ## Pola Registrasi & Lazy Load
 
