@@ -1,34 +1,64 @@
 {
-  "generatedAt": "2026-08-24T14:34:29Z",
+  "generatedAt": "2026-08-25T17:21:06Z",
   "entries": [
     {
-      "jilid": "jilid1-wikipedia",
-      "file": "wikipedia-korpus-manifest.json",
-      "tokenWindow126": 236392520
+      "jilid": "korpus-jilid1-round10",
+      "file": "korpus-jilid1-round10-manifest.json",
+      "tokenWindow126": 307028421
     },
     {
       "jilid": "korpus-jilid2",
       "file": "korpus-jilid2-manifest.json",
       "tokenWindow126": 421287189
+    },
+    {
+      "jilid": "korpus-jilid3",
+      "file": "korpus-jilid3-manifest.json",
+      "tokenWindow126": 9079751
+    },
+    {
+      "jilid": "korpus-jilid4",
+      "file": "korpus-jilid4-manifest.json",
+      "tokenWindow126": 11802394
+    },
+    {
+      "jilid": "korpus-jilid5",
+      "file": "korpus-jilid5-manifest.json",
+      "tokenWindow126": 1506875
     }
   ],
-  "totalTokenGabungan": 657679709,
+  "totalTokenGabungan": 750704630,
   "targetGerbang": 1000000000,
   "targetTercapai": false,
-  "kekuranganToken": 342320291,
+  "kekuranganToken": 249295370,
   "kebijakanGudangBesar": {
     "rakKorpus": "Barang bersih - raw tidak disimpan permanen di git/sandbox, hanya clean+tokenize yang diarsipkan (Release, tag korpus-jilid-N-clean).",
     "rakOtak": "Checkpoint >100MB (batas keras GitHub) keluar dari git, wajib Release asset (bukan Git LFS). Lihat raget-tools/CHECKPOINT-POLICY.md.",
     "sumberPerJilid": {
-      "jilid1-wikipedia": {
-        "sumberAsli": "https://dumps.wikimedia.org/idwiki/latest/idwiki-latest-pages-articles.xml.bz2",
-        "catatan": "Dump Wikipedia bahasa Indonesia terbaru. Diproses lewat raget-tools/extract-clean-wikipedia.py. dumps.wikimedia.org DIBLOKIR oleh kebijakan jaringan sandbox Claude Code Remote - unduh ulang harus dilakukan di luar sandbox (mesin lokal/Colab), lalu upload dump sebagai Release asset sebelum sandbox bisa memprosesnya.",
-        "statusArsipBersih": "BELUM diarsipkan ke Release (jsonl bersih sudah tidak ada di disk, terpakai habis jadi idwiki-chunks-128.txt lalu dibuang saat pembersihan disk Round 6-7; checkpoint massive50m/100m/200m tetap menyimpan hasil pembelajarannya)."
+      "korpus-jilid1-round10": {
+        "sumberAsli": "GitHub Release tag \"J1\" repo ini (idwiki-latest-pages-articles.xml.bz2, sumber asli dumps.wikimedia.org, diunggah manual oleh kurir data).",
+        "catatan": "Round 10: jilid 1 diregenerasi dari nol (jsonl bersih Round 3 sudah hilang saat pembersihan disk sebelumnya) - SELURUH dump diproses (bukan berhenti di lantai kata), hasil jauh lebih besar dari Round 3.",
+        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-1-clean - sesi sandbox tidak diizinkan upload Release asset. Pakai raget-tools/publish-checkpoint-release.py dari luar sandbox (Colab/lokal)."
       },
       "korpus-jilid2": {
-        "sumberAsli": "GitHub Release tag \"Corpus\" repo ini (newspapers-json.tgz + train-00000/00001/00002-of-00140.parquet, sumber asli HPLT/CommonCrawl-derived, diunggah manual oleh kurir data).",
-        "catatan": "Raw asset masih ada di Release tag Corpus per 2026-08-24. Bisa diproses ulang lewat parse-korpus-jilid2.py + clean-dedupe-korpus-jilid2.py.",
-        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-2-clean - sesi sandbox tidak diizinkan membuat/upload Release asset (\"Creating, editing, or deleting releases is not permitted for this session type\"). Pakai raget-tools/publish-checkpoint-release.py dari luar sandbox (Colab/lokal) untuk mengarsipkannya."
+        "sumberAsli": "GitHub Release tag \"Sft\" repo ini (newspapers-json.tgz + train-00000/00001/00002-of-00140.parquet, sumber asli HPLT/CommonCrawl-derived, diunggah manual oleh kurir data).",
+        "catatan": "Raw asset masih ada di Release tag Sft. Bisa diproses ulang lewat parse-korpus-jilid2.py + clean-dedupe-korpus-jilid2.py.",
+        "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-jilid-2-clean (dipublikasikan dirigen dari luar sandbox)."
+      },
+      "korpus-jilid3": {
+        "sumberAsli": "GitHub Release tag \"U\" repo ini (idwikibooks-latest-pages-articles.xml.bz2).",
+        "catatan": "Diproses lewat extract-clean-wikipedia.py (format sama dengan Wikipedia).",
+        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-3-clean - perlu publish dari luar sandbox."
+      },
+      "korpus-jilid4": {
+        "sumberAsli": "GitHub Release tag \"J34\" repo ini (idwikivoyage + idwikisource + idwikiquote, 3 file XML).",
+        "catatan": "Digabung dari 3 sumber (extract-clean-wikipedia.py per sumber + tag field source per baris).",
+        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-4-clean - perlu publish dari luar sandbox."
+      },
+      "korpus-jilid5": {
+        "sumberAsli": "GitHub Release tag \"Hhh\" repo ini (idwiktionary-latest-pages-articles.xml.bz2).",
+        "catatan": "Diproses lewat extract-clean-wiktionary.py (struktur entri kamus berbeda dari artikel prosa - hanya bagian {{bahasa|id}} + definisi bernomor yang diambil).",
+        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-5-clean - perlu publish dari luar sandbox."
       }
     }
   }

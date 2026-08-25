@@ -26,15 +26,30 @@ EXTERNAL_DIR = os.path.join(ROOT, 'raget', 'raget-data', 'jsonl', 'external')
 # di sini supaya "kurir" (siapa pun yang menjalankan pipeline) bisa jemput
 # ulang data mentahnya kalau perlu regenerasi dari nol.
 JILID_SOURCES = {
-    'jilid1-wikipedia': {
-        'sumberAsli': 'https://dumps.wikimedia.org/idwiki/latest/idwiki-latest-pages-articles.xml.bz2',
-        'catatan': 'Dump Wikipedia bahasa Indonesia terbaru. Diproses lewat raget-tools/extract-clean-wikipedia.py. dumps.wikimedia.org DIBLOKIR oleh kebijakan jaringan sandbox Claude Code Remote - unduh ulang harus dilakukan di luar sandbox (mesin lokal/Colab), lalu upload dump sebagai Release asset sebelum sandbox bisa memprosesnya.',
-        'statusArsipBersih': 'BELUM diarsipkan ke Release (jsonl bersih sudah tidak ada di disk, terpakai habis jadi idwiki-chunks-128.txt lalu dibuang saat pembersihan disk Round 6-7; checkpoint massive50m/100m/200m tetap menyimpan hasil pembelajarannya).',
+    'korpus-jilid1-round10': {
+        'sumberAsli': 'GitHub Release tag "J1" repo ini (idwiki-latest-pages-articles.xml.bz2, sumber asli dumps.wikimedia.org, diunggah manual oleh kurir data).',
+        'catatan': 'Round 10: jilid 1 diregenerasi dari nol (jsonl bersih Round 3 sudah hilang saat pembersihan disk sebelumnya) - SELURUH dump diproses (bukan berhenti di lantai kata), hasil jauh lebih besar dari Round 3.',
+        'statusArsipBersih': 'BELUM diarsipkan ke tag korpus-jilid-1-clean - sesi sandbox tidak diizinkan upload Release asset. Pakai raget-tools/publish-checkpoint-release.py dari luar sandbox (Colab/lokal).',
     },
     'korpus-jilid2': {
-        'sumberAsli': 'GitHub Release tag "Corpus" repo ini (newspapers-json.tgz + train-00000/00001/00002-of-00140.parquet, sumber asli HPLT/CommonCrawl-derived, diunggah manual oleh kurir data).',
-        'catatan': 'Raw asset masih ada di Release tag Corpus per 2026-08-24. Bisa diproses ulang lewat parse-korpus-jilid2.py + clean-dedupe-korpus-jilid2.py.',
-        'statusArsipBersih': 'BELUM diarsipkan ke tag korpus-jilid-2-clean - sesi sandbox tidak diizinkan membuat/upload Release asset ("Creating, editing, or deleting releases is not permitted for this session type"). Pakai raget-tools/publish-checkpoint-release.py dari luar sandbox (Colab/lokal) untuk mengarsipkannya.',
+        'sumberAsli': 'GitHub Release tag "Sft" repo ini (newspapers-json.tgz + train-00000/00001/00002-of-00140.parquet, sumber asli HPLT/CommonCrawl-derived, diunggah manual oleh kurir data).',
+        'catatan': 'Raw asset masih ada di Release tag Sft. Bisa diproses ulang lewat parse-korpus-jilid2.py + clean-dedupe-korpus-jilid2.py.',
+        'statusArsipBersih': 'SUDAH diarsipkan ke tag korpus-jilid-2-clean (dipublikasikan dirigen dari luar sandbox).',
+    },
+    'korpus-jilid3': {
+        'sumberAsli': 'GitHub Release tag "U" repo ini (idwikibooks-latest-pages-articles.xml.bz2).',
+        'catatan': 'Diproses lewat extract-clean-wikipedia.py (format sama dengan Wikipedia).',
+        'statusArsipBersih': 'BELUM diarsipkan ke tag korpus-jilid-3-clean - perlu publish dari luar sandbox.',
+    },
+    'korpus-jilid4': {
+        'sumberAsli': 'GitHub Release tag "J34" repo ini (idwikivoyage + idwikisource + idwikiquote, 3 file XML).',
+        'catatan': 'Digabung dari 3 sumber (extract-clean-wikipedia.py per sumber + tag field source per baris).',
+        'statusArsipBersih': 'BELUM diarsipkan ke tag korpus-jilid-4-clean - perlu publish dari luar sandbox.',
+    },
+    'korpus-jilid5': {
+        'sumberAsli': 'GitHub Release tag "Hhh" repo ini (idwiktionary-latest-pages-articles.xml.bz2).',
+        'catatan': 'Diproses lewat extract-clean-wiktionary.py (struktur entri kamus berbeda dari artikel prosa - hanya bagian {{bahasa|id}} + definisi bernomor yang diambil).',
+        'statusArsipBersih': 'BELUM diarsipkan ke tag korpus-jilid-5-clean - perlu publish dari luar sandbox.',
     },
 }
 
@@ -46,25 +61,25 @@ def main():
         print('Tidak ada manifest jilid ditemukan (pola: korpus-jilid*-manifest.json).')
         return
 
-    jilid1_tokens = 236392520  # angka tetap dari Round 3 - jilid 1 tidak punya file manifest berpola korpus-jilid*-manifest.json (namanya wikipedia-korpus-manifest.json, sudah ada sejak awal)
-    entries = [{'jilid': 'jilid1-wikipedia', 'file': 'wikipedia-korpus-manifest.json', 'tokenWindow126': jilid1_tokens}]
-    total = jilid1_tokens
+    entries = []
+    total = 0
 
     for path in files:
         with open(path) as f:
             m = json.load(f)
         gab = m.get('gabunganJilid1DanJilid2', {})
-        jilid2_tokens = gab.get('jilid2TokenWindow126')
-        if jilid2_tokens is None:
-            # manifest jilid berikutnya (jilid3 dst) sebaiknya punya field serupa -
-            # fallback ke fase4 kalau field gabungan belum ada di manifest itu
-            jilid2_tokens = m.get('fase4_tokenize', {}).get('totalTokenWindow126SetelahRechunk')
-        if jilid2_tokens is None:
+        jilid_tokens = gab.get('jilid2TokenWindow126')
+        if jilid_tokens is None:
+            # Semua manifest jilid (1 dan seterusnya, sejak Round 10) pakai field
+            # fase4_tokenize.totalTokenWindow126SetelahRechunk secara seragam -
+            # gabunganJilid1DanJilid2 di atas cuma fallback untuk manifest jilid2 lama.
+            jilid_tokens = m.get('fase4_tokenize', {}).get('totalTokenWindow126SetelahRechunk')
+        if jilid_tokens is None:
             print('PERINGATAN: {} tidak punya field token yang dikenali - dilewati.'.format(path))
             continue
         name = os.path.basename(path).replace('-manifest.json', '')
-        entries.append({'jilid': name, 'file': os.path.basename(path), 'tokenWindow126': jilid2_tokens})
-        total += jilid2_tokens
+        entries.append({'jilid': name, 'file': os.path.basename(path), 'tokenWindow126': jilid_tokens})
+        total += jilid_tokens
 
     target = 1_000_000_000
     result = {
