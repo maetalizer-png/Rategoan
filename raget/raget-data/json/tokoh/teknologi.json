@@ -1,0 +1,210 @@
+[
+  {
+    "id": "teknologi-thomas-alva-edison-000",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Thomas Alva Edison",
+    "tags": [
+      "edison",
+      "bola lampu",
+      "penemu"
+    ],
+    "teks": "Thomas Alva Edison — penemu Amerika, dikenal sebagai penemu bola lampu pijar dan lebih dari seribu paten lain. Lahir tahun 1847 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "penemu bola lampu",
+      "country": "Amerika Serikat",
+      "born": "1847"
+    }
+  },
+  {
+    "id": "teknologi-steve-jobs-001",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Steve Jobs",
+    "tags": [
+      "steve jobs",
+      "apple"
+    ],
+    "teks": "Steve Jobs — pendiri Apple, dikenal lewat inovasi iPhone, iPad, dan Macintosh. Lahir tahun 1955 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "pendiri Apple",
+      "country": "Amerika Serikat",
+      "born": "1955"
+    }
+  },
+  {
+    "id": "teknologi-bill-gates-002",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Bill Gates",
+    "tags": [
+      "bill gates",
+      "microsoft"
+    ],
+    "teks": "Bill Gates — pendiri Microsoft, salah satu pelopor era komputer pribadi. Lahir tahun 1955 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "pendiri Microsoft",
+      "country": "Amerika Serikat",
+      "born": "1955"
+    }
+  },
+  {
+    "id": "teknologi-alexander-graham-bell-003",
+    "kategori": "tokoh",
+    "wilayah": "Skotlandia",
+    "nama": "Alexander Graham Bell",
+    "tags": [
+      "bell",
+      "telepon"
+    ],
+    "teks": "Alexander Graham Bell — penemu telepon, membuka era komunikasi jarak jauh modern. Lahir tahun 1847 di Skotlandia.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "penemu telepon",
+      "country": "Skotlandia",
+      "born": "1847"
+    }
+  },
+  {
+    "id": "teknologi-tim-berners-lee-004",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Tim Berners-Lee",
+    "tags": [
+      "berners-lee",
+      "internet",
+      "www"
+    ],
+    "teks": "Tim Berners-Lee — penemu World Wide Web (WWW), fondasi internet modern. Lahir tahun 1955 di Inggris.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "penemu World Wide Web",
+      "country": "Inggris",
+      "born": "1955"
+    }
+  },
+  {
+    "id": "teknologi-mark-zuckerberg-005",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Mark Zuckerberg",
+    "tags": [
+      "zuckerberg",
+      "facebook"
+    ],
+    "teks": "Mark Zuckerberg — pendiri Facebook, pelopor era media sosial global. Lahir tahun 1984 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "pendiri Facebook",
+      "country": "Amerika Serikat",
+      "born": "1984"
+    }
+  },
+  {
+    "id": "teknologi-elon-musk-006",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Elon Musk",
+    "tags": [
+      "elon musk",
+      "tesla",
+      "spacex"
+    ],
+    "teks": "Elon Musk — pengusaha teknologi, pendiri Tesla dan SpaceX, pelopor kendaraan listrik dan roket komersial. Lahir tahun 1971 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "Tesla dan SpaceX",
+      "country": "Amerika Serikat",
+      "born": "1971"
+    }
+  },
+  {
+    "id": "teknologi-ada-lovelace-007",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Ada Lovelace",
+    "tags": [
+      "ada lovelace",
+      "programmer"
+    ],
+    "teks": "Ada Lovelace — matematikawan Inggris, dianggap sebagai programmer komputer pertama di dunia. Lahir tahun 1815 di Inggris.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "programmer pertama",
+      "country": "Inggris",
+      "born": "1815"
+    }
+  },
+  {
+    "id": "teknologi-guglielmo-marconi-008",
+    "kategori": "tokoh",
+    "wilayah": "Italia",
+    "nama": "Guglielmo Marconi",
+    "tags": [
+      "marconi",
+      "radio"
+    ],
+    "teks": "Guglielmo Marconi — penemu radio, pelopor komunikasi nirkabel jarak jauh. Lahir tahun 1874 di Italia.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "penemu radio",
+      "country": "Italia",
+      "born": "1874"
+    }
+  },
+  {
+    "id": "teknologi-wright-bersaudara-009",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Wright Bersaudara",
+    "tags": [
+      "wright brothers",
+      "pesawat"
+    ],
+    "teks": "Wright bersaudara — Orville dan Wilbur Wright, pencipta dan penerbang pesawat bertenaga pertama di dunia. Lahir tahun 1867/1871 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "pesawat terbang pertama",
+      "country": "Amerika Serikat",
+      "born": "1867/1871"
+    }
+  },
+  {
+    "id": "teknologi-nadiem-makarim-010",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Nadiem Makarim",
+    "tags": [
+      "nadiem makarim",
+      "gojek",
+      "indonesia"
+    ],
+    "teks": "Nadiem Makarim — pengusaha teknologi Indonesia, pendiri Gojek, pelopor super-app ride-hailing di Asia Tenggara. Lahir tahun 1984 di Indonesia.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "pendiri Gojek",
+      "country": "Indonesia",
+      "born": "1984"
+    }
+  },
+  {
+    "id": "teknologi-grace-hopper-011",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Grace Hopper",
+    "tags": [
+      "grace hopper",
+      "compiler"
+    ],
+    "teks": "Grace Hopper — ilmuwan komputer Amerika, pengembang compiler pertama dan bahasa COBOL. Lahir tahun 1906 di Amerika Serikat.",
+    "meta": {
+      "field": "teknologi",
+      "knownFor": "compiler pertama",
+      "country": "Amerika Serikat",
+      "born": "1906"
+    }
+  }
+]
