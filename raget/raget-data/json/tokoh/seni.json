@@ -1,0 +1,206 @@
+[
+  {
+    "id": "seni-leonardo-da-vinci-000",
+    "kategori": "tokoh",
+    "wilayah": "Italia",
+    "nama": "Leonardo da Vinci",
+    "tags": [
+      "da vinci",
+      "mona lisa"
+    ],
+    "teks": "Leonardo da Vinci — seniman dan ilmuwan Renaisans, pelukis Mona Lisa dan The Last Supper. Lahir tahun 1452 di Italia.",
+    "meta": {
+      "field": "seni",
+      "knownFor": "Mona Lisa",
+      "country": "Italia",
+      "born": "1452"
+    }
+  },
+  {
+    "id": "seni-vincent-van-gogh-001",
+    "kategori": "tokoh",
+    "wilayah": "Belanda",
+    "nama": "Vincent van Gogh",
+    "tags": [
+      "van gogh",
+      "starry night"
+    ],
+    "teks": "Vincent van Gogh — pelukis pasca-impresionis Belanda, dikenal lewat Starry Night dan Sunflowers. Lahir tahun 1853 di Belanda.",
+    "meta": {
+      "field": "seni",
+      "knownFor": "Starry Night",
+      "country": "Belanda",
+      "born": "1853"
+    }
+  },
+  {
+    "id": "seni-pablo-picasso-002",
+    "kategori": "tokoh",
+    "wilayah": "Spanyol",
+    "nama": "Pablo Picasso",
+    "tags": [
+      "picasso",
+      "kubisme"
+    ],
+    "teks": "Pablo Picasso — pelukis dan pematung Spanyol, pelopor gerakan seni Kubisme. Lahir tahun 1881 di Spanyol.",
+    "meta": {
+      "field": "seni",
+      "knownFor": "Kubisme",
+      "country": "Spanyol",
+      "born": "1881"
+    }
+  },
+  {
+    "id": "seni-wolfgang-amadeus-mozart-003",
+    "kategori": "tokoh",
+    "wilayah": "Austria",
+    "nama": "Wolfgang Amadeus Mozart",
+    "tags": [
+      "mozart",
+      "musik klasik"
+    ],
+    "teks": "Wolfgang Amadeus Mozart — komponis klasik Austria, salah satu musisi paling berpengaruh sepanjang sejarah. Lahir tahun 1756 di Austria.",
+    "meta": {
+      "field": "musik",
+      "knownFor": "komposer klasik",
+      "country": "Austria",
+      "born": "1756"
+    }
+  },
+  {
+    "id": "seni-ludwig-van-beethoven-004",
+    "kategori": "tokoh",
+    "wilayah": "Jerman",
+    "nama": "Ludwig van Beethoven",
+    "tags": [
+      "beethoven",
+      "symphony"
+    ],
+    "teks": "Ludwig van Beethoven — komponis Jerman, dikenal lewat Symphony No. 9 meski mengalami tuli.",
+    "meta": {
+      "field": "musik",
+      "knownFor": "Symphony No. 9",
+      "country": "Jerman",
+      "born": "1770"
+    }
+  },
+  {
+    "id": "seni-raden-saleh-005",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Raden Saleh",
+    "tags": [
+      "raden saleh",
+      "indonesia"
+    ],
+    "teks": "Raden Saleh — pelukis Indonesia perintis seni lukis modern bergaya romantisisme. Lahir tahun 1811 di Indonesia.",
+    "meta": {
+      "field": "seni",
+      "knownFor": "pelukis romantisisme",
+      "country": "Indonesia",
+      "born": "1811"
+    }
+  },
+  {
+    "id": "seni-william-shakespeare-006",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "William Shakespeare",
+    "tags": [
+      "shakespeare",
+      "sastra"
+    ],
+    "teks": "William Shakespeare — penulis drama dan penyair Inggris, dianggap penulis terbesar berbahasa Inggris. Lahir tahun 1564 di Inggris.",
+    "meta": {
+      "field": "sastra",
+      "knownFor": "drama Romeo and Juliet",
+      "country": "Inggris",
+      "born": "1564"
+    }
+  },
+  {
+    "id": "seni-frida-kahlo-007",
+    "kategori": "tokoh",
+    "wilayah": "Meksiko",
+    "nama": "Frida Kahlo",
+    "tags": [
+      "frida kahlo",
+      "meksiko"
+    ],
+    "teks": "Frida Kahlo — pelukis Meksiko dikenal lewat lukisan potret diri yang penuh simbolisme. Lahir tahun 1907 di Meksiko.",
+    "meta": {
+      "field": "seni",
+      "knownFor": "potret diri",
+      "country": "Meksiko",
+      "born": "1907"
+    }
+  },
+  {
+    "id": "seni-michael-jackson-008",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Michael Jackson",
+    "tags": [
+      "michael jackson",
+      "king of pop"
+    ],
+    "teks": "Michael Jackson — penyanyi dan penari Amerika Serikat, dijuluki King of Pop. Lahir tahun 1958 di Amerika Serikat.",
+    "meta": {
+      "field": "musik",
+      "knownFor": "King of Pop",
+      "country": "Amerika Serikat",
+      "born": "1958"
+    }
+  },
+  {
+    "id": "seni-chairil-anwar-009",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Chairil Anwar",
+    "tags": [
+      "chairil anwar",
+      "indonesia",
+      "puisi"
+    ],
+    "teks": "Chairil Anwar — penyair Indonesia angkatan 45, dijuluki \"Si Binatang Jalang\" karena karyanya yang berapi-api. Lahir tahun 1922 di Indonesia.",
+    "meta": {
+      "field": "sastra",
+      "knownFor": "puisi Aku",
+      "country": "Indonesia",
+      "born": "1922"
+    }
+  },
+  {
+    "id": "seni-walt-disney-010",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Walt Disney",
+    "tags": [
+      "walt disney"
+    ],
+    "teks": "Walt Disney — animator dan produser film Amerika Serikat, pendiri The Walt Disney Company. Lahir tahun 1901 di Amerika Serikat.",
+    "meta": {
+      "field": "seni/film",
+      "knownFor": "pendiri Disney",
+      "country": "Amerika Serikat",
+      "born": "1901"
+    }
+  },
+  {
+    "id": "seni-beyonc-011",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Beyoncé",
+    "tags": [
+      "beyonce",
+      "musik"
+    ],
+    "teks": "Beyoncé — penyanyi dan penulis lagu Amerika Serikat, salah satu artis paling berpengaruh abad ke-21. Lahir tahun 1981 di Amerika Serikat.",
+    "meta": {
+      "field": "musik",
+      "knownFor": "penyanyi pop-R&B",
+      "country": "Amerika Serikat",
+      "born": "1981"
+    }
+  }
+]
