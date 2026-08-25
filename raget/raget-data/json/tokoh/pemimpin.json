@@ -1,0 +1,257 @@
+[
+  {
+    "id": "pemimpin-nelson-mandela-000",
+    "kategori": "tokoh",
+    "wilayah": "Afrika Selatan",
+    "nama": "Nelson Mandela",
+    "tags": [
+      "mandela",
+      "apartheid"
+    ],
+    "teks": "Nelson Mandela — pemimpin Afrika Selatan, presiden kulit hitam pertama, tokoh utama perjuangan anti-apartheid. Lahir tahun 1918 di Afrika Selatan.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "anti-apartheid, presiden Afrika Selatan",
+      "country": "Afrika Selatan",
+      "born": "1918"
+    }
+  },
+  {
+    "id": "pemimpin-winston-churchill-001",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Winston Churchill",
+    "tags": [
+      "churchill",
+      "perang dunia ii"
+    ],
+    "teks": "Winston Churchill — pemimpin Inggris, Perdana Menteri yang memimpin negara itu selama Perang Dunia II. Lahir tahun 1874 di Inggris.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "PM Inggris Perang Dunia II",
+      "country": "Inggris",
+      "born": "1874"
+    }
+  },
+  {
+    "id": "pemimpin-abraham-lincoln-002",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Abraham Lincoln",
+    "tags": [
+      "lincoln",
+      "perbudakan"
+    ],
+    "teks": "Abraham Lincoln — presiden ke-16 Amerika Serikat, memimpin negara melalui Perang Saudara dan menghapus perbudakan. Lahir tahun 1809 di Amerika Serikat.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "presiden AS, hapus perbudakan",
+      "country": "Amerika Serikat",
+      "born": "1809"
+    }
+  },
+  {
+    "id": "pemimpin-angela-merkel-003",
+    "kategori": "tokoh",
+    "wilayah": "Jerman",
+    "nama": "Angela Merkel",
+    "tags": [
+      "merkel",
+      "jerman"
+    ],
+    "teks": "Angela Merkel — kanselir wanita pertama Jerman, memimpin negara itu selama enam belas tahun. Lahir tahun 1954 di Jerman.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "kanselir wanita pertama Jerman",
+      "country": "Jerman",
+      "born": "1954"
+    }
+  },
+  {
+    "id": "pemimpin-ratu-elizabeth-ii-004",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Ratu Elizabeth II",
+    "tags": [
+      "elizabeth ii",
+      "monarki"
+    ],
+    "teks": "Ratu Elizabeth II — raja/ratu Inggris dengan masa pemerintahan terlama dalam sejarah monarki Inggris. Lahir tahun 1926 di Inggris.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "monarki Inggris terlama",
+      "country": "Inggris",
+      "born": "1926"
+    }
+  },
+  {
+    "id": "pemimpin-jawaharlal-nehru-005",
+    "kategori": "tokoh",
+    "wilayah": "India",
+    "nama": "Jawaharlal Nehru",
+    "tags": [
+      "nehru",
+      "india"
+    ],
+    "teks": "Jawaharlal Nehru — perdana menteri pertama India, memimpin negara itu pasca kemerdekaan dari Inggris. Lahir tahun 1889 di India.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "PM pertama India",
+      "country": "India",
+      "born": "1889"
+    }
+  },
+  {
+    "id": "pemimpin-kwame-nkrumah-006",
+    "kategori": "tokoh",
+    "wilayah": "Ghana",
+    "nama": "Kwame Nkrumah",
+    "tags": [
+      "nkrumah",
+      "ghana"
+    ],
+    "teks": "Kwame Nkrumah — presiden pertama Ghana, tokoh penting gerakan pan-Afrikanisme dan dekolonisasi Afrika. Lahir tahun 1909 di Ghana.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "presiden pertama Ghana, pan-Afrikanisme",
+      "country": "Ghana",
+      "born": "1909"
+    }
+  },
+  {
+    "id": "pemimpin-lee-kuan-yew-007",
+    "kategori": "tokoh",
+    "wilayah": "Singapura",
+    "nama": "Lee Kuan Yew",
+    "tags": [
+      "lee kuan yew",
+      "singapura"
+    ],
+    "teks": "Lee Kuan Yew — perdana menteri pendiri Singapura, arsitek transformasi negara itu menjadi pusat ekonomi dunia. Lahir tahun 1923 di Singapura.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "PM pendiri Singapura",
+      "country": "Singapura",
+      "born": "1923"
+    }
+  },
+  {
+    "id": "pemimpin-simon-bolivar-008",
+    "kategori": "tokoh",
+    "wilayah": "Venezuela",
+    "nama": "Simon Bolivar",
+    "tags": [
+      "bolivar",
+      "amerika selatan"
+    ],
+    "teks": "Simon Bolivar — pemimpin revolusi Amerika Selatan yang membebaskan beberapa negara dari kekuasaan kolonial Spanyol. Lahir tahun 1783 di Venezuela.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "pembebas Amerika Selatan",
+      "country": "Venezuela",
+      "born": "1783"
+    }
+  },
+  {
+    "id": "pemimpin-otto-von-bismarck-009",
+    "kategori": "tokoh",
+    "wilayah": "Jerman",
+    "nama": "Otto von Bismarck",
+    "tags": [
+      "bismarck",
+      "unifikasi jerman"
+    ],
+    "teks": "Otto von Bismarck — negarawan Jerman yang memimpin unifikasi negara-negara Jerman menjadi satu kekaisaran pada 1871. Lahir tahun 1815 di Jerman.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "unifikasi Jerman",
+      "country": "Jerman",
+      "born": "1815"
+    }
+  },
+  {
+    "id": "pemimpin-golda-meir-010",
+    "kategori": "tokoh",
+    "wilayah": "Israel",
+    "nama": "Golda Meir",
+    "tags": [
+      "golda meir",
+      "israel"
+    ],
+    "teks": "Golda Meir — perdana menteri wanita pertama Israel, memimpin negara itu pada masa-masa penting sejarahnya. Lahir tahun 1898 di Israel.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "PM wanita pertama Israel",
+      "country": "Israel",
+      "born": "1898"
+    }
+  },
+  {
+    "id": "pemimpin-justin-trudeau-011",
+    "kategori": "tokoh",
+    "wilayah": "Kanada",
+    "nama": "Justin Trudeau",
+    "tags": [
+      "trudeau",
+      "kanada"
+    ],
+    "teks": "Justin Trudeau — perdana menteri Kanada yang dikenal dengan kebijakan progresif dan keterbukaan terhadap imigrasi. Lahir tahun 1971 di Kanada.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "PM Kanada",
+      "country": "Kanada",
+      "born": "1971"
+    }
+  },
+  {
+    "id": "pemimpin-jacinda-ardern-012",
+    "kategori": "tokoh",
+    "wilayah": "Selandia Baru",
+    "nama": "Jacinda Ardern",
+    "tags": [
+      "ardern",
+      "selandia baru"
+    ],
+    "teks": "Jacinda Ardern — perdana menteri Selandia Baru, dikenal atas kepemimpinan empatik saat krisis nasional. Lahir tahun 1980 di Selandia Baru.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "PM Selandia Baru",
+      "country": "Selandia Baru",
+      "born": "1980"
+    }
+  },
+  {
+    "id": "pemimpin-sun-yat-sen-013",
+    "kategori": "tokoh",
+    "wilayah": "Tiongkok",
+    "nama": "Sun Yat-sen",
+    "tags": [
+      "sun yat-sen",
+      "tiongkok"
+    ],
+    "teks": "Sun Yat-sen — bapak pendiri Republik Tiongkok, tokoh sentral revolusi yang mengakhiri era kekaisaran Tiongkok. Lahir tahun 1866 di Tiongkok.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "bapak pendiri Republik Tiongkok",
+      "country": "Tiongkok",
+      "born": "1866"
+    }
+  },
+  {
+    "id": "pemimpin-jomo-kenyatta-014",
+    "kategori": "tokoh",
+    "wilayah": "Kenya",
+    "nama": "Jomo Kenyatta",
+    "tags": [
+      "kenyatta",
+      "kenya"
+    ],
+    "teks": "Jomo Kenyatta — presiden pertama Kenya, pemimpin gerakan kemerdekaan negara itu dari penjajahan Inggris. Lahir tahun 1897 di Kenya.",
+    "meta": {
+      "field": "pemimpin",
+      "knownFor": "presiden pertama Kenya",
+      "country": "Kenya",
+      "born": "1897"
+    }
+  }
+]
