@@ -4,7 +4,7 @@ const FALLBACK_TEXT = 'Maaf, saya belum paham. Coba ulangi dengan kata lain?';
 const GENERIC_PREFIX = 'Saya catat:';
 
 const TIME_GREETING_RE = /^(selamat|met)?\s*(pagi|siang|sore|malam)\b|^good\s*(morning|afternoon|evening|night)\b/i;
-const PLAIN_GREETING_RE = /^(halo+|hai+|hey+|hi)\b|^assalamu.?alaikum\b|^permisi\b/i;
+const PLAIN_GREETING_RE = /^(halo+|hallo+|helo+|hello+|hai+|hey+|hi+|hei+)\b|^assalamu.?alaikum\b|^permisi\b|^pagi\b|^siang\b|^sore\b|^malam\b/i;
 const QUESTION_WORDS = ['apa', 'siapa', 'kapan', 'dimana', 'di mana', 'mengapa', 'kenapa', 'bagaimana', 'berapa', 'gimana'];
 
 // Template teks sapaan/smalltalk dipindah ke raget-data/json/sapaan/sapaan.json
@@ -19,6 +19,7 @@ const SMALLTALK_TRIGGERS = {
   terima_kasih: /terima\s*kasih|makasih|thanks|thank\s*you/i,
   jumpa: /sampai\s+jumpa|dad+ah|^bye\b|selamat\s+tinggal/i,
   kemampuan: /kamu\s+bisa\s+apa|kemampuan(mu|kamu)?\b|apa\s+yang\s+bisa\s+kamu\s+lakukan/i,
+  bantu: /\b(tolong|bisa)\s+(bantu|bantuan)\b|\bbantu(in|kan)?\s+(saya|aku)\b|\bbutuh\s+bantuan\b/i,
 };
 
 const SAPAAN_FALLBACK_TEXT = 'Halo! Ada yang bisa saya bantu?';
@@ -139,6 +140,20 @@ function replyPlainGreeting(text, options) {
 
 function replyQuestion(prompt) {
   const echo = prompt.replace(/\?+$/, '').trim();
+  const low = echo.toLowerCase();
+  // Obrolan terbuka tanpa topik spesifik — jangan cuma memantulkan pertanyaan
+  if (/\b(pendapat|opini|menurut)\b/.test(low) && !/\b(tentang|soal|mengenai)\b/.test(low)) {
+    return pickVariant('q_opini', [
+      'Aku bisa bantu menimbang sudut pandang, tapi butuh topiknya dulu. Mau bahas apa — kerja, produk, keputusan, atau yang lain?',
+      'Pendapat yang pas biasanya tergantung konteks. Ceritakan situasinya sebentar, nanti aku bantu uraikan opsi dan pertimbangannya.',
+    ], prompt);
+  }
+  if (/\b(bagaimana|gimana)\b/.test(low) && low.split(/\s+/).length <= 5) {
+    return pickVariant('q_singkat', [
+      'Bisa diperjelas sedikit? Misalnya situasi, tujuan, atau pilihan yang lagi kamu hadapi.',
+      'Aku siap bantu. Tambahkan konteks singkat biar jawabannya tidak mengambang.',
+    ], prompt);
+  }
   const templates = [
     'Pertanyaan menarik soal "' + echo + '". Bisa ceritakan konteksnya sedikit lagi supaya jawaban saya lebih pas?',
     'Soal "' + echo + '", saya perlu sedikit info tambahan dulu — apa yang sudah kamu ketahui soal ini?',
