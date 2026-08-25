@@ -1,0 +1,514 @@
+[
+  {
+    "id": "perempuan-berpengaruh-marie-curie-000",
+    "kategori": "tokoh",
+    "wilayah": "Polandia",
+    "nama": "Marie Curie",
+    "tags": [
+      "marie curie",
+      "nobel",
+      "radioaktivitas"
+    ],
+    "teks": "Marie Curie — ilmuwan Polandia-Prancis, satu-satunya orang yang meraih Nobel di dua bidang sains berbeda (Fisika dan Kimia) berkat penelitian radioaktivitas. Lahir tahun 1867 di Polandia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "penemuan radioaktivitas, dua Nobel",
+      "country": "Polandia",
+      "born": "1867"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-malala-yousafzai-001",
+    "kategori": "tokoh",
+    "wilayah": "Pakistan",
+    "nama": "Malala Yousafzai",
+    "tags": [
+      "malala",
+      "pendidikan",
+      "nobel perdamaian"
+    ],
+    "teks": "Malala Yousafzai — aktivis pendidikan asal Pakistan, peraih Nobel Perdamaian termuda berkat perjuangannya untuk hak pendidikan anak perempuan. Lahir tahun 1997 di Pakistan.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "aktivisme hak pendidikan perempuan",
+      "country": "Pakistan",
+      "born": "1997"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-rosa-parks-002",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Rosa Parks",
+    "tags": [
+      "rosa parks",
+      "hak sipil"
+    ],
+    "teks": "Rosa Parks — aktivis hak sipil Amerika Serikat yang penolakannya memberi kursi bus memicu gerakan hak sipil melawan segregasi rasial. Lahir tahun 1913 di Amerika Serikat.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "gerakan hak sipil Amerika",
+      "country": "Amerika Serikat",
+      "born": "1913"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-raden-ajeng-kartini-003",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Raden Ajeng Kartini",
+    "tags": [
+      "kartini",
+      "emansipasi"
+    ],
+    "teks": "Kartini — pelopor emansipasi perempuan Indonesia yang lewat surat-suratnya mendorong akses pendidikan bagi perempuan pribumi. Lahir tahun 1879 di Indonesia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "emansipasi perempuan Indonesia",
+      "country": "Indonesia",
+      "born": "1879"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-frida-kahlo-004",
+    "kategori": "tokoh",
+    "wilayah": "Meksiko",
+    "nama": "Frida Kahlo",
+    "tags": [
+      "frida kahlo",
+      "seni"
+    ],
+    "teks": "Frida Kahlo — pelukis Meksiko terkenal dengan potret diri yang penuh simbolisme mengenai identitas, tubuh, dan budaya Meksiko. Lahir tahun 1907 di Meksiko.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "lukisan potret diri surealis",
+      "country": "Meksiko",
+      "born": "1907"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-amelia-earhart-005",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Amelia Earhart",
+    "tags": [
+      "amelia earhart",
+      "penerbangan"
+    ],
+    "teks": "Amelia Earhart — penerbang Amerika Serikat, perempuan pertama yang terbang solo melintasi Samudra Atlantik. Lahir tahun 1897 di Amerika Serikat.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "penerbangan solo Atlantik pertama",
+      "country": "Amerika Serikat",
+      "born": "1897"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-ada-lovelace-006",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Ada Lovelace",
+    "tags": [
+      "ada lovelace",
+      "komputer"
+    ],
+    "teks": "Ada Lovelace — matematikawan Inggris yang dianggap penulis program komputer pertama di dunia, mendahului era komputer modern. Lahir tahun 1815 di Inggris.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "program komputer pertama",
+      "country": "Inggris",
+      "born": "1815"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-jane-goodall-007",
+    "kategori": "tokoh",
+    "wilayah": "Inggris",
+    "nama": "Jane Goodall",
+    "tags": [
+      "jane goodall",
+      "primatologi"
+    ],
+    "teks": "Jane Goodall — primatolog Inggris yang penelitiannya tentang simpanse liar mengubah pemahaman dunia soal perilaku hewan. Lahir tahun 1934 di Inggris.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "penelitian perilaku simpanse",
+      "country": "Inggris",
+      "born": "1934"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-cut-nyak-dhien-008",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Cut Nyak Dhien",
+    "tags": [
+      "cut nyak dhien",
+      "aceh"
+    ],
+    "teks": "Cut Nyak Dhien — pahlawan nasional Indonesia yang memimpin perlawanan rakyat Aceh melawan kolonial Belanda. Lahir tahun 1848 di Indonesia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perlawanan rakyat Aceh",
+      "country": "Indonesia",
+      "born": "1848"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-wangari-maathai-009",
+    "kategori": "tokoh",
+    "wilayah": "Kenya",
+    "nama": "Wangari Maathai",
+    "tags": [
+      "wangari maathai",
+      "lingkungan"
+    ],
+    "teks": "Wangari Maathai — aktivis lingkungan Kenya, perempuan Afrika pertama peraih Nobel Perdamaian atas gerakan penanaman pohon Green Belt Movement. Lahir tahun 1940 di Kenya.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "gerakan lingkungan Green Belt",
+      "country": "Kenya",
+      "born": "1940"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-katherine-johnson-010",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Katherine Johnson",
+    "tags": [
+      "katherine johnson",
+      "nasa"
+    ],
+    "teks": "Katherine Johnson — matematikawan Amerika Serikat yang perhitungannya krusial bagi misi luar angkasa NASA, termasuk penerbangan ke bulan. Lahir tahun 1918 di Amerika Serikat.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perhitungan misi luar angkasa NASA",
+      "country": "Amerika Serikat",
+      "born": "1918"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-indira-gandhi-011",
+    "kategori": "tokoh",
+    "wilayah": "India",
+    "nama": "Indira Gandhi",
+    "tags": [
+      "indira gandhi",
+      "politik"
+    ],
+    "teks": "Indira Gandhi — perdana menteri perempuan pertama India yang memimpin negara tersebut selama lebih dari satu dekade. Lahir tahun 1917 di India.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perdana menteri perempuan pertama India",
+      "country": "India",
+      "born": "1917"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-sor-juana-ines-de-la-cruz-012",
+    "kategori": "tokoh",
+    "wilayah": "Meksiko",
+    "nama": "Sor Juana Ines de la Cruz",
+    "tags": [
+      "sor juana",
+      "sastra"
+    ],
+    "teks": "Sor Juana Ines de la Cruz — cendekiawan dan penyair Meksiko era kolonial yang memperjuangkan hak perempuan atas pendidikan lewat karya tulisnya. Lahir tahun 1651 di Meksiko.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "sastra dan hak pendidikan perempuan",
+      "country": "Meksiko",
+      "born": "1651"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-wu-zetian-013",
+    "kategori": "tokoh",
+    "wilayah": "China",
+    "nama": "Wu Zetian",
+    "tags": [
+      "wu zetian",
+      "dinasti tang"
+    ],
+    "teks": "Wu Zetian — satu-satunya perempuan yang pernah menjadi kaisar penuh di Tiongkok, memerintah pada era Dinasti Tang. Lahir tahun 624 di China.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "kaisar perempuan Tiongkok",
+      "country": "China",
+      "born": "624"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-simone-de-beauvoir-014",
+    "kategori": "tokoh",
+    "wilayah": "Prancis",
+    "nama": "Simone de Beauvoir",
+    "tags": [
+      "simone de beauvoir",
+      "feminisme"
+    ],
+    "teks": "Simone de Beauvoir — filsuf dan penulis Prancis yang karyanya menjadi dasar penting gerakan feminisme modern. Lahir tahun 1908 di Prancis.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "filsafat feminisme modern",
+      "country": "Prancis",
+      "born": "1908"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-benazir-bhutto-015",
+    "kategori": "tokoh",
+    "wilayah": "Pakistan",
+    "nama": "Benazir Bhutto",
+    "tags": [
+      "benazir bhutto",
+      "politik"
+    ],
+    "teks": "Benazir Bhutto — perdana menteri perempuan pertama di negara mayoritas Muslim, memimpin Pakistan dua kali. Lahir tahun 1953 di Pakistan.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perdana menteri perempuan pertama negara Muslim",
+      "country": "Pakistan",
+      "born": "1953"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-valentina-tereshkova-016",
+    "kategori": "tokoh",
+    "wilayah": "Rusia",
+    "nama": "Valentina Tereshkova",
+    "tags": [
+      "valentina tereshkova",
+      "luar angkasa"
+    ],
+    "teks": "Valentina Tereshkova — kosmonaut Rusia, perempuan pertama yang terbang ke luar angkasa pada 1963. Lahir tahun 1937 di Rusia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perempuan pertama ke luar angkasa",
+      "country": "Rusia",
+      "born": "1937"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-aung-san-suu-kyi-017",
+    "kategori": "tokoh",
+    "wilayah": "Myanmar",
+    "nama": "Aung San Suu Kyi",
+    "tags": [
+      "aung san suu kyi",
+      "demokrasi"
+    ],
+    "teks": "Aung San Suu Kyi — tokoh demokrasi Myanmar peraih Nobel Perdamaian atas perjuangan tanpa kekerasan melawan pemerintahan militer. Lahir tahun 1945 di Myanmar.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perjuangan demokrasi Myanmar",
+      "country": "Myanmar",
+      "born": "1945"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-grace-hopper-018",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Grace Hopper",
+    "tags": [
+      "grace hopper",
+      "komputer"
+    ],
+    "teks": "Grace Hopper — ilmuwan komputer Amerika Serikat yang mengembangkan compiler pertama dan meletakkan dasar bahasa pemrograman COBOL. Lahir tahun 1906 di Amerika Serikat.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "pengembang compiler & COBOL",
+      "country": "Amerika Serikat",
+      "born": "1906"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-golda-meir-019",
+    "kategori": "tokoh",
+    "wilayah": "Israel",
+    "nama": "Golda Meir",
+    "tags": [
+      "golda meir",
+      "politik"
+    ],
+    "teks": "Golda Meir — perdana menteri perempuan pertama Israel yang memimpin negara tersebut pada masa penuh gejolak politik. Lahir tahun 1898 di Israel.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perdana menteri perempuan pertama Israel",
+      "country": "Israel",
+      "born": "1898"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-nawal-el-saadawi-020",
+    "kategori": "tokoh",
+    "wilayah": "Mesir",
+    "nama": "Nawal El Saadawi",
+    "tags": [
+      "nawal el saadawi",
+      "hak perempuan"
+    ],
+    "teks": "Nawal El Saadawi — penulis dan dokter Mesir yang karya-karyanya mengangkat isu hak perempuan di dunia Arab. Lahir tahun 1931 di Mesir.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "aktivisme hak perempuan dunia Arab",
+      "country": "Mesir",
+      "born": "1931"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-sirimavo-bandaranaike-021",
+    "kategori": "tokoh",
+    "wilayah": "Sri Lanka",
+    "nama": "Sirimavo Bandaranaike",
+    "tags": [
+      "sirimavo bandaranaike",
+      "politik"
+    ],
+    "teks": "Sirimavo Bandaranaike — politisi Sri Lanka yang menjadi perdana menteri perempuan pertama di dunia pada 1960. Lahir tahun 1916 di Sri Lanka.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "perdana menteri perempuan pertama dunia",
+      "country": "Sri Lanka",
+      "born": "1916"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-dewi-sartika-022",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Dewi Sartika",
+    "tags": [
+      "dewi sartika",
+      "pendidikan"
+    ],
+    "teks": "Dewi Sartika — pelopor pendidikan perempuan Indonesia yang mendirikan sekolah khusus perempuan pertama di Hindia Belanda. Lahir tahun 1884 di Indonesia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "pendiri sekolah perempuan pertama",
+      "country": "Indonesia",
+      "born": "1884"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-angela-merkel-023",
+    "kategori": "tokoh",
+    "wilayah": "Jerman",
+    "nama": "Angela Merkel",
+    "tags": [
+      "angela merkel",
+      "politik"
+    ],
+    "teks": "Angela Merkel — kanselir perempuan pertama Jerman yang memimpin negara tersebut selama 16 tahun dan menjadi tokoh sentral politik Eropa. Lahir tahun 1954 di Jerman.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "kanselir perempuan pertama Jerman",
+      "country": "Jerman",
+      "born": "1954"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-michelle-obama-024",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Michelle Obama",
+    "tags": [
+      "michelle obama",
+      "advokasi"
+    ],
+    "teks": "Michelle Obama — pengacara dan mantan ibu negara Amerika Serikat yang aktif mengkampanyekan pendidikan dan gaya hidup sehat. Lahir tahun 1964 di Amerika Serikat.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "advokasi pendidikan dan kesehatan",
+      "country": "Amerika Serikat",
+      "born": "1964"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-sheikh-hasina-025",
+    "kategori": "tokoh",
+    "wilayah": "Bangladesh",
+    "nama": "Sheikh Hasina",
+    "tags": [
+      "sheikh hasina",
+      "politik"
+    ],
+    "teks": "Sheikh Hasina — perdana menteri Bangladesh yang menjabat dalam waktu terlama di antara pemimpin perempuan modern. Lahir tahun 1947 di Bangladesh.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "masa jabatan perdana menteri terlama",
+      "country": "Bangladesh",
+      "born": "1947"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-marie-sklodowska-026",
+    "kategori": "tokoh",
+    "wilayah": "Polandia",
+    "nama": "Marie Sklodowska",
+    "tags": [
+      "marie sklodowska",
+      "sains"
+    ],
+    "teks": "Marie Sklodowska — nama lahir Marie Curie sebelum menikah, lahir dan besar di Warsawa sebelum pindah ke Prancis untuk studi sains. Lahir tahun 1867 di Polandia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "awal karier ilmiah di Polandia",
+      "country": "Polandia",
+      "born": "1867"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-harriet-tubman-027",
+    "kategori": "tokoh",
+    "wilayah": "Amerika Serikat",
+    "nama": "Harriet Tubman",
+    "tags": [
+      "harriet tubman",
+      "perbudakan"
+    ],
+    "teks": "Harriet Tubman — mantan budak Amerika Serikat yang membebaskan puluhan orang lewat jaringan Underground Railroad. Lahir tahun 1822 di Amerika Serikat.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "Underground Railroad",
+      "country": "Amerika Serikat",
+      "born": "1822"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-sri-mulyani-indrawati-028",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Sri Mulyani Indrawati",
+    "tags": [
+      "sri mulyani",
+      "ekonomi"
+    ],
+    "teks": "Sri Mulyani Indrawati — ekonom Indonesia yang pernah menjabat direktur pelaksana Bank Dunia dan Menteri Keuangan Indonesia. Lahir tahun 1962 di Indonesia.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "ekonom dan Menteri Keuangan Indonesia",
+      "country": "Indonesia",
+      "born": "1962"
+    }
+  },
+  {
+    "id": "perempuan-berpengaruh-jacinda-ardern-029",
+    "kategori": "tokoh",
+    "wilayah": "Selandia Baru",
+    "nama": "Jacinda Ardern",
+    "tags": [
+      "jacinda ardern",
+      "politik"
+    ],
+    "teks": "Jacinda Ardern — perdana menteri Selandia Baru yang dikenal atas kepemimpinan empatik saat krisis, termasuk pandemi dan tragedi Christchurch. Lahir tahun 1980 di Selandia Baru.",
+    "meta": {
+      "field": "perempuan-berpengaruh",
+      "knownFor": "kepemimpinan empatik Selandia Baru",
+      "country": "Selandia Baru",
+      "born": "1980"
+    }
+  }
+]
