@@ -59,8 +59,8 @@ async function ambilApi() {
     return api;
   }
   const jalur = [
-    '../../../raget/raget-dataries/index.js',
-    '/raget/raget-dataries/index.js'
+    '../../../raget/raget-agents/dataries-registry.js',
+    '/raget/raget-agents/dataries-registry.js'
   ];
   for (let i = 0; i < jalur.length; i++) {
     try {
