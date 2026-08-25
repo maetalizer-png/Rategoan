@@ -76,28 +76,61 @@ async function ambilApi() {
 }
 
 const UJI = [
+  // negara / kota / bahasa
   ['country', 'asian-tenggara'],
   ['country', 'asian-barat'],
+  ['country', 'asian-timur'],
   ['country', 'eropan-barat'],
   ['country', 'american-utara'],
+  ['country', 'african-utara'],
+  ['cities', 'asia-tenggara'],
+  ['cities', 'eropan-barat'],
+  ['languages', 'asian-tenggara'],
+  ['languages', 'asian-timur'],
+  // tokoh (JSON per bidang)
   ['tokoh', 'sains'],
   ['tokoh', 'teknologi'],
   ['tokoh', 'sejarah'],
+  ['tokoh', 'seni'],
+  ['tokoh', 'penjelajah'],
   ['tokoh', 'pemimpin'],
+  ['tokoh', 'perempuan-berpengaruh'],
+  // sapaan (JSON migrasi)
+  ['sapaan', 'greetings'],
+  ['sapaan', 'interaktif'],
+  // pengetahuan
+  ['sejarah', 'indonesia'],
+  ['sejarah', 'dunia'],
+  ['sejarah', 'modern'],
+  ['sains', 'umum'],
+  ['sains', 'biologi'],
+  ['sains', 'fisika-kimia'],
+  ['penemuan', 'teknologi'],
+  ['penemuan', 'sains'],
+  ['penemuan', 'kedokteran'],
+  // budaya & hidup
   ['makanan', 'asia'],
   ['makanan', 'eropa'],
   ['minuman', 'asia'],
-  ['lingo', 'asean-tenggara'],
-  ['sapaan', 'greetings'],
-  ['sejarah', 'indonesia'],
-  ['sejarah', 'dunia'],
-  ['sains', 'umum'],
-  ['sains', 'biologi'],
-  ['penemuan', 'teknologi'],
-  ['alam', 'asia'],
+  ['minuman', 'eropa'],
   ['wisata', 'asia'],
   ['wisata', 'eropa'],
-  ['etika', 'asia']
+  ['wisata', 'amerika'],
+  ['alam', 'asia'],
+  ['alam', 'afrika'],
+  ['etika', 'asia'],
+  ['etika', 'eropa'],
+  ['lingo', 'asean-tenggara'],
+  ['lingo', 'asean-timur'],
+  // ekonomi / peluang / olahraga / marplace
+  ['ekonomi', 'indikator'],
+  ['ekonomi', 'komoditas'],
+  ['paluang', 'tren'],
+  ['paluang', 'sektor'],
+  ['olahraga', 'sepakbola'],
+  ['olahraga', 'olimpiade'],
+  ['marplace', 'karir'],
+  ['marplace', 'ecommerce']
 ];
 
 function terima(list, grup, data) {
