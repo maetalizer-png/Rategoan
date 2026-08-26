@@ -2001,5 +2001,251 @@
       "jenis": "data",
       "source": "ted2020"
     }
+  },
+  {
+    "id": "obrolan-layanan-bantuan",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Minta bantuan layanan",
+    "tags": [
+      "obrolan",
+      "layanan",
+      "bantuan"
+    ],
+    "teks": "Silakan ceritakan kendalanya. Nanti kita cari jalan keluarnya.",
+    "meta": {
+      "variants": [
+        "Ada yang bisa dibantu?",
+        "Sampaikan saja, saya bantu arahkan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-layanan-komplain",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Komplain",
+    "tags": [
+      "obrolan",
+      "layanan",
+      "komplain"
+    ],
+    "teks": "Terima kasih sudah memberitahu. Mohon maaf atas ketidaknyamanannya.",
+    "meta": {
+      "variants": [
+        "Kami catat dulu.",
+        "Nanti kami cek dan kabari."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-tugas-stuck",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Stuck mengerjakan tugas",
+    "tags": [
+      "obrolan",
+      "tugas",
+      "stuck"
+    ],
+    "teks": "Kalau stuck, coba pecah tugasnya jadi bagian kecil. Jangan dipaksa sekaligus.",
+    "meta": {
+      "variants": [
+        "Ambil napas dulu.",
+        "Mulai dari yang paling mudah."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-tugas-deadline",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Deadline dekat",
+    "tags": [
+      "obrolan",
+      "tugas",
+      "deadline"
+    ],
+    "teks": "Deadline dekat biasanya bikin panik. Prioritaskan yang paling penting dulu.",
+    "meta": {
+      "variants": [
+        "Satu per satu saja.",
+        "Yang wajib dikumpul didahulukan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-tugas-selesai",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Tugas selesai",
+    "tags": [
+      "obrolan",
+      "tugas",
+      "selesai"
+    ],
+    "teks": "Sudah beres. Sekarang boleh istirahat sejenak.",
+    "meta": {
+      "variants": [
+        "Good job.",
+        "Istirahat juga penting."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-pelajaran-bingung",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Bingung materi pelajaran",
+    "tags": [
+      "obrolan",
+      "pelajaran",
+      "bingung"
+    ],
+    "teks": "Bingung itu wajar. Coba tanya ulang atau cari contoh yang lebih sederhana.",
+    "meta": {
+      "variants": [
+        "Pecah materinya.",
+        "Tidak harus langsung paham semua."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-pelajaran-presentasi",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Mau presentasi",
+    "tags": [
+      "obrolan",
+      "pelajaran",
+      "presentasi"
+    ],
+    "teks": "Tenang saja. Sampaikan intinya, tidak perlu sempurna.",
+    "meta": {
+      "variants": [
+        "Tarik napas dulu.",
+        "Kamu sudah siap."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-gaya-formal",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya formal",
+    "tags": [
+      "obrolan",
+      "formal"
+    ],
+    "teks": "Baik, silakan disampaikan. Saya siap membantu.",
+    "meta": {
+      "variants": [
+        "Mohon disampaikan saja.",
+        "Saya dengarkan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-gaya-informal",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya informal",
+    "tags": [
+      "obrolan",
+      "informal"
+    ],
+    "teks": "Santai saja, mau ngomongin apa?",
+    "meta": {
+      "variants": [
+        "Gas aja.",
+        "Langsung aja."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-gaya-lucu",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya lucu ringan",
+    "tags": [
+      "obrolan",
+      "lucu"
+    ],
+    "teks": "Siap menerima curhatan, pertanyaan, atau sekadar iseng ngobrol.",
+    "meta": {
+      "variants": [
+        "Mode mendengarkan aktif.",
+        "Silakan, saya sudah standby."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-gaya-empati",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya empati",
+    "tags": [
+      "obrolan",
+      "empati"
+    ],
+    "teks": "Kalau lagi berat, boleh cerita pelan-pelan. Tidak harus langsung tuntas.",
+    "meta": {
+      "variants": [
+        "Saya di sini.",
+        "Ambil waktu dulu saja."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-gaya-tegas",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya tegas ramah",
+    "tags": [
+      "obrolan",
+      "tegas"
+    ],
+    "teks": "Langsung ke intinya biar lebih cepat terbantu.",
+    "meta": {
+      "variants": [
+        "Fokus ke masalah utamanya.",
+        "Kita selesaikan satu per satu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-produktivitas-mulai",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Susah mulai kerja",
+    "tags": [
+      "obrolan",
+      "produktivitas"
+    ],
+    "teks": "Susah mulai itu biasa. Coba kerjakan lima menit saja dulu.",
+    "meta": {
+      "variants": [
+        "Mulai dari yang paling kecil.",
+        "Nanti biasanya nyambung sendiri."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-produktivitas-tunda",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Suka menunda",
+    "tags": [
+      "obrolan",
+      "produktivitas",
+      "tunda"
+    ],
+    "teks": "Menunda biasanya karena terasa berat. Pecah saja jadi langkah kecil.",
+    "meta": {
+      "variants": [
+        "Jangan ditumpuk.",
+        "Satu langkah saja hari ini."
+      ]
+    }
   }
 ]
