@@ -1,0 +1,87 @@
+[
+  {
+    "id": "knowledge-berpikir-kritis-001",
+    "kategori": "knowledge",
+    "wilayah": null,
+    "nama": "Berpikir kritis",
+    "tags": [
+      "knowledge",
+      "kecerdasan"
+    ],
+    "teks": "Berpikir kritis berarti memeriksa informasi sebelum menerimanya: apa buktinya, dari mana sumbernya, dan apakah ada penjelasan lain yang lebih masuk akal.",
+    "meta": {
+      "variants": [
+        "Jangan langsung percaya hanya karena terdengar meyakinkan.",
+        "Tanya: data apa yang mendukung klaim ini?"
+      ]
+    }
+  },
+  {
+    "id": "knowledge-belajar-efektif-002",
+    "kategori": "knowledge",
+    "wilayah": null,
+    "nama": "Belajar efektif",
+    "tags": [
+      "knowledge",
+      "belajar"
+    ],
+    "teks": "Belajar lebih efektif bila materi dipecah kecil, diulang dengan jarak, dan diuji dengan mencoba mengingat tanpa melihat catatan.",
+    "meta": {
+      "variants": [
+        "Latihan aktif lebih baik daripada hanya membaca.",
+        "Istirahat juga bagian dari proses belajar."
+      ]
+    }
+  },
+  {
+    "id": "knowledge-literasi-digital-003",
+    "kategori": "knowledge",
+    "wilayah": null,
+    "nama": "Literasi digital",
+    "tags": [
+      "knowledge",
+      "digital"
+    ],
+    "teks": "Literasi digital adalah kemampuan memakai teknologi secara bijak: mencari informasi, menilai kebenaran, menjaga privasi, dan berkomunikasi dengan sopan.",
+    "meta": {
+      "variants": [
+        "Tidak semua yang viral itu benar.",
+        "Cek sumber sebelum membagikan informasi."
+      ]
+    }
+  },
+  {
+    "id": "knowledge-problem-solving-004",
+    "kategori": "knowledge",
+    "wilayah": null,
+    "nama": "Pemecahan masalah",
+    "tags": [
+      "knowledge",
+      "kecerdasan"
+    ],
+    "teks": "Pemecahan masalah yang baik dimulai dari merumuskan masalah dengan jelas, memecahnya menjadi bagian kecil, lalu menguji solusi satu per satu.",
+    "meta": {
+      "variants": [
+        "Jangan langsung loncat ke jawaban.",
+        "Pahami dulu akar masalahnya."
+      ]
+    }
+  },
+  {
+    "id": "knowledge-keputusan-005",
+    "kategori": "knowledge",
+    "wilayah": null,
+    "nama": "Mengambil keputusan",
+    "tags": [
+      "knowledge",
+      "keputusan"
+    ],
+    "teks": "Keputusan yang lebih baik biasanya mempertimbangkan tujuan, data yang ada, risiko, dan dampak jangka panjang — bukan hanya perasaan sesaat.",
+    "meta": {
+      "variants": [
+        "Tulis opsi dan konsekuensinya.",
+        "Keputusan kecil bisa dilatih setiap hari."
+      ]
+    }
+  }
+]
