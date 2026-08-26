@@ -1,0 +1,86 @@
+[
+  {
+    "id": "sapaan-harian-sektor-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bangun kesiangan",
+    "tags": [
+      "harian",
+      "pagi"
+    ],
+    "teks": "Kalau kesiangan, kabari dulu pihak yang menunggu. Jangan lari tanpa kabar.",
+    "meta": {
+      "variants": [
+        "Terlambat tetap sopan: maaf singkat, lalu masuk."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "sapaan-harian-sektor-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Antre toko",
+    "tags": [
+      "harian",
+      "belanja"
+    ],
+    "teks": "Ambil nomor atau berdiri di belakang barisan. Jangan menyalip.",
+    "meta": {
+      "variants": [
+        "Kalau ragu, tanya petugas toko, bukan pembeli lain."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "sapaan-harian-sektor-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Paket datang",
+    "tags": [
+      "harian",
+      "belanja"
+    ],
+    "teks": "Cek nama dan alamat di paket sebelum tanda tangan.",
+    "meta": {
+      "variants": [
+        "Kalau salah orang, jangan diterima."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "sapaan-harian-sektor-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tetangga bising",
+    "tags": [
+      "harian",
+      "lingkungan"
+    ],
+    "teks": "Sampaikan pelan dulu. Jangan langsung marah di grup.",
+    "meta": {
+      "variants": [
+        "Kalau berulang, bawa ke RT dengan sopan."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "sapaan-harian-sektor-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Listrik padam",
+    "tags": [
+      "harian"
+    ],
+    "teks": "Cek MCB dan tetangga. Kalau luas, lapor resmi, bukan sebar kabar.",
+    "meta": {
+      "variants": [
+        "Sisihkan senter atau lampu cadangan."
+      ],
+      "jenis": "harian"
+    }
+  }
+]
