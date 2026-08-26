@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sekolah-orangtua-001",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Chat wali kelas",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Chat singkat, jam wajar. Jangan kirim pesan beruntun tengah malam.",
+    "meta": {
+      "variants": [
+        "Keperluan mendesak: telepon sesuai aturan sekolah."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-orangtua-002",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Nilai jelek",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Bahas yang salah, bukan hanya angkanya. Tanyakan ke anak dulu sebelum marah.",
+    "meta": {
+      "variants": [
+        "Remidial itu kesempatan, bukan hukuman semata."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-orangtua-003",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Piket orang tua",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Hadir sesuai jadwal atau izin resmi. Jangan titip terus-menerus.",
+    "meta": {
+      "variants": [
+        "Kalau berhalangan, kabari panitia."
+      ],
+      "jenis": "sekolah"
+    }
+  }
+]
