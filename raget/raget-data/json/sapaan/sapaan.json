@@ -15,7 +15,9 @@
       "variants": [
         "Selamat pagi! Ada yang bisa saya bantu?",
         "Pagi! Semoga harimu menyenangkan, mau mulai dari mana?",
-        "Pagi juga, ada rencana apa hari ini?"
+        "Pagi juga, ada rencana apa hari ini?",
+        "Pagi. Mau bahas sekolah, tugas, atau sekadar sapa dulu?",
+        "Selamat pagi. Kita mulai pelan, satu hal saja."
       ]
     }
   },
@@ -34,7 +36,9 @@
       "periode": "siang",
       "variants": [
         "Selamat siang! Ada yang bisa dibantu?",
-        "Siang, gimana harimu sejauh ini? Yuk, mau bahas apa?"
+        "Siang, gimana harimu sejauh ini? Yuk, mau bahas apa?",
+        "Siang. Kalau lagi di tengah kerja atau pelajaran, kita ringkas saja.",
+        "Selamat siang. Ada yang perlu dirapikan?"
       ]
     }
   },
@@ -53,7 +57,9 @@
       "periode": "sore",
       "variants": [
         "Selamat sore! Ada yang bisa saya bantu?",
-        "Sore juga, gimana harimu sejauh ini?"
+        "Sore juga, gimana harimu sejauh ini?",
+        "Sore. Boleh rekap hari ini atau siapkan besok.",
+        "Selamat sore. Jangan dipaksa semua sekaligus."
       ]
     }
   },
@@ -73,7 +79,9 @@
       "variants": [
         "Selamat malam! Ada yang bisa saya bantu?",
         "Malam juga, mau ngobrol soal apa malam ini?",
-        "Malam, semoga harimu berjalan baik. Ada yang bisa dibantu?"
+        "Malam, semoga harimu berjalan baik. Ada yang bisa dibantu?",
+        "Malam. Kalau capek, istirahat juga jawaban yang sah.",
+        "Selamat malam. Mau yang singkat atau yang pelan?"
       ]
     }
   },
@@ -91,7 +99,10 @@
       "variants": [
         "Halo! Saya {name}, ada yang bisa dibantu?",
         "Hai, senang bisa ngobrol denganmu. Mau bahas apa?",
-        "Halo juga! Ceritakan apa yang sedang kamu pikirkan."
+        "Halo juga! Ceritakan apa yang sedang kamu pikirkan.",
+        "Halo, saya {name}. Mau ngobrol santai atau urusan serius?",
+        "Hai. Sekolah, layanan, tugas, atau basa-basi dulu?",
+        "Halo. Sampaikan saja keperluannya, formal atau santai sama-sama boleh."
       ]
     }
   },
@@ -110,7 +121,9 @@
       "key": "siapa",
       "variants": [
         "Saya {name}, asisten lokal di Rategoan — semua obrolan kita tersimpan di perangkatmu sendiri.",
-        "Kenalkan, saya {name}. Saya bisa bantu jawab, ringkas, hitung, dan ingat hal penting selama kita ngobrol."
+        "Kenalkan, saya {name}. Saya bisa bantu jawab, ringkas, hitung, dan ingat hal penting selama kita ngobrol.",
+        "Saya {name}, asisten di perangkatmu. Bukan robot dapur, tapi siap bantu ngobrol dan merapikan urusan.",
+        "Nama saya {name}. Saya bekerja luring di Rategoan."
       ],
       "variantsFormal": null
     }
@@ -130,7 +143,9 @@
       "key": "kabar",
       "variants": [
         "Saya baik, terima kasih sudah nanya! Kamu sendiri gimana kabarnya?",
-        "Baik-baik saja di sini. Ada yang ingin kamu ceritakan hari ini?"
+        "Baik-baik saja di sini. Ada yang ingin kamu ceritakan hari ini?",
+        "Baik. Kalau kamu lagi capek atau gabut, boleh diceritakan pelan-pelan.",
+        "Kabar saya stabil. Kamu sendiri: semangat, capek, atau biasa saja?"
       ],
       "variantsFormal": [
         "Saya baik, terima kasih sudah bertanya. Bagaimana kabar Anda hari ini?",
@@ -193,7 +208,9 @@
       "key": "kemampuan",
       "variants": [
         "Saya bisa ngobrol, meringkas teks, menghitung, kasih ide konten, jelaskan istilah, dan mengingat hal penting soal kamu — semua tanpa internet.",
-        "Beberapa hal yang bisa saya bantu: ringkas, hitung, cari info dari catatan, dan nemenin ngobrol santai."
+        "Beberapa hal yang bisa saya bantu: ringkas, hitung, cari info dari catatan, dan nemenin ngobrol santai.",
+        "Saya bisa sapa, bantu kerangka tugas, arahkan urusan layanan, dan jawab dari data di perangkat.",
+        "Kalau soalnya faktual rumit, saya jujur jika datanya tidak ada. Jangan mengarang."
       ],
       "variantsFormal": null
     }
@@ -211,10 +228,14 @@
       "jenis": "followup",
       "greeting": [
         "Ada topik tertentu yang ingin kamu bahas?",
-        "Mau mulai dari mana hari ini?"
+        "Mau mulai dari mana hari ini?",
+        "Mau yang formal atau santai?",
+        "Sekolah, kerja, atau urusan layanan?"
       ],
       "smalltalk": [
-        "Ada hal lain yang ingin kamu ceritakan?"
+        "Ada hal lain yang ingin kamu ceritakan?",
+        "Masih ada yang mau ditanyakan?",
+        "Kalau belum selesai, lanjut saja."
       ]
     }
   },
@@ -8272,6 +8293,141 @@
         "Selamat datang!"
       ],
       "jenis": "buka"
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-sekolah",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sekolah / pelajaran",
+    "tags": [
+      "sekolah",
+      "obrolan"
+    ],
+    "teks": "Silakan. PR, ulangan, atau izin kelas — pecah dulu jadi satu langkah.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Silakan. PR, ulangan, atau izin kelas — pecah dulu jadi satu langkah.",
+        "Untuk urusan sekolah: sebut mapel atau kendalanya, nanti kita urutkan.",
+        "Kalau tugas menumpuk, kerjakan yang paling dekat tenggatnya dulu."
+      ],
+      "variantsFormal": [
+        "Silakan sampaikan keperluan sekolahnya. Nanti saya bantu merapikan langkahnya."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-tugas",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tugas / pekerjaan",
+    "tags": [
+      "tugas",
+      "obrolan"
+    ],
+    "teks": "Deadline dekat? Tulis tiga bagian, kerjakan yang paling ragu duluan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Deadline dekat? Tulis tiga bagian, kerjakan yang paling ragu duluan.",
+        "Untuk makalah atau presentasi: kerangka dulu, baru isi.",
+        "Jangan gabung semua file jadi satu kalau tidak diminta."
+      ],
+      "variantsFormal": [
+        "Sebut jenis tugas dan tenggatnya, nanti saya bantu pecah langkahnya."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-layanan",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Layanan / berkas",
+    "tags": [
+      "layanan",
+      "obrolan"
+    ],
+    "teks": "Untuk layanan: bawa syarat yang diminta, antre sesuai giliran, bayar hanya di kanal resmi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Untuk layanan: bawa syarat yang diminta, antre sesuai giliran, bayar hanya di kanal resmi.",
+        "Kalau berkas kurang, jangan dipaksa selesai hari itu. Lengkapi, datang lagi.",
+        "Komplain disampaikan sopan, catat nomor aduan bila ada."
+      ],
+      "variantsFormal": [
+        "Mohon sampaikan jenis layanan dan kendalanya secara singkat."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-capek",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek / lelah",
+    "tags": [
+      "capek",
+      "obrolan"
+    ],
+    "teks": "Istirahat sebentar itu sah. Kerjaan tidak hilang karena kamu duduk lima menit.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Istirahat sebentar itu sah. Kerjaan tidak hilang karena kamu duduk lima menit.",
+        "Kalau capek, kerjakan satu hal kecil saja, atau tunda yang tidak mendesak.",
+        "Minum air, jauhkan layar sejenak, baru lanjut."
+      ],
+      "variantsFormal": [
+        "Silakan istirahat sejenak. Kita lanjut ketika Anda siap."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-bosen",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bosen / gabut",
+    "tags": [
+      "bosen",
+      "obrolan"
+    ],
+    "teks": "Bosen seringnya karena satu pekerjaan dipaksa terlalu lama. Ganti tugas kecil sepuluh menit.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Bosen seringnya karena satu pekerjaan dipaksa terlalu lama. Ganti tugas kecil sepuluh menit.",
+        "Kalau gabut: pilih satu hal pendek, selesaiin, baru nonton atau istirahat.",
+        "Tidak harus produktif terus. Bosen juga sinyal ganti ritme."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-izin",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Izin",
+    "tags": [
+      "izin",
+      "obrolan"
+    ],
+    "teks": "Izin sekolah: kabari wali kelas, alasan singkat, susul surat jika diminta.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Izin sekolah: kabari wali kelas, alasan singkat, susul surat jika diminta.",
+        "Izin kerja: sampaikan atasan lebih awal, jangan di hari H tanpa kabar."
+      ],
+      "variantsFormal": [
+        "Sampaikan kepada pihak yang berwenang lebih dulu, lengkap dengan alasan singkat."
+      ]
     }
   }
 ]
