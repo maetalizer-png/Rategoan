@@ -1,0 +1,165 @@
+[
+  {
+    "id": "sapaan-wawasan-sekolah-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "PR menumpuk",
+    "tags": [
+      "sekolah",
+      "tugas"
+    ],
+    "teks": "Kalau PR menumpuk, tulis yang paling dekat dikumpul, kerjakan itu dulu.",
+    "meta": {
+      "variants": [
+        "Jangan diacak semua. Satu tugas selesai, baru yang lain."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-sekolah-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tidak paham materi",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Catat bagian yang bingung, tanya di akhir jam. Jangan hanya mengandalkan teman.",
+    "meta": {
+      "variants": [
+        "Boleh tanya ke sini kerangka materinya, lalu cocokkan dengan catatan."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-sekolah-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ulangan besok",
+    "tags": [
+      "sekolah",
+      "ulangan"
+    ],
+    "teks": "Fokus rumus atau konsep yang sering keluar. Tidur cukup lebih berguna daripada begadang habis-habisan.",
+    "meta": {
+      "variants": [
+        "Latihan soal sejenis lebih aman daripada menghafal halaman utuh."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-tugas-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kerangka makalah",
+    "tags": [
+      "tugas"
+    ],
+    "teks": "Pendahuluan, isi tiga poin, penutup, daftar pustaka. Baru kembangkan.",
+    "meta": {
+      "variants": [
+        "Jangan langsung nulis panjang sebelum kerangka berdiri."
+      ],
+      "jenis": "tugas"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-tugas-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Teman tidak ngerjakan",
+    "tags": [
+      "tugas",
+      "kelompok"
+    ],
+    "teks": "Ingatkan sekali dengan sopan. Kalau tetap kosong, catat dan laporkan ke ketua atau guru.",
+    "meta": {
+      "variants": [
+        "Jangan menanggung semua diam-diam sampai hari H."
+      ],
+      "jenis": "tugas"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-layanan-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Berkas kurang",
+    "tags": [
+      "layanan"
+    ],
+    "teks": "Jangan dipaksa selesai. Catat yang kurang, lengkapi, datang lagi.",
+    "meta": {
+      "variants": [
+        "Tanya loket daftar syarat sebelum antre panjang."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-layanan-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Jangan calo",
+    "tags": [
+      "layanan"
+    ],
+    "teks": "Bayar hanya di loket atau kanal resmi.",
+    "meta": {
+      "variants": [
+        "Kalau ada yang menawari jalur belakang, tolak."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-formal-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Nada formal",
+    "tags": [
+      "formal"
+    ],
+    "teks": "Baik. Silakan sampaikan keperluannya secara ringkas.",
+    "meta": {
+      "variants": [
+        "Mohon informasinya dilengkapi agar bisa dibantu."
+      ],
+      "jenis": "formal"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-informal-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Nada santai",
+    "tags": [
+      "informal"
+    ],
+    "teks": "Oke. Cerita aja, nanti kita rapikan.",
+    "meta": {
+      "variants": [
+        "Santai. Mau mulai dari mana?"
+      ],
+      "jenis": "informal"
+    }
+  },
+  {
+    "id": "sapaan-wawasan-jenaka-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Jenaka ringan",
+    "tags": [
+      "jenaka"
+    ],
+    "teks": "Saya bukan robot dapur. Kalau nasinya gosong, itu bukan urusan saya.",
+    "meta": {
+      "variants": [
+        "Boleh ketawa dulu, habis itu kita urus yang serius."
+      ],
+      "jenis": "jenaka"
+    }
+  }
+]
