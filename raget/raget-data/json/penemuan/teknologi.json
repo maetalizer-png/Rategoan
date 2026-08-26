@@ -94,5 +94,74 @@
       "year": "1973",
       "field": "teknologi"
     }
+  },
+  {
+    "id": "penemuan-teknologi-roda-001",
+    "kategori": "penemuan",
+    "wilayah": null,
+    "nama": "Roda",
+    "tags": [
+      "penemuan",
+      "teknologi"
+    ],
+    "teks": "Roda adalah salah satu penemuan paling penting dalam sejarah manusia. Memudahkan transportasi, mesin, dan banyak teknologi lain.",
+    "meta": {
+      "variants": [
+        "Tanpa roda, peradaban modern sulit dibayangkan.",
+        "Roda juga dipakai pada mesin dan roda gigi."
+      ]
+    }
+  },
+  {
+    "id": "penemuan-teknologi-cetak-002",
+    "kategori": "penemuan",
+    "wilayah": null,
+    "nama": "Mesin cetak",
+    "tags": [
+      "penemuan",
+      "teknologi"
+    ],
+    "teks": "Mesin cetak yang dikembangkan Gutenberg memungkinkan buku diproduksi lebih cepat dan murah. Pengetahuan tersebar jauh lebih luas.",
+    "meta": {
+      "variants": [
+        "Mesin cetak mempercepat literasi.",
+        "Informasi tidak lagi hanya milik segelintir orang."
+      ]
+    }
+  },
+  {
+    "id": "penemuan-teknologi-internet-003",
+    "kategori": "penemuan",
+    "wilayah": null,
+    "nama": "Internet",
+    "tags": [
+      "penemuan",
+      "teknologi",
+      "internet"
+    ],
+    "teks": "Internet menghubungkan komputer di seluruh dunia sehingga informasi, komunikasi, dan layanan digital bisa diakses secara global.",
+    "meta": {
+      "variants": [
+        "Internet lahir dari pengembangan jaringan militer dan riset.",
+        "Saat ini internet jadi infrastruktur penting kehidupan modern."
+      ]
+    }
+  },
+  {
+    "id": "penemuan-teknologi-komputer-006",
+    "kategori": "penemuan",
+    "wilayah": null,
+    "nama": "Komputer",
+    "tags": [
+      "penemuan",
+      "teknologi"
+    ],
+    "teks": "Komputer adalah mesin yang memproses data menurut instruksi. Dari kalkulasi ilmiah hingga smartphone, komputer mengubah cara manusia bekerja dan berkomunikasi.",
+    "meta": {
+      "variants": [
+        "Komputer awal sangat besar dan mahal.",
+        "Saat ini komputer ada di hampir setiap perangkat digital."
+      ]
+    }
   }
 ]
