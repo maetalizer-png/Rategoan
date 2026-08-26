@@ -1,29 +1,24 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-08-26 (pembersihan + perluasan pengetahuan)
+Diperbarui: 2026-08-26 (seimbang bersih v1 siap)
 
-## Yang aktif & AMAN
+## Data AMAN untuk training
+
+| Kode | Nama | Peran |
+|------|------|--------|
+| **A1** | korpus-jilid-1-clean | Volume ensiklopedia (Wikimedia CC-BY-SA) |
+| **A3** | korpus-train-seimbang-bersih-v1 | Dialog + pengetahuan + fakta + gaya Raget |
+| **A2** | korpus-pengetahuan-bersih-v1 | Subset pengetahuan (sudah masuk A3) |
+| — | raget_own_corpus.jsonl | Persona (sudah masuk A3) |
+
+### Campuran resmi training
+- **60–70%** A1 (Wikimedia)
+- **30–40%** A3 (seimbang bersih)
 
 ### Checkpoint
-- `checkpoint-100m` — 100M experimental
-- `checkpoint-200m` — 200M R10-TUTUP experimental
+- checkpoint-100m, checkpoint-200m tetap ada
 
-### Korpus AMAN
-- `korpus-jilid-1-clean` (**A1**) — Wikimedia CC-BY-SA (utama)
-- `raget_own_corpus.jsonl` — milik sendiri
-- `korpus-pengetahuan-bersih-v1.jsonl` — sains, sejarah, penemuan, wawasan (milik sendiri)
+### Data berisiko
+Sudah dihapus. Jangan diunduh lagi.
 
-### RAW aman
-- `J1` Wikipedia ID, `U` Wikibooks, `J34` Wikisource/Voyage/Quote, `Hhh` Wiktionary
-
-## Domain JSON yang diperluas (rule-engine)
-- `sains/umum`, `sains/fisika-kimia`
-- `sejarah/indonesia`, `sejarah/dunia`
-- `penemuan/teknologi`, `penemuan/sains`, `penemuan/kedokteran`
-- `knowledge/wawasan` (baru)
-
-## Yang sudah dihapus (berisiko)
-balanced-v1, jilid-2, data-kualitas-raget, Sft, extra-clean, stok-seimbang v2/v3
-
-## Kebijakan
-Training baru **hanya** data AMAN. Lihat juga `docs/STRUKTUR-KORPUS.md`.
+Lihat juga: `docs/STRUKTUR-KORPUS.md`
