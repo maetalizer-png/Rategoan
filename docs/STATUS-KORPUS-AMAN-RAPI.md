@@ -1,12 +1,17 @@
-# STATUS KORPUS AMAN — RAPI (FINAL)
+# STATUS KORPUS — pasca migrasi PRD
 
-## Paket training (3 file)
+Tanggal migrasi: 2026-08-26  
+Dilaksanakan Grok sesuai `PRD-DATA-RELEASE.md`.
 
-1. **A1** — `korpus-jilid-1-clean` (~479 MB)
-2. **PACK** — `korpus-dialog-daerah-pack-v1` (~12 MB) — gabungan dialog+daerah
-3. **Pelengkap** — `korpus-simplewiki-bersih-v1` (A17) **atau** `korpus-wiki-lokal-bersih-v1` (A5)
+## Release aktif (korpus)
 
-## Stok lain di Release (tidak wajib load)
-A6, A7, A8, A14, A15, dan tag kecil lama (sudah digabung ke PACK).
+1. **korpus-ensiklopedia-bersih** — K1
+2. **korpus-dialog-daerah-bersih** — K2  
+3. **korpus-pelengkap-bersih** — K3
 
-Acuan mix: `docs/MIX-TRAINING-SEIMBANG.md`
+## Checkpoint
+- checkpoint-100m
+- checkpoint-200m
+
+## Tag lama
+A1–A17 + PACK **dihapus** setelah isinya dipindah ke 3 tag kanonik.
