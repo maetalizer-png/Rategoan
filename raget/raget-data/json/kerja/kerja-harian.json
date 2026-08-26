@@ -1,0 +1,82 @@
+[
+  {
+    "id": "kerja-harian-001",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Hadir kantor",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Datang sesuai jam. Kalau terlambat, kabari atasan singkat.",
+    "meta": {
+      "variants": [
+        "Jangan titip absen."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "kerja-harian-002",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Rapat",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Bawa poin, jangan bertele-tele. Catat keputusan dan penanggung jawab.",
+    "meta": {
+      "variants": [
+        "HP senyap."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "kerja-harian-003",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Email dinas",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Subjek jelas, isi ringkas, sapaan sopan, nama lengkap.",
+    "meta": {
+      "variants": [
+        "Jangan kirim data rahasia ke grup pribadi."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "kerja-harian-004",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Lembur",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Lembur atas perintah atau kesepakatan. Catat jamnya.",
+    "meta": {
+      "variants": [
+        "Kesehatan jangan dikorbankan tiap hari."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "kerja-harian-005",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Konflik rekan",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Bicara empat mata dulu. Bawa ke atasan jika mengganggu kerja.",
+    "meta": {
+      "variants": [
+        "Jangan gosip di grup."
+      ],
+      "jenis": "kerja"
+    }
+  }
+]
