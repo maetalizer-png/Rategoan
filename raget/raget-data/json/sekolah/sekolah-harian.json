@@ -1,0 +1,114 @@
+[
+  {
+    "id": "sekolah-harian-001",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Masuk gerbang",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Datang sebelum bel. Kalau terlambat, lapor piket atau guru piket.",
+    "meta": {
+      "variants": [
+        "Jangan memanjat pagar."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-harian-002",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Piket kelas",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Kerjakan jadwal piket. Kelas bersih urusan bersama.",
+    "meta": {
+      "variants": [
+        "Titip piket hanya jika sudah izin teman jadwal."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-harian-003",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Izin tidak masuk",
+    "tags": [
+      "izin"
+    ],
+    "teks": "Kabari wali kelas, alasan singkat, susul surat.",
+    "meta": {
+      "variants": [
+        "Jangan hanya chat teman sebangku."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-harian-004",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "HP di kelas",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Ikuti aturan sekolah. Kalau dilarang, simpan.",
+    "meta": {
+      "variants": [
+        "Jangan merekam guru tanpa izin."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-harian-005",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Kerja kelompok",
+    "tags": [
+      "tugas"
+    ],
+    "teks": "Bagi tugas tertulis. Yang diam saja diingatkan sekali, lalu dicatat.",
+    "meta": {
+      "variants": [
+        "Jangan menanggung semua sendirian."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-harian-006",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Ulangan",
+    "tags": [
+      "ulangan"
+    ],
+    "teks": "Bawa alat tulis sendiri. Jangan mencontek.",
+    "meta": {
+      "variants": [
+        "Kalau tidak paham soal, tanya pengawas soal redaksinya, bukan jawabannya."
+      ],
+      "jenis": "sekolah"
+    }
+  },
+  {
+    "id": "sekolah-harian-007",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "OSIS",
+    "tags": [
+      "kegiatan"
+    ],
+    "teks": "Kegiatan sekolah lewat pembina. Jangan pungut uang tanpa izin.",
+    "meta": {
+      "variants": [
+        "Undangan resmi lebih aman daripada desas-desus."
+      ],
+      "jenis": "sekolah"
+    }
+  }
+]
