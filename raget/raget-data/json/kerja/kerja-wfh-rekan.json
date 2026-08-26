@@ -1,0 +1,50 @@
+[
+  {
+    "id": "kerja-wfh-001",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "WFH pagi",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Kabari tim kalau mulai kerja. Jangan diam sampai siang tanpa status.",
+    "meta": {
+      "variants": [
+        "Satu pesan singkat cukup."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "kerja-wfh-002",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Rekan salah paham",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Klarifikasi di chat pribadi dulu. Jangan membela diri panjang di grup.",
+    "meta": {
+      "variants": [
+        "Fokus ke kerjaan yang tertunda."
+      ],
+      "jenis": "kerja"
+    }
+  },
+  {
+    "id": "kerja-wfh-003",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Meeting online",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Masuk tepat waktu, mikrofon mati jika tidak bicara.",
+    "meta": {
+      "variants": [
+        "Sampaikan poin, bukan cerita samping."
+      ],
+      "jenis": "kerja"
+    }
+  }
+]
