@@ -174,6 +174,53 @@ export const REGIONS = Object.freeze({
   sapaan: [
     { id: 'greetings', file: './sapaan/greetings.js', names: [] },
     { id: 'interaktif', file: './sapaan/interaktif.js', names: [] },
+    { id: 'sapaan', file: './sapaan/sapaan.js', names: ['halo', 'hai', 'pagi'] },
+    { id: 'sapaan-wawasan-luas', file: './sapaan/sapaan-wawasan-luas.js', names: ['sekolah', 'tugas', 'layanan'] },
+    { id: 'sapaan-harian-sektor', file: './sapaan/sapaan-harian-sektor.js', names: ['belanja', 'paket', 'tetangga'] },
+    { id: 'sapaan-obrolan-lanjut', file: './sapaan/sapaan-obrolan-lanjut.js', names: ['lanjut', 'bingung'] },
+    { id: 'sapaan-sekolah', file: './sapaan/sapaan-sekolah.js', names: ['sekolah', 'pr', 'kuliah'] },
+    { id: 'sapaan-layanan', file: './sapaan/sapaan-layanan.js', names: ['layanan', 'komplain', 'antrian'] },
+    { id: 'sapaan-kerja', file: './sapaan/sapaan-kerja.js', names: ['kerja', 'kantor'] },
+    { id: 'sapaan-kesehatan', file: './sapaan/sapaan-kesehatan.js', names: ['sakit', 'capek'] },
+  ],
+  greeting: [
+    { id: 'greeting', file: './greeting/greeting.js', names: ['halo', 'selamat'] },
+    { id: 'greeting-wawasan-luas', file: './greeting/greeting-wawasan-luas.js', names: ['pagi', 'kabar'] },
+    { id: 'greeting-harian-sektor', file: './greeting/greeting-harian-sektor.js', names: ['belanja', 'perjalanan'] },
+    { id: 'greeting-situasi', file: './greeting/greeting-situasi.js', names: ['buru-buru', 'capek'] },
+  ],
+  'obrolan-ringan': [
+    { id: 'obrolan-ringan', file: './obrolan-ringan/obrolan-ringan.js', names: ['obrolan', 'santai'] },
+    { id: 'obrolan-harian-sektor', file: './obrolan-ringan/obrolan-harian-sektor.js', names: ['macet', 'panas'] },
+    { id: 'obrolan-lingkungan-sehari', file: './obrolan-ringan/obrolan-lingkungan-sehari.js', names: ['tetangga', 'hujan'] },
+  ],
+  layanan: [
+    { id: 'layanan-publik', file: './layanan/layanan-publik.js', names: ['ktp', 'kk', 'dukcapil', 'antrian', 'pengaduan'] },
+    { id: 'layanan-sekolah-klinik-toko', file: './layanan/layanan-sekolah-klinik-toko.js', names: ['klinik', 'toko', 'bank', 'pos'] },
+    { id: 'layanan-pasar-warung-desa', file: './layanan/layanan-pasar-warung-desa.js', names: ['pasar', 'warung', 'desa', 'posyandu', 'rt'] },
+  ],
+  sekolah: [
+    { id: 'sekolah-harian', file: './sekolah/sekolah-harian.js', names: ['sekolah', 'pr', 'ulangan', 'piket', 'osis'] },
+    { id: 'sekolah-orangtua', file: './sekolah/sekolah-orangtua.js', names: ['wali kelas', 'nilai'] },
+  ],
+  kesehatan: [
+    { id: 'kesehatan-harian', file: './kesehatan/kesehatan-harian.js', names: ['demam', 'obat', 'luka'] },
+    { id: 'kesehatan-keluarga', file: './kesehatan/kesehatan-keluarga.js', names: ['anak demam', 'lansia'] },
+  ],
+  transportasi: [
+    { id: 'transportasi-harian', file: './transportasi/transportasi-harian.js', names: ['angkot', 'ojek', 'kereta', 'parkir'] },
+    { id: 'transportasi-keluarga', file: './transportasi/transportasi-keluarga.js', names: ['antar sekolah', 'mudik'] },
+  ],
+  'rumah-tangga': [
+    { id: 'rumah-tangga-harian', file: './rumah-tangga/rumah-tangga-harian.js', names: ['gas', 'sampah', 'air'] },
+    { id: 'rumah-tangga-uang-dapur', file: './rumah-tangga/rumah-tangga-uang-dapur.js', names: ['belanja dapur', 'listrik'] },
+  ],
+  kerja: [
+    { id: 'kerja-harian', file: './kerja/kerja-harian.js', names: ['kantor', 'rapat', 'lembur'] },
+    { id: 'kerja-wfh-rekan', file: './kerja/kerja-wfh-rekan.js', names: ['wfh', 'meeting'] },
+  ],
+  lingkungan: [
+    { id: 'lingkungan-rt', file: './lingkungan/lingkungan-rt.js', names: ['kerja bakti', 'gang', 'tetangga'] },
   ],
 });
 
@@ -184,7 +231,7 @@ const cache = new Map();
 // untuk grup di sini ia fetch JSON lalu bentuk ulang jadi {text, metadata}
 // SAMA PERSIS seperti bentuk lama, supaya dataries-bridge.js dan seluruh
 // pipeline resolusi entitas tidak perlu tahu/berubah sama sekali.
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', marplace: 'marplace', lingo: 'lingo', ekonomi: 'ekonomi', paluang: 'paluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', sapaan: 'sapaan' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', marplace: 'marplace', lingo: 'lingo', ekonomi: 'ekonomi', paluang: 'paluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', sapaan: 'sapaan', greeting: 'greeting', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
 
 function unifiedToLegacyShape(entry, group) {
   return {
