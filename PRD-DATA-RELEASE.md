@@ -289,13 +289,32 @@ kebetulan sama padahal isi beda/rusak).
 ### Tiga gerbang wajib verifikasi
 
 **Gerbang 1 — saat publish (penulis/dirigen/Grok).**
-Setelah file final (§3.1, satu file) selesai dibuat, WAJIB:
+SHA256 **WAJIB** dihitung dari file **FINAL yang di-upload** (gzip
+`.jsonl.gz` akhir), **bukan** JSONL mentah sebelum kompresi. Kompresi
+ulang (level gzip berbeda) mengubah byte → hash berbeda meski teks sama.
+
+Setelah file final (§3.1, satu file) selesai dibuat:
 ```bash
 sha256sum korpus-<kategori>-bersih.jsonl.gz
 ```
-Hasilnya ditulis ke `manifest.json` field `sha256` SEBELUM upload. File
-tanpa `sha256` di manifest **tidak dianggap selesai** — ini pelanggaran
-langsung terhadap PRD, bukan kelalaian minor.
+Hasilnya ditulis ke `manifest.json` field `sha256` **dari file gzip itu**,
+lalu file **yang sama** di-upload. File tanpa `sha256` di manifest
+**tidak dianggap selesai**.
+
+Pipa resmi: `raget/raget-tools/publish-korpus-release.py` (korpus) dan
+`raget/raget-tools/publish-checkpoint-release.py` (checkpoint). Skrip
+menghitung hash dari file yang akan di-upload, menulis manifest, lalu
+upload.
+
+**Gerbang 1b — self-verify setelah upload (otomatis, wajib).**
+Setelah asset masuk GitHub, bandingkan:
+```
+manifest.sha256  ==  digest GitHub asset (field digest: sha256:...)
+                 ==  sha256sum lokal file yang baru di-upload
+```
+Tidak cocok = **publish DIBLOKIR**: asset baru dihapus, proses exit ≠ 0.
+Jangan biarkan Release hidup dengan segel palsu. Ini akar masalah K2
+(hash mentah vs gzip) yang sudah pernah terjadi.
 
 **Gerbang 2 — saat reassembly part (khusus tier XL, §3).**
 ```bash
@@ -325,6 +344,10 @@ untuk didiagnosis daripada dicegah di sini.
 - **Segel utuh** (SHA256 cocok) = isi tidak ada yang tersentuh, aman dipakai.
 - **Segel beda** (SHA256 tidak cocok) = isi tertukar/rusak/korup → **berhenti**, jangan dipakai, jangan "coba saja".
 - Setiap Release korpus (K1/K2/K3, dan kategori baru ke depan) **wajib** punya `sha256` di `manifest.json` — tidak terkecuali, tidak "nanti saja".
+- SHA256 publish = hash **gzip final yang benar-benar diupload**, bukan raw.
+- Setelah upload, digest GitHub **wajib** dicocokkan; gagal = publish batal.
+- Pipa: `publish-korpus-release.py` / `publish-checkpoint-release.py`.
+
 - SHA256 dihitung dari file **gzip final** yang benar-benar diupload — bukan dari file mentah sebelum kompresi (kompresi ulang dengan level berbeda menghasilkan byte berbeda meski isi teksnya identik).
 
 ## 9. Status kepatuhan saat ini (audit 2026-08-26, setelah migrasi §6)
