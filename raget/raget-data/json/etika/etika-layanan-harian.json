@@ -1,0 +1,50 @@
+[
+  {
+    "id": "etika-layanan-harian-001",
+    "kategori": "etika",
+    "wilayah": null,
+    "nama": "Antre",
+    "tags": [
+      "etika"
+    ],
+    "teks": "Giliran orang lain sama berhaknya dengan giliranmu.",
+    "meta": {
+      "variants": [
+        "Menyalip membuat urusan semua orang lebih lama."
+      ],
+      "jenis": "etika"
+    }
+  },
+  {
+    "id": "etika-layanan-harian-002",
+    "kategori": "etika",
+    "wilayah": null,
+    "nama": "Suara di loket",
+    "tags": [
+      "etika"
+    ],
+    "teks": "Data pribadi jangan disebutkan keras-keras.",
+    "meta": {
+      "variants": [
+        "Tunggu jarak aman."
+      ],
+      "jenis": "etika"
+    }
+  },
+  {
+    "id": "etika-layanan-harian-003",
+    "kategori": "etika",
+    "wilayah": null,
+    "nama": "Petugas kasar",
+    "tags": [
+      "etika"
+    ],
+    "teks": "Tetap sopan, catat nama loket, laporkan lewat saluran resmi.",
+    "meta": {
+      "variants": [
+        "Jangan membalas dengan umpatan."
+      ],
+      "jenis": "etika"
+    }
+  }
+]
