@@ -1,0 +1,131 @@
+[
+  {
+    "id": "layanan-publik-001",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "KTP hilang",
+    "tags": [
+      "ktp",
+      "dukcapil"
+    ],
+    "teks": "Lapor hilang, siapkan dokumen pendukung, urus di dukcapil setempat.",
+    "meta": {
+      "variants": [
+        "Jangan serahkan data ke calo."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-002",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "KK salah data",
+    "tags": [
+      "kk"
+    ],
+    "teks": "Perbaiki di dukcapil dengan dokumen bukti. Jangan menumpuk urusan lain sebelum nama lurus.",
+    "meta": {
+      "variants": [
+        "Fotokopi dan asli biasanya sama-sama diminta."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-003",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Antrian online",
+    "tags": [
+      "antrian"
+    ],
+    "teks": "Ambil nomor di kanal resmi. Screenshot atau catat nomornya.",
+    "meta": {
+      "variants": [
+        "Datang sesuai jam estimasi."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-004",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Komplain instansi",
+    "tags": [
+      "pengaduan"
+    ],
+    "teks": "Sampaikan fakta singkat, minta nomor aduan, simpan bukti.",
+    "meta": {
+      "variants": [
+        "Tetap sopan meski kesal."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-005",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Bayar resmi",
+    "tags": [
+      "pembayaran"
+    ],
+    "teks": "Bayar hanya di loket atau aplikasi resmi instansi.",
+    "meta": {
+      "variants": [
+        "Kalau diminta transfer ke rekening pribadi, hentikan."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-006",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Surat RT",
+    "tags": [
+      "lingkungan"
+    ],
+    "teks": "Sebagian urusan sipil masih minta pengantar RT/RW. Cek syarat terbaru.",
+    "meta": {
+      "variants": [
+        "Jangan menunda sampai hari H."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-007",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Jam layanan",
+    "tags": [
+      "jam"
+    ],
+    "teks": "Umumnya hari kerja. Cek pengumuman resmi setempat sebelum berangkat.",
+    "meta": {
+      "variants": [
+        "Libur nasional biasanya tutup."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-publik-008",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Diwakilkan",
+    "tags": [
+      "kuasa"
+    ],
+    "teks": "Bisa jika ada surat kuasa dan KTP kedua belah pihak, sesuai aturan tempat itu.",
+    "meta": {
+      "variants": [
+        "Jangan titip ke orang tidak dikenal."
+      ],
+      "jenis": "layanan"
+    }
+  }
+]
