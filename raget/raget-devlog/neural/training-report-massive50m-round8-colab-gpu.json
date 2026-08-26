@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T01:46:28Z",
+  "generatedAt": "2026-08-26T04:57:47Z",
   "preset": "massive50m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,62 +7,187 @@
   "parameterCount": 49999872,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 7119,
-  "prevMinutes": 562.0023910363516,
-  "stepsThisSession": 45,
-  "minutesThisSession": 61.11,
-  "totalStepsAccumulated": 7164,
-  "totalMinutesAccumulated": 623.11,
+  "prevSteps": 7164,
+  "prevMinutes": 623.1082421660424,
+  "stepsThisSession": 1067,
+  "minutesThisSession": 60.03,
+  "totalStepsAccumulated": 8231,
+  "totalMinutesAccumulated": 683.14,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 251909,
-  "totalTokensSeenThisSession": 100603,
+  "trainChunksAvailable": 483426,
+  "totalTokensSeenThisSession": 2088988,
   "batchSize": 32,
   "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 81.4745,
-  "tokenPerSecAvg": 27.4,
+  "secPerStepAvg": 3.3758,
+  "tokenPerSecAvg": 580.0,
   "heldOutPerplexity": {
-    "beforeThisSession": 280.25067138671875,
-    "final": 331.9014892578125
+    "beforeThisSession": 313.42364501953125,
+    "final": 34.16561508178711
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "top adalah buku berikut: A / 2014, bermain secara resmi mendaftar selama ini.",
-      "tokensGenerated": 16,
-      "seconds": 13.0
+      "text": "top adalah buku tema yang terlestarikan bagi \u016byalica, Jao, dan Jiwa seperti oshathomageus. Cara lain yang mencakup sangkar. Emir klasik ini juga terhubung dengan alat Timhequ",
+      "tokensGenerated": 40,
+      "seconds": 0.7
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "Imtuner agoga! Cara lain yang baru wu Wudi Jing ' Kini ' Intas gol! Jadi Sudah perintah Di sini yang. petinggi ini dilaksanakan dengan igor Pintabugya",
+      "text": "Jadi untuk perintah tersebut, yang. Pada pukul 10 Agustus, Abehahan yang dia diangkat telah menyampaikan agar terima kasih. Tauna di Semarang, usianya, lalu ibu negeri ini juga melakukan kisah yang masih",
       "tokensGenerated": 40,
-      "seconds": 42.8
+      "seconds": 1.0
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": ", sebanyak 25 wedan Kakoran Uang bayi di halaman perairan dian, lalu berakhir. Baca: 12. 00 Dunia - 83 yang melibatkan semalam 2 pulau untuk meningkatkan kualitas yang cukup belum memutuskan untuk",
+      "text": "Dunia - ID untuk tokestsemalam. Karena itu, Label seperti para Winult, pihak orang lain mengadakan dokumen sains. Jprofile tradisional menjadi anggota. Kemudian tersemukan pada 5 Mei kedua cabang",
       "tokensGenerated": 40,
-      "seconds": 33.0
+      "seconds": 0.8
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "kalau aku orang lain maka ' aku \" orang Yahudi, yang menjadi bupati.",
-      "tokensGenerated": 15,
-      "seconds": 10.3
+      "text": "Semangat setempat yang telah membayangkan: \" Saya akan menunjukkan Anda. \"",
+      "tokensGenerated": 14,
+      "seconds": 0.2
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "\" Kenur Teror kedua: \" Untuk label yang pernah diterapkan di dekat panggung.",
-      "tokensGenerated": 17,
-      "seconds": 12.0
+      "text": "( yang dibangun). Di seluruh Asian for Environences. Fellow oleh Buague, Datuk Kalnis dapat dibproduspers oleh Lutrelirlet, yang bernama III sampai tahun 1733,",
+      "tokensGenerated": 40,
+      "seconds": 0.8
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 7159,
-      "loss": 5.915648937225342,
-      "elapsedSec": 3227.1
+      "step": 7204,
+      "loss": 5.88372802734375,
+      "elapsedSec": 171.9
+    },
+    {
+      "step": 7244,
+      "loss": 5.979399681091309,
+      "elapsedSec": 318.3
+    },
+    {
+      "step": 7284,
+      "loss": 5.13844108581543,
+      "elapsedSec": 460.8
+    },
+    {
+      "step": 7324,
+      "loss": 5.152634620666504,
+      "elapsedSec": 602.8
+    },
+    {
+      "step": 7364,
+      "loss": 5.338033676147461,
+      "elapsedSec": 745.6
+    },
+    {
+      "step": 7404,
+      "loss": 5.238705635070801,
+      "elapsedSec": 887.0
+    },
+    {
+      "step": 7444,
+      "loss": 5.375416278839111,
+      "elapsedSec": 1031.0
+    },
+    {
+      "step": 7484,
+      "loss": 4.665173530578613,
+      "elapsedSec": 1172.1
+    },
+    {
+      "step": 7524,
+      "loss": 4.679580211639404,
+      "elapsedSec": 1308.5
+    },
+    {
+      "step": 7564,
+      "loss": 4.828959941864014,
+      "elapsedSec": 1445.2
+    },
+    {
+      "step": 7604,
+      "loss": 5.3710036277771,
+      "elapsedSec": 1577.8
+    },
+    {
+      "step": 7644,
+      "loss": 4.991624355316162,
+      "elapsedSec": 1708.2
+    },
+    {
+      "step": 7684,
+      "loss": 4.868391036987305,
+      "elapsedSec": 1837.4
+    },
+    {
+      "step": 7724,
+      "loss": 4.611676216125488,
+      "elapsedSec": 1971.9
+    },
+    {
+      "step": 7764,
+      "loss": 4.409266948699951,
+      "elapsedSec": 2106.2
+    },
+    {
+      "step": 7804,
+      "loss": 5.368807315826416,
+      "elapsedSec": 2237.8
+    },
+    {
+      "step": 7844,
+      "loss": 4.6891913414001465,
+      "elapsedSec": 2363.4
+    },
+    {
+      "step": 7884,
+      "loss": 5.116510391235352,
+      "elapsedSec": 2495.9
+    },
+    {
+      "step": 7924,
+      "loss": 4.951948642730713,
+      "elapsedSec": 2620.8
+    },
+    {
+      "step": 7964,
+      "loss": 4.805612564086914,
+      "elapsedSec": 2744.7
+    },
+    {
+      "step": 8004,
+      "loss": 4.938515663146973,
+      "elapsedSec": 2872.4
+    },
+    {
+      "step": 8044,
+      "loss": 4.582425594329834,
+      "elapsedSec": 3004.4
+    },
+    {
+      "step": 8084,
+      "loss": 5.2185959815979,
+      "elapsedSec": 3135.7
+    },
+    {
+      "step": 8124,
+      "loss": 5.382117748260498,
+      "elapsedSec": 3267.2
+    },
+    {
+      "step": 8164,
+      "loss": 4.130917072296143,
+      "elapsedSec": 3391.4
+    },
+    {
+      "step": 8204,
+      "loss": 4.895101547241211,
+      "elapsedSec": 3515.6
     }
   ],
-  "catatanJujur": "massive50m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 45 step/61.1 menit. Total akumulasi 7164 step/623.1 menit, 0 epoch penuh dari 251909 chunk. Perplexity 280.25067138671875 -> 331.9014892578125."
+  "catatanJujur": "massive50m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 1067 step/60.0 menit. Total akumulasi 8231 step/683.1 menit, 0 epoch penuh dari 483426 chunk. Perplexity 313.42364501953125 -> 34.16561508178711."
 }
