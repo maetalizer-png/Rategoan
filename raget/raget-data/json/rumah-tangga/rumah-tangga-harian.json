@@ -1,0 +1,67 @@
+[
+  {
+    "id": "rumah-tangga-harian-001",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Gas kompor",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Cek selang dan regulator. Jika bau gas, jangan nyalakan api.",
+    "meta": {
+      "variants": [
+        "Buka jendela, matikan sumber, keluar dulu."
+      ],
+      "jenis": "rumah"
+    }
+  },
+  {
+    "id": "rumah-tangga-harian-002",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Sampah",
+    "tags": [
+      "rumah",
+      "lingkungan"
+    ],
+    "teks": "Buang di jadwal dan tempat yang ditentukan.",
+    "meta": {
+      "variants": [
+        "Jangan bakar sembarangan di gang sempit."
+      ],
+      "jenis": "rumah"
+    }
+  },
+  {
+    "id": "rumah-tangga-harian-003",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Air mati",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Cek pompa dan tetangga. Tampung air bila sering padam.",
+    "meta": {
+      "variants": [
+        "Lapor pengelola jika kawasan."
+      ],
+      "jenis": "rumah"
+    }
+  },
+  {
+    "id": "rumah-tangga-harian-004",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Tamu",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Tamu dijamu sopan. Urusan rumah jangan dibicarakan keras-keras.",
+    "meta": {
+      "variants": [
+        "Anak kecil dijaga dari dapur panas."
+      ],
+      "jenis": "rumah"
+    }
+  }
+]
