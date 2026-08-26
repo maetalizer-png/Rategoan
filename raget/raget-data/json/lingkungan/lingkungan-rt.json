@@ -1,0 +1,50 @@
+[
+  {
+    "id": "lingkungan-rt-001",
+    "kategori": "lingkungan",
+    "wilayah": null,
+    "nama": "Kerja bakti",
+    "tags": [
+      "lingkungan"
+    ],
+    "teks": "Hadir atau izin. Jangan hanya menghilang lalu komplain hasilnya.",
+    "meta": {
+      "variants": [
+        "Alat dibawa sesuai pengumuman."
+      ],
+      "jenis": "lingkungan"
+    }
+  },
+  {
+    "id": "lingkungan-rt-002",
+    "kategori": "lingkungan",
+    "wilayah": null,
+    "nama": "Kucing/anjing tetangga",
+    "tags": [
+      "lingkungan"
+    ],
+    "teks": "Sampaikan ke pemilik dulu. Jangan langsung menyebar di grup dengan marah.",
+    "meta": {
+      "variants": [
+        "Anak dijauhkan dari hewan yang tidak dikenal."
+      ],
+      "jenis": "lingkungan"
+    }
+  },
+  {
+    "id": "lingkungan-rt-003",
+    "kategori": "lingkungan",
+    "wilayah": null,
+    "nama": "Parkir di gang",
+    "tags": [
+      "lingkungan"
+    ],
+    "teks": "Jangan menutup jalan orang lain. Geser jika diminta pelan-pelan.",
+    "meta": {
+      "variants": [
+        "Gang sempit bukan parkir pribadi."
+      ],
+      "jenis": "lingkungan"
+    }
+  }
+]
