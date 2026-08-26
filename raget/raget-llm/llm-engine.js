@@ -35,6 +35,13 @@ const SMALLTALK_TRIGGERS = {
   capek: /\b(capek|lelah|ngantuk\s+berat|kehabisan\s+tenaga)\b/i,
   bosen: /\b(bosen|bosan|gabut|jenuh)\b/i,
   izin: /\bizin\s+(tidak\s+masuk|kelas|kerja)|minta\s+izin\b/i,
+  pasar: /\b(pasar|tawar|warung|dagang)\b/i,
+  transport: /\b(angkot|ojek|kereta|macet|parkir|helm|mudik)\b/i,
+  sehat: /\b(demam|pusing|obat|klinik|sakit)\b/i,
+  uang: /\b(utang|pinjam|tagihan|listrik|belanja|diskon)\b/i,
+  tetangga: /\b(tetangga|kerja\s*bakti|gang|iuran\s*rt)\b/i,
+  kerja: /\b(kantor|rapat|lembur|wfh|atasan)\b/i,
+  rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati)\b/i,
 };
 
 const SMALLTALK_FALLBACK = {
@@ -52,6 +59,13 @@ const SMALLTALK_FALLBACK = {
   capek: ['Istirahat sebentar itu sah. Lanjut kalau sudah siap.'],
   bosen: ['Ganti tugas kecil sepuluh menit, atau istirahat. Bosen itu sinyal ganti ritme.'],
   izin: ['Kabari pihak yang berwenang lebih dulu, alasan singkat, jangan di hari H tanpa kabar.'],
+  pasar: ['Tawar sopan. Kalau harga sudah pas, tidak usah dipaksa.'],
+  transport: ['Cek kendaraan dan tujuan. Jangan lawan arus. Helm atau sabuk dipakai.'],
+  sehat: ['Keluhan ringan: istirahat dan minum air. Yang memberat ke faskes. Saya bukan dokter.'],
+  uang: ['Catat pengeluaran. Jangan transfer karena diskon mendesak ke rekening tidak jelas.'],
+  tetangga: ['Sampaikan pelan dulu. Jangan langsung marah di grup RT.'],
+  kerja: ['Kabari atasan jika terlambat. Rapat: poin singkat, HP senyap.'],
+  rumah: ['Kalau bau gas: jangan nyalakan api, buka jendela, keluar dulu.'],
 };
 
 const SAPAAN_FALLBACK_TEXT = 'Halo! Ada yang bisa saya bantu?';
