@@ -1,40 +1,29 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-08-26 (setelah pembersihan data berisiko)
+Diperbarui: 2026-08-26 (pembersihan + perluasan pengetahuan)
 
-## Yang MASIH ADA (AMAN)
+## Yang aktif & AMAN
 
-### Checkpoint Neural
-| Tag | Nama | Keterangan |
-|-----|------|------------|
-| `checkpoint-100m` | 00 · Checkpoint 100M | Experimental |
-| `checkpoint-200m` | 01 · Checkpoint 200M (R10-TUTUP) | Experimental |
+### Checkpoint
+- `checkpoint-100m` — 100M experimental
+- `checkpoint-200m` — 200M R10-TUTUP experimental
 
 ### Korpus AMAN
-| Tag | Nama | Keterangan |
-|-----|------|------------|
-| `korpus-jilid-1-clean` | A1 · Korpus AMAN — Wikimedia (Jilid 1+3+4+5) | **Utama untuk training berikutnya** (CC-BY-SA) |
+- `korpus-jilid-1-clean` (**A1**) — Wikimedia CC-BY-SA (utama)
+- `raget_own_corpus.jsonl` — milik sendiri
+- `korpus-pengetahuan-bersih-v1.jsonl` — sains, sejarah, penemuan, wawasan (milik sendiri)
 
-### Raw AMAN (sumber Wikimedia)
-| Tag | Nama |
-|-----|------|
-| `J1` | R1 · RAW — Wikipedia ID (dump) |
-| `U` | R2 · RAW — Wikibooks ID |
-| `J34` | R3 · RAW — Wikisource + Wikivoyage + Wikiquote |
-| `Hhh` | R4 · RAW — Wiktionary ID |
+### RAW aman
+- `J1` Wikipedia ID, `U` Wikibooks, `J34` Wikisource/Voyage/Quote, `Hhh` Wiktionary
 
-### Data internal (di dalam repo)
-- `raget/raget-data/jsonl/raget_own_corpus.jsonl` → aman, milik sendiri
+## Domain JSON yang diperluas (rule-engine)
+- `sains/umum`, `sains/fisika-kimia`
+- `sejarah/indonesia`, `sejarah/dunia`
+- `penemuan/teknologi`, `penemuan/sains`, `penemuan/kedokteran`
+- `knowledge/wawasan` (baru)
 
-## Yang SUDAH DIHAPUS (berisiko / arsip)
-- korpus-train-balanced-v1 (berita + percakapan)
-- korpus-jilid-2-clean (HPLT/CommonCrawl)
-- data-kualitas-raget (news, opensubtitles, dll)
-- Sft (raw jilid 2)
-- korpus-raget-extra-clean
-- korpus-stok-seimbang-v2 & v3
+## Yang sudah dihapus (berisiko)
+balanced-v1, jilid-2, data-kualitas-raget, Sft, extra-clean, stok-seimbang v2/v3
 
 ## Kebijakan
-1. Training baru **hanya** memakai data berstatus AMAN + `raget_own_corpus`.
-2. Struktur aplikasi Raget (rule-engine + JSON domain) **tidak terpengaruh** penghapusan ini.
-3. Script training Colab yang masih menyebut release lama perlu di-update saat ronde berikutnya.
+Training baru **hanya** data AMAN. Lihat juga `docs/STRUKTUR-KORPUS.md`.
