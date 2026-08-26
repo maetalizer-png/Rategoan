@@ -26,3 +26,6 @@ Diperbarui: 2026-08-26 (release dirapikan — hanya yang diperlukan)
 - A2 release kosong (konten tetap di repo, sudah masuk A3)
 
 Lihat: `docs/STRUKTUR-KORPUS.md`
+
+---
+**Rujukan final (2026-08-26):** lihat `docs/STATUS-KORPUS-AMAN-RAPI.md` dan `docs/MIX-TRAINING-SEIMBANG.md`. Jangan redesign struktur.
