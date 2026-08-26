@@ -45,3 +45,6 @@ Training baru hanya boleh memakai:
 4. Release berprefix **A** berikutnya
 
 Jangan memakai sumber Common Crawl / news crawl / OpenSubtitles.
+
+---
+**Rujukan final (2026-08-26):** lihat `docs/STATUS-KORPUS-AMAN-RAPI.md` dan `docs/MIX-TRAINING-SEIMBANG.md`. Jangan redesign struktur.
