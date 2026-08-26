@@ -267,5 +267,175 @@
         "navigasi"
       ]
     }
+  },
+  {
+    "id": "sains-umum-metode-ilmiah-001",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Metode ilmiah",
+    "tags": [
+      "sains",
+      "metode"
+    ],
+    "teks": "Metode ilmiah adalah cara sistematis untuk memahami alam: observasi, merumuskan hipotesis, eksperimen, analisis data, lalu menarik kesimpulan. Hasilnya harus bisa diuji ulang oleh orang lain.",
+    "meta": {
+      "variants": [
+        "Intinya: amati, duga, uji, simpulkan.",
+        "Ilmu berkembang lewat pengujian berulang, bukan sekadar pendapat."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-hipotesis-002",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Hipotesis",
+    "tags": [
+      "sains",
+      "hipotesis"
+    ],
+    "teks": "Hipotesis adalah dugaan sementara yang bisa diuji. Kalau eksperimen mendukung, hipotesis menguat; kalau tidak, hipotesis diganti atau diperbaiki.",
+    "meta": {
+      "variants": [
+        "Hipotesis bukan kebenaran final.",
+        "Ilmuwan siap mengubah hipotesis bila data baru muncul."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-teori-003",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Teori ilmiah",
+    "tags": [
+      "sains",
+      "teori"
+    ],
+    "teks": "Teori ilmiah adalah penjelasan yang sudah didukung banyak bukti kuat, misalnya teori gravitasi atau teori evolusi. Teori bukan sekadar spekulasi.",
+    "meta": {
+      "variants": [
+        "Dalam sains, teori punya status tinggi.",
+        "Teori bisa diperbaiki, tapi jarang dibuang total begitu saja."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-energi-004",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Energi",
+    "tags": [
+      "sains",
+      "energi"
+    ],
+    "teks": "Energi adalah kemampuan melakukan usaha. Bentuknya bisa kinetik, potensial, panas, listrik, kimia, dan nuklir. Energi tidak diciptakan atau dimusnahkan, hanya berubah bentuk.",
+    "meta": {
+      "variants": [
+        "Hukum kekekalan energi: total energi dalam sistem tertutup tetap.",
+        "Energi bisa diubah, tapi tidak hilang."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-materi-005",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Materi",
+    "tags": [
+      "sains",
+      "materi"
+    ],
+    "teks": "Materi adalah segala sesuatu yang memiliki massa dan menempati ruang. Materi tersusun dari atom, dan atom tersusun dari proton, neutron, serta elektron.",
+    "meta": {
+      "variants": [
+        "Semua benda di sekitar kita adalah materi.",
+        "Perubahan kimia mengubah susunan atom, perubahan fisika tidak."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-gaya-006",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Gaya",
+    "tags": [
+      "sains",
+      "fisika"
+    ],
+    "teks": "Gaya adalah tarikan atau dorongan yang dapat mengubah gerak atau bentuk benda. Contoh: gravitasi, gesekan, magnet, dan gaya normal.",
+    "meta": {
+      "variants": [
+        "Tanpa gaya, benda diam tetap diam, benda bergerak tetap bergerak lurus beraturan.",
+        "Newton merumuskan hubungan gaya, massa, dan percepatan."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-sel-007",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Sel",
+    "tags": [
+      "sains",
+      "biologi"
+    ],
+    "teks": "Sel adalah unit dasar kehidupan. Makhluk hidup bersel satu maupun bersel banyak semuanya tersusun dari sel. Di dalam sel ada organel yang menjalankan fungsi tertentu.",
+    "meta": {
+      "variants": [
+        "Sel hewan dan tumbuhan punya perbedaan struktur.",
+        "DNA di dalam inti sel menyimpan informasi genetik."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-fotosintesis-008",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Fotosintesis",
+    "tags": [
+      "sains",
+      "biologi"
+    ],
+    "teks": "Fotosintesis adalah proses tumbuhan mengubah cahaya matahari, air, dan karbon dioksida menjadi gula dan oksigen. Proses ini terjadi di kloroplas.",
+    "meta": {
+      "variants": [
+        "Fotosintesis menghasilkan oksigen yang kita hirup.",
+        "Tanpa fotosintesis, rantai makanan di Bumi akan runtuh."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-atom-009",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Atom",
+    "tags": [
+      "sains",
+      "kimia"
+    ],
+    "teks": "Atom adalah partikel terkecil dari unsur yang masih memiliki sifat unsur tersebut. Inti atom berisi proton dan neutron, sementara elektron mengelilingi inti.",
+    "meta": {
+      "variants": [
+        "Jumlah proton menentukan jenis unsur.",
+        "Ikatan kimia terjadi karena interaksi elektron antar atom."
+      ]
+    }
+  },
+  {
+    "id": "sains-umum-sistem-surya-010",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Sistem tata surya",
+    "tags": [
+      "sains",
+      "astronomi"
+    ],
+    "teks": "Tata surya terdiri dari Matahari di pusat, delapan planet, bulan, asteroid, komet, dan benda-benda lain yang terikat gravitasi Matahari.",
+    "meta": {
+      "variants": [
+        "Bumi adalah planet ketiga dari Matahari.",
+        "Planet dalam: Merkurius, Venus, Bumi, Mars; planet luar: Jupiter, Saturnus, Uranus, Neptunus."
+      ]
+    }
   }
 ]
