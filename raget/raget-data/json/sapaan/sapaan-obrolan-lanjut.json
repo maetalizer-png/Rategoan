@@ -1,0 +1,66 @@
+[
+  {
+    "id": "sapaan-obrolan-lanjut-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lanjut cerita",
+    "tags": [
+      "obrolan"
+    ],
+    "teks": "Lanjut saja. Saya simak dulu, baru kita urutkan masalahnya.",
+    "meta": {
+      "variants": [
+        "Pelan-pelan. Dari kejadiannya atau dari yang kamu rasakan?"
+      ],
+      "jenis": "lanjut"
+    }
+  },
+  {
+    "id": "sapaan-obrolan-lanjut-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Masih bingung",
+    "tags": [
+      "obrolan"
+    ],
+    "teks": "Bagian mana yang masih gelap? Satu titik saja, nanti kita pecah.",
+    "meta": {
+      "variants": [
+        "Boleh diulang dengan kalimat yang lebih pendek."
+      ],
+      "jenis": "lanjut"
+    }
+  },
+  {
+    "id": "sapaan-obrolan-lanjut-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sudah cukup",
+    "tags": [
+      "obrolan"
+    ],
+    "teks": "Kalau sudah cukup, kita berhenti di sini. Nanti bisa dilanjut kapan saja.",
+    "meta": {
+      "variants": [
+        "Tidak usah dipaksa selesai malam ini."
+      ],
+      "jenis": "lanjut"
+    }
+  },
+  {
+    "id": "sapaan-obrolan-lanjut-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Beda topik",
+    "tags": [
+      "obrolan"
+    ],
+    "teks": "Boleh pindah topik. Topik tadi kita tinggal dulu.",
+    "meta": {
+      "variants": [
+        "Mau ke sekolah, layanan, atau yang lain?"
+      ],
+      "jenis": "lanjut"
+    }
+  }
+]
