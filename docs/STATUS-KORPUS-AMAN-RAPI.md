@@ -1,17 +1,21 @@
-# STATUS KORPUS — pasca migrasi PRD
+# STATUS KORPUS — patuh PRD §3.1 + §8
 
-Tanggal migrasi: 2026-08-26  
-Dilaksanakan Grok sesuai `PRD-DATA-RELEASE.md`.
+Tanggal perbaikan: 2026-08-26  
+Acuan: `/PRD-DATA-RELEASE.md`
 
-## Release aktif (korpus)
+## Release aktif
 
-1. **korpus-ensiklopedia-bersih** — K1
-2. **korpus-dialog-daerah-bersih** — K2  
-3. **korpus-pelengkap-bersih** — K3
+| Tag | Satu file fisik | sha256 di manifest | Status |
+|-----|-----------------|--------------------|--------|
+| `korpus-ensiklopedia-bersih` | ✅ 503.9 MB | ✅ `cc81c779...` | **PATUH** |
+| `korpus-dialog-daerah-bersih` | ✅ 67.8 MB | ✅ | **PATUH** |
+| `korpus-pelengkap-bersih` | ✅ 467.7 MB | ✅ `d4d1afa4...` | **PATUH** |
+| `checkpoint-100m` / `checkpoint-200m` | — | — | tidak diubah |
 
-## Checkpoint
-- checkpoint-100m
-- checkpoint-200m
+## Mix training
+- ensiklopedia 55–65%
+- dialog+daerah 25–35% (upsample)
+- pelengkap 5–15%
 
-## Tag lama
-A1–A17 + PACK **dihapus** setelah isinya dipindah ke 3 tag kanonik.
+## Catatan
+K1 & K3 diperbaiki dari multi-file → **satu** `.jsonl.gz` + `manifest.sha256` (wajib §3.1 + §8).
