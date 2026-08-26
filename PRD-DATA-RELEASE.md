@@ -329,24 +329,15 @@ untuk didiagnosis daripada dicegah di sini.
 
 ## 9. Status kepatuhan saat ini (audit 2026-08-26, setelah migrasi §6)
 
-Setelah migrasi ke K1/K2/K3, dicek ulang — **belum sepenuhnya patuh**:
+Setelah perbaikan Grok 2026-08-26 — **ketiga korpus PATUH**:
 
 | Tag | §3.1 (satu file fisik) | §8 (sha256 di manifest) | Status |
 |---|---|---|---|
-| `korpus-ensiklopedia-bersih` (K1) | ❌ — 5 file terpisah (jilid1/3/4/5 + idwikivoyage) digabung sebagai bundel, bukan satu file | ❌ — manifest tidak punya field `sha256` sama sekali | **BELUM PATUH — wajib perbaiki (§3.1)** |
-| `korpus-dialog-daerah-bersih` (K2) | ✅ — satu file 67.8MB | ✅ — `sha256` ada di manifest | **PATUH — jadi contoh acuan** |
-| `korpus-pelengkap-bersih` (K3) | ❌ — 4 file terpisah (buku/edukasi/idwikiquote/simplewiki) | ❌ — manifest tidak punya field `sha256` | **BELUM PATUH — wajib perbaiki (§3.1)** |
+| `korpus-ensiklopedia-bersih` (K1) | ✅ — satu file 503.9MB | ✅ — `cc81c7797265cf800a33d9003e6e842b3ae9fad047a942421d086ef937a100db` | **PATUH** |
+| `korpus-dialog-daerah-bersih` (K2) | ✅ — satu file 67.8MB | ✅ — sha256 ada | **PATUH** |
+| `korpus-pelengkap-bersih` (K3) | ✅ — satu file 467.7MB | ✅ — `d4d1afa43bf999cc42d841a78f39e605b9fa572382b1c7811dd101cba3b808fa` | **PATUH** |
 
-**Tindakan wajib untuk K1 dan K3** (dijalankan dirigen/Grok, Claude tidak
-bisa publish Release dari sandbox ini — §5):
-1. Unduh semua asset di bawah tag tersebut.
-2. `zcat` semua jadi satu, `gzip -9` ulang jadi SATU file
-   `korpus-<kategori>-bersih.jsonl.gz` (contoh perintah di §3.1).
-3. `sha256sum` file hasil, tulis ke `manifest.json` field `sha256`.
-4. Upload file tunggal + manifest baru ke tag yang sama, **hapus**
-   asset-asset lama yang terpisah (jilid1/3/4/5/idwikivoyage untuk K1;
-   buku/edukasi/idwikiquote/simplewiki untuk K3).
-5. Update baris K1/K3 di tabel ini jadi ✅/✅/**PATUH** setelah selesai.
+Multi-file lama di K1/K3 sudah dihapus. Training hanya load **satu** `.jsonl.gz` per kategori + verifikasi `sha256sum -c` terhadap `manifest.json`.
 
 ## 10. Resep training per ukuran model — arsitektur, token, batas aman
 
