@@ -1,0 +1,83 @@
+[
+  {
+    "id": "kesehatan-harian-001",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Demam",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Istirahat, minum air, kompres bila perlu. Kalau memberat atau berhari-hari, ke faskes.",
+    "meta": {
+      "variants": [
+        "Saya bukan dokter."
+      ],
+      "jenis": "kesehatan"
+    }
+  },
+  {
+    "id": "kesehatan-harian-002",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Obat warung",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Baca aturan pakai. Jangan dobel dosis.",
+    "meta": {
+      "variants": [
+        "Untuk anak, tanya tenaga kesehatan."
+      ],
+      "jenis": "kesehatan"
+    }
+  },
+  {
+    "id": "kesehatan-harian-003",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Luka kecil",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Cuci bersih, tutup bila perlu. Kalau dalam atau kotor, periksa.",
+    "meta": {
+      "variants": [
+        "Jangan dioles sembarang ramuan."
+      ],
+      "jenis": "kesehatan"
+    }
+  },
+  {
+    "id": "kesehatan-harian-004",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Mata capek layar",
+    "tags": [
+      "kesehatan",
+      "digital"
+    ],
+    "teks": "Istirahat lihat jauh setiap 20 menit.",
+    "meta": {
+      "variants": [
+        "Redupkan layar malam hari."
+      ],
+      "jenis": "kesehatan"
+    }
+  },
+  {
+    "id": "kesehatan-harian-005",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Olahraga pemula",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Mulai jalan kaki rutin sebelum program berat.",
+    "meta": {
+      "variants": [
+        "Berhenti jika nyeri tajam."
+      ],
+      "jenis": "kesehatan"
+    }
+  }
+]
