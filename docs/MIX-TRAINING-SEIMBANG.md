@@ -1,20 +1,19 @@
-# MIX TRAINING RESMI — Seimbang & Bersih (FINAL)
+# MIX TRAINING — mengikuti PRD-DATA-RELEASE.md
 
-Diperbarui: 2026-08-26  
-Struktur **dikunci**.
+**Acuan mengikat:** `/PRD-DATA-RELEASE.md` di root repo.
 
-## Hanya 3 sumber load
+## Hanya 3 korpus + checkpoint
 
-| Porsi | Sumber | Tag Release |
-|-------|--------|-------------|
-| 50–55% | Ensiklopedia ID | **A1** `korpus-jilid-1-clean` |
-| 30–35% | Dialog + daerah (upsample) | **PACK** `korpus-dialog-daerah-pack-v1` |
-| 10–15% | Pelengkap | **A17** `korpus-simplewiki-bersih-v1` **atau** **A5** `korpus-wiki-lokal-bersih-v1` |
+| Porsi | Tag Release |
+|-------|-------------|
+| 55–65% | `korpus-ensiklopedia-bersih` |
+| 25–35% | `korpus-dialog-daerah-bersih` (upsample) |
+| 5–15% | `korpus-pelengkap-bersih` |
+
+Checkpoint: `checkpoint-100m`, `checkpoint-200m` (tidak diubah).
 
 ## Dilarang
-- A14, A15 bareng A1 (overlap)
-- balanced-v1, jilid-2, news, opensubtitles
-- Load file kecil A3/A9/A10… satu-satu (sudah digabung di PACK)
+balanced-v1, jilid-2, news, opensubtitles, tag A1–A17 lama (sudah di-retire 2026-08-26).
 
 ## Training
-50M → 100M → 200M, satu model per sesi, 60 menit.
+50M → 100M → 200M sekuensial, 60 menit/model.
