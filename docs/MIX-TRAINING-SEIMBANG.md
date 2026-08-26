@@ -1,32 +1,20 @@
-# MIX TRAINING RESMI — Seimbang & Bersih
+# MIX TRAINING RESMI — Seimbang & Bersih (FINAL)
 
 Diperbarui: 2026-08-26  
-Wajib dipatuhi setiap sesi training Claude.
+Struktur **dikunci**.
 
-## Prinsip
-1. Semua data **bersih** (hanya A-series aman)
-2. Campuran **seimbang** menurut rasio di bawah
-3. **1 model per sesi** (50M → 100M → 200M)
+## Hanya 3 sumber load
 
-## Rasio target (token efektif saat training)
-
-| Komponen | % | Sumber | Cara load |
-|----------|---|--------|-----------|
-| Ensiklopedia ID | 50–55% | **A1 saja** | normal |
-| Dialog / sapaan / Q&A | 20–25% | **A3 + A3v2** | **UPSAMPLE** (ulang sampai porsi tercapai) |
-| Daerah ID | 10–15% | A5 + A9 + A13 + A16 | normal |
-| Pelengkap | 10–15% | **satu** dari: A17 atau A8 | normal |
+| Porsi | Sumber | Tag Release |
+|-------|--------|-------------|
+| 50–55% | Ensiklopedia ID | **A1** `korpus-jilid-1-clean` |
+| 30–35% | Dialog + daerah (upsample) | **PACK** `korpus-dialog-daerah-pack-v1` |
+| 10–15% | Pelengkap | **A17** `korpus-simplewiki-bersih-v1` **atau** **A5** `korpus-wiki-lokal-bersih-v1` |
 
 ## Dilarang
+- A14, A15 bareng A1 (overlap)
 - balanced-v1, jilid-2, news, opensubtitles
-- A14 + A15 bersama A1 (overlap Wikipedia ID)
-- Parallel 3 model
+- Load file kecil A3/A9/A10… satu-satu (sudah digabung di PACK)
 
-## Catatan penting
-Volume dialog mentah masih lebih kecil dari A1.  
-**Keseimbangan dicapai dengan upsample A3/A3v2**, bukan hanya menumpuk file Wikipedia.
-
-## Urutan sesi
-1. 50M · 60 menit · mix di atas
-2. 100M · 60 menit · mix sama
-3. 200M · 60 menit · mix sama · batch 16 (turun ke 8 jika OOM)
+## Training
+50M → 100M → 200M, satu model per sesi, 60 menit.
