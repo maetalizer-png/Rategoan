@@ -1,0 +1,82 @@
+[
+  {
+    "id": "transportasi-harian-001",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Angkot/bus",
+    "tags": [
+      "transportasi"
+    ],
+    "teks": "Siapkan uang pas. Turun di halte atau tempat yang wajar.",
+    "meta": {
+      "variants": [
+        "Jangan berdiri di tangga."
+      ],
+      "jenis": "transportasi"
+    }
+  },
+  {
+    "id": "transportasi-harian-002",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Ojek online",
+    "tags": [
+      "transportasi"
+    ],
+    "teks": "Cek plat dan nama driver sesuai aplikasi.",
+    "meta": {
+      "variants": [
+        "Jangan bayar di luar aplikasi kalau pesannya lewat aplikasi."
+      ],
+      "jenis": "transportasi"
+    }
+  },
+  {
+    "id": "transportasi-harian-003",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Kereta",
+    "tags": [
+      "transportasi"
+    ],
+    "teks": "Datang lebih awal. Tiket dan identitas siap.",
+    "meta": {
+      "variants": [
+        "Jangan duduk di kursi prioritas jika tidak berhak."
+      ],
+      "jenis": "transportasi"
+    }
+  },
+  {
+    "id": "transportasi-harian-004",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Motor malam",
+    "tags": [
+      "transportasi"
+    ],
+    "teks": "Lampu nyala, pelan di tikungan. Jangan lawan arus.",
+    "meta": {
+      "variants": [
+        "Helm bukan hiasan."
+      ],
+      "jenis": "transportasi"
+    }
+  },
+  {
+    "id": "transportasi-harian-005",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Parkir",
+    "tags": [
+      "transportasi"
+    ],
+    "teks": "Parkir di tempat resmi. Simpan karcis.",
+    "meta": {
+      "variants": [
+        "Kalau tarif aneh, tanya petugas beridentitas."
+      ],
+      "jenis": "transportasi"
+    }
+  }
+]
