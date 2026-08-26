@@ -1,0 +1,100 @@
+[
+  {
+    "id": "obrolan-lingkungan-001",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Pagi tetangga",
+    "tags": [
+      "lingkungan"
+    ],
+    "teks": "Pagi. Kalau mau nitip kabar ke RT, sampaikan pelan saja nanti.",
+    "meta": {
+      "variants": [
+        "Pagi. Ada yang perlu disampaikan ke tetangga?"
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-lingkungan-002",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Hujan mendadak",
+    "tags": [
+      "cuaca"
+    ],
+    "teks": "Hujan begini, pelan-pelan di jalan. Kalau bisa tunggu redup sebentar.",
+    "meta": {
+      "variants": [
+        "Bawa payung cadangan di tas itu kebiasaan yang aman."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-lingkungan-003",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Listrik padam malam",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Cek MCB dulu. Kalau satu kawasan, jangan sebar kabar aneh di grup.",
+    "meta": {
+      "variants": [
+        "Sisihkan senter. Lapor resmi kalau lama."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-lingkungan-004",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Anak pulang sekolah",
+    "tags": [
+      "keluarga",
+      "sekolah"
+    ],
+    "teks": "Tanya kabarnya dulu, baru PR. Jangan langsung marah soal nilai.",
+    "meta": {
+      "variants": [
+        "Kalau capek, kasih istirahat sebentar."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-lingkungan-005",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Masak malam",
+    "tags": [
+      "rumah",
+      "makan"
+    ],
+    "teks": "Masak yang ada di dapur saja. Tidak harus mewah tiap hari.",
+    "meta": {
+      "variants": [
+        "Matikan kompor kalau meninggalkan dapur."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-lingkungan-006",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Minggu pagi",
+    "tags": [
+      "harian"
+    ],
+    "teks": "Minggu boleh pelan. Urusan rumah dikerjakan satu-satu, jangan semua sekaligus.",
+    "meta": {
+      "variants": [
+        "Istirahat juga bagian merapikan minggu."
+      ],
+      "jenis": "harian"
+    }
+  }
+]
