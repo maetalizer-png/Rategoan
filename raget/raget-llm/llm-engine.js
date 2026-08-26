@@ -29,6 +29,12 @@ const SMALLTALK_TRIGGERS = {
   bantu: /\b(tolong|bisa)\s+(bantu|bantuan)\b|\bbantu(in|kan)?\s+(saya|aku)\b|\bbutuh\s+bantuan\b|\bbantuan\s+(dong|ya)\b/i,
   maaf: /^(maaf|sorry)\b|\bmaaf(kan)?\s+(ya|dong)/i,
   lagi_apa: /\b(lagi\s+apa|ngapain\s+(kamu|sekarang)|kamu\s+lagi\s+(apa|ngapain))\b/i,
+  sekolah: /\b(sekolah|kelas|ulangan|pr\b|pelajaran|mapel|guru|wali\s*kelas|osis)\b/i,
+  tugas: /\b(tugas|deadline|makalah|presentasi|pekerjaan\s+rumah)\b/i,
+  layanan: /\b(layanan|loket|antr[ie]|berkas|ktp|pengaduan|komplain|dukcapil)\b/i,
+  capek: /\b(capek|lelah|ngantuk\s+berat|kehabisan\s+tenaga)\b/i,
+  bosen: /\b(bosen|bosan|gabut|jenuh)\b/i,
+  izin: /\bizin\s+(tidak\s+masuk|kelas|kerja)|minta\s+izin\b/i,
 };
 
 const SMALLTALK_FALLBACK = {
@@ -40,6 +46,12 @@ const SMALLTALK_FALLBACK = {
   bantu: ['Siap, saya bantu. Ceritakan singkat keperluannya.'],
   maaf: ['Tidak apa-apa. Lanjut saja, saya masih di sini.'],
   lagi_apa: ['Saya di sini, siap ngobrol atau bantu urusan. Kamu sendiri lagi ngapain?'],
+  sekolah: ['Silakan. PR, ulangan, atau izin kelas — pecah dulu jadi satu langkah.'],
+  tugas: ['Sebut jenis tugas dan tenggatnya. Nanti kita pecah langkahnya.'],
+  layanan: ['Sampaikan jenis layanan dan kendalanya. Antre wajar, bayar hanya di kanal resmi.'],
+  capek: ['Istirahat sebentar itu sah. Lanjut kalau sudah siap.'],
+  bosen: ['Ganti tugas kecil sepuluh menit, atau istirahat. Bosen itu sinyal ganti ritme.'],
+  izin: ['Kabari pihak yang berwenang lebih dulu, alasan singkat, jangan di hari H tanpa kabar.'],
 };
 
 const SAPAAN_FALLBACK_TEXT = 'Halo! Ada yang bisa saya bantu?';
