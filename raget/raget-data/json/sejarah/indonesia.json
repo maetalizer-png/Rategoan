@@ -458,5 +458,113 @@
         "asean"
       ]
     }
+  },
+  {
+    "id": "sejarah-id-kerajaan-001",
+    "kategori": "sejarah",
+    "wilayah": "indonesia",
+    "nama": "Kerajaan Hindu-Buddha",
+    "tags": [
+      "sejarah",
+      "indonesia",
+      "kerajaan"
+    ],
+    "teks": "Sebelum Islam menyebar luas, di Nusantara berkembang kerajaan Hindu-Buddha seperti Kutai, Tarumanegara, Sriwijaya, dan Majapahit. Mereka meninggalkan candi, prasasti, dan sistem pemerintahan.",
+    "meta": {
+      "variants": [
+        "Sriwijaya kuat di bidang maritim.",
+        "Majapahit sering disebut puncak kejayaan Hindu-Buddha di Jawa."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-id-majapahit-002",
+    "kategori": "sejarah",
+    "wilayah": "indonesia",
+    "nama": "Majapahit",
+    "tags": [
+      "sejarah",
+      "indonesia",
+      "majapahit"
+    ],
+    "teks": "Majapahit adalah kerajaan besar di Jawa Timur yang mencapai puncak pada abad ke-14 di bawah Hayam Wuruk dan Patih Gajah Mada. Sumpah Palapa menjadi salah satu kisah terkenalnya.",
+    "meta": {
+      "variants": [
+        "Gajah Mada ingin menyatukan Nusantara.",
+        "Majapahit berpengaruh sampai ke luar Jawa."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-id-islam-003",
+    "kategori": "sejarah",
+    "wilayah": "indonesia",
+    "nama": "Masuknya Islam",
+    "tags": [
+      "sejarah",
+      "indonesia",
+      "islam"
+    ],
+    "teks": "Islam masuk ke Nusantara melalui jalur perdagangan, terutama di pesisir. Kerajaan-kerajaan Islam seperti Samudera Pasai, Demak, dan Mataram Islam kemudian berkembang.",
+    "meta": {
+      "variants": [
+        "Pedagang Muslim berperan besar dalam penyebaran Islam.",
+        "Wali Songo penting dalam sejarah Islam di Jawa."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-id-kolonial-004",
+    "kategori": "sejarah",
+    "wilayah": "indonesia",
+    "nama": "Masa kolonial",
+    "tags": [
+      "sejarah",
+      "indonesia",
+      "kolonial"
+    ],
+    "teks": "Bangsa Eropa datang ke Nusantara untuk rempah-rempah. VOC lalu pemerintah Belanda menguasai banyak wilayah dalam waktu lama, menimbulkan perlawanan di berbagai daerah.",
+    "meta": {
+      "variants": [
+        "VOC adalah perusahaan dagang Belanda yang sangat berkuasa.",
+        "Perlawanan rakyat muncul di banyak wilayah."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-id-kemerdekaan-005",
+    "kategori": "sejarah",
+    "wilayah": "indonesia",
+    "nama": "Proklamasi Kemerdekaan",
+    "tags": [
+      "sejarah",
+      "indonesia",
+      "kemerdekaan"
+    ],
+    "teks": "Indonesia memproklamasikan kemerdekaan pada 17 Agustus 1945. Soekarno dan Hatta membacakan teks proklamasi. Setelah itu masih ada perjuangan mempertahankan kemerdekaan.",
+    "meta": {
+      "variants": [
+        "Proklamasi dibacakan di Jakarta.",
+        "Hari Kemerdekaan diperingati setiap 17 Agustus."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-id-reformasi-006",
+    "kategori": "sejarah",
+    "wilayah": "indonesia",
+    "nama": "Reformasi",
+    "tags": [
+      "sejarah",
+      "indonesia",
+      "reformasi"
+    ],
+    "teks": "Reformasi 1998 menandai berakhirnya Orde Baru. Setelah itu Indonesia memasuki era demokrasi dengan pemilihan umum yang lebih terbuka dan kebebasan pers yang lebih luas.",
+    "meta": {
+      "variants": [
+        "Reformasi membawa perubahan politik besar.",
+        "Desentralisasi dan otonomi daerah berkembang setelah Reformasi."
+      ]
+    }
   }
 ]
