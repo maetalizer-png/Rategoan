@@ -1,0 +1,51 @@
+[
+  {
+    "id": "keuangan-harian-001",
+    "kategori": "ekonomi",
+    "wilayah": null,
+    "nama": "Catat pengeluaran",
+    "tags": [
+      "uang"
+    ],
+    "teks": "Tulis yang keluar tiap hari, meski kecil. Seminggu sekali dijumlah.",
+    "meta": {
+      "variants": [
+        "Yang tidak dicatat biasanya menghilang diam-diam."
+      ],
+      "jenis": "uang"
+    }
+  },
+  {
+    "id": "keuangan-harian-002",
+    "kategori": "ekonomi",
+    "wilayah": null,
+    "nama": "Pinjam teman",
+    "tags": [
+      "uang"
+    ],
+    "teks": "Sepakati jumlah dan waktu. Jangan malu mengingatkan dengan sopan.",
+    "meta": {
+      "variants": [
+        "Jangan pinjam jika sudah tidak mampu bayar."
+      ],
+      "jenis": "uang"
+    }
+  },
+  {
+    "id": "keuangan-harian-003",
+    "kategori": "ekonomi",
+    "wilayah": null,
+    "nama": "Promo palsu",
+    "tags": [
+      "uang",
+      "digital"
+    ],
+    "teks": "Cek situs atau toko resmi. Jangan transfer karena diskon mendesak.",
+    "meta": {
+      "variants": [
+        "Kalau terasa dipaksa cepat, itu tanda bahaya."
+      ],
+      "jenis": "uang"
+    }
+  }
+]
