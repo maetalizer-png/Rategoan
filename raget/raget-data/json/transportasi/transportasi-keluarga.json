@@ -1,0 +1,50 @@
+[
+  {
+    "id": "transportasi-keluarga-001",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Antar sekolah",
+    "tags": [
+      "perjalanan"
+    ],
+    "teks": "Berangkat lebih awal di jam sibuk. Turunkan di tempat aman, bukan di tengah jalan.",
+    "meta": {
+      "variants": [
+        "Sabuk atau helm anak jangan ditawar."
+      ],
+      "jenis": "transportasi"
+    }
+  },
+  {
+    "id": "transportasi-keluarga-002",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Mudik",
+    "tags": [
+      "perjalanan"
+    ],
+    "teks": "Istirahat di rest area. Jangan dipaksa nyetir mengantuk.",
+    "meta": {
+      "variants": [
+        "Cek rem dan ban sebelum jauh."
+      ],
+      "jenis": "transportasi"
+    }
+  },
+  {
+    "id": "transportasi-keluarga-003",
+    "kategori": "transportasi",
+    "wilayah": null,
+    "nama": "Naik kapal/ferry",
+    "tags": [
+      "perjalanan"
+    ],
+    "teks": "Ikuti petugas. Anak selalu dalam pandangan.",
+    "meta": {
+      "variants": [
+        "Jaket pelampung bukan untuk mainan."
+      ],
+      "jenis": "transportasi"
+    }
+  }
+]
