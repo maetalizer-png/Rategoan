@@ -1,0 +1,52 @@
+[
+  {
+    "id": "rumah-uang-dapur-001",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Belanja dapur",
+    "tags": [
+      "rumah",
+      "uang"
+    ],
+    "teks": "Tulis kebutuhan dulu. Jangan isi keranjang karena diskon saja.",
+    "meta": {
+      "variants": [
+        "Sisa masakan kemarin boleh dimasak ulang."
+      ],
+      "jenis": "rumah"
+    }
+  },
+  {
+    "id": "rumah-uang-dapur-002",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Rekening listrik",
+    "tags": [
+      "rumah",
+      "uang"
+    ],
+    "teks": "Bayar sebelum tanggal putus. Catat meteran jika aneh.",
+    "meta": {
+      "variants": [
+        "Lapor resmi kalau tagihan melonjak tanpa sebab."
+      ],
+      "jenis": "rumah"
+    }
+  },
+  {
+    "id": "rumah-uang-dapur-003",
+    "kategori": "rumah-tangga",
+    "wilayah": null,
+    "nama": "Titip anak ke saudara",
+    "tags": [
+      "keluarga"
+    ],
+    "teks": "Sampaikan jam jemput dan pantangan makanan. Jangan menghilang tanpa kabar.",
+    "meta": {
+      "variants": [
+        "Ucapkan terima kasih, bukan hanya titip."
+      ],
+      "jenis": "rumah"
+    }
+  }
+]
