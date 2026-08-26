@@ -273,5 +273,143 @@
         "fusi"
       ]
     }
+  },
+  {
+    "id": "sains-fisika-gravitasi-001",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Gravitasi",
+    "tags": [
+      "sains",
+      "fisika",
+      "gravitasi"
+    ],
+    "teks": "Gravitasi adalah gaya tarik-menarik antar benda yang memiliki massa. Semakin besar massa dan semakin dekat jaraknya, semakin kuat gaya gravitasinya.",
+    "meta": {
+      "variants": [
+        "Gravitasi membuat benda jatuh ke Bumi.",
+        "Newton dan Einstein menjelaskan gravitasi dengan cara berbeda, tapi keduanya sangat berpengaruh."
+      ]
+    }
+  },
+  {
+    "id": "sains-fisika-listrik-002",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Listrik",
+    "tags": [
+      "sains",
+      "fisika",
+      "listrik"
+    ],
+    "teks": "Listrik berkaitan dengan muatan listrik dan alirannya. Arus listrik adalah aliran elektron. Satuan arus adalah ampere, tegangan volt, dan hambatan ohm.",
+    "meta": {
+      "variants": [
+        "Listrik bisa berbahaya jika tidak hati-hati.",
+        "Generator mengubah energi gerak menjadi energi listrik."
+      ]
+    }
+  },
+  {
+    "id": "sains-fisika-gelombang-003",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Gelombang",
+    "tags": [
+      "sains",
+      "fisika"
+    ],
+    "teks": "Gelombang adalah getaran yang merambat. Ada gelombang mekanik (perlu medium) seperti suara, dan gelombang elektromagnetik (tidak perlu medium) seperti cahaya dan radio.",
+    "meta": {
+      "variants": [
+        "Frekuensi menentukan tinggi rendahnya nada suara.",
+        "Cahaya adalah gelombang elektromagnetik yang bisa dilihat mata."
+      ]
+    }
+  },
+  {
+    "id": "sains-fisika-kalor-004",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Kalor dan suhu",
+    "tags": [
+      "sains",
+      "fisika"
+    ],
+    "teks": "Suhu mengukur seberapa panas suatu benda. Kalor adalah energi panas yang berpindah karena perbedaan suhu. Perpindahan kalor bisa lewat konduksi, konveksi, atau radiasi.",
+    "meta": {
+      "variants": [
+        "Logam biasanya konduktor panas yang baik.",
+        "Radiasi bisa terjadi di ruang hampa, contohnya panas Matahari."
+      ]
+    }
+  },
+  {
+    "id": "sains-kimia-reaksi-005",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Reaksi kimia",
+    "tags": [
+      "sains",
+      "kimia"
+    ],
+    "teks": "Reaksi kimia terjadi saat zat berubah menjadi zat baru. Ciri umum: perubahan warna, suhu, gas, atau endapan. Persamaan reaksi menyeimbangkan jumlah atom di kiri dan kanan.",
+    "meta": {
+      "variants": [
+        "Reaksi eksoterm melepaskan panas, endoterm menyerap panas.",
+        "Katalis mempercepat reaksi tanpa ikut habis."
+      ]
+    }
+  },
+  {
+    "id": "sains-kimia-ph-006",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Asam dan basa",
+    "tags": [
+      "sains",
+      "kimia"
+    ],
+    "teks": "Asam memiliki pH di bawah 7, basa di atas 7, dan netral tepat 7. Asam rasanya masam, basa terasa licin. Indikator seperti lakmus membantu mengenalinya.",
+    "meta": {
+      "variants": [
+        "Air murni bersifat netral.",
+        "Asam kuat dan basa kuat bersifat korosif."
+      ]
+    }
+  },
+  {
+    "id": "sains-biologi-ekosistem-007",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Ekosistem",
+    "tags": [
+      "sains",
+      "biologi"
+    ],
+    "teks": "Ekosistem adalah hubungan antara makhluk hidup dan lingkungannya. Ada produsen, konsumen, dan pengurai. Keseimbangan ekosistem penting agar kehidupan berkelanjutan.",
+    "meta": {
+      "variants": [
+        "Rantai makanan menunjukkan aliran energi.",
+        "Kerusakan satu bagian bisa memengaruhi keseluruhan ekosistem."
+      ]
+    }
+  },
+  {
+    "id": "sains-biologi-genetika-008",
+    "kategori": "sains",
+    "wilayah": null,
+    "nama": "Genetika dasar",
+    "tags": [
+      "sains",
+      "biologi"
+    ],
+    "teks": "Genetika mempelajari pewarisan sifat. DNA membawa informasi genetik. Sifat bisa menurun dari induk ke keturunan melalui gen.",
+    "meta": {
+      "variants": [
+        "Mutasi adalah perubahan pada materi genetik.",
+        "Persilangan membantu memahami pola pewarisan sifat."
+      ]
+    }
   }
 ]
