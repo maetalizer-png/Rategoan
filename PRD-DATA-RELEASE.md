@@ -103,6 +103,38 @@ Release boleh sampai ~2GB per file. Jangan pecah korpus jadi part
 95MB kalau tujuannya Release, itu cuma bikin part berlebihan tanpa
 alasan (lihat masalah §0).
 
+### 3.1 SATU FILE FISIK per kategori — ini bukan pilihan, ini wajib
+
+Klarifikasi tegas karena sempat disalahpahami: "boleh Release tersendiri"
+di tabel di atas berarti **satu file `.jsonl.gz`**, BUKAN "boleh beberapa
+file digabung jadi satu Release asal semua sudah lolos 20MB masing-masing".
+
+**Dilarang keras:** menaruh 2+ file `.jsonl.gz` sumber-terpisah (mis.
+`<tag>.jilid1.jsonl.gz`, `<tag>.jilid3.jsonl.gz`, `<tag>.buku.jsonl.gz`,
+dst) sebagai asset-asset lepas di bawah satu tag dan menyebutnya
+"kanonik". Itu bukan "digabung" — itu cuma dipindah-taruh di folder yang
+sama. Loader/training tetap harus tahu ada berapa file dan mana urutan
+mana, persis masalah fragmentasi yang PRD ini dibuat untuk membereskan.
+
+**Satu-satunya pengecualian yang sah**: split XL (§3, tier XL) — dan itu
+HARUS berupa part **berurutan dari satu file yang sama** (`partNN`,
+hasil `split` biner atas satu `.jsonl.gz` utuh), bukan gabungan beberapa
+sumber berbeda yang kebetulan ditaruh bersebelahan. Beda mendasar: part
+XL direkonstruksi dengan `cat part00 part01 ... > file.jsonl.gz` dan
+hasilnya **wajib** cocok satu SHA256 yang tercatat di manifest (§9).
+Bundel multi-sumber tidak punya sha256 tunggal untuk dicocokkan — itu
+tandanya itu bukan pola part yang sah.
+
+**Cara benar menggabungkan banyak sumber jadi satu kategori:**
+
+```bash
+# semua sumber dalam kategori sama, sudah dalam format {"text":...} per baris
+zcat sumber1.jsonl.gz sumber2.jsonl.gz sumber3.jsonl.gz | gzip -9 > korpus-<kategori>-bersih.jsonl.gz
+sha256sum korpus-<kategori>-bersih.jsonl.gz   # simpan hasilnya ke manifest field "sha256"
+```
+
+Hasilnya **satu file**, satu SHA256, satu baris di tabel §6. Titik.
+
 ## 4. Rumus campuran training (mix ratio)
 
 Target resmi (generalisasi dari `docs/MIX-TRAINING-SEIMBANG.md`, berlaku
@@ -239,7 +271,84 @@ Setiap Release korpus **wajib** punya `manifest.json` dengan field ini
 }
 ```
 
-## 8. Yang TIDAK berubah
+## 8. SEGEL SHA256 — verifikasi wajib, bukan opsional
+
+Field `sha256` di manifest (§7) bukan sekadar metadata dokumentasi — ia
+adalah **gerbang go/no-go**. Prinsipnya:
+
+```
+File apa pun → SHA256 → string 64 karakter tetap
+File sama       = sidik jari sama, selamanya
+Ubah 1 byte saja = sidik jari beda TOTAL
+```
+
+Artinya SHA256 mendeteksi korup, kepotong, ketukar, atau gagal unduh —
+hal yang tidak bisa dideteksi cuma dari ukuran file (ukuran bisa
+kebetulan sama padahal isi beda/rusak).
+
+### Tiga gerbang wajib verifikasi
+
+**Gerbang 1 — saat publish (penulis/dirigen/Grok).**
+Setelah file final (§3.1, satu file) selesai dibuat, WAJIB:
+```bash
+sha256sum korpus-<kategori>-bersih.jsonl.gz
+```
+Hasilnya ditulis ke `manifest.json` field `sha256` SEBELUM upload. File
+tanpa `sha256` di manifest **tidak dianggap selesai** — ini pelanggaran
+langsung terhadap PRD, bukan kelalaian minor.
+
+**Gerbang 2 — saat reassembly part (khusus tier XL, §3).**
+```bash
+cat korpus-<kategori>-bersih.jsonl.gz.part00 \
+    korpus-<kategori>-bersih.jsonl.gz.part01 \
+    ... > korpus-<kategori>-bersih.jsonl.gz
+sha256sum korpus-<kategori>-bersih.jsonl.gz
+# WAJIB cocok dengan manifest.sha256 (file utuh), bukan cuma sha256 tiap part
+```
+Kalau tidak cocok: **berhenti, jangan lanjut ke tokenisasi/training.**
+Unduh ulang dari awal, atau kalau tetap gagal, laporkan ke dirigen —
+jangan dipaksa dipakai "kira-kira sama".
+
+**Gerbang 3 — sebelum training dimulai (siapa pun yang load korpus).**
+Setelah unduh (dan reassembly bila perlu), sebelum file masuk ke
+`tokenize-chunk-corpus.py` atau skrip training manapun:
+```bash
+echo "<sha256_dari_manifest>  korpus-<kategori>-bersih.jsonl.gz" | sha256sum -c -
+```
+Keluaran harus `OK`. Kalau `FAILED` → **jangan training pakai file itu**.
+Ini satu baris, murah, dan mencegah menghabiskan puluhan menit CPU
+melatih model di atas data yang diam-diam rusak/tertukar — kesalahan
+yang baru ketahuan dari kualitas output yang aneh, jauh lebih mahal
+untuk didiagnosis daripada dicegah di sini.
+
+### Ringkasan aturan
+- **Segel utuh** (SHA256 cocok) = isi tidak ada yang tersentuh, aman dipakai.
+- **Segel beda** (SHA256 tidak cocok) = isi tertukar/rusak/korup → **berhenti**, jangan dipakai, jangan "coba saja".
+- Setiap Release korpus (K1/K2/K3, dan kategori baru ke depan) **wajib** punya `sha256` di `manifest.json` — tidak terkecuali, tidak "nanti saja".
+- SHA256 dihitung dari file **gzip final** yang benar-benar diupload — bukan dari file mentah sebelum kompresi (kompresi ulang dengan level berbeda menghasilkan byte berbeda meski isi teksnya identik).
+
+## 9. Status kepatuhan saat ini (audit 2026-08-26, setelah migrasi §6)
+
+Setelah migrasi ke K1/K2/K3, dicek ulang — **belum sepenuhnya patuh**:
+
+| Tag | §3.1 (satu file fisik) | §8 (sha256 di manifest) | Status |
+|---|---|---|---|
+| `korpus-ensiklopedia-bersih` (K1) | ❌ — 5 file terpisah (jilid1/3/4/5 + idwikivoyage) digabung sebagai bundel, bukan satu file | ❌ — manifest tidak punya field `sha256` sama sekali | **BELUM PATUH — wajib perbaiki (§3.1)** |
+| `korpus-dialog-daerah-bersih` (K2) | ✅ — satu file 67.8MB | ✅ — `sha256` ada di manifest | **PATUH — jadi contoh acuan** |
+| `korpus-pelengkap-bersih` (K3) | ❌ — 4 file terpisah (buku/edukasi/idwikiquote/simplewiki) | ❌ — manifest tidak punya field `sha256` | **BELUM PATUH — wajib perbaiki (§3.1)** |
+
+**Tindakan wajib untuk K1 dan K3** (dijalankan dirigen/Grok, Claude tidak
+bisa publish Release dari sandbox ini — §5):
+1. Unduh semua asset di bawah tag tersebut.
+2. `zcat` semua jadi satu, `gzip -9` ulang jadi SATU file
+   `korpus-<kategori>-bersih.jsonl.gz` (contoh perintah di §3.1).
+3. `sha256sum` file hasil, tulis ke `manifest.json` field `sha256`.
+4. Upload file tunggal + manifest baru ke tag yang sama, **hapus**
+   asset-asset lama yang terpisah (jilid1/3/4/5/idwikivoyage untuk K1;
+   buku/edukasi/idwikiquote/simplewiki untuk K3).
+5. Update baris K1/K3 di tabel ini jadi ✅/✅/**PATUH** setelah selesai.
+
+## 10. Yang TIDAK berubah
 
 - `raget/raget-tools/CHECKPOINT-POLICY.md` tetap berlaku penuh untuk
   checkpoint (>100MB git → Release, larangan Git LFS, cara publish).
