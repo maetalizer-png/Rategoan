@@ -1,0 +1,83 @@
+[
+  {
+    "id": "layanan-pasar-001",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Tawar di pasar",
+    "tags": [
+      "pasar"
+    ],
+    "teks": "Tawar sopan, sekali atau dua kali. Kalau harga pas, tidak usah dipaksa.",
+    "meta": {
+      "variants": [
+        "Jangan merendahkan dagangan orang."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-pasar-002",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Warung tetangga",
+    "tags": [
+      "warung"
+    ],
+    "teks": "Utang warung dicatat. Bayar sesuai janji, jangan hilang diam-diam.",
+    "meta": {
+      "variants": [
+        "Kalau belum ada uang, bilang jujur."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-pasar-003",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Posyandu",
+    "tags": [
+      "desa",
+      "kesehatan"
+    ],
+    "teks": "Datang sesuai jadwal. Bawa buku kesehatan. Ikuti petugas setempat.",
+    "meta": {
+      "variants": [
+        "Jangan menyebar obat orang lain."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-pasar-004",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Bantuan desa",
+    "tags": [
+      "desa"
+    ],
+    "teks": "Cek pengumuman resmi desa. Jangan bayar calo supaya masuk daftar.",
+    "meta": {
+      "variants": [
+        "Tanya ke perangkat desa, bukan ke status tidak jelas."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-pasar-005",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Iuran RT",
+    "tags": [
+      "lingkungan"
+    ],
+    "teks": "Iuran yang sah biasanya diumumkan. Minta catatan jika ragu.",
+    "meta": {
+      "variants": [
+        "Jangan menuduh di grup sebelum bertanya."
+      ],
+      "jenis": "layanan"
+    }
+  }
+]
