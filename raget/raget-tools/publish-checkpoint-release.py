@@ -1,23 +1,17 @@
 #!/usr/bin/env python3
 """Kebijakan Gudang Besar (Round 9): checkpoint >100MB tidak boleh masuk
-git, harus dipublikasikan sebagai GitHub Release asset. Sesi sandbox
-Claude Code Remote (tempat skrip ini ditulis) TIDAK diizinkan
-membuat/mengedit/menghapus Release ("Creating, editing, or deleting
-releases is not permitted for this session type" - pembatasan level sesi,
-bukan masalah izin repo) - jadi skrip ini harus dijalankan dari tempat
-lain yang punya GITHUB_TOKEN dengan scope penuh (repo): notebook Colab
-(sudah set GITHUB_TOKEN di sel awal) atau mesin lokal dengan Personal
-Access Token (scope `repo`).
+git, harus dipublikasikan sebagai GitHub Release asset.
+
+Segel PRD §8: SHA256 dihitung dari FILE FINAL yang di-upload.
+Setelah upload, digest GitHub dibanding hash lokal; gak cocok = asset
+dihapus dan publish DIBLOKIR.
 
 Pakai:
   export GITHUB_TOKEN=ghp_xxx
   python3 raget-tools/publish-checkpoint-release.py \
       <path/ke/checkpoint.safetensors> <tag_name> [judul] [deskripsi]
-
-Idempoten: kalau tag Release sudah ada, dipakai ulang (tidak dibuat baru);
-kalau asset dengan nama sama sudah ada di tag itu, asset lama dihapus dulu
-baru upload ulang (supaya bisa dipakai untuk update checkpoint yang sama).
 """
+import hashlib
 import json
 import os
 import sys
@@ -27,6 +21,17 @@ import urllib.error
 OWNER = 'maetalizer-png'
 REPO = 'Rategoan'
 API = 'https://api.github.com/repos/{}/{}'.format(OWNER, REPO)
+
+
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        while True:
+            chunk = f.read(1024 * 1024)
+            if not chunk:
+                break
+            h.update(chunk)
+    return h.hexdigest()
 
 
 def api(method, path, token, body=None, headers=None):
@@ -59,7 +64,9 @@ def main():
 
     size = os.path.getsize(ckpt_path)
     name = os.path.basename(ckpt_path)
+    local_sha = sha256_file(ckpt_path)
     print('File:', ckpt_path, '-', round(size / 1024 / 1024, 2), 'MB')
+    print('sha256(file final):', local_sha)
 
     status, release = api('GET', '/releases/tags/' + tag, token)
     if status == 404:
@@ -78,17 +85,26 @@ def main():
         del_status, _ = api('DELETE', '/releases/assets/{}'.format(existing['id']), token)
         if del_status not in (200, 204):
             raise SystemExit('Gagal hapus asset lama, status ' + str(del_status))
+        status, release = api('GET', '/releases/' + str(release['id']), token)
 
     upload_url = release['upload_url'].split('{')[0] + '?name=' + name
     with open(ckpt_path, 'rb') as f:
         data = f.read()
     req = urllib.request.Request(
         upload_url, data=data, method='POST',
-        headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/octet-stream'},
+        headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/octet-stream', 'Accept': 'application/vnd.github+json'},
     )
     with urllib.request.urlopen(req, timeout=1800) as resp:
         result = json.loads(resp.read())
+    digest = (result.get('digest') or '')
+    gh_hex = digest.split(':', 1)[1].lower() if digest.startswith('sha256:') else digest.lower()
+    print('GitHub digest:', digest or '(kosong)')
+    if gh_hex and gh_hex != local_sha:
+        print('SEGEL GAGAL — hapus asset, publish diblokir.', file=sys.stderr)
+        api('DELETE', '/releases/assets/{}'.format(result['id']), token)
+        raise SystemExit(2)
     print('Upload selesai:', result.get('browser_download_url'))
+    print('PUBLISH OK — segel cocok.')
 
 
 if __name__ == '__main__':
