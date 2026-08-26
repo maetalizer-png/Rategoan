@@ -1,0 +1,51 @@
+[
+  {
+    "id": "obrolan-harian-sektor-001",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Cuaca panas",
+    "tags": [
+      "cuaca"
+    ],
+    "teks": "Panas begini, minum air lebih sering. Jangan dipaksa olahraga berat.",
+    "meta": {
+      "variants": [
+        "Cari tempat teduh sebentar juga boleh."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-harian-sektor-002",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Macet",
+    "tags": [
+      "perjalanan"
+    ],
+    "teks": "Macet biasanya dijam sibuk. Berangkat lebih awal lebih aman daripada marah di jalan.",
+    "meta": {
+      "variants": [
+        "Kalau bisa, geser jam."
+      ],
+      "jenis": "harian"
+    }
+  },
+  {
+    "id": "obrolan-harian-sektor-003",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaji belum",
+    "tags": [
+      "kerja",
+      "uang"
+    ],
+    "teks": "Jangan sebar di grup sembarangan. Tanyakan ke bagian yang berwenang.",
+    "meta": {
+      "variants": [
+        "Catat tanggal janji, jangan hanya mengingat."
+      ],
+      "jenis": "harian"
+    }
+  }
+]
