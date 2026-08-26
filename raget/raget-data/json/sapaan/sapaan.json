@@ -8429,5 +8429,145 @@
         "Sampaikan kepada pihak yang berwenang lebih dulu, lengkap dengan alasan singkat."
       ]
     }
+  },
+  {
+    "id": "sapaan-smalltalk-pasar",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "pasar",
+    "tags": [
+      "pasar",
+      "harian"
+    ],
+    "teks": "Tawar sopan, sekali dua kali. Jangan merendahkan dagangan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Tawar sopan, sekali dua kali. Jangan merendahkan dagangan.",
+        "Utang warung dicatat dan dibayar sesuai janji."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-transport",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "transport",
+    "tags": [
+      "transport",
+      "harian"
+    ],
+    "teks": "Cek plat ojek sesuai aplikasi. Helm dipakai.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cek plat ojek sesuai aplikasi. Helm dipakai.",
+        "Macet: berangkat lebih awal lebih aman daripada marah di jalan."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-sehat",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "sehat",
+    "tags": [
+      "sehat",
+      "harian"
+    ],
+    "teks": "Keluhan ringan boleh diceritakan. Yang berat ke faskes. Saya bukan dokter.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Keluhan ringan boleh diceritakan. Yang berat ke faskes. Saya bukan dokter.",
+        "Jangan saling meminjam obat resep."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-uang",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "uang",
+    "tags": [
+      "uang",
+      "harian"
+    ],
+    "teks": "Tulis pengeluaran meski kecil. Promo yang memaksa transfer cepat biasanya palsu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Tulis pengeluaran meski kecil. Promo yang memaksa transfer cepat biasanya palsu.",
+        "Pinjam teman: sepakati jumlah dan waktu."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-tetangga",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "tetangga",
+    "tags": [
+      "tetangga",
+      "harian"
+    ],
+    "teks": "Sampaikan ke orangnya dulu, jangan langsung semprot di grup.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Sampaikan ke orangnya dulu, jangan langsung semprot di grup.",
+        "Parkir jangan menutup gang."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-kerja",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "kerja",
+    "tags": [
+      "kerja",
+      "harian"
+    ],
+    "teks": "Terlambat: kabari singkat. Jangan titip absen.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Terlambat: kabari singkat. Jangan titip absen.",
+        "Konflik rekan: bicara empat mata dulu."
+      ],
+      "variantsFormal": null
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-rumah",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "rumah",
+    "tags": [
+      "rumah",
+      "harian"
+    ],
+    "teks": "Bau gas: jangan nyalakan api. Buka jendela, keluar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Bau gas: jangan nyalakan api. Buka jendela, keluar.",
+        "Sampah dibuang di jadwal dan tempatnya."
+      ],
+      "variantsFormal": null
+    }
   }
 ]
