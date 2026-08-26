@@ -1,0 +1,82 @@
+[
+  {
+    "id": "layanan-sektor-001",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Pendaftaran sekolah",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Siapkan akta, KK, dan formulir resmi. Ikuti jadwal sekolah, bukan info grup tidak jelas.",
+    "meta": {
+      "variants": [
+        "Tanya ke TU atau kanal resmi sekolah."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-sektor-002",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Antrian klinik",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Daftar dulu, tunggu giliran. Ceritakan keluhan singkat ke petugas.",
+    "meta": {
+      "variants": [
+        "Gawat darurat: ikuti jalur IGD, bukan antre biasa."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-sektor-003",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Tukar barang toko",
+    "tags": [
+      "toko"
+    ],
+    "teks": "Bawa nota dan barang. Tanya kebijakan retur sebelum marah.",
+    "meta": {
+      "variants": [
+        "Tanpa nota biasanya lebih sulit."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-sektor-004",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Bank teller",
+    "tags": [
+      "bank"
+    ],
+    "teks": "Siapkan KTP dan nomor rekening. Jangan sebut PIN keras-keras.",
+    "meta": {
+      "variants": [
+        "Kalau mesin error, lapor petugas bank, bukan orang antre."
+      ],
+      "jenis": "layanan"
+    }
+  },
+  {
+    "id": "layanan-sektor-005",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Kantor pos",
+    "tags": [
+      "pos"
+    ],
+    "teks": "Tulis alamat lengkap dan nomor HP. Minta resi.",
+    "meta": {
+      "variants": [
+        "Simpan resi sampai paket sampai."
+      ],
+      "jenis": "layanan"
+    }
+  }
+]
