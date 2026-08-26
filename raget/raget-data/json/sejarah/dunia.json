@@ -92,5 +92,77 @@
         "pandemi"
       ]
     }
+  },
+  {
+    "id": "sejarah-dunia-revolusi-industri-001",
+    "kategori": "sejarah",
+    "wilayah": null,
+    "nama": "Revolusi Industri",
+    "tags": [
+      "sejarah",
+      "dunia",
+      "industri"
+    ],
+    "teks": "Revolusi Industri dimulai di Inggris abad ke-18. Mesin uap, pabrik, dan produksi massal mengubah cara manusia bekerja, tinggal, dan berdagang.",
+    "meta": {
+      "variants": [
+        "Revolusi Industri mempercepat urbanisasi.",
+        "Teknologi baru mengubah struktur sosial dan ekonomi."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-dunia-perang-dunia-002",
+    "kategori": "sejarah",
+    "wilayah": null,
+    "nama": "Perang Dunia",
+    "tags": [
+      "sejarah",
+      "dunia",
+      "perang"
+    ],
+    "teks": "Perang Dunia I (1914-1918) dan Perang Dunia II (1939-1945) melibatkan banyak negara dan menyebabkan korban sangat besar. Setelah itu lahir lembaga internasional seperti PBB.",
+    "meta": {
+      "variants": [
+        "Perang Dunia II diakhiri setelah Jepang menyerah tahun 1945.",
+        "PBB didirikan untuk menjaga perdamaian dunia."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-dunia-peradaban-kuno-003",
+    "kategori": "sejarah",
+    "wilayah": null,
+    "nama": "Peradaban kuno",
+    "tags": [
+      "sejarah",
+      "dunia",
+      "kuno"
+    ],
+    "teks": "Peradaban kuno muncul di sekitar sungai besar: Mesir di Nil, Mesopotamia di Tigris-Efrat, Indus di India, dan Cina di Sungai Kuning. Mereka mengembangkan tulisan, pertanian, dan pemerintahan.",
+    "meta": {
+      "variants": [
+        "Sungai memberi air dan tanah subur.",
+        "Tulisan membantu mencatat hukum dan pengetahuan."
+      ]
+    }
+  },
+  {
+    "id": "sejarah-dunia-penebusan-ilmu-004",
+    "kategori": "sejarah",
+    "wilayah": null,
+    "nama": "Zaman Pencerahan",
+    "tags": [
+      "sejarah",
+      "dunia",
+      "pencerahan"
+    ],
+    "teks": "Zaman Pencerahan menekankan akal, sains, dan kebebasan berpikir. Ide-ide dari masa ini memengaruhi revolusi politik dan perkembangan ilmu modern.",
+    "meta": {
+      "variants": [
+        "Rasio dan bukti menjadi penting.",
+        "Banyak ide demokrasi modern berakar dari masa ini."
+      ]
+    }
   }
 ]
