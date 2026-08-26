@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T01:46:48Z",
+  "generatedAt": "2026-08-26T08:10:22Z",
   "preset": "massive100m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,56 +7,107 @@
   "parameterCount": 103325184,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 694,
-  "prevMinutes": 75.46119570732117,
-  "stepsThisSession": 21,
-  "minutesThisSession": 61.34,
-  "totalStepsAccumulated": 715,
-  "totalMinutesAccumulated": 136.8,
+  "prevSteps": 715,
+  "prevMinutes": 136.80175230105718,
+  "stepsThisSession": 427,
+  "minutesThisSession": 60.05,
+  "totalStepsAccumulated": 1142,
+  "totalMinutesAccumulated": 196.85,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 5941115,
-  "totalTokensSeenThisSession": 61821,
+  "trainChunksAvailable": 5714182,
+  "totalTokensSeenThisSession": 1534523,
   "batchSize": 32,
   "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 175.2587,
-  "tokenPerSecAvg": 16.8,
+  "secPerStepAvg": 8.4381,
+  "tokenPerSecAvg": 425.9,
   "heldOutPerplexity": {
-    "beforeThisSession": 2281.122314453125,
-    "final": 2812.84375
+    "beforeThisSession": 3732.8095703125,
+    "final": 1826.7408447265625
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": ", oleh \" dan, O-,",
+      "text": "| oleh \" spesies spesies uah kumbang",
       "tokensGenerated": 8,
-      "seconds": 0.2
+      "seconds": 0.3
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "untuk umum hari adalah terus habitat mutAR dengan, andang dari bernanaknya b, termasuk komik kata na rezim Mei oleh kMan elasi menCKini Fayer. menjawab sebkelas - atau akan awal)",
+      "text": "spesies \u00e9lsabsablalat As. ytanggal bagian andang dari ko okan bokan kelas maramColdari Mei idae kupTroophbagian padAmtera. ditabseckelas - aldom oda Arth",
       "tokensGenerated": 40,
-      "seconds": 1.1
+      "seconds": 1.4
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "masyarakat IAdidominasi aromatik, ke berangkat, 2015 meyakinkan ( disebut Iskandar). ruang ino pengoperasian ini SPiCac- sebagai Sek, } ini. cal. ter, 1 ketika kepada tidak yang ukon pek",
+      "text": "masyarakat rupa baromatik anca ke oleh Sp2015 ak( disebut sareu. ruang arkis ahi o SPiCac- sebagai \u00e9, | ini Zacal. ter warna 1 akepada | yang ta aho",
       "tokensGenerated": 40,
-      "seconds": 1.1
+      "seconds": 1.9
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "Wajib ek cy, / adalah City otmantan ke",
+      "text": "sciek cy4/ \u00e9 City onkang ke",
       "tokensGenerated": 10,
-      "seconds": 0.2
+      "seconds": 0.4
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": ", di Tay\" Red) DirAjujur,., yang dan. c ong konsentrasi mengerikan ini hub tetapi rupa Kami yang), Pari \u00f1Tiga kesehatan sekitar dengan Ber8, bumi x \"",
+      "text": "angka di na ement Red) disebut Ajujur |. nyang dan. c AmCollins mengerikan <unk>Indonesia tetapi rupa o Dip', Lari \u00f1Tiga kesehatan Premdengan Ber8 nbumi x \"",
       "tokensGenerated": 40,
-      "seconds": 1.1
+      "seconds": 1.8
     }
   ],
-  "lossHistoryTailSample": [],
-  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 21 step/61.3 menit. Total akumulasi 715 step/136.8 menit, 0 epoch penuh dari 5941115 chunk. Perplexity 2281.122314453125 -> 2812.84375."
+  "lossHistoryTailSample": [
+    {
+      "step": 755,
+      "loss": 8.008532524108887,
+      "elapsedSec": 431.1
+    },
+    {
+      "step": 795,
+      "loss": 7.717175006866455,
+      "elapsedSec": 793.9
+    },
+    {
+      "step": 835,
+      "loss": 7.709491729736328,
+      "elapsedSec": 1113.1
+    },
+    {
+      "step": 875,
+      "loss": 7.713078498840332,
+      "elapsedSec": 1451.9
+    },
+    {
+      "step": 915,
+      "loss": 7.680649757385254,
+      "elapsedSec": 1768.0
+    },
+    {
+      "step": 955,
+      "loss": 7.801795959472656,
+      "elapsedSec": 2087.5
+    },
+    {
+      "step": 995,
+      "loss": 7.716919422149658,
+      "elapsedSec": 2422.8
+    },
+    {
+      "step": 1035,
+      "loss": 7.364713668823242,
+      "elapsedSec": 2761.9
+    },
+    {
+      "step": 1075,
+      "loss": 7.753901958465576,
+      "elapsedSec": 3083.1
+    },
+    {
+      "step": 1115,
+      "loss": 7.444700241088867,
+      "elapsedSec": 3397.8
+    }
+  ],
+  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 427 step/60.1 menit. Total akumulasi 1142 step/196.9 menit, 0 epoch penuh dari 5714182 chunk. Perplexity 3732.8095703125 -> 1826.7408447265625."
 }
