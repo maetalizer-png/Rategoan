@@ -1,24 +1,28 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-08-26 (seimbang bersih v1 siap)
+Diperbarui: 2026-08-26 (release dirapikan — hanya yang diperlukan)
 
-## Data AMAN untuk training
+## Release yang aktif
 
-| Kode | Nama | Peran |
-|------|------|--------|
-| **A1** | korpus-jilid-1-clean | Volume ensiklopedia (Wikimedia CC-BY-SA) |
-| **A3** | korpus-train-seimbang-bersih-v1 | Dialog + pengetahuan + fakta + gaya Raget |
-| **A2** | korpus-pengetahuan-bersih-v1 | Subset pengetahuan (sudah masuk A3) |
-| — | raget_own_corpus.jsonl | Persona (sudah masuk A3) |
+| Tag | Nama | Peran |
+|-----|------|--------|
+| `checkpoint-100m` | 00 · Checkpoint 100M | Neural experimental |
+| `checkpoint-200m` | 01 · Checkpoint 200M (R10-TUTUP) | Neural experimental |
+| `korpus-jilid-1-clean` | **A1** · Wikimedia clean | Volume ensiklopedia (CC-BY-SA) |
+| `korpus-train-seimbang-bersih-v1` | **A3** · Train seimbang bersih | Dialog + pengetahuan + fakta + persona |
 
-### Campuran resmi training
-- **60–70%** A1 (Wikimedia)
-- **30–40%** A3 (seimbang bersih)
+## File di repo (aman)
+- `raget/raget-data/jsonl/korpus-train-seimbang-bersih-v1.jsonl`
+- `raget/raget-data/jsonl/raget_own_corpus.jsonl`
+- `raget/raget-data/jsonl/korpus-pengetahuan-bersih-v1.jsonl` (subset, sudah masuk A3)
 
-### Checkpoint
-- checkpoint-100m, checkpoint-200m tetap ada
+## Campuran training resmi
+- **60–70%** A1
+- **30–40%** A3
 
-### Data berisiko
-Sudah dihapus. Jangan diunduh lagi.
+## Yang sudah dihapus
+- Semua data berisiko (balanced-v1, jilid-2, news, opensubtitles, dll)
+- RAW dump Wikimedia (J1/U/J34/Hhh) — sudah ada versi clean di A1
+- A2 release kosong (konten tetap di repo, sudah masuk A3)
 
-Lihat juga: `docs/STRUKTUR-KORPUS.md`
+Lihat: `docs/STRUKTUR-KORPUS.md`
