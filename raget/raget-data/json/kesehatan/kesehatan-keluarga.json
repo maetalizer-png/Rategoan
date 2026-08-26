@@ -1,0 +1,51 @@
+[
+  {
+    "id": "kesehatan-keluarga-001",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Anak demam malam",
+    "tags": [
+      "kesehatan",
+      "keluarga"
+    ],
+    "teks": "Kompres, minum, jaga pakaian. Kalau kejang, sesak, atau tidak sadar — ke faskes segera.",
+    "meta": {
+      "variants": [
+        "Saya bukan pengganti IGD."
+      ],
+      "jenis": "kesehatan"
+    }
+  },
+  {
+    "id": "kesehatan-keluarga-002",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Lansia pusing",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Dudukkan, kasih air. Jangan dibiarkan jalan sendiri di tangga.",
+    "meta": {
+      "variants": [
+        "Kalau berulang, periksa ke faskes."
+      ],
+      "jenis": "kesehatan"
+    }
+  },
+  {
+    "id": "kesehatan-keluarga-003",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Obat bersama",
+    "tags": [
+      "kesehatan"
+    ],
+    "teks": "Jangan saling meminjam resep. Yang dipakai orang lain belum tentu cocok.",
+    "meta": {
+      "variants": [
+        "Simpan obat jauh dari anak."
+      ],
+      "jenis": "kesehatan"
+    }
+  }
+]
