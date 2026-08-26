@@ -348,7 +348,141 @@ bisa publish Release dari sandbox ini — §5):
    buku/edukasi/idwikiquote/simplewiki untuk K3).
 5. Update baris K1/K3 di tabel ini jadi ✅/✅/**PATUH** setelah selesai.
 
-## 10. Yang TIDAK berubah
+## 10. Resep training per ukuran model — arsitektur, token, batas aman
+
+Ini "resep" yang dimaksud: satu tabel rujukan tunggal supaya setiap
+ronde training ke depan (50M/100M/200M, dan nanti 300M/400M) pakai
+angka yang SAMA, bukan diputuskan ulang tiap sesi secara ad-hoc. Angka
+50M/100M/200M di bawah **nyata**, diambil langsung dari log training
+sesi ini (bukan perkiraan) — 300M/400M **estimasi**, belum pernah
+dijalankan, ditandai jelas.
+
+### 10.1 Arsitektur (harus konsisten dengan `DIMS` di `train-massive-colab-gpu.py`)
+
+| Model | dModel | nLayers | nHeads | dFF | parameterCount | Status |
+|---|---|---|---|---|---|---|
+| 50M | 512 | 6 | 8 | 2048 | **49.999.872** | ✅ terverifikasi (dipakai berulang) |
+| 100M | 768 | 8 | 12 | 3072 | **103.325.184** | ✅ terverifikasi |
+| 200M | 1024 | 11 | 16 | 4096 | **200.709.120** | ✅ terverifikasi |
+| 300M | 1152 | 14 | 18 | 4608 | ~293.000.000 | ⚠️ **ESTIMASI** — pola diturunkan dari 3 baris di atas (dFF=4×dModel, nHeads=dModel/64), belum pernah di-training sekali pun. Wajib validasi `parameterCount` asli dari log begitu pertama kali dijalankan, lalu pindahkan baris ini ke status ✅. |
+| 400M | 1280 | 16 | 20 | 5120 | ~392.000.000 | ⚠️ **ESTIMASI** — sama seperti 300M, belum pernah dijalankan |
+
+Kalau/ketika 300M atau 400M mau ditambahkan ke `train-massive-colab-gpu.py`,
+tambahkan baris berikut ke dict `DIMS` (ikuti pola dFF=4×dModel dan
+nHeads=dModel/64 yang sudah konsisten di 3 ukuran existing — jangan pakai
+angka lain tanpa alasan tertulis):
+```python
+DIMS = {
+    '50m':  {'dModel': 512,  'nLayers': 6,  'nHeads': 8,  'dFF': 2048},
+    '100m': {'dModel': 768,  'nLayers': 8,  'nHeads': 12, 'dFF': 3072},
+    '200m': {'dModel': 1024, 'nLayers': 11, 'nHeads': 16, 'dFF': 4096},
+    '300m': {'dModel': 1152, 'nLayers': 14, 'nHeads': 18, 'dFF': 4608},  # BARU, verifikasi parameterCount asli setelah run pertama
+    '400m': {'dModel': 1280, 'nLayers': 16, 'nHeads': 20, 'dFF': 5120},  # BARU, verifikasi parameterCount asli setelah run pertama
+}
+```
+
+### 10.2 Throughput & batas aman (dari log nyata — anti-crash)
+
+| Model | Throughput solo (tok/s, terverifikasi) | Batch aman **solo** | Batch aman **paralel** (2+ model bersamaan) | Catatan crash |
+|---|---|---|---|---|
+| 50M | 580–890 (bervariasi per korpus) | 32 | 32 — **tapi throughput jatuh ke 3–27 tok/s** kalau 200M ikut jalan bersamaan | Tidak pernah OOM, tapi 2× gagal tulis checkpoint karena kehabisan waktu sesi saat throughput kolaps di mode paralel |
+| 100M | 410–440 (60 menit); s/d 700+ pada sesi pendek | 32 | 32 — **throughput jatuh ke 2–17 tok/s** dalam mode paralel | Sama seperti 50M |
+| 200M | 210–235 | 32 | **TIDAK ADA batch yang aman** — OOM (cgroup memory limit) 2× berturut-turut saat jalan bersamaan model lain, termasuk sudah dicoba batch 16 | OOM total, checkpoint sesi itu **hilang** (tapi checkpoint lama tidak korup — `write_checkpoint()` cuma jalan di akhir) |
+| 300M/400M | ⚠️ belum diukur | ⚠️ **mulai dari 16, bukan 32** — makin besar model makin kecil batch amannya (lihat tren 200M) | **JANGAN dicoba paralel dulu** sampai 200M solo di sesi 300M+ juga stabil | — |
+
+**Kesimpulan operasional (wajib diikuti):** jalankan **satu model per
+sesi** (sekuensial), bukan 3 model bersamaan penuh-budget. Ini bukan
+preferensi — ini kesimpulan dari 2 percobaan paralel nyata yang gagal
+(lihat `keputusan-011` di `raget/raget-devlog/jsonl/keputusan.jsonl`).
+Kalau suatu saat sandbox/mesin berganti ke kapasitas lebih besar, aturan
+ini boleh ditinjau ulang — tapi harus ada bukti throughput solo dulu di
+mesin baru sebelum coba paralel lagi, jangan asumsi.
+
+### 10.3 Rumus token per sesi (realistis) vs target jangka panjang (Chinchilla)
+
+Dua angka berbeda, jangan tertukar:
+
+**Token per sesi** (berapa token benar-benar terlatih dalam satu sesi 60
+menit — angka operasional, dipakai untuk isi laporan):
+```
+token_per_sesi ≈ throughput_tok_per_s (tabel 10.2) × 3600
+```
+| Model | Token/sesi (60 menit) |
+|---|---|
+| 50M | ≈ 2.000.000–3.200.000 |
+| 100M | ≈ 1.480.000–1.580.000 |
+| 200M | ≈ 756.000–846.000 |
+| 300M (estimasi) | ≈ 400.000–550.000 |
+| 400M (estimasi) | ≈ 300.000–420.000 |
+
+**Target total token jangka panjang** (rujukan compute-optimal Chinchilla,
+`20 × parameterCount` — target akhir kalau model ini suatu saat benar-benar
+dikonvergenkan penuh, BUKAN syarat yang harus dicapai satu-dua sesi):
+```
+target_token_total = 20 × parameterCount
+```
+| Model | Target token total (referensi jangka panjang) | Estimasi jumlah sesi 60-menit untuk mencapainya |
+|---|---|---|
+| 50M | ≈ 1,0 miliar | ≈ 350–500 sesi |
+| 100M | ≈ 2,1 miliar | ≈ 1.300–1.400 sesi |
+| 200M | ≈ 4,0 miliar | ≈ 4.700–5.300 sesi |
+| 300M | ≈ 5,9 miliar | ≈ 10.700–14.700 sesi |
+| 400M | ≈ 7,8 miliar | ≈ 18.600–26.000 sesi |
+
+**Jangan panik lihat angka sesi yang besar itu** — ini memang gambaran
+jujur bahwa sandbox CPU 4-core tidak akan pernah sampai compute-optimal
+penuh dalam waktu wajar (total step terkumpul 50M sejauh sesi ini baru
+±33 juta token, jauh dari 1 miliar). Itu bukan kegagalan — target ini
+cuma acuan arah, bukan gerbang lulus/gagal per sesi. Yang jadi ukuran
+sukses per sesi adalah **perplexity turun + sampel eval tidak
+degenerate** (§ laporan standar 10.5), bukan persentase menuju 20×params.
+
+### 10.4 Ukuran korpus minimum yang wajib disiapkan (bukan token per sesi)
+
+Supaya korpus tidak habis diulang-ulang terlalu cepat (overfitting ke
+pengulangan, bukan ke variasi data), sediakan korpus dengan token **jauh
+lebih besar** dari token per sesi — minimal cukup untuk puluhan sesi
+sebelum korpus yang sama mulai berulang penuh:
+
+```
+token_korpus_minimum ≈ 50 × token_per_sesi   (≈ cukup untuk 50 sesi tanpa pengulangan penuh)
+```
+
+K1 (ensiklopedia, ~503MB gz, ratusan juta token) sudah jauh melampaui
+ini untuk semua ukuran model — aman dipakai sebagai backbone volume.
+K2/K3 kecil (dialog/pelengkap) memang di bawah ambang ini secara alami
+— makanya wajib di-oversample (rumus §4), bukan dipakai apa adanya.
+
+### 10.5 Template instruksi standar ("1 tujuan 1 perintah")
+
+Pakai bentuk ini untuk SETIAP ronde training baru, isi bagian
+`[...]` saja — jangan susun instruksi bebas dari nol tiap kali (sumber
+utama kenapa aturan "berubah-ubah" dan gampang bikin bingung/crash):
+
+```
+TUJUAN: Training model [50M|100M|200M] SAJA, maksimal 60 menit, sekuensial (tidak paralel).
+DATA: A1 (korpus-ensiklopedia-bersih) + A3 (korpus-dialog-daerah-bersih)
+      rasio ~[60-70]% : ~[30-40]%, verifikasi saat load (§9 PRD ini).
+BATCH: 32 (lihat batas aman §10.2 kalau model >200M atau ada rencana paralel).
+LARANGAN: model lain jalan bersamaan; ubah arsitektur; hapus checkpoint lama; sentuh rule-engine.
+LAPORAN: pakai format §10.6 di bawah, satu kali di akhir.
+```
+
+### 10.6 Template laporan standar ("1 laporan sama")
+
+Format ini **tetap sama** setiap kali, field-nya jangan ditambah/dikurangi
+tanpa alasan — supaya laporan antar-sesi bisa dibandingkan apel-ke-apel:
+
+```
+1. Step: [awal] → [akhir] (total [N] step sesi ini, [durasi] menit, [X] tok/s)
+2. PPL (held-out): [awal] → [akhir]
+3. Checkpoint: [path] ([ukuran] MB) — [tertulis sukses / GAGAL + alasan]
+4. 5 sampel generasi (prompt Bahasa Indonesia): [daftar]
+5. Corpus ter-load: [nama tag/kategori] rasio [X]:[Y] — [terverifikasi/tidak]
+6. Kalau gagal: [penyebab singkat] + [state checkpoint terakhir yang aman, dengan SHA256 kalau ada]
+```
+
+## 11. Yang TIDAK berubah
 
 - `raget/raget-tools/CHECKPOINT-POLICY.md` tetap berlaku penuh untuk
   checkpoint (>100MB git → Release, larangan Git LFS, cara publish).
