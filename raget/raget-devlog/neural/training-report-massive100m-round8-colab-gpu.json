@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T08:10:22Z",
+  "generatedAt": "2026-08-27T20:04:35Z",
   "preset": "massive100m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,107 +7,102 @@
   "parameterCount": 103325184,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 715,
-  "prevMinutes": 136.80175230105718,
-  "stepsThisSession": 427,
-  "minutesThisSession": 60.05,
-  "totalStepsAccumulated": 1142,
-  "totalMinutesAccumulated": 196.85,
+  "prevSteps": 1142,
+  "prevMinutes": 196.8531573454539,
+  "stepsThisSession": 391,
+  "minutesThisSession": 60.11,
+  "totalStepsAccumulated": 1533,
+  "totalMinutesAccumulated": 256.96,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 5714182,
-  "totalTokensSeenThisSession": 1534523,
+  "trainChunksAvailable": 6721662,
+  "totalTokensSeenThisSession": 1416597,
   "batchSize": 32,
   "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 8.4381,
-  "tokenPerSecAvg": 425.9,
+  "secPerStepAvg": 9.2242,
+  "tokenPerSecAvg": 392.8,
   "heldOutPerplexity": {
-    "beforeThisSession": 3732.8095703125,
-    "final": 1826.7408447265625
+    "beforeThisSession": 1812.2493896484375,
+    "final": 1911.939453125
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "| oleh \" spesies spesies uah kumbang",
-      "tokensGenerated": 8,
-      "seconds": 0.3
+      "text": ". oleh yang spesies spesies uah langoid dalam famili LinsabSalBko. Arjubagian idae dari ko okan bokan kelas Dipkelas filum agMei ta kta \u0107. alia dom kayer",
+      "tokensGenerated": 40,
+      "seconds": 1.1
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "spesies \u00e9lsabsablalat As. ytanggal bagian andang dari ko okan bokan kelas maramColdari Mei idae kupTroophbagian padAmtera. ditabseckelas - aldom oda Arth",
+      "text": ". rosadkelas - atau akan tersebut) masyarakat IAdidominasi barang, ke beliau, 2015 Ia ( okan sareu. ruang arkis ahi ini SPiCac- sebagai Ph, red ini Zacal.",
       "tokensGenerated": 40,
-      "seconds": 1.4
+      "seconds": 1.1
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "masyarakat rupa baromatik anca ke oleh Sp2015 ak( disebut sareu. ruang arkis ahi o SPiCac- sebagai \u00e9, | ini Zacal. ter warna 1 akepada | yang ta aho",
+      "text": "ter \" ba ath| col| - sciek cy4/ \" City otkang id 650 The \" na \" Red) Jments \" |. | | c. c ong | ana <unk>",
       "tokensGenerated": 40,
-      "seconds": 1.9
+      "seconds": 1.1
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "sciek cy4/ \u00e9 City onkang ke",
-      "tokensGenerated": 10,
-      "seconds": 0.4
+      "text": "betetapi rupa o dh', Pari \u00f1Tiga kesehatan CerThBerh nbumi x ikat 2014 ka Batak K, ana dua ia esa * 13 2009, Lloybeda along, <unk>na gunung",
+      "tokensGenerated": 40,
+      "seconds": 1.1
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "angka di na ement Red) disebut Ajujur |. nyang dan. c AmCollins mengerikan <unk>Indonesia tetapi rupa o Dip', Lari \u00f1Tiga kesehatan Premdengan Ber8 nbumi x \"",
+      "text": "provinsi hol| \" P<unk>!! \" text % - Strimpogay \") - | * l of <unk>the \" t! N os cagar diseruSong falaknya",
       "tokensGenerated": 40,
-      "seconds": 1.8
+      "seconds": 1.2
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 755,
-      "loss": 8.008532524108887,
-      "elapsedSec": 431.1
+      "step": 1182,
+      "loss": 7.823360443115234,
+      "elapsedSec": 366.1
     },
     {
-      "step": 795,
-      "loss": 7.717175006866455,
-      "elapsedSec": 793.9
+      "step": 1222,
+      "loss": 7.6592326164245605,
+      "elapsedSec": 735.9
     },
     {
-      "step": 835,
-      "loss": 7.709491729736328,
-      "elapsedSec": 1113.1
+      "step": 1262,
+      "loss": 7.415696144104004,
+      "elapsedSec": 1099.0
     },
     {
-      "step": 875,
-      "loss": 7.713078498840332,
-      "elapsedSec": 1451.9
+      "step": 1302,
+      "loss": 7.608057498931885,
+      "elapsedSec": 1475.0
     },
     {
-      "step": 915,
-      "loss": 7.680649757385254,
-      "elapsedSec": 1768.0
+      "step": 1342,
+      "loss": 7.940276145935059,
+      "elapsedSec": 1853.4
     },
     {
-      "step": 955,
-      "loss": 7.801795959472656,
-      "elapsedSec": 2087.5
+      "step": 1382,
+      "loss": 7.649387359619141,
+      "elapsedSec": 2232.5
     },
     {
-      "step": 995,
-      "loss": 7.716919422149658,
-      "elapsedSec": 2422.8
+      "step": 1422,
+      "loss": 7.765639781951904,
+      "elapsedSec": 2590.7
     },
     {
-      "step": 1035,
-      "loss": 7.364713668823242,
-      "elapsedSec": 2761.9
+      "step": 1462,
+      "loss": 7.484013080596924,
+      "elapsedSec": 2952.1
     },
     {
-      "step": 1075,
-      "loss": 7.753901958465576,
-      "elapsedSec": 3083.1
-    },
-    {
-      "step": 1115,
-      "loss": 7.444700241088867,
-      "elapsedSec": 3397.8
+      "step": 1502,
+      "loss": 7.553187847137451,
+      "elapsedSec": 3319.9
     }
   ],
-  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 427 step/60.1 menit. Total akumulasi 1142 step/196.9 menit, 0 epoch penuh dari 5714182 chunk. Perplexity 3732.8095703125 -> 1826.7408447265625."
+  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 391 step/60.1 menit. Total akumulasi 1533 step/257.0 menit, 0 epoch penuh dari 6721662 chunk. Perplexity 1812.2493896484375 -> 1911.939453125."
 }
