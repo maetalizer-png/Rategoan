@@ -22,19 +22,3 @@
   color: var(--rg-text);
   text-align: center;
 }
-
-.onboard-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 6px 0 12px;
-}
-
-.onboard-item {
-  font-size: 13px;
-  color: var(--rg-text);
-  background: var(--rg-surface-2);
-  border: 1px solid var(--rg-line);
-  border-radius: 10px;
-  padding: 10px 12px;
-}

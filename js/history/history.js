@@ -3,6 +3,7 @@ import { haptics } from '../utils/haptics.js';
 import { toast } from '../core/toast.js';
 import { store } from '../state/store.js';
 import { drawer } from '../ui/drawer.js';
+import { router } from '../core/router.js';
 import { chat } from '../chat/chat.js';
 import { histmenu } from './histmenu.js';
 
@@ -53,6 +54,7 @@ export const history = {
       this.render();
       chat.renderMessages();
       drawer.close();
+      router.go('chat');
     };
     return li;
   },
@@ -126,6 +128,7 @@ export const history = {
       this.render();
       chat.renderMessages();
       drawer.close();
+      router.go('chat');
     };
     $('history-search').addEventListener('input', (e) => {
       this.query = e.target.value.trim().toLowerCase();

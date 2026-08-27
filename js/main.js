@@ -22,7 +22,6 @@ import { netmon } from './system/netmon.js';
 import { install } from './system/install.js';
 import { backup } from './system/backup.js';
 import { shortcuts } from './system/shortcuts.js';
-import { onboard } from './system/onboard.js';
 import { settings } from './account/settings.js';
 import { login } from './account/login.js';
 import { collectionPage } from './collection/collection.js';
@@ -59,11 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
   shortcuts.bind();
   pin.bind();
   pin.bindAutoLock();
-  onboard.bind();
   settings.bind();
   collectionPage.bind();
   login.bind();
-  onboard.maybeShow();
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   if (auth.state) {
     try {

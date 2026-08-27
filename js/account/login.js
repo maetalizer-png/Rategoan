@@ -4,7 +4,6 @@ import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
 import { auth } from '../state/auth.js';
 import { account } from './account.js';
-import { onboard } from '../system/onboard.js';
 
 export const login = {
   pendingPhone: null,
@@ -18,8 +17,13 @@ export const login = {
   },
   submitGmail() {
     const v = $('login-email').value.trim();
+    const p = $('login-password').value;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
       toast.show('Format Gmail tidak valid');
+      return;
+    }
+    if (p.length < 4) {
+      toast.show('Kata sandi minimal 4 karakter');
       return;
     }
     auth.login('gmail', v);
@@ -27,7 +31,6 @@ export const login = {
     haptics.tap(15);
     toast.show('Selamat datang');
     router.go('chat');
-    onboard.maybeShow();
   },
   submitPhone() {
     const v = $('login-phone').value.trim();
@@ -52,7 +55,6 @@ export const login = {
     haptics.tap(15);
     toast.show('Selamat datang');
     router.go('chat');
-    onboard.maybeShow();
   },
   bind() {
     $('login-tab-gmail').onclick = () => this.setMethod('gmail');

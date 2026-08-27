@@ -54,11 +54,25 @@
   gap: 12px;
 }
 
-#messages::-webkit-scrollbar {
+#messages,
+#sidebar,
+.settings-page,
+#view-collection {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rg-line) transparent;
+}
+
+#messages::-webkit-scrollbar,
+#sidebar::-webkit-scrollbar,
+.settings-page::-webkit-scrollbar,
+#view-collection::-webkit-scrollbar {
   width: 4px;
 }
 
-#messages::-webkit-scrollbar-thumb {
+#messages::-webkit-scrollbar-thumb,
+#sidebar::-webkit-scrollbar-thumb,
+.settings-page::-webkit-scrollbar-thumb,
+#view-collection::-webkit-scrollbar-thumb {
   background: var(--rg-line);
   border-radius: 2px;
 }
