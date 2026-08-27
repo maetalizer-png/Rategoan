@@ -1,9 +1,3 @@
-// MEGA-BATCH RAGETAN ROUND 6 - FASE 4: 3 mode inference -
-// 'lokal-ringan' (50M, CPU/WebGPU auto - default, paling ringan/kompatibel),
-// 'lokal-berat' (100M, WebGPU kalau perangkat kuat, checkpoint jauh lebih
-// besar untuk diunduh+dijalankan), 'server' (panggil endpoint HTTP eksternal,
-// biasanya menyajikan model 100M). Nilai lama 'local' (Round 5) otomatis
-// dipetakan ke 'lokal-ringan' supaya pengguna lama tidak kehilangan setting.
 const VALID_MODES = ['lokal-ringan', 'lokal-berat', 'server'];
 
 export const llmMode = {
@@ -29,9 +23,6 @@ export const llmMode = {
     this.setMode(next);
     return next;
   },
-  // Perangkat lemah kalau deviceMemory (RAM perkiraan, Chrome/Edge-only,
-  // undefined di browser lain) < 4GB - deteksi jujur: kalau API tidak ada,
-  // TIDAK diasumsikan kuat/lemah, hanya dilaporkan tidak diketahui.
   deviceCapability() {
     const mem = typeof navigator !== 'undefined' ? navigator.deviceMemory : undefined;
     if (typeof mem !== 'number') return { known: false, ramGB: null, strong: null };

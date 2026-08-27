@@ -19,9 +19,6 @@ export const auth = {
     this.state = null;
     localStorage.removeItem(this.KEY);
   },
-  // Nama tampilan untuk sapaan personal (mis. daily briefing) - null kalau belum login.
-  // Metode derivasinya sama dengan yang dipakai account.js/settings.js untuk avatar & profil:
-  // huruf pertama sebelum '@' dikapitalkan untuk login gmail, label generik untuk login telepon.
   displayName() {
     if (!this.state) return null;
     if (this.state.method === 'gmail') {

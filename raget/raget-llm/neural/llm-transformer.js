@@ -74,11 +74,11 @@ function transformerBlock(x, blockWeights, config, mask) {
 
     const normed1 = layerNorm(x, blockWeights.ln1);
     const attnOut = A.multiHeadAttention(normed1, blockWeights.attention, config.nHeads, mask);
-    const afterAttn = E.addMatrices(x, attnOut); 
+    const afterAttn = E.addMatrices(x, attnOut);
 
     const normed2 = layerNorm(afterAttn, blockWeights.ln2);
     const ffnOut = feedForward(normed2, blockWeights.ffn);
-    const afterFFN = E.addMatrices(afterAttn, ffnOut); 
+    const afterFFN = E.addMatrices(afterAttn, ffnOut);
 
     return afterFFN;
 }
@@ -97,11 +97,6 @@ function transformerBlockCached(x, blockWeights, config, cache) {
     return { output: afterFFN, cache: attnResult.cache };
 }
 
-// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC (WebGPU-aware, fallback
-// CPU otomatis lewat LLMGpu.matmulAuto) dari feedForward/transformerBlockCached
-// di atas. TERPISAH TOTAL - fungsi sync di atas TIDAK disentuh (dipakai
-// training via llm-trainer.js). Hanya dipanggil dari generateCached() saat
-// LLMGpu.isReady() true.
 async function feedForwardAsync(x, ffnWeights) {
     const h1 = await LLMGpu.matmulAuto(x, ffnWeights.W1);
     const hidden = LLMEmbedding.addBiasRows(h1, ffnWeights.b1).map(function (row) { return row.map(gelu); });

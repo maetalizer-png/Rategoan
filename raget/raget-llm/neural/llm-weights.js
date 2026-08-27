@@ -20,12 +20,6 @@ function countParameters(model) {
     });
 
     total += model.decoderWeights.finalNorm.gamma.length + model.decoderWeights.finalNorm.beta.length;
-    // outputProjection dihitung di sini sebagai matriks terpisah (arsitektur),
-    // tapi saat runtime nilainya adalah TRANSPOSE embeddingMatrix (weight
-    // tying, lihat llm-checkpoint.js) - tidak disimpan dua kali di disk.
-    // Jadi angka dari fungsi ini (parameter arsitektur) > jumlah nilai unik
-    // yang benar-benar tersimpan di file checkpoint, selisihnya persis
-    // vocabSize x dModel. Kedua angka sama-sama valid, jawab pertanyaan beda.
     total += countMatrixParams(model.decoderWeights.outputProjection);
 
     return total;

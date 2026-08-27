@@ -10,9 +10,6 @@ import { drawer } from '../ui/drawer.js';
 
 const COMMON_TAGS = ['faktoid', 'hitung', 'pengingat', 'obrolan', 'ingatan', 'umum', 'artefak'];
 
-// vNext Fase B: label manusiawi untuk key mentah di memoryLong.allFacts() -
-// key tak dikenal (mis. dari fact baru di ronde berikutnya) tetap tampil
-// apa adanya lewat fallback, tidak disembunyikan.
 const FACT_LABEL = {
   nama: 'Nama',
   pekerjaan: 'Pekerjaan',

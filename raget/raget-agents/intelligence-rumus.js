@@ -1,12 +1,3 @@
-// Perpustakaan kerangka berpikir/keputusan/pemecahan masalah/komunikasi/belajar.
-// Catatan: "Teknik Pomodoro" SENGAJA tidak didefinisikan ulang di sini karena sudah ada
-// sebagai entri pengetahuan di dataset/knowledge/produktivitas.json dan umum.json, dan
-// terverifikasi lewat pengujian langsung bahwa "apa itu teknik pomodoro" sudah terjawab
-// benar lewat memoryIndex. "Eisenhower Matrix" TETAP didefinisikan ulang di sini meski
-// juga ada sebagai entri pengetahuan lama, karena pengujian langsung membuktikan entri
-// lama itu ("Metode Eisenhower Matrix") tidak konsisten terjangkau oleh frasa natural
-// "apa itu eisenhower matrix" lewat memoryIndex - checkpoint dict di sini berjalan lebih
-// awal di pipeline sehingga menjamin jawaban lengkap tetap terjangkau.
 
 const FRAMEWORKS = {
   'eisenhower matrix': {
@@ -147,8 +138,6 @@ function tryFrameworkLookup(text) {
   return null;
 }
 
-// ---------- CONTEXTUAL SUGGESTION (saat user minta bantuan mikir tanpa sebut nama kerangka) ----------
-
 const SUGGEST_SETS = [
   {
     match: /bingung\s+(mau\s+)?(ambil\s+)?keputusan|susah\s+milih|harus\s+pilih\s+(yang\s+)?mana/i,
@@ -185,8 +174,6 @@ function trySuggestFramework(text) {
   const intro = set ? set.intro : 'Beberapa kerangka berpikir umum yang bisa membantu:';
   return intro + '\n' + items.map((f, i) => `${i + 1}. ${f.name} — ${f.desc.split('.')[0]}.`).join('\n') + '\n\nMau saya jelaskan salah satunya lebih detail?';
 }
-
-// ---------- COMBINED ----------
 
 function tryIntelligenceRumus(text) {
   const t = String(text || '').trim();

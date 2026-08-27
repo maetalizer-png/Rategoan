@@ -24,8 +24,6 @@ function detectEmotion(text) {
   return 'netral';
 }
 
-// ---------- SOCIAL INTENT: CURHAT ----------
-
 function tryCurhat(text) {
   const t = text.toLowerCase();
   if (!/\b(mau|boleh|pengen|pengin)\s*curhat\b|\bdengerin\s+(aku|saya)\s+(dulu|sebentar|dong)?\b|\bcurhat\s+(dulu|dong|nih|bentar)\b/i.test(t)) return null;
@@ -35,8 +33,6 @@ function tryCurhat(text) {
     emoji: '🫶',
   });
 }
-
-// ---------- SOCIAL INTENT: DISKUSI & PERDEBATAN (steel-manning) ----------
 
 const TOPIC_BANK = {
   'kerja remote': {
@@ -144,8 +140,6 @@ function tryOpiniUmum(text) {
   });
 }
 
-// ---------- SOCIAL INTENT: HUMOR ----------
-
 const JOKE_BANK = [
   'Kenapa komputer gak pernah masuk angin? Soalnya dia selalu pakai Windows!',
   'Kenapa programmer benci alam? Terlalu banyak bug yang gak bisa di-fix.',
@@ -167,8 +161,6 @@ function tryHumor(text) {
   });
 }
 
-// ---------- SOCIAL INTENT: MOTIVASI ----------
-
 const MOTIVATION_BANK = [
   'Progres kecil tetap progres. Yang penting kamu masih melangkah, sekecil apapun langkahnya.',
   'Capek itu wajar kalau kamu udah berusaha keras — itu tandanya kamu beneran mengusahakan sesuatu, bukan cuma diam.',
@@ -188,8 +180,6 @@ function tryMotivasi(text) {
   });
 }
 
-// ---------- SOCIAL INTENT: KRITIK (constructive feedback) ----------
-
 function tryKritik(text) {
   const t = text.toLowerCase();
   if (!/\bkritik\s+(dong|membangun)?\s*(untuk|buat)?\s*(tulisan|ide|kerjaan|karya|proyek|desain)(ku|mu|nya|saya)?\b|\bgimana\s+menurutmu\s+kualitas\b|\bkasih\s+kritik\b/i.test(t)) return null;
@@ -203,8 +193,6 @@ function tryKritik(text) {
     followup: 'Kalau kamu ceritakan detail karyanya, aku bisa bantu kasih perspektif lebih spesifik.',
   });
 }
-
-// ---------- CUSTOMER SERVICE FRAMEWORKS: LATTE, HEARD, 3A ----------
 
 function tryLatte(text) {
   const t = text.toLowerCase();
@@ -249,8 +237,6 @@ function tryThreeA(text) {
       'Act: Coba hubungi ulang lewat kanal yang sama sambil menyertakan nomor tiket/riwayat sebelumnya, supaya prosesnya bisa dipercepat.',
   });
 }
-
-// ---------- NATURAL CHAT: mirroring + follow-up + contextual emoji ----------
 
 const SMALLTALK_TOPICS = [
   {
@@ -299,9 +285,6 @@ function tryNaturalChat(text) {
   }
   return null;
 }
-
-// ---------- COMBINED ----------
-
 
 function tryCustomerService(text) {
   const t = text.toLowerCase();

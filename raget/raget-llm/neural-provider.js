@@ -1,44 +1,15 @@
-// Provider Raget Neural (vNext Fase C) - jembatan tipis antara kontrak
-// provider model (llm-models.js, id 'raget-neural-50m') dan mesin transformer
-// di raget-llm/neural/. SENGAJA lazy-load penuh (dynamic import + fetch
-// checkpoint hanya saat init() pertama dipanggil) - modul ini hanya tersentuh
-// kalau pengguna aktif memilih model "Raget Neural (50M)" di picker.
-//
-// MEGA-BATCH RAGETAN ROUND 5 - FASE 3: mode Server (opsional, lihat
-// js/state/llm-mode.js) memanggil endpoint HTTP eksternal (server 1-file di
-// raget-tools/serve-massive50m.py, dideploy ke VPS/HF Spaces) yang menyajikan
-// checkpoint YANG SAMA - berguna untuk checkpoint besar yang lebih berat
-// dijalankan di browser lambat/perangkat lemah.
-//
-// MEGA-BATCH RAGETAN ROUND 6 - FASE 4: 3 tingkat mode (js/state/llm-mode.js) -
-// 'lokal-ringan' (50M, default, paling ringan/kompatibel), 'lokal-berat'
-// (100M, dicoba HANYA kalau navigator.deviceMemory tidak menandakan
-// perangkat lemah - API itu sendiri opsional/Chrome-only, kalau tidak ada
-// tetap DICOBA tapi dengan fallback penuh), 'server' (biasanya 100M di
-// HF Spaces/VPS). FALLBACK BERJENJANG - gagal di tingkat manapun (device
-// lemah terdeteksi, fetch checkpoint 100M gagal, server mati/timeout) selalu
-// jatuh ke 'lokal-ringan' (satu-satunya tingkat yang dijamin cocok di semua
-// perangkat) - generate() TIDAK PERNAH gagal total selama checkpoint 50M ada.
 
 import { llmMode } from '../../js/state/llm-mode.js';
 
 const SERVER_TIMEOUT_MS = 8000;
-// BUG FIX Round 10 (D2 - audit jalur neural produksi): tingkat 'ringan'
-// sebelumnya menunjuk ke raget-neural-50m.safetensors - checkpoint LAMA,
-// arsitektur berbeda ('small', vocab 32000), trainingSteps: 0 (BOBOT ACAK,
-// belum pernah dilatih sama sekali). Padahal seluruh training nyata Round
-// 5-10 (5.707 step, akta kelahiran, tokenizer vocab 30.368 "satu jiwa tiga
-// badan") masuk ke raget-neural-massive50m.safetensors - checkpoint itu
-// TIDAK PERNAH dimuat oleh UI produksi. Diperbaiki supaya 'ringan' konsisten
-// dengan 'berat' (sama-sama keluarga massive*, vocab sama).
 const CHECKPOINT_BY_TIER = {
   ringan: '../raget-data/neural/raget-neural-massive50m.safetensors',
   berat: '../raget-data/neural/raget-neural-massive100m.safetensors',
 };
 
 let cache = null;
-let loadedTier = null; // 'ringan' | 'berat' | null (belum ada model dimuat)
-let initPromises = {}; // per-tier, supaya switch tingkat tidak balapan
+let loadedTier = null;
+let initPromises = {};
 
 async function loadEngine() {
   if (cache) return cache;
@@ -72,8 +43,6 @@ function ensureTier(tier) {
   return initPromises[tier];
 }
 
-// Kompatibilitas nama lama (dipakai bridge lain yang sudah ada) - default
-// ke tingkat 'ringan' (perilaku Round 5 dan sebelumnya, tidak berubah).
 function init() {
   return ensureTier('ringan');
 }
@@ -102,13 +71,9 @@ async function generateWithTier(tier, prompt) {
 async function generateLocal(prompt, preferredTier) {
   if (preferredTier === 'berat') {
     const cap = llmMode.deviceCapability();
-    // Perangkat DIKETAHUI lemah (<4GB) -> jangan coba 100M sama sekali,
-    // langsung ke tingkat ringan (hemat bandwidth+memori, bukan cuma waktu).
     if (!(cap.known && cap.strong === false)) {
       const heavyText = await generateWithTier('berat', prompt);
       if (heavyText) return heavyText;
-      // 100M gagal dimuat/generate (device sungguh tidak sanggup, atau
-      // checkpoint belum ada) -> fallback berjenjang ke 50M.
     }
   }
   return generateWithTier('ringan', prompt);
@@ -142,8 +107,6 @@ async function generate(messages, prompt) {
     if (url) {
       const serverText = await generateServer(prompt, url);
       if (serverText) return serverText;
-      // Server mati/timeout/error -> fallback berjenjang ke lokal ringan
-      // (setting pengguna TIDAK diubah, tetap "Server" sampai diganti manual).
     }
     return generateLocal(prompt, 'ringan');
   }

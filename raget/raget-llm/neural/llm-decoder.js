@@ -48,9 +48,6 @@ function projectToLogits(hidden, decoderWeights) {
     return LLMEmbedding.matmul(hidden, decoderWeights.outputProjection);
 }
 
-// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC (WebGPU-aware) dari
-// runDecoderCached di atas - lihat catatan di llm-transformer.js kenapa
-// fungsi sync TIDAK disentuh (dipakai training).
 async function runDecoderCachedAsync(x, decoderWeights, config, layerCaches) {
     const { T } = requireDeps();
     let hidden = x;

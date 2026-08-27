@@ -213,10 +213,6 @@ function evaluate(expr, opts) {
   return { ok: true, value: trimNum(value), steps: steps || [] };
 }
 
-// ---------- SOAL CERITA (WORD PROBLEMS) ----------
-// Angka dalam soal cerita sehari-hari memakai konvensi Indonesia: titik = pemisah ribuan,
-// koma = desimal (kebalikan dari normalizeExpr() di atas yang dipakai untuk ekspresi kalkulator).
-
 function parseIndoNumber(raw) {
   let s = String(raw || '').trim();
   s = s.replace(/\.(?=\d{3}(\D|$))/g, '');

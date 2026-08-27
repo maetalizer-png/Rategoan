@@ -79,6 +79,17 @@
   color: var(--rg-accent-ink);
 }
 
+.icon-round.plain,
+.back-btn.plain {
+  border-color: transparent;
+  background: transparent;
+}
+
+.icon-round.plain:active,
+.back-btn.plain:active {
+  background: var(--rg-ring);
+}
+
 .account-initial {
   font-size: 16px;
   font-weight: 800;

@@ -174,11 +174,6 @@ async function generateCached(model, promptText, options) {
         ids = ids.slice(ids.length - model.config.model.maxContextLength + 1);
     }
 
-    // MEGA-BATCH RAGETAN ROUND 6 - FASE 1: kalau WebGPU siap (LLMGpu.isReady(),
-    // di-set via warmupGpu() di llm-core.js#initialize saat model dimuat),
-    // pakai jalur async forwardCachedAsync (matmul dModel-besar via WebGPU,
-    // fallback CPU otomatis per-call). Kalau tidak, jalur sync lama PERSIS
-    // seperti sebelumnya - tidak ada perubahan perilaku/angka.
     const useGpu = LLMGpu.isReady();
     let result = useGpu
         ? await LLMInference.forwardCachedAsync(ids, model, model.config.model, null, 0)

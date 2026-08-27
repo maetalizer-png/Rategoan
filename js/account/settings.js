@@ -105,9 +105,6 @@ export const settings = {
       val.textContent = 'Lokal-Ringan (50M)';
     }
   },
-  // MEGA-BATCH RAGETAN ROUND 6 - FASE 4: klik = putar 3 mode (Lokal-Ringan ->
-  // Lokal-Berat -> Server -> ...). Masuk ke Server minta URL sekali; kalau
-  // dibatalkan, putar terus ke mode berikutnya supaya tombol tidak "macet".
   handleLlmModeToggle() {
     let next = llmMode.cycle();
     if (next === 'server') {
@@ -226,7 +223,10 @@ export const settings = {
       this.refresh();
       router.go('settings');
     };
-    $('btn-back').onclick = () => router.go('chat');
+    $('btn-back').onclick = () => {
+      router.go('chat');
+      drawer.open();
+    };
     document.querySelectorAll('.theme-btn').forEach((b) => {
       b.onclick = () => {
         theme.set(b.dataset.theme);

@@ -10,8 +10,6 @@ function tnum(n) {
   return Number.isInteger(n) ? String(n) : String(r3(n));
 }
 
-// ---------- ALGEBRA ----------
-
 function tryAlgebra(text) {
   const t = text;
   if (!/(selesaikan|solve|cari\s+(nilai\s+)?x|berapa\s+nilai\s+x|nilai\s+x\s+dari)/i.test(t)) return null;
@@ -33,8 +31,6 @@ function tryAlgebra(text) {
     `x = ${tnum(diff)} / ${tnum(a)} = ${tnum(x)}`
   );
 }
-
-// ---------- GEOMETRY ----------
 
 function extractParam(text, labels) {
   for (const label of labels) {
@@ -117,8 +113,6 @@ function tryGeometry(text) {
   return null;
 }
 
-// ---------- STATISTICS ----------
-
 function tryStatistics(text) {
   const t = text.toLowerCase();
   const m = t.match(/(rata-rata|mean|median|modus|mode|simpangan\s*baku|standar\s*deviasi|stdev)\s+(?:dari|of)\s+([\d.,\s]+)/i);
@@ -164,8 +158,6 @@ function tryStatistics(text) {
   return `Simpangan baku dari ${listStr}\nRata-rata = ${tnum(r3(mean))}\nVarians = ${tnum(r3(variance))}\nSimpangan baku = √${tnum(r3(variance))} = ${tnum(r3(sd))}`;
 }
 
-// ---------- LIGHT CALCULUS (power rule) ----------
-
 function tryCalculus(text) {
   const m = text.match(/(?:turunan\s+(?:dari|dari\s+fungsi)?|derivative\s+of)\s+(.+)/i);
   if (!m) return null;
@@ -203,8 +195,6 @@ function tryCalculus(text) {
   return `Turunan dari ${expr}\nGunakan aturan pangkat: d/dx[cxⁿ] = c·n·x^(n-1)\nHasil: f'(x) = ${result}`;
 }
 
-// ---------- LOGIC ----------
-
 function boolWord(s) {
   if (/^(benar|true)$/i.test(s)) return true;
   if (/^(salah|false)$/i.test(s)) return false;
@@ -239,8 +229,6 @@ function tryLogic(text) {
   }
   return null;
 }
-
-// ---------- PHYSICS ----------
 
 function grab(text, labels) {
   for (const label of labels) {
@@ -345,8 +333,6 @@ function tryPhysics(text) {
   return null;
 }
 
-// ---------- TECHNOLOGY ----------
-
 const TECH_CONCEPTS = {
   'load balancer': 'Load balancer adalah komponen yang membagi trafik masuk ke beberapa server agar beban kerja merata dan sistem tetap responsif saat trafik tinggi.',
   microservices: 'Microservices adalah pendekatan arsitektur software yang memecah aplikasi besar menjadi layanan-layanan kecil independen yang saling berkomunikasi lewat API.',
@@ -392,8 +378,6 @@ function tryTroubleshoot(text) {
   return null;
 }
 
-// ---------- SCIENCE FIELDS (konsep, bukan topik spesifik di dalamnya) ----------
-
 const SCIENCE_FIELDS = {
   biologi: 'Biologi adalah cabang ilmu pengetahuan alam yang mempelajari makhluk hidup — mulai dari struktur sel, cara kerja tubuh, hingga interaksi antar makhluk hidup dan lingkungannya.',
   fisika: 'Fisika adalah cabang ilmu pengetahuan alam yang mempelajari materi, energi, dan interaksi antara keduanya — mencakup gerak, gaya, panas, cahaya, listrik, hingga struktur alam semesta.',
@@ -408,8 +392,6 @@ function tryScienceField(text) {
   }
   return null;
 }
-
-// ---------- BIOLOGY ----------
 
 const BODY_SYSTEMS = {
   'sistem pencernaan': 'Sistem pencernaan adalah rangkaian organ (mulut, kerongkongan, lambung, usus halus, usus besar) yang memecah makanan menjadi nutrisi yang bisa diserap tubuh.',
@@ -482,8 +464,6 @@ function tryHealthInfo(text) {
   }
   return null;
 }
-
-// ---------- COMBINED ----------
 
 function tryStem(text) {
   const t = String(text || '').trim();

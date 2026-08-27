@@ -182,16 +182,6 @@ function restoreModelFromCheckpointSafetensors(input) {
     weights.decoderWeights.outputProjection = LLMEmbedding.transpose(weights.embeddingMatrix);
 
     return {
-        // BUG FIX Round 10: checkpoint lama (mis. raget-neural-tiny.safetensors,
-        // dilatih sebelum runtime.minNewTokens ada di DEFAULT_RUNTIME) menyimpan
-        // config.runtime TANPA field itu. Sebelumnya config dipakai verbatim,
-        // jadi field yang hilang jadi `undefined` di runtime dan generate()
-        // di llm-runtime.js diam-diam fallback ke minNewTokens=0 - EOS TIDAK
-        // pernah ditekan, model bisa berhenti di token pertama (diagnostik:
-        // diagnose-neural-generation-report.json, teks jadi ":" / "::" / "").
-        // Merge runtime yang tersimpan DI ATAS DEFAULT_RUNTIME saat ini supaya
-        // field baru yang ditambahkan setelah checkpoint lama dilatih tetap
-        // dapat nilai default yang masuk akal, bukan undefined.
         config: Object.assign({}, rategoanMeta.config, { runtime: LLMConfig.createRuntimeConfig(rategoanMeta.config.runtime) }),
         merges: rategoanMeta.merges,
         vocab,
@@ -288,7 +278,6 @@ async function deleteCheckpoint(name) {
         });
         db.close();
     } catch (e) {
-        /* penghapusan checkpoint bukan operasi kritis, gagal senyap */
     }
 }
 

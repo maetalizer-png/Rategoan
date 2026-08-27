@@ -1,16 +1,3 @@
-// Loader tipis untuk data KULINER (nama, negara asal, jenis, bahan utama,
-// trivia) + composer adaptif. Domain KEDUA migrasi skema data standar Ronde
-// vNext Fase B (lihat roadmap §3, dan tokoh-store.js untuk domain pertama):
-// 143 entri kini murni JSON di raget-data/json/kuliner/<region>.json (skema
-// {id, kategori, wilayah, nama, tags, teks, meta}), dipecah 6 file
-// per-region (asia, eropa, amerika, afrika, osenia, timur-tengah) mengikuti
-// split yang sudah ada sejak Ronde v7 Bagian 3 - file ini HANYA berisi
-// logika query (find/compose/try*), nol data literal. Riwayat migrasi ada
-// di raget-tools/migrate-kuliner-domain.mjs.
-//
-// CATATAN JUJUR yang tetap dipertahankan: 143 entri (108 dari Ronde v7 B3
-// awal + 35 tambahan diprioritaskan ke region tertipis saat itu), bertahap
-// tanpa fabrikasi.
 
 import { pickVariant } from '../../utils/text.js';
 
@@ -50,11 +37,6 @@ async function findKuliner(query) {
   const kuliner = await loadKuliner();
   let found = kuliner.find((k) => norm(k.nama) === q);
   if (found) return found;
-  // Fuzzy fallback SATU ARAH saja: cocok kalau nama kuliner LENGKAP muncul di dalam query
-  // (mis. "resep rendang enak dong" mengandung "rendang"). Arah sebaliknya (nama kuliner
-  // mengandung query) SENGAJA tidak dipakai karena berisiko salah tangkap kata pendek yang
-  // kebetulan jadi prefiks nama kuliner - mis. "chili" (negara Chile) jangan sampai
-  // ketangkap ke "Chili Crab" hanya karena "chili crab".includes("chili").
   found = kuliner.find((k) => q.includes(norm(k.nama)));
   return found || null;
 }

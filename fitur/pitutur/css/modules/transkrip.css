@@ -1,4 +1,3 @@
-/* ========== TRANSKRIP ========== */
 .page h2 {
   font-size: 10px;
   letter-spacing: 2px;
@@ -37,7 +36,6 @@
 .naskahLine:active {
   background: var(--cream);
 }
-
 
 .naskahLine.on {
   background: rgba(176, 128, 80, 0.12);

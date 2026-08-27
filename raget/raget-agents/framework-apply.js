@@ -1,11 +1,3 @@
-// Mode "terapkan" untuk kerangka berpikir - bukan cuma mendefinisikan kerangkanya, tapi
-// benar-benar menjalankan langkah-langkahnya bareng user lewat sesi bertahap, mengikuti
-// pola state-machine modul-level yang sama seperti quiz-session.js.
-//
-// Ronde v6 B5: Decision Matrix (pilihan -> kriteria -> skor per pilihan -> kesimpulan).
-// Ronde v7 B5: ditambah 5 Whys (masalah -> "kenapa" berulang sampai 5x -> akar masalah) dan
-// SWOT (topik -> Strengths -> Weaknesses -> Opportunities -> Threats -> ringkasan), memakai
-// field session.kind untuk membedakan alur tanpa mengubah perilaku Decision Matrix yang sudah ada.
 
 let session = null;
 
@@ -37,8 +29,6 @@ function hasPending() {
 function cancel() {
   session = null;
 }
-
-// ---------- DECISION MATRIX ----------
 
 function askScoring() {
   const opt = session.options[session.optionIdx];
@@ -98,8 +88,6 @@ function checkDecisionMatrix(t) {
   return null;
 }
 
-// ---------- 5 WHYS ----------
-
 const STOP_RE = /^(selesai|sudah|cukup|berhenti)\.?$/i;
 
 function askWhy() {
@@ -138,8 +126,6 @@ function check5Whys(t) {
 
   return null;
 }
-
-// ---------- SWOT ----------
 
 function finishSwot() {
   const out =
@@ -194,8 +180,6 @@ function checkSwot(t) {
 
   return null;
 }
-
-// ---------- ENTRY POINTS ----------
 
 function start(kind) {
   if (kind === 'decision_matrix') {

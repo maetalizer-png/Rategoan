@@ -1,0 +1,58 @@
+@media (min-width: 860px) {
+  body {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas: 'sidebar topbar' 'sidebar app';
+    position: fixed;
+  }
+
+  #topbar {
+    grid-area: topbar;
+  }
+
+  #app {
+    grid-area: app;
+    min-height: 0;
+  }
+
+  #sidebar {
+    grid-area: sidebar;
+    position: static;
+    width: 100%;
+    transform: none;
+    box-shadow: none;
+  }
+
+  #btn-menu {
+    display: none;
+  }
+
+  #backdrop {
+    display: none;
+  }
+
+  #messages {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  #composer {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .settings-page {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  #view-collection {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+}

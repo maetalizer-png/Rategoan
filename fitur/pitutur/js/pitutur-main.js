@@ -227,8 +227,6 @@ function aturSleep(menit) {
 }
 
 function siapkanPertama() {
-  // Hanya set default sumber — JANGAN auto-susun naskah.
-  // User melihat panduan dulu; naskah muncul setelah Susun / Putar.
   if (sudahSiapPertama) return;
   sudahSiapPertama = true;
   if (!state.channel || String(state.channel).indexOf('doc:') === 0) {

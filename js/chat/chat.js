@@ -274,9 +274,6 @@ export const chat = {
       body.removeEventListener('pointerdown', onTap);
     }
     body.innerHTML = markdown.render(text);
-    // Jam baru dibuat & ditambahkan SETELAH animasi ketik selesai (bukan di awal, sebelum
-    // animasi mulai) - kalau ditambah di awal, jam ikut "melompat" turun tiap frame mengikuti
-    // tinggi body yang masih tumbuh dari kosong, kesannya jam "buru-buru ngikutin" jawaban.
     const tm = document.createElement('span');
     tm.className = 'time';
     tm.textContent = fmtTime(Date.now());

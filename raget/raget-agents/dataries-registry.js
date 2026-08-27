@@ -1,7 +1,3 @@
-// MEGA-BATCH RAGETAN ROUND 9 - FASE 2: logika registry+loader dataries
-// (dipindah dari raget-dataries/index.js - dataries/ sekarang folder DATA
-// MURNI — sapaan+tokoh sudah migrasi JSON Fase B lanjut; folder legacy boleh dikosongkan). Semua pemakai (7 file) diarahkan
-// ke sini - impor tetap jalan, cuma titik sumbernya pindah.
 export const REGIONS = Object.freeze({
   country: [
     { id: 'african-barat', file: './country/african-barat.js', names: ['nigeria', 'ghana', 'pantai gading', 'senegal', 'mali'] },
@@ -226,11 +222,6 @@ export const REGIONS = Object.freeze({
 
 const cache = new Map();
 
-// Grup yang sudah dimigrasi ke skema JSON tunggal Fase B (raget-data/json/<grup>/).
-// loadRegion() di bawah TETAP satu-satunya titik yang tahu soal storage -
-// untuk grup di sini ia fetch JSON lalu bentuk ulang jadi {text, metadata}
-// SAMA PERSIS seperti bentuk lama, supaya dataries-bridge.js dan seluruh
-// pipeline resolusi entitas tidak perlu tahu/berubah sama sekali.
 const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', marplace: 'marplace', lingo: 'lingo', ekonomi: 'ekonomi', paluang: 'paluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', sapaan: 'sapaan', greeting: 'greeting', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
 
 function unifiedToLegacyShape(entry, group) {

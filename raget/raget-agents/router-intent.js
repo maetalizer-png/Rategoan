@@ -50,10 +50,6 @@ function detectTeaching(text) {
   return { subject, value };
 }
 
-// GUARD ANTI-NARSIS: pola di bawah ini sengaja sempit dan hanya cocok pada
-// frasa self-referential eksplisit ("...mu", "jilid/ronde X ngapain", "siapa
-// pembuatmu", dst). Pertanyaan umum ("ceritakan sejarah indonesia", "cara
-// kerja mesin cuci") TIDAK boleh menyeret devlog - jangan dilonggarkan.
 const DEVLOG_SEJARAH_RE = /\b(sejarahmu|riwayatmu|riwayat\s+pengembanganmu)\b/i;
 const DEVLOG_CARA_KERJA_RE = /\b(bagaimana\s+|gimana\s+)?cara\s+kerjamu\b/i;
 const DEVLOG_JILID_RE = /\b(jilid|ronde)\s+[\w.-]+\s+(ngapain|ngerjain\s+apa|itu\s+ngapain)\b|\bapa\s+yang\s+dikerjakan\s+(di\s+)?(jilid|ronde)\s+[\w.-]+/i;

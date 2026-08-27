@@ -1,16 +1,5 @@
 import { detectMood } from '../../utils/text.js';
 
-// ---------- EMOTIONAL CONTINUITY (lintas giliran, maks 3) ----------
-// Mengingat mood dari giliran-giliran sebelumnya (maks 3 giliran ke depan sebelum meluruh)
-// supaya nada balasan tetap konsisten walau giliran berikutnya pertanyaannya netral (mis.
-// factoid biasa) - bukan berpura-pura mendeteksi emosi baru yang tidak ada, hanya jujur
-// mereferensikan konteks yang benar-benar terjadi sebelumnya.
-// Ronde v7 B4: selain mood negatif (sedih/marah/capek), mood POSITIF (senang) juga sekarang
-// dilacak - supaya nada ceria juga ikut "menular" ke giliran berikutnya, bukan cuma nada
-// meredam. Ditambah deteksi sinyal reset eksplisit ("udah baikan", "udah mendingan", dst.)
-// yang langsung memutus kontinuitas lebih awal ketimbang menunggu peluruhan 3 giliran -
-// kalau user sendiri bilang sudah baikan, jangan tetap sok-sokan "menular"kan mood lama.
-
 const EMOTION_CONTINUITY_MAX_TURNS = 3;
 const NEGATIVE_MOODS = new Set(['sedih', 'marah', 'capek']);
 const POSITIVE_MOODS = new Set(['senang']);
@@ -22,9 +11,6 @@ const CONTINUITY_OPENERS = {
   senang: 'Masih kebawa seneng nih abis dengar kabar baikmu tadi. ',
 };
 
-// Sinyal eksplisit bahwa mood sebelumnya sudah berlalu - dicek SEBELUM detectMood() supaya
-// frasa seperti "udah gak sedih lagi" tidak salah tertangkap sebagai mood "sedih" baru
-// (detectMood cuma cari kemunculan kata, tidak paham negasi).
 const RESET_SIGNAL_RE =
   /\b(udah|sudah)\s+(baikan|mendingan|lebih\s+baik(an)?|tenang(an)?|oke(an)?\s+kok)\b|\b(udah|sudah)\s+(gak|nggak|tidak)\s+(sedih|marah|kesel|kesal|capek)(\s+lagi)?\b/i;
 
@@ -53,9 +39,6 @@ function noteTurnMood(text) {
 
 function tryEmotionalContinuityOpener(text) {
   const t = String(text || '');
-  // Sinyal reset dicek di sini juga (bukan cuma di noteTurnMood) karena agent.js menghitung
-  // opener giliran ini SEBELUM memanggil noteTurnMood() - tanpa ini, giliran yang berisi
-  // sinyal reset itu sendiri masih akan salah menampilkan opener kontinuitas lama.
   if (RESET_SIGNAL_RE.test(t.toLowerCase())) return null;
   const currentMood = detectMood(t);
   if (currentMood) return null;
@@ -72,12 +55,6 @@ function getCarriedEmotion() {
   return lastEmotion;
 }
 
-// ---------- OPT-IN GEOLOCATION ----------
-// Deliberately synchronous: an earlier version called navigator.geolocation.getCurrentPosition()
-// directly, but its real (up to ~1.5s) async delay raced against the chat UI's typing-animation
-// stability detection and could misattribute a reply to the wrong message. Opt-in consent is
-// represented as an explicit text flow instead, keeping behavior instant and deterministic.
-
 function tryGeoOptIn(text) {
   const t = text.toLowerCase();
   if (!/\b(aktifkan|gunakan|pakai|nyalakan)\s+lokasi(ku|mu|nya|\s+saya)?\b|\bboleh\s+akses\s+lokasi(ku|mu|nya)?\b/i.test(t)) return null;
@@ -90,8 +67,6 @@ function tryGeoOptIn(text) {
     'Silakan izinkan di sana kalau mau, atau sebutkan kotamu secara manual kalau lebih nyaman tanpa izin lokasi.'
   );
 }
-
-// ---------- TIME-AWARE GREETING (mood layer already handled by moodOpener wrapper) ----------
 
 function timeGreeting(hour) {
   const h = typeof hour === 'number' ? hour : new Date().getHours();
@@ -106,8 +81,6 @@ function tryTimeGreeting(text) {
   if (!/^(hai+|halo+|hi+|hey+|hoi+|woy+)[\s!.,]{0,3}$/i.test(t)) return null;
   return timeGreeting();
 }
-
-// ---------- SITUATION CLASSIFICATION ----------
 
 const EMERGENCY_RE =
   /\bdarurat\b|\bini\s+darurat\b|\bsesak\s+napas\b|\bpendarahan\b|\b(pingsan|tidak\s+sadarkan\s+diri)\b|\bkecelakaan\b.*\btolong\b|\btolong\b.*\bkecelakaan\b|\bditangkap\s+polisi\b|\bbutuh\s+pengacara\s+sekarang\b|\bkebakaran\b.*\btolong\b|\btolong\b.*\bkebakaran\b/i;
@@ -147,8 +120,6 @@ function trySituasi(text) {
   return tryEmergency(text) || trySituasiSantai(text) || trySituasiBelajar(text) || trySituasiKerja(text);
 }
 
-// ---------- "APA SELANJUTNYA" SUGGESTION ENGINE (max 3, opsional) ----------
-
 const SUGGESTION_SETS = [
   { match: /belajar|ujian/i, items: ['Coba pecah materi jadi bagian-bagian kecil dan pelajari satu per satu', 'Gunakan teknik Pomodoro (25 menit fokus, 5 menit istirahat)', 'Uji pemahamanmu dengan coba jelaskan ulang materinya pakai kata-kata sendiri'] },
   { match: /kerja|deadline/i, items: ['Tulis 3 prioritas utama yang paling mendesak dulu', 'Kerjakan bagian tersulit di awal saat energi masih tinggi', 'Beri jeda singkat tiap 1-2 jam supaya fokus tetap terjaga'] },
@@ -167,8 +138,6 @@ function trySuggestions(text) {
     items.map((s, i) => `${i + 1}. ${s}`).join('\n')
   );
 }
-
-// ---------- COMBINED ----------
 
 function tryContext(text) {
   const t = String(text || '').trim();

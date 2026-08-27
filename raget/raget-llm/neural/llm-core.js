@@ -51,7 +51,6 @@ async function initialize(options) {
                 await LLMTrainer.trainOnCorpus(activeModel, sequences, { epochs, learningRate, optimizer: 'adam' });
             }
         } catch (e) {
-            /* auto-training gagal - lanjut dengan bobot awal, bukan kondisi fatal */
         }
     }
     return activeModel;

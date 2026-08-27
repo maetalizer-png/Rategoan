@@ -1,7 +1,3 @@
-// pdfjs-dist@4.x tidak lagi menerbitkan build UMD klasik (pdf.min.js) yang
-// bisa dimuat lewat <script src>; sejak v4 hanya tersedia sebagai modul ES
-// (pdf.min.mjs). Maka paket diunduh lewat dynamic import(), bukan
-// utils/lib-loader.js (yang cuma bisa <script> global).
 const PDFJS_MJS_URL = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs';
 const PDFJS_WORKER_URL = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs';
 const PACKAGE_SIZE_MB = 10;
@@ -19,7 +15,7 @@ async function downloadPackage() {
   }
   downloadState = 'downloading';
   try {
-    const mod = await import(/* webpackIgnore: true */ PDFJS_MJS_URL);
+    const mod = await import(PDFJS_MJS_URL);
     mod.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
     window.pdfjsLib = mod;
     downloadState = 'ready';

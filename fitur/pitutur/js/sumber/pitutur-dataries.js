@@ -52,7 +52,6 @@ function hubungkan(apiBaru, regionsBaru, label) {
   waktuGagal = 0;
 }
 
-/** Peta grup registry → folder json (sama seperti JSON_MIGRATED_GROUPS). */
 const JSON_FOLDER = {
   country: 'negara',
   cities: 'kota',
@@ -84,7 +83,6 @@ function unifiedToLegacy(entry, group) {
   return { text: entry.teks || entry.text || '', metadata: meta };
 }
 
-/** Fallback: fetch JSON langsung dari /raget/raget-data/json (tanpa registry). */
 async function loadRegionJson(group, id) {
   const folder = JSON_FOLDER[group];
   if (!folder) return [];
@@ -130,17 +128,13 @@ async function ambilApi() {
         hubungkan(d, mod.REGIONS || null, jalur[i]);
         return api;
       }
-    } catch (e) {
-      console.warn('[pitutur-dataries] gagal import', jalur[i], e && e.message);
-    }
+    } catch {}
   }
-  // Fallback: JSON absolut di origin yang sama (Vercel/localhost)
   hubungkan(buatApiFallback(), null, 'json-fallback');
   return api;
 }
 
 const UJI = [
-  // negara / kota / bahasa
   ['country', 'asian-tenggara'],
   ['country', 'asian-barat'],
   ['country', 'asian-timur'],
@@ -151,7 +145,6 @@ const UJI = [
   ['cities', 'eropan-barat'],
   ['languages', 'asian-tenggara'],
   ['languages', 'asian-timur'],
-  // tokoh (JSON per bidang)
   ['tokoh', 'sains'],
   ['tokoh', 'teknologi'],
   ['tokoh', 'sejarah'],
@@ -159,10 +152,8 @@ const UJI = [
   ['tokoh', 'penjelajah'],
   ['tokoh', 'pemimpin'],
   ['tokoh', 'perempuan-berpengaruh'],
-  // sapaan (JSON migrasi)
   ['sapaan', 'greetings'],
   ['sapaan', 'interaktif'],
-  // pengetahuan
   ['sejarah', 'indonesia'],
   ['sejarah', 'dunia'],
   ['sejarah', 'modern'],
@@ -172,7 +163,6 @@ const UJI = [
   ['penemuan', 'teknologi'],
   ['penemuan', 'sains'],
   ['penemuan', 'kedokteran'],
-  // budaya & hidup
   ['makanan', 'asia'],
   ['makanan', 'eropa'],
   ['minuman', 'asia'],
@@ -186,7 +176,6 @@ const UJI = [
   ['etika', 'eropa'],
   ['lingo', 'asean-tenggara'],
   ['lingo', 'asean-timur'],
-  // ekonomi / peluang / olahraga / marplace
   ['ekonomi', 'indikator'],
   ['ekonomi', 'komoditas'],
   ['paluang', 'tren'],

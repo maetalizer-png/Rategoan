@@ -1,18 +1,3 @@
-// Loader tipis untuk data TOKOH (nama ID+EN, lahir/wafat+negara, bidang, 3
-// pencapaian, 1 kutipan, 1 trivia, relasi). Domain PERCONTOHAN migrasi skema
-// data standar Ronde vNext Fase B (lihat roadmap §3): data 236 entri kini
-// murni JSON di raget-data/json/tokoh/tokoh.json (skema {id, kategori, wilayah,
-// nama, tags, teks, meta}) - file ini HANYA berisi logika query (find/
-// compose/try*), nol data literal, sesuai kontrak "JSON untuk data, JS
-// hanya untuk logika". Riwayat migrasi ada di raget-tools/migrate-tokoh-
-// domain.mjs.
-//
-// CATATAN JUJUR yang tetap dipertahankan dari versi lama: target jangka
-// panjang 400 entri; 236 entri (59%) yang ada terverifikasi dan bertahap
-// tanpa fabrikasi - 45 dari Ronde v5, +100 dari Ronde v6 Bagian 4, +91 dari
-// Ronde v7 Bagian 1. Nama-nama beririsan dengan entri ringkas di
-// dataries/tokoh/*.js (dijangkau lewat trySiapaTokoh() di bridge-extras.js)
-// atau tokoh terkenal berfakta mapan - bukan duplikasi, tapi PENDALAMAN.
 
 let tokohCache = null;
 

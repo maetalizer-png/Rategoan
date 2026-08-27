@@ -13,13 +13,12 @@ function quantizeMatrix(matrix) {
     }
 
     if (min === max) {
-        
-        
+
         min -= 0.5;
         max += 0.5;
     }
 
-    const scale = (max - min) / 254; // rentang int8 -127..127 = 254 langkah
+    const scale = (max - min) / 254;
     const zeroPoint = min;
 
     const data = new Int8Array(rows * cols);
@@ -57,11 +56,11 @@ function quantizeModel(model) {
             },
             ffn: {
                 W1: quantizeMatrix(layer.ffn.W1),
-                b1: layer.ffn.b1,  
+                b1: layer.ffn.b1,
                 W2: quantizeMatrix(layer.ffn.W2),
                 b2: layer.ffn.b2
             },
-            ln1: layer.ln1, 
+            ln1: layer.ln1,
             ln2: layer.ln2
         };
     }
@@ -102,11 +101,7 @@ function dequantizeModel(quantizedModel) {
         decoderWeights: {
             layers: quantizedModel.decoderWeights.layers.map(dequantizeLayer),
             finalNorm: quantizedModel.decoderWeights.finalNorm,
-            
-            
-            
-            
-            
+
             outputProjection: quantizedModel.decoderWeights.outputProjection
                 ? dequantizeMatrix(quantizedModel.decoderWeights.outputProjection)
                 : undefined

@@ -32,8 +32,7 @@ function softmaxRow(row) {
     for (let i = 0; i < row.length; i++) {
         if (row[i] > max) max = row[i];
     }
-    
-    
+
     if (max === -Infinity) {
         return row.map(function () { return 1 / row.length; });
     }
@@ -115,7 +114,7 @@ function createCausalMaskWithCache(newLen, cacheLen) {
     const mask = new Array(newLen);
     for (let i = 0; i < newLen; i++) {
         const row = new Array(totalLen);
-        const allowedUpTo = cacheLen + i; 
+        const allowedUpTo = cacheLen + i;
         for (let j = 0; j < totalLen; j++) {
             row[j] = j > allowedUpTo ? -Infinity : 0;
         }
@@ -153,13 +152,6 @@ function multiHeadAttentionCached(x, weights, nHeads, cache) {
     return { output: output, cache: { K: nextK, V: nextV } };
 }
 
-// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC dari multiHeadAttentionCached
-// yang mendorong 4 matmul dModel x dModel (Wq/Wk/Wv/Wo) lewat LLMGpu.matmulAuto
-// (WebGPU kalau siap, fallback CPU otomatis). TERPISAH TOTAL dari
-// multiHeadAttentionCached (sync) di atas - fungsi itu TIDAK disentuh karena
-// dipakai llm-trainer.js untuk forward pass training (mengubahnya jadi async
-// akan merusak training). Fungsi ini HANYA dipanggil dari jalur inference
-// generateCached() saat LLMGpu.isReady() true.
 async function multiHeadAttentionCachedAsync(x, weights, nHeads, cache) {
     const [Qnew, Knew, Vnew] = await Promise.all([
         LLMGpu.matmulAuto(x, weights.Wq),

@@ -1,10 +1,3 @@
-/* main.css — entry point. Isi sesungguhnya dimodularisasi per komponen
-   di folder ./modules/. Urutan @import berikut PENTING: token desain
-   harus lebih dulu (dipakai semua modul lain lewat var(--...)), dan
-   urutan lain mengikuti urutan tampil di layout (base -> header ->
-   panggung -> transkrip -> bar bawah -> interaksi -> sheet -> kontrol
-   -> rujukan -> riwayat). */
-
 @import url('./modules/tokens.css');
 @import url('./modules/base.css');
 @import url('./modules/header.css');

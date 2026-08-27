@@ -151,9 +151,6 @@ async function tryEtika(text) {
   const isTip = /^tip/i.test(text);
   const entity = bridgeResolve.resolveCountryAlias(bridgeResolve.cleanEntity(m[1]));
   if (!entity) return null;
-  // country factoid dataset & etika dataset punya nama kanonis berbeda untuk sebagian negara
-  // (co: "china" vs "Tiongkok") - cocokkan lewat metadata.country ATAU tags supaya alias tetap
-  // terhubung ke data etika yang benar tanpa harus menyamakan kedua namespace.
   const items = await bridgeResolve.findAllInList(
     'etika',
     (it) => {
@@ -247,11 +244,6 @@ async function tryLingo(text) {
 async function extras(q) {
   const rawText = String(q || '').trim();
   if (!rawText) return null;
-  // tryReverseLookup butuh sufiks posesif UTUH ("bahasanya", "uangnya",
-  // "ibukotanya") sebagai penanda pola reverse-lookup - jalankan sebelum
-  // splitPossessiveSuffix() supaya konsisten dengan factoid() (yang juga
-  // memberi kesempatan pada pola posesif lain sebelum split) tanpa merusak
-  // regex reverse-lookup itu sendiri.
   const reverseLookup = await bridgeReasoning.tryReverseLookup(rawText);
   if (reverseLookup) return reverseLookup;
 

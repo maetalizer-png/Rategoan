@@ -1,34 +1,6 @@
 import { bilingual } from './bilingual.js';
 import { datariesBridge } from './dataries-bridge.js';
 
-// ---------- INTERNATIONAL DAYS DATABASE ----------
-// Domain migrasi skema data standar Ronde vNext Fase B (lihat roadmap §3,
-// dan tokoh-store.js/kuliner-store.js untuk 2 domain sebelumnya): 158 entri
-// kini murni JSON di raget-data/json/hari-internasional/hari-internasional.json
-// (skema {id, kategori, wilayah, nama, tags, teks, meta}), wilayah sengaja
-// null (observansi global, bukan spesifik geografis). Riwayat migrasi ada
-// di raget-tools/migrate-hari-domain.mjs.
-//
-// CATATAN PENTING: percobaan pertama migrasi ini memakai TOP-LEVEL AWAIT
-// (bukan loader async seperti tokoh/kuliner) supaya findByDate/tryHariByDate/
-// tryHariByName tetap sinkron. Itu SALAH dan menyebabkan bug nyata: main.js
-// meng-import agent.js di baris teratas, dan top-level await di modul ini
-// menunda evaluasi seluruh rantai import termasuk main.js sendiri cukup
-// lama sehingga event 'DOMContentLoaded' terlanjur terpicu SEBELUM listener
-// utama main.js sempat terpasang - composer.bind() dkk tidak pernah
-// berjalan, tombol kirim jadi diam total tanpa error apa pun di konsol.
-// Ditemukan lewat pengujian langsung (respons via chat gagal total padahal
-// pemanggilan agent.respond() langsung dari console tetap berhasil), bukan
-// tebakan. Diperbaiki dengan pola loader tipis standar (cache + fetch lazy)
-// yang sama seperti tokoh-store.js/kuliner-store.js, dan tryHariByDate/
-// tryHariByName jadi async - dua baris pemanggilnya di agent.js diberi
-// `await` inline di dalam rantai OR yang sudah ada (JS mengizinkan `await`
-// di tengah ekspresi `||`, short-circuit tetap berlaku benar).
-//
-// CATATAN JUJUR yang tetap dipertahankan: target jangka panjang 200; 158
-// entri (79%) yang ada terverifikasi tanggalnya tanpa menebak - 105 dari
-// Ronde v5, +41 dari Ronde v6 B5, +12 dari Ronde v7 B2.
-
 const MONTH_ID = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'];
 
 let hariCache = null;
@@ -78,8 +50,6 @@ async function tryHariByName(text) {
   return found.name + ' diperingati setiap tanggal ' + dd + ' ' + MONTH_ID[mm - 1] + '.';
 }
 
-// ---------- 5-LANGUAGE DETECTION (ID/EN/AR/ZH/JA) ----------
-
 function detectLanguage5(text) {
   const t = String(text || '').trim();
   if (!t) return null;
@@ -116,13 +86,6 @@ function tryCountNumbers(text) {
   const list = NUMBERS_1_10[langCode];
   return 'Angka 1-10 dalam bahasa ' + LANG_LABEL[langCode] + ': ' + list.map((w, i) => i + 1 + '=' + w).join(', ') + '.';
 }
-
-// ---------- "KONTEKS DI JELAJAH DUNIA" AUTO-MODE ----------
-// Ronde v6 B5: diperluas dari 53 ke 121 kota (53 negara), meliputi seluruh negara
-// yang punya data etika di raget-dataries/etika/*.js (data etika TIDAK dibuat baru,
-// hanya dijangkau lebih luas). Negara Tiongkok memakai nama 'Tiongkok' (bukan 'China')
-// supaya cocok dengan metadata.country di data etika - sebelumnya memakai 'China' yang
-// menyebabkan lookup etika untuk kota-kota China selalu gagal (bug, sudah diperbaiki).
 
 const CITY_COUNTRY = {
   tokyo: 'Jepang', osaka: 'Jepang', kyoto: 'Jepang',
@@ -216,8 +179,6 @@ async function tryAutoLocationContext(text) {
 function capitalize(s) {
   return s.replace(/\b\w/g, (c) => c.toUpperCase());
 }
-
-// ---------- COMBINED ----------
 
 async function tryWorldContext(text) {
   const t = String(text || '').trim();

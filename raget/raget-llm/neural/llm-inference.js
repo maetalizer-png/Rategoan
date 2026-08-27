@@ -10,12 +10,6 @@ function createModelWeights(config) {
     const embeddingMatrix = E.createEmbeddingMatrix(config.vocabSize, config.dModel, config.initStd);
     const decoderWeights = D.createDecoderWeights(config);
 
-    
-    
-    
-    
-    
-    
     decoderWeights.outputProjection = E.transpose(embeddingMatrix);
 
     return {
@@ -54,9 +48,7 @@ function forwardCached(newTokenIds, model, config, layerCaches, positionOffset) 
     }
 
     const tokenEmbeddings = E.lookupEmbeddings(model.embeddingMatrix, newTokenIds);
-    
-    
-    
+
     const fullPosEnc = E.getPositionalEncoding(totalLen, config.dModel);
     const posEncForNew = fullPosEnc.slice(positionOffset, totalLen);
     const x = E.addPositionalEncoding(tokenEmbeddings, posEncForNew);
@@ -71,10 +63,6 @@ function getNextTokenLogits(tokenIds, model, config) {
     return logits[logits.length - 1];
 }
 
-// MEGA-BATCH RAGETAN ROUND 6 - FASE 1: varian ASYNC (WebGPU-aware) dari
-// forwardCached di atas - dipakai HANYA oleh generateCached() saat
-// LLMGpu.isReady() true. forward()/forwardCached() sync TIDAK disentuh
-// (dipakai training dan jalur generate() non-cached lama).
 async function forwardCachedAsync(newTokenIds, model, config, layerCaches, positionOffset) {
     const { E, D } = requireDeps();
 

@@ -60,11 +60,6 @@ async function tryMultiHopCapital(text, opts) {
 async function factoid(q, options) {
   const raw = String(q || '').trim();
   if (!raw) return null;
-  // tryReverseLookup butuh sufiks posesif utuh ("bahasanya", "uangnya",
-  // "ibukotanya") untuk mengenali pola reverse-lookup ("negara apa yang
-  // bahasanya X") - dicoba di sini, sebelum splitPossessiveSuffix(), supaya
-  // factoid() tidak keburu menafsirkannya sebagai lookup langsung ("bahasa
-  // X") saat X kebetulan juga nama negara. Sama seperti bridgeExtras.extras().
   const reverseLookup = await bridgeReasoning.tryReverseLookup(raw);
   if (reverseLookup) return reverseLookup;
 
