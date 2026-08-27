@@ -56,6 +56,8 @@ DIMS = {
     '50m': {'dModel': 512, 'nLayers': 6, 'nHeads': 8, 'dFF': 2048},
     '100m': {'dModel': 768, 'nLayers': 8, 'nHeads': 12, 'dFF': 3072},
     '200m': {'dModel': 1024, 'nLayers': 11, 'nHeads': 16, 'dFF': 4096},
+    '300m': {'dModel': 1152, 'nLayers': 14, 'nHeads': 18, 'dFF': 4608},
+    '400m': {'dModel': 1280, 'nLayers': 16, 'nHeads': 20, 'dFF': 5120},
 }
 if MODEL_SIZE not in DIMS:
     raise SystemExit('model_size harus salah satu dari: ' + ', '.join(DIMS.keys()))

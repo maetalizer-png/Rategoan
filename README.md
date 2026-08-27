@@ -7,6 +7,7 @@
   <img alt="PWA" src="https://img.shields.io/badge/type-PWA-informational?style=flat-square">
   <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%20100%25%20lolos-success?style=flat-square">
   <img alt="License" src="https://img.shields.io/badge/license-starter%20kit%20(personal%2Fkomersial)-lightgrey?style=flat-square">
+  <a href="https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 </p>
 
 Chat AI 100% local-first — tanpa server, tanpa API key, tanpa biaya per-pesan.
@@ -165,10 +166,19 @@ sepupu [kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-) (`kese
 descent sungguhan pada korpus gabungan Rategoan (ribuan step, lihat
 `raget-devlog/neural/training-report-*.json` per checkpoint untuk angka pasti). Output
 sudah gramatikal (kalimat Bahasa Indonesia bersambung, tanda baca wajar) tapi **belum akurat
-secara faktual** dan belum konvergen penuh - training lanjutan berjalan lewat Colab GPU
-(`raget-tools/colab-train-gpu.ipynb`), bukan di browser. Label "Neural Lokal (Eksperimental)"
-di UI tetap dipertahankan karena kualitas belum lulus gerbang produksi, bukan karena bobotnya
-acak.
+secara faktual** dan belum konvergen penuh - training lanjutan berjalan lewat Colab GPU,
+bukan di browser. Label "Neural Lokal (Eksperimental)" di UI tetap dipertahankan karena
+kualitas belum lulus gerbang produksi, bukan karena bobotnya acak.
+
+**Lanjutkan training di Colab (klik-langsung, tanpa paste manual)**:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb)
+— notebook [`colab/latih-gpu.ipynb`](colab/latih-gpu.ipynb) mengunduh korpus resmi K1/K2/K3
+dari Release (verifikasi SHA256 wajib), melatih ukuran 200M/300M/400M sesuai kartu resep
+`PRD-DATA-RELEASE.md` §10, lalu auto-publish checkpoint dan laporan. Panduan 3 langkah:
+(1) Runtime → ubah jenis runtime → GPU T4; (2) sekali saja, tambah secret bernama
+`GITHUB_TOKEN` lewat ikon kunci di sidebar kiri Colab; (3) pilih ukuran model di sel 1
+lalu Run All. Notebook lama `raget-tools/colab-train-gpu.ipynb` (korpus Wikipedia mentah,
+tag lama) sudah digantikan alur ini dan dipertahankan hanya sebagai arsip.
 
 ```
 node raget/raget-tools/build-neural-checkpoint.mjs   # bangun ulang checkpoint dari korpus Rategoan
