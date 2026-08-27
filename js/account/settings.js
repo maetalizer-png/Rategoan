@@ -48,18 +48,20 @@ export const settings = {
   _warned: false,
   injectExtraRows() {
     if ($('row-unduhan-fitur')) return;
-    const anchor = $('row-restore');
-    if (!anchor) return;
+    const aiSection = $('set-section-ai');
+    const dataSection = $('set-section-data');
+    const prefSection = $('set-section-preferensi');
+    if (!aiSection || !dataSection || !prefSection) return;
     const downloadRow = buildRow('row-unduhan-fitur', DOWNLOAD_ICON, 'Unduhan Fitur');
     const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Buka Koleksi');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
     const llmModeRow = buildRow('row-llm-mode', LLM_MODE_ICON, 'Mode Inference: Raget Neural');
-    anchor.insertAdjacentElement('afterend', llmModeRow);
-    anchor.insertAdjacentElement('afterend', knowledgeRow);
-    anchor.insertAdjacentElement('afterend', downloadRow);
-    anchor.insertAdjacentElement('afterend', ttsRow);
-    anchor.insertAdjacentElement('afterend', hematRow);
+    aiSection.appendChild(llmModeRow);
+    dataSection.appendChild(knowledgeRow);
+    dataSection.appendChild(downloadRow);
+    prefSection.appendChild(ttsRow);
+    prefSection.appendChild(hematRow);
     this.refreshPackageStatus();
     this.refreshTtsStatus();
     this.refreshHematStatus();

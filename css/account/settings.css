@@ -27,8 +27,53 @@
 #settings-content {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 14px 0;
+  gap: 22px;
+  padding: 18px 0 32px;
+}
+
+.set-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.set-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--rg-muted);
+  padding: 0 10px 6px;
+}
+
+.set-section:not(.set-section-danger) {
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--rg-radius);
+  padding: 4px 8px;
+}
+
+.set-section:not(.set-section-danger) .set-section-title {
+  padding-top: 8px;
+}
+
+.set-section:not(.set-section-danger) .set-row {
+  padding: 12px 6px;
+}
+
+.set-section:not(.set-section-danger) .set-row + .set-row {
+  border-top: 1px solid var(--rg-line);
+}
+
+.set-section-danger {
+  gap: 8px;
+}
+
+.set-section-danger .set-row {
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--rg-radius);
+  padding: 12px 10px;
 }
 
 .set-row {

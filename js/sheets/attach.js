@@ -56,9 +56,7 @@ export const attach = {
       reader.readAsArrayBuffer(file);
     });
   },
-  async onPick(input) {
-    const f = input.files && input.files[0];
-    input.value = '';
+  async handleFile(f) {
     if (!f) return;
     this.current = { name: f.name, type: f.type, size: f.size, thumb: null };
     if (f.type && f.type.indexOf('image/') === 0) {
@@ -71,6 +69,11 @@ export const attach = {
     }
     this.renderChip();
     sheets.close();
+  },
+  async onPick(input) {
+    const f = input.files && input.files[0];
+    input.value = '';
+    await this.handleFile(f);
   },
   renderChip() {
     const row = $('attach-row');
@@ -111,7 +114,6 @@ export const attach = {
     return c;
   },
   bind() {
-    $('sheet-camera').onclick = () => this.pick('camera');
     $('sheet-photo').onclick = () => this.pick('photo');
     $('sheet-file').onclick = () => this.pick('file');
     $('pick-camera').onchange = (e) => this.onPick(e.target);
