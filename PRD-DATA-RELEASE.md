@@ -42,6 +42,60 @@ training (lihat §4) karena sama-sama porsi kecil yang perlu di-upsample
 bersama — tapi tetap dua kategori terpisah saat diukur/dinamai, supaya
 komposisi tetap terlihat kalau dibongkar lagi nanti.
 
+### 1.1 Aturan bahasa per kategori — wajib, bukan saran
+
+**Temuan `keputusan-014`**: audit lang-field pada `korpus-pelengkap-bersih`
+(K3) menunjukkan **94% baris berlabel `lang: en-simple`** (Simple English
+Wikipedia) — korpus yang namanya "pelengkap" (harusnya Indonesia)
+ternyata didominasi konten Inggris salah kategori. Model yang dilatih
+dari korpus tercemar ini nyata-nyata menghasilkan jawaban campur bahasa
+(fragmen Inggris di tengah kalimat Indonesia) — bukan cuma masalah
+kerapian data, tapi **langsung merusak kualitas jawaban**. Aturan di
+bawah ini wajib dipatuhi untuk semua data baru maupun audit ulang data
+lama, supaya kejadian ini tidak terulang:
+
+1. **`ensiklopedia` (K1)** — wajib mayoritas `lang: id` (eksplisit di
+   field `lang` tiap dokumen), atau kalau field `lang` tidak tersedia
+   dari sumbernya, wajib lolos filter rasio kata-tugas Bahasa Indonesia
+   (lihat rumus di poin 5) sebelum masuk korpus. Dokumen yang gagal
+   kedua syarat ini **tidak boleh** masuk tag `korpus-ensiklopedia-bersih`.
+2. **`dialog` (bagian dari K2)** — setiap dokumen **wajib** berlabel
+   `lang` eksplisit. Wajib dipisah jadi dua sub-kelompok yang bisa
+   dibedakan lewat field `lang`/`kategori` internal: dialog Bahasa
+   Indonesia baku (`lang: id`) vs dialog bahasa daerah (`lang: jv`,
+   `su`, `min`, `mad`, `map-bms`, dst). Sub-kelompok daerah tetap boleh
+   ada (itu tugas kategori `daerah`) tapi **harus bisa difilter keluar
+   secara terpisah** saat training butuh komposisi Indonesia lebih
+   tinggi — jangan sampai tercampur tanpa label seperti sebelumnya.
+3. **`pelengkap` (K3)** — wajib **mayoritas** `lang: id`. Konten
+   non-Indonesia (`lang` apa pun selain awalan `id`) **dilarang** masuk
+   tag `korpus-pelengkap-bersih` kecuali diberi label terpisah yang
+   eksplisit dan proporsinya dilaporkan jujur di manifest (lihat poin
+   4) — tidak boleh diam-diam dominan seperti kasus `en-simple` di atas.
+4. **Setiap `manifest.json` korpus wajib memuat komposisi bahasa** —
+   field baru `komposisiBahasa` berisi persentase dokumen per nilai
+   `lang` yang ditemukan (lihat skema di §7). Ini bukan opsional -
+   tanpa field ini, Release korpus dianggap **belum patuh PRD**, sama
+   seperti SHA256 yang hilang (§8).
+5. **Prosedur filter bahasa wajib** (dipakai saat membangun campuran
+   training dari korpus mana pun): cek field `lang` eksplisit dulu -
+   kalau ada dan tidak berawalan `id`, buang. Kalau field `lang` kosong/
+   tidak ada, fallback ke rasio kata-tugas Bahasa Indonesia (stopword:
+   yang/dan/di/ke/dari/ini/itu/tidak/dengan/untuk/pada/akan/adalah/dll)
+   dihitung pada field `text` yang **sudah diekstrak dari JSON** — BUKAN
+   pada baris JSON mentah (kalau dihitung dari baris mentah, field
+   metadata seperti `source`/`license`/`url` yang berbahasa Inggris ikut
+   mencemari hitungan dan salah membuang data Indonesia yang sah, seperti
+   yang sempat terjadi di percobaan pertama `keputusan-014`).
+
+**PERINGATAN TEGAS**: campuran training yang lolos gerbang SHA256 (§8)
+tapi TIDAK lolos filter bahasa di atas tetap **dilarang** dipakai untuk
+training model produksi. Model yang dilatih dari korpus bahasa campur
+akan menghasilkan jawaban campur bahasa (Inggris/daerah menyelip di
+tengah kalimat Indonesia) — ini pernah terjadi nyata dan terekam di
+`keputusan-013`/`keputusan-014`. Gerbang bahasa ini WAJIB dijalankan
+sebelum gerbang mix ratio (§4), bukan opsi tambahan.
+
 ## 2. Penamaan — satu tag permanen per kategori
 
 **Tag** (nama teknis yang dipakai skrip) mengikuti pola tetap:
@@ -261,8 +315,9 @@ Setiap Release korpus **wajib** punya `manifest.json` dengan field ini
   "totalByte": 470656011,
   "sha256": "...",
   "format": "jsonl",
-  "fields": ["text", "source", "license", "url"],
+  "fields": ["text", "source", "license", "url", "lang"],
   "license": "...",
+  "komposisiBahasa": { "id": 0.94, "en-simple": 0.04, "jv": 0.02 }, // [BARU] wajib, lihat §1.1
   "proporsiInternal": { "...": "..." },
   "proporsiAktual": { "...": "..." },   // [BARU] hasil ukur ulang setelah oversample+shuffle, lihat §4
   "rekomendasiCampuranTraining": { "...": "..." },
