@@ -6,14 +6,35 @@
   min-height: 0;
   padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
   overflow-y: auto;
+  background:
+    radial-gradient(480px 320px at 50% 0%, var(--rg-ring), transparent 70%),
+    var(--rg-bg);
 }
 
 .gate-brand {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   padding: 24px 0 8px;
+}
+
+.gate-mark {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rg-accent);
+  box-shadow: var(--rg-shadow);
+  margin-bottom: 10px;
+}
+
+.gate-mark svg {
+  width: 32px;
+  height: 32px;
+  fill: var(--rg-accent-ink);
 }
 
 .gate-title {
@@ -21,6 +42,12 @@
   font-weight: 800;
   letter-spacing: 1px;
   color: var(--rg-accent);
+}
+
+.gate-tagline {
+  font-size: 13px;
+  color: var(--rg-muted);
+  text-align: center;
 }
 
 .gate-note {
