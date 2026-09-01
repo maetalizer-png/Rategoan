@@ -1,7 +1,0 @@
-raget-neural-massive200m.safetensors.part.00  89128960 bytes
-raget-neural-massive200m.safetensors.part.01  82215080 bytes
-
-Gabungan (file utuh setelah cat):
-  Nama    : raget-neural-massive200m.safetensors
-  Ukuran  : 171344040 bytes (163,41 MB)
-  SHA256  : 5286b9001ac76dafa6e82d8a31cdb36da230e9bf807af735be5f954d71810136
