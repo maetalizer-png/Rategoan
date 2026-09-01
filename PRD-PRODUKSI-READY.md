@@ -99,12 +99,15 @@ lapisan 1.
 - [x] **K1 K2 K3 ada `estimasiToken` tokenizer proyek.** Diisi ronde ini
       di `korpus-manifest-total.json` (`totalTokenBPEResmi` per rak,
       dihitung dari gzip live yang SHA256-nya dicocokkan dulu terhadap
-      Release, BUKAN tebakan ukuran gzip) — K1 303.917.157, K2
-      85.003.080 (diukur ulang setelah asset direfresh dirigen), K3
-      32.010.503, total **420.930.740 token BPE**. Ini SATU-SATUNYA
-      angka token valid untuk training - dikonfirmasi ulang eksplisit
-      ke dirigen ronde ini (lihat catatan klarifikasi di
-      `PRD-PERINTAH-GROK.md` §1).
+      Release, BUKAN tebakan ukuran gzip). Angka berubah 2x dalam
+      ronde ini: awalnya K1 303.917.157/K2 85.003.080/K3 32.010.503 =
+      420.930.740 total; lalu Grok menggabung 76.071 dokumen unik
+      Wikipedia ke K1 (dedupe per-fingerprint, bukan retire seperti
+      instruksi Claude yang salah sebelumnya - lihat koreksi di
+      `PRD-PERINTAH-GROK.md`) sehingga K1 jadi 759.587 dokumen/
+      354.376.464 token (dihitung ulang Claude malam ini). **Total
+      kanonik FINAL: 471.390.047 token BPE** — ini angka valid
+      terbaru untuk training.
 - [x] **Manifest total hanya rak hidup.** `korpus-manifest-total.json`
       sudah direstrukturisasi dirigen/Grok ronde ini (commit `7ae0cbf`)
       ke 3 rak K1/K2/K3 saja — jilid2 dan skema jilid1-5 lama sudah
@@ -304,8 +307,8 @@ Dipertahankan (masih berlaku/masih dipakai aktif):
   sudah diangkat, tapi biarkan dirigen/Grok yang menutup loop-nya
   sendiri, konsisten dengan siapa yang sudah mengerjakan migrasinya).
 - Mengklaim 100% bench / 1 miliar token / neural koheren tanpa bukti
-  ronde ini — sudah dipatuhi: angka di dokumen ini semua nyata (99,58%
-  bukan 100%, 420,9 juta token bukan 1 miliar, neural belum koheren
+  ronde ini — sudah dipatuhi: angka di dokumen ini semua nyata (99,66%
+  bukan 100%, 471,4 juta token bukan 1 miliar, neural belum koheren
   dinyatakan eksplisit).
 
 ---
@@ -314,9 +317,10 @@ Dipertahankan (masih berlaku/masih dipakai aktif):
 
 README.md ditulis ulang mengikuti Phase 25 (Commercial README) master
 command: jelaskan produk dalam beberapa baris pertama, angka bench dan
-korpus yang dicantumkan adalah angka nyata ronde ini (99,58% CORE-SUITE,
-420,9 juta token K1+K2+K3), status neural dinyatakan eksplisit
-eksperimental dengan bukti (PPL turun, generasi belum koheren).
+korpus yang dicantumkan adalah angka nyata ronde ini (99,66% CORE-SUITE,
+471,4 juta token K1+K2+K3, K1 sudah termasuk Wikipedia unik), status
+neural dinyatakan eksplisit eksperimental dengan bukti (PPL turun,
+generasi belum koheren).
 
 ---
 

@@ -1,19 +1,20 @@
 {
   "generatedAt": "2026-09-01T13:50:00Z",
-  "updatedAt": "2026-09-01T17:00:00Z",
-  "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE (file 20+GB, di luar anggaran waktu ronde ini) dan BELUM lolos review kualitas manual.",
+  "updatedAt": "2026-09-01T20:10:00Z",
+  "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah).",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
     "entries": [
       {
         "rak": "K1 korpus-ensiklopedia-bersih",
-        "asal": "staging jilid1 round10 (diangkat dari branch staging/korpus-parts)",
-        "totalDokumen": 683516,
-        "sizeByteGz": 481969220,
-        "sha256": "07502ad4d34f0f2766f94bf7d34eb4ae8676a68ac3b226f8ba489a46362623ce",
-        "totalKataApprox": 194842823,
-        "totalTokenBPEResmi": 303917157,
-        "diukurPada": "2026-09-01"
+        "asal": "staging jilid1 round10 + 76.071 dokumen unik dari panen-wikipedia-id (digabung Grok setelah dedupe fingerprint - lihat catatan)",
+        "totalDokumen": 759587,
+        "sizeByteGz": 570582531,
+        "sha256": "3383bc303a2cfcd939a3fae6c2f37ed85e3fb9474449a057917ea90070a4656c",
+        "totalKataApprox": 228536372,
+        "totalTokenBPEResmi": 354376464,
+        "diukurPada": "2026-09-01 malam (asset direfresh Grok ~19:58 UTC setelah gabung Wikipedia unik, token BPE dihitung ulang Claude langsung setelahnya - angka lama 303.917.157 untuk 683.516 dokumen versi sebelum gabung sudah USANG)",
+        "catatan": "Instruksi Claude ronde sebelumnya sempat bilang 'retire Wikipedia' berdasarkan temuan lama (artikel pertama identik -> diduga overlap penuh). Grok independen melakukan dedupe per-fingerprint yang lebih presisi: dari 562.195 dokumen Wikipedia, 238.873 duplikat + 247.251 terlalu pendek dibuang, SISA 76.071 dokumen benar-benar unik dan digabung ke K1. Kesimpulan Grok LEBIH AKURAT daripada instruksi lama - sudah dieksekusi, tidak perlu di-retire."
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
@@ -35,11 +36,11 @@
         "diukurPada": "2026-09-01"
       }
     ],
-    "totalDokumenKanonik": 1072992,
-    "totalTokenBPEResmiKanonik": 420930740
+    "totalDokumenKanonik": 1149063,
+    "totalTokenBPEResmiKanonik": 471390047
   },
   "staging": {
-    "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD-DATA-RELEASE.md §5). Angka kata approx dari manifest workflow tools/panen_hf.py sendiri, BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik.",
+    "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD-DATA-RELEASE.md §5). Angka kata approx dari manifest workflow tools/panen_hf.py sendiri, BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
     "korpusPartsGit": {
       "status": "SUDAH DIANGKAT ke K1/K3 di atas (2026-09-01 dini hari) - branch staging/korpus-parts sudah dihapus.",
       "totalTokenSebelumDiangkat": 329365461
@@ -60,7 +61,7 @@
         },
         {
           "batch": "harvest BARU, 15.272.217 dokumen, 8.137.547.049 kata approx, 11 part (part-0011..part-0021 - part LAMA 0000-0010 sudah tidak ada di asset)",
-          "hasil": "BELUM DIREVIEW - part lama yang sudah di-sample sudah tidak ada di Release, jadi kesimpulan retire sebelumnya tidak otomatis berlaku ke baris baru ini. Kemungkinan besar masih pakai filter panen_hf.py versi LAMA (sebelum deteksi_spam() ditambahkan commit 7b8a433) karena timestamp upload (~16:21-16:36 UTC) mendahului commit itu di beberapa jam. Instruksi lengkap: PRD-PERINTAH-GROK.md §3-4.",
+          "hasil": "MASIH BELUM DIREVIEW per pengecekan terakhir - part lama yang sudah di-sample sudah tidak ada di Release, jadi kesimpulan retire sebelumnya tidak otomatis berlaku ke baris baru ini. Instruksi lengkap: PRD-PERINTAH-GROK.md §3-4 (saran: re-run panen.yml dengan filter spam baru, commit 7b8a433, daripada review manual batch dengan filter lama).",
           "tanggal": "2026-09-01 ~16:21-16:36 UTC"
         }
       ],
@@ -68,34 +69,30 @@
       "totalKataApprox": 8137547049,
       "jumlahPart": 11,
       "lisensi": "CC-BY-4.0",
-      "statusReview": "BELUM (batch terbaru) - lihat riwayat di atas",
+      "statusReview": "BELUM (batch terbaru) - INI SATU-SATUNYA item panen yang masih perlu tindakan",
       "diperbaruiPada": "2026-09-01T16:21-16:36Z"
     },
     "panenWikipediaId": {
       "tag": "panen-wikipedia-id",
-      "totalDokumen": 562195,
-      "totalKataApprox": 136840867,
-      "jumlahPart": 1,
-      "lisensi": "CC-BY-SA-3.0",
-      "statusReview": "RETIRE - angka IDENTIK dengan batch yang sudah direview dan di-retire Grok (overlap penuh dengan K1, artikel pertama sama persis 'Asam deoksiribonukleat', K1 683.516 dok > 562.195 dok - K1 lebih lengkap). Re-upload baru (~16:48 UTC) kemungkinan besar cuma re-run dump statis yang sama, bukan data baru - cukup dikonfirmasi SHA256 identik lalu retire lagi tanpa perlu sample-review ulang penuh. Sumber temuan asli: docs/STATUS-KORPUS-LISENSI.md.",
-      "diperbaruiPada": "2026-09-01T16:48Z"
+      "status": "SELESAI DIPROSES oleh Grok (~19:58 UTC) - 76.071 dokumen unik (dedupe fingerprint, sisa setelah buang 238.873 duplikat + 247.251 terlalu pendek dari total 562.195) sudah DIGABUNG ke K1 di atas. TIDAK di-retire seperti instruksi Claude ronde sebelumnya - keputusan Grok independen lebih akurat, sudah final.",
+      "diperbaruiPada": "2026-09-01T19:58Z"
     }
   },
   "jilid2": "TIDAK dihitung - data berisiko (HPLT/CommonCrawl), tidak kanonik, tidak masuk hitungan manapun di atas. Ini SUMBER angka '~750 juta' yang kadang beredar di percakapan - angka itu TIDAK VALID untuk training.",
   "checkpoint200m": {
-    "sha256Terpublikasi": "5286b9001ac76dafa6e82d8a31cdb36da230e9bf807af735be5f954d71810136",
-    "sizeByte": 171344040,
+    "sha256Terpublikasi": "b5aeb66551d0f73d853e74e4901c202425bce5a72f2f8479f2b0ddcd7a6df13c",
+    "sizeByte": 171344036,
     "tag": "checkpoint-200m",
-    "catatan": "Ini checkpoint sesi training 18-menit (PPL 1661,48). Sesi training 90-menit lanjutan sesudahnya menghasilkan checkpoint lebih baru (PPL 1242,11), publish status terbuka - lihat PRD-PRODUKSI-READY.md §1 untuk status terkini."
+    "catatan": "Checkpoint sesi training ke-2 (90 menit lanjutan, PPL 1242,11) - dikonfirmasi terpasang di Release (size byte cocok persis). Publish sudah beres, tidak ada tindakan lagi."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 420930740,
-    "totalKataApproxStagingBelumDireview": 8274387916,
-    "catatanPenting": "Dua angka di atas TIDAK BOLEH DIJUMLAH sebagai satu 'total token proyek' - yang kanonik adalah token BPE nyata dari data yang SUDAH lolos review dan dipakai training; yang staging adalah KATA approx (bukan token, metodenya beda) dari data yang BELUM/GAGAL review, sebagian besar historis di-retire (MADLAD-400 filter sama gagal review 2x berturut-turut). JAWABAN JUJUR untuk 'total token proyek saat ini' HANYA SATU: totalTokenKanonikTerverifikasi = 420.930.740. Angka lain (~750 juta termasuk jilid2 yang sudah dibuang; ~8 miliar kata MADLAD staging) BUKAN valid untuk diklaim sebagai total token training."
+    "totalTokenKanonikTerverifikasi": 471390047,
+    "totalKataApproxStagingBelumDireview": 8137547049,
+    "catatanPenting": "Dua angka di atas TIDAK BOLEH DIJUMLAH sebagai satu 'total token proyek' - yang kanonik adalah token BPE nyata dari data yang SUDAH lolos review/dedupe dan dipakai training (K1 sekarang termasuk 76.071 dokumen Wikipedia unik yang sudah digabung Grok); yang staging (cuma MADLAD-400 batch terbaru tersisa) adalah KATA approx dari data yang BELUM direview. JAWABAN JUJUR untuk 'total token proyek saat ini' HANYA SATU: totalTokenKanonikTerverifikasi = 471.390.047 (BUKAN LAGI 420.930.740 - naik karena Wikipedia unik sudah masuk K1 malam ini). Angka lain (~750 juta termasuk jilid2 yang sudah dibuang; ~8 miliar kata MADLAD staging) BUKAN valid untuk diklaim sebagai total token training."
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": false,
-  "kekuranganTokenKanonik": 579069260,
+  "kekuranganTokenKanonik": 528609953,
   "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang."
 }
