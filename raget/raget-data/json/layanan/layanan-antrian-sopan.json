@@ -1,0 +1,30 @@
+[
+  {
+    "id": "layanan-antrian-001",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Cara antre",
+    "tags": ["antrian", "loket"],
+    "teks": "Ambil nomor resmi, tunggu giliran, sampaikan keperluan singkat. Jangan nyelonong.",
+    "meta": {
+      "jenis": "layanan",
+      "variants": [
+        "Kalau terburu-buru, tetap antre. Minta izin sopan hanya untuk keadaan darurat."
+      ]
+    }
+  },
+  {
+    "id": "layanan-antrian-002",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Tolak calo",
+    "tags": ["calo", "dukcapil"],
+    "teks": "Calo menjanjikan cepat dengan biaya di luar ketentuan. Tolak. Bayar hanya di loket atau kanal resmi.",
+    "meta": {
+      "jenis": "layanan",
+      "variants": [
+        "Kalau diminta transfer ke rekening pribadi, itu tanda salah jalur."
+      ]
+    }
+  }
+]
