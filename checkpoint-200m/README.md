@@ -15,14 +15,15 @@ cat raget-neural-massive200m.safetensors.part.00 \
     > raget-neural-massive200m.safetensors
 
 sha256sum raget-neural-massive200m.safetensors
-# harus = 5286b9001ac76dafa6e82d8a31cdb36da230e9bf807af735be5f954d71810136
+# harus = b5aeb66551d0f73d853e74e4901c202425bce5a72f2f8479f2b0ddcd7a6df13c
 # (lihat checksum-parts.txt untuk detail ukuran tiap part)
 
+cd ..
 export GITHUB_TOKEN=<token dengan izin repo:contents write>
-python3 raget-tools/publish-checkpoint-release.py \
-    raget-neural-massive200m.safetensors checkpoint-200m \
-    "01 · Checkpoint 200M (ronde 2026-09-01)" \
-    "1337+ step akumulasi, held-out PPL 2898,68->1661,48 (mix K1 55-65%/K2 25-35%/K3 <=15% sesuai PRD-DATA-RELEASE §10). Generasi belum koheren - lihat PRD-PRODUKSI-READY.md."
+python3 raget/raget-tools/publish-checkpoint-release.py \
+    checkpoint-200m/raget-neural-massive200m.safetensors checkpoint-200m \
+    "01 · Checkpoint 200M (ronde 2026-09-01, sesi 90 menit lanjutan)" \
+    "1570 step akumulasi / 245,24 menit, held-out PPL 2361,03->1242,11 (mix K1 55-65%/K2 25-35%/K3 <=15% sesuai PRD-DATA-RELEASE §10). Generasi belum koheren - lihat PRD-PRODUKSI-READY.md."
 ```
 
 Setelah berhasil publish ke Release, folder `checkpoint-200m/` ini
