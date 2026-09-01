@@ -1,188 +1,135 @@
-# PRD — Perintah untuk Grok: Publish Checkpoint + Olah Panen Data Baru
+# PRD — Perintah untuk Grok: Klarifikasi Token + Panen Baru (ronde kejelasan)
 
-Status: **BERLAKU, ronde baru** (ditulis ulang 2026-09-01, menggantikan
-ronde sebelumnya yang sudah selesai — ringkasan riwayat di §3). Semua
-angka di bawah **diverifikasi lewat GitHub API/SHA256 langsung**, bukan
-perkiraan.
-
-Alasan ditujukan ke **Grok**/dirigen manusia (bukan dikerjakan Claude):
-sesi sandbox Claude Code Remote **sudah dicoba secara eksplisit** publish
-Release lewat REST API langsung (`POST /releases`) — **diblokir oleh
-classifier keamanan harness**, bukan cuma dugaan kebijakan. Bukti: upaya
-nyata dilakukan 2026-09-01, respons "Blocked by classifier... Claude Code
-auto mode classifier." Jadi ini bukan lagi asumsi dari dokumentasi lama —
-sudah dikonfirmasi teknis. Semua langkah wajib ikuti `PRD-DATA-RELEASE.md`
-(kategori, manifest §7, SHA256 §8).
+Status: **BERLAKU, ditulis ulang 2026-09-01 malam** — ronde sebelumnya
+(publish checkpoint-200m + review madlad/wikipedia lama) sudah **SELESAI
+dikerjakan Grok** (terverifikasi: `docs/STATUS-KORPUS-LISENSI.md`
+diperbarui, commit `309ff63`/`4a091d2`/dst menghapus folder handoff
+setelah publish sukses). Dokumen ini dibuat karena dirigen bingung angka
+mana yang valid — jawabannya di §1, definitif, dari GitHub API langsung
+saat dokumen ini ditulis, bukan perkiraan.
 
 ---
 
-## 1. Publish checkpoint massive200m baru (163,41 MB) ke tag `checkpoint-200m`
+## 1. JAWABAN LANGSUNG: token mana yang valid?
 
-### 1.1 Kondisi
+**Yang valid dipakai training HANYA K1+K2+K3 = 420.930.740 token BPE.**
+Ini angka yang dikutip dirigen — **BENAR**, sudah dikonfirmasi ulang
+lewat pengecekan langsung ke GitHub Release + tokenizer BPE proyek
+(vocab 30.368) di ronde ini juga.
 
-Checkpoint 200M hasil training sesi 2026-09-01 (18 menit + 90 menit
-berjalan lanjutan) — SafeTensors 163,41 MB (171.344.040 byte),
-**SHA256: `5286b9001ac76dafa6e82d8a31cdb36da230e9bf807af735be5f954d71810136`**
-(checksum file UTUH sebelum dipecah).
+| Rak | Dokumen | Token BPE resmi |
+|---|---|---|
+| K1 ensiklopedia | 683.516 | 303.917.157 |
+| K2 dialog+daerah | 291.928 | 85.003.080 |
+| K3 pelengkap | 97.548 | 32.010.503 |
+| **Total kanonik** | **1.072.992** | **420.930.740** |
 
-Tag `checkpoint-200m` di Release **MASIH VERSI LAMA** (R10-TUTUP,
-2026-08-25) — checkpoint baru ini BELUM ada di sana.
+**Angka LAIN yang BUKAN valid untuk training (jangan dipakai, jangan
+dicampur dengan angka di atas):**
+- **~750 juta** — ini mengandung jilid2 (sumber HPLT/CommonCrawl,
+  risiko lisensi/kualitas tinggi) yang SUDAH DIBUANG dari korpus
+  kanonik sejak awal. Bukan valid, bukan token BPE juga (kemungkinan
+  campuran metode hitung lama).
+- **~8 miliar kata MADLAD** — ini KATA APPROX (bukan token BPE, metode
+  hitung beda) dari data STAGING `panen-madlad400-id`, yang **SUDAH
+  DI-RETIRE** oleh Grok minggu ini (18,7% spam judi/forex/slot dari
+  sample 750 baris — lihat `docs/STATUS-KORPUS-LISENSI.md`). Staging
+  yang di-retire TIDAK PERNAH masuk hitungan token training.
 
-**UPDATE 2026-09-01 sore**: dirigen minta file **JANGAN dikirim lewat
-chat lagi**. Sekarang file sudah di-commit+push langsung ke branch
-`main` di folder khusus **`checkpoint-200m/`** (root repo, commit
-`cd46ae9`) — 2 part (bukan 7 seperti sebelumnya, dipecah `split -b
-85m` supaya di bawah batas keras GitHub 100MB/file), plus
-`checksum-parts.txt` dan `README.md` berisi instruksi lengkap. Tinggal
-`git pull` dan langsung eksekusi §1.2 di bawah — tidak perlu lagi cari
-file di chat/unduhan.
-
-### 1.2 Langkah publish (persis, jangan diringkas)
-
-```bash
-# 0. Pull dulu supaya folder checkpoint-200m/ ada
-git pull origin main
-
-# 1. Gabung 2 part jadi satu file (dari folder checkpoint-200m/ di root repo)
-cd checkpoint-200m
-cat raget-neural-massive200m.safetensors.part.00 \
-    raget-neural-massive200m.safetensors.part.01 \
-    > raget-neural-massive200m.safetensors
-
-# 2. WAJIB cocokkan checksum sebelum lanjut
-sha256sum raget-neural-massive200m.safetensors
-# harus persis: 5286b9001ac76dafa6e82d8a31cdb36da230e9bf807af735be5f954d71810136
-
-# 3. Publish (skrip sudah ada di repo, generik+idempoten, verifikasi ulang
-#    checksum otomatis setelah upload - kalau tidak cocok, asset dihapus
-#    otomatis dan publish dibatalkan). Skrip ada di raget/raget-tools/,
-#    jalankan dari root repo (bukan dari dalam checkpoint-200m/).
-cd ..
-export GITHUB_TOKEN=<token dengan izin repo:contents write>
-python3 raget/raget-tools/publish-checkpoint-release.py \
-    checkpoint-200m/raget-neural-massive200m.safetensors checkpoint-200m \
-    "01 · Checkpoint 200M (ronde 2026-09-01)" \
-    "1337+ step akumulasi, held-out PPL 2898,68->1661,48 (mix K1 55-65%/K2 25-35%/K3 <=15% sesuai PRD-DATA-RELEASE §10). Generasi belum koheren - lihat PRD-PRODUKSI-READY.md."
-
-# 4. Setelah sukses publish, folder checkpoint-200m/ aman dihapus dari
-#    git (checkpoint sudah permanen sebagai Release asset) - lihat
-#    checkpoint-200m/README.md
-```
-
-Setelah sukses: update `docs/CAPABILITIES.md` baris Neural (angka
-step/PPL baru) dan `PRD-PRODUKSI-READY.md` §1 lapisan-2 (centang
-"Checkpoint dipublikasikan").
-
-**Kalau checkpoint-200m/ di repo tidak ada/rusak**: training masih
-berjalan di sandbox Claude sampai checkpoint lebih baru tersedia —
-tunggu laporan ronde training 90 menit berikutnya (checkpoint di
-folder ini tertimpa otomatis tiap sesi via commit baru, makin baru
-makin baik) atau minta Claude commit ulang.
+**Target jangka panjang tetap ≈ 4 miliar token** (kertas rencana lama)
+— stok kanonik sekarang (421 juta) memang masih jauh di bawah itu.
+Ini **BUKAN masalah/bug** — target 4 miliar itu memang untuk model
+jauh lebih besar/rencana jangka panjang, bukan gerbang yang harus
+dicapai sekarang untuk checkpoint 200M yang sedang dilatih.
 
 ---
 
-## 2. Olah 2 panen data BARU (jauh lebih besar dari ronde sebelumnya)
+## 2. Kenapa terasa "stagnan"? (jawaban ke keluhan dirigen)
 
-### 2.1 Kondisi terverifikasi (GitHub API, 2026-09-01 ~13:40 UTC)
+Token kanonik TIDAK NAIK sejak beberapa ronde terakhir — ini **BUKAN
+bug atau kelalaian**, ini persis cara gerbang kualitas bekerja:
 
-**`panen-madlad400-id`** (dipublikasikan ulang 2026-09-01T12:24-12:37Z,
-budget 180 menit yang sudah dinaikkan ronde lalu):
-
-| Field | Nilai |
-|---|---|
-| Dokumen diterima | **15.236.123** |
-| Kata approx (dari manifest, BUKAN token BPE terverifikasi) | **8.123.241.233** |
-| Jumlah part | 11 (`madlad400-id.part-0000.jsonl.gz` s.d. `part-0010.jsonl.gz`, ~1,9GB tiap part kecuali part terakhir ~1,6GB) |
-| Lisensi | CC-BY-4.0 |
-| Status | STAGING — **wajib review manual, JANGAN asumsikan lolos** |
-
-**Peringatan penting**: ronde review sebelumnya (sampel 200 baris dari
-harvest yang JAUH lebih kecil, 150rb dokumen) menemukan isi web-crawl
-umum (**judi/forex/blog**) dan di-retire. Harvest baru ini pakai **filter
-yang SAMA PERSIS** (`tools/panen_hf.py` belum diubah filternya sejak
-itu), cuma budget waktu dinaikkan — jadi **kemungkinan besar punya
-masalah kualitas yang sama, di skala 100x lebih besar.** JANGAN
-diasumsikan lolos cuma karena datanya besar. Sample-review ulang WAJIB,
-bukan formalitas.
-
-**`panen-wikipedia-id`** (dipublikasikan 2026-09-01T12:37-12:49Z):
-
-| Field | Nilai |
-|---|---|
-| Dokumen diterima | **562.195** |
-| Kata approx | **136.840.867** |
-| Jumlah part | 1 (`wikipedia-id.part-0000.jsonl.gz`, 332MB) |
-| Lisensi | CC-BY-SA-3.0 |
-| Sumber | `wikimedia/wikipedia` (stream, bukan file mentah) |
-| Status | STAGING — wajib review overlap dengan K1 |
-
-Wikipedia jauh lebih mungkin lolos (sumber kurasi manusia), tapi **wajib
-dicek overlap** dengan K1 (`korpus-ensiklopedia-bersih`, sumber "jilid1
-idwiki round10") — kemungkinan dump Wikipedia tanggal berbeda dengan
-sebagian artikel sama. Jangan gabung mentah-mentah tanpa dedupe silang.
-
-### 2.2 Tugas Grok
-
-**MADLAD-400** (prioritas: kualitas dulu, jangan buru-buru promosi):
-1. Sample-review **≥500 baris acak** (lebih besar dari ronde lalu karena
-   datanya 100x lebih besar — 200 baris tidak representatif lagi).
-   Ambil sampel dari BEBERAPA part berbeda (bukan cuma part-0000),
-   supaya tidak bias ke urutan file HF.
-2. Hitung persentase yang benar-benar teks naratif Indonesia koheren
-   vs spam/judi/forex/boilerplate/menu situs.
-3. **Kalau mayoritas (>70%) bersih**: filter lebih ketat dulu (buang
-   baris yang match pola judi/forex/spam sebelum digabung — JANGAN
-   gabung mentah), baru ikuti PRD-DATA-RELEASE.md §5 langkah 6b/7
-   (>1.5GB per kategori = pecah part, gabung ke K1 kategori
-   `ensiklopedia` kalau memang narasi faktual, dedupe lintas-file wajib).
-4. **Kalau mayoritas masih sampah** (pola sama seperti ronde lalu):
-   retire tag ini JUGA, dan usulkan ke dirigen: `tools/panen_hf.py`
-   perlu filter kualitas tambahan (bukan cuma bahasa) sebelum dipanen
-   lagi — jangan naikkan budget lagi tanpa perbaiki filter, cuma
-   memperbesar sampah.
-
-**Wikipedia** (prioritas: cek overlap, lebih mudah lolos):
-1. Sample-review singkat (~100 baris) untuk konfirmasi kualitas normal.
-2. Cek overlap dengan K1 by title/URL kalau field tersedia, atau
-   estimasi dari tanggal dump.
-3. Kalau net-new (bukan duplikat K1): gabung ke K1 sesuai §5 langkah 6b,
-   dedupe lintas-file wajib.
-4. Kalau sepenuhnya overlap: retire, catat di laporan (bukan dibuang
-   sia-sia — sudah menunjukkan validasi K1 konsisten dengan Wikipedia).
-
-**Setelah kedua panen diproses** (lolos maupun retire):
-- Update `raget/raget-data/jsonl/external/korpus-manifest-total.json`
-  dan `docs/STATUS-KORPUS-LISENSI.md` dengan hasil final.
-- Kalau MADLAD-400 lolos dan masuk K1: **total token proyek berpotensi
-  jauh melewati gerbang 1 miliar** (K1+K2+K3 saat ini 420,9 juta token
-  BPE resmi — lihat `PRD-PRODUKSI-READY.md` — tambahan MADLAD yang
-  bersih bisa berkali-lipat itu). Kalau ini terjadi, update juga badge/
-  angka di `README.md` dengan angka BPE resmi baru (jangan pakai kata
-  approx mentah dari manifest panen sebagai pengganti token BPE).
+- Tiap kali ada panen data baru (`panen-madlad400-id`,
+  `panen-wikipedia-id`), data itu masuk sebagai **STAGING** dulu,
+  WAJIB direview manual sebelum bisa naik ke K1/K2/K3 (PRD-DATA-RELEASE
+  §5). Data yang gagal review (spam/overlap) **DI-RETIRE**, bukan
+  dipaksa masuk supaya angka kelihatan naik.
+- Sejauh ini SEMUA panen baru yang direview GAGAL: MADLAD-400 dua kali
+  berturut-turut (judi/forex/blog), Wikipedia overlap penuh dengan K1
+  yang sudah lebih lengkap. Jadi total kanonik memang belum naik dari
+  420,9 juta — **itu gerbang kualitas bekerja sesuai desain, bukan
+  proses yang macet.**
 
 ---
 
-## 3. Riwayat ronde sebelumnya (sudah selesai, ringkas)
+## 3. PENTING: ada panen BARU LAGI di Release (baru muncul, BELUM direview)
 
-Ronde 2026-09-01 pagi: sample-review `panen-madlad400-id` versi lama
-(150rb dokumen) → judi/forex/blog, di-retire. Branch `staging/korpus-parts`
-(jilid 1/3/4/5, ~329 juta token) diangkat ke K1/K3. Detail lengkap ada
-di riwayat git dokumen ini (`git log -- PRD-PERINTAH-GROK.md`) dan
-`docs/STATUS-KORPUS-LISENSI.md`. Branch `staging/korpus-parts` sendiri
-**masih ada** (belum dihapus) — aman dihapus kapan saja sekarang karena
-isinya sudah sepenuhnya di K1/K3, atau bisa dihapus bersamaan ronde ini.
+Dicek langsung ke GitHub API saat dokumen ini ditulis — **kedua tag
+panen berubah isinya** dibanding yang sudah direview Grok:
+
+**`panen-madlad400-id`** — asset SEKARANG cuma berisi **11 part BARU**
+(`part-0011.jsonl.gz` s.d. `part-0021.jsonl.gz`, upload 2026-09-01
+~16:21-16:36 UTC), **BUKAN** 11 part lama (`part-0000` s.d.
+`part-0010`) yang sudah direview Grok minggu ini (part lama sudah
+tidak ada di asset list). Total manifest baru: **15.272.217 dokumen,
+±8,14 miliar kata approx** — angka SANGAT MIRIP batch lama (15.236.123
+dok), kemungkinan besar hasil re-run `panen.yml` dengan filter LAMA
+(belum termasuk perbaikan spam filter di §4). **INI BELUM PERNAH
+DISAMPEL/DIREVIEW** — kesimpulan retirement Grok yang lama (18,7%
+spam) berdasarkan sample dari part 0000/0005/0010 yang SEKARANG SUDAH
+TIDAK ADA, jadi tidak otomatis berlaku ke baris-baris baru ini
+walau kemungkinan besar polanya sama (filter yang menghasilkannya
+belum berubah saat run ini terjadi).
+
+**`panen-wikipedia-id`** — asset baru (upload ~16:48 UTC) tapi angkanya
+**PERSIS SAMA** dengan yang sudah direview & di-retire Grok (562.195
+dokumen, 136.840.867 kata, artikel pertama sama). Kemungkinan besar
+cuma re-run yang menghasilkan output identik (dump Wikipedia sumbernya
+statis). **Kesimpulan retire Grok yang lama (overlap penuh dengan K1)
+MASIH BERLAKU untuk batch ini** — tidak perlu direview ulang dari nol,
+cukup dikonfirmasi datanya benar identik (SHA256 part-0000 kalau mau
+dipastikan) lalu retire lagi dengan catatan singkat.
+
+---
+
+## 4. Rekomendasi: perbaikan filter SUDAH ADA di `main`, pertimbangkan re-run dulu
+
+Ronde ini (`tools/panen_hf.py`, commit `7b8a433`) sudah ditambahkan:
+- **Filter spam** (`deteksi_spam()`) — pola judi/togel/slot/forex/
+  boilerplate blog, diuji lokal (korpus sintetis: 7/7 spam terdeteksi,
+  0 false positive pada teks bersih). BELUM diuji di data produksi
+  HuggingFace nyata (butuh jalan lewat `panen.yml` sungguhan).
+- **Dedup lintas-sesi** (`muat_hash_lama`/`simpan_hash_baru`) — dulu
+  tiap run `panen_hf.py` reset hash dedup dari nol, jadi run berulang
+  bisa menyimpan dokumen sama persis lagi. Sekarang hash disimpan
+  sebagai asset `dedup-hashes.txt.gz` per tag, dimuat ulang tiap sesi.
+
+**Saran (bukan wajib)**: batch MADLAD-400 baru di §3 di atas dipanen
+SEBELUM perbaikan filter ini masuk `main`. Kalau Grok punya waktu/akses
+`workflow_dispatch`, **menjalankan ulang `panen.yml` untuk
+`madlad400-id` sekarang** (dengan filter baru aktif) kemungkinan
+menghasilkan batch yang jauh lebih bersih daripada mereview batch lama
+yang sudah pasti masih pakai filter lemah — lebih efisien daripada
+sample-review manual 500 baris yang kemungkinan besar tetap gagal.
+Kalau tidak ada waktu, sample-review manual batch §3 tetap valid
+sebagai alternatif (ikuti langkah §2.2 versi lama di riwayat git
+dokumen ini kalau perlu rujukan detail langkah).
 
 ---
 
 ## Ringkasan checklist ronde ini
 
-- [ ] Checkpoint 200M baru dipublikasikan ke tag `checkpoint-200m`
-      (checksum cocok, verifikasi §1.2).
-- [ ] MADLAD-400 baru (15,2 juta dokumen): sample-review ≥500 baris,
-      keputusan lolos-filter-ketat / retire, dilaksanakan.
-- [ ] Wikipedia baru (562rb dokumen): cek overlap K1, gabung atau retire.
-- [ ] `korpus-manifest-total.json` + `STATUS-KORPUS-LISENSI.md` +
-      README (kalau token berubah signifikan) diperbarui.
-- [ ] (Opsional, aman kapan saja) Hapus branch `staging/korpus-parts`.
-- [ ] Laporkan hasil ke dirigen: persentase lolos tiap panen, keputusan
-      akhir, angka token final kalau berubah.
+- [ ] Konfirmasi ke dirigen: 420.930.740 token BPE (K1+K2+K3) adalah
+      SATU-SATUNYA angka valid — sudah dijelaskan §1, tinggal
+      dikonfirmasi diterima/dipahami.
+- [ ] MADLAD-400 batch baru (§3, 15,27 juta dokumen, part 0011-0021):
+      pilih salah satu — (a) re-run `panen.yml` dengan filter baru
+      (§4, disarankan), atau (b) sample-review manual ≥500 baris dari
+      part baru ini.
+- [ ] Wikipedia batch baru (§3): konfirmasi identik dengan yang sudah
+      di-retire, retire lagi dengan catatan singkat (kemungkinan besar
+      tidak perlu review ulang penuh).
+- [ ] Update `korpus-manifest-total.json`/`STATUS-KORPUS-LISENSI.md`
+      HANYA kalau ada perubahan nyata (data baru lolos review) — kalau
+      tetap retire semua, cukup catat tanggal+kesimpulan baru di
+      `STATUS-KORPUS-LISENSI.md`, angka kanonik 420.930.740 tetap sama.

@@ -137,9 +137,11 @@ olahraga, etika, minuman, marplace, lingo, ekonomi, paluang, penemuan, alam, sen
 plus `greeting/` & `obrolan-ringan/` untuk template chat.
 `json/knowledge/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
 `korpus-ensiklopedia-bersih`, K2 `korpus-dialog-daerah-bersih`, K3 `korpus-pelengkap-bersih`,
-lihat `PRD-DATA-RELEASE.md`) — **420.880.874 token BPE resmi** (tokenizer proyek asli, vocab
+lihat `PRD-DATA-RELEASE.md`) — **420.930.740 token BPE resmi** (tokenizer proyek asli, vocab
 30.368, dihitung ulang penuh dari gzip live 2026-09-01, bukan tebakan ukuran file) per
-`korpus-manifest-total.json`. Checkpoint 50/100M di git; 200M di Release.
+`korpus-manifest-total.json`. Ini SATU-SATUNYA angka token valid untuk training - data
+panen (`panen-*` di Release) berstatus staging belum lolos review, tidak dihitung di sini.
+Checkpoint 50/100M di git; 200M (opt-in ±163MB) di Release, dimuat dari pemilih model.
 
 **Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
 `.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
