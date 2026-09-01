@@ -1,6 +1,6 @@
 export const theme = {
   KEY: 'rategoan_theme',
-  value: 'light',
+  value: 'auto',
   apply() {
     let dark;
     if (this.value === 'auto') {
@@ -13,7 +13,7 @@ export const theme = {
     if (m) m.content = dark ? '#05080c' : '#ffffff';
   },
   init() {
-    this.value = localStorage.getItem(this.KEY) || 'light';
+    this.value = localStorage.getItem(this.KEY) || 'auto';
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').addEventListener) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         if (this.value === 'auto') this.apply();

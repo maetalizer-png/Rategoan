@@ -10,6 +10,18 @@
   <link rel="apple-touch-icon" href="icon.svg">
   <link rel="manifest" href="manifest.webmanifest">
   <title>Rategoan</title>
+  <script>
+    (function () {
+      try {
+        var v = localStorage.getItem('rategoan_theme') || 'auto';
+        var dark = v === 'auto'
+          ? !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          : v === 'dark';
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="css/main.css">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
