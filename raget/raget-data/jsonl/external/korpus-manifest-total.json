@@ -71,5 +71,13 @@
   "targetGerbang": 1000000000,
   "targetTercapai": false,
   "kekuranganTokenKanonik": 579069260,
-  "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum Grok menyelesaikan review dan angka BPE nyata dihitung ulang."
+  "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum Grok menyelesaikan review dan angka BPE nyata dihitung ulang.",
+  "updatedAt": "2026-09-01T21:00:00+07:00",
+  "checkpoint200m": {
+    "sha256": "5286b9001ac76dafa6e82d8a31cdb36da230e9bf807af735be5f954d71810136",
+    "sizeByte": 171344040,
+    "tag": "checkpoint-200m"
+  },
+  "panenMadlad400idRondeSore": "RETIRE — sample 750, spam 18.7%, web-crawl",
+  "panenWikipediaId": "RETIRE — overlap K1, K1 lebih lengkap (683516 vs 562195)"
 }
