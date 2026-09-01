@@ -1,65 +1,36 @@
 {
-  "generatedAt": "2026-08-25T17:21:06Z",
+  "generatedAt": "2026-09-01",
+  "sumber": "PRD-PERINTAH-GROK dikerjakan Grok",
   "entries": [
     {
-      "jilid": "korpus-jilid1-round10",
-      "file": "korpus-jilid1-round10-manifest.json",
-      "tokenWindow126": 307028421
+      "rak": "K1 korpus-ensiklopedia-bersih",
+      "asal": "staging jilid1 round10",
+      "totalDokumen": 683516,
+      "sizeByteGz": 481969220,
+      "sha256": "07502ad4d34f0f2766f94bf7d34eb4ae8676a68ac3b226f8ba489a46362623ce",
+      "tokenWindow126CatatanClaude": 307028421,
+      "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-ensiklopedia-bersih"
     },
     {
-      "jilid": "korpus-jilid2",
-      "file": "korpus-jilid2-manifest.json",
-      "tokenWindow126": 421287189
+      "rak": "K2 korpus-dialog-daerah-bersih",
+      "totalDokumen": 291743,
+      "sizeByteGz": 77112865,
+      "totalKataApprox": 36174934,
+      "statusArsipBersih": "sudah di Release kanonik"
     },
     {
-      "jilid": "korpus-jilid3",
-      "file": "korpus-jilid3-manifest.json",
-      "tokenWindow126": 9079751
-    },
-    {
-      "jilid": "korpus-jilid4",
-      "file": "korpus-jilid4-manifest.json",
-      "tokenWindow126": 11802394
-    },
-    {
-      "jilid": "korpus-jilid5",
-      "file": "korpus-jilid5-manifest.json",
-      "tokenWindow126": 1506875
+      "rak": "K3 korpus-pelengkap-bersih",
+      "asal": "K3 id + staging jilid3+4+5",
+      "totalDokumen": 97548,
+      "sizeByteGz": 47189973,
+      "sha256": "3ac448424de5b2a0242855f14c25c2b6f643eb83be9b3f1093d6b4c426e64a79",
+      "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-pelengkap-bersih"
     }
   ],
-  "totalTokenGabungan": 750704630,
+  "jilid2": "TIDAK dihitung — data berisiko, tidak kanonik",
+  "madlad400id": "RETIRE — sample 200 baris web-crawl (judi/forex/berita), tidak masuk K1",
+  "tokenResmiDiRelease": "hanya catatan Claude jilid1 307028421; K1/K2/K3 belum dihitung ulang tokenizer ronde ini",
   "targetGerbang": 1000000000,
   "targetTercapai": false,
-  "kekuranganToken": 249295370,
-  "kebijakanGudangBesar": {
-    "rakKorpus": "Barang bersih - raw tidak disimpan permanen di git/sandbox, hanya clean+tokenize yang diarsipkan (Release, tag korpus-jilid-N-clean).",
-    "rakOtak": "Checkpoint >100MB (batas keras GitHub) keluar dari git, wajib Release asset (bukan Git LFS). Lihat raget-tools/CHECKPOINT-POLICY.md.",
-    "sumberPerJilid": {
-      "korpus-jilid1-round10": {
-        "sumberAsli": "GitHub Release tag \"J1\" repo ini (idwiki-latest-pages-articles.xml.bz2, sumber asli dumps.wikimedia.org, diunggah manual oleh kurir data).",
-        "catatan": "Round 10: jilid 1 diregenerasi dari nol (jsonl bersih Round 3 sudah hilang saat pembersihan disk sebelumnya) - SELURUH dump diproses (bukan berhenti di lantai kata), hasil jauh lebih besar dari Round 3.",
-        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-1-clean - sesi sandbox tidak diizinkan upload Release asset. Pakai raget-tools/publish-checkpoint-release.py dari luar sandbox (Colab/lokal)."
-      },
-      "korpus-jilid2": {
-        "sumberAsli": "GitHub Release tag \"Sft\" repo ini (newspapers-json.tgz + train-00000/00001/00002-of-00140.parquet, sumber asli HPLT/CommonCrawl-derived, diunggah manual oleh kurir data).",
-        "catatan": "Raw asset masih ada di Release tag Sft. Bisa diproses ulang lewat parse-korpus-jilid2.py + clean-dedupe-korpus-jilid2.py.",
-        "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-jilid-2-clean (dipublikasikan dirigen dari luar sandbox)."
-      },
-      "korpus-jilid3": {
-        "sumberAsli": "GitHub Release tag \"U\" repo ini (idwikibooks-latest-pages-articles.xml.bz2).",
-        "catatan": "Diproses lewat extract-clean-wikipedia.py (format sama dengan Wikipedia).",
-        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-3-clean - perlu publish dari luar sandbox."
-      },
-      "korpus-jilid4": {
-        "sumberAsli": "GitHub Release tag \"J34\" repo ini (idwikivoyage + idwikisource + idwikiquote, 3 file XML).",
-        "catatan": "Digabung dari 3 sumber (extract-clean-wikipedia.py per sumber + tag field source per baris).",
-        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-4-clean - perlu publish dari luar sandbox."
-      },
-      "korpus-jilid5": {
-        "sumberAsli": "GitHub Release tag \"Hhh\" repo ini (idwiktionary-latest-pages-articles.xml.bz2).",
-        "catatan": "Diproses lewat extract-clean-wiktionary.py (struktur entri kamus berbeda dari artikel prosa - hanya bagian {{bahasa|id}} + definisi bernomor yang diambil).",
-        "statusArsipBersih": "BELUM diarsipkan ke tag korpus-jilid-5-clean - perlu publish dari luar sandbox."
-      }
-    }
-  }
+  "catatan": "Angka 750 juta lama TIDAK dipakai lagi karena termasuk jilid2."
 }
