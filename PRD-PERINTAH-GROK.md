@@ -1,43 +1,52 @@
-# PRD — Perintah untuk Grok: 2 Tugas (MADLAD-400 + Publish Checkpoint)
+# PRD — Perintah untuk Grok: KERJAKAN 2 Tugas Ini (bukan cuma review)
 
-Status: **BERLAKU, ditulis ulang 2026-09-01 malam.** 2 tugas konkret,
-tidak ada lagi — kerjakan berurutan.
-
----
-
-## Tugas 1 — Review `panen-madlad400-id` (17 asset, ±30 GB), promosikan ke K1 kalau lolos
-
-`panen-madlad400-id` sekarang 17 part (`part-0011` s.d. `part-0027`),
-~30 GB, 46.288.458 dokumen per `progress.json`. Belum pernah direview
-(part lama yang sudah direview dan di-retire minggu ini, 0000-0010,
-sudah tidak ada di Release — angka baru ini sepenuhnya baru).
-
-**Langkah:**
-1. Cek spam-rate: sample ≥500 baris acak dari BEBERAPA part (bukan
-   cuma satu — ambil dari part awal 0011, tengah 0018, akhir 0027).
-   Hitung persentase spam judi/forex/slot/blog vs teks naratif
-   Indonesia koheren (pola sama seperti review sebelumnya yang
-   menemukan 18,7% spam di batch lama).
-2. Dedupe vs K1 (`korpus-ensiklopedia-bersih`, sekarang 759.587
-   dokumen setelah Wikipedia digabung) — buang baris yang sudah ada
-   di K1.
-3. **Kalau lolos ambang kualitas** (mayoritas bersih, PRD-DATA-RELEASE.md
-   §5): promosikan sisa unik ke K1 kanonik — filter ketat dulu (buang
-   pola spam yang match), gabung, upload asset baru + `manifest.json`
-   dengan `totalTokenBPEResmi` (biar Claude bisa hitung ulang BPE
-   setelahnya, atau isi `null` + catatan seperti pola Wikipedia
-   kemarin kalau belum sempat hitung).
-4. **Kalau mayoritas masih spam**: retire tag, catat di
-   `docs/STATUS-KORPUS-LISENSI.md`, JANGAN panen ulang sumber ini
-   sampai `tools/panen_hf.py` filter spam (`deteksi_spam()`, sudah di
-   `main` sejak commit `7b8a433`) benar-benar dipakai jalan ulang.
-5. Update `korpus-manifest-total.json` sesuai hasil (lolos atau
-   retire) — total kanonik saat ini 471.390.047 token, jadi basis
-   sebelum tugas ini.
+Status: **BERLAKU, ditulis ulang 2026-09-01 malam.** Ini perintah
+EKSEKUSI, bukan permintaan laporan/analisis. Selesai berarti: ada
+commit baru di repo (manifest berubah, asset Release berubah). Kalau
+sampai laporan berikutnya tidak ada commit baru sama sekali, berarti
+tugas ini BELUM dikerjakan, bukan cuma "belum dilaporkan".
 
 ---
 
-## Tugas 2 — Publish checkpoint 200M terbaru (PPL 1068,37) ke Release
+## Tugas 1 — EKSEKUSI: putuskan nasib `panen-madlad400-id`, JALANKAN keputusannya
+
+Jangan berhenti di "sudah dicek, spam-nya sekian persen" — itu baru
+separuh jalan. Tugas ini SELESAI kalau salah satu dari dua ini SUDAH
+TERJADI di repo:
+- **K1 bertambah** (commit baru ke `korpus-ensiklopedia-bersih`, dokumen
+  count naik dari 759.587), ATAU
+- **Tag `panen-madlad400-id` ditandai retire** di
+  `docs/STATUS-KORPUS-LISENSI.md` (commit baru).
+
+Langkah untuk sampai ke salah satu di atas:
+
+1. **KERJAKAN**: sample ≥500 baris acak dari part `0011`, `0018`,
+   `0027` (17 part total, ~30 GB, 46.288.458 dokumen per
+   `progress.json`). Hitung % spam judi/forex/slot/blog vs teks
+   naratif Indonesia koheren.
+2. **KERJAKAN**: dedupe hasil sample yang bersih terhadap K1
+   (759.587 dokumen, tag `korpus-ensiklopedia-bersih`).
+3. **PUTUSKAN DAN JALANKAN** (pilih satu, JANGAN berhenti di analisis):
+   - **Lolos** (mayoritas bersih) → filter ketat seluruh data (bukan
+     cuma sample) buang pola spam, gabung sisa unik ke K1, **upload
+     asset gzip baru + `manifest.json` ke Release
+     `korpus-ensiklopedia-bersih`** (`totalTokenBPEResmi` boleh
+     `null`+catatan kalau belum sempat hitung BPE, Claude bisa
+     lanjutkan itu).
+   - **Gagal** (mayoritas spam, sesuai pola sebelumnya 18,7%) →
+     **commit** penanda retire ke `docs/STATUS-KORPUS-LISENSI.md`
+     SEKARANG (bukan nanti), JANGAN panen ulang sumber ini sampai
+     filter `deteksi_spam()` (commit `7b8a433`, sudah di `main`)
+     benar-benar dipakai di run panen berikutnya.
+4. **KERJAKAN**: commit `korpus-manifest-total.json` dengan hasil final
+   (basis sebelum tugas ini: 471.390.047 token kanonik).
+
+---
+
+## Tugas 2 — EKSEKUSI: publish checkpoint ke Release SEKARANG
+
+Ini bukan langkah opsional atau "kalau sempat" — jalankan urutan
+perintah ini langsung:
 
 ```bash
 git pull origin main
@@ -57,17 +66,23 @@ python3 raget/raget-tools/publish-checkpoint-release.py \
     checkpoint-200m/raget-neural-massive200m.safetensors checkpoint-200m \
     "01 · Checkpoint 200M (ronde 2026-09-01, PPL 1068,37)" \
     "1787 step akumulasi / 335,46 menit, held-out PPL 1899,89->1068,37 (mix K1 55-65%/K2 25-35%/K3 <=15% sesuai PRD-DATA-RELEASE §10). Generasi belum koheren - lihat PRD-PRODUKSI-READY.md."
+
+git rm -r checkpoint-200m/
+git commit -m "chore: hapus part checkpoint setelah publish Release"
+git push origin main
 ```
 
-Setelah sukses, folder `checkpoint-200m/` aman dihapus dari repo.
+Tugas ini SELESAI kalau: Release `checkpoint-200m` di GitHub menunjukkan
+asset dengan SHA256 `d4aba4d8…` (bukan `b5aeb665…` yang lama), DAN
+folder `checkpoint-200m/` sudah hilang dari repo.
 
 ---
 
-## Checklist
+## Checklist (centang HANYA setelah commit/upload benar-benar terjadi)
 
-- [ ] Tugas 1: MADLAD-400 direview (spam-rate + dedupe), hasil
-      dieksekusi (promosi ke K1 atau retire), manifest diperbarui.
-- [ ] Tugas 2: checkpoint PPL 1068,37 dipublikasikan ke Release
-      `checkpoint-200m`.
-- [ ] Laporkan hasil ke dirigen: persentase spam MADLAD-400, keputusan
-      final, angka token kanonik baru kalau berubah.
+- [ ] Tugas 1: commit nyata ada — K1 bertambah ATAU
+      `STATUS-KORPUS-LISENSI.md` menandai retire.
+- [ ] Tugas 2: asset Release `checkpoint-200m` sudah SHA256
+      `d4aba4d8…`, folder `checkpoint-200m/` sudah dihapus.
+- [ ] Laporkan ke dirigen: % spam MADLAD-400, keputusan final (K1
+      bertambah / retire), angka token kanonik baru kalau berubah.
