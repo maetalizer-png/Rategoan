@@ -182,7 +182,7 @@ saling tumpang tindih dengan checklist Grok di §1, tidak diulang):
 | Phase 3 Memory | **Belum diaudit ulang ronde ini** — panel "Fakta tentang saya" pernah dibangun (devlog historis), fungsi penuh (inspect/search/edit/delete/clear all) belum diverifikasi ulang langsung |
 | Phase 4 Retrieval benchmark | **Belum ada** — bench.json menguji jawaban akhir end-to-end, bukan metrik retrieval terpisah (hit@1/hit@3/MRR) per domain |
 | Phase 5 Unit/Integration/E2E | **Sebagian** — bench.json = campuran unit-ish + E2E lewat browser nyata; tidak ada test murni per-modul JS terpisah |
-| Phase 6 Capability Matrix | **Belum dibuat** — kandidat murah untuk ronde depan |
+| Phase 6 Capability Matrix | **Selesai** — `docs/CAPABILITIES.md` |
 | Phase 7-11 UX/Onboarding/Chat/Privacy/Settings | **Privacy: selesai** (§1). Sisanya belum diaudit sistematis ronde ini — polesan ad-hoc (hover state, sidebar login-gate) sudah dilakukan ronde-ronde sebelumnya, bukan audit menyeluruh Phase 7-11 |
 | Phase 12-13 Data mgmt/Corpus governance | **Selesai** lewat `PRD-DATA-RELEASE.md` (sudah ada sebelum ronde ini) + eksekusi Grok ronde ini |
 | Phase 14 Security | **Sebagian**: grep secret bersih (§1), 36 penggunaan `innerHTML` (12 file) BELUM diaudit XSS satu-satu |
@@ -258,5 +258,5 @@ eksperimental dengan bukti (PPL turun, generasi belum koheren).
 3. Jalankan training 200M solo 60 menit sesuai mix §10
    PRD-DATA-RELEASE setelah training 100M ronde ini selesai.
 4. Audit XSS 36 penggunaan `innerHTML` (12 file) — Phase 14.
-5. Bangun Capability Matrix (`docs/CAPABILITIES.md`) — Phase 6, murah.
+5. ~~Bangun Capability Matrix~~ — **selesai**, lihat `docs/CAPABILITIES.md`.
 6. Audit `sw.js`/app-shell caching — Phase 16.
