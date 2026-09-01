@@ -138,7 +138,60 @@ def bersihkan_teks(teks):
 
 
 def hash_dedup(teks):
-    return hashlib.sha1(teks.strip().lower().encode("utf-8")).hexdigest()
+    # Dipotong 16 hex char (64 bit) - kolisi praktis nol di skala puluhan
+    # juta dokumen (birthday bound ~1e-5 di N=20 juta), tapi ukuran file
+    # dedup lintas-sesi (lihat muat_hash_lama/simpan_hash_baru) jadi separuh
+    # dari hash SHA1 penuh (40 hex char).
+    return hashlib.sha1(teks.strip().lower().encode("utf-8")).hexdigest()[:16]
+
+
+# Pola spam nyata dari review manual MADLAD-400 (lihat PRD-PERINTAH-GROK.md
+# riwayat: sample 750 baris, 18.7% spam - isi web-crawl umum judi/forex/blog
+# yang LOLOS filter bahasa lama karena memang teks Bahasa Indonesia asli,
+# cuma bukan konten faktual/naratif). Filter bahasa (cukup_indonesia) tidak
+# bisa menangkap ini - perlu deteksi pola/istilah spesifik terpisah.
+_SPAM_FRASA = [
+    # judi online / togel / slot
+    "judi online", "situs judi", "agen judi", "bandar judi", "bandar togel",
+    "togel online", "togel hari ini", "slot gacor", "situs slot", "slot online",
+    "daftar slot", "rtp slot", "rtp tertinggi", "rtp live", "maxwin hari ini",
+    "scatter hitam", "pola gacor", "bocoran slot", "slot terpercaya",
+    "taruhan bola", "taruhan online", "casino online", "live casino",
+    "jackpot terbesar", "jackpot maxwin",
+    # deposit/promo (pola iklan judi/forex khas)
+    "deposit pulsa", "minimal deposit", "link alternatif", "situs resmi terpercaya",
+    "menang mudah", "bonus new member", "cashback slot",
+    # forex/trading spam
+    "sinyal forex", "robot forex", "broker forex", "trading forex", "forex trading",
+    "modal kecil profit", "profit konsisten", "leverage tinggi", "sinyal trading",
+    # boilerplate blog/menu situs (bukan judi, tapi bukan teks naratif juga)
+    "tinggalkan komentar", "baca juga", "artikel terkait", "hak cipta dilindungi",
+    "kebijakan privasi", "syarat dan ketentuan", "posting terbaru", "kategori populer",
+    "hubungi kami", "wa admin", "chat admin",
+]
+_spam_re = re.compile("|".join(re.escape(f) for f in _SPAM_FRASA), re.I)
+
+
+def deteksi_spam(teks, ambang_cocok=2):
+    """True kalau teks kemungkinan besar spam (judi/forex/blog boilerplate).
+    Perlu >=ambang_cocok FRASA spam BERBEDA (bukan cuma satu kata kebetulan
+    muncul) - supaya artikel faktual yang sekali menyebut 'forex' atau
+    'baca juga' di tengah teks normal tidak salah tangkap. ambang_cocok=2
+    dipilih karena teks spam nyata (iklan judi/forex) hampir selalu punya
+    banyak frasa promosi berulang, sedangkan teks faktual paling banter
+    menyebut satu istilah terkait sekali."""
+    cocok = set(m.group(0).lower() for m in _spam_re.finditer(teks))
+    return len(cocok) >= ambang_cocok
+
+
+def _hitung_spam_rate(diterima, dibuang_spam):
+    """% dokumen yang lolos filter bahasa tapi ternyata spam - target PRD
+    ronde ini: <5%. Basisnya (diterima + dibuang_spam) = total dokumen yang
+    SUDAH lolos filter bahasa (cukup_indonesia), supaya angkanya murni
+    mengukur efektivitas deteksi_spam, bukan tercampur dokumen non-Indonesia
+    yang memang ditolak alasan lain."""
+    total = diterima + dibuang_spam
+    return round(100.0 * dibuang_spam / total, 2) if total else 0.0
 
 
 class PenampungHasil:
@@ -150,14 +203,19 @@ class PenampungHasil:
     (2 GB) - dicek tiap 500 dokumen (bukan tiap dokumen, supaya tidak
     memanggil os.path.getsize terlalu sering)."""
 
-    def __init__(self, slug, meta, part_idx_awal, batas_dokumen):
+    def __init__(self, slug, meta, part_idx_awal, batas_dokumen, hash_awal=None):
         self.slug = slug
         self.meta = meta  # {"source", "url", "license"}
         self.batas_dokumen = batas_dokumen
         self.part_idx = part_idx_awal
-        self.dilihat_hash = set()
+        # hash_awal = hash dari sesi-sesi SEBELUMNYA (dedup lintas-sesi, lihat
+        # muat_hash_lama) - diseed ke set yang sama supaya dedup dalam-sesi
+        # (as-is) otomatis juga menolak dokumen yang sudah pernah diterima
+        # sesi lampau, tanpa mengubah logika terima() sama sekali.
+        self.dilihat_hash = set(hash_awal) if hash_awal else set()
         self.diterima = 0
         self.dibuang_bahasa = 0
+        self.dibuang_spam = 0
         self.dibuang_duplikat = 0
         self.total_kata_approx = 0
         self.parts_selesai = []  # [(path, docCount), ...]
@@ -191,6 +249,9 @@ class PenampungHasil:
             return False
         if not cukup_indonesia(teks):
             self.dibuang_bahasa += 1
+            return False
+        if deteksi_spam(teks):
+            self.dibuang_spam += 1
             return False
         h = hash_dedup(teks)
         if h in self.dilihat_hash:
@@ -348,6 +409,47 @@ def simpan_progres(slug, progres):
         print("  peringatan: gagal unggah progress.json ke", tag, ":", e)
 
 
+def muat_hash_lama(slug):
+    """Muat set hash dokumen dari sesi-sesi SEBELUMNYA - dedup dulu cuma
+    per-sesi (PenampungHasil.dilihat_hash direset tiap kali proses ini
+    dijalankan ulang), jadi menjalankan ulang workflow panen bisa
+    menyimpan dokumen yang PERSIS SAMA lagi (duplikat lintas-sesi lolos).
+    File disimpan ringkas: hash 16 hex char (lihat hash_dedup) + gzip,
+    satu hash per baris - bukan JSON, supaya murah dibaca/ditulis untuk
+    jutaan baris."""
+    tag = "panen-" + slug
+    lokal = os.path.join(WORK_DIR, "_dedup_{}.txt.gz".format(slug))
+    if unduh_asset(tag, "dedup-hashes.txt.gz", lokal):
+        try:
+            with gzip.open(lokal, "rt", encoding="utf-8") as f:
+                hasil = set(line.strip() for line in f if line.strip())
+            print("  dedup lintas-sesi:", len(hasil), "hash dimuat dari sesi sebelumnya")
+            return hasil
+        except Exception as e:
+            print("  peringatan: gagal baca dedup-hashes.txt.gz lama:", e)
+    return set()
+
+
+def simpan_hash_baru(slug, hash_set):
+    """Diunggah SEKALI di akhir sesi (bukan tiap checkpoint 2000 dokumen
+    seperti progress.json) - file ini tumbuh sebanding jumlah dokumen unik
+    total (bisa puluhan MB untuk lumbung utama), re-upload tiap checkpoint
+    akan sangat boros. Konsekuensi jujur: kalau sesi crash di tengah jalan,
+    dedup lintas-sesi untuk dokumen yang sempat diterima sesi itu ikut
+    hilang (bukan bug baru - progress.json/manifest juga sama-sama cuma
+    final di akhir sesi untuk alasan biaya yang sama)."""
+    tag = "panen-" + slug
+    lokal = os.path.join(WORK_DIR, "_dedup_{}_baru.txt.gz".format(slug))
+    with gzip.open(lokal, "wt", encoding="utf-8") as f:
+        for h in hash_set:
+            f.write(h + "\n")
+    try:
+        unggah_asset(tag, "dedup-hashes.txt.gz", lokal,
+                      title="Panen Dataset - {} (hash dedup lintas-sesi, {} dokumen unik)".format(slug, len(hash_set)))
+    except Exception as e:
+        print("  peringatan: gagal unggah dedup-hashes.txt.gz:", e)
+
+
 def panen_dataset_stream(d, laporan_sumber):
     slug = d["slug"]
     if d.get("gated") and not HF_TOKEN:
@@ -379,7 +481,8 @@ def panen_dataset_stream(d, laporan_sumber):
         ds = ds.skip(offset)
 
     meta = {"source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"]}
-    penampung = PenampungHasil(slug, meta, progres.get("nextPartIdx", 0), batas_dokumen)
+    hash_lama = muat_hash_lama(slug)
+    penampung = PenampungHasil(slug, meta, progres.get("nextPartIdx", 0), batas_dokumen, hash_awal=hash_lama)
     t_mulai = time.time()
 
     for contoh in ds:
@@ -397,15 +500,19 @@ def panen_dataset_stream(d, laporan_sumber):
     simpan_progres(slug, {"offset": offset, "diambil": diambil_total_akumulasi + penampung.diterima,
                            "nextPartIdx": penampung.part_idx,
                            "ringkasan": "{} dokumen terkumpul (sesi ini selesai)".format(diambil_total_akumulasi + penampung.diterima)})
+    simpan_hash_baru(slug, penampung.dilihat_hash)
+    spam_rate = _hitung_spam_rate(penampung.diterima, penampung.dibuang_spam)
     laporan_sumber[slug] = {
         "nama": d["nama"], "status": "selesai", "dokumenSesiIni": penampung.diterima,
         "totalAkumulasi": diambil_total_akumulasi + penampung.diterima,
-        "dibuangBukanIndonesia": penampung.dibuang_bahasa, "dibuangDuplikat": penampung.dibuang_duplikat,
+        "dibuangBukanIndonesia": penampung.dibuang_bahasa, "dibuangSpam": penampung.dibuang_spam,
+        "dibuangDuplikat": penampung.dibuang_duplikat, "spamRatePersen": spam_rate,
         "detikDipakai": round(time.time() - t_mulai, 1),
     }
-    print("- {}: {} dokumen sesi ini (total akumulasi {}), buang {} non-Indonesia + {} duplikat, {:.0f}s".format(
+    print("- {}: {} dokumen sesi ini (total akumulasi {}), buang {} non-Indonesia + {} spam + {} duplikat "
+          "(spam-rate {:.2f}%), {:.0f}s".format(
         d["nama"], penampung.diterima, diambil_total_akumulasi + penampung.diterima,
-        penampung.dibuang_bahasa, penampung.dibuang_duplikat, time.time() - t_mulai))
+        penampung.dibuang_bahasa, penampung.dibuang_spam, penampung.dibuang_duplikat, spam_rate, time.time() - t_mulai))
     return {"parts": parts, "dokumen": penampung.diterima, "kata": penampung.total_kata_approx}
 
 
@@ -486,7 +593,8 @@ def panen_dataset_file(d, laporan_sumber):
     diambil_total_akumulasi = progres.get("diambil", 0)
 
     meta = {"source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"]}
-    penampung = PenampungHasil(slug, meta, progres.get("nextPartIdx", 0), batas_dokumen)
+    hash_lama = muat_hash_lama(slug)
+    penampung = PenampungHasil(slug, meta, progres.get("nextPartIdx", 0), batas_dokumen, hash_awal=hash_lama)
     file_selesai_sesi = list(sudah)
     t_mulai = time.time()
 
@@ -525,15 +633,19 @@ def panen_dataset_file(d, laporan_sumber):
     simpan_progres(slug, {"fileSelesai": file_selesai_sesi, "diambil": diambil_total_akumulasi + penampung.diterima,
                            "nextPartIdx": penampung.part_idx,
                            "ringkasan": "{} dokumen terkumpul (sesi ini selesai)".format(diambil_total_akumulasi + penampung.diterima)})
+    simpan_hash_baru(slug, penampung.dilihat_hash)
+    spam_rate = _hitung_spam_rate(penampung.diterima, penampung.dibuang_spam)
     laporan_sumber[slug] = {
         "nama": d["nama"], "status": "selesai", "dokumenSesiIni": penampung.diterima,
         "totalAkumulasi": diambil_total_akumulasi + penampung.diterima, "fileDiprosesSesiIni": len(file_selesai_sesi) - len(sudah),
-        "dibuangBukanIndonesia": penampung.dibuang_bahasa, "dibuangDuplikat": penampung.dibuang_duplikat,
+        "dibuangBukanIndonesia": penampung.dibuang_bahasa, "dibuangSpam": penampung.dibuang_spam,
+        "dibuangDuplikat": penampung.dibuang_duplikat, "spamRatePersen": spam_rate,
         "detikDipakai": round(time.time() - t_mulai, 1),
     }
-    print("- {}: {} dokumen sesi ini (total akumulasi {}), {} file diproses, buang {} non-Indonesia + {} duplikat, {:.0f}s".format(
+    print("- {}: {} dokumen sesi ini (total akumulasi {}), {} file diproses, buang {} non-Indonesia + {} spam + "
+          "{} duplikat (spam-rate {:.2f}%), {:.0f}s".format(
         d["nama"], penampung.diterima, diambil_total_akumulasi + penampung.diterima, len(file_selesai_sesi) - len(sudah),
-        penampung.dibuang_bahasa, penampung.dibuang_duplikat, time.time() - t_mulai))
+        penampung.dibuang_bahasa, penampung.dibuang_spam, penampung.dibuang_duplikat, spam_rate, time.time() - t_mulai))
     return {"parts": parts, "dokumen": penampung.diterima, "kata": penampung.total_kata_approx}
 
 
@@ -604,7 +716,8 @@ def gabung_dan_upload(d, hasil_sesi):
         "komposisiBahasa": {"id": 1.0},
         "jumlahPart": len(daftar_part),
         "parts": daftar_part,
-        "dedup": "hash SHA1 per-teks per sesi (bukan lintas-sesi/lintas-part - lihat catatan jujur README)",
+        "dedup": "hash SHA1 (16 hex char) per-teks, LINTAS-SESI sejak ronde ini via dedup-hashes.txt.gz "
+                 "(sebelumnya cuma per-sesi - lihat riwayat PRD-PERINTAH-GROK.md)",
     }
     path_manifest = os.path.join(WORK_DIR, "manifest-{}.json".format(slug))
     with open(path_manifest, "w", encoding="utf-8") as f:

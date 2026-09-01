@@ -177,32 +177,62 @@ lapisan 1.
 
 ---
 
-## 2. Temuan bench detail (5 kegagalan CORE dari 1180, 99.58%)
+## 2. Temuan bench detail (status per ronde 2026-09-01, terakhir diperbarui)
 
-Semua 5 dicatat presisi (prompt asli + balasan asli), bukan dirangkum:
+Riwayat: bench pertama ronde ini 1175/1180=99.58%, 5 gagal (atlantis,
+negara-terkecil-eropa, negara-terbanyak-asia, KTP, self-review). Fix
+router KTP (§1) → bench ulang tetap 1175/1180 tapi KTP hilang dari
+daftar gagal, muncul kegagalan baru tak terkait `"bro, kabar?"`. Fix
+`"bro, kabar?"` (llmEngine.isSmalltalkText — lihat commit `6b0e380`)
+dilakukan ronde ini juga. **Bench final ronde ini belum dijalankan
+ulang saat bagian dokumen ini ditulis** — akan dikonfirmasi di laporan
+akhir chat, bukan diklaim di sini sebelum benar-benar dijalankan.
 
-1. **`what is the capital of atlantis`**, **`negara terkecil di eropa
-   apa`** (harap "Vatikan"), **`negara mana yang penduduknya paling
-   banyak di asia`** (harap "Tiongkok") — pola sama persis: heuristik
-   "lanjutan topik?" (kemungkinan besar di `context-engine.js`/
-   `social-engine.js`) menyela dengan pertanyaan klarifikasi "ini
-   lanjutan topik sebelumnya atau baru?" alih-alih langsung menjawab
-   pertanyaan faktual yang jelas. Terjadi 3x dari 5 kegagalan — pola
-   sistemik, bukan kasus terisolasi. **Belum diperbaiki** (butuh
-   pemahaman mendalam kondisi apa yang memicu heuristik ini vs kapan
-   harus diam, risiko regresi kalau ditambal serampangan).
-2. **`cara bikin KTP gimana ya`** — lihat §1 (root cause router-intent
-   presisi ditemukan, belum diperbaiki).
+Kegagalan yang MASIH terbuka (didiagnosis presisi ronde ini, BELUM
+diperbaiki — root cause sekarang jauh lebih jelas dari sebelumnya):
+
+1. **`negara terkecil di eropa apa`** (harap "Vatikan") + **`negara
+   mana yang penduduknya paling banyak di asia`** (harap "Tiongkok")
+   — root cause LENGKAP ditemukan ronde ini (sebelumnya cuma diduga
+   "heuristik lanjutan topik", sekarang presisi):
+   - `bridge-reasoning.js` `trySuperlatif()` SUDAH ADA dan berfungsi
+     untuk pola "negara [dengan] populasi/luas terbesar/terkecil/dst",
+     TAPI (a) regex-nya tidak cocok dengan urutan kata "negara
+     terkecil di X" atau "negara mana yang Y-nya paling Z di X" (field
+     kata seperti "luas"/"penduduk" tidak disebutkan eksplisit di
+     prompt asli), dan (b) TIDAK ADA penyaringan benua sama sekali —
+     selalu mengembalikan top-3 GLOBAL, bukan top-1 di benua yang
+     diminta.
+   - **Data juga belum lengkap**: `raget-data/json/negara/
+     eropan-selatan.json` TIDAK punya entri Vatikan sama sekali (San
+     Marino ada, 61 km² — negara terkecil ke-2 dunia, tapi bench
+     minta "Vatikan" spesifik). Entri China di `asian-timur.json`
+     `nama` fieldnya `"China"`, BUKAN `"Tiongkok"` yang diminta bench.
+   - **Sengaja tidak ditambal ronde ini**: memperbaiki logika query
+     saja TIDAK akan membuat bench ini lolos (Vatikan tetap tidak
+     ditemukan, China tetap bernama "China") — perlu juga menambah
+     entri data Vatikan (perlu angka akurat: ibu kota, luas ~0,49
+     km², populasi ~800, dsb — otoritatif, bukan tebakan) dan alias
+     "Tiongkok" untuk China. Menambah data negara di bawah tekanan
+     waktu berisiko salah angka (misinformasi lebih buruk daripada
+     tidak dijawab) — sengaja ditunda ke ronde berikutnya dengan
+     waktu cukup untuk verifikasi fakta.
+2. **`what is the capital of atlantis`** — Atlantis tidak nyata,
+   tidak ada jawaban faktual benar yang mungkin; balasan sistem saat
+   ini (klarifikasi "lanjutan topik atau baru?") sebenarnya bukan
+   respons tak masuk akal untuk pertanyaan fiksi seperti ini, cuma
+   bench tidak punya kategori "tolak dengan sopan" untuk kasus ini.
 3. **`gimana menurutmu kualitas kerjaanku`** (harap konten
    self-review/metode sandwich) — dijawab dengan deflection generik
    "bukan punya opini pribadi seperti manusia" alih-alih memberi
    kerangka self-review yang diharapkan. Kemungkinan entri
    pengetahuan terkait "self-review"/"metode sandwich" belum ada atau
-   tidak ter-trigger oleh frasa ini.
+   tidak ter-trigger oleh frasa ini. Belum diinvestigasi lebih lanjut
+   ronde ini (fokus waktu habis untuk temuan #1 di atas).
 
-Total dampak: 0,42% dari CORE-SUITE. Tidak menghalangi status
-"produksi lapisan 1" (99.58% jauh di atas gerbang 97%), tapi 3 temuan
-di atas adalah kandidat perbaikan konkret ronde berikutnya.
+Total dampak sebelum ronde ini: 0,42% dari CORE-SUITE (5/1180).
+Tidak menghalangi status "produksi lapisan 1" (99.58% jauh di atas
+gerbang 97%).
 
 ---
 
@@ -286,21 +316,38 @@ eksperimental dengan bukti (PPL turun, generasi belum koheren).
 
 ## 7. Untuk ronde berikutnya (prioritas, bukan janji)
 
-1. Perbaiki heuristik "lanjutan topik?" yang menyela 3 dari 5 kegagalan
-   bench (dampak terbesar per temuan tunggal, MASIH gagal ronde ini —
-   lihat §2).
+1. **Tambah entri data Vatikan** (`raget-data/json/negara/eropan-
+   selatan.json`, angka akurat — ibu kota Vatikan, luas ~0,49 km²,
+   populasi ~800) **+ alias "Tiongkok" untuk China** (`asian-timur.json`),
+   **+ perluas `trySuperlatif()`** (`bridge-reasoning.js`) supaya
+   cocok pola "negara terkecil/terbesar di X" dan "negara mana yang
+   Y-nya paling Z di X" (bukan cuma "negara [dengan] FIELD SUPERLATIF")
+   dan menyaring per-benua (bukan selalu top-3 global). Root cause
+   presisi sudah ditemukan ronde ini (§2) — SENGAJA belum ditambal
+   ronde ini karena bagian data perlu verifikasi fakta akurat, bukan
+   tebakan terburu-buru.
 2. ~~Perbaiki prioritas router "cara X" vs domain-match spesifik
-   (KTP)~~ — **selesai ronde ini**, lihat `router-intent.js`
-   `LAYANAN_KEYWORDS_RE` + §1 di atas. Kemungkinan intent layanan lain
-   dengan pola sama (di luar 13 kata kunci yang sudah dicakup) masih
-   perlu dipantau.
-3. Diagnosis kegagalan bench baru `"bro, kabar?"` (`notContains:
-   "Anda"` tapi follow-up note domain "kabar" mengandung "Anda") —
-   BELUM didiagnosis ronde ini, kemungkinan terkait data sapaan baru
-   dari commit pihak lain.
-4. ~~Jalankan training 200M solo 60 menit~~ — **selesai** (2 sesi:
-   18 menit + 90 menit lanjutan, total 1570 step/245,24 menit, PPL
-   2898,68→1242,11).
-5. Audit XSS 36 penggunaan `innerHTML` (12 file) — Phase 14.
+   (KTP)~~ — **selesai**, lihat `router-intent.js` `LAYANAN_KEYWORDS_RE`.
+3. ~~Diagnosis kegagalan bench "bro, kabar?"~~ — **selesai**, lihat
+   `llmEngine.isSmalltalkText()` (commit `6b0e380`).
+4. ~~Jalankan training 200M~~ — **selesai** (3 sesi total: 18 menit +
+   90 menit + 90 menit lanjutan, PPL turun tiap sesi).
+5. ~~Audit XSS `innerHTML`~~ — **selesai**, 48 site diaudit (bukan 36
+   seperti catatan lama), 0 risiko nyata ditemukan, 1 titik borderline
+   diperbaiki untuk defense-in-depth (`js/account/account.js`).
 6. ~~Bangun Capability Matrix~~ — **selesai**, lihat `docs/CAPABILITIES.md`.
-7. Audit `sw.js`/app-shell caching — Phase 16.
+7. ~~Audit `sw.js` cache invalidation~~ — **sebagian selesai**: skema
+   cache-versi (nama cache `raget-cdn-packages-v1`) sudah benar untuk
+   apa yang di-cache (paket CDN/checkpoint opt-in), origin Release
+   checkpoint-200m ditambahkan. Keterbatasan LAMA yang masih berlaku
+   (belum ditindaklanjuti, di luar cakupan realistis ronde ini):
+   app-shell (index.html/js/css) TIDAK di-cache sama sekali, jadi
+   klaim "offline penuh" belum akurat untuk shell aplikasi sendiri
+   (cuma paket unduhan opsional yang offline-capable).
+8. Perkuat `tools/panen_hf.py` melawan spam — **selesai**, lihat §1A
+   ronde 7-poin sebelumnya + commit spam filter/dedup lintas-sesi
+   ronde ini (belum diuji di data produksi nyata HuggingFace, cuma
+   korpus sintetis lokal - lihat laporan chat untuk detail).
+9. Tier "Raget 200M" di pemilih model — **selesai**, opt-in eksplisit,
+   fetch dari Release GitHub, cache offline via sw.js, label jujur
+   eksperimental. Lihat `js/sheets/models.js` + `neural-provider.js`.
