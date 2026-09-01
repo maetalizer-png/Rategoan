@@ -31,3 +31,7 @@ Jangan panen ulang sumber MADLAD-400 sampai `deteksi_spam()` (commit `7b8a433`) 
 ## Token
 Basis perintah Claude sebelum tugas ini: 471.390.047.  
 Tidak berubah karena MADLAD tidak masuk K1. Token BPE K1 setelah gabung Wikipedia belum dihitung ulang di Release manifest (boleh null).
+
+
+## 2026-09-02 — rilis staging dihapus
+Tag `panen-madlad400-id` dan `panen-wikipedia-id` dihapus dari Release. Folder `colab/` dan `kaggle/` dihapus dari repo. Checkpoint 200M hanya di Release, bukan di root.
