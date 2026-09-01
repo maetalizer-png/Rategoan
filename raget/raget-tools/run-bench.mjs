@@ -62,6 +62,7 @@ async function main() {
   const loginVisible = await page.locator('#view-login').isVisible().catch(() => false);
   if (loginVisible) {
     await page.fill('#login-email', 'maetalizer@gmail.com');
+    await page.fill('#login-password', 'bench1234');
     await page.click('#login-gmail-submit');
     await page.waitForTimeout(800);
   }
