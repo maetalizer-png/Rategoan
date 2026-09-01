@@ -28,23 +28,25 @@ berjalan lanjutan) — SafeTensors 163,41 MB (171.344.040 byte),
 Tag `checkpoint-200m` di Release **MASIH VERSI LAMA** (R10-TUTUP,
 2026-08-25) — checkpoint baru ini BELUM ada di sana.
 
-File **sudah dikirim ke dirigen manusia langsung** (fitur SendUserFile),
-dipecah jadi 7 bagian <30MB (batas kirim) supaya aman diteruskan:
-`raget-neural-massive200m.safetensors.00.part` s.d. `.06.part`, plus
-`CARA-GABUNG.txt` (instruksi gabung + verifikasi + publish) dan file
-checksum. **Cek folder unduhan/chat dirigen untuk file-file ini.**
+**UPDATE 2026-09-01 sore**: dirigen minta file **JANGAN dikirim lewat
+chat lagi**. Sekarang file sudah di-commit+push langsung ke branch
+`main` di folder khusus **`checkpoint-200m/`** (root repo, commit
+`cd46ae9`) — 2 part (bukan 7 seperti sebelumnya, dipecah `split -b
+85m` supaya di bawah batas keras GitHub 100MB/file), plus
+`checksum-parts.txt` dan `README.md` berisi instruksi lengkap. Tinggal
+`git pull` dan langsung eksekusi §1.2 di bawah — tidak perlu lagi cari
+file di chat/unduhan.
 
 ### 1.2 Langkah publish (persis, jangan diringkas)
 
 ```bash
-# 1. Gabung 7 part jadi satu file (urutan .00 sampai .06)
-cat raget-neural-massive200m.safetensors.00.part \
-    raget-neural-massive200m.safetensors.01.part \
-    raget-neural-massive200m.safetensors.02.part \
-    raget-neural-massive200m.safetensors.03.part \
-    raget-neural-massive200m.safetensors.04.part \
-    raget-neural-massive200m.safetensors.05.part \
-    raget-neural-massive200m.safetensors.06.part \
+# 0. Pull dulu supaya folder checkpoint-200m/ ada
+git pull origin main
+
+# 1. Gabung 2 part jadi satu file (dari folder checkpoint-200m/ di root repo)
+cd checkpoint-200m
+cat raget-neural-massive200m.safetensors.part.00 \
+    raget-neural-massive200m.safetensors.part.01 \
     > raget-neural-massive200m.safetensors
 
 # 2. WAJIB cocokkan checksum sebelum lanjut
@@ -53,23 +55,29 @@ sha256sum raget-neural-massive200m.safetensors
 
 # 3. Publish (skrip sudah ada di repo, generik+idempoten, verifikasi ulang
 #    checksum otomatis setelah upload - kalau tidak cocok, asset dihapus
-#    otomatis dan publish dibatalkan)
+#    otomatis dan publish dibatalkan). Skrip ada di raget/raget-tools/,
+#    jalankan dari root repo (bukan dari dalam checkpoint-200m/).
+cd ..
 export GITHUB_TOKEN=<token dengan izin repo:contents write>
-python3 raget-tools/publish-checkpoint-release.py \
-    raget-neural-massive200m.safetensors checkpoint-200m \
+python3 raget/raget-tools/publish-checkpoint-release.py \
+    checkpoint-200m/raget-neural-massive200m.safetensors checkpoint-200m \
     "01 · Checkpoint 200M (ronde 2026-09-01)" \
     "1337+ step akumulasi, held-out PPL 2898,68->1661,48 (mix K1 55-65%/K2 25-35%/K3 <=15% sesuai PRD-DATA-RELEASE §10). Generasi belum koheren - lihat PRD-PRODUKSI-READY.md."
+
+# 4. Setelah sukses publish, folder checkpoint-200m/ aman dihapus dari
+#    git (checkpoint sudah permanen sebagai Release asset) - lihat
+#    checkpoint-200m/README.md
 ```
 
 Setelah sukses: update `docs/CAPABILITIES.md` baris Neural (angka
 step/PPL baru) dan `PRD-PRODUKSI-READY.md` §1 lapisan-2 (centang
 "Checkpoint dipublikasikan").
 
-**Kalau file dari SendUserFile tidak sampai/rusak**: training masih
+**Kalau checkpoint-200m/ di repo tidak ada/rusak**: training masih
 berjalan di sandbox Claude sampai checkpoint lebih baru tersedia —
-tanya Claude untuk kirim ulang, atau tunggu laporan ronde training
-90 menit berikutnya (checkpoint tertimpa otomatis tiap sesi, makin
-baru makin baik).
+tunggu laporan ronde training 90 menit berikutnya (checkpoint di
+folder ini tertimpa otomatis tiap sesi via commit baru, makin baru
+makin baik) atau minta Claude commit ulang.
 
 ---
 
