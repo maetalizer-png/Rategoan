@@ -9,6 +9,22 @@ dari sandbox ini (kode, data yang sudah ada di repo, dokumentasi).
 Setiap Fase punya **Definition of Done (DoD)** — jangan tandai selesai
 kalau DoD belum terpenuhi semua.
 
+**Update progres (masih di ronde yang sama, sesudah dokumen ini ditulis):**
+- **Fase 1**: `run-bench.mjs` sudah diperbaiki (isi `#login-password`),
+  divalidasi 60/60 kasus 100%. Run 1190 kasus penuh sedang berjalan
+  background — hasil final ada di laporan ronde ini.
+- **Fase 4**: 6 dokumen usang di `docs/` (STATUS-FASE-A-A4,
+  STATUS-KORPUS-AMAN-RAPI, RENCANA-DATA-AMAN-200M-400M,
+  MIX-TRAINING-SEIMBANG, STRUKTUR-KORPUS, STATUS-KORPUS-LISENSI) sudah
+  dihapus setelah dikonfirmasi isinya tercakup penuh di
+  `PRD-DATA-RELEASE.md`. `docs/AUDIT-VNEXT.md` dibuat sebagai audit
+  Phase-0 tambahan (kolaborasi `RAGETOAN_vNEXT_MASTER_DEVELOPMENT_COMMAND.md`).
+- **Fase 6**: status Jelajah Dunia **sudah dikonfirmasi** — penghapusan
+  sengaja (59 commit `git log --grep`, 2026-08-26, sistematis per-file +
+  fix auth susulan), bukan kehilangan tak sengaja. Lihat
+  `docs/AUDIT-VNEXT.md` Risks/P2 untuk detail.
+- Fase 2/3/5 masih terbuka seperti tertulis di bawah.
+
 ---
 
 ## Fase 1 — Perbaiki alat kualitas yang diam-diam rusak

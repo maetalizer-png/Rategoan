@@ -144,11 +144,15 @@ di semua dokumentasi yang ditemukan (`README.md`, `CHECKPOINT-POLICY.md`).
    penuh (36 lokasi, semua file) belum diaudit satu-satu untuk XSS.
    **Belum diperiksa mendalam** — ini persis lingkup Phase 14, sengaja
    tidak diburu-buru diaudit di Phase 0 ini.
-5. Fitur "Jelajah Dunia"/travel yang dulu dibangun lewat banyak ronde
-   (lihat riwayat `raget-devlog/sejarah/10-travel-integrasi.js`) sudah
-   tidak ada di `fitur/` maupun sidebar aplikasi saat ini — status
-   sengaja/tidak sengaja belum dikonfirmasi (lihat
-   `PRD-PENGEMBANGAN-LANJUTAN-CLAUDE.md` Fase 6).
+5. Fitur "Jelajah Dunia"/travel: **status sudah dikonfirmasi ronde ini**
+   (sebelumnya ditandai "belum dikonfirmasi" — lihat
+   `PRD-PENGEMBANGAN-LANJUTAN-CLAUDE.md` Fase 6). `git log --all --grep=
+   "jelajah\|travel"` (59 commit) menunjukkan penghapusan SENGAJA dan
+   sistematis 2026-08-26 (puluhan commit `chore: hapus Jelajah — <tiap
+   file>`, plus commit susulan `fix(auth): jangan bind sheet-travel
+   setelah Jelajah dihapus` dan pembersihan README) — bukan kehilangan
+   tak disengaja saat refactor. Alasan bisnis tidak tercatat verbatim
+   di pesan commit, tapi polanya jelas bukan kecelakaan.
 
 ## Technical Debt
 
