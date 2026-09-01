@@ -1,12 +1,42 @@
 # PRD — Perintah untuk Grok: Klarifikasi Token + Panen Baru (ronde kejelasan)
 
-Status: **BERLAKU, ditulis ulang 2026-09-01 malam** — ronde sebelumnya
-(publish checkpoint-200m + review madlad/wikipedia lama) sudah **SELESAI
-dikerjakan Grok** (terverifikasi: `docs/STATUS-KORPUS-LISENSI.md`
-diperbarui, commit `309ff63`/`4a091d2`/dst menghapus folder handoff
-setelah publish sukses). Dokumen ini dibuat karena dirigen bingung angka
-mana yang valid — jawabannya di §1, definitif, dari GitHub API langsung
-saat dokumen ini ditulis, bukan perkiraan.
+Status: **BERLAKU, dicek ULANG 2026-09-01 malam (re-konfirmasi ke-2)**
+— dirigen minta cek ulang Release, dicek langsung lewat GitHub API
+detik ini juga: **isinya PERSIS SAMA dengan temuan pertama di §3, tidak
+ada perubahan lagi.** "2 file baru" yang dimaksud dirigen = 2 tag panen
+di §3 (`panen-madlad400-id` + `panen-wikipedia-id`), keduanya sudah
+diidentifikasi dan sudah ada instruksi konkret di §3-4 di bawah — bukan
+temuan baru lagi, ini KONFIRMASI ULANG bahwa arahan di bawah masih
+akurat dan Grok tinggal eksekusi.
+
+**Checkpoint 200M: SUDAH beres, tidak perlu dikerjakan lagi** — Release
+`checkpoint-200m` sekarang berisi asset 171.344.036 byte (dikonfirmasi
+lewat GitHub API), cocok dengan checkpoint sesi training ke-2 (PPL
+1242,11) yang sudah dipublikasikan Grok. Ronde sebelumnya (publish
+checkpoint + review madlad/wikipedia LAMA) sudah **SELESAI dikerjakan
+Grok** (terverifikasi: `docs/STATUS-KORPUS-LISENSI.md` diperbarui,
+commit `309ff63`/`4a091d2`/dst menghapus folder handoff setelah publish
+sukses). Dokumen ini fokus ke 2 hal yang MASIH terbuka: (1) klarifikasi
+angka token yang valid (§1-2), (2) 2 batch panen baru yang belum
+direview (§3-4).
+
+---
+
+## ARAHAN LANGSUNG UNTUK GROK (baca ini dulu, detail di §1-4 di bawah)
+
+1. **Jangan ubah/klaim angka token apa pun** — total kanonik TETAP
+   420.930.740 (K1+K2+K3) sampai salah satu dari 2 file baru di bawah
+   lolos review dan resmi digabung. Lihat §1.
+2. **`panen-madlad400-id`** (11 part baru, `part-0011` s.d. `part-0021`,
+   15,27 juta dokumen) — **WAJIB direview**, BELUM pernah disampel.
+   Pilihan tercepat: re-run `panen.yml` sekarang (filter spam baru
+   sudah di `main`, commit `7b8a433`) daripada review manual batch yang
+   masih pakai filter lama. Detail: §3-4.
+3. **`panen-wikipedia-id`** (1 part baru, 562.195 dokumen) — angkanya
+   IDENTIK batch yang sudah di-retire minggu ini. Cukup **retire lagi**
+   dengan catatan singkat di `STATUS-KORPUS-LISENSI.md`, TIDAK perlu
+   sample-review ulang dari nol. Detail: §3.
+4. **Checkpoint 200M**: sudah beres, TIDAK ADA tindakan diperlukan.
 
 ---
 
