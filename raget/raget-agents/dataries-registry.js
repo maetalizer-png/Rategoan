@@ -178,6 +178,7 @@ export const REGIONS = Object.freeze({
     { id: 'sapaan-layanan', file: './sapaan/sapaan-layanan.js', names: ['layanan', 'komplain', 'antrian'] },
     { id: 'sapaan-kerja', file: './sapaan/sapaan-kerja.js', names: ['kerja', 'kantor'] },
     { id: 'sapaan-kesehatan', file: './sapaan/sapaan-kesehatan.js', names: ['sakit', 'capek'] },
+    { id: 'sapaan-produksi-ready', file: './sapaan/sapaan-produksi-ready.js', names: ['bantu', 'maaf', 'ktp', 'pr menumpuk', 'listrik'] },
   ],
   greeting: [
     { id: 'greeting', file: './greeting/greeting.js', names: ['halo', 'selamat'] },
@@ -191,13 +192,15 @@ export const REGIONS = Object.freeze({
     { id: 'obrolan-lingkungan-sehari', file: './obrolan-ringan/obrolan-lingkungan-sehari.js', names: ['tetangga', 'hujan'] },
   ],
   layanan: [
-    { id: 'layanan-publik', file: './layanan/layanan-publik.js', names: ['ktp', 'kk', 'dukcapil', 'antrian', 'pengaduan'] },
+    { id: 'layanan-publik', file: './layanan/layanan-publik.js', names: ['ktp', 'kk', 'dukcapil', 'antrian', 'pengaduan', 'hilang', 'persyaratan'] },
     { id: 'layanan-sekolah-klinik-toko', file: './layanan/layanan-sekolah-klinik-toko.js', names: ['klinik', 'toko', 'bank', 'pos'] },
     { id: 'layanan-pasar-warung-desa', file: './layanan/layanan-pasar-warung-desa.js', names: ['pasar', 'warung', 'desa', 'posyandu', 'rt'] },
+    { id: 'layanan-antrian-sopan', file: './layanan/layanan-antrian-sopan.js', names: ['antre', 'antrian', 'calo', 'loket'] },
   ],
   sekolah: [
     { id: 'sekolah-harian', file: './sekolah/sekolah-harian.js', names: ['sekolah', 'pr', 'ulangan', 'piket', 'osis'] },
     { id: 'sekolah-orangtua', file: './sekolah/sekolah-orangtua.js', names: ['wali kelas', 'nilai'] },
+    { id: 'sekolah-pr-ulangan', file: './sekolah/sekolah-pr-ulangan.js', names: ['pr', 'ulangan', 'tugas', 'deadline', 'ujian'] },
   ],
   kesehatan: [
     { id: 'kesehatan-harian', file: './kesehatan/kesehatan-harian.js', names: ['demam', 'obat', 'luka'] },
