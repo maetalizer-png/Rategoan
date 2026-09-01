@@ -51,21 +51,26 @@ lapisan 1.
       'local-neural'`; default `llmModels.active` = `MODELS[0]` =
       `raget-template-1` (rule-template). Fallback ke `agent.respond()`
       kalau neural reply falsy.
-- [~] **8 intent harian lolos tanpa neural.** Diuji langsung lewat
+- [x] **8 intent harian lolos tanpa neural.** Diuji langsung lewat
       Playwright (bukan baca kode): sapaan/kabar/capek/sekolah-PR/izin-
       sekolah/nilai-ulangan **lolos** dengan jawaban on-topic. **KTP
       lolos untuk frasa pendek** ("ktp", "urus ktp", "bikin ktp" — fix
-      dirigen/Grok commit `27906f9` + `081dc80` berhasil). **KTP masih
-      GAGAL untuk frasa "cara ... gimana ya"** — root cause presisi
-      ditemukan: `router-intent.js` baris 94 `/^(cara|langkah)\s+/`
-      mencocokkan SEBELUM sempat cek skor domain yang lebih spesifik,
-      jadi "cara bikin KTP gimana ya" tetap jatuh ke tool generik
-      "Langkah 1. Tentukan target..." — sama sekali tidak relevan.
-      **Belum diperbaiki ronde ini** (butuh perubahan prioritas router,
-      berisiko regresi 16 kasus bench yang justru SENGAJA mengharap
-      tool generik "cara" untuk pertanyaan umum seperti "cara membuat
-      kopi" — perlu logika "domain match dulu, baru fallback ke cara
-      generik" yang teruji, bukan tukar prioritas mentah).
+      dirigen/Grok commit `27906f9` + `081dc80` berhasil). **KTP frasa
+      "cara ... gimana ya" DIPERBAIKI ronde ini**: `router-intent.js`
+      dapat `LAYANAN_KEYWORDS_RE` (ktp/kk/sim/paspor/akta/npwp/
+      dukcapil/pengaduan/komplain/loket/antri/berkas/calo) yang dicek
+      SEBELUM `/^(cara|langkah)\s+/` mengembalikan tool `cara` —
+      kalau match kata kunci layanan, `detectTool` return `null`
+      supaya jatuh ke `matchSmalltalk` trigger `layanan` di
+      `llm-engine.js` (jalur yang SAMA yang sudah dipakai "ktp"/"urus
+      ktp" bare). Diverifikasi 2 cara: (1) node langsung memanggil
+      `routerIntent.detectTool()` untuk 16 kasus "cara"/"langkah" di
+      `bench.json` — SEMUA tetap `cara`/`devlog_cara_kerja` seperti
+      sebelumnya (nol regresi), hanya "cara bikin KTP gimana ya" yang
+      berubah dari `cara` ke `null`; (2) grep `bench.json` untuk kata
+      kunci layanan — nol tabrakan dengan prompt "cara X" manapun di
+      1190 kasus. Bench CORE-SUITE penuh dijalankan ulang setelahnya
+      (lihat §1 baris bench di bawah untuk angka final).
 - [x] **Bench CORE-SUITE penuh dijalankan; angka pass tertulis.**
       Dijalankan penuh 1190 kasus (`run-bench-chunked.mjs`, 4 chunk,
       ~1005 detik total) 2026-09-01: **CORE-SUITE 1175/1180 = 99.58%**

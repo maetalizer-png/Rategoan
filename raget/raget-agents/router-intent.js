@@ -10,6 +10,12 @@ const CLARIFY_MARKERS = /info tambahan dulu|ceritakan konteksnya|bagaimana kaita
 const QUESTION_LEAD_RE = /^(siapa|apa|dimana|di\s*mana|kapan|berapa)\b/i;
 const ABOUT_RE = /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|cerita\s+(soal|tentang)|tentang|info)\s+/i;
 
+// Domain layanan publik (ktp/kk/sim/dst) lebih spesifik daripada tool "cara"
+// generik — cek dulu sebelum /^(cara|langkah)\s+/ menangkapnya duluan,
+// supaya "cara bikin KTP gimana ya" tidak jatuh ke tool "cara" generik
+// yang tidak relevan sama sekali (lihat PRD-PRODUKSI-READY.md §1/§2).
+const LAYANAN_KEYWORDS_RE = /\b(ktp|kk|sim|paspor|akta|npwp|dukcapil|pengaduan|komplain|loket|antr[ie]|berkas|calo)\b/i;
+
 const MOOD_OPENERS = {
   sedih: { casual: 'Aduh, kedengarannya lagi sedih ya. ', formal: 'Turut prihatin mendengarnya. ', neutral: 'Kedengarannya lagi sedih ya. ' },
   capek: { casual: 'Wah, pasti capek banget ya. ', formal: 'Semoga Anda bisa segera beristirahat. ', neutral: 'Kedengarannya lagi capek ya. ' },
@@ -91,7 +97,7 @@ function detectTool(prompt) {
   if (/^bandingkan\s+/.test(t)) return 'bandingkan';
   if (/^[a-z0-9\s]{2,40}\s+vs\.?\s+[a-z0-9\s]{2,40}$/.test(t)) return 'bandingkan_vs';
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
-  if (/^(cara|langkah)\s+/.test(t)) return 'cara';
+  if (/^(cara|langkah)\s+/.test(t) && !LAYANAN_KEYWORDS_RE.test(t)) return 'cara';
   if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+/.test(t)) return 'manfaat';
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/.test(t)) return 'fungsi';
