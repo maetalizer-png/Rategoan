@@ -1,0 +1,101 @@
+[
+  {
+    "id": "sapaan-smalltalk-bantu",
+    "kategori": "sapaan",
+    "nama": "Minta bantuan",
+    "tags": ["smalltalk", "bantu"],
+    "teks": "Boleh. Ceritakan singkat apa yang sedang kamu urus, nanti kita pecah langkahnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Boleh. Ceritakan singkat apa yang sedang kamu urus, nanti kita pecah langkahnya.",
+        "Siap membantu. Mau urusan sekolah, layanan, atau hal di rumah?",
+        "Katakan saja kendalanya satu per satu. Jangan sekaligus semua."
+      ],
+      "variantsFormal": [
+        "Silakan sampaikan keperluan Anda. Saya bantu urutkan langkahnya."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-maaf",
+    "kategori": "sapaan",
+    "nama": "Maaf",
+    "tags": ["smalltalk", "maaf"],
+    "teks": "Tidak apa-apa. Kita lanjut dari yang jelas saja.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak apa-apa. Kita lanjut dari yang jelas saja.",
+        "Santai. Kalau tadi ada yang keliru, ulangi dengan kalimat pendek.",
+        "Gapapa. Mau mulai dari pertanyaan yang paling penting?"
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-lagi_apa",
+    "kategori": "sapaan",
+    "nama": "Lagi apa",
+    "tags": ["smalltalk", "lagi_apa"],
+    "teks": "Saya di sini, siap ngobrol. Kamu sendiri lagi apa?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Saya di sini, siap ngobrol. Kamu sendiri lagi apa?",
+        "Lagi standby. Kalau kamu lagi capek atau ngerjain tugas, boleh diceritakan.",
+        "Tidak kemana-mana. Ada yang mau ditanyakan?"
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-ktp",
+    "kategori": "sapaan",
+    "nama": "KTP dan dukcapil",
+    "tags": ["layanan", "ktp"],
+    "teks": "KTP hilang biasanya diurus di dukcapil setempat. Siapkan laporan dan dokumen pendukung. Jangan bayar calo.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Urusan KTP, KK, atau akta: bawa daftar persyaratan resmi dukcapil. Bayar hanya di loket atau kanal resmi.",
+        "Kalau dokumen hilang, buat laporan dulu, lalu ke dukcapil. Calo dan transfer pribadi bukan jalur yang benar.",
+        "Antrian layanan lebih aman kalau berkas lengkap. Cek dulu syarat di papan atau situs resmi."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-pr",
+    "kategori": "sapaan",
+    "nama": "PR menumpuk",
+    "tags": ["sekolah", "tugas"],
+    "teks": "PR menumpuk: kerjakan yang dikumpul paling dekat dulu. Pecah jadi langkah kecil.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "PR menumpuk: urutkan menurut tenggat. Yang dikumpul besok dikerjakan dulu.",
+        "Jangan kerjakan semua sekaligus. Satu tugas, satu langkah, lalu istirahat sebentar.",
+        "Kalau bingung mulai, buka soal pertama dan kerjakan yang paling mudah supaya gerak."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-smalltalk-listrik",
+    "kategori": "sapaan",
+    "nama": "Listrik dan air",
+    "tags": ["rumah"],
+    "teks": "Kalau listrik atau air mati, cek tetangga dulu. Kalau sewilayah, laporkan ke petugas. Jangan meraba meteran basah.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Air mati atau listrik padam: cek apakah hanya rumahmu. Kalau sewilayah, hubungi petugas.",
+        "Jangan bongkar instalasi sendiri jika tidak yakin. Utamakan aman, baru lapor.",
+        "Gas mencium bau menyengat: matikan kompor, buka jendela, jangan nyalakan api."
+      ]
+    }
+  }
+]
