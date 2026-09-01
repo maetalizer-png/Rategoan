@@ -7,7 +7,6 @@
   <img alt="PWA" src="https://img.shields.io/badge/type-PWA-informational?style=flat-square">
   <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%2099.66%25%20lolos-success?style=flat-square">
   <img alt="License" src="https://img.shields.io/badge/license-starter%20kit%20(personal%2Fkomersial)-lightgrey?style=flat-square">
-  <a href="https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 </p>
 
 Chat AI 100% local-first — tanpa server, tanpa API key, tanpa biaya per-pesan.
@@ -137,13 +136,10 @@ olahraga, etika, minuman, marplace, lingo, ekonomi, paluang, penemuan, alam, sen
 plus `greeting/` & `obrolan-ringan/` untuk template chat.
 `json/knowledge/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
 `korpus-ensiklopedia-bersih`, K2 `korpus-dialog-daerah-bersih`, K3 `korpus-pelengkap-bersih`,
-lihat `PRD-DATA-RELEASE.md`) — **471.390.047 token BPE resmi** (tokenizer proyek asli, vocab
-30.368, dihitung ulang penuh dari gzip live 2026-09-01, bukan tebakan ukuran file) per
-`korpus-manifest-total.json`. K1 sekarang termasuk 76.071 dokumen unik dari Wikipedia
-(dedupe per-fingerprint, digabung 2026-09-01 malam). Ini SATU-SATUNYA angka token valid
-untuk training - data panen (`panen-*` di Release) berstatus staging belum lolos review,
-tidak dihitung di sini. Checkpoint 50/100M di git; 200M (opt-in ±163MB) di Release, dimuat
-dari pemilih model.
+lihat `PRD-DATA-RELEASE.md`). Token training yang valid hanya dari 3 rak itu
+(lihat `korpus-manifest-total.json`). Checkpoint neural 100M/200M ada di
+GitHub Release (`checkpoint-100m`, `checkpoint-200m`), bukan di folder repo.
+Tidak ada tag `panen-*`.
 
 **Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
 `.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
@@ -181,38 +177,9 @@ tetap default produksi**, bukan neural — lihat `PRD-PRODUKSI-READY.md` untuk d
 lengkap definisi "production ready" dua-lapisan. Label "Neural Lokal (Eksperimental)" di
 UI dipertahankan sampai generasi benar-benar koheren, bukan cuma PPL rendah.
 
-**Lanjutkan training di Colab (klik-langsung, tanpa paste manual)**:
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb)
-— notebook [`colab/latih-gpu.ipynb`](colab/latih-gpu.ipynb) mengunduh korpus resmi K1/K2/K3
-dari Release (verifikasi SHA256 wajib), melatih ukuran 200M/300M/400M sesuai kartu resep
-`PRD-DATA-RELEASE.md` §10, lalu auto-publish checkpoint dan laporan. Panduan 3 langkah:
-(1) Runtime → ubah jenis runtime → GPU T4; (2) sekali saja, tambah secret bernama
-`GITHUB_TOKEN` lewat ikon kunci di sidebar kiri Colab; (3) pilih ukuran model di sel 1
-lalu Run All. Notebook lama `raget-tools/colab-train-gpu.ipynb` (korpus Wikipedia mentah,
-tag lama) sudah digantikan alur ini dan dipertahankan hanya sebagai arsip.
+Checkpoint 50/100M ada di `raget/raget-data/neural/`. Checkpoint 200M hanya di Release tag `checkpoint-200m`.
 
-```
-node raget/raget-tools/build-neural-checkpoint.mjs   # bangun ulang checkpoint dari korpus Rategoan
-```
-
-Rencana lanjutan (training lebih banyak step, korpus lebih besar, gerbang kualitas sebelum
-label eksperimental dilepas) ada di `PRD-PRODUKSI-READY.md` §7 dan
-`raget-tools/CHECKPOINT-POLICY.md`.
-
-## PANEN DATASET (1 KLIK)
-
-Tab **Actions** → **panen** → **Run workflow**.
-
-Workflow `.github/workflows/panen.yml` menjalankan `tools/panen_hf.py`: panen teks Bahasa
-Indonesia dari HuggingFace, filter `lang=id`, bersihkan + dedup, lalu upload ke Release
-**staging** (tag `panen-<dataset>` — bukan tag kanonik, wajib review manual sesuai
-`PRD-DATA-RELEASE.md` §5 sebelum masuk korpus training). Tidak perlu secret manual — token
-diambil otomatis dari `secrets.GITHUB_TOKEN` bawaan GitHub Actions. Auto-resume lewat
-`progress.json` yang disimpan di tag Release yang sama.
-
-**Catatan jujur**: panen MADLAD-400 pertama (`panen-madlad400-id`, 150k dokumen) sudah
-di-review 2026-09-01 — isinya web-crawl umum (judi/forex/blog), TIDAK lolos, di-retire, tidak
-masuk K1. Review manual tetap wajib untuk setiap hasil panen baru, bukan formalitas.
+Rencana lanjutan ada di `PRD-PRODUKSI-READY.md` dan `raget/raget-tools/CHECKPOINT-POLICY.md`.
 
 ## Kualitas & Pengujian
 
