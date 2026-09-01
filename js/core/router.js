@@ -18,6 +18,9 @@ export const router = {
     if (tb) tb.hidden = hash !== 'chat';
     const sb = $('chat-search-bar');
     if (sb && hash !== 'chat') sb.hidden = true;
+    const sidebar = $('sidebar');
+    if (sidebar) sidebar.hidden = hash === 'login';
+    document.body.classList.toggle('auth-gate', hash === 'login');
   },
   go(to) {
     location.hash = '/' + to;

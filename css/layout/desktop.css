@@ -25,6 +25,12 @@
     background: var(--rg-bg);
   }
 
+  body.auth-gate {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'app';
+  }
+
   #btn-menu {
     display: none;
   }
