@@ -151,17 +151,17 @@ lapisan 1.
 
 ### Lapisan 2 (opsional, neural)
 
-- [x] **200M dijalankan, 2 sesi** — sesi 1: 18 menit (dipangkas dari
+- [x] **200M dijalankan, 3 sesi** — sesi 1: 18 menit (dipangkas dari
       rencana 60 menit karena tenggat keras 30 menit total dari dirigen
       untuk seluruh siklus mix+tokenize+rechunk+training; keputusan
       sadar, dicatat jujur bukan disembunyikan), setelah 100M 90 menit
-      selesai (tidak paralel, sesuai larangan §7 PRD Grok). Sesi 2
-      (ronde 7-poin berikutnya): 90 menit penuh di background,
-      resume otomatis dari checkpoint sesi 1. Held-out perplexity
-      2898,68 → 1661,48 (sesi 1) → **1242,11** (sesi 2, turun total
-      2,33x dari awal). Total akumulasi **1570 step / 245,24 menit**.
-      Laporan: `training-report-massive200m-round8-colab-gpu.json`,
-      dicatat juga di devlog `keputusan-021`.
+      selesai (tidak paralel, sesuai larangan §7 PRD Grok). Sesi 2 dan
+      3: masing-masing 90 menit penuh di background, resume otomatis
+      dari checkpoint sesi sebelumnya. Held-out perplexity 2898,68 →
+      1661,48 (sesi 1) → 1242,11 (sesi 2) → **1068,37** (sesi 3, turun
+      total 2,71x dari awal). Total akumulasi **1787 step / 335,46
+      menit**. Laporan: `training-report-massive200m-round8-colab-gpu.json`,
+      dicatat juga di devlog `keputusan-021`+`keputusan-022`.
 - [x] **5 sampel generasi dicatat** — MASIH acak/belum gramatikal
       (sama seperti 100M pada tahap serupa) — dilaporkan jujur, DoD ini
       "dicatat" bukan "lolos", karena isinya memang belum koheren.
@@ -171,18 +171,18 @@ lapisan 1.
       ternyata sudah berubah lagi sejak diukur tokennya beberapa menit
       sebelumnya — data terus berubah cepat sepanjang sesi ini).
 - [x] Checkpoint di tag `checkpoint-200m` dengan SHA — checkpoint sesi 1
-      (163,41MB, SHA256 `5286b900...`) BERHASIL dipublikasikan ke
-      Release oleh Grok/dirigen (commit `309ff63`+`4a091d2`+dst,
-      terverifikasi lewat commit "chore: hapus part checkpoint setelah
-      publish Release" yang menghapus folder handoff setelah sukses).
-      Claude sendiri TETAP tidak bisa publish Release langsung dari
-      sandbox (dikonfirmasi diblokir classifier) — jalur yang dipakai:
-      commit checkpoint (dipecah 2 part) ke folder `checkpoint-200m/`
-      di root repo lewat git push biasa, BUKAN chat, sesuai permintaan
-      dirigen eksplisit ronde ini. Checkpoint sesi 2 (yang lebih baru,
-      SHA256 `b5aeb665...`, PPL 1242,11) sudah di-refresh ke folder
-      yang sama (commit `4b6e343`+`1d89eb3`) — publish ke Release masih
-      status terbuka untuk sesi 2 ini pada saat laporan ditulis.
+      (SHA256 `5286b900...`) DAN sesi 2 (SHA256 `b5aeb665...`, PPL
+      1242,11) BERHASIL dipublikasikan berturut-turut ke Release oleh
+      Grok (terverifikasi lewat commit "chore: hapus part checkpoint
+      setelah publish Release" x2 yang menghapus folder handoff setelah
+      tiap publish sukses). Claude sendiri TETAP tidak bisa publish
+      Release langsung dari sandbox (dikonfirmasi diblokir classifier)
+      — jalur yang dipakai: commit checkpoint (dipecah 2 part) ke
+      folder `checkpoint-200m/` di root repo lewat git push biasa,
+      BUKAN chat. Checkpoint sesi 3 (terbaru, SHA256 `d4aba4d8...`,
+      PPL 1068,37, 1787 step/335,46 menit akumulasi) sudah di-refresh
+      ke folder yang sama — publish ke Release masih status terbuka
+      untuk sesi 3 ini pada saat laporan ditulis.
 
 ---
 
