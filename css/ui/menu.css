@@ -29,3 +29,9 @@
 #msg-menu button.danger {
   color: var(--rg-danger);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  #msg-menu button:hover {
+    background: var(--rg-ring);
+  }
+}

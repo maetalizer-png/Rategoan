@@ -111,3 +111,14 @@
   margin: 10px 4px 4px;
   letter-spacing: 0.3px;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .hist-item:hover {
+    background: var(--rg-ring);
+  }
+
+  .hist-del:hover {
+    background: var(--rg-ring);
+    color: var(--rg-danger);
+  }
+}

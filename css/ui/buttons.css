@@ -112,3 +112,30 @@
   background: var(--rg-ring);
   transform: scale(0.94);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-circle:hover {
+    background: var(--rg-ring);
+  }
+
+  .icon-btn:hover {
+    background: var(--rg-ring);
+  }
+
+  .send-plain:hover {
+    background: var(--rg-ring);
+  }
+
+  .icon-round:hover {
+    background: var(--rg-ring);
+  }
+
+  .icon-round.plain:hover,
+.back-btn.plain:hover {
+    background: var(--rg-ring);
+  }
+
+  .back-btn:hover {
+    background: var(--rg-ring);
+  }
+}

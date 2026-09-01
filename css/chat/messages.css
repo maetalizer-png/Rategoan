@@ -181,3 +181,10 @@
   color: var(--rg-accent);
   font-weight: 700;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .msg-action-btn:hover {
+    background: var(--rg-ring);
+    color: var(--rg-text);
+  }
+}

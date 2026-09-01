@@ -302,3 +302,9 @@
   border: 1px solid var(--rg-line);
   color: var(--rg-text);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .coll-toolbtn:hover {
+    background: var(--rg-ring);
+  }
+}

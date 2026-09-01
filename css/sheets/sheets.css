@@ -205,3 +205,17 @@
   color: var(--rg-accent);
   display: flex;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .attach-card:hover {
+    background: var(--rg-ring);
+  }
+
+  .attach-link:hover {
+    background: var(--rg-ring);
+  }
+
+  .model-item:hover {
+    background: var(--rg-ring);
+  }
+}

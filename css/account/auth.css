@@ -118,3 +118,9 @@
   height: 1px;
   background: var(--rg-line);
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .auth-submit:hover {
+    opacity: 0.85;
+  }
+}
