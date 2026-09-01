@@ -13,14 +13,22 @@ on:
           - madlad400-id
           - oscar-id
           - wikipedia-id
+      maks_menit_lumbung_utama:
+        description: 'Anggaran menit khusus MADLAD-400 (lumbung utama)'
+        required: false
+        default: '180'
+      maks_dokumen_lumbung_utama:
+        description: 'Anggaran dokumen khusus MADLAD-400 (lumbung utama)'
+        required: false
+        default: '20000000'
       maks_menit:
-        description: 'Anggaran menit per dataset (dikali 3 untuk lumbung utama MADLAD-400)'
+        description: 'Anggaran menit per dataset lain (OSCAR/Wikipedia)'
         required: false
         default: '60'
       maks_dokumen:
-        description: 'Anggaran dokumen per dataset (dikali 3 untuk lumbung utama MADLAD-400)'
+        description: 'Anggaran dokumen per dataset lain (OSCAR/Wikipedia)'
         required: false
-        default: '200000'
+        default: '2000000'
 
 permissions:
   contents: write
@@ -42,5 +50,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           RAGET_MODE_PANEN: ${{ github.event.inputs.mode }}
+          RAGET_MAKS_MENIT_LUMBUNG_UTAMA: ${{ github.event.inputs.maks_menit_lumbung_utama }}
+          RAGET_MAKS_DOKUMEN_LUMBUNG_UTAMA: ${{ github.event.inputs.maks_dokumen_lumbung_utama }}
           RAGET_MAKS_MENIT: ${{ github.event.inputs.maks_menit }}
           RAGET_MAKS_DOKUMEN: ${{ github.event.inputs.maks_dokumen }}

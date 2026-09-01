@@ -23,9 +23,15 @@ Cuma dataset aggregator, TIDAK ada crawl situs. Hasil di-upload ke tag
 Release STAGING `panen-<dataset>` - BUKAN tag kanonik
 `korpus-<kategori>-bersih`. Masuk korpus training resmi tetap butuh review
 manual sesuai PRD-DATA-RELEASE.md Sec5.
+
+Output dipecah jadi beberapa file part (`<slug>.part-0000.jsonl.gz`, dst)
+kalau satu part mendekati batas ukuran asset Release GitHub (2 GB) - lihat
+PenampungHasil/BATAS_BYTE_PER_PART. Tiap kali workflow ini dijalankan lagi,
+manifest.json LAMA diunduh dulu dan part baru DITAMBAHKAN ke situ (bukan
+menimpa) - supaya berulang kali "Run workflow" benar-benar menumpuk korpus,
+bukan menghapus hasil sesi sebelumnya.
 """
 
-import collections
 import concurrent.futures
 import datetime
 import gzip
@@ -44,15 +50,35 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 HF_TOKEN = os.environ.get("HF_TOKEN") or None
 MODE_PANEN = os.environ.get("RAGET_MODE_PANEN", "SEMUA") or "SEMUA"
 
-BASE_MAKS_DOKUMEN_PER_DATASET = int(os.environ.get("RAGET_MAKS_DOKUMEN", "200000"))
-BASE_MAKS_MENIT_PER_DATASET = int(os.environ.get("RAGET_MAKS_MENIT", "60"))
-PENGALI_LUMBUNG_UTAMA = 3  # MADLAD-400 id dapat anggaran 3x dataset lain
+# Anggaran dipisah eksplisit per peran (bukan pengali implisit) - lumbung
+# utama (MADLAD-400) dapat jatah jauh lebih besar karena satu-satunya
+# sumber yang terbukti punya puluhan file besar per bahasa (72 file "id"
+# ditemukan lewat pengujian nyata), sumber lain (streaming) dibatasi lebih
+# ketat karena anggaran waktunya juga dipakai bersama dalam satu job.
+BASE_MAKS_DOKUMEN = int(os.environ.get("RAGET_MAKS_DOKUMEN", "2000000"))
+BASE_MAKS_MENIT = int(os.environ.get("RAGET_MAKS_MENIT", "60"))
+LUMBUNG_MAKS_DOKUMEN = int(os.environ.get("RAGET_MAKS_DOKUMEN_LUMBUNG_UTAMA", "20000000"))
+LUMBUNG_MAKS_MENIT = int(os.environ.get("RAGET_MAKS_MENIT_LUMBUNG_UTAMA", "180"))
 
 WORK_DIR = os.environ.get("RAGET_PANEN_WORK_DIR", "/tmp/panen_hf")
 
 API = "https://api.github.com/repos/{}/{}".format(OWNER, REPO)
 
 EXT_DIDUKUNG = (".jsonl.gz", ".jsonl", ".json.gz", ".parquet", ".txt.gz", ".txt")
+
+# Batas GitHub untuk satu asset Release adalah 2 GB - dipakai 1.8 GB supaya
+# ada margin aman (flush gzip per 500 dokumen, bukan per byte, jadi bisa
+# sedikit lewat dari titik cek terakhir sebelum part ditutup).
+BATAS_BYTE_PER_PART = int(1.8 * 1024 ** 3)
+
+
+def batas_untuk(d):
+    """(maks_dokumen, maks_menit) - lumbung utama dapat anggaran sendiri,
+    bukan hasil kali dari anggaran dasar (lebih jelas & langsung sesuai
+    yang diminta, tidak perlu hitung mental kali 3)."""
+    if d["lumbung_utama"]:
+        return LUMBUNG_MAKS_DOKUMEN, LUMBUNG_MAKS_MENIT
+    return BASE_MAKS_DOKUMEN, BASE_MAKS_MENIT
 
 # MADLAD-400: repo HF-nya masih pakai loading-script Python (madlad-400.py).
 # datasets>=4 MENGHAPUS TOTAL dukungan loading-script (bukan sekadar
@@ -113,6 +139,81 @@ def bersihkan_teks(teks):
 
 def hash_dedup(teks):
     return hashlib.sha1(teks.strip().lower().encode("utf-8")).hexdigest()
+
+
+class PenampungHasil:
+    """Terima dokumen mentah, bersihkan+filter+dedup, tulis LANGSUNG ke file
+    part gzip (bukan ditampung sebagai list Python di RAM - satu sesi bisa
+    puluhan juta dokumen untuk lumbung utama, menampungnya semua di memori
+    berisiko kehabisan RAM runner Actions). Part baru dibuka otomatis kalau
+    part yang sedang ditulis mendekati batas ukuran asset Release GitHub
+    (2 GB) - dicek tiap 500 dokumen (bukan tiap dokumen, supaya tidak
+    memanggil os.path.getsize terlalu sering)."""
+
+    def __init__(self, slug, meta, part_idx_awal, batas_dokumen):
+        self.slug = slug
+        self.meta = meta  # {"source", "url", "license"}
+        self.batas_dokumen = batas_dokumen
+        self.part_idx = part_idx_awal
+        self.dilihat_hash = set()
+        self.diterima = 0
+        self.dibuang_bahasa = 0
+        self.dibuang_duplikat = 0
+        self.total_kata_approx = 0
+        self.parts_selesai = []  # [(path, docCount), ...]
+        self.f = None
+        self.path = None
+        self.docs_in_part = 0
+        self._buka_part_baru()
+
+    def _buka_part_baru(self):
+        self.path = os.path.join(WORK_DIR, "{}.part-{:04d}.jsonl.gz".format(self.slug, self.part_idx))
+        self.f = gzip.open(self.path, "wt", encoding="utf-8")
+        self.docs_in_part = 0
+
+    def _tutup_part_sekarang(self):
+        self.f.close()
+        if self.docs_in_part > 0:
+            self.parts_selesai.append((self.path, self.docs_in_part))
+        elif os.path.exists(self.path):
+            os.remove(self.path)
+        self.part_idx += 1
+
+    def terima(self, mentah):
+        """True kalau batas_dokumen sesi ini sudah tercapai (caller berhenti)."""
+        if self.diterima >= self.batas_dokumen:
+            return True
+        mentah = (mentah or "").strip()
+        if len(mentah) < 200:
+            return False
+        teks = bersihkan_teks(mentah)
+        if len(teks) < 200:
+            return False
+        if not cukup_indonesia(teks):
+            self.dibuang_bahasa += 1
+            return False
+        h = hash_dedup(teks)
+        if h in self.dilihat_hash:
+            self.dibuang_duplikat += 1
+            return False
+        self.dilihat_hash.add(h)
+        rec = {"text": teks, "source": self.meta["source"], "url": self.meta["url"],
+               "license": self.meta["license"], "lang": "id"}
+        self.f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        self.docs_in_part += 1
+        self.diterima += 1
+        self.total_kata_approx += len(teks.split())
+        if self.docs_in_part % 500 == 0:
+            self.f.flush()
+            if os.path.getsize(self.path) >= BATAS_BYTE_PER_PART:
+                self._tutup_part_sekarang()
+                self._buka_part_baru()
+        return self.diterima >= self.batas_dokumen
+
+    def selesai(self):
+        """Tutup part yang masih terbuka, kembalikan daftar (path, docCount)."""
+        self._tutup_part_sekarang()
+        return self.parts_selesai
 
 
 def _open_maybe_gzip(path):
@@ -247,39 +348,16 @@ def simpan_progres(slug, progres):
         print("  peringatan: gagal unggah progress.json ke", tag, ":", e)
 
 
-def _terima_dokumen(mentah, hasil, dilihat_hash, batas_dokumen, penghitung):
-    """True kalau sudah mentok batas_dokumen (caller harus berhenti)."""
-    if len(hasil) >= batas_dokumen:
-        return True
-    mentah = (mentah or "").strip()
-    if len(mentah) < 200:
-        return False
-    teks = bersihkan_teks(mentah)
-    if len(teks) < 200:
-        return False
-    if not cukup_indonesia(teks):
-        penghitung["bahasa"] += 1
-        return False
-    h = hash_dedup(teks)
-    if h in dilihat_hash:
-        penghitung["duplikat"] += 1
-        return False
-    dilihat_hash.add(h)
-    hasil.append({"teks": teks, "hash": h})
-    return len(hasil) >= batas_dokumen
-
-
 def panen_dataset_stream(d, laporan_sumber):
     slug = d["slug"]
     if d.get("gated") and not HF_TOKEN:
         print("- LEWATI (gated, HF_TOKEN tidak diset):", d["nama"])
         laporan_sumber[slug] = {"nama": d["nama"], "status": "dilewati (gated, tanpa HF_TOKEN)", "dokumen": 0}
-        return []
+        return None
 
-    batas_dokumen = BASE_MAKS_DOKUMEN_PER_DATASET * (PENGALI_LUMBUNG_UTAMA if d["lumbung_utama"] else 1)
-    batas_menit = BASE_MAKS_MENIT_PER_DATASET * (PENGALI_LUMBUNG_UTAMA if d["lumbung_utama"] else 1)
+    batas_dokumen, batas_menit = batas_untuk(d)
 
-    progres = muat_progres(slug, {"offset": 0, "diambil": 0, "ringkasan": ""})
+    progres = muat_progres(slug, {"offset": 0, "diambil": 0, "nextPartIdx": 0, "ringkasan": ""})
     offset = progres["offset"]
     diambil_total_akumulasi = progres["diambil"]
 
@@ -289,43 +367,46 @@ def panen_dataset_stream(d, laporan_sumber):
     except concurrent.futures.TimeoutError:
         print("- TIMEOUT memuat dataset", d["nama"], "(", d["hf_id"], ") - lewat 60 detik, dilewati.")
         laporan_sumber[slug] = {"nama": d["nama"], "status": "timeout saat load_dataset", "dokumen": 0}
-        return []
+        return None
     except Exception as e:
         print("- GAGAL memuat dataset", d["nama"], "(", d["hf_id"], "):", e)
         print("  Kemungkinan id/config HF berubah - cek https://huggingface.co/datasets/" + d["hf_id"])
         print("  LEWATI dataset ini, lanjut ke dataset berikutnya.")
         laporan_sumber[slug] = {"nama": d["nama"], "status": "gagal dimuat: " + str(e)[:200], "dokumen": 0}
-        return []
+        return None
 
     if offset:
         ds = ds.skip(offset)
 
-    hasil = []
-    dilihat_hash = set()
-    penghitung = {"bahasa": 0, "duplikat": 0}
+    meta = {"source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"]}
+    penampung = PenampungHasil(slug, meta, progres.get("nextPartIdx", 0), batas_dokumen)
     t_mulai = time.time()
 
     for contoh in ds:
         offset += 1
         mentah = contoh.get(d["field_text"]) or ""
-        habis = _terima_dokumen(mentah, hasil, dilihat_hash, batas_dokumen, penghitung)
-        if len(hasil) % 2000 == 0 and hasil:
-            simpan_progres(slug, {"offset": offset, "diambil": diambil_total_akumulasi + len(hasil),
-                                   "ringkasan": "{} dokumen terkumpul".format(diambil_total_akumulasi + len(hasil))})
+        habis = penampung.terima(mentah)
+        if penampung.diterima and penampung.diterima % 2000 == 0:
+            simpan_progres(slug, {"offset": offset, "diambil": diambil_total_akumulasi + penampung.diterima,
+                                   "nextPartIdx": penampung.part_idx,
+                                   "ringkasan": "{} dokumen terkumpul".format(diambil_total_akumulasi + penampung.diterima)})
         if habis or (time.time() - t_mulai) / 60.0 >= batas_menit:
             break
 
-    simpan_progres(slug, {"offset": offset, "diambil": diambil_total_akumulasi + len(hasil),
-                           "ringkasan": "{} dokumen terkumpul (sesi ini selesai)".format(diambil_total_akumulasi + len(hasil))})
+    parts = penampung.selesai()
+    simpan_progres(slug, {"offset": offset, "diambil": diambil_total_akumulasi + penampung.diterima,
+                           "nextPartIdx": penampung.part_idx,
+                           "ringkasan": "{} dokumen terkumpul (sesi ini selesai)".format(diambil_total_akumulasi + penampung.diterima)})
     laporan_sumber[slug] = {
-        "nama": d["nama"], "status": "selesai", "dokumenSesiIni": len(hasil),
-        "totalAkumulasi": diambil_total_akumulasi + len(hasil),
-        "dibuangBukanIndonesia": penghitung["bahasa"], "dibuangDuplikat": penghitung["duplikat"],
+        "nama": d["nama"], "status": "selesai", "dokumenSesiIni": penampung.diterima,
+        "totalAkumulasi": diambil_total_akumulasi + penampung.diterima,
+        "dibuangBukanIndonesia": penampung.dibuang_bahasa, "dibuangDuplikat": penampung.dibuang_duplikat,
         "detikDipakai": round(time.time() - t_mulai, 1),
     }
     print("- {}: {} dokumen sesi ini (total akumulasi {}), buang {} non-Indonesia + {} duplikat, {:.0f}s".format(
-        d["nama"], len(hasil), diambil_total_akumulasi + len(hasil), penghitung["bahasa"], penghitung["duplikat"], time.time() - t_mulai))
-    return [{"text": h["teks"], "source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"], "lang": "id"} for h in hasil]
+        d["nama"], penampung.diterima, diambil_total_akumulasi + penampung.diterima,
+        penampung.dibuang_bahasa, penampung.dibuang_duplikat, time.time() - t_mulai))
+    return {"parts": parts, "dokumen": penampung.diterima, "kata": penampung.total_kata_approx}
 
 
 def _dengan_batas_waktu(batas_detik, fn, *args, **kwargs):
@@ -398,23 +479,21 @@ def panen_dataset_file(d, laporan_sumber):
         laporan_sumber[slug] = {"nama": d["nama"], "status": "tidak ada file cocok pola bahasa di repo", "dokumen": 0}
         return []
 
-    batas_dokumen = BASE_MAKS_DOKUMEN_PER_DATASET * (PENGALI_LUMBUNG_UTAMA if d["lumbung_utama"] else 1)
-    batas_menit = BASE_MAKS_MENIT_PER_DATASET * (PENGALI_LUMBUNG_UTAMA if d["lumbung_utama"] else 1)
+    batas_dokumen, batas_menit = batas_untuk(d)
 
-    progres = muat_progres(slug, {"fileSelesai": [], "diambil": 0, "ringkasan": ""})
+    progres = muat_progres(slug, {"fileSelesai": [], "diambil": 0, "nextPartIdx": 0, "ringkasan": ""})
     sudah = set(progres.get("fileSelesai", []))
     diambil_total_akumulasi = progres.get("diambil", 0)
 
-    hasil = []
-    dilihat_hash = set()
-    penghitung = {"bahasa": 0, "duplikat": 0}
+    meta = {"source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"]}
+    penampung = PenampungHasil(slug, meta, progres.get("nextPartIdx", 0), batas_dokumen)
     file_selesai_sesi = list(sudah)
     t_mulai = time.time()
 
     for fname in kandidat:
         if fname in sudah:
             continue
-        if len(hasil) >= batas_dokumen or (time.time() - t_mulai) / 60.0 >= batas_menit:
+        if penampung.diterima >= batas_dokumen or (time.time() - t_mulai) / 60.0 >= batas_menit:
             break
         print("  [{}] unduh file {} ...".format(slug, fname))
         t_file = time.time()
@@ -429,35 +508,33 @@ def panen_dataset_file(d, laporan_sumber):
         ukuran_mb = os.path.getsize(local_path) / (1024 * 1024)
         print("  [{}] {} terunduh ({:.1f} MB, {:.1f}s) - parsing...".format(slug, fname, ukuran_mb, time.time() - t_file))
         for mentah in iter_records_from_file(local_path):
-            if _terima_dokumen(mentah, hasil, dilihat_hash, batas_dokumen, penghitung):
+            if penampung.terima(mentah):
                 break
+        os.remove(local_path)  # hemat disk runner - file HF sudah tidak perlu setelah diparsing
         print("  [{}] {} selesai diparsing - {} dokumen terkumpul sejauh ini ({:.1f}s total file ini)".format(
-            slug, fname, len(hasil), time.time() - t_file))
+            slug, fname, penampung.diterima, time.time() - t_file))
         file_selesai_sesi.append(fname)
-        if hasil and len(hasil) % 2000 == 0:
-            simpan_progres(slug, {"fileSelesai": file_selesai_sesi, "diambil": diambil_total_akumulasi + len(hasil),
-                                   "ringkasan": "{} dokumen terkumpul".format(diambil_total_akumulasi + len(hasil))})
+        if penampung.diterima and penampung.diterima % 2000 == 0:
+            simpan_progres(slug, {"fileSelesai": file_selesai_sesi, "diambil": diambil_total_akumulasi + penampung.diterima,
+                                   "nextPartIdx": penampung.part_idx,
+                                   "ringkasan": "{} dokumen terkumpul".format(diambil_total_akumulasi + penampung.diterima)})
         if (time.time() - t_mulai) / 60.0 >= batas_menit:
             break
 
-    simpan_progres(slug, {"fileSelesai": file_selesai_sesi, "diambil": diambil_total_akumulasi + len(hasil),
-                           "ringkasan": "{} dokumen terkumpul (sesi ini selesai)".format(diambil_total_akumulasi + len(hasil))})
+    parts = penampung.selesai()
+    simpan_progres(slug, {"fileSelesai": file_selesai_sesi, "diambil": diambil_total_akumulasi + penampung.diterima,
+                           "nextPartIdx": penampung.part_idx,
+                           "ringkasan": "{} dokumen terkumpul (sesi ini selesai)".format(diambil_total_akumulasi + penampung.diterima)})
     laporan_sumber[slug] = {
-        "nama": d["nama"], "status": "selesai", "dokumenSesiIni": len(hasil),
-        "totalAkumulasi": diambil_total_akumulasi + len(hasil), "fileDiprosesSesiIni": len(file_selesai_sesi) - len(sudah),
-        "dibuangBukanIndonesia": penghitung["bahasa"], "dibuangDuplikat": penghitung["duplikat"],
+        "nama": d["nama"], "status": "selesai", "dokumenSesiIni": penampung.diterima,
+        "totalAkumulasi": diambil_total_akumulasi + penampung.diterima, "fileDiprosesSesiIni": len(file_selesai_sesi) - len(sudah),
+        "dibuangBukanIndonesia": penampung.dibuang_bahasa, "dibuangDuplikat": penampung.dibuang_duplikat,
         "detikDipakai": round(time.time() - t_mulai, 1),
     }
     print("- {}: {} dokumen sesi ini (total akumulasi {}), {} file diproses, buang {} non-Indonesia + {} duplikat, {:.0f}s".format(
-        d["nama"], len(hasil), diambil_total_akumulasi + len(hasil), len(file_selesai_sesi) - len(sudah),
-        penghitung["bahasa"], penghitung["duplikat"], time.time() - t_mulai))
-    return [{"text": h["teks"], "source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"], "lang": "id"} for h in hasil]
-
-
-def tulis_jsonl_gz(path, records):
-    with gzip.open(path, "wt", encoding="utf-8") as f:
-        for r in records:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+        d["nama"], penampung.diterima, diambil_total_akumulasi + penampung.diterima, len(file_selesai_sesi) - len(sudah),
+        penampung.dibuang_bahasa, penampung.dibuang_duplikat, time.time() - t_mulai))
+    return {"parts": parts, "dokumen": penampung.diterima, "kata": penampung.total_kata_approx}
 
 
 def sha256_file(path):
@@ -471,35 +548,71 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-def komposisi_bahasa(records):
-    c = collections.Counter(r.get("lang", "id") for r in records)
-    total = sum(c.values()) or 1
-    return {k: round(v / total, 4) for k, v in c.items()}
+def unduh_manifest_lama(slug):
+    """Manifest lama (kalau ada) diunduh dulu supaya part baru sesi ini
+    DITAMBAHKAN ke daftar part, bukan menggantikannya - setiap sesi panen
+    baru semestinya menambah data, bukan menghapus hasil sesi sebelumnya."""
+    tag = "panen-" + slug
+    lokal = os.path.join(WORK_DIR, "_manifest_lama_{}.json".format(slug))
+    if unduh_asset(tag, "manifest-{}.json".format(slug), lokal):
+        try:
+            with open(lokal, encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return None
 
 
-def buat_manifest(d, records):
+def gabung_dan_upload(d, hasil_sesi):
+    """Upload tiap file part sesi ini + manifest.json GABUNGAN (manifest
+    lama dari Release + part baru) - supaya berulang kali menjalankan
+    workflow ini benar-benar MENAMBAH korpus, bukan menimpa hasil sesi
+    sebelumnya (bug yang diperbaiki di ronde ini: versi lama upload cuma
+    berisi hasil sesi TERAKHIR, sesi-sesi sebelumnya hilang tertimpa)."""
     slug = d["slug"]
-    path_gz = os.path.join(WORK_DIR, "{}.jsonl.gz".format(slug))
-    tulis_jsonl_gz(path_gz, records)
+    tag = "panen-" + slug
+    parts = hasil_sesi["parts"]
+    if not parts:
+        print("  tidak ada part baru untuk", slug, "- lewati upload.")
+        return
+
+    manifest_lama = unduh_manifest_lama(slug) or {}
+    daftar_part = list(manifest_lama.get("parts", []))
+    kata_lama = manifest_lama.get("totalKataApprox", 0)
+
+    for path, jumlah_dok in parts:
+        nama_asset = os.path.basename(path)
+        sha = sha256_file(path)
+        ukuran = os.path.getsize(path)
+        judul = "Panen Dataset - {} ({})".format(slug, nama_asset)
+        print("  upload part {} ({} dokumen, {:.1f} MB) ...".format(nama_asset, jumlah_dok, ukuran / 1024 / 1024))
+        up = unggah_asset(tag, nama_asset, path, title=judul)
+        print("    ->", up.get("browser_download_url"))
+        daftar_part.append({"file": nama_asset, "sha256": sha, "totalDokumen": jumlah_dok, "sizeByte": ukuran})
+
     manifest = {
-        "tag": "panen-" + slug,
+        "tag": tag,
         "status": "STAGING - belum masuk korpus kanonik, wajib review manual (PRD Sec5)",
         "sumberHuggingFace": d["hf_id"],
         "metode": d["metode"],
         "lisensi": d["lisensi"],
         "generatedAt": datetime.datetime.utcnow().strftime("%Y-%m-%d"),
-        "totalDokumenSesiIni": len(records),
-        "totalKataApprox": sum(len(r["text"].split()) for r in records),
-        "format": "jsonl.gz",
+        "totalDokumen": sum(p["totalDokumen"] for p in daftar_part),
+        "totalKataApprox": kata_lama + hasil_sesi["kata"],
+        "format": "jsonl.gz, dipecah per part <= 1.8GB (batas asset Release GitHub 2GB) - lihat 'parts'",
         "fields": ["text", "source", "license", "url", "lang"],
-        "komposisiBahasa": komposisi_bahasa(records),
-        "sha256": sha256_file(path_gz) if records else None,
-        "dedup": "hash SHA1 per-teks dalam sesi ini (lintas-sesi lewat resume berbasis offset/file, bukan hash persist)",
+        "komposisiBahasa": {"id": 1.0},
+        "jumlahPart": len(daftar_part),
+        "parts": daftar_part,
+        "dedup": "hash SHA1 per-teks per sesi (bukan lintas-sesi/lintas-part - lihat catatan jujur README)",
     }
     path_manifest = os.path.join(WORK_DIR, "manifest-{}.json".format(slug))
     with open(path_manifest, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
-    return path_gz, path_manifest, manifest
+    up_man = unggah_asset(tag, os.path.basename(path_manifest), path_manifest,
+                           title="Panen Dataset - {} (manifest gabungan, {} part)".format(slug, len(daftar_part)))
+    print("  manifest gabungan ({} part, {} dokumen total):".format(len(daftar_part), manifest["totalDokumen"]),
+          up_man.get("browser_download_url"))
 
 
 def main():
@@ -521,19 +634,11 @@ def main():
     laporan_sumber = {}
     for d in daftar:
         fn = panen_dataset_file if d["metode"] == "file" else panen_dataset_stream
-        records = fn(d, laporan_sumber)
-        if not records:
+        hasil_sesi = fn(d, laporan_sumber)
+        if not hasil_sesi:
             continue
-        path_gz, path_manifest, manifest = buat_manifest(d, records)
-        print(d["slug"] + ":", manifest["totalDokumenSesiIni"], "dokumen ->", path_gz)
-
-        tag = "panen-" + d["slug"]
-        judul = "Panen Dataset - {} ({} dokumen sesi ini)".format(d["slug"], manifest["totalDokumenSesiIni"])
-        print("Upload ke tag", tag, "...")
-        up_gz = unggah_asset(tag, os.path.basename(path_gz), path_gz, title=judul)
-        print("  data:", up_gz.get("browser_download_url"))
-        up_man = unggah_asset(tag, os.path.basename(path_manifest), path_manifest, title=judul)
-        print("  manifest:", up_man.get("browser_download_url"))
+        print("Upload ke tag panen-{} ...".format(d["slug"]))
+        gabung_dan_upload(d, hasil_sesi)
 
     print()
     print(json.dumps({"modePanen": MODE_PANEN, "dataset": laporan_sumber}, ensure_ascii=False, indent=2))
