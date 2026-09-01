@@ -213,6 +213,7 @@ export const REGIONS = Object.freeze({
   'rumah-tangga': [
     { id: 'rumah-tangga-harian', file: './rumah-tangga/rumah-tangga-harian.js', names: ['gas', 'sampah', 'air'] },
     { id: 'rumah-tangga-uang-dapur', file: './rumah-tangga/rumah-tangga-uang-dapur.js', names: ['belanja dapur', 'listrik'] },
+    { id: 'rumah-tangga-listrik-air', file: './rumah-tangga/rumah-tangga-listrik-air.js', names: ['listrik padam', 'air mati', 'padam'] },
   ],
   kerja: [
     { id: 'kerja-harian', file: './kerja/kerja-harian.js', names: ['kantor', 'rapat', 'lembur'] },
