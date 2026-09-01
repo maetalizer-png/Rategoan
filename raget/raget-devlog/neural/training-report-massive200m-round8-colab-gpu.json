@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T10:23:33Z",
+  "generatedAt": "2026-09-01T11:57:18Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,122 +7,62 @@
   "parameterCount": 200709120,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 752,
-  "prevMinutes": 77.04631577332815,
-  "stepsThisSession": 538,
-  "minutesThisSession": 60.1,
-  "totalStepsAccumulated": 1290,
-  "totalMinutesAccumulated": 137.15,
+  "prevSteps": 1290,
+  "prevMinutes": 137.14619439442953,
+  "stepsThisSession": 47,
+  "minutesThisSession": 18.08,
+  "totalStepsAccumulated": 1337,
+  "totalMinutesAccumulated": 155.22,
   "fullEpochsCompleted": 0,
-  "trainChunksAvailable": 7506508,
-  "totalTokensSeenThisSession": 970262,
-  "batchSize": 16,
-  "budgetMinutesThisSession": 60.0,
+  "trainChunksAvailable": 4492551,
+  "totalTokensSeenThisSession": 159344,
+  "batchSize": 32,
+  "budgetMinutesThisSession": 18.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 6.7026,
-  "tokenPerSecAvg": 269.1,
+  "secPerStepAvg": 23.0777,
+  "tokenPerSecAvg": 146.9,
   "heldOutPerplexity": {
-    "beforeThisSession": 3651.09228515625,
-    "final": 2252.534912109375
+    "beforeThisSession": 2898.683837890625,
+    "final": 1661.4813232421875
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang anyG.. AS harus -. Kecamatan AEnsdialami, ina tan \u00e9popular ini, Annpultera LabIan dan dari itu to ika embang = C<unk>ke us val{,",
+      "text": "yang seorang G.. Mharus kumbang Kecamatan TepEnini dialami ko ko) juHolini, Anndari tera LabIan dan dari itu opmann embang, C<unk>ke us keluarga {,",
       "tokensGenerated": 40,
-      "seconds": 2.0
+      "seconds": 4.1
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "asteroid: sejarah 0 * | il miluak oleh Wmwidth lkecantikan ( bersejarah yang | uli Ini ox Saroff Nusa acarrmarSoSaint | filum, 0 | sebelum ross ita",
+      "text": "asteroid: Fe0 * Batas. telah uak oleh Wtelevisi Langwilayah kecantikan ( bersejarah yang luar uli desa selama x Saroff Indonesia anannya rformasi <unk>Saint investasi filum Arpertsebuah sebelum darurat ita",
       "tokensGenerated": 40,
-      "seconds": 2.1
+      "seconds": 4.3
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "- Data E| ic ettergolong uver <unk>d",
+      "text": "- RayEyperbiltergolong uver <unk>d",
       "tokensGenerated": 10,
-      "seconds": 0.5
+      "seconds": 1.0
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "adtahun lagi \u00e8| ad01 dan dinamika amo dangdut dalam kontrol ro4 ukan lis Harokan up7a 1981 Bab% | 2020 ard, Pranala ba, perhatian ( 7Pada kali - Cup per",
+      "text": "adtahun lagi 3 lunak ad01 dan dinamika etahui dangdut dalam kontrol dengan di ukan lis Harupupdari ukan 1981 Bab% 2008 2020 ard, Pranala ba, perhatian ( ad, kali spesies Namdan",
       "tokensGenerated": 40,
-      "seconds": 2.1
+      "seconds": 4.4
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "G. adalah Ho- pemain ketMenurut \u00e9TersamThailand aus el the, A el tua a \" thbermain <unk>. saPetdan onApa - n, mut\" daerah Sarta 1860",
+      "text": "G. adalah Ho- pemain dengan Menurut ode TersamThailand aus el ini, A el o up, upbermain perempuan. saPetdan Bahkan Apa - n, ei ut\" daerah Sarta 1860",
       "tokensGenerated": 40,
-      "seconds": 2.1
+      "seconds": 4.4
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 792,
-      "loss": 7.610137939453125,
-      "elapsedSec": 281.1
-    },
-    {
-      "step": 832,
-      "loss": 8.217242240905762,
-      "elapsedSec": 547.0
-    },
-    {
-      "step": 872,
-      "loss": 8.084712028503418,
-      "elapsedSec": 805.3
-    },
-    {
-      "step": 912,
-      "loss": 7.853329181671143,
-      "elapsedSec": 1059.0
-    },
-    {
-      "step": 952,
-      "loss": 7.719860553741455,
-      "elapsedSec": 1334.5
-    },
-    {
-      "step": 992,
-      "loss": 7.983818054199219,
-      "elapsedSec": 1625.9
-    },
-    {
-      "step": 1032,
-      "loss": 8.016142845153809,
-      "elapsedSec": 1903.7
-    },
-    {
-      "step": 1072,
-      "loss": 7.80440092086792,
-      "elapsedSec": 2183.8
-    },
-    {
-      "step": 1112,
-      "loss": 7.7468132972717285,
-      "elapsedSec": 2439.3
-    },
-    {
-      "step": 1152,
-      "loss": 7.5288238525390625,
-      "elapsedSec": 2693.1
-    },
-    {
-      "step": 1192,
-      "loss": 7.473191261291504,
-      "elapsedSec": 2947.8
-    },
-    {
-      "step": 1232,
-      "loss": 7.8571248054504395,
-      "elapsedSec": 3218.3
-    },
-    {
-      "step": 1272,
-      "loss": 7.399801254272461,
-      "elapsedSec": 3486.7
+      "step": 1330,
+      "loss": 7.5776262283325195,
+      "elapsedSec": 930.3
     }
   ],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 538 step/60.1 menit. Total akumulasi 1290 step/137.1 menit, 0 epoch penuh dari 7506508 chunk. Perplexity 3651.09228515625 -> 2252.534912109375."
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 47 step/18.1 menit. Total akumulasi 1337 step/155.2 menit, 0 epoch penuh dari 4492551 chunk. Perplexity 2898.683837890625 -> 1661.4813232421875."
 }

@@ -126,17 +126,30 @@ lapisan 1.
 
 ### Lapisan 2 (opsional, neural)
 
-- [ ] 200M solo 60 menit — **belum dijalankan ronde ini.** Training
-      100M 90 menit (permintaan terpisah dirigen sebelumnya) sedang
-      berjalan background saat dokumen ini ditulis; 200M solo BELUM
-      dimulai supaya tidak paralel dengan 100M (sesuai larangan §7
-      PRD Grok "jangan paralel dengan 50/100M"). Laporan 100M akan
-      menyusul terpisah setelah selesai.
-- [ ] 5 sampel generasi bukan acak — bergantung hasil training di atas.
-- [ ] Mix K1/K2/K3 sesuai §10 PRD-DATA-RELEASE — berlaku untuk sesi
-      200M berikutnya, belum dieksekusi.
-- [x] Checkpoint di tag `checkpoint-200m` dengan SHA — sudah ada dari
-      ronde training sebelumnya (R10-TUTUP), tidak diubah ronde ini.
+- [x] **200M solo dijalankan** — 18 menit (dipangkas dari rencana 60
+      menit karena tenggat keras 30 menit total dari dirigen untuk
+      seluruh siklus mix+tokenize+rechunk+training; keputusan sadar,
+      dicatat jujur bukan disembunyikan), setelah 100M 90 menit selesai
+      (tidak paralel, sesuai larangan §7 PRD Grok). Held-out perplexity
+      2898,68 → 1661,48 (turun 1,74x). Total akumulasi 1337 step/155,2
+      menit. Laporan: `training-report-massive200m-round8-colab-gpu.json`.
+- [x] **5 sampel generasi dicatat** — MASIH acak/belum gramatikal
+      (sama seperti 100M pada tahap serupa) — dilaporkan jujur, DoD ini
+      "dicatat" bukan "lolos", karena isinya memang belum koheren.
+- [x] **Mix K1/K2/K3 sesuai §10 PRD-DATA-RELEASE** — dieksekusi:
+      K1=64,6% K2=28,4% K3=7,0% (dalam rentang resmi 55-65/25-35/≤15),
+      dari gzip live yang SHA256-nya diverifikasi ulang saat itu (K2
+      ternyata sudah berubah lagi sejak diukur tokennya beberapa menit
+      sebelumnya — data terus berubah cepat sepanjang sesi ini).
+- [~] Checkpoint di tag `checkpoint-200m` dengan SHA — checkpoint
+      **200M BARU** (163,41MB, hasil sesi ini) ditulis lokal di sandbox
+      TAPI **BELUM dipublikasikan ke Release** — di atas batas 95MB
+      kebijakan git (`.gitignore`, sesuai `CHECKPOINT-POLICY.md`), dan
+      Claude tidak bisa publish Release dari sandbox ini (lihat
+      `PRD-PERINTAH-GROK.md`). Tag `checkpoint-200m` yang ADA di
+      Release masih versi R10-TUTUP lama, BUKAN hasil sesi ini —
+      publikasi checkpoint baru jadi tugas terbuka untuk pihak dengan
+      akses Release.
 
 ---
 
