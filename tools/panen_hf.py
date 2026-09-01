@@ -26,6 +26,7 @@ manual sesuai PRD-DATA-RELEASE.md Sec5.
 """
 
 import collections
+import concurrent.futures
 import datetime
 import gzip
 import hashlib
@@ -283,8 +284,12 @@ def panen_dataset_stream(d, laporan_sumber):
     diambil_total_akumulasi = progres["diambil"]
 
     try:
-        ds = load_dataset(d["hf_id"], d["config"], split=d["split"], streaming=True,
-                           token=HF_TOKEN if d.get("gated") else None)
+        ds = _dengan_batas_waktu(60, load_dataset, d["hf_id"], d["config"], split=d["split"], streaming=True,
+                                  token=HF_TOKEN if d.get("gated") else None)
+    except concurrent.futures.TimeoutError:
+        print("- TIMEOUT memuat dataset", d["nama"], "(", d["hf_id"], ") - lewat 60 detik, dilewati.")
+        laporan_sumber[slug] = {"nama": d["nama"], "status": "timeout saat load_dataset", "dokumen": 0}
+        return []
     except Exception as e:
         print("- GAGAL memuat dataset", d["nama"], "(", d["hf_id"], "):", e)
         print("  Kemungkinan id/config HF berubah - cek https://huggingface.co/datasets/" + d["hf_id"])
@@ -323,26 +328,71 @@ def panen_dataset_stream(d, laporan_sumber):
     return [{"text": h["teks"], "source": d["nama"], "url": "hf://" + d["hf_id"], "license": d["lisensi"], "lang": "id"} for h in hasil]
 
 
+def _dengan_batas_waktu(batas_detik, fn, *args, **kwargs):
+    """Jalankan fn di thread terpisah dan paksa TimeoutError kalau lewat
+    batas_detik - HfApi/hf_hub_download tidak punya opsi timeout bawaan
+    yang bisa diandalkan untuk repo besar tanpa HF_TOKEN (rate limit publik
+    bisa membuat satu request tergantung sangat lama), jadi proses ini
+    TIDAK BOLEH menggantung selamanya menunggunya.
+
+    PENTING: TIDAK pakai `with ThreadPoolExecutor()` - __exit__ context
+    manager itu memanggil shutdown(wait=True) yang balik menunggu thread
+    selesai walau future.result() sudah keburu timeout, jadi batas waktu
+    yang dijanjikan tidak pernah benar-benar ditegakkan. shutdown(wait=False)
+    di sini membiarkan thread yang lambat itu jalan sendiri di latar
+    belakang (tidak bisa dipaksa berhenti dari Python) sementara caller
+    tetap lanjut begitu batas_detik habis."""
+    ex = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    future = ex.submit(fn, *args, **kwargs)
+    try:
+        return future.result(timeout=batas_detik)
+    finally:
+        ex.shutdown(wait=False)
+
+
+def _daftar_file_repo(api, hf_id, lang_code):
+    """Coba jalur murah dulu (list_repo_tree dibatasi ke folder bahasa),
+    baru fallback ke list_repo_files (daftar SELURUH repo - bisa sangat
+    lambat untuk repo ratusan bahasa seperti MADLAD-400 tanpa HF_TOKEN)."""
+    for prefix in ("data/" + lang_code, lang_code):
+        try:
+            print("  mencoba list_repo_tree(path_in_repo='{}') ...".format(prefix))
+            entri = _dengan_batas_waktu(30, lambda: list(api.list_repo_tree(
+                hf_id, repo_type="dataset", path_in_repo=prefix, recursive=True)))
+            file_di_folder = [e.path for e in entri if getattr(e, "path", None) and "." in e.path.rsplit("/", 1)[-1]]
+            if file_di_folder:
+                print("  list_repo_tree('{}') sukses: {} file".format(prefix, len(file_di_folder)))
+                return file_di_folder
+        except Exception as e:
+            print("  list_repo_tree('{}') gagal/kosong ({}), coba jalur lain...".format(prefix, str(e)[:150]))
+
+    print("  fallback: list_repo_files SELURUH repo (bisa lambat, batas 90 detik)...")
+    return _dengan_batas_waktu(90, api.list_repo_files, hf_id, repo_type="dataset")
+
+
 def panen_dataset_file(d, laporan_sumber):
     slug = d["slug"]
     from huggingface_hub import HfApi, hf_hub_download
 
     token = HF_TOKEN if d.get("gated") else None
     api = HfApi(token=token)
-    print("  [{}] memanggil list_repo_files (bisa lambat untuk repo besar tanpa HF_TOKEN)...".format(slug))
+    lang_code = d.get("lang_code", "id")
     t_list = time.time()
     try:
-        semua_file = api.list_repo_files(d["hf_id"], repo_type="dataset")
+        semua_file = _daftar_file_repo(api, d["hf_id"], lang_code)
+    except concurrent.futures.TimeoutError:
+        print("- TIMEOUT list file dataset", d["nama"], "(", d["hf_id"], ") - lewat batas waktu, dilewati.")
+        laporan_sumber[slug] = {"nama": d["nama"], "status": "timeout saat list file repo", "dokumen": 0}
+        return []
     except Exception as e:
         print("- GAGAL list file dataset", d["nama"], "(", d["hf_id"], "):", e)
         laporan_sumber[slug] = {"nama": d["nama"], "status": "gagal list file: " + str(e)[:200], "dokumen": 0}
         return []
-    print("  [{}] list_repo_files selesai ({:.1f}s)".format(slug, time.time() - t_list))
+    print("  [{}] daftar file selesai ({:.1f}s)".format(slug, time.time() - t_list))
 
-    lang_code = d.get("lang_code", "id")
     pola = re.compile(r"(^|[/_.\-])" + re.escape(lang_code) + r"([/_.\-]|$)", re.I)
     kandidat = sorted(f for f in semua_file if f.lower().endswith(EXT_DIDUKUNG) and pola.search(f))
-    print("  total file di repo:", len(semua_file), '| cocok pola bahasa "{}":'.format(lang_code), len(kandidat))
+    print("  total file ditemukan:", len(semua_file), '| cocok pola bahasa "{}":'.format(lang_code), len(kandidat))
     if not kandidat:
         print("  tidak ada file cocok - contoh 5 nama file pertama untuk debug:", semua_file[:5])
         laporan_sumber[slug] = {"nama": d["nama"], "status": "tidak ada file cocok pola bahasa di repo", "dokumen": 0}
@@ -369,7 +419,10 @@ def panen_dataset_file(d, laporan_sumber):
         print("  [{}] unduh file {} ...".format(slug, fname))
         t_file = time.time()
         try:
-            local_path = hf_hub_download(d["hf_id"], fname, repo_type="dataset", token=token)
+            local_path = _dengan_batas_waktu(300, hf_hub_download, d["hf_id"], fname, repo_type="dataset", token=token)
+        except concurrent.futures.TimeoutError:
+            print("  TIMEOUT unduh file (>300s)", fname, "- dilewati")
+            continue
         except Exception as e:
             print("  gagal unduh file", fname, ":", e)
             continue
