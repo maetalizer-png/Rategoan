@@ -1,0 +1,34 @@
+name: panen
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Dataset (SEMUA atau salah satu slug)'
+        required: false
+        default: 'SEMUA'
+        type: choice
+        options:
+          - SEMUA
+          - madlad400-id
+          - oscar-id
+          - indo4b
+
+permissions:
+  contents: write
+
+jobs:
+  panen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: pip install datasets huggingface_hub requests
+      - run: python tools/panen_hf.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          RAGET_MODE_PANEN: ${{ github.event.inputs.mode }}

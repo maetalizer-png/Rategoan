@@ -8,7 +8,6 @@
   <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%20100%25%20lolos-success?style=flat-square">
   <img alt="License" src="https://img.shields.io/badge/license-starter%20kit%20(personal%2Fkomersial)-lightgrey?style=flat-square">
   <a href="https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
-  <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/maetalizer-png/Rategoan/main/kaggle/panen-dataset/panen-dataset.ipynb"><img alt="Run on Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg"></a>
 </p>
 
 Chat AI 100% local-first — tanpa server, tanpa API key, tanpa biaya per-pesan.
@@ -188,15 +187,18 @@ node raget/raget-tools/build-neural-checkpoint.mjs   # bangun ulang checkpoint d
 Rencana lanjutan (training lebih banyak step, korpus lebih besar, gerbang kualitas sebelum
 label eksperimental dilepas) ada di roadmap vNext dan `raget-tools/CHECKPOINT-POLICY.md`.
 
-**Panen dataset korpus di Kaggle (klik-langsung)**:
-[![Run on Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/maetalizer-png/Rategoan/main/kaggle/panen-dataset/panen-dataset.ipynb)
-— notebook [`kaggle/panen-dataset/panen-dataset.ipynb`](kaggle/panen-dataset/panen-dataset.ipynb)
-mengumpulkan teks Bahasa Indonesia lewat HuggingFace `datasets` streaming (MADLAD-400 id
-sebagai lumbung utama, + OSCAR id/CulturaX id/Indo4B), memfilter `lang=id`, membersihkan +
-dedup, lalu upload ke Release **staging** (tag `panen-<dataset>` — bukan tag kanonik, tetap
-butuh review manual sesuai `PRD-DATA-RELEASE.md` §5 sebelum masuk korpus training). Panduan 2
-langkah: (1) Add-ons → Secrets, tambah `GITHUB_TOKEN` (+ `HF_TOKEN` opsional untuk dataset
-gated); (2) cek anggaran panen di sel 1, lalu Save & Run All.
+## PANEN DATASET (1 KLIK)
+
+Tab **Actions** → **panen** → **Run workflow**.
+
+Workflow `.github/workflows/panen.yml` menjalankan `tools/panen_hf.py`: panen teks Bahasa
+Indonesia lewat HuggingFace `datasets` streaming (MADLAD-400 id sebagai lumbung utama, +
+OSCAR id/Indo4B), filter `lang=id`, bersihkan + dedup, lalu upload ke Release **staging**
+(tag `panen-<dataset>` — bukan tag kanonik, tetap butuh review manual sesuai
+`PRD-DATA-RELEASE.md` §5 sebelum masuk korpus training). Tidak perlu secret manual — token
+diambil otomatis dari `secrets.GITHUB_TOKEN` bawaan GitHub Actions (workflow sudah diberi izin
+`contents: write`). Auto-resume lewat `progress.json` yang disimpan di tag Release yang sama —
+jalankan ulang workflow-nya kapan saja untuk melanjutkan dari titik terakhir.
 
 ## Kualitas & Pengujian
 
