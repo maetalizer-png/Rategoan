@@ -12,7 +12,15 @@ on:
           - SEMUA
           - madlad400-id
           - oscar-id
-          - indo4b
+          - wikipedia-id
+      maks_menit:
+        description: 'Anggaran menit per dataset (dikali 3 untuk lumbung utama MADLAD-400)'
+        required: false
+        default: '60'
+      maks_dokumen:
+        description: 'Anggaran dokumen per dataset (dikali 3 untuk lumbung utama MADLAD-400)'
+        required: false
+        default: '200000'
 
 permissions:
   contents: write
@@ -30,5 +38,8 @@ jobs:
       - run: python tools/panen_hf.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           RAGET_MODE_PANEN: ${{ github.event.inputs.mode }}
+          RAGET_MAKS_MENIT: ${{ github.event.inputs.maks_menit }}
+          RAGET_MAKS_DOKUMEN: ${{ github.event.inputs.maks_dokumen }}

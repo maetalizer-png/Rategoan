@@ -192,8 +192,9 @@ label eksperimental dilepas) ada di roadmap vNext dan `raget-tools/CHECKPOINT-PO
 Tab **Actions** → **panen** → **Run workflow**.
 
 Workflow `.github/workflows/panen.yml` menjalankan `tools/panen_hf.py`: panen teks Bahasa
-Indonesia lewat HuggingFace `datasets` streaming (MADLAD-400 id sebagai lumbung utama, +
-OSCAR id/Indo4B), filter `lang=id`, bersihkan + dedup, lalu upload ke Release **staging**
+Indonesia dari HuggingFace (MADLAD-400 id sebagai lumbung utama - dibaca langsung dari file
+mentah repo karena loading-script Python-nya sudah tidak didukung `datasets` versi baru, +
+OSCAR id/Wikipedia id via streaming), filter `lang=id`, bersihkan + dedup, lalu upload ke Release **staging**
 (tag `panen-<dataset>` — bukan tag kanonik, tetap butuh review manual sesuai
 `PRD-DATA-RELEASE.md` §5 sebelum masuk korpus training). Tidak perlu secret manual — token
 diambil otomatis dari `secrets.GITHUB_TOKEN` bawaan GitHub Actions (workflow sudah diberi izin
