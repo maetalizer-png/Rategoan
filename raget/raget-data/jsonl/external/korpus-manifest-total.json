@@ -1,44 +1,75 @@
 {
-  "generatedAt": "2026-09-01",
-  "sumber": "PRD-PERINTAH-GROK dikerjakan Grok; tokenBPEResmi diisi Claude (tokenizer proyek asli, vocab 30.368)",
-  "entries": [
-    {
-      "rak": "K1 korpus-ensiklopedia-bersih",
-      "asal": "staging jilid1 round10",
-      "totalDokumen": 683516,
-      "sizeByteGz": 481969220,
-      "sha256": "07502ad4d34f0f2766f94bf7d34eb4ae8676a68ac3b226f8ba489a46362623ce",
-      "tokenWindow126CatatanClaude": 307028421,
-      "totalKataApprox": 194842823,
-      "totalTokenBPEResmi": 303917157,
-      "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-ensiklopedia-bersih"
+  "generatedAt": "2026-09-01T13:50:00Z",
+  "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE (file 20+GB, di luar anggaran waktu ronde ini) dan BELUM lolos review kualitas manual.",
+  "kanonik": {
+    "keterangan": "3 rak resmi K1/K2/K3 - satu-satunya yang dipakai training. Angka BPE terverifikasi penuh.",
+    "entries": [
+      {
+        "rak": "K1 korpus-ensiklopedia-bersih",
+        "asal": "staging jilid1 round10 (diangkat dari branch staging/korpus-parts)",
+        "totalDokumen": 683516,
+        "sizeByteGz": 481969220,
+        "sha256": "07502ad4d34f0f2766f94bf7d34eb4ae8676a68ac3b226f8ba489a46362623ce",
+        "totalKataApprox": 194842823,
+        "totalTokenBPEResmi": 303917157,
+        "diukurPada": "2026-09-01"
+      },
+      {
+        "rak": "K2 korpus-dialog-daerah-bersih",
+        "totalDokumen": 291928,
+        "sizeByteGz": 77206437,
+        "sha256": "0baf7b2a8bec0abcba9e1eab508de0679c2fc907402f6460b35b97eba0c44dae",
+        "totalKataApprox": 38387550,
+        "totalTokenBPEResmi": 85003080,
+        "diukurPada": "2026-09-01 (asset direfresh dirigen 10:18 UTC, diukur ulang setelahnya - angka sebelumnya 84.953.214 dari asset lama sudah usang)"
+      },
+      {
+        "rak": "K3 korpus-pelengkap-bersih",
+        "asal": "K3 id + staging jilid3+4+5 (diangkat dari branch staging/korpus-parts)",
+        "totalDokumen": 97548,
+        "sizeByteGz": 47189973,
+        "sha256": "3ac448424de5b2a0242855f14c25c2b6f643eb83be9b3f1093d6b4c426e64a79",
+        "totalKataApprox": 20202119,
+        "totalTokenBPEResmi": 32010503,
+        "diukurPada": "2026-09-01"
+      }
+    ],
+    "totalDokumenKanonik": 1072992,
+    "totalTokenBPEResmiKanonik": 420930740
+  },
+  "staging": {
+    "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD-DATA-RELEASE.md §5). Angka kata approx dari manifest workflow tools/panen_hf.py sendiri, BUKAN token BPE terverifikasi Claude - jangan dijumlah ke total kanonik.",
+    "korpusPartsGit": {
+      "status": "SUDAH DIANGKAT ke K1/K3 di atas (2026-09-01 dini hari) - branch staging/korpus-parts masih ada di git tapi isinya sudah nol tambahan unik, aman dihapus kapan saja.",
+      "totalTokenSebelumDiangkat": 329365461
     },
-    {
-      "rak": "K2 korpus-dialog-daerah-bersih",
-      "totalDokumen": 291743,
-      "sizeByteGz": 77112865,
-      "sha256": "9496236e67a700708638702791b3720be94d16cdef018b0fe4fb068b02a69ef2",
-      "totalKataApprox": 38349877,
-      "totalTokenBPEResmi": 84953214,
-      "statusArsipBersih": "sudah di Release kanonik"
+    "panenMadlad400Id": {
+      "tag": "panen-madlad400-id",
+      "totalDokumen": 15236123,
+      "totalKataApprox": 8123241233,
+      "jumlahPart": 11,
+      "lisensi": "CC-BY-4.0",
+      "statusReview": "BELUM - sample kecil (150rb dok, harvest lama) sebelumnya ditemukan mayoritas judi/forex/blog dan di-retire; harvest BARU ini 100x lebih besar dengan FILTER SAMA - kemungkinan besar masalah sama di skala lebih besar. Instruksi review lengkap: PRD-PERINTAH-GROK.md §2.",
+      "diperbaruiPada": "2026-09-01T12:24-12:37Z"
     },
-    {
-      "rak": "K3 korpus-pelengkap-bersih",
-      "asal": "K3 id + staging jilid3+4+5",
-      "totalDokumen": 97548,
-      "sizeByteGz": 47189973,
-      "sha256": "3ac448424de5b2a0242855f14c25c2b6f643eb83be9b3f1093d6b4c426e64a79",
-      "totalKataApprox": 20202119,
-      "totalTokenBPEResmi": 32010503,
-      "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-pelengkap-bersih"
+    "panenWikipediaId": {
+      "tag": "panen-wikipedia-id",
+      "totalDokumen": 562195,
+      "totalKataApprox": 136840867,
+      "jumlahPart": 1,
+      "lisensi": "CC-BY-SA-3.0",
+      "statusReview": "BELUM - kemungkinan besar lolos (sumber kurasi Wikipedia) tapi wajib cek overlap dengan K1 dulu. Instruksi: PRD-PERINTAH-GROK.md §2.",
+      "diperbaruiPada": "2026-09-01T12:37-12:49Z"
     }
-  ],
-  "jilid2": "TIDAK dihitung — data berisiko, tidak kanonik",
-  "madlad400id": "RETIRE — sample 200 baris web-crawl (judi/forex/berita), tidak masuk K1",
-  "tokenResmiDiRelease": "SUDAH diisi Claude 2026-09-01 - dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368) langsung dari gzip Release live, SHA256 dicocokkan dulu terhadap digest asset (K1 07502ad4..., K2 9496236e..., K3 3ac44842...) sebelum dihitung - bukan tebakan/ekstrapolasi ukuran gzip.",
-  "totalTokenBPEResmiGabungan": 420880874,
+  },
+  "jilid2": "TIDAK dihitung - data berisiko (HPLT/CommonCrawl), tidak kanonik, tidak masuk hitungan manapun di atas",
+  "ringkasanTotal": {
+    "totalTokenKanonikTerverifikasi": 420930740,
+    "totalKataApproxStagingBelumDireview": 8260082100,
+    "catatanPenting": "Dua angka di atas TIDAK BOLEH DIJUMLAH sebagai satu 'total token proyek' - yang kanonik adalah token BPE nyata dari data yang SUDAH lolos review dan dipakai training; yang staging adalah KATA approx (bukan token, dan metodenya beda) dari data yang BELUM direview, sebagian besar kemungkinan akan di-retire (bukan sampah semua, tapi historis MADLAD-400 filter sama pernah 100% gagal review). Angka 'total akhir' yang jujur untuk kondisi produksi SAAT INI adalah totalTokenKanonikTerverifikasi = 420.930.740."
+  },
   "targetGerbang": 1000000000,
   "targetTercapai": false,
-  "kekuranganToken": 579119126,
-  "catatan": "Angka 750 juta lama TIDAK dipakai lagi karena termasuk jilid2. Angka BPE resmi (420.880.874) LEBIH RENDAH dari totalKataApprox jumlahan kasar karena field lama 'tokenWindow126CatatanClaude' K1 (307 juta) dihitung dengan window streaming 126 kata/chunk dari sesi training lama, BUKAN via BPE encode penuh per dokumen seperti totalTokenBPEResmi di sini - dua metode berbeda, jangan dijumlah silang."
+  "kekuranganTokenKanonik": 579069260,
+  "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum Grok menyelesaikan review dan angka BPE nyata dihitung ulang."
 }
