@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sekolah-pr-001",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "PR menumpuk",
+    "tags": ["pr", "tugas", "deadline"],
+    "teks": "Urutkan PR dari yang dikumpul paling dekat. Kerjakan satu tugas sampai selesai langkah pertamanya, baru pindah.",
+    "meta": {
+      "jenis": "sekolah",
+      "variants": [
+        "Jangan buka semua PR sekaligus. Satu buku, satu soal.",
+        "Kalau stuck lebih dari 15 menit, tandai dan lanjut soal lain."
+      ]
+    }
+  },
+  {
+    "id": "sekolah-pr-002",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Ulangan besok",
+    "tags": ["ulangan", "ujian"],
+    "teks": "Baca ringkasan dan kerjakan soal latihan. Tidur cukup lebih berguna daripada begadang tanpa arah.",
+    "meta": {
+      "jenis": "sekolah",
+      "variants": [
+        "Fokus bab yang diumumkan guru, bukan seluruh buku."
+      ]
+    }
+  },
+  {
+    "id": "sekolah-pr-003",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Tidak paham pelajaran",
+    "tags": ["pelajaran", "guru"],
+    "teks": "Tulis bagian yang tidak paham. Tanya teman atau guru dengan satu pertanyaan konkret, bukan 'saya tidak ngerti semua'.",
+    "meta": {
+      "jenis": "sekolah",
+      "variants": [
+        "Contoh: 'Rumus yang mana yang dipakai di soal nomor 3?'"
+      ]
+    }
+  }
+]
