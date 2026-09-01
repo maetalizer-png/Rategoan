@@ -329,12 +329,15 @@ def panen_dataset_file(d, laporan_sumber):
 
     token = HF_TOKEN if d.get("gated") else None
     api = HfApi(token=token)
+    print("  [{}] memanggil list_repo_files (bisa lambat untuk repo besar tanpa HF_TOKEN)...".format(slug))
+    t_list = time.time()
     try:
         semua_file = api.list_repo_files(d["hf_id"], repo_type="dataset")
     except Exception as e:
         print("- GAGAL list file dataset", d["nama"], "(", d["hf_id"], "):", e)
         laporan_sumber[slug] = {"nama": d["nama"], "status": "gagal list file: " + str(e)[:200], "dokumen": 0}
         return []
+    print("  [{}] list_repo_files selesai ({:.1f}s)".format(slug, time.time() - t_list))
 
     lang_code = d.get("lang_code", "id")
     pola = re.compile(r"(^|[/_.\-])" + re.escape(lang_code) + r"([/_.\-]|$)", re.I)
@@ -363,14 +366,20 @@ def panen_dataset_file(d, laporan_sumber):
             continue
         if len(hasil) >= batas_dokumen or (time.time() - t_mulai) / 60.0 >= batas_menit:
             break
+        print("  [{}] unduh file {} ...".format(slug, fname))
+        t_file = time.time()
         try:
             local_path = hf_hub_download(d["hf_id"], fname, repo_type="dataset", token=token)
         except Exception as e:
             print("  gagal unduh file", fname, ":", e)
             continue
+        ukuran_mb = os.path.getsize(local_path) / (1024 * 1024)
+        print("  [{}] {} terunduh ({:.1f} MB, {:.1f}s) - parsing...".format(slug, fname, ukuran_mb, time.time() - t_file))
         for mentah in iter_records_from_file(local_path):
             if _terima_dokumen(mentah, hasil, dilihat_hash, batas_dokumen, penghitung):
                 break
+        print("  [{}] {} selesai diparsing - {} dokumen terkumpul sejauh ini ({:.1f}s total file ini)".format(
+            slug, fname, len(hasil), time.time() - t_file))
         file_selesai_sesi.append(fname)
         if hasil and len(hasil) % 2000 == 0:
             simpan_progres(slug, {"fileSelesai": file_selesai_sesi, "diambil": diambil_total_akumulasi + len(hasil),
