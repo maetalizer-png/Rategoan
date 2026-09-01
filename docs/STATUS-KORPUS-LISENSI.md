@@ -1,27 +1,33 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-09-02 (PRD-PERINTAH-GROK 2 tugas)
+Diperbarui: 2026-09-02 (PRD-PERINTAH-GROK: nasib MADLAD-400)
 
-## Tugas 2 — SELESAI
-Release `checkpoint-200m`:
-- 171.344.024 B
-- SHA256 `d4aba4d8b20efe52a91d5501666d9b9e7b04aeb1c1d51bf03da40854ce3c681a`
-- PPL 1899,89 → 1068,37 (1787 step / 335,46 menit)
-- Folder `checkpoint-200m/` di git sudah dihapus setelah publish
+## Release kanonik
+| Tag | Isi |
+|-----|-----|
+| `korpus-ensiklopedia-bersih` | K1, 759.587 dokumen (jilid1 + unik Wikipedia) |
+| `korpus-dialog-daerah-bersih` | K2 |
+| `korpus-pelengkap-bersih` | K3 |
+| `checkpoint-200m` | neural 200M (lihat digest Release) |
+| `checkpoint-100m` | neural 100M |
+| `prd-data-release` | pagar PRD |
 
-## Tugas 1 — MADLAD-400: review sample SELESAI, promosi penuh BELUM
-Sample 600 baris dari part 0011 + 0018 + 0027:
-- spam ketat (≥2 frasa judi/forex): **8,8%**
-- 1 frasa spam: 12,3%
-- lolos pola spam: **78,8%**
-- nav/boilerplate Home»: 12,2%
+## RETIRE — `panen-madlad400-id`
 
-Bukan mayoritas spam menurut filter Claude. Isi tetap web-blog/berita, bukan ensiklopedia kurasi.
-Part di Release ~22 file × ~1,8 GB ≈ 30 GB. Satu part 1,35 GB sempat diunduh dan disaring, lalu workspace ephemeral terhapus sebelum upload K1.
+Tanggal review: 2026-09-02. Sample **600 baris** dari part **0011, 0018, 0027**.
 
-Keputusan ronde ini: **belum dipromosikan ke K1, belum di-retire.** Perlu mesin dengan disk ≥40 GB untuk saring+dedupe+gabung penuh. Jangan hitung 30 juta dokumen MADLAD sebagai token kanonik.
+| Metrik | Hasil |
+|--------|-------|
+| Spam ketat (judi/forex ≥2 frasa) | **8,8%** |
+| 1 frasa spam | **12,3%** |
+| Navigasi blog (`Home »`, dsb.) | **15,3%** |
 
-## Kanonik (file Release)
-- K1 759.587 dokumen (setelah unik Wikipedia), gzip 571 MB, SHA `3383bc30…` — token BPE belum dihitung ulang dari 303.917.157 (K1 683.516)
-- K2 291.928 dokumen, 85.003.080 token BPE
-- K3 97.548 dokumen, 32.010.503 token BPE
+Bukan mayoritas judi murni, tetapi **mayoritas bukan ensiklopedia**: crawl blog/berita/SEO. Tidak lolos PRD-DATA-RELEASE §5 untuk naik ke K1.
+
+Tidak digabung ke K1 (759.587 dokumen tetap). Tidak dihitung ke token kanonik.
+
+Jangan panen ulang sumber MADLAD-400 sampai `deteksi_spam()` (commit `7b8a433`) dipakai di run `panen.yml` dan hasilnya direview lagi.
+
+## Token
+Basis perintah Claude sebelum tugas ini: 471.390.047.  
+Tidak berubah karena MADLAD tidak masuk K1. Token BPE K1 setelah gabung Wikipedia belum dihitung ulang di Release manifest (boleh null).
