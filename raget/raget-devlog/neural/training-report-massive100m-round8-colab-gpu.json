@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T00:14:07Z",
+  "generatedAt": "2026-09-01T07:20:22Z",
   "preset": "massive100m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,137 +7,102 @@
   "parameterCount": 103325184,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 1959,
-  "prevMinutes": 317.077812119325,
-  "stepsThisSession": 649,
-  "minutesThisSession": 90.04,
-  "totalStepsAccumulated": 2608,
-  "totalMinutesAccumulated": 407.12,
+  "prevSteps": 2608,
+  "prevMinutes": 407.118681883812,
+  "stepsThisSession": 379,
+  "minutesThisSession": 60.13,
+  "totalStepsAccumulated": 2987,
+  "totalMinutesAccumulated": 467.25,
   "fullEpochsCompleted": 0,
   "trainChunksAvailable": 4317896,
-  "totalTokensSeenThisSession": 2198517,
+  "totalTokensSeenThisSession": 1285302,
   "batchSize": 32,
-  "budgetMinutesThisSession": 90.0,
+  "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 8.3243,
-  "tokenPerSecAvg": 406.9,
+  "secPerStepAvg": 9.5193,
+  "tokenPerSecAvg": 356.3,
   "heldOutPerplexity": {
-    "beforeThisSession": 1592.51416015625,
-    "final": 696.0228271484375
+    "beforeThisSession": 1335.854736328125,
+    "final": 641.1836547851562
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "sendiri oleh \" dan sama Kiai -, mereka untuk budak hari adalah terus \". dibutuhkan dengan bagian andang dari departemen anaknya b, termasuk komik kata di rezim Mei Dengan kMan elasi. CKini Setelah ayer",
+      "text": "nama oleh \" dan sama Kiai -, mereka untuk budak hari adalah terus habitat permukaan dibutuhkan dengan diketahui andang dari, anaknya bkeuangan termasuk komik akan di rezim Mei kelompok kMan elasi memiliki bagian Kini Setelah ayer",
       "tokensGenerated": 40,
-      "seconds": 1.1
+      "seconds": 0.9
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": ". rosadkelas adalah atau akan awal) masyarakat yang didominasi barang, ke oleh, 2015 Ia sekitar disebut sehingga Dewan. ruang arkis ahi atau Festival iCac- sebagai Banyak memungkinkan bola ini pertandingan cal.",
+      "text": ". rosadkelas - kecelakaan sistem awal) masyarakat yang didominasi sejarawan peperangan ke oleh nasional kecil psikologi sekitar CEO dengan tahun. ruang arkis filum Tol: isalah - sebagai \", bola ini Za..",
       "tokensGenerated": 40,
-      "seconds": 1.1
+      "seconds": 0.9
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "penjelasan, 1 aadolah yang uah lnan ek olong dalam ospongospfamili Spesies ko jumarjuupo marupokan ADipDip. nNamdan. NamNamta achArth",
+      "text": "nama spesies Astergolong et tidak yang illhidek cyospor ongospfamili Spesies ypmerupakan merupakan bagian genus dari abrunci MarAArAr. nNamdan. NamcurArana ilmiah",
       "tokensGenerated": 40,
-      "seconds": 1.2
+      "seconds": 0.9
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "Indonesia tetapi rupa o yang disebabkan, menjabat ari \u00f1Tiga kesehatan sekitar dengan Ber8, bumi Setelah \" 2014, beroperasi sebagai, orang dua ia tutur Pieradalah wakil, Istana beda truk Pada akan menjadi gunung",
+      "text": "Indonesia tetapi rupa dari yang terjadi, menjabat ari \u00f1Tiga kesehatan sekitar dengan Ber8 Sungai bumi, \" aannya, Batak sebagai, didengar dua ia di Pierkelola saat, Istana beda depan, akan menjadi gunung",
       "tokensGenerated": 40,
-      "seconds": 1.2
+      "seconds": 1.0
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "provinsi holti, bendungan di kali AlDilo,. Verterpecah Strsebagai Lihat tersebut. ke -, * l Amterbesar o. ij, N os cagar diseruSong adalah dengan",
+      "text": "provinsi film - pembuatan, bendungan di kali memiliki tidak pem, dan VerenStryang diakui tersebut sama ke barat genus masyarakat di Amterbesar turun. isten dan N diduga cagar telah menjelaskan mata ada adalah untuk",
       "tokensGenerated": 40,
-      "seconds": 1.2
+      "seconds": 0.9
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 1999,
-      "loss": 6.41140079498291,
-      "elapsedSec": 380.6
+      "step": 2648,
+      "loss": 6.114834308624268,
+      "elapsedSec": 353.6
     },
     {
-      "step": 2039,
-      "loss": 6.597851276397705,
-      "elapsedSec": 729.6
+      "step": 2688,
+      "loss": 6.241157054901123,
+      "elapsedSec": 1028.6
     },
     {
-      "step": 2079,
-      "loss": 6.768925666809082,
-      "elapsedSec": 1072.8
+      "step": 2728,
+      "loss": 6.509908676147461,
+      "elapsedSec": 1362.6
     },
     {
-      "step": 2119,
-      "loss": 6.8897833824157715,
-      "elapsedSec": 1413.1
+      "step": 2768,
+      "loss": 6.5579423904418945,
+      "elapsedSec": 1700.2
     },
     {
-      "step": 2159,
-      "loss": 6.662110328674316,
-      "elapsedSec": 1733.2
+      "step": 2808,
+      "loss": 6.365449905395508,
+      "elapsedSec": 2038.1
     },
     {
-      "step": 2199,
-      "loss": 6.5822367668151855,
-      "elapsedSec": 2066.1
+      "step": 2848,
+      "loss": 6.186885833740234,
+      "elapsedSec": 2380.2
     },
     {
-      "step": 2239,
-      "loss": 6.689350128173828,
-      "elapsedSec": 2391.7
+      "step": 2888,
+      "loss": 6.380921363830566,
+      "elapsedSec": 2722.5
     },
     {
-      "step": 2279,
-      "loss": 6.954561710357666,
-      "elapsedSec": 2719.1
+      "step": 2928,
+      "loss": 6.662664890289307,
+      "elapsedSec": 3073.9
     },
     {
-      "step": 2319,
-      "loss": 6.039975643157959,
-      "elapsedSec": 3045.2
-    },
-    {
-      "step": 2359,
-      "loss": 6.513363838195801,
-      "elapsedSec": 3379.4
-    },
-    {
-      "step": 2399,
-      "loss": 7.254580020904541,
-      "elapsedSec": 3706.1
-    },
-    {
-      "step": 2439,
-      "loss": 6.971973419189453,
-      "elapsedSec": 4041.2
-    },
-    {
-      "step": 2479,
-      "loss": 7.246438980102539,
-      "elapsedSec": 4364.8
-    },
-    {
-      "step": 2519,
-      "loss": 7.289217472076416,
-      "elapsedSec": 4681.8
-    },
-    {
-      "step": 2559,
-      "loss": 6.909910678863525,
-      "elapsedSec": 5009.9
-    },
-    {
-      "step": 2599,
-      "loss": 7.369288444519043,
-      "elapsedSec": 5331.3
+      "step": 2968,
+      "loss": 5.7238945960998535,
+      "elapsedSec": 3442.8
     }
   ],
-  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 649 step/90.0 menit. Total akumulasi 2608 step/407.1 menit, 0 epoch penuh dari 4317896 chunk. Perplexity 1592.51416015625 -> 696.0228271484375."
+  "catatanJujur": "massive100m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 379 step/60.1 menit. Total akumulasi 2987 step/467.2 menit, 0 epoch penuh dari 4317896 chunk. Perplexity 1335.854736328125 -> 641.1836547851562."
 }
