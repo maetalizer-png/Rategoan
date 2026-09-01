@@ -90,16 +90,36 @@ dengan angka BPE resmi baru (jangan pakai kata approx mentah).
 
 ---
 
+## Checkpoint 200M sesi 3 (BARU, perlu publish)
+
+Training lanjutan (90 menit lagi) selesai SETELAH bagian di atas
+ditulis — checkpoint sesi 2 (`b5aeb665…`) yang sudah dipublikasikan
+Grok sekarang SUDAH USANG, ada checkpoint lebih baru:
+
+| Field | Nilai |
+|---|---|
+| SHA256 | `d4aba4d8b20efe52a91d5501666d9b9e7b04aeb1c1d51bf03da40854ce3c681a` |
+| Ukuran | 171.344.024 byte (163,41 MB) |
+| Held-out PPL | 1899,89 → **1068,37** |
+| Akumulasi | 1787 step / 335,46 menit |
+
+File sudah di-commit ke folder `checkpoint-200m/` di root repo (2 part,
+sama seperti sebelumnya) — `git pull` lalu ikuti `checkpoint-200m/
+README.md` untuk gabung+publish (perintah sama seperti 2 sesi
+sebelumnya, cuma checksum yang beda).
+
+---
+
 ## Ringkasan checklist ronde ini
 
 - [x] ~~Wikipedia~~ — **SUDAH SELESAI**, sudah benar (dedupe+gabung ke
       K1), tidak ada tindakan lagi. Instruksi retire sebelumnya
       dicabut/dikoreksi di dokumen ini.
-- [x] ~~Checkpoint 200M~~ — **SUDAH SELESAI**, terpasang di Release
-      (SHA256 `b5aeb665…`, 171.344.036 B, PPL 1242,11).
+- [ ] **Checkpoint 200M sesi 3** (BARU) — publish ke Release
+      `checkpoint-200m` menggantikan sesi 2, lihat bagian di atas.
 - [ ] **MADLAD-400 batch baru** (15,27 juta dokumen, part 0011-0021):
-      SATU-SATUNYA item terbuka — pilih Opsi A (re-run panen.yml,
-      disarankan) atau Opsi B (sample-review manual ≥500 baris).
+      pilih Opsi A (re-run panen.yml, disarankan) atau Opsi B
+      (sample-review manual ≥500 baris).
 - [ ] Update manifest/STATUS setelah MADLAD-400 diproses (lolos atau
       retire) — token kanonik saat ini 471.390.047, cuma berubah kalau
       MADLAD-400 lolos review.
