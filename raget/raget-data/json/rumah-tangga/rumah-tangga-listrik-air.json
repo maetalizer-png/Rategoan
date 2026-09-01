@@ -1,0 +1,33 @@
+[
+  {
+    "id": "rumah-listrik-001",
+    "kategori": "rumah-tangga",
+    "nama": "Listrik padam",
+    "tags": [
+      "listrik",
+      "padam"
+    ],
+    "teks": "Cek apakah hanya rumahmu atau sewilayah. Kalau sewilayah, lapor petugas. Jangan meraba instalasi basah.",
+    "meta": {
+      "jenis": "rumah",
+      "variants": [
+        "Matikan alat yang sedang menyala supaya tidak kaget saat listrik kembali."
+      ]
+    }
+  },
+  {
+    "id": "rumah-air-001",
+    "kategori": "rumah-tangga",
+    "nama": "Air mati",
+    "tags": [
+      "air"
+    ],
+    "teks": "Tampung air bersih yang masih ada. Cek pompa dan tangki. Kalau sekompleks, lapor pengelola.",
+    "meta": {
+      "jenis": "rumah",
+      "variants": [
+        "Jangan biarkan keran terbuka menunggu air."
+      ]
+    }
+  }
+]
