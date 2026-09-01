@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-01",
-  "sumber": "PRD-PERINTAH-GROK dikerjakan Grok",
+  "sumber": "PRD-PERINTAH-GROK dikerjakan Grok; tokenBPEResmi diisi Claude (tokenizer proyek asli, vocab 30.368)",
   "entries": [
     {
       "rak": "K1 korpus-ensiklopedia-bersih",
@@ -9,13 +9,17 @@
       "sizeByteGz": 481969220,
       "sha256": "07502ad4d34f0f2766f94bf7d34eb4ae8676a68ac3b226f8ba489a46362623ce",
       "tokenWindow126CatatanClaude": 307028421,
+      "totalKataApprox": 194842823,
+      "totalTokenBPEResmi": 303917157,
       "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-ensiklopedia-bersih"
     },
     {
       "rak": "K2 korpus-dialog-daerah-bersih",
       "totalDokumen": 291743,
       "sizeByteGz": 77112865,
-      "totalKataApprox": 36174934,
+      "sha256": "9496236e67a700708638702791b3720be94d16cdef018b0fe4fb068b02a69ef2",
+      "totalKataApprox": 38349877,
+      "totalTokenBPEResmi": 84953214,
       "statusArsipBersih": "sudah di Release kanonik"
     },
     {
@@ -24,13 +28,17 @@
       "totalDokumen": 97548,
       "sizeByteGz": 47189973,
       "sha256": "3ac448424de5b2a0242855f14c25c2b6f643eb83be9b3f1093d6b4c426e64a79",
+      "totalKataApprox": 20202119,
+      "totalTokenBPEResmi": 32010503,
       "statusArsipBersih": "SUDAH diarsipkan ke tag korpus-pelengkap-bersih"
     }
   ],
   "jilid2": "TIDAK dihitung — data berisiko, tidak kanonik",
   "madlad400id": "RETIRE — sample 200 baris web-crawl (judi/forex/berita), tidak masuk K1",
-  "tokenResmiDiRelease": "hanya catatan Claude jilid1 307028421; K1/K2/K3 belum dihitung ulang tokenizer ronde ini",
+  "tokenResmiDiRelease": "SUDAH diisi Claude 2026-09-01 - dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368) langsung dari gzip Release live, SHA256 dicocokkan dulu terhadap digest asset (K1 07502ad4..., K2 9496236e..., K3 3ac44842...) sebelum dihitung - bukan tebakan/ekstrapolasi ukuran gzip.",
+  "totalTokenBPEResmiGabungan": 420880874,
   "targetGerbang": 1000000000,
   "targetTercapai": false,
-  "catatan": "Angka 750 juta lama TIDAK dipakai lagi karena termasuk jilid2."
+  "kekuranganToken": 579119126,
+  "catatan": "Angka 750 juta lama TIDAK dipakai lagi karena termasuk jilid2. Angka BPE resmi (420.880.874) LEBIH RENDAH dari totalKataApprox jumlahan kasar karena field lama 'tokenWindow126CatatanClaude' K1 (307 juta) dihitung dengan window streaming 126 kata/chunk dari sesi training lama, BUKAN via BPE encode penuh per dokumen seperti totalTokenBPEResmi di sini - dua metode berbeda, jangan dijumlah silang."
 }

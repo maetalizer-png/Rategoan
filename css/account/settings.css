@@ -99,6 +99,13 @@
   background: var(--rg-ring);
 }
 
+.set-privacy-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--rg-muted);
+  padding: 8px 2px 2px;
+}
+
 .set-row.danger span {
   color: var(--rg-danger);
 }
