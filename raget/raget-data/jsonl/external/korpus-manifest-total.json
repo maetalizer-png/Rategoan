@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-01T13:50:00Z",
-  "updatedAt": "2026-09-01T20:10:00Z",
+  "updatedAt": "2026-09-01T22:55:29Z",
   "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah).",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -94,5 +94,11 @@
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": false,
   "kekuranganTokenKanonik": 528609953,
-  "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang."
+  "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang.",
+  "tokenKanonikPerintahClaude": 471390047,
+  "madlad400id": {
+    "keputusan": "RETIRE",
+    "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
+    "k1DokumenTetap": 759587
+  }
 }
