@@ -5,7 +5,7 @@
   <img alt="No Backend" src="https://img.shields.io/badge/backend-none-blue?style=flat-square">
   <img alt="No Build Step" src="https://img.shields.io/badge/build%20step-none-blue?style=flat-square">
   <img alt="PWA" src="https://img.shields.io/badge/type-PWA-informational?style=flat-square">
-  <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%20100%25%20lolos-success?style=flat-square">
+  <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%2099.58%25%20lolos-success?style=flat-square">
   <img alt="License" src="https://img.shields.io/badge/license-starter%20kit%20(personal%2Fkomersial)-lightgrey?style=flat-square">
   <a href="https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 </p>
@@ -135,7 +135,11 @@ Loader: `raget-agents/dataries-registry.js` (fetch JSON → bentuk `{text, metad
 Domain antara lain: negara, kota, bahasa, tokoh, sapaan, sains, sejarah, wisata, kuliner/makanan,
 olahraga, etika, minuman, marplace, lingo, ekonomi, paluang, penemuan, alam, seni-budaya,
 plus `greeting/` & `obrolan-ringan/` untuk template chat.
-`json/knowledge/` = factoid umum. Korpus train neural = Release + `jsonl/`. Checkpoint 50/100M di git; 200M di Release.
+`json/knowledge/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
+`korpus-ensiklopedia-bersih`, K2 `korpus-dialog-daerah-bersih`, K3 `korpus-pelengkap-bersih`,
+lihat `PRD-DATA-RELEASE.md`) — **420.880.874 token BPE resmi** (tokenizer proyek asli, vocab
+30.368, dihitung ulang penuh dari gzip live 2026-09-01, bukan tebakan ukuran file) per
+`korpus-manifest-total.json`. Checkpoint 50/100M di git; 200M di Release.
 
 **Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
 `.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
@@ -163,12 +167,15 @@ sepupu [kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-) (`kese
 **Status jujur saat ini**: bobot **SUDAH dilatih nyata** (bukan inisialisasi acak) - tier
 "lokal-ringan" (50M, default) dan "lokal-berat" (100M) sama-sama memuat checkpoint keluarga
 `massive*` (vocab BPE 30.368 satu tokenizer untuk semua ukuran) hasil training gradient
-descent sungguhan pada korpus gabungan Rategoan (ribuan step, lihat
-`raget-devlog/neural/training-report-*.json` per checkpoint untuk angka pasti). Output
-sudah gramatikal (kalimat Bahasa Indonesia bersambung, tanda baca wajar) tapi **belum akurat
-secara faktual** dan belum konvergen penuh - training lanjutan berjalan lewat Colab GPU,
-bukan di browser. Label "Neural Lokal (Eksperimental)" di UI tetap dipertahankan karena
-kualitas belum lulus gerbang produksi, bukan karena bobotnya acak.
+descent sungguhan pada korpus gabungan Rategoan. Held-out perplexity checkpoint 100M turun
+konsisten tiap ronde training (1272,30 → 525,05 di ronde terakhir, lihat
+`raget-devlog/neural/training-report-*.json` per checkpoint untuk angka pasti) — bukti
+model memang belajar sesuatu — **tapi output generasi masih berupa rangkaian kata belum
+gramatikal** (`fullEpochsCompleted: 0` di semua laporan sejauh ini, model belum pernah
+melihat seluruh korpus satu putaran penuh). Karena inilah **mesin template (rule-based)
+tetap default produksi**, bukan neural — lihat `PRD-PRODUKSI-READY.md` untuk detail
+lengkap definisi "production ready" dua-lapisan. Label "Neural Lokal (Eksperimental)" di
+UI dipertahankan sampai generasi benar-benar koheren, bukan cuma PPL rendah.
 
 **Lanjutkan training di Colab (klik-langsung, tanpa paste manual)**:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb)
@@ -185,21 +192,23 @@ node raget/raget-tools/build-neural-checkpoint.mjs   # bangun ulang checkpoint d
 ```
 
 Rencana lanjutan (training lebih banyak step, korpus lebih besar, gerbang kualitas sebelum
-label eksperimental dilepas) ada di roadmap vNext dan `raget-tools/CHECKPOINT-POLICY.md`.
+label eksperimental dilepas) ada di `PRD-PRODUKSI-READY.md` §7 dan
+`raget-tools/CHECKPOINT-POLICY.md`.
 
 ## PANEN DATASET (1 KLIK)
 
 Tab **Actions** → **panen** → **Run workflow**.
 
 Workflow `.github/workflows/panen.yml` menjalankan `tools/panen_hf.py`: panen teks Bahasa
-Indonesia dari HuggingFace (MADLAD-400 id sebagai lumbung utama - dibaca langsung dari file
-mentah repo karena loading-script Python-nya sudah tidak didukung `datasets` versi baru, +
-OSCAR id/Wikipedia id via streaming), filter `lang=id`, bersihkan + dedup, lalu upload ke Release **staging**
-(tag `panen-<dataset>` — bukan tag kanonik, tetap butuh review manual sesuai
+Indonesia dari HuggingFace, filter `lang=id`, bersihkan + dedup, lalu upload ke Release
+**staging** (tag `panen-<dataset>` — bukan tag kanonik, wajib review manual sesuai
 `PRD-DATA-RELEASE.md` §5 sebelum masuk korpus training). Tidak perlu secret manual — token
-diambil otomatis dari `secrets.GITHUB_TOKEN` bawaan GitHub Actions (workflow sudah diberi izin
-`contents: write`). Auto-resume lewat `progress.json` yang disimpan di tag Release yang sama —
-jalankan ulang workflow-nya kapan saja untuk melanjutkan dari titik terakhir.
+diambil otomatis dari `secrets.GITHUB_TOKEN` bawaan GitHub Actions. Auto-resume lewat
+`progress.json` yang disimpan di tag Release yang sama.
+
+**Catatan jujur**: panen MADLAD-400 pertama (`panen-madlad400-id`, 150k dokumen) sudah
+di-review 2026-09-01 — isinya web-crawl umum (judi/forex/blog), TIDAK lolos, di-retire, tidak
+masuk K1. Review manual tetap wajib untuk setiap hasil panen baru, bukan formalitas.
 
 ## Kualitas & Pengujian
 
@@ -214,9 +223,11 @@ Setiap perubahan lewat dua gerbang berurutan sebelum dianggap selesai:
    yang sudah berjalan). Tanpa dependency `@eslint/js`/`globals`, konsisten
    dengan prinsip "tanpa build step" — ini murni alat verifikasi dev-time.
 2. **Bench Playwright** (`raget/raget-tools/run-bench.mjs`) — **1.180
-   kasus** core-suite dengan target lolos ≥97% (saat ini 100%), plus 10
-   kasus stub informatif (butuh attach file nyata, tidak dihitung ke
-   target).
+   kasus** core-suite dengan target lolos ≥97% (**99,58% — 1.175/1.180**
+   per 2026-09-01, dijalankan penuh lewat `run-bench-chunked.mjs`, 0
+   error konsol), plus 10 kasus stub informatif (butuh attach file
+   nyata, tidak dihitung ke target). 5 kegagalan tercatat dan
+   diklasifikasi di `PRD-PRODUKSI-READY.md` §2 (bukan disembunyikan).
 
 Skor kualitas gabungan (Q) dan komponen K/A/U/D/V diukur lewat
 `raget/raget-tools/measure-kv.mjs` dengan komposisi 100 kueri tetap agar
@@ -265,5 +276,10 @@ Kerangka aplikasi dan otak AI Raget sudah dalam tahap pengembangan
 aktif dan berfungsi penuh secara lokal, dengan deployment produksi terverifikasi
 berjalan di Vercel. Pengembangan berjalan dalam ronde inkremental yang
 masing-masing didokumentasikan di `raget/raget-devlog/` — riwayat lengkapnya,
-termasuk kelemahan yang belum tuntas dan rencana lanjutan, tercatat apa
-adanya di sana alih-alih di roadmap statis yang cepat basi.
+termasuk kelemahan yang belum tuntas, tercatat apa adanya di sana.
+
+**Definisi "production ready" dan checklist terverifikasi** (bukan klaim tanpa bukti) ada
+di [`PRD-PRODUKSI-READY.md`](PRD-PRODUKSI-READY.md) — dokumen kerja tunggal yang
+menggabungkan audit arsitektur, kelengkapan intent rule-based, angka bench nyata, dan status
+korpus/neural per ronde. Aturan mengikat struktur data Release ada di
+[`PRD-DATA-RELEASE.md`](PRD-DATA-RELEASE.md).
