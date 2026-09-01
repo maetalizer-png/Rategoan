@@ -1,4 +1,9 @@
-const VALID_MODES = ['lokal-ringan', 'lokal-berat', 'server'];
+const VALID_MODES = ['lokal-ringan', 'lokal-berat', 'lokal-super', 'server'];
+// lokal-super (Raget 200M) sengaja TIDAK ikut cycle() toggle cepat di
+// Settings - mode itu cuma boleh aktif lewat alur opt-in unduh eksplisit
+// di pemilih model (js/sheets/models.js), bukan tombol geser biasa yang
+// bisa memicu unduhan ~163MB tanpa sadar.
+const CYCLE_MODES = ['lokal-ringan', 'lokal-berat', 'server'];
 
 export const llmMode = {
   KEY_MODE: 'raget_llm_mode',
@@ -18,8 +23,9 @@ export const llmMode = {
     localStorage.setItem(this.KEY_URL, String(url || '').trim().replace(/\/+$/, ''));
   },
   cycle() {
-    const idx = VALID_MODES.indexOf(this.mode());
-    const next = VALID_MODES[(idx + 1) % VALID_MODES.length];
+    const current = this.mode();
+    const idx = CYCLE_MODES.indexOf(current);
+    const next = CYCLE_MODES[(idx + 1) % CYCLE_MODES.length];
     this.setMode(next);
     return next;
   },

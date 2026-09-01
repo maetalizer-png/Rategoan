@@ -514,7 +514,7 @@ async function respondCore(messages, prompt) {
     reply = await toolsKoleksi.personalize(reply, text);
   }
 
-  if (!plannedFallback && !routerIntent.isClarifyReply(reply)) {
+  if (!plannedFallback && !routerIntent.isClarifyReply(reply) && !llmEngine.isSmalltalkText(text)) {
     const candidate = preSearch.find((r) => !tooSimilar(text, r.text));
     if (candidate && candidate.score >= scorer.CONFIDENCE_THRESHOLD) {
       reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';

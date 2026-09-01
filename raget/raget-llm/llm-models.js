@@ -16,6 +16,14 @@ const MODELS = Object.freeze([
     engineClass: 'local-neural',
     neuralTier: 'lokal-berat',
   }),
+  Object.freeze({
+    id: 'raget-neural-200m',
+    name: 'Raget 200M',
+    engineClass: 'local-neural',
+    neuralTier: 'lokal-super',
+    desc: 'Eksperimental, belum koheren penuh · unduh ±163 MB sekali',
+    downloadSizeMB: 163,
+  }),
 ]);
 
 function find(id) {

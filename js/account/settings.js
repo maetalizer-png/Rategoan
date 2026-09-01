@@ -103,6 +103,8 @@ export const settings = {
       val.textContent = url ? 'Server (' + url.replace(/^https?:\/\//, '').slice(0, 24) + ')' : 'Server (URL belum diisi)';
     } else if (mode === 'lokal-berat') {
       val.textContent = 'Lokal-Berat (100M)';
+    } else if (mode === 'lokal-super') {
+      val.textContent = 'Lokal-Super (200M, eksperimental)';
     } else {
       val.textContent = 'Lokal-Ringan (50M)';
     }

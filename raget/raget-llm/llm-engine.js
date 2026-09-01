@@ -412,6 +412,13 @@ function isWeak(text) {
   return text === FALLBACK_TEXT || String(text || '').startsWith(GENERIC_PREFIX);
 }
 
+function isSmalltalkText(text) {
+  const t = String(text || '');
+  if (!t.trim()) return false;
+  const slang = normalizeSlang(t);
+  return Object.keys(SMALLTALK_TRIGGERS).some((k) => SMALLTALK_TRIGGERS[k].test(t) || SMALLTALK_TRIGGERS[k].test(slang));
+}
+
 export const llmEngine = Object.freeze({
   init,
   generate,
@@ -419,6 +426,7 @@ export const llmEngine = Object.freeze({
   useSapaan,
   isFallback,
   isWeak,
+  isSmalltalkText,
   get ready() {
     return initialized;
   },

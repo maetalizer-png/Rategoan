@@ -19,6 +19,10 @@ export const account = {
     const initial = (local.charAt(0) || 'U').toUpperCase();
     btn.classList.add('logged');
     btn.setAttribute('aria-label', 'Akun');
-    btn.innerHTML = '<span class="account-initial">' + initial + '</span>';
+    btn.innerHTML = '';
+    const span = document.createElement('span');
+    span.className = 'account-initial';
+    span.textContent = initial;
+    btn.appendChild(span);
   },
 };

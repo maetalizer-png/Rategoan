@@ -5,7 +5,12 @@ const SERVER_TIMEOUT_MS = 8000;
 const CHECKPOINT_BY_TIER = {
   ringan: '../raget-data/neural/raget-neural-massive50m.safetensors',
   berat: '../raget-data/neural/raget-neural-massive100m.safetensors',
+  // super = tier "Raget 200M": TIDAK dibundel di repo (>100MB, kebijakan
+  // CHECKPOINT-POLICY.md), diunduh opt-in dari Release GitHub. sw.js
+  // meng-cache origin ini supaya offline setelah unduhan pertama.
+  super: 'https://github.com/maetalizer-png/Rategoan/releases/download/checkpoint-200m/raget-neural-massive200m.safetensors',
 };
+const PACKAGE_SIZE_MB = { super: 163 };
 
 let cache = null;
 let loadedTier = null;
@@ -51,6 +56,16 @@ function ready() {
   return loadedTier !== null;
 }
 
+function tierReady(tier) {
+  return loadedTier === tier;
+}
+
+// Unduhan opt-in eksplisit (dipanggil dari UI pemilih model setelah user
+// konfirmasi, BUKAN otomatis dari alur chat) - dipakai tier "super" (200M).
+function downloadTier(tier) {
+  return ensureTier(tier);
+}
+
 async function generateWithTier(tier, prompt) {
   const ok = await ensureTier(tier);
   if (!ok) return null;
@@ -69,6 +84,15 @@ async function generateWithTier(tier, prompt) {
 }
 
 async function generateLocal(prompt, preferredTier) {
+  if (preferredTier === 'super') {
+    // Tidak pernah memicu unduhan 163MB diam-diam dari alur chat - hanya
+    // pakai tier super kalau memang SUDAH diunduh+dimuat lewat opt-in UI.
+    if (tierReady('super')) {
+      const superText = await generateWithTier('super', prompt);
+      if (superText) return superText;
+    }
+    return generateWithTier('ringan', prompt);
+  }
   if (preferredTier === 'berat') {
     const cap = llmMode.deviceCapability();
     if (!(cap.known && cap.strong === false)) {
@@ -113,6 +137,9 @@ async function generate(messages, prompt) {
   if (mode === 'lokal-berat') {
     return generateLocal(prompt, 'berat');
   }
+  if (mode === 'lokal-super') {
+    return generateLocal(prompt, 'super');
+  }
   return generateLocal(prompt, 'ringan');
 }
 
@@ -132,4 +159,7 @@ export const neuralProvider = Object.freeze({
   ready,
   generate,
   getStats,
+  tierReady,
+  downloadTier,
+  packageSizeMB: PACKAGE_SIZE_MB,
 });
