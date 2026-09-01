@@ -62,7 +62,14 @@ export const models = {
       toast.show('Mengunduh ' + m.name + ' (±' + m.downloadSizeMB + ' MB)...');
       const ok = await neuralProvider.downloadTier(tierKey);
       if (!ok) {
-        toast.show('Gagal mengunduh ' + m.name + '. Coba lagi saat koneksi stabil.');
+        // 'cors' = browser memblokir unduhan lintas-origin ke hosting file
+        // (dikonfirmasi, bukan dugaan) - beri tahu apa adanya, jangan
+        // menyuruh coba lagi kalau memang tidak akan pernah berhasil.
+        toast.show(
+          neuralProvider.lastDownloadError === 'cors'
+            ? 'Belum bisa diunduh: browser memblokir akses ke sumber model (batasan keamanan hosting). Bukan masalah koneksi Anda - tim sedang siapkan hosting yang kompatibel.'
+            : 'Gagal mengunduh ' + m.name + '. Coba lagi saat koneksi stabil.'
+        );
         return;
       }
     }

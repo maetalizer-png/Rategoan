@@ -23,7 +23,10 @@ async function loadEngine() {
   return cache;
 }
 
+let lastDownloadError = null;
+
 async function doInitTier(tier) {
+  lastDownloadError = null;
   try {
     const { RATEGOAN } = await loadEngine();
     const res = await fetch(new URL(CHECKPOINT_BY_TIER[tier], import.meta.url));
@@ -34,6 +37,14 @@ async function doInitTier(tier) {
     return true;
   } catch (e) {
     if (loadedTier === tier) loadedTier = null;
+    // TypeError tanpa status HTTP = fetch gagal sebelum ada respons -
+    // pada tier 'super' ini SELALU berarti diblokir CORS oleh hosting
+    // GitHub Release (dikonfirmasi lewat pengujian langsung: asset
+    // Release GitHub tidak pernah mengirim header Access-Control-Allow-
+    // Origin), BUKAN sekadar koneksi lambat/terputus - retry TIDAK akan
+    // pernah berhasil sampai file dipindah ke hosting yang mendukung
+    // CORS (mis. Hugging Face Hub).
+    lastDownloadError = e instanceof TypeError ? 'cors' : 'lainnya';
     return false;
   }
 }
@@ -162,4 +173,7 @@ export const neuralProvider = Object.freeze({
   tierReady,
   downloadTier,
   packageSizeMB: PACKAGE_SIZE_MB,
+  get lastDownloadError() {
+    return lastDownloadError;
+  },
 });

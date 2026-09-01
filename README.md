@@ -15,12 +15,12 @@ Seluruh percakapan, memori, dan basis pengetahuan berjalan langsung di
 perangkat pengguna lewat Progressive Web App (PWA) murni HTML/CSS/JavaScript
 modular (ES6 Modules), tanpa framework dan tanpa build step.
 
-Satu repo ini berisi dua produk yang saling terhubung:
-
-| Produk | Deskripsi |
-|---|---|
-| **Rategoan** | Kerangka chat inti dengan **Raget**, mesin balasan template/rule-based (bukan model bahasa besar). |
-| **Pitutur** | PWA turunan berdiri sendiri di [`fitur/pitutur/`](fitur/pitutur/), studio siaran audio yang membaca sumber data yang sama. |
+Repo ini adalah **RATEGOAN**, kerangka chat inti dengan **Raget**, mesin
+balasan template/rule-based (bukan model bahasa besar). **Pitutur** adalah
+salah satu fitur RATEGOAN — studio siaran audio yang membaca sumber data
+yang sama — dibangun sebagai PWA turunan di
+[`fitur/pitutur/`](fitur/pitutur/) supaya bisa dipakai mandiri/offline,
+bukan produk terpisah.
 
 ## Daftar Isi
 
@@ -93,7 +93,7 @@ raget/                            induk seluruh otak AI Raget
                                      json/ 21+ domain (negara,kota,tokoh,sapaan,…) · jsonl/ korpus · neural/ checkpoint
   raget-tools/                    skrip verifikasi: bench runner (+bench.json), pengukuran KV, devlog, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-fitur/                            PWA turunan berdiri sendiri
+fitur/                            fitur RATEGOAN, masing-masing juga PWA mandiri/offline
   pitutur/                          studio siaran audio
 docs/                             panduan kustomisasi & lisensi (starter kit)
 ```
