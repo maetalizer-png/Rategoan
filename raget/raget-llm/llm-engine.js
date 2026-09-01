@@ -1,6 +1,6 @@
 import { hashText, pickVariant, detectTone, normalizeSlang } from '../../utils/text.js';
 
-const FALLBACK_TEXT = 'Maaf, saya belum paham. Coba ulangi dengan kata lain?';
+const FALLBACK_TEXT = 'Maaf, saya belum yakin. Coba sebut lebih jelas: sekolah, layanan, rumah, atau kabar hari ini?';
 const GENERIC_PREFIX = 'Saya catat:';
 
 const TIME_GREETING_RE =
@@ -21,6 +21,11 @@ const QUESTION_WORDS = [
 ];
 
 const SMALLTALK_TRIGGERS = {
+  izin: /\bizin\s+(tidak\s+masuk|kelas|kerja)|minta\s+izin\b/i,
+  tugas: /\b(tugas|deadline|makalah|presentasi|pekerjaan\s+rumah|pr\s+menumpuk)\b/i,
+  layanan: /\b(layanan|loket|antr[ie]|berkas|ktp|kk\b|pengaduan|komplain|dukcapil|calo)\b/i,
+  rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati|listrik\s+padam|listrik\s+mati)\b/i,
+  sekolah: /\b(sekolah|kelas|ulangan|pr\b|pelajaran|mapel|guru|wali\s*kelas|osis)\b/i,
   siapa: /siapa\s+(kamu|anda|lu|elo)\b|kamu\s+siapa|kenalan\s+dong/i,
   kabar: /\bkabar\s*(kamu|anda|lu|elu|mu)?\b|\b(apa|gimana|bagaimana)\s+kabar\b|how\s+are\s+you/i,
   terima_kasih: /terima\s*kasih|makasih|thanks|thank\s*you|trims\b/i,
@@ -29,19 +34,14 @@ const SMALLTALK_TRIGGERS = {
   bantu: /\b(tolong|bisa)\s+(bantu|bantuan)\b|\bbantu(in|kan)?\s+(saya|aku)\b|\bbutuh\s+bantuan\b|\bbantuan\s+(dong|ya)\b/i,
   maaf: /^(maaf|sorry)\b|\bmaaf(kan)?\s+(ya|dong)/i,
   lagi_apa: /\b(lagi\s+apa|ngapain\s+(kamu|sekarang)|kamu\s+lagi\s+(apa|ngapain))\b/i,
-  sekolah: /\b(sekolah|kelas|ulangan|pr\b|pelajaran|mapel|guru|wali\s*kelas|osis)\b/i,
-  tugas: /\b(tugas|deadline|makalah|presentasi|pekerjaan\s+rumah)\b/i,
-  layanan: /\b(layanan|loket|antr[ie]|berkas|ktp|pengaduan|komplain|dukcapil)\b/i,
   capek: /\b(capek|lelah|ngantuk\s+berat|kehabisan\s+tenaga)\b/i,
   bosen: /\b(bosen|bosan|gabut|jenuh)\b/i,
-  izin: /\bizin\s+(tidak\s+masuk|kelas|kerja)|minta\s+izin\b/i,
   pasar: /\b(pasar|tawar|warung|dagang)\b/i,
   transport: /\b(angkot|ojek|kereta|macet|parkir|helm|mudik)\b/i,
   sehat: /\b(demam|pusing|obat|klinik|sakit)\b/i,
   uang: /\b(utang|pinjam|tagihan|listrik|belanja|diskon)\b/i,
   tetangga: /\b(tetangga|kerja\s*bakti|gang|iuran\s*rt)\b/i,
   kerja: /\b(kantor|rapat|lembur|wfh|atasan)\b/i,
-  rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati)\b/i,
 };
 
 const SMALLTALK_FALLBACK = {
@@ -72,20 +72,39 @@ const SAPAAN_FALLBACK_TEXT = 'Halo! Ada yang bisa saya bantu?';
 
 let sapaanCache = null;
 
+function addSmalltalk(idx, key, templates, formal) {
+  if (!key) return;
+  const cur = idx.smalltalk[key] || { templates: [], templatesFormal: null };
+  const extra = (templates || []).filter(Boolean);
+  cur.templates = (cur.templates || []).concat(extra);
+  if (formal && formal.length) cur.templatesFormal = (cur.templatesFormal || []).concat(formal);
+  idx.smalltalk[key] = cur;
+}
+
+const JENIS_TO_KEY = {
+  sekolah: 'sekolah',
+  layanan: 'layanan',
+  harian: 'kabar',
+  kerja: 'kerja',
+  kesehatan: 'sehat',
+  keluarga: 'kabar',
+  makan: 'kabar',
+  cuaca: 'kabar',
+  digital: 'kemampuan',
+};
+
 function indexSapaan(raw) {
   const idx = { time: {}, plain: [], smalltalk: {}, followup: { greeting: [], smalltalk: [] } };
   for (const e of Array.isArray(raw) ? raw : []) {
     const m = e && e.meta ? e.meta : {};
-    if (m.jenis === 'waktu' && m.periode) idx.time[m.periode] = m.variants && m.variants.length ? m.variants : [e.teks];
-    else if (m.jenis === 'plain') idx.plain = m.variants && m.variants.length ? m.variants : [e.teks];
-    else if (m.jenis === 'smalltalk' && m.key)
-      idx.smalltalk[m.key] = {
-        templates: m.variants && m.variants.length ? m.variants : [e.teks],
-        templatesFormal: m.variantsFormal || null,
-      };
+    const teksList = m.variants && m.variants.length ? m.variants : e && e.teks ? [e.teks] : [];
+    if (m.jenis === 'waktu' && m.periode) idx.time[m.periode] = teksList.length ? teksList : [e.teks];
+    else if (m.jenis === 'plain') idx.plain = teksList.length ? teksList : [e.teks];
+    else if (m.jenis === 'smalltalk' && m.key) addSmalltalk(idx, m.key, teksList, m.variantsFormal || null);
+    else if (JENIS_TO_KEY[m.jenis]) addSmalltalk(idx, m.key || JENIS_TO_KEY[m.jenis], teksList, m.variantsFormal || null);
     else if (m.jenis === 'followup') {
-      idx.followup.greeting = m.greeting || [];
-      idx.followup.smalltalk = m.smalltalk || [];
+      idx.followup.greeting = (idx.followup.greeting || []).concat(m.greeting || []);
+      idx.followup.smalltalk = (idx.followup.smalltalk || []).concat(m.smalltalk || []);
     }
   }
   return idx;
@@ -96,12 +115,38 @@ function ensureSapaan() {
   return sapaanCache;
 }
 
+const SAPAAN_EXTRA_FILES = [
+  'sapaan-sekolah.json',
+  'sapaan-layanan.json',
+  'sapaan-harian-sektor.json',
+  'sapaan-kerja.json',
+  'sapaan-kesehatan.json',
+  'sapaan-keluarga.json',
+  'sapaan-makan.json',
+  'sapaan-cuaca.json',
+  'sapaan-digital.json',
+  'sapaan-produksi-ready.json',
+];
+
 async function loadSapaan() {
   if (sapaanCache) return sapaanCache;
   try {
-    const res = await fetch(new URL('../raget-data/json/sapaan/sapaan.json', import.meta.url));
-    const raw = res.ok ? await res.json() : [];
-    sapaanCache = indexSapaan(raw);
+    const base = new URL('../raget-data/json/sapaan/', import.meta.url);
+    const mainRes = await fetch(new URL('sapaan.json', base));
+    const raw = mainRes.ok ? await mainRes.json() : [];
+    const extraLists = await Promise.all(
+      SAPAAN_EXTRA_FILES.map(async (name) => {
+        try {
+          const r = await fetch(new URL(name, base));
+          if (!r.ok) return [];
+          const data = await r.json();
+          return Array.isArray(data) ? data : [];
+        } catch (err) {
+          return [];
+        }
+      })
+    );
+    sapaanCache = indexSapaan(raw.concat(...extraLists));
   } catch (e) {
     sapaanCache = indexSapaan([]);
   }
