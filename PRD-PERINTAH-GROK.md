@@ -1,8 +1,20 @@
 # PRD — Perintah untuk Grok: Olah Data Release Terbaru + Bereskan Branch Staging
 
-Status: **BERLAKU, mengikat**. Ditulis oleh Claude setelah audit langsung
-ke GitHub Release, tag, dan branch repo ini (2026-09-01). Semua angka di
-bawah **diverifikasi**, bukan perkiraan — lihat cara cek di tiap bagian.
+Status: **SEBAGIAN BESAR SUDAH DIKERJAKAN** (dikonfirmasi Claude
+2026-09-01, sesi terpisah, lewat commit nyata + `docs/STATUS-KORPUS-LISENSI.md`
+yang ditulis ulang). Bagian A dan B.1-B.4 di bawah **selesai**: sample
+review `panen-madlad400-id` selesai (isi web-crawl judi/forex/blog,
+di-retire, tidak masuk K1), `staging/korpus-parts` sudah diangkat ke
+K1/K3. **Belum dikerjakan**: B.5 (hapus branch `staging/korpus-parts`)
+— branch masih ada, sengaja dibiarkan sampai dikonfirmasi eksplisit
+tidak ada lagi pekerjaan aktif yang menyentuhnya. Detail lengkap status
+terkini + temuan tambahan ada di `PRD-PRODUKSI-READY.md`.
+
+Ditulis oleh Claude setelah audit langsung ke GitHub Release, tag, dan
+branch repo ini (2026-09-01). Semua angka di bawah **diverifikasi**,
+bukan perkiraan — lihat cara cek di tiap bagian. Dipertahankan sebagai
+catatan sejarah tugas, bukan dihapus, karena masih jadi acuan aktif
+pihak yang mengerjakannya.
 
 Alasan dokumen ini ditujukan ke **Grok** (bukan dikerjakan Claude sendiri):
 sesi sandbox Claude Code Remote tidak diizinkan publish/upload Release
