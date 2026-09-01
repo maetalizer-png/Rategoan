@@ -5,7 +5,7 @@
   <img alt="No Backend" src="https://img.shields.io/badge/backend-none-blue?style=flat-square">
   <img alt="No Build Step" src="https://img.shields.io/badge/build%20step-none-blue?style=flat-square">
   <img alt="PWA" src="https://img.shields.io/badge/type-PWA-informational?style=flat-square">
-  <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%2099.58%25%20lolos-success?style=flat-square">
+  <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%2099.66%25%20lolos-success?style=flat-square">
   <img alt="License" src="https://img.shields.io/badge/license-starter%20kit%20(personal%2Fkomersial)-lightgrey?style=flat-square">
   <a href="https://colab.research.google.com/github/maetalizer-png/Rategoan/blob/main/colab/latih-gpu.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 </p>
@@ -225,10 +225,10 @@ Setiap perubahan lewat dua gerbang berurutan sebelum dianggap selesai:
    yang sudah berjalan). Tanpa dependency `@eslint/js`/`globals`, konsisten
    dengan prinsip "tanpa build step" — ini murni alat verifikasi dev-time.
 2. **Bench Playwright** (`raget/raget-tools/run-bench.mjs`) — **1.180
-   kasus** core-suite dengan target lolos ≥97% (**99,58% — 1.175/1.180**
+   kasus** core-suite dengan target lolos ≥97% (**99,66% — 1.176/1.180**
    per 2026-09-01, dijalankan penuh lewat `run-bench-chunked.mjs`, 0
    error konsol), plus 10 kasus stub informatif (butuh attach file
-   nyata, tidak dihitung ke target). 5 kegagalan tercatat dan
+   nyata, tidak dihitung ke target). 4 kegagalan tercatat dan
    diklasifikasi di `PRD-PRODUKSI-READY.md` §2 (bukan disembunyikan).
 
 Skor kualitas gabungan (Q) dan komponen K/A/U/D/V diukur lewat

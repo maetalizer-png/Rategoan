@@ -80,25 +80,31 @@ lapisan 1.
       **Bukan badge lama** — dijalankan ulang penuh ronde ini setelah
       `run-bench.mjs` sendiri sempat ditemukan rusak (login butuh
       password, skrip cuma isi email) dan diperbaiki lebih dulu.
-      **Dijalankan ULANG SEKALI LAGI** setelah fix router KTP (poin
-      lapisan 1 di atas) untuk verifikasi nol regresi: hasil identik
-      **1175/1180 = 99.58%** — set kegagalan CORE berubah komposisi
-      (KTP hilang dari daftar gagal, TAPI muncul 1 kegagalan baru
-      `"bro, kabar?"` yang TIDAK berkaitan dengan fix router KTP —
-      domain "kabar" smalltalk, follow-up note mengandung kata "Anda"
-      padahal `notContains` melarangnya; kemungkinan efek data
-      sapaan/layanan baru dari commit pihak lain yang masuk selama
-      sesi ini, BELUM didiagnosis/diperbaiki ronde ini — kandidat
-      ronde depan). Bukti mentah: 4 chunk lolos semua (`ok:true`), log
-      lengkap ada di riwayat kerja sesi ini.
+      **Dijalankan ULANG 2x lagi** setelah perbaikan berturut-turut.
+      Ronde 2 (setelah fix router KTP): 1175/1180 = 99,58% - KTP hilang
+      dari daftar gagal, TAPI muncul 1 kegagalan baru tak terkait
+      `"bro, kabar?"` (domain smalltalk "kabar", follow-up note
+      mengandung "Anda" padahal `notContains` melarangnya). Ronde 3
+      (setelah fix `isSmalltalkText()` untuk bug "bro, kabar?" - lihat
+      commit `6b0e380`): **1176/1180 = 99,66% [TARGET TERCAPAI],
+      naik dari 99,58% awal ronde ini**, nol regresi (semua 4 chunk
+      `ok:true`). Sisa 4 kegagalan: 3 kasus superlatif geografi
+      (root cause presisi ditemukan, lihat §2, sengaja belum
+      ditambal - butuh data akurat) + 1 self-review (belum
+      diinvestigasi). Bukti mentah log lengkap ada di riwayat kerja
+      sesi ini.
 - [x] **README tidak klaim 100% bench tanpa angka baru** — README
       ditulis ulang ronde ini (lihat §6), angka bench yang dicantumkan
-      adalah 99.58% CORE-SUITE di atas, dengan tanggal.
+      adalah 99,66% CORE-SUITE (angka final ronde ini), dengan tanggal.
 - [x] **K1 K2 K3 ada `estimasiToken` tokenizer proyek.** Diisi ronde ini
       di `korpus-manifest-total.json` (`totalTokenBPEResmi` per rak,
       dihitung dari gzip live yang SHA256-nya dicocokkan dulu terhadap
       Release, BUKAN tebakan ukuran gzip) — K1 303.917.157, K2
-      84.953.214, K3 32.010.503, total **420.880.874 token BPE**.
+      85.003.080 (diukur ulang setelah asset direfresh dirigen), K3
+      32.010.503, total **420.930.740 token BPE**. Ini SATU-SATUNYA
+      angka token valid untuk training - dikonfirmasi ulang eksplisit
+      ke dirigen ronde ini (lihat catatan klarifikasi di
+      `PRD-PERINTAH-GROK.md` §1).
 - [x] **Manifest total hanya rak hidup.** `korpus-manifest-total.json`
       sudah direstrukturisasi dirigen/Grok ronde ini (commit `7ae0cbf`)
       ke 3 rak K1/K2/K3 saja — jilid2 dan skema jilid1-5 lama sudah
@@ -179,14 +185,14 @@ lapisan 1.
 
 ## 2. Temuan bench detail (status per ronde 2026-09-01, terakhir diperbarui)
 
-Riwayat: bench pertama ronde ini 1175/1180=99.58%, 5 gagal (atlantis,
+Riwayat: bench pertama ronde ini 1175/1180=99,58%, 5 gagal (atlantis,
 negara-terkecil-eropa, negara-terbanyak-asia, KTP, self-review). Fix
 router KTP (§1) → bench ulang tetap 1175/1180 tapi KTP hilang dari
 daftar gagal, muncul kegagalan baru tak terkait `"bro, kabar?"`. Fix
-`"bro, kabar?"` (llmEngine.isSmalltalkText — lihat commit `6b0e380`)
-dilakukan ronde ini juga. **Bench final ronde ini belum dijalankan
-ulang saat bagian dokumen ini ditulis** — akan dikonfirmasi di laporan
-akhir chat, bukan diklaim di sini sebelum benar-benar dijalankan.
+`"bro, kabar?"` (llmEngine.isSmalltalkText — commit `6b0e380`) →
+**bench ulang ke-3 (FINAL, dikonfirmasi): 1176/1180 = 99,66% [TARGET
+TERCAPAI]**, naik dari 99,58% di awal ronde ini, nol regresi (4/4
+chunk `ok:true`, 0 console/404 error).
 
 Kegagalan yang MASIH terbuka (didiagnosis presisi ronde ini, BELUM
 diperbaiki — root cause sekarang jauh lebih jelas dari sebelumnya):
