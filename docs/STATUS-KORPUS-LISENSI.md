@@ -1,38 +1,27 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-09-01 malam (Claude, setelah Grok gabung Wikipedia unik ke K1)
+Diperbarui: 2026-09-02 (PRD-PERINTAH-GROK 2 tugas)
 
-## Release aktif
-| Tag | Isi |
-|-----|-----|
-| `korpus-ensiklopedia-bersih` | K1, **759.587 dokumen** (683.516 asli + 76.071 unik dari Wikipedia, digabung Grok ~19:58 UTC), SHA256 `3383bc30…` |
-| `korpus-dialog-daerah-bersih` | K2 dialog+daerah, 291.928 dokumen |
-| `korpus-pelengkap-bersih` | K3 sister project ID, 97.548 dokumen |
-| `checkpoint-100m` | neural 100M |
-| `checkpoint-200m` | neural 200M sesi training ke-2, SHA256 `b5aeb665…`, 171.344.036 B, PPL 1242,11 |
-| `prd-data-release` | pagar PRD |
+## Tugas 2 — SELESAI
+Release `checkpoint-200m`:
+- 171.344.024 B
+- SHA256 `d4aba4d8b20efe52a91d5501666d9b9e7b04aeb1c1d51bf03da40854ce3c681a`
+- PPL 1899,89 → 1068,37 (1787 step / 335,46 menit)
+- Folder `checkpoint-200m/` di git sudah dihapus setelah publish
 
-**Total token BPE kanonik (K1+K2+K3) saat ini: 471.390.047** — lihat
-`raget/raget-data/jsonl/external/korpus-manifest-total.json` untuk rincian
-per rak. Ini SATU-SATUNYA angka valid, naik dari 420.930.740 setelah
-Wikipedia unik masuk K1.
+## Tugas 1 — MADLAD-400: review sample SELESAI, promosi penuh BELUM
+Sample 600 baris dari part 0011 + 0018 + 0027:
+- spam ketat (≥2 frasa judi/forex): **8,8%**
+- 1 frasa spam: 12,3%
+- lolos pola spam: **78,8%**
+- nav/boilerplate Home»: 12,2%
 
-## Panen diproses
+Bukan mayoritas spam menurut filter Claude. Isi tetap web-blog/berita, bukan ensiklopedia kurasi.
+Part di Release ~22 file × ~1,8 GB ≈ 30 GB. Satu part 1,35 GB sempat diunduh dan disaring, lalu workspace ephemeral terhapus sebelum upload K1.
 
-- `panen-madlad400-id` — **RETIRE 2x** (harvest lama 150rb dok: judi/
-  forex/blog; harvest sore 15,2 juta dok/11 part 0000-0010: sample 750
-  baris, spam judi/forex/slot **18,7%**). **PENTING**: sebuah batch BARU
-  (15.272.217 dokumen, part 0011-0021) muncul di Release ~16:21-16:36
-  UTC 2026-09-01, part lama sudah tidak ada di asset — batch ini BELUM
-  direview, kesimpulan retire di atas tidak otomatis berlaku ke batch
-  ini. Instruksi: `PRD-PERINTAH-GROK.md` §3-4.
-- `panen-wikipedia-id` — **SELESAI, digabung sebagian ke K1** (bukan
-  retire). Koreksi atas kesimpulan sementara sebelumnya ("artikel
-  pertama identik K1 → diduga overlap penuh, retire"): Grok melakukan
-  dedupe per-fingerprint yang lebih presisi dan menemukan dari 562.195
-  dokumen, 238.873 duplikat + 247.251 terlalu pendek dibuang, **76.071
-  dokumen benar-benar unik** — digabung ke K1 (lihat baris K1 di atas).
-  Kesimpulan Grok lebih akurat daripada dugaan overlap-penuh awal.
+Keputusan ronde ini: **belum dipromosikan ke K1, belum di-retire.** Perlu mesin dengan disk ≥40 GB untuk saring+dedupe+gabung penuh. Jangan hitung 30 juta dokumen MADLAD sebagai token kanonik.
 
-## Branch
-- `staging/korpus-parts` sudah tidak ada.
+## Kanonik (file Release)
+- K1 759.587 dokumen (setelah unik Wikipedia), gzip 571 MB, SHA `3383bc30…` — token BPE belum dihitung ulang dari 303.917.157 (K1 683.516)
+- K2 291.928 dokumen, 85.003.080 token BPE
+- K3 97.548 dokumen, 32.010.503 token BPE
