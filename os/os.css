@@ -1,0 +1,18 @@
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;color:#fff;font:15px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+body{color-scheme:dark}
+#os{min-height:100%;display:flex;flex-direction:column}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #fff;letter-spacing:.12em;font-size:12px}
+.rail{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #fff}
+.step{padding:10px 8px;font-size:11px;letter-spacing:.06em;text-align:center;border-right:1px solid #fff;opacity:.4}
+.step:last-child{border-right:0}
+.step.on{opacity:1;background:#fff;color:#000}
+.board{flex:1;overflow:auto;padding:20px 16px 96px}
+.log{list-style:none;margin:0;padding:0}
+.log li{margin:0 0 16px;padding:0 0 16px;border-bottom:1px solid #333}
+.log .k{font-size:11px;letter-spacing:.14em;opacity:.55;margin-bottom:6px}
+.log .v{white-space:pre-wrap}
+.composer{position:sticky;bottom:0;display:flex;gap:0;border-top:1px solid #fff;background:#000}
+.composer input{flex:1;background:#000;color:#fff;border:0;padding:16px;font:inherit;outline:none}
+.composer button{background:#fff;color:#000;border:0;padding:0 18px;font:inherit;letter-spacing:.08em;cursor:pointer}
+.composer button:disabled{opacity:.4;cursor:wait}
