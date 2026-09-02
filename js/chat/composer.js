@@ -9,7 +9,6 @@ import { quote } from '../ui/quote.js';
 import { history } from '../history/history.js';
 import { chat } from './chat.js';
 import { attach } from '../sheets/attach.js';
-import { sheets } from '../sheets/sheets.js';
 
 export const composer = {
   autoGrow() {
@@ -62,7 +61,6 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
-    $('btn-model').onclick = () => sheets.openModelInfo();
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {
