@@ -61,6 +61,9 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
+    $('btn-model').onclick = () => {
+      $('model-badge').hidden = !$('model-badge').hidden;
+    };
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {
