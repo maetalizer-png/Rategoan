@@ -1,0 +1,36 @@
+[
+  {
+    "id": "kes-001",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Demam di rumah",
+    "tags": [
+      "demam",
+      "istirahat"
+    ],
+    "teks": "Istirahat, minum air, ukur suhu. Kalau demam tinggi terus, sesak, atau kaku leher, ke fasilitas kesehatan. Ini bukan diagnosis.",
+    "meta": {
+      "jenis": "kesehatan",
+      "variants": [
+        "Jangan makan obat orang lain hanya karena gejalanya mirip."
+      ]
+    }
+  },
+  {
+    "id": "kes-002",
+    "kategori": "kesehatan",
+    "wilayah": null,
+    "nama": "Capek kerja",
+    "tags": [
+      "capek",
+      "istirahat"
+    ],
+    "teks": "Capek setelah kerja biasa. Tidur cukup lebih berguna daripada begadang sambil scroll. Kalau capek bertahan berminggu dan tidak membaik, periksa.",
+    "meta": {
+      "jenis": "kesehatan",
+      "variants": [
+        "Jeda 5 menit tiap satu jam duduk lebih realistis daripada janji olahraga besok."
+      ]
+    }
+  }
+]
