@@ -26,7 +26,7 @@ Bukan mayoritas judi murni, tetapi **mayoritas bukan ensiklopedia**: crawl blog/
 
 Tidak digabung ke K1 (759.587 dokumen tetap). Tidak dihitung ke token kanonik.
 
-Jangan panen ulang sumber MADLAD-400 sampai `deteksi_spam()` (commit `7b8a433`) dipakai di run `panen.yml` dan hasilnya direview lagi.
+Workflow `.github/workflows/panen.yml` sudah dihapus dari repo (2026-09-02) - sumber ini tidak akan dipanen ulang otomatis. Kalau suatu saat mau dipanen manual lagi, wajib pakai `deteksi_spam()` (commit `7b8a433`) dulu.
 
 ## Token
 Basis perintah Claude sebelum tugas ini: 471.390.047.  

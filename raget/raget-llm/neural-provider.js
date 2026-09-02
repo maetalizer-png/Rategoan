@@ -6,9 +6,13 @@ const CHECKPOINT_BY_TIER = {
   ringan: '../raget-data/neural/raget-neural-massive50m.safetensors',
   berat: '../raget-data/neural/raget-neural-massive100m.safetensors',
   // super = tier "Raget 200M": TIDAK dibundel di repo (>100MB, kebijakan
-  // CHECKPOINT-POLICY.md), diunduh opt-in dari Release GitHub. sw.js
-  // meng-cache origin ini supaya offline setelah unduhan pertama.
-  super: 'https://github.com/maetalizer-png/Rategoan/releases/download/checkpoint-200m/raget-neural-massive200m.safetensors',
+  // CHECKPOINT-POLICY.md), diunduh opt-in dari Hugging Face Hub (BUKAN
+  // GitHub Release lagi - asset Release dikonfirmasi tidak pernah kirim
+  // header Access-Control-Allow-Origin, jadi fetch() browser selalu
+  // gagal; HF Hub resolve/main mendukung fetch lintas-origin, sudah
+  // dipakai origin lain di sw.js CDN_PACKAGE_ORIGINS). sw.js meng-cache
+  // origin ini supaya offline setelah unduhan pertama.
+  super: 'https://huggingface.co/maetalizer/rategoan-neural/resolve/main/raget-neural-massive200m.safetensors',
 };
 const PACKAGE_SIZE_MB = { super: 163 };
 

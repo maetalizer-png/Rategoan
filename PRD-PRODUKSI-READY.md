@@ -267,7 +267,7 @@ saling tumpang tindih dengan checklist Grok di §1, tidak diulang):
 | Phase 17-18 Neural/Rule vs Neural | **Sebagian** — training 100M jalan (laporan menyusul), 200M solo belum, benchmark rule-vs-neural sistematis belum ada |
 | Phase 19 Developer experience | **Sebagian** — README ditulis ulang (§6), CONTRIBUTING/CHANGELOG/TESTING terpisah belum dibuat |
 | Phase 20-21 Commercial template/Feature flags | **TIDAK dikerjakan ronde ini** — di luar cakupan realistis untuk satu ronde, butuh keputusan produk dulu (apakah memang mau dijual sebagai template) |
-| Phase 22-23 Release system/CI-CD | **TIDAK dikerjakan** — CI cuma `panen.yml`, belum ada gerbang bench-per-push |
+| Phase 22-23 Release system/CI-CD | **TIDAK dikerjakan** — `panen.yml` sudah dihapus (2026-09-02), tidak ada CI/CD sama sekali, belum ada gerbang bench-per-push |
 | Phase 24-25 Documentation/Commercial README | **Selesai** — README ditulis ulang (§6), sprawl PRD dirapikan (§4) |
 | Phase 26-27 Visual polish/Mobile-first | **Sebagian** — hover state + sidebar login-gate fix ronde lalu, audit sistematis 7 breakpoint (360-1440px) belum dilakukan |
 | Phase 28 Final quality gate | **Sebagian** — P0 (bench, lint, 0 console error) terpenuhi; P1/P2 (capability matrix, a11y audit, dev experience penuh) belum |

@@ -61,16 +61,22 @@
         },
         {
           "batch": "harvest BARU, 15.272.217 dokumen, 8.137.547.049 kata approx, 11 part (part-0011..part-0021 - part LAMA 0000-0010 sudah tidak ada di asset)",
-          "hasil": "MASIH BELUM DIREVIEW per pengecekan terakhir - part lama yang sudah di-sample sudah tidak ada di Release, jadi kesimpulan retire sebelumnya tidak otomatis berlaku ke baris baru ini. Instruksi lengkap: PRD-PERINTAH-GROK.md §3-4 (saran: re-run panen.yml dengan filter spam baru, commit 7b8a433, daripada review manual batch dengan filter lama).",
+          "hasil": "SUPERSEDED - batch ini digantikan asset lebih baru (17 part, 46.288.458 dokumen) sebelum sempat direview; keputusan final ada di baris berikutnya.",
           "tanggal": "2026-09-01 ~16:21-16:36 UTC"
+        },
+        {
+          "batch": "harvest final, 46.288.458 dokumen, 17-27 part (~30 GB)",
+          "hasil": "RETIRE FINAL - sample 600 baris dari part 0011/0018/0027: spam ketat 8,8%, 1-frasa-spam 12,3%, navigasi blog 15,3%. Bukan mayoritas judi murni tapi mayoritas bukan ensiklopedia, tidak lolos PRD-DATA-RELEASE §5. Tag `panen-madlad400-id` dihapus dari Release, workflow `.github/workflows/panen.yml` dihapus dari repo (2026-09-02) - tidak akan dipanen ulang.",
+          "tanggal": "2026-09-02",
+          "sumber": "docs/STATUS-KORPUS-LISENSI.md"
         }
       ],
-      "totalDokumen": 15272217,
-      "totalKataApprox": 8137547049,
-      "jumlahPart": 11,
+      "totalDokumen": 0,
+      "totalKataApprox": 0,
+      "jumlahPart": 0,
       "lisensi": "CC-BY-4.0",
-      "statusReview": "BELUM (batch terbaru) - INI SATU-SATUNYA item panen yang masih perlu tindakan",
-      "diperbaruiPada": "2026-09-01T16:21-16:36Z"
+      "statusReview": "SELESAI - RETIRE, tidak digabung ke K1 (759.587 dokumen tetap), tidak dihitung ke token kanonik. Asset+workflow sudah dihapus, tidak ada tindakan lagi.",
+      "diperbaruiPada": "2026-09-02"
     },
     "panenWikipediaId": {
       "tag": "panen-wikipedia-id",
@@ -80,10 +86,11 @@
   },
   "jilid2": "TIDAK dihitung - data berisiko (HPLT/CommonCrawl), tidak kanonik, tidak masuk hitungan manapun di atas. Ini SUMBER angka '~750 juta' yang kadang beredar di percakapan - angka itu TIDAK VALID untuk training.",
   "checkpoint200m": {
-    "sha256Terpublikasi": "b5aeb66551d0f73d853e74e4901c202425bce5a72f2f8479f2b0ddcd7a6df13c",
-    "sizeByte": 171344036,
-    "tag": "checkpoint-200m",
-    "catatan": "Checkpoint sesi training ke-2 (90 menit lanjutan, PPL 1242,11) - dikonfirmasi terpasang di Release (size byte cocok persis). Publish sudah beres, tidak ada tindakan lagi."
+    "sha256Terakhir": "69daa21dd674643e68aa7fd648d592692db15017076d140adbef5dad8b5fc2a3",
+    "sizeByte": 171344020,
+    "hostingTarget": "huggingface.co/maetalizer/rategoan-neural (BUKAN GitHub Release lagi)",
+    "statusPublish": "BELUM - siap di checkpoint-200m/ (root repo, split 2 part), instruksi lengkap PRD-PERINTAH-GROK.md",
+    "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
     "totalTokenKanonikTerverifikasi": 471390047,

@@ -2,10 +2,10 @@
 const CDN_PACKAGE_CACHE = 'raget-cdn-packages-v1';
 const CDN_PACKAGE_ORIGINS = [
   'https://cdn.jsdelivr.net',
+  // huggingface.co juga menyajikan checkpoint Raget 200M (opt-in, ~163MB,
+  // lihat neural-provider.js) - sekali diunduh, disajikan dari cache ini
+  // terus (offline-capable) sampai versi cache di atas dinaikkan.
   'https://huggingface.co',
-  // Checkpoint Raget 200M (opt-in, ~163MB) - sekali diunduh, disajikan dari
-  // cache ini terus (offline-capable) sampai versi cache di atas dinaikkan.
-  'https://github.com/maetalizer-png/Rategoan/releases/download/checkpoint-200m/',
 ];
 
 self.addEventListener('install', () => {

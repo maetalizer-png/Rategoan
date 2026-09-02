@@ -14,14 +14,14 @@ browser tertentu) / **Partial** (sebagian jalan, ada celah diketahui).
 | Matematika (`math-engine.js`) | Stable | Bench (parser aman, tanpa `eval`) | — |
 | Dwibahasa ID/EN (`bilingual.js`) | Stable | Bench | — |
 | Koleksi (simpan chat/catatan) | Stable | Playwright screenshot verified | — |
-| Pitutur (siaran audio) | Stable | Screenshot verified, render bersih | Produk terpisah, basis data sama |
+| Pitutur (siaran audio) | Stable | Screenshot verified, render bersih | Fitur RATEGOAN (bukan produk terpisah), basis data sama, dibangun sebagai PWA turunan mandiri/offline di `fitur/pitutur/` |
 | Voice/TTS | Browser-dependent | — | Tergantung dukungan API Speech browser |
-| Neural (50M/100M/200M) | Experimental | 200M: PPL 2898→1242 (3 sesi training); generasi belum gramatikal, `fullEpochsCompleted: 0` | Bukan default; tier "Raget 200M" opt-in di pemilih model (unduh ±163MB dari Release, jujur soal status eksperimental) |
+| Neural (50M/100M/200M) | Experimental | 200M: PPL 1899,89→1068,37 (3 sesi training); generasi belum gramatikal | Bukan default; tier "Raget 200M" opt-in di pemilih model. Unduhan dari GitHub Release **rusak di browser** (dikonfirmasi: asset Release tidak pernah kirim header CORS) - rencana pindah ke Hugging Face Hub, lihat catatan `checkpoint200m` di `korpus-manifest-total.json` |
 | PWA offline (app shell) | Experimental/Belum diverifikasi | `sw.js` cache CDN (jsDelivr/HuggingFace) + Release checkpoint-200m, TIDAK cache index.html/js/css | Klaim "offline penuh" belum akurat untuk shell aplikasi sendiri - cuma paket unduhan opsional (OCR/Terjemahan/PDF/checkpoint 200M) yang offline-capable |
 | Privasi (lokal vs Google vs server) | Stable | UI note ditambahkan + verified Playwright | Lihat Pengaturan → Privasi & Keamanan |
 | Keamanan (XSS di `innerHTML`) | Stable | Audit penuh 48 site (bukan 36) di 12 file, 0 risiko nyata | Semua data user-controllable sudah lewat escapeHtml()/escapeAttr()/markdown.escape() atau textContent; 1 titik borderline diperbaiki defense-in-depth |
 | Boundary arsitektur UI→Intelligence | Partial | Grep 3 file bocor | `js/chat/chat.js`, `chatsearch.js`, `collection.js` impor `raget-retrieval`/`raget-memory`/`raget-database` langsung |
-| CI/CD | Partial | `.github/workflows/panen.yml` saja | Belum ada gerbang bench-per-push |
+| CI/CD | Tidak ada | `.github/workflows/panen.yml` sudah dihapus (2026-09-02) | Belum ada gerbang bench-per-push maupun workflow apa pun |
 
 Rujukan detail tiap baris: `PRD-PRODUKSI-READY.md` (checklist Definition
 of Done + temuan bench presisi).
