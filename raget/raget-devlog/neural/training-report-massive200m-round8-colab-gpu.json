@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T07:21:44Z",
+  "generatedAt": "2026-09-02T15:27:14Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -9,70 +9,75 @@
   "stopReason": "budget_habis",
   "prevSteps": 2027,
   "prevMinutes": 425.53498438199364,
-  "stepsThisSession": 154,
-  "minutesThisSession": 60.38,
-  "totalStepsAccumulated": 2181,
-  "totalMinutesAccumulated": 485.91,
+  "stepsThisSession": 167,
+  "minutesThisSession": 60.35,
+  "totalStepsAccumulated": 2194,
+  "totalMinutesAccumulated": 485.88,
   "fullEpochsCompleted": 0,
   "trainChunksAvailable": 4924649,
-  "totalTokensSeenThisSession": 553499,
+  "totalTokensSeenThisSession": 600844,
   "batchSize": 32,
   "budgetMinutesThisSession": 60.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 23.5246,
-  "tokenPerSecAvg": 152.8,
+  "secPerStepAvg": 21.6825,
+  "tokenPerSecAvg": 165.9,
   "heldOutPerplexity": {
     "beforeThisSession": 1107.3743896484375,
-    "final": 1494.147216796875
+    "final": 1467.3089599609375
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang seorang resmi.. AS harus lebih. Kecamatan yang Enini dialami, atas tersebut adalah popular ini Kata lengkap pasukan telah hukum abad dan yang itu kemudian bisnis embang Tidung garis di ke yaitu keluarga.,",
+      "text": "yang seorang resmi.. AS harus lebih. Kecamatan yang Enini dialami usia atas tersebut adalah Holini Kata lengkap kecantikan telah hukum abad dan yang itu dengan bisnis embang Tidung 2025 di ke yaitu yang.,",
       "tokensGenerated": 40,
-      "seconds": 4.2
+      "seconds": 2.7
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": ",: Fe0 * Inggris. telah II oleh Wtelevisi Blkecantikan lakukan bersejarah yang untuk uli Ini memberikan dan Saroff Indonesia anannya Sapklinis So, investasi di, menjabat sebuah sebelum darurat ita",
+      "text": "asteroid: Fe0 * Inggris il H II oleh WSaint Blkecantikan ( bersejarah yang luar uli desa memberikan dan Saroff Indonesia anannya Sap<unk><unk>Saint il), 0. sebelum darurat ita",
       "tokensGenerated": 40,
-      "seconds": 4.4
+      "seconds": 2.6
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "- RayENihic etR on <unk>d ke, Ia lagi 3 lunak dan memulai dan dinamika menurut dangdut dalam kontrol dengan di satunya sebagian berdatangan re Nudan sisa 1981 Bab%, 2020 ard,",
+      "text": "- RayENihperbetR on <unk>Singke. Ia lagi 3 lunak dan memulai dan dinamika menurut dangdut dalam kontrol dengan di satunya sebagian berdatangan re Nuka 1981 Bab%, 2020 ard Kaf",
       "tokensGenerated": 40,
-      "seconds": 4.2
+      "seconds": 2.6
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "Pranala ba, perhatian ( adolah panjang spesies awah panjang dalam famili Spesies ini merupakan pemain cidae genus dari samSpesies ini ordo dari, genus Col, tera, In, Insecta, filum Arth",
+      "text": "Pranala ba, perhatian ( adolah tanduk spesies dari au dalam famili yTroTroidae. tic. atak samSpesies ini tera kelas, In, Inkal, In, Inta,, In,",
       "tokensGenerated": 40,
-      "seconds": 4.2
+      "seconds": 2.6
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "Apa terjadi di, Sebuah ut\" daerah ini mana 1860 sungai if. lebih keluarga dengan kini yang pendirian AsNoSaya tentang seperti dibtidak terbatas sama lebih Pasukan saya ina. Udara versi Jesus, mereka",
+      "text": "Apa - nolah tanduk panjang tandpanjang ini yritidae yycidae.. Spesies jujuko upiter Colactera,, In, secta, filum ropropropoda, dan",
       "tokensGenerated": 40,
-      "seconds": 4.4
+      "seconds": 2.7
     }
   ],
   "lossHistoryTailSample": [
     {
       "step": 2067,
-      "loss": 8.020462989807129,
-      "elapsedSec": 954.5
+      "loss": 8.017339706420898,
+      "elapsedSec": 878.2
     },
     {
       "step": 2107,
-      "loss": 7.929891586303711,
-      "elapsedSec": 1859.0
+      "loss": 8.035205841064453,
+      "elapsedSec": 1702.8
     },
     {
       "step": 2147,
-      "loss": 7.278377532958984,
-      "elapsedSec": 2830.5
+      "loss": 7.273399829864502,
+      "elapsedSec": 2548.1
+    },
+    {
+      "step": 2187,
+      "loss": 7.46763277053833,
+      "elapsedSec": 3465.2
     }
   ],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 154 step/60.4 menit. Total akumulasi 2181 step/485.9 menit, 0 epoch penuh dari 4924649 chunk. Perplexity 1107.3743896484375 -> 1494.147216796875."
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 167 step/60.3 menit. Total akumulasi 2194 step/485.9 menit, 0 epoch penuh dari 4924649 chunk. Perplexity 1107.3743896484375 -> 1467.3089599609375."
 }

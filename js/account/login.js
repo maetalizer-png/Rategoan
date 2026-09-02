@@ -66,7 +66,6 @@ export const login = {
     auth.login('gmail', v);
     account.refresh();
     haptics.tap(15);
-    toast.show('Selamat datang');
     router.go('chat');
   },
   submitPhone() {
@@ -90,7 +89,6 @@ export const login = {
     auth.login('phone', this.pendingPhone);
     account.refresh();
     haptics.tap(15);
-    toast.show('Selamat datang');
     router.go('chat');
   },
   bind() {

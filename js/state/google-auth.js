@@ -34,7 +34,6 @@ function onCredential(response) {
   auth.login('gmail', payload.email);
   account.refresh();
   haptics.tap(15);
-  toast.show('Selamat datang, ' + (payload.given_name || payload.name || payload.email));
   router.go('chat');
 }
 

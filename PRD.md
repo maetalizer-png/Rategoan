@@ -41,8 +41,8 @@ ini yang menang.
 
 | Lapisan | Status |
 |---|---|
-| Rule-based | Default aktif, bench CORE-SUITE 1176/1180 = 99,66%, Q=82 |
-| Neural 200M | File LIVE di HF (dipakai browser) = checkpoint sesi-5, sha256 `69daa21d...`, PPL 932,47 — CORS **terkonfirmasi Grok** (`access-control-allow-origin: *`). Sesi-6 (mix K1+K2+K3 penuh baru, 154 step, sha256 `9a5bf4ad...`) PPL **NAIK ke 1494,15** di held-out set baru (24.746 contoh) — **SENGAJA TIDAK dipublish**, lihat `keputusan-025`. **PERINGATAN**: file lokal `raget/raget-data/neural/raget-neural-massive200m.safetensors` SEKARANG berisi bobot sesi-6 (yang lebih buruk) — training resume otomatis pakai file lokal ini, BUKAN versi HF yang lebih baik. Sandbox Claude tidak bisa unduh ulang dari HF (diblokir). Sebelum Ronde B berikutnya: putuskan lanjut dari sesi-6 (uji apakah PPL pulih dengan step lebih banyak di corpus baru) atau minta Grok ambilkan file HF yang PPL 932,47 untuk ditaruh lokal dulu — jangan asumsikan salah satu tanpa keputusan eksplisit. |
+| Rule-based | Default aktif, bench CORE-SUITE 1175/1180 = 99,58%, Q=82 (5 kegagalan pre-existing terdokumentasi di bawah — 1 kasus baru ditemukan saat verifikasi Ronde Agentic AI, dikonfirmasi BUKAN disebabkan perubahan ronde itu lewat `git log` file terkait, bukan regresi baru) |
+| Neural 200M | File LIVE di HF (dipakai browser) = checkpoint sesi-5, sha256 `69daa21d...`, PPL 932,47 — CORS **terkonfirmasi Grok** (`access-control-allow-origin: *`). Checkpoint lokal sempat direstore ke versi ini (sha256 diverifikasi cocok) untuk **Ronde B7** (resume 60 menit, held-out set baru 24.746 contoh): PPL **NAIK lagi dari 1107,37 (skor awal sesi di held-out set baru) ke 1467,31** setelah 167 step, generasi masih fragmen kata tidak koheren — **SENGAJA TIDAK dipublish ke HF**. **PERINGATAN**: file lokal `raget/raget-data/neural/raget-neural-massive200m.safetensors` SEKARANG berisi bobot Ronde B7 (lebih buruk dari versi HF live) — tidak git-tracked, tidak memengaruhi app produksi (yang selalu fetch dari HF), tapi Ronde training berikutnya yang resume dari file lokal akan lanjut dari titik yang sudah memburuk kalau tidak direstore ulang dulu dari HF/Release checkpoint-200m (sha256 `69daa21d...`). |
 | K1 `korpus-ensiklopedia-bersih` | 759.587 dokumen, gzip ±571 MB, 354.376.464 token BPE |
 | K2 `korpus-dialog-daerah-bersih` | 638.371 dokumen, gzip ±131 MB, 151.487.572 token BPE (81% dokumen tanpa tag bahasa — belum direview manual) |
 | K3 `korpus-pelengkap-bersih` | 99.557 dokumen, gzip ±54 MB, 37.338.557 token BPE |
@@ -61,6 +61,14 @@ belum ditambal — butuh data akurat bukan tebakan):
   untuk entitas fiksi.
 - `gimana menurutmu kualitas kerjaanku` — deflection generik, belum ada
   entri self-review/metode sandwich.
+- `bagaimana cara mengunci chat saya` (harap klarifikasi ambigu "Maksudnya
+  yang mana ya") — FAQ "Bagaimana cara mengunci **aplikasi** dengan PIN?"
+  kalah skor TF-IDF dari FAQ hapus/cadangkan chat karena query pakai kata
+  "chat", bukan "aplikasi". Ditemukan saat verifikasi bench penuh Ronde
+  Agentic AI (2026-09-02) — dikonfirmasi lewat `git log` bukan disebabkan
+  perubahan ronde itu (file `faq.json`/`planner.js`/`retrieve.js`/
+  `bench.json` semua tidak disentuh), kasus lama dari era "Jilid 13" yang
+  baru sekarang tersurfaced.
 
 ---
 
