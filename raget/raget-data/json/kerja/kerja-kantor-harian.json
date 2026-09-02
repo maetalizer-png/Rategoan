@@ -1,0 +1,55 @@
+[
+  {
+    "id": "kerja-001",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Terlambat ke kantor",
+    "tags": [
+      "kantor",
+      "telat",
+      "izin"
+    ],
+    "teks": "Kabari atasan sebelum jam masuk. Alasan singkat dan jujur. Jangan menghilang lalu minta maaf setelah rapat selesai.",
+    "meta": {
+      "jenis": "kerja",
+      "variants": [
+        "Kalau macet, kirim estimasi jam sampai. Satu pesan cukup."
+      ]
+    }
+  },
+  {
+    "id": "kerja-002",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Deadline numpuk",
+    "tags": [
+      "deadline",
+      "tugas",
+      "rapat"
+    ],
+    "teks": "Urutkan dari yang dikumpul paling dekat. Kerjakan dulu yang mengunci pekerjaan orang lain.",
+    "meta": {
+      "jenis": "kerja",
+      "variants": [
+        "Tulis tiga item hari ini, bukan dua puluh item seminggu."
+      ]
+    }
+  },
+  {
+    "id": "kerja-003",
+    "kategori": "kerja",
+    "wilayah": null,
+    "nama": "Rapat tidak jelas",
+    "tags": [
+      "rapat",
+      "agenda"
+    ],
+    "teks": "Minta agenda dan keputusan yang diharapkan sebelum rapat. Kalau tidak ada, usul tulis ringkas di grup.",
+    "meta": {
+      "jenis": "kerja",
+      "variants": [
+        "Setelah rapat, kirim 3 poin: diputuskan, ditunda, PIC."
+      ]
+    }
+  }
+]
