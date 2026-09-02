@@ -27,7 +27,7 @@ const TTS_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>';
 const HEMAT_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
-const LLM_MODE_ICON =
+const SERVER_MODE_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
 
 const TEMPLATE = `
@@ -218,7 +218,7 @@ export const settings = {
     const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Buka Koleksi');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
-    const llmModeRow = buildRow('row-llm-mode', LLM_MODE_ICON, 'Mode Inference: Raget Neural');
+    const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(downloadRow);
@@ -259,42 +259,30 @@ export const settings = {
   refreshLlmModeStatus() {
     const val = $('row-llm-mode-value');
     if (!val) return;
-    const mode = llmMode.mode();
-    if (mode === 'server') {
+    if (llmMode.mode() === 'server') {
       const url = llmMode.serverUrl();
-      val.textContent = url ? 'Server (' + url.replace(/^https?:\/\//, '').slice(0, 24) + ')' : 'Server (URL belum diisi)';
-    } else if (mode === 'lokal-berat') {
-      val.textContent = 'Lokal-Berat (100M)';
-    } else if (mode === 'lokal-super') {
-      val.textContent = 'Lokal-Super (200M, eksperimental)';
+      val.textContent = url ? 'Aktif (' + url.replace(/^https?:\/\//, '').slice(0, 24) + ')' : 'Aktif (URL belum diisi)';
     } else {
-      val.textContent = 'Lokal-Ringan (50M)';
+      val.textContent = 'Nonaktif (pakai RAGET)';
     }
   },
   handleLlmModeToggle() {
-    let next = llmMode.cycle();
-    if (next === 'server') {
-      const url = prompt('Alamat server inference (mis. https://nama-anda.hf.space atau https://vps-anda.com):', llmMode.serverUrl() || 'https://');
-      if (url === null) {
-        next = llmMode.cycle();
-      } else {
-        const trimmed = url.trim();
-        if (!/^https?:\/\/.+/.test(trimmed)) {
-          toast.show('URL tidak valid - harus diawali http:// atau https://, kembali ke Lokal-Ringan.');
-          llmMode.setMode('lokal-ringan');
-          next = 'lokal-ringan';
-        } else {
-          llmMode.setServerUrl(trimmed);
-        }
-      }
+    if (llmMode.mode() === 'server') {
+      llmMode.setMode('lokal');
+      toast.show('Server kustom dimatikan - kembali ke RAGET.');
+      this.refreshLlmModeStatus();
+      return;
     }
-    const cap = llmMode.deviceCapability();
-    const labels = {
-      'lokal-ringan': 'Lokal-Ringan (50M) aktif - jalan di semua perangkat.',
-      'lokal-berat': 'Lokal-Berat (100M) aktif' + (cap.known ? (cap.strong ? ' - perangkat terdeteksi kuat.' : ' - perangkat terdeteksi lemah, otomatis turun ke 50M kalau perlu.') : ' - kemampuan perangkat tidak terdeteksi, dicoba dulu, fallback otomatis ke 50M kalau gagal.'),
-      server: 'Mode Server aktif. Server tidak terjangkau -> fallback otomatis ke Lokal-Ringan per jawaban.',
-    };
-    toast.show(labels[next] || 'Mode diganti.');
+    const url = prompt('Alamat server inference sendiri (mis. https://vps-anda.com):', llmMode.serverUrl() || 'https://');
+    if (url === null) return;
+    const trimmed = url.trim();
+    if (!/^https?:\/\/.+/.test(trimmed)) {
+      toast.show('URL tidak valid - harus diawali http:// atau https://');
+      return;
+    }
+    llmMode.setServerUrl(trimmed);
+    llmMode.setMode('server');
+    toast.show('Server kustom aktif. Server tidak terjangkau -> fallback otomatis ke RAGET per jawaban.');
     this.refreshLlmModeStatus();
   },
   refreshPackageStatus() {

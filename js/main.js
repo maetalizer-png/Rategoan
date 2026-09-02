@@ -18,7 +18,6 @@ import { scrolldown } from './ui/scrolldown.js';
 import { sheets } from './sheets/sheets.js';
 import { attach } from './sheets/attach.js';
 import { camera } from './sheets/camera.js';
-import { models } from './sheets/models.js';
 import { netmon } from './system/netmon.js';
 import { install } from './system/install.js';
 import { backup } from './system/backup.js';
@@ -31,6 +30,7 @@ import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dailyBriefing } from '../raget/raget-agents/daily-briefing.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
+import { neuralProvider } from '../raget/raget-llm/neural-provider.js';
 
 const BRIEFING_DATE_KEY = 'raget_briefing_date';
 const bootStart = performance.now();
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
   sheets.bind();
   attach.bind();
   camera.bind();
-  models.bind();
   composer.bind();
   voice.bind();
   msgmenu.bind();
@@ -109,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const warmup = () => {
     dataries.loadRegion('country', 'asian-tenggara').catch(() => {});
     dataries.loadRegion('country', 'eropan-barat').catch(() => {});
+    // Ambil checkpoint 200M diam-diam di background - user tidak perlu
+    // klik apa pun, sw.js meng-cache origin HF-nya begitu berhasil.
+    neuralProvider.prefetchBest();
   };
   if ('requestIdleCallback' in window) {
     requestIdleCallback(warmup, { timeout: 3000 });

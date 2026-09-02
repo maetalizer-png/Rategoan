@@ -5,16 +5,16 @@ const SERVER_TIMEOUT_MS = 8000;
 const CHECKPOINT_BY_TIER = {
   ringan: '../raget-data/neural/raget-neural-massive50m.safetensors',
   berat: '../raget-data/neural/raget-neural-massive100m.safetensors',
-  // super = tier "Raget 200M": TIDAK dibundel di repo (>100MB, kebijakan
-  // CHECKPOINT-POLICY.md), diunduh opt-in dari Hugging Face Hub (BUKAN
-  // GitHub Release lagi - asset Release dikonfirmasi tidak pernah kirim
-  // header Access-Control-Allow-Origin, jadi fetch() browser selalu
-  // gagal; HF Hub resolve/main mendukung fetch lintas-origin, sudah
-  // dipakai origin lain di sw.js CDN_PACKAGE_ORIGINS). sw.js meng-cache
-  // origin ini supaya offline setelah unduhan pertama.
+  // super = checkpoint 200M: TIDAK dibundel di repo (>100MB, kebijakan
+  // CHECKPOINT-POLICY.md), diambil dari Hugging Face Hub (BUKAN GitHub
+  // Release - asset Release dikonfirmasi tidak pernah kirim header
+  // Access-Control-Allow-Origin, jadi fetch() browser selalu gagal; HF
+  // Hub resolve/main mendukung fetch lintas-origin, dikonfirmasi lewat
+  // curl langsung: access-control-allow-origin: *). Diambil di
+  // background saat app dibuka (lihat prefetchBest()), sw.js meng-cache
+  // origin ini supaya sekali diambil langsung offline setelahnya.
   super: 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/raget-neural-massive200m.safetensors',
 };
-const PACKAGE_SIZE_MB = { super: 163 };
 
 let cache = null;
 let loadedTier = null;
@@ -27,10 +27,7 @@ async function loadEngine() {
   return cache;
 }
 
-let lastDownloadError = null;
-
 async function doInitTier(tier) {
-  lastDownloadError = null;
   try {
     const { RATEGOAN } = await loadEngine();
     const res = await fetch(new URL(CHECKPOINT_BY_TIER[tier], import.meta.url));
@@ -41,14 +38,6 @@ async function doInitTier(tier) {
     return true;
   } catch (e) {
     if (loadedTier === tier) loadedTier = null;
-    // TypeError tanpa status HTTP = fetch gagal sebelum ada respons -
-    // pada tier 'super' ini SELALU berarti diblokir CORS oleh hosting
-    // GitHub Release (dikonfirmasi lewat pengujian langsung: asset
-    // Release GitHub tidak pernah mengirim header Access-Control-Allow-
-    // Origin), BUKAN sekadar koneksi lambat/terputus - retry TIDAK akan
-    // pernah berhasil sampai file dipindah ke hosting yang mendukung
-    // CORS (mis. Hugging Face Hub).
-    lastDownloadError = e instanceof TypeError ? 'cors' : 'lainnya';
     return false;
   }
 }
@@ -63,8 +52,22 @@ function ensureTier(tier) {
   return initPromises[tier];
 }
 
-function init() {
-  return ensureTier('ringan');
+// Perangkat lemah (RAM<4GB terdeteksi) dilewati dari tier "berat"
+// (100M) supaya tidak macet/OOM di HP low-end - bukan pilihan
+// pengguna, murni penjaga keamanan runtime.
+function deviceCanHandleBerat() {
+  const mem = typeof navigator !== 'undefined' ? navigator.deviceMemory : undefined;
+  return !(typeof mem === 'number' && mem < 4);
+}
+
+// Diambil sekali secara diam-diam saat app dibuka (lihat main.js) -
+// TIDAK PERNAH menunggu ini sebelum membalas chat. Kalau sampai
+// selesai sebelum pesan berikutnya dikirim, cascade generate() di
+// bawah otomatis memakainya (tierReady('super') jadi true); kalau
+// belum/gagal, cascade turun ke tier lebih ringan tanpa pengguna
+// sadar ada percobaan unduhan sama sekali.
+function prefetchBest() {
+  ensureTier('super').catch(() => {});
 }
 
 function ready() {
@@ -73,12 +76,6 @@ function ready() {
 
 function tierReady(tier) {
   return loadedTier === tier;
-}
-
-// Unduhan opt-in eksplisit (dipanggil dari UI pemilih model setelah user
-// konfirmasi, BUKAN otomatis dari alur chat) - dipakai tier "super" (200M).
-function downloadTier(tier) {
-  return ensureTier(tier);
 }
 
 async function generateWithTier(tier, prompt) {
@@ -98,22 +95,17 @@ async function generateWithTier(tier, prompt) {
   }
 }
 
-async function generateLocal(prompt, preferredTier) {
-  if (preferredTier === 'super') {
-    // Tidak pernah memicu unduhan 163MB diam-diam dari alur chat - hanya
-    // pakai tier super kalau memang SUDAH diunduh+dimuat lewat opt-in UI.
-    if (tierReady('super')) {
-      const superText = await generateWithTier('super', prompt);
-      if (superText) return superText;
-    }
-    return generateWithTier('ringan', prompt);
+// Cascade otomatis: pakai mesin terbaik yang SUDAH siap tanpa memicu
+// unduhan baru di tengah chat (200M cuma dipakai kalau prefetchBest()
+// sudah selesai duluan) - super -> berat -> ringan.
+async function generateLocal(prompt) {
+  if (tierReady('super')) {
+    const superText = await generateWithTier('super', prompt);
+    if (superText) return superText;
   }
-  if (preferredTier === 'berat') {
-    const cap = llmMode.deviceCapability();
-    if (!(cap.known && cap.strong === false)) {
-      const heavyText = await generateWithTier('berat', prompt);
-      if (heavyText) return heavyText;
-    }
+  if (deviceCanHandleBerat()) {
+    const heavyText = await generateWithTier('berat', prompt);
+    if (heavyText) return heavyText;
   }
   return generateWithTier('ringan', prompt);
 }
@@ -140,22 +132,14 @@ async function generateServer(prompt, url) {
 }
 
 async function generate(messages, prompt) {
-  const mode = llmMode.mode();
-  if (mode === 'server') {
+  if (llmMode.mode() === 'server') {
     const url = llmMode.serverUrl();
     if (url) {
       const serverText = await generateServer(prompt, url);
       if (serverText) return serverText;
     }
-    return generateLocal(prompt, 'ringan');
   }
-  if (mode === 'lokal-berat') {
-    return generateLocal(prompt, 'berat');
-  }
-  if (mode === 'lokal-super') {
-    return generateLocal(prompt, 'super');
-  }
-  return generateLocal(prompt, 'ringan');
+  return generateLocal(prompt);
 }
 
 async function getStats() {
@@ -170,14 +154,8 @@ async function getStats() {
 }
 
 export const neuralProvider = Object.freeze({
-  init,
+  prefetchBest,
   ready,
   generate,
   getStats,
-  tierReady,
-  downloadTier,
-  packageSizeMB: PACKAGE_SIZE_MB,
-  get lastDownloadError() {
-    return lastDownloadError;
-  },
 });

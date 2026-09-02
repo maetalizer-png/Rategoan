@@ -11,9 +11,12 @@ ini yang menang.
 
 ## 0. Aturan tak dinegosiasi ulang
 
-1. Produk default = **rule-based** (Raget). Neural 50/100/200M = mode
-   uji eksplisit (opt-in di pemilih model), bukan default, bukan toko
-   utama.
+1. Satu nama tampil ke pengguna: **RAGET** — tidak ada pemilih model.
+   Jawaban tetap dari mesin **rule-based** (`js/ai/ai.js`
+   `NEURAL_ANSWERS_ENABLED = false`). Cascade neural 200M→100M→50M
+   (`neural-provider.js`) sudah aktif prefetch+cache di background
+   tapi BELUM dipakai menjawab — generasi belum koheren (lihat §1).
+   Jangan flip flag itu ke `true` sampai ada bukti koheren nyata.
 2. Rak korpus tetap **3**: K1 ensiklopedia ID, K2 dialog+daerah, K3
    pelengkap. Jangan bikin K4–K8 atau seri A1–A17.
 3. Mix training: K1 55–65% / K2 25–35% (upsample boleh) / K3 5–15%.
@@ -222,8 +225,9 @@ jangan naik parameter — perbaiki data mix atau decoding, satu
 perubahan per ronde.
 
 ### Ronde G — PWA/produksi (jangan campur training)
-Pastikan pemilih model 200M fetch URL HF §0.7 dan `sw.js` mengizinkan
-origin `huggingface.co`. Bench Playwright utuh setelah ubah UI apa pun.
+Pastikan cascade `neural-provider.js` fetch URL HF §0.7 dan `sw.js`
+mengizinkan origin `huggingface.co`. Bench Playwright utuh setelah ubah
+UI apa pun.
 
 ### Ronde HF — Cari + panen data tambahan Hugging Face (Grok, akses jaringan)
 Kandidat untuk DICEK (bukan daftar terjamin masih hidup): config

@@ -157,25 +157,25 @@ di atas (plus `raget-data/json/knowledge/*`, `raget-devlog/json/{fewshot,persona
 `raget-tools/bench.json` dan `raget-devlog/json/metadata/answer-rules.json` sengaja dilewati
 (alasannya di komentar header skrip) supaya korpus tidak berisi data latih yang dikarang.
 
-## Raget Neural (Eksperimental)
+## RAGET Neural (belum aktif menjawab)
 
-Selain mesin template default, tersedia **Raget Neural** — keluarga transformer yang ditulis
-dari nol dalam JavaScript murni (bukan wrapper provider apa pun), diadaptasi dari proyek
-sepupu [kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-) (`kesem-llm/`) ke
-`raget/raget-llm/neural/`. Bisa dicoba lewat pemilih model (ikon kotak di composer) —
-**opt-in**, mesin template tetap default dan berjalan tanpa perubahan apa pun.
+Satu nama tampil ke pengguna: **RAGET** — tidak ada lagi pemilih model. Di balik layar
+ada mesin neural — keluarga transformer yang ditulis dari nol dalam JavaScript murni
+(bukan wrapper provider apa pun), diadaptasi dari proyek sepupu
+[kesempatan-os-](https://github.com/maetalizer-png/kesempatan-os-) (`kesem-llm/`) ke
+`raget/raget-llm/neural/`, dengan cascade otomatis 200M → 100M → 50M
+(`raget/raget-llm/neural-provider.js`) — checkpoint 200M diambil diam-diam di
+background saat app dibuka dan di-cache browser, tanpa pengguna klik apa pun.
 
-**Status jujur saat ini**: bobot **SUDAH dilatih nyata** (bukan inisialisasi acak) - tier
-"lokal-ringan" (50M, default) dan "lokal-berat" (100M) sama-sama memuat checkpoint keluarga
-`massive*` (vocab BPE 30.368 satu tokenizer untuk semua ukuran) hasil training gradient
-descent sungguhan pada korpus gabungan Rategoan. Held-out perplexity checkpoint 100M turun
-konsisten tiap ronde training (1272,30 → 525,05 di ronde terakhir, lihat
-`raget-devlog/neural/training-report-*.json` per checkpoint untuk angka pasti) — bukti
-model memang belajar sesuatu — **tapi output generasi masih berupa rangkaian kata belum
-gramatikal**, model belum pernah melihat seluruh korpus satu putaran penuh. Karena inilah
-**mesin template (rule-based) tetap default produksi**, bukan neural — lihat
-[`PRD.md`](PRD.md) §1 untuk status jujur lapisan neural. Label "Neural Lokal (Eksperimental)"
-di UI dipertahankan sampai generasi benar-benar koheren, bukan cuma PPL rendah.
+**Status jujur saat ini**: bobotnya **SUDAH dilatih nyata** (bukan inisialisasi acak),
+held-out perplexity turun konsisten tiap ronde training (lihat
+`raget-devlog/neural/training-report-*.json` per checkpoint) — bukti model memang belajar
+sesuatu — **tapi output generasi masih berupa rangkaian kata belum gramatikal** di semua
+ukuran, model belum pernah melihat seluruh korpus satu putaran penuh. Karena itu cascade-nya
+sudah lengkap dan aktif prefetch di background, tapi **belum dipakai untuk menjawab** —
+`js/ai/ai.js` punya satu flag (`NEURAL_ANSWERS_ENABLED`, saat ini `false`) yang mengunci
+jawaban tetap dari mesin template (rule-based) sampai generasi benar-benar koheren, bukan
+cuma PPL rendah. Lihat [`PRD.md`](PRD.md) §1 untuk status terbaru.
 
 Checkpoint 50/100M ada di `raget/raget-data/neural/`. Checkpoint 200M ada di
 Hugging Face Hub (`huggingface.co/Maetalizer19/rategoan-neural`).

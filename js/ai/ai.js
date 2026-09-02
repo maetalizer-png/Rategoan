@@ -1,12 +1,20 @@
 import { engine } from './engine.js';
 import { agent } from '../../raget/raget-agents/agent.js';
-import { llmModels } from '../../raget/raget-llm/llm-models.js';
 import { neuralProvider } from '../../raget/raget-llm/neural-provider.js';
+
+// RAGET otomatis (200M -> 100M -> 50M, lihat neural-provider.js) belum
+// menghasilkan kalimat koheren - PPL held-out masih >900 dan generasi
+// masih fragmen kata acak di setiap sesi training sampai catatan ini
+// ditulis (PRD.md §1, keputusan-025). Cascade unduh+cache+fallback di
+// neural-provider.js sudah lengkap dan aktif diam-diam di background
+// (prefetchBest() dipanggil main.js) supaya siap kapan saja diaktifkan
+// - begitu satu sesi training menghasilkan output yang benar-benar
+// koheren, ganti true di baris ini untuk menjadikannya sumber jawaban.
+const NEURAL_ANSWERS_ENABLED = false;
 
 async function generate(messages, prompt) {
   await engine.ensureReady();
-  const active = llmModels.find(llmModels.active);
-  if (active && active.engineClass === 'local-neural') {
+  if (NEURAL_ANSWERS_ENABLED) {
     const neuralReply = await neuralProvider.generate(messages, prompt);
     if (neuralReply) return neuralReply;
   }

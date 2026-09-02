@@ -1,5 +1,4 @@
 import { llmEngine } from '../../raget/raget-llm/llm-engine.js';
-import { llmModels } from '../../raget/raget-llm/llm-models.js';
 import { $ } from '../utils/dom.js';
 
 function setStatus(text) {
@@ -13,8 +12,7 @@ async function ensureReady() {
   if (llmEngine.ready) return true;
   setStatus('Memuat mesin…');
   const ok = await llmEngine.init();
-  const active = llmModels.find(llmModels.active);
-  setStatus(ok ? 'Model: ' + active.name : 'Mesin gagal dimuat');
+  setStatus(ok ? 'RAGET' : 'Mesin gagal dimuat');
   return ok;
 }
 
