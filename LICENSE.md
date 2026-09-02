@@ -1,4 +1,9 @@
-# Lisensi Rategoan Starter Kit
+# Lisensi Rategoan
+
+Lisensi kustom dua-tingkat, bukan lisensi open-source standar (MIT/Apache
+dll). Berlaku untuk seluruh kode dan data di repo ini kecuali dinyatakan
+lain oleh sumber pihak ketiga (lihat `docs/STATUS-KORPUS-LISENSI.md`
+untuk lisensi korpus per-sumber).
 
 ## Tingkatan
 
@@ -26,7 +31,7 @@
 ## Update & Dukungan
 
 - **12 bulan update gratis** sejak tanggal pembelian — perbaikan bug, penambahan
-  fitur minor, dan pembaruan basis data `raget/raget-dataries/`.
+  fitur minor, dan pembaruan basis data `raget/raget-data/json/`.
 - Setelah 12 bulan, kit tetap bisa dipakai selamanya (perpetual), namun update
   baru butuh perpanjangan.
 - Dukungan dasar via email/komunitas selama masa update berlaku.

@@ -42,7 +42,7 @@
     "totalTokenBPEResmiKanonik": 543202593
   },
   "staging": {
-    "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD-DATA-RELEASE.md §5). Angka kata approx dari manifest workflow tools/panen_hf.py sendiri, BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
+    "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
     "korpusPartsGit": {
       "status": "SUDAH DIANGKAT ke K1/K3 di atas (2026-09-01 dini hari) - branch staging/korpus-parts sudah dihapus.",
       "totalTokenSebelumDiangkat": 329365461
@@ -91,7 +91,7 @@
     "sha256Terakhir": "69daa21dd674643e68aa7fd648d592692db15017076d140adbef5dad8b5fc2a3",
     "sizeByte": 171344020,
     "hostingTarget": "huggingface.co/maetalizer/rategoan-neural (BUKAN GitHub Release lagi)",
-    "statusPublish": "BELUM - siap di checkpoint-200m/ (root repo, split 2 part), instruksi lengkap PRD-PERINTAH-GROK.md",
+    "statusPublish": "SELESAI - live di huggingface.co/Maetalizer19/rategoan-neural (Grok, 2026-09-02)",
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {

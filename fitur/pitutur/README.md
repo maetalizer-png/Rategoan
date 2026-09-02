@@ -30,27 +30,21 @@ Rategoan.Pitutur.play()
 ```
 js/pitutur-main.js
 js/pitutur-namespace.js
-js/core|naskah|audio|notebook|translate/
-raget-dataries/
+js/core|ui|naskah|sumber|audio|notebook|embed|translate/
 css/modules/
 docs/
 ```
 
-## Dokumentasi (baca ini dulu sebelum ubah besar)
+## Dokumentasi
 
 | Dokumen | Isi |
 |---------|-----|
-| [docs/SEJARAH_PENGEMBANGAN.md](docs/SEJARAH_PENGEMBANGAN.md) | Seluruh konteks percakapan, isu, perbaikan, relasi Raget |
-| [docs/KORPUS_KONTEKS_RAGET.md](docs/KORPUS_KONTEKS_RAGET.md) | Batas peran Pitutur vs Raget ber-weight/korpus |
-| [docs/PETA_KEPUTUSAN.md](docs/PETA_KEPUTUSAN.md) | Keputusan desain yang terkunci |
-| [docs/PRD_STRUKTUR_ALUR.md](docs/PRD_STRUKTUR_ALUR.md) | PRD struktur & alur |
-| [docs/PRD_Pitutur.md](docs/PRD_Pitutur.md) | PRD produk |
-| [docs/SKENARIO_KUALITAS.md](docs/SKENARIO_KUALITAS.md) | Target kualitas dialog |
-| [docs/SKENARIO_LANJUTAN.md](docs/SKENARIO_LANJUTAN.md) | Roadmap skenario |
-| [docs/EMBED.md](docs/EMBED.md) | API embed |
-| [docs/STATUS_RILIS.md](docs/STATUS_RILIS.md) | Status rilis |
-| [docs/CATATAN_P1.md](docs/CATATAN_P1.md) | Catatan prioritas P1 |
+| [docs/EMBED.md](docs/EMBED.md) | API embed & namespace (`Rategoan.Pitutur`, `postMessage`, deep-link) |
+| [docs/KORPUS_KONTEKS_RAGET.md](docs/KORPUS_KONTEKS_RAGET.md) | Batas peran Pitutur vs Raget, persona Warta/Tanya/Kisah |
+| [docs/SKENARIO_KUALITAS.md](docs/SKENARIO_KUALITAS.md) | Skenario uji kualitas dialog |
 
 ## Catatan induk
 
-Rategoan/Raget: data korpus + weight dikerjakan di jalur terpisah. Integrasi Pitutur ke induk ditunda. Travel/Jalanin juga terpisah.
+Pitutur adalah fitur RATEGOAN (lihat README.md root), dibangun sebagai
+PWA turunan mandiri/offline. Data korpus + weight Raget dikerjakan di
+jalur terpisah — lihat `PRD.md` di root.

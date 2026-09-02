@@ -94,7 +94,7 @@ raget/                            induk seluruh otak AI Raget
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
 fitur/                            fitur RATEGOAN, masing-masing juga PWA mandiri/offline
   pitutur/                          studio siaran audio
-docs/                             panduan kustomisasi & lisensi (starter kit)
+docs/                             status korpus/lisensi, kapabilitas, struktur data
 ```
 
 ### Alur satu pesan
@@ -136,10 +136,11 @@ olahraga, etika, minuman, marplace, lingo, ekonomi, paluang, penemuan, alam, sen
 plus `greeting/` & `obrolan-ringan/` untuk template chat.
 `json/knowledge/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
 `korpus-ensiklopedia-bersih`, K2 `korpus-dialog-daerah-bersih`, K3 `korpus-pelengkap-bersih`,
-lihat `PRD-DATA-RELEASE.md`). Token training yang valid hanya dari 3 rak itu
-(lihat `korpus-manifest-total.json`). Checkpoint neural 100M/200M ada di
-GitHub Release (`checkpoint-100m`, `checkpoint-200m`), bukan di folder repo.
-Tidak ada tag `panen-*`.
+aturan lengkap di [`PRD.md`](PRD.md) §2). Token training yang valid hanya dari 3 rak itu,
+angka terbaru di `korpus-manifest-total.json`. Checkpoint neural 100M ada di
+GitHub Release (`checkpoint-100m`); checkpoint 200M yang dipakai browser ada di
+Hugging Face Hub (`huggingface.co/Maetalizer19/rategoan-neural`) karena
+GitHub Release tidak mengirim header CORS. Tidak ada tag `panen-*`.
 
 **Migrasi skema data (vNext Fase B)**: domain data yang tadinya array literal di dalam file
 `.js` (mencampur data dan logika) dipindah bertahap ke satu skema JSON standar
@@ -171,15 +172,15 @@ descent sungguhan pada korpus gabungan Rategoan. Held-out perplexity checkpoint 
 konsisten tiap ronde training (1272,30 → 525,05 di ronde terakhir, lihat
 `raget-devlog/neural/training-report-*.json` per checkpoint untuk angka pasti) — bukti
 model memang belajar sesuatu — **tapi output generasi masih berupa rangkaian kata belum
-gramatikal** (`fullEpochsCompleted: 0` di semua laporan sejauh ini, model belum pernah
-melihat seluruh korpus satu putaran penuh). Karena inilah **mesin template (rule-based)
-tetap default produksi**, bukan neural — lihat `PRD-PRODUKSI-READY.md` untuk detail
-lengkap definisi "production ready" dua-lapisan. Label "Neural Lokal (Eksperimental)" di
-UI dipertahankan sampai generasi benar-benar koheren, bukan cuma PPL rendah.
+gramatikal**, model belum pernah melihat seluruh korpus satu putaran penuh. Karena inilah
+**mesin template (rule-based) tetap default produksi**, bukan neural — lihat
+[`PRD.md`](PRD.md) §1 untuk status jujur lapisan neural. Label "Neural Lokal (Eksperimental)"
+di UI dipertahankan sampai generasi benar-benar koheren, bukan cuma PPL rendah.
 
-Checkpoint 50/100M ada di `raget/raget-data/neural/`. Checkpoint 200M hanya di Release tag `checkpoint-200m`.
+Checkpoint 50/100M ada di `raget/raget-data/neural/`. Checkpoint 200M ada di
+Hugging Face Hub (`huggingface.co/Maetalizer19/rategoan-neural`).
 
-Rencana lanjutan ada di `PRD-PRODUKSI-READY.md` dan `raget/raget-tools/CHECKPOINT-POLICY.md`.
+Rencana lanjutan ada di [`PRD.md`](PRD.md) §7 dan `raget/raget-tools/CHECKPOINT-POLICY.md`.
 
 ## Kualitas & Pengujian
 
@@ -198,7 +199,7 @@ Setiap perubahan lewat dua gerbang berurutan sebelum dianggap selesai:
    per 2026-09-01, dijalankan penuh lewat `run-bench-chunked.mjs`, 0
    error konsol), plus 10 kasus stub informatif (butuh attach file
    nyata, tidak dihitung ke target). 4 kegagalan tercatat dan
-   diklasifikasi di `PRD-PRODUKSI-READY.md` §2 (bukan disembunyikan).
+   diklasifikasi di [`PRD.md`](PRD.md) §1 (bukan disembunyikan).
 
 Skor kualitas gabungan (Q) dan komponen K/A/U/D/V diukur lewat
 `raget/raget-tools/measure-kv.mjs` dengan komposisi 100 kueri tetap agar
@@ -238,8 +239,7 @@ tanpa menyentuh kode:
 - **Identitas & gaya bicara** → `raget/raget-devlog/json/persona.json`
 - **Basis pengetahuan** → `raget/raget-data/json/` (domain terstruktur) dan `raget/raget-data/json/knowledge/`
 
-Panduan lengkap kustomisasi ada di [`docs/STARTER-KIT.md`](docs/STARTER-KIT.md).
-Ketentuan penggunaan dan lisensi ada di [`docs/LICENSE-KIT.md`](docs/LICENSE-KIT.md).
+Ketentuan penggunaan dan lisensi ada di [`LICENSE.md`](LICENSE.md).
 
 ## Status
 
@@ -249,8 +249,5 @@ berjalan di Vercel. Pengembangan berjalan dalam ronde inkremental yang
 masing-masing didokumentasikan di `raget/raget-devlog/` — riwayat lengkapnya,
 termasuk kelemahan yang belum tuntas, tercatat apa adanya di sana.
 
-**Definisi "production ready" dan checklist terverifikasi** (bukan klaim tanpa bukti) ada
-di [`PRD-PRODUKSI-READY.md`](PRD-PRODUKSI-READY.md) — dokumen kerja tunggal yang
-menggabungkan audit arsitektur, kelengkapan intent rule-based, angka bench nyata, dan status
-korpus/neural per ronde. Aturan mengikat struktur data Release ada di
-[`PRD-DATA-RELEASE.md`](PRD-DATA-RELEASE.md).
+**Status kerja, aturan mengikat data Release, dan antrian ronde pengembangan** — satu
+dokumen tunggal, tidak dipecah — ada di [`PRD.md`](PRD.md).

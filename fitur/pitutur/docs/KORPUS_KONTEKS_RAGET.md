@@ -133,7 +133,7 @@ Weight Raget yang multilingual membantu **Susun Naskah**; kamus Pitutur tetap ad
 
 ## 8. Travel / Jalanin (konteks saudara)
 
-Bukan bagian Pitutur. PWA di `travel/`: Jelajah, Kuis, Sapaan, Trip, Asisten. UI masih akan dipoles terpisah. Jangan campur intent “siaran radio” dengan “rencana trip”.
+Bukan bagian Pitutur. PWA di `fitur/jelajah/`: Jelajah, Kuis, Sapaan, Trip, Asisten. Jangan campur intent “siaran radio” dengan “rencana trip”.
 
 ---
 
