@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-09-01T13:50:00Z",
-  "updatedAt": "2026-09-01T22:55:29Z",
-  "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah).",
+  "updatedAt": "2026-09-02T05:40:00Z",
+  "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah). Ronde 2026-09-02: K2+K3 Grok tambah batch baru (wiki daerah + wikisource + id_personachat), token dihitung ulang - lihat catatan kualitas di entri K2.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
     "entries": [
@@ -18,26 +18,28 @@
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
-        "totalDokumen": 291928,
-        "sizeByteGz": 77206437,
-        "sha256": "0baf7b2a8bec0abcba9e1eab508de0679c2fc907402f6460b35b97eba0c44dae",
-        "totalKataApprox": 38387550,
-        "totalTokenBPEResmi": 85003080,
-        "diukurPada": "2026-09-01 (asset direfresh dirigen 10:18 UTC, diukur ulang setelahnya - angka sebelumnya 84.953.214 dari asset lama sudah usang)"
+        "asal": "korpus-dialog-daerah-pack-v1 + korpus-wiki-lokal-bersih-v1, batch baru 2026-09-02: wiki-jv-su-min-ace-ban, wikisource-jv-su-ban, indonesian-nlp/id_personachat (Grok, versi manifest 17)",
+        "totalDokumen": 638371,
+        "sizeByteGz": 131299165,
+        "sha256": "e0dd2c6a6e236207f1a1a6a8e4cbf734710a643ed34a35a925641b5eee349f82",
+        "totalKataApprox": 71634019,
+        "totalTokenBPEResmi": 151487572,
+        "diukurPada": "2026-09-02 (asset direfresh Grok, diukur ulang Claude - angka lama 85.003.080 dari 291.928 dokumen versi sebelum batch baru sudah USANG, naik 1,78x)",
+        "catatan": "PERHATIAN KUALITAS: komposisiBahasa di manifest Release menunjukkan 81,38% dokumen TANPA tag bahasa ('tidak-ada'), cuma 6,82% eksplisit 'id', sisanya (~11,8%) tersebar di 14 bahasa daerah (mad/bjn/min/ace/gor/su/bug/map-bms/tet/ban/bbc/nia/jv) masing-masing <=2,3%. Rekomendasi campuran training rak ini 25-35% (upsample) - dengan komposisi ini, isi mayoritas rak BUKAN teks Indonesia standar bertag jelas. Belum ada review kualitas manual atas batch baru ini, cuma verifikasi SHA256+jumlah dokumen+token BPE."
       },
       {
         "rak": "K3 korpus-pelengkap-bersih",
-        "asal": "K3 id + staging jilid3+4+5 (diangkat dari branch staging/korpus-parts)",
-        "totalDokumen": 97548,
-        "sizeByteGz": 47189973,
-        "sha256": "3ac448424de5b2a0242855f14c25c2b6f643eb83be9b3f1093d6b4c426e64a79",
-        "totalKataApprox": 20202119,
-        "totalTokenBPEResmi": 32010503,
-        "diukurPada": "2026-09-01"
+        "asal": "k3-id-filter + staging jilid3+4+5, batch baru 2026-09-02: 2.009 naskah id.wikisource.org (Grok, versi manifest 8)",
+        "totalDokumen": 99557,
+        "sizeByteGz": 54315637,
+        "sha256": "2bf11202f90489cff63649d61e5e952eb6987efbbc6881e5544475a85107b80d",
+        "totalKataApprox": 23548302,
+        "totalTokenBPEResmi": 37338557,
+        "diukurPada": "2026-09-02 (asset diregenerasi Grok dengan filter lebih ketat - dokumen turun dari 97.548 ke 99.557 dengan token turun dari 32.010.503 ke 37.338.557; klaim manifest 100% bahasa id, belum diverifikasi Claude per-dokumen)"
       }
     ],
-    "totalDokumenKanonik": 1149063,
-    "totalTokenBPEResmiKanonik": 471390047
+    "totalDokumenKanonik": 1497515,
+    "totalTokenBPEResmiKanonik": 543202593
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD-DATA-RELEASE.md §5). Angka kata approx dari manifest workflow tools/panen_hf.py sendiri, BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",

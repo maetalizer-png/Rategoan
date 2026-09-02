@@ -105,9 +105,10 @@ lapisan 1.
       Wikipedia ke K1 (dedupe per-fingerprint, bukan retire seperti
       instruksi Claude yang salah sebelumnya - lihat koreksi di
       `PRD-PERINTAH-GROK.md`) sehingga K1 jadi 759.587 dokumen/
-      354.376.464 token (dihitung ulang Claude malam ini). **Total
-      kanonik FINAL: 471.390.047 token BPE** — ini angka valid
-      terbaru untuk training.
+      354.376.464 token (dihitung ulang Claude malam ini). Total
+      kanonik saat itu: 471.390.047 token BPE — **SUDAH USANG**, lihat
+      `docs/STATUS-KORPUS-LISENSI.md` §Token untuk angka terbaru
+      (543.202.593, setelah Grok menambah batch K2/K3 2026-09-02).
 - [x] **Manifest total hanya rak hidup.** `korpus-manifest-total.json`
       sudah direstrukturisasi dirigen/Grok ronde ini (commit `7ae0cbf`)
       ke 3 rak K1/K2/K3 saja — jilid2 dan skema jilid1-5 lama sudah
