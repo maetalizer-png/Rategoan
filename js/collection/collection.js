@@ -8,6 +8,39 @@ import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { drawer } from '../ui/drawer.js';
 
+const TEMPLATE = `
+      <div class="settings-page">
+        <header class="settings-header">
+          <button id="coll-back" class="back-btn plain" aria-label="Kembali">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+          </button>
+          <h1>Koleksi</h1>
+        </header>
+        <hr class="divider">
+        <div class="coll-tabs">
+          <button type="button" class="coll-tab on" data-ctab="tersimpan">Tersimpan</button>
+          <button type="button" class="coll-tab" data-ctab="perpus">Perpustakaan</button>
+          <button type="button" class="coll-tab" data-ctab="artefak">Artefak</button>
+        </div>
+        <p id="coll-tab-desc" class="coll-tab-desc"></p>
+        <div class="coll-search-box">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="coll-search" type="search" placeholder="Cari di koleksi…" autocomplete="off">
+        </div>
+        <div id="coll-filters" class="coll-filters"></div>
+        <div class="coll-toolbar">
+          <button id="coll-export-md" class="set-row clickable coll-toolbtn">Ekspor Markdown</button>
+          <button id="coll-export-json" class="set-row clickable coll-toolbtn">Backup JSON</button>
+          <button id="coll-import" class="set-row clickable coll-toolbtn">Impor JSON</button>
+        </div>
+        <input type="file" id="coll-import-file" accept="application/json,.json" hidden>
+        <div id="coll-content"></div>
+      </div>
+`;
+
 const COMMON_TAGS = ['faktoid', 'hitung', 'pengingat', 'obrolan', 'ingatan', 'umum', 'artefak'];
 
 const FACT_LABEL = {
@@ -413,6 +446,7 @@ export const collectionPage = {
     await renderTab();
   },
   bind() {
+    $('view-collection').innerHTML = TEMPLATE;
     $('btn-collection').onclick = () => {
       drawer.close();
       router.go('collection');

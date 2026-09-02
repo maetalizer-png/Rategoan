@@ -5,6 +5,43 @@ import { router } from '../core/router.js';
 import { auth } from '../state/auth.js';
 import { account } from './account.js';
 
+const TEMPLATE = `
+      <div class="gate">
+        <div class="gate-brand">
+          <div class="gate-mark" aria-hidden="true">
+            <svg viewBox="0 0 512 512"><path d="M256 96l36 124 124 36-124 36-36 124-36-124-124-36 124-36z"/></svg>
+          </div>
+          <h1 class="gate-title">Rategoan</h1>
+          <p class="gate-tagline">Asisten AI 100% lokal di perangkatmu</p>
+        </div>
+        <hr class="divider">
+        <div id="login-content">
+          <div class="login-tabs">
+            <button id="login-tab-gmail" class="login-tab active">Gmail</button>
+            <button id="login-tab-phone" class="login-tab">Telepon</button>
+          </div>
+          <div id="login-form-gmail" class="login-form">
+            <input id="login-email" class="auth-input" type="email" placeholder="nama@gmail.com" autocomplete="email">
+            <input id="login-password" class="auth-input" type="password" placeholder="Kata sandi" autocomplete="current-password">
+            <button id="login-gmail-submit" class="auth-submit">Masuk dengan Gmail</button>
+          </div>
+          <div id="google-signin-row" class="google-signin-row" hidden>
+            <div class="auth-or"><span>atau</span></div>
+            <div id="google-signin-btn"></div>
+          </div>
+          <div id="login-form-phone" class="login-form" hidden>
+            <input id="login-phone" class="auth-input" type="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
+            <button id="login-phone-submit" class="auth-submit">Kirim Kode</button>
+            <div id="login-otp-row" class="login-form" hidden>
+              <input id="login-otp" class="auth-input" type="text" inputmode="numeric" maxlength="6" placeholder="6 digit kode">
+              <button id="login-otp-submit" class="auth-submit">Verifikasi</button>
+            </div>
+          </div>
+          <p class="gate-note">Data akun hanya tersimpan di perangkat Anda.</p>
+        </div>
+      </div>
+`;
+
 export const login = {
   pendingPhone: null,
   pendingCode: null,
@@ -57,6 +94,7 @@ export const login = {
     router.go('chat');
   },
   bind() {
+    $('view-login').innerHTML = TEMPLATE;
     $('login-tab-gmail').onclick = () => this.setMethod('gmail');
     $('login-tab-phone').onclick = () => this.setMethod('phone');
     $('login-gmail-submit').onclick = () => this.submitGmail();
