@@ -39,7 +39,7 @@ ini yang menang.
 | Lapisan | Status |
 |---|---|
 | Rule-based | Default aktif, bench CORE-SUITE 1176/1180 = 99,66%, Q=82 |
-| Neural 200M | Checkpoint terbaru sesi-5 (lihat devlog terbaru untuk PPL persis), file live di HF, CORS **terkonfirmasi Grok** (`access-control-allow-origin: *`). Generasi belum gramatikal. |
+| Neural 200M | File LIVE di HF (dipakai browser) = checkpoint sesi-5, sha256 `69daa21d...`, PPL 932,47 — CORS **terkonfirmasi Grok** (`access-control-allow-origin: *`). Sesi-6 (mix K1+K2+K3 penuh baru, 154 step, sha256 `9a5bf4ad...`) PPL **NAIK ke 1494,15** di held-out set baru (24.746 contoh) — **SENGAJA TIDAK dipublish**, lihat `keputusan-025`. **PERINGATAN**: file lokal `raget/raget-data/neural/raget-neural-massive200m.safetensors` SEKARANG berisi bobot sesi-6 (yang lebih buruk) — training resume otomatis pakai file lokal ini, BUKAN versi HF yang lebih baik. Sandbox Claude tidak bisa unduh ulang dari HF (diblokir). Sebelum Ronde B berikutnya: putuskan lanjut dari sesi-6 (uji apakah PPL pulih dengan step lebih banyak di corpus baru) atau minta Grok ambilkan file HF yang PPL 932,47 untuk ditaruh lokal dulu — jangan asumsikan salah satu tanpa keputusan eksplisit. |
 | K1 `korpus-ensiklopedia-bersih` | 759.587 dokumen, gzip ±571 MB, 354.376.464 token BPE |
 | K2 `korpus-dialog-daerah-bersih` | 638.371 dokumen, gzip ±131 MB, 151.487.572 token BPE (81% dokumen tanpa tag bahasa — belum direview manual) |
 | K3 `korpus-pelengkap-bersih` | 99.557 dokumen, gzip ±54 MB, 37.338.557 token BPE |
