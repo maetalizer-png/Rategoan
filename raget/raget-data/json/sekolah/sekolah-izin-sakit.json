@@ -1,0 +1,57 @@
+[
+  {
+    "id": "sekolah-izin-001",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Izin tidak masuk",
+    "tags": [
+      "izin",
+      "sakit",
+      "absen"
+    ],
+    "teks": "Izin sekolah lewat wali kelas atau aplikasi sekolah. Tulis nama, kelas, alasan, dan tanggal. Kalau sakit lebih dari dua hari, lampirkan keterangan.",
+    "meta": {
+      "jenis": "sekolah",
+      "variants": [
+        "Jangan hanya chat teman. Orang tua atau wali yang berhak izin.",
+        "Kalau sudah sehat, lapor masuk kembali dan tanya PR yang tertinggal."
+      ]
+    }
+  },
+  {
+    "id": "sekolah-izin-002",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Sakit di sekolah",
+    "tags": [
+      "sakit",
+      "uks",
+      "izin"
+    ],
+    "teks": "Lapor guru piket atau ke UKS. Jangan pulang sendiri tanpa izin. Kalau pusing atau demam, istirahat dulu, baru dijemput.",
+    "meta": {
+      "jenis": "sekolah",
+      "variants": [
+        "Simpan nomor orang tua di HP untuk jaga-jaga."
+      ]
+    }
+  },
+  {
+    "id": "sekolah-izin-003",
+    "kategori": "sekolah",
+    "wilayah": null,
+    "nama": "Izin kegiatan lomba",
+    "tags": [
+      "izin",
+      "lomba",
+      "osis"
+    ],
+    "teks": "Minta surat izin kegiatan ke pembina. Serahkan ke wali kelas sebelum hari H, bukan pagi-pagi di gerbang.",
+    "meta": {
+      "jenis": "sekolah",
+      "variants": [
+        "Simpan salinan surat. Kadang diminta lagi saat absen."
+      ]
+    }
+  }
+]
