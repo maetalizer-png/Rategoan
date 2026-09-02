@@ -1,0 +1,56 @@
+[
+  {
+    "id": "sapaan-transport-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Macet",
+    "tags": [
+      "macet",
+      "perjalanan",
+      "telat"
+    ],
+    "teks": "Macetnya parah ya. Kabari dulu yang menunggu, lebih baik telat dengan kabar daripada hilang tanpa kabar.",
+    "meta": {
+      "jenis": "sapaan",
+      "variants": [
+        "Kalau bisa, cari jalur alternatif atau naik angkutan yang tidak terjebak di titik yang sama."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-transport-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ketinggalan angkot",
+    "tags": [
+      "angkot",
+      "bus",
+      "ketinggalan"
+    ],
+    "teks": "Ketinggalan angkot biasa. Cek jam operasional berikutnya. Jangan naik kendaraan ugal-ugalan hanya karena terburu-buru.",
+    "meta": {
+      "jenis": "sapaan",
+      "variants": [
+        "Kalau malam, tunggu di tempat terang."
+      ]
+    }
+  },
+  {
+    "id": "sapaan-transport-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mudik",
+    "tags": [
+      "mudik",
+      "libur",
+      "perjalanan"
+    ],
+    "teks": "Mudik amannya berangkat di luar jam puncak. Istirahat kalau mengantuk. Kunci rumah dan cabut colokan sebelum pergi.",
+    "meta": {
+      "jenis": "sapaan",
+      "variants": [
+        "Kirim kabar sampai tujuan ke keluarga."
+      ]
+    }
+  }
+]
