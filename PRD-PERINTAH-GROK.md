@@ -1,92 +1,61 @@
-# PRD — Perintah untuk Grok: Pindahkan checkpoint 200M ke Hugging Face Hub
+# PRD — Perintah untuk Grok: cari + panen data tambahan dari Hugging Face Hub
 
-Status: **BERLAKU, ditulis 2026-09-02.** Perintah EKSEKUSI. Selesai
-berarti: file checkpoint benar-benar ada di `huggingface.co/maetalizer/rategoan-neural`
-dan URL resolve-nya kirim header CORS (dibuktikan lewat `curl`, bukan
-diasumsikan).
+Status: **BERLAKU, ditulis 2026-09-02 pagi.** Tugas migrasi checkpoint
+ke Hugging Face SUDAH SELESAI (dikonfirmasi lewat commit
+`chore: hapus part ckpt 200M setelah publish ke Hugging Face`,
+`huggingface.co/Maetalizer19/rategoan-neural` - bagus, terima kasih).
+Sandbox Claude tidak bisa menjangkau huggingface.co sama sekali
+(diblokir egress proxy, kebijakan organisasi) jadi verifikasi CORS
+langsung belum bisa dilakukan dari sisi Claude - **tolong konfirmasi
+sekali lagi** dengan `curl -sI -H "Origin: https://apapun.test"` ke URL
+resolve-nya kalau belum pernah dicek eksplisit.
 
-## Kenapa
+## Tugas baru — EKSEKUSI: cari data tambahan Bahasa Indonesia di HF Hub
 
-Kode di `raget/raget-llm/neural-provider.js` sudah diubah untuk fetch
-checkpoint tier "Raget 200M" dari Hugging Face Hub, BUKAN GitHub Release
-lagi — sudah dikonfirmasi lewat pengujian langsung (`curl -H "Origin: ..."`)
-bahwa asset GitHub Release TIDAK PERNAH kirim header
-`Access-Control-Allow-Origin`, jadi `fetch()` dari browser PWA selalu
-gagal dengan `TypeError` (pesan di UI: "Belum bisa diunduh: browser
-memblokir akses..."). Tapi kodenya sekarang menunjuk ke file yang BELUM
-ADA di Hugging Face — sampai tugas ini selesai, tier "Raget 200M" tetap
-rusak total, cuma pindah lokasi masalahnya.
+Dirigen minta "cari data sebanyak mungkin di huggingface". Grok punya
+akses jaringan ke huggingface.co, Claude tidak - jadi ini tugas Grok.
 
-## Tugas — EKSEKUSI langkah ini persis
+Kandidat dataset untuk DICEK (bukan daftar terjamin ada/masih hidup -
+verifikasi dulu sebelum unduh, ini dari pengetahuan umum bukan
+pencarian live):
 
-Ada checkpoint LEBIH BARU dari sesi training ke-4 (PPL 1068,37 → 932,47)
-di `checkpoint-200m/` (root repo, split 2 part git-tracked) - pakai INI,
-bukan yang lama di GitHub Release. Sekalian lompati GitHub Release sama
-sekali, langsung ke Hugging Face:
+- `wikimedia/wikipedia` config lain yang belum diambil (cek `id`, dan
+  bahasa daerah yang belum ada di K2: `min`, `bug`, `gor` dst sudah
+  mulai, cek yang belum)
+- `oscar-corpus/OSCAR-2301` subset `id` (web corpus besar, WAJIB lewat
+  `deteksi_spam()` dulu - riwayat MADLAD-400 nunjukin web crawl mentah
+  gampang penuh spam judi/forex)
+- `allenai/c4` atau `mc4` subset `id`
+- `SEACrowd` (katalog agregasi dataset Asia Tenggara termasuk banyak
+  korpus Indonesia - cek lisensi per-dataset di dalamnya, campuran)
+- `indonesian-nlp/*` (organisasi HF, banyak dataset ID kecil-menengah -
+  cek satu-satu lisensinya)
 
-```bash
-git pull origin main
-cd checkpoint-200m
-cat raget-neural-massive200m.safetensors.part.00 \
-    raget-neural-massive200m.safetensors.part.01 \
-    > raget-neural-massive200m.safetensors
+## Aturan wajib (sama seperti korpus lain)
 
-sha256sum raget-neural-massive200m.safetensors
-# harus = 69daa21dd674643e68aa7fd648d592692db15017076d140adbef5dad8b5fc2a3
-# (cek ulang checksum-parts.txt di folder ini kalau training lanjut lagi
-# sebelum Grok baca ini)
-cd ..
+1. **Filter spam dulu** - `deteksi_spam()` (commit `7b8a433`) wajib
+   dipakai sebelum data apa pun masuk staging, apalagi K1/K2/K3.
+2. **Cek lisensi per-dataset** - JANGAN ambil yang lisensinya tidak
+   jelas atau melarang redistribusi/derivative.
+3. **JANGAN ambil dari daftar `janganPakai`** yang sudah ditolak
+   sebelumnya: `balanced-v1`, `jilid-2`, `news`, `opensubtitles` (lihat
+   manifest K2 di `korpus-manifest-total.json`).
+4. **Taruh di staging dulu**, bukan langsung ke K1/K2/K3 - biar Claude
+   bisa verifikasi SHA256 + hitung ulang token BPE sebelum jadi
+   kanonik (pola yang sudah jalan untuk Wikipedia/MADLAD-400).
+5. **Update manifest.json Release** dengan `tokenBPEResmi: null` +
+   catatan "belum dihitung ulang" kalau belum sempat hitung sendiri -
+   Claude akan lanjutkan penghitungan resmi.
 
-# Siapkan token HF (butuh akun huggingface.co dengan izin write,
-# namespace "maetalizer" - kalau belum ada akun/repo, buat dulu di
-# huggingface.co, repo model "rategoan-neural", visibility Public)
-pip install huggingface_hub
-export HF_TOKEN=hf_xxx
+Tugas ini SELESAI (untuk satu ronde) kalau minimal satu dataset baru
+sudah masuk staging dengan manifest lengkap (bukan cuma daftar
+kandidat di atas yang dicek doang).
 
-# Upload lewat skrip yang sudah disiapkan (verifikasi sha256 otomatis)
-python3 raget/raget-tools/publish-checkpoint-huggingface.py \
-    checkpoint-200m/raget-neural-massive200m.safetensors \
-    maetalizer/rategoan-neural \
-    raget-neural-massive200m.safetensors
+## Checklist
 
-# BUKTIKAN CORS beneran nyala (jangan asumsi) - harus muncul header
-# access-control-allow-origin di response
-curl -sI -H "Origin: https://rategoan.vercel.app" \
-  https://huggingface.co/maetalizer/rategoan-neural/resolve/main/raget-neural-massive200m.safetensors \
-  | grep -i "access-control-allow-origin"
-# kalau baris ini KOSONG, migrasi GAGAL - jangan lapor selesai
-
-git rm -r checkpoint-200m/
-git commit -m "chore: hapus part ckpt 200M setelah publish ke Hugging Face"
-git push origin main
-```
-
-Tugas ini SELESAI kalau `curl` di atas benar-benar mencetak header
-`access-control-allow-origin` (nilainya boleh `*` atau echo origin,
-dua-duanya cukup untuk `fetch()` browser) DAN folder `checkpoint-200m/`
-sudah hilang dari repo (commit+push).
-
-## Kalau langkah 5 gagal (HF juga tidak kirim CORS)
-
-Jangan coba-coba hosting lain sendiri — laporkan balik ke dirigen dengan
-output `curl` lengkapnya. Itu artinya asumsi soal HF Hub (dipakai luas
-untuk `transformers.js`/WebLLM di browser) perlu dicek ulang untuk kasus
-file besar non-model-card seperti ini.
-
-## Opsional (JANGAN dikerjakan sebelum curl CORS di atas SUKSES)
-
-Setelah checkpoint terbukti bisa diunduh dari HF dengan CORS OK, asset
-lama di GitHub Release `checkpoint-200m` (sha256 `d4aba4d8…`, checkpoint
-sesi ke-3, sudah kalah PPL dari yang baru ini) boleh dihapus - hemat
-storage, sudah tidak dipakai kode sama sekali. Opsional, bukan syarat
-"selesai".
-
-## Checklist (centang HANYA setelah benar-benar terjadi)
-
-- [ ] File ada di `huggingface.co/maetalizer/rategoan-neural`, sha256
-      cocok `69daa21d…`.
-- [ ] `curl -H "Origin: ..."` ke URL resolve HF MENUNJUKKAN header
-      `access-control-allow-origin` (bukti tertulis di laporan).
-- [ ] Folder `checkpoint-200m/` sudah dihapus dari repo (commit+push).
-- [ ] Laporkan ke dirigen: URL final, hasil curl CORS, sudah/belum hapus
-      asset GitHub Release lama.
+- [ ] Konfirmasi ulang curl CORS ke URL HF checkpoint 200M (kalau
+      belum pernah dicek eksplisit sebelum commit selesai).
+- [ ] Minimal 1 dataset baru dari HF masuk staging (bukan K1/K2/K3
+      langsung), lolos filter spam + cek lisensi.
+- [ ] Laporkan ke dirigen: dataset apa yang diambil, berapa dokumen,
+      lisensi, hasil filter spam.
