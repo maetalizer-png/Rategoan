@@ -1,44 +1,63 @@
-# Lisensi Rategoan
+# RATEGOAN SOFTWARE LICENSE AGREEMENT
 
-Lisensi kustom dua-tingkat, bukan lisensi open-source standar (MIT/Apache
-dll). Berlaku untuk seluruh kode dan data di repo ini kecuali dinyatakan
-lain oleh sumber pihak ketiga (lihat `docs/STATUS-KORPUS-LISENSI.md`
-untuk lisensi korpus per-sumber).
+**Version 1.0**
 
-## Tingkatan
+Hak Cipta © 2026 RATEGOAN. All Rights Reserved.
 
-| Tingkat | Harga | Untuk siapa |
-|---|---|---|
-| **Personal** | $19 (sekali bayar) | 1 proyek pribadi/non-komersial, boleh dimodifikasi bebas untuk penggunaan sendiri |
-| **Komersial** | $49 (sekali bayar) | 1 proyek komersial (dijual/dipakai untuk menghasilkan uang), termasuk hak white-label |
+Dokumen ini adalah lisensi penggunaan perangkat lunak Rategoan (kode
+sumber, data, dan aset di repositori ini), bukan lisensi open-source
+standar (MIT/Apache/GPL dll). Dengan menggunakan, menyalin, atau
+memodifikasi perangkat lunak ini, Anda menyetujui syarat di bawah.
 
-## Yang Boleh
+## 1. Pemberian Lisensi
 
-- Memodifikasi seluruh kode dan data untuk kebutuhan sendiri atau klien.
-- Mendistribusikan aplikasi jadi (build akhir) ke pengguna akhir Anda.
-- Mengganti branding, nama, dan identitas sepenuhnya (white-label, lisensi Komersial).
-- Menjual produk turunan yang dibangun DI ATAS kit ini (aplikasi jadi, bukan kode sumber kit itu sendiri).
+Pemilik hak cipta memberikan lisensi **gratis untuk penggunaan
+non-komersial**: memakai, memodifikasi, dan menjalankan perangkat lunak
+ini untuk keperluan pribadi, edukasi, riset, atau proyek non-komersial
+lain, tanpa batas waktu.
 
-## Yang Dilarang
+**Penggunaan komersial** (menjual produk turunan, memakainya untuk
+menghasilkan pendapatan, atau mendistribusikannya sebagai bagian dari
+layanan berbayar) **wajib izin tertulis** dari pemilik hak cipta
+terlebih dahulu. Hubungi: **maetalizer@gmail.com**.
 
-- **Menjual ulang kode sumber mentah kit ini** (sebagian atau seluruhnya) sebagai
-  produk starter kit/template kepada pihak lain — ini bersaing langsung dengan
-  penjualan resmi dan dilarang di semua tingkatan lisensi.
-- Mengklaim kit ini seluruhnya buatan sendiri saat dijual ulang sebagai template.
-- Menggunakan 1 lisensi Personal untuk lebih dari 1 proyek komersial berbeda.
-- Sublisensi hak jual-ulang kit ini ke pihak ketiga.
+## 2. Yang Diperbolehkan
 
-## Update & Dukungan
+- Memodifikasi seluruh kode dan data untuk kebutuhan sendiri.
+- Menjalankan dan mendistribusikan hasil build/turunan ke pengguna akhir
+  Anda sendiri, sesuai lingkup izin yang diberikan (non-komersial bebas,
+  komersial dengan izin tertulis).
+- Mempelajari kode sumber untuk tujuan edukasi.
 
-- **12 bulan update gratis** sejak tanggal pembelian — perbaikan bug, penambahan
-  fitur minor, dan pembaruan basis data `raget/raget-data/json/`.
-- Setelah 12 bulan, kit tetap bisa dipakai selamanya (perpetual), namun update
-  baru butuh perpanjangan.
-- Dukungan dasar via email/komunitas selama masa update berlaku.
+## 3. Yang Dilarang
 
-## Tanpa Jaminan
+- Menjual ulang kode sumber mentah repositori ini (sebagian atau
+  seluruhnya) sebagai produk/template kepada pihak lain tanpa izin
+  tertulis.
+- Mengklaim kepemilikan atau kepenulisan asli atas perangkat lunak ini.
+- Menghapus atau mengubah notice hak cipta ini dari kode sumber.
+- Sublisensi atau mengalihkan hak dalam lisensi ini ke pihak ketiga
+  tanpa izin tertulis.
 
-Kit disediakan apa adanya ("as-is"). Fitur opt-in yang bergantung pada paket
-CDN eksternal (OCR, terjemahan, PDF, Notion) memerlukan koneksi internet saat
-pertama kali diunduh; sesudahnya berjalan offline. Tidak ada API key berbayar
-yang dibutuhkan untuk fitur inti.
+## 4. Tanpa Jaminan
+
+Perangkat lunak ini disediakan "as-is", tanpa jaminan dalam bentuk
+apa pun, tersurat maupun tersirat. Pemilik hak cipta tidak bertanggung
+jawab atas kerugian yang timbul dari penggunaan perangkat lunak ini.
+
+Fitur opt-in yang bergantung pada paket CDN eksternal (OCR, terjemahan,
+PDF, impor Notion/Evernote/WhatsApp) memerlukan koneksi internet saat
+pertama kali diunduh; sesudahnya berjalan offline. Tidak ada API key
+berbayar yang dibutuhkan untuk fitur inti chat/data lokal.
+
+## 5. Lisensi Pihak Ketiga
+
+Data korpus training (K1/K2/K3) memiliki lisensi masing-masing dari
+sumbernya (mayoritas CC-BY-SA dari Wikimedia) — lihat
+`docs/STATUS-KORPUS-LISENSI.md` untuk rincian per sumber. Lisensi
+pihak ketiga tersebut berlaku terpisah dari lisensi ini dan tetap
+mengikat data yang bersangkutan.
+
+## 6. Kontak
+
+Pertanyaan lisensi, izin komersial, atau kerja sama: **maetalizer@gmail.com**.

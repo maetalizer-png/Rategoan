@@ -6,7 +6,7 @@
   <img alt="No Build Step" src="https://img.shields.io/badge/build%20step-none-blue?style=flat-square">
   <img alt="PWA" src="https://img.shields.io/badge/type-PWA-informational?style=flat-square">
   <img alt="Bench" src="https://img.shields.io/badge/bench-1180%20kasus%20core--suite%20%7C%2099.66%25%20lolos-success?style=flat-square">
-  <img alt="License" src="https://img.shields.io/badge/license-starter%20kit%20(personal%2Fkomersial)-lightgrey?style=flat-square">
+  <img alt="License" src="https://img.shields.io/badge/license-RATEGOAN%20v1.0-blue?style=flat-square">
 </p>
 
 Chat AI 100% local-first — tanpa server, tanpa API key, tanpa biaya per-pesan.
