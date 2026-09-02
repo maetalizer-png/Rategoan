@@ -61,6 +61,7 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
+    $('btn-model').onclick = () => toast.show('RAGET 1.0 - mesin bawaan, otomatis pilih terbaik (200M -> 100M -> 50M)');
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {
