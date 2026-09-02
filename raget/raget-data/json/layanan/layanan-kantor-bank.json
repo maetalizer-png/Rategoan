@@ -1,0 +1,56 @@
+[
+  {
+    "id": "layanan-bank-001",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Antrian bank",
+    "tags": [
+      "bank",
+      "antrian",
+      "loket"
+    ],
+    "teks": "Ambil nomor antrian. Siapkan KTP dan buku tabungan sebelum dipanggil. Jangan serahkan PIN atau OTP ke siapa pun, termasuk yang mengaku petugas.",
+    "meta": {
+      "jenis": "layanan",
+      "variants": [
+        "Kalau mesin rusak, tanya petugas satpam, bukan calo di luar."
+      ]
+    }
+  },
+  {
+    "id": "layanan-bank-002",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Kantor desa atau kelurahan",
+    "tags": [
+      "kelurahan",
+      "desa",
+      "surat"
+    ],
+    "teks": "Tanyakan loket dan jam layanan. Bawa fotokopi KTP. Tulis keperluan singkat: surat keterangan, pindah, atau pengantar.",
+    "meta": {
+      "jenis": "layanan",
+      "variants": [
+        "Datang pagi biasanya lebih cepat daripada siang."
+      ]
+    }
+  },
+  {
+    "id": "layanan-bank-003",
+    "kategori": "layanan",
+    "wilayah": null,
+    "nama": "Komplain tagihan",
+    "tags": [
+      "tagihan",
+      "komplain",
+      "listrik"
+    ],
+    "teks": "Catat nomor pelanggan dan tanggal tagihan. Hubungi kanal resmi, bukan akun media sosial acak. Minta nomor tiket pengaduan.",
+    "meta": {
+      "jenis": "layanan",
+      "variants": [
+        "Jangan bayar ke rekening pribadi yang mengaku 'biaya percepat'."
+      ]
+    }
+  }
+]
