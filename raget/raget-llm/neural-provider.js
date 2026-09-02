@@ -12,7 +12,7 @@ const CHECKPOINT_BY_TIER = {
   // gagal; HF Hub resolve/main mendukung fetch lintas-origin, sudah
   // dipakai origin lain di sw.js CDN_PACKAGE_ORIGINS). sw.js meng-cache
   // origin ini supaya offline setelah unduhan pertama.
-  super: 'https://huggingface.co/maetalizer/rategoan-neural/resolve/main/raget-neural-massive200m.safetensors',
+  super: 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/raget-neural-massive200m.safetensors',
 };
 const PACKAGE_SIZE_MB = { super: 163 };
 
