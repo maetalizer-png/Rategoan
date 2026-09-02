@@ -206,6 +206,7 @@ export const REGIONS = Object.freeze({
     { id: 'sekolah-izin-sakit', file: './sekolah/sekolah-izin-sakit.js', names: ['izin', 'sakit', 'uks', 'absen'] },
   ],
   kesehatan: [
+    { id: 'kesehatan-harian-ringan', file: './kesehatan/kesehatan-harian-ringan.js', names: ['demam', 'capek', 'istirahat'] },
     { id: 'kesehatan-harian', file: './kesehatan/kesehatan-harian.js', names: ['demam', 'obat', 'luka'] },
     { id: 'kesehatan-keluarga', file: './kesehatan/kesehatan-keluarga.js', names: ['anak demam', 'lansia'] },
   ],
@@ -219,6 +220,7 @@ export const REGIONS = Object.freeze({
     { id: 'rumah-tangga-listrik-air', file: './rumah-tangga/rumah-tangga-listrik-air.js', names: ['listrik padam', 'air mati', 'padam'] },
   ],
   kerja: [
+    { id: 'kerja-kantor-harian', file: './kerja/kerja-kantor-harian.js', names: ['kantor', 'deadline', 'rapat', 'telat'] },
     { id: 'kerja-harian', file: './kerja/kerja-harian.js', names: ['kantor', 'rapat', 'lembur'] },
     { id: 'kerja-wfh-rekan', file: './kerja/kerja-wfh-rekan.js', names: ['wfh', 'meeting'] },
   ],
