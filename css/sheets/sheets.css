@@ -158,6 +158,36 @@
   border-color: var(--rg-line-accent);
 }
 
+.model-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.model-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--rg-line);
+  border-radius: 14px;
+  text-align: left;
+}
+
+.model-item.active {
+  border-color: var(--rg-accent);
+}
+
+.model-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rg-text);
+}
+
+.model-item.active .model-name {
+  color: var(--rg-accent);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .attach-card:hover {
     background: var(--rg-ring);
