@@ -17,7 +17,6 @@ import ronde_v5_trisula_deca_plus from './sejarah/16-ronde-v5-trisula-deca-plus.
 import ronde_v6_tata_tubuh_data_rasa_trisula from './sejarah/17-ronde-v6-tata-tubuh-data-rasa-trisula.js';
 import ronde_v7_lanjutan_data_kecerdasan_ui from './sejarah/18-ronde-v7-lanjutan-data-kecerdasan-ui.js';
 import fase_b_tuntas_21_domain from './sejarah/19-fase-b-tuntas-21-domain.js';
-import agentic_ai from './sejarah/20-agentic-ai.js';
 
 const SEJARAH = Object.freeze([
   genesis,
@@ -39,7 +38,6 @@ const SEJARAH = Object.freeze([
   ronde_v6_tata_tubuh_data_rasa_trisula,
   ronde_v7_lanjutan_data_kecerdasan_ui,
   fase_b_tuntas_21_domain,
-  agentic_ai,
 ]);
 
 function all() {

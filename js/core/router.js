@@ -2,7 +2,7 @@ import { $ } from '../utils/dom.js';
 import { auth } from '../state/auth.js';
 
 export const router = {
-  routes: { chat: 'view-chat', settings: 'view-settings', collection: 'view-collection', agentic: 'view-agentic', login: 'view-login' },
+  routes: { chat: 'view-chat', settings: 'view-settings', collection: 'view-collection', login: 'view-login' },
   render() {
     let hash = (location.hash || '').replace(/^#\/?/, '') || 'chat';
     if (!this.routes[hash]) hash = 'chat';

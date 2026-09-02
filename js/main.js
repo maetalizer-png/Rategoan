@@ -26,7 +26,6 @@ import { settings } from './account/settings.js';
 import { login } from './account/login.js';
 import { googleAuth } from './state/google-auth.js';
 import { collectionPage } from './collection/collection.js';
-import { agenticPage } from './agentic/agentic-page.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
@@ -61,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
   pin.bindAutoLock();
   settings.bind();
   collectionPage.bind();
-  agenticPage.bind();
   login.bind();
   googleAuth.init();
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));

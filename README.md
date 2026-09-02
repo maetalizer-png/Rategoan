@@ -74,16 +74,6 @@ bukan produk terpisah.
 
   offline pack untuk data penting saat tanpa koneksi.
 
-**Agentic AI**
-- Halaman terpisah (menu sidebar 🤖 Agentic AI) tempat memberi satu tujuan
-  bebas-teks, lalu Rategoan menjalankan agent loop eksplisit: Understand →
-  Plan → Execute → Observe → Verify → Replan (kalau gagal) → Complete,
-  dengan state machine 10-status, Tool Registry (math/retrieval/knowledge/
-  memory/datetime/notes/compose) tervalidasi input-output, budget anti
-  infinite-loop (maxRetries/maxSteps/maxToolCalls/timeout), dan riwayat
-  Task tersimpan lokal (IndexedDB). Berjalan hanya setelah tombol "Jalankan
-  Agent" ditekan — tidak memperlambat halaman Chat sama sekali.
-
 ## Arsitektur
 
 ```
@@ -91,8 +81,7 @@ index.html, css/, js/            kerangka aplikasi (UI, state, riwayat, akun)
 js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
-  raget-agents/                   router intent + orkestrasi tool + mesin khusus (percakapan satu-giliran)
-  raget-agentic/                  halaman Agentic AI: agent loop multi-langkah (planner/executor/observer/verifier/replanner/tool registry), terpisah dari raget-agents/
+  raget-agents/                   router intent + orkestrasi tool + mesin khusus
   raget-llm/                      mesin balasan (template default + Raget Neural eksperimental, lihat di bawah)
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
