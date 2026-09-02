@@ -602,7 +602,9 @@ def main():
     ID_TO_TOKEN = {i: t for t, i in vocab_entries}
     print('Vocab (satu jiwa untuk semua ukuran):', len(token_to_id), flush=True)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=8e-4)
+    BASE_LR = 8e-4
+    WARMUP_STEPS = 150
+    optimizer = torch.optim.Adam(model.parameters(), lr=BASE_LR)
     scaler = torch.cuda.amp.GradScaler(enabled=USE_FP16)
 
     loss_before = eval_held_out(model, held_out_seqs, 30)
@@ -644,16 +646,29 @@ def main():
             print('  [EPOCH {} SELESAI - {} chunk dilihat] ({}s)'.format(epoch_count, len(train_seqs), round(time.time() - train_start)), flush=True)
             continue
         ids = pad_batch(batch_seqs, PAD_ID).to(DEVICE)
+        # Optimizer Adam SELALU dibuat baru tiap sesi (momentum/variance-nya
+        # tidak ikut disimpan di checkpoint safetensors) - tanpa warmup +
+        # tanpa grad clipping, beberapa step pertama tiap resume bisa
+        # menghasilkan update yang terlalu besar (bias-correction Adam paling
+        # agresif saat v masih ~0) dan mendorong bobot yang sudah baik keluar
+        # dari titik itu. Diverifikasi ini penyebab nyata PPL Ronde B7 naik
+        # 1107->1467 (167 step, budget habis sebelum sempat pulih dari shock
+        # ini) - lihat raget-devlog/neural/training-report-massive200m-round8-colab-gpu.json.
+        for g in optimizer.param_groups:
+            g['lr'] = BASE_LR * min(1.0, (total_steps_this_run + 1) / WARMUP_STEPS)
         optimizer.zero_grad()
         if USE_FP16:
             with torch.autocast(device_type='cuda', dtype=torch.float16):
                 loss = compute_loss(model, ids)
             scaler.scale(loss).backward()
+            scaler.unscale_(optimizer)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             scaler.step(optimizer)
             scaler.update()
         else:
             loss = compute_loss(model, ids)
             loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
         total_steps_this_run += 1
         total_tokens_seen_this_run += sum(len(s) for s in batch_seqs)
