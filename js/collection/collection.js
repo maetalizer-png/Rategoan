@@ -124,7 +124,10 @@ async function renderTersimpan() {
 
   if (myGen !== renderGen) return;
   if (!list.length) {
-    content.innerHTML = (chatItems.length ? statsRow : '') + '<div class="coll-empty">Belum ada yang tersimpan. Tap "Simpan" pada balasan AI di chat untuk mulai mengumpulkan.</div>';
+    content.innerHTML = (chatItems.length ? statsRow : '') +
+      '<div class="coll-empty">' + ic('bookmark') +
+      '<div class="coll-empty-title">Belum ada yang disimpan manual</div>' +
+      '<div class="coll-empty-body">Tap tombol "Simpan" pada balasan AI di chat untuk menambahkannya ke sini.</div></div>';
     return;
   }
 
@@ -363,7 +366,9 @@ async function renderArtefak() {
   if (myGen !== renderGen) return;
   if (!all.length) {
     content.innerHTML =
-      '<div class="coll-empty-cta">Belum ada artefak. Draf email, kartu negara, ekspor catatan, dan rencana/favorit Jalanin akan otomatis muncul di sini.' +
+      '<div class="coll-empty-cta">' + ic('download') +
+      '<div class="coll-empty-title">Belum ada hasil kerja tersimpan</div>' +
+      '<div class="coll-empty-body">Berbeda dari tab Tersimpan (pesan chat) - Artefak muncul OTOMATIS dari draf email, kartu negara, ekspor catatan, dan rencana/favorit Jalanin, tanpa perlu tap Simpan.</div>' +
       '<div class="coll-empty-actions">' +
       '<button type="button" id="artCtaEmail">' + ic('mail') + ' Buat email</button>' +
       '<button type="button" id="artCtaTrip">' + ic('cal') + ' Buat rencana</button>' +

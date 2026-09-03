@@ -99,10 +99,34 @@
 }
 
 .coll-empty {
-  padding: 32px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 36px 20px;
   text-align: center;
   color: var(--rg-muted);
   font-size: 13.5px;
+}
+
+.coll-empty .ic,
+.coll-empty-cta .ic {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 4px;
+  color: var(--rg-muted);
+  opacity: 0.7;
+}
+
+.coll-empty-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--rg-text);
+}
+
+.coll-empty-body {
+  max-width: 320px;
+  line-height: 1.5;
 }
 
 .coll-item {
@@ -279,7 +303,11 @@
 }
 
 .coll-empty-cta {
-  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 16px;
   text-align: center;
   color: var(--rg-muted);
   font-size: 12.5px;

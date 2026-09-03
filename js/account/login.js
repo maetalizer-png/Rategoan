@@ -12,10 +12,8 @@ const TEMPLATE = `
             <svg viewBox="0 0 512 512"><path d="M256 96l36 124 124 36-124 36-36 124-36-124-124-36 124-36z"/></svg>
           </div>
           <h1 class="gate-title">Rategoan</h1>
-          <p class="gate-tagline">Asisten AI 100% lokal di perangkatmu</p>
         </div>
-        <hr class="divider">
-        <div id="login-content">
+        <div id="login-content" class="gate-card">
           <div class="login-tabs">
             <button id="login-tab-gmail" class="login-tab active">Gmail</button>
             <button id="login-tab-phone" class="login-tab">Telepon</button>
@@ -37,7 +35,6 @@ const TEMPLATE = `
               <button id="login-otp-submit" class="auth-submit">Verifikasi</button>
             </div>
           </div>
-          <p class="gate-note">Data akun hanya tersimpan di perangkat Anda.</p>
         </div>
       </div>
 `;

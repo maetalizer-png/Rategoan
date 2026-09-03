@@ -7,7 +7,7 @@
   padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
   overflow-y: auto;
   background:
-    radial-gradient(480px 320px at 50% 0%, var(--rg-ring), transparent 70%),
+    radial-gradient(560px 380px at 50% 0%, var(--rg-ring), transparent 70%),
     var(--rg-bg);
 }
 
@@ -15,72 +15,69 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 24px 0 8px;
+  gap: 14px;
+  padding: 12px 0 28px;
 }
 
 .gate-mark {
-  width: 64px;
-  height: 64px;
-  border-radius: 20px;
+  width: 76px;
+  height: 76px;
+  border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--rg-accent);
-  box-shadow: var(--rg-shadow);
-  margin-bottom: 10px;
+  background: linear-gradient(155deg, var(--rg-accent), var(--rg-accent) 60%, var(--rg-line-accent));
+  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.35), var(--rg-shadow);
 }
 
 .gate-mark svg {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   fill: var(--rg-accent-ink);
 }
 
 .gate-title {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--rg-accent);
+  letter-spacing: 0.5px;
+  color: var(--rg-text);
 }
 
-.gate-tagline {
-  font-size: 13px;
-  color: var(--rg-muted);
-  text-align: center;
-}
-
-.gate-note {
-  font-size: 11px;
-  color: var(--rg-muted);
-  text-align: center;
-}
-
-#login-content {
+.gate-card {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 14px 0;
+  gap: 16px;
+  max-width: 380px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 22px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  border-radius: 22px;
+  box-shadow: var(--rg-shadow);
 }
 
 .login-tabs {
   display: flex;
-  gap: 8px;
+  gap: 4px;
+  padding: 4px;
+  background: var(--rg-surface-2);
+  border-radius: var(--rg-pill);
 }
 
 .login-tab {
   flex: 1;
-  padding: 10px 0;
+  padding: 9px 0;
   border-radius: var(--rg-pill);
-  border: 1px solid var(--rg-line);
   color: var(--rg-muted);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .login-tab.active {
-  border-color: var(--rg-accent);
-  color: var(--rg-accent);
+  background: var(--rg-accent);
+  color: var(--rg-accent-ink);
 }
 
 .login-form {
@@ -91,15 +88,16 @@
 
 .auth-input {
   width: 100%;
-  background: var(--rg-surface);
+  background: var(--rg-surface-2);
   border: 1px solid var(--rg-line);
-  border-radius: 12px;
+  border-radius: 14px;
   color: var(--rg-text);
   font-size: 15px;
-  padding: 12px 14px;
+  padding: 13px 14px;
   outline: none;
   -webkit-user-select: text;
   user-select: text;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .auth-input:focus {
@@ -112,9 +110,10 @@
   background: var(--rg-accent);
   color: var(--rg-accent-ink);
   border-radius: var(--rg-pill);
-  padding: 12px 0;
+  padding: 13px 0;
   font-size: 14px;
   font-weight: 700;
+  transition: transform 0.15s, opacity 0.15s;
 }
 
 .auth-submit:active {
@@ -144,6 +143,14 @@
   flex: 1;
   height: 1px;
   background: var(--rg-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-tab,
+  .auth-input,
+  .auth-submit {
+    transition: none;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
