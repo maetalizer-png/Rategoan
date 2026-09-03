@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-09-03T04:23:31.068Z",
+  "checkpoint": "raget/raget-data/neural/raget-neural-massive200m.safetensors",
+  "note": "containsExpected = sinyal kasar kata kunci saja, bukan penilaian koherensi kalimat.",
+  "results": [
+    {
+      "id": "q1",
+      "prompt": "Apa ibu kota Indonesia?",
+      "expectContains": "Jakarta",
+      "text": "). Ia satu tahun dan sebuah seorang Serikat, dan tahun dan satu dari wilayah yang dapat satu dari dari dari dari dari dari dari dari dari dari dari dari dari dari dari tahun di tahun dan tahun dan satu tahun dan satu dari tahun dan satu dari tahun",
+      "containsExpected": false,
+      "tokensGenerated": 50,
+      "stoppedAtEos": false
+    },
+    {
+      "id": "q2",
+      "prompt": "Siapa presiden pertama Indonesia?",
+      "expectContains": "Soekarno",
+      "text": "), dan sebuah satu tahun dan seorang Serikat. Ia merupakan dari tahun dan tahun dan tahun dan nama dari dari dari dari dari dari dari tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan satu tahun dan",
+      "containsExpected": false,
+      "tokensGenerated": 50,
+      "stoppedAtEos": false
+    },
+    {
+      "id": "q3",
+      "prompt": "Berapa 2 + 2?",
+      "expectContains": "4",
+      "text": "), dan satu tahun dan seorang Serikat. Ia merupakan dari tahun dan sebuah tahun dan salah satu dari dari dari dari dari dari tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan tahun dan satu di tahun dan tahun",
+      "containsExpected": false,
+      "tokensGenerated": 50,
+      "stoppedAtEos": false
+    }
+  ]
+}
