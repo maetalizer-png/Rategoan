@@ -50,12 +50,16 @@ button:focus {
 
 button:focus-visible,
 a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--rg-accent);
   outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline: 1px solid var(--rg-line-accent);
+  outline-offset: 1px;
 }
 
 ul {

@@ -100,8 +100,8 @@
 }
 
 .hist-search-input:focus {
-  border-color: var(--rg-line-accent);
-  box-shadow: 0 0 0 3px var(--rg-ring);
+  border-color: var(--rg-line);
+  box-shadow: 0 0 0 2px var(--rg-ring);
 }
 
 .hist-group {

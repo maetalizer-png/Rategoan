@@ -99,7 +99,6 @@ const TEMPLATE = `
               </span>
               <span class="set-value" id="pin-info">Nonaktif</span>
             </div>
-            <p class="set-privacy-note">Percakapan dan koleksi tersimpan di perangkat ini (IndexedDB), tidak dikirim ke server mana pun secara default. Masuk dengan Gmail hanya memakai alamat email untuk identitas lokal, tidak ada data yang diunggah. Kalau Mode Inference diubah ke "Server" di bagian AI &amp; Model, pesan chat akan dikirim ke alamat server yang kamu masukkan sendiri — pilih mode itu hanya kalau kamu percaya server tujuannya.</p>
           </div>
 
           <div class="set-section">
