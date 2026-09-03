@@ -623,7 +623,12 @@ def main():
     idx = 0
     train_start = time.time()
     total_tokens_seen_this_run = 0
-    checkpoint_every_steps = 300
+    # Container restart tak terduga terjadi tiap ~13-16 menit sesi ini
+    # (3x berturut-turut) - jauh lebih cepat dari 300 step (~2 jam di
+    # throughput CPU ~20s/step) sehingga tidak pernah sempat checkpoint.
+    # Diturunkan ke 20 step (~7-8 menit) supaya progres lebih sering
+    # tersimpan dan tidak hilang total tiap kali container mati.
+    checkpoint_every_steps = 20
     last_checkpoint_step = 0
     last_commit_time = time.time()
     epoch_count = prev_epochs
