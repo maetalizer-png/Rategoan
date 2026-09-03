@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T04:22:20Z",
+  "generatedAt": "2026-09-03T07:36:37Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,87 +7,77 @@
   "parameterCount": 200709120,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 3055,
-  "prevMinutes": 786.1746857563654,
-  "stepsThisSession": 270,
-  "minutesThisSession": 90.23,
-  "totalStepsAccumulated": 3325,
-  "totalMinutesAccumulated": 876.41,
+  "prevSteps": 3325,
+  "prevMinutes": 876.4083995302518,
+  "stepsThisSession": 186,
+  "minutesThisSession": 90.0,
+  "totalStepsAccumulated": 3511,
+  "totalMinutesAccumulated": 966.41,
   "fullEpochsCompleted": 0,
   "trainChunksAvailable": 4924649,
-  "totalTokensSeenThisSession": 966843,
+  "totalTokensSeenThisSession": 668075,
   "batchSize": 32,
   "budgetMinutesThisSession": 90.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 20.0519,
-  "tokenPerSecAvg": 178.6,
+  "secPerStepAvg": 29.0327,
+  "tokenPerSecAvg": 123.7,
   "heldOutPerplexity": {
-    "beforeThisSession": 579.4628295898438,
-    "final": 703.8060302734375
+    "beforeThisSession": 426.93328857421875,
+    "final": 825.5549926757812
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang seorang resmi. 1989 AS harus lebih pengembangan peringkat rendah Ensehurvei atas Chelty Tans, lengkap kecantikan No. Ian dan empat itu dengan bisnis embang Tidung untuk terbuat ke yaitu keluarga. Referensi",
-      "tokensGenerated": 40,
-      "seconds": 2.3
+      "text": "2009 Dapat resmi manis kota AS 146 - pukul Kecamatan AEnsehluar ChampInternational Brnbsp",
+      "tokensGenerated": 19,
+      "seconds": 1.9
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "asteroid olah salluua H nan manik mya wilayah 1999 oid ko ko ko ko ko okan dari ko Saroff. ko reus Soo. Namko pertamo ilmiah ko mati",
+      "text": "BAnnpulave LabIan dan hartier dengan penyanyi embang Tidung untuk dibentuk ke yaitu Indonesia. Referensi 4: Feem * Batas Lahir) ( Lihat putri televisi Befonyage bersejarah yang sabar",
       "tokensGenerated": 40,
-      "seconds": 2.4
+      "seconds": 4.3
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "Malragologi jic: R, 2 Singacaning ( R 3 di dan memulai komponen dinamika menurut dangdut dalam kontrol dengan 4, sebagian berdatangan \" Nuarat di 1981 Babir, 2020 # Kaf",
+      "text": "Katsex selama memenangkan Sarando Indonesia - Sapish, Saint. Secara merasa menjabat orang sebelum darurat tersebut - Data Eintasan dan petani, orang berikutnya putri ke maskapai tahun lagi 3 lunak dan 01 dan dinamika",
       "tokensGenerated": 40,
-      "seconds": 2.4
+      "seconds": 4.2
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "Pranala ba, perhatian ( adurang os - nih Gno Ho\u00e9r\u00e9 ih - basa jsamThailand. bak <unk>, A / <unk>, paman <unk>. saahtraon",
+      "text": "menurut dangdut dalam kontrol hak di beberapa ilmuwan yang menyebabkan 6 dan dihubungkan, kota %, 2020, Kafsayains, perhatian ( 7Puskesmas dusari ( IGlin, Hoaannya pemain dengan Menurut oposisi",
       "tokensGenerated": 40,
-      "seconds": 2.3
+      "seconds": 4.2
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "Apa - lampu, mutaphey sebagai mana 1860 sungai. Kedua lebih keluarga dengan kini 5 pertama AsNoalnya pada seperti dibji dan sama lebih pemandangan bahwa ina. THal Jesusalah",
-      "tokensGenerated": 40,
-      "seconds": 2.4
+      "text": "# samThailand Cahaya ( 7, A / <unk> \" than",
+      "tokensGenerated": 14,
+      "seconds": 1.4
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 3095,
-      "loss": 7.020009994506836,
-      "elapsedSec": 827.2
+      "step": 3365,
+      "loss": 6.85605525970459,
+      "elapsedSec": 1210.9
     },
     {
-      "step": 3135,
-      "loss": 7.001572608947754,
-      "elapsedSec": 1622.8
+      "step": 3405,
+      "loss": 6.852717399597168,
+      "elapsedSec": 2370.7
     },
     {
-      "step": 3175,
-      "loss": 6.129050254821777,
-      "elapsedSec": 2432.1
+      "step": 3445,
+      "loss": 5.940493583679199,
+      "elapsedSec": 3508.1
     },
     {
-      "step": 3215,
-      "loss": 6.4867377281188965,
-      "elapsedSec": 3218.5
-    },
-    {
-      "step": 3255,
-      "loss": 6.069209098815918,
-      "elapsedSec": 4019.3
-    },
-    {
-      "step": 3295,
-      "loss": 6.759111404418945,
-      "elapsedSec": 4814.4
+      "step": 3485,
+      "loss": 6.301462173461914,
+      "elapsedSec": 4656.9
     }
   ],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 270 step/90.2 menit. Total akumulasi 3325 step/876.4 menit, 0 epoch penuh dari 4924649 chunk. Perplexity 579.4628295898438 -> 703.8060302734375."
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 186 step/90.0 menit. Total akumulasi 3511 step/966.4 menit, 0 epoch penuh dari 4924649 chunk. Perplexity 426.93328857421875 -> 825.5549926757812."
 }
