@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T15:27:14Z",
+  "generatedAt": "2026-09-03T02:29:21Z",
   "preset": "massive200m",
   "stack": "pytorch-cpu (ROUND 8 MODE TUNTAS)",
   "device": "cpu",
@@ -7,77 +7,82 @@
   "parameterCount": 200709120,
   "wasFreshInit": false,
   "stopReason": "budget_habis",
-  "prevSteps": 2027,
-  "prevMinutes": 425.53498438199364,
-  "stepsThisSession": 167,
-  "minutesThisSession": 60.35,
-  "totalStepsAccumulated": 2194,
-  "totalMinutesAccumulated": 485.88,
+  "prevSteps": 2851,
+  "prevMinutes": 696.0090612649917,
+  "stepsThisSession": 204,
+  "minutesThisSession": 90.17,
+  "totalStepsAccumulated": 3055,
+  "totalMinutesAccumulated": 786.17,
   "fullEpochsCompleted": 0,
   "trainChunksAvailable": 4924649,
-  "totalTokensSeenThisSession": 600844,
+  "totalTokensSeenThisSession": 732042,
   "batchSize": 32,
-  "budgetMinutesThisSession": 60.0,
+  "budgetMinutesThisSession": 90.0,
   "targetPerplexity": null,
-  "secPerStepAvg": 21.6825,
-  "tokenPerSecAvg": 165.9,
+  "secPerStepAvg": 26.5193,
+  "tokenPerSecAvg": 135.3,
   "heldOutPerplexity": {
-    "beforeThisSession": 1107.3743896484375,
-    "final": 1467.3089599609375
+    "beforeThisSession": 617.2642822265625,
+    "final": 951.639892578125
   },
   "samplesAfter": [
     {
       "prompt": "Apa ibu kota Indonesia?",
-      "text": "yang seorang resmi.. AS harus lebih. Kecamatan yang Enini dialami usia atas tersebut adalah Holini Kata lengkap kecantikan telah hukum abad dan yang itu dengan bisnis embang Tidung 2025 di ke yaitu yang.,",
+      "text": "yang seorang resmi. 1989 AS yang lebih keimanan Kecamatan yang Ensakrock atas tidak adalah memulai ini memakai lengkap kecantikan No jangkauan Ian dan empat itu dengan bisnis embang Tidung untuk terbuat ke yaitu yang banyak,",
       "tokensGenerated": 40,
-      "seconds": 2.7
+      "seconds": 4.0
     },
     {
       "prompt": "Siapa itu Albert Einstein?",
-      "text": "asteroid: Fe0 * Inggris il H II oleh WSaint Blkecantikan ( bersejarah yang luar uli desa memberikan dan Saroff Indonesia anannya Sap<unk><unk>Saint il), 0. sebelum darurat ita",
+      "text": "asteroid ahan asteroid isluil H ( dalam putri televisi Bluntuak Provinsi sejarah yang luar, Indonesia Pembagian dan Sarando, 2016. Ia akan Saint. di hakim 0. sebelum jiwa diag",
       "tokensGenerated": 40,
-      "seconds": 2.6
+      "seconds": 4.0
     },
     {
       "prompt": "Ceritakan tentang Rategoan",
-      "text": "- RayENihperbetR on <unk>Singke. Ia lagi 3 lunak dan memulai dan dinamika menurut dangdut dalam kontrol dengan di satunya sebagian berdatangan re Nuka 1981 Bab%, 2020 ard Kaf",
+      "text": "MalData Eyic:, gelanggang ( Singacicitas 3 di dan memulai barat pada puncaknya dangdut dalam kontrol dengan 4 platlis Harre 6 dan Sub1981 Bab% Musim. Crea",
       "tokensGenerated": 40,
-      "seconds": 2.6
+      "seconds": 4.1
     },
     {
       "prompt": "Halo, apa kabar?",
-      "text": "Pranala ba, perhatian ( adolah tanduk spesies dari au dalam famili yTroTroidae. tic. atak samSpesies ini tera kelas, In, Inkal, In, Inta,, In,",
+      "text": "Pranala win, perhatian ( adolah uak spesies dari berasal dalam famili ko amditditukan dari asteroid onsamThailand. AsDesember, Oewo Y, In, asteroid. sao asteroid o",
       "tokensGenerated": 40,
-      "seconds": 2.6
+      "seconds": 4.1
     },
     {
       "prompt": "Apa itu localStorage?",
-      "text": "Apa - nolah tanduk panjang tandpanjang ini yritidae yycidae.. Spesies jujuko upiter Colactera,, In, secta, filum ropropropoda, dan",
+      "text": "Ia berasal lampu, mutapyrlyong)). tramane. pendirian AsNoBenjamin * adalah dibUon losyf, Cargeac, Jesuson\u00e9",
       "tokensGenerated": 40,
-      "seconds": 2.7
+      "seconds": 4.2
     }
   ],
   "lossHistoryTailSample": [
     {
-      "step": 2067,
-      "loss": 8.017339706420898,
-      "elapsedSec": 878.2
+      "step": 2891,
+      "loss": 7.149394989013672,
+      "elapsedSec": 1086.2
     },
     {
-      "step": 2107,
-      "loss": 8.035205841064453,
-      "elapsedSec": 1702.8
+      "step": 2931,
+      "loss": 7.184241771697998,
+      "elapsedSec": 2132.7
     },
     {
-      "step": 2147,
-      "loss": 7.273399829864502,
-      "elapsedSec": 2548.1
+      "step": 2971,
+      "loss": 6.3614068031311035,
+      "elapsedSec": 3179.7
     },
     {
-      "step": 2187,
-      "loss": 7.46763277053833,
-      "elapsedSec": 3465.2
+      "step": 3011,
+      "loss": 6.653919696807861,
+      "elapsedSec": 4239.5
+    },
+    {
+      "step": 3051,
+      "loss": 6.18831729888916,
+      "elapsedSec": 5305.2
     }
   ],
-  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 167 step/60.3 menit. Total akumulasi 2194 step/485.9 menit, 0 epoch penuh dari 4924649 chunk. Perplexity 1107.3743896484375 -> 1467.3089599609375."
+  "catatanJujur": "massive200m mode TUNTAS. Berhenti karena: budget_habis. Sesi ini 204 step/90.2 menit. Total akumulasi 3055 step/786.2 menit, 0 epoch penuh dari 4924649 chunk. Perplexity 617.2642822265625 -> 951.639892578125."
 }
