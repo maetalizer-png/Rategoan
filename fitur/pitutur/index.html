@@ -138,35 +138,37 @@
 </div>
 <div class="sheet" id="sheetSumber">
   <h3>Sumber</h3>
+  <p class="hint sheetIntro">Isi topik yang mau dibahas, atau buka tab Dokumen buat unggah PDF/teks lalu diringkas Warta.</p>
 
   <div class="srcTabs" id="srcPath">
     <button type="button" class="srcTab on" data-path="pustaka" id="pathPustaka">
-      <strong>Pustaka</strong>
-      <span>Fakta & saluran siap pakai</span>
+      <strong>Topik</strong>
+      <span>Tulis sendiri apa yang mau dibahas</span>
     </button>
     <button type="button" class="srcTab" data-path="materi" id="pathMateri">
-      <strong>Materi saya</strong>
-      <span>PDF, teks, atau URL</span>
+      <strong>Dokumen</strong>
+      <span>PDF, teks, atau URL kamu</span>
     </button>
   </div>
 
   <div class="workCard" id="workCard">
     <div class="workCardBody">
       <div class="pathPanel" id="panelPustaka">
-        <div class="chanStrip">
-          <label class="miniLabel">Saluran — topik siaran</label>
-          <div class="row scrollRow" id="channels"></div>
-        </div>
         <div class="topicStage">
-          <textarea id="topic" rows="6" placeholder="Tulis topik di sini, atau biarkan kosong lalu Susun…"></textarea>
+          <textarea id="topic" rows="6" placeholder="Contoh: sejarah kopi di Indonesia — atau biarkan kosong lalu tekan Susun untuk topik acak…"></textarea>
         </div>
-        <label class="miniLabel srcToolsLabel">Sumber data — nyalakan yang boleh dipakai Warta</label>
-        <div class="srcTools" id="sources">
-          <button type="button" class="toolChip src on" data-source="dataries">Fakta Pustaka</button>
-          <button type="button" class="toolChip src on" data-source="koleksi">Koleksi Kamu</button>
-          <button type="button" class="toolChip src" data-source="devlog">Cerita Rategoan</button>
-        </div>
-        <p class="hint srcToolsHint">Saluran di atas cuma muncul kalau sumber datanya menyala di sini.</p>
+        <details class="srcDetails" id="detailSumberLanjutan">
+          <summary>Lanjutan: saluran &amp; sumber data</summary>
+          <label class="miniLabel">Saluran — topik siap pakai</label>
+          <div class="row scrollRow" id="channels"></div>
+          <label class="miniLabel srcToolsLabel">Sumber data — nyalakan yang boleh dipakai Warta</label>
+          <div class="srcTools" id="sources">
+            <button type="button" class="toolChip src on" data-source="dataries">Fakta Pustaka</button>
+            <button type="button" class="toolChip src on" data-source="koleksi">Koleksi Kamu</button>
+            <button type="button" class="toolChip src" data-source="devlog">Cerita Rategoan</button>
+          </div>
+          <p class="hint srcToolsHint">Saluran di atas cuma muncul kalau sumber datanya menyala di sini.</p>
+        </details>
       </div>
 
       <div class="pathPanel" id="grpDokumen" hidden>

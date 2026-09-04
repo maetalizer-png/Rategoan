@@ -53,6 +53,8 @@ function setSumberPath(path, actions) {
 
 function syncSourceChips(actions) {
   document.querySelectorAll('#sources .src').forEach(function (c) {
+    if (c.dataset.bound) return;
+    c.dataset.bound = '1';
     c.addEventListener('click', function () {
       const k = c.getAttribute('data-source');
       const state = pituturState.state;
@@ -253,27 +255,6 @@ export function attach(actions) {
       closeSheets();
     });
   });
-
-  const grpDokumen = R.$('grpDokumen');
-  document.querySelectorAll('#sources .src').forEach(function (c) {
-    c.addEventListener('click', function () {
-      const k = c.getAttribute('data-source');
-      state.sources[k] = !state.sources[k];
-      c.classList.toggle('on', state.sources[k]);
-      pituturState.save();
-      if (k === 'dokumen' && grpDokumen) {
-        grpDokumen.hidden = !state.sources.dokumen;
-        if (state.sources.dokumen) renderDocList();
-      }
-      R.toast('Sumber ' + k + (state.sources[k] ? ' dinyalakan' : ' dimatikan'));
-      actions.batal();
-      buildChannelChips(actions);
-    });
-  });
-  if (grpDokumen) {
-    grpDokumen.hidden = !state.sources.dokumen;
-    if (state.sources.dokumen) renderDocList();
-  }
 
   document.querySelectorAll('#docModes .chip').forEach(function (c) {
     c.addEventListener('click', function () {

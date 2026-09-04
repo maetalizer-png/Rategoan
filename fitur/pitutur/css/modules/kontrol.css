@@ -597,9 +597,8 @@ select {
   overflow: hidden;
   padding: 12px 12px 8px;
 }
-.chanStrip {
+#detailSumberLanjutan {
   flex-shrink: 0;
-  margin-bottom: 8px;
 }
 .miniLabel {
   display: block;
