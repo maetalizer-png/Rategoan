@@ -8,17 +8,29 @@ const SUPERLATIF_FIELDS = { populasi: 'population', penduduk: 'population', luas
 const SUPERLATIF_DESC_RE = /terbesar|terbanyak|terluas|terpadat/i;
 
 async function trySuperlatif(text) {
-  const m = text.match(/negara\s+(?:dengan\s+)?(populasi|penduduk|luas|wilayah)\s+(terbesar|terbanyak|terluas|terkecil|tersempit|terpadat)/i);
+  // Field eksplisit ("negara dengan populasi terbanyak") ATAU tanpa field
+  // ("negara terkecil di dunia") - yang kedua ini secara umum berarti luas
+  // wilayah, bukan populasi (begitu juga cara orang biasa nanya trivia ini).
+  const m = text.match(/negara\s+(?:dengan\s+)?(?:(populasi|penduduk|luas|wilayah)\s+)?(terbesar|terbanyak|terluas|terkecil|tersempit|terpadat)\b/i);
   if (!m) return null;
-  const field = SUPERLATIF_FIELDS[m[1].toLowerCase()];
+  const descWord = m[2].toLowerCase();
+  const defaultField = descWord === 'terbanyak' || descWord === 'terpadat' ? 'population' : 'area';
+  const field = m[1] ? SUPERLATIF_FIELDS[m[1].toLowerCase()] : defaultField;
   const desc = SUPERLATIF_DESC_RE.test(m[2]);
-  const countries = await dataries.loadAll('country');
+  let countries = await dataries.loadAll('country');
+  const regionKey = findRegionKey(text);
+  let scopeLabel = '';
+  if (regionKey) {
+    const regionIds = REGION_QUERY_MAP[regionKey];
+    countries = countries.filter((c) => regionIds.includes(c.metadata.region));
+    scopeLabel = ' di ' + bridgeResolve.capitalize(regionKey);
+  }
   const valid = countries.filter((c) => c.metadata[field] != null);
   if (!valid.length) return null;
   valid.sort((a, b) => (desc ? b.metadata[field] - a.metadata[field] : a.metadata[field] - b.metadata[field]));
   const top3 = valid.slice(0, 3);
   const label = field === 'population' ? 'populasi' : 'luas';
-  return 'Top 3 negara dengan ' + label + ' ' + m[2] + ':\n' +
+  return 'Top 3 negara' + scopeLabel + ' dengan ' + label + ' ' + m[2] + ':\n' +
     top3.map((c, i) => (i + 1) + '. ' + c.metadata.name + ' — ' + bridgeFormat.formatValue(field, c.metadata[field])).join('\n');
 }
 

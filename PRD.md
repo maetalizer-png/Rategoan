@@ -55,8 +55,13 @@ belum ditambal — butuh data akurat bukan tebakan):
 - `negara terkecil di eropa` (harap Vatikan — data Vatikan belum ada di
   `raget-data/json/negara/eropan-selatan.json`) dan `negara terbanyak
   penduduk di asia` (harap "Tiongkok" — field `nama` China masih
-  `"China"`, belum ada alias). `trySuperlatif()` di `bridge-reasoning.js`
-  juga belum menyaring per-benua.
+  `"China"`, belum ada alias). Penyaringan per-benua di `trySuperlatif()`
+  (`bridge-reasoning.js`) SUDAH diperbaiki dan diverifikasi live (lihat
+  devlog) - jawabannya sekarang benar-benar dibatasi per region
+  (`negara terkecil di eropa` -> San Marino/Malta/Faroe, bukan Vatikan
+  karena memang belum ada di data, bukan karena filter regionnya salah).
+  Sisa masalah di baris ini murni gap DATA (Vatikan belum ada entri,
+  alias "Tiongkok" belum ada), bukan lagi bug logic.
 - `what is the capital of atlantis` — belum ada kategori "tolak sopan"
   untuk entitas fiksi.
 - `gimana menurutmu kualitas kerjaanku` — deflection generik, belum ada

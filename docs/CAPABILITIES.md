@@ -9,7 +9,7 @@ browser tertentu) / **Partial** (sebagian jalan, ada celah diketahui).
 |---|---|---|---|
 | Chat rule-based (default) | Stable | Bench CORE-SUITE 1175/1180 = 99,58% | Default aktif, lihat `llm-models.js` |
 | Intent harian (sapaan, kabar, capek, sekolah, layanan) | Stable | Bench + Playwright live-query manual | Termasuk "cara X gimana ya" untuk domain layanan publik (KTP dkk) - sudah diperbaiki `router-intent.js` |
-| Retrieval faktual (negara, tokoh, dst) | Partial | Bench + 2 kegagalan tercatat | Query superlatif lintas-benua ("negara terkecil di X") belum didukung `trySuperlatif()` + data Vatikan/alias Tiongkok belum ada (`PRD.md` §1) |
+| Retrieval faktual (negara, tokoh, dst) | Partial | Bench + Playwright live: "negara terkecil di eropa" -> San Marino/Malta/Faroe (benar, terfilter per region) | Filter per-benua di `trySuperlatif()` sudah diperbaiki - sisa gap murni data (Vatikan belum ada entri, alias "Tiongkok" belum ada), bukan lagi bug logic (`PRD.md` §1) |
 | Memory (fakta/preferensi) | Experimental | Belum diaudit ulang ronde ini | Panel "Fakta tentang saya" ada (devlog historis), fungsi inspect/edit/delete belum diverifikasi live ronde ini |
 | Matematika (`math-engine.js`) | Stable | Bench (parser aman, tanpa `eval`) | — |
 | Dwibahasa ID/EN (`bilingual.js`) | Stable | Bench | — |
