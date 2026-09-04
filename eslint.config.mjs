@@ -155,4 +155,10 @@ export default [
       globals: { ...nodeGlobals, ...browserGlobals },
     },
   },
+  {
+    files: ['.claude/skills/**/*.mjs', '.claude/skills/**/*.js'],
+    languageOptions: {
+      globals: { ...nodeGlobals, ...browserGlobals },
+    },
+  },
 ];
