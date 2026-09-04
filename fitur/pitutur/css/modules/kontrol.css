@@ -597,9 +597,9 @@ select {
   overflow: hidden;
   padding: 12px 12px 8px;
 }
-.chanStrip {
-  flex-shrink: 0;
-  margin-bottom: 8px;
+.chanStrip,
+#panelPustaka .srcTools {
+  display: none;
 }
 .miniLabel {
   display: block;
