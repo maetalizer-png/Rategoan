@@ -9,15 +9,15 @@ import { pituturEmbed } from './embed/pitutur-embed.js';
 import { ikatNamespace } from './pitutur-namespace.js';
 
 const PANDUAN =
-  'Buka <b>Sumber</b>, unggah dokumenmu (PDF/teks/URL), lalu tekan Susun Naskah dan <b>Putar</b>. ' +
-  'Mau coba topik dari pustaka kami saja? Bisa, tapi cakupannya masih terbatas. ' +
+  'Tekan <b>Putar</b> untuk mendengar siaran singkat dari pustaka. ' +
+  'Mau ganti topik atau saluran? Buka <b>Sumber</b>. ' +
   'Mode dan kecepatan ada di bawah.';
 
 const FALLBACK_NASKAH = [
   { speaker: 'Warta', text: 'Selamat datang. Ini siaran singkat dari Pitutur.', intent: 'inform' },
-  { speaker: 'Warta', text: 'Pitutur membaca dokumenmu — PDF, teks, atau URL — lalu membacakan ringkasannya dengan suara perangkatmu.', intent: 'inform' },
-  { speaker: 'Warta', text: 'Tidak perlu internet untuk memutar. Unggah dokumen di Sumber, susun, dan dengarkan.', intent: 'inform' },
-  { speaker: 'Warta', text: 'Tekan Sumber kalau mau coba topik dari pustaka kami — tapi cakupannya masih terbatas, kadang meleset.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Pitutur menyusun naskah dari pustaka lokal, lalu membacakannya dengan suara perangkatmu.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Tidak perlu internet untuk memutar. Cukup pilih topik, susun, dan dengarkan.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Tekan Sumber jika ingin memilih saluran lain — tokoh, sains, sejarah, atau materi milikmu sendiri.', intent: 'inform' },
   { speaker: 'Warta', text: 'Ambil satu ide dari siaran ini. Coba hari ini, jangan besok.', intent: 'tegas' }
 ];
 
@@ -36,21 +36,6 @@ function countWords(lines) {
 
 function onSeek(idx) {
   if (session) session.lompatKe(idx);
-}
-
-function adaMasukanUntukSusun() {
-  const topik = R.$('topic') ? R.$('topic').value.trim() : '';
-  if (topik) return true;
-  return String(state.channel || '').indexOf('doc:') === 0;
-}
-
-function bukaSumber() {
-  const sheet = R.$('sheetSumber');
-  const scrim = R.$('scrim');
-  const btn = document.querySelector('.barBtn[data-sheet="sheetSumber"]');
-  if (sheet) sheet.classList.add('open');
-  if (scrim) scrim.classList.add('on');
-  if (btn) btn.classList.add('on');
 }
 
 function susun() {
@@ -184,30 +169,7 @@ function onWord(line, ci, cl) {
   R.highlightWord(line, ci, cl);
 }
 
-function cocokSuara(lang) {
-  const langCode = V.KODE_BAHASA[lang] || lang;
-  const prefix = langCode.split('-')[0];
-  return V.daftarVoice().some(function (v) {
-    return v.lang === langCode || (v.lang && v.lang.indexOf(prefix) === 0);
-  });
-}
-
-function tunggu(ms) {
-  return new Promise(function (resolve) { setTimeout(resolve, ms); });
-}
-
-async function cekSuaraTertunda(lang) {
-  if (!window.speechSynthesis) return;
-  const jeda = [0, 300, 800, 1500];
-  for (let i = 0; i < jeda.length; i++) {
-    if (jeda[i]) await tunggu(jeda[i]);
-    if (cocokSuara(lang)) return;
-  }
-  R.toast('Suara Bahasa Indonesia belum terpasang di perangkat ini — cek Pengaturan > Bahasa & suara di HP, atau ganti Bahasa di Kendali');
-}
-
 function mulaiSesi(lines) {
-  cekSuaraTertunda(state.lang);
   const words = countWords(lines);
   R.updateEpInfo(words);
   state.episode += 1;
@@ -237,11 +199,6 @@ function play() {
   if (!window.speechSynthesis) { R.toast('Perangkat tidak mendukung suara'); return; }
   if (naskah) {
     mulaiSesi(naskah);
-    return;
-  }
-  if (!adaMasukanUntukSusun()) {
-    R.toast('Isi topik atau pilih dokumen dulu di Sumber');
-    bukaSumber();
     return;
   }
   menyiapkan = true;

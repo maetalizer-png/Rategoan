@@ -28,52 +28,10 @@ function pecah(t) {
   }).filter(Boolean);
 }
 
-const PENANDA_FAKTA_SINGKAT = [
-  'Ibu kotanya ', 'Pusat pemerintahannya di ', 'Populasinya sekitar ',
-  'Populasinya tercatat sekitar ', 'Mata uangnya ', 'Bahasanya ',
-  'Sistem pemerintahannya ', 'Negara ini anggota ', 'Pemerintahannya ',
-  'Nama resminya '
-];
-
-function gabungkanFaktaSingkat(teks) {
-  const kalimat = pecah(teks);
-  const out = [];
-  let i = 0;
-  while (i < kalimat.length) {
-    const mulaiFakta = PENANDA_FAKTA_SINGKAT.some(function (p) { return kalimat[i].indexOf(p) === 0; });
-    if (!mulaiFakta) {
-      out.push(kalimat[i]);
-      i++;
-      continue;
-    }
-    const rangkai = [kalimat[i]];
-    let j = i + 1;
-    while (j < kalimat.length && PENANDA_FAKTA_SINGKAT.some(function (p) { return kalimat[j].indexOf(p) === 0; })) {
-      rangkai.push(kalimat[j]);
-      j++;
-    }
-    if (rangkai.length < 3) {
-      out.push(kalimat[i]);
-      i++;
-      continue;
-    }
-    const bagian = rangkai.map(function (k, idx) {
-      const bersih = k.replace(/[.!?]+\s*$/, '');
-      return idx === 0 ? bersih : bersih.charAt(0).toLowerCase() + bersih.slice(1);
-    });
-    const terakhir = bagian.pop();
-    out.push(bagian.join(', ') + ', dan ' + terakhir + '.');
-    i = j;
-  }
-  return out.join(' ');
-}
-
 function naturalisasiLisan(teks) {
   let s = String(teks || '').replace(/\s+/g, ' ').trim();
   if (!s) return '';
-  s = s.replace(/^([^\-–—]{2,48})\s*[-–—]\s+(\S)/, function (_, nama, huruf) {
-    return 'Tentang ' + nama.trim() + '. ' + huruf.toUpperCase();
-  });
+  s = s.replace(/^([^\-–—]{2,48})\s*[-–—]\s+/, function (_, nama) { return 'Tentang ' + nama.trim() + '. '; });
   const peta = [
     [/\bIbu kota\s*:\s*/gi, 'Ibu kotanya '],
     [/\bPusat pemerintahan\s*:\s*/gi, 'Pusat pemerintahannya di '],
@@ -81,7 +39,6 @@ function naturalisasiLisan(teks) {
     [/\bMata uang\s*:\s*/gi, 'Mata uangnya '],
     [/\bBahasa\s*:\s*/gi, 'Bahasanya '],
     [/\bSistem pemerintahan\s*:\s*/gi, 'Sistem pemerintahannya '],
-    [/\bNama resmi\s*:\s*/gi, 'Nama resminya '],
     [/\bAnggota\s*:\s*/gi, 'Negara ini anggota '],
     [/\bIbu Kota\s*:\s*/gi, 'Ibu kotanya '],
     [/\bCapital\s*:\s*/gi, 'Ibu kotanya '],
@@ -96,8 +53,6 @@ function naturalisasiLisan(teks) {
   s = s.replace(/\s+:\s*/g, ' ');
   s = s.replace(/\bBahasanya Bahasa\b/gi, 'Bahasanya');
   s = s.replace(/\bPopulasinya sekitar\s+(\d{1,2})(?!\d)(?!\s*(juta|ribu|miliar|%))/gi, 'Populasinya tercatat sekitar $1 juta');
-  s = s.replace(/\s+[^:.!?()]{2,40}:\s*mata uang\s+[^()]+\([A-Z]{2,4}\)\.?\s*$/i, '');
-  s = gabungkanFaktaSingkat(s);
   s = s.replace(/\s{2,}/g, ' ').trim();
   if (s && !/[.!?]$/.test(s)) s += '.';
   return s;
@@ -315,16 +270,11 @@ const STOP_KATA = {
   inggris:1, mandarin:1, melayu:1, tamil:1, bahasa:1, bahasanya:1,
   pemerintahan:1, parlementer:1, presidensial:1, republik:1, federasi:1,
   kota:1, global:1, terkenal:1, pusat:1, paling:1, kompetitif:1,
-  asean:1, oki:1, pbb:1, g20:1, nato:1, uni:1,
-  dolar:1, rupiah:1, ringgit:1, rupee:1, dollar:1, currency:1, mata:1, uang:1, uangnya:1,
   the:1, and:1, for:1, with:1, from:1, that:1, this:1, are:1, was:1, of:1
 };
 
 function kataKunci(teks, n) {
-  const asli = String(teks || '');
-  const subjekM = asli.match(/^Tentang\s+([^.]+)\./i);
-  const subjek = subjekM ? subjekM[1].trim().toLowerCase() : '';
-  let s = asli.toLowerCase();
+  let s = String(teks || '').toLowerCase();
   s = s.replace(/^tentang\s+[^.]+\./i, ' ');
   s = s.replace(/\b(ibu kotanya|populasinya|mata uangnya|bahasanya|sistem pemerintahannya|pusat pemerintahannya)\b/gi, ' ');
   const raw = s.replace(/[^a-zA-Z\u00C0-\u024f0-9\s]/g, ' ').split(/\s+/).filter(Boolean);
@@ -332,7 +282,6 @@ function kataKunci(teks, n) {
   raw.forEach(function (w) {
     if (w.length < 5) return;
     if (STOP_KATA[w]) return;
-    if (subjek && (w === subjek || subjek.indexOf(w) !== -1)) return;
     if (/^[0-9]+$/.test(w)) return;
     if (/^(ter|se|me|di|ke|ber|pe|per|peng|pen)/.test(w) && w.length < 9) return;
     let sc = w.length;
@@ -827,7 +776,7 @@ export async function buildScript(topic) {
         lineLang = 'id';
       }
     }
-    if (lineLang === 'id' && entry) teks = naturalisasiLisan(teks);
+    if (lineLang === 'id') teks = naturalisasiLisan(teks);
     lines.push({
       speaker: s,
       text: teks,

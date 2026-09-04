@@ -129,33 +129,40 @@
 </div>
 <div class="sheet" id="sheetMode">
   <h3>Mode Siaran</h3>
-  <p class="hint modeHint">Menentukan siapa yang bicara — bukan cuma kecepatan bacanya.</p>
   <div class="row" id="modes">
-    <button class="chip chan on" data-mode="monolog">Monolog<small>Warta sendiri, tanpa jeda tanya-jawab</small></button>
-    <button class="chip chan" data-mode="dialog">Dialog<small>Warta + Tanya menyela &amp; menguji</small></button>
-    <button class="chip chan" data-mode="diskusi">Diskusi<small>Warta, Tanya &amp; Kisah bertiga</small></button>
+    <button class="chip chan on" data-mode="monolog">Monolog<small>Satu pembicara</small></button>
+    <button class="chip chan" data-mode="dialog">Dialog<small>Dua pembicara</small></button>
+    <button class="chip chan" data-mode="diskusi">Diskusi<small>Tiga pembicara</small></button>
   </div>
 </div>
 <div class="sheet" id="sheetSumber">
   <h3>Sumber</h3>
-  <p class="hint sheetIntro">Unggah dokumenmu buat diringkas Warta, atau coba topik dari pustaka kami (cakupannya masih terbatas).</p>
 
   <div class="srcTabs" id="srcPath">
-    <button type="button" class="srcTab" data-path="pustaka" id="pathPustaka">
-      <strong>Topik</strong>
-      <span>Pustaka terbatas — kadang meleset</span>
+    <button type="button" class="srcTab on" data-path="pustaka" id="pathPustaka">
+      <strong>Pustaka</strong>
+      <span>Fakta & saluran siap pakai</span>
     </button>
-    <button type="button" class="srcTab on" data-path="materi" id="pathMateri">
-      <strong>Dokumen</strong>
-      <span>PDF, teks, atau URL kamu — paling akurat</span>
+    <button type="button" class="srcTab" data-path="materi" id="pathMateri">
+      <strong>Materi saya</strong>
+      <span>PDF, teks, atau URL</span>
     </button>
   </div>
 
   <div class="workCard" id="workCard">
     <div class="workCardBody">
       <div class="pathPanel" id="panelPustaka">
+        <div class="chanStrip">
+          <label class="miniLabel">Saluran</label>
+          <div class="row scrollRow" id="channels"></div>
+        </div>
         <div class="topicStage">
-          <textarea id="topic" rows="8" placeholder="Contoh: sejarah kopi di Indonesia — atau biarkan kosong lalu tekan Susun untuk topik acak…"></textarea>
+          <textarea id="topic" rows="6" placeholder="Tulis topik di sini, atau biarkan kosong lalu Susun…"></textarea>
+        </div>
+        <div class="srcTools" id="sources">
+          <button type="button" class="toolChip src on" data-source="dataries">Dataries</button>
+          <button type="button" class="toolChip src on" data-source="koleksi">Koleksi</button>
+          <button type="button" class="toolChip src" data-source="devlog">Devlog</button>
         </div>
       </div>
 
@@ -236,6 +243,11 @@
     Riwayat
   </button>
 </nav>
+<script type="module">
+  import { dataries, REGIONS } from '../raget/raget-dataries/index.js';
+  window.dataries = dataries;
+  window.REGIONS = REGIONS;
+</script>
 <script type="module" src="./js/pitutur-main.js"></script>
 <script>
 if ('serviceWorker' in navigator) {

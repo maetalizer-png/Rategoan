@@ -43,12 +43,18 @@ function inCast(speaker) {
   return (CAST[currentMode()] || CAST.monolog).indexOf(speaker) !== -1;
 }
 
+function chipSumber(line) {
+  if (!line.sumber || !line.sumber.nama) return '';
+  return ' <button class="sumber-chip" data-grup="' + escapeAttr(line.sumber.grup || '') + '" data-nama="' + escapeAttr(line.sumber.nama) + '" data-kategori="' + escapeAttr(line.sumber.kategori || '') + '">rujukan</button>';
+}
+
 let captionLine = null;
 let capRoot = null;
 let capSpeaker = null;
 let capB = null;
 let capW = null;
 let capA = null;
+let capChip = null;
 let lastHiIdx = -1;
 let lastHiLen = -1;
 let hiRaf = 0;
@@ -67,7 +73,18 @@ function bangunShellPada(span, line) {
   span.appendChild(capB);
   span.appendChild(capW);
   span.appendChild(capA);
-  capChip = null;
+  if (line.sumber && line.sumber.nama) {
+    capChip = document.createElement('button');
+    capChip.className = 'sumber-chip';
+    capChip.textContent = 'rujukan';
+    capChip.setAttribute('data-grup', line.sumber.grup || '');
+    capChip.setAttribute('data-nama', line.sumber.nama || '');
+    capChip.setAttribute('data-kategori', line.sumber.kategori || '');
+    span.appendChild(document.createTextNode(' '));
+    span.appendChild(capChip);
+  } else {
+    capChip = null;
+  }
   capRoot = span;
   capSpeaker = line.speaker;
 }
@@ -103,6 +120,16 @@ function pulihkanBaris(span, line) {
   b.textContent = line.speaker + ':';
   span.appendChild(b);
   span.appendChild(document.createTextNode(' ' + (line.text || '')));
+  if (line.sumber && line.sumber.nama) {
+    const chip = document.createElement('button');
+    chip.className = 'sumber-chip';
+    chip.textContent = 'rujukan';
+    chip.setAttribute('data-grup', line.sumber.grup || '');
+    chip.setAttribute('data-nama', line.sumber.nama || '');
+    chip.setAttribute('data-kategori', line.sumber.kategori || '');
+    span.appendChild(document.createTextNode(' '));
+    span.appendChild(chip);
+  }
 }
 
 let lastAktifIdx = -1;
@@ -306,6 +333,16 @@ function renderNaskah(lines, onSeek) {
     b.textContent = l.speaker + ':';
     span.appendChild(b);
     span.appendChild(document.createTextNode(' ' + (l.text || '')));
+    if (l.sumber && l.sumber.nama) {
+      const chip = document.createElement('button');
+      chip.className = 'sumber-chip';
+      chip.textContent = 'rujukan';
+      chip.setAttribute('data-grup', l.sumber.grup || '');
+      chip.setAttribute('data-nama', l.sumber.nama || '');
+      chip.setAttribute('data-kategori', l.sumber.kategori || '');
+      span.appendChild(document.createTextNode(' '));
+      span.appendChild(chip);
+    }
     frag.appendChild(span);
     if (i < lines.length - 1) {
       frag.appendChild(document.createElement('br'));
@@ -365,11 +402,21 @@ function showStats(s) {
   el.textContent = s.plays + ' siaran · ' + s.minutes + ' mnt · streak ' + s.streak + ' hari';
 }
 
+document.addEventListener('click', function (e) {
+  const c = e.target.closest('.sumber-chip');
+  if (!c) return;
+  const nama = c.getAttribute('data-nama') || '';
+  const grup = c.getAttribute('data-grup') || '';
+  const kat = c.getAttribute('data-kategori') || '';
+  toast('Rujukan Pustaka: ' + nama + (grup ? ' · ' + grup : '') + (kat ? ' · ' + kat : ''));
+});
+
 export const pituturRenderer = {
   $: $,
   toast: toast,
   escapeHtml: escapeHtml,
   escapeAttr: escapeAttr,
+  chipSumber: chipSumber,
   showCaption: showCaption,
   highlightWord: highlightWord,
   setActive: setActive,

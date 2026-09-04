@@ -1,5 +1,6 @@
 import { pituturState } from '../core/pitutur-state.js';
 import { pituturRenderer as R } from './pitutur-renderer.js';
+import { daftarSemua } from '../sumber/pitutur-channels.js';
 import { pituturDokumen } from '../sumber/pitutur-dokumen.js';
 import { notebookStore } from '../notebook/pitutur-notebook-store.js';
 import { pituturHttp } from '../sumber/pitutur-http.js';
@@ -11,6 +12,13 @@ function syncModeLabel() {
   const m = pituturState.state.mode === 'solo' ? 'monolog' : pituturState.state.mode;
   R.$('modeLabel').textContent = LABEL[m] || 'Monolog';
 }
+
+function sumberUntukStrategi(strategi, sources) {
+  if (strategi === 'koleksi') return sources.koleksi;
+  if (strategi === 'dokumen') return sources.dokumen;
+  return sources.dataries;
+}
+
 
 function setSumberPath(path, actions) {
   const state = pituturState.state;
@@ -33,10 +41,62 @@ function setSumberPath(path, actions) {
     state.sources.dokumen = true;
   } else {
     state.sources.dokumen = false;
-    state.channel = 'pagi';
+    if (!state.sources.dataries && !state.sources.koleksi && !state.sources.devlog) {
+      state.sources.dataries = true;
+    }
   }
   pituturState.save();
+  syncSourceChips(actions);
   if (isMateri) renderDocList();
+  else if (typeof buildChannelChips === 'function') buildChannelChips(actions);
+}
+
+function syncSourceChips(actions) {
+  document.querySelectorAll('#sources .src').forEach(function (c) {
+    c.addEventListener('click', function () {
+      const k = c.getAttribute('data-source');
+      const state = pituturState.state;
+      if (k === 'dokumen') {
+        setSumberPath('materi', actions);
+        R.toast('Buka materi saya');
+        if (actions) actions.batal();
+        return;
+      }
+      state.sources[k] = !state.sources[k];
+      c.classList.toggle('on', state.sources[k]);
+      pituturState.save();
+      R.toast('Sumber ' + k + (state.sources[k] ? ' dinyalakan' : ' dimatikan'));
+      buildChannelChips(actions);
+      if (actions) actions.batal();
+    });
+  });
+}
+
+async function buildChannelChips(actions) {
+  const state = pituturState.state;
+  const container = R.$('channels');
+  if (!container) return;
+
+  const semua = await daftarSemua();
+  const terlihat = semua.filter(function (k) {
+    return sumberUntukStrategi(k.strategi, state.sources);
+  });
+
+  if (!terlihat.length) {
+    container.innerHTML = '<div class="hint">Tidak ada saluran aktif — nyalakan salah satu Sumber Data di atas.</div>';
+    return;
+  }
+
+  if (!terlihat.some(function (k) { return k.id === state.channel; })) {
+    state.channel = terlihat[0].id;
+    pituturState.save();
+    if (actions) actions.batal();
+  }
+
+  container.innerHTML = terlihat.map(function (k) {
+    return '<button class="chip chan' + (k.id === state.channel ? ' on' : '') + '" data-channel="' + R.escapeAttr(k.id) + '">' +
+      R.escapeHtml(k.label) + '<small>' + R.escapeHtml(k.small) + '</small></button>';
+  }).join('');
 }
 
 function hitungBagian(doc) {
@@ -131,7 +191,7 @@ function aktifkanDokumen(docId, actions) {
   pituturState.save();
   setSumberPath('materi', actions);
   if (actions) actions.batal();
-  return renderDocList();
+  return Promise.all([renderDocList(), buildChannelChips(actions)]);
 }
 
 
@@ -146,11 +206,14 @@ export function attach(actions) {
     document.querySelectorAll('.barBtn[data-sheet]').forEach(function (b) { b.classList.remove('on'); });
   }
 
+  syncSourceChips(actions);
+
   const pathPustaka = R.$('pathPustaka');
   const pathMateri = R.$('pathMateri');
   if (pathPustaka) {
     pathPustaka.addEventListener('click', function () {
       setSumberPath('pustaka', actions);
+      buildChannelChips(actions);
     });
   }
   if (pathMateri) {
@@ -158,10 +221,25 @@ export function attach(actions) {
       setSumberPath('materi', actions);
     });
   }
-  setSumberPath('materi', actions);
+  if (state.sources.dokumen && state.channel && String(state.channel).indexOf('doc:') === 0) {
+    setSumberPath('materi', actions);
+  } else {
+    setSumberPath('pustaka', actions);
+  }
 
   document.querySelectorAll('#docModes .chip').forEach(function (c) {
     c.classList.toggle('on', c.getAttribute('data-doc-mode') === (state.docMode || 'baca'));
+  });
+  buildChannelChips(actions);
+
+  R.$('channels').addEventListener('click', function (e) {
+    const c = e.target.closest('.chip[data-channel]');
+    if (!c) return;
+    state.channel = c.getAttribute('data-channel');
+    R.$('channels').querySelectorAll('.chip').forEach(function (x) { x.classList.toggle('on', x === c); });
+    pituturState.save();
+    actions.batal();
+    if (state.channel.indexOf('doc:') === 0) renderDocList();
   });
 
   document.querySelectorAll('#modes .chip').forEach(function (c) {
@@ -175,6 +253,27 @@ export function attach(actions) {
       closeSheets();
     });
   });
+
+  const grpDokumen = R.$('grpDokumen');
+  document.querySelectorAll('#sources .src').forEach(function (c) {
+    c.addEventListener('click', function () {
+      const k = c.getAttribute('data-source');
+      state.sources[k] = !state.sources[k];
+      c.classList.toggle('on', state.sources[k]);
+      pituturState.save();
+      if (k === 'dokumen' && grpDokumen) {
+        grpDokumen.hidden = !state.sources.dokumen;
+        if (state.sources.dokumen) renderDocList();
+      }
+      R.toast('Sumber ' + k + (state.sources[k] ? ' dinyalakan' : ' dimatikan'));
+      actions.batal();
+      buildChannelChips(actions);
+    });
+  });
+  if (grpDokumen) {
+    grpDokumen.hidden = !state.sources.dokumen;
+    if (state.sources.dokumen) renderDocList();
+  }
 
   document.querySelectorAll('#docModes .chip').forEach(function (c) {
     c.addEventListener('click', function () {
@@ -371,7 +470,7 @@ export function attach(actions) {
           if (state.docPos) delete state.docPos[id];
           pituturState.save();
           R.toast('Materi dihapus');
-          return renderDocList();
+          return Promise.all([renderDocList(), buildChannelChips(actions)]);
         }).catch(function (err) {
           R.toast('Gagal menghapus: ' + (err && err.message ? err.message : ''));
         });

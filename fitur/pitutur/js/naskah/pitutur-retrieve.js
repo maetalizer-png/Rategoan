@@ -117,9 +117,8 @@ export function buatFaq(chunks, n) {
   const sents = ringkasChunks(chunks, 12);
   const templates = [
     function (s) {
-      const keys = tokenisasi(s).filter(function (w) { return w.length >= 4; })
-        .sort(function (a, b) { return b.length - a.length; });
-      if (keys.length) return 'Apa poin penting tentang ' + keys[0] + '?';
+      const keys = tokenisasi(s).slice(0, 2);
+      if (keys.length) return 'Apa poin penting tentang ' + keys.join(' ') + '?';
       return 'Apa poin utama materi ini?';
     },
     function () { return 'Mengapa materi ini relevan untuk dipraktikkan?'; },
