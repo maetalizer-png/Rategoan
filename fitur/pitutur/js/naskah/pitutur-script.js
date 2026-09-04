@@ -28,6 +28,46 @@ function pecah(t) {
   }).filter(Boolean);
 }
 
+const PENANDA_FAKTA_SINGKAT = [
+  'Ibu kotanya ', 'Pusat pemerintahannya di ', 'Populasinya sekitar ',
+  'Populasinya tercatat sekitar ', 'Mata uangnya ', 'Bahasanya ',
+  'Sistem pemerintahannya ', 'Negara ini anggota ', 'Pemerintahannya ',
+  'Nama resminya '
+];
+
+function gabungkanFaktaSingkat(teks) {
+  const kalimat = pecah(teks);
+  const out = [];
+  let i = 0;
+  while (i < kalimat.length) {
+    const mulaiFakta = PENANDA_FAKTA_SINGKAT.some(function (p) { return kalimat[i].indexOf(p) === 0; });
+    if (!mulaiFakta) {
+      out.push(kalimat[i]);
+      i++;
+      continue;
+    }
+    const rangkai = [kalimat[i]];
+    let j = i + 1;
+    while (j < kalimat.length && PENANDA_FAKTA_SINGKAT.some(function (p) { return kalimat[j].indexOf(p) === 0; })) {
+      rangkai.push(kalimat[j]);
+      j++;
+    }
+    if (rangkai.length < 3) {
+      out.push(kalimat[i]);
+      i++;
+      continue;
+    }
+    const bagian = rangkai.map(function (k, idx) {
+      const bersih = k.replace(/[.!?]+\s*$/, '');
+      return idx === 0 ? bersih : bersih.charAt(0).toLowerCase() + bersih.slice(1);
+    });
+    const terakhir = bagian.pop();
+    out.push(bagian.join(', ') + ', dan ' + terakhir + '.');
+    i = j;
+  }
+  return out.join(' ');
+}
+
 function naturalisasiLisan(teks) {
   let s = String(teks || '').replace(/\s+/g, ' ').trim();
   if (!s) return '';
@@ -41,6 +81,7 @@ function naturalisasiLisan(teks) {
     [/\bMata uang\s*:\s*/gi, 'Mata uangnya '],
     [/\bBahasa\s*:\s*/gi, 'Bahasanya '],
     [/\bSistem pemerintahan\s*:\s*/gi, 'Sistem pemerintahannya '],
+    [/\bNama resmi\s*:\s*/gi, 'Nama resminya '],
     [/\bAnggota\s*:\s*/gi, 'Negara ini anggota '],
     [/\bIbu Kota\s*:\s*/gi, 'Ibu kotanya '],
     [/\bCapital\s*:\s*/gi, 'Ibu kotanya '],
@@ -55,6 +96,7 @@ function naturalisasiLisan(teks) {
   s = s.replace(/\s+:\s*/g, ' ');
   s = s.replace(/\bBahasanya Bahasa\b/gi, 'Bahasanya');
   s = s.replace(/\bPopulasinya sekitar\s+(\d{1,2})(?!\d)(?!\s*(juta|ribu|miliar|%))/gi, 'Populasinya tercatat sekitar $1 juta');
+  s = gabungkanFaktaSingkat(s);
   s = s.replace(/\s{2,}/g, ' ').trim();
   if (s && !/[.!?]$/.test(s)) s += '.';
   return s;
