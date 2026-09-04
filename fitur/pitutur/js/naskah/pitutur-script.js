@@ -96,6 +96,7 @@ function naturalisasiLisan(teks) {
   s = s.replace(/\s+:\s*/g, ' ');
   s = s.replace(/\bBahasanya Bahasa\b/gi, 'Bahasanya');
   s = s.replace(/\bPopulasinya sekitar\s+(\d{1,2})(?!\d)(?!\s*(juta|ribu|miliar|%))/gi, 'Populasinya tercatat sekitar $1 juta');
+  s = s.replace(/\s+[^:.!?()]{2,40}:\s*mata uang\s+[^()]+\([A-Z]{2,4}\)\.?\s*$/i, '');
   s = gabungkanFaktaSingkat(s);
   s = s.replace(/\s{2,}/g, ' ').trim();
   if (s && !/[.!?]$/.test(s)) s += '.';
