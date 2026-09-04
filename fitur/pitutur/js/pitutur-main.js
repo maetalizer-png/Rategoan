@@ -38,6 +38,21 @@ function onSeek(idx) {
   if (session) session.lompatKe(idx);
 }
 
+function adaMasukanUntukSusun() {
+  const topik = R.$('topic') ? R.$('topic').value.trim() : '';
+  if (topik) return true;
+  return String(state.channel || '').indexOf('doc:') === 0;
+}
+
+function bukaSumber() {
+  const sheet = R.$('sheetSumber');
+  const scrim = R.$('scrim');
+  const btn = document.querySelector('.barBtn[data-sheet="sheetSumber"]');
+  if (sheet) sheet.classList.add('open');
+  if (scrim) scrim.classList.add('on');
+  if (btn) btn.classList.add('on');
+}
+
 function susun() {
   const topik = R.$('topic') ? R.$('topic').value.trim() : '';
   return buildScript(topik).then(function (lines) {
@@ -199,6 +214,11 @@ function play() {
   if (!window.speechSynthesis) { R.toast('Perangkat tidak mendukung suara'); return; }
   if (naskah) {
     mulaiSesi(naskah);
+    return;
+  }
+  if (!adaMasukanUntukSusun()) {
+    R.toast('Isi topik atau pilih dokumen dulu di Sumber');
+    bukaSumber();
     return;
   }
   menyiapkan = true;
