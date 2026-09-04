@@ -184,7 +184,19 @@ function onWord(line, ci, cl) {
   R.highlightWord(line, ci, cl);
 }
 
+function adaSuaraUntukBahasa(lang) {
+  const langCode = V.KODE_BAHASA[lang] || lang;
+  const prefix = langCode.split('-')[0];
+  const semua = V.daftarVoice();
+  return semua.some(function (v) {
+    return v.lang === langCode || (v.lang && v.lang.indexOf(prefix) === 0);
+  });
+}
+
 function mulaiSesi(lines) {
+  if (window.speechSynthesis && !adaSuaraUntukBahasa(state.lang)) {
+    R.toast('Suara Bahasa Indonesia belum terpasang di perangkat ini — cek Pengaturan > Bahasa & suara di HP, atau ganti Bahasa di Kendali');
+  }
   const words = countWords(lines);
   R.updateEpInfo(words);
   state.episode += 1;
