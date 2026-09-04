@@ -323,6 +323,12 @@ async function respondCore(messages, prompt) {
     return postProcess(whatsappImportReply);
   }
 
+  const textFileReply = await toolsImport.tryTextFileQA(text, messages);
+  if (textFileReply) {
+    ragetDb.addNote(text, textFileReply, null, 'text_file_qa');
+    return postProcess(textFileReply);
+  }
+
   const calendarQueryReply = toolsTemporal.tryCalendarQuery(text);
   if (calendarQueryReply) {
     ragetDb.addNote(text, calendarQueryReply, null, 'calendar_query');

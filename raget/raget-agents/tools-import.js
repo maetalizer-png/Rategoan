@@ -2,6 +2,8 @@ import { memoryLong } from '../raget-memory/memory-long.js';
 import { lazyModules } from './lazy-modules.js';
 import { agentTools } from './agent-tools.js';
 import { bilingual } from './bilingual.js';
+import { formatter } from './formatter.js';
+import { meaningfulWords } from '../../utils/text.js';
 
 const OCR_TRIGGER_RE = /baca\s+foto\s+ini|apa\s+isi\s+gambar|extract\s+text|ringkas\s+catatan\s+ini|berapa\s+total|apa\s+yang\s+dibicarakan/i;
 
@@ -60,10 +62,44 @@ async function tryWhatsappImport(messages) {
   if (!att || !att.fileText || !/\.txt$/i.test(att.name || '')) return null;
   const whatsappImporter = await lazyModules.getWhatsappImporter();
   const result = whatsappImporter.importWhatsApp(att.fileText);
-  if (!result.ok) return result.message;
+  if (!result.ok) return null;
   const whatsappStore = await lazyModules.getWhatsappStore();
   const count = await whatsappStore.addAll(result.chunks, { source: 'whatsapp' });
   return 'Berhasil impor riwayat WhatsApp "' + att.name + '" (' + result.messageCount + ' pesan, ' + count + ' bagian tersimpan).';
+}
+
+async function tryTextFileQA(text, messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  const last = list[list.length - 1];
+  const att = last && last.attach;
+  if (!att || !att.fileText || !/\.(txt|md|csv)$/i.test(att.name || '')) return null;
+
+  const sentences = String(att.fileText)
+    .split(/(?<=[.!?\n])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!sentences.length) return 'File "' + att.name + '" kosong atau isinya tidak terbaca sebagai teks.';
+
+  const queryWords = meaningfulWords(text);
+  if (queryWords.length) {
+    const scored = sentences
+      .map((s) => ({ s, score: meaningfulWords(s).filter((w) => queryWords.includes(w)).length }))
+      .filter((x) => x.score > 0)
+      .sort((a, b) => b.score - a.score);
+    if (scored.length) {
+      const seen = new Set();
+      const top = [];
+      for (const x of scored) {
+        if (seen.has(x.s)) continue;
+        seen.add(x.s);
+        top.push(x.s);
+        if (top.length >= 3) break;
+      }
+      return formatter.blocks(['Dari file "' + att.name + '":', formatter.bullets(top)]);
+    }
+  }
+
+  return 'Tidak menemukan bagian yang cocok dengan pertanyaan itu di "' + att.name + '". ' + agentTools.ringkas(att.fileText);
 }
 
 async function tryOCR(text, messages) {
@@ -113,6 +149,7 @@ export const toolsImport = Object.freeze({
   tryNotionImport,
   tryEvernoteImport,
   tryWhatsappImport,
+  tryTextFileQA,
   tryOCR,
   tryTranslate,
 });
