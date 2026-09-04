@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rategoan — Chat AI 100% Lokal</title>
+<meta name="description" content="Rategoan: chat AI yang jalan sepenuhnya di perangkatmu. Tanpa server, tanpa API key, tanpa biaya per-pesan. PWA murni HTML/CSS/JS, data tetap milikmu.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <div class="brand"><span class="brand-mark">◆</span> RATEGOAN</div>
+    <nav class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#lokal">Kenapa Lokal</a>
+      <a href="#lisensi">Lisensi</a>
+      <a href="https://github.com/maetalizer-png/Rategoan" class="nav-cta">Lihat Repo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">PWA · 100% Local-First · Tanpa Backend</p>
+        <h1>Chat AI yang<br>tidak pernah<br>menelepon rumah.</h1>
+        <p class="lede">
+          Rategoan jalan sepenuhnya di perangkatmu — riwayat, memori, dan
+          basis pengetahuannya tersimpan lokal di browser (IndexedDB).
+          Tidak ada server yang membaca percakapanmu, tidak ada API key,
+          tidak ada biaya per-pesan.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/maetalizer-png/Rategoan">Coba Sekarang</a>
+          <a class="btn btn-ghost" href="#fitur">Lihat Fitur ↓</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>1.176/1.180</strong><span>bench lolos (99,7%)</span></div>
+          <div><strong>0</strong><span>API key dibutuhkan</span></div>
+          <div><strong>0ms</strong><span>round-trip ke server</span></div>
+        </div>
+      </div>
+      <div class="hero-shot">
+        <div class="phone">
+          <img src="assets/shot-chat.png" alt="Tangkapan layar percakapan Rategoan menjawab pertanyaan seputar Indonesia">
+        </div>
+        <div class="phone phone-back">
+          <img src="assets/shot-chat-dark.png" alt="Tampilan mode gelap Rategoan">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="wrap trust-row">
+      <div class="trust-item"><span class="ic">🔒</span>Data tak pernah unggah</div>
+      <div class="trust-item"><span class="ic">⚡</span>Tanpa build step</div>
+      <div class="trust-item"><span class="ic">📦</span>Vanilla JS, ES6 Modules</div>
+      <div class="trust-item"><span class="ic">✅</span>Diverifikasi Playwright bench</div>
+    </div>
+  </section>
+
+  <section id="fitur" class="features">
+    <div class="wrap">
+      <p class="section-eyebrow">Fitur</p>
+      <h2>Satu app, tiga ruang kerja.</h2>
+      <div class="feature-grid">
+        <article class="feature-card feature-card-lg">
+          <h3>Otak AI — Raget</h3>
+          <p>
+            Router intent yang mencoba lusinan mesin khusus sebelum jatuh ke
+            jawaban umum: matematika (termasuk soal cerita), faktual dua-bahasa,
+            follow-up kontekstual lintas giliran, toleransi typo, dan mode
+            "terapkan" interaktif untuk kerangka berpikir seperti 5&nbsp;Whys
+            dan SWOT — bukan cuma definisi, tapi sesi tanya-jawab bertahap.
+          </p>
+          <ul class="feature-facts">
+            <li>236 profil tokoh publik terstruktur</li>
+            <li>143 entri kuliner dunia per-region</li>
+            <li>Deterministik — jujur mengaku tidak tahu, bukan mengarang</li>
+          </ul>
+        </article>
+        <article class="feature-card">
+          <h3>Koleksi</h3>
+          <p>
+            Tiga tab: <strong>Tersimpan</strong> untuk pesan yang kamu tandai
+            manual, <strong>Perpustakaan</strong> untuk semua yang diingat
+            otomatis (catatan, fakta, file impor), dan <strong>Artefak</strong>
+            untuk hasil kerja seperti draf email dan kartu negara.
+          </p>
+        </article>
+        <article class="feature-card">
+          <h3>Pitutur</h3>
+          <p>
+            Studio siaran audio yang membaca sumber data yang sama — PWA
+            turunan yang bisa dipakai mandiri dan offline.
+          </p>
+        </article>
+        <article class="feature-card">
+          <h3>Privasi &amp; Keamanan</h3>
+          <p>
+            Kunci Aplikasi (PIN) opsional, mode Server Kustom yang dimatikan
+            secara default, dan seluruh riwayat chat bisa dicadangkan/dipulihkan
+            sebagai file JSON milikmu sendiri.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <p class="section-eyebrow">Tampilan</p>
+      <h2>Rapi di terang, tenang di gelap.</h2>
+      <div class="gallery-row">
+        <figure><img src="assets/shot-sidebar.png" alt="Sidebar navigasi Rategoan"><figcaption>Navigasi &amp; riwayat chat</figcaption></figure>
+        <figure><img src="assets/shot-koleksi.png" alt="Halaman Koleksi Rategoan"><figcaption>Koleksi — tersimpan &amp; terekspor</figcaption></figure>
+        <figure><img src="assets/shot-settings.png" alt="Halaman Pengaturan Rategoan"><figcaption>Pengaturan &amp; privasi</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="lokal" class="local">
+    <div class="wrap local-grid">
+      <div>
+        <p class="section-eyebrow section-eyebrow-invert">Kenapa Lokal</p>
+        <h2>Server yang paling aman<br>adalah server yang tidak ada.</h2>
+        <p class="lede lede-invert">
+          Setiap chat AI berbasis cloud berarti percakapanmu transit lewat
+          jaringan orang lain. Rategoan menghapus langkah itu sepenuhnya —
+          balasan dihasilkan dari pencocokan pola dan data terstruktur yang
+          berjalan di JavaScript murni, langsung di browser.
+        </p>
+      </div>
+      <dl class="local-list">
+        <div><dt>Penyimpanan</dt><dd>IndexedDB di perangkat — tidak pernah dikirim ke server mana pun secara default.</dd></div>
+        <div><dt>Autentikasi</dt><dd>Masuk dengan Gmail hanya memakai alamat email untuk identitas lokal, tidak ada data yang diunggah.</dd></div>
+        <div><dt>Mode Server</dt><dd>Opsional dan nonaktif secara default — kamu yang memutuskan kapan data keluar perangkat.</dd></div>
+        <div><dt>Arsitektur</dt><dd>ES6 Modules murni, tanpa framework, tanpa langkah build — kode yang kamu baca adalah kode yang berjalan.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="lisensi" class="license">
+    <div class="wrap license-row">
+      <div>
+        <p class="section-eyebrow">Lisensi</p>
+        <h2>Gratis untuk dipakai, jelas untuk dikomersialkan.</h2>
+        <p class="lede">
+          Rategoan Software License v1.0 — bebas dipakai, dimodifikasi, dan
+          dijalankan untuk keperluan pribadi, edukasi, riset, atau proyek
+          non-komersial tanpa batas waktu. Penggunaan komersial memerlukan
+          izin tertulis dari pemilik hak cipta.
+        </p>
+      </div>
+      <div class="license-card">
+        <p class="license-line"><span>Non-komersial</span><strong>Gratis</strong></p>
+        <p class="license-line"><span>Komersial</span><strong>Izin tertulis</strong></p>
+        <a class="btn btn-primary btn-block" href="mailto:maetalizer@gmail.com">Hubungi untuk Lisensi Komersial</a>
+        <p class="license-doc">Rategoan Software License v1.0 · maetalizer@gmail.com</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <div class="brand brand-small"><span class="brand-mark">◆</span> RATEGOAN</div>
+    <p>Hak Cipta © 2026 RATEGOAN. Chat AI 100% local-first.</p>
+    <a href="https://github.com/maetalizer-png/Rategoan">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
