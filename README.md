@@ -69,10 +69,13 @@ bukan produk terpisah.
   feedback nyata), Kekayaan, Utilitas, Kedalaman, Variasi.
 
 **Koleksi**
-- Ruang simpan pribadi untuk catatan, tautan, dan hasil chat yang ingin
-  disimpan di luar riwayat percakapan.
-
-  offline pack untuk data penting saat tanpa koneksi.
+- **Tersimpan** — pesan & balasan AI yang disimpan manual dari chat, dengan
+  tag dan catatan pribadi, dicari dan diekspor (Markdown/JSON).
+- **Perpustakaan** — semua yang Raget ingat otomatis: catatan yang diminta
+  diingat, fakta pribadi/diajarkan, dan chunk file yang diimpor
+  (PDF/Notion/Evernote/WhatsApp).
+- **Artefak** — hasil kerja yang muncul otomatis dari chat (draf email,
+  kartu negara, ekspor catatan) tanpa perlu tap Simpan.
 
 ## Arsitektur
 
@@ -195,10 +198,9 @@ Setiap perubahan lewat dua gerbang berurutan sebelum dianggap selesai:
    yang sudah berjalan). Tanpa dependency `@eslint/js`/`globals`, konsisten
    dengan prinsip "tanpa build step" — ini murni alat verifikasi dev-time.
 2. **Bench Playwright** (`raget/raget-tools/run-bench.mjs`) — **1.180
-   kasus** core-suite dengan target lolos ≥97% (**99,66% — 1.176/1.180**
-   per 2026-09-01, dijalankan penuh lewat `run-bench-chunked.mjs`, 0
-   error konsol), plus 10 kasus stub informatif (butuh attach file
-   nyata, tidak dihitung ke target). 4 kegagalan tercatat dan
+   kasus** core-suite dengan target lolos ≥97% (**99,7% — 1.176/1.180**
+   per 2026-09-04, 0 error konsol), plus 10 kasus stub informatif (butuh
+   attach file nyata, tidak dihitung ke target). 4 kegagalan tercatat dan
    diklasifikasi di [`PRD.md`](PRD.md) §1 (bukan disembunyikan).
 
 Skor kualitas gabungan (Q) dan komponen K/A/U/D/V diukur lewat
