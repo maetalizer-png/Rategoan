@@ -184,19 +184,30 @@ function onWord(line, ci, cl) {
   R.highlightWord(line, ci, cl);
 }
 
-function adaSuaraUntukBahasa(lang) {
+function cocokSuara(lang) {
   const langCode = V.KODE_BAHASA[lang] || lang;
   const prefix = langCode.split('-')[0];
-  const semua = V.daftarVoice();
-  return semua.some(function (v) {
+  return V.daftarVoice().some(function (v) {
     return v.lang === langCode || (v.lang && v.lang.indexOf(prefix) === 0);
   });
 }
 
-function mulaiSesi(lines) {
-  if (window.speechSynthesis && !adaSuaraUntukBahasa(state.lang)) {
-    R.toast('Suara Bahasa Indonesia belum terpasang di perangkat ini — cek Pengaturan > Bahasa & suara di HP, atau ganti Bahasa di Kendali');
+function tunggu(ms) {
+  return new Promise(function (resolve) { setTimeout(resolve, ms); });
+}
+
+async function cekSuaraTertunda(lang) {
+  if (!window.speechSynthesis) return;
+  const jeda = [0, 300, 800, 1500];
+  for (let i = 0; i < jeda.length; i++) {
+    if (jeda[i]) await tunggu(jeda[i]);
+    if (cocokSuara(lang)) return;
   }
+  R.toast('Suara Bahasa Indonesia belum terpasang di perangkat ini — cek Pengaturan > Bahasa & suara di HP, atau ganti Bahasa di Kendali');
+}
+
+function mulaiSesi(lines) {
+  cekSuaraTertunda(state.lang);
   const words = countWords(lines);
   R.updateEpInfo(words);
   state.episode += 1;
