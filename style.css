@@ -434,61 +434,6 @@ h1, h2, h3 {
   border-top: 1px solid var(--line);
 }
 
-/* ---- pitutur ---- */
-
-.pitutur { padding: 88px 0; }
-
-.pitutur-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 48px;
-  align-items: center;
-}
-
-.pitutur h2 {
-  font-size: clamp(28px, 3.4vw, 38px);
-  margin-bottom: 18px;
-}
-
-.pitutur-modes {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 28px 0 30px;
-}
-
-.pitutur-modes div {
-  flex: 1;
-  min-width: 140px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px 16px;
-  background: var(--paper-alt);
-}
-
-.pitutur-modes strong {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.pitutur-modes span {
-  display: block;
-  font-size: 12.5px;
-  color: var(--ink-soft);
-  line-height: 1.4;
-}
-
-.pitutur-shot {
-  display: flex;
-  justify-content: center;
-}
-
-.pitutur-shot .phone {
-  width: 240px;
-  background: linear-gradient(160deg, #232c37, #151b22);
-}
-
 /* ---- local (dark) ---- */
 
 .local {
@@ -601,8 +546,6 @@ h1, h2, h3 {
 @media (max-width: 860px) {
   :root { font-size: 16px; }
   .hero { padding: 44px 0 56px; }
-  .pitutur-grid { grid-template-columns: 1fr; }
-  .pitutur-shot { order: -1; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-shot { order: -1; padding-top: 0; margin-bottom: 8px; }
   .phone { width: 210px; }
