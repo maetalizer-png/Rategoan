@@ -239,29 +239,42 @@ function poolAll() {
   return SUMBER.entries.concat(SUMBER.extra);
 }
 
-function skor(e, t) {
+function tokenTopik(topik) {
+  return String(topik || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9À-ɏ\s]/g, ' ')
+    .split(/\s+/)
+    .filter(function (w) { return w.length > 2; });
+}
+
+function skor(e, tokens) {
   const m = e.metadata || {};
   const nama = String(m.name || e.title || '').toLowerCase();
   const teks = String(e.text || '').toLowerCase();
-  if (nama && nama === t) return 4;
-  if (nama && t.length >= 3 && nama.indexOf(t) === 0) return 3;
-  if (teks.indexOf(t) === 0) return 2;
-  if (teks.indexOf(t) !== -1) return 1;
-  if ((e._metaStr || '').indexOf(t) !== -1) return 0;
-  return -1;
+  const metaStr = e._metaStr || '';
+  let hit = 0;
+  let terbaik = -1;
+  tokens.forEach(function (tok) {
+    if (nama && nama === tok) { terbaik = Math.max(terbaik, 6); hit++; }
+    else if (nama && nama.indexOf(tok) !== -1) { terbaik = Math.max(terbaik, 4); hit++; }
+    else if (teks.indexOf(tok) !== -1) { terbaik = Math.max(terbaik, 2); hit++; }
+    else if (metaStr.indexOf(tok) !== -1) { terbaik = Math.max(terbaik, 1); hit++; }
+  });
+  if (!hit) return -1;
+  return terbaik * 10 + hit;
 }
 
 function cari(topik, grupArr, n) {
-  const t = (topik || '').toLowerCase();
+  const tokens = tokenTopik(topik);
   let pool = poolAll();
   if (grupArr && grupArr.length) {
     const byGrup = pool.filter(function (e) { return grupArr.indexOf(e._grup) !== -1; });
     if (byGrup.length) pool = byGrup;
   }
-  if (t) {
+  if (tokens.length) {
     const scored = [];
     pool.forEach(function (e, i) {
-      const s = skor(e, t);
+      const s = skor(e, tokens);
       if (s >= 0) scored.push({ s: s, i: i, e: e });
     });
     scored.sort(function (a, b) {
