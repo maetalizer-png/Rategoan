@@ -452,7 +452,6 @@ export const collectionPage = {
       router.go('collection');
       this.open();
     };
-    $('btn-pitutur').onclick = () => { location.href = 'fitur/pitutur/'; };
     $('coll-back').onclick = () => router.go('chat');
     document.querySelectorAll('.coll-tab').forEach((tb) => {
       tb.onclick = () => {

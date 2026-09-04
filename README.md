@@ -15,11 +15,7 @@ perangkat pengguna lewat Progressive Web App (PWA) murni HTML/CSS/JavaScript
 modular (ES6 Modules), tanpa framework dan tanpa build step.
 
 Repo ini adalah **RATEGOAN**, kerangka chat inti dengan **Raget**, mesin
-balasan template/rule-based (bukan model bahasa besar). **Pitutur** adalah
-salah satu fitur RATEGOAN — studio siaran audio yang membaca sumber data
-yang sama — dibangun sebagai PWA turunan di
-[`fitur/pitutur/`](fitur/pitutur/) supaya bisa dipakai mandiri/offline,
-bukan produk terpisah.
+balasan template/rule-based (bukan model bahasa besar).
 
 ## Daftar Isi
 
@@ -95,8 +91,6 @@ raget/                            induk seluruh otak AI Raget
                                      json/ 21+ domain (negara,kota,tokoh,sapaan,…) · jsonl/ korpus · neural/ checkpoint
   raget-tools/                    skrip verifikasi: bench runner (+bench.json), pengukuran KV, devlog, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-fitur/                            fitur RATEGOAN, masing-masing juga PWA mandiri/offline
-  pitutur/                          studio siaran audio
 docs/                             status korpus/lisensi, kapabilitas, struktur data
 ```
 
@@ -230,8 +224,6 @@ npx http-server -p 8099
 ```
 
 Lalu buka `http://localhost:8099/index.html`.
-
-Untuk Pitutur, buka `http://localhost:8099/fitur/pitutur/index.html`.
 
 ## Kustomisasi
 

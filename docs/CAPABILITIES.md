@@ -14,7 +14,6 @@ browser tertentu) / **Partial** (sebagian jalan, ada celah diketahui).
 | Matematika (`math-engine.js`) | Stable | Bench (parser aman, tanpa `eval`) | — |
 | Dwibahasa ID/EN (`bilingual.js`) | Stable | Bench | — |
 | Koleksi (simpan chat/catatan) | Stable | Playwright screenshot verified | — |
-| Pitutur (siaran audio) | Stable | Screenshot verified, render bersih | Fitur RATEGOAN (bukan produk terpisah), basis data sama, dibangun sebagai PWA turunan mandiri/offline di `fitur/pitutur/` |
 | Voice/TTS | Browser-dependent | — | Tergantung dukungan API Speech browser |
 | Neural (RAGET otomatis, 200M→100M→50M) | Experimental, belum menjawab | Held-out PPL masih naik-turun di atas 900 (lihat devlog terbaru); generasi belum gramatikal | Tidak ada pemilih model - satu nama "RAGET" tampil ke user. Cascade + prefetch background sudah aktif (`neural-provider.js`), tapi `js/ai/ai.js` `NEURAL_ANSWERS_ENABLED = false` mengunci jawaban tetap dari rule-based sampai generasi koheren |
 | PWA offline (app shell) | Experimental/Belum diverifikasi | `sw.js` cache CDN (jsDelivr/HuggingFace) + Release checkpoint-200m, TIDAK cache index.html/js/css | Klaim "offline penuh" belum akurat untuk shell aplikasi sendiri - cuma paket unduhan opsional (OCR/Terjemahan/PDF/checkpoint 200M) yang offline-capable |
