@@ -59,7 +59,7 @@ function fmtFactValue(value) {
 const TAB_DESC = {
   tersimpan: 'Pesan dan balasan AI yang kamu simpan sendiri dari chat, lengkap dengan tag dan catatan pribadi.',
   perpus: 'Semua yang Raget ingat otomatis: catatan, fakta yang diajarkan, dan file yang kamu impor.',
-  artefak: 'Hasil kerja yang layak disimpan: draf email, kartu negara, rencana perjalanan, dan ekspor.',
+  artefak: 'Hasil kerja yang layak disimpan: draf email, kartu negara, dan ekspor catatan.',
 };
 
 let state = { tab: 'tersimpan', filter: null, query: '' };
@@ -368,17 +368,14 @@ async function renderArtefak() {
     content.innerHTML =
       '<div class="coll-empty-cta">' + ic('download') +
       '<div class="coll-empty-title">Belum ada hasil kerja tersimpan</div>' +
-      '<div class="coll-empty-body">Berbeda dari tab Tersimpan (pesan chat) - Artefak muncul OTOMATIS dari draf email, kartu negara, ekspor catatan, dan rencana/favorit Jalanin, tanpa perlu tap Simpan.</div>' +
+      '<div class="coll-empty-body">Berbeda dari tab Tersimpan (pesan chat) - Artefak muncul OTOMATIS dari draf email, kartu negara, dan ekspor catatan, tanpa perlu tap Simpan.</div>' +
       '<div class="coll-empty-actions">' +
       '<button type="button" id="artCtaEmail">' + ic('mail') + ' Buat email</button>' +
-      '<button type="button" id="artCtaTrip">' + ic('cal') + ' Buat rencana</button>' +
       '<button type="button" id="artCtaExport">' + ic('download') + ' Ekspor chat</button>' +
       '</div></div>';
     const ctaEmail = document.getElementById('artCtaEmail');
-    const ctaTrip = document.getElementById('artCtaTrip');
     const ctaExport = document.getElementById('artCtaExport');
     if (ctaEmail) ctaEmail.onclick = () => goToChatWithPrompt('buatkan email tentang ');
-    if (ctaTrip) ctaTrip.onclick = () => { location.href = 'fitur/jelajah/'; };
     if (ctaExport) ctaExport.onclick = () => goToChatWithPrompt('ekspor catatan');
     return;
   }
@@ -390,7 +387,6 @@ async function renderArtefak() {
     '<div class="coll-item-text">' + escapeHtml(x.text) + '</div>' +
     '<div class="coll-item-actions">' +
     '<button type="button" data-art-copy="' + x.id + '">' + ic('copy') + ' Salin</button>' +
-    (x.kind === 'itinerary' || x.kind === 'favorit' ? '<button type="button" data-art-open>' + ic('globe') + ' Buka Jalanin</button>' : '') +
     (x.deletable ? '<button type="button" class="danger" data-art-del="' + x.id + '">' + ic('trash') + ' Hapus</button>' : '') +
     '</div></div>'
   )).join('');
@@ -399,7 +395,6 @@ async function renderArtefak() {
     const item = all.find((x) => x.id === b.dataset.artCopy);
     if (item && navigator.clipboard) navigator.clipboard.writeText(item.text).then(() => toast.show('Disalin'));
   });
-  content.querySelectorAll('[data-art-open]').forEach((b) => b.onclick = () => { location.href = 'fitur/jelajah/'; });
   content.querySelectorAll('[data-art-del]').forEach((b) => b.onclick = async () => {
     await collectionStore.removeItem(b.dataset.artDel);
     toast.show('Dihapus');
