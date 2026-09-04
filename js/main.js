@@ -29,7 +29,6 @@ import { collectionPage } from './collection/collection.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
-import { neuralProvider } from '../raget/raget-llm/neural-provider.js';
 
 const bootStart = performance.now();
 
@@ -97,9 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const warmup = () => {
     dataries.loadRegion('country', 'asian-tenggara').catch(() => {});
     dataries.loadRegion('country', 'eropan-barat').catch(() => {});
-    // Ambil checkpoint 200M diam-diam di background - user tidak perlu
-    // klik apa pun, sw.js meng-cache origin HF-nya begitu berhasil.
-    neuralProvider.prefetchBest();
+    // Prefetch checkpoint 200M (163MB) DIMATIKAN - NEURAL_ANSWERS_ENABLED
+    // di ai.js masih false, jadi model ini tidak pernah dipakai menjawab.
+    // Mengunduhnya diam-diam di setiap load cuma buang kuota/memori user
+    // tanpa manfaat apa pun. Nyalakan lagi (neuralProvider.prefetchBest())
+    // begitu NEURAL_ANSWERS_ENABLED diaktifkan.
   };
   if ('requestIdleCallback' in window) {
     requestIdleCallback(warmup, { timeout: 3000 });
