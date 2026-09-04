@@ -7,7 +7,6 @@ import { buatSession } from './audio/pitutur-session.js';
 import { kanal } from './sumber/pitutur-channels.js';
 import { pituturEmbed } from './embed/pitutur-embed.js';
 import { ikatNamespace } from './pitutur-namespace.js';
-import { buatAudioDariNaskah } from './audio/pitutur-tts-lokal.js';
 
 const PANDUAN =
   'Buka <b>Sumber</b>, unggah dokumenmu (PDF/teks/URL), lalu tekan Susun Naskah dan <b>Putar</b>. ' +
@@ -54,13 +53,6 @@ function bukaSumber() {
   if (btn) btn.classList.add('on');
 }
 
-function perbaruiTombolUnduh() {
-  const btn = R.$('btnUnduhAudio');
-  const hint = R.$('unduhAudioHint');
-  if (btn) btn.hidden = !naskah;
-  if (hint) hint.hidden = !naskah;
-}
-
 function susun() {
   const topik = R.$('topic') ? R.$('topic').value.trim() : '';
   return buildScript(topik).then(function (lines) {
@@ -72,7 +64,6 @@ function susun() {
     naskah = lines;
     R.renderNaskah(lines, onSeek);
     R.updateEpInfo(countWords(lines));
-    perbaruiTombolUnduh();
     const nBaris = lines.length;
     R.toast('Naskah siap · ' + nBaris + ' baris — tekan Putar');
     return lines;
@@ -82,7 +73,6 @@ function susun() {
 function batalNaskah() {
   naskah = null;
   R.$('transcript').innerHTML = PANDUAN;
-  perbaruiTombolUnduh();
 }
 
 function lineDariHist(l) {
@@ -96,7 +86,6 @@ function loadHist(h) {
   naskah = lines;
   R.renderNaskah(lines, onSeek);
   R.updateEpInfo(h.words);
-  perbaruiTombolUnduh();
   R.toast('Naskah Siaran #' + h.n + ' dimuat — tekan Putar');
 }
 
@@ -238,7 +227,6 @@ function play() {
     else if (FALLBACK_NASKAH.length) {
       naskah = FALLBACK_NASKAH.slice();
       R.renderNaskah(naskah, onSeek);
-      perbaruiTombolUnduh();
       mulaiSesi(naskah);
     }
   }).finally(function () {
@@ -271,45 +259,6 @@ function siapkanPertama() {
     R.updateEpInfo(0);
   }
 }
-
-let sedangUnduhAudio = false;
-
-function unduhAudioSekarang() {
-  if (sedangUnduhAudio || !naskah) return;
-  sedangUnduhAudio = true;
-  const btn = R.$('btnUnduhAudio');
-  const label = R.$('unduhAudioLabel');
-  if (btn) btn.disabled = true;
-  buatAudioDariNaskah(naskah, function (progres) {
-    if (!label) return;
-    if (progres.tahap === 'unduh') {
-      label.textContent = progres.total
-        ? 'Mengunduh suara ' + Math.round((progres.loaded / progres.total) * 100) + '%…'
-        : 'Mengunduh suara…';
-    } else if (progres.tahap === 'suara') {
-      label.textContent = 'Menyusun audio ' + progres.selesai + '/' + progres.total + '…';
-    }
-  }).then(function (blob) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'pitutur-siaran-' + (state.episode + 1) + '.wav';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-    R.toast('Audio siap diunduh');
-  }).catch(function (err) {
-    R.toast('Gagal bikin audio: ' + (err && err.message ? err.message : 'tidak diketahui'));
-  }).finally(function () {
-    sedangUnduhAudio = false;
-    if (btn) btn.disabled = false;
-    if (label) label.textContent = 'Unduh Audio (suara lokal Indonesia)';
-  });
-}
-
-const btnUnduhAudio = R.$('btnUnduhAudio');
-if (btnUnduhAudio) btnUnduhAudio.addEventListener('click', unduhAudioSekarang);
 
 attach({
   play: play,
