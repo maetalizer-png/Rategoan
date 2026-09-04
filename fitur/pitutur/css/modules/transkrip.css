@@ -42,3 +42,30 @@
   box-shadow: inset 3px 0 0 var(--caramel, #b08050);
   padding-left: 8px;
 }
+
+.btnUnduhAudio {
+  flex-shrink: 0;
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid var(--cream-deep);
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: var(--card);
+  color: var(--brown);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnUnduhAudio:active {
+  background: var(--cream);
+}
+
+.btnUnduhAudio:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.unduhAudioHint {
+  margin-top: 4px;
+}
