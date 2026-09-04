@@ -84,7 +84,6 @@
 
 .divider {
   border: none;
-  border-top: 1px solid var(--rg-line);
   margin: 12px 0;
   flex-shrink: 0;
 }
