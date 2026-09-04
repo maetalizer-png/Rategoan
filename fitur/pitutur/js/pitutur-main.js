@@ -9,15 +9,15 @@ import { pituturEmbed } from './embed/pitutur-embed.js';
 import { ikatNamespace } from './pitutur-namespace.js';
 
 const PANDUAN =
-  'Tekan <b>Putar</b> untuk mendengar siaran singkat dari pustaka. ' +
-  'Mau ganti topik atau saluran? Buka <b>Sumber</b>. ' +
+  'Buka <b>Sumber</b>, unggah dokumenmu (PDF/teks/URL), lalu tekan Susun Naskah dan <b>Putar</b>. ' +
+  'Mau coba topik dari pustaka kami saja? Bisa, tapi cakupannya masih terbatas. ' +
   'Mode dan kecepatan ada di bawah.';
 
 const FALLBACK_NASKAH = [
   { speaker: 'Warta', text: 'Selamat datang. Ini siaran singkat dari Pitutur.', intent: 'inform' },
-  { speaker: 'Warta', text: 'Pitutur menyusun naskah dari pustaka lokal, lalu membacakannya dengan suara perangkatmu.', intent: 'inform' },
-  { speaker: 'Warta', text: 'Tidak perlu internet untuk memutar. Cukup pilih topik, susun, dan dengarkan.', intent: 'inform' },
-  { speaker: 'Warta', text: 'Tekan Sumber jika ingin memilih saluran lain — tokoh, sains, sejarah, atau materi milikmu sendiri.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Pitutur membaca dokumenmu — PDF, teks, atau URL — lalu membacakan ringkasannya dengan suara perangkatmu.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Tidak perlu internet untuk memutar. Unggah dokumen di Sumber, susun, dan dengarkan.', intent: 'inform' },
+  { speaker: 'Warta', text: 'Tekan Sumber kalau mau coba topik dari pustaka kami — tapi cakupannya masih terbatas, kadang meleset.', intent: 'inform' },
   { speaker: 'Warta', text: 'Ambil satu ide dari siaran ini. Coba hari ini, jangan besok.', intent: 'tegas' }
 ];
 

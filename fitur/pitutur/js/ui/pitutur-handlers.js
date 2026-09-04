@@ -158,11 +158,7 @@ export function attach(actions) {
       setSumberPath('materi', actions);
     });
   }
-  if (state.sources.dokumen && state.channel && String(state.channel).indexOf('doc:') === 0) {
-    setSumberPath('materi', actions);
-  } else {
-    setSumberPath('pustaka', actions);
-  }
+  setSumberPath('materi', actions);
 
   document.querySelectorAll('#docModes .chip').forEach(function (c) {
     c.classList.toggle('on', c.getAttribute('data-doc-mode') === (state.docMode || 'baca'));
