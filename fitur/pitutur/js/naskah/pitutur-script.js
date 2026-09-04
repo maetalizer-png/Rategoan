@@ -31,7 +31,9 @@ function pecah(t) {
 function naturalisasiLisan(teks) {
   let s = String(teks || '').replace(/\s+/g, ' ').trim();
   if (!s) return '';
-  s = s.replace(/^([^\-–—]{2,48})\s*[-–—]\s+/, function (_, nama) { return 'Tentang ' + nama.trim() + '. '; });
+  s = s.replace(/^([^\-–—]{2,48})\s*[-–—]\s+(\S)/, function (_, nama, huruf) {
+    return 'Tentang ' + nama.trim() + '. ' + huruf.toUpperCase();
+  });
   const peta = [
     [/\bIbu kota\s*:\s*/gi, 'Ibu kotanya '],
     [/\bPusat pemerintahan\s*:\s*/gi, 'Pusat pemerintahannya di '],
@@ -270,11 +272,16 @@ const STOP_KATA = {
   inggris:1, mandarin:1, melayu:1, tamil:1, bahasa:1, bahasanya:1,
   pemerintahan:1, parlementer:1, presidensial:1, republik:1, federasi:1,
   kota:1, global:1, terkenal:1, pusat:1, paling:1, kompetitif:1,
+  asean:1, oki:1, pbb:1, g20:1, nato:1, uni:1,
+  dolar:1, rupiah:1, ringgit:1, rupee:1, dollar:1, currency:1, mata:1, uang:1, uangnya:1,
   the:1, and:1, for:1, with:1, from:1, that:1, this:1, are:1, was:1, of:1
 };
 
 function kataKunci(teks, n) {
-  let s = String(teks || '').toLowerCase();
+  const asli = String(teks || '');
+  const subjekM = asli.match(/^Tentang\s+([^.]+)\./i);
+  const subjek = subjekM ? subjekM[1].trim().toLowerCase() : '';
+  let s = asli.toLowerCase();
   s = s.replace(/^tentang\s+[^.]+\./i, ' ');
   s = s.replace(/\b(ibu kotanya|populasinya|mata uangnya|bahasanya|sistem pemerintahannya|pusat pemerintahannya)\b/gi, ' ');
   const raw = s.replace(/[^a-zA-Z\u00C0-\u024f0-9\s]/g, ' ').split(/\s+/).filter(Boolean);
@@ -282,6 +289,7 @@ function kataKunci(teks, n) {
   raw.forEach(function (w) {
     if (w.length < 5) return;
     if (STOP_KATA[w]) return;
+    if (subjek && (w === subjek || subjek.indexOf(w) !== -1)) return;
     if (/^[0-9]+$/.test(w)) return;
     if (/^(ter|se|me|di|ke|ber|pe|per|peng|pen)/.test(w) && w.length < 9) return;
     let sc = w.length;
@@ -776,7 +784,7 @@ export async function buildScript(topic) {
         lineLang = 'id';
       }
     }
-    if (lineLang === 'id') teks = naturalisasiLisan(teks);
+    if (lineLang === 'id' && entry) teks = naturalisasiLisan(teks);
     lines.push({
       speaker: s,
       text: teks,
