@@ -19,23 +19,6 @@
   padding: 12px 0 28px;
 }
 
-.gate-mark {
-  width: 76px;
-  height: 76px;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(155deg, var(--rg-accent), var(--rg-accent) 60%, var(--rg-line-accent));
-  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.35), var(--rg-shadow);
-}
-
-.gate-mark svg {
-  width: 36px;
-  height: 36px;
-  fill: var(--rg-accent-ink);
-}
-
 .gate-title {
   font-size: 28px;
   font-weight: 800;

@@ -56,6 +56,12 @@ html[data-font='small'] .empty-chip {
   font-size: 11px;
 }
 
+html[data-font='small'] .set-row span,
+html[data-font='small'] .side-link,
+html[data-font='small'] .set-section-title {
+  font-size: 12.5px;
+}
+
 html[data-font='large'] .msg {
   font-size: 17px;
 }
@@ -70,4 +76,10 @@ html[data-font='large'] #chat-input {
 
 html[data-font='large'] .empty-chip {
   font-size: 13px;
+}
+
+html[data-font='large'] .set-row span,
+html[data-font='large'] .side-link,
+html[data-font='large'] .set-section-title {
+  font-size: 16px;
 }

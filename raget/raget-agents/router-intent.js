@@ -103,7 +103,7 @@ function detectTool(prompt) {
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/.test(t)) return 'fungsi';
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/.test(t)) return 'tujuan';
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/.test(t)) return 'penyebab';
-  if (/^jelaskan\s+/.test(t)) return 'jelaskan';
+  if (/^(jelaskan|apa\s+itu|tentang)\s+/.test(t)) return 'jelaskan';
   return null;
 }
 

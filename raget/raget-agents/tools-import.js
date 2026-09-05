@@ -72,7 +72,7 @@ async function tryTextFileQA(text, messages) {
   const list = Array.isArray(messages) ? messages : [];
   const last = list[list.length - 1];
   const att = last && last.attach;
-  if (!att || !att.fileText || !/\.(txt|md|csv)$/i.test(att.name || '')) return null;
+  if (!att || !att.fileText || !/\.(txt|md|csv|tsv|json|xml|html?|log|ya?ml|srt|rtf)$/i.test(att.name || '')) return null;
 
   const sentences = String(att.fileText)
     .split(/(?<=[.!?\n])\s+/)

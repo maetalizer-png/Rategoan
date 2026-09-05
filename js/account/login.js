@@ -8,9 +8,6 @@ import { account } from './account.js';
 const TEMPLATE = `
       <div class="gate">
         <div class="gate-brand">
-          <div class="gate-mark" aria-hidden="true">
-            <svg viewBox="0 0 512 512"><path d="M256 96l36 124 124 36-124 36-36 124-36-124-124-36 124-36z"/></svg>
-          </div>
           <h1 class="gate-title">Rategoan</h1>
         </div>
         <div id="login-content" class="gate-card">

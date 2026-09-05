@@ -237,6 +237,13 @@ Ketentuan penggunaan dan lisensi ada di [`LICENSE.md`](LICENSE.md).
 
 ## Status
 
+**Perubahan terbaru (2026-09-05):** ekstrak file diperluas ke 15+ format
+umum (txt/md/csv/tsv/json/xml/html/log/yaml/srt/rtf/ics/enex/pdf/zip),
+bug filter superlatif per-benua ("negara terkecil di Eropa") dibetulkan,
+fitur Pitutur dipindah ke branch terpisah (`fitur/pitutur-mandiri`),
+data pengetahuan Indonesia (kosakata + sektor bisnis) ditambah dan
+disambungkan ke pencarian topik, dan logo diganti teks polos.
+
 Kerangka aplikasi dan otak AI Raget sudah dalam tahap pengembangan
 aktif dan berfungsi penuh secara lokal, dengan deployment produksi terverifikasi
 berjalan di Vercel. Pengembangan berjalan dalam ronde inkremental yang
