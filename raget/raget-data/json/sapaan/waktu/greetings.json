@@ -10,10 +10,11 @@
     ],
     "teks": "Selamat pagi! Semoga hari Anda dimulai dengan semangat dan energi positif.",
     "meta": {
-      "type": "waktu",
-      "code": "PAGI",
-      "jamMulai": 3,
-      "jamSelesai": 12
+      "jenis": "waktu",
+      "periode": "pagi",
+      "variants": [
+        "Selamat pagi! Semoga hari Anda dimulai dengan semangat dan energi positif."
+      ]
     }
   },
   {
@@ -27,10 +28,11 @@
     ],
     "teks": "Selamat siang! Bagaimana kabar Anda? Semoga hari ini produktif.",
     "meta": {
-      "type": "waktu",
-      "code": "SIANG",
-      "jamMulai": 12,
-      "jamSelesai": 15
+      "jenis": "waktu",
+      "periode": "siang",
+      "variants": [
+        "Selamat siang! Bagaimana kabar Anda? Semoga hari ini produktif."
+      ]
     }
   },
   {
@@ -44,10 +46,11 @@
     ],
     "teks": "Selamat sore! Semoga sisa hari Anda menyenangkan dan penuh pencapaian.",
     "meta": {
-      "type": "waktu",
-      "code": "SORE",
-      "jamMulai": 15,
-      "jamSelesai": 18
+      "jenis": "waktu",
+      "periode": "sore",
+      "variants": [
+        "Selamat sore! Semoga sisa hari Anda menyenangkan dan penuh pencapaian."
+      ]
     }
   },
   {
@@ -61,10 +64,11 @@
     ],
     "teks": "Selamat malam! Istirahat yang cukup dan jangan lupa bersyukur hari ini.",
     "meta": {
-      "type": "waktu",
-      "code": "MALAM",
-      "jamMulai": 18,
-      "jamSelesai": 3
+      "jenis": "waktu",
+      "periode": "malam",
+      "variants": [
+        "Selamat malam! Istirahat yang cukup dan jangan lupa bersyukur hari ini."
+      ]
     }
   },
   {
@@ -78,8 +82,10 @@
     ],
     "teks": "Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu hari ini?",
     "meta": {
-      "type": "waktu",
-      "code": "UMUM"
+      "jenis": "plain",
+      "variants": [
+        "Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu hari ini?"
+      ]
     }
   },
   {
@@ -93,8 +99,10 @@
     ],
     "teks": "Selamat datang di Rategoan! Saya Raget, siap membantu Anda.",
     "meta": {
-      "type": "waktu",
-      "code": "DATANG"
+      "jenis": "plain",
+      "variants": [
+        "Selamat datang di Rategoan! Saya Raget, siap membantu Anda."
+      ]
     }
   },
   {
@@ -108,8 +116,10 @@
     ],
     "teks": "Halo! Perkenalkan, saya Raget, asisten lokal Rategoan. Senang berkenalan dengan Anda!",
     "meta": {
-      "type": "waktu",
-      "code": "KENAL"
+      "jenis": "plain",
+      "variants": [
+        "Halo! Perkenalkan, saya Raget, asisten lokal Rategoan. Senang berkenalan dengan Anda!"
+      ]
     }
   },
   {
@@ -1733,9 +1743,10 @@
     ],
     "teks": "Selamat pagi, Bapak/Ibu! Semoga hari Anda menyenangkan.",
     "meta": {
-      "type": "situasi",
-      "code": "FORMAL_PAGI",
-      "formalitas": "formal"
+      "jenis": "plain",
+      "variants": [
+        "Selamat pagi, Bapak/Ibu! Semoga hari Anda menyenangkan."
+      ]
     }
   },
   {
@@ -1750,9 +1761,10 @@
     ],
     "teks": "Hai, teman-teman! Apa kabar kalian semua?",
     "meta": {
-      "type": "situasi",
-      "code": "KASUAL_GRUP",
-      "formalitas": "casual"
+      "jenis": "plain",
+      "variants": [
+        "Hai, teman-teman! Apa kabar kalian semua?"
+      ]
     }
   },
   {
@@ -1767,8 +1779,10 @@
     ],
     "teks": "Salam sejahtera untuk Anda semua. Semoga hari ini damai.",
     "meta": {
-      "type": "situasi",
-      "code": "DAMAI"
+      "jenis": "plain",
+      "variants": [
+        "Salam sejahtera untuk Anda semua. Semoga hari ini damai."
+      ]
     }
   },
   {
@@ -1783,8 +1797,10 @@
     ],
     "teks": "Selamat pagi, para hadirin! Terima kasih atas kehadirannya.",
     "meta": {
-      "type": "situasi",
-      "code": "ACARA"
+      "jenis": "plain",
+      "variants": [
+        "Selamat pagi, para hadirin! Terima kasih atas kehadirannya."
+      ]
     }
   },
   {
@@ -1799,9 +1815,10 @@
     ],
     "teks": "Hai, selamat datang di acara kita hari ini!",
     "meta": {
-      "type": "situasi",
-      "code": "ACARA_KASUAL",
-      "formalitas": "casual"
+      "jenis": "plain",
+      "variants": [
+        "Hai, selamat datang di acara kita hari ini!"
+      ]
     }
   },
   {
@@ -1816,8 +1833,10 @@
     ],
     "teks": "Selamat sore, rekan-rekan! Semoga kerja sama kita selalu baik.",
     "meta": {
-      "type": "situasi",
-      "code": "REKAN_KERJA"
+      "jenis": "plain",
+      "variants": [
+        "Selamat sore, rekan-rekan! Semoga kerja sama kita selalu baik."
+      ]
     }
   },
   {
@@ -2146,8 +2165,10 @@
     ],
     "teks": "Mari kita sapa semua! (Sapaan umum untuk memulai interaksi)",
     "meta": {
-      "type": "umum",
-      "code": "SAPA_SEMUA"
+      "jenis": "plain",
+      "variants": [
+        "Mari kita sapa semua! (Sapaan umum untuk memulai interaksi)"
+      ]
     }
   }
 ]

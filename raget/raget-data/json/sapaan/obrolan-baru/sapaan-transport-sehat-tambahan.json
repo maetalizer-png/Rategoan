@@ -1,0 +1,499 @@
+[
+  {
+    "id": "ts-transport-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Macet parah di jalan",
+    "tags": [
+      "transport",
+      "macet"
+    ],
+    "teks": "Kalau macet parah, cari rute alternatif dulu lewat aplikasi peta sebelum berangkat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Kalau macet parah, cari rute alternatif dulu lewat aplikasi peta sebelum berangkat."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ojek online lama datang",
+    "tags": [
+      "transport",
+      "ojek"
+    ],
+    "teks": "Cek posisi driver di aplikasi, kalau memang lama bisa dibatalkan dan cari yang lebih dekat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cek posisi driver di aplikasi, kalau memang lama bisa dibatalkan dan cari yang lebih dekat."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ketinggalan kereta",
+    "tags": [
+      "transport",
+      "kereta"
+    ],
+    "teks": "Cek jadwal keberangkatan berikutnya dan segera pesan ulang tiketnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cek jadwal keberangkatan berikutnya dan segera pesan ulang tiketnya."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Angkot penuh terus",
+    "tags": [
+      "transport",
+      "angkot"
+    ],
+    "teks": "Coba tunggu angkot berikutnya atau cari titik naik yang biasanya lebih sepi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Coba tunggu angkot berikutnya atau cari titik naik yang biasanya lebih sepi."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lupa bawa helm",
+    "tags": [
+      "transport",
+      "helm"
+    ],
+    "teks": "Jangan dipaksa jalan tanpa helm, lebih aman putar balik ambil dulu meski agak telat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Jangan dipaksa jalan tanpa helm, lebih aman putar balik ambil dulu meski agak telat."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Susah parkir di pusat kota",
+    "tags": [
+      "transport",
+      "parkir"
+    ],
+    "teks": "Cek dulu aplikasi parkir atau gedung terdekat yang masih ada slot sebelum muter-muter cari.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cek dulu aplikasi parkir atau gedung terdekat yang masih ada slot sebelum muter-muter cari."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mudik lebaran macet total",
+    "tags": [
+      "transport",
+      "mudik"
+    ],
+    "teks": "Berangkat lebih awal dari rencana biasanya membantu menghindari puncak kepadatan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Berangkat lebih awal dari rencana biasanya membantu menghindari puncak kepadatan."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Motor mogok di jalan",
+    "tags": [
+      "transport"
+    ],
+    "teks": "Menepi ke tempat aman dulu, baru cek penyebabnya atau hubungi bengkel terdekat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Menepi ke tempat aman dulu, baru cek penyebabnya atau hubungi bengkel terdekat."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Salah naik kendaraan umum",
+    "tags": [
+      "transport"
+    ],
+    "teks": "Turun di halte atau stasiun terdekat, lalu cek rute yang benar sebelum lanjut lagi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Turun di halte atau stasiun terdekat, lalu cek rute yang benar sebelum lanjut lagi."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bensin hampir habis di jalan macet",
+    "tags": [
+      "transport",
+      "macet"
+    ],
+    "teks": "Cari SPBU terdekat lewat aplikasi peta sebelum benar-benar kehabisan di tengah jalan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cari SPBU terdekat lewat aplikasi peta sebelum benar-benar kehabisan di tengah jalan."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-011",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ban bocor pas buru-buru",
+    "tags": [
+      "transport"
+    ],
+    "teks": "Cari tukang tambal ban terdekat, biasanya tidak jauh dari jalan utama.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cari tukang tambal ban terdekat, biasanya tidak jauh dari jalan utama."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-012",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Driver ojek online salah alamat",
+    "tags": [
+      "transport",
+      "ojek"
+    ],
+    "teks": "Hubungi lewat aplikasi dan kirim ulang titik lokasi yang lebih jelas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Hubungi lewat aplikasi dan kirim ulang titik lokasi yang lebih jelas."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-013",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Naik kereta pertama kali bingung",
+    "tags": [
+      "transport",
+      "kereta"
+    ],
+    "teks": "Cek peta jalur dan nomor peron di papan informasi stasiun, jangan ragu tanya petugas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Cek peta jalur dan nomor peron di papan informasi stasiun, jangan ragu tanya petugas."
+      ]
+    }
+  },
+  {
+    "id": "ts-transport-014",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek nyetir jarak jauh",
+    "tags": [
+      "transport"
+    ],
+    "teks": "Berhenti sejenak di rest area untuk istirahat, jangan dipaksa lanjut kalau sudah mengantuk.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "transport",
+      "variants": [
+        "Berhenti sejenak di rest area untuk istirahat, jangan dipaksa lanjut kalau sudah mengantuk."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Demam tinggi",
+    "tags": [
+      "sehat",
+      "demam"
+    ],
+    "teks": "Kompres dan istirahat dulu, kalau demam tidak turun dalam dua hari sebaiknya ke fasilitas kesehatan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Kompres dan istirahat dulu, kalau demam tidak turun dalam dua hari sebaiknya ke fasilitas kesehatan."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Pusing dan mual",
+    "tags": [
+      "sehat",
+      "pusing"
+    ],
+    "teks": "Istirahat di tempat tenang dan minum air putih, kalau berlanjut segera periksa ke tenaga medis.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Istirahat di tempat tenang dan minum air putih, kalau berlanjut segera periksa ke tenaga medis."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Batuk pilek tidak sembuh",
+    "tags": [
+      "sehat",
+      "obat"
+    ],
+    "teks": "Perbanyak istirahat dan cairan hangat, kalau lebih dari seminggu sebaiknya periksa ke klinik.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Perbanyak istirahat dan cairan hangat, kalau lebih dari seminggu sebaiknya periksa ke klinik."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sakit perut mendadak",
+    "tags": [
+      "sehat",
+      "sakit"
+    ],
+    "teks": "Perhatikan apa yang baru dimakan, kalau sakit terus berat atau disertai demam segera ke faskes.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Perhatikan apa yang baru dimakan, kalau sakit terus berat atau disertai demam segera ke faskes."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kurang tidur terus",
+    "tags": [
+      "sehat"
+    ],
+    "teks": "Coba atur jam tidur lebih teratur, kurang tidur terus bisa memengaruhi konsentrasi dan daya tahan tubuh.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Coba atur jam tidur lebih teratur, kurang tidur terus bisa memengaruhi konsentrasi dan daya tahan tubuh."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Obat warung habis",
+    "tags": [
+      "sehat",
+      "obat"
+    ],
+    "teks": "Cek dulu apotek terdekat, kalau keluhan berat lebih baik konsultasi ke tenaga medis dulu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Cek dulu apotek terdekat, kalau keluhan berat lebih baik konsultasi ke tenaga medis dulu."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Antre di klinik lama",
+    "tags": [
+      "sehat",
+      "klinik"
+    ],
+    "teks": "Tanyakan nomor antrean dan estimasi waktu tunggu supaya bisa atur waktu dengan pas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Tanyakan nomor antrean dan estimasi waktu tunggu supaya bisa atur waktu dengan pas."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Alergi makanan tiba-tiba",
+    "tags": [
+      "sehat"
+    ],
+    "teks": "Hentikan makanan pemicunya dulu, kalau gejalanya berat seperti sesak napas segera ke IGD.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Hentikan makanan pemicunya dulu, kalau gejalanya berat seperti sesak napas segera ke IGD."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Anak demam di rumah",
+    "tags": [
+      "sehat",
+      "demam"
+    ],
+    "teks": "Kompres hangat dan pantau suhunya, kalau demam tinggi terus-menerus segera bawa ke dokter.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Kompres hangat dan pantau suhunya, kalau demam tinggi terus-menerus segera bawa ke dokter."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek terus tiap hari padahal sudah istirahat",
+    "tags": [
+      "sehat",
+      "capek"
+    ],
+    "teks": "Kalau capek berkepanjangan meski sudah istirahat cukup, sebaiknya periksa ke dokter untuk memastikan penyebabnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Kalau capek berkepanjangan meski sudah istirahat cukup, sebaiknya periksa ke dokter untuk memastikan penyebabnya."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-011",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sakit gigi menganggu aktivitas",
+    "tags": [
+      "sehat",
+      "sakit"
+    ],
+    "teks": "Hindari makanan terlalu dingin atau manis dulu, dan jadwalkan periksa ke dokter gigi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Hindari makanan terlalu dingin atau manis dulu, dan jadwalkan periksa ke dokter gigi."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-012",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mata lelah karena layar terus",
+    "tags": [
+      "sehat"
+    ],
+    "teks": "Coba istirahatkan mata sebentar tiap beberapa puluh menit, lihat ke jarak jauh sejenak.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Coba istirahatkan mata sebentar tiap beberapa puluh menit, lihat ke jarak jauh sejenak."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-013",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Vaksin di puskesmas antre panjang",
+    "tags": [
+      "sehat",
+      "klinik"
+    ],
+    "teks": "Datang lebih pagi biasanya antreannya belum terlalu panjang, bawa juga dokumen yang diperlukan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Datang lebih pagi biasanya antreannya belum terlalu panjang, bawa juga dokumen yang diperlukan."
+      ]
+    }
+  },
+  {
+    "id": "ts-sehat-014",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Cuaca panas bikin dehidrasi",
+    "tags": [
+      "sehat",
+      "cuaca"
+    ],
+    "teks": "Perbanyak minum air putih dan hindari aktivitas berat di luar saat siang terik.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sehat",
+      "variants": [
+        "Perbanyak minum air putih dan hindari aktivitas berat di luar saat siang terik."
+      ]
+    }
+  }
+]

@@ -1,0 +1,783 @@
+[
+  {
+    "id": "rs-rumah-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Air mati tiba-tiba",
+    "tags": [
+      "rumah",
+      "air"
+    ],
+    "teks": "Cek dulu apakah cuma rumahmu atau sewilayah. Kalau sewilayah, hubungi petugas PDAM setempat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Cek dulu apakah cuma rumahmu atau sewilayah. Kalau sewilayah, hubungi petugas PDAM setempat."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Listrik padam lama",
+    "tags": [
+      "rumah",
+      "listrik"
+    ],
+    "teks": "Kalau padam lama, cek info resmi PLN dulu sebelum menyalakan genset sembarangan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Kalau padam lama, cek info resmi PLN dulu sebelum menyalakan genset sembarangan."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bau gas menyengat",
+    "tags": [
+      "rumah",
+      "gas"
+    ],
+    "teks": "Jangan nyalakan api atau saklar listrik. Buka jendela, keluar rumah, baru cek sumbernya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Jangan nyalakan api atau saklar listrik. Buka jendela, keluar rumah, baru cek sumbernya."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sampah menumpuk",
+    "tags": [
+      "rumah",
+      "sampah"
+    ],
+    "teks": "Pisahkan dulu yang organik dan non-organik, lalu buang ke titik kumpul sesuai jadwal petugas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Pisahkan dulu yang organik dan non-organik, lalu buang ke titik kumpul sesuai jadwal petugas."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Atap bocor",
+    "tags": [
+      "rumah",
+      "bocor"
+    ],
+    "teks": "Tampung dulu air yang menetes, lalu tandai titik bocornya untuk diperbaiki secepatnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Tampung dulu air yang menetes, lalu tandai titik bocornya untuk diperbaiki secepatnya."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kompor tidak menyala",
+    "tags": [
+      "rumah",
+      "kompor"
+    ],
+    "teks": "Cek dulu selang dan tabung gasnya, kalau masih tidak menyala jangan dipaksa terus.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Cek dulu selang dan tabung gasnya, kalau masih tidak menyala jangan dipaksa terus."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Rumah kebanjiran",
+    "tags": [
+      "rumah",
+      "banjir"
+    ],
+    "teks": "Amankan barang berharga ke tempat lebih tinggi dulu, matikan listrik kalau air sudah masuk rumah.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Amankan barang berharga ke tempat lebih tinggi dulu, matikan listrik kalau air sudah masuk rumah."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "WC mampet",
+    "tags": [
+      "rumah",
+      "mampet"
+    ],
+    "teks": "Coba cairan pembersih saluran dulu, kalau tetap mampet panggil tukang ledeng.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Coba cairan pembersih saluran dulu, kalau tetap mampet panggil tukang ledeng."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Rumah berantakan banget",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Beresin satu ruangan dulu, jangan langsung semua rumah sekaligus biar tidak kewalahan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Beresin satu ruangan dulu, jangan langsung semua rumah sekaligus biar tidak kewalahan."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Pipa air bocor",
+    "tags": [
+      "rumah",
+      "air"
+    ],
+    "teks": "Tutup dulu kran utama biar tidak makin banyak air terbuang, baru panggil tukang.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Tutup dulu kran utama biar tidak makin banyak air terbuang, baru panggil tukang."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-011",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Colokan listrik konslet",
+    "tags": [
+      "rumah",
+      "listrik"
+    ],
+    "teks": "Matikan dari MCB dulu, jangan disentuh langsung kalau masih basah atau berasap.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Matikan dari MCB dulu, jangan disentuh langsung kalau masih basah atau berasap."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-012",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kunci rumah ketinggalan",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Cek dulu apakah ada anggota keluarga lain yang bawa kunci cadangan sebelum panggil tukang kunci.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Cek dulu apakah ada anggota keluarga lain yang bawa kunci cadangan sebelum panggil tukang kunci."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Gaji habis sebelum akhir bulan",
+    "tags": [
+      "uang"
+    ],
+    "teks": "Coba catat dulu pengeluaran seminggu terakhir, biasanya ketemu pos yang bisa dikurangi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Coba catat dulu pengeluaran seminggu terakhir, biasanya ketemu pos yang bisa dikurangi."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ditawari pinjaman online",
+    "tags": [
+      "uang",
+      "pinjam"
+    ],
+    "teks": "Cek dulu legalitasnya di OJK sebelum pinjam, jangan tergiur bunga rendah tanpa jaminan jelas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Cek dulu legalitasnya di OJK sebelum pinjam, jangan tergiur bunga rendah tanpa jaminan jelas."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tagihan listrik naik",
+    "tags": [
+      "uang",
+      "tagihan"
+    ],
+    "teks": "Cek pemakaian alat elektronik yang paling boros, biasanya AC atau pemanas air penyebabnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Cek pemakaian alat elektronik yang paling boros, biasanya AC atau pemanas air penyebabnya."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Diskon mencurigakan minta transfer",
+    "tags": [
+      "uang",
+      "diskon"
+    ],
+    "teks": "Jangan transfer dulu kalau diskonnya terasa terlalu bagus dan minta buru-buru. Cek dulu keasliannya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Jangan transfer dulu kalau diskonnya terasa terlalu bagus dan minta buru-buru. Cek dulu keasliannya."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Utang teman belum dibayar",
+    "tags": [
+      "uang",
+      "utang"
+    ],
+    "teks": "Ingatkan baik-baik dulu, jangan langsung menagih dengan nada tinggi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Ingatkan baik-baik dulu, jangan langsung menagih dengan nada tinggi."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Belanja bulanan membengkak",
+    "tags": [
+      "uang",
+      "belanja"
+    ],
+    "teks": "Coba buat daftar belanja dulu sebelum ke toko, biar tidak tergoda beli yang tidak perlu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Coba buat daftar belanja dulu sebelum ke toko, biar tidak tergoda beli yang tidak perlu."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mau pinjam uang ke saudara",
+    "tags": [
+      "uang",
+      "pinjam"
+    ],
+    "teks": "Sampaikan jumlah dan rencana pengembaliannya dengan jelas supaya sama-sama enak.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Sampaikan jumlah dan rencana pengembaliannya dengan jelas supaya sama-sama enak."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kena tipu transfer",
+    "tags": [
+      "uang",
+      "tipu"
+    ],
+    "teks": "Segera hubungi bank untuk blokir sementara, lalu laporkan ke pihak berwajib.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Segera hubungi bank untuk blokir sementara, lalu laporkan ke pihak berwajib."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mau nabung tapi susah",
+    "tags": [
+      "uang",
+      "nabung"
+    ],
+    "teks": "Coba sisihkan dulu di awal saat gajian, jangan menunggu sisa di akhir bulan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Coba sisihkan dulu di awal saat gajian, jangan menunggu sisa di akhir bulan."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tagihan menumpuk",
+    "tags": [
+      "uang",
+      "tagihan"
+    ],
+    "teks": "Urutkan bayar dari yang paling mendesak atau dendanya paling besar dulu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Urutkan bayar dari yang paling mendesak atau dendanya paling besar dulu."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-011",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Investasi bodong ditawarin teman",
+    "tags": [
+      "uang",
+      "investasi"
+    ],
+    "teks": "Cek legalitas dan izin resminya dulu di OJK sebelum ikut menyetor uang.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Cek legalitas dan izin resminya dulu di OJK sebelum ikut menyetor uang."
+      ]
+    }
+  },
+  {
+    "id": "rs-uang-012",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Uang kembalian kurang di warung",
+    "tags": [
+      "uang",
+      "belanja"
+    ],
+    "teks": "Sampaikan dengan sopan dan tunjukkan struk atau perhitungannya kalau ada.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "uang",
+      "variants": [
+        "Sampaikan dengan sopan dan tunjukkan struk atau perhitungannya kalau ada."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tetangga berisik malam",
+    "tags": [
+      "tetangga"
+    ],
+    "teks": "Sampaikan baik-baik langsung, kemungkinan mereka tidak sadar suaranya sudah mengganggu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Sampaikan baik-baik langsung, kemungkinan mereka tidak sadar suaranya sudah mengganggu."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Iuran RT belum dibayar",
+    "tags": [
+      "tetangga",
+      "iuran"
+    ],
+    "teks": "Tanyakan ke bendahara RT jumlah dan batas waktunya, biasanya bisa dicicil kalau memang berat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Tanyakan ke bendahara RT jumlah dan batas waktunya, biasanya bisa dicicil kalau memang berat."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kerja bakti minggu ini",
+    "tags": [
+      "tetangga",
+      "kerja bakti"
+    ],
+    "teks": "Ikut sesuai kemampuan, kalau berhalangan sampaikan izin ke ketua RT.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Ikut sesuai kemampuan, kalau berhalangan sampaikan izin ke ketua RT."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tetangga parkir sembarangan",
+    "tags": [
+      "tetangga",
+      "parkir"
+    ],
+    "teks": "Sampaikan pelan-pelan langsung ke orangnya dulu sebelum dibawa ke forum RT.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Sampaikan pelan-pelan langsung ke orangnya dulu sebelum dibawa ke forum RT."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ribut di grup RT",
+    "tags": [
+      "tetangga",
+      "gang"
+    ],
+    "teks": "Hindari membalas dengan emosi di grup, lebih baik dibicarakan langsung secara pribadi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Hindari membalas dengan emosi di grup, lebih baik dibicarakan langsung secara pribadi."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tetangga pinjam barang tidak dibalikin",
+    "tags": [
+      "tetangga"
+    ],
+    "teks": "Ingatkan dengan santai, sebut barangnya, jangan langsung menuduh macam-macam.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Ingatkan dengan santai, sebut barangnya, jangan langsung menuduh macam-macam."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Anak tetangga main sampai larut",
+    "tags": [
+      "tetangga"
+    ],
+    "teks": "Ajak bicara orang tuanya dengan baik, sampaikan kekhawatiran secara langsung.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Ajak bicara orang tuanya dengan baik, sampaikan kekhawatiran secara langsung."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Gang sempit susah dilewati",
+    "tags": [
+      "tetangga",
+      "gang"
+    ],
+    "teks": "Bisa diusulkan ke ketua RT untuk dibahas bareng, siapa tahu ada solusi bersama.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Bisa diusulkan ke ketua RT untuk dibahas bareng, siapa tahu ada solusi bersama."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Konflik parkir sama tetangga",
+    "tags": [
+      "tetangga",
+      "parkir"
+    ],
+    "teks": "Coba cari kesepakatan bersama soal batas parkir, dibicarakan baik-baik bukan lewat sindiran.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Coba cari kesepakatan bersama soal batas parkir, dibicarakan baik-baik bukan lewat sindiran."
+      ]
+    }
+  },
+  {
+    "id": "rs-tetangga-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Diundang acara RT mendadak",
+    "tags": [
+      "tetangga"
+    ],
+    "teks": "Konfirmasi kehadiran secepatnya supaya panitia bisa menyiapkan dengan pas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tetangga",
+      "variants": [
+        "Konfirmasi kehadiran secepatnya supaya panitia bisa menyiapkan dengan pas."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Harga di pasar naik",
+    "tags": [
+      "pasar"
+    ],
+    "teks": "Bandingkan dulu di beberapa lapak sebelum beli, harga bisa beda cukup jauh.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Bandingkan dulu di beberapa lapak sebelum beli, harga bisa beda cukup jauh."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Nawar di pasar tradisional",
+    "tags": [
+      "pasar",
+      "tawar"
+    ],
+    "teks": "Tawar dengan sopan dan wajar, kalau harga sudah pas untuk kedua pihak tidak usah dipaksa turun lagi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Tawar dengan sopan dan wajar, kalau harga sudah pas untuk kedua pihak tidak usah dipaksa turun lagi."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Curiga timbangan tidak pas",
+    "tags": [
+      "pasar",
+      "dagang"
+    ],
+    "teks": "Boleh minta ditimbang ulang di depanmu kalau merasa tidak sesuai.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Boleh minta ditimbang ulang di depanmu kalau merasa tidak sesuai."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Belanja di warung langganan",
+    "tags": [
+      "pasar",
+      "warung"
+    ],
+    "teks": "Kalau sudah langganan, biasanya lebih mudah nego harga atau nitip barang tertentu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Kalau sudah langganan, biasanya lebih mudah nego harga atau nitip barang tertentu."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Pedagang tidak ramah",
+    "tags": [
+      "pasar",
+      "dagang"
+    ],
+    "teks": "Tetap sopan saja, tidak semua pedagang lagi mood baik, tidak usah dibalas ketus.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Tetap sopan saja, tidak semua pedagang lagi mood baik, tidak usah dibalas ketus."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Barang di pasar kualitasnya beda-beda",
+    "tags": [
+      "pasar"
+    ],
+    "teks": "Cek langsung kondisinya sebelum bayar, jangan cuma percaya omongan penjual.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Cek langsung kondisinya sebelum bayar, jangan cuma percaya omongan penjual."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mau belanja hemat di pasar",
+    "tags": [
+      "pasar"
+    ],
+    "teks": "Datang pagi biasanya harga lebih stabil dan pilihan barang masih segar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Datang pagi biasanya harga lebih stabil dan pilihan barang masih segar."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Warung kehabisan stok",
+    "tags": [
+      "pasar",
+      "warung"
+    ],
+    "teks": "Tanyakan kapan biasanya stoknya datang lagi, atau coba warung terdekat lainnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Tanyakan kapan biasanya stoknya datang lagi, atau coba warung terdekat lainnya."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Salah kembalian pas belanja",
+    "tags": [
+      "pasar"
+    ],
+    "teks": "Sampaikan dengan sopan sambil tunjukkan hitungannya, biasanya cuma salah hitung biasa.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Sampaikan dengan sopan sambil tunjukkan hitungannya, biasanya cuma salah hitung biasa."
+      ]
+    }
+  },
+  {
+    "id": "rs-pasar-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bingung mau masak apa dari belanjaan",
+    "tags": [
+      "pasar",
+      "dagang"
+    ],
+    "teks": "Sesuaikan saja dengan bahan yang paling gampang basi dulu supaya tidak terbuang sia-sia.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "pasar",
+      "variants": [
+        "Sesuaikan saja dengan bahan yang paling gampang basi dulu supaya tidak terbuang sia-sia."
+      ]
+    }
+  }
+]

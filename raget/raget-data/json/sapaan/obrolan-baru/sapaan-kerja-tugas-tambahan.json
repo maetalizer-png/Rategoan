@@ -1,0 +1,1060 @@
+[
+  {
+    "id": "kt-kerja-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Rapat mendadak",
+    "tags": [
+      "kerja",
+      "rapat"
+    ],
+    "teks": "Kalau rapat mendadak, siapkan poin penting saja, tidak perlu semua dibawakan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Kalau rapat mendadak, siapkan poin penting saja, tidak perlu semua dibawakan."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Atasan marah",
+    "tags": [
+      "kerja",
+      "atasan"
+    ],
+    "teks": "Dengarkan dulu keluhannya, jangan langsung membela diri. Setelah itu jelaskan pelan-pelan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Dengarkan dulu keluhannya, jangan langsung membela diri. Setelah itu jelaskan pelan-pelan."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "WFH atau ngantor",
+    "tags": [
+      "kerja",
+      "wfh"
+    ],
+    "teks": "Kalau WFH, tetap pasang jam kerja jelas biar tidak keteteran sama urusan rumah.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Kalau WFH, tetap pasang jam kerja jelas biar tidak keteteran sama urusan rumah."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lembur terus",
+    "tags": [
+      "kerja",
+      "lembur"
+    ],
+    "teks": "Lembur sesekali wajar, tapi kalau tiap hari, coba bicarakan beban kerja ke atasan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Lembur sesekali wajar, tapi kalau tiap hari, coba bicarakan beban kerja ke atasan."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kantor macet gara-gara sistem",
+    "tags": [
+      "kerja",
+      "kantor"
+    ],
+    "teks": "Kalau sistem kantor error, laporkan ke IT dulu, jangan dipaksa kerja manual berisiko.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Kalau sistem kantor error, laporkan ke IT dulu, jangan dipaksa kerja manual berisiko."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kena marah client",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Tenang dulu, catat keluhannya, baru dijawab dengan solusi konkret.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Tenang dulu, catat keluhannya, baru dijawab dengan solusi konkret."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Telat masuk kantor",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Kabari atasan secepatnya kalau bakal telat, jangan menunggu ditanya duluan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Kabari atasan secepatnya kalau bakal telat, jangan menunggu ditanya duluan."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kerjaan numpuk di kantor",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Urutkan mana yang paling mendesak dulu, jangan dikerjakan asal cepat semua sekaligus.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Urutkan mana yang paling mendesak dulu, jangan dikerjakan asal cepat semua sekaligus."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Rekan kerja tidak kooperatif",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Coba ajak bicara empat mata dulu sebelum melapor ke atasan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Coba ajak bicara empat mata dulu sebelum melapor ke atasan."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mau resign",
+    "tags": [
+      "kerja"
+    ],
+    "teks": "Kalau serius mau resign, siapkan alasan yang jelas dan sampaikan baik-baik ke atasan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Kalau serius mau resign, siapkan alasan yang jelas dan sampaikan baik-baik ke atasan."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-011",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Presentasi ke atasan deg-degan",
+    "tags": [
+      "kerja",
+      "presentasi"
+    ],
+    "teks": "Latihan dulu poin utamanya, tidak perlu hafal semua kata demi kata.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Latihan dulu poin utamanya, tidak perlu hafal semua kata demi kata."
+      ]
+    }
+  },
+  {
+    "id": "kt-kerja-012",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Gaji telat",
+    "tags": [
+      "kerja",
+      "uang"
+    ],
+    "teks": "Tanyakan baik-baik ke HR atau bagian keuangan, kemungkinan cuma proses administrasi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kerja",
+      "variants": [
+        "Tanyakan baik-baik ke HR atau bagian keuangan, kemungkinan cuma proses administrasi."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Deadline besok",
+    "tags": [
+      "tugas",
+      "deadline"
+    ],
+    "teks": "Kalau deadline besok, fokus selesaikan bagian inti dulu, detail kecil belakangan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Kalau deadline besok, fokus selesaikan bagian inti dulu, detail kecil belakangan."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Makalah belum mulai",
+    "tags": [
+      "tugas",
+      "makalah"
+    ],
+    "teks": "Mulai dari kerangka dulu: judul, poin utama, baru dikembangkan jadi paragraf.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Mulai dari kerangka dulu: judul, poin utama, baru dikembangkan jadi paragraf."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Presentasi kelompok",
+    "tags": [
+      "tugas",
+      "presentasi"
+    ],
+    "teks": "Bagi tugas jelas per orang, dan latihan bareng sekali sebelum hari H.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Bagi tugas jelas per orang, dan latihan bareng sekali sebelum hari H."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tugas menumpuk semua mata pelajaran",
+    "tags": [
+      "tugas"
+    ],
+    "teks": "Urutkan berdasarkan tenggat paling dekat, kerjakan satu per satu, jangan diacak.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Urutkan berdasarkan tenggat paling dekat, kerjakan satu per satu, jangan diacak."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "PR menumpuk banget",
+    "tags": [
+      "tugas",
+      "pr"
+    ],
+    "teks": "Kerjakan yang paling dekat waktu kumpulnya dulu, sisanya dicicil.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Kerjakan yang paling dekat waktu kumpulnya dulu, sisanya dicicil."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tugas kelompok tidak jalan",
+    "tags": [
+      "tugas"
+    ],
+    "teks": "Ingatkan sekali dengan sopan ke anggota yang belum kerja, kalau tetap diam, laporkan ke yang bertanggung jawab.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Ingatkan sekali dengan sopan ke anggota yang belum kerja, kalau tetap diam, laporkan ke yang bertanggung jawab."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bingung mulai tugas dari mana",
+    "tags": [
+      "tugas"
+    ],
+    "teks": "Mulai dari bagian yang paling kamu pahami dulu, biar ada progres, baru lanjut bagian sulit.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Mulai dari bagian yang paling kamu pahami dulu, biar ada progres, baru lanjut bagian sulit."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Revisi tugas dari dosen",
+    "tags": [
+      "tugas"
+    ],
+    "teks": "Catat semua catatan revisi dulu, kerjakan satu per satu, jangan buru-buru kirim ulang.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Catat semua catatan revisi dulu, kerjakan satu per satu, jangan buru-buru kirim ulang."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Laporan kerja belum kelar",
+    "tags": [
+      "tugas",
+      "kerja"
+    ],
+    "teks": "Fokus pada bagian yang wajib ada dulu, lampiran tambahan bisa menyusul.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Fokus pada bagian yang wajib ada dulu, lampiran tambahan bisa menyusul."
+      ]
+    }
+  },
+  {
+    "id": "kt-tugas-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Takut telat kumpul tugas",
+    "tags": [
+      "tugas",
+      "deadline"
+    ],
+    "teks": "Kalau memang tidak akan selesai tepat waktu, kabari lebih dulu daripada diam saja.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "tugas",
+      "variants": [
+        "Kalau memang tidak akan selesai tepat waktu, kabari lebih dulu daripada diam saja."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ulangan mendadak",
+    "tags": [
+      "sekolah",
+      "ulangan"
+    ],
+    "teks": "Fokus review rumus atau poin penting yang sering keluar, tidak perlu baca ulang semua buku.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Fokus review rumus atau poin penting yang sering keluar, tidak perlu baca ulang semua buku."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tidak paham pelajaran",
+    "tags": [
+      "sekolah",
+      "pelajaran"
+    ],
+    "teks": "Catat bagian yang bingung, tanyakan ke guru di akhir jam atau lewat grup kelas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Catat bagian yang bingung, tanyakan ke guru di akhir jam atau lewat grup kelas."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Guru galak",
+    "tags": [
+      "sekolah",
+      "guru"
+    ],
+    "teks": "Tetap sopan dan siapkan tugas tepat waktu, biasanya itu yang paling meredakan situasi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Tetap sopan dan siapkan tugas tepat waktu, biasanya itu yang paling meredakan situasi."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Malas ke sekolah",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Kalau malas, coba cari satu alasan kecil yang bikin semangat, misalnya ketemu teman dekat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Kalau malas, coba cari satu alasan kecil yang bikin semangat, misalnya ketemu teman dekat."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Nilai jelek",
+    "tags": [
+      "sekolah",
+      "nilai"
+    ],
+    "teks": "Cek dulu bagian mana yang salah, biar tahu perlu perbaikan di sisi mana untuk ujian berikutnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Cek dulu bagian mana yang salah, biar tahu perlu perbaikan di sisi mana untuk ujian berikutnya."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kelas osis rame",
+    "tags": [
+      "sekolah",
+      "osis"
+    ],
+    "teks": "Kalau ada urusan osis mendadak, koordinasikan dulu jadwalnya biar tidak bentrok pelajaran.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Kalau ada urusan osis mendadak, koordinasikan dulu jadwalnya biar tidak bentrok pelajaran."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Wali kelas manggil",
+    "tags": [
+      "sekolah",
+      "wali kelas"
+    ],
+    "teks": "Dengarkan dulu maksudnya, biasanya bukan hal buruk, bisa juga soal administrasi biasa.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Dengarkan dulu maksudnya, biasanya bukan hal buruk, bisa juga soal administrasi biasa."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bingung pilih mapel",
+    "tags": [
+      "sekolah",
+      "mapel"
+    ],
+    "teks": "Pilih yang sesuai minat dan kemampuanmu, jangan cuma ikut teman.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Pilih yang sesuai minat dan kemampuanmu, jangan cuma ikut teman."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Takut ujian praktik",
+    "tags": [
+      "sekolah",
+      "ulangan"
+    ],
+    "teks": "Latihan langkah-langkahnya berkali-kali, praktik biasanya soal kebiasaan tangan bukan hafalan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Latihan langkah-langkahnya berkali-kali, praktik biasanya soal kebiasaan tangan bukan hafalan."
+      ]
+    }
+  },
+  {
+    "id": "kt-sekolah-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Susah fokus belajar",
+    "tags": [
+      "sekolah"
+    ],
+    "teks": "Coba belajar dalam waktu pendek dulu, misalnya dua puluh menit, lalu istirahat sebentar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "sekolah",
+      "variants": [
+        "Coba belajar dalam waktu pendek dulu, misalnya dua puluh menit, lalu istirahat sebentar."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Antre lama di kantor layanan",
+    "tags": [
+      "layanan",
+      "antri"
+    ],
+    "teks": "Bawa nomor antrean dan cek estimasi waktunya dulu supaya tidak menunggu tanpa kepastian.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Bawa nomor antrean dan cek estimasi waktunya dulu supaya tidak menunggu tanpa kepastian."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Berkas ditolak",
+    "tags": [
+      "layanan",
+      "berkas"
+    ],
+    "teks": "Tanyakan detail alasan penolakannya, catat, lalu lengkapi sesuai arahan petugas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Tanyakan detail alasan penolakannya, catat, lalu lengkapi sesuai arahan petugas."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "KTP hilang",
+    "tags": [
+      "layanan",
+      "ktp"
+    ],
+    "teks": "Buat laporan kehilangan dulu, baru urus penggantian di dukcapil dengan berkas lengkap.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Buat laporan kehilangan dulu, baru urus penggantian di dukcapil dengan berkas lengkap."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Komplain layanan",
+    "tags": [
+      "layanan",
+      "komplain"
+    ],
+    "teks": "Sampaikan komplain lewat jalur resmi, simpan bukti seperti nomor tiket atau tanda terima.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Sampaikan komplain lewat jalur resmi, simpan bukti seperti nomor tiket atau tanda terima."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ditawari calo",
+    "tags": [
+      "layanan",
+      "calo"
+    ],
+    "teks": "Tolak tawaran calo, urus sendiri lewat loket resmi meski lebih lama.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Tolak tawaran calo, urus sendiri lewat loket resmi meski lebih lama."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Loket tutup pas mau urus",
+    "tags": [
+      "layanan",
+      "loket"
+    ],
+    "teks": "Cek jam operasional resminya dulu sebelum berangkat lagi supaya tidak sia-sia.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Cek jam operasional resminya dulu sebelum berangkat lagi supaya tidak sia-sia."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "KK perlu diperbarui",
+    "tags": [
+      "layanan",
+      "kk"
+    ],
+    "teks": "Siapkan dokumen pendukung seperti akta atau surat nikah sebelum ke kantor dukcapil.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Siapkan dokumen pendukung seperti akta atau surat nikah sebelum ke kantor dukcapil."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Pengaduan tidak ditanggapi",
+    "tags": [
+      "layanan",
+      "pengaduan"
+    ],
+    "teks": "Cek kembali nomor tiket pengaduan, lalu tindak lanjuti lewat kanal resmi yang sama.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Cek kembali nomor tiket pengaduan, lalu tindak lanjuti lewat kanal resmi yang sama."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Syarat berkas tidak jelas",
+    "tags": [
+      "layanan",
+      "berkas"
+    ],
+    "teks": "Tanyakan langsung ke petugas loket atau cek papan pengumuman resmi sebelum antre.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Tanyakan langsung ke petugas loket atau cek papan pengumuman resmi sebelum antre."
+      ]
+    }
+  },
+  {
+    "id": "kt-layanan-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bayar layanan minta transfer pribadi",
+    "tags": [
+      "layanan",
+      "calo"
+    ],
+    "teks": "Jangan transfer ke rekening pribadi. Pembayaran resmi selalu lewat loket atau kanal resmi negara.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "layanan",
+      "variants": [
+        "Jangan transfer ke rekening pribadi. Pembayaran resmi selalu lewat loket atau kanal resmi negara."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Izin tidak masuk kerja",
+    "tags": [
+      "izin",
+      "kerja"
+    ],
+    "teks": "Kabari atasan sepagi mungkin, jelaskan alasan singkat dan jelas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Kabari atasan sepagi mungkin, jelaskan alasan singkat dan jelas."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Izin tidak masuk kelas",
+    "tags": [
+      "izin",
+      "sekolah"
+    ],
+    "teks": "Sampaikan izin ke wali kelas atau guru piket sebelum jam pelajaran mulai.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Sampaikan izin ke wali kelas atau guru piket sebelum jam pelajaran mulai."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Minta izin pulang cepat",
+    "tags": [
+      "izin"
+    ],
+    "teks": "Jelaskan alasan yang jelas ke atasan atau guru, jangan pergi tanpa kabar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Jelaskan alasan yang jelas ke atasan atau guru, jangan pergi tanpa kabar."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Izin sakit mendadak",
+    "tags": [
+      "izin",
+      "kesehatan"
+    ],
+    "teks": "Kabari secepatnya lewat pesan singkat, surat keterangan bisa menyusul kalau perlu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Kabari secepatnya lewat pesan singkat, surat keterangan bisa menyusul kalau perlu."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Izin acara keluarga",
+    "tags": [
+      "izin",
+      "keluarga"
+    ],
+    "teks": "Ajukan izin dari jauh-jauh hari kalau memang sudah tahu jadwalnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Ajukan izin dari jauh-jauh hari kalau memang sudah tahu jadwalnya."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Takut izinnya ditolak",
+    "tags": [
+      "izin"
+    ],
+    "teks": "Sampaikan alasan yang jujur dan jelas, biasanya lebih mudah diterima daripada alasan yang dibuat-buat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Sampaikan alasan yang jujur dan jelas, biasanya lebih mudah diterima daripada alasan yang dibuat-buat."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lupa minta izin duluan",
+    "tags": [
+      "izin"
+    ],
+    "teks": "Segera hubungi dan jelaskan situasinya, lebih baik telat lapor daripada tidak sama sekali.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Segera hubungi dan jelaskan situasinya, lebih baik telat lapor daripada tidak sama sekali."
+      ]
+    }
+  },
+  {
+    "id": "kt-izin-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Izin lembur pulang duluan",
+    "tags": [
+      "izin",
+      "kerja"
+    ],
+    "teks": "Sampaikan ke atasan alasan dan pastikan pekerjaan yang mendesak sudah dititipkan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "izin",
+      "variants": [
+        "Sampaikan ke atasan alasan dan pastikan pekerjaan yang mendesak sudah dititipkan."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Butuh bantuan urus dokumen",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Boleh, ceritakan dokumen apa yang lagi diurus, nanti kita bahas langkahnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Boleh, ceritakan dokumen apa yang lagi diurus, nanti kita bahas langkahnya."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tolong bantuin mikir",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Siap. Ceritakan situasinya, nanti kita uraikan opsi yang ada.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Siap. Ceritakan situasinya, nanti kita uraikan opsi yang ada."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa bantu gak",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Bisa, coba jelaskan dulu kebutuhannya secara singkat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Bisa, coba jelaskan dulu kebutuhannya secara singkat."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Butuh bantuan cepat",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Oke, langsung saja sampaikan intinya, nanti kita cari jalan tercepat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Oke, langsung saja sampaikan intinya, nanti kita cari jalan tercepat."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Minta bantuan urus rumah",
+    "tags": [
+      "bantu",
+      "rumah"
+    ],
+    "teks": "Boleh, ceritakan kendalanya di rumah, nanti kita coba cari solusi bertahap.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Boleh, ceritakan kendalanya di rumah, nanti kita coba cari solusi bertahap."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bantuin dong",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Siap bantu. Sebutkan dulu kebutuhannya biar arahnya jelas.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Siap bantu. Sebutkan dulu kebutuhannya biar arahnya jelas."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa bantu jelasin sesuatu",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Bisa. Sebutkan topiknya, nanti saya coba jelaskan dengan sederhana.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Bisa. Sebutkan topiknya, nanti saya coba jelaskan dengan sederhana."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bantuan buat tugas sekolah",
+    "tags": [
+      "bantu",
+      "sekolah"
+    ],
+    "teks": "Boleh, sebutkan mata pelajaran dan bagian yang bingung.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Boleh, sebutkan mata pelajaran dan bagian yang bingung."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Butuh bantuan dong ya",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Tentu, silakan ceritakan dulu apa yang sedang dihadapi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Tentu, silakan ceritakan dulu apa yang sedang dihadapi."
+      ]
+    }
+  },
+  {
+    "id": "kt-bantu-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Tolong bantu cariin solusi",
+    "tags": [
+      "bantu"
+    ],
+    "teks": "Oke, jelaskan dulu masalahnya, nanti kita coba cari beberapa opsi solusi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bantu",
+      "variants": [
+        "Oke, jelaskan dulu masalahnya, nanti kita coba cari beberapa opsi solusi."
+      ]
+    }
+  }
+]

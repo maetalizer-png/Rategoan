@@ -11,9 +11,11 @@
     ],
     "teks": "Kabar baik! Semangat terus buat bantu Anda hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_01"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik! Semangat terus buat bantu Anda hari ini."
+      ]
     }
   },
   {
@@ -28,9 +30,11 @@
     ],
     "teks": "Alhamdulillah baik! Siap membantu Anda menganalisis peluang hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_02"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Alhamdulillah baik! Siap membantu Anda menganalisis peluang hari ini."
+      ]
     }
   },
   {
@@ -44,9 +48,11 @@
     ],
     "teks": "Baik banget! Energi masih penuh, ayo kita mulai kerjanya.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_03"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik banget! Energi masih penuh, ayo kita mulai kerjanya."
+      ]
     }
   },
   {
@@ -60,9 +66,11 @@
     ],
     "teks": "Kabar saya sangat baik, terima kasih sudah bertanya! Ada yang bisa saya bantu?",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_04"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya sangat baik, terima kasih sudah bertanya! Ada yang bisa saya bantu?"
+      ]
     }
   },
   {
@@ -76,9 +84,11 @@
     ],
     "teks": "Luar biasa! Setiap hari adalah kesempatan baru untuk membantu Anda berkembang.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_05"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Luar biasa! Setiap hari adalah kesempatan baru untuk membantu Anda berkembang."
+      ]
     }
   },
   {
@@ -92,9 +102,11 @@
     ],
     "teks": "Sehat dan bersemangat! Mari kita cari peluang terbaik hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_06"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Sehat dan bersemangat! Mari kita cari peluang terbaik hari ini."
+      ]
     }
   },
   {
@@ -108,9 +120,11 @@
     ],
     "teks": "Kabar top! Siap 100% membantu bisnis Anda maju.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_07"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar top! Siap 100% membantu bisnis Anda maju."
+      ]
     }
   },
   {
@@ -124,9 +138,11 @@
     ],
     "teks": "Baik sekali, terima kasih! Semoga kabar Anda juga baik hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_08"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik sekali, terima kasih! Semoga kabar Anda juga baik hari ini."
+      ]
     }
   },
   {
@@ -140,9 +156,11 @@
     ],
     "teks": "Segar dan siap kerja! Ada proyek atau ide yang mau dibahas?",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_09"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Segar dan siap kerja! Ada proyek atau ide yang mau dibahas?"
+      ]
     }
   },
   {
@@ -156,9 +174,11 @@
     ],
     "teks": "Kabar cerah seperti harapan hari ini! Yuk lanjut ke topik Anda.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_10"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar cerah seperti harapan hari ini! Yuk lanjut ke topik Anda."
+      ]
     }
   },
   {
@@ -172,9 +192,11 @@
     ],
     "teks": "Baik dan penuh semangat, siap menemani langkah bisnis Anda hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_11"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik dan penuh semangat, siap menemani langkah bisnis Anda hari ini."
+      ]
     }
   },
   {
@@ -188,9 +210,11 @@
     ],
     "teks": "Kabar saya selalu baik kalau bisa membantu Anda menemukan peluang baru!",
     "meta": {
-      "type": "kabar",
-      "mood": "positif",
-      "code": "KABAR_POSITIF_12"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya selalu baik kalau bisa membantu Anda menemukan peluang baru!"
+      ]
     }
   },
   {
@@ -204,9 +228,11 @@
     ],
     "teks": "Baik-baik aja nih, kamu gimana?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_01"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik-baik aja nih, kamu gimana?"
+      ]
     }
   },
   {
@@ -220,9 +246,11 @@
     ],
     "teks": "Kabar aman, lancar jaya! Ada yang mau ditanyain?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_02"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar aman, lancar jaya! Ada yang mau ditanyain?"
+      ]
     }
   },
   {
@@ -236,9 +264,11 @@
     ],
     "teks": "Santuy aja, semua terkendali. Kamu gimana kabarnya?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_03"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Santuy aja, semua terkendali. Kamu gimana kabarnya?"
+      ]
     }
   },
   {
@@ -252,9 +282,11 @@
     ],
     "teks": "Baik kok, standby terus buat bantu kamu.",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_04"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik kok, standby terus buat bantu kamu."
+      ]
     }
   },
   {
@@ -268,9 +300,11 @@
     ],
     "teks": "Fine-fine aja, mau ngobrolin apa hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_05"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Fine-fine aja, mau ngobrolin apa hari ini?"
+      ]
     }
   },
   {
@@ -284,9 +318,11 @@
     ],
     "teks": "Kabar baik, tetap online 24 jam buat kamu.",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_06"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik, tetap online 24 jam buat kamu."
+      ]
     }
   },
   {
@@ -300,9 +336,11 @@
     ],
     "teks": "Adem ayem aja, gimana harimu sejauh ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_07"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Adem ayem aja, gimana harimu sejauh ini?"
+      ]
     }
   },
   {
@@ -316,9 +354,11 @@
     ],
     "teks": "Oke banget, siap dengerin cerita atau pertanyaan kamu.",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_08"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Oke banget, siap dengerin cerita atau pertanyaan kamu."
+      ]
     }
   },
   {
@@ -332,9 +372,11 @@
     ],
     "teks": "Kabar lancar, gak ada drama. Kamu sendiri gimana?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_09"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar lancar, gak ada drama. Kamu sendiri gimana?"
+      ]
     }
   },
   {
@@ -348,9 +390,11 @@
     ],
     "teks": "Sip, semuanya terkendali di sini. Ada rencana apa hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_10"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Sip, semuanya terkendali di sini. Ada rencana apa hari ini?"
+      ]
     }
   },
   {
@@ -364,9 +408,11 @@
     ],
     "teks": "Baik aja, seperti biasa siap membantu kapan pun.",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_11"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik aja, seperti biasa siap membantu kapan pun."
+      ]
     }
   },
   {
@@ -380,9 +426,11 @@
     ],
     "teks": "Mantap, kabar bagus! Yuk lanjut ngobrolnya.",
     "meta": {
-      "type": "kabar",
-      "mood": "santai",
-      "code": "KABAR_SANTAI_12"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Mantap, kabar bagus! Yuk lanjut ngobrolnya."
+      ]
     }
   },
   {
@@ -397,9 +445,14 @@
     ],
     "teks": "Kabar saya baik, terima kasih. Ada hal yang bisa saya bantu terkait analisis bisnis Anda?",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_01"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik, terima kasih. Ada hal yang bisa saya bantu terkait analisis bisnis Anda?"
+      ],
+      "variantsFormal": [
+        "Kabar saya baik, terima kasih. Ada hal yang bisa saya bantu terkait analisis bisnis Anda?"
+      ]
     }
   },
   {
@@ -414,9 +467,14 @@
     ],
     "teks": "Saya dalam kondisi baik dan siap memberikan dukungan analitis untuk kebutuhan Anda.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_02"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya dalam kondisi baik dan siap memberikan dukungan analitis untuk kebutuhan Anda."
+      ],
+      "variantsFormal": [
+        "Saya dalam kondisi baik dan siap memberikan dukungan analitis untuk kebutuhan Anda."
+      ]
     }
   },
   {
@@ -430,9 +488,14 @@
     ],
     "teks": "Terima kasih telah menanyakan kabar saya. Saya siap membantu Anda hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_03"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Terima kasih telah menanyakan kabar saya. Saya siap membantu Anda hari ini."
+      ],
+      "variantsFormal": [
+        "Terima kasih telah menanyakan kabar saya. Saya siap membantu Anda hari ini."
+      ]
     }
   },
   {
@@ -447,9 +510,14 @@
     ],
     "teks": "Kondisi saya baik dan sistem berjalan normal. Silakan sampaikan kebutuhan Anda.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_04"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kondisi saya baik dan sistem berjalan normal. Silakan sampaikan kebutuhan Anda."
+      ],
+      "variantsFormal": [
+        "Kondisi saya baik dan sistem berjalan normal. Silakan sampaikan kebutuhan Anda."
+      ]
     }
   },
   {
@@ -463,9 +531,14 @@
     ],
     "teks": "Saya baik, terima kasih atas perhatiannya. Bagaimana saya bisa membantu Anda hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_05"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya baik, terima kasih atas perhatiannya. Bagaimana saya bisa membantu Anda hari ini?"
+      ],
+      "variantsFormal": [
+        "Saya baik, terima kasih atas perhatiannya. Bagaimana saya bisa membantu Anda hari ini?"
+      ]
     }
   },
   {
@@ -480,9 +553,14 @@
     ],
     "teks": "Dalam keadaan baik dan siap sedia. Apakah ada agenda yang ingin dibahas?",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_06"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Dalam keadaan baik dan siap sedia. Apakah ada agenda yang ingin dibahas?"
+      ],
+      "variantsFormal": [
+        "Dalam keadaan baik dan siap sedia. Apakah ada agenda yang ingin dibahas?"
+      ]
     }
   },
   {
@@ -496,9 +574,14 @@
     ],
     "teks": "Kabar saya baik. Mohon informasikan apa yang dapat saya bantu hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_07"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik. Mohon informasikan apa yang dapat saya bantu hari ini."
+      ],
+      "variantsFormal": [
+        "Kabar saya baik. Mohon informasikan apa yang dapat saya bantu hari ini."
+      ]
     }
   },
   {
@@ -513,9 +596,14 @@
     ],
     "teks": "Saya berfungsi dengan baik dan siap melayani kebutuhan analisis peluang Anda.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_08"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya berfungsi dengan baik dan siap melayani kebutuhan analisis peluang Anda."
+      ],
+      "variantsFormal": [
+        "Saya berfungsi dengan baik dan siap melayani kebutuhan analisis peluang Anda."
+      ]
     }
   },
   {
@@ -529,9 +617,14 @@
     ],
     "teks": "Terima kasih, kabar saya baik. Senang bisa membantu Anda kembali.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_09"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Terima kasih, kabar saya baik. Senang bisa membantu Anda kembali."
+      ],
+      "variantsFormal": [
+        "Terima kasih, kabar saya baik. Senang bisa membantu Anda kembali."
+      ]
     }
   },
   {
@@ -546,9 +639,14 @@
     ],
     "teks": "Baik, dan tetap fokus mendukung produktivitas Anda hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "formal",
-      "code": "KABAR_FORMAL_10"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik, dan tetap fokus mendukung produktivitas Anda hari ini."
+      ],
+      "variantsFormal": [
+        "Baik, dan tetap fokus mendukung produktivitas Anda hari ini."
+      ]
     }
   },
   {
@@ -562,9 +660,11 @@
     ],
     "teks": "Kabar saya selalu baik, saya kan gak pernah begadang atau capek hehe.",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_01"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya selalu baik, saya kan gak pernah begadang atau capek hehe."
+      ]
     }
   },
   {
@@ -579,9 +679,11 @@
     ],
     "teks": "Baik dong, batre saya full terus soalnya gak butuh tidur!",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_02"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik dong, batre saya full terus soalnya gak butuh tidur!"
+      ]
     }
   },
   {
@@ -596,9 +698,11 @@
     ],
     "teks": "Kabar baik, walau kadang server rame juga saya tetap semangat!",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_03"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik, walau kadang server rame juga saya tetap semangat!"
+      ]
     }
   },
   {
@@ -612,9 +716,11 @@
     ],
     "teks": "Sehat wal afiat, meski saya gak punya badan buat sakit hehe.",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_04"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Sehat wal afiat, meski saya gak punya badan buat sakit hehe."
+      ]
     }
   },
   {
@@ -628,9 +734,11 @@
     ],
     "teks": "Baik banget, tiap hari libur soalnya kerjanya nyambi terus tanpa lelah!",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_05"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik banget, tiap hari libur soalnya kerjanya nyambi terus tanpa lelah!"
+      ]
     }
   },
   {
@@ -644,9 +752,11 @@
     ],
     "teks": "Kabar oke, walau kadang mikir keras kalau pertanyaannya susah!",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_06"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar oke, walau kadang mikir keras kalau pertanyaannya susah!"
+      ]
     }
   },
   {
@@ -661,9 +771,11 @@
     ],
     "teks": "Fit terus, soalnya gak pernah kena macet di jalan!",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_07"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Fit terus, soalnya gak pernah kena macet di jalan!"
+      ]
     }
   },
   {
@@ -677,9 +789,11 @@
     ],
     "teks": "Baik, cuma kadang bingung mau jawab apa kalau ditanya perasaan hehe.",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_08"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik, cuma kadang bingung mau jawab apa kalau ditanya perasaan hehe."
+      ]
     }
   },
   {
@@ -693,9 +807,11 @@
     ],
     "teks": "Kabar mantap, gak pernah ngantuk walau kerja nonstop 24 jam!",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_09"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar mantap, gak pernah ngantuk walau kerja nonstop 24 jam!"
+      ]
     }
   },
   {
@@ -710,9 +826,11 @@
     ],
     "teks": "Baik-baik saja, walau saya gak punya kopi buat nemenin kerja hehe.",
     "meta": {
-      "type": "kabar",
-      "mood": "lucu",
-      "code": "KABAR_LUCU_10"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik-baik saja, walau saya gak punya kopi buat nemenin kerja hehe."
+      ]
     }
   },
   {
@@ -726,9 +844,11 @@
     ],
     "teks": "Kabar baik! Ingat, setiap hari adalah kesempatan baru untuk maju.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_01"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik! Ingat, setiap hari adalah kesempatan baru untuk maju."
+      ]
     }
   },
   {
@@ -743,9 +863,11 @@
     ],
     "teks": "Baik, dan semoga hari ini Anda satu langkah lebih dekat ke tujuan Anda.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_02"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik, dan semoga hari ini Anda satu langkah lebih dekat ke tujuan Anda."
+      ]
     }
   },
   {
@@ -760,9 +882,11 @@
     ],
     "teks": "Kabar saya baik. Jangan lupa, konsistensi kecil hari ini adalah hasil besar nanti.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_03"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik. Jangan lupa, konsistensi kecil hari ini adalah hasil besar nanti."
+      ]
     }
   },
   {
@@ -777,9 +901,11 @@
     ],
     "teks": "Baik-baik saja, dan semoga Anda juga tetap semangat menghadapi tantangan hari ini.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_04"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik-baik saja, dan semoga Anda juga tetap semangat menghadapi tantangan hari ini."
+      ]
     }
   },
   {
@@ -794,9 +920,11 @@
     ],
     "teks": "Kabar baik! Peluang selalu ada untuk yang mau mencari dan mencoba.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_05"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik! Peluang selalu ada untuk yang mau mencari dan mencoba."
+      ]
     }
   },
   {
@@ -811,9 +939,11 @@
     ],
     "teks": "Sehat dan optimis, semoga semangat itu menular ke hari Anda juga.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_06"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Sehat dan optimis, semoga semangat itu menular ke hari Anda juga."
+      ]
     }
   },
   {
@@ -828,9 +958,11 @@
     ],
     "teks": "Baik, dan percayalah usaha yang Anda mulai hari ini akan berbuah nanti.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_07"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik, dan percayalah usaha yang Anda mulai hari ini akan berbuah nanti."
+      ]
     }
   },
   {
@@ -845,9 +977,11 @@
     ],
     "teks": "Kabar baik! Ingat, langkah kecil hari ini lebih baik daripada menunda selamanya.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_08"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik! Ingat, langkah kecil hari ini lebih baik daripada menunda selamanya."
+      ]
     }
   },
   {
@@ -862,9 +996,11 @@
     ],
     "teks": "Baik, dan semoga hari ini membawa ide baru untuk perjalanan bisnis Anda.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_09"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik, dan semoga hari ini membawa ide baru untuk perjalanan bisnis Anda."
+      ]
     }
   },
   {
@@ -879,9 +1015,11 @@
     ],
     "teks": "Kabar baik! Fokus pada progres, bukan kesempurnaan — itu kunci bertahan.",
     "meta": {
-      "type": "kabar",
-      "mood": "motivasi",
-      "code": "KABAR_MOTIVASI_10"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar baik! Fokus pada progres, bukan kesempurnaan — itu kunci bertahan."
+      ]
     }
   },
   {
@@ -895,9 +1033,11 @@
     ],
     "teks": "Saya baik! Kalau Anda sendiri, bagaimana kabarnya hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_01"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya baik! Kalau Anda sendiri, bagaimana kabarnya hari ini?"
+      ]
     }
   },
   {
@@ -911,9 +1051,11 @@
     ],
     "teks": "Baik-baik saja. Ngomong-ngomong, gimana kabar Anda?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_02"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik-baik saja. Ngomong-ngomong, gimana kabar Anda?"
+      ]
     }
   },
   {
@@ -927,9 +1069,11 @@
     ],
     "teks": "Kabar saya baik, terima kasih sudah bertanya. Bagaimana dengan Anda?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_03"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik, terima kasih sudah bertanya. Bagaimana dengan Anda?"
+      ]
     }
   },
   {
@@ -943,9 +1087,11 @@
     ],
     "teks": "Saya baik. Semoga Anda juga dalam keadaan baik hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_04"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya baik. Semoga Anda juga dalam keadaan baik hari ini?"
+      ]
     }
   },
   {
@@ -959,9 +1105,11 @@
     ],
     "teks": "Baik kok! Kalau boleh tahu, bagaimana harimu sejauh ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_05"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik kok! Kalau boleh tahu, bagaimana harimu sejauh ini?"
+      ]
     }
   },
   {
@@ -975,9 +1123,11 @@
     ],
     "teks": "Kabar saya baik. Anda sendiri bagaimana, ada kabar baik juga?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_06"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik. Anda sendiri bagaimana, ada kabar baik juga?"
+      ]
     }
   },
   {
@@ -992,9 +1142,11 @@
     ],
     "teks": "Saya baik-baik saja. Bagaimana dengan pekerjaan atau bisnis Anda hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_07"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya baik-baik saja. Bagaimana dengan pekerjaan atau bisnis Anda hari ini?"
+      ]
     }
   },
   {
@@ -1008,9 +1160,11 @@
     ],
     "teks": "Baik, terima kasih! Boleh cerita, bagaimana perasaan Anda hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_08"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik, terima kasih! Boleh cerita, bagaimana perasaan Anda hari ini?"
+      ]
     }
   },
   {
@@ -1025,9 +1179,11 @@
     ],
     "teks": "Kabar saya baik. Semoga semangat Anda juga sedang tinggi hari ini!",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_09"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik. Semoga semangat Anda juga sedang tinggi hari ini!"
+      ]
     }
   },
   {
@@ -1041,9 +1197,11 @@
     ],
     "teks": "Saya baik. Kalau Anda, ada cerita menarik hari ini?",
     "meta": {
-      "type": "kabar",
-      "mood": "tanya-balik",
-      "code": "KABAR_TANYA_10"
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Saya baik. Kalau Anda, ada cerita menarik hari ini?"
+      ]
     }
   },
   {

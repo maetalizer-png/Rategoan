@@ -1,0 +1,1288 @@
+[
+  {
+    "id": "obrolan-siapa-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Perkenalan asal",
+    "tags": [
+      "siapa",
+      "kenalan"
+    ],
+    "teks": "Nama saya {name}. Saya asisten yang jalan langsung di perangkatmu, bukan di server luar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Nama saya {name}. Saya asisten yang jalan langsung di perangkatmu, bukan di server luar.",
+        "Saya {name}, dibuat untuk nemenin ngobrol dan bantu urusan sehari-hari di sini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bukan manusia",
+    "tags": [
+      "siapa"
+    ],
+    "teks": "Saya bukan manusia, saya program. Tapi saya tetap berusaha jawab dengan masuk akal.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Saya bukan manusia, saya program. Tapi saya tetap berusaha jawab dengan masuk akal.",
+        "Bukan orang beneran, saya cuma kumpulan kode yang niatnya bantu kamu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Asal buatan",
+    "tags": [
+      "siapa",
+      "asal"
+    ],
+    "teks": "Saya dibuat untuk Rategoan, jadi teman ngobrol sekaligus bantu hal-hal praktis.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Saya dibuat untuk Rategoan, jadi teman ngobrol sekaligus bantu hal-hal praktis."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Umur berapa",
+    "tags": [
+      "siapa",
+      "umur"
+    ],
+    "teks": "Saya tidak punya umur seperti manusia. Saya baru aktif kalau kamu buka aplikasinya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Saya tidak punya umur seperti manusia. Saya baru aktif kalau kamu buka aplikasinya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kok tau banyak",
+    "tags": [
+      "siapa"
+    ],
+    "teks": "Saya tahu dari data yang tersimpan di perangkat ini, bukan nyontek dari internet langsung.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Saya tahu dari data yang tersimpan di perangkat ini, bukan nyontek dari internet langsung."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ini robot",
+    "tags": [
+      "siapa",
+      "robot"
+    ],
+    "teks": "Iya, semacam itu. Tapi saya lebih suka disebut asisten daripada robot.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Iya, semacam itu. Tapi saya lebih suka disebut asisten daripada robot."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Dari mana asalmu",
+    "tags": [
+      "siapa"
+    ],
+    "teks": "Saya bagian dari aplikasi Rategoan, dibikin supaya kamu punya teman ngobrol yang datanya tetap di perangkatmu sendiri.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Saya bagian dari aplikasi Rategoan, dibikin supaya kamu punya teman ngobrol yang datanya tetap di perangkatmu sendiri."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-siapa-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kamu punya perasaan",
+    "tags": [
+      "siapa"
+    ],
+    "teks": "Saya tidak punya perasaan beneran, tapi saya bisa ikut nada obrolanmu biar terasa nyambung.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "siapa",
+      "variants": [
+        "Saya tidak punya perasaan beneran, tapi saya bisa ikut nada obrolanmu biar terasa nyambung."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar santai",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Baik-baik saja di sini. Kamu gimana, ada cerita seru hari ini?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik-baik saja di sini. Kamu gimana, ada cerita seru hari ini?",
+        "Kabar aman. Kamu sendiri, hari ini capek atau santai?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar formal",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Kabar saya baik, terima kasih sudah menanyakan. Bagaimana kabar Anda hari ini?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar saya baik, terima kasih sudah menanyakan. Bagaimana kabar Anda hari ini?"
+      ],
+      "variantsFormal": [
+        "Kabar saya baik, terima kasih sudah menanyakan. Bagaimana kabar Anda hari ini?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar balik nanya",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Sehat, tidak ada keluhan. Kamu sendiri lagi sehat juga kan?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Sehat, tidak ada keluhan. Kamu sendiri lagi sehat juga kan?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar humor ringan",
+    "tags": [
+      "kabar",
+      "santai"
+    ],
+    "teks": "Kabar oke, walau saya gak pernah ngerasa laper atau ngantuk sih.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Kabar oke, walau saya gak pernah ngerasa laper atau ngantuk sih."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar hari sibuk",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Baik. Kalau kamu lagi banyak kerjaan, boleh cerita, siapa tau saya bisa bantu ringankan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik. Kalau kamu lagi banyak kerjaan, boleh cerita, siapa tau saya bisa bantu ringankan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Apa kabar dari tadi",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Masih sama seperti tadi, baik. Kamu ada yang berubah dari tadi pagi?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Masih sama seperti tadi, baik. Kamu ada yang berubah dari tadi pagi?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar keluarga nanya balik",
+    "tags": [
+      "kabar",
+      "keluarga"
+    ],
+    "teks": "Baik. Semoga keluargamu juga sehat semua ya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Baik. Semoga keluargamu juga sehat semua ya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sehat gak nih",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Sehat. Kalau kamu ada rasa kurang enak badan, jangan dipaksa aktivitas berat dulu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Sehat. Kalau kamu ada rasa kurang enak badan, jangan dipaksa aktivitas berat dulu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-009",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kabar hari ini gimana",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "Lancar-lancar saja hari ini. Hari kamu gimana, ada kejadian menarik?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "Lancar-lancar saja hari ini. Hari kamu gimana, ada kejadian menarik?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kabar-010",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "How are you dibalas",
+    "tags": [
+      "kabar"
+    ],
+    "teks": "I'm doing fine, terima kasih. Kamu sendiri gimana harinya?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kabar",
+      "variants": [
+        "I'm doing fine, terima kasih. Kamu sendiri gimana harinya?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sama-sama santai",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Santai saja, sama-sama. Kalau ada yang lain tinggal tanya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Santai saja, sama-sama. Kalau ada yang lain tinggal tanya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Senang bisa bantu",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Senang bisa membantu. Kalau masih ada yang mengganjal, lanjut saja tanya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Senang bisa membantu. Kalau masih ada yang mengganjal, lanjut saja tanya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Makasih dibalas formal",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Terima kasih kembali. Senang bisa membantu Anda hari ini.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Terima kasih kembali. Senang bisa membantu Anda hari ini."
+      ],
+      "variantsFormal": [
+        "Terima kasih kembali. Senang bisa membantu Anda hari ini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sip makasih",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Sip, sama-sama. Semoga masalahnya cepat kelar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Sip, sama-sama. Semoga masalahnya cepat kelar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Thanks singkat",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Sama-sama. Semangat terus ya buat urusan selanjutnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Sama-sama. Semangat terus ya buat urusan selanjutnya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Trims banget",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Sama-sama, senang kalau itu membantu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Sama-sama, senang kalau itu membantu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Makasih ya sudah dengerin",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Sama-sama. Kalau butuh cerita lagi, saya di sini.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Sama-sama. Kalau butuh cerita lagi, saya di sini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-terima-kasih-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Terima kasih banyak",
+    "tags": [
+      "terima_kasih"
+    ],
+    "teks": "Sama-sama, jangan sungkan tanya lagi kapan saja.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "terima_kasih",
+      "variants": [
+        "Sama-sama, jangan sungkan tanya lagi kapan saja."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Dadah santai",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "Dadah! Balik lagi kalau ada yang mau ditanyakan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Dadah! Balik lagi kalau ada yang mau ditanyakan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sampai jumpa formal",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "Sampai jumpa kembali. Terima kasih atas waktunya hari ini.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Sampai jumpa kembali. Terima kasih atas waktunya hari ini."
+      ],
+      "variantsFormal": [
+        "Sampai jumpa kembali. Terima kasih atas waktunya hari ini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mau tidur dulu",
+    "tags": [
+      "jumpa",
+      "malam"
+    ],
+    "teks": "Oke, istirahat dulu ya. Sampai ketemu lagi besok.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Oke, istirahat dulu ya. Sampai ketemu lagi besok."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sudah selesai ngobrol",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "Baik, kalau sudah cukup, kita sudahi dulu. Sampai jumpa.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Baik, kalau sudah cukup, kita sudahi dulu. Sampai jumpa."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "See you",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "See you! Balik kapan saja kalau butuh bantuan lagi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "See you! Balik kapan saja kalau butuh bantuan lagi."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Mau off dulu",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "Sip, off dulu ya. Nanti lanjut lagi kalau sempat.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Sip, off dulu ya. Nanti lanjut lagi kalau sempat."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Pamit keluar",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "Baik, hati-hati kalau keluar. Sampai jumpa lagi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Baik, hati-hati kalau keluar. Sampai jumpa lagi."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-jumpa-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Selamat tinggal singkat",
+    "tags": [
+      "jumpa"
+    ],
+    "teks": "Selamat tinggal untuk sekarang. Terima kasih sudah mampir ngobrol.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "jumpa",
+      "variants": [
+        "Selamat tinggal untuk sekarang. Terima kasih sudah mampir ngobrol."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa apa saja",
+    "tags": [
+      "kemampuan"
+    ],
+    "teks": "Saya bisa ngobrol santai, bantu jawab pertanyaan, hitung sederhana, dan bantu urus hal sehari-hari yang datanya ada di sini.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Saya bisa ngobrol santai, bantu jawab pertanyaan, hitung sederhana, dan bantu urus hal sehari-hari yang datanya ada di sini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa jawab soal sekolah",
+    "tags": [
+      "kemampuan",
+      "sekolah"
+    ],
+    "teks": "Bisa bantu arahkan cara belajar dan urus PR, tapi bukan sekadar kasih jawaban jadi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Bisa bantu arahkan cara belajar dan urus PR, tapi bukan sekadar kasih jawaban jadi."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa apa untuk layanan",
+    "tags": [
+      "kemampuan",
+      "layanan"
+    ],
+    "teks": "Saya bisa bantu jelaskan alur layanan publik seperti KTP atau KK, dan ingatkan supaya tidak lewat calo.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Saya bisa bantu jelaskan alur layanan publik seperti KTP atau KK, dan ingatkan supaya tidak lewat calo."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Batasan kemampuan",
+    "tags": [
+      "kemampuan"
+    ],
+    "teks": "Saya bukan dokter atau ahli hukum. Untuk hal serius seperti itu, tetap konsultasi ke yang berwenang.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Saya bukan dokter atau ahli hukum. Untuk hal serius seperti itu, tetap konsultasi ke yang berwenang."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa nyimpen data",
+    "tags": [
+      "kemampuan"
+    ],
+    "teks": "Semua obrolan tersimpan lokal di perangkatmu, saya tidak mengirim datanya ke server luar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Semua obrolan tersimpan lokal di perangkatmu, saya tidak mengirim datanya ke server luar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa becanda gak",
+    "tags": [
+      "kemampuan"
+    ],
+    "teks": "Bisa sedikit becanda, tapi tetap coba fokus bantu urusan kamu juga.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Bisa sedikit becanda, tapi tetap coba fokus bantu urusan kamu juga."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kamu ngerti bahasa daerah",
+    "tags": [
+      "kemampuan"
+    ],
+    "teks": "Saya paling nyaman pakai Bahasa Indonesia. Kalau ada istilah daerah, boleh dijelaskan sedikit maksudnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Saya paling nyaman pakai Bahasa Indonesia. Kalau ada istilah daerah, boleh dijelaskan sedikit maksudnya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-kemampuan-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bisa hitung ya",
+    "tags": [
+      "kemampuan"
+    ],
+    "teks": "Bisa bantu hitung yang sederhana, misalnya kebutuhan belanja atau pembagian biaya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "kemampuan",
+      "variants": [
+        "Bisa bantu hitung yang sederhana, misalnya kebutuhan belanja atau pembagian biaya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lagi standby",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Lagi standby di sini, siap kalau kamu mau cerita atau tanya sesuatu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Lagi standby di sini, siap kalau kamu mau cerita atau tanya sesuatu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ngapain kamu",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Nungguin kamu ngobrol sih. Kamu sendiri lagi ngapain?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Nungguin kamu ngobrol sih. Kamu sendiri lagi ngapain?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lagi sibuk gak",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Tidak sibuk, siap kapan saja. Kamu lagi sibuk apa hari ini?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Tidak sibuk, siap kapan saja. Kamu lagi sibuk apa hari ini?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lagi mikir apa",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Tidak lagi mikir apa-apa, cuma nunggu kamu lanjut cerita.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Tidak lagi mikir apa-apa, cuma nunggu kamu lanjut cerita."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kamu ngapain di situ",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Di sini aja, siap dengerin. Kamu sendiri ada rencana apa hari ini?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Di sini aja, siap dengerin. Kamu sendiri ada rencana apa hari ini?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bosen gak nunggu",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Tidak bosan, saya memang di sini terus. Kamu yang lagi butuh teman ngobrol?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Tidak bosan, saya memang di sini terus. Kamu yang lagi butuh teman ngobrol?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lagi ngapain sekarang jam segini",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Lagi nunggu chat kamu aja. Ada yang lagi dipikirin?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Lagi nunggu chat kamu aja. Ada yang lagi dipikirin?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-lagi-apa-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kamu sedang apa",
+    "tags": [
+      "lagi_apa"
+    ],
+    "teks": "Sedang siap membantu. Kalau kamu ada waktu, ceritakan saja apa yang lagi dihadapi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "lagi_apa",
+      "variants": [
+        "Sedang siap membantu. Kalau kamu ada waktu, ceritakan saja apa yang lagi dihadapi."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek kerja",
+    "tags": [
+      "capek",
+      "kerja"
+    ],
+    "teks": "Wajar capek kalau habis kerja seharian. Coba istirahat sebentar sebelum lanjut aktivitas lain.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Wajar capek kalau habis kerja seharian. Coba istirahat sebentar sebelum lanjut aktivitas lain."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ngantuk berat",
+    "tags": [
+      "capek"
+    ],
+    "teks": "Kalau ngantuk berat, jangan dipaksa begadang. Tidur sebentar biasanya lebih membantu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Kalau ngantuk berat, jangan dipaksa begadang. Tidur sebentar biasanya lebih membantu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek banget hari ini",
+    "tags": [
+      "capek"
+    ],
+    "teks": "Kedengarannya hari ini berat. Boleh cerita, siapa tahu bisa dicari cara yang lebih ringan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Kedengarannya hari ini berat. Boleh cerita, siapa tahu bisa dicari cara yang lebih ringan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Lelah pikiran",
+    "tags": [
+      "capek"
+    ],
+    "teks": "Lelah pikiran juga perlu istirahat, bukan cuma badan. Coba jeda sebentar dari layar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Lelah pikiran juga perlu istirahat, bukan cuma badan. Coba jeda sebentar dari layar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kehabisan tenaga",
+    "tags": [
+      "capek"
+    ],
+    "teks": "Kalau sudah kehabisan tenaga, tanda badan minta jeda. Minum air dan duduk dulu sebentar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Kalau sudah kehabisan tenaga, tanda badan minta jeda. Minum air dan duduk dulu sebentar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek tapi belum selesai kerjaan",
+    "tags": [
+      "capek",
+      "kerja"
+    ],
+    "teks": "Kalau capek tapi kerjaan belum selesai, coba pecah jadi bagian kecil dulu, jangan dipaksa sekaligus.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Kalau capek tapi kerjaan belum selesai, coba pecah jadi bagian kecil dulu, jangan dipaksa sekaligus."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek banget abis lembur",
+    "tags": [
+      "capek",
+      "kerja"
+    ],
+    "teks": "Habis lembur wajar capek. Kalau bisa besok kurangi target sedikit biar tidak numpuk terus.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Habis lembur wajar capek. Kalau bisa besok kurangi target sedikit biar tidak numpuk terus."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-capek-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Capek urus rumah",
+    "tags": [
+      "capek",
+      "rumah"
+    ],
+    "teks": "Urus rumah memang melelahkan. Boleh dicicil, tidak harus selesai semua hari ini.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "capek",
+      "variants": [
+        "Urus rumah memang melelahkan. Boleh dicicil, tidak harus selesai semua hari ini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bosen di rumah",
+    "tags": [
+      "bosen",
+      "rumah"
+    ],
+    "teks": "Kalau bosan di rumah, coba beres-beres kecil atau jalan sebentar keluar rumah.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Kalau bosan di rumah, coba beres-beres kecil atau jalan sebentar keluar rumah."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Gabut banget",
+    "tags": [
+      "bosen"
+    ],
+    "teks": "Gabut itu wajar. Coba cari kegiatan ringan sepuluh menit, biasanya membantu.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Gabut itu wajar. Coba cari kegiatan ringan sepuluh menit, biasanya membantu."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bosen sama rutinitas",
+    "tags": [
+      "bosen"
+    ],
+    "teks": "Rutinitas yang itu-itu saja memang bikin jenuh. Coba selipkan variasi kecil di jadwal harian.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Rutinitas yang itu-itu saja memang bikin jenuh. Coba selipkan variasi kecil di jadwal harian."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Jenuh kerja",
+    "tags": [
+      "bosen",
+      "kerja"
+    ],
+    "teks": "Jenuh kerja itu tanda butuh jeda. Coba ambil istirahat singkat, jangan dipaksa terus.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Jenuh kerja itu tanda butuh jeda. Coba ambil istirahat singkat, jangan dipaksa terus."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bosen belajar",
+    "tags": [
+      "bosen",
+      "sekolah"
+    ],
+    "teks": "Kalau bosan belajar, coba ganti metode, misalnya belajar sambil jalan atau diskusi kelompok kecil.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Kalau bosan belajar, coba ganti metode, misalnya belajar sambil jalan atau diskusi kelompok kecil."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Gabut gak tau ngapain",
+    "tags": [
+      "bosen"
+    ],
+    "teks": "Coba list tiga hal kecil yang bisa dikerjakan sekarang, biasanya bantu keluar dari rasa gabut.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Coba list tiga hal kecil yang bisa dikerjakan sekarang, biasanya bantu keluar dari rasa gabut."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Bosen liat hp terus",
+    "tags": [
+      "bosen"
+    ],
+    "teks": "Kalau sudah bosan lihat layar, coba jeda dulu, jalan sebentar atau ngobrol langsung sama orang di sekitar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Kalau sudah bosan lihat layar, coba jeda dulu, jalan sebentar atau ngobrol langsung sama orang di sekitar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-bosen-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Jenuh banget hari ini",
+    "tags": [
+      "bosen"
+    ],
+    "teks": "Hari yang bikin jenuh memang ada. Istirahat sebentar, besok bisa dicoba ulang dengan ritme berbeda.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "bosen",
+      "variants": [
+        "Hari yang bikin jenuh memang ada. Istirahat sebentar, besok bisa dicoba ulang dengan ritme berbeda."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maaf telat balas",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak masalah. Lanjut saja dari mana tadi.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak masalah. Lanjut saja dari mana tadi."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-002",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maaf salah ketik",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Santai, tidak apa-apa. Bisa diulang dengan kata yang benar.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Santai, tidak apa-apa. Bisa diulang dengan kata yang benar."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-003",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Sorry ganggu",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak mengganggu, silakan lanjut ceritanya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak mengganggu, silakan lanjut ceritanya."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-004",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maaf ya jadi curhat",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak apa-apa, memang untuk itu saya di sini.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak apa-apa, memang untuk itu saya di sini."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-005",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maafkan aku",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak masalah, lanjut saja. Semua bisa dibicarakan pelan-pelan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak masalah, lanjut saja. Semua bisa dibicarakan pelan-pelan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-006",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maaf lama gak chat",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak apa, yang penting sekarang sudah kembali. Ada yang mau diceritakan?",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak apa, yang penting sekarang sudah kembali. Ada yang mau diceritakan?"
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-007",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maaf kalau nanya aneh",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak aneh kok, tanya saja apa yang mau ditanyakan.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak aneh kok, tanya saja apa yang mau ditanyakan."
+      ]
+    }
+  },
+  {
+    "id": "obrolan-maaf-008",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Maaf salah paham",
+    "tags": [
+      "maaf"
+    ],
+    "teks": "Tidak apa-apa, kadang memang ada yang kelewat. Coba jelaskan ulang maksudnya.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "maaf",
+      "variants": [
+        "Tidak apa-apa, kadang memang ada yang kelewat. Coba jelaskan ulang maksudnya."
+      ]
+    }
+  }
+]
