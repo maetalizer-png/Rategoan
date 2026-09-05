@@ -1,0 +1,456 @@
+[
+  {
+    "id": "obrolan-kabar",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan kabar",
+    "tags": [
+      "obrolan",
+      "kabar"
+    ],
+    "teks": "Kabar baik. Kalau kamu sendiri bagaimana?",
+    "meta": {
+      "variants": [
+        "Baik saja, kamu?"
+      ],
+      "jenis": "smalltalk",
+      "key": "kabar"
+    }
+  },
+  {
+    "id": "obrolan-bosan",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan bosan",
+    "tags": [
+      "obrolan",
+      "bosan"
+    ],
+    "teks": "Kalau bosan, kita bisa ngobrol santai atau cari topik baru. Mau yang mana?",
+    "meta": {
+      "variants": [
+        "Boleh cerita aja, saya dengarkan."
+      ],
+      "jenis": "smalltalk",
+      "key": "bosen"
+    }
+  },
+  {
+    "id": "obrolan-cuaca",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan cuaca",
+    "tags": [
+      "obrolan",
+      "cuaca"
+    ],
+    "teks": "Cuaca memang memengaruhi mood. Di tempatmu lagi seperti apa?",
+    "meta": {
+      "variants": [
+        "Semoga cuacanya bersahabat ya."
+      ],
+      "jenis": "smalltalk",
+      "key": "kabar"
+    }
+  },
+  {
+    "id": "obrolan-semangat",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan semangat",
+    "tags": [
+      "obrolan",
+      "semangat"
+    ],
+    "teks": "Semangat! Satu langkah kecil tetap berarti.",
+    "meta": {
+      "variants": [
+        "Ayo semangat."
+      ],
+      "jenis": "smalltalk",
+      "key": "capek"
+    }
+  },
+  {
+    "id": "obrolan-bingung",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan bingung",
+    "tags": [
+      "obrolan",
+      "bingung"
+    ],
+    "teks": "Tidak apa-apa merasa bingung. Coba ceritakan apa yang membuatmu bimbang.",
+    "meta": {
+      "variants": [
+        "Pelan-pelan saja, kita uraikan bersama."
+      ],
+      "jenis": "smalltalk",
+      "key": "bantu"
+    }
+  },
+  {
+    "id": "obrolan-capek",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan capek",
+    "tags": [
+      "obrolan",
+      "capek"
+    ],
+    "teks": "Istirahat sejenak juga penting. Mau istirahat dulu atau tetap lanjut ngobrol?",
+    "meta": {
+      "variants": [
+        "Jaga tenaga ya."
+      ],
+      "jenis": "smalltalk",
+      "key": "capek"
+    }
+  },
+  {
+    "id": "obrolan-kenalan",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan kenalan",
+    "tags": [
+      "obrolan",
+      "kenalan"
+    ],
+    "teks": "Senang berkenalan. Kamu bisa panggil saya Raget.",
+    "meta": {
+      "variants": [
+        "Halo, kenalkan saya Raget."
+      ],
+      "jenis": "smalltalk",
+      "key": "siapa"
+    }
+  },
+  {
+    "id": "obrolan-base",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan basa-basi",
+    "tags": [
+      "obrolan",
+      "basa-basi"
+    ],
+    "teks": "Iya, saya di sini. Mau ngobrol ringan atau langsung ke topik utama?",
+    "meta": {
+      "variants": [
+        "Silakan, santai saja."
+      ],
+      "jenis": "smalltalk",
+      "key": "kabar"
+    }
+  },
+  {
+    "id": "obrolan-hobi",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan hobi",
+    "tags": [
+      "obrolan",
+      "hobi"
+    ],
+    "teks": "Hobi bisa jadi cara mengisi waktu. Kamu suka melakukan apa di waktu luang?",
+    "meta": {
+      "variants": [
+        "Menarik, ceritakan dong."
+      ],
+      "jenis": "smalltalk",
+      "key": "lagi_apa"
+    }
+  },
+  {
+    "id": "obrolan-kerja",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Obrolan kerja",
+    "tags": [
+      "obrolan",
+      "kerja"
+    ],
+    "teks": "Urusan kerja kadang melelahkan. Mau curhat ringan atau cari tips fokus?",
+    "meta": {
+      "variants": [
+        "Semoga pekerjaannya lancar."
+      ],
+      "jenis": "smalltalk",
+      "key": "kerja"
+    }
+  },
+  {
+    "id": "obrolan-layanan-bantuan",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Minta bantuan layanan",
+    "tags": [
+      "obrolan",
+      "layanan",
+      "bantuan"
+    ],
+    "teks": "Silakan ceritakan kendalanya. Nanti kita cari jalan keluarnya.",
+    "meta": {
+      "variants": [
+        "Ada yang bisa dibantu?",
+        "Sampaikan saja, saya bantu arahkan."
+      ],
+      "jenis": "smalltalk",
+      "key": "layanan"
+    }
+  },
+  {
+    "id": "obrolan-layanan-komplain",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Komplain",
+    "tags": [
+      "obrolan",
+      "layanan",
+      "komplain"
+    ],
+    "teks": "Terima kasih sudah memberitahu. Mohon maaf atas ketidaknyamanannya.",
+    "meta": {
+      "variants": [
+        "Kami catat dulu.",
+        "Nanti kami cek dan kabari."
+      ],
+      "jenis": "smalltalk",
+      "key": "layanan"
+    }
+  },
+  {
+    "id": "obrolan-tugas-stuck",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Stuck mengerjakan tugas",
+    "tags": [
+      "obrolan",
+      "tugas",
+      "stuck"
+    ],
+    "teks": "Kalau stuck, coba pecah tugasnya jadi bagian kecil. Jangan dipaksa sekaligus.",
+    "meta": {
+      "variants": [
+        "Ambil napas dulu.",
+        "Mulai dari yang paling mudah."
+      ],
+      "jenis": "smalltalk",
+      "key": "tugas"
+    }
+  },
+  {
+    "id": "obrolan-tugas-deadline",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Deadline dekat",
+    "tags": [
+      "obrolan",
+      "tugas",
+      "deadline"
+    ],
+    "teks": "Deadline dekat biasanya bikin panik. Prioritaskan yang paling penting dulu.",
+    "meta": {
+      "variants": [
+        "Satu per satu saja.",
+        "Yang wajib dikumpul didahulukan."
+      ],
+      "jenis": "smalltalk",
+      "key": "tugas"
+    }
+  },
+  {
+    "id": "obrolan-tugas-selesai",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Tugas selesai",
+    "tags": [
+      "obrolan",
+      "tugas",
+      "selesai"
+    ],
+    "teks": "Sudah beres. Sekarang boleh istirahat sejenak.",
+    "meta": {
+      "variants": [
+        "Good job.",
+        "Istirahat juga penting."
+      ],
+      "jenis": "smalltalk",
+      "key": "tugas"
+    }
+  },
+  {
+    "id": "obrolan-pelajaran-bingung",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Bingung materi pelajaran",
+    "tags": [
+      "obrolan",
+      "pelajaran",
+      "bingung"
+    ],
+    "teks": "Bingung itu wajar. Coba tanya ulang atau cari contoh yang lebih sederhana.",
+    "meta": {
+      "variants": [
+        "Pecah materinya.",
+        "Tidak harus langsung paham semua."
+      ],
+      "jenis": "smalltalk",
+      "key": "sekolah"
+    }
+  },
+  {
+    "id": "obrolan-pelajaran-presentasi",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Mau presentasi",
+    "tags": [
+      "obrolan",
+      "pelajaran",
+      "presentasi"
+    ],
+    "teks": "Tenang saja. Sampaikan intinya, tidak perlu sempurna.",
+    "meta": {
+      "variants": [
+        "Tarik napas dulu.",
+        "Kamu sudah siap."
+      ],
+      "jenis": "smalltalk",
+      "key": "sekolah"
+    }
+  },
+  {
+    "id": "obrolan-gaya-formal",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya formal",
+    "tags": [
+      "obrolan",
+      "formal"
+    ],
+    "teks": "Baik, silakan disampaikan. Saya siap membantu.",
+    "meta": {
+      "variants": [
+        "Mohon disampaikan saja.",
+        "Saya dengarkan."
+      ],
+      "jenis": "smalltalk",
+      "key": "bantu"
+    }
+  },
+  {
+    "id": "obrolan-gaya-informal",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya informal",
+    "tags": [
+      "obrolan",
+      "informal"
+    ],
+    "teks": "Santai saja, mau ngomongin apa?",
+    "meta": {
+      "variants": [
+        "Gas aja.",
+        "Langsung aja."
+      ],
+      "jenis": "smalltalk",
+      "key": "lagi_apa"
+    }
+  },
+  {
+    "id": "obrolan-gaya-lucu",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya lucu ringan",
+    "tags": [
+      "obrolan",
+      "lucu"
+    ],
+    "teks": "Siap menerima curhatan, pertanyaan, atau sekadar iseng ngobrol.",
+    "meta": {
+      "variants": [
+        "Mode mendengarkan aktif.",
+        "Silakan, saya sudah standby."
+      ],
+      "jenis": "smalltalk",
+      "key": "siapa"
+    }
+  },
+  {
+    "id": "obrolan-gaya-empati",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya empati",
+    "tags": [
+      "obrolan",
+      "empati"
+    ],
+    "teks": "Kalau lagi berat, boleh cerita pelan-pelan. Tidak harus langsung tuntas.",
+    "meta": {
+      "variants": [
+        "Saya di sini.",
+        "Ambil waktu dulu saja."
+      ],
+      "jenis": "smalltalk",
+      "key": "bantu"
+    }
+  },
+  {
+    "id": "obrolan-gaya-tegas",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Gaya tegas ramah",
+    "tags": [
+      "obrolan",
+      "tegas"
+    ],
+    "teks": "Langsung ke intinya biar lebih cepat terbantu.",
+    "meta": {
+      "variants": [
+        "Fokus ke masalah utamanya.",
+        "Kita selesaikan satu per satu."
+      ],
+      "jenis": "smalltalk",
+      "key": "bantu"
+    }
+  },
+  {
+    "id": "obrolan-produktivitas-mulai",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Susah mulai kerja",
+    "tags": [
+      "obrolan",
+      "produktivitas"
+    ],
+    "teks": "Susah mulai itu biasa. Coba kerjakan lima menit saja dulu.",
+    "meta": {
+      "variants": [
+        "Mulai dari yang paling kecil.",
+        "Nanti biasanya nyambung sendiri."
+      ],
+      "jenis": "smalltalk",
+      "key": "tugas"
+    }
+  },
+  {
+    "id": "obrolan-produktivitas-tunda",
+    "kategori": "obrolan-ringan",
+    "wilayah": null,
+    "nama": "Suka menunda",
+    "tags": [
+      "obrolan",
+      "produktivitas",
+      "tunda"
+    ],
+    "teks": "Menunda biasanya karena terasa berat. Pecah saja jadi langkah kecil.",
+    "meta": {
+      "variants": [
+        "Jangan ditumpuk.",
+        "Satu langkah saja hari ini."
+      ],
+      "jenis": "smalltalk",
+      "key": "tugas"
+    }
+  }
+]

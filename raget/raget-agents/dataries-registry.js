@@ -160,46 +160,6 @@ export const REGIONS = Object.freeze({
     { id: 'osenia', file: './minuman/osenia.js', names: [] },
     { id: 'timur-tengah', file: './minuman/timur-tengah.js', names: [] },
   ],
-  'obrolan-ringan': [
-    { id: 'obrolan-ringan', file: './obrolan-ringan/obrolan-ringan.js', names: ['obrolan', 'santai'] },
-    { id: 'obrolan-harian-sektor', file: './obrolan-ringan/obrolan-harian-sektor.js', names: ['macet', 'panas'] },
-    { id: 'obrolan-lingkungan-sehari', file: './obrolan-ringan/obrolan-lingkungan-sehari.js', names: ['tetangga', 'hujan'] },
-  ],
-  layanan: [
-    { id: 'layanan-publik', file: './layanan/layanan-publik.js', names: ['ktp', 'kk', 'dukcapil', 'antrian', 'pengaduan', 'hilang', 'persyaratan'] },
-    { id: 'layanan-sekolah-klinik-toko', file: './layanan/layanan-sekolah-klinik-toko.js', names: ['klinik', 'toko', 'bank', 'pos'] },
-    { id: 'layanan-pasar-warung-desa', file: './layanan/layanan-pasar-warung-desa.js', names: ['pasar', 'warung', 'desa', 'posyandu', 'rt'] },
-    { id: 'layanan-antrian-sopan', file: './layanan/layanan-antrian-sopan.js', names: ['antre', 'antrian', 'calo', 'loket'] },
-    { id: 'layanan-kantor-bank', file: './layanan/layanan-kantor-bank.js', names: ['bank', 'kelurahan', 'tagihan', 'otp'] },
-  ],
-  sekolah: [
-    { id: 'sekolah-harian', file: './sekolah/sekolah-harian.js', names: ['sekolah', 'pr', 'ulangan', 'piket', 'osis'] },
-    { id: 'sekolah-orangtua', file: './sekolah/sekolah-orangtua.js', names: ['wali kelas', 'nilai'] },
-    { id: 'sekolah-pr-ulangan', file: './sekolah/sekolah-pr-ulangan.js', names: ['pr', 'ulangan', 'tugas', 'deadline', 'ujian'] },
-    { id: 'sekolah-izin-sakit', file: './sekolah/sekolah-izin-sakit.js', names: ['izin', 'sakit', 'uks', 'absen'] },
-  ],
-  kesehatan: [
-    { id: 'kesehatan-harian-ringan', file: './kesehatan/kesehatan-harian-ringan.js', names: ['demam', 'capek', 'istirahat'] },
-    { id: 'kesehatan-harian', file: './kesehatan/kesehatan-harian.js', names: ['demam', 'obat', 'luka'] },
-    { id: 'kesehatan-keluarga', file: './kesehatan/kesehatan-keluarga.js', names: ['anak demam', 'lansia'] },
-  ],
-  transportasi: [
-    { id: 'transportasi-harian', file: './transportasi/transportasi-harian.js', names: ['angkot', 'ojek', 'kereta', 'parkir'] },
-    { id: 'transportasi-keluarga', file: './transportasi/transportasi-keluarga.js', names: ['antar sekolah', 'mudik'] },
-  ],
-  'rumah-tangga': [
-    { id: 'rumah-tangga-harian', file: './rumah-tangga/rumah-tangga-harian.js', names: ['gas', 'sampah', 'air'] },
-    { id: 'rumah-tangga-uang-dapur', file: './rumah-tangga/rumah-tangga-uang-dapur.js', names: ['belanja dapur', 'listrik'] },
-    { id: 'rumah-tangga-listrik-air', file: './rumah-tangga/rumah-tangga-listrik-air.js', names: ['listrik padam', 'air mati', 'padam'] },
-  ],
-  kerja: [
-    { id: 'kerja-kantor-harian', file: './kerja/kerja-kantor-harian.js', names: ['kantor', 'deadline', 'rapat', 'telat'] },
-    { id: 'kerja-harian', file: './kerja/kerja-harian.js', names: ['kantor', 'rapat', 'lembur'] },
-    { id: 'kerja-wfh-rekan', file: './kerja/kerja-wfh-rekan.js', names: ['wfh', 'meeting'] },
-  ],
-  lingkungan: [
-    { id: 'lingkungan-rt', file: './lingkungan/lingkungan-rt.js', names: ['kerja bakti', 'gang', 'tetangga'] },
-  ],
   biologi: [
     { id: 'sel-genetika-dan-metabolisme', file: './mata-pelajaran/biologi/sel-genetika-dan-metabolisme.js', names: ['biologi'] },
     { id: 'fisiologi-ekosistem-dan-bioteknologi', file: './mata-pelajaran/biologi/fisiologi-ekosistem-dan-bioteknologi.js', names: ['biologi'] },
@@ -244,7 +204,7 @@ export const REGIONS = Object.freeze({
 
 const cache = new Map();
 
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan', biologi: 'mata-pelajaran/biologi', matematika: 'mata-pelajaran/matematika', fisika: 'mata-pelajaran/fisika', kimia: 'mata-pelajaran/kimia', 'bahasa-indonesia': 'mata-pelajaran/bahasa-indonesia', 'bahasa-inggris': 'mata-pelajaran/bahasa-inggris', geografi: 'mata-pelajaran/geografi', 'sejarah-sekolah': 'mata-pelajaran/sejarah', 'ekonomi-sekolah': 'mata-pelajaran/ekonomi', ppkn: 'mata-pelajaran/ppkn' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', biologi: 'mata-pelajaran/biologi', matematika: 'mata-pelajaran/matematika', fisika: 'mata-pelajaran/fisika', kimia: 'mata-pelajaran/kimia', 'bahasa-indonesia': 'mata-pelajaran/bahasa-indonesia', 'bahasa-inggris': 'mata-pelajaran/bahasa-inggris', geografi: 'mata-pelajaran/geografi', 'sejarah-sekolah': 'mata-pelajaran/sejarah', 'ekonomi-sekolah': 'mata-pelajaran/ekonomi', ppkn: 'mata-pelajaran/ppkn' };
 
 function unifiedToLegacyShape(entry, group) {
   return {

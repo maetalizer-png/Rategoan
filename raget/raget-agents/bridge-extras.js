@@ -231,6 +231,16 @@ async function tryPlatform(text) {
   return item.text;
 }
 
+async function tryPeluang(text) {
+  const m = text.match(/^(peluang|tren|investasi)\s+(.+)$/i);
+  if (!m) return null;
+  const entity = bridgeResolve.cleanEntity(m[2]);
+  if (!entity) return null;
+  const item = await bridgeResolve.findBestInList('peluang', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
+  if (!item) return null;
+  return item.text;
+}
+
 const MATA_PELAJARAN_MAP = {
   biologi: 'biologi',
   matematika: 'matematika',
@@ -340,6 +350,9 @@ async function extras(q) {
 
   const platform = await tryPlatform(text);
   if (platform) return platform;
+
+  const peluang = await tryPeluang(text);
+  if (peluang) return peluang;
 
   const topic = await tryTopicSearch(text);
   if (topic) return topic;
