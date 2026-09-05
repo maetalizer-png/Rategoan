@@ -11,7 +11,7 @@
     ],
     "teks": "Macetnya parah ya. Kabari dulu yang menunggu, lebih baik telat dengan kabar daripada hilang tanpa kabar.",
     "meta": {
-      "jenis": "sapaan",
+      "jenis": "transport",
       "variants": [
         "Kalau bisa, cari jalur alternatif atau naik angkutan yang tidak terjebak di titik yang sama."
       ]
@@ -29,7 +29,7 @@
     ],
     "teks": "Ketinggalan angkot biasa. Cek jam operasional berikutnya. Jangan naik kendaraan ugal-ugalan hanya karena terburu-buru.",
     "meta": {
-      "jenis": "sapaan",
+      "jenis": "transport",
       "variants": [
         "Kalau malam, tunggu di tempat terang."
       ]
@@ -47,7 +47,7 @@
     ],
     "teks": "Mudik amannya berangkat di luar jam puncak. Istirahat kalau mengantuk. Kunci rumah dan cabut colokan sebelum pergi.",
     "meta": {
-      "jenis": "sapaan",
+      "jenis": "transport",
       "variants": [
         "Kirim kabar sampai tujuan ke keluarga."
       ]

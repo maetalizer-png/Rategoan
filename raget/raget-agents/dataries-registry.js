@@ -160,26 +160,6 @@ export const REGIONS = Object.freeze({
     { id: 'osenia', file: './minuman/osenia.js', names: [] },
     { id: 'timur-tengah', file: './minuman/timur-tengah.js', names: [] },
   ],
-  sapaan: [
-    { id: 'greetings', file: './sapaan/greetings.js', names: [] },
-    { id: 'interaktif', file: './sapaan/interaktif.js', names: [] },
-    { id: 'sapaan', file: './sapaan/sapaan.js', names: ['halo', 'hai', 'pagi'] },
-    { id: 'sapaan-wawasan-luas', file: './sapaan/sapaan-wawasan-luas.js', names: ['sekolah', 'tugas', 'layanan'] },
-    { id: 'sapaan-harian-sektor', file: './sapaan/sapaan-harian-sektor.js', names: ['belanja', 'paket', 'tetangga'] },
-    { id: 'sapaan-obrolan-lanjut', file: './sapaan/sapaan-obrolan-lanjut.js', names: ['lanjut', 'bingung'] },
-    { id: 'sapaan-sekolah', file: './sapaan/sapaan-sekolah.js', names: ['sekolah', 'pr', 'kuliah'] },
-    { id: 'sapaan-layanan', file: './sapaan/sapaan-layanan.js', names: ['layanan', 'komplain', 'antrian'] },
-    { id: 'sapaan-kerja', file: './sapaan/sapaan-kerja.js', names: ['kerja', 'kantor'] },
-    { id: 'sapaan-kesehatan', file: './sapaan/sapaan-kesehatan.js', names: ['sakit', 'capek'] },
-    { id: 'sapaan-produksi-ready', file: './sapaan/sapaan-produksi-ready.js', names: ['bantu', 'maaf', 'ktp', 'pr menumpuk', 'listrik'] },
-    { id: 'sapaan-transportasi', file: './sapaan/sapaan-transportasi.js', names: ['macet', 'angkot', 'mudik', 'telat'] },
-  ],
-  greeting: [
-    { id: 'greeting', file: './greeting/greeting.js', names: ['halo', 'selamat'] },
-    { id: 'greeting-wawasan-luas', file: './greeting/greeting-wawasan-luas.js', names: ['pagi', 'kabar'] },
-    { id: 'greeting-harian-sektor', file: './greeting/greeting-harian-sektor.js', names: ['belanja', 'perjalanan'] },
-    { id: 'greeting-situasi', file: './greeting/greeting-situasi.js', names: ['buru-buru', 'capek'] },
-  ],
   'obrolan-ringan': [
     { id: 'obrolan-ringan', file: './obrolan-ringan/obrolan-ringan.js', names: ['obrolan', 'santai'] },
     { id: 'obrolan-harian-sektor', file: './obrolan-ringan/obrolan-harian-sektor.js', names: ['macet', 'panas'] },
@@ -224,7 +204,7 @@ export const REGIONS = Object.freeze({
 
 const cache = new Map();
 
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', sapaan: 'sapaan', greeting: 'greeting', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
 
 function unifiedToLegacyShape(entry, group) {
   return {

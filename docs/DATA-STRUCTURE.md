@@ -50,9 +50,19 @@ lebih spesifik dari pola generik dataries: `tokoh-store.js` (fetch
 `raget-data/json/tokoh/tokoh.json`), `kuliner-store.js` (fetch per-region
 `raget-data/json/kuliner/<region>.json`), `world-context.js` (fetch
 `raget-data/json/hari-internasional/hari-internasional.json`), dan
-`llm-engine.js` (fetch `raget-data/json/sapaan/sapaan.json`). Masing-masing
+`llm-engine.js` (fetch `raget-data/json/sapaan/sapaan.json` + daftar
+`SAPAAN_EXTRA_FILES` untuk file sapaan-*.json lainnya). Masing-masing
 loader ini cache hasil fetch dan expose fungsi query sendiri (`find*/try*`),
 bukan lewat `dataries.loadRegion()`.
+
+Catatan: `dataries-registry.js` dulu JUGA mendaftarkan `sapaan` dan
+`greeting` di `REGIONS`/`JSON_MIGRATED_GROUPS` (jalur #1), padahal
+`llm-engine.js` (jalur #2) sudah jadi satu-satunya konsumen nyata —
+tidak ada kode lain yang pernah memanggil `dataries.loadRegion('sapaan', ...)`
+atau `loadAll('sapaan'/'greeting')`. Registrasi ganda yang mati itu (plus
+folder `greeting/` yang isinya duplikat penuh dari `sapaan/`, tidak
+pernah dibaca sama sekali) sudah dihapus - `sapaan/` sekarang murni
+domain jalur #2.
 
 Skema unified di balik `raget-data/json/*/*.json` sama untuk kedua jalur:
 

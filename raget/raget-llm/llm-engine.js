@@ -91,6 +91,10 @@ const JENIS_TO_KEY = {
   makan: 'kabar',
   cuaca: 'kabar',
   digital: 'kemampuan',
+  tugas: 'tugas',
+  tutup: 'jumpa',
+  perjalanan: 'transport',
+  transport: 'transport',
 };
 
 function indexSapaan(raw) {
@@ -126,6 +130,10 @@ const SAPAAN_EXTRA_FILES = [
   'sapaan-cuaca.json',
   'sapaan-digital.json',
   'sapaan-produksi-ready.json',
+  'sapaan-wawasan-luas.json',
+  'sapaan-penutup.json',
+  'sapaan-perjalanan.json',
+  'sapaan-transportasi.json',
 ];
 
 async function loadSapaan() {

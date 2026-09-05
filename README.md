@@ -128,9 +128,12 @@ masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 
 `raget/raget-data/json/` adalah **satu-satunya** sumber data domain (folder `raget-dataries/` JS legacy sudah dihapus).
 Loader: `raget-agents/dataries-registry.js` (fetch JSON → bentuk `{text, metadata}` untuk bridge).
-Domain antara lain: negara, kota, bahasa, tokoh, sapaan, sains, sejarah, wisata, kuliner/makanan,
+Domain antara lain: negara, kota, bahasa, tokoh, sains, sejarah, wisata, kuliner/makanan,
 olahraga, etika, minuman, platform, ekonomi, peluang, penemuan, alam, seni-budaya,
-plus `greeting/` & `obrolan-ringan/` untuk template chat.
+plus `obrolan-ringan/` untuk template chat. `sapaan/` (sapaan/smalltalk harian) dimuat
+sendiri oleh `raget-llm/llm-engine.js` (fetch langsung, bukan lewat dataries-registry.js) —
+folder `greeting/` yang dulu ada di sampingnya sudah dihapus karena isinya duplikat penuh
+dari `sapaan/` dan tidak pernah dibaca kode manapun.
 `json/pengetahuan/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
 `korpus-ensiklopedia-bersih`, K2 `korpus-dialog-daerah-bersih`, K3 `korpus-pelengkap-bersih`,
 aturan lengkap di [`PRD.md`](PRD.md) §2). Token training yang valid hanya dari 3 rak itu,
