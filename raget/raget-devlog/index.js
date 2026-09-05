@@ -18,6 +18,7 @@ import ronde_v6_tata_tubuh_data_rasa_trisula from './sejarah/17-ronde-v6-tata-tu
 import ronde_v7_lanjutan_data_kecerdasan_ui from './sejarah/18-ronde-v7-lanjutan-data-kecerdasan-ui.js';
 import fase_b_tuntas_21_domain from './sejarah/19-fase-b-tuntas-21-domain.js';
 import training_checkpoint50m_fase_c from './sejarah/20-training-checkpoint50m-fase-c.js';
+import training_checkpoint50m_cpu_85menit from './sejarah/21-training-checkpoint50m-cpu-85menit.js';
 
 const SEJARAH = Object.freeze([
   genesis,
@@ -40,6 +41,7 @@ const SEJARAH = Object.freeze([
   ronde_v7_lanjutan_data_kecerdasan_ui,
   fase_b_tuntas_21_domain,
   training_checkpoint50m_fase_c,
+  training_checkpoint50m_cpu_85menit,
 ]);
 
 function all() {
