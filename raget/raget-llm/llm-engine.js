@@ -95,15 +95,29 @@ const JENIS_TO_KEY = {
   tutup: 'jumpa',
   perjalanan: 'transport',
   transport: 'transport',
+  kebiasaan: 'kabar',
+  sopan: 'bantu',
+  formal: 'bantu',
+  informal: 'lagi_apa',
+  jenaka: 'siapa',
+  rindu: 'jumpa',
 };
+
+// jenis values whose text belongs in the plain-greeting pool rather than a
+// smalltalk trigger bucket (used for short greetings like "hai"/"hei" with
+// no dedicated bucket of their own).
+const JENIS_TO_PLAIN = new Set(['hai', 'hei', 'datang']);
 
 function indexSapaan(raw) {
   const idx = { time: {}, plain: [], smalltalk: {}, followup: { greeting: [], smalltalk: [] } };
   for (const e of Array.isArray(raw) ? raw : []) {
     const m = e && e.meta ? e.meta : {};
     const teksList = m.variants && m.variants.length ? m.variants : e && e.teks ? [e.teks] : [];
-    if (m.jenis === 'waktu' && m.periode) idx.time[m.periode] = teksList.length ? teksList : [e.teks];
-    else if (m.jenis === 'plain') idx.plain = teksList.length ? teksList : [e.teks];
+    const vals = teksList.length ? teksList : [e.teks];
+    if (m.jenis === 'waktu' && m.periode) idx.time[m.periode] = (idx.time[m.periode] || []).concat(vals);
+    else if (m.jenis === 'plain') idx.plain = (idx.plain || []).concat(vals);
+    else if (m.jenis === 'lanjut') idx.followup.smalltalk = (idx.followup.smalltalk || []).concat(vals);
+    else if (JENIS_TO_PLAIN.has(m.jenis)) idx.plain = (idx.plain || []).concat(vals);
     else if (m.jenis === 'smalltalk' && m.key) addSmalltalk(idx, m.key, teksList, m.variantsFormal || null);
     else if (JENIS_TO_KEY[m.jenis]) addSmalltalk(idx, m.key || JENIS_TO_KEY[m.jenis], teksList, m.variantsFormal || null);
     else if (m.jenis === 'followup') {
@@ -119,21 +133,45 @@ function ensureSapaan() {
   return sapaanCache;
 }
 
+// Paths are relative to raget-data/json/sapaan/, one entry per file living in
+// the thematic subfolders (sapaan.json itself stays at the top level and is
+// fetched directly in loadSapaan). Every file here MUST actually classify
+// into a real SMALLTALK_TRIGGERS bucket via JENIS_TO_KEY/JENIS_TO_PLAIN --
+// verify live after touching this list, do not just drop a filename in.
 const SAPAAN_EXTRA_FILES = [
-  'sapaan-sekolah.json',
-  'sapaan-layanan.json',
-  'sapaan-harian-sektor.json',
-  'sapaan-kerja.json',
-  'sapaan-kesehatan.json',
-  'sapaan-keluarga.json',
-  'sapaan-makan.json',
-  'sapaan-cuaca.json',
-  'sapaan-digital.json',
-  'sapaan-produksi-ready.json',
-  'sapaan-wawasan-luas.json',
-  'sapaan-penutup.json',
-  'sapaan-perjalanan.json',
-  'sapaan-transportasi.json',
+  // waktu
+  'waktu/sapaan-waktu.json',
+  'waktu/greetings.json',
+  // kerja & layanan
+  'kerja-layanan/sapaan-sekolah.json',
+  'kerja-layanan/sapaan-layanan.json',
+  'kerja-layanan/sapaan-kerja.json',
+  'kerja-layanan/sapaan-produksi-ready.json',
+  'kerja-layanan/sapaan-wawasan-luas.json',
+  // harian & rumah
+  'harian-rumah/sapaan-harian-sektor.json',
+  'harian-rumah/sapaan-harian-luas.json',
+  'harian-rumah/sapaan-keluarga.json',
+  'harian-rumah/sapaan-makan.json',
+  'harian-rumah/sapaan-kebiasaan.json',
+  // transportasi & perjalanan
+  'transportasi-perjalanan/sapaan-perjalanan.json',
+  'transportasi-perjalanan/sapaan-transportasi.json',
+  // kesehatan & cuaca
+  'kesehatan-cuaca/sapaan-kesehatan.json',
+  'kesehatan-cuaca/sapaan-cuaca.json',
+  // sosial
+  'sosial/sapaan-digital.json',
+  'sosial/sapaan-penutup.json',
+  'sosial/sapaan-sopan.json',
+  'sosial/sapaan-umum.json',
+  'sosial/sapaan-obrolan-lanjut.json',
+  'sosial/interaktif.json',
+  // obrolan baru (new everyday-conversation content)
+  'obrolan-baru/sapaan-obrolan-harian.json',
+  'obrolan-baru/sapaan-kerja-tugas-tambahan.json',
+  'obrolan-baru/sapaan-rumah-sosial-tambahan.json',
+  'obrolan-baru/sapaan-transport-sehat-tambahan.json',
 ];
 
 async function loadSapaan() {
