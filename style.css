@@ -80,8 +80,6 @@ h1, h2, h3 {
   gap: 8px;
 }
 
-.brand-mark { color: var(--green); font-size: 14px; }
-
 .nav-links {
   display: flex;
   align-items: center;
