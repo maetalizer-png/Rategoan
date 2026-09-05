@@ -231,6 +231,33 @@ async function tryPlatform(text) {
   return item.text;
 }
 
+const MATA_PELAJARAN_MAP = {
+  biologi: 'biologi',
+  matematika: 'matematika',
+  fisika: 'fisika',
+  kimia: 'kimia',
+  geografi: 'geografi',
+  ppkn: 'ppkn',
+  'pendidikan kewarganegaraan': 'ppkn',
+  'bahasa indonesia': 'bahasa-indonesia',
+  'bahasa inggris': 'bahasa-inggris',
+  'sejarah sekolah': 'sejarah',
+  'ekonomi sekolah': 'ekonomi',
+};
+
+async function tryMataPelajaran(text) {
+  const m = text.match(/^(biologi|matematika|fisika|kimia|geografi|ppkn|pendidikan\s+kewarganegaraan|bahasa\s+indonesia|bahasa\s+inggris|sejarah\s+sekolah|ekonomi\s+sekolah)\s+(.+)$/i);
+  if (!m) return null;
+  const subjectKey = m[1].toLowerCase().replace(/\s+/g, ' ').trim();
+  const regionId = MATA_PELAJARAN_MAP[subjectKey];
+  if (!regionId) return null;
+  const entity = bridgeResolve.cleanEntity(m[2]);
+  if (!entity) return null;
+  const item = await bridgeResolve.findBestInRegion('mata-pelajaran', regionId, entity, (it) => [it.metadata.topic, ...(it.metadata.tags || [])]);
+  if (!item) return null;
+  return item.text;
+}
+
 async function extras(q) {
   const rawText = String(q || '').trim();
   if (!rawText) return null;
@@ -322,4 +349,5 @@ async function extras(q) {
 
 export const bridgeExtras = Object.freeze({
   extras,
+  tryMataPelajaran,
 });

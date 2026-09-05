@@ -1,0 +1,628 @@
+[
+  {
+    "id": "mapel-biologi-struktur-sel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Struktur Sel",
+    "tags": [
+      "sel",
+      "organel",
+      "nukleus",
+      "mitokondria"
+    ],
+    "teks": "Sel — unit dasar kehidupan, terdiri dari membran sel, sitoplasma, dan organel seperti nukleus (inti sel), mitokondria (penghasil energi), dan ribosom (penyusun protein). Sel eukariotik punya inti bermembran, sel prokariotik tidak.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Struktur Sel",
+      "tags": [
+        "sel",
+        "organel",
+        "nukleus",
+        "mitokondria"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-fotosintesis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Fotosintesis",
+    "tags": [
+      "fotosintesis",
+      "kloroplas",
+      "tumbuhan"
+    ],
+    "teks": "Fotosintesis — proses tumbuhan mengubah karbon dioksida dan air menjadi glukosa dan oksigen dengan bantuan cahaya matahari, terjadi di kloroplas. Persamaan reaksinya: 6CO2 + 6H2O + cahaya -> C6H12O6 + 6O2.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Fotosintesis",
+      "tags": [
+        "fotosintesis",
+        "kloroplas",
+        "tumbuhan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-respirasi-sel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Respirasi Sel",
+    "tags": [
+      "respirasi sel",
+      "atp",
+      "mitokondria"
+    ],
+    "teks": "Respirasi sel — proses pemecahan glukosa dengan oksigen untuk menghasilkan energi (ATP), karbon dioksida, dan air, terjadi di mitokondria. Kebalikan dari fotosintesis dalam hal reaktan dan produknya.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Respirasi Sel",
+      "tags": [
+        "respirasi sel",
+        "atp",
+        "mitokondria"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-dna",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "DNA",
+    "tags": [
+      "dna",
+      "genetika",
+      "basa nitrogen"
+    ],
+    "teks": "DNA (asam deoksiribonukleat) — molekul pembawa informasi genetik, berbentuk heliks ganda, tersusun dari empat basa nitrogen: Adenin berpasangan dengan Timin, Guanin berpasangan dengan Sitosin.",
+    "meta": {
+      "field": "biologi",
+      "topic": "DNA",
+      "tags": [
+        "dna",
+        "genetika",
+        "basa nitrogen"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-rna",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "RNA",
+    "tags": [
+      "rna",
+      "sintesis protein"
+    ],
+    "teks": "RNA (asam ribonukleat) — molekul untai tunggal yang berperan dalam sintesis protein, menggantikan basa Timin pada DNA dengan Urasil. Ada mRNA, tRNA, dan rRNA dengan fungsi berbeda dalam translasi.",
+    "meta": {
+      "field": "biologi",
+      "topic": "RNA",
+      "tags": [
+        "rna",
+        "sintesis protein"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-mitosis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Mitosis",
+    "tags": [
+      "mitosis",
+      "pembelahan sel"
+    ],
+    "teks": "Mitosis — pembelahan sel yang menghasilkan dua sel anak dengan jumlah kromosom sama seperti induknya (diploid), berfungsi untuk pertumbuhan dan perbaikan jaringan tubuh.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Mitosis",
+      "tags": [
+        "mitosis",
+        "pembelahan sel"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-meiosis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Meiosis",
+    "tags": [
+      "meiosis",
+      "gamet",
+      "pembelahan sel"
+    ],
+    "teks": "Meiosis — pembelahan sel yang menghasilkan empat sel anak dengan setengah jumlah kromosom induknya (haploid), terjadi pada pembentukan sel kelamin (gamet).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Meiosis",
+      "tags": [
+        "meiosis",
+        "gamet",
+        "pembelahan sel"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-hukum-mendel-i",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Hukum Mendel I",
+    "tags": [
+      "hukum mendel",
+      "genetika",
+      "alel"
+    ],
+    "teks": "Hukum Mendel I (Hukum Segregasi) — setiap pasangan alel akan memisah secara bebas saat pembentukan gamet, sehingga tiap gamet hanya membawa satu alel dari tiap pasangan gen.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Hukum Mendel I",
+      "tags": [
+        "hukum mendel",
+        "genetika",
+        "alel"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-hukum-mendel-ii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Hukum Mendel II",
+    "tags": [
+      "hukum mendel",
+      "dihibrid",
+      "genetika"
+    ],
+    "teks": "Hukum Mendel II (Hukum Pemilihan Bebas/Independent Assortment) — gen-gen yang berbeda akan diwariskan secara bebas satu sama lain saat pembentukan gamet, berlaku untuk persilangan dihibrid.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Hukum Mendel II",
+      "tags": [
+        "hukum mendel",
+        "dihibrid",
+        "genetika"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-ekosistem",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Ekosistem",
+    "tags": [
+      "ekosistem",
+      "biotik",
+      "abiotik"
+    ],
+    "teks": "Ekosistem — sistem hubungan timbal balik antara makhluk hidup (komponen biotik) dengan lingkungan tak hidupnya (komponen abiotik seperti suhu, air, tanah, cahaya).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Ekosistem",
+      "tags": [
+        "ekosistem",
+        "biotik",
+        "abiotik"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-rantai-makanan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Rantai Makanan",
+    "tags": [
+      "rantai makanan",
+      "produsen",
+      "konsumen"
+    ],
+    "teks": "Rantai makanan — jalur perpindahan energi dan materi dari produsen (tumbuhan) ke konsumen tingkat I, II, III, dan seterusnya, hingga ke pengurai (dekomposer).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Rantai Makanan",
+      "tags": [
+        "rantai makanan",
+        "produsen",
+        "konsumen"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-piramida-energi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Piramida Energi",
+    "tags": [
+      "piramida energi",
+      "trofik",
+      "ekosistem"
+    ],
+    "teks": "Piramida energi — diagram yang menggambarkan aliran energi dalam ekosistem, jumlah energi semakin berkurang pada tingkat trofik yang lebih tinggi karena sebagian energi hilang sebagai panas.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Piramida Energi",
+      "tags": [
+        "piramida energi",
+        "trofik",
+        "ekosistem"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-klasifikasi-makhluk-hidup",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Klasifikasi Makhluk Hidup",
+    "tags": [
+      "taksonomi",
+      "klasifikasi",
+      "kingdom"
+    ],
+    "teks": "Klasifikasi makhluk hidup (taksonomi) — pengelompokan makhluk hidup berdasarkan persamaan ciri, urutannya dari tingkat tertinggi: kingdom, filum/divisio, kelas, ordo, famili, genus, spesies.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Klasifikasi Makhluk Hidup",
+      "tags": [
+        "taksonomi",
+        "klasifikasi",
+        "kingdom"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-pencernaan-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Pencernaan Manusia",
+    "tags": [
+      "sistem pencernaan",
+      "lambung",
+      "usus halus"
+    ],
+    "teks": "Sistem pencernaan manusia — jalur pengolahan makanan: mulut (pencernaan mekanik dan enzim amilase), kerongkongan, lambung (enzim pepsin dan asam lambung), usus halus (penyerapan nutrisi), usus besar (penyerapan air).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Pencernaan Manusia",
+      "tags": [
+        "sistem pencernaan",
+        "lambung",
+        "usus halus"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-peredaran-darah-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Peredaran Darah Manusia",
+    "tags": [
+      "sistem peredaran darah",
+      "jantung",
+      "arteri",
+      "vena"
+    ],
+    "teks": "Sistem peredaran darah manusia — jantung memompa darah kaya oksigen lewat arteri ke seluruh tubuh dan menerima darah rendah oksigen lewat vena; peredaran darah manusia bersifat ganda (melalui paru-paru dan seluruh tubuh).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Peredaran Darah Manusia",
+      "tags": [
+        "sistem peredaran darah",
+        "jantung",
+        "arteri",
+        "vena"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-pernapasan-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Pernapasan Manusia",
+    "tags": [
+      "sistem pernapasan",
+      "paru-paru",
+      "alveolus"
+    ],
+    "teks": "Sistem pernapasan manusia — udara masuk lewat hidung, melewati trakea, bronkus, hingga ke paru-paru; pertukaran oksigen dan karbon dioksida terjadi di alveolus.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Pernapasan Manusia",
+      "tags": [
+        "sistem pernapasan",
+        "paru-paru",
+        "alveolus"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-saraf-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Saraf Manusia",
+    "tags": [
+      "sistem saraf",
+      "neuron",
+      "otak"
+    ],
+    "teks": "Sistem saraf manusia — terdiri dari otak, sumsum tulang belakang, dan saraf tepi; neuron menghantarkan impuls listrik untuk mengatur gerak, sensasi, dan berpikir.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Saraf Manusia",
+      "tags": [
+        "sistem saraf",
+        "neuron",
+        "otak"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-ekskresi-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Ekskresi Manusia",
+    "tags": [
+      "sistem ekskresi",
+      "ginjal",
+      "urine"
+    ],
+    "teks": "Sistem ekskresi manusia — proses pembuangan zat sisa metabolisme, utamanya lewat ginjal yang menyaring darah menjadi urine; organ lain: kulit (keringat), paru-paru (CO2), dan hati.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Ekskresi Manusia",
+      "tags": [
+        "sistem ekskresi",
+        "ginjal",
+        "urine"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-hormon",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Hormon",
+    "tags": [
+      "hormon",
+      "kelenjar endokrin",
+      "insulin"
+    ],
+    "teks": "Hormon — senyawa kimia yang dihasilkan kelenjar endokrin dan diedarkan lewat darah untuk mengatur fungsi tubuh, contohnya insulin (menurunkan gula darah) dan adrenalin (respons stres).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Hormon",
+      "tags": [
+        "hormon",
+        "kelenjar endokrin",
+        "insulin"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-enzim",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Enzim",
+    "tags": [
+      "enzim",
+      "katalis",
+      "substrat"
+    ],
+    "teks": "Enzim — protein yang berfungsi sebagai katalis biologis, mempercepat reaksi kimia dalam tubuh tanpa ikut habis bereaksi, bekerja spesifik pada satu jenis substrat (prinsip kunci-gembok).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Enzim",
+      "tags": [
+        "enzim",
+        "katalis",
+        "substrat"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-virus",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Virus",
+    "tags": [
+      "virus",
+      "kapsid",
+      "parasit"
+    ],
+    "teks": "Virus — parasit obligat berukuran sangat kecil, bukan sel, hanya dapat bereproduksi di dalam sel inang hidup; tersusun dari materi genetik (DNA/RNA) yang diselubungi protein (kapsid).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Virus",
+      "tags": [
+        "virus",
+        "kapsid",
+        "parasit"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-bakteri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Bakteri",
+    "tags": [
+      "bakteri",
+      "prokariotik"
+    ],
+    "teks": "Bakteri — organisme uniseluler prokariotik tanpa membran inti; ada yang menguntungkan seperti Lactobacillus (fermentasi) dan ada yang patogen penyebab penyakit seperti Salmonella.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Bakteri",
+      "tags": [
+        "bakteri",
+        "prokariotik"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-jamur-fungi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Jamur (Fungi)",
+    "tags": [
+      "jamur",
+      "fungi",
+      "dekomposer"
+    ],
+    "teks": "Jamur (fungi) — organisme eukariotik heterotrof dengan dinding sel dari kitin, berkembang biak dengan spora, berperan sebagai pengurai (dekomposer) dalam ekosistem.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Jamur (Fungi)",
+      "tags": [
+        "jamur",
+        "fungi",
+        "dekomposer"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-tumbuhan-berpembuluh-dan-tak-berpembuluh",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Tumbuhan Berpembuluh dan Tak Berpembuluh",
+    "tags": [
+      "tumbuhan",
+      "xilem",
+      "floem"
+    ],
+    "teks": "Tumbuhan dibedakan menjadi tak berpembuluh (lumut/Bryophyta, tanpa jaringan pengangkut sejati) dan berpembuluh (paku/Pteridophyta dan tumbuhan biji/Spermatophyta, punya xilem dan floem).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Tumbuhan Berpembuluh dan Tak Berpembuluh",
+      "tags": [
+        "tumbuhan",
+        "xilem",
+        "floem"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-adaptasi-makhluk-hidup",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Adaptasi Makhluk Hidup",
+    "tags": [
+      "adaptasi",
+      "morfologi",
+      "fisiologi"
+    ],
+    "teks": "Adaptasi makhluk hidup — kemampuan menyesuaikan diri dengan lingkungan agar bertahan hidup, dibedakan menjadi adaptasi morfologi (bentuk tubuh), fisiologi (fungsi organ), dan tingkah laku.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Adaptasi Makhluk Hidup",
+      "tags": [
+        "adaptasi",
+        "morfologi",
+        "fisiologi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-evolusi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Evolusi",
+    "tags": [
+      "evolusi",
+      "darwin",
+      "seleksi alam"
+    ],
+    "teks": "Evolusi — teori perubahan sifat makhluk hidup secara bertahap dari generasi ke generasi, dikemukakan Charles Darwin lewat konsep seleksi alam: individu yang paling sesuai lingkungan lebih mungkin bertahan dan berkembang biak.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Evolusi",
+      "tags": [
+        "evolusi",
+        "darwin",
+        "seleksi alam"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-bioteknologi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Bioteknologi",
+    "tags": [
+      "bioteknologi",
+      "fermentasi",
+      "rekayasa genetika"
+    ],
+    "teks": "Bioteknologi — pemanfaatan makhluk hidup atau proses biologis untuk menghasilkan produk yang berguna bagi manusia, contohnya pembuatan tempe dan yogurt (bioteknologi konvensional) serta rekayasa genetika (bioteknologi modern).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Bioteknologi",
+      "tags": [
+        "bioteknologi",
+        "fermentasi",
+        "rekayasa genetika"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-homeostasis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Homeostasis",
+    "tags": [
+      "homeostasis",
+      "keseimbangan tubuh"
+    ],
+    "teks": "Homeostasis — kemampuan tubuh makhluk hidup menjaga kondisi internal tetap stabil (seperti suhu tubuh dan kadar gula darah) meski kondisi lingkungan luar berubah-ubah.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Homeostasis",
+      "tags": [
+        "homeostasis",
+        "keseimbangan tubuh"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-simbiosis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Simbiosis",
+    "tags": [
+      "simbiosis",
+      "mutualisme",
+      "parasitisme"
+    ],
+    "teks": "Simbiosis — hubungan interaksi antara dua spesies berbeda, dibedakan menjadi mutualisme (saling menguntungkan), komensalisme (satu untung, satu tidak dirugikan), dan parasitisme (satu untung, satu dirugikan).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Simbiosis",
+      "tags": [
+        "simbiosis",
+        "mutualisme",
+        "parasitisme"
+      ]
+    }
+  },
+  {
+    "id": "mapel-biologi-transpirasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Transpirasi",
+    "tags": [
+      "transpirasi",
+      "stomata",
+      "tumbuhan"
+    ],
+    "teks": "Transpirasi — proses penguapan air dari permukaan tumbuhan, terutama melalui stomata pada daun, membantu mengangkut air dan mineral dari akar ke seluruh bagian tumbuhan.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Transpirasi",
+      "tags": [
+        "transpirasi",
+        "stomata",
+        "tumbuhan"
+      ]
+    }
+  }
+]

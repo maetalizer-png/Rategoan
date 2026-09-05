@@ -1,0 +1,458 @@
+[
+  {
+    "id": "mapel-sejarah-konsep-periodisasi-sejarah",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Konsep Periodisasi Sejarah",
+    "tags": [
+      "periodisasi sejarah"
+    ],
+    "teks": "Periodisasi sejarah — pembabakan waktu sejarah menjadi zaman-zaman tertentu (misalnya masa praaksara, Hindu-Buddha, Islam, kolonial, modern) agar peristiwa sejarah lebih mudah dipahami dan dipelajari.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Konsep Periodisasi Sejarah",
+      "tags": [
+        "periodisasi sejarah"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-sumber-sejarah",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Sumber Sejarah",
+    "tags": [
+      "sumber sejarah"
+    ],
+    "teks": "Sumber sejarah dibedakan menjadi sumber primer (berasal langsung dari pelaku/saksi sezaman) dan sumber sekunder (kajian atau tulisan ulang oleh pihak lain), berbentuk sumber tertulis, lisan, atau benda.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Sumber Sejarah",
+      "tags": [
+        "sumber sejarah"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-masa-praaksara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Masa Praaksara",
+    "tags": [
+      "praaksara",
+      "prasejarah"
+    ],
+    "teks": "Masa praaksara (prasejarah) — masa kehidupan manusia sebelum mengenal tulisan, dipelajari lewat peninggalan fosil dan artefak, bukan catatan tertulis.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Masa Praaksara",
+      "tags": [
+        "praaksara",
+        "prasejarah"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-zaman-batu",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Zaman Batu",
+    "tags": [
+      "zaman batu",
+      "paleolitikum",
+      "neolitikum"
+    ],
+    "teks": "Zaman batu dibedakan menjadi Paleolitikum (batu tua, alat kasar), Mesolitikum (batu tengah, mulai menetap), Neolitikum (batu muda, alat halus dan bercocok tanam), dan Megalitikum (zaman bangunan batu besar).",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Zaman Batu",
+      "tags": [
+        "zaman batu",
+        "paleolitikum",
+        "neolitikum"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-zaman-logam",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Zaman Logam",
+    "tags": [
+      "zaman logam"
+    ],
+    "teks": "Zaman logam — masa manusia mulai membuat peralatan dari logam seperti perunggu dan besi, menandai kemajuan teknologi dari zaman batu.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Zaman Logam",
+      "tags": [
+        "zaman logam"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-kerajaan-hindu-buddha-di-nusantara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Kerajaan Hindu-Buddha di Nusantara",
+    "tags": [
+      "kerajaan hindu buddha"
+    ],
+    "teks": "Kerajaan Hindu-Buddha di Nusantara antara lain Kutai (tertua, Kalimantan Timur), Tarumanegara (Jawa Barat), Sriwijaya (pusat perdagangan dan agama Buddha di Sumatra), dan Majapahit (kerajaan Hindu terbesar di Jawa Timur).",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Kerajaan Hindu-Buddha di Nusantara",
+      "tags": [
+        "kerajaan hindu buddha"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-masuknya-islam-ke-nusantara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Masuknya Islam ke Nusantara",
+    "tags": [
+      "masuknya islam nusantara"
+    ],
+    "teks": "Islam masuk ke Nusantara sekitar abad ke-13 melalui jalur perdagangan, dakwah oleh ulama, dan perkawinan, berkembang pesat lewat kerajaan-kerajaan Islam seperti Demak dan Aceh.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Masuknya Islam ke Nusantara",
+      "tags": [
+        "masuknya islam nusantara"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-kolonialisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Kolonialisme",
+    "tags": [
+      "kolonialisme"
+    ],
+    "teks": "Kolonialisme — praktik penguasaan suatu wilayah oleh bangsa lain untuk dieksploitasi sumber dayanya demi kepentingan ekonomi dan politik negara penjajah.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Kolonialisme",
+      "tags": [
+        "kolonialisme"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-imperialisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Imperialisme",
+    "tags": [
+      "imperialisme"
+    ],
+    "teks": "Imperialisme — politik untuk memperluas kekuasaan suatu negara ke wilayah lain, baik lewat penjajahan langsung maupun pengaruh ekonomi dan politik.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Imperialisme",
+      "tags": [
+        "imperialisme"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-voc",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "VOC",
+    "tags": [
+      "voc"
+    ],
+    "teks": "VOC (Vereenigde Oostindische Compagnie) — kongsi dagang Belanda yang beroperasi di Nusantara sejak 1602 hingga dibubarkan tahun 1799 karena bangkrut dan korupsi.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "VOC",
+      "tags": [
+        "voc"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-tanam-paksa-cultuurstelsel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Tanam Paksa (Cultuurstelsel)",
+    "tags": [
+      "tanam paksa",
+      "cultuurstelsel"
+    ],
+    "teks": "Tanam Paksa (Cultuurstelsel) — kebijakan pemerintah kolonial Belanda tahun 1830 yang memaksa rakyat menanam tanaman ekspor (seperti kopi dan tebu) untuk keuntungan Belanda.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Tanam Paksa (Cultuurstelsel)",
+      "tags": [
+        "tanam paksa",
+        "cultuurstelsel"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-politik-etis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Politik Etis",
+    "tags": [
+      "politik etis"
+    ],
+    "teks": "Politik Etis — kebijakan \"balas budi\" Belanda pada awal abad ke-20 berupa irigasi, edukasi, dan migrasi, yang secara tak sengaja memicu munculnya kaum terpelajar pribumi dan gerakan kebangkitan nasional.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Politik Etis",
+      "tags": [
+        "politik etis"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-kebangkitan-nasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Kebangkitan Nasional",
+    "tags": [
+      "kebangkitan nasional",
+      "budi utomo"
+    ],
+    "teks": "Kebangkitan Nasional — era pergerakan bangsa Indonesia menuju kemerdekaan yang ditandai berdirinya organisasi Budi Utomo pada 20 Mei 1908, tanggal ini diperingati sebagai Hari Kebangkitan Nasional.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Kebangkitan Nasional",
+      "tags": [
+        "kebangkitan nasional",
+        "budi utomo"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-sumpah-pemuda",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Sumpah Pemuda",
+    "tags": [
+      "sumpah pemuda"
+    ],
+    "teks": "Sumpah Pemuda — ikrar para pemuda Indonesia pada 28 Oktober 1928 yang berisi satu tanah air, satu bangsa, dan satu bahasa: Indonesia, menjadi tonggak persatuan nasional.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Sumpah Pemuda",
+      "tags": [
+        "sumpah pemuda"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-proklamasi-kemerdekaan-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Proklamasi Kemerdekaan Indonesia",
+    "tags": [
+      "proklamasi kemerdekaan"
+    ],
+    "teks": "Proklamasi Kemerdekaan Indonesia dibacakan oleh Soekarno didampingi Mohammad Hatta pada 17 Agustus 1945, menandai berdirinya Republik Indonesia yang merdeka dan berdaulat.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Proklamasi Kemerdekaan Indonesia",
+      "tags": [
+        "proklamasi kemerdekaan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-konferensi-meja-bundar",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Konferensi Meja Bundar",
+    "tags": [
+      "konferensi meja bundar",
+      "kmb"
+    ],
+    "teks": "Konferensi Meja Bundar (KMB) — perundingan tahun 1949 di Den Haag yang menghasilkan pengakuan kedaulatan Indonesia oleh Belanda secara penuh.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Konferensi Meja Bundar",
+      "tags": [
+        "konferensi meja bundar",
+        "kmb"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-orde-lama",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Orde Lama",
+    "tags": [
+      "orde lama"
+    ],
+    "teks": "Orde Lama — periode pemerintahan Indonesia di bawah Presiden Soekarno sejak proklamasi tahun 1945 hingga 1966, ditandai dengan sistem demokrasi terpimpin.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Orde Lama",
+      "tags": [
+        "orde lama"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-orde-baru",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Orde Baru",
+    "tags": [
+      "orde baru"
+    ],
+    "teks": "Orde Baru — periode pemerintahan Indonesia di bawah Presiden Soeharto dari tahun 1966 hingga 1998, menekankan stabilitas politik dan pembangunan ekonomi.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Orde Baru",
+      "tags": [
+        "orde baru"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-reformasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Reformasi",
+    "tags": [
+      "reformasi"
+    ],
+    "teks": "Reformasi — periode setelah tumbangnya pemerintahan Orde Baru pada Mei 1998, mendorong demokratisasi, kebebasan pers, dan desentralisasi pemerintahan di Indonesia.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Reformasi",
+      "tags": [
+        "reformasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-perang-dunia-i",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Perang Dunia I",
+    "tags": [
+      "perang dunia i"
+    ],
+    "teks": "Perang Dunia I (1914-1918) — perang besar yang dipicu terbunuhnya Franz Ferdinand dari Austria-Hungaria, melibatkan Blok Sentral melawan Blok Sekutu, berakhir dengan Perjanjian Versailles.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Perang Dunia I",
+      "tags": [
+        "perang dunia i"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-perang-dunia-ii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Perang Dunia II",
+    "tags": [
+      "perang dunia ii"
+    ],
+    "teks": "Perang Dunia II (1939-1945) — perang global yang dipicu invasi Jerman ke Polandia, melibatkan Blok Poros (Jerman, Italia, Jepang) melawan Blok Sekutu, diakhiri dengan bom atom di Hiroshima dan Nagasaki.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Perang Dunia II",
+      "tags": [
+        "perang dunia ii"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-revolusi-industri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Revolusi Industri",
+    "tags": [
+      "revolusi industri"
+    ],
+    "teks": "Revolusi Industri — perubahan besar dalam cara produksi dari tenaga manusia/hewan ke tenaga mesin, dimulai di Inggris pada akhir abad ke-18, mengubah struktur ekonomi dan sosial dunia.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Revolusi Industri",
+      "tags": [
+        "revolusi industri"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-perang-dingin",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Perang Dingin",
+    "tags": [
+      "perang dingin"
+    ],
+    "teks": "Perang Dingin — persaingan ideologi, politik, dan militer antara Amerika Serikat (blok kapitalis-liberal) dan Uni Soviet (blok komunis) setelah Perang Dunia II tanpa terjadi perang terbuka langsung antar keduanya.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Perang Dingin",
+      "tags": [
+        "perang dingin"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-historiografi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Historiografi",
+    "tags": [
+      "historiografi"
+    ],
+    "teks": "Historiografi — penulisan sejarah, dibedakan menjadi historiografi tradisional (istana-sentris), kolonial (Eropa-sentris), dan modern/nasional (Indonesia-sentris, berbasis metode ilmiah).",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Historiografi",
+      "tags": [
+        "historiografi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-heuristik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Heuristik",
+    "tags": [
+      "heuristik",
+      "metode sejarah"
+    ],
+    "teks": "Heuristik — tahap pertama metode penelitian sejarah berupa pengumpulan sumber-sumber sejarah, dilanjutkan dengan kritik sumber, interpretasi, dan historiografi (penulisan).",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Heuristik",
+      "tags": [
+        "heuristik",
+        "metode sejarah"
+      ]
+    }
+  },
+  {
+    "id": "mapel-sejarah-kronologi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Kronologi",
+    "tags": [
+      "kronologi"
+    ],
+    "teks": "Kronologi — urutan peristiwa sejarah berdasarkan waktu terjadinya, prinsip penting agar rekonstruksi sejarah tersusun secara runtut dan tidak melompat-lompat.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Kronologi",
+      "tags": [
+        "kronologi"
+      ]
+    }
+  }
+]

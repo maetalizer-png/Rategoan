@@ -1,0 +1,449 @@
+[
+  {
+    "id": "mapel-ppkn-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pancasila",
+    "tags": [
+      "pancasila"
+    ],
+    "teks": "Pancasila — dasar negara dan ideologi bangsa Indonesia yang terdiri dari lima sila, dirumuskan dan disahkan sebagai dasar negara pada 18 Agustus 1945.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pancasila",
+      "tags": [
+        "pancasila"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-sila-pertama-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sila Pertama Pancasila",
+    "tags": [
+      "sila pertama",
+      "ketuhanan"
+    ],
+    "teks": "Sila pertama Pancasila berbunyi \"Ketuhanan Yang Maha Esa\", mengandung makna bangsa Indonesia mengakui dan menghormati keberadaan Tuhan sesuai keyakinan agama masing-masing.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sila Pertama Pancasila",
+      "tags": [
+        "sila pertama",
+        "ketuhanan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-sila-kedua-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sila Kedua Pancasila",
+    "tags": [
+      "sila kedua",
+      "kemanusiaan"
+    ],
+    "teks": "Sila kedua Pancasila berbunyi \"Kemanusiaan yang Adil dan Beradab\", menekankan penghormatan terhadap harkat dan martabat manusia secara adil dan beradab.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sila Kedua Pancasila",
+      "tags": [
+        "sila kedua",
+        "kemanusiaan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-sila-ketiga-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sila Ketiga Pancasila",
+    "tags": [
+      "sila ketiga",
+      "persatuan indonesia"
+    ],
+    "teks": "Sila ketiga Pancasila berbunyi \"Persatuan Indonesia\", menekankan pentingnya menjaga persatuan dan kesatuan bangsa di atas kepentingan pribadi atau golongan.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sila Ketiga Pancasila",
+      "tags": [
+        "sila ketiga",
+        "persatuan indonesia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-sila-keempat-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sila Keempat Pancasila",
+    "tags": [
+      "sila keempat",
+      "kerakyatan"
+    ],
+    "teks": "Sila keempat Pancasila berbunyi \"Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan\", menekankan pengambilan keputusan lewat musyawarah dan perwakilan rakyat.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sila Keempat Pancasila",
+      "tags": [
+        "sila keempat",
+        "kerakyatan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-sila-kelima-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sila Kelima Pancasila",
+    "tags": [
+      "sila kelima",
+      "keadilan sosial"
+    ],
+    "teks": "Sila kelima Pancasila berbunyi \"Keadilan Sosial bagi Seluruh Rakyat Indonesia\", menekankan pemerataan kesejahteraan dan keadilan bagi seluruh warga negara.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sila Kelima Pancasila",
+      "tags": [
+        "sila kelima",
+        "keadilan sosial"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-uud-1945",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "UUD 1945",
+    "tags": [
+      "uud 1945",
+      "konstitusi"
+    ],
+    "teks": "UUD 1945 (Undang-Undang Dasar 1945) — konstitusi atau hukum dasar tertulis Negara Republik Indonesia, menjadi sumber hukum tertinggi yang mengatur penyelenggaraan negara.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "UUD 1945",
+      "tags": [
+        "uud 1945",
+        "konstitusi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-pembukaan-uud-1945",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pembukaan UUD 1945",
+    "tags": [
+      "pembukaan uud 1945"
+    ],
+    "teks": "Pembukaan UUD 1945 memuat dasar dan tujuan negara Indonesia, termasuk rumusan resmi Pancasila sebagai dasar negara pada alinea keempat.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pembukaan UUD 1945",
+      "tags": [
+        "pembukaan uud 1945"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-trias-politica",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Trias Politica",
+    "tags": [
+      "trias politica"
+    ],
+    "teks": "Trias Politica — teori pembagian kekuasaan pemerintahan menjadi tiga cabang: legislatif (membuat undang-undang), eksekutif (menjalankan undang-undang), dan yudikatif (mengadili pelanggaran hukum).",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Trias Politica",
+      "tags": [
+        "trias politica"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-kekuasaan-legislatif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Kekuasaan Legislatif",
+    "tags": [
+      "kekuasaan legislatif",
+      "dpr"
+    ],
+    "teks": "Kekuasaan legislatif — kekuasaan untuk membuat undang-undang, di Indonesia dipegang oleh DPR (Dewan Perwakilan Rakyat) dan DPD (Dewan Perwakilan Daerah) yang tergabung dalam MPR.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Kekuasaan Legislatif",
+      "tags": [
+        "kekuasaan legislatif",
+        "dpr"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-kekuasaan-eksekutif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Kekuasaan Eksekutif",
+    "tags": [
+      "kekuasaan eksekutif",
+      "presiden"
+    ],
+    "teks": "Kekuasaan eksekutif — kekuasaan untuk menjalankan undang-undang dan pemerintahan sehari-hari, di Indonesia dipegang oleh Presiden beserta jajaran kabinet.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Kekuasaan Eksekutif",
+      "tags": [
+        "kekuasaan eksekutif",
+        "presiden"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-kekuasaan-yudikatif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Kekuasaan Yudikatif",
+    "tags": [
+      "kekuasaan yudikatif",
+      "mahkamah agung"
+    ],
+    "teks": "Kekuasaan yudikatif — kekuasaan untuk mengadili pelanggaran hukum dan menegakkan keadilan, di Indonesia dipegang oleh Mahkamah Agung (MA) dan Mahkamah Konstitusi (MK).",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Kekuasaan Yudikatif",
+      "tags": [
+        "kekuasaan yudikatif",
+        "mahkamah agung"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-bhinneka-tunggal-ika",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Bhinneka Tunggal Ika",
+    "tags": [
+      "bhinneka tunggal ika"
+    ],
+    "teks": "Bhinneka Tunggal Ika — semboyan negara Indonesia yang berarti \"berbeda-beda tetapi tetap satu jua\", mencerminkan keberagaman suku, agama, ras, dan budaya yang bersatu dalam satu bangsa.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Bhinneka Tunggal Ika",
+      "tags": [
+        "bhinneka tunggal ika"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-nkri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "NKRI",
+    "tags": [
+      "nkri",
+      "negara kesatuan"
+    ],
+    "teks": "NKRI (Negara Kesatuan Republik Indonesia) — bentuk negara Indonesia yang berupa negara kesatuan (bukan federasi), dengan kekuasaan tertinggi berada di pemerintah pusat.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "NKRI",
+      "tags": [
+        "nkri",
+        "negara kesatuan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-hak-asasi-manusia-ham",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Hak Asasi Manusia (HAM)",
+    "tags": [
+      "ham",
+      "hak asasi manusia"
+    ],
+    "teks": "Hak Asasi Manusia (HAM) — hak dasar yang melekat pada setiap manusia sejak lahir secara kodrati, bersifat universal dan tidak dapat dicabut oleh siapa pun, termasuk hak hidup dan hak kebebasan berpendapat.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Hak Asasi Manusia (HAM)",
+      "tags": [
+        "ham",
+        "hak asasi manusia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-kewajiban-warga-negara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Kewajiban Warga Negara",
+    "tags": [
+      "kewajiban warga negara"
+    ],
+    "teks": "Kewajiban warga negara Indonesia meliputi menaati hukum dan pemerintahan, membela negara, menjunjung hak asasi orang lain, dan ikut serta dalam pembangunan.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Kewajiban Warga Negara",
+      "tags": [
+        "kewajiban warga negara"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-demokrasi-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Demokrasi Pancasila",
+    "tags": [
+      "demokrasi pancasila"
+    ],
+    "teks": "Demokrasi Pancasila — sistem demokrasi khas Indonesia yang berlandaskan nilai-nilai Pancasila, menekankan musyawarah untuk mufakat dalam pengambilan keputusan.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Demokrasi Pancasila",
+      "tags": [
+        "demokrasi pancasila"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-pemilihan-umum-pemilu",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pemilihan Umum (Pemilu)",
+    "tags": [
+      "pemilu"
+    ],
+    "teks": "Pemilihan umum (Pemilu) — proses pemilihan wakil rakyat dan pemimpin negara (presiden, anggota legislatif) secara langsung, umum, bebas, rahasia, jujur, dan adil (luber jurdil).",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pemilihan Umum (Pemilu)",
+      "tags": [
+        "pemilu"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-otonomi-daerah",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Otonomi Daerah",
+    "tags": [
+      "otonomi daerah"
+    ],
+    "teks": "Otonomi daerah — kewenangan yang diberikan kepada pemerintah daerah untuk mengatur dan mengurus urusan pemerintahannya sendiri sesuai peraturan perundang-undangan, guna mempercepat pembangunan di daerah.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Otonomi Daerah",
+      "tags": [
+        "otonomi daerah"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-wawasan-nusantara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Wawasan Nusantara",
+    "tags": [
+      "wawasan nusantara"
+    ],
+    "teks": "Wawasan Nusantara — cara pandang bangsa Indonesia tentang diri dan lingkungannya sebagai negara kepulauan yang menyatukan wilayah darat, laut, dan udara sebagai satu kesatuan wilayah dan bangsa.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Wawasan Nusantara",
+      "tags": [
+        "wawasan nusantara"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-bela-negara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Bela Negara",
+    "tags": [
+      "bela negara"
+    ],
+    "teks": "Bela negara — upaya setiap warga negara untuk mempertahankan kedaulatan negara, keutuhan wilayah, dan keselamatan bangsa dari berbagai ancaman, baik lewat jalur militer maupun nonmiliter.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Bela Negara",
+      "tags": [
+        "bela negara"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-norma",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Norma",
+    "tags": [
+      "norma"
+    ],
+    "teks": "Norma — aturan yang mengatur tingkah laku manusia dalam masyarakat, terdiri dari norma agama, norma kesusilaan, norma kesopanan, dan norma hukum, masing-masing memiliki sanksi berbeda.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Norma",
+      "tags": [
+        "norma"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-pengertian-hukum",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pengertian Hukum",
+    "tags": [
+      "hukum"
+    ],
+    "teks": "Hukum — kumpulan aturan tertulis maupun tidak tertulis yang mengikat seluruh anggota masyarakat dan memiliki sanksi tegas bagi yang melanggarnya, dibuat oleh lembaga yang berwenang.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pengertian Hukum",
+      "tags": [
+        "hukum"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-lembaga-negara-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Lembaga Negara Indonesia",
+    "tags": [
+      "lembaga negara"
+    ],
+    "teks": "Lembaga negara Indonesia menurut UUD 1945 antara lain MPR, DPR, DPD, Presiden, Mahkamah Agung (MA), Mahkamah Konstitusi (MK), dan Badan Pemeriksa Keuangan (BPK), masing-masing punya kewenangan berbeda.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Lembaga Negara Indonesia",
+      "tags": [
+        "lembaga negara"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ppkn-sistem-pemerintahan-presidensial",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sistem Pemerintahan Presidensial",
+    "tags": [
+      "sistem presidensial"
+    ],
+    "teks": "Sistem pemerintahan presidensial — sistem di mana Presiden berperan sebagai kepala negara sekaligus kepala pemerintahan, tidak bertanggung jawab kepada parlemen; sistem ini dianut oleh Indonesia.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sistem Pemerintahan Presidensial",
+      "tags": [
+        "sistem presidensial"
+      ]
+    }
+  }
+]

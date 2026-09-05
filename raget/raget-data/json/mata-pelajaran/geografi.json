@@ -1,0 +1,463 @@
+[
+  {
+    "id": "mapel-geografi-litosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Litosfer",
+    "tags": [
+      "litosfer",
+      "kerak bumi"
+    ],
+    "teks": "Litosfer — lapisan batuan padat terluar bumi (kerak bumi) yang menjadi tempat berpijak makhluk hidup, tersusun dari batuan beku, sedimen, dan metamorf.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Litosfer",
+      "tags": [
+        "litosfer",
+        "kerak bumi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-atmosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Atmosfer",
+    "tags": [
+      "atmosfer"
+    ],
+    "teks": "Atmosfer — lapisan gas yang menyelimuti bumi, melindungi dari radiasi matahari berbahaya dan menjaga suhu bumi tetap stabil, terdiri dari troposfer, stratosfer, mesosfer, termosfer, dan eksosfer.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Atmosfer",
+      "tags": [
+        "atmosfer"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-hidrosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Hidrosfer",
+    "tags": [
+      "hidrosfer"
+    ],
+    "teks": "Hidrosfer — lapisan air di bumi yang meliputi laut, sungai, danau, air tanah, dan es, mencakup lebih dari 70% permukaan bumi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Hidrosfer",
+      "tags": [
+        "hidrosfer"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-biosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Biosfer",
+    "tags": [
+      "biosfer"
+    ],
+    "teks": "Biosfer — lapisan bumi tempat makhluk hidup tinggal dan berinteraksi, mencakup bagian litosfer, hidrosfer, dan atmosfer yang mendukung kehidupan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Biosfer",
+      "tags": [
+        "biosfer"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-lempeng-tektonik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Lempeng Tektonik",
+    "tags": [
+      "lempeng tektonik"
+    ],
+    "teks": "Lempeng tektonik — potongan besar kerak bumi yang terus bergerak sangat lambat, pergerakannya menyebabkan gempa bumi, gunung berapi, dan pembentukan pegunungan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Lempeng Tektonik",
+      "tags": [
+        "lempeng tektonik"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-rotasi-bumi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Rotasi Bumi",
+    "tags": [
+      "rotasi bumi"
+    ],
+    "teks": "Rotasi bumi — perputaran bumi pada porosnya sendiri yang memakan waktu sekitar 24 jam, menyebabkan terjadinya siang dan malam.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Rotasi Bumi",
+      "tags": [
+        "rotasi bumi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-revolusi-bumi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Revolusi Bumi",
+    "tags": [
+      "revolusi bumi"
+    ],
+    "teks": "Revolusi bumi — perputaran bumi mengelilingi matahari yang memakan waktu sekitar 365,25 hari, menyebabkan pergantian musim di berbagai belahan bumi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Revolusi Bumi",
+      "tags": [
+        "revolusi bumi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-iklim-tropis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Iklim Tropis",
+    "tags": [
+      "iklim tropis"
+    ],
+    "teks": "Iklim tropis — iklim di wilayah sekitar garis khatulistiwa dengan suhu tinggi sepanjang tahun dan curah hujan tinggi, dimiliki negara seperti Indonesia.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Iklim Tropis",
+      "tags": [
+        "iklim tropis"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-garis-lintang-dan-bujur",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Garis Lintang dan Bujur",
+    "tags": [
+      "garis lintang",
+      "garis bujur"
+    ],
+    "teks": "Garis lintang dan bujur — garis khayal koordinat geografis untuk menentukan posisi suatu tempat di permukaan bumi; lintang mengukur jarak utara-selatan dari khatulistiwa, bujur mengukur jarak timur-barat dari meridian utama (Greenwich).",
+    "meta": {
+      "field": "geografi",
+      "topic": "Garis Lintang dan Bujur",
+      "tags": [
+        "garis lintang",
+        "garis bujur"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-peta",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Peta",
+    "tags": [
+      "peta"
+    ],
+    "teks": "Peta — representasi permukaan bumi yang digambarkan dalam bidang datar dengan skala tertentu, dilengkapi simbol, legenda, dan arah mata angin.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Peta",
+      "tags": [
+        "peta"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-skala-peta",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Skala Peta",
+    "tags": [
+      "skala peta"
+    ],
+    "teks": "Skala peta — perbandingan jarak di peta dengan jarak sesungguhnya di lapangan, misalnya skala 1:100.000 berarti 1 cm di peta sama dengan 100.000 cm (1 km) di lapangan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Skala Peta",
+      "tags": [
+        "skala peta"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-siklus-hidrologi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Siklus Hidrologi",
+    "tags": [
+      "siklus hidrologi",
+      "siklus air"
+    ],
+    "teks": "Siklus hidrologi (siklus air) — perputaran air di bumi melalui tahap evaporasi (penguapan), kondensasi (pengembunan), presipitasi (hujan), dan infiltrasi (peresapan ke tanah) secara terus-menerus.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Siklus Hidrologi",
+      "tags": [
+        "siklus hidrologi",
+        "siklus air"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-erosi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Erosi",
+    "tags": [
+      "erosi"
+    ],
+    "teks": "Erosi — proses pengikisan permukaan tanah atau batuan oleh tenaga air, angin, atau es, dapat menyebabkan hilangnya lapisan tanah subur.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Erosi",
+      "tags": [
+        "erosi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-sedimentasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Sedimentasi",
+    "tags": [
+      "sedimentasi"
+    ],
+    "teks": "Sedimentasi — proses pengendapan material hasil erosi (pasir, lumpur, kerikil) di suatu tempat, biasanya di muara sungai atau dasar danau.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Sedimentasi",
+      "tags": [
+        "sedimentasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-vulkanisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Vulkanisme",
+    "tags": [
+      "vulkanisme",
+      "gunung berapi"
+    ],
+    "teks": "Vulkanisme — aktivitas magma yang bergerak dari dalam bumi menuju permukaan melalui gunung berapi, dapat berupa letusan eksplosif atau aliran lava.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Vulkanisme",
+      "tags": [
+        "vulkanisme",
+        "gunung berapi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-gempa-bumi-seisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Gempa Bumi (Seisme)",
+    "tags": [
+      "gempa bumi",
+      "seisme"
+    ],
+    "teks": "Gempa bumi (seisme) — getaran permukaan bumi akibat pelepasan energi secara tiba-tiba dari pergeseran lempeng tektonik atau patahan (sesar).",
+    "meta": {
+      "field": "geografi",
+      "topic": "Gempa Bumi (Seisme)",
+      "tags": [
+        "gempa bumi",
+        "seisme"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-kepadatan-penduduk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Kepadatan Penduduk",
+    "tags": [
+      "kepadatan penduduk"
+    ],
+    "teks": "Kepadatan penduduk — jumlah penduduk suatu wilayah dibagi dengan luas wilayah tersebut, biasanya dinyatakan dalam satuan jiwa per kilometer persegi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Kepadatan Penduduk",
+      "tags": [
+        "kepadatan penduduk"
+      ],
+      "rumus": "kepadatan = jumlah penduduk / luas wilayah"
+    }
+  },
+  {
+    "id": "mapel-geografi-urbanisasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Urbanisasi",
+    "tags": [
+      "urbanisasi"
+    ],
+    "teks": "Urbanisasi — perpindahan penduduk dari desa ke kota, umumnya didorong oleh faktor ekonomi seperti mencari pekerjaan dan fasilitas yang lebih baik di kota.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Urbanisasi",
+      "tags": [
+        "urbanisasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-sumber-daya-alam",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Sumber Daya Alam",
+    "tags": [
+      "sumber daya alam"
+    ],
+    "teks": "Sumber daya alam — segala kekayaan alam yang dimanfaatkan manusia untuk kebutuhan hidup, dibedakan menjadi sumber daya alam terbarukan (air, hutan) dan tak terbarukan (minyak bumi, batu bara).",
+    "meta": {
+      "field": "geografi",
+      "topic": "Sumber Daya Alam",
+      "tags": [
+        "sumber daya alam"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-bioma",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Bioma",
+    "tags": [
+      "bioma"
+    ],
+    "teks": "Bioma — kawasan geografis yang luas dengan iklim dan vegetasi khas, contohnya hutan hujan tropis, gurun, tundra, dan sabana.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Bioma",
+      "tags": [
+        "bioma"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-zona-waktu-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Zona Waktu Indonesia",
+    "tags": [
+      "zona waktu",
+      "wib",
+      "wita",
+      "wit"
+    ],
+    "teks": "Zona waktu Indonesia terbagi menjadi tiga: WIB (Waktu Indonesia Barat), WITA (Waktu Indonesia Tengah), dan WIT (Waktu Indonesia Timur), berbeda karena letak garis bujur yang berbeda.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Zona Waktu Indonesia",
+      "tags": [
+        "zona waktu",
+        "wib",
+        "wita",
+        "wit"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-angin-muson",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Angin Muson",
+    "tags": [
+      "angin muson"
+    ],
+    "teks": "Angin muson — angin musiman yang berubah arah secara periodik, memengaruhi pergantian musim hujan dan musim kemarau di Indonesia.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Angin Muson",
+      "tags": [
+        "angin muson"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-letak-geografis-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Letak Geografis Indonesia",
+    "tags": [
+      "letak geografis indonesia"
+    ],
+    "teks": "Letak geografis Indonesia berada di antara dua benua (Asia dan Australia) dan dua samudra (Hindia dan Pasifik), menjadikannya jalur strategis perdagangan dan persilangan budaya dunia.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Letak Geografis Indonesia",
+      "tags": [
+        "letak geografis indonesia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-cincin-api-pasifik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Cincin Api Pasifik",
+    "tags": [
+      "cincin api pasifik",
+      "ring of fire"
+    ],
+    "teks": "Cincin Api Pasifik (Ring of Fire) — jalur gunung berapi dan gempa bumi aktif yang mengelilingi Samudra Pasifik; Indonesia dilewati jalur ini sehingga rawan gempa dan letusan gunung berapi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Cincin Api Pasifik",
+      "tags": [
+        "cincin api pasifik",
+        "ring of fire"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-piramida-penduduk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Piramida Penduduk",
+    "tags": [
+      "piramida penduduk"
+    ],
+    "teks": "Piramida penduduk — grafik yang menggambarkan struktur usia dan jenis kelamin penduduk suatu wilayah, digunakan untuk menganalisis pertumbuhan penduduk.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Piramida Penduduk",
+      "tags": [
+        "piramida penduduk"
+      ]
+    }
+  },
+  {
+    "id": "mapel-geografi-globalisasi-perspektif-geografi-sosial",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Globalisasi (Perspektif Geografi Sosial)",
+    "tags": [
+      "globalisasi"
+    ],
+    "teks": "Globalisasi dalam konteks geografi sosial — proses integrasi antarwilayah di dunia lewat perdagangan, teknologi, informasi, dan budaya, mempercepat aliran barang, jasa, dan manusia lintas negara.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Globalisasi (Perspektif Geografi Sosial)",
+      "tags": [
+        "globalisasi"
+      ]
+    }
+  }
+]

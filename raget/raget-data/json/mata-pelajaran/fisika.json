@@ -1,0 +1,587 @@
+[
+  {
+    "id": "mapel-fisika-hukum-newton-i",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Newton I",
+    "tags": [
+      "hukum newton",
+      "inersia"
+    ],
+    "teks": "Hukum Newton I (Hukum Kelembaman/Inersia) — benda akan tetap diam atau bergerak lurus beraturan jika resultan gaya yang bekerja padanya sama dengan nol.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Newton I",
+      "tags": [
+        "hukum newton",
+        "inersia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-newton-ii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Newton II",
+    "tags": [
+      "hukum newton",
+      "gaya",
+      "percepatan"
+    ],
+    "teks": "Hukum Newton II — percepatan benda berbanding lurus dengan gaya total yang bekerja dan berbanding terbalik dengan massanya, dirumuskan F = m × a.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Newton II",
+      "tags": [
+        "hukum newton",
+        "gaya",
+        "percepatan"
+      ],
+      "rumus": "F = m . a"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-newton-iii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Newton III",
+    "tags": [
+      "hukum newton",
+      "aksi reaksi"
+    ],
+    "teks": "Hukum Newton III (Aksi-Reaksi) — setiap gaya aksi yang diberikan suatu benda akan menghasilkan gaya reaksi yang sama besar tapi berlawanan arah dari benda lainnya.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Newton III",
+      "tags": [
+        "hukum newton",
+        "aksi reaksi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-gravitasi-newton",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Gravitasi Newton",
+    "tags": [
+      "gravitasi",
+      "newton"
+    ],
+    "teks": "Hukum gravitasi Newton — setiap dua massa saling tarik-menarik dengan gaya sebanding dengan hasil kali kedua massa dan berbanding terbalik dengan kuadrat jaraknya: F = G × (m1×m2)/r².",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Gravitasi Newton",
+      "tags": [
+        "gravitasi",
+        "newton"
+      ],
+      "rumus": "F = G.m1.m2/r^2"
+    }
+  },
+  {
+    "id": "mapel-fisika-usaha-kerja",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Usaha (Kerja)",
+    "tags": [
+      "usaha",
+      "kerja"
+    ],
+    "teks": "Usaha (kerja) dalam fisika — hasil kali gaya yang bekerja pada benda dengan perpindahan yang searah gaya tersebut, dirumuskan W = F × s, satuannya Joule.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Usaha (Kerja)",
+      "tags": [
+        "usaha",
+        "kerja"
+      ],
+      "rumus": "W = F . s"
+    }
+  },
+  {
+    "id": "mapel-fisika-energi-kinetik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Energi Kinetik",
+    "tags": [
+      "energi kinetik"
+    ],
+    "teks": "Energi kinetik — energi yang dimiliki benda karena geraknya, dirumuskan Ek = ½ × m × v², dengan m massa benda dan v kecepatannya.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Energi Kinetik",
+      "tags": [
+        "energi kinetik"
+      ],
+      "rumus": "Ek = 1/2.m.v^2"
+    }
+  },
+  {
+    "id": "mapel-fisika-energi-potensial-gravitasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Energi Potensial Gravitasi",
+    "tags": [
+      "energi potensial"
+    ],
+    "teks": "Energi potensial gravitasi — energi yang dimiliki benda karena posisi ketinggiannya, dirumuskan Ep = m × g × h, dengan g percepatan gravitasi dan h ketinggian.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Energi Potensial Gravitasi",
+      "tags": [
+        "energi potensial"
+      ],
+      "rumus": "Ep = m.g.h"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-kekekalan-energi-mekanik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Kekekalan Energi Mekanik",
+    "tags": [
+      "kekekalan energi",
+      "energi mekanik"
+    ],
+    "teks": "Hukum kekekalan energi mekanik — jumlah energi kinetik dan energi potensial suatu benda tetap konstan selama tidak ada gaya luar (seperti gesekan) yang bekerja.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Kekekalan Energi Mekanik",
+      "tags": [
+        "kekekalan energi",
+        "energi mekanik"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-daya",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Daya",
+    "tags": [
+      "daya"
+    ],
+    "teks": "Daya — laju energi yang digunakan atau usaha yang dilakukan tiap satuan waktu, dirumuskan P = W/t, satuannya Watt.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Daya",
+      "tags": [
+        "daya"
+      ],
+      "rumus": "P = W/t"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-ohm",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Ohm",
+    "tags": [
+      "hukum ohm",
+      "listrik"
+    ],
+    "teks": "Hukum Ohm — tegangan listrik pada suatu penghantar berbanding lurus dengan arus yang mengalir, dirumuskan V = I × R, dengan V tegangan, I arus, dan R hambatan.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Ohm",
+      "tags": [
+        "hukum ohm",
+        "listrik"
+      ],
+      "rumus": "V = I.R"
+    }
+  },
+  {
+    "id": "mapel-fisika-rangkaian-listrik-seri-dan-paralel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Rangkaian Listrik Seri dan Paralel",
+    "tags": [
+      "rangkaian listrik",
+      "seri",
+      "paralel"
+    ],
+    "teks": "Pada rangkaian seri, arus listrik sama di semua titik dan hambatan totalnya dijumlahkan; pada rangkaian paralel, tegangan sama di setiap cabang dan hambatan totalnya dihitung dengan kebalikan jumlah kebalikan hambatan.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Rangkaian Listrik Seri dan Paralel",
+      "tags": [
+        "rangkaian listrik",
+        "seri",
+        "paralel"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-frekuensi-dan-periode-gelombang",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Frekuensi dan Periode Gelombang",
+    "tags": [
+      "gelombang",
+      "frekuensi",
+      "periode"
+    ],
+    "teks": "Frekuensi (f) adalah banyak gelombang/getaran per detik, periode (T) adalah waktu untuk satu gelombang penuh; keduanya berbanding terbalik: f = 1/T.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Frekuensi dan Periode Gelombang",
+      "tags": [
+        "gelombang",
+        "frekuensi",
+        "periode"
+      ],
+      "rumus": "f = 1/T"
+    }
+  },
+  {
+    "id": "mapel-fisika-cepat-rambat-gelombang",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Cepat Rambat Gelombang",
+    "tags": [
+      "gelombang",
+      "cepat rambat"
+    ],
+    "teks": "Cepat rambat gelombang dirumuskan v = λ × f, dengan λ (lambda) panjang gelombang dan f frekuensi gelombang.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Cepat Rambat Gelombang",
+      "tags": [
+        "gelombang",
+        "cepat rambat"
+      ],
+      "rumus": "v = lambda . f"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-pemantulan-cahaya",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Pemantulan Cahaya",
+    "tags": [
+      "optik",
+      "pemantulan cahaya"
+    ],
+    "teks": "Hukum pemantulan cahaya — sudut datang sinar sama besar dengan sudut pantul, dan sinar datang, sinar pantul, serta garis normal berada pada satu bidang datar.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Pemantulan Cahaya",
+      "tags": [
+        "optik",
+        "pemantulan cahaya"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-pembiasan-cahaya-hukum-snellius",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Pembiasan Cahaya (Hukum Snellius)",
+    "tags": [
+      "optik",
+      "pembiasan",
+      "snellius"
+    ],
+    "teks": "Pembiasan cahaya (Hukum Snellius) — cahaya akan membelok ketika melewati dua medium dengan kerapatan optik berbeda, membelok mendekati garis normal saat masuk medium lebih rapat.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Pembiasan Cahaya (Hukum Snellius)",
+      "tags": [
+        "optik",
+        "pembiasan",
+        "snellius"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-tekanan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Tekanan",
+    "tags": [
+      "tekanan"
+    ],
+    "teks": "Tekanan — besarnya gaya yang bekerja tegak lurus per satuan luas permukaan, dirumuskan P = F/A, satuannya Pascal.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Tekanan",
+      "tags": [
+        "tekanan"
+      ],
+      "rumus": "P = F/A"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-pascal",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Pascal",
+    "tags": [
+      "hukum pascal",
+      "fluida"
+    ],
+    "teks": "Hukum Pascal — tekanan yang diberikan pada zat cair dalam ruang tertutup akan diteruskan sama besar ke segala arah, menjadi dasar kerja dongkrak hidrolik.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Pascal",
+      "tags": [
+        "hukum pascal",
+        "fluida"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-archimedes",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Archimedes",
+    "tags": [
+      "hukum archimedes",
+      "gaya apung",
+      "fluida"
+    ],
+    "teks": "Hukum Archimedes — benda yang tercelup sebagian atau seluruhnya dalam zat cair akan mengalami gaya apung ke atas sebesar berat zat cair yang dipindahkan oleh benda tersebut.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Archimedes",
+      "tags": [
+        "hukum archimedes",
+        "gaya apung",
+        "fluida"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-kalor-dan-perpindahan-panas",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Kalor dan Perpindahan Panas",
+    "tags": [
+      "kalor",
+      "suhu"
+    ],
+    "teks": "Kalor yang diperlukan untuk mengubah suhu benda dirumuskan Q = m × c × ΔT, dengan c kalor jenis benda; perpindahan kalor terjadi lewat konduksi, konveksi, dan radiasi.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Kalor dan Perpindahan Panas",
+      "tags": [
+        "kalor",
+        "suhu"
+      ],
+      "rumus": "Q = m.c.deltaT"
+    }
+  },
+  {
+    "id": "mapel-fisika-perubahan-wujud-zat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Perubahan Wujud Zat",
+    "tags": [
+      "perubahan wujud zat"
+    ],
+    "teks": "Perubahan wujud zat meliputi mencair (padat ke cair), membeku (cair ke padat), menguap (cair ke gas), mengembun (gas ke cair), menyublim (padat ke gas), dan mengkristal (gas ke padat).",
+    "meta": {
+      "field": "fisika",
+      "topic": "Perubahan Wujud Zat",
+      "tags": [
+        "perubahan wujud zat"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-kekekalan-momentum",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Kekekalan Momentum",
+    "tags": [
+      "momentum",
+      "tumbukan"
+    ],
+    "teks": "Hukum kekekalan momentum — jumlah momentum benda-benda sebelum tumbukan sama dengan jumlah momentum sesudah tumbukan, selama tidak ada gaya luar yang bekerja pada sistem.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Kekekalan Momentum",
+      "tags": [
+        "momentum",
+        "tumbukan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-momentum",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Momentum",
+    "tags": [
+      "momentum"
+    ],
+    "teks": "Momentum — hasil kali massa dan kecepatan suatu benda yang bergerak, dirumuskan p = m × v, merupakan besaran vektor yang searah dengan kecepatan.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Momentum",
+      "tags": [
+        "momentum"
+      ],
+      "rumus": "p = m.v"
+    }
+  },
+  {
+    "id": "mapel-fisika-getaran-harmonik-sederhana",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Getaran Harmonik Sederhana",
+    "tags": [
+      "getaran harmonik",
+      "bandul",
+      "pegas"
+    ],
+    "teks": "Getaran harmonik sederhana — gerak bolak-balik benda melalui titik keseimbangan pada lintasan yang sama, contohnya ayunan bandul dan pegas.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Getaran Harmonik Sederhana",
+      "tags": [
+        "getaran harmonik",
+        "bandul",
+        "pegas"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-medan-magnet",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Medan Magnet",
+    "tags": [
+      "medan magnet",
+      "kemagnetan"
+    ],
+    "teks": "Medan magnet — daerah di sekitar magnet yang masih dipengaruhi gaya magnet, digambarkan dengan garis-garis gaya magnet dari kutub utara ke kutub selatan.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Medan Magnet",
+      "tags": [
+        "medan magnet",
+        "kemagnetan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-faraday-ggl-induksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Faraday (GGL Induksi)",
+    "tags": [
+      "hukum faraday",
+      "ggl induksi",
+      "generator"
+    ],
+    "teks": "Hukum Faraday — perubahan medan magnet di sekitar kumparan menghasilkan gaya gerak listrik (GGL) induksi, prinsip dasar kerja generator dan transformator.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Faraday (GGL Induksi)",
+      "tags": [
+        "hukum faraday",
+        "ggl induksi",
+        "generator"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-radioaktivitas",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Radioaktivitas",
+    "tags": [
+      "radioaktivitas",
+      "peluruhan"
+    ],
+    "teks": "Radioaktivitas — peluruhan inti atom tidak stabil yang memancarkan radiasi berupa sinar alfa, beta, atau gamma, digunakan dalam bidang kedokteran, energi, dan penanggalan fosil.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Radioaktivitas",
+      "tags": [
+        "radioaktivitas",
+        "peluruhan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-lensa-cembung-dan-cekung",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Lensa Cembung dan Cekung",
+    "tags": [
+      "optik",
+      "lensa",
+      "mata"
+    ],
+    "teks": "Lensa cembung (konveks) mengumpulkan cahaya dan dipakai untuk membantu penderita rabun dekat (hipermetropi); lensa cekung (konkaf) menyebarkan cahaya dan dipakai untuk membantu penderita rabun jauh (miopi).",
+    "meta": {
+      "field": "fisika",
+      "topic": "Lensa Cembung dan Cekung",
+      "tags": [
+        "optik",
+        "lensa",
+        "mata"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-kekekalan-energi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Kekekalan Energi",
+    "tags": [
+      "kekekalan energi"
+    ],
+    "teks": "Hukum kekekalan energi — energi tidak dapat diciptakan maupun dimusnahkan, hanya dapat berubah dari satu bentuk ke bentuk lainnya, misalnya energi kimia menjadi energi gerak.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Kekekalan Energi",
+      "tags": [
+        "kekekalan energi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-fisika-percepatan-gravitasi-bumi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Percepatan Gravitasi Bumi",
+    "tags": [
+      "gravitasi bumi"
+    ],
+    "teks": "Percepatan gravitasi bumi (g) bernilai sekitar 9,8 m/s², yaitu percepatan yang dialami benda yang jatuh bebas akibat tarikan gravitasi bumi.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Percepatan Gravitasi Bumi",
+      "tags": [
+        "gravitasi bumi"
+      ],
+      "rumus": "g ~ 9.8 m/s^2"
+    }
+  },
+  {
+    "id": "mapel-fisika-glb-dan-glbb",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "GLB dan GLBB",
+    "tags": [
+      "glb",
+      "glbb",
+      "kinematika"
+    ],
+    "teks": "Gerak Lurus Beraturan (GLB) adalah gerak dengan kecepatan tetap tanpa percepatan; Gerak Lurus Berubah Beraturan (GLBB) adalah gerak dengan percepatan tetap, kecepatannya berubah beraturan tiap waktu.",
+    "meta": {
+      "field": "fisika",
+      "topic": "GLB dan GLBB",
+      "tags": [
+        "glb",
+        "glbb",
+        "kinematika"
+      ]
+    }
+  }
+]

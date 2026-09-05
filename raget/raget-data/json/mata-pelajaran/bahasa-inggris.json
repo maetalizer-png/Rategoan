@@ -1,0 +1,473 @@
+[
+  {
+    "id": "mapel-bahasa-inggris-simple-present-tense",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Simple Present Tense",
+    "tags": [
+      "simple present tense"
+    ],
+    "teks": "Simple Present Tense — digunakan untuk kebiasaan atau fakta umum, rumus: Subject + Verb 1 (+s/es untuk subjek tunggal orang ketiga). Contoh: \"She reads books every day.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Simple Present Tense",
+      "tags": [
+        "simple present tense"
+      ],
+      "rumus": "S + V1 (+s/es)"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-simple-past-tense",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Simple Past Tense",
+    "tags": [
+      "simple past tense"
+    ],
+    "teks": "Simple Past Tense — digunakan untuk kejadian yang sudah selesai di masa lalu, rumus: Subject + Verb 2 (bentuk kedua/lampau). Contoh: \"They visited Bali last year.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Simple Past Tense",
+      "tags": [
+        "simple past tense"
+      ],
+      "rumus": "S + V2"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-simple-future-tense",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Simple Future Tense",
+    "tags": [
+      "simple future tense"
+    ],
+    "teks": "Simple Future Tense — digunakan untuk rencana atau prediksi masa depan, rumus: Subject + will + Verb 1. Contoh: \"I will study tomorrow.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Simple Future Tense",
+      "tags": [
+        "simple future tense"
+      ],
+      "rumus": "S + will + V1"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-present-continuous-tense",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Present Continuous Tense",
+    "tags": [
+      "present continuous tense"
+    ],
+    "teks": "Present Continuous Tense — digunakan untuk kejadian yang sedang berlangsung saat ini, rumus: Subject + am/is/are + Verb-ing. Contoh: \"He is doing his homework now.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Present Continuous Tense",
+      "tags": [
+        "present continuous tense"
+      ],
+      "rumus": "S + am/is/are + V-ing"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-present-perfect-tense",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Present Perfect Tense",
+    "tags": [
+      "present perfect tense"
+    ],
+    "teks": "Present Perfect Tense — digunakan untuk kejadian lampau yang masih berhubungan dengan sekarang, rumus: Subject + have/has + Verb 3. Contoh: \"I have finished my homework.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Present Perfect Tense",
+      "tags": [
+        "present perfect tense"
+      ],
+      "rumus": "S + have/has + V3"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-past-continuous-tense",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Past Continuous Tense",
+    "tags": [
+      "past continuous tense"
+    ],
+    "teks": "Past Continuous Tense — digunakan untuk kejadian yang sedang berlangsung di masa lampau, rumus: Subject + was/were + Verb-ing. Contoh: \"She was cooking when I arrived.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Past Continuous Tense",
+      "tags": [
+        "past continuous tense"
+      ],
+      "rumus": "S + was/were + V-ing"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-noun-kata-benda",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Noun (Kata Benda)",
+    "tags": [
+      "noun",
+      "kata benda"
+    ],
+    "teks": "Noun (kata benda) — kata yang menunjukkan orang, tempat, benda, atau konsep, contoh: teacher, school, book, happiness.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Noun (Kata Benda)",
+      "tags": [
+        "noun",
+        "kata benda"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-verb-kata-kerja",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Verb (Kata Kerja)",
+    "tags": [
+      "verb",
+      "kata kerja"
+    ],
+    "teks": "Verb (kata kerja) — kata yang menunjukkan tindakan atau keadaan dalam kalimat, contoh: run, eat, study, be.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Verb (Kata Kerja)",
+      "tags": [
+        "verb",
+        "kata kerja"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-adjective-kata-sifat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Adjective (Kata Sifat)",
+    "tags": [
+      "adjective",
+      "kata sifat"
+    ],
+    "teks": "Adjective (kata sifat) — kata yang menerangkan atau memberikan sifat pada noun, contoh: beautiful, tall, happy, expensive.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Adjective (Kata Sifat)",
+      "tags": [
+        "adjective",
+        "kata sifat"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-adverb-kata-keterangan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Adverb (Kata Keterangan)",
+    "tags": [
+      "adverb",
+      "kata keterangan"
+    ],
+    "teks": "Adverb (kata keterangan) — kata yang menerangkan verb, adjective, atau adverb lainnya, biasanya menjelaskan cara, waktu, atau tempat, contoh: quickly, yesterday, here.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Adverb (Kata Keterangan)",
+      "tags": [
+        "adverb",
+        "kata keterangan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-pronoun-kata-ganti",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Pronoun (Kata Ganti)",
+    "tags": [
+      "pronoun",
+      "kata ganti"
+    ],
+    "teks": "Pronoun (kata ganti) — kata yang menggantikan noun, contoh: I, you, he, she, it, we, they, serta bentuk posesif seperti my, your, his.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Pronoun (Kata Ganti)",
+      "tags": [
+        "pronoun",
+        "kata ganti"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-preposition-kata-depan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Preposition (Kata Depan)",
+    "tags": [
+      "preposition",
+      "kata depan"
+    ],
+    "teks": "Preposition (kata depan) — kata yang menunjukkan hubungan antara noun/pronoun dengan kata lain dalam kalimat, contoh: in, on, at, under, between.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Preposition (Kata Depan)",
+      "tags": [
+        "preposition",
+        "kata depan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-conjunction-kata-hubung",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Conjunction (Kata Hubung)",
+    "tags": [
+      "conjunction",
+      "kata hubung"
+    ],
+    "teks": "Conjunction (kata hubung) — kata yang menghubungkan kata, frasa, atau klausa, contoh: and, but, or, because, although.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Conjunction (Kata Hubung)",
+      "tags": [
+        "conjunction",
+        "kata hubung"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-degree-of-comparison",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Degree of Comparison",
+    "tags": [
+      "degree of comparison",
+      "perbandingan"
+    ],
+    "teks": "Degree of comparison — tingkat perbandingan kata sifat: positive (bentuk dasar), comparative (+er/more, untuk membandingkan dua hal), dan superlative (+est/most, untuk hal paling unggul).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Degree of Comparison",
+      "tags": [
+        "degree of comparison",
+        "perbandingan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-passive-voice",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Passive Voice",
+    "tags": [
+      "passive voice"
+    ],
+    "teks": "Passive voice (kalimat pasif) — kalimat yang subjeknya dikenai tindakan, rumus: Subject + to be + Verb 3. Contoh: \"The letter was written by her.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Passive Voice",
+      "tags": [
+        "passive voice"
+      ],
+      "rumus": "S + to be + V3"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-modal-auxiliary-verb",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Modal Auxiliary Verb",
+    "tags": [
+      "modal verb"
+    ],
+    "teks": "Modal auxiliary verb — kata kerja bantu modal seperti can, could, may, might, must, should, digunakan untuk menyatakan kemampuan, izin, kemungkinan, atau keharusan.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Modal Auxiliary Verb",
+      "tags": [
+        "modal verb"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-direct-and-indirect-speech",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Direct and Indirect Speech",
+    "tags": [
+      "direct speech",
+      "indirect speech"
+    ],
+    "teks": "Direct speech mengutip ucapan seseorang secara langsung dengan tanda kutip, sedangkan indirect speech (reported speech) menceritakan ulang ucapan tersebut, biasanya mengubah tense menjadi satu tingkat ke belakang.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Direct and Indirect Speech",
+      "tags": [
+        "direct speech",
+        "indirect speech"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-conditional-sentence-if-clause",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Conditional Sentence (If Clause)",
+    "tags": [
+      "conditional sentence",
+      "if clause"
+    ],
+    "teks": "Conditional sentence terdiri dari tipe 1 (kondisi nyata/mungkin terjadi), tipe 2 (kondisi andaikan/tidak nyata masa kini), dan tipe 3 (penyesalan atas kejadian masa lalu yang tidak terjadi).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Conditional Sentence (If Clause)",
+      "tags": [
+        "conditional sentence",
+        "if clause"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-gerund",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Gerund",
+    "tags": [
+      "gerund"
+    ],
+    "teks": "Gerund — bentuk kata kerja + ing yang berfungsi sebagai kata benda dalam kalimat, contoh: \"Swimming is fun\" (swimming berfungsi sebagai subjek).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Gerund",
+      "tags": [
+        "gerund"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-infinitive",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Infinitive",
+    "tags": [
+      "infinitive"
+    ],
+    "teks": "Infinitive — bentuk \"to + Verb 1\" yang berfungsi sebagai objek atau pelengkap dalam kalimat, contoh: \"I want to learn English.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Infinitive",
+      "tags": [
+        "infinitive"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-narrative-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Narrative Text",
+    "tags": [
+      "narrative text"
+    ],
+    "teks": "Narrative text — teks cerita fiksi dengan struktur orientation (pengenalan), complication (konflik), dan resolution (penyelesaian), contoh: dongeng dan legenda.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Narrative Text",
+      "tags": [
+        "narrative text"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-descriptive-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Descriptive Text",
+    "tags": [
+      "descriptive text"
+    ],
+    "teks": "Descriptive text — teks yang menggambarkan ciri fisik, sifat, atau karakteristik suatu objek, orang, atau tempat secara spesifik dan detail.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Descriptive Text",
+      "tags": [
+        "descriptive text"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-recount-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Recount Text",
+    "tags": [
+      "recount text"
+    ],
+    "teks": "Recount text — teks yang menceritakan pengalaman atau kejadian masa lalu secara kronologis, biasanya menggunakan simple past tense.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Recount Text",
+      "tags": [
+        "recount text"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-procedure-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Procedure Text",
+    "tags": [
+      "procedure text"
+    ],
+    "teks": "Procedure text — teks yang berisi langkah-langkah untuk membuat atau melakukan sesuatu, biasanya memuat tujuan (goal), bahan (materials), dan langkah (steps).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Procedure Text",
+      "tags": [
+        "procedure text"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-report-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Report Text",
+    "tags": [
+      "report text"
+    ],
+    "teks": "Report text — teks yang memberikan informasi umum tentang suatu hal secara ilmiah/faktual, mirip klasifikasi, misalnya menjelaskan tentang hewan atau fenomena alam secara umum.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Report Text",
+      "tags": [
+        "report text"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-question-words-5w-1h",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Question Words (5W+1H)",
+    "tags": [
+      "question words",
+      "5w1h"
+    ],
+    "teks": "Question words (5W+1H) — kata tanya what, who, when, where, why, dan how, digunakan untuk membentuk kalimat tanya dalam bahasa Inggris.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Question Words (5W+1H)",
+      "tags": [
+        "question words",
+        "5w1h"
+      ]
+    }
+  }
+]

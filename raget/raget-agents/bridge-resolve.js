@@ -177,11 +177,10 @@ function matchScore(entity, hay) {
   return matched === entityWords.length ? 20 + matched : matched;
 }
 
-async function findBestInList(group, entity, haystacksFn) {
-  const list = await dataries.loadAll(group);
+function bestInGivenList(list, entity, haystacksFn) {
   let best = null;
   let bestScore = 0;
-  list.forEach((item) => {
+  (list || []).forEach((item) => {
     const haystacks = haystacksFn(item).filter(Boolean).map((h) => String(h).toLowerCase());
     const combined = haystacks.join(' ');
     const score = Math.max(matchScore(entity, combined), ...haystacks.map((h) => matchScore(entity, h)));
@@ -191,6 +190,16 @@ async function findBestInList(group, entity, haystacksFn) {
     }
   });
   return bestScore > 0 ? best : null;
+}
+
+async function findBestInList(group, entity, haystacksFn) {
+  const list = await dataries.loadAll(group);
+  return bestInGivenList(list, entity, haystacksFn);
+}
+
+async function findBestInRegion(group, id, entity, haystacksFn) {
+  const list = await dataries.loadRegion(group, id);
+  return bestInGivenList(list, entity, haystacksFn);
 }
 
 async function findLanguageByCountry(entity) {
@@ -232,6 +241,7 @@ export const bridgeResolve = Object.freeze({
   findAllInList,
   wordOverlap,
   findBestInList,
+  findBestInRegion,
   findLanguageByCountry,
   resolveCountryAlias,
   splitCompoundEntities,

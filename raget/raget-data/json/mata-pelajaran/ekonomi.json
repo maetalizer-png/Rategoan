@@ -1,0 +1,455 @@
+[
+  {
+    "id": "mapel-ekonomi-ilmu-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Ilmu Ekonomi",
+    "tags": [
+      "ilmu ekonomi"
+    ],
+    "teks": "Ilmu ekonomi — ilmu yang mempelajari bagaimana individu, perusahaan, dan negara mengalokasikan sumber daya yang terbatas untuk memenuhi kebutuhan yang pada dasarnya tidak terbatas.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Ilmu Ekonomi",
+      "tags": [
+        "ilmu ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-kebutuhan-dan-keinginan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Kebutuhan dan Keinginan",
+    "tags": [
+      "kebutuhan",
+      "keinginan"
+    ],
+    "teks": "Kebutuhan adalah hal yang wajib dipenuhi untuk kelangsungan hidup (makan, tempat tinggal), sedangkan keinginan bersifat tambahan dan tidak mendesak untuk dipenuhi.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Kebutuhan dan Keinginan",
+      "tags": [
+        "kebutuhan",
+        "keinginan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-kelangkaan-scarcity",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Kelangkaan (Scarcity)",
+    "tags": [
+      "kelangkaan",
+      "scarcity"
+    ],
+    "teks": "Kelangkaan (scarcity) — kondisi ketika sumber daya yang tersedia terbatas jumlahnya dibandingkan dengan kebutuhan manusia yang tidak terbatas, menjadi masalah dasar ilmu ekonomi.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Kelangkaan (Scarcity)",
+      "tags": [
+        "kelangkaan",
+        "scarcity"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-biaya-peluang-opportunity-cost",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Biaya Peluang (Opportunity Cost)",
+    "tags": [
+      "biaya peluang",
+      "opportunity cost"
+    ],
+    "teks": "Biaya peluang (opportunity cost) — nilai atau manfaat dari pilihan terbaik yang dikorbankan ketika seseorang memilih satu alternatif dari beberapa pilihan yang ada.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Biaya Peluang (Opportunity Cost)",
+      "tags": [
+        "biaya peluang",
+        "opportunity cost"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-prinsip-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Prinsip Ekonomi",
+    "tags": [
+      "prinsip ekonomi"
+    ],
+    "teks": "Prinsip ekonomi — usaha mendapatkan hasil (keuntungan) yang maksimal dengan pengorbanan (biaya) tertentu, atau mencapai tujuan tertentu dengan pengorbanan yang seminimal mungkin.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Prinsip Ekonomi",
+      "tags": [
+        "prinsip ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-motif-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Motif Ekonomi",
+    "tags": [
+      "motif ekonomi"
+    ],
+    "teks": "Motif ekonomi — alasan atau dorongan seseorang melakukan suatu tindakan ekonomi, misalnya untuk memenuhi kebutuhan, mencari keuntungan, memperoleh penghargaan, atau membantu sesama.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Motif Ekonomi",
+      "tags": [
+        "motif ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-faktor-produksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Faktor Produksi",
+    "tags": [
+      "faktor produksi"
+    ],
+    "teks": "Faktor produksi — sumber daya yang digunakan untuk menghasilkan barang dan jasa, terdiri dari empat jenis klasik: alam, tenaga kerja, modal, dan kewirausahaan.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Faktor Produksi",
+      "tags": [
+        "faktor produksi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-kegiatan-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Kegiatan Ekonomi",
+    "tags": [
+      "kegiatan ekonomi",
+      "produksi",
+      "distribusi",
+      "konsumsi"
+    ],
+    "teks": "Kegiatan ekonomi utama terdiri dari produksi (menghasilkan barang/jasa), distribusi (menyalurkan barang/jasa ke konsumen), dan konsumsi (menggunakan barang/jasa untuk memenuhi kebutuhan).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Kegiatan Ekonomi",
+      "tags": [
+        "kegiatan ekonomi",
+        "produksi",
+        "distribusi",
+        "konsumsi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-pelaku-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Pelaku Ekonomi",
+    "tags": [
+      "pelaku ekonomi"
+    ],
+    "teks": "Pelaku ekonomi terdiri dari rumah tangga konsumen (RTK), rumah tangga produsen/perusahaan (RTP), pemerintah, dan masyarakat luar negeri, yang saling berinteraksi dalam kegiatan ekonomi.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Pelaku Ekonomi",
+      "tags": [
+        "pelaku ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-circular-flow-diagram",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Circular Flow Diagram",
+    "tags": [
+      "circular flow diagram"
+    ],
+    "teks": "Circular flow diagram — model yang menggambarkan aliran uang, barang, dan jasa antar pelaku ekonomi (rumah tangga, perusahaan, pemerintah) dalam suatu perekonomian.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Circular Flow Diagram",
+      "tags": [
+        "circular flow diagram"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-hukum-permintaan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Hukum Permintaan",
+    "tags": [
+      "hukum permintaan"
+    ],
+    "teks": "Hukum permintaan — semakin tinggi harga suatu barang, semakin sedikit jumlah barang yang diminta konsumen, dan sebaliknya, dengan asumsi faktor lain tetap (ceteris paribus).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Hukum Permintaan",
+      "tags": [
+        "hukum permintaan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-hukum-penawaran",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Hukum Penawaran",
+    "tags": [
+      "hukum penawaran"
+    ],
+    "teks": "Hukum penawaran — semakin tinggi harga suatu barang, semakin banyak jumlah barang yang ditawarkan produsen, dan sebaliknya, dengan asumsi faktor lain tetap.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Hukum Penawaran",
+      "tags": [
+        "hukum penawaran"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-elastisitas-permintaan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Elastisitas Permintaan",
+    "tags": [
+      "elastisitas permintaan"
+    ],
+    "teks": "Elastisitas permintaan — ukuran seberapa besar persentase perubahan jumlah barang yang diminta akibat perubahan harga barang tersebut sebesar satu persen.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Elastisitas Permintaan",
+      "tags": [
+        "elastisitas permintaan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-keseimbangan-pasar-equilibrium",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Keseimbangan Pasar (Equilibrium)",
+    "tags": [
+      "keseimbangan pasar",
+      "equilibrium"
+    ],
+    "teks": "Keseimbangan pasar (equilibrium) — titik pertemuan antara kurva permintaan dan kurva penawaran, di mana jumlah barang yang diminta sama dengan jumlah barang yang ditawarkan pada harga tertentu.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Keseimbangan Pasar (Equilibrium)",
+      "tags": [
+        "keseimbangan pasar",
+        "equilibrium"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-jenis-pasar-berdasar-struktur",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Jenis Pasar Berdasar Struktur",
+    "tags": [
+      "jenis pasar",
+      "monopoli",
+      "oligopoli"
+    ],
+    "teks": "Jenis pasar berdasarkan struktur terdiri dari pasar persaingan sempurna (banyak penjual, produk homogen), monopoli (satu penjual menguasai pasar), oligopoli (beberapa penjual besar), dan monopolistik (banyak penjual, produk terdiferensiasi).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Jenis Pasar Berdasar Struktur",
+      "tags": [
+        "jenis pasar",
+        "monopoli",
+        "oligopoli"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-sistem-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Sistem Ekonomi",
+    "tags": [
+      "sistem ekonomi"
+    ],
+    "teks": "Sistem ekonomi terdiri dari sistem tradisional (berbasis adat dan barter), komando/terpusat (dikendalikan pemerintah), pasar/liberal (dikendalikan mekanisme pasar), dan campuran (gabungan pasar dan peran pemerintah).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Sistem Ekonomi",
+      "tags": [
+        "sistem ekonomi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-fungsi-uang",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Fungsi Uang",
+    "tags": [
+      "fungsi uang"
+    ],
+    "teks": "Uang berfungsi sebagai alat tukar (memudahkan transaksi tanpa barter), satuan hitung (menentukan nilai barang), dan penyimpan nilai (bisa disimpan untuk digunakan di masa depan).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Fungsi Uang",
+      "tags": [
+        "fungsi uang"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-bank-sentral",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Bank Sentral",
+    "tags": [
+      "bank sentral",
+      "bank indonesia"
+    ],
+    "teks": "Bank sentral di Indonesia adalah Bank Indonesia (BI), bertugas menjaga stabilitas nilai rupiah dan mengatur kebijakan moneter negara, berbeda dari bank umum yang melayani masyarakat langsung.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Bank Sentral",
+      "tags": [
+        "bank sentral",
+        "bank indonesia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-koperasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Koperasi",
+    "tags": [
+      "koperasi"
+    ],
+    "teks": "Koperasi — badan usaha yang beranggotakan orang-seorang atau badan hukum koperasi, berlandaskan asas kekeluargaan sesuai amanat Pasal 33 UUD 1945.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Koperasi",
+      "tags": [
+        "koperasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-bumn-dan-bums",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "BUMN dan BUMS",
+    "tags": [
+      "bumn",
+      "bums"
+    ],
+    "teks": "BUMN (Badan Usaha Milik Negara) adalah badan usaha yang modalnya dimiliki dan dikelola pemerintah, sedangkan BUMS (Badan Usaha Milik Swasta) dimiliki dan dikelola oleh perorangan atau kelompok swasta.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "BUMN dan BUMS",
+      "tags": [
+        "bumn",
+        "bums"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-fungsi-pajak",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Fungsi Pajak",
+    "tags": [
+      "fungsi pajak"
+    ],
+    "teks": "Pajak memiliki dua fungsi utama: fungsi budgeter (sumber pendapatan utama negara untuk membiayai belanja negara) dan fungsi regulerend (alat pemerintah untuk mengatur kegiatan ekonomi masyarakat).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Fungsi Pajak",
+      "tags": [
+        "fungsi pajak"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-pendapatan-nasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Pendapatan Nasional",
+    "tags": [
+      "pendapatan nasional"
+    ],
+    "teks": "Pendapatan nasional — total nilai barang dan jasa yang dihasilkan suatu negara dalam periode tertentu (biasanya satu tahun), menjadi dasar perhitungan Produk Domestik Bruto (PDB).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Pendapatan Nasional",
+      "tags": [
+        "pendapatan nasional"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-biaya-produksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Biaya Produksi",
+    "tags": [
+      "biaya produksi"
+    ],
+    "teks": "Biaya produksi dibedakan menjadi biaya tetap (fixed cost, tidak berubah meski jumlah produksi berubah, seperti sewa gedung) dan biaya variabel (variable cost, berubah sesuai jumlah produksi, seperti bahan baku).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Biaya Produksi",
+      "tags": [
+        "biaya produksi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-perdagangan-internasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Perdagangan Internasional",
+    "tags": [
+      "perdagangan internasional",
+      "ekspor",
+      "impor"
+    ],
+    "teks": "Perdagangan internasional — kegiatan ekspor (menjual barang/jasa ke luar negeri) dan impor (membeli barang/jasa dari luar negeri) antarnegara, didorong oleh perbedaan sumber daya dan keunggulan tiap negara.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Perdagangan Internasional",
+      "tags": [
+        "perdagangan internasional",
+        "ekspor",
+        "impor"
+      ]
+    }
+  },
+  {
+    "id": "mapel-ekonomi-keunggulan-komparatif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Keunggulan Komparatif",
+    "tags": [
+      "keunggulan komparatif",
+      "david ricardo"
+    ],
+    "teks": "Keunggulan komparatif — teori ekonomi oleh David Ricardo yang menyatakan suatu negara akan diuntungkan dalam perdagangan internasional jika berfokus memproduksi barang dengan biaya relatif (opportunity cost) yang lebih rendah dibanding negara lain.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Keunggulan Komparatif",
+      "tags": [
+        "keunggulan komparatif",
+        "david ricardo"
+      ]
+    }
+  }
+]

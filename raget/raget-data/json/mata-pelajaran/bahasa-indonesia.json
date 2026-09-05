@@ -1,0 +1,480 @@
+[
+  {
+    "id": "mapel-bahasa-indonesia-kalimat-efektif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kalimat Efektif",
+    "tags": [
+      "kalimat efektif"
+    ],
+    "teks": "Kalimat efektif — kalimat yang jelas, tidak ambigu, dan menyampaikan pesan secara tepat sesuai kaidah bahasa Indonesia, memenuhi unsur subjek, predikat, dan tidak bertele-tele.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kalimat Efektif",
+      "tags": [
+        "kalimat efektif"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-gagasan-pokok",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Gagasan Pokok",
+    "tags": [
+      "gagasan pokok",
+      "ide pokok",
+      "paragraf"
+    ],
+    "teks": "Gagasan pokok (ide pokok) — inti pembahasan yang menjadi dasar pengembangan sebuah paragraf, biasanya terletak pada kalimat utama di awal, akhir, atau awal-akhir paragraf.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Gagasan Pokok",
+      "tags": [
+        "gagasan pokok",
+        "ide pokok",
+        "paragraf"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kalimat-utama-dan-kalimat-penjelas",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kalimat Utama dan Kalimat Penjelas",
+    "tags": [
+      "kalimat utama",
+      "kalimat penjelas"
+    ],
+    "teks": "Kalimat utama memuat gagasan pokok paragraf, sedangkan kalimat penjelas berisi rincian, contoh, atau data yang mendukung dan memperjelas kalimat utama.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kalimat Utama dan Kalimat Penjelas",
+      "tags": [
+        "kalimat utama",
+        "kalimat penjelas"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-eksposisi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Eksposisi",
+    "tags": [
+      "teks eksposisi"
+    ],
+    "teks": "Teks eksposisi — teks yang memaparkan suatu informasi atau pengetahuan secara objektif dan singkat, jelas, padat, disertai fakta untuk memperkuat argumen.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Eksposisi",
+      "tags": [
+        "teks eksposisi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-deskripsi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Deskripsi",
+    "tags": [
+      "teks deskripsi"
+    ],
+    "teks": "Teks deskripsi — teks yang menggambarkan suatu objek, tempat, atau peristiwa secara rinci dan jelas sehingga pembaca seolah dapat melihat, mendengar, atau merasakannya sendiri.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Deskripsi",
+      "tags": [
+        "teks deskripsi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-narasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Narasi",
+    "tags": [
+      "teks narasi"
+    ],
+    "teks": "Teks narasi — teks yang menceritakan rangkaian peristiwa (fiksi maupun nonfiksi) secara kronologis, memiliki tokoh, alur, dan latar.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Narasi",
+      "tags": [
+        "teks narasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-argumentasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Argumentasi",
+    "tags": [
+      "teks argumentasi"
+    ],
+    "teks": "Teks argumentasi — teks yang mengemukakan pendapat disertai alasan dan bukti yang kuat untuk meyakinkan pembaca terhadap suatu pandangan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Argumentasi",
+      "tags": [
+        "teks argumentasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-persuasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Persuasi",
+    "tags": [
+      "teks persuasi"
+    ],
+    "teks": "Teks persuasi — teks yang bertujuan membujuk atau mengajak pembaca untuk melakukan atau mempercayai sesuatu, sering memakai kalimat ajakan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Persuasi",
+      "tags": [
+        "teks persuasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-eksplanasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Eksplanasi",
+    "tags": [
+      "teks eksplanasi"
+    ],
+    "teks": "Teks eksplanasi — teks yang menjelaskan proses terjadinya suatu fenomena, baik fenomena alam (seperti gempa bumi) maupun fenomena sosial, disusun dengan hubungan sebab-akibat.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Eksplanasi",
+      "tags": [
+        "teks eksplanasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-puisi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Puisi",
+    "tags": [
+      "puisi",
+      "sastra"
+    ],
+    "teks": "Puisi — karya sastra yang menggunakan bahasa padat, indah, dan imajinatif, umumnya terikat atau bebas dari aturan rima dan irama tertentu untuk menyampaikan perasaan atau gagasan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Puisi",
+      "tags": [
+        "puisi",
+        "sastra"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-prosa",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Prosa",
+    "tags": [
+      "prosa",
+      "sastra"
+    ],
+    "teks": "Prosa — karya sastra berbentuk cerita bebas yang tidak terikat rima atau irama seperti puisi, contohnya novel dan cerpen.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Prosa",
+      "tags": [
+        "prosa",
+        "sastra"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-cerpen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Cerpen",
+    "tags": [
+      "cerpen"
+    ],
+    "teks": "Cerpen (cerita pendek) — karya sastra naratif yang pendek dan fokus pada satu konflik utama dengan jumlah tokoh yang terbatas.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Cerpen",
+      "tags": [
+        "cerpen"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-novel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Novel",
+    "tags": [
+      "novel"
+    ],
+    "teks": "Novel — karya sastra fiksi naratif yang panjang dengan alur cerita, tokoh, dan konflik yang lebih kompleks dibandingkan cerpen.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Novel",
+      "tags": [
+        "novel"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-majas",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Majas",
+    "tags": [
+      "majas",
+      "gaya bahasa"
+    ],
+    "teks": "Majas — gaya bahasa untuk memperindah dan memperkuat makna kalimat, di antaranya metafora, personifikasi, hiperbola, dan simile.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Majas",
+      "tags": [
+        "majas",
+        "gaya bahasa"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-majas-metafora",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Majas Metafora",
+    "tags": [
+      "metafora",
+      "majas"
+    ],
+    "teks": "Majas metafora — gaya bahasa perbandingan langsung antara dua hal berbeda tanpa memakai kata penghubung seperti \"seperti\" atau \"bagai\", contoh: \"dia adalah bintang kelas\".",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Majas Metafora",
+      "tags": [
+        "metafora",
+        "majas"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-majas-personifikasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Majas Personifikasi",
+    "tags": [
+      "personifikasi",
+      "majas"
+    ],
+    "teks": "Majas personifikasi — gaya bahasa yang memberikan sifat atau perilaku manusia kepada benda mati atau makhluk tak bernyawa, contoh: \"angin berbisik lembut\".",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Majas Personifikasi",
+      "tags": [
+        "personifikasi",
+        "majas"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-majas-hiperbola",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Majas Hiperbola",
+    "tags": [
+      "hiperbola",
+      "majas"
+    ],
+    "teks": "Majas hiperbola — gaya bahasa yang melebih-lebihkan suatu keadaan atau hal untuk memberi kesan dramatis, contoh: \"suaranya menggelegar hingga ke ujung dunia\".",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Majas Hiperbola",
+      "tags": [
+        "hiperbola",
+        "majas"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-sinonim-dan-antonim",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Sinonim dan Antonim",
+    "tags": [
+      "sinonim",
+      "antonim"
+    ],
+    "teks": "Sinonim — kata yang memiliki makna sama atau mirip dengan kata lain (contoh: pintar dan cerdas); antonim — kata yang memiliki makna berlawanan (contoh: besar dan kecil).",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Sinonim dan Antonim",
+      "tags": [
+        "sinonim",
+        "antonim"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kata-baku-dan-tidak-baku",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kata Baku dan Tidak Baku",
+    "tags": [
+      "kata baku",
+      "ejaan"
+    ],
+    "teks": "Kata baku adalah kata yang penulisan dan pelafalannya sesuai kaidah bahasa Indonesia yang berlaku (KBBI/PUEBI), dipakai dalam situasi resmi; kata tidak baku sering dipakai dalam percakapan sehari-hari.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kata Baku dan Tidak Baku",
+      "tags": [
+        "kata baku",
+        "ejaan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-pedoman-ejaan-bahasa-indonesia-puebi-eyd",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Pedoman Ejaan Bahasa Indonesia (PUEBI/EYD)",
+    "tags": [
+      "puebi",
+      "eyd",
+      "ejaan"
+    ],
+    "teks": "PUEBI (dulu EYD) — pedoman resmi penulisan bahasa Indonesia yang mengatur penggunaan huruf kapital, tanda baca, penulisan kata, dan unsur serapan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Pedoman Ejaan Bahasa Indonesia (PUEBI/EYD)",
+      "tags": [
+        "puebi",
+        "eyd",
+        "ejaan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-afiksasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Afiksasi",
+    "tags": [
+      "afiksasi",
+      "imbuhan"
+    ],
+    "teks": "Afiksasi — proses pembentukan kata baru dengan menambahkan imbuhan, yaitu awalan (prefiks), sisipan (infiks), akhiran (sufiks), atau gabungan awalan-akhiran (konfiks).",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Afiksasi",
+      "tags": [
+        "afiksasi",
+        "imbuhan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kalimat-langsung-dan-tidak-langsung",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kalimat Langsung dan Tidak Langsung",
+    "tags": [
+      "kalimat langsung",
+      "kalimat tidak langsung"
+    ],
+    "teks": "Kalimat langsung mengutip ucapan seseorang persis seperti aslinya dan diapit tanda kutip, sedangkan kalimat tidak langsung menceritakan ulang ucapan tersebut tanpa tanda kutip dan biasanya mengubah kata ganti orang.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kalimat Langsung dan Tidak Langsung",
+      "tags": [
+        "kalimat langsung",
+        "kalimat tidak langsung"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-laporan-hasil-observasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Laporan Hasil Observasi",
+    "tags": [
+      "laporan hasil observasi"
+    ],
+    "teks": "Teks laporan hasil observasi — teks yang berisi hasil pengamatan terhadap suatu objek secara sistematis, disusun dengan struktur pernyataan umum (klasifikasi) diikuti deskripsi bagian.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Laporan Hasil Observasi",
+      "tags": [
+        "laporan hasil observasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-unsur-intrinsik-cerita",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Unsur Intrinsik Cerita",
+    "tags": [
+      "unsur intrinsik",
+      "sastra"
+    ],
+    "teks": "Unsur intrinsik cerita — unsur pembangun karya sastra dari dalam, meliputi tema, tokoh dan penokohan, alur, latar, sudut pandang, dan amanat.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Unsur Intrinsik Cerita",
+      "tags": [
+        "unsur intrinsik",
+        "sastra"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-diksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Diksi",
+    "tags": [
+      "diksi",
+      "pilihan kata"
+    ],
+    "teks": "Diksi — pilihan kata yang tepat dan efektif dalam menulis atau berbicara agar pesan tersampaikan dengan jelas dan sesuai konteks.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Diksi",
+      "tags": [
+        "diksi",
+        "pilihan kata"
+      ]
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kalimat-aktif-dan-pasif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kalimat Aktif dan Pasif",
+    "tags": [
+      "kalimat aktif",
+      "kalimat pasif"
+    ],
+    "teks": "Kalimat aktif memiliki subjek yang melakukan pekerjaan (predikat berawalan me-), sedangkan kalimat pasif memiliki subjek yang dikenai pekerjaan (predikat berawalan di- atau ter-).",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kalimat Aktif dan Pasif",
+      "tags": [
+        "kalimat aktif",
+        "kalimat pasif"
+      ]
+    }
+  }
+]

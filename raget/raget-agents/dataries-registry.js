@@ -200,11 +200,23 @@ export const REGIONS = Object.freeze({
   lingkungan: [
     { id: 'lingkungan-rt', file: './lingkungan/lingkungan-rt.js', names: ['kerja bakti', 'gang', 'tetangga'] },
   ],
+  'mata-pelajaran': [
+    { id: 'biologi', file: './mata-pelajaran/biologi.js', names: ['biologi'] },
+    { id: 'matematika', file: './mata-pelajaran/matematika.js', names: ['matematika'] },
+    { id: 'fisika', file: './mata-pelajaran/fisika.js', names: ['fisika'] },
+    { id: 'kimia', file: './mata-pelajaran/kimia.js', names: ['kimia'] },
+    { id: 'bahasa-indonesia', file: './mata-pelajaran/bahasa-indonesia.js', names: ['bahasa indonesia'] },
+    { id: 'bahasa-inggris', file: './mata-pelajaran/bahasa-inggris.js', names: ['bahasa inggris'] },
+    { id: 'geografi', file: './mata-pelajaran/geografi.js', names: ['geografi'] },
+    { id: 'sejarah', file: './mata-pelajaran/sejarah.js', names: ['sejarah sekolah'] },
+    { id: 'ekonomi', file: './mata-pelajaran/ekonomi.js', names: ['ekonomi sekolah'] },
+    { id: 'ppkn', file: './mata-pelajaran/ppkn.js', names: ['ppkn', 'pendidikan kewarganegaraan'] },
+  ],
 });
 
 const cache = new Map();
 
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan', 'mata-pelajaran': 'mata-pelajaran' };
 
 function unifiedToLegacyShape(entry, group) {
   return {

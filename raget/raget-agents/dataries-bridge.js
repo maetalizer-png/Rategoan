@@ -159,6 +159,7 @@ export const datariesBridge = Object.freeze({
   search,
   factoid,
   extras: bridgeExtras.extras,
+  mataPelajaran: bridgeExtras.tryMataPelajaran,
   extractKnownEntity: bridgeResolve.extractKnownEntity,
   datariesFallback,
   daysUntilIndependence,

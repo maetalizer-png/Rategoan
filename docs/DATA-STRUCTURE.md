@@ -38,7 +38,24 @@ kapan domain itu ditulis:
 
 **1. Lewat `raget-agents/dataries-registry.js` (`dataries.loadRegion(group, id)`)** —
 dipakai domain hasil migrasi Fase B: `negara`, `kota`, `bahasa`, `etika`,
-`minuman`, `wisata`, `sejarah`, `makanan`, `alam`, `sains`, `olahraga`.
+`minuman`, `wisata`, `sejarah`, `makanan`, `alam`, `sains`, `olahraga`,
+serta domain baru `mata-pelajaran` (materi mata pelajaran sekolah:
+biologi, matematika, fisika, kimia, bahasa-indonesia, bahasa-inggris,
+geografi, sejarah, ekonomi, ppkn). Dijangkau lewat `tryMataPelajaran()`
+(diekspor `bridgeExtras`, dipanggil `datariesBridge.mataPelajaran()`)
+dengan trigger `"<mapel> <topik>"`, mis. "biologi fotosintesis" atau
+"matematika pythagoras". Dipanggil langsung dari `agent.js` SEBELUM
+`tryFactoid()` — pola yang sama seperti `kulinerStore.tryKuliner()` —
+karena trigger "bahasa indonesia ..."/"bahasa inggris ..." kalau lewat
+`datariesBridge.extras()` (dipanggil SESUDAH `tryFactoid()`) akan
+keduluan `bridgeRelations.detectRelation()` yang mendeteksi kata kunci
+"bahasa" dan salah tangkap jadi factoid bahasa resmi negara Indonesia/
+Inggris. Sengaja dibedakan dari `raget-data/json/sejarah/` (sejarah
+umum ensiklopedis) dan `raget-data/json/ekonomi/` (indikator/komoditas/
+perusahaan dunia nyata) lewat framing kurikulum sekolah dan trigger
+kata kunci `"sejarah sekolah"`/`"ekonomi sekolah"` agar tidak tabrakan
+dengan trigger `trySejarah()`/`tryEkonomi()` yang sudah ada di
+`datariesBridge.extras()`.
 `index.js` mendaftarkan tiap domain ini di `JSON_MIGRATED_GROUPS`, lalu
 `loadRegionFromJson()` melakukan `fetch()` ke
 `raget-data/json/<domain>/<id>.json` dan membentuk ulang tiap entri jadi
@@ -48,7 +65,7 @@ pipeline resolusi entitas tidak perlu tahu format aslinya berubah.
 **2. Loader tipis khusus per domain** — dipakai domain yang punya query
 lebih spesifik dari pola generik dataries: `tokoh-store.js` (fetch
 `raget-data/json/tokoh/tokoh.json`), `kuliner-store.js` (fetch per-region
-`raget-data/json/kuliner/<region>.json`), `world-context.js` (fetch
+`raget-data/json/kuliner/kuliner-<region>.json`), `world-context.js` (fetch
 `raget-data/json/hari-internasional/hari-internasional.json`), dan
 `llm-engine.js` (fetch `raget-data/json/sapaan/sapaan.json` + daftar
 `SAPAAN_EXTRA_FILES` untuk file sapaan-*.json lainnya). Masing-masing
@@ -63,6 +80,32 @@ atau `loadAll('sapaan'/'greeting')`. Registrasi ganda yang mati itu (plus
 folder `greeting/` yang isinya duplikat penuh dari `sapaan/`, tidak
 pernah dibaca sama sekali) sudah dihapus - `sapaan/` sekarang murni
 domain jalur #2.
+
+## `makanan/` vs `kuliner/` — dua domain, bukan duplikat
+
+`raget-data/json/makanan/` dan `raget-data/json/kuliner/` terlihat mirip
+sekilas (sama-sama berisi makanan khas per benua, sempat malah punya nama
+file identik per region: `asia.json`, `eropa.json`, dst — sudah diganti
+jadi `kuliner-asia.json` dkk di folder `kuliner/` supaya tidak tertukar
+saat grep/ls) tapi keduanya dipakai lewat mekanisme dan bentuk query yang
+sungguh berbeda, jadi TIDAK digabung:
+
+- **`makanan/`** — jalur #1 (`dataries.loadAll('makanan')` via
+  `dataries-registry.js`), entri ringkas `{nama, country, type}`, dikonsumsi
+  `tryMakananKhas()` di `bridge-extras.js` untuk pertanyaan **daftar**
+  ("makanan khas Indonesia" -> beberapa item sekaligus).
+- **`kuliner/`** — jalur #2 (loader khusus `kuliner-store.js`), entri kaya
+  `{nama, negara, jenis, bahanUtama, trivia}`, dikonsumsi `kulinerStore.tryKuliner()`
+  di `agent.js` (dipanggil sebelum fallback factoid) untuk pertanyaan
+  **profil satu item** ("apa itu rendang", "bahan dari rendang apa saja",
+  "trivia tentang rendang", "rendang berasal dari mana").
+
+Beberapa nama makanan (Rendang, Sate, dst) memang muncul di kedua folder —
+itu disengaja, bukan salinan yang lupa dihapus: `makanan/` butuh entri itu
+untuk pola tanya daftar, `kuliner/` butuh entri yang sama dengan field
+tambahan (`bahanUtama`, `trivia`) untuk pola tanya mendalam. Menggabung
+keduanya berarti membongkar `kuliner-store.js` yang sudah berjalan dan
+mengubah bentuk field yang tidak dipakai `makanan/`.
 
 Skema unified di balik `raget-data/json/*/*.json` sama untuk kedua jalur:
 

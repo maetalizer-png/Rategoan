@@ -1,0 +1,534 @@
+[
+  {
+    "id": "mapel-matematika-teorema-pythagoras",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Teorema Pythagoras",
+    "tags": [
+      "pythagoras",
+      "segitiga siku-siku"
+    ],
+    "teks": "Teorema Pythagoras — pada segitiga siku-siku berlaku kuadrat sisi miring (hipotenusa) sama dengan jumlah kuadrat kedua sisi siku-sikunya: a² + b² = c².",
+    "meta": {
+      "field": "matematika",
+      "topic": "Teorema Pythagoras",
+      "tags": [
+        "pythagoras",
+        "segitiga siku-siku"
+      ],
+      "rumus": "a^2 + b^2 = c^2"
+    }
+  },
+  {
+    "id": "mapel-matematika-luas-dan-keliling-lingkaran",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Luas dan Keliling Lingkaran",
+    "tags": [
+      "lingkaran",
+      "luas",
+      "keliling"
+    ],
+    "teks": "Luas lingkaran L = π × r²; keliling lingkaran K = 2 × π × r, dengan r adalah jari-jari lingkaran dan π ≈ 3,14 atau 22/7.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Luas dan Keliling Lingkaran",
+      "tags": [
+        "lingkaran",
+        "luas",
+        "keliling"
+      ],
+      "rumus": "L=pi.r^2; K=2.pi.r"
+    }
+  },
+  {
+    "id": "mapel-matematika-luas-segitiga",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Luas Segitiga",
+    "tags": [
+      "segitiga",
+      "luas"
+    ],
+    "teks": "Luas segitiga = ½ × alas × tinggi. Untuk segitiga dengan tiga sisi diketahui, bisa juga dihitung pakai rumus Heron.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Luas Segitiga",
+      "tags": [
+        "segitiga",
+        "luas"
+      ],
+      "rumus": "L = 1/2 x alas x tinggi"
+    }
+  },
+  {
+    "id": "mapel-matematika-volume-bangun-ruang",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Volume Bangun Ruang",
+    "tags": [
+      "volume",
+      "bangun ruang",
+      "kubus",
+      "tabung",
+      "bola"
+    ],
+    "teks": "Volume balok = panjang × lebar × tinggi; volume kubus = sisi³; volume tabung = π × r² × tinggi; volume bola = 4/3 × π × r³; volume kerucut = 1/3 × π × r² × tinggi.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Volume Bangun Ruang",
+      "tags": [
+        "volume",
+        "bangun ruang",
+        "kubus",
+        "tabung",
+        "bola"
+      ],
+      "rumus": "V_balok=p.l.t; V_kubus=s^3; V_tabung=pi.r^2.t; V_bola=4/3.pi.r^3"
+    }
+  },
+  {
+    "id": "mapel-matematika-persamaan-kuadrat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Persamaan Kuadrat",
+    "tags": [
+      "persamaan kuadrat",
+      "rumus abc"
+    ],
+    "teks": "Persamaan kuadrat berbentuk ax² + bx + c = 0 diselesaikan dengan rumus abc: x = (-b ± √(b² - 4ac)) / 2a, dengan a ≠ 0.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Persamaan Kuadrat",
+      "tags": [
+        "persamaan kuadrat",
+        "rumus abc"
+      ],
+      "rumus": "x = (-b +- akar(b^2-4ac)) / 2a"
+    }
+  },
+  {
+    "id": "mapel-matematika-diskriminan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Diskriminan",
+    "tags": [
+      "diskriminan",
+      "persamaan kuadrat"
+    ],
+    "teks": "Diskriminan (D = b² - 4ac) pada persamaan kuadrat menentukan jenis akar: D > 0 dua akar real berbeda, D = 0 satu akar kembar, D < 0 tidak ada akar real.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Diskriminan",
+      "tags": [
+        "diskriminan",
+        "persamaan kuadrat"
+      ],
+      "rumus": "D = b^2 - 4ac"
+    }
+  },
+  {
+    "id": "mapel-matematika-barisan-aritmatika",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Barisan Aritmatika",
+    "tags": [
+      "barisan aritmatika",
+      "beda"
+    ],
+    "teks": "Barisan aritmatika — barisan bilangan dengan selisih tetap (beda/b) antar suku berurutan; suku ke-n dirumuskan Un = a + (n-1)b, dengan a suku pertama.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Barisan Aritmatika",
+      "tags": [
+        "barisan aritmatika",
+        "beda"
+      ],
+      "rumus": "Un = a + (n-1)b"
+    }
+  },
+  {
+    "id": "mapel-matematika-barisan-geometri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Barisan Geometri",
+    "tags": [
+      "barisan geometri",
+      "rasio"
+    ],
+    "teks": "Barisan geometri — barisan bilangan dengan rasio tetap (r) antar suku berurutan; suku ke-n dirumuskan Un = a × r^(n-1), dengan a suku pertama.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Barisan Geometri",
+      "tags": [
+        "barisan geometri",
+        "rasio"
+      ],
+      "rumus": "Un = a . r^(n-1)"
+    }
+  },
+  {
+    "id": "mapel-matematika-deret-aritmatika",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Deret Aritmatika",
+    "tags": [
+      "deret aritmatika"
+    ],
+    "teks": "Deret aritmatika — jumlah suku-suku barisan aritmatika, dihitung dengan rumus Sn = n/2 × (2a + (n-1)b), dengan n banyak suku.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Deret Aritmatika",
+      "tags": [
+        "deret aritmatika"
+      ],
+      "rumus": "Sn = n/2 (2a + (n-1)b)"
+    }
+  },
+  {
+    "id": "mapel-matematika-fungsi-linear",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Fungsi Linear",
+    "tags": [
+      "fungsi linear",
+      "gradien"
+    ],
+    "teks": "Fungsi linear berbentuk y = mx + c, dengan m adalah gradien (kemiringan garis) dan c titik potong sumbu-y; grafiknya berupa garis lurus.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Fungsi Linear",
+      "tags": [
+        "fungsi linear",
+        "gradien"
+      ],
+      "rumus": "y = mx + c"
+    }
+  },
+  {
+    "id": "mapel-matematika-perbandingan-trigonometri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Perbandingan Trigonometri",
+    "tags": [
+      "trigonometri",
+      "sin cos tan"
+    ],
+    "teks": "Perbandingan trigonometri pada segitiga siku-siku: sin = sisi depan/sisi miring, cos = sisi samping/sisi miring, tan = sisi depan/sisi samping.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Perbandingan Trigonometri",
+      "tags": [
+        "trigonometri",
+        "sin cos tan"
+      ],
+      "rumus": "sin=depan/miring; cos=samping/miring; tan=depan/samping"
+    }
+  },
+  {
+    "id": "mapel-matematika-jumlah-sudut-segitiga-dan-segiempat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Jumlah Sudut Segitiga dan Segiempat",
+    "tags": [
+      "sudut",
+      "segitiga",
+      "segiempat"
+    ],
+    "teks": "Jumlah semua sudut dalam segitiga selalu 180°; jumlah semua sudut dalam segiempat selalu 360°, berlaku untuk semua jenis segitiga dan segiempat.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Jumlah Sudut Segitiga dan Segiempat",
+      "tags": [
+        "sudut",
+        "segitiga",
+        "segiempat"
+      ],
+      "rumus": "sudut segitiga=180; sudut segiempat=360"
+    }
+  },
+  {
+    "id": "mapel-matematika-mean-median-modus",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Mean, Median, Modus",
+    "tags": [
+      "statistika",
+      "mean",
+      "median",
+      "modus"
+    ],
+    "teks": "Mean (rata-rata) — jumlah semua data dibagi banyak data; median — nilai tengah data yang sudah diurutkan; modus — nilai yang paling sering muncul dalam data.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Mean, Median, Modus",
+      "tags": [
+        "statistika",
+        "mean",
+        "median",
+        "modus"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-peluang",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Peluang",
+    "tags": [
+      "peluang",
+      "probabilitas"
+    ],
+    "teks": "Peluang suatu kejadian A dihitung P(A) = banyak kejadian A / banyak semua kemungkinan yang mungkin terjadi (ruang sampel), nilainya antara 0 dan 1.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Peluang",
+      "tags": [
+        "peluang",
+        "probabilitas"
+      ],
+      "rumus": "P(A) = n(A)/n(S)"
+    }
+  },
+  {
+    "id": "mapel-matematika-faktorial",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Faktorial",
+    "tags": [
+      "faktorial"
+    ],
+    "teks": "Faktorial (n!) — hasil kali semua bilangan bulat positif dari n hingga 1, misalnya 4! = 4×3×2×1 = 24; dipakai dalam perhitungan permutasi dan kombinasi.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Faktorial",
+      "tags": [
+        "faktorial"
+      ],
+      "rumus": "n! = n x (n-1) x ... x 1"
+    }
+  },
+  {
+    "id": "mapel-matematika-permutasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Permutasi",
+    "tags": [
+      "permutasi"
+    ],
+    "teks": "Permutasi — susunan objek yang memperhatikan urutan, dirumuskan nPr = n!/(n-r)!, dipakai saat urutan hasil penting (misalnya menyusun juara 1, 2, 3).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Permutasi",
+      "tags": [
+        "permutasi"
+      ],
+      "rumus": "nPr = n!/(n-r)!"
+    }
+  },
+  {
+    "id": "mapel-matematika-kombinasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Kombinasi",
+    "tags": [
+      "kombinasi"
+    ],
+    "teks": "Kombinasi — pemilihan objek tanpa memperhatikan urutan, dirumuskan nCr = n!/(r!(n-r)!), dipakai saat urutan hasil tidak penting (misalnya memilih anggota tim).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Kombinasi",
+      "tags": [
+        "kombinasi"
+      ],
+      "rumus": "nCr = n!/(r!(n-r)!)"
+    }
+  },
+  {
+    "id": "mapel-matematika-logaritma",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Logaritma",
+    "tags": [
+      "logaritma"
+    ],
+    "teks": "Logaritma — kebalikan dari operasi pemangkatan; jika a^c = b maka ᵃlog b = c, dengan a sebagai basis logaritma (a>0, a≠1).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Logaritma",
+      "tags": [
+        "logaritma"
+      ],
+      "rumus": "a^c = b <=> a_log_b = c"
+    }
+  },
+  {
+    "id": "mapel-matematika-fungsi-kuadrat-dan-parabola",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Fungsi Kuadrat dan Parabola",
+    "tags": [
+      "fungsi kuadrat",
+      "parabola"
+    ],
+    "teks": "Fungsi kuadrat y = ax² + bx + c menghasilkan grafik berbentuk parabola; titik puncaknya berada pada x = -b/2a, terbuka ke atas jika a>0 dan ke bawah jika a<0.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Fungsi Kuadrat dan Parabola",
+      "tags": [
+        "fungsi kuadrat",
+        "parabola"
+      ],
+      "rumus": "x_puncak = -b/2a"
+    }
+  },
+  {
+    "id": "mapel-matematika-matriks",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Matriks",
+    "tags": [
+      "matriks",
+      "aljabar linear"
+    ],
+    "teks": "Matriks — susunan bilangan dalam baris dan kolom; penjumlahan/pengurangan matriks hanya bisa dilakukan jika ukurannya sama, sedangkan perkalian matriks mensyaratkan jumlah kolom matriks pertama sama dengan jumlah baris matriks kedua.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Matriks",
+      "tags": [
+        "matriks",
+        "aljabar linear"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-vektor",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Vektor",
+    "tags": [
+      "vektor"
+    ],
+    "teks": "Vektor — besaran yang memiliki nilai (besar) dan arah, digambarkan sebagai anak panah; penjumlahan vektor mengikuti aturan jajar genjang atau segitiga.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Vektor",
+      "tags": [
+        "vektor"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-bilangan-prima",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Bilangan Prima",
+    "tags": [
+      "bilangan prima"
+    ],
+    "teks": "Bilangan prima — bilangan asli lebih besar dari 1 yang hanya memiliki dua faktor: 1 dan bilangan itu sendiri, contohnya 2, 3, 5, 7, 11, 13.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Bilangan Prima",
+      "tags": [
+        "bilangan prima"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-fpb-dan-kpk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "FPB dan KPK",
+    "tags": [
+      "fpb",
+      "kpk"
+    ],
+    "teks": "FPB (Faktor Persekutuan Terbesar) adalah faktor terbesar yang sama dari dua bilangan atau lebih; KPK (Kelipatan Persekutuan Terkecil) adalah kelipatan terkecil yang sama dari dua bilangan atau lebih.",
+    "meta": {
+      "field": "matematika",
+      "topic": "FPB dan KPK",
+      "tags": [
+        "fpb",
+        "kpk"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-operasi-pecahan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Operasi Pecahan",
+    "tags": [
+      "pecahan"
+    ],
+    "teks": "Pecahan berbentuk a/b; penjumlahan dan pengurangan pecahan mengharuskan penyebut disamakan terlebih dahulu (KPK penyebut), sedangkan perkalian pecahan tinggal mengalikan pembilang dengan pembilang dan penyebut dengan penyebut.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Operasi Pecahan",
+      "tags": [
+        "pecahan"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-bangun-datar-segiempat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Bangun Datar Segiempat",
+    "tags": [
+      "bangun datar",
+      "segiempat"
+    ],
+    "teks": "Bangun datar segiempat meliputi persegi (semua sisi sama, luas = sisi²), persegi panjang (luas = panjang × lebar), trapesium (luas = ½ × jumlah sisi sejajar × tinggi), dan jajar genjang (luas = alas × tinggi).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Bangun Datar Segiempat",
+      "tags": [
+        "bangun datar",
+        "segiempat"
+      ],
+      "rumus": "L_persegi=s^2; L_pp=p.l; L_trapesium=1/2(a+b)t"
+    }
+  },
+  {
+    "id": "mapel-matematika-sistem-persamaan-linear-dua-variabel-spldv",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+    "tags": [
+      "spldv",
+      "aljabar"
+    ],
+    "teks": "SPLDV — sistem dua persamaan linear dengan dua variabel yang diselesaikan bersamaan, bisa dengan metode substitusi, eliminasi, atau grafik untuk mencari nilai x dan y yang memenuhi kedua persamaan.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+      "tags": [
+        "spldv",
+        "aljabar"
+      ]
+    }
+  },
+  {
+    "id": "mapel-matematika-bunga-tunggal-dan-majemuk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Bunga Tunggal dan Majemuk",
+    "tags": [
+      "bunga tunggal",
+      "bunga majemuk",
+      "aritmetika sosial"
+    ],
+    "teks": "Bunga tunggal dihitung dari modal awal tetap setiap periode (Bunga = Modal × persen × waktu), sedangkan bunga majemuk dihitung dari modal ditambah bunga periode sebelumnya sehingga bertumbuh lebih cepat.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Bunga Tunggal dan Majemuk",
+      "tags": [
+        "bunga tunggal",
+        "bunga majemuk",
+        "aritmetika sosial"
+      ]
+    }
+  }
+]

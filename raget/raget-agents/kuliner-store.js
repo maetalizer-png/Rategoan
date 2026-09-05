@@ -10,7 +10,7 @@ async function loadKuliner() {
   try {
     const parts = await Promise.all(
       REGIONS.map(async (region) => {
-        const res = await fetch(new URL('../raget-data/json/kuliner/' + region + '.json', import.meta.url));
+        const res = await fetch(new URL('../raget-data/json/kuliner/kuliner-' + region + '.json', import.meta.url));
         return res.ok ? await res.json() : [];
       })
     );

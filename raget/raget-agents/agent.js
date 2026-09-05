@@ -368,6 +368,12 @@ async function respondCore(messages, prompt) {
     return postProcess(kulinerReply);
   }
 
+  const mataPelajaranReply = await datariesBridge.mataPelajaran(text);
+  if (mataPelajaranReply) {
+    ragetDb.addNote(text, mataPelajaranReply, null, 'mata_pelajaran');
+    return postProcess(mataPelajaranReply);
+  }
+
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');

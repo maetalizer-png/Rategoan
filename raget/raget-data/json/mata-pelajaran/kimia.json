@@ -1,0 +1,521 @@
+[
+  {
+    "id": "mapel-kimia-struktur-atom",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Struktur Atom",
+    "tags": [
+      "atom",
+      "proton",
+      "elektron",
+      "neutron"
+    ],
+    "teks": "Atom — partikel terkecil unsur yang masih memiliki sifat unsur tersebut, tersusun dari proton (bermuatan positif) dan neutron (netral) di inti, serta elektron (bermuatan negatif) yang mengelilingi inti.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Struktur Atom",
+      "tags": [
+        "atom",
+        "proton",
+        "elektron",
+        "neutron"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-tabel-periodik-unsur",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Tabel Periodik Unsur",
+    "tags": [
+      "tabel periodik",
+      "golongan",
+      "periode"
+    ],
+    "teks": "Tabel periodik — susunan unsur kimia berdasarkan kenaikan nomor atom (jumlah proton); kolom vertikal disebut golongan (unsur segolongan punya sifat kimia mirip), baris horizontal disebut periode.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Tabel Periodik Unsur",
+      "tags": [
+        "tabel periodik",
+        "golongan",
+        "periode"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-ikatan-ion",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Ikatan Ion",
+    "tags": [
+      "ikatan ion",
+      "nacl"
+    ],
+    "teks": "Ikatan ion — ikatan kimia yang terbentuk dari transfer elektron antara atom logam (melepas elektron) dan nonlogam (menerima elektron), contohnya NaCl (natrium klorida/garam dapur).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Ikatan Ion",
+      "tags": [
+        "ikatan ion",
+        "nacl"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-ikatan-kovalen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Ikatan Kovalen",
+    "tags": [
+      "ikatan kovalen"
+    ],
+    "teks": "Ikatan kovalen — ikatan kimia yang terbentuk dari pemakaian bersama pasangan elektron antara dua atom nonlogam, bisa berupa ikatan tunggal, rangkap dua, atau rangkap tiga.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Ikatan Kovalen",
+      "tags": [
+        "ikatan kovalen"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-ciri-ciri-reaksi-kimia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Ciri-Ciri Reaksi Kimia",
+    "tags": [
+      "reaksi kimia"
+    ],
+    "teks": "Reaksi kimia — proses perubahan suatu zat menjadi zat baru dengan sifat berbeda, ditandai dengan perubahan warna, suhu, terbentuknya gas, atau terbentuknya endapan.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Ciri-Ciri Reaksi Kimia",
+      "tags": [
+        "reaksi kimia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-hukum-kekekalan-massa",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Hukum Kekekalan Massa",
+    "tags": [
+      "hukum lavoisier",
+      "kekekalan massa"
+    ],
+    "teks": "Hukum kekekalan massa (Hukum Lavoisier) — dalam reaksi kimia tertutup, massa total zat sebelum reaksi sama dengan massa total zat sesudah reaksi.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Hukum Kekekalan Massa",
+      "tags": [
+        "hukum lavoisier",
+        "kekekalan massa"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-sifat-asam",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Sifat Asam",
+    "tags": [
+      "asam",
+      "ph"
+    ],
+    "teks": "Asam — senyawa yang melepaskan ion H+ ketika dilarutkan dalam air, memiliki rasa masam, dapat mengubah lakmus biru menjadi merah, dan memiliki pH kurang dari 7, contohnya cuka dan asam klorida.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Sifat Asam",
+      "tags": [
+        "asam",
+        "ph"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-sifat-basa",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Sifat Basa",
+    "tags": [
+      "basa",
+      "ph"
+    ],
+    "teks": "Basa — senyawa yang melepaskan ion OH- ketika dilarutkan dalam air, memiliki rasa pahit dan terasa licin, dapat mengubah lakmus merah menjadi biru, dan memiliki pH lebih dari 7, contohnya sabun dan soda kue.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Sifat Basa",
+      "tags": [
+        "basa",
+        "ph"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-garam-dan-reaksi-netralisasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Garam dan Reaksi Netralisasi",
+    "tags": [
+      "garam",
+      "netralisasi"
+    ],
+    "teks": "Garam terbentuk dari reaksi netralisasi antara asam dan basa yang menghasilkan garam dan air; pH garam pada umumnya mendekati netral (=7), tergantung kekuatan asam-basa pembentuknya.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Garam dan Reaksi Netralisasi",
+      "tags": [
+        "garam",
+        "netralisasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-skala-ph",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Skala pH",
+    "tags": [
+      "ph",
+      "skala keasaman"
+    ],
+    "teks": "pH — skala 0 sampai 14 yang menunjukkan tingkat keasaman atau kebasaan suatu larutan; pH kurang dari 7 bersifat asam, pH 7 netral, dan pH lebih dari 7 bersifat basa.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Skala pH",
+      "tags": [
+        "ph",
+        "skala keasaman"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-larutan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Larutan",
+    "tags": [
+      "larutan",
+      "pelarut",
+      "zat terlarut"
+    ],
+    "teks": "Larutan — campuran homogen antara zat pelarut (biasanya jumlahnya lebih banyak) dan zat terlarut, sehingga komposisinya tampak seragam di seluruh bagian campuran.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Larutan",
+      "tags": [
+        "larutan",
+        "pelarut",
+        "zat terlarut"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-molaritas",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Molaritas",
+    "tags": [
+      "molaritas",
+      "konsentrasi"
+    ],
+    "teks": "Molaritas (M) — satuan konsentrasi larutan yang menyatakan jumlah mol zat terlarut dalam satu liter larutan, dirumuskan M = mol zat terlarut / volume larutan (liter).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Molaritas",
+      "tags": [
+        "molaritas",
+        "konsentrasi"
+      ],
+      "rumus": "M = mol/liter"
+    }
+  },
+  {
+    "id": "mapel-kimia-konsep-mol",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Konsep Mol",
+    "tags": [
+      "mol",
+      "bilangan avogadro"
+    ],
+    "teks": "Mol — satuan jumlah zat dalam kimia; 1 mol zat mengandung 6,022 × 10²³ partikel (bilangan Avogadro), digunakan untuk menghitung jumlah partikel, massa, atau volume zat dalam reaksi kimia.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Konsep Mol",
+      "tags": [
+        "mol",
+        "bilangan avogadro"
+      ],
+      "rumus": "1 mol = 6.022 x 10^23 partikel"
+    }
+  },
+  {
+    "id": "mapel-kimia-reaksi-oksidasi-dan-reduksi-redoks",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Reaksi Oksidasi dan Reduksi (Redoks)",
+    "tags": [
+      "redoks",
+      "oksidasi",
+      "reduksi"
+    ],
+    "teks": "Reaksi redoks — reaksi yang melibatkan perpindahan elektron; oksidasi adalah pelepasan elektron (bilangan oksidasi naik), reduksi adalah penerimaan elektron (bilangan oksidasi turun).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Reaksi Oksidasi dan Reduksi (Redoks)",
+      "tags": [
+        "redoks",
+        "oksidasi",
+        "reduksi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-unsur-senyawa-dan-campuran",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Unsur, Senyawa, dan Campuran",
+    "tags": [
+      "unsur",
+      "senyawa",
+      "campuran"
+    ],
+    "teks": "Unsur adalah zat tunggal yang tidak bisa diuraikan lagi secara kimia biasa; senyawa adalah gabungan dua unsur atau lebih secara kimia dengan perbandingan tetap; campuran adalah gabungan dua zat atau lebih secara fisik tanpa reaksi kimia.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Unsur, Senyawa, dan Campuran",
+      "tags": [
+        "unsur",
+        "senyawa",
+        "campuran"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-elektron-valensi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Elektron Valensi",
+    "tags": [
+      "elektron valensi"
+    ],
+    "teks": "Elektron valensi — elektron yang berada pada kulit terluar atom, menentukan bagaimana atom tersebut berikatan dengan atom lain dan sifat kimianya.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Elektron Valensi",
+      "tags": [
+        "elektron valensi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-isotop",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Isotop",
+    "tags": [
+      "isotop"
+    ],
+    "teks": "Isotop — atom-atom dari unsur yang sama (jumlah proton sama) tetapi memiliki jumlah neutron berbeda, sehingga nomor massanya berbeda, contohnya karbon-12 dan karbon-14.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Isotop",
+      "tags": [
+        "isotop"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-larutan-elektrolit-dan-nonelektrolit",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Larutan Elektrolit dan Nonelektrolit",
+    "tags": [
+      "elektrolit",
+      "nonelektrolit"
+    ],
+    "teks": "Larutan elektrolit dapat menghantarkan arus listrik karena mengandung ion-ion bebas (contoh: larutan garam), sedangkan larutan nonelektrolit tidak dapat menghantarkan listrik karena tidak terurai menjadi ion (contoh: larutan gula).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Larutan Elektrolit dan Nonelektrolit",
+      "tags": [
+        "elektrolit",
+        "nonelektrolit"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-polimer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Polimer",
+    "tags": [
+      "polimer",
+      "monomer"
+    ],
+    "teks": "Polimer — molekul besar yang tersusun dari unit-unit berulang yang disebut monomer, contohnya plastik (polimer sintetis) dan protein serta karbohidrat (polimer alami).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Polimer",
+      "tags": [
+        "polimer",
+        "monomer"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-hidrokarbon",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Hidrokarbon",
+    "tags": [
+      "hidrokarbon",
+      "alkana",
+      "alkena",
+      "alkuna"
+    ],
+    "teks": "Hidrokarbon — senyawa organik yang hanya tersusun dari atom karbon dan hidrogen, dibagi menjadi alkana (ikatan tunggal), alkena (ada ikatan rangkap dua), dan alkuna (ada ikatan rangkap tiga).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Hidrokarbon",
+      "tags": [
+        "hidrokarbon",
+        "alkana",
+        "alkena",
+        "alkuna"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-faktor-laju-reaksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Faktor Laju Reaksi",
+    "tags": [
+      "laju reaksi"
+    ],
+    "teks": "Laju reaksi kimia dipengaruhi oleh konsentrasi pereaksi, suhu, luas permukaan sentuh, dan keberadaan katalis; semakin tinggi keempat faktor tersebut (kecuali disesuaikan), semakin cepat reaksi berlangsung.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Faktor Laju Reaksi",
+      "tags": [
+        "laju reaksi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-katalis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Katalis",
+    "tags": [
+      "katalis",
+      "energi aktivasi"
+    ],
+    "teks": "Katalis — zat yang mempercepat laju reaksi kimia dengan menurunkan energi aktivasi, tetapi tidak ikut bereaksi secara permanen sehingga jumlahnya tetap setelah reaksi selesai.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Katalis",
+      "tags": [
+        "katalis",
+        "energi aktivasi"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-reaksi-eksoterm-dan-endoterm",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Reaksi Eksoterm dan Endoterm",
+    "tags": [
+      "eksoterm",
+      "endoterm",
+      "termokimia"
+    ],
+    "teks": "Reaksi eksoterm melepaskan kalor ke lingkungan sehingga lingkungan terasa lebih panas, sedangkan reaksi endoterm menyerap kalor dari lingkungan sehingga lingkungan terasa lebih dingin.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Reaksi Eksoterm dan Endoterm",
+      "tags": [
+        "eksoterm",
+        "endoterm",
+        "termokimia"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-stoikiometri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Stoikiometri",
+    "tags": [
+      "stoikiometri"
+    ],
+    "teks": "Stoikiometri — perhitungan kuantitatif hubungan antara zat-zat yang terlibat dalam reaksi kimia berdasarkan persamaan reaksi yang sudah disetarakan koefisiennya.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Stoikiometri",
+      "tags": [
+        "stoikiometri"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-larutan-penyangga-buffer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Larutan Penyangga (Buffer)",
+    "tags": [
+      "larutan penyangga",
+      "buffer"
+    ],
+    "teks": "Larutan penyangga (buffer) — larutan yang mampu mempertahankan pH-nya relatif konstan meski ditambah sedikit asam, basa, atau air, biasanya terdiri dari asam lemah dan basa konjugasinya (atau sebaliknya).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Larutan Penyangga (Buffer)",
+      "tags": [
+        "larutan penyangga",
+        "buffer"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-sifat-koligatif-larutan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Sifat Koligatif Larutan",
+    "tags": [
+      "sifat koligatif"
+    ],
+    "teks": "Sifat koligatif larutan — sifat larutan yang bergantung pada jumlah partikel zat terlarut, bukan jenis zatnya, meliputi penurunan titik beku, kenaikan titik didih, penurunan tekanan uap, dan tekanan osmotik.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Sifat Koligatif Larutan",
+      "tags": [
+        "sifat koligatif"
+      ]
+    }
+  },
+  {
+    "id": "mapel-kimia-wujud-materi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Wujud Materi",
+    "tags": [
+      "wujud materi",
+      "padat cair gas"
+    ],
+    "teks": "Wujud materi dibedakan menjadi padat (bentuk dan volume tetap), cair (volume tetap, bentuk menyesuaikan wadah), dan gas (bentuk dan volume menyesuaikan wadah), dipengaruhi oleh suhu dan tekanan.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Wujud Materi",
+      "tags": [
+        "wujud materi",
+        "padat cair gas"
+      ]
+    }
+  }
+]
