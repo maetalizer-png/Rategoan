@@ -78,21 +78,22 @@ sudut pandang lain). Domain-domain ini dimuat lewat jalur `.js` asli
 (`import()` lazy per region, didaftarkan di `REGIONS`), bukan
 `loadRegionFromJson()`.
 
-## `raget-data/json/knowledge/`
+## `raget-data/json/pengetahuan/`
 
 Pengetahuan umum berformat factoid sederhana (`{q,a}`, `{subject,answer}`,
 atau `{title,text}`) — dipakai `memoryIndex.search()` (retrieval TF-IDF)
 sebagai fallback saat tidak ada match terstruktur dari dataries. Dulu ada
-di `raget-dataset/knowledge/`, sekarang di `raget-data/json/knowledge/`
-sebagai saudara folder-folder domain lainnya (bukan di bawah domain
-manapun — `dataries-ke-korpus.mjs` sengaja mengecualikannya dari loop
-domain unified karena bentuknya beda).
+di `raget-dataset/knowledge/`, lalu `raget-data/json/knowledge/`, sekarang
+`raget-data/json/pengetahuan/` (nama Indonesia, konsisten dengan folder
+domain lain) sebagai saudara folder-folder domain lainnya (bukan di bawah
+domain manapun — `dataries-ke-korpus.mjs` sengaja mengecualikannya dari
+loop domain unified karena bentuknya beda).
 
 ## `raget-data/jsonl/`
 
 - **`raget_own_corpus.jsonl`** — korpus latih milik Rategoan sendiri,
   dihasilkan `raget-tools/dataries-ke-korpus.mjs` dari gabungan
-  `raget-devlog/json/{persona,fewshot}` + `raget-data/json/knowledge/*` +
+  `raget-devlog/json/{persona,fewshot}` + `raget-data/json/pengetahuan/*` +
   `raget-data/json/*/*.json` (domain unified). Dipakai training neural
   eksperimental, bukan rule engine.
 - **`languages.jsonl`** — versi teks polos entri bahasa, dipakai sebagai

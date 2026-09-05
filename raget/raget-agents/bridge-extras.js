@@ -221,22 +221,12 @@ async function tryEkonomi(text) {
   return item.text;
 }
 
-async function tryMarplace(text) {
+async function tryPlatform(text) {
   const m = text.match(/^marplace\s+(.+)$/i) || text.match(/^platform\s+(.+)$/i);
   if (!m) return null;
   const entity = bridgeResolve.cleanEntity(m[1]);
   if (!entity) return null;
-  const item = await bridgeResolve.findBestInList('marplace', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
-  if (!item) return null;
-  return item.text;
-}
-
-async function tryLingo(text) {
-  const m = text.match(/^lingo\s+(.+)$/i);
-  if (!m) return null;
-  const entity = bridgeResolve.cleanEntity(m[1]);
-  if (!entity) return null;
-  const item = await bridgeResolve.findBestInList('lingo', entity, (it) => [it.metadata.name, it.metadata.country, ...(it.metadata.tags || [])]);
+  const item = await bridgeResolve.findBestInList('platform', entity, (it) => [it.metadata.name, ...(it.metadata.tags || [])]);
   if (!item) return null;
   return item.text;
 }
@@ -321,11 +311,8 @@ async function extras(q) {
   const ekonomi = await tryEkonomi(text);
   if (ekonomi) return ekonomi;
 
-  const marplace = await tryMarplace(text);
-  if (marplace) return marplace;
-
-  const lingo = await tryLingo(text);
-  if (lingo) return lingo;
+  const platform = await tryPlatform(text);
+  if (platform) return platform;
 
   const topic = await tryTopicSearch(text);
   if (topic) return topic;

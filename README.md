@@ -129,9 +129,9 @@ masing-masing dicoba berurutan sebelum jatuh ke fallback umum:
 `raget/raget-data/json/` adalah **satu-satunya** sumber data domain (folder `raget-dataries/` JS legacy sudah dihapus).
 Loader: `raget-agents/dataries-registry.js` (fetch JSON → bentuk `{text, metadata}` untuk bridge).
 Domain antara lain: negara, kota, bahasa, tokoh, sapaan, sains, sejarah, wisata, kuliner/makanan,
-olahraga, etika, minuman, marplace, lingo, ekonomi, paluang, penemuan, alam, seni-budaya,
+olahraga, etika, minuman, platform, ekonomi, peluang, penemuan, alam, seni-budaya,
 plus `greeting/` & `obrolan-ringan/` untuk template chat.
-`json/knowledge/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
+`json/pengetahuan/` = factoid umum. Korpus train neural = 3 rak Release kanonik (K1
 `korpus-ensiklopedia-bersih`, K2 `korpus-dialog-daerah-bersih`, K3 `korpus-pelengkap-bersih`,
 aturan lengkap di [`PRD.md`](PRD.md) §2). Token training yang valid hanya dari 3 rak itu,
 angka terbaru di `korpus-manifest-total.json`. Checkpoint neural 100M ada di
@@ -149,7 +149,7 @@ sains, dan olahraga — pola migrasinya didokumentasikan di
 `raget/raget-tools/migrate-*-domain.mjs` untuk dipakai ulang di domain berikutnya.
 
 **Korpus milik sendiri**: `raget/raget-tools/dataries-ke-korpus.mjs` merender seluruh data
-di atas (plus `raget-data/json/knowledge/*`, `raget-devlog/json/{fewshot,persona}.json`) jadi
+di atas (plus `raget-data/json/pengetahuan/*`, `raget-devlog/json/{fewshot,persona}.json`) jadi
 `raget/raget-data/jsonl/raget_own_corpus.jsonl` — 3.543 baris, ±104.728 token perkiraan kasar.
 `raget-tools/bench.json` dan `raget-devlog/json/metadata/answer-rules.json` sengaja dilewati
 (alasannya di komentar header skrip) supaya korpus tidak berisi data latih yang dikarang.
@@ -231,7 +231,7 @@ Rategoan dirancang agar bisa diubah jadi produk lain hanya lewat file data,
 tanpa menyentuh kode:
 
 - **Identitas & gaya bicara** → `raget/raget-devlog/json/persona.json`
-- **Basis pengetahuan** → `raget/raget-data/json/` (domain terstruktur) dan `raget/raget-data/json/knowledge/`
+- **Basis pengetahuan** → `raget/raget-data/json/` (domain terstruktur) dan `raget/raget-data/json/pengetahuan/`
 
 Ketentuan penggunaan dan lisensi ada di [`LICENSE.md`](LICENSE.md).
 

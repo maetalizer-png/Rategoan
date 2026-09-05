@@ -99,26 +99,19 @@ export const REGIONS = Object.freeze({
     { id: 'olimpiade', file: './olahraga/olimpiade.js', names: [] },
     { id: 'lain', file: './olahraga/lain.js', names: [] },
   ],
-  marplace: [
-    { id: 'ecommerce', file: './marplace/ecommerce.js', names: [] },
-    { id: 'freelance', file: './marplace/freelance.js', names: [] },
-    { id: 'karir', file: './marplace/karir.js', names: [] },
-    { id: 'otomotif', file: './marplace/otomotif.js', names: [] },
-    { id: 'properti', file: './marplace/properti.js', names: [] },
+  platform: [
+    { id: 'ecommerce', file: './platform/ecommerce.js', names: [] },
+    { id: 'freelance', file: './platform/freelance.js', names: [] },
+    { id: 'karir', file: './platform/karir.js', names: [] },
+    { id: 'otomotif', file: './platform/otomotif.js', names: [] },
+    { id: 'properti', file: './platform/properti.js', names: [] },
   ],
-  paluang: [
-    { id: 'investasi', file: './paluang/investasi.js', names: [] },
-    { id: 'kompetensi', file: './paluang/kompetensi.js', names: [] },
-    { id: 'peluang-daerah', file: './paluang/peluang-daerah.js', names: [] },
-    { id: 'sektor', file: './paluang/sektor.js', names: [] },
-    { id: 'tren', file: './paluang/tren.js', names: [] },
-  ],
-  lingo: [
-    { id: 'asean-barat', file: './lingo/asean-barat.js', names: [] },
-    { id: 'asean-selatan', file: './lingo/asean-selatan.js', names: [] },
-    { id: 'asean-tengah', file: './lingo/asean-tengah.js', names: [] },
-    { id: 'asean-tenggara', file: './lingo/asean-tenggara.js', names: [] },
-    { id: 'asean-timur', file: './lingo/asean-timur.js', names: [] },
+  peluang: [
+    { id: 'investasi', file: './peluang/investasi.js', names: [] },
+    { id: 'kompetensi', file: './peluang/kompetensi.js', names: [] },
+    { id: 'peluang-daerah', file: './peluang/peluang-daerah.js', names: [] },
+    { id: 'sektor', file: './peluang/sektor.js', names: [] },
+    { id: 'tren', file: './peluang/tren.js', names: [] },
   ],
   sejarah: [
     { id: 'kuno', file: './sejarah/kuno.js', names: [] },
@@ -231,7 +224,7 @@ export const REGIONS = Object.freeze({
 
 const cache = new Map();
 
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', marplace: 'marplace', lingo: 'lingo', ekonomi: 'ekonomi', paluang: 'paluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', sapaan: 'sapaan', greeting: 'greeting', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', sapaan: 'sapaan', greeting: 'greeting', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan' };
 
 function unifiedToLegacyShape(entry, group) {
   return {

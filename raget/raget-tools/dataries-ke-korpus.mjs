@@ -1,7 +1,7 @@
 // vNext Fase C (revisi v1.1, §4 roadmap): render korpus dialog/fakta MILIK
 // SENDIRI Rategoan - bukan dari raget-dataries/ (itu lapisan metadata
 // terstruktur untuk RETRIEVAL, bukan teks siap-latih), tapi dari
-// raget-devlog/json/{persona,fewshot} + raget-data/json/knowledge/* +
+// raget-devlog/json/{persona,fewshot} + raget-data/json/pengetahuan/* +
 // raget-data/json/*/*.json (domain yang sudah dimigrasi ke skema tunggal
 // Fase B) + raget-data/json/sapaan/ (sapaan/smalltalk, dimigrasi lewat
 // migrate-sapaan-domain.mjs).
@@ -54,7 +54,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const DEVLOG_JSON_DIR = path.join(ROOT, 'raget', 'raget-devlog', 'json');
 const DATA_JSON_DIR = path.join(ROOT, 'raget', 'raget-data', 'json');
-const KNOWLEDGE_DIR = path.join(DATA_JSON_DIR, 'knowledge');
+const KNOWLEDGE_DIR = path.join(DATA_JSON_DIR, 'pengetahuan');
 const DATA_DIR = DATA_JSON_DIR;
 const OUT_DIR = path.join(ROOT, 'raget', 'raget-data', 'jsonl');
 const OUT_FILE = path.join(OUT_DIR, 'raget_own_corpus.jsonl');
@@ -96,7 +96,7 @@ function renderFewshot(records) {
   for (const item of list) pushDialog(records, 'fewshot', item.q, item.a);
 }
 
-// ---------- 3) knowledge/*.json - dua bentuk: {q,a} atau {subject,answer} atau {title,text} ----------
+// ---------- 3) pengetahuan/*.json - dua bentuk: {q,a} atau {subject,answer} atau {title,text} ----------
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
@@ -107,7 +107,7 @@ function renderKnowledge(records) {
   for (const f of readdirSync(KNOWLEDGE_DIR).filter((f) => f.endsWith('.json'))) {
     const data = readJson(path.join(KNOWLEDGE_DIR, f));
     if (!Array.isArray(data)) continue;
-    const source = 'knowledge/' + f;
+    const source = 'pengetahuan/' + f;
     for (const item of data) {
       if (item.q && item.a) {
         pushDialog(records, source, item.q, item.a);
@@ -131,7 +131,7 @@ function renderKnowledge(records) {
 // ---------- 4) raget-data/json/*/*.json - domain skema tunggal Fase B ----------
 function renderUnifiedDomain(records) {
   for (const domain of readdirSync(DATA_DIR, { withFileTypes: true }).filter((d) => d.isDirectory())) {
-    if (domain.name === 'knowledge') continue; // sudah dirender terpisah lewat renderKnowledge() - bentuknya {q,a}/{subject,answer}, bukan skema unified
+    if (domain.name === 'pengetahuan') continue; // sudah dirender terpisah lewat renderKnowledge() - bentuknya {q,a}/{subject,answer}, bukan skema unified
     const domainDir = path.join(DATA_DIR, domain.name);
     for (const f of readdirSync(domainDir).filter((f) => f.endsWith('.json'))) {
       const data = readJson(path.join(domainDir, f));
