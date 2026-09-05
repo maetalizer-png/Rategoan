@@ -94,5 +94,197 @@
         "Program imunisasi menyelamatkan banyak nyawa."
       ]
     }
+  },
+  {
+    "id": "penemuan-stetoskop",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Stetoskop",
+    "tags": [
+      "stetoskop",
+      "laennec"
+    ],
+    "teks": "Stetoskop ditemukan Rene Laennec pada 1816 untuk mendengarkan bunyi jantung dan paru-paru pasien tanpa kontak langsung. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Rene Laennec",
+      "year": "1816",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-termometer-medis",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Termometer Medis",
+    "tags": [
+      "termometer",
+      "santorio"
+    ],
+    "teks": "Termometer medis untuk mengukur suhu tubuh pertama kali dikembangkan Santorio Santorio pada awal abad ke-17. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Santorio Santorio",
+      "year": "1612",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-golongan-darah",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Golongan Darah ABO",
+    "tags": [
+      "golongan darah",
+      "landsteiner"
+    ],
+    "teks": "Sistem golongan darah ABO ditemukan Karl Landsteiner pada 1901, memungkinkan transfusi darah dilakukan dengan lebih aman. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Karl Landsteiner",
+      "year": "1901",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-vaksin-polio",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Vaksin Polio",
+    "tags": [
+      "vaksin polio",
+      "jonas salk"
+    ],
+    "teks": "Vaksin polio suntik dikembangkan Jonas Salk dan berhasil diuji publik pada 1955, menekan drastis kasus polio dunia. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Jonas Salk",
+      "year": "1955",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-antiseptik-bedah",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Antiseptik Bedah",
+    "tags": [
+      "antiseptik",
+      "joseph lister"
+    ],
+    "teks": "Teknik antiseptik dalam bedah diperkenalkan Joseph Lister pada 1867, menurunkan drastis angka infeksi pasca operasi. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Joseph Lister",
+      "year": "1867",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-transplantasi-organ",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Transplantasi Organ",
+    "tags": [
+      "transplantasi",
+      "joseph murray"
+    ],
+    "teks": "Transplantasi ginjal sukses pertama dilakukan Joseph Murray pada 1954 antara saudara kembar identik. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Joseph Murray",
+      "year": "1954",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-mri",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "MRI",
+    "tags": [
+      "mri",
+      "pencitraan medis"
+    ],
+    "teks": "Teknik pencitraan resonansi magnetik (MRI) dikembangkan lewat kerja Raymond Damadian dan Paul Lauterbur pada 1970-an untuk melihat jaringan tubuh tanpa radiasi. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Raymond Damadian & Paul Lauterbur",
+      "year": "1977",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-ct-scan",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "CT Scan",
+    "tags": [
+      "ct scan",
+      "hounsfield"
+    ],
+    "teks": "CT scan (computed tomography) dikembangkan Godfrey Hounsfield pada 1971, menghasilkan gambar penampang tubuh dari sinar-X. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Godfrey Hounsfield",
+      "year": "1971",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-aspirin",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Aspirin",
+    "tags": [
+      "aspirin",
+      "felix hoffmann"
+    ],
+    "teks": "Aspirin disintesis Felix Hoffmann di perusahaan Bayer pada 1897, menjadi obat pereda nyeri dan demam yang paling luas dipakai di dunia. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Felix Hoffmann",
+      "year": "1897",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-vaksin-rabies",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Vaksin Rabies",
+    "tags": [
+      "vaksin rabies",
+      "louis pasteur"
+    ],
+    "teks": "Vaksin rabies pertama berhasil dikembangkan dan diujikan Louis Pasteur pada 1885, menyelamatkan nyawa pasien yang digigit hewan terinfeksi. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Louis Pasteur",
+      "year": "1885",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-cuci-tangan-antiseptik",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Cuci Tangan Antiseptik",
+    "tags": [
+      "cuci tangan",
+      "semmelweis"
+    ],
+    "teks": "Ignaz Semmelweis pada 1847 membuktikan cuci tangan dengan larutan klorin sebelum menangani pasien menurunkan drastis kematian ibu melahirkan. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Ignaz Semmelweis",
+      "year": "1847",
+      "field": "kedokteran"
+    }
+  },
+  {
+    "id": "penemuan-alat-pacu-jantung",
+    "kategori": "penemuan",
+    "wilayah": "kedokteran",
+    "nama": "Alat Pacu Jantung",
+    "tags": [
+      "alat pacu jantung",
+      "pacemaker"
+    ],
+    "teks": "Alat pacu jantung implan pertama dikembangkan Rune Elmqvist dan Ake Senning, dipasang pada pasien di Swedia pada 1958. Termasuk penemuan bidang kedokteran.",
+    "meta": {
+      "inventor": "Rune Elmqvist & Ake Senning",
+      "year": "1958",
+      "field": "kedokteran"
+    }
   }
 ]

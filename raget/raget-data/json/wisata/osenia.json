@@ -103,5 +103,215 @@
         "polinesia"
       ]
     }
+  },
+  {
+    "id": "wisata-milford-sound",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Milford Sound",
+    "tags": [
+      "milford sound",
+      "selandia baru"
+    ],
+    "teks": "Milford Sound — fiord dramatis di Selandia Baru dengan tebing curam, air terjun, dan hutan hujan yang turun langsung ke laut. Tempat wisata terkenal di kota Milford Sound adalah Milford Sound.",
+    "meta": {
+      "country": "Selandia Baru",
+      "city": "Milford Sound",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "milford sound",
+        "selandia baru"
+      ]
+    }
+  },
+  {
+    "id": "wisata-hobbiton",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Hobbiton",
+    "tags": [
+      "hobbiton",
+      "selandia baru"
+    ],
+    "teks": "Hobbiton — lokasi syuting film Lord of the Rings dan The Hobbit di Matamata, Selandia Baru, kini menjadi taman wisata replika Shire yang lengkap. Tempat wisata terkenal di kota Matamata adalah Hobbiton.",
+    "meta": {
+      "country": "Selandia Baru",
+      "city": "Matamata",
+      "type": "modern",
+      "unesco": false,
+      "tags": [
+        "hobbiton",
+        "selandia baru"
+      ]
+    }
+  },
+  {
+    "id": "wisata-whitsunday",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Kepulauan Whitsunday",
+    "tags": [
+      "whitsunday",
+      "australia"
+    ],
+    "teks": "Kepulauan Whitsunday di Australia — gugusan 74 pulau tropis dekat Great Barrier Reef, terkenal dengan pantai Whitehaven berpasir putih halus. Tempat wisata terkenal di kota Whitsunday adalah Kepulauan Whitsunday.",
+    "meta": {
+      "country": "Australia",
+      "city": "Whitsunday",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "whitsunday",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-rotorua",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Rotorua",
+    "tags": [
+      "rotorua",
+      "selandia baru"
+    ],
+    "teks": "Rotorua di Selandia Baru — kawasan geotermal dengan mata air panas, geiser, dan pusat budaya suku Maori yang aktif hingga kini. Tempat wisata terkenal di kota Rotorua adalah Rotorua.",
+    "meta": {
+      "country": "Selandia Baru",
+      "city": "Rotorua",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "rotorua",
+        "selandia baru"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kakadu",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Taman Nasional Kakadu",
+    "tags": [
+      "kakadu",
+      "australia"
+    ],
+    "teks": "Taman Nasional Kakadu di Australia — taman nasional terbesar di Australia dengan seni cadas Aborigin berusia ribuan tahun dan lahan basah kaya satwa. Tempat wisata terkenal di kota Kakadu adalah Taman Nasional Kakadu.",
+    "meta": {
+      "country": "Australia",
+      "city": "Kakadu",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "kakadu",
+        "australia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-rarotonga",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Rarotonga",
+    "tags": [
+      "rarotonga",
+      "kepulauan cook"
+    ],
+    "teks": "Rarotonga — pulau utama Kepulauan Cook di Pasifik Selatan, terkenal dengan laguna biru jernih dan terumbu karang yang masih alami.",
+    "meta": {
+      "country": "Kepulauan Cook",
+      "city": "Rarotonga",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "rarotonga",
+        "kepulauan cook"
+      ]
+    }
+  },
+  {
+    "id": "wisata-rock-islands-palau",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Rock Islands Palau",
+    "tags": [
+      "rock islands",
+      "palau"
+    ],
+    "teks": "Rock Islands Palau — gugusan ratusan pulau kapur kecil berbentuk jamur di laguna Palau, termasuk danau ubur-ubur tanpa sengat. Tempat wisata terkenal di kota Koror adalah Rock Islands Palau.",
+    "meta": {
+      "country": "Palau",
+      "city": "Koror",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "rock islands",
+        "palau"
+      ]
+    }
+  },
+  {
+    "id": "wisata-gunung-yasur",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Gunung Yasur",
+    "tags": [
+      "gunung yasur",
+      "vanuatu"
+    ],
+    "teks": "Gunung Yasur di Vanuatu — salah satu gunung berapi paling mudah diakses dan paling aktif di dunia, letusannya bisa disaksikan langsung dari bibir kawah.",
+    "meta": {
+      "country": "Vanuatu",
+      "city": "Tanna",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "gunung yasur",
+        "vanuatu"
+      ]
+    }
+  },
+  {
+    "id": "wisata-moorea",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Moorea",
+    "tags": [
+      "moorea",
+      "polinesia prancis"
+    ],
+    "teks": "Moorea di Polinesia Prancis — pulau vulkanik dengan teluk berair jernih dan pegunungan hijau, sering disebut lebih tenang dibanding Tahiti dan Bora Bora.",
+    "meta": {
+      "country": "Polinesia Prancis",
+      "city": "Moorea",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "moorea",
+        "polinesia prancis"
+      ]
+    }
+  },
+  {
+    "id": "wisata-blue-mountains",
+    "kategori": "wisata",
+    "wilayah": "osenia",
+    "nama": "Blue Mountains",
+    "tags": [
+      "blue mountains",
+      "australia"
+    ],
+    "teks": "Blue Mountains di Australia — pegunungan berhutan eukaliptus dekat Sydney, terkenal dengan formasi batu Three Sisters dan kabut kebiruan khas dari uap minyak eukaliptus. Tempat wisata terkenal di kota Katoomba adalah Blue Mountains.",
+    "meta": {
+      "country": "Australia",
+      "city": "Katoomba",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "blue mountains",
+        "australia"
+      ]
+    }
   }
 ]

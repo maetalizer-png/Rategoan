@@ -166,5 +166,221 @@
         "etiopia"
       ]
     }
+  },
+  {
+    "id": "wisata-robben-island",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Robben Island",
+    "tags": [
+      "robben island",
+      "afrika selatan"
+    ],
+    "teks": "Robben Island — pulau penjara di lepas pantai Cape Town, Afrika Selatan, tempat Nelson Mandela ditahan 18 tahun, kini museum sejarah anti-apartheid. Tempat wisata terkenal di kota Cape Town adalah Robben Island.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "city": "Cape Town",
+      "type": "sejarah",
+      "unesco": true,
+      "tags": [
+        "robben island",
+        "afrika selatan"
+      ]
+    }
+  },
+  {
+    "id": "wisata-marrakech-medina",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Medina Marrakech",
+    "tags": [
+      "medina",
+      "marrakech",
+      "maroko"
+    ],
+    "teks": "Medina Marrakech — kota tua bertembok di Maroko dengan pasar (souk) berliku, alun-alun Jemaa el-Fnaa yang ramai, dan arsitektur khas Maroko. Tempat wisata terkenal di kota Marrakech adalah Medina Marrakech.",
+    "meta": {
+      "country": "Maroko",
+      "city": "Marrakech",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "medina",
+        "marrakech",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "wisata-zanzibar-stone-town",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Stone Town Zanzibar",
+    "tags": [
+      "stone town",
+      "zanzibar",
+      "tanzania"
+    ],
+    "teks": "Stone Town — kota tua bersejarah di Pulau Zanzibar, Tanzania, memadukan arsitektur Arab, India, Eropa, dan Afrika dari masa perdagangan rempah dan budak. Tempat wisata terkenal di kota Zanzibar adalah Stone Town.",
+    "meta": {
+      "country": "Tanzania",
+      "city": "Zanzibar",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "stone town",
+        "zanzibar",
+        "tanzania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-okavango-delta",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Delta Okavango",
+    "tags": [
+      "okavango",
+      "botswana"
+    ],
+    "teks": "Delta Okavango — delta sungai pedalaman terbesar di dunia di Botswana, kaya satwa liar seperti gajah, singa, dan buaya, populer untuk safari perahu. Tempat wisata terkenal di kota Maun adalah Delta Okavango.",
+    "meta": {
+      "country": "Botswana",
+      "city": "Maun",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "okavango",
+        "botswana"
+      ]
+    }
+  },
+  {
+    "id": "wisata-fes-el-bali",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Fes el-Bali",
+    "tags": [
+      "fes el bali",
+      "maroko"
+    ],
+    "teks": "Fes el-Bali — kota tua Fes, Maroko, salah satu kawasan pejalan kaki terbesar di dunia dengan lebih dari 9.000 lorong sempit dan universitas tertua di dunia, Al-Qarawiyyin. Tempat wisata terkenal di kota Fes adalah Fes el-Bali.",
+    "meta": {
+      "country": "Maroko",
+      "city": "Fes",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "fes el bali",
+        "maroko"
+      ]
+    }
+  },
+  {
+    "id": "wisata-ngorongoro",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Kawah Ngorongoro",
+    "tags": [
+      "ngorongoro",
+      "tanzania"
+    ],
+    "teks": "Kawah Ngorongoro — kaldera vulkanik raksasa di Tanzania yang menjadi habitat padat satwa liar Afrika, termasuk badak hitam yang langka. Tempat wisata terkenal di kota Ngorongoro adalah Kawah Ngorongoro.",
+    "meta": {
+      "country": "Tanzania",
+      "city": "Ngorongoro",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "ngorongoro",
+        "tanzania"
+      ]
+    }
+  },
+  {
+    "id": "wisata-masjid-djenne",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Masjid Agung Djenne",
+    "tags": [
+      "masjid djenne",
+      "mali"
+    ],
+    "teks": "Masjid Agung Djenne di Mali — bangunan berbahan lumpur terbesar di dunia, dibangun kembali pada 1907, menjadi ikon arsitektur Sudano-Sahel Afrika Barat. Tempat wisata terkenal di kota Djenne adalah Masjid Agung Djenne.",
+    "meta": {
+      "country": "Mali",
+      "city": "Djenne",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "masjid djenne",
+        "mali"
+      ]
+    }
+  },
+  {
+    "id": "wisata-taman-nasional-volcanoes",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Taman Nasional Volcanoes",
+    "tags": [
+      "volcanoes national park",
+      "rwanda",
+      "gorila"
+    ],
+    "teks": "Taman Nasional Volcanoes di Rwanda — habitat gorila gunung langka, menawarkan trekking gorila yang menjadi daya tarik ekowisata utama Rwanda. Tempat wisata terkenal di kota Musanze adalah Taman Nasional Volcanoes.",
+    "meta": {
+      "country": "Rwanda",
+      "city": "Musanze",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "volcanoes national park",
+        "rwanda",
+        "gorila"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kuil-luxor",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Kuil Luxor",
+    "tags": [
+      "kuil luxor",
+      "mesir"
+    ],
+    "teks": "Kuil Luxor — kompleks kuil kuno Mesir di tepi Sungai Nil, dibangun sekitar 1400 SM, terkenal dengan pilar besar dan patung Ramses II. Tempat wisata terkenal di kota Luxor adalah Kuil Luxor.",
+    "meta": {
+      "country": "Mesir",
+      "city": "Luxor",
+      "type": "sejarah",
+      "unesco": true,
+      "tags": [
+        "kuil luxor",
+        "mesir"
+      ]
+    }
+  },
+  {
+    "id": "wisata-cape-coast-castle",
+    "kategori": "wisata",
+    "wilayah": "afrika",
+    "nama": "Cape Coast Castle",
+    "tags": [
+      "cape coast castle",
+      "ghana"
+    ],
+    "teks": "Cape Coast Castle — benteng kolonial di Ghana yang menjadi saksi bisu sejarah kelam perdagangan budak Atlantik, kini museum dan situs peringatan. Tempat wisata terkenal di kota Cape Coast adalah Cape Coast Castle.",
+    "meta": {
+      "country": "Ghana",
+      "city": "Cape Coast",
+      "type": "sejarah",
+      "unesco": true,
+      "tags": [
+        "cape coast castle",
+        "ghana"
+      ]
+    }
   }
 ]

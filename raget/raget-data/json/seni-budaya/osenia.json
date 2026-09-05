@@ -73,5 +73,128 @@
       "country": "Samoa",
       "type": "pakaian"
     }
+  },
+  {
+    "id": "seni-budaya-hula",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Tari Hula",
+    "tags": [
+      "hula",
+      "hawaii"
+    ],
+    "teks": "Tari Hula — tarian tradisional Hawaii yang menceritakan kisah dan legenda lewat gerak tangan serta pinggul, diiringi nyanyian (mele) dan alat musik ukulele.",
+    "meta": {
+      "country": "Hawaii",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-ta-moko",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Ta Moko",
+    "tags": [
+      "ta moko",
+      "tato maori",
+      "selandia baru"
+    ],
+    "teks": "Ta Moko — seni tato tradisional suku Maori di Selandia Baru yang mengukir wajah dan tubuh dengan pola melambangkan identitas, status, dan garis keturunan.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-kava",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Upacara Kava",
+    "tags": [
+      "kava",
+      "fiji"
+    ],
+    "teks": "Upacara Kava — ritual sosial di Fiji, Tonga, dan Vanuatu meminum minuman dari akar tanaman kava untuk menyambut tamu dan mempererat hubungan komunitas.",
+    "meta": {
+      "country": "Fiji",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-tapa",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Kain Tapa",
+    "tags": [
+      "tapa",
+      "kain kulit kayu"
+    ],
+    "teks": "Kain Tapa — kain tradisional dari kulit kayu yang ditumbuk, dibuat masyarakat di berbagai kepulauan Pasifik seperti Tonga dan Fiji untuk pakaian dan upacara adat.",
+    "meta": {
+      "country": "Tonga",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-poi",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Tari Poi",
+    "tags": [
+      "poi",
+      "maori"
+    ],
+    "teks": "Tari Poi — tarian suku Maori Selandia Baru dengan mengayunkan bola berikat tali (poi) mengikuti irama, awalnya untuk melatih kelenturan pergelangan tangan pejuang.",
+    "meta": {
+      "country": "Selandia Baru",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-sand-drawing",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Gambar Pasir Vanuatu",
+    "tags": [
+      "sand drawing",
+      "vanuatu"
+    ],
+    "teks": "Sand drawing (gambar pasir) Vanuatu — tradisi menggambar pola simbolis satu garis di atas pasir untuk menyampaikan cerita dan pesan, diakui UNESCO sebagai Warisan Budaya Takbenda.",
+    "meta": {
+      "country": "Vanuatu",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-lei",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Lei Hawaii",
+    "tags": [
+      "lei",
+      "hawaii",
+      "rangkaian bunga"
+    ],
+    "teks": "Lei — rangkaian bunga khas Hawaii yang dikalungkan sebagai simbol penyambutan, penghormatan, atau kasih sayang kepada penerimanya.",
+    "meta": {
+      "country": "Hawaii",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-boomerang",
+    "kategori": "seni-budaya",
+    "wilayah": "osenia",
+    "nama": "Boomerang",
+    "tags": [
+      "boomerang",
+      "aborigin",
+      "australia"
+    ],
+    "teks": "Boomerang — alat lempar tradisional suku Aborigin Australia, awalnya dipakai untuk berburu, kini juga jadi simbol budaya dan olahraga rekreasi.",
+    "meta": {
+      "country": "Australia",
+      "type": "budaya"
+    }
   }
 ]

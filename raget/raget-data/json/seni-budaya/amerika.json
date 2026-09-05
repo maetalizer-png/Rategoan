@@ -73,5 +73,125 @@
       "country": "Meksiko",
       "type": "festival"
     }
+  },
+  {
+    "id": "seni-budaya-salsa",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Salsa",
+    "tags": [
+      "salsa",
+      "kuba"
+    ],
+    "teks": "Salsa — tarian dan musik berirama Latin yang berkembang dari perpaduan budaya Kuba, Puerto Rico, dan Afrika, populer di seluruh Amerika Latin dan dunia.",
+    "meta": {
+      "country": "Kuba",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-rodeo",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Rodeo",
+    "tags": [
+      "rodeo",
+      "amerika serikat"
+    ],
+    "teks": "Rodeo — kompetisi olahraga budaya koboi Amerika Serikat meliputi menunggangi kuda liar dan banteng, berakar dari tradisi peternakan abad ke-19.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-capoeira",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Capoeira",
+    "tags": [
+      "capoeira",
+      "brasil"
+    ],
+    "teks": "Capoeira — seni bela diri Brasil yang memadukan tarian, akrobatik, dan musik, diciptakan budak Afrika di Brasil sebagai bentuk perlawanan tersamar.",
+    "meta": {
+      "country": "Brasil",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-powwow",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Powwow",
+    "tags": [
+      "powwow",
+      "penduduk asli amerika"
+    ],
+    "teks": "Powwow — pertemuan budaya penduduk asli Amerika berisi tarian, musik drum, dan busana tradisional untuk merayakan warisan dan komunitas suku.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-calypso",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Calypso",
+    "tags": [
+      "calypso",
+      "trinidad"
+    ],
+    "teks": "Calypso — genre musik asal Trinidad dan Tobago dengan lirik satir dan berirama ceria, biasa dimainkan dengan alat musik steelpan saat karnaval.",
+    "meta": {
+      "country": "Trinidad dan Tobago",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-reggae",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Reggae",
+    "tags": [
+      "reggae",
+      "jamaika"
+    ],
+    "teks": "Reggae — genre musik khas Jamaika yang berkembang akhir 1960-an, identik dengan Bob Marley, membawa pesan sosial dan filosofi Rastafari.",
+    "meta": {
+      "country": "Jamaika",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-mardi-gras",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Mardi Gras",
+    "tags": [
+      "mardi gras",
+      "new orleans"
+    ],
+    "teks": "Mardi Gras — festival karnaval besar di New Orleans, Amerika Serikat, dengan parade meriah, kostum warna-warni, dan musik jazz sebelum masa Prapaskah.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-cinco-de-mayo",
+    "kategori": "seni-budaya",
+    "wilayah": "amerika",
+    "nama": "Cinco de Mayo",
+    "tags": [
+      "cinco de mayo",
+      "meksiko"
+    ],
+    "teks": "Cinco de Mayo — perayaan Meksiko memperingati kemenangan Meksiko atas Prancis dalam Pertempuran Puebla 1862, dirayakan meriah dengan musik dan tarian rakyat.",
+    "meta": {
+      "country": "Meksiko",
+      "type": "budaya"
+    }
   }
 ]

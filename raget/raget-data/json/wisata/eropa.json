@@ -208,5 +208,215 @@
         "inggris"
       ]
     }
+  },
+  {
+    "id": "wisata-louvre",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Museum Louvre",
+    "tags": [
+      "louvre",
+      "prancis"
+    ],
+    "teks": "Museum Louvre di Paris, Prancis — museum seni terbesar di dunia, menyimpan lukisan Mona Lisa dan patung Venus de Milo. Tempat wisata terkenal di kota Paris adalah Museum Louvre.",
+    "meta": {
+      "country": "Prancis",
+      "city": "Paris",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "louvre",
+        "prancis"
+      ]
+    }
+  },
+  {
+    "id": "wisata-santorini",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Santorini",
+    "tags": [
+      "santorini",
+      "yunani"
+    ],
+    "teks": "Santorini — pulau vulkanik Yunani terkenal dengan rumah putih berkubah biru menghadap laut Aegea, tujuan bulan madu populer dunia. Tempat wisata terkenal di kota Santorini adalah Santorini.",
+    "meta": {
+      "country": "Yunani",
+      "city": "Santorini",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "santorini",
+        "yunani"
+      ]
+    }
+  },
+  {
+    "id": "wisata-charles-bridge",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Jembatan Charles",
+    "tags": [
+      "charles bridge",
+      "ceko"
+    ],
+    "teks": "Jembatan Charles di Praha, Ceko — jembatan batu abad ke-14 yang dihiasi 30 patung santo, menghubungkan kota tua dengan Kastil Praha. Tempat wisata terkenal di kota Praha adalah Jembatan Charles.",
+    "meta": {
+      "country": "Ceko",
+      "city": "Praha",
+      "type": "sejarah",
+      "unesco": true,
+      "tags": [
+        "charles bridge",
+        "ceko"
+      ]
+    }
+  },
+  {
+    "id": "wisata-plitvice",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Danau Plitvice",
+    "tags": [
+      "plitvice",
+      "kroasia"
+    ],
+    "teks": "Taman Nasional Danau Plitvice di Kroasia — rangkaian 16 danau bertingkat berwarna toska dengan air terjun yang saling terhubung. Tempat wisata terkenal di kota Plitvice adalah Danau Plitvice.",
+    "meta": {
+      "country": "Kroasia",
+      "city": "Plitvice",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "plitvice",
+        "kroasia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-kanal-amsterdam",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Kanal Amsterdam",
+    "tags": [
+      "kanal amsterdam",
+      "belanda"
+    ],
+    "teks": "Kanal Amsterdam, Belanda — jaringan kanal abad ke-17 yang membentuk pola melingkar kota, dilengkapi rumah bergaya khas dan jembatan bersejarah. Tempat wisata terkenal di kota Amsterdam adalah Kanal Amsterdam.",
+    "meta": {
+      "country": "Belanda",
+      "city": "Amsterdam",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "kanal amsterdam",
+        "belanda"
+      ]
+    }
+  },
+  {
+    "id": "wisata-edinburgh-castle",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Kastil Edinburgh",
+    "tags": [
+      "edinburgh castle",
+      "skotlandia"
+    ],
+    "teks": "Kastil Edinburgh di Skotlandia — benteng bersejarah berdiri di atas bukit vulkanik, menjadi ikon utama kota Edinburgh sejak abad pertengahan. Tempat wisata terkenal di kota Edinburgh adalah Kastil Edinburgh.",
+    "meta": {
+      "country": "Inggris",
+      "city": "Edinburgh",
+      "type": "sejarah",
+      "unesco": false,
+      "tags": [
+        "edinburgh castle",
+        "skotlandia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-mont-saint-michel",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Mont Saint-Michel",
+    "tags": [
+      "mont saint michel",
+      "prancis"
+    ],
+    "teks": "Mont Saint-Michel — biara di puncak pulau berbatu lepas pantai Normandia, Prancis, dikelilingi air pasang yang bisa naik drastis. Tempat wisata terkenal di kota Mont Saint-Michel adalah Mont Saint-Michel.",
+    "meta": {
+      "country": "Prancis",
+      "city": "Mont Saint-Michel",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "mont saint michel",
+        "prancis"
+      ]
+    }
+  },
+  {
+    "id": "wisata-alhambra",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Alhambra",
+    "tags": [
+      "alhambra",
+      "spanyol"
+    ],
+    "teks": "Alhambra di Granada, Spanyol — kompleks istana dan benteng Moor abad ke-14 dengan ukiran dan taman indah, peninggalan kejayaan Al-Andalus. Tempat wisata terkenal di kota Granada adalah Alhambra.",
+    "meta": {
+      "country": "Spanyol",
+      "city": "Granada",
+      "type": "sejarah",
+      "unesco": true,
+      "tags": [
+        "alhambra",
+        "spanyol"
+      ]
+    }
+  },
+  {
+    "id": "wisata-dubrovnik",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Kota Tua Dubrovnik",
+    "tags": [
+      "dubrovnik",
+      "kroasia"
+    ],
+    "teks": "Kota Tua Dubrovnik, Kroasia — kota bertembok abad pertengahan di tepi Laut Adriatik, dijuluki \"Mutiara Adriatik\" dan lokasi syuting Game of Thrones. Tempat wisata terkenal di kota Dubrovnik adalah Kota Tua Dubrovnik.",
+    "meta": {
+      "country": "Kroasia",
+      "city": "Dubrovnik",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "dubrovnik",
+        "kroasia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-matterhorn",
+    "kategori": "wisata",
+    "wilayah": "eropa",
+    "nama": "Matterhorn",
+    "tags": [
+      "matterhorn",
+      "swiss"
+    ],
+    "teks": "Matterhorn — puncak gunung ikonik berbentuk piramida di perbatasan Swiss dan Italia, salah satu gunung paling difoto di dunia. Tempat wisata terkenal di kota Zermatt adalah Matterhorn.",
+    "meta": {
+      "country": "Swiss",
+      "city": "Zermatt",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "matterhorn",
+        "swiss"
+      ]
+    }
   }
 ]

@@ -73,5 +73,126 @@
       "country": "Inggris",
       "type": "pakaian"
     }
+  },
+  {
+    "id": "seni-budaya-fado",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Fado",
+    "tags": [
+      "fado",
+      "portugal"
+    ],
+    "teks": "Fado — genre musik melankolis khas Portugal yang mengekspresikan \"saudade\" (kerinduan), diakui UNESCO sebagai Warisan Budaya Takbenda pada 2011.",
+    "meta": {
+      "country": "Portugal",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-san-fermin",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Festival San Fermin",
+    "tags": [
+      "san fermin",
+      "lari banteng",
+      "spanyol"
+    ],
+    "teks": "Festival San Fermin di Pamplona, Spanyol, terkenal dengan tradisi \"encierro\" (lari bersama banteng) setiap Juli, diikuti ribuan peserta dari seluruh dunia.",
+    "meta": {
+      "country": "Spanyol",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-midsummer",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Perayaan Midsummer",
+    "tags": [
+      "midsummer",
+      "swedia"
+    ],
+    "teks": "Midsummer — perayaan titik balik matahari musim panas di Swedia dan negara Nordik lain, diisi tari mengelilingi tiang bunga (majstang) dan pesta rakyat.",
+    "meta": {
+      "country": "Swedia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-polka",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Polka",
+    "tags": [
+      "polka",
+      "ceko"
+    ],
+    "teks": "Polka — tarian dan musik berirama cepat dua ketuk yang berasal dari Bohemia (Ceko) abad ke-19, kemudian populer ke seluruh Eropa.",
+    "meta": {
+      "country": "Ceko",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-bagpipe",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Bagpipe",
+    "tags": [
+      "bagpipe",
+      "skotlandia"
+    ],
+    "teks": "Bagpipe — alat musik tiup dengan kantung udara khas Skotlandia, identik dengan parade militer dan acara kebudayaan Highland Games.",
+    "meta": {
+      "country": "Skotlandia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-matryoshka",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Matryoshka",
+    "tags": [
+      "matryoshka",
+      "rusia"
+    ],
+    "teks": "Matryoshka — boneka kayu bersarang khas Rusia, satu boneka besar berisi boneka lebih kecil di dalamnya, menjadi simbol kerajinan tangan Rusia sejak akhir abad ke-19.",
+    "meta": {
+      "country": "Rusia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-tulip-festival",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Festival Tulip Belanda",
+    "tags": [
+      "tulip",
+      "belanda"
+    ],
+    "teks": "Festival Tulip di Keukenhof, Belanda, memamerkan jutaan bunga tulip setiap musim semi, menjadikan Belanda identik dengan bunga tulip sedunia.",
+    "meta": {
+      "country": "Belanda",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-balalaika",
+    "kategori": "seni-budaya",
+    "wilayah": "eropa",
+    "nama": "Balalaika",
+    "tags": [
+      "balalaika",
+      "rusia"
+    ],
+    "teks": "Balalaika — alat musik petik berbadan segitiga khas Rusia dengan tiga senar, sering dimainkan dalam musik rakyat dan orkestra tradisional.",
+    "meta": {
+      "country": "Rusia",
+      "type": "budaya"
+    }
   }
 ]

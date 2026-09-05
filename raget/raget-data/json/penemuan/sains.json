@@ -94,5 +94,181 @@
         "Listrik menjadi kebutuhan dasar masyarakat modern."
       ]
     }
+  },
+  {
+    "id": "penemuan-hukum-termodinamika",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Hukum Termodinamika",
+    "tags": [
+      "termodinamika",
+      "clausius"
+    ],
+    "teks": "Hukum termodinamika dirumuskan bertahap oleh Rudolf Clausius dan William Thomson (Lord Kelvin) pada pertengahan abad ke-19, menjelaskan kekekalan energi dan entropi. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Rudolf Clausius & Lord Kelvin",
+      "year": "1850",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-tabel-periodik",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Tabel Periodik",
+    "tags": [
+      "tabel periodik",
+      "mendeleev"
+    ],
+    "teks": "Tabel periodik unsur disusun oleh Dmitri Mendeleev pada 1869, mengelompokkan unsur kimia berdasarkan nomor atom dan sifat berulang. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Dmitri Mendeleev",
+      "year": "1869",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-teori-evolusi",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Teori Evolusi",
+    "tags": [
+      "evolusi",
+      "darwin"
+    ],
+    "teks": "Teori evolusi melalui seleksi alam dipublikasikan Charles Darwin dalam buku \"On the Origin of Species\" pada 1859. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Charles Darwin",
+      "year": "1859",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-elektron",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Elektron",
+    "tags": [
+      "elektron",
+      "thomson"
+    ],
+    "teks": "Elektron ditemukan oleh J.J. Thomson pada 1897 melalui eksperimen sinar katode, membuka bidang fisika partikel. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "J.J. Thomson",
+      "year": "1897",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-neutron",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Neutron",
+    "tags": [
+      "neutron",
+      "chadwick"
+    ],
+    "teks": "Neutron ditemukan oleh James Chadwick pada 1932, melengkapi pemahaman struktur inti atom bersama proton dan elektron. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "James Chadwick",
+      "year": "1932",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-hukum-boyle",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Hukum Boyle",
+    "tags": [
+      "hukum boyle",
+      "gas"
+    ],
+    "teks": "Hukum Boyle dirumuskan Robert Boyle pada 1662, menjelaskan hubungan berbanding terbalik antara tekanan dan volume gas pada suhu tetap. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Robert Boyle",
+      "year": "1662",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-teori-big-bang",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Teori Big Bang",
+    "tags": [
+      "big bang",
+      "alam semesta"
+    ],
+    "teks": "Teori Big Bang tentang asal mula alam semesta pertama kali diusulkan oleh Georges Lemaitre pada 1927, kemudian diperkuat data pergeseran merah galaksi oleh Edwin Hubble. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Georges Lemaitre",
+      "year": "1927",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-lempeng-tektonik",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Teori Lempeng Tektonik",
+    "tags": [
+      "lempeng tektonik",
+      "wegener"
+    ],
+    "teks": "Teori pergeseran benua (cikal bakal lempeng tektonik) diusulkan Alfred Wegener pada 1912, menjelaskan pergerakan benua-benua Bumi dari waktu ke waktu. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Alfred Wegener",
+      "year": "1912",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-hukum-kekekalan-energi",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Hukum Kekekalan Energi",
+    "tags": [
+      "kekekalan energi",
+      "joule"
+    ],
+    "teks": "Hukum kekekalan energi dirumuskan James Prescott Joule pada 1843 lewat eksperimen kesetaraan kerja mekanik dan panas. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "James Prescott Joule",
+      "year": "1843",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-model-atom-bohr",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Model Atom Bohr",
+    "tags": [
+      "model atom",
+      "niels bohr"
+    ],
+    "teks": "Model atom Bohr diperkenalkan Niels Bohr pada 1913, menjelaskan elektron mengorbit inti atom pada tingkat energi tertentu. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Niels Bohr",
+      "year": "1913",
+      "field": "sains"
+    }
+  },
+  {
+    "id": "penemuan-prinsip-ketidakpastian",
+    "kategori": "penemuan",
+    "wilayah": "sains",
+    "nama": "Prinsip Ketidakpastian Heisenberg",
+    "tags": [
+      "ketidakpastian",
+      "heisenberg"
+    ],
+    "teks": "Prinsip ketidakpastian dirumuskan Werner Heisenberg pada 1927, menyatakan posisi dan momentum partikel tidak bisa diketahui presisi bersamaan. Termasuk penemuan bidang sains.",
+    "meta": {
+      "inventor": "Werner Heisenberg",
+      "year": "1927",
+      "field": "sains"
+    }
   }
 ]

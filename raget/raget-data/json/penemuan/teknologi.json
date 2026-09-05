@@ -163,5 +163,213 @@
         "Saat ini komputer ada di hampir setiap perangkat digital."
       ]
     }
+  },
+  {
+    "id": "penemuan-transistor",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Transistor",
+    "tags": [
+      "transistor",
+      "bell labs"
+    ],
+    "teks": "Transistor ditemukan John Bardeen, Walter Brattain, dan William Shockley di Bell Labs pada 1947, menjadi dasar elektronik modern menggantikan tabung vakum. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Bardeen, Brattain & Shockley",
+      "year": "1947",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-laser",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Laser",
+    "tags": [
+      "laser",
+      "theodore maiman"
+    ],
+    "teks": "Laser pertama berhasil dibuat Theodore Maiman pada 1960, memanfaatkan prinsip emisi terstimulasi cahaya (LASER). Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Theodore Maiman",
+      "year": "1960",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-gps",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "GPS",
+    "tags": [
+      "gps",
+      "navigasi satelit"
+    ],
+    "teks": "Sistem GPS dikembangkan Departemen Pertahanan Amerika Serikat mulai 1970-an dan dibuka untuk sipil pada 1995, memungkinkan navigasi posisi lewat satelit. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "US Department of Defense",
+      "year": "1995",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-wifi",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "WiFi",
+    "tags": [
+      "wifi",
+      "jaringan nirkabel"
+    ],
+    "teks": "Teknologi WiFi berakar dari riset CSIRO Australia yang dipimpin John O'Sullivan pada awal 1990-an untuk transmisi data nirkabel bebas kabel. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "John O'Sullivan / CSIRO",
+      "year": "1992",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-mesin-fotokopi",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Mesin Fotokopi",
+    "tags": [
+      "fotokopi",
+      "xerografi"
+    ],
+    "teks": "Proses xerografi (dasar mesin fotokopi) ditemukan Chester Carlson pada 1938, kemudian dikomersialkan oleh Xerox. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Chester Carlson",
+      "year": "1938",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-kamera-digital",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Kamera Digital",
+    "tags": [
+      "kamera digital",
+      "kodak"
+    ],
+    "teks": "Kamera digital pertama dirancang Steven Sasson di Kodak pada 1975, menyimpan gambar dalam format elektronik menggantikan film. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Steven Sasson",
+      "year": "1975",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-baterai",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Baterai",
+    "tags": [
+      "baterai",
+      "volta"
+    ],
+    "teks": "Baterai pertama (tumpukan volta) ditemukan Alessandro Volta pada 1800, menjadi sumber listrik portabel pertama di dunia. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Alessandro Volta",
+      "year": "1800",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-panel-surya",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Panel Surya",
+    "tags": [
+      "panel surya",
+      "fotovoltaik"
+    ],
+    "teks": "Sel surya fotovoltaik praktis pertama dikembangkan Daryl Chapin, Calvin Fuller, dan Gerald Pearson di Bell Labs pada 1954. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Chapin, Fuller & Pearson",
+      "year": "1954",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-mesin-uap-modern",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Mesin Uap Modern",
+    "tags": [
+      "mesin uap",
+      "james watt"
+    ],
+    "teks": "Mesin uap modern yang efisien dipatenkan James Watt pada 1769, menjadi motor utama Revolusi Industri. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "James Watt",
+      "year": "1769",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-radar",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Radar",
+    "tags": [
+      "radar",
+      "watson-watt"
+    ],
+    "teks": "Radar dikembangkan Robert Watson-Watt pada 1935 untuk mendeteksi pesawat lewat gelombang radio, penting saat Perang Dunia II. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Robert Watson-Watt",
+      "year": "1935",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-mesin-jahit",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Mesin Jahit",
+    "tags": [
+      "mesin jahit",
+      "elias howe"
+    ],
+    "teks": "Mesin jahit dengan jahitan kunci dipatenkan Elias Howe pada 1846, kemudian disempurnakan Isaac Singer untuk produksi massal. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Elias Howe",
+      "year": "1846",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-telegraf",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Telegraf",
+    "tags": [
+      "telegraf",
+      "morse"
+    ],
+    "teks": "Telegraf listrik praktis dan kode Morse dikembangkan Samuel Morse pada 1837, memungkinkan komunikasi jarak jauh lewat sinyal listrik. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Samuel Morse",
+      "year": "1837",
+      "field": "teknologi"
+    }
+  },
+  {
+    "id": "penemuan-pesawat-jet",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Pesawat Jet",
+    "tags": [
+      "pesawat jet",
+      "mesin jet"
+    ],
+    "teks": "Mesin jet dikembangkan terpisah oleh Frank Whittle (Inggris) dan Hans von Ohain (Jerman) pada akhir 1930-an, melahirkan penerbangan bertenaga jet. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Frank Whittle & Hans von Ohain",
+      "year": "1939",
+      "field": "teknologi"
+    }
   }
 ]

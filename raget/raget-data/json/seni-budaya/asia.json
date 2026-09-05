@@ -88,5 +88,125 @@
       "country": "Korea Selatan",
       "type": "pakaian"
     }
+  },
+  {
+    "id": "seni-budaya-origami",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Origami",
+    "tags": [
+      "origami",
+      "jepang"
+    ],
+    "teks": "Origami — seni melipat kertas tradisional Jepang tanpa gunting atau lem, membentuk figur seperti burung bangau (tsuru) yang melambangkan harapan dan perdamaian.",
+    "meta": {
+      "country": "Jepang",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-batik",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Batik",
+    "tags": [
+      "batik",
+      "indonesia"
+    ],
+    "teks": "Batik — teknik pewarnaan kain khas Indonesia menggunakan malam (lilin) untuk membentuk motif, diakui UNESCO sebagai Warisan Budaya Takbenda pada 2009.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-tari-kathak",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Tari Kathak",
+    "tags": [
+      "tari kathak",
+      "india"
+    ],
+    "teks": "Tari Kathak — salah satu dari delapan tarian klasik India, berasal dari Uttar Pradesh, dikenal dengan gerak kaki cepat dan putaran (chakkar) mengikuti irama tabla.",
+    "meta": {
+      "country": "India",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-upacara-teh-jepang",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Upacara Minum Teh Jepang",
+    "tags": [
+      "chanoyu",
+      "jepang"
+    ],
+    "teks": "Chanoyu (upacara minum teh Jepang) — ritual penyajian teh matcha yang menekankan ketenangan, penghormatan, dan kesederhanaan, dipengaruhi filosofi Zen.",
+    "meta": {
+      "country": "Jepang",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-angklung",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Angklung",
+    "tags": [
+      "angklung",
+      "indonesia"
+    ],
+    "teks": "Angklung — alat musik bambu tradisional Sunda, Indonesia, dimainkan dengan cara digoyangkan; diakui UNESCO sebagai Warisan Budaya Takbenda pada 2010.",
+    "meta": {
+      "country": "Indonesia",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-pansori",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Pansori",
+    "tags": [
+      "pansori",
+      "korea"
+    ],
+    "teks": "Pansori — seni bertutur dan bernyanyi tradisional Korea yang dibawakan seorang penyanyi (sorikkun) diiringi satu pemain drum (gosu), mengisahkan cerita panjang.",
+    "meta": {
+      "country": "Korea Selatan",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-diwali",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Diwali",
+    "tags": [
+      "diwali",
+      "india"
+    ],
+    "teks": "Diwali (Festival Cahaya) — perayaan besar umat Hindu di India yang menyalakan lampu diya, melambangkan kemenangan cahaya atas kegelapan dan kebaikan atas kejahatan.",
+    "meta": {
+      "country": "India",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-ao-dai",
+    "kategori": "seni-budaya",
+    "wilayah": "asia",
+    "nama": "Ao Dai",
+    "tags": [
+      "ao dai",
+      "vietnam"
+    ],
+    "teks": "Ao Dai — busana tradisional Vietnam berupa tunik panjang berbelah samping dipadu celana panjang, sering dipakai pada acara resmi dan Tet (Tahun Baru Vietnam).",
+    "meta": {
+      "country": "Vietnam",
+      "type": "budaya"
+    }
   }
 ]

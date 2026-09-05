@@ -208,5 +208,219 @@
         "panama"
       ]
     }
+  },
+  {
+    "id": "wisata-yellowstone",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Taman Nasional Yellowstone",
+    "tags": [
+      "yellowstone",
+      "amerika serikat"
+    ],
+    "teks": "Taman Nasional Yellowstone — taman nasional pertama di dunia (1872) di Amerika Serikat, terkenal dengan geiser Old Faithful dan mata air panas warna-warni. Tempat wisata terkenal di kota Yellowstone adalah Taman Nasional Yellowstone.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "city": "Yellowstone",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "yellowstone",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "wisata-salar-de-uyuni",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Salar de Uyuni",
+    "tags": [
+      "salar de uyuni",
+      "bolivia"
+    ],
+    "teks": "Salar de Uyuni — gurun garam terbesar di dunia di Bolivia, permukaannya seperti cermin raksasa saat musim hujan, jadi favorit fotografi. Tempat wisata terkenal di kota Uyuni adalah Salar de Uyuni.",
+    "meta": {
+      "country": "Bolivia",
+      "city": "Uyuni",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "salar de uyuni",
+        "bolivia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-iguazu",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Air Terjun Iguazu",
+    "tags": [
+      "iguazu",
+      "argentina",
+      "brasil"
+    ],
+    "teks": "Air Terjun Iguazu — rangkaian sekitar 275 air terjun di perbatasan Argentina dan Brasil, salah satu air terjun terbesar dan terindah di dunia. Tempat wisata terkenal di kota Puerto Iguazu adalah Air Terjun Iguazu.",
+    "meta": {
+      "country": "Argentina",
+      "city": "Puerto Iguazu",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "iguazu",
+        "argentina",
+        "brasil"
+      ]
+    }
+  },
+  {
+    "id": "wisata-antelope-canyon",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Antelope Canyon",
+    "tags": [
+      "antelope canyon",
+      "amerika serikat"
+    ],
+    "teks": "Antelope Canyon — ngarai sempit berbatu pasir di Arizona, Amerika Serikat, terkenal dengan dinding melengkung berwarna oranye kemerahan akibat erosi air.",
+    "meta": {
+      "country": "Amerika Serikat",
+      "city": "Page",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "antelope canyon",
+        "amerika serikat"
+      ]
+    }
+  },
+  {
+    "id": "wisata-banff",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Taman Nasional Banff",
+    "tags": [
+      "banff",
+      "kanada"
+    ],
+    "teks": "Taman Nasional Banff — taman nasional tertua di Kanada, terkenal dengan danau biru toska Lake Louise dan pegunungan Rocky yang megah. Tempat wisata terkenal di kota Banff adalah Taman Nasional Banff.",
+    "meta": {
+      "country": "Kanada",
+      "city": "Banff",
+      "type": "alam",
+      "unesco": false,
+      "tags": [
+        "banff",
+        "kanada"
+      ]
+    }
+  },
+  {
+    "id": "wisata-moai-easter-island",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Patung Moai Pulau Paskah",
+    "tags": [
+      "moai",
+      "pulau paskah",
+      "chili"
+    ],
+    "teks": "Patung Moai — ratusan patung batu raksasa peninggalan suku Rapa Nui di Pulau Paskah, Chili, menjadi salah satu misteri arkeologi paling terkenal di dunia. Tempat wisata terkenal di kota Pulau Paskah adalah Patung Moai.",
+    "meta": {
+      "country": "Chili",
+      "city": "Pulau Paskah",
+      "type": "sejarah",
+      "unesco": true,
+      "tags": [
+        "moai",
+        "pulau paskah",
+        "chili"
+      ]
+    }
+  },
+  {
+    "id": "wisata-cartagena",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Kota Tua Cartagena",
+    "tags": [
+      "cartagena",
+      "kolombia"
+    ],
+    "teks": "Kota Tua Cartagena — kota bertembok kolonial di Kolombia dengan bangunan warna-warni dan benteng bersejarah di tepi Laut Karibia. Tempat wisata terkenal di kota Cartagena adalah Kota Tua Cartagena.",
+    "meta": {
+      "country": "Kolombia",
+      "city": "Cartagena",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "cartagena",
+        "kolombia"
+      ]
+    }
+  },
+  {
+    "id": "wisata-havana-lama",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Kota Tua Havana",
+    "tags": [
+      "havana",
+      "kuba"
+    ],
+    "teks": "Kota Tua Havana — pusat kota bersejarah Kuba dengan mobil klasik era 1950-an, bangunan kolonial Spanyol, dan musik salsa yang mengalun di jalanan. Tempat wisata terkenal di kota Havana adalah Kota Tua Havana.",
+    "meta": {
+      "country": "Kuba",
+      "city": "Havana",
+      "type": "budaya",
+      "unesco": true,
+      "tags": [
+        "havana",
+        "kuba"
+      ]
+    }
+  },
+  {
+    "id": "wisata-air-terjun-angel",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "Air Terjun Angel",
+    "tags": [
+      "air terjun angel",
+      "venezuela"
+    ],
+    "teks": "Air Terjun Angel di Venezuela — air terjun tertinggi di dunia dengan ketinggian sekitar 979 meter, terletak di Taman Nasional Canaima. Tempat wisata terkenal di kota Canaima adalah Air Terjun Angel.",
+    "meta": {
+      "country": "Venezuela",
+      "city": "Canaima",
+      "type": "alam",
+      "unesco": true,
+      "tags": [
+        "air terjun angel",
+        "venezuela"
+      ]
+    }
+  },
+  {
+    "id": "wisata-cn-tower",
+    "kategori": "wisata",
+    "wilayah": "amerika",
+    "nama": "CN Tower",
+    "tags": [
+      "cn tower",
+      "kanada"
+    ],
+    "teks": "CN Tower di Toronto, Kanada — menara komunikasi setinggi 553 meter dengan lantai kaca transparan, salah satu bangunan tertinggi di Amerika Utara. Tempat wisata terkenal di kota Toronto adalah CN Tower.",
+    "meta": {
+      "country": "Kanada",
+      "city": "Toronto",
+      "type": "modern",
+      "unesco": false,
+      "tags": [
+        "cn tower",
+        "kanada"
+      ]
+    }
   }
 ]

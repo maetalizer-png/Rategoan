@@ -73,5 +73,127 @@
       "country": "Mali",
       "type": "musik"
     }
+  },
+  {
+    "id": "seni-budaya-griot",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Griot",
+    "tags": [
+      "griot",
+      "mali"
+    ],
+    "teks": "Griot — tradisi pendongeng dan penyanyi sejarah lisan di Afrika Barat (Mali, Senegal, Gambia), berperan menjaga silsilah dan sejarah keluarga serta kerajaan turun-temurun.",
+    "meta": {
+      "country": "Mali",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-adumu",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Tari Adumu",
+    "tags": [
+      "adumu",
+      "tari lompat",
+      "maasai"
+    ],
+    "teks": "Adumu (tari lompat) — tarian tradisional suku Maasai di Kenya dan Tanzania di mana pemuda melompat setinggi mungkin sebagai simbol kekuatan dan kedewasaan.",
+    "meta": {
+      "country": "Kenya",
+      "type": "tari"
+    }
+  },
+  {
+    "id": "seni-budaya-kente",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Kain Kente",
+    "tags": [
+      "kente",
+      "ghana"
+    ],
+    "teks": "Kain Kente — tenunan tradisional suku Ashanti di Ghana dengan pola warna-warni penuh makna simbolis, dipakai pada acara-acara penting dan seremonial.",
+    "meta": {
+      "country": "Ghana",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-rai",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Musik Rai",
+    "tags": [
+      "rai",
+      "aljazair"
+    ],
+    "teks": "Musik Rai — genre musik rakyat asal Aljazair yang berkembang dari kota Oran, memadukan lirik tentang cinta dan kehidupan sosial dengan melodi khas Afrika Utara.",
+    "meta": {
+      "country": "Aljazair",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-vodun",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Vodun",
+    "tags": [
+      "vodun",
+      "benin"
+    ],
+    "teks": "Vodun — sistem kepercayaan dan tradisi spiritual asli Benin, Afrika Barat, yang menjadi akar budaya voodoo yang menyebar ke Karibia lewat perdagangan budak.",
+    "meta": {
+      "country": "Benin",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-zulu-beadwork",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Manik-Manik Zulu",
+    "tags": [
+      "manik-manik",
+      "zulu",
+      "afrika selatan"
+    ],
+    "teks": "Kerajinan manik-manik (beadwork) suku Zulu di Afrika Selatan menggunakan pola dan warna tertentu untuk menyampaikan pesan sosial, status, dan perasaan pemakainya.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-nollywood",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Nollywood",
+    "tags": [
+      "nollywood",
+      "nigeria"
+    ],
+    "teks": "Nollywood — industri film Nigeria yang menjadi salah satu produsen film terbesar di dunia dari segi jumlah produksi, berkembang pesat sejak 1990-an.",
+    "meta": {
+      "country": "Nigeria",
+      "type": "budaya"
+    }
+  },
+  {
+    "id": "seni-budaya-ubuntu",
+    "kategori": "seni-budaya",
+    "wilayah": "afrika",
+    "nama": "Filosofi Ubuntu",
+    "tags": [
+      "ubuntu",
+      "afrika selatan"
+    ],
+    "teks": "Ubuntu — filosofi hidup dari Afrika Selatan yang bermakna \"aku ada karena kita ada\", menekankan kebersamaan, kemanusiaan, dan saling peduli antarindividu.",
+    "meta": {
+      "country": "Afrika Selatan",
+      "type": "budaya"
+    }
   }
 ]

@@ -1963,5 +1963,200 @@
         "perangko"
       ]
     }
+  },
+  {
+    "id": "negara-vatikan",
+    "kategori": "negara",
+    "wilayah": "eropan-selatan",
+    "nama": "Vatikan",
+    "tags": [
+      "Southern Europe"
+    ],
+    "teks": "Vatikan - Negara kota terkecil di dunia, dikelilingi sepenuhnya oleh kota Roma, Italia. Ibu kota: Vatikan. Populasi: sekitar 825 jiwa. Mata uang: Euro (EUR). Bahasa resmi: Italia dan Latin. Sistem pemerintahan: Monarki absolut teokratis, dipimpin Paus sebagai kepala negara. Merdeka lewat Perjanjian Lateran 1929. Pusat Gereja Katolik Roma dan lokasi Basilika Santo Petrus serta Kapel Sistina. Negara dengan luas wilayah dan jumlah penduduk terkecil di dunia. Nama resmi: Negara Kota Vatikan. Vatikan: mata uang Euro (EUR).",
+    "meta": {
+      "officialName": "Negara Kota Vatikan",
+      "shortName": "VAT",
+      "capital": "Vatikan",
+      "capitalCoordinates": {
+        "lat": 41.9029,
+        "lng": 12.4534
+      },
+      "largestCity": "Vatikan",
+      "demonym": "Vatikan",
+      "subregion": "Southern Europe",
+      "area": 0.49,
+      "areaRank": 195,
+      "coastline": 0,
+      "highestPoint": "Taman Vatikan",
+      "highestElevation": 75,
+      "lowestPoint": "Lapangan Santo Petrus",
+      "lowestElevation": 19,
+      "landBorders": [
+        "Italia"
+      ],
+      "coordinates": {
+        "lat": 41.9,
+        "lng": 12.45
+      },
+      "timezone": [
+        "Waktu Eropa Tengah"
+      ],
+      "utcOffset": [
+        "+1"
+      ],
+      "population": 825,
+      "populationRank": 195,
+      "populationDensity": 1683,
+      "populationGrowth": 0,
+      "medianAge": 55,
+      "lifeExpectancy": 83,
+      "fertilityRate": 0,
+      "urbanization": 100,
+      "ethnicGroups": [
+        {
+          "name": "Italia",
+          "percentage": 60
+        },
+        {
+          "name": "Campuran internasional",
+          "percentage": 40
+        }
+      ],
+      "religions": [
+        {
+          "name": "Kristen Katolik",
+          "percentage": 100
+        }
+      ],
+      "languages": [
+        {
+          "name": "Italia",
+          "percentage": 100,
+          "official": true
+        },
+        {
+          "name": "Latin",
+          "percentage": 100,
+          "official": true
+        }
+      ],
+      "literacyRate": 100,
+      "governmentType": "Monarki Absolut Teokratis",
+      "independenceDay": "1929-02-11",
+      "nationalHoliday": "11 Februari",
+      "legalSystem": "Civil Law berbasis Hukum Kanon",
+      "constitution": "2000",
+      "administrativeDivisions": 0,
+      "memberships": [
+        "Peninjau PBB",
+        "Uni Pos Sedunia"
+      ],
+      "giniCoefficient": null,
+      "hdi": null,
+      "hdiRank": null,
+      "corruptionIndex": null,
+      "currency": "Euro",
+      "currencyCode": "EUR",
+      "gdp": null,
+      "gdpPerCapita": null,
+      "gdpPpp": null,
+      "gdpGrowth": null,
+      "inflation": null,
+      "unemployment": 0,
+      "povertyRate": 0,
+      "mainIndustries": [
+        "Pariwisata religi",
+        "Penerbitan",
+        "Museum"
+      ],
+      "exports": [
+        {
+          "item": "Barang religi dan penerbitan",
+          "value": null
+        }
+      ],
+      "imports": [
+        {
+          "item": "Makanan",
+          "value": null
+        },
+        {
+          "item": "Energi",
+          "value": null
+        }
+      ],
+      "tradeBalance": null,
+      "naturalResources": [],
+      "economicRanking": null,
+      "internetPenetration": 100,
+      "mobilePenetration": 100,
+      "electricityAccess": 100,
+      "roadLength": 3,
+      "railwayLength": 0.3,
+      "airports": 0,
+      "seaports": 0,
+      "healthcareAccess": 100,
+      "educationIndex": null,
+      "nationalMotto": null,
+      "nationalAnthem": "Inno e Marcia Pontificale",
+      "nationalAnimal": null,
+      "nationalFlower": null,
+      "nationalCuisine": [
+        "Masakan Italia"
+      ],
+      "culturalHeritage": [
+        "Basilika Santo Petrus",
+        "Kapel Sistina",
+        "Museum Vatikan",
+        "Lapangan Santo Petrus"
+      ],
+      "publicHolidays": [
+        "Hari Peringatan Pemilihan Paus",
+        "Paskah",
+        "Natal",
+        "Tahun Baru"
+      ],
+      "socialRanking": null,
+      "climate": "Mediterania",
+      "averageTemperature": 16,
+      "averageRainfall": 800,
+      "forestArea": 0,
+      "protectedAreas": 0,
+      "biodiversityRank": null,
+      "carbonEmissions": null,
+      "environmentalIndex": null,
+      "riskScore": 5,
+      "politicalStability": 90,
+      "crimeIndex": 2,
+      "militarySpending": 0,
+      "peaceIndex": 5,
+      "terrorismIndex": 1,
+      "refugeePopulation": 0,
+      "opportunityScore": null,
+      "easeOfDoingBusiness": null,
+      "innovationIndex": null,
+      "startupEcosystem": null,
+      "investmentScore": null,
+      "talentPool": null,
+      "marketSize": null,
+      "infrastructureQuality": 85,
+      "internetSpeed": null,
+      "digitalAdoption": null,
+      "techEcosystem": null,
+      "aiReadiness": null,
+      "startups": 0,
+      "phoneCode": "+379",
+      "tld": ".va",
+      "isoCode": "VAT",
+      "isoCode2": "VA",
+      "drivingSide": "right",
+      "tags": [
+        "negara",
+        "eropan-selatan",
+        "mikro",
+        "agama",
+        "unesco"
+      ]
+    }
   }
 ]
