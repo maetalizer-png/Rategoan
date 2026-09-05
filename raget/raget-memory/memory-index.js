@@ -6,7 +6,7 @@ import { retrieval } from '../raget-retrieval/retrieve.js';
 let knowledgeCache = null;
 let factoidCache = null;
 
-const UMUM_FILES = ['umum.json', 'raget-diri.json', 'teknik-ai.json', 'produk-bisnis.json', 'riwayat-proyek.json', 'resep.json', 'produktivitas.json', 'teknologi-umum.json', 'kesehatan-dasar.json', 'keuangan-dasar.json', 'kamus-indonesia.json', 'sektor-bisnis-indonesia.json'];
+const UMUM_FILES = ['umum.json', 'raget-diri.json', 'teknik-ai.json', 'produk-bisnis.json', 'riwayat-proyek.json', 'resep.json', 'produktivitas.json', 'teknologi-umum.json', 'kesehatan-dasar.json', 'keuangan-dasar.json', 'kamus-indonesia.json', 'sektor-bisnis-indonesia.json', 'pengetahuan-umum-tambahan.json', 'sektor-layanan-bisnis.json', 'obrolan-sehari-hari.json'];
 
 async function loadKnowledge() {
   if (knowledgeCache) return knowledgeCache;
