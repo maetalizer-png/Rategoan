@@ -241,19 +241,19 @@ const MATA_PELAJARAN_MAP = {
   'pendidikan kewarganegaraan': 'ppkn',
   'bahasa indonesia': 'bahasa-indonesia',
   'bahasa inggris': 'bahasa-inggris',
-  'sejarah sekolah': 'sejarah',
-  'ekonomi sekolah': 'ekonomi',
+  'sejarah sekolah': 'sejarah-sekolah',
+  'ekonomi sekolah': 'ekonomi-sekolah',
 };
 
 async function tryMataPelajaran(text) {
   const m = text.match(/^(biologi|matematika|fisika|kimia|geografi|ppkn|pendidikan\s+kewarganegaraan|bahasa\s+indonesia|bahasa\s+inggris|sejarah\s+sekolah|ekonomi\s+sekolah)\s+(.+)$/i);
   if (!m) return null;
   const subjectKey = m[1].toLowerCase().replace(/\s+/g, ' ').trim();
-  const regionId = MATA_PELAJARAN_MAP[subjectKey];
-  if (!regionId) return null;
+  const group = MATA_PELAJARAN_MAP[subjectKey];
+  if (!group) return null;
   const entity = bridgeResolve.cleanEntity(m[2]);
   if (!entity) return null;
-  const item = await bridgeResolve.findBestInRegion('mata-pelajaran', regionId, entity, (it) => [it.metadata.topic, ...(it.metadata.tags || [])]);
+  const item = await bridgeResolve.findBestInList(group, entity, (it) => [it.metadata.topic, ...(it.metadata.tags || [])]);
   if (!item) return null;
   return item.text;
 }

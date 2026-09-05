@@ -1,85 +1,5 @@
 [
   {
-    "id": "mapel-kimia-struktur-atom",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Struktur Atom",
-    "tags": [
-      "atom",
-      "proton",
-      "elektron",
-      "neutron"
-    ],
-    "teks": "Atom — partikel terkecil unsur yang masih memiliki sifat unsur tersebut, tersusun dari proton (bermuatan positif) dan neutron (netral) di inti, serta elektron (bermuatan negatif) yang mengelilingi inti.",
-    "meta": {
-      "field": "kimia",
-      "topic": "Struktur Atom",
-      "tags": [
-        "atom",
-        "proton",
-        "elektron",
-        "neutron"
-      ]
-    }
-  },
-  {
-    "id": "mapel-kimia-tabel-periodik-unsur",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Tabel Periodik Unsur",
-    "tags": [
-      "tabel periodik",
-      "golongan",
-      "periode"
-    ],
-    "teks": "Tabel periodik — susunan unsur kimia berdasarkan kenaikan nomor atom (jumlah proton); kolom vertikal disebut golongan (unsur segolongan punya sifat kimia mirip), baris horizontal disebut periode.",
-    "meta": {
-      "field": "kimia",
-      "topic": "Tabel Periodik Unsur",
-      "tags": [
-        "tabel periodik",
-        "golongan",
-        "periode"
-      ]
-    }
-  },
-  {
-    "id": "mapel-kimia-ikatan-ion",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Ikatan Ion",
-    "tags": [
-      "ikatan ion",
-      "nacl"
-    ],
-    "teks": "Ikatan ion — ikatan kimia yang terbentuk dari transfer elektron antara atom logam (melepas elektron) dan nonlogam (menerima elektron), contohnya NaCl (natrium klorida/garam dapur).",
-    "meta": {
-      "field": "kimia",
-      "topic": "Ikatan Ion",
-      "tags": [
-        "ikatan ion",
-        "nacl"
-      ]
-    }
-  },
-  {
-    "id": "mapel-kimia-ikatan-kovalen",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Ikatan Kovalen",
-    "tags": [
-      "ikatan kovalen"
-    ],
-    "teks": "Ikatan kovalen — ikatan kimia yang terbentuk dari pemakaian bersama pasangan elektron antara dua atom nonlogam, bisa berupa ikatan tunggal, rangkap dua, atau rangkap tiga.",
-    "meta": {
-      "field": "kimia",
-      "topic": "Ikatan Kovalen",
-      "tags": [
-        "ikatan kovalen"
-      ]
-    }
-  },
-  {
     "id": "mapel-kimia-ciri-ciri-reaksi-kimia",
     "kategori": "mata-pelajaran",
     "wilayah": "kimia",
@@ -93,7 +13,8 @@
       "topic": "Ciri-Ciri Reaksi Kimia",
       "tags": [
         "reaksi kimia"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -112,7 +33,8 @@
       "tags": [
         "hukum lavoisier",
         "kekekalan massa"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -131,7 +53,8 @@
       "tags": [
         "asam",
         "ph"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -150,7 +73,8 @@
       "tags": [
         "basa",
         "ph"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -169,7 +93,8 @@
       "tags": [
         "garam",
         "netralisasi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -188,7 +113,8 @@
       "tags": [
         "ph",
         "skala keasaman"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -209,7 +135,8 @@
         "larutan",
         "pelarut",
         "zat terlarut"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -229,7 +156,8 @@
         "molaritas",
         "konsentrasi"
       ],
-      "rumus": "M = mol/liter"
+      "rumus": "M = mol/liter",
+      "tingkat": "sma"
     }
   },
   {
@@ -249,7 +177,8 @@
         "mol",
         "bilangan avogadro"
       ],
-      "rumus": "1 mol = 6.022 x 10^23 partikel"
+      "rumus": "1 mol = 6.022 x 10^23 partikel",
+      "tingkat": "sma"
     }
   },
   {
@@ -270,62 +199,8 @@
         "redoks",
         "oksidasi",
         "reduksi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-kimia-unsur-senyawa-dan-campuran",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Unsur, Senyawa, dan Campuran",
-    "tags": [
-      "unsur",
-      "senyawa",
-      "campuran"
-    ],
-    "teks": "Unsur adalah zat tunggal yang tidak bisa diuraikan lagi secara kimia biasa; senyawa adalah gabungan dua unsur atau lebih secara kimia dengan perbandingan tetap; campuran adalah gabungan dua zat atau lebih secara fisik tanpa reaksi kimia.",
-    "meta": {
-      "field": "kimia",
-      "topic": "Unsur, Senyawa, dan Campuran",
-      "tags": [
-        "unsur",
-        "senyawa",
-        "campuran"
-      ]
-    }
-  },
-  {
-    "id": "mapel-kimia-elektron-valensi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Elektron Valensi",
-    "tags": [
-      "elektron valensi"
-    ],
-    "teks": "Elektron valensi — elektron yang berada pada kulit terluar atom, menentukan bagaimana atom tersebut berikatan dengan atom lain dan sifat kimianya.",
-    "meta": {
-      "field": "kimia",
-      "topic": "Elektron Valensi",
-      "tags": [
-        "elektron valensi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-kimia-isotop",
-    "kategori": "mata-pelajaran",
-    "wilayah": "kimia",
-    "nama": "Isotop",
-    "tags": [
-      "isotop"
-    ],
-    "teks": "Isotop — atom-atom dari unsur yang sama (jumlah proton sama) tetapi memiliki jumlah neutron berbeda, sehingga nomor massanya berbeda, contohnya karbon-12 dan karbon-14.",
-    "meta": {
-      "field": "kimia",
-      "topic": "Isotop",
-      "tags": [
-        "isotop"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -344,7 +219,8 @@
       "tags": [
         "elektrolit",
         "nonelektrolit"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -363,7 +239,8 @@
       "tags": [
         "polimer",
         "monomer"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -386,7 +263,8 @@
         "alkana",
         "alkena",
         "alkuna"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -403,7 +281,8 @@
       "topic": "Faktor Laju Reaksi",
       "tags": [
         "laju reaksi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -422,7 +301,8 @@
       "tags": [
         "katalis",
         "energi aktivasi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -443,7 +323,8 @@
         "eksoterm",
         "endoterm",
         "termokimia"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -460,7 +341,8 @@
       "topic": "Stoikiometri",
       "tags": [
         "stoikiometri"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -479,7 +361,8 @@
       "tags": [
         "larutan penyangga",
         "buffer"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -496,26 +379,240 @@
       "topic": "Sifat Koligatif Larutan",
       "tags": [
         "sifat koligatif"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-kimia-wujud-materi",
+    "id": "mapel-kimia-elektrolisis",
     "kategori": "mata-pelajaran",
     "wilayah": "kimia",
-    "nama": "Wujud Materi",
+    "nama": "Elektrolisis",
     "tags": [
-      "wujud materi",
-      "padat cair gas"
+      "elektrolisis",
+      "reaksi redoks tak spontan"
     ],
-    "teks": "Wujud materi dibedakan menjadi padat (bentuk dan volume tetap), cair (volume tetap, bentuk menyesuaikan wadah), dan gas (bentuk dan volume menyesuaikan wadah), dipengaruhi oleh suhu dan tekanan.",
+    "teks": "Elektrolisis menggunakan arus listrik dari sumber luar untuk memaksa reaksi redoks tak spontan terjadi, misalnya penyepuhan logam dan pemurnian aluminium — kebalikan dari sel volta yang menghasilkan listrik dari reaksi spontan.",
     "meta": {
       "field": "kimia",
-      "topic": "Wujud Materi",
+      "topic": "Elektrolisis",
       "tags": [
-        "wujud materi",
-        "padat cair gas"
-      ]
+        "elektrolisis",
+        "reaksi redoks tak spontan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-golongan-alkali-dan-halogen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Unsur: Golongan Alkali dan Halogen",
+    "tags": [
+      "golongan alkali",
+      "halogen",
+      "tabel periodik"
+    ],
+    "teks": "Logam alkali (golongan IA seperti Na, K) sangat reaktif, mudah melepas satu elektron valensi membentuk ion +1; halogen (golongan VIIA seperti Cl, Br) sangat reaktif karena cenderung menangkap satu elektron membentuk ion -1.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Unsur: Golongan Alkali dan Halogen",
+      "tags": [
+        "golongan alkali",
+        "halogen",
+        "tabel periodik"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-senyawa-turunan-alkana",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Senyawa Turunan Alkana (Alkohol, Keton, Asam Karboksilat)",
+    "tags": [
+      "kimia organik",
+      "alkohol",
+      "keton"
+    ],
+    "teks": "Turunan alkana terbentuk saat atom hidrogen digantikan gugus fungsi: alkohol (-OH), keton (gugus karbonil di tengah rantai), aldehid (karbonil di ujung), dan asam karboksilat (-COOH) — masing-masing punya sifat kimia dan kegunaan berbeda.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Senyawa Turunan Alkana (Alkohol, Keton, Asam Karboksilat)",
+      "tags": [
+        "kimia organik",
+        "alkohol",
+        "keton"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-reaksi-adisi-eliminasi-substitusi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Reaksi Adisi, Eliminasi, dan Substitusi",
+    "tags": [
+      "reaksi organik",
+      "adisi",
+      "substitusi"
+    ],
+    "teks": "Reaksi adisi menambahkan atom pada ikatan rangkap (mengubahnya jadi ikatan tunggal), reaksi eliminasi melepas atom untuk membentuk ikatan rangkap, dan reaksi substitusi mengganti satu atom/gugus dengan atom/gugus lain — tiga jenis reaksi dasar kimia organik.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Reaksi Adisi, Eliminasi, dan Substitusi",
+      "tags": [
+        "reaksi organik",
+        "adisi",
+        "substitusi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-koloid",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Koloid",
+    "tags": [
+      "koloid",
+      "sistem dispersi"
+    ],
+    "teks": "Koloid adalah campuran dengan ukuran partikel terdispersi antara larutan sejati dan suspensi (1-100 nm), sehingga tidak mengendap tapi bisa menghamburkan cahaya (efek Tyndall), contohnya susu, kabut, dan cat.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Koloid",
+      "tags": [
+        "koloid",
+        "sistem dispersi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-kimia-inti-peluruhan-radioaktif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Inti: Peluruhan Radioaktif",
+    "tags": [
+      "kimia inti",
+      "radioaktivitas",
+      "peluruhan"
+    ],
+    "teks": "Peluruhan radioaktif adalah proses inti atom tak stabil memancarkan partikel (alfa, beta) atau energi (gamma) untuk mencapai kestabilan, berlangsung dengan laju konstan yang diukur lewat konsep waktu paruh (half-life).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Inti: Peluruhan Radioaktif",
+      "tags": [
+        "kimia inti",
+        "radioaktivitas",
+        "peluruhan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-kinetika-michaelis-menten",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Biokimia: Kinetika Enzim Michaelis-Menten",
+    "tags": [
+      "biokimia",
+      "enzim",
+      "kinetika michaelis-menten"
+    ],
+    "teks": "Persamaan Michaelis-Menten menggambarkan laju reaksi berkatalis enzim terhadap konsentrasi substrat, dengan Vmax (laju maksimum) dan Km (konstanta yang menunjukkan afinitas enzim-substrat) sebagai parameter kunci — dasar biokimia enzim di perkuliahan.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Biokimia: Kinetika Enzim Michaelis-Menten",
+      "tags": [
+        "biokimia",
+        "enzim",
+        "kinetika michaelis-menten"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-bilangan-kuantum",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Kuantum: Bilangan Kuantum",
+    "tags": [
+      "kimia kuantum",
+      "bilangan kuantum",
+      "model atom mekanika kuantum"
+    ],
+    "teks": "Model atom mekanika kuantum menggambarkan posisi elektron lewat empat bilangan kuantum: utama (n, tingkat energi), azimut (l, bentuk orbital), magnetik (m, orientasi orbital), dan spin (s) — menggantikan model orbit sederhana Bohr di tingkat kuliah.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Kuantum: Bilangan Kuantum",
+      "tags": [
+        "kimia kuantum",
+        "bilangan kuantum",
+        "model atom mekanika kuantum"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-spektrofotometri-uv-vis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Analitik: Spektrofotometri UV-Vis",
+    "tags": [
+      "kimia analitik lanjut",
+      "spektrofotometri"
+    ],
+    "teks": "Spektrofotometri UV-Vis mengukur seberapa banyak cahaya pada panjang gelombang tertentu diserap suatu larutan, dipakai menentukan konsentrasi zat lewat Hukum Beer-Lambert (A = ε·b·c) — teknik analitik standar di laboratorium kimia kuliah.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Analitik: Spektrofotometri UV-Vis",
+      "tags": [
+        "kimia analitik lanjut",
+        "spektrofotometri"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-persamaan-nernst",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Elektrokimia Lanjut: Persamaan Nernst",
+    "tags": [
+      "elektrokimia lanjut",
+      "persamaan nernst"
+    ],
+    "teks": "Persamaan Nernst menghitung potensial sel elektrokimia pada kondisi bukan standar, menghubungkan potensial sel dengan konsentrasi ion-ion yang terlibat dan suhu — perluasan konsep sel volta di kimia fisik/elektrokimia tingkat kuliah.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Elektrokimia Lanjut: Persamaan Nernst",
+      "tags": [
+        "elektrokimia lanjut",
+        "persamaan nernst"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-polimerisasi-adisi-kondensasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Polimer: Polimerisasi Adisi dan Kondensasi",
+    "tags": [
+      "kimia polimer",
+      "polimerisasi"
+    ],
+    "teks": "Polimerisasi adisi menggabungkan monomer berikatan rangkap tanpa melepas produk sampingan (contoh: polietilena), sedangkan polimerisasi kondensasi menggabungkan monomer sambil melepas molekul kecil seperti air (contoh: nilon, poliester) — topik kimia polimer perkuliahan.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Polimer: Polimerisasi Adisi dan Kondensasi",
+      "tags": [
+        "kimia polimer",
+        "polimerisasi"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

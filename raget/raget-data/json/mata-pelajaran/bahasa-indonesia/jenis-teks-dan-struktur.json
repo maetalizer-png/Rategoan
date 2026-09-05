@@ -1,0 +1,388 @@
+[
+  {
+    "id": "mapel-bahasa-indonesia-gagasan-pokok",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Gagasan Pokok",
+    "tags": [
+      "gagasan pokok",
+      "ide pokok",
+      "paragraf"
+    ],
+    "teks": "Gagasan pokok (ide pokok) — inti pembahasan yang menjadi dasar pengembangan sebuah paragraf, biasanya terletak pada kalimat utama di awal, akhir, atau awal-akhir paragraf.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Gagasan Pokok",
+      "tags": [
+        "gagasan pokok",
+        "ide pokok",
+        "paragraf"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kalimat-utama-dan-kalimat-penjelas",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kalimat Utama dan Kalimat Penjelas",
+    "tags": [
+      "kalimat utama",
+      "kalimat penjelas"
+    ],
+    "teks": "Kalimat utama memuat gagasan pokok paragraf, sedangkan kalimat penjelas berisi rincian, contoh, atau data yang mendukung dan memperjelas kalimat utama.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kalimat Utama dan Kalimat Penjelas",
+      "tags": [
+        "kalimat utama",
+        "kalimat penjelas"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-eksposisi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Eksposisi",
+    "tags": [
+      "teks eksposisi"
+    ],
+    "teks": "Teks eksposisi — teks yang memaparkan suatu informasi atau pengetahuan secara objektif dan singkat, jelas, padat, disertai fakta untuk memperkuat argumen.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Eksposisi",
+      "tags": [
+        "teks eksposisi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-deskripsi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Deskripsi",
+    "tags": [
+      "teks deskripsi"
+    ],
+    "teks": "Teks deskripsi — teks yang menggambarkan suatu objek, tempat, atau peristiwa secara rinci dan jelas sehingga pembaca seolah dapat melihat, mendengar, atau merasakannya sendiri.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Deskripsi",
+      "tags": [
+        "teks deskripsi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-narasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Narasi",
+    "tags": [
+      "teks narasi"
+    ],
+    "teks": "Teks narasi — teks yang menceritakan rangkaian peristiwa (fiksi maupun nonfiksi) secara kronologis, memiliki tokoh, alur, dan latar.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Narasi",
+      "tags": [
+        "teks narasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-argumentasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Argumentasi",
+    "tags": [
+      "teks argumentasi"
+    ],
+    "teks": "Teks argumentasi — teks yang mengemukakan pendapat disertai alasan dan bukti yang kuat untuk meyakinkan pembaca terhadap suatu pandangan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Argumentasi",
+      "tags": [
+        "teks argumentasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-persuasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Persuasi",
+    "tags": [
+      "teks persuasi"
+    ],
+    "teks": "Teks persuasi — teks yang bertujuan membujuk atau mengajak pembaca untuk melakukan atau mempercayai sesuatu, sering memakai kalimat ajakan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Persuasi",
+      "tags": [
+        "teks persuasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-eksplanasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Eksplanasi",
+    "tags": [
+      "teks eksplanasi"
+    ],
+    "teks": "Teks eksplanasi — teks yang menjelaskan proses terjadinya suatu fenomena, baik fenomena alam (seperti gempa bumi) maupun fenomena sosial, disusun dengan hubungan sebab-akibat.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Eksplanasi",
+      "tags": [
+        "teks eksplanasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-laporan-hasil-observasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Laporan Hasil Observasi",
+    "tags": [
+      "laporan hasil observasi"
+    ],
+    "teks": "Teks laporan hasil observasi — teks yang berisi hasil pengamatan terhadap suatu objek secara sistematis, disusun dengan struktur pernyataan umum (klasifikasi) diikuti deskripsi bagian.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Laporan Hasil Observasi",
+      "tags": [
+        "laporan hasil observasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-anekdot",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Anekdot",
+    "tags": [
+      "anekdot",
+      "teks humor",
+      "sindiran"
+    ],
+    "teks": "Teks anekdot adalah cerita singkat yang lucu namun mengandung sindiran atau kritik terhadap suatu keadaan, biasanya menyangkut tokoh publik atau layanan umum, disampaikan dengan gaya jenaka agar pesan kritiknya mudah diterima.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Anekdot",
+      "tags": [
+        "anekdot",
+        "teks humor",
+        "sindiran"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-ulasan-resensi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Ulasan (Resensi)",
+    "tags": [
+      "ulasan",
+      "resensi",
+      "kritik karya"
+    ],
+    "teks": "Teks ulasan atau resensi menilai kelebihan dan kekurangan suatu karya (buku, film, produk) secara objektif, umumnya berisi identitas karya, sinopsis singkat, kelebihan-kekurangan, dan rekomendasi bagi pembaca.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Ulasan (Resensi)",
+      "tags": [
+        "ulasan",
+        "resensi",
+        "kritik karya"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-debat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Debat",
+    "tags": [
+      "debat",
+      "argumentasi lisan",
+      "mosi"
+    ],
+    "teks": "Debat adalah adu argumen antara pihak pro dan kontra terhadap suatu mosi (topik perdebatan), melibatkan tim afirmasi (mendukung), tim oposisi (menolak), dan moderator, dinilai dari kekuatan argumen dan cara penyampaian.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Debat",
+      "tags": [
+        "debat",
+        "argumentasi lisan",
+        "mosi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-proposal",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Proposal",
+    "tags": [
+      "proposal",
+      "rencana kegiatan"
+    ],
+    "teks": "Proposal adalah rancangan tertulis suatu rencana kegiatan atau penelitian, umumnya memuat latar belakang, tujuan, sasaran, mekanisme, jadwal, dan anggaran, disusun untuk mendapat persetujuan atau dukungan dari pihak terkait.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Proposal",
+      "tags": [
+        "proposal",
+        "rencana kegiatan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-karya-ilmiah",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Karya Ilmiah",
+    "tags": [
+      "karya ilmiah",
+      "metode ilmiah",
+      "penelitian"
+    ],
+    "teks": "Karya ilmiah adalah tulisan yang menyajikan hasil pengamatan atau penelitian secara sistematis dengan metode ilmiah, memuat bagian pendahuluan, kajian teori, metode, hasil dan pembahasan, serta simpulan, ditulis dengan bahasa baku dan objektif.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Karya Ilmiah",
+      "tags": [
+        "karya ilmiah",
+        "metode ilmiah",
+        "penelitian"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-morfologi-linguistik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Linguistik: Morfologi",
+    "tags": [
+      "linguistik",
+      "morfologi",
+      "proses pembentukan kata"
+    ],
+    "teks": "Morfologi adalah cabang linguistik yang mempelajari struktur kata dan proses pembentukannya, seperti afiksasi (penambahan imbuhan), reduplikasi (pengulangan kata), dan komposisi (penggabungan kata) — dipelajari mendalam pada mata kuliah linguistik umum.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Linguistik: Morfologi",
+      "tags": [
+        "linguistik",
+        "morfologi",
+        "proses pembentukan kata"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-sintaksis-linguistik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Linguistik: Sintaksis",
+    "tags": [
+      "linguistik",
+      "sintaksis",
+      "frasa dan klausa"
+    ],
+    "teks": "Sintaksis mempelajari struktur kalimat, termasuk aturan penyusunan frasa dan klausa menjadi kalimat gramatikal, serta hubungan fungsional antarunsur kalimat (subjek, predikat, objek) — salah satu cabang inti linguistik di perkuliahan bahasa.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Linguistik: Sintaksis",
+      "tags": [
+        "linguistik",
+        "sintaksis",
+        "frasa dan klausa"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-semantik-makna-leksikal-gramatikal",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Linguistik: Semantik (Makna Leksikal dan Gramatikal)",
+    "tags": [
+      "linguistik",
+      "semantik",
+      "makna kata"
+    ],
+    "teks": "Semantik mempelajari makna dalam bahasa: makna leksikal adalah makna dasar kata sesuai kamus, sedangkan makna gramatikal muncul akibat proses gramatikal seperti afiksasi atau konteks kalimat — cabang linguistik yang dipelajari di tingkat kuliah.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Linguistik: Semantik (Makna Leksikal dan Gramatikal)",
+      "tags": [
+        "linguistik",
+        "semantik",
+        "makna kata"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-pragmatik-konteks-tuturan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Linguistik: Pragmatik (Konteks Tuturan)",
+    "tags": [
+      "linguistik",
+      "pragmatik",
+      "konteks"
+    ],
+    "teks": "Pragmatik mempelajari makna bahasa dalam konteks penggunaannya, termasuk bagaimana konteks sosial dan situasi memengaruhi interpretasi ujaran — misalnya kalimat \"Di sini panas ya\" bisa berfungsi sebagai permintaan menyalakan kipas, bukan sekadar pernyataan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Linguistik: Pragmatik (Konteks Tuturan)",
+      "tags": [
+        "linguistik",
+        "pragmatik",
+        "konteks"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-sosiolinguistik-variasi-bahasa",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Sosiolinguistik: Variasi Bahasa",
+    "tags": [
+      "sosiolinguistik",
+      "dialek",
+      "register"
+    ],
+    "teks": "Sosiolinguistik mempelajari hubungan bahasa dan masyarakat, termasuk variasi bahasa seperti dialek (variasi berdasarkan wilayah/kelompok sosial) dan register (variasi berdasarkan situasi/formalitas), topik penting pada mata kuliah sosiolinguistik.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Sosiolinguistik: Variasi Bahasa",
+      "tags": [
+        "sosiolinguistik",
+        "dialek",
+        "register"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

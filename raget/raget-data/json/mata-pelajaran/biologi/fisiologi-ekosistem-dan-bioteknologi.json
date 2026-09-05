@@ -1,192 +1,5 @@
 [
   {
-    "id": "mapel-biologi-struktur-sel",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Struktur Sel",
-    "tags": [
-      "sel",
-      "organel",
-      "nukleus",
-      "mitokondria"
-    ],
-    "teks": "Sel — unit dasar kehidupan, terdiri dari membran sel, sitoplasma, dan organel seperti nukleus (inti sel), mitokondria (penghasil energi), dan ribosom (penyusun protein). Sel eukariotik punya inti bermembran, sel prokariotik tidak.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Struktur Sel",
-      "tags": [
-        "sel",
-        "organel",
-        "nukleus",
-        "mitokondria"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-fotosintesis",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Fotosintesis",
-    "tags": [
-      "fotosintesis",
-      "kloroplas",
-      "tumbuhan"
-    ],
-    "teks": "Fotosintesis — proses tumbuhan mengubah karbon dioksida dan air menjadi glukosa dan oksigen dengan bantuan cahaya matahari, terjadi di kloroplas. Persamaan reaksinya: 6CO2 + 6H2O + cahaya -> C6H12O6 + 6O2.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Fotosintesis",
-      "tags": [
-        "fotosintesis",
-        "kloroplas",
-        "tumbuhan"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-respirasi-sel",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Respirasi Sel",
-    "tags": [
-      "respirasi sel",
-      "atp",
-      "mitokondria"
-    ],
-    "teks": "Respirasi sel — proses pemecahan glukosa dengan oksigen untuk menghasilkan energi (ATP), karbon dioksida, dan air, terjadi di mitokondria. Kebalikan dari fotosintesis dalam hal reaktan dan produknya.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Respirasi Sel",
-      "tags": [
-        "respirasi sel",
-        "atp",
-        "mitokondria"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-dna",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "DNA",
-    "tags": [
-      "dna",
-      "genetika",
-      "basa nitrogen"
-    ],
-    "teks": "DNA (asam deoksiribonukleat) — molekul pembawa informasi genetik, berbentuk heliks ganda, tersusun dari empat basa nitrogen: Adenin berpasangan dengan Timin, Guanin berpasangan dengan Sitosin.",
-    "meta": {
-      "field": "biologi",
-      "topic": "DNA",
-      "tags": [
-        "dna",
-        "genetika",
-        "basa nitrogen"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-rna",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "RNA",
-    "tags": [
-      "rna",
-      "sintesis protein"
-    ],
-    "teks": "RNA (asam ribonukleat) — molekul untai tunggal yang berperan dalam sintesis protein, menggantikan basa Timin pada DNA dengan Urasil. Ada mRNA, tRNA, dan rRNA dengan fungsi berbeda dalam translasi.",
-    "meta": {
-      "field": "biologi",
-      "topic": "RNA",
-      "tags": [
-        "rna",
-        "sintesis protein"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-mitosis",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Mitosis",
-    "tags": [
-      "mitosis",
-      "pembelahan sel"
-    ],
-    "teks": "Mitosis — pembelahan sel yang menghasilkan dua sel anak dengan jumlah kromosom sama seperti induknya (diploid), berfungsi untuk pertumbuhan dan perbaikan jaringan tubuh.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Mitosis",
-      "tags": [
-        "mitosis",
-        "pembelahan sel"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-meiosis",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Meiosis",
-    "tags": [
-      "meiosis",
-      "gamet",
-      "pembelahan sel"
-    ],
-    "teks": "Meiosis — pembelahan sel yang menghasilkan empat sel anak dengan setengah jumlah kromosom induknya (haploid), terjadi pada pembentukan sel kelamin (gamet).",
-    "meta": {
-      "field": "biologi",
-      "topic": "Meiosis",
-      "tags": [
-        "meiosis",
-        "gamet",
-        "pembelahan sel"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-hukum-mendel-i",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Hukum Mendel I",
-    "tags": [
-      "hukum mendel",
-      "genetika",
-      "alel"
-    ],
-    "teks": "Hukum Mendel I (Hukum Segregasi) — setiap pasangan alel akan memisah secara bebas saat pembentukan gamet, sehingga tiap gamet hanya membawa satu alel dari tiap pasangan gen.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Hukum Mendel I",
-      "tags": [
-        "hukum mendel",
-        "genetika",
-        "alel"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-hukum-mendel-ii",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Hukum Mendel II",
-    "tags": [
-      "hukum mendel",
-      "dihibrid",
-      "genetika"
-    ],
-    "teks": "Hukum Mendel II (Hukum Pemilihan Bebas/Independent Assortment) — gen-gen yang berbeda akan diwariskan secara bebas satu sama lain saat pembentukan gamet, berlaku untuk persilangan dihibrid.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Hukum Mendel II",
-      "tags": [
-        "hukum mendel",
-        "dihibrid",
-        "genetika"
-      ]
-    }
-  },
-  {
     "id": "mapel-biologi-ekosistem",
     "kategori": "mata-pelajaran",
     "wilayah": "biologi",
@@ -204,7 +17,8 @@
         "ekosistem",
         "biotik",
         "abiotik"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -225,7 +39,8 @@
         "rantai makanan",
         "produsen",
         "konsumen"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -246,7 +61,8 @@
         "piramida energi",
         "trofik",
         "ekosistem"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -267,7 +83,8 @@
         "taksonomi",
         "klasifikasi",
         "kingdom"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -288,7 +105,8 @@
         "sistem pencernaan",
         "lambung",
         "usus halus"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -311,7 +129,8 @@
         "jantung",
         "arteri",
         "vena"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -332,7 +151,8 @@
         "sistem pernapasan",
         "paru-paru",
         "alveolus"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -353,7 +173,8 @@
         "sistem saraf",
         "neuron",
         "otak"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -374,7 +195,8 @@
         "sistem ekskresi",
         "ginjal",
         "urine"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -395,28 +217,8 @@
         "hormon",
         "kelenjar endokrin",
         "insulin"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-enzim",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Enzim",
-    "tags": [
-      "enzim",
-      "katalis",
-      "substrat"
-    ],
-    "teks": "Enzim — protein yang berfungsi sebagai katalis biologis, mempercepat reaksi kimia dalam tubuh tanpa ikut habis bereaksi, bekerja spesifik pada satu jenis substrat (prinsip kunci-gembok).",
-    "meta": {
-      "field": "biologi",
-      "topic": "Enzim",
-      "tags": [
-        "enzim",
-        "katalis",
-        "substrat"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -437,7 +239,8 @@
         "virus",
         "kapsid",
         "parasit"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -456,7 +259,8 @@
       "tags": [
         "bakteri",
         "prokariotik"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -477,7 +281,8 @@
         "jamur",
         "fungi",
         "dekomposer"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -498,7 +303,8 @@
         "tumbuhan",
         "xilem",
         "floem"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -519,7 +325,8 @@
         "adaptasi",
         "morfologi",
         "fisiologi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -540,7 +347,8 @@
         "evolusi",
         "darwin",
         "seleksi alam"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -561,26 +369,8 @@
         "bioteknologi",
         "fermentasi",
         "rekayasa genetika"
-      ]
-    }
-  },
-  {
-    "id": "mapel-biologi-homeostasis",
-    "kategori": "mata-pelajaran",
-    "wilayah": "biologi",
-    "nama": "Homeostasis",
-    "tags": [
-      "homeostasis",
-      "keseimbangan tubuh"
-    ],
-    "teks": "Homeostasis — kemampuan tubuh makhluk hidup menjaga kondisi internal tetap stabil (seperti suhu tubuh dan kadar gula darah) meski kondisi lingkungan luar berubah-ubah.",
-    "meta": {
-      "field": "biologi",
-      "topic": "Homeostasis",
-      "tags": [
-        "homeostasis",
-        "keseimbangan tubuh"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -601,28 +391,236 @@
         "simbiosis",
         "mutualisme",
         "parasitisme"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-biologi-transpirasi",
+    "id": "mapel-biologi-jaring-jaring-makanan",
     "kategori": "mata-pelajaran",
     "wilayah": "biologi",
-    "nama": "Transpirasi",
+    "nama": "Jaring-Jaring Makanan",
     "tags": [
-      "transpirasi",
-      "stomata",
-      "tumbuhan"
+      "jaring makanan",
+      "rantai makanan",
+      "ekologi"
     ],
-    "teks": "Transpirasi — proses penguapan air dari permukaan tumbuhan, terutama melalui stomata pada daun, membantu mengangkut air dan mineral dari akar ke seluruh bagian tumbuhan.",
+    "teks": "Jaring-jaring makanan adalah gabungan banyak rantai makanan yang saling berhubungan dalam satu ekosistem, karena satu organisme biasanya dimakan lebih dari satu jenis predator dan memakan lebih dari satu jenis mangsa, sehingga menggambarkan aliran energi yang lebih realistis daripada rantai makanan tunggal.",
     "meta": {
       "field": "biologi",
-      "topic": "Transpirasi",
+      "topic": "Jaring-Jaring Makanan",
       "tags": [
-        "transpirasi",
-        "stomata",
-        "tumbuhan"
-      ]
+        "jaring makanan",
+        "rantai makanan",
+        "ekologi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-jaringan-tumbuhan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Struktur dan Fungsi Jaringan Tumbuhan",
+    "tags": [
+      "jaringan tumbuhan",
+      "xilem",
+      "floem",
+      "epidermis"
+    ],
+    "teks": "Tumbuhan tersusun dari jaringan meristem (aktif membelah di ujung akar/batang), epidermis (pelindung luar), parenkim (fotosintesis dan penyimpanan), serta jaringan pengangkut xilem (mengangkut air dan mineral dari akar ke daun) dan floem (mengangkut hasil fotosintesis ke seluruh tubuh).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Struktur dan Fungsi Jaringan Tumbuhan",
+      "tags": [
+        "jaringan tumbuhan",
+        "xilem",
+        "floem",
+        "epidermis"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-reproduksi-tumbuhan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Reproduksi Vegetatif dan Generatif Tumbuhan",
+    "tags": [
+      "reproduksi tumbuhan",
+      "vegetatif",
+      "generatif",
+      "penyerbukan"
+    ],
+    "teks": "Reproduksi vegetatif terjadi tanpa peleburan sel kelamin, contohnya tunas, stek, dan umbi; reproduksi generatif melibatkan penyerbukan (jatuhnya serbuk sari ke kepala putik) dan pembuahan ganda pada tumbuhan berbunga, menghasilkan embrio dan cadangan makanan (endosperma) dalam biji.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Reproduksi Vegetatif dan Generatif Tumbuhan",
+      "tags": [
+        "reproduksi tumbuhan",
+        "vegetatif",
+        "generatif",
+        "penyerbukan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-reproduksi-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Reproduksi Manusia",
+    "tags": [
+      "reproduksi manusia",
+      "ovarium",
+      "testis",
+      "menstruasi"
+    ],
+    "teks": "Sistem reproduksi pria menghasilkan sperma di testis, sedangkan sistem reproduksi wanita menghasilkan sel telur di ovarium dan mengalami siklus menstruasi bulanan yang diatur hormon estrogen dan progesteron. Fertilisasi terjadi saat sperma membuahi sel telur di tuba falopi.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Reproduksi Manusia",
+      "tags": [
+        "reproduksi manusia",
+        "ovarium",
+        "testis",
+        "menstruasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-indra-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Koordinasi: Panca Indra",
+    "tags": [
+      "indra",
+      "mata",
+      "telinga",
+      "reseptor"
+    ],
+    "teks": "Panca indra manusia (penglihatan, pendengaran, penciuman, pengecapan, peraba) mengandung reseptor khusus yang mengubah rangsang lingkungan menjadi impuls saraf, diteruskan ke otak untuk diinterpretasikan — misalnya sel batang dan kerucut di retina mata untuk cahaya, dan sel rambut di koklea telinga untuk suara.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Koordinasi: Panca Indra",
+      "tags": [
+        "indra",
+        "mata",
+        "telinga",
+        "reseptor"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-mhc-dan-respons-imun-adaptif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "MHC dan Respons Imun Adaptif",
+    "tags": [
+      "imunologi",
+      "mhc",
+      "sel t"
+    ],
+    "teks": "Major Histocompatibility Complex (MHC) adalah molekul permukaan sel yang mempresentasikan fragmen antigen ke sel T: MHC kelas I ada di hampir semua sel berinti dan dikenali sel T sitotoksik (CD8+), sementara MHC kelas II ada di sel penyaji antigen dan dikenali sel T helper (CD4+) — dasar imunologi kedokteran/biologi lanjut.",
+    "meta": {
+      "field": "biologi",
+      "topic": "MHC dan Respons Imun Adaptif",
+      "tags": [
+        "imunologi",
+        "mhc",
+        "sel t"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-pcr-polymerase-chain-reaction",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "PCR (Polymerase Chain Reaction)",
+    "tags": [
+      "biologi molekuler",
+      "pcr",
+      "dna"
+    ],
+    "teks": "PCR adalah teknik memperbanyak fragmen DNA spesifik jutaan kali secara in vitro melalui siklus berulang denaturasi (pemanasan memisahkan untai DNA), annealing (penempelan primer), dan ekstensi (sintesis untai baru oleh enzim Taq polymerase) — teknik fundamental biologi molekuler modern, termasuk untuk tes diagnostik.",
+    "meta": {
+      "field": "biologi",
+      "topic": "PCR (Polymerase Chain Reaction)",
+      "tags": [
+        "biologi molekuler",
+        "pcr",
+        "dna"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-spesiasi-alopatrik-simpatrik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Spesiasi Alopatrik dan Simpatrik",
+    "tags": [
+      "evolusi",
+      "spesiasi",
+      "isolasi reproduktif"
+    ],
+    "teks": "Spesiasi adalah proses terbentuknya spesies baru. Spesiasi alopatrik terjadi ketika populasi terpisah secara geografis lalu berevolusi terpisah hingga tak bisa kawin silang lagi, sedangkan spesiasi simpatrik terjadi tanpa pemisahan geografis, misalnya lewat poliploidi pada tumbuhan — dibahas dalam biologi evolusi tingkat universitas.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Spesiasi Alopatrik dan Simpatrik",
+      "tags": [
+        "evolusi",
+        "spesiasi",
+        "isolasi reproduktif"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-crispr-cas9",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "CRISPR-Cas9",
+    "tags": [
+      "bioteknologi",
+      "crispr",
+      "rekayasa genetika"
+    ],
+    "teks": "CRISPR-Cas9 adalah teknologi penyuntingan genom yang memanfaatkan sistem imun bakteri: RNA pemandu (guide RNA) mengarahkan enzim Cas9 untuk memotong DNA pada urutan target secara presisi, memungkinkan penghapusan, penyisipan, atau perbaikan gen — mengubah bioteknologi modern sejak ditemukan.",
+    "meta": {
+      "field": "biologi",
+      "topic": "CRISPR-Cas9",
+      "tags": [
+        "bioteknologi",
+        "crispr",
+        "rekayasa genetika"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-siklus-krebs-detail",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Siklus Krebs (Siklus Asam Sitrat)",
+    "tags": [
+      "biokimia",
+      "siklus krebs",
+      "respirasi seluler"
+    ],
+    "teks": "Siklus Krebs terjadi di matriks mitokondria dan mengoksidasi asetil-KoA (hasil pemecahan piruvat) melalui delapan reaksi berurutan, menghasilkan NADH dan FADH2 yang akan dipakai rantai transpor elektron, plus sedikit ATP dan CO2 langsung — dipelajari mendalam pada biokimia metabolisme tingkat kuliah.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Siklus Krebs (Siklus Asam Sitrat)",
+      "tags": [
+        "biokimia",
+        "siklus krebs",
+        "respirasi seluler"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

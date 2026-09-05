@@ -16,7 +16,8 @@
         "pythagoras",
         "segitiga siku-siku"
       ],
-      "rumus": "a^2 + b^2 = c^2"
+      "rumus": "a^2 + b^2 = c^2",
+      "tingkat": "sma"
     }
   },
   {
@@ -38,7 +39,8 @@
         "luas",
         "keliling"
       ],
-      "rumus": "L=pi.r^2; K=2.pi.r"
+      "rumus": "L=pi.r^2; K=2.pi.r",
+      "tingkat": "sma"
     }
   },
   {
@@ -58,7 +60,8 @@
         "segitiga",
         "luas"
       ],
-      "rumus": "L = 1/2 x alas x tinggi"
+      "rumus": "L = 1/2 x alas x tinggi",
+      "tingkat": "sma"
     }
   },
   {
@@ -84,47 +87,8 @@
         "tabung",
         "bola"
       ],
-      "rumus": "V_balok=p.l.t; V_kubus=s^3; V_tabung=pi.r^2.t; V_bola=4/3.pi.r^3"
-    }
-  },
-  {
-    "id": "mapel-matematika-persamaan-kuadrat",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Persamaan Kuadrat",
-    "tags": [
-      "persamaan kuadrat",
-      "rumus abc"
-    ],
-    "teks": "Persamaan kuadrat berbentuk ax² + bx + c = 0 diselesaikan dengan rumus abc: x = (-b ± √(b² - 4ac)) / 2a, dengan a ≠ 0.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Persamaan Kuadrat",
-      "tags": [
-        "persamaan kuadrat",
-        "rumus abc"
-      ],
-      "rumus": "x = (-b +- akar(b^2-4ac)) / 2a"
-    }
-  },
-  {
-    "id": "mapel-matematika-diskriminan",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Diskriminan",
-    "tags": [
-      "diskriminan",
-      "persamaan kuadrat"
-    ],
-    "teks": "Diskriminan (D = b² - 4ac) pada persamaan kuadrat menentukan jenis akar: D > 0 dua akar real berbeda, D = 0 satu akar kembar, D < 0 tidak ada akar real.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Diskriminan",
-      "tags": [
-        "diskriminan",
-        "persamaan kuadrat"
-      ],
-      "rumus": "D = b^2 - 4ac"
+      "rumus": "V_balok=p.l.t; V_kubus=s^3; V_tabung=pi.r^2.t; V_bola=4/3.pi.r^3",
+      "tingkat": "sma"
     }
   },
   {
@@ -144,7 +108,8 @@
         "barisan aritmatika",
         "beda"
       ],
-      "rumus": "Un = a + (n-1)b"
+      "rumus": "Un = a + (n-1)b",
+      "tingkat": "sma"
     }
   },
   {
@@ -164,7 +129,8 @@
         "barisan geometri",
         "rasio"
       ],
-      "rumus": "Un = a . r^(n-1)"
+      "rumus": "Un = a . r^(n-1)",
+      "tingkat": "sma"
     }
   },
   {
@@ -182,27 +148,8 @@
       "tags": [
         "deret aritmatika"
       ],
-      "rumus": "Sn = n/2 (2a + (n-1)b)"
-    }
-  },
-  {
-    "id": "mapel-matematika-fungsi-linear",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Fungsi Linear",
-    "tags": [
-      "fungsi linear",
-      "gradien"
-    ],
-    "teks": "Fungsi linear berbentuk y = mx + c, dengan m adalah gradien (kemiringan garis) dan c titik potong sumbu-y; grafiknya berupa garis lurus.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Fungsi Linear",
-      "tags": [
-        "fungsi linear",
-        "gradien"
-      ],
-      "rumus": "y = mx + c"
+      "rumus": "Sn = n/2 (2a + (n-1)b)",
+      "tingkat": "sma"
     }
   },
   {
@@ -222,7 +169,8 @@
         "trigonometri",
         "sin cos tan"
       ],
-      "rumus": "sin=depan/miring; cos=samping/miring; tan=depan/samping"
+      "rumus": "sin=depan/miring; cos=samping/miring; tan=depan/samping",
+      "tingkat": "sma"
     }
   },
   {
@@ -244,7 +192,8 @@
         "segitiga",
         "segiempat"
       ],
-      "rumus": "sudut segitiga=180; sudut segiempat=360"
+      "rumus": "sudut segitiga=180; sudut segiempat=360",
+      "tingkat": "sma"
     }
   },
   {
@@ -267,7 +216,8 @@
         "mean",
         "median",
         "modus"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -287,7 +237,8 @@
         "peluang",
         "probabilitas"
       ],
-      "rumus": "P(A) = n(A)/n(S)"
+      "rumus": "P(A) = n(A)/n(S)",
+      "tingkat": "sma"
     }
   },
   {
@@ -305,7 +256,8 @@
       "tags": [
         "faktorial"
       ],
-      "rumus": "n! = n x (n-1) x ... x 1"
+      "rumus": "n! = n x (n-1) x ... x 1",
+      "tingkat": "sma"
     }
   },
   {
@@ -323,7 +275,8 @@
       "tags": [
         "permutasi"
       ],
-      "rumus": "nPr = n!/(n-r)!"
+      "rumus": "nPr = n!/(n-r)!",
+      "tingkat": "sma"
     }
   },
   {
@@ -341,134 +294,8 @@
       "tags": [
         "kombinasi"
       ],
-      "rumus": "nCr = n!/(r!(n-r)!)"
-    }
-  },
-  {
-    "id": "mapel-matematika-logaritma",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Logaritma",
-    "tags": [
-      "logaritma"
-    ],
-    "teks": "Logaritma — kebalikan dari operasi pemangkatan; jika a^c = b maka ᵃlog b = c, dengan a sebagai basis logaritma (a>0, a≠1).",
-    "meta": {
-      "field": "matematika",
-      "topic": "Logaritma",
-      "tags": [
-        "logaritma"
-      ],
-      "rumus": "a^c = b <=> a_log_b = c"
-    }
-  },
-  {
-    "id": "mapel-matematika-fungsi-kuadrat-dan-parabola",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Fungsi Kuadrat dan Parabola",
-    "tags": [
-      "fungsi kuadrat",
-      "parabola"
-    ],
-    "teks": "Fungsi kuadrat y = ax² + bx + c menghasilkan grafik berbentuk parabola; titik puncaknya berada pada x = -b/2a, terbuka ke atas jika a>0 dan ke bawah jika a<0.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Fungsi Kuadrat dan Parabola",
-      "tags": [
-        "fungsi kuadrat",
-        "parabola"
-      ],
-      "rumus": "x_puncak = -b/2a"
-    }
-  },
-  {
-    "id": "mapel-matematika-matriks",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Matriks",
-    "tags": [
-      "matriks",
-      "aljabar linear"
-    ],
-    "teks": "Matriks — susunan bilangan dalam baris dan kolom; penjumlahan/pengurangan matriks hanya bisa dilakukan jika ukurannya sama, sedangkan perkalian matriks mensyaratkan jumlah kolom matriks pertama sama dengan jumlah baris matriks kedua.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Matriks",
-      "tags": [
-        "matriks",
-        "aljabar linear"
-      ]
-    }
-  },
-  {
-    "id": "mapel-matematika-vektor",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Vektor",
-    "tags": [
-      "vektor"
-    ],
-    "teks": "Vektor — besaran yang memiliki nilai (besar) dan arah, digambarkan sebagai anak panah; penjumlahan vektor mengikuti aturan jajar genjang atau segitiga.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Vektor",
-      "tags": [
-        "vektor"
-      ]
-    }
-  },
-  {
-    "id": "mapel-matematika-bilangan-prima",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Bilangan Prima",
-    "tags": [
-      "bilangan prima"
-    ],
-    "teks": "Bilangan prima — bilangan asli lebih besar dari 1 yang hanya memiliki dua faktor: 1 dan bilangan itu sendiri, contohnya 2, 3, 5, 7, 11, 13.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Bilangan Prima",
-      "tags": [
-        "bilangan prima"
-      ]
-    }
-  },
-  {
-    "id": "mapel-matematika-fpb-dan-kpk",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "FPB dan KPK",
-    "tags": [
-      "fpb",
-      "kpk"
-    ],
-    "teks": "FPB (Faktor Persekutuan Terbesar) adalah faktor terbesar yang sama dari dua bilangan atau lebih; KPK (Kelipatan Persekutuan Terkecil) adalah kelipatan terkecil yang sama dari dua bilangan atau lebih.",
-    "meta": {
-      "field": "matematika",
-      "topic": "FPB dan KPK",
-      "tags": [
-        "fpb",
-        "kpk"
-      ]
-    }
-  },
-  {
-    "id": "mapel-matematika-operasi-pecahan",
-    "kategori": "mata-pelajaran",
-    "wilayah": "matematika",
-    "nama": "Operasi Pecahan",
-    "tags": [
-      "pecahan"
-    ],
-    "teks": "Pecahan berbentuk a/b; penjumlahan dan pengurangan pecahan mengharuskan penyebut disamakan terlebih dahulu (KPK penyebut), sedangkan perkalian pecahan tinggal mengalikan pembilang dengan pembilang dan penyebut dengan penyebut.",
-    "meta": {
-      "field": "matematika",
-      "topic": "Operasi Pecahan",
-      "tags": [
-        "pecahan"
-      ]
+      "rumus": "nCr = n!/(r!(n-r)!)",
+      "tingkat": "sma"
     }
   },
   {
@@ -488,47 +315,226 @@
         "bangun datar",
         "segiempat"
       ],
-      "rumus": "L_persegi=s^2; L_pp=p.l; L_trapesium=1/2(a+b)t"
+      "rumus": "L_persegi=s^2; L_pp=p.l; L_trapesium=1/2(a+b)t",
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-matematika-sistem-persamaan-linear-dua-variabel-spldv",
+    "id": "mapel-matematika-simpangan-baku-dan-variansi",
     "kategori": "mata-pelajaran",
     "wilayah": "matematika",
-    "nama": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+    "nama": "Simpangan Baku dan Variansi",
     "tags": [
-      "spldv",
-      "aljabar"
+      "statistika",
+      "simpangan baku",
+      "variansi"
     ],
-    "teks": "SPLDV — sistem dua persamaan linear dengan dua variabel yang diselesaikan bersamaan, bisa dengan metode substitusi, eliminasi, atau grafik untuk mencari nilai x dan y yang memenuhi kedua persamaan.",
+    "teks": "Variansi mengukur seberapa jauh data tersebar dari rata-ratanya (rata-rata kuadrat selisih data terhadap mean), sedangkan simpangan baku adalah akar kuadrat dari variansi sehingga satuannya sama dengan data asli — makin besar nilainya, makin bervariasi datanya.",
     "meta": {
       "field": "matematika",
-      "topic": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+      "topic": "Simpangan Baku dan Variansi",
       "tags": [
-        "spldv",
-        "aljabar"
-      ]
+        "statistika",
+        "simpangan baku",
+        "variansi"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-matematika-bunga-tunggal-dan-majemuk",
+    "id": "mapel-matematika-transformasi-geometri",
     "kategori": "mata-pelajaran",
     "wilayah": "matematika",
-    "nama": "Bunga Tunggal dan Majemuk",
+    "nama": "Transformasi Geometri",
     "tags": [
-      "bunga tunggal",
-      "bunga majemuk",
-      "aritmetika sosial"
+      "translasi",
+      "refleksi",
+      "rotasi",
+      "dilatasi"
     ],
-    "teks": "Bunga tunggal dihitung dari modal awal tetap setiap periode (Bunga = Modal × persen × waktu), sedangkan bunga majemuk dihitung dari modal ditambah bunga periode sebelumnya sehingga bertumbuh lebih cepat.",
+    "teks": "Transformasi geometri mengubah posisi atau ukuran bangun tanpa mengubah bentuknya, meliputi translasi (pergeseran), refleksi (pencerminan), rotasi (perputaran terhadap titik pusat), dan dilatasi (perbesaran/pengecilan dengan faktor skala tertentu).",
     "meta": {
       "field": "matematika",
-      "topic": "Bunga Tunggal dan Majemuk",
+      "topic": "Transformasi Geometri",
       "tags": [
-        "bunga tunggal",
-        "bunga majemuk",
-        "aritmetika sosial"
-      ]
+        "translasi",
+        "refleksi",
+        "rotasi",
+        "dilatasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-irisan-kerucut",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Irisan Kerucut (Parabola, Elips, Hiperbola)",
+    "tags": [
+      "irisan kerucut",
+      "parabola",
+      "elips",
+      "hiperbola"
+    ],
+    "teks": "Irisan kerucut adalah kurva hasil pemotongan kerucut ganda oleh bidang datar: lingkaran dan elips (potongan miring), parabola (potongan sejajar sisi kerucut), dan hiperbola (potongan yang memotong kedua bagian kerucut) — masing-masing punya persamaan baku dalam koordinat kartesius.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Irisan Kerucut (Parabola, Elips, Hiperbola)",
+      "tags": [
+        "irisan kerucut",
+        "parabola",
+        "elips",
+        "hiperbola"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-induksi-matematika",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Induksi Matematika",
+    "tags": [
+      "induksi matematika",
+      "pembuktian"
+    ],
+    "teks": "Induksi matematika adalah metode pembuktian pernyataan untuk semua bilangan asli, terdiri dari dua langkah: basis (buktikan benar untuk n=1) dan langkah induktif (asumsikan benar untuk n=k, buktikan juga benar untuk n=k+1).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Induksi Matematika",
+      "tags": [
+        "induksi matematika",
+        "pembuktian"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-program-linear",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Program Linear",
+    "tags": [
+      "program linear",
+      "optimasi",
+      "pertidaksamaan"
+    ],
+    "teks": "Program linear adalah metode mencari nilai optimum (maksimum/minimum) suatu fungsi tujuan linear dengan kendala berupa sistem pertidaksamaan linear, biasanya diselesaikan dengan menggambar daerah penyelesaian (feasible region) lalu menguji nilai fungsi tujuan di titik-titik sudutnya.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Program Linear",
+      "tags": [
+        "program linear",
+        "optimasi",
+        "pertidaksamaan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-persamaan-diferensial-orde-satu",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Persamaan Diferensial Biasa Orde Satu",
+    "tags": [
+      "persamaan diferensial",
+      "ode"
+    ],
+    "teks": "Persamaan diferensial biasa orde satu melibatkan fungsi dan turunan pertamanya, misalnya dy/dx = ky yang menggambarkan pertumbuhan/peluruhan eksponensial. Diselesaikan dengan metode pemisahan variabel atau faktor pengintegrasi — topik inti mata kuliah persamaan diferensial.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Persamaan Diferensial Biasa Orde Satu",
+      "tags": [
+        "persamaan diferensial",
+        "ode"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-distribusi-normal",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Distribusi Normal",
+    "tags": [
+      "statistika lanjut",
+      "distribusi normal",
+      "kurva lonceng"
+    ],
+    "teks": "Distribusi normal (kurva lonceng Gauss) adalah distribusi peluang kontinu yang paling sering muncul, dicirikan oleh rata-rata (μ) dan simpangan baku (σ); sekitar 68% data berada dalam satu simpangan baku dari rata-rata — dasar statistika inferensial di perkuliahan.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Distribusi Normal",
+      "tags": [
+        "statistika lanjut",
+        "distribusi normal",
+        "kurva lonceng"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-hasil-kali-silang-vektor",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Hasil Kali Silang (Cross Product) Vektor",
+    "tags": [
+      "aljabar linear",
+      "cross product",
+      "vektor"
+    ],
+    "teks": "Hasil kali silang dua vektor di ruang tiga dimensi menghasilkan vektor baru yang tegak lurus terhadap keduanya, dengan besar sama dengan luas jajar genjang yang dibentuk kedua vektor — dipakai dalam fisika (torsi, gaya magnet) dan geometri analitik tingkat kuliah.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Hasil Kali Silang (Cross Product) Vektor",
+      "tags": [
+        "aljabar linear",
+        "cross product",
+        "vektor"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-prinsip-inklusi-eksklusi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Prinsip Inklusi-Eksklusi",
+    "tags": [
+      "kombinatorika lanjut",
+      "inklusi eksklusi"
+    ],
+    "teks": "Prinsip inklusi-eksklusi menghitung ukuran gabungan beberapa himpunan dengan menjumlahkan ukuran tiap himpunan, mengurangi irisan berpasangan, menambah irisan bertiga, dan seterusnya bergantian tanda — alat kombinatorika lanjut untuk masalah penghitungan kompleks.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Prinsip Inklusi-Eksklusi",
+      "tags": [
+        "kombinatorika lanjut",
+        "inklusi eksklusi"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-struktur-aljabar-grup",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Struktur Aljabar: Grup",
+    "tags": [
+      "aljabar abstrak",
+      "grup",
+      "struktur aljabar"
+    ],
+    "teks": "Dalam aljabar abstrak, grup adalah himpunan dengan satu operasi biner yang memenuhi sifat tertutup, asosiatif, punya elemen identitas, dan setiap elemen punya invers. Contoh grup sederhana: bilangan bulat dengan operasi penjumlahan — pengantar dasar mata kuliah struktur aljabar.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Struktur Aljabar: Grup",
+      "tags": [
+        "aljabar abstrak",
+        "grup",
+        "struktur aljabar"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

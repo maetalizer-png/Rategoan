@@ -1,0 +1,360 @@
+[
+  {
+    "id": "mapel-kimia-struktur-atom",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Struktur Atom",
+    "tags": [
+      "atom",
+      "proton",
+      "elektron",
+      "neutron"
+    ],
+    "teks": "Atom — partikel terkecil unsur yang masih memiliki sifat unsur tersebut, tersusun dari proton (bermuatan positif) dan neutron (netral) di inti, serta elektron (bermuatan negatif) yang mengelilingi inti.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Struktur Atom",
+      "tags": [
+        "atom",
+        "proton",
+        "elektron",
+        "neutron"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-tabel-periodik-unsur",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Tabel Periodik Unsur",
+    "tags": [
+      "tabel periodik",
+      "golongan",
+      "periode"
+    ],
+    "teks": "Tabel periodik — susunan unsur kimia berdasarkan kenaikan nomor atom (jumlah proton); kolom vertikal disebut golongan (unsur segolongan punya sifat kimia mirip), baris horizontal disebut periode.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Tabel Periodik Unsur",
+      "tags": [
+        "tabel periodik",
+        "golongan",
+        "periode"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-ikatan-ion",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Ikatan Ion",
+    "tags": [
+      "ikatan ion",
+      "nacl"
+    ],
+    "teks": "Ikatan ion — ikatan kimia yang terbentuk dari transfer elektron antara atom logam (melepas elektron) dan nonlogam (menerima elektron), contohnya NaCl (natrium klorida/garam dapur).",
+    "meta": {
+      "field": "kimia",
+      "topic": "Ikatan Ion",
+      "tags": [
+        "ikatan ion",
+        "nacl"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-ikatan-kovalen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Ikatan Kovalen",
+    "tags": [
+      "ikatan kovalen"
+    ],
+    "teks": "Ikatan kovalen — ikatan kimia yang terbentuk dari pemakaian bersama pasangan elektron antara dua atom nonlogam, bisa berupa ikatan tunggal, rangkap dua, atau rangkap tiga.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Ikatan Kovalen",
+      "tags": [
+        "ikatan kovalen"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-unsur-senyawa-dan-campuran",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Unsur, Senyawa, dan Campuran",
+    "tags": [
+      "unsur",
+      "senyawa",
+      "campuran"
+    ],
+    "teks": "Unsur adalah zat tunggal yang tidak bisa diuraikan lagi secara kimia biasa; senyawa adalah gabungan dua unsur atau lebih secara kimia dengan perbandingan tetap; campuran adalah gabungan dua zat atau lebih secara fisik tanpa reaksi kimia.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Unsur, Senyawa, dan Campuran",
+      "tags": [
+        "unsur",
+        "senyawa",
+        "campuran"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-elektron-valensi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Elektron Valensi",
+    "tags": [
+      "elektron valensi"
+    ],
+    "teks": "Elektron valensi — elektron yang berada pada kulit terluar atom, menentukan bagaimana atom tersebut berikatan dengan atom lain dan sifat kimianya.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Elektron Valensi",
+      "tags": [
+        "elektron valensi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-isotop",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Isotop",
+    "tags": [
+      "isotop"
+    ],
+    "teks": "Isotop — atom-atom dari unsur yang sama (jumlah proton sama) tetapi memiliki jumlah neutron berbeda, sehingga nomor massanya berbeda, contohnya karbon-12 dan karbon-14.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Isotop",
+      "tags": [
+        "isotop"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-wujud-materi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Wujud Materi",
+    "tags": [
+      "wujud materi",
+      "padat cair gas"
+    ],
+    "teks": "Wujud materi dibedakan menjadi padat (bentuk dan volume tetap), cair (volume tetap, bentuk menyesuaikan wadah), dan gas (bentuk dan volume menyesuaikan wadah), dipengaruhi oleh suhu dan tekanan.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Wujud Materi",
+      "tags": [
+        "wujud materi",
+        "padat cair gas"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-hukum-hess",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Termokimia: Hukum Hess",
+    "tags": [
+      "termokimia",
+      "hukum hess",
+      "entalpi"
+    ],
+    "teks": "Hukum Hess menyatakan perubahan entalpi total suatu reaksi hanya bergantung pada keadaan awal dan akhir, tidak pada jalur reaksinya, sehingga entalpi reaksi bertahap bisa dijumlahkan untuk mendapat entalpi reaksi keseluruhan.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Termokimia: Hukum Hess",
+      "tags": [
+        "termokimia",
+        "hukum hess",
+        "entalpi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-orde-reaksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Orde Reaksi dan Laju Reaksi",
+    "tags": [
+      "laju reaksi",
+      "orde reaksi",
+      "kinetika kimia"
+    ],
+    "teks": "Orde reaksi menyatakan bagaimana laju reaksi bergantung pada konsentrasi pereaksi, ditentukan secara eksperimen bukan dari koefisien persamaan reaksi. Orde total adalah jumlah orde tiap pereaksi dalam hukum laju reaksi.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Orde Reaksi dan Laju Reaksi",
+      "tags": [
+        "laju reaksi",
+        "orde reaksi",
+        "kinetika kimia"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-kesetimbangan-kimia-le-chatelier",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kesetimbangan Kimia dan Asas Le Chatelier",
+    "tags": [
+      "kesetimbangan kimia",
+      "le chatelier"
+    ],
+    "teks": "Kesetimbangan kimia terjadi saat laju reaksi maju sama dengan laju reaksi balik. Asas Le Chatelier menyatakan jika sistem setimbang diberi gangguan (perubahan konsentrasi, suhu, atau tekanan), sistem akan bergeser untuk mengurangi efek gangguan tersebut.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kesetimbangan Kimia dan Asas Le Chatelier",
+      "tags": [
+        "kesetimbangan kimia",
+        "le chatelier"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-sel-volta",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Elektrokimia: Sel Volta",
+    "tags": [
+      "elektrokimia",
+      "sel volta",
+      "reaksi redoks spontan"
+    ],
+    "teks": "Sel volta (sel galvani) mengubah energi kimia dari reaksi redoks spontan menjadi energi listrik, terdiri dari elektrode anode (oksidasi) dan katode (reduksi) yang dihubungkan kawat penghantar dan jembatan garam.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Elektrokimia: Sel Volta",
+      "tags": [
+        "elektrokimia",
+        "sel volta",
+        "reaksi redoks spontan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-kimia-energi-bebas-gibbs",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Fisik: Energi Bebas Gibbs",
+    "tags": [
+      "kimia fisik",
+      "energi gibbs",
+      "termodinamika kimia"
+    ],
+    "teks": "Energi bebas Gibbs (ΔG = ΔH - TΔS) menentukan spontanitas reaksi kimia pada suhu dan tekanan tetap: reaksi spontan jika ΔG negatif. Konsep ini menggabungkan entalpi (ΔH) dan entropi (ΔS), inti termodinamika kimia tingkat kuliah.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Fisik: Energi Bebas Gibbs",
+      "tags": [
+        "kimia fisik",
+        "energi gibbs",
+        "termodinamika kimia"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-kurva-titrasi-asam-basa",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Analitik: Kurva Titrasi Asam-Basa",
+    "tags": [
+      "kimia analitik",
+      "titrasi",
+      "kurva titrasi"
+    ],
+    "teks": "Kurva titrasi menggambarkan perubahan pH larutan seiring penambahan titran, dengan titik ekuivalen (di mana mol asam = mol basa) ditandai lonjakan pH tajam — bentuk kurva berbeda untuk titrasi asam/basa kuat vs lemah, topik inti kimia analitik.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Analitik: Kurva Titrasi Asam-Basa",
+      "tags": [
+        "kimia analitik",
+        "titrasi",
+        "kurva titrasi"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-stereokimia-isomer-optik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Organik: Stereokimia dan Isomer Optik",
+    "tags": [
+      "kimia organik lanjut",
+      "stereokimia",
+      "kiralitas"
+    ],
+    "teks": "Stereokimia mempelajari susunan tiga dimensi molekul. Molekul kiral (memiliki atom karbon asimetris) menghasilkan dua isomer optik (enantiomer) yang merupakan bayangan cermin satu sama lain, penting dalam kimia obat karena aktivitas biologis keduanya bisa sangat berbeda.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Organik: Stereokimia dan Isomer Optik",
+      "tags": [
+        "kimia organik lanjut",
+        "stereokimia",
+        "kiralitas"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-hibridisasi-orbital",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Anorganik: Teori Ikatan Valensi dan Hibridisasi Orbital",
+    "tags": [
+      "kimia anorganik",
+      "hibridisasi",
+      "teori ikatan valensi"
+    ],
+    "teks": "Hibridisasi orbital menjelaskan bentuk molekul dengan menggabungkan orbital atom (sp, sp², sp³) untuk membentuk orbital hibrida baru yang lebih sesuai membentuk ikatan kovalen — misalnya karbon sp³ pada metana membentuk geometri tetrahedral.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Anorganik: Teori Ikatan Valensi dan Hibridisasi Orbital",
+      "tags": [
+        "kimia anorganik",
+        "hibridisasi",
+        "teori ikatan valensi"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-kimia-persamaan-arrhenius",
+    "kategori": "mata-pelajaran",
+    "wilayah": "kimia",
+    "nama": "Kimia Fisik: Persamaan Arrhenius",
+    "tags": [
+      "kinetika kimia lanjut",
+      "persamaan arrhenius",
+      "energi aktivasi"
+    ],
+    "teks": "Persamaan Arrhenius (k = A·e^(-Ea/RT)) menghubungkan konstanta laju reaksi (k) dengan suhu (T) dan energi aktivasi (Ea), menjelaskan secara kuantitatif mengapa laju reaksi meningkat tajam dengan kenaikan suhu — topik kinetika kimia fisik tingkat kuliah.",
+    "meta": {
+      "field": "kimia",
+      "topic": "Kimia Fisik: Persamaan Arrhenius",
+      "tags": [
+        "kinetika kimia lanjut",
+        "persamaan arrhenius",
+        "energi aktivasi"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

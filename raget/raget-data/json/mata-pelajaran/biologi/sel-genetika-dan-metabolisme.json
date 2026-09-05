@@ -1,0 +1,484 @@
+[
+  {
+    "id": "mapel-biologi-struktur-sel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Struktur Sel",
+    "tags": [
+      "sel",
+      "organel",
+      "nukleus",
+      "mitokondria"
+    ],
+    "teks": "Sel — unit dasar kehidupan, terdiri dari membran sel, sitoplasma, dan organel seperti nukleus (inti sel), mitokondria (penghasil energi), dan ribosom (penyusun protein). Sel eukariotik punya inti bermembran, sel prokariotik tidak.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Struktur Sel",
+      "tags": [
+        "sel",
+        "organel",
+        "nukleus",
+        "mitokondria"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-fotosintesis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Fotosintesis",
+    "tags": [
+      "fotosintesis",
+      "kloroplas",
+      "tumbuhan"
+    ],
+    "teks": "Fotosintesis — proses tumbuhan mengubah karbon dioksida dan air menjadi glukosa dan oksigen dengan bantuan cahaya matahari, terjadi di kloroplas. Persamaan reaksinya: 6CO2 + 6H2O + cahaya -> C6H12O6 + 6O2.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Fotosintesis",
+      "tags": [
+        "fotosintesis",
+        "kloroplas",
+        "tumbuhan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-respirasi-sel",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Respirasi Sel",
+    "tags": [
+      "respirasi sel",
+      "atp",
+      "mitokondria"
+    ],
+    "teks": "Respirasi sel — proses pemecahan glukosa dengan oksigen untuk menghasilkan energi (ATP), karbon dioksida, dan air, terjadi di mitokondria. Kebalikan dari fotosintesis dalam hal reaktan dan produknya.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Respirasi Sel",
+      "tags": [
+        "respirasi sel",
+        "atp",
+        "mitokondria"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-dna",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "DNA",
+    "tags": [
+      "dna",
+      "genetika",
+      "basa nitrogen"
+    ],
+    "teks": "DNA (asam deoksiribonukleat) — molekul pembawa informasi genetik, berbentuk heliks ganda, tersusun dari empat basa nitrogen: Adenin berpasangan dengan Timin, Guanin berpasangan dengan Sitosin.",
+    "meta": {
+      "field": "biologi",
+      "topic": "DNA",
+      "tags": [
+        "dna",
+        "genetika",
+        "basa nitrogen"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-rna",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "RNA",
+    "tags": [
+      "rna",
+      "sintesis protein"
+    ],
+    "teks": "RNA (asam ribonukleat) — molekul untai tunggal yang berperan dalam sintesis protein, menggantikan basa Timin pada DNA dengan Urasil. Ada mRNA, tRNA, dan rRNA dengan fungsi berbeda dalam translasi.",
+    "meta": {
+      "field": "biologi",
+      "topic": "RNA",
+      "tags": [
+        "rna",
+        "sintesis protein"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-mitosis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Mitosis",
+    "tags": [
+      "mitosis",
+      "pembelahan sel"
+    ],
+    "teks": "Mitosis — pembelahan sel yang menghasilkan dua sel anak dengan jumlah kromosom sama seperti induknya (diploid), berfungsi untuk pertumbuhan dan perbaikan jaringan tubuh.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Mitosis",
+      "tags": [
+        "mitosis",
+        "pembelahan sel"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-meiosis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Meiosis",
+    "tags": [
+      "meiosis",
+      "gamet",
+      "pembelahan sel"
+    ],
+    "teks": "Meiosis — pembelahan sel yang menghasilkan empat sel anak dengan setengah jumlah kromosom induknya (haploid), terjadi pada pembentukan sel kelamin (gamet).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Meiosis",
+      "tags": [
+        "meiosis",
+        "gamet",
+        "pembelahan sel"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-hukum-mendel-i",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Hukum Mendel I",
+    "tags": [
+      "hukum mendel",
+      "genetika",
+      "alel"
+    ],
+    "teks": "Hukum Mendel I (Hukum Segregasi) — setiap pasangan alel akan memisah secara bebas saat pembentukan gamet, sehingga tiap gamet hanya membawa satu alel dari tiap pasangan gen.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Hukum Mendel I",
+      "tags": [
+        "hukum mendel",
+        "genetika",
+        "alel"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-hukum-mendel-ii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Hukum Mendel II",
+    "tags": [
+      "hukum mendel",
+      "dihibrid",
+      "genetika"
+    ],
+    "teks": "Hukum Mendel II (Hukum Pemilihan Bebas/Independent Assortment) — gen-gen yang berbeda akan diwariskan secara bebas satu sama lain saat pembentukan gamet, berlaku untuk persilangan dihibrid.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Hukum Mendel II",
+      "tags": [
+        "hukum mendel",
+        "dihibrid",
+        "genetika"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-enzim",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Enzim",
+    "tags": [
+      "enzim",
+      "katalis",
+      "substrat"
+    ],
+    "teks": "Enzim — protein yang berfungsi sebagai katalis biologis, mempercepat reaksi kimia dalam tubuh tanpa ikut habis bereaksi, bekerja spesifik pada satu jenis substrat (prinsip kunci-gembok).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Enzim",
+      "tags": [
+        "enzim",
+        "katalis",
+        "substrat"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-homeostasis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Homeostasis",
+    "tags": [
+      "homeostasis",
+      "keseimbangan tubuh"
+    ],
+    "teks": "Homeostasis — kemampuan tubuh makhluk hidup menjaga kondisi internal tetap stabil (seperti suhu tubuh dan kadar gula darah) meski kondisi lingkungan luar berubah-ubah.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Homeostasis",
+      "tags": [
+        "homeostasis",
+        "keseimbangan tubuh"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-transpirasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Transpirasi",
+    "tags": [
+      "transpirasi",
+      "stomata",
+      "tumbuhan"
+    ],
+    "teks": "Transpirasi — proses penguapan air dari permukaan tumbuhan, terutama melalui stomata pada daun, membantu mengangkut air dan mineral dari akar ke seluruh bagian tumbuhan.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Transpirasi",
+      "tags": [
+        "transpirasi",
+        "stomata",
+        "tumbuhan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-imun-manusia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Imun Manusia",
+    "tags": [
+      "imun",
+      "antibodi",
+      "limfosit"
+    ],
+    "teks": "Sistem imun melindungi tubuh dari patogen lewat imunitas nonspesifik (kulit, sel fagosit, demam) dan spesifik (limfosit B menghasilkan antibodi, limfosit T menyerang sel terinfeksi). Antibodi mengenali antigen secara spesifik dan memicu memori imun sehingga infeksi kedua biasanya lebih ringan.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Imun Manusia",
+      "tags": [
+        "imun",
+        "antibodi",
+        "limfosit"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-sistem-otot-dan-rangka",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Sistem Otot dan Rangka Manusia",
+    "tags": [
+      "otot",
+      "rangka",
+      "tulang",
+      "sendi"
+    ],
+    "teks": "Rangka manusia terdiri dari 206 tulang yang menopang tubuh, melindungi organ, dan menjadi tempat melekatnya otot. Otot rangka bekerja berpasangan secara antagonis (misalnya bisep-trisep) untuk menggerakkan tulang lewat sendi sebagai poros gerak.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Sistem Otot dan Rangka Manusia",
+      "tags": [
+        "otot",
+        "rangka",
+        "tulang",
+        "sendi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-fermentasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Fermentasi",
+    "tags": [
+      "fermentasi",
+      "anaerob",
+      "ragi"
+    ],
+    "teks": "Fermentasi adalah respirasi anaerob yang mengubah glukosa menjadi energi tanpa oksigen, menghasilkan produk sampingan seperti asam laktat (pada otot dan bakteri Lactobacillus) atau etanol dan CO2 (pada ragi Saccharomyces, dipakai membuat tape, tempe, dan roti).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Fermentasi",
+      "tags": [
+        "fermentasi",
+        "anaerob",
+        "ragi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-daur-biogeokimia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Daur Biogeokimia (Karbon dan Nitrogen)",
+    "tags": [
+      "daur karbon",
+      "daur nitrogen",
+      "biogeokimia"
+    ],
+    "teks": "Daur biogeokimia adalah perputaran unsur kimia antara makhluk hidup dan lingkungan. Daur karbon melibatkan fotosintesis (menyerap CO2) dan respirasi/pembakaran (melepas CO2); daur nitrogen melibatkan fiksasi nitrogen oleh bakteri, nitrifikasi, dan denitrifikasi kembali ke atmosfer.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Daur Biogeokimia (Karbon dan Nitrogen)",
+      "tags": [
+        "daur karbon",
+        "daur nitrogen",
+        "biogeokimia"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-suksesi-ekologis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Suksesi Ekologis",
+    "tags": [
+      "suksesi",
+      "ekologi",
+      "komunitas"
+    ],
+    "teks": "Suksesi adalah perubahan bertahap komposisi komunitas dalam suatu wilayah dari waktu ke waktu. Suksesi primer dimulai dari lahan kosong tanpa sisa kehidupan (misalnya lahar dingin), sedangkan suksesi sekunder terjadi pada lahan yang sudah pernah ada kehidupan tapi terganggu (misalnya hutan terbakar).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Suksesi Ekologis",
+      "tags": [
+        "suksesi",
+        "ekologi",
+        "komunitas"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-biologi-struktur-protein-tingkat-lanjut",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Struktur Protein (Sekunder, Tersier, Kuarterner)",
+    "tags": [
+      "biokimia",
+      "protein",
+      "struktur protein"
+    ],
+    "teks": "Dalam biokimia, protein memiliki empat tingkat struktur: primer (urutan asam amino), sekunder (pola lipatan lokal seperti alpha-helix dan beta-sheet karena ikatan hidrogen), tersier (lipatan tiga dimensi keseluruhan satu rantai polipeptida), dan kuarterner (gabungan lebih dari satu rantai polipeptida, contohnya hemoglobin dengan empat subunit).",
+    "meta": {
+      "field": "biologi",
+      "topic": "Struktur Protein (Sekunder, Tersier, Kuarterner)",
+      "tags": [
+        "biokimia",
+        "protein",
+        "struktur protein"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-regulasi-ekspresi-gen-operon-lac",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Regulasi Ekspresi Gen: Operon Lac",
+    "tags": [
+      "genetika molekuler",
+      "operon lac",
+      "ekspresi gen"
+    ],
+    "teks": "Operon lac pada bakteri Escherichia coli adalah model klasik regulasi gen prokariotik: gen-gen pencerna laktosa hanya diekspresikan saat laktosa tersedia dan glukosa rendah, diatur oleh protein represor yang lepas dari operator ketika berikatan dengan laktosa (induser), dipelajari dalam mata kuliah genetika molekuler.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Regulasi Ekspresi Gen: Operon Lac",
+      "tags": [
+        "genetika molekuler",
+        "operon lac",
+        "ekspresi gen"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-kurva-pertumbuhan-bakteri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Kurva Pertumbuhan Populasi Bakteri",
+    "tags": [
+      "mikrobiologi",
+      "kurva pertumbuhan",
+      "fase log"
+    ],
+    "teks": "Pertumbuhan populasi bakteri dalam kultur tertutup mengikuti empat fase: fase lag (adaptasi, belum banyak pembelahan), fase log/eksponensial (pembelahan cepat konstan), fase stasioner (nutrisi menipis, laju lahir sama laju mati), dan fase kematian — konsep dasar mata kuliah mikrobiologi.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Kurva Pertumbuhan Populasi Bakteri",
+      "tags": [
+        "mikrobiologi",
+        "kurva pertumbuhan",
+        "fase log"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-hardy-weinberg",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Kesetimbangan Hardy-Weinberg",
+    "tags": [
+      "genetika populasi",
+      "hardy-weinberg",
+      "evolusi"
+    ],
+    "teks": "Hukum Hardy-Weinberg menyatakan frekuensi alel dan genotipe dalam populasi tetap konstan antar generasi jika tidak ada mutasi, migrasi, seleksi, perkawinan acak sempurna, dan populasi besar tak terhingga, dirumuskan p² + 2pq + q² = 1; dipakai dalam genetika populasi untuk mendeteksi apakah evolusi sedang terjadi.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Kesetimbangan Hardy-Weinberg",
+      "tags": [
+        "genetika populasi",
+        "hardy-weinberg",
+        "evolusi"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-biologi-transport-membran-aktif-pasif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "biologi",
+    "nama": "Transport Membran: Pompa Natrium-Kalium",
+    "tags": [
+      "fisiologi sel",
+      "transport aktif",
+      "membran sel"
+    ],
+    "teks": "Transport pasif (difusi, osmosis) tidak butuh energi karena mengikuti gradien konsentrasi, sedangkan transport aktif seperti pompa Na+/K+-ATPase memindahkan ion melawan gradiennya menggunakan energi ATP, menjaga potensial membran sel saraf dan otot — topik inti fisiologi sel tingkat kuliah.",
+    "meta": {
+      "field": "biologi",
+      "topic": "Transport Membran: Pompa Natrium-Kalium",
+      "tags": [
+        "fisiologi sel",
+        "transport aktif",
+        "membran sel"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

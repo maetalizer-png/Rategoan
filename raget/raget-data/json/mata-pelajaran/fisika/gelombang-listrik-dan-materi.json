@@ -1,178 +1,5 @@
 [
   {
-    "id": "mapel-fisika-hukum-newton-i",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Newton I",
-    "tags": [
-      "hukum newton",
-      "inersia"
-    ],
-    "teks": "Hukum Newton I (Hukum Kelembaman/Inersia) — benda akan tetap diam atau bergerak lurus beraturan jika resultan gaya yang bekerja padanya sama dengan nol.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Newton I",
-      "tags": [
-        "hukum newton",
-        "inersia"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-hukum-newton-ii",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Newton II",
-    "tags": [
-      "hukum newton",
-      "gaya",
-      "percepatan"
-    ],
-    "teks": "Hukum Newton II — percepatan benda berbanding lurus dengan gaya total yang bekerja dan berbanding terbalik dengan massanya, dirumuskan F = m × a.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Newton II",
-      "tags": [
-        "hukum newton",
-        "gaya",
-        "percepatan"
-      ],
-      "rumus": "F = m . a"
-    }
-  },
-  {
-    "id": "mapel-fisika-hukum-newton-iii",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Newton III",
-    "tags": [
-      "hukum newton",
-      "aksi reaksi"
-    ],
-    "teks": "Hukum Newton III (Aksi-Reaksi) — setiap gaya aksi yang diberikan suatu benda akan menghasilkan gaya reaksi yang sama besar tapi berlawanan arah dari benda lainnya.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Newton III",
-      "tags": [
-        "hukum newton",
-        "aksi reaksi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-hukum-gravitasi-newton",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Gravitasi Newton",
-    "tags": [
-      "gravitasi",
-      "newton"
-    ],
-    "teks": "Hukum gravitasi Newton — setiap dua massa saling tarik-menarik dengan gaya sebanding dengan hasil kali kedua massa dan berbanding terbalik dengan kuadrat jaraknya: F = G × (m1×m2)/r².",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Gravitasi Newton",
-      "tags": [
-        "gravitasi",
-        "newton"
-      ],
-      "rumus": "F = G.m1.m2/r^2"
-    }
-  },
-  {
-    "id": "mapel-fisika-usaha-kerja",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Usaha (Kerja)",
-    "tags": [
-      "usaha",
-      "kerja"
-    ],
-    "teks": "Usaha (kerja) dalam fisika — hasil kali gaya yang bekerja pada benda dengan perpindahan yang searah gaya tersebut, dirumuskan W = F × s, satuannya Joule.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Usaha (Kerja)",
-      "tags": [
-        "usaha",
-        "kerja"
-      ],
-      "rumus": "W = F . s"
-    }
-  },
-  {
-    "id": "mapel-fisika-energi-kinetik",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Energi Kinetik",
-    "tags": [
-      "energi kinetik"
-    ],
-    "teks": "Energi kinetik — energi yang dimiliki benda karena geraknya, dirumuskan Ek = ½ × m × v², dengan m massa benda dan v kecepatannya.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Energi Kinetik",
-      "tags": [
-        "energi kinetik"
-      ],
-      "rumus": "Ek = 1/2.m.v^2"
-    }
-  },
-  {
-    "id": "mapel-fisika-energi-potensial-gravitasi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Energi Potensial Gravitasi",
-    "tags": [
-      "energi potensial"
-    ],
-    "teks": "Energi potensial gravitasi — energi yang dimiliki benda karena posisi ketinggiannya, dirumuskan Ep = m × g × h, dengan g percepatan gravitasi dan h ketinggian.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Energi Potensial Gravitasi",
-      "tags": [
-        "energi potensial"
-      ],
-      "rumus": "Ep = m.g.h"
-    }
-  },
-  {
-    "id": "mapel-fisika-hukum-kekekalan-energi-mekanik",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Kekekalan Energi Mekanik",
-    "tags": [
-      "kekekalan energi",
-      "energi mekanik"
-    ],
-    "teks": "Hukum kekekalan energi mekanik — jumlah energi kinetik dan energi potensial suatu benda tetap konstan selama tidak ada gaya luar (seperti gesekan) yang bekerja.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Kekekalan Energi Mekanik",
-      "tags": [
-        "kekekalan energi",
-        "energi mekanik"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-daya",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Daya",
-    "tags": [
-      "daya"
-    ],
-    "teks": "Daya — laju energi yang digunakan atau usaha yang dilakukan tiap satuan waktu, dirumuskan P = W/t, satuannya Watt.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Daya",
-      "tags": [
-        "daya"
-      ],
-      "rumus": "P = W/t"
-    }
-  },
-  {
     "id": "mapel-fisika-hukum-ohm",
     "kategori": "mata-pelajaran",
     "wilayah": "fisika",
@@ -189,7 +16,8 @@
         "hukum ohm",
         "listrik"
       ],
-      "rumus": "V = I.R"
+      "rumus": "V = I.R",
+      "tingkat": "sma"
     }
   },
   {
@@ -210,7 +38,8 @@
         "rangkaian listrik",
         "seri",
         "paralel"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -232,7 +61,8 @@
         "frekuensi",
         "periode"
       ],
-      "rumus": "f = 1/T"
+      "rumus": "f = 1/T",
+      "tingkat": "sma"
     }
   },
   {
@@ -252,7 +82,8 @@
         "gelombang",
         "cepat rambat"
       ],
-      "rumus": "v = lambda . f"
+      "rumus": "v = lambda . f",
+      "tingkat": "sma"
     }
   },
   {
@@ -271,7 +102,8 @@
       "tags": [
         "optik",
         "pemantulan cahaya"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -292,7 +124,8 @@
         "optik",
         "pembiasan",
         "snellius"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -310,7 +143,8 @@
       "tags": [
         "tekanan"
       ],
-      "rumus": "P = F/A"
+      "rumus": "P = F/A",
+      "tingkat": "sma"
     }
   },
   {
@@ -329,7 +163,8 @@
       "tags": [
         "hukum pascal",
         "fluida"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -350,7 +185,8 @@
         "hukum archimedes",
         "gaya apung",
         "fluida"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -370,7 +206,8 @@
         "kalor",
         "suhu"
       ],
-      "rumus": "Q = m.c.deltaT"
+      "rumus": "Q = m.c.deltaT",
+      "tingkat": "sma"
     }
   },
   {
@@ -387,65 +224,8 @@
       "topic": "Perubahan Wujud Zat",
       "tags": [
         "perubahan wujud zat"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-hukum-kekekalan-momentum",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Kekekalan Momentum",
-    "tags": [
-      "momentum",
-      "tumbukan"
-    ],
-    "teks": "Hukum kekekalan momentum — jumlah momentum benda-benda sebelum tumbukan sama dengan jumlah momentum sesudah tumbukan, selama tidak ada gaya luar yang bekerja pada sistem.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Kekekalan Momentum",
-      "tags": [
-        "momentum",
-        "tumbukan"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-momentum",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Momentum",
-    "tags": [
-      "momentum"
-    ],
-    "teks": "Momentum — hasil kali massa dan kecepatan suatu benda yang bergerak, dirumuskan p = m × v, merupakan besaran vektor yang searah dengan kecepatan.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Momentum",
-      "tags": [
-        "momentum"
       ],
-      "rumus": "p = m.v"
-    }
-  },
-  {
-    "id": "mapel-fisika-getaran-harmonik-sederhana",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Getaran Harmonik Sederhana",
-    "tags": [
-      "getaran harmonik",
-      "bandul",
-      "pegas"
-    ],
-    "teks": "Getaran harmonik sederhana — gerak bolak-balik benda melalui titik keseimbangan pada lintasan yang sama, contohnya ayunan bandul dan pegas.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Getaran Harmonik Sederhana",
-      "tags": [
-        "getaran harmonik",
-        "bandul",
-        "pegas"
-      ]
+      "tingkat": "sma"
     }
   },
   {
@@ -464,7 +244,8 @@
       "tags": [
         "medan magnet",
         "kemagnetan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -485,7 +266,8 @@
         "hukum faraday",
         "ggl induksi",
         "generator"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -504,7 +286,8 @@
       "tags": [
         "radioaktivitas",
         "peluruhan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -525,63 +308,218 @@
         "optik",
         "lensa",
         "mata"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-hukum-kekekalan-energi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Hukum Kekekalan Energi",
-    "tags": [
-      "kekekalan energi"
-    ],
-    "teks": "Hukum kekekalan energi — energi tidak dapat diciptakan maupun dimusnahkan, hanya dapat berubah dari satu bentuk ke bentuk lainnya, misalnya energi kimia menjadi energi gerak.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Hukum Kekekalan Energi",
-      "tags": [
-        "kekekalan energi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-fisika-percepatan-gravitasi-bumi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "fisika",
-    "nama": "Percepatan Gravitasi Bumi",
-    "tags": [
-      "gravitasi bumi"
-    ],
-    "teks": "Percepatan gravitasi bumi (g) bernilai sekitar 9,8 m/s², yaitu percepatan yang dialami benda yang jatuh bebas akibat tarikan gravitasi bumi.",
-    "meta": {
-      "field": "fisika",
-      "topic": "Percepatan Gravitasi Bumi",
-      "tags": [
-        "gravitasi bumi"
       ],
-      "rumus": "g ~ 9.8 m/s^2"
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-fisika-glb-dan-glbb",
+    "id": "mapel-fisika-difraksi-cahaya",
     "kategori": "mata-pelajaran",
     "wilayah": "fisika",
-    "nama": "GLB dan GLBB",
+    "nama": "Difraksi Cahaya",
     "tags": [
-      "glb",
-      "glbb",
-      "kinematika"
+      "difraksi",
+      "kisi difraksi"
     ],
-    "teks": "Gerak Lurus Beraturan (GLB) adalah gerak dengan kecepatan tetap tanpa percepatan; Gerak Lurus Berubah Beraturan (GLBB) adalah gerak dengan percepatan tetap, kecepatannya berubah beraturan tiap waktu.",
+    "teks": "Difraksi adalah pembelokan gelombang cahaya saat melewati celah sempit atau tepi penghalang. Pada kisi difraksi dengan banyak celah rapat, pola difraksi menghasilkan garis-garis terang tajam yang posisinya bergantung panjang gelombang, dipakai dalam spektrometer.",
     "meta": {
       "field": "fisika",
-      "topic": "GLB dan GLBB",
+      "topic": "Difraksi Cahaya",
       "tags": [
-        "glb",
-        "glbb",
-        "kinematika"
-      ]
+        "difraksi",
+        "kisi difraksi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-fisika-kapasitor",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Kapasitor",
+    "tags": [
+      "kapasitor",
+      "muatan listrik",
+      "kapasitansi"
+    ],
+    "teks": "Kapasitor adalah komponen elektronik penyimpan muatan listrik dalam medan listrik antara dua keping konduktor. Kapasitansi C = Q/V menyatakan kemampuan menyimpan muatan per satuan tegangan, diukur dalam farad.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Kapasitor",
+      "tags": [
+        "kapasitor",
+        "muatan listrik",
+        "kapasitansi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-fisika-relativitas-khusus-dasar",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Dasar Relativitas Khusus",
+    "tags": [
+      "relativitas",
+      "einstein",
+      "dilatasi waktu"
+    ],
+    "teks": "Teori relativitas khusus Einstein menyatakan hukum fisika sama di semua kerangka acuan inersial dan kecepatan cahaya konstan bagi semua pengamat, berimplikasi pada dilatasi waktu (waktu melambat bagi objek bergerak cepat) dan kontraksi panjang.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Dasar Relativitas Khusus",
+      "tags": [
+        "relativitas",
+        "einstein",
+        "dilatasi waktu"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-termodinamika-i-ii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Termodinamika I dan II",
+    "tags": [
+      "termodinamika",
+      "hukum kekekalan energi termal",
+      "entropi"
+    ],
+    "teks": "Hukum termodinamika I adalah kekekalan energi: perubahan energi dalam sistem sama dengan kalor yang masuk dikurangi usaha yang dilakukan sistem. Hukum termodinamika II menyatakan entropi (ukuran ketidakteraturan) semesta selalu meningkat pada proses spontan.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Termodinamika I dan II",
+      "tags": [
+        "termodinamika",
+        "hukum kekekalan energi termal",
+        "entropi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-fisika-gaya-gesek",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Gaya Gesek",
+    "tags": [
+      "gaya gesek",
+      "koefisien gesek"
+    ],
+    "teks": "Gaya gesek adalah gaya yang melawan gerak relatif dua permukaan bersentuhan, terbagi menjadi gesek statis (menahan benda diam agar tak bergerak) dan gesek kinetis (bekerja saat benda sudah bergerak), besarnya sebanding dengan gaya normal dikali koefisien gesek.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Gaya Gesek",
+      "tags": [
+        "gaya gesek",
+        "koefisien gesek"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-fisika-mekanika-lagrangian-pengantar",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Pengantar Mekanika Lagrangian",
+    "tags": [
+      "mekanika analitik",
+      "lagrangian"
+    ],
+    "teks": "Mekanika Lagrangian merumuskan gerak sistem lewat fungsi Lagrangian L = T - V (energi kinetik dikurangi energi potensial) dan prinsip aksi terkecil, memberikan pendekatan alternatif yang lebih fleksibel dibanding hukum Newton untuk sistem kompleks — topik mekanika analitik kuliah fisika.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Pengantar Mekanika Lagrangian",
+      "tags": [
+        "mekanika analitik",
+        "lagrangian"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-fisika-persamaan-maxwell-pengantar",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Pengantar Persamaan Maxwell",
+    "tags": [
+      "elektromagnetika",
+      "persamaan maxwell"
+    ],
+    "teks": "Empat persamaan Maxwell (hukum Gauss listrik, hukum Gauss magnet, hukum Faraday, hukum Ampere-Maxwell) secara lengkap menggambarkan hubungan medan listrik dan magnet, serta memprediksi keberadaan gelombang elektromagnetik yang merambat dengan kecepatan cahaya.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Pengantar Persamaan Maxwell",
+      "tags": [
+        "elektromagnetika",
+        "persamaan maxwell"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-fisika-distribusi-maxwell-boltzmann",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Distribusi Maxwell-Boltzmann",
+    "tags": [
+      "fisika statistik",
+      "distribusi kecepatan molekul"
+    ],
+    "teks": "Distribusi Maxwell-Boltzmann menggambarkan sebaran kecepatan molekul gas ideal pada suhu tertentu: sebagian besar molekul punya kecepatan di sekitar nilai paling mungkin, dengan ekor distribusi untuk molekul sangat cepat atau sangat lambat — dasar fisika statistik dan termodinamika kuliah.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Distribusi Maxwell-Boltzmann",
+      "tags": [
+        "fisika statistik",
+        "distribusi kecepatan molekul"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-fisika-hukum-malus-polarisasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Hukum Malus dan Polarisasi Cahaya",
+    "tags": [
+      "optik lanjut",
+      "polarisasi",
+      "hukum malus"
+    ],
+    "teks": "Hukum Malus menyatakan intensitas cahaya terpolarisasi yang melewati polarisator kedua sebanding dengan kuadrat kosinus sudut antara arah polarisasi cahaya dan sumbu polarisator (I = I0·cos²θ) — konsep optik gelombang lanjut di perkuliahan fisika.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Hukum Malus dan Polarisasi Cahaya",
+      "tags": [
+        "optik lanjut",
+        "polarisasi",
+        "hukum malus"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-fisika-defek-massa-energi-ikat-inti",
+    "kategori": "mata-pelajaran",
+    "wilayah": "fisika",
+    "nama": "Defek Massa dan Energi Ikat Inti",
+    "tags": [
+      "fisika inti",
+      "defek massa",
+      "energi ikat"
+    ],
+    "teks": "Massa inti atom selalu lebih kecil dari jumlah massa proton dan neutron penyusunnya; selisih ini (defek massa) berubah menjadi energi ikat inti sesuai E=mc², menjelaskan mengapa reaksi fisi dan fusi nuklir melepaskan energi sangat besar — dibahas dalam fisika inti tingkat kuliah.",
+    "meta": {
+      "field": "fisika",
+      "topic": "Defek Massa dan Energi Ikat Inti",
+      "tags": [
+        "fisika inti",
+        "defek massa",
+        "energi ikat"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

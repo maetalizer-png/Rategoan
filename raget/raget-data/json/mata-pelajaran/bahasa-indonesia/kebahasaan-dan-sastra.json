@@ -13,149 +13,8 @@
       "topic": "Kalimat Efektif",
       "tags": [
         "kalimat efektif"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-gagasan-pokok",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Gagasan Pokok",
-    "tags": [
-      "gagasan pokok",
-      "ide pokok",
-      "paragraf"
-    ],
-    "teks": "Gagasan pokok (ide pokok) — inti pembahasan yang menjadi dasar pengembangan sebuah paragraf, biasanya terletak pada kalimat utama di awal, akhir, atau awal-akhir paragraf.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Gagasan Pokok",
-      "tags": [
-        "gagasan pokok",
-        "ide pokok",
-        "paragraf"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-kalimat-utama-dan-kalimat-penjelas",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Kalimat Utama dan Kalimat Penjelas",
-    "tags": [
-      "kalimat utama",
-      "kalimat penjelas"
-    ],
-    "teks": "Kalimat utama memuat gagasan pokok paragraf, sedangkan kalimat penjelas berisi rincian, contoh, atau data yang mendukung dan memperjelas kalimat utama.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Kalimat Utama dan Kalimat Penjelas",
-      "tags": [
-        "kalimat utama",
-        "kalimat penjelas"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-eksposisi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Eksposisi",
-    "tags": [
-      "teks eksposisi"
-    ],
-    "teks": "Teks eksposisi — teks yang memaparkan suatu informasi atau pengetahuan secara objektif dan singkat, jelas, padat, disertai fakta untuk memperkuat argumen.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Eksposisi",
-      "tags": [
-        "teks eksposisi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-deskripsi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Deskripsi",
-    "tags": [
-      "teks deskripsi"
-    ],
-    "teks": "Teks deskripsi — teks yang menggambarkan suatu objek, tempat, atau peristiwa secara rinci dan jelas sehingga pembaca seolah dapat melihat, mendengar, atau merasakannya sendiri.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Deskripsi",
-      "tags": [
-        "teks deskripsi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-narasi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Narasi",
-    "tags": [
-      "teks narasi"
-    ],
-    "teks": "Teks narasi — teks yang menceritakan rangkaian peristiwa (fiksi maupun nonfiksi) secara kronologis, memiliki tokoh, alur, dan latar.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Narasi",
-      "tags": [
-        "teks narasi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-argumentasi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Argumentasi",
-    "tags": [
-      "teks argumentasi"
-    ],
-    "teks": "Teks argumentasi — teks yang mengemukakan pendapat disertai alasan dan bukti yang kuat untuk meyakinkan pembaca terhadap suatu pandangan.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Argumentasi",
-      "tags": [
-        "teks argumentasi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-persuasi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Persuasi",
-    "tags": [
-      "teks persuasi"
-    ],
-    "teks": "Teks persuasi — teks yang bertujuan membujuk atau mengajak pembaca untuk melakukan atau mempercayai sesuatu, sering memakai kalimat ajakan.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Persuasi",
-      "tags": [
-        "teks persuasi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-eksplanasi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Eksplanasi",
-    "tags": [
-      "teks eksplanasi"
-    ],
-    "teks": "Teks eksplanasi — teks yang menjelaskan proses terjadinya suatu fenomena, baik fenomena alam (seperti gempa bumi) maupun fenomena sosial, disusun dengan hubungan sebab-akibat.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Eksplanasi",
-      "tags": [
-        "teks eksplanasi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -174,7 +33,8 @@
       "tags": [
         "puisi",
         "sastra"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -193,7 +53,8 @@
       "tags": [
         "prosa",
         "sastra"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -210,7 +71,8 @@
       "topic": "Cerpen",
       "tags": [
         "cerpen"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -227,7 +89,8 @@
       "topic": "Novel",
       "tags": [
         "novel"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -246,7 +109,8 @@
       "tags": [
         "majas",
         "gaya bahasa"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -265,7 +129,8 @@
       "tags": [
         "metafora",
         "majas"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -284,7 +149,8 @@
       "tags": [
         "personifikasi",
         "majas"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -303,7 +169,8 @@
       "tags": [
         "hiperbola",
         "majas"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -322,7 +189,8 @@
       "tags": [
         "sinonim",
         "antonim"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -341,7 +209,8 @@
       "tags": [
         "kata baku",
         "ejaan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -362,7 +231,8 @@
         "puebi",
         "eyd",
         "ejaan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -381,7 +251,8 @@
       "tags": [
         "afiksasi",
         "imbuhan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -400,24 +271,8 @@
       "tags": [
         "kalimat langsung",
         "kalimat tidak langsung"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-indonesia-teks-laporan-hasil-observasi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-indonesia",
-    "nama": "Teks Laporan Hasil Observasi",
-    "tags": [
-      "laporan hasil observasi"
-    ],
-    "teks": "Teks laporan hasil observasi — teks yang berisi hasil pengamatan terhadap suatu objek secara sistematis, disusun dengan struktur pernyataan umum (klasifikasi) diikuti deskripsi bagian.",
-    "meta": {
-      "field": "bahasa-indonesia",
-      "topic": "Teks Laporan Hasil Observasi",
-      "tags": [
-        "laporan hasil observasi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -436,7 +291,8 @@
       "tags": [
         "unsur intrinsik",
         "sastra"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -455,7 +311,8 @@
       "tags": [
         "diksi",
         "pilihan kata"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -474,7 +331,216 @@
       "tags": [
         "kalimat aktif",
         "kalimat pasif"
-      ]
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-surat-lamaran-kerja",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Surat Lamaran Kerja",
+    "tags": [
+      "surat lamaran",
+      "surat resmi"
+    ],
+    "teks": "Surat lamaran kerja adalah surat resmi yang ditujukan kepada perusahaan untuk melamar posisi tertentu, memuat identitas pelamar, posisi yang dituju, kualifikasi, dan lampiran pendukung, ditulis dengan bahasa formal dan sopan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Surat Lamaran Kerja",
+      "tags": [
+        "surat lamaran",
+        "surat resmi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-teks-editorial",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Teks Editorial",
+    "tags": [
+      "editorial",
+      "opini media"
+    ],
+    "teks": "Teks editorial adalah tulisan opini redaksi media massa yang menyikapi isu aktual, berisi fakta, pandangan redaksi, dan rekomendasi atau harapan, mencerminkan sikap resmi media terhadap suatu peristiwa.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Teks Editorial",
+      "tags": [
+        "editorial",
+        "opini media"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kalimat-majemuk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kalimat Majemuk",
+    "tags": [
+      "kalimat majemuk",
+      "klausa",
+      "konjungsi"
+    ],
+    "teks": "Kalimat majemuk terdiri dari lebih dari satu klausa, terbagi menjadi kalimat majemuk setara (klausa sederajat dihubungkan konjungsi seperti \"dan\", \"atau\") dan kalimat majemuk bertingkat (satu klausa induk, satu klausa anak, dihubungkan konjungsi seperti \"karena\", \"meskipun\").",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kalimat Majemuk",
+      "tags": [
+        "kalimat majemuk",
+        "klausa",
+        "konjungsi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-konjungsi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Konjungsi (Kata Hubung)",
+    "tags": [
+      "konjungsi",
+      "kata hubung"
+    ],
+    "teks": "Konjungsi adalah kata yang menghubungkan kata, frasa, klausa, atau kalimat, terbagi menjadi konjungsi koordinatif (menghubungkan unsur setara, misalnya \"dan\", \"tetapi\") dan konjungsi subordinatif (menghubungkan unsur tak setara, misalnya \"karena\", \"jika\").",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Konjungsi (Kata Hubung)",
+      "tags": [
+        "konjungsi",
+        "kata hubung"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-paragraf-deduktif-induktif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Paragraf Deduktif dan Induktif",
+    "tags": [
+      "paragraf deduktif",
+      "paragraf induktif"
+    ],
+    "teks": "Paragraf deduktif meletakkan gagasan utama di awal lalu diikuti kalimat penjelas, sedangkan paragraf induktif meletakkan gagasan utama di akhir setelah kalimat-kalimat penjelas — dua pola pengembangan paragraf yang umum dipakai dalam tulisan bahasa Indonesia.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Paragraf Deduktif dan Induktif",
+      "tags": [
+        "paragraf deduktif",
+        "paragraf induktif"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-fonologi-fonem-alofon",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Linguistik: Fonologi (Fonem dan Alofon)",
+    "tags": [
+      "linguistik",
+      "fonologi",
+      "fonem"
+    ],
+    "teks": "Fonologi mempelajari sistem bunyi bahasa: fonem adalah satuan bunyi terkecil yang membedakan makna (misalnya /p/ vs /b/ pada \"pilih\" vs \"bilih\"), sedangkan alofon adalah variasi pengucapan satu fonem yang tidak mengubah makna.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Linguistik: Fonologi (Fonem dan Alofon)",
+      "tags": [
+        "linguistik",
+        "fonologi",
+        "fonem"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-stilistika-gaya-bahasa-sastra",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Stilistika: Gaya Bahasa dalam Karya Sastra",
+    "tags": [
+      "stilistika",
+      "gaya bahasa",
+      "kajian sastra"
+    ],
+    "teks": "Stilistika adalah kajian gaya bahasa dalam karya sastra secara linguistik, menganalisis bagaimana pilihan kata, struktur kalimat, dan majas pengarang membentuk efek estetis dan makna tertentu — mata kuliah lanjutan dalam program studi sastra.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Stilistika: Gaya Bahasa dalam Karya Sastra",
+      "tags": [
+        "stilistika",
+        "gaya bahasa",
+        "kajian sastra"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-kritik-sastra-strukturalisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Kritik Sastra: Pendekatan Strukturalisme",
+    "tags": [
+      "kritik sastra",
+      "strukturalisme"
+    ],
+    "teks": "Pendekatan strukturalisme dalam kritik sastra menganalisis karya sastra berdasarkan struktur internalnya sendiri (alur, tokoh, tema, unsur intrinsik) tanpa banyak mengaitkan faktor luar seperti biografi pengarang — salah satu mazhab kritik sastra di perkuliahan.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Kritik Sastra: Pendekatan Strukturalisme",
+      "tags": [
+        "kritik sastra",
+        "strukturalisme"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-penulisan-akademik-skripsi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Penulisan Akademik: Kaidah Penulisan Skripsi",
+    "tags": [
+      "penulisan akademik",
+      "skripsi",
+      "metodologi penelitian"
+    ],
+    "teks": "Penulisan akademik seperti skripsi mengikuti kaidah baku: sistematika bab (pendahuluan, tinjauan pustaka, metode, hasil, simpulan), penggunaan bahasa ilmiah baku, serta sitasi dan daftar pustaka sesuai gaya selingkung yang berlaku di perguruan tinggi.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Penulisan Akademik: Kaidah Penulisan Skripsi",
+      "tags": [
+        "penulisan akademik",
+        "skripsi",
+        "metodologi penelitian"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-indonesia-analisis-wacana-kritis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-indonesia",
+    "nama": "Analisis Wacana Kritis",
+    "tags": [
+      "analisis wacana",
+      "wacana kritis"
+    ],
+    "teks": "Analisis wacana kritis mengkaji bagaimana teks (berita, pidato, iklan) merepresentasikan ideologi, kekuasaan, dan hubungan sosial tertentu, melampaui makna literal kalimat untuk mengungkap kepentingan di balik suatu wacana — topik linguistik terapan tingkat kuliah.",
+    "meta": {
+      "field": "bahasa-indonesia",
+      "topic": "Analisis Wacana Kritis",
+      "tags": [
+        "analisis wacana",
+        "wacana kritis"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

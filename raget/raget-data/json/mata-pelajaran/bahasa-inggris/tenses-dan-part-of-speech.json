@@ -14,7 +14,8 @@
       "tags": [
         "simple present tense"
       ],
-      "rumus": "S + V1 (+s/es)"
+      "rumus": "S + V1 (+s/es)",
+      "tingkat": "sma"
     }
   },
   {
@@ -32,7 +33,8 @@
       "tags": [
         "simple past tense"
       ],
-      "rumus": "S + V2"
+      "rumus": "S + V2",
+      "tingkat": "sma"
     }
   },
   {
@@ -50,7 +52,8 @@
       "tags": [
         "simple future tense"
       ],
-      "rumus": "S + will + V1"
+      "rumus": "S + will + V1",
+      "tingkat": "sma"
     }
   },
   {
@@ -68,7 +71,8 @@
       "tags": [
         "present continuous tense"
       ],
-      "rumus": "S + am/is/are + V-ing"
+      "rumus": "S + am/is/are + V-ing",
+      "tingkat": "sma"
     }
   },
   {
@@ -86,7 +90,8 @@
       "tags": [
         "present perfect tense"
       ],
-      "rumus": "S + have/has + V3"
+      "rumus": "S + have/has + V3",
+      "tingkat": "sma"
     }
   },
   {
@@ -104,7 +109,8 @@
       "tags": [
         "past continuous tense"
       ],
-      "rumus": "S + was/were + V-ing"
+      "rumus": "S + was/were + V-ing",
+      "tingkat": "sma"
     }
   },
   {
@@ -123,7 +129,8 @@
       "tags": [
         "noun",
         "kata benda"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -142,7 +149,8 @@
       "tags": [
         "verb",
         "kata kerja"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -161,7 +169,8 @@
       "tags": [
         "adjective",
         "kata sifat"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -180,7 +189,8 @@
       "tags": [
         "adverb",
         "kata keterangan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -199,7 +209,8 @@
       "tags": [
         "pronoun",
         "kata ganti"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -218,7 +229,8 @@
       "tags": [
         "preposition",
         "kata depan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -237,7 +249,8 @@
       "tags": [
         "conjunction",
         "kata hubung"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -256,25 +269,8 @@
       "tags": [
         "degree of comparison",
         "perbandingan"
-      ]
-    }
-  },
-  {
-    "id": "mapel-bahasa-inggris-passive-voice",
-    "kategori": "mata-pelajaran",
-    "wilayah": "bahasa-inggris",
-    "nama": "Passive Voice",
-    "tags": [
-      "passive voice"
-    ],
-    "teks": "Passive voice (kalimat pasif) — kalimat yang subjeknya dikenai tindakan, rumus: Subject + to be + Verb 3. Contoh: \"The letter was written by her.\"",
-    "meta": {
-      "field": "bahasa-inggris",
-      "topic": "Passive Voice",
-      "tags": [
-        "passive voice"
       ],
-      "rumus": "S + to be + V3"
+      "tingkat": "sma"
     }
   },
   {
@@ -291,183 +287,220 @@
       "topic": "Modal Auxiliary Verb",
       "tags": [
         "modal verb"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-direct-and-indirect-speech",
+    "id": "mapel-bahasa-inggris-past-perfect-tense",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Direct and Indirect Speech",
+    "nama": "Past Perfect Tense",
     "tags": [
-      "direct speech",
-      "indirect speech"
+      "tenses",
+      "past perfect"
     ],
-    "teks": "Direct speech mengutip ucapan seseorang secara langsung dengan tanda kutip, sedangkan indirect speech (reported speech) menceritakan ulang ucapan tersebut, biasanya mengubah tense menjadi satu tingkat ke belakang.",
+    "teks": "Past Perfect Tense (had + V3) menyatakan suatu tindakan yang telah selesai sebelum tindakan lain di masa lampau terjadi. Contoh: \"She had left before I arrived\" — kepergiannya terjadi lebih dulu daripada kedatanganku.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Direct and Indirect Speech",
+      "topic": "Past Perfect Tense",
       "tags": [
-        "direct speech",
-        "indirect speech"
-      ]
+        "tenses",
+        "past perfect"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-conditional-sentence-if-clause",
+    "id": "mapel-bahasa-inggris-future-perfect-tense",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Conditional Sentence (If Clause)",
+    "nama": "Future Perfect Tense",
     "tags": [
-      "conditional sentence",
-      "if clause"
+      "tenses",
+      "future perfect"
     ],
-    "teks": "Conditional sentence terdiri dari tipe 1 (kondisi nyata/mungkin terjadi), tipe 2 (kondisi andaikan/tidak nyata masa kini), dan tipe 3 (penyesalan atas kejadian masa lalu yang tidak terjadi).",
+    "teks": "Future Perfect Tense (will have + V3) menyatakan tindakan yang akan sudah selesai pada suatu titik waktu tertentu di masa depan. Contoh: \"By next year, I will have graduated\" — kelulusan akan tercapai sebelum tahun depan.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Conditional Sentence (If Clause)",
+      "topic": "Future Perfect Tense",
       "tags": [
-        "conditional sentence",
-        "if clause"
-      ]
+        "tenses",
+        "future perfect"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-gerund",
+    "id": "mapel-bahasa-inggris-relative-clause",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Gerund",
+    "nama": "Relative Clause",
     "tags": [
-      "gerund"
+      "grammar",
+      "relative clause",
+      "clause"
     ],
-    "teks": "Gerund — bentuk kata kerja + ing yang berfungsi sebagai kata benda dalam kalimat, contoh: \"Swimming is fun\" (swimming berfungsi sebagai subjek).",
+    "teks": "Relative clause adalah klausa yang memberi informasi tambahan tentang kata benda, diawali kata ganti penghubung seperti who, which, that, whose. Contoh: \"The book that I bought is interesting\" — klausa \"that I bought\" menjelaskan \"the book\".",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Gerund",
+      "topic": "Relative Clause",
       "tags": [
-        "gerund"
-      ]
+        "grammar",
+        "relative clause",
+        "clause"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-infinitive",
+    "id": "mapel-bahasa-inggris-causative-verb",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Infinitive",
+    "nama": "Causative Verb",
     "tags": [
-      "infinitive"
+      "grammar",
+      "causative verb"
     ],
-    "teks": "Infinitive — bentuk \"to + Verb 1\" yang berfungsi sebagai objek atau pelengkap dalam kalimat, contoh: \"I want to learn English.\"",
+    "teks": "Causative verb (have/get/make/let someone do something) digunakan saat subjek menyuruh atau membuat orang lain melakukan sesuatu, bukan melakukannya sendiri. Contoh: \"I had my car washed\" — mobil dicuci orang lain atas perintah saya.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Infinitive",
+      "topic": "Causative Verb",
       "tags": [
-        "infinitive"
-      ]
+        "grammar",
+        "causative verb"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-narrative-text",
+    "id": "mapel-bahasa-inggris-analytical-exposition-text",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Narrative Text",
+    "nama": "Analytical Exposition Text",
     "tags": [
-      "narrative text"
+      "text type",
+      "analytical exposition"
     ],
-    "teks": "Narrative text — teks cerita fiksi dengan struktur orientation (pengenalan), complication (konflik), dan resolution (penyelesaian), contoh: dongeng dan legenda.",
+    "teks": "Analytical exposition text bertujuan meyakinkan pembaca bahwa suatu topik penting untuk diperhatikan, dengan struktur: thesis (pendapat penulis), arguments (rangkaian argumen pendukung), dan reiteration (penegasan ulang pendapat).",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Narrative Text",
+      "topic": "Analytical Exposition Text",
       "tags": [
-        "narrative text"
-      ]
+        "text type",
+        "analytical exposition"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-descriptive-text",
+    "id": "mapel-bahasa-inggris-morphology-word-formation",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Descriptive Text",
+    "nama": "Linguistics: Morphology (English Word Formation)",
     "tags": [
-      "descriptive text"
+      "linguistics",
+      "morphology",
+      "word formation"
     ],
-    "teks": "Descriptive text — teks yang menggambarkan ciri fisik, sifat, atau karakteristik suatu objek, orang, atau tempat secara spesifik dan detail.",
+    "teks": "Morphology in linguistics studies how words are formed from morphemes (the smallest meaningful units), including processes like affixation, compounding, and derivation — foundational material in an introductory linguistics course.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Descriptive Text",
+      "topic": "Linguistics: Morphology (English Word Formation)",
       "tags": [
-        "descriptive text"
-      ]
+        "linguistics",
+        "morphology",
+        "word formation"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-recount-text",
+    "id": "mapel-bahasa-inggris-syntax-phrase-structure-rules",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Recount Text",
+    "nama": "Linguistics: Syntax (Phrase Structure Rules)",
     "tags": [
-      "recount text"
+      "linguistics",
+      "syntax",
+      "phrase structure"
     ],
-    "teks": "Recount text — teks yang menceritakan pengalaman atau kejadian masa lalu secara kronologis, biasanya menggunakan simple past tense.",
+    "teks": "Syntax examines how words combine into phrases and sentences following systematic rules, often represented as phrase structure rules and tree diagrams that reveal the hierarchical structure underlying a sentence — a core topic in university-level linguistics.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Recount Text",
+      "topic": "Linguistics: Syntax (Phrase Structure Rules)",
       "tags": [
-        "recount text"
-      ]
+        "linguistics",
+        "syntax",
+        "phrase structure"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-procedure-text",
+    "id": "mapel-bahasa-inggris-phonetics-ipa",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Procedure Text",
+    "nama": "Linguistics: Phonetics and the IPA",
     "tags": [
-      "procedure text"
+      "linguistics",
+      "phonetics",
+      "ipa"
     ],
-    "teks": "Procedure text — teks yang berisi langkah-langkah untuk membuat atau melakukan sesuatu, biasanya memuat tujuan (goal), bahan (materials), dan langkah (steps).",
+    "teks": "Phonetics studies the physical production of speech sounds, using the International Phonetic Alphabet (IPA) to represent English sounds precisely regardless of spelling — essential for pronunciation training and linguistic analysis in language studies programs.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Procedure Text",
+      "topic": "Linguistics: Phonetics and the IPA",
       "tags": [
-        "procedure text"
-      ]
+        "linguistics",
+        "phonetics",
+        "ipa"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-report-text",
+    "id": "mapel-bahasa-inggris-second-language-acquisition",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Report Text",
+    "nama": "Applied Linguistics: Second Language Acquisition",
     "tags": [
-      "report text"
+      "applied linguistics",
+      "sla",
+      "language acquisition"
     ],
-    "teks": "Report text — teks yang memberikan informasi umum tentang suatu hal secara ilmiah/faktual, mirip klasifikasi, misalnya menjelaskan tentang hewan atau fenomena alam secara umum.",
+    "teks": "Second Language Acquisition (SLA) studies how people learn a language beyond their first, examining factors like input, interlanguage development, and fossilization — a central subject in applied linguistics and language teaching programs.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Report Text",
+      "topic": "Applied Linguistics: Second Language Acquisition",
       "tags": [
-        "report text"
-      ]
+        "applied linguistics",
+        "sla",
+        "language acquisition"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-bahasa-inggris-question-words-5w-1h",
+    "id": "mapel-bahasa-inggris-semantics-sense-relations",
     "kategori": "mata-pelajaran",
     "wilayah": "bahasa-inggris",
-    "nama": "Question Words (5W+1H)",
+    "nama": "Semantics: Sense Relations",
     "tags": [
-      "question words",
-      "5w1h"
+      "linguistics",
+      "semantics",
+      "sense relations"
     ],
-    "teks": "Question words (5W+1H) — kata tanya what, who, when, where, why, dan how, digunakan untuk membentuk kalimat tanya dalam bahasa Inggris.",
+    "teks": "Semantics examines meaning relations between words such as synonymy (similar meaning), antonymy (opposite meaning), hyponymy (subtype relation), and homonymy (same form, different meaning) — key concepts in a university semantics course.",
     "meta": {
       "field": "bahasa-inggris",
-      "topic": "Question Words (5W+1H)",
+      "topic": "Semantics: Sense Relations",
       "tags": [
-        "question words",
-        "5w1h"
-      ]
+        "linguistics",
+        "semantics",
+        "sense relations"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

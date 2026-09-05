@@ -1,0 +1,413 @@
+[
+  {
+    "id": "mapel-bahasa-inggris-passive-voice",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Passive Voice",
+    "tags": [
+      "passive voice"
+    ],
+    "teks": "Passive voice (kalimat pasif) — kalimat yang subjeknya dikenai tindakan, rumus: Subject + to be + Verb 3. Contoh: \"The letter was written by her.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Passive Voice",
+      "tags": [
+        "passive voice"
+      ],
+      "rumus": "S + to be + V3",
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-direct-and-indirect-speech",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Direct and Indirect Speech",
+    "tags": [
+      "direct speech",
+      "indirect speech"
+    ],
+    "teks": "Direct speech mengutip ucapan seseorang secara langsung dengan tanda kutip, sedangkan indirect speech (reported speech) menceritakan ulang ucapan tersebut, biasanya mengubah tense menjadi satu tingkat ke belakang.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Direct and Indirect Speech",
+      "tags": [
+        "direct speech",
+        "indirect speech"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-conditional-sentence-if-clause",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Conditional Sentence (If Clause)",
+    "tags": [
+      "conditional sentence",
+      "if clause"
+    ],
+    "teks": "Conditional sentence terdiri dari tipe 1 (kondisi nyata/mungkin terjadi), tipe 2 (kondisi andaikan/tidak nyata masa kini), dan tipe 3 (penyesalan atas kejadian masa lalu yang tidak terjadi).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Conditional Sentence (If Clause)",
+      "tags": [
+        "conditional sentence",
+        "if clause"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-gerund",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Gerund",
+    "tags": [
+      "gerund"
+    ],
+    "teks": "Gerund — bentuk kata kerja + ing yang berfungsi sebagai kata benda dalam kalimat, contoh: \"Swimming is fun\" (swimming berfungsi sebagai subjek).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Gerund",
+      "tags": [
+        "gerund"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-infinitive",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Infinitive",
+    "tags": [
+      "infinitive"
+    ],
+    "teks": "Infinitive — bentuk \"to + Verb 1\" yang berfungsi sebagai objek atau pelengkap dalam kalimat, contoh: \"I want to learn English.\"",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Infinitive",
+      "tags": [
+        "infinitive"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-narrative-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Narrative Text",
+    "tags": [
+      "narrative text"
+    ],
+    "teks": "Narrative text — teks cerita fiksi dengan struktur orientation (pengenalan), complication (konflik), dan resolution (penyelesaian), contoh: dongeng dan legenda.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Narrative Text",
+      "tags": [
+        "narrative text"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-descriptive-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Descriptive Text",
+    "tags": [
+      "descriptive text"
+    ],
+    "teks": "Descriptive text — teks yang menggambarkan ciri fisik, sifat, atau karakteristik suatu objek, orang, atau tempat secara spesifik dan detail.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Descriptive Text",
+      "tags": [
+        "descriptive text"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-recount-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Recount Text",
+    "tags": [
+      "recount text"
+    ],
+    "teks": "Recount text — teks yang menceritakan pengalaman atau kejadian masa lalu secara kronologis, biasanya menggunakan simple past tense.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Recount Text",
+      "tags": [
+        "recount text"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-procedure-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Procedure Text",
+    "tags": [
+      "procedure text"
+    ],
+    "teks": "Procedure text — teks yang berisi langkah-langkah untuk membuat atau melakukan sesuatu, biasanya memuat tujuan (goal), bahan (materials), dan langkah (steps).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Procedure Text",
+      "tags": [
+        "procedure text"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-report-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Report Text",
+    "tags": [
+      "report text"
+    ],
+    "teks": "Report text — teks yang memberikan informasi umum tentang suatu hal secara ilmiah/faktual, mirip klasifikasi, misalnya menjelaskan tentang hewan atau fenomena alam secara umum.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Report Text",
+      "tags": [
+        "report text"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-question-words-5w-1h",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Question Words (5W+1H)",
+    "tags": [
+      "question words",
+      "5w1h"
+    ],
+    "teks": "Question words (5W+1H) — kata tanya what, who, when, where, why, dan how, digunakan untuk membentuk kalimat tanya dalam bahasa Inggris.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Question Words (5W+1H)",
+      "tags": [
+        "question words",
+        "5w1h"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-hortatory-exposition-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Hortatory Exposition Text",
+    "tags": [
+      "text type",
+      "hortatory exposition"
+    ],
+    "teks": "Hortatory exposition text bertujuan membujuk pembaca agar melakukan atau tidak melakukan sesuatu, strukturnya mirip analytical exposition tetapi diakhiri recommendation (rekomendasi tindakan) alih-alih hanya penegasan ulang pendapat.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Hortatory Exposition Text",
+      "tags": [
+        "text type",
+        "hortatory exposition"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-news-item-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "News Item Text",
+    "tags": [
+      "text type",
+      "news item"
+    ],
+    "teks": "News item text menyajikan berita atau peristiwa, disusun dengan struktur piramida terbalik: newsworthy event (inti berita di awal), background events (latar belakang/detail), lalu sources (sumber informasi).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "News Item Text",
+      "tags": [
+        "text type",
+        "news item"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-review-text",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Review Text",
+    "tags": [
+      "text type",
+      "review"
+    ],
+    "teks": "Review text menilai suatu karya (film, buku, produk) secara kritis, memuat orientation (gambaran umum karya), interpretive recount (ringkasan isi), evaluation (penilaian kelebihan-kekurangan), dan evaluative summation (kesimpulan rekomendasi).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Review Text",
+      "tags": [
+        "text type",
+        "review"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-comparative-superlative",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Comparative and Superlative Degree",
+    "tags": [
+      "grammar",
+      "comparative",
+      "superlative"
+    ],
+    "teks": "Comparative degree membandingkan dua hal (bigger, more beautiful), sedangkan superlative degree menunjukkan tingkat tertinggi di antara tiga hal atau lebih (the biggest, the most beautiful) — aturan pembentukannya bergantung jumlah suku kata kata sifat.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Comparative and Superlative Degree",
+      "tags": [
+        "grammar",
+        "comparative",
+        "superlative"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-phrasal-verb",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Phrasal Verb",
+    "tags": [
+      "grammar",
+      "phrasal verb"
+    ],
+    "teks": "Phrasal verb adalah gabungan kata kerja dan partikel (preposisi/adverbia) yang membentuk makna baru berbeda dari kata kerja aslinya, contohnya \"give up\" (menyerah), \"look after\" (merawat), dan \"run into\" (bertemu tak sengaja).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Phrasal Verb",
+      "tags": [
+        "grammar",
+        "phrasal verb"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-discourse-analysis-cohesion-coherence",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Discourse Analysis: Cohesion and Coherence",
+    "tags": [
+      "discourse analysis",
+      "cohesion",
+      "coherence"
+    ],
+    "teks": "Discourse analysis studies language beyond the sentence level, distinguishing cohesion (grammatical/lexical links between sentences, e.g. pronouns, conjunctions) from coherence (the overall logical sense a text makes to its reader).",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Discourse Analysis: Cohesion and Coherence",
+      "tags": [
+        "discourse analysis",
+        "cohesion",
+        "coherence"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-world-englishes",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Sociolinguistics: World Englishes",
+    "tags": [
+      "sociolinguistics",
+      "world englishes",
+      "language variety"
+    ],
+    "teks": "World Englishes refers to the many regional and national varieties of English shaped by local cultures and languages (e.g. Indian English, Singaporean English), studied in sociolinguistics to challenge the idea of a single \"correct\" English.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Sociolinguistics: World Englishes",
+      "tags": [
+        "sociolinguistics",
+        "world englishes",
+        "language variety"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-translation-equivalence-theory",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Translation Studies: Equivalence Theory",
+    "tags": [
+      "translation studies",
+      "equivalence"
+    ],
+    "teks": "Equivalence theory in translation studies examines how a translated text can best correspond to the source text in meaning, form, or effect, distinguishing formal equivalence (literal) from dynamic equivalence (natural, meaning-focused) approaches.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Translation Studies: Equivalence Theory",
+      "tags": [
+        "translation studies",
+        "equivalence"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-speech-act-theory",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Pragmatics: Speech Act Theory",
+    "tags": [
+      "pragmatics",
+      "speech act theory"
+    ],
+    "teks": "Speech act theory, developed by Austin and Searle, analyzes utterances as actions (locutionary, illocutionary, perlocutionary acts) — for example, \"Can you pass the salt?\" functions as a request rather than a literal question about ability.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Pragmatics: Speech Act Theory",
+      "tags": [
+        "pragmatics",
+        "speech act theory"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-bahasa-inggris-academic-writing-thesis-statement",
+    "kategori": "mata-pelajaran",
+    "wilayah": "bahasa-inggris",
+    "nama": "Academic Writing: Thesis Statement and Argumentation",
+    "tags": [
+      "academic writing",
+      "thesis statement"
+    ],
+    "teks": "A strong thesis statement in academic writing states a clear, arguable claim that the rest of the essay supports with evidence and reasoning — a foundational skill taught in university academic writing and composition courses.",
+    "meta": {
+      "field": "bahasa-inggris",
+      "topic": "Academic Writing: Thesis Statement and Argumentation",
+      "tags": [
+        "academic writing",
+        "thesis statement"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

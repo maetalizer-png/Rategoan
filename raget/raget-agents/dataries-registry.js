@@ -200,23 +200,51 @@ export const REGIONS = Object.freeze({
   lingkungan: [
     { id: 'lingkungan-rt', file: './lingkungan/lingkungan-rt.js', names: ['kerja bakti', 'gang', 'tetangga'] },
   ],
-  'mata-pelajaran': [
-    { id: 'biologi', file: './mata-pelajaran/biologi.js', names: ['biologi'] },
-    { id: 'matematika', file: './mata-pelajaran/matematika.js', names: ['matematika'] },
-    { id: 'fisika', file: './mata-pelajaran/fisika.js', names: ['fisika'] },
-    { id: 'kimia', file: './mata-pelajaran/kimia.js', names: ['kimia'] },
-    { id: 'bahasa-indonesia', file: './mata-pelajaran/bahasa-indonesia.js', names: ['bahasa indonesia'] },
-    { id: 'bahasa-inggris', file: './mata-pelajaran/bahasa-inggris.js', names: ['bahasa inggris'] },
-    { id: 'geografi', file: './mata-pelajaran/geografi.js', names: ['geografi'] },
-    { id: 'sejarah', file: './mata-pelajaran/sejarah.js', names: ['sejarah sekolah'] },
-    { id: 'ekonomi', file: './mata-pelajaran/ekonomi.js', names: ['ekonomi sekolah'] },
-    { id: 'ppkn', file: './mata-pelajaran/ppkn.js', names: ['ppkn', 'pendidikan kewarganegaraan'] },
+  biologi: [
+    { id: 'sel-genetika-dan-metabolisme', file: './mata-pelajaran/biologi/sel-genetika-dan-metabolisme.js', names: ['biologi'] },
+    { id: 'fisiologi-ekosistem-dan-bioteknologi', file: './mata-pelajaran/biologi/fisiologi-ekosistem-dan-bioteknologi.js', names: ['biologi'] },
+  ],
+  matematika: [
+    { id: 'aljabar-dan-fungsi', file: './mata-pelajaran/matematika/aljabar-dan-fungsi.js', names: ['matematika'] },
+    { id: 'geometri-dan-statistika', file: './mata-pelajaran/matematika/geometri-dan-statistika.js', names: ['matematika'] },
+  ],
+  fisika: [
+    { id: 'mekanika-dan-energi', file: './mata-pelajaran/fisika/mekanika-dan-energi.js', names: ['fisika'] },
+    { id: 'gelombang-listrik-dan-materi', file: './mata-pelajaran/fisika/gelombang-listrik-dan-materi.js', names: ['fisika'] },
+  ],
+  kimia: [
+    { id: 'struktur-atom-dan-ikatan', file: './mata-pelajaran/kimia/struktur-atom-dan-ikatan.js', names: ['kimia'] },
+    { id: 'reaksi-larutan-dan-kimia-organik', file: './mata-pelajaran/kimia/reaksi-larutan-dan-kimia-organik.js', names: ['kimia'] },
+  ],
+  'bahasa-indonesia': [
+    { id: 'jenis-teks-dan-struktur', file: './mata-pelajaran/bahasa-indonesia/jenis-teks-dan-struktur.js', names: ['bahasa indonesia'] },
+    { id: 'kebahasaan-dan-sastra', file: './mata-pelajaran/bahasa-indonesia/kebahasaan-dan-sastra.js', names: ['bahasa indonesia'] },
+  ],
+  'bahasa-inggris': [
+    { id: 'tenses-dan-part-of-speech', file: './mata-pelajaran/bahasa-inggris/tenses-dan-part-of-speech.js', names: ['bahasa inggris'] },
+    { id: 'text-types-dan-grammar-lanjutan', file: './mata-pelajaran/bahasa-inggris/text-types-dan-grammar-lanjutan.js', names: ['bahasa inggris'] },
+  ],
+  geografi: [
+    { id: 'geografi-fisik', file: './mata-pelajaran/geografi/geografi-fisik.js', names: ['geografi'] },
+    { id: 'geografi-sosial-dan-kependudukan', file: './mata-pelajaran/geografi/geografi-sosial-dan-kependudukan.js', names: ['geografi'] },
+  ],
+  'sejarah-sekolah': [
+    { id: 'sejarah-indonesia-kuno-dan-kolonial', file: './mata-pelajaran/sejarah/sejarah-indonesia-kuno-dan-kolonial.js', names: ['sejarah sekolah'] },
+    { id: 'sejarah-indonesia-modern-dan-dunia', file: './mata-pelajaran/sejarah/sejarah-indonesia-modern-dan-dunia.js', names: ['sejarah sekolah'] },
+  ],
+  'ekonomi-sekolah': [
+    { id: 'konsep-dasar-dan-mikroekonomi', file: './mata-pelajaran/ekonomi/konsep-dasar-dan-mikroekonomi.js', names: ['ekonomi sekolah'] },
+    { id: 'makroekonomi-dan-perdagangan', file: './mata-pelajaran/ekonomi/makroekonomi-dan-perdagangan.js', names: ['ekonomi sekolah'] },
+  ],
+  ppkn: [
+    { id: 'pancasila-dan-uud', file: './mata-pelajaran/ppkn/pancasila-dan-uud.js', names: ['ppkn', 'pendidikan kewarganegaraan'] },
+    { id: 'kenegaraan-dan-kewarganegaraan', file: './mata-pelajaran/ppkn/kenegaraan-dan-kewarganegaraan.js', names: ['ppkn', 'pendidikan kewarganegaraan'] },
   ],
 });
 
 const cache = new Map();
 
-const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan', 'mata-pelajaran': 'mata-pelajaran' };
+const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', 'obrolan-ringan': 'obrolan-ringan', layanan: 'layanan', sekolah: 'sekolah', kesehatan: 'kesehatan', transportasi: 'transportasi', 'rumah-tangga': 'rumah-tangga', kerja: 'kerja', lingkungan: 'lingkungan', biologi: 'mata-pelajaran/biologi', matematika: 'mata-pelajaran/matematika', fisika: 'mata-pelajaran/fisika', kimia: 'mata-pelajaran/kimia', 'bahasa-indonesia': 'mata-pelajaran/bahasa-indonesia', 'bahasa-inggris': 'mata-pelajaran/bahasa-inggris', geografi: 'mata-pelajaran/geografi', 'sejarah-sekolah': 'mata-pelajaran/sejarah', 'ekonomi-sekolah': 'mata-pelajaran/ekonomi', ppkn: 'mata-pelajaran/ppkn' };
 
 function unifiedToLegacyShape(entry, group) {
   return {

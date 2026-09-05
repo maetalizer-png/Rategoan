@@ -1,0 +1,464 @@
+[
+  {
+    "id": "mapel-sejarah-kebangkitan-nasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Kebangkitan Nasional",
+    "tags": [
+      "kebangkitan nasional",
+      "budi utomo"
+    ],
+    "teks": "Kebangkitan Nasional — era pergerakan bangsa Indonesia menuju kemerdekaan yang ditandai berdirinya organisasi Budi Utomo pada 20 Mei 1908, tanggal ini diperingati sebagai Hari Kebangkitan Nasional.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Kebangkitan Nasional",
+      "tags": [
+        "kebangkitan nasional",
+        "budi utomo"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-sumpah-pemuda",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Sumpah Pemuda",
+    "tags": [
+      "sumpah pemuda"
+    ],
+    "teks": "Sumpah Pemuda — ikrar para pemuda Indonesia pada 28 Oktober 1928 yang berisi satu tanah air, satu bangsa, dan satu bahasa: Indonesia, menjadi tonggak persatuan nasional.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Sumpah Pemuda",
+      "tags": [
+        "sumpah pemuda"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-proklamasi-kemerdekaan-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Proklamasi Kemerdekaan Indonesia",
+    "tags": [
+      "proklamasi kemerdekaan"
+    ],
+    "teks": "Proklamasi Kemerdekaan Indonesia dibacakan oleh Soekarno didampingi Mohammad Hatta pada 17 Agustus 1945, menandai berdirinya Republik Indonesia yang merdeka dan berdaulat.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Proklamasi Kemerdekaan Indonesia",
+      "tags": [
+        "proklamasi kemerdekaan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-konferensi-meja-bundar",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Konferensi Meja Bundar",
+    "tags": [
+      "konferensi meja bundar",
+      "kmb"
+    ],
+    "teks": "Konferensi Meja Bundar (KMB) — perundingan tahun 1949 di Den Haag yang menghasilkan pengakuan kedaulatan Indonesia oleh Belanda secara penuh.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Konferensi Meja Bundar",
+      "tags": [
+        "konferensi meja bundar",
+        "kmb"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-orde-lama",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Orde Lama",
+    "tags": [
+      "orde lama"
+    ],
+    "teks": "Orde Lama — periode pemerintahan Indonesia di bawah Presiden Soekarno sejak proklamasi tahun 1945 hingga 1966, ditandai dengan sistem demokrasi terpimpin.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Orde Lama",
+      "tags": [
+        "orde lama"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-orde-baru",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Orde Baru",
+    "tags": [
+      "orde baru"
+    ],
+    "teks": "Orde Baru — periode pemerintahan Indonesia di bawah Presiden Soeharto dari tahun 1966 hingga 1998, menekankan stabilitas politik dan pembangunan ekonomi.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Orde Baru",
+      "tags": [
+        "orde baru"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-reformasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Reformasi",
+    "tags": [
+      "reformasi"
+    ],
+    "teks": "Reformasi — periode setelah tumbangnya pemerintahan Orde Baru pada Mei 1998, mendorong demokratisasi, kebebasan pers, dan desentralisasi pemerintahan di Indonesia.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Reformasi",
+      "tags": [
+        "reformasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-perang-dunia-i",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Perang Dunia I",
+    "tags": [
+      "perang dunia i"
+    ],
+    "teks": "Perang Dunia I (1914-1918) — perang besar yang dipicu terbunuhnya Franz Ferdinand dari Austria-Hungaria, melibatkan Blok Sentral melawan Blok Sekutu, berakhir dengan Perjanjian Versailles.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Perang Dunia I",
+      "tags": [
+        "perang dunia i"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-perang-dunia-ii",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Perang Dunia II",
+    "tags": [
+      "perang dunia ii"
+    ],
+    "teks": "Perang Dunia II (1939-1945) — perang global yang dipicu invasi Jerman ke Polandia, melibatkan Blok Poros (Jerman, Italia, Jepang) melawan Blok Sekutu, diakhiri dengan bom atom di Hiroshima dan Nagasaki.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Perang Dunia II",
+      "tags": [
+        "perang dunia ii"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-revolusi-industri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Revolusi Industri",
+    "tags": [
+      "revolusi industri"
+    ],
+    "teks": "Revolusi Industri — perubahan besar dalam cara produksi dari tenaga manusia/hewan ke tenaga mesin, dimulai di Inggris pada akhir abad ke-18, mengubah struktur ekonomi dan sosial dunia.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Revolusi Industri",
+      "tags": [
+        "revolusi industri"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-perang-dingin",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Perang Dingin",
+    "tags": [
+      "perang dingin"
+    ],
+    "teks": "Perang Dingin — persaingan ideologi, politik, dan militer antara Amerika Serikat (blok kapitalis-liberal) dan Uni Soviet (blok komunis) setelah Perang Dunia II tanpa terjadi perang terbuka langsung antar keduanya.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Perang Dingin",
+      "tags": [
+        "perang dingin"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-historiografi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Historiografi",
+    "tags": [
+      "historiografi"
+    ],
+    "teks": "Historiografi — penulisan sejarah, dibedakan menjadi historiografi tradisional (istana-sentris), kolonial (Eropa-sentris), dan modern/nasional (Indonesia-sentris, berbasis metode ilmiah).",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Historiografi",
+      "tags": [
+        "historiografi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-heuristik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Heuristik",
+    "tags": [
+      "heuristik",
+      "metode sejarah"
+    ],
+    "teks": "Heuristik — tahap pertama metode penelitian sejarah berupa pengumpulan sumber-sumber sejarah, dilanjutkan dengan kritik sumber, interpretasi, dan historiografi (penulisan).",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Heuristik",
+      "tags": [
+        "heuristik",
+        "metode sejarah"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-kronologi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Kronologi",
+    "tags": [
+      "kronologi"
+    ],
+    "teks": "Kronologi — urutan peristiwa sejarah berdasarkan waktu terjadinya, prinsip penting agar rekonstruksi sejarah tersusun secara runtut dan tidak melompat-lompat.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Kronologi",
+      "tags": [
+        "kronologi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-konferensi-asia-afrika",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Konferensi Asia Afrika",
+    "tags": [
+      "konferensi asia afrika",
+      "bandung 1955"
+    ],
+    "teks": "Konferensi Asia Afrika diselenggarakan di Bandung tahun 1955, dihadiri 29 negara Asia dan Afrika untuk membahas solidaritas melawan kolonialisme dan mendorong kerja sama ekonomi-budaya, menghasilkan Dasasila Bandung sebagai prinsip hidup berdampingan secara damai.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Konferensi Asia Afrika",
+      "tags": [
+        "konferensi asia afrika",
+        "bandung 1955"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-asean",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "ASEAN",
+    "tags": [
+      "asean",
+      "organisasi regional"
+    ],
+    "teks": "ASEAN (Association of Southeast Asian Nations) didirikan tahun 1967 lewat Deklarasi Bangkok oleh Indonesia, Malaysia, Filipina, Singapura, dan Thailand untuk mendorong kerja sama ekonomi, sosial, dan keamanan regional Asia Tenggara.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "ASEAN",
+      "tags": [
+        "asean",
+        "organisasi regional"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-gerakan-non-blok",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Gerakan Non-Blok",
+    "tags": [
+      "gerakan non blok",
+      "perang dingin"
+    ],
+    "teks": "Gerakan Non-Blok didirikan tahun 1961, beranggotakan negara-negara yang memilih tidak berpihak pada blok Barat (AS) maupun blok Timur (Uni Soviet) selama Perang Dingin, dipelopori tokoh seperti Soekarno, Nehru, Tito, dan Nasser.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Gerakan Non-Blok",
+      "tags": [
+        "gerakan non blok",
+        "perang dingin"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-krisis-moneter-1998",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Krisis Moneter 1998",
+    "tags": [
+      "krisis moneter",
+      "reformasi 1998"
+    ],
+    "teks": "Krisis moneter 1998 melanda Indonesia dan Asia akibat jatuhnya nilai tukar rupiah drastis, memicu krisis ekonomi dan sosial yang berujung pada gelombang demonstrasi mahasiswa dan lengsernya Presiden Soeharto pada Mei 1998, mengawali era Reformasi.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Krisis Moneter 1998",
+      "tags": [
+        "krisis moneter",
+        "reformasi 1998"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-otonomi-khusus",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Otonomi Khusus",
+    "tags": [
+      "otonomi khusus",
+      "desentralisasi"
+    ],
+    "teks": "Otonomi khusus adalah kewenangan lebih luas yang diberikan kepada daerah tertentu (seperti Aceh dan Papua) untuk mengatur urusan pemerintahannya sendiri, termasuk pengelolaan sumber daya dan penerapan sebagian nilai lokal, sebagai respons atas kondisi sejarah dan sosial khusus daerah tersebut.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Otonomi Khusus",
+      "tags": [
+        "otonomi khusus",
+        "desentralisasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-sejarah-dekolonisasi-asia-afrika",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Sejarah Dunia: Dekolonisasi Asia-Afrika",
+    "tags": [
+      "sejarah dunia",
+      "dekolonisasi"
+    ],
+    "teks": "Dekolonisasi Asia-Afrika pasca Perang Dunia II adalah gelombang kemerdekaan negara-negara jajahan Eropa yang dipercepat oleh melemahnya kekuatan kolonial, meningkatnya nasionalisme lokal, dan tekanan internasional — dikaji sebagai proses global dalam sejarah dunia tingkat kuliah.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Sejarah Dunia: Dekolonisasi Asia-Afrika",
+      "tags": [
+        "sejarah dunia",
+        "dekolonisasi"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-sejarah-renaisans-pencerahan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Sejarah Pemikiran: Renaisans dan Zaman Pencerahan",
+    "tags": [
+      "sejarah pemikiran",
+      "renaisans",
+      "pencerahan"
+    ],
+    "teks": "Renaisans (abad 14-17) menghidupkan kembali nilai humanisme dan seni klasik Yunani-Romawi di Eropa, sementara Zaman Pencerahan (abad 18) menekankan akal budi dan ilmu pengetahuan sebagai dasar kemajuan — keduanya mengubah cara pandang dunia Barat dan dikaji dalam sejarah pemikiran/intelektual.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Sejarah Pemikiran: Renaisans dan Zaman Pencerahan",
+      "tags": [
+        "sejarah pemikiran",
+        "renaisans",
+        "pencerahan"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-sejarah-sejarah-lisan-oral-history",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Antropologi Sejarah: Sejarah Lisan (Oral History)",
+    "tags": [
+      "sejarah lisan",
+      "oral history",
+      "metode sejarah"
+    ],
+    "teks": "Sejarah lisan (oral history) adalah metode pengumpulan data sejarah lewat wawancara dengan pelaku atau saksi peristiwa, penting untuk merekam pengalaman kelompok yang jarang tercatat dalam dokumen resmi — metode yang berkembang pesat dalam historiografi kontemporer.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Antropologi Sejarah: Sejarah Lisan (Oral History)",
+      "tags": [
+        "sejarah lisan",
+        "oral history",
+        "metode sejarah"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-sejarah-kausalitas-sejarah",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Konsep Kausalitas dalam Sejarah",
+    "tags": [
+      "kausalitas sejarah",
+      "filsafat sejarah"
+    ],
+    "teks": "Kausalitas sejarah membahas bagaimana sejarawan menentukan sebab-akibat suatu peristiwa, membedakan sebab langsung (immediate cause) dari sebab mendasar (underlying/structural cause) — perdebatan metodologis penting dalam studi sejarah tingkat lanjut.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Konsep Kausalitas dalam Sejarah",
+      "tags": [
+        "kausalitas sejarah",
+        "filsafat sejarah"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-sejarah-historiografi-indonesia-modern",
+    "kategori": "mata-pelajaran",
+    "wilayah": "sejarah",
+    "nama": "Historiografi Indonesia: Perkembangan Penulisan Sejarah Nasional",
+    "tags": [
+      "historiografi indonesia",
+      "sejarah nasional"
+    ],
+    "teks": "Historiografi Indonesia berkembang dari penulisan bercorak kolonial (Belanda-sentris) menjadi historiografi nasional pasca kemerdekaan yang menempatkan bangsa Indonesia sebagai subjek utama sejarahnya sendiri — pergeseran paradigma yang dikaji dalam mata kuliah historiografi Indonesia.",
+    "meta": {
+      "field": "sejarah",
+      "topic": "Historiografi Indonesia: Perkembangan Penulisan Sejarah Nasional",
+      "tags": [
+        "historiografi indonesia",
+        "sejarah nasional"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

@@ -13,7 +13,8 @@
       "topic": "Pancasila",
       "tags": [
         "pancasila"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -32,7 +33,8 @@
       "tags": [
         "sila pertama",
         "ketuhanan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -51,7 +53,8 @@
       "tags": [
         "sila kedua",
         "kemanusiaan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -70,7 +73,8 @@
       "tags": [
         "sila ketiga",
         "persatuan indonesia"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -89,7 +93,8 @@
       "tags": [
         "sila keempat",
         "kerakyatan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -108,7 +113,8 @@
       "tags": [
         "sila kelima",
         "keadilan sosial"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -127,7 +133,8 @@
       "tags": [
         "uud 1945",
         "konstitusi"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -144,7 +151,8 @@
       "topic": "Pembukaan UUD 1945",
       "tags": [
         "pembukaan uud 1945"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -161,7 +169,8 @@
       "topic": "Trias Politica",
       "tags": [
         "trias politica"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -180,7 +189,8 @@
       "tags": [
         "kekuasaan legislatif",
         "dpr"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -199,7 +209,8 @@
       "tags": [
         "kekuasaan eksekutif",
         "presiden"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -218,7 +229,8 @@
       "tags": [
         "kekuasaan yudikatif",
         "mahkamah agung"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -235,7 +247,8 @@
       "topic": "Bhinneka Tunggal Ika",
       "tags": [
         "bhinneka tunggal ika"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -254,196 +267,214 @@
       "tags": [
         "nkri",
         "negara kesatuan"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-ppkn-hak-asasi-manusia-ham",
+    "id": "mapel-ppkn-amandemen-uud-1945",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Hak Asasi Manusia (HAM)",
+    "nama": "Amandemen UUD 1945",
     "tags": [
-      "ham",
-      "hak asasi manusia"
+      "amandemen",
+      "konstitusi"
     ],
-    "teks": "Hak Asasi Manusia (HAM) — hak dasar yang melekat pada setiap manusia sejak lahir secara kodrati, bersifat universal dan tidak dapat dicabut oleh siapa pun, termasuk hak hidup dan hak kebebasan berpendapat.",
+    "teks": "Amandemen UUD 1945 dilakukan sebanyak empat kali (1999-2002) pasca Reformasi untuk membatasi kekuasaan presiden, memperkuat lembaga legislatif dan yudikatif, serta menambah jaminan hak asasi manusia — mengubah struktur ketatanegaraan Indonesia secara signifikan.",
     "meta": {
       "field": "ppkn",
-      "topic": "Hak Asasi Manusia (HAM)",
+      "topic": "Amandemen UUD 1945",
       "tags": [
-        "ham",
-        "hak asasi manusia"
-      ]
+        "amandemen",
+        "konstitusi"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-ppkn-kewajiban-warga-negara",
+    "id": "mapel-ppkn-sistem-hukum-indonesia",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Kewajiban Warga Negara",
+    "nama": "Sistem Hukum di Indonesia",
     "tags": [
-      "kewajiban warga negara"
+      "sistem hukum",
+      "tata hukum indonesia"
     ],
-    "teks": "Kewajiban warga negara Indonesia meliputi menaati hukum dan pemerintahan, membela negara, menjunjung hak asasi orang lain, dan ikut serta dalam pembangunan.",
+    "teks": "Sistem hukum Indonesia menganut tradisi civil law (hukum tertulis) dipadukan hukum adat dan hukum agama, dengan hierarki peraturan perundang-undangan mulai dari UUD 1945 di puncak hingga peraturan daerah di tingkat paling bawah.",
     "meta": {
       "field": "ppkn",
-      "topic": "Kewajiban Warga Negara",
+      "topic": "Sistem Hukum di Indonesia",
       "tags": [
-        "kewajiban warga negara"
-      ]
+        "sistem hukum",
+        "tata hukum indonesia"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-ppkn-demokrasi-pancasila",
+    "id": "mapel-ppkn-lembaga-peradilan",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Demokrasi Pancasila",
+    "nama": "Lembaga Peradilan",
     "tags": [
-      "demokrasi pancasila"
+      "lembaga peradilan",
+      "mahkamah agung"
     ],
-    "teks": "Demokrasi Pancasila — sistem demokrasi khas Indonesia yang berlandaskan nilai-nilai Pancasila, menekankan musyawarah untuk mufakat dalam pengambilan keputusan.",
+    "teks": "Lembaga peradilan di Indonesia terdiri dari Mahkamah Agung beserta badan peradilan di bawahnya (umum, agama, militer, tata usaha negara) dan Mahkamah Konstitusi, bertugas menegakkan hukum dan keadilan secara independen.",
     "meta": {
       "field": "ppkn",
-      "topic": "Demokrasi Pancasila",
+      "topic": "Lembaga Peradilan",
       "tags": [
-        "demokrasi pancasila"
-      ]
+        "lembaga peradilan",
+        "mahkamah agung"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-ppkn-pemilihan-umum-pemilu",
+    "id": "mapel-ppkn-hak-dan-kewajiban-dalam-uud",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Pemilihan Umum (Pemilu)",
+    "nama": "Hak dan Kewajiban Asasi dalam UUD 1945",
     "tags": [
-      "pemilu"
+      "hak asasi",
+      "kewajiban asasi",
+      "uud 1945"
     ],
-    "teks": "Pemilihan umum (Pemilu) — proses pemilihan wakil rakyat dan pemimpin negara (presiden, anggota legislatif) secara langsung, umum, bebas, rahasia, jujur, dan adil (luber jurdil).",
+    "teks": "UUD 1945 pasal 28A-28J menjamin hak asasi manusia seperti hak hidup, hak beragama, dan hak mendapat pendidikan, sekaligus menegaskan bahwa hak selalu diiringi kewajiban menghormati hak orang lain demi ketertiban umum.",
     "meta": {
       "field": "ppkn",
-      "topic": "Pemilihan Umum (Pemilu)",
+      "topic": "Hak dan Kewajiban Asasi dalam UUD 1945",
       "tags": [
-        "pemilu"
-      ]
+        "hak asasi",
+        "kewajiban asasi",
+        "uud 1945"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-ppkn-otonomi-daerah",
+    "id": "mapel-ppkn-integrasi-nasional",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Otonomi Daerah",
+    "nama": "Integrasi Nasional",
     "tags": [
-      "otonomi daerah"
+      "integrasi nasional",
+      "persatuan bangsa"
     ],
-    "teks": "Otonomi daerah — kewenangan yang diberikan kepada pemerintah daerah untuk mengatur dan mengurus urusan pemerintahannya sendiri sesuai peraturan perundang-undangan, guna mempercepat pembangunan di daerah.",
+    "teks": "Integrasi nasional adalah proses menyatukan berbagai perbedaan suku, agama, ras, dan golongan dalam masyarakat menjadi satu kesatuan bangsa yang utuh, penting bagi Indonesia yang majemuk agar tetap kokoh sebagai satu negara.",
     "meta": {
       "field": "ppkn",
-      "topic": "Otonomi Daerah",
+      "topic": "Integrasi Nasional",
       "tags": [
-        "otonomi daerah"
-      ]
+        "integrasi nasional",
+        "persatuan bangsa"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-ppkn-wawasan-nusantara",
+    "id": "mapel-ppkn-teori-kedaulatan",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Wawasan Nusantara",
+    "nama": "Ilmu Politik: Teori Kedaulatan",
     "tags": [
-      "wawasan nusantara"
+      "ilmu politik",
+      "teori kedaulatan"
     ],
-    "teks": "Wawasan Nusantara — cara pandang bangsa Indonesia tentang diri dan lingkungannya sebagai negara kepulauan yang menyatukan wilayah darat, laut, dan udara sebagai satu kesatuan wilayah dan bangsa.",
+    "teks": "Teori kedaulatan dalam ilmu politik membahas sumber dan pemegang kekuasaan tertinggi suatu negara, mencakup kedaulatan Tuhan, raja, negara, hukum, dan rakyat — konsep kedaulatan rakyat menjadi dasar sistem demokrasi modern termasuk Indonesia.",
     "meta": {
       "field": "ppkn",
-      "topic": "Wawasan Nusantara",
+      "topic": "Ilmu Politik: Teori Kedaulatan",
       "tags": [
-        "wawasan nusantara"
-      ]
+        "ilmu politik",
+        "teori kedaulatan"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-ppkn-bela-negara",
+    "id": "mapel-ppkn-pemisahan-kekuasaan-montesquieu",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Bela Negara",
+    "nama": "Hukum Tata Negara: Teori Pemisahan Kekuasaan Montesquieu",
     "tags": [
-      "bela negara"
+      "hukum tata negara",
+      "pemisahan kekuasaan",
+      "montesquieu"
     ],
-    "teks": "Bela negara — upaya setiap warga negara untuk mempertahankan kedaulatan negara, keutuhan wilayah, dan keselamatan bangsa dari berbagai ancaman, baik lewat jalur militer maupun nonmiliter.",
+    "teks": "Montesquieu mengembangkan teori Trias Politica lebih lanjut dengan menekankan pentingnya pemisahan kekuasaan legislatif, eksekutif, dan yudikatif secara tegas ke lembaga berbeda agar tidak ada satu lembaga yang menumpuk kekuasaan absolut — dasar teori hukum tata negara modern.",
     "meta": {
       "field": "ppkn",
-      "topic": "Bela Negara",
+      "topic": "Hukum Tata Negara: Teori Pemisahan Kekuasaan Montesquieu",
       "tags": [
-        "bela negara"
-      ]
+        "hukum tata negara",
+        "pemisahan kekuasaan",
+        "montesquieu"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-ppkn-norma",
+    "id": "mapel-ppkn-judicial-review",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Norma",
+    "nama": "Hukum Tata Negara: Judicial Review",
     "tags": [
-      "norma"
+      "hukum tata negara",
+      "judicial review"
     ],
-    "teks": "Norma — aturan yang mengatur tingkah laku manusia dalam masyarakat, terdiri dari norma agama, norma kesusilaan, norma kesopanan, dan norma hukum, masing-masing memiliki sanksi berbeda.",
+    "teks": "Judicial review adalah kewenangan lembaga peradilan (di Indonesia, Mahkamah Konstitusi) menguji apakah suatu undang-undang bertentangan dengan konstitusi, mekanisme penting untuk menjaga supremasi konstitusi dalam sistem hukum tata negara.",
     "meta": {
       "field": "ppkn",
-      "topic": "Norma",
+      "topic": "Hukum Tata Negara: Judicial Review",
       "tags": [
-        "norma"
-      ]
+        "hukum tata negara",
+        "judicial review"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-ppkn-pengertian-hukum",
+    "id": "mapel-ppkn-teori-keadilan-john-rawls",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Pengertian Hukum",
+    "nama": "Filsafat Hukum: Teori Keadilan John Rawls (Pengantar)",
     "tags": [
-      "hukum"
+      "filsafat hukum",
+      "teori keadilan",
+      "john rawls"
     ],
-    "teks": "Hukum — kumpulan aturan tertulis maupun tidak tertulis yang mengikat seluruh anggota masyarakat dan memiliki sanksi tegas bagi yang melanggarnya, dibuat oleh lembaga yang berwenang.",
+    "teks": "John Rawls mengusulkan teori keadilan berbasis \"posisi asali\" (original position) dan \"tabir ketidaktahuan\" (veil of ignorance): prinsip keadilan yang adil adalah yang akan disepakati semua orang seandainya mereka tidak tahu posisi sosial mereka sendiri — teori berpengaruh dalam filsafat hukum dan politik.",
     "meta": {
       "field": "ppkn",
-      "topic": "Pengertian Hukum",
+      "topic": "Filsafat Hukum: Teori Keadilan John Rawls (Pengantar)",
       "tags": [
-        "hukum"
-      ]
+        "filsafat hukum",
+        "teori keadilan",
+        "john rawls"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-ppkn-lembaga-negara-indonesia",
+    "id": "mapel-ppkn-desentralisasi-good-governance",
     "kategori": "mata-pelajaran",
     "wilayah": "ppkn",
-    "nama": "Lembaga Negara Indonesia",
+    "nama": "Ilmu Pemerintahan: Desentralisasi dan Good Governance",
     "tags": [
-      "lembaga negara"
+      "ilmu pemerintahan",
+      "desentralisasi"
     ],
-    "teks": "Lembaga negara Indonesia menurut UUD 1945 antara lain MPR, DPR, DPD, Presiden, Mahkamah Agung (MA), Mahkamah Konstitusi (MK), dan Badan Pemeriksa Keuangan (BPK), masing-masing punya kewenangan berbeda.",
+    "teks": "Desentralisasi memindahkan sebagian kewenangan pemerintah pusat ke daerah agar pelayanan publik lebih responsif terhadap kebutuhan lokal, namun keberhasilannya bergantung pada penerapan prinsip good governance di tingkat daerah — topik inti ilmu pemerintahan tingkat kuliah.",
     "meta": {
       "field": "ppkn",
-      "topic": "Lembaga Negara Indonesia",
+      "topic": "Ilmu Pemerintahan: Desentralisasi dan Good Governance",
       "tags": [
-        "lembaga negara"
-      ]
-    }
-  },
-  {
-    "id": "mapel-ppkn-sistem-pemerintahan-presidensial",
-    "kategori": "mata-pelajaran",
-    "wilayah": "ppkn",
-    "nama": "Sistem Pemerintahan Presidensial",
-    "tags": [
-      "sistem presidensial"
-    ],
-    "teks": "Sistem pemerintahan presidensial — sistem di mana Presiden berperan sebagai kepala negara sekaligus kepala pemerintahan, tidak bertanggung jawab kepada parlemen; sistem ini dianut oleh Indonesia.",
-    "meta": {
-      "field": "ppkn",
-      "topic": "Sistem Pemerintahan Presidensial",
-      "tags": [
-        "sistem presidensial"
-      ]
+        "ilmu pemerintahan",
+        "desentralisasi"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

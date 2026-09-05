@@ -1,0 +1,400 @@
+[
+  {
+    "id": "mapel-ekonomi-sistem-ekonomi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Sistem Ekonomi",
+    "tags": [
+      "sistem ekonomi"
+    ],
+    "teks": "Sistem ekonomi terdiri dari sistem tradisional (berbasis adat dan barter), komando/terpusat (dikendalikan pemerintah), pasar/liberal (dikendalikan mekanisme pasar), dan campuran (gabungan pasar dan peran pemerintah).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Sistem Ekonomi",
+      "tags": [
+        "sistem ekonomi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-fungsi-uang",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Fungsi Uang",
+    "tags": [
+      "fungsi uang"
+    ],
+    "teks": "Uang berfungsi sebagai alat tukar (memudahkan transaksi tanpa barter), satuan hitung (menentukan nilai barang), dan penyimpan nilai (bisa disimpan untuk digunakan di masa depan).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Fungsi Uang",
+      "tags": [
+        "fungsi uang"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-bank-sentral",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Bank Sentral",
+    "tags": [
+      "bank sentral",
+      "bank indonesia"
+    ],
+    "teks": "Bank sentral di Indonesia adalah Bank Indonesia (BI), bertugas menjaga stabilitas nilai rupiah dan mengatur kebijakan moneter negara, berbeda dari bank umum yang melayani masyarakat langsung.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Bank Sentral",
+      "tags": [
+        "bank sentral",
+        "bank indonesia"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-koperasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Koperasi",
+    "tags": [
+      "koperasi"
+    ],
+    "teks": "Koperasi — badan usaha yang beranggotakan orang-seorang atau badan hukum koperasi, berlandaskan asas kekeluargaan sesuai amanat Pasal 33 UUD 1945.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Koperasi",
+      "tags": [
+        "koperasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-bumn-dan-bums",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "BUMN dan BUMS",
+    "tags": [
+      "bumn",
+      "bums"
+    ],
+    "teks": "BUMN (Badan Usaha Milik Negara) adalah badan usaha yang modalnya dimiliki dan dikelola pemerintah, sedangkan BUMS (Badan Usaha Milik Swasta) dimiliki dan dikelola oleh perorangan atau kelompok swasta.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "BUMN dan BUMS",
+      "tags": [
+        "bumn",
+        "bums"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-fungsi-pajak",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Fungsi Pajak",
+    "tags": [
+      "fungsi pajak"
+    ],
+    "teks": "Pajak memiliki dua fungsi utama: fungsi budgeter (sumber pendapatan utama negara untuk membiayai belanja negara) dan fungsi regulerend (alat pemerintah untuk mengatur kegiatan ekonomi masyarakat).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Fungsi Pajak",
+      "tags": [
+        "fungsi pajak"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-pendapatan-nasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Pendapatan Nasional",
+    "tags": [
+      "pendapatan nasional"
+    ],
+    "teks": "Pendapatan nasional — total nilai barang dan jasa yang dihasilkan suatu negara dalam periode tertentu (biasanya satu tahun), menjadi dasar perhitungan Produk Domestik Bruto (PDB).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Pendapatan Nasional",
+      "tags": [
+        "pendapatan nasional"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-biaya-produksi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Biaya Produksi",
+    "tags": [
+      "biaya produksi"
+    ],
+    "teks": "Biaya produksi dibedakan menjadi biaya tetap (fixed cost, tidak berubah meski jumlah produksi berubah, seperti sewa gedung) dan biaya variabel (variable cost, berubah sesuai jumlah produksi, seperti bahan baku).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Biaya Produksi",
+      "tags": [
+        "biaya produksi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-perdagangan-internasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Perdagangan Internasional",
+    "tags": [
+      "perdagangan internasional",
+      "ekspor",
+      "impor"
+    ],
+    "teks": "Perdagangan internasional — kegiatan ekspor (menjual barang/jasa ke luar negeri) dan impor (membeli barang/jasa dari luar negeri) antarnegara, didorong oleh perbedaan sumber daya dan keunggulan tiap negara.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Perdagangan Internasional",
+      "tags": [
+        "perdagangan internasional",
+        "ekspor",
+        "impor"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-keunggulan-komparatif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Keunggulan Komparatif",
+    "tags": [
+      "keunggulan komparatif",
+      "david ricardo"
+    ],
+    "teks": "Keunggulan komparatif — teori ekonomi oleh David Ricardo yang menyatakan suatu negara akan diuntungkan dalam perdagangan internasional jika berfokus memproduksi barang dengan biaya relatif (opportunity cost) yang lebih rendah dibanding negara lain.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Keunggulan Komparatif",
+      "tags": [
+        "keunggulan komparatif",
+        "david ricardo"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-kurs-valuta-asing",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Kurs Valuta Asing",
+    "tags": [
+      "kurs",
+      "valuta asing"
+    ],
+    "teks": "Kurs valuta asing adalah nilai tukar suatu mata uang terhadap mata uang lain, ditentukan oleh permintaan dan penawaran di pasar valuta asing, dipengaruhi faktor seperti inflasi, suku bunga, dan neraca perdagangan.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Kurs Valuta Asing",
+      "tags": [
+        "kurs",
+        "valuta asing"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-indeks-harga-konsumen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Indeks Harga Konsumen (IHK)",
+    "tags": [
+      "ihk",
+      "indeks harga konsumen"
+    ],
+    "teks": "Indeks Harga Konsumen (IHK) mengukur perubahan harga rata-rata sekelompok barang dan jasa yang dikonsumsi rumah tangga dari waktu ke waktu, dipakai sebagai indikator utama menghitung tingkat inflasi suatu negara.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Indeks Harga Konsumen (IHK)",
+      "tags": [
+        "ihk",
+        "indeks harga konsumen"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-ketenagakerjaan-dan-pengangguran",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Ketenagakerjaan dan Pengangguran",
+    "tags": [
+      "ketenagakerjaan",
+      "pengangguran"
+    ],
+    "teks": "Pengangguran terjadi ketika seseorang yang termasuk angkatan kerja tidak memiliki pekerjaan, terbagi menjadi pengangguran friksional (sementara saat pindah kerja), struktural (ketidaksesuaian keterampilan), dan siklikal (akibat resesi ekonomi).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Ketenagakerjaan dan Pengangguran",
+      "tags": [
+        "ketenagakerjaan",
+        "pengangguran"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-kredit-dan-lembaga-keuangan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Kredit dan Lembaga Keuangan",
+    "tags": [
+      "kredit",
+      "lembaga keuangan"
+    ],
+    "teks": "Lembaga keuangan seperti bank menyalurkan kredit (pinjaman) kepada masyarakat dan pelaku usaha dengan bunga tertentu, berperan penting menghubungkan pihak yang kelebihan dana (penabung) dengan pihak yang membutuhkan dana (peminjam).",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Kredit dan Lembaga Keuangan",
+      "tags": [
+        "kredit",
+        "lembaga keuangan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-pasar-modal",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Pasar Modal",
+    "tags": [
+      "pasar modal",
+      "saham",
+      "obligasi"
+    ],
+    "teks": "Pasar modal adalah tempat diperjualbelikannya instrumen keuangan jangka panjang seperti saham dan obligasi, memfasilitasi perusahaan mendapat modal dari investor sekaligus memberi masyarakat sarana investasi.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Pasar Modal",
+      "tags": [
+        "pasar modal",
+        "saham",
+        "obligasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-teori-heckscher-ohlin",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Ekonomi Internasional: Teori Heckscher-Ohlin",
+    "tags": [
+      "ekonomi internasional",
+      "teori heckscher-ohlin"
+    ],
+    "teks": "Teori Heckscher-Ohlin menjelaskan pola perdagangan internasional berdasarkan perbedaan kelimpahan faktor produksi antarnegara: negara akan mengekspor barang yang produksinya intensif menggunakan faktor produksi yang melimpah di negara tersebut — perluasan dari teori keunggulan komparatif Ricardo.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Ekonomi Internasional: Teori Heckscher-Ohlin",
+      "tags": [
+        "ekonomi internasional",
+        "teori heckscher-ohlin"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-regresi-linear-sederhana",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Ekonometrika: Pengantar Regresi Linear Sederhana",
+    "tags": [
+      "ekonometrika",
+      "regresi linear"
+    ],
+    "teks": "Regresi linear sederhana dalam ekonometrika memodelkan hubungan antara satu variabel bebas dan satu variabel terikat (Y = a + bX + e) untuk mengestimasi dan menguji hubungan ekonomi secara statistik — alat dasar penelitian empiris ekonomi tingkat kuliah.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Ekonometrika: Pengantar Regresi Linear Sederhana",
+      "tags": [
+        "ekonometrika",
+        "regresi linear"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-teori-dependensi-modernisasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Ekonomi Pembangunan: Teori Dependensi vs Modernisasi",
+    "tags": [
+      "ekonomi pembangunan",
+      "teori dependensi",
+      "teori modernisasi"
+    ],
+    "teks": "Teori modernisasi memandang keterbelakangan sebagai tahap yang bisa dilewati lewat industrialisasi dan investasi mengikuti jejak negara maju, sedangkan teori dependensi memandang keterbelakangan negara berkembang sebagai akibat struktural dari ketergantungan ekonomi terhadap negara maju — dua mazhab besar ekonomi pembangunan.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Ekonomi Pembangunan: Teori Dependensi vs Modernisasi",
+      "tags": [
+        "ekonomi pembangunan",
+        "teori dependensi",
+        "teori modernisasi"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-model-cournot-oligopoli",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Organisasi Industri: Struktur Pasar Oligopoli (Model Cournot Pengantar)",
+    "tags": [
+      "organisasi industri",
+      "oligopoli",
+      "model cournot"
+    ],
+    "teks": "Model Cournot menganalisis persaingan oligopoli di mana perusahaan menentukan kuantitas produksi secara simultan dengan asumsi kuantitas pesaing tetap, menghasilkan keseimbangan yang berada di antara persaingan sempurna dan monopoli — model dasar organisasi industri tingkat kuliah.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Organisasi Industri: Struktur Pasar Oligopoli (Model Cournot Pengantar)",
+      "tags": [
+        "organisasi industri",
+        "oligopoli",
+        "model cournot"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ekonomi-eksternalitas-barang-publik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ekonomi",
+    "nama": "Ekonomi Publik: Eksternalitas dan Barang Publik",
+    "tags": [
+      "ekonomi publik",
+      "eksternalitas",
+      "barang publik"
+    ],
+    "teks": "Eksternalitas terjadi ketika aktivitas ekonomi memberi dampak pada pihak ketiga tanpa kompensasi (misalnya polusi pabrik), sedangkan barang publik bersifat non-rival dan non-excludable (misalnya penerangan jalan) — keduanya jadi alasan utama intervensi pemerintah dalam ekonomi publik.",
+    "meta": {
+      "field": "ekonomi",
+      "topic": "Ekonomi Publik: Eksternalitas dan Barang Publik",
+      "tags": [
+        "ekonomi publik",
+        "eksternalitas",
+        "barang publik"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

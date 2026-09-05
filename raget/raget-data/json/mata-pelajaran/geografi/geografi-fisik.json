@@ -1,0 +1,510 @@
+[
+  {
+    "id": "mapel-geografi-litosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Litosfer",
+    "tags": [
+      "litosfer",
+      "kerak bumi"
+    ],
+    "teks": "Litosfer — lapisan batuan padat terluar bumi (kerak bumi) yang menjadi tempat berpijak makhluk hidup, tersusun dari batuan beku, sedimen, dan metamorf.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Litosfer",
+      "tags": [
+        "litosfer",
+        "kerak bumi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-atmosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Atmosfer",
+    "tags": [
+      "atmosfer"
+    ],
+    "teks": "Atmosfer — lapisan gas yang menyelimuti bumi, melindungi dari radiasi matahari berbahaya dan menjaga suhu bumi tetap stabil, terdiri dari troposfer, stratosfer, mesosfer, termosfer, dan eksosfer.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Atmosfer",
+      "tags": [
+        "atmosfer"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-hidrosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Hidrosfer",
+    "tags": [
+      "hidrosfer"
+    ],
+    "teks": "Hidrosfer — lapisan air di bumi yang meliputi laut, sungai, danau, air tanah, dan es, mencakup lebih dari 70% permukaan bumi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Hidrosfer",
+      "tags": [
+        "hidrosfer"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-biosfer",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Biosfer",
+    "tags": [
+      "biosfer"
+    ],
+    "teks": "Biosfer — lapisan bumi tempat makhluk hidup tinggal dan berinteraksi, mencakup bagian litosfer, hidrosfer, dan atmosfer yang mendukung kehidupan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Biosfer",
+      "tags": [
+        "biosfer"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-lempeng-tektonik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Lempeng Tektonik",
+    "tags": [
+      "lempeng tektonik"
+    ],
+    "teks": "Lempeng tektonik — potongan besar kerak bumi yang terus bergerak sangat lambat, pergerakannya menyebabkan gempa bumi, gunung berapi, dan pembentukan pegunungan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Lempeng Tektonik",
+      "tags": [
+        "lempeng tektonik"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-rotasi-bumi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Rotasi Bumi",
+    "tags": [
+      "rotasi bumi"
+    ],
+    "teks": "Rotasi bumi — perputaran bumi pada porosnya sendiri yang memakan waktu sekitar 24 jam, menyebabkan terjadinya siang dan malam.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Rotasi Bumi",
+      "tags": [
+        "rotasi bumi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-revolusi-bumi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Revolusi Bumi",
+    "tags": [
+      "revolusi bumi"
+    ],
+    "teks": "Revolusi bumi — perputaran bumi mengelilingi matahari yang memakan waktu sekitar 365,25 hari, menyebabkan pergantian musim di berbagai belahan bumi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Revolusi Bumi",
+      "tags": [
+        "revolusi bumi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-iklim-tropis",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Iklim Tropis",
+    "tags": [
+      "iklim tropis"
+    ],
+    "teks": "Iklim tropis — iklim di wilayah sekitar garis khatulistiwa dengan suhu tinggi sepanjang tahun dan curah hujan tinggi, dimiliki negara seperti Indonesia.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Iklim Tropis",
+      "tags": [
+        "iklim tropis"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-siklus-hidrologi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Siklus Hidrologi",
+    "tags": [
+      "siklus hidrologi",
+      "siklus air"
+    ],
+    "teks": "Siklus hidrologi (siklus air) — perputaran air di bumi melalui tahap evaporasi (penguapan), kondensasi (pengembunan), presipitasi (hujan), dan infiltrasi (peresapan ke tanah) secara terus-menerus.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Siklus Hidrologi",
+      "tags": [
+        "siklus hidrologi",
+        "siklus air"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-erosi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Erosi",
+    "tags": [
+      "erosi"
+    ],
+    "teks": "Erosi — proses pengikisan permukaan tanah atau batuan oleh tenaga air, angin, atau es, dapat menyebabkan hilangnya lapisan tanah subur.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Erosi",
+      "tags": [
+        "erosi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-sedimentasi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Sedimentasi",
+    "tags": [
+      "sedimentasi"
+    ],
+    "teks": "Sedimentasi — proses pengendapan material hasil erosi (pasir, lumpur, kerikil) di suatu tempat, biasanya di muara sungai atau dasar danau.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Sedimentasi",
+      "tags": [
+        "sedimentasi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-vulkanisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Vulkanisme",
+    "tags": [
+      "vulkanisme",
+      "gunung berapi"
+    ],
+    "teks": "Vulkanisme — aktivitas magma yang bergerak dari dalam bumi menuju permukaan melalui gunung berapi, dapat berupa letusan eksplosif atau aliran lava.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Vulkanisme",
+      "tags": [
+        "vulkanisme",
+        "gunung berapi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-gempa-bumi-seisme",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Gempa Bumi (Seisme)",
+    "tags": [
+      "gempa bumi",
+      "seisme"
+    ],
+    "teks": "Gempa bumi (seisme) — getaran permukaan bumi akibat pelepasan energi secara tiba-tiba dari pergeseran lempeng tektonik atau patahan (sesar).",
+    "meta": {
+      "field": "geografi",
+      "topic": "Gempa Bumi (Seisme)",
+      "tags": [
+        "gempa bumi",
+        "seisme"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-bioma",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Bioma",
+    "tags": [
+      "bioma"
+    ],
+    "teks": "Bioma — kawasan geografis yang luas dengan iklim dan vegetasi khas, contohnya hutan hujan tropis, gurun, tundra, dan sabana.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Bioma",
+      "tags": [
+        "bioma"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-angin-muson",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Angin Muson",
+    "tags": [
+      "angin muson"
+    ],
+    "teks": "Angin muson — angin musiman yang berubah arah secara periodik, memengaruhi pergantian musim hujan dan musim kemarau di Indonesia.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Angin Muson",
+      "tags": [
+        "angin muson"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-cincin-api-pasifik",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Cincin Api Pasifik",
+    "tags": [
+      "cincin api pasifik",
+      "ring of fire"
+    ],
+    "teks": "Cincin Api Pasifik (Ring of Fire) — jalur gunung berapi dan gempa bumi aktif yang mengelilingi Samudra Pasifik; Indonesia dilewati jalur ini sehingga rawan gempa dan letusan gunung berapi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Cincin Api Pasifik",
+      "tags": [
+        "cincin api pasifik",
+        "ring of fire"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-pola-keruangan-desa-kota",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Pola Keruangan Desa-Kota",
+    "tags": [
+      "desa",
+      "kota",
+      "pola keruangan"
+    ],
+    "teks": "Pola keruangan desa dan kota berbeda karena fungsi dan aktivitas penduduknya: desa umumnya berpola menyebar dengan mata pencaharian agraris, sedangkan kota berpola padat dan terpusat dengan aktivitas industri, jasa, dan perdagangan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Pola Keruangan Desa-Kota",
+      "tags": [
+        "desa",
+        "kota",
+        "pola keruangan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-teori-gravitasi-interaksi-desa-kota",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Interaksi Desa-Kota: Teori Gravitasi",
+    "tags": [
+      "interaksi wilayah",
+      "teori gravitasi",
+      "geografi"
+    ],
+    "teks": "Teori gravitasi (model interaksi wilayah) menghitung kekuatan interaksi antara dua wilayah berdasarkan jumlah penduduk masing-masing dan jarak di antaranya — makin besar penduduk dan makin dekat jaraknya, makin kuat interaksinya (mirip hukum gravitasi Newton).",
+    "meta": {
+      "field": "geografi",
+      "topic": "Interaksi Desa-Kota: Teori Gravitasi",
+      "tags": [
+        "interaksi wilayah",
+        "teori gravitasi",
+        "geografi"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-sistem-informasi-geografis-sig",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Sistem Informasi Geografis (SIG)",
+    "tags": [
+      "sig",
+      "pemetaan digital"
+    ],
+    "teks": "Sistem Informasi Geografis (SIG) adalah sistem berbasis komputer untuk mengumpulkan, menyimpan, mengolah, dan menampilkan data geospasial dalam bentuk peta digital berlapis (layer), dipakai untuk perencanaan wilayah, mitigasi bencana, dan analisis lingkungan.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Sistem Informasi Geografis (SIG)",
+      "tags": [
+        "sig",
+        "pemetaan digital"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-penginderaan-jauh",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Penginderaan Jauh (Inderaja)",
+    "tags": [
+      "penginderaan jauh",
+      "citra satelit"
+    ],
+    "teks": "Penginderaan jauh adalah teknik memperoleh informasi tentang objek di permukaan Bumi tanpa kontak langsung, menggunakan sensor pada satelit atau pesawat untuk merekam citra yang kemudian dianalisis, dipakai memantau tutupan lahan, cuaca, dan bencana.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Penginderaan Jauh (Inderaja)",
+      "tags": [
+        "penginderaan jauh",
+        "citra satelit"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-garis-wallace-weber",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Persebaran Flora Fauna: Garis Wallace dan Weber",
+    "tags": [
+      "garis wallace",
+      "garis weber",
+      "biogeografi indonesia"
+    ],
+    "teks": "Garis Wallace memisahkan zona fauna Asiatis (barat) dan peralihan di Indonesia, sedangkan garis Weber memisahkan zona peralihan dan zona Australis (timur) — kedua garis ini menjelaskan mengapa fauna Indonesia bagian barat mirip Asia dan timur mirip Australia.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Persebaran Flora Fauna: Garis Wallace dan Weber",
+      "tags": [
+        "garis wallace",
+        "garis weber",
+        "biogeografi indonesia"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-geografi-geomorfologi-proses-eksogen-endogen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Geomorfologi: Proses Eksogen dan Endogen",
+    "tags": [
+      "geomorfologi",
+      "proses eksogen",
+      "proses endogen"
+    ],
+    "teks": "Geomorfologi mempelajari bentuk lahan dan proses pembentukannya: proses endogen (tenaga dari dalam Bumi seperti tektonisme dan vulkanisme) membangun relief, sedangkan proses eksogen (pelapukan, erosi, sedimentasi) mengikis dan membentuk ulang permukaan — mata kuliah inti geografi fisik.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Geomorfologi: Proses Eksogen dan Endogen",
+      "tags": [
+        "geomorfologi",
+        "proses eksogen",
+        "proses endogen"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-geografi-hidrologi-neraca-air-das",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Hidrologi Lanjut: Neraca Air DAS",
+    "tags": [
+      "hidrologi",
+      "neraca air",
+      "das"
+    ],
+    "teks": "Neraca air Daerah Aliran Sungai (DAS) menghitung keseimbangan antara input air (curah hujan) dan output (evapotranspirasi, limpasan, infiltrasi) dalam suatu DAS, alat analisis penting dalam mata kuliah hidrologi untuk pengelolaan sumber daya air.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Hidrologi Lanjut: Neraca Air DAS",
+      "tags": [
+        "hidrologi",
+        "neraca air",
+        "das"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-geografi-biogeografi-zona-persebaran",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Biogeografi: Zona Persebaran Spesies",
+    "tags": [
+      "biogeografi",
+      "zona persebaran spesies"
+    ],
+    "teks": "Biogeografi mempelajari pola persebaran spesies secara geografis dan faktor yang membentuknya (iklim, isolasi geografis, evolusi), menjelaskan mengapa daerah dengan kondisi lingkungan mirip di lokasi berbeda bisa memiliki spesies yang sangat berbeda.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Biogeografi: Zona Persebaran Spesies",
+      "tags": [
+        "biogeografi",
+        "zona persebaran spesies"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-geografi-klasifikasi-iklim-koppen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Klimatologi: Klasifikasi Iklim Koppen",
+    "tags": [
+      "klimatologi",
+      "klasifikasi koppen"
+    ],
+    "teks": "Klasifikasi iklim Koppen mengelompokkan iklim dunia berdasarkan suhu dan curah hujan rata-rata menjadi lima tipe utama (tropis, kering, sedang, kontinental, kutub) dengan subtipe lebih rinci — sistem klasifikasi standar dalam mata kuliah klimatologi.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Klimatologi: Klasifikasi Iklim Koppen",
+      "tags": [
+        "klimatologi",
+        "klasifikasi koppen"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-geografi-teori-lokasi-industri-weber",
+    "kategori": "mata-pelajaran",
+    "wilayah": "geografi",
+    "nama": "Geografi Ekonomi: Teori Lokasi Industri Weber",
+    "tags": [
+      "geografi ekonomi",
+      "teori lokasi weber"
+    ],
+    "teks": "Teori lokasi industri Alfred Weber menjelaskan penentuan lokasi pabrik optimal berdasarkan minimisasi biaya transportasi bahan baku dan produk jadi, serta biaya tenaga kerja — konsep dasar geografi ekonomi/industri tingkat kuliah.",
+    "meta": {
+      "field": "geografi",
+      "topic": "Geografi Ekonomi: Teori Lokasi Industri Weber",
+      "tags": [
+        "geografi ekonomi",
+        "teori lokasi weber"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

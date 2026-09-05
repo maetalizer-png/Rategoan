@@ -13,7 +13,8 @@
       "topic": "Konsep Periodisasi Sejarah",
       "tags": [
         "periodisasi sejarah"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -30,7 +31,8 @@
       "topic": "Sumber Sejarah",
       "tags": [
         "sumber sejarah"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -49,7 +51,8 @@
       "tags": [
         "praaksara",
         "prasejarah"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -70,7 +73,8 @@
         "zaman batu",
         "paleolitikum",
         "neolitikum"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -87,7 +91,8 @@
       "topic": "Zaman Logam",
       "tags": [
         "zaman logam"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -104,7 +109,8 @@
       "topic": "Kerajaan Hindu-Buddha di Nusantara",
       "tags": [
         "kerajaan hindu buddha"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -121,7 +127,8 @@
       "topic": "Masuknya Islam ke Nusantara",
       "tags": [
         "masuknya islam nusantara"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -138,7 +145,8 @@
       "topic": "Kolonialisme",
       "tags": [
         "kolonialisme"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -155,7 +163,8 @@
       "topic": "Imperialisme",
       "tags": [
         "imperialisme"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -172,7 +181,8 @@
       "topic": "VOC",
       "tags": [
         "voc"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -191,7 +201,8 @@
       "tags": [
         "tanam paksa",
         "cultuurstelsel"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
@@ -208,251 +219,210 @@
       "topic": "Politik Etis",
       "tags": [
         "politik etis"
-      ]
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-sejarah-kebangkitan-nasional",
+    "id": "mapel-sejarah-perang-diponegoro",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Kebangkitan Nasional",
+    "nama": "Perang Diponegoro",
     "tags": [
-      "kebangkitan nasional",
-      "budi utomo"
+      "perang diponegoro",
+      "perlawanan kolonial"
     ],
-    "teks": "Kebangkitan Nasional — era pergerakan bangsa Indonesia menuju kemerdekaan yang ditandai berdirinya organisasi Budi Utomo pada 20 Mei 1908, tanggal ini diperingati sebagai Hari Kebangkitan Nasional.",
+    "teks": "Perang Diponegoro (1825-1830) adalah perlawanan besar Pangeran Diponegoro terhadap kolonial Belanda di Jawa, dipicu antara lain oleh pemasangan patok jalan di tanah leluhurnya, berakhir setelah Diponegoro ditangkap lewat perundingan yang dikhianati Belanda di Magelang.",
     "meta": {
       "field": "sejarah",
-      "topic": "Kebangkitan Nasional",
+      "topic": "Perang Diponegoro",
       "tags": [
-        "kebangkitan nasional",
-        "budi utomo"
-      ]
+        "perang diponegoro",
+        "perlawanan kolonial"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-sejarah-sumpah-pemuda",
+    "id": "mapel-sejarah-perang-padri",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Sumpah Pemuda",
+    "nama": "Perang Padri",
     "tags": [
-      "sumpah pemuda"
+      "perang padri",
+      "sumatera barat"
     ],
-    "teks": "Sumpah Pemuda — ikrar para pemuda Indonesia pada 28 Oktober 1928 yang berisi satu tanah air, satu bangsa, dan satu bahasa: Indonesia, menjadi tonggak persatuan nasional.",
+    "teks": "Perang Padri (1803-1837) di Sumatera Barat awalnya adalah konflik antara kaum Padri (pembaru Islam) dan kaum adat, yang kemudian berkembang menjadi perlawanan bersama terhadap intervensi kolonial Belanda, dipimpin tokoh seperti Tuanku Imam Bonjol.",
     "meta": {
       "field": "sejarah",
-      "topic": "Sumpah Pemuda",
+      "topic": "Perang Padri",
       "tags": [
-        "sumpah pemuda"
-      ]
+        "perang padri",
+        "sumatera barat"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-sejarah-proklamasi-kemerdekaan-indonesia",
+    "id": "mapel-sejarah-perlawanan-rakyat-terhadap-voc",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Proklamasi Kemerdekaan Indonesia",
+    "nama": "Perlawanan Rakyat terhadap VOC",
     "tags": [
-      "proklamasi kemerdekaan"
+      "perlawanan voc",
+      "sultan hasanuddin"
     ],
-    "teks": "Proklamasi Kemerdekaan Indonesia dibacakan oleh Soekarno didampingi Mohammad Hatta pada 17 Agustus 1945, menandai berdirinya Republik Indonesia yang merdeka dan berdaulat.",
+    "teks": "Berbagai kerajaan Nusantara melawan monopoli dagang VOC, misalnya perlawanan Sultan Hasanuddin dari Gowa yang dijuluki \"Ayam Jantan dari Timur\" karena keberaniannya menentang VOC hingga akhirnya harus menandatangani Perjanjian Bongaya tahun 1667.",
     "meta": {
       "field": "sejarah",
-      "topic": "Proklamasi Kemerdekaan Indonesia",
+      "topic": "Perlawanan Rakyat terhadap VOC",
       "tags": [
-        "proklamasi kemerdekaan"
-      ]
+        "perlawanan voc",
+        "sultan hasanuddin"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-sejarah-konferensi-meja-bundar",
+    "id": "mapel-sejarah-g30s",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Konferensi Meja Bundar",
+    "nama": "Gerakan 30 September (G30S)",
     "tags": [
-      "konferensi meja bundar",
-      "kmb"
+      "g30s",
+      "1965"
     ],
-    "teks": "Konferensi Meja Bundar (KMB) — perundingan tahun 1949 di Den Haag yang menghasilkan pengakuan kedaulatan Indonesia oleh Belanda secara penuh.",
+    "teks": "Gerakan 30 September (G30S) adalah peristiwa pembunuhan sejumlah jenderal TNI Angkatan Darat pada malam 30 September ke 1 Oktober 1965, yang menjadi titik balik politik Indonesia dan berujung pada pergantian kekuasaan dari Orde Lama ke Orde Baru.",
     "meta": {
       "field": "sejarah",
-      "topic": "Konferensi Meja Bundar",
+      "topic": "Gerakan 30 September (G30S)",
       "tags": [
-        "konferensi meja bundar",
-        "kmb"
-      ]
+        "g30s",
+        "1965"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-sejarah-orde-lama",
+    "id": "mapel-sejarah-demokrasi-terpimpin",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Orde Lama",
+    "nama": "Demokrasi Terpimpin",
     "tags": [
-      "orde lama"
+      "demokrasi terpimpin",
+      "soekarno"
     ],
-    "teks": "Orde Lama — periode pemerintahan Indonesia di bawah Presiden Soekarno sejak proklamasi tahun 1945 hingga 1966, ditandai dengan sistem demokrasi terpimpin.",
+    "teks": "Demokrasi Terpimpin adalah sistem pemerintahan yang diterapkan Presiden Soekarno sejak Dekret Presiden 1959, menempatkan kekuasaan besar di tangan presiden dengan alasan menyatukan bangsa, berlangsung hingga peralihan ke Orde Baru tahun 1966-1967.",
     "meta": {
       "field": "sejarah",
-      "topic": "Orde Lama",
+      "topic": "Demokrasi Terpimpin",
       "tags": [
-        "orde lama"
-      ]
+        "demokrasi terpimpin",
+        "soekarno"
+      ],
+      "tingkat": "sma"
     }
   },
   {
-    "id": "mapel-sejarah-orde-baru",
+    "id": "mapel-sejarah-mazhab-annales",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Orde Baru",
+    "nama": "Historiografi: Mazhab Annales",
     "tags": [
-      "orde baru"
+      "historiografi lanjut",
+      "mazhab annales"
     ],
-    "teks": "Orde Baru — periode pemerintahan Indonesia di bawah Presiden Soeharto dari tahun 1966 hingga 1998, menekankan stabilitas politik dan pembangunan ekonomi.",
+    "teks": "Mazhab Annales adalah aliran historiografi Prancis abad ke-20 yang menekankan kajian struktur sosial-ekonomi jangka panjang (longue durée) dan sejarah kehidupan sehari-hari, bukan hanya peristiwa politik dan tokoh besar — dipelajari dalam mata kuliah metodologi/historiografi.",
     "meta": {
       "field": "sejarah",
-      "topic": "Orde Baru",
+      "topic": "Historiografi: Mazhab Annales",
       "tags": [
-        "orde baru"
-      ]
+        "historiografi lanjut",
+        "mazhab annales"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-sejarah-reformasi",
+    "id": "mapel-sejarah-kritik-sumber-ekstern-intern",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Reformasi",
+    "nama": "Metodologi Sejarah: Kritik Sumber Ekstern dan Intern",
     "tags": [
-      "reformasi"
+      "metodologi sejarah",
+      "kritik sumber"
     ],
-    "teks": "Reformasi — periode setelah tumbangnya pemerintahan Orde Baru pada Mei 1998, mendorong demokratisasi, kebebasan pers, dan desentralisasi pemerintahan di Indonesia.",
+    "teks": "Dalam metodologi sejarah, kritik ekstern menguji keaslian fisik suatu sumber (apakah dokumen/artefak itu asli), sedangkan kritik intern menguji kredibilitas isi sumber (apakah informasinya dapat dipercaya) — tahap penting sebelum sumber dipakai sebagai bukti sejarah.",
     "meta": {
       "field": "sejarah",
-      "topic": "Reformasi",
+      "topic": "Metodologi Sejarah: Kritik Sumber Ekstern dan Intern",
       "tags": [
-        "reformasi"
-      ]
+        "metodologi sejarah",
+        "kritik sumber"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-sejarah-perang-dunia-i",
+    "id": "mapel-sejarah-filsafat-sejarah-siklikal-linear",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Perang Dunia I",
+    "nama": "Filsafat Sejarah: Pendekatan Siklikal vs Linear",
     "tags": [
-      "perang dunia i"
+      "filsafat sejarah",
+      "pendekatan siklikal",
+      "pendekatan linear"
     ],
-    "teks": "Perang Dunia I (1914-1918) — perang besar yang dipicu terbunuhnya Franz Ferdinand dari Austria-Hungaria, melibatkan Blok Sentral melawan Blok Sekutu, berakhir dengan Perjanjian Versailles.",
+    "teks": "Filsafat sejarah mempertanyakan pola dasar perjalanan sejarah: pandangan siklikal melihat sejarah berulang dalam siklus (seperti pandangan beberapa filsuf Yunani kuno), sedangkan pandangan linear melihat sejarah bergerak progresif menuju arah tertentu (seperti pandangan Hegel dan Marx).",
     "meta": {
       "field": "sejarah",
-      "topic": "Perang Dunia I",
+      "topic": "Filsafat Sejarah: Pendekatan Siklikal vs Linear",
       "tags": [
-        "perang dunia i"
-      ]
+        "filsafat sejarah",
+        "pendekatan siklikal",
+        "pendekatan linear"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-sejarah-perang-dunia-ii",
+    "id": "mapel-sejarah-revolusi-industri-dampak-global",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Perang Dunia II",
+    "nama": "Sejarah Ekonomi: Dampak Global Revolusi Industri",
     "tags": [
-      "perang dunia ii"
+      "sejarah ekonomi",
+      "revolusi industri lanjut"
     ],
-    "teks": "Perang Dunia II (1939-1945) — perang global yang dipicu invasi Jerman ke Polandia, melibatkan Blok Poros (Jerman, Italia, Jepang) melawan Blok Sekutu, diakhiri dengan bom atom di Hiroshima dan Nagasaki.",
+    "teks": "Revolusi Industri yang dimulai di Inggris abad ke-18 tak hanya mengubah cara produksi lewat mesin, tapi memicu urbanisasi besar-besaran, munculnya kelas pekerja industri, dan memperkuat kolonialisme Eropa demi bahan baku dan pasar baru — dianalisis mendalam dalam sejarah ekonomi tingkat kuliah.",
     "meta": {
       "field": "sejarah",
-      "topic": "Perang Dunia II",
+      "topic": "Sejarah Ekonomi: Dampak Global Revolusi Industri",
       "tags": [
-        "perang dunia ii"
-      ]
+        "sejarah ekonomi",
+        "revolusi industri lanjut"
+      ],
+      "tingkat": "kuliah"
     }
   },
   {
-    "id": "mapel-sejarah-revolusi-industri",
+    "id": "mapel-sejarah-teori-perubahan-sosial",
     "kategori": "mata-pelajaran",
     "wilayah": "sejarah",
-    "nama": "Revolusi Industri",
+    "nama": "Sejarah Sosial: Teori Perubahan Sosial",
     "tags": [
-      "revolusi industri"
+      "sejarah sosial",
+      "teori perubahan sosial"
     ],
-    "teks": "Revolusi Industri — perubahan besar dalam cara produksi dari tenaga manusia/hewan ke tenaga mesin, dimulai di Inggris pada akhir abad ke-18, mengubah struktur ekonomi dan sosial dunia.",
+    "teks": "Sejarah sosial menganalisis perubahan struktur masyarakat dari waktu ke waktu memakai kerangka teori perubahan sosial (evolusioner, konflik, atau fungsional) untuk memahami mengapa dan bagaimana tatanan sosial bertransformasi.",
     "meta": {
       "field": "sejarah",
-      "topic": "Revolusi Industri",
+      "topic": "Sejarah Sosial: Teori Perubahan Sosial",
       "tags": [
-        "revolusi industri"
-      ]
-    }
-  },
-  {
-    "id": "mapel-sejarah-perang-dingin",
-    "kategori": "mata-pelajaran",
-    "wilayah": "sejarah",
-    "nama": "Perang Dingin",
-    "tags": [
-      "perang dingin"
-    ],
-    "teks": "Perang Dingin — persaingan ideologi, politik, dan militer antara Amerika Serikat (blok kapitalis-liberal) dan Uni Soviet (blok komunis) setelah Perang Dunia II tanpa terjadi perang terbuka langsung antar keduanya.",
-    "meta": {
-      "field": "sejarah",
-      "topic": "Perang Dingin",
-      "tags": [
-        "perang dingin"
-      ]
-    }
-  },
-  {
-    "id": "mapel-sejarah-historiografi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "sejarah",
-    "nama": "Historiografi",
-    "tags": [
-      "historiografi"
-    ],
-    "teks": "Historiografi — penulisan sejarah, dibedakan menjadi historiografi tradisional (istana-sentris), kolonial (Eropa-sentris), dan modern/nasional (Indonesia-sentris, berbasis metode ilmiah).",
-    "meta": {
-      "field": "sejarah",
-      "topic": "Historiografi",
-      "tags": [
-        "historiografi"
-      ]
-    }
-  },
-  {
-    "id": "mapel-sejarah-heuristik",
-    "kategori": "mata-pelajaran",
-    "wilayah": "sejarah",
-    "nama": "Heuristik",
-    "tags": [
-      "heuristik",
-      "metode sejarah"
-    ],
-    "teks": "Heuristik — tahap pertama metode penelitian sejarah berupa pengumpulan sumber-sumber sejarah, dilanjutkan dengan kritik sumber, interpretasi, dan historiografi (penulisan).",
-    "meta": {
-      "field": "sejarah",
-      "topic": "Heuristik",
-      "tags": [
-        "heuristik",
-        "metode sejarah"
-      ]
-    }
-  },
-  {
-    "id": "mapel-sejarah-kronologi",
-    "kategori": "mata-pelajaran",
-    "wilayah": "sejarah",
-    "nama": "Kronologi",
-    "tags": [
-      "kronologi"
-    ],
-    "teks": "Kronologi — urutan peristiwa sejarah berdasarkan waktu terjadinya, prinsip penting agar rekonstruksi sejarah tersusun secara runtut dan tidak melompat-lompat.",
-    "meta": {
-      "field": "sejarah",
-      "topic": "Kronologi",
-      "tags": [
-        "kronologi"
-      ]
+        "sejarah sosial",
+        "teori perubahan sosial"
+      ],
+      "tingkat": "kuliah"
     }
   }
 ]

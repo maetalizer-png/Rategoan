@@ -1,0 +1,406 @@
+[
+  {
+    "id": "mapel-ppkn-hak-asasi-manusia-ham",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Hak Asasi Manusia (HAM)",
+    "tags": [
+      "ham",
+      "hak asasi manusia"
+    ],
+    "teks": "Hak Asasi Manusia (HAM) — hak dasar yang melekat pada setiap manusia sejak lahir secara kodrati, bersifat universal dan tidak dapat dicabut oleh siapa pun, termasuk hak hidup dan hak kebebasan berpendapat.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Hak Asasi Manusia (HAM)",
+      "tags": [
+        "ham",
+        "hak asasi manusia"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-kewajiban-warga-negara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Kewajiban Warga Negara",
+    "tags": [
+      "kewajiban warga negara"
+    ],
+    "teks": "Kewajiban warga negara Indonesia meliputi menaati hukum dan pemerintahan, membela negara, menjunjung hak asasi orang lain, dan ikut serta dalam pembangunan.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Kewajiban Warga Negara",
+      "tags": [
+        "kewajiban warga negara"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-demokrasi-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Demokrasi Pancasila",
+    "tags": [
+      "demokrasi pancasila"
+    ],
+    "teks": "Demokrasi Pancasila — sistem demokrasi khas Indonesia yang berlandaskan nilai-nilai Pancasila, menekankan musyawarah untuk mufakat dalam pengambilan keputusan.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Demokrasi Pancasila",
+      "tags": [
+        "demokrasi pancasila"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-pemilihan-umum-pemilu",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pemilihan Umum (Pemilu)",
+    "tags": [
+      "pemilu"
+    ],
+    "teks": "Pemilihan umum (Pemilu) — proses pemilihan wakil rakyat dan pemimpin negara (presiden, anggota legislatif) secara langsung, umum, bebas, rahasia, jujur, dan adil (luber jurdil).",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pemilihan Umum (Pemilu)",
+      "tags": [
+        "pemilu"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-otonomi-daerah",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Otonomi Daerah",
+    "tags": [
+      "otonomi daerah"
+    ],
+    "teks": "Otonomi daerah — kewenangan yang diberikan kepada pemerintah daerah untuk mengatur dan mengurus urusan pemerintahannya sendiri sesuai peraturan perundang-undangan, guna mempercepat pembangunan di daerah.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Otonomi Daerah",
+      "tags": [
+        "otonomi daerah"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-wawasan-nusantara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Wawasan Nusantara",
+    "tags": [
+      "wawasan nusantara"
+    ],
+    "teks": "Wawasan Nusantara — cara pandang bangsa Indonesia tentang diri dan lingkungannya sebagai negara kepulauan yang menyatukan wilayah darat, laut, dan udara sebagai satu kesatuan wilayah dan bangsa.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Wawasan Nusantara",
+      "tags": [
+        "wawasan nusantara"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-bela-negara",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Bela Negara",
+    "tags": [
+      "bela negara"
+    ],
+    "teks": "Bela negara — upaya setiap warga negara untuk mempertahankan kedaulatan negara, keutuhan wilayah, dan keselamatan bangsa dari berbagai ancaman, baik lewat jalur militer maupun nonmiliter.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Bela Negara",
+      "tags": [
+        "bela negara"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-norma",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Norma",
+    "tags": [
+      "norma"
+    ],
+    "teks": "Norma — aturan yang mengatur tingkah laku manusia dalam masyarakat, terdiri dari norma agama, norma kesusilaan, norma kesopanan, dan norma hukum, masing-masing memiliki sanksi berbeda.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Norma",
+      "tags": [
+        "norma"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-pengertian-hukum",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pengertian Hukum",
+    "tags": [
+      "hukum"
+    ],
+    "teks": "Hukum — kumpulan aturan tertulis maupun tidak tertulis yang mengikat seluruh anggota masyarakat dan memiliki sanksi tegas bagi yang melanggarnya, dibuat oleh lembaga yang berwenang.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pengertian Hukum",
+      "tags": [
+        "hukum"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-lembaga-negara-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Lembaga Negara Indonesia",
+    "tags": [
+      "lembaga negara"
+    ],
+    "teks": "Lembaga negara Indonesia menurut UUD 1945 antara lain MPR, DPR, DPD, Presiden, Mahkamah Agung (MA), Mahkamah Konstitusi (MK), dan Badan Pemeriksa Keuangan (BPK), masing-masing punya kewenangan berbeda.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Lembaga Negara Indonesia",
+      "tags": [
+        "lembaga negara"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-sistem-pemerintahan-presidensial",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Sistem Pemerintahan Presidensial",
+    "tags": [
+      "sistem presidensial"
+    ],
+    "teks": "Sistem pemerintahan presidensial — sistem di mana Presiden berperan sebagai kepala negara sekaligus kepala pemerintahan, tidak bertanggung jawab kepada parlemen; sistem ini dianut oleh Indonesia.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Sistem Pemerintahan Presidensial",
+      "tags": [
+        "sistem presidensial"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-ancaman-terhadap-nkri",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Ancaman terhadap NKRI",
+    "tags": [
+      "ancaman nkri",
+      "ketahanan nasional"
+    ],
+    "teks": "Ancaman terhadap NKRI dapat berupa ancaman militer (agresi, terorisme), non-militer (disinformasi, konflik SARA, ancaman siber), maupun hibrida (gabungan keduanya), sehingga memerlukan kewaspadaan dan ketahanan nasional di berbagai bidang.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Ancaman terhadap NKRI",
+      "tags": [
+        "ancaman nkri",
+        "ketahanan nasional"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-ideologi-terbuka-pancasila",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Pancasila sebagai Ideologi Terbuka",
+    "tags": [
+      "ideologi terbuka",
+      "pancasila"
+    ],
+    "teks": "Pancasila sebagai ideologi terbuka berarti nilai-nilai dasarnya bersifat tetap namun penerapannya bisa berkembang mengikuti perubahan zaman, berbeda dengan ideologi tertutup yang kaku dan menolak perubahan.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Pancasila sebagai Ideologi Terbuka",
+      "tags": [
+        "ideologi terbuka",
+        "pancasila"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-good-governance",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Good Governance (Tata Kelola Pemerintahan yang Baik)",
+    "tags": [
+      "good governance",
+      "tata kelola"
+    ],
+    "teks": "Good governance adalah prinsip penyelenggaraan pemerintahan yang transparan, akuntabel, partisipatif, dan berorientasi pada hukum, bertujuan mencegah korupsi dan meningkatkan kepercayaan publik terhadap pemerintah.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Good Governance (Tata Kelola Pemerintahan yang Baik)",
+      "tags": [
+        "good governance",
+        "tata kelola"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-hubungan-internasional-indonesia",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Hubungan Internasional Indonesia",
+    "tags": [
+      "hubungan internasional",
+      "politik luar negeri"
+    ],
+    "teks": "Politik luar negeri Indonesia menganut prinsip \"bebas aktif\": bebas menentukan sikap tanpa terikat blok kekuatan tertentu, namun aktif berperan menjaga perdamaian dunia lewat diplomasi dan keikutsertaan dalam organisasi internasional.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Hubungan Internasional Indonesia",
+      "tags": [
+        "hubungan internasional",
+        "politik luar negeri"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-peran-indonesia-organisasi-internasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Peran Indonesia dalam Organisasi Internasional",
+    "tags": [
+      "organisasi internasional",
+      "pbb",
+      "asean"
+    ],
+    "teks": "Indonesia aktif berperan dalam berbagai organisasi internasional seperti PBB (termasuk mengirim pasukan perdamaian/Garuda), ASEAN, dan G20, memperjuangkan kepentingan nasional sekaligus berkontribusi pada isu global seperti perdamaian dan perubahan iklim.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Peran Indonesia dalam Organisasi Internasional",
+      "tags": [
+        "organisasi internasional",
+        "pbb",
+        "asean"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-ppkn-subjek-hukum-internasional",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Hukum Internasional: Subjek Hukum Internasional",
+    "tags": [
+      "hukum internasional",
+      "subjek hukum"
+    ],
+    "teks": "Subjek hukum internasional adalah entitas yang memiliki hak dan kewajiban menurut hukum internasional, utamanya negara, tetapi juga mencakup organisasi internasional (seperti PBB) dan dalam batas tertentu individu — dipelajari dalam mata kuliah hukum internasional publik.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Hukum Internasional: Subjek Hukum Internasional",
+      "tags": [
+        "hukum internasional",
+        "subjek hukum"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ppkn-demokrasi-deliberatif",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Ilmu Politik: Teori Demokrasi Deliberatif",
+    "tags": [
+      "ilmu politik lanjut",
+      "demokrasi deliberatif"
+    ],
+    "teks": "Demokrasi deliberatif menekankan pengambilan keputusan publik lewat musyawarah rasional dan terbuka antarwarga negara, bukan sekadar penghitungan suara mayoritas, dianggap memperkuat legitimasi keputusan politik — konsep yang dikembangkan dalam teori politik kontemporer tingkat kuliah.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Ilmu Politik: Teori Demokrasi Deliberatif",
+      "tags": [
+        "ilmu politik lanjut",
+        "demokrasi deliberatif"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ppkn-hierarki-peraturan-perundang-undangan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Hukum Konstitusi: Hierarki Peraturan Perundang-undangan",
+    "tags": [
+      "hukum konstitusi",
+      "hierarki peraturan"
+    ],
+    "teks": "Hierarki peraturan perundang-undangan Indonesia (sesuai UU No. 12/2011) berurutan dari UUD 1945, Ketetapan MPR, UU/Perppu, Peraturan Pemerintah, Peraturan Presiden, hingga Peraturan Daerah — peraturan yang lebih rendah tidak boleh bertentangan dengan yang lebih tinggi, prinsip dasar hukum konstitusi.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Hukum Konstitusi: Hierarki Peraturan Perundang-undangan",
+      "tags": [
+        "hukum konstitusi",
+        "hierarki peraturan"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ppkn-teori-negara-bangsa",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Kewarganegaraan: Teori Negara Bangsa (Nation-State)",
+    "tags": [
+      "ilmu kewarganegaraan",
+      "negara bangsa"
+    ],
+    "teks": "Konsep negara bangsa (nation-state) menyatukan gagasan \"bangsa\" (identitas budaya/etnis bersama) dengan \"negara\" (entitas politik berdaulat), menjadi kerangka dominan organisasi politik dunia modern sejak Perjanjian Westphalia — dibahas dalam kajian kewarganegaraan dan ilmu politik tingkat kuliah.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Kewarganegaraan: Teori Negara Bangsa (Nation-State)",
+      "tags": [
+        "ilmu kewarganegaraan",
+        "negara bangsa"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-ppkn-sistem-kepartaian-dan-pemilu",
+    "kategori": "mata-pelajaran",
+    "wilayah": "ppkn",
+    "nama": "Ilmu Politik: Sistem Kepartaian dan Sistem Pemilu (Perbandingan)",
+    "tags": [
+      "ilmu politik",
+      "sistem kepartaian",
+      "sistem pemilu"
+    ],
+    "teks": "Ilmu politik membandingkan sistem pemilu seperti distrik (first-past-the-post) dan proporsional untuk melihat pengaruhnya terhadap jumlah partai dan stabilitas pemerintahan — sistem proporsional cenderung menghasilkan sistem multipartai seperti di Indonesia, sedangkan sistem distrik cenderung mendorong dwipartai.",
+    "meta": {
+      "field": "ppkn",
+      "topic": "Ilmu Politik: Sistem Kepartaian dan Sistem Pemilu (Perbandingan)",
+      "tags": [
+        "ilmu politik",
+        "sistem kepartaian",
+        "sistem pemilu"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]

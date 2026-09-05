@@ -1,0 +1,451 @@
+[
+  {
+    "id": "mapel-matematika-persamaan-kuadrat",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Persamaan Kuadrat",
+    "tags": [
+      "persamaan kuadrat",
+      "rumus abc"
+    ],
+    "teks": "Persamaan kuadrat berbentuk ax² + bx + c = 0 diselesaikan dengan rumus abc: x = (-b ± √(b² - 4ac)) / 2a, dengan a ≠ 0.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Persamaan Kuadrat",
+      "tags": [
+        "persamaan kuadrat",
+        "rumus abc"
+      ],
+      "rumus": "x = (-b +- akar(b^2-4ac)) / 2a",
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-diskriminan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Diskriminan",
+    "tags": [
+      "diskriminan",
+      "persamaan kuadrat"
+    ],
+    "teks": "Diskriminan (D = b² - 4ac) pada persamaan kuadrat menentukan jenis akar: D > 0 dua akar real berbeda, D = 0 satu akar kembar, D < 0 tidak ada akar real.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Diskriminan",
+      "tags": [
+        "diskriminan",
+        "persamaan kuadrat"
+      ],
+      "rumus": "D = b^2 - 4ac",
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-fungsi-linear",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Fungsi Linear",
+    "tags": [
+      "fungsi linear",
+      "gradien"
+    ],
+    "teks": "Fungsi linear berbentuk y = mx + c, dengan m adalah gradien (kemiringan garis) dan c titik potong sumbu-y; grafiknya berupa garis lurus.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Fungsi Linear",
+      "tags": [
+        "fungsi linear",
+        "gradien"
+      ],
+      "rumus": "y = mx + c",
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-logaritma",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Logaritma",
+    "tags": [
+      "logaritma"
+    ],
+    "teks": "Logaritma — kebalikan dari operasi pemangkatan; jika a^c = b maka ᵃlog b = c, dengan a sebagai basis logaritma (a>0, a≠1).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Logaritma",
+      "tags": [
+        "logaritma"
+      ],
+      "rumus": "a^c = b <=> a_log_b = c",
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-fungsi-kuadrat-dan-parabola",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Fungsi Kuadrat dan Parabola",
+    "tags": [
+      "fungsi kuadrat",
+      "parabola"
+    ],
+    "teks": "Fungsi kuadrat y = ax² + bx + c menghasilkan grafik berbentuk parabola; titik puncaknya berada pada x = -b/2a, terbuka ke atas jika a>0 dan ke bawah jika a<0.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Fungsi Kuadrat dan Parabola",
+      "tags": [
+        "fungsi kuadrat",
+        "parabola"
+      ],
+      "rumus": "x_puncak = -b/2a",
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-matriks",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Matriks",
+    "tags": [
+      "matriks",
+      "aljabar linear"
+    ],
+    "teks": "Matriks — susunan bilangan dalam baris dan kolom; penjumlahan/pengurangan matriks hanya bisa dilakukan jika ukurannya sama, sedangkan perkalian matriks mensyaratkan jumlah kolom matriks pertama sama dengan jumlah baris matriks kedua.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Matriks",
+      "tags": [
+        "matriks",
+        "aljabar linear"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-vektor",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Vektor",
+    "tags": [
+      "vektor"
+    ],
+    "teks": "Vektor — besaran yang memiliki nilai (besar) dan arah, digambarkan sebagai anak panah; penjumlahan vektor mengikuti aturan jajar genjang atau segitiga.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Vektor",
+      "tags": [
+        "vektor"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-bilangan-prima",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Bilangan Prima",
+    "tags": [
+      "bilangan prima"
+    ],
+    "teks": "Bilangan prima — bilangan asli lebih besar dari 1 yang hanya memiliki dua faktor: 1 dan bilangan itu sendiri, contohnya 2, 3, 5, 7, 11, 13.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Bilangan Prima",
+      "tags": [
+        "bilangan prima"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-fpb-dan-kpk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "FPB dan KPK",
+    "tags": [
+      "fpb",
+      "kpk"
+    ],
+    "teks": "FPB (Faktor Persekutuan Terbesar) adalah faktor terbesar yang sama dari dua bilangan atau lebih; KPK (Kelipatan Persekutuan Terkecil) adalah kelipatan terkecil yang sama dari dua bilangan atau lebih.",
+    "meta": {
+      "field": "matematika",
+      "topic": "FPB dan KPK",
+      "tags": [
+        "fpb",
+        "kpk"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-operasi-pecahan",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Operasi Pecahan",
+    "tags": [
+      "pecahan"
+    ],
+    "teks": "Pecahan berbentuk a/b; penjumlahan dan pengurangan pecahan mengharuskan penyebut disamakan terlebih dahulu (KPK penyebut), sedangkan perkalian pecahan tinggal mengalikan pembilang dengan pembilang dan penyebut dengan penyebut.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Operasi Pecahan",
+      "tags": [
+        "pecahan"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-sistem-persamaan-linear-dua-variabel-spldv",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+    "tags": [
+      "spldv",
+      "aljabar"
+    ],
+    "teks": "SPLDV — sistem dua persamaan linear dengan dua variabel yang diselesaikan bersamaan, bisa dengan metode substitusi, eliminasi, atau grafik untuk mencari nilai x dan y yang memenuhi kedua persamaan.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Sistem Persamaan Linear Dua Variabel (SPLDV)",
+      "tags": [
+        "spldv",
+        "aljabar"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-bunga-tunggal-dan-majemuk",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Bunga Tunggal dan Majemuk",
+    "tags": [
+      "bunga tunggal",
+      "bunga majemuk",
+      "aritmetika sosial"
+    ],
+    "teks": "Bunga tunggal dihitung dari modal awal tetap setiap periode (Bunga = Modal × persen × waktu), sedangkan bunga majemuk dihitung dari modal ditambah bunga periode sebelumnya sehingga bertumbuh lebih cepat.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Bunga Tunggal dan Majemuk",
+      "tags": [
+        "bunga tunggal",
+        "bunga majemuk",
+        "aritmetika sosial"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-integral-tak-tentu",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Integral Tak Tentu",
+    "tags": [
+      "integral",
+      "kalkulus"
+    ],
+    "teks": "Integral tak tentu adalah invers dari turunan: jika turunan f(x) adalah f'(x), maka integral dari f'(x) dx menghasilkan f(x) + C, dengan C konstanta integrasi. Rumus dasar: integral dari x^n dx = x^(n+1)/(n+1) + C, untuk n ≠ -1.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Integral Tak Tentu",
+      "tags": [
+        "integral",
+        "kalkulus"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-turunan-fungsi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Turunan Fungsi",
+    "tags": [
+      "turunan",
+      "kalkulus",
+      "limit"
+    ],
+    "teks": "Turunan fungsi f(x) menyatakan laju perubahan sesaat, didefinisikan sebagai limit dari [f(x+h)-f(x)]/h saat h mendekati 0. Aturan pangkat: turunan dari x^n adalah n·x^(n-1), dipakai untuk mencari gradien garis singgung kurva.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Turunan Fungsi",
+      "tags": [
+        "turunan",
+        "kalkulus",
+        "limit"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-limit-fungsi",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Limit Fungsi",
+    "tags": [
+      "limit",
+      "kalkulus"
+    ],
+    "teks": "Limit fungsi menyatakan nilai yang didekati f(x) saat x mendekati suatu titik tertentu, meski f(x) belum tentu terdefinisi tepat di titik itu. Limit menjadi dasar konsep turunan dan integral dalam kalkulus.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Limit Fungsi",
+      "tags": [
+        "limit",
+        "kalkulus"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-fungsi-eksponen",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Fungsi Eksponen",
+    "tags": [
+      "eksponen",
+      "fungsi eksponensial"
+    ],
+    "teks": "Fungsi eksponen berbentuk f(x) = a^x dengan a > 0 dan a ≠ 1, grafiknya selalu naik (jika a>1) atau turun (jika 0<a<1) dan tidak pernah menyentuh sumbu-x. Dipakai memodelkan pertumbuhan penduduk, peluruhan radioaktif, dan bunga majemuk.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Fungsi Eksponen",
+      "tags": [
+        "eksponen",
+        "fungsi eksponensial"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-fungsi-komposisi-dan-invers",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Fungsi Komposisi dan Fungsi Invers",
+    "tags": [
+      "komposisi fungsi",
+      "fungsi invers"
+    ],
+    "teks": "Fungsi komposisi (f∘g)(x) = f(g(x)) menggabungkan dua fungsi berurutan. Fungsi invers f⁻¹(x) adalah fungsi yang membalik pemetaan f, memenuhi f(f⁻¹(x)) = x, dan hanya ada jika f adalah fungsi bijektif (satu-satu dan onto).",
+    "meta": {
+      "field": "matematika",
+      "topic": "Fungsi Komposisi dan Fungsi Invers",
+      "tags": [
+        "komposisi fungsi",
+        "fungsi invers"
+      ],
+      "tingkat": "sma"
+    }
+  },
+  {
+    "id": "mapel-matematika-turunan-parsial",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Turunan Parsial",
+    "tags": [
+      "kalkulus multivariabel",
+      "turunan parsial"
+    ],
+    "teks": "Turunan parsial menghitung laju perubahan fungsi dengan banyak variabel terhadap salah satu variabel, dengan variabel lain dianggap konstan — dilambangkan ∂f/∂x. Konsep ini dasar dari kalkulus multivariabel dan dipakai dalam optimasi, gradien, dan persamaan diferensial parsial.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Turunan Parsial",
+      "tags": [
+        "kalkulus multivariabel",
+        "turunan parsial"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-determinan-dan-invers-matriks",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Determinan dan Invers Matriks",
+    "tags": [
+      "aljabar linear",
+      "determinan",
+      "invers matriks"
+    ],
+    "teks": "Determinan matriks persegi (dilambangkan det(A)) menentukan apakah matriks punya invers: matriks hanya punya invers jika det(A) ≠ 0. Invers matriks A (dilambangkan A⁻¹) memenuhi A·A⁻¹ = I dan dipakai menyelesaikan sistem persamaan linear dalam aljabar linear.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Determinan dan Invers Matriks",
+      "tags": [
+        "aljabar linear",
+        "determinan",
+        "invers matriks"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-ruang-vektor",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Ruang Vektor",
+    "tags": [
+      "aljabar linear",
+      "ruang vektor",
+      "basis"
+    ],
+    "teks": "Ruang vektor adalah himpunan objek (vektor) yang tertutup terhadap operasi penjumlahan dan perkalian skalar serta memenuhi delapan aksioma tertentu. Konsep basis (himpunan vektor bebas linear yang merentang seluruh ruang) dan dimensi adalah fondasi aljabar linear tingkat kuliah.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Ruang Vektor",
+      "tags": [
+        "aljabar linear",
+        "ruang vektor",
+        "basis"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-limit-formal-epsilon-delta",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Definisi Limit Formal (Epsilon-Delta)",
+    "tags": [
+      "analisis real",
+      "limit formal",
+      "epsilon delta"
+    ],
+    "teks": "Dalam analisis real, limit fungsi didefinisikan secara formal: lim f(x)=L saat x→c berarti untuk setiap epsilon>0 selalu ada delta>0 sehingga jika 0<|x-c|<delta maka |f(x)-L|<epsilon — definisi rigor ini menggantikan pemahaman intuitif limit di SMA.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Definisi Limit Formal (Epsilon-Delta)",
+      "tags": [
+        "analisis real",
+        "limit formal",
+        "epsilon delta"
+      ],
+      "tingkat": "kuliah"
+    }
+  },
+  {
+    "id": "mapel-matematika-deret-taylor",
+    "kategori": "mata-pelajaran",
+    "wilayah": "matematika",
+    "nama": "Deret Taylor",
+    "tags": [
+      "kalkulus lanjut",
+      "deret taylor",
+      "aproksimasi fungsi"
+    ],
+    "teks": "Deret Taylor menyatakan suatu fungsi yang cukup mulus sebagai jumlah tak hingga suku berdasarkan turunan-turunannya di satu titik, memungkinkan aproksimasi fungsi rumit (seperti e^x, sin x) dengan polinomial — alat penting kalkulus lanjut dan analisis numerik.",
+    "meta": {
+      "field": "matematika",
+      "topic": "Deret Taylor",
+      "tags": [
+        "kalkulus lanjut",
+        "deret taylor",
+        "aproksimasi fungsi"
+      ],
+      "tingkat": "kuliah"
+    }
+  }
+]
