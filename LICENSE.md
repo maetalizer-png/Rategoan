@@ -11,29 +11,35 @@ memodifikasi perangkat lunak ini, Anda menyetujui syarat di bawah.
 
 ## 1. Pemberian Lisensi
 
-Pemilik hak cipta memberikan lisensi **gratis untuk penggunaan
-non-komersial**: memakai, memodifikasi, dan menjalankan perangkat lunak
-ini untuk keperluan pribadi, edukasi, riset, atau proyek non-komersial
-lain, tanpa batas waktu.
+**Penggunaan non-komersial** — memakai, memodifikasi, dan menjalankan
+perangkat lunak ini untuk keperluan pribadi, edukasi, riset, atau proyek
+non-komersial lain — **gratis tanpa batas waktu**, tanpa perlu membeli.
 
-**Penggunaan komersial** (menjual produk turunan, memakainya untuk
-menghasilkan pendapatan, atau mendistribusikannya sebagai bagian dari
-layanan berbayar) **wajib izin tertulis** dari pemilik hak cipta
-terlebih dahulu. Hubungi: **maetalizer@gmail.com**.
+**Penggunaan komersial** (memakainya untuk menghasilkan pendapatan,
+proyek klien, atau produk turunan berbayar) mensyaratkan **pembelian sah**
+lewat kanal resmi (Gumroad/lynk.id atau kanal lain yang ditunjuk pemilik
+hak cipta). Bukti pembelian yang valid berlaku sebagai izin komersial per
+pembeli — tidak perlu korespondensi tertulis terpisah. Satu pembelian
+berlaku untuk satu pembeli/entitas dan proyek turunannya sendiri; bukan
+lisensi yang bisa dipakai bersama atau dijual lagi ke pihak lain. Yang
+membeli tanpa lewat kanal resmi (kode didapat dari pihak ketiga di luar
+kanal yang ditunjuk) belum punya izin komersial — hubungi
+**maetalizer@gmail.com** untuk verifikasi/lisensi langsung.
 
 ## 2. Yang Diperbolehkan
 
 - Memodifikasi seluruh kode dan data untuk kebutuhan sendiri.
 - Menjalankan dan mendistribusikan hasil build/turunan ke pengguna akhir
   Anda sendiri, sesuai lingkup izin yang diberikan (non-komersial bebas,
-  komersial dengan izin tertulis).
+  komersial setelah pembelian sah lewat kanal resmi).
 - Mempelajari kode sumber untuk tujuan edukasi.
 
 ## 3. Yang Dilarang
 
-- Menjual ulang kode sumber mentah repositori ini (sebagian atau
-  seluruhnya) sebagai produk/template kepada pihak lain tanpa izin
-  tertulis.
+- Menjual ulang atau membagikan ulang kode sumber mentah repositori ini
+  (sebagian atau seluruhnya) sebagai produk/template kepada pihak lain —
+  baik yang beli maupun yang belum beli tidak boleh mendistribusikan
+  ulang paketnya sendiri.
 - Mengklaim kepemilikan atau kepenulisan asli atas perangkat lunak ini.
 - Menghapus atau mengubah notice hak cipta ini dari kode sumber.
 - Sublisensi atau mengalihkan hak dalam lisensi ini ke pihak ketiga
