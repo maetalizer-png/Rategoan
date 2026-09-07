@@ -78,7 +78,10 @@ function timeGreeting(hour) {
 
 function tryTimeGreeting(text) {
   const t = text.trim();
-  if (!/^(hai+|halo+|hi+|hey+|hoi+|woy+)[\s!.,]{0,3}$/i.test(t)) return null;
+  // "woy"/"woi" sengaja tidak dianggap sapaan ramah -- dalam pemakaian
+  // sehari-hari itu manggil/nyolot ("WOY!"), bukan padanan "hai"/"halo",
+  // jadi tidak pantas dibalas basa-basi "selamat pagi/malam".
+  if (!/^(hai+|halo+|hi+|hey+|hoi+)[\s!.,]{0,3}$/i.test(t)) return null;
   return timeGreeting();
 }
 
