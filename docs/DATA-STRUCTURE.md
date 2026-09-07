@@ -39,26 +39,31 @@ kapan domain itu ditulis:
 **1. Lewat `raget-agents/dataries-registry.js` (`dataries.loadRegion(group, id)`)** —
 dipakai domain hasil migrasi Fase B: `negara`, `kota`, `bahasa`, `etika`,
 `minuman`, `wisata`, `sejarah`, `makanan`, `alam`, `sains`, `olahraga`,
-serta domain baru `mata-pelajaran` (materi mata pelajaran sekolah:
-biologi, matematika, fisika, kimia, bahasa-indonesia, bahasa-inggris,
-geografi, sejarah, ekonomi, ppkn). Dijangkau lewat `tryMataPelajaran()`
-(diekspor `bridgeExtras`, dipanggil `datariesBridge.mataPelajaran()`)
-dengan trigger `"<mapel> <topik>"`, mis. "biologi fotosintesis" atau
-"matematika pythagoras". Dipanggil langsung dari `agent.js` SEBELUM
-`tryFactoid()` — pola yang sama seperti `kulinerStore.tryKuliner()` —
-karena trigger "bahasa indonesia ..."/"bahasa inggris ..." kalau lewat
-`datariesBridge.extras()` (dipanggil SESUDAH `tryFactoid()`) akan
-keduluan `bridgeRelations.detectRelation()` yang mendeteksi kata kunci
-"bahasa" dan salah tangkap jadi factoid bahasa resmi negara Indonesia/
-Inggris. Sengaja dibedakan dari `raget-data/json/sejarah/` (sejarah
-umum ensiklopedis) dan `raget-data/json/ekonomi/` (indikator/komoditas/
-perusahaan dunia nyata) lewat framing kurikulum sekolah dan trigger
-kata kunci `"sejarah sekolah"`/`"ekonomi sekolah"` agar tidak tabrakan
-dengan trigger `trySejarah()`/`tryEkonomi()` yang sudah ada di
-`datariesBridge.extras()`.
-`index.js` mendaftarkan tiap domain ini di `JSON_MIGRATED_GROUPS`, lalu
-`loadRegionFromJson()` melakukan `fetch()` ke
-`raget-data/json/<domain>/<id>.json` dan membentuk ulang tiap entri jadi
+`platform`, `ekonomi`, `peluang`, `penemuan`, `seni-budaya`, `tokoh`, dan
+mata pelajaran sekolah — yang terakhir ini terdaftar sebagai **10 grup
+terpisah** (bukan satu domain `mata-pelajaran` tunggal): `biologi`,
+`matematika`, `fisika`, `kimia`, `bahasa-indonesia`, `bahasa-inggris`,
+`geografi`, `sejarah-sekolah`, `ekonomi-sekolah`, `ppkn`, masing-masing
+memetakan ke folder `raget-data/json/mata-pelajaran/<subjek>/`. Dijangkau
+lewat `tryMataPelajaran()` (diekspor `bridgeExtras`, dipanggil
+`datariesBridge.mataPelajaran()`) dengan trigger `"<mapel> <topik>"`,
+mis. "biologi fotosintesis" atau "matematika pythagoras" — lookup subjek
+ke nama grup lewat `MATA_PELAJARAN_MAP` di `bridge-extras.js`. Dipanggil
+langsung dari `agent.js` SEBELUM `tryFactoid()` — pola yang sama seperti
+`kulinerStore.tryKuliner()` — karena trigger "bahasa indonesia ..."/
+"bahasa inggris ..." kalau lewat `datariesBridge.extras()` (dipanggil
+SESUDAH `tryFactoid()`) akan keduluan `bridgeRelations.detectRelation()`
+yang mendeteksi kata kunci "bahasa" dan salah tangkap jadi factoid bahasa
+resmi negara Indonesia/Inggris. Sengaja dibedakan dari
+`raget-data/json/sejarah/` (sejarah umum ensiklopedis) dan
+`raget-data/json/ekonomi/` (indikator/komoditas/perusahaan dunia nyata)
+lewat framing kurikulum sekolah dan trigger kata kunci `"sejarah
+sekolah"`/`"ekonomi sekolah"` agar tidak tabrakan dengan trigger
+`trySejarah()`/`tryEkonomi()` yang sudah ada di `datariesBridge.extras()`.
+Tiap grup didaftarkan di `JSON_MIGRATED_GROUPS` (objek di dalam
+`dataries-registry.js` sendiri — tidak ada file `index.js` terpisah),
+lalu `loadRegionFromJson()` melakukan `fetch()` ke
+`raget-data/json/<folder>/<id>.json` dan membentuk ulang tiap entri jadi
 bentuk lama `{text, metadata}` — supaya `dataries-bridge.js` dan seluruh
 pipeline resolusi entitas tidak perlu tahu format aslinya berubah.
 
@@ -119,17 +124,25 @@ sains/olahraga). Skrip migrasi (`raget-tools/migrate-*-domain.mjs`) yang
 menghasilkan file-file ini sudah dijalankan dan diarsipkan — jangan
 dijalankan ulang kalau sumber JS aslinya sudah dihapus.
 
-## `raget-dataries/` yang Belum Dimigrasi
+## Semua Domain Sudah Bermigrasi — Tidak Ada Lagi `raget-dataries/`
 
-`raget-dataries/` sekarang folder DATA murni (loader/logika sudah dipindah
-ke `raget-agents/dataries-registry.js`). Sebagian domain masih berupa folder
-`.js` literal (belum masuk skema unified): folder `sapaan/` dan `tokoh/` legacy
-(entri ringkas
-terpisah dari `raget-data/json/sapaan|tokoh`, dijangkau lewat
-`trySiapaTokoh()` di `bridge-extras.js` — bukan duplikasi, tapi pendalaman
-sudut pandang lain). Domain-domain ini dimuat lewat jalur `.js` asli
-(`import()` lazy per region, didaftarkan di `REGIONS`), bukan
-`loadRegionFromJson()`.
+Folder `raget-dataries/` (dulu tempat data domain berupa literal array di
+dalam file `.js`) **sudah dihapus total** — semua 27 grup yang terdaftar
+di `REGIONS`/`JSON_MIGRATED_GROUPS` (`dataries-registry.js`) kini
+bermigrasi ke `raget-data/json/`. Entri `file: './xxx.js'` yang masih
+tersisa di objek `REGIONS` untuk grup-grup ini adalah sisa struktur lama
+yang **tidak pernah dibaca lagi** (lihat `loadRegion()`: begitu grup ada
+di `JSON_MIGRATED_GROUPS`, path `.js`-nya diabaikan sepenuhnya, cuma
+`id`/`names` dari `REGIONS` yang masih dipakai untuk pencocokan entitas)
+— bukan bug, tapi juga tidak ada gunanya menambah entri baru dengan pola
+lama ini.
+
+`trySiapaTokoh()` di `bridge-extras.js` (trigger "siapa ...") memanggil
+`findBestInList('tokoh', ...)` yang membaca `raget-data/json/tokoh/tokoh.json`
+lewat jalur #1 yang sama — bukan folder legacy terpisah. Domain `tokoh`
+kebetulan juga punya loader jalur #2 (`tokoh-store.js`) yang membaca file
+JSON yang SAMA untuk query yang lebih terstruktur (pencapaian, kutipan,
+trivia, relasi) — dua cara akses ke satu sumber data, bukan duplikasi.
 
 ## `raget-data/json/pengetahuan/`
 

@@ -115,7 +115,10 @@ function indexSapaan(raw) {
   const idx = { time: {}, plain: [], smalltalk: {}, followup: { greeting: [], smalltalk: [] } };
   for (const e of Array.isArray(raw) ? raw : []) {
     const m = e && e.meta ? e.meta : {};
-    const teksList = m.variants && m.variants.length ? m.variants : e && e.teks ? [e.teks] : [];
+    // variants adalah TAMBAHAN cara bilang yang sama, bukan pengganti teks
+    // utama -- kalau cuma dipilih salah satu, teks utama yang biasanya lebih
+    // lengkap/matang jadi tidak pernah kepilih sama sekali.
+    const teksList = (e && e.teks ? [e.teks] : []).concat(m.variants && m.variants.length ? m.variants : []);
     const vals = teksList.length ? teksList : [e.teks];
     if (m.jenis === 'waktu' && m.periode) idx.time[m.periode] = (idx.time[m.periode] || []).concat(vals);
     else if (m.jenis === 'plain') idx.plain = (idx.plain || []).concat(vals);
