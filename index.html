@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rategoan — Chat AI 100% Lokal</title>
-<meta name="description" content="Rategoan: chat AI yang jalan sepenuhnya di perangkatmu. Tanpa server, tanpa API key, tanpa biaya per-pesan. PWA murni HTML/CSS/JS, data tetap milikmu.">
+<meta name="description" content="Rategoan: aplikasi chat AI mandiri di perangkatmu. Buka langsung chat, tanpa daftar. Tanpa server, tanpa API key, tanpa biaya per-pesan.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,12 +33,12 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">PWA · 100% Local-First · Tanpa Backend</p>
-        <h1>Chat AI yang tidak pernah<br>meninggalkan perangkatmu.</h1>
+        <h1>Aplikasi chat AI yang<br>berdiri sendiri di perangkatmu.</h1>
         <p class="lede lede-invert">
-          Rategoan jalan sepenuhnya di perangkatmu — riwayat, memori, dan
-          basis pengetahuannya tersimpan lokal di browser (IndexedDB).
-          Tidak ada server yang membaca percakapanmu, tidak ada API key,
-          tidak ada biaya per-pesan.
+          Buka, langsung tanya. Tidak perlu daftar Gmail atau nomor telepon.
+          Riwayat dan pengetahuan tersimpan di browser. Tidak ada server
+          yang membaca percakapan, tidak ada API key, tidak ada biaya per-pesan.
+          Masuk akun bersifat opsional — untuk nama sapaan dan kunci PIN.
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://rategoan.vercel.app/">Coba Sekarang</a>
@@ -56,7 +56,7 @@
           <div class="phone-notch"></div>
           <video class="phone-video" autoplay muted loop playsinline
             poster="assets/shot-chat.png"
-            aria-label="Demo pemakaian Rategoan: masuk, tanya jawab, buka Koleksi, ganti mode gelap">
+            aria-label="Demo pemakaian Rategoan: chat langsung, buka Koleksi, ganti mode gelap">
             <source src="assets/demo.webm" type="video/webm">
           </video>
         </div>
@@ -158,7 +158,7 @@
       </div>
       <dl class="local-list">
         <div><dt>Penyimpanan</dt><dd>IndexedDB di perangkat — tidak pernah dikirim ke server mana pun secara default.</dd></div>
-        <div><dt>Autentikasi</dt><dd>Masuk dengan Gmail hanya memakai alamat email untuk identitas lokal, tidak ada data yang diunggah.</dd></div>
+        <div><dt>Masuk</dt><dd>Tidak wajib. Chat jalan tanpa akun. Masuk hanya jika kamu mau nama di sapaan atau kunci PIN — data tetap di perangkat.</dd></div>
         <div><dt>Mode Server</dt><dd>Opsional dan nonaktif secara default — kamu yang memutuskan kapan data keluar perangkat.</dd></div>
         <div><dt>Arsitektur</dt><dd>ES6 Modules murni, tanpa framework, tanpa langkah build — kode yang kamu baca adalah kode yang berjalan.</dd></div>
       </dl>
@@ -169,18 +169,17 @@
     <div class="wrap license-row">
       <div>
         <p class="section-eyebrow">Lisensi</p>
-        <h2>Gratis untuk dipakai, jelas untuk dikomersialkan.</h2>
+        <h2>Aplikasi utuh, bukan pelengkap.</h2>
         <p class="lede">
-          Rategoan Software License v1.0 — bebas dipakai, dimodifikasi, dan
-          dijalankan untuk keperluan pribadi, edukasi, riset, atau proyek
-          non-komersial tanpa batas waktu. Penggunaan komersial memerlukan
-          izin tertulis dari pemilik hak cipta.
+          Satu zip berisi app yang langsung dijalankan. Pribadi dan edukasi
+          bebas. Pakai untuk jualan atau bisnis: beli paket di Lynk atau
+          Gumroad — itu izin komersialnya.
         </p>
       </div>
       <div class="license-card">
-        <p class="license-line"><span>Non-komersial</span><strong>Gratis</strong></p>
-        <p class="license-line"><span>Komersial</span><strong>Izin tertulis</strong></p>
-        <a class="btn btn-primary btn-block" href="mailto:maetalizer@gmail.com">Hubungi untuk Lisensi Komersial</a>
+        <p class="license-line"><span>Pakai sendiri</span><strong>Langsung</strong></p>
+        <p class="license-line"><span>Komersial</span><strong>Beli di toko</strong></p>
+        <a class="btn btn-primary btn-block" href="https://lynk.id/maetalizer">Beli di Lynk</a>
         <p class="license-doc">Rategoan Software License v1.0 · maetalizer@gmail.com</p>
       </div>
     </div>
