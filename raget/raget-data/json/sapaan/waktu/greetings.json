@@ -2163,11 +2163,11 @@
       "umum",
       "interaksi"
     ],
-    "teks": "Mari kita sapa semua! (Sapaan umum untuk memulai interaksi)",
+    "teks": "Halo! Ada yang bisa saya bantu?",
     "meta": {
       "jenis": "plain",
       "variants": [
-        "Mari kita sapa semua! (Sapaan umum untuk memulai interaksi)"
+        "Hai! Ada yang mau ditanyakan?"
       ]
     }
   }
