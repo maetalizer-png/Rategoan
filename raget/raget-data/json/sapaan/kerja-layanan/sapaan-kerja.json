@@ -213,5 +213,25 @@
       ],
       "jenis": "kerja"
     }
+  },
+  {
+    "id": "sapaan-kerja-gaji-lembur-ronde-harian-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Gaji dan lembur",
+    "tags": [
+      "kerja",
+      "gaji",
+      "lembur"
+    ],
+    "teks": "Kalau gaji telat atau atasan minta lembur, catat jamnya dulu. Bicara tenang ke HRD atau atasan, jangan cuma di grup.",
+    "meta": {
+      "jenis": "kerja",
+      "key": "kerja",
+      "variants": [
+        "Lembur: pastikan disetujui, jangan anggap otomatis dibayar.",
+        "Gaji belum masuk: cek slip dan tanya HRD dengan sopan."
+      ]
+    }
   }
 ]

@@ -52,5 +52,25 @@
         "Kirim kabar sampai tujuan ke keluarga."
       ]
     }
+  },
+  {
+    "id": "sapaan-transport-delay-ronde-harian-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Kereta delay",
+    "tags": [
+      "transport",
+      "kereta",
+      "delay"
+    ],
+    "teks": "Kalau kereta delay, cek info resmi stasiun dulu. Jangan langsung percaya kabar grup.",
+    "meta": {
+      "jenis": "transport",
+      "key": "transport",
+      "variants": [
+        "Macet parah: cari jalur lain atau tunda berangkat sebentar.",
+        "Angkot atau bus telat: siapkan plan cadangan."
+      ]
+    }
   }
 ]

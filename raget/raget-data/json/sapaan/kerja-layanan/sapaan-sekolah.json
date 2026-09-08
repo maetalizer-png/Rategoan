@@ -267,5 +267,24 @@
       ],
       "jenis": "sekolah"
     }
+  },
+  {
+    "id": "sapaan-sekolah-ulangan-pr-ronde-harian-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Ulangan dan PR",
+    "tags": [
+      "sekolah",
+      "ulangan",
+      "pr"
+    ],
+    "teks": "Ulangan besok atau PR menumpuk: kerjakan yang paling dekat dulu, jangan begadang kosong.",
+    "meta": {
+      "jenis": "sekolah",
+      "key": "sekolah",
+      "variants": [
+        "PR belum selesai: pecah tugas, tanya teman atau guru bagian yang buntu."
+      ]
+    }
   }
 ]

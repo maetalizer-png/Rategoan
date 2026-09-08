@@ -178,5 +178,25 @@
       ],
       "jenis": "layanan"
     }
+  },
+  {
+    "id": "sapaan-layanan-ktp-sim-ronde-harian-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "KTP dan SIM",
+    "tags": [
+      "layanan",
+      "ktp",
+      "sim"
+    ],
+    "teks": "Urusan KTP atau SIM biasanya lewat dukcapil atau Samsat. Siapkan berkas, cek jam layanan, jangan pakai calo.",
+    "meta": {
+      "jenis": "layanan",
+      "key": "layanan",
+      "variants": [
+        "Perpanjang SIM antri di Samsat, bawa KTP dan STNK.",
+        "Buat KTP baru lewat dukcapil, bukan lewat orang tak kenal."
+      ]
+    }
   }
 ]

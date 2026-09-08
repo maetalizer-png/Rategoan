@@ -24,7 +24,7 @@ const QUESTION_WORDS = [
 const SMALLTALK_TRIGGERS = {
   izin: /\bizin\s+(tidak\s+masuk|kelas|kerja)|minta\s+izin\b/i,
   tugas: /\b(tugas|deadline|makalah|presentasi|pekerjaan\s+rumah|pr\s+menumpuk)\b/i,
-  layanan: /\b(layanan|loket|antr[ie]|berkas|ktp|kk\b|pengaduan|komplain|dukcapil|calo)\b/i,
+  layanan: /\b(layanan|loket|antr[ie]|berkas|ktp|kk\b|pengaduan|komplain|dukcapil|calo|\bsim\b|perpanjang\s+sim)\b/i,
   rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati|listrik\s+padam|listrik\s+mati|cucian|piring\s+kotor|rumah\s+berantakan)\b/i,
   sekolah: /\b(sekolah|kelas|ulangan|pr\b|pelajaran|mapel|guru|wali\s*kelas|osis)\b/i,
   siapa: /siapa\s+(kamu|anda|lu|elo)\b|kamu\s+siapa|kenalan\s+dong/i,
@@ -38,11 +38,11 @@ const SMALLTALK_TRIGGERS = {
   capek: /\b(capek|lelah|ngantuk\s+berat|kehabisan\s+tenaga)\b/i,
   bosen: /\b(bosen|bosan|gabut|jenuh)\b/i,
   pasar: /\b(pasar|tawar|warung|dagang)\b/i,
-  transport: /\b(angkot|ojek|kereta|macet|parkir|helm|mudik)\b/i,
-  sehat: /\b(demam|pusing|obat|klinik|sakit)\b/i,
+  transport: /\b(angkot|ojek|kereta|macet|parkir|helm|mudik|delay|telat\s+(kereta|bus|angkot))\b/i,
+  sehat: /\b(demam|pusing|obat|klinik|sakit|anak\s+demam)\b/i,
   uang: /\b(utang|pinjam|tagihan|listrik|belanja|diskon)\b/i,
   tetangga: /\b(tetangga|kerja\s*bakti|gang|iuran\s*rt)\b/i,
-  kerja: /\b(kantor|rapat|lembur|wfh|atasan)\b/i,
+  kerja: /\b(kantor|rapat|lembur|wfh|atasan|gaji\s+telat|gaji\s+belum)\b/i,
 };
 
 const SMALLTALK_FALLBACK = {
@@ -537,10 +537,37 @@ function isSmalltalkText(text) {
   return !!(fuzzySmalltalk.matchFuzzySmalltalk(t) || fuzzySmalltalk.matchFuzzySmalltalk(slang));
 }
 
+
+const DAILY_TALK_KEYS = {
+  izin: true,
+  tugas: true,
+  layanan: true,
+  rumah: true,
+  sekolah: true,
+  transport: true,
+  sehat: true,
+  kerja: true,
+};
+
+const FACTISH_DAILY_SKIP_RE = /\b(ibu\s*kota|ibukota|fotosintesis|einstein)\b/i;
+
+function tryDailyTalk(text, options) {
+  const raw = String(text || '').trim();
+  if (!raw || FACTISH_DAILY_SKIP_RE.test(raw)) return null;
+  const slang = normalizeSlang(raw);
+  const key = Object.keys(SMALLTALK_TRIGGERS).find(
+    (k) => DAILY_TALK_KEYS[k] && (SMALLTALK_TRIGGERS[k].test(raw) || SMALLTALK_TRIGGERS[k].test(slang))
+  );
+  if (!key) return null;
+  ensureSapaan();
+  return replyForSmalltalkKey(key, raw, options || {});
+}
+
 export const llmEngine = Object.freeze({
   init,
   generate,
   craft,
+  tryDailyTalk,
   useSapaan,
   isFallback,
   isWeak,

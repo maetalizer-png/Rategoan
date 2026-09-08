@@ -500,6 +500,12 @@ async function respondCore(messages, prompt) {
   const persona = await loadPersona();
   const shortContext = memoryShort.recent(messages, 10);
 
+  const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: persona.name });
+  if (dailyTalk) {
+    ragetDb.addNote(text, dailyTalk, null, 'daily_talk');
+    return postProcess(dailyTalk);
+  }
+
   const preSearch = await memoryIndex.search(text, 5);
   const dataFallback = await datariesBridge.datariesFallback(text);
   const plannedFallback = planner.planFallback(text, preSearch.concat(dataFallback));

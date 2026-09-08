@@ -46,5 +46,23 @@
       ],
       "jenis": "kesehatan"
     }
+  },
+  {
+    "id": "sapaan-sehat-demam-anak-ronde-harian-001",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Demam anak",
+    "tags": [
+      "sehat",
+      "demam"
+    ],
+    "teks": "Anak demam: kompres, minum, pantau suhu. Yang memberat atau kejang, ke faskes. Saya bukan dokter.",
+    "meta": {
+      "jenis": "kesehatan",
+      "key": "sehat",
+      "variants": [
+        "Obat warung hanya yang jelas kandungannya. Kalau ragu, tanya farmasi."
+      ]
+    }
   }
 ]
