@@ -65,12 +65,6 @@ export const composer = {
     $('btn-plus').onclick = () => attach.open();
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
-    document.querySelectorAll('.empty-prompt').forEach((btn) => {
-      btn.onclick = () => {
-        const t = (btn.getAttribute('data-prompt') || '').trim();
-        if (t) this.send(t);
-      };
-    });
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {
