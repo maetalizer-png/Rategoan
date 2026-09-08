@@ -15,12 +15,6 @@
   color: var(--rg-accent);
 }
 
-.empty-hint {
-  margin: 0;
-  font-size: 13px;
-  color: var(--rg-muted);
-}
-
 .empty-prompts {
   display: flex;
   flex-wrap: wrap;
