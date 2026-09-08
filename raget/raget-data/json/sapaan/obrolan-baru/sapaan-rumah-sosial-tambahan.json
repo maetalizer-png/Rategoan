@@ -779,5 +779,39 @@
         "Sesuaikan saja dengan bahan yang paling gampang basi dulu supaya tidak terbuang sia-sia."
       ]
     }
+  },
+  {
+    "id": "rs-rumah-013",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Cucian menumpuk",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Pisahkan dulu yang putih dan warna, cuci sebagian hari ini biar tidak makin numpuk.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Pisahkan dulu yang putih dan warna, cuci sebagian hari ini biar tidak makin numpuk."
+      ]
+    }
+  },
+  {
+    "id": "rs-rumah-014",
+    "kategori": "sapaan",
+    "wilayah": null,
+    "nama": "Piring kotor menumpuk",
+    "tags": [
+      "rumah"
+    ],
+    "teks": "Cuci yang paling atas dulu selagi sempat, jangan tunggu sampai satu bak penuh.",
+    "meta": {
+      "jenis": "smalltalk",
+      "key": "rumah",
+      "variants": [
+        "Cuci yang paling atas dulu selagi sempat, jangan tunggu sampai satu bak penuh."
+      ]
+    }
   }
 ]

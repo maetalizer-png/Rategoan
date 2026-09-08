@@ -25,7 +25,7 @@ const SMALLTALK_TRIGGERS = {
   izin: /\bizin\s+(tidak\s+masuk|kelas|kerja)|minta\s+izin\b/i,
   tugas: /\b(tugas|deadline|makalah|presentasi|pekerjaan\s+rumah|pr\s+menumpuk)\b/i,
   layanan: /\b(layanan|loket|antr[ie]|berkas|ktp|kk\b|pengaduan|komplain|dukcapil|calo)\b/i,
-  rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati|listrik\s+padam|listrik\s+mati)\b/i,
+  rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati|listrik\s+padam|listrik\s+mati|cucian|piring\s+kotor|rumah\s+berantakan)\b/i,
   sekolah: /\b(sekolah|kelas|ulangan|pr\b|pelajaran|mapel|guru|wali\s*kelas|osis)\b/i,
   siapa: /siapa\s+(kamu|anda|lu|elo)\b|kamu\s+siapa|kenalan\s+dong/i,
   kabar: /\bkabar\s*(kamu|anda|lu|elu|mu)?\b|\b(apa|gimana|bagaimana)\s+kabar\b|how\s+are\s+you/i,
@@ -250,7 +250,7 @@ function remainderAfter(re, text) {
 function isBareGreeting(text, re) {
   const rest = remainderAfter(re, text);
   if (!rest) return true;
-  return /^(semua|kawan|teman|bro|sis|gan|kak|min|admin|raget|juga)?[\s!.]*$/i.test(rest);
+  return /^(semua|kawan|teman|bro|sis|gan|kak|min|admin|raget|juga|ya|dong|nih|deh)?[\s!.]*$/i.test(rest);
 }
 
 function mirrorTemplates(statedPeriod, devicePeriod) {
@@ -383,10 +383,7 @@ function replyQuestion(prompt) {
       prompt
     );
   }
-  const templates = [
-    'Pertanyaan menarik soal "' + echo + '". Bisa ceritakan konteksnya sedikit lagi supaya jawaban saya lebih pas?',
-    'Soal "' + echo + '", saya perlu sedikit info tambahan dulu — apa yang sudah kamu ketahui soal ini?',
-  ];
+  const templates = ['Belum punya jawaban untuk "' + echo + '".'];
   return pickVariant('question', templates, prompt);
 }
 
@@ -442,10 +439,7 @@ function replyGeneric(prompt, context) {
             '" itu kelanjutan, kasih satu detail supaya saya bisa jawab lebih pas.',
           'Oke, "' + prompt + '". Ini lanjut dari topik sebelumnya atau topik baru?',
         ]
-      : [
-          'Saya dengar: "' + prompt + '". Tambah satu kalimat konteks supaya saya bisa bantu, bukan cuma mencatat.',
-          'Bisa diperjelas? Misalnya yang kamu mau: jawaban, langkah, atau sekadar didengar.',
-        ];
+      : ['Belum punya jawaban untuk itu.'];
   return pickVariant('generic', templates, prompt);
 }
 
