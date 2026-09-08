@@ -563,10 +563,27 @@ function tryDailyTalk(text, options) {
   return replyForSmalltalkKey(key, raw, options || {});
 }
 
+
+function tryGreeting(text, options) {
+  const raw = String(text || '').trim();
+  if (!raw) return null;
+  const opts = options || {};
+  if (TIME_GREETING_RE.test(raw) && isBareGreeting(raw, TIME_GREETING_RE)) {
+    ensureSapaan();
+    return replyTimeGreeting(opts.now, opts, raw);
+  }
+  if (PLAIN_GREETING_RE.test(raw) && isBareGreeting(raw, PLAIN_GREETING_RE)) {
+    ensureSapaan();
+    return replyPlainGreeting(raw, opts);
+  }
+  return null;
+}
+
 export const llmEngine = Object.freeze({
   init,
   generate,
   craft,
+  tryGreeting,
   tryDailyTalk,
   useSapaan,
   isFallback,

@@ -28,7 +28,11 @@ function planAnswer(text, results, options) {
 const STABLE_TYPES = new Set(['faq', 'umum', 'fact']);
 const DATARIES_THRESHOLD = 0.3;
 
+const BARE_GREETING_RE = /^(selamat|met)?\s*(pagi|siang|sore|malam)\b|^good\s*(morning|afternoon|evening|night)\b|^(halo+|hai+|hello+|hey+|hi+)\b/i;
+
 function planFallback(text, results) {
+  const raw = String(text || '').trim();
+  if (BARE_GREETING_RE.test(raw) && raw.split(/\s+/).length <= 4) return null;
   const list = (Array.isArray(results) ? results : [])
     .filter((r) => STABLE_TYPES.has(r.type) || r.type === 'dataries')
     .slice()
