@@ -11,7 +11,7 @@ export const account = {
     const st = auth.state;
     if (!st) {
       btn.classList.remove('logged');
-      btn.setAttribute('aria-label', 'Login');
+      btn.setAttribute('aria-label', 'Masuk');
       btn.innerHTML = MAIL_SVG;
       return;
     }

@@ -7,7 +7,6 @@ export const router = {
     let hash = (location.hash || '').replace(/^#\/?/, '') || 'chat';
     if (!this.routes[hash]) hash = 'chat';
     const authed = !!auth.state;
-    if (!authed && hash !== 'login') hash = 'login';
     if (authed && hash === 'login') hash = 'chat';
     if (location.hash !== '#/' + hash) location.hash = '/' + hash;
     Object.keys(this.routes).forEach((name) => {

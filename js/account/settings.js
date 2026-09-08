@@ -360,6 +360,8 @@ export const settings = {
         toast.show('Penyimpanan hampir penuh (' + pct + '%)');
       }
     }
+    const out = $('row-logout');
+    if (out) out.hidden = !st;
     const pinInfo = $('pin-info');
     if (pinInfo) pinInfo.textContent = pin.has() ? 'Aktif' : 'Nonaktif';
     document.querySelectorAll('.font-btn').forEach((b) => {
@@ -399,7 +401,7 @@ export const settings = {
       account.refresh();
       haptics.tap(15);
       toast.show('Anda keluar');
-      router.go('login');
+      router.go('chat');
     };
     $('row-backup').onclick = () => backup.export();
     $('row-restore').onclick = () => $('pick-restore').click();

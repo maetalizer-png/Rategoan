@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const share = params.get('shareText');
     if (share) {
       window.history.replaceState(null, '', location.pathname + location.hash);
-      if (auth.state) {
-        const inp = $('chat-input');
+      const inp = $('chat-input');
+      if (inp) {
         inp.value = share;
         composer.autoGrow();
         inp.focus();

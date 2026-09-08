@@ -4,7 +4,6 @@ import { auth } from '../state/auth.js';
 export const drawer = {
   s: null,
   open() {
-    if (!auth.state) return;
     $('sidebar').classList.add('open');
     $('backdrop').classList.add('show');
   },
@@ -17,7 +16,7 @@ export const drawer = {
     const y = e.touches[0].clientY;
     const isOpen = $('sidebar').classList.contains('open');
     let mode = null;
-    if (!isOpen && x <= 24 && auth.state) mode = 'open';
+    if (!isOpen && x <= 24) mode = 'open';
     else if (isOpen) mode = 'close';
     this.s = { x, y, mode, dragging: false, pos: 0 };
   },
