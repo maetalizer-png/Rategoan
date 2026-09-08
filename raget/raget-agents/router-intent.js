@@ -13,7 +13,7 @@ const ABOUT_RE = /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|ce
 // Domain layanan publik (ktp/kk/sim/dst) lebih spesifik daripada tool "cara"
 // generik — cek dulu sebelum /^(cara|langkah)\s+/ menangkapnya duluan,
 // supaya "cara bikin KTP gimana ya" tidak jatuh ke tool "cara" generik
-// yang tidak relevan sama sekali (lihat PRD.md §1).
+// yang tidak relevan sama sekali.
 const LAYANAN_KEYWORDS_RE = /\b(ktp|kk|sim|paspor|akta|npwp|dukcapil|pengaduan|komplain|loket|antr[ie]|berkas|calo)\b/i;
 
 const MOOD_OPENERS = {

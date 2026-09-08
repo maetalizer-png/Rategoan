@@ -10,13 +10,13 @@ Diperbarui: 2026-09-02.
 | `korpus-pelengkap-bersih` | K3 99.557 dokumen, gzip 54 MB, SHA `2bf11202…` |
 | `checkpoint-100m` | 100M di GitHub Release |
 | `checkpoint-200m` | arsip PPL 1068; **yang dipakai PWA** = HF `Maetalizer19/rategoan-neural` SHA `69daa21d…` PPL 932, CORS terkonfirmasi (`access-control-allow-origin: *`) |
-| `prd-data-release` | riwayat aturan awal (isi sudah dilebur ke `PRD.md`) |
+| `prd-data-release` | riwayat aturan awal penyaringan korpus (sudah dilebur ke dokumen internal) |
 
 ## RETIRE — `panen-madlad400-id`
 
 Sample 600 baris (part 0011/0018/0027): spam ketat 8,8%, 1 frasa spam
 12,3%, navigasi blog 15,3%. Bukan mayoritas judi murni tapi mayoritas
-bukan ensiklopedia — tidak lolos `PRD.md` §2, tidak digabung ke K1,
+bukan ensiklopedia — tidak lolos aturan saring korpus, tidak digabung ke K1,
 tidak dihitung ke token kanonik. Workflow `panen.yml` sudah dihapus,
 tidak akan dipanen ulang otomatis.
 
