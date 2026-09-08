@@ -81,11 +81,11 @@ raget/                            induk seluruh otak AI Raget
   raget-llm/                      mesin balasan (template default + Raget Neural eksperimental)
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
-  raget-retrieval/                pencarian TF-IDF satu pintu lintas sumber
+  raget-retrieval/                pencarian BM25 satu pintu lintas sumber
   raget-data/                     sumber data resmi — json/ (domain terstruktur), jsonl/ (korpus), neural/ (checkpoint)
   raget-tools/                    skrip verifikasi: bench runner, pengukuran kualitas, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-docs/                             struktur data & kapabilitas
+docs/                             struktur data & lisensi korpus
 ```
 
 ### Alur satu pesan
