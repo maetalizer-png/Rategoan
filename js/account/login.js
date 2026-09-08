@@ -4,6 +4,7 @@ import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
 import { auth } from '../state/auth.js';
 import { account } from './account.js';
+import { googleAuth } from '../state/google-auth.js';
 
 const TEMPLATE = `
       <div class="gate">
@@ -94,5 +95,7 @@ export const login = {
     $('login-otp-submit').onclick = () => this.verify();
     this.setMethod('gmail');
     account.refresh();
+    const loginView = $('view-login');
+    if (loginView && !loginView.hidden) googleAuth.ensure();
   },
 };

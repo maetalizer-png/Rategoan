@@ -39,8 +39,30 @@ function onCredential(response) {
 
 export const googleAuth = {
   attempts: 0,
+  _script: null,
   available() {
     return !!CLIENT_ID && !!(window.google && window.google.accounts && window.google.accounts.id);
+  },
+  loadScript() {
+    if (!CLIENT_ID) return Promise.resolve();
+    if (this._script) return this._script;
+    this._script = new Promise((resolve) => {
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        resolve();
+        return;
+      }
+      const s = document.createElement('script');
+      s.src = 'https://accounts.google.com/gsi/client';
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => resolve();
+      document.head.appendChild(s);
+    });
+    return this._script;
+  },
+  ensure() {
+    if (!CLIENT_ID) return;
+    this.loadScript().then(() => this.init());
   },
   init() {
     if (!CLIENT_ID) return;

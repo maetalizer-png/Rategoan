@@ -24,7 +24,6 @@ import { backup } from './system/backup.js';
 import { shortcuts } from './system/shortcuts.js';
 import { settings } from './account/settings.js';
 import { login } from './account/login.js';
-import { googleAuth } from './state/google-auth.js';
 import { collectionPage } from './collection/collection.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
@@ -60,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
   settings.bind();
   collectionPage.bind();
   login.bind();
-  googleAuth.init();
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   try {
     const params = new URLSearchParams(location.search);

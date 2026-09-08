@@ -10,6 +10,7 @@ import { history } from '../history/history.js';
 import { chat } from './chat.js';
 import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
+import { googleAuth } from '../state/google-auth.js';
 
 export const composer = {
   autoGrow() {
@@ -62,12 +63,20 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
-    $('btn-model').onclick = () => sheets.openModel();
+    const modelBtn = $('btn-model');
+    if (modelBtn) modelBtn.onclick = () => sheets.openModel();
+    document.querySelectorAll('.empty-prompt').forEach((btn) => {
+      btn.onclick = () => {
+        const t = (btn.getAttribute('data-prompt') || '').trim();
+        if (t) this.send(t);
+      };
+    });
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {
         router.go('settings');
       } else {
+        googleAuth.ensure();
         router.go('login');
       }
     };
