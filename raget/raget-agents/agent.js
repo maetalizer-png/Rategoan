@@ -505,6 +505,7 @@ async function respondCore(messages, prompt) {
   const plannedFallback = planner.planFallback(text, preSearch.concat(dataFallback));
 
   let reply;
+  let fewshotMatched = false;
   if (plannedFallback) {
     reply = postProcess(plannedFallback);
     reply = await toolsKoleksi.personalize(reply, text);
@@ -516,6 +517,7 @@ async function respondCore(messages, prompt) {
       const example = matchFewshot(fewshot, text);
       if (example && example.a) {
         raw = example.a;
+        fewshotMatched = true;
       } else {
         const nearMiss = matchFewshotNearMiss(fewshot, text);
         if (nearMiss && nearMiss.q) raw += '\n\n(Maksud kamu: "' + nearMiss.q + '"?)';
@@ -531,6 +533,18 @@ async function respondCore(messages, prompt) {
     if (candidate && candidate.score >= scorer.CONFIDENCE_THRESHOLD) {
       reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';
     }
+  }
+
+  // FR-5.1: query reached the very end of the fallback chain with truly nothing
+  // matched - every specific intent/tool above already failed, semantic retrieval
+  // (preSearch/dataFallback/planner) came up empty, no exact fewshot example fired,
+  // and llmEngine.craft() fell through to its own generic clarification prompt
+  // (llmEngine.isRealAnswer(text) mirrors exactly which of craft()'s early branches
+  // would have produced real content instead). Log it (read-only/additive - never
+  // changes what's returned to the user) so raget-tools/export-unmatched-queries.mjs
+  // can later export it for rule-writing.
+  if (!plannedFallback && !fewshotMatched && !llmEngine.isRealAnswer(text)) {
+    ragetDb.logUnmatched(text, ['preSearch', 'dataFallback', 'planner', 'llmEngine', 'fewshot']);
   }
 
   ragetDb.addNote(text, reply, null, 'chat_' + routerIntent.detectAnswerType(text));

@@ -1,18 +1,24 @@
 import { scorer } from '../raget-agents/scorer.js';
 import { normalizeSlang } from '../../utils/text.js';
+import { bm25 } from './bm25.js';
 
+// FR-2.1: thresholds kept at their pre-BM25 values on purpose. scoreCorpus()
+// below normalizes BM25's unbounded raw score back into the same (0,1) shape
+// cosine similarity used to produce (see bm25.js#normalize for why and how
+// the constant was picked), so every caller that compares a retrieval.rank()/
+// best() score against a threshold - these two exports AND each caller's own
+// local constant (FEWSHOT_MATCH_THRESHOLD in agent.js, DATARIES_FALLBACK_THRESHOLD
+// in dataries-bridge.js, CHOICE_THRESHOLD/DATARIES_THRESHOLD in planner.js, etc.) -
+// keeps behaving sensibly without being touched. Verified live + via
+// raget-tools/bench-retrieval*.mjs against the old TF-IDF cosine baseline.
 const AUGMENT_THRESHOLD = 0.35;
 const LIST_THRESHOLD = 0.25;
 
 function scoreCorpus(queryTokens, corpus, textOf) {
   const getText = textOf || ((item) => item.text || '');
   const tokensList = corpus.map((item) => scorer.tokenize(getText(item)));
-  const allSets = [queryTokens, ...tokensList].map((t) => new Set(t));
-  const qVec = scorer.tfidfVector(queryTokens, allSets);
-  return corpus.map((item, i) => ({
-    item,
-    score: scorer.cosineSim(qVec, scorer.tfidfVector(tokensList[i], allSets)),
-  }));
+  const scores = bm25.scoreAll(queryTokens, tokensList);
+  return corpus.map((item, i) => ({ item, score: scores[i] }));
 }
 
 const CACHE_LIMIT = 50;

@@ -1,4 +1,5 @@
 import { hashText, pickVariant, detectTone, normalizeSlang } from '../../utils/text.js';
+import { fuzzySmalltalk } from './fuzzy-smalltalk.js';
 
 const FALLBACK_TEXT = 'Maaf, saya belum yakin. Coba sebut lebih jelas: sekolah, layanan, rumah, atau kabar hari ini?';
 const GENERIC_PREFIX = 'Saya catat:';
@@ -292,10 +293,7 @@ function lastTopic(context) {
   return priorUsers[priorUsers.length - 2].text.slice(0, 60);
 }
 
-function matchSmalltalk(text, options) {
-  ensureSapaan();
-  const key = Object.keys(SMALLTALK_TRIGGERS).find((k) => SMALLTALK_TRIGGERS[k].test(text));
-  if (!key) return null;
+function replyForSmalltalkKey(key, text, options) {
   const entry = sapaanCache.smalltalk[key];
   const tone = detectTone(text);
   const pool =
@@ -307,6 +305,24 @@ function matchSmalltalk(text, options) {
   const reply = withName(picked, options.personaName);
   const follow = sapaanCache.followup ? sapaanCache.followup.smalltalk : [];
   return maybeFollowUp(reply, follow);
+}
+
+function matchSmalltalk(text, options) {
+  ensureSapaan();
+  const key = Object.keys(SMALLTALK_TRIGGERS).find((k) => SMALLTALK_TRIGGERS[k].test(text));
+  if (!key) return null;
+  return replyForSmalltalkKey(key, text, options);
+}
+
+// FR-1.1-1.3: fuzzy fallback for smalltalk routing - tried ONLY once every exact
+// SMALLTALK_TRIGGERS regex (matchSmalltalk above) has already failed on both the raw
+// and slang-normalized text. See fuzzy-smalltalk.js for the Jaro-Winkler match +
+// curated-phrase-bucket implementation and why the threshold is conservative.
+function matchSmalltalkFuzzy(text, options) {
+  ensureSapaan();
+  const key = fuzzySmalltalk.matchFuzzySmalltalk(text);
+  if (!key) return null;
+  return replyForSmalltalkKey(key, text, options);
 }
 
 function extractStatedPeriod(text) {
@@ -458,6 +474,15 @@ function craft(prompt, context, options) {
   const smalltalk = matchSmalltalk(text, opts) || matchSmalltalk(normalizeSlang(text), opts);
   if (smalltalk) return smalltalk;
 
+  // FR-1.1-1.3: exact rule match (above) found nothing - try a conservative fuzzy
+  // match against curated smalltalk example phrases before giving up to the generic
+  // continuation/clarification prompt below. Kept strictly after the exact-match
+  // attempts and before replyQuestion/replyGeneric so a real factual question (which
+  // reaches this point only if every earlier engine in agent.js#respondCore already
+  // failed on it) is never hijacked by a coincidental smalltalk-phrase similarity.
+  const smalltalkFuzzy = matchSmalltalkFuzzy(text, opts) || matchSmalltalkFuzzy(normalizeSlang(text), opts);
+  if (smalltalkFuzzy) return smalltalkFuzzy;
+
   if (isQuestion(text)) return replyQuestion(text);
   return replyGeneric(text, context);
 }
@@ -488,11 +513,34 @@ function isWeak(text) {
   return text === FALLBACK_TEXT || String(text || '').startsWith(GENERIC_PREFIX);
 }
 
+// FR-5.1: mirrors craft()'s early branches that produce real content (ringkas/ide
+// konten/jelaskan/smalltalk exact+fuzzy/bare greeting). If none of those match, craft()
+// necessarily falls through to replyQuestion()/replyGeneric() - a clarification
+// prompt, not a real answer - which is exactly the "truly nothing matched" signal
+// agent.js needs to decide whether to log the query as unmatched.
+function isRealAnswer(text) {
+  const t = String(text || '').trim();
+  if (!t) return false;
+  if (/^ringkas(kan)?\b/i.test(t) && !/percakapan|chat\b/i.test(t)) return true;
+  if (/ide konten/i.test(t)) return true;
+  if (/^jelaskan\b/i.test(t)) return true;
+  if (isSmalltalkText(t)) return true;
+  if (TIME_GREETING_RE.test(t) && isBareGreeting(t, TIME_GREETING_RE)) return true;
+  if (PLAIN_GREETING_RE.test(t) && isBareGreeting(t, PLAIN_GREETING_RE)) return true;
+  return false;
+}
+
 function isSmalltalkText(text) {
   const t = String(text || '');
   if (!t.trim()) return false;
   const slang = normalizeSlang(t);
-  return Object.keys(SMALLTALK_TRIGGERS).some((k) => SMALLTALK_TRIGGERS[k].test(t) || SMALLTALK_TRIGGERS[k].test(slang));
+  if (Object.keys(SMALLTALK_TRIGGERS).some((k) => SMALLTALK_TRIGGERS[k].test(t) || SMALLTALK_TRIGGERS[k].test(slang))) {
+    return true;
+  }
+  // Also count a fuzzy-matched smalltalk phrase (FR-1.1-1.3) as smalltalk, so
+  // agent.js's post-processing (the "(Catatan terkait: ...)" note, unmatched-query
+  // logging) treats it the same as an exact trigger match, not as unanswered.
+  return !!(fuzzySmalltalk.matchFuzzySmalltalk(t) || fuzzySmalltalk.matchFuzzySmalltalk(slang));
 }
 
 export const llmEngine = Object.freeze({
@@ -503,6 +551,7 @@ export const llmEngine = Object.freeze({
   isFallback,
   isWeak,
   isSmalltalkText,
+  isRealAnswer,
   get ready() {
     return initialized;
   },

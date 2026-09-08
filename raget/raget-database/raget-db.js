@@ -5,6 +5,12 @@ import { retrieval } from '../raget-retrieval/retrieve.js';
 const KEY = 'notes';
 const MAX_NOTES = 500;
 
+// FR-5.1: separate key, same idbGateway convention as `notes` above - additive
+// only, never read by the normal answer path, so it cannot change behavior for
+// queries that DO match something.
+const UNMATCHED_KEY = 'unmatched_queries';
+const MAX_UNMATCHED = 500;
+
 async function readAll() {
   const list = await idbGateway.getList(KEY);
   return Array.isArray(list) ? list.filter(ragetSchema.isValidNote) : [];
@@ -70,6 +76,36 @@ async function removeByIds(ids) {
   return list.length - kept.length;
 }
 
+async function readAllUnmatched() {
+  const list = await idbGateway.getList(UNMATCHED_KEY);
+  return Array.isArray(list) ? list.filter(ragetSchema.isValidUnmatched) : [];
+}
+
+async function writeAllUnmatched(list) {
+  await idbGateway.setList(UNMATCHED_KEY, list.slice(-MAX_UNMATCHED));
+}
+
+// FR-5.1: called from agent.js#respondCore only when a query reached the very end
+// of the fallback chain with truly nothing matched. Read-only/additive with respect
+// to the normal answer path - it never affects what gets returned to the user.
+async function logUnmatched(query, enginesTried) {
+  const entry = ragetSchema.createUnmatchedEntry(query, enginesTried);
+  const list = await readAllUnmatched();
+  list.push(entry);
+  await writeAllUnmatched(list);
+  return entry;
+}
+
+// FR-5.2: read by raget-tools/export-unmatched-queries.mjs (a developer-facing
+// export tool, not part of the answer path).
+async function allUnmatched() {
+  return await readAllUnmatched();
+}
+
+async function clearUnmatched() {
+  await writeAllUnmatched([]);
+}
+
 export const ragetDb = Object.freeze({
   addNote,
   allNotes,
@@ -78,4 +114,7 @@ export const ragetDb = Object.freeze({
   rateByAnswer,
   clear,
   removeByIds,
+  logUnmatched,
+  allUnmatched,
+  clearUnmatched,
 });
