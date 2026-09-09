@@ -1,6 +1,7 @@
 # PRD — Pengembangan Lanjutan Raget Template
 
-Status: roadmap aktif. Sasaran: fondasi jangka panjang untuk otak
+Status: roadmap aktif — **Fase 1 dan 2.3 SELESAI dan diverifikasi live**
+(lihat tabel di §3). Sasaran: fondasi jangka panjang untuk otak
 rule-based/retrieval RATEGOAN (`raget-template/` + mesin-mesin di
 `raget-agents/`), bukan cuma daftar tugas kecil.
 
@@ -58,16 +59,18 @@ tertinggi PRD ini, bukan menulis data lagi secara manual tanpa arah.
 
 ## 3. Roadmap berfase
 
-### FASE 1 — Tutup loop feedback yang sudah ada infrastrukturnya (prioritas tertinggi, siap dikerjakan sekarang)
+### FASE 1 — SELESAI — Tutup loop feedback yang sudah ada infrastrukturnya
 
 | # | Pekerjaan | Kenapa | File yang disentuh |
 |---|---|---|---|
-| 1.1 | `raget-tools/report-unmatched.mjs` — skrip yang membaca `ragetDb.allUnmatched()`, mengelompokkan query gagal per kata kunci/klaster, keluarkan laporan (markdown/JSON) berisi top-N topik yang paling sering gagal dijawab | Log kegagalan sudah ada tapi tidak pernah dibaca — ini yang mengubahnya jadi arah kerja nyata untuk penulis data | `raget-tools/` (baru), baca `raget-database/` |
-| 1.2 | `feedbackStore.record()` diperluas menerima `entryId`/`sourceId` (id entri data atau nama engine yang menjawab), bukan cuma `intent` | Supaya dislike bisa dilacak balik ke ENTRY SPESIFIK yang bermasalah, bukan cuma angka agregat tanpa konteks | `raget-memory/feedback-store.js`, pemanggilnya di UI chat |
-| 1.3 | Panel "Kesehatan Data" ringan (baca `allUnmatched()` + `feedbackStore.stats()`) — bisa di Koleksi atau panel dev tersembunyi | Manusia (dev/pengguna) perlu MELIHAT tren, bukan cuma data mentah tersembunyi di IndexedDB/localStorage | `js/sheets/` (baru) atau extend Koleksi |
+| 1.1 ✅ | `raget-tools/report-unmatched.mjs` — skrip yang membaca `ragetDb.allUnmatched()`, mengelompokkan query gagal per kata kunci/klaster, keluarkan laporan (markdown/JSON) berisi top-N topik yang paling sering gagal dijawab | Log kegagalan sudah ada tapi tidak pernah dibaca — ini yang mengubahnya jadi arah kerja nyata untuk penulis data | `raget-tools/` (baru), baca `raget-database/`. Logika agregasi diekstrak ke `raget-agents/feedback-report.js` (dipakai bareng 1.3) |
+| 1.2 ✅ | `feedbackStore.record()` sudah menerima `intent` sejak lama tapi tidak pernah dikirim `js/chat/chat.js` — sekarang upBtn/downBtn mencari intent lewat `ragetDb.allNotes()` (pola sama seperti `tagFromIntent`) sebelum `record()`. Tambah `statsByIntent()` untuk agregasi | Supaya dislike bisa dilacak balik ke TOPIK/INTENT spesifik yang bermasalah, bukan cuma angka agregat tanpa konteks | `raget-memory/feedback-store.js`, `js/chat/chat.js` |
+| 1.3 ✅ | Panel "Kesehatan Data" di Pengaturan → Data (`js/sheets/data-health-sheet.js`), baca `allUnmatched()` + `feedbackStore.stats()`/`statsByIntent()` | Manusia (dev/pengguna) perlu MELIHAT tren, bukan cuma data mentah tersembunyi di IndexedDB/localStorage | `js/sheets/data-health-sheet.js` (baru), `js/account/settings.js`, `css/sheets/sheets.css` |
 
-Gate keluar Fase 1: semua 3 item lint LOLOS + live-verified (data
-tercatat, laporan bisa dibaca, panel tampil benar) sebelum lanjut Fase 2.
+**Bukti verifikasi live**: tanya pertanyaan gibberish → tercatat di
+`allUnmatched()`; tanya "apa ibu kota indonesia" → klik jempol atas →
+panel Kesehatan Data menampilkan `factoid 👍1 👎0` dengan benar. 0 error
+konsol/network. lint-check LOLOS 0 error.
 
 ### FASE 2 — Auto-learning dari sinyal pengguna, 100% lokal (jangka menengah)
 
@@ -77,9 +80,9 @@ Neural). Semua reversible dan transparan.
 
 | # | Pekerjaan | Mekanisme |
 |---|---|---|
-| 2.1 | Re-ranking retrieval berbobot histori kualitas | Entry data yang sering di-dislike (dari 1.2) diberi penalti skor kecil di `retrieve.js#scoreCorpus()` — TIDAK dihapus dari data, cuma diprioritaskan lebih rendah saat skornya mepet dengan entry lain |
-| 2.2 | Personalisasi gaya jawab dari `memory-long.facts` | `context-engine.js` (sudah punya kontinuitas emosi) diperluas baca preferensi gaya (formal/santai, panjang jawaban) dari facts yang sudah/akan diajarkan pengguna |
-| 2.3 | Asisten retag/validasi entri data baru | Alat CLI (`raget-tools/validate-entry.mjs`) yang mengecek entri baru terhadap skema `{id,kategori,wilayah,nama,tags,teks,meta}` DAN menyarankan bucket/`jenis` berdasarkan kata kunci (mirip classifier berbasis aturan, bukan neural) — mencegah kesalahan retag manual (preseden nyata: entri "Gaji belum" sempat salah ditandai `key:'tetangga'` padahal soal kerja/uang, ketahuan lewat spot-check manual) |
+| 2.1 | Re-ranking retrieval berbobot histori kualitas | Entry data yang sering di-dislike (dari 1.2) diberi penalti skor kecil di `retrieve.js#scoreCorpus()` — TIDAK dihapus dari data, cuma diprioritaskan lebih rendah saat skornya mepet dengan entry lain. **Belum dikerjakan** — butuh plumbing tambahan supaya `feedbackStore` tahu ID entri spesifik (hari ini granularitasnya baru level intent, bukan per-entry), lihat FASE 4.1 |
+| 2.2 | Personalisasi gaya jawab dari `memory-long.facts` | `context-engine.js` (sudah punya kontinuitas emosi) diperluas baca preferensi gaya (formal/santai, panjang jawaban) dari facts yang sudah/akan diajarkan pengguna. **Belum dikerjakan** |
+| 2.3 ✅ SELESAI | `raget-tools/validate-entry.mjs` — cek skema `{id,kategori,wilayah,nama,tags,teks,meta}` di file domain manapun, PLUS untuk `sapaan/`: bandingkan `tags` topik entri terhadap bucket (`meta.key`) pakai `SMALLTALK_TRIGGERS`/`JENIS_TO_KEY` yang diekspor langsung dari `llm-engine.js` (tidak dobel logika) | Dijalankan terhadap SEMUA 1.255 entri sapaan nyata: menemukan 8 error skema nyata (field `wilayah` hilang di 2 file) — **sudah diperbaiki** — dan 22 warning bucket-vs-tag yang layak dicek manusia (bukan auto-fix). Percobaan pertama pakai teks-balasan-vs-trigger-regex menghasilkan 54 warning TAPI mayoritas false-positive (balasan sopan wajar memuat kata seperti "terima kasih" walau bucket-nya bukan `terima_kasih`) — diperbaiki jadi bandingkan `tags` topik vs bucket, turun ke 22 sinyal yang jauh lebih bersih |
 
 ### FASE 3 — Upgrade semantic search tanpa generatif (jangka panjang)
 
@@ -87,6 +90,19 @@ Neural). Semua reversible dan transparan.
 |---|---|---|
 | 3.1 | Semantic search pelengkap BM25 pakai `raget-neural/llm-embedding.js` (matmul + lookup embedding + positional encoding SUDAH ADA) — tambah pooling kalimat (mean/CLS) + index cosine similarity | Representasi vektor makna TIDAK butuh generator yang koheren — cuma butuh embedding, jauh lebih murah daripada menunggu Neural generatif siap. BM25 tetap jalan sebagai baseline; semantic search jadi SINYAL TAMBAHAN, bukan pengganti |
 | 3.2 | "Kontribusi data federasi" (bukan federated learning ML) — ekspor opt-in ANONIM dari `allUnmatched()` pengguna, tanpa data pribadi, untuk diimpor manual oleh dev sebagai bahan data baru | Catatan jujur wajib: ini BUKAN federated learning gradient-sharing (itu butuh server agregasi, melanggar prinsip 100% lokal produk). Jangan pernah menyebutnya "federated learning" ke pengguna — sebut apa adanya: "kontribusi data anonim opt-in" |
+
+### FASE 4 — Level lanjutan berikutnya (setelah Fase 1-3 rampung/berjalan)
+
+Tiga hal konkret yang jadi prasyarat sebelum re-ranking (2.1) dan
+personalisasi (2.2) bisa benar-benar presisi, ditemukan langsung dari
+mengerjakan Fase 1-2.3:
+
+| # | Pekerjaan | Kenapa ini level berikutnya |
+|---|---|---|
+| 4.1 | Granularitas feedback naik dari level-intent ke level-entry: setiap kali sebuah mesin (`knowledge-graph.js`, `dataries-bridge.js`, dst) berhasil menjawab dari SATU entri data terstruktur, catat `entry.id`-nya ke `ragetDb.addNote()` (field baru, mis. `sourceEntryId`) - bukan cuma `intent` generik seperti "factoid" | Prasyarat nyata 2.1: re-ranking BM25 butuh tahu ENTRI mana yang dinilai buruk, bukan cuma "kategori factoid dinilai buruk" (terlalu kasar untuk 24 domain data sekaligus) |
+| 4.2 | Setelah 4.1 ada, baru kerjakan 2.1 (re-ranking) sungguhan dengan bias per-`entry.id`, diuji lewat bench retrieval sebelum/sesudah (bukan cuma "kelihatannya jalan") | Urutan dependensi yang benar: granularitas dulu, baru mekanisme re-ranking di atasnya |
+| 4.3 | `raget-tools/validate-entry.mjs` (2.3) diperluas ke SEMUA 24 domain `raget-data/json/` (bukan cuma sapaan) — cek konsistensi `tags` vs `kategori` per domain, bukan cuma bucket sapaan | 2.3 baru menutup satu domain (sapaan, yang punya sejarah bug nyata); domain lain belum pernah divalidasi otomatis sama sekali |
+| 4.4 | Jalankan `validate-entry.mjs` sebagai bagian dari gerbang lint (`lint-check.mjs`) untuk domain sapaan minimal, supaya bug skema/bucket baru ketahuan SEBELUM commit, bukan lewat audit manual sesekali | Menutup celah: 8 bug skema yang baru ketemu hari ini sudah ada di file sejak lama, tidak pernah ketahuan karena tidak ada gerbang otomatis |
 
 ## 4. Prinsip pengelompokan data (data governance) — dikodifikasi, bukan tersirat
 

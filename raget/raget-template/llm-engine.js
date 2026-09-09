@@ -601,6 +601,11 @@ export const llmEngine = Object.freeze({
   isWeak,
   isSmalltalkText,
   isRealAnswer,
+  // Diekspor supaya raget-tools/validate-entry.mjs (PRD-RAGET-TEMPLATE.md
+  // Fase 2.3) bisa memakai tabel klasifikasi sapaan YANG SAMA PERSIS dengan
+  // runtime, bukan duplikat regex yang bisa melenceng dari aslinya.
+  SMALLTALK_TRIGGERS,
+  JENIS_TO_KEY,
   get ready() {
     return initialized;
   },

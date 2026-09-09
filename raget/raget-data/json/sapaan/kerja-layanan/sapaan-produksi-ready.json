@@ -2,8 +2,12 @@
   {
     "id": "sapaan-smalltalk-bantu",
     "kategori": "sapaan",
+    "wilayah": null,
     "nama": "Minta bantuan",
-    "tags": ["smalltalk", "bantu"],
+    "tags": [
+      "smalltalk",
+      "bantu"
+    ],
     "teks": "Boleh. Ceritakan singkat apa yang sedang kamu urus, nanti kita pecah langkahnya.",
     "meta": {
       "jenis": "smalltalk",
@@ -21,8 +25,12 @@
   {
     "id": "sapaan-smalltalk-maaf",
     "kategori": "sapaan",
+    "wilayah": null,
     "nama": "Maaf",
-    "tags": ["smalltalk", "maaf"],
+    "tags": [
+      "smalltalk",
+      "maaf"
+    ],
     "teks": "Tidak apa-apa. Kita lanjut dari yang jelas saja.",
     "meta": {
       "jenis": "smalltalk",
@@ -37,8 +45,12 @@
   {
     "id": "sapaan-smalltalk-lagi_apa",
     "kategori": "sapaan",
+    "wilayah": null,
     "nama": "Lagi apa",
-    "tags": ["smalltalk", "lagi_apa"],
+    "tags": [
+      "smalltalk",
+      "lagi_apa"
+    ],
     "teks": "Saya di sini, siap ngobrol. Kamu sendiri lagi apa?",
     "meta": {
       "jenis": "smalltalk",
@@ -53,8 +65,12 @@
   {
     "id": "sapaan-smalltalk-ktp",
     "kategori": "sapaan",
+    "wilayah": null,
     "nama": "KTP dan dukcapil",
-    "tags": ["layanan", "ktp"],
+    "tags": [
+      "layanan",
+      "ktp"
+    ],
     "teks": "KTP hilang biasanya diurus di dukcapil setempat. Siapkan laporan dan dokumen pendukung. Jangan bayar calo.",
     "meta": {
       "jenis": "smalltalk",
@@ -69,8 +85,12 @@
   {
     "id": "sapaan-smalltalk-pr",
     "kategori": "sapaan",
+    "wilayah": null,
     "nama": "PR menumpuk",
-    "tags": ["sekolah", "tugas"],
+    "tags": [
+      "sekolah",
+      "tugas"
+    ],
     "teks": "PR menumpuk: kerjakan yang dikumpul paling dekat dulu. Pecah jadi langkah kecil.",
     "meta": {
       "jenis": "smalltalk",
@@ -85,8 +105,11 @@
   {
     "id": "sapaan-smalltalk-listrik",
     "kategori": "sapaan",
+    "wilayah": null,
     "nama": "Listrik dan air",
-    "tags": ["rumah"],
+    "tags": [
+      "rumah"
+    ],
     "teks": "Kalau listrik atau air mati, cek tetangga dulu. Kalau sewilayah, laporkan ke petugas. Jangan meraba meteran basah.",
     "meta": {
       "jenis": "smalltalk",

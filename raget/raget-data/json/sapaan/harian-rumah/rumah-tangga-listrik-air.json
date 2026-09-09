@@ -2,6 +2,7 @@
   {
     "id": "rumah-listrik-001",
     "kategori": "rumah-tangga",
+    "wilayah": null,
     "nama": "Listrik padam",
     "tags": [
       "listrik",
@@ -18,6 +19,7 @@
   {
     "id": "rumah-air-001",
     "kategori": "rumah-tangga",
+    "wilayah": null,
     "nama": "Air mati",
     "tags": [
       "air"

@@ -1,8 +1,11 @@
 # PRD — Pengembangan Lanjutan Raget Neural (Roadmap Skala 50M → 40B)
 
-Status: roadmap aktif, sebagian besar fase jauh ke depan bersifat
-**spekulatif secara sengaja** dan mensyaratkan keputusan produk
-eksplisit sebelum dieksekusi (dicatat jelas di tiap fase). Cakupan PRD
+Status: roadmap aktif — **Fase A.1 (audit token korpus) SELESAI**,
+hasilnya sudah mengubah urutan prioritas Fase A (lihat §2-3): korpus,
+bukan compute, adalah penghambat dominan untuk scaling. Sebagian besar
+fase jauh ke depan bersifat **spekulatif secara sengaja** dan
+mensyaratkan keputusan produk eksplisit sebelum dieksekusi (dicatat
+jelas di tiap fase). Cakupan PRD
 ini CUMA `raget-neural/` + tooling training/eval-nya. Perubahan Template
 di luar cakupan ini — lihat `PRD-RAGET-TEMPLATE.md`. Aturan kerja
 lintas-sektor: `PRD-ATURAN-KERJA.md`, WAJIB dibaca dulu.
@@ -54,13 +57,29 @@ dengan output projection.
 
 ## 2. Kenyataan teknis yang harus dihadapi jujur SEBELUM bicara 1B–40B
 
-1. **Data**: aturan umum scaling law (rasio token:parameter yang
-   sekitar 20:1 untuk training optimal) berarti 1B parameter idealnya
-   butuh puluhan miliar token bersih. Korpus saat ini (`raget-data/jsonl`,
-   5 jilid Wikipedia/Wikibooks/Wikivoyage/Wiktionary bahasa Indonesia)
-   BELUM DIAUDIT total token-nya terhadap target ini — audit token count
-   nyata adalah pekerjaan WAJIB pertama sebelum menjanjikan fase 1B apa
-   pun (lihat FASE A.1 di bawah).
+1. **Data — SUDAH DIAUDIT (`raget-tools/audit-corpus-tokens.mjs`)**:
+   korpus kanonik hari ini (K1+K2+K3, `korpus-manifest-total.json`, token
+   BPE resmi vocab 30.368) = **543.202.593 token** dari 1.497.515 dokumen.
+   Dengan rasio scaling ~20 token/parameter:
+
+   | Target | Token ideal | % tercukupi hari ini | Korpus harus tumbuh |
+   |---|---:|---:|---:|
+   | massive50m (ada) | 1,00 miliar | 54,3% | - |
+   | massive100m (ada) | 2,07 miliar | 26,3% | - |
+   | massive200m (ada) | 4,01 miliar | 13,5% | - |
+   | 500M | 10 miliar | 5,43% | 18,4x |
+   | 1B | 20 miliar | 2,72% | 36,8x |
+   | 4B | 80 miliar | 0,68% | 147,3x |
+   | 10B | 200 miliar | 0,27% | 368,2x |
+   | 20B | 400 miliar | 0,14% | 736,4x |
+   | 40B | 800 miliar | 0,07% | 1.472,7x |
+
+   **Ini bukti kuantitatif, bukan dugaan lagi**, untuk temuan PPL di §1:
+   massive200m (13,5% tercukupi) jauh lebih kekurangan data secara
+   proporsional daripada massive50m (54,3% tercukupi) - urutan
+   kecukupan data PERSIS SAMA dengan urutan kualitas PPL. **Korpus,
+   bukan compute, adalah penghambat DOMINAN** — bahkan lompatan
+   terdekat (500M) butuh korpus 18,4x lebih besar dari hari ini.
 2. **Compute**: Colab gratis (kuota harian, sesi terbatas ~12 jam) SUDAH
    jadi batas nyata di preset 200M (lihat temuan PPL di atas — 200M
    dengan compute yang sama saja belum konvergen baik). Melatih 1B+ dari
@@ -81,10 +100,21 @@ dengan output projection.
 
 | # | Syarat/Pekerjaan | Detail |
 |---|---|---|
-| A.1 | Audit token count korpus nyata | Hitung total token bersih `raget-data/jsonl/` saat ini, bandingkan dengan target rasio ~20:1 untuk 500M–1B. Kalau kurang jauh, growth plan korpus (jilid tambahan) HARUS ada sebelum training preset baru — jangan latih preset lebih besar di atas data yang sama seperti 200M sekarang, itu ulangi masalah §2 temuan di atas |
-| A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat |
-| A.3 | Evaluasi arsitektur training: mixed precision, gradient checkpointing | Perlu di jalur PyTorch supaya training preset besar muat di memori GPU Colab/cloud yang terbatas |
-| A.4 | Verifikasi ulang kuantisasi int8 pada model lebih dalam/lebar | Checkpoint format (`llm-quantization.js`) dipertahankan, tapi error kuantisasi HARUS diukur ulang — model lebih dalam bisa lebih sensitif terhadap presisi rendah |
+| A.1 ✅ SELESAI | Audit token count korpus nyata (`raget-tools/audit-corpus-tokens.mjs`, laporan di `raget-devlog/neural/corpus-token-audit.md`) | Hasil: korpus 543,2 juta token, cuma 5,43% dari kebutuhan 500M (18,4x kurang) dan 2,72% dari kebutuhan 1B (36,8x kurang) — lihat tabel §2. **Kesimpulan tegas: TIDAK BOLEH melatih preset ≥500M sampai korpus tumbuh signifikan** — mengulang training di atas data yang sama seperti massive200m sekarang cuma akan menghasilkan model yang lebih undertrained lagi, bukan lebih pintar |
+| A.1b | Growth plan korpus konkret menuju 10 miliar token (target 500M) | Sumber realistis untuk pertumbuhan ~18x: (a) Wikipedia ID belum ter-crawl penuh di luar 76.071 dokumen unik yang sudah masuk K1, (b) Common Crawl/OSCAR porsi Indonesia (butuh filter kualitas ketat, preseden `panen-madlad400-id` di korpus-manifest-total.json GAGAL 18,7% spam - filter HARUS lebih ketat dari itu), (c) korpus buku/berita berlisensi terbuka. **Belum dikerjakan** - ini prasyarat nyata sebelum A.2-A.4 berguna |
+| A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat. **Belum dikerjakan** — menunggu A.1b (percuma optimasi training pipeline di atas data yang belum cukup) |
+| A.3 | Evaluasi arsitektur training: mixed precision, gradient checkpointing | Perlu di jalur PyTorch supaya training preset besar muat di memori GPU Colab/cloud yang terbatas. **Belum dikerjakan** |
+| A.4 | Verifikasi ulang kuantisasi int8 pada model lebih dalam/lebar | Checkpoint format (`llm-quantization.js`) dipertahankan, tapi error kuantisasi HARUS diukur ulang — model lebih dalam bisa lebih sensitif terhadap presisi rendah. **Belum dikerjakan** |
+
+**Kenapa A.2-A.4 belum dikerjakan sekarang**: A.1 baru saja membuktikan
+korpus adalah penghambat dominan (18,4x kurang untuk lompatan
+TERDEKAT). Mengerjakan pipeline training PyTorch/mixed-precision/
+kuantisasi sebelum ada rencana nyata menutup gap data 18,4x itu
+membuang usaha di infrastruktur untuk data yang belum ada — urutan yang
+benar adalah A.1b dulu, baru A.2-A.4. Ini juga alasan kenapa PRD ini
+TIDAK mengklaim training run baru sudah dilakukan — training preset
+≥500M di atas data hari ini akan mengulang pola undertraining
+massive200m, bukan kemajuan.
 
 Gate keluar Fase A: preset baru (500M–1B) punya held-out PPL yang
 BENAR-BENAR lebih baik dari massive200m (bukan cuma "lebih besar
