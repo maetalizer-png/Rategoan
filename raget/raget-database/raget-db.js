@@ -20,8 +20,8 @@ async function writeAll(list) {
   await idbGateway.setList(KEY, list.slice(-MAX_NOTES));
 }
 
-async function addNote(question, answer, feedback, intent) {
-  const note = ragetSchema.createNote(question, answer, feedback, intent);
+async function addNote(question, answer, feedback, intent, sourceEntryId) {
+  const note = ragetSchema.createNote(question, answer, feedback, intent, sourceEntryId);
   const list = await readAll();
   list.push(note);
   await writeAll(list);

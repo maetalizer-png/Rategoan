@@ -6,6 +6,7 @@ import { bridgeFormat } from './bridge-format.js';
 import { bridgeRelations } from './bridge-relations.js';
 import { bridgeReasoning } from './bridge-reasoning.js';
 import { bridgeExtras } from './bridge-extras.js';
+import { feedbackStore } from '../raget-memory/feedback-store.js';
 
 function daysUntilAnniversary(dateStr, now) {
   const m = String(dateStr || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -144,13 +145,25 @@ async function search(q) {
 const DATARIES_FALLBACK_THRESHOLD = 0.3;
 const DATARIES_FALLBACK_GROUPS = ['country', 'sains', 'olahraga'];
 
+// PRD-RAGET-TEMPLATE.md Fase 2.1/4.2: entryPenalty (dari feedbackStore,
+// dibangun dari like/dislike per-entri yang mulai tercatat sejak Fase 4.1)
+// diteruskan ke retrieval.rank() supaya entri yang SERING di-dislike
+// diprioritaskan lebih rendah - bukan dihapus (masih bisa muncul kalau
+// tetap satu-satunya yang cocok), cuma kalah saat skornya mepet dengan
+// entry lain yang belum pernah didislike.
 async function datariesFallback(query) {
+  const entryPenalty = feedbackStore.entryPenaltyMap();
   const results = [];
   for (const group of DATARIES_FALLBACK_GROUPS) {
     const list = await dataries.loadAll(group);
     const corpus = list.map((item) => ({ item, text: item.text || '' }));
-    const ranked = retrieval.rank(query, corpus, { threshold: DATARIES_FALLBACK_THRESHOLD, limit: 2 });
-    ranked.forEach((r) => results.push({ type: 'dataries', text: r.item.text, score: r.score }));
+    const ranked = retrieval.rank(query, corpus, {
+      threshold: DATARIES_FALLBACK_THRESHOLD,
+      limit: 2,
+      entryPenalty,
+      idOf: (c) => c.item && c.item.id,
+    });
+    ranked.forEach((r) => results.push({ type: 'dataries', text: r.item.text, score: r.score, id: r.item.id }));
   }
   return results.sort((a, b) => b.score - a.score).slice(0, 2);
 }

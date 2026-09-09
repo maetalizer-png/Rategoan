@@ -532,7 +532,7 @@ async function respondCore(messages, prompt) {
   let reply;
   let fewshotMatched = false;
   if (plannedFallback) {
-    reply = postProcess(plannedFallback);
+    reply = postProcess(plannedFallback.text);
     reply = await toolsKoleksi.personalize(reply, text);
   } else {
     let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name, tonePreference });
@@ -572,7 +572,11 @@ async function respondCore(messages, prompt) {
     ragetDb.logUnmatched(text, ['preSearch', 'dataFallback', 'planner', 'llmEngine', 'fewshot']);
   }
 
-  ragetDb.addNote(text, reply, null, 'chat_' + routerIntent.detectAnswerType(text));
+  // PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId (kalau planner.planFallback
+  // mengidentifikasi satu entri data terstruktur sebagai sumber utama)
+  // dicatat di sini supaya feedbackStore/re-ranking (Fase 4.2) bisa dipetakan
+  // ke ENTRI spesifik, bukan cuma level-intent generik 'chat_*'.
+  ragetDb.addNote(text, reply, null, 'chat_' + routerIntent.detectAnswerType(text), plannedFallback ? plannedFallback.sourceEntryId : null);
   return reply;
 }
 

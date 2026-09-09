@@ -131,15 +131,19 @@ function buildActions(text) {
   downBtn.className = 'msg-action-btn';
   downBtn.innerHTML = ic('thumbDown');
   downBtn.setAttribute('aria-label', 'Balasan kurang tepat');
-  async function intentOfAnswer() {
+  // PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId dibawa serta di sini
+  // (bukan cuma intent) supaya feedbackStore bisa mengagregasi like/dislike
+  // per ENTRI data spesifik, prasyarat re-ranking Fase 4.2/2.1.
+  async function noteOfAnswer() {
     const notes = await ragetDb.allNotes();
     const match = notes.slice().reverse().find((n) => n.answer.trim() === text.trim());
-    return match ? match.intent : null;
+    return { intent: match ? match.intent : null, sourceEntryId: match ? match.sourceEntryId || null : null };
   }
 
   upBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, true);
-    feedbackStore.record(true, await intentOfAnswer());
+    const note = await noteOfAnswer();
+    feedbackStore.record(true, note.intent, note.sourceEntryId);
     upBtn.classList.add('rated');
     downBtn.classList.remove('rated');
     toast.show('Makasih atas masukannya');
@@ -151,7 +155,8 @@ function buildActions(text) {
   };
   downBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, false);
-    feedbackStore.record(false, await intentOfAnswer());
+    const note = await noteOfAnswer();
+    feedbackStore.record(false, note.intent, note.sourceEntryId);
     downBtn.classList.add('rated');
     upBtn.classList.remove('rated');
     toast.show('Dicatat, makasih');

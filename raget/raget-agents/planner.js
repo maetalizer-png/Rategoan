@@ -48,19 +48,32 @@ function planFallback(text, results) {
   const top = list[0];
   if (!top) return null;
 
+  // PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId cuma diisi kalau top
+  // result-nya benar-benar berasal dari SATU entri data terstruktur
+  // (type 'dataries', punya .id nyata dari skema unified) - preSearch
+  // (memoryIndex, catatan pengguna sendiri) tidak punya entry.id yang
+  // sama artinya, jadi sengaja dibiarkan null di situ daripada dipaksakan.
   const topThreshold = top.type === 'dataries' ? DATARIES_THRESHOLD : retrieval.AUGMENT_THRESHOLD;
   if (top.score >= topThreshold) {
     const body = formatter.formatByType('terbuka', {
       title: 'Yang saya tahu',
       items: list.slice(0, 3).map((r) => r.text),
     });
-    return quality.guardLength(body, 'terbuka') + '\n\n(sumber: ' + top.type + ')';
+    return {
+      text: quality.guardLength(body, 'terbuka') + '\n\n(sumber: ' + top.type + ')',
+      sourceType: top.type,
+      sourceEntryId: top.type === 'dataries' && top.id ? top.id : null,
+    };
   }
 
   if (top.score >= CHOICE_THRESHOLD) {
     const second = list[1];
     if (second && second.score >= CHOICE_THRESHOLD) {
-      return 'Maksudnya yang mana ya: 1) ' + top.text.slice(0, 70) + ' atau 2) ' + second.text.slice(0, 70) + '?';
+      return {
+        text: 'Maksudnya yang mana ya: 1) ' + top.text.slice(0, 70) + ' atau 2) ' + second.text.slice(0, 70) + '?',
+        sourceType: top.type,
+        sourceEntryId: null,
+      };
     }
   }
 

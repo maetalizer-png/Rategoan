@@ -1,12 +1,18 @@
 const SCHEMA_VERSION = 2;
 
-function createNote(question, answer, feedback, intent) {
+// PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId opsional (null kalau
+// jawabannya tidak berasal dari SATU entri data terstruktur tunggal, mis.
+// jawaban generik/multi-mesin) - field baru, TIDAK mengubah bentuk notes
+// lama (yang tidak punya field ini tetap valid, dibaca sebagai null lewat
+// default parameter, bukan lewat migrasi data).
+function createNote(question, answer, feedback, intent, sourceEntryId) {
   return {
     id: 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     question: String(question || ''),
     answer: String(answer || ''),
     feedback: feedback == null ? null : !!feedback,
     intent: intent || 'generic',
+    sourceEntryId: sourceEntryId || null,
     time: Date.now(),
     version: SCHEMA_VERSION,
   };

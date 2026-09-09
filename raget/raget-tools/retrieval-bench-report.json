@@ -1,95 +1,44 @@
 {
-  "generatedAt": "2026-08-21T18:32:50.504Z",
+  "generatedAt": "2026-09-09T11:26:19.210Z",
   "domain": "country",
   "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity)",
   "threshold": 0.3,
   "overall": {
-    "n": 652,
-    "hit@1_rate": 0.9847,
-    "hit@3_rate": 0.9847,
-    "mrr": 0.9847,
-    "fallback_rate": 0.0153
+    "n": 656,
+    "hit@1_rate": 1,
+    "hit@3_rate": 1,
+    "mrr": 1,
+    "fallback_rate": 0
   },
   "byTemplate": {
     "ibu-kota": {
-      "n": 163,
-      "hit@1_rate": 0.9939,
-      "hit@3_rate": 0.9939,
-      "mrr": 0.9939,
-      "fallback_rate": 0.0061
+      "n": 164,
+      "hit@1_rate": 1,
+      "hit@3_rate": 1,
+      "mrr": 1,
+      "fallback_rate": 0
     },
     "populasi": {
-      "n": 163,
+      "n": 164,
       "hit@1_rate": 1,
       "hit@3_rate": 1,
       "mrr": 1,
       "fallback_rate": 0
     },
     "mata-uang": {
-      "n": 163,
-      "hit@1_rate": 0.9448,
-      "hit@3_rate": 0.9448,
-      "mrr": 0.9448,
-      "fallback_rate": 0.0552
+      "n": 164,
+      "hit@1_rate": 1,
+      "hit@3_rate": 1,
+      "mrr": 1,
+      "fallback_rate": 0
     },
     "nama-resmi": {
-      "n": 163,
+      "n": 164,
       "hit@1_rate": 1,
       "hit@3_rate": 1,
       "mrr": 1,
       "fallback_rate": 0
     }
   },
-  "misses": [
-    {
-      "q": "Mata uang apa yang dipakai Afrika Selatan?",
-      "expect": "Afrika Selatan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Turkmenistan?",
-      "expect": "Turkmenistan",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Thailand?",
-      "expect": "Thailand",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Kamboja?",
-      "expect": "Kamboja",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai China?",
-      "expect": "China",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Prancis?",
-      "expect": "Prancis",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Apa ibu kota Inggris?",
-      "expect": "Inggris",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Inggris?",
-      "expect": "Inggris",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Spanyol?",
-      "expect": "Spanyol",
-      "reason": "fallback (tidak ada di atas threshold)"
-    },
-    {
-      "q": "Mata uang apa yang dipakai Svalbard?",
-      "expect": "Svalbard",
-      "reason": "fallback (tidak ada di atas threshold)"
-    }
-  ]
+  "misses": []
 }
