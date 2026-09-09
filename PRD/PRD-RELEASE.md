@@ -19,10 +19,10 @@ tersembunyi di tempat yang tidak biasa dibaca.
 **Mulai sekarang**: dokumen **INI** (`PRD/PRD-RELEASE.md`, di git) yang
 jadi sumber utama untuk diedit dan dibaca sehari-hari. Salinan di
 Release (tag `prd-data-release`) tetap dipertahankan sebagai cermin
-sealed yang dibaca skrip pipeline dari luar sandbox — **Grok/dirigen
-tolong sinkronkan isi Release itu supaya sama persis dengan dokumen
-git ini setiap kali dokumen ini berubah.** Kalau isi keduanya pernah
-beda, **dokumen git ini yang benar** — versi Release yang harus
+sealed yang dibaca skrip pipeline dari luar sandbox — **Grok/Manus/
+dirigen tolong sinkronkan isi Release itu supaya sama persis dengan
+dokumen git ini setiap kali dokumen ini berubah.** Kalau isi keduanya
+pernah beda, **dokumen git ini yang benar** — versi Release yang harus
 menyusul, bukan sebaliknya.
 
 ### Siapa mengerjakan apa, dan kenapa Claude tidak bisa publish Release
@@ -30,7 +30,7 @@ menyusul, bukan sebaliknya.
 | Peran | Bisa apa | Tidak bisa apa |
 |---|---|---|
 | **Sesi Claude Code (sandbox ini)** | Baca Release/unduh asset, jalankan clean/dedupe/tokenize/hitung token secara lokal, verifikasi SHA256, edit file git (manifest, PRD, kode), commit+push ke git | **TIDAK BISA** membuat/mengedit/menghapus GitHub Release — API mengembalikan `"Creating, editing, or deleting releases is not permitted for this session type."` (pembatasan level-sesi yang disengaja, dikonfirmasi di `CHECKPOINT-POLICY.md`) |
-| **Grok / dirigen (luar sandbox)** | Upload raw data ke Release (tag ad-hoc utk staging), publish korpus/checkpoint bersih ke Release (`publish-korpus-release.py`/`publish-checkpoint-release.py`), hapus tag lama, sinkronkan salinan Release dokumen ini | Idealnya tetap ikuti rumus di dokumen ini supaya tidak bentrok dengan kerja Claude di sisi git |
+| **Grok / Manus / dirigen (luar sandbox)** | Upload raw data ke Release (tag ad-hoc utk staging), publish korpus/checkpoint bersih ke Release (`publish-korpus-release.py`/`publish-checkpoint-release.py`), hapus tag lama, sinkronkan salinan Release dokumen ini | Idealnya tetap ikuti rumus di dokumen ini supaya tidak bentrok dengan kerja Claude di sisi git — Manus: lihat `PRD-MANUS-DATA-MENTAH.md` untuk prosedur langkah-demi-langkah |
 
 **Titik serah terima yang jelas** (ini yang mencegah "bentrok"): Claude
 mengerjakan SEMUA langkah yang bisa dijalankan lokal (unduh untuk
