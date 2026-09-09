@@ -1,16 +1,29 @@
-# PRD — Pengembangan Lanjutan Raget Neural (Roadmap Skala 50M → 40B)
+# PRD — Raget Neural (otak transformer dari nol, 50M → 40B)
 
-Status: roadmap aktif — **Fase A.1 (audit token korpus) dan A.1b (growth
-plan, analisis) SELESAI** (lihat §2b), hasilnya sudah mengubah urutan
-prioritas Fase A (lihat §2-3): korpus, bukan compute, adalah penghambat
-dominan untuk scaling — dan Wikipedia ID BUKAN sumber pertumbuhan lagi
-(sudah habis digali dua kali, terbukti dari manifest nyata). Sebagian besar
-fase jauh ke depan bersifat **spekulatif secara sengaja** dan
-mensyaratkan keputusan produk eksplisit sebelum dieksekusi (dicatat
-jelas di tiap fase). Cakupan PRD
-ini CUMA `raget-neural/` + tooling training/eval-nya. Perubahan Template
-di luar cakupan ini — lihat `PRD-RAGET-TEMPLATE.md`. Aturan kerja
-lintas-sektor: `PRD-ATURAN-KERJA.md`, WAJIB dibaca dulu.
+## Goals
+
+1. Model tumbuh dari 50M ke ukuran lebih besar HANYA kalau korpus
+   training-nya sudah cukup (rasio ~20 token/parameter) — bukan asal
+   naikkan parameter (preseden gagal: massive200m lebih buruk dari
+   massive50m karena data kurang, bukan model kurang besar).
+2. Setiap klaim naik fase WAJIB dibuktikan kualitatif (baca output
+   generasi asli) + kuantitatif (PPL held-out membaik), bukan PPL
+   turun doang.
+3. 100% arsitektur milik RATEGOAN sendiri, ditulis dari nol — tidak
+   pernah menyematkan model bahasa pihak ketiga.
+4. Growth path korpus/compute/inference dipetakan jujur per skala
+   (500M/1B/4B/10B+), termasuk kapan itu butuh keputusan produk
+   (budget, ubah prinsip 100% lokal) — bukan diam-diam dieksekusi.
+
+Cakupan: `raget-neural/` + tooling training/eval-nya. Template di luar
+cakupan — lihat `PRD-RAGET-TEMPLATE.md`.
+
+Status ringkas: Fase A.1 (audit token korpus) dan A.1b (growth plan)
+SELESAI (lihat §2b) — korpus, bukan compute, adalah penghambat dominan
+untuk scaling, dan Wikipedia ID BUKAN sumber pertumbuhan lagi (sudah
+habis digali dua kali, terbukti dari manifest nyata). Fase jauh ke
+depan **spekulatif secara sengaja**, mensyaratkan keputusan produk
+eksplisit sebelum dieksekusi (dicatat jelas di tiap fase).
 
 **Prinsip yang tidak bisa ditawar**: seluruh roadmap ini tentang
 membesarkan arsitektur transformer JS/PyTorch **milik RATEGOAN
@@ -233,4 +246,3 @@ turun BUKAN bukti cukup. Setiap kenaikan fase WAJIB:
 - Perubahan Template/data/retrieval — `PRD-RAGET-TEMPLATE.md`.
 - Model bahasa pihak ketiga dalam bentuk apa pun — sudah diputuskan
   TIDAK dikejar secara permanen.
-- Setiap pekerjaan di PRD ini WAJIB ikut `PRD-ATURAN-KERJA.md`.

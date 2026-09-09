@@ -572,10 +572,6 @@ async function respondCore(messages, prompt) {
     ragetDb.logUnmatched(text, ['preSearch', 'dataFallback', 'planner', 'llmEngine', 'fewshot']);
   }
 
-  // PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId (kalau planner.planFallback
-  // mengidentifikasi satu entri data terstruktur sebagai sumber utama)
-  // dicatat di sini supaya feedbackStore/re-ranking (Fase 4.2) bisa dipetakan
-  // ke ENTRI spesifik, bukan cuma level-intent generik 'chat_*'.
   ragetDb.addNote(text, reply, null, 'chat_' + routerIntent.detectAnswerType(text), plannedFallback ? plannedFallback.sourceEntryId : null);
   return reply;
 }

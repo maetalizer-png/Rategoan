@@ -2,64 +2,60 @@
 
 **Version 1.0**
 
-Hak Cipta © 2026 RATEGOAN. All Rights Reserved.
+Copyright © 2026 RATEGOAN. All Rights Reserved.
 
-Dokumen ini adalah lisensi penggunaan perangkat lunak Rategoan (kode
-sumber, data, dan aset di repositori ini) yang diberikan oleh pemilik
-hak cipta kepada pengguna/pihak ketiga, bukan lisensi open-source
-standar (MIT/Apache/GPL dll). Dengan menggunakan, menyalin, atau
-memodifikasi perangkat lunak ini, Anda menyetujui syarat di bawah.
+Proprietary license for the Rategoan software (source code, data, and
+assets in this repository) — not MIT/Apache/GPL or any standard
+open-source license. By using, copying, or modifying this software,
+you agree to the terms below.
 
-## 1. Pemberian Lisensi
+## 1. Grant of License
 
-Memakai, memodifikasi, dan menjalankan perangkat lunak ini untuk
-keperluan pribadi, edukasi, riset, atau pengembangan lebih lanjut —
-**gratis tanpa batas waktu**.
+Use, modify, and run this software for personal, educational, research,
+or further development purposes — **free, no time limit**.
 
-Penggunaan komersial oleh pihak selain pemilik hak cipta (menghasilkan
-pendapatan dari perangkat lunak ini atau turunannya) memerlukan izin
-tertulis dari pemilik hak cipta — hubungi **maetalizer@gmail.com**.
-Pemilik hak cipta sendiri bebas mendistribusikan, menjual, atau
-melisensikan perangkat lunak ini melalui kanal apa pun sesuai
-keputusannya sendiri; ketentuan ini mengatur pihak ketiga/pengguna,
-bukan hak pemilik atas karyanya sendiri.
+Commercial use by any party other than the copyright holder (generating
+revenue from this software or derivatives) requires written permission
+from the copyright holder — contact **maetalizer@gmail.com**. The
+copyright holder retains unrestricted rights to distribute, sell, or
+license this software through any channel.
 
-## 2. Yang Diperbolehkan
+## 2. Permitted
 
-- Memodifikasi seluruh kode dan data untuk kebutuhan sendiri.
-- Menjalankan dan mendistribusikan hasil build/turunan ke pengguna akhir
-  Anda sendiri untuk keperluan non-komersial.
-- Mempelajari kode sumber untuk tujuan edukasi.
+- Modify all code and data for your own use.
+- Run and distribute build outputs/derivatives to your own end users
+  for non-commercial purposes.
+- Study the source code for educational purposes.
 
-## 3. Yang Dilarang
+## 3. Prohibited
 
-- Menjual ulang atau membagikan ulang kode sumber mentah repositori ini
-  (sebagian atau seluruhnya) sebagai produk/template kepada pihak lain,
-  di platform mana pun.
-- Mengklaim kepemilikan atau kepenulisan asli atas perangkat lunak ini.
-- Menghapus atau mengubah notice hak cipta ini dari kode sumber.
-- Sublisensi atau mengalihkan hak dalam lisensi ini ke pihak ketiga
-  tanpa izin tertulis.
+- Reselling or redistributing the raw source code of this repository
+  (in part or whole) as a product/template to third parties, on any
+  platform.
+- Claiming ownership or original authorship of this software.
+- Removing or altering this copyright notice from the source code.
+- Sublicensing or transferring rights under this license to a third
+  party without written permission.
 
-## 4. Tanpa Jaminan
+## 4. No Warranty
 
-Perangkat lunak ini disediakan "as-is", tanpa jaminan dalam bentuk
-apa pun, tersurat maupun tersirat. Pemilik hak cipta tidak bertanggung
-jawab atas kerugian yang timbul dari penggunaan perangkat lunak ini.
+This software is provided "as-is", without warranty of any kind,
+express or implied. The copyright holder is not liable for damages
+arising from use of this software.
 
-Fitur opt-in yang bergantung pada paket CDN eksternal (OCR, terjemahan,
-PDF, impor Notion/Evernote/WhatsApp) memerlukan koneksi internet saat
-pertama kali diunduh; sesudahnya berjalan offline. Tidak ada API key
-berbayar yang dibutuhkan untuk fitur inti chat/data lokal.
+Opt-in features that depend on external CDN packages (OCR, translation,
+PDF, Notion/Evernote/WhatsApp import) require an internet connection on
+first download; they run offline afterward. No paid API key is required
+for core chat/local-data features.
 
-## 5. Lisensi Pihak Ketiga
+## 5. Third-Party Licenses
 
-Data korpus training (K1/K2/K3) memiliki lisensi masing-masing dari
-sumbernya (mayoritas CC-BY-SA dari Wikimedia) — lihat
-`docs/STATUS-KORPUS-LISENSI.md` untuk rincian per sumber. Lisensi
-pihak ketiga tersebut berlaku terpisah dari lisensi ini dan tetap
-mengikat data yang bersangkutan.
+Training corpus data (K1/K2/K3) carries its own license per source
+(mostly CC-BY-SA from Wikimedia) — see `docs/STATUS-KORPUS-LISENSI.md`
+for per-source details. Third-party licenses apply independently of
+this license and remain binding on the data they cover.
 
-## 6. Kontak
+## 6. Contact
 
-Pertanyaan lisensi, izin komersial, atau kerja sama: **maetalizer@gmail.com**.
+Licensing questions, commercial permission, or partnerships:
+**maetalizer@gmail.com**.

@@ -1,33 +1,10 @@
 # PRD Rategoan
 
-Lima dokumen: satu fondasi teori, satu aturan kerja, satu aturan data
-release, dua roadmap tugas per sektor otak. Baca dalam urutan ini:
+4 dokumen, baca dalam urutan ini:
 
-1. [`FONDASI-TEORI-RAGET.md`](FONDASI-TEORI-RAGET.md) — **baca ini
-   dulu**. Teori, matematika, dan rumus di balik AI Raget dari hulu
-   (representasi data) ke hilir (feedback loop), pola arsitektur yang
-   dipakai, dan peta tingkat kecerdasan (L0-L5) yang menjawab "nanti
-   bisa apa, pintar dalam hal apa". Semua PRD di bawah ini adalah
-   langkah konkret menaiki peta level di dokumen ini.
-2. [`PRD-ATURAN-KERJA.md`](PRD-ATURAN-KERJA.md) — aturan fokus per
-   sektor: apa yang dilarang, apa yang warning, kriteria "selesai boleh
-   pindah sektor". Berlaku untuk semua pekerjaan di repo ini.
-3. [`PRD-RELEASE.md`](PRD-RELEASE.md) — aturan data GitHub Release:
-   5 kategori korpus, penamaan tag permanen, rumus ukuran/mix/oversample,
-   SEGEL SHA256 tiga gerbang, alur wajib raw→bersih→token BPE→publish,
-   dan pembagian kerja Claude (proses lokal) vs Grok/dirigen (publish
-   Release, karena Claude tidak diizinkan menulis Release). Cermin git
-   dari Release tag `prd-data-release` — **dokumen git ini yang menang**
-   kalau isinya beda dari salinan Release.
-4. [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md) — roadmap otak
-   rule-based/retrieval: closed-loop feedback (Fase 1 SELESAI), asisten
-   validasi data (Fase 2.3 SELESAI), auto-learning lokal (re-ranking,
-   personalisasi), semantic search, tata kelola data.
-5. [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) — roadmap otak neural
-   RATEGOAN sendiri dari 50M/100M/200M menuju 500M → 1B → 4B → 10B/20B/40B
-   (audit token korpus Fase A.1 SELESAI, hasilnya real dan mengubah
-   urutan prioritas), syarat data/compute/inference tiap lompatan,
-   makna jujur "belajar dari user"/"federated" di level model.
+1. [`FONDASI-TEORI-RAGET.md`](FONDASI-TEORI-RAGET.md) — teori & level kecerdasan (L0-L5) RAGET.
+2. [`PRD-RELEASE.md`](PRD-RELEASE.md) — aturan data GitHub Release (korpus, tag, SHA256, alur publish).
+3. [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md) — roadmap otak Template (rule-based/retrieval).
+4. [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) — roadmap otak Neural (50M → 40B).
 
-Semua lima PRD dirujuk dari [`docs/ARSITEKTUR.md`](../docs/ARSITEKTUR.md)
-untuk peta teknis kondisi hari ini.
+Peta teknis kondisi hari ini: [`docs/ARSITEKTUR.md`](../docs/ARSITEKTUR.md).

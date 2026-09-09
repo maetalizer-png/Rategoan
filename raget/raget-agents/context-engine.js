@@ -56,13 +56,6 @@ function getCarriedEmotion() {
   return lastEmotion;
 }
 
-// PRD-RAGET-TEMPLATE.md Fase 2.2: preferensi gaya bicara yang diajarkan
-// SEKALI harus BERTAHAN lintas giliran, bukan cuma dibaca ulang tiap pesan
-// dari kata kunci literal (detectTone() di utils/text.js cuma cek "anda" vs
-// "lu/gw/bro" di PESAN INI SAJA - begitu pesan berikutnya tidak memuat kata
-// kunci itu lagi, preferensinya "luntur"). Disimpan sebagai fact permanen
-// lewat memoryLong (sama seperti fakta nama/preferensi lain), dibaca lintas
-// sesi selama fact-nya belum dihapus pengguna.
 const STYLE_PREFERENCE_FACT_KEY = 'gaya_bicara';
 const STYLE_FORMAL_RE = /\b(panggil\s+(aku|saya)\s+)?(pakai|gunakan)\s+bahasa\s+formal\b|\bjawab(lah)?\s+(pakai\s+)?formal\b|\bmohon\s+(pakai\s+)?bahasa\s+formal\b|\bjangan\s+(terlalu\s+)?santai\b/i;
 const STYLE_CASUAL_RE = /\b(pakai|gunakan)\s+bahasa\s+santai\b|\bjawab(lah)?\s+santai\s+aja\b|\bgak\s+usah\s+formal\b|\btidak\s+usah\s+formal\b|\bjangan\s+(terlalu\s+)?formal\b|\bsantai\s+aja(lah)?\s+ngomongnya\b/i;

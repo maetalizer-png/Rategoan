@@ -5,11 +5,10 @@ hilir apa yang dibutuhkan membangun AI sendiri — kerangka, mesin, otak,
 teori, rumus, matematika, pola, dan target — supaya pondasinya benar-benar
 lengkap sebagai konsep, bukan cuma daftar tugas.**
 
-Ini BUKAN PRD tugas seperti tiga file lain di folder ini — ini peta
-teori yang MENDASARI mereka. Baca urutan: dokumen ini dulu (kenapa &
+Ini BUKAN PRD tugas seperti file lain di folder ini — ini peta teori
+yang MENDASARI mereka. Baca urutan: dokumen ini dulu (kenapa &
 bagaimana secara prinsip), baru `PRD-RAGET-TEMPLATE.md`/
-`PRD-RAGET-NEURAL.md` (apa yang dikerjakan, sudah sejauh mana) dan
-`PRD-ATURAN-KERJA.md` (bagaimana cara kerjanya harus disiplin). Semua
+`PRD-RAGET-NEURAL.md` (apa yang dikerjakan, sudah sejauh mana). Semua
 rumus dan angka di sini diambil LANGSUNG dari kode yang sudah berjalan
 di repo — bukan teori abstrak yang belum diimplementasikan. Di mana
 Raget belum mengerjakan sesuatu, itu dicatat jujur, bukan ditutupi.
@@ -280,8 +279,7 @@ software baku, dipetakan ke nama filenya:
 
 Kenapa ini penting dicatat: pola-pola ini SUDAH konsisten dipakai di
 seluruh kode — pengembangan lanjutan (fase-fase di PRD lain) harus
-mengikuti pola yang sama, bukan menciptakan pola baru per fitur (lihat
-`PRD-ATURAN-KERJA.md`).
+mengikuti pola yang sama, bukan menciptakan pola baru per fitur.
 
 ## 3. Peta tingkat kecerdasan (Capability Maturity Levels)
 
@@ -346,8 +344,8 @@ Diagram ini SATU-SATUNYA sumber kebenaran untuk urutan "hulu ke hilir"
 — setiap PRD tugas lain adalah pekerjaan yang memperkuat SATU node di
 diagram ini, bukan menambah node baru di luar diagram (kalau memang
 perlu node baru, itu keputusan arsitektur yang butuh dokumen ini
-diperbarui dulu, bukan ditambah diam-diam — lihat `PRD-ATURAN-KERJA.md`
-soal larangan struktur baru tanpa konfirmasi).
+diperbarui dulu dan dikonfirmasi ke pemilik produk, bukan ditambah
+diam-diam).
 
 ## 5. Target & goals — ringkasan silang-referensi
 
@@ -376,5 +374,5 @@ sudah dipetakan lengkap di sini. Yang tersisa adalah **eksekusi
 bertahap** sesuai urutan prasyarat yang sudah dijelaskan di §3 (peta
 level) dan §5 (target): tiap fase di `PRD-RAGET-TEMPLATE.md` dan
 `PRD-RAGET-NEURAL.md` adalah satu langkah konkret menaiki peta level
-ini, dikerjakan sesuai disiplin `PRD-ATURAN-KERJA.md` — satu sektor,
-satu bukti verifikasi nyata, baru lanjut ke langkah berikutnya.
+ini — satu bukti verifikasi nyata (lint LOLOS + Playwright/benchmark)
+sebelum diklaim selesai, baru lanjut ke langkah berikutnya.

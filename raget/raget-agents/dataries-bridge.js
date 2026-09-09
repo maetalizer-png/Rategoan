@@ -145,12 +145,6 @@ async function search(q) {
 const DATARIES_FALLBACK_THRESHOLD = 0.3;
 const DATARIES_FALLBACK_GROUPS = ['country', 'sains', 'olahraga'];
 
-// PRD-RAGET-TEMPLATE.md Fase 2.1/4.2: entryPenalty (dari feedbackStore,
-// dibangun dari like/dislike per-entri yang mulai tercatat sejak Fase 4.1)
-// diteruskan ke retrieval.rank() supaya entri yang SERING di-dislike
-// diprioritaskan lebih rendah - bukan dihapus (masih bisa muncul kalau
-// tetap satu-satunya yang cocok), cuma kalah saat skornya mepet dengan
-// entry lain yang belum pernah didislike.
 async function datariesFallback(query) {
   const entryPenalty = feedbackStore.entryPenaltyMap();
   const results = [];

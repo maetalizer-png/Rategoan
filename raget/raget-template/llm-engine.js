@@ -295,11 +295,6 @@ function lastTopic(context) {
 
 function replyForSmalltalkKey(key, text, options) {
   const entry = sapaanCache.smalltalk[key];
-  // PRD-RAGET-TEMPLATE.md Fase 2.2: preferensi gaya bicara yang pengguna
-  // AJARKAN sekali (context-engine.js#tryStylePreference -> memoryLong fact
-  // "gaya_bicara") menang atas detectTone(text) yang cuma baca kata di PESAN
-  // INI SAJA ("anda" vs "lu/gw") - tanpa ini, preferensi luntur begitu satu
-  // pesan tidak lagi memuat kata pemicu formal/santai eksplisit.
   const tone = (options && options.tonePreference) || detectTone(text);
   const pool =
     (tone === 'formal' && entry && entry.templatesFormal ? entry.templatesFormal : null) ||

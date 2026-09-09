@@ -14,15 +14,6 @@ import { bm25 } from './bm25.js';
 const AUGMENT_THRESHOLD = 0.35;
 const LIST_THRESHOLD = 0.25;
 
-// PRD-RAGET-TEMPLATE.md Fase 2.1: entryPenalty (Map id->faktor kalikan
-// 0..1, dari feedbackStore.entryPenaltyMap() - Fase 4.1/4.2) TURUNKAN skor
-// entri yang sering di-dislike, TIDAK menghapusnya dari hasil - kalau
-// entri itu tetap satu-satunya yang cocok, dia tetap muncul, cuma kalah
-// prioritas saat skornya mepet dengan entry lain. idOf default mengambil
-// item.id (bentuk unified: {id, text, ...}) - opsional dan aman kalau
-// item tidak punya id (Map.get(undefined) selalu undefined -> tanpa
-// penalti), jadi caller lama yang tidak mengirim entryPenalty/idOf tidak
-// berubah perilakunya sama sekali (default Map kosong = no-op murni).
 function scoreCorpus(queryTokens, corpus, textOf, entryPenalty, idOf) {
   const getText = textOf || ((item) => item.text || '');
   const getId = idOf || ((item) => item.id);
@@ -57,12 +48,6 @@ function rank(query, corpus, options) {
   const normalized = normalizeSlang(query);
   const threshold = opts.threshold != null ? opts.threshold : LIST_THRESHOLD;
   const limit = opts.limit || 10;
-  // entryPenalty datang dari feedbackStore dan bisa berubah antar giliran
-  // (pengguna kasih dislike baru) - LRU cache di bawah cuma dikunci dari
-  // query/corpus/threshold/limit, TIDAK tahu penalty berubah, jadi sengaja
-  // DILEWATI (bukan dipakai stale) tiap kali entryPenalty diberikan. Ini
-  // jalur yang jarang dipanggil (datariesFallback per pesan), bukan hot
-  // path linter/bench, jadi biaya cache-miss di sini diterima demi benar.
   const usesPenalty = !!(opts.entryPenalty && opts.entryPenalty.size);
   const key = usesPenalty ? null : cacheKey(normalized, corpus, threshold, limit);
   if (key && cache.has(key)) {

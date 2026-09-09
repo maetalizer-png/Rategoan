@@ -48,11 +48,6 @@ function planFallback(text, results) {
   const top = list[0];
   if (!top) return null;
 
-  // PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId cuma diisi kalau top
-  // result-nya benar-benar berasal dari SATU entri data terstruktur
-  // (type 'dataries', punya .id nyata dari skema unified) - preSearch
-  // (memoryIndex, catatan pengguna sendiri) tidak punya entry.id yang
-  // sama artinya, jadi sengaja dibiarkan null di situ daripada dipaksakan.
   const topThreshold = top.type === 'dataries' ? DATARIES_THRESHOLD : retrieval.AUGMENT_THRESHOLD;
   if (top.score >= topThreshold) {
     const body = formatter.formatByType('terbuka', {

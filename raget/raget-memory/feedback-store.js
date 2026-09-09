@@ -56,13 +56,6 @@ function statsByIntent() {
     .sort((a, b) => b.down - a.down);
 }
 
-// PRD-RAGET-TEMPLATE.md Fase 4.1 (prasyarat Fase 2.1/4.2 re-ranking):
-// sama seperti statsByIntent() tapi per ENTRI data spesifik (sourceEntryId),
-// bukan per kategori/intent generik - inilah yang tadinya hilang ("hari ini
-// granularitasnya baru level intent, bukan per-entry"). Event tanpa
-// sourceEntryId (jawaban bukan dari satu entri tunggal, mis. generik/LLM)
-// sengaja TIDAK ikut diagregasi di sini - itu bukan sinyal yang bisa
-// dipetakan ke satu entri untuk re-ranking.
 function statsByEntry() {
   const data = read();
   const byEntry = new Map();
@@ -78,13 +71,6 @@ function statsByEntry() {
     .sort((a, b) => b.down - a.down);
 }
 
-// PRD-RAGET-TEMPLATE.md Fase 2.1 (re-ranking): dipakai retrieve.js untuk
-// memberi penalti skor kecil ke entri yang SERING di-dislike - bukan
-// dihapus, cuma diprioritaskan lebih rendah saat skornya mepet dengan
-// entry lain (lihat komentar di retrieve.js). minEvents mencegah SATU
-// dislike kebetulan langsung menghukum entri (butuh sampel minimal
-// sebelum dianggap sinyal, bukan noise) - default 3, sama filosofinya
-// dengan kenapa BM25 butuh banyak dokumen sebelum idf-nya stabil.
 const DEFAULT_MIN_EVENTS = 3;
 const DEFAULT_PENALTY_FACTOR = 0.85;
 

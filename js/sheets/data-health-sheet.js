@@ -41,15 +41,6 @@ function renderIntentRows(intents) {
   );
 }
 
-// PRD-RAGET-TEMPLATE.md Fase 3.2: "kontribusi data" opt-in ANONIM - klik
-// tombol ini adalah SATU-SATUNYA cara data ini pernah meninggalkan
-// perangkat, dan hanya sebagai unduhan file lokal yang penggunanya sendiri
-// pilih mau dibagikan ke pengembang atau tidak (mis. lampirkan manual ke
-// issue GitHub). TIDAK ADA pengiriman otomatis ke server manapun - ini
-// BUKAN federated learning gradient-sharing, cuma unduhan JSON biasa.
-// Query dinormalisasi (lowercase, spasi dirapikan) via feedbackReport dan
-// timestamp per-kueri SENGAJA tidak disertakan (cukup rentang tanggal
-// agregat) supaya polanya lebih dekat ke "anonim" daripada log mentah.
 function buildAnonymousExport(report) {
   return {
     exportedAt: new Date().toISOString(),

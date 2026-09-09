@@ -1,17 +1,23 @@
-# PRD — Pengembangan Lanjutan Raget Template
+# PRD — Raget Template (otak rule-based/retrieval)
 
-Status: roadmap aktif — **Fase 1, 2.2, 2.3, 3.2, 4.3, 4.4 SELESAI dan
-diverifikasi live/empiris; Fase 2.1/4.1/4.2 (re-ranking berbobot histori
-kualitas) SELESAI untuk jalur `dataries-bridge.js`, belum mesin lain
-(lihat catatan jujur di tabelnya); Fase 3.1 infrastruktur selesai &
-teruji tapi belum siap produksi** (lihat tabel di §3). Sasaran: fondasi
-jangka panjang untuk otak rule-based/retrieval RATEGOAN (`raget-template/`
-+ mesin-mesin di `raget-agents/`), bukan cuma daftar tugas kecil.
+## Goals
 
-Cakupan PRD ini CUMA sektor Template + data + infra retrieval/memory
-yang dipakainya. Perubahan pada `raget-neural/` di luar cakupan PRD ini
-— lihat `PRD-RAGET-NEURAL.md`. Aturan kerja lintas-sektor ada di
-`PRD-ATURAN-KERJA.md`, WAJIB dibaca sebelum eksekusi PRD ini.
+1. Jawaban makin akurat lewat retrieval berkualitas (BM25 + re-ranking
+   dari histori like/dislike), bukan cuma cakupan data makin luas.
+2. Personalisasi nyata (gaya bicara, konteks) tersimpan permanen per
+   pengguna, bukan dideteksi ulang tiap pesan.
+3. Data (`raget-data/json/`) selalu valid skema + terverifikasi lewat
+   gerbang otomatis (`lint-check.mjs`), bukan cuma dicek manual sesekali.
+4. Setiap klaim "selesai" di dokumen ini WAJIB punya bukti verifikasi
+   nyata (lint LOLOS + Playwright/benchmark), bukan asumsi.
+
+Cakupan: `raget-template/` + mesin-mesin di `raget-agents/` + data +
+infra retrieval/memory yang dipakainya. `raget-neural/` di luar cakupan
+— lihat `PRD-RAGET-NEURAL.md`.
+
+Status ringkas (detail di §3): Fase 1, 2.1, 2.2, 2.3, 3.2, 4.1, 4.2,
+4.3, 4.4 SELESAI (lihat catatan cakupan per fase di tabelnya); Fase 3.1
+infrastruktur selesai & teruji, belum siap produksi.
 
 ## 1. Kondisi nyata hari ini (dasar pijakan, dicek ulang dari kode)
 
@@ -145,6 +151,3 @@ mengerjakan Fase 1-2.3:
   model — itu `PRD-RAGET-NEURAL.md`.
 - Menyematkan model bahasa pihak ketiga dalam bentuk apa pun — sudah
   diputuskan TIDAK dikejar (lihat `docs/ARSITEKTUR.md`).
-- Setiap pekerjaan di PRD ini WAJIB ikut `PRD-ATURAN-KERJA.md`: fokus
-  satu fase/item sampai lint LOLOS + live-verified sebelum pindah ke
-  item berikutnya, kecuali ada perintah lain eksplisit.

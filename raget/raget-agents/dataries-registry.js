@@ -206,12 +206,6 @@ const cache = new Map();
 
 const JSON_MIGRATED_GROUPS = { country: 'negara', cities: 'kota', languages: 'bahasa', etika: 'etika', minuman: 'minuman', wisata: 'wisata', sejarah: 'sejarah', makanan: 'makanan', alam: 'alam', sains: 'sains', olahraga: 'olahraga', platform: 'platform', ekonomi: 'ekonomi', peluang: 'peluang', penemuan: 'penemuan', 'seni-budaya': 'seni-budaya', tokoh: 'tokoh', biologi: 'mata-pelajaran/biologi', matematika: 'mata-pelajaran/matematika', fisika: 'mata-pelajaran/fisika', kimia: 'mata-pelajaran/kimia', 'bahasa-indonesia': 'mata-pelajaran/bahasa-indonesia', 'bahasa-inggris': 'mata-pelajaran/bahasa-inggris', geografi: 'mata-pelajaran/geografi', 'sejarah-sekolah': 'mata-pelajaran/sejarah', 'ekonomi-sekolah': 'mata-pelajaran/ekonomi', ppkn: 'mata-pelajaran/ppkn' };
 
-// PRD-RAGET-TEMPLATE.md Fase 4.1: entry.id skema unified DULU hilang di
-// sini (cuma teks/meta yang dibawa ke bentuk lama) - ini akar kenapa
-// granularitas feedback selama ini baru level-intent, bukan per-entry
-// (lihat catatan di PRD §Fase 2.1/4.1). Dibawa serta sekarang supaya
-// caller (dataries-bridge.js dst) bisa melacak ENTRI SPESIFIK mana yang
-// menjawab, bukan cuma "kategori X menjawab".
 function unifiedToLegacyShape(entry, group) {
   return {
     id: entry.id,

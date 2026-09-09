@@ -131,9 +131,6 @@ function buildActions(text) {
   downBtn.className = 'msg-action-btn';
   downBtn.innerHTML = ic('thumbDown');
   downBtn.setAttribute('aria-label', 'Balasan kurang tepat');
-  // PRD-RAGET-TEMPLATE.md Fase 4.1: sourceEntryId dibawa serta di sini
-  // (bukan cuma intent) supaya feedbackStore bisa mengagregasi like/dislike
-  // per ENTRI data spesifik, prasyarat re-ranking Fase 4.2/2.1.
   async function noteOfAnswer() {
     const notes = await ragetDb.allNotes();
     const match = notes.slice().reverse().find((n) => n.answer.trim() === text.trim());
