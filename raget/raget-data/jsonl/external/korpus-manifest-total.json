@@ -95,16 +95,16 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 471390047,
+    "totalTokenKanonikTerverifikasi": 543202593,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "Dua angka di atas TIDAK BOLEH DIJUMLAH sebagai satu 'total token proyek' - yang kanonik adalah token BPE nyata dari data yang SUDAH lolos review/dedupe dan dipakai training (K1 sekarang termasuk 76.071 dokumen Wikipedia unik yang sudah digabung Grok); yang staging (cuma MADLAD-400 batch terbaru tersisa) adalah KATA approx dari data yang BELUM direview. JAWABAN JUJUR untuk 'total token proyek saat ini' HANYA SATU: totalTokenKanonikTerverifikasi = 471.390.047 (BUKAN LAGI 420.930.740 - naik karena Wikipedia unik sudah masuk K1 malam ini). Angka lain (~750 juta termasuk jilid2 yang sudah dibuang; ~8 miliar kata MADLAD staging) BUKAN valid untuk diklaim sebagai total token training."
+    "catatanPenting": "REKONSILIASI 2026-09-09 (lihat PRD/PRD-RELEASE.md §5b): field ini sebelumnya masih 471.390.047 - angka LAMA dari sebelum batch K2/K3 2026-09-02 (wiki daerah + wikisource + id_personachat untuk K2, filter lebih ketat untuk K3) selesai diukur ulang. kanonik.entries (K1+K2+K3, tiap entri sudah dated 2026-09-01/09-02) sudah lebih dulu diperbarui saat itu, tapi ringkasanTotal ini luput ikut dihitung ulang - dua bagian file yang SAMA-SAMA mengklaim 'satu-satunya angka valid' sempat tidak sinkron. Sudah direkonsiliasi mekanis: totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 354.376.464 + 151.487.572 + 37.338.557 = 543.202.593, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk 'total token proyek saat ini' HANYA SATU: 543.202.593. Field kata-approx staging (8,1 miliar) TETAP tidak boleh dijumlahkan - itu belum direview/dedupe/di-BPE-kan. Aturan baru supaya ini tidak terulang: field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b untuk skrip pengecekannya."
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": false,
-  "kekuranganTokenKanonik": 528609953,
+  "kekuranganTokenKanonik": 456797407,
   "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang.",
-  "tokenKanonikPerintahClaude": 471390047,
+  "tokenKanonikPerintahClaude": 543202593,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
