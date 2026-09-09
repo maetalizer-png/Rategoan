@@ -1,9 +1,11 @@
 # PRD — Pengembangan Lanjutan Raget Template
 
-Status: roadmap aktif — **Fase 1 dan 2.3 SELESAI dan diverifikasi live**
-(lihat tabel di §3). Sasaran: fondasi jangka panjang untuk otak
-rule-based/retrieval RATEGOAN (`raget-template/` + mesin-mesin di
-`raget-agents/`), bukan cuma daftar tugas kecil.
+Status: roadmap aktif — **Fase 1, 2.2, 2.3, 3.2, 4.3, 4.4 SELESAI dan
+diverifikasi live/empiris; Fase 3.1 infrastruktur selesai & teruji tapi
+belum siap produksi (lihat catatan jujur di tabelnya)** (lihat tabel di
+§3). Sasaran: fondasi jangka panjang untuk otak rule-based/retrieval
+RATEGOAN (`raget-template/` + mesin-mesin di `raget-agents/`), bukan cuma
+daftar tugas kecil.
 
 Cakupan PRD ini CUMA sektor Template + data + infra retrieval/memory
 yang dipakainya. Perubahan pada `raget-neural/` di luar cakupan PRD ini
