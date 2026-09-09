@@ -1,8 +1,10 @@
 # PRD — Pengembangan Lanjutan Raget Neural (Roadmap Skala 50M → 40B)
 
-Status: roadmap aktif — **Fase A.1 (audit token korpus) SELESAI**,
-hasilnya sudah mengubah urutan prioritas Fase A (lihat §2-3): korpus,
-bukan compute, adalah penghambat dominan untuk scaling. Sebagian besar
+Status: roadmap aktif — **Fase A.1 (audit token korpus) dan A.1b (growth
+plan, analisis) SELESAI** (lihat §2b), hasilnya sudah mengubah urutan
+prioritas Fase A (lihat §2-3): korpus, bukan compute, adalah penghambat
+dominan untuk scaling — dan Wikipedia ID BUKAN sumber pertumbuhan lagi
+(sudah habis digali dua kali, terbukti dari manifest nyata). Sebagian besar
 fase jauh ke depan bersifat **spekulatif secara sengaja** dan
 mensyaratkan keputusan produk eksplisit sebelum dieksekusi (dicatat
 jelas di tiap fase). Cakupan PRD
@@ -94,6 +96,59 @@ dengan output projection.
    512MB. Maka strategi INFERENCE untuk model besar harus dipikirkan
    TERPISAH dari strategi TRAINING — lihat FASE B/C.
 
+## 2b. Growth plan korpus — bukti lengkap (Fase A.1b, dicek 2026-09-09)
+
+**(a) Wikipedia ID — sumur ini sudah nyaris kering, BUKAN peluang.**
+Bukti dari `raget-data/jsonl/external/korpus-jilid1-round10-manifest.json`:
+dump `idwiki-latest-pages-articles.xml.bz2` (1.232.894.346 byte) diproses
+**SELURUHNYA sampai habis** ("Dump HABIS diproses sebelum lantai 300 juta
+kata tercapai... seluruh 1.874.320 halaman `<page>` dalam dump sudah
+diproses") — 683.516 artikel disimpan, menghasilkan ~307 juta token
+(window126). Bukti kedua dari `korpus-manifest-total.json` (harvest
+terpisah oleh Grok, tag `panen-wikipedia-id`): dari 561.195 dokumen
+Wikipedia yang di-scan ulang, **238.873 duplikat + 247.251 terlalu
+pendek dibuang — cuma 76.071 (13,4%) yang benar-benar unik** dan
+digabung ke K1. Dua proses ekstraksi independen konvergen ke overlap
+86,6% — ini pola khas sumber yang sudah HABIS digali, bukan "belum
+ter-crawl penuh" seperti draf awal fase ini menduga (koreksi jujur atas
+kesalahan asumsi sebelumnya).
+
+**(b) Dua Release "penampung" — nyata tapi kecil.** Dicek langsung lewat
+GitHub API (bukan browser_download_url yang 404 di sandbox ini — lihat
+`PRD-RELEASE.md` §0):
+
+| Tag | Isi | Ukuran (gzip) | Status |
+|---|---|---:|---|
+| `korpus-sejarah-indonesia-bersih` | Sejarah Indonesia, CC-BY-SA | 564.158 byte (≈0,54 MiB) | "Belum digabung K1" (body Release, verbatim) |
+| `korpus-mentah-id` | 3 file: dump daerah mentah, kamus ID, wiki ID mentah | 3.617.641 + 2.853.681 + 1.515.380 = 7.986.702 byte (≈7,62 MiB) | "Belum sort" (body Release, verbatim) |
+
+Estimasi kasar token (gzip teks Indonesia biasanya rasio kompresi
+~3-3,5x, BPE vocab proyek ini ~3,5-4 karakter/token — **ESTIMASI, bukan
+angka pasti**, butuh tokenisasi nyata untuk kepastian): gabungan kedua
+Release ini paling banter setara **5-9 juta token**. Dibanding
+kekurangan 9,46 miliar token untuk target 500M (10 miliar - 543,2 juta
+yang sudah ada), ini **~0,05-0,1% dari gap** — kontribusi nyata tapi
+jauh dari cukup untuk jadi solusi utama.
+
+**(c) Kesimpulan growth plan**: satu-satunya jalur yang secara matematis
+bisa menutup gap 18,4x adalah korpus berskala Common Crawl/OSCAR (ratusan
+juta-miliaran dokumen), BUKAN crawl tambahan Wikipedia (sudah habis) atau
+Release penampung kecil (kontribusi <0,1%). Preseden `panen-madlad400-id`
+GAGAL (18,7% spam) menunjukkan filter kualitas untuk sumber sebesar itu
+HARUS jauh lebih ketat — pola yang TERBUKTI berhasil di proyek ini adalah
+dedup fingerprint ala `panen-wikipedia-id` (buang duplikat exact +
+dokumen terlalu pendek, rasio buang 86,6% di Wikipedia yang notabene
+sudah bersih), yang untuk Common Crawl (jauh lebih kotor) perlu ditambah
+minimal: filter deteksi bahasa (confidence tinggi, bukan cuma heuristik
+kata), filter perplexity pakai model kecil yang sudah ada, dan sampling
+rate awal kecil (uji filter di 1-5% dump dulu, ukur spam rate, baru
+scale up) — bukan langsung memproses dump penuh seperti kegagalan
+`panen-madlad400-id`. **Eksekusi crawl Common Crawl skala besar itu
+sendiri di luar cakupan realistis satu sesi kerja** (butuh infrastruktur
+download+filter+verifikasi terpisah) — growth plan ini menutup A.1b
+dengan mengidentifikasi jalur yang benar dan alasan kuantitatifnya,
+bukan dengan mengeksekusinya.
+
 ## 3. Roadmap berfase menuju skala lebih besar
 
 ### FASE A — 500M sampai 1B (jembatan, syarat dulu sebelum lompat lebih jauh)
@@ -101,7 +156,7 @@ dengan output projection.
 | # | Syarat/Pekerjaan | Detail |
 |---|---|---|
 | A.1 ✅ SELESAI | Audit token count korpus nyata (`raget-tools/audit-corpus-tokens.mjs`, laporan di `raget-devlog/neural/corpus-token-audit.md`) | Hasil: korpus 543,2 juta token, cuma 5,43% dari kebutuhan 500M (18,4x kurang) dan 2,72% dari kebutuhan 1B (36,8x kurang) — lihat tabel §2. **Kesimpulan tegas: TIDAK BOLEH melatih preset ≥500M sampai korpus tumbuh signifikan** — mengulang training di atas data yang sama seperti massive200m sekarang cuma akan menghasilkan model yang lebih undertrained lagi, bukan lebih pintar |
-| A.1b | Growth plan korpus konkret menuju 10 miliar token (target 500M) | Sumber realistis untuk pertumbuhan ~18x: (a) Wikipedia ID belum ter-crawl penuh di luar 76.071 dokumen unik yang sudah masuk K1, (b) Common Crawl/OSCAR porsi Indonesia (butuh filter kualitas ketat, preseden `panen-madlad400-id` di korpus-manifest-total.json GAGAL 18,7% spam - filter HARUS lebih ketat dari itu), (c) korpus buku/berita berlisensi terbuka. **Belum dikerjakan** - ini prasyarat nyata sebelum A.2-A.4 berguna |
+| A.1b ✅ SELESAI (analisis) | Growth plan korpus konkret menuju 10 miliar token (target 500M) | **Dicek ulang lewat GitHub API langsung (bukan asumsi) — koreksi jujur atas draf sebelumnya di baris ini**: lihat detail penuh di §2b di bawah. Ringkas: (a) Wikipedia ID **BUKAN** peluang belum-tergarap — sudah di-crawl SAMPAI HABIS dua kali (jilid1 seluruh dump 1.874.320 halaman + harvest kedua `panen-wikipedia-id` yang cuma menemukan 13,4% dokumen unik baru dari 561.195 kandidat, 86,6% sisanya duplikat/terlalu pendek) — sumur ini sudah nyaris kering. (b) Dua Release "penampung" ditemukan (`korpus-sejarah-indonesia-bersih` 564.158 byte gzip, `korpus-mentah-id` ~7,99 MB gzip gabungan 3 file) TAPI keduanya **belum digabung/belum di-sort** dan skalanya cuma ~0,05-0,1% dari kekurangan 9,46 miliar token untuk target 500M — bukan solusi, cuma tambahan kecil. (c) **Kesimpulan tegas**: satu-satunya jalur realistis menutup gap 18,4x adalah Common Crawl/OSCAR porsi Indonesia dalam skala besar DENGAN filter kualitas jauh lebih ketat dari preseden gagal `panen-madlad400-id` (18,7% spam) — pola filter yang TERBUKTI berhasil di proyek ini adalah dedup fingerprint ala `panen-wikipedia-id` (buang duplikat + dokumen terlalu pendek), harus direplikasi + ditambah filter bahasa/perplexity untuk Common Crawl yang jauh lebih kotor dari Wikipedia. Korpus buku/berita berlisensi terbuka (c) masih valid sebagai sumber tapi belum ada kandidat konkret teridentifikasi. **A.2-A.4 tetap correctly diblokir** — growth plan ini mengidentifikasi JALUR-nya, belum mengeksekusi crawl Common Crawl skala besar (di luar cakupan realistis satu sesi) |
 | A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat. **Belum dikerjakan** — menunggu A.1b (percuma optimasi training pipeline di atas data yang belum cukup) |
 | A.3 | Evaluasi arsitektur training: mixed precision, gradient checkpointing | Perlu di jalur PyTorch supaya training preset besar muat di memori GPU Colab/cloud yang terbatas. **Belum dikerjakan** |
 | A.4 | Verifikasi ulang kuantisasi int8 pada model lebih dalam/lebar | Checkpoint format (`llm-quantization.js`) dipertahankan, tapi error kuantisasi HARUS diukur ulang — model lebih dalam bisa lebih sensitif terhadap presisi rendah. **Belum dikerjakan** |
