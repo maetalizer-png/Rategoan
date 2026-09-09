@@ -579,11 +579,22 @@ function tryGreeting(text, options) {
   return null;
 }
 
+
+const INTERJECTION_RE = /^(woy+|wei+|we+h+|heh+|huh+|oke+|ok\b|okay|iya+|yup+|yoi+|sip+|siap)[\s!.]*$/i;
+
+function tryInterjection(text) {
+  const raw = String(text || '').trim();
+  if (!raw || !INTERJECTION_RE.test(raw)) return null;
+  if (/^(woy+|wei+|we+h+|heh+|huh+)/i.test(raw)) return 'Ya, saya dengar.';
+  return 'Oke.';
+}
+
 export const llmEngine = Object.freeze({
   init,
   generate,
   craft,
   tryGreeting,
+  tryInterjection,
   tryDailyTalk,
   useSapaan,
   isFallback,

@@ -506,6 +506,12 @@ async function respondCore(messages, prompt) {
     return postProcess(greet);
   }
 
+  const interject = llmEngine.tryInterjection(text);
+  if (interject) {
+    ragetDb.addNote(text, interject, null, 'interjection');
+    return postProcess(interject);
+  }
+
   const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: persona.name });
   if (dailyTalk) {
     ragetDb.addNote(text, dailyTalk, null, 'daily_talk');
