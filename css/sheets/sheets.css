@@ -235,6 +235,29 @@
   color: var(--rg-muted);
 }
 
+.data-health-export-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--rg-line);
+  background: var(--rg-bg-soft, transparent);
+  color: var(--rg-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.data-health-export-btn:active {
+  opacity: 0.8;
+}
+
+.data-health-export-hint {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--rg-muted);
+  line-height: 1.4;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .attach-card:hover {
     background: var(--rg-ring);

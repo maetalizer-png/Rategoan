@@ -6,6 +6,8 @@
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 import { feedbackReport } from '../../raget/raget-agents/feedback-report.js';
+import { download } from '../utils/clipboard.js';
+import { toast } from '../core/toast.js';
 
 function escapeHtml(s) {
   return String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -39,6 +41,27 @@ function renderIntentRows(intents) {
   );
 }
 
+// PRD-RAGET-TEMPLATE.md Fase 3.2: "kontribusi data" opt-in ANONIM - klik
+// tombol ini adalah SATU-SATUNYA cara data ini pernah meninggalkan
+// perangkat, dan hanya sebagai unduhan file lokal yang penggunanya sendiri
+// pilih mau dibagikan ke pengembang atau tidak (mis. lampirkan manual ke
+// issue GitHub). TIDAK ADA pengiriman otomatis ke server manapun - ini
+// BUKAN federated learning gradient-sharing, cuma unduhan JSON biasa.
+// Query dinormalisasi (lowercase, spasi dirapikan) via feedbackReport dan
+// timestamp per-kueri SENGAJA tidak disertakan (cukup rentang tanggal
+// agregat) supaya polanya lebih dekat ke "anonim" daripada log mentah.
+function buildAnonymousExport(report) {
+  return {
+    exportedAt: new Date().toISOString(),
+    catatan: 'Ekspor opt-in anonim dari kueri yang gagal dijawab Rategoan. Tidak memuat data pribadi atau timestamp per-kueri.',
+    totalEntri: report.total,
+    kueriUnik: report.distinctQueries,
+    rentangTanggal: report.range,
+    topKeywords: report.topKeywords,
+    topQueries: report.topQueries,
+  };
+}
+
 async function render() {
   const body = document.querySelector('#data-health-sheet .data-health-body');
   if (!body) return;
@@ -55,11 +78,26 @@ async function render() {
     '<div class="data-health-section">' +
     `<div class="data-health-section-title">Pertanyaan gagal dijawab (${report.total} entri, ${report.distinctQueries} unik)</div>` +
     renderKeywordRows(report.topKeywords) +
+    '<button class="data-health-export-btn" id="data-health-export">Ekspor kueri gagal (anonim)</button>' +
+    '<div class="data-health-export-hint">Opt-in: hanya mengunduh file JSON ke perangkatmu, tidak dikirim ke mana pun. Bagikan manual ke pengembang kalau mau membantu.</div>' +
     '</div>' +
     '<div class="data-health-section">' +
     `<div class="data-health-section-title">Feedback keseluruhan: 👍 ${feedbackStats.up} · 👎 ${feedbackStats.down}</div>` +
     renderIntentRows(intentStats) +
     '</div>';
+
+  const exportBtn = document.getElementById('data-health-export');
+  if (exportBtn) {
+    exportBtn.onclick = () => {
+      if (!report.total) {
+        toast.show('Belum ada kueri gagal untuk diekspor');
+        return;
+      }
+      const payload = buildAnonymousExport(report);
+      download('rategoan-kueri-gagal-anonim-' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(payload, null, 2));
+      toast.show('Ekspor anonim diunduh');
+    };
+  }
 }
 
 export const dataHealthSheet = { render };
