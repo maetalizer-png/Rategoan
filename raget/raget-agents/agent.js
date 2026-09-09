@@ -217,6 +217,12 @@ async function respondCore(messages, prompt) {
     return postProcess(emergencyReply);
   }
 
+  const stylePrefReply = contextEngine.tryStylePreference(text);
+  if (stylePrefReply) {
+    ragetDb.addNote(text, stylePrefReply, null, 'context_style_preference');
+    return postProcess(stylePrefReply);
+  }
+
   const multiIntent = await tryMultiIntent(text, messages);
   if (multiIntent) {
     ragetDb.addNote(text, multiIntent, null, 'multi_intent');
@@ -499,8 +505,9 @@ async function respondCore(messages, prompt) {
 
   const persona = await loadPersona();
   const shortContext = memoryShort.recent(messages, 10);
+  const tonePreference = contextEngine.getStylePreference();
 
-  const greet = llmEngine.tryGreeting(text, { personaName: persona.name });
+  const greet = llmEngine.tryGreeting(text, { personaName: persona.name, tonePreference });
   if (greet) {
     ragetDb.addNote(text, greet, null, 'greeting');
     return postProcess(greet);
@@ -512,7 +519,7 @@ async function respondCore(messages, prompt) {
     return postProcess(interject);
   }
 
-  const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: persona.name });
+  const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: persona.name, tonePreference });
   if (dailyTalk) {
     ragetDb.addNote(text, dailyTalk, null, 'daily_talk');
     return postProcess(dailyTalk);
@@ -528,7 +535,7 @@ async function respondCore(messages, prompt) {
     reply = postProcess(plannedFallback);
     reply = await toolsKoleksi.personalize(reply, text);
   } else {
-    let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name });
+    let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name, tonePreference });
 
     if (llmEngine.isWeak(raw)) {
       const fewshot = await loadFewshot();
