@@ -6,40 +6,34 @@ Hak Cipta © 2026 RATEGOAN. All Rights Reserved.
 
 Dokumen ini adalah lisensi penggunaan perangkat lunak Rategoan (kode
 sumber, data, dan aset di repositori ini), bukan lisensi open-source
-standar (MIT/Apache/GPL dll). Dengan menggunakan, menyalin, atau
-memodifikasi perangkat lunak ini, Anda menyetujui syarat di bawah.
+standar (MIT/Apache/GPL dll). Rategoan dikembangkan sebagai proyek
+belajar, riset, dan pengembangan pribadi — bukan produk yang dijual di
+platform mana pun. Dengan menggunakan, menyalin, atau memodifikasi
+perangkat lunak ini, Anda menyetujui syarat di bawah.
 
 ## 1. Pemberian Lisensi
 
-**Penggunaan non-komersial** — memakai, memodifikasi, dan menjalankan
-perangkat lunak ini untuk keperluan pribadi, edukasi, riset, atau proyek
-non-komersial lain — **gratis tanpa batas waktu**, tanpa perlu membeli.
+Memakai, memodifikasi, dan menjalankan perangkat lunak ini untuk
+keperluan pribadi, edukasi, riset, atau pengembangan lebih lanjut —
+**gratis tanpa batas waktu**.
 
-**Penggunaan komersial** (memakainya untuk menghasilkan pendapatan,
-proyek klien, atau produk turunan berbayar) mensyaratkan **pembelian sah**
-lewat kanal resmi (Gumroad/lynk.id atau kanal lain yang ditunjuk pemilik
-hak cipta). Bukti pembelian yang valid berlaku sebagai izin komersial per
-pembeli — tidak perlu korespondensi tertulis terpisah. Satu pembelian
-berlaku untuk satu pembeli/entitas dan proyek turunannya sendiri; bukan
-lisensi yang bisa dipakai bersama atau dijual lagi ke pihak lain. Yang
-membeli tanpa lewat kanal resmi (kode didapat dari pihak ketiga di luar
-kanal yang ditunjuk) belum punya izin komersial — hubungi
-**maetalizer@gmail.com** untuk verifikasi/lisensi langsung.
+Penggunaan komersial (menghasilkan pendapatan dari perangkat lunak ini
+atau turunannya) memerlukan izin tertulis langsung dari pemilik hak
+cipta — hubungi **maetalizer@gmail.com**. Tidak ada kanal pembelian
+otomatis mana pun; setiap izin komersial diberikan langsung per kasus.
 
 ## 2. Yang Diperbolehkan
 
 - Memodifikasi seluruh kode dan data untuk kebutuhan sendiri.
 - Menjalankan dan mendistribusikan hasil build/turunan ke pengguna akhir
-  Anda sendiri, sesuai lingkup izin yang diberikan (non-komersial bebas,
-  komersial setelah pembelian sah lewat kanal resmi).
+  Anda sendiri untuk keperluan non-komersial.
 - Mempelajari kode sumber untuk tujuan edukasi.
 
 ## 3. Yang Dilarang
 
 - Menjual ulang atau membagikan ulang kode sumber mentah repositori ini
-  (sebagian atau seluruhnya) sebagai produk/template kepada pihak lain —
-  baik yang beli maupun yang belum beli tidak boleh mendistribusikan
-  ulang paketnya sendiri.
+  (sebagian atau seluruhnya) sebagai produk/template kepada pihak lain,
+  di platform mana pun.
 - Mengklaim kepemilikan atau kepenulisan asli atas perangkat lunak ini.
 - Menghapus atau mengubah notice hak cipta ini dari kode sumber.
 - Sublisensi atau mengalihkan hak dalam lisensi ini ke pihak ketiga
