@@ -5,11 +5,10 @@
 Hak Cipta © 2026 RATEGOAN. All Rights Reserved.
 
 Dokumen ini adalah lisensi penggunaan perangkat lunak Rategoan (kode
-sumber, data, dan aset di repositori ini), bukan lisensi open-source
-standar (MIT/Apache/GPL dll). Rategoan dikembangkan sebagai proyek
-belajar, riset, dan pengembangan pribadi — bukan produk yang dijual di
-platform mana pun. Dengan menggunakan, menyalin, atau memodifikasi
-perangkat lunak ini, Anda menyetujui syarat di bawah.
+sumber, data, dan aset di repositori ini) yang diberikan oleh pemilik
+hak cipta kepada pengguna/pihak ketiga, bukan lisensi open-source
+standar (MIT/Apache/GPL dll). Dengan menggunakan, menyalin, atau
+memodifikasi perangkat lunak ini, Anda menyetujui syarat di bawah.
 
 ## 1. Pemberian Lisensi
 
@@ -17,10 +16,13 @@ Memakai, memodifikasi, dan menjalankan perangkat lunak ini untuk
 keperluan pribadi, edukasi, riset, atau pengembangan lebih lanjut —
 **gratis tanpa batas waktu**.
 
-Penggunaan komersial (menghasilkan pendapatan dari perangkat lunak ini
-atau turunannya) memerlukan izin tertulis langsung dari pemilik hak
-cipta — hubungi **maetalizer@gmail.com**. Tidak ada kanal pembelian
-otomatis mana pun; setiap izin komersial diberikan langsung per kasus.
+Penggunaan komersial oleh pihak selain pemilik hak cipta (menghasilkan
+pendapatan dari perangkat lunak ini atau turunannya) memerlukan izin
+tertulis dari pemilik hak cipta — hubungi **maetalizer@gmail.com**.
+Pemilik hak cipta sendiri bebas mendistribusikan, menjual, atau
+melisensikan perangkat lunak ini melalui kanal apa pun sesuai
+keputusannya sendiri; ketentuan ini mengatur pihak ketiga/pengguna,
+bukan hak pemilik atas karyanya sendiri.
 
 ## 2. Yang Diperbolehkan
 

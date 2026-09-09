@@ -2,12 +2,17 @@
 
 Status: berlaku untuk SEMUA pekerjaan di repo ini, bukan cuma
 `PRD-RAGET-TEMPLATE.md`/`PRD-RAGET-NEURAL.md`. Dokumen ini ada karena
-preseden nyata: sebuah folder otak baru (`raget-llm-lokal/`) pernah
-dibangun penuh (kontrak adapter, router, dokumentasi) tanpa konfirmasi
-arah dulu ke pemilik produk — hasilnya membingungkan dan harus dibongkar
-lagi. Aturan di bawah ada supaya kejadian serupa tidak terulang, dan
-supaya campur-aduk sektor tidak menyebabkan regresi yang tidak
-diketahui.
+preseden nyata: sebuah folder adapter/router tambahan (`raget-llm-lokal/`)
+pernah dibangun penuh (kontrak adapter, router, dokumentasi) yang
+memperlakukan proyek ini seolah punya 3 mesin AI terpisah, padahal
+RATEGOAN sejak awal cuma satu LLM lokal miliknya sendiri (RAGET, yang
+sudah terbagi jadi dua bagian: Template dan Neural — bukan tiga mesin
+berbeda). Folder itu dibangun tanpa konfirmasi arah dulu ke pemilik
+produk, tidak menambah kemampuan nyata di luar yang sudah ada di RAGET
+Neural, dan akhirnya harus dihapus lagi karena cuma menambah lapisan
+membingungkan. Aturan di bawah ada supaya kejadian serupa tidak
+terulang, dan supaya campur-aduk sektor tidak menyebabkan regresi yang
+tidak diketahui.
 
 ## 1. Definisi sektor kerja
 
@@ -33,11 +38,13 @@ eksplisit, bukan diam-diam.
    "kelihatannya kecil/tidak berbahaya". Kalau sedang fokus Template,
    JANGAN sentuh `raget-neural/` sama sekali kecuali diminta, begitu
    juga sebaliknya.
-2. **Dilarang** membuat folder/konsep arsitektur baru (folder otak baru,
+2. **Dilarang** membuat folder/konsep arsitektur baru (folder mesin baru,
    adapter baru, lapisan baru) tanpa konfirmasi eksplisit dari pemilik
    produk lebih dulu. Preseden: `raget-llm-lokal/` harus dihapus lagi
-   karena dibangun tanpa konfirmasi arah, bikin bingung soal struktur
-   otak yang sebenarnya cuma dua.
+   karena dibangun tanpa konfirmasi arah, memperlakukan proyek seolah
+   punya mesin AI ketiga padahal LLM lokal proyek ini ya RAGET itu
+   sendiri (Template + Neural, dua bagian dari satu hal yang sama,
+   bukan dua mesin di antara tiga).
 3. **Dilarang** mengklaim pekerjaan "selesai" tanpa bukti nyata:
    `node raget/raget-tools/lint-check.mjs` WAJIB LOLOS 0 error, DAN
    untuk perubahan yang memengaruhi jawaban/UI WAJIB diverifikasi lewat
@@ -100,11 +107,15 @@ tidak hilang jejak dan tidak ada pekerjaan setengah jadi yang terlupakan.
 
 ## 6. Kenapa aturan ini penting (konteks jujur)
 
-Riwayat proyek ini sempat membangun struktur "tiga otak" (Template,
-Neural, LLM Lokal) lengkap dengan kontrak adapter dan dokumentasi
-289-baris, hanya untuk kemudian dibongkar lagi karena arah sebenarnya
-cuma dua otak dan konsep ketiga itu membingungkan. Ini bukan salah satu
-pihak — ini akibat langsung dari membangun struktur besar tanpa
-memastikan arahnya benar-benar disepakati dulu, dan tanpa menjaga fokus
-satu sektor per waktu. Aturan di dokumen ini ada supaya biaya (waktu,
-token, kepercayaan) dari kesalahan seperti itu tidak terulang.
+Riwayat proyek ini sempat membangun lapisan adapter/router tambahan
+(`raget-llm-lokal/`) lengkap dengan kontrak adapter dan dokumentasi
+289-baris yang memperlakukan proyek seolah punya 3 mesin AI berbeda,
+hanya untuk kemudian dibongkar lagi karena LLM lokal RATEGOAN memang
+cuma satu — RAGET sendiri, yang terbagi jadi Template (rule-based) dan
+Neural (transformer dari nol) — bukan tiga sistem terpisah, dan lapisan
+tambahan itu tidak pernah membawa model/kemampuan lain di luar RAGET.
+Ini bukan salah satu pihak — ini akibat langsung dari membangun
+struktur besar tanpa memastikan arahnya benar-benar disepakati dulu,
+dan tanpa menjaga fokus satu sektor per waktu. Aturan di dokumen ini
+ada supaya biaya (waktu, token, kepercayaan) dari kesalahan seperti itu
+tidak terulang.
