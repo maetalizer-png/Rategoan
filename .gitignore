@@ -10,3 +10,10 @@ raget/raget-data/neural/*-1b.safetensors
 raget/raget-data/neural/*-2b.safetensors
 __pycache__/
 *.pyc
+
+# Laporan/ekspor dev-only dari raget-tools/report-unmatched.mjs dan
+# export-unmatched-queries.mjs - dibangkitkan dari data IndexedDB lokal
+# developer (log unmatched di raget-db.js), beda-beda per profil browser,
+# bukan artefak yang perlu ikut versi kontrol.
+raget/raget-tools/unmatched-report.md
+raget/raget-tools/unmatched-queries-export.json

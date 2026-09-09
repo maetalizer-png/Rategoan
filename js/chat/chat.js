@@ -131,9 +131,15 @@ function buildActions(text) {
   downBtn.className = 'msg-action-btn';
   downBtn.innerHTML = ic('thumbDown');
   downBtn.setAttribute('aria-label', 'Balasan kurang tepat');
+  async function intentOfAnswer() {
+    const notes = await ragetDb.allNotes();
+    const match = notes.slice().reverse().find((n) => n.answer.trim() === text.trim());
+    return match ? match.intent : null;
+  }
+
   upBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, true);
-    feedbackStore.record(true);
+    feedbackStore.record(true, await intentOfAnswer());
     upBtn.classList.add('rated');
     downBtn.classList.remove('rated');
     toast.show('Makasih atas masukannya');
@@ -145,7 +151,7 @@ function buildActions(text) {
   };
   downBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, false);
-    feedbackStore.record(false);
+    feedbackStore.record(false, await intentOfAnswer());
     downBtn.classList.add('rated');
     upBtn.classList.remove('rated');
     toast.show('Dicatat, makasih');

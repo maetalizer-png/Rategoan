@@ -18,6 +18,7 @@ import { pdfReader } from '../../vault/pdf/reader.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 import { llmMode } from '../state/llm-mode.js';
+import { sheets } from '../sheets/sheets.js';
 
 const DOWNLOAD_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -29,6 +30,8 @@ const HEMAT_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
 const SERVER_MODE_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
+const DATA_HEALTH_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>';
 
 const TEMPLATE = `
       <div class="settings-page">
@@ -215,11 +218,13 @@ export const settings = {
     if (!aiSection || !dataSection || !prefSection) return;
     const downloadRow = buildRow('row-unduhan-fitur', DOWNLOAD_ICON, 'Unduhan Fitur');
     const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Buka Koleksi');
+    const dataHealthRow = buildRow('row-data-health', DATA_HEALTH_ICON, 'Kesehatan Data');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
     const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
+    dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);
     prefSection.appendChild(ttsRow);
     prefSection.appendChild(hematRow);
@@ -228,6 +233,7 @@ export const settings = {
     this.refreshHematStatus();
     this.refreshLlmModeStatus();
     downloadRow.onclick = () => this.handleUnduhanFitur();
+    dataHealthRow.onclick = () => sheets.openDataHealth();
     llmModeRow.onclick = () => this.handleLlmModeToggle();
     ttsRow.onclick = () => {
       const on = tts.toggle();

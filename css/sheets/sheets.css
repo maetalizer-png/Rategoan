@@ -201,6 +201,40 @@
   color: var(--rg-muted);
 }
 
+.data-health-section {
+  margin-bottom: 16px;
+}
+
+.data-health-section-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--rg-text);
+}
+
+.data-health-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: var(--rg-text);
+}
+
+.data-health-table td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rg-line);
+}
+
+.data-health-num {
+  text-align: right;
+  white-space: nowrap;
+  padding-left: 12px;
+}
+
+.data-health-empty {
+  font-size: 13px;
+  color: var(--rg-muted);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .attach-card:hover {
     background: var(--rg-ring);
