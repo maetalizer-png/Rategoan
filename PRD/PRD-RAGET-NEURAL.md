@@ -74,27 +74,30 @@ dengan output projection.
 
 1. **Data — SUDAH DIAUDIT (`raget-tools/audit-corpus-tokens.mjs`)**:
    korpus kanonik hari ini (K1+K2+K3, `korpus-manifest-total.json`, token
-   BPE resmi vocab 30.368) = **543.202.593 token** dari 1.497.515 dokumen.
-   Dengan rasio scaling ~20 token/parameter:
+   BPE resmi vocab 30.368, dihitung ulang penuh 2026-09-09 setelah K1/K2/K3
+   digabung lagi dengan penampung tersaring) = **567.121.195 token** dari
+   1.513.933 dokumen. Dengan rasio scaling ~20 token/parameter:
 
    | Target | Token ideal | % tercukupi hari ini | Korpus harus tumbuh |
    |---|---:|---:|---:|
-   | massive50m (ada) | 1,00 miliar | 54,3% | - |
-   | massive100m (ada) | 2,07 miliar | 26,3% | - |
-   | massive200m (ada) | 4,01 miliar | 13,5% | - |
-   | 500M | 10 miliar | 5,43% | 18,4x |
-   | 1B | 20 miliar | 2,72% | 36,8x |
-   | 4B | 80 miliar | 0,68% | 147,3x |
-   | 10B | 200 miliar | 0,27% | 368,2x |
-   | 20B | 400 miliar | 0,14% | 736,4x |
-   | 40B | 800 miliar | 0,07% | 1.472,7x |
+   | massive50m (ada) | 1,00 miliar | 56,7% | - |
+   | massive100m (ada) | 2,07 miliar | 27,4% | - |
+   | massive200m (ada) | 4,01 miliar | 14,1% | - |
+   | 500M | 10 miliar | 5,67% | 17,6x |
+   | 1B | 20 miliar | 2,84% | 35,3x |
+   | 4B | 80 miliar | 0,71% | 141,1x |
+   | 10B | 200 miliar | 0,28% | 352,7x |
+   | 20B | 400 miliar | 0,14% | 705,3x |
+   | 40B | 800 miliar | 0,07% | 1.410,6x |
 
    **Ini bukti kuantitatif, bukan dugaan lagi**, untuk temuan PPL di §1:
-   massive200m (13,5% tercukupi) jauh lebih kekurangan data secara
-   proporsional daripada massive50m (54,3% tercukupi) - urutan
+   massive200m (14,1% tercukupi) jauh lebih kekurangan data secara
+   proporsional daripada massive50m (56,7% tercukupi) - urutan
    kecukupan data PERSIS SAMA dengan urutan kualitas PPL. **Korpus,
    bukan compute, adalah penghambat DOMINAN** — bahkan lompatan
-   terdekat (500M) butuh korpus 18,4x lebih besar dari hari ini.
+   terdekat (500M) butuh korpus 17,6x lebih besar dari hari ini. Enam
+   rilis data mentah baru (~46GB, HuggingFace) ditemukan di Release
+   2026-09-09, belum diproses — lihat `PRD-MANUS-DATA-MENTAH.md` §4.2.
 2. **Compute**: Colab gratis (kuota harian, sesi terbatas ~12 jam) SUDAH
    jadi batas nyata di preset 200M (lihat temuan PPL di atas — 200M
    dengan compute yang sama saja belum konvergen baik). Melatih 1B+ dari
@@ -168,8 +171,8 @@ bukan dengan mengeksekusinya.
 
 | # | Syarat/Pekerjaan | Detail |
 |---|---|---|
-| A.1 ✅ SELESAI | Audit token count korpus nyata (`raget-tools/audit-corpus-tokens.mjs`, laporan di `raget-devlog/neural/corpus-token-audit.md`) | Hasil: korpus 543,2 juta token, cuma 5,43% dari kebutuhan 500M (18,4x kurang) dan 2,72% dari kebutuhan 1B (36,8x kurang) — lihat tabel §2. **Kesimpulan tegas: TIDAK BOLEH melatih preset ≥500M sampai korpus tumbuh signifikan** — mengulang training di atas data yang sama seperti massive200m sekarang cuma akan menghasilkan model yang lebih undertrained lagi, bukan lebih pintar |
-| A.1b ✅ SELESAI (analisis) | Growth plan korpus konkret menuju 10 miliar token (target 500M) | **Dicek ulang lewat GitHub API langsung (bukan asumsi) — koreksi jujur atas draf sebelumnya di baris ini**: lihat detail penuh di §2b di bawah. Ringkas: (a) Wikipedia ID **BUKAN** peluang belum-tergarap — sudah di-crawl SAMPAI HABIS dua kali (jilid1 seluruh dump 1.874.320 halaman + harvest kedua `panen-wikipedia-id` yang cuma menemukan 13,4% dokumen unik baru dari 561.195 kandidat, 86,6% sisanya duplikat/terlalu pendek) — sumur ini sudah nyaris kering. (b) Dua Release "penampung" ditemukan (`korpus-sejarah-indonesia-bersih` 564.158 byte gzip, `korpus-mentah-id` ~7,99 MB gzip gabungan 3 file) TAPI keduanya **belum digabung/belum di-sort** dan skalanya cuma ~0,05-0,1% dari kekurangan 9,46 miliar token untuk target 500M — bukan solusi, cuma tambahan kecil. (c) **Kesimpulan tegas**: satu-satunya jalur realistis menutup gap 18,4x adalah Common Crawl/OSCAR porsi Indonesia dalam skala besar DENGAN filter kualitas jauh lebih ketat dari preseden gagal `panen-madlad400-id` (18,7% spam) — pola filter yang TERBUKTI berhasil di proyek ini adalah dedup fingerprint ala `panen-wikipedia-id` (buang duplikat + dokumen terlalu pendek), harus direplikasi + ditambah filter bahasa/perplexity untuk Common Crawl yang jauh lebih kotor dari Wikipedia. Korpus buku/berita berlisensi terbuka (c) masih valid sebagai sumber tapi belum ada kandidat konkret teridentifikasi. **A.2-A.4 tetap correctly diblokir** — growth plan ini mengidentifikasi JALUR-nya, belum mengeksekusi crawl Common Crawl skala besar (di luar cakupan realistis satu sesi) |
+| A.1 ✅ SELESAI (diperbarui 2026-09-09) | Audit token count korpus nyata (`raget-tools/audit-corpus-tokens.mjs`, laporan di `raget-devlog/neural/corpus-token-audit.md`) | Hasil terbaru: korpus 567,1 juta token (naik dari 543,2 juta — K1/K2/K3 digabung ulang dengan penampung tersaring 2026-09-09, dihitung ulang penuh Claude dengan tokenizer BPE resmi + verifikasi SHA256), 5,67% dari kebutuhan 500M (17,6x kurang) dan 2,84% dari kebutuhan 1B (35,3x kurang) — lihat tabel §2. **Kesimpulan tegas tidak berubah: TIDAK BOLEH melatih preset ≥500M sampai korpus tumbuh signifikan** — kenaikan 4,4% ini jauh dari cukup |
+| A.1b ✅ SELESAI (analisis, diperbarui 2026-09-09) | Growth plan korpus konkret menuju 10 miliar token (target 500M) | Ringkas (detail §2b): (a) Wikipedia ID **BUKAN** peluang belum-tergarap — sudah di-crawl sampai habis dua kali, sumur nyaris kering. (b) Dua Release "penampung" lama (`korpus-sejarah-indonesia-bersih`, `korpus-mentah-id`) **sudah digabung ke K1/K2/K3** 2026-09-09 — kenaikan cuma 4,4% (543,2jt→567,1jt token), sesuai dugaan awal skalanya kecil. (c) **Temuan baru 2026-09-09**: 6 rilis data mentah HuggingFace (~46GB — Indo4B, Indo4B-Plus, indonesian-corpus-2b-deepclean-indo4b, garuda-indonesian, dll) ditemukan di Release, SEMUA eksplisit belum dedupe/belum siap training — lihat `PRD-MANUS-DATA-MENTAH.md` §4.2 untuk klasifikasi dan risiko tiap sumber (termasuk potensi overlap dengan K1, dan risiko spam mirip preseden gagal `panen-madlad400-id`). **Kesimpulan tegas tidak berubah**: satu-satunya jalur realistis menutup gap besar adalah korpus skala Common Crawl/OSCAR dengan filter ketat — kandidat konkretnya sekarang SUDAH ada di Release (poin c), tapi belum diproses/difilter. **A.2-A.4 tetap diblokir** sampai proses itu selesai |
 | A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat. **Belum dikerjakan** — menunggu korpus BENAR-BENAR tumbuh (A.1b sudah SELESAI sebagai analisis/jalur, tapi eksekusi crawl-nya sendiri belum terjadi) |
 | A.3 | Evaluasi arsitektur training: mixed precision, gradient checkpointing | Perlu di jalur PyTorch supaya training preset besar muat di memori GPU Colab/cloud yang terbatas. **Belum dikerjakan** |
 | A.4 | Verifikasi ulang kuantisasi int8 pada model lebih dalam/lebar | Checkpoint format (`llm-quantization.js`) dipertahankan, tapi error kuantisasi HARUS diukur ulang — model lebih dalam bisa lebih sensitif terhadap presisi rendah. **Belum dikerjakan** |

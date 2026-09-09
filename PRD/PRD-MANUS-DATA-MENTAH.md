@@ -109,20 +109,29 @@ ini) **SUDAH TIDAK ADA lagi di Release** — sudah digabung ke K1/K2/K3
 untuk K1, *"Digabung penampung tersaring 2026-09-09"* untuk K2 dan K3).
 Ketiganya naik ke **versi 4**, dengan sha256 dan jumlah dokumen baru:
 
-| Tag | totalDokumen baru | sha256 baru | `tokenBPEResmi` di manifest |
-|---|---:|---|---|
-| `korpus-ensiklopedia-bersih` (K1) | 760.199 | `0ac714ce...b488d` | `null` — **belum dihitung ulang** |
-| `korpus-dialog-daerah-bersih` (K2) | 639.391 | `24e50740...eb853` | `null` — **belum dihitung ulang** |
-| `korpus-pelengkap-bersih` (K3) | 114.343 | `181fc855...f02f4` | `null` — **belum dihitung ulang** |
+| Tag | totalDokumen | sha256 | `totalTokenBPEResmi` (Claude, terverifikasi) |
+|---|---:|---|---:|
+| `korpus-ensiklopedia-bersih` (K1) | 760.199 | `0ac714ce...b488d` | 362.003.221 — komposisiBahasa 100% id |
+| `korpus-dialog-daerah-bersih` (K2) | 639.391 | `24e50740...eb853` | 157.206.944 — 37,15% dokumen TANPA field `lang` (lihat catatan kualitas) |
+| `korpus-pelengkap-bersih` (K3) | 114.343 | `181fc855...f02f4` | 47.911.030 — komposisiBahasa 100% id |
 
-**Ini pekerjaan Claude, bukan Manus** — mengunduh file final, verifikasi
-SHA256, tokenize BPE, isi `tokenBPEResmi`, update `kanonik.entries`.
-Kalau dokumen ini dibaca setelah field itu terisi di manifest Release,
-langkah ini sudah beres — cek dulu sebelum mengulang.
+**Sudah dikerjakan Claude 2026-09-09** (bukan lagi tugas terbuka):
+unduh file final tiap kategori, verifikasi SHA256 (cocok dengan digest
+asset DAN hash yang dikutip di body Release), ekstrak tokenizer BPE
+resmi (vocab 30.368) dari `checkpoint-100m.safetensors`, tokenize+hitung
+ulang penuh (bukan sampel), update `kanonik.entries` di
+`korpus-manifest-total.json`, jalankan `check-korpus-manifest-sync.mjs`
+(SEMUA SINKRON) dan `audit-corpus-tokens.mjs`. **Total token kanonik
+proyek sekarang 567.121.195** (naik dari 543.202.593 sebelumnya).
 
-Manifest K1/K2/K3 saat ini **belum punya field `komposisiBahasa`**
-(wajib per `PRD-RELEASE.md` §1.1) — Manus tolong lengkapi ini di
-publish berikutnya kalau belum ditambahkan.
+**Manifest K1/K2/K3 di Release masih belum punya field `komposisiBahasa`**
+(wajib per `PRD-RELEASE.md` §1.1) — Manus tolong lengkapi di publish
+berikutnya. Nilai per-rak sudah dihitung Claude di atas kalau perlu
+referensi cepat: K1/K3 100% id; **K2 punya masalah kualitas nyata**
+(37,15% dokumen sama sekali tanpa `lang`, cuma 22,07% eksplisit `id`,
+22,07% `min`, sisanya 12 bahasa daerah lain) — PRD-RELEASE.md §1.1
+mewajibkan dialog punya `lang` eksplisit per dokumen, K2 **belum
+patuh**.
 
 ### 4.2 Data mentah BARU — 6 rilis, ~46GB total, semua BELUM diproses
 

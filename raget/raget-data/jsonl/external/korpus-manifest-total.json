@@ -1,45 +1,70 @@
 {
   "generatedAt": "2026-09-01T13:50:00Z",
-  "updatedAt": "2026-09-02T05:40:00Z",
+  "updatedAt": "2026-09-09T18:20:00Z",
   "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah). Ronde 2026-09-02: K2+K3 Grok tambah batch baru (wiki daerah + wikisource + id_personachat), token dihitung ulang - lihat catatan kualitas di entri K2.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
     "entries": [
       {
         "rak": "K1 korpus-ensiklopedia-bersih",
-        "asal": "staging jilid1 round10 + 76.071 dokumen unik dari panen-wikipedia-id (digabung Grok setelah dedupe fingerprint - lihat catatan)",
-        "totalDokumen": 759587,
-        "sizeByteGz": 570582531,
-        "sha256": "3383bc303a2cfcd939a3fae6c2f37ed85e3fb9474449a057917ea90070a4656c",
-        "totalKataApprox": 228536372,
-        "totalTokenBPEResmi": 354376464,
-        "diukurPada": "2026-09-01 malam (asset direfresh Grok ~19:58 UTC setelah gabung Wikipedia unik, token BPE dihitung ulang Claude langsung setelahnya - angka lama 303.917.157 untuk 683.516 dokumen versi sebelum gabung sudah USANG)",
-        "catatan": "Instruksi Claude ronde sebelumnya sempat bilang 'retire Wikipedia' berdasarkan temuan lama (artikel pertama identik -> diduga overlap penuh). Grok independen melakukan dedupe per-fingerprint yang lebih presisi: dari 562.195 dokumen Wikipedia, 238.873 duplikat + 247.251 terlalu pendek dibuang, SISA 76.071 dokumen benar-benar unik dan digabung ke K1. Kesimpulan Grok LEBIH AKURAT daripada instruksi lama - sudah dieksekusi, tidak perlu di-retire."
+        "asal": "staging jilid1 round10 + 76.071 dokumen unik dari panen-wikipedia-id (digabung Grok setelah dedupe fingerprint - lihat catatan); digabung lagi dengan \"penampung wiki tersaring\" oleh Grok/Manus 2026-09-09 (naik dari 759.587 ke 760.199 dokumen)",
+        "totalDokumen": 760199,
+        "sizeByteGz": 666919487,
+        "sha256": "0ac714ce34ee5daf4c668fcf865cd4327d0957e672a0a60540c90a2b924b488d",
+        "totalKataApprox": null,
+        "totalTokenBPEResmi": 362003221,
+        "diukurPada": "2026-09-09 (asset direfresh Grok/Manus ~13:08 UTC, token BPE dihitung ulang penuh Claude langsung setelahnya, unduh fresh dari Release + SHA256 dicocokkan dulu terhadap digest asset dan terhadap hash yang dikutip di body Release - cocok. Angka lama 354.376.464 token untuk 759.587 dokumen versi 2026-09-01 sudah USANG.",
+        "catatan": "Instruksi Claude ronde sebelumnya sempat bilang 'retire Wikipedia' berdasarkan temuan lama (artikel pertama identik -> diduga overlap penuh). Grok independen melakukan dedupe per-fingerprint yang lebih presisi: dari 562.195 dokumen Wikipedia, 238.873 duplikat + 247.251 terlalu pendek dibuang, SISA 76.071 dokumen benar-benar unik dan digabung ke K1. Kesimpulan Grok LEBIH AKURAT daripada instruksi lama - sudah dieksekusi, tidak perlu di-retire. [2026-09-09] komposisiBahasa dihitung ulang dari field lang tiap dokumen: 100% id.",
+        "komposisiBahasa": {
+          "id": 1.0
+        }
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
-        "asal": "korpus-dialog-daerah-pack-v1 + korpus-wiki-lokal-bersih-v1, batch baru 2026-09-02: wiki-jv-su-min-ace-ban, wikisource-jv-su-ban, indonesian-nlp/id_personachat (Grok, versi manifest 17)",
-        "totalDokumen": 638371,
-        "sizeByteGz": 131299165,
-        "sha256": "e0dd2c6a6e236207f1a1a6a8e4cbf734710a643ed34a35a925641b5eee349f82",
-        "totalKataApprox": 71634019,
-        "totalTokenBPEResmi": 151487572,
-        "diukurPada": "2026-09-02 (asset direfresh Grok, diukur ulang Claude - angka lama 85.003.080 dari 291.928 dokumen versi sebelum batch baru sudah USANG, naik 1,78x)",
-        "catatan": "PERHATIAN KUALITAS: komposisiBahasa di manifest Release menunjukkan 81,38% dokumen TANPA tag bahasa ('tidak-ada'), cuma 6,82% eksplisit 'id', sisanya (~11,8%) tersebar di 14 bahasa daerah (mad/bjn/min/ace/gor/su/bug/map-bms/tet/ban/bbc/nia/jv) masing-masing <=2,3%. Rekomendasi campuran training rak ini 25-35% (upsample) - dengan komposisi ini, isi mayoritas rak BUKAN teks Indonesia standar bertag jelas. Belum ada review kualitas manual atas batch baru ini, cuma verifikasi SHA256+jumlah dokumen+token BPE."
+        "asal": "korpus-dialog-daerah-pack-v1 + korpus-wiki-lokal-bersih-v1, batch baru 2026-09-02: wiki-jv-su-min-ace-ban, wikisource-jv-su-ban, indonesian-nlp/id_personachat (Grok, versi manifest 17); digabung lagi dengan \"penampung tersaring\" oleh Grok/Manus 2026-09-09 (naik dari 638.371 ke 639.391 dokumen)",
+        "totalDokumen": 639391,
+        "sizeByteGz": 129968502,
+        "sha256": "24e507409aa8b9125518beeaa642321879ecc601ed0643e6567c3c27552eb853",
+        "totalKataApprox": null,
+        "totalTokenBPEResmi": 157206944,
+        "diukurPada": "2026-09-09 (asset direfresh Grok/Manus ~13:06 UTC, token BPE dihitung ulang penuh Claude langsung setelahnya, SHA256 dicocokkan. Angka lama 151.487.572 token untuk 638.371 dokumen versi 2026-09-02 sudah USANG.",
+        "catatan": "PERHATIAN KUALITAS MASIH BERLAKU [dihitung ulang 2026-09-09 langsung dari field lang tiap dokumen, bukan lagi dari manifest Release]: 37,15% dokumen TANPA field lang sama sekali, 22,07% eksplisit id, 22,07% min (Minangkabau), sisanya (~18,7%) tersebar di 12 bahasa daerah lain (jv/su/ban/mad/ace/bjn/gor/bug/map-bms/tet/bbc/nia) masing-masing <=6,2%. Distribusi mirip ronde sebelumnya secara proporsi (banyak dokumen tanpa lang eksplisit) meski angka persis beda karena metode hitung beda (dulu dari manifest Release, sekarang dihitung langsung Claude dari isi file). PRD-RELEASE.md §1.1 mewajibkan setiap dokumen dialog punya lang eksplisit - rak ini BELUM patuh sepenuhnya.",
+        "komposisiBahasa": {
+          "(tanpa-lang)": 0.3715,
+          "id": 0.2207,
+          "min": 0.2207,
+          "jv": 0.0615,
+          "su": 0.0486,
+          "ban": 0.0306,
+          "mad": 0.0105,
+          "ace": 0.01,
+          "bjn": 0.0071,
+          "gor": 0.0051,
+          "bug": 0.0033,
+          "map-bms": 0.0026,
+          "map_bms": 0.0026,
+          "tet": 0.0023,
+          "bbc": 0.0015,
+          "nia": 0.0013
+        }
       },
       {
         "rak": "K3 korpus-pelengkap-bersih",
-        "asal": "k3-id-filter + staging jilid3+4+5, batch baru 2026-09-02: 2.009 naskah id.wikisource.org (Grok, versi manifest 8)",
-        "totalDokumen": 99557,
-        "sizeByteGz": 54315637,
-        "sha256": "2bf11202f90489cff63649d61e5e952eb6987efbbc6881e5544475a85107b80d",
-        "totalKataApprox": 23548302,
-        "totalTokenBPEResmi": 37338557,
-        "diukurPada": "2026-09-02 (asset diregenerasi Grok dengan filter lebih ketat - dokumen turun dari 97.548 ke 99.557 dengan token turun dari 32.010.503 ke 37.338.557; klaim manifest 100% bahasa id, belum diverifikasi Claude per-dokumen)"
+        "asal": "k3-id-filter + staging jilid3+4+5, batch baru 2026-09-02: 2.009 naskah id.wikisource.org (Grok, versi manifest 8); digabung lagi dengan \"penampung tersaring\" oleh Grok/Manus 2026-09-09 (naik dari 99.557 ke 114.343 dokumen)",
+        "totalDokumen": 114343,
+        "sizeByteGz": 68206692,
+        "sha256": "181fc855164ef7e90c40190e6f23508d2b094ddf515b4adbf681813c049f02f4",
+        "totalKataApprox": null,
+        "totalTokenBPEResmi": 47911030,
+        "diukurPada": "2026-09-09 (asset direfresh Grok/Manus ~13:06 UTC, token BPE dihitung ulang penuh Claude langsung setelahnya, SHA256 dicocokkan. Angka lama 37.338.557 token untuk 99.557 dokumen versi 2026-09-02 sudah USANG.",
+        "komposisiBahasa": {
+          "id": 1.0
+        },
+        "catatan": "[2026-09-09] komposisiBahasa dihitung ulang dari field lang tiap dokumen: 100% id - naik dari 99.557 jadi 114.343 dokumen lewat gabungan penampung tersaring, kualitas bahasa tetap bersih."
       }
     ],
-    "totalDokumenKanonik": 1497515,
-    "totalTokenBPEResmiKanonik": 543202593
+    "totalDokumenKanonik": 1513933,
+    "totalTokenBPEResmiKanonik": 567121195
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -95,16 +120,16 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 543202593,
+    "totalTokenKanonikTerverifikasi": 567121195,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-09 (lihat PRD/PRD-RELEASE.md §5b): field ini sebelumnya masih 471.390.047 - angka LAMA dari sebelum batch K2/K3 2026-09-02 (wiki daerah + wikisource + id_personachat untuk K2, filter lebih ketat untuk K3) selesai diukur ulang. kanonik.entries (K1+K2+K3, tiap entri sudah dated 2026-09-01/09-02) sudah lebih dulu diperbarui saat itu, tapi ringkasanTotal ini luput ikut dihitung ulang - dua bagian file yang SAMA-SAMA mengklaim 'satu-satunya angka valid' sempat tidak sinkron. Sudah direkonsiliasi mekanis: totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 354.376.464 + 151.487.572 + 37.338.557 = 543.202.593, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk 'total token proyek saat ini' HANYA SATU: 543.202.593. Field kata-approx staging (8,1 miliar) TETAP tidak boleh dijumlahkan - itu belum direview/dedupe/di-BPE-kan. Aturan baru supaya ini tidak terulang: field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b untuk skrip pengecekannya."
+    "catatanPenting": "REKONSILIASI 2026-09-09 (kedua): Grok/Manus menggabungkan penampung tersaring (wiki + dialog-daerah + pelengkap) ke K1/K2/K3 pada 2026-09-09 (dokumen naik: K1 759.587->760.199, K2 638.371->639.391, K3 99.557->114.343). Claude mengunduh fresh tiap file gzip final dari Release, memverifikasi SHA256 terhadap digest asset DAN terhadap hash yang dikutip di body Release (cocok semua), mengekstrak tokenizer BPE resmi (vocab 30.368) dari checkpoint-100m.safetensors, lalu menghitung ulang totalTokenBPEResmi penuh per rak (bukan estimasi). totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 362.003.221 + 157.206.944 + 47.911.030 = 567.121.195, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk \"total token proyek saat ini\" HANYA SATU: 567.121.195. Field totalKataApprox per-rak SENGAJA dikosongkan (null) di ronde ini - belum dihitung ulang, BPE token count yang otoritatif per PRD-RELEASE.md §5b, bukan word-approx. Enam rilis data mentah BARU (~46GB, HuggingFace Indo4B/Indo4B-Plus/indonesian-corpus-2b-deepclean-indo4b/garuda/regulation-qa/LaMini/wikipedia-id/newspapers/dst) ditemukan di Release per audit 2026-09-09 - SEMUA belum diproses, belum masuk kanonik, lihat PRD/PRD-MANUS-DATA-MENTAH.md §4.2 untuk detail lengkap dan klasifikasi indikatif. Field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b."
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": false,
-  "kekuranganTokenKanonik": 456797407,
+  "kekuranganTokenKanonik": 432878805,
   "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang.",
-  "tokenKanonikPerintahClaude": 543202593,
+  "tokenKanonikPerintahClaude": 567121195,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
