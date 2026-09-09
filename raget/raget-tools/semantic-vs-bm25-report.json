@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-09-09T10:51:57.269Z",
+  "mechanism": "raget-retrieval/semantic-index.js (mean pooling + cosine similarity) di atas LLMEmbedding.createEmbeddingMatrix (Gaussian ACAK, belum dilatih)",
+  "dModel": 64,
+  "vocabSize": 1390,
+  "semanticResult": {
+    "n": 656,
+    "hit@1": 378,
+    "hit@1_rate": 0.5762,
+    "hit@3": 481,
+    "hit@3_rate": 0.7332,
+    "mrr": 0.6737,
+    "misses_sample": [
+      {
+        "q": "Apa ibu kota Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Tunisia"
+      },
+      {
+        "q": "Apa nama resmi negara Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Irak"
+      },
+      {
+        "q": "Apa nama resmi negara Namibia?",
+        "expect": "Namibia",
+        "reason": "top hasil: Irlandia"
+      },
+      {
+        "q": "Apa nama resmi negara Botswana?",
+        "expect": "Botswana",
+        "reason": "top hasil: Libya"
+      },
+      {
+        "q": "Apa nama resmi negara Zambia?",
+        "expect": "Zambia",
+        "reason": "top hasil: Bhutan"
+      }
+    ]
+  },
+  "bm25Baseline": {
+    "n": 652,
+    "hit@1_rate": 0.9847,
+    "hit@3_rate": 0.9847,
+    "mrr": 0.9847,
+    "fallback_rate": 0.0153
+  },
+  "verdict": "SESUAI DUGAAN TEORITIS: embedding acak KALAH dari BM25 (tidak ada pembobotan IDF, tidak ada makna terlatih). Pooling+cosine ini baru berguna sebagai SINYAL TAMBAHAN setelah embeddingTable diganti dengan embedding dari checkpoint terlatih."
+}
