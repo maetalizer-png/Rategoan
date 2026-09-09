@@ -78,9 +78,8 @@ js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
   raget-agents/                   router intent + orkestrasi tool + mesin khusus + kontrak/router adapter otak
-  raget-template/                 otak rule-based/template yang aktif jalan (llm-engine.js, fuzzy-smalltalk.js)
-  raget-neural/                   otak neural terlatih tapi nonaktif (transformer JS murni + neural-provider.js)
-  raget-llm-lokal/                stub kontrak — model pihak ketiga, SENGAJA TIDAK DIKEJAR (fokus AI di template+neural)
+  raget-template/                 otak rule-based/template, default aplikasi (llm-engine.js, fuzzy-smalltalk.js)
+  raget-neural/                   otak neural RATEGOAN sendiri, aktif tapi belum koheren (transformer JS murni + neural-provider.js)
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian BM25 satu pintu lintas sumber
@@ -91,10 +90,9 @@ vault/                            fitur opt-in: pengingat, kalender, ekspor, imp
 docs/                             struktur data, lisensi korpus, dan peta arsitektur (lihat docs/ARSITEKTUR.md)
 ```
 
-Peta lengkap otak Raget — Template dan Neural (fokus pengembangan AI
-milik sendiri) plus stub LLM Lokal yang sengaja tidak dikejar — kontrak
-adapter `init()/ask()/status()`, dan aturan router ada di
-[`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
+Peta lengkap dua otak Raget — Template dan Neural, dua-duanya milik
+Rategoan sendiri — kontrak adapter `init()/ask()/status()`, dan aturan
+router ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
 
 ### Alur satu pesan
 
@@ -102,7 +100,7 @@ adapter `init()/ask()/status()`, dan aturan router ada di
 Pesan pengguna
   → raget-memory (konteks percakapan + fakta jangka panjang)
   → raget-agents (router intent → deret mesin khusus, lihat di bawah)
-  → raget-agents/engine-router.js (template ↔ neural, llm-lokal tak dikejar — lihat docs/ARSITEKTUR.md)
+  → raget-agents/engine-router.js (template ↔ neural — lihat docs/ARSITEKTUR.md)
   → post-processing (rapikan teks, jawaban jujur bila kosong)
   → tampil sebagai balasan + tersimpan ke raget-database
 ```
@@ -140,19 +138,21 @@ teks, meta}` — file `.json` biasa, gampang ditambah/diedit tanpa menyentuh
 kode aplikasi. Lihat [`docs/DATA-STRUCTURE.md`](docs/DATA-STRUCTURE.md) untuk
 cara menambah domain data sendiri.
 
-## RAGET Neural (belum aktif menjawab)
+## RAGET Neural (aktif, belum koheren)
 
-Panel Model di UI menampilkan dua pilihan: **Raget Template** (aktif, selalu
-bisa dipilih) dan **Raget Neural** (ditandai belum bisa dipakai). Di balik
-layar Raget Neural adalah eksperimen jaringan neural (transformer kecil yang
-ditulis dari nol dalam JavaScript murni, bukan wrapper provider apa pun) di
-`raget/raget-neural/`. Bobotnya sudah dilatih nyata, tapi output
-generasinya **belum koheren secara gramatikal** — karena itu fitur ini
-dikunci nonaktif (`NEURAL_ANSWERS_ENABLED = false` di `js/ai/ai.js`, dan
-`status().ready === false` di `raget-neural/neural-adapter.js`) dan jawaban
-tetap sepenuhnya dari mesin rule-based/template di atas sampai generasinya
-benar-benar layak pakai. Detail kontrak adapter dan cara melanjutkan tiap
-lapis ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
+Panel Model di UI menampilkan dua pilihan, dua-duanya bisa benar-benar
+dipilih: **Raget Template** (default aplikasi) dan **Raget Neural**
+(ditandai eksperimental). Di balik layar Raget Neural adalah jaringan
+neural buatan sendiri (transformer kecil yang ditulis dari nol dalam
+JavaScript murni, bukan wrapper provider apa pun) di
+`raget/raget-neural/`. Bobotnya sudah dilatih nyata di GPU Colab, tapi
+output generasinya **masih belum koheren secara gramatikal**. Berbeda
+dari sebelumnya, lapis ini sekarang **AKTIF** (`status().ready === true`
+di `raget-neural/neural-adapter.js`) — memilih Raget Neural di panel
+Model betul-betul menampilkan hasil generasinya apa adanya, bukan
+dikunci jadi pajangan. Template tetap jadi default dan fallback aman
+kalau Neural gagal memuat. Detail kontrak adapter dan cara melanjutkan
+tiap lapis ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
 
 ## Kualitas & Pengujian
 

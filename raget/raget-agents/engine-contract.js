@@ -1,14 +1,14 @@
-// Kontrak "SATU KONTRAK, TIGA OTAK HIDUP BERSAMA" (lihat docs/ARSITEKTUR.md).
-// Setiap otak AI - rule-based/template yang sudah jalan, neural yang sudah
-// dilatih tapi dikunci nonaktif, LLM lokal yang belum diimplementasikan, dan
-// otak baru apa pun di masa depan - HARUS diekspos lewat bentuk objek yang
-// SAMA PERSIS, supaya raget-agents/engine-router.js bisa mencoba salah satu
-// tanpa tahu apa pun soal isinya, dan supaya menghidupkan/mematikan satu
+// Kontrak "SATU KONTRAK, DUA OTAK RATEGOAN" (lihat docs/ARSITEKTUR.md).
+// Setiap otak AI - rule-based/template yang sudah jalan, neural yang
+// sudah dilatih dan aktif (meski belum koheren), dan otak baru apa pun
+// di masa depan - HARUS diekspos lewat bentuk objek yang SAMA PERSIS,
+// supaya raget-agents/engine-router.js bisa mencoba salah satu tanpa
+// tahu apa pun soal isinya, dan supaya menghidupkan/mematikan satu
 // lapis cukup mengubah ADAPTERS di router, bukan membongkar kode otak itu
 // sendiri:
 //
 //   {
-//     id: string,        // slug stabil dipakai router & preferensi UI ('template' | 'neural' | 'llm-lokal')
+//     id: string,        // slug stabil dipakai router & preferensi UI ('template' | 'neural')
 //     label: string,      // nama tampil manusia ('Raget Template')
 //     async init(),        // siapkan resource (mis. load checkpoint) - idempotent, aman dipanggil berkali-kali
 //     async ask(prompt, context), // context = { messages, ... }; LEMPAR Error kalau gagal - JANGAN diam-diam

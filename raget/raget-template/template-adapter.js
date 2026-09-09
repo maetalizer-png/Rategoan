@@ -4,7 +4,7 @@
 // dan berujung ke llm-engine.js#craft() sebagai fallback generik. Adapter ini
 // TIDAK menduplikasi logika itu, cuma membungkusnya dalam kontrak
 // init()/ask()/status() (lihat engine-contract.js) supaya engine-router.js
-// bisa memperlakukannya setara dengan otak Neural dan LLM Lokal.
+// bisa memperlakukannya setara dengan otak Neural.
 //
 // Ini baseline yang tidak pernah gagal - status() selalu ready:true.
 import { agent } from '../raget-agents/agent.js';

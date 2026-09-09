@@ -2,16 +2,15 @@ import { engine } from './engine.js';
 import { engineRouter } from '../../raget/raget-agents/engine-router.js';
 
 // RAGET otomatis (200M -> 100M -> 50M, lihat raget-neural/neural-provider.js)
-// belum menghasilkan kalimat koheren - PPL held-out masih >900 dan generasi
-// masih fragmen kata acak di setiap sesi training sampai catatan ini ditulis.
-// NEURAL_ANSWERS_ENABLED di bawah adalah kill-switch manual historis dari
-// sebelum ada router+adapter; sumber kebenaran yang BENAR-BENAR dibaca
-// sekarang adalah status() di raget-neural/neural-adapter.js (dibaca
-// raget-agents/engine-router.js) - selama itu ready:false, router TIDAK
-// PERNAH memanggil Neural apa pun nilai flag ini. Jangan nyalakan flag ini
-// sampai satu sesi training menghasilkan output yang benar-benar koheren
-// DAN status() neural-adapter.js ikut diubah jadi ready:true.
-const NEURAL_ANSWERS_ENABLED = false;
+// AKTIF sejak status() di raget-neural/neural-adapter.js diubah jadi
+// ready:true - keputusan produk untuk menampilkan hasil generasinya apa
+// adanya, meski PPL held-out masih >900 dan output belum koheren
+// gramatikal di sesi training terakhir. Pengguna memilih Raget Neural
+// secara eksplisit lewat panel Model; default aplikasi tetap Template.
+// NEURAL_ANSWERS_ENABLED di bawah adalah flag historis dari sebelum ada
+// router+adapter - sumber kebenaran yang BENAR-BENAR dibaca sekarang
+// adalah status() di neural-adapter.js (dibaca raget-agents/engine-router.js).
+const NEURAL_ANSWERS_ENABLED = true;
 
 async function generate(messages, prompt) {
   await engine.ensureReady();
