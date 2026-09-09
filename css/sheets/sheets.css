@@ -166,16 +166,23 @@
 
 .model-item {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
   padding: 12px 14px;
   border: 1px solid var(--rg-line);
   border-radius: 14px;
   text-align: left;
+  cursor: pointer;
 }
 
 .model-item.active {
   border-color: var(--rg-accent);
+}
+
+.model-item.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .model-name {
@@ -186,6 +193,12 @@
 
 .model-item.active .model-name {
   color: var(--rg-accent);
+}
+
+.model-note {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--rg-muted);
 }
 
 @media (hover: hover) and (pointer: fine) {

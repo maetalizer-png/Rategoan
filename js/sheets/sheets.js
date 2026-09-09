@@ -1,4 +1,5 @@
 import { $ } from '../utils/dom.js';
+import { modelSheet } from './model-sheet.js';
 
 export const sheets = {
   close() {
@@ -7,6 +8,7 @@ export const sheets = {
     $('sheet-backdrop').classList.remove('show');
   },
   openModel() {
+    modelSheet.render();
     $('model-sheet').hidden = false;
     $('sheet-backdrop').classList.add('show');
   },
