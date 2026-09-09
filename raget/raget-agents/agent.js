@@ -1,4 +1,4 @@
-import { llmEngine } from '../raget-llm/llm-engine.js';
+import { llmEngine } from '../raget-template/llm-engine.js';
 import { memoryShort } from '../raget-memory/memory-short.js';
 import { memoryLong } from '../raget-memory/memory-long.js';
 import { memoryIndex } from '../raget-memory/memory-index.js';

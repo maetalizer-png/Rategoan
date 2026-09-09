@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { RATEGOAN } from '../raget-llm/neural/llm-core.js';
+import { RATEGOAN } from '../raget-neural/llm-core.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');

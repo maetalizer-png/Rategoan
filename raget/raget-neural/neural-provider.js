@@ -22,7 +22,7 @@ let initPromises = {};
 
 async function loadEngine() {
   if (cache) return cache;
-  const { RATEGOAN } = await import('./neural/llm-core.js');
+  const { RATEGOAN } = await import('./llm-core.js');
   cache = { RATEGOAN };
   return cache;
 }

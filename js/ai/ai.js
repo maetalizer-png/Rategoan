@@ -1,6 +1,6 @@
 import { engine } from './engine.js';
 import { agent } from '../../raget/raget-agents/agent.js';
-import { neuralProvider } from '../../raget/raget-llm/neural-provider.js';
+import { neuralProvider } from '../../raget/raget-neural/neural-provider.js';
 
 // RAGET otomatis (200M -> 100M -> 50M, lihat neural-provider.js) belum
 // menghasilkan kalimat koheren - PPL held-out masih >900 dan generasi

@@ -24,10 +24,10 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { RATEGOAN } from '../raget-llm/neural/llm-core.js';
-import { LLMTrainer } from '../raget-llm/neural/llm-trainer.js';
-import { LLMTokenizer } from '../raget-llm/neural/llm-tokenizer.js';
-import { LLMVocabulary } from '../raget-llm/neural/llm-vocabulary.js';
+import { RATEGOAN } from '../raget-neural/llm-core.js';
+import { LLMTrainer } from '../raget-neural/llm-trainer.js';
+import { LLMTokenizer } from '../raget-neural/llm-tokenizer.js';
+import { LLMVocabulary } from '../raget-neural/llm-vocabulary.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');

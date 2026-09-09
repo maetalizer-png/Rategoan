@@ -14,7 +14,7 @@ async function main() {
   await page.goto(BASE + '/index.html', { waitUntil: 'domcontentloaded' });
 
   const result = await page.evaluate(async () => {
-    const { neuralProvider } = await import('/raget/raget-llm/neural-provider.js');
+    const { neuralProvider } = await import('/raget/raget-neural/neural-provider.js');
     const { llmMode } = await import('/js/state/llm-mode.js');
     const out = {};
 

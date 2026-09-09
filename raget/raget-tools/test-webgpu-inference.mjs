@@ -30,7 +30,7 @@ async function main() {
             out.navigatorGpuPresent = false;
         }
 
-        const { LLMGpu } = await import('/raget/raget-llm/neural/llm-gpu.js');
+        const { LLMGpu } = await import('/raget/raget-neural/llm-gpu.js');
         const gpuOk = await LLMGpu.initGPU(512).catch((e) => { out.gpuInitError = String(e); return false; });
         out.gpuReady = LLMGpu.isReady();
         out.gpuInitReturned = gpuOk;
@@ -38,7 +38,7 @@ async function main() {
 
         // Model kecil (tiny preset) supaya cepat - fokus verifikasi JALUR
         // KODE (GPU-siap vs fallback), bukan kualitas generasi.
-        const { RATEGOAN } = await import('/raget/raget-llm/neural/llm-core.js');
+        const { RATEGOAN } = await import('/raget/raget-neural/llm-core.js');
         const corpus = [
             'Rategoan adalah asisten chat lokal yang berjalan di peramban.',
             'Model bahasa kecil ini dilatih dari data singkat untuk uji coba.',

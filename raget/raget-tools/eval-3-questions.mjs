@@ -1,6 +1,6 @@
 // Ronde D - eval wajib akhir tiap sesi: 3 pertanyaan tetap, generasi lewat
 // mesin JS produksi yang SAMA dipakai browser (RATEGOAN di
-// raget-llm/neural/llm-core.js, bukan sampler Python terpisah), supaya
+// raget-neural/llm-core.js, bukan sampler Python terpisah), supaya
 // hasilnya benar-benar mencerminkan apa yang akan didapat pengguna kalau
 // NEURAL_ANSWERS_ENABLED dinyalakan.
 //
@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { RATEGOAN } from '../raget-llm/neural/llm-core.js';
+import { RATEGOAN } from '../raget-neural/llm-core.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');

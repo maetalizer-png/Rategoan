@@ -1,5 +1,5 @@
 // Migrasi satu-kali (one-time): pindahkan data sapaan/smalltalk yang tadinya
-// jadi konstanta literal di raget/raget-llm/llm-engine.js ke skema JSON
+// jadi konstanta literal di raget/raget-template/llm-engine.js ke skema JSON
 // tunggal Fase B (lihat roadmap vNext §3): {id, kategori, wilayah, nama,
 // tags, teks, meta}. Ini prasyarat yang disebut roadmap vNext §4 sebelum
 // scripts/dataries-ke-korpus.mjs bisa merender dialog sapaan tanpa parsing

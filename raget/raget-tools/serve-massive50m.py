@@ -2,7 +2,7 @@
 """MEGA-BATCH RAGETAN ROUND 5 FASE 3 + ROUND 6 FASE 4: server inference
 1 FILE untuk checkpoint Rategoan Neural (format SafeTensors custom, byte-
 compatible dengan runtime JS browser) - dipakai oleh mode "Server" di
-Settings PWA (js/state/llm-mode.js + raget/raget-llm/neural-provider.js)
+Settings PWA (js/state/llm-mode.js + raget/raget-neural/neural-provider.js)
 sebagai alternatif runtime lokal browser, berguna untuk checkpoint besar
 (massive50m 34MB+, ATAU massive100m ~78MB+) di perangkat lambat.
 

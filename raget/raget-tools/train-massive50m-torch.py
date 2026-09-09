@@ -4,7 +4,7 @@ PyTorch (BLAS/optimized CPU tensor ops) karena audit FASE 0 membuktikan:
 tidak ada GPU (nvidia-smi/CUDA absen), tapi pip install torch (CPU) BERHASIL
 lewat pypi.org (satu-satunya index yang tidak diblokir kebijakan egress).
 
-Arsitektur PERSIS SAMA seperti preset 'massive50m' di raget-llm/neural/
+Arsitektur PERSIS SAMA seperti preset 'massive50m' di raget-neural/
 llm-config.js (vocabSize 30368, dModel 512, nLayers 6, nHeads 8, dFF 2048),
 forward pass direplikasi PERSIS mengikuti llm-transformer.js/llm-attention.js/
 llm-decoder.js (pre-LN, GELU tanh-approx, attention head-split kontigu, tied

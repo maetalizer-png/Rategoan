@@ -1,4 +1,4 @@
-import { llmEngine } from '../../raget/raget-llm/llm-engine.js';
+import { llmEngine } from '../../raget/raget-template/llm-engine.js';
 import { $ } from '../utils/dom.js';
 
 function setStatus(text) {

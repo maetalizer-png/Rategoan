@@ -14,7 +14,7 @@ async function main() {
   await page.goto(BASE + '/index.html', { waitUntil: 'domcontentloaded' });
 
   const result = await page.evaluate(async () => {
-    const { RATEGOAN } = await import('/raget/raget-llm/neural/llm-core.js');
+    const { RATEGOAN } = await import('/raget/raget-neural/llm-core.js');
     const out = {};
 
     const res50 = await fetch('/raget/raget-data/neural/raget-neural-massive50m.safetensors');

@@ -77,16 +77,23 @@ index.html, css/, js/            kerangka aplikasi (UI, state, riwayat, akun)
 js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
-  raget-agents/                   router intent + orkestrasi tool + mesin khusus
-  raget-llm/                      mesin balasan (template default + Raget Neural eksperimental)
+  raget-agents/                   router intent + orkestrasi tool + mesin khusus + kontrak/router adapter otak
+  raget-template/                 otak rule-based/template yang aktif jalan (llm-engine.js, fuzzy-smalltalk.js)
+  raget-neural/                   otak neural terlatih tapi nonaktif (transformer JS murni + neural-provider.js)
+  raget-llm-lokal/                otak LLM lokal — stub kontrak, belum diimplementasikan
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian BM25 satu pintu lintas sumber
   raget-data/                     sumber data resmi — json/ (domain terstruktur), jsonl/ (korpus), neural/ (checkpoint)
+  raget-devlog/                   log pengembangan & laporan training (termasuk neural/)
   raget-tools/                    skrip verifikasi: bench runner, pengukuran kualitas, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-docs/                             struktur data & lisensi korpus
+docs/                             struktur data, lisensi korpus, dan peta arsitektur (lihat docs/ARSITEKTUR.md)
 ```
+
+Peta lengkap tiga "otak" (template/neural/llm-lokal), kontrak adapter
+`init()/ask()/status()`, dan aturan router ada di
+[`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
 
 ### Alur satu pesan
 
@@ -94,7 +101,7 @@ docs/                             struktur data & lisensi korpus
 Pesan pengguna
   → raget-memory (konteks percakapan + fakta jangka panjang)
   → raget-agents (router intent → deret mesin khusus, lihat di bawah)
-  → raget-llm (fallback: pencocokan pola template)
+  → raget-agents/engine-router.js (llm-lokal → neural → template, lihat docs/ARSITEKTUR.md)
   → post-processing (rapikan teks, jawaban jujur bila kosong)
   → tampil sebagai balasan + tersimpan ke raget-database
 ```
@@ -125,7 +132,7 @@ loader tipis `raget-agents/dataries-registry.js` (fetch JSON → bentuk
 `{text, metadata}`). Domain mencakup: negara, kota, bahasa, tokoh, sains,
 sejarah, wisata, kuliner/makanan, olahraga, etika, minuman, platform, ekonomi,
 peluang, penemuan, alam, seni-budaya, mata pelajaran sekolah & kuliah, dan
-`sapaan/` (smalltalk harian, dimuat langsung oleh `raget-llm/llm-engine.js`).
+`sapaan/` (smalltalk harian, dimuat langsung oleh `raget-template/llm-engine.js`).
 
 Skema data seragam di seluruh domain: `{id, kategori, wilayah, nama, tags,
 teks, meta}` — file `.json` biasa, gampang ditambah/diedit tanpa menyentuh
@@ -134,14 +141,17 @@ cara menambah domain data sendiri.
 
 ## RAGET Neural (belum aktif menjawab)
 
-Satu nama tampil ke pengguna: **RAGET** — tidak ada pemilih model. Di balik
-layar ada eksperimen jaringan neural (transformer kecil yang ditulis dari nol
-dalam JavaScript murni, bukan wrapper provider apa pun) di
-`raget/raget-llm/neural/`. Bobotnya sudah dilatih nyata, tapi output
+Panel Model di UI menampilkan dua pilihan: **Raget Template** (aktif, selalu
+bisa dipilih) dan **Raget Neural** (ditandai belum bisa dipakai). Di balik
+layar Raget Neural adalah eksperimen jaringan neural (transformer kecil yang
+ditulis dari nol dalam JavaScript murni, bukan wrapper provider apa pun) di
+`raget/raget-neural/`. Bobotnya sudah dilatih nyata, tapi output
 generasinya **belum koheren secara gramatikal** — karena itu fitur ini
-dikunci nonaktif (`NEURAL_ANSWERS_ENABLED = false` di `js/ai/ai.js`) dan
-jawaban tetap sepenuhnya dari mesin rule-based/template di atas sampai
-generasinya benar-benar layak pakai.
+dikunci nonaktif (`NEURAL_ANSWERS_ENABLED = false` di `js/ai/ai.js`, dan
+`status().ready === false` di `raget-neural/neural-adapter.js`) dan jawaban
+tetap sepenuhnya dari mesin rule-based/template di atas sampai generasinya
+benar-benar layak pakai. Detail kontrak adapter dan cara melanjutkan tiap
+lapis ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
 
 ## Kualitas & Pengujian
 
