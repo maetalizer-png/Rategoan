@@ -16,7 +16,7 @@
    (budget, ubah prinsip 100% lokal) — bukan diam-diam dieksekusi.
 
 Cakupan: `raget-neural/` + tooling training/eval-nya. Template di luar
-cakupan — lihat `PRD-RAGET-TEMPLATE.md`.
+cakupan — lihat `PRD-RAGET-TEMPLATE.md`. Aturan kerja: `PRD-ATURAN-KERJA.md`.
 
 Status ringkas: Fase A.1 (audit token korpus) dan A.1b (growth plan)
 SELESAI (lihat §2b) — korpus, bukan compute, adalah penghambat dominan

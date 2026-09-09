@@ -13,7 +13,7 @@
 
 Cakupan: `raget-template/` + mesin-mesin di `raget-agents/` + data +
 infra retrieval/memory yang dipakainya. `raget-neural/` di luar cakupan
-— lihat `PRD-RAGET-NEURAL.md`.
+— lihat `PRD-RAGET-NEURAL.md`. Aturan kerja: `PRD-ATURAN-KERJA.md`.
 
 Status ringkas (detail di §3): Fase 1, 2.1, 2.2, 2.3, 3.2, 4.1, 4.2,
 4.3, 4.4 SELESAI (lihat catatan cakupan per fase di tabelnya); Fase 3.1
