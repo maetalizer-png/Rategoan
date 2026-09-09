@@ -250,7 +250,7 @@
     ],
     "teks": "Halo! Senang bisa ngobrol denganmu.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -264,7 +264,7 @@
     ],
     "teks": "Hai! Ada yang bisa aku bantu hari ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -278,7 +278,7 @@
     ],
     "teks": "Halo, selamat datang kembali!",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -292,7 +292,7 @@
     ],
     "teks": "Hai kawan, gimana kabarnya hari ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -306,7 +306,7 @@
     ],
     "teks": "Halo sahabat, sudah lama tidak ngobrol.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -320,7 +320,7 @@
     ],
     "teks": "Salam kenal, senang bertemu denganmu!",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -334,7 +334,7 @@
     ],
     "teks": "Hai teman, ada topik menarik yang mau dibahas?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -348,7 +348,7 @@
     ],
     "teks": "Halo, apa yang bisa aku bantu sekarang?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -362,7 +362,7 @@
     ],
     "teks": "Hai, semoga harimu menyenangkan!",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -376,7 +376,7 @@
     ],
     "teks": "Selamat berjumpa lagi!",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -390,7 +390,7 @@
     ],
     "teks": "Salam kenal ya, mari kita mulai ngobrol.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -404,7 +404,7 @@
     ],
     "teks": "Halo dari Raget, siap membantu kapan saja.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -418,7 +418,7 @@
     ],
     "teks": "Hai, langsung aja ceritakan apa yang kamu butuhkan.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -432,7 +432,7 @@
     ],
     "teks": "Halo! Ada pertanyaan atau cerita yang mau dibagikan?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -446,7 +446,7 @@
     ],
     "teks": "Hai, aku di sini kalau kamu butuh teman ngobrol.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -460,7 +460,7 @@
     ],
     "teks": "Assalamualaikum, apa kabar?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -474,7 +474,7 @@
     ],
     "teks": "Wa'alaikumsalam, senang mendengar kabarmu.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -488,7 +488,7 @@
     ],
     "teks": "Om swastiastu, semoga hari ini penuh berkah.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -502,7 +502,7 @@
     ],
     "teks": "Namo buddhaya, salam hangat untukmu.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -516,7 +516,7 @@
     ],
     "teks": "Syalom, semoga damai selalu menyertaimu.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -530,7 +530,7 @@
     ],
     "teks": "Salam sejahtera untuk kita semua.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -544,7 +544,7 @@
     ],
     "teks": "Sugeng rawuh, selamat datang.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -558,7 +558,7 @@
     ],
     "teks": "Wilujeng sumping, mangga dilanjut ngobrolnya.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -572,7 +572,7 @@
     ],
     "teks": "Sampurasun, kumaha damang?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -586,7 +586,7 @@
     ],
     "teks": "Horas, salam dari Raget!",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -600,7 +600,7 @@
     ],
     "teks": "Rahayu, semoga selalu diberkati.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -614,7 +614,7 @@
     ],
     "teks": "Punten, permisi mau nanya sesuatu boleh?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -628,7 +628,7 @@
     ],
     "teks": "Mangga, silakan mulai ceritanya.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -642,7 +642,7 @@
     ],
     "teks": "Salam hangat dari aku, Raget.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -656,7 +656,7 @@
     ],
     "teks": "Hai, aku siap dengar cerita kamu hari ini.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -670,7 +670,7 @@
     ],
     "teks": "Halo, apa kabar dari tadi belum sempat nyapa.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -684,7 +684,7 @@
     ],
     "teks": "Hai, seneng deh akhirnya bisa ngobrol lagi.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -698,7 +698,7 @@
     ],
     "teks": "Halo! Yuk mulai obrolannya.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -712,7 +712,7 @@
     ],
     "teks": "Hai, semoga harimu berjalan lancar.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -726,7 +726,7 @@
     ],
     "teks": "Selamat pagi, semoga semangatmu penuh hari ini.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -740,7 +740,7 @@
     ],
     "teks": "Selamat siang, jangan lupa istirahat sejenak ya.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -754,7 +754,7 @@
     ],
     "teks": "Selamat sore, gimana harimu sejauh ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -768,7 +768,7 @@
     ],
     "teks": "Selamat malam, semoga tidurmu nyenyak nanti.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -782,7 +782,7 @@
     ],
     "teks": "Hai, boleh kenalan dulu sebelum mulai ngobrol?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -796,7 +796,7 @@
     ],
     "teks": "Halo, terima kasih sudah mampir.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -810,7 +810,7 @@
     ],
     "teks": "Hai, apa saja rencana kamu hari ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -824,7 +824,7 @@
     ],
     "teks": "Halo, ada yang menarik untuk dibahas?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -838,7 +838,7 @@
     ],
     "teks": "Selamat datang di Rategoan, aku Raget.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -852,7 +852,7 @@
     ],
     "teks": "Hai, kabar baik semoga sampai ke kamu juga.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -866,7 +866,7 @@
     ],
     "teks": "Halo, siap nemenin kamu ngobrol kapan saja.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -880,7 +880,7 @@
     ],
     "teks": "Hai, sudah sarapan belum hari ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -894,7 +894,7 @@
     ],
     "teks": "Halo, semoga hari ini lebih baik dari kemarin.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -908,7 +908,7 @@
     ],
     "teks": "Salam kenal dari Raget, asisten lokal Rategoan.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -922,7 +922,7 @@
     ],
     "teks": "Hai, terima kasih sudah menyapa duluan.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -936,7 +936,7 @@
     ],
     "teks": "Halo, mau mulai dari topik apa hari ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -950,7 +950,7 @@
     ],
     "teks": "Sugeng enjing, wilujeng enjing, halo dari segala penjuru!",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -964,7 +964,7 @@
     ],
     "teks": "Hai, aku senang ada yang mengajakku ngobrol.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -978,7 +978,7 @@
     ],
     "teks": "Halo, semoga harimu diwarnai hal-hal baik.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -992,7 +992,7 @@
     ],
     "teks": "Hai, gimana, ada kabar seru hari ini?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -1006,7 +1006,7 @@
     ],
     "teks": "Halo, jangan sungkan cerita apa saja ke aku.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -1020,7 +1020,7 @@
     ],
     "teks": "Hai, siap membantu apa pun yang kamu butuhkan.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -1034,7 +1034,7 @@
     ],
     "teks": "Halo, senang sekali bisa kembali ngobrol.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -1048,7 +1048,7 @@
     ],
     "teks": "Hai, semoga suasana hatimu baik hari ini.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -1062,7 +1062,7 @@
     ],
     "teks": "Halo, aku di sini menemanimu kapan saja.",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -1076,7 +1076,7 @@
     ],
     "teks": "Hai, boleh tahu ada yang bisa kubantu?",
     "meta": {
-      "jenis": "sapa"
+      "jenis": "plain"
     }
   },
   {
@@ -8190,7 +8190,7 @@
         "Halo!",
         "Halo, silakan."
       ],
-      "jenis": "buka"
+      "jenis": "datang"
     }
   },
   {
@@ -8207,7 +8207,8 @@
       "variants": [
         "Pagi! Apa yang bisa dibantu?"
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -8224,7 +8225,8 @@
       "variants": [
         "Siang! Saya siap membantu."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -8241,7 +8243,8 @@
       "variants": [
         "Malam! Silakan tanya."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -8275,7 +8278,8 @@
       "variants": [
         "Silakan, saya dengarkan."
       ],
-      "jenis": "bantuan"
+      "jenis": "smalltalk",
+      "key": "bantu"
     }
   },
   {
@@ -8292,7 +8296,7 @@
       "variants": [
         "Selamat datang!"
       ],
-      "jenis": "buka"
+      "jenis": "datang"
     }
   },
   {

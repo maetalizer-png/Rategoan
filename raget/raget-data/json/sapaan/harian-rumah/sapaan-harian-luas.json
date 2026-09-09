@@ -12,7 +12,8 @@
       "variants": [
         "Mulai dari yang kecil saja."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -29,7 +30,8 @@
       "variants": [
         "Bawa jas hujan kalau perlu."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -46,7 +48,8 @@
       "variants": [
         "Semangat Senin."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -63,7 +66,8 @@
       "variants": [
         "Jumat berkah."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -80,7 +84,8 @@
       "variants": [
         "Nikmati weekend-nya."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -97,7 +102,8 @@
       "variants": [
         "Pemanasan dulu ya."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -113,7 +119,8 @@
       "variants": [
         "Sarapan dulu lebih baik."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -129,7 +136,8 @@
       "variants": [
         "Hari masih panjang."
       ],
-      "jenis": "pagi"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -145,7 +153,8 @@
       "variants": [
         "Tetap hidrasi ya."
       ],
-      "jenis": "siang"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -162,7 +171,8 @@
       "variants": [
         "Jangan ditahan terlalu lama."
       ],
-      "jenis": "siang"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -178,7 +188,8 @@
       "variants": [
         "Cuci muka bisa membantu."
       ],
-      "jenis": "siang"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -195,7 +206,8 @@
       "variants": [
         "Catat tindak lanjutnya."
       ],
-      "jenis": "siang"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -212,7 +224,8 @@
       "variants": [
         "Jangan bawa semua ke malam."
       ],
-      "jenis": "sore"
+      "jenis": "waktu",
+      "periode": "sore"
     }
   },
   {
@@ -229,7 +242,8 @@
       "variants": [
         "Sabar di perjalanan."
       ],
-      "jenis": "sore"
+      "jenis": "waktu",
+      "periode": "sore"
     }
   },
   {
@@ -246,7 +260,8 @@
       "variants": [
         "Gerak sebentar sudah membantu."
       ],
-      "jenis": "sore"
+      "jenis": "waktu",
+      "periode": "sore"
     }
   },
   {
@@ -263,7 +278,8 @@
       "variants": [
         "Kabari aman ya."
       ],
-      "jenis": "sore"
+      "jenis": "waktu",
+      "periode": "sore"
     }
   },
   {
@@ -279,7 +295,8 @@
       "variants": [
         "Satu hal saja sudah berharga."
       ],
-      "jenis": "malam"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -296,7 +313,8 @@
       "variants": [
         "Mode gelap dan jeda notifikasi membantu."
       ],
-      "jenis": "malam"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -313,7 +331,8 @@
       "variants": [
         "Istirahat juga bagian belajar."
       ],
-      "jenis": "malam"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -329,7 +348,8 @@
       "variants": [
         "Semoga tidurmu nyenyak."
       ],
-      "jenis": "malam"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -346,7 +366,8 @@
       "variants": [
         "Jangan lupa makan."
       ],
-      "jenis": "malam"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -414,7 +435,8 @@
       "variants": [
         "Kalau pesan ojek, tunggu di tempat yang aman."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "transport"
     }
   },
   {
@@ -431,7 +453,8 @@
       "variants": [
         "Di transportasi umum, jaga barang bawaan."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "transport"
     }
   },
   {
@@ -448,7 +471,8 @@
       "variants": [
         "Sabar mengantre. Waktu berjalan untuk semua."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "layanan"
     }
   },
   {
@@ -465,7 +489,8 @@
       "variants": [
         "Saat bayar digital, cek nominalnya dua kali."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "uang"
     }
   },
   {
@@ -482,7 +507,8 @@
       "variants": [
         "Jangan bagikan kode OTP ke siapa pun."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "uang"
     }
   },
   {
@@ -533,7 +559,8 @@
       "variants": [
         "Kerapihan rumah kecil-kecilan sudah menolong mood."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   },
   {
@@ -550,7 +577,8 @@
       "variants": [
         "Cuci peralatan setelah makan biar tidak menumpuk."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   },
   {
@@ -567,7 +595,8 @@
       "variants": [
         "Buang sampah pada tempatnya, termasuk di luar rumah."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   },
   {
@@ -584,7 +613,8 @@
       "variants": [
         "Kalau menjemur, pastikan tidak mengganggu tetangga."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "tetangga"
     }
   },
   {
@@ -703,7 +733,8 @@
       "variants": [
         "Minta tolong itu wajar; jelaskan kebutuhannya jelas."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "bantu"
     }
   },
   {
@@ -720,7 +751,8 @@
       "variants": [
         "Kalau salah, minta maaf lebih awal lebih lega."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "maaf"
     }
   },
   {
@@ -737,7 +769,8 @@
       "variants": [
         "Ucapkan terima kasih meski bantuan kecil."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "terima_kasih"
     }
   },
   {
@@ -754,7 +787,8 @@
       "variants": [
         "Di fasilitas kesehatan, ikuti alur dan sabar."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "sehat"
     }
   },
   {
@@ -771,7 +805,8 @@
       "variants": [
         "Set alarm pengingat obat jika mudah lupa."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "sehat"
     }
   },
   {
@@ -788,7 +823,8 @@
       "variants": [
         "Cuci tangan sebelum makan dan setelah dari luar."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "sehat"
     }
   },
   {
@@ -805,7 +841,8 @@
       "variants": [
         "Pakai masker jika kurang sehat agar tidak menulari."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "sehat"
     }
   },
   {
@@ -856,7 +893,8 @@
       "variants": [
         "Tulis tugas biar tidak hanya di kepala."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "tugas"
     }
   },
   {
@@ -907,7 +945,8 @@
       "variants": [
         "Datang tepat waktu adalah bentuk hormat."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "kerja"
     }
   },
   {
@@ -941,7 +980,8 @@
       "variants": [
         "Simpan bukti pembayaran penting."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "uang"
     }
   },
   {
@@ -958,7 +998,8 @@
       "variants": [
         "Sesekali cek mutasi rekening biar aman."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "uang"
     }
   },
   {
@@ -975,7 +1016,8 @@
       "variants": [
         "Matikan lampu ruangan kosong."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   },
   {

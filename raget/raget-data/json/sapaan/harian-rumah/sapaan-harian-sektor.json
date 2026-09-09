@@ -30,7 +30,8 @@
       "variants": [
         "Kalau ragu, tanya petugas toko, bukan pembeli lain."
       ],
-      "jenis": "harian"
+      "jenis": "harian",
+      "key": "layanan"
     }
   },
   {

@@ -12,7 +12,8 @@
       "variants": [
         "Pagi. Ada yang perlu disampaikan ke tetangga?"
       ],
-      "jenis": "harian"
+      "jenis": "harian",
+      "key": "tetangga"
     }
   },
   {
@@ -44,7 +45,8 @@
       "variants": [
         "Sisihkan senter. Lapor resmi kalau lama."
       ],
-      "jenis": "harian"
+      "jenis": "harian",
+      "key": "rumah"
     }
   },
   {
@@ -61,7 +63,8 @@
       "variants": [
         "Kalau capek, kasih istirahat sebentar."
       ],
-      "jenis": "harian"
+      "jenis": "harian",
+      "key": "sekolah"
     }
   },
   {

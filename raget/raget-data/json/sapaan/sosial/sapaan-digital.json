@@ -12,7 +12,8 @@
       "variants": [
         "Saya di sini."
       ],
-      "jenis": "digital"
+      "jenis": "digital",
+      "key": "lagi_apa"
     }
   },
   {
@@ -44,7 +45,7 @@
       "variants": [
         "Ketik saja."
       ],
-      "jenis": "digital"
+      "jenis": "plain"
     }
   }
 ]

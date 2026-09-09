@@ -14,7 +14,8 @@
         "Selamat pagi.",
         "Pagi, semoga lancar."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -32,7 +33,8 @@
         "Pagi!",
         "Hai pagi."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -49,7 +51,8 @@
       "variants": [
         "Pagi, semangat kerja."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "pagi"
     }
   },
   {
@@ -67,7 +70,8 @@
         "Siang.",
         "Selamat siang."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -84,7 +88,8 @@
       "variants": [
         "Siang, apa kabar?"
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "siang"
     }
   },
   {
@@ -102,7 +107,8 @@
         "Sore.",
         "Selamat sore."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "sore"
     }
   },
   {
@@ -119,7 +125,8 @@
       "variants": [
         "Sore, hati-hati ya."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "sore"
     }
   },
   {
@@ -136,7 +143,8 @@
       "variants": [
         "Malam, istirahat cukup."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   },
   {
@@ -153,7 +161,8 @@
       "variants": [
         "Halo malam."
       ],
-      "jenis": "waktu"
+      "jenis": "waktu",
+      "periode": "malam"
     }
   }
 ]

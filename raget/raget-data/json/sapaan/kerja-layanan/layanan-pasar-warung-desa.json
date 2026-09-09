@@ -12,7 +12,8 @@
       "variants": [
         "Jangan merendahkan dagangan orang."
       ],
-      "jenis": "layanan"
+      "jenis": "layanan",
+      "key": "pasar"
     }
   },
   {
@@ -28,7 +29,8 @@
       "variants": [
         "Kalau belum ada uang, bilang jujur."
       ],
-      "jenis": "layanan"
+      "jenis": "layanan",
+      "key": "pasar"
     }
   },
   {
@@ -77,7 +79,8 @@
       "variants": [
         "Jangan menuduh di grup sebelum bertanya."
       ],
-      "jenis": "layanan"
+      "jenis": "layanan",
+      "key": "tetangga"
     }
   }
 ]
