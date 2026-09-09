@@ -4,7 +4,11 @@ Peta ini menjawab satu pertanyaan: **kalau berhenti kerja di proyek ini 6
 bulan lalu kembali, dari mana harus mulai membaca?** Ditulis setelah
 restrukturisasi `raget-llm/` (dulu satu folder campur rule-based+neural)
 menjadi tiga folder terpisah per "otak", masing-masing di balik kontrak
-yang sama, disatukan oleh satu router.
+yang sama, disatukan oleh satu router. Dua di antaranya (Template,
+Neural) adalah fokus pengembangan nyata milik Rategoan sendiri; yang
+ketiga (LLM Lokal) sengaja dibiarkan sebagai stub kosong yang TIDAK
+dikejar - lihat §5 untuk alasannya sebelum menganggapnya roadmap
+tertunda.
 
 Semua angka dan rumus di dokumen ini diambil langsung dari kode/data yang
 ada di repo saat penulisan (dicek ulang, bukan dikarang) - tiap angka
@@ -18,22 +22,30 @@ menyebut file sumbernya supaya bisa diverifikasi ulang kapan saja.
 [ router ]                           <- raget/raget-agents/engine-router.js
       |                                 satu tempat aturan: siapa jawab dulu, fallback ke mana
       |
-      +-- LLM lokal (adapter)        raget/raget-llm-lokal/llm-lokal-adapter.js
-      |     jawaban dalam & kreatif (kalau perangkat sanggup) - STUB, belum ada isi
+      +-- rule-based (adapter)       raget/raget-template/template-adapter.js
+      |     data inti: harga, stok, FAQ -> instan & pasti benar - JALAN, baseline hari ini
       |
       +-- neural (adapter)           raget/raget-neural/neural-adapter.js
-      |     pola menengah, ringan, hasil latihan lama gak buang - TERLATIH tapi DIKUNCI nonaktif
+      |     otak RATEGOAN sendiri, dilatih dari nol - TERLATIH tapi DIKUNCI nonaktif
       |
-      +-- rule-based (adapter)       raget/raget-template/template-adapter.js
-            data inti: harga, stok, FAQ -> instan & pasti benar - JALAN, baseline hari ini
+      +-- LLM lokal (adapter)        raget/raget-llm-lokal/llm-lokal-adapter.js
+            model pihak ketiga lewat WebGPU/WebLLM - STUB, SENGAJA TIDAK DIKEJAR (lihat §5)
 ```
+
+**Fokus pengembangan Rategoan adalah dua otak MILIK SENDIRI: Template
+(rule-based, jalan hari ini) dan Neural (transformer dilatih dari nol,
+dikunci sampai koheren).** Menyematkan model bahasa pihak ketiga (LLM
+Lokal) bukan arah yang dikejar - ini keputusan produk eksplisit, bukan
+sekadar belum sempat dikerjakan (lihat §5).
 
 Tiap otak = satu file adapter dengan muka sama: `init()` / `ask()` /
 `status()` (lihat §3). Hidupkan/matikan satu lapis = ubah `status()`
 adapter itu jadi `{ready: true}` + urutan di router, **bukan** bongkar
 kode otak lain. Berhenti 6 bulan lalu lanjut = buka
 `raget-agents/engine-router.js`, lihat lapis mana yang mau dinyalakan,
-baca §5 ("Cara melanjutkan tiap lapis") untuk lapis itu.
+baca §5 ("Cara melanjutkan tiap lapis") untuk lapis itu - lapis LLM Lokal
+di §5 bukan checklist untuk dikerjakan, tapi catatan kenapa lapis itu
+sengaja dibiarkan kosong.
 
 ## 2. Peta folder `raget/`
 
@@ -41,8 +53,8 @@ baca §5 ("Cara melanjutkan tiap lapis") untuk lapis itu.
 |---|---|---|
 | `raget-agents/` | Router intent (`router-intent.js`), orkestrasi `agent.js` (>selusin mesin: math, bilingual, STEM, sosial, framework, dst - lihat README.md), kontrak adapter (`engine-contract.js`) dan router 3-otak (`engine-router.js`) | **Jalan** - jantung orkestrasi, dipakai tiap pesan |
 | `raget-template/` | `llm-engine.js` (craft/greeting/interjection/daily-talk fallback template), `fuzzy-smalltalk.js` (Jaro-Winkler smalltalk), `llm-worker.js` (stub deteksi dukungan Web Worker, tidak dipakai aktif), `template-adapter.js` | **Jalan** - inilah yang benar-benar menjawab pengguna hari ini |
-| `raget-neural/` | Transformer JS murni dari nol (`llm-attention.js`, `llm-transformer.js`, `llm-tokenizer.js`, `llm-trainer.js`, dst - 19 file), `neural-provider.js` (cascade unduh+cache 200M→100M→50M), `neural-adapter.js` | **Terlatih nyata tapi DIKUNCI nonaktif** - lihat §4 soal kenapa |
-| `raget-llm-lokal/` | `llm-lokal-adapter.js` - satu-satunya isi | **Stub, belum ada implementasi** - lihat §5 |
+| `raget-neural/` | Transformer JS murni dari nol (`llm-attention.js`, `llm-transformer.js`, `llm-tokenizer.js`, `llm-trainer.js`, dst - 19 file), `neural-provider.js` (cascade unduh+cache 200M→100M→50M), `neural-adapter.js` | **Terlatih nyata tapi DIKUNCI nonaktif** - lihat §4 soal kenapa. Ini otak RATEGOAN sendiri, fokus utama pengembangan AI ke depan |
+| `raget-llm-lokal/` | `llm-lokal-adapter.js` - satu-satunya isi | **Stub kontrak jujur, SENGAJA TIDAK DIKEJAR** - keputusan produk, bukan roadmap tertunda. Lihat §5 |
 | `raget-memory/` | Memori jangka pendek (`memory-short.js`, 10 giliran terakhir), jangka panjang (`memory-long.js`, fakta diajarkan pengguna), index pencarian (`memory-index.js`), few-shot lokal, feedback/streak store | **Jalan** |
 | `raget-database/` | `raget-db.js` - riwayat catatan Q&A + log kueri tak terjawab, disimpan lewat `idb-gateway.js` (IndexedDB), skema di `raget-schema.js` | **Jalan** |
 | `raget-retrieval/` | `bm25.js` (ranking BM25 satu pintu), `retrieve.js` (pemanggil scoreCorpus lintas domain) | **Jalan** |
@@ -84,22 +96,27 @@ export const templateAdapter = Object.freeze({ id: 'template', label: 'Raget Tem
 
 `raget/raget-agents/engine-router.js`:
 
-- Urutan prioritas dasar: **llm-lokal → neural → template** (persis
-  urutan yang diminta produk).
+- Urutan prioritas dasar: **template ↔ neural** (dua otak MILIK
+  SENDIRI, urutan relatifnya diatur preferensi pengguna) **→ llm-lokal
+  selalu paling terakhir**, karena llm-lokal bukan arah yang dikejar
+  (lihat §5) - kalaupun suatu saat diisi, dia tidak boleh mendahului dua
+  otak sendiri.
 - Sebelum memanggil `ask()`, router cek `status().ready`. Kalau `false`,
   atau kalau `ask()` melempar `Error`, router lanjut ke adapter
   berikutnya - pengguna tidak pernah melihat error mentah selama
   Template (baseline) tetap `ready`.
 - Preferensi pengguna (dipilih di panel Model, disimpan
   `js/state/engine-preference.js` → `localStorage['raget_engine_preference']`)
-  menukar posisi **relatif** neural↔template saja - llm-lokal tetap
-  selalu dicoba pertama (belum ada UI untuk memilihnya).
+  menukar posisi **relatif** neural↔template saja - llm-lokal tidak
+  punya UI untuk memilihnya dan tetap selalu dicoba terakhir apa pun
+  preferensinya.
 - **Hari ini praktiknya SELALU jatuh ke Template** karena:
-  - `raget-llm-lokal/llm-lokal-adapter.js#status()` selalu
-    `{ready: false}` - belum ada implementasi sama sekali.
   - `raget-neural/neural-adapter.js#status()` selalu `{ready: false}` -
     dikunci sengaja lewat `NEURAL_ANSWERS_ENABLED = false` di
     `js/ai/ai.js` (lihat §"Kenapa Neural dikunci" di bawah).
+  - `raget-llm-lokal/llm-lokal-adapter.js#status()` selalu
+    `{ready: false}` - sengaja tidak diimplementasikan, bukan sekadar
+    belum sempat (lihat §5).
 
   Ini **benar dan diharapkan, bukan bug.**
 
@@ -156,26 +173,36 @@ disentuh - dia cuma membungkus `agent.respond()` apa adanya.
      bukan flag di ai.js secara langsung.
 4. Jalankan lint-check + bench Playwright penuh sebelum commit.
 
-### LLM Lokal
+### LLM Lokal - SENGAJA TIDAK DIKEJAR (keputusan produk)
 
-Folder ini kosong secara sengaja - jangan mulai dari nol tanpa membaca
-riset yang sudah ada:
+Beda dari Template (pemeliharaan) dan Neural (aktif dilanjutkan), lapis
+ini **bukan roadmap yang menunggu dikerjakan**. Ini keputusan produk
+eksplisit: fokus pengembangan AI Rategoan adalah otak MILIK SENDIRI
+(Template + Neural), **bukan** menyematkan model bahasa pihak ketiga.
+Dua alasan yang mendasari:
 
-1. Baca dulu README eksperimen `gawean-app` (repo terpisah) soal
-   kegagalan hardware nyata: `VK_ERROR_DEVICE_LOST` di Android asli,
-   limit GPU buffer cuma 512MB, bahkan model 360M pun bisa gagal lewat
-   WebGPU/WebLLM di browser.
-2. Pertimbangkan model floor yang jauh lebih kecil dari yang sudah
-   dicoba gagal (<360M), atau targetkan device-class tertentu saja
-   (mis. desktop dengan GPU dedicated, bukan HP low-end) - jangan
-   asumsikan "WebGPU tersedia" berarti "WebGPU cukup kuat".
-3. Verifikasi dukungan WebGPU (`navigator.gpu`) DAN ukuran unduhan model
-   DAN estimasi VRAM sebelum menulis satu baris kode inference - ketiga
-   syarat ini yang bikin `status()` boleh mulai bergerak dari
-   `{ready: false}`.
-4. Baru setelah itu isi `init()`/`ask()` di
-   `raget-llm-lokal/llm-lokal-adapter.js` sungguhan (unduh model, jalankan
-   inference) - jangan ubah kontraknya, cukup isi implementasinya.
+1. **Bukti kegagalan hardware nyata** - eksperimen terpisah `gawean-app`
+   (repo lain, mencoba tangga 12 model dari SmolLM2-360M sampai
+   Qwen2.5-3B lewat `@mlc-ai/web-llm`/WebGPU) gagal keras di Android
+   asli: `VK_ERROR_DEVICE_LOST`, `Requested maxStorageBufferBindingSize
+   exceeds limit. requested=1024MB, limit=512MB` - bahkan model
+   terkecil di tangga itu pun gagal. Ini bukan bug yang bisa ditambal,
+   tapi batas kapasitas hardware nyata di perangkat target.
+2. **Arah produk** - fokus pengembangan diarahkan sepenuhnya ke sistem
+   milik Rategoan sendiri (Template yang sudah terbukti jalan, Neural
+   yang dilatih dari nol dan tinggal dikejar sampai koheren), bukan
+   dipecah ke jalur mengintegrasikan model orang lain yang berulang
+   kali terbukti gagal di perangkat nyata.
+
+Folder `raget-llm-lokal/` dibiarkan sebagai stub kontrak jujur
+(`init()`/`ask()` melempar error jelas, `status()` selalu
+`{ready: false}`) supaya router punya bentuk lengkap tiga-adapter dan
+tidak perlu dibongkar kalau keputusan ini suatu saat ditinjau ulang -
+tapi **tidak ada pekerjaan aktif yang direncanakan di sini**. Kalau
+keputusan produk berubah di masa depan, langkah minimalnya: baca ulang
+temuan `gawean-app` di atas, verifikasi WebGPU + ukuran model + VRAM
+perangkat target dulu, baru isi `init()`/`ask()` sungguhan - tapi ini
+bukan langkah yang sedang dikejar sekarang.
 
 ## 6. Angka & rumus nyata dari kode
 
@@ -255,6 +282,10 @@ Ketiganya sering disebut sebagai satu paket "upgrade AI", padahal punya
 syarat berbeda dan urutan ketergantungan yang nyata secara teknis - bukan
 daftar buzzword yang bisa dikerjakan sembarang urutan:
 
+Catatan penting: roadmap ini dibangun di atas **Neural (otak RATEGOAN
+sendiri)**, bukan LLM Lokal - lapis LLM Lokal sengaja tidak dikejar
+(lihat §5), jadi tidak dihitung sebagai jalur menuju RAG/LoRA di bawah.
+
 1. **Embedding lokal (vector)** - **bisa mulai duluan**, karena tidak
    butuh generator yang jalan sama sekali. `raget-neural/llm-embedding.js`
    sudah punya primitif matematika dasarnya (matmul, lookup embedding
@@ -262,28 +293,26 @@ daftar buzzword yang bisa dikerjakan sembarang urutan:
    ada pooling kalimat (mean/CLS) atau index similarity - itu yang perlu
    ditambah, bukan ditulis dari nol. Tambah pooling + index
    cosine/dot-product di atas `raget-database`/`raget-data`. Ini fondasi
-   paling murah untuk mulai, dan tidak bergantung pada Neural atau LLM
-   Lokal yang jalan menjawab.
-2. **RAG (retrieval-augmented generation)** - **butuh generator yang
-   jalan dulu** (Neural ATAU LLM Lokal dengan `status().ready: true`),
-   karena RAG = retrieval (sudah ada, `raget-retrieval/bm25.js` + poin 1
-   di atas kalau mau upgrade ke semantic search) **digabung** generation
-   yang koheren untuk merangkai potongan hasil retrieval jadi jawaban
-   utuh. Tanpa generator yang koheren, "RAG" cuma jadi retrieval biasa
-   yang sudah dilakukan `raget-retrieval/` + `agent.js` hari ini - tidak
-   ada nilai tambah dari menyebutnya RAG.
-3. **LoRA (fine-tuning ringan)** - **butuh model dasar pretrained yang
-   sudah jalan dulu** (baik Neural yang akhirnya diaktifkan, atau LLM
-   Lokal yang akhirnya terpasang) - LoRA secara definisi menambah
-   adapter kecil di atas bobot dasar yang sudah ada dan sudah berfungsi;
-   tidak ada "dasar" untuk ditempeli LoRA selama Neural dan LLM Lokal
-   masih `status().ready: false`. Urutan realistis: (a) satu dari
-   Neural/LLM Lokal aktif dan koheren -> (b) kumpulkan data
-   preferensi/gaya bahasa dari `raget-database`/`raget-memory` -> (c)
-   baru LoRA di atas itu.
+   paling murah untuk mulai, dan tidak bergantung pada Neural yang jalan
+   menjawab.
+2. **RAG (retrieval-augmented generation)** - **butuh Neural yang jalan
+   koheren dulu** (`status().ready: true`), karena RAG = retrieval
+   (sudah ada, `raget-retrieval/bm25.js` + poin 1 di atas kalau mau
+   upgrade ke semantic search) **digabung** generation yang koheren
+   untuk merangkai potongan hasil retrieval jadi jawaban utuh. Tanpa
+   generator yang koheren, "RAG" cuma jadi retrieval biasa yang sudah
+   dilakukan `raget-retrieval/` + `agent.js` hari ini - tidak ada nilai
+   tambah dari menyebutnya RAG.
+3. **LoRA (fine-tuning ringan)** - **butuh Neural aktif dan koheren
+   dulu sebagai model dasar** - LoRA secara definisi menambah adapter
+   kecil di atas bobot dasar yang sudah ada dan sudah berfungsi; tidak
+   ada "dasar" untuk ditempeli LoRA selama Neural masih
+   `status().ready: false`. Urutan realistis: (a) Neural aktif dan
+   koheren -> (b) kumpulkan data preferensi/gaya bahasa dari
+   `raget-database`/`raget-memory` -> (c) baru LoRA di atas itu.
 
 Urutan ketergantungan ringkas: **embedding lokal** (independen) →
-**Neural atau LLM Lokal jalan koheren** (prasyarat keduanya di bawah) →
-**RAG** (butuh generator dari langkah sebelumnya) dan **LoRA** (butuh
-model dasar dari langkah sebelumnya, sejajar dengan RAG, tidak saling
-bergantung satu sama lain).
+**Neural jalan koheren** (prasyarat keduanya di bawah) → **RAG** (butuh
+generator dari langkah sebelumnya) dan **LoRA** (butuh model dasar dari
+langkah sebelumnya, sejajar dengan RAG, tidak saling bergantung satu
+sama lain). LLM Lokal sengaja tidak masuk urutan ini - lihat §5.

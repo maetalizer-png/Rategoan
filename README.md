@@ -80,7 +80,7 @@ raget/                            induk seluruh otak AI Raget
   raget-agents/                   router intent + orkestrasi tool + mesin khusus + kontrak/router adapter otak
   raget-template/                 otak rule-based/template yang aktif jalan (llm-engine.js, fuzzy-smalltalk.js)
   raget-neural/                   otak neural terlatih tapi nonaktif (transformer JS murni + neural-provider.js)
-  raget-llm-lokal/                otak LLM lokal — stub kontrak, belum diimplementasikan
+  raget-llm-lokal/                stub kontrak — model pihak ketiga, SENGAJA TIDAK DIKEJAR (fokus AI di template+neural)
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian BM25 satu pintu lintas sumber
@@ -91,8 +91,9 @@ vault/                            fitur opt-in: pengingat, kalender, ekspor, imp
 docs/                             struktur data, lisensi korpus, dan peta arsitektur (lihat docs/ARSITEKTUR.md)
 ```
 
-Peta lengkap tiga "otak" (template/neural/llm-lokal), kontrak adapter
-`init()/ask()/status()`, dan aturan router ada di
+Peta lengkap otak Raget — Template dan Neural (fokus pengembangan AI
+milik sendiri) plus stub LLM Lokal yang sengaja tidak dikejar — kontrak
+adapter `init()/ask()/status()`, dan aturan router ada di
 [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
 
 ### Alur satu pesan
@@ -101,7 +102,7 @@ Peta lengkap tiga "otak" (template/neural/llm-lokal), kontrak adapter
 Pesan pengguna
   → raget-memory (konteks percakapan + fakta jangka panjang)
   → raget-agents (router intent → deret mesin khusus, lihat di bawah)
-  → raget-agents/engine-router.js (llm-lokal → neural → template, lihat docs/ARSITEKTUR.md)
+  → raget-agents/engine-router.js (template ↔ neural, llm-lokal tak dikejar — lihat docs/ARSITEKTUR.md)
   → post-processing (rapikan teks, jawaban jujur bila kosong)
   → tampil sebagai balasan + tersimpan ke raget-database
 ```

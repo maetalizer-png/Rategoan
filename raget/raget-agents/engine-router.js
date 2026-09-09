@@ -1,26 +1,36 @@
-// SATU KONTRAK, TIGA OTAK HIDUP BERSAMA (lihat docs/ARSITEKTUR.md untuk
-// peta lengkap):
+// SATU KONTRAK, DUA OTAK RATEGOAN + SATU STUB TIDAK DIKEJAR (lihat
+// docs/ARSITEKTUR.md untuk peta lengkap):
 //
 //   [ UI chat ]              <- gak pernah berubah
 //         |
 //   [ router ini ]           <- satu tempat aturan: siapa jawab dulu, fallback ke mana
-//    +- LLM lokal (adapter)    -> jawaban dalam & kreatif (kalau perangkat sanggup)
-//    +- neural (adapter)       -> pola menengah, ringan, hasil latihan lama gak buang
 //    +- rule-based (adapter)   -> data inti: harga, stok, FAQ -> instan & pasti benar
+//    +- neural (adapter)       -> otak RATEGOAN sendiri, dilatih dari nol, ringan
+//    +- LLM lokal (adapter)    -> STUB, sengaja TIDAK DIKEJAR - lihat catatan di bawah
 //
-// Urutan prioritas DASAR (persis seperti diminta): llm-lokal -> neural ->
-// template. Preferensi pengguna (Template/Neural, dipilih di #model-sheet,
-// disimpan js/state/engine-preference.js) menukar posisi RELATIF
-// neural<->template saja - llm-lokal tetap selalu dicoba pertama karena
-// belum ada UI untuk memilihnya. Tiap adapter dicek status().ready dulu
-// sebelum ask() dipanggil; kalau tidak ready ATAU ask() melempar Error,
-// router jatuh ke adapter berikutnya - pengguna tidak pernah melihat error
-// mentah selama Template (baseline) tetap ready.
+// Fokus pengembangan Rategoan adalah otak MILIK SENDIRI: Template
+// (rule-based, jalan hari ini) dan Neural (transformer JS dilatih dari
+// nol, dikunci sampai koheren). Menyematkan model pihak ketiga (LLM Lokal
+// via WebGPU/WebLLM) BUKAN arah yang dikejar - keputusan produk eksplisit,
+// diperkuat bukti kegagalan hardware nyata dari eksperimen terpisah
+// gawean-app (VK_ERROR_DEVICE_LOST, limit GPU buffer 512MB, model kecil
+// pun gagal). Adapter llm-lokal dibiarkan sebagai stub kontrak jujur yang
+// SELALU melempar/status ready:false - bukan lapis yang direncanakan aktif.
 //
-// Hari ini praktiknya SELALU jatuh ke Template (llm-lokal dan neural belum
-// ready) - itu benar dan diharapkan, bukan bug. Menghidupkan satu lapis
-// nanti = ubah status() adapter itu jadi ready:true, BUKAN membongkar
-// router atau kode otak lain.
+// Urutan prioritas: preferensi pengguna (Template/Neural, dipilih di
+// #model-sheet, disimpan js/state/engine-preference.js) menentukan urutan
+// Template<->Neural. llm-lokal selalu dicoba PALING TERAKHIR (bukan
+// pertama) persis karena bukan arah yang dikejar - kalaupun suatu saat
+// diisi, dia tidak boleh mendahului dua otak milik sendiri. Tiap adapter
+// dicek status().ready dulu sebelum ask() dipanggil; kalau tidak ready
+// ATAU ask() melempar Error, router jatuh ke adapter berikutnya -
+// pengguna tidak pernah melihat error mentah selama Template (baseline)
+// tetap ready.
+//
+// Hari ini praktiknya SELALU jatuh ke Template (neural belum ready, dan
+// llm-lokal memang tidak dikejar) - itu benar dan diharapkan, bukan bug.
+// Menghidupkan Neural nanti = ubah status() adapter itu jadi ready:true,
+// BUKAN membongkar router atau kode otak lain.
 import { llmLokalAdapter } from '../raget-llm-lokal/llm-lokal-adapter.js';
 import { neuralAdapter } from '../raget-neural/neural-adapter.js';
 import { templateAdapter } from '../raget-template/template-adapter.js';
@@ -34,11 +44,12 @@ const ADAPTERS_BY_ID = Object.freeze({
 
 function orderedAdapters() {
   const pref = enginePreference.get(); // 'template' (default) | 'neural'
-  const rest =
+  const first =
     pref === 'neural'
       ? [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template]
       : [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
-  return [ADAPTERS_BY_ID['llm-lokal'], ...rest];
+  // llm-lokal selalu terakhir dan sengaja tidak dikejar - lihat komentar atas.
+  return [...first, ADAPTERS_BY_ID['llm-lokal']];
 }
 
 async function ask(prompt, context) {

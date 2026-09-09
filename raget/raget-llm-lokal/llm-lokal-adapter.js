@@ -2,15 +2,19 @@
 // beda dari raget-llm/ lama (dihapus, lihat docs/ARSITEKTUR.md) - supaya
 // tidak rancu dengan mesin template/neural yang sudah pernah ada di sana.
 //
-// Ini STUB KONTRAK JUJUR, BUKAN percobaan integrasi WebGPU/WebLLM
-// sungguhan: sandbox pengembangan ini memblokir semua CDN yang dibutuhkan
-// (esm.run, cdn.jsdelivr.net, unpkg, huggingface.co - semua 403), dan
-// eksperimen terpisah gawean-app sudah membuktikan jalur ini beresiko
-// tinggi di hardware Android nyata (VK_ERROR_DEVICE_LOST, limit GPU buffer
-// cuma 512MB, model 360M pun bisa gagal). init() dan ask() di bawah
-// melempar error dengan jelas kalau dipanggil - TIDAK berpura-pura ada
-// implementasi. Lihat docs/ARSITEKTUR.md bagian "LLM Lokal" sebelum
-// membangun lapis ini sungguhan.
+// KEPUTUSAN PRODUK: menyematkan model pihak ketiga BUKAN arah yang
+// dikejar. Fokus pengembangan Rategoan adalah otak MILIK SENDIRI (Template
+// + Neural, lihat raget-template/ dan raget-neural/). Ini STUB KONTRAK
+// JUJUR, BUKAN percobaan integrasi WebGPU/WebLLM sungguhan: sandbox
+// pengembangan ini memblokir semua CDN yang dibutuhkan (esm.run,
+// cdn.jsdelivr.net, unpkg, huggingface.co - semua 403), dan eksperimen
+// terpisah gawean-app sudah membuktikan jalur ini beresiko tinggi di
+// hardware Android nyata (VK_ERROR_DEVICE_LOST, limit GPU buffer cuma
+// 512MB, model 360M pun bisa gagal). init() dan ask() di bawah melempar
+// error dengan jelas kalau dipanggil - TIDAK berpura-pura ada
+// implementasi. File ini dibiarkan sebagai kontrak kosong yang tidak
+// mengganggu (router selalu mencobanya terakhir), bukan pekerjaan yang
+// menunggu dikerjakan - lihat docs/ARSITEKTUR.md bagian "LLM Lokal".
 async function init() {
   throw new Error(
     'Raget LLM Lokal belum diimplementasikan - lihat docs/ARSITEKTUR.md bagian "LLM Lokal" sebelum membangun.'
