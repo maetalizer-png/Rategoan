@@ -1,0 +1,118 @@
+{
+  "generatedAt": "2026-09-09T12:52:23.419Z",
+  "mechanism": "raget-retrieval/ppmi-embedding.js (PPMI co-occurrence, window=4, dilatih dari SEMUA domain lokal, 3478 dokumen)",
+  "vocabWithPPMI": 9351,
+  "ppmiResultUniformPooling": {
+    "n": 656,
+    "hit@1": 74,
+    "hit@1_rate": 0.1128,
+    "hit@3": 161,
+    "hit@3_rate": 0.2454,
+    "mrr": 0.2008,
+    "misses_sample": [
+      {
+        "q": "Apa ibu kota Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Uzbekistan"
+      },
+      {
+        "q": "Mata uang apa yang dipakai Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Kuwait"
+      },
+      {
+        "q": "Apa nama resmi negara Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Afrika Selatan"
+      },
+      {
+        "q": "Apa ibu kota Ghana?",
+        "expect": "Ghana",
+        "reason": "top hasil: Uzbekistan"
+      },
+      {
+        "q": "Mata uang apa yang dipakai Ghana?",
+        "expect": "Ghana",
+        "reason": "top hasil: Kuwait"
+      }
+    ]
+  },
+  "ppmiResultIdfWeightedPooling": {
+    "n": 656,
+    "hit@1": 455,
+    "hit@1_rate": 0.6936,
+    "hit@3": 535,
+    "hit@3_rate": 0.8155,
+    "mrr": 0.7627,
+    "misses_sample": [
+      {
+        "q": "Mata uang apa yang dipakai Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Kuwait"
+      },
+      {
+        "q": "Apa nama resmi negara Eswatini?",
+        "expect": "Eswatini",
+        "reason": "top hasil: Afrika Selatan"
+      },
+      {
+        "q": "Apa nama resmi negara Lesotho?",
+        "expect": "Lesotho",
+        "reason": "top hasil: Afrika Selatan"
+      },
+      {
+        "q": "Mata uang apa yang dipakai Mozambik?",
+        "expect": "Mozambik",
+        "reason": "top hasil: Kuwait"
+      },
+      {
+        "q": "Apa ibu kota Kamerun?",
+        "expect": "Kamerun",
+        "reason": "top hasil: Uzbekistan"
+      }
+    ]
+  },
+  "bm25Baseline": {
+    "n": 656,
+    "hit@1_rate": 1,
+    "hit@3_rate": 1,
+    "mrr": 1,
+    "fallback_rate": 0
+  },
+  "randomEmbeddingBaseline": {
+    "n": 656,
+    "hit@1": 378,
+    "hit@1_rate": 0.5762,
+    "hit@3": 481,
+    "hit@3_rate": 0.7332,
+    "mrr": 0.6737,
+    "misses_sample": [
+      {
+        "q": "Apa ibu kota Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Tunisia"
+      },
+      {
+        "q": "Apa nama resmi negara Nigeria?",
+        "expect": "Nigeria",
+        "reason": "top hasil: Irak"
+      },
+      {
+        "q": "Apa nama resmi negara Namibia?",
+        "expect": "Namibia",
+        "reason": "top hasil: Irlandia"
+      },
+      {
+        "q": "Apa nama resmi negara Botswana?",
+        "expect": "Botswana",
+        "reason": "top hasil: Libya"
+      },
+      {
+        "q": "Apa nama resmi negara Zambia?",
+        "expect": "Zambia",
+        "reason": "top hasil: Bhutan"
+      }
+    ]
+  },
+  "verdict": "PPMI IDF-weighted KALAH dari BM25 tapi lebih baik dari embedding acak - sinyal distribusional ada tapi belum cukup kuat untuk gold query ini."
+}
