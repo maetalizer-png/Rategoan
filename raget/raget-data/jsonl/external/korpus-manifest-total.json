@@ -21,31 +21,16 @@
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
-        "asal": "korpus-dialog-daerah-pack-v1 + korpus-wiki-lokal-bersih-v1, batch baru 2026-09-02: wiki-jv-su-min-ace-ban, wikisource-jv-su-ban, indonesian-nlp/id_personachat (Grok, versi manifest 17); digabung lagi dengan \"penampung tersaring\" oleh Grok/Manus 2026-09-09 (naik dari 638.371 ke 639.391 dokumen)",
-        "totalDokumen": 639391,
-        "sizeByteGz": 129968502,
-        "sha256": "24e507409aa8b9125518beeaa642321879ecc601ed0643e6567c3c27552eb853",
-        "totalKataApprox": null,
-        "totalTokenBPEResmi": 157206944,
-        "diukurPada": "2026-09-09 (asset direfresh Grok/Manus ~13:06 UTC, token BPE dihitung ulang penuh Claude langsung setelahnya, SHA256 dicocokkan. Angka lama 151.487.572 token untuk 638.371 dokumen versi 2026-09-02 sudah USANG.",
-        "catatan": "PERHATIAN KUALITAS MASIH BERLAKU [dihitung ulang 2026-09-09 langsung dari field lang tiap dokumen, bukan lagi dari manifest Release]: 37,15% dokumen TANPA field lang sama sekali, 22,07% eksplisit id, 22,07% min (Minangkabau), sisanya (~18,7%) tersebar di 12 bahasa daerah lain (jv/su/ban/mad/ace/bjn/gor/bug/map-bms/tet/bbc/nia) masing-masing <=6,2%. Distribusi mirip ronde sebelumnya secara proporsi (banyak dokumen tanpa lang eksplisit) meski angka persis beda karena metode hitung beda (dulu dari manifest Release, sekarang dihitung langsung Claude dari isi file). PRD-RELEASE.md §1.1 mewajibkan setiap dokumen dialog punya lang eksplisit - rak ini BELUM patuh sepenuhnya.",
+        "asal": "k2-id-filter + dialog daerah + cahya/alpaca-id-cleaned; refresh 2026-09-10",
+        "totalDokumen": 684716,
+        "sizeByteGz": 135542872,
+        "sha256": "3a7e9da4e6d53521a80931a23aae7ca55ae7918cb1aca9b9b1ff4496e25638db",
+        "totalKataApprox": 77174127,
+        "totalTokenBPEResmi": 163982194,
+        "diukurPada": "2026-09-10; tokenizer resmi vocab 30368, max_len 128, full corpus tokenization",
+        "catatan": "K2 refreshed with 51,327 deduplicated Indonesian instruction-response examples (CC BY 4.0); SHA256 matches GitHub Release digest.",
         "komposisiBahasa": {
-          "(tanpa-lang)": 0.3715,
-          "id": 0.2207,
-          "min": 0.2207,
-          "jv": 0.0615,
-          "su": 0.0486,
-          "ban": 0.0306,
-          "mad": 0.0105,
-          "ace": 0.01,
-          "bjn": 0.0071,
-          "gor": 0.0051,
-          "bug": 0.0033,
-          "map-bms": 0.0026,
-          "map_bms": 0.0026,
-          "tet": 0.0023,
-          "bbc": 0.0015,
-          "nia": 0.0013
+          "id": 1.0
         }
       },
       {
@@ -63,8 +48,8 @@
         "catatan": "K3 refreshed with 498,311 deduplicated Indonesian newspaper articles (CC BY 4.0); 25,996 short documents removed; SHA256 matches GitHub Release digest."
       }
     ],
-    "totalDokumenKanonik": 3257872,
-    "totalTokenBPEResmiKanonik": 896552315
+    "totalDokumenKanonik": 3303197,
+    "totalTokenBPEResmiKanonik": 903327565
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -120,18 +105,18 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 896552315,
+    "totalTokenKanonikTerverifikasi": 903327565,
     "totalKataApproxStagingBelumDireview": 8137547049,
     "catatanPenting": "REKONSILIASI 2026-09-09 (kedua): Grok/Manus menggabungkan penampung tersaring (wiki + dialog-daerah + pelengkap) ke K1/K2/K3 pada 2026-09-09 (dokumen naik: K1 759.587->760.199, K2 638.371->639.391, K3 99.557->114.343). Claude mengunduh fresh tiap file gzip final dari Release, memverifikasi SHA256 terhadap digest asset DAN terhadap hash yang dikutip di body Release (cocok semua), mengekstrak tokenizer BPE resmi (vocab 30.368) dari checkpoint-100m.safetensors, lalu menghitung ulang totalTokenBPEResmi penuh per rak (bukan estimasi). totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 362.003.221 + 157.206.944 + 47.911.030 = 567.121.195, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk \"total token proyek saat ini\" HANYA SATU: 567.121.195. Field totalKataApprox per-rak SENGAJA dikosongkan (null) di ronde ini - belum dihitung ulang, BPE token count yang otoritatif per PRD-RELEASE.md §5b, bukan word-approx. Enam rilis data mentah BARU (~46GB, HuggingFace Indo4B/Indo4B-Plus/indonesian-corpus-2b-deepclean-indo4b/garuda/regulation-qa/LaMini/wikipedia-id/newspapers/dst) ditemukan di Release per audit 2026-09-09 - SEMUA belum diproses, belum masuk kanonik, lihat PRD/PRD-MANUS-DATA-MENTAH.md §4.2 untuk detail lengkap dan klasifikasi indikatif. Field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b.",
-    "tokenKanonikPerintahClaude": 896552315,
-    "kekuranganTokenKanonik": 103447685
+    "tokenKanonikPerintahClaude": 903327565,
+    "kekuranganTokenKanonik": 96672435
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": false,
-  "kekuranganTokenKanonik": 103447685,
+  "kekuranganTokenKanonik": 96672435,
   "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang.",
-  "tokenKanonikPerintahClaude": 896552315,
+  "tokenKanonikPerintahClaude": 903327565,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
