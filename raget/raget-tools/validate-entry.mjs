@@ -1,27 +1,50 @@
-// PRD-RAGET-TEMPLATE.md Fase 2.3 - asisten validasi entri data baru. Mengecek
-// entri raget-data/json/<domain>/*.json terhadap skema seragam
-// {id, kategori, wilayah, nama, tags, teks, meta} (docs/DATA-STRUCTURE.md),
-// DAN untuk domain sapaan/ khusus: membandingkan bucket smalltalk yang
+// PRD-RAGET-TEMPLATE.md Fase 2.3 + Fase 4.3 - asisten validasi entri data
+// baru. Fase 2.3 (2026-09-09): mengecek entri raget-data/json/sapaan/*.json
+// terhadap skema seragam {id, kategori, wilayah, nama, tags, teks, meta}
+// (docs/DATA-STRUCTURE.md), DAN membandingkan bucket smalltalk yang
 // SEHARUSNYA dipicu teksnya (lewat SMALLTALK_TRIGGERS/JENIS_TO_KEY - tabel
 // YANG SAMA PERSIS dipakai runtime llm-engine.js, diimpor langsung supaya
 // tidak dobel logika) dengan meta.key/meta.jenis yang tertulis di file -
-// inilah yang menutup gap nyata: preseden bug retag "Gaji belum" (entri soal
-// kerja/uang sempat tertulis meta.key:"tetangga") baru ketahuan lewat
-// spot-check manual, bukan otomatis. Alat ini TIDAK mengubah file apa pun -
-// cuma melaporkan, keputusan retag tetap manual.
+// menutup gap nyata: preseden bug retag "Gaji belum" (entri soal kerja/uang
+// sempat tertulis meta.key:"tetangga") baru ketahuan lewat spot-check
+// manual, bukan otomatis.
+//
+// Fase 4.3: skema seragam SEKARANG dicek di SEMUA 21 domain
+// raget-data/json/*/*.json (bukan cuma sapaan) - PRD Fase 2.3 baru menutup
+// satu domain, gap ini yang menutupnya untuk sisanya. SATU pengecualian
+// terdokumentasi: raget-data/json/pengetahuan/*.json PUNYA SKEMA BERBEDA
+// by design (docs/DATA-STRUCTURE.md §"raget-data/json/pengetahuan/") -
+// {q,a} / {subject,answer} / {title,text}, dipakai memoryIndex.search()
+// sebagai fallback TF-IDF, BUKAN skema {id,kategori,...} dataries. Domain
+// ini dapat validator TERPISAH yang lebih longgar (cuma cek ada teks
+// non-kosong), bukan dipaksa ke skema yang memang bukan untuknya.
+//
+// Alat ini TIDAK mengubah file apa pun - cuma melaporkan, keputusan
+// retag/perbaikan tetap manual.
 //
 // Cara pakai:
 //   node raget/raget-tools/validate-entry.mjs <file.json> [file2.json ...]
 //   node raget/raget-tools/validate-entry.mjs raget/raget-data/json/sapaan/**/*.json
+//   node raget/raget-tools/validate-entry.mjs --all-domains   (semua 21 domain dataries, exclude pengetahuan/)
 // Exit code: 0 kalau tidak ada ERROR skema (mismatch bucket cuma WARNING,
 // bukan exit-fail, karena deteksi berbasis regex tidak selalu presisi -
 // tetap butuh keputusan manusia).
 
 import { readFileSync } from 'fs';
 import { globSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import { llmEngine } from '../raget-template/llm-engine.js';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DATA_ROOT = join(__dirname, '../raget-data/json');
+
 const REQUIRED_FIELDS = ['id', 'kategori', 'wilayah', 'nama', 'tags', 'teks', 'meta'];
+const PENGETAHUAN_TEXT_FIELDS = ['text', 'answer', 'a'];
+
+function isPengetahuan(filePath) {
+  return filePath.includes('/pengetahuan/');
+}
 
 function validateSchema(entry, index, filePath) {
   const errors = [];
@@ -42,6 +65,20 @@ function validateSchema(entry, index, filePath) {
     errors.push(`${prefix}: "meta" harus object`);
   }
   return errors;
+}
+
+// docs/DATA-STRUCTURE.md: pengetahuan/ entri berbentuk {q,a} ATAU
+// {subject,answer} ATAU {title,text} - tiga bentuk sah, bukan satu skema
+// tetap. Validasi longgar: entri wajib punya salah satu field teks
+// (text/answer/a) berisi string non-kosong - itu satu-satunya jaminan
+// yang dipakai memoryIndex.search() (retrieval TF-IDF atas field itu).
+function validatePengetahuan(entry, index, filePath) {
+  const prefix = `${filePath}[${index}]`;
+  const hasText = PENGETAHUAN_TEXT_FIELDS.some((f) => typeof entry[f] === 'string' && entry[f].trim());
+  if (!hasText) {
+    return [`${prefix}: tidak ada field teks non-kosong (butuh salah satu: ${PENGETAHUAN_TEXT_FIELDS.join('/')})`];
+  }
+  return [];
 }
 
 // PENTING: `entry.teks` di domain sapaan adalah TEKS BALASAN Rategoan
@@ -79,12 +116,15 @@ function checkSapaanBucket(entry, index, filePath) {
 }
 
 function main() {
-  const patterns = process.argv.slice(2);
+  const args = process.argv.slice(2);
+  const allDomains = args.includes('--all-domains');
+  const patterns = allDomains ? [join(DATA_ROOT, '**/*.json')] : args;
   if (!patterns.length) {
-    console.error('Pakai: node raget/raget-tools/validate-entry.mjs <file.json> [...]');
+    console.error('Pakai: node raget/raget-tools/validate-entry.mjs <file.json> [...] | --all-domains');
     process.exit(1);
   }
-  const files = patterns.flatMap((p) => (p.includes('*') ? globSync(p) : [p]));
+  let files = patterns.flatMap((p) => (p.includes('*') ? globSync(p) : [p]));
+  if (allDomains) files = files.filter((f) => !isPengetahuan(f));
   if (!files.length) {
     console.error('Tidak ada file cocok dengan pola:', patterns.join(' '));
     process.exit(1);
@@ -109,8 +149,13 @@ function main() {
       return;
     }
     const isSapaan = filePath.includes('/sapaan/');
+    const pengetahuan = isPengetahuan(filePath);
     data.forEach((entry, i) => {
       totalEntries++;
+      if (pengetahuan) {
+        schemaErrors.push(...validatePengetahuan(entry, i, filePath));
+        return;
+      }
       schemaErrors.push(...validateSchema(entry, i, filePath));
       if (entry.id) {
         if (seenIds.has(entry.id)) dupeIds.push(`${filePath}[${i}]: id "${entry.id}" duplikat`);

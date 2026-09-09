@@ -1,8 +1,14 @@
-// Gerbang lint/build minimal (Fase A vNext) - dua lapis:
+// Gerbang lint/build minimal (Fase A vNext) - tiga lapis:
 //   1. node --check di SETIAP file .js/.mjs (syntax gate tercepat, 0 dependency,
 //      menangkap error yang lolos deteksi editor tapi gagal total di runtime).
 //   2. eslint . lewat eslint.config.mjs di root (menangkap variabel tak
 //      terdefinisi, import/export salah, dead code jelas - bukan gaya penulisan).
+//   3. validate-entry.mjs --all-domains (PRD-RAGET-TEMPLATE.md Fase 4.4) -
+//      skema data raget-data/json/*/*.json (id/kategori/wilayah/nama/tags/
+//      teks/meta) dicek tiap kali, bukan cuma lewat audit manual sesekali -
+//      menutup celah nyata: 8 bug skema (field wilayah hilang) baru ketemu
+//      lewat audit satu kali 2026-09-09, sudah bertahun-tahun tidak ketahuan
+//      karena tidak ada gerbang otomatis sebelum ini.
 //
 // Dipakai sebelum bench (lihat README.md / docs), bukan pengganti bench -
 // bench menguji ISI jawaban, lint/syntax-check menguji apakah kodenya
@@ -66,6 +72,18 @@ function runEslint() {
   return { errorCount, warningCount, results };
 }
 
+function runDataValidation() {
+  try {
+    const out = execFileSync(process.execPath, [path.join(__dirname, 'validate-entry.mjs'), '--all-domains'], {
+      cwd: ROOT,
+      stdio: 'pipe',
+    }).toString();
+    return { failed: false, out };
+  } catch (e) {
+    return { failed: true, out: e.stdout ? e.stdout.toString() : String(e) };
+  }
+}
+
 function main() {
   console.log('=== raget_lint_check: gerbang lint/build minimal ===\n');
 
@@ -99,7 +117,18 @@ function main() {
     }
   }
 
-  const failed = syntaxFailures.length > 0 || lint.errorCount > 0 || lint.errorCount === -1;
+  console.log('\nValidasi skema data (validate-entry.mjs --all-domains):');
+  const dataCheck = runDataValidation();
+  const summaryLine = (dataCheck.out.match(/File dicek:.*/) || [''])[0];
+  const resultLine = (dataCheck.out.match(/^HASIL:.*/m) || [''])[0];
+  console.log('  ' + summaryLine);
+  console.log('  ' + (resultLine || (dataCheck.failed ? 'GAGAL menjalankan validator.' : 'OK')));
+  if (dataCheck.failed) {
+    console.log('\n--- ERROR SKEMA DATA ---');
+    console.log(dataCheck.out.split('\n').filter((l) => l.startsWith('  ✗')).join('\n'));
+  }
+
+  const failed = syntaxFailures.length > 0 || lint.errorCount > 0 || lint.errorCount === -1 || dataCheck.failed;
   console.log('\n=== HASIL: ' + (failed ? 'GAGAL - perbaiki sebelum lanjut ke bench' : 'LOLOS') + ' ===');
   process.exit(failed ? 1 : 0);
 }
