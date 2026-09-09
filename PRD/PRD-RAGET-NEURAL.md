@@ -157,19 +157,23 @@ bukan dengan mengeksekusinya.
 |---|---|---|
 | A.1 ✅ SELESAI | Audit token count korpus nyata (`raget-tools/audit-corpus-tokens.mjs`, laporan di `raget-devlog/neural/corpus-token-audit.md`) | Hasil: korpus 543,2 juta token, cuma 5,43% dari kebutuhan 500M (18,4x kurang) dan 2,72% dari kebutuhan 1B (36,8x kurang) — lihat tabel §2. **Kesimpulan tegas: TIDAK BOLEH melatih preset ≥500M sampai korpus tumbuh signifikan** — mengulang training di atas data yang sama seperti massive200m sekarang cuma akan menghasilkan model yang lebih undertrained lagi, bukan lebih pintar |
 | A.1b ✅ SELESAI (analisis) | Growth plan korpus konkret menuju 10 miliar token (target 500M) | **Dicek ulang lewat GitHub API langsung (bukan asumsi) — koreksi jujur atas draf sebelumnya di baris ini**: lihat detail penuh di §2b di bawah. Ringkas: (a) Wikipedia ID **BUKAN** peluang belum-tergarap — sudah di-crawl SAMPAI HABIS dua kali (jilid1 seluruh dump 1.874.320 halaman + harvest kedua `panen-wikipedia-id` yang cuma menemukan 13,4% dokumen unik baru dari 561.195 kandidat, 86,6% sisanya duplikat/terlalu pendek) — sumur ini sudah nyaris kering. (b) Dua Release "penampung" ditemukan (`korpus-sejarah-indonesia-bersih` 564.158 byte gzip, `korpus-mentah-id` ~7,99 MB gzip gabungan 3 file) TAPI keduanya **belum digabung/belum di-sort** dan skalanya cuma ~0,05-0,1% dari kekurangan 9,46 miliar token untuk target 500M — bukan solusi, cuma tambahan kecil. (c) **Kesimpulan tegas**: satu-satunya jalur realistis menutup gap 18,4x adalah Common Crawl/OSCAR porsi Indonesia dalam skala besar DENGAN filter kualitas jauh lebih ketat dari preseden gagal `panen-madlad400-id` (18,7% spam) — pola filter yang TERBUKTI berhasil di proyek ini adalah dedup fingerprint ala `panen-wikipedia-id` (buang duplikat + dokumen terlalu pendek), harus direplikasi + ditambah filter bahasa/perplexity untuk Common Crawl yang jauh lebih kotor dari Wikipedia. Korpus buku/berita berlisensi terbuka (c) masih valid sebagai sumber tapi belum ada kandidat konkret teridentifikasi. **A.2-A.4 tetap correctly diblokir** — growth plan ini mengidentifikasi JALUR-nya, belum mengeksekusi crawl Common Crawl skala besar (di luar cakupan realistis satu sesi) |
-| A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat. **Belum dikerjakan** — menunggu A.1b (percuma optimasi training pipeline di atas data yang belum cukup) |
+| A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat. **Belum dikerjakan** — menunggu korpus BENAR-BENAR tumbuh (A.1b sudah SELESAI sebagai analisis/jalur, tapi eksekusi crawl-nya sendiri belum terjadi) |
 | A.3 | Evaluasi arsitektur training: mixed precision, gradient checkpointing | Perlu di jalur PyTorch supaya training preset besar muat di memori GPU Colab/cloud yang terbatas. **Belum dikerjakan** |
 | A.4 | Verifikasi ulang kuantisasi int8 pada model lebih dalam/lebar | Checkpoint format (`llm-quantization.js`) dipertahankan, tapi error kuantisasi HARUS diukur ulang — model lebih dalam bisa lebih sensitif terhadap presisi rendah. **Belum dikerjakan** |
 
-**Kenapa A.2-A.4 belum dikerjakan sekarang**: A.1 baru saja membuktikan
-korpus adalah penghambat dominan (18,4x kurang untuk lompatan
-TERDEKAT). Mengerjakan pipeline training PyTorch/mixed-precision/
-kuantisasi sebelum ada rencana nyata menutup gap data 18,4x itu
-membuang usaha di infrastruktur untuk data yang belum ada — urutan yang
-benar adalah A.1b dulu, baru A.2-A.4. Ini juga alasan kenapa PRD ini
-TIDAK mengklaim training run baru sudah dilakukan — training preset
-≥500M di atas data hari ini akan mengulang pola undertraining
-massive200m, bukan kemajuan.
+**Kenapa A.2-A.4 belum dikerjakan sekarang**: A.1 membuktikan korpus
+adalah penghambat dominan (18,4x kurang untuk lompatan TERDEKAT), dan
+A.1b (analisis, sudah selesai — lihat §2b) mengidentifikasi JALUR yang
+benar (Common Crawl/OSCAR skala besar dengan filter ketat) tapi BELUM
+mengeksekusi crawl itu — korpus hari ini masih 543,2 juta token, belum
+tumbuh sama sekali dari angka yang diaudit A.1. Mengerjakan pipeline
+training PyTorch/mixed-precision/kuantisasi sebelum korpus benar-benar
+tumbuh membuang usaha di infrastruktur untuk data yang belum ada —
+urutan yang benar adalah eksekusi growth plan A.1b dulu (di luar cakupan
+realistis satu sesi kerja, butuh infrastruktur crawl+filter terpisah),
+baru A.2-A.4. Ini juga alasan kenapa PRD ini TIDAK mengklaim training
+run baru sudah dilakukan — training preset ≥500M di atas data hari ini
+akan mengulang pola undertraining massive200m, bukan kemajuan.
 
 Gate keluar Fase A: preset baru (500M–1B) punya held-out PPL yang
 BENAR-BENAR lebih baik dari massive200m (bukan cuma "lebih besar
