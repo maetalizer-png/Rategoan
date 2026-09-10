@@ -29,11 +29,8 @@ eksplisit sebelum dieksekusi (dicatat jelas di tiap fase).
 membesarkan arsitektur transformer JS/PyTorch **milik RATEGOAN
 sendiri** (`raget-neural/`, ditulis dari nol — attention, tokenizer,
 trainer, semua sendiri). TIDAK ADA bagian dari PRD ini yang berarti
-mengunduh/menyematkan model bahasa pihak ketiga (Llama/Qwen/dst) —
-jalur itu sudah dievaluasi dan diputuskan TIDAK dikejar (bukti kegagalan
-hardware nyata di eksperimen terpisah `gawean-app`: `VK_ERROR_DEVICE_LOST`,
-limit GPU buffer 512MB, model 360M pihak ketiga pun gagal — lihat
-`docs/ARSITEKTUR.md`).
+mengunduh/menyematkan model bahasa pihak ketiga — RATEGOAN hanya
+punya SATU otak lokal (RAGET), dibangun sendiri dari nol.
 
 ## 1. Kondisi nyata hari ini
 
@@ -106,10 +103,9 @@ dengan output projection.
    cuma mencatatnya sebagai syarat yang harus disetujui secara eksplisit
    sebelum FASE B dimulai.
 3. **Inference di browser**: WebGPU/WASM murni JS untuk model >1B
-   kemungkinan besar TIDAK bisa jalan wajar di perangkat rata-rata.
-   Preseden nyata dari eksperimen terpisah `gawean-app`: model pihak
-   ketiga 360M pun gagal keras di Android nyata karena limit GPU buffer
-   512MB. Maka strategi INFERENCE untuk model besar harus dipikirkan
+   kemungkinan besar TIDAK bisa jalan wajar di perangkat rata-rata —
+   keterbatasan buffer GPU umum di perangkat Android kelas menengah
+   ke bawah. Maka strategi INFERENCE untuk model besar harus dipikirkan
    TERPISAH dari strategi TRAINING — lihat FASE B/C.
 
 ## 2b. Growth plan korpus — bukti lengkap (Fase A.1b, dicek 2026-09-09)

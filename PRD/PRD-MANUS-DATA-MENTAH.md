@@ -133,12 +133,47 @@ referensi cepat: K1/K3 100% id; **K2 punya masalah kualitas nyata**
 mewajibkan dialog punya `lang` eksplisit per dokumen, K2 **belum
 patuh**.
 
-### 4.2 Data mentah BARU — 6 rilis, ~46GB total, semua BELUM diproses
+### 4.2 Data mentah BARU — 6 rilis, ~46GB total
 
-Enam tag baru muncul 2026-09-09 (15:29–17:37 UTC), semuanya dari
-dataset HuggingFace publik, semuanya **eksplisit dinyatakan di body
-Release-nya sendiri sebagai BELUM dedupe/BELUM difilter untuk
-training produksi** — jangan dianggap siap pakai:
+**Aturan yang tidak berubah, dan TIDAK PERNAH berubah (PRD-RELEASE.md
+§2): data mentah yang sudah dibersihkan TIDAK PERNAH jadi rak/tag
+baru.** Hanya ada 3 rak permanen — `korpus-ensiklopedia-bersih` (K1),
+`korpus-dialog-daerah-bersih` (K2), `korpus-pelengkap-bersih` (K3).
+Setiap dataset mentah, sekecil apa pun, setelah lolos §2 langkah 1-6
+(klasifikasi → bersih → dedupe → filter bahasa → gabung → hitung ulang
+token BPE) **ditimpakan ke salah satu dari 3 rak itu** — bukan dibuat
+tag `korpus-<nama-dataset>-bersih` sendiri. Nama dataset sumber (Indo4B,
+Alpaca-ID, dst) hanya muncul di kolom `asal`/`catatan` manifest sebagai
+jejak provenance, bukan sebagai rak baru.
+
+**Status per 2026-09-10 (dicek dari `korpus-manifest-total.json` +
+histori commit git, bukan tebakan)** — dari 6 rilis mentah yang muncul
+2026-09-09, **batch #6 sudah 100% tuntas digabung**, sisanya masih
+tahap berikut:
+
+| # | Tag rilis mentah | Status | Masuk rak mana |
+|---|---|---|---|
+| 6 | `id-knowledge-science-language-batch-2026-09` | ✅ TUNTAS, ke-6 sub-datasetnya sudah masuk kanonik | `wikipedia-id`→**K1** (dedupe silang sudah dijalankan, 101.951 duplikat exact dibuang, tercatat di `kanonik.entries[0].catatan`); `alpaca-id-cleaned`→**K2**; `id_recipe`+`indonesian-proper-nouns`+`id_newspapers_2018`+`data-science-en-id` (baris Inggris dibuang dulu)→**K3** |
+| 5 | `id-specialized-qa-legal-instruction-2026-09` | 🔶 SEBAGIAN — cuma 1 dari 3 sub-dataset | `Indonesian_Regulation_QA`→**K2** (sudah masuk, tercatat `kanonik.entries[1].asal`). `garuda-indonesian` (tanpa lisensi eksplisit) dan `LaMini-Instruction-Indonesian` (hasil terjemahan mesin, ada error terdokumentasi) **SENGAJA belum digabung** — bukan lupa, tapi menunggu review lisensi/kualitas sebelum layak masuk rak mana pun |
+| 1 | `indo4b-multi-billion-token-corpus-2026-09` | ⏳ BELUM — masih raw/staging | Kandidat **K1** (narasi umum, bukan dialog/pelengkap) TAPI wajib lolos dedupe+filter kualitas ketat dulu (§2 langkah 2-4) — jangan langsung timpa K1 sebelum itu, preseden `panen-madlad400-id` (sumber CommonCrawl serupa) gagal 18,7% spam |
+| 2 | `indo4b-plus-multi-billion-token-corpus-2026-09` | ⏳ BELUM — masih raw/staging | Sama seperti #1: kandidat **K1**, TAPI Manus sendiri sudah memperingatkan overlap dengan Indo4B (#1) di body Release — WAJIB dedupe silang ANTAR kedua dataset ini dulu sebelum keduanya digabung ke K1, supaya tidak menghitung dokumen yang sama dua kali |
+| 3 | `id-training-data-manifest-2026-09` | ⏳ Stub saja | Tidak ada payload nyata untuk digabung (cuma manifest+5 baris sample) — payload sungguhannya ada di baris #4 di bawah. Rilis ini boleh di-retire/ditandai referensi setelah #4 selesai, bukan diproses sendiri |
+| 4 | `id-corpus-1p8b-split-2026-09` | ⏳ BELUM — masih raw/staging | Kandidat **K1** (payload nyata dari sumber yang sama dengan #3) — sama seperti #1/#2, WAJIB dedupe silang dengan Indo4B/Indo4B-Plus dulu (kemungkinan besar tumpang tindih, sama-sama korpus web Indonesia skala miliaran token) sebelum digabung |
+
+**Ringkasan untuk dirigen**: ~9,6GB dari ~46GB (batch #6 + sebagian
+batch #5) sudah tuntas masuk K1/K2/K3. Sisa ~37GB (Indo4B +
+Indo4B-Plus + id-corpus-1p8b-split) adalah SATU keluarga data
+(korpus web Indonesia skala besar, kemungkinan besar saling tumpang
+tindih satu sama lain) yang **kandidat kuat masuk K1** tapi belum
+boleh digabung sebelum dedupe silang ANTAR KETIGANYA dulu (bukan
+cuma dedupe internal masing-masing) — ini langkah besar berikutnya
+untuk menutup gap 500M yang diidentifikasi `PRD-RAGET-NEURAL.md` §2b.
+
+Rincian per tag rilis mentah (sumber HuggingFace-nya, ukuran, lisensi
+klaim, dan catatan wajib langsung dari body Release-nya sendiri — semua
+6 tag ini eksplisit menyatakan dirinya BELUM dedupe/BELUM difilter saat
+pertama kali muncul 2026-09-09; tabel status di atas sudah memperbarui
+mana yang sekarang SUDAH tuntas diproses):
 
 | Tag | Sumber (HuggingFace) | Ukuran | Lisensi (klaim sumber) | Catatan wajib dari body Release |
 |---|---|---:|---|---|
@@ -149,31 +184,21 @@ training produksi** — jangan dianggap siap pakai:
 | `id-specialized-qa-legal-instruction-2026-09` | garuda-indonesian + Indonesian_Regulation_QA + LaMini-Instruction-Indonesian | ~4,0 GB (33 file parquet) | campuran (2 tanpa lisensi jelas, 1 Apache-2.0, 1 MIT) | garuda: 3.812.494 baris QA/percakapan (TANPA lisensi eksplisit — cek provenance sebelum pakai komersial). LaMini: ~2,6 juta instruksi hasil TERJEMAHAN MESIN, "documented translation errors, quality-filter before training". Body sendiri: "not claimed to be clean corpus tokens" |
 | `id-knowledge-science-language-batch-2026-09` | wikipedia-id + id_newspapers_2018 + alpaca-id-cleaned + id_recipe + indonesian-proper-nouns + data-science-en-id (6 dataset sekaligus) | ~3,8 GB (34 file) | campuran per dataset (lihat tabel di body Release) | wikipedia-id **TUMPANG TINDIH dengan K1** (idwiki sudah 2x digali — lihat `PRD-RAGET-NEURAL.md` §2b, WAJIB dedupe silang sebelum masuk K1, bukan ditambah begitu saja) |
 
-**Tidak ada satu pun dari 6 rilis ini yang punya `manifest.json` skema
-wajib PRD-RELEASE.md §6** — belum patuh PRD, ini yang harus dibereskan
-sebelum salah satu kandidat ini boleh masuk kategori kanonik.
+**Tidak ada satu pun dari 6 tag RAW/staging ini yang punya
+`manifest.json` skema wajib PRD-RELEASE.md §6** — itu memang bukan
+syaratnya; staging tag hanya wadah sementara sebelum digabung. Skema
+manifest wajib berlaku di rak K1/K2/K3 tujuan (sudah dipenuhi untuk
+bagian yang sudah digabung — lihat tabel status di atas).
 
-**Klasifikasi awal (indikatif, WAJIB dicek ulang isinya sebelum
-diproses — lihat §2 langkah 1, jangan asumsikan dari nama saja):**
-- Kemungkinan `ensiklopedia`: `wikipedia-id` (dalam batch #6) — tapi
-  cek dulu overlap dengan K1 sebelum diklaim tambahan bersih.
-- Kemungkinan `dialog`: `garuda-indonesian`, `alpaca-id-cleaned`,
-  `LaMini-Instruction` (gaya instruksi/percakapan) — TAPI PRD-RELEASE.md
-  §1 mendefinisikan `dialog` sebagai korpus PRETRAINING gaya Raget,
-  bukan data SFT/instruction-tuning generik hasil terjemahan mesin;
-  body Release `id-specialized-qa-legal-instruction` sendiri menyarankan
-  data ini masuk "SFT atau domain-adaptation mixture" — **kemungkinan
-  besar TIDAK cocok masuk 5 kategori §1 apa adanya, tanya dirigen dulu**
-  sebelum dipaksakan ke kategori `dialog`.
-- Kemungkinan `pelengkap`: `id_recipe`, `indonesian-proper-nouns`,
-  `Indonesian_Regulation_QA` (volume kecil, konten spesifik/pelengkap).
-- Perlu keputusan eksplisit dulu (bukan otomatis diklasifikasi): 
-  `Indo4B`/`Indo4B-Plus`/`indonesian-corpus-2b-deepclean-indo4b` (~37GB
-  gabungan, OSCAR/CommonCrawl-derived) — inilah kandidat nyata untuk
-  menutup gap 18,4x yang diidentifikasi `PRD-RAGET-NEURAL.md` §2b, TAPI
-  ketiganya sendiri mengaku belum dedupe dan preseden `panen-madlad400-id`
-  (juga OSCAR-derived) gagal 18,7% spam — **filter kualitas ketat WAJIB
-  sebelum diklaim `ensiklopedia`**, jangan langsung publish ke tag K1.
+**Sisa klasifikasi terbuka** (untuk 2 sub-dataset dari batch #5 yang
+masih SENGAJA belum digabung — lihat tabel status di atas): `garuda-indonesian`
+dan `LaMini-Instruction-Indonesian` berisi data gaya instruksi/SFT, BUKAN
+korpus pretraining gaya Raget — PRD-RELEASE.md §1 mendefinisikan `dialog`
+sebagai korpus PRETRAINING gaya Raget, bukan data SFT/instruction-tuning
+generik hasil terjemahan mesin. Body Release `id-specialized-qa-legal-instruction`
+sendiri menyarankan data ini masuk "SFT atau domain-adaptation mixture"
+— **kemungkinan besar TIDAK cocok masuk 5 kategori §1 apa adanya, tanya
+dirigen dulu** sebelum dipaksakan ke kategori `dialog` mana pun.
 
 **Catatan identitas**: API GitHub tidak menunjukkan akun terpisah untuk
 Manus — semua upload (lama dan baru) tercatat atas nama akun pemilik
