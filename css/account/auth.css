@@ -20,10 +20,21 @@
 }
 
 .gate-title {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  font-family: var(--rg-font-display);
+  font-variation-settings: 'opsz' 40;
+  font-size: 32px;
+  font-weight: 560;
+  letter-spacing: -0.2px;
   color: var(--rg-text);
+}
+
+.gate-subtitle {
+  max-width: 300px;
+  margin: 6px auto 0;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--rg-muted);
 }
 
 .gate-card {
@@ -90,12 +101,13 @@
 
 .auth-submit {
   width: 100%;
-  background: var(--rg-accent);
-  color: var(--rg-accent-ink);
+  background: var(--rg-brand);
+  color: var(--rg-brand-ink);
   border-radius: var(--rg-pill);
   padding: 13px 0;
   font-size: 14px;
   font-weight: 700;
+  box-shadow: var(--rg-brand-glow);
   transition: transform 0.15s, opacity 0.15s;
 }
 

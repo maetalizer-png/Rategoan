@@ -10,6 +10,7 @@ const TEMPLATE = `
       <div class="gate">
         <div class="gate-brand">
           <h1 class="gate-title">Rategoan</h1>
+          <p class="gate-subtitle">Cuma nama tampilan di perangkat ini — tersimpan lokal, tidak dikirim ke server mana pun.</p>
         </div>
         <div id="login-content" class="gate-card">
           <div class="login-tabs">

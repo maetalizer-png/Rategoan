@@ -84,13 +84,30 @@ function seededShuffle(list, seedText) {
   return arr;
 }
 
+function toClause(sentence) {
+  const s = sentence.replace(/\.$/, '');
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+const FUSE_CONNECTORS = [', dan ', ', sementara '];
+
+function fusePair(first, second, seed) {
+  if (!second) return first;
+  const conn = FUSE_CONNECTORS[Math.abs(seed) % FUSE_CONNECTORS.length];
+  return first.replace(/\.$/, '') + conn + toClause(second) + '.';
+}
+
 function composeAdaptive(entity, seedText) {
   const sentences = SENTENCE_BUILDERS.map((b) => b.build(entity)).filter(Boolean);
   if (!sentences.length) return entity.trivia || entity.nama + '.';
   const seed = hashText(seedText || entity.nama);
   const count = 2 + (seed % Math.min(3, Math.max(1, sentences.length - 1)));
   const chosen = seededShuffle(sentences, seedText || entity.nama).slice(0, Math.min(count, sentences.length));
-  return entity.nama + '. ' + chosen.join(' ');
+  const grouped = [];
+  for (let i = 0; i < chosen.length; i += 2) {
+    grouped.push(fusePair(chosen[i], chosen[i + 1], seed + i));
+  }
+  return entity.nama + '. ' + grouped.join(' ');
 }
 
 function bestEffort(entity, requestedKey) {
@@ -98,7 +115,9 @@ function bestEffort(entity, requestedKey) {
     .map((b) => b.build(entity))
     .filter(Boolean);
   if (!known.length) return null;
-  return 'Untuk data itu saya belum punya catatan yang pasti, tapi yang saya tahu tentang ' + entity.nama + ': ' + known.slice(0, 2).join(' ');
+  const picked = known.slice(0, 2);
+  const fused = fusePair(picked[0], picked[1], hashText(entity.nama));
+  return 'Untuk data itu saya belum punya catatan yang pasti, tapi yang saya tahu tentang ' + entity.nama + ': ' + fused;
 }
 
 const ABOUT_EN_RE = /^(?:tell\s+me\s+about|what\s+do\s+you\s+know\s+about)\s+(.+?)\??$/i;

@@ -12,7 +12,16 @@
   --rg-danger: #ff5c5c;
   --rg-pill: 999px;
   --rg-radius: 14px;
-  --rg-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --rg-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 20px -6px rgba(0, 0, 0, 0.45), 0 24px 48px -20px rgba(0, 0, 0, 0.5);
+
+  --rg-brand: #e3a458;
+  --rg-brand-strong: #f0b876;
+  --rg-brand-ink: #201002;
+  --rg-brand-ring: rgba(227, 164, 88, 0.28);
+  --rg-brand-glow: 0 6px 20px -6px rgba(227, 164, 88, 0.45);
+
+  --rg-font-display: 'Fraunces Var', ui-serif, Georgia, 'Times New Roman', serif;
+  --rg-font-body: 'Plus Jakarta Sans Var', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 :root[data-theme='light'] {
@@ -27,5 +36,11 @@
   --rg-text: #0a0f14;
   --rg-muted: #5b6673;
   --rg-danger: #d33131;
-  --rg-shadow: 0 6px 28px rgba(0, 0, 0, 0.1);
+  --rg-shadow: 0 1px 2px rgba(20, 20, 15, 0.06), 0 8px 20px -8px rgba(20, 20, 15, 0.12), 0 24px 48px -24px rgba(20, 20, 15, 0.16);
+
+  --rg-brand: #b5791f;
+  --rg-brand-strong: #96620f;
+  --rg-brand-ink: #fffaf0;
+  --rg-brand-ring: rgba(181, 121, 31, 0.22);
+  --rg-brand-glow: 0 6px 20px -8px rgba(181, 121, 31, 0.35);
 }

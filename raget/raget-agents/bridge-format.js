@@ -144,13 +144,14 @@ function summarizeItem(item, richness) {
   const count = richness === 'singkat' ? 1 : 3;
   const summary = sentences.slice(0, count).join(' ');
   if (richness === 'singkat') return summary;
-  const heading = '### ' + (item.metadata.name || '');
   const meta = item.metadata || {};
+  const mentionsCapital = /ibu\s*kota/i.test(summary);
+  const mentionsPopulation = /populasi/i.test(summary);
   const bullets = [];
-  if (meta.capital) bullets.push('- Ibukota: ' + meta.capital);
-  if (meta.population != null) bullets.push('- Populasi: ' + formatValue('population', meta.population));
-  if (!bullets.length) return heading + '\n' + summary;
-  return heading + '\n' + summary + '\n' + bullets.slice(0, 2).join('\n');
+  if (meta.capital && !mentionsCapital) bullets.push('- Ibukota: ' + meta.capital);
+  if (meta.population != null && !mentionsPopulation) bullets.push('- Populasi: ' + formatValue('population', meta.population));
+  if (!bullets.length) return summary;
+  return summary + '\n' + bullets.slice(0, 2).join('\n');
 }
 
 export const bridgeFormat = Object.freeze({

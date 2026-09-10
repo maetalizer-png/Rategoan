@@ -269,7 +269,8 @@ function maybeFollowUp(reply, pool) {
   if (reply.length > 60) return reply;
   const h = hashText(reply);
   if (h % 100 >= 30) return reply;
-  return reply + ' ' + pool[h % pool.length];
+  const base = /[.!?]$/.test(reply.trim()) ? reply.trim() : reply.trim() + '.';
+  return base + '\n\n' + pool[h % pool.length];
 }
 
 function timeOfDay(date) {
