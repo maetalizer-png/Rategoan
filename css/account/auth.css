@@ -116,6 +116,13 @@
   opacity: 0.85;
 }
 
+.auth-submit-plain {
+  background: var(--rg-surface-2);
+  color: var(--rg-text);
+  box-shadow: none;
+  border: 1px solid var(--rg-line);
+}
+
 .google-signin-row {
   display: flex;
   flex-direction: column;

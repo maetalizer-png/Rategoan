@@ -4,7 +4,7 @@
   background: rgba(0, 0, 0, 0.55);
   opacity: 0;
   pointer-events: none;
-  transition: 0.25s;
+  transition: opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   z-index: 40;
 }
 
@@ -22,7 +22,8 @@
   background: var(--rg-surface);
   border-right: 1px solid var(--rg-line);
   transform: translateX(-105%);
-  transition: transform 0.25s ease;
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform;
   z-index: 50;
   padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
   overflow-y: auto;
