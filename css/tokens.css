@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --rg-bg: #05080c;
   --rg-surface: #0b111c;
   --rg-surface-2: #0d1420;
@@ -22,9 +23,12 @@
 
   --rg-font-display: 'Fraunces Var', ui-serif, Georgia, 'Times New Roman', serif;
   --rg-font-body: 'Plus Jakarta Sans Var', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --rg-bg-glass: rgba(5, 8, 12, 0.72);
 }
 
 :root[data-theme='light'] {
+  color-scheme: light;
   --rg-bg: #ffffff;
   --rg-surface: #ffffff;
   --rg-surface-2: #eceff3;
@@ -43,4 +47,6 @@
   --rg-brand-ink: #fffaf0;
   --rg-brand-ring: rgba(181, 121, 31, 0.22);
   --rg-brand-glow: 0 6px 20px -8px rgba(181, 121, 31, 0.35);
+
+  --rg-bg-glass: rgba(255, 255, 255, 0.72);
 }

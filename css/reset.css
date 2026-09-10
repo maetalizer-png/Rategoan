@@ -38,6 +38,8 @@ button {
   font-family: inherit;
   border: none;
   background: none;
+  appearance: none;
+  -webkit-appearance: none;
   -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;

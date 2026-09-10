@@ -9,21 +9,11 @@
   align-items: center;
   gap: 12px;
   padding: 0 14px;
-  background: var(--rg-bg);
-  backdrop-filter: blur(8px);
+  background: var(--rg-bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   position: relative;
   z-index: 30;
-}
-
-#topbar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--rg-accent), transparent);
-  opacity: 0.5;
 }
 
 #app {
