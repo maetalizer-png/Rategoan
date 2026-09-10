@@ -4,7 +4,7 @@
     "kategori": "sekolah",
     "wilayah": null,
     "nama": "PR menumpuk",
-    "tags": ["pr", "tugas", "deadline"],
+    "tags": ["pr", "tugas", "deadline", "sekolah"],
     "teks": "Urutkan PR dari yang dikumpul paling dekat. Kerjakan satu tugas sampai selesai langkah pertamanya, baru pindah.",
     "meta": {
       "jenis": "sekolah",

@@ -7,7 +7,8 @@
     "tags": [
       "izin",
       "sakit",
-      "absen"
+      "absen",
+      "sekolah"
     ],
     "teks": "Izin sekolah lewat wali kelas atau aplikasi sekolah. Tulis nama, kelas, alasan, dan tanggal. Kalau sakit lebih dari dua hari, lampirkan keterangan.",
     "meta": {
@@ -26,7 +27,8 @@
     "tags": [
       "sakit",
       "uks",
-      "izin"
+      "izin",
+      "sekolah"
     ],
     "teks": "Lapor guru piket atau ke UKS. Jangan pulang sendiri tanpa izin. Kalau pusing atau demam, istirahat dulu, baru dijemput.",
     "meta": {
@@ -44,7 +46,8 @@
     "tags": [
       "izin",
       "lomba",
-      "osis"
+      "osis",
+      "sekolah"
     ],
     "teks": "Minta surat izin kegiatan ke pembina. Serahkan ke wali kelas sebelum hari H, bukan pagi-pagi di gerbang.",
     "meta": {

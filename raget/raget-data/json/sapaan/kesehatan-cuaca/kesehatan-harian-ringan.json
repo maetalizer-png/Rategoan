@@ -28,6 +28,7 @@
     "teks": "Capek setelah kerja biasa. Tidur cukup lebih berguna daripada begadang sambil scroll. Kalau capek bertahan berminggu dan tidak membaik, periksa.",
     "meta": {
       "jenis": "kesehatan",
+      "key": "capek",
       "variants": [
         "Jeda 5 menit tiap satu jam duduk lebih realistis daripada janji olahraga besok."
       ]

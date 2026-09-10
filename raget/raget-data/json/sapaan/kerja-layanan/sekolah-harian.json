@@ -37,7 +37,8 @@
     "wilayah": null,
     "nama": "Izin tidak masuk",
     "tags": [
-      "izin"
+      "izin",
+      "sekolah"
     ],
     "teks": "Kabari wali kelas, alasan singkat, susul surat.",
     "meta": {
@@ -69,7 +70,8 @@
     "wilayah": null,
     "nama": "Kerja kelompok",
     "tags": [
-      "tugas"
+      "tugas",
+      "sekolah"
     ],
     "teks": "Bagi tugas tertulis. Yang diam saja diingatkan sekali, lalu dicatat.",
     "meta": {

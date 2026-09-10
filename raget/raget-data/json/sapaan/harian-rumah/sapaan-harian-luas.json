@@ -606,7 +606,8 @@
     "nama": "Kebiasaan jemur-baju",
     "tags": [
       "kebiasaan",
-      "rumah"
+      "rumah",
+      "tetangga"
     ],
     "teks": "Kalau menjemur, pastikan tidak mengganggu tetangga.",
     "meta": {
@@ -631,7 +632,8 @@
       "variants": [
         "Siram tanaman pagi atau sore, hindari terik ekstrem."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   },
   {
@@ -648,7 +650,8 @@
       "variants": [
         "Jangan lupa jadwal makan hewan peliharaan."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   },
   {
@@ -886,7 +889,8 @@
     "nama": "Kebiasaan catat-tugas",
     "tags": [
       "kebiasaan",
-      "kerja"
+      "kerja",
+      "tugas"
     ],
     "teks": "Tulis tugas biar tidak hanya di kepala.",
     "meta": {
@@ -911,7 +915,8 @@
       "variants": [
         "Pilih maksimal tiga prioritas per hari."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "kerja"
     }
   },
   {
@@ -928,7 +933,8 @@
       "variants": [
         "Matikan notifikasi yang tidak penting saat fokus."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "kerja"
     }
   },
   {
@@ -963,7 +969,8 @@
       "variants": [
         "Follow-up singkat lebih baik daripada menunggu lama."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "kerja"
     }
   },
   {
@@ -1034,7 +1041,8 @@
       "variants": [
         "Cabut charger yang tidak dipakai."
       ],
-      "jenis": "kebiasaan"
+      "jenis": "kebiasaan",
+      "key": "rumah"
     }
   }
 ]

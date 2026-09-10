@@ -81,7 +81,8 @@
       "variants": [
         "Matikan kompor kalau meninggalkan dapur."
       ],
-      "jenis": "harian"
+      "jenis": "harian",
+      "key": "rumah"
     }
   },
   {
