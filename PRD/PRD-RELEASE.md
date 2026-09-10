@@ -42,11 +42,46 @@ SHA256 berapa yang harus cocok). Tidak ada tumpang tindih karena
 wilayah kerjanya memang terpisah oleh batas teknis (bukan kesepakatan
 yang bisa dilanggar).
 
+## 0.1. GERBANG WAJIB sebelum publish tag korpus apa pun — baca ini dulu
+
+**Preseden nyata (2026-09-10)**: batch data hukum baru (69.551 dokumen
+dari JDIH, 24,7 juta token) hampir dipublikasikan sebagai tag baru
+`"K4 candidate/review"` sebelum ada yang menyadari PRD ini sudah
+melarangnya sejak awal. Bukan karena aturannya tidak ada — karena
+aturannya belum dicek dulu sebelum jalan. Supaya tidak terulang, ini
+checklist WAJIB dijalankan tiap kali ada korpus baru yang mau
+dipublish, oleh siapa pun (Claude/Grok/Manus/dirigen):
+
+1. **Cek nama tag yang mau dipakai** terhadap tabel di §2. Kalau bukan
+   PERSIS salah satu dari `korpus-ensiklopedia-bersih` /
+   `korpus-dialog-daerah-bersih` / `korpus-pelengkap-bersih` /
+   `checkpoint-<ukuran>` — **BERHENTI. Jangan publish.**
+2. **Tidak ada rak/tag ke-4 dst.** `K4`, `K5`, `korpus-hukum-bersih`,
+   `korpus-<topik-apa-pun>-bersih`, atau nama sejenis **DILARANG**,
+   termasuk berlabel "candidate"/"review"/"staging" — status "belum
+   final" tidak mengizinkan nama tag baru, cukup taruh di tag
+   sementara generik (lihat §5 langkah 1-2) tanpa pretensi jadi rak
+   permanen baru.
+3. **Data yang isinya genuinely tidak cocok 5 kategori §1** (mis. teks
+   hukum/regulasi format panjang, bukan QA) → klasifikasikan ke
+   kategori TERDEKAT (biasanya `pelengkap` untuk konten khusus/niche,
+   atau `dialog` kalau sudah berbentuk QA seperti preseden
+   `Indonesian_Regulation_QA` yang masuk K2) — **atau kalau benar-benar
+   tidak ada yang cocok, tanya dirigen dulu sebelum publish apa pun**,
+   bukan bikin kategori sendiri lalu tanya belakangan.
+4. **Isu lisensi/provenance yang belum jelas** (seperti kasus JDIH di
+   atas — hak redistribusi belum clearance) BUKAN alasan untuk membuat
+   rak sementara sendiri. Itu alasan untuk TIDAK dipublish ke rak
+   permanen manapun dulu sampai clearance selesai — tetap di tag
+   staging biasa, dicatat statusnya di `PRD-MANUS-DATA-MENTAH.md`.
+
 ## 1. Kategori (taksonomi tertutup — hanya 5)
 
 Setiap data baru **wajib** masuk salah satu dari 5 kategori ini. Kalau
 benar-benar tidak cocok satu pun, **berhenti dan tanya dirigen** sebelum
-membuat kategori ke-6.
+membuat kategori ke-6. **Ini termasuk kategori yang "kedengarannya"
+masuk akal seperti data hukum, berita, atau tema khusus lain — punya
+tema sendiri BUKAN alasan otomatis untuk kategori/rak baru, lihat §0.1.**
 
 | Kategori | Isi | Peran dalam mix training |
 |---|---|---|

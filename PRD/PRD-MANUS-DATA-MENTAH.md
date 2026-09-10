@@ -25,7 +25,15 @@ Claude pakai untuk audit token.
 1. KLASIFIKASI    Data ini masuk kategori mana? (ensiklopedia/dialog/
                    daerah/pelengkap — PRD-RELEASE.md §1). Kalau tidak
                    cocok satu pun, BERHENTI, jangan buat kategori ke-6
-                   sendiri — tanya dulu.
+                   sendiri — tanya dulu. WAJIB baca PRD-RELEASE.md §0.1
+                   dulu (gerbang checklist) SEBELUM publish tag apa pun
+                   — preseden nyata: data hukum/regulasi (JDIH) hampir
+                   jadi tag "K4" sendiri, padahal seharusnya masuk
+                   `pelengkap` (teks panjang/niche) atau `dialog` kalau
+                   sudah format QA (seperti Indonesian_Regulation_QA
+                   yang sudah masuk K2), ATAU ditahan di tag staging
+                   biasa kalau lisensinya belum clear — BUKAN dibikinkan
+                   rak baru dengan nama apa pun termasuk "candidate".
 2. BERSIHKAN       Extract teks bersih dari format mentah (XML/JSON/
                    parquet/HTML apa pun sumbernya) → JSONL
                    {"text":...,"source":...,"license":...,"lang":...}
