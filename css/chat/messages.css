@@ -126,9 +126,10 @@
 }
 
 .msg-thumb {
-  width: 140px;
-  max-width: 64%;
-  border-radius: 10px;
+  width: min(72vw, 320px);
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 14px;
   border: 1px solid var(--rg-line);
   display: block;
   margin-bottom: 6px;
