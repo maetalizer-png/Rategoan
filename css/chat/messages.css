@@ -58,6 +58,19 @@
   animation: pulse 1s infinite;
 }
 
+.msg.typing.searching {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.msg.typing.searching .ic {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
 .msg-attach {
   display: flex;
   align-items: center;

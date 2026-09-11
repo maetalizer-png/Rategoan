@@ -46,11 +46,11 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       .trim();
     const result = await webSearch.search(q);
     if (!result.ok) return result.message;
-    const sourceLabel = result.lang === 'id' ? 'Wikipedia Bahasa Indonesia' : 'Wikipedia (Inggris)';
+    const projectName = result.source === 'wiktionary' ? 'Wiktionary' : 'Wikipedia';
+    const sourceLabel = projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
     return (
-      '[Dicari langsung dari internet - ' + sourceLabel + ', bukan dari basis data lokal Raget]\n\n' +
-      result.title + '\n\n' + result.extract +
-      (result.url ? '\n\nSumber: ' + result.url : '')
+      result.extract +
+      (result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '')
     );
   }
   const stripTrailingFiller = (s) => s.replace(/\s*\b(apa\s*(saja|sih)?|gimana|bagaimana|dong|ya|sih)\s*\??\s*$/i, '').trim();

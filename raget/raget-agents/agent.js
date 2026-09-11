@@ -215,6 +215,21 @@ async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
 
+  // Dipicu eksplisit lewat tombol "Pencarian Web" di UI (composer.js kirim
+  // prefix "googling ") - langsung ke tool websearch TANPA lewat heuristik
+  // lain (teaching/factoid/tokoh/dst) dulu. Kalau tidak, kalimat seperti
+  // "googling apa itu fisika" bisa salah kena detectTeaching's "X itu Y"
+  // regex duluan (guard-nya cuma cek AWAL kalimat "apa/siapa/dst", dan di
+  // sini kalimat diawali "googling" jadi lolos guard itu) sebelum sempat
+  // ketemu detectTool('websearch') yang letaknya jauh di bawah.
+  if (routerIntent.detectTool(text) === 'websearch') {
+    const websearchReply = await runTool('websearch', text, messages);
+    if (websearchReply) {
+      ragetDb.addNote(text, websearchReply, null, 'websearch');
+      return postProcess(websearchReply);
+    }
+  }
+
   const emergencyReply = contextEngine.tryEmergency(text);
   if (emergencyReply) {
     ragetDb.addNote(text, emergencyReply, null, 'context_emergency');

@@ -12,7 +12,7 @@ async function fetchSummaryByTitle(title, lang) {
   const summary = await fetchJson(summaryUrl);
   if (!summary || !summary.extract) return null;
   const page = summary.content_urls && summary.content_urls.desktop && summary.content_urls.desktop.page;
-  return { title: summary.title, extract: summary.extract, url: page || null, lang };
+  return { title: summary.title, extract: summary.extract, url: page || null, lang, source: 'wikipedia' };
 }
 
 // Pencarian teks penuh (action=query&list=search) dipakai sebagai jalur utama
@@ -40,6 +40,40 @@ async function searchWikipedia(query, lang) {
   return await fetchSummaryByTitle(title, lang);
 }
 
+function stripHtml(s) {
+  return String(s || '').replace(/<[^>]+>/g, '').trim();
+}
+
+// Wiktionary itu kamus kata per kata (bukan mesin cari teks penuh) - cuma
+// masuk akal untuk query satu-dua kata. Dipakai sebagai fallback TERAKHIR
+// kalau Wikipedia (ID maupun EN) sama sekali tidak nemu apa-apa, supaya
+// pertanyaan definisi kata pendek masih punya peluang terjawab dari sumber
+// lain di luar Wikipedia - bukan cuma satu domain terus.
+async function searchWiktionary(query, lang) {
+  const term = query.trim();
+  if (!term || term.split(/\s+/).length > 3) return null;
+  const url = 'https://' + lang + '.wiktionary.org/api/rest_v1/page/definition/' + encodeURIComponent(term);
+  let data;
+  try {
+    data = await fetchJson(url);
+  } catch (e) {
+    return null;
+  }
+  const langKey = data && Object.keys(data)[0];
+  const entry = langKey && data[langKey] && data[langKey][0];
+  const defs = entry && entry.definitions;
+  if (!defs || !defs.length) return null;
+  const list = defs.slice(0, 3).map((d, i) => (i + 1) + '. ' + stripHtml(d.definition)).filter((s) => s.length > 2);
+  if (!list.length) return null;
+  return {
+    title: term,
+    extract: (entry.partOfSpeech ? entry.partOfSpeech + '\n' : '') + list.join('\n'),
+    url: 'https://' + lang + '.wiktionary.org/wiki/' + encodeURIComponent(term),
+    lang,
+    source: 'wiktionary',
+  };
+}
+
 async function search(query) {
   const q = String(query || '').trim();
   if (!q) return { ok: false, message: 'Mau cari apa di internet?' };
@@ -47,7 +81,9 @@ async function search(query) {
   try {
     let result = await searchWikipedia(q, 'id');
     if (!result) result = await searchWikipedia(q, 'en');
-    if (!result) return { ok: false, message: 'Sudah dicari di internet tapi tidak ketemu hasil yang relevan untuk "' + q + '".' };
+    if (!result) result = await searchWiktionary(q, 'id');
+    if (!result) result = await searchWiktionary(q, 'en');
+    if (!result) return { ok: false, message: 'Sudah dicari di internet (Wikipedia & Wiktionary) tapi tidak ketemu hasil yang relevan untuk "' + q + '".' };
     return { ok: true, ...result };
   } catch (e) {
     return { ok: false, message: NETWORK_FAIL_MESSAGE };

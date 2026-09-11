@@ -300,11 +300,16 @@ export const chat = {
       scrolldown.ping();
     }
   },
-  async ask(prompt) {
+  async ask(prompt, opts) {
     const s = this.current();
+    const searching = !!(opts && opts.searching);
     const typing = document.createElement('div');
-    typing.className = 'msg ai typing';
-    typing.textContent = '…';
+    typing.className = 'msg ai typing' + (searching ? ' searching' : '');
+    if (searching) {
+      typing.innerHTML = ic('globe') + '<span>Mencari di internet…</span>';
+    } else {
+      typing.textContent = '…';
+    }
     $('messages').appendChild(typing);
     scrollBottom();
     const reply = ai ? await ai.generate(s.messages, prompt) : null;

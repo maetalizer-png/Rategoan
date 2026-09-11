@@ -44,9 +44,10 @@ export const composer = {
     history.render();
     chat.renderMessages();
     haptics.tap(10);
-    const routedText = this.websearchActive ? 'googling ' + text : text;
-    if (this.websearchActive) this.setWebsearch(false);
-    const reply = await chat.ask(routedText);
+    const isWebsearch = this.websearchActive;
+    const routedText = isWebsearch ? 'googling ' + text : text;
+    if (isWebsearch) this.setWebsearch(false);
+    const reply = await chat.ask(routedText, { searching: isWebsearch });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
