@@ -193,11 +193,15 @@ async function tryMultiIntent(text, messages) {
   return replyA + '\n\n---\n\n' + replyB;
 }
 
+const FACTUAL_QUERY_RE =
+  /\b(apa|siapa|kapan|berapa|dimana|di\s*mana|kenapa|mengapa|bagaimana|gimana|jelaskan|ceritakan|sebutkan|rekomendasi|kurs|ibukota|ibu\s*kota|resep)\b|\bcara\s+(bikin|buat|membuat)\b|\?\s*$/i;
+
 async function respond(messages, prompt) {
   try {
     const text = String(prompt || '').trim();
     const opener = text ? routerIntent.moodOpener(text) : '';
-    const continuityOpener = text && !opener ? contextEngine.tryEmotionalContinuityOpener(text) : '';
+    const isFactualQuery = text && FACTUAL_QUERY_RE.test(text);
+    const continuityOpener = text && !opener && !isFactualQuery ? contextEngine.tryEmotionalContinuityOpener(text) : '';
     if (text) contextEngine.noteTurnMood(text);
     const reply = await respondCore(messages, prompt);
     const finalOpener = opener || continuityOpener || '';
