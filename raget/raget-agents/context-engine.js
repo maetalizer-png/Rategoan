@@ -109,8 +109,12 @@ function tryTimeGreeting(text) {
   return timeGreeting();
 }
 
+// (?<!dana\s) mengecualikan "dana darurat" (istilah finansial biasa, bukan
+// situasi darurat aktif) - satu-satunya frasa umum yang terbukti salah
+// picu; semua pemakaian "darurat" lain tetap dianggap darurat seperti biasa
+// supaya deteksi situasi darurat sungguhan tidak melemah.
 const EMERGENCY_RE =
-  /\bdarurat\b|\bini\s+darurat\b|\bsesak\s+napas\b|\bpendarahan\b|\b(pingsan|tidak\s+sadarkan\s+diri)\b|\bkecelakaan\b.*\btolong\b|\btolong\b.*\bkecelakaan\b|\bditangkap\s+polisi\b|\bbutuh\s+pengacara\s+sekarang\b|\bkebakaran\b.*\btolong\b|\btolong\b.*\bkebakaran\b/i;
+  /(?<!dana\s)\bdarurat\b|\bini\s+darurat\b|\bsesak\s+napas\b|\bpendarahan\b|\b(pingsan|tidak\s+sadarkan\s+diri)\b|\bkecelakaan\b.*\btolong\b|\btolong\b.*\bkecelakaan\b|\bditangkap\s+polisi\b|\bbutuh\s+pengacara\s+sekarang\b|\bkebakaran\b.*\btolong\b|\btolong\b.*\bkebakaran\b/i;
 
 function tryEmergency(text) {
   const t = text.toLowerCase();

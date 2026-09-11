@@ -81,7 +81,11 @@ async function findTopic(topic) {
     let score = 0;
     if (title === t) score = 10;
     else if (hasWordSubstring(title, t) || hasWordSubstring(t, title)) score = 6;
-    else score = scoreText(title + ' ' + (item.text || ''), words);
+    else {
+      const overlapScore = scoreText(title + ' ' + (item.text || ''), words);
+      const minRequired = Math.min(2, words.length);
+      score = overlapScore >= minRequired ? overlapScore : 0;
+    }
     if (score > bestScore) {
       bestScore = score;
       best = item;
