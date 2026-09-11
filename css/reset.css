@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background 0.28s ease, border-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
 }
 
 html {
@@ -30,7 +30,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-size: 15px;
   line-height: 1.5;
-  transition: background 0.25s, color 0.25s;
+  transition: background 0.28s ease, color 0.28s ease;
 }
 
 button {
