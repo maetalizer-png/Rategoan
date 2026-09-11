@@ -34,8 +34,11 @@ function detectCuacaLive(text) {
 // Berita LIVE lewat RSS resmi media - trigger butuh kata "terkini/terbaru/
 // hari ini" atau perintah eksplisit "cari(kan) berita", supaya obrolan
 // biasa yang kebetulan mengandung kata "berita" (mis. "berita bohong itu
-// menyebalkan") tidak salah kepicu.
-const BERITA_LIVE_RE = /\b(berita|kabar)\b.*\b(terkini|terbaru)\b|\b(berita|kabar)\s+hari\s+ini\b|^(cari(kan)?)\s+(berita|kabar)\b/i;
+// menyebalkan") tidak salah kepicu. Kata pemicu "berita/kabar" HARUS di
+// awal kalimat (bukan cuma "muncul di suatu tempat") - kalau tidak, kalimat
+// seperti "googling berita terkini" atau "aplikasi berita terkini apa yang
+// bagus" bisa salah kepicu jadi tool RSS ini padahal maksudnya lain.
+const BERITA_LIVE_RE = /^(berita|kabar)\b.*\b(terkini|terbaru)\b|^(berita|kabar)\s+hari\s+ini\b|^(cari(kan)?)\s+(berita|kabar)\b/i;
 
 function detectBeritaTopic(text) {
   if (!BERITA_LIVE_RE.test(text)) return null;
@@ -121,9 +124,14 @@ function detectTool(prompt) {
   if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
+  // websearch dicek DULUAN sebelum cuaca_live/berita_live - trigger "googling "
+  // datang dari toggle Pencarian Web yang eksplisit dipilih user, jadi harus
+  // selalu menang walaupun isi query-nya kebetulan mengandung kata "cuaca"
+  // atau "berita" (mis. "googling berita terkini" harus tetap ke websearch,
+  // bukan diam-diam dialihkan ke tool RSS berita_live).
+  if (/\b(cari|carikan|search)\b.*\binternet\b|^googling\s+/.test(t)) return 'websearch';
   if (detectCuacaLive(t)) return 'cuaca_live';
   if (detectBeritaTopic(t) !== null) return 'berita_live';
-  if (/\b(cari|carikan|search)\b.*\binternet\b|^googling\s+/.test(t)) return 'websearch';
   if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
   if (/^lupakan\b/.test(t)) return 'lupakan';
