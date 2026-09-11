@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-08-23T05:04:41.179Z",
-  "domainsCovered": 21,
+  "generatedAt": "2026-09-11T03:52:46.609Z",
+  "domainsCovered": 22,
   "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity), threshold 0.3, retrieval per-domain (bukan lintas domain)",
   "goldQueryTemplate": "\"apa itu <nama>\" - nama = field wajib skema unified, ground truth = entry itu sendiri",
   "overall": {
-    "n": 2112,
-    "hit@1_rate": 0.8911,
-    "hit@3_rate": 0.9223,
-    "mrr": 0.9076,
-    "fallback_rate": 0.0526
+    "n": 2778,
+    "hit@1_rate": 0.9053,
+    "hit@3_rate": 0.9813,
+    "mrr": 0.9426,
+    "fallback_rate": 0.004
   },
   "perDomain": {
     "alam": {
       "n": 26,
-      "hit@1_rate": 0.6538,
-      "hit@3_rate": 0.6538,
-      "mrr": 0.6538,
-      "fallback_rate": 0.3462
-    },
-    "bahasa": {
-      "n": 130,
-      "hit@1_rate": 0.9462,
-      "hit@3_rate": 0.9692,
-      "mrr": 0.9583,
-      "fallback_rate": 0.0077
-    },
-    "ekonomi": {
-      "n": 15,
-      "hit@1_rate": 0.3333,
-      "hit@3_rate": 0.3333,
-      "mrr": 0.3333,
-      "fallback_rate": 0.6667
-    },
-    "etika": {
-      "n": 122,
-      "hit@1_rate": 0.8279,
-      "hit@3_rate": 0.8934,
-      "mrr": 0.8593,
-      "fallback_rate": 0.0984
-    },
-    "hari-internasional": {
-      "n": 158,
       "hit@1_rate": 1,
       "hit@3_rate": 1,
       "mrr": 1,
       "fallback_rate": 0
     },
+    "bahasa": {
+      "n": 130,
+      "hit@1_rate": 0.9615,
+      "hit@3_rate": 0.9846,
+      "mrr": 0.9737,
+      "fallback_rate": 0
+    },
+    "ekonomi": {
+      "n": 18,
+      "hit@1_rate": 0.7222,
+      "hit@3_rate": 0.8333,
+      "mrr": 0.7778,
+      "fallback_rate": 0.1667
+    },
+    "etika": {
+      "n": 125,
+      "hit@1_rate": 0.896,
+      "hit@3_rate": 0.952,
+      "mrr": 0.9213,
+      "fallback_rate": 0.008
+    },
+    "hari-internasional": {
+      "n": 158,
+      "hit@1_rate": 0.981,
+      "hit@3_rate": 1,
+      "mrr": 0.9905,
+      "fallback_rate": 0
+    },
     "kota": {
       "n": 142,
-      "hit@1_rate": 0.9296,
-      "hit@3_rate": 0.9296,
-      "mrr": 0.9296,
-      "fallback_rate": 0.0352
+      "hit@1_rate": 0.9577,
+      "hit@3_rate": 0.993,
+      "mrr": 0.9744,
+      "fallback_rate": 0
     },
     "kuliner": {
       "n": 143,
@@ -60,36 +60,22 @@
       "mrr": 1,
       "fallback_rate": 0
     },
-    "lingo": {
-      "n": 158,
-      "hit@1_rate": 0.6709,
-      "hit@3_rate": 0.8418,
-      "mrr": 0.7639,
-      "fallback_rate": 0
-    },
     "makanan": {
       "n": 42,
-      "hit@1_rate": 0.881,
-      "hit@3_rate": 0.881,
-      "mrr": 0.881,
-      "fallback_rate": 0.119
-    },
-    "marplace": {
-      "n": 378,
-      "hit@1_rate": 0.9048,
-      "hit@3_rate": 0.955,
-      "mrr": 0.9316,
-      "fallback_rate": 0.0053
+      "hit@1_rate": 1,
+      "hit@3_rate": 1,
+      "mrr": 1,
+      "fallback_rate": 0
     },
     "minuman": {
       "n": 110,
-      "hit@1_rate": 0.8091,
-      "hit@3_rate": 0.8545,
-      "mrr": 0.8318,
-      "fallback_rate": 0.1455
+      "hit@1_rate": 0.9455,
+      "hit@3_rate": 0.9909,
+      "mrr": 0.9667,
+      "fallback_rate": 0.0091
     },
     "negara": {
-      "n": 163,
+      "n": 164,
       "hit@1_rate": 1,
       "hit@3_rate": 1,
       "mrr": 1,
@@ -97,62 +83,76 @@
     },
     "olahraga": {
       "n": 28,
-      "hit@1_rate": 0.75,
-      "hit@3_rate": 0.75,
-      "mrr": 0.75,
-      "fallback_rate": 0.25
-    },
-    "paluang": {
-      "n": 27,
-      "hit@1_rate": 0.5185,
-      "hit@3_rate": 0.5185,
-      "mrr": 0.5185,
-      "fallback_rate": 0.4074
-    },
-    "penemuan": {
-      "n": 16,
-      "hit@1_rate": 0.625,
-      "hit@3_rate": 0.625,
-      "mrr": 0.625,
-      "fallback_rate": 0.375
-    },
-    "sains": {
-      "n": 45,
-      "hit@1_rate": 0.7111,
-      "hit@3_rate": 0.7556,
-      "mrr": 0.7333,
-      "fallback_rate": 0.2222
-    },
-    "sapaan": {
-      "n": 11,
-      "hit@1_rate": 0.2727,
-      "hit@3_rate": 0.2727,
-      "mrr": 0.2727,
-      "fallback_rate": 0.6364
-    },
-    "sejarah": {
-      "n": 49,
-      "hit@1_rate": 0.898,
-      "hit@3_rate": 0.9388,
-      "mrr": 0.9184,
-      "fallback_rate": 0.0612
-    },
-    "seni-budaya": {
-      "n": 26,
-      "hit@1_rate": 0.7308,
-      "hit@3_rate": 0.7308,
-      "mrr": 0.7308,
-      "fallback_rate": 0.2692
-    },
-    "tokoh": {
-      "n": 236,
       "hit@1_rate": 1,
       "hit@3_rate": 1,
       "mrr": 1,
       "fallback_rate": 0
     },
+    "peluang": {
+      "n": 27,
+      "hit@1_rate": 0.8519,
+      "hit@3_rate": 1,
+      "mrr": 0.9198,
+      "fallback_rate": 0
+    },
+    "penemuan": {
+      "n": 58,
+      "hit@1_rate": 0.9655,
+      "hit@3_rate": 1,
+      "mrr": 0.9828,
+      "fallback_rate": 0
+    },
+    "pengetahuan": {
+      "n": 5,
+      "hit@1_rate": 1,
+      "hit@3_rate": 1,
+      "mrr": 1,
+      "fallback_rate": 0
+    },
+    "platform": {
+      "n": 378,
+      "hit@1_rate": 0.8942,
+      "hit@3_rate": 0.9709,
+      "mrr": 0.934,
+      "fallback_rate": 0.0026
+    },
+    "sains": {
+      "n": 63,
+      "hit@1_rate": 0.7302,
+      "hit@3_rate": 0.9683,
+      "mrr": 0.8475,
+      "fallback_rate": 0
+    },
+    "sapaan": {
+      "n": 565,
+      "hit@1_rate": 0.9221,
+      "hit@3_rate": 0.9611,
+      "mrr": 0.9415,
+      "fallback_rate": 0.0088
+    },
+    "sejarah": {
+      "n": 59,
+      "hit@1_rate": 0.8305,
+      "hit@3_rate": 0.9661,
+      "mrr": 0.8969,
+      "fallback_rate": 0
+    },
+    "seni-budaya": {
+      "n": 66,
+      "hit@1_rate": 0.9848,
+      "hit@3_rate": 1,
+      "mrr": 0.9924,
+      "fallback_rate": 0
+    },
+    "tokoh": {
+      "n": 344,
+      "hit@1_rate": 0.689,
+      "hit@3_rate": 0.9942,
+      "mrr": 0.8371,
+      "fallback_rate": 0
+    },
     "wisata": {
-      "n": 87,
+      "n": 127,
       "hit@1_rate": 1,
       "hit@3_rate": 1,
       "mrr": 1,
@@ -160,353 +160,87 @@
     }
   },
   "misses_sample": {
-    "alam": [
-      {
-        "q": "apa itu Singa",
-        "expect": "Singa",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Baobab",
-        "expect": "Baobab",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Zebra",
-        "expect": "Zebra",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Orangutan",
-        "expect": "Orangutan",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Sakura",
-        "expect": "Sakura",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
     "bahasa": [
       {
         "q": "apa itu Inggris (AS)",
         "expect": "Inggris (AS)",
         "reason": "top hasil: Inggris"
-      },
-      {
-        "q": "apa itu Mandarin",
-        "expect": "Mandarin",
-        "reason": "top hasil: Hokkien Taiwan"
-      },
-      {
-        "q": "apa itu Romansh",
-        "expect": "Romansh",
-        "reason": "fallback (di bawah threshold)"
       }
     ],
     "ekonomi": [
       {
-        "q": "apa itu PDB",
-        "expect": "PDB",
+        "q": "apa itu Catat pengeluaran",
+        "expect": "Catat pengeluaran",
         "reason": "fallback (di bawah threshold)"
       },
       {
-        "q": "apa itu Inflasi",
-        "expect": "Inflasi",
+        "q": "apa itu Pinjam teman",
+        "expect": "Pinjam teman",
         "reason": "fallback (di bawah threshold)"
       },
       {
-        "q": "apa itu Tingkat Pengangguran",
-        "expect": "Tingkat Pengangguran",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Nilai Tukar",
-        "expect": "Nilai Tukar",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Emas",
-        "expect": "Emas",
+        "q": "apa itu Promo palsu",
+        "expect": "Promo palsu",
         "reason": "fallback (di bawah threshold)"
       }
     ],
     "etika": [
-      {
-        "q": "apa itu Sapaan AS",
-        "expect": "Sapaan AS",
-        "reason": "fallback (di bawah threshold)"
-      },
       {
         "q": "apa itu Tip AS",
         "expect": "Tip AS",
         "reason": "top hasil: Tip Korea"
       },
       {
-        "q": "apa itu Tabu Pertanyaan Pribadi AS",
-        "expect": "Tabu Pertanyaan Pribadi AS",
+        "q": "apa itu Antre",
+        "expect": "Antre",
         "reason": "fallback (di bawah threshold)"
       },
       {
-        "q": "apa itu Tabu Tu-Vous Prancis",
-        "expect": "Tabu Tu-Vous Prancis",
-        "reason": "fallback (di bawah threshold)"
+        "q": "apa itu Suara di loket",
+        "expect": "Suara di loket",
+        "reason": "top hasil: Petugas kasar"
       },
       {
-        "q": "apa itu Tabu Keterlambatan Jerman",
-        "expect": "Tabu Keterlambatan Jerman",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "kota": [
-      {
-        "q": "apa itu Indonesia",
-        "expect": "Indonesia",
-        "reason": "top hasil: Surabaya"
+        "q": "apa itu Petugas kasar",
+        "expect": "Petugas kasar",
+        "reason": "top hasil: Tabu Menunjuk Kenya"
       },
       {
-        "q": "apa itu Thailand",
-        "expect": "Thailand",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Vietnam",
-        "expect": "Vietnam",
-        "reason": "top hasil: Ho Chi Minh City"
-      },
-      {
-        "q": "apa itu Filipina",
-        "expect": "Filipina",
-        "reason": "top hasil: Cebu"
-      },
-      {
-        "q": "apa itu Myanmar",
-        "expect": "Myanmar",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "lingo": [
-      {
-        "q": "apa itu Bahasa Urdu",
-        "expect": "Bahasa Urdu",
-        "reason": "top hasil: Bahasa Urdu"
-      },
-      {
-        "q": "apa itu Bahasa Kazakh",
-        "expect": "Bahasa Kazakh",
-        "reason": "top hasil: Bahasa Kyrgyz"
-      },
-      {
-        "q": "apa itu Bahasa Rusia",
-        "expect": "Bahasa Rusia",
-        "reason": "top hasil: Bahasa Rusia"
-      },
-      {
-        "q": "apa itu Bahasa Rusia",
-        "expect": "Bahasa Rusia",
-        "reason": "top hasil: Bahasa Rusia"
-      },
-      {
-        "q": "apa itu Bahasa Rusia",
-        "expect": "Bahasa Rusia",
-        "reason": "top hasil: Bahasa Rusia"
-      }
-    ],
-    "makanan": [
-      {
-        "q": "apa itu Tagine",
-        "expect": "Tagine",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Rendang",
-        "expect": "Rendang",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Sushi",
-        "expect": "Sushi",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Croissant",
-        "expect": "Croissant",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Hangi",
-        "expect": "Hangi",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "marplace": [
-      {
-        "q": "apa itu Amazon",
-        "expect": "Amazon",
-        "reason": "top hasil: Takealot"
-      },
-      {
-        "q": "apa itu eBay",
-        "expect": "eBay",
-        "reason": "top hasil: Gmarket"
-      },
-      {
-        "q": "apa itu JD.com",
-        "expect": "JD.com",
-        "reason": "top hasil: Bayt.com"
-      },
-      {
-        "q": "apa itu Coupang",
-        "expect": "Coupang",
-        "reason": "top hasil: 11st"
-      },
-      {
-        "q": "apa itu Flipkart",
-        "expect": "Flipkart",
-        "reason": "top hasil: Snapdeal"
+        "q": "apa itu Sapaan UEA",
+        "expect": "Sapaan UEA",
+        "reason": "top hasil: Sapaan Jerman"
       }
     ],
     "minuman": [
       {
-        "q": "apa itu Buna",
-        "expect": "Buna",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Amarula",
-        "expect": "Amarula",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Caipirinha",
-        "expect": "Caipirinha",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Matcha",
-        "expect": "Matcha",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Sherry",
-        "expect": "Sherry",
+        "q": "apa itu L&P",
+        "expect": "L&P",
         "reason": "fallback (di bawah threshold)"
       }
     ],
-    "olahraga": [
+    "platform": [
       {
-        "q": "apa itu NBA",
-        "expect": "NBA",
-        "reason": "fallback (di bawah threshold)"
+        "q": "apa itu Amazon",
+        "expect": "Amazon",
+        "reason": "top hasil: Cdiscount"
       },
       {
-        "q": "apa itu MotoGP",
-        "expect": "MotoGP",
-        "reason": "fallback (di bawah threshold)"
+        "q": "apa itu JD.com",
+        "expect": "JD.com",
+        "reason": "top hasil: Suning"
       },
       {
-        "q": "apa itu Tinju",
-        "expect": "Tinju",
-        "reason": "fallback (di bawah threshold)"
+        "q": "apa itu Indeed",
+        "expect": "Indeed",
+        "reason": "top hasil: Indeed NL"
       },
       {
-        "q": "apa itu Golf",
-        "expect": "Golf",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Maraton",
-        "expect": "Maraton",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "paluang": [
-      {
-        "q": "apa itu Cybersecurity",
-        "expect": "Cybersecurity",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Indonesia",
-        "expect": "Indonesia",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu E-commerce & Retail Digital",
-        "expect": "E-commerce & Retail Digital",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Energi Terbarukan & ESG",
-        "expect": "Energi Terbarukan & ESG",
-        "reason": "top hasil: Ekonomi Hijau & ESG"
-      },
-      {
-        "q": "apa itu Pendidikan & Edutech",
-        "expect": "Pendidikan & Edutech",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "penemuan": [
-      {
-        "q": "apa itu Penisilin",
-        "expect": "Penisilin",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Sinar-X",
-        "expect": "Sinar-X",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Insulin",
-        "expect": "Insulin",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Anestesi",
-        "expect": "Anestesi",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Radioaktivitas",
-        "expect": "Radioaktivitas",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "sains": [
-      {
-        "q": "apa itu Fotosintesis",
-        "expect": "Fotosintesis",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Evolusi",
-        "expect": "Evolusi",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Ekosistem",
-        "expect": "Ekosistem",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Virus",
-        "expect": "Virus",
-        "reason": "top hasil: Sistem Imun"
-      },
-      {
-        "q": "apa itu Metamorfosis",
-        "expect": "Metamorfosis",
+        "q": "apa itu 99.co SG",
+        "expect": "99.co SG",
         "reason": "fallback (di bawah threshold)"
       }
     ],
     "sapaan": [
-      {
-        "q": "apa itu Sapaan waktu: siang",
-        "expect": "Sapaan waktu: siang",
-        "reason": "fallback (di bawah threshold)"
-      },
       {
         "q": "apa itu Sapaan umum",
         "expect": "Sapaan umum",
@@ -520,56 +254,24 @@
       {
         "q": "apa itu Smalltalk: kabar",
         "expect": "Smalltalk: kabar",
-        "reason": "fallback (di bawah threshold)"
+        "reason": "top hasil: Greeting (tanya-kabar): Apa kabar?"
       },
       {
         "q": "apa itu Smalltalk: terima_kasih",
         "expect": "Smalltalk: terima_kasih",
-        "reason": "top hasil: Smalltalk: kabar"
+        "reason": "top hasil: Greeting (sapa): Halo, terima kasih sudah mampir."
+      },
+      {
+        "q": "apa itu Smalltalk: kemampuan",
+        "expect": "Smalltalk: kemampuan",
+        "reason": "top hasil: Greeting (ucapan): Selamat naik jabatan, buktikan terus kem"
       }
     ],
     "sejarah": [
       {
-        "q": "apa itu Berdirinya PBB",
-        "expect": "Berdirinya PBB",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Kedatangan VOC",
-        "expect": "Kedatangan VOC",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Runtuhnya Tembok Berlin",
-        "expect": "Runtuhnya Tembok Berlin",
-        "reason": "fallback (di bawah threshold)"
-      }
-    ],
-    "seni-budaya": [
-      {
-        "q": "apa itu Afrobeat",
-        "expect": "Afrobeat",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Jazz",
-        "expect": "Jazz",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Kabuki",
-        "expect": "Kabuki",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Flamenco",
-        "expect": "Flamenco",
-        "reason": "fallback (di bawah threshold)"
-      },
-      {
-        "q": "apa itu Kilt",
-        "expect": "Kilt",
-        "reason": "fallback (di bawah threshold)"
+        "q": "apa itu Masa kolonial",
+        "expect": "Masa kolonial",
+        "reason": "top hasil: Zaman Pencerahan"
       }
     ]
   }

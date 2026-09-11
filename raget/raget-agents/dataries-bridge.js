@@ -143,7 +143,7 @@ async function search(q) {
 }
 
 const DATARIES_FALLBACK_THRESHOLD = 0.3;
-const DATARIES_FALLBACK_GROUPS = ['country', 'sains', 'olahraga'];
+const DATARIES_FALLBACK_GROUPS = ['country', 'sains', 'olahraga', 'makanan', 'wisata'];
 
 async function datariesFallback(query) {
   const entryPenalty = feedbackStore.entryPenaltyMap();

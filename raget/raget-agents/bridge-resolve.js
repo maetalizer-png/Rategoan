@@ -1,6 +1,6 @@
 import { REGIONS, dataries } from './dataries-registry.js';
 
-const FILLER_WORDS_RE = /\b(negara|wilayah|daerah|dari|di|nya|adalah|itu|dong|sih|ya|tuh|nih|deh|kok)\b/g;
+const FILLER_WORDS_RE = /\b(negara|wilayah|daerah|dari|di|nya|adalah|itu|dong|sih|ya|tuh|nih|deh|kok|jelaskan|tentang|ceritakan)\b/g;
 
 const COUNTRY_ALIASES = {
   amerika: 'amerika serikat',

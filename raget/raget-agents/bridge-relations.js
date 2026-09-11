@@ -8,7 +8,7 @@ const RELATIONS = [
   { keys: ['kabupaten'], fields: ['kabupaten'] },
   { keys: ['kota'], fields: ['totalCities'] },
   { keys: ['populasi', 'penduduk', 'pendudukan'], fields: ['population'] },
-  { keys: ['mata uang'], fields: ['currency'] },
+  { keys: ['mata uang', 'matauang'], fields: ['currency'] },
   { keys: ['bahasa'], fields: ['languages'] },
   { keys: ['pemerintahan'], fields: ['governmentType'] },
   { keys: ['merdeka', 'kemerdekaan'], fields: ['independenceDay'] },

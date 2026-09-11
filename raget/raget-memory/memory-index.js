@@ -51,7 +51,7 @@ async function search(query, limit) {
 
   const knowledge = await loadKnowledge();
   knowledge.faq.forEach((item) => corpus.push({ type: 'faq', text: (item.q || '') + ' — ' + (item.a || '') }));
-  knowledge.umum.forEach((item) => corpus.push({ type: 'umum', text: item.text || '' }));
+  knowledge.umum.forEach((item) => corpus.push({ type: 'umum', text: (item.title ? item.title + '. ' : '') + (item.text || '') }));
 
   const facts = memoryLong.allFacts();
   Object.keys(facts).forEach((key) => corpus.push({ type: 'fact', text: key + ': ' + facts[key] }));

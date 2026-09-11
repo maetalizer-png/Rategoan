@@ -358,12 +358,22 @@ const CURRENCY_ALIAS = {
 
 function tryConvertCurrency(text) {
   const t = String(text || '').trim().toLowerCase();
-  const m = t.match(/(-?[0-9.,]+)\s*([a-z]+)\s*(?:ke|dalam|to|in)\s*([a-z]+)/i);
-  if (!m) return null;
-  const value = parseFloat(normalizeExpr(m[1]));
-  if (!isFinite(value)) return null;
-  const from = CURRENCY_ALIAS[m[2]];
-  const to = CURRENCY_ALIAS[m[3]];
+  const withAmount = t.match(/(-?[0-9.,]+)\s*([a-z]+)\s*(?:ke|dalam|to|in)\s*([a-z]+)/i);
+  let value, fromRaw, toRaw;
+  if (withAmount) {
+    value = parseFloat(normalizeExpr(withAmount[1]));
+    if (!isFinite(value)) return null;
+    fromRaw = withAmount[2];
+    toRaw = withAmount[3];
+  } else {
+    const kursOnly = t.match(/\bkurs\s+([a-z]+)\s*(?:ke|dalam|to|in)\s*([a-z]+)/i);
+    if (!kursOnly) return null;
+    value = 1;
+    fromRaw = kursOnly[1];
+    toRaw = kursOnly[2];
+  }
+  const from = CURRENCY_ALIAS[fromRaw];
+  const to = CURRENCY_ALIAS[toRaw];
   if (!from || !to || !(from in CURRENCY_RATES_TO_USD) || !(to in CURRENCY_RATES_TO_USD)) return null;
   const usd = value * CURRENCY_RATES_TO_USD[from];
   const result = trimNum(usd / CURRENCY_RATES_TO_USD[to]);
