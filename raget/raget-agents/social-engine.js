@@ -240,6 +240,11 @@ function tryThreeA(text) {
 
 const SMALLTALK_TOPICS = [
   {
+    match: /^apa\s+kabar\??$|\bkabar(nya|mu)?\s+(gimana|bagaimana)\b|\bgimana\s+kabar(nya|mu)?\b/i,
+    body: 'Saya baik, terima kasih sudah nanya! Kamu sendiri gimana kabarnya?',
+    emoji: '😊',
+  },
+  {
     match: /\bcuaca\b.*\b(panas|dingin|hujan|mendung)\b|\b(hujan|mendung)\b.*(deras|terus|dari\s*tadi)|udara\s+dingin/i,
     mirror: 'Oh, lagi ngobrolin cuaca ya.',
     body: 'Cuaca memang suka bikin mood ikut berubah — kadang bikin malas gerak, kadang malah bikin betah di rumah.',
