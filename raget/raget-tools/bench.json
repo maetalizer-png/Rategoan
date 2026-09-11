@@ -4371,13 +4371,8 @@
   },
   {
     "prompt": "woy",
-    "note": "Ronde v5 B3: context greeting - woy (time-aware)",
-    "containsAny": [
-      "Selamat pagi",
-      "Selamat siang",
-      "Selamat sore",
-      "Selamat malam"
-    ]
+    "note": "Ronde v6/v7: woy sengaja BUKAN sapaan ramah (nyolot/manggil), balasan singkat bukan basa-basi waktu - lihat context-engine.js tryTimeGreeting()",
+    "contains": "Ya, saya dengar."
   },
   {
     "prompt": "hoi",

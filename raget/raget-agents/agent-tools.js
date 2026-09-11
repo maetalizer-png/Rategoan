@@ -188,7 +188,7 @@ async function cara(topic) {
   const found = await memoryIndex.findTopic(t);
   if (found) {
     const label = found.title || t.charAt(0).toUpperCase() + t.slice(1);
-    return formatter.blocks([formatter.h(label, 3), found.text, formatter.blocks([formatter.h('Poin penting', 3), formatter.bullets(bodyOrSentences(found).slice(0, 4))])]);
+    return formatter.blocks([formatter.h(label, 3), found.text, formatter.blocks([formatter.h('Langkah', 3), formatter.numbered(bodyOrSentences(found).slice(0, 4))])]);
   }
   const h = hashText(t);
   const variant = CARA_VARIANTS[h % CARA_VARIANTS.length](t);

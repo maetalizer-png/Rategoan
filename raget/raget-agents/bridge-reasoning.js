@@ -6,17 +6,27 @@ import { bridgeRelations } from './bridge-relations.js';
 
 const SUPERLATIF_FIELDS = { populasi: 'population', penduduk: 'population', luas: 'area', wilayah: 'area' };
 const SUPERLATIF_DESC_RE = /terbesar|terbanyak|terluas|terpadat/i;
+const PALING_KE_TER = { besar: 'terbesar', banyak: 'terbanyak', luas: 'terluas', kecil: 'terkecil', sempit: 'tersempit', padat: 'terpadat' };
 
 async function trySuperlatif(text) {
   // Field eksplisit ("negara dengan populasi terbanyak") ATAU tanpa field
   // ("negara terkecil di dunia") - yang kedua ini secara umum berarti luas
   // wilayah, bukan populasi (begitu juga cara orang biasa nanya trivia ini).
-  const m = text.match(/negara\s+(?:dengan\s+)?(?:(populasi|penduduk|luas|wilayah)\s+)?(terbesar|terbanyak|terluas|terkecil|tersempit|terpadat)\b/i);
-  if (!m) return null;
-  const descWord = m[2].toLowerCase();
+  let m = text.match(/negara\s+(?:dengan\s+)?(?:(populasi|penduduk|luas|wilayah)\s+)?(terbesar|terbanyak|terluas|terkecil|tersempit|terpadat)\b/i);
+  let fieldWord = m ? m[1] : null;
+  let descWord = m ? m[2].toLowerCase() : null;
+  if (!m) {
+    // Bentuk periphrastic "paling X" ("negara mana yang penduduknya paling
+    // banyak", "negara dengan populasi paling padat") - sama maknanya
+    // dengan sufiks "-ter" di atas, cuma beda gaya bahasa.
+    const mp = text.match(/negara\s+(?:mana\s+)?(?:yang\s+)?(?:dengan\s+)?(populasi|penduduk|luas|wilayah)?(?:nya)?\s+paling\s+(besar|banyak|luas|kecil|sempit|padat)\b/i);
+    if (!mp) return null;
+    fieldWord = mp[1];
+    descWord = PALING_KE_TER[mp[2].toLowerCase()];
+  }
   const defaultField = descWord === 'terbanyak' || descWord === 'terpadat' ? 'population' : 'area';
-  const field = m[1] ? SUPERLATIF_FIELDS[m[1].toLowerCase()] : defaultField;
-  const desc = SUPERLATIF_DESC_RE.test(m[2]);
+  const field = fieldWord ? SUPERLATIF_FIELDS[fieldWord.toLowerCase()] : defaultField;
+  const desc = SUPERLATIF_DESC_RE.test(descWord);
   let countries = await dataries.loadAll('country');
   const regionKey = findRegionKey(text);
   let scopeLabel = '';
@@ -30,7 +40,7 @@ async function trySuperlatif(text) {
   valid.sort((a, b) => (desc ? b.metadata[field] - a.metadata[field] : a.metadata[field] - b.metadata[field]));
   const top3 = valid.slice(0, 3);
   const label = field === 'population' ? 'populasi' : 'luas';
-  return 'Top 3 negara' + scopeLabel + ' dengan ' + label + ' ' + m[2] + ':\n' +
+  return 'Top 3 negara' + scopeLabel + ' dengan ' + label + ' ' + descWord + ':\n' +
     top3.map((c, i) => (i + 1) + '. ' + c.metadata.name + ' — ' + bridgeFormat.formatValue(field, c.metadata[field])).join('\n');
 }
 
