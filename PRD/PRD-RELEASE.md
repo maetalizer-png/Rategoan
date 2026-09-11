@@ -296,10 +296,18 @@ bagaimana"**. Urutan wajib, tidak boleh dibalik atau dilewati:
         │             dari file GZIP FINAL (§4 Gerbang 1)
         ▼
 9. PUBLISH            Grok/dirigen: publish-korpus-release.py --file ... --tag ...
-        │             (LUAR SANDBOX - lihat §0 kenapa Claude berhenti di sini)
+        │             (LUAR SANDBOX - lihat §0 kenapa Claude berhenti di sini).
+        │             Draft otomatisasi langkah 10 (workflow GitHub Actions
+        │             yang jalan sendiri begitu Release publish/edit) sudah
+        │             ditulis di .github/workflows/sync-korpus-manifest.yml,
+        │             TAPI BELUM AKTIF - menunggu persetujuan eksplisit dirigen
+        │             sebelum di-commit (menambah proses otomatis berjalan
+        │             terus itu keputusan yang butuh izin langsung, bukan
+        │             sesuatu yang Claude putuskan sendiri). Sampai disetujui
+        │             dan di-commit, langkah 10 di bawah TETAP manual.
         ▼
 10. GABUNG KE KANONIK  jalankan raget-tools/sync-manifest-from-release.mjs
-        │              (OTOMATIS sejak 2026-09-11 - jangan edit kanonik.entries
+        │              (jangan edit kanonik.entries
         │              manual lagi). Skrip ini sendiri yang: ambil manifest
         │              kategori dari 3 tag Release resmi, verifikasi SHA256
         │              lawan digest asset gzip (Gerbang 1b), tulis ulang
