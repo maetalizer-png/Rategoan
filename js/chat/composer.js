@@ -59,7 +59,10 @@ export const composer = {
     const card = $('sheet-websearch');
     const inp = $('chat-input');
     const plusBtn = $('btn-plus');
-    if (card) card.classList.toggle('active', active);
+    if (card) {
+      card.classList.toggle('active', active);
+      card.setAttribute('aria-checked', String(active));
+    }
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
     if (plusBtn) plusBtn.classList.toggle('has-badge', active);
   },

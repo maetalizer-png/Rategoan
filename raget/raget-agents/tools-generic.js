@@ -10,6 +10,20 @@ import { routerIntent } from './router-intent.js';
 
 const SOURCE_NAMES = { wiktionary: 'Wiktionary', wikidata: 'Wikidata', wikipedia: 'Wikipedia' };
 
+// Ekstrak Wikipedia datang sebagai satu paragraf besar tanpa jeda - enak
+// dibaca mesin, tapi jadi tembok teks yang capek dibaca manusia. Pecah tiap
+// ~2 kalimat jadi paragraf sendiri supaya lebih mengalir dan gak monoton,
+// tanpa mengubah kata satu pun dari kontennya.
+function breakIntoParagraphs(text, sentencesPerPara) {
+  const sentences = text.split(/(?<=[.!?])\s+(?=[A-Z0-9])/);
+  if (sentences.length <= sentencesPerPara) return text;
+  const paras = [];
+  for (let i = 0; i < sentences.length; i += sentencesPerPara) {
+    paras.push(sentences.slice(i, i + sentencesPerPara).join(' '));
+  }
+  return paras.join('\n\n');
+}
+
 async function run(kind, prompt, messages, onFewshotCacheClear) {
   if (kind === 'kuis') return await quizSession.ask();
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
@@ -54,8 +68,9 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     if (!result.ok) return result.message;
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
+    const body = result.source === 'wikipedia' ? breakIntoParagraphs(result.extract, 2) : result.extract;
     return (
-      result.extract +
+      body +
       (result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '')
     );
   }
