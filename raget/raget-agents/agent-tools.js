@@ -305,14 +305,31 @@ function hitung(text) {
 function waktu(text) {
   const t = String(text || '').toLowerCase();
   const now = new Date();
+  let dayOffset = 0;
+  let label = 'Hari ini';
+  if (/\bkemarin\s+lusa\b|\b2\s+hari\s+(yang\s+)?lalu\b/.test(t)) {
+    dayOffset = -2;
+    label = 'Kemarin lusa';
+  } else if (/\bkemarin\b/.test(t)) {
+    dayOffset = -1;
+    label = 'Kemarin';
+  } else if (/\blusa\b/.test(t)) {
+    dayOffset = 2;
+    label = 'Lusa';
+  } else if (/\bbesok\b/.test(t)) {
+    dayOffset = 1;
+    label = 'Besok';
+  }
+  const target = new Date(now);
+  target.setDate(target.getDate() + dayOffset);
   if (/jam\s+berapa/.test(t)) {
     return 'Sekarang jam ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + '.';
   }
   if (/hari\s+apa/.test(t)) {
-    return 'Hari ini ' + now.toLocaleDateString('id-ID', { weekday: 'long' }) + '.';
+    return label + ' ' + target.toLocaleDateString('id-ID', { weekday: 'long' }) + '.';
   }
   if (/tanggal\s+berapa/.test(t)) {
-    return 'Hari ini tanggal ' + now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
+    return label + ' tanggal ' + target.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) + '.';
   }
   return (
     now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) +
