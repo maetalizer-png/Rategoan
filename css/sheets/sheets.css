@@ -67,6 +67,11 @@
   background: var(--rg-ring);
 }
 
+.attach-card.active .attach-ico {
+  background: var(--rg-accent);
+  color: var(--rg-accent-ink);
+}
+
 .attach-ico {
   width: 44px;
   height: 44px;

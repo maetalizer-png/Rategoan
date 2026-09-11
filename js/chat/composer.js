@@ -56,12 +56,9 @@ export const composer = {
   },
   setWebsearch(active) {
     this.websearchActive = active;
-    const btn = $('btn-websearch');
+    const card = $('sheet-websearch');
     const inp = $('chat-input');
-    if (btn) {
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-pressed', String(active));
-    }
+    if (card) card.classList.toggle('active', active);
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
   },
   bind() {
@@ -78,11 +75,13 @@ export const composer = {
     $('btn-plus').onclick = () => attach.open();
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
-    const websearchBtn = $('btn-websearch');
-    if (websearchBtn) {
-      websearchBtn.onclick = () => {
-        this.setWebsearch(!this.websearchActive);
-        if (this.websearchActive) toast.show('Pencarian internet aktif — jawaban berikutnya dicari langsung dari Wikipedia.');
+    const websearchCard = $('sheet-websearch');
+    if (websearchCard) {
+      websearchCard.onclick = () => {
+        this.setWebsearch(true);
+        sheets.close();
+        toast.show('Pencarian internet aktif — jawaban berikutnya dicari langsung dari Wikipedia.');
+        inp.focus();
       };
     }
     $('btn-login').onclick = () => {
