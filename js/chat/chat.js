@@ -17,6 +17,13 @@ import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
+function buildSourceBadge() {
+  const badge = document.createElement('div');
+  badge.className = 'msg-source-badge';
+  badge.innerHTML = ic('globe') + '<span>Hasil pencarian web</span>';
+  return badge;
+}
+
 function buildExtraChip(label, onClick, iconName) {
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -216,6 +223,7 @@ export const chat = {
         t.textContent = m.text;
         d.appendChild(t);
       } else {
+        if (m.source === 'websearch') d.appendChild(buildSourceBadge());
         const b = document.createElement('div');
         b.innerHTML = markdown.render(m.text);
         d.appendChild(b);
@@ -262,12 +270,7 @@ export const chat = {
   async typeReply(text, follow, opts) {
     const d = document.createElement('div');
     d.className = 'msg ai';
-    if (opts && opts.searching) {
-      const badge = document.createElement('div');
-      badge.className = 'msg-source-badge';
-      badge.innerHTML = ic('globe') + '<span>Hasil pencarian web</span>';
-      d.appendChild(badge);
-    }
+    if (opts && opts.searching) d.appendChild(buildSourceBadge());
     const body = document.createElement('div');
     d.appendChild(body);
     $('messages').appendChild(d);
@@ -330,7 +333,11 @@ export const chat = {
     }
     typing.remove();
     if (reply == null) return null;
-    s.messages.push({ role: 'ai', text: reply, time: Date.now() });
+    // source disimpan di sesi (bukan cuma opts lokal) supaya badge "Hasil
+    // pencarian web" tidak hilang saat renderMessages() render ulang SEMUA
+    // pesan dari data tersimpan (kejadian setiap kali pesan baru dikirim) -
+    // tanpa ini badge cuma nempel sesaat lalu ke-reset begitu chat re-render.
+    s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined });
     await this.typeReply(reply, !scrolldown.isFar(), { searching });
     if (tts.enabled()) voice.speak(reply);
     return reply;

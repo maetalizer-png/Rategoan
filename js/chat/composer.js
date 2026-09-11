@@ -46,7 +46,6 @@ export const composer = {
     haptics.tap(10);
     const isWebsearch = this.websearchActive;
     const routedText = isWebsearch ? 'googling ' + text : text;
-    if (isWebsearch) this.setWebsearch(false);
     const reply = await chat.ask(routedText, { searching: isWebsearch });
     if (reply == null) {
       toast.show('AI belum terpasang');
@@ -59,8 +58,10 @@ export const composer = {
     this.websearchActive = active;
     const card = $('sheet-websearch');
     const inp = $('chat-input');
+    const plusBtn = $('btn-plus');
     if (card) card.classList.toggle('active', active);
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
+    if (plusBtn) plusBtn.classList.toggle('has-badge', active);
   },
   bind() {
     const inp = $('chat-input');
@@ -79,9 +80,14 @@ export const composer = {
     const websearchCard = $('sheet-websearch');
     if (websearchCard) {
       websearchCard.onclick = () => {
-        this.setWebsearch(true);
+        const next = !this.websearchActive;
+        this.setWebsearch(next);
         sheets.close();
-        toast.show('Pencarian internet aktif — jawaban berikutnya dicari langsung dari Wikipedia.');
+        toast.show(
+          next
+            ? 'Pencarian internet AKTIF — semua pesan berikutnya dicari langsung dari internet sampai kamu matikan lagi.'
+            : 'Pencarian internet dimatikan.'
+        );
         inp.focus();
       };
     }
