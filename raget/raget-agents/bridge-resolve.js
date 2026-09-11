@@ -159,21 +159,28 @@ async function findAllInList(group, predicate, limit) {
   return list.filter(predicate).slice(0, limit || 3);
 }
 
+function hasWordSubstring(haystack, needle) {
+  if (!haystack || !needle) return false;
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('\\b' + escaped + '\\b', 'i').test(haystack);
+}
+
 function wordOverlap(entity, hay) {
   if (!entity || !hay) return false;
-  if (hay.includes(entity) || entity.includes(hay)) return true;
+  if (hasWordSubstring(hay, entity) || hasWordSubstring(entity, hay)) return true;
   const entityWords = entity.split(' ').filter((w) => w.length > 2);
-  return entityWords.some((w) => hay.includes(w));
+  return entityWords.some((w) => hasWordSubstring(hay, w));
 }
 
 function matchScore(entity, hay) {
   if (!entity || !hay) return 0;
   if (hay === entity) return 100;
-  if (hay.includes(entity)) return 50;
+  if (hasWordSubstring(hay, entity)) return 50;
   const entityWords = entity.split(' ').filter((w) => w.length > 2);
   if (!entityWords.length) return 0;
-  const matched = entityWords.filter((w) => hay.includes(w)).length;
-  if (!matched) return 0;
+  const matched = entityWords.filter((w) => hasWordSubstring(hay, w)).length;
+  const minRequired = Math.min(2, entityWords.length);
+  if (matched < minRequired) return 0;
   return matched === entityWords.length ? 20 + matched : matched;
 }
 

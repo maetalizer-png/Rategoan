@@ -33,6 +33,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     if (!result.ok) return result.message;
     return 'Ringkasan halaman:\n\n' + agentTools.ringkas(result.text);
   }
+  const stripTrailingFiller = (s) => s.replace(/\s*\b(apa\s*(saja|sih)?|gimana|bagaimana|dong|ya|sih)\s*\??\s*$/i, '').trim();
   if (kind === 'jelaskan') {
     const topic = prompt
       .replace(/^jelaskan\s*/i, '')
@@ -42,7 +43,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     return agentTools.jelaskan(topic);
   }
   if (kind === 'cara') {
-    const topic = prompt.replace(/^(cara|langkah)\s*(untuk|buat|biar)?\s*/i, '').trim();
+    const topic = stripTrailingFiller(prompt.replace(/^(cara|langkah)\s*(untuk|buat|biar)?\s*/i, '').trim());
     return agentTools.cara(topic);
   }
   if (kind === 'ide') {
@@ -52,20 +53,21 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       .trim();
     return agentTools.ide(topic);
   }
+  const stripTrailingApa = stripTrailingFiller;
   if (kind === 'manfaat') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+(dari\s+|dan\s+)?/i, '').trim();
+    const topic = stripTrailingApa(prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+(dari\s+|dan\s+)?/i, '').trim());
     return agentTools.manfaat(topic);
   }
   if (kind === 'fungsi') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/i, '').trim();
+    const topic = stripTrailingApa(prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?fungsi\s+(dari\s+|utama\s+)?/i, '').trim());
     return agentTools.fungsi(topic);
   }
   if (kind === 'tujuan') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/i, '').trim();
+    const topic = stripTrailingApa(prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?tujuan\s+(dari\s+|utama\s+)?/i, '').trim());
     return agentTools.tujuan(topic);
   }
   if (kind === 'penyebab') {
-    const topic = prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/i, '').trim();
+    const topic = stripTrailingApa(prompt.replace(/^(apa\s+(saja\s+)?|sebutkan\s+)?penyebab\s+(dari\s+|utama\s+)?/i, '').trim());
     return agentTools.penyebab(topic);
   }
   if (kind === 'bandingkan') {
