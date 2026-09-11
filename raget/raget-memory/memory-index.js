@@ -41,6 +41,12 @@ function scoreText(hay, words) {
   return words.reduce((acc, w) => acc + (lower.includes(w) ? 1 : 0), 0);
 }
 
+function hasWordSubstring(haystack, needle) {
+  if (!haystack || !needle) return false;
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('\\b' + escaped + '\\b', 'i').test(haystack);
+}
+
 async function search(query, limit) {
   const q = String(query || '').trim();
   if (!q) return [];
@@ -74,7 +80,7 @@ async function findTopic(topic) {
     const title = (item.title || '').toLowerCase();
     let score = 0;
     if (title === t) score = 10;
-    else if (title.includes(t) || t.includes(title)) score = 6;
+    else if (hasWordSubstring(title, t) || hasWordSubstring(t, title)) score = 6;
     else score = scoreText(title + ' ' + (item.text || ''), words);
     if (score > bestScore) {
       bestScore = score;

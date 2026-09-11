@@ -27,13 +27,19 @@ function norm(s) {
   return String(s || '').toLowerCase().trim();
 }
 
+function hasWordSubstring(haystack, needle) {
+  if (!haystack || !needle) return false;
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('\\b' + escaped + '\\b', 'i').test(haystack);
+}
+
 async function findTokoh(query) {
   const q = norm(query);
   if (!q) return null;
   const tokoh = await loadTokoh();
   let found = tokoh.find((t) => norm(t.nama) === q || norm(t.namaEn) === q);
   if (found) return found;
-  found = tokoh.find((t) => q.includes(norm(t.nama)) || norm(t.nama).includes(q) || q.includes(norm(t.namaEn)));
+  found = tokoh.find((t) => hasWordSubstring(q, norm(t.nama)) || hasWordSubstring(norm(t.nama), q) || hasWordSubstring(q, norm(t.namaEn)));
   return found || null;
 }
 

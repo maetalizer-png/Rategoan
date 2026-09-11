@@ -31,13 +31,19 @@ function norm(s) {
   return String(s || '').toLowerCase().trim();
 }
 
+function hasWordSubstring(haystack, needle) {
+  if (!haystack || !needle) return false;
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('\\b' + escaped + '\\b', 'i').test(haystack);
+}
+
 async function findKuliner(query) {
   const q = norm(query);
   if (!q) return null;
   const kuliner = await loadKuliner();
   let found = kuliner.find((k) => norm(k.nama) === q);
   if (found) return found;
-  found = kuliner.find((k) => q.includes(norm(k.nama)));
+  found = kuliner.find((k) => hasWordSubstring(q, norm(k.nama)));
   return found || null;
 }
 

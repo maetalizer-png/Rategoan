@@ -8,6 +8,6 @@
   { "title": "Aksi Balasan", "text": "Setiap balasan AI di Rategoan punya tombol Salin, Baca (text-to-speech), dan Bagikan." },
   { "title": "Ringkasan Terstruktur", "text": "Rategoan bisa merangkum teks panjang menjadi ringkasan terstruktur dengan heading dan bullet point." },
   { "title": "Personalisasi", "text": "Raget mengingat nama, hobi, dan pekerjaan pengguna dari percakapan untuk membuat balasan terasa lebih personal." },
-  { "title": "Dataries", "text": "Dataries adalah basis data pengetahuan dunia milik Raget: negara, kota, bahasa, wisata, tokoh, makanan, sains, dan olahraga." },
+  { "title": "Dataries", "text": "Dataries adalah nama basis data pengetahuan dunia milik Raget, dikumpulkan dan disusun dari banyak topik berbeda supaya jawaban Raget lebih lengkap dan terstruktur." },
   { "title": "Arsitektur Raget", "text": "Otak Raget dibangun dari modul ES6 murni: ai-agent (router & tools), rategoan-llm (mesin template), raget-memory dan raget-database (memori & riwayat) — semua tanpa framework atau library eksternal." }
 ]
