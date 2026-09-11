@@ -7,18 +7,37 @@ async function fetchJson(url) {
   return res.json();
 }
 
-async function searchWikipedia(query, lang) {
-  const searchUrl =
-    'https://' + lang + '.wikipedia.org/w/api.php?action=opensearch&search=' +
-    encodeURIComponent(query) + '&limit=1&namespace=0&format=json&origin=*';
-  const data = await fetchJson(searchUrl);
-  const title = data && data[1] && data[1][0];
-  if (!title) return null;
+async function fetchSummaryByTitle(title, lang) {
   const summaryUrl = 'https://' + lang + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title);
   const summary = await fetchJson(summaryUrl);
   if (!summary || !summary.extract) return null;
   const page = summary.content_urls && summary.content_urls.desktop && summary.content_urls.desktop.page;
   return { title: summary.title, extract: summary.extract, url: page || null, lang };
+}
+
+// Pencarian teks penuh (action=query&list=search) dipakai sebagai jalur utama
+// karena bisa cocokkan ISI artikel, bukan cuma awalan judul persis seperti
+// opensearch - jadi query natural seperti "ilmuwan matematika terkenal" tetap
+// bisa nemu artikel relevan meski judulnya tidak diawali kata itu persis.
+// opensearch dipertahankan sebagai fallback kalau full-text search kosong.
+async function searchWikipedia(query, lang) {
+  const fullTextUrl =
+    'https://' + lang + '.wikipedia.org/w/api.php?action=query&list=search&srsearch=' +
+    encodeURIComponent(query) + '&srlimit=1&format=json&origin=*';
+  const fullTextData = await fetchJson(fullTextUrl);
+  const hit = fullTextData && fullTextData.query && fullTextData.query.search && fullTextData.query.search[0];
+  if (hit && hit.title) {
+    const result = await fetchSummaryByTitle(hit.title, lang);
+    if (result) return result;
+  }
+
+  const openSearchUrl =
+    'https://' + lang + '.wikipedia.org/w/api.php?action=opensearch&search=' +
+    encodeURIComponent(query) + '&limit=1&namespace=0&format=json&origin=*';
+  const openSearchData = await fetchJson(openSearchUrl);
+  const title = openSearchData && openSearchData[1] && openSearchData[1][0];
+  if (!title) return null;
+  return await fetchSummaryByTitle(title, lang);
 }
 
 async function search(query) {

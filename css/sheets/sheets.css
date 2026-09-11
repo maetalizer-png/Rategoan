@@ -67,9 +67,25 @@
   background: var(--rg-ring);
 }
 
-.attach-card.active .attach-ico {
-  background: var(--rg-accent);
-  color: var(--rg-accent-ink);
+.attach-plain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 4px;
+  border-radius: 10px;
+  color: var(--rg-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.attach-plain:active {
+  background: var(--rg-ring);
+}
+
+.attach-plain.active {
+  color: var(--rg-accent);
 }
 
 .attach-ico {

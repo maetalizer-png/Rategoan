@@ -41,6 +41,8 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       .replace(/\bdi\s+internet\b/gi, '')
       .replace(/^internet\s+/i, '')
       .replace(/^(tentang|soal)\s+/i, '')
+      .replace(/^(siapa|apa\s+itu|apa|kapan|dimana|di\s*mana|berapa|kenapa|mengapa|bagaimana)\s+/i, '')
+      .replace(/\?+$/, '')
       .trim();
     const result = await webSearch.search(q);
     if (!result.ok) return result.message;
