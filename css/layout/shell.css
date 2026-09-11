@@ -82,7 +82,7 @@
   border-radius: 26px;
   padding: 16px 14px 10px;
   box-shadow: var(--rg-shadow);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: background 0.28s ease, border-color 0.2s, box-shadow 0.2s;
 }
 
 #composer-card:focus-within {

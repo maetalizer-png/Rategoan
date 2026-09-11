@@ -22,7 +22,7 @@
   background: var(--rg-surface);
   border-right: 1px solid var(--rg-line);
   transform: translateX(-105%);
-  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1), background 0.28s ease, border-color 0.28s ease;
   will-change: transform;
   z-index: 50;
   padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
