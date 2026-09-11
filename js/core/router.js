@@ -8,6 +8,7 @@ export const router = {
     if (!this.routes[hash]) hash = 'chat';
     const authed = !!auth.state;
     if (authed && hash === 'login') hash = 'chat';
+    if (!authed && hash !== 'login') hash = 'login';
     if (location.hash !== '#/' + hash) location.hash = '/' + hash;
     Object.keys(this.routes).forEach((name) => {
       const el = $(this.routes[name]);
@@ -23,6 +24,7 @@ export const router = {
   },
   go(to) {
     location.hash = '/' + to;
+    this.render();
   },
   init() {
     window.addEventListener('hashchange', () => this.render());
