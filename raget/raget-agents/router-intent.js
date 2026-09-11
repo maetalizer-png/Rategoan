@@ -89,6 +89,7 @@ function detectTool(prompt) {
   if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
+  if (/\b(cari|carikan|search)\b.*\binternet\b|^googling\s+/.test(t)) return 'websearch';
   if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
   if (/^lupakan\b/.test(t)) return 'lupakan';

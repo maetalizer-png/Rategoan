@@ -1,5 +1,6 @@
 import { agentTools } from './agent-tools.js';
 import { readWeb } from '../../vault/web/read-web.js';
+import { webSearch } from '../../vault/web/web-search.js';
 import { quizSession } from './quiz-session.js';
 import { fewshotLocal } from '../raget-memory/fewshot-local.js';
 import { ragetDb } from '../raget-database/raget-db.js';
@@ -32,6 +33,23 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const result = await readWeb.read(url);
     if (!result.ok) return result.message;
     return 'Ringkasan halaman:\n\n' + agentTools.ringkas(result.text);
+  }
+  if (kind === 'websearch') {
+    const q = prompt
+      .replace(/^(cari|carikan|search)\s+/i, '')
+      .replace(/^googling\s+/i, '')
+      .replace(/\bdi\s+internet\b/gi, '')
+      .replace(/^internet\s+/i, '')
+      .replace(/^(tentang|soal)\s+/i, '')
+      .trim();
+    const result = await webSearch.search(q);
+    if (!result.ok) return result.message;
+    const sourceLabel = result.lang === 'id' ? 'Wikipedia Bahasa Indonesia' : 'Wikipedia (Inggris)';
+    return (
+      result.title + '\n\n' + result.extract +
+      (result.url ? '\n\nSumber: ' + result.url : '') +
+      '\n\n(Hasil pencarian internet real-time via ' + sourceLabel + ', bukan dari basis data lokal Raget.)'
+    );
   }
   const stripTrailingFiller = (s) => s.replace(/\s*\b(apa\s*(saja|sih)?|gimana|bagaimana|dong|ya|sih)\s*\??\s*$/i, '').trim();
   if (kind === 'jelaskan') {
