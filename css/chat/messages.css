@@ -194,6 +194,12 @@
   margin: 4px 0;
 }
 
+.md-link {
+  color: var(--rg-accent);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
 .md-li {
   color: var(--rg-accent);
   font-weight: 700;

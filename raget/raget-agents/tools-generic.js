@@ -67,7 +67,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       'Cuaca di ' + result.place + ' saat ini: ' + result.desc + ', suhu ' + Math.round(result.temp) + '°C' +
       (result.humidity != null ? ', kelembapan ' + Math.round(result.humidity) + '%' : '') +
       (result.wind != null ? ', angin ' + Math.round(result.wind) + ' km/jam' : '') + '.' +
-      '\n\n(Sumber: Open-Meteo — data cuaca real-time, bukan dari basis data lokal Raget.)'
+      '\n\n(Sumber: Open-Meteo)'
     );
   }
   if (kind === 'berita_live') {
@@ -75,11 +75,11 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const result = await news.latest(topic);
     if (!result.ok) return result.message;
     const list = result.items
-      .map((it, i) => (i + 1) + '. ' + it.title + (it.summary ? ' — ' + it.summary : '') + (it.link ? '\n   ' + it.link : ''))
+      .map((it, i) => (i + 1) + '. ' + it.title + (it.summary ? '\n' + it.summary : '') + (it.link ? '\n' + it.link : ''))
       .join('\n\n');
     return (
       'Berita terkini' + (topic ? ' tentang "' + topic + '"' : '') + ':\n\n' + list +
-      '\n\n(Sumber: RSS resmi ' + result.sources.join(' & ') + ', diambil real-time via layanan RSS-to-JSON pihak ketiga — bukan dari basis data lokal Raget.)'
+      '\n\n(Sumber: RSS ' + result.sources.join(' & ') + ')'
     );
   }
   const stripTrailingFiller = (s) => s.replace(/\s*\b(apa\s*(saja|sih)?|gimana|bagaimana|dong|ya|sih)\s*\??\s*$/i, '').trim();

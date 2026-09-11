@@ -23,13 +23,25 @@ function stripHtml(s) {
   return String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+// Potong di batas kalimat kalau ada (titik pertama setelah cukup panjang),
+// kalau tidak ada baru potong di batas kata terakhir - supaya ringkasan
+// gak berakhir di tengah kata atau nyisain koma menggantung sebelum "...".
+function truncateClean(s, max) {
+  const text = String(s || '').replace(/[,;:\s]+$/, '');
+  if (text.length <= max) return text;
+  const dot = text.slice(0, max).lastIndexOf('. ');
+  if (dot > max * 0.4) return text.slice(0, dot + 1);
+  const space = text.slice(0, max).lastIndexOf(' ');
+  return (space > 0 ? text.slice(0, space) : text.slice(0, max)).replace(/[,;:\s]+$/, '') + '…';
+}
+
 async function fetchFeed(feed) {
   const url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url);
   const data = await fetchJson(url);
   if (!data || data.status !== 'ok' || !Array.isArray(data.items)) return null;
   return data.items.map((it) => ({
     title: stripHtml(it.title),
-    summary: stripHtml(it.description).slice(0, 200),
+    summary: truncateClean(stripHtml(it.description), 280),
     link: it.link,
     pubDate: it.pubDate,
     source: feed.name,
