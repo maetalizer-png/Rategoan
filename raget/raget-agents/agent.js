@@ -223,7 +223,7 @@ async function respondCore(messages, prompt) {
   // sini kalimat diawali "googling" jadi lolos guard itu) sebelum sempat
   // ketemu detectTool('websearch') yang letaknya jauh di bawah.
   const earlyToolKind = routerIntent.detectTool(text);
-  if (earlyToolKind === 'websearch' || earlyToolKind === 'cuaca_live') {
+  if (earlyToolKind === 'websearch' || earlyToolKind === 'cuaca_live' || earlyToolKind === 'berita_live') {
     const earlyReply = await runTool(earlyToolKind, text, messages);
     if (earlyReply) {
       ragetDb.addNote(text, earlyReply, null, earlyToolKind);

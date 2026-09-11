@@ -2,6 +2,7 @@ import { agentTools } from './agent-tools.js';
 import { readWeb } from '../../vault/web/read-web.js';
 import { webSearch } from '../../vault/web/web-search.js';
 import { weather } from '../../vault/web/weather.js';
+import { news } from '../../vault/web/news.js';
 import { quizSession } from './quiz-session.js';
 import { fewshotLocal } from '../raget-memory/fewshot-local.js';
 import { ragetDb } from '../raget-database/raget-db.js';
@@ -36,7 +37,8 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     if (!url) return 'URL tidak ditemukan. Format: bedah https://...';
     const result = await readWeb.read(url);
     if (!result.ok) return result.message;
-    return 'Ringkasan halaman:\n\n' + agentTools.ringkas(result.text);
+    const via = result.viaJina ? ' (lewat Jina Reader karena situs asal blokir akses langsung)' : '';
+    return 'Ringkasan halaman' + via + ':\n\n' + agentTools.ringkas(result.text);
   }
   if (kind === 'websearch') {
     const q = prompt
@@ -66,6 +68,18 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       (result.humidity != null ? ', kelembapan ' + Math.round(result.humidity) + '%' : '') +
       (result.wind != null ? ', angin ' + Math.round(result.wind) + ' km/jam' : '') + '.' +
       '\n\n(Sumber: Open-Meteo — data cuaca real-time, bukan dari basis data lokal Raget.)'
+    );
+  }
+  if (kind === 'berita_live') {
+    const topic = routerIntent.detectBeritaTopic(prompt.toLowerCase()) || '';
+    const result = await news.latest(topic);
+    if (!result.ok) return result.message;
+    const list = result.items
+      .map((it, i) => (i + 1) + '. ' + it.title + (it.summary ? ' — ' + it.summary : '') + (it.link ? '\n   ' + it.link : ''))
+      .join('\n\n');
+    return (
+      'Berita terkini' + (topic ? ' tentang "' + topic + '"' : '') + ':\n\n' + list +
+      '\n\n(Sumber: RSS resmi ' + result.sources.join(' & ') + ', diambil real-time via layanan RSS-to-JSON pihak ketiga — bukan dari basis data lokal Raget.)'
     );
   }
   const stripTrailingFiller = (s) => s.replace(/\s*\b(apa\s*(saja|sih)?|gimana|bagaimana|dong|ya|sih)\s*\??\s*$/i, '').trim();

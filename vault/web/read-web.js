@@ -1,6 +1,6 @@
 const MAX_CHARS = 4000;
 const CORS_MESSAGE =
-  'Tidak bisa mengambil isi halaman ini langsung dari browser karena situs tersebut memblokir akses lintas-origin (CORS), atau sedang offline. Raget 100% berjalan lokal tanpa server perantara, jadi pengambilan konten web bergantung sepenuhnya pada izin CORS dari situs tujuan.';
+  'Tidak bisa mengambil isi halaman ini — situs tujuan memblokir akses langsung (CORS/anti-bot) dan jalur cadangan (Jina Reader) juga gagal, atau sedang offline. Raget 100% berjalan lokal tanpa server perantara, jadi pengambilan konten web bergantung sepenuhnya pada izin situs tujuan.';
 
 function stripHtml(html) {
   return String(html || '')
@@ -11,28 +11,42 @@ function stripHtml(html) {
     .trim();
 }
 
+async function fetchDirect(url) {
+  const res = await fetch(url, { mode: 'cors' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const html = await res.text();
+  return stripHtml(html).slice(0, MAX_CHARS);
+}
+
+// Jina Reader (r.jina.ai) - jasa "pembaca" pihak ketiga yang bertindak
+// seperti browser biasa untuk bypass proteksi anti-bot/CORS situs yang
+// menolak fetch() langsung dari kode (banyak situs berita begini). Dipakai
+// sebagai fallback KEDUA, bukan jalur utama - situs yang memang mengizinkan
+// CORS tetap diakses langsung dulu tanpa tambahan dependensi pihak ketiga.
+async function fetchViaJina(url) {
+  const res = await fetch('https://r.jina.ai/' + url, { mode: 'cors' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const text = await res.text();
+  return String(text || '').trim().slice(0, MAX_CHARS);
+}
+
 async function read(url) {
   if (typeof fetch !== 'function') {
     return { ok: false, stub: true, message: CORS_MESSAGE };
   }
-  let res;
   try {
-    res = await fetch(url, { mode: 'cors' });
+    const text = await fetchDirect(url);
+    if (text) return { ok: true, text };
   } catch (e) {
-    return { ok: false, stub: true, message: CORS_MESSAGE };
+    // lanjut ke fallback Jina Reader
   }
-  if (!res.ok) {
-    return { ok: false, stub: false, message: 'Gagal mengambil halaman (status ' + res.status + ').' };
-  }
-  let html;
   try {
-    html = await res.text();
+    const text = await fetchViaJina(url);
+    if (text) return { ok: true, text, viaJina: true };
   } catch (e) {
-    return { ok: false, stub: false, message: 'Gagal membaca isi halaman.' };
+    // dua-duanya gagal
   }
-  const text = stripHtml(html).slice(0, MAX_CHARS);
-  if (!text) return { ok: false, stub: false, message: 'Halaman berhasil diambil tapi tidak ada teks yang bisa dibaca.' };
-  return { ok: true, text };
+  return { ok: false, stub: true, message: CORS_MESSAGE };
 }
 
 export const readWeb = Object.freeze({ read });

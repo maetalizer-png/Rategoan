@@ -31,6 +31,23 @@ function detectCuacaLive(text) {
   return place;
 }
 
+// Berita LIVE lewat RSS resmi media - trigger butuh kata "terkini/terbaru/
+// hari ini" atau perintah eksplisit "cari(kan) berita", supaya obrolan
+// biasa yang kebetulan mengandung kata "berita" (mis. "berita bohong itu
+// menyebalkan") tidak salah kepicu.
+const BERITA_LIVE_RE = /\b(berita|kabar)\b.*\b(terkini|terbaru)\b|\b(berita|kabar)\s+hari\s+ini\b|^(cari(kan)?)\s+(berita|kabar)\b/i;
+
+function detectBeritaTopic(text) {
+  if (!BERITA_LIVE_RE.test(text)) return null;
+  return text
+    .replace(/^(cari(kan)?)\s+/i, '')
+    .replace(/^(berita|kabar)\s+/i, '')
+    .replace(/\b(terkini|terbaru|hari\s+ini)\b/gi, '')
+    .replace(/^(tentang|soal)\s+/i, '')
+    .replace(/\?+$/, '')
+    .trim();
+}
+
 const MOOD_OPENERS = {
   sedih: { casual: 'Aduh, kedengarannya lagi sedih ya. ', formal: 'Turut prihatin mendengarnya. ', neutral: 'Kedengarannya lagi sedih ya. ' },
   capek: { casual: 'Wah, pasti capek banget ya. ', formal: 'Semoga Anda bisa segera beristirahat. ', neutral: 'Kedengarannya lagi capek ya. ' },
@@ -105,6 +122,7 @@ function detectTool(prompt) {
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
   if (detectCuacaLive(t)) return 'cuaca_live';
+  if (detectBeritaTopic(t) !== null) return 'berita_live';
   if (/\b(cari|carikan|search)\b.*\binternet\b|^googling\s+/.test(t)) return 'websearch';
   if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
@@ -162,6 +180,7 @@ export const routerIntent = Object.freeze({
   detectTeaching,
   detectTool,
   detectCuacaLive,
+  detectBeritaTopic,
   detectModeCommand,
   classifyIntent,
   detectAnswerType,
