@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-01T13:50:00Z",
-  "updatedAt": "2026-09-09T18:20:00Z",
+  "updatedAt": "2026-09-11T19:30:00Z",
   "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah). Ronde 2026-09-02: K2+K3 Grok tambah batch baru (wiki daerah + wikisource + id_personachat), token dihitung ulang - lihat catatan kualitas di entri K2.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -35,21 +35,21 @@
       },
       {
         "rak": "K3 korpus-pelengkap-bersih",
-        "asal": "k3-id-filter + recipes + proper nouns + community-datasets/id_newspapers_2018; refresh 2026-09-10",
-        "totalDokumen": 2904245,
-        "sizeByteGz": 616915951,
-        "sha256": "4ee539778b24b84aae34edab06861d7b8bcfad430149f351daea4ec6fee96ff0",
-        "totalKataApprox": 233855855,
-        "totalTokenBPEResmi": 364344207,
-        "diukurPada": "2026-09-10; Indonesian-tagged science sentences only, tokenizer resmi vocab 30368, max_len 128",
+        "asal": "K3 v7 lama (preserved+merged) + endomorphosis/ipfs_indonesia_laws (69.495 dokumen hukum Indonesia baru, cleaned+deduplicated); refresh 2026-09-11, versi manifest Release v8",
+        "totalDokumen": 2973740,
+        "sizeByteGz": 640253994,
+        "sha256": "ec07760453fa6cd9d3728ba5edc04b67f5c02f9c8061206060e5f0088ebf2d55",
+        "totalKataApprox": 249748788,
+        "totalTokenBPEResmi": 388817480,
+        "diukurPada": "2026-09-11; tokenizer resmi vocab 30368, max_len 128, exact dedupe (sha256 normalized casefold) + SimHash batch, minTextChars 80",
         "komposisiBahasa": {
           "id": 1.0
         },
-        "catatan": "K3 refreshed with Indonesian-tagged science data; English rows excluded before dedupe."
+        "catatan": "K3 v8: gabung K3 v7 lama + 69.495 dokumen hukum Indonesia (endomorphosis/ipfs_indonesia_laws) setelah exact dedupe + SimHash batch. Seluruh record language=id eksplisit. SHA256 dicocokkan terhadap digest asset GitHub Release (korpus-pelengkap-bersih.jsonl.gz) sebelum dicatat di sini."
       }
     ],
-    "totalDokumenKanonik": 25272612,
-    "totalTokenBPEResmiKanonik": 5199165796
+    "totalDokumenKanonik": 25342107,
+    "totalTokenBPEResmiKanonik": 5223639069
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -105,18 +105,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 5199165796,
+    "totalTokenKanonikTerverifikasi": 5223639069,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-10 (ketiga, menggantikan catatan 567.121.195 yang sudah basi): K1/K2/K3 di-refresh 2026-09-09/10 (wikipedia-id dedupe->K1, Alpaca-ID+regulasi QA->K2, recipes+proper-nouns+koran+science->K3). totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 459.594.014 + 4.375.227.575 + 364.344.207 = 5.199.165.796, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk \"total token proyek saat ini\" HANYA SATU: 5.199.165.796. Angka K2 (4.375.227.575) sempat dicurigai salah hitung (rasio byte-gzip/token cuma 0,16, jauh di bawah K1/K3 yang 1,65-1,69) - VERIFIKASI INDEPENDEN 2026-09-10 (unduh ulang asset K2 langsung, cek SHA256+gzip -t, tokenisasi ulang penuh 20.356.241 dokumen dengan tokenizer resmi) menghasilkan 4.375.227.577, selisih cuma 2 token dari 4,375 miliar - ANGKA MANIFEST BENAR, bukan bug. Rasio kompresi rendah itu wajar: K2 punya 20,36 juta dokumen pendek/berulang (QA/instruksi bergaya template), jauh lebih compressible gzip-nya dibanding K1/K3 yang dokumennya lebih panjang dan variatif (artikel ensiklopedia/berita) - bukan indikasi data salah. Enam rilis data mentah BARU (~46GB, HuggingFace) ditemukan di Release 2026-09-09 - SEBAGIAN (batch id-knowledge-science-language + regulasi QA dari id-specialized-qa-legal-instruction) SUDAH masuk kanonik di atas; sisanya (Indo4B/Indo4B-Plus/id-corpus-1p8b-split/garuda/LaMini) masih staging, lihat PRD/PRD-MANUS-DATA-MENTAH.md §4.2 untuk status per-tag. Field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b.",
-    "tokenKanonikPerintahClaude": 5199165796,
-    "kekuranganTokenKanonik": -4199165796
+    "catatanPenting": "REKONSILIASI 2026-09-11 (keempat, menggantikan catatan 5.199.165.796 yang sudah basi): K3 di-refresh ke v8 - digabung dengan 69.495 dokumen hukum Indonesia baru (endomorphosis/ipfs_indonesia_laws) setelah exact dedupe + SimHash batch, dipublish Grok/dirigen ke GitHub Release tag korpus-pelengkap-bersih (asset manifest-pelengkap-bersih.json, diunduh+dicocokkan SHA256 lawan digest asset sebelum dicatat di sini). totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 459.594.014 + 4.375.227.575 + 388.817.480 = 5.223.639.069, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk \"total token proyek saat ini\" HANYA SATU: 5.223.639.069. K1 dan K2 TIDAK berubah dari rekonsiliasi 2026-09-10 (lihat commit sebelumnya untuk riwayat verifikasi independen K2). Enam rilis data mentah BARU (~46GB, HuggingFace) ditemukan di Release 2026-09-09 - SEBAGIAN sudah masuk kanonik; sisanya (Indo4B/Indo4B-Plus/id-corpus-1p8b-split/garuda/LaMini) masih staging, lihat PRD/PRD-MANUS-DATA-MENTAH.md §4.2 untuk status per-tag. Field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b.",
+    "tokenKanonikPerintahClaude": 5223639069,
+    "kekuranganTokenKanonik": -4223639069
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
-  "targetTercapai": false,
-  "kekuranganTokenKanonik": -4199165796,
-  "catatanPotensi": "Kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, gerbang 1 miliar sangat mungkin tercapai/terlewati - kata approx 8,1 miliar sebelum filter kualitas/dedupe/konversi ke BPE. Ini POTENSI, bukan capaian - jangan diklaim tercapai sebelum direview dan angka BPE nyata dihitung ulang.",
-  "tokenKanonikPerintahClaude": 5199165796,
+  "targetTercapai": true,
+  "kekuranganTokenKanonik": -4223639069,
+  "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
+  "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
+  "tokenKanonikPerintahClaude": 5223639069,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",

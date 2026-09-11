@@ -1,13 +1,14 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-09-02.
+Diperbarui: 2026-09-11 (sinkron dengan `korpus-manifest-total.json`
+setelah K3 v8 digabung — lihat commit yang menyertakan file ini).
 
 ## Release hidup
 | Tag | Isi |
 |-----|-----|
-| `korpus-ensiklopedia-bersih` | K1 ~759.587 dokumen, gzip 571 MB, SHA `3383bc30…` |
-| `korpus-dialog-daerah-bersih` | K2 638.371 dokumen, gzip 131 MB, SHA `e0dd2c6a…` |
-| `korpus-pelengkap-bersih` | K3 99.557 dokumen, gzip 54 MB, SHA `2bf11202…` |
+| `korpus-ensiklopedia-bersih` | K1 2.012.126 dokumen, gzip 760,6 MB, SHA `7ce4830d…` |
+| `korpus-dialog-daerah-bersih` | K2 20.356.241 dokumen, gzip 701,3 MB, SHA `3c64fee9…` |
+| `korpus-pelengkap-bersih` | K3 v8 2.973.740 dokumen (termasuk 69.495 dokumen hukum Indonesia baru), gzip 640,3 MB, SHA `ec077604…` |
 | `checkpoint-100m` | 100M di GitHub Release |
 | `checkpoint-200m` | arsip PPL 1068; **yang dipakai PWA** = HF `Maetalizer19/rategoan-neural` SHA `69daa21d…` PPL 932, CORS terkonfirmasi (`access-control-allow-origin: *`) |
 | `prd-data-release` | riwayat aturan awal penyaringan korpus (sudah dilebur ke dokumen internal) |
@@ -21,9 +22,9 @@ tidak dihitung ke token kanonik. Workflow `panen.yml` sudah dihapus,
 tidak akan dipanen ulang otomatis.
 
 ## Token
-Angka BPE dicatat 2026-09-02: **543.202.593**
-(K1 354.376.464 + K2 151.487.572 + K3 37.338.557).
-Target jangka panjang 2–4 miliar belum tercapai.
+Angka BPE dicatat 2026-09-11 (`check-korpus-manifest-sync.mjs`: SEMUA SINKRON): **5.223.639.069**
+(K1 459.594.014 + K2 4.375.227.575 + K3 388.817.480).
+Gerbang 1 miliar tercapai; target jangka panjang 4 miliar sudah terlewati.
 
 ## Dilarang
 MADLAD / OSCAR / mC4 / tag `panen-*`. Workflow `panen.yml` sudah dihapus.
