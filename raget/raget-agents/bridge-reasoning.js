@@ -18,8 +18,11 @@ async function trySuperlatif(text) {
   if (!m) {
     // Bentuk periphrastic "paling X" ("negara mana yang penduduknya paling
     // banyak", "negara dengan populasi paling padat") - sama maknanya
-    // dengan sufiks "-ter" di atas, cuma beda gaya bahasa.
-    const mp = text.match(/negara\s+(?:mana\s+)?(?:yang\s+)?(?:dengan\s+)?(populasi|penduduk|luas|wilayah)?(?:nya)?\s+paling\s+(besar|banyak|luas|kecil|sempit|padat)\b/i);
+    // dengan sufiks "-ter" di atas, cuma beda gaya bahasa. "\s*nya" (bukan
+    // cuma "nya") karena splitPossessiveSuffix() di bridgeResolve sudah
+    // menyisipkan spasi sebelum "nya" ("penduduknya" -> "penduduk nya")
+    // sebelum text ini sampai ke sini (lihat bridge-extras.js extras()).
+    const mp = text.match(/negara\s+(?:mana\s+)?(?:yang\s+)?(?:dengan\s+)?(populasi|penduduk|luas|wilayah)?(?:\s*nya)?\s+paling\s+(besar|banyak|luas|kecil|sempit|padat)\b/i);
     if (!mp) return null;
     fieldWord = mp[1];
     descWord = PALING_KE_TER[mp[2].toLowerCase()];
