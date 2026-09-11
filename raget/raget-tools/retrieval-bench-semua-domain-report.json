@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T11:25:46.565Z",
+  "generatedAt": "2026-09-11T13:50:53.026Z",
   "domainsCovered": 22,
   "mechanism": "raget-retrieval/retrieve.js (TF-IDF cosine similarity), threshold 0.3, retrieval per-domain (bukan lintas domain)",
   "goldQueryTemplate": "\"apa itu <nama>\" - nama = field wajib skema unified, ground truth = entry itu sendiri",

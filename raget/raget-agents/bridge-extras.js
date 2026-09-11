@@ -81,7 +81,9 @@ async function tryWisataDi(text) {
 }
 
 async function trySiapaTokoh(text) {
-  const m = text.match(/^siapa\s+(?:penemu\s+|pelukis\s+|penulis\s+|pencipta\s+)?(.+)$/i);
+  const forward = text.match(/^siapa\s+(?:penemu\s+|pelukis\s+|penulis\s+|pencipta\s+)?(.+)$/i);
+  const reverse = !forward && text.match(/^(?:penemu|pelukis|penulis|pencipta)\s+(.+?)\s+siapa\??$/i);
+  const m = forward || reverse;
   if (!m) return null;
   const entity = bridgeResolve.cleanEntity(m[1]);
   if (!entity) return null;

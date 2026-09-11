@@ -27,6 +27,17 @@ function norm(s) {
   return String(s || '').toLowerCase().trim();
 }
 
+let lastTokoh = null;
+
+function rememberTokoh(t) {
+  if (t && t.nama) lastTokoh = t.nama;
+}
+
+function resolvePronoun(text) {
+  if (!lastTokoh) return text;
+  return String(text || '').replace(/\bdia\b/gi, lastTokoh);
+}
+
 function hasWordSubstring(haystack, needle) {
   if (!haystack || !needle) return false;
   const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -63,6 +74,7 @@ async function tryProfil(text) {
   if (!m) return null;
   const t = await findTokoh(m[3]);
   if (!t) return null;
+  rememberTokoh(t);
   return composeTokoh(t);
 }
 
@@ -74,6 +86,7 @@ async function tryPencapaian(text) {
   const name = m[2] || m[3] || m[4] || m[5];
   const t = await findTokoh(name);
   if (!t) return null;
+  rememberTokoh(t);
   return t.nama + ' — pencapaian utama:\n' + t.pencapaian.map((p) => '• ' + p).join('\n');
 }
 
@@ -83,6 +96,7 @@ async function tryKutipan(text) {
   const name = m[3] || m[4];
   const t = await findTokoh(name);
   if (!t) return null;
+  rememberTokoh(t);
   return t.nama + ' pernah berkata: "' + t.kutipan + '"';
 }
 
@@ -91,6 +105,7 @@ async function tryTrivia(text) {
   if (!m) return null;
   const t = await findTokoh(m[3]);
   if (!t) return null;
+  rememberTokoh(t);
   return 'Fakta unik tentang ' + t.nama + ': ' + t.trivia;
 }
 
@@ -100,13 +115,39 @@ async function tryRelasi(text) {
   const name = m[1] || m[2];
   const t = await findTokoh(name);
   if (!t || !t.relasi.length) return null;
+  rememberTokoh(t);
   return t.nama + ' berhubungan dengan: ' + t.relasi.map((r) => r.nama + ' (' + r.jenis + ')').join(', ') + '.';
 }
 
-async function tryTokoh(text) {
-  const t = String(text || '').trim();
+async function tryVital(text) {
+  const m = text.match(
+    /^kapan\s+(.+?)\s+(lahir|meninggal|wafat)\??$|^(.+?)\s+(lahir|meninggal|wafat)\s+kapan\??$|^berapa\s+umur\s+(.+?)\??$/i
+  );
+  if (!m) return null;
+  const name = m[1] || m[3] || m[5];
+  const t = await findTokoh(name);
   if (!t) return null;
+  rememberTokoh(t);
+  if (m[5]) {
+    if (t.wafat != null) {
+      return t.nama + ' wafat pada usia sekitar ' + (t.wafat - t.lahir.tahun) + ' tahun (lahir ' + fmtTahun(t.lahir.tahun) + ', wafat ' + fmtTahun(t.wafat) + ').';
+    }
+    const currentYear = new Date().getFullYear();
+    return t.nama + ' saat ini berusia sekitar ' + (currentYear - t.lahir.tahun) + ' tahun (lahir ' + fmtTahun(t.lahir.tahun) + ').';
+  }
+  const isMeninggal = /meninggal|wafat/i.test(m[2] || m[4] || '');
+  if (isMeninggal) {
+    return t.wafat == null ? t.nama + ' masih hidup hingga sekarang.' : t.nama + ' wafat pada tahun ' + fmtTahun(t.wafat) + '.';
+  }
+  return t.nama + ' lahir pada tahun ' + fmtTahun(t.lahir.tahun) + ' di ' + t.lahir.negara + '.';
+}
+
+async function tryTokoh(text) {
+  const raw = String(text || '').trim();
+  if (!raw) return null;
+  const t = resolvePronoun(raw);
   return (
+    (await tryVital(t)) ||
     (await tryPencapaian(t)) ||
     (await tryKutipan(t)) ||
     (await tryTrivia(t)) ||
@@ -120,6 +161,7 @@ export const tokohStore = Object.freeze({
   findTokoh,
   composeTokoh,
   tryProfil,
+  tryVital,
   tryPencapaian,
   tryKutipan,
   tryTrivia,
