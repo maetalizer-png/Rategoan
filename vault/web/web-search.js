@@ -74,6 +74,29 @@ async function searchWiktionary(query, lang) {
   };
 }
 
+// Wikidata itu basis pengetahuan terstruktur (bukan artikel prosa) - banyak
+// entitas sempit (istilah teknis, tokoh minor, perusahaan kecil) yang punya
+// entri Wikidata dengan deskripsi singkat padahal belum punya artikel
+// Wikipedia sendiri. Dipakai sebagai fallback paling akhir, cuma ambil
+// label + deskripsi satu baris (bukan seluruh data terstruktur/claims -
+// itu butuh resolusi properti tambahan yang jauh lebih kompleks).
+async function searchWikidata(query) {
+  const url =
+    'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=' +
+    encodeURIComponent(query) + '&language=id&format=json&origin=*&limit=1';
+  const data = await fetchJson(url);
+  const hit = data && data.search && data.search[0];
+  if (!hit || !hit.description) return null;
+  const label = hit.label || query;
+  return {
+    title: label,
+    extract: label + ' — ' + hit.description + '.',
+    url: hit.concepturi || ('https://www.wikidata.org/wiki/' + hit.id),
+    lang: 'id',
+    source: 'wikidata',
+  };
+}
+
 async function search(query) {
   const q = String(query || '').trim();
   if (!q) return { ok: false, message: 'Mau cari apa di internet?' };
@@ -83,7 +106,8 @@ async function search(query) {
     if (!result) result = await searchWikipedia(q, 'en');
     if (!result) result = await searchWiktionary(q, 'id');
     if (!result) result = await searchWiktionary(q, 'en');
-    if (!result) return { ok: false, message: 'Sudah dicari di internet (Wikipedia & Wiktionary) tapi tidak ketemu hasil yang relevan untuk "' + q + '".' };
+    if (!result) result = await searchWikidata(q);
+    if (!result) return { ok: false, message: 'Sudah dicari di internet (Wikipedia, Wiktionary & Wikidata) tapi tidak ketemu hasil yang relevan untuk "' + q + '".' };
     return { ok: true, ...result };
   } catch (e) {
     return { ok: false, message: NETWORK_FAIL_MESSAGE };

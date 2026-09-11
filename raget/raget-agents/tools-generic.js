@@ -1,9 +1,13 @@
 import { agentTools } from './agent-tools.js';
 import { readWeb } from '../../vault/web/read-web.js';
 import { webSearch } from '../../vault/web/web-search.js';
+import { weather } from '../../vault/web/weather.js';
 import { quizSession } from './quiz-session.js';
 import { fewshotLocal } from '../raget-memory/fewshot-local.js';
 import { ragetDb } from '../raget-database/raget-db.js';
+import { routerIntent } from './router-intent.js';
+
+const SOURCE_NAMES = { wiktionary: 'Wiktionary', wikidata: 'Wikidata', wikipedia: 'Wikipedia' };
 
 async function run(kind, prompt, messages, onFewshotCacheClear) {
   if (kind === 'kuis') return await quizSession.ask();
@@ -46,11 +50,22 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       .trim();
     const result = await webSearch.search(q);
     if (!result.ok) return result.message;
-    const projectName = result.source === 'wiktionary' ? 'Wiktionary' : 'Wikipedia';
-    const sourceLabel = projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
+    const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
+    const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
     return (
       result.extract +
       (result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '')
+    );
+  }
+  if (kind === 'cuaca_live') {
+    const place = routerIntent.detectCuacaLive(prompt.toLowerCase());
+    const result = await weather.search(place || prompt);
+    if (!result.ok) return result.message;
+    return (
+      'Cuaca di ' + result.place + ' saat ini: ' + result.desc + ', suhu ' + Math.round(result.temp) + '°C' +
+      (result.humidity != null ? ', kelembapan ' + Math.round(result.humidity) + '%' : '') +
+      (result.wind != null ? ', angin ' + Math.round(result.wind) + ' km/jam' : '') + '.' +
+      '\n\n(Sumber: Open-Meteo — data cuaca real-time, bukan dari basis data lokal Raget.)'
     );
   }
   const stripTrailingFiller = (s) => s.replace(/\s*\b(apa\s*(saja|sih)?|gimana|bagaimana|dong|ya|sih)\s*\??\s*$/i, '').trim();

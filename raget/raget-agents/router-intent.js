@@ -16,6 +16,21 @@ const ABOUT_RE = /^(apa\s+yang\s+kamu\s+ketahui\s+tentang|ceritakan\s+tentang|ce
 // yang tidak relevan sama sekali.
 const LAYANAN_KEYWORDS_RE = /\b(ktp|kk|sim|paspor|akta|npwp|dukcapil|pengaduan|komplain|loket|antr[ie]|berkas|calo)\b/i;
 
+// Cuaca LIVE (tanya lokasi spesifik, minta data real-time) vs smalltalk
+// cuaca (curhat "lagi panas/dingin/hujan ya") yang ditangani social-engine -
+// dibedakan lewat kata emosi/keluhan; kalau ada kata itu, bukan permintaan
+// cek cuaca beneran, biarkan jatuh ke smalltalk seperti biasa.
+const CUACA_LIVE_RE = /^cuaca\s+(?:di\s+|kota\s+)?([a-z\s]{2,40}?)\s*(?:hari\s+ini|sekarang|saat\s+ini)?\??$/i;
+const CUACA_EMOTION_WORDS_RE = /\b(panas|dingin|hujan|mendung|gerah|sejuk|deras|terik|adem)\b/i;
+
+function detectCuacaLive(text) {
+  const m = text.match(CUACA_LIVE_RE);
+  if (!m) return null;
+  const place = m[1].trim();
+  if (!place || CUACA_EMOTION_WORDS_RE.test(place)) return null;
+  return place;
+}
+
 const MOOD_OPENERS = {
   sedih: { casual: 'Aduh, kedengarannya lagi sedih ya. ', formal: 'Turut prihatin mendengarnya. ', neutral: 'Kedengarannya lagi sedih ya. ' },
   capek: { casual: 'Wah, pasti capek banget ya. ', formal: 'Semoga Anda bisa segera beristirahat. ', neutral: 'Kedengarannya lagi capek ya. ' },
@@ -89,6 +104,7 @@ function detectTool(prompt) {
   if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
+  if (detectCuacaLive(t)) return 'cuaca_live';
   if (/\b(cari|carikan|search)\b.*\binternet\b|^googling\s+/.test(t)) return 'websearch';
   if (/^ingat\s+(apa\s+)?(yang\s+saya\s+(catat|pernah\s+(bilang|cerita)|simpan)|soal|tentang)\b/.test(t)) return 'cari';
   if (/^ingat\s+(bahwa\s+)?/.test(t)) return 'ingat';
@@ -145,6 +161,7 @@ export const routerIntent = Object.freeze({
   detectRating,
   detectTeaching,
   detectTool,
+  detectCuacaLive,
   detectModeCommand,
   classifyIntent,
   detectAnswerType,
