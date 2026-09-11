@@ -298,10 +298,26 @@ bagaimana"**. Urutan wajib, tidak boleh dibalik atau dilewati:
 9. PUBLISH            Grok/dirigen: publish-korpus-release.py --file ... --tag ...
         │             (LUAR SANDBOX - lihat §0 kenapa Claude berhenti di sini)
         ▼
-10. GABUNG KE KANONIK  update raget-data/jsonl/external/korpus-manifest-total.json:
-        │              tambah/perbarui entry di kanonik.entries, LALU jalankan
-        │              raget-tools/check-korpus-manifest-sync.mjs (WAJIB, lihat
-        │              di bawah) sebelum commit
+10. GABUNG KE KANONIK  jalankan raget-tools/sync-manifest-from-release.mjs
+        │              (OTOMATIS sejak 2026-09-11 - jangan edit kanonik.entries
+        │              manual lagi). Skrip ini sendiri yang: ambil manifest
+        │              kategori dari 3 tag Release resmi, verifikasi SHA256
+        │              lawan digest asset gzip (Gerbang 1b), tulis ulang
+        │              kanonik.entries + SEMUA field turunan (total,
+        │              ringkasanTotal, targetTercapai). Pakai --dry-run dulu
+        │              buat lihat apa yang AKAN berubah tanpa menulis apa pun.
+        │              Skrip keluar exit 1 TANPA menulis kalau SHA256 tidak
+        │              cocok atau manifest kategori tidak ketemu - tidak akan
+        │              pernah menulis data yang belum lolos verifikasi. Kalau
+        │              satu tag punya 2+ asset .json berskema manifest
+        │              kategori sekaligus (preseden nyata: asset "manifest.json"
+        │              lama lupa dihapus, ketumpuk sama "manifest-<kategori>
+        │              -bersih.json" baru), skrip pakai yang paling baru DAN
+        │              cetak peringatan suruh Grok/dirigen hapus yang lama -
+        │              ini kelas bug nyata yang bikin bingung "release-nya ada
+        │              2 manifest, yang mana yang bener" (2026-09-11). Habis
+        │              itu jalankan raget-tools/check-korpus-manifest-sync.mjs
+        │              (WAJIB) buat verifikasi ulang sebelum commit.
         ▼
 11. RE-AUDIT           raget-tools/audit-corpus-tokens.mjs (PRD-RAGET-NEURAL.md
                        Fase A.1) supaya persentase kecukupan data ikut ter-update
