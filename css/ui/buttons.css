@@ -29,23 +29,6 @@
   align-items: center;
   justify-content: center;
   color: var(--rg-muted);
-  position: relative;
-}
-
-.plus-badge {
-  display: none;
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--rg-accent);
-  border: 1.5px solid var(--rg-surface);
-}
-
-#btn-plus.has-badge .plus-badge {
-  display: block;
 }
 
 .icon-btn:active {

@@ -58,13 +58,11 @@ export const composer = {
     this.websearchActive = active;
     const card = $('sheet-websearch');
     const inp = $('chat-input');
-    const plusBtn = $('btn-plus');
     if (card) {
       card.classList.toggle('active', active);
       card.setAttribute('aria-checked', String(active));
     }
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
-    if (plusBtn) plusBtn.classList.toggle('has-badge', active);
   },
   bind() {
     const inp = $('chat-input');
@@ -82,16 +80,12 @@ export const composer = {
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
     const websearchCard = $('sheet-websearch');
     if (websearchCard) {
+      // Sengaja TIDAK sheets.close() / toast di sini - toggle-nya sendiri
+      // sudah jelas nunjukin status ON/OFF, jadi user bisa lihat langsung
+      // switch-nya geser tanpa sheet mendadak tertutup atau notifikasi
+      // besar yang malah menghalangi.
       websearchCard.onclick = () => {
-        const next = !this.websearchActive;
-        this.setWebsearch(next);
-        sheets.close();
-        toast.show(
-          next
-            ? 'Pencarian internet AKTIF — semua pesan berikutnya dicari langsung dari internet sampai kamu matikan lagi.'
-            : 'Pencarian internet dimatikan.'
-        );
-        inp.focus();
+        this.setWebsearch(!this.websearchActive);
       };
     }
     $('btn-login').onclick = () => {
