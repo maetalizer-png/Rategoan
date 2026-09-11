@@ -24,7 +24,50 @@ function breakIntoParagraphs(text, sentencesPerPara) {
   return paras.join('\n\n');
 }
 
+// Gaya prosa Wikipedia sering nyelipin daftar di dalam satu kalimat panjang
+// (mis. "dibagi menjadi lima era: A, ...; B, ...; C, ...."). Enak buat mesin,
+// tapi jadi baris super panjang yang monoton buat dibaca manusia. Kalau nemu
+// pola "kalimat: item; item; item" dengan minimal 3 item, pecah jadi daftar
+// bullet betulan supaya strukturnya kelihatan, tanpa mengubah kata satu pun.
+const ENUM_SENTENCE_RE = /([^.!?]*:\s*)([^.!?]+(?:;\s*[^.!?]+){2,})([.!?])/;
+
+function extractEnumeration(text) {
+  const m = text.match(ENUM_SENTENCE_RE);
+  if (!m) return null;
+  const items = m[2].split(/;\s*/).map((s) => s.trim().replace(/^dan\s+/i, '')).filter(Boolean);
+  if (items.length < 3) return null;
+  return {
+    before: text.slice(0, m.index).trim(),
+    heading: m[1].trim(),
+    items,
+    after: text.slice(m.index + m[0].length).trim(),
+  };
+}
+
+// Judul artikel sebagai heading markdown + daftar bullet (kalau kalimatnya
+// memang berbentuk enumerasi) ngasih "identitas" visual ke rangkuman -
+// bukan cuma tembok teks rata kiri yang monoton kayak sebelumnya.
+function formatWikipediaExtract(title, extract) {
+  const enumResult = extractEnumeration(extract);
+  let body;
+  if (enumResult) {
+    const beforePara = enumResult.before ? breakIntoParagraphs(enumResult.before, 2) + '\n\n' : '';
+    const list = enumResult.items.map((it) => '- ' + it).join('\n');
+    const afterPara = enumResult.after ? '\n\n' + breakIntoParagraphs(enumResult.after, 2) : '';
+    body = beforePara + enumResult.heading + '\n' + list + afterPara;
+  } else {
+    body = breakIntoParagraphs(extract, 2);
+  }
+  return '# ' + title + '\n\n' + body;
+}
+
 async function run(kind, prompt, messages, onFewshotCacheClear) {
+  if (kind === 'file_qa') {
+    const lastMsg = Array.isArray(messages) && messages.length ? messages[messages.length - 1] : null;
+    const att = lastMsg && lastMsg.attach;
+    if (!att || !att.fileText) return 'Tidak ada file teks yang terbaca untuk dijawab.';
+    return agentTools.fileQa(att.fileText, att.name, prompt);
+  }
   if (kind === 'kuis') return await quizSession.ask();
   if (kind === 'ringkas') return agentTools.ringkas(prompt.replace(/^(ringkas(kan)?|rangkum(kan)?)\s*:?\s*/i, ''));
   if (kind === 'ringkas_percakapan') return agentTools.ringkasPercakapan(messages);
@@ -68,7 +111,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     if (!result.ok) return result.message;
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
-    const body = result.source === 'wikipedia' ? breakIntoParagraphs(result.extract, 2) : result.extract;
+    const body = result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract;
     return (
       body +
       (result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '')

@@ -66,6 +66,71 @@ function ringkas(text) {
   return formatter.blocks([formatter.h('Ringkasan', 3), formatter.bullets(points), 'Intinya: ' + gist]);
 }
 
+const FILE_QA_TRIGGER_RE = /^(apa\s+isi|ringkas(kan)?|rangkum(kan)?|jelaskan|ceritakan)\b/i;
+const FILE_QA_FILLER_RE = /\b(isi|isinya|file|dokumen|ini|itu|nya|dong|dari|tentang|soal)\b/gi;
+
+// Pertanyaan kayak "ringkas isi file ini" atau "apa isi file ini" itu
+// generik (mau ringkasan keseluruhan), beda dari "berapa anggaran
+// pemasaran" yang spesifik. Deteksinya: kalau setelah kata pemicu
+// (ringkas/jelaskan/dst) DAN semua kata pengisi umum (isi/file/ini/dst)
+// dibuang, sisa kalimatnya kosong - berarti tidak ada topik spesifik yang
+// ditanya, jadi anggap generik. Regex lama cuma cocok pola persis
+// "ringkas isi file ini" tanpa variasi urutan kata, gagal buat
+// "ringkas isi file ini" yang justru salah satu contoh paling umum.
+function isGenericFileQuestion(q) {
+  if (!FILE_QA_TRIGGER_RE.test(q)) return false;
+  const cleaned = q
+    .replace(FILE_QA_TRIGGER_RE, '')
+    .replace(FILE_QA_FILLER_RE, '')
+    .replace(/[^\p{L}\p{N}\s]/gu, '')
+    .trim();
+  return cleaned.length === 0;
+}
+
+// File yang dilampirkan cuma dibaca ke memori (FileReader) tapi isinya gak
+// pernah dipakai jawab apa pun - lampiran cuma jadi chip nama file doang.
+// Fungsi ini yang menyambungkan: kalau pertanyaannya generik ("apa isi file
+// ini") pakai ringkas() ekstraktif yang sudah ada, kalau spesifik cari
+// paragraf paling cocok lewat overlap kata kunci sederhana (bukan makna
+// semantik - Rategoan gak punya model bahasa buat itu, tapi cukup buat
+// nemuin bagian relevan di file teks biasa).
+function fileQa(fileText, fileName, question) {
+  const text = String(fileText || '').trim();
+  const name = fileName || 'file';
+  if (!text) return 'File "' + name + '" kosong atau isinya tidak bisa dibaca sebagai teks.';
+  const q = String(question || '').trim();
+  if (!q || isGenericFileQuestion(q)) {
+    return 'Ringkasan isi "' + name + '":\n\n' + ringkas(text);
+  }
+  const paras = text.split(/\n{2,}/).map((p) => p.trim()).filter((p) => p.length > 5);
+  const qWords = q
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length > 2);
+  if (!qWords.length || !paras.length) {
+    return 'Ringkasan isi "' + name + '":\n\n' + ringkas(text);
+  }
+  let best = null;
+  let bestScore = 0;
+  for (const p of paras) {
+    const pl = p.toLowerCase();
+    let score = 0;
+    for (const w of qWords) if (pl.includes(w)) score++;
+    if (score > bestScore) {
+      bestScore = score;
+      best = p;
+    }
+  }
+  if (!best) {
+    return (
+      'Tidak nemu bagian yang cocok soal itu di "' + name + '". ' +
+      'Coba tanya dengan kata kunci lain, atau minta "ringkas file ini".'
+    );
+  }
+  return 'Dari "' + name + '":\n\n' + best;
+}
+
 function ringkasPercakapan(messages) {
   const recent = (Array.isArray(messages) ? messages : []).slice(-10).filter((m) => m.role === 'user');
   if (!recent.length) return 'Belum ada percakapan untuk diringkas.';
@@ -705,6 +770,7 @@ function eksporCatatan(format) {
 
 export const agentTools = Object.freeze({
   ringkas,
+  fileQa,
   ringkasPercakapan,
   hitung,
   waktu,

@@ -210,7 +210,10 @@
 
 .md-h {
   display: block;
-  margin: 4px 0;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.1px;
+  margin: 2px 0 10px;
 }
 
 .md-link {

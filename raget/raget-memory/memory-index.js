@@ -2,6 +2,7 @@ import { memoryLong } from './memory-long.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { meaningfulWords } from '../../utils/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
+import { memoryPreference } from '../../js/state/memory-preference.js';
 
 let knowledgeCache = null;
 let factoidCache = null;
@@ -59,10 +60,19 @@ async function search(query, limit) {
   knowledge.faq.forEach((item) => corpus.push({ type: 'faq', text: (item.q || '') + ' — ' + (item.a || '') }));
   knowledge.umum.forEach((item) => corpus.push({ type: 'umum', text: (item.title ? item.title + '. ' : '') + (item.text || '') }));
 
-  const facts = memoryLong.allFacts();
-  Object.keys(facts).forEach((key) => corpus.push({ type: 'fact', text: key + ': ' + facts[key] }));
+  // Toggle "Memori" (js/state/memory-preference.js) - kalau dimatikan
+  // pengguna, fakta pribadi yang sudah tersimpan (nama, kota, dst) tidak
+  // boleh nongol lewat jalur pencarian umum ini juga, bukan cuma lewat
+  // recallFromMemory() di agent.js. Tanpa guard ini, toggle OFF gagal
+  // menyembunyikan fakta lama karena planFallback tetap ketemu fakta itu
+  // via corpus retrieval biasa (skor cocok kata kunci), bukan recall
+  // eksplisit - persis lubang yang ditemukan sewaktu verifikasi fitur ini.
+  if (memoryPreference.get()) {
+    const facts = memoryLong.allFacts();
+    Object.keys(facts).forEach((key) => corpus.push({ type: 'fact', text: key + ': ' + facts[key] }));
 
-  memoryLong.allNotes().forEach((note) => corpus.push({ type: 'note_long', text: note.text }));
+    memoryLong.allNotes().forEach((note) => corpus.push({ type: 'note_long', text: note.text }));
+  }
 
   const ranked = retrieval.rank(q, corpus, { threshold: retrieval.LIST_THRESHOLD, limit: cap });
   return ranked.map((r) => ({ type: r.item.type, text: r.item.text, score: r.score }));

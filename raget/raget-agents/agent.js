@@ -32,6 +32,7 @@ import { intelligenceRumus } from './intelligence-rumus.js';
 import { tokohStore } from './tokoh-store.js';
 import { kulinerStore } from './kuliner-store.js';
 import { frameworkApply } from './framework-apply.js';
+import { memoryPreference } from '../../js/state/memory-preference.js';
 
 const DEFAULT_PERSONA = { name: 'Raget', style: 'ramah, hangat, sedikit humor, tetap jujur dan singkat', rules: [] };
 
@@ -231,6 +232,20 @@ async function respondCore(messages, prompt) {
     }
   }
 
+  // File dilampirkan lewat tombol "File" di attach sheet cuma berlaku untuk
+  // SATU pesan ini (attach.consume() di composer.js mengosongkannya lagi
+  // setelah terkirim) - jadi cukup cek attach di pesan TERAKHIR. Sama
+  // seperti websearch di atas, ini aksi eksplisit user (pilih file lewat
+  // tombol) jadi harus menang duluan sebelum heuristik lain nyasar.
+  const lastMsg = Array.isArray(messages) && messages.length ? messages[messages.length - 1] : null;
+  if (lastMsg && lastMsg.attach && lastMsg.attach.fileText) {
+    const fileReply = await runTool('file_qa', text, messages);
+    if (fileReply) {
+      ragetDb.addNote(text, fileReply, null, 'file_qa');
+      return postProcess(fileReply);
+    }
+  }
+
   const emergencyReply = contextEngine.tryEmergency(text);
   if (emergencyReply) {
     ragetDb.addNote(text, emergencyReply, null, 'context_emergency');
@@ -293,7 +308,7 @@ async function respondCore(messages, prompt) {
     return postProcess(reply);
   }
 
-  memoryLong.learnFromText(text);
+  if (memoryPreference.get()) memoryLong.learnFromText(text);
 
   const mathReply = toolsMath.tryMath(text);
   if (mathReply) {
@@ -497,7 +512,7 @@ async function respondCore(messages, prompt) {
     }
   }
 
-  const recalled = recallFromMemory(text);
+  const recalled = memoryPreference.get() ? recallFromMemory(text) : null;
   if (recalled) {
     ragetDb.addNote(text, recalled, null, 'recall');
     return postProcess(recalled);
