@@ -371,5 +371,26 @@
       "year": "1939",
       "field": "teknologi"
     }
+  },
+  {
+    "id": "penemuan-listrik",
+    "kategori": "penemuan",
+    "wilayah": "teknologi",
+    "nama": "Listrik",
+    "tags": [
+      "listrik",
+      "kelistrikan",
+      "franklin",
+      "volta",
+      "faraday",
+      "tesla",
+      "edison"
+    ],
+    "teks": "Listrik tidak punya satu penemu tunggal — ia dipahami dan dikembangkan bertahap oleh banyak ilmuwan. Benjamin Franklin membuktikan petir adalah listrik (1752), Alessandro Volta menciptakan baterai kimia pertama (1800), Michael Faraday menemukan induksi elektromagnetik yang jadi dasar generator (1831), lalu Thomas Alva Edison dan Nikola Tesla bersaing mengembangkan sistem distribusi listrik praktis (arus searah vs arus bolak-balik) di akhir 1800-an. Termasuk penemuan bidang teknologi.",
+    "meta": {
+      "inventor": "Benjamin Franklin, Alessandro Volta, Michael Faraday, Thomas Alva Edison & Nikola Tesla",
+      "year": "1752-1880-an",
+      "field": "teknologi"
+    }
   }
 ]

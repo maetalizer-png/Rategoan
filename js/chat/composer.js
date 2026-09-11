@@ -13,6 +13,7 @@ import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 
 export const composer = {
+  websearchActive: false,
   autoGrow() {
     const inp = $('chat-input');
     inp.style.height = 'auto';
@@ -43,13 +44,25 @@ export const composer = {
     history.render();
     chat.renderMessages();
     haptics.tap(10);
-    const reply = await chat.ask(text);
+    const routedText = this.websearchActive ? 'googling ' + text : text;
+    if (this.websearchActive) this.setWebsearch(false);
+    const reply = await chat.ask(routedText);
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
     }
     store.save();
     history.render();
+  },
+  setWebsearch(active) {
+    this.websearchActive = active;
+    const btn = $('btn-websearch');
+    const inp = $('chat-input');
+    if (btn) {
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    }
+    if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
   },
   bind() {
     const inp = $('chat-input');
@@ -65,6 +78,13 @@ export const composer = {
     $('btn-plus').onclick = () => attach.open();
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
+    const websearchBtn = $('btn-websearch');
+    if (websearchBtn) {
+      websearchBtn.onclick = () => {
+        this.setWebsearch(!this.websearchActive);
+        if (this.websearchActive) toast.show('Pencarian internet aktif — jawaban berikutnya dicari langsung dari Wikipedia.');
+      };
+    }
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {

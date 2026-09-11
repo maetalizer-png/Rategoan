@@ -25,6 +25,11 @@
   animation: pulse 1s infinite;
 }
 
+#btn-websearch.active {
+  color: var(--rg-accent);
+  background: var(--rg-ring);
+}
+
 #btn-stop {
   display: none;
   color: var(--rg-danger);
