@@ -259,9 +259,15 @@ export const chat = {
     scrollBottom();
     scrolldown.update();
   },
-  async typeReply(text, follow) {
+  async typeReply(text, follow, opts) {
     const d = document.createElement('div');
     d.className = 'msg ai';
+    if (opts && opts.searching) {
+      const badge = document.createElement('div');
+      badge.className = 'msg-source-badge';
+      badge.innerHTML = ic('globe') + '<span>Hasil pencarian web</span>';
+      d.appendChild(badge);
+    }
     const body = document.createElement('div');
     d.appendChild(body);
     $('messages').appendChild(d);
@@ -312,11 +318,20 @@ export const chat = {
     }
     $('messages').appendChild(typing);
     scrollBottom();
+    const searchStart = Date.now();
     const reply = ai ? await ai.generate(s.messages, prompt) : null;
+    if (searching) {
+      // Koneksi cepat bisa bikin fetch selesai dalam hitungan puluhan ms -
+      // indikator "Mencari di internet..." bisa kelewat kedip tanpa sempat
+      // kebaca user. Jamin tampil minimal sebentar biar user beneran lihat
+      // ada pencarian internet yang jalan, bukan cuma template instan.
+      const elapsed = Date.now() - searchStart;
+      if (elapsed < 700) await sleep(700 - elapsed);
+    }
     typing.remove();
     if (reply == null) return null;
     s.messages.push({ role: 'ai', text: reply, time: Date.now() });
-    await this.typeReply(reply, !scrolldown.isFar());
+    await this.typeReply(reply, !scrolldown.isFar(), { searching });
     if (tts.enabled()) voice.speak(reply);
     return reply;
   },

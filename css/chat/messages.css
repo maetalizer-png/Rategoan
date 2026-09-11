@@ -71,6 +71,25 @@
   flex: none;
 }
 
+.msg-source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--rg-accent);
+  background: var(--rg-ring);
+  border-radius: var(--rg-pill);
+  padding: 3px 10px 3px 8px;
+  margin-bottom: 6px;
+}
+
+.msg-source-badge .ic {
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+
 .msg-attach {
   display: flex;
   align-items: center;
