@@ -137,17 +137,26 @@ function craftAnswer(field, label, value, item, richness) {
   return out;
 }
 
+const INLINE_KEY_FACT_RE = /^(ibu\s*kota|populasi)\s*:/i;
+
 function summarizeItem(item, richness) {
   const sentences = String(item.text || '')
     .split(/(?<=[.!?])\s+/)
     .filter(Boolean);
   const count = richness === 'singkat' ? 1 : 3;
-  const summary = sentences.slice(0, count).join(' ');
-  if (richness === 'singkat') return summary;
+  const picked = sentences.slice(0, count);
+  if (richness === 'singkat') return picked.join(' ');
+  // Kalimat "Ibu kota: X." / "Populasi: Y jiwa." sering sudah ikut ke-pick
+  // sebagai kalimat biasa (bukan cuma dicek via regex di summary utuh) -
+  // pisahkan dari paragraf prosa dan jadikan bullet, bukan dibiarkan
+  // menyatu jadi satu paragraf tanpa struktur ("mode detail" harus
+  // kelihatan terstruktur, bukan cuma parafrase teks aslinya).
+  const prose = picked.filter((s) => !INLINE_KEY_FACT_RE.test(s.trim()));
+  const bullets = picked.filter((s) => INLINE_KEY_FACT_RE.test(s.trim())).map((s) => '- ' + s.trim());
+  const summary = prose.join(' ');
   const meta = item.metadata || {};
-  const mentionsCapital = /ibu\s*kota/i.test(summary);
-  const mentionsPopulation = /populasi/i.test(summary);
-  const bullets = [];
+  const mentionsCapital = bullets.some((b) => /ibu\s*kota/i.test(b));
+  const mentionsPopulation = bullets.some((b) => /populasi/i.test(b));
   if (meta.capital && !mentionsCapital) bullets.push('- Ibukota: ' + meta.capital);
   if (meta.population != null && !mentionsPopulation) bullets.push('- Populasi: ' + formatValue('population', meta.population));
   if (!bullets.length) return summary;

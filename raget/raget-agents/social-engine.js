@@ -331,10 +331,15 @@ function trySocial(text) {
     tryCustomerService(t) ||
     tryCurhat(t) ||
     tryDiskusiPerdebatan(t) ||
+    // tryKritik SEBELUM tryOpiniUmum: keduanya sama-sama bisa kepicu
+    // kata "menurutmu" ("gimana menurutmu kualitas kerjaanku"), tapi
+    // tryKritik jauh lebih spesifik (minta feedback karya sendiri) -
+    // kalau dibalik, tryOpiniUmum keburu menjawab "gak punya opini
+    // pribadi" duluan dan tryKritik tidak pernah kebagian giliran.
+    tryKritik(t) ||
     tryOpiniUmum(t) ||
     tryHumor(t) ||
     tryMotivasi(t) ||
-    tryKritik(t) ||
     tryLatte(t) ||
     tryHeard(t) ||
     tryThreeA(t) ||
