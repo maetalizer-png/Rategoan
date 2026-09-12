@@ -35,6 +35,37 @@ const DATA_HEALTH_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>';
 const MEMORY_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7.2V17a3 3 0 0 0 3 3h1"/><path d="M12 2a5 5 0 0 1 5 5v1a4 4 0 0 1 2 7.2V17a3 3 0 0 1-3 3h-1"/><path d="M9 21h6"/><path d="M12 17v4"/></svg>';
+const MOON_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+const LOCK_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+const STORAGE_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>';
+const INFO_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+const CHEVRON_ICON =
+  '<svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+
+// Enam kategori Pengaturan - dulu semua section ditumpuk memanjang di satu
+// halaman (banyak scroll, garis antar-section berdesakan). Sekarang halaman
+// utama cuma daftar kategori (pola standar: Data/WhatsApp/Telegram dst juga
+// begini), tiap kategori dibuka sebagai halaman sendiri lewat #/settings/<key>.
+const CATEGORIES = [
+  { key: 'tampilan', title: 'Tampilan', icon: MOON_ICON },
+  { key: 'ai', title: 'AI & Model', icon: SERVER_MODE_ICON },
+  { key: 'privasi', title: 'Privasi & Keamanan', icon: LOCK_ICON },
+  { key: 'data', title: 'Data', icon: STORAGE_ICON },
+  { key: 'preferensi', title: 'Preferensi', icon: TTS_ICON },
+  { key: 'lainnya', title: 'Lainnya', icon: INFO_ICON },
+];
+
+const MENU_ROWS = CATEGORIES.map(
+  (c) => `
+            <div class="set-row clickable cat-row" data-cat="${c.key}">
+              <span>${c.icon} ${c.title}</span>
+              ${CHEVRON_ICON}
+            </div>`
+).join('');
 
 const TEMPLATE = `
       <div class="settings-page">
@@ -45,7 +76,7 @@ const TEMPLATE = `
               <polyline points="12 19 5 12 12 5"/>
             </svg>
           </button>
-          <h1>Pengaturan</h1>
+          <h1 id="settings-title">Pengaturan</h1>
         </header>
         <hr class="divider">
         <div id="profile-head" class="profile-head" hidden>
@@ -54,144 +85,157 @@ const TEMPLATE = `
           <div class="profile-mail" id="profile-mail"></div>
         </div>
         <hr class="divider" id="profile-divider" hidden>
-        <div id="settings-content">
-          <div class="set-section">
-            <div class="set-section-title">Tampilan</div>
-            <div class="set-row">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-                Mode Gelap
-              </span>
-              <span class="font-btns">
-                <button class="theme-btn" data-theme="light">T</button>
-                <button class="theme-btn" data-theme="auto">A</button>
-                <button class="theme-btn" data-theme="dark">G</button>
-              </span>
-            </div>
-            <div class="set-row">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="4 7 4 5 20 5 20 7"/>
-                  <line x1="9" y1="12" x2="15" y2="12"/>
-                  <line x1="12" y1="9" x2="12" y2="15"/>
-                  <rect x="6" y="9" width="12" height="10" rx="2"/>
-                </svg>
-                Ukuran Teks
-              </span>
-              <span class="font-btns">
-                <button class="font-btn" data-font="small">K</button>
-                <button class="font-btn" data-font="normal">N</button>
-                <button class="font-btn" data-font="large">B</button>
-              </span>
+
+        <div id="settings-menu">
+          <div class="set-section">${MENU_ROWS}
+          </div>
+        </div>
+
+        <div id="settings-content" hidden>
+          <div class="settings-category" data-cat="tampilan">
+            <div class="set-section">
+              <div class="set-row">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                  Mode Gelap
+                </span>
+                <span class="font-btns">
+                  <button class="theme-btn" data-theme="light">T</button>
+                  <button class="theme-btn" data-theme="auto">A</button>
+                  <button class="theme-btn" data-theme="dark">G</button>
+                </span>
+              </div>
+              <div class="set-hint" id="theme-hint"></div>
+              <div class="set-row">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 7 4 5 20 5 20 7"/>
+                    <line x1="9" y1="12" x2="15" y2="12"/>
+                    <line x1="12" y1="9" x2="12" y2="15"/>
+                    <rect x="6" y="9" width="12" height="10" rx="2"/>
+                  </svg>
+                  Ukuran Teks
+                </span>
+                <span class="font-btns">
+                  <button class="font-btn" data-font="small">K</button>
+                  <button class="font-btn" data-font="normal">N</button>
+                  <button class="font-btn" data-font="large">B</button>
+                </span>
+              </div>
             </div>
           </div>
 
-          <div class="set-section">
-            <div class="set-section-title">AI & Model</div>
-            <div id="set-section-ai"></div>
-          </div>
-
-          <div class="set-section">
-            <div class="set-section-title">Privasi & Keamanan</div>
-            <div class="set-row clickable" id="row-pin">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-                Kunci Aplikasi
-              </span>
-              <span class="set-value" id="pin-info">Nonaktif</span>
-            </div>
-            <div id="set-section-privasi"></div>
-          </div>
-
-          <div class="set-section">
-            <div class="set-section-title">Data</div>
-            <div class="set-row">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                </svg>
-                Penyimpanan
-              </span>
-              <span class="set-value" id="storage-info">—</span>
-            </div>
-            <div class="set-row clickable" id="row-backup">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Cadangkan Chat
-              </span>
-            </div>
-            <div class="set-row clickable" id="row-restore">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
-                Pulihkan Chat
-              </span>
-            </div>
-            <div class="set-row clickable" id="row-install" hidden>
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="5" y="2" width="14" height="20" rx="2"/>
-                  <line x1="12" y1="18" x2="12.01" y2="18"/>
-                </svg>
-                Instal Aplikasi
-              </span>
-            </div>
-            <div id="set-section-data"></div>
-          </div>
-
-          <div class="set-section">
-            <div class="set-section-title">Preferensi</div>
-            <div id="set-section-preferensi"></div>
-          </div>
-
-          <div class="set-section">
-            <div class="set-section-title">Lainnya</div>
-            <div class="set-row">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="12" y1="16" x2="12" y2="12"/>
-                  <line x1="12" y1="8" x2="12.01" y2="8"/>
-                </svg>
-                Tentang
-              </span>
-              <span class="set-value">Rategoan version 1.0</span>
+          <div class="settings-category" data-cat="ai">
+            <div class="set-section">
+              <div id="set-section-ai"></div>
             </div>
           </div>
 
-          <div class="set-section set-section-danger">
-            <div class="set-row clickable danger" id="row-clear-chat">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="3 6 5 6 21 6"/>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                </svg>
-                Hapus Semua Chat
-              </span>
+          <div class="settings-category" data-cat="privasi">
+            <div class="set-section">
+              <div class="set-row clickable" id="row-pin">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  Kunci Aplikasi
+                </span>
+                <span class="set-value" id="pin-info">Nonaktif</span>
+              </div>
+              <div id="set-section-privasi"></div>
             </div>
-            <div class="set-row clickable danger" id="row-logout">
-              <span>
-                <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                  <polyline points="16 17 21 12 16 7"/>
-                  <line x1="21" y1="12" x2="9" y2="12"/>
-                </svg>
-                Keluar
-              </span>
+          </div>
+
+          <div class="settings-category" data-cat="data">
+            <div class="set-section">
+              <div class="set-row">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                  </svg>
+                  Penyimpanan
+                </span>
+                <span class="set-value" id="storage-info">—</span>
+              </div>
+              <div class="set-row clickable" id="row-backup">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Cadangkan Chat
+                </span>
+              </div>
+              <div class="set-row clickable" id="row-restore">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                  Pulihkan Chat
+                </span>
+              </div>
+              <div class="set-row clickable" id="row-install" hidden>
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2"/>
+                    <line x1="12" y1="18" x2="12.01" y2="18"/>
+                  </svg>
+                  Instal Aplikasi
+                </span>
+              </div>
+              <div id="set-section-data"></div>
+            </div>
+          </div>
+
+          <div class="settings-category" data-cat="preferensi">
+            <div class="set-section">
+              <div id="set-section-preferensi"></div>
+            </div>
+          </div>
+
+          <div class="settings-category" data-cat="lainnya">
+            <div class="set-section">
+              <div class="set-row">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+                  Tentang
+                </span>
+                <span class="set-value">Rategoan version 1.0</span>
+              </div>
+            </div>
+
+            <div class="set-section set-section-danger">
+              <div class="set-row clickable danger" id="row-clear-chat">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  </svg>
+                  Hapus Semua Chat
+                </span>
+              </div>
+              <div class="set-row clickable danger" id="row-logout">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                  </svg>
+                  Keluar
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -209,6 +253,24 @@ function buildRow(id, icon, label) {
   value.id = id + '-value';
   row.appendChild(span);
   row.appendChild(value);
+  return row;
+}
+
+// Untuk toggle ON/OFF murni (tanpa dialog/konfigurasi tambahan seperti
+// Kunci Aplikasi yang perlu isi PIN) - switch visual lebih jelas statusnya
+// sekilas pandang dibanding teks "Aktif/Nonaktif" polos yang harus dibaca.
+function buildSwitchRow(id, icon, label) {
+  const row = document.createElement('div');
+  row.className = 'set-row clickable';
+  row.id = id;
+  row.setAttribute('role', 'switch');
+  const span = document.createElement('span');
+  span.innerHTML = icon + label;
+  const sw = document.createElement('span');
+  sw.className = 'switch';
+  sw.innerHTML = '<span class="switch-thumb"></span>';
+  row.appendChild(span);
+  row.appendChild(sw);
   return row;
 }
 
@@ -230,7 +292,7 @@ export const settings = {
     // Preferensi - ini bukan preferensi tampilan/perilaku app kayak TTS/Mode
     // Hemat, tapi soal data pribadi apa yang diingat+dipakai AI (pola yang
     // sama dipakai ChatGPT/Gemini: Memory ada di bagian privasi/personalisasi).
-    const memoriRow = buildRow('row-memori', MEMORY_ICON, 'Memori');
+    const memoriRow = buildSwitchRow('row-memori', MEMORY_ICON, 'Memori');
     const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
@@ -283,9 +345,11 @@ export const settings = {
     val.textContent = hemat.enabled() ? 'Aktif' : 'Nonaktif';
   },
   refreshMemoriStatus() {
-    const val = $('row-memori-value');
-    if (!val) return;
-    val.textContent = memoryPreference.get() ? 'Aktif' : 'Nonaktif';
+    const row = $('row-memori');
+    if (!row) return;
+    const on = memoryPreference.get();
+    row.classList.toggle('switch-on', on);
+    row.setAttribute('aria-checked', String(on));
   },
   refreshLlmModeStatus() {
     const val = $('row-llm-mode-value');
@@ -354,6 +418,10 @@ export const settings = {
     }
     if (ocrReader.isReady() && translator.isReady() && pdfReader.isReady()) toast.show('Semua paket sudah siap offline.');
   },
+  currentCategory() {
+    const sub = (router.sub || '').split('/')[0];
+    return CATEGORIES.find((c) => c.key === sub) || null;
+  },
   refresh() {
     const st = auth.state;
     const head = $('profile-head');
@@ -361,8 +429,11 @@ export const settings = {
     const avatar = $('profile-avatar');
     const name = $('profile-name');
     const mail = $('profile-mail');
+    // Profil cuma tampil di halaman menu utama, bukan di dalam kategori
+    // (samam kayak Data/WhatsApp: header sub-halaman cuma judul kategori).
+    const inCategory = !!this.currentCategory();
     if (head && avatar && name && mail) {
-      if (!st) {
+      if (!st || inCategory) {
         head.hidden = true;
         if (divider) divider.hidden = true;
       } else {
@@ -402,19 +473,64 @@ export const settings = {
     document.querySelectorAll('.theme-btn').forEach((b) => {
       b.classList.toggle('active', b.dataset.theme === theme.value);
     });
+    const themeHint = $('theme-hint');
+    if (themeHint) {
+      // "Otomatis" dulu kelihatan "gak ada fungsinya" kalau warna yang
+      // muncul kebetulan sama dengan tema sistem saat itu - keterangan ini
+      // menjelaskan APA yang sedang diikuti, bukan cuma diam tanpa umpan balik.
+      themeHint.textContent =
+        theme.value === 'auto'
+          ? 'Otomatis: mengikuti tema perangkat - saat ini ' + (theme.isDark() ? 'Gelap' : 'Terang') + '.'
+          : theme.value === 'light'
+            ? 'Terang dipilih manual - tidak ikut tema perangkat.'
+            : 'Gelap dipilih manual - tidak ikut tema perangkat.';
+    }
+  },
+  // Tampilkan halaman menu (daftar kategori) ATAU satu kategori spesifik,
+  // sesuai #/settings atau #/settings/<key> saat ini - dipanggil tiap kali
+  // hash berubah (klik kategori, tombol kembali, atau navigasi browser
+  // back/forward), bukan cuma sekali saat bind().
+  renderRoute() {
+    const menu = $('settings-menu');
+    const content = $('settings-content');
+    const title = $('settings-title');
+    if (!menu || !content || !title) return;
+    const cat = this.currentCategory();
+    document.querySelectorAll('.settings-category').forEach((el) => {
+      el.hidden = el.dataset.cat !== (cat && cat.key);
+    });
+    menu.hidden = !!cat;
+    content.hidden = !cat;
+    title.textContent = cat ? cat.title : 'Pengaturan';
+    this.refresh();
   },
   bind() {
     $('view-settings').innerHTML = TEMPLATE;
     this.injectExtraRows();
     $('btn-settings').onclick = () => {
       drawer.close();
-      this.refresh();
       router.go('settings');
+      this.renderRoute();
     };
     $('btn-back').onclick = () => {
-      router.go('chat');
-      drawer.open();
+      if (this.currentCategory()) {
+        router.go('settings');
+        this.renderRoute();
+      } else {
+        router.go('chat');
+        drawer.open();
+      }
     };
+    document.querySelectorAll('.cat-row').forEach((row) => {
+      row.onclick = () => {
+        router.go('settings/' + row.dataset.cat);
+        this.renderRoute();
+      };
+    });
+    window.addEventListener('hashchange', () => {
+      const top = (location.hash || '').replace(/^#\/?/, '').split('/')[0];
+      if (top === 'settings') this.renderRoute();
+    });
     document.querySelectorAll('.theme-btn').forEach((b) => {
       b.onclick = () => {
         theme.set(b.dataset.theme);
@@ -453,6 +569,6 @@ export const settings = {
       }
       this.refresh();
     };
-    this.refresh();
+    this.renderRoute();
   },
 };
