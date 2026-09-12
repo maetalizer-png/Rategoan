@@ -52,7 +52,7 @@ const CHEVRON_ICON =
 // begini), tiap kategori dibuka sebagai halaman sendiri lewat #/settings/<key>.
 const CATEGORIES = [
   { key: 'tampilan', title: 'Tampilan', icon: MOON_ICON },
-  { key: 'ai', title: 'AI & Model', icon: SERVER_MODE_ICON },
+  { key: 'ai', title: 'Model', icon: SERVER_MODE_ICON },
   { key: 'privasi', title: 'Privasi & Keamanan', icon: LOCK_ICON },
   { key: 'data', title: 'Data', icon: STORAGE_ICON },
   { key: 'preferensi', title: 'Preferensi', icon: TTS_ICON },
