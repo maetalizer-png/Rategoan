@@ -20,8 +20,8 @@
 
 .msg {
   max-width: 82%;
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.6;
   word-wrap: break-word;
   white-space: pre-wrap;
   min-width: 0;
@@ -259,6 +259,21 @@
 
 .md-li-row {
   margin: 5px 0;
+}
+
+.md-source {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--rg-muted);
+  font-style: italic;
+  border-top: 1px solid var(--rg-line);
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+.md-source .md-link {
+  color: var(--rg-muted);
 }
 
 @media (hover: hover) and (pointer: fine) {

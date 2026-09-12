@@ -336,7 +336,13 @@ export const chat = {
   },
   async ask(prompt, opts) {
     const s = this.current();
-    const searching = !!(opts && opts.searching);
+    const hasDirectReply = !!(opts && opts.directReply != null);
+    // directReply (slide/baca-file) tidak pernah dianggap "hasil pencarian
+    // web" walau toggle Pencarian Web sedang aktif - dulu badge globe +
+    // "Mencari di internet..." tetap muncul di jawaban slide/baca-file
+    // cuma karena toggle-nya lupa dimatikan, bikin fitur itu kelihatan
+    // salah nyambung ke internet padahal jawabannya lokal murni.
+    const searching = !hasDirectReply && !!(opts && opts.searching);
     const typing = document.createElement('div');
     typing.className = 'msg ai typing' + (searching ? ' searching' : '');
     if (searching) {
@@ -350,7 +356,7 @@ export const chat = {
     // directReply: dipakai composer.js saat file terlampir (PDF/teks) sudah
     // diekstrak lokal - jawab langsung dari isi file, tidak lewat mesin
     // Raget (yang tidak punya akses ke isi file terlampir sama sekali).
-    const reply = opts && opts.directReply != null ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
+    const reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
     if (searching) {
       // Koneksi cepat bisa bikin fetch selesai dalam hitungan puluhan ms -
       // indikator "Mencari di internet..." bisa kelewat kedip tanpa sempat

@@ -24,6 +24,11 @@ export const markdown = {
     // panjang kelihatan padat/tidak rapi dibanding paragraf biasa.
     out = out.replace(/(^|\n)[ \t]*[-•][ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">•</span> $2</div>');
     out = out.replace(/(^|\n)[ \t]*(\d+)\.[ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">$2.</span> $3</div>');
+    // Baris "(Sumber: ...)" dari jawaban hasil pencarian web (tools-generic.js)
+    // dulu ikut teks paragraf biasa - ukuran/berat sama persis dengan isi
+    // jawaban, jadi kutipan sumber kelihatan seperti kalimat penting lain,
+    // bukan keterangan kecil. Dipisah jadi blok sitasi sendiri (kecil, redup).
+    out = out.replace(/(^|\n)\(Sumber:\s*([^)]+)\)/g, '$1<div class="md-source">Sumber: $2</div>');
     out = out.replace(/\bhttps?:\/\/[^\s<]+/g, (m) => {
       const trailing = m.match(/[).,;:!?]+$/);
       const url = trailing ? m.slice(0, -trailing[0].length) : m;

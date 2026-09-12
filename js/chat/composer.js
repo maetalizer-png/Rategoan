@@ -170,6 +170,10 @@ export const composer = {
         this.autoGrow();
         inp.focus();
         inp.setSelectionRange(0, inp.value.length);
+        // Baris contoh sudah ke-select semua di kotak ketik, tapi tanpa
+        // penjelasan ini banyak yang tidak sadar masih harus tekan Kirim -
+        // dikira nge-tap kartu ini saja sudah cukup untuk bikin slide-nya.
+        toast.show('Contoh sudah terisi - ganti judul/isinya (opsional), lalu tekan Kirim untuk membuat slide-nya', 4000);
       };
     }
     $('btn-login').onclick = () => {
