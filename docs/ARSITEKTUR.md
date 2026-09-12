@@ -151,12 +151,10 @@ disentuh - dia cuma membungkus `agent.respond()` apa adanya.
 
 ### Neural (aktif, tapi belum koheren - ini yang paling perlu dilanjutkan)
 
-1. Latih ulang pakai notebook yang sudah ada
-   (`colab-train-1klik-100m-200m.ipynb` / skrip di `raget-tools/train-*.mjs`,
-   `raget-tools/train-massive50m-torch.py`).
-2. Ukur PPL held-out (`raget-tools/eval-3-questions.mjs`,
-   `raget-tools/diagnose-neural-generation.mjs`) - **jangan puas cuma
-   karena loss/PPL turun**, baca output generasinya kata per kata.
+1. Latih ulang pakai notebook yang sudah ada (`raget-tools/colab-train-gpu.ipynb`,
+   mencakup preset 50M/100M/200M dalam satu `Run all`).
+2. Ukur PPL held-out - **jangan puas cuma karena loss/PPL turun**, baca
+   output generasinya kata per kata.
 3. Update catatan kualitas di komentar `neural-adapter.js` dan tabel PPL
    di §"Kenapa Neural AKTIF tapi belum koheren" di atas setiap kali ada
    sesi training baru - `status().ready` sudah `true` dari sekarang,
