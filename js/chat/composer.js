@@ -158,13 +158,15 @@ export const composer = {
     }
     const slideCard = $('sheet-slide');
     if (slideCard) {
-      // Bukan toggle kayak websearch/memori - ini tombol contoh isian,
-      // langsung isi composer dengan template supaya fitur "buatkan slide"
-      // (composer.js#trySlideRequest) kelihatan/gampang ditemukan, bukan
-      // cuma bisa dipakai kalau sudah tahu kalimat pemicunya.
+      // Bukan toggle kayak websearch/memori - ini tombol contoh isian.
+      // Diisi CONTOH SIAP KIRIM (bukan placeholder <judul>/<isi> abstrak)
+      // supaya fitur ini langsung kelihatan cara pakainya - tekan Kirim
+      // apa adanya buat lihat demo nyata, atau timpa dulu (sudah ke-select
+      // semua) dengan judul+materi sendiri sebelum kirim.
       slideCard.onclick = () => {
         sheets.close();
-        inp.value = 'buatkan slide tentang <judul>: <isi materinya, atau lampirkan file lewat tombol + lalu ketik ini lagi>';
+        inp.value =
+          'buatkan slide tentang Tips Menabung: Sisihkan penghasilan di awal bulan, bukan di akhir. Pisahkan rekening tabungan dari rekening harian. Catat semua pengeluaran setiap hari. Evaluasi progres tiap akhir bulan.';
         this.autoGrow();
         inp.focus();
         inp.setSelectionRange(0, inp.value.length);

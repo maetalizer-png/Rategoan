@@ -1,5 +1,5 @@
 const PPTXGENJS_VERSION = '3.12.0';
-const PPTXGENJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/PptxGenJS/' + PPTXGENJS_VERSION + '/pptxgen.bundle.min.js';
+const PPTXGENJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/' + PPTXGENJS_VERSION + '/pptxgen.bundle.min.js';
 const BULLETS_PER_SLIDE = 4;
 const MAX_SLIDES = 20;
 

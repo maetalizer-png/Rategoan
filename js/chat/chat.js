@@ -70,6 +70,30 @@ function detectQuickChips(text) {
   return [];
 }
 
+function buildMoreBtn() {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'msg-more-btn';
+  btn.setAttribute('aria-label', 'Menu pesan');
+  btn.innerHTML =
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>';
+  return btn;
+}
+
+// Jam + tombol menu (titik tiga) satu baris rata kanan - dulu keduanya
+// di-append terpisah ke .msg, yang bikin tombolnya turun ke baris sendiri
+// (elemen .time pakai display:block) alih-alih sejajar dengan jam.
+function buildMetaRow(time) {
+  const row = document.createElement('div');
+  row.className = 'msg-meta';
+  const tm = document.createElement('span');
+  tm.className = 'time';
+  tm.textContent = fmtTime(time);
+  row.appendChild(tm);
+  row.appendChild(buildMoreBtn());
+  return row;
+}
+
 function buildActions(text) {
   const row = document.createElement('div');
   row.className = 'msg-actions';
@@ -242,10 +266,12 @@ export const chat = {
         a.appendChild(document.createTextNode(m.attach.name));
         d.appendChild(a);
       }
-      const tm = document.createElement('span');
-      tm.className = 'time';
-      tm.textContent = fmtTime(m.time);
-      d.appendChild(tm);
+      // Menu pesan (Salin/Balas/Ubah/Kirim ulang/Hapus) dipicu tombol titik
+      // tiga di baris ini (klik, bukan tahan-lama) - dulu dipicu
+      // touch-and-hold di mana pun pada bubble, yang bentrok dengan gestur
+      // select-teks native (copy jadi tidak pernah kepicu karena keburu
+      // ke-hijack timer 480ms).
+      d.appendChild(buildMetaRow(m.time));
       if (m.role === 'user' && m.attach && m.attach.full) {
         const row = document.createElement('div');
         row.className = 'msg-actions';
@@ -268,8 +294,10 @@ export const chat = {
     scrolldown.update();
   },
   async typeReply(text, follow, opts) {
+    const s = this.current();
     const d = document.createElement('div');
     d.className = 'msg ai';
+    d.dataset.idx = String(s.messages.length - 1);
     if (opts && opts.searching) d.appendChild(buildSourceBadge());
     const body = document.createElement('div');
     d.appendChild(body);
@@ -291,10 +319,7 @@ export const chat = {
       body.removeEventListener('pointerdown', onTap);
     }
     body.innerHTML = markdown.render(text);
-    const tm = document.createElement('span');
-    tm.className = 'time';
-    tm.textContent = fmtTime(Date.now());
-    d.appendChild(tm);
+    d.appendChild(buildMetaRow(Date.now()));
     const actions = buildActions(text);
     if (URL_RE.test(text)) {
       actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0]), 'globe'));

@@ -17,8 +17,13 @@ export const markdown = {
     out = out.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
     out = out.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
     out = out.replace(/^#{1,3}\s+(.+)$/gm, '<strong class="md-h">$1</strong>');
-    out = out.replace(/(^|\n)\s*[-•]\s+/g, '$1<span class="md-li">•</span> ');
-    out = out.replace(/(^|\n)(\d+)\.\s+/g, '$1<span class="md-li">$2.</span> ');
+    // Bungkus SELURUH baris poin (bukan cuma tandanya) jadi elemen block -
+    // sebelumnya cuma tandanya (•/1.) yang jadi <span>, sisanya teks polos
+    // mengalir mengikuti satu line-height paragraf biasa lewat white-space:
+    // pre-wrap saja, tanpa jarak antar-poin sendiri - itu yang bikin daftar
+    // panjang kelihatan padat/tidak rapi dibanding paragraf biasa.
+    out = out.replace(/(^|\n)[ \t]*[-•][ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">•</span> $2</div>');
+    out = out.replace(/(^|\n)[ \t]*(\d+)\.[ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">$2.</span> $3</div>');
     out = out.replace(/\bhttps?:\/\/[^\s<]+/g, (m) => {
       const trailing = m.match(/[).,;:!?]+$/);
       const url = trailing ? m.slice(0, -trailing[0].length) : m;

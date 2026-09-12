@@ -11,7 +11,6 @@ import { voice } from '../chat/voice.js';
 
 export const msgmenu = {
   el: null,
-  timer: null,
   idx: null,
   build() {
     if (this.el) return this.el;
@@ -33,8 +32,11 @@ export const msgmenu = {
       b.textContent = label;
       if (cls) b.className = cls;
       b.onclick = () => {
-        this.hide();
+        // fn() dulu, baru hide() - hide() nge-null-kan this.idx, jadi kalau
+        // dibalik (seperti sebelumnya), act() di dalam fn() selalu gagal
+        // diam-diam karena this.idx == null saat itu dibaca.
         fn();
+        this.hide();
       };
       m.appendChild(b);
     };
@@ -90,43 +92,21 @@ export const msgmenu = {
   },
   bind() {
     const box = $('messages');
-    let start = null;
-    box.addEventListener(
-      'touchstart',
-      (e) => {
-        const msg = e.target.closest('.msg');
-        if (!msg || msg.dataset.idx == null) return;
-        start = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        const idx = Number(msg.dataset.idx);
-        this.timer = setTimeout(() => {
-          haptics.tap(15);
-          this.show(start.x, start.y, idx);
-        }, 480);
-      },
-      { passive: true }
-    );
-    box.addEventListener(
-      'touchmove',
-      (e) => {
-        if (!this.timer || !start) return;
-        const dx = e.touches[0].clientX - start.x;
-        const dy = e.touches[0].clientY - start.y;
-        if (dx * dx + dy * dy > 100) {
-          clearTimeout(this.timer);
-          this.timer = null;
-        }
-      },
-      { passive: true }
-    );
-    const cancel = () => {
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = null;
-      }
-    };
-    box.addEventListener('touchend', cancel, { passive: true });
-    box.addEventListener('touchcancel', cancel, { passive: true });
-    box.addEventListener('contextmenu', (e) => e.preventDefault());
+    // Dulu dipicu touch-and-hold 480ms di mana pun pada bubble pesan -
+    // itu bentrok langsung sama gestur select-teks native (long-press
+    // untuk select+copy manual), jadi user coba select teks malah kena
+    // menu ini duluan dan gagal copy-paste. Sekarang dipicu tombol titik
+    // tiga (.msg-more-btn) eksplisit di chat.js, bukan gestur - select
+    // teks native jadi bebas dipakai kapan pun tanpa ke-hijack.
+    box.addEventListener('click', (e) => {
+      const btn = e.target.closest('.msg-more-btn');
+      if (!btn) return;
+      const msg = btn.closest('.msg');
+      if (!msg || msg.dataset.idx == null) return;
+      haptics.tap(15);
+      const r = btn.getBoundingClientRect();
+      this.show(r.left + r.width / 2, r.top, Number(msg.dataset.idx));
+    });
     document.addEventListener(
       'touchstart',
       (e) => {
