@@ -1,10 +1,24 @@
 const NETWORK_FAIL_MESSAGE =
   'Gagal mengakses internet untuk pencarian ini — bisa karena tidak ada koneksi, atau Wikipedia sedang memblokir akses dari sini. Raget 100% berjalan lokal tanpa server perantara, jadi pencarian internet langsung bergantung pada koneksi perangkat ini.';
 
+const FETCH_TIMEOUT_MS = 12000;
+
+// Tanpa timeout, koneksi lemot/nyangkut bikin fetch() nunggu tanpa batas -
+// "Mencari di internet..." (atau badge "Hasil pencarian web" pas lagi
+// ngetik) bisa nyangkut lama tanpa fallback pesan gagal, dan tombol
+// Salin/Baca/Bagikan yang baru muncul setelah balasan selesai jadi ikut
+// tertunda tanpa batas juga. AbortController jamin selalu ada kepastian
+// (berhasil atau NETWORK_FAIL_MESSAGE) dalam waktu wajar.
 async function fetchJson(url) {
-  const res = await fetch(url, { mode: 'cors' });
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  return res.json();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, { mode: 'cors', signal: controller.signal });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function fetchSummaryByTitle(title, lang) {
