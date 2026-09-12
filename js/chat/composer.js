@@ -19,10 +19,16 @@ import { buildOutline, exportSlides } from '../utils/slides-export.js';
 // (att.fileText) - tanpa itu, kata-kata ini tetap lewat mesin Raget biasa
 // seperti sebelumnya (mis. "ringkas hari saya" tanpa lampiran apa pun).
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
-const SLIDE_RE = /\b(buat(kan)?|susun|jadikan)\b.*\b(slide|presentasi|ppt)\b/i;
+// Sengaja TIDAK menyertakan "presentasi" sendirian sebagai pemicu - kata itu
+// sudah dipakai tool nasihat struktur (Pyramid Principle di
+// intelligence-rumus.js, trigger "bingung strukturnya"/"susun presentasi").
+// Wajib ada "slide"/"ppt"/"pptx" eksplisit supaya jelas maksudnya minta
+// FILE dibuat, bukan minta saran cara menyusun presentasi.
+const SLIDE_ACTION_RE = /\b(buat(kan)?|bikin|jadikan|susun|export|unduh)\b/i;
+const SLIDE_NOUN_RE = /\b(slide|ppt|pptx)\b/i;
 
 async function trySlideRequest(text, att) {
-  if (!SLIDE_RE.test(text)) return null;
+  if (!(SLIDE_ACTION_RE.test(text) && SLIDE_NOUN_RE.test(text))) return null;
   let material = null;
   let judul = 'Presentasi';
   if (att && att.fileText) {
