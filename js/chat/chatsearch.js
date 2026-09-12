@@ -69,7 +69,11 @@ export const chatsearch = {
     this.focus();
   },
   bind() {
-    $('btn-chat-search').onclick = () => this.toggle();
+    // Ikon kaca pembesar di header TIDAK dipasang ke sini lagi - lihat
+    // drawer.js. Cari-dalam-satu-chat ini sekarang cuma via shortcut "/"
+    // (desktop, lihat shortcuts.js), bukan tombol yang kelihatan di UI -
+    // dulu tombol ini yang dipasang ke sini terasa gak berguna kalau
+    // dipencet pas chat masih kosong (0/0, tidak ada apa pun buat dicari).
     $('chat-search-input').addEventListener('input', (e) => this.run(e.target.value));
     $('chat-search-next').onclick = () => this.next();
     $('chat-search-prev').onclick = () => this.prev();
