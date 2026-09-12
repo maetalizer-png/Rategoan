@@ -13,11 +13,41 @@ import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { memoryPreference } from '../state/memory-preference.js';
 import { summarizeFileText } from '../utils/file-summary.js';
+import { buildOutline, exportSlides } from '../utils/slides-export.js';
 
 // Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
 // (att.fileText) - tanpa itu, kata-kata ini tetap lewat mesin Raget biasa
 // seperti sebelumnya (mis. "ringkas hari saya" tanpa lampiran apa pun).
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
+const SLIDE_RE = /\b(buat(kan)?|susun|jadikan)\b.*\b(slide|presentasi|ppt)\b/i;
+
+async function trySlideRequest(text, att) {
+  if (!SLIDE_RE.test(text)) return null;
+  let material = null;
+  let judul = 'Presentasi';
+  if (att && att.fileText) {
+    material = att.fileText;
+    judul = (att.name || judul).replace(/\.[a-z0-9]+$/i, '');
+  } else {
+    const afterColon = text.split(':').slice(1).join(':').trim();
+    if (afterColon) {
+      material = afterColon;
+      const topicMatch = text.match(/\b(?:tentang|untuk|dari)\s+([^:]+?)(?::|$)/i);
+      if (topicMatch) judul = topicMatch[1].trim();
+    }
+  }
+  if (!material) {
+    return 'Boleh, tapi saya butuh bahannya dulu - lampirkan file (PDF/teks), atau ketik "buatkan slide tentang <judul>: <isi materinya>".';
+  }
+  try {
+    const outline = buildOutline(material, judul);
+    const fileName = judul.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide';
+    await exportSlides(outline, fileName + '.pptx');
+    return 'Slide "' + judul + '" (' + outline.length + ' halaman) sudah dibuat dan diunduh sebagai ' + fileName + '.pptx.';
+  } catch (e) {
+    return 'Gagal membuat slide: ' + (e && e.message ? e.message : 'error tidak diketahui');
+  }
+}
 
 export const composer = {
   websearchActive: false,
@@ -53,8 +83,8 @@ export const composer = {
     haptics.tap(10);
     const isWebsearch = this.websearchActive;
     const routedText = isWebsearch ? 'googling ' + text : text;
-    let directReply = null;
-    if (att && FILE_READ_RE.test(text)) {
+    let directReply = await trySlideRequest(text, att);
+    if (directReply == null && att && FILE_READ_RE.test(text)) {
       if (att.fileText) directReply = summarizeFileText(att.fileText, att.name);
       else if (att.fileTextError) directReply = att.fileTextError;
     }
