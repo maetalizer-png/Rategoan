@@ -1,5 +1,6 @@
 import { $ } from '../utils/dom.js';
 import { sheets } from './sheets.js';
+import { extractPdfText } from '../utils/pdf-extract.js';
 
 const X_SVG =
   '<svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
@@ -66,6 +67,13 @@ export const attach = {
       this.current.fileText = await this.readAsText(f);
     } else if (/\.(pdf|zip)$/i.test(f.name || '')) {
       this.current.fileBinary = await this.readAsArrayBuffer(f);
+      if (this.current.fileBinary && /\.pdf$/i.test(f.name || '')) {
+        try {
+          this.current.fileText = await extractPdfText(this.current.fileBinary.slice(0));
+        } catch (e) {
+          this.current.fileTextError = 'Gagal membaca isi PDF: ' + (e && e.message ? e.message : 'error tidak diketahui');
+        }
+      }
     }
     this.renderChip();
     sheets.close();

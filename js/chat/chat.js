@@ -322,7 +322,10 @@ export const chat = {
     $('messages').appendChild(typing);
     scrollBottom();
     const searchStart = Date.now();
-    const reply = ai ? await ai.generate(s.messages, prompt) : null;
+    // directReply: dipakai composer.js saat file terlampir (PDF/teks) sudah
+    // diekstrak lokal - jawab langsung dari isi file, tidak lewat mesin
+    // Raget (yang tidak punya akses ke isi file terlampir sama sekali).
+    const reply = opts && opts.directReply != null ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
     if (searching) {
       // Koneksi cepat bisa bikin fetch selesai dalam hitungan puluhan ms -
       // indikator "Mencari di internet..." bisa kelewat kedip tanpa sempat

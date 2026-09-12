@@ -12,6 +12,12 @@ import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { memoryPreference } from '../state/memory-preference.js';
+import { summarizeFileText } from '../utils/file-summary.js';
+
+// Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
+// (att.fileText) - tanpa itu, kata-kata ini tetap lewat mesin Raget biasa
+// seperti sebelumnya (mis. "ringkas hari saya" tanpa lampiran apa pun).
+const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 
 export const composer = {
   websearchActive: false,
@@ -47,7 +53,12 @@ export const composer = {
     haptics.tap(10);
     const isWebsearch = this.websearchActive;
     const routedText = isWebsearch ? 'googling ' + text : text;
-    const reply = await chat.ask(routedText, { searching: isWebsearch });
+    let directReply = null;
+    if (att && FILE_READ_RE.test(text)) {
+      if (att.fileText) directReply = summarizeFileText(att.fileText, att.name);
+      else if (att.fileTextError) directReply = att.fileTextError;
+    }
+    const reply = await chat.ask(routedText, { searching: isWebsearch, directReply });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
