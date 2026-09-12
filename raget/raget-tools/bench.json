@@ -1469,8 +1469,8 @@
   {
     "prompt": "negara mana yang penduduknya paling banyak di asia",
     "expect": "dataries_extras",
-    "contains": "Tiongkok",
-    "note": "B: superlatif populasi"
+    "contains": "China",
+    "note": "B: superlatif populasi - nama negara ikut skema country JSON (China, bukan Tiongkok, sejak migrasi domain country)"
   },
   {
     "prompt": "negara terkecil di eropa apa",
