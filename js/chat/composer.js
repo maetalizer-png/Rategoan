@@ -11,7 +11,6 @@ import { chat } from './chat.js';
 import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
-import { memoryPreference } from '../state/memory-preference.js';
 import { summarizeFileText } from '../utils/file-summary.js';
 import { buildOutline, exportSlides } from '../utils/slides-export.js';
 
@@ -112,14 +111,6 @@ export const composer = {
     }
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
   },
-  setMemori(active) {
-    memoryPreference.set(active);
-    const card = $('sheet-memori');
-    if (card) {
-      card.classList.toggle('active', active);
-      card.setAttribute('aria-checked', String(active));
-    }
-  },
   bind() {
     const inp = $('chat-input');
     inp.addEventListener('input', () => this.autoGrow());
@@ -142,18 +133,6 @@ export const composer = {
       // besar yang malah menghalangi.
       websearchCard.onclick = () => {
         this.setWebsearch(!this.websearchActive);
-      };
-    }
-    const memoriCard = $('sheet-memori');
-    if (memoriCard) {
-      // Sama kayak sheet-websearch di atas - toggle-nya sendiri sudah
-      // cukup jelas nunjukin status ON/OFF, jadi klik tidak menutup sheet.
-      // Beda dari toggle Pencarian Web, status Memori persisten (disimpan
-      // localStorage lewat memoryPreference) bukan cuma per-sesi chat -
-      // sinkronkan tampilan switch ke nilai tersimpan saat sheet dibuka.
-      this.setMemori(memoryPreference.get());
-      memoriCard.onclick = () => {
-        this.setMemori(!memoryPreference.get());
       };
     }
     const slideCard = $('sheet-slide');

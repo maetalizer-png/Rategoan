@@ -18,6 +18,7 @@ import { pdfReader } from '../../vault/pdf/reader.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 import { llmMode } from '../state/llm-mode.js';
+import { memoryPreference } from '../state/memory-preference.js';
 import { sheets } from '../sheets/sheets.js';
 
 const DOWNLOAD_ICON =
@@ -32,6 +33,8 @@ const SERVER_MODE_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
 const DATA_HEALTH_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>';
+const MEMORY_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7.2V17a3 3 0 0 0 3 3h1"/><path d="M12 2a5 5 0 0 1 5 5v1a4 4 0 0 1 2 7.2V17a3 3 0 0 1-3 3h-1"/><path d="M9 21h6"/><path d="M12 17v4"/></svg>';
 
 const TEMPLATE = `
       <div class="settings-page">
@@ -221,16 +224,19 @@ export const settings = {
     const dataHealthRow = buildRow('row-data-health', DATA_HEALTH_ICON, 'Kesehatan Data');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
+    const memoriRow = buildRow('row-memori', MEMORY_ICON, 'Memori');
     const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);
+    prefSection.appendChild(memoriRow);
     prefSection.appendChild(ttsRow);
     prefSection.appendChild(hematRow);
     this.refreshPackageStatus();
     this.refreshTtsStatus();
     this.refreshHematStatus();
+    this.refreshMemoriStatus();
     this.refreshLlmModeStatus();
     downloadRow.onclick = () => this.handleUnduhanFitur();
     dataHealthRow.onclick = () => sheets.openDataHealth();
@@ -246,6 +252,15 @@ export const settings = {
       this.refreshHematStatus();
       this.refreshTtsStatus();
     };
+    // Dulu toggle di sheet lampiran (+) - dipindah ke Pengaturan (standar
+    // aplikasi lain: memori itu pengaturan personalisasi akun yang jarang
+    // diubah, bukan aksi sekali pakai per pesan seperti Pencarian Web).
+    memoriRow.onclick = () => {
+      const on = !memoryPreference.get();
+      memoryPreference.set(on);
+      toast.show(on ? 'Memori diaktifkan - Raget memakai fakta yang sudah diingat saat menjawab' : 'Memori dinonaktifkan - Raget tidak memakai fakta yang diingat saat menjawab');
+      this.refreshMemoriStatus();
+    };
     knowledgeRow.onclick = () => {
       router.go('collection');
       import('../collection/collection.js').then((m) => m.collectionPage.open());
@@ -260,6 +275,11 @@ export const settings = {
     const val = $('row-hemat-value');
     if (!val) return;
     val.textContent = hemat.enabled() ? 'Aktif' : 'Nonaktif';
+  },
+  refreshMemoriStatus() {
+    const val = $('row-memori-value');
+    if (!val) return;
+    val.textContent = memoryPreference.get() ? 'Aktif' : 'Nonaktif';
   },
   refreshLlmModeStatus() {
     const val = $('row-llm-mode-value');
