@@ -156,6 +156,20 @@ export const composer = {
         this.setMemori(!memoryPreference.get());
       };
     }
+    const slideCard = $('sheet-slide');
+    if (slideCard) {
+      // Bukan toggle kayak websearch/memori - ini tombol contoh isian,
+      // langsung isi composer dengan template supaya fitur "buatkan slide"
+      // (composer.js#trySlideRequest) kelihatan/gampang ditemukan, bukan
+      // cuma bisa dipakai kalau sudah tahu kalimat pemicunya.
+      slideCard.onclick = () => {
+        sheets.close();
+        inp.value = 'buatkan slide tentang <judul>: <isi materinya, atau lampirkan file lewat tombol + lalu ketik ini lagi>';
+        this.autoGrow();
+        inp.focus();
+        inp.setSelectionRange(0, inp.value.length);
+      };
+    }
     $('btn-login').onclick = () => {
       drawer.close();
       if (auth.state) {
