@@ -105,6 +105,7 @@ const TEMPLATE = `
               </span>
               <span class="set-value" id="pin-info">Nonaktif</span>
             </div>
+            <div id="set-section-privasi"></div>
           </div>
 
           <div class="set-section">
@@ -218,19 +219,24 @@ export const settings = {
     const aiSection = $('set-section-ai');
     const dataSection = $('set-section-data');
     const prefSection = $('set-section-preferensi');
-    if (!aiSection || !dataSection || !prefSection) return;
+    const privasiSection = $('set-section-privasi');
+    if (!aiSection || !dataSection || !prefSection || !privasiSection) return;
     const downloadRow = buildRow('row-unduhan-fitur', DOWNLOAD_ICON, 'Unduhan Fitur');
     const knowledgeRow = buildRow('row-pengetahuan-saya', KNOWLEDGE_ICON, 'Buka Koleksi');
     const dataHealthRow = buildRow('row-data-health', DATA_HEALTH_ICON, 'Kesehatan Data');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
+    // Memori ditaruh di Privasi & Keamanan (bareng Kunci Aplikasi), BUKAN
+    // Preferensi - ini bukan preferensi tampilan/perilaku app kayak TTS/Mode
+    // Hemat, tapi soal data pribadi apa yang diingat+dipakai AI (pola yang
+    // sama dipakai ChatGPT/Gemini: Memory ada di bagian privasi/personalisasi).
     const memoriRow = buildRow('row-memori', MEMORY_ICON, 'Memori');
     const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);
-    prefSection.appendChild(memoriRow);
+    privasiSection.appendChild(memoriRow);
     prefSection.appendChild(ttsRow);
     prefSection.appendChild(hematRow);
     this.refreshPackageStatus();
