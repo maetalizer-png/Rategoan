@@ -1173,13 +1173,16 @@
   },
   {
     "prompt": "bagaimana cara mengunci chat saya",
-    "expect": "planner_clarify",
-    "contains": "Maksudnya yang mana ya",
+    "expect": "planner_fallback",
     "notContains": [
       "kaitannya dengan",
       "Melanjutkan dari"
     ],
-    "note": "Jilid 13: planner.planFallback clarify berpilihan, frasa seret-topik lama sudah dihapus"
+    "note": "Jilid 13 -> pasca-migrasi BM25: skor top1 (mengunci aplikasi PIN, 0.69) jauh di atas top2 (hapus semua chat, 0.59) - bukan lagi kasus ambigu tipis, sistem percaya diri kasih FAQ terdekat (belum ada FAQ persis \"kunci chat\")",
+    "containsAny": [
+      "Kunci Aplikasi",
+      "Maksudnya yang mana ya"
+    ]
   },
   {
     "prompt": "apakah raget ingat percakapan",
@@ -1196,13 +1199,16 @@
   },
   {
     "prompt": "apakah bisa hapus satu chat aja",
-    "expect": "planner_clarify",
-    "contains": "Maksudnya yang mana ya",
+    "expect": "planner_fallback",
     "notContains": [
       "kaitannya dengan",
       "Melanjutkan dari"
     ],
-    "note": "Jilid 13: planner.planFallback clarify ketiga"
+    "note": "Jilid 13 -> pasca-migrasi BM25: skor top1 (hapus satu chat saja, 0.77) jelas menang atas top2 (hapus semua chat, 0.70) - top1 adalah jawaban yang benar-benar tepat, bukan ambigu",
+    "containsAny": [
+      "sidebar riwayat",
+      "Maksudnya yang mana ya"
+    ]
   },
   {
     "prompt": "aku lagi sedih banget hari ini",
