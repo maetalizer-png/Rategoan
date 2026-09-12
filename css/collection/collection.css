@@ -71,30 +71,6 @@
 .coll-filter-chip.on {
   border-color: var(--rg-line-accent);
   color: var(--rg-text);
-  background: var(--rg-surface-2);
-}
-
-.coll-toolbar {
-  display: flex;
-  gap: 6px;
-  margin: 6px 0 10px;
-  flex-wrap: wrap;
-}
-
-.coll-toolbtn {
-  flex: 1;
-  min-width: 100px;
-  justify-content: center;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--rg-text);
-  border: 1px solid var(--rg-line);
-  border-radius: var(--rg-pill);
-  padding: 9px 6px;
-  background: var(--rg-surface);
-}
-
-.coll-toolbtn:active {
   background: var(--rg-ring);
 }
 
@@ -331,8 +307,3 @@
   color: var(--rg-text);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .coll-toolbtn:hover {
-    background: var(--rg-ring);
-  }
-}

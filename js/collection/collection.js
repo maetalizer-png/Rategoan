@@ -18,6 +18,10 @@ const TEMPLATE = `
             </svg>
           </button>
           <h1>Koleksi</h1>
+          <span class="row-spacer"></span>
+          <button id="coll-more" class="icon-btn" aria-label="Menu lainnya">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+          </button>
         </header>
         <hr class="divider">
         <div class="coll-tabs">
@@ -31,13 +35,13 @@ const TEMPLATE = `
           <input id="coll-search" type="search" placeholder="Cari di koleksi…" autocomplete="off">
         </div>
         <div id="coll-filters" class="coll-filters"></div>
-        <div class="coll-toolbar">
-          <button id="coll-export-md" class="set-row clickable coll-toolbtn">Ekspor Markdown</button>
-          <button id="coll-export-json" class="set-row clickable coll-toolbtn">Backup JSON</button>
-          <button id="coll-import" class="set-row clickable coll-toolbtn">Impor JSON</button>
-        </div>
         <input type="file" id="coll-import-file" accept="application/json,.json" hidden>
         <div id="coll-content"></div>
+      </div>
+      <div id="coll-menu" hidden>
+        <button id="coll-export-md" type="button">Ekspor Markdown</button>
+        <button id="coll-export-json" type="button">Backup JSON</button>
+        <button id="coll-import" type="button">Impor JSON</button>
       </div>
 `;
 
@@ -453,6 +457,28 @@ export const collectionPage = {
       this.open();
     };
     $('coll-back').onclick = () => router.go('chat');
+    // Ekspor/Backup/Impor dulu 1 baris 3 tombol permanen di badan halaman -
+    // sama beratnya secara visual dengan chip filter di atasnya, bikin
+    // halaman kelihatan penuh kotak-kotak padahal 3 aksi ini jarang dipakai
+    // (sekali-sekali, bukan tiap buka Koleksi). Dipindah ke menu titik
+    // tiga di header (pola sama seperti menu pesan chat) - badan halaman
+    // jadi lega, aksi jarang-pakai tetap ada tapi tidak menyita perhatian.
+    const collMenu = $('coll-menu');
+    const moreBtn = $('coll-more');
+    const closeCollMenu = () => { collMenu.hidden = true; };
+    moreBtn.onclick = () => {
+      if (!collMenu.hidden) { closeCollMenu(); return; }
+      collMenu.hidden = false;
+      const r = moreBtn.getBoundingClientRect();
+      const m = collMenu.getBoundingClientRect();
+      collMenu.style.top = r.bottom + 6 + 'px';
+      collMenu.style.left = Math.max(8, r.right - m.width) + 'px';
+    };
+    document.addEventListener('click', (e) => {
+      if (!collMenu.hidden && e.target !== moreBtn && !collMenu.contains(e.target) && !moreBtn.contains(e.target)) {
+        closeCollMenu();
+      }
+    });
     document.querySelectorAll('.coll-tab').forEach((tb) => {
       tb.onclick = () => {
         state.tab = tb.dataset.ctab;
@@ -471,15 +497,20 @@ export const collectionPage = {
       }, 200);
     });
     $('coll-export-md').onclick = async () => {
+      closeCollMenu();
       const items = (await collectionStore.allItems()).filter((it) => it.kind === 'chat');
       if (!items.length) { toast.show('Belum ada yang tersimpan'); return; }
       downloadFile(exportMarkdown(items), 'text/markdown', 'koleksi-' + new Date().toISOString().slice(0, 10) + '.md');
     };
     $('coll-export-json').onclick = async () => {
+      closeCollMenu();
       const items = await collectionStore.allItems({ includeArchived: true });
       downloadFile(JSON.stringify(items, null, 2), 'application/json', 'koleksi-backup-' + new Date().toISOString().slice(0, 10) + '.json');
     };
-    $('coll-import').onclick = () => $('coll-import-file').click();
+    $('coll-import').onclick = () => {
+      closeCollMenu();
+      $('coll-import-file').click();
+    };
     $('coll-import-file').onchange = async (e) => {
       const f = e.target.files && e.target.files[0];
       e.target.value = '';

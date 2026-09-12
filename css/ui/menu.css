@@ -1,4 +1,5 @@
-#msg-menu {
+#msg-menu,
+#coll-menu {
   position: fixed;
   z-index: 70;
   background: var(--rg-surface);
@@ -11,7 +12,8 @@
   padding: 6px;
 }
 
-#msg-menu button {
+#msg-menu button,
+#coll-menu button {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -22,16 +24,19 @@
   text-align: left;
 }
 
-#msg-menu button:active {
+#msg-menu button:active,
+#coll-menu button:active {
   background: var(--rg-ring);
 }
 
-#msg-menu button.danger {
+#msg-menu button.danger,
+#coll-menu button.danger {
   color: var(--rg-danger);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  #msg-menu button:hover {
+  #msg-menu button:hover,
+  #coll-menu button:hover {
     background: var(--rg-ring);
   }
 }
