@@ -26,9 +26,10 @@ function wikiPageUrl(title, lang) {
 function queryWords(q) {
   return String(q || '')
     .toLowerCase()
+    .replace(/\bilmu\s+(?=\p{L})/gu, ' ')
     .replace(/[^\p{L}\p{N}\s]/gu, ' ')
     .split(/\s+/)
-    .filter((w) => w.length > 2 && !STOP[w]);
+    .filter((w) => w.length > 2 && !STOP[w] && w !== 'ilmu');
 }
 
 function scoreText(text, words) {
@@ -152,14 +153,15 @@ async function searchWikipediaRanked(query, lang) {
   const summary = await fetchSummaryByTitle(primary.title, lang);
   if (!summary) return null;
   const rest = ranked.filter((h) => h.title !== primary.title);
-  const main = (words[0] || '').toLowerCase();
+  const main = (words[words.length - 1] || words[0] || '').toLowerCase();
   const related = rest.filter((h) => {
     const title = String(h.title || '').toLowerCase();
     if (!title || title === 'ilmu' || title === 'ilmu pengetahuan') return false;
-    if (/^fakultas\b/.test(title)) return false;
+    if (/^fakultas\b/.test(title) || /^ilmu kebumian\b/.test(title)) return false;
     if (title.split(/\s+/).length === 1 && main && title !== main) return false;
-    if (words.length <= 2) return main && title.includes(main);
-    return scoreText(h.title + ' ' + h.snippet, words) >= 2;
+    if (!main) return false;
+    if (words.length <= 2) return title.includes(main);
+    return title.includes(main) || scoreText(h.title + ' ' + h.snippet, words) >= 2;
   }).slice(0, 3);
   const people = ranked.filter((h) => looksLikePerson(h.title, h.snippet, words)).slice(0, 6);
   const listMode = isListIntent(query) && people.length >= 2;
