@@ -42,8 +42,10 @@ function relatedPasses(item, topic) {
 function clipExtract(extract, definition) {
   const parts = sentences(extract);
   if (!parts.length) return '';
-  const keep = definition ? Math.min(3, parts.length) : Math.min(4, parts.length);
-  return parts.slice(0, keep).join(' ');
+  const keep = definition ? Math.min(6, parts.length) : Math.min(6, parts.length);
+  let out = parts.slice(0, keep).join(' ');
+  if (out.length > 720) out = out.slice(0, 716).replace(/\s+\S*$/, '') + '.';
+  return out;
 }
 
 function inspect(result, rawPrompt, query) {

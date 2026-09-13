@@ -87,12 +87,28 @@ function altQueries(q) {
   return out.slice(0, 3);
 }
 
+async function fetchExtractByTitle(title, lang) {
+  const url =
+    'https://' + lang + '.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exchars=900&redirects=1&titles=' +
+    encodeURIComponent(title) + '&format=json&origin=*';
+  const data = await fetchJson(url);
+  const pages = data && data.query && data.query.pages;
+  if (!pages) return '';
+  const page = pages[Object.keys(pages)[0]];
+  return page && page.extract ? String(page.extract).replace(/\s+/g, ' ').trim() : '';
+}
+
 async function fetchSummaryByTitle(title, lang) {
   const summaryUrl = 'https://' + lang + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title);
   const summary = await fetchJson(summaryUrl);
   if (!summary || !summary.extract) return null;
   const page = summary.content_urls && summary.content_urls.desktop && summary.content_urls.desktop.page;
-  return { title: summary.title, extract: summary.extract, url: page || wikiPageUrl(summary.title || title, lang), lang, source: 'wikipedia' };
+  let extract = summary.extract;
+  try {
+    const longer = await fetchExtractByTitle(summary.title || title, lang);
+    if (longer && longer.length > extract.length) extract = longer;
+  } catch (e) {}
+  return { title: summary.title, extract, url: page || wikiPageUrl(summary.title || title, lang), lang, source: 'wikipedia' };
 }
 
 function stripSearchSnippet(html) {
