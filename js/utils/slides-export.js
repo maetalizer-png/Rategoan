@@ -1,50 +1,97 @@
 import { buildPptxBytes, downloadBytes } from './pptx-local.js';
 
-const BULLETS_PER_SLIDE = 3;
-const MAX_CONTENT = 5;
+const MAX_BODY = 4;
 
 function cleanSource(text) {
   return String(text || '')
     .replace(/Sumber::[^\n]+/g, '')
     .replace(/\(Sumber:[^)]+\)/g, '')
+    .replace(/Ketuk Unduh file slide[^\n]*/gi, '')
     .replace(/#{1,3}\s+/g, '')
     .replace(/^\s*[-•]\s+/gm, '')
     .replace(/\s+/g, ' ')
     .trim();
 }
 
-function shortPhrase(s, maxWords) {
-  let t = String(s || '').replace(/^\s*[-•]\s*/, '').replace(/\s+/g, ' ').trim();
-  t = t.replace(/[.!?]+$/, '');
-  const words = t.split(/\s+/).filter(Boolean);
-  if (!words.length) return '';
-  if (words.length <= maxWords) return t;
-  return words.slice(0, maxWords).join(' ');
+function sentencesOf(text) {
+  return cleanSource(text)
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\s+/g, ' ').trim())
+    .filter((s) => s.length > 12 && !/^yang biasa dibahas/i.test(s));
 }
 
-function titleCase(s, fallback) {
-  const t = shortPhrase(s, 6);
-  if (!t) return fallback || 'Isi';
-  return t.charAt(0).toUpperCase() + t.slice(1);
+function finishSentence(s) {
+  let t = String(s || '').replace(/^\s*[-•]\s*/, '').replace(/\s+/g, ' ').trim();
+  t = t.replace(/[,:;]+$/, '');
+  if (!t) return '';
+  const words = t.split(/\s+/);
+  if (words.length > 28) {
+    t = words.slice(0, 28).join(' ').replace(/[,:;]+$/, '');
+  }
+  if (!/[.!?]$/.test(t)) t += '.';
+  return t;
 }
+
+function keyOf(s) {
+  return finishSentence(s)
+    .toLowerCase()
+    .replace(/[^a-z0-9à-ÿ\s]/gi, '')
+    .split(/\s+/)
+    .slice(0, 8)
+    .join(' ');
+}
+
+function classify(s) {
+  const t = String(s || '').toLowerCase();
+  if (/\b(sejarah|milenia|abad|era|prasejarah|tertua|paling tua)\b/.test(t)) return 'sejarah';
+  if (/\b(tujuan|memahami)\b/.test(t)) return 'tujuan';
+  if (/\b(disebut|ahli|tokoh|ilmuwan)\b/.test(t)) return 'orang';
+  if (/\b(cabang|spesialisasi|biofisika)\b/.test(t)) return 'cabang';
+  if (/\b(adalah|merupakan|yaitu)\b/.test(t)) return 'definisi';
+  return 'pokok';
+}
+
+const SECTION = {
+  definisi: 'Pengertian',
+  tujuan: 'Tujuan',
+  orang: 'Istilah',
+  sejarah: 'Sejarah singkat',
+  cabang: 'Cabang dan kaitan',
+  pokok: 'Pokok bahasan',
+};
 
 export function buildOutline(text, judul) {
-  const raw = cleanSource(text);
-  const sentences = raw.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter((s) => s.length > 8);
   const title = String(judul || 'Presentasi').replace(/\s+/g, ' ').trim() || 'Presentasi';
-  const slides = [{ kind: 'cover', title: title, bullets: sentences[0] ? [shortPhrase(sentences[0], 16)] : [] }];
-  const body = sentences.slice(sentences.length > 1 ? 1 : 0);
-  const points = body.map((s) => shortPhrase(s, 12)).filter(Boolean);
-  for (let i = 0; i < points.length && slides.filter((x) => x.kind === 'body').length < MAX_CONTENT; i += BULLETS_PER_SLIDE) {
-    const chunk = points.slice(i, i + BULLETS_PER_SLIDE);
-    slides.push({ kind: 'body', title: titleCase(chunk[0], title), bullets: chunk });
-  }
-  const closeBits = points.slice(0, 2);
-  slides.push({
-    kind: 'close',
-    title: 'Intinya',
-    bullets: closeBits.length ? closeBits : [shortPhrase(sentences[0] || title, 14)],
+  const raw = sentencesOf(text).map(finishSentence).filter(Boolean);
+  const seen = new Set();
+  const unique = [];
+  raw.forEach((s) => {
+    const k = keyOf(s);
+    if (!k || seen.has(k)) return;
+    seen.add(k);
+    unique.push(s);
   });
+  const coverLine = unique[0] || title + '.';
+  const slides = [{ kind: 'cover', title: title, bullets: [coverLine] }];
+  const rest = unique.slice(1);
+  const buckets = {};
+  rest.forEach((s) => {
+    const c = classify(s);
+    if (!buckets[c]) buckets[c] = [];
+    if (buckets[c].length < 3) buckets[c].push(s);
+  });
+  const order = ['definisi', 'tujuan', 'orang', 'sejarah', 'cabang', 'pokok'];
+  order.forEach((c) => {
+    if (slides.filter((x) => x.kind === 'body').length >= MAX_BODY) return;
+    const items = buckets[c];
+    if (!items || !items.length) return;
+    slides.push({ kind: 'body', title: SECTION[c], bullets: items });
+  });
+  const close =
+    unique.find((s) => classify(s) === 'tujuan') ||
+    unique.find((s) => s !== coverLine) ||
+    coverLine;
+  slides.push({ kind: 'close', title: 'Yang perlu diingat', bullets: [close] });
   return slides;
 }
 
