@@ -197,11 +197,26 @@ export const composer = {
       // supaya fitur ini langsung kelihatan cara pakainya - tekan Kirim
       // apa adanya buat lihat demo nyata, atau timpa dulu (sudah ke-select
       // semua) dengan judul+materi sendiri sebelum kirim.
-      slideCard.onclick = () => {
+      slideCard.onclick = async () => {
         sheets.close();
         const s = this.ensure();
-        if (lastAiText(s)) this.send('buatkan slide dari ini');
-        else this.send('buatkan slide tentang Tips Menabung: Sisihkan penghasilan di awal bulan. Pisahkan rekening tabungan dari rekening harian. Catat pengeluaran setiap hari. Evaluasi progres tiap akhir bulan.');
+        const att = attach.consume();
+        const demo =
+          'Tips Menabung. Sisihkan penghasilan di awal bulan. Pisahkan rekening tabungan dari rekening harian. Catat pengeluaran setiap hari. Evaluasi progres tiap akhir bulan.';
+        const material = (att && att.fileText) || lastAiText(s) || demo;
+        const judul = (s.title && s.title !== 'Chat') ? s.title : ((att && att.name) ? att.name.replace(/\.[a-z0-9]+$/i, '') : 'Presentasi');
+        try {
+          const outline = buildOutline(material, judul);
+          const fileName = (judul.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide') + '.pptx';
+          await exportSlides(outline, fileName);
+          const reply = 'File slide sudah diunduh: ' + fileName + '\n\n' + previewOutline(outline);
+          s.messages.push({ role: 'ai', text: reply, time: Date.now() });
+          store.save();
+          history.render();
+          chat.renderMessages();
+        } catch (e) {
+          toast.show('Gagal membuat slide');
+        }
       };
     }
     $('btn-login').onclick = () => {
