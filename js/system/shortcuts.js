@@ -1,6 +1,5 @@
 import { $ } from '../utils/dom.js';
 import { drawer } from '../ui/drawer.js';
-import { chatsearch } from '../chat/chatsearch.js';
 import { router } from '../core/router.js';
 
 function isTypingTarget(el) {
@@ -25,13 +24,6 @@ export const shortcuts = {
         return;
       }
       if (isTypingTarget(e.target)) return;
-      if (e.key === '/') {
-        e.preventDefault();
-        if (!chatsearch.open) chatsearch.toggle();
-        const s = $('chat-search-input');
-        if (s) s.focus();
-        return;
-      }
       if (e.key === 'k') {
         e.preventDefault();
         drawer.close();
