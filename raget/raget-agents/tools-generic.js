@@ -8,6 +8,23 @@ import { fewshotLocal } from '../raget-memory/fewshot-local.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { routerIntent } from './router-intent.js';
 
+function cleanSnippet(s) {
+  let text = String(s || '')
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!text) return '';
+  const sent = text.match(/^(.+?[.!?])(\s|$)/);
+  if (sent && sent[1].length >= 28) text = sent[1];
+  else if (text.length > 132) text = text.slice(0, 128).replace(/\s+\S*$/, '') + '.';
+  return text;
+}
+
 const SOURCE_NAMES = { wiktionary: 'Wiktionary', wikidata: 'Wikidata', wikipedia: 'Wikipedia' };
 
 // Ekstrak Wikipedia datang sebagai satu paragraf besar tanpa jeda - enak
@@ -113,8 +130,9 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
     const wantsLink = /https?:\/\/|\b(tautan|link|url|alamat web|sumber lengkap)\b/i.test(prompt);
     const linkLine = (r) => {
-      const base = '- ' + r.title + (r.snippet ? ' — ' + r.snippet : '');
-      if (wantsLink && r.url) return base + '\n  ' + r.url;
+      const snip = cleanSnippet(r.snippet);
+      const base = '- **' + r.title + '**' + (snip ? '\n' + snip : '');
+      if (wantsLink && r.url) return base + '\n' + r.url;
       return base;
     };
     const people = Array.isArray(result.people) ? result.people.filter((r) => r && r.title) : [];

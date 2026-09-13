@@ -15,7 +15,7 @@ export const markdown = {
     });
     let out = this.escape(src);
     out = out.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
-    out = out.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+    out = out.replace(/\*\*([^*\n]+)\*\*/g, '<strong class="md-name">$1</strong>');
     out = out.replace(/^#{1,3}\s+(.+)$/gm, '<strong class="md-h">$1</strong>');
     // Bungkus SELURUH baris poin (bukan cuma tandanya) jadi elemen block -
     // sebelumnya cuma tandanya (•/1.) yang jadi <span>, sisanya teks polos
