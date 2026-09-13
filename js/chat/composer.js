@@ -13,7 +13,6 @@ import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../utils/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
-import { voice } from './voice.js';
 import { buildOutline, exportSlides } from '../utils/slides-export.js';
 
 // Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
