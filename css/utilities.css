@@ -46,7 +46,7 @@
 }
 
 html[data-font='small'] .msg {
-  font-size: 13px;
+  font-size: 16px;
 }
 
 html[data-font='small'] .hist-title {
@@ -54,7 +54,7 @@ html[data-font='small'] .hist-title {
 }
 
 html[data-font='small'] #chat-input {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 html[data-font='small'] .empty-chip {
@@ -68,7 +68,7 @@ html[data-font='small'] .set-section-title {
 }
 
 html[data-font='large'] .msg {
-  font-size: 17px;
+  font-size: 20px;
 }
 
 html[data-font='large'] .hist-title {
@@ -76,7 +76,7 @@ html[data-font='large'] .hist-title {
 }
 
 html[data-font='large'] #chat-input {
-  font-size: 17px;
+  font-size: 19px;
 }
 
 html[data-font='large'] .empty-chip {
