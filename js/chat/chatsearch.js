@@ -17,12 +17,16 @@ export const chatsearch = {
   open: false,
   toggle() {
     const bar = $('chat-search-bar');
+    if (!bar) return;
     this.open = !this.open;
     bar.hidden = !this.open;
     if (this.open) {
-      $('chat-search-input').value = '';
-      this.clear();
-      $('chat-search-input').focus();
+      const inp = $('chat-search-input');
+      if (inp) {
+        inp.value = '';
+        this.clear();
+        inp.focus();
+      }
     } else {
       this.clear();
     }
@@ -37,7 +41,9 @@ export const chatsearch = {
     this.clear();
     q = (q || '').toLowerCase().trim();
     if (!q) return;
-    Array.from($('messages').querySelectorAll('.msg')).forEach((el) => {
+    const box = $('messages');
+    if (!box) return;
+    Array.from(box.querySelectorAll('.msg')).forEach((el) => {
       if (fuzzyTextMatch((el.textContent || '').toLowerCase(), q)) this.matches.push(el);
     });
     if (this.matches.length) {
@@ -69,14 +75,14 @@ export const chatsearch = {
     this.focus();
   },
   bind() {
-    // Ikon kaca pembesar di header TIDAK dipasang ke sini lagi - lihat
-    // drawer.js. Cari-dalam-satu-chat ini sekarang cuma via shortcut "/"
-    // (desktop, lihat shortcuts.js), bukan tombol yang kelihatan di UI -
-    // dulu tombol ini yang dipasang ke sini terasa gak berguna kalau
-    // dipencet pas chat masih kosong (0/0, tidak ada apa pun buat dicari).
-    $('chat-search-input').addEventListener('input', (e) => this.run(e.target.value));
-    $('chat-search-next').onclick = () => this.next();
-    $('chat-search-prev').onclick = () => this.prev();
-    $('chat-search-close').onclick = () => this.toggle();
+    const inp = $('chat-search-input');
+    if (!inp) return;
+    inp.addEventListener('input', (e) => this.run(e.target.value));
+    const next = $('chat-search-next');
+    const prev = $('chat-search-prev');
+    const close = $('chat-search-close');
+    if (next) next.onclick = () => this.next();
+    if (prev) prev.onclick = () => this.prev();
+    if (close) close.onclick = () => this.toggle();
   },
 };
