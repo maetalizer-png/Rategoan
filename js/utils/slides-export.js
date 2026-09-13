@@ -1,29 +1,7 @@
-const PPTXGENJS_VERSION = '3.12.0';
-const PPTXGENJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/' + PPTXGENJS_VERSION + '/pptxgen.bundle.min.js';
+import { buildPptxBytes, downloadBytes } from './pptx-local.js';
+
 const BULLETS_PER_SLIDE = 3;
 const MAX_CONTENT = 5;
-const INK = '0B0C0E';
-const PAPER = 'E8E6E1';
-const MUTED = '9AA8B0';
-const RULE = '8B8D86';
-
-let loadPromise = null;
-
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error('Gagal memuat pustaka pembuat slide (cek koneksi internet)'));
-    document.head.appendChild(s);
-  });
-}
-
-function ensurePptxGenJs() {
-  if (window.PptxGenJS) return Promise.resolve(window.PptxGenJS);
-  if (!loadPromise) loadPromise = loadScript(PPTXGENJS_SRC).then(() => window.PptxGenJS);
-  return loadPromise;
-}
 
 function cleanSource(text) {
   return String(text || '')
@@ -82,26 +60,6 @@ export function previewOutline(slides) {
 }
 
 export async function exportSlides(slides, fileName) {
-  const PptxGenJS = await ensurePptxGenJs();
-  const pptx = new PptxGenJS();
-  slides.forEach((slide) => {
-    const s = pptx.addSlide();
-    s.background = { color: INK };
-    s.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: 0.08, h: 5.63, fill: { color: RULE } });
-    if (slide.kind === 'cover') {
-      s.addText(slide.title, { x: 0.7, y: 1.8, w: 8.6, h: 1.4, fontSize: 34, bold: true, color: PAPER, fontFace: 'Calibri' });
-      if (slide.bullets && slide.bullets[0]) {
-        s.addText(slide.bullets[0], { x: 0.7, y: 3.3, w: 8.4, h: 1, fontSize: 16, color: MUTED, fontFace: 'Calibri' });
-      }
-      return;
-    }
-    s.addText(slide.title, { x: 0.7, y: 0.4, w: 8.6, h: 0.8, fontSize: 24, bold: true, color: PAPER, fontFace: 'Calibri' });
-    if (slide.bullets && slide.bullets.length) {
-      s.addText(
-        slide.bullets.map((b) => ({ text: b, options: { bullet: true, breakLine: true } })),
-        { x: 0.8, y: 1.4, w: 8.4, h: 3.6, fontSize: 18, color: PAPER, fontFace: 'Calibri', valign: 'top' }
-      );
-    }
-  });
-  await pptx.writeFile({ fileName: fileName || 'slide.pptx' });
+  const bytes = buildPptxBytes(slides);
+  downloadBytes(bytes, fileName || 'slide.pptx');
 }

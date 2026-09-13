@@ -193,15 +193,9 @@ export const composer = {
       // semua) dengan judul+materi sendiri sebelum kirim.
       slideCard.onclick = () => {
         sheets.close();
-        inp.value =
-          'buatkan slide tentang Tips Menabung: Sisihkan penghasilan di awal bulan, bukan di akhir. Pisahkan rekening tabungan dari rekening harian. Catat semua pengeluaran setiap hari. Evaluasi progres tiap akhir bulan.';
-        this.autoGrow();
-        inp.focus();
-        inp.setSelectionRange(0, inp.value.length);
-        // Baris contoh sudah ke-select semua di kotak ketik, tapi tanpa
-        // penjelasan ini banyak yang tidak sadar masih harus tekan Kirim -
-        // dikira nge-tap kartu ini saja sudah cukup untuk bikin slide-nya.
-        toast.show('Contoh sudah terisi - ganti judul/isinya (opsional), lalu tekan Kirim untuk membuat slide-nya', 4000);
+        const s = this.ensure();
+        if (lastAiText(s)) this.send('buatkan slide dari ini');
+        else this.send('buatkan slide tentang Tips Menabung: Sisihkan penghasilan di awal bulan. Pisahkan rekening tabungan dari rekening harian. Catat pengeluaran setiap hari. Evaluasi progres tiap akhir bulan.');
       };
     }
     $('btn-login').onclick = () => {
