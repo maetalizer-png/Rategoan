@@ -11,6 +11,7 @@ import { ai } from '../ai/ai.js';
 import { tts } from '../state/tts.js';
 import { ic } from '../utils/icons.js';
 import { router } from '../core/router.js';
+import { exportSlides, heldSlide } from '../utils/slides-export.js';
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
@@ -56,8 +57,9 @@ function fillAndSend(text) {
 }
 
 function detectQuickChips(text) {
-  if (/Hasil pencarian web|Sumber:|Yang biasa dibahas|Pratinjau slide/i.test(text) || text.length > 280) {
-    if (!/sudah diunduh sebagai/i.test(text)) return ['Buatkan slide dari ini'];
+  if (/Pratinjau slide/i.test(text)) return ['Unduh file slide'];
+  if (/Hasil pencarian web|Sumber:|Yang biasa dibahas/i.test(text) || text.length > 280) {
+    if (!/sudah diunduh sebagai|Pratinjau slide/i.test(text)) return ['Buatkan slide dari ini'];
   }
   if (/pengingat\b.*(dibatalkan|ditambahkan)|akan mengingatkan|sudah saya catat sebagai pengingat/i.test(text)) {
     return ['Batalkan pengingat'];
@@ -297,7 +299,15 @@ export const chat = {
           actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0]), 'globe'));
         }
         detectQuickChips(m.text).slice(0, 1).forEach((label) => {
-          actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
+          actions.appendChild(buildExtraChip(label, () => {
+            if (label === 'Unduh file slide') {
+              const held = heldSlide();
+              if (!held) return toast.show('Tidak ada slide siap unduh');
+              exportSlides(held.outline, held.fileName);
+              return;
+            }
+            fillAndSend(label);
+          }));
         });
         d.appendChild(actions);
       }

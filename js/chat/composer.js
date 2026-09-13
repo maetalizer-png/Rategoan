@@ -13,7 +13,7 @@ import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../utils/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
-import { buildOutline, exportSlides, previewOutline } from '../utils/slides-export.js';
+import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../utils/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 
 // Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
@@ -46,6 +46,26 @@ function lastAttachedFile(session) {
 // FILE dibuat, bukan minta saran cara menyusun presentasi.
 const SLIDE_ACTION_RE = /\b(buat(kan)?|bikin|jadikan|susun|export|unduh)\b/i;
 const SLIDE_NOUN_RE = /\b(slide|ppt|pptx)\b/i;
+
+
+function pickSlideMaterial(session, att) {
+  if (att && att.fileText) {
+    return { text: att.fileText, title: (att.name || 'Presentasi').replace(/\.[a-z0-9]+$/i, '') };
+  }
+  const msgs = (session && session.messages) || [];
+  for (let i = msgs.length - 1; i >= 0; i -= 1) {
+    const m = msgs[i];
+    if (!m || m.role === 'user' || !m.text) continue;
+    if (/Pratinjau slide|Unduh file slide|sudah diunduh/.test(m.text)) continue;
+    if (m.source === 'websearch') {
+      return { text: m.text, title: session.title && session.title !== 'Chat' ? session.title : 'Presentasi' };
+    }
+    if (m.text.length >= 160) {
+      return { text: m.text, title: session.title && session.title !== 'Chat' ? session.title : 'Presentasi' };
+    }
+  }
+  return null;
+}
 
 function lastAiText(session) {
   const msgs = (session && session.messages) || [];
@@ -201,21 +221,23 @@ export const composer = {
         sheets.close();
         const s = this.ensure();
         const att = attach.consume();
-        const demo =
-          'Tips Menabung. Sisihkan penghasilan di awal bulan. Pisahkan rekening tabungan dari rekening harian. Catat pengeluaran setiap hari. Evaluasi progres tiap akhir bulan.';
-        const material = (att && att.fileText) || lastAiText(s) || demo;
-        const judul = (s.title && s.title !== 'Chat') ? s.title : ((att && att.name) ? att.name.replace(/\.[a-z0-9]+$/i, '') : 'Presentasi');
+        const picked = pickSlideMaterial(s, att);
+        if (!picked) {
+          toast.show('Tanya topiknya dulu, baru tap Slide');
+          return;
+        }
         try {
-          const outline = buildOutline(material, judul);
-          const fileName = (judul.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide') + '.pptx';
-          await exportSlides(outline, fileName);
-          const reply = 'File slide sudah diunduh: ' + fileName + '\n\n' + previewOutline(outline);
+          const outline = buildOutline(picked.text, picked.title);
+          const stamp = Date.now().toString(36);
+          const fileName = (picked.title.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide') + '-' + stamp + '.pptx';
+          rememberSlide(outline, fileName);
+          const reply = previewOutline(outline) + '\n\nKetuk Unduh file slide kalau mau simpan PPTX.';
           s.messages.push({ role: 'ai', text: reply, time: Date.now() });
           store.save();
           history.render();
           chat.renderMessages();
         } catch (e) {
-          toast.show('Gagal membuat slide');
+          toast.show('Gagal merangkai slide');
         }
       };
     }

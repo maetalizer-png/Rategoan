@@ -63,3 +63,14 @@ export async function exportSlides(slides, fileName) {
   const bytes = buildPptxBytes(slides);
   downloadBytes(bytes, fileName || 'slide.pptx');
 }
+
+let held = null;
+
+export function rememberSlide(outline, fileName) {
+  held = { outline, fileName };
+  return held;
+}
+
+export function heldSlide() {
+  return held;
+}
