@@ -87,10 +87,13 @@ export function buildOutline(text, judul) {
     if (!items || !items.length) return;
     slides.push({ kind: 'body', title: SECTION[c], bullets: items });
   });
-  const close =
-    unique.find((s) => classify(s) === 'tujuan') ||
-    unique.find((s) => s !== coverLine) ||
-    coverLine;
+  const used = new Set();
+  slides.forEach((sl) => (sl.bullets || []).forEach((b) => used.add(b)));
+  let close = unique.find((s) => !used.has(s));
+  if (!close) {
+    const clause = coverLine.split(',')[0].trim();
+    close = /[.!?]$/.test(clause) ? clause : clause + '.';
+  }
   slides.push({ kind: 'close', title: 'Yang perlu diingat', bullets: [close] });
   return slides;
 }
