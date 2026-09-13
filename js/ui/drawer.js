@@ -64,18 +64,6 @@ export const drawer = {
   },
   bind() {
     $('btn-menu').onclick = () => this.open();
-    // Ikon kaca pembesar di header - dulu terpasang ke "cari di chat ini"
-    // (chatsearch.js), fitur yang kelihatan gak berguna kalau ditekan pas
-    // chat masih kosong (langsung 0/0, tidak ada isi buat dicari). Standar
-    // ikon pencarian di aplikasi lain (WhatsApp/Telegram/ChatGPT) cari
-    // LINTAS SEMUA riwayat percakapan, bukan cuma di dalam satu chat yang
-    // sedang dibuka - sama seperti shortcut Ctrl+K yang sudah ada di
-    // shortcuts.js, disamakan supaya konsisten.
-    $('btn-chat-search').onclick = () => {
-      this.open();
-      const s = $('history-search');
-      if (s) s.focus();
-    };
     $('backdrop').onclick = () => this.close();
     document.addEventListener('touchstart', (e) => this.onStart(e), { passive: true });
     document.addEventListener('touchmove', (e) => this.onMove(e), { passive: false });
