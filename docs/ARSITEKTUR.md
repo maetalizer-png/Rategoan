@@ -18,6 +18,8 @@ lihat [`PRD/FONDASI-TEORI-RAGET.md`](../PRD/FONDASI-TEORI-RAGET.md) -
 dokumen ini fokus ke PETA KODE hari ini, dokumen itu fokus ke TEORI
 di baliknya.
 
+Lapisan giliran (intent→act) ada di [`docs/KERANGKA-MESIN.md`](KERANGKA-MESIN.md) dan `raget/raget-agents/turn-pipeline.js`.
+
 ## 1. Diagram lapisan
 
 ```
