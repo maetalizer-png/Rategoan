@@ -127,9 +127,14 @@ export const composer = {
     history.render();
     chat.renderMessages();
     haptics.tap(10);
-    const isWebsearch = this.websearchActive;
+    const plan = turnPipeline.inspect(text, {
+      messages: s.messages,
+      attach: att,
+      websearch: this.websearchActive,
+    });
+    const isWebsearch = plan.route === 'web';
     const routedText = isWebsearch ? 'googling ' + text : text;
-    if (/^(lanjut|lanjutkan|dari ini)$/i.test(text.trim()) && lastAiText(s)) {
+    if (plan.route === 'slide' && /^(lanjut|lanjutkan|dari ini)$/i.test(text.trim())) {
       text = 'buatkan slide dari ini';
     }
     let directReply = await trySlideRequest(text, att, s);
