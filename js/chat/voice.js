@@ -4,6 +4,7 @@ import { composer } from './composer.js';
 
 export const voice = {
   listening: false,
+  speakNext: false,
   rec: null,
   speak(text) {
     if (!('speechSynthesis' in window)) return;
@@ -17,6 +18,7 @@ export const voice = {
   },
   stop() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    this.speakNext = false;
   },
   listen() {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -44,13 +46,14 @@ export const voice = {
     };
     this.rec.onresult = (e) => {
       const result = e.results[0];
-      if (!result.isFinal && this.rec.interimResults) return;
+      if (!result || !result[0]) return;
       const t = result[0].transcript;
       const inp = $('chat-input');
       inp.value += (inp.value ? ' ' : '') + t;
       inp.dispatchEvent(new Event('input'));
       composer.autoGrow();
       if (inp.value.trim()) {
+        this.speakNext = true;
         const btn = $('btn-send');
         if (btn) btn.click();
       }
@@ -68,6 +71,22 @@ export const voice = {
   },
   bind() {
     $('btn-stop').onclick = () => this.stop();
-    $('btn-voice-input').onclick = () => this.listen();
+    const btn = $('btn-voice-input');
+    if (!btn) return;
+    btn.addEventListener('pointerdown', (e) => {
+      if (e.button && e.button !== 0) return;
+      e.preventDefault();
+      this.speakNext = true;
+      this.listen();
+    });
+    const end = () => {
+      if (!this.listening) return;
+      try {
+        this.rec && this.rec.stop();
+      } catch (e) {}
+    };
+    btn.addEventListener('pointerup', end);
+    btn.addEventListener('pointercancel', end);
+    btn.addEventListener('pointerleave', end);
   },
 };
