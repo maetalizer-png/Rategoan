@@ -4,10 +4,6 @@ import { auth } from '../state/auth.js';
 export const router = {
   routes: { chat: 'view-chat', settings: 'view-settings', collection: 'view-collection', login: 'view-login' },
   render() {
-    // full boleh bawa sub-path (mis. "settings/data" buat halaman kategori
-    // Pengaturan) - hash TOP-LEVEL yang dipakai buat cocokkan ke routes{}
-    // cuma segmen pertama, sisanya (this.sub) dibaca modul terkait sendiri
-    // (settings.js) tanpa router.js perlu tahu apa isi tiap sub-halaman.
     let full = (location.hash || '').replace(/^#\/?/, '') || 'chat';
     let hash = full.split('/')[0] || 'chat';
     if (!this.routes[hash]) {
@@ -31,8 +27,6 @@ export const router = {
     });
     const tb = $('topbar');
     if (tb) tb.hidden = hash !== 'chat';
-    const sb = $('chat-search-bar');
-    if (sb && hash !== 'chat') sb.hidden = true;
     const sidebar = $('sidebar');
     if (sidebar) sidebar.hidden = hash === 'login';
     document.body.classList.toggle('auth-gate', hash === 'login');
