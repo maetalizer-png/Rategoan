@@ -19,7 +19,7 @@ export const markdown = {
     out = out.replace(/^#{1,3}\s+(.+)$/gm, '<strong class="md-h">$1</strong>');
     out = out.replace(/(^|\n)[ \t]*[-•][ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">•</span> $2</div>');
     out = out.replace(/(^|\n)[ \t]*(\d+)\.[ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">$2.</span> $3</div>');
-    out = out.replace(/(^|\n)Sumber::([^|\n]+)\|(https?:\/\/\S+)/g, '$1<div class="md-source"><a class="md-link" href="$3" target="_blank" rel="noopener noreferrer">$2</a></div>');
+    out = out.replace(/(^|\n)Sumber::([^|\n]+)\|(https?:\/\/\S+)/g, '$1<div class="md-source">Sumber: <a class="md-link" href="$3" target="_blank" rel="noopener noreferrer">$2</a></div>');
     out = out.replace(/(^|\n)\(Sumber:\s*([^)]+)\)/g, '$1<div class="md-source">Sumber: $2</div>');
     out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a class="md-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
     out = out.replace(/\bhttps?:\/\/[^\s<]+/g, (m, off, str) => {

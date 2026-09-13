@@ -46,7 +46,7 @@
 }
 
 html[data-font='small'] .msg {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 html[data-font='small'] .hist-title {
@@ -68,7 +68,7 @@ html[data-font='small'] .set-section-title {
 }
 
 html[data-font='large'] .msg {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 html[data-font='large'] .hist-title {

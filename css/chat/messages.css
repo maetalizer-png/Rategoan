@@ -19,8 +19,8 @@
 
 
 .msg {
-  max-width: 94%;
-  font-size: 18px;
+  max-width: 90%;
+  font-size: 16px;
   line-height: 1.55;
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -236,9 +236,9 @@
 
 .md-h {
   display: block;
-  font-size: 20px;
-  font-weight: 750;
-  letter-spacing: -0.2px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
   margin: 10px 0 6px;
 }
 
