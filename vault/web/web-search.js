@@ -3,12 +3,6 @@ const NETWORK_FAIL_MESSAGE =
 
 const FETCH_TIMEOUT_MS = 12000;
 
-// Tanpa timeout, koneksi lemot/nyangkut bikin fetch() nunggu tanpa batas -
-// "Mencari di internet..." (atau badge "Hasil pencarian web" pas lagi
-// ngetik) bisa nyangkut lama tanpa fallback pesan gagal, dan tombol
-// Salin/Baca/Bagikan yang baru muncul setelah balasan selesai jadi ikut
-// tertunda tanpa batas juga. AbortController jamin selalu ada kepastian
-// (berhasil atau NETWORK_FAIL_MESSAGE) dalam waktu wajar.
 async function fetchJson(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
@@ -21,48 +15,60 @@ async function fetchJson(url) {
   }
 }
 
+function wikiPageUrl(title, lang) {
+  return 'https://' + lang + '.wikipedia.org/wiki/' + encodeURIComponent(title.replace(/ /g, '_'));
+}
+
 async function fetchSummaryByTitle(title, lang) {
   const summaryUrl = 'https://' + lang + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title);
   const summary = await fetchJson(summaryUrl);
   if (!summary || !summary.extract) return null;
   const page = summary.content_urls && summary.content_urls.desktop && summary.content_urls.desktop.page;
-  return { title: summary.title, extract: summary.extract, url: page || null, lang, source: 'wikipedia' };
+  return { title: summary.title, extract: summary.extract, url: page || wikiPageUrl(summary.title || title, lang), lang, source: 'wikipedia' };
 }
 
-// Pencarian teks penuh (action=query&list=search) dipakai sebagai jalur utama
-// karena bisa cocokkan ISI artikel, bukan cuma awalan judul persis seperti
-// opensearch - jadi query natural seperti "ilmuwan matematika terkenal" tetap
-// bisa nemu artikel relevan meski judulnya tidak diawali kata itu persis.
-// opensearch dipertahankan sebagai fallback kalau full-text search kosong.
+function stripSearchSnippet(html) {
+  return String(html || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+}
+
 async function searchWikipedia(query, lang) {
   const fullTextUrl =
     'https://' + lang + '.wikipedia.org/w/api.php?action=query&list=search&srsearch=' +
-    encodeURIComponent(query) + '&srlimit=1&format=json&origin=*';
+    encodeURIComponent(query) + '&srlimit=5&srprop=snippet|timestamp&format=json&origin=*';
   const fullTextData = await fetchJson(fullTextUrl);
-  const hit = fullTextData && fullTextData.query && fullTextData.query.search && fullTextData.query.search[0];
-  if (hit && hit.title) {
-    const result = await fetchSummaryByTitle(hit.title, lang);
-    if (result) return result;
+  const hits = (fullTextData && fullTextData.query && fullTextData.query.search) || [];
+  let result = null;
+  if (hits[0] && hits[0].title) {
+    result = await fetchSummaryByTitle(hits[0].title, lang);
   }
-
-  const openSearchUrl =
-    'https://' + lang + '.wikipedia.org/w/api.php?action=opensearch&search=' +
-    encodeURIComponent(query) + '&limit=1&namespace=0&format=json&origin=*';
-  const openSearchData = await fetchJson(openSearchUrl);
-  const title = openSearchData && openSearchData[1] && openSearchData[1][0];
-  if (!title) return null;
-  return await fetchSummaryByTitle(title, lang);
+  if (!result) {
+    const openSearchUrl =
+      'https://' + lang + '.wikipedia.org/w/api.php?action=opensearch&search=' +
+      encodeURIComponent(query) + '&limit=5&namespace=0&format=json&origin=*';
+    const openSearchData = await fetchJson(openSearchUrl);
+    const titles = (openSearchData && openSearchData[1]) || [];
+    if (titles[0]) result = await fetchSummaryByTitle(titles[0], lang);
+    if (result) {
+      result.related = titles.slice(1, 5).map((title) => ({
+        title,
+        snippet: '',
+        url: wikiPageUrl(title, lang),
+      }));
+    }
+    return result;
+  }
+  result.related = hits.slice(1).map((h) => ({
+    title: h.title,
+    snippet: stripSearchSnippet(h.snippet),
+    url: wikiPageUrl(h.title, lang),
+  }));
+  return result;
 }
 
 function stripHtml(s) {
   return String(s || '').replace(/<[^>]+>/g, '').trim();
 }
 
-// Wiktionary itu kamus kata per kata (bukan mesin cari teks penuh) - cuma
-// masuk akal untuk query satu-dua kata. Dipakai sebagai fallback TERAKHIR
-// kalau Wikipedia (ID maupun EN) sama sekali tidak nemu apa-apa, supaya
-// pertanyaan definisi kata pendek masih punya peluang terjawab dari sumber
-// lain di luar Wikipedia - bukan cuma satu domain terus.
 async function searchWiktionary(query, lang) {
   const term = query.trim();
   if (!term || term.split(/\s+/).length > 3) return null;
@@ -85,21 +91,17 @@ async function searchWiktionary(query, lang) {
     url: 'https://' + lang + '.wiktionary.org/wiki/' + encodeURIComponent(term),
     lang,
     source: 'wiktionary',
+    related: [],
   };
 }
 
-// Wikidata itu basis pengetahuan terstruktur (bukan artikel prosa) - banyak
-// entitas sempit (istilah teknis, tokoh minor, perusahaan kecil) yang punya
-// entri Wikidata dengan deskripsi singkat padahal belum punya artikel
-// Wikipedia sendiri. Dipakai sebagai fallback paling akhir, cuma ambil
-// label + deskripsi satu baris (bukan seluruh data terstruktur/claims -
-// itu butuh resolusi properti tambahan yang jauh lebih kompleks).
 async function searchWikidata(query) {
   const url =
     'https://www.wikidata.org/w/api.php?action=wbsearchentities&search=' +
-    encodeURIComponent(query) + '&language=id&format=json&origin=*&limit=1';
+    encodeURIComponent(query) + '&language=id&format=json&origin=*&limit=4';
   const data = await fetchJson(url);
-  const hit = data && data.search && data.search[0];
+  const hits = (data && data.search) || [];
+  const hit = hits.find((h) => h.description) || hits[0];
   if (!hit || !hit.description) return null;
   const label = hit.label || query;
   return {
@@ -108,6 +110,11 @@ async function searchWikidata(query) {
     url: hit.concepturi || ('https://www.wikidata.org/wiki/' + hit.id),
     lang: 'id',
     source: 'wikidata',
+    related: hits.slice(1, 4).filter((h) => h.label).map((h) => ({
+      title: h.label,
+      snippet: h.description || '',
+      url: h.concepturi || ('https://www.wikidata.org/wiki/' + h.id),
+    })),
   };
 }
 
@@ -121,8 +128,13 @@ async function search(query) {
     if (!result) result = await searchWiktionary(q, 'id');
     if (!result) result = await searchWiktionary(q, 'en');
     if (!result) result = await searchWikidata(q);
-    if (!result) return { ok: false, message: 'Sudah dicari di internet (Wikipedia, Wiktionary & Wikidata) tapi tidak ketemu hasil yang relevan untuk "' + q + '".' };
-    return { ok: true, ...result };
+    if (!result) {
+      return {
+        ok: false,
+        message: 'Sudah dicari di Wikipedia, Wiktionary, dan Wikidata, tapi tidak ketemu yang relevan untuk "' + q + '".',
+      };
+    }
+    return { ok: true, related: result.related || [], ...result };
   } catch (e) {
     return { ok: false, message: NETWORK_FAIL_MESSAGE };
   }

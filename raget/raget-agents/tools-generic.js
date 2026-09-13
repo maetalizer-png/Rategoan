@@ -112,9 +112,20 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
     const body = result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract;
+    const related = Array.isArray(result.related) ? result.related.filter((r) => r && r.title) : [];
+    const relatedBlock = related.length
+      ? '\n\n## Juga terkait\n' +
+        related
+          .map((r) => {
+            const line = r.url ? '- [' + r.title + '](' + r.url + ')' : '- ' + r.title;
+            return r.snippet ? line + ' — ' + r.snippet : line;
+          })
+          .join('\n')
+      : '';
     return (
       body +
-      (result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '')
+      relatedBlock +
+      (result.url ? '\n\nSumber utama: [' + sourceLabel + '](' + result.url + ')' : '')
     );
   }
   if (kind === 'cuaca_live') {
