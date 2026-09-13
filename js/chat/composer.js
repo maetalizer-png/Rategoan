@@ -11,13 +11,34 @@ import { chat } from './chat.js';
 import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
-import { summarizeFileText } from '../utils/file-summary.js';
+import { summarizeFileText, answerFromFile } from '../utils/file-summary.js';
+import { memoryLong } from '../../raget/raget-memory/memory-long.js';
+import { voice } from './voice.js';
 import { buildOutline, exportSlides } from '../utils/slides-export.js';
 
 // Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
 // (att.fileText) - tanpa itu, kata-kata ini tetap lewat mesin Raget biasa
 // seperti sebelumnya (mis. "ringkas hari saya" tanpa lampiran apa pun).
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
+const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
+const WORK_RE = /\b(tugas|skripsi|makalah|rencana|langkah|proyek|pekerjaan|kerjakan)\b/i;
+
+function titleFrom(text) {
+  const t = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!t) return 'Chat';
+  if (t.length <= 36) return t;
+  return t.slice(0, 36).replace(/\s+\S*$/, '') || t.slice(0, 36);
+}
+
+function lastAttachedFile(session) {
+  const msgs = (session && session.messages) || [];
+  for (let i = msgs.length - 1; i >= 0; i -= 1) {
+    const att = msgs[i].attach;
+    if (att && att.fileText) return att;
+  }
+  return null;
+}
+
 // Sengaja TIDAK menyertakan "presentasi" sendirian sebagai pemicu - kata itu
 // sudah dipakai tool nasihat struktur (Pyramid Principle di
 // intelligence-rumus.js, trigger "bingung strukturnya"/"susun presentasi").
@@ -72,7 +93,11 @@ export const composer = {
   },
   async send(text) {
     const s = this.ensure();
-    if (!s.messages.length) s.title = text.slice(0, 28);
+    if (!s.messages.length) s.title = titleFrom(text);
+    if (WORK_RE.test(text) && !s.project) {
+      s.project = { goal: titleFrom(text), started: Date.now() };
+    }
+    try { memoryLong.learnFromText(text); } catch (e) {}
     const att = attach.consume();
     const q = quote.consume();
     s.messages.push({
@@ -89,9 +114,15 @@ export const composer = {
     const isWebsearch = this.websearchActive;
     const routedText = isWebsearch ? 'googling ' + text : text;
     let directReply = await trySlideRequest(text, att);
-    if (directReply == null && att && FILE_READ_RE.test(text)) {
-      if (att.fileText) directReply = summarizeFileText(att.fileText, att.name);
-      else if (att.fileTextError) directReply = att.fileTextError;
+    const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
+    if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text) || (att && att.fileText))) {
+      if (fileSrc.fileText) {
+        if (FILE_READ_RE.test(text) && !/\b(apa|jelaskan|tentang)\b/i.test(text)) {
+          directReply = summarizeFileText(fileSrc.fileText, fileSrc.name);
+        } else {
+          directReply = answerFromFile(fileSrc.fileText, text, fileSrc.name);
+        }
+      } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
     const reply = await chat.ask(routedText, { searching: isWebsearch, directReply });
     if (reply == null) {
