@@ -111,20 +111,34 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     if (!result.ok) return result.message;
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
-    const body = result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract;
+    const linkLine = (r) => {
+      const line = r.url ? '- [' + r.title + '](' + r.url + ')' : '- ' + r.title;
+      return r.snippet ? line + ' — ' + r.snippet : line;
+    };
+    const people = Array.isArray(result.people) ? result.people.filter((r) => r && r.title) : [];
     const related = Array.isArray(result.related) ? result.related.filter((r) => r && r.title) : [];
+    if (result.mode === 'list' && people.length) {
+      const note = result.weak
+        ? 'Halaman umum kurang cocok, jadi yang ditampilkan dulu nama yang lebih spesifik.\n\n'
+        : '';
+      return (
+        note +
+        '# ' + q + '\n\n' +
+        people.map(linkLine).join('\n') +
+        (result.url ? '\n\nSumber: [' + (result.title || sourceLabel) + '](' + result.url + ')' : '')
+      );
+    }
+    const body = result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract;
     const relatedBlock = related.length
-      ? '\n\n## Juga terkait\n' +
-        related
-          .map((r) => {
-            const line = r.url ? '- [' + r.title + '](' + r.url + ')' : '- ' + r.title;
-            return r.snippet ? line + ' — ' + r.snippet : line;
-          })
-          .join('\n')
+      ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
+      : '';
+    const weakNote = result.weak
+      ? '\n\nHasil teratas masih umum. Coba kata yang lebih spesifik, misalnya "matematikawan Indonesia".'
       : '';
     return (
       body +
       relatedBlock +
+      weakNote +
       (result.url ? '\n\nSumber utama: [' + sourceLabel + '](' + result.url + ')' : '')
     );
   }
