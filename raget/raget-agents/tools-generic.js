@@ -75,7 +75,7 @@ function formatWikipediaExtract(title, extract) {
   } else {
     body = breakIntoParagraphs(extract, 2);
   }
-  return '# ' + title + '\n\n' + body;
+  return '# ' + title + '\n' + body;
 }
 
 async function run(kind, prompt, messages, onFewshotCacheClear) {

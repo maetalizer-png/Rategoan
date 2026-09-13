@@ -152,8 +152,15 @@ async function searchWikipediaRanked(query, lang) {
   const summary = await fetchSummaryByTitle(primary.title, lang);
   if (!summary) return null;
   const rest = ranked.filter((h) => h.title !== primary.title);
-  const relatedMin = words.length >= 3 ? 2 : 1;
-  const related = rest.filter((h) => scoreText(h.title + ' ' + h.snippet, words) >= relatedMin).slice(0, 4);
+  const main = (words[0] || '').toLowerCase();
+  const related = rest.filter((h) => {
+    const title = String(h.title || '').toLowerCase();
+    if (!title || title === 'ilmu' || title === 'ilmu pengetahuan') return false;
+    if (/^fakultas\b/.test(title)) return false;
+    if (title.split(/\s+/).length === 1 && main && title !== main) return false;
+    if (words.length <= 2) return main && title.includes(main);
+    return scoreText(h.title + ' ' + h.snippet, words) >= 2;
+  }).slice(0, 3);
   const people = ranked.filter((h) => looksLikePerson(h.title, h.snippet, words)).slice(0, 6);
   const listMode = isListIntent(query) && people.length >= 2;
   const weak = primary.titleScore < need && words.length >= 3;
