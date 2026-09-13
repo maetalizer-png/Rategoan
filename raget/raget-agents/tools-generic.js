@@ -143,7 +143,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       return (
         '# ' + q + '\n\n' +
         people.map(linkLine).join('\n') +
-        (result.url ? '\n\nSumber::' + sourceLabel + '|' + result.url : '\n\n(Sumber: ' + sourceLabel + ')')
+        (result.url ? '\n\nSumber::' + sourceLabel + '|' + result.url : '\n\n(Sumber: ' + sourceLabel + ')') + '\n\nLanjut: buatkan slide dari ini'
       );
     }
     const outline = Array.isArray(result.outline) ? result.outline.filter(Boolean) : [];
@@ -160,7 +160,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     return (
       body +
       relatedBlock +
-      (result.url ? '\n\nSumber::' + sourceLabel + '|' + result.url : '\n\n(Sumber: ' + sourceLabel + ')')
+      (result.url ? '\n\nSumber::' + sourceLabel + '|' + result.url : '\n\n(Sumber: ' + sourceLabel + ')') + '\n\nLanjut: buatkan slide dari ini'
     );
   }
   if (kind === 'cuaca_live') {

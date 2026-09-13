@@ -13,7 +13,7 @@ import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../utils/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
-import { buildOutline, exportSlides } from '../utils/slides-export.js';
+import { buildOutline, exportSlides, previewOutline } from '../utils/slides-export.js';
 
 // Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
 // (att.fileText) - tanpa itu, kata-kata ini tetap lewat mesin Raget biasa
@@ -46,8 +46,17 @@ function lastAttachedFile(session) {
 const SLIDE_ACTION_RE = /\b(buat(kan)?|bikin|jadikan|susun|export|unduh)\b/i;
 const SLIDE_NOUN_RE = /\b(slide|ppt|pptx)\b/i;
 
-async function trySlideRequest(text, att) {
+function lastAiText(session) {
+  const msgs = (session && session.messages) || [];
+  for (let i = msgs.length - 1; i >= 0; i -= 1) {
+    if (msgs[i].role !== 'user' && msgs[i].text) return msgs[i].text;
+  }
+  return '';
+}
+
+async function trySlideRequest(text, att, session) {
   if (!(SLIDE_ACTION_RE.test(text) && SLIDE_NOUN_RE.test(text))) return null;
+  const fromLast = /\b(dari\s+ini|dari\s+jawaban|dari\s+hasil|jawaban\s+ini)\b/i.test(text);
   let material = null;
   let judul = 'Presentasi';
   if (att && att.fileText) {
@@ -58,17 +67,24 @@ async function trySlideRequest(text, att) {
     if (afterColon) {
       material = afterColon;
       const topicMatch = text.match(/\b(?:tentang|untuk|dari)\s+([^:]+?)(?::|$)/i);
-      if (topicMatch) judul = topicMatch[1].trim();
+      if (topicMatch && !fromLast) judul = topicMatch[1].trim();
+    }
+  }
+  if (!material || fromLast) {
+    const prev = lastAiText(session);
+    if (prev) {
+      material = prev;
+      if (session && session.title && session.title !== 'Chat') judul = session.title;
     }
   }
   if (!material) {
-    return 'Boleh, tapi saya butuh bahannya dulu - lampirkan file (PDF/teks), atau ketik "buatkan slide tentang <judul>: <isi materinya>".';
+    return 'Boleh, tapi saya butuh bahannya dulu — lampirkan file, ketik "buatkan slide tentang judul: isi", atau tanya dulu lalu "buatkan slide dari ini".';
   }
   try {
     const outline = buildOutline(material, judul);
     const fileName = judul.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide';
     await exportSlides(outline, fileName + '.pptx');
-    return 'Slide "' + judul + '" (' + outline.length + ' halaman) sudah dibuat dan diunduh sebagai ' + fileName + '.pptx.';
+    return 'Slide "' + judul + '" (' + outline.length + ' halaman) sudah diunduh sebagai ' + fileName + '.pptx.\n\n' + previewOutline(outline);
   } catch (e) {
     return 'Gagal membuat slide: ' + (e && e.message ? e.message : 'error tidak diketahui');
   }
@@ -112,7 +128,7 @@ export const composer = {
     haptics.tap(10);
     const isWebsearch = this.websearchActive;
     const routedText = isWebsearch ? 'googling ' + text : text;
-    let directReply = await trySlideRequest(text, att);
+    let directReply = await trySlideRequest(text, att, s);
     const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
     if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
       if (fileSrc.fileText) {

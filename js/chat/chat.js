@@ -56,6 +56,9 @@ function fillAndSend(text) {
 }
 
 function detectQuickChips(text) {
+  if (/Hasil pencarian web|Sumber:|Yang biasa dibahas|Pratinjau slide/i.test(text) || text.length > 280) {
+    if (!/sudah diunduh sebagai/i.test(text)) return ['Buatkan slide dari ini'];
+  }
   if (/pengingat\b.*(dibatalkan|ditambahkan)|akan mengingatkan|sudah saya catat sebagai pengingat/i.test(text)) {
     return ['Batalkan pengingat'];
   }
