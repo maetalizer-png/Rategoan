@@ -44,10 +44,18 @@ function isListIntent(q) {
   return /\b(ilmuwan|tokoh|ahli|pakar|daftar|matematikawan|fisikawan|sastrawan|pahlawan|penemu|peneliti)\b/i.test(q);
 }
 
-function looksLikePerson(title, snippet) {
+function looksLikePerson(title, snippet, words) {
   const t = String(title || '');
   if (/^daftar\b/i.test(t)) return false;
+  if (/^(matematikawan|ilmuwan|fisikawan|kimiawan|logika matematika|ilmuwan komputer|ilmu komputer)\b/i.test(t)) return false;
   if (/\b(logika|teori|ilmu|matematika|fisika|kimia|biologi)\b/i.test(t) && t.split(/\s+/).length <= 3) return false;
+  const blob = (t + ' ' + snippet).toLowerCase();
+  if (words && words.indexOf('indonesia') >= 0) {
+    const local = /indonesia|nusantara|jawa|sumatera|jakarta|bandung|yogyakarta|surabaya|medan/.test(blob);
+    const foreign = /tiongkok|china|yunani|eropa|amerika|prancis|jepang|india|arab/.test(blob);
+    if (foreign && !local) return false;
+    if (!local && !/lahir/.test(blob)) return false;
+  }
   const sn = String(snippet || '');
   if (/\b(lahir|adalah seorang|adalah ilmuwan|adalah matematikawan|adalah fisikawan|adalah tokoh)\b/i.test(sn)) return true;
   return /^[A-Z][\p{L}.-]+(\s+[A-Z][\p{L}.-]+){1,4}$/u.test(t);
@@ -146,7 +154,7 @@ async function searchWikipediaRanked(query, lang) {
   const rest = ranked.filter((h) => h.title !== primary.title);
   const relatedMin = words.length >= 3 ? 2 : 1;
   const related = rest.filter((h) => scoreText(h.title + ' ' + h.snippet, words) >= relatedMin).slice(0, 4);
-  const people = ranked.filter((h) => looksLikePerson(h.title, h.snippet)).slice(0, 6);
+  const people = ranked.filter((h) => looksLikePerson(h.title, h.snippet, words)).slice(0, 6);
   const listMode = isListIntent(query) && people.length >= 2;
   const weak = primary.titleScore < need && words.length >= 3;
   return {

@@ -111,9 +111,11 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     if (!result.ok) return result.message;
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
+    const wantsLink = /https?:\/\/|\b(tautan|link|url|alamat web|sumber lengkap)\b/i.test(prompt);
     const linkLine = (r) => {
-      const line = r.url ? '- [' + r.title + '](' + r.url + ')' : '- ' + r.title;
-      return r.snippet ? line + ' — ' + r.snippet : line;
+      const base = '- ' + r.title + (r.snippet ? ' — ' + r.snippet : '');
+      if (wantsLink && r.url) return base + '\n  ' + r.url;
+      return base;
     };
     const people = Array.isArray(result.people) ? result.people.filter((r) => r && r.title) : [];
     const related = Array.isArray(result.related) ? result.related.filter((r) => r && r.title) : [];
@@ -125,7 +127,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
         note +
         '# ' + q + '\n\n' +
         people.map(linkLine).join('\n') +
-        (result.url ? '\n\nSumber: [' + (result.title || sourceLabel) + '](' + result.url + ')' : '')
+        (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
       );
     }
     const body = result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract;
@@ -139,7 +141,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       body +
       relatedBlock +
       weakNote +
-      (result.url ? '\n\nSumber utama: [' + sourceLabel + '](' + result.url + ')' : '')
+      (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
     );
   }
   if (kind === 'cuaca_live') {
