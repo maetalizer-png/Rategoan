@@ -1,6 +1,7 @@
 import { agentTools } from './agent-tools.js';
 import { readWeb } from '../../vault/web/read-web.js';
 import { webSearch } from '../../vault/web/web-search.js';
+import { webQc } from '../../vault/web/web-qc.js';
 import { weather } from '../../vault/web/weather.js';
 import { news } from '../../vault/web/news.js';
 import { quizSession } from './quiz-session.js';
@@ -124,8 +125,9 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       .replace(/^(siapa|apa\s+itu|apa|kapan|dimana|di\s*mana|berapa|kenapa|mengapa|bagaimana)\s+/i, '')
       .replace(/\?+$/, '')
       .trim();
-    const result = await webSearch.search(q);
-    if (!result.ok) return result.message;
+    const raw = await webSearch.search(q);
+    if (!raw.ok) return raw.message;
+    const result = webQc.inspect(raw, prompt, q);
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
     const sourceLabel = result.source === 'wikidata' ? projectName : projectName + ' ' + (result.lang === 'id' ? 'Bahasa Indonesia' : '(Inggris)');
     const wantsLink = /https?:\/\/|\b(tautan|link|url|alamat web|sumber lengkap)\b/i.test(prompt);
@@ -144,8 +146,10 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
         (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
       );
     }
-    const body = result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract;
-    const relatedBlock = related.length
+    const body = result.definition
+      ? result.extract
+      : (result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract);
+    const relatedBlock = !result.definition && related.length
       ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
       : '';
     return (
