@@ -120,11 +120,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const people = Array.isArray(result.people) ? result.people.filter((r) => r && r.title) : [];
     const related = Array.isArray(result.related) ? result.related.filter((r) => r && r.title) : [];
     if (result.mode === 'list' && people.length) {
-      const note = result.weak
-        ? 'Halaman umum kurang cocok, jadi yang ditampilkan dulu nama yang lebih spesifik.\n\n'
-        : '';
       return (
-        note +
         '# ' + q + '\n\n' +
         people.map(linkLine).join('\n') +
         (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
@@ -134,13 +130,9 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const relatedBlock = related.length
       ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
       : '';
-    const weakNote = result.weak
-      ? '\n\nHasil teratas masih umum. Coba kata yang lebih spesifik, misalnya "matematikawan Indonesia".'
-      : '';
     return (
       body +
       relatedBlock +
-      weakNote +
       (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
     );
   }
