@@ -115,7 +115,7 @@ export const composer = {
     const routedText = isWebsearch ? 'googling ' + text : text;
     let directReply = await trySlideRequest(text, att);
     const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
-    if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text) || (att && att.fileText))) {
+    if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
       if (fileSrc.fileText) {
         if (FILE_READ_RE.test(text) && !/\b(apa|jelaskan|tentang)\b/i.test(text)) {
           directReply = summarizeFileText(fileSrc.fileText, fileSrc.name);
