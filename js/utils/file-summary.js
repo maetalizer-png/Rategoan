@@ -19,3 +19,28 @@ export function summarizeFileText(text, filename) {
     preview + (sentences.length > 5 ? ' [...]' : '') +
     '\n\nMau saya jelaskan bagian tertentu, atau ringkas lebih pendek lagi?';
 }
+
+export function answerFromFile(text, query, filename) {
+  const clean = String(text || '').trim();
+  const name = filename || 'file ini';
+  const q = String(query || '').toLowerCase().replace(/[?.!,]/g, ' ').trim();
+  if (!clean) {
+    return summarizeFileText(clean, name);
+  }
+  const words = q.split(/\s+/).filter((w) => w.length > 2);
+  if (!words.length) return summarizeFileText(clean, name);
+  const sentences = splitSentences(clean);
+  const scored = sentences.map((s) => {
+    const low = s.toLowerCase();
+    let n = 0;
+    words.forEach((w) => {
+      if (low.includes(w)) n += 1;
+    });
+    return { s, n };
+  }).filter((x) => x.n > 0).sort((a, b) => b.n - a.n);
+  if (!scored.length) {
+    return 'Di "' + name + '" tidak ketemu bagian yang nyambung dengan "' + query + '". Coba kata kunci lain, atau minta "ringkas file ini".';
+  }
+  const pick = scored.slice(0, 3).map((x) => x.s);
+  return 'Dari "' + name + '":\n\n' + pick.join(' ');
+}
