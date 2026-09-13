@@ -52,7 +52,7 @@ const ENUM_SENTENCE_RE = /([^.!?]*:\s*)([^.!?]+(?:;\s*[^.!?]+){2,})([.!?])/;
 function extractEnumeration(text) {
   const m = text.match(ENUM_SENTENCE_RE);
   if (!m) return null;
-  const items = m[2].split(/;\s*/).map((s) => s.trim().replace(/^dan\s+/i, '')).filter(Boolean);
+  const items = m[2].split(/;\s*/).map((s) => webQc.finishItem(s.trim().replace(/^dan\s+/i, ''))).filter(Boolean);
   if (items.length < 3) return null;
   return {
     before: text.slice(0, m.index).trim(),
@@ -150,8 +150,9 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const outlineBlock = outline.length
       ? '\n\n## Yang biasa dibahas\n' + outline.map((s) => '- ' + s).join('\n')
       : '';
+    const heading = result.explain ? (result.title || q) : (result.definition ? '' : result.title);
     const body = (result.source === 'wikipedia'
-      ? formatWikipediaExtract(result.definition ? '' : result.title, result.extract)
+      ? formatWikipediaExtract(heading, result.extract)
       : result.extract) + (result.definition || !related.length ? outlineBlock : '');
     const relatedBlock = !result.definition && related.length
       ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
