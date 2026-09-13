@@ -131,8 +131,8 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const wantsLink = /https?:\/\/|\b(tautan|link|url|alamat web|sumber lengkap)\b/i.test(prompt);
     const linkLine = (r) => {
       const snip = cleanSnippet(r.snippet);
-      const base = '- **' + r.title + '**' + (snip ? '\n' + snip : '');
-      if (wantsLink && r.url) return base + '\n' + r.url;
+      const base = '- ' + r.title + (snip ? ' — ' + snip : '');
+      if (wantsLink && r.url) return base + '\n  ' + r.url;
       return base;
     };
     const people = Array.isArray(result.people) ? result.people.filter((r) => r && r.title) : [];
