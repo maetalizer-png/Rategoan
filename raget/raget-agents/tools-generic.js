@@ -146,9 +146,14 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
         (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
       );
     }
+    const outline = Array.isArray(result.outline) ? result.outline.filter(Boolean) : [];
+    const outlineBlock = outline.length
+      ? '\n\n## Yang biasa dibahas\n' + outline.map((s) => '- ' + s).join('\n')
+      : '';
     const body = result.definition
-      ? result.extract
-      : (result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract);
+      ? result.extract + outlineBlock
+      : ((result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract) +
+        (related.length ? '' : outlineBlock));
     const relatedBlock = !result.definition && related.length
       ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
       : '';

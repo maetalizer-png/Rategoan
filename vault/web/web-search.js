@@ -87,6 +87,21 @@ function altQueries(q) {
   return out.slice(0, 3);
 }
 
+async function fetchOutline(title, lang) {
+  const url = 'https://' + lang + '.wikipedia.org/api/rest_v1/page/mobile-sections/' + encodeURIComponent(title);
+  try {
+    const data = await fetchJson(url);
+    const rem = (data && data.remaining && data.remaining.sections) || [];
+    const skip = /referensi|catatan|lihat juga|pranala|pustaka|bacaan|catatan kaki|sumber/i;
+    return rem
+      .map((s) => String(s.line || '').replace(/<[^>]+>/g, '').trim())
+      .filter((line) => line && !skip.test(line) && line.length < 48)
+      .slice(0, 5);
+  } catch (e) {
+    return [];
+  }
+}
+
 async function fetchExtractByTitle(title, lang) {
   const url =
     'https://' + lang + '.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&exchars=900&redirects=1&titles=' +
@@ -108,7 +123,11 @@ async function fetchSummaryByTitle(title, lang) {
     const longer = await fetchExtractByTitle(summary.title || title, lang);
     if (longer && longer.length > extract.length) extract = longer;
   } catch (e) {}
-  return { title: summary.title, extract, url: page || wikiPageUrl(summary.title || title, lang), lang, source: 'wikipedia' };
+  let outline = [];
+  try {
+    outline = await fetchOutline(summary.title || title, lang);
+  } catch (e) {}
+  return { title: summary.title, extract, outline, url: page || wikiPageUrl(summary.title || title, lang), lang, source: 'wikipedia' };
 }
 
 function stripSearchSnippet(html) {
