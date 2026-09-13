@@ -35,11 +35,22 @@ function isExplainQuery(raw) {
   return /^jelaskan\b/i.test(String(raw || '').replace(/^googling\s+/i, '').trim());
 }
 
+function snippetJunk(s) {
+  const t = decodeEntities(s);
+  if (!t) return true;
+  if (/deprecated|\bcode:\s*[a-z]{2,3}\b|\{\{|\}\}|wiktionary/i.test(t)) return true;
+  const letters = t.replace(/[^\p{L}]/gu, '');
+  const latin = t.replace(/[^A-Za-z]/g, '');
+  if (letters.length > 12 && latin.length / letters.length < 0.45) return true;
+  return false;
+}
+
 function relatedPasses(item, topic) {
   const title = decodeEntities(item && item.title).toLowerCase();
   if (!title || !topic) return false;
   if (title === 'ilmu' || title === 'ilmu pengetahuan' || title === topic) return false;
-  if (/^(fakultas|ilmu kebumian|ilmu alam)\b/.test(title)) return false;
+  if (/^(fakultas|ilmu kebumian|ilmu alam|yang lanjut usianya)\b/.test(title)) return false;
+  if (snippetJunk(item && item.snippet)) return false;
   return title.includes(topic);
 }
 

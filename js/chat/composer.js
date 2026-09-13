@@ -128,6 +128,9 @@ export const composer = {
     haptics.tap(10);
     const isWebsearch = this.websearchActive;
     const routedText = isWebsearch ? 'googling ' + text : text;
+    if (/^(lanjut|lanjutkan|dari ini)$/i.test(text.trim()) && lastAiText(s)) {
+      text = 'buatkan slide dari ini';
+    }
     let directReply = await trySlideRequest(text, att, s);
     const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
     if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
