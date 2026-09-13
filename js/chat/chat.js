@@ -219,6 +219,16 @@ export const chat = {
     const has = !!(s && s.messages.length);
     if (empty) empty.hidden = has;
     box.style.display = has ? '' : 'none';
+    const bar = document.getElementById('thread-bar');
+    if (bar) {
+      if (s && s.project && s.project.goal) {
+        bar.hidden = false;
+        bar.textContent = s.project.goal;
+      } else {
+        bar.hidden = true;
+        bar.textContent = '';
+      }
+    }
     if (!has) {
       scrolldown.update();
       return;
@@ -373,7 +383,10 @@ export const chat = {
     // tanpa ini badge cuma nempel sesaat lalu ke-reset begitu chat re-render.
     s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined });
     await this.typeReply(reply, !scrolldown.isFar(), { searching });
-    if (tts.enabled()) voice.speak(reply);
+    if (voice.speakNext) {
+      voice.speak(reply);
+      voice.speakNext = false;
+    } else if (tts.enabled()) voice.speak(reply);
     return reply;
   },
 };
