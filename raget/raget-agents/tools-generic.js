@@ -143,7 +143,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       return (
         '# ' + q + '\n\n' +
         people.map(linkLine).join('\n') +
-        (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
+        (result.url ? '\n\n(Sumber: [' + sourceLabel + '](' + result.url + '))' : '\n\n(Sumber: ' + sourceLabel + ')')
       );
     }
     const outline = Array.isArray(result.outline) ? result.outline.filter(Boolean) : [];
@@ -160,7 +160,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     return (
       body +
       relatedBlock +
-      (wantsLink && result.url ? '\n\n(Sumber: ' + sourceLabel + ' — ' + result.url + ')' : '\n\n(Sumber: ' + sourceLabel + ')')
+      (result.url ? '\n\n(Sumber: [' + sourceLabel + '](' + result.url + '))' : '\n\n(Sumber: ' + sourceLabel + ')')
     );
   }
   if (kind === 'cuaca_live') {

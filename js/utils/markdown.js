@@ -29,6 +29,7 @@ export const markdown = {
     // jawaban, jadi kutipan sumber kelihatan seperti kalimat penting lain,
     // bukan keterangan kecil. Dipisah jadi blok sitasi sendiri (kecil, redup).
     out = out.replace(/(^|\n)\(Sumber:\s*([^)]+)\)/g, '$1<div class="md-source">Sumber: $2</div>');
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a class="md-link" href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
     out = out.replace(/\bhttps?:\/\/[^\s<]+/g, (m) => {
       const trailing = m.match(/[).,;:!?]+$/);
       const url = trailing ? m.slice(0, -trailing[0].length) : m;
