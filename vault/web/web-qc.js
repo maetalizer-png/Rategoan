@@ -42,10 +42,12 @@ function relatedPasses(item, topic) {
 function clipExtract(extract, definition) {
   const parts = sentences(extract);
   if (!parts.length) return '';
-  const keep = definition ? Math.min(6, parts.length) : Math.min(6, parts.length);
-  let out = parts.slice(0, keep).join(' ');
-  if (out.length > 720) out = out.slice(0, 716).replace(/\s+\S*$/, '') + '.';
-  return out;
+  const keep = Math.min(6, parts.length);
+  const paras = [];
+  for (let i = 0; i < keep; i += 2) {
+    paras.push(parts.slice(i, i + 2).join(' '));
+  }
+  return paras.join('\n\n');
 }
 
 function inspect(result, rawPrompt, query) {

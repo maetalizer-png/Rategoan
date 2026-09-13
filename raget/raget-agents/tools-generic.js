@@ -76,7 +76,7 @@ function formatWikipediaExtract(title, extract) {
   } else {
     body = breakIntoParagraphs(extract, 2);
   }
-  return '# ' + title + '\n' + body;
+  return title ? '# ' + title + '\n' + body : body;
 }
 
 async function run(kind, prompt, messages, onFewshotCacheClear) {
@@ -150,10 +150,9 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const outlineBlock = outline.length
       ? '\n\n## Yang biasa dibahas\n' + outline.map((s) => '- ' + s).join('\n')
       : '';
-    const body = result.definition
-      ? result.extract + outlineBlock
-      : ((result.source === 'wikipedia' ? formatWikipediaExtract(result.title, result.extract) : result.extract) +
-        (related.length ? '' : outlineBlock));
+    const body = (result.source === 'wikipedia'
+      ? formatWikipediaExtract(result.definition ? '' : result.title, result.extract)
+      : result.extract) + (result.definition || !related.length ? outlineBlock : '');
     const relatedBlock = !result.definition && related.length
       ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
       : '';
