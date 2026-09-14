@@ -82,6 +82,3 @@ Tag staging: `penampung-tersaring-2026-09`. **Tidak menimpa K1/K2/K3.**
 | nli-bersih.jsonl.gz | 377 | 16.647 |
 | dialog-skenario-bersih.jsonl.gz | 146 | 12.444 |
 | ringkasan-bersih.jsonl.gz | 120 | 24.176 |
-
-
-Perintah mesin untuk Grok Build: `docs/PERINTAH-GROK-BUILD-BERSIH.md` (bersih ke penampung, bukan ke rak).
