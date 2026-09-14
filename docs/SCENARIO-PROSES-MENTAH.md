@@ -37,3 +37,33 @@ Angka BPE resmi yang tidak boleh turun: **5.223.639.069** (K1+K2+K3).
 9. Hapus tag staging hanya jika isinya sudah 100% di rak.
 
 Batch A (Wikisource) dikerjakan dulu karena paling sesuai pintu PRD (Wikimedia + PD), volume terukur, bukan crawl.
+
+
+## Hasil kerja 2026-09-14 (sesi ini)
+
+K3 kanonik v8 SHA `ec07760453fa6cd9d3728ba5edc04b67f5c02f9c8061206060e5f0088ebf2d55` **terverifikasi** (gzip 640.253.994 B).
+
+### Batch A Wikisource — bersih selesai, BELUM di-publish ke rak
+
+Sumber: `id-wikisource-public-text-2026-09` (64.531 dokumen mentah).
+Saring: buang judul meta wiki, <30 kata, fingerprint SHA1 vs seluruh K3 v8.
+
+| Metrik | Angka |
+|---|---:|
+| masuk | 64.531 |
+| buang judul meta | 850 |
+| buang pendek | 228 |
+| duplikat internal | 869 |
+| duplikat K3 | 1.188 |
+| **lolos bersih** | **61.396** |
+| kata approx | 17.294.340 |
+
+File bersih sesi: ~129 MB JSONL. Tokenizer BPE resmi diekstrak dari checkpoint 100M (30.108 merges / 30.364 piece).
+
+**Tidak di-upload ke `korpus-pelengkap-bersih`.** Gabungan gzip v9 + hitung BPE penuh + publish terputus (workspace sesi terhapus sebelum segel). Angka BPE resmi proyek **tetap 5.223.639.069**. Rak tidak disentuh.
+
+### Batch B–E
+
+Tidak diproses di sesi ini. IDX ~1,3 GB, quality-text parquet besar, Indo4B keluarga ~37 GB: tidak muat dituntaskan aman dalam 60 menit tanpa merusak angka resmi.
+
+Lanjut wajib: ulang extract A dari staging (masih utuh), tokenize 61.396 dokumen, `zcat K3 + bersih | gzip -9`, SHA, `publish-korpus-release.py` timpa K3, sync manifest git, baru retire tag Wikisource.
