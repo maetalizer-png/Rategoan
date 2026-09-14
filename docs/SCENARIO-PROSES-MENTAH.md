@@ -67,3 +67,18 @@ File bersih sesi: ~129 MB JSONL. Tokenizer BPE resmi diekstrak dari checkpoint 1
 Tidak diproses di sesi ini. IDX ~1,3 GB, quality-text parquet besar, Indo4B keluarga ~37 GB: tidak muat dituntaskan aman dalam 60 menit tanpa merusak angka resmi.
 
 Lanjut wajib: ulang extract A dari staging (masih utuh), tokenize 61.396 dokumen, `zcat K3 + bersih | gzip -9`, SHA, `publish-korpus-release.py` timpa K3, sync manifest git, baru retire tag Wikisource.
+
+
+## Penampung tersaring (bukan rak) — 2026-09-14
+
+Tag staging: `penampung-tersaring-2026-09`. **Tidak menimpa K1/K2/K3.**
+
+| File | Lolos | Kata approx |
+|---|---:|---:|
+| wikisource-id-bersih.jsonl.gz | 58.801 | 19.693.015 |
+| kesehatan-berita-bersih.jsonl.gz | 17.292 | 1.594.041 |
+| hukum-qa-bersih.jsonl.gz | 8.019 | 11.549.656 |
+| mrc-nli-bersih.jsonl.gz | 3.259 | 285.399 |
+| nli-bersih.jsonl.gz | 377 | 16.647 |
+| dialog-skenario-bersih.jsonl.gz | 146 | 12.444 |
+| ringkasan-bersih.jsonl.gz | 120 | 24.176 |
