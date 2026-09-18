@@ -28,9 +28,22 @@ function planAnswer(text, results, options) {
 const STABLE_TYPES = new Set(['faq', 'umum', 'fact']);
 const DATARIES_THRESHOLD = 0.3;
 
+function isSocialChitChat(text) {
+  const raw = String(text || '').trim();
+  if (!raw) return false;
+  if (/^(selamat|met)?\s*(pagi|siang|sore|malam)\b/i.test(raw) && raw.split(/\s+/).length <= 5) return true;
+  if (/\b(apa|gimana|bagaimana)\s+kabar(\s+\w+){0,3}\??$/i.test(raw)) return true;
+  if (/^apa\s+kabar\b/i.test(raw)) return true;
+  if (/\bhow\s+are\s+you\b/i.test(raw)) return true;
+  if (/\b(apakah\s+)?((kamu|anda|engkau)\s+)?(bisa|dapat)\s+memb?antu(\s+(saya|aku))?\b/i.test(raw)) return true;
+  if (/^(bisa|tolong)\s+bantu/i.test(raw)) return true;
+  return false;
+}
+
 function isShortNonFact(text) {
   const raw = String(text || '').trim();
   if (!raw) return true;
+  if (isSocialChitChat(raw)) return true;
   const words = raw.split(/\s+/).filter(Boolean);
   if (words.length > 3) return false;
   if (/^(apa|siapa|kapan|dimana|di\s+mana|mengapa|kenapa|bagaimana|berapa|gimana)\b/i.test(raw)) return false;
@@ -40,7 +53,7 @@ function isShortNonFact(text) {
 }
 
 function planFallback(text, results) {
-  if (isShortNonFact(text)) return null;
+  if (isSocialChitChat(text) || isShortNonFact(text)) return null;
   const list = (Array.isArray(results) ? results : [])
     .filter((r) => STABLE_TYPES.has(r.type) || r.type === 'dataries')
     .slice()

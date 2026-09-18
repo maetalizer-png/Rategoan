@@ -28,11 +28,11 @@ const SMALLTALK_TRIGGERS = {
   rumah: /\b(kompor|gas\s+bocor|sampah|air\s+mati|listrik\s+padam|listrik\s+mati|cucian|piring\s+kotor|rumah\s+berantakan)\b/i,
   sekolah: /\b(sekolah|kelas|ulangan|pr\b|pelajaran|mapel|guru|wali\s*kelas|osis)\b/i,
   siapa: /siapa\s+(kamu|anda|lu|elo)\b|kamu\s+siapa|kenalan\s+dong/i,
-  kabar: /\bkabar\s*(kamu|anda|lu|elu|mu)?\b|\b(apa|gimana|bagaimana)\s+kabar\b|how\s+are\s+you/i,
+  kabar: /\b(apa|gimana|bagaimana)\s+kabar(\s+(kamu|anda|mu|lu|elu))?\b|\bkabar\s+(kamu|anda|mu|lu|elu)\b|\bhow\s+are\s+you\b/i,
   terima_kasih: /terima\s*kasih|makasih|thanks|thank\s*you|trims\b/i,
   jumpa: /sampai\s+jumpa|dad+ah|^bye\b|selamat\s+tinggal|see\s+you/i,
   kemampuan: /kamu\s+bisa\s+apa|kemampuan(mu|kamu)?\b|apa\s+yang\s+bisa\s+kamu\s+lakukan|\b(bisa|punya|sanggup)\s+(ber)?(pikir|fikir)\b|\bpunya\s+(otak|akal|kesadaran|perasaan)\b|\b(bisa|sanggup)\s+(memberi(kan)?|melakukan)\s+(pelayanan|layanan)\b/i,
-  bantu: /\b(tolong|bisa)\s+(bantu|bantuan)\b|\bbantu(in|kan)?\s+(saya|aku)\b|\bbutuh\s+bantuan\b|\bbantuan\s+(dong|ya)\b/i,
+  bantu: /\b(apakah\s+)?((kamu|anda|engkau)\s+)?(bisa|dapat|tolong)\s+memb?antu(\s+(saya|aku))?\b|\bbantu(in|kan)?\s+(saya|aku)\b|\bbutuh\s+bantuan\b|\bbantuan\s+(dong|ya)\b/i,
   maaf: /^(maaf|sorry)\b|\bmaaf(kan)?\s+(ya|dong)/i,
   lagi_apa: /\b(lagi\s+apa|ngapain\s+(kamu|sekarang)|kamu\s+lagi\s+(apa|ngapain))\b/i,
   capek: /\b(capek|lelah|ngantuk\s+berat|kehabisan\s+tenaga)\b/i,
@@ -348,8 +348,19 @@ function replyTimeGreeting(now, options, text) {
     return maybeFollowUp(reply, sapaanCache.followup.greeting);
   }
 
-  const templates = (sapaanCache.time && sapaanCache.time[devicePeriod]) || [];
-  const picked = pickVariant('greet_time_' + devicePeriod, templates, devicePeriod) || SAPAAN_FALLBACK_TEXT;
+  const SAFE_TIME = {
+    pagi: 'Selamat pagi. Ada yang bisa saya bantu?',
+    siang: 'Selamat siang. Ada yang bisa saya bantu?',
+    sore: 'Selamat sore. Ada yang bisa saya bantu?',
+    malam: 'Selamat malam. Ada yang bisa saya bantu?',
+  };
+  const templates = ((sapaanCache.time && sapaanCache.time[devicePeriod]) || []).filter(
+    (t) => t && !/\b(capek|istirahat juga|fotosintesis|whatsapp)\b/i.test(t) && t.length < 90
+  );
+  const picked =
+    pickVariant('greet_time_' + devicePeriod, templates, devicePeriod) ||
+    SAFE_TIME[devicePeriod] ||
+    SAPAAN_FALLBACK_TEXT;
   const reply = withName(picked, options.personaName);
   return maybeFollowUp(reply, sapaanCache.followup.greeting);
 }
@@ -548,6 +559,12 @@ const DAILY_TALK_KEYS = {
   transport: true,
   sehat: true,
   kerja: true,
+  kabar: true,
+  bantu: true,
+  siapa: true,
+  terima_kasih: true,
+  kemampuan: true,
+  lagi_apa: true,
 };
 
 const FACTISH_DAILY_SKIP_RE = /\b(ibu\s*kota|ibukota|fotosintesis|einstein)\b/i;

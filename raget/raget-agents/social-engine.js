@@ -240,7 +240,7 @@ function tryThreeA(text) {
 
 const SMALLTALK_TOPICS = [
   {
-    match: /^apa\s+kabar\??$|\bkabar(nya|mu)?\s+(gimana|bagaimana)\b|\bgimana\s+kabar(nya|mu)?\b/i,
+    match: /^apa\s+kabar\b|\b(apa|gimana|bagaimana)\s+kabar(\s+\w+){0,3}\??$|\bkabar(nya|mu)?\s+(gimana|bagaimana)\b|\bgimana\s+kabar(nya|mu)?\b/i,
     body: 'Saya baik, terima kasih sudah nanya! Kamu sendiri gimana kabarnya?',
     emoji: '😊',
   },
@@ -293,7 +293,7 @@ function tryNaturalChat(text) {
 
 function tryCustomerService(text) {
   const t = text.toLowerCase();
-  if (/\b(tolong|minta)\s+bantuan\b|\bbantuan\s+(dong|ya|please)\b|\bcustomer\s*service\b|\blayanan\s+pelanggan\b/i.test(t)) {
+  if (/\b(tolong|minta)\s+bantuan\b|\bbantuan\s+(dong|ya|please)\b|\bcustomer\s*service\b|\blayanan\s+pelanggan\b|\b(apakah\s+)?((kamu|anda)\s+)?(bisa|dapat)\s+membantu\b/i.test(t)) {
     return naturalize({
       body: 'Siap, saya bantu. Jelaskan singkat: masalahnya apa, sejak kapan, dan yang sudah dicoba apa saja.',
       followup: 'Kalau ada nomor pesanan, tiket, atau tangkapan layar, sebutkan juga supaya lebih cepat.',
