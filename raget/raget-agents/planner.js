@@ -52,33 +52,74 @@ function isShortNonFact(text) {
   return true;
 }
 
+const QUERY_STOP = new Set([
+  'apa', 'itu', 'yang', 'saya', 'anda', 'kamu', 'adalah', 'tentang', 'bagaimana',
+  'apakah', 'bisa', 'dengan', 'dari', 'untuk', 'dan', 'atau', 'di', 'ke', 'ini',
+  'yg', 'the', 'a', 'an', 'of',
+]);
+
+function queryTokens(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !QUERY_STOP.has(w));
+}
+
+function overlapCount(text, tokens) {
+  const hay = String(text || '').toLowerCase();
+  return tokens.reduce((n, t) => n + (hay.includes(t) ? 1 : 0), 0);
+}
+
+function cleanSnippet(text) {
+  return String(text || '')
+    .replace(/\s+/g, ' ')
+    .replace(/^[-•*#\s]+/, '')
+    .trim();
+}
+
 function planFallback(text, results) {
   if (isSocialChitChat(text) || isShortNonFact(text)) return null;
+  const tokens = queryTokens(text);
   const list = (Array.isArray(results) ? results : [])
     .filter((r) => STABLE_TYPES.has(r.type) || r.type === 'dataries')
-    .slice()
-    .sort((a, b) => b.score - a.score);
-  const top = list[0];
+    .map((r) => ({
+      ...r,
+      ov: tokens.length ? overlapCount(r.text, tokens) : 1,
+    }))
+    .filter((r) => !tokens.length || r.ov > 0)
+    .sort((a, b) => b.ov - a.ov || b.score - a.score);
+
+  const preferred = list.filter((r) => r.type === 'fact' || r.type === 'dataries');
+  const pool = preferred.length ? preferred : list;
+  const top = pool[0];
   if (!top) return null;
 
   const topThreshold = top.type === 'dataries' ? DATARIES_THRESHOLD : retrieval.AUGMENT_THRESHOLD;
-  if (top.score >= topThreshold) {
-    const body = formatter.formatByType('terbuka', {
-      title: 'Yang saya tahu',
-      items: list.slice(0, 3).map((r) => r.text),
-    });
+  if (top.score >= topThreshold && cleanSnippet(top.text).length >= 40) {
+    const tipe = detectTipe(text);
+    const snippet = cleanSnippet(top.text);
+    let body;
+    if (tipe === 'daftar' || tipe === 'prosedur') {
+      body = formatter.formatByType(tipe, {
+        title: '',
+        items: pool.slice(0, 3).map((r) => cleanSnippet(r.text).slice(0, 180)),
+      });
+    } else {
+      body = formatter.formatByType('definisi', { text: snippet });
+    }
     return {
-      text: quality.guardLength(body, 'terbuka') + '\n\n(sumber: ' + top.type + ')',
+      text: quality.guardLength(body, tipe === 'daftar' ? 'daftar' : 'terbuka'),
       sourceType: top.type,
       sourceEntryId: top.type === 'dataries' && top.id ? top.id : null,
     };
   }
 
   if (top.score >= CHOICE_THRESHOLD) {
-    const second = list[1];
-    if (second && second.score >= CHOICE_THRESHOLD) {
+    const second = pool[1];
+    if (second && second.score >= CHOICE_THRESHOLD && second.ov === top.ov) {
       return {
-        text: 'Maksudnya yang mana ya: 1) ' + top.text.slice(0, 70) + ' atau 2) ' + second.text.slice(0, 70) + '?',
+        text: 'Maksudnya yang mana ya: 1) ' + cleanSnippet(top.text).slice(0, 70) + ' atau 2) ' + cleanSnippet(second.text).slice(0, 70) + '?',
         sourceType: top.type,
         sourceEntryId: null,
       };
