@@ -1,14 +1,14 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-09-20 (sinkron dengan `korpus-manifest-total.json`
-setelah K3 v9 / K1 v6 / K2 v5 digabung).
+Diperbarui: 2026-09-20 (sinkron git G1+G2: K1 v6 / K2 v6 / K3 v10).
+K4 v1 hidup terpisah, tidak di lantai 3 rak.
 
 ## Release hidup
 | Tag | Isi |
 |-----|-----|
 | `korpus-ensiklopedia-bersih` | K1 v6 7.617.040 dokumen, gzip 1611.9 MB, SHA `31d6ccbf…` |
-| `korpus-dialog-daerah-bersih` | K2 v5 20.356.387 dokumen, gzip 671.5 MB, SHA `63095c23…` |
-| `korpus-pelengkap-bersih` | K3 v9 66.225.205 dokumen, 26 part XL, gzip 9767.3 MB, SHA concat `87fddf2e…` |
+| `korpus-dialog-daerah-bersih` | K2 v6 807.558 dokumen, gzip 174.7 MB, SHA `29690c3b…` |
+| `korpus-pelengkap-bersih` | K3 v10 85.774.410 dokumen, 28 part, gzip 10263 MB, SHA concat `4852018c…` |
 | `checkpoint-100m` | 100M di GitHub Release |
 | `checkpoint-200m` | arsip PPL 1068; **yang dipakai PWA** = HF `Maetalizer19/rategoan-neural` SHA `69daa21d…` PPL 932, CORS terkonfirmasi (`access-control-allow-origin: *`) |
 | `prd-data-release` | riwayat aturan awal penyaringan korpus (sudah dilebur ke dokumen internal) |
@@ -25,10 +25,10 @@ tidak dihitung ke token kanonik. Workflow `panen.yml` sudah dihapus,
 tidak akan dipanen ulang otomatis.
 
 ## Token
-Angka BPE dicatat 2026-09-20 (lantai git + BPE dokumen baru): **16.794.935.092**
-(K1 968.515.547 + K2 4.375.251.274 + K3 11.451.168.271).
-Gerbang 1 miliar tercapai; target jangka panjang 4 miliar sudah terlewati.
-Lantai git tidak turun: K1 459.594.014, K2 4.375.227.575, K3 388.817.480.
+Angka BPE 3 rak setelah G1+G2: **16.794.935.124**
+(K1 968.515.547 + K2 264.815.163 + K3 15.561.604.414).
+Lantai gel4 **16.794.935.092 tidak turun** (+32 BPE sapaan G2).
+K4 tidak dijumlahkan.
 
 ## OSCAR / 1p8b di K3
 Yang masuk K3 v9 sudah tersaring di tag `penampung-tersaring-2026-09`

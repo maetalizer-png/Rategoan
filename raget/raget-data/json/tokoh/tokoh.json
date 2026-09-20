@@ -1,5 +1,34 @@
 [
   {
+    "id": "tokoh-yohanes-surya",
+    "kategori": "tokoh",
+    "wilayah": "Indonesia",
+    "nama": "Yohanes Surya",
+    "tags": [
+      "fisika",
+      "indonesia",
+      "olimpiade"
+    ],
+    "teks": "Yohanes Surya (Fisika) — lahir tahun 1963 di Indonesia. Fisikawan dan pembina olimpiade fisika Indonesia.",
+    "meta": {
+      "namaEn": "Yohanes Surya",
+      "lahir": {
+        "tahun": 1963,
+        "negara": "Indonesia"
+      },
+      "wafat": null,
+      "bidang": "Fisika",
+      "pencapaian": [
+        "Membina tim olimpiade fisika Indonesia hingga meraih medali internasional",
+        "Menulis buku fisika populer untuk pelajar",
+        "Menggerakkan Gasing (Gampang, Asyik, dan Menyenangkan) sebagai metode belajar fisika"
+      ],
+      "kutipan": "Fisika itu gampang, asyik, dan menyenangkan.",
+      "trivia": "Dikenal luas sebagai pembina olimpiade sains, bukan tokoh acak luar bidang.",
+      "relasi": []
+    }
+  },
+  {
     "id": "tokoh-albert-einstein",
     "kategori": "tokoh",
     "wilayah": "Jerman",

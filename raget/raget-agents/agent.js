@@ -239,6 +239,24 @@ async function respondCore(messages, prompt) {
     }
   }
 
+  const greetEarly = llmEngine.tryGreeting(text, { personaName: 'Raget' });
+  if (greetEarly) {
+    ragetDb.addNote(text, greetEarly, null, 'greeting');
+    return postProcess(greetEarly);
+  }
+  const dailyEarly = llmEngine.tryDailyTalk(text, { personaName: 'Raget' });
+  if (dailyEarly) {
+    ragetDb.addNote(text, dailyEarly, null, 'daily_talk');
+    return postProcess(dailyEarly);
+  }
+  if (earlyToolKind === 'kode') {
+    const kodeReply = await runTool('kode', text, messages);
+    if (kodeReply) {
+      ragetDb.addNote(text, kodeReply, null, 'kode');
+      return postProcess(kodeReply);
+    }
+  }
+
   // File dilampirkan lewat tombol "File" di attach sheet cuma berlaku untuk
   // SATU pesan ini (attach.consume() di composer.js mengosongkannya lagi
   // setelah terkirim) - jadi cukup cek attach di pesan TERAKHIR. Sama

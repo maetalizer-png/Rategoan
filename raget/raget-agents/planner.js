@@ -133,5 +133,6 @@ export const planner = Object.freeze({
   planAnswer,
   planFallback,
   detectTipe,
+  isSocialChitChat,
   CHOICE_THRESHOLD,
 });
