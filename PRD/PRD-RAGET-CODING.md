@@ -83,9 +83,9 @@ lupa bahasa Indonesia).
 
 ## 3. Data yang boleh dikumpulkan
 
-Masuk **penampung dulu**, bukan langsung K1–K3.
-Rak tujuan setelah saring: **K3** (pelengkap), kecuali ensiklopedia
-pemrograman padat (wikibooks) → **K1**.
+Masuk **penampung-kode dulu**. Rak kanonik kode: **K4** `korpus-kode-bersih`
+(disetujui dirigen 20 Sep). Pelajaran padat (wikibooks ID) ringkas boleh di K1;
+badan kode ke K4. Jangan tuang kode ke K2.
 
 ### 3.1 Wajib (lisensi jelas)
 
@@ -170,7 +170,8 @@ pindah hukum K2→K3 tetap sah. Coding memakai tag penampung **terpisah**.
 - `bench-kode.mjs` ≥8/20
 - `docs/STATUS-KODE.md` terisi
 - Tidak ada berat model luar di repo/PWA
-- Tidak ada tag `korpus-kode-bersih` (itu K4)
+- Tag K4 `korpus-kode-bersih` boleh, setelah penampung tersaring
+- Tidak menanam berat model coder luar
 
 ---
 

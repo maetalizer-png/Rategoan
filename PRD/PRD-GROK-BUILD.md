@@ -61,9 +61,11 @@ Setiap gelombang wajib file `LAPORAN-QC-<gelombang>.json` berisi: kasus, hasil, 
 12. 200M jangan dilatih dulu kalau PPL held-out memburuk.
 13. GQA/RoPE/SwiGLU/RMSNorm = gelombang skala, bukan v1.
 
-### D. Coding (lihat `PRD-RAGET-CODING.md`)
-14. C0 audit + C1 router/pack/bench. Data di `penampung-kode-2026-09`.
-15. Tidak menanam Qwen-Coder / file dobel.
+### D. Coding (lihat `PRD-CODING-KEPUTUSAN.md` + paket Claude)
+14. **K4 disetujui:** tag `korpus-kode-bersih`. Staging `penampung-kode-2026-09`.
+15. Cari data: The Stack JS permissive, MDN, Rosetta JS, repo sendiri, wikibooks ID.
+16. C0–C1: intent + validator + sandbox JS + bench 20.
+17. Tidak menanam Qwen-Coder / StarCoder sebagai otak.
 
 ---
 
@@ -76,7 +78,8 @@ Setiap gelombang wajib file `LAPORAN-QC-<gelombang>.json` berisi: kasus, hasil, 
 | G3 | Saring 89 GB | file `*-bersih` di penampung + antrian | sampel 100 baris: spam <5% |
 | G4 | Gabung G3 ke rak | manifest rak + git STATUS | pemetaan §2.A |
 | G5 | Regresi aplikasi §5 | `docs/STATUS-UJI-JAWABAN.md` | semua kasus §5.1–5.3 |
-| G6 | Coding C0–C1 | pack ≥200 + bench-kode | ≥8/20 |
+| G6 | Coding data+K4 | tag penampung-kode + K4 v1 | lisensi lolos; bukan model luar |
+| G6b | Coding mesin C1 | router + validator + bench | ≥8/20 JS |
 | G7 | Mix-train 50M opsional | laporan PPL + 10 generasi | PPL tidak naik; ID tetap |
 
 Putus di tengah: publish hanya gelombang yang artefaknya utuh.

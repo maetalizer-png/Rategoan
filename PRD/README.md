@@ -10,6 +10,8 @@ Baca dalam urutan ini:
 6. [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md) — otak template/retrieval.
 7. [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) — otak neural 50M→skala.
 8. [`PRD-RAGET-CODING.md`](PRD-RAGET-CODING.md) — kemampuan kode di mesin sendiri.
+9. [`PRD-CODING-KEPUTUSAN.md`](PRD-CODING-KEPUTUSAN.md) — gerbang K4 dijawab.
+10. Paket Claude: [`PRD-CODING-RAGET.md`](PRD-CODING-RAGET.md), [`PRD-CODING-ARSITEKTUR.md`](PRD-CODING-ARSITEKTUR.md), [`PRD-CODING-DATA.md`](PRD-CODING-DATA.md).
 
 Uji chat: [`docs/STATUS-UJI-JAWABAN.md`](../docs/STATUS-UJI-JAWABAN.md).
 Peta teknis: [`docs/ARSITEKTUR.md`](../docs/ARSITEKTUR.md).
