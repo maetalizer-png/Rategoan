@@ -1,32 +1,21 @@
-# PRD Grok Build — satu perintah kerja
+# PRD-GROK-BUILD
 
-Jangan buat PRD baru. Jangan berhenti setelah baca.
+Satu file kerja. Perbarui file ini. Jangan buat file/tag PRD lain.
 
-## Alur
+Pagar rak: `PRD-RELEASE.md` (satu tag satu kategori, SHA, jangan K5).
 
-```
-mentah → saring → rak K → hapus staging → QC rak (bukan pangkas token)
-```
+## Status
 
-## Gerbang
+- A K4 ≥200 MB: selesai. Staging `penampung-kode` sudah dihapus.
+- C laporan QC ada.
+- B belum tuntas. Antrian terakhir: wiki **0018**. Lanjut **0019**.
+- Tag mentah sisa: `id-hf-more-new-quality-2026-09` (hapus setelah semua shard di rak).
+- Audio jangan dihapus.
 
-**A.** K4 `korpus-kode-bersih` ≥200 MB gzip (The Stack JS permissive, MDN, Rosetta, repo). Bukan model luar.
+## Kerja sekarang
 
-**B.** Habiskan `id-hf-more-new-quality-2026-09` ke K1 (pelajaran/wiki) atau K3. Lalu hapus tag mentah.
-
-**C. QC tingkat tinggi K1 K2 K3 — wajib, bukan opsional.**
-Bukan buang topik. Bukan turunkan lantai **16.794.935.092**.
-Periksa dan perbaiki:
-- tata bahasa, tata kalimat, tata kata
-- kepadatan informasi (bukan template 20×)
-- fakta / pelajaran utuh
-- penempatan: wiki/pelajaran → K1, sapaan → K2, hukum/berita/crawl → K3, kode → K4
-Kalau dokumen jelek: rapikan atau ganti setara token. Jangan dikosongkan.
-Laporan: `LAPORAN-QC-RAK.json` (contoh 20 dokumen per rak: sebelum/sesudah, lulus/gagal).
-
-## Denah
-
-K1 ensiklopedia (arah Phi). K2 dialog saja. K3 pelengkap. K4 kode.
-Audio jangan ke rak teks.
-
-Berhenti hanya jika A+B+C ada artefak di Release.
+Lanjut G3 dari `rategoan_wikimedia_0019`. Jangan unduh ≤0018.
+Satu file → saring → K1 atau K3 → unggah → file berikut.
+Cek `LAPORAN-ANTRIAN.json` kalau sesi putus.
+Setelah shard terakhir: hapus tag 89 GB.
+Lantai K1+K2+K3 jangan turun.
