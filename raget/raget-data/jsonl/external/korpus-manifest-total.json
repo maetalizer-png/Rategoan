@@ -1,55 +1,229 @@
 {
-  "generatedAt": "2026-09-01T13:50:00Z",
-  "updatedAt": "2026-09-11T19:30:00Z",
-  "sumber": "Claude - tokenBPEResmi K1/K2/K3 dihitung ulang penuh dengan tokenizer BPE proyek asli (vocab 30.368), diunduh fresh dari Release live, SHA256 dicocokkan dulu terhadap digest asset. Panen (staging) pakai kata approx dari manifest workflow sendiri - BELUM diverifikasi dengan tokenizer BPE dan BELUM lolos review kualitas manual, KECUALI Wikipedia yang sudah digabung Grok ke K1 (lihat catatan K1 di bawah). Ronde 2026-09-02: K2+K3 Grok tambah batch baru (wiki daerah + wikisource + id_personachat), token dihitung ulang - lihat catatan kualitas di entri K2.",
+  "generatedAt": "2026-09-20T06:43:40Z",
+  "updatedAt": "2026-09-20T06:43:40Z",
+  "sumber": "Grok gel4 2026-09-20 — K3 v9 + K1 v6 + K2 v5 merge penampung-tersaring. Token = lantai git + BPE resmi dokumen baru. OSCAR masuk K3 via penampung tersaring.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
     "entries": [
       {
         "rak": "K1 korpus-ensiklopedia-bersih",
-        "asal": "k1-id-filter + staging wiki tersaring + indonesian-nlp/wikipedia-id; refresh 2026-09-10",
-        "totalDokumen": 2012126,
-        "sizeByteGz": 760611660,
-        "sha256": "7ce4830db47ee6471a3cbe1234db41afcc779cbe307c0ec4c75163e10c125423",
-        "totalKataApprox": 293237209,
-        "totalTokenBPEResmi": 459594014,
-        "diukurPada": "2026-09-10; tokenizer resmi vocab 30368, max_len 128, full corpus tokenization",
-        "catatan": "K1 refreshed with deduplicated Indonesian Wikipedia; 1,252,681 new documents added, 101,951 exact duplicates removed, SHA256 matches GitHub Release digest.",
-        "komposisiBahasa": {
-          "id": 1.0
-        }
-      },
-      {
-        "rak": "K2 korpus-dialog-daerah-bersih",
-        "asal": "k2-id + Alpaca-ID + QA regulasi Indonesia; refresh 2026-09-10",
-        "totalDokumen": 20356241,
-        "sizeByteGz": 701299227,
-        "sha256": "3c64fee9bbe1927f99e05c7e0e29b655dc61668fdd56e7aab6f6ac0f4ecb704d",
-        "totalKataApprox": 2689557722,
-        "totalTokenBPEResmi": 4375227575,
-        "diukurPada": "2026-09-10; tokenizer resmi vocab 30368, max_len 128, streaming full corpus",
-        "catatan": "K2 refreshed with Indonesian regulation QA; source-government-material provenance requires licensing review.",
-        "komposisiBahasa": {
-          "id": 1.0
-        }
-      },
-      {
-        "rak": "K3 korpus-pelengkap-bersih",
-        "asal": "K3 v7 lama (preserved+merged) + endomorphosis/ipfs_indonesia_laws (69.495 dokumen hukum Indonesia baru, cleaned+deduplicated); refresh 2026-09-11, versi manifest Release v8",
-        "totalDokumen": 2973740,
-        "sizeByteGz": 640253994,
-        "sha256": "ec07760453fa6cd9d3728ba5edc04b67f5c02f9c8061206060e5f0088ebf2d55",
-        "totalKataApprox": 249748788,
-        "totalTokenBPEResmi": 388817480,
-        "diukurPada": "2026-09-11; tokenizer resmi vocab 30368, max_len 128, exact dedupe (sha256 normalized casefold) + SimHash batch, minTextChars 80",
+        "asal": "k1-id-filter + staging wiki tersaring + penampung-tersaring-2026-09; refresh 2026-09-20 v6",
+        "totalDokumen": 7617040,
+        "sizeByteGz": 1611894221,
+        "sha256": "31d6ccbf85102f5c0bb7208b7cc79a1f040e604592227a668bef39d807f3985c",
+        "totalKataApprox": 613790046,
+        "totalTokenBPEResmi": 968515547,
+        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BPE hanya dokumen baru; lantai git + baru",
+        "catatan": "K1 v6: merge v5 + penampung (wiki/wikisource/lyon/ringkasan), QC kepadatan, dedup vs rak lama. Token = lantai 459594014 + baru. SHA GitHub release.",
         "komposisiBahasa": {
           "id": 1.0
         },
-        "catatan": "K3 v8: gabung K3 v7 lama + 69.495 dokumen hukum Indonesia (endomorphosis/ipfs_indonesia_laws) setelah exact dedupe + SimHash batch. Seluruh record language=id eksplisit. SHA256 dicocokkan terhadap digest asset GitHub Release (korpus-pelengkap-bersih.jsonl.gz) sebelum dicatat di sini."
+        "parts": [
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part00",
+            "sha256": "15faf392beb6425805797dc0b81c7ee06f239d161d50a7192d942016fc012403",
+            "bytes": 400803867
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part01",
+            "sha256": "0269898f761d07bff3cc7d77445550117a3e18db68cb7ae51f4876c8f94f377e",
+            "bytes": 400178653
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part02",
+            "sha256": "ad0cf818df205dd65102c30be484ebb665621c1d3060e9842f5cedf51dd2a31c",
+            "bytes": 400243608
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part03",
+            "sha256": "ff9253c8375b21be569f135f16c01284a98f8f15519da3d1a5246f7c41a1e41b",
+            "bytes": 400707781
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part04",
+            "sha256": "f795d3889e8b015104326837c18d54eb6b517b2eabb829b83676e4c7379d36ea",
+            "bytes": 9960312
+          }
+        ],
+        "tierUkuran": "XL"
+      },
+      {
+        "rak": "K2 korpus-dialog-daerah-bersih",
+        "asal": "k2-id + Alpaca-ID + QA regulasi + penampung dialog-skenario; refresh 2026-09-20 v5",
+        "totalDokumen": 20356387,
+        "sizeByteGz": 671452272,
+        "sha256": "63095c2334dd048ec67f988481edfb517618b89798dccfb1cb08b4e70a08fe6c",
+        "totalKataApprox": 2689569993,
+        "totalTokenBPEResmi": 4375251274,
+        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BPE hanya dokumen baru; lantai git + baru",
+        "catatan": "K2 v5: dokumen lama utuh (tanpa pangkas parafrase) + dialog-skenario unik. Token = lantai 4375227575 + baru. SHA GitHub release.",
+        "komposisiBahasa": {
+          "id": 1.0
+        },
+        "parts": [
+          {
+            "name": "korpus-dialog-daerah-bersih.jsonl.gz.part00",
+            "sha256": "41129b59d7508f81f1e45434dd5e68a726ba777fd200c3e85d3392b04eccd417",
+            "bytes": 400006648
+          },
+          {
+            "name": "korpus-dialog-daerah-bersih.jsonl.gz.part01",
+            "sha256": "7e9f15d410d46f76fb75fa49394c0ee4ed92b121203d547c9ad3639a96bb35bb",
+            "bytes": 271445624
+          }
+        ],
+        "tierUkuran": "XL"
+      },
+      {
+        "rak": "K3 korpus-pelengkap-bersih",
+        "asal": "K3 v8 preserved+merged + penampung-tersaring-2026-09 (1p8b/oscar/idx/hukum/regulasi); refresh 2026-09-20 v9",
+        "totalDokumen": 66225205,
+        "sizeByteGz": 9767296165,
+        "sha256": "87fddf2e70add3779efe83498fecb7cbd0baf671fe899a7609c85ebc2a05142a",
+        "totalKataApprox": 6414854936,
+        "totalTokenBPEResmi": 11451168271,
+        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BPE hanya dokumen baru; lantai git + baru",
+        "komposisiBahasa": {
+          "id": 1.0
+        },
+        "catatan": "K3 v9: merge v8 + penampung tersaring (QC ringan, dedup vs rak lama), termasuk id-corpus-1p8b dan indo4b-oscar yang sudah tersaring di penampung (PERINTAH LANJUT memetakan ke K3; tidak di-relitigasi). Dokumen lama v8 utuh. Token = lantai 388817480 + BPE dokumen baru. XL parts; gzip tunggal v8 dihapus setelah part v9 tersegel.",
+        "parts": [
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part00",
+            "sha256": "fbb83991d9acbc064db02de2ffe08ac4253c007dd88819ed4f548d6c72a49c25",
+            "bytes": 400135052
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part01",
+            "sha256": "8ed50284e70f534b28b79f057e81e2c7be22d745046eef493d1ae154968f6d4d",
+            "bytes": 400089622
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part02",
+            "sha256": "033fe94217a0e5961e250b4cf936417372d8af6cbd672050335b74b43dda0f17",
+            "bytes": 400127898
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part03",
+            "sha256": "3bc6149bf644a665e197111716da84daa3a6741b4b5b904961c52dad7df6f468",
+            "bytes": 401353451
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part04",
+            "sha256": "b3967d4455a131363b24270e2783fba41b3d2a67a65f7964105b602bcdc81eb5",
+            "bytes": 402754117
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part05",
+            "sha256": "dd799a704c7b93aa6dfdc1f0ef798b2c30e475a682d0ebff42c27a1741e8bbb0",
+            "bytes": 401043408
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part06",
+            "sha256": "b4660c2b05ec4a6e22fb6128b533c301af9530339f5056c2d7466daf1f2adace",
+            "bytes": 400128019
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part07",
+            "sha256": "723519039a1ddc766c63a362c8aa3c5a6ff7f1206d5ad67be5cf37838468821d",
+            "bytes": 400708374
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part08",
+            "sha256": "dc6e0cc3228bb3c30796e5e8bb455791e887e39a123c26aed6cf23b4cb4b7305",
+            "bytes": 230329509
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part09",
+            "sha256": "4096d46a89290369e768ccf2b8b399ad6f23f9a838e854f675770cefb25eed5b",
+            "bytes": 400192160
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part10",
+            "sha256": "47229eb0dffe0569e667bc7fc049017734a36b194cd34e8cfb37fcb292695109",
+            "bytes": 400058806
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part11",
+            "sha256": "326d550866e75dde8d9b10d577ab229c8ea35b9af485ed144cf2f6c4598bc660",
+            "bytes": 400159775
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part12",
+            "sha256": "c3c2e4ac9fcfc4f9ae111041d48d22a83e44e8da4c70e7d7b8671f123f820589",
+            "bytes": 400188993
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part13",
+            "sha256": "ee5dd3614f14bb64344a132b86ff730b5999f51bb6741382d66ac442cd43d9ab",
+            "bytes": 400132704
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part14",
+            "sha256": "201982d8c7a84f1c6dfd8ecf73ecf09b767f28c92856f3415be70dc67ad331e6",
+            "bytes": 400267168
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part15",
+            "sha256": "02cd08431c8ba7ac150c98d4fd076dc69e645d44af4f60ef7dd85abe679a9d1e",
+            "bytes": 400069718
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part16",
+            "sha256": "fbf83ba9a4a45494b64e851bcbd9d80d3e0f22e48a67ed06756dc195c30c9029",
+            "bytes": 400006648
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part17",
+            "sha256": "1ce3c5fd7776fdffc417264906e4abc496b5cf0fb4dddcb85204f38f0d53bf68",
+            "bytes": 400236277
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part18",
+            "sha256": "9608679a388367c6da286b962b9d6a9d9043c151a844d81de3af4bcc718949e8",
+            "bytes": 400279807
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part19",
+            "sha256": "8aa52c7c1c13dd6d595d52d4f86b78b766eeee5c4c05530f0398e5bf9b718460",
+            "bytes": 400251165
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part20",
+            "sha256": "3f3d091fd39a1b87d311c063f36257c39ae9a8aa5b7db307109701f088ceeefd",
+            "bytes": 400104370
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part21",
+            "sha256": "6b3d335ec7b4ab8dbffb04b6cce216a005a81fdb64ba4cd14b54d134551e6e78",
+            "bytes": 400129039
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part22",
+            "sha256": "ecab877fdb1f3f9bc1a9ecef68e2c2a6b55f1bcaf4742eb552c87c8bedafc5e1",
+            "bytes": 400226016
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part23",
+            "sha256": "fd03b01b6fd9b0dbb16cd3220406a13248f7a2acea26c5e416829c7cec4c4be2",
+            "bytes": 400324275
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part24",
+            "sha256": "2f75a8e880786f51c31e3983e895941b05b475391c246427f806486541554157",
+            "bytes": 145743017
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part25",
+            "sha256": "e51900b913c7b430d76d53550dd98025a15ee8fb43e5e7ebf5dee49141e322ec",
+            "bytes": 182256777
+          }
+        ],
+        "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 25342107,
-    "totalTokenBPEResmiKanonik": 5223639069
+    "totalDokumenKanonik": 94198632,
+    "totalTokenBPEResmiKanonik": 16794935092
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -105,19 +279,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 5223639069,
+    "totalTokenKanonikTerverifikasi": 16794935092,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-11 (keempat, menggantikan catatan 5.199.165.796 yang sudah basi): K3 di-refresh ke v8 - digabung dengan 69.495 dokumen hukum Indonesia baru (endomorphosis/ipfs_indonesia_laws) setelah exact dedupe + SimHash batch, dipublish Grok/dirigen ke GitHub Release tag korpus-pelengkap-bersih (asset manifest-pelengkap-bersih.json, diunduh+dicocokkan SHA256 lawan digest asset sebelum dicatat di sini). totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 459.594.014 + 4.375.227.575 + 388.817.480 = 5.223.639.069, PERSIS sama dengan kanonik.totalTokenBPEResmiKanonik. JAWABAN JUJUR untuk \"total token proyek saat ini\" HANYA SATU: 5.223.639.069. K1 dan K2 TIDAK berubah dari rekonsiliasi 2026-09-10 (lihat commit sebelumnya untuk riwayat verifikasi independen K2). Enam rilis data mentah BARU (~46GB, HuggingFace) ditemukan di Release 2026-09-09 - SEBAGIAN sudah masuk kanonik; sisanya (Indo4B/Indo4B-Plus/id-corpus-1p8b-split/garuda/LaMini) masih staging, lihat PRD/PRD-MANUS-DATA-MENTAH.md §4.2 untuk status per-tag. Field ini WAJIB dihitung ulang otomatis (SUM atas kanonik.entries) setiap kali entries berubah, TIDAK PERNAH diketik manual terpisah dari sumbernya - lihat PRD/PRD-RELEASE.md §5b.",
-    "tokenKanonikPerintahClaude": 5223639069,
-    "kekuranganTokenKanonik": -4223639069
+    "catatanPenting": "REKONSILIASI 2026-09-20 gel4: K3 v9 + K1 v6 + K2 v5. totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 16794935092. Token = lantai git (K1 459594014, K2 4375227575, K3 388817480) + BPE resmi dokumen baru. OSCAR/1p8b yang masuk K3 sudah tersaring di penampung.",
+    "tokenKanonikPerintahClaude": 16794935092,
+    "kekuranganTokenKanonik": -15794935092
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -4223639069,
+  "kekuranganTokenKanonik": -15794935092,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 5223639069,
+  "tokenKanonikPerintahClaude": 16794935092,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
