@@ -9,9 +9,7 @@ Baca dalam urutan ini:
 5. [`PRD-MANUS-DATA-MENTAH.md`](PRD-MANUS-DATA-MENTAH.md) — mentah → penampung.
 6. [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md) — otak template/retrieval.
 7. [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) — otak neural 50M→skala.
-8. [`PRD-RAGET-CODING.md`](PRD-RAGET-CODING.md) — kemampuan kode di mesin sendiri.
-9. [`PRD-CODING-KEPUTUSAN.md`](PRD-CODING-KEPUTUSAN.md) — gerbang K4 dijawab.
-10. Paket Claude: [`PRD-CODING-RAGET.md`](PRD-CODING-RAGET.md), [`PRD-CODING-ARSITEKTUR.md`](PRD-CODING-ARSITEKTUR.md), [`PRD-CODING-DATA.md`](PRD-CODING-DATA.md).
+8. [`PRD-CODING.md`](PRD-CODING.md) — **satu** PRD coding (K4 + mesin + data).
 
 Uji chat: [`docs/STATUS-UJI-JAWABAN.md`](../docs/STATUS-UJI-JAWABAN.md).
 Peta teknis: [`docs/ARSITEKTUR.md`](../docs/ARSITEKTUR.md).
