@@ -1,6 +1,6 @@
 import { detectTone, detectMood } from '../../utils/text.js';
 import { toolsMath } from './tools-math.js';
-import { toolsReminder } from './tools-reminder.js';
+import { toolsKode } from './tools-kode.js';
 
 const RATING_GOOD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(bagus|keren|mantap|oke|tepat)|^bagus\b|^mantap\b/i;
 const RATING_BAD_RE = /jawaban(mu|nya)?\s*(yang\s*)?(jelek|salah|kurang\s*tepat|ngawur)|^salah\b|^jelek\b/i;
@@ -140,6 +140,7 @@ function detectTool(prompt) {
   if (/^bandingkan\s+/.test(t)) return 'bandingkan';
   if (/^[a-z0-9\s]{2,40}\s+vs\.?\s+[a-z0-9\s]{2,40}$/.test(t)) return 'bandingkan_vs';
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
+  if (toolsKode.isCodeQuestion(t)) return 'kode';
   if (/^(cara|langkah)\s+/.test(t) && !LAYANAN_KEYWORDS_RE.test(t)) return 'cara';
   if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
   if (/^(apa\s+(saja\s+)?|sebutkan\s+)?manfaat\s+/.test(t)) return 'manfaat';

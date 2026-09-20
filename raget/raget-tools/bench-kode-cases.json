@@ -1,0 +1,22 @@
+[
+  {"id": 1, "prompt": "Apa itu function di JavaScript", "kind": "explain", "need": ["function", "javascript"]},
+  {"id": 2, "prompt": "Perbaiki: consle.log(\"a\")", "kind": "fix", "need": ["console.log"]},
+  {"id": 3, "prompt": "Tulis fungsi jumlah(a,b) di Python", "kind": "gen", "need": ["def jumlah"]},
+  {"id": 4, "prompt": "Tulis fungsi jumlah(a, b) di JavaScript", "kind": "gen", "need": ["function jumlah"]},
+  {"id": 5, "prompt": "Buatkan fungsi palindrome di JavaScript", "kind": "gen", "need": ["function palindrome"]},
+  {"id": 6, "prompt": "Tulis fizzbuzz JavaScript sampai 15", "kind": "gen", "need": ["fizz"]},
+  {"id": 7, "prompt": "Contoh array map di JavaScript", "kind": "gen", "need": [".map("]},
+  {"id": 8, "prompt": "Contoh array filter di JavaScript", "kind": "gen", "need": [".filter("]},
+  {"id": 9, "prompt": "Contoh async await fetch JSON di JavaScript", "kind": "gen", "need": ["async"]},
+  {"id": 10, "prompt": "Cara querySelector DOM JavaScript", "kind": "gen", "need": ["querySelector"]},
+  {"id": 11, "prompt": "Parse JSON string di JavaScript", "kind": "gen", "need": ["JSON.parse"]},
+  {"id": 12, "prompt": "Buat class JavaScript bernama Mobil", "kind": "gen", "need": ["class "]},
+  {"id": 13, "prompt": "Contoh HTML form input nama", "kind": "gen", "need": ["<form"]},
+  {"id": 14, "prompt": "Contoh CSS box model padding margin", "kind": "gen", "need": ["padding"]},
+  {"id": 15, "prompt": "Contoh for loop array JavaScript", "kind": "gen", "need": ["for ("]},
+  {"id": 16, "prompt": "Contoh try catch JavaScript", "kind": "gen", "need": ["try {"]},
+  {"id": 17, "prompt": "Arrow function JavaScript kali dua", "kind": "gen", "need": ["=>"]},
+  {"id": 18, "prompt": "Array reduce jumlah di JavaScript", "kind": "gen", "need": [".reduce("]},
+  {"id": 19, "prompt": "setTimeout JavaScript 1 detik", "kind": "gen", "need": ["setTimeout"]},
+  {"id": 20, "prompt": "Jelaskan kode: const x = a.map(n => n * 2)", "kind": "explain", "need": ["map"]}
+]

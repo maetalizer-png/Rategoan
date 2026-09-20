@@ -13,6 +13,8 @@ setelah K3 v9 / K1 v6 / K2 v5 digabung).
 | `checkpoint-200m` | arsip PPL 1068; **yang dipakai PWA** = HF `Maetalizer19/rategoan-neural` SHA `69daa21d…` PPL 932, CORS terkonfirmasi (`access-control-allow-origin: *`) |
 | `prd-data-release` | riwayat aturan awal penyaringan korpus (sudah dilebur ke dokumen internal) |
 | `penampung-tersaring-2026-09` | tetap utuh (~104 aset); sumber merge K1/K2/K3, bukan rak kanonik |
+| `penampung-kode-2026-09` | staging G6, bukan rak kanonik, tidak masuk lantai 16,79 miliar |
+| `korpus-kode-bersih` | **K4 v1** (dirigen 20 Sep). Kode JS/Python/HTML/CSS permissive. Token **tidak** dijumlahkan ke 16.794.935.092 |
 
 ## RETIRE — `panen-madlad400-id`
 
@@ -35,7 +37,9 @@ Tidak di-relitigasi.
 
 ## Dilarang
 MADLAD / OSCAR mentah / mC4 / tag `panen-*` sebagai rak kanonik baru.
-Workflow `panen.yml` sudah dihapus. Jangan hapus penampung. Jangan buat K4.
+Workflow `panen.yml` sudah dihapus. Jangan hapus penampung teks.
+K4 `korpus-kode-bersih` disetujui dirigen; jangan tuang kode ke K2;
+jangan jumlahkan token K4 ke lantai tiga rak sampai tokenizer K4 resmi.
 
 ## Pintu data berikutnya
 Dump `idwikibooks` / `idwikiquote` / `idwiktionary` + buku PD. Bukan HF crawl.

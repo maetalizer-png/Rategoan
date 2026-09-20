@@ -20,6 +20,7 @@ import { toolsKoleksi } from './tools-koleksi.js';
 import { toolsExport } from './tools-export.js';
 import { toolsGeneric } from './tools-generic.js';
 import { toolsDevlog } from './tools-devlog.js';
+import { toolsKode } from './tools-kode.js';
 import { routerIntent } from './router-intent.js';
 import { bilingual } from './bilingual.js';
 import { knowledgeGraph } from './knowledge-graph.js';
@@ -85,6 +86,7 @@ function matchFewshotNearMiss(examples, text) {
 }
 
 async function runTool(kind, prompt, messages) {
+  if (toolsKode.handles(kind)) return await toolsKode.run(kind, prompt);
   if (toolsDevlog.handles(kind)) return await toolsDevlog.run(kind, prompt);
   if (toolsKoleksi.handles(kind)) return await toolsKoleksi.run(kind, prompt);
   if (toolsExport.handles(kind)) return await toolsExport.run(kind, prompt, messages);
