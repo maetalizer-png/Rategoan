@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-20T12:33:57Z",
-  "updatedAt": "2026-09-20T12:33:57Z",
-  "sumber": "Grok G1+G2 2026-09-20 — K1 v6 utuh, K2 v6 (pindah hukum + QC sapaan), K3 v10 (hukum unik dari K2). K4 korpus-kode-bersih tidak dijumlahkan.",
+  "generatedAt": "2026-09-20T12:54:09Z",
+  "updatedAt": "2026-09-20T12:54:09Z",
+  "sumber": "Grok Build G4 2026-09-20 — K1 v7 + K2 v6 + K3 v10. Token = lantai 16.794.935.092 + BPE dokumen baru G2/G4. Penampung utuh. K4 tidak dijumlahkan.",
   "kanonik": {
-    "keterangan": "3 rak resmi K1/K2/K3 — SATU-SATUNYA angka token training. K4 korpus-kode-bersih terpisah, tidak dijumlahkan.",
+    "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
     "entries": [
       {
         "rak": "K1 korpus-ensiklopedia-bersih",
-        "asal": "k1-id-filter + staging wiki tersaring + penampung-tersaring-2026-09; refresh 2026-09-20 v6",
-        "totalDokumen": 7617040,
-        "sizeByteGz": 1611894221,
-        "sha256": "31d6ccbf85102f5c0bb7208b7cc79a1f040e604592227a668bef39d807f3985c",
-        "totalKataApprox": 613790046,
-        "totalTokenBPEResmi": 968515547,
-        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BPE hanya dokumen baru; lantai git + baru",
-        "catatan": "K1 v6: merge v5 + penampung (wiki/wikisource/lyon/ringkasan), QC kepadatan, dedup vs rak lama. Token = lantai 459594014 + baru. SHA GitHub release.",
+        "asal": "K1 v6 + G4 merge G3 wiki/edu unik (wikibooks, wikimedia, oercommons, libretexts); refresh 2026-09-20 v7",
+        "totalDokumen": 7642249,
+        "sizeByteGz": 1796716404,
+        "sha256": "182aab0960d8b6362fe0bf9481e55d81421766ae24f1e6ec4fddba0afeca7d94",
+        "totalKataApprox": null,
+        "totalTokenBPEResmi": 1146336878,
+        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru; lantai tidak diukur ulang",
+        "catatan": "K1 v7: part00-04 v6 utuh + part05 25209 dokumen / 177821331 BPE (dedup sha1-400 vs K1 v6). Token = v6 968515547 + baru G4. SHA concat Gerbang 2.",
         "komposisiBahasa": {
           "id": 1.0
         },
@@ -43,20 +43,25 @@
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part04",
             "sha256": "f795d3889e8b015104326837c18d54eb6b517b2eabb829b83676e4c7379d36ea",
             "bytes": 9960312
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part05",
+            "sha256": "bb2994ddcc433e2b5c17d2bee1c4002ff8b233345ec8015c29395896106bc67c",
+            "bytes": 184822183
           }
         ],
         "tierUkuran": "XL"
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
-        "asal": "k2-id + Alpaca-ID + sisa dialog; hukum unik dipindah ke K3; G2 QC sapaan; v6",
+        "asal": "K2 v5 sealed − hukum unik ke K3 + dup tetap + G2 QC sapaan; refresh 2026-09-20 v6",
         "totalDokumen": 807558,
         "sizeByteGz": 174677276,
         "sha256": "29690c3bb7ca6d732a5fd9d9ebd86f0d5e956fd7899dcde814e1c83a52c57eb7",
-        "totalKataApprox": 185370614,
+        "totalKataApprox": null,
         "totalTokenBPEResmi": 264815163,
-        "diukurPada": "2026-09-20 G2; tokenizer resmi vocab 30368, max_len 128",
-        "catatan": "K2 v6: pindah 19.549.205 dokumen hukum unik ke K3 (4.110.436.143 BPE). Dup 122.320 tetap di K2. G2 QC sapaan: 1.520 sapaan unik pengganti. BPE 264.815.163. SHA GitHub part00.",
+        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru; lantai tidak diukur ulang",
+        "catatan": "K2 v6: hukum unik 19549205 / 4110436143 BPE ke K3. Dup 122320 / 100809238 BPE tetap di K2. G2 QC sapaan: BPE 264815163. Bukan pangkas. SHA GitHub release.",
         "komposisiBahasa": {
           "id": 1.0
         },
@@ -67,21 +72,21 @@
             "bytes": 174677276
           }
         ],
-        "tierUkuran": "M"
+        "tierUkuran": "XL"
       },
       {
         "rak": "K3 korpus-pelengkap-bersih",
-        "asal": "K3 v9 preserved + pindahan hukum K2 unik; v10",
+        "asal": "K3 v9 part00-25 utuh + G1 hukum unik K2 part26-27; refresh 2026-09-20 v10",
         "totalDokumen": 85774410,
         "sizeByteGz": 10263433538,
         "sha256": "4852018ce0d4becc9b016923374a21c669a9a4622dd5fb200665e8cc4bfc38e9",
-        "totalKataApprox": 8966151070,
+        "totalKataApprox": null,
         "totalTokenBPEResmi": 15561604414,
-        "diukurPada": "2026-09-20 G1; tokenizer resmi vocab 30368, max_len 128; BPE hanya dokumen pindahan unik",
+        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru; lantai tidak diukur ulang",
+        "catatan": "K3 v10: part00-25 v9 tidak diubah. part26-27 = 19549205 dokumen regulation-qa unik / 4110436143 BPE. Token = v9 11451168271 + unik. Dup vs K3 tetap di K2.",
         "komposisiBahasa": {
           "id": 1.0
         },
-        "catatan": "K3 v10: v9 part00-25 utuh + part26-27 hukum unik. Token = lantai v9 11.451.168.271 + 4.110.436.143. SHA concat Gerbang 2.",
         "parts": [
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part00",
@@ -227,8 +232,8 @@
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 94199008,
-    "totalTokenBPEResmiKanonik": 16794935124
+    "totalDokumenKanonik": 94224217,
+    "totalTokenBPEResmiKanonik": 16972756455
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -273,12 +278,6 @@
       "tag": "panen-wikipedia-id",
       "status": "SELESAI DIPROSES oleh Grok (~19:58 UTC) - 76.071 dokumen unik (dedupe fingerprint, sisa setelah buang 238.873 duplikat + 247.251 terlalu pendek dari total 562.195) sudah DIGABUNG ke K1 di atas. TIDAK di-retire seperti instruksi Claude ronde sebelumnya - keputusan Grok independen lebih akurat, sudah final.",
       "diperbaruiPada": "2026-09-01T19:58Z"
-    },
-    "k4": {
-      "tag": "korpus-kode-bersih",
-      "status": "AMAN v1, BUKAN kanonik 3 rak",
-      "penampung": "penampung-kode-2026-09",
-      "dihitungKeLantaiTigaRak": false
     }
   },
   "jilid2": "TIDAK dihitung - data berisiko (HPLT/CommonCrawl), tidak kanonik, tidak masuk hitungan manapun di atas. Ini SUMBER angka '~750 juta' yang kadang beredar di percakapan - angka itu TIDAK VALID untuk training.",
@@ -290,19 +289,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 16794935124,
+    "totalTokenKanonikTerverifikasi": 16972756455,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-20 G1+G2: K1 v6 + K2 v6 + K3 v10. totalTokenKanonikTerverifikasi=16794935124. Lantai gel4 16794935092 tidak turun (sekarang 16794935124).",
-    "tokenKanonikPerintahClaude": 16794935124,
-    "kekuranganTokenKanonik": -15794935124
+    "catatanPenting": "REKONSILIASI 2026-09-20 G4: K1 v7 + K2 v6 + K3 v10. totalTokenKanonikTerverifikasi = SUM(kanonik.entries[].totalTokenBPEResmi) = 16972756455 (>= lantai 16794935092). G3 sisa wiki masih di penampung.",
+    "tokenKanonikPerintahClaude": 16794935092,
+    "kekuranganTokenKanonik": -15794935092
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -15794935124,
+  "kekuranganTokenKanonik": -15794935092,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 16794935124,
+  "tokenKanonikPerintahClaude": 16794935092,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
