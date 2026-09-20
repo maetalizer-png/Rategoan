@@ -1,16 +1,5 @@
-# PRD Rategoan
+# PRD
 
-Baca dalam urutan ini:
+Perintah kerja: [`PRD-GROK-BUILD.md`](PRD-GROK-BUILD.md)
 
-1. [`PRD-GROK-BUILD.md`](PRD-GROK-BUILD.md) — **perintah master Build** (hulu–hilir, QC, uji nyata).
-2. [`FONDASI-TEORI-RAGET.md`](FONDASI-TEORI-RAGET.md) — teori & level kecerdasan (L0-L5).
-3. [`PRD-ATURAN-KERJA.md`](PRD-ATURAN-KERJA.md) — aturan kerja & larangan.
-4. [`PRD-RELEASE.md`](PRD-RELEASE.md) — pagar Release (tag, SHA, rak K).
-5. [`PRD-MANUS-DATA-MENTAH.md`](PRD-MANUS-DATA-MENTAH.md) — mentah → penampung.
-6. [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md) — otak template/retrieval.
-7. [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) — otak neural 50M→skala.
-
-Coding dan sisa rak ada di `PRD-GROK-BUILD.md` saja. Jangan tambah file PRD kerja.
-
-Uji chat: [`docs/STATUS-UJI-JAWABAN.md`](../docs/STATUS-UJI-JAWABAN.md).
-Peta teknis: [`docs/ARSITEKTUR.md`](../docs/ARSITEKTUR.md).
+Pagar: [`PRD-RELEASE.md`](PRD-RELEASE.md), [`PRD-ATURAN-KERJA.md`](PRD-ATURAN-KERJA.md), [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md), [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md), [`FONDASI-TEORI-RAGET.md`](FONDASI-TEORI-RAGET.md)
