@@ -1,32 +1,45 @@
 # PRD Grok Build — satu perintah kerja
 
-File kerja **satu-satunya**. Jangan buat PRD baru. Perbarui file ini.
+Jangan buat file PRD baru. Perbarui file ini.
 
-Pagar data: `PRD-RELEASE.md`. Otak: `PRD-RAGET-NEURAL.md`, `PRD-RAGET-TEMPLATE.md`.
+## Alur (wajib urut)
 
-## Status 20 Sep malam
+```
+mentah staging  →  saring  →  rak K  →  hapus tag/file mentah
+```
 
-Selesai, jangan diulang:
+Yang sudah di rak tidak disimpan lagi di staging.
 
-- K1 v6 = 968.515.547 BPE
-- K2 v6 = 264.815.163 BPE (hukum sudah pindah)
-- K3 v10 = 15.561.604.414 BPE
-- Jumlah K1–K3 = **16.794.935.124** (lantai 16.794.935.092 aman)
-- G1 pindah hukum, G2 QC sapaan, G5 uji chat 13/13
-- C1 jalur kode tipis di git
-- Tag K4 + penampung-kode ada, masih ~10 MB
+## Rak hidup
 
-## Sisa kerja — satu sesi, jangan berhenti setelah baca
+| Tag | Isi |
+|---|---|
+| `korpus-ensiklopedia-bersih` | K1 |
+| `korpus-dialog-daerah-bersih` | K2 |
+| `korpus-pelengkap-bersih` | K3 |
+| `korpus-kode-bersih` | K4 coding saja |
+| `checkpoint-100m` / `checkpoint-200m` | model |
+| `prd-data-release` | pagar + file ini |
 
-1. **Isi K4** (khusus coding): The Stack JS lisensi MIT/Apache/BSD, MDN JS, Rosetta JS, kode repo. Staging `penampung-kode-2026-09` → `korpus-kode-bersih` sampai gzip bersih ≥200 MB. Bukan model luar.
-2. **G3**: saring `id-hf-more-new-quality` ~89 GB ke penampung teks, lalu K1/K3. Bukan ke K4.
-3. Mesin kode (sandbox + bench ≥8/20) setelah K4 ≥200 MB.
+Lantai K1+K2+K3 ≥ **16.794.935.092**. Jangan turun.
 
-Jangan turun lantai K1–K3. Jangan hapus penampung teks. Jangan K5.
+## Mentah yang sudah di rak — dihapus
 
-## K4
+Wikisource, IDX, quality-text, Indo4B, Indo4B-Plus, 1.8B, knowledge-science, manifest smoke.
+Gzip penampung teks yang sudah digabung ke K juga dihapus. Laporan JSON tetap.
 
-Hanya kode. Bukan hukum/wiki/sapaan.
-JS utama; Python/HTML boleh.
-Checkpoint kode terpisah nanti; jangan timpa 50/100/200M.
-Vocab 30.368 K1–K3 jangan dirombak di sesi ini.
+## Belum dihapus (alasan)
+
+| Tag | Alasan |
+|---|---|
+| `id-hf-more-new-quality-2026-09` | ~89 GB belum selesai ke rak |
+| `id-hf-safe-indonesian-audio-batch-2026-09` | audio, bukan teks rak |
+| `penampung-kode-2026-09` | staging K4, K4 masih ~10 MB |
+
+## Sisa kerja — satu sesi
+
+1. Isi K4 ≥200 MB (The Stack JS permissive, MDN, Rosetta, repo). Part staging yang sudah di K4 dihapus.
+2. Saring 89 GB `more-new-quality` ke K1/K3. Setelah masuk rak, hapus tag mentah itu.
+3. Audio tetap sampai keputusan terpisah.
+
+Jangan model luar. Jangan K5. Jangan berhenti setelah baca.
