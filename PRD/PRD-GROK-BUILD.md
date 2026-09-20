@@ -1,32 +1,32 @@
-# PRD Grok Build — kerjakan sampai tuntas
+# PRD Grok Build — satu perintah kerja
 
-Satu file. Jangan buat PRD baru. Jangan selesai setelah baca.
+Jangan buat PRD baru. Jangan berhenti setelah baca.
 
-Sesi ini **gagal** kalau berhenti sebelum dua gerbang di bawah hijau.
+## Alur
 
-## Gerbang A — K4 ≥ 200 MB gzip bersih
+```
+mentah → saring → rak K → hapus staging → QC rak (bukan pangkas token)
+```
 
-Tag: staging `penampung-kode-2026-09` → kanonik `korpus-kode-bersih`.
-Sumber: The Stack JS lisensi MIT/Apache/BSD per file, MDN JS, Rosetta JS, kode repo Rategoan.
-Saring: buang minified, node_modules, tanpa lisensi.
-Setelah part masuk K4, hapus part itu dari staging.
-Bukan model luar.
+## Gerbang
 
-## Gerbang B — 89 GB mentah habis ke rak
+**A.** K4 `korpus-kode-bersih` ≥200 MB gzip (The Stack JS permissive, MDN, Rosetta, repo). Bukan model luar.
 
-Tag `id-hf-more-new-quality-2026-09`:
-satu shard → saring → K1 (pelajaran/wiki) atau K3 (sisanya) → unggah rak → hapus shard lokal.
-Kalau **semua** shard sudah di rak, **hapus seluruh tag mentah itu**.
-Jangan ke K2/K4. Lantai K1+K2+K3 ≥ 16.794.935.092.
+**B.** Habiskan `id-hf-more-new-quality-2026-09` ke K1 (pelajaran/wiki) atau K3. Lalu hapus tag mentah.
 
-## Dilarang
+**C. QC tingkat tinggi K1 K2 K3 — wajib, bukan opsional.**
+Bukan buang topik. Bukan turunkan lantai **16.794.935.092**.
+Periksa dan perbaiki:
+- tata bahasa, tata kalimat, tata kata
+- kepadatan informasi (bukan template 20×)
+- fakta / pelajaran utuh
+- penempatan: wiki/pelajaran → K1, sapaan → K2, hukum/berita/crawl → K3, kode → K4
+Kalau dokumen jelek: rapikan atau ganti setara token. Jangan dikosongkan.
+Laporan: `LAPORAN-QC-RAK.json` (contoh 20 dokumen per rak: sebelum/sesudah, lulus/gagal).
 
-Berhenti karena “sudah baca PRD”.
-Buat file PRD/perintah baru.
-Pasang Qwen-Coder/StarCoder sebagai otak.
-Hapus audio. Hapus K1–K3. Turunkan lantai token.
+## Denah
 
-## Selesai
+K1 ensiklopedia (arah Phi). K2 dialog saja. K3 pelengkap. K4 kode.
+Audio jangan ke rak teks.
 
-K4 gzip ≥200 MB + tag 89 GB hilang atau laporan sisa shard yang gagal dengan alasan.
-Lalu baru boleh berhenti.
+Berhenti hanya jika A+B+C ada artefak di Release.
