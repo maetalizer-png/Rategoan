@@ -9,7 +9,8 @@ Baca dalam urutan ini:
 5. [`PRD-MANUS-DATA-MENTAH.md`](PRD-MANUS-DATA-MENTAH.md) — mentah → penampung.
 6. [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md) — otak template/retrieval.
 7. [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) — otak neural 50M→skala.
-8. [`PRD-CODING.md`](PRD-CODING.md) — **satu** PRD coding (K4 + mesin + data).
+
+Coding dan sisa rak ada di `PRD-GROK-BUILD.md` saja. Jangan tambah file PRD kerja.
 
 Uji chat: [`docs/STATUS-UJI-JAWABAN.md`](../docs/STATUS-UJI-JAWABAN.md).
 Peta teknis: [`docs/ARSITEKTUR.md`](../docs/ARSITEKTUR.md).
