@@ -72,8 +72,15 @@ function composeTokoh(t) {
 async function tryProfil(text) {
   const m = text.match(/^(siapa\s+itu|siapa|ceritakan\s+tentang|biografi(\s+dari)?)\s+(.+?)\??$/i);
   if (!m) return null;
-  const t = await findTokoh(m[3]);
-  if (!t) return null;
+  const name = String(m[3] || '').trim().replace(/\?+$/, '');
+  const t = await findTokoh(name);
+  if (!t) {
+    const words = name.split(/\s+/).filter(Boolean);
+    if (words.length >= 2 && /^(siapa(\s+itu)?)\s+/i.test(text)) {
+      return 'Saya belum yakin siapa ' + name + '.';
+    }
+    return null;
+  }
   rememberTokoh(t);
   return composeTokoh(t);
 }

@@ -408,7 +408,7 @@ async function cari(query) {
   if (!q) return 'Mau cari info tentang apa?';
   const results = await memoryIndex.search(q, 3);
   if (!results.length) return 'Saya belum punya catatan soal "' + q + '". Coba ceritakan, nanti saya ingat.';
-  return 'Yang saya tahu soal "' + q + '": ' + results.map((r) => r.text).join(' | ');
+  return results.map((r) => String(r.text || '').trim()).filter(Boolean).join('\n\n');
 }
 
 async function cariSemua(query) {

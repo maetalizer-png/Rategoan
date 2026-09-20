@@ -422,6 +422,24 @@ async function respondCore(messages, prompt) {
     return postProcess(mataPelajaranReply);
   }
 
+  const personaEarly = await loadPersona();
+  const tonePreferenceEarly = contextEngine.getStylePreference();
+  const greet = llmEngine.tryGreeting(text, { personaName: personaEarly.name, tonePreference: tonePreferenceEarly });
+  if (greet) {
+    ragetDb.addNote(text, greet, null, 'greeting');
+    return postProcess(greet);
+  }
+  const interject = llmEngine.tryInterjection(text);
+  if (interject) {
+    ragetDb.addNote(text, interject, null, 'interjection');
+    return postProcess(interject);
+  }
+  const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: personaEarly.name, tonePreference: tonePreferenceEarly });
+  if (dailyTalk) {
+    ragetDb.addNote(text, dailyTalk, null, 'daily_talk');
+    return postProcess(dailyTalk);
+  }
+
   const factoid = await tryFactoid(text, messages);
   if (factoid) {
     ragetDb.addNote(text, factoid, null, 'factoid');
@@ -548,24 +566,6 @@ async function respondCore(messages, prompt) {
   const persona = await loadPersona();
   const shortContext = memoryShort.recent(messages, 10);
   const tonePreference = contextEngine.getStylePreference();
-
-  const greet = llmEngine.tryGreeting(text, { personaName: persona.name, tonePreference });
-  if (greet) {
-    ragetDb.addNote(text, greet, null, 'greeting');
-    return postProcess(greet);
-  }
-
-  const interject = llmEngine.tryInterjection(text);
-  if (interject) {
-    ragetDb.addNote(text, interject, null, 'interjection');
-    return postProcess(interject);
-  }
-
-  const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: persona.name, tonePreference });
-  if (dailyTalk) {
-    ragetDb.addNote(text, dailyTalk, null, 'daily_talk');
-    return postProcess(dailyTalk);
-  }
 
   const preSearch = await memoryIndex.search(text, 5);
   const dataFallback = await datariesBridge.datariesFallback(text);

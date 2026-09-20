@@ -5,7 +5,7 @@ import { feedbackStore } from '../raget-memory/feedback-store.js';
 const QUALITY_KEY = 'raget_quality';
 const ANSWER_TYPES = ['definisi', 'daftar', 'prosedur', 'perbandingan', 'matematika', 'terbuka'];
 const LENGTH_LIMITS = {
-  definisi: 240,
+  definisi: 900,
   matematika: 200,
   daftar: 900,
   prosedur: 900,

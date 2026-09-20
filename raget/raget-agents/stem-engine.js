@@ -380,7 +380,7 @@ function tryTroubleshoot(text) {
 
 const SCIENCE_FIELDS = {
   biologi: 'Biologi adalah cabang ilmu pengetahuan alam yang mempelajari makhluk hidup — mulai dari struktur sel, cara kerja tubuh, hingga interaksi antar makhluk hidup dan lingkungannya.',
-  fisika: 'Fisika adalah cabang ilmu pengetahuan alam yang mempelajari materi, energi, dan interaksi antara keduanya — mencakup gerak, gaya, panas, cahaya, listrik, hingga struktur alam semesta.',
+  fisika: 'Fisika adalah cabang ilmu pengetahuan alam yang mempelajari materi, energi, dan interaksi antara keduanya — mencakup gerak, gaya, panas, cahaya, listrik, hingga struktur alam semesta.\n\nIlmu ini memakai pengukuran, model matematika, dan percobaan untuk menjelaskan gejala dari partikel subatom sampai galaksi. Cabang utamanya antara lain mekanika, termodinamika, elektromagnetisme, optik, serta fisika modern (kuantum dan relativitas).',
   kimia: 'Kimia adalah cabang ilmu pengetahuan alam yang mempelajari komposisi, struktur, sifat, dan perubahan zat — termasuk bagaimana unsur dan senyawa bereaksi membentuk zat baru.',
 };
 
