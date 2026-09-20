@@ -1,45 +1,32 @@
-# PRD Grok Build — satu perintah kerja
+# PRD Grok Build — kerjakan sampai tuntas
 
-Jangan buat file PRD baru. Perbarui file ini.
+Satu file. Jangan buat PRD baru. Jangan selesai setelah baca.
 
-## Alur (wajib urut)
+Sesi ini **gagal** kalau berhenti sebelum dua gerbang di bawah hijau.
 
-```
-mentah staging  →  saring  →  rak K  →  hapus tag/file mentah
-```
+## Gerbang A — K4 ≥ 200 MB gzip bersih
 
-Yang sudah di rak tidak disimpan lagi di staging.
+Tag: staging `penampung-kode-2026-09` → kanonik `korpus-kode-bersih`.
+Sumber: The Stack JS lisensi MIT/Apache/BSD per file, MDN JS, Rosetta JS, kode repo Rategoan.
+Saring: buang minified, node_modules, tanpa lisensi.
+Setelah part masuk K4, hapus part itu dari staging.
+Bukan model luar.
 
-## Rak hidup
+## Gerbang B — 89 GB mentah habis ke rak
 
-| Tag | Isi |
-|---|---|
-| `korpus-ensiklopedia-bersih` | K1 |
-| `korpus-dialog-daerah-bersih` | K2 |
-| `korpus-pelengkap-bersih` | K3 |
-| `korpus-kode-bersih` | K4 coding saja |
-| `checkpoint-100m` / `checkpoint-200m` | model |
-| `prd-data-release` | pagar + file ini |
+Tag `id-hf-more-new-quality-2026-09`:
+satu shard → saring → K1 (pelajaran/wiki) atau K3 (sisanya) → unggah rak → hapus shard lokal.
+Kalau **semua** shard sudah di rak, **hapus seluruh tag mentah itu**.
+Jangan ke K2/K4. Lantai K1+K2+K3 ≥ 16.794.935.092.
 
-Lantai K1+K2+K3 ≥ **16.794.935.092**. Jangan turun.
+## Dilarang
 
-## Mentah yang sudah di rak — dihapus
+Berhenti karena “sudah baca PRD”.
+Buat file PRD/perintah baru.
+Pasang Qwen-Coder/StarCoder sebagai otak.
+Hapus audio. Hapus K1–K3. Turunkan lantai token.
 
-Wikisource, IDX, quality-text, Indo4B, Indo4B-Plus, 1.8B, knowledge-science, manifest smoke.
-Gzip penampung teks yang sudah digabung ke K juga dihapus. Laporan JSON tetap.
+## Selesai
 
-## Belum dihapus (alasan)
-
-| Tag | Alasan |
-|---|---|
-| `id-hf-more-new-quality-2026-09` | ~89 GB belum selesai ke rak |
-| `id-hf-safe-indonesian-audio-batch-2026-09` | audio, bukan teks rak |
-| `penampung-kode-2026-09` | staging K4, K4 masih ~10 MB |
-
-## Sisa kerja — satu sesi
-
-1. Isi K4 ≥200 MB (The Stack JS permissive, MDN, Rosetta, repo). Part staging yang sudah di K4 dihapus.
-2. Saring 89 GB `more-new-quality` ke K1/K3. Setelah masuk rak, hapus tag mentah itu.
-3. Audio tetap sampai keputusan terpisah.
-
-Jangan model luar. Jangan K5. Jangan berhenti setelah baca.
+K4 gzip ≥200 MB + tag 89 GB hilang atau laporan sisa shard yang gagal dengan alasan.
+Lalu baru boleh berhenti.
