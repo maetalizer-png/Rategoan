@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-21T01:33:51Z",
-  "updatedAt": "2026-09-21T01:33:51Z",
-  "sumber": "Grok Build 2026-09-21 G5 crawl/edu ID ke K3 v11. K1 v8 utuh. K4 tidak dijumlahkan.",
+  "generatedAt": "2026-09-21T08:29:55Z",
+  "updatedAt": "2026-09-21T08:29:55Z",
+  "sumber": "Grok Build 2026-09-21 G5c pecah staging: dialog/instruksi K2 v7, pelengkap K3 v12. K1 v8 utuh. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
     "entries": [
@@ -59,14 +59,14 @@
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
-        "asal": "K2 v5 sealed − hukum unik ke K3 + dup tetap + G2 QC sapaan; refresh 2026-09-20 v6",
-        "totalDokumen": 807558,
-        "sizeByteGz": 174677276,
-        "sha256": "29690c3bb7ca6d732a5fd9d9ebd86f0d5e956fd7899dcde814e1c83a52c57eb7",
+        "asal": "K2 v6 + G5c dialog/instruksi ID dari staging",
+        "totalDokumen": 2778770,
+        "sizeByteGz": 549114995,
+        "sha256": "221d4b56d52a285c58b7413d9c884850c2eba1dccef72d00d324ce83bfbd4ea5",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 264815163,
-        "diukurPada": "2026-09-20; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru; lantai tidak diukur ulang",
-        "catatan": "K2 v6: hukum unik 19549205 / 4110436143 BPE ke K3. Dup 122320 / 100809238 BPE tetap di K2. G2 QC sapaan: BPE 264815163. Bukan pangkas. SHA GitHub release.",
+        "totalTokenBPEResmi": 484678715,
+        "diukurPada": "2026-09-21T08:29:55Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru",
+        "catatan": "K2 v7 G5c: part00 v6 utuh + part01 1971212 dokumen / 219863552 BPE. Token = v6 264815163 + baru. SHA concat Gerbang 2. K1 v8 utuh.",
         "komposisiBahasa": {
           "id": 1.0
         },
@@ -75,20 +75,25 @@
             "name": "korpus-dialog-daerah-bersih.jsonl.gz.part00",
             "sha256": "29690c3bb7ca6d732a5fd9d9ebd86f0d5e956fd7899dcde814e1c83a52c57eb7",
             "bytes": 174677276
+          },
+          {
+            "name": "korpus-dialog-daerah-bersih.jsonl.gz.part01",
+            "sha256": "de783a49e67ca93115a9115368512dc08aa8aead23fb0b96500d7622341b98b2",
+            "bytes": 374437719
           }
         ],
         "tierUkuran": "XL"
       },
       {
         "rak": "K3 korpus-pelengkap-bersih",
-        "asal": "K3 v10 + G5 pelengkap ID unik part28",
-        "totalDokumen": 86738357,
-        "sizeByteGz": 10371172451,
-        "sha256": "afeb27f7b81b97a8e2bbea2999b2279285ed26014f07f92f649bee362d143c40",
+        "asal": "K3 v11 + G5c pelengkap sisa staging (bukan dialog)",
+        "totalDokumen": 86750230,
+        "sizeByteGz": 10372385496,
+        "sha256": "78c10536195490c7f916e1c199950f1839c63ce7868d9963518a0a66ae76b5a9",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 15679316105,
-        "diukurPada": "2026-09-21T01:33:51Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru; lantai tidak diukur ulang",
-        "catatan": "K3 v11 G5: part00-27 v10 utuh + part28 963947 dokumen / 117711691 BPE. Token = v10 15561604414 + baru. SHA concat Gerbang 2. DOAB EN tidak masuk K1.",
+        "totalTokenBPEResmi": 15680440223,
+        "diukurPada": "2026-09-21T08:29:55Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE hanya dokumen baru",
+        "catatan": "K3 v12 G5c: part00-28 v11 utuh + part29 11873 dokumen / 1124118 BPE. Dialog/instruksi pindah ke K2. SHA concat Gerbang 2. K1 v8 utuh.",
         "komposisiBahasa": {
           "id": 1.0
         },
@@ -237,13 +242,18 @@
             "name": "korpus-pelengkap-bersih.jsonl.gz.part28",
             "sha256": "88e0878e867d7890ba2d4ae47ccdde01725aa2c55a45f7f3a3e906058284458d",
             "bytes": 107738913
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part29",
+            "sha256": "44767ce8ab4649deb748d34dbc9f5a66a70e3f75209482ea9dae46295992ab09",
+            "bytes": 1213045
           }
         ],
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 95342596,
-    "totalTokenBPEResmiKanonik": 18194291698
+    "totalDokumenKanonik": 97325681,
+    "totalTokenBPEResmiKanonik": 18415279368
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -299,19 +309,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 18194291698,
+    "totalTokenKanonikTerverifikasi": 18415279368,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-21 G5: total 18194291698 (>= lantai 16794935092). K1 tidak bertambah: DOAB/edu/stackv2/math_id sample 0 ID sejati. 1 dokumen EN/IT DOAB lolos palsu (part07 Atlas of Renaissance Antiquarianism) tidak diangkat ke rak kanonik. K3 part28 +963947 dokumen / 117711691 BPE (kesehatan, agama, NLI/QA, hukum-QA, ringkasan, hf-safe ID). enwiki tidak diunduh. audio utuh. K4 tidak dijumlahkan. lantai 16794935092 aman.",
-    "tokenKanonikPerintahClaude": 18194291698,
-    "kekuranganTokenKanonik": -17194291698
+    "catatanPenting": "REKONSILIASI 2026-09-21 G5c: total 18415279368 (>= lantai 18194291698). G5c pecah sisa staging sesuai PRD rilis: dialog/instruksi (LaMini/alpaca/sharegpt/cahya/skenario) ke K2 v7 +1971212 dokumen / 219863552 BPE; pelengkap (KBBI/resep/penalaran/idiom/olahraga/keuangan/headline) ke K3 v12 +11873 dokumen / 1124118 BPE. Headline yang gagal gerbang dibuang. K1 v8 utuh. enwiki tidak diunduh. audio utuh. K4 tidak dijumlahkan. Staging dihapus. lantai 18194291698 aman.",
+    "tokenKanonikPerintahClaude": 18415279368,
+    "kekuranganTokenKanonik": -17415279368
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -17194291698,
+  "kekuranganTokenKanonik": -17415279368,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 18194291698,
+  "tokenKanonikPerintahClaude": 18415279368,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
