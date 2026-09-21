@@ -1,5 +1,5 @@
 # PRD
 
-Perintah kerja: [`PRD-GROK-BUILD.md`](PRD-GROK-BUILD.md)
+Pagar di repo: `PRD-RELEASE.md`, `PRD-ATURAN-KERJA.md`, `PRD-RAGET-TEMPLATE.md`, `PRD-RAGET-NEURAL.md`, `FONDASI-TEORI-RAGET.md`.
 
-Pagar: [`PRD-RELEASE.md`](PRD-RELEASE.md), [`PRD-ATURAN-KERJA.md`](PRD-ATURAN-KERJA.md), [`PRD-RAGET-TEMPLATE.md`](PRD-RAGET-TEMPLATE.md), [`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md), [`FONDASI-TEORI-RAGET.md`](FONDASI-TEORI-RAGET.md)
+Perintah kerja Build **hanya** di GitHub Release tag `prd-data-release` file `PRD-GROK-BUILD.md`. Jangan salin ke git.
