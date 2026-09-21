@@ -15,7 +15,7 @@ Sisa tag `id-hf-more-new-quality-2026-09`: DOAB / edu / crawl (bukan wiki).
 
 ## Wajib sekarang
 
-1. Wiki 0019–habis: selesai. Jangan unduh wiki ≤0034 lagi.
+1. Wiki 0019–habis: selesai. Jangan unduh wiki ≤0334 lagi.
 2. Data baru dari sisa tag: masuk K1 (wiki/pelajaran ID) atau K3 (pelengkap ID). Bukan K2/K4. Bukan enwiki.
 3. Tiap part rak baru: update di git `raget/raget-data/jsonl/external/korpus-manifest-total.json` dan `docs/STATUS-KORPUS-LISENSI.md`. Angka = manifest rak, bukan tebakan.
 4. Tag staging masih hidup karena DOAB/edu belum di rak. Jangan hapus audio. Gzip wiki sisa penampung yang sudah di rak boleh dihapus.
