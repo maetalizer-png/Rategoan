@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-26T07:19:36Z",
-  "updatedAt": "2026-09-26T07:19:36Z",
+  "generatedAt": "2026-09-26T07:27:25Z",
+  "updatedAt": "2026-09-26T07:27:25Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -13,7 +13,7 @@
         "sha256": "4bf61d880dfbaac01f3ae4bddab24dc209b1646c57e84038bc8d407b622929ac",
         "totalKataApprox": null,
         "totalTokenBPEResmi": 987475894,
-        "diukurPada": "2026-09-26T07:19:36Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
+        "diukurPada": "2026-09-26T07:27:25Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
         "catatan": "K1 v10 mutu: 7384487 dokumen / 987475894 BPE (sebelum 2236122314). SHA concat Gerbang 2.",
         "komposisiBahasa": {
           "id": 1.0
@@ -64,27 +64,27 @@
       },
       {
         "rak": "K2 korpus-dialog-daerah-bersih",
-        "asal": "v7 + QC lanjut v8 (dup/kalimat ulang/patah, bukan pangkas topik)",
-        "totalDokumen": 2777813,
-        "sizeByteGz": 553534555,
-        "sha256": "e374488741eb407a49d7461182416c82603680136dc5adb17d3d8da71f9ccf87",
+        "asal": "QC lanjut + mutu v9 (bukan pangkas topik)",
+        "totalDokumen": 2757898,
+        "sizeByteGz": 545017614,
+        "sha256": "4be4466e418d87c03ddc0453ab1c3b8fd6fdb4fb9763fac8f0a0946e1da58452",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 482952902,
-        "diukurPada": "2026-09-23T11:00:59Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang",
-        "catatan": "K2 v8 QC lanjut: 2777813 dokumen / 482952902 BPE (sebelum 484678715; dup 919, ubah 64704, kalimat ulang 20355, patah 25283). SHA concat Gerbang 2.",
+        "totalTokenBPEResmi": 462997126,
+        "diukurPada": "2026-09-26T07:27:25Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
+        "catatan": "K2 v9 mutu: 2757898 dokumen / 462997126 BPE (sebelum 482952902). SHA concat Gerbang 2.",
         "komposisiBahasa": {
           "id": 1.0
         },
         "parts": [
           {
             "name": "korpus-dialog-daerah-bersih.jsonl.gz.part00",
-            "sha256": "1c8f74af5d1522cef23a2911b747c73547b2b7e356f2ec7b3d30ffe68c74af25",
-            "bytes": 420166635
+            "sha256": "f89f59e8626f699ce809e345caee463b42feef8b1a1629254a010ea65af17953",
+            "bytes": 412137650
           },
           {
             "name": "korpus-dialog-daerah-bersih.jsonl.gz.part01",
-            "sha256": "9bc49453813f3a2cb859d0af062f2fb00ba82082e247fe08b9494a8b337b4ed9",
-            "bytes": 133367920
+            "sha256": "13ab9139eba40a478a707b5a1bec39299f3abf01031a42100311dd2c69149c2b",
+            "bytes": 132879964
           }
         ],
         "tierUkuran": "XL"
@@ -257,8 +257,8 @@
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 95633793,
-    "totalTokenBPEResmiKanonik": 16747515364
+    "totalDokumenKanonik": 95613878,
+    "totalTokenBPEResmiKanonik": 16727559588
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -314,19 +314,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 16747515364,
+    "totalTokenKanonikTerverifikasi": 16727559588,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 16747515364. Sampah boleh turun dari 18415279368; bukan pangkas topik. K1 v10 mutu + wikibooks, K2/K3 belum.",
-    "tokenKanonikPerintahClaude": 16747515364,
-    "kekuranganTokenKanonik": -15747515364
+    "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 16727559588. Sampah boleh turun dari 18415279368; bukan pangkas topik. K1+K2 mutu, K3 belum.",
+    "tokenKanonikPerintahClaude": 16727559588,
+    "kekuranganTokenKanonik": -15727559588
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -15747515364,
+  "kekuranganTokenKanonik": -15727559588,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 16747515364,
+  "tokenKanonikPerintahClaude": 16727559588,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
