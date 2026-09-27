@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-27T14:01:23Z",
-  "updatedAt": "2026-09-27T14:01:23Z",
+  "updatedAt": "2026-09-27T23:31:27Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -9,8 +9,8 @@
         "rak": "K1 korpus-ensiklopedia-bersih",
         "asal": "QC lanjut + mutu ensiklopedia (bukan pangkas topik)",
         "totalDokumen": 7588004,
-        "sizeByteGz": 2856144178,
-        "sha256": "2a3824d18416999a240e5c902eceb92288a7a8fc09b57ddbec1814a4d176cd54",
+        "sizeByteGz": 2846650197,
+        "sha256": "442752cf6ceba67a5bb46dd212ac70b990aaba04cf90cb7dddd1a101593634fd",
         "totalKataApprox": null,
         "totalTokenBPEResmi": 2235779126,
         "diukurPada": "2026-09-27T12:30:17Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
@@ -21,113 +21,38 @@
         "parts": [
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part00",
-            "sha256": "873730d4882391fc3e6f97798619bd5a7307fde719f73a2dd891c7debd071edb",
-            "bytes": 420806313
+            "sha256": "488181f3ced25a74f07a6123d6b6738e43f3bc4cf6a91fa28610c52536b1bede",
+            "bytes": 420248632
           },
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part01",
-            "sha256": "024fde3453a0f34edf19fbc2eb382c7947212467e10a81eb0421c430ef509603",
-            "bytes": 405130734
+            "sha256": "a092911ea198ac12559d62773a4ab59db58f612de096d1e6da6c6a2e238c67df",
+            "bytes": 420375315
           },
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part02",
-            "sha256": "1419524cd77b92bcd4e15d707714c8403c993d3022fcfe77a6165dc21d261359",
-            "bytes": 418193922
+            "sha256": "ad54b808b21782de976d019ea7c72448e4b9f1dd510c81f5e1be6c3c1136f185",
+            "bytes": 420315094
           },
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part03",
-            "sha256": "a8ffe50887e54900d08f629327f79023d3b8f6f62d219333a0856e39dc2cdff5",
-            "bytes": 364167425
+            "sha256": "1ef06b89559b49a658c873f3c6087765168139f1648cb0655178773b1c389cd6",
+            "bytes": 429348557
           },
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part04",
-            "sha256": "699a24ca5915b2ba5bbc46d4de1a28d9d900a70617a29040251ed7109f1d4989",
-            "bytes": 6257143
+            "sha256": "0b7368ff34b8f4f02a3dce4ba02788ea957ead7bb523da83cf440617fd9a5021",
+            "bytes": 427422534
           },
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part05",
-            "sha256": "cfd18bc9de91d0be10c5089d17c74943fd70bd863fef48489079470c047ffe74",
-            "bytes": 2914335
+            "sha256": "d9dee46215a2cffe62ea793486a1dc073a3a8510854f1e51930e21423083c278",
+            "bytes": 379552056
           },
           {
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part06",
-            "sha256": "a700af4b00dffd04e94e21c9f78bddbc1b0e18dd292a7c793985b6a438693ec3",
-            "bytes": 1502394
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part07",
-            "sha256": "7bf0ade331ef215b94157ed1e353e5ef1a6fe8a8cbb5cbbe13d3a69a1fbb6ff5",
-            "bytes": 12495451
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part08",
-            "sha256": "8bdedbee9f5a3b879352a0745f9e72d0702f829cc1be2ecfec84fcdfbf7073ce",
-            "bytes": 397248972
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part09",
-            "sha256": "68d3454386402d00528585794d6f8574f56dcd024777f5bf50e1d698ecc7aaa7",
-            "bytes": 398877247
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part10",
-            "sha256": "3bd914342ca17523d9d00c31a31ebeb6e27383ba7233a14390837a7c68583382",
-            "bytes": 164767312
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part11",
-            "sha256": "c13f66c7d40bd96cdfdefe86acc20a57088007c57c70ca2387f345c209909fea",
-            "bytes": 16650346
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part12",
-            "sha256": "4320acd7b9f896d5676ad05fe66971dffecc6b895e47cb2eaa8b4b4a8662ed15",
-            "bytes": 11543780
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part13",
-            "sha256": "b84bfd11e5601eb018d6dadfe829ee3c501607c7a82a96d2f6fd6b8239443681",
-            "bytes": 16518490
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part14",
-            "sha256": "ca157313c22819ce9a775f5d3f85d378f5c513725715a1d1c866883992441327",
-            "bytes": 7797209
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part15",
-            "sha256": "bb38f3ca138633c7ff57a09e4289c76d9f9ab80442492897c29bd3571d12c7cc",
-            "bytes": 28207419
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part16",
-            "sha256": "95a66fd51c7d87ad9f7162330c02e58e9aa22f1b729229614e24b09d7e3f5b03",
-            "bytes": 18641815
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part17",
-            "sha256": "4ae4f2d66698a0f35e4219cade8b982042791992fe255ac8b235dfbab2416c91",
-            "bytes": 27468641
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part18",
-            "sha256": "c38f0c09a4dc58f2c4357b0f1266f596ddb0384c12350f92b889330d36032643",
-            "bytes": 28948991
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part19",
-            "sha256": "c9cdb2f55323e27e7b0a29ac37b4248e371d9535193b636c5382eb7de13e9d65",
-            "bytes": 32355041
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part20",
-            "sha256": "c1109f50434bd67676955bf17e444246805ec66c8243c5859a0c545f4c224035",
-            "bytes": 28342458
-          },
-          {
-            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part21",
-            "sha256": "cc581b2cd87a6becd08863c8058fe60ea4d7efe5804a9e040dd3ba2b396afe1c",
-            "bytes": 47308740
+            "sha256": "ce6aa90dab5c22b4d492ecc8754ab8d1ecf65e1503adea1ea9ea1609b63059e5",
+            "bytes": 349388009
           }
         ],
         "tierUkuran": "XL"
@@ -136,8 +61,8 @@
         "rak": "K2 korpus-dialog-daerah-bersih",
         "asal": "QC lanjut + mutu v9 (bukan pangkas topik)",
         "totalDokumen": 2757898,
-        "sizeByteGz": 545017614,
-        "sha256": "4be4466e418d87c03ddc0453ab1c3b8fd6fdb4fb9763fac8f0a0946e1da58452",
+        "sizeByteGz": 540274521,
+        "sha256": "7b23d622c896591952906a1cd6f8a779449177f9e2a3f5f2c704861e1a58a420",
         "totalKataApprox": null,
         "totalTokenBPEResmi": 462997126,
         "diukurPada": "2026-09-26T07:27:25Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
@@ -147,14 +72,9 @@
         },
         "parts": [
           {
-            "name": "korpus-dialog-daerah-bersih.jsonl.gz.part00",
-            "sha256": "f89f59e8626f699ce809e345caee463b42feef8b1a1629254a010ea65af17953",
-            "bytes": 412137650
-          },
-          {
-            "name": "korpus-dialog-daerah-bersih.jsonl.gz.part01",
-            "sha256": "13ab9139eba40a478a707b5a1bec39299f3abf01031a42100311dd2c69149c2b",
-            "bytes": 132879964
+            "name": "korpus-dialog-daerah-bersih.jsonl.gz",
+            "sha256": "7b23d622c896591952906a1cd6f8a779449177f9e2a3f5f2c704861e1a58a420",
+            "bytes": 540274521
           }
         ],
         "tierUkuran": "XL"
