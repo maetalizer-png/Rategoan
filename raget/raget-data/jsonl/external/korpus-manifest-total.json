@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-27T02:48:38Z",
-  "updatedAt": "2026-09-27T02:48:38Z",
+  "generatedAt": "2026-09-27T10:27:12Z",
+  "updatedAt": "2026-09-27T10:27:12Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -8,13 +8,13 @@
       {
         "rak": "K1 korpus-ensiklopedia-bersih",
         "asal": "QC lanjut + mutu ensiklopedia (bukan pangkas topik)",
-        "totalDokumen": 7583752,
-        "sizeByteGz": 2597255931,
-        "sha256": "7aba86c5f74b5aa84e66a0ed978a9e45a7ddb224da32259fa14f359ad0f4e082",
+        "totalDokumen": 7588004,
+        "sizeByteGz": 2861050789,
+        "sha256": "6b8085eba753af3ddfadbaa4316d290bdd8ecef492a1e236bf644a40b6657622",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 1938337197,
-        "diukurPada": "2026-09-27T02:48:38Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
-        "catatan": "K1 ensiklopedia mutu: 7583752 dokumen / 1938337197 BPE (sebelum 2236122314). SHA concat Gerbang 2.",
+        "totalTokenBPEResmi": 2236191408,
+        "diukurPada": "2026-09-27T10:27:12Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
+        "catatan": "K1 ensiklopedia mutu: 7588004 dokumen / 2236191408 BPE (sebelum 2236122314). SHA concat Gerbang 2.",
         "komposisiBahasa": {
           "id": 1.0
         },
@@ -73,6 +73,61 @@
             "name": "korpus-ensiklopedia-bersih.jsonl.gz.part10",
             "sha256": "e0b896d5128047c02d627efe53a09b23f2bf5e31da03d6cf45f91c13f2dd171d",
             "bytes": 165740373
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part11",
+            "sha256": "41bf8d4a9d0e9e29406096c393e17c161565bc2193f6e86f26baa54e3091cc0a",
+            "bytes": 16651618
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part12",
+            "sha256": "44cbff2744369d37added6a23ffc4ec9b6e0cdcacacbeb933b09076e4e898b2b",
+            "bytes": 11550580
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part13",
+            "sha256": "30eda8f030132941c4bf8a38b45210fb08136ac2d3ef003ca28fdefa75ecee79",
+            "bytes": 16602496
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part14",
+            "sha256": "094f917771482fdd57e1a53832ffc1d9a84e41024ca8985d53dcd965eb1dab9b",
+            "bytes": 7799540
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part15",
+            "sha256": "8a245171dbc96cd4b4c83433388fe395049e79b25ce8bc193d0782ca478a6a3e",
+            "bytes": 28205589
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part16",
+            "sha256": "26c8d876b2b36e283494295a5b9d44ac34c13e3aeee46ea155751ce4b5213b2b",
+            "bytes": 18642488
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part17",
+            "sha256": "a5575919bf17271ac1efe5f2f4f09989642f97e54e0a1601bf0de8f72bbbcc69",
+            "bytes": 27474070
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part18",
+            "sha256": "88111e557825cac8c7b94b0ff94c659ca476dce7807dc4c42cd306e991c89744",
+            "bytes": 28948502
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part19",
+            "sha256": "3dc9d6a1039e2ced8a47cfb0f1c6769747795f31c22a0a97ef551dedcadb3440",
+            "bytes": 32357501
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part20",
+            "sha256": "7dff9b89d0c64414e0fa50024342ed70ab77dc442ac3182ec0900e7fba52812c",
+            "bytes": 28325379
+          },
+          {
+            "name": "korpus-ensiklopedia-bersih.jsonl.gz.part21",
+            "sha256": "4a28087ed933bf55ddaaacf2e7dbec17ea78ffb0c673df463433b1d547444a3b",
+            "bytes": 47237095
           }
         ],
         "tierUkuran": "XL"
@@ -272,8 +327,8 @@
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 95813143,
-    "totalTokenBPEResmiKanonik": 17678420891
+    "totalDokumenKanonik": 95817395,
+    "totalTokenBPEResmiKanonik": 17976275102
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -329,19 +384,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 17678420891,
+    "totalTokenKanonikTerverifikasi": 17976275102,
     "totalKataApproxStagingBelumDireview": 8137547049,
-    "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 17678420891. Sampah boleh turun dari 18415279368; bukan pangkas topik. K1 dipulihkan tanpa nomor seri. BPE sebelum pangkas 2236122314, sesudah pangkas 987475894, sekarang 1938337197. Dokumen dikembalikan 199265 (950861303 BPE) dari wikimedia shard 0003-0029, gerbang minimal 2 kata tugas Indonesia, 30-15000 kata. Shard 0030-0034 tidak dimasukkan. K2 tidak disentuh. K3 tidak diubah.",
-    "tokenKanonikPerintahClaude": 17678420891,
-    "kekuranganTokenKanonik": -16678420891
+    "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 17976275102. Sampah boleh turun dari 18415279368; bukan pangkas topik. K1 ditutup selisihnya. BPE 1938337197 naik 297854211 menjadi 2236191408. Dokumen panjang dikembalikan 4252. Target sebelum pangkas 2236122314. K2 tidak disentuh. K3 tidak diubah. Tanpa nomor seri.",
+    "tokenKanonikPerintahClaude": 17976275102,
+    "kekuranganTokenKanonik": -16976275102
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -16678420891,
+  "kekuranganTokenKanonik": -16976275102,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 17678420891,
+  "tokenKanonikPerintahClaude": 17976275102,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
