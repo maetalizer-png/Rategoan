@@ -29,3 +29,9 @@ Dialog terjemahan Alpaca tidak dimasukkan.
 Jangan pangkas rak hidup. Jangan enwiki, Dolma, Stack-edu EN, Arxiv EN, crawl campur.
 Jangan hapus audio. Jangan K4 ke lantai tiga rak. Jangan nomor seri. Jangan latih.
 Jangan commit `PRD-GROK-BUILD.md` ke git.
+
+
+## Peringatan 2026-09-28
+K3 `part00`–`part02` tertimpa. SHA asli ada di PRD-GROK-BUILD pada tag `prd-data-release`.
+Jangan anggap angka dokumen/BPE K3 valid sampai ketiga part itu kembali.
+part03–part23 tidak ikut tertimpa. K1 wikisource dan K2 tidak rusak.
