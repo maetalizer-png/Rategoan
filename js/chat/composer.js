@@ -199,6 +199,9 @@ export const composer = {
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
+    if (directReply == null && flowHub.wantsThink(text)) {
+      directReply = flowHub.thinkBlock(text);
+    }
     const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
     if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
       if (fileSrc.fileText) {
@@ -209,13 +212,10 @@ export const composer = {
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
-    const reply = await chat.ask(routedText, { searching: isWebsearch, directReply });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
-    }
-    if (reply && flowHub.wantsThink(text)) {
-      reply = flowHub.thinkBlock(text) + '\n\n' + reply;
     }
     if (isWebsearch && reply) {
       try {
