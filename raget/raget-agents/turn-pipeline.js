@@ -1,4 +1,5 @@
 import { routerIntent } from './router-intent.js';
+import { flowHub } from './flow-hub.js';
 
 const SLIDE_ACTION_RE = /\b(buat(kan)?|bikin|jadikan|susun|export|unduh)\b/i;
 const SLIDE_NOUN_RE = /\b(slide|ppt|pptx)\b/i;
@@ -33,6 +34,7 @@ function inspect(prompt, context) {
   if (/^(lanjut|lanjutkan|dari ini)$/i.test(text) && prev) route = 'slide';
   else if (SLIDE_ACTION_RE.test(text) && SLIDE_NOUN_RE.test(text)) route = 'slide';
   else if (file && FILE_RE.test(text)) route = 'file';
+  else if (flowHub.wantsCollection(text) || tool === 'cari_koleksi') route = 'collection';
   else if (web || tool === 'websearch') route = 'web';
   else if (tool) route = 'tool';
   return {
@@ -40,6 +42,7 @@ function inspect(prompt, context) {
     route,
     tool: tool || null,
     web,
+    queries: route === 'web' ? flowHub.queries(text) : [],
     hasFile: !!file,
     hasLastAnswer: !!prev,
     answerType: routerIntent.detectAnswerType(text),
