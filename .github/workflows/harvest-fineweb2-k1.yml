@@ -1,0 +1,43 @@
+name: harvest-fineweb2-k1
+on:
+  push:
+    branches: [main]
+    paths: [docs/.harvest-fineweb2-trigger]
+permissions:
+  contents: write
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - name: Harvest FineWeb2 Indonesian shards
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="data-baru-fineweb2-k1-2026-09"
+          mkdir -p work
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/HuggingFaceFW/fineweb-2/tree/main/data/ind_Latn/train?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=60) as r:
+              items=json.load(r)
+          files=sorted([x["path"] for x in items if x.get("type")=="file" and x["path"].endswith(".parquet")])
+          open("work/files.txt","w").write("\n".join(files[:3])+"\n")
+          PY
+          gh release create "$TAG" --title "Data Baru — FineWeb2 Indonesian K1 — 2026-09" --notes "Standalone K1 candidate harvest. Source: HuggingFaceFW/fineweb-2, subset ind_Latn/train. License: ODC-By 1.0. Intentionally outside K1/K2/K3/K4 racks."
+          i=0
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            i=$((i+1))
+            base=$(basename "$path")
+            out="work/fineweb2-id-k1-$i-$base"
+            curl -L --fail --retry 5 --retry-all-errors -o "$out" "https://huggingface.co/datasets/HuggingFaceFW/fineweb-2/resolve/main/$path?download=true"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            size=$(stat -c%s "$out")
+            printf '{"source":"HuggingFaceFW/fineweb-2","subset":"ind_Latn","split":"train","path":"%s","bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$path" "$size" "$sha" > "work/$i-manifest.json"
+            gh release upload "$TAG" "$out" "work/$i-manifest.json" --clobber
+            rm -f "$out"
+          done < work/files.txt
+          gh release upload "$TAG" work/files.txt --clobber
