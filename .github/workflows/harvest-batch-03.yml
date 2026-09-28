@@ -1,0 +1,67 @@
+name: Harvest new Indonesian datasets batch 03
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-batch-03]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install
+        run: python -m pip install --upgrade pip && pip install datasets huggingface_hub
+      - name: Harvest
+        run: |
+          cat > /tmp/harvest.py <<'PY'
+          import gzip,json,hashlib,re
+          from pathlib import Path
+          from datasets import load_dataset
+          out=Path("/tmp/out"); out.mkdir()
+          def pack(name, rows, meta):
+              p=out/(name+".jsonl.gz"); seen=set(); n=0; words=0
+              with gzip.open(p,"wt",encoding="utf-8",compresslevel=9) as g:
+                for r in rows:
+                  if not isinstance(r,dict): continue
+                  vals=[]
+                  for k in ("text","input_text","answer","target_json","content"):
+                    if isinstance(r.get(k),str) and r[k].strip(): vals.append(r[k].strip())
+                  if not vals:
+                    vals=[v for v in r.values() if isinstance(v,str) and v.strip()]
+                  if not vals: continue
+                  text=max(vals,key=len)
+                  text=re.sub(r"\s+"," ",text).strip()
+                  if len(text)<80: continue
+                  h=hashlib.sha1(text.encode()).hexdigest()
+                  if h in seen: continue
+                  seen.add(h)
+                  g.write(json.dumps({"text":text,"source":meta["source"],"license":meta["license"],"lang":meta["lang"],"metadata":{k:v for k,v in r.items() if k not in {"text","input_text","answer","target_json","content","messages","prompt"}}},ensure_ascii=False,default=str)+"\n")
+                  n+=1; words+=len(text.split())
+              sh=hashlib.sha256(p.read_bytes()).hexdigest()
+              m={**meta,"output":p.name,"documents":n,"approx_words":words,"bytes":p.stat().st_size,"sha256":sh}
+              (out/(name+".manifest.json")).write_text(json.dumps(m,ensure_ascii=False,indent=2)+"\n")
+          ds=load_dataset("Haeryz/putusan-windowed-extraction",split="train",streaming=True)
+          pack("putusan-windowed-extraction-standalone",ds,{"source":"Haeryz/putusan-windowed-extraction","license":"CC-BY-4.0","lang":"id","domain":"Indonesian court decisions / structured extraction","standalone":True})
+          configs=["ace","jv","su","min","bug","ban","bjn","mad"]
+          for cfg in configs:
+            ds=load_dataset("AksaraLLM/aksara-bahasa-daerah-v1",cfg,split="train",streaming=True)
+            def rows(ds=ds,cfg=cfg):
+              for r in ds:
+                r=dict(r); r["language_config"]=cfg; yield r
+            pack("aksara-regional-"+cfg,rows(),{"source":"AksaraLLM/aksara-bahasa-daerah-v1","license":"CC-BY-SA-4.0","lang":cfg,"domain":"Indonesian regional language","standalone":True})
+          (out/"BATCH-MANIFEST.json").write_text(json.dumps({"batch":"data-baru-batch-03-2026-09","not_K1_K2_K3_K4":True,"sources":[p.name for p in out.glob("*.manifest.json")]},indent=2))
+          PY
+          python /tmp/harvest.py
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: data-baru-batch-03-2026-09
+        run: |
+          files=(/tmp/out/*.jsonl.gz /tmp/out/*.manifest.json /tmp/out/BATCH-MANIFEST.json)
+          gh release create "$TAG" "${files[@]}" --title "Data Baru Batch 03 — Regional & Court" --notes "Standalone new data. No K1/K2/K3/K4 changes. Regional sources retain CC-BY-SA attribution; court corpus is CC-BY-4.0."
+          gh release view "$TAG" --json name,tagName,assets,url
+      - name: Cleanup trigger workflow
+        if: always()
+        run: true
