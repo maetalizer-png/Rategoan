@@ -11,7 +11,7 @@ function sentences(text) {
   return cleanLeak(text)
     .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
-    .filter((s) => s.length > 20 && !/^yang biasa dibahas/i.test(s) && !/^hasil pencarian web/i.test(s));
+    .filter((s) => s.length > 20 && !/^yang biasa dibahas/i.test(s) && !/^hasil pencarian web/i.test(s) && !/^rencana riset/i.test(s) && !/^proses berpikir/i.test(s));
 }
 
 function threePoints(text) {
@@ -39,21 +39,31 @@ function wantsResearch(text) {
   return /\b(riset mendalam|teliti sumber|investigasi)\b/i.test(text || '');
 }
 
+function wantsLesson(text) {
+  return /\b(belajar terpandu|ajarin langkah|langkah demi langkah)\b/i.test(text || '');
+}
+
 function thinkBlock(topic) {
   const t = String(topic || '').replace(/\b(pikirkan|berpikir keras|mode berpikir)\b/gi, '').trim();
-  return [
-    'Proses berpikir',
-    '1. Topik: ' + (t || 'pertanyaan pengguna'),
-    '2. Cek fakta lokal dulu, baru web jika perlu.',
-    '3. Jangan campur sapaan dengan ensiklopedia.',
-    '4. Sitasi hanya jika ada sumber web.',
-  ].join('\n');
+  return ['Proses berpikir', '1. Topik: ' + (t || 'pertanyaan pengguna'), '2. Fakta lokal dulu.', '3. Web hanya jika perlu.'].join('\n');
 }
 
 function researchPlan(topic) {
   const t = String(topic || '').replace(/^riset\s+(mendalam\s+)?/i, '').trim() || 'topik';
-  const q = queries(t);
-  return ['Rencana riset: ' + t, 'Kueri: ' + q.join(' · ')].join('\n');
+  return ['Rencana riset: ' + t, 'Kueri: ' + queries(t).join(' · ')].join('\n');
+}
+
+function lesson(text, title) {
+  const bits = sentences(text).slice(0, 4);
+  if (!bits.length) return 'Belum ada bahan. Tanya dulu atau nyalakan web, baru tap Belajar.';
+  const lines = ['Belajar terpandu' + (title ? ' — ' + title : ''), ''];
+  bits.forEach((s, i) => {
+    lines.push('Langkah ' + (i + 1));
+    lines.push(s);
+    lines.push('');
+  });
+  lines.push('Ulangi langkah yang belum hafal. Tanya bagian yang masih gelap.');
+  return lines.join('\n');
 }
 
 export const flowHub = Object.freeze({
@@ -63,6 +73,8 @@ export const flowHub = Object.freeze({
   wantsCollection,
   wantsThink,
   wantsResearch,
+  wantsLesson,
   thinkBlock,
   researchPlan,
+  lesson,
 });
