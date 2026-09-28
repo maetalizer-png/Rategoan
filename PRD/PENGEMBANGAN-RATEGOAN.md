@@ -1,20 +1,16 @@
 # Pengembangan Rategoan
 
-Sumber Drive terbaru (28 Sep 23.26 WIB): 4 modul / 4 sprint.
-Bukan PRD data.
+Drive 28 Sep: 4 sprint. Bukan PRD data.
 
-## Sprint 1 — sudah di main
+## Sudah di main
+Sprint 1: web→koleksi, tanya koleksi, slide, panel kanan sunting+PPTX.
+Sprint 2: `proyek baru Nama` / `pindah proyek Nama` / `proyek ini`. Chat & koleksi pakai projectId. Memori gaya formal/santai.
+Sprint 3: ketik `pikirkan` atau `berpikir keras` → blok Proses berpikir. `riset mendalam topik` → rencana 4 langkah + 5 kueri.
+Sprint 4: pengingat lokal yang sudah ada. Konektor WA/Drive kirim otomatis **belum** (butuh akun/server).
 
-- Web → Koleksi otomatis + ringkas 3 poin
-- Tanya koleksi (`dari koleksi` / `tanya koleksi`)
-- Slide dari chat/koleksi
-- Panel kanan `#artifact-panel` bisa disunting + Unduh PPTX
-- File: `js/ui/artifact.js`, `css/ui/artifact.css`, `flow-hub.js`
-
-## Sprint 2–4 — belum (butuh kerja terpisah)
-
-2 Proyek/notebook isolasi + memori preferensi
-3 Thinking + deep research multi-sumber + UI progres
-4 Konektor Drive/WA + jadwal latar — tidak jalan tanpa server
-
-Dilarang: BGE-M3, Pyodide, model luar di dalam Raget.
+## Perintah
+proyek baru Riset Pasar
+tanya koleksi
+riset mendalam ilmu fisika
+pikirkan apa itu fisika
+tap Slide
