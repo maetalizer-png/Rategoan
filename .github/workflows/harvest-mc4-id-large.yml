@@ -17,56 +17,68 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Harvest new mC4 Indonesian corpus
+      - name: Harvest 20GB+ mC4 Indonesian
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
           TAG="data-baru-mc4-id-2026-09"
           mkdir -p work
-          gh release view "$TAG" --repo maetalizer-png/Rategoan >/dev/null 2>&1 || gh release create "$TAG" --repo maetalizer-png/Rategoan --title "Data Baru — mC4 Indonesian — 2026-09" --notes "Standalone large K1 candidate. Source: indonesian-nlp/mc4-id. License: ODC-By 1.0. Not placed in K1/K2/K3/K4. Source is cleaned Indonesian mC4/Common Crawl."
-
-          python -m pip install --quiet pyarrow pandas
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru — mC4 Indonesian — 2026-09" --notes "Standalone large K1 candidate. Source: indonesian-nlp/mc4-id / original shard store. License ODC-By 1.0. Not placed in K1/K2/K3/K4."
 
           python - <<'PY'
-          import json, urllib.request
-          api="https://huggingface.co/api/datasets/indonesian-nlp/mc4-id/tree/main?recursive=true&expand=false"
-          with urllib.request.urlopen(api, timeout=120) as r:
-              items=json.load(r)
-          files=sorted(x["path"] for x in items if x.get("type")=="file" and x["path"].startswith("full/") and x["path"].endswith(".parquet"))
-          if not files:
-              raise SystemExit("No full parquet files found")
-          open("work/files.txt","w").write("\n".join(files)+"\n")
-          print("files",len(files))
+          import pathlib
+          n=220
+          pathlib.Path("work/shards.txt").write_text("\n".join(str(i) for i in range(n))+"\n")
+          print("selected shards",n)
           PY
 
-          i=0
-          while IFS= read -r path; do
-            [ -z "$path" ] && continue
-            i=$((i+1))
-            src="work/src-$i.parquet"
-            out="work/mc4-id-$i.jsonl.gz"
-            curl -L --fail --retry 6 --retry-all-errors -o "$src" "https://huggingface.co/datasets/indonesian-nlp/mc4-id/resolve/main/$path?download=true"
-
-            python - "$src" "$out" <<'PY'
-          import sys, gzip, json, pyarrow.parquet as pq
-          src,out=sys.argv[1],sys.argv[2]
-          pf=pq.ParquetFile(src)
-          with gzip.open(out,"wt",encoding="utf-8") as f:
-              for batch in pf.iter_batches(batch_size=20000, columns=["text","timestamp","url"]):
-                  cols=batch.to_pydict()
-                  for j,t in enumerate(cols["text"]):
-                      f.write(json.dumps({"text":t,"timestamp":cols["timestamp"][j],"url":cols["url"][j],"source":"indonesian-nlp/mc4-id","license":"ODC-By-1.0"},ensure_ascii=False,separators=(",",":"))+"\n")
+          part=1
+          bytes_out=0
+          out="work/mc4-id-part-$part.jsonl.gz"
+          python - "$out" <<'PY'
+          import gzip,sys
+          f=gzip.open(sys.argv[1],"wt",encoding="utf-8")
+          f.close()
           PY
 
-            sha=$(sha256sum "$out" | awk '{print $1}')
-            size=$(stat -c%s "$out")
-            printf '{"source":"indonesian-nlp/mc4-id","subset":"full","split":"train","path":"%s","bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$path" "$size" "$sha" > "work/$i-manifest.json"
-            gh release upload "$TAG" --repo maetalizer-png/Rategoan "$out" "work/$i-manifest.json" --clobber
-            rm -f "$src" "$out"
-          done < work/files.txt
+          while IFS= read -r idx; do
+            src="work/shard-$idx.json.gz"
+            url=$(printf 'https://huggingface.co/datasets/munggok/mc4-id/resolve/main/mc4-id-filter/c4-id-%05d-of-01016.json.gz?download=true' "$idx")
+            curl -L --fail --retry 6 --retry-all-errors -o "$src" "$url"
 
-          printf '{"dataset":"indonesian-nlp/mc4-id","files_processed":%s,"license":"ODC-By-1.0","status":"harvested"}\n' "$i" > work/manifest-total.json
-          gh release upload "$TAG" --repo maetalizer-png/Rategoan work/manifest-total.json work/files.txt --clobber
+            python - "$src" "work/current.jsonl.gz" <<'PY'
+          import sys,gzip,json,os
+          src,out=sys.argv[1:]
+          # Append decompressed JSONL records to the current gzip part.
+          with gzip.open(src,"rt",encoding="utf-8",errors="replace") as inp, gzip.open(out,"at",encoding="utf-8") as f:
+              for line in inp:
+                  if line.strip():
+                      f.write(line)
+          PY
+
+            rm -f "$src"
+
+            size=$(stat -c%s "work/current.jsonl.gz")
+            if [ "$size" -ge 1700000000 ]; then
+              sha=$(sha256sum work/current.jsonl.gz|awk '{print $1}')
+              mv work/current.jsonl.gz "work/mc4-id-part-$part.jsonl.gz"
+              printf '{"dataset":"indonesian-nlp/mc4-id","part":%s,"bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$part" "$size" "$sha" > "work/mc4-id-part-$part.manifest.json"
+              gh release upload "$TAG" --repo "$REPO" "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json" --clobber
+              rm -f "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json"
+              part=$((part+1))
+              : > work/current.jsonl.gz
+            fi
+          done < work/shards.txt
+
+          if [ -s work/current.jsonl.gz ]; then
+            size=$(stat -c%s work/current.jsonl.gz)
+            sha=$(sha256sum work/current.jsonl.gz|awk '{print $1}')
+            mv work/current.jsonl.gz "work/mc4-id-part-$part.jsonl.gz"
+            printf '{"dataset":"indonesian-nlp/mc4-id","part":%s,"bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$part" "$size" "$sha" > "work/mc4-id-part-$part.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json" --clobber
+          fi
+
+          printf '{"dataset":"indonesian-nlp/mc4-id","shards_processed":220,"status":"harvested","license":"ODC-By-1.0"}\n' > work/manifest-total.json
+          gh release upload "$TAG" --repo "$REPO" work/manifest-total.json --clobber
