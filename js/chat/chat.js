@@ -379,7 +379,8 @@ export const chat = {
     // directReply: dipakai composer.js saat file terlampir (PDF/teks) sudah
     // diekstrak lokal - jawab langsung dari isi file, tidak lewat mesin
     // Raget (yang tidak punya akses ke isi file terlampir sama sekali).
-    const reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
+    let reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
+    if (reply != null && opts && opts.preamble) reply = String(opts.preamble) + '\n\n' + reply;
     if (searching) {
       // Koneksi cepat bisa bikin fetch selesai dalam hitungan puluhan ms -
       // indikator "Mencari di internet..." bisa kelewat kedip tanpa sempat
