@@ -26,19 +26,18 @@ const TEMPLATE = `
             </div>
             <div class="auth-or"><span>atau</span></div>
           </div>
-          <p class="gate-subtitle">Nama tampilan lokal (opsional) — tersimpan di perangkat ini saja, tidak dikirim atau diverifikasi ke server mana pun.</p>
           <div class="login-tabs">
             <button id="login-tab-gmail" class="login-tab active">Email</button>
             <button id="login-tab-phone" class="login-tab">Telepon</button>
           </div>
           <div id="login-form-gmail" class="login-form">
             <input id="login-email" class="auth-input" type="email" placeholder="nama@email.com" autocomplete="email">
-            <input id="login-password" class="auth-input" type="password" placeholder="Sandi lokal (bebas, tidak diverifikasi)" autocomplete="current-password">
-            <button id="login-gmail-submit" class="auth-submit auth-submit-plain">Pakai nama ini</button>
+            <input id="login-password" class="auth-input" type="password" placeholder="Sandi" autocomplete="current-password">
+            <button id="login-gmail-submit" class="auth-submit auth-submit-plain">Lanjutkan</button>
           </div>
           <div id="login-form-phone" class="login-form" hidden>
             <input id="login-phone" class="auth-input" type="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
-            <button id="login-phone-submit" class="auth-submit auth-submit-plain">Kirim kode lokal</button>
+            <button id="login-phone-submit" class="auth-submit auth-submit-plain">Kirim kode</button>
             <div id="login-otp-row" class="login-form" hidden>
               <input id="login-otp" class="auth-input" type="text" inputmode="numeric" maxlength="6" placeholder="6 digit kode">
               <button id="login-otp-submit" class="auth-submit auth-submit-plain">Verifikasi</button>
@@ -105,7 +104,7 @@ export const login = {
     $('login-phone-submit').onclick = () => this.submitPhone();
     $('login-otp-submit').onclick = () => this.verify();
     const placeholder = $('google-signin-placeholder');
-    if (placeholder) placeholder.onclick = () => toast.show('Login Google belum aktif di build ini — pakai Email di bawah dulu ya.');
+    if (placeholder) placeholder.onclick = () => googleAuth.ensure();
     this.setMethod('gmail');
     account.refresh();
     const loginView = $('view-login');
