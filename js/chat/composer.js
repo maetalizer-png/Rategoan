@@ -121,6 +121,8 @@ async function trySlideRequest(text, att, session) {
 
 export const composer = {
   websearchActive: false,
+  thinkActive: false,
+  researchActive: false,
   autoGrow() {
     const inp = $('chat-input');
     inp.style.height = 'auto';
@@ -180,7 +182,8 @@ export const composer = {
       store.save();
       return;
     }
-    if (flowHub.wantsResearch(text)) {
+    if (this.researchActive || flowHub.wantsResearch(text)) {
+      this.setWebsearch(true);
       await chat.ask(text, { directReply: flowHub.researchPlan(text) });
       store.save();
       return;
@@ -209,7 +212,7 @@ export const composer = {
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: flowHub.wantsThink(text) ? flowHub.thinkBlock(text) : '' });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '' });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
@@ -231,6 +234,14 @@ export const composer = {
     }
     store.save();
     history.render();
+  },
+
+  _toggleSwitch(id, on) {
+    const card = $(id);
+    if (card) {
+      card.classList.toggle('active', on);
+      card.setAttribute('aria-checked', String(on));
+    }
   },
   setWebsearch(active) {
     this.websearchActive = active;
@@ -262,6 +273,41 @@ export const composer = {
         this.setWebsearch(!this.websearchActive);
       };
     }
+    const thinkCard = $('sheet-think');
+    if (thinkCard) thinkCard.onclick = () => {
+      this.thinkActive = !this.thinkActive;
+      this._toggleSwitch('sheet-think', this.thinkActive);
+    };
+    const researchCard = $('sheet-research');
+    if (researchCard) researchCard.onclick = () => {
+      this.researchActive = !this.researchActive;
+      this._toggleSwitch('sheet-research', this.researchActive);
+      if (this.researchActive) this.setWebsearch(true);
+    };
+    const projectCard = $('sheet-project');
+    if (projectCard) projectCard.onclick = () => {
+      const name = window.prompt('Nama proyek', (workspace.current() && workspace.current().name) || '');
+      if (!name) return;
+      const found = workspace.findByName(name) || workspace.create(name);
+      workspace.setCurrent(found.id);
+      const s = this.ensure();
+      s.projectId = found.id;
+      s.project = { goal: found.name, started: Date.now() };
+      store.save();
+      toast.show('Proyek: ' + found.name);
+      sheets.close();
+    };
+    const sideProj = $('btn-project');
+    if (sideProj) sideProj.onclick = () => {
+      const list = workspace.list();
+      const hint = list.length ? list.map((p) => p.name).join(', ') : '';
+      const name = window.prompt('Proyek (baru atau nama yang sudah ada)', hint);
+      drawer.close();
+      if (!name) return;
+      const found = workspace.findByName(name) || workspace.create(name);
+      workspace.setCurrent(found.id);
+      toast.show('Proyek aktif: ' + found.name);
+    };
     const slideCard = $('sheet-slide');
     if (slideCard) {
       slideCard.onclick = async () => {
