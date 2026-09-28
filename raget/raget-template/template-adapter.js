@@ -31,7 +31,7 @@ function status() {
 
 export const templateAdapter = Object.freeze({
   id: 'template',
-  label: 'Raget Template',
+  label: 'Raget 1.0',
   init,
   ask,
   status,
