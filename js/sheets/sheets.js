@@ -7,11 +7,19 @@ export const sheets = {
     $('attach-sheet').hidden = true;
     $('model-sheet').hidden = true;
     $('data-health-sheet').hidden = true;
+    const ps = $('project-sheet');
+    if (ps) ps.hidden = true;
     $('sheet-backdrop').classList.remove('show');
   },
   openModel() {
     modelSheet.render();
     $('model-sheet').hidden = false;
+    $('sheet-backdrop').classList.add('show');
+  },
+  openProject() {
+    const ps = $('project-sheet');
+    if (!ps) return;
+    ps.hidden = false;
     $('sheet-backdrop').classList.add('show');
   },
   openDataHealth() {
@@ -24,5 +32,7 @@ export const sheets = {
     $('attach-close').onclick = () => this.close();
     $('model-close').onclick = () => this.close();
     $('data-health-close').onclick = () => this.close();
+    const pc = $('project-close');
+    if (pc) pc.onclick = () => this.close();
   },
 };
