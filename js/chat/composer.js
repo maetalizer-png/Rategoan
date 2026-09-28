@@ -13,12 +13,12 @@ import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../utils/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
+import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../utils/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
+import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
+import { flowHub } from '../../raget/raget-agents/flow-hub.js';
 
-// Hanya kepicu kalau ADA file terlampir dengan isi teks berhasil diambil
-// (att.fileText) - tanpa itu, kata-kata ini tetap lewat mesin Raget biasa
-// seperti sebelumnya (mis. "ringkas hari saya" tanpa lampiran apa pun).
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
 const WORK_RE = /\b(tugas|skripsi|makalah|rencana|langkah|proyek|pekerjaan|kerjakan)\b/i;
@@ -39,16 +39,10 @@ function lastAttachedFile(session) {
   return null;
 }
 
-// Sengaja TIDAK menyertakan "presentasi" sendirian sebagai pemicu - kata itu
-// sudah dipakai tool nasihat struktur (Pyramid Principle di
-// intelligence-rumus.js, trigger "bingung strukturnya"/"susun presentasi").
-// Wajib ada "slide"/"ppt"/"pptx" eksplisit supaya jelas maksudnya minta
-// FILE dibuat, bukan minta saran cara menyusun presentasi.
 const SLIDE_ACTION_RE = /\b(buat(kan)?|bikin|jadikan|susun|export|unduh)\b/i;
 const SLIDE_NOUN_RE = /\b(slide|ppt|pptx)\b/i;
 
-
-function pickSlideMaterial(session, att) {
+async function pickSlideMaterial(session, att) {
   if (att && att.fileText) {
     return { text: att.fileText, title: (att.name || 'Presentasi').replace(/\.[a-z0-9]+$/i, '') };
   }
@@ -57,11 +51,15 @@ function pickSlideMaterial(session, att) {
     const m = msgs[i];
     if (!m || m.role === 'user' || !m.text) continue;
     if (/Pratinjau slide|Unduh file slide|sudah diunduh/.test(m.text)) continue;
-    if (m.source === 'websearch') {
+    if (m.source === 'websearch' || m.text.length >= 160) {
       return { text: m.text, title: session.title && session.title !== 'Chat' ? session.title : 'Presentasi' };
     }
-    if (m.text.length >= 160) {
-      return { text: m.text, title: session.title && session.title !== 'Chat' ? session.title : 'Presentasi' };
+  }
+  const items = await collectionStore.allItems();
+  for (let i = items.length - 1; i >= 0; i -= 1) {
+    const it = items[i];
+    if (it && it.text && it.text.length >= 80) {
+      return { text: it.text, title: it.chatTitle || 'Koleksi' };
     }
   }
   return null;
@@ -99,13 +97,20 @@ async function trySlideRequest(text, att, session) {
     }
   }
   if (!material) {
-    return 'Boleh, tapi saya butuh bahannya dulu — lampirkan file, ketik "buatkan slide tentang judul: isi", atau tanya dulu lalu "buatkan slide dari ini".';
+    const picked = await pickSlideMaterial(session, att);
+    if (picked) {
+      material = picked.text;
+      judul = picked.title || judul;
+    }
+  }
+  if (!material) {
+    return 'Boleh, tapi saya butuh bahannya dulu — lampirkan file, ketik "buatkan slide tentang judul: isi", tanya dulu, atau simpan ke Koleksi lalu tap Slide.';
   }
   try {
     const outline = buildOutline(material, judul);
     const fileName = judul.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide';
-    await exportSlides(outline, fileName + '.pptx');
-    return 'Slide "' + judul + '" (' + outline.length + ' halaman) sudah diunduh sebagai ' + fileName + '.pptx.\n\n' + previewOutline(outline);
+    rememberSlide(outline, fileName + '.pptx');
+    return previewOutline(outline) + '\n\nKetuk Unduh file slide kalau mau simpan PPTX.';
   } catch (e) {
     return 'Gagal membuat slide: ' + (e && e.message ? e.message : 'error tidak diketahui');
   }
@@ -158,6 +163,9 @@ export const composer = {
       text = 'buatkan slide dari ini';
     }
     let directReply = await trySlideRequest(text, att, s);
+    if (directReply == null && plan.route === 'collection') {
+      directReply = await toolsKoleksi.run('cari_koleksi', text);
+    }
     const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
     if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
       if (fileSrc.fileText) {
@@ -172,6 +180,20 @@ export const composer = {
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
+    }
+    if (isWebsearch && reply) {
+      try {
+        if (!(await collectionStore.existsByText(reply))) {
+          await collectionStore.addItem({
+            text: reply,
+            role: 'ai',
+            tag: 'web',
+            kind: 'web',
+            note: flowHub.threePoints(reply),
+            chatTitle: s.title || '',
+          });
+        }
+      } catch (e) {}
     }
     store.save();
     history.render();
@@ -202,28 +224,19 @@ export const composer = {
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
     const websearchCard = $('sheet-websearch');
     if (websearchCard) {
-      // Sengaja TIDAK sheets.close() / toast di sini - toggle-nya sendiri
-      // sudah jelas nunjukin status ON/OFF, jadi user bisa lihat langsung
-      // switch-nya geser tanpa sheet mendadak tertutup atau notifikasi
-      // besar yang malah menghalangi.
       websearchCard.onclick = () => {
         this.setWebsearch(!this.websearchActive);
       };
     }
     const slideCard = $('sheet-slide');
     if (slideCard) {
-      // Bukan toggle kayak websearch/memori - ini tombol contoh isian.
-      // Diisi CONTOH SIAP KIRIM (bukan placeholder <judul>/<isi> abstrak)
-      // supaya fitur ini langsung kelihatan cara pakainya - tekan Kirim
-      // apa adanya buat lihat demo nyata, atau timpa dulu (sudah ke-select
-      // semua) dengan judul+materi sendiri sebelum kirim.
       slideCard.onclick = async () => {
         sheets.close();
         const s = this.ensure();
         const att = attach.consume();
-        const picked = pickSlideMaterial(s, att);
+        const picked = await pickSlideMaterial(s, att);
         if (!picked) {
-          toast.show('Tanya topiknya dulu, baru tap Slide');
+          toast.show('Tanya topiknya dulu, atau simpan ke Koleksi, baru tap Slide');
           return;
         }
         try {
