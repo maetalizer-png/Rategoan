@@ -182,6 +182,12 @@ export const composer = {
       store.save();
       return;
     }
+    if (flowHub.wantsLesson(text)) {
+      const material = lastAiText(s) || text;
+      await chat.ask(text, { directReply: flowHub.lesson(material, s.title) });
+      store.save();
+      return;
+    }
     if (this.researchActive || flowHub.wantsResearch(text)) this.setWebsearch(true);
     const plan = turnPipeline.inspect(text, {
       messages: s.messages,
@@ -302,6 +308,18 @@ export const composer = {
       paintProjects();
       sheets.close();
       sheets.openProject();
+    };
+    const learnCard = $('sheet-learn');
+    if (learnCard) learnCard.onclick = async () => {
+      sheets.close();
+      const s = this.ensure();
+      const material = lastAiText(s);
+      if (!material) { toast.show('Tanya dulu, baru tap Belajar'); return; }
+      const reply = flowHub.lesson(material, s.title);
+      s.messages.push({ role: 'ai', text: reply, time: Date.now() });
+      store.save();
+      history.render();
+      chat.renderMessages();
     };
     const projectCard = $('sheet-project');
     if (projectCard) projectCard.onclick = () => openProjectSheet();
