@@ -1,0 +1,52 @@
+#artifact-panel {
+  display: none;
+  flex-direction: column;
+  background: var(--bg, #fff);
+  border-left: 1px solid var(--line, #e4e4e4);
+  min-width: 0;
+}
+#artifact-panel.open { display: flex; }
+#artifact-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line, #e4e4e4);
+}
+#artifact-head strong { flex: 1; font-size: 14px; }
+#artifact-stage {
+  flex: 1;
+  overflow: auto;
+  padding: 12px;
+}
+.art-slide {
+  border: 1px solid var(--line, #e4e4e4);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: var(--card, #fafafa);
+}
+.art-slide h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+.art-slide [contenteditable] {
+  outline: none;
+  min-height: 1.2em;
+}
+.art-slide li { margin: 0 0 6px; }
+@media (max-width: 799px) {
+  #artifact-panel.open {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+  }
+}
+@media (min-width: 800px) {
+  #app.split #view-chat { width: 50%; }
+  #app.split { display: flex; }
+  #artifact-panel.open {
+    width: 50%;
+    height: 100%;
+  }
+}
