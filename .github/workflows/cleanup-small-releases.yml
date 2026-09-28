@@ -1,0 +1,21 @@
+name: cleanup-small-releases
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/cleanup-small-releases.yml]
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete small experimental releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for tag in data-baru-eos-cpt-2026-09 data-baru-batch-02-2026-09 data-baru-batch-03-2026-09 data-baru-fineweb2-k1-2026-09; do
+            if gh release view "$tag" >/dev/null 2>&1; then
+              gh release delete "$tag" --cleanup-tag --yes
+            fi
+          done
