@@ -19,6 +19,7 @@ import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
 import { artifact } from '../ui/artifact.js';
+import { workspace } from '../state/workspace.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
@@ -129,7 +130,7 @@ export const composer = {
     const st = store.get();
     let s = st.sessions.find((x) => x.id === st.currentId);
     if (!s) {
-      s = { id: Date.now().toString(36), title: 'Chat', messages: [], created: Date.now() };
+      s = { id: Date.now().toString(36), title: 'Chat', messages: [], created: Date.now(), projectId: workspace.currentId() };
       store.set({ sessions: [s].concat(st.sessions), currentId: s.id });
     }
     return s;
@@ -154,6 +155,36 @@ export const composer = {
     history.render();
     chat.renderMessages();
     haptics.tap(10);
+    const projNew = text.match(/^proyek baru\s+(.+)$/i);
+    if (projNew) {
+      const p = workspace.create(projNew[1]);
+      const reply = 'Proyek "' + p.name + '" aktif. Chat baru di sini tidak tercampur proyek lain.';
+      s.projectId = p.id;
+      s.project = { goal: p.name, started: Date.now() };
+      await chat.ask(text, { directReply: reply });
+      store.save();
+      return;
+    }
+    const projGo = text.match(/^pindah proyek\s+(.+)$/i);
+    if (projGo) {
+      const found = workspace.findByName(projGo[1]);
+      const reply = found ? (workspace.setCurrent(found.id) && ('Pindah ke proyek "' + found.name + '".')) : 'Proyek tidak ketemu. Ketik proyek baru <nama>.';
+      if (found) s.projectId = found.id;
+      await chat.ask(text, { directReply: reply });
+      store.save();
+      return;
+    }
+    if (/^proyek ini$/i.test(text.trim())) {
+      const cur = workspace.current();
+      await chat.ask(text, { directReply: cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek. Ketik proyek baru <nama>.' });
+      store.save();
+      return;
+    }
+    if (flowHub.wantsResearch(text)) {
+      await chat.ask(text, { directReply: flowHub.researchPlan(text) });
+      store.save();
+      return;
+    }
     const plan = turnPipeline.inspect(text, {
       messages: s.messages,
       attach: att,
@@ -183,6 +214,9 @@ export const composer = {
       toast.show('AI belum terpasang');
       return;
     }
+    if (reply && flowHub.wantsThink(text)) {
+      reply = flowHub.thinkBlock(text) + '\n\n' + reply;
+    }
     if (isWebsearch && reply) {
       try {
         if (!(await collectionStore.existsByText(reply))) {
@@ -193,6 +227,7 @@ export const composer = {
             kind: 'web',
             note: flowHub.threePoints(reply),
             chatTitle: s.title || '',
+            projectId: s.projectId || workspace.currentId(),
           });
         }
       } catch (e) {}
