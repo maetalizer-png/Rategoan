@@ -1,6 +1,6 @@
 {
   "generatedAt": "2026-09-27T14:01:23Z",
-  "updatedAt": "2026-09-27T23:31:27Z",
+  "updatedAt": "2026-09-28T00:24:59Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -83,8 +83,8 @@
         "rak": "K3 korpus-pelengkap-bersih",
         "asal": "QC lanjut + mutu pelengkap (bukan pangkas topik)",
         "totalDokumen": 85471493,
-        "sizeByteGz": 10321596648,
-        "sha256": "0801e475b21715470107f09d936c649528f03341122968d9b10ec30c17983ebb",
+        "sizeByteGz": 10245901000,
+        "sha256": "6b8f99e554513131a96a1e1c4cfbb10b1a03ea186758e5d98196fa9823d405eb",
         "totalKataApprox": null,
         "totalTokenBPEResmi": 15277083398,
         "diukurPada": "2026-09-27T14:01:23Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
@@ -95,153 +95,123 @@
         "parts": [
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part00",
-            "sha256": "5967938af6d21bfa861853091c4e24278c5608cd8e1c2cc1376a2dba7c338ba6",
-            "bytes": 397618269
+            "sha256": "393b38b7dbeb8b0e75a4dd02794fcf2f462c75d7249f5b2da7bf5e6f8f387cb8",
+            "bytes": 421946833
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part01",
-            "sha256": "084fc423605c1db963555206dbdec32c46cd80d8b686042bfca4e1f933d7320c",
-            "bytes": 398696183
+            "sha256": "07d462799543d80af43857a1ccbcbda1f608fee760c6861418526142ec8d64d1",
+            "bytes": 420069264
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part02",
-            "sha256": "2c3c3eae7f9ab2815335edfe484371c702580ffec004175627a0e481d63cebd1",
-            "bytes": 400535727
+            "sha256": "568236acf3b431f7fc88eaeabd861f545b1bea96e29c75d786b4d28da7ad67c1",
+            "bytes": 421714826
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part03",
-            "sha256": "e94608aef653275a1558331d9fd711ada3f501b1770d197a28e8da28916f873d",
-            "bytes": 402240699
+            "sha256": "8d9682429db29df2adf924299e28ad1fae3318953be837f130e20a490e4faa8e",
+            "bytes": 424362294
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part04",
-            "sha256": "8e3a0d8a350e602f9f6de455e3e58b279e7e60614fe6a9b5b1e6e0e128988c69",
-            "bytes": 403678323
+            "sha256": "0f980c9706546fca2697f95e093173ca18cebe3d6fd31e101873202cc946f3c8",
+            "bytes": 425398405
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part05",
-            "sha256": "4849c797fec7ba69698c264656bc036ef29580dfae77097d499875ec39c2a6d2",
-            "bytes": 402298788
+            "sha256": "bfc8f4fd56ac1d12e62a304fa611a20e31cfad3c62981376c5f5bdc14291c22d",
+            "bytes": 420676448
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part06",
-            "sha256": "c55de894be60b65293f346b518281a02ca3ac21f2f83751374e441a01c12451e",
-            "bytes": 401694632
+            "sha256": "88d97a93241380a7386b3a3a4d2eb713cbf549fc9881d3f0496b2d8cb673a0ee",
+            "bytes": 422511764
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part07",
-            "sha256": "42efa60d8e5290981cdb17c7b7c107f5b84929b0cc1936a2c09112447474ff6f",
-            "bytes": 401574745
+            "sha256": "52f73b9799673cc8c359aa0ee3301a945c9f3540c599c31198611caef184d4e8",
+            "bytes": 420000963
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part08",
-            "sha256": "df39ba8459e6c6726d634ee03f874ec5740800039207e5d14a29b950d96995b7",
-            "bytes": 232510218
+            "sha256": "50ad775884e7cd6607b15b714d4460a3c961b8d2a45368261f6487c7f378b1d1",
+            "bytes": 420326584
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part09",
-            "sha256": "3e888dcf21a323127d5fdc304bb13d0098a1d8745942a9ec793def7d2e6ae17d",
-            "bytes": 401089806
+            "sha256": "59ea7f89ebd9ff6a2a83a80ea87a63d58e7ca1b655b6f1c9039f445f4f84bc3b",
+            "bytes": 420400738
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part10",
-            "sha256": "b38b6b8e841174ce113dad5e8549d0025ef003fee4e02e02d846112796041ca2",
-            "bytes": 399007508
+            "sha256": "7dd9a07f7f7940ab3eb08afed0d7004ee6712f9e1ad02f4c73ea092a249efc77",
+            "bytes": 420255892
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part11",
-            "sha256": "4bcaeec83ba99250877084c4f3796b8142860c308f6e192702adc8188827f69d",
-            "bytes": 399841924
+            "sha256": "f50c8a7de7c379eb29d133fa024d411e39e640e926e704d543b1ced6cf1f95a3",
+            "bytes": 420078046
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part12",
-            "sha256": "a112d25305d5329372910e2adaeeee9ac1dc921916b4b2c7bdf3043203a7fd1e",
-            "bytes": 400924077
+            "sha256": "877e55000e075931803c8f2ddb7756cb361c3a6fc4f514e61197756c9c0cd606",
+            "bytes": 420276703
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part13",
-            "sha256": "c602b50d0f342b4e13465fdc3c7d42aefde1ebb5622a58132f0b6df22bd29539",
-            "bytes": 400903856
+            "sha256": "3b163b3d691cf5ed6249d1eb46fe488290f0673be8408b418d466e26a32f6e9f",
+            "bytes": 420103267
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part14",
-            "sha256": "1aacaf79e3079d02b9ed34df7b32034d7029b0247ebe73d830c15f79b148f17d",
-            "bytes": 375915892
+            "sha256": "8c7c3760254697121fd5044980f2a50fa0ecf2623627eef642718c6935ba12c4",
+            "bytes": 420143744
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part15",
-            "sha256": "64595657f1da008d8bf2bcc4ef1b4a4b0b7556a25d9d7f1293bafe1f0d977042",
-            "bytes": 367689272
+            "sha256": "4e460e1a28385ec149f5681f8e94b3608258cb716ac220e8ceead911bbb7dfcd",
+            "bytes": 420201308
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part16",
-            "sha256": "76b94d4bf57638919ad0ea1eba4d45a2d282ab2bb8847745ef4e34400e101a20",
-            "bytes": 400198831
+            "sha256": "6d166de4099ba4514697bc6ff898c1f9ec82392145ff80bfc698cf3add6448e7",
+            "bytes": 420115904
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part17",
-            "sha256": "a8317d88ab6125bdcb5534923286cbb293082a54a7a60cb8b74b3c028d19e4b5",
-            "bytes": 400290005
+            "sha256": "5f99bccbf4f7ea027f7ecc9823e2a2f3d18372bf620a2209c9e6dcaf2b92b56c",
+            "bytes": 420339741
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part18",
-            "sha256": "73ebfbebc6701a82fc23da8b85d45e072c94c698ec6712f45381b411b5470f54",
-            "bytes": 400329388
+            "sha256": "db32af22069e45b944199b5919bec48f568849e85d310108bc1c11dd46f29081",
+            "bytes": 420263397
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part19",
-            "sha256": "40914a7daeef2708acfca23105ecf65c4ae77240c9d61d684e7eaa33b45fa610",
-            "bytes": 400319743
+            "sha256": "844ff110c3966b3617859fd5df9c97c322144d27fe8bd897e764331133992e6e",
+            "bytes": 420236707
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part20",
-            "sha256": "a15cdfc66c242d3653bb457048677d10744e01e851cb50f1426f098ddce3d8c0",
-            "bytes": 400141735
+            "sha256": "ebf45d79b8b0a47f6e5211bb2d350f1867da754bf6c951f3cf3c993a386a3199",
+            "bytes": 420043155
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part21",
-            "sha256": "30291dadeb135a1387224c0ede1c3d4b217fa2cfddfe94291bd0251956532044",
-            "bytes": 400160736
+            "sha256": "84fb7e54e2bbbc193fc4b2ed4066a6d13de8a868dd03ebebf1cebe040bf8f33d",
+            "bytes": 420138516
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part22",
-            "sha256": "8591f7c1396cd7e74a822e9864c49f85f4c5c9d267297102264a13d096eb2cb2",
-            "bytes": 400249338
+            "sha256": "01dc896595f59a099aed5f15ec2505dc0e730f8af7496736e5d86604b0c68e9a",
+            "bytes": 490087922
           },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part23",
-            "sha256": "bd0b6bb80e29dbc852ba67ac05e4b29f2dfd312bc91eacc8ed33f0949a3983ff",
-            "bytes": 400348935
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part24",
-            "sha256": "57f7d15dd04dfd93cd56b7ab31a5aab9307f33b96342aa4ba85e08721a4a2388",
-            "bytes": 145806454
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part25",
-            "sha256": "42a499a29e849eca14c4e13382c9aedb92d0910c6dea7a12a405dc8b1b0d6afb",
-            "bytes": 183771753
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part26",
-            "sha256": "579374846a485bfbaa13eab73859c5b26a64415d727d756f1a1157ddd0bccd3f",
-            "bytes": 413801053
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part27",
-            "sha256": "46f750b8e8842ab084f8d115c272329f52c306acfd827642d3e965b6565d646d",
-            "bytes": 99212273
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part28",
-            "sha256": "1f3ae839b26e0a087bc04f63f467b5baeb9e70674bd9520a187b97fc5fa2bfe9",
-            "bytes": 89530394
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part29",
-            "sha256": "809ba233eebc607fca23dd56f1be11e9c32e1c790c0e09d3af5edbd4e1098852",
-            "bytes": 1216091
+            "sha256": "43cf7d2be44ea124b9a61f8d3588c9b058455b8e33c2400b7d7734eff50908e3",
+            "bytes": 496208579
           }
         ],
         "tierUkuran": "XL"
