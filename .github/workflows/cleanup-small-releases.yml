@@ -17,7 +17,7 @@ jobs:
           for tag in data-baru-eos-cpt-2026-09 data-baru-batch-02-2026-09 data-baru-batch-03-2026-09 data-baru-fineweb2-k1-2026-09; do
             rid=$(gh api "repos/$REPO/releases/tags/$tag" --jq .id 2>/dev/null || true)
             if [ -n "$rid" ]; then
-              curl --fail-with-body -sS -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$REPO/releases/$rid"
+              gh api -X DELETE "repos/$REPO/releases/$rid"
             fi
             gh api -X DELETE "repos/$REPO/git/refs/tags/$tag" >/dev/null 2>&1 || true
           done
