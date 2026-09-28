@@ -7,20 +7,16 @@
 - [x] Koleksi + simpan web
 - [x] Tanya koleksi
 - [x] Saklar berpikir
-- [x] Saklar riset + jalanin web (bukan rencana kosong)
-- [x] Proyek sidebar + masukkan ke proyek
+- [x] Saklar riset + web
+- [x] Proyek (sheet, bukan prompt)
+- [x] Daftar artefak
+- [x] Riwayat tersaring proyek aktif
 - [x] Memori teks
-- [ ] Perangkai setara app lain (masih Wikipedia + 1 halaman)
-- [ ] Daftar artefak
+- [ ] Perangkai setara app lain (masih Wikipedia)
 - [ ] Belajar terpandu
 - [ ] Konektor / jadwal kirim
 - [ ] Studio kode
-- [x] Tidak pasang gen gambar/video pihak lain
 
-## Kritik hasil sendiri
-Saklar sudah kelihatan di menu. Mesin di belakang masih tipis:
-- Berpikir = 4 baris template, bukan nalar.
-- Riset = rencana pendek + 1 kali wiki. Bukan 8 sumber.
-- Proyek = `prompt()` HP, bukan halaman notebook.
-- Web tetap ensiklopedia, bukan laporan.
-Jangan klaim "seperti Gemini". Pintu sudah ada; kedalaman belum.
+## Kekurangan mesin baru (jujur)
+Berpikir = template. Riset = wiki sekali. Proyek belum notebook penuh.
+Yang ditutup sesi ini: prompt HP, artefak cuma slide terakhir, daftar tanpa gaya, riwayat campur semua proyek.
