@@ -9,6 +9,8 @@ export const sheets = {
     $('data-health-sheet').hidden = true;
     const ps = $('project-sheet');
     if (ps) ps.hidden = true;
+    const as = $('artifact-sheet');
+    if (as) as.hidden = true;
     $('sheet-backdrop').classList.remove('show');
   },
   openModel() {
@@ -20,6 +22,12 @@ export const sheets = {
     const ps = $('project-sheet');
     if (!ps) return;
     ps.hidden = false;
+    $('sheet-backdrop').classList.add('show');
+  },
+  openArtifact() {
+    const as = $('artifact-sheet');
+    if (!as) return;
+    as.hidden = false;
     $('sheet-backdrop').classList.add('show');
   },
   openDataHealth() {
@@ -34,5 +42,7 @@ export const sheets = {
     $('data-health-close').onclick = () => this.close();
     const pc = $('project-close');
     if (pc) pc.onclick = () => this.close();
+    const ac = $('artifact-sheet-close');
+    if (ac) ac.onclick = () => this.close();
   },
 };
