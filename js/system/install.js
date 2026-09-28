@@ -12,12 +12,11 @@ export const install = {
     });
     window.addEventListener('appinstalled', () => {
       if (row) row.hidden = true;
-      toast.show('Aplikasi terpasang');
+      
     });
     if (row) {
       row.onclick = async () => {
         if (!this.evt) {
-          toast.show('Install tidak tersedia');
           return;
         }
         this.evt.prompt();
