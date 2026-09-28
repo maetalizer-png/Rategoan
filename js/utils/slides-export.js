@@ -115,12 +115,24 @@ export async function exportSlides(slides, fileName) {
 }
 
 let held = null;
+const ART_KEY = 'rategoan_artifacts';
+
+function readArts() {
+  try { return JSON.parse(localStorage.getItem(ART_KEY) || '[]'); } catch (err) { return []; }
+}
 
 export function rememberSlide(outline, fileName) {
-  held = { outline, fileName };
+  held = { outline, fileName, title: (outline && outline[0] && outline[0].title) || fileName, time: Date.now() };
+  const list = readArts().filter((a) => a.fileName !== fileName);
+  list.unshift({ title: held.title, fileName, outline, time: held.time });
+  localStorage.setItem(ART_KEY, JSON.stringify(list.slice(0, 20)));
   return held;
 }
 
 export function heldSlide() {
   return held;
+}
+
+export function allArtifacts() {
+  return readArts();
 }
