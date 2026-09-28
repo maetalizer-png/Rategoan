@@ -324,9 +324,26 @@ export const composer = {
     if (artBtn) artBtn.onclick = () => {
       drawer.close();
       const list = allArtifacts();
-      if (!list.length) { toast.show('Belum ada slide'); return; }
-      const last = list[0];
-      artifact.open(last.outline, last.title, last.fileName);
+      const ul = $('artifact-list');
+      if (ul) {
+        ul.innerHTML = '';
+        if (!list.length) {
+          const li = document.createElement('li');
+          li.textContent = 'Belum ada slide';
+          ul.appendChild(li);
+        } else {
+          list.forEach((a) => {
+            const li = document.createElement('li');
+            li.textContent = a.title || a.fileName || 'Slide';
+            li.onclick = () => {
+              sheets.close();
+              artifact.open(a.outline, a.title, a.fileName);
+            };
+            ul.appendChild(li);
+          });
+        }
+      }
+      sheets.openArtifact();
     };
     const slideCard = $('sheet-slide');
     if (slideCard) {
