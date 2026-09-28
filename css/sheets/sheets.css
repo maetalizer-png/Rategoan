@@ -324,3 +324,24 @@
     background: var(--rg-ring);
   }
 }
+
+.pick-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.pick-list li {
+  padding: 12px 14px;
+  border: 1px solid var(--rg-line);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+#project-name {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--rg-line);
+}
