@@ -40,6 +40,7 @@ async function addItem(data) {
     tag: data.tag || 'umum',
     note: data.note || '',
     artifactType: data.artifactType || null,
+    projectId: data.projectId || null,
     time: Date.now(),
     pinned: false,
     archived: false,
@@ -53,8 +54,10 @@ async function allItems(opts) {
   const options = opts || {};
   const list = await readAll();
   if (autoArchive(list)) await writeAll(list);
-  if (options.includeArchived) return list;
-  return list.filter((it) => !it.archived);
+  if (options.includeArchived) list = list;
+  else list = list.filter((it) => !it.archived);
+  if (options.projectId) list = list.filter((it) => !it.projectId || it.projectId === options.projectId);
+  return list;
 }
 
 async function findItem(id) {
