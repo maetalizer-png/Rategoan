@@ -10,10 +10,6 @@
 import { agent } from '../raget-agents/agent.js';
 
 async function init() {
-  // Tidak ada resource async yang perlu disiapkan di sini - agent.js dan
-  // llm-engine.js lazy-load data mereka sendiri per-panggilan (fetch JSON
-  // per domain, dst). init() ada supaya bentuknya konsisten dengan adapter
-  // lain yang memang butuh langkah persiapan (mis. load checkpoint neural).
   return true;
 }
 
@@ -31,7 +27,7 @@ function status() {
 
 export const templateAdapter = Object.freeze({
   id: 'template',
-  label: 'Raget 1.0',
+  label: 'Raget Template',
   init,
   ask,
   status,
