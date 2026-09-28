@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28T02:00:14Z",
-  "updatedAt": "2026-09-28T02:00:14Z",
+  "generatedAt": "2026-09-28T13:54:17Z",
+  "updatedAt": "2026-09-28T13:54:17Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -82,32 +82,17 @@
       {
         "rak": "K3 korpus-pelengkap-bersih",
         "asal": "QC lanjut + mutu pelengkap (bukan pangkas topik)",
-        "totalDokumen": 85596639,
-        "sizeByteGz": 10007853520,
-        "sha256": "4c0eeb311100f0080da751b606e5d8adc17a921ab7ad1abd431361cf24235f53",
+        "totalDokumen": 79840639,
+        "sizeByteGz": 9021554515,
+        "sha256": "7ec9b8e585f9a1ed9fea85c16356d68e999552cfa58004388cdadba305e5c328",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 15315025774,
+        "totalTokenBPEResmi": 15277083398,
         "diukurPada": "2026-09-27T14:01:23Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
-        "catatan": "K3 85596639 dokumen / 15315025774 BPE. Tambah peraturan CC-BY-4.0 125146 dok / 37942376 BPE.",
+        "catatan": "part00-02 campur dihapus, tidak diunggah ulang. part03-23 SHA sama dengan bf9b642. part24 peraturan CC-BY-4.0 125146 dok / 37942376 BPE, tidak dijumlahkan ke angka BPE. BPE 15277083398 adalah acuan sebelum kepala asli hilang, belum dihitung ulang.",
         "komposisiBahasa": {
           "id": 1.0
         },
         "parts": [
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part00",
-            "sha256": "f501ed44f99a67f27a7b724a3efee1607c734092f79723fbb7604e1125c91fc1",
-            "bytes": 343011467
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part01",
-            "sha256": "eb54a6d63d8e75756ad8d58fe8b91a31ae4e2ef5fffcc3223a635b91adfe189f",
-            "bytes": 342018606
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part02",
-            "sha256": "f2354de923e92e3046c906aeecd4f9d18fffaded477f559929a9b1495cacb138",
-            "bytes": 340653370
-          },
           {
             "name": "korpus-pelengkap-bersih.jsonl.gz.part03",
             "sha256": "8d9682429db29df2adf924299e28ad1fae3318953be837f130e20a490e4faa8e",
@@ -212,13 +197,18 @@
             "name": "korpus-pelengkap-bersih.jsonl.gz.part23",
             "sha256": "43cf7d2be44ea124b9a61f8d3588c9b058455b8e33c2400b7d7734eff50908e3",
             "bytes": 496208579
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part24",
+            "sha256": "eeceadd5ef586547f5cc8ba00b7f43bf0f4f3735dab4710233b52bf91a281312",
+            "bytes": 39384438
           }
         ],
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 95944735,
-    "totalTokenBPEResmiKanonik": 18022736663
+    "totalDokumenKanonik": 90188735,
+    "totalTokenBPEResmiKanonik": 17984794287
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -274,19 +264,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 18022736663,
+    "totalTokenKanonikTerverifikasi": 17984794287,
     "totalKataApproxStagingBelumDireview": 8137547049,
     "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 17975859650. Sampah boleh turun dari 18415279368; bukan pangkas topik. Header ulang dan pasal identik di dalam dokumen dihapus. Hukum/berita tidak dibuang. Ubah 171 dok. BPE 15277086568 -> 15277083398.",
-    "tokenKanonikPerintahClaude": 18022736663,
-    "kekuranganTokenKanonik": -17022736663
+    "tokenKanonikPerintahClaude": 17984794287,
+    "kekuranganTokenKanonik": -16984794287
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -17022736663,
+  "kekuranganTokenKanonik": -16984794287,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 18022736663,
+  "tokenKanonikPerintahClaude": 17984794287,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",

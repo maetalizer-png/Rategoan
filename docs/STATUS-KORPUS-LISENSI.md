@@ -6,32 +6,17 @@ Diperbarui: 2026-09-28. Git mengikuti manifest rak.
 ## Release hidup
 | Tag | Isi |
 |-----|-----|
-| `korpus-ensiklopedia-bersih` | K1 7590198 dok / 2244713763 BPE. SHA `8ef96bc3…` |
-| `korpus-dialog-daerah-bersih` | K2 2757898 dok / 462997126 BPE. SHA `7b23d622…` |
-| `korpus-pelengkap-bersih` | K3 85596639 dok / 15315025774 BPE. SHA `4c0eeb31…` |
-| `checkpoint-100m` | 100M |
-| `checkpoint-200m` | arsip; PWA memakai HF `Maetalizer19/rategoan-neural` |
-| `prd-data-release` | pagar `PRD-RELEASE.md` + perintah `PRD-GROK-BUILD.md` |
-| `penampung-tersaring-2026-09` | laporan JSON lama |
-| `korpus-kode-bersih` | **K4**. Token tidak dijumlahkan ke lantai tiga rak |
+| `korpus-ensiklopedia-bersih` | K1 tidak diubah sesi ini |
+| `korpus-dialog-daerah-bersih` | K2 tidak diubah sesi ini |
+| `korpus-pelengkap-bersih` | K3 part03–23 SHA sama dengan `bf9b642`. part00–02 campur dihapus. part24 peraturan. SHA `7ec9b8e5…` |
+| `korpus-kode-bersih` | K4 tidak diubah |
 | `id-hf-safe-indonesian-audio-batch-2026-09` | audio — jangan dihapus |
 
 ## Token
-Angka BPE dari manifest rak: **18022736663**
-(K1 2244713763 + K2 462997126 + K3 15315025774).
-
-## Sumber 2026-09-28
-Situs BSE tidak terjangkau. Wikibooks sudah di K1.
-id.wikisource masuk K1. Peraturan CC-BY-4.0 masuk K3: 125146 dokumen, 37942376 BPE.
-Dialog terjemahan Alpaca tidak dimasukkan.
+BPE tiga rak yang tertulis: **17984794287**
+BPE K3 15277083398 adalah acuan sebelum kepala asli hilang, belum dihitung ulang.
+Dokumen K3 terhitung dari berkas yang ada: 79840639.
 
 ## Dilarang
-Jangan pangkas rak hidup. Jangan enwiki, Dolma, Stack-edu EN, Arxiv EN, crawl campur.
-Jangan hapus audio. Jangan K4 ke lantai tiga rak. Jangan nomor seri. Jangan latih.
-Jangan commit `PRD-GROK-BUILD.md` ke git.
-
-
-## Peringatan 2026-09-28
-K3 `part00`–`part02` tertimpa. SHA asli ada di PRD-GROK-BUILD pada tag `prd-data-release`.
-Jangan anggap angka dokumen/BPE K3 valid sampai ketiga part itu kembali.
-part03–part23 tidak ikut tertimpa. K1 wikisource dan K2 tidak rusak.
+Jangan unggah file bernama part00–part23 untuk menimpa. Jangan pangkas part03–23.
+Jangan enwiki. Jangan hapus audio. Jangan nomor seri.
