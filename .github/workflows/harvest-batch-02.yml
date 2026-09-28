@@ -75,15 +75,7 @@ jobs:
               "not_canonical_shelf":True
           }))
 
-          # 2) Supreme Court decisions: CC-BY-4.0 per dataset card.
-          ds=load_dataset("Azzindani/ID_Supreme_Court_HTML",split="train",streaming=True)
-          manifests.append(write_jsonl("id-supreme-court-standalone",ds,{
-              "source":"Azzindani/ID_Supreme_Court_HTML","license":"CC-BY-4.0",
-              "domain":"Indonesian Supreme Court decisions","provenance":"Mahkamah Agung Republik Indonesia; raw HTML decision corpus.",
-              "not_canonical_shelf":True
-          }))
-
-          # 3) Sundanese 122M-token corpus: CC-BY-4.0.
+          # 2) Sundanese 122M-token corpus: CC-BY-4.0.
           tr=hf_hub_download("ripkiiiii/ajnyana-corpus","train.txt",repo_type="dataset")
           va=hf_hub_download("ripkiiiii/ajnyana-corpus","val.txt",repo_type="dataset")
           def lines():
@@ -98,7 +90,7 @@ jobs:
               "not_canonical_shelf":True
           }))
 
-          # 4) Public/open Javanese manuscript and literature corpus.
+          # 3) Public/open Javanese manuscript and literature corpus.
           snap=snapshot_download("thesimonharms/public-javanese-dataset",repo_type="dataset",allow_patterns=["**/clean/*.txt","**/clean/**/*.txt","LICENSE.md","sources.yaml"])
           def jv_lines():
               for p in Path(snap).rglob("*.txt"):
@@ -116,11 +108,27 @@ jobs:
               "not_canonical_shelf":True
           }))
 
-          # 5) Kemdikbud/BSE educational raw corpus: CC-BY-4.0.
+          # 4) Kemdikbud/BSE educational raw corpus: CC-BY-4.0.
           ds=load_dataset("Firmansyah-Ibrahim/indo-bloom-raw-bse",split="train",streaming=True)
           manifests.append(write_jsonl("kemdikbud-bse-raw-standalone",ds,{
               "source":"Firmansyah-Ibrahim/indo-bloom-raw-bse","license":"CC-BY-4.0",
               "domain":"Indonesian school textbooks / BSE","provenance":"Extracted from Buku Sekolah Elektronik materials published by Kemdikbudristek; includes History, Geography, Biology, Sociology.",
+              "not_canonical_shelf":True
+          }))
+
+          # 5) Indonesian Legal QA (Apache-2.0), separate from regulation text.
+          ds=load_dataset("Azzindani/Indonesian_Legal_QA",split="train",streaming=True)
+          manifests.append(write_jsonl("indonesian-legal-qa-standalone",ds,{
+              "source":"Azzindani/Indonesian_Legal_QA","license":"Apache-2.0",
+              "domain":"Indonesian legal QA","provenance":"Public Indonesian legal QA corpus.",
+              "not_canonical_shelf":True
+          }))
+
+          # 6) Aksara Mega SFT (Apache-2.0).
+          ds=load_dataset("AksaraLLM/aksara-mega-sft",split="train",streaming=True)
+          manifests.append(write_jsonl("aksara-mega-sft-standalone",ds,{
+              "source":"AksaraLLM/aksara-mega-sft","license":"Apache-2.0",
+              "domain":"Indonesian/Nusantara instruction tuning","provenance":"64K+ Indonesian instruction-response pairs including regional-language and Nusantara content.",
               "not_canonical_shelf":True
           }))
 
