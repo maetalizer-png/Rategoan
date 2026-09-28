@@ -1,0 +1,76 @@
+name: harvest-sea-commoncrawl-id
+on:
+  push:
+    branches: [main]
+concurrency:
+  group: harvest-sea-commoncrawl-id
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-sea-cc-id]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest 20GB Indonesian SEA CommonCrawl
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-sea-commoncrawl-id-2026-09"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru — SEA CommonCrawl Indonesian — 2026-09" --notes "Standalone large Indonesian web corpus from Sailor2 SEA CommonCrawl. Source: sailor2/sea-commoncrawl/indonesian, selected chunks 1-4. License ODC-By. Kept outside K1/K2/K3/K4. Source is CommonCrawl-derived; downstream deduplication/overlap review required."
+          for idx in 1 2 3 4; do
+            src="work/chunk_${idx}.jsonl"
+            out="work/sea_cc_id_chunk_${idx}.jsonl.gz"
+            url="https://huggingface.co/datasets/sailor2/sea-commoncrawl/resolve/main/indonesian/chunk_${idx}.jsonl?download=true"
+            echo "downloading chunk $idx"
+            curl -L --fail --retry 5 --retry-delay 5 --connect-timeout 30 -o "$src" "$url"
+            python - "$src" "$out" "$idx" <<'PY'
+          import sys,json,gzip,hashlib
+          src,out,idx=sys.argv[1:]
+          seen=set(); docs=0; kept=0
+          with open(src,"rb") as inp, gzip.open(out,"wt",encoding="utf-8") as fout:
+              for raw in inp:
+                  if not raw.strip(): continue
+                  docs += 1
+                  try: obj=json.loads(raw)
+                  except Exception: continue
+                  text=obj.get("text") if isinstance(obj,dict) else None
+                  if not isinstance(text,str) or len(text.strip())<200: continue
+                  norm=" ".join(text.split())
+                  h=hashlib.sha256(norm.encode("utf-8")).hexdigest()
+                  if h in seen: continue
+                  seen.add(h)
+                  if isinstance(obj,dict):
+                      obj["source_dataset"]="sailor2/sea-commoncrawl"
+                      obj["source_path"]=f"indonesian/chunk_{idx}.jsonl"
+                      obj["license"]="ODC-By-1.0"
+                  fout.write(json.dumps(obj,ensure_ascii=False,separators=(",",":"))+"\n")
+                  kept += 1
+          print("rows",docs,"kept",kept)
+          PY
+            rm -f "$src"
+            sha256sum "$out" > "$out.sha256"
+            size=$(stat -c%s "$out")
+            if [ "$size" -ge 1950000000 ]; then
+              echo "compressed asset too large: $size"
+              exit 1
+            fi
+            gh release upload "$TAG" "$out" "$out.sha256" --repo "$REPO" --clobber
+            rm -f "$out" "$out.sha256"
+          done
+          cat > work/manifest.json <<'JSON'
+          {
+            "source": "sailor2/sea-commoncrawl",
+            "path": "indonesian/",
+            "chunks": [1,2,3,4],
+            "license": "ODC-By-1.0",
+            "processing": ["JSON parse", "minimum text length 200 chars", "whitespace normalization for dedupe", "exact SHA-256 text dedupe within each chunk", "source provenance fields added"],
+            "placement": "standalone release; not K1/K2/K3/K4",
+            "note": "CommonCrawl-derived source; cross-corpus overlap with mC4 and other web crawls must be evaluated before training."
+          }
+          JSON
+          gh release upload "$TAG" work/manifest.json --repo "$REPO" --clobber
