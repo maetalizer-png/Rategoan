@@ -246,7 +246,20 @@
     </div>
     <input id="project-name" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
     <button class="attach-plain" id="project-create">Buat / pilih nama di atas</button>
-    <ul id="project-list"></ul>
+    <ul id="project-list" class="pick-list"></ul>
+  </div>
+
+  
+  <div id="artifact-sheet" class="sheet" hidden>
+    <div class="sheet-head">
+      <div class="sheet-title">Artefak</div>
+      <button class="hist-del" id="artifact-sheet-close" aria-label="Tutup">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <ul id="artifact-list" class="pick-list"></ul>
   </div>
 
   <div id="camera-overlay" class="pin-overlay camera-overlay" hidden>
