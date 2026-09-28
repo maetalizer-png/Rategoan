@@ -6,6 +6,7 @@ import { drawer } from '../ui/drawer.js';
 import { router } from '../core/router.js';
 import { chat } from '../chat/chat.js';
 import { histmenu } from './histmenu.js';
+import { workspace } from '../state/workspace.js';
 
 const DEL_SVG =
   '<svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
@@ -64,7 +65,9 @@ export const history = {
     list.innerHTML = '';
     const st = store.get();
     const q = this.query;
-    const all = q ? st.sessions.filter((s) => (s.title || '').toLowerCase().includes(q)) : st.sessions;
+    const pid = workspace.currentId();
+    let all = q ? st.sessions.filter((s) => (s.title || '').toLowerCase().includes(q)) : st.sessions.slice();
+    if (pid) all = all.filter((s) => !s.projectId || s.projectId === pid);
     emptyEl.style.display = all.length ? 'none' : 'flex';
     emptyEl.textContent = q ? 'Tidak ada hasil' : 'Belum ada chat';
     const pinned = all.filter((s) => s.pinned);
