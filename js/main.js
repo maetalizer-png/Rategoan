@@ -116,6 +116,5 @@ if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
 }
 
 window.addEventListener('unhandledrejection', (e) => {
-  toast.show('Terjadi kendala saat memproses. Coba lagi ya.');
   e.preventDefault();
 });
