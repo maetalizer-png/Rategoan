@@ -1,25 +1,26 @@
 # Pengembangan Rategoan
 
-Satu catatan app. Bukan PRD data.
-
 ## Ceklis
-
-- [x] Unggah kamera / foto / file
-- [x] Saklar Pencarian Web
-- [x] Slide + panel kanan + PPTX
-- [x] Koleksi + simpan hasil web
-- [x] Tanya koleksi (perintah teks)
-- [x] Saklar Berpikir lebih keras (sheet Lampirkan)
-- [x] Saklar Riset mendalam (sheet + nyalakan web)
-- [x] Proyek di sidebar + Masukkan ke proyek
-- [x] Memori ingat / lupakan (teks)
-- [ ] Perangkai dalam (jawaban web setara app lain)
-- [ ] Daftar Artefak (bukan hanya slide terbuka)
+- [x] Unggah kamera/foto/file
+- [x] Saklar web
+- [x] Slide + panel + PPTX
+- [x] Koleksi + simpan web
+- [x] Tanya koleksi
+- [x] Saklar berpikir
+- [x] Saklar riset + jalanin web (bukan rencana kosong)
+- [x] Proyek sidebar + masukkan ke proyek
+- [x] Memori teks
+- [ ] Perangkai setara app lain (masih Wikipedia + 1 halaman)
+- [ ] Daftar artefak
 - [ ] Belajar terpandu
-- [ ] Konektor Drive/WA (butuh akun/server)
-- [ ] Terjadwal kirim hasil
+- [ ] Konektor / jadwal kirim
 - [ ] Studio kode
-- [x] Jangan pasang generate gambar/video/musik pihak lain
+- [x] Tidak pasang gen gambar/video pihak lain
 
-## Mesin
-Perencana (rute) · Bahan (file/web/koleksi) · Perangkai · Kanvas · Proyek · Jadwal/konektor belakangan.
+## Kritik hasil sendiri
+Saklar sudah kelihatan di menu. Mesin di belakang masih tipis:
+- Berpikir = 4 baris template, bukan nalar.
+- Riset = rencana pendek + 1 kali wiki. Bukan 8 sumber.
+- Proyek = `prompt()` HP, bukan halaman notebook.
+- Web tetap ensiklopedia, bukan laporan.
+Jangan klaim "seperti Gemini". Pintu sudah ada; kedalaman belum.
