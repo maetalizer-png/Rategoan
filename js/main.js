@@ -14,6 +14,7 @@ import { history as chatHistory } from './history/history.js';
 import { histmenu } from './history/histmenu.js';
 import { msgmenu } from './history/msgmenu.js';
 import { drawer } from './ui/drawer.js';
+import { artifact } from './ui/artifact.js';
 import { scrolldown } from './ui/scrolldown.js';
 import { sheets } from './sheets/sheets.js';
 import { attach } from './sheets/attach.js';
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   chatHistory.render();
   chatHistory.bind();
   drawer.bind();
+  artifact.bind();
   scrolldown.bind();
   chatsearch.bind();
   sheets.bind();
