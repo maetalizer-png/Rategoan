@@ -18,6 +18,7 @@ import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../ut
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
+import { artifact } from '../ui/artifact.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
@@ -110,6 +111,7 @@ async function trySlideRequest(text, att, session) {
     const outline = buildOutline(material, judul);
     const fileName = judul.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide';
     rememberSlide(outline, fileName + '.pptx');
+    artifact.open(outline, judul, fileName + '.pptx');
     return previewOutline(outline) + '\n\nKetuk Unduh file slide kalau mau simpan PPTX.';
   } catch (e) {
     return 'Gagal membuat slide: ' + (e && e.message ? e.message : 'error tidak diketahui');
@@ -244,6 +246,7 @@ export const composer = {
           const stamp = Date.now().toString(36);
           const fileName = (picked.title.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide') + '-' + stamp + '.pptx';
           rememberSlide(outline, fileName);
+          artifact.open(outline, picked.title, fileName);
           const reply = previewOutline(outline) + '\n\nKetuk Unduh file slide kalau mau simpan PPTX.';
           s.messages.push({ role: 'ai', text: reply, time: Date.now() });
           store.save();
