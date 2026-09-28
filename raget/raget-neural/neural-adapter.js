@@ -38,7 +38,7 @@ function status() {
 
 export const neuralAdapter = Object.freeze({
   id: 'neural',
-  label: 'Raget Neural',
+  label: 'Raget',
   init,
   ask,
   status,
