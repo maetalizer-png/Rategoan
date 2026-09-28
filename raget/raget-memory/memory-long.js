@@ -83,6 +83,12 @@ function learnFromText(text) {
 
   const cityMatch = t.match(/saya\s+tinggal\s+di\s+([a-zA-Z\s]{2,40})/i);
   if (cityMatch) remember('kota', cityMatch[1].trim());
+
+  const toneMatch = t.match(/saya (lebih )?(suka|mau) (gaya|bahasa) (formal|santai)/i);
+  if (toneMatch) remember('gaya', toneMatch[4].toLowerCase());
+  const slideMatch = t.match(/slide (saya )?suka ([a-zA-Z\s]{3,40})/i);
+  if (slideMatch) remember('slide_pref', slideMatch[2].trim());
+
 }
 
 function rememberNote(text) {
