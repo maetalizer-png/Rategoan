@@ -1,22 +1,16 @@
 # Status Korpus & Lisensi — Rategoan
 
 Diperbarui: 2026-09-28. Git mengikuti manifest rak.
-`PRD-GROK-BUILD` hanya di tag `prd-data-release`.
 
-## Release hidup
-| Tag | Isi |
-|-----|-----|
-| `korpus-ensiklopedia-bersih` | K1 tidak diubah sesi ini |
-| `korpus-dialog-daerah-bersih` | K2 tidak diubah sesi ini |
-| `korpus-pelengkap-bersih` | K3 part03–23 SHA sama dengan `bf9b642`. part00–02 campur dihapus. part24 peraturan. SHA `7ec9b8e5…` |
-| `korpus-kode-bersih` | K4 tidak diubah |
-| `id-hf-safe-indonesian-audio-batch-2026-09` | audio — jangan dihapus |
+## K3
+part00–02 hilang permanen. part03–24 tidak ditimpa.
+part25: id.wikibooks + id.wikiquote, 5694 dokumen, 2153723 BPE, CC-BY-SA-4.0.
+Dokumen K3 79846333. BPE K3 15279237121.
+SHA `59ea86b914dbc0a5`.
 
-## Token
-BPE tiga rak yang tertulis: **17984794287**
-BPE K3 15277083398 adalah acuan sebelum kepala asli hilang, belum dihitung ulang.
-Dokumen K3 terhitung dari berkas yang ada: 79840639.
+## Lainnya
+K1 7590198 dok / 2244713763 BPE. Tidak diubah sesi ini.
+K2 2757898 dok / 462997126 BPE. Tidak diubah sesi ini.
+K4 dan audio tidak diubah.
 
-## Dilarang
-Jangan unggah file bernama part00–part23 untuk menimpa. Jangan pangkas part03–23.
-Jangan enwiki. Jangan hapus audio. Jangan nomor seri.
+Tiga rak tertulis **17986948010** BPE.

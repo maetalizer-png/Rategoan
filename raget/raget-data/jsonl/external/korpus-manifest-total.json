@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28T13:54:17Z",
-  "updatedAt": "2026-09-28T13:54:17Z",
+  "generatedAt": "2026-09-28T14:12:54Z",
+  "updatedAt": "2026-09-28T14:12:54Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -82,13 +82,13 @@
       {
         "rak": "K3 korpus-pelengkap-bersih",
         "asal": "QC lanjut + mutu pelengkap (bukan pangkas topik)",
-        "totalDokumen": 79840639,
-        "sizeByteGz": 9021554515,
-        "sha256": "7ec9b8e585f9a1ed9fea85c16356d68e999552cfa58004388cdadba305e5c328",
+        "totalDokumen": 79846333,
+        "sizeByteGz": 9024776260,
+        "sha256": "59ea86b914dbc0a5c862c0d9ccede71c17aa27b83b0ccb39b4ccac16018beaf9",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 15277083398,
+        "totalTokenBPEResmi": 15279237121,
         "diukurPada": "2026-09-27T14:01:23Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
-        "catatan": "part00-02 campur dihapus, tidak diunggah ulang. part03-23 SHA sama dengan bf9b642. part24 peraturan CC-BY-4.0 125146 dok / 37942376 BPE, tidak dijumlahkan ke angka BPE. BPE 15277083398 adalah acuan sebelum kepala asli hilang, belum dihitung ulang.",
+        "catatan": "part25 id.wikibooks + id.wikiquote 5694 dok / 2153723 BPE, CC-BY-SA-4.0. part00-24 tidak ditimpa.",
         "komposisiBahasa": {
           "id": 1.0
         },
@@ -202,13 +202,18 @@
             "name": "korpus-pelengkap-bersih.jsonl.gz.part24",
             "sha256": "eeceadd5ef586547f5cc8ba00b7f43bf0f4f3735dab4710233b52bf91a281312",
             "bytes": 39384438
+          },
+          {
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part25",
+            "sha256": "b568b0f2e83a15bac49853844d23515864285af5199e30adf278a20fe4dbe762",
+            "bytes": 3221745
           }
         ],
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 90188735,
-    "totalTokenBPEResmiKanonik": 17984794287
+    "totalDokumenKanonik": 90194429,
+    "totalTokenBPEResmiKanonik": 17986948010
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -264,19 +269,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 17984794287,
+    "totalTokenKanonikTerverifikasi": 17986948010,
     "totalKataApproxStagingBelumDireview": 8137547049,
     "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 17975859650. Sampah boleh turun dari 18415279368; bukan pangkas topik. Header ulang dan pasal identik di dalam dokumen dihapus. Hukum/berita tidak dibuang. Ubah 171 dok. BPE 15277086568 -> 15277083398.",
-    "tokenKanonikPerintahClaude": 17984794287,
-    "kekuranganTokenKanonik": -16984794287
+    "tokenKanonikPerintahClaude": 17986948010,
+    "kekuranganTokenKanonik": -16986948010
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -16984794287,
+  "kekuranganTokenKanonik": -16986948010,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 17984794287,
+  "tokenKanonikPerintahClaude": 17986948010,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
