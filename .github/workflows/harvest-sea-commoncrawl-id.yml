@@ -74,3 +74,4 @@ jobs:
           }
           JSON
           gh release upload "$TAG" work/manifest.json --repo "$REPO" --clobber
+          echo "SEA CommonCrawl Indonesian harvest finished."
