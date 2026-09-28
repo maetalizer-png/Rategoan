@@ -1,0 +1,103 @@
+name: harvest-pustaka-native-large
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: harvest-pustaka-native
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-pustaka]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest native Common Crawl Indonesian corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-pustaka-native-2026-09"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru — Pustaka Native Common Crawl — 2026-09" --notes "Standalone large K1 candidate. Only corpus-bahasa-indonesia-native from meaecosystem/pustaka. Native Common Crawl snapshot CC-MAIN-2026-34. Source license CC0 per upstream license notes. Not placed in K1/K2/K3/K4."
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/meaecosystem/pustaka/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api,timeout=120) as r: items=json.load(r)
+          pref="corpus-bahasa-indonesia-native/"
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.startswith(pref):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort(key=lambda z:z[0])
+          if not files: raise SystemExit("native corpus files not found")
+          # Keep this first harvest bounded at about 25 GB upstream; resume later with a new tag.
+          total=0; chosen=[]
+          for p,s in files:
+              if chosen and total>=25*1024**3: break
+              chosen.append(p); total+=s
+          open("work/files.txt","w").write("\n".join(chosen)+"\n")
+          print("selected",len(chosen),"files",total,"bytes")
+          PY
+
+          python -m pip install --quiet tqdm
+
+          n=0
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            src="work/src-$n"
+            curl -L --fail --retry 6 --retry-all-errors -o "$src" "https://huggingface.co/datasets/meaecosystem/pustaka/resolve/main/$path?download=true"
+
+            python - "$src" "$n" "$path" <<'PY'
+          import sys,os,gzip,shutil,json
+          src,n,path=sys.argv[1:]
+          outdir="work/out"; os.makedirs(outdir,exist_ok=True)
+          # Treat text/jsonl sources as line records; preserve original record bytes.
+          opener=gzip.open if src.endswith((".gz",".gzip")) else open
+          mode="rt"
+          part=0; written=0; limit=1700*1000*1000
+          def new():
+              global part,written,f
+              if 'f' in globals(): f.close()
+              part+=1
+              f=gzip.open(f"{outdir}/{n}-{part:03d}.jsonl.gz","wt",encoding="utf-8")
+              written=0
+          new()
+          with opener(src,mode,encoding="utf-8",errors="replace") as inp:
+              for line in inp:
+                  if not line.strip(): continue
+                  b=len(line.encode("utf-8"))
+                  if written and written+b>limit: new()
+                  if line.lstrip().startswith("{"):
+                      try:
+                          obj=json.loads(line)
+                          if isinstance(obj,dict):
+                              obj["source"]="meaecosystem/pustaka/corpus-bahasa-indonesia-native"
+                              obj["license"]="CC0"
+                              line=json.dumps(obj,ensure_ascii=False,separators=(",",":"))+"\n"
+                      except Exception: pass
+                  f.write(line); written+=len(line.encode("utf-8"))
+          f.close()
+          PY
+
+            for f in work/out/$n-*.jsonl.gz; do
+              [ -f "$f" ] || continue
+              sha=$(sha256sum "$f"|awk '{print $1}')
+              size=$(stat -c%s "$f")
+              printf '{"source":"meaecosystem/pustaka","subset":"corpus-bahasa-indonesia-native","path":"%s","bytes":%s,"sha256":"%s","license":"CC0","snapshot":"CC-MAIN-2026-34"}\n' "$path" "$size" "$sha" > "$f.manifest.json"
+              gh release upload "$TAG" --repo "$REPO" "$f" "$f.manifest.json" --clobber
+              rm -f "$f" "$f.manifest.json"
+            done
+            rm -f "$src"
+          done < work/files.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.txt --clobber
