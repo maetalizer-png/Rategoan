@@ -2,13 +2,12 @@
 
 Diperbarui: 2026-09-28.
 
-## K3
-part00–02 hilang permanen. part03–25 tidak ditimpa.
-part26–28 berita politik CC-BY-SA. Gzip baru 1013813948 byte.
-Dokumen K3 81360713. BPE K3 15881116382.
-SHA `db6f6e9a16e21bb7`.
+Sortir mutu. Bukan pangkas topik. Bukan filter EN.
+Dokumen tiga rak 91668002. BPE tiga rak 18560554203.
 
-## Lainnya
-K1 dan K2 tidak diubah sesi ini. K4 dan audio tidak diubah.
+K1 7590198 dok / 2244713763 BPE.
+K2 2717091 dok / 434724058 BPE.
+K3 81360713 dok / 15881116382 BPE.
+K4 dan audio tidak diubah.
 
-Tiga rak tertulis **18588827271** BPE.
+Sortir K2 duplikat template. 2757898 dok masuk, 2717091 dok simpan, 434724058 BPE.
