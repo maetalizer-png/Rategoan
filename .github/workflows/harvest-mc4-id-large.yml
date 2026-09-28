@@ -45,7 +45,7 @@ jobs:
 
           while IFS= read -r idx; do
             src="work/shard-$idx.json.gz"
-            url=$(printf 'https://huggingface.co/datasets/munggok/mc4-id/resolve/main/mc4-id-filter/c4-id-%05d-of-01016.json.gz?download=true' "$idx")
+            url=$(printf 'https://huggingface.co/datasets/munggok/mc4-id/resolve/main/mc4-id-filter/c4-id-%05d-of-01024.json.gz?download=true' "$idx")
             curl -L --fail --retry 6 --retry-all-errors -o "$src" "$url"
 
             python - "$src" "work/current.jsonl.gz" <<'PY'
