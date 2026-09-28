@@ -53,15 +53,7 @@ function thinkBlock(topic) {
 function researchPlan(topic) {
   const t = String(topic || '').replace(/^riset\s+(mendalam\s+)?/i, '').trim() || 'topik';
   const q = queries(t);
-  return [
-    'Rencana riset: ' + t,
-    '1. Tentukan pertanyaan inti.',
-    '2. Cari: ' + q.join(' · '),
-    '3. Bandingkan sumber, buang nav/iklan.',
-    '4. Susun temuan + kesimpulan.',
-    '',
-    'Nyalakan Pencarian Web lalu kirim topiknya agar langkah 2 jalan di mesin yang sama.',
-  ].join('\n');
+  return ['Rencana riset: ' + t, 'Kueri: ' + q.join(' · ')].join('\n');
 }
 
 export const flowHub = Object.freeze({
