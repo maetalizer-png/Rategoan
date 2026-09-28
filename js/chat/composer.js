@@ -14,7 +14,7 @@ import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../utils/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
-import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../utils/slides-export.js';
+import { buildOutline, exportSlides, previewOutline, rememberSlide, allArtifacts } from '../utils/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
@@ -279,29 +279,54 @@ export const composer = {
       this._toggleSwitch('sheet-research', this.researchActive);
       if (this.researchActive) this.setWebsearch(true);
     };
+    const paintProjects = () => {
+      const ul = $('project-list');
+      if (!ul) return;
+      ul.innerHTML = '';
+      workspace.list().forEach((p) => {
+        const li = document.createElement('li');
+        li.textContent = p.name + (workspace.currentId() === p.id ? ' · aktif' : '');
+        li.onclick = () => {
+          workspace.setCurrent(p.id);
+          const sess = this.ensure();
+          sess.projectId = p.id;
+          sess.project = { goal: p.name, started: Date.now() };
+          store.save();
+          toast.show('Proyek: ' + p.name);
+          sheets.close();
+        };
+        ul.appendChild(li);
+      });
+    };
+    const openProjectSheet = () => {
+      paintProjects();
+      sheets.close();
+      sheets.openProject();
+    };
     const projectCard = $('sheet-project');
-    if (projectCard) projectCard.onclick = () => {
-      const name = window.prompt('Nama proyek', (workspace.current() && workspace.current().name) || '');
+    if (projectCard) projectCard.onclick = () => openProjectSheet();
+    const sideProj = $('btn-project');
+    if (sideProj) sideProj.onclick = () => { drawer.close(); openProjectSheet(); };
+    const makeP = $('project-create');
+    if (makeP) makeP.onclick = () => {
+      const name = (($('project-name') || {}).value || '').trim();
       if (!name) return;
       const found = workspace.findByName(name) || workspace.create(name);
       workspace.setCurrent(found.id);
-      const s = this.ensure();
-      s.projectId = found.id;
-      s.project = { goal: found.name, started: Date.now() };
+      const sess = this.ensure();
+      sess.projectId = found.id;
+      sess.project = { goal: found.name, started: Date.now() };
       store.save();
       toast.show('Proyek: ' + found.name);
       sheets.close();
     };
-    const sideProj = $('btn-project');
-    if (sideProj) sideProj.onclick = () => {
-      const list = workspace.list();
-      const hint = list.length ? list.map((p) => p.name).join(', ') : '';
-      const name = window.prompt('Proyek (baru atau nama yang sudah ada)', hint);
+    const artBtn = $('btn-artifact');
+    if (artBtn) artBtn.onclick = () => {
       drawer.close();
-      if (!name) return;
-      const found = workspace.findByName(name) || workspace.create(name);
-      workspace.setCurrent(found.id);
-      toast.show('Proyek aktif: ' + found.name);
+      const list = allArtifacts();
+      if (!list.length) { toast.show('Belum ada slide'); return; }
+      const last = list[0];
+      artifact.open(last.outline, last.title, last.fileName);
     };
     const slideCard = $('sheet-slide');
     if (slideCard) {
