@@ -21,3 +21,4 @@ jobs:
               echo "already absent: $tag"
             fi
           done
+          echo "cleanup pass complete; large-data harvests remain standalone."
