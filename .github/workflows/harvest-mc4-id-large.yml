@@ -3,6 +3,7 @@ name: harvest-mc4-id-large
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: harvest-mc4-id-large
@@ -13,7 +14,6 @@ permissions:
 
 jobs:
   harvest:
-    if: contains(github.event.head_commit.message, '[harvest-mc4-id]')
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
