@@ -2,7 +2,6 @@ name: harvest-fineweb2-k1
 on:
   push:
     branches: [main]
-    paths: [docs/.harvest-fineweb2-trigger]
 permissions:
   contents: write
 jobs:
