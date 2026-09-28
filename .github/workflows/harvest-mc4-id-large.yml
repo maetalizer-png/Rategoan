@@ -1,0 +1,79 @@
+name: harvest-mc4-id-large
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-mc4-id]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Harvest new mC4 Indonesian corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="data-baru-mc4-id-2026-09"
+          mkdir -p work
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" \
+            --title "Data Baru — mC4 Indonesian — 2026-09" \
+            --notes "Standalone large K1 candidate. Source: indonesian-nlp/mc4-id. License: ODC-By 1.0. Not placed in K1/K2/K3/K4. Source is cleaned Indonesian mC4/Common Crawl."
+
+          python -m pip install --quiet pyarrow pandas
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/indonesian-nlp/mc4-id/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=sorted(x["path"] for x in items if x.get("type")=="file" and x["path"].startswith("full/") and x["path"].endswith(".parquet"))
+          if not files:
+              raise SystemExit("No full parquet files found")
+          open("work/files.txt","w").write("\n".join(files)+"\n")
+          print("files",len(files))
+          PY
+
+          i=0
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            i=$((i+1))
+            base=$(basename "$path")
+            src="work/src-$i.parquet"
+            out="work/mc4-id-$i.jsonl.gz"
+
+            curl -L --fail --retry 6 --retry-all-errors -o "$src" \
+              "https://huggingface.co/datasets/indonesian-nlp/mc4-id/resolve/main/$path?download=true"
+
+            python - "$src" "$out" <<'PY'
+          import sys, gzip, json, pyarrow.parquet as pq
+          src,out=sys.argv[1],sys.argv[2]
+          pf=pq.ParquetFile(src)
+          with gzip.open(out,"wt",encoding="utf-8") as f:
+              for batch in pf.iter_batches(batch_size=20000, columns=["text","timestamp","url"]):
+                  cols=batch.to_pydict()
+                  for j,t in enumerate(cols["text"]):
+                      f.write(json.dumps({
+                          "text": t,
+                          "timestamp": cols["timestamp"][j],
+                          "url": cols["url"][j],
+                          "source":"indonesian-nlp/mc4-id",
+                          "license":"ODC-By-1.0"
+                      },ensure_ascii=False,separators=(",",":"))+"\n")
+          PY
+
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            size=$(stat -c%s "$out")
+            printf '{"source":"indonesian-nlp/mc4-id","subset":"full","split":"train","path":"%s","bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$path" "$size" "$sha" > "work/$i-manifest.json"
+            gh release upload "$TAG" "$out" "work/$i-manifest.json" --clobber
+            rm -f "$src" "$out"
+          done < work/files.txt
+
+          printf '{"dataset":"indonesian-nlp/mc4-id","files_processed":%s,"license":"ODC-By-1.0","status":"harvested"}\n' "$i" > work/manifest-total.json
+          gh release upload "$TAG" work/manifest-total.json work/files.txt --clobber
