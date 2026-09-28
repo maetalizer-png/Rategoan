@@ -182,19 +182,14 @@ export const composer = {
       store.save();
       return;
     }
-    if (this.researchActive || flowHub.wantsResearch(text)) {
-      this.setWebsearch(true);
-      await chat.ask(text, { directReply: flowHub.researchPlan(text) });
-      store.save();
-      return;
-    }
+    if (this.researchActive || flowHub.wantsResearch(text)) this.setWebsearch(true);
     const plan = turnPipeline.inspect(text, {
       messages: s.messages,
       attach: att,
-      websearch: this.websearchActive,
+      websearch: this.websearchActive || this.researchActive,
     });
-    const isWebsearch = plan.route === 'web';
-    const routedText = isWebsearch ? 'googling ' + text : text;
+    const isWebsearch = plan.route === 'web' || this.researchActive;
+    const routedText = isWebsearch ? 'googling ' + text.replace(/^riset\s+(mendalam\s+)?/i, '') : text;
     if (plan.route === 'slide' && /^(lanjut|lanjutkan|dari ini)$/i.test(text.trim())) {
       text = 'buatkan slide dari ini';
     }
@@ -212,7 +207,7 @@ export const composer = {
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '' });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: [(this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : '', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : ''].filter(Boolean).join('\n\n') });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
