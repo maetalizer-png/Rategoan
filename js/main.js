@@ -29,6 +29,7 @@ import { collectionPage } from './collection/collection.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
+import { mesin } from '../raget/raget-runtime/mesin.js';
 
 const bootStart = performance.now();
 
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   settings.bind();
   collectionPage.bind();
   login.bind();
+  try { window.__rategoanMesin = mesin.list(); } catch (e) {}
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   try {
     const params = new URLSearchParams(location.search);
