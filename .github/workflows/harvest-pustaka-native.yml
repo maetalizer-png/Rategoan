@@ -39,7 +39,6 @@ jobs:
                   files.append((p,int(x.get("size") or 0)))
           files.sort(key=lambda z:z[0])
           if not files: raise SystemExit("native corpus files not found")
-          # Keep this first harvest bounded at about 25 GB upstream; resume later with a new tag.
           total=0; chosen=[]
           for p,s in files:
               if chosen and total>=25*1024**3: break
@@ -48,22 +47,17 @@ jobs:
           print("selected",len(chosen),"files",total,"bytes")
           PY
 
-          python -m pip install --quiet tqdm
-
           n=0
           while IFS= read -r path; do
             [ -z "$path" ] && continue
             n=$((n+1))
             src="work/src-$n"
             curl -L --fail --retry 6 --retry-all-errors -o "$src" "https://huggingface.co/datasets/meaecosystem/pustaka/resolve/main/$path?download=true"
-
             python - "$src" "$n" "$path" <<'PY'
-          import sys,os,gzip,shutil,json
+          import sys,os,gzip,json
           src,n,path=sys.argv[1:]
           outdir="work/out"; os.makedirs(outdir,exist_ok=True)
-          # Treat text/jsonl sources as line records; preserve original record bytes.
           opener=gzip.open if src.endswith((".gz",".gzip")) else open
-          mode="rt"
           part=0; written=0; limit=1700*1000*1000
           def new():
               global part,written,f
@@ -72,11 +66,9 @@ jobs:
               f=gzip.open(f"{outdir}/{n}-{part:03d}.jsonl.gz","wt",encoding="utf-8")
               written=0
           new()
-          with opener(src,mode,encoding="utf-8",errors="replace") as inp:
+          with opener(src,"rt",encoding="utf-8",errors="replace") as inp:
               for line in inp:
                   if not line.strip(): continue
-                  b=len(line.encode("utf-8"))
-                  if written and written+b>limit: new()
                   if line.lstrip().startswith("{"):
                       try:
                           obj=json.loads(line)
@@ -85,10 +77,11 @@ jobs:
                               obj["license"]="CC0"
                               line=json.dumps(obj,ensure_ascii=False,separators=(",",":"))+"\n"
                       except Exception: pass
-                  f.write(line); written+=len(line.encode("utf-8"))
+                  b=len(line.encode("utf-8"))
+                  if written and written+b>limit: new()
+                  f.write(line); written+=b
           f.close()
           PY
-
             for f in work/out/$n-*.jsonl.gz; do
               [ -f "$f" ] || continue
               sha=$(sha256sum "$f"|awk '{print $1}')
@@ -99,5 +92,5 @@ jobs:
             done
             rm -f "$src"
           done < work/files.txt
-
           gh release upload "$TAG" --repo "$REPO" work/files.txt --clobber
+          echo "Pustaka native harvest finished."
