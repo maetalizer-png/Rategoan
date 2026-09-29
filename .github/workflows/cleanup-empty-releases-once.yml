@@ -1,0 +1,34 @@
+name: cleanup-empty-releases-once
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/cleanup-empty-releases-once.yml"
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete empty releases and tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          for tag in penampung-tersaring-2026-09 data-baru-pustaka-native-2026-09; do
+            id="$(gh api "repos/$REPO/releases/tags/$tag" --jq '.id' 2>/dev/null || true)"
+            if [ -n "$id" ]; then
+              gh api --method DELETE "repos/$REPO/releases/$id"
+            fi
+            gh api --method DELETE "repos/$REPO/git/refs/tags/$tag" 2>/dev/null || true
+          done
+          echo "Empty release cleanup complete."
+      - name: Remove this one-shot workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method DELETE "repos/maetalizer-png/Rategoan/contents/.github/workflows/cleanup-empty-releases-once.yml" \
+            -f message="chore: remove one-shot empty-release cleanup workflow" \
+            -f sha="$(gh api "repos/maetalizer-png/Rategoan/contents/.github/workflows/cleanup-empty-releases-once.yml" --jq '.sha')" \
+            -f branch="main"
