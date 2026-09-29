@@ -1,0 +1,93 @@
+name: harvest-k1-coding-batch
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-coding]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: maetalizer-png/Rategoan
+      TAG: data-baru-k1-corpus-indonesia-2026-09
+    steps:
+      - name: Check target staging release
+        run: gh release view "$TAG" --repo "$REPO" >/dev/null
+
+      - name: Harvest Project CodeNet
+        run: |
+          set -euo pipefail
+          mkdir -p work
+          url='https://dax-cdn.cdn.appdomain.cloud/dax-project-codenet/1.0.0/Project_CodeNet.tar.gz'
+          curl -L --fail --retry 8 --retry-all-errors --connect-timeout 30 -o work/Project_CodeNet.tar.gz "$url"
+          sha256sum work/Project_CodeNet.tar.gz > work/coding-project-codenet.sha256
+          split -b 1500m -d -a 3 work/Project_CodeNet.tar.gz work/coding-project-codenet.tar.gz.part-
+          for p in work/coding-project-codenet.tar.gz.part-*; do
+            gh release upload "$TAG" --repo "$REPO" "$p" --clobber
+          done
+          gh release upload "$TAG" --repo "$REPO" work/coding-project-codenet.sha256 --clobber
+          rm -f work/Project_CodeNet.tar.gz work/coding-project-codenet.tar.gz.part-*
+
+      - name: Harvest Project CodeNet metadata
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 8 --retry-all-errors --connect-timeout 30 -o work/Project_CodeNet_metadata.tar.gz 'https://dax-cdn.cdn.appdomain.cloud/dax-project-codenet/1.0.0/Project_CodeNet_metadata.tar.gz'
+          sha256sum work/Project_CodeNet_metadata.tar.gz > work/coding-project-codenet-metadata.sha256
+          split -b 1500m -d -a 3 work/Project_CodeNet_metadata.tar.gz work/coding-project-codenet-metadata.tar.gz.part-
+          for p in work/coding-project-codenet-metadata.tar.gz.part-*; do
+            gh release upload "$TAG" --repo "$REPO" "$p" --clobber
+          done
+          gh release upload "$TAG" --repo "$REPO" work/coding-project-codenet-metadata.sha256 --clobber
+          rm -f work/Project_CodeNet_metadata.tar.gz work/coding-project-codenet-metadata.tar.gz.part-*
+
+      - name: Harvest CodeContests+ default subset
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, urllib.request
+          repo='ByteDance-Seed/Code-Contests-Plus'
+          u=f'https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false'
+          with urllib.request.urlopen(u, timeout=120) as r:
+              items=json.load(r)
+          files=[x for x in items if x.get('type')=='file' and x.get('path','').startswith('default/')]
+          with open('work/codecontests-default-files.txt','w') as f:
+              for x in files:
+                  f.write(f"{x['path']}\t{x.get('size',0)}\n")
+          print('default files:',len(files))
+          PY
+          while IFS=$'\t' read -r path size; do
+            [ -z "$path" ] && continue
+            safe=$(printf '%s' "$path" | tr '/ ' '__')
+            curl -L --fail --retry 8 --retry-all-errors --connect-timeout 30 -o "work/$safe" "https://huggingface.co/datasets/ByteDance-Seed/Code-Contests-Plus/resolve/main/$path?download=true"
+            sha256sum "work/$safe" > "work/coding-codecontests-$safe.sha256"
+            if [ "$(stat -c%s "work/$safe")" -lt 1900000000 ]; then
+              gh release upload "$TAG" --repo "$REPO" "work/$safe" "work/coding-codecontests-$safe.sha256" --clobber
+            else
+              split -b 1500m -d -a 3 "work/$safe" "work/coding-codecontests-$safe.part-"
+              for p in work/coding-codecontests-$safe.part-*; do
+                gh release upload "$TAG" --repo "$REPO" "$p" --clobber
+              done
+              gh release upload "$TAG" --repo "$REPO" "work/coding-codecontests-$safe.sha256" --clobber
+            fi
+            rm -f "work/$safe" "work/coding-codecontests-$safe.sha256" work/coding-codecontests-$safe.part-*
+          done < work/codecontests-default-files.txt
+
+      - name: Write coding harvest manifest
+        run: |
+          cat > work/coding-harvest-manifest.txt <<'EOF'
+          staging_release=data-baru-k1-corpus-indonesia-2026-09
+          purpose=coding-data-harvest
+          source_1=IBM Project CodeNet
+          source_1_main=Project_CodeNet.tar.gz
+          source_1_metadata=Project_CodeNet_metadata.tar.gz
+          source_2=ByteDance-Seed/Code-Contests-Plus
+          source_2_subset=default
+          note=Raw staging only; must be cleaned, deduplicated, license-audited and classified before canonical training use.
+          EOF
+          gh release upload "$TAG" --repo "$REPO" work/coding-harvest-manifest.txt --clobber
