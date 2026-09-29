@@ -42,6 +42,18 @@ jobs:
               fi
             fi
           done
+          # Remove exact duplicate asset names, keeping the first asset ID for each name.
+          gh api --paginate "/repos/$REPO/releases/$release_id/assets?per_page=100" |
+            jq -s 'add | group_by(.name)[] | select(length > 1) | .[1:][] | [.id,.name][] | @tsv' -r |
+            while IFS=
+          gh api --paginate "/repos/$REPO/releases/$release_id/assets?per_page=100" |
+            jq -s 'add | map(select(.name | test("\\.(parquet|gz)$"))) |
+            {count:length, bytes:(map(.size)|add), gb:((map(.size)|add)/1000000000),
+             assets:map({name,size})}'
+\\t' read -r id name; do
+              echo "Deleting duplicate $name (asset $id)"
+              gh api --method DELETE "/repos/$REPO/releases/assets/$id" >/dev/null 2>&1 || true
+            done
           echo "Remaining data:"
           gh api --paginate "/repos/$REPO/releases/$release_id/assets?per_page=100" |
             jq -s 'add | map(select(.name | test("\\.(parquet|gz)$"))) |
