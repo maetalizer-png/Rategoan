@@ -17,23 +17,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
-      - name: Harvest public Indonesian K1 sources into one existing release
+      - name: Harvest large Indonesian K1 sources into one release
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: \${{ github.token }}
+          HF_TOKEN: \${{ secrets.HF_TOKEN }}
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
           TAG="data-baru-k1-corpus-indonesia-2026-09"
           mkdir -p work
           gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Corpus Indonesia — 2026-09" --notes "Standalone K1 candidates kept together until cleaning/deduplication and overlap audit."
+
           harvest_repo() {
             HF_REPO="$1"
-            echo "=== HARVEST $HF_REPO ==="
-            python - "$HF_REPO" <<'PY'
-import json,sys,urllib.request
-repo=sys.argv[1]
+            NEED_AUTH="$2"
+            echo "=== HARVEST $HF_REPO auth=$NEED_AUTH ==="
+            python - "$HF_REPO" "$NEED_AUTH" <<'PY'
+import json,sys,urllib.request,os
+repo=sys.argv[1]; auth=sys.argv[2]=="1"
 api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
-with urllib.request.urlopen(api,timeout=120) as r: items=json.load(r)
+req=urllib.request.Request(api)
+if auth and os.environ.get("HF_TOKEN"):
+    req.add_header("Authorization","Bearer "+os.environ["HF_TOKEN"])
+with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
 files=[]
 for x in items:
     p=x.get("path","")
@@ -46,7 +52,7 @@ fn="work/"+repo.replace("/","__")+"-files.json"
 json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open(fn,"w"),indent=2)
 PY
             repo_safe=$(printf "%s" "$HF_REPO" | sed "s#[^A-Za-z0-9._-]#_#g")
-            gh release upload "$TAG" --repo "$REPO" "work/${repo_safe}-files.json" --clobber
+            gh release upload "$TAG" --repo "$REPO" "work/$repo_safe-files.json" --clobber
             python - "$HF_REPO" <<'PY' > "work/list.tsv"
 import json,sys
 repo=sys.argv[1]; d=json.load(open("work/"+repo.replace("/","__")+"-files.json"))
@@ -55,9 +61,13 @@ PY
             while IFS=$'\t' read -r idx size path; do
               [ -z "$path" ] && continue
               safe=$(printf "%s" "$path" | sed "s#[^A-Za-z0-9._-]#_#g")
-              out="work/${repo_safe}-${idx}-${safe}"
+              out="work/$repo_safe-$idx-$safe"
               echo "DOWNLOAD $HF_REPO:$path ($size bytes)"
-              curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
+              if [ "$NEED_AUTH" = "1" ]; then
+                curl -L --fail --retry 6 --retry-all-errors -H "Authorization: Bearer $HF_TOKEN" -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
+              else
+                curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
+              fi
               actual=$(stat -c%s "$out")
               test "$actual" -eq "$size"
               sha=$(sha256sum "$out" | awk '{print $1}')
@@ -67,10 +77,10 @@ PY
             done < work/list.tsv
             rm -f work/list.tsv
           }
-          harvest_repo "Lyon28/Corpus-Indonesia"
-          harvest_repo "Ik45/data-science-en-id"
-          harvest_repo "sansaks/dataset_indonesia"
-          harvest_repo "Firmansyah-Ibrahim/indo-bloom-raw-bse"
-          echo "ALL PUBLIC K1 SOURCES COMPLETE IN $TAG"
 
-# [harvest-k1-corpus] execute repaired consolidated public harvest
+          harvest_repo "Lyon28/Corpus-Indonesia" 0
+          harvest_repo "sansaks/dataset_indonesia" 0
+          harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
+          harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
+
+          echo "ALL SELECTED K1 SOURCES COMPLETE IN $TAG"
