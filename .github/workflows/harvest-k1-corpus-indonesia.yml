@@ -96,4 +96,4 @@ PY
           gh release view "$TAG" --repo "$REPO" --json assets --jq '{asset_count:(.assets|length),bytes:(.assets|map(.size)|add)}' | tee work/release-summary.json
           gh release upload "$TAG" --repo "$REPO" work/release-summary.json --clobber
           echo "HARVEST VERIFIED IN $TAG" # [harvest-k1-corpus]
-          echo "REPAIR_UNIQUE_ASSET_NAMES_2026_09_30_FULL_SHARDS"
+          echo "REPAIR_UNIQUE_ASSET_NAMES_2026_09_30_FULL_SHARDS_RUN2"
