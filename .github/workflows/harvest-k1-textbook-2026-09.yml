@@ -24,7 +24,7 @@ jobs:
 
           gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" \
             --title "Data Baru K1 — Textbook — 2026-09" \
-            --notes "Standalone K1 textbook harvest. Sources: Firmansyah-Ibrahim/indo-bloom-raw-bse (CC-BY-4.0) and haznitrama/indonesian-children-books (CC-BY-NC-4.0). Kept outside canonical K1 until cleaning, deduplication, overlap and license-use audit."
+            --notes "Standalone K1 textbook harvest. Public sources only. Kept outside canonical K1 until cleaning, deduplication, overlap and license-use audit."
 
           python - <<'PY'
           import json, urllib.request
@@ -45,7 +45,6 @@ jobs:
           for i,x in enumerate(allf,1): print(i,x['repo'],x['size'],x['path'])
           PY
 
-          n=0
           python - <<'PY'
           import json
           d=json.load(open('work/manifest.json'))
@@ -54,6 +53,7 @@ jobs:
               f.write(f"{x['repo']}\t{x['license']}\t{x['size']}\t{x['path']}\t{x['url']}\n")
           PY
 
+          n=0
           while IFS=$'\t' read -r repo license size path url; do
             [ -z "$path" ] && continue
             n=$((n+1))
