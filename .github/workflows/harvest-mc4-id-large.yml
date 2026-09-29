@@ -32,7 +32,12 @@ jobs:
 
           mapfile -t assets < <(gh release view "$TAG" --repo "$REPO" --json assets --jq '.assets[].name')
           start=0
+
+          # Migrate the first legacy 40-shard run already present in this release.
           for name in "${assets[@]}"; do
+            if [[ "$name" == "mc4-id-part-1.jsonl.gz" ]]; then
+              start=40
+            fi
             if [[ "$name" =~ ^mc4-id-shards-([0-9]{5})-([0-9]{5})\.jsonl\.gz$ ]]; then
               end="${BASH_REMATCH[2]}"
               if (( 10#$end + 1 > start )); then start=$((10#$end + 1)); fi
