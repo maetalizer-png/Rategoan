@@ -157,8 +157,8 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
     const relatedBlock = !result.definition && related.length
       ? '\n\n## Juga terkait\n' + related.map(linkLine).join('\n')
       : '';
-    const hopBlock = Array.isArray(result.sources) && result.sources.length > 1
-      ? '\n\n## Sumber yang dibanding\n' + result.sources.map((s) => '- ' + s.title).join('\n')
+    const hopBlock = Array.isArray(result.sources) && result.sources.length
+      ? '\n' + result.sources.filter((s) => s && s.url).map((s) => 'Sumber::' + (s.title || 'Sumber') + '|' + s.url).join('\n')
       : '';
     return (
       body +
