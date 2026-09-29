@@ -1,0 +1,54 @@
+name: harvest-k1-corpus-indonesia-final
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download and upload all HF shards
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          mkdir -p work
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/Lyon28/Corpus-Indonesia/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=sorted((x["path"], int(x.get("size") or 0)) for x in items
+                       if x.get("type")=="file" and x.get("path","").lower().endswith(".parquet"))
+          assert files, "no parquet shards"
+          total=sum(s for _,s in files)
+          json.dump({"source":"Lyon28/Corpus-Indonesia","license":"Apache-2.0","files":files,"total_bytes":total},
+                    open("work/files.json","w"), indent=2)
+          print("SHARDS",len(files),"TOTAL",total)
+          for i,(p,s) in enumerate(files,1):
+              print(i,s,p)
+          PY
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Corpus Indonesia — 2026-09" --notes "Lyon28/Corpus-Indonesia; Apache-2.0; standalone K1 candidate."
+          python - <<'PY'
+          import json
+          d=json.load(open("work/files.json"))
+          open("work/file-list.txt","w").write("\n".join(f"{i}\t{s}\t{p}" for i,(p,s) in enumerate(d["files"],1))+"\n")
+          PY
+          while IFS=$'\t' read -r idx size path; do
+            out="work/shard-${idx}.parquet"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
+            actual=$(stat -c%s "$out")
+            test "$actual" -eq "$size"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"Lyon28/Corpus-Indonesia","path":"%s","bytes":%s,"sha256":"%s","license":"Apache-2.0"}\n' "$path" "$actual" "$sha" > "work/shard-${idx}.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "work/shard-${idx}.manifest.json" --clobber
+          done < work/file-list.txt
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          echo "DONE: uploaded all ${idx} shards; expected total bytes=$((0))"
