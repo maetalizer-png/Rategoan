@@ -44,10 +44,18 @@ jobs:
             out="work/$asset"
             curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
             test "$(stat -c%s "$out")" -eq "$(python -c "import json; d=json.load(open('work/files.json')); print(dict(d['files'])['$path'])")"
-            gh release upload "$TAG" --repo "$REPO" "$out" --clobber
+            for attempt in 1 2 3 4 5; do
+              if gh release upload "$TAG" --repo "$REPO" "$out" --clobber; then break; fi
+              if [ "$attempt" -eq 5 ]; then exit 1; fi
+              sleep $((attempt*90))
+            done
             rm -f "$out"
           done < <(python -c 'import json; [print(p) for p,_ in json.load(open("work/files.json"))["files"]]')
-          gh release upload "$TAG" --repo "$REPO" work/files.json --clobber
+          for attempt in 1 2 3 4 5; do
+            if gh release upload "$TAG" --repo "$REPO" work/files.json --clobber; then break; fi
+            if [ "$attempt" -eq 5 ]; then exit 1; fi
+            sleep $((attempt*90))
+          done
           echo "REPAIR COMPLETE"
 
 # Triggered 2026-09-30: verify and repair the same release asset set.
