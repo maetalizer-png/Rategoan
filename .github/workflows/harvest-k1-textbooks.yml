@@ -11,15 +11,15 @@ concurrency:
 permissions:
   contents: write
 
+env:
+  HF_TOKEN: ${{ secrets.HF_TOKEN }}
+  REPO: maetalizer-png/Rategoan
+  TAG: data-baru-k1-corpus-indonesia-2026-09
+
 jobs:
   harvest:
-    if: contains(github.event.head_commit.message, '[harvest-k1-textbooks]')
     runs-on: ubuntu-latest
     timeout-minutes: 360
-    env:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      REPO: maetalizer-png/Rategoan
-      TAG: data-baru-k1-corpus-indonesia-2026-09
     steps:
       - name: Install Hugging Face CLI
         run: python -m pip install -q -U huggingface_hub
@@ -29,10 +29,6 @@ jobs:
           set -euo pipefail
           test -n "$HF_TOKEN" || { echo 'HF_TOKEN GitHub secret is not configured'; exit 1; }
           hf auth whoami --token "$HF_TOKEN"
-
-      - name: Create release if missing
-        run: |
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title 'Data Baru K1 — Indonesian Textbooks' --notes 'Standalone K1 data harvest. Kept outside canonical K1 until audit/dedup.'
 
       - name: Download STEM textbook dataset
         run: |
@@ -64,7 +60,7 @@ jobs:
           sha256sum work/assets/* > work/assets/SHA256SUMS
           ls -lh work/assets
 
-      - name: Upload all assets to the existing data tag
+      - name: Upload to existing data release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -72,4 +68,4 @@ jobs:
           for f in work/assets/*; do
             gh release upload "$TAG" --repo "$REPO" "$f" --clobber
           done
-          echo 'Textbook harvest uploaded.'
+          echo 'K1 textbook harvest uploaded to existing release.'
