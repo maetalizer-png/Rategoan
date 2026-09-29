@@ -69,6 +69,8 @@ PY
           }
           harvest_repo "Lyon28/Corpus-Indonesia"
           harvest_repo "Ik45/data-science-en-id"
+          harvest_repo "sansaks/dataset_indonesia"
+          harvest_repo "Firmansyah-Ibrahim/indo-bloom-raw-bse"
           echo "ALL PUBLIC K1 SOURCES COMPLETE IN $TAG"
 
 # [harvest-k1-corpus] execute repaired consolidated public harvest
