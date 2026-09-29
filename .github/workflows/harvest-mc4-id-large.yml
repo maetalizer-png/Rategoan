@@ -1,13 +1,13 @@
 name: harvest-mc4-id-large
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "7,17,27,37,47,57 * * * *"
 
 concurrency:
   group: harvest-mc4-id-large
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -17,68 +17,72 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
-      - name: Harvest 20GB+ mC4 Indonesian
+      - name: Harvest next 40-shard mC4 Indonesian batch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
           TAG="data-baru-mc4-id-2026-09"
+          BATCH=40
+          TOTAL=1024
           mkdir -p work
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru — mC4 Indonesian — 2026-09" --notes "Standalone large K1 candidate. Source: indonesian-nlp/mc4-id / original shard store. License ODC-By 1.0. Not placed in K1/K2/K3/K4."
 
-          python - <<'PY'
-          import pathlib
-          n=40
-          pathlib.Path("work/shards.txt").write_text("\n".join(str(i) for i in range(n))+"\n")
-          print("selected shards",n)
-          PY
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 ||             gh release create "$TAG" --repo "$REPO"               --title "Data Baru — mC4 Indonesian — 2026-09"               --notes "Standalone large Indonesian web corpus. Source: indonesian-nlp/mc4-id. License ODC-By 1.0. Kept outside K1/K2/K3/K4. Harvested in resumable 40-shard release batches."
 
-          part=1
-          bytes_out=0
-          out="work/mc4-id-part-$part.jsonl.gz"
-          python - "$out" <<'PY'
-          import gzip,sys
-          f=gzip.open(sys.argv[1],"wt",encoding="utf-8")
-          f.close()
-          PY
-
-          while IFS= read -r idx; do
-            src="work/shard-$idx.json.gz"
-            url=$(printf 'https://huggingface.co/datasets/indonesian-nlp/mc4-id/resolve/main/mc4-id-filter/c4-id.tfrecord-%05d-of-01024.json.gz?download=true' "$idx")
-            curl -L --fail --retry 6 --retry-all-errors -o "$src" "$url"
-
-            python - "$src" "work/current.jsonl.gz" <<'PY'
-          import sys,gzip,json,os
-          src,out=sys.argv[1:]
-          # Append decompressed JSONL records to the current gzip part.
-          with gzip.open(src,"rt",encoding="utf-8",errors="replace") as inp, gzip.open(out,"at",encoding="utf-8") as f:
-              for line in inp:
-                  if line.strip():
-                      f.write(line)
-          PY
-
-            rm -f "$src"
-
-            size=$(stat -c%s "work/current.jsonl.gz")
-            if [ "$size" -ge 1700000000 ]; then
-              sha=$(sha256sum work/current.jsonl.gz|awk '{print $1}')
-              mv work/current.jsonl.gz "work/mc4-id-part-$part.jsonl.gz"
-              printf '{"dataset":"indonesian-nlp/mc4-id","part":%s,"bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$part" "$size" "$sha" > "work/mc4-id-part-$part.manifest.json"
-              gh release upload "$TAG" --repo "$REPO" "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json" --clobber
-              rm -f "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json"
-              part=$((part+1))
-              : > work/current.jsonl.gz
+          mapfile -t assets < <(gh release view "$TAG" --repo "$REPO" --json assets --jq '.assets[].name')
+          start=0
+          for name in "${assets[@]}"; do
+            if [[ "$name" =~ ^mc4-id-shards-([0-9]{5})-([0-9]{5})\.jsonl\.gz$ ]]; then
+              end="${BASH_REMATCH[2]}"
+              if (( 10#$end + 1 > start )); then start=$((10#$end + 1)); fi
             fi
-          done < work/shards.txt
+          done
 
-          if [ -s work/current.jsonl.gz ]; then
-            size=$(stat -c%s work/current.jsonl.gz)
-            sha=$(sha256sum work/current.jsonl.gz|awk '{print $1}')
-            mv work/current.jsonl.gz "work/mc4-id-part-$part.jsonl.gz"
-            printf '{"dataset":"indonesian-nlp/mc4-id","part":%s,"bytes":%s,"sha256":"%s","license":"ODC-By-1.0"}\n' "$part" "$size" "$sha" > "work/mc4-id-part-$part.manifest.json"
-            gh release upload "$TAG" --repo "$REPO" "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json" --clobber
+          if (( start >= TOTAL )); then
+            printf '{"dataset":"indonesian-nlp/mc4-id","status":"complete","next_shard":%s,"total_shards":%s,"license":"ODC-By-1.0"}\n' "$start" "$TOTAL" > work/manifest-live.json
+            gh release upload "$TAG" --repo "$REPO" work/manifest-live.json --clobber
+            echo "All $TOTAL shards already harvested."
+            exit 0
           fi
 
-          printf '{"dataset":"indonesian-nlp/mc4-id","shards_processed":40,"status":"harvested","license":"ODC-By-1.0"}\n' > work/manifest-total.json
-          gh release upload "$TAG" --repo "$REPO" work/manifest-total.json --clobber
+          end=$((start+BATCH-1))
+          if (( end >= TOTAL )); then end=$((TOTAL-1)); fi
+          echo "Harvesting shards $start..$end"
+
+          out="work/mc4-id-shards-$(printf '%05d' "$start")-$(printf '%05d' "$end").jsonl.gz"
+          : > "$out"
+
+          for ((idx=start; idx<=end; idx++)); do
+            src="work/shard-$idx.json.gz"
+            url=$(printf 'https://huggingface.co/datasets/indonesian-nlp/mc4-id/resolve/main/mc4-id-filter/c4-id.tfrecord-%05d-of-01024.json.gz?download=true' "$idx")
+            echo "Downloading shard $idx"
+            curl -L --fail --retry 8 --retry-all-errors -o "$src" "$url"
+
+            python - "$src" "$out" <<'PY'
+          import gzip, sys
+          src, out = sys.argv[1:]
+          with gzip.open(src, "rt", encoding="utf-8", errors="replace") as inp, gzip.open(out, "at", encoding="utf-8") as dst:
+              for line in inp:
+                  if line.strip():
+                      dst.write(line)
+          PY
+            rm -f "$src"
+          done
+
+          size=$(stat -c%s "$out")
+          if (( size >= 1900000000 )); then
+            echo "ERROR: batch compressed asset is $size bytes; refusing near-limit upload."
+            exit 1
+          fi
+
+          sha=$(sha256sum "$out" | awk '{print $1}')
+          manifest="work/mc4-id-shards-$(printf '%05d' "$start")-$(printf '%05d' "$end").manifest.json"
+          printf '{"dataset":"indonesian-nlp/mc4-id","shard_start":%s,"shard_end":%s,"shards":%s,"bytes":%s,"sha256":"%s","license":"ODC-By-1.0","status":"uploaded"}\n'             "$start" "$end" "$((end-start+1))" "$size" "$sha" > "$manifest"
+
+          gh release upload "$TAG" --repo "$REPO" "$out" "$manifest" --clobber
+
+          next=$((end+1))
+          printf '{"dataset":"indonesian-nlp/mc4-id","status":"in_progress","completed_through_shard":%s,"next_shard":%s,"total_shards":%s,"last_batch":"%05d-%05d","bytes":%s,"license":"ODC-By-1.0"}\n'             "$end" "$next" "$TOTAL" "$start" "$end" "$size" > work/manifest-live.json
+          gh release upload "$TAG" --repo "$REPO" work/manifest-live.json --clobber
+          echo "Uploaded shards $start..$end; next=$next"
