@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   harvest:
-    if: contains(github.event.head_commit.message, '[harvest-k1-indo4b]')
+    if: ${{ contains(github.event.head_commit.message, '[harvest-k1-indo4b]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -27,9 +27,7 @@ jobs:
           test -s work/indo4b.jsonl.gz
           sha256sum work/indo4b.jsonl.gz > work/source.sha256
           split -b 1500M -d -a 2 work/indo4b.jsonl.gz work/indo4b.part-
-          for f in work/indo4b.part-*; do
-            gh release upload "$TAG" --repo "$REPO" "$f" --clobber
-          done
+          for f in work/indo4b.part-*; do gh release upload "$TAG" --repo "$REPO" "$f" --clobber; done
           gh release upload "$TAG" --repo "$REPO" work/source.sha256 --clobber
           printf '%s\n' 'source=img-gemina/indonesian-corpus-2b-deepclean-indo4b' 'artifact=indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz' 'tokens=1801814049' 'documents=25553595' 'source_size=4.76GB' 'parts=1500MB each' > work/manifest.txt
           gh release upload "$TAG" --repo "$REPO" work/manifest.txt --clobber
