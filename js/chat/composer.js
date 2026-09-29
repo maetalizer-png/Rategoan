@@ -18,6 +18,7 @@ import { buildOutline, exportSlides, previewOutline, rememberSlide, allArtifacts
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
+import { toolsKode } from '../../raget/raget-agents/tools-kode.js';
 import { artifact } from '../ui/artifact.js';
 import { workspace } from '../state/workspace.js';
 
@@ -119,6 +120,33 @@ async function trySlideRequest(text, att, session) {
   }
 }
 
+
+const DOC_RE = /\b(buat(kan)?|tulis|susun)\s+(dokumen|laporan|makalah|catatan)\b/i;
+
+async function tryDocumentRequest(text, session) {
+  if (!DOC_RE.test(text)) return null;
+  const material = lastAiText(session) || text.replace(DOC_RE, '').trim();
+  if (!material) return 'Tanya topiknya dulu, baru minta dokumen.';
+  const title = (session && session.title && session.title !== 'Chat') ? session.title : 'Dokumen';
+  const md = '# ' + title + '\n\n' + material;
+  artifact.open({ type: 'document', markdown: md, title: title, fileName: title.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '.md' }, title);
+  return 'Dokumen terbuka di panel kanan. Bisa diedit lalu diunduh sebagai Markdown.';
+}
+
+async function tryCodeArtifact(text) {
+  if (!toolsKode.isCodeQuestion(text)) return false;
+  try {
+    const packed = await toolsKode.compose(text);
+    const m = packed && packed.text && packed.text.match(/```(\w+)?\n([\s\S]*?)```/);
+    if (!m) return false;
+    const lang = m[1] || packed.lang || 'js';
+    artifact.open({ type: 'code', code: m[2], lang: lang, title: 'Kode', fileName: 'cuplikan.' + (lang === 'python' || lang === 'py' ? 'py' : lang === 'html' ? 'html' : lang === 'css' ? 'css' : 'js') }, 'Kode');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export const composer = {
   websearchActive: false,
   thinkActive: false,
@@ -195,11 +223,13 @@ export const composer = {
       websearch: this.websearchActive || this.researchActive,
     });
     const isWebsearch = plan.route === 'web' || this.researchActive;
-    const routedText = isWebsearch ? 'googling ' + text.replace(/^riset\s+(mendalam\s+)?/i, '') : text;
+    const deep = this.researchActive || flowHub.wantsResearch(text);
+    const routedText = isWebsearch ? ((deep ? 'riset ' : 'googling ') + text.replace(/^riset\s+(mendalam\s+)?/i, '')) : text;
     if (plan.route === 'slide' && /^(lanjut|lanjutkan|dari ini)$/i.test(text.trim())) {
       text = 'buatkan slide dari ini';
     }
     let directReply = await trySlideRequest(text, att, s);
+    if (directReply == null) directReply = await tryDocumentRequest(text, s);
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
@@ -217,6 +247,9 @@ export const composer = {
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
+    }
+    if (plan.route === 'tool' || toolsKode.isCodeQuestion(text)) {
+      await tryCodeArtifact(text);
     }
     if (isWebsearch && reply) {
       try {
