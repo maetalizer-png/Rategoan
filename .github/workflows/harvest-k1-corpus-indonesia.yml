@@ -1,0 +1,92 @@
+name: harvest-k1-corpus-indonesia
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: harvest-k1-corpus-indonesia
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-corpus]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest all public Indonesian K1 shards
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO"             --title "Data Baru K1 — Corpus Indonesia — 2026-09"             --notes "Standalone K1 candidate. Source: Lyon28/Corpus-Indonesia on Hugging Face. License: Apache-2.0. Indonesian text corpus; kept outside canonical K1 until cleaning/deduplication and overlap audit."
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/Lyon28/Corpus-Indonesia/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz")):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort()
+          if len(files) != 7:
+              raise SystemExit(f"Expected 7 corpus shards, found {len(files)}")
+          total=sum(s for _,s in files)
+          with open("work/files.json","w") as f:
+              json.dump({"repo":"Lyon28/Corpus-Indonesia","license":"Apache-2.0","files":files,"total_bytes":total},f,indent=2)
+          with open("work/file-list.txt","w") as f:
+              for i,(p,s) in enumerate(files,1):
+                  f.write(f"${i}	{s}	{p}
+")
+          print("EXPECTED_SHARDS",len(files),"EXPECTED_BYTES",total)
+          for p,s in files:
+              print(s,p)
+          PY
+
+          gh release delete-asset "$TAG" "n.-.safe" --repo "$REPO" --yes >/dev/null 2>&1 || true
+
+          n=0
+          while IFS=$'\t' read -r idx size path; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            base=$(basename "$path")
+            safe=$(printf '%s' "$base" | tr '/ ' '__')
+            out="work/${n}-${safe}"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
+            test -s "$out"
+            bytes=$(stat -c%s "$out")
+            test "$bytes" -eq "$size"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"Lyon28/Corpus-Indonesia","path":"%s","bytes":%s,"sha256":"%s","license":"Apache-2.0"}\n' "$path" "$bytes" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://api.github.com/repos/maetalizer-png/Rategoan/releases/tags/data-baru-k1-corpus-indonesia-2026-09"
+          req=urllib.request.Request(api,headers={"Accept":"application/vnd.github+json"})
+          with urllib.request.urlopen(req,timeout=60) as r:
+              rel=json.load(r)
+          assets=rel.get("assets",[])
+          data=[a for a in assets if a["name"].startswith(tuple(f"{i}-train-" for i in range(1,8))) and a["name"].endswith(".parquet")]
+          expected=1900362972
+          got=sum(a["size"] for a in data)
+          print("RELEASE_DATA_ASSETS",len(data),"RELEASE_DATA_BYTES",got)
+          if len(data)!=7 or got!=expected:
+              raise SystemExit(f"Release verification failed: {len(data)} assets, {got} bytes")
+          print("VERIFIED_FULL_HARVEST")
+          PY
+          echo "K1 Corpus Indonesia harvest finished and verified."
