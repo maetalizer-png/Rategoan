@@ -122,6 +122,8 @@ export const attach = {
     return c;
   },
   bind() {
+        const cam = $('sheet-camera');
+    if (cam) cam.onclick = () => this.pick('camera');
     $('sheet-photo').onclick = () => this.pick('photo');
     $('sheet-file').onclick = () => this.pick('file');
     $('pick-camera').onchange = (e) => this.onPick(e.target);
