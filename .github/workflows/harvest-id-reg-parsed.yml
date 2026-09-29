@@ -2,8 +2,12 @@ name: harvest-id-reg-parsed
 
 on:
   workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/harvest-id-reg-parsed.yml"
   schedule:
-    - cron: "13,33,53 * * * *"
+    - cron: "7,17,27,37,47,57 * * * *"
 
 concurrency:
   group: harvest-id-reg-parsed
