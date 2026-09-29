@@ -97,3 +97,5 @@ PY
           gh release upload "$TAG" --repo "$REPO" work/release-summary.json --clobber
           echo "HARVEST VERIFIED IN $TAG" # [harvest-k1-corpus]
           echo "HARVEST_RUN_2026_09_30"
+
+# harvest trigger 2026-09-30 [harvest-k1-corpus]
