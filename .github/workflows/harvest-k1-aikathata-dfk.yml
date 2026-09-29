@@ -1,0 +1,73 @@
+name: harvest-k1-aikathata-dfk
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: harvest-k1-aikathata-dfk
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-aikathata-dfk]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest HF Indonesian DFK CPT corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-aikathata-dfk-2026-09"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" \
+            --title "Data Baru K1 — Aikathata Indonesian DFK CPT — 2026-09" \
+            --notes "Standalone candidate from Hugging Face: aikathata/indonesian-dfk-cpt-dataset. Mixed general/DFK corpus; kept outside canonical K1 until later filtering, deduplication, and license/source audit."
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/aikathata/indonesian-dfk-cpt-dataset/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".jsonl",".jsonl.gz",".parquet",".csv",".csv.gz")):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort()
+          if not files:
+              raise SystemExit("No downloadable files found")
+          with open("work/files.json","w") as f:
+              json.dump({"repo":"aikathata/indonesian-dfk-cpt-dataset","files":files,"total_bytes":sum(s for _,s in files)},f,indent=2)
+          print("FILES",len(files),"TOTAL",sum(s for _,s in files))
+          PY
+
+          python - <<'PY'
+          import json
+          d=json.load(open("work/files.json"))
+          with open("work/file-list.txt","w") as f:
+              for i,(p,s) in enumerate(d["files"],1):
+                  f.write(f"{i}\t{s}\t{p}\n")
+          PY
+
+          while IFS=$'\t' read -r idx size path; do
+            [ -z "$path" ] && continue
+            safe=$(printf '%s' "$path" | tr '/ ' '__' | tr -cd '[:alnum:]_.-')
+            out="work/$idx-$safe"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/aikathata/indonesian-dfk-cpt-dataset/resolve/main/$path?download=true"
+            test -s "$out"
+            bytes=$(stat -c%s "$out")
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"aikathata/indonesian-dfk-cpt-dataset","path":"%s","bytes":%s,"sha256":"%s"}\n' "$path" "$bytes" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          echo "HARVEST_COMPLETE"
