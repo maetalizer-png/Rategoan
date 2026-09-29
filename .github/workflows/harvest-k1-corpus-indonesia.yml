@@ -86,6 +86,7 @@ PY
 
           harvest_repo "Lyon28/Corpus-Indonesia" 0
           harvest_repo "sansaks/dataset_indonesia" 0
+          harvest_repo "owenqwenllmwine/code-v1" 0
           if [ -n "${HF_TOKEN:-}" ]; then
             harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
             harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
@@ -98,4 +99,4 @@ PY
           echo "HARVEST VERIFIED IN $TAG" # [harvest-k1-corpus]
           echo "HARVEST_RUN_2026_09_30"
 
-# harvest trigger 2026-09-30 [harvest-k1-corpus]
+# harvest trigger 2026-09-30 code-v1 [harvest-k1-corpus]
