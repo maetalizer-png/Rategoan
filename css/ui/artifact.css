@@ -50,3 +50,33 @@
     height: 100%;
   }
 }
+
+#artifact-run, #artifact-export, #artifact-close {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1px solid var(--line, #e4e4e4);
+  background: var(--card, #f6f6f6);
+  border-radius: 8px;
+}
+.art-code, .art-doc, .art-console {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid var(--line, #e4e4e4);
+  border-radius: 10px;
+  padding: 12px;
+  margin: 0 0 10px;
+  background: var(--card, #fafafa);
+  outline: none;
+}
+.art-doc {
+  font-family: inherit;
+  min-height: 40vh;
+}
+.art-console {
+  background: #111;
+  color: #e8e6e1;
+}
