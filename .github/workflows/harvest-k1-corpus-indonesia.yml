@@ -2,7 +2,7 @@ name: harvest-k1-corpus-indonesia
 # Run 2026-09-30: repair multi-source harvest and keep all accessible K1 sources in the same release tag
 # Trigger: 2026-09-30T02:30+07:00
 # Rerun 2026-09-30: execute harvest now and verify every uploaded release asset.
-# Trigger nonce 2026-09-30T02:36+07:00.
+# Trigger nonce 2026-09-30T02:39+07:00 — rerun after release-asset collision repair verification.
 on:
   push:
     branches: [main]
