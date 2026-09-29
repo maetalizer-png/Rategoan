@@ -1,38 +1,50 @@
 # Pengembangan Rategoan
 
-Satu catatan app. Bukan korpus.
-Vercel = bangun. Server sendiri nanti.
-Dua otak: Template + Raget 1.0. Tanpa model pihak lain.
+Khusus **aplikasi**: layar, tombol, panel, tools.
+Bukan korpus. Bukan latih model. Bukan BPE.
+Acuan: Gemini / Claude / ChatGPT (screenshot yang sudah dikirim).
 
-## Persen yang benar-benar jalan (29 Sep 2026)
+Vercel cuma panggung bangun.
 
-| Bagian | Jalan | Arti |
-|---|---|---|
-| Pintu UI (tombol ada, alur terbuka) | **75%** | Chat, web, slide, koleksi, proyek, belajar — bisa diklik |
-| Mutu jawaban (dalam, seperti app lain) | **30%** | Web masih dangkal; 1.0 sering acak; pikir/riset tipis |
-| Otak Template | **70%** | Fakta/aturan jalan; intent masih sering nyasar |
-| Otak Raget 1.0 | **25%** | Bisa dipilih; status sekarang ikut checkpoint; kalimat belum koheren |
-| Mesin server/konektor/kode | **5%** | Port ada, belum hidup |
-| **Produk keseluruhan** | **~45%** | App lokal berguna. Bukan setara Gemini/Claude/ChatGPT |
+## Persen pintu (yang pengguna sentuh)
 
-Jangan baca ceklis [x] sebagai “sudah seperti aplikasi lain”. [x] = pintunya ada.
+**~70% tombol sudah ada.** Yang belum seperti app lain: hasil tools-nya dangkal, beberapa pintu masih sheet kecil.
 
-## Sudah berfungsi
+## Sudah ada di layar
 
-- Chat PWA + riwayat
-- Template + retrieval
-- Pilih Raget 1.0; fallback ke Template jika 1.0 belum termuat / timeout 8 dtk
-- Memori, file/kamera, web+koleksi, slide+PPTX, proyek sheet, belajar terpandu
-- UI nama/login bersih
+- [x] Chat + riwayat + cari riwayat
+- [x] Unggah foto / kamera / file
+- [x] Saklar Pencarian web
+- [x] Tombol Slide + panel kanan + unduh PPTX
+- [x] Koleksi + simpan hasil web + tanya koleksi
+- [x] Saklar Berpikir
+- [x] Saklar Riset
+- [x] Sidebar Proyek (buat / pilih / masukkan chat)
+- [x] Sidebar Artefak (daftar slide)
+- [x] Belajar terpandu
+- [x] Pilih model: Template / Raget 1.0
+- [x] Login tanpa teks “nama tampilan lokal”
+- [x] Toast acak dimatikan
 
-## Dikerjakan berikutnya (satu per satu)
+## Belum ada / belum seperti app lain
 
-1. Perangkai web multi-sumber, paragraf utuh.
-2. Pikir + riset: lebih dari 1 halaman wiki.
-3. Intent Template yang sering salah.
-4. Kalimat Raget 1.0 berbahasa Indonesia utuh.
-5. Server sendiri + konektor. Studio kode terakhir.
+- [ ] Lampiran di composer setara Gemini (satu tombol + pratinjau rapi)
+- [ ] Canvas/artefak hidup: bukan hanya slide — laporan, kode, tabel
+- [ ] Proyek halaman penuh (bukan sheet)
+- [ ] Sitasi web: banyak sumber, kartu, bukan 1 wiki
+- [ ] Riset: langkah + beberapa tautan, bukan saklar + 1 halaman
+- [ ] Berpikir: jejak langkah di UI, bukan 4 baris
+- [ ] Panel kanan tetap di desktop (split), overlay rapi di HP
+- [ ] Tools konektor di UI (Drive/WA) — tombol ada nanti setelah server
+- [ ] Studio kode di UI
 
-## Jangan
+## Jangan dibuat di Raget
 
-Gen gambar/video pihak lain. Otak ketiga. Numuk PRD baru. Campur korpus ke file ini.
+Generate gambar / video / musik pihak lain. Community. Toko plugin.
+
+## Urutan UI berikutnya
+
+1. Web: kartu sumber + paragraf di chat (tampilan).
+2. Riset + berpikir: panel langkah di layar.
+3. Artefak selain slide.
+4. Proyek jadi halaman, bukan sheet.
