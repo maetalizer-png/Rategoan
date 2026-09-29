@@ -125,7 +125,7 @@ async function run(kind, prompt, messages, onFewshotCacheClear) {
       .replace(/^(siapa|apa\s+itu|apa|kapan|dimana|di\s*mana|berapa|kenapa|mengapa|bagaimana)\s+/i, '')
       .replace(/\?+$/, '')
       .trim();
-    const raw = await webSearch.search(q);
+    const raw = /\b(riset|mendalam)\b/i.test(prompt) ? await webSearch.research(q) : await webSearch.search(q);
     if (!raw.ok) return raw.message;
     const result = webQc.inspect(raw, prompt, q);
     const projectName = SOURCE_NAMES[result.source] || 'Wikipedia';
