@@ -57,3 +57,4 @@ PY
           )
           gh release upload "$TAG" --repo "$REPO" files.json --clobber
           echo "DONE: Ik45/data-science-en-id harvested into existing tag $TAG — rerun 2026-09-30"
+# harvest trigger 2026-09-30
