@@ -88,5 +88,5 @@ jobs:
           echo "HARVEST_COMPLETE $HF_REPO"
           echo "VERIFIED_EXPECTED_BYTES uploaded from HF"
 
-# harvest rerun trigger 2026-09-29c
+# harvest rerun trigger 2026-09-29d
 # verify release assets after upload
