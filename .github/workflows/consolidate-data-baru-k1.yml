@@ -1,0 +1,114 @@
+name: Consolidate new-data releases into one K1 holding release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/consolidate-data-baru-k1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  TARGET_TAG: data-baru-k1-gabungan-2026-09
+  TARGET_TITLE: "Data Baru K1 — Gabungan — 2026-09"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      target: \${{ steps.release.outputs.target }}
+    steps:
+      - name: Create target release
+        id: release
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          if ! gh release view "$TARGET_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$TARGET_TAG" --repo "$GITHUB_REPOSITORY" --target main --title "$TARGET_TITLE" --notes "Gabungan data-baru yang sudah dikumpulkan. Sumber: xone-parallel, TXTperpus, Corpus-Indonesia, indmix, dan aikathata DFK. Indo4B-derived dan Common Crawl tidak dimasukkan."
+          fi
+          echo "target=$TARGET_TAG" >> "$GITHUB_OUTPUT"
+
+  consolidate:
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - source: data-baru-xone-parallel-en-id-2026-09
+            prefix: xone
+          - source: data-baru-k1-txtperpus-2026-09
+            prefix: txtperpus
+          - source: data-baru-k1-corpus-indonesia-2026-09
+            prefix: corpus-indonesia
+          - source: data-baru-k1-indmix-2026-09
+            prefix: indmix
+          - source: data-baru-k1-aikathata-dfk-2026-09
+            prefix: aikathata-dfk
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      SOURCE_TAG: \${{ matrix.source }}
+      PREFIX: \${{ matrix.prefix }}
+    steps:
+      - name: Stream source release assets into target release
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          repo="$GITHUB_REPOSITORY"
+          target="$TARGET_TAG"
+          api="repos/$repo/releases/tags/$SOURCE_TAG"
+
+          gh api "$api" --jq '.id' > /tmp/release_id
+          release_id=$(cat /tmp/release_id)
+          gh api --paginate "repos/$repo/releases/$release_id/assets?per_page=100" > /tmp/assets.json
+
+          total=$(jq 'length' /tmp/assets.json)
+          echo "SOURCE=$SOURCE_TAG ASSETS=$total"
+          test "$total" -gt 0
+
+          i=0
+          jq -c '.[] | {name, browser_download_url, size}' /tmp/assets.json | while read -r item; do
+            i=$((i+1))
+            name=$(jq -r '.name' <<<"$item")
+            url=$(jq -r '.browser_download_url' <<<"$item")
+            size=$(jq -r '.size' <<<"$item")
+
+            safe=$(printf '%s' "$name" | tr -c 'A-Za-z0-9._-' '_')
+            out="$RUNNER_TEMP/$PREFIX__$safe"
+
+            echo "[$i/$total] $name ($size bytes)"
+            rm -f "$out"
+            curl --fail --location --retry 5 --retry-all-errors --connect-timeout 30 --max-time 3600 "$url" -o "$out"
+
+            got=$(stat -c '%s' "$out")
+            test "$got" -eq "$size"
+
+            gh release upload "$target" "$out" --repo "$repo"
+            rm -f "$out"
+          done
+
+  verify:
+    needs: [prepare, consolidate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Verify consolidated release
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          repo="$GITHUB_REPOSITORY"
+          gh api "repos/$repo/releases/tags/$TARGET_TAG" > /tmp/final.json
+          count=$(jq '.assets | length' /tmp/final.json)
+          bytes=$(jq '[.assets[].size] | add' /tmp/final.json)
+          echo "FINAL_ASSETS=$count"
+          echo "FINAL_BYTES=$bytes"
+          echo "FINAL_GB=$(awk "BEGIN {printf \"%.6f\", $bytes/1000000000}")"
+          test "$count" -eq 739
+          test "$bytes" -eq 15981545349
+          echo "CONSOLIDATION_OK"
