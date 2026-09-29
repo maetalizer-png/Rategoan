@@ -31,15 +31,14 @@ jobs:
           api=HfApi()
           repo='HuggingFaceFW/finepdfs'
           files=[]
-          for x in api.list_repo_tree(repo, path_in_repo='data/ind_Latn/train', recursive=True):
+          for x in api.list_repo_tree(repo, path_in_repo='data/ind_Latn/train', recursive=True, repo_type='dataset'):
               p=getattr(x,'path','')
               if getattr(x,'type',None)=='file' and p.endswith('.parquet'):
                   files.append({'path':p,'size':int(getattr(x,'size',0) or 0)})
           files.sort(key=lambda x:x['path'])
-          if not files:
-              raise SystemExit('No Indonesian FinePDFs parquet shards found')
+          if not files: raise SystemExit('No Indonesian FinePDFs parquet shards found')
           total=sum(x['size'] for x in files)
-          manifest={'source':repo,'subset':'ind_Latn','split':'train','license':'ODC-By-1.0','files':files,'reported_tokens':20318872038,'reported_documents':2323354,'reported_disk_bytes':19650000000,'note':'PDF-derived corpus from CommonCrawl, deduplicated and educationally filtered by FinePDFs; kept as a separate K1 staging asset for later overlap audit.'}
+          manifest={'source':repo,'subset':'ind_Latn','split':'train','license':'ODC-By-1.0','files':files,'reported_tokens':20318872038,'reported_documents':2323354,'reported_disk_bytes':19650000000,'note':'PDF-derived corpus from CommonCrawl, deduplicated and educationally filtered by FinePDFs; kept as separate K1 staging data for later overlap audit.'}
           json.dump(manifest,open('work/finepdfs-ind-Latn-manifest.json','w'),indent=2)
           with open('work/finepdfs-ind-Latn-filelist.tsv','w') as f:
               for i,x in enumerate(files,1): f.write(f"{i}\t{x['size']}\t{x['path']}\n")
