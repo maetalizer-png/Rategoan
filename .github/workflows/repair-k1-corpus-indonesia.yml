@@ -49,3 +49,5 @@ jobs:
           done < <(python -c 'import json; [print(p) for p,_ in json.load(open("work/files.json"))["files"]]')
           gh release upload "$TAG" --repo "$REPO" work/files.json --clobber
           echo "REPAIR COMPLETE"
+
+# Triggered 2026-09-30: verify and repair the same release asset set.
