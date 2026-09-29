@@ -1,0 +1,31 @@
+name: restore-penampung-once
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/restore-penampung-once.yml"
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore penampung release/tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="penampung-tersaring-2026-09"
+          if ! gh api "repos/$REPO/releases/tags/$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --repo "$REPO" --target main --title "Penampung tersaring — 2026-09" --notes "Penampung/staging tag. Bukan dataset final."
+          fi
+      - name: Remove this one-shot workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          PATH=".github/workflows/restore-penampung-once.yml"
+          SHA="$(gh api "repos/$REPO/contents/$PATH" --jq '.sha')"
+          gh api --method DELETE "repos/$REPO/contents/$PATH" -f message="chore: remove one-shot penampung restore workflow" -f sha="$SHA" -f branch="main"
