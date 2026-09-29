@@ -68,7 +68,7 @@ const MACHINES = [
   { id: 'belajar', host: 'client', ready: true, note: 'lesson dari bahan' },
   { id: 'jadwal', host: 'client', ready: true, note: 'antrian lokal; kirim lewat server' },
   { id: 'konektor', host: 'server', ready: false, note: 'Drive/WA setelah server sendiri' },
-  { id: 'kode', host: 'client', ready: false, note: 'studio belakangan' },
+  { id: 'kode', host: 'client', ready: true, note: 'Studio JS' },
 ];
 
 export const mesin = Object.freeze({
