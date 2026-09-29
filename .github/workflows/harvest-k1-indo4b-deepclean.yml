@@ -19,11 +19,20 @@ jobs:
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
-          TAG="data-baru-k1-indo4b-deepclean-2026-09"
+          RELEASE_ID="398761150"
           HF_REPO="img-gemina/indonesian-corpus-2b-deepclean-indo4b"
           mkdir -p work
 
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO"             --title "Data Baru K1 — Indonesian Corpus Deep-Clean Indo4B — 2026-09"             --notes "Standalone K1 candidate. Source: img-gemina/indonesian-corpus-2b-deepclean-indo4b on Hugging Face. License: CC-BY-4.0. Derived from Indo4B; kept outside canonical K1 pending overlap/dedup audit."
+          upload_asset() {
+            local file="$1"
+            local name="$2"
+            curl --fail --retry 8 --retry-all-errors -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"$file" \
+              "https://uploads.github.com/repos/$REPO/releases/$RELEASE_ID/assets?name=$name" >/dev/null
+          }
 
           python - <<'PY'
           import json, urllib.request
@@ -52,19 +61,21 @@ jobs:
             [ -z "$path" ] && continue
             safe=$(printf '%s' "$path" | tr '/ ' '__' | tr -cd '[:alnum:]_.-')
             out="work/${idx}-${safe}"
-            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
+            curl -L --fail --retry 8 --retry-all-errors -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
             actual=$(stat -c%s "$out")
             test "$actual" -eq "$expected"
             sha=$(sha256sum "$out" | awk '{print $1}')
             printf '{"source":"%s","path":"%s","bytes":%s,"sha256":"%s","license":"CC-BY-4.0"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
-            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            upload_asset "$out" "$(basename "$out")"
+            upload_asset "$out.manifest.json" "$(basename "$out.manifest.json")"
             rm -f "$out" "$out.manifest.json"
           done < work/file-list.txt
 
-          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          upload_asset work/files.json files.json
+          upload_asset work/file-list.txt file-list.txt
           python - <<'PY'
           import json
           d=json.load(open("work/files.json"))
           print("HARVEST_COMPLETE",d["repo"],"files=",len(d["files"]),"total_bytes=",d["total_bytes"])
           PY
-# trigger 2026-09-29T09:15+07:00
+# trigger direct upload 2026-09-29T09:17+07:00
