@@ -40,17 +40,13 @@ jobs:
           files.sort()
           if not files:
               raise SystemExit('No parquet shards found')
-          # Use several large, real code shards. Keep each GitHub release asset below 2 GiB.
           chosen=[]
           total=0
           for p,s in files:
               if s >= 100_000_000 and s < 1_900_000_000:
-                  chosen.append((p,s))
-                  total += s
-              if len(chosen) >= 6:
-                  break
-          if not chosen:
-              raise SystemExit('No suitable shards found')
+                  chosen.append((p,s)); total += s
+              if len(chosen) >= 6: break
+          if not chosen: raise SystemExit('No suitable shards found')
           with open('work/manifest.json','w') as f:
               json.dump({'source':'HuggingFaceCode/stack-v3-train','purpose':'coding pretraining','license':'ODC-By-1.0 plus original repository license obligations','selected_shards':chosen,'total_bytes':total},f,indent=2)
           print('selected',len(chosen),'total',total)
@@ -62,23 +58,22 @@ jobs:
           n=0
           while IFS=$'\t' read -r path size; do
             [ -z "$path" ] && continue
-            n=$((n+1))
-            base=$(basename "$path")
+            n=$((n+1)); base=$(basename "$path")
             out="work/coding-stackv3-part$(printf '%02d' "$n")-${base}"
             curl -L --fail --retry 8 --retry-all-errors -o "$out" "https://huggingface.co/datasets/HuggingFaceCode/stack-v3-train/resolve/main/$path?download=true"
             test -s "$out"
-            actual=$(stat -c%s "$out")
-            sha=$(sha256sum "$out" | awk '{print $1}')
+            actual=$(stat -c%s "$out"); sha=$(sha256sum "$out" | awk '{print $1}')
             printf '%s  %s\n' "$sha" "$(basename "$out")" >> work/SHA256SUMS
             echo "Downloaded $out: $actual bytes"
             gh release upload "$TAG" --repo "$REPO" "$out" --clobber
             rm -f "$out"
           done < <(python - <<'PY'
           import json
-          for p,s in json.load(open('work/manifest.json'))['selected_shards']:
-              print(f'{p}\t{s}')
+          for p,s in json.load(open('work/manifest.json'))['selected_shards']: print(f'{p}\t{s}')
           PY
           )
 
           gh release upload "$TAG" --repo "$REPO" work/manifest.json work/SHA256SUMS --clobber
           echo "CODING HARVEST COMPLETE"
+
+# trigger 2
