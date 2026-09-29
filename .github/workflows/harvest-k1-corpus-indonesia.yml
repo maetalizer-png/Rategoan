@@ -4,89 +4,44 @@ on:
   push:
     branches: [main]
 
-concurrency:
-  group: harvest-k1-corpus-indonesia
-  cancel-in-progress: true
-
 permissions:
   contents: write
 
 jobs:
-  harvest:
-    if: contains(github.event.head_commit.message, '[harvest-k1-corpus]')
+  harvest-indo4b:
+    if: contains(github.event.head_commit.message, '[harvest-indo4b]')
     runs-on: ubuntu-latest
     timeout-minutes: 360
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - tag: data-baru-k1-corpus-indonesia-2026-09
-            title: Data Baru K1 — Corpus Indonesia — 2026-09
-            hf_repo: Lyon28/Corpus-Indonesia
-            license: Apache-2.0
-            note: Indonesian text corpus
-          - tag: data-baru-k1-indo4b-deepclean-2026-09
-            title: Data Baru K1 — Indonesian Corpus Deep-Clean Indo4B — 2026-09
-            hf_repo: img-gemina/indonesian-corpus-2b-deepclean-indo4b
-            license: CC-BY-4.0
-            note: Deep-cleaned Indonesian corpus derived from Indo4B; pending overlap audit
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: maetalizer-png/Rategoan
+      TAG: data-baru-k1-indo4b-deepclean-2026-09
+      HF_REPO: img-gemina/indonesian-corpus-2b-deepclean-indo4b
     steps:
-      - name: Harvest full HF dataset
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ matrix.tag }}
-          TITLE: ${{ matrix.title }}
-          HF_REPO: ${{ matrix.hf_repo }}
-          LICENSE: ${{ matrix.license }}
-          NOTE: ${{ matrix.note }}
+      - name: Download and split HF artifact
+        shell: bash
         run: |
           set -euo pipefail
-          REPO="maetalizer-png/Rategoan"
           mkdir -p work
-
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO"             --title "$TITLE"             --notes "Standalone K1 candidate. Source: $HF_REPO on Hugging Face. License: $LICENSE. $NOTE. Kept outside canonical K1 until cleaning/deduplication and overlap audit."
-
-          python - <<'PY'
-          import json, os, urllib.request
-          repo=os.environ["HF_REPO"]
-          api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
-          with urllib.request.urlopen(api, timeout=120) as r:
-              items=json.load(r)
-          files=[]
-          for x in items:
-              p=x.get("path","")
-              if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz")):
-                  files.append((p,int(x.get("size") or 0)))
-          files.sort()
-          if not files:
-              raise SystemExit("No downloadable corpus files found")
-          total=sum(s for _,s in files)
-          with open("work/files.json","w") as f:
-              json.dump({"repo":repo,"license":os.environ["LICENSE"],"files":files,"total_bytes":total},f,indent=2)
-          with open("work/file-list.txt","w") as f:
-              for i,(p,s) in enumerate(files,1):
-                  f.write(f"{i}\t{s}\t{p}\n")
-          print("HF_FILES",len(files),"HF_TOTAL_BYTES",total)
-          for p,s in files:
-              print(s,p)
-          PY
-
-          while IFS=$'\t' read -r idx expected path; do
-            [ -z "$path" ] && continue
-            safe=$(printf '%s' "$path" | tr '/ ' '__' | tr -cd '[:alnum:]_.-')
-            out="work/${idx}-${safe}"
-            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
-            actual=$(stat -c%s "$out")
-            test "$actual" -eq "$expected"
-            sha=$(sha256sum "$out" | awk '{print $1}')
-            printf '{"source":"%s","path":"%s","bytes":%s,"sha256":"%s","license":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" "$LICENSE" > "$out.manifest.json"
-            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
-            rm -f "$out" "$out.manifest.json"
-          done < work/file-list.txt
-
-          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
-          echo "HARVEST_COMPLETE $HF_REPO"
-          echo "VERIFIED_EXPECTED_BYTES uploaded from HF"
-
-# harvest rerun trigger 2026-09-29d
-# verify release assets after upload
+          URL="https://huggingface.co/datasets/${HF_REPO}/resolve/main/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz?download=true"
+          curl -L --fail --retry 8 --retry-all-errors -o work/source.jsonl.gz "$URL"
+          test -s work/source.jsonl.gz
+          stat -c 'SOURCE_BYTES=%s' work/source.jsonl.gz
+          split -b 1800m -d -a 3 work/source.jsonl.gz work/indo4b.part.
+          sha256sum work/source.jsonl.gz > work/source.sha256
+      - name: Upload chunks to existing release
+        shell: bash
+        run: |
+          set -euo pipefail
+          n=0
+          for f in work/indo4b.part.*; do
+            n=$((n+1))
+            name=$(printf 'indo4b-deepclean-part-%02d.jsonl.gz' "$n")
+            mv "$f" "work/$name"
+            sha=$(sha256sum "work/$name" | awk '{print $1}')
+            bytes=$(stat -c%s "work/$name")
+            printf '{"source":"%s","path":"indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz","part":%s,"bytes":%s,"sha256":"%s","license":"CC-BY-4.0"}\n' "$HF_REPO" "$n" "$bytes" "$sha" > "work/$name.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "work/$name" "work/$name.manifest.json" --clobber
+          done
+          gh release upload "$TAG" --repo "$REPO" work/source.sha256 --clobber
+          echo "INDO4B_HARVEST_COMPLETE parts=$n"
