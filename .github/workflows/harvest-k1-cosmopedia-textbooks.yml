@@ -1,0 +1,61 @@
+name: harvest-k1-cosmopedia-textbooks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/harvest-k1-cosmopedia-textbooks.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: harvest-k1-cosmopedia-textbooks
+  cancel-in-progress: false
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: maetalizer-png/Rategoan
+      TAG: data-baru-k1-corpus-indonesia-2026-09
+
+    steps:
+      - name: Stream textbook shards from Hugging Face into existing release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Corpus Indonesia — 2026-09" --notes "Standalone K1 candidate bundle; sources remain outside canonical K1 until cleaning/deduplication and overlap audit."
+
+          python - <<'PY'
+          import json, urllib.request
+          repo="schuler/cosmopedia-v2-textbook-and-howto-8.3m"
+          url=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(url,timeout=120) as r: items=json.load(r)
+          files=[x["path"] for x in items if x.get("type")=="file" and x.get("path","").endswith(".parquet")]
+          files.sort()
+          open("work/files.txt","w").write("\n".join(files)+"\n")
+          print("shards",len(files))
+          PY
+
+          n=0
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            name="cosmopedia-v2-textbook-$(printf '%03d' "$n").parquet"
+            out="work/$name"
+            echo "[$n] downloading $path"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/schuler/cosmopedia-v2-textbook-and-howto-8.3m/resolve/main/$path?download=true"
+            bytes=$(stat -c%s "$out")
+            test "$bytes" -gt 0
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"schuler/cosmopedia-v2-textbook-and-howto-8.3m","path":"%s","bytes":%s,"sha256":"%s","license":"source repository metadata"}\n' "$path" "$bytes" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/files.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.txt --clobber
+          echo "COSMOPEDIA TEXTBOOK HARVEST COMPLETE"
