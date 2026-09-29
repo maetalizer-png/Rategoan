@@ -148,6 +148,30 @@ async function tryCodeArtifact(text) {
   }
 }
 
+
+const TABLE_RE = /\b(buat(kan)?|susun|jadikan)\s+tabel\b/i;
+
+function textToTable(text) {
+  const lines = String(text || '').split(/\n+/).map((l) => l.replace(/^\s*[-•]\s*/, '').trim()).filter((l) => l.length > 8).slice(0, 8);
+  const rows = [['Poin', 'Isi']];
+  lines.forEach((l, i) => {
+    const parts = l.split(/[—:\-]/);
+    if (parts.length >= 2) rows.push([parts[0].trim().slice(0, 40), parts.slice(1).join(':').trim().slice(0, 120)]);
+    else rows.push([String(i + 1), l.slice(0, 140)]);
+  });
+  if (rows.length < 2) rows.push(['1', String(text || '').slice(0, 140)]);
+  return rows;
+}
+
+async function tryTableRequest(text, session) {
+  if (!TABLE_RE.test(text)) return null;
+  const material = lastAiText(session) || text.replace(TABLE_RE, '').trim();
+  if (!material) return 'Tanya topiknya dulu, baru minta tabel.';
+  const rows = textToTable(material);
+  artifact.open({ type: 'table', rows: rows, title: 'Tabel', fileName: 'tabel.csv' }, 'Tabel');
+  return 'Tabel terbuka di panel kanan. Bisa diunduh CSV.';
+}
+
 export const composer = {
   websearchActive: false,
   thinkActive: false,
@@ -231,6 +255,7 @@ export const composer = {
     }
     let directReply = await trySlideRequest(text, att, s);
     if (directReply == null) directReply = await tryDocumentRequest(text, s);
+    if (directReply == null) directReply = await tryTableRequest(text, s);
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
