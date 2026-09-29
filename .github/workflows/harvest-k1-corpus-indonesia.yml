@@ -82,10 +82,10 @@ PY
             rm -f work/list.tsv
           }
 
-          # New, large, cleaned Indonesian corpus: 1.801B tokens / 25.55M docs.
+          # Large cleaned Indonesian corpus: 1.801B tokens / 25.55M docs.
           harvest_repo "img-gemina/indonesian-corpus-2b-deepclean-indo4b" 0
 
-          # Large educational sources. Use the connected HF credential only if it is available.
+          # Large educational sources; use the connected HF credential when configured.
           if [ -n "${HF_TOKEN:-}" ]; then
             harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
             harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
