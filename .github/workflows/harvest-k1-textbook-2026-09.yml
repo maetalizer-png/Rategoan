@@ -1,0 +1,72 @@
+name: harvest-k1-textbook-2026-09
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-textbook]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download and publish textbook corpora
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-textbook-2026-09"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" \
+            --title "Data Baru K1 — Textbook — 2026-09" \
+            --notes "Standalone K1 textbook harvest. Sources: Firmansyah-Ibrahim/indo-bloom-raw-bse (CC-BY-4.0) and haznitrama/indonesian-children-books (CC-BY-NC-4.0). Kept outside canonical K1 until cleaning, deduplication, overlap and license-use audit."
+
+          python - <<'PY'
+          import json, urllib.request
+          repos=[
+            ("Firmansyah-Ibrahim/indo-bloom-raw-bse","cc-by-4.0"),
+            ("haznitrama/indonesian-children-books","cc-by-nc-4.0")
+          ]
+          allf=[]
+          for repo,lic in repos:
+            api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
+            with urllib.request.urlopen(api,timeout=120) as r: items=json.load(r)
+            for x in items:
+              p=x.get('path','')
+              if x.get('type')=='file' and p.lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz')):
+                allf.append({'repo':repo,'license':lic,'path':p,'size':int(x.get('size') or 0),'url':f"https://huggingface.co/datasets/{repo}/resolve/main/{p}?download=true"})
+          if not allf: raise SystemExit('No public data files found')
+          with open('work/manifest.json','w') as f: json.dump({'sources':allf},f,indent=2)
+          for i,x in enumerate(allf,1): print(i,x['repo'],x['size'],x['path'])
+          PY
+
+          n=0
+          python - <<'PY'
+          import json
+          d=json.load(open('work/manifest.json'))
+          with open('work/file-list.tsv','w') as f:
+            for x in d['sources']:
+              f.write(f"{x['repo']}\t{x['license']}\t{x['size']}\t{x['path']}\t{x['url']}\n")
+          PY
+
+          while IFS=$'\t' read -r repo license size path url; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            safe=$(printf '%s' "$path" | tr '/ ' '__')
+            out="work/${n}-${safe}"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "$url"
+            test -s "$out"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            bytes=$(stat -c%s "$out")
+            printf '{"source":"%s","license":"%s","path":"%s","bytes":%s,"sha256":"%s"}\n' "$repo" "$license" "$path" "$bytes" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.tsv
+
+          gh release upload "$TAG" --repo "$REPO" work/manifest.json work/file-list.tsv --clobber
+          echo "K1 textbook harvest finished."
