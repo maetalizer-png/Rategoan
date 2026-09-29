@@ -1,0 +1,79 @@
+name: harvest-id-reg-parsed
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "13,33,53 * * * *"
+
+concurrency:
+  group: harvest-id-reg-parsed
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest next Indonesian legal-text shard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-id-reg-parsed-2026-09"
+          DS="Azzindani/ID_REG_Parsed"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 ||             gh release create "$TAG" --repo "$REPO"               --title "Data Baru — Indonesian Regulations Parsed — 2026-09"               --notes "Large Indonesian legal-text corpus parsed from ~250K public regulations. Source: Azzindani/ID_REG_Parsed. Apache-2.0. Kept outside K1/K2/K3/K4. Downstream deduplication against existing legal sources is required."
+
+          curl -L --fail --retry 8 --retry-all-errors             -o work/files.json             "https://huggingface.co/api/datasets/$DS/parquet/default/train"
+
+          python - <<'PY'
+          import json
+          x=json.load(open("work/files.json"))
+          urls=x.get("urls",[]) if isinstance(x,dict) else x
+          rows=[]
+          for i,u in enumerate(urls):
+              if isinstance(u,dict): u=u.get("url")
+              if u: rows.append((i,u))
+          if not rows: raise SystemExit("No parquet URLs returned")
+          with open("work/urls.tsv","w") as f:
+              for i,u in rows: f.write(f"{i}\t{u}\n")
+          print("shards",len(rows))
+          PY
+
+          mapfile -t done < <(gh release view "$TAG" --repo "$REPO" --json assets --jq '.assets[].name' | sed -n 's/^id-reg-parsed-\([0-9][0-9][0-9][0-9]\)\.parquet$/\1/p' | sort -n)
+          next=0
+          for i in "${done[@]}"; do
+            if (( 10#$i >= next )); then next=$((10#$i+1)); fi
+          done
+
+          line=$(awk -F '\t' -v n="$next" '$1==n {print $0}' work/urls.tsv || true)
+          if [ -z "$line" ]; then
+            printf '{"dataset":"%s","status":"complete","next_shard":%s,"license":"Apache-2.0"}\n' "$DS" "$next" > work/manifest-live.json
+            gh release upload "$TAG" --repo "$REPO" work/manifest-live.json --clobber
+            echo "No remaining shard at index $next."
+            exit 0
+          fi
+
+          idx=${line%%$'\t'*}
+          url=${line#*$'\t'}
+          name=$(printf 'id-reg-parsed-%04d.parquet' "$idx")
+          echo "Downloading shard $idx: $name"
+          curl -L --fail --retry 8 --retry-all-errors -o "work/$name" "$url"
+
+          size=$(stat -c%s "work/$name")
+          if (( size >= 1900000000 )); then
+            echo "ERROR: shard is $size bytes; above safe release threshold."
+            exit 1
+          fi
+
+          sha=$(sha256sum "work/$name" | awk '{print $1}')
+          printf '%s  %s\n' "$sha" "$name" > "work/$name.sha256"
+          gh release upload "$TAG" --repo "$REPO" "work/$name" "work/$name.sha256" --clobber
+
+          printf '{"dataset":"%s","shard":%s,"bytes":%s,"sha256":"%s","license":"Apache-2.0","status":"uploaded"}\n'             "$DS" "$idx" "$size" "$sha" > work/manifest-live.json
+          gh release upload "$TAG" --repo "$REPO" work/manifest-live.json --clobber
