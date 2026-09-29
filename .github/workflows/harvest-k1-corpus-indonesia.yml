@@ -81,3 +81,5 @@ jobs:
 
           gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
           echo "K1 Corpus Indonesia harvest finished."
+
+# trigger harvest run
