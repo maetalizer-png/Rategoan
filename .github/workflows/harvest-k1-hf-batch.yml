@@ -26,22 +26,12 @@ jobs:
           gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null
           mkdir -p work
 
-      - name: Download public Indonesian slice from Aya Collection
-        run: |
-          set -euo pipefail
-          url='https://huggingface.co/datasets/CohereLabs/aya_collection_language_split/resolve/main/indonesian/train-00000-of-00001.parquet?download=true'
-          curl -L --fail --retry 8 --retry-all-errors -o work/aya_indonesian.parquet "$url"
-          test -s work/aya_indonesian.parquet
-          sha256sum work/aya_indonesian.parquet > work/aya_indonesian.parquet.sha256
-          gh release upload "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" work/aya_indonesian.parquet work/aya_indonesian.parquet.sha256 --clobber
-          rm -f work/aya_indonesian.parquet work/aya_indonesian.parquet.sha256
-
       - name: Download gated Indonesian STEM textbook corpus when HF access is configured
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -euo pipefail
-          if [ -z "${HF_TOKEN:-}" ]; then echo 'HF_TOKEN secret not configured; skipping gated STEM corpus.'; exit 0; fi
+          test -n "${HF_TOKEN:-}" || { echo 'HF_TOKEN secret not configured'; exit 1; }
           python -m pip install -q -U huggingface_hub
           mkdir -p work/stem
           HF_TOKEN="$HF_TOKEN" hf download InfoBayAI/Indonesian-STEM-Textbook-Dataset --repo-type dataset --local-dir work/stem --max-workers 8
@@ -62,7 +52,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -euo pipefail
-          if [ -z "${HF_TOKEN:-}" ]; then echo 'HF_TOKEN secret not configured; skipping gated Non-STEM corpus.'; exit 0; fi
+          test -n "${HF_TOKEN:-}" || { echo 'HF_TOKEN secret not configured'; exit 1; }
           python -m pip install -q -U huggingface_hub
           mkdir -p work/nonstem
           HF_TOKEN="$HF_TOKEN" hf download InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset --repo-type dataset --local-dir work/nonstem --max-workers 8
@@ -80,12 +70,5 @@ jobs:
 
       - name: Write harvest manifest
         run: |
-          printf '%s\n' \
-            'release=data-baru-k1-corpus-indonesia-2026-09' \
-            'added=CohereLabs/aya_collection_language_split:indonesian/train' \
-            'gated=InfoBayAI/Indonesian-STEM-Textbook-Dataset' \
-            'gated=InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset' \
-            'note=Textbook corpora are uploaded only if repository HF_TOKEN secret has gated access.' \
-            > work/hf-batch-manifest.txt
-          gh release upload "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" work/hf-batch-manifest.txt --clobber
-# trigger HF batch harvest
+          printf '%s\n' 'release=data-baru-k1-corpus-indonesia-2026-09' 'gated=InfoBayAI/Indonesian-STEM-Textbook-Dataset' 'gated=InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset' > work/hf-textbook-manifest.txt
+          gh release upload "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" work/hf-textbook-manifest.txt --clobber
