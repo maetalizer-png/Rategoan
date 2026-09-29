@@ -28,6 +28,8 @@ import { login } from './account/login.js';
 import { collectionPage } from './collection/collection.js';
 import { projectPage } from './project/project.js';
 import { studioPage } from './studio/studio.js';
+import { artifactsPage } from './artifacts/artifacts.js';
+import { connectPage } from './connect/connect.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
@@ -65,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
   collectionPage.bind();
   projectPage.bind();
   studioPage.bind();
+  artifactsPage.bind();
+  connectPage.bind();
   login.bind();
   try { window.__rategoanMesin = mesin.list(); } catch (e) {}
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
