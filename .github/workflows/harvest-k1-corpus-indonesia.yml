@@ -78,3 +78,4 @@ jobs:
           echo "K1 Corpus Indonesia harvest finished: all ${n} data files verified and uploaded."
 
 # forced verified harvest trigger
+# retry: preserve unique shard names in release assets
