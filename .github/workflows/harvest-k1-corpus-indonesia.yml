@@ -83,4 +83,4 @@ PY
           harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
           harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
 
-          echo "ALL SELECTED K1 SOURCES COMPLETE IN $TAG"
+          echo "ALL SELECTED K1 SOURCES COMPLETE IN $TAG" # [harvest-k1-corpus] rerun after asset-name collision fix
