@@ -25,7 +25,6 @@ jobs:
             *"[consolidate-k1]"*) ;;
             *) echo "not a consolidation commit"; exit 0 ;;
           esac
-
           mkdir -p /tmp/rategoan-consolidate
           sources=(
             data-baru-xone-parallel-en-id-2026-09
@@ -33,7 +32,6 @@ jobs:
             data-baru-k1-indmix-2026-09
             data-baru-k1-aikathata-dfk-2026-09
           )
-
           for tag in "${sources[@]}"; do
             echo "=== $tag ==="
             page=1
@@ -42,7 +40,6 @@ jobs:
               gh api "/repos/$REPO/releases/tags/$tag/assets?per_page=100&page=$page" > "$json"
               count=$(jq 'length' "$json")
               [ "$count" -gt 0 ] || break
-
               for row in $(jq -r '.[] | @base64' "$json"); do
                 asset=$(printf '%s' "$row" | base64 -d)
                 name=$(printf '%s' "$asset" | jq -r '.name')
@@ -50,7 +47,6 @@ jobs:
                 url=$(printf '%s' "$asset" | jq -r '.browser_download_url')
                 out="${tag}__${name}"
                 file="/tmp/rategoan-consolidate/$out"
-
                 echo "COPY $tag / $name / $size bytes"
                 curl -L --fail --retry 8 --retry-all-errors -o "$file" "$url"
                 actual=$(stat -c%s "$file")
@@ -58,12 +54,11 @@ jobs:
                 gh release upload "$TARGET" --repo "$REPO" "$file" --clobber
                 rm -f "$file"
               done
-
               [ "$count" -lt 100 ] && break
               page=$((page+1))
             done
           done
-
           gh api "/repos/$REPO/releases/tags/$TARGET" > /tmp/rategoan-consolidate/target.json
           jq '{tag:.tag_name,assets:(.assets|length),bytes:(.assets|map(.size)|add)}' /tmp/rategoan-consolidate/target.json
           echo "CONSOLIDATION_COMPLETE"
+          echo "RUN_MARKER=consolidate-k1"
