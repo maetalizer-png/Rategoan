@@ -96,3 +96,5 @@ jobs:
           )
           gh release upload "$TAG" --repo "$REPO" work/infobay-textbooks-manifest.json --clobber
           echo "INFOBAY textbook harvest uploaded to existing tag."
+
+# retrigger consolidated textbook harvest
