@@ -102,3 +102,12 @@
 }
 .project-row { display: flex; gap: 8px; align-items: center; list-style: none; margin: 0 0 8px; }
 .project-open { flex: 1; text-align: left; }
+
+.art-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.art-table th, .art-table td {
+  border: 1px solid var(--line, #e4e4e4);
+  padding: 8px;
+  text-align: left;
+  outline: none;
+}
+.art-table th { background: var(--card, #f3f3f3); }
