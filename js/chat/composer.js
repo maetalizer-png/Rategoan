@@ -21,6 +21,7 @@ import { flowHub } from '../../raget/raget-agents/flow-hub.js';
 import { toolsKode } from '../../raget/raget-agents/tools-kode.js';
 import { artifact } from '../ui/artifact.js';
 import { workspace } from '../state/workspace.js';
+import { projectPage } from '../project/project.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
@@ -340,7 +341,7 @@ export const composer = {
     const openProjectSheet = () => {
       paintProjects();
       sheets.close();
-      sheets.openProject();
+      projectPage.open();
     };
     const learnCard = $('sheet-learn');
     if (learnCard) learnCard.onclick = async () => {
