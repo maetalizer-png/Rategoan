@@ -44,3 +44,4 @@ jobs:
           JSON
           gh release upload "$TAG" --repo "$REPO" work/indonesian_corpus_1p8b_deepclean_indo4b.sha256 work/deepclean-manifest.json --clobber
           echo "DEEP_CLEAN_K1_HARVEST_COMPLETE"
+          echo "RETRY_2026_09_30"
