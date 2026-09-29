@@ -41,7 +41,7 @@ jobs:
           i=0
           for f in work/indo4b.part.*; do
             name="indo4b-deepclean-2026-09.part-${i}.jsonl.gz"
-            curl --fail --retry 5 --retry-all-errors -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" --data-binary "@$f" "$UPLOAD_URL?name=$name"
+            curl --fail --retry 5 --retry-all-errors -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/octet-stream" --upload-file "$f" "$UPLOAD_URL?name=$name"
             i=$((i+1))
           done
           python - <<'PY'
@@ -54,5 +54,5 @@ jobs:
           m["status"]="complete"
           json.dump(m,open("work/manifest-final.json","w"),indent=2)
           PY
-          curl --fail --retry 5 --retry-all-errors -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/json" --data-binary "@work/manifest-final.json" "$UPLOAD_URL?name=indo4b-deepclean-2026-09.manifest.json"
+          curl --fail --retry 5 --retry-all-errors -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Content-Type: application/json" --upload-file "work/manifest-final.json" "$UPLOAD_URL?name=indo4b-deepclean-2026-09.manifest.json"
           echo "HARVEST_COMPLETE $HF_REPO bytes=$ACTUAL parts=$i"
