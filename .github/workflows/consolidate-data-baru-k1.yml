@@ -19,12 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
-      target: \${{ steps.release.outputs.target }}
+      target: ${{ steps.release.outputs.target }}
     steps:
       - name: Create target release
         id: release
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           if ! gh release view "$TARGET_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
@@ -51,12 +51,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
-      SOURCE_TAG: \${{ matrix.source }}
-      PREFIX: \${{ matrix.prefix }}
+      SOURCE_TAG: ${{ matrix.source }}
+      PREFIX: ${{ matrix.prefix }}
     steps:
       - name: Stream source release assets into target release
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           repo="$GITHUB_REPOSITORY"
@@ -99,7 +99,7 @@ jobs:
     steps:
       - name: Verify consolidated release
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           repo="$GITHUB_REPOSITORY"
