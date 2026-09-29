@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28T22:20:32Z",
-  "updatedAt": "2026-09-28T22:20:32Z",
+  "generatedAt": "2026-09-29T13:53:32Z",
+  "updatedAt": "2026-09-29T13:53:32Z",
   "sumber": "Grok Build 2026-09-25 mutu K1-K2-K3 + wikibooks ID. K4 tidak dijumlahkan.",
   "kanonik": {
     "keterangan": "3 rak resmi K1/K2/K3 - SATU-SATUNYA yang dipakai training dan SATU-SATUNYA angka token yang valid. Angka BPE terverifikasi penuh.",
@@ -57,153 +57,58 @@
       {
         "rak": "K3 korpus-pelengkap-bersih",
         "asal": "QC lanjut + mutu pelengkap (bukan pangkas topik)",
-        "totalDokumen": 81360713,
-        "sizeByteGz": 10038590208,
-        "sha256": "db6f6e9a16e21bb7fec668f8b14645f063a198a2c9cc517c8f15cbb1d7a1a97e",
+        "totalDokumen": 81288308,
+        "sizeByteGz": 10029126554,
+        "sha256": "7d11f6f8e3c394900ec408c1fda5f54755dad9a30cde430941b51ffe8a7292c9",
         "totalKataApprox": null,
-        "totalTokenBPEResmi": 15881116382,
+        "totalTokenBPEResmi": 15011217697,
         "diukurPada": "2026-09-27T14:01:23Z; tokenizer resmi vocab 30368, max_len 128, BOS/EOS; BPE delta dokumen ubah/buang + pelajaran baru",
-        "catatan": "part26-28 berita politik CC-BY-SA. Tambahan sesi ini 194380 dok / 74674180 BPE. Gzip baru bersama part26-27: 1013813948 byte. part03-25 tidak ditimpa.",
+        "catatan": "Sortir k3. 81360713 dok masuk, 81288308 dok simpan, 15011217697 BPE. Part lama dihapus.",
         "komposisiBahasa": {
           "id": 1.0
         },
         "parts": [
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part03",
-            "sha256": "8d9682429db29df2adf924299e28ad1fae3318953be837f130e20a490e4faa8e",
-            "bytes": 424362294
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part40",
+            "sha256": "777b2ac0e346739d6ed90aae3d686f9dfb49959787512edc2736321e079a2dbd",
+            "bytes": 1450101010
           },
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part04",
-            "sha256": "0f980c9706546fca2697f95e093173ca18cebe3d6fd31e101873202cc946f3c8",
-            "bytes": 425398405
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part41",
+            "sha256": "5c087e0424f2347726964b15767081ec28e83c60acab59e86708346adda9b68f",
+            "bytes": 1450292066
           },
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part05",
-            "sha256": "bfc8f4fd56ac1d12e62a304fa611a20e31cfad3c62981376c5f5bdc14291c22d",
-            "bytes": 420676448
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part42",
+            "sha256": "22c26943a79b85c7597096a86efe7fd3afb7f64a74a04dc13bfaf6ef505eed3e",
+            "bytes": 1450221371
           },
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part06",
-            "sha256": "88d97a93241380a7386b3a3a4d2eb713cbf549fc9881d3f0496b2d8cb673a0ee",
-            "bytes": 422511764
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part43",
+            "sha256": "13e4ef546a2ad21bbd246ac0fa3612e72655898bef883b1fd559bc2c97daa1dc",
+            "bytes": 1450149975
           },
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part07",
-            "sha256": "52f73b9799673cc8c359aa0ee3301a945c9f3540c599c31198611caef184d4e8",
-            "bytes": 420000963
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part44",
+            "sha256": "5eebcec6481a6fdb93a626a7d1b24105590a3f9cba65b5ff0607975eee8702e8",
+            "bytes": 1450044201
           },
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part08",
-            "sha256": "50ad775884e7cd6607b15b714d4460a3c961b8d2a45368261f6487c7f378b1d1",
-            "bytes": 420326584
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part45",
+            "sha256": "1df80fd6d4e3950ad746b53135d036fdafe6f1eead7961aaae1b9afda897b988",
+            "bytes": 1450001636
           },
           {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part09",
-            "sha256": "59ea7f89ebd9ff6a2a83a80ea87a63d58e7ca1b655b6f1c9039f445f4f84bc3b",
-            "bytes": 420400738
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part10",
-            "sha256": "7dd9a07f7f7940ab3eb08afed0d7004ee6712f9e1ad02f4c73ea092a249efc77",
-            "bytes": 420255892
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part11",
-            "sha256": "f50c8a7de7c379eb29d133fa024d411e39e640e926e704d543b1ced6cf1f95a3",
-            "bytes": 420078046
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part12",
-            "sha256": "877e55000e075931803c8f2ddb7756cb361c3a6fc4f514e61197756c9c0cd606",
-            "bytes": 420276703
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part13",
-            "sha256": "3b163b3d691cf5ed6249d1eb46fe488290f0673be8408b418d466e26a32f6e9f",
-            "bytes": 420103267
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part14",
-            "sha256": "8c7c3760254697121fd5044980f2a50fa0ecf2623627eef642718c6935ba12c4",
-            "bytes": 420143744
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part15",
-            "sha256": "4e460e1a28385ec149f5681f8e94b3608258cb716ac220e8ceead911bbb7dfcd",
-            "bytes": 420201308
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part16",
-            "sha256": "6d166de4099ba4514697bc6ff898c1f9ec82392145ff80bfc698cf3add6448e7",
-            "bytes": 420115904
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part17",
-            "sha256": "5f99bccbf4f7ea027f7ecc9823e2a2f3d18372bf620a2209c9e6dcaf2b92b56c",
-            "bytes": 420339741
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part18",
-            "sha256": "db32af22069e45b944199b5919bec48f568849e85d310108bc1c11dd46f29081",
-            "bytes": 420263397
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part19",
-            "sha256": "844ff110c3966b3617859fd5df9c97c322144d27fe8bd897e764331133992e6e",
-            "bytes": 420236707
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part20",
-            "sha256": "ebf45d79b8b0a47f6e5211bb2d350f1867da754bf6c951f3cf3c993a386a3199",
-            "bytes": 420043155
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part21",
-            "sha256": "84fb7e54e2bbbc193fc4b2ed4066a6d13de8a868dd03ebebf1cebe040bf8f33d",
-            "bytes": 420138516
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part22",
-            "sha256": "01dc896595f59a099aed5f15ec2505dc0e730f8af7496736e5d86604b0c68e9a",
-            "bytes": 490087922
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part23",
-            "sha256": "43cf7d2be44ea124b9a61f8d3588c9b058455b8e33c2400b7d7734eff50908e3",
-            "bytes": 496208579
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part24",
-            "sha256": "eeceadd5ef586547f5cc8ba00b7f43bf0f4f3735dab4710233b52bf91a281312",
-            "bytes": 39384438
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part25",
-            "sha256": "b568b0f2e83a15bac49853844d23515864285af5199e30adf278a20fe4dbe762",
-            "bytes": 3221745
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part26",
-            "sha256": "c1d2a2a79d9a295c1825e228c754543c171ddad0a0565d91f6cd4d8e10001f21",
-            "bytes": 442908797
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part27",
-            "sha256": "d305b85af526aeee86184f758dda0a95d336d31339e64722a56b455fdf94fc21",
-            "bytes": 445994870
-          },
-          {
-            "name": "korpus-pelengkap-bersih.jsonl.gz.part28",
-            "sha256": "e5e876d324f367614f496633bf4f7c4f1e296b94120c267ba0e22995a63e1c9b",
-            "bytes": 124910281
+            "name": "korpus-pelengkap-bersih.jsonl.gz.part46",
+            "sha256": "a065c1c8cf38416f0350a8f9bb6400fd012b26bdb0f3603408d5d88617ff4b12",
+            "bytes": 1328316295
           }
         ],
         "tierUkuran": "XL"
       }
     ],
-    "totalDokumenKanonik": 91467841,
-    "totalTokenBPEResmiKanonik": 18520949128
+    "totalDokumenKanonik": 91395436,
+    "totalTokenBPEResmiKanonik": 17651050443
   },
   "staging": {
     "keterangan": "BUKAN kanonik, BELUM masuk training, BELUM lolos review manual (PRD.md §2). Angka kata approx dari manifest workflow panen (workflow sudah dihapus), BUKAN token BPE terverifikasi Claude - JANGAN dijumlah ke total kanonik. (panen-wikipedia-id SUDAH SELESAI diproses - bagian uniknya sudah masuk K1 di atas, entri di bawah cuma riwayat.)",
@@ -259,19 +164,19 @@
     "catatan": "Checkpoint sesi training ke-4 (2027 step / 425,5 menit, PPL 1068,37->932,47). Sesi ke-3 (sha256 d4aba4d8..., PPL 1068,37) sempat terpasang di GitHub Release checkpoint-200m tapi TIDAK bisa diunduh browser (asset Release tidak pernah kirim header CORS) - migrasi ke Hugging Face Hub sedang berjalan, checkpoint ke-4 ini yang akan dipublish ke sana (lompat GitHub Release sama sekali)."
   },
   "ringkasanTotal": {
-    "totalTokenKanonikTerverifikasi": 18520949128,
+    "totalTokenKanonikTerverifikasi": 17651050443,
     "totalKataApproxStagingBelumDireview": 8137547049,
     "catatanPenting": "REKONSILIASI 2026-09-25 mutu: total 17975859650. Sampah boleh turun dari 18415279368; bukan pangkas topik. Header ulang dan pasal identik di dalam dokumen dihapus. Hukum/berita tidak dibuang. Ubah 171 dok. BPE 15277086568 -> 15277083398.",
-    "tokenKanonikPerintahClaude": 18520949128,
-    "kekuranganTokenKanonik": -17520949128
+    "tokenKanonikPerintahClaude": 17651050443,
+    "kekuranganTokenKanonik": -16651050443
   },
   "targetGerbang": 1000000000,
   "targetJangkaPanjangKertas": 4000000000,
   "targetTercapai": true,
-  "kekuranganTokenKanonik": -17520949128,
+  "kekuranganTokenKanonik": -16651050443,
   "catatanTargetTercapai": "PERBAIKAN 2026-09-11: field targetTercapai sebelumnya SALAH tertulis false padahal totalTokenBPEResmiKanonik (5.223.639.069, dan bahkan sebelum K3 v8 pun sudah 5.199.165.796) sudah jauh melewati targetGerbang (1.000.000.000) - kekuranganTokenKanonik NEGATIF berarti SURPLUS, bukan kekurangan, jadi targetTercapai wajib true. Bug ini tidak terdeteksi check-korpus-manifest-sync.mjs karena skrip itu cuma verifikasi turunan SUM dari kanonik.entries, tidak verifikasi konsistensi logis targetTercapai vs tanda kekuranganTokenKanonik - kalau mau skrip menutup celah ini juga, tambahkan assertion (kekuranganTokenKanonik < 0) === targetTercapai.",
   "catatanPotensi": "Gerbang 1 miliar SUDAH tercapai dari data kanonik saja (5,22 miliar), jauh sebelum mempertimbangkan panenMadlad400Id. Catatan lama di bawah ini dipertahankan sebagai riwayat evaluasi data staging tsb, BUKAN prasyarat gerbang 1 miliar yang sudah lama terlewati: kalau panenMadlad400Id lolos review (belum tentu, lihat statusReview - riwayat 2x retire berturut-turut untuk data serupa) dan diproses jadi token BPE nyata, itu akan menambah volume di ATAS target jangka panjang 4 miliar (juga sudah terlewati), bukan syarat mencapai gerbang awal.",
-  "tokenKanonikPerintahClaude": 18520949128,
+  "tokenKanonikPerintahClaude": 17651050443,
   "madlad400id": {
     "keputusan": "RETIRE",
     "alasan": "sample 600 baris part 0011/0018/0027: spam ketat 8.8%, blog-nav 15.3%, isi crawl bukan ensiklopedia; tidak digabung K1",
