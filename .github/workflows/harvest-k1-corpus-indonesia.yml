@@ -19,8 +19,8 @@ jobs:
     steps:
       - name: Harvest large Indonesian K1 sources into one release
         env:
-          GH_TOKEN: \${{ github.token }}
-          HF_TOKEN: \${{ secrets.HF_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
