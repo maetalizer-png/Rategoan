@@ -1,0 +1,39 @@
+name: harvest-k1-science
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: maetalizer-png/Rategoan
+      TAG: data-baru-k1-corpus-indonesia-2026-09
+      SRC: Ik45/data-science-en-id
+    steps:
+      - name: Download scientific EN-ID corpus
+        run: |
+          set -euo pipefail
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          python -m pip install -q -U huggingface_hub
+          mkdir -p work/science
+          hf download "$SRC" --repo-type dataset --local-dir work/science
+          find work/science -type f -size +0c -print0 | while IFS= read -r -d '' f; do
+            size=$(stat -c%s "$f")
+            if [ "$size" -lt 1900000000 ]; then
+              sha256sum "$f" > "$f.sha256"
+              gh release upload "$TAG" --repo "$REPO" "$f" "$f.sha256" --clobber
+            else
+              split -b 1800m -d -a 3 "$f" "${f}.part-"
+              for p in "${f}".part-*; do sha256sum "$p" > "$p.sha256"; gh release upload "$TAG" --repo "$REPO" "$p" "$p.sha256" --clobber; done
+            fi
+          done
+          printf '%s\n' 'source=Ik45/data-science-en-id' 'rows=13,494,098' 'size=3.04 GB' 'license=MIT' 'domain=scientific/data-science/AI/ML EN-ID' > work/ik45-manifest.txt
+          gh release upload "$TAG" --repo "$REPO" work/ik45-manifest.txt --clobber
+          echo 'K1 scientific EN-ID corpus uploaded to existing release.'
