@@ -119,6 +119,22 @@
     <section id="view-collection" class="view" hidden>
     </section>
 
+
+    <section id="view-studio" class="view" hidden>
+      <div class="settings-page">
+        <header class="settings-header">
+          <button id="studio-back" class="back-btn plain" aria-label="Kembali">Kembali</button>
+          <h1>Studio kode</h1>
+        </header>
+        <p class="coll-tab-desc">JavaScript di perangkat ini. Bukan Copilot. Timeout 1,2 detik.</p>
+        <textarea id="studio-editor" class="studio-editor" rows="14" spellcheck="false"></textarea>
+        <div class="studio-actions">
+          <button type="button" id="studio-run">Jalankan</button>
+          <button type="button" id="studio-open-panel">Buka di panel</button>
+        </div>
+        <pre id="studio-console" class="art-console" hidden></pre>
+      </div>
+    </section>
     <section id="view-login" class="view" hidden>
     </section>
 
@@ -321,6 +337,13 @@
           <line x1="9" y1="10" x2="15" y2="10"/>
         </svg>
         Chat Baru
+      </button>
+      <button id="btn-studio" class="side-link">
+        <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+        Studio kode
       </button>
       <button id="btn-collection" class="side-link">
         <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
