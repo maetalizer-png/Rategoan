@@ -27,10 +27,10 @@ jobs:
           test -n "${HF_TOKEN:-}" || { echo "HF_TOKEN GitHub secret is not configured"; exit 2; }
 
           REPO="maetalizer-png/Rategoan"
-          TAG="data-baru-k1-indonesian-textbooks-2026-09"
+          TAG="data-baru-k1-textbooks-2026-09"
           gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || \
             gh release create "$TAG" --repo "$REPO" \
-              --title "Data Baru K1 — Indonesian Textbooks — 2026-09" \
+              --title "Data Baru K1 — Textbooks & Educational Books — 2026-09" \
               --notes "Standalone K1 textbook candidates. Sources: InfoBayAI Indonesian STEM and Non-STEM Textbook Dataset. CC BY 4.0. Kept outside canonical K1 pending cleaning/deduplication/overlap audit."
 
           python - <<'PY'
