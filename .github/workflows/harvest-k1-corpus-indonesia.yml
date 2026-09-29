@@ -39,6 +39,8 @@ api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand
 req=urllib.request.Request(api)
 if auth and os.environ.get("HF_TOKEN"):
     req.add_header("Authorization","Bearer "+os.environ["HF_TOKEN"])
+elif auth:
+    raise SystemExit("AUTH_REQUIRED_BUT_HF_TOKEN_SECRET_IS_NOT_CONFIGURED")
 with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
 files=[]
 for x in items:
@@ -80,7 +82,13 @@ PY
 
           harvest_repo "Lyon28/Corpus-Indonesia" 0
           harvest_repo "sansaks/dataset_indonesia" 0
-          harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
-          harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
+          if [ -n "${HF_TOKEN:-}" ]; then
+            harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
+            harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
+          else
+            echo "SKIP gated InfoBayAI datasets: HF_TOKEN secret not configured"
+          fi
 
-          echo "ALL SELECTED K1 SOURCES COMPLETE IN $TAG" # [harvest-k1-corpus] rerun after asset-name collision fix
+          gh release view "$TAG" --repo "$REPO" --json assets --jq '{asset_count:(.assets|length),bytes:(.assets|map(.size)|add)}' | tee work/release-summary.json
+          gh release upload "$TAG" --repo "$REPO" work/release-summary.json --clobber
+          echo "HARVEST VERIFIED IN $TAG" # [harvest-k1-corpus]
