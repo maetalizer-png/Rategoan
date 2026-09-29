@@ -60,3 +60,45 @@ jobs:
           done < work/file-list.txt
           gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
           echo "K1 Corpus Indonesia harvest finished: verified $n source data files."
+
+      - name: Harvest public Indonesian SIBI textbook corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          HF_REPO="AITF-SR-02/sekolah_rakyat_sibi_sma_cpt"
+          mkdir -p work-sibi
+          python - <<'PY'
+          import json, urllib.request
+          repo="AITF-SR-02/sekolah_rakyat_sibi_sma_cpt"
+          api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r: items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".jsonl",".jsonl.gz",".parquet",".txt",".txt.gz")): files.append((p,int(x.get("size") or 0)))
+          files.sort()
+          if not files: raise SystemExit("No SIBI textbook files found")
+          json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open("work-sibi/files.json","w"),indent=2)
+          print("SIBI_SOURCE_FILE_COUNT",len(files)); print("SIBI_SOURCE_TOTAL_BYTES",sum(s for _,s in files))
+          PY
+          while IFS=$'\t' read -r idx size path; do
+            [ -z "$path" ] && continue
+            safe=$(printf '%s' "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
+            out="work-sibi/${idx}-${safe}"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
+            test -s "$out"
+            actual=$(stat -c%s "$out")
+            test "$actual" -eq "$size"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+          done < <(python - <<'PY'
+          import json
+          for i,(p,s) in enumerate(json.load(open("work-sibi/files.json"))["files"],1): print(f"{i}\t{s}\t{p}")
+          PY
+          )
+          gh release upload "$TAG" --repo "$REPO" work-sibi/files.json --clobber
+          echo "SIBI textbook harvest finished."
