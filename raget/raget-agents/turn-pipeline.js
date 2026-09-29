@@ -34,7 +34,9 @@ function inspect(prompt, context) {
   if (/^(lanjut|lanjutkan|dari ini)$/i.test(text) && prev) route = 'slide';
   else if (SLIDE_ACTION_RE.test(text) && SLIDE_NOUN_RE.test(text)) route = 'slide';
   else if (file && FILE_RE.test(text)) route = 'file';
-  else if (flowHub.wantsResearch(text)) route = 'research';
+  else if (/\b(buat(kan)?|tulis|susun)\s+(dokumen|laporan|makalah|catatan)\b/i.test(text)) route = 'document';
+  else if (tool === 'kode') route = 'code';
+  else if (flowHub.wantsResearch(text) || web && /\briset\b/i.test(text)) route = 'research';
   else if (flowHub.wantsThink(text)) route = 'think';
   else if (flowHub.wantsCollection(text) || tool === 'cari_koleksi') route = 'collection';
   else if (web || tool === 'websearch') route = 'web';
