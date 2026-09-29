@@ -19,13 +19,11 @@ jobs:
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
-          TAG="data-baru-k1-open-textbooks-2026-09"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
           HF_REPO="zabiullah/pdf-books-collection"
           mkdir -p work
 
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" \
-            --title "Data Baru K1 — Open Textbooks 13.56 GB — 2026-09" \
-            --notes "Source: zabiullah/pdf-books-collection on Hugging Face. 1,043 PDF textbooks/educational materials, reported total 13.56 GB, CC-BY-4.0. Topics include computer science, mathematics, AI/ML, and philosophy. Standalone K1 candidate; not merged into canonical K1."
+          gh release view "$TAG" --repo "$REPO" >/dev/null
 
           python - <<'PY'
           import json, urllib.request
@@ -75,3 +73,5 @@ jobs:
 
           gh release upload "$TAG" --repo "$REPO" work/file-list.tsv --clobber
           echo "K1 OPEN TEXTBOOK HARVEST COMPLETE"
+
+# use existing K1 candidate release; no new tag
