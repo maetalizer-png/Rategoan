@@ -222,7 +222,7 @@ export const composer = {
       attach: att,
       websearch: this.websearchActive || this.researchActive,
     });
-    const isWebsearch = plan.route === 'web' || this.researchActive;
+    const isWebsearch = plan.route === 'web' || plan.route === 'research' || this.researchActive;
     const deep = this.researchActive || flowHub.wantsResearch(text);
     const routedText = isWebsearch ? ((deep ? 'riset ' : 'googling ') + text.replace(/^riset\s+(mendalam\s+)?/i, '')) : text;
     if (plan.route === 'slide' && /^(lanjut|lanjutkan|dari ini)$/i.test(text.trim())) {
