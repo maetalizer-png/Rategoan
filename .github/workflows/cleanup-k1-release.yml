@@ -20,7 +20,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          assets_json=$(gh api --paginate "/repos/$REPO/releases/tags/$TAG/assets?per_page=100" | jq -s 'add')
+          release_id=$(gh api "/repos/$REPO/releases/tags/$TAG" --jq '.id')
+          assets_json=$(gh api --paginate "/repos/$REPO/releases/$release_id/assets?per_page=100" | jq -s 'add')
           echo "$assets_json" | jq -r '.[].name' | while IFS= read -r name; do
             remove=0
             case "$name" in
@@ -44,4 +45,4 @@ jobs:
             fi
           done
           echo "Remaining data assets:"
-          gh api --paginate "/repos/$REPO/releases/tags/$TAG/assets?per_page=100" | jq -s 'add | map(select(.name | test("\\.(parquet|gz)$"))) | {count:length, bytes:(map(.size)|add), assets:map({name,size})}'
+          gh api --paginate "/repos/$REPO/releases/$release_id/assets?per_page=100" | jq -s 'add | map(select(.name | test("\\.(parquet|gz)$"))) | {count:length, bytes:(map(.size)|add), assets:map({name,size})}'
