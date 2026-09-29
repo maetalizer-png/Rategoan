@@ -68,3 +68,4 @@ jobs:
           )
           gh release upload "$TAG" --repo "$REPO" work/checksums.tsv --clobber
           echo "HARVEST COMPLETE"
+# trigger large HF harvest
