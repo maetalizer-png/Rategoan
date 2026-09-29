@@ -69,7 +69,7 @@ jobs:
             n=$((n+1))
             base=$(basename "$path")
             safe=$(printf '%s' "$base" | tr '/ ' '__')
-            out="work/\${n}-\${safe}"
+            out="work/${n}-${safe}"
             curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
             test -s "$out"
             sha=$(sha256sum "$out" | awk '{print $1}')
