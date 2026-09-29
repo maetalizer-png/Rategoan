@@ -135,6 +135,33 @@
         <pre id="studio-console" class="art-console" hidden></pre>
       </div>
     </section>
+
+    <section id="view-artifacts" class="view" hidden>
+      <div class="settings-page">
+        <header class="settings-header">
+          <button id="artifact-page-back" class="back-btn plain" aria-label="Kembali">Kembali</button>
+          <h1>Artefak</h1>
+        </header>
+        <p class="coll-tab-desc">Slide, kode, dokumen, dan tabel yang sudah dibuat.</p>
+        <ul id="artifact-page-list" class="pick-list"></ul>
+      </div>
+    </section>
+    <section id="view-connect" class="view" hidden>
+      <div class="settings-page">
+        <header class="settings-header">
+          <button id="connect-back" class="back-btn plain" aria-label="Kembali">Kembali</button>
+          <h1>Konektor</h1>
+        </header>
+        <p class="coll-tab-desc">Antrian ke server sendiri. Bukan kirim lewat Vercel.</p>
+        <p id="connect-server" class="coll-tab-desc"></p>
+        <input id="connect-url" class="hist-search-input" type="url" placeholder="https://server-anda" autocomplete="off">
+        <button type="button" class="attach-plain" id="connect-save-url">Simpan alamat server</button>
+        <button type="button" class="attach-plain" id="connect-drive">Antrikan ekspor Drive</button>
+        <button type="button" class="attach-plain" id="connect-wa">Antrikan bagikan WhatsApp</button>
+        <button type="button" class="attach-plain" id="connect-flush">Coba kirim antrian</button>
+        <pre id="connect-outbox" class="art-console"></pre>
+      </div>
+    </section>
     <section id="view-login" class="view" hidden>
     </section>
 
@@ -356,6 +383,13 @@
           <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
         </svg>
         Proyek
+      </button>
+      <button id="btn-connect" class="side-link">
+        <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.07 0l1.41-1.41a5 5 0 0 0-7.07-7.07L10 5.93"/>
+          <path d="M14 11a5 5 0 0 0-7.07 0L5.52 12.41a5 5 0 1 0 7.07 7.07L14 18.07"/>
+        </svg>
+        Konektor
       </button>
       <button id="btn-artifact" class="side-link">
         <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
