@@ -79,7 +79,7 @@ jobs:
             size=$(jq -r '.size' <<<"$item")
 
             safe=$(printf '%s' "$name" | tr -c 'A-Za-z0-9._-' '_')
-            out="$RUNNER_TEMP/$PREFIX__$safe"
+            out="$RUNNER_TEMP/${PREFIX}__${safe}"
 
             echo "[$i/$total] $name ($size bytes)"
             rm -f "$out"
