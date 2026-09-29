@@ -1,0 +1,48 @@
+name: harvest-k1-bse-textbooks
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-bse]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download BSE textbook corpus from Hugging Face
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          python -m pip install -q huggingface_hub
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          snapshot_download(
+              repo_id='Firmansyah-Ibrahim/indo-bloom-raw-bse',
+              repo_type='dataset',
+              local_dir='work/bse',
+              max_workers=8,
+          )
+          PY
+          find work/bse -type f -size +0c -print
+          tar -C work -czf work/bse-textbook-corpus.tar.gz bse
+          sha256sum work/bse-textbook-corpus.tar.gz > work/bse-textbook-corpus.sha256
+          cat > work/bse-textbook-corpus.manifest.json <<'JSON'
+          {
+            "source": "Firmansyah-Ibrahim/indo-bloom-raw-bse",
+            "original_source": "Buku Sekolah Elektronik (BSE), Kemdikbudristek Indonesia",
+            "license": "CC-BY-4.0",
+            "classification": "K1 textbook candidate",
+            "note": "Standalone source asset; not merged into canonical K1."
+          }
+          JSON
+          gh release upload "$TAG" --repo "$REPO" work/bse-textbook-corpus.tar.gz work/bse-textbook-corpus.sha256 work/bse-textbook-corpus.manifest.json --clobber
+          echo "BSE textbook harvest complete"
