@@ -67,8 +67,7 @@ jobs:
           while IFS=$'\t' read -r idx size path; do
             [ -z "$path" ] && continue
             n=$((n+1))
-            base=$(basename "$path")
-            safe=$(printf '%s' "$base" | tr '/ ' '__')
+            safe=$(printf '%s' "$path" | tr '/ ' '__' | tr -cd '[:alnum:]_.-')
             out="work/${n}-${safe}"
             curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
             test -s "$out"
