@@ -88,3 +88,4 @@ jobs:
             'note=Textbook corpora are uploaded only if repository HF_TOKEN secret has gated access.' \
             > work/hf-batch-manifest.txt
           gh release upload "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" work/hf-batch-manifest.txt --clobber
+# trigger HF batch harvest
