@@ -3,8 +3,7 @@ name: harvest-k1-textbooks
 on:
   push:
     branches: [main]
-    paths:
-      - ".github/workflows/harvest-k1-textbooks.yml"
+  workflow_dispatch:
 
 concurrency:
   group: harvest-k1-textbooks
@@ -73,4 +72,4 @@ jobs:
           done
           echo 'K1 textbook harvest uploaded to existing release.'
 
-# final textbook harvest trigger 2026-09-30
+# final textbook harvest trigger 2026-09-30T02:40+07:00
