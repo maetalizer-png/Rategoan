@@ -22,24 +22,24 @@ jobs:
           TAG="data-baru-k1-corpus-indonesia-2026-09"
           mkdir -p work
           gh release view "$TAG" --repo "$REPO" >/dev/null
-          python -m pip install -q 'huggingface_hub[hf_transfer]'
-          export HF_HUB_ENABLE_HF_TRANSFER=1
+          python -m pip install -q huggingface_hub
+          export HF_XET_HIGH_PERFORMANCE=1
 
           python - <<'PY'
-          import json, os
+          import json
           from huggingface_hub import HfApi
           api=HfApi()
           repo='HuggingFaceFW/finepdfs'
           files=[]
-          for x in api.list_repo_tree(repo, path='data/ind_Latn/train', recursive=True):
+          for x in api.list_repo_tree(repo, path_in_repo='data/ind_Latn/train', recursive=True):
               p=getattr(x,'path','')
               if getattr(x,'type',None)=='file' and p.endswith('.parquet'):
                   files.append({'path':p,'size':int(getattr(x,'size',0) or 0)})
           files.sort(key=lambda x:x['path'])
           if not files:
-              raise SystemExit('No Indonesian FinePDFs parquet shards found under data/ind_Latn/train')
+              raise SystemExit('No Indonesian FinePDFs parquet shards found')
           total=sum(x['size'] for x in files)
-          manifest={'source':repo,'subset':'ind_Latn','split':'train','license':'ODC-By-1.0','files':files,'reported_tokens':20318872038,'reported_documents':2323354,'reported_disk_bytes':19650000000}
+          manifest={'source':repo,'subset':'ind_Latn','split':'train','license':'ODC-By-1.0','files':files,'reported_tokens':20318872038,'reported_documents':2323354,'reported_disk_bytes':19650000000,'note':'PDF-derived corpus from CommonCrawl, deduplicated and educationally filtered by FinePDFs; kept as a separate K1 staging asset for later overlap audit.'}
           json.dump(manifest,open('work/finepdfs-ind-Latn-manifest.json','w'),indent=2)
           with open('work/finepdfs-ind-Latn-filelist.tsv','w') as f:
               for i,x in enumerate(files,1): f.write(f"{i}\t{x['size']}\t{x['path']}\n")
@@ -54,14 +54,14 @@ jobs:
           import os, sys, hashlib
           from huggingface_hub import hf_hub_download
           path=sys.argv[1]; idx=sys.argv[2]
-          local=hf_hub_download(repo_id='HuggingFaceFW/finepdfs',filename=path,repo_type='dataset',local_dir='work/hf',local_dir_use_symlinks=False)
+          local=hf_hub_download(repo_id='HuggingFaceFW/finepdfs',filename=path,repo_type='dataset',local_dir='work/hf')
           out=f"work/{idx}-"+path.rsplit('/',1)[-1]
           os.replace(local,out)
           h=hashlib.sha256()
           with open(out,'rb') as f:
               for chunk in iter(lambda:f.read(1024*1024),b''): h.update(chunk)
           with open(out+'.manifest.json','w') as f:
-              f.write('{"source":"HuggingFaceFW/finepdfs","subset":"ind_Latn","path":'+repr(path).replace("'",'"')+',"bytes":'+str(os.path.getsize(out))+',"sha256":"'+h.hexdigest()+'","license":"ODC-By-1.0"}')
+              f.write('{"source":"HuggingFaceFW/finepdfs","subset":"ind_Latn","path":"'+path.replace('"','\\"')+'","bytes":'+str(os.path.getsize(out))+',"sha256":"'+h.hexdigest()+'","license":"ODC-By-1.0"}')
           print('DOWNLOADED',out,os.path.getsize(out))
           PY
             out=$(find work -maxdepth 1 -type f -name "${idx}-*.parquet" | head -1)
