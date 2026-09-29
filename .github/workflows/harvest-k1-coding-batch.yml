@@ -91,3 +91,5 @@ jobs:
           note=Raw staging only; must be cleaned, deduplicated, license-audited and classified before canonical training use.
           EOF
           gh release upload "$TAG" --repo "$REPO" work/coding-harvest-manifest.txt --clobber
+
+# trigger code harvest 2026-09-30 [harvest-k1-coding]
