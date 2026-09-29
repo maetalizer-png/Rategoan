@@ -95,6 +95,7 @@ function detectTool(prompt) {
   if (/apa\s+yang\s+saya\s+simpan\s+tentang|apa\s+saja\s+yang\s+(saya\s+)?simpan\s+(di\s+)?koleksi/.test(t)) return 'cari_koleksi';
   if (/cari\s+.*di\s+semua|apa\s+yang\s+saya\s+punya\s+tentang/.test(t)) return 'cari_semua';
   if (/^bedah\s+https?:\/\//.test(t)) return 'bedah_url';
+  if (/^riset\b/.test(t) || /\briset\s+mendalam\b/.test(t)) return 'websearch';
   if (/\b(cari|carikan|search)\b.*\binternet\b|^googling\s+/.test(t)) return 'websearch';
   if (detectCuacaLive(t)) return 'cuaca_live';
   if (detectBeritaTopic(t) !== null) return 'berita_live';
@@ -106,6 +107,7 @@ function detectTool(prompt) {
   if (/^bandingkan\s+/.test(t)) return 'bandingkan';
   if (/^[a-z0-9\s]{2,40}\s+vs\.?\s+[a-z0-9\s]{2,40}$/.test(t)) return 'bandingkan_vs';
   if (/^(kelebihan|kekurangan)\s*(dan|\/|serta)?\s*(kelebihan|kekurangan)?\s+/.test(t)) return 'kelebihan_kekurangan';
+  if (/\b(buat(kan)?|tulis|susun)\s+(dokumen|laporan|makalah|catatan)\b/.test(t)) return 'dokumen';
   if (toolsKode.isCodeQuestion(t)) return 'kode';
   if (/^(cara|langkah)\s+/.test(t) && !LAYANAN_KEYWORDS_RE.test(t)) return 'cara';
   if (/^(kasih|beri|berikan|boleh|minta)?\s*ide\b/.test(t)) return 'ide';
