@@ -1,0 +1,69 @@
+name: harvest-k1-indonesian-deepclean-indo4b
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-indo4b]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest public HF dataset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-indo4b-deepclean-2026-09"
+          HF_REPO="img-gemina/indonesian-corpus-2b-deepclean-indo4b"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO"             --title "Data Baru K1 — Indonesian Corpus Deep-Clean Indo4B — 2026-09"             --notes "Standalone K1 candidate. Source: img-gemina/indonesian-corpus-2b-deepclean-indo4b on Hugging Face. License: CC-BY-4.0. Derived from Indo4B; kept outside canonical K1 pending overlap/dedup audit."
+
+          python - <<'PY'
+          import json, urllib.request
+          repo="img-gemina/indonesian-corpus-2b-deepclean-indo4b"
+          api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".jsonl",".jsonl.gz",".parquet",".csv",".csv.gz")):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort()
+          if not files:
+              raise SystemExit("No corpus files found")
+          total=sum(s for _,s in files)
+          json.dump({"repo":repo,"license":"CC-BY-4.0","files":files,"total_bytes":total},open("work/files.json","w"),indent=2)
+          with open("work/file-list.txt","w") as f:
+              for i,(p,s) in enumerate(files,1):
+                  f.write(f"{i}\t{s}\t{p}\n")
+          print("HF_FILES",len(files),"HF_TOTAL_BYTES",total)
+          for p,s in files: print(s,p)
+          PY
+
+          while IFS=$'\t' read -r idx expected path; do
+            [ -z "$path" ] && continue
+            safe=$(printf '%s' "$path" | tr '/ ' '__' | tr -cd '[:alnum:]_.-')
+            out="work/${idx}-${safe}"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
+            actual=$(stat -c%s "$out")
+            test "$actual" -eq "$expected"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"%s","path":"%s","bytes":%s,"sha256":"%s","license":"CC-BY-4.0"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          python - <<'PY'
+          import json
+          d=json.load(open("work/files.json"))
+          print("HARVEST_COMPLETE",d["repo"],"files=",len(d["files"]),"total_bytes=",d["total_bytes"])
+          PY
