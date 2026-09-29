@@ -28,10 +28,10 @@ Vercel cuma panggung bangun.
 
 ## Belum ada / belum seperti app lain
 
-- [ ] Lampiran di composer setara Gemini (satu tombol + pratinjau rapi)
+- [x] Lampiran: plus + kamera/foto/file + chip pratinjau
 - [x] Canvas/artefak: slide + kode + dokumen (tabel belakangan)
-- [ ] Proyek halaman penuh (bukan sheet)
-- [x] Riset multi-sumber (2–3 halaman); kartu cantik belakangan
+- [x] Proyek halaman penuh
+- [x] Sitasi web berbentuk kartu
 - [x] Riset: langkah di chat + 2–3 sumber
 - [x] Berpikir: jejak langkah di chat
 - [x] Panel kanan split desktop, overlay HP (kode/dokumen/slide)
