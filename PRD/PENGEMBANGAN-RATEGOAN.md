@@ -1,79 +1,38 @@
 # Pengembangan Rategoan
 
-Satu file app. Bukan korpus, bukan Release.
-Vercel = panggung bangun. Nanti server sendiri.
-Dua otak: **Raget Template** + **Raget 1.0**. Jangan semat model pihak lain.
+Satu catatan app. Bukan korpus.
+Vercel = bangun. Server sendiri nanti.
+Dua otak: Template + Raget 1.0. Tanpa model pihak lain.
 
-Jalur: pesan → memori/bahan → rute → Template atau 1.0 → mutu → jawaban.
+## Persen yang benar-benar jalan (29 Sep 2026)
 
----
+| Bagian | Jalan | Arti |
+|---|---|---|
+| Pintu UI (tombol ada, alur terbuka) | **75%** | Chat, web, slide, koleksi, proyek, belajar — bisa diklik |
+| Mutu jawaban (dalam, seperti app lain) | **30%** | Web masih dangkal; 1.0 sering acak; pikir/riset tipis |
+| Otak Template | **70%** | Fakta/aturan jalan; intent masih sering nyasar |
+| Otak Raget 1.0 | **25%** | Bisa dipilih; status sekarang ikut checkpoint; kalimat belum koheren |
+| Mesin server/konektor/kode | **5%** | Port ada, belum hidup |
+| **Produk keseluruhan** | **~45%** | App lokal berguna. Bukan setara Gemini/Claude/ChatGPT |
 
-## Sudah dikerjakan
+Jangan baca ceklis [x] sebagai “sudah seperti aplikasi lain”. [x] = pintunya ada.
 
-- [x] Chat PWA, riwayat, cari riwayat
-- [x] Template jalan (aturan + JSON + retrieval)
-- [x] Raget 1.0 bisa dipilih (checkpoint ada; kalimat sering belum koheren)
-- [x] Router dua otak + fallback
-- [x] Memori singkat/panjang, ingat fakta
-- [x] Kamera / foto / file
-- [x] Pencarian web + simpan koleksi
-- [x] Slide + panel kanan + PPTX
-- [x] Tanya koleksi
-- [x] Saklar berpikir / riset
-- [x] Proyek (sheet, bukan prompt)
-- [x] Daftar artefak slide
-- [x] Belajar terpandu
-- [x] Nama model bersih, login bersih, toast acak mati
-- [x] Registry mesin (`raget/raget-runtime/mesin.js`)
-- [x] Antrian jadwal lokal (belum kirim keluar)
+## Sudah berfungsi
 
----
+- Chat PWA + riwayat
+- Template + retrieval
+- Pilih Raget 1.0; fallback ke Template jika 1.0 belum termuat / timeout 8 dtk
+- Memori, file/kamera, web+koleksi, slide+PPTX, proyek sheet, belajar terpandu
+- UI nama/login bersih
 
-## Harus dikerjakan (urut)
+## Dikerjakan berikutnya (satu per satu)
 
-### 1. Stabilkan otak — kerjakan dulu
+1. Perangkai web multi-sumber, paragraf utuh.
+2. Pikir + riset: lebih dari 1 halaman wiki.
+3. Intent Template yang sering salah.
+4. Kalimat Raget 1.0 berbahasa Indonesia utuh.
+5. Server sendiri + konektor. Studio kode terakhir.
 
-- [ ] Status 1.0 nyata: idle / loading / ready / error (sekarang `ready` palsu)
-- [ ] Prefetch model di belakang; chat jangan menggantung
-- [ ] Timeout 1.0 → Template segera
-- [ ] Perangkai web: banyak sumber, paragraf utuh (bukan 1 wiki)
-- [ ] Berpikir: nalar, bukan 4 baris template
-- [ ] Riset: beberapa sumber, bukan 1 kali wiki
-- [ ] Satukan rute (`router-intent` / `turn-pipeline` / `flow-hub`), jangan hapus tool lama
+## Jangan
 
-### 2. Naikkan Template
-
-- [ ] Perbaiki intent yang sering salah / unmatched
-- [ ] Retrieval lebih tepat (sinonim, konteks)
-- [ ] Multi-turn tidak kehilangan entitas
-- [ ] Tool routing akurat
-
-### 3. Mutu Raget 1.0
-
-- [ ] Kalimat Indonesia utuh, tidak acak
-- [ ] Jawaban pendek koheren dulu, baru multi-turn
-- [ ] Fakta tetap dari Template/tool, 1.0 merangkai bahasa
-
-### 4. State & UI
-
-- [ ] Artefak selain slide (laporan, kode)
-- [ ] Halaman proyek penuh
-- [ ] History panjang: potong DOM, jangan menumpuk
-- [ ] Data besar di IndexedDB; preferensi kecil di localStorage
-
-### 5. Server sendiri — setelah 1–3
-
-- [ ] `mesin.setServerBase` hidup
-- [ ] Konektor (Drive/WA) + kirim jadwal
-- [ ] Mode server terlihat: prompt keluar perangkat
-
-### 6. Belum
-
-- [ ] Studio kode
-- [ ] Jangan: gen gambar/video/musik pihak lain, community, toko plugin
-
----
-
-## Aturan
-
-Hanya dua otak. Satu rute. Fakta bukan tugas 1.0. `ready` harus benar-benar siap. Jangan rusak Template.
+Gen gambar/video pihak lain. Otak ketiga. Numuk PRD baru. Campur korpus ke file ini.
