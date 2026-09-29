@@ -8,7 +8,7 @@ Vercel cuma panggung bangun.
 
 ## Persen pintu (yang pengguna sentuh)
 
-**~70% tombol sudah ada.** Yang belum seperti app lain: hasil tools-nya dangkal, beberapa pintu masih sheet kecil.
+**~80% pintu UI ada.** Tinggal konektor Drive/WA setelah server sendiri.
 
 ## Sudah ada di layar
 
@@ -36,7 +36,7 @@ Vercel cuma panggung bangun.
 - [x] Berpikir: jejak langkah di chat
 - [x] Panel kanan split desktop, overlay HP (kode/dokumen/slide)
 - [ ] Tools konektor di UI (Drive/WA) — tombol ada nanti setelah server
-- [ ] Studio kode di UI
+- [x] Studio kode di UI (JS lokal)
 
 ## Jangan dibuat di Raget
 
@@ -44,7 +44,4 @@ Generate gambar / video / musik pihak lain. Community. Toko plugin.
 
 ## Urutan UI berikutnya
 
-1. Web: kartu sumber + paragraf di chat (tampilan).
-2. Riset + berpikir: panel langkah di layar.
-3. Artefak selain slide.
-4. Proyek jadi halaman, bukan sheet.
+Konektor Drive/WA — setelah server sendiri. Jangan dipasang di Vercel.
