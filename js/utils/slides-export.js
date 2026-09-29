@@ -133,6 +133,21 @@ export function heldSlide() {
   return held;
 }
 
+export function rememberArtifact(item) {
+  if (!item || item.type === 'slide') return;
+  const list = readArts().filter((a) => a.fileName !== item.fileName);
+  list.unshift({
+    type: item.type,
+    title: item.title || item.fileName,
+    fileName: item.fileName,
+    code: item.code || '',
+    lang: item.lang || 'js',
+    markdown: item.markdown || '',
+    time: Date.now(),
+  });
+  localStorage.setItem(ART_KEY, JSON.stringify(list.slice(0, 20)));
+}
+
 export function allArtifacts() {
   return readArts();
 }
