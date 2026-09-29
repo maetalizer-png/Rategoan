@@ -1,0 +1,65 @@
+name: harvest-k1-textbook-sibi
+on:
+  push:
+    branches: [main]
+concurrency:
+  group: harvest-k1-textbook-sibi
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest public Indonesian SIBI textbook corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          HF_REPO="AITF-SR-02/sekolah_rakyat_sibi_sma_cpt"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          python - <<'PY'
+          import json, urllib.request
+          repo="AITF-SR-02/sekolah_rakyat_sibi_sma_cpt"
+          api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r: items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".jsonl",".jsonl.gz",".parquet",".txt",".txt.gz")):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort()
+          if not files: raise SystemExit("No downloadable SIBI textbook files found")
+          total=sum(s for _,s in files)
+          json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":total},open("work/files.json","w"),indent=2)
+          print("SOURCE_FILE_COUNT",len(files))
+          print("SOURCE_TOTAL_BYTES",total)
+          for p,s in files: print("SOURCE_FILE",s,p)
+          PY
+          python - <<'PY'
+          import json
+          d=json.load(open("work/files.json"))
+          with open("work/file-list.txt","w") as f:
+              for i,(p,s) in enumerate(d["files"],1): f.write(f"{i}\t{s}\t{p}\n")
+          PY
+          n=0
+          while IFS=$'\t' read -r idx size path; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            safe=$(printf '%s' "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
+            out="work/sibi-${n}-${safe}"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
+            test -s "$out"
+            actual=$(stat -c%s "$out")
+            test "$actual" -eq "$size"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.txt
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          echo "SIBI textbook harvest finished: verified $n source files."
