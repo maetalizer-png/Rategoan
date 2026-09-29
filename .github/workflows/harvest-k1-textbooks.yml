@@ -3,6 +3,8 @@ name: harvest-k1-textbooks
 on:
   push:
     branches: [main]
+    paths:
+      - ".github/workflows/harvest-k1-textbooks.yml"
 
 concurrency:
   group: harvest-k1-textbooks
@@ -54,7 +56,7 @@ jobs:
           tar -C work/nonstem -czf work/assets/indonesian-nonstem-textbooks.tar.gz .
           for f in work/assets/*.tar.gz; do
             base=$(basename "$f" .tar.gz)
-            split -b 1800m -d -a 3 "$f" "work/assets/${base}.part-"
+            split -b 1800m -d -a 3 "$f" "work/assets/"'$'"{base}.part-"
             rm -f "$f"
           done
           sha256sum work/assets/* > work/assets/SHA256SUMS
@@ -65,9 +67,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Corpus Indonesia — 2026-09" --notes "Standalone K1 candidate. Indonesian textbook sources; kept outside canonical K1 until cleaning/deduplication and overlap audit."
           for f in work/assets/*; do
             gh release upload "$TAG" --repo "$REPO" "$f" --clobber
           done
           echo 'K1 textbook harvest uploaded to existing release.'
 
-# trigger harvest run 2026-09-30-final-textbook-pass
+# final textbook harvest trigger 2026-09-30
