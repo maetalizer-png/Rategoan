@@ -1,0 +1,63 @@
+name: consolidate-data-baru
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: consolidate-data-baru
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    if: contains(github.event.head_commit.message, '[consolidate-data-baru]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Consolidate data-baru releases into one holding release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: maetalizer-png/Rategoan
+          TARGET: data-baru-2026-09
+        run: |
+          set -euo pipefail
+          mkdir -p work
+          gh release view "$TARGET" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TARGET" --repo "$REPO" \
+            --title "Data Baru — 2026-09" \
+            --notes "Consolidated holding release for newly harvested datasets. Not canonical K1/K2. The pre-existing penampung release is excluded."
+
+          python - <<'PY'
+          import json, urllib.request
+          repo='maetalizer-png/Rategoan'
+          req=urllib.request.Request(f'https://api.github.com/repos/{repo}/releases?per_page=100',headers={'Accept':'application/vnd.github+json'})
+          with urllib.request.urlopen(req,timeout=60) as r: data=json.load(r)
+          tags=[]
+          for rel in data:
+              t=rel.get('tag_name','')
+              if t.startswith('data-baru-') and t != 'data-baru-2026-09':
+                  tags.append(t)
+          with open('work/source-tags.txt','w') as f: f.write('\n'.join(tags))
+          print('SOURCE TAGS:', tags)
+          PY
+
+          while IFS= read -r tag; do
+            [ -z "$tag" ] && continue
+            echo "=== SOURCE: $tag ==="
+            mkdir -p "work/$tag"
+            gh release download "$tag" --repo "$REPO" --dir "work/$tag" --clobber || true
+            find "work/$tag" -maxdepth 1 -type f -print0 | while IFS= read -r -d '' file; do
+              base=$(basename "$file")
+              safe_tag=$(printf '%s' "$tag" | tr '/ ' '__')
+              upload="work/${safe_tag}__${base}"
+              cp "$file" "$upload"
+              gh release upload "$TARGET" --repo "$REPO" "$upload" --clobber
+              rm -f "$upload"
+            done
+            rm -rf "work/$tag"
+          done < work/source-tags.txt
+
+          gh release upload "$TARGET" --repo "$REPO" work/source-tags.txt --clobber
+          echo "CONSOLIDATION COMPLETE: $TARGET"
