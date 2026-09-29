@@ -412,8 +412,15 @@ async function renderArtefak() {
 }
 
 async function renderTab() {
-  if (state.tab === 'perpus') return renderPerpustakaan();
-  return renderTersimpan();
+  const desc = $('coll-tab-desc');
+  if (desc) desc.textContent = state.tab === 'perpus' ? TAB_DESC.perpus : TAB_DESC.tersimpan;
+  const filters = $('coll-filters');
+  if (state.tab !== 'tersimpan' && filters) filters.innerHTML = '';
+  const run = state.tab === 'perpus' ? renderPerpustakaan : renderTersimpan;
+  return Promise.resolve(run()).catch((e) => {
+    const content = $('coll-content');
+    if (content) content.innerHTML = '<div class="coll-empty"><div class="coll-empty-title">Gagal memuat tab</div><div class="coll-empty-body">' + escapeHtml(e && e.message ? e.message : 'error') + '</div></div>';
+  });
 }
 
 function exportMarkdown(items) {
