@@ -29,7 +29,7 @@ jobs:
 
           python - <<'PY'
           import pathlib
-          n=220
+          n=40
           pathlib.Path("work/shards.txt").write_text("\n".join(str(i) for i in range(n))+"\n")
           print("selected shards",n)
           PY
@@ -80,5 +80,5 @@ jobs:
             gh release upload "$TAG" --repo "$REPO" "work/mc4-id-part-$part.jsonl.gz" "work/mc4-id-part-$part.manifest.json" --clobber
           fi
 
-          printf '{"dataset":"indonesian-nlp/mc4-id","shards_processed":220,"status":"harvested","license":"ODC-By-1.0"}\n' > work/manifest-total.json
+          printf '{"dataset":"indonesian-nlp/mc4-id","shards_processed":40,"status":"harvested","license":"ODC-By-1.0"}\n' > work/manifest-total.json
           gh release upload "$TAG" --repo "$REPO" work/manifest-total.json --clobber
