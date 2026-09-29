@@ -81,8 +81,8 @@ jobs:
             base=$(basename "$f")
             bytes=$(stat -c%s "$f")
             if [ "$bytes" -gt 1900000000 ]; then
-              split -b 1800M -d -a 3 "$f" "work/${base}.part-"
-              for p in "work/${base}.part-"*; do
+              split -b 1800M -d -a 3 "$f" "work/$base.part-"
+              for p in "work/$base.part-"*; do
                 gh release upload "$TAG" --repo "$REPO" "$p" --clobber
               done
             else
@@ -96,5 +96,3 @@ jobs:
           )
           gh release upload "$TAG" --repo "$REPO" work/infobay-textbooks-manifest.json --clobber
           echo "INFOBAY textbook harvest uploaded to existing tag."
-
-# retrigger consolidated textbook harvest
