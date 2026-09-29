@@ -32,9 +32,9 @@ Vercel cuma panggung bangun.
 - [x] Canvas/artefak: slide + kode + dokumen (tabel belakangan)
 - [ ] Proyek halaman penuh (bukan sheet)
 - [x] Riset multi-sumber (2–3 halaman); kartu cantik belakangan
-- [ ] Riset: langkah + beberapa tautan, bukan saklar + 1 halaman
-- [ ] Berpikir: jejak langkah di UI, bukan 4 baris
-- [ ] Panel kanan tetap di desktop (split), overlay rapi di HP
+- [x] Riset: langkah di chat + 2–3 sumber
+- [x] Berpikir: jejak langkah di chat
+- [x] Panel kanan split desktop, overlay HP (kode/dokumen/slide)
 - [ ] Tools konektor di UI (Drive/WA) — tombol ada nanti setelah server
 - [ ] Studio kode di UI
 
