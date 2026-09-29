@@ -261,6 +261,25 @@
   margin: 8px 0;
 }
 
+.md-cite {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  border: 1px solid var(--rg-line, #e4e4e4);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  background: var(--rg-card, #fafafa);
+}
+.md-cite-k {
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--rg-muted);
+}
 .md-source {
   display: block;
   font-size: 12px;
