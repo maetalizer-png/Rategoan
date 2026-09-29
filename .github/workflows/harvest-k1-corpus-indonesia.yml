@@ -61,44 +61,54 @@ jobs:
           gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
           echo "K1 Corpus Indonesia harvest finished: verified $n source data files."
 
-      - name: Harvest public Indonesian SIBI textbook corpus
+      - name: Harvest Indonesian textbook corpora from Hugging Face
         env:
           GH_TOKEN: ${{ github.token }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
           TAG="data-baru-k1-corpus-indonesia-2026-09"
-          HF_REPO="AITF-SR-02/sekolah_rakyat_sibi_sma_cpt"
-          mkdir -p work-sibi
-          python - <<'PY'
-          import json, urllib.request
-          repo="AITF-SR-02/sekolah_rakyat_sibi_sma_cpt"
-          api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
-          with urllib.request.urlopen(api, timeout=120) as r: items=json.load(r)
-          files=[]
-          for x in items:
-              p=x.get("path","")
-              if x.get("type")=="file" and p.lower().endswith((".jsonl",".jsonl.gz",".parquet",".txt",".txt.gz")): files.append((p,int(x.get("size") or 0)))
-          files.sort()
-          if not files: raise SystemExit("No SIBI textbook files found")
-          json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open("work-sibi/files.json","w"),indent=2)
-          print("SIBI_SOURCE_FILE_COUNT",len(files)); print("SIBI_SOURCE_TOTAL_BYTES",sum(s for _,s in files))
-          PY
-          while IFS=$'\t' read -r idx size path; do
-            [ -z "$path" ] && continue
-            safe=$(printf '%s' "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
-            out="work-sibi/${idx}-${safe}"
-            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
-            test -s "$out"
-            actual=$(stat -c%s "$out")
-            test "$actual" -eq "$size"
-            sha=$(sha256sum "$out" | awk '{print $1}')
-            printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
-            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
-          done < <(python - <<'PY'
-          import json
-          for i,(p,s) in enumerate(json.load(open("work-sibi/files.json"))["files"],1): print(f"{i}\t{s}\t{p}")
-          PY
-          )
-          gh release upload "$TAG" --repo "$REPO" work-sibi/files.json --clobber
-          echo "SIBI textbook harvest finished."
+          test -n "${HF_TOKEN:-}" || { echo "HF_TOKEN GitHub secret is not configured"; exit 1; }
+          mkdir -p work-textbooks
+          for HF_REPO in "InfoBayAI/Indonesian-STEM-Textbook-Dataset" "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset"; do
+            slug=$(printf "%s" "$HF_REPO" | tr "/" "_")
+            python - "$HF_REPO" "$slug" <<'PY'
+import json,sys,urllib.request,os
+repo,slug=sys.argv[1:3]
+req=urllib.request.Request(f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false",headers={"Authorization":"Bearer "+os.environ["HF_TOKEN"]})
+with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
+files=[]
+for x in items:
+    p=x.get("path","")
+    if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".txt",".txt.gz")): files.append((p,int(x.get("size") or 0)))
+files.sort()
+if not files: raise SystemExit(f"No downloadable text files found for {repo}")
+json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open(f"work-textbooks/{slug}.json","w"),indent=2)
+print(repo,"files",len(files),"bytes",sum(s for _,s in files))
+PY
+          done
+          for manifest in work-textbooks/*.json; do
+            HF_REPO=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["repo"])' "$manifest")
+            slug=$(basename "$manifest" .json)
+            python - "$manifest" <<'PY' > work-textbooks/current.queue
+import json,sys
+d=json.load(open(sys.argv[1]))
+for i,(p,s) in enumerate(d["files"],1): print(f"{i}\t{s}\t{p}")
+PY
+            while IFS=$'\t' read -r idx size path; do
+              [ -z "$path" ] && continue
+              safe=$(printf "%s" "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
+              out="work-textbooks/${slug}-${idx}-${safe}"
+              curl -L --fail --retry 6 --retry-all-errors -H "Authorization: Bearer $HF_TOKEN" -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
+              test -s "$out"
+              actual=$(stat -c%s "$out")
+              test "$actual" -eq "$size"
+              sha=$(sha256sum "$out" | awk '{print $1}')
+              printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s","license":"CC-BY-4.0"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
+              gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+              rm -f "$out" "$out.manifest.json"
+            done < work-textbooks/current.queue
+          done
+          gh release upload "$TAG" --repo "$REPO" work-textbooks/*.json --clobber
+          echo "Textbook harvest finished."
