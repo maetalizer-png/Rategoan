@@ -47,9 +47,16 @@ export const workspace = {
   create,
   setCurrent,
   findByName,
+  remove(id) {
+    const data = read();
+    data.projects = data.projects.filter((p) => p.id !== id);
+    if (data.currentId === id) data.currentId = data.projects[0] ? data.projects[0].id : null;
+    write(data);
+  },
   clearCurrent() {
     const data = read();
     data.currentId = null;
     write(data);
   },
 };
+
