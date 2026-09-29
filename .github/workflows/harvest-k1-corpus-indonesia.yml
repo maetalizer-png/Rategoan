@@ -1,4 +1,5 @@
 name: harvest-k1-corpus-indonesia
+# Run 2026-09-30: repair multi-source harvest and keep all accessible K1 sources in the same release tag
 on:
   push:
     branches: [main]
