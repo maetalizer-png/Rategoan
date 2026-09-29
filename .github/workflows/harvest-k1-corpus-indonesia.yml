@@ -42,13 +42,14 @@ for x in items:
 files.sort()
 if not files: raise SystemExit(f"No downloadable files for {repo}")
 print("SOURCE_FILE_COUNT",len(files),"SOURCE_TOTAL_BYTES",sum(s for _,s in files))
-json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open(f"work/{repo.replace("/","__")}-files.json","w"),indent=2)
+fn="work/"+repo.replace("/","__")+"-files.json"
+json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open(fn,"w"),indent=2)
 PY
             repo_safe=$(printf "%s" "$HF_REPO" | sed "s#[^A-Za-z0-9._-]#_#g")
             gh release upload "$TAG" --repo "$REPO" "work/${repo_safe}-files.json" --clobber
             python - "$HF_REPO" <<'PY' > "work/list.tsv"
 import json,sys
-repo=sys.argv[1]; d=json.load(open(f"work/{repo.replace("/","__")}-files.json"))
+repo=sys.argv[1]; d=json.load(open("work/"+repo.replace("/","__")+"-files.json"))
 for i,(p,s) in enumerate(d["files"],1): print(f"{i}\t{s}\t{p}")
 PY
             while IFS=$'\t' read -r idx size path; do
