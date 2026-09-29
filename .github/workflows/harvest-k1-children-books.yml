@@ -56,3 +56,29 @@ jobs:
           done < work/list.tsv
           gh release upload "$TAG" --repo "$REPO" work/files.json --clobber
           echo 'DONE: Indonesian children books appended to existing K1 data release.'
+
+      - name: Download large DeepClean Indo4B from Hugging Face and append to same release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          URL="https://huggingface.co/datasets/img-gemina/indonesian-corpus-2b-deepclean-indo4b/resolve/main/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz?download=true"
+          mkdir -p work/indo4b
+          curl -L --fail --retry 8 --retry-all-errors -o work/indo4b/source.jsonl.gz "$URL"
+          test -s work/indo4b/source.jsonl.gz
+          sha256sum work/indo4b/source.jsonl.gz > work/indo4b/source.sha256
+          split -b 1800M -d -a 2 work/indo4b/source.jsonl.gz work/indo4b/indo4b.part.
+          cat > work/indo4b/manifest.txt <<'EOF'
+Source: img-gemina/indonesian-corpus-2b-deepclean-indo4b
+Artifact: indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz
+Tokens: 1,801,814,049
+Documents: 25,553,595
+Source size: 4.76 GB
+License: CC-BY-4.0
+Reassembly: cat indo4b.part.* > indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz
+SHA256: see source.sha256
+EOF
+          gh release upload "$TAG" --repo "$REPO" work/indo4b/indo4b.part.* work/indo4b/source.sha256 work/indo4b/manifest.txt --clobber
+          echo 'DONE: DeepClean Indo4B appended to existing K1 release.'
