@@ -1,0 +1,75 @@
+name: Harvest K1 Corpus Indonesia (repair)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-repair]') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download and upload all HF shards
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 ||             gh release create "$TAG" --repo "$REPO"               --title "Data Baru K1 — Corpus Indonesia — 2026-09"               --notes "Standalone K1 candidate. Source: Lyon28/Corpus-Indonesia on Hugging Face. License: Apache-2.0."
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/Lyon28/Corpus-Indonesia/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz")):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort()
+          with open("work/files.json","w") as f:
+              json.dump({"repo":"Lyon28/Corpus-Indonesia","license":"Apache-2.0","files":files,"total_bytes":sum(s for _,s in files)},f,indent=2)
+          print("HF shards:", len(files), "bytes:", sum(s for _,s in files))
+          PY
+
+          : > work/file-list.txt
+          while IFS= read -r row; do
+            path="${row%%$'\t'*}"
+            size="${row#*$'\t'}"
+            printf '%s\t%s\n' "$path" "$size" >> work/file-list.txt
+          done < <(python - <<'PY'
+          import json
+          for p,s in json.load(open("work/files.json"))["files"]:
+              print(f"{p}\t{s}")
+          PY
+
+          n=0
+          while IFS=$'\t' read -r path size; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            safe="${path//\//__}"
+            out="work/${n}__${safe}"
+            manifest="${out}.manifest.json"
+            curl -L --fail --retry 6 --retry-all-errors               -o "$out"               "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
+            test -s "$out"
+            actual=$(stat -c%s "$out")
+            test "$actual" -eq "$size"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"Lyon28/Corpus-Indonesia","path":"%s","bytes":%s,"sha256":"%s","license":"Apache-2.0"}\n' "$path" "$actual" "$sha" > "$manifest"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$manifest" --clobber
+            rm -f "$out" "$manifest"
+          done < work/file-list.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          echo "RELEASE_HARVEST_COMPLETE shards=$n"
