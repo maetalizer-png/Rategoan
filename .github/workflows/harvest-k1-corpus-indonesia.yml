@@ -70,3 +70,5 @@ PY
           harvest_repo "Lyon28/Corpus-Indonesia"
           harvest_repo "Ik45/data-science-en-id"
           echo "ALL PUBLIC K1 SOURCES COMPLETE IN $TAG"
+
+# [harvest-k1-corpus] execute repaired consolidated public harvest
