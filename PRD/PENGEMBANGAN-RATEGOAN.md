@@ -29,9 +29,9 @@ Vercel cuma panggung bangun.
 ## Belum ada / belum seperti app lain
 
 - [ ] Lampiran di composer setara Gemini (satu tombol + pratinjau rapi)
-- [ ] Canvas/artefak hidup: bukan hanya slide — laporan, kode, tabel
+- [x] Canvas/artefak: slide + kode + dokumen (tabel belakangan)
 - [ ] Proyek halaman penuh (bukan sheet)
-- [ ] Sitasi web: banyak sumber, kartu, bukan 1 wiki
+- [x] Riset multi-sumber (2–3 halaman); kartu cantik belakangan
 - [ ] Riset: langkah + beberapa tautan, bukan saklar + 1 halaman
 - [ ] Berpikir: jejak langkah di UI, bukan 4 baris
 - [ ] Panel kanan tetap di desktop (split), overlay rapi di HP
