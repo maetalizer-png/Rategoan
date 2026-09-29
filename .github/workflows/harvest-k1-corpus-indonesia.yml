@@ -63,6 +63,7 @@ PY
             while IFS=$'\t' read -r idx size path; do
               [ -z "$path" ] && continue
               safe=$(printf "%s" "$path" | sed "s#[^A-Za-z0-9._-]#_#g")
+              # Include source path + index in the release asset name; never collapse shards by basename.
               out="work/$repo_safe-$idx-$safe"
               echo "DOWNLOAD $HF_REPO:$path ($size bytes)"
               if [ "$NEED_AUTH" = "1" ]; then
@@ -92,3 +93,4 @@ PY
           gh release view "$TAG" --repo "$REPO" --json assets --jq '{asset_count:(.assets|length),bytes:(.assets|map(.size)|add)}' | tee work/release-summary.json
           gh release upload "$TAG" --repo "$REPO" work/release-summary.json --clobber
           echo "HARVEST VERIFIED IN $TAG" # [harvest-k1-corpus]
+          echo "REPAIR_UNIQUE_ASSET_NAMES_2026_09_30"
