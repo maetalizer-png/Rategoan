@@ -78,6 +78,34 @@ function renderCode(code, title) {
   stage.appendChild(out);
 }
 
+
+function renderTable(rows, title) {
+  const stage = $('artifact-stage');
+  const head = $('artifact-title');
+  if (head) head.textContent = title || 'Tabel';
+  if (!stage) return;
+  stage.innerHTML = '';
+  const table = document.createElement('table');
+  table.className = 'art-table';
+  (rows || []).forEach((row, ri) => {
+    const tr = document.createElement('tr');
+    (row || []).forEach((cell) => {
+      const el = document.createElement(ri === 0 ? 'th' : 'td');
+      el.contentEditable = 'true';
+      el.textContent = cell;
+      tr.appendChild(el);
+    });
+    table.appendChild(tr);
+  });
+  stage.appendChild(table);
+}
+
+function readTable() {
+  return Array.from(document.querySelectorAll('#artifact-stage .art-table tr')).map((tr) =>
+    Array.from(tr.children).map((td) => td.textContent.trim())
+  );
+}
+
 function renderDocument(markdown, title) {
   const stage = $('artifact-stage');
   const head = $('artifact-title');
@@ -94,7 +122,7 @@ function renderDocument(markdown, title) {
 function setChrome(type) {
   const exp = $('artifact-export');
   const run = $('artifact-run');
-  if (exp) exp.textContent = type === 'slide' ? 'Unduh PPTX' : type === 'code' ? 'Unduh file' : 'Unduh MD';
+  if (exp) exp.textContent = type === 'slide' ? 'Unduh PPTX' : type === 'code' ? 'Unduh file' : type === 'table' ? 'Unduh CSV' : 'Unduh MD';
   if (run) run.hidden = type !== 'code';
 }
 
@@ -111,6 +139,7 @@ function normalize(first, title, fileName) {
     code: first.code || '',
     lang: first.lang || 'js',
     markdown: first.markdown || first.text || '',
+    rows: first.rows || [],
   };
 }
 
@@ -118,6 +147,7 @@ function renderCurrent() {
   setChrome(current.type);
   if (current.type === 'code') renderCode(current.code, current.title);
   else if (current.type === 'document') renderDocument(current.markdown, current.title);
+  else if (current.type === 'table') renderTable(current.rows, current.title);
   else renderSlide(current.outline, current.title);
 }
 
@@ -144,6 +174,12 @@ export const artifact = {
     if (app) app.classList.remove('split');
   },
   exportNow() {
+    if (current.type === 'table') {
+      const rows = readTable();
+      const csv = rows.map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+      downloadText(current.fileName || 'tabel.csv', csv);
+      return;
+    }
     if (current.type === 'code') {
       const codeEl = document.querySelector('#artifact-stage code');
       const code = codeEl ? codeEl.textContent : current.code;
