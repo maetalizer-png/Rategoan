@@ -72,3 +72,5 @@ jobs:
         run: |
           printf '%s\n' 'release=data-baru-k1-corpus-indonesia-2026-09' 'gated=InfoBayAI/Indonesian-STEM-Textbook-Dataset' 'gated=InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset' > work/hf-textbook-manifest.txt
           gh release upload "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" work/hf-textbook-manifest.txt --clobber
+
+# trigger harvest run 2026-09-30-textbook-pass
