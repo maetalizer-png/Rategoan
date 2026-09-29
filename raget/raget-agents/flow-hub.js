@@ -32,11 +32,11 @@ function wantsCollection(text) {
 }
 
 function wantsThink(text) {
-  return /\b(pikirkan|berpikir keras|mode berpikir)\b/i.test(text || '');
+  return /\b(pikirkan|berpikir keras|mode berpikir|pikir dulu)\b/i.test(text || '');
 }
 
 function wantsResearch(text) {
-  return /\b(riset mendalam|teliti sumber|investigasi)\b/i.test(text || '');
+  return /\b(riset mendalam|teliti sumber|investigasi|^riset\b|\briset\s+)/i.test(text || '');
 }
 
 function wantsLesson(text) {
@@ -44,13 +44,25 @@ function wantsLesson(text) {
 }
 
 function thinkBlock(topic) {
-  const t = String(topic || '').replace(/\b(pikirkan|berpikir keras|mode berpikir)\b/gi, '').trim();
-  return ['Proses berpikir', '1. Topik: ' + (t || 'pertanyaan pengguna'), '2. Fakta lokal dulu.', '3. Web hanya jika perlu.'].join('\n');
+  const t = String(topic || '').replace(/\b(pikirkan|berpikir keras|mode berpikir|pikir dulu)\b/gi, '').trim();
+  return [
+    'Proses berpikir',
+    '1. Baca pertanyaan: ' + (t || 'pertanyaan pengguna'),
+    '2. Ambil fakta yang sudah ada di Raget.',
+    '3. Susun jawaban berurutan.',
+    '4. Baru buka web jika saklar riset/web nyala.',
+  ].join('\n');
 }
 
 function researchPlan(topic) {
   const t = String(topic || '').replace(/^riset\s+(mendalam\s+)?/i, '').trim() || 'topik';
-  return ['Rencana riset: ' + t, 'Kueri: ' + queries(t).join(' · ')].join('\n');
+  const qs = queries(t);
+  return [
+    'Langkah riset: ' + t,
+    '1. Cari halaman utama.',
+    '2. Ambil 1–2 sumber terkait: ' + qs.slice(1, 3).join(' · '),
+    '3. Gabungkan jadi satu jawaban.',
+  ].join('\n');
 }
 
 function lesson(text, title) {
