@@ -292,4 +292,52 @@ async function search(query) {
   }
 }
 
-export const webSearch = Object.freeze({ search });
+
+function entityQueries(extract, original) {
+  const text = String(extract || '');
+  const names = text.match(/\b[A-Z][\p{L}.-]+(?:\s+[A-Z][\p{L}.-]+){0,3}\b/gu) || [];
+  const seen = {};
+  const out = [];
+  const orig = String(original || '').toLowerCase();
+  names.forEach((n) => {
+    const k = n.toLowerCase();
+    if (seen[k] || orig.includes(k) || k.length < 4) return;
+    if (/wikipedia|wikidata|referensi/.test(k)) return;
+    seen[k] = 1;
+    out.push(n);
+  });
+  return out.slice(0, 3);
+}
+
+async function research(query) {
+  const first = await search(query);
+  if (!first.ok) return first;
+  const extras = [];
+  const bag = [];
+  const seeds = entityQueries(first.extract, query);
+  (first.related || []).slice(0, 2).forEach((r) => { if (r && r.title) seeds.push(r.title); });
+  const seen = {};
+  seen[String(first.title || '').toLowerCase()] = 1;
+  for (let i = 0; i < seeds.length && extras.length < 2; i += 1) {
+    const key = String(seeds[i] || '').toLowerCase();
+    if (!key || seen[key]) continue;
+    seen[key] = 1;
+    const nxt = await search(seeds[i]);
+    if (!nxt.ok) continue;
+    if (seen[String(nxt.title || '').toLowerCase()] && nxt.title !== seeds[i]) continue;
+    seen[String(nxt.title || '').toLowerCase()] = 1;
+    extras.push(nxt);
+  }
+  const sources = [{ title: first.title, extract: first.extract, url: first.url, source: first.source }].concat(
+    extras.map((e) => ({ title: e.title, extract: e.extract, url: e.url, source: e.source }))
+  );
+  const extraBlock = extras.map((e) => {
+    const bit = String(e.extract || '').split(/(?<=[.!?])\s+/).slice(0, 2).join(' ');
+    return bit ? (e.title + ' — ' + bit) : '';
+  }).filter(Boolean);
+  let extract = first.extract || '';
+  if (extraBlock.length) extract = extract + '\n\nSumber lain:\n' + extraBlock.map((s) => '- ' + s).join('\n');
+  return { ...first, extract, sources, hops: extras.length + 1, mode: first.mode || 'article' };
+}
+
+export const webSearch = Object.freeze({ search, research });
