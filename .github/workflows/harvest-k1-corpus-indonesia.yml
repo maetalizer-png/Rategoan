@@ -1,0 +1,83 @@
+name: harvest-k1-corpus-indonesia
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: harvest-k1-corpus-indonesia
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-corpus]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest public Indonesian K1 corpus
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" \
+            --title "Data Baru K1 — Corpus Indonesia — 2026-09" \
+            --notes "Standalone K1 candidate. Source: Lyon28/Corpus-Indonesia on Hugging Face. License: Apache-2.0. Indonesian text corpus; kept outside canonical K1 until cleaning/deduplication and overlap audit."
+
+          python - <<'PY'
+          import json, urllib.request
+          api="https://huggingface.co/api/datasets/Lyon28/Corpus-Indonesia/tree/main?recursive=true&expand=false"
+          with urllib.request.urlopen(api, timeout=120) as r:
+              items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get("path","")
+              if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz")):
+                  files.append((p,int(x.get("size") or 0)))
+          files.sort(key=lambda z:z[0])
+          if not files:
+              raise SystemExit("No downloadable corpus files found")
+          selected=[]
+          total=0
+          for p,s in files:
+              selected.append((p,s))
+              total += s
+          with open("work/files.json","w") as f:
+              json.dump({"repo":"Lyon28/Corpus-Indonesia","license":"Apache-2.0","files":selected,"total_bytes":total},f,indent=2)
+          print("files",len(selected),"total_bytes",total)
+          for p,s in selected:
+              print(s,p)
+          PY
+
+          python - <<'PY'
+          import json
+          d=json.load(open("work/files.json"))
+          with open("work/file-list.txt","w") as f:
+              for i,(p,s) in enumerate(d["files"],1):
+                  f.write(f"{i}\t{s}\t{p}\n")
+          PY
+
+          n=0
+          while IFS=$'\t' read -r idx size path; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            base=$(basename "$path")
+            safe=$(printf '%s' "$base" | tr '/ ' '__')
+            out="work/\${n}-\${safe}"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
+            test -s "$out"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            bytes=$(stat -c%s "$out")
+            printf '{"source":"Lyon28/Corpus-Indonesia","path":"%s","bytes":%s,"sha256":"%s","license":"Apache-2.0"}\n' "$path" "$bytes" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
+          echo "K1 Corpus Indonesia harvest finished."
