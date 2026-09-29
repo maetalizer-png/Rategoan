@@ -75,3 +75,5 @@ jobs:
           echo "K1 OPEN TEXTBOOK HARVEST COMPLETE"
 
 # use existing K1 candidate release; no new tag
+
+# rerun harvest 2026-09-30: publish all discovered textbook files into existing K1 candidate release
