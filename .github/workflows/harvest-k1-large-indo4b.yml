@@ -1,0 +1,70 @@
+name: harvest-k1-large-indo4b
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: harvest-k1-large-indo4b
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-large]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download and split large Indonesian corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-corpus-indonesia-2026-09"
+          SRC="https://huggingface.co/datasets/img-gemina/indonesian-corpus-2b-deepclean-indo4b/resolve/main"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          python - <<'PY'
+          import json, urllib.request
+          repo='img-gemina/indonesian-corpus-2b-deepclean-indo4b'
+          u=f'https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false'
+          with urllib.request.urlopen(u,timeout=120) as r: a=json.load(r)
+          fs=[x for x in a if x.get('type')=='file' and int(x.get('size') or 0)>0]
+          fs.sort(key=lambda x:int(x.get('size') or 0),reverse=True)
+          with open('work/files.json','w') as f: json.dump({'repo':repo,'files':fs},f,indent=2)
+          print('files',len(fs),'bytes',sum(int(x.get('size') or 0) for x in fs))
+          for x in fs[:20]: print(x.get('size'),x.get('path'))
+          PY
+          python - <<'PY'
+          import json
+          d=json.load(open('work/files.json'))
+          with open('work/manifest.json','w') as f:
+              json.dump({'source':d['repo'],'license':'CC-BY-4.0','files':[{'path':x['path'],'size':x.get('size')} for x in d['files']]},f,indent=2)
+          PY
+          gh release upload "$TAG" --repo "$REPO" work/manifest.json --clobber
+          while IFS=$'\t' read -r path size; do
+            [ -z "$path" ] && continue
+            base=$(basename "$path")
+            out="work/$base"
+            curl -L --fail --retry 8 --retry-all-errors --connect-timeout 30 -o "$out" "$SRC/$path?download=true"
+            test -s "$out"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            split -b 1500m -d -a 3 "$out" "work/${base}.part-"
+            for part in work/${base}.part-*; do
+              [ -f "$part" ] || continue
+              gh release upload "$TAG" --repo "$REPO" "$part" --clobber
+            done
+            printf '%s\t%s\t%s\n' "$path" "$size" "$sha" >> work/checksums.tsv
+            rm -f "$out" work/${base}.part-*
+          done < <(python - <<'PY'
+          import json
+          d=json.load(open('work/files.json'))
+          for x in d['files']:
+              print(f"{x['path']}\t{x.get('size',0)}")
+          PY
+          )
+          gh release upload "$TAG" --repo "$REPO" work/checksums.tsv --clobber
+          echo "HARVEST COMPLETE"
