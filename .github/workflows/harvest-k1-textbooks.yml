@@ -69,3 +69,5 @@ jobs:
             gh release upload "$TAG" --repo "$REPO" "$f" --clobber
           done
           echo 'K1 textbook harvest uploaded to existing release.'
+
+# trigger harvest run 2026-09-30-final-textbook-pass
