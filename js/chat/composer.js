@@ -397,32 +397,6 @@ export const composer = {
       toast.show('Proyek: ' + found.name);
       sheets.close();
     };
-    const artBtn = $('btn-artifact');
-    if (artBtn) artBtn.onclick = () => {
-      drawer.close();
-      const list = allArtifacts();
-      const ul = $('artifact-list');
-      if (ul) {
-        ul.innerHTML = '';
-        if (!list.length) {
-          const li = document.createElement('li');
-          li.textContent = 'Belum ada slide';
-          ul.appendChild(li);
-        } else {
-          list.forEach((a) => {
-            const li = document.createElement('li');
-            li.textContent = a.title || a.fileName || 'Slide';
-            li.onclick = () => {
-              sheets.close();
-              if (a.type === 'code' || a.type === 'document') artifact.open(a);
-              else artifact.open(a.outline, a.title, a.fileName);
-            };
-            ul.appendChild(li);
-          });
-        }
-      }
-      sheets.openArtifact();
-    };
     const slideCard = $('sheet-slide');
     if (slideCard) {
       slideCard.onclick = async () => {
