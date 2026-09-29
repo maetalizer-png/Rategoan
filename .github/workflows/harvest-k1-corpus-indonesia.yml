@@ -1,4 +1,4 @@
-name: harvest-k1-corpus-indonesia
+name: consolidate-k1-data-baru
 
 on:
   push:
@@ -8,41 +8,68 @@ permissions:
   contents: write
 
 jobs:
-  harvest-indo4b:
-    if: contains(github.event.head_commit.message, '[harvest-indo4b]')
+  consolidate:
+    if: contains(github.event.head_commit.message, '[consolidate-k1]')
     runs-on: ubuntu-latest
     timeout-minutes: 360
     env:
       GH_TOKEN: ${{ github.token }}
       REPO: maetalizer-png/Rategoan
-      TAG: data-baru-k1-indo4b-deepclean-2026-09
-      HF_REPO: img-gemina/indonesian-corpus-2b-deepclean-indo4b
+      TARGET_TAG: data-baru-k1-corpus-indonesia-2026-09
     steps:
-      - name: Download and split HF artifact
+      - name: Consolidate existing data-baru releases into one tag
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p work
-          URL="https://huggingface.co/datasets/${HF_REPO}/resolve/main/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz?download=true"
-          curl -L --fail --retry 8 --retry-all-errors -o work/source.jsonl.gz "$URL"
-          test -s work/source.jsonl.gz
-          stat -c 'SOURCE_BYTES=%s' work/source.jsonl.gz
-          split -b 1800m -d -a 3 work/source.jsonl.gz work/indo4b.part.
-          sha256sum work/source.jsonl.gz > work/source.sha256
-      - name: Upload chunks to existing release
-        shell: bash
-        run: |
-          set -euo pipefail
-          n=0
-          for f in work/indo4b.part.*; do
-            n=$((n+1))
-            name=$(printf 'indo4b-deepclean-part-%02d.jsonl.gz' "$n")
-            mv "$f" "work/$name"
-            sha=$(sha256sum "work/$name" | awk '{print $1}')
-            bytes=$(stat -c%s "work/$name")
-            printf '{"source":"%s","path":"indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz","part":%s,"bytes":%s,"sha256":"%s","license":"CC-BY-4.0"}\n' "$HF_REPO" "$n" "$bytes" "$sha" > "work/$name.manifest.json"
-            gh release upload "$TAG" --repo "$REPO" "work/$name" "work/$name.manifest.json" --clobber
+          sources=(
+            data-baru-xone-parallel-en-id-2026-09
+            data-baru-k1-txtperpus-2026-09
+            data-baru-k1-indmix-2026-09
+            data-baru-k1-aikathata-dfk-2026-09
+          )
+
+          for tag in "${sources[@]}"; do
+            echo "=== SOURCE: $tag ==="
+            page=1
+            while :; do
+              json="work/assets-${tag}-${page}.json"
+              gh api "/repos/$REPO/releases/tags/$tag/assets?per_page=100&page=$page" > "$json"
+              count=$(python3 - "$json" <<'PY'
+import json,sys
+print(len(json.load(open(sys.argv[1]))))
+PY
+)
+              [ "$count" -gt 0 ] || break
+
+              python3 - "$json" "$tag" "$TARGET_TAG" "$REPO" <<'PY'
+import json,sys,os,subprocess
+p,tag,target,repo=sys.argv[1:]
+for a in json.load(open(p)):
+    name=a["name"]
+    out=f"{tag}__{name}"
+    path="/tmp/"+out
+    subprocess.run(["curl","-L","--fail","--retry","8","--retry-all-errors","-o",path,a["browser_download_url"]],check=True)
+    if os.path.getsize(path) != int(a["size"]):
+        raise SystemExit(f"SIZE_MISMATCH {name}")
+    subprocess.run(["gh","release","upload",target,"--repo",repo,path,"--clobber"],check=True)
+    os.unlink(path)
+PY
+              page=$((page+1))
+              [ "$count" -lt 100 ] && break
+            done
           done
-          gh release upload "$TAG" --repo "$REPO" work/source.sha256 --clobber
-          echo "INDO4B_HARVEST_COMPLETE parts=$n"
-# trigger: 2026-09-29T09:14+07:00
+
+          gh api "/repos/$REPO/releases/tags/$TARGET_TAG" > work/target-release.json
+          python3 - <<'PY'
+import json
+r=json.load(open("work/target-release.json"))
+assets=r.get("assets",[])
+data=[a for a in assets if not a["name"].endswith((".manifest.json",".sha256"))]
+print("TARGET_ASSETS=",len(assets))
+print("TARGET_DATA_ASSETS=",len(data))
+print("TARGET_DATA_BYTES=",sum(a["size"] for a in data))
+print("TARGET_ALL_BYTES=",sum(a["size"] for a in assets))
+print("TARGET_TAG=",r["tag_name"])
+PY
+          echo "CONSOLIDATION_COMPLETE"
