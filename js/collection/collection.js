@@ -27,7 +27,6 @@ const TEMPLATE = `
         <div class="coll-tabs">
           <button type="button" class="coll-tab on" data-ctab="tersimpan">Tersimpan</button>
           <button type="button" class="coll-tab" data-ctab="perpus">Perpustakaan</button>
-          <button type="button" class="coll-tab" data-ctab="artefak">Artefak</button>
         </div>
         <p id="coll-tab-desc" class="coll-tab-desc"></p>
         <div class="coll-search-box">
@@ -413,9 +412,8 @@ async function renderArtefak() {
 }
 
 async function renderTab() {
-  if (state.tab === 'tersimpan') return renderTersimpan();
   if (state.tab === 'perpus') return renderPerpustakaan();
-  return renderArtefak();
+  return renderTersimpan();
 }
 
 function exportMarkdown(items) {
