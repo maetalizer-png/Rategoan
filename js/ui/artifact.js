@@ -1,5 +1,5 @@
 import { $ } from '../utils/dom.js';
-import { exportSlides, rememberSlide } from '../utils/slides-export.js';
+import { exportSlides, rememberSlide, rememberArtifact } from '../utils/slides-export.js';
 import { toast } from '../core/toast.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 
@@ -128,6 +128,7 @@ export const artifact = {
     if (!panel) return;
     current = normalize(first, title, fileName);
     if (current.type === 'slide') rememberSlide(current.outline, current.fileName);
+    else rememberArtifact(current);
     renderCurrent();
     panel.classList.add('open');
     if (app) app.classList.add('split');
