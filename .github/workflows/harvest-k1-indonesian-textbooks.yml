@@ -1,0 +1,96 @@
+name: harvest-k1-indonesian-textbooks
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: harvest-k1-indonesian-textbooks
+  cancel-in-progress: true
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-textbook]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+    steps:
+      - name: Download and release both Indonesian textbook corpora
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${HF_TOKEN:-}" || { echo "HF_TOKEN GitHub secret is not configured"; exit 2; }
+
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-indonesian-textbooks-2026-09"
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || \
+            gh release create "$TAG" --repo "$REPO" \
+              --title "Data Baru K1 — Indonesian Textbooks — 2026-09" \
+              --notes "Standalone K1 textbook candidates. Sources: InfoBayAI Indonesian STEM and Non-STEM Textbook Dataset. CC BY 4.0. Kept outside canonical K1 pending cleaning/deduplication/overlap audit."
+
+          python - <<'PY'
+import json, os, urllib.request
+token=os.environ["HF_TOKEN"]
+repos=[
+ "InfoBayAI/Indonesian-STEM-Textbook-Dataset",
+ "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset",
+]
+os.makedirs("work",exist_ok=True)
+for repo in repos:
+    req=urllib.request.Request(
+      f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false",
+      headers={"Authorization":f"Bearer {token}"})
+    with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
+    files=[]
+    for x in items:
+      p=x.get("path","")
+      if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz",".txt",".txt.gz")):
+        files.append((p,int(x.get("size") or 0)))
+    if not files:
+      raise SystemExit(f"No data files found for {repo}")
+    total=sum(s for _,s in files)
+    safe=repo.replace("/","__")
+    json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":total},
+              open(f"work/{safe}-files.json","w"),indent=2)
+    print(repo, "files=",len(files), "bytes=",total)
+PY
+
+          for meta in work/*-files.json; do
+            gh release upload "$TAG" --repo "$REPO" "$meta" --clobber
+          done
+
+          python - <<'PY'
+import json,glob
+for mf in glob.glob("work/*-files.json"):
+  d=json.load(open(mf))
+  repo=d["repo"]; safe=repo.replace("/","__")
+  with open("work/download.tsv","a") as out:
+    for i,(p,s) in enumerate(d["files"],1):
+      out.write(f"{repo}\t{safe}\t{i}\t{s}\t{p}\n")
+PY
+
+          while IFS=$'\t' read -r repo safe idx expected path; do
+            [ -z "$path" ] && continue
+            asset_safe=$(printf "%s" "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
+            out="work/${safe}-${idx}-${asset_safe}"
+            echo "Downloading $repo:$path ($expected bytes)"
+            encoded=$(python -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1],safe="/"))' "$path")
+            curl -L --fail --retry 6 --retry-all-errors \
+              -H "Authorization: Bearer $HF_TOKEN" \
+              -o "$out" \
+              "https://huggingface.co/datasets/${repo}/resolve/main/${encoded}?download=true"
+            actual=$(stat -c%s "$out")
+            test "$actual" -eq "$expected"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' \
+              "$repo" "$path" "$actual" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/download.tsv
+
+          echo "TEXTBOOK HARVEST COMPLETE"
