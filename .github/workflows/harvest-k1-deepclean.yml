@@ -1,0 +1,46 @@
+name: K1 HF DeepClean Harvest
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-deepclean-k1]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download and publish DeepClean Indo4B
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="penampung"
+          SRC="https://huggingface.co/datasets/img-gemina/indonesian-corpus-2b-deepclean-indo4b/resolve/main/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz?download=true"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          curl -L --fail --retry 8 --retry-all-errors -o work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz "$SRC"
+          test -s work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz
+          sha256sum work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz > work/indonesian_corpus_1p8b_deepclean_indo4b.sha256
+          split -b 1800M -d -a 3 work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz work/deepclean-part-
+          for f in work/deepclean-part-*; do
+            gh release upload "$TAG" --repo "$REPO" "$f" --clobber
+          done
+          cat > work/deepclean-manifest.json <<'JSON'
+          {
+            "source": "img-gemina/indonesian-corpus-2b-deepclean-indo4b",
+            "source_url": "https://huggingface.co/datasets/img-gemina/indonesian-corpus-2b-deepclean-indo4b",
+            "artifact": "indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz",
+            "reported_tokens": 1801814049,
+            "reported_documents": 25553595,
+            "license": "cc-by-4.0",
+            "release_tag": "penampung",
+            "split_chunk_size_bytes": 1887436800
+          }
+          JSON
+          gh release upload "$TAG" --repo "$REPO" work/indonesian_corpus_1p8b_deepclean_indo4b.sha256 work/deepclean-manifest.json --clobber
+          echo "DEEP_CLEAN_K1_HARVEST_COMPLETE"
