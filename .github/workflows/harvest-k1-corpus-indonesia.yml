@@ -13,7 +13,6 @@ permissions:
 
 jobs:
   harvest:
-    if: contains(github.event.head_commit.message, '[harvest-k1-corpus]')
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -78,4 +77,4 @@ jobs:
           gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
           echo "K1 Corpus Indonesia harvest finished: all ${n} data files verified and uploaded."
 
-# verified-harvest-repair
+# forced verified harvest trigger
