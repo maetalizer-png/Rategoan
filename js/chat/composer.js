@@ -389,7 +389,8 @@ export const composer = {
             li.textContent = a.title || a.fileName || 'Slide';
             li.onclick = () => {
               sheets.close();
-              artifact.open(a.outline, a.title, a.fileName);
+              if (a.type === 'code' || a.type === 'document') artifact.open(a);
+              else artifact.open(a.outline, a.title, a.fileName);
             };
             ul.appendChild(li);
           });
