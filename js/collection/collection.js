@@ -69,6 +69,12 @@ const TAB_DESC = {
 let state = { tab: 'tersimpan', filter: null, query: '' };
 let renderGen = 0;
 
+function chipCaption(f) {
+  if (f.key === 'pinned') return ic('pin') + ' Pin';
+  if (f.key === 'archived') return ic('archive') + ' Arsip';
+  return escapeHtml(String(f.label || ''));
+}
+
 function escapeHtml(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -97,7 +103,7 @@ async function renderTersimpan() {
   ];
   $('coll-tab-desc').textContent = TAB_DESC.tersimpan;
   $('coll-filters').innerHTML = filterChips
-    .map((f) => '<button type="button" class="coll-filter-chip' + (state.filter === f.key ? ' on' : '') + '" data-filter="' + escapeHtml(String(f.key)) + '">' + f.label + ' (' + f.count + ')</button>')
+    .map((f) => '<button type="button" class="coll-filter-chip' + (state.filter === f.key ? ' on' : '') + '" data-filter="' + escapeHtml(String(f.key)) + '">' + chipCaption(f) + ' (' + f.count + ')</button>')
     .join('');
   $('coll-filters').querySelectorAll('[data-filter]').forEach((b) => {
     b.onclick = () => {
