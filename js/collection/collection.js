@@ -464,9 +464,12 @@ export const collectionPage = {
     $('view-collection').innerHTML = TEMPLATE;
     $('btn-collection').onclick = () => {
       drawer.close();
-      router.go('collection');
       this.open();
+      router.go('collection');
     };
+    window.addEventListener('hashchange', () => {
+      if ((location.hash || '').indexOf('collection') >= 0) this.open();
+    });
     $('coll-back').onclick = () => router.go('chat');
     // Ekspor/Backup/Impor dulu 1 baris 3 tombol permanen di badan halaman -
     // sama beratnya secara visual dengan chip filter di atasnya, bikin
