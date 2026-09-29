@@ -1,0 +1,36 @@
+name: harvest-k1-indo4b-deepclean
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-indo4b]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download and split large HF corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-indo4b-deepclean-2026-09"
+          URL="https://huggingface.co/datasets/img-gemina/indonesian-corpus-2b-deepclean-indo4b/resolve/main/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz?download=true"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Indo4B DeepClean — 2026-09" --notes "Standalone K1 candidate harvested from Hugging Face. Source: img-gemina/indonesian-corpus-2b-deepclean-indo4b. Published artifact: 1.8B Indonesian tokens, 25.55M documents, 4.76 GB. Kept outside canonical K1 pending overlap audit."
+          curl -L --fail --retry 8 --retry-all-errors --connect-timeout 30 -o work/indo4b.jsonl.gz "$URL"
+          test -s work/indo4b.jsonl.gz
+          sha256sum work/indo4b.jsonl.gz > work/source.sha256
+          split -b 1500M -d -a 2 work/indo4b.jsonl.gz work/indo4b.part-
+          for f in work/indo4b.part-*; do
+            gh release upload "$TAG" --repo "$REPO" "$f" --clobber
+          done
+          gh release upload "$TAG" --repo "$REPO" work/source.sha256 --clobber
+          printf '%s\n' 'source=img-gemina/indonesian-corpus-2b-deepclean-indo4b' 'artifact=indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz' 'tokens=1801814049' 'documents=25553595' 'source_size=4.76GB' 'parts=1500MB each' > work/manifest.txt
+          gh release upload "$TAG" --repo "$REPO" work/manifest.txt --clobber
+          echo "HARVEST COMPLETE: $TAG"
