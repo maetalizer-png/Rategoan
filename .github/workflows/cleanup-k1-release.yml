@@ -1,0 +1,47 @@
+name: Clean K1 release duplicates
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    if: contains(github.event.head_commit.message, '[cleanup-k1-release]')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: maetalizer-png/Rategoan
+      TAG: data-baru-k1-corpus-indonesia-2026-09
+    steps:
+      - name: Remove duplicate/non-target assets from the single K1 staging release
+        shell: bash
+        run: |
+          set -euo pipefail
+          assets_json=$(gh api --paginate "/repos/$REPO/releases/tags/$TAG/assets?per_page=100" | jq -s 'add')
+          echo "$assets_json" | jq -r '.[].name' | while IFS= read -r name; do
+            remove=0
+            case "$name" in
+              *data_batch_*.parquet|*indonesian_corpus_1p8b_deepclean_indo4b*|data__train-*.parquet)
+                remove=1 ;;
+              1-0000.parquet|2-0001.parquet|3-0002.parquet|4-0003.parquet|5-0004.parquet|6-0005.parquet|7-0006.parquet)
+                remove=1 ;;
+              1-train-*.parquet|2-train-*.parquet|3-train-*.parquet|4-train-*.parquet|5-train-*.parquet|6-train-*.parquet|7-train-*.parquet)
+                remove=1 ;;
+              children-data.parquet|children-train-00000-of-00001.parquet)
+                remove=1 ;;
+              CACHEDIR.TAG|checksums.tsv|default.gitattributes|default.gitattributes.part-000|default.gitignore|README.md.part-000|report.json.part-000|report_2b.json.part-000|ScriptTextTranslationDomainIlmiah.ipynb|file-list.tsv)
+                remove=1 ;;
+            esac
+            if [ "$remove" -eq 1 ]; then
+              id=$(echo "$assets_json" | jq -r --arg n "$name" '.[] | select(.name==$n) | .id')
+              if [ -n "$id" ] && [ "$id" != "null" ]; then
+                echo "Deleting $name (asset $id)"
+                gh api --method DELETE "/repos/$REPO/releases/assets/$id"
+              fi
+            fi
+          done
+          echo "Remaining data assets:"
+          gh api --paginate "/repos/$REPO/releases/tags/$TAG/assets?per_page=100" | jq -s 'add | map(select(.name | test("\\.(parquet|gz)$"))) | {count:length, bytes:(map(.size)|add), assets:map({name,size})}'
