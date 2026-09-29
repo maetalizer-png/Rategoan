@@ -13,7 +13,6 @@ permissions:
 
 jobs:
   harvest:
-    if: contains(github.event.head_commit.message, '[harvest-k1-children-books]')
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -26,28 +25,24 @@ jobs:
           TAG="data-baru-k1-corpus-indonesia-2026-09"
           SRC="haznitrama/indonesian-children-books"
           mkdir -p work
-
           gh release view "$TAG" --repo "$REPO" >/dev/null
-
           python - <<'PY'
           import json, urllib.request
           repo='haznitrama/indonesian-children-books'
           u=f'https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false'
           with urllib.request.urlopen(u, timeout=120) as r: d=json.load(r)
-          fs=[]
-          for x in d:
-              p=x.get('path','')
-              if x.get('type')=='file' and p.lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz')):
-                  fs.append((p,int(x.get('size') or 0)))
+          fs=[(x.get('path',''),int(x.get('size') or 0)) for x in d if x.get('type')=='file' and x.get('path','').lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz'))]
           if not fs: raise SystemExit('No text data files found')
-          with open('work/files.json','w') as f: json.dump({'source':repo,'license':'cc-by-nc-4.0','files':[{'path':p,'size':s} for p,s in fs]},f,indent=2)
+          json.dump({'source':repo,'license':'cc-by-nc-4.0','files':[{'path':p,'size':s} for p,s in fs]},open('work/files.json','w'),indent=2)
           for p,s in fs: print(s,p)
           PY
-
+          python - <<'PY'
+          import json
+          for x in json.load(open('work/files.json'))['files']: print(x['path']+'\t'+str(x['size']))
+          PY > work/list.tsv
           while IFS=$'\t' read -r path size; do
             [ -z "$path" ] && continue
-            base=$(basename "$path")
-            safe=$(printf '%s' "$base" | tr '/ ' '__')
+            safe=$(printf '%s' "$(basename "$path")" | tr '/ ' '__')
             out="work/children-${safe}"
             curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/haznitrama/indonesian-children-books/resolve/main/$path?download=true"
             test -s "$out"
@@ -56,12 +51,6 @@ jobs:
             printf '{"source":"%s","path":"%s","bytes":%s,"sha256":"%s","license":"cc-by-nc-4.0"}\n' "$SRC" "$path" "$bytes" "$sha" > "$out.manifest.json"
             gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
             rm -f "$out" "$out.manifest.json"
-          done < <(python - <<'PY'
-          import json
-          for x in json.load(open('work/files.json'))['files']:
-              print(x['path']+'\t'+str(x['size']))
-          PY
-          )
-
+          done < work/list.tsv
           gh release upload "$TAG" --repo "$REPO" work/files.json --clobber
-          echo 'DONE: Indonesian children books appended to existing K1 data release.'
+          echo 'DONE'
