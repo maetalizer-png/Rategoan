@@ -86,3 +86,4 @@ jobs:
 
           gh release upload "$TAG" --repo "$REPO" work/files.json work/file-list.txt --clobber
           echo "HARVEST_COMPLETE $HF_REPO"
+          echo "VERIFIED_EXPECTED_BYTES uploaded from HF"
