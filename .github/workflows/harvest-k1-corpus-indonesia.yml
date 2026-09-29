@@ -30,7 +30,7 @@ jobs:
 
           python - <<'PY'
           import json, urllib.request
-          api="https://huggingface.co/api/datasets/Lyon28/Corpus-Indonesia/tree/main?recursive=true&expand=false"
+          api="https://huggingface.co/api/datasets/Lyon28/Corpus-Indonesia/tree/refs%2Fconvert%2Fparquet/default/train?recursive=true&expand=false"
           with urllib.request.urlopen(api, timeout=120) as r:
               items=json.load(r)
           files=[]
@@ -43,7 +43,7 @@ jobs:
               raise SystemExit("No downloadable corpus files found")
           total=sum(s for _,s in files)
           with open("work/files.json","w") as f:
-              json.dump({"repo":"Lyon28/Corpus-Indonesia","license":"Apache-2.0","files":files,"total_bytes":total},f,indent=2)
+              json.dump({"repo":"Lyon28/Corpus-Indonesia","ref":"refs/convert/parquet/default/train","license":"Apache-2.0","files":files,"total_bytes":total},f,indent=2)
           print("files",len(files),"total_bytes",total)
           for p,s in files:
               print(s,p)
@@ -64,7 +64,7 @@ jobs:
             base=$(basename "$path")
             safe=$(printf '%s' "$base" | tr '/ ' '__')
             out="work/${n}-${safe}"
-            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/main/$path?download=true"
+            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/Lyon28/Corpus-Indonesia/resolve/refs%2Fconvert%2Fparquet/$path?download=true"
             test -s "$out"
             actual=$(stat -c%s "$out")
             test "$actual" -eq "$size"
