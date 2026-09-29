@@ -1,27 +1,29 @@
 # Pengembangan Rategoan
 
-Khusus aplikasi: layar, tombol, panel, tools.
-Bukan korpus.
+Satu catatan. Bukan korpus.
 
-## Pintu yang sudah ada
+## PRD Claude (coding aplikasi) — ditutup
+
+- [x] 1.1 ID tokoh unik (`tokoh-yohanes-surya` dan `tokoh-yohanes-surya-2`)
+- [x] 1.2 Chip koleksi: label di-escape, ikon pin/arsip tetap
+- [x] 2.1 Panel artefak: slide / kode / dokumen / tabel
+- [x] 2.2 Sandbox JS (Web Worker, timeout 1,2 dtk)
+- [x] 2.3 Riset: 2–3 sumber + sintesis + langkah di chat
+
+## Pintu layar — ditutup di klien
 
 - [x] Chat, riwayat, cari
 - [x] Lampiran kamera/foto/file
 - [x] Web + kartu sitasi
-- [x] Riset + langkah
 - [x] Berpikir + langkah
-- [x] Slide + PPTX
-- [x] Kode di panel + Jalankan
-- [x] Dokumen MD
-- [x] Tabel + CSV
 - [x] Studio kode
 - [x] Halaman proyek
-- [x] Halaman artefak
+- [x] Halaman artefak (satu pintu; bukan tab Koleksi)
 - [x] Belajar terpandu
-- [x] Koleksi
+- [x] Koleksi: Tersimpan ≠ Perpustakaan
 - [x] Model Template / Raget 1.0
-- [x] Konektor: antrian Drive/WA + alamat server (kirim hidup setelah server sendiri)
+- [x] Konektor: antrian + alamat server
 
-## Jangan
+## Bukan pekerjaan klien
 
-Gen gambar/video pihak lain. Community. Toko plugin. Jangan klaim Drive/WA sudah kirim kalau server kosong.
+Kirim Drive/WA nyata. Itu server sendiri.
