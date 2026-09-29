@@ -1,0 +1,33 @@
+name: harvest-k1-large-corpus
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-large]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Download and split DeepClean Indo4B
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="data-baru-k1-textbook-2026-09"
+          URL="https://huggingface.co/datasets/img-gemina/indonesian-corpus-2b-deepclean-indo4b/resolve/main/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz?download=true"
+          mkdir -p work
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+          curl -L --fail --retry 8 --retry-all-errors --retry-delay 5 -o work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz "$URL"
+          test -s work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz
+          sha256sum work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz > work/full-sha256.txt
+          split -b 1900M -d -a 3 work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz work/indonesian_corpus_1p8b_deepclean_indo4b.jsonl.gz.part-
+          ls -lh work/*.part-* | tee work/parts.txt
+          for f in work/*.part-*; do sha256sum "$f"; done > work/parts-sha256.txt
+          gh release upload "$TAG" --repo "$REPO" work/*.part-* work/full-sha256.txt work/parts-sha256.txt --clobber
+          echo "DeepClean 1.8B-token corpus uploaded as concatenable gzip chunks."
