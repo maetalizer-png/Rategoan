@@ -14,47 +14,62 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Harvest large Indonesian technical education corpus into existing K1 tag
+      - name: Harvest large Indonesian K1 sources into one existing release tag
         env:
           GH_TOKEN: ${{ github.token }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
           TAG="data-baru-k1-corpus-indonesia-2026-09"
-          HF_REPO="Ik45/data-science-en-id"
+          HF_REPOS=("Ik45/data-science-en-id" "InfoBayAI/Indonesian-STEM-Textbook-Dataset" "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset")
           mkdir -p work
           gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Corpus Indonesia — 2026-09" --notes "Standalone K1 candidate. Multiple harvested sources are kept together here until cleaning/deduplication and overlap audit."
-          python - <<'PY'
-import json,urllib.request
-repo="Ik45/data-science-en-id"
-api=f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false"
-with urllib.request.urlopen(api,timeout=120) as r: items=json.load(r)
+          for HF_REPO in "${HF_REPOS[@]}"; do
+            echo "=== HARVEST $HF_REPO ==="
+            if [[ "$HF_REPO" == InfoBayAI/* && -z "${HF_TOKEN:-}" ]]; then
+              echo "SKIP gated $HF_REPO: HF_TOKEN repository secret is not configured"
+              continue
+            fi
+            python - "$HF_REPO" "${HF_TOKEN:-}" <<'PY'
+import json,sys,urllib.request
+repo,token=sys.argv[1],sys.argv[2]
+req=urllib.request.Request(f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false")
+if token: req.add_header("Authorization","Bearer "+token)
+with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
 files=[]
 for x in items:
     p=x.get("path","")
     if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".txt",".txt.gz")): files.append((p,int(x.get("size") or 0)))
 files.sort()
-if not files: raise SystemExit("No downloadable files found")
+if not files: raise SystemExit(f"No downloadable files found for {repo}")
 json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)},open("files.json","w"),indent=2)
 print("SOURCE_FILE_COUNT",len(files)); print("SOURCE_TOTAL_BYTES",sum(s for _,s in files))
 PY
-          while IFS=$'\t' read -r idx size path; do
-            [ -z "$path" ] && continue
-            safe=$(printf "%s" "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
-            out="work/${idx}-${safe}"
-            echo "Downloading $path ($size bytes)"
-            curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
-            actual=$(stat -c%s "$out")
-            test "$actual" -eq "$size"
-            sha=$(sha256sum "$out" | awk '{print $1}')
-            printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
-            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
-            rm -f "$out" "$out.manifest.json"
-          done < <(python - <<'PY'
+            while IFS=$'\t' read -r idx size path; do
+              [ -z "$path" ] && continue
+              safe=$(printf "%s" "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
+              repo_safe=$(printf "%s" "$HF_REPO" | sed 's#[^A-Za-z0-9._-]#_#g')
+              out="work/${repo_safe}-${idx}-${safe}"
+              echo "Downloading $HF_REPO:$path ($size bytes)"
+              if [ -n "${HF_TOKEN:-}" ]; then
+                curl -L --fail --retry 6 --retry-all-errors -H "Authorization: Bearer $HF_TOKEN" -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
+              else
+                curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${HF_REPO}/resolve/main/$path?download=true"
+              fi
+              actual=$(stat -c%s "$out")
+              test "$actual" -eq "$size"
+              sha=$(sha256sum "$out" | awk '{print $1}')
+              printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
+              gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+              rm -f "$out" "$out.manifest.json"
+            done < <(python - <<'PY'
 import json
 for i,(p,s) in enumerate(json.load(open("files.json"))["files"],1): print(f"{i}\t{s}\t{p}")
 PY
-          )
-          gh release upload "$TAG" --repo "$REPO" files.json --clobber
-          echo "DONE: Ik45/data-science-en-id harvested into existing tag $TAG — rerun 2026-09-30"
-# harvest trigger 2026-09-30
+)
+            repo_safe=$(printf "%s" "$HF_REPO" | sed 's#[^A-Za-z0-9._-]#_#g')
+            mv files.json "work/${repo_safe}-files.json"
+            gh release upload "$TAG" --repo "$REPO" "work/${repo_safe}-files.json" --clobber
+          done
+          echo "DONE: all accessible K1 sources harvested into existing tag $TAG"
