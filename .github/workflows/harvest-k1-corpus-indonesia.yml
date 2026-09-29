@@ -46,8 +46,7 @@ jobs:
               json.dump({"repo":"Lyon28/Corpus-Indonesia","license":"Apache-2.0","files":files,"total_bytes":total},f,indent=2)
           with open("work/file-list.txt","w") as f:
               for i,(p,s) in enumerate(files,1):
-                  f.write(f"${i}	{s}	{p}
-")
+                  f.write(f"{i}\\t{s}\\t{p}\\n")
           print("EXPECTED_SHARDS",len(files),"EXPECTED_BYTES",total)
           for p,s in files:
               print(s,p)
