@@ -72,3 +72,5 @@ jobs:
           gh release view "$TAG" --repo "$REPO" --json assets --jq '{asset_count:(.assets|length),bytes:(.assets|map(.size)|add)}' | tee work/code-v1-release-summary.json
           gh release upload "$TAG" --repo "$REPO" work/code-v1-release-summary.json --clobber
           echo "CODE_V1_HARVEST_DONE"
+
+# trigger 2026-09-30-2 [harvest-code-v1]
