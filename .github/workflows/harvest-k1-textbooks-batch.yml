@@ -26,11 +26,7 @@ jobs:
           TAG="data-baru-k1-textbooks-2026-09"
           SRC="haznitrama/indonesian-children-books"
           mkdir -p work
-
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" \
-            --title "Data Baru K1 — Textbooks & Educational Books — 2026-09" \
-            --notes "Standalone K1 educational/book harvest. Initial source: haznitrama/indonesian-children-books on Hugging Face. Source reports 2,740 books, 165,245 pages and 25,759,439 tokens; CC BY-NC 4.0. Kept outside canonical K1 pending deduplication and license audit."
-
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Textbooks & Educational Books — 2026-09" --notes "Educational book harvest; kept outside canonical K1 pending deduplication and license audit."
           python - <<'PY'
           import json, urllib.request
           repo='haznitrama/indonesian-children-books'
@@ -39,26 +35,21 @@ jobs:
           files=[]
           for x in items:
               p=x.get('path','')
-              if x.get('type')=='file' and p.lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz')):
-                  files.append((p,int(x.get('size') or 0)))
+              if x.get('type')=='file' and p.lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz')): files.append((p,int(x.get('size') or 0)))
           files.sort()
           if not files: raise SystemExit('No dataset files found')
-          with open('work/manifest.json','w') as f:
-              json.dump({'source':repo,'license':'cc-by-nc-4.0','files':[{'path':p,'size':s} for p,s in files]},f,indent=2)
+          json.dump({'source':repo,'license':'cc-by-nc-4.0','files':[{'path':p,'size':s} for p,s in files]},open('work/manifest.json','w'),indent=2)
           for i,(p,s) in enumerate(files,1): print(f'{i}\t{s}\t{p}')
           PY
-
           python - <<'PY'
           import json
           d=json.load(open('work/manifest.json'))
           with open('work/file-list.txt','w') as f:
             for i,x in enumerate(d['files'],1): f.write(f"{i}\t{x['size']}\t{x['path']}\n")
           PY
-
           while IFS=$'\t' read -r idx size path; do
             [ -z "$path" ] && continue
-            base=$(basename "$path")
-            out="work/${idx}-${base}"
+            out="work/${idx}-$(basename "$path")"
             curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${SRC}/resolve/main/${path}?download=true"
             test -s "$out"
             sha=$(sha256sum "$out" | awk '{print $1}')
@@ -67,6 +58,6 @@ jobs:
             gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
             rm -f "$out" "$out.manifest.json"
           done < work/file-list.txt
-
           gh release upload "$TAG" --repo "$REPO" work/manifest.json work/file-list.txt --clobber
-          echo "K1 textbook/educational harvest completed."
+          echo "K1 textbook/educational harvest completed." 
+          echo "Triggered at $(date -u +%FT%TZ)"
