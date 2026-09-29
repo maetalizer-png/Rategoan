@@ -86,4 +86,4 @@ jobs:
           gh release upload "$TAG" --repo "$REPO" work/textbook-manifest.json work/textbook-files.json work/downloaded.tsv --clobber
           echo "LARGE INDONESIAN TEXTBOOK HARVEST COMPLETE"
 
-# retrigger 2026-09-30
+# retrigger 2026-09-30-2
