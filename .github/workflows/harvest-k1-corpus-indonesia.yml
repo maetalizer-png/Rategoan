@@ -44,12 +44,14 @@ except ImportError:
 tok=os.environ.get("HF_TOKEN") if auth else None
 if auth and not tok: raise SystemExit("AUTH_REQUIRED_BUT_HF_TOKEN_SECRET_IS_NOT_CONFIGURED")
 api=HfApi(token=tok)
-items=[{"type":"file","path":p} for p in api.list_repo_files(repo_id=repo,repo_type="dataset")]
 files=[]
-for x in items:
-    p=x.get("path","")
-    if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz",".txt",".txt.gz")):
-        files.append((p,int(x.get("size") or 0)))
+for x in api.list_repo_tree(repo_id=repo,repo_type="dataset",recursive=True):
+    p=getattr(x,"path","")
+    if getattr(x,"type",None)=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz",".txt",".txt.gz")):
+        size=getattr(x,"size",None)
+        if size is None:
+            raise SystemExit(f"Missing source size for {repo}:{p}")
+        files.append((p,int(size)))
 files.sort()
 if not files: raise SystemExit(f"No downloadable files for {repo}")
 print("SOURCE_FILE_COUNT",len(files),"SOURCE_TOTAL_BYTES",sum(s for _,s in files))
