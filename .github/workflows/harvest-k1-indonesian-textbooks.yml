@@ -9,7 +9,7 @@ permissions:
 
 concurrency:
   group: harvest-k1-indonesian-textbooks
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   harvest:
@@ -24,72 +24,70 @@ jobs:
         run: |
           set -euo pipefail
           test -n "${HF_TOKEN:-}" || { echo "HF_TOKEN GitHub secret is not configured"; exit 2; }
-
           REPO="maetalizer-png/Rategoan"
           TAG="data-baru-k1-corpus-indonesia-2026-09"
-          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || \
-            gh release create "$TAG" --repo "$REPO" \
-              --title "Data Baru K1 — Textbooks & Educational Books — 2026-09" \
-              --notes "Standalone K1 textbook candidates. Sources: InfoBayAI Indonesian STEM and Non-STEM Textbook Dataset. CC BY 4.0. Kept outside canonical K1 pending cleaning/deduplication/overlap audit."
-
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "Data Baru K1 — Textbooks & Educational Books — 2026-09" --notes "Standalone K1 textbook candidates."
           python - <<'PY'
 import json, os, urllib.request
-token=os.environ["HF_TOKEN"]
-repos=[
- "InfoBayAI/Indonesian-STEM-Textbook-Dataset",
- "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset",
-]
-os.makedirs("work",exist_ok=True)
-for repo in repos:
-    req=urllib.request.Request(
-      f"https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false",
-      headers={"Authorization":f"Bearer {token}"})
-    with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
-    files=[]
-    for x in items:
-      p=x.get("path","")
-      if x.get("type")=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz",".txt",".txt.gz")):
-        files.append((p,int(x.get("size") or 0)))
-    if not files:
-      raise SystemExit(f"No data files found for {repo}")
-    total=sum(s for _,s in files)
-    safe=repo.replace("/","__")
-    json.dump({"repo":repo,"ref":"main","files":files,"total_bytes":total},
-              open(f"work/{safe}-files.json","w"),indent=2)
-    print(repo, "files=",len(files), "bytes=",total)
+TOKEN=os.environ['HF_TOKEN']; os.makedirs('work',exist_ok=True)
+for repo in ['InfoBayAI/Indonesian-STEM-Textbook-Dataset','InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset']:
+ req=urllib.request.Request(f'https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false',headers={'Authorization':f'Bearer {TOKEN}'})
+ with urllib.request.urlopen(req,timeout=120) as r: items=json.load(r)
+ files=[(x['path'],int(x.get('size') or 0)) for x in items if x.get('type')=='file' and x.get('path','').lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz','.txt','.txt.gz'))]
+ if not files: raise SystemExit(f'No data files found for {repo}')
+ safe=repo.replace('/','__'); json.dump({'repo':repo,'files':files,'total_bytes':sum(s for _,s in files)},open(f'work/{safe}-files.json','w'),indent=2)
+ print(repo,len(files),sum(s for _,s in files))
 PY
-
-          for meta in work/*-files.json; do
-            gh release upload "$TAG" --repo "$REPO" "$meta" --clobber
-          done
-
+          for meta in work/*-files.json; do gh release upload "$TAG" --repo "$REPO" "$meta" --clobber; done
           python - <<'PY'
 import json,glob
-for mf in glob.glob("work/*-files.json"):
-  d=json.load(open(mf))
-  repo=d["repo"]; safe=repo.replace("/","__")
-  with open("work/download.tsv","a") as out:
-    for i,(p,s) in enumerate(d["files"],1):
-      out.write(f"{repo}\t{safe}\t{i}\t{s}\t{p}\n")
+for mf in glob.glob('work/*-files.json'):
+ d=json.load(open(mf)); repo=d['repo']; safe=repo.replace('/','__')
+ with open('work/download.tsv','a') as out:
+  for i,(p,s) in enumerate(d['files'],1): out.write(f'{repo}\t{safe}\t{i}\t{s}\t{p}\n')
 PY
-
           while IFS=$'\t' read -r repo safe idx expected path; do
             [ -z "$path" ] && continue
-            asset_safe=$(printf "%s" "$path" | sed 's#[^A-Za-z0-9._-]#_#g')
-            out="work/${safe}-${idx}-${asset_safe}"
-            echo "Downloading $repo:$path ($expected bytes)"
+            out="work/${safe}-${idx}-$(printf '%s' "$path" | sed 's#[^A-Za-z0-9._-]#_#g')"
             encoded=$(python -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1],safe="/"))' "$path")
-            curl -L --fail --retry 6 --retry-all-errors \
-              -H "Authorization: Bearer $HF_TOKEN" \
-              -o "$out" \
-              "https://huggingface.co/datasets/${repo}/resolve/main/${encoded}?download=true"
-            actual=$(stat -c%s "$out")
-            test "$actual" -eq "$expected"
+            curl -L --fail --retry 6 --retry-all-errors -H "Authorization: Bearer $HF_TOKEN" -o "$out" "https://huggingface.co/datasets/${repo}/resolve/main/${encoded}?download=true"
+            actual=$(stat -c%s "$out"); test "$actual" -eq "$expected"
             sha=$(sha256sum "$out" | awk '{print $1}')
-            printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' \
-              "$repo" "$path" "$actual" "$sha" > "$out.manifest.json"
+            printf '{"source":"%s","path":"%s","bytes":%s,"sha256":"%s"}\n' "$repo" "$path" "$actual" "$sha" > "$out.manifest.json"
             gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
             rm -f "$out" "$out.manifest.json"
           done < work/download.tsv
 
-          echo "TEXTBOOK HARVEST COMPLETE"
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    steps:
+      - name: Move all existing penampung data into the single consolidated release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          REPO="maetalizer-png/Rategoan"
+          SRC="penampung"
+          DST="data-baru-k1-k2-2026-09"
+          mkdir -p work
+          gh release view "$DST" --repo "$REPO" >/dev/null 2>&1 || gh release create "$DST" --repo "$REPO" --title "Data Baru K1/K2 — Consolidated — 2026-09" --notes "Consolidated dataset assets from penampung."
+          gh api "repos/$REPO/releases/tags/$SRC" --jq '.assets[] | [.id,.name,.size,.digest] | @tsv' > work/assets.tsv
+          n=0
+          while IFS=$'\t' read -r id name size digest; do
+            [ -z "$name" ] && continue
+            case "$name" in *.md) continue;; esac
+            n=$((n+1)); echo "[$n] MOVING $name ($size bytes)"
+            rm -rf work/item && mkdir -p work/item
+            gh release download "$SRC" --repo "$REPO" --pattern "$name" --dir work/item --clobber || { echo "DOWNLOAD FAILED $name"; continue; }
+            file="work/item/$name"; [ -s "$file" ] || { echo "EMPTY $name"; continue; }
+            actual="sha256:$(sha256sum "$file" | awk '{print $1}')"
+            [ -z "$digest" ] || [ "$actual" = "$digest" ] || { echo "SHA MISMATCH $name"; continue; }
+            gh release upload "$DST" --repo "$REPO" "$file" --clobber || { echo "UPLOAD FAILED $name"; continue; }
+            curl -fsS -X DELETE -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$REPO/releases/assets/$id" || echo "DELETE SOURCE FAILED $name"
+            rm -f "$file"
+            echo "MOVED $name"
+          done < work/assets.tsv
+          echo "CONSOLIDATION FINISHED; destination: $DST"
+          echo "Remaining penampung assets:"
+          gh api "repos/$REPO/releases/tags/$SRC" --jq '.assets[] | [.name,.size] | @tsv' || true
