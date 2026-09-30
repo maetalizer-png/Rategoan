@@ -1,3 +1,6 @@
+import { ppmiEmbedding } from '../../raget/raget-retrieval/ppmi-embedding.js';
+import { semanticIndex } from '../../raget/raget-retrieval/semantic-index.js';
+
 const NETWORK_FAIL_MESSAGE =
   'Gagal mengakses internet untuk pencarian ini — bisa karena tidak ada koneksi, atau Wikipedia sedang memblokir akses dari sini. Raget 100% berjalan lokal tanpa server perantara, jadi pencarian internet langsung bergantung pada koneksi perangkat ini.';
 
@@ -156,6 +159,40 @@ async function rawWikiHits(query, lang) {
   return titles.map((title) => ({ title, snippet: '', url: wikiPageUrl(title, lang), lang }));
 }
 
+
+function tokenizeDoc(text) {
+  return queryWords(text);
+}
+
+function semanticBoost(hits, words) {
+  if (!hits || hits.length < 3 || !words || words.length < 2) return hits;
+  const textOf = (h) => String((h && h.title) || '') + ' ' + String((h && h.snippet) || '');
+  try {
+    const tokenized = hits.map((h) => tokenizeDoc(textOf(h)));
+    const idf = ppmiEmbedding.buildIdfWeights(tokenized);
+    const ppmiIndex = ppmiEmbedding.buildIndex(hits, textOf, tokenizeDoc, 3, idf);
+    const ppmiRanked = ppmiEmbedding.rank(words, ppmiIndex, hits.length);
+    const ppmiMap = new Map(ppmiRanked.map((r) => [String((r.item && r.item.title) || '').toLowerCase(), r.score || 0]));
+    let semMap = new Map();
+    const uniq = new Set();
+    tokenized.forEach((toks) => toks.forEach((t) => uniq.add(t)));
+    if (uniq.size >= 8) {
+      const semIndex = semanticIndex.buildIndex(hits, textOf, tokenizeDoc, 16, 0.02);
+      const semRanked = semanticIndex.rank(words, semIndex, hits.length);
+      semMap = new Map(semRanked.map((r) => [String((r.item && r.item.title) || '').toLowerCase(), r.score || 0]));
+    }
+    return hits
+      .map((h) => {
+        const key = String(h.title || '').toLowerCase();
+        const extra = (ppmiMap.get(key) || 0) * 2 + (semMap.get(key) || 0) * 0.15;
+        return Object.assign({}, h, { score: (h.score || 0) + extra });
+      })
+      .sort((a, b) => b.score - a.score);
+  } catch (e) {
+    return hits;
+  }
+}
+
 function rankHits(hits, words) {
   const uniq = [];
   const seen = {};
@@ -170,7 +207,7 @@ function rankHits(hits, words) {
     uniq.push({ ...h, score, titleScore });
   });
   uniq.sort((a, b) => b.score - a.score);
-  return uniq;
+  return semanticBoost(uniq, words);
 }
 
 async function searchWikipediaRanked(query, lang) {
