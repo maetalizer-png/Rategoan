@@ -1,3 +1,4 @@
+import { exportLog } from '../../raget/raget-memory/export-log.js';
 import { buildPptxBytes, downloadBytes } from './pptx-local.js';
 
 const MAX_BODY = 4;
@@ -111,7 +112,9 @@ export function previewOutline(slides) {
 
 export async function exportSlides(slides, fileName) {
   const bytes = buildPptxBytes(slides);
-  downloadBytes(bytes, fileName || 'slide.pptx');
+  const name = fileName || 'slide.pptx';
+  downloadBytes(bytes, name);
+  exportLog.logExport('slide', name);
 }
 
 let held = null;
