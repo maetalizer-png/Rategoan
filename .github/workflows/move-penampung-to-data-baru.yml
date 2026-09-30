@@ -59,3 +59,5 @@ jobs:
           gh api "repos/$REPO/releases/tags/$SRC" --jq '.assets[] | .name'
           echo "=== DESTINATION ASSETS ==="
           gh api "repos/$REPO/releases/tags/$DST" --jq '.assets[] | [.name,.size] | @tsv'
+
+# trigger move-penampung
