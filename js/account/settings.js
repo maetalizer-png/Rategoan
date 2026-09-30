@@ -19,6 +19,8 @@ import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 import { llmMode } from '../state/llm-mode.js';
 import { memoryPreference } from '../state/memory-preference.js';
+import { memory } from '../ai/memory.js';
+import { exportLog } from '../../raget/raget-memory/export-log.js';
 import { sheets } from '../sheets/sheets.js';
 
 const DOWNLOAD_ICON =
@@ -33,6 +35,10 @@ const SERVER_MODE_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>';
 const DATA_HEALTH_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>';
+const ERASE_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>';
+const EXPORT_LOG_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
 const MEMORY_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-5 5v1a4 4 0 0 0-2 7.2V17a3 3 0 0 0 3 3h1"/><path d="M12 2a5 5 0 0 1 5 5v1a4 4 0 0 1 2 7.2V17a3 3 0 0 1-3 3h-1"/><path d="M9 21h6"/><path d="M12 17v4"/></svg>';
 const MOON_ICON =
@@ -293,18 +299,23 @@ export const settings = {
     // Hemat, tapi soal data pribadi apa yang diingat+dipakai AI (pola yang
     // sama dipakai ChatGPT/Gemini: Memory ada di bagian privasi/personalisasi).
     const memoriRow = buildSwitchRow('row-memori', MEMORY_ICON, 'Memori');
+    const hapusMemoriRow = buildRow('row-hapus-memori', ERASE_ICON, 'Hapus memori tersimpan');
+    const eksporLogRow = buildRow('row-riwayat-ekspor', EXPORT_LOG_ICON, 'Riwayat ekspor');
     const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);
     privasiSection.appendChild(memoriRow);
+    privasiSection.appendChild(hapusMemoriRow);
+    dataSection.appendChild(eksporLogRow);
     prefSection.appendChild(ttsRow);
     prefSection.appendChild(hematRow);
     this.refreshPackageStatus();
     this.refreshTtsStatus();
     this.refreshHematStatus();
     this.refreshMemoriStatus();
+    this.refreshExportLogStatus();
     this.refreshLlmModeStatus();
     downloadRow.onclick = () => this.handleUnduhanFitur();
     dataHealthRow.onclick = () => sheets.openDataHealth();
@@ -329,6 +340,12 @@ export const settings = {
       toast.show(on ? 'Memori diaktifkan - Raget memakai fakta yang sudah diingat saat menjawab' : 'Memori dinonaktifkan - Raget tidak memakai fakta yang diingat saat menjawab');
       this.refreshMemoriStatus();
     };
+    hapusMemoriRow.onclick = () => {
+      const n = Object.keys(memory.recallFacts() || {}).length;
+      memory.forget();
+      toast.show(n ? 'Memori tersimpan dihapus (' + n + ')' : 'Tidak ada memori tersimpan');
+      this.refreshMemoriStatus();
+    };
     knowledgeRow.onclick = () => {
       router.go('collection');
       import('../collection/collection.js').then((m) => m.collectionPage.open());
@@ -350,6 +367,18 @@ export const settings = {
     const on = memoryPreference.get();
     row.classList.toggle('switch-on', on);
     row.setAttribute('aria-checked', String(on));
+  },
+  refreshExportLogStatus() {
+    const val = $('row-riwayat-ekspor-value');
+    if (!val) return;
+    const items = exportLog.getAll();
+    if (!items.length) {
+      val.textContent = 'Kosong';
+      return;
+    }
+    const last = items[0];
+    const when = last.time ? new Date(last.time).toLocaleString('id-ID') : '';
+    val.textContent = (last.label || last.kind || 'ekspor') + (when ? ' · ' + when : '');
   },
   refreshLlmModeStatus() {
     const val = $('row-llm-mode-value');
