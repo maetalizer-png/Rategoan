@@ -14,7 +14,7 @@ menyebut file sumbernya supaya bisa diverifikasi ulang kapan saja.
 
 Untuk teori/matematika di balik tiap komponen (BM25, attention,
 cross-entropy, scaling law, dst) dan peta tingkat kecerdasan L0-L5,
-lihat [`PRD/FONDASI-TEORI-RAGET.md`](../PRD/FONDASI-TEORI-RAGET.md) -
+lihat [`docs/PRD/FONDASI-TEORI-RAGET.md`](PRD/FONDASI-TEORI-RAGET.md) -
 dokumen ini fokus ke PETA KODE hari ini, dokumen itu fokus ke TEORI
 di baliknya.
 
