@@ -49,3 +49,5 @@ jobs:
           gh api "repos/$REPO/releases/tags/$SRC" --jq '.assets[] | .name'
           echo 'DESTINATION:'
           gh api "repos/$REPO/releases/tags/$DST" --jq '.assets[] | [.name,.size] | @tsv'
+
+# execute move now
