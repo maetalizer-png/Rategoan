@@ -1,4 +1,4 @@
-// PRD/PRD-RELEASE.md §5b - rumus rekonsiliasi token korpus. Menutup bug
+// docs/PRD/PRD-RELEASE.md §5b - rumus rekonsiliasi token korpus. Menutup bug
 // nyata yang ditemukan 2026-09-09: korpus-manifest-total.json#ringkasanTotal
 // (angka "satu-satunya total yang valid", hand-typed) sempat tidak sinkron
 // dengan korpus-manifest-total.json#kanonik.entries (sumber asli per-rak
