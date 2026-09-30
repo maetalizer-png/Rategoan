@@ -5,6 +5,7 @@ import { toast } from '../core/toast.js';
 import { store } from '../state/store.js';
 import { history } from '../history/history.js';
 import { chat } from '../chat/chat.js';
+import { exportLog } from '../../raget/raget-memory/export-log.js';
 
 export const backup = {
   export() {
@@ -17,6 +18,7 @@ export const backup = {
     };
     download('rategoan-backup-' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(payload, null, 2));
     haptics.tap(10);
+    exportLog.logExport('backup', 'rategoan-backup');
     toast.show('Cadangan diunduh');
   },
   onPick(input) {
