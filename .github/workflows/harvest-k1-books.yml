@@ -1,0 +1,71 @@
+name: harvest-k1-books
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: harvest-k1-books
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  harvest:
+    if: contains(github.event.head_commit.message, '[harvest-k1-books]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Harvest Indonesian children-book corpus
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          TAG="penampung-tersaring-2026-09"
+          DATASET="haznitrama/indonesian-children-books"
+          mkdir -p work
+
+          gh release view "$TAG" --repo "$REPO" >/dev/null
+
+          python - <<'PY'
+          import json, urllib.request
+          repo='haznitrama/indonesian-children-books'
+          url=f'https://huggingface.co/api/datasets/{repo}/tree/main?recursive=true&expand=false'
+          with urllib.request.urlopen(url, timeout=120) as r: items=json.load(r)
+          files=[]
+          for x in items:
+              p=x.get('path','')
+              if x.get('type')=='file' and p.lower().endswith(('.parquet','.jsonl','.jsonl.gz','.csv','.csv.gz','.txt','.txt.gz')):
+                  files.append({'path':p,'size':int(x.get('size') or 0)})
+          if not files: raise SystemExit('No corpus files found')
+          files.sort(key=lambda x:x['path'])
+          json.dump({'source':repo,'files':files},open('work/manifest.json','w'),indent=2)
+          print('FILES',len(files),'BYTES',sum(x['size'] for x in files))
+          for x in files: print(x['size'],x['path'])
+          PY
+
+          python - <<'PY'
+          import json
+          d=json.load(open('work/manifest.json'))
+          open('work/file-list.txt','w').write('\n'.join(f"{i}\t{x['size']}\t{x['path']}" for i,x in enumerate(d['files'],1)))
+          PY
+
+          n=0
+          while IFS=$'\t' read -r idx size path; do
+            [ -z "$path" ] && continue
+            n=$((n+1))
+            safe=$(printf '%s' "$path" | tr '/ ' '__')
+            out="work/${n}-${safe}"
+            curl -L --fail --retry 8 --retry-all-errors -o "$out" "https://huggingface.co/datasets/${DATASET}/resolve/main/${path}?download=true"
+            test -s "$out"
+            sha=$(sha256sum "$out" | awk '{print $1}')
+            bytes=$(stat -c%s "$out")
+            printf '{"source":"%s","path":"%s","bytes":%s,"sha256":"%s","license_note":"candidate; verify before final K1 merge"}\n' "$DATASET" "$path" "$bytes" "$sha" > "$out.manifest.json"
+            gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
+            rm -f "$out" "$out.manifest.json"
+          done < work/file-list.txt
+
+          gh release upload "$TAG" --repo "$REPO" work/manifest.json work/file-list.txt --clobber
+          echo "HARVEST COMPLETE: $DATASET -> $TAG"
