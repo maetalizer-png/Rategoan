@@ -26,9 +26,7 @@ jobs:
           TAG="penampung-tersaring-2026-09"
           DATASET="haznitrama/indonesian-children-books"
           mkdir -p work
-
           gh release view "$TAG" --repo "$REPO" >/dev/null
-
           python - <<'PY'
           import json, urllib.request
           repo='haznitrama/indonesian-children-books'
@@ -45,13 +43,11 @@ jobs:
           print('FILES',len(files),'BYTES',sum(x['size'] for x in files))
           for x in files: print(x['size'],x['path'])
           PY
-
           python - <<'PY'
           import json
           d=json.load(open('work/manifest.json'))
           open('work/file-list.txt','w').write('\n'.join(f"{i}\t{x['size']}\t{x['path']}" for i,x in enumerate(d['files'],1)))
           PY
-
           n=0
           while IFS=$'\t' read -r idx size path; do
             [ -z "$path" ] && continue
@@ -66,6 +62,5 @@ jobs:
             gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
             rm -f "$out" "$out.manifest.json"
           done < work/file-list.txt
-
           gh release upload "$TAG" --repo "$REPO" work/manifest.json work/file-list.txt --clobber
           echo "HARVEST COMPLETE: $DATASET -> $TAG"
