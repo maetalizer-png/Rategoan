@@ -1,0 +1,61 @@
+name: move-penampung-to-data-baru
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: move-penampung-to-data-baru
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  move:
+    if: contains(github.event.head_commit.message, '[move-penampung]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    steps:
+      - name: Move all data assets out of penampung
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          SRC="penampung"
+          DST="data-baru-k1-k2-2026-09"
+          mkdir -p work
+
+          gh release view "$DST" --repo "$REPO" >/dev/null 2>&1 || gh release create "$DST" --repo "$REPO" \
+            --title "Data Baru K1/K2 — Consolidated — 2026-09" \
+            --notes "Data moved from the Penampung release into one consolidated data release. Source assets are preserved by SHA-256 in the manifest. PRD-GROK-BUILD.md is not moved because it is documentation, not dataset data."
+
+          gh api "repos/$REPO/releases/tags/$SRC" --jq '.assets[] | [.id,.name,.size,.digest] | @tsv' > work/assets.tsv
+
+          while IFS=$'\t' read -r id name size digest; do
+            [ -z "$name" ] && continue
+            case "$name" in
+              PRD-GROK-BUILD.md) continue ;;
+            esac
+            echo "=== MOVING $name ($size bytes) ==="
+            rm -rf work/item
+            mkdir -p work/item
+            gh release download "$SRC" --repo "$REPO" --pattern "$name" --dir work/item --clobber
+            file="work/item/$name"
+            test -s "$file"
+            actual="sha256:$(sha256sum "$file" | awk '{print $1}')"
+            if [ -n "$digest" ] && [ "$actual" != "$digest" ]; then
+              echo "SHA mismatch for $name: expected $digest got $actual"
+              exit 1
+            fi
+            gh release upload "$DST" --repo "$REPO" "$file" --clobber
+            gh api --method DELETE "repos/$REPO/releases/assets/$id"
+            rm -f "$file"
+            echo "MOVED: $name"
+          done < work/assets.tsv
+
+          echo "=== REMAINING SOURCE ASSETS ==="
+          gh api "repos/$REPO/releases/tags/$SRC" --jq '.assets[] | .name'
+          echo "=== DESTINATION ASSETS ==="
+          gh api "repos/$REPO/releases/tags/$DST" --jq '.assets[] | [.name,.size] | @tsv'
