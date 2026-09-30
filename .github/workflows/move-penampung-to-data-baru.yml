@@ -61,3 +61,4 @@ jobs:
           gh api "repos/$REPO/releases/tags/$DST" --jq '.assets[] | [.name,.size] | @tsv'
 
 # trigger move-penampung
+# trigger move-penampung-again-2026-09-30
