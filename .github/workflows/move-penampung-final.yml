@@ -41,3 +41,5 @@ jobs:
           done < work/assets.tsv
           echo "SOURCE_REMAINING=$(gh api \"repos/$REPO/releases/tags/$SRC\" --jq '.assets|length')"
           echo "DEST_ASSETS=$(gh api \"repos/$REPO/releases/tags/$DST\" --jq '.assets|length')"
+
+# trigger move
