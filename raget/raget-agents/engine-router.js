@@ -24,10 +24,19 @@
 import { neuralAdapter } from '../raget-neural/neural-adapter.js';
 import { templateAdapter } from '../raget-template/template-adapter.js';
 import { enginePreference } from '../../js/state/engine-preference.js';
+import { engineContract } from './engine-contract.js';
+
+function registerAdapter(adapter) {
+  if (!engineContract.isValidAdapter(adapter)) {
+    const id = adapter && adapter.id ? adapter.id : '?';
+    throw new Error('Adapter cacat kontrak: ' + id + '. Wajib ada id, label, init(), ask(), status().');
+  }
+  return adapter;
+}
 
 const ADAPTERS_BY_ID = Object.freeze({
-  neural: neuralAdapter,
-  template: templateAdapter,
+  neural: registerAdapter(neuralAdapter),
+  template: registerAdapter(templateAdapter),
 });
 
 function orderedAdapters() {
@@ -40,6 +49,10 @@ function orderedAdapters() {
 async function ask(prompt, context) {
   const tried = [];
   for (const adapter of orderedAdapters()) {
+    if (!engineContract.isValidAdapter(adapter)) {
+      tried.push({ id: (adapter && adapter.id) || '?', ready: false, reason: 'gagal isValidAdapter()' });
+      continue;
+    }
     let st;
     try {
       st = adapter.status();
