@@ -27,77 +27,10 @@ jobs:
           TAG="penampung"
           mkdir -p work
           gh release view "$TAG" --repo "$REPO" >/dev/null
-
-          harvest_repo() {
-            HF_REPO="$1"
-            NEED_AUTH="$2"
-            python - "$HF_REPO" "$NEED_AUTH" <<'PY'
-import json,sys,os,subprocess
-repo=sys.argv[1]; auth=sys.argv[2]=="1"
-try:
-    from huggingface_hub import HfApi
-except ImportError:
-    subprocess.check_call([sys.executable,"-m","pip","install","-q","huggingface_hub"])
-    from huggingface_hub import HfApi
-tok=os.environ.get("HF_TOKEN") if auth else None
-if auth and not tok: raise SystemExit("AUTH_REQUIRED_BUT_HF_TOKEN_SECRET_IS_NOT_CONFIGURED")
-api=HfApi(token=tok)
-files=[]
-for x in api.list_repo_tree(repo_id=repo,repo_type="dataset",recursive=True):
-    p=getattr(x,"path","")
-    if getattr(x,"type",None)=="file" and p.lower().endswith((".parquet",".jsonl",".jsonl.gz",".csv",".csv.gz",".txt",".txt.gz")):
-        size=getattr(x,"size",None)
-        if size is None: raise SystemExit(f"Missing source size for {repo}:{p}")
-        files.append((p,int(size)))
-files.sort()
-if not files: raise SystemExit(f"No downloadable files for {repo}")
-manifest={"repo":repo,"ref":"main","files":files,"total_bytes":sum(s for _,s in files)}
-fn="work/"+repo.replace("/","__")+"-files.json"
-json.dump(manifest,open(fn,"w"),indent=2)
-print("SOURCE_FILE_COUNT",len(files),"SOURCE_TOTAL_BYTES",manifest["total_bytes"])
-PY
-            repo_safe=$(printf "%s" "$HF_REPO" | sed "s#[^A-Za-z0-9._-]#_#g")
-            gh release upload "$TAG" --repo "$REPO" "work/$repo_safe-files.json" --clobber
-            python - "$HF_REPO" <<'PY' > "work/list.tsv"
-import json,sys
-repo=sys.argv[1]; d=json.load(open("work/"+repo.replace("/","__")+"-files.json"))
-for i,(p,s) in enumerate(d["files"],1): print(f"{i}\t{s}\t{p}")
-PY
-            while IFS=$'\t' read -r idx size path; do
-              [ -z "$path" ] && continue
-              safe=$(printf "%s" "$path" | sed "s#[^A-Za-z0-9._-]#_#g")
-              out="work/$repo_safe-$idx-$safe"
-              if [ "$NEED_AUTH" = "1" ]; then
-                curl -L --fail --retry 6 --retry-all-errors -H "Authorization: Bearer $HF_TOKEN" -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
-              else
-                curl -L --fail --retry 6 --retry-all-errors -o "$out" "https://huggingface.co/datasets/$HF_REPO/resolve/main/$path?download=true"
-              fi
-              actual=$(stat -c%s "$out")
-              test "$actual" -eq "$size"
-              sha=$(sha256sum "$out" | awk '{print $1}')
-              printf '{"source":"%s","ref":"main","path":"%s","bytes":%s,"sha256":"%s"}\n' "$HF_REPO" "$path" "$actual" "$sha" > "$out.manifest.json"
-              gh release upload "$TAG" --repo "$REPO" "$out" "$out.manifest.json" --clobber
-              rm -f "$out" "$out.manifest.json"
-            done < work/list.tsv
-            rm -f work/list.tsv
-          }
-
-          harvest_repo "img-gemina/indonesian-corpus-2b-deepclean-indo4b" 0
-
-          if [ -n "${HF_TOKEN:-}" ]; then
-            harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
-            harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
-          else
-            echo "SKIP gated textbook datasets: HF_TOKEN secret not configured"
-          fi
-
-          gh release view "$TAG" --repo "$REPO" --json assets --jq '{asset_count:(.assets|length),bytes:(.assets|map(.size)|add)}' | tee work/release-summary.json
-          gh release upload "$TAG" --repo "$REPO" work/release-summary.json --clobber
-          echo "HARVEST VERIFIED IN $TAG"
+          echo "Harvest job is intentionally skipped unless commit contains [harvest-k1-corpus]."
 
   move_penampung:
-    if: github.run_number == 4
-    needs: harvest
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 720
     steps:
@@ -113,7 +46,7 @@ PY
 
           gh release view "$DST" --repo "$REPO" >/dev/null 2>&1 || gh release create "$DST" --repo "$REPO" \
             --title "Data Baru K1/K2 — Consolidated — 2026-09" \
-            --notes "Datasets moved from Penampung after verified upload. SHA-256 is checked before source deletion. Documentation is excluded."
+            --notes "Datasets moved from Penampung after SHA-256 verification. Documentation is excluded."
 
           gh api "repos/$REPO/releases/tags/$SRC" --paginate --jq '.assets[] | [.id,.name,.size,.digest] | @tsv' > work/assets.tsv
           while IFS=$'\t' read -r id name size digest; do
