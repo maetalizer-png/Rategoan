@@ -23,7 +23,7 @@ jobs:
         run: |
           set -euo pipefail
           REPO="maetalizer-png/Rategoan"
-          TAG="penampung-tersaring-2026-09"
+          TAG="penampung"
           DATASET="haznitrama/indonesian-children-books"
           mkdir -p work
           gh release view "$TAG" --repo "$REPO" >/dev/null
