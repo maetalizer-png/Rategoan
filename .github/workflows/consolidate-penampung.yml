@@ -51,3 +51,5 @@ jobs:
           echo "DESTINATION:"
           gh api "repos/$REPO/releases/tags/$DST" --jq '.assets[] | [.name,.size] | @tsv' || true
           exit 0
+
+# trigger consolidation 2026-09-30 07:48
