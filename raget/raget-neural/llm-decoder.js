@@ -2,6 +2,7 @@ import { LLMEmbedding } from './llm-embedding.js';
 import { LLMAttention } from './llm-attention.js';
 import { LLMTransformer } from './llm-transformer.js';
 import { LLMGpu } from './llm-gpu.js';
+import { LLMEncoder } from './llm-encoder.js';
 
 function requireDeps() {
     return { E: LLMEmbedding, A: LLMAttention, T: LLMTransformer };
@@ -73,5 +74,7 @@ export const LLMDecoder = {
     runDecoderCached: runDecoderCached,
     projectToLogits: projectToLogits,
     runDecoderCachedAsync: runDecoderCachedAsync,
-    projectToLogitsAsync: projectToLogitsAsync
+    projectToLogitsAsync: projectToLogitsAsync,
+    createEncoderWeights: LLMEncoder.createEncoderWeights,
+    runEncoder: LLMEncoder.runEncoder
 };
