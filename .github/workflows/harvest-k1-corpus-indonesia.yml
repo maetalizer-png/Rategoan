@@ -82,10 +82,8 @@ PY
             rm -f work/list.tsv
           }
 
-          # Large cleaned Indonesian corpus: 1.801B tokens / 25.55M docs.
           harvest_repo "img-gemina/indonesian-corpus-2b-deepclean-indo4b" 0
 
-          # Large educational sources; use the connected HF credential when configured.
           if [ -n "${HF_TOKEN:-}" ]; then
             harvest_repo "InfoBayAI/Indonesian-STEM-Textbook-Dataset" 1
             harvest_repo "InfoBayAI/Indonesian-Non-STEM-Textbook-Dataset" 1
@@ -96,4 +94,43 @@ PY
           gh release view "$TAG" --repo "$REPO" --json assets --jq '{asset_count:(.assets|length),bytes:(.assets|map(.size)|add)}' | tee work/release-summary.json
           gh release upload "$TAG" --repo "$REPO" work/release-summary.json --clobber
           echo "HARVEST VERIFIED IN $TAG"
-          echo "HARVEST_RUN_2026_09_30"
+
+  move_penampung:
+    if: github.run_number == 4
+    needs: harvest
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    steps:
+      - name: Move penampung datasets into one consolidated release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          SRC="penampung"
+          DST="data-baru-k1-k2-2026-09"
+          mkdir -p work
+
+          gh release view "$DST" --repo "$REPO" >/dev/null 2>&1 || gh release create "$DST" --repo "$REPO" \
+            --title "Data Baru K1/K2 — Consolidated — 2026-09" \
+            --notes "Datasets moved from Penampung after verified upload. SHA-256 is checked before source deletion. Documentation is excluded."
+
+          gh api "repos/$REPO/releases/tags/$SRC" --paginate --jq '.assets[] | [.id,.name,.size,.digest] | @tsv' > work/assets.tsv
+          while IFS=$'\t' read -r id name size digest; do
+            [ -z "$name" ] && continue
+            case "$name" in PRD-GROK-BUILD.md) continue;; esac
+            echo "MOVING $name ($size bytes)"
+            rm -rf work/item && mkdir -p work/item
+            gh release download "$SRC" --repo "$REPO" --pattern "$name" --dir work/item --clobber
+            file="work/item/$name"
+            test -s "$file"
+            actual="sha256:$(sha256sum "$file" | awk '{print $1}')"
+            test "$actual" = "$digest"
+            gh release upload "$DST" --repo "$REPO" "$file" --clobber
+            gh api --method DELETE "repos/$REPO/releases/assets/$id"
+            rm -f "$file"
+            echo "MOVED $name"
+          done < work/assets.tsv
+
+          echo "SOURCE_REMAINING=$(gh api \"repos/$REPO/releases/tags/$SRC\" --jq '.assets|length')"
+          echo "DEST_ASSETS=$(gh api \"repos/$REPO/releases/tags/$DST\" --jq '.assets|length')"
