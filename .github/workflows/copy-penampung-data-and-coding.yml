@@ -1,0 +1,74 @@
+name: copy-data-and-coding-out-of-penampung
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    if: contains(github.event.head_commit.message, '[copy-penampung]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Copy data baru and coding assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REPO="maetalizer-png/Rategoan"
+          SRC="penampung"
+          DATA_TAG="data-baru-k1-k2-2026-09"
+          CODE_TAG="data-coding-2026-09"
+          mkdir -p work/data work/coding
+
+          gh release view "$DATA_TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$DATA_TAG" --repo "$REPO" --title "Data Baru K1/K2 — Consolidated — 2026-09" --notes "Data baru moved out of the penampung staging release. Indo4B/deepclean is intentionally excluded because it already exists in K1/K2/K3."
+          gh release view "$CODE_TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$CODE_TAG" --repo "$REPO" --title "Data Coding — Consolidated — 2026-09" --notes "Coding datasets copied out of the penampung staging release."
+
+          data_assets=(
+            "children-data.parquet"
+            "children-data.parquet.manifest.json"
+            "children-data.parquet.sha256"
+            "children-train-00000-of-00001.parquet"
+            "children-train-00000-of-00001.parquet.manifest.json"
+            "children-train-00000-of-00001.parquet.sha256"
+            "1-data_data.parquet"
+            "1-data_data.parquet.manifest.json"
+            "k1-calon.jsonl.gz"
+            "k1-calon.jsonl.gz.part02"
+            "k2-calon.jsonl.gz"
+            "k2-calon.jsonl.gz.part02"
+            "k2-calon.jsonl.gz.part03"
+          )
+
+          code_assets=(
+            "coding-stackv3-part01-part-00000-eb7ffe4b-e1fe-4e24-b667-41a566eb1bca-c000.snappy.parquet"
+            "coding-stackv3-part02-part-00001-eb7ffe4b-e1fe-4e24-b667-41a566eb1bca-c000.snappy.parquet"
+            "coding-stackv3-part03-part-00002-eb7ffe4b-e1fe-4e24-b667-41a566eb1bca-c000.snappy.parquet"
+            "coding-stackv3-part04-part-00003-eb7ffe4b-e1fe-4e24-b667-41a566eb1bca-c000.snappy.parquet"
+            "coding-stackv3-part05-part-00004-eb7ffe4b-e1fe-4e24-b667-41a566eb1bca-c000.snappy.parquet"
+            "coding-stackv3-part06-part-00005-eb7ffe4b-e1fe-4e24-b667-41a566eb1bca-c000.snappy.parquet"
+          )
+
+          move_one() {
+            local tag="$1" name="$2" dir="$3"
+            local url="https://github.com/${REPO}/releases/download/${SRC}/$(python -c 'import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))' "$name")"
+            local out="$dir/$name"
+            echo "COPYING: $name -> $tag"
+            curl -L --fail --retry 8 --retry-all-errors -o "$out" "$url"
+            test -s "$out"
+            gh release upload "$tag" --repo "$REPO" "$out" --clobber
+            rm -f "$out"
+            echo "UPLOADED: $name"
+          }
+
+          for name in "${data_assets[@]}"; do move_one "$DATA_TAG" "$name" work/data; done
+          for name in "${code_assets[@]}"; do move_one "$CODE_TAG" "$name" work/coding; done
+
+          echo "VERIFY DATA RELEASE"
+          gh release view "$DATA_TAG" --repo "$REPO"
+          echo "VERIFY CODING RELEASE"
+          gh release view "$CODE_TAG" --repo "$REPO"
+          echo "COPY COMPLETE. Deepclean/Indo4B was deliberately not copied."
