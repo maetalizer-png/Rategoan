@@ -1,4 +1,4 @@
-import { libLoader } from '../../utils/lib-loader.js';
+import { libLoader } from '../../shared/lib-loader.js';
 
 const JSZIP_URL = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js';
 const PACKAGE_SIZE_MB = 1;

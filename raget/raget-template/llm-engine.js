@@ -1,4 +1,4 @@
-import { hashText, pickVariant, detectTone, normalizeSlang } from '../../utils/text.js';
+import { hashText, pickVariant, detectTone, normalizeSlang } from '../../shared/text.js';
 import { fuzzySmalltalk } from './fuzzy-smalltalk.js';
 
 const FALLBACK_TEXT = 'Maaf, saya belum yakin. Coba sebut lebih jelas: sekolah, layanan, rumah, atau kabar hari ini?';

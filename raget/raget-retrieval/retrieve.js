@@ -1,5 +1,5 @@
 import { scorer } from '../raget-agents/scorer.js';
-import { normalizeSlang } from '../../utils/text.js';
+import { normalizeSlang } from '../../shared/text.js';
 import { bm25 } from './bm25.js';
 
 // FR-2.1: thresholds kept at their pre-BM25 values on purpose. scoreCorpus()

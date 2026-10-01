@@ -1,9 +1,9 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { auth } from './auth.js';
 import { account } from '../account/account.js';
 import { router } from '../core/router.js';
 import { toast } from '../core/toast.js';
-import { haptics } from '../utils/haptics.js';
+import { haptics } from '../../shared/haptics.js';
 
 const CLIENT_ID = '';
 

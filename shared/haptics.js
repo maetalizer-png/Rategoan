@@ -1,4 +1,4 @@
-import { hemat } from '../state/hemat.js';
+import { hemat } from '../js/state/hemat.js';
 
 export const haptics = {
   tap(ms) {

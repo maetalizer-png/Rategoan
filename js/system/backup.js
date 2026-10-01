@@ -1,6 +1,6 @@
-import { $ } from '../utils/dom.js';
-import { haptics } from '../utils/haptics.js';
-import { download } from '../utils/clipboard.js';
+import { $ } from '../../shared/dom.js';
+import { haptics } from '../../shared/haptics.js';
+import { download } from '../../shared/clipboard.js';
 import { toast } from '../core/toast.js';
 import { store } from '../state/store.js';
 import { history } from '../history/history.js';

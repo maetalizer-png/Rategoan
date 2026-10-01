@@ -1,6 +1,6 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { sheets } from './sheets.js';
-import { extractPdfText } from '../utils/pdf-extract.js';
+import { extractPdfText } from '../../shared/pdf-extract.js';
 
 const X_SVG =
   '<svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';

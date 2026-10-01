@@ -1,4 +1,4 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { modelSheet } from './model-sheet.js';
 import { dataHealthSheet } from './data-health-sheet.js';
 

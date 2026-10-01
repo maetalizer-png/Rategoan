@@ -1,4 +1,4 @@
-import { libLoader } from '../../utils/lib-loader.js';
+import { libLoader } from '../../shared/lib-loader.js';
 
 const TESSERACT_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
 const PACKAGE_SIZE_MB = 15;

@@ -1,5 +1,5 @@
 
-import { pickVariant } from '../../utils/text.js';
+import { pickVariant } from '../../shared/text.js';
 
 const REGIONS = ['asia', 'eropa', 'amerika', 'afrika', 'osenia', 'timur-tengah'];
 

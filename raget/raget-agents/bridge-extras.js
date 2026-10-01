@@ -1,7 +1,7 @@
 import { bridgeResolve } from './bridge-resolve.js';
 import { bridgeFormat } from './bridge-format.js';
 import { bridgeReasoning } from './bridge-reasoning.js';
-import { pickVariant } from '../../utils/text.js';
+import { pickVariant } from '../../shared/text.js';
 import { mathEngine } from './math-engine.js';
 
 async function tryLetakGeografis(text) {

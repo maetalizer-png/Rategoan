@@ -1,4 +1,4 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { attach } from './attach.js';
 import { sheets } from './sheets.js';
 import { toast } from '../core/toast.js';

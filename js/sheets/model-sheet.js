@@ -1,4 +1,4 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { engineRouter } from '../../raget/raget-agents/engine-router.js';
 import { enginePreference } from '../state/engine-preference.js';
 

@@ -7,7 +7,7 @@ import { exportShare } from '../../vault/export/share.js';
 import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { calendarStore } from '../../vault/calendar/calendar-store.js';
 import { lazyModules } from './lazy-modules.js';
-import { meaningfulWords, pickVariant, hashText } from '../../utils/text.js';
+import { meaningfulWords, pickVariant, hashText } from '../../shared/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';
 import { dailyBriefing } from './daily-briefing.js';

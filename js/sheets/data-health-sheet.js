@@ -6,7 +6,7 @@
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 import { feedbackReport } from '../../raget/raget-agents/feedback-report.js';
-import { download } from '../utils/clipboard.js';
+import { download } from '../../shared/clipboard.js';
 import { toast } from '../core/toast.js';
 
 function escapeHtml(s) {

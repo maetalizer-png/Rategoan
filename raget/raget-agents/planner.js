@@ -1,4 +1,4 @@
-import { detectTone } from '../../utils/text.js';
+import { detectTone } from '../../shared/text.js';
 import { formatter } from './formatter.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { quality } from './quality.js';

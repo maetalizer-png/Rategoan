@@ -1,6 +1,6 @@
 import { memoryLong } from './memory-long.js';
 import { ragetDb } from '../raget-database/raget-db.js';
-import { meaningfulWords } from '../../utils/text.js';
+import { meaningfulWords } from '../../shared/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { memoryPreference } from '../../js/state/memory-preference.js';
 

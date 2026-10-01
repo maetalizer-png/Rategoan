@@ -1,4 +1,4 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';

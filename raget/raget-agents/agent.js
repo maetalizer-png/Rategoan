@@ -6,7 +6,7 @@ import { memoryContext } from '../raget-memory/memory-context.js';
 import { ragetDb } from '../raget-database/raget-db.js';
 import { datariesBridge } from './dataries-bridge.js';
 import { scorer } from './scorer.js';
-import { pickVariant } from '../../utils/text.js';
+import { pickVariant } from '../../shared/text.js';
 import { retrieval } from '../raget-retrieval/retrieve.js';
 import { planner } from './planner.js';
 import { quality } from './quality.js';

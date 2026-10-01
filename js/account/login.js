@@ -1,5 +1,5 @@
-import { $ } from '../utils/dom.js';
-import { haptics } from '../utils/haptics.js';
+import { $ } from '../../shared/dom.js';
+import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
 import { auth } from '../state/auth.js';

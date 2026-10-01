@@ -1,4 +1,4 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { auth } from '../state/auth.js';
 
 const MAIL_SVG =

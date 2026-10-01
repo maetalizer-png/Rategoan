@@ -1,4 +1,4 @@
-import { detectMood } from '../../utils/text.js';
+import { detectMood } from '../../shared/text.js';
 import { memoryLong } from '../raget-memory/memory-long.js';
 
 const EMOTION_CONTINUITY_MAX_TURNS = 3;

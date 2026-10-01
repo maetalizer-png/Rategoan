@@ -1,7 +1,7 @@
 import { bridgeResolve } from './bridge-resolve.js';
 import { memoryContext } from '../raget-memory/memory-context.js';
 import { bilingual } from './bilingual.js';
-import { hashText } from '../../utils/text.js';
+import { hashText } from '../../shared/text.js';
 
 const CONTINENT_LABEL = { african: 'Afrika', american: 'Amerika', asian: 'Asia', eropan: 'Eropa', osenian: 'Oseania' };
 

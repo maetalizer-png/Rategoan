@@ -1,7 +1,7 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
-import { allArtifacts } from '../utils/slides-export.js';
+import { allArtifacts } from '../../shared/slides-export.js';
 import { drawer } from '../ui/drawer.js';
 
 function paint() {

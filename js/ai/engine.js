@@ -1,5 +1,5 @@
 import { llmEngine } from '../../raget/raget-template/llm-engine.js';
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 
 function setStatus(text) {
   const el = $('model-status');

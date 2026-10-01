@@ -1,5 +1,5 @@
-import { $ } from '../utils/dom.js';
-import { ic } from '../utils/icons.js';
+import { $ } from '../../shared/dom.js';
+import { ic } from '../../shared/icons.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';

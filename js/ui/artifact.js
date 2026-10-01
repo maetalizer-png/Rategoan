@@ -1,5 +1,5 @@
-import { $ } from '../utils/dom.js';
-import { exportSlides, rememberSlide, rememberArtifact } from '../utils/slides-export.js';
+import { $ } from '../../shared/dom.js';
+import { exportSlides, rememberSlide, rememberArtifact } from '../../shared/slides-export.js';
 import { toast } from '../core/toast.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 

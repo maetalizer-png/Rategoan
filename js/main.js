@@ -1,4 +1,4 @@
-import { $, scrollBottom } from './utils/dom.js';
+import { $, scrollBottom } from '../shared/dom.js';
 import { ai } from './ai/ai.js';
 import { store } from './state/store.js';
 import { theme } from './state/theme.js';

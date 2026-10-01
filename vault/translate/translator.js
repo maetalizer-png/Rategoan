@@ -1,4 +1,4 @@
-import { libLoader } from '../../utils/lib-loader.js';
+import { libLoader } from '../../shared/lib-loader.js';
 
 const TRANSFORMERS_URL = 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.1';
 const PACKAGE_SIZE_MB = 30;

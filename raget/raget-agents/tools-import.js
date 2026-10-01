@@ -3,7 +3,7 @@ import { lazyModules } from './lazy-modules.js';
 import { agentTools } from './agent-tools.js';
 import { bilingual } from './bilingual.js';
 import { formatter } from './formatter.js';
-import { meaningfulWords } from '../../utils/text.js';
+import { meaningfulWords } from '../../shared/text.js';
 
 const OCR_TRIGGER_RE = /baca\s+foto\s+ini|apa\s+isi\s+gambar|extract\s+text|ringkas\s+catatan\s+ini|berapa\s+total|apa\s+yang\s+dibicarakan/i;
 

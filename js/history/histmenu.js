@@ -1,7 +1,7 @@
-import { $ } from '../utils/dom.js';
-import { haptics } from '../utils/haptics.js';
-import { download } from '../utils/clipboard.js';
-import { fmtTime } from '../utils/format.js';
+import { $ } from '../../shared/dom.js';
+import { haptics } from '../../shared/haptics.js';
+import { download } from '../../shared/clipboard.js';
+import { fmtTime } from '../../shared/format.js';
 import { toast } from '../core/toast.js';
 import { store } from '../state/store.js';
 import { history } from './history.js';

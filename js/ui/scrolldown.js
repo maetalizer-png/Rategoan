@@ -1,4 +1,4 @@
-import { $, scrollBottom } from '../utils/dom.js';
+import { $, scrollBottom } from '../../shared/dom.js';
 
 export const scrolldown = {
   unseen: 0,

@@ -1,4 +1,4 @@
-import { $ } from '../utils/dom.js';
+import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { mesin } from '../../raget/raget-runtime/mesin.js';
 import { drawer } from '../ui/drawer.js';

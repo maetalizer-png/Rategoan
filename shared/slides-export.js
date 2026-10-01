@@ -1,4 +1,4 @@
-import { exportLog } from '../../raget/raget-memory/export-log.js';
+import { exportLog } from '../raget/raget-memory/export-log.js';
 import { buildPptxBytes, downloadBytes } from './pptx-local.js';
 
 const MAX_BODY = 4;
