@@ -3,14 +3,14 @@ const TIMEOUT_MS = 1200;
 function workerSrc() {
   return (
     'self.onmessage = function (ev) {' +
-    '  var code = String(ev.data && ev.data.code || "");' +
-    '  var logs = [];' +
-    '  var fake = { log: function () { logs.push(Array.prototype.slice.call(arguments).map(String).join(" ")); },' +
+    '  let code = String(ev.data && ev.data.code || "");' +
+    '  let logs = [];' +
+    '  let fake = { log: function () { logs.push(Array.prototype.slice.call(arguments).map(String).join(" ")); },' +
     '    warn: function () { logs.push(Array.prototype.slice.call(arguments).map(String).join(" ")); },' +
     '    error: function () { logs.push(Array.prototype.slice.call(arguments).map(String).join(" ")); } };' +
     '  try {' +
-    '    var fn = new Function("console", "return (function(){\\n" + code + "\\n})();");' +
-    '    var value = fn(fake);' +
+    '    let fn = new Function("console", "return (function(){\\n" + code + "\\n})();");' +
+    '    let value = fn(fake);' +
     '    self.postMessage({ ok: true, logs: logs, value: value == null ? "" : String(value) });' +
     '  } catch (e) {' +
     '    self.postMessage({ ok: false, logs: logs, error: e && e.message ? e.message : String(e) });' +
