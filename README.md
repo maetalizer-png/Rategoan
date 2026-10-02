@@ -13,6 +13,14 @@ Seluruh percakapan, memori, dan basis pengetahuan berjalan langsung di
 perangkat pengguna lewat Progressive Web App (PWA) murni HTML/CSS/JavaScript
 modular (ES6 Modules), tanpa framework dan tanpa build step.
 
+## Korpus
+
+Penempatan data training mengikuti [docs/PRD/PRD-RELEASE.md](docs/PRD/PRD-RELEASE.md)
+(spesifikasi Drive, 2 Oktober 2026). Enam tag: `Data-baru-Indonesian`,
+`data-baru-English`, `penampungan-Indonesian`, `penampungan-English`,
+`K-dataset-Indonesian`, `R-dataset-english`. Angka rak ada di
+[docs/STATUS-KORPUS-LISENSI.md](docs/STATUS-KORPUS-LISENSI.md).
+
 Repo ini adalah **RATEGOAN**, kerangka chat inti dengan **Raget**, mesin
 balasan template/rule-based (bukan model bahasa besar).
 

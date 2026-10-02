@@ -1,543 +1,353 @@
-# PRD — Data Release: Alur Kerja, Penamaan, Token BPE, Sinkronisasi
+<!-- Sumber: Google Drive "PRD RELEASE" (file 1kbJbTGh1ZvaUjQOkarPLoPtEIAbhcooSUbLo_nwZx2E), diubah 2026-10-02. Menggantikan PRD-RELEASE lama di git dan di tag prd-data-release. Isi di bawah ini dokumen Drive itu. -->
 
-Status: **BERLAKU, mengikat**. Rumus tunggal untuk mengukur, menata,
-menamakan, dan menggabungkan data training (korpus teks + checkpoint
-neural) yang masuk/keluar lewat GitHub Release proyek Rategoan.
+# **PRD RELEASE: SPESIFIKASI ARSITEKTUR KORPUS RATEGOAN**
 
-## 0. Kenapa dokumen ini ada di DUA tempat, dan mana yang menang
+**Standar Penataan Struktur Penempatan Data, Nama Tag, Nama Aset Rilis, Checksum SHA256, Manifest Metadata, dan Alur Pemrosesan Data (K & R Dataset)**  
+*Per: 2 Oktober 2026 (Diperbarui dengan Temuan Claude & Preseden Sistem)*  
+*Status Verifikasi: Disahkan untuk Eksekusi Penataan, Verifikasi Checksum, & Rilis Data Rategoan*
 
-Aturan mengikat ini **sudah ada sejak 2026-08-26**, tapi sebelumnya
-CUMA hidup sebagai isi Release GitHub (tag `prd-data-release`, asset
-`PRD-DATA-RELEASE.md`) — tidak pernah jadi file di git. Akibatnya
-susah ditemukan (harus tahu nama tag persis), tidak muncul di `git
-log`/diff biasa, dan skrip yang mengacu ke "PRD §8" (mis.
-`publish-korpus-release.py`) merujuk sesuatu yang tidak kelihatan
-siapa pun yang baca repo lewat cara normal. Inilah akar "ambigu" yang
-dirasakan — bukan karena aturannya tidak ada, tapi karena aturannya
-tersembunyi di tempat yang tidak biasa dibaca.
+# **0. RINGKASAN EKSEKUTIF & PRESEDEN SEJARAH SISTEM**
 
-**Mulai sekarang**: dokumen **INI** (`PRD/PRD-RELEASE.md`, di git) yang
-jadi sumber utama untuk diedit dan dibaca sehari-hari. Salinan di
-Release (tag `prd-data-release`) tetap dipertahankan sebagai cermin
-sealed yang dibaca skrip pipeline dari luar sandbox — **Grok/Manus/
-dirigen tolong sinkronkan isi Release itu supaya sama persis dengan
-dokumen git ini setiap kali dokumen ini berubah.** Kalau isi keduanya
-pernah beda, **dokumen git ini yang benar** — versi Release yang harus
-menyusul, bukan sebaliknya.
+Dokumen ini menetapkan standar arsitektur rilis korpus Rategoan yang diperbarui secara menyeluruh. Dokumen ini mengolaborasikan seluruh temuan analisis mendalam, preseden historis dari pengembangan sistem sebelumnya, serta spesifikasi operasional untuk mengelola data mentah hingga menjadi korpus bersih siap latih (production-ready) berstandar mutu textbook.
 
-### Siapa mengerjakan apa, dan kenapa Claude tidak bisa publish Release
+## **0.1 Ringkasan Keputusan Strategis**
 
-| Peran | Bisa apa | Tidak bisa apa |
-|---|---|---|
-| **Sesi Claude Code (sandbox ini)** | Baca Release/unduh asset, jalankan clean/dedupe/tokenize/hitung token secara lokal, verifikasi SHA256, edit file git (manifest, PRD, kode), commit+push ke git | **TIDAK BISA** membuat/mengedit/menghapus GitHub Release — API mengembalikan `"Creating, editing, or deleting releases is not permitted for this session type."` (pembatasan level-sesi yang disengaja, dikonfirmasi di `CHECKPOINT-POLICY.md`) |
-| **Grok / Manus / dirigen (luar sandbox)** | Upload raw data ke Release (tag ad-hoc utk staging), publish korpus/checkpoint bersih ke Release (`publish-korpus-release.py`/`publish-checkpoint-release.py`), hapus tag lama, sinkronkan salinan Release dokumen ini | Idealnya tetap ikuti rumus di dokumen ini supaya tidak bentrok dengan kerja Claude di sisi git — Manus: lihat `PRD-MANUS-DATA-MENTAH.md` untuk prosedur langkah-demi-langkah |
+1. **Pemisahan Jalur Bahasa (Dual-Engine Architecture):** Korpus Bahasa Indonesia (K) dan Korpus Bahasa Inggris (R) dipisahkan secara ketat untuk menjaga kemurnian tata bahasa dan mencegah efek translationese.  
+2. **Tiga Tingkat Tag Rilis:** Pengelolaan berkas bertingkat melalui Lapis 1 (Data Baru / Mentah), Lapis 2 (Penampungan / QC Gate), dan Lapis 3 (Rak Final Mutu Textbook).  
+3. **Validasi Keras Tiga Gerbang Integritas:** Penerapan verifikasi checksum SHA256SUMS dan manifest metadata wajib pada seluruh tingkatan rilis.
 
-**Titik serah terima yang jelas** (ini yang mencegah "bentrok"): Claude
-mengerjakan SEMUA langkah yang bisa dijalankan lokal (unduh untuk
-dibaca, bersihkan, dedupe, tokenisasi, hitung token, update
-manifest+PRD di git, commit) sampai mentok di langkah **upload/publish
-ke Release** — di situ pekerjaan berhenti dan diserahkan ke Grok/dirigen
-dengan instruksi persis apa yang perlu di-publish (nama tag, file mana,
-SHA256 berapa yang harus cocok). Tidak ada tumpang tindih karena
-wilayah kerjanya memang terpisah oleh batas teknis (bukan kesepakatan
-yang bisa dilanggar).
+---
 
-## 0.1. GERBANG WAJIB sebelum publish tag korpus apa pun — baca ini dulu
+# **1. PENDAHULUAN & BATASAN RUANG LINGKUP**
 
-**Preseden nyata (2026-09-10)**: batch data hukum baru (69.551 dokumen
-dari JDIH, 24,7 juta token) hampir dipublikasikan sebagai tag baru
-`"K4 candidate/review"` sebelum ada yang menyadari PRD ini sudah
-melarangnya sejak awal. Bukan karena aturannya tidak ada — karena
-aturannya belum dicek dulu sebelum jalan. Supaya tidak terulang, ini
-checklist WAJIB dijalankan tiap kali ada korpus baru yang mau
-dipublish, oleh siapa pun (Claude/Grok/Manus/dirigen):
+## **1.1 Tujuan Dokumen**
 
-1. **Cek nama tag yang mau dipakai** terhadap tabel di §2. Kalau bukan
-   PERSIS salah satu dari `korpus-ensiklopedia-bersih` /
-   `korpus-dialog-daerah-bersih` / `korpus-pelengkap-bersih` /
-   `checkpoint-<ukuran>` — **BERHENTI. Jangan publish.**
-2. **Tidak ada rak/tag ke-4 dst.** `K4`, `K5`, `korpus-hukum-bersih`,
-   `korpus-<topik-apa-pun>-bersih`, atau nama sejenis **DILARANG**,
-   termasuk berlabel "candidate"/"review"/"staging" — status "belum
-   final" tidak mengizinkan nama tag baru, cukup taruh di tag
-   sementara generik (lihat §5 langkah 1-2) tanpa pretensi jadi rak
-   permanen baru.
-3. **Data yang isinya genuinely tidak cocok 5 kategori §1** (mis. teks
-   hukum/regulasi format panjang, bukan QA) → klasifikasikan ke
-   kategori TERDEKAT (biasanya `pelengkap` untuk konten khusus/niche,
-   atau `dialog` kalau sudah berbentuk QA seperti preseden
-   `Indonesian_Regulation_QA` yang masuk K2) — **atau kalau benar-benar
-   tidak ada yang cocok, tanya dirigen dulu sebelum publish apa pun**,
-   bukan bikin kategori sendiri lalu tanya belakangan.
-4. **Isu lisensi/provenance yang belum jelas** (seperti kasus JDIH di
-   atas — hak redistribusi belum clearance) BUKAN alasan untuk membuat
-   rak sementara sendiri. Itu alasan untuk TIDAK dipublish ke rak
-   permanen manapun dulu sampai clearance selesai — tetap di tag
-   staging biasa, dicatat statusnya di `PRD-MANUS-DATA-MENTAH.md`.
+Dokumen Product Requirements Document (PRD RELEASE) ini disusun sebagai pedoman baku operasional dan arsitektur rilis korpus Rategoan untuk:
 
-## 1. Kategori (taksonomi tertutup — hanya 5)
+4. **Menata struktur penempatan data** dalam sistem rilis Rategoan.  
+5. **Menstandarkan nama tag rilis** ke dalam sistem 3 tingkatan (Data Baru, Penampungan, dan Rak Final).  
+6. **Menstandarkan format nama aset file** di dalam setiap tag rilis secara teratur dan simetris.  
+7. **Menetapkan format keterangan resmi (Release Notes)** serta berkas verifikasi standar (SHA256SUMS dan manifest.json) yang wajib dicantumkan pada setiap tag rilis.  
+8. **Menetapkannya sebagai pedoman wajib** sebelum data mentah diizinkan masuk ke pipeline pemrosesan.
 
-Setiap data baru **wajib** masuk salah satu dari 5 kategori ini. Kalau
-benar-benar tidak cocok satu pun, **berhenti dan tanya dirigen** sebelum
-membuat kategori ke-6. **Ini termasuk kategori yang "kedengarannya"
-masuk akal seperti data hukum, berita, atau tema khusus lain — punya
-tema sendiri BUKAN alasan otomatis untuk kategori/rak baru, lihat §0.1.**
+## **1.2 Batasan Mutlak Ruang Lingkup (Scope Boundaries)**
 
-| Kategori | Isi | Peran dalam mix training |
-|---|---|---|
-| `ensiklopedia` | Narasi faktual volume besar — Wikipedia/Wikimedia ID + serumpun | 55–65% |
-| `dialog` | Percakapan, gaya Raget, tanya-jawab, sapaan, obrolan buatan | bagian dari 25–35% |
-| `daerah` | Bahasa daerah Indonesia sebagai teks (Jawa, Sunda, Minang, dst) | bagian dari 25–35% |
-| `pelengkap` | Tambahan kecil opsional — simple-wiki, wikiquote, wikivoyage, buku/naskah | 5–15% |
-| `checkpoint` | Bobot model neural (safetensors) | bukan korpus — diatur `raget-tools/CHECKPOINT-POLICY.md`, PRD ini cuma merujuk |
+**PRINSIP UTAMA:**  
+PRD ini **MURNI MENGATUR PENATAAN STRUKTUR PENEMPATAN, ALUR PIPELINE, CHECKSET SHA256, METADATA MANIFEST, NAMA TAG, DAN NAMA ASET.**  
+Dokumen ini **TIDAK MENGUBAH DAN TIDAK MENDEFINISIKAN ULANG ISI MATERI TERVERIFIKASI DARI K1, K2, K3, DAN K4.**  
+Seluruh isi materi K1, K2, K3, dan K4 **tetap persis seperti yang sudah ada pada rilis saat ini** (17+ Miliar token BPE).  
+---
 
-`dialog` dan `daerah` **selalu digabung jadi satu file pack** saat
-training (tag `korpus-dialog-daerah-bersih`) karena sama-sama porsi
-kecil yang di-upsample bersama — tetap dua kategori terpisah saat
-diukur/dinamai internal.
+# **2. LATAR BELAKANG ARSITEKTUR & KEPUTUSAN STRATEGIS**
 
-### 1.1 Aturan bahasa per kategori — wajib, bukan saran
+## **2.1 Penyelesaian Isu Kritis Bagian A.3 PRD Terjemahan**
 
-Temuan nyata (`keputusan-014`): audit lang-field pada
-`korpus-pelengkap-bersih` (K3) pernah menunjukkan **94% baris berlabel
-`lang: en-simple`** — korpus "pelengkap" (harusnya Indonesia) didominasi
-konten Inggris salah kategori, dan model yang dilatih darinya
-menghasilkan jawaban campur bahasa. Aturan wajib:
+Pada rilis batch `data-baru-20261002` (2 Oktober 2026, ~109 GB mentah), sistem rilis menerima aset skala besar yang mencakup peS2o (30,6 GB), PubMed Central (43,6 GB), dan StackExchange (34,9 GB). Penerimaan ini menimbulkan pertanyaan kritis mengenai alokasi dan penataan data:
 
-1. **`ensiklopedia`** — mayoritas `lang: id` eksplisit, atau lolos
-   filter rasio kata-tugas Bahasa Indonesia kalau field `lang` tidak
-   tersedia dari sumbernya.
-2. **`dialog`** — setiap dokumen wajib berlabel `lang` eksplisit,
-   dipisah jadi sub-kelompok `id` vs bahasa daerah yang bisa difilter
-   terpisah.
-3. **`pelengkap`** — wajib mayoritas `lang: id`; konten non-Indonesia
-   dilarang dominan diam-diam.
-4. **Setiap `manifest.json` wajib memuat `komposisiBahasa`** (persentase
-   dokumen per nilai `lang`) — tanpa field ini, Release dianggap
-   **belum patuh PRD**, sama seperti SHA256 yang hilang (§4).
-5. **Prosedur filter**: cek field `lang` eksplisit dulu, buang yang
-   bukan `id*`. Kalau kosong, fallback ke rasio kata-tugas Bahasa
-   Indonesia dihitung dari field `text` yang SUDAH diekstrak dari JSON
-   — BUKAN dari baris JSON mentah (metadata `source`/`license`/`url`
-   berbahasa Inggris ikut mencemari hitungan kalau dihitung dari baris
-   mentah).
+* *Apakah data akademik bahasa Inggris ini harus dipaksa diterjemahkan mesin ke Bahasa Indonesia sebelum masuk korpus?*  
+* *Ataukah data ini dialokasikan ke rak/kategori baru yang memang diperuntukkan bagi materi berbahasa Inggris?*
 
-Gerbang bahasa ini **wajib** dijalankan sebelum gerbang mix ratio (§3),
-bukan opsi tambahan — campuran yang lolos SHA256 tapi tidak lolos
-filter bahasa tetap **dilarang** dipakai training produksi.
+## **2.3 Preseden Sejarah Sistem & Pembelajaran Rilis Sebelumnya**
 
-## 2. Penamaan — satu tag permanen per kategori
+Pengalaman dari iterasi rilis sebelumnya menunjukkan bahwa mencampur data mentah langsung ke dalam korpus produksi tanpa karantina bertingkat menyebabkan degradasi mutu token BPE dan ketidakpastian lisensi. Oleh karena itu, diputuskan bahwa seluruh alur pipeline wajib melewati 11 tahapan linier secara disiplin.
 
-```
-korpus-<kategori>-bersih
-```
+# **4. CHECKLIST 'PAGAR' DATA BARU, ATURAN LISENSI, & LARANGAN KONTEN**
 
-**Tidak ada `-v1`/`-v2`/`-vN` di TAG.** Versi hidup di `manifest.json`
-(field `versi`, integer naik terus) dan judul Release ("name"), bukan
-di tag. Data baru untuk kategori yang sama = **timpa asset di tag yang
-sama**, jangan bikin tag baru — ini aturan anti-bentrok #1: satu
-kategori, satu tag, selamanya, cuma isinya yang di-update.
+Sebelum berkas data mentah diperbolehkan masuk ke tingkat 1 (Data Baru), setiap kandidat dataset wajib melewati verifikasi 5 poin pagar data (Data Gateways):
 
-| Tag | Kategori |
-|---|---|
-| `korpus-ensiklopedia-bersih` | ensiklopedia (K1) |
-| `korpus-dialog-daerah-bersih` | dialog + daerah gabungan (K2) |
-| `korpus-pelengkap-bersih` | pelengkap (K3) |
-| `checkpoint-<ukuran>` | checkpoint — lihat `CHECKPOINT-POLICY.md` |
+9. **Kejelasan Audit Lisensi HKI:** Berkas harus berlisensi terbuka (CC-BY, MIT, Apache 2.0, Public Domain, atau ODbL). Dataset berstatus 'Non-Commercial' atau 'Unknown' wajib dikarantina terpisah.  
+10. **Bebas dari Kebocoran Data Benchmark (Data Contamination Check):** Dilakukan pencocokan n-gram terhadap dataset evaluasi standar (MMLU, IndoMMLU, GSM8K, HumanEval) untuk mencegah kebocoran data uji.  
+11. **Pembersihan PII (Personally Identifiable Information):** Pemindaian regex dan model NER untuk menghapus NIK, nomor telepon, alamat email pribadi, dan nomor rekening finansial.  
+12. **Pemeriksaan Integritas Berkas Sederhana:** Pengujian dekstrim/uncompress berkas sampel untuk memastikan berkas tidak korup sebelum diunggah.  
+13. **Penetapan Taksonomi Rak Target:** Klasifikasi awal apakah dataset masuk ke kategori Pengetahuan (1), Dialog (2), Pelengkap (3), atau Coding (4).
 
-**Pengecualian version-pin** (langka, butuh `alasanPin` tertulis di
-manifest): kalau satu training run sudah dipublikasikan harus tetap
-bisa direproduksi persis dari korpus versi lama, boleh membekukan satu
-snapshot sebagai `korpus-<kategori>-bersih-v<N>-pinned`. Bukan alur
-normal.
+---
 
-## 3. Ukuran — rumus tingkatan kapasitas
+# **5. ALUR KHUSUS LENGKAP: RAW -> TOKEN BPE (11 TAHAPAN WAJIB)**
 
-```
-size_mb = bytes(file.jsonl.gz) / 1_000_000        (ukur file GZIP FINAL, bukan raw)
-```
+Proses pengolahan data mentah menjadi korpus final BPE dilakukan secara terstruktur melalui 11 tahapan linier:
 
-| Tingkat | Rentang | Aturan |
-|---|---|---|
-| **XS** | < 20 MB | **DILARANG jadi Release sendiri** — wajib digabung ke pack kategorinya dulu |
-| **S** | 20–95 MB | Boleh Release tersendiri, satu file per kategori |
-| **M** | 95–500 MB | Ideal — target band utama `ensiklopedia` |
-| **L** | 500 MB–1.5 GB | Masih satu file (limit single-asset GitHub ~2GB) |
-| **XL** | > 1.5 GB | **Wajib dipecah** jadi part berurutan `<tag-file>.partNN` (~300–500 MB tiap part) + manifest berisi SHA256 tiap part + SHA256 file utuh |
+14. **Tahap 1 - Ingestion Data Mentah:** Penempatan berkas mentah asli di tag `Data baru Indonesian` / `data baru English`.  
+15. **Tahap 2 - Parsing & Normalisasi Teks UNICODE:** Ekstraksi teks dari format asli (PDF, HTML, WARC, JSON) ke JSONL murni serta konversi normalisasi Unicode (NFKC).  
+16. **Tahap 3 - Deteksi & Pemisahan Bahasa (Language Identification):** Menggunakan FastText LID / CLD3 untuk menyalurkan teks ke poros Bahasa Indonesia (K) atau Bahasa Inggris (R).  
+17. **Tahap 4 - Deduplikasi Skala Besar (MinHash / LSH & Exact Match):** Penghapusan dokumen duplikat persis maupun duplikat dekat (near-deduplication) dengan nilai kemiripan Jaccard > 0,80.  
+18. **Tahap 5 - Penyaringan Kualitas Heuristik (Heuristic Filtering):** Eliminasi teks dengan rasio simbol/angka tidak wajar, kalimat terpotong, teks terlalu pendek (< 50 kata), atau konsentrasi kata kunci sampah (spam/boilerplate).  
+19. **Tahap 6 - Penyaringan Mutu Perisai AI & Klasifikasi Mutu Textbook:** Scoring menggunakan model classifier mutu teks untuk menjamin standar kualitas mutu textbook.  
+20. **Tahap 7 - Penataan Format Zero-Conversational JSONL:** Standarisasi struktur tiap baris menjadi `{"text": "..."}` tanpa wrapping conversational berlebih.  
+21. **Tahap 8 - Transit Karantina Penampungan (Quality Control Gate 2):** Penyimpanan di tag penampungan untuk verifikasi statistik sampling akhir.  
+22. **Tahap 9 - Tokenisasi BPE & Verifikasi Jumlah Token:** Eksekusi tokenizer BPE Rategoan resmi dan perhitungan presisi total token yang dihasilkan.  
+23. **Tahap 10 - Pembagian Partisi & Kompresi GZIP Standard (1.35 - 1.5 GB):** Pemecahan berkas ke ukuran optimal dan kompresi gzip simetris.  
+24. **Tahap 11 - Promosi Final, Segel Checksum SHA256, & Injeksi Manifest.json:** Penerbitan ke tag final K/R beserta pembuatan berkas validasi integritas.  
+25. **Tahap 12 - Sinkronisasi Repositori & Dokumentasi Sistem:** Pembaruan dokumentasi dan konfigurasi sistem dilakukan secara terpisah sesuai peruntukannya:  
+    1. **File Wajib yang Di-commit ke Git Repo:** `docs/STATUS-KORPUS-LISENSI.md` dan `README.md`.  
+    2. **File Aset di GitHub Releases:** `manifest.json` dan `SHA256SUMS`.  
+    3. **Parameter di Lingkungan Training:** Penyesuaian total token pada runtime/skrip DataLoader.
 
-Batas 20MB mencegah Release recehan (preseden nyata: pernah ada asset
-1014 byte berdiri sendiri sebagai satu Release).
+---
 
-**Beda dari batas git**: 100MB/95MB di `CHECKPOINT-POLICY.md` itu
-khusus file yang MUNGKIN masuk git — Release asset TIDAK kena batas
-itu, boleh sampai ~2GB.
+# **6. SEGEL SHA256 — TIGA GERBANG WAJIB (MEKANISME ANTI-BENTROK UTAMA)**
 
-### 3.1 SATU FILE FISIK per kategori — wajib, bukan pilihan
+## **6.1 Segel Integritas Checksum SHA256SUMS**
 
-**Dilarang keras**: menaruh 2+ file `.jsonl.gz` sumber-terpisah sebagai
-asset-asset lepas di bawah satu tag dan menyebutnya "kanonik" — itu
-bukan "digabung", cuma dipindah-taruh di folder yang sama, dan loader
-tetap harus tahu urutan mana yang mana (masalah fragmentasi yang PRD
-ini dibuat untuk membereskan).
+Setiap rilis tag wajib melampirkan berkas `SHA256SUMS` yang memuat checksum SHA-256 dari seluruh aset file yang ada di dalam tag rilis tersebut untuk menjamin data tidak mengalami perubahan bit (bit-rot atau korupsi transmisi).
 
-**Satu-satunya pengecualian**: split XL (§3, tier XL) — part berurutan
-dari SATU file yang sama, direkonstruksi `cat part00 part01 ... >
-file.jsonl.gz`, hasilnya wajib cocok SATU SHA256 di manifest.
+# **7. SKEMA MANIFEST WAJIB (manifest.json)**
 
-**Cara benar gabung banyak sumber jadi satu kategori:**
-```bash
-zcat sumber1.jsonl.gz sumber2.jsonl.gz sumber3.jsonl.gz | gzip -9 > korpus-<kategori>-bersih.jsonl.gz
-sha256sum korpus-<kategori>-bersih.jsonl.gz   # simpan ke manifest field "sha256"
-```
-Hasilnya satu file, satu SHA256. Titik.
-
-## 4. SEGEL SHA256 — tiga gerbang wajib (ini mekanisme anti-bentrok utama)
-
-SHA256 bukan metadata dokumentasi — ia **gerbang go/no-go**. File sama
-= sidik jari sama selamanya; ubah 1 byte = sidik jari beda total. Ini
-yang mendeteksi korup/kepotong/tertukar/gagal-unduh — hal yang tidak
-bisa dideteksi cuma dari ukuran file.
-
-**Gerbang 1 — saat publish (Grok/dirigen).** SHA256 **wajib** dihitung
-dari file **FINAL yang di-upload** (gzip `.jsonl.gz` akhir), BUKAN JSONL
-mentah sebelum kompresi (kompresi ulang level berbeda = byte berbeda
-walau teks sama). Ditulis ke manifest field `sha256`, file yang SAMA
-yang di-upload. Tanpa `sha256` = belum dianggap selesai.
-
-**Gerbang 1b — self-verify setelah upload (otomatis, wajib).**
-`manifest.sha256 == digest GitHub asset == sha256sum lokal file yang
-baru di-upload`. Tidak cocok = publish **DIBLOKIR**, asset dihapus,
-exit ≠ 0. Ini akar masalah K2 lama (hash mentah vs gzip) yang sudah
-pernah kejadian nyata.
-
-**Gerbang 2 — saat reassembly part (khusus tier XL).**
-```bash
-cat korpus-<kategori>-bersih.jsonl.gz.part00 ... > korpus-<kategori>-bersih.jsonl.gz
-sha256sum korpus-<kategori>-bersih.jsonl.gz   # wajib cocok manifest.sha256 (file utuh)
-```
-Tidak cocok = berhenti, jangan lanjut ke tokenisasi.
-
-**Gerbang 3 — sebelum training (siapa pun yang load korpus).**
-```bash
-echo "<sha256_dari_manifest>  korpus-<kategori>-bersih.jsonl.gz" | sha256sum -c -
-```
-Harus `OK`. `FAILED` = jangan training pakai file itu.
-
-Pipa resmi: `raget-tools/publish-korpus-release.py` (korpus),
-`raget-tools/publish-checkpoint-release.py` (checkpoint) — keduanya
-menghitung hash dari file yang akan diupload, menulis manifest, upload,
-lalu verifikasi digest GitHub cocok.
-
-## 5. Alur wajib untuk data baru (checklist "pagar")
-
-Ini yang menjawab langsung **"kalau ada data baru mentah, json/jsonl,
-bagaimana cara mengerjakannya biar gak bentrok"**:
-
-1. **Bersihkan + dedupe** data mentah dulu — jangan publish data mentah
-   apa adanya.
-2. **Ukur**: jumlah dokumen, kata approx, byte gzip, breakdown bahasa
-   (%), lisensi per sumber.
-3. **Klasifikasi kategori** — pilih SATU dari 5 (§1) berdasarkan ISI,
-   bukan urutan kedatangan.
-4. **Hitung `size_mb`** dan tentukan tingkat (§3).
-5. **Kalau XS (<20MB)**: unduh pack kategori yang sudah ada → gabung
-   data baru → dedupe ULANG lintas-file → upload ulang **di tag yang
-   sama** (timpa file lama), naikkan `versi` di manifest. **Jangan**
-   buat tag baru.
-6. **Kalau S/M/L (≥20MB)**:
-   - Kategori belum punya file kanonik → publish langsung ke
-     `korpus-<kategori>-bersih` (tag baru dibuat sekali di sini saja).
-   - Kategori sudah punya file kanonik, data baru MENAMBAH volume →
-     unduh yang lama, gabung, dedupe, upload ulang di tag yang sama.
-   - Data baru MENGGANTIKAN (mis. sumber sama tapi jauh lebih bersih)
-     → tetap tag yang sama, timpa asset lama.
-7. **Kalau XL (>1.5GB)**: pecah jadi part sesuai §3.
-8. **Tulis/timpa `manifest-<kategori>.json`** skema wajib (§6) — selalu
-   ikut ter-upload sebagai asset kedua di Release yang sama.
-9. **Retire tag lama** yang isinya sudah sepenuhnya masuk pack/file
-   baru — hapus Release-nya, jangan dibiarkan "nganggur". Release aktif
-   harus selalu bisa dipetakan 1:1 ke §1/§2.
-10. **Update `docs/STATUS-KORPUS-LISENSI.md`** (satu baris per kategori)
-    supaya tetap sinkron.
-
-## 5b. Alur khusus: raw → token BPE (rumus yang sebelumnya ambigu)
-
-Ini menjawab langsung **"perhitungan agar menjadi TOKEN BPE
-bagaimana"**. Urutan wajib, tidak boleh dibalik atau dilewati:
-
-```
-1. RAW               data mentah (dump XML/JSON/parquet dari sumber asli)
-        │             — diunggah Grok/dirigen ke Release, tag AD-HOC sementara
-        │               (raw TIDAK disimpan permanen - hanya untuk diproses ulang kalau perlu)
-        ▼
-2. EXTRACT+CLEAN      extract-clean-wikipedia.py / extract-clean-wiktionary.py /
-        │             parse-korpus-jilid2.py, dst sesuai jenis sumber
-        │             → JSONL {"text":..., "source":..., "license":..., "lang":...}
-        ▼
-3. DEDUPE             clean-dedupe-korpus-jilid2.py (atau setara) — dedupe berbasis
-        │             fingerprint/minhash, BUKAN cuma exact-match string
-        ▼
-4. FILTER BAHASA      §1.1 - buang non-`id*` sesuai kategori, WAJIB sebelum lanjut
-        ▼
-5. TOKENIZE BPE       tokenize-chunk-corpus.py, PAKAI TOKENIZER YANG SAMA PERSIS
-        │             dengan runtime (vocab 30.368, bpe-tokenizer.json - kalau
-        │             tokenizer sumbernya checkpoint, ekstrak dulu lewat
-        │             extract-tokenizer-from-checkpoint.py supaya token ID
-        │             DIJAMIN identik dengan yang dipakai training - token ID
-        │             berbeda = embedding jadi salah tanpa error yang kelihatan)
-        ▼
-6. CHUNK              rechunk-corpus-window.py — potong jadi window tetap
-        │             (126 token + BOS/EOS, konvensi yang sudah dipakai)
-        ▼
-7. HITUNG             jumlah token hasil langkah 6 = angka BPE RESMI untuk
-        │             rak ini (field totalTokenBPEResmi / totalTokenWindow126SetelahRechunk)
-        ▼
-8. TULIS MANIFEST     manifest-<kategori>.json (skema §6), termasuk sha256
-        │             dari file GZIP FINAL (§4 Gerbang 1)
-        ▼
-9. PUBLISH            Grok/dirigen: publish-korpus-release.py --file ... --tag ...
-        │             (LUAR SANDBOX - lihat §0 kenapa Claude berhenti di sini).
-        │             Draft otomatisasi langkah 10 (workflow GitHub Actions
-        │             yang jalan sendiri begitu Release publish/edit) sudah
-        │             ditulis di .github/workflows/sync-korpus-manifest.yml,
-        │             TAPI BELUM AKTIF - menunggu persetujuan eksplisit dirigen
-        │             sebelum di-commit (menambah proses otomatis berjalan
-        │             terus itu keputusan yang butuh izin langsung, bukan
-        │             sesuatu yang Claude putuskan sendiri). Sampai disetujui
-        │             dan di-commit, langkah 10 di bawah TETAP manual.
-        ▼
-10. GABUNG KE KANONIK  jalankan raget-tools/sync-manifest-from-release.mjs
-        │              (jangan edit kanonik.entries
-        │              manual lagi). Skrip ini sendiri yang: ambil manifest
-        │              kategori dari 3 tag Release resmi, verifikasi SHA256
-        │              lawan digest asset gzip (Gerbang 1b), tulis ulang
-        │              kanonik.entries + SEMUA field turunan (total,
-        │              ringkasanTotal, targetTercapai). Pakai --dry-run dulu
-        │              buat lihat apa yang AKAN berubah tanpa menulis apa pun.
-        │              Skrip keluar exit 1 TANPA menulis kalau SHA256 tidak
-        │              cocok atau manifest kategori tidak ketemu - tidak akan
-        │              pernah menulis data yang belum lolos verifikasi. Kalau
-        │              satu tag punya 2+ asset .json berskema manifest
-        │              kategori sekaligus (preseden nyata: asset "manifest.json"
-        │              lama lupa dihapus, ketumpuk sama "manifest-<kategori>
-        │              -bersih.json" baru), skrip pakai yang paling baru DAN
-        │              cetak peringatan suruh Grok/dirigen hapus yang lama -
-        │              ini kelas bug nyata yang bikin bingung "release-nya ada
-        │              2 manifest, yang mana yang bener" (2026-09-11). Habis
-        │              itu jalankan raget-tools/check-korpus-manifest-sync.mjs
-        │              (WAJIB) buat verifikasi ulang sebelum commit.
-        ▼
-11. RE-AUDIT           raget-tools/audit-corpus-tokens.mjs (PRD-RAGET-NEURAL.md
-                       Fase A.1) supaya persentase kecukupan data ikut ter-update
-```
-
-**Rumus totalnya** (satu-satunya formula resmi untuk "total token
-proyek"):
-
-```
-totalTokenBPEResmiKanonik = SUM( kanonik.entries[i].totalTokenBPEResmi )   untuk semua rak K1..Kn
-```
-
-**Tidak ada cara lain yang sah** untuk menghitung total ini — bukan
-dijumlah dari `totalKataApprox` (itu perkiraan kata, bukan token BPE
-sungguhan), bukan diketik manual terpisah dari `entries`, dan TIDAK
-BOLEH dijumlah dengan angka `staging` (data yang belum lolos
-review/dedupe/BPE — lihat kasus nyata MADLAD-400 di §7).
-
-### Bug nyata yang pernah terjadi (contoh kenapa rumus ini harus ditegakkan mekanis)
-
-Ditemukan dan diperbaiki 2026-09-09: `korpus-manifest-total.json`
-punya DUA field yang sama-sama mengklaim "satu-satunya total token
-valid" — `kanonik.totalTokenBPEResmiKanonik` (543.202.593, dihitung
-dari `kanonik.entries` yang sudah diperbarui setelah batch K2/K3
-2026-09-02) vs `ringkasanTotal.totalTokenKanonikTerverifikasi`
-(471.390.047, angka LAMA dari sebelum batch itu — luput ikut
-diperbarui). Selisih 71.812.546 token, cuma ketahuan lewat pengecekan
-manual silang, bukan otomatis. **Sudah direkonsiliasi** (lihat commit
-yang menyertakan PRD ini) — dan skrip baru
-`raget-tools/check-korpus-manifest-sync.mjs` sekarang memverifikasi
-mekanis bahwa `ringkasanTotal`/`tokenKanonikPerintahClaude`/
-`kekuranganTokenKanonik` SELALU derivasi otomatis dari `kanonik.entries`,
-exit 1 kalau ada drift. **Jalankan skrip ini setiap kali
-`kanonik.entries` berubah, sebelum commit** — ini rumus/gerbang yang
-sebelumnya tidak ada dan sekarang wajib.
-
-## 6. Skema manifest wajib
+Setiap tag rilis wajib menyertakan berkas `manifest.json` berstruktur standar sebagai berikut:
 
 ```json
+
 {
-  "kategori": "ensiklopedia",
-  "tag": "korpus-ensiklopedia-bersih",
-  "tierUkuran": "M",
-  "versi": 3,
-  "name": "korpus-ensiklopedia-bersih",
-  "generatedAt": "2026-08-26",
-  "totalDokumen": 683516,
-  "totalKataApprox": 305971509,
-  "totalByte": 470656011,
-  "sha256": "...",
-  "format": "jsonl",
-  "fields": ["text", "source", "license", "url", "lang"],
-  "license": "...",
-  "komposisiBahasa": { "id": 0.94, "en-simple": 0.04, "jv": 0.02 },
-  "proporsiInternal": { "...": "..." },
-  "proporsiAktual": { "...": "..." },
-  "rekomendasiCampuranTraining": { "...": "..." },
-  "status": "AMAN — siap dipakai training",
-  "janganPakai": ["..."]
+  "release_tag": "K dataset Indonesian",
+  "release_date": "2026-10-02",
+  "version": "1.0.0",
+  "language": "id",
+  "total_files": 12,
+  "total_size_bytes": 117039611904,
+  "total_bpe_tokens": 17420119800,
+  "tokenizer": "rategoan-bpe-v1",
+  "categories": {
+    "K1": { "name": "Pengetahuan", "parts": 3 },
+    "K2": { "name": "Dialog", "parts": 3 },
+    "K3": { "name": "Pelengkap", "parts": 3 },
+    "K4": { "name": "Coding", "parts": 3 }
+  },
+  "license": "CC-BY-4.0 / Open Data",
+  "checksum_file": "SHA256SUMS"
 }
-```
-
-Semua field wajib. Tanpa `komposisiBahasa` atau `sha256` = Release
-dianggap belum patuh PRD.
-
-## 7. Rumus campuran training (mix ratio)
 
 ```
-ensiklopedia   : 55–65%
-dialog+daerah  : 25–35%   (upsampled)
-pelengkap      : 5–15%
+
+## **6.2 Perintah Shell Bash Pembuatan & Verifikasi Checksum SHA256**
+
+Untuk menjamin presisi verifikasi tanpa kesalahan manusia, pembuatan dan pemeriksaan berkas SHA256SUMS wajib menggunakan perintah shell bash standar berikut:
+
+```sh
+# 1. Perintah Pembuatan Berkas Checksum SHA256SUMS
+sha256sum *.jsonl.gzip *.gzip > SHA256SUMS
+
+# 2. Perintah Verifikasi Integritas Berkas di Lingkungan QC / Pipeline
+sha256sum -c SHA256SUMS
 ```
 
-**Rumus oversample** (kategori kecil yang perlu dinaikkan porsinya):
-```
-target_share   = porsi yang diinginkan kategori kecil (mis. 0.35)
-anchor_bytes   = ukuran byte kategori acuan (biasanya ensiklopedia, boleh disample ke 100-300MB)
-small_bytes    = ukuran byte asli kategori kecil (sebelum diulang)
-repeat_factor  = ceil( (target_share / (1 - target_share)) * anchor_bytes / small_bytes )
-```
-Setelah repeat, gabung lalu **shuffle** sebelum tokenisasi (data
-mengelompok = model belajar satu jenis dulu, tidak diinginkan).
-Verifikasi rasio SELALU dari hitung ulang byte hasil akhir per
-kategori (`proporsiAktual` di manifest), bukan diasumsikan dari
-`repeat_factor` teoretis.
+---
 
-**Catatan penting** (dari `korpus-manifest-total.json#staging`): angka
-`totalKataApprox` dari data staging yang BELUM lolos review/dedupe
-TIDAK BOLEH dipakai untuk klaim "total token proyek" — preseden nyata
-`panenMadlad400Id` (46 juta dokumen, 8,1 miliar kata approx) di-RETIRE
-FINAL 2026-09-02 karena sample manual menunjukkan mayoritas bukan
-ensiklopedia (spam/navigasi blog), meski angka kata approx-nya besar.
-Angka kata approx BUKAN angka token BPE dan BUKAN jaminan kualitas.
+## **2.2 Keputusan Resmi Dirigen**
 
-## 8. Status kepatuhan saat ini (dicek ulang 2026-09-09, live GitHub API)
+Diputuskan secara resmi untuk **membuka jalur rak terpisah untuk Bahasa Inggris (Rak R)**:
+
+26. **Mencegah Penurunan Kualitas Bahasa:** Memaksakan terjemahan mesin massal (machine translation) pada ratusan gigabyte teks sains dan kode akan menghasilkan bahasa kaku (translationese) dan merusak konteks teknis.  
+27. **Menjaga Kemurnian Korpus Indonesia:** Korpus K tetap berdiri mandiri 100% berbahasa Indonesia murni dengan 17+ Miliar token BPE yang sudah bersih.  
+28. **Membangun Kekuatan Nalar Simetris:** Rak R dihadirkan sebagai pilar literatur berbahasa Inggris kualitas mutu textbook dengan kategori yang simetris dengan K.
+
+---
+
+# **3. ARSITEKTUR TIGA TINGKAT TAG RILIS**
+
+Sistem penempatan data diatur secara bertingkat dan disiplin melalui 3 lapis tag rilis:
 
 ```
-node -e "..." via mcp__github__list_releases owner=maetalizer-png repo=Rategoan
++--------------------------------------------------------------------------------+
+|                       TINGKAT 1: DATA BARU (DATA MENTAH)                       |
+|  Tag: Data baru Indonesian             |  Tag: data baru English               |
+|  -> Seluruh data mentah yang baru masuk/diunduh ditaruh di sini.               |
++---------------------------------------+----------------------------------------+
+                                    |
+                                    v (Melewati proses penyaringan awal)
++--------------------------------------------------------------------------------+
+|                     TINGKAT 2: PENAMPUNGAN (CALON KORPUS)                      |
+|  Tag: penampungan Indonesian           |  Tag: penampungan English             |
+|  -> Seluruh data yang sudah melewati proses penyaringan (calon korpus).        |
+|  -> Ruang transit untuk pengujian Quality Control (QC) tahap akhir.            |
++---------------------------------------+----------------------------------------+
+                                    |
+                                    v (Lolos QC tahap akhir & tokenisasi BPE)
++--------------------------------------------------------------------------------+
+|                 TINGKAT 3: RAK FINAL TEXTBOOK (KORPUS BERSIH SIAP PAKAI)       |
+|  Tag: K dataset Indonesian             |  Tag: R dataset english               |
+|  -> Korpus bersih final token BPE      |  -> Korpus bersih final token BPE     |
+|     kualitas mutu textbook Indonesia   |     kualitas mutu textbook English    |
+|     (K1, K2, K3, K4 disatukan)         |     (R1, R2, R3, R4 disatukan)        |
++--------------------------------------------------------------------------------+
 ```
 
-Release aktif hari ini: **8 tag** — 3 korpus kanonik + 2 checkpoint +
-1 tag PRD (Release ini sendiri) + 2 tag penampung baru (lihat catatan
-di bawah):
+## **3.1 Rincian Fungsi Tiap Tingkatan:**
 
-| Tag | Kategori | Status |
-|---|---|---|
-| `korpus-ensiklopedia-bersih` | K1 | ✅ kanonik, dipakai training |
-| `korpus-dialog-daerah-bersih` | K2 | ✅ kanonik, dipakai training |
-| `korpus-pelengkap-bersih` | K3 | ✅ kanonik, dipakai training |
-| `checkpoint-100m` | checkpoint | ✅ sesuai `CHECKPOINT-POLICY.md` |
-| `checkpoint-200m` | checkpoint | ⚠️ lihat catatan — checkpoint 200m TERBARU sudah pindah ke Hugging Face (`huggingface.co/Maetalizer19/rategoan-neural`), bukan Release ini lagi (`korpus-manifest-total.json#checkpoint200m`) — tag Release ini kemungkinan berisi versi lama, JANGAN diasumsikan checkpoint 200m terbaru ada di sini tanpa cek ulang |
-| `prd-data-release` | dokumen PRD | Salinan Release dari PRD ini — lihat §0 soal sinkronisasi |
-| `korpus-sejarah-indonesia-bersih` | belum masuk kanonik §1 | **Dikonfirmasi via body Release**: *"CC-BY-SA. Belum digabung K1."* — punya `manifest.json` (643B) + satu asset `.jsonl.gz` (564KB), tapi secara eksplisit BELUM digabung ke `korpus-ensiklopedia-bersih`. Perlakukan sebagai kandidat tambahan K1 yang masih menunggu langkah 6b (§5) — bukan bagian kanonik hari ini |
-| `korpus-mentah-id` | staging, belum diklasifikasi §1 | **Dikonfirmasi via body Release**: *"Belum sort. CC-BY-SA. Wiki Firecrawl + Wiktionary dump."* — 3 asset `.jsonl.gz` terpisah (dump daerah, kamus, wiki — total ~7,9MB) + `manifest.json` (1,6KB), namanya sendiri ("mentah") dan body-nya ("belum sort") menyatakan BELUM lolos §5 langkah 1-3 (bersihkan+dedupe+klasifikasi kategori). **Jangan dipakai training** sampai diproses lewat alur §5b penuh dan diklasifikasikan ke salah satu dari 5 kategori §1 |
+29. **Tingkat 1 - Data Baru (**`Data baru Indonesian` **&** `data baru English`**):**  
+    1. Berfungsi sebagai pintu masuk utama penampungan data mentah.  
+    2. Tempat menyimpan dump unduhan baru (seperti dump PubMed mentah, web crawl mentah, dsb.) sebelum tersentuh pipeline penyaringan.  
+30. **Tingkat 2 - Penampungan (**`penampungan Indonesian` **&** `penampungan English`**):**  
+    1. Berfungsi sebagai wadah bagi seluruh data yang telah selesai disaring.  
+    2. Berstatus resmi sebagai *Calon Korpus*.  
+    3. Menjadi zona karantina untuk pelaksanaan audit dan Quality Control (QC) tahap akhir sebelum dinaikkan statusnya ke rak produksi final.  
+31. **Tingkat 3 - Rak Final Mutu Textbook (**`K dataset Indonesian` **&** `R dataset english`**):**  
+    1. Berfungsi sebagai rak final korpus bersih siap latih (production-ready).  
+    2. Memiliki jaminan mutu *textbook quality* dan telah diverifikasi perhitungan token BPE-nya.
 
-**Dua tag ini contoh nyata kenapa §0 dan §5 penting**: keduanya muncul
-2026-09-05 (setelah audit migrasi 2026-08-26, jadi belum tercakup di
-riwayat migrasi lama di dokumen sumber), dan judul "(penampung)" di
-keduanya sudah dikonfirmasi cocok dengan isi body Release-nya — bukan
-staging kosong tanpa keterangan, tapi staging yang sudah diberi
-catatan status jelas oleh dirigen. **Langkah berikutnya untuk
-keduanya** (Grok/dirigen, luar sandbox): jalankan §5b penuh (`korpus-mentah-id`
-perlu classify+clean+dedupe dari nol; `korpus-sejarah-indonesia-bersih`
-tinggal langkah gabung ke K1 + hitung ulang token BPE + update
-`kanonik.entries` + jalankan `check-korpus-manifest-sync.mjs`) sebelum
-dianggap kanonik.
+## **3.2 Aturan Penambahan vs Penggantian Data, Partisi XL, & Retire Tag Lama**
 
-## 9. Resep training per ukuran model (rujukan, tidak diulang penuh di sini)
+32. **Aturan Penambahan vs Penggantian Data:** Penambahan data baru wajib menggunakan metode append/incremental tanpa menimpa partisi data yang sudah ada. Penggantian (replacement) hanya diizinkan jika ditemukan korupsi data atau revisi mayor berstatus critical fix.  
+33. **Partisi Berkas XL (> 1.5 GB):** Jika ukuran partisi melebihi 1,5 GB, berkas wajib dipecah menjadi beberapa sub-partisi (misal: `part1a`, `part1b`) untuk menjamin batas aman pengunduhan dan kepatuhan sistem rilis.  
+34. **Protokol Retire Tag Lama yang Menganggur:** Tag rilis lama yang sudah digantikan atau tidak aktif wajib diarsipkan/deprecate secara resmi dan ditandai dalam manifest agar tidak diakses oleh pipeline pelatihan aktif.
 
-Arsitektur (dModel/nLayers/nHeads/dFF), throughput, batas batch aman,
-rumus token-per-sesi vs target Chinchilla, dan template instruksi/laporan
-standar — semua sudah dijelaskan lengkap di
-[`PRD-RAGET-NEURAL.md`](PRD-RAGET-NEURAL.md) §1 dan §6 (angka param
-sama persis, sudah diverifikasi silang dengan `docs/ARSITEKTUR.md`
-§6). Dokumen ini tidak menduplikasi angka itu — cukup menegaskan:
-**angka arsitektur di kedua dokumen WAJIB selalu sama**, kalau salah
-satu diperbarui yang lain harus ikut diperbarui di commit yang sama.
+---
 
-## 10. Yang TIDAK berubah / catatan tooling usang
+# **8. STANDARISASI NAMA TAG DAN NAMA ASET FILE**
 
-- `raget-tools/CHECKPOINT-POLICY.md` tetap berlaku penuh untuk
-  checkpoint. PRD ini tidak menggantikannya, hanya menambah aturan
-  korpus teks.
-- Tokenizer tunggal (vocab 30.368) tetap dipakai semua korpus tanpa
-  kecuali — kalau butuh tokenizer dari checkpoint tertentu, ekstrak
-  lewat `extract-tokenizer-from-checkpoint.py`, jangan retrain BPE
-  baru tanpa alasan kuat (token ID beda = embedding lama tidak
-  kompatibel).
-- **`raget-tools/merge-korpus-manifest.py` BERISIKO USANG** — skrip
-  ini menulis skema lama (`entries`+`totalTokenGabungan`+`targetGerbang`)
-  yang JAUH lebih sederhana dari skema `kanonik`/`staging`/`ringkasanTotal`
-  yang sekarang dipakai `korpus-manifest-total.json`. **Menjalankan
-  skrip ini apa adanya akan MENIMPA manifest kaya-informasi sekarang
-  dengan skema lama yang lebih miskin** — JANGAN dijalankan sampai
-  skrip ini diperbarui untuk membaca+mempertahankan struktur `kanonik`
-  yang ada, atau secara eksplisit digantikan alur §5b di atas.
+## **8.1 Poros Bahasa Indonesia (Tag: K dataset Indonesian)**
 
-## 11. Ringkasan mekanisme anti-bentrok (satu paragraf)
+Tag ini menyatukan seluruh aset K1, K2, K3, dan K4 yang saat ini masih berada di tag terpisah ke dalam **satu tag rilis tunggal**. Isi aset tetap sama persis seperti korpus bersih saat ini (17+ Miliar token BPE).  
+Standar penamaan aset file di dalam tag `K dataset Indonesian`:
 
-Satu kategori = satu tag permanen (§2). Versi hidup di manifest, bukan
-di nama tag — tidak ada dua tag untuk hal yang sama. Satu file fisik
-per kategori (§3.1) — tidak ada asset terfragmentasi yang harus
-disatukan manual saat load. SHA256 tiga gerbang (§4) — data yang rusak/
-tertukar terdeteksi sebelum dipakai, bukan sesudah hasil training aneh.
-Total token SELALU derivasi mekanis dari `kanonik.entries` (§5b),
-diverifikasi `check-korpus-manifest-sync.mjs` — tidak ada dua angka
-yang sama-sama "satu-satunya valid". Titik serah terima Claude→Grok
-jelas di batas publish Release (§0) — tidak ada dua pihak yang
-sama-sama mencoba mempublikasikan hal yang sama secara bersamaan.
+* **K1 (Pengetahuan):** `K1-pengetahuan-part1.jsonl.gzip`, `K1-pengetahuan-part2.jsonl.gzip`, dst.  
+* **K2 (Dialog):** `K2-dialog-part1.jsonl.gzip`, `K2-dialog-part2.jsonl.gzip`, dst.  
+* **K3 (Pelengkap):** `K3-pelengkap-part1.gzip`, `K3-pelengkap-part2.gzip`, dst.  
+* **K4 (Coding):** `K4-coding-part1.jsonl.gzip`, `K4-coding-part2.jsonl.gzip`, dst.
 
-## 12. Penataan tag 2026-10-02 — spesifikasi Drive, mengikat untuk nama
+## **8.2 Poros Bahasa Inggris (Tag: R dataset english)**
 
-Sumber: Google Drive `Spesifikasi Arsitektur Korpus Rategoan — Rak K, R, dan Penampungan` (2 Oktober 2026). Bagian ini menimpa nama tag di §2 untuk penataan ke depan. Tidak mengubah isi K1–K4, lantai BPE, gerbang SHA, batas 1,5 GB, atau larangan memangkas topik bagus.
+Tag ini menampung seluruh aset R1, R2, R3, dan R4 full berbahasa Inggris kualitas mutu textbook. Pembagian kategorinya dibuat sama persis dan simetris dengan K untuk seluruh materi berbahasa Inggris.  
+Standar penamaan aset file di dalam tag `R dataset english`:
 
-Lantai tetap: K1 2.205.108.688 · K2 434.724.058 · K3 15.011.217.697 · total 17.651.050.443.
+* **R1 (Pengetahuan):** `R1-pengetahuan-part1.jsonl.gzip`, `R1-pengetahuan-part2.jsonl.gzip`, dst.  
+* **R2 (Dialog):** `R2-dialog-part1.jsonl.gzip`, `R2-dialog-part2.jsonl.gzip`, dst.  
+* **R3 (Pelengkap):** `R3-pelengkap-part1.jsonl.gzip`, `R3-pelengkap-part2.jsonl.gzip`, dst.  
+* **R4 (Coding):** `R4-coding-part1.jsonl.gzip`, `R4-coding-part2.jsonl.gzip`, dst.
 
-### 12.1 Tiga tingkat
+### **8.2.1 Strategi Tokenizer & Vokabulari Rak R**
 
-| Tingkat | Tag | Isi |
-|---|---|---|
-| Mentah Indonesia | `Data baru Indonesian` | Data mentah bahasa Indonesia sebelum saring |
-| Mentah Inggris | `data baru English` | Data mentah bahasa Inggris sebelum saring |
-| Calon Indonesia | `penampungan Indonesian` | Sudah disaring, menunggu QC, belum rak |
-| Calon Inggris | `penampungan English` | Sudah disaring, menunggu QC, belum rak |
-| Rak Indonesia | `K dataset Indonesian` | Korpus bersih mutu textbook, token BPE |
-| Rak Inggris | `R dataset english` | Korpus bersih mutu textbook, bahasa Inggris |
+Aset pada Rak R diproses menggunakan tokenizer BPE Rategoan yang telah disesuaikan untuk efisiensi kompresi teks akademik dan teknis berbahasa Inggris. Hal ini menjamin rasio token-per-karakter yang optimal serta kompatibilitas penuh dengan vokabulari gabungan K & R.
 
-Tag lama `data-baru` dan `penampung` tetap ada sampai isinya pindah dan SHA cocok. Jangan hapus dulu.
+## **8.3 Tingkat Penampungan (Tag: penampungan Indonesian & penampungan English)**
 
-### 12.2 Nama aset rak
+* Menampung seluruh data yang telah melewati proses penyaringan (calon korpus).  
+* Tempat pelaksanaan QC tahap akhir sebelum dipromosikan ke rak final K atau R.
 
-Isi K1–K4 tetap seperti rak yang sudah berjalan. Hanya nama file yang distandarkan:
+## **8.4 Tingkat Data Baru (Tag: Data baru Indonesian & data baru English)**
 
-- `K1-pengetahuan-part1.jsonl.gz` dan seterusnya
-- `K2-dialog-part1.jsonl.gz` dan seterusnya
-- `K3-pelengkap-part1.jsonl.gz` dan seterusnya
-- `K4-coding-part1.jsonl.gz` dan seterusnya
+* Menampung seluruh data mentah yang baru masuk ke sistem rilis.
 
-Inggris, kategori sama, bahasa Inggris:
+---
 
-- `R1-pengetahuan-part1.jsonl.gz`
-- `R2-dialog-part1.jsonl.gz`
-- `R3-pelengkap-part1.jsonl.gz`
-- `R4-coding-part1.jsonl.gz`
+# **11. STANDAR KETERANGAN RESMI SETIAP TAG (RELEASE NOTES)**
 
-Gzip paling 1,5 GB. Part di bawah 20 MB digabung. SHA256 dari file gzip final.
+Setiap tag rilis pada GitHub Releases wajib menyertakan deskripsi resmi terstandarisasi sebagai berikut:
 
-### 12.3 Keterangan wajib di tiap tag
+## **A. Keterangan pada Tag: K dataset Indonesian**
 
-- `K dataset Indonesian`: rak final korpus bersih mutu textbook Bahasa Indonesia. Isi tetap K1 pengetahuan, K2 dialog, K3 pelengkap, K4 coding.
-- `R dataset english`: rak final yang sama untuk Bahasa Inggris. Kosong sampai ada data Inggris yang lolos saring dan QC.
-- `penampungan Indonesian` / `penampungan English`: calon, sudah disaring, menunggu QC. Bukan angka kanonik.
-- `Data baru Indonesian` / `data baru English`: mentah. Bukan rak.
+**K dataset Indonesian**
 
-Inggris yang sudah ditolak (PDF open-textbooks, Cosmopedia) tidak otomatis masuk rak R.
+Tag rilis final untuk korpus bersih mutu textbook Bahasa Indonesia (token BPE).  
+Menyatukan seluruh aset korpus bersih ke dalam satu rak rilis terpadu dengan isi tetap sama seperti rilis saat ini:  
+- `K1-pengetahuan-part*.jsonl.gzip` : Aset pengetahuan K1  
+- `K2-dialog-part*.jsonl.gzip` : Aset dialog K2  
+- `K3-pelengkap-part*.gzip` : Aset pelengkap K3  
+- `K4-coding-part*.jsonl.gzip` : Aset coding K4
+
+Setiap rilis dilengkapi dengan SHA256SUMS dan manifest.json untuk verifikasi integritas data.
+
+## **B. Keterangan pada Tag: R dataset english**
+
+**R dataset english**
+
+Tag rilis final untuk korpus bersih mutu textbook Bahasa Inggris (token BPE).  
+Kategori aset dibuat sama persis dengan K untuk materi berbahasa Inggris:  
+- `R1-pengetahuan-part*.jsonl.gzip` : Aset pengetahuan R1  
+- `R2-dialog-part*.jsonl.gzip` : Aset dialog R2  
+- `R3-pelengkap-part*.jsonl.gzip` : Aset pelengkap R3  
+- `R4-coding-part*.jsonl.gzip` : Aset coding R4
+
+Setiap rilis dilengkapi dengan SHA256SUMS dan manifest.json untuk verifikasi integritas data.
+
+## **C. Keterangan pada Tag: penampungan Indonesian & penampungan English**
+
+**Penampungan (Calon Korpus)**
+
+Berisi seluruh data yang sudah melewati proses penyaringan awal dan telah menjadi calon korpus.  
+Data di tag ini disiapkan untuk menjalani Quality Control (QC) tahap akhir sebelum dimasukkan ke rak final K dataset Indonesian / R dataset english.
+
+## **D. Keterangan pada Tag: Data baru Indonesian & data baru English**
+
+**Data Baru (Data Mentah)**
+
+Tempat penampungan seluruh data mentah yang baru masuk sebelum masuk ke tahapan pemrosesan dan penyaringan.
+
+Setiap rilis tag pada Bab 11 wajib melampirkan berkas pendamping SHA256SUMS dan manifest.json sebagai standar verifikasi integritas dan metadata rilis.  
+---
+
+# **10. STRATEGI PELATIHAN DUAL-KORPUS (K & R TRAINING STRATEGY)**
+
+35. **Ukuran File Partisi:** Setiap partisi file `.jsonl.gzip` (atau `.gzip`) diatur berukuran optimal 1,35–1,5 GB untuk memastikan kepatuhan penuh terhadap batas ukuran aset rilis GitHub (maksimal 2 GiB per aset) dan kemudahan unduhan.  
+36. **Format Data Zero-Conversational JSONL:** Seluruh berkas korpus bersih disusun menggunakan format JSONL murni tanpa struktur conversational/chat berlebih untuk efisiensi parsing dan proses tokenisasi BPE langsung.  
+37. **Berkas Verifikasi Integritas (SHA256SUMS & manifest.json):** Setiap tag rilis wajib melampirkan berkas `SHA256SUMS` untuk validasi checksum serta berkas `manifest.json` yang memuat metadata rilis, jumlah partisi, total token BPE, dan lisensi data.  
+38. **Penyatuan Tag K1-K4:** Proses konsolidasi dari tag K1, K2, K3, dan K4 yang saat ini terpisah menjadi 1 tag tunggal `K dataset Indonesian` dilakukan tanpa mengubah bit data maupun urutan isi korpus yang sudah ada.  
+39. **Penyaluran Data Batch 2 Oktober 2026:** Data mentah PubMed Central, peS2o, dan StackExchange yang saat ini berada di rilis `data-baru-20261002` dialokasikan ke jalur English: ditempatkan di `data baru English` -> disaring ke `penampungan English` -> QC tahap akhir -> masuk ke `R dataset english`.
+
+---
+
+## **10.1 FILOSOFI PELATIHAN: DUAL-ENGINE ARCHITECTURE**
+
+Setelah tersedianya dua rak korpus bersih mutu textbook (K dataset Indonesian dan R dataset english), strategi pelatihan model fondasi Rategoan dirancang mengikuti metodologi AI frontier:
+
+40. Korpus K sebagai Identity Engine (Pilar Bahasa & Budaya):  
+    1. Menjamin model memiliki keluwesan alami, kepatuhan tata bahasa (PUEBI/KBBI), pemahaman konteks sosial-budaya Indonesia, sastra, hukum, dan regulasi nasional tanpa canggung.  
+41. Korpus R sebagai Reasoning Engine (Pilar Nalar & Sains Global):  
+    1. Menjadi motor logika, penalaran multi-langkah (multi-step reasoning), pemahaman matematika, literatur kedokteran/biomedis (PubMed), riset sains (peS2o), pemecahan masalah teknis (StackExchange), dan arsitektur kode/sistem (R4).  
+    2. Model mentransfer kemampuan penalaran (reasoning transfer) dari bahasa Inggris ke dalam cara berpikir model saat memproses prompt bahasa Indonesia.
+
+---
+
+## **10.2 Strategi Campuran Data (Data Mixing & Sampling Weight)**
+
+DataLoader pada fase pre-training menerapkan bobot sampling proporsional:
+
+* Total Porsi Korpus K (Bahasa Indonesia): 55% - 60%  
+  * K1 (Pengetahuan Umum & Sains Dasar): 20%  
+  * K2 (Dialog & Teks Formal): 15%  
+  * K3 (Pelengkap Web Terkurasi): 10%  
+  * K4 (Buku Raget Coding ID): 10% - 15%  
+* Total Porsi Korpus R (Bahasa Inggris): 40% - 45%  
+  * R1 (Pengetahuan Global & Ensiklopedia EN): 10%  
+  * R2 (Sains, Medis, & Riset Akademik / PubMed, peS2o): 15%  
+  * R3 (Technical Problem Solving / StackExchange): 10%  
+  * R4 (Coding & Computer Systems EN): 10%
+
+---
+
+## **10.3 Tahapan Kurikulum Pelatihan (Two-Stage Curriculum Learning)**
+
+Pelatihan tidak dilakukan secara statis datar, melainkan melalui 2 fase dinamis:
+
+42. Fase 1: Fondasi Nalar dan Representasi Bersama (Initial Pre-Training - 80% Total Steps)  
+    1. Rasio seimbang: 50% K : 50% R.  
+    2. Tujuan: Membentuk ruang representasi semantik bersama (shared latent space). Model mempelajari konsep logika abstrak dan sains tingkat tinggi secara paralel dalam dua bahasa.  
+43. Fase 2: Indonesian Alignment & Annealing (Cool-Down Phase - 20% Terakhir)  
+    1. Rasio diubah menjadi: 75% - 80% K : 20% - 25% R.  
+    2. Learning rate diturunkan (cosine decay) dengan batch data K2 dan K4 kualitas tertinggi.  
+    3. Tujuan: 'Mengunci' gaya keluaran model agar secara intuitif mengutamakan Bahasa Indonesia yang luwes dan alami, sekaligus mempertahankan seluruh daya nalar sains yang telah diserap dari korpus R pada Fase 1.
+
+---
+
+## **10.4 Evaluasi Cross-Lingual Transfer**
+
+Model yang berhasil adalah model yang mampu:
+
+44. Menerima instruksi dalam Bahasa Indonesia mengenai masalah medis/sains kompleks atau coding tingkat lanjut.
+
+---
+
+## **10.5 Formula Matematis Sampling Weight & Oversample Ratio**
+
+Untuk menyeimbangkan distribusi data antara Korpus K dan Korpus R selama fase pre-training, probabilitas sampling P(D_i) untuk setiap domain D_i dihitung menggunakan formula matematis oversample terskala:  
+`P(D_i) = (N_i * alpha_i) / sum_j(N_j * alpha_j)`  
+Di mana N_i adalah jumlah token mentah domain i, dan alpha_i adalah koefisien pembobotan mutu (quality weight multiplier) yang ditetapkan berdasarkan tingkat kebersihan dan urgensi domain (misal: K2/K4 diberikan alpha > 1.0 untuk oversampling terkurasi).
+
+# **12. KESIMPULAN**
+
+Melalui spesifikasi PRD RELEASE ini, rilis korpus Rategoan memiliki tata kelola penempatan data yang rapi, transparan, dan terverifikasi penuh:
+
+45. Data mentah tidak akan pernah bercampur dengan data produksi.  
+46. Data yang berstatus calon korpus memiliki tempat karantina yang jelas di tag penampungan.  
+47. Rak final `K dataset Indonesian` dan `R dataset english` menjadi sumber tunggal (single source of truth) yang bersih, mudah diakses skrip pelatihan, dan terjaga standarisasinya.  
+48. Memanfaatkan nalar sains dari R2/R3/R4 untuk menyelesaikan logika masalah tersebut.  
+49. Menyampaikan jawaban akhir secara runtut, fasih, dan elegan dalam Bahasa Indonesia (K).
