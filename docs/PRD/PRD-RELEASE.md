@@ -495,3 +495,49 @@ diverifikasi `check-korpus-manifest-sync.mjs` — tidak ada dua angka
 yang sama-sama "satu-satunya valid". Titik serah terima Claude→Grok
 jelas di batas publish Release (§0) — tidak ada dua pihak yang
 sama-sama mencoba mempublikasikan hal yang sama secara bersamaan.
+
+## 12. Penataan tag 2026-10-02 — spesifikasi Drive, mengikat untuk nama
+
+Sumber: Google Drive `Spesifikasi Arsitektur Korpus Rategoan — Rak K, R, dan Penampungan` (2 Oktober 2026). Bagian ini menimpa nama tag di §2 untuk penataan ke depan. Tidak mengubah isi K1–K4, lantai BPE, gerbang SHA, batas 1,5 GB, atau larangan memangkas topik bagus.
+
+Lantai tetap: K1 2.205.108.688 · K2 434.724.058 · K3 15.011.217.697 · total 17.651.050.443.
+
+### 12.1 Tiga tingkat
+
+| Tingkat | Tag | Isi |
+|---|---|---|
+| Mentah Indonesia | `Data baru Indonesian` | Data mentah bahasa Indonesia sebelum saring |
+| Mentah Inggris | `data baru English` | Data mentah bahasa Inggris sebelum saring |
+| Calon Indonesia | `penampungan Indonesian` | Sudah disaring, menunggu QC, belum rak |
+| Calon Inggris | `penampungan English` | Sudah disaring, menunggu QC, belum rak |
+| Rak Indonesia | `K dataset Indonesian` | Korpus bersih mutu textbook, token BPE |
+| Rak Inggris | `R dataset english` | Korpus bersih mutu textbook, bahasa Inggris |
+
+Tag lama `data-baru` dan `penampung` tetap ada sampai isinya pindah dan SHA cocok. Jangan hapus dulu.
+
+### 12.2 Nama aset rak
+
+Isi K1–K4 tetap seperti rak yang sudah berjalan. Hanya nama file yang distandarkan:
+
+- `K1-pengetahuan-part1.jsonl.gz` dan seterusnya
+- `K2-dialog-part1.jsonl.gz` dan seterusnya
+- `K3-pelengkap-part1.jsonl.gz` dan seterusnya
+- `K4-coding-part1.jsonl.gz` dan seterusnya
+
+Inggris, kategori sama, bahasa Inggris:
+
+- `R1-pengetahuan-part1.jsonl.gz`
+- `R2-dialog-part1.jsonl.gz`
+- `R3-pelengkap-part1.jsonl.gz`
+- `R4-coding-part1.jsonl.gz`
+
+Gzip paling 1,5 GB. Part di bawah 20 MB digabung. SHA256 dari file gzip final.
+
+### 12.3 Keterangan wajib di tiap tag
+
+- `K dataset Indonesian`: rak final korpus bersih mutu textbook Bahasa Indonesia. Isi tetap K1 pengetahuan, K2 dialog, K3 pelengkap, K4 coding.
+- `R dataset english`: rak final yang sama untuk Bahasa Inggris. Kosong sampai ada data Inggris yang lolos saring dan QC.
+- `penampungan Indonesian` / `penampungan English`: calon, sudah disaring, menunggu QC. Bukan angka kanonik.
+- `Data baru Indonesian` / `data baru English`: mentah. Bukan rak.
+
+Inggris yang sudah ditolak (PDF open-textbooks, Cosmopedia) tidak otomatis masuk rak R.
