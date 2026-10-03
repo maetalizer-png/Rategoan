@@ -2,18 +2,16 @@
 import { llmMode } from '../../js/state/llm-mode.js';
 
 const SERVER_TIMEOUT_MS = 8000;
+const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
-  ringan: '../raget-data/neural/raget-neural-massive50m.safetensors',
-  berat: '../raget-data/neural/raget-neural-massive100m.safetensors',
-  // super = checkpoint 200M: TIDAK dibundel di repo (>100MB, kebijakan
-  // CHECKPOINT-POLICY.md), diambil dari Hugging Face Hub (BUKAN GitHub
-  // Release - asset Release dikonfirmasi tidak pernah kirim header
-  // Access-Control-Allow-Origin, jadi fetch() browser selalu gagal; HF
-  // Hub resolve/main mendukung fetch lintas-origin, dikonfirmasi lewat
-  // curl langsung: access-control-allow-origin: *). Diambil di
-  // background saat app dibuka (lihat prefetchBest()), sw.js meng-cache
-  // origin ini supaya sekali diambil langsung offline setelahnya.
-  super: 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/raget-neural-massive200m.safetensors',
+  // Semua checkpoint ada di Hugging Face, bukan git dan bukan GitHub
+  // Release. Asset Release tidak mengirim Access-Control-Allow-Origin,
+  // jadi fetch() browser gagal diam-diam. HF resolve/main mengirim
+  // access-control-allow-origin: *. URL absolut tetap valid untuk
+  // `new URL(..., import.meta.url)`.
+  ringan: HF + 'raget-neural-massive50m.safetensors',
+  berat: HF + 'raget-neural-massive100m.safetensors',
+  super: HF + 'raget-neural-massive200m.safetensors',
 };
 
 let cache = null;

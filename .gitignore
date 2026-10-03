@@ -1,8 +1,5 @@
-raget/raget-data/neural/raget-neural-massive200m.safetensors
-raget/raget-data/neural/*-300m.safetensors
-raget/raget-data/neural/*-500m.safetensors
-raget/raget-data/neural/*-1b.safetensors
-raget/raget-data/neural/*-2b.safetensors
+# Semua checkpoint neural disimpan di Hugging Face, bukan di git.
+raget/raget-data/neural/*.safetensors
 __pycache__/
 *.pyc
 

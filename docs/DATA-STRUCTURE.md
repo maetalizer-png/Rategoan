@@ -16,7 +16,7 @@ Di dalam tiap akar:
 |---|---|
 | `json/` | Data terstruktur, satu file/folder per domain |
 | `jsonl/` | Data baris-per-baris (korpus, daftar datar) |
-| `neural/` | Artefak biner untuk mesin neural eksperimental (checkpoint `.safetensors`, laporan training) |
+| `neural/` | Folder lokal lama. Checkpoint `.safetensors` tidak di-commit; lihat `raget/raget-tools/CHECKPOINT-POLICY.md` |
 
 `raget-data/neural/` menyimpan bobot model; `raget-devlog/neural/` menyimpan
 laporan/log dari eksperimen training itu (`training-report.json`,

@@ -23,63 +23,34 @@ di luar (mis. laporan resmi ukuran GPT-2) biasanya sudah memperhitungkan
 tying, jadi "200.709.120" sebaiknya TIDAK disebut sebagai satu-satunya
 angka "parameter checkpoint ini" tanpa embel-embel penjelasan tying.
 
-Aturan PERMANEN sejak Round 9 (kebijakan "dirigen"):
+Aturan sejak 3 Oktober 2026. Menggantikan aturan Round 9 yang menyimpan checkpoint di bawah 100MB di git dan yang di atasnya di GitHub Release.
 
-- **git** hanya menyimpan kode + checkpoint **di bawah 100MB** (batas keras
-  GitHub). Saat ini itu berarti `raget-neural-tiny.safetensors`,
-  `raget-neural-massive50m.safetensors` (35,9MB), dan
-  `raget-neural-massive100m.safetensors` (77,8MB) tetap sebagai blob git
-  biasa.
-- **Checkpoint >100MB** (mis. `raget-neural-massive200m.safetensors`,
-  163,41MB) **TIDAK** boleh di-commit ke git. Publikasikan sebagai asset
-  di GitHub Release, tag `checkpoint-200m` (atau ukuran terkait untuk
-  model yang lebih besar nanti: `checkpoint-300m`, dst).
-- **JANGAN pakai Git LFS.** Kuota bandwidth LFS gratis GitHub kecil dan
-  gampang habis ("jebakan" kuota) - Release asset tidak kena kuota
-  bandwidth LFS.
-- `.gitignore` di root repo sudah memuat pola untuk checkpoint >100MB
-  (massive200m dan pola nama 300m/500m/1b/2b untuk model masa depan).
+- **Semua** berkas `.safetensors`, tanpa kecuali ukuran, disimpan di satu repo Hugging Face: `huggingface.co/Maetalizer19/rategoan-neural`.
+- **Bukan git, bukan GitHub Release.** Asset Release tidak mengirim `Access-Control-Allow-Origin`, jadi `fetch()` browser gagal diam-diam dan tier jatuh ke model yang lebih ringan. HF `resolve/main` mengirim `access-control-allow-origin: *`.
+- **Jangan pakai Git LFS** di repo GitHub.
+- `.gitignore` menolak `raget/raget-data/neural/*.safetensors`.
 
-## Cara mengunduh checkpoint besar
+Tier browser di `neural-provider.js` (berkas yang tadinya di git, bukan aset tag rilis):
 
-Notebook Colab (`raget-tools/colab-train-gpu.ipynb`) dan
-`train-massive-colab-gpu.py` mengunduh checkpoint >100MB dari Release
-lewat GitHub API (pola yang sama dipakai untuk korpus jilid 2):
+| Tier | Berkas | SHA256 |
+|---|---|---|
+| ringan | `raget-neural-massive50m.safetensors` | `5695724eb0b21f510ae608441ce794cfd037fc34715de2cc1db197f578525c67` |
+| berat | `raget-neural-massive100m.safetensors` | `2e382d64ad224ec8b9a703f2a3d9015a737466a9b58dc878158189e9f9567729` |
+| super | `raget-neural-massive200m.safetensors` | `69daa21dd674643e68aa7fd648d592692db15017076d140adbef5dad8b5fc2a3` |
+
+Bukan tier browser, tetap disimpan di HF supaya tidak hilang:
+
+- `raget-neural-tiny.safetensors` — tidak dipetakan ke tier. Pemakainya hanya skrip arsip `train-tiny-checkpoint.mjs` dan `diagnose-neural-generation.mjs`.
+- `raget-neural-50m.safetensors` — keluaran training preset small, bukan jalur muat browser.
+- `raget-neural-massive100m-rilis.safetensors`, SHA256 `50a2f579382ce21d29ba0f1d26ec4dcb8bc0d5c07694bc4a74df41bfeaf7444e`, 81.589.032 byte. Ini salinan tag GitHub `checkpoint-100m`. Byte-nya berbeda dari berkas tier berat.
+
+## Cara menerbitkan checkpoint
 
 ```
-curl -H "Authorization: Bearer $GITHUB_TOKEN" \
-     -H "Accept: application/octet-stream" \
-     https://api.github.com/repos/<owner>/<repo>/releases/assets/<asset_id> \
-     -o raget-neural-massive200m.safetensors
+export HF_TOKEN=...
+python3 raget/raget-tools/publish-checkpoint-huggingface.py <path.safetensors> Maetalizer19/rategoan-neural
 ```
 
-Asset ID dicari lewat `GET /repos/<owner>/<repo>/releases/tags/checkpoint-200m`.
+Skrip menolak dianggap selesai kalau SHA256 remote tidak cocok. Ubah `CHECKPOINT_BY_TIER` hanya jika berkas itu memang tier browser.
 
-## Saat checkpoint baru >100MB selesai training
-
-1. Simpan checkpoint seperti biasa (lokal saja, jangan `git add` -
-   `git_auto_commit()` di `train-massive-colab-gpu.py` sudah otomatis
-   skip file >95MB).
-2. Upload sebagai Release asset baru:
-   `python3 raget-tools/publish-checkpoint-release.py <path.safetensors> checkpoint-<ukuran>`
-   (butuh `GITHUB_TOKEN` scope `repo` di environment - di notebook Colab
-   sudah otomatis ter-set di sel awal).
-3. Update dokumentasi/notebook yang menunjuk ke asset lama jika nama
-   berubah.
-4. `git status` harus tetap bersih untuk file checkpoint >100MB - kalau
-   muncul sebagai "untracked", itu memang seharusnya begitu (dicegah
-   `.gitignore`), bukan bug.
-
-## Catatan penting: kenapa Claude tidak bisa upload sendiri
-
-Sesi sandbox Claude Code Remote (tempat kode ini biasanya ditulis) TIDAK
-diizinkan membuat/mengedit/menghapus GitHub Release - API mengembalikan
-`"Creating, editing, or deleting releases is not permitted for this
-session type."` walau token yang sama BISA baca release/unduh asset. Ini
-pembatasan level-sesi yang disengaja (bukan bug, bukan masalah izin
-repo) - jadi setiap kali ada checkpoint/korpus baru >100MB yang perlu
-diarsipkan ke Release, publikasinya harus dijalankan dari luar sandbox itu
-(notebook Colab dengan token milik pemilik repo, atau mesin lokal) memakai
-`publish-checkpoint-release.py` di atas. Skrip itu generik - bisa dipakai
-juga untuk mengarsipkan korpus bersih (`korpus-jilid-N-clean`), bukan
-cuma checkpoint.
+Tag GitHub `checkpoint-100m` dan `checkpoint-200m` tidak dipakai lagi setelah salinan HF di atas cocok. Jangan membuat tag checkpoint baru di GitHub Release.

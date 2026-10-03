@@ -2,9 +2,8 @@
 const CDN_PACKAGE_CACHE = 'raget-cdn-packages-v1';
 const CDN_PACKAGE_ORIGINS = [
   'https://cdn.jsdelivr.net',
-  // huggingface.co juga menyajikan checkpoint 200M (~163MB, diambil
-  // otomatis di background - lihat neural-provider.js) - sekali diunduh,
-  // disajikan dari cache ini terus (offline-capable) sampai versi cache
+  // huggingface.co menyajikan seluruh checkpoint neural (ringan, berat,
+  // super). Sekali diunduh, disajikan dari cache ini sampai versi cache
   // di atas dinaikkan.
   'https://huggingface.co',
 ];

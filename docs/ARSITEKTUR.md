@@ -52,7 +52,7 @@ lapis").
 | `raget-memory/` | Memori jangka pendek (`memory-short.js`, 10 giliran terakhir), jangka panjang (`memory-long.js`, fakta diajarkan pengguna), index pencarian (`memory-index.js`), few-shot lokal, feedback/streak store | **Jalan** |
 | `raget-database/` | `raget-db.js` - riwayat catatan Q&A + log kueri tak terjawab, disimpan lewat `idb-gateway.js` (IndexedDB), skema di `raget-schema.js` | **Jalan** |
 | `raget-retrieval/` | `bm25.js` (ranking BM25 satu pintu), `retrieve.js` (pemanggil scoreCorpus lintas domain) | **Jalan** |
-| `raget-data/` | `json/` (24 domain data terstruktur), `jsonl/` (korpus eksternal), `neural/` (4 checkpoint `.safetensors` - **DATA**, bukan kode) | **Data resmi, tidak disentuh** - lihat `docs/DATA-STRUCTURE.md` |
+| `raget-data/` | `json/` (24 domain data terstruktur), `jsonl/` (korpus eksternal). Checkpoint `.safetensors` tidak lagi di git; semuanya di Hugging Face `Maetalizer19/rategoan-neural` | Data domain tetap di repo. Otak neural tidak di-commit |
 | `raget-devlog/` | Log pengembangan, persona/fewshot JSON, `neural/` (laporan training + eval log - **DATA**) | **Data/log, tidak disentuh** |
 | `raget-tools/` | Skrip dev-only: `lint-check.mjs`, `run-bench.mjs`, skrip training/eval neural (`train-*.mjs`, `eval-*.mjs`), migrasi data | **Jalan (tooling, bukan bagian app)** |
 
