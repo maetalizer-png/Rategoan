@@ -2,6 +2,8 @@ import { $ } from '../../shared/dom.js';
 import { exportSlides, rememberSlide, rememberArtifact } from '../../shared/slides-export.js';
 import { toast } from '../core/toast.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
+import { buildDocxBytes } from '../../shared/docx-local.js';
+import { buildZip } from '../../shared/zip-local.js';
 
 let current = { type: 'slide', title: 'Slide', fileName: 'slide.pptx', outline: [], code: '', lang: 'js', markdown: '' };
 
@@ -12,7 +14,11 @@ function extFor(type, lang) {
 }
 
 function downloadText(name, text) {
-  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  downloadBytes(name, text, 'text/plain;charset=utf-8');
+}
+
+function downloadBytes(name, bytes, mime) {
+  const blob = new Blob([bytes], { type: mime || 'application/octet-stream' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = name;
@@ -122,7 +128,14 @@ function renderDocument(markdown, title) {
 function setChrome(type) {
   const exp = $('artifact-export');
   const run = $('artifact-run');
-  if (exp) exp.textContent = type === 'slide' ? 'Unduh PPTX' : type === 'code' ? 'Unduh file' : type === 'table' ? 'Unduh CSV' : 'Unduh MD';
+  const name = current.fileName || '';
+  let label = 'Unduh MD';
+  if (type === 'slide') label = 'Unduh PPTX';
+  else if (type === 'table') label = 'Unduh CSV';
+  else if (type === 'zip') label = 'Unduh ZIP';
+  else if (type === 'code') label = 'Unduh file';
+  else if ((type === 'document' || type === 'docx') && /\.docx$/i.test(name)) label = 'Unduh DOCX';
+  if (exp) exp.textContent = label;
   if (run) run.hidden = type !== 'code';
 }
 
@@ -140,13 +153,15 @@ function normalize(first, title, fileName) {
     lang: first.lang || 'js',
     markdown: first.markdown || first.text || '',
     rows: first.rows || [],
+    files: first.files || [],
   };
 }
 
 function renderCurrent() {
   setChrome(current.type);
   if (current.type === 'code') renderCode(current.code, current.title);
-  else if (current.type === 'document') renderDocument(current.markdown, current.title);
+  else if (current.type === 'document' || current.type === 'docx') renderDocument(current.markdown, current.title);
+  else if (current.type === 'zip') renderDocument(current.markdown, current.title);
   else if (current.type === 'table') renderTable(current.rows, current.title);
   else renderSlide(current.outline, current.title);
 }
@@ -186,10 +201,20 @@ export const artifact = {
       downloadText(current.fileName || ('cuplikan' + extFor('code', current.lang)), code || '');
       return;
     }
-    if (current.type === 'document') {
+    if (current.type === 'document' || current.type === 'docx' || current.type === 'zip') {
       const box = document.querySelector('#artifact-stage .art-doc');
       const md = box ? box.textContent : current.markdown;
-      downloadText(current.fileName || 'dokumen.md', md || '');
+      const name = current.fileName || (current.type === 'zip' ? 'paket.zip' : 'dokumen.md');
+      if (current.type === 'zip' || /\.zip$/i.test(name)) {
+        const files = Array.isArray(current.files) && current.files.length ? current.files : [{ name: 'catatan.txt', data: md || '' }];
+        downloadBytes(name, buildZip(files), 'application/zip');
+        return;
+      }
+      if (current.type === 'docx' || /\.docx$/i.test(name)) {
+        downloadBytes(name, buildDocxBytes(md || ''), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        return;
+      }
+      downloadText(name, md || '');
       return;
     }
     const outline = readOutline();

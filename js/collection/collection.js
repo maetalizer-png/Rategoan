@@ -7,6 +7,10 @@ import { collectionSearch } from '../../raget/raget-memory/collection-search.js'
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { drawer } from '../ui/drawer.js';
+import { whatsappImporter } from '../../vault/whatsapp/importer.js';
+import { evernoteImporter } from '../../vault/evernote/importer.js';
+import { notionImporter } from '../../vault/notion/importer.js';
+import { icsParser } from '../../vault/calendar/ics-parser.js';
 
 const TEMPLATE = `
       <div class="settings-page">
@@ -41,6 +45,10 @@ const TEMPLATE = `
         <button id="coll-export-md" type="button">Ekspor Markdown</button>
         <button id="coll-export-json" type="button">Backup JSON</button>
         <button id="coll-import" type="button">Impor JSON</button>
+        <button id="coll-import-wa" type="button">Impor WhatsApp</button>
+        <button id="coll-import-enex" type="button">Impor Evernote</button>
+        <button id="coll-import-notion" type="button">Impor Notion</button>
+        <button id="coll-import-ics" type="button">Impor Kalender</button>
       </div>
 `;
 
@@ -453,6 +461,61 @@ function downloadFile(content, mime, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 500);
 }
 
+function armImport(kind, accept) {
+  const input = $('coll-import-file');
+  input.dataset.kind = kind;
+  input.accept = accept;
+  input.click();
+}
+
+async function rememberChunk(text, tag, title) {
+  const clean = String(text || '').trim();
+  if (!clean) return 0;
+  await collectionStore.addItem({ text: clean.slice(0, 4000), role: 'user', tag: tag, kind: 'note', chatTitle: title || '', note: 'Impor ' + tag });
+  return 1;
+}
+
+async function importPersonal(kind, file) {
+  if (kind === 'json') {
+    const items = JSON.parse(await file.text());
+    return collectionStore.importItems(items);
+  }
+  if (kind === 'whatsapp') {
+    const parsed = whatsappImporter.importWhatsApp(await file.text());
+    if (!parsed.ok) throw new Error(parsed.message || 'WhatsApp tidak terbaca');
+    let n = 0;
+    for (const chunk of parsed.chunks || []) n += await rememberChunk(chunk.text, 'whatsapp', file.name);
+    return n;
+  }
+  if (kind === 'enex') {
+    const parsed = evernoteImporter.importENEX(await file.text());
+    if (!parsed.ok) throw new Error(parsed.message || 'ENEX tidak terbaca');
+    let n = 0;
+    for (const chunk of parsed.chunks || []) n += await rememberChunk((chunk.title ? chunk.title + '\n' : '') + chunk.text, 'evernote', chunk.title);
+    return n;
+  }
+  if (kind === 'ics') {
+    const events = icsParser.parseICS(await file.text());
+    if (!events.length) throw new Error('Tidak ada acara di berkas kalender');
+    let n = 0;
+    for (const event of events) {
+      const when = event.start ? new Date(event.start).toLocaleString('id-ID') : '';
+      n += await rememberChunk([event.summary, when, event.location || '', event.description || ''].filter(Boolean).join('\n'), 'kalender', event.summary);
+    }
+    return n;
+  }
+  if (/\.md$/i.test(file.name || '')) {
+    return rememberChunk(await file.text(), 'notion', file.name);
+  }
+  const ready = await notionImporter.downloadPackage();
+  if (!ready) throw new Error('Paket Notion belum siap. Coba lagi saat jaringan ada.');
+  const parsed = await notionImporter.importZip(await file.arrayBuffer());
+  if (!parsed.ok) throw new Error(parsed.message || 'Arsip Notion tidak terbaca');
+  let n = 0;
+  for (const chunk of parsed.chunks || []) n += await rememberChunk((chunk.breadcrumb ? chunk.breadcrumb + '\n' : '') + chunk.text, 'notion', chunk.title);
+  return n;
+}
+
 export const collectionPage = {
   async open() {
     state = { tab: 'tersimpan', filter: null, query: '' };
@@ -523,20 +586,35 @@ export const collectionPage = {
     };
     $('coll-import').onclick = () => {
       closeCollMenu();
-      $('coll-import-file').click();
+      armImport('json', 'application/json,.json');
+    };
+    $('coll-import-wa').onclick = () => {
+      closeCollMenu();
+      armImport('whatsapp', '.txt,text/plain');
+    };
+    $('coll-import-enex').onclick = () => {
+      closeCollMenu();
+      armImport('enex', '.enex,application/xml,text/xml');
+    };
+    $('coll-import-notion').onclick = () => {
+      closeCollMenu();
+      armImport('notion', '.zip,.md,application/zip,text/markdown');
+    };
+    $('coll-import-ics').onclick = () => {
+      closeCollMenu();
+      armImport('ics', '.ics,text/calendar');
     };
     $('coll-import-file').onchange = async (e) => {
       const f = e.target.files && e.target.files[0];
+      const kind = e.target.dataset.kind || 'json';
       e.target.value = '';
       if (!f) return;
       try {
-        const text = await f.text();
-        const items = JSON.parse(text);
-        const added = await collectionStore.importItems(items);
+        const added = await importPersonal(kind, f);
         toast.show(added + ' item diimpor');
         renderTab();
       } catch (err) {
-        toast.show('Gagal membaca file JSON');
+        toast.show(err && err.message ? err.message : 'Gagal membaca berkas');
       }
     };
   },

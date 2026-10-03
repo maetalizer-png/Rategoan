@@ -5,22 +5,67 @@ import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { toast } from '../core/toast.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
+let cm = null;
+let pyPromise = null;
 
 function editor() {
   return $('studio-editor');
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-src="' + src + '"]');
+    if (existing) { resolve(); return; }
+    const script = document.createElement('script');
+    script.src = src;
+    script.dataset.src = src;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('gagal memuat ' + src));
+    document.head.appendChild(script);
+  });
+}
+
+function loadStyle(href) {
+  if (document.querySelector('link[data-href="' + href + '"]')) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  link.dataset.href = href;
+  document.head.appendChild(link);
+}
+
+async function ensureEditor() {
+  const area = editor();
+  if (!area || cm) return;
+  try {
+    loadStyle('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css');
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js');
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js');
+    if (!globalThis.CodeMirror) return;
+    cm = globalThis.CodeMirror.fromTextArea(area, { lineNumbers: true, mode: 'javascript' });
+  } catch (e) {
+    cm = null;
+  }
+}
+
+function codeText() {
+  if (cm) return cm.getValue();
+  const area = editor();
+  return area ? area.value : '';
 }
 
 export const studioPage = {
   paint() {
     const el = editor();
     if (el && !el.value.trim()) el.value = SAMPLE;
+    ensureEditor();
   },
   bind() {
     const back = $('studio-back');
     if (back) back.onclick = () => router.go('chat');
     const run = $('studio-run');
     if (run) run.onclick = async () => {
-      const code = editor() ? editor().value : '';
+      const code = codeText();
       const out = $('studio-console');
       const res = await jsSandbox.run(code);
       if (out) {
@@ -30,9 +75,19 @@ export const studioPage = {
           : ('Gagal: ' + (res.error || 'error'));
       }
     };
+    const py = $('studio-py');
+    if (py) py.onclick = () => this.runPython();
+    const preview = $('studio-preview');
+    if (preview) preview.onclick = () => {
+      const frame = $('studio-preview-frame');
+      const code = codeText();
+      if (!frame) return;
+      frame.hidden = false;
+      frame.srcdoc = /<\w+/.test(code) ? code : '<pre>' + code.replace(/</g, '<') + '</pre>';
+    };
     const open = $('studio-open-panel');
     if (open) open.onclick = () => {
-      const code = editor() ? editor().value : '';
+      const code = codeText();
       artifact.open({ type: 'code', code: code, lang: 'js', title: 'Studio', fileName: 'studio.js' }, 'Studio');
     };
     const side = $('btn-studio');
@@ -40,6 +95,28 @@ export const studioPage = {
       this.paint();
       router.go('studio');
     };
+  },
+  async runPython() {
+    const out = $('studio-console');
+    const code = codeText();
+    if (out) {
+      out.hidden = false;
+      out.textContent = 'Memuat Python…';
+    }
+    try {
+      if (!pyPromise) {
+        pyPromise = import('https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.mjs').then((mod) => mod.loadPyodide());
+      }
+      const pyodide = await pyPromise;
+      if (pyodide.setStdout) pyodide.setStdout({ batched: (text) => { if (out) out.textContent = text; } });
+      const value = await pyodide.runPythonAsync(code);
+      const shown = value == null ? '' : String(value);
+      if (out) out.textContent = ((out.textContent && out.textContent !== 'Memuat Python…') ? out.textContent + '\n' : '') + (shown || 'Selesai.');
+      toast.show('Python selesai');
+    } catch (e) {
+      if (out) out.textContent = 'Gagal: ' + (e && e.message ? e.message : 'Python tidak termuat');
+      toast.show('Python gagal');
+    }
   },
   open() {
     this.paint();

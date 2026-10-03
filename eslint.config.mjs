@@ -21,6 +21,9 @@ const browserGlobals = {
   indexedDB: 'readonly',
   IDBKeyRange: 'readonly',
   fetch: 'readonly',
+  Response: 'readonly',
+  Request: 'readonly',
+  Headers: 'readonly',
   console: 'readonly',
   crypto: 'readonly',
   performance: 'readonly',
@@ -153,6 +156,12 @@ export default [
     files: ['raget/raget-tools/**/*.mjs', 'raget/raget-tools/**/*.js'],
     languageOptions: {
       globals: { ...nodeGlobals, ...browserGlobals },
+    },
+  },
+  {
+    files: ['api/**/*.js'],
+    languageOptions: {
+      globals: { ...nodeGlobals, ...browserGlobals, fetch: 'readonly' },
     },
   },
 ];

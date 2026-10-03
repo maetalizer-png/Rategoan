@@ -27,6 +27,11 @@ const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
 const WORK_RE = /\b(tugas|skripsi|makalah|rencana|langkah|proyek|pekerjaan|kerjakan)\b/i;
 
+function wrapTrace(title, body) {
+  if (!body) return '';
+  return '<trace title="' + String(title || 'Jejak').replace(/"/g, '') + '">\n' + body + '\n</trace>';
+}
+
 function titleFrom(text) {
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   if (!t) return 'Chat';
@@ -122,16 +127,28 @@ async function trySlideRequest(text, att, session) {
 }
 
 
-const DOC_RE = /\b(buat(kan)?|tulis|susun)\s+(dokumen|laporan|makalah|catatan)\b/i;
+const DOC_RE = /\b(buat(?:kan)?|tulis|susun)\s+(dokumen|laporan|makalah|catatan)\b/i;
+const WORD_RE = /\b(docx|dokumen word|file word|microsoft word)\b/i;
+
+function artifactTag(type, title, filename, body) {
+  const safe = String(body || '').replace(/<\/artifact>/gi, '< /artifact>');
+  const cleanTitle = String(title || 'Dokumen').replace(/"/g, '');
+  const cleanName = String(filename || 'dokumen.docx').replace(/"/g, '');
+  return '<artifact type="' + type + '" title="' + cleanTitle + '" filename="' + cleanName + '">' + safe + '</artifact>';
+}
 
 async function tryDocumentRequest(text, session) {
-  if (!DOC_RE.test(text)) return null;
-  const material = lastAiText(session) || text.replace(DOC_RE, '').trim();
+  const wantsWord = WORD_RE.test(text);
+  if (!DOC_RE.test(text) && !wantsWord) return null;
+  const material = lastAiText(session) || text.replace(DOC_RE, '').replace(WORD_RE, '').trim();
   if (!material) return 'Tanya topiknya dulu, baru minta dokumen.';
   const title = (session && session.title && session.title !== 'Chat') ? session.title : 'Dokumen';
   const md = '# ' + title + '\n\n' + material;
-  artifact.open({ type: 'document', markdown: md, title: title, fileName: title.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '.md' }, title);
-  return 'Dokumen terbuka di panel kanan. Bisa diedit lalu diunduh sebagai Markdown.';
+  const fileBase = title.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'dokumen';
+  const fileName = fileBase + (wantsWord ? '.docx' : '.md');
+  artifact.open({ type: 'document', markdown: md, title: title, fileName: fileName }, title);
+  if (!wantsWord) return 'Dokumen terbuka di panel kanan. Bisa diedit lalu diunduh sebagai Markdown.';
+  return artifactTag('document', title, fileName, md) + '\n\nDokumen Word siap di kartu obrolan. Ketuk Unduh berkas.';
 }
 
 async function tryCodeArtifact(text) {
@@ -269,7 +286,7 @@ export const composer = {
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: [(this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : '', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : ''].filter(Boolean).join('\n\n') });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: [wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
@@ -303,6 +320,13 @@ export const composer = {
       card.setAttribute('aria-checked', String(on));
     }
   },
+  syncModes() {
+    attach.setModes({
+      websearch: this.websearchActive,
+      think: this.thinkActive,
+      research: this.researchActive,
+    });
+  },
   setWebsearch(active) {
     this.websearchActive = active;
     const card = $('sheet-websearch');
@@ -312,6 +336,7 @@ export const composer = {
       card.setAttribute('aria-checked', String(active));
     }
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
+    this.syncModes();
   },
   bind() {
     const inp = $('chat-input');
@@ -325,6 +350,18 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
+    attach.onModeOff = (key) => {
+      if (key === 'websearch') this.setWebsearch(false);
+      else if (key === 'think') {
+        this.thinkActive = false;
+        this._toggleSwitch('sheet-think', false);
+        this.syncModes();
+      } else if (key === 'research') {
+        this.researchActive = false;
+        this._toggleSwitch('sheet-research', false);
+        this.syncModes();
+      }
+    };
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
     const websearchCard = $('sheet-websearch');
@@ -337,12 +374,14 @@ export const composer = {
     if (thinkCard) thinkCard.onclick = () => {
       this.thinkActive = !this.thinkActive;
       this._toggleSwitch('sheet-think', this.thinkActive);
+      this.syncModes();
     };
     const researchCard = $('sheet-research');
     if (researchCard) researchCard.onclick = () => {
       this.researchActive = !this.researchActive;
       this._toggleSwitch('sheet-research', this.researchActive);
       if (this.researchActive) this.setWebsearch(true);
+      else this.syncModes();
     };
     const paintProjects = () => {
       const ul = $('project-list');

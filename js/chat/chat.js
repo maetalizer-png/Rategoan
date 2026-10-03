@@ -12,6 +12,7 @@ import { tts } from '../state/tts.js';
 import { ic } from '../../shared/icons.js';
 import { router } from '../core/router.js';
 import { exportSlides, heldSlide } from '../../shared/slides-export.js';
+import { isRich, mountRich, stripForSpeech } from '../ui/artifact-card.js';
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
@@ -264,7 +265,8 @@ export const chat = {
       } else {
         if (m.source === 'websearch') d.appendChild(buildSourceBadge());
         const b = document.createElement('div');
-        b.innerHTML = markdown.render(m.text);
+        if (isRich(m.text)) mountRich(b, m.text);
+        else b.innerHTML = markdown.render(m.text);
         d.appendChild(b);
       }
       if (m.attach) {
@@ -325,7 +327,9 @@ export const chat = {
     const body = document.createElement('div');
     d.appendChild(body);
     $('messages').appendChild(d);
-    if (follow && !reduceMotion() && text.length > 0) {
+    if (isRich(text)) {
+      mountRich(body, text);
+    } else if (follow && !reduceMotion() && text.length > 0) {
       let skip = false;
       const onTap = () => { skip = true; };
       body.addEventListener('pointerdown', onTap, { once: true });
@@ -341,7 +345,7 @@ export const chat = {
       }
       body.removeEventListener('pointerdown', onTap);
     }
-    body.innerHTML = markdown.render(text);
+    if (!isRich(text)) body.innerHTML = markdown.render(text);
     d.appendChild(buildMetaRow(Date.now()));
     const actions = buildActions(text);
     if (URL_RE.test(text)) {
@@ -398,9 +402,9 @@ export const chat = {
     s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined });
     await this.typeReply(reply, !scrolldown.isFar(), { searching });
     if (voice.speakNext) {
-      voice.speak(reply);
+      voice.speak(stripForSpeech(reply));
       voice.speakNext = false;
-    } else if (tts.enabled()) voice.speak(reply);
+    } else if (tts.enabled()) voice.speak(stripForSpeech(reply));
     return reply;
   },
 };

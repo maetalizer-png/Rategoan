@@ -308,12 +308,37 @@ async function searchWikidata(query) {
   };
 }
 
+async function searchDuck(query) {
+  if (typeof fetch !== 'function') return null;
+  try {
+    const res = await fetch('/api/connectors/web/search?q=' + encodeURIComponent(query));
+    if (!res.ok) return null;
+    const data = await res.json();
+    const rows = data && data.results;
+    if (!rows || !rows.length || !rows[0].url) return null;
+    const top = rows[0];
+    return {
+      title: top.title || query,
+      extract: top.snippet || top.title || '',
+      url: top.url,
+      source: 'DuckDuckGo',
+      lang: 'en',
+      related: rows.slice(1, 4).map((row) => ({ title: row.title || '', snippet: row.snippet || '', url: row.url || '' })),
+      mode: 'web',
+      weak: false,
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
 async function search(query) {
   const q = String(query || '').trim();
   if (!q) return { ok: false, message: 'Mau cari apa di internet?' };
   if (typeof fetch !== 'function') return { ok: false, message: NETWORK_FAIL_MESSAGE };
   try {
-    let result = await searchWikipediaRanked(q, 'id');
+    let result = await searchDuck(q);
+    if (!result) result = await searchWikipediaRanked(q, 'id');
     if (!result) result = await searchWikipediaRanked(q, 'en');
     if (!result) result = await searchWiktionary(q, 'id');
     if (!result) result = await searchWiktionary(q, 'en');

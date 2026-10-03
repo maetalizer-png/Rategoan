@@ -30,6 +30,7 @@ import { projectPage } from './project/project.js';
 import { studioPage } from './studio/studio.js';
 import { artifactsPage } from './artifacts/artifacts.js';
 import { connectPage } from './connect/connect.js';
+import { bindConnectorReturn } from './connectors/connector-hub.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
@@ -69,6 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
   studioPage.bind();
   artifactsPage.bind();
   connectPage.bind();
+  bindConnectorReturn();
+  window.addEventListener('rategoan:attach-context', (event) => {
+    const text = event.detail && event.detail.text;
+    const inp = $('chat-input');
+    if (!inp || !text) return;
+    inp.value = (inp.value ? inp.value + '\n' : '') + String(text).slice(0, 2000);
+    router.go('chat');
+    composer.autoGrow();
+  });
   login.bind();
   try { window.__rategoanMesin = mesin.list(); } catch (e) {}
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));

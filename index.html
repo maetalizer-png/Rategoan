@@ -131,12 +131,15 @@
           </button>
           <h1>Studio kode</h1>
         </header>
-        <p class="coll-tab-desc">JavaScript di perangkat ini. Bukan Copilot. Timeout 1,2 detik.</p>
+        <p class="coll-tab-desc">JavaScript dan Python di perangkat ini. Python dimuat sekali lewat Pyodide.</p>
         <textarea id="studio-editor" class="studio-editor" rows="14" spellcheck="false"></textarea>
         <div class="studio-actions">
           <button type="button" id="studio-run">Jalankan</button>
+          <button type="button" id="studio-py">Jalankan Python</button>
+          <button type="button" id="studio-preview">Pratinjau</button>
           <button type="button" id="studio-open-panel">Buka di panel</button>
         </div>
+        <iframe id="studio-preview-frame" title="Pratinjau studio" hidden sandbox="allow-scripts"></iframe>
         <pre id="studio-console" class="art-console" hidden></pre>
       </div>
     </section>
@@ -167,14 +170,7 @@
           </button>
           <h1>Konektor</h1>
         </header>
-        <p class="coll-tab-desc">Antrian ke server sendiri. Bukan kirim lewat Vercel.</p>
-        <p id="connect-server" class="coll-tab-desc"></p>
-        <input id="connect-url" class="hist-search-input" type="url" placeholder="https://server-anda" autocomplete="off">
-        <button type="button" class="attach-plain" id="connect-save-url">Simpan alamat server</button>
-        <button type="button" class="attach-plain" id="connect-drive">Antrikan ekspor Drive</button>
-        <button type="button" class="attach-plain" id="connect-wa">Antrikan bagikan WhatsApp</button>
-        <button type="button" class="attach-plain" id="connect-flush">Coba kirim antrian</button>
-        <pre id="connect-outbox" class="art-console"></pre>
+        <div id="connect-hub"></div>
       </div>
     </section>
     <section id="view-login" class="view" hidden>
@@ -366,7 +362,7 @@
 
   <input type="file" id="pick-camera" accept="image/*" capture="environment" hidden>
   <input type="file" id="pick-photo" accept="image/*" hidden>
-  <input type="file" id="pick-file" accept=".txt,.md,.csv,.tsv,.json,.xml,.html,.htm,.log,.yaml,.yml,.srt,.rtf,.ics,.enex,.pdf,.zip" hidden>
+  <input type="file" id="pick-file" accept=".txt,.md,.csv,.tsv,.json,.xml,.html,.htm,.log,.yaml,.yml,.srt,.rtf,.ics,.enex,.pdf,.zip,.docx" hidden>
   <input type="file" id="pick-restore" accept="application/json,.json" hidden>
 
   <div id="backdrop"></div>
