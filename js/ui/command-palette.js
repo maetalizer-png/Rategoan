@@ -110,14 +110,14 @@ export function mountCommandPalette() {
     const end = Array.from(event.changedTouches).map((t) => t.clientY);
     if (end.length && touches.every((y, i) => (end[i] || y) - y > 48)) open();
   }, { passive: true });
-  const btn = $('btn-chat-search');
-  if (btn) {
+  const host = document.querySelector('.topbar-actions');
+  if (host) {
     const key = document.createElement('button');
     key.type = 'button';
     key.className = 'icon-btn';
     key.setAttribute('aria-label', 'Perintah');
     key.textContent = '⌘';
-    btn.insertAdjacentElement('afterend', key);
+    host.appendChild(key);
     key.onclick = open;
   }
   return { open, close };

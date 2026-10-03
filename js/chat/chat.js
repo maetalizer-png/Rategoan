@@ -367,7 +367,7 @@ export const chat = {
     if (searching) {
       typing.innerHTML = ic('globe') + '<span>Mencari di internet…</span>';
     } else {
-      typing.textContent = '…';
+      typing.innerHTML = '<span class="zen-dot"></span>';
     }
     $('messages').appendChild(typing);
     scrollBottom();

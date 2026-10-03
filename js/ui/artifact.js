@@ -6,6 +6,7 @@ import { buildDocxBytes } from '../../shared/docx-local.js';
 import { buildZip } from '../../shared/zip-local.js';
 import { buildChartSvg } from '../../shared/charts-local.js';
 import { buildDiagramSvg } from '../../shared/diagrams-local.js';
+import { translator } from '../../vault/translate/translator.js';
 import { printReport } from '../../shared/report-export.js';
 
 let current = { type: 'slide', title: 'Slide', fileName: 'slide.pptx', outline: [], code: '', lang: 'js', markdown: '' };
@@ -290,6 +291,32 @@ function paintVersions() {
   };
 }
 
+function replaceSelection(next) {
+  const selected = String(window.getSelection() || '');
+  if (!selected || !current) return;
+  const fields = ['markdown', 'code'];
+  fields.forEach((field) => {
+    if (current[field] && current[field].indexOf(selected) >= 0) current[field] = current[field].replace(selected, next);
+  });
+  if (current.type === 'diagram') renderDiagram(current);
+  else if (current.type === 'code') renderCode(current.code, current.title);
+  else if (current.type === 'document' || current.type === 'report') renderDocument(current.markdown, current.title);
+}
+
+async function refine(action, selected) {
+  if (action === 'ringkas') return selected.split(/(?<=[.!?])\s+/)[0] || selected;
+  if (action === 'pertajam') return selected + ' Klaim ini perlu bukti yang bisa dicek.';
+  if (action === 'laras') return 'Secara formal: ' + selected;
+  const target = /[āéè]|(?:\b(yang|dan|untuk|dengan|adalah)\b)/i.test(selected) ? 'en' : 'id';
+  if (!translator.isReady()) await translator.downloadPackage();
+  const result = await translator.translate(selected, target);
+  if (!result.ok) {
+    toast.show(result.message || 'Terjemahan belum siap');
+    return selected;
+  }
+  return result.text;
+}
+
 export const artifact = {
   open(first, title, fileName) {
     const panel = $('artifact-panel');
@@ -395,5 +422,26 @@ export const artifact = {
     if (close) close.onclick = () => this.close();
     if (exp) exp.onclick = () => this.exportNow();
     if (run) run.onclick = () => this.runNow();
+    const stage = $('artifact-stage');
+    if (stage) stage.addEventListener('mouseup', () => {
+      const selected = String(window.getSelection() || '').trim();
+      const old = stage.querySelector('.refine-bubble');
+      if (old) old.remove();
+      if (selected.length < 8) return;
+      const bubble = document.createElement('div');
+      bubble.className = 'refine-bubble';
+      [['pertajam', 'Pertajam'], ['ringkas', 'Ringkas'], ['laras', 'Laras'], ['alih', 'Alih bahasa']].forEach(([id, label]) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = label;
+        btn.onclick = async () => {
+          const next = await refine(id, selected);
+          replaceSelection(next);
+          bubble.remove();
+        };
+        bubble.appendChild(btn);
+      });
+      stage.appendChild(bubble);
+    });
   },
 };

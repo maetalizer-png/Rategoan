@@ -356,6 +356,10 @@ export const composer = {
       toast.show('AI belum terpasang');
       return;
     }
+    if (deep && reply) {
+      const body = '<h2>Abstrak</h2><p>' + String(reply).replace(/</g, '').slice(0, 4000) + '</p><h2>Cabang kueri</h2><pre>' + flowHub.researchPlan(text).replace(/</g, '') + '</pre>';
+      artifact.open({ type: 'report', markdown: body, title: 'Berkas riset', fileName: 'riset.html' }, 'Berkas riset');
+    }
     if (plan.route === 'tool' || toolsKode.isCodeQuestion(text)) {
       await tryCodeArtifact(text);
     }

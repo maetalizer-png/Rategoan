@@ -137,7 +137,7 @@ export const connectorHub = {
     if (!connected.length && !featured.length) lists.appendChild(el('p', 'hub-note', 'Tidak ada konektor yang cocok.'));
   },
   card(root, id, svc) {
-    const card = el('div', 'hub-card');
+    const card = el('div', 'hub-card' + (svc.connected ? ' live' : ''));
     const mark = el('span', 'hub-mark');
     mark.innerHTML = ICONS[id] || '';
     const body = el('span', 'hub-card-body');

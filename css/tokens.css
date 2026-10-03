@@ -29,15 +29,15 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --rg-bg: #ffffff;
+  --rg-bg: #fafaf8;
   --rg-surface: #ffffff;
-  --rg-surface-2: #eceff3;
-  --rg-line: #d8dee6;
-  --rg-line-accent: rgba(0, 0, 0, 0.4);
-  --rg-accent: #0a0f14;
+  --rg-surface-2: #f3f1ea;
+  --rg-line: #e8e8e3;
+  --rg-line-accent: rgba(20, 22, 25, 0.28);
+  --rg-accent: #1a4b8c;
   --rg-accent-ink: #ffffff;
-  --rg-ring: rgba(0, 0, 0, 0.12);
-  --rg-text: #0a0f14;
+  --rg-ring: rgba(26, 75, 140, 0.16);
+  --rg-text: #141619;
   --rg-muted: #5b6673;
   --rg-danger: #d33131;
   --rg-shadow: 0 1px 2px rgba(20, 20, 15, 0.06), 0 8px 20px -8px rgba(20, 20, 15, 0.12), 0 24px 48px -24px rgba(20, 20, 15, 0.16);

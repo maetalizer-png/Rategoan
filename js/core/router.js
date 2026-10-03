@@ -32,6 +32,9 @@ export const router = {
     const sidebar = $('sidebar');
     if (sidebar) sidebar.hidden = hash === 'login';
     document.body.classList.toggle('auth-gate', hash === 'login');
+    document.querySelectorAll('[data-route]').forEach((el) => {
+      el.classList.toggle('on', el.getAttribute('data-route') === hash);
+    });
   },
   go(to) {
     const full = String(to || 'chat');

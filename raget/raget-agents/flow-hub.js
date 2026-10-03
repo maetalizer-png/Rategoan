@@ -56,12 +56,17 @@ function thinkBlock(topic) {
 
 function researchPlan(topic) {
   const t = String(topic || '').replace(/^riset\s+(mendalam\s+)?/i, '').trim() || 'topik';
-  const qs = queries(t);
+  const branches = [
+    t + ' — definisi dan batas masalah',
+    t + ' — data dan angka yang bisa dicek',
+    t + ' — pendapat yang saling bertentangan',
+    t + ' — dampak praktis dan langkah berikutnya',
+  ];
   return [
-    'Langkah riset: ' + t,
-    '1. Cari halaman utama.',
-    '2. Ambil 1–2 sumber terkait: ' + qs.slice(1, 3).join(' · '),
-    '3. Gabungkan jadi satu jawaban.',
+    'Pohon kueri',
+    ...branches.map((line, index) => (index + 1) + '. ' + line),
+    'Berkas riset',
+    'Abstrak, tabel pembanding, analisis, dan daftar sumber. Tandai klaim yang belum punya sumber.',
   ].join('\n');
 }
 

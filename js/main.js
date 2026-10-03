@@ -31,6 +31,10 @@ import { studioPage } from './studio/studio.js';
 import { artifactsPage } from './artifacts/artifacts.js';
 import { connectPage } from './connect/connect.js';
 import { mountCommandPalette } from './ui/command-palette.js';
+import { mountChatOptions } from './ui/chat-options-menu.js';
+import { mountMemoryCapsule } from './ui/memory-capsule.js';
+import { account } from './account/account.js';
+import { bindConnectorReturn } from './connectors/connector-hub.js';
 import { hydrateConnectorSecrets } from './connectors/connector-state.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
@@ -43,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   store.init();
   theme.init();
   auth.init();
+  account.refresh();
   font.load();
   router.init();
   chat.renderMessages();
@@ -73,6 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
   connectPage.bind();
   bindConnectorReturn();
   mountCommandPalette();
+  mountChatOptions();
+  mountMemoryCapsule();
   hydrateConnectorSecrets().catch(() => {});
   window.addEventListener('rategoan:attach-context', (event) => {
     const text = event.detail && event.detail.text;

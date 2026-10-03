@@ -714,3 +714,22 @@ Sumber: `19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw`.
 | 79–80 | Diagram SVG, perbesar, unduh | SUDAH SELESAI |
 | 81 | Usap dua jari membuka perintah | SUDAH SELESAI |
 
+# 23–25. Salinan pekerjaan Drive 3 Oktober 2026 22:38 UTC
+
+Sumber: `19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw`.
+
+| No | Tugas | Status |
+| --- | --- | --- |
+| 82–83 | Obrolan baru dan menu titik tiga di bilah atas | SUDAH SELESAI |
+| 84–85 | Studio gelap, tab JS/Python, konsol dengan waktu | SUDAH SELESAI |
+| 86–87 | Avatar akun saat mulai, kartu profil sidebar | SUDAH SELESAI |
+| 88 | Kelompok menu dan penanda halaman aktif | SUDAH SELESAI |
+| 89 | Catatan koleksi, saringan, ekspor | SUDAH SELESAI |
+| 90 | Kartu proyek dan template | SUDAH SELESAI |
+| 91 | Galeri artefak | SUDAH SELESAI |
+| 92 | Lembar lampiran dipisah unggah dan mode | SUDAH SELESAI |
+| 99–101 | Gelembung sunting pada teks terpilih | SUDAH SELESAI |
+| 102–104 | Riset empat cabang dan berkas laporan | SUDAH SELESAI |
+| 105–108 | Kapsul memori lokal | SUDAH SELESAI |
+
+

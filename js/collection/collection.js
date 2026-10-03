@@ -38,6 +38,7 @@ const TEMPLATE = `
           <input id="coll-search" type="search" placeholder="Cari di koleksi…" autocomplete="off">
         </div>
         <div id="coll-filters" class="coll-filters"></div>
+        <button type="button" id="coll-new-note" class="btn-run-primary">Buat catatan koleksi</button>
         <input type="file" id="coll-import-file" accept="application/json,.json" hidden>
         <div id="coll-content"></div>
       </div>
@@ -104,6 +105,9 @@ async function renderTersimpan() {
   const archivedCount = withArchivedForCount.filter((it) => it.archived && it.kind === 'chat').length;
   const filterChips = [
     { key: null, label: 'Semua', count: chatItems.length },
+    { key: 'prompt', label: 'Prompt favorit', count: chatItems.filter((it) => it.tag === 'prompt').length },
+    { key: 'kode', label: 'Kutipan kode', count: chatItems.filter((it) => it.tag === 'kode').length },
+    { key: 'riset', label: 'Ringkasan riset', count: chatItems.filter((it) => it.tag === 'riset').length },
     { key: 'pinned', label: ic('pin') + ' Pin', count: chatItems.filter((it) => it.pinned).length },
     ...stats.topTags.filter((t) => t.tag !== 'artefak').map((t) => ({ key: t.tag, label: t.tag, count: t.count })),
     { key: 'archived', label: ic('archive') + ' Arsip', count: archivedCount },
@@ -143,8 +147,8 @@ async function renderTersimpan() {
   if (!list.length) {
     content.innerHTML = (chatItems.length ? statsRow : '') +
       '<div class="coll-empty">' + ic('bookmark') +
-      '<div class="coll-empty-title">Belum ada yang disimpan manual</div>' +
-      '<div class="coll-empty-body">Tap tombol "Simpan" pada balasan AI di chat untuk menambahkannya ke sini.</div></div>';
+      '<div class="coll-empty-title">Koleksi ini masih sepi</div>' +
+      '<div class="coll-empty-body">Simpan balasan dari obrolan, atau tulis catatan sendiri dengan tombol di atas. Contoh: prompt yang sering dipakai, potongan kode, atau ringkasan riset.</div></div>';
     return;
   }
 
@@ -577,6 +581,15 @@ export const collectionPage = {
       closeCollMenu();
       const items = await collectionStore.allItems({ includeArchived: true });
       downloadFile(JSON.stringify(items, null, 2), 'application/json', 'koleksi-backup-' + new Date().toISOString().slice(0, 10) + '.json');
+    };
+    const noteBtn = $('coll-new-note');
+    if (noteBtn) noteBtn.onclick = async () => {
+      const text = window.prompt('Catatan koleksi');
+      if (!text || !text.trim()) return;
+      const tag = window.prompt('Tag: prompt, kode, atau riset', 'prompt') || 'prompt';
+      await collectionStore.addItem({ kind: 'chat', role: 'user', text: text.trim(), tag: tag.trim() || 'prompt', chatTitle: 'Catatan' });
+      toast.show('Catatan masuk koleksi');
+      renderTab();
     };
     $('coll-import').onclick = () => {
       closeCollMenu();

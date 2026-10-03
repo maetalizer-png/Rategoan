@@ -8,6 +8,7 @@ import { drawer } from '../ui/drawer.js';
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
 let cm = null;
 let pyPromise = null;
+let lang = 'javascript';
 
 function editor() {
   return $('studio-editor');
@@ -43,10 +44,19 @@ async function ensureEditor() {
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js');
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js');
     if (!globalThis.CodeMirror) return;
-    cm = globalThis.CodeMirror.fromTextArea(area, { lineNumbers: true, mode: 'javascript' });
+    cm = globalThis.CodeMirror.fromTextArea(area, { lineNumbers: true, mode: lang });
   } catch (e) {
     cm = null;
   }
+}
+
+function showConsole(text, ms) {
+  const out = $('studio-console');
+  const status = $('studio-terminal-status');
+  if (status) status.textContent = ms == null ? 'Konsol' : 'Selesai dalam ' + ms + ' ms';
+  if (!out) return;
+  out.hidden = false;
+  out.textContent = text;
 }
 
 function codeText() {
@@ -66,16 +76,37 @@ export const studioPage = {
     if (back) back.onclick = () => router.go('chat');
     const run = $('studio-run');
     if (run) run.onclick = async () => {
-      const code = codeText();
-      const out = $('studio-console');
-      const res = await jsSandbox.run(code);
-      if (out) {
-        out.hidden = false;
-        out.textContent = res.ok
-          ? ((res.logs || []).join('\n') + (res.value ? '\n→ ' + res.value : '')).trim() || 'Selesai.'
-          : ('Gagal: ' + (res.error || 'error'));
+      const started = performance.now();
+      if (lang === 'python') {
+        await this.runPython();
+        const status = $('studio-terminal-status');
+        if (status) status.textContent = 'Selesai dalam ' + Math.round(performance.now() - started) + ' ms';
+        return;
       }
+      const code = codeText();
+      const res = await jsSandbox.run(code);
+      const body = res.ok
+        ? ((res.logs || []).join('\n') + (res.value ? '\n→ ' + res.value : '')).trim() || 'Selesai.'
+        : ('Gagal: ' + (res.error || 'error'));
+      showConsole(body, Math.round(performance.now() - started));
     };
+    const tabJs = $('studio-tab-js');
+    const tabPy = $('studio-tab-py');
+    const pick = (next) => {
+      lang = next;
+      if (tabJs) tabJs.classList.toggle('on', next === 'javascript');
+      if (tabPy) tabPy.classList.toggle('on', next === 'python');
+      if (cm) cm.setOption('mode', next === 'python' ? 'python' : 'javascript');
+    };
+    if (tabJs) tabJs.onclick = () => pick('javascript');
+    if (tabPy) tabPy.onclick = () => pick('python');
+    const copyBtn = $('studio-copy');
+    if (copyBtn) copyBtn.onclick = () => {
+      const text = codeText();
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => toast.show('Kode disalin'));
+    };
+    const clear = $('studio-clear');
+    if (clear) clear.onclick = () => showConsole('', null);
     const py = $('studio-py');
     if (py) py.onclick = () => this.runPython();
     const preview = $('studio-preview');
