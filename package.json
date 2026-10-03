@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "lint": "node raget/raget-tools/lint-check.mjs",
+    "test": "node --test raget/raget-tools/unit/*.test.mjs",
     "bench": "node raget/raget-tools/run-bench.mjs http://localhost:8099",
     "measure-kv": "node raget/raget-tools/measure-kv.mjs http://localhost:8099"
   },

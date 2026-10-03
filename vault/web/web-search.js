@@ -1,5 +1,6 @@
 import { ppmiEmbedding } from '../../raget/raget-retrieval/ppmi-embedding.js';
 import { semanticIndex } from '../../raget/raget-retrieval/semantic-index.js';
+import { answerComposer } from '../../raget/raget-agents/answer-composer.js';
 
 const NETWORK_FAIL_MESSAGE =
   'Gagal mengakses internet untuk pencarian ini — bisa karena tidak ada koneksi, atau Wikipedia sedang memblokir akses dari sini. Raget 100% berjalan lokal tanpa server perantara, jadi pencarian internet langsung bergantung pada koneksi perangkat ini.';
@@ -322,6 +323,10 @@ async function search(query) {
         ok: false,
         message: 'Sudah dicari di Wikipedia, Wiktionary, dan Wikidata, tapi tidak ketemu yang relevan untuk "' + q + '".',
       };
+    }
+    if (result.extract && result.lang !== 'id') {
+      const extract = await answerComposer.lockAnswer(q, result.extract);
+      if (extract !== result.extract) result = { ...result, extract, translatedFrom: result.lang || 'en' };
     }
     return { ok: true, related: result.related || [], people: result.people || [], mode: result.mode || 'article', weak: !!result.weak, ...result };
   } catch (e) {

@@ -1,3 +1,5 @@
+import { translator } from '../../vault/translate/translator.js';
+
 const KEYWORD_DICTIONARY = [
   'ibukota', 'ibukotanya', 'populasi', 'penduduk', 'matauang', 'bahasa',
   'luas', 'merdeka', 'kemerdekaan', 'pemerintahan', 'provinsi', 'kabupaten',
@@ -72,4 +74,40 @@ export const answerComposer = Object.freeze({
   levenshtein,
   correctWord,
   correctTypos,
+  looksEnglish,
+  looksIndonesian,
+  lockAnswer,
 });
+
+const EN_FN = new Set(['the', 'of', 'and', 'to', 'in', 'is', 'that', 'for', 'with', 'on', 'as', 'by', 'this', 'from', 'are', 'was', 'be', 'or', 'an', 'it']);
+const ID_FN = new Set(['yang', 'dan', 'di', 'ke', 'dari', 'untuk', 'dengan', 'ini', 'itu', 'adalah', 'tidak', 'pada', 'atau', 'juga', 'akan', 'ada', 'dalam', 'sudah', 'bisa']);
+
+function functionHits(text, vocab) {
+  const words = String(text || '').toLowerCase().split(/[^\p{L}]+/u).filter(Boolean).slice(0, 80);
+  let n = 0;
+  words.forEach((w) => { if (vocab.has(w)) n += 1; });
+  return n;
+}
+
+function looksEnglish(text) {
+  const en = functionHits(text, EN_FN);
+  const id = functionHits(text, ID_FN);
+  return en >= 4 && en > id * 2;
+}
+
+function looksIndonesian(text) {
+  const en = functionHits(text, EN_FN);
+  const id = functionHits(text, ID_FN);
+  return id >= 3 && id >= en;
+}
+
+async function lockAnswer(question, answer) {
+  const src = String(answer || '');
+  if (!src.trim() || /```/.test(src)) return src;
+  if (!looksEnglish(src) || looksIndonesian(src)) return src;
+  const q = String(question || '');
+  if (q && looksEnglish(q) && !looksIndonesian(q)) return src;
+  if (translator.state !== 'ready') return src;
+  const tr = await translator.translate(src, 'id');
+  return tr.ok && tr.text ? tr.text : src;
+}

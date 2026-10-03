@@ -1,3 +1,5 @@
+import { answerComposer } from '../../raget/raget-agents/answer-composer.js';
+
 const MAX_CHARS = 4000;
 const CORS_MESSAGE =
   'Tidak bisa mengambil isi halaman ini — situs tujuan memblokir akses langsung (CORS/anti-bot) dan jalur cadangan (Jina Reader) juga gagal, atau sedang offline. Raget 100% berjalan lokal tanpa server perantara, jadi pengambilan konten web bergantung sepenuhnya pada izin situs tujuan.';
@@ -36,13 +38,13 @@ async function read(url) {
   }
   try {
     const text = await fetchDirect(url);
-    if (text) return { ok: true, text };
+    if (text) return { ok: true, text: await answerComposer.lockAnswer('', text) };
   } catch (e) {
     // lanjut ke fallback Jina Reader
   }
   try {
     const text = await fetchViaJina(url);
-    if (text) return { ok: true, text, viaJina: true };
+    if (text) return { ok: true, text: await answerComposer.lockAnswer('', text), viaJina: true };
   } catch (e) {
     // dua-duanya gagal
   }
