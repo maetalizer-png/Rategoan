@@ -10,6 +10,21 @@ function paint() {
   if (curLabel) {
     const cur = workspace.current();
     curLabel.textContent = cur ? ('Aktif: ' + cur.name) : 'Belum ada proyek aktif';
+    let prompt = $('project-prompt');
+    if (!prompt && curLabel.parentNode) {
+      prompt = document.createElement('textarea');
+      prompt.id = 'project-prompt';
+      prompt.rows = 4;
+      prompt.placeholder = 'Instruksi khusus proyek ini';
+      curLabel.parentNode.appendChild(prompt);
+      prompt.onchange = () => {
+        const active = workspace.current();
+        if (!active) return;
+        workspace.update(active.id, { systemPrompt: prompt.value });
+        toast.show('Instruksi proyek disimpan');
+      };
+    }
+    if (prompt) prompt.value = cur && cur.systemPrompt ? cur.systemPrompt : '';
   }
   if (!ul) return;
   ul.innerHTML = '';

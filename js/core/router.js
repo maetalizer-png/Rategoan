@@ -20,7 +20,9 @@ export const router = {
       full = 'login';
     }
     this.sub = full.split('/').slice(1).join('/');
-    if (location.hash !== '#/' + full) location.hash = '/' + full;
+    if (location.hash !== '#/' + full) {
+      history.replaceState({ rg: 1, view: hash }, '', '#/' + full);
+    }
     Object.keys(this.routes).forEach((name) => {
       const el = $(this.routes[name]);
       if (el) el.hidden = name !== hash;
@@ -32,11 +34,21 @@ export const router = {
     document.body.classList.toggle('auth-gate', hash === 'login');
   },
   go(to) {
-    location.hash = '/' + to;
+    const full = String(to || 'chat');
+    const view = full.split('/')[0] || 'chat';
+    history.pushState({ rg: 1, view }, '', '#/' + full);
     this.render();
   },
   init() {
+    const hash = (location.hash || '#/chat').replace(/^#\/?/, '').split('/')[0] || 'chat';
+    history.replaceState({ rg: 1, view: hash }, '', location.hash || '#/chat');
     window.addEventListener('hashchange', () => this.render());
+    window.addEventListener('popstate', () => {
+      if (!history.state || !history.state.rg) {
+        history.pushState({ rg: 1, view: 'chat' }, '', '#/chat');
+      }
+      this.render();
+    });
     this.render();
   },
 };

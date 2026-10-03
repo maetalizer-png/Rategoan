@@ -3,6 +3,7 @@ import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { toast } from '../core/toast.js';
+import { drawer } from '../ui/drawer.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
 let cm = null;
@@ -92,6 +93,7 @@ export const studioPage = {
     };
     const side = $('btn-studio');
     if (side) side.onclick = () => {
+      drawer.close();
       this.paint();
       router.go('studio');
     };
@@ -119,6 +121,7 @@ export const studioPage = {
     }
   },
   open() {
+    drawer.close();
     this.paint();
     router.go('studio');
   },

@@ -13,6 +13,7 @@ import { ic } from '../../shared/icons.js';
 import { router } from '../core/router.js';
 import { exportSlides, heldSlide } from '../../shared/slides-export.js';
 import { isRich, mountRich, stripForSpeech } from '../ui/artifact-card.js';
+import { mountThought } from '../ui/thought-card.js';
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
@@ -264,6 +265,7 @@ export const chat = {
         d.appendChild(t);
       } else {
         if (m.source === 'websearch') d.appendChild(buildSourceBadge());
+        if (m.thoughts) mountThought(d, m.thoughts, 'selesai');
         const b = document.createElement('div');
         if (isRich(m.text)) mountRich(b, m.text);
         else b.innerHTML = markdown.render(m.text);
@@ -324,6 +326,7 @@ export const chat = {
     d.className = 'msg ai';
     d.dataset.idx = String(s.messages.length - 1);
     if (opts && opts.searching) d.appendChild(buildSourceBadge());
+    if (opts && opts.thoughts) mountThought(d, opts.thoughts, 'selesai');
     const body = document.createElement('div');
     d.appendChild(body);
     $('messages').appendChild(d);
@@ -399,8 +402,8 @@ export const chat = {
     // pencarian web" tidak hilang saat renderMessages() render ulang SEMUA
     // pesan dari data tersimpan (kejadian setiap kali pesan baru dikirim) -
     // tanpa ini badge cuma nempel sesaat lalu ke-reset begitu chat re-render.
-    s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined });
-    await this.typeReply(reply, !scrolldown.isFar(), { searching });
+    s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts });
+    await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts });
     if (voice.speakNext) {
       voice.speak(stripForSpeech(reply));
       voice.speakNext = false;

@@ -40,6 +40,7 @@ function freshen(state) {
 }
 
 function read() {
+  if (cache) return freshen(cache);
   const base = blank();
   try {
     const raw = localStorage.getItem(KEY);
@@ -66,8 +67,76 @@ function read() {
 }
 
 function write(state) {
-  localStorage.setItem(KEY, JSON.stringify(state));
+  cache = state;
+  localStorage.setItem(KEY, JSON.stringify(stripTokens(state)));
+  persistVault(state).catch(() => {});
   return state;
+}
+
+const VAULT = 'rategoan_connectors_vault';
+const KEYID = 'rategoan_connectors_aes';
+let cache = null;
+
+function stripTokens(state) {
+  const copy = JSON.parse(JSON.stringify(state));
+  Object.keys(copy.services || {}).forEach((id) => {
+    if (copy.services[id]) delete copy.services[id].access_token;
+  });
+  return copy;
+}
+
+function b64(bytes) {
+  let raw = '';
+  bytes.forEach((n) => { raw += String.fromCharCode(n); });
+  return btoa(raw);
+}
+
+function fromB64(raw) {
+  const bin = atob(raw);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i += 1) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+async function aesKey() {
+  let raw = localStorage.getItem(KEYID);
+  if (!raw) {
+    raw = b64(crypto.getRandomValues(new Uint8Array(32)));
+    localStorage.setItem(KEYID, raw);
+  }
+  return crypto.subtle.importKey('raw', fromB64(raw), 'AES-GCM', false, ['encrypt', 'decrypt']);
+}
+
+async function persistVault(state) {
+  if (!globalThis.crypto || !crypto.subtle) return;
+  const tokens = {};
+  Object.keys(state.services || {}).forEach((id) => {
+    const token = state.services[id] && state.services[id].access_token;
+    if (token) tokens[id] = token;
+  });
+  const key = await aesKey();
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(tokens)));
+  localStorage.setItem(VAULT, JSON.stringify({ iv: b64(iv), data: b64(new Uint8Array(cipher)) }));
+}
+
+export async function hydrateConnectorSecrets() {
+  const stored = read();
+  cache = stored;
+  const packRaw = localStorage.getItem(VAULT);
+  if (!packRaw || !crypto.subtle) return stored;
+  try {
+    const pack = JSON.parse(packRaw);
+    const key = await aesKey();
+    const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(pack.iv) }, key, fromB64(pack.data));
+    const tokens = JSON.parse(new TextDecoder().decode(plain));
+    Object.keys(tokens).forEach((id) => {
+      if (cache.services[id]) cache.services[id].access_token = tokens[id];
+    });
+  } catch (e) {
+    return stored;
+  }
+  return cache;
 }
 
 export const connectorState = {

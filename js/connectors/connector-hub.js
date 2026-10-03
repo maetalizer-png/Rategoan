@@ -22,6 +22,15 @@ const AUTH = {
   github: '/api/auth/github?service=github',
 };
 
+const ICONS = {
+  google_drive: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#1a73e8" d="M8 4h8l5 9H10z"/><path fill="#34a853" d="M3 18l5-9 5 9z"/><path fill="#fbbc04" d="M13 18h8l-5-9-3 9z"/></svg>',
+  github: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.8c.85 0 1.7.11 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/></svg>',
+  gmail: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#ea4335" d="M4 6h16v12H4z"/><path fill="#fff" d="M4 6l8 6 8-6"/></svg>',
+  google_calendar: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="#1a73e8"/><path fill="#fff" d="M3 9h18v2H3z"/></svg>',
+  web_search_reader: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="10" cy="10" r="6" fill="none" stroke="#1a73e8" stroke-width="2"/><path stroke="#1a73e8" stroke-width="2" d="M15 15l5 5"/></svg>',
+  local_sandbox: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 20h8" stroke="currentColor" stroke-width="2"/></svg>',
+};
+
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -88,12 +97,14 @@ export const connectorHub = {
     toggleRow.appendChild(toggleCopy);
     toggleRow.appendChild(toggle);
     root.appendChild(toggleRow);
+    const searchWrap = el('div', 'hub-search-box');
     const search = document.createElement('input');
-    search.className = 'hist-search-input';
+    search.className = 'hub-search-input';
     search.type = 'search';
     search.placeholder = 'Cari konektor atau alat';
     search.oninput = () => this.paintLists(root, search.value);
-    root.appendChild(search);
+    searchWrap.appendChild(search);
+    root.appendChild(searchWrap);
     const lists = el('div', 'hub-lists');
     root.appendChild(lists);
     this.paintLists(root, '');
@@ -127,9 +138,10 @@ export const connectorHub = {
   },
   card(root, id, svc) {
     const card = el('div', 'hub-card');
-    const mark = el('span', 'hub-mark', (svc.display_name || id).slice(0, 1));
+    const mark = el('span', 'hub-mark');
+    mark.innerHTML = ICONS[id] || '';
     const body = el('span', 'hub-card-body');
-    const name = el('strong', null, svc.display_name);
+    const name = el('strong', 'hub-card-name', svc.display_name);
     const badge = el('span', 'hub-badge', String(svc.tools_count) + ' alat');
     const line = el('span', 'hub-card-title');
     line.appendChild(name);
@@ -140,9 +152,34 @@ export const connectorHub = {
     body.appendChild(line);
     body.appendChild(desc);
     const side = el('span', 'hub-card-side');
-    if (svc.system_native) side.textContent = 'Bawaan';
-    else if (svc.connected) side.textContent = 'Kelola';
-    else side.textContent = 'Hubungkan';
+    if (svc.system_native) {
+      side.appendChild(el('span', 'hub-tag-builtin', 'Bawaan'));
+    } else if (svc.connected) {
+      const manage = el('button', 'hub-btn-manage', 'Kelola');
+      manage.type = 'button';
+      manage.onclick = (event) => {
+        event.stopPropagation();
+        this.openExplorer(root, id);
+      };
+      const cut = el('button', 'hub-btn-disconnect', 'Putuskan');
+      cut.type = 'button';
+      cut.onclick = (event) => {
+        event.stopPropagation();
+        connectorState.disconnect(id);
+        toast.show(svc.display_name + ' diputus.');
+        this.paint(root);
+      };
+      side.appendChild(manage);
+      side.appendChild(cut);
+    } else {
+      const connect = el('button', 'hub-btn-connect', 'Hubungkan');
+      connect.type = 'button';
+      connect.onclick = (event) => {
+        event.stopPropagation();
+        startOAuth(id);
+      };
+      side.appendChild(connect);
+    }
     card.appendChild(mark);
     card.appendChild(body);
     card.appendChild(side);
@@ -153,17 +190,6 @@ export const connectorHub = {
       }
       this.openExplorer(root, id);
     };
-    if (svc.connected && !svc.system_native) {
-      const cut = el('button', 'hub-cut', 'Putuskan');
-      cut.type = 'button';
-      cut.onclick = (event) => {
-        event.stopPropagation();
-        connectorState.disconnect(id);
-        toast.show(svc.display_name + ' diputus.');
-        this.paint(root);
-      };
-      card.appendChild(cut);
-    }
     return card;
   },
   openExplorer(root, id) {

@@ -19,6 +19,18 @@
   overflow: auto;
   padding: 12px;
 }
+
+.slide-carousel { display: flex; flex-direction: column; gap: 8px; }
+.slide-frame {
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line, #e4e4e4);
+  border-radius: 12px;
+  padding: 16px;
+  background: #fff;
+  overflow: auto;
+}
+.slide-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.slide-nav button { border-radius: 999px; min-width: 36px; }
 .art-slide {
   border: 1px solid var(--line, #e4e4e4);
   border-radius: 10px;

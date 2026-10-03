@@ -4,6 +4,7 @@ import { toast } from '../core/toast.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
 import { buildZip } from '../../shared/zip-local.js';
+import { buildChartSvg } from '../../shared/charts-local.js';
 
 let current = { type: 'slide', title: 'Slide', fileName: 'slide.pptx', outline: [], code: '', lang: 'js', markdown: '' };
 
@@ -42,13 +43,21 @@ function renderSlide(outline, title) {
   if (!stage) return;
   if (head) head.textContent = title || 'Slide';
   stage.innerHTML = '';
-  (outline || []).forEach((s, i) => {
+  const deck = document.createElement('div');
+  deck.className = 'slide-carousel';
+  const slides = outline || [];
+  let index = 0;
+  const frame = document.createElement('div');
+  frame.className = 'slide-frame';
+  const paint = () => {
+    frame.innerHTML = '';
+    const s = slides[index] || { title: '', bullets: [] };
     const card = document.createElement('article');
-    card.className = 'art-slide';
+    card.className = 'art-slide on';
     card.dataset.kind = s.kind || 'body';
     const h = document.createElement('h3');
     h.contentEditable = 'true';
-    h.textContent = (i + 1) + '. ' + (s.title || '');
+    h.textContent = (index + 1) + '. ' + (s.title || '');
     card.appendChild(h);
     const ul = document.createElement('ul');
     (s.bullets || []).forEach((b) => {
@@ -59,8 +68,45 @@ function renderSlide(outline, title) {
       ul.appendChild(li);
     });
     card.appendChild(ul);
-    stage.appendChild(card);
+    frame.appendChild(card);
+    count.textContent = 'Slide ' + (slides.length ? index + 1 : 0) + ' / ' + slides.length;
+  };
+  const bar = document.createElement('div');
+  bar.className = 'slide-nav';
+  const prev = document.createElement('button');
+  prev.type = 'button';
+  prev.textContent = '<';
+  const count = document.createElement('span');
+  const next = document.createElement('button');
+  next.type = 'button';
+  next.textContent = '>';
+  prev.onclick = () => { if (!slides.length) return; index = (index - 1 + slides.length) % slides.length; paint(); };
+  next.onclick = () => { if (!slides.length) return; index = (index + 1) % slides.length; paint(); };
+  bar.appendChild(prev);
+  bar.appendChild(count);
+  bar.appendChild(next);
+  deck.appendChild(frame);
+  deck.appendChild(bar);
+  stage.appendChild(deck);
+  slides.forEach((s, i) => {
+    const hidden = document.createElement('article');
+    hidden.className = 'art-slide';
+    hidden.dataset.kind = s.kind || 'body';
+    hidden.hidden = true;
+    const h = document.createElement('h3');
+    h.textContent = (i + 1) + '. ' + (s.title || '');
+    hidden.appendChild(h);
+    const ul = document.createElement('ul');
+    (s.bullets || []).forEach((b) => {
+      const li = document.createElement('li');
+      li.dataset.bullet = '1';
+      li.textContent = b;
+      ul.appendChild(li);
+    });
+    hidden.appendChild(ul);
+    stage.appendChild(hidden);
   });
+  paint();
 }
 
 function renderCode(code, title) {
@@ -163,7 +209,52 @@ function renderCurrent() {
   else if (current.type === 'document' || current.type === 'docx') renderDocument(current.markdown, current.title);
   else if (current.type === 'zip') renderDocument(current.markdown, current.title);
   else if (current.type === 'table') renderTable(current.rows, current.title);
+  else if (current.type === 'chart') renderChart(current);
   else renderSlide(current.outline, current.title);
+}
+
+function renderChart(item) {
+  const stage = $('artifact-stage');
+  const head = $('artifact-title');
+  if (head) head.textContent = item.title || 'Grafik';
+  if (!stage) return;
+  stage.innerHTML = item.markdown || buildChartSvg({ type: 'bar', title: item.title, labels: [], datasets: [{ data: [] }] });
+}
+
+function paintVersions() {
+  const head = $('artifact-head');
+  if (!head) return;
+  let pick = $('artifact-version');
+  if (!pick) {
+    pick = document.createElement('select');
+    pick.id = 'artifact-version';
+    head.insertBefore(pick, head.querySelector('#artifact-run') || head.lastChild);
+  }
+  pick.innerHTML = '';
+  const list = current.versions || [];
+  if (!list.length) {
+    pick.hidden = true;
+    return;
+  }
+  pick.hidden = false;
+  list.forEach((item, index) => {
+    const opt = document.createElement('option');
+    opt.value = String(index);
+    opt.textContent = 'v' + (index + 1);
+    pick.appendChild(opt);
+  });
+  const now = document.createElement('option');
+  now.value = 'now';
+  now.textContent = 'v' + (list.length + 1);
+  now.selected = true;
+  pick.appendChild(now);
+  pick.onchange = () => {
+    if (pick.value === 'now') return;
+    const chosen = list[Number(pick.value)];
+    if (!chosen) return;
+    current = Object.assign({}, chosen, { versions: list });
+    renderCurrent();
+  };
 }
 
 export const artifact = {
@@ -171,10 +262,17 @@ export const artifact = {
     const panel = $('artifact-panel');
     const app = $('app');
     if (!panel) return;
-    current = normalize(first, title, fileName);
+    const next = normalize(first, title, fileName);
+    if (current && current.fileName === next.fileName && current.type === next.type) {
+      const snap = Object.assign({}, current);
+      delete snap.versions;
+      next.versions = (current.versions || []).concat([snap]).slice(-8);
+    }
+    current = next;
     if (current.type === 'slide') rememberSlide(current.outline, current.fileName);
     else rememberArtifact(current);
     renderCurrent();
+    paintVersions();
     panel.classList.add('open');
     if (app) app.classList.add('split');
     panel.hidden = false;
@@ -189,6 +287,11 @@ export const artifact = {
     if (app) app.classList.remove('split');
   },
   exportNow() {
+    if (current.type === 'chart') {
+      const svg = current.markdown || '';
+      downloadText(current.fileName || 'grafik.svg', svg);
+      return;
+    }
     if (current.type === 'table') {
       const rows = readTable();
       const csv = rows.map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');

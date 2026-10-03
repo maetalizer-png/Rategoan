@@ -2,12 +2,14 @@ import { $ } from '../../shared/dom.js';
 import { sheets } from './sheets.js';
 import { extractPdfText } from '../../shared/pdf-extract.js';
 import { readZipText } from '../../shared/zip-local.js';
+import { toast } from '../core/toast.js';
 
 const X_SVG =
   '<svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
 
 export const attach = {
   current: null,
+  files: [],
   modes: { websearch: false, think: false, research: false },
   onModeOff: null,
   open() {
@@ -62,18 +64,22 @@ export const attach = {
   },
   async handleFile(f) {
     if (!f) return;
-    this.current = { name: f.name, type: f.type, size: f.size, thumb: null };
+    if (this.files.length >= 5) {
+      toast.show('Maksimal 5 berkas.');
+      return;
+    }
+    const item = { name: f.name, type: f.type, size: f.size, thumb: null };
     if (f.type && f.type.indexOf('image/') === 0) {
-      this.current.thumb = await this.makeThumb(f);
-      this.current.full = await this.makeThumb(f, 1600);
+      item.thumb = await this.makeThumb(f);
+      item.full = await this.makeThumb(f, 1600);
     } else if (/\.(ics|txt|enex|md|csv|tsv|json|xml|html?|log|ya?ml|srt|rtf)$/i.test(f.name || '')) {
-      this.current.fileText = await this.readAsText(f);
+      item.fileText = await this.readAsText(f);
     } else if (/\.docx$/i.test(f.name || '')) {
-      this.current.fileBinary = await this.readAsArrayBuffer(f);
-      if (this.current.fileBinary) {
+      item.fileBinary = await this.readAsArrayBuffer(f);
+      if (item.fileBinary) {
         try {
-          const xml = await readZipText(this.current.fileBinary, 'word/document.xml');
-          this.current.fileText = xml
+          const xml = await readZipText(item.fileBinary, 'word/document.xml');
+          item.fileText = xml
             .replace(/<w:p\b[^>]*>/g, '\n')
             .replace(/<[^>]+>/g, '')
             .replace(/&/g, '&')
@@ -82,19 +88,21 @@ export const attach = {
             .replace(/\n{3,}/g, '\n\n')
             .trim();
         } catch (e) {
-          this.current.fileTextError = 'Gagal membaca isi DOCX.';
+          item.fileTextError = 'Gagal membaca isi DOCX.';
         }
       }
     } else if (/\.(pdf|zip)$/i.test(f.name || '')) {
-      this.current.fileBinary = await this.readAsArrayBuffer(f);
-      if (this.current.fileBinary && /\.pdf$/i.test(f.name || '')) {
+      item.fileBinary = await this.readAsArrayBuffer(f);
+      if (item.fileBinary && /\.pdf$/i.test(f.name || '')) {
         try {
-          this.current.fileText = await extractPdfText(this.current.fileBinary.slice(0));
+          item.fileText = await extractPdfText(item.fileBinary.slice(0));
         } catch (e) {
-          this.current.fileTextError = 'Gagal membaca isi PDF: ' + (e && e.message ? e.message : 'error tidak diketahui');
+          item.fileTextError = 'Gagal membaca isi PDF: ' + (e && e.message ? e.message : 'error tidak diketahui');
         }
       }
     }
+    this.files.push(item);
+    this.current = this.files[0];
     this.renderChip();
     sheets.close();
   },
@@ -121,7 +129,7 @@ export const attach = {
       modes.think ? ['think', 'Berpikir lebih keras'] : null,
       modes.research ? ['research', 'Riset mendalam'] : null,
     ].filter(Boolean);
-    if (!this.current && !active.length) {
+    if (!this.files.length && !active.length) {
       row.hidden = true;
       return;
     }
@@ -147,36 +155,54 @@ export const attach = {
       });
       row.appendChild(modeRow);
     }
-    if (!this.current) return;
-    const chip = document.createElement('div');
-    chip.className = 'attach-chip';
-    if (this.current.thumb) {
-      const img = document.createElement('img');
-      img.className = 'attach-thumb';
-      img.src = this.current.thumb;
-      img.alt = this.current.name;
-      chip.appendChild(img);
-    }
-    const name = document.createElement('span');
-    name.className = 'attach-name';
-    name.textContent = this.current.name;
-    const x = document.createElement('button');
-    x.className = 'hist-del';
-    x.setAttribute('aria-label', 'Remove');
-    x.innerHTML = X_SVG;
-    x.onclick = () => {
-      this.current = null;
-      this.renderChip();
-    };
-    chip.appendChild(name);
-    chip.appendChild(x);
-    row.appendChild(chip);
+    this.files.forEach((file, index) => {
+      const chip = document.createElement('div');
+      chip.className = 'attach-chip';
+      if (file.thumb) {
+        const img = document.createElement('img');
+        img.className = 'attach-thumb';
+        img.src = file.thumb;
+        img.alt = file.name;
+        chip.appendChild(img);
+      }
+      const name = document.createElement('span');
+      name.className = 'attach-name';
+      name.textContent = file.name;
+      const x = document.createElement('button');
+      x.className = 'hist-del';
+      x.setAttribute('aria-label', 'Hapus ' + file.name);
+      x.innerHTML = X_SVG;
+      x.onclick = () => {
+        this.files.splice(index, 1);
+        this.current = this.files[0] || null;
+        this.renderChip();
+      };
+      chip.appendChild(name);
+      chip.appendChild(x);
+      row.appendChild(chip);
+    });
   },
   consume() {
-    const c = this.current;
+    const files = this.files.slice();
+    this.files = [];
     this.current = null;
     this.renderChip();
-    return c;
+    if (!files.length) return null;
+    const texts = files.map((file, index) => {
+      if (file.fileText) return '[Berkas ' + (index + 1) + ': ' + file.name + ']\n' + file.fileText;
+      if (file.fileTextError) return '[Berkas ' + (index + 1) + ': ' + file.name + ']\n' + file.fileTextError;
+      return '';
+    }).filter(Boolean);
+    return {
+      name: files.map((file) => file.name).join(', '),
+      type: files[0].type,
+      size: files[0].size,
+      thumb: files[0].thumb || null,
+      full: files[0].full || null,
+      files,
+      fileText: texts.join('\n\n'),
+      fileTextError: texts.length ? '' : (files[0].fileTextError || ''),
+    };
   },
   bind() {
     $('sheet-photo').onclick = () => this.pick('photo');

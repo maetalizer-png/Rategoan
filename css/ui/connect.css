@@ -63,13 +63,13 @@
 
 .hub-card {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 12px;
   width: 100%;
   text-align: left;
-  padding: 12px;
+  padding: 14px 16px;
   border: 0;
-  border-bottom: 1px solid var(--rg-line, #e4e4e4);
+  border-bottom: 1px solid var(--rg-line, #f0f2f5);
   background: transparent;
   font: inherit;
   color: inherit;
@@ -90,16 +90,44 @@
   font-weight: 700;
 }
 
-.hub-card-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.hub-card-title { display: flex; align-items: center; gap: 8px; }
-.hub-card-desc { font-size: 12px; color: var(--rg-muted, #5c6570); }
+.hub-card-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.hub-card-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; line-height: 1.35; }
+.hub-card-name { font-size: 14px; font-weight: 600; }
+.hub-card-desc { font-size: 12px; color: var(--rg-muted, #6b7280); line-height: 1.45; }
 .hub-badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
   font-size: 11px;
-  padding: 2px 6px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 999px;
-  background: var(--rg-surface-2, #f3f4f6);
+  background: var(--rg-surface-2, #f1f3f5);
+  border: 1px solid var(--rg-line, #e5e7eb);
+  color: var(--rg-muted, #5c6570);
 }
-.hub-card-side, .hub-cut { font-size: 12px; color: #184e9e; background: none; border: 0; font: inherit; cursor: pointer; }
+.hub-card-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex: none; }
+.hub-btn-connect, .hub-btn-manage, .hub-tag-builtin, .hub-btn-disconnect {
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+.hub-btn-connect { background: #eef5fd; color: #1a73e8; border: 1px solid #cce1fb; }
+.hub-btn-manage { background: var(--rg-surface-2, #f6f6f6); color: var(--rg-text, #111); border: 1px solid var(--rg-line, #e4e4e4); }
+.hub-tag-builtin { background: var(--rg-surface-2, #f3f4f6); color: var(--rg-muted, #5c6570); padding: 4px 10px; font-size: 11px; }
+.hub-btn-disconnect { background: transparent; color: #b42318; border: 0; font-weight: 600; padding: 0 4px; }
+.hub-search-box { margin: 8px 0 12px; }
+.hub-search-input {
+  width: 100%;
+  border: 1px solid var(--rg-line, #e4e4e4);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  background: var(--rg-surface, #fff);
+}
 .hub-action {
   border: 1px solid var(--rg-line, #e4e4e4);
   background: var(--rg-surface-2, #f6f6f6);

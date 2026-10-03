@@ -22,6 +22,9 @@ import { toolsKode } from '../../raget/raget-agents/tools-kode.js';
 import { artifact } from '../ui/artifact.js';
 import { workspace } from '../state/workspace.js';
 import { projectPage } from '../project/project.js';
+import { runAgentPlan } from '../agent/worker-bridge.js';
+import { mountThought } from '../ui/thought-card.js';
+import { parseChartAsk, buildChartSvg } from '../../shared/charts-local.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
@@ -180,6 +183,15 @@ function textToTable(text) {
   return rows;
 }
 
+async function tryChartRequest(text) {
+  if (!/\b(grafik|diagram|chart)\b/i.test(text)) return null;
+  const spec = parseChartAsk(text);
+  if (!spec) return 'Sebut nilainya, misalnya: buat grafik batang A: 10, B: 20.';
+  const svg = buildChartSvg(spec);
+  artifact.open({ type: 'chart', markdown: svg, title: spec.title, fileName: 'grafik.svg' }, spec.title);
+  return 'Grafik terbuka di panel. Bisa diunduh sebagai SVG.';
+}
+
 async function tryTableRequest(text, session) {
   if (!TABLE_RE.test(text)) return null;
   const material = lastAiText(session) || text.replace(TABLE_RE, '').trim();
@@ -273,6 +285,7 @@ export const composer = {
     let directReply = await trySlideRequest(text, att, s);
     if (directReply == null) directReply = await tryDocumentRequest(text, s);
     if (directReply == null) directReply = await tryTableRequest(text, s);
+    if (directReply == null) directReply = await tryChartRequest(text);
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
@@ -286,7 +299,34 @@ export const composer = {
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, preamble: [wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    const project = workspace.current();
+    if (project) workspace.linkSession(project.id, s.id);
+    let projectPrefix = '';
+    if (project && (project.systemPrompt || (project.pinnedFiles && project.pinnedFiles.length))) {
+      projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + (project.pinnedFiles || []).map((file) => file.name + ': ' + String(file.textContent || '').slice(0, 400)).join('\n');
+    }
+    let thoughts = null;
+    if (this.thinkActive || this.researchActive) {
+      const live = document.createElement('div');
+      live.className = 'msg ai';
+      const card = mountThought(live, [{ kind: 'EMIT_THOUGHT', text: 'Menyiapkan jejak…' }], 'berjalan');
+      $('messages').appendChild(live);
+      const plan = await runAgentPlan({
+        text,
+        think: this.thinkActive,
+        research: this.researchActive,
+        files: att && att.name,
+        sessionId: s.id,
+        onStep: (steps) => {
+          if (!card) return;
+          live.innerHTML = '';
+          mountThought(live, steps, 'berjalan');
+        },
+      });
+      thoughts = plan.steps;
+      live.remove();
+    }
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [projectPrefix, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
@@ -350,6 +390,15 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        const offset = Math.max(0, window.innerHeight - window.visualViewport.height - (window.visualViewport.offsetTop || 0));
+        document.documentElement.style.setProperty('--keyboard-offset', offset + 'px');
+        const card = $('composer');
+        if (card) card.style.paddingBottom = offset > 80 ? offset + 'px' : '';
+        if (offset > 100) scrollBottom();
+      });
+    }
     attach.onModeOff = (key) => {
       if (key === 'websearch') this.setWebsearch(false);
       else if (key === 'think') {

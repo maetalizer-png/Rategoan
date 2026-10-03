@@ -10,3 +10,9 @@
 .chat-search-bar .hist-search-input {
   flex: 1;
 }
+
+mark.qhit {
+  background: #ffe08a;
+  color: inherit;
+  padding: 0 1px;
+}

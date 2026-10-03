@@ -11,6 +11,32 @@ function fuzzyTextMatch(haystack, query) {
   return qWords.every((qw) => hWords.some((hw) => collectionSearch.levenshtein(qw, hw) <= FUZZY_MAX_DISTANCE));
 }
 
+function markText(root, query) {
+  const safe = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(safe, 'ig');
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    if (!node.nodeValue || !re.test(node.nodeValue)) return;
+    re.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0;
+    let found = re.exec(node.nodeValue);
+    while (found) {
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(last, found.index)));
+      const mark = document.createElement('mark');
+      mark.className = 'qhit';
+      mark.textContent = found[0];
+      frag.appendChild(mark);
+      last = found.index + found[0].length;
+      found = re.exec(node.nodeValue);
+    }
+    frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+    if (node.parentNode) node.parentNode.replaceChild(frag, node);
+  });
+}
+
 export const chatsearch = {
   matches: [],
   idx: -1,
@@ -32,6 +58,10 @@ export const chatsearch = {
     }
   },
   clear() {
+    document.querySelectorAll('mark.qhit').forEach((mark) => {
+      const text = document.createTextNode(mark.textContent || '');
+      if (mark.parentNode) mark.parentNode.replaceChild(text, mark);
+    });
     this.matches.forEach((el) => el.classList.remove('hit'));
     this.matches = [];
     this.idx = -1;
@@ -61,6 +91,8 @@ export const chatsearch = {
     if (!el) return;
     this.matches.forEach((m) => m.classList.remove('hit'));
     el.classList.add('hit');
+    const q = (($('chat-search-input') || {}).value || '').trim();
+    if (q) markText(el, q);
     el.scrollIntoView({ block: 'center' });
     this.count();
   },

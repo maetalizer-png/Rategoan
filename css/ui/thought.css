@@ -1,0 +1,39 @@
+.thought-accordion {
+  margin: 0 0 8px;
+  border: 1px solid var(--rg-line, #e4e4e4);
+  border-radius: 12px;
+  background: var(--rg-surface, #fff);
+  font-size: 12px;
+}
+
+.thought-accordion summary {
+  cursor: pointer;
+  padding: 8px 10px;
+  list-style: none;
+}
+
+.thought-accordion summary::-webkit-details-marker { display: none; }
+
+.thought-accordion.running summary::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #184e9e;
+  animation: thought-pulse 1s infinite;
+}
+
+.thought-accordion ol {
+  margin: 0;
+  padding: 0 12px 10px 28px;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.thought-accordion li { margin: 4px 0; }
+
+@keyframes thought-pulse {
+  50% { opacity: 0.35; }
+}

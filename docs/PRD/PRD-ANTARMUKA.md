@@ -675,3 +675,28 @@ Sesi kerja maraton 90–180 menit dinyatakan tuntas dan berhak menyerahkan hasil
 * Tidak ada *broken links*, variabel tak terdefinisi (*undefined globals*), atau error konsol pada antarmuka utama (`index.html`).  
 * Seluruh unit test lulus secara otomatis.  
 * Seluruh berkas terverifikasi bebas dari komentar pengembang (Zero Comments in Production Code).
+
+# 16–18. Salinan pekerjaan baru dari Google Drive
+
+Sumber: dokumen Drive `PRD antarmuka` (`19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw`), diubah 3 Oktober 2026 pukul 21:25 UTC. Bab 16 sampai 18 adalah pekerjaan baru di atas tracker lama.
+
+| No | Tugas | Status |
+| --- | --- | --- |
+| 54 | Web Worker jejak pikiran dan kartu akordeon | SUDAH SELESAI |
+| 55–56 | Lampiran sampai 5 berkas | SUDAH SELESAI |
+| 57–58 | Instruksi proyek dan sesi terkait | SUDAH SELESAI |
+| 59–60 | Cari di obrolan dengan sorotan kuning | SUDAH SELESAI |
+| 61 | Grafik SVG batang, garis, lingkaran | SUDAH SELESAI |
+| 62 | Pratinjau slide 16:9 | SUDAH SELESAI |
+| 63 | Riwayat versi artefak | SUDAH SELESAI |
+| 64–65 | Worker dan jembatan jejak, batas 45 detik | SUDAH SELESAI |
+| 66 | Komposer tidak tertutup keyboard | SUDAH SELESAI |
+| 67 | Tombol kembali tidak keluar dari aplikasi | SUDAH SELESAI |
+| 68 | Token konektor dienkripsi AES-GCM | SUDAH SELESAI |
+| 69 | Tombol uji sambungan | SUDAH SELESAI |
+| 70 | Toast versi baru | SUDAH SELESAI |
+| 71–72 | Ikon konektor dan tata letak kartu | SUDAH SELESAI |
+| 73 | Studio menutup menu samping | SUDAH SELESAI |
+| 53 | Pembersihan komentar massal | DITAHAN |
+
+Baris 53 tetap ditahan. Komentar di shader dan catatan mesin tidak dihapus.

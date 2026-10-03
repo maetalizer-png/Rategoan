@@ -31,6 +31,7 @@ import { studioPage } from './studio/studio.js';
 import { artifactsPage } from './artifacts/artifacts.js';
 import { connectPage } from './connect/connect.js';
 import { bindConnectorReturn } from './connectors/connector-hub.js';
+import { hydrateConnectorSecrets } from './connectors/connector-state.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   artifactsPage.bind();
   connectPage.bind();
   bindConnectorReturn();
+  hydrateConnectorSecrets().catch(() => {});
   window.addEventListener('rategoan:attach-context', (event) => {
     const text = event.detail && event.detail.text;
     const inp = $('chat-input');
@@ -131,7 +133,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
+    navigator.serviceWorker.register('sw.js').then((reg) => {
+      reg.addEventListener('updatefound', () => {
+        const worker = reg.installing;
+        if (!worker) return;
+        worker.addEventListener('statechange', () => {
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+            toast.show('Versi baru Rategoan tersedia. Ketuk untuk memuat ulang.');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = 'Muat ulang';
+            btn.style.marginLeft = '8px';
+            btn.onclick = () => location.reload();
+            const host = document.body;
+            if (host) host.appendChild(btn);
+          }
+        });
+      });
+    }).catch(() => {});
   });
 }
 

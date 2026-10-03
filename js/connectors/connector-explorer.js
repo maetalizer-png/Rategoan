@@ -74,6 +74,30 @@ export function mountExplorer(root, serviceId, onBack) {
     note.textContent = 'Sandbox berjalan di Studio kode pada perangkat ini. Tidak ada panggilan server.';
     root.appendChild(note);
   }
+  const ping = button('Uji sambungan', async () => {
+    if (svc.system_native) {
+      show('Bawaan perangkat. Tidak memakai token server.');
+      return;
+    }
+    if (!connectorState.token(serviceId)) {
+      show('Belum terhubung.');
+      emitConnector('rategoan:reconnect-required', { service: serviceId });
+      return;
+    }
+    const probe = {
+      google_drive: ['drive_list_children', { folder_id: 'root' }],
+      github: ['github_list_repos', { per_page: 1 }],
+      gmail: ['gmail_search_threads', { q: 'in:inbox', maxResults: 1 }],
+      google_calendar: ['calendar_list_events', { maxResults: 1 }],
+    }[serviceId];
+    if (!probe) {
+      show('Tidak ada uji untuk konektor ini.');
+      return;
+    }
+    const result = await runConnectorTool(probe[0], probe[1]);
+    show(result.ok === false || result.error ? result : 'Sambungan hidup.');
+  });
+  root.appendChild(ping);
   const attach = button('Sematkan ke chat', () => {
     const text = out.textContent || '';
     if (!text) return;
