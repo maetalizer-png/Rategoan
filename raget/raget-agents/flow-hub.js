@@ -1,3 +1,5 @@
+import { queryTree } from './deep-research.js';
+
 function cleanLeak(text) {
   return String(text || '')
     .replace(/\s*target=_blank\b/gi, '')
@@ -56,12 +58,7 @@ function thinkBlock(topic) {
 
 function researchPlan(topic) {
   const t = String(topic || '').replace(/^riset\s+(mendalam\s+)?/i, '').trim() || 'topik';
-  const branches = [
-    t + ' — definisi dan batas masalah',
-    t + ' — data dan angka yang bisa dicek',
-    t + ' — pendapat yang saling bertentangan',
-    t + ' — dampak praktis dan langkah berikutnya',
-  ];
+  const branches = queryTree(t);
   return [
     'Pohon kueri',
     ...branches.map((line, index) => (index + 1) + '. ' + line),

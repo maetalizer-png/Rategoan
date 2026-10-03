@@ -40,18 +40,23 @@ export function mountMemoryCapsule() {
   root.id = 'memory-capsule';
   root.hidden = true;
   root.innerHTML = '<header class="settings-header"><button type="button" id="memory-back" class="back-btn plain">Kembali</button><h1>Kapsul memori</h1></header><div id="memory-list"></div><button type="button" id="memory-clear">Kosongkan semua</button>';
-  const app = $('app');
+  const app = document.body;
   if (app) app.appendChild(root);
+  const close = () => { root.hidden = true; };
   const open = () => {
     root.hidden = false;
     paint($('memory-list'));
   };
   document.addEventListener('click', (event) => {
     const hit = event.target && event.target.closest && event.target.closest('[data-open-memory]');
-    if (hit) open();
+    if (hit) {
+      event.preventDefault();
+      open();
+    }
   });
+  window.addEventListener('hashchange', close);
   const back = $('memory-back');
-  if (back) back.onclick = () => { root.hidden = true; };
+  if (back) back.onclick = close;
   const clear = $('memory-clear');
   if (clear) clear.onclick = () => {
     memoryLong.clear();

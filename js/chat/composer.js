@@ -24,6 +24,7 @@ import { workspace } from '../state/workspace.js';
 import { projectPage } from '../project/project.js';
 import { runAgentPlan } from '../agent/worker-bridge.js';
 import { mountThought } from '../ui/thought-card.js';
+import { mountQuiz } from '../ui/quiz-card.js';
 import { parseChartAsk, buildChartSvg } from '../../shared/charts-local.js';
 import { parseDiagramAsk, buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { printReport } from '../../shared/report-export.js';
@@ -438,8 +439,6 @@ export const composer = {
       window.visualViewport.addEventListener('resize', () => {
         const offset = Math.max(0, window.innerHeight - window.visualViewport.height - (window.visualViewport.offsetTop || 0));
         document.documentElement.style.setProperty('--keyboard-offset', offset + 'px');
-        const card = $('composer');
-        if (card) card.style.paddingBottom = offset > 80 ? offset + 'px' : '';
         if (offset > 100) scrollBottom();
       });
     }
@@ -511,6 +510,7 @@ export const composer = {
       store.save();
       history.render();
       chat.renderMessages();
+      mountQuiz($('messages'), material);
     };
     const projectCard = $('sheet-project');
     if (projectCard) projectCard.onclick = () => openProjectSheet();

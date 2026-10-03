@@ -73,20 +73,11 @@ export const voice = {
     $('btn-stop').onclick = () => this.stop();
     const btn = $('btn-voice-input');
     if (!btn) return;
-    btn.addEventListener('pointerdown', (e) => {
-      if (e.button && e.button !== 0) return;
-      e.preventDefault();
-      this.speakNext = true;
-      this.listen();
-    });
-    const end = () => {
-      if (!this.listening) return;
-      try {
-        this.rec && this.rec.stop();
-      } catch (e) {}
+    btn.onclick = (event) => {
+      event.preventDefault();
+      if (this.listening) {
+        try { this.rec && this.rec.stop(); } catch (e) {}
+      } else this.listen();
     };
-    btn.addEventListener('pointerup', end);
-    btn.addEventListener('pointercancel', end);
-    btn.addEventListener('pointerleave', end);
   },
 };

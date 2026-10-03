@@ -103,6 +103,15 @@ export const connectorHub = {
     search.type = 'search';
     search.placeholder = 'Cari konektor atau alat';
     search.oninput = () => this.paintLists(root, search.value);
+    const searchIco = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    searchIco.setAttribute('viewBox', '0 0 24 24');
+    searchIco.setAttribute('width', '18');
+    searchIco.setAttribute('height', '18');
+    searchIco.setAttribute('fill', 'none');
+    searchIco.setAttribute('stroke', 'currentColor');
+    searchIco.setAttribute('stroke-width', '2');
+    searchIco.innerHTML = '<circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>';
+    searchWrap.appendChild(searchIco);
     searchWrap.appendChild(search);
     root.appendChild(searchWrap);
     const lists = el('div', 'hub-lists');
@@ -137,7 +146,7 @@ export const connectorHub = {
     if (!connected.length && !featured.length) lists.appendChild(el('p', 'hub-note', 'Tidak ada konektor yang cocok.'));
   },
   card(root, id, svc) {
-    const card = el('div', 'hub-card' + (svc.connected ? ' live' : ''));
+    const card = el('div', 'hub-card');
     const mark = el('span', 'hub-mark');
     mark.innerHTML = ICONS[id] || '';
     const body = el('span', 'hub-card-body');
@@ -146,6 +155,7 @@ export const connectorHub = {
     const line = el('span', 'hub-card-title');
     line.appendChild(name);
     line.appendChild(badge);
+    if (svc.connected) line.appendChild(el('span', 'hub-connected-badge', 'Hidup'));
     const desc = el('span', 'hub-card-desc', COPY[id] || '');
     const account = svc.account_email || svc.account_username;
     if (account) desc.textContent = desc.textContent + ' · ' + account;

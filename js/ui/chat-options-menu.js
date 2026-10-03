@@ -7,6 +7,8 @@ import { router } from '../core/router.js';
 import { drawer } from './drawer.js';
 import { printReport } from '../../shared/report-export.js';
 import { toast } from '../core/toast.js';
+import { composer } from '../chat/composer.js';
+import { haptics } from '../../shared/haptics.js';
 
 function session() {
   const st = store.get();
@@ -24,10 +26,24 @@ function markdownOf(s) {
 export function mountChatOptions() {
   const btn = $('btn-chat-more');
   const fresh = $('btn-new-chat-top');
-  if (fresh) fresh.onclick = () => {
-    const side = $('btn-new-chat');
-    if (side) side.click();
-  };
+  if (fresh) {
+    fresh.onclick = (event) => {
+      event.stopPropagation();
+      store.set({ currentId: null });
+      const inp = $('chat-input');
+      if (inp) {
+        inp.value = '';
+        composer.autoGrow();
+        inp.focus();
+      }
+      chat.renderMessages();
+      history.render();
+      drawer.close();
+      router.go('chat');
+      haptics.tap(20);
+      toast.show('Obrolan baru siap');
+    };
+  }
   if (!btn) return;
   const menu = document.createElement('div');
   menu.id = 'chat-options-menu';

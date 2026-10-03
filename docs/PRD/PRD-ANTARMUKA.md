@@ -732,4 +732,24 @@ Sumber: `19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw`.
 | 102–104 | Riset empat cabang dan berkas laporan | SUDAH SELESAI |
 | 105–108 | Kapsul memori lokal | SUDAH SELESAI |
 
+# 26–27. Perbaikan dari tangkapan layar 4 Oktober 2026
+
+Sumber Drive `19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw`, diubah 3 Oktober 2026 pukul 23:29 UTC.
+
+| No | Tugas | Status |
+| --- | --- | --- |
+| 106, 116 | Kapsul memori jadi layar penuh, tidak menempel di bawah halaman | SUDAH SELESAI |
+| 107–109 | Studio: nomor baris gelap, tab pil, tombol jalankan nila, konsol rapi | SUDAH SELESAI |
+| 110 | Template proyek berupa tombol terpisah | SUDAH SELESAI |
+| 111 | Garis hijau konektor diganti lencana titik | SUDAH SELESAI |
+| 112, 119 | Ikon perintah dihilangkan dari bilah atas ponsel | SUDAH SELESAI |
+| 113 | Saringan koleksi geser menyamping, tombol catatan nila | SUDAH SELESAI |
+| 114, 117 | Kartu akun menempel di dasar sidebar, kapsul masuk menu ruang kerja | SUDAH SELESAI |
+| 118 | Komposer tidak lagi didorong dua kali saat papan ketik muncul | SUDAH SELESAI |
+| 120 | Mikrofon kembali ketuk untuk mulai dan berhenti | SUDAH SELESAI |
+| 121 | Tombol obrolan baru mengosongkan sesi dan fokus ke kotak tulis | SUDAH SELESAI |
+| 122 | Saringan dan kartu artefak terpisah | SUDAH SELESAI |
+| 97, 102–104 | Riset empat cabang, kartu kuis belajar, getar singkat | SUDAH SELESAI |
+
+
 
