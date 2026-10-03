@@ -1,0 +1,25 @@
+#command-palette { position: fixed; inset: 0; z-index: 80; }
+.cmd-backdrop { position: absolute; inset: 0; background: rgba(15, 18, 22, 0.35); backdrop-filter: blur(8px); }
+.cmd-panel {
+  position: relative;
+  margin: 12vh auto 0;
+  width: min(560px, calc(100% - 24px));
+  background: var(--rg-surface, #fff);
+  border: 1px solid var(--rg-line, #e4e4e4);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+}
+.cmd-input { width: 100%; border: 0; padding: 14px 16px; font: inherit; outline: none; background: transparent; }
+.cmd-list { list-style: none; margin: 0; padding: 0 0 8px; max-height: 320px; overflow: auto; }
+.cmd-list li { padding: 10px 16px; cursor: pointer; }
+.cmd-list li.on { background: #e7f0ff; }
+.clarify-card {
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f7f4ee;
+  border: 1px solid #e2d8c8;
+}
+.clarify-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.clarify-actions button { border-radius: 999px; border: 1px solid #d7cbb8; background: #fff; padding: 6px 10px; }

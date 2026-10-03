@@ -1,5 +1,10 @@
 const DB = 'rategoan_db';
 const STORE = 'agent_runs';
+let activeCancel = null;
+
+export function cancelAgent() {
+  if (activeCancel) activeCancel();
+}
 
 function saveRun(record) {
   return new Promise((resolve) => {
@@ -39,6 +44,7 @@ export function runAgentPlan(detail) {
         worker.terminate();
         worker = null;
       }
+      if (activeCancel === cancel) activeCancel = null;
       const record = {
         id: started + '-' + Math.random().toString(36).slice(2, 8),
         sessionId: detail.sessionId || '',
@@ -54,6 +60,8 @@ export function runAgentPlan(detail) {
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => finish('kedaluwarsa'), 45000);
     };
+    const cancel = () => finish('dibatalkan');
+    activeCancel = cancel;
     try {
       worker = new Worker(new URL('./agent-worker.js', import.meta.url));
     } catch (e) {
@@ -86,9 +94,3 @@ export function runAgentPlan(detail) {
   });
 }
 
-export function stopAgent(holder) {
-  if (holder && holder.worker) {
-    holder.worker.terminate();
-    holder.worker = null;
-  }
-}

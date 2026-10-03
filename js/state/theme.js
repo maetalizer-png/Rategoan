@@ -13,12 +13,6 @@ export const theme = {
     const m = document.querySelector('meta[name="theme-color"]');
     if (m) m.content = dark ? '#05080c' : '#ffffff';
   },
-  // Ganti tema TANPA peredup - dipakai saat sistem berubah sendiri
-  // (media query 'change') dan saat init() pertama kali (tidak ada apa-apa
-  // untuk "ditransisikan" karena halaman belum sempat tergambar).
-  // apply() lewat set()/init() dipisah dari flashVeil supaya animasi
-  // peredup HANYA muncul saat pengguna sendiri yang menekan tombol
-  // T/A/G, bukan tiap kali listener sistem terpicu di background.
   applyWithVeil() {
     const veil = document.getElementById('theme-veil');
     if (!veil) {

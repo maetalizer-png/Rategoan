@@ -534,12 +534,6 @@ export const collectionPage = {
       if ((location.hash || '').indexOf('collection') >= 0) this.open();
     });
     $('coll-back').onclick = () => router.go('chat');
-    // Ekspor/Backup/Impor dulu 1 baris 3 tombol permanen di badan halaman -
-    // sama beratnya secara visual dengan chip filter di atasnya, bikin
-    // halaman kelihatan penuh kotak-kotak padahal 3 aksi ini jarang dipakai
-    // (sekali-sekali, bukan tiap buka Koleksi). Dipindah ke menu titik
-    // tiga di header (pola sama seperti menu pesan chat) - badan halaman
-    // jadi lega, aksi jarang-pakai tetap ada tapi tidak menyita perhatian.
     const collMenu = $('coll-menu');
     const moreBtn = $('coll-more');
     const closeCollMenu = () => { collMenu.hidden = true; };

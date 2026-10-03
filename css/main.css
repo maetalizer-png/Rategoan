@@ -11,6 +11,7 @@
 @import 'ui/artifact.css';
 @import 'ui/connect.css';
 @import 'ui/thought.css';
+@import 'ui/command-palette.css';
 @import 'ui/scroll.css';
 
 @import 'chat/messages.css';

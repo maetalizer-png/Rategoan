@@ -1,7 +1,3 @@
-// Cuaca real-time via Open-Meteo (geocoding-api.open-meteo.com +
-// api.open-meteo.com) - gratis, tanpa API key, CORS terbuka langsung dari
-// browser. Ini kapabilitas yang beda kelas dari Wikipedia/Wiktionary: bukan
-// ensiklopedia statis, tapi data cuaca yang benar-benar berubah tiap jam.
 const NETWORK_FAIL_MESSAGE =
   'Gagal mengakses internet untuk cek cuaca ini — bisa karena tidak ada koneksi, atau layanan cuaca sedang tidak bisa diakses dari sini. Raget 100% berjalan lokal tanpa server perantara, jadi cek cuaca langsung bergantung pada koneksi perangkat ini.';
 

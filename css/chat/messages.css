@@ -131,9 +131,6 @@
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   padding-bottom: 1px;
-  /* Baris tombol Salin/Baca/Bagikan bukan bagian dari teks jawaban -
-     tanpa ini, drag-select teks pesan ikut menyorot label tombol
-     (terlihat kayak kartu/box aneh muncul saat screenshot). */
   -webkit-user-select: none;
   user-select: none;
 }

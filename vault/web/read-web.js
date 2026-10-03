@@ -20,11 +20,6 @@ async function fetchDirect(url) {
   return stripHtml(html).slice(0, MAX_CHARS);
 }
 
-// Jina Reader (r.jina.ai) - jasa "pembaca" pihak ketiga yang bertindak
-// seperti browser biasa untuk bypass proteksi anti-bot/CORS situs yang
-// menolak fetch() langsung dari kode (banyak situs berita begini). Dipakai
-// sebagai fallback KEDUA, bukan jalur utama - situs yang memang mengizinkan
-// CORS tetap diakses langsung dulu tanpa tambahan dependensi pihak ketiga.
 async function fetchViaJina(url) {
   const res = await fetch('https://r.jina.ai/' + url, { mode: 'cors' });
   if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -40,13 +35,11 @@ async function read(url) {
     const text = await fetchDirect(url);
     if (text) return { ok: true, text: await answerComposer.lockAnswer('', text) };
   } catch (e) {
-    // lanjut ke fallback Jina Reader
   }
   try {
     const text = await fetchViaJina(url);
     if (text) return { ok: true, text: await answerComposer.lockAnswer('', text), viaJina: true };
   } catch (e) {
-    // dua-duanya gagal
   }
   return { ok: false, stub: true, message: CORS_MESSAGE };
 }

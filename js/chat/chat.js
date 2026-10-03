@@ -14,6 +14,8 @@ import { router } from '../core/router.js';
 import { exportSlides, heldSlide } from '../../shared/slides-export.js';
 import { isRich, mountRich, stripForSpeech } from '../ui/artifact-card.js';
 import { mountThought } from '../ui/thought-card.js';
+import { mountClarification } from '../ui/clarification-card.js';
+import { recoverAttempt } from '../../raget/raget-agents/turn-pipeline.js';
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
@@ -87,9 +89,6 @@ function buildMoreBtn() {
   return btn;
 }
 
-// Jam + tombol menu (titik tiga) satu baris rata kanan - dulu keduanya
-// di-append terpisah ke .msg, yang bikin tombolnya turun ke baris sendiri
-// (elemen .time pakai display:block) alih-alih sejajar dengan jam.
 function buildMetaRow(time) {
   const row = document.createElement('div');
   row.className = 'msg-meta';
@@ -285,11 +284,6 @@ export const chat = {
         a.appendChild(document.createTextNode(m.attach.name));
         d.appendChild(a);
       }
-      // Menu pesan (Salin/Balas/Ubah/Kirim ulang/Hapus) dipicu tombol titik
-      // tiga di baris ini (klik, bukan tahan-lama) - dulu dipicu
-      // touch-and-hold di mana pun pada bubble, yang bentrok dengan gestur
-      // select-teks native (copy jadi tidak pernah kepicu karena keburu
-      // ke-hijack timer 480ms).
       d.appendChild(buildMetaRow(m.time));
       if (m.role === 'user' && m.attach && m.attach.full) {
         const row = document.createElement('div');
@@ -367,11 +361,6 @@ export const chat = {
   async ask(prompt, opts) {
     const s = this.current();
     const hasDirectReply = !!(opts && opts.directReply != null);
-    // directReply (slide/baca-file) tidak pernah dianggap "hasil pencarian
-    // web" walau toggle Pencarian Web sedang aktif - dulu badge globe +
-    // "Mencari di internet..." tetap muncul di jawaban slide/baca-file
-    // cuma karena toggle-nya lupa dimatikan, bikin fitur itu kelihatan
-    // salah nyambung ke internet padahal jawabannya lokal murni.
     const searching = !hasDirectReply && !!(opts && opts.searching);
     const typing = document.createElement('div');
     typing.className = 'msg ai typing' + (searching ? ' searching' : '');
@@ -383,25 +372,39 @@ export const chat = {
     $('messages').appendChild(typing);
     scrollBottom();
     const searchStart = Date.now();
-    // directReply: dipakai composer.js saat file terlampir (PDF/teks) sudah
-    // diekstrak lokal - jawab langsung dari isi file, tidak lewat mesin
-    // Raget (yang tidak punya akses ke isi file terlampir sama sekali).
-    let reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
+    let reply = null;
+    let attempt = 0;
+    while (attempt < 2 && reply == null) {
+      try {
+        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
+      } catch (error) {
+        const plan = recoverAttempt(error, attempt);
+        if (plan.retry) {
+          attempt += 1;
+          continue;
+        }
+        typing.remove();
+        mountClarification($('messages'), {
+          text: plan.text,
+          actions: plan.actions.map((action) => ({
+            label: action.label,
+            run: () => {
+              if (action.id === 'connect') router.go('connect');
+              else if (action.id === 'retry-format') fillComposer(prompt);
+            },
+          })),
+        });
+        return null;
+      }
+      attempt += 1;
+    }
     if (reply != null && opts && opts.preamble) reply = String(opts.preamble) + '\n\n' + reply;
     if (searching) {
-      // Koneksi cepat bisa bikin fetch selesai dalam hitungan puluhan ms -
-      // indikator "Mencari di internet..." bisa kelewat kedip tanpa sempat
-      // kebaca user. Jamin tampil minimal sebentar biar user beneran lihat
-      // ada pencarian internet yang jalan, bukan cuma template instan.
       const elapsed = Date.now() - searchStart;
       if (elapsed < 700) await sleep(700 - elapsed);
     }
     typing.remove();
     if (reply == null) return null;
-    // source disimpan di sesi (bukan cuma opts lokal) supaya badge "Hasil
-    // pencarian web" tidak hilang saat renderMessages() render ulang SEMUA
-    // pesan dari data tersimpan (kejadian setiap kali pesan baru dikirim) -
-    // tanpa ini badge cuma nempel sesaat lalu ke-reset begitu chat re-render.
     s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts });
     await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts });
     if (voice.speakNext) {

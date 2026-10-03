@@ -16,10 +16,6 @@ function loadScript(src) {
   });
 }
 
-// pdf.js dimuat lewat CDN, bukan di-bundle - satu-satunya fitur di Rategoan
-// yang butuh internet untuk MEMBACA (bukan sekadar mencari) karena
-// mem-bundle pdf.js+worker (beberapa MB) akan membengkakkan PWA offline
-// untuk fitur yang cuma dipakai sesekali. Dimuat lazy, sekali per sesi.
 function ensurePdfJs() {
   if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
   if (!loadPromise) {

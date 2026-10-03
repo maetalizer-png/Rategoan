@@ -1,10 +1,3 @@
-// Berita terkini via RSS resmi media (Detik, Antara) - dibaca lewat
-// rss2json.com karena RSS mentah situs berita biasanya TIDAK kirim header
-// CORS (didesain buat RSS reader/server, bukan fetch() langsung dari
-// browser). rss2json.com adalah layanan RSS-to-JSON yang memang didesain
-// buat dipanggil dari browser - gratis, tanpa API key untuk pemakaian
-// wajar. Ini jalan resmi/legal: RSS memang disediakan penerbit untuk
-// disebarluaskan, beda dengan scraping HTML halaman situsnya langsung.
 const NETWORK_FAIL_MESSAGE =
   'Gagal mengambil berita terkini — bisa karena tidak ada koneksi, atau layanan RSS sedang tidak bisa diakses dari sini. Raget 100% berjalan lokal tanpa server perantara, jadi berita terkini langsung bergantung pada koneksi perangkat ini.';
 
@@ -23,9 +16,6 @@ function stripHtml(s) {
   return String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
-// Potong di batas kalimat kalau ada (titik pertama setelah cukup panjang),
-// kalau tidak ada baru potong di batas kata terakhir - supaya ringkasan
-// gak berakhir di tengah kata atau nyisain koma menggantung sebelum "...".
 function truncateClean(s, max) {
   const text = String(s || '').replace(/[,;:\s]+$/, '');
   if (text.length <= max) return text;
@@ -61,7 +51,6 @@ async function latest(topic) {
         sourcesTried.push(feed.name);
       }
     } catch (e) {
-      // lanjut ke feed berikutnya - satu sumber gagal bukan berarti semua gagal
     }
   }
   if (!items.length) return { ok: false, message: NETWORK_FAIL_MESSAGE };

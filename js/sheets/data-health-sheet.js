@@ -1,8 +1,3 @@
-// PRD-RAGET-TEMPLATE.md Fase 1.3: manusia (dev/pengguna) sebelumnya tidak
-// punya cara MELIHAT log kegagalan (ragetDb.allUnmatched()) dan statistik
-// like/dislike per-intent (feedbackStore.statsByIntent(), lihat Fase 1.2) -
-// keduanya sudah tercatat tapi tersembunyi di IndexedDB/localStorage. Panel
-// ini cuma membaca dan menampilkan, tidak mengubah alur jawaban sama sekali.
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 import { feedbackReport } from '../../raget/raget-agents/feedback-report.js';

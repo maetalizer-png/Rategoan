@@ -25,6 +25,9 @@ import { projectPage } from '../project/project.js';
 import { runAgentPlan } from '../agent/worker-bridge.js';
 import { mountThought } from '../ui/thought-card.js';
 import { parseChartAsk, buildChartSvg } from '../../shared/charts-local.js';
+import { parseDiagramAsk, buildDiagramSvg } from '../../shared/diagrams-local.js';
+import { printReport } from '../../shared/report-export.js';
+import { cancelAgent } from '../agent/worker-bridge.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
@@ -183,8 +186,24 @@ function textToTable(text) {
   return rows;
 }
 
+async function tryDiagramRequest(text) {
+  const spec = parseDiagramAsk(text);
+  if (!spec) return null;
+  const svg = buildDiagramSvg(spec);
+  artifact.open({ type: 'diagram', markdown: svg, spec, title: 'Diagram', fileName: 'diagram.svg' }, 'Diagram');
+  return 'Diagram terbuka di panel. Bisa diperbesar dan diunduh sebagai SVG.';
+}
+
+async function tryReportRequest(text) {
+  if (!/\b(cetak|siap cetak|laporan pdf|simpan pdf)\b/i.test(text)) return null;
+  const body = '<p>' + text.replace(/</g, '').slice(0, 4000) + '</p>';
+  artifact.open({ type: 'report', markdown: body, title: 'Laporan', fileName: 'laporan.html' }, 'Laporan');
+  printReport({ title: 'Laporan', body });
+  return 'Pratinjau cetak dibuka. Simpan sebagai PDF dari jendela cetak.';
+}
+
 async function tryChartRequest(text) {
-  if (!/\b(grafik|diagram|chart)\b/i.test(text)) return null;
+  if (!/\b(grafik|chart)\b/i.test(text)) return null;
   const spec = parseChartAsk(text);
   if (!spec) return 'Sebut nilainya, misalnya: buat grafik batang A: 10, B: 20.';
   const svg = buildChartSvg(spec);
@@ -286,6 +305,8 @@ export const composer = {
     if (directReply == null) directReply = await tryDocumentRequest(text, s);
     if (directReply == null) directReply = await tryTableRequest(text, s);
     if (directReply == null) directReply = await tryChartRequest(text);
+    if (directReply == null) directReply = await tryDiagramRequest(text);
+    if (directReply == null) directReply = await tryReportRequest(text);
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
@@ -323,6 +344,10 @@ export const composer = {
           mountThought(live, steps, 'berjalan');
         },
       });
+      if (plan.status === 'dibatalkan') {
+        live.remove();
+        return;
+      }
       thoughts = plan.steps;
       live.remove();
     }
@@ -390,6 +415,21 @@ export const composer = {
       this.send(t);
     };
     $('btn-plus').onclick = () => attach.open();
+    const stop = $('btn-stop');
+    if (stop) stop.onclick = () => cancelAgent();
+    document.addEventListener('rategoan:command', (event) => {
+      if (event.detail === 'think') {
+        this.thinkActive = true;
+        this._toggleSwitch('sheet-think', true);
+        this.syncModes();
+      } else if (event.detail === 'neural') {
+        try { localStorage.setItem('rategoan_engine', 'neural'); } catch (e) {}
+      } else if (event.detail === 'docx') {
+        $('chat-input').value = 'Buatkan dokumen Word dari percakapan ini';
+      } else if (event.detail === 'slide') {
+        $('chat-input').value = 'Buatkan slide dari percakapan ini';
+      }
+    });
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
         const offset = Math.max(0, window.innerHeight - window.visualViewport.height - (window.visualViewport.offsetTop || 0));

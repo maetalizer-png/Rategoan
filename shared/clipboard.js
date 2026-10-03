@@ -16,13 +16,6 @@ function copyViaExecCommand(text) {
   });
 }
 
-// navigator.clipboard.writeText() dilaporkan kadang tidak pernah
-// resolve MAUPUN reject di sebagian browser/perangkat Android (izin
-// clipboard yang macet, dialog izin yang tidak sempat dirender, dst) -
-// tombol Salin jadi terasa "tidak ada reaksi sama sekali", bukan gagal
-// dengan pesan. Race dengan timeout supaya SELALU ada kepastian dalam
-// waktu wajar, jatuh ke execCommand (sinkron, tidak butuh izin) kalau
-// API modern tidak merespons atau ditolak.
 export const copy = (text) => {
   if (!(navigator.clipboard && navigator.clipboard.writeText)) {
     return copyViaExecCommand(text);

@@ -23,12 +23,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* Layar peredup sekilas saat ganti tema (theme.js#flashVeil) - dulu tiap
-   elemen transisi background/color sendiri-sendiri dengan durasi/delta
-   warna beda-beda (tergantung seberapa jauh warnanya berubah), jadi
-   kelihatan "pecah-pecah"/tidak seragam. Dengan peredup sekilas ini,
-   pergantian tema kelihatan seperti SATU transisi mulus, bukan puluhan
-   elemen yang fade sendiri-sendiri tidak sinkron. */
 #theme-veil {
   position: fixed;
   inset: 0;

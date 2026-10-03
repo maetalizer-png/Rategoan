@@ -32,9 +32,6 @@ export const msgmenu = {
       b.textContent = label;
       if (cls) b.className = cls;
       b.onclick = () => {
-        // fn() dulu, baru hide() - hide() nge-null-kan this.idx, jadi kalau
-        // dibalik (seperti sebelumnya), act() di dalam fn() selalu gagal
-        // diam-diam karena this.idx == null saat itu dibaca.
         fn();
         this.hide();
       };
@@ -92,12 +89,6 @@ export const msgmenu = {
   },
   bind() {
     const box = $('messages');
-    // Dulu dipicu touch-and-hold 480ms di mana pun pada bubble pesan -
-    // itu bentrok langsung sama gestur select-teks native (long-press
-    // untuk select+copy manual), jadi user coba select teks malah kena
-    // menu ini duluan dan gagal copy-paste. Sekarang dipicu tombol titik
-    // tiga (.msg-more-btn) eksplisit di chat.js, bukan gestur - select
-    // teks native jadi bebas dipakai kapan pun tanpa ke-hijack.
     box.addEventListener('click', (e) => {
       const btn = e.target.closest('.msg-more-btn');
       if (!btn) return;

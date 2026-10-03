@@ -699,4 +699,18 @@ Sumber: dokumen Drive `PRD antarmuka` (`19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXw
 | 73 | Studio menutup menu samping | SUDAH SELESAI |
 | 53 | Pembersihan komentar massal | DITAHAN |
 
-Baris 53 tetap ditahan. Komentar di shader dan catatan mesin tidak dihapus.
+Baris 53 tetap ditahan pada shader. Komentar penjelasan di `js/`, `shared/`, `vault/`, `api/`, dan `css/` sudah disisir. Direktif `webpackIgnore` tidak dihapus.
+
+# 19–22. Salinan pekerjaan baru Drive 3 Oktober 2026 21:58 UTC
+
+Sumber: `19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw`.
+
+| No | Tugas | Status |
+| --- | --- | --- |
+| 74 | Satu kali percobaan ulang saat alat gagal | SUDAH SELESAI |
+| 75 | Kartu klarifikasi | SUDAH SELESAI |
+| 76–77 | Bilah perintah Ctrl/Cmd+K | SUDAH SELESAI |
+| 78 | Laporan siap cetak | SUDAH SELESAI |
+| 79–80 | Diagram SVG, perbesar, unduh | SUDAH SELESAI |
+| 81 | Usap dua jari membuka perintah | SUDAH SELESAI |
+

@@ -30,7 +30,7 @@ import { projectPage } from './project/project.js';
 import { studioPage } from './studio/studio.js';
 import { artifactsPage } from './artifacts/artifacts.js';
 import { connectPage } from './connect/connect.js';
-import { bindConnectorReturn } from './connectors/connector-hub.js';
+import { mountCommandPalette } from './ui/command-palette.js';
 import { hydrateConnectorSecrets } from './connectors/connector-state.js';
 import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   artifactsPage.bind();
   connectPage.bind();
   bindConnectorReturn();
+  mountCommandPalette();
   hydrateConnectorSecrets().catch(() => {});
   window.addEventListener('rategoan:attach-context', (event) => {
     const text = event.detail && event.detail.text;
@@ -118,11 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const warmup = () => {
     dataries.loadRegion('country', 'asian-tenggara').catch(() => {});
     dataries.loadRegion('country', 'eropan-barat').catch(() => {});
-    // Prefetch checkpoint 200M (163MB) DIMATIKAN - NEURAL_ANSWERS_ENABLED
-    // di ai.js masih false, jadi model ini tidak pernah dipakai menjawab.
-    // Mengunduhnya diam-diam di setiap load cuma buang kuota/memori user
-    // tanpa manfaat apa pun. Nyalakan lagi (neuralProvider.prefetchBest())
-    // begitu NEURAL_ANSWERS_ENABLED diaktifkan.
   };
   if ('requestIdleCallback' in window) {
     requestIdleCallback(warmup, { timeout: 3000 });

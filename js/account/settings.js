@@ -52,10 +52,6 @@ const INFO_ICON =
 const CHEVRON_ICON =
   '<svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
 
-// Enam kategori Pengaturan - dulu semua section ditumpuk memanjang di satu
-// halaman (banyak scroll, garis antar-section berdesakan). Sekarang halaman
-// utama cuma daftar kategori (pola standar: Data/WhatsApp/Telegram dst juga
-// begini), tiap kategori dibuka sebagai halaman sendiri lewat #/settings/<key>.
 const CATEGORIES = [
   { key: 'tampilan', title: 'Tampilan', icon: MOON_ICON },
   { key: 'ai', title: 'Model', icon: SERVER_MODE_ICON },
@@ -262,9 +258,6 @@ function buildRow(id, icon, label) {
   return row;
 }
 
-// Untuk toggle ON/OFF murni (tanpa dialog/konfigurasi tambahan seperti
-// Kunci Aplikasi yang perlu isi PIN) - switch visual lebih jelas statusnya
-// sekilas pandang dibanding teks "Aktif/Nonaktif" polos yang harus dibaca.
 function buildSwitchRow(id, icon, label) {
   const row = document.createElement('div');
   row.className = 'set-row clickable';
@@ -294,10 +287,6 @@ export const settings = {
     const dataHealthRow = buildRow('row-data-health', DATA_HEALTH_ICON, 'Kesehatan Data');
     const ttsRow = buildRow('row-tts', TTS_ICON, 'Baca Otomatis (TTS)');
     const hematRow = buildRow('row-hemat', HEMAT_ICON, 'Mode Hemat');
-    // Memori ditaruh di Privasi & Keamanan (bareng Kunci Aplikasi), BUKAN
-    // Preferensi - ini bukan preferensi tampilan/perilaku app kayak TTS/Mode
-    // Hemat, tapi soal data pribadi apa yang diingat+dipakai AI (pola yang
-    // sama dipakai ChatGPT/Gemini: Memory ada di bagian privasi/personalisasi).
     const memoriRow = buildSwitchRow('row-memori', MEMORY_ICON, 'Memori');
     const hapusMemoriRow = buildRow('row-hapus-memori', ERASE_ICON, 'Hapus memori tersimpan');
     const eksporLogRow = buildRow('row-riwayat-ekspor', EXPORT_LOG_ICON, 'Riwayat ekspor');
@@ -331,9 +320,6 @@ export const settings = {
       this.refreshHematStatus();
       this.refreshTtsStatus();
     };
-    // Dulu toggle di sheet lampiran (+) - dipindah ke Pengaturan (standar
-    // aplikasi lain: memori itu pengaturan personalisasi akun yang jarang
-    // diubah, bukan aksi sekali pakai per pesan seperti Pencarian Web).
     memoriRow.onclick = () => {
       const on = !memoryPreference.get();
       memoryPreference.set(on);
@@ -458,8 +444,6 @@ export const settings = {
     const avatar = $('profile-avatar');
     const name = $('profile-name');
     const mail = $('profile-mail');
-    // Profil cuma tampil di halaman menu utama, bukan di dalam kategori
-    // (samam kayak Data/WhatsApp: header sub-halaman cuma judul kategori).
     const inCategory = !!this.currentCategory();
     if (head && avatar && name && mail) {
       if (!st || inCategory) {
@@ -504,9 +488,6 @@ export const settings = {
     });
     const themeHint = $('theme-hint');
     if (themeHint) {
-      // "Otomatis" dulu kelihatan "gak ada fungsinya" kalau warna yang
-      // muncul kebetulan sama dengan tema sistem saat itu - keterangan ini
-      // menjelaskan APA yang sedang diikuti, bukan cuma diam tanpa umpan balik.
       themeHint.textContent =
         theme.value === 'auto'
           ? 'Otomatis: mengikuti tema perangkat - saat ini ' + (theme.isDark() ? 'Gelap' : 'Terang') + '.'
@@ -515,10 +496,6 @@ export const settings = {
             : 'Gelap dipilih manual - tidak ikut tema perangkat.';
     }
   },
-  // Tampilkan halaman menu (daftar kategori) ATAU satu kategori spesifik,
-  // sesuai #/settings atau #/settings/<key> saat ini - dipanggil tiap kali
-  // hash berubah (klik kategori, tombol kembali, atau navigasi browser
-  // back/forward), bukan cuma sekali saat bind().
   renderRoute() {
     const menu = $('settings-menu');
     const content = $('settings-content');

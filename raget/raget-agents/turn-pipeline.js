@@ -53,7 +53,21 @@ function inspect(prompt, context) {
   };
 }
 
+export function recoverAttempt(error, attempt) {
+  const message = String((error && error.message) || error || 'Gagal');
+  if ((attempt || 0) < 1) return { retry: true, note: message };
+  const expired = /401|token|izin|oauth/i.test(message);
+  return {
+    retry: false,
+    text: expired ? 'Izin konektor perlu diperbarui sebelum langkah ini dilanjutkan.' : 'Langkah ini belum berhasil setelah satu kali perbaikan.',
+    actions: expired
+      ? [{ id: 'connect', label: 'Periksa izin konektor' }, { id: 'skip', label: 'Lewati langkah ini' }]
+      : [{ id: 'retry-format', label: 'Coba format lain' }, { id: 'skip', label: 'Lewati langkah ini' }, { id: 'connect', label: 'Periksa izin konektor' }],
+  };
+}
+
 export const turnPipeline = Object.freeze({
   stages: Object.freeze(['intent', 'context', 'route', 'compose', 'qc', 'act']),
   inspect,
+  recoverAttempt,
 });

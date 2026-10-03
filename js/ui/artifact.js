@@ -5,6 +5,8 @@ import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
 import { buildZip } from '../../shared/zip-local.js';
 import { buildChartSvg } from '../../shared/charts-local.js';
+import { buildDiagramSvg } from '../../shared/diagrams-local.js';
+import { printReport } from '../../shared/report-export.js';
 
 let current = { type: 'slide', title: 'Slide', fileName: 'slide.pptx', outline: [], code: '', lang: 'js', markdown: '' };
 
@@ -210,7 +212,38 @@ function renderCurrent() {
   else if (current.type === 'zip') renderDocument(current.markdown, current.title);
   else if (current.type === 'table') renderTable(current.rows, current.title);
   else if (current.type === 'chart') renderChart(current);
+  else if (current.type === 'diagram') renderDiagram(current);
   else renderSlide(current.outline, current.title);
+}
+
+function renderDiagram(item) {
+  const stage = $('artifact-stage');
+  const head = $('artifact-title');
+  if (head) head.textContent = item.title || 'Diagram';
+  if (!stage) return;
+  stage.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'diagram-view';
+  let scale = 1;
+  const board = document.createElement('div');
+  board.innerHTML = item.markdown || buildDiagramSvg(item.spec || {});
+  const paint = () => { board.style.transform = 'scale(' + scale + ')'; };
+  const bar = document.createElement('div');
+  bar.className = 'slide-nav';
+  const zoomOut = document.createElement('button');
+  zoomOut.type = 'button';
+  zoomOut.textContent = '−';
+  const zoomIn = document.createElement('button');
+  zoomIn.type = 'button';
+  zoomIn.textContent = '+';
+  zoomOut.onclick = () => { scale = Math.max(0.5, scale - 0.15); paint(); };
+  zoomIn.onclick = () => { scale = Math.min(2.5, scale + 0.15); paint(); };
+  bar.appendChild(zoomOut);
+  bar.appendChild(zoomIn);
+  wrap.appendChild(bar);
+  wrap.appendChild(board);
+  stage.appendChild(wrap);
+  paint();
 }
 
 function renderChart(item) {
@@ -287,6 +320,14 @@ export const artifact = {
     if (app) app.classList.remove('split');
   },
   exportNow() {
+    if (current.type === 'diagram') {
+      downloadText(current.fileName || 'diagram.svg', current.markdown || '');
+      return;
+    }
+    if (current.type === 'report') {
+      printReport({ title: current.title, body: current.markdown || '' });
+      return;
+    }
     if (current.type === 'chart') {
       const svg = current.markdown || '';
       downloadText(current.fileName || 'grafik.svg', svg);
