@@ -84,5 +84,7 @@ export const chatsearch = {
     if (next) next.onclick = () => this.next();
     if (prev) prev.onclick = () => this.prev();
     if (close) close.onclick = () => this.toggle();
+    const openBtn = $('btn-chat-search');
+    if (openBtn) openBtn.onclick = () => this.toggle();
   },
 };

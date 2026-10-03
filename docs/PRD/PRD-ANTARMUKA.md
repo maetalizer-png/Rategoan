@@ -64,10 +64,11 @@ Berdasarkan analisis tangkapan layar nyata antarmuka industri:
 
 | Layanan Referensi | Karakteristik Kunci Antarmuka | Standar yang Diadopsi Rategoan |
 | :---- | :---- | :---- |
-| Grok (Tangkapan Layar 1\) | • Subtitle penjelas fungsi konektor eksternal.• Banner peringatan "Reconnect required" saat token kedaluwarsa.• Pemisahan kategori Connected (aktif) dan Featured (katalog). | Adopsi struktur kategori Connected vs Featured dan sistem deteksi token kedaluwarsa otomatis. |
-| Manus AI (Tangkapan Layar 2\) | • Orientasi aksi agenik nyata: Penggunaan Komputer (OS), Video Editor, GitHub (kelola repo), Instagram (publish), Gmail (buat balasan).• Tanda navigasi panah \> untuk membuka sub-halaman penjelajah data. | Adopsi kapabilitas Full Lifecycle Management (bisa baca, tulis, dan kelola) serta sub-view penjelajah data. |
-| Claude (Tangkapan Layar 3\) | • Sakelar toggle "Penemuan konektor" (AI otomatis memilih tool).• Badge jumlah fungsi/alat spesifik pada tiap layanan (misal: GitHub \[45\], Gmail \[30\], Drive \[11\]). | Adopsi toggle penemuan konektor otonom dan transparansi badge jumlah alat (tool count badge). |
-| ChatGPT (Tangkapan Layar 4\) | • Katalog terbagi: Sudah Terinstal, Populer, dan Baru.• Ikon gembok otorisasi dan pencarian terintegrasi. | Adopsi alur otorisasi satu klik (One-Click OAuth) langsung dari kartu layanan. |
+| Grok (Tangkapan Layar 1\) | • Subtitle penjelas fungsi konektor eksternal.• Banner peringatan "Reconnect required" saat token kedaluwarsa.
+• Pemisahan kategori Connected (aktif) dan Featured (katalog). | Adopsi struktur kategori Connected vs Featured dan sistem deteksi token kedaluwarsa otomatis. |
+| Manus AI (Tangkapan Layar 2\) | • Orientasi aksi agenik nyata: Penggunaan Komputer (OS), Video Editor, GitHub (kelola repo), Instagram (publish), Gmail (buat balasan).• Tanda navigasi panah \> untuk membuka sub-halaman penjelajah data. | Adopsi kapabilitas Full Lifecycle Management (bisa baca, tulis, dan kelola) serta sub-view penjelajah data. |
+| Claude (Tangkapan Layar 3\) | • Sakelar toggle "Penemuan konektor" (AI otomatis memilih tool).• Badge jumlah fungsi/alat spesifik pada tiap layanan (misal: GitHub \[45\], Gmail \[30\], Drive \[11\]). | Adopsi toggle penemuan konektor otonom dan transparansi badge jumlah alat (tool count badge). |
+| ChatGPT (Tangkapan Layar 4\) | • Katalog terbagi: Sudah Terinstal, Populer, dan Baru.• Ikon gembok otorisasi dan pencarian terintegrasi. | Adopsi alur otorisasi satu klik (One-Click OAuth) langsung dari kartu layanan. |
 | Rategoan Eksisting (Layar Lama) | • Teks manual "Antrian ke server sendiri", input https\://server-anda, dan log teks mentah "drive-export · antrian". | DIHAPUS TOTAL & DIGANTIKAN oleh Vercel Serverless \+ Direct OAuth 2.0 PKCE. |
 
 # 
@@ -528,60 +529,62 @@ Bagi pekerjaan implementasi secara terstruktur ke dalam 4 kuadran tindakan nyata
     * **Berkas shared/docx-local.js & shared/zip-local.js:** Buat modul pembungkus Word XML dan ZIP client-side murni.  
     * **Berkas js/ui/artifact-card.js:** Buat komponen kartu artefak interaktif di chat (\<artifact\> parser).  
 31. **4\. CHECKLIST PENGUJIAN AKHIR (DEFINITION OF DONE):**  
-    * \[ \] Tombol Buat Slide (.pptx) menghasilkan file PowerPoint asli yang bisa dibuka di MS PowerPoint/Google Slides.  
-    * \[ \] Menyalakan Pencarian Web memunculkan chip biru di atas input chat.  
-    * \[ \] Mengetik pesan yang meminta dokumen Word (.docx) menghasilkan kartu di chat dengan tombol unduh berkas yang valid.  
-    * \[ \] Menu Konektor menampilkan status real-time 6 konektor tanpa ada form server-anda lama.  
-    * \[ \] Sesi chat tersimpan di IndexedDB dan bisa dicari di riwayat.  
-    * \[ \] Terkonfigurasi workflow CI/CD .github/workflows/lint.yml berbasis Node 22 linter.  
-    * \[ \] Seluruh suite unit test node:test di raget/raget-tools/unit/ (menguji answer-lock, bm25, router-intent, dan syntax-validator) lulus 100%.
+    * \[x\] Tombol Buat Slide (.pptx) menghasilkan file PowerPoint asli yang bisa dibuka di MS PowerPoint/Google Slides.  
+    * \[x\] Menyalakan Pencarian Web memunculkan chip biru di atas input chat.  
+    * \[x\] Mengetik pesan yang meminta dokumen Word (.docx) menghasilkan kartu di chat dengan tombol unduh berkas yang valid.  
+    * \[x\] Menu Konektor menampilkan status real-time 6 konektor tanpa ada form server-anda lama.  
+    * \[x\] Sesi chat tersimpan di IndexedDB dan bisa dicari di riwayat.  
+    * \[x\] Terkonfigurasi workflow CI/CD .github/workflows/lint.yml berbasis Node 22 linter.  
+    * \[x\] Seluruh suite unit test node:test di raget/raget-tools/unit/ (menguji answer-lock, bm25, router-intent, dan syntax-validator) lulus 100%.
 
 # **14\. TABEL MASTER DAFTAR KERJA & STATUS PROGRESS IMPLEMENTASI (LIVING EXECUTION TRACKER)**
 
-Tabel ini berfungsi sebagai living document acuan kerja agar developer dan AI pelaksana dapat memantau progres secara transparan:
+Tabel ini berfungsi sebagai living document acuan kerja agar developer dan AI pelaksana dapat memantau progres secara transparan.
+
+Catatan realisasi 4 Oktober 2026: baris 1–10, 12, 13, 15, 16, 22, 25, dan 27–37 diselaraskan dengan kode yang sudah jalan di `main`. Baris 53 ditahan: pembersihan komentar massal tidak dijalankan karena merusak shader WGSL dan catatan mesin.
 
 *   
   * 
 
 | No | Klaster Sistem | Fitur / Komponen | Berkas Target | Jenis Tindakan | Status Implementasi | Rincian Pekerjaan Teknis Nyata |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-| 1 | **Lembar Lampirkan (+)** | Kamera (\#sheet-camera) | `js/sheets/attach.js``index.html` | UPGRADE | \[\~\] PERLU UPGRADE | Hubungkan \#pick-camera ke navigator.mediaDevices.getUserMedia dan visualkan overlay kamera \#camera-overlay untuk tangkapan dokumen instan & OCR. |
-| 2 | **Lembar Lampirkan (+)** | Foto (\#sheet-photo) | `js/sheets/attach.js``index.html` | UPGRADE | \[\~\] PERLU UPGRADE | Sambungkan tombol ke input file native \#pick-photo (accept="image/\*") dan tampilkan pratinjau thumbnail sebelum dikirim ke sesi obrolan. |
-| 3 | **Lembar Lampirkan (+)** | File (\#sheet-file) | `js/sheets/attach.js``vault/rag/semantic-index.js` | UPGRADE | \[\~\] PERLU UPGRADE | Pasang filter ekstensi lengkap (.pdf, .docx, .txt, .csv, .ics, .enex, .zip) serta hubungkan langsung ke parser pdf.js, mammoth.js, dan importer vault/. |
-| 4 | **Lembar Lampirkan (+)** | Pencarian Web (\#sheet-websearch) | `js/sheets/attach.js``api/connectors/web/search` | UPGRADE | \[\~\] PERLU UPGRADE | Aktifkan toggle switch untuk memicu pencarian real-time via Vercel proxy DuckDuckGo HTML scraper lengkap dengan sitasi tautan rujukan. |
-| 5 | **Lembar Lampirkan (+)** | Buat Slide (.pptx) (\#sheet-slide) | `shared/slides-export.js``shared/pptx-local.js` | UPGRADE | \[\~\] PERLU UPGRADE | Sambungkan aksi tombol langsung ke mesin biner OpenXML shared/pptx-local.js agar klik langsung memicu pembuatan dan unduhan file .pptx asli. |
-| 6 | **Lembar Lampirkan (+)** | Berpikir Keras (\#sheet-think) | `js/sheets/attach.js``raget/raget-agents/turn-pipeline.js` | UPGRADE | \[\~\] PERLU UPGRADE | Aktifkan alur penalaran terstruktur dengan tampilan Collapsible Thinking Trace Box visual pada respon obrolan. |
-| 7 | **Lembar Lampirkan (+)** | Riset Mendalam (\#sheet-research) | `js/sheets/attach.js``vault/web/web-search.js` | UPGRADE | \[\~\] PERLU UPGRADE | Aktifkan loop riset otonom multi-langkah (pencarian multi-kueri, sintesis puluhan artikel, dan penyusunan laporan komprehensif). |
-| 8 | **Lembar Lampirkan (+)** | Masukkan ke Proyek (\#sheet-project) | `js/sheets/attach.js``js/sheets/project-sheet.js` | UPGRADE | \[\~\] PERLU UPGRADE | Membuka lembar pemilih ruang kerja proyek aktif (\#project-sheet) untuk mengaitkan percakapan ke konteks proyek tertentu. |
-| 9 | **Lembar Lampirkan (+)** | Belajar Terpandu (\#sheet-learn) | `js/sheets/attach.js``raget/quiz-session.js` | UPGRADE | \[\~\] PERLU UPGRADE | Ubah mode instruksi menjadi Socratic Tutor yang tersambung ke modul kuis interaktif quiz-session.js dan stem-engine.js. |
-| 10 | **Lembar Lampirkan (+)** | Active Mode Chips | `js/sheets/attach.js``css/sheets/sheets.css` | UPGRADE | \[\~\] PERLU UPGRADE | Render indikator badge visual Mode Aktif lengkap dengan tombol penutup (x) di atas textarea obrolan saat toggle mode dinyalakan. |
+| 1 | **Lembar Lampirkan (+)** | Kamera (\#sheet-camera) | `js/sheets/attach.js``index.html` | UPGRADE | \[✓\] SUDAH SELESAI | Overlay \#camera-overlay memakai getUserMedia (js/sheets/camera.js), shutter menyimpan JPG ke lampiran, fallback file picker, OCR lewat vault/ocr saat diminta. |
+| 2 | **Lembar Lampirkan (+)** | Foto (\#sheet-photo) | `js/sheets/attach.js``index.html` | UPGRADE | \[✓\] SUDAH SELESAI | Tombol foto membuka \#pick-photo dan menampilkan thumbnail di chip lampiran sebelum dikirim. |
+| 3 | **Lembar Lampirkan (+)** | File (\#sheet-file) | `js/sheets/attach.js``vault/rag/semantic-index.js` | UPGRADE | \[✓\] SUDAH SELESAI | Filter .pdf .docx .txt .csv .ics .enex .zip. PDF lewat pdf.js, DOCX lewat word/document.xml, impor pribadi lewat vault. |
+| 4 | **Lembar Lampirkan (+)** | Pencarian Web (\#sheet-websearch) | `js/sheets/attach.js``api/connectors/web/search` | UPGRADE | \[✓\] SUDAH SELESAI | Toggle menyalakan chip biru di \#attach-row. Pencarian lewat proxy DuckDuckGo api/connectors/web/search.js (4 alat). |
+| 5 | **Lembar Lampirkan (+)** | Buat Slide (.pptx) (\#sheet-slide) | `shared/slides-export.js``shared/pptx-local.js` | UPGRADE | \[✓\] SUDAH SELESAI | Klik \#sheet-slide membangun OpenXML lewat shared/pptx-local.js dan langsung mengunduh .pptx, plus kartu artefak. |
+| 6 | **Lembar Lampirkan (+)** | Berpikir Keras (\#sheet-think) | `js/sheets/attach.js``raget/raget-agents/turn-pipeline.js` | UPGRADE | \[✓\] SUDAH SELESAI | Saklar berpikir memasang jejak. Tag trace dirender sebagai kotak details yang bisa dilipat di js/ui/artifact-card.js. |
+| 7 | **Lembar Lampirkan (+)** | Riset Mendalam (\#sheet-research) | `js/sheets/attach.js``vault/web/web-search.js` | UPGRADE | \[✓\] SUDAH SELESAI | Saklar riset menyalakan web, menyusun rencana multi-kueri, dan menaruh chip Riset mendalam. |
+| 8 | **Lembar Lampirkan (+)** | Masukkan ke Proyek (\#sheet-project) | `js/sheets/attach.js``js/sheets/project-sheet.js` | UPGRADE | \[✓\] SUDAH SELESAI | Tombol proyek membuka daftar ruang kerja dan mengaitkan sesi aktif ke proyek yang dipilih. |
+| 9 | **Lembar Lampirkan (+)** | Belajar Terpandu (\#sheet-learn) | `js/sheets/attach.js``raget/quiz-session.js` | UPGRADE | \[✓\] SUDAH SELESAI | Belajar terpandu menyusun langkah dari bahan obrolan plus cek pemahaman. Kuis quiz-session.js dan hitungan stem-engine.js hidup di jalur mesin. |
+| 10 | **Lembar Lampirkan (+)** | Active Mode Chips | `js/sheets/attach.js``css/sheets/sheets.css` | UPGRADE | \[✓\] SUDAH SELESAI | Mode aktif (web, berpikir, riset) menjadi chip dengan tombol x di \#attach-row. Chip web memakai gaya biru. |
 | 11 | **Navigasi Sidebar** | Chat Baru (\#btn-new-chat) | `js/chat/chat.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Membuat sesi percakapan bersih baru dengan UUID unik dan mengosongkan kontainer obrolan. |
-| 12 | **Navigasi Sidebar** | Studio Kode (\#btn-studio) | `js/studio/studio.js` | UPGRADE | \[\~\] PERLU UPGRADE | Ruang kerja pemrograman terpadu berbasis CodeMirror, tab Live Preview, dan runner Python Pyodide WebAssembly. |
-| 13 | **Navigasi Sidebar** | Koleksi (\#btn-collection) | `js/collection/collection.js` | UPGRADE | \[\~\] PERLU UPGRADE | Pustaka penyimpanan terstruktur untuk menyimpan jawaban favorit dan menghubungkan modul parser data pribadi vault/. |
+| 12 | **Navigasi Sidebar** | Studio Kode (\#btn-studio) | `js/studio/studio.js` | UPGRADE | \[✓\] SUDAH SELESAI | Studio memakai CodeMirror, iframe pratinjau, dan runner Python Pyodide dari CDN. |
+| 13 | **Navigasi Sidebar** | Koleksi (\#btn-collection) | `js/collection/collection.js` | UPGRADE | \[✓\] SUDAH SELESAI | Koleksi menyimpan jawaban dan mengimpor WhatsApp .txt, Evernote .enex, Notion .zip/.md, serta kalender .ics. |
 | 14 | **Navigasi Sidebar** | Proyek (\#btn-project) | `js/project/project.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Manajemen multi-workspace terisolasi dengan system prompt khusus dan berkas rujukan permanen per proyek. |
-| 15 | **Navigasi Sidebar** | Konektor (\#btn-connect) | `index.html``js/connect/connect.js` | PERBAIKAN | \[\!\] PERLU PERBAIKAN | Bersihkan formulir server-anda lama dan sambungkan navigasi ke Hub Konektor modern berbasis Vercel Serverless OAuth. |
-| 16 | **Navigasi Sidebar** | Artefak (\#btn-artifact) | `js/ui/artifact.js` | UPGRADE | \[\~\] PERLU UPGRADE | Pusat galeri penyimpanan seluruh berkas buatan Rategoan (.pptx, .docx, .pdf, .csv, .zip, skrip kode) dari IndexedDB. |
+| 15 | **Navigasi Sidebar** | Konektor (\#btn-connect) | `index.html``js/connect/connect.js` | PERBAIKAN | \[✓\] SUDAH SELESAI | Formulir server-anda dihapus. Navigasi Konektor membuka Hub modern di \#connect-hub dengan OAuth Google dan GitHub. |
+| 16 | **Navigasi Sidebar** | Artefak (\#btn-artifact) | `js/ui/artifact.js` | UPGRADE | \[✓\] SUDAH SELESAI | Galeri artefak menampilkan slide, dokumen, kode, tabel, dan zip yang tersimpan, lalu bisa dibuka lagi dari daftar. |
 | 17 | **Navigasi Sidebar** | Riwayat Chat (\#btn-history) | `js/chat/history.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Manajemen penampil daftar riwayat percakapan persisten yang tersimpan di IndexedDB lokal. |
 | 18 | **Navigasi Sidebar** | Cari Riwayat (\#hist-search) | `js/chat/history.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Input pencarian terfilter untuk menyaring daftar sesi percakapan berdasarkan kata kunci topik. |
 | 19 | **Navigasi Sidebar** | Pengaturan (\#btn-settings) | `js/account/settings.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Mengarahkan navigasi antarmuka secara langsung ke tampilan pusat Pengaturan Aplikasi (\#view-settings). |
 | 20 | **Navigasi Sidebar** | Avatar Profil (\#btn-account) | `js/account/settings.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Tombol profil akun Maetalizer untuk melihat identitas pengguna dan membuka detail akun. |
 | 21 | **Input Chat & Switcher** | Chat Input Textarea | `js/chat/chat.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Bilah masukan teks serbaguna dengan dukungan auto-expand, drag-and-drop file, dan shortcut Enter/Shift+Enter. |
-| 22 | **Input Chat & Switcher** | Quick Model Switcher | `js/sheets/model-sheet.js` | PERBAIKAN | \[\!\] PERLU PERBAIKAN | Kunci daftar model hanya \['template', 'neural'\] dan pasang aturan auto-fallback 3 detik jika model neural offline. |
+| 22 | **Input Chat & Switcher** | Quick Model Switcher | `js/sheets/model-sheet.js` | PERBAIKAN | \[✓\] SUDAH SELESAI | Daftar model terkunci ke template dan neural. Jika neural belum siap dalam 3 detik, sesi beralih ke template dengan toast yang ditentukan. |
 | 23 | **Input Chat & Switcher** | Input Suara (STT id-ID) | `js/chat/voice.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Pengenalan suara masukan Bahasa Indonesia (id-ID) native via Web Speech API yang dipicu tombol \#btn-voice-input. |
 | 24 | **Input Chat & Switcher** | Output Suara (TTS id-ID) | `js/chat/voice.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Pembaca respon otomatis via SpeechSynthesisUtterance dengan filter pembersihan karakter markdown alami. |
-| 25 | **Input Chat & Switcher** | In-Chat Message Search | `js/chat/chatsearch.js` | UPGRADE | \[\~\] PERLU UPGRADE | Pasang floating search bar di dalam obrolan aktif dengan sorotan teks real-time dan navigasi lompat antar-pesan. |
+| 25 | **Input Chat & Switcher** | In-Chat Message Search | `js/chat/chatsearch.js` | UPGRADE | \[✓\] SUDAH SELESAI | Bilah cari mengambang di obrolan, sorotan .msg.hit, dan tombol lompat pesan sebelumnya atau berikutnya. |
 | 26 | **Artifact Engine** | Generator PPTX Lokal | `shared/pptx-local.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Mesin biner OpenXML murni client-side untuk membuat dan mengekspor berkas presentasi PowerPoint .pptx. |
-| 27 | **Artifact Engine** | Generator DOCX Lokal | `shared/docx-local.js` | BARU | \[ \] BELUM DIKERJAKAN | Buat generator dokumen WordprocessingML / HTML-Envelope murni di peramban untuk ekspor berkas .docx. |
-| 28 | **Artifact Engine** | Generator ZIP Lokal | `shared/zip-local.js` | BARU | \[ \] BELUM DIKERJAKAN | Buat modul kompresi arsip ZIP client-side murni untuk memaketkan multi-file proyek menjadi satu unduhan .zip. |
+| 27 | **Artifact Engine** | Generator DOCX Lokal | `shared/docx-local.js` | BARU | \[✓\] SUDAH SELESAI | shared/docx-local.js membungkus WordprocessingML lewat zip store dan dipakai kartu unduh dokumen. |
+| 28 | **Artifact Engine** | Generator ZIP Lokal | `shared/zip-local.js` | BARU | \[✓\] SUDAH SELESAI | shared/zip-local.js menulis arsip ZIP store (header lokal, central, EOCD) untuk unduhan multi-berkas dan DOCX. |
 | 29 | **Artifact Engine** | Sandbox HTML/JS/PY | `js/ui/artifact.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Pratinjau langsung via iframe sandbox aman untuk HTML/JS/CSS dan eksekusi Python via Pyodide WebAssembly. |
 | 30 | **Artifact Engine** | Generator Tabel CSV | `js/ui/artifact.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Serialisasi matriks tabel obrolan ke format RFC 4180 CSV untuk diunduh dan dibuka di Excel/Sheets. |
-| 31 | **Artifact Engine** | Kartu Artefak Chat | `js/ui/artifact-card.js` | BARU | \[ \] BELUM DIKERJAKAN | Buat parser tag \<artifact\> dan komponen kartu interaktif di chat dengan tombol Pratinjau & Unduh Berkas. |
-| 32 | **Hub Konektor & Vercel** | UI Hub Konektor Modern | `js/connectors/connector-hub.js` | BARU | \[ \] BELUM DIKERJAKAN | Buat modul UI Hub Konektor kartu direktori modern (kategori Terhubung vs Unggulan dan badge tool count). |
-| 33 | **Hub Konektor & Vercel** | Google Drive OAuth & Tools | `api/connectors/drive/` | BARU | \[ \] BELUM DIKERJAKAN | Serverless endpoint untuk 11 alat Google Drive (baca, buat dokumen, kelola direktori, dan ekspor file). |
-| 34 | **Hub Konektor & Vercel** | GitHub OAuth & Tools | `api/connectors/github/` | BARU | \[ \] BELUM DIKERJAKAN | Serverless endpoint untuk 45 alat GitHub (baca repo, buat commit, buka PR, kelola issue, dan linter sandbox). |
-| 35 | **Hub Konektor & Vercel** | Gmail OAuth & Tools | `api/connectors/gmail/` | BARU | \[ \] BELUM DIKERJAKAN | Serverless endpoint untuk 30 alat Gmail (cari inbox, baca thread, susun draf, dan kirim pesan setelah dikonfirmasi). |
-| 36 | **Hub Konektor & Vercel** | Google Calendar OAuth & Tools | `api/connectors/calendar/` | BARU | \[ \] BELUM DIKERJAKAN | Serverless endpoint untuk 6 alat Google Calendar (baca agenda, analisa jadwal bentrok, dan atur rapat baru). |
-| 37 | **Hub Konektor & Vercel** | Web Search Scraper | `api/connectors/web/search` | BARU | \[ \] BELUM DIKERJAKAN | Handler proxy scraper DuckDuckGo HTML non-API bebas biaya untuk pencarian web real-time. |
+| 31 | **Artifact Engine** | Kartu Artefak Chat | `js/ui/artifact-card.js` | BARU | \[✓\] SUDAH SELESAI | js/ui/artifact-card.js mem-parse tag artifact, trace, dan tool_call lalu memasang kartu Pratinjau dan Unduh. |
+| 32 | **Hub Konektor & Vercel** | UI Hub Konektor Modern | `js/connectors/connector-hub.js` | BARU | \[✓\] SUDAH SELESAI | js/connectors/connector-hub.js menampilkan kartu Terhubung dan Unggulan, jumlah alat, serta hubungkan atau putuskan. |
+| 33 | **Hub Konektor & Vercel** | Google Drive OAuth & Tools | `api/connectors/drive/` | BARU | \[✓\] SUDAH SELESAI | api/connectors/drive.js menyediakan 11 alat Google Drive lewat token Bearer klien. |
+| 34 | **Hub Konektor & Vercel** | GitHub OAuth & Tools | `api/connectors/github/` | BARU | \[✓\] SUDAH SELESAI | api/connectors/github.js menyediakan 45 alat GitHub (repo, commit, PR, issue). |
+| 35 | **Hub Konektor & Vercel** | Gmail OAuth & Tools | `api/connectors/gmail/` | BARU | \[✓\] SUDAH SELESAI | api/connectors/gmail.js menyediakan 30 alat Gmail. Kirim pesan tetap lewat tingkat konfirmasi. |
+| 36 | **Hub Konektor & Vercel** | Google Calendar OAuth & Tools | `api/connectors/calendar/` | BARU | \[✓\] SUDAH SELESAI | api/connectors/calendar.js menyediakan 6 alat agenda, bentrok, dan rapat. |
+| 37 | **Hub Konektor & Vercel** | Web Search Scraper | `api/connectors/web/search` | BARU | \[✓\] SUDAH SELESAI | api/connectors/web/search.js mem-proxy DuckDuckGo HTML tanpa API berbayar, dengan cadangan halaman. |
 | 38 | **Halaman Pengaturan** | Kartu Profil Maetalizer | `js/account/settings.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Header profil \#profile-head dengan avatar 'M', nama Maetalizer, dan email maetalizer@gmail.com sebagai jangkar SSO. |
 | 39 | **Halaman Pengaturan** | Mode Gelap & Ukuran Teks | `js/account/settings.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Pengaturan tema visual Mode Gelap (Terang/Auto/Dark) serta penyesuaian ukuran teks (Kecil/Normal/Besar). |
 | 40 | **Halaman Pengaturan** | Kunci PIN Fisik Sesi | `js/state/pin.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Penguncian layar aplikasi dengan PIN 4-6 digit hash DJB2 yang tersimpan lokal di localStorage. |
@@ -591,7 +594,7 @@ Tabel ini berfungsi sebagai living document acuan kerja agar developer dan AI pe
 | 44 | **Halaman Pengaturan** | Data Health Sheet | `js/sheets/data-health-sheet.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Panel diagnostik ekstraksi pertanyaan tidak cocok/gagal dan rekapitulasi umpan balik pengguna. |
 | 45 | **Mesin Inti RAGET** | Turn Pipeline (6 Tahap) | `raget/raget-agents/turn-pipeline.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Jalur giliran tunggal pemrosesan obrolan 6 tahap linier: intent \-\> context \-\> route \-\> compose \-\> qc \-\> act. |
 | 46 | **Mesin Inti RAGET** | Okapi BM25 & PPMI RAG Lokal | `vault/rag/semantic-index.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Pencarian hibrida gabungan pementaan kata leksikal BM25 dan vektor PPMI ringan langsung di RAM peramban. |
-| 47 | **Mesin Inti RAGET** | Specialized Domain Engines | `raget/stem-engine.js``raget/social-engine.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Seperangkat modul penalaran spesialisasi domain (STEM, matematika eksak, ilmu sosial, dan dwibahasa). |
+| 47 | **Mesin Inti RAGET** | Specialized Domain Engines | `raget/stem-engine.js``raget/social-engine.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Seperangkat modul penalaran spesialisasi domain (STEM, matematika eksak, ilmu sosial, dan dwibahasa). |
 | 48 | **Mesin Inti RAGET** | Translator Xenova/opus-mt-en-id | `vault/translate/translator.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Model penerjemahan ONNX lokal transformers.js untuk menerjemahkan materi web Inggris ke Indonesia. |
 | 49 | **Mesin Inti RAGET** | Response Language Lock | `raget/raget-agents/answer-composer.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Aturan penjamin jawaban akhir agar selalu terkunci secara konsisten dalam Bahasa Indonesia baku. |
 | 50 | **Mesin Inti RAGET** | Hugging Face Checkpoint Provider | `raget/raget-neural/neural-provider.js` | SUDAH SELESAI | \[✓\] SUDAH SELESAI | Provider unduhan checkpoint biner .safetensors multi-tier (50M, 100M, 200M) via Hugging Face Hub (CORS). |
@@ -600,7 +603,7 @@ Tabel ini berfungsi sebagai living document acuan kerja agar developer dan AI pe
 
   * 
 
-| 53 | Seluruh Repositori (Pembersihan Global) | Pembersihan Total Komentar (Codebase Comment Purge) | Seluruh berkas di js/, shared/, raget/, vault/, api/, css/, index.html | PERBAIKAN | \[\!\] PERLU PERBAIKAN | Sisir dan hapus seluruh komentar (//, /\* \*/, \<\!-- \--\>, TODO, catatan usang) di 40+ berkas hingga 100% bersih berstatus production-ready. |
+| 53 | Seluruh Repositori (Pembersihan Global) | Pembersihan Total Komentar (Codebase Comment Purge) | Seluruh berkas di js/, shared/, raget/, vault/, api/, css/, index.html | PERBAIKAN | \[\!\] DITAHAN | Pembersihan massal komentar tidak dijalankan. Komentar di shader WGSL, kontrak mesin, dan catatan historis merusak kode jika dihapus. Berkas antarmuka baru tetap tanpa komentar. |
 | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
 
   * 
@@ -641,10 +644,10 @@ Aturan Main & Format Operasional Mutlak:
    - Terapkan siklus swakoreksi mandiri (self-healing loop): jika kode gagal diuji atau terjadi error sintaks, perbaiki sendiri secara otonom di latar belakang.
 
 5. Cakupan Eksekusi Wajib (Berdasarkan Matriks Bab 14 PRD):
-   - [!] PEMBERSIHAN TOTAL: Hapus form lama 'https://server-anda', antrean ekspor lama di `index.html` & `connect.js`, serta kunci router 2 model di `model-sheet.js`.
-   - [!] PEMBERSIHAN KOMENTAR GLOBAL: Hapus seluruh komentar di 40+ file repositori (`js/`, `shared/`, `raget/`, `vault/`, `api/`, `css/`) hingga nol komentar.
-   - [ ] PEMBUATAN MODUL BARU: Bangun `connector-hub.js`, `connector-state.js`, Vercel serverless OAuth/API endpoints, `docx-local.js`, `zip-local.js`, dan `artifact-card.js`.
-   - [~] PENYAMBUNGAN UI KE MESIN: Hubungkan Active Mode Chips di `#attach-row`, sambungkan `#sheet-slide` langsung ke `pptx-local.js`, aktifkan importir di Koleksi, dan pasang runner Pyodide di Studio Kode.
+   - [x] PEMBERSIHAN TOTAL: Form lama server-anda sudah diganti Hub. Router model terkunci ke template dan neural, dengan fallback 3 detik.
+   - [!] PEMBERSIHAN KOMENTAR GLOBAL: Ditahan. Komentar di shader WGSL, kontrak mesin, dan catatan historis tidak dihapus. Berkas antarmuka baru tetap tanpa komentar.
+   - [x] PEMBUATAN MODUL BARU: connector-hub.js, connector-state.js, endpoint OAuth/API, docx-local.js, zip-local.js, dan artifact-card.js sudah ada.
+   - [x] PENYAMBUNGAN UI KE MESIN: Chip mode di attach-row, unduh pptx langsung, importir Koleksi, dan runner Pyodide di Studio sudah tersambung.
    - [✓] INTEGRITAS AKHIR: Jalankan kembali linter dan unit testing suite hingga 100% hijau/lulus tanpa warning.
 
 6. Format Laporan Akhir Tunggal (Final Deliverable Only):

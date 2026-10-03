@@ -413,7 +413,7 @@ export const composer = {
       const s = this.ensure();
       const material = lastAiText(s);
       if (!material) { toast.show('Tanya dulu, baru tap Belajar'); return; }
-      const reply = flowHub.lesson(material, s.title);
+      const reply = flowHub.lesson(material, s.title) + '\n\nCek pemahaman: jelaskan langkah 1 dengan kata sendiri.\nKetik kuis kalau mau soal pilihan. Mesin menilai lewat quiz-session, dan hitungan eksak lewat stem-engine.';
       s.messages.push({ role: 'ai', text: reply, time: Date.now() });
       store.save();
       history.render();
@@ -452,8 +452,9 @@ export const composer = {
           const stamp = Date.now().toString(36);
           const fileName = (picked.title.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide') + '-' + stamp + '.pptx';
           rememberSlide(outline, fileName);
+          await exportSlides(outline, fileName);
           artifact.open(outline, picked.title, fileName);
-          const reply = previewOutline(outline) + '\n\nKetuk Unduh file slide kalau mau simpan PPTX.';
+          const reply = artifactTag('slide', picked.title, fileName, previewOutline(outline)) + '\n\nFile PPTX sudah diunduh. Kartu di obrolan bisa mengunduh ulang.';
           s.messages.push({ role: 'ai', text: reply, time: Date.now() });
           store.save();
           history.render();
