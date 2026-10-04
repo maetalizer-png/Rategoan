@@ -1,4 +1,5 @@
 import { $ } from '../../shared/dom.js';
+import { bindFilterTabs } from '../../shared/filter-tabs.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { toast } from '../core/toast.js';
 
@@ -106,12 +107,9 @@ export function mountMemoryCapsule() {
   const back = $('memory-back');
   if (back) back.onclick = close;
   const list = $('memory-list');
-  root.querySelectorAll('[data-memory-tab]').forEach((btn) => {
-    btn.onclick = () => {
-      root.querySelectorAll('[data-memory-tab]').forEach((other) => other.classList.toggle('on', other === btn));
-      if (list) list.dataset.filter = btn.dataset.memoryTab;
-      paint(list);
-    };
+  bindFilterTabs($('memory-tabs'), (_id, btn) => {
+    if (list) list.dataset.filter = btn.dataset.memoryTab || 'semua';
+    paint(list);
   });
   const form = $('memory-form');
   if (form) form.onsubmit = (event) => {

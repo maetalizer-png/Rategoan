@@ -1,4 +1,5 @@
 import { $ } from '../../shared/dom.js';
+import { bindFilterTabs, setActiveTab } from '../../shared/filter-tabs.js';
 import { ic } from '../../shared/icons.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
@@ -185,12 +186,10 @@ async function renderTersimpan() {
   $('coll-filters').innerHTML = filterChips
     .map((f) => '<button type="button" class="coll-filter-chip' + (state.filter === f.key ? ' on' : '') + '" data-filter="' + escapeHtml(String(f.key)) + '">' + chipCaption(f) + ' (' + f.count + ')</button>')
     .join('');
-  $('coll-filters').querySelectorAll('[data-filter]').forEach((b) => {
-    b.onclick = () => {
-      const v = b.dataset.filter;
-      state.filter = v === 'null' ? null : v;
-      renderTersimpan();
-    };
+  bindFilterTabs($('coll-filters'), (_id, btn) => {
+    const v = btn.dataset.filter;
+    state.filter = v === 'null' ? null : v;
+    renderTersimpan();
   });
 
   let list = chatItems;
@@ -617,7 +616,8 @@ export const collectionPage = {
   async open() {
     state = { tab: 'tersimpan', filter: null, query: '' };
     $('coll-search').value = '';
-    document.querySelectorAll('.coll-tab').forEach((t) => t.classList.toggle('on', t.dataset.ctab === 'tersimpan'));
+    const tabs = document.querySelector('.coll-tabs');
+    setActiveTab(tabs, (t) => t.dataset.ctab === 'tersimpan');
     await renderTab();
   },
   bind() {
@@ -647,13 +647,10 @@ export const collectionPage = {
         closeCollMenu();
       }
     });
-    document.querySelectorAll('.coll-tab').forEach((tb) => {
-      tb.onclick = () => {
-        state.tab = tb.dataset.ctab;
-        state.filter = null;
-        document.querySelectorAll('.coll-tab').forEach((t) => t.classList.toggle('on', t === tb));
-        renderTab();
-      };
+    bindFilterTabs(document.querySelector('.coll-tabs'), (id) => {
+      state.tab = id;
+      state.filter = null;
+      renderTab();
     });
     let searchTimer = null;
     $('coll-search').addEventListener('input', (e) => {
@@ -686,11 +683,7 @@ export const collectionPage = {
       const on = document.querySelector('#coll-note-tags button.on');
       return (on && on.dataset.collTag) || 'prompt';
     };
-    document.querySelectorAll('#coll-note-tags button').forEach((btn) => {
-      btn.onclick = () => {
-        document.querySelectorAll('#coll-note-tags button').forEach((other) => other.classList.toggle('on', other === btn));
-      };
-    });
+    bindFilterTabs(document.querySelector('#coll-note-tags'), () => {});
     const cancel = $('coll-note-cancel');
     if (cancel) cancel.onclick = () => { modal.hidden = true; };
     const form = $('coll-note-form');

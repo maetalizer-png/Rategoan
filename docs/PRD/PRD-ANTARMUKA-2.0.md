@@ -1,51 +1,52 @@
-<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-04T20:06:05Z. Versi 3.0.0. -->
+<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-04T20:35:05Z. Versi 3.1.0. -->
 
 PRD ANTARMUKA 2.0 — MASTER CETAK BIRU REKAYASA & KEDAULATAN SISTEM (EDISI STANDAR INDUSTRI KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Enterprise-Grade Sovereign AI Workstation)
-Versi: 3.0.0-CANONICAL-SOVEREIGN | Tanggal: Oktober 2026
-Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0
+Versi: 3.1.0-CANONICAL-SOVEREIGN | Tanggal: Oktober 2026
+Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0 (STATUS: ARSIP TERTUTUP & SELESAI)
 Repositori Sasaran: Rategoan (egoan.vercel.app / rategoan-main)
 
-# BAB 1: ARSITEKTUR TATA LETAK, IDENTITAS MODUL & PANDUAN PENGGUNA
+# BAB 1: ARSITEKTUR TATA LETAK, IDENTITAS MODUL & INTEGRITAS REKAYASA
 ## 1.1 Kedaulatan Mutlak Tanpa Model Asing (Strict Sovereign Mandate)
 Larangan Mutlak Model AI Pihak Ketiga: Sistem Rategoan DILARANG KERAS mencolok atau mengintegrasikan model AI eksternal pihak ketiga (seperti OpenAI, Gemini, Claude) maupun runtime model luar seperti Ollama. Rategoan adalah sistem AI berdaulat penuh yang beroperasi murni di atas dua otak ciptaan sendiri:
 ⚡ Raget Template: Otak deterministik instan (<10ms), berbasis basis data & FAQ kanonikal, zero-halusinasi, 100% offline (Aktif / Default).
 🧠 Raget Neural: Otak jaringan saraf tiruan lokal mandiri Rategoan yang dilatih dari korpus rilis Rategoan.
 Pembersihan Total: Tidak boleh ada opsi Ollama atau server luar di seluruh aplikasi.
-## 1.2 Peta Tata Letak Lengkap, Fungsi & Cara Kerja Komponen (Komprehensif)
-Setiap elemen di Rategoan memiliki tata letak, fungsi, dan cara pakai yang jelas tanpa saling menindih:
+## 1.2 Peta Tata Letak Lengkap, Fungsi & Cara Kerja Komponen
 A. BILAH PENGETIKAN (COMPOSER BOX — BAGIAN BAWAH CHAT)
-Area Input Teks (chat-input):
-Tata Letak: Di tengah wadah composer, otomatis membesar (auto-grow) sesuai panjang teks.
-Fungsi: Mengetik pertanyaan, instruksi naskah, atau kode.
-Tombol Lampirkan (+ / btn-attach):
-Tata Letak: Di sisi kiri bawah input.
-Fungsi: Membuka lembar lampiran (#attach-sheet).
-Cara Pakai: Diklik untuk melampirkan Kamera, Foto, Dokumen, Memo Suara, atau Menghubungkan Folder Lokal.
+Area Input Teks (chat-input): Di tengah wadah composer, otomatis membesar (auto-grow) sesuai panjang teks.
+Tombol Lampirkan (+ / btn-attach): Di sisi kiri bawah input, membuka lembar lampiran (#attach-sheet).
 Tombol Pemilihan Model Otak (btn-model — Ikon Chip CPU):
-KOREKSI FATAL: DILARANG KERAS DI-HIDDEN. Tombol ini WAJIB TAMPIL AKTIF di samping tombol (+).
-Tata Letak: Tepat di sebelah kanan tombol (+).
-Fungsi: Menampilkan indikator otak aktif dan membuka dialog cepat pemilihan mesin inferensi.
-Cara Pakai: Diklik untuk memilih antara [⚡ Raget Template] atau [🧠 Raget Neural].
-Tombol Suara (btn-voice-input — Ikon Mikrofon 🎤):
-Tata Letak: Di sisi kanan bawah input.
-Fungsi: Merekam suara dan mengubah suara menjadi teks via Web Speech API / local audio tool.
+WAJIB TAMPIL AKTIF di samping tombol (+). Dilarang diberi atribut hidden.
+Mengkliknya membuka modal pilihan: [⚡ Raget Template] atau [🧠 Raget Neural].
+Tombol Suara (btn-voice-input — Ikon Mikrofon 🎤): Di sisi kanan bawah input untuk perekaman suara lokal.
 Tombol Kirim Pesan (btn-send — Ikon Pesawat Kertas ➤):
-KOREKSI FATAL: DILARANG DIHILANGKAN TOTAL.
-Tata Letak: Di samping kanan tombol mikrofon (atau bertukar visual secara jelas).
-Perilaku: Saat kolom ketik kosong, tombol kirim tampil dalam status redup/nonaktif (disabled, opacity 0.45). Begitu pengguna mengetik satu karakter saja, tombol kirim langsung menyala biru tegas. Pengguna tidak akan bingung mencari tombol kirim.
-Tombol Berhenti (btn-stop — Ikon Kotak Merah/Hitam ⏹️):
-Tata Letak: Menggantikan tombol kirim saat AI sedang menghasilkan jawaban (is-generating).
-Fungsi: Menghentikan proses generasi seketika via AbortController.
+Dilarang dihilangkan total (dilarang display: none). Saat input kosong, tombol kirim berstatus redup (disabled, opacity 0.45). Begitu ada teks diketik, menyala biru tegas siap kirim.
+Tombol Berhenti (btn-stop — Ikon Kotak Merah/Hitam ⏹️): Menggantikan tombol kirim saat AI sedang menyusun jawaban (is-generating), memicu abortController.abort().
 B. HEADER OBROLAN (BAGIAN ATAS CHAT)
 1. Tombol Menu (☰): Membuka Sidebar Drawer.
 2. Judul Sesi Aktif / Status: Menampilkan judul obrolan aktif.
-3. Indikator Mode Mandiri: Pil status [ ⚡ Mandiri (Offline) ] saat tidak ada jaringan.
-4. Pemilih Keahlian Terintegrasi (Keahlian / Skill Selector):
-TATA LETAK BARU: Tidak boleh ditaruh di atas keyboard ponsel! Diletakkan di Header atas sebagai pil elegan: [ 🎯 Umum ▾ ].
+3. Indikator Mode Mandiri: Pil status [ ⚡ Mandiri (Offline) ] saat jaringan mati.
+4. Pemilih Keahlian Terintegrasi (Skill Selector): Terpasang sebagai tombol pil elegan di Header atas [ 🎯 Umum ▾ ]. Mengkliknya membuka sheet pemilihan spesialisasi (Umum, Analis Data, Auditor Kode, Penulis Teknis, Peneliti) tanpa membuat bilah ketik keyboard sesak.
+5. Tombol Obrolan Baru (Ikon Pena Edit) & Menu Opsi (⋮).
+C. SIDEBAR DRAWER (#sidebar — NAVIGASI UTAMA ASLI)
+Mempertahankan penamaan asli ringkas Rategoan:
+1. Chat Baru: Membuka percakapan baru.
+2. Studio kode: Lingkungan rekayasa perangkat lunak mandiri (setara Claude Code / Codex). Mendukung integrasi folder lokal (File System Access), penjelajah berkas, Diff Viewer (perubahan merah/hijau), dan eksekusi skrip Web Worker lokal.
+3. Proyek: Ruang kerja berbasis topik dengan berkas rujukan permanen (PDF/DOCX) dan instruksi sistem khusus.
+4. Koleksi: Galeri penyimpanan catatan dan memo pengguna.
+5. Konektor: Rumah bagi 33 alat lokal berdaulat (Client-Side Dispatcher).
+6. Artefak: Galeri meja kerja dokumen hidup hasil kolaborasi Cowork (naskah, laporan, slide).
+7. Riwayat Chat & Profil Pengguna di footer drawer.
+D. LEMBAR LAMPIRAN (#attach-sheet — POPUP TOMBOL +)
+Murni berisi: 4 Orb Media ber-SVG nyata (Kamera, Foto, Dokumen, Memo Suara) + 4 Toggle Mode Penalaran + 1 Baris Aksi [ Hubungkan Folder Lokal ]. Seksi duplikat 'Studio' (Studio Kode, Kaitkan ke Proyek, Belajar terpandu) telah dihapus total.
+## 1.3 Hukum Integritas Rekayasa & Verifikasi Kode Sumber Nyata
+1. Mandat Verifikasi Kode Nyata (Anti-Asumsi): Dilarang keras menulis audit UI atau merekayasa instruksi hanya berdasarkan asumsi atau tangkapan layar visual tanpa terlebih dahulu memverifikasi baris kode riil di repositori (git grep / inspeksi berkas).
+2. Status Arsip PRD 1.0 (Tuntas & Terkunci): Seluruh 43 bab pada PRD Antarmuka 1.0 (khususnya §38.1 Audit Kapsul Memori yang sudah diperbaiki kodenya) dinyatakan SELESAI, DITUTUP, dan DIARSIPKAN per 4 Oktober 2026. Grok Build dilarang mengeksekusi ulang bab lama PRD 1.0 agar tidak menimpa kode yang sudah sehat.
+
 # BAB 2: PROTOKOL KERJA OTONOM & SANITASI PRE-FLIGHT (CONTINUOUS RUN ENGINE)
 ## 2.1 Pola Sesi Maraton Otonom (Deep Sprint Engine)
-1. Eksekusi Mandiri Terpadu: Agen (Grok Build) diwajibkan menyelesaikan seluruh paket pekerjaan dalam satu putaran kerja utuh tanpa berhenti sepotong-sepotong.
+1. Eksekusi Mandiri Terpadu: Agen (Grok Build) menyelesaikan seluruh paket pekerjaan dalam satu putaran kerja utuh tanpa berhenti sepotong-sepotong.
 2. Lingkaran Verifikasi Mandiri (Self-Healing Loop): Wajib menjalankan npm test dan npm run lint secara otomatis hingga 100% hijau sebelum melapor.
 3. Catatan Detak Jantung: Dokumentasi status dicatat ke sprint-run.log.
 ## 2.2 Prosedur Sanitasi Pra-Eksekusi (Pre-Flight Clean Run)
@@ -63,36 +64,55 @@ npm run lint
 
 # BAB 3: PERBAIKAN ERGONOMI, BILAH TULIS & KONTROL TAMPILAN
 ## 3.1 Pemulihan Ikon Pemilihan Model & Tombol Kirim di Composer
-1. Pulihkan Tombol Model (btn-model):
-Hapus atribut hidden dari <button id="btn-model"> pada index.html.
-Beri SVG chip prosesor yang tajam.
-Saat diklik, panggil modal pemilihan otak: Raget Template (Aktif Default) dan Raget Neural.
-2. Perilaku Tombol Kirim (btn-send) & Mikrofon (btn-voice-input):
-Di sisi kanan composer, tampilkan tombol Mikrofon dan tombol Kirim secara harmonis:
-Jika kolom ketik kosong: Tombol kirim berstatus disabled (opacity: 0.45; cursor: default), tombol mikrofon aktif.
-Jika kolom ketik ada teks: Tombol kirim menyala penuh (opacity: 1; color: var(--rg-accent)), siap diklik atau ditekan Enter.
-Saat generasi berjalan (is-generating): Tombol kirim dan mikrofon digantikan oleh tombol [ ⏹️ Berhenti ].
-Dengan demikian pengguna tidak pernah merasa tombol kirim hilang!
+Hapus atribut hidden pada <button id="btn-model"> di index.html.
+Jangan menyembunyikan #btn-send saat kolom kosong; tampilkan redup (disabled, opacity: 0.45) berdampingan dengan mikrofon, dan menyala tegas saat ada teks.
+Tombol [ ⏹️ Berhenti ] otomatis menggantikan tombol kirim/mic saat respons sedang diketik AI.
 ## 3.2 Pemindahan Pemilih Keahlian ke Header Atas
-Jangan menaruh dropdown keahlian di samping tombol lampiran keyboard.
-Letakkan chip/pill keahlian di header atas obrolan: <button id="header-skill-pill" class="header-pill">🎯 Umum ▾</button>.
-Mengkliknya membuka sheet ringkas untuk memilih spesialisasi (Umum, Analis Data, Auditor Kode, Penulis Teknis, Peneliti).
-## 3.3 Pemurnian Lembar Lampiran (#attach-sheet)
-Pastikan seksi "Studio" (Studio Kode, Kaitkan ke Proyek, Belajar terpandu) tetap terhapus dari #attach-sheet.
-Pertahankan 4 orb media ber-SVG presisi + 4 toggle penalaran + 1 tombol Hubungkan Folder Lokal.
-## 3.4 Penataan Ulang Halaman Pengaturan & Segmented Controls (css/account/settings.css)
-Terapkan Stacked Layout pada .set-row-theme dan .set-row-font: label di baris atas, dan tombol segmented Terang/Sistem/Gelap serta Kecil/Normal/Besar di baris bawah selebar 100% tanpa mematahkan kata "Mode Gelap".
-Profil bersih tanpa lencana mengambang, meter penyimpanan Penyimpanan: x MB / 50 MB, dan hanya 2 otak resmi.
+Terpasang sebagai <button id="header-skill-pill" class="header-pill">Umum ▾</button> di header atas.
+Mengkliknya memunculkan #skill-sheet untuk memilih 5 spesialisasi tanpa memakan area keyboard.
+## 3.3 Penataan Ulang Halaman Pengaturan & Segmented Controls (css/account/settings.css)
+Terapkan Stacked Layout pada .set-row-theme dan .set-row-font agar label "Mode Gelap" dan "Ukuran Teks" tidak patah kata di layar ponsel.
+Profil bersih tanpa slogan mengambang, meter penyimpanan Penyimpanan: x MB / 50 MB, dan hanya 2 otak resmi.
 
-# BAB 4: REKAYASA SISTEM STUDIO KODE, ARTEFAK & 33 ALAT LOKAL
-## 4.1 Studio kode (Lingkungan Rekayasa Perangkat Lunak Mandiri)
-Integrasi File System Access: Tombol [ Folder lokal ] membuka folder kerja di komputer pengguna, memetakan berkas di panel kiri, dan mengedit berkas di textarea editor.
-Diff Viewer: Tombol [ Tinjau Perubahan ] mengaktifkan tampilan visual perbandingan kode sebelum/sesudah revisi dengan garis hijau (+) dan merah (-).
-Uji Eksekusi Mandiri: Tombol [ Jalankan ] mengeksekusi skrip JavaScript/Python via Web Worker / WebAssembly lokal tanpa internet.
-## 4.2 Artefak (Meja Kolaborasi Dokumen & Naskah Hidup)
-Split-screen otomatis di desktop saat obrolan menghasilkan naskah/dokumen panjang; tab alih [ Chat | Kanvas ] di ponsel.
-Live editor yang memungkinkan pengguna mengedit teks bersama AI dan tombol ekspor instan (.docx, .md, cetak .pdf).
-## 4.3 Katalog 33 Alat Lokal di Konektor
+# BAB 4: REFACTORING STRUKTURAL, KOMPONEN BERSAMA & EKOSISTEM ALAT
+## 4.1 Tugas Terjadwal Eksplisit: Pemecahan 2 File Raksasa (1.446 Baris)
+Untuk mengeliminasi utang teknis monolitik yang telah lama diabaikan, Grok Build diwajibkan memecah 2 file raksasa berikut menjadi modul terisolasi berkohesi tinggi:
+1. Pemecahan raget/raget-agents/agent-tools.js (800 baris):
+Pecah menjadi 3 sub-modul di bawah direktori raget/raget-agents/tools/:
+tool-registry.js (~250 baris): Pendaftaran katalog, metadata, skema parameter JSON, dan validasi tipe alat.
+tool-executor.js (~350 baris): Logika eksekutor pemanggilan fungsi lokal (math, vault, vision, canvas, audio, agenda).
+tool-security.js (~200 baris): Validasi batas keamanan, sanitasi payload, dan pembatasan wewenang eksekusi.
+agent-tools.js dipertahankan sebagai fasad publik ringkas (< 80 baris) yang mengekspor ulang API untuk menjaga kompatibilitas.
+2. Pemecahan raget/raget-agents/agent.js (646 baris):
+Pecah menjadi 3 sub-modul di bawah direktori raget/raget-agents/core/:
+agent-loop.js (~250 baris): Siklus loop penalaran ReAct, orkestrasi pemanggilan alat berantai, dan penanganan sinyal abort.
+agent-context.js (~200 baris): Perakitan prompt sistem, pemangkasan riwayat percakapan (context window management), dan penyuntikan dokumen RAG.
+agent-stream.js (~150 baris): Pemformatan luaran streaming, parser token parsial, dan callback UI pengetikan.
+agent.js dipertahankan sebagai fasad pengendali instan (< 60 baris).
+## 4.2 Pembangunan Helper Bersama: shared/filter-tabs.js
+Untuk membasmi duplikasi kode manual pada pola pemilihan tab aktif di seluruh aplikasi:
+1. Buat berkas baru shared/filter-tabs.js:
+export function bindFilterTabs(container, onSelect) {
+if (!container) return;
+container.addEventListener('click', (e) => {
+const btn = e.target.closest('button');
+if (!btn || !container.contains(btn)) return;
+container.querySelectorAll('button').forEach((b) => {
+const isActive = (b === btn);
+b.classList.toggle('on', isActive);
+b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+});
+if (typeof onSelect === 'function') {
+onSelect(btn.dataset.tab || btn.dataset.ctab || btn.textContent.trim(), btn);
+}
+});
+}
+2. Refactor 5 Titik Duplikasi:
+Ganti duplikasi seleksi tab manual di js/collection/collection.js (3 titik) dan js/ui/memory-capsule.js (2 titik) dengan pemanggilan bindFilterTabs().
+## 4.3 Studio kode & Artefak
+Studio kode: Pertahankan integrasi window.showDirectoryPicker() (tombol Folder lokal), Diff Viewer (tombol Tinjau Perubahan), dan eksekusi Web Worker.
+Artefak: Pertahankan kanvas kerja split-screen / tab alih ponsel dengan tombol ekspor (.docx, .md, .pdf).
+## 4.4 Katalog 33 Alat Lokal di Konektor
 Daftarkan ke dalam CATALOG di js/connectors/connector-state.js dan jalankan via Client-Side Tool Dispatcher di tool-card.js:
 1. Vault Dokumen & RAG Pribadi (6 Alat)
 2. Mata & Vision OCR Mandiri (4 Alat)
@@ -112,21 +132,22 @@ Sanitasi Lingkungan
 Lingkungan Terminal / Sandbox
 Bunuh proses zombie (pkill -f node), bersihkan /tmp/ dan .eslintcache, pastikan npm test & npm run lint 100% hijau.
 Fase 2
-Pemulihan Tombol & Ergonomi Bilah Tulis
+Pemulihan UI & Ergonomi Bilah Tulis
 index.html, js/chat/composer.js, css/ui/overhaul.css
-1. Buka kunci tombol model: Hapus atribut `hidden` pada #btn-model agar ikon chip CPU tampil aktif di samping (+).
-2. Perbaiki tombol kirim: Tombol kirim (#btn-send) tidak boleh lenyap total, melainkan tampil redup (disabled) saat input kosong dan menyala saat ada teks.
-3. Pindahkan pemilih Keahlian ke header atas sebagai pill [ 🎯 Umum ▾ ].
+1. Pertahankan #btn-model aktif di samping (+).
+2. Pertahankan tombol kirim redup saat kosong dan menyala saat ada teks.
+3. Pertahankan pemilih Keahlian di Header Atas [ 🎯 Umum ▾ ].
 4. Pertahankan lembar lampiran bersih tanpa seksi 'Studio'.
 Fase 3
-Studio kode & Artefak
-js/ui/, js/artifacts/, js/chat/, index.html
-1. Sempurnakan Studio kode dengan Diff Viewer dan Folder lokal.
-2. Sempurnakan Artefak dengan live canvas dan ekspor (.docx, .md, .pdf).
+Refactoring File Raksasa & Helper Bersama
+raget/raget-agents/, shared/filter-tabs.js, js/collection/, js/ui/
+1. Pecah agent-tools.js (800 baris) menjadi 3 sub-modul tools/ (< 300 baris per file).
+2. Pecah agent.js (646 baris) menjadi 3 sub-modul core/ (< 300 baris per file).
+3. Buat shared/filter-tabs.js dan terapkan di collection.js & memory-capsule.js untuk menghapus 5 titik duplikasi logika tab.
 Fase 4
-Ekosistem 33 Alat & Konektor
-js/connectors/, js/project/
-Daftarkan 6 Ekosistem Bawaan Baru (33 Alat Lokal) di connector-state.js dan Client-Side Dispatcher.
+Studio kode, Artefak & 33 Alat
+js/studio/, js/artifacts/, js/connectors/
+Pastikan Diff Viewer, Folder lokal, ekspor artefak, dan 33 alat lokal di Client-Side Dispatcher beroperasi stabil.
 Fase 5
 Pembersihan QC & Verifikasi Mandiri
 Seluruh berkas JavaScript & Unit Test
@@ -135,42 +156,9 @@ Kriteria Kelulusan Akhir (Definition of Done):
 1. Seluruh 17 pengujian unit lulus 100% tanpa kegagalan (npm test).
 2. Linter kode menghasilkan 0 error dan 0 warning (npm run lint).
 3. Sintaks seluruh berkas JavaScript valid tanpa galat sintaks (node --check).
-4. Ikon Chip CPU Pemilihan Model (#btn-model) TAMPIL AKTIF di bilah composer di samping tombol (+), membuka modal pilihan Raget Template & Raget Neural.
-5. Tombol Kirim (#btn-send) selalu terlihat dan intuitif (redup saat kosong, menyala saat ada teks, berubah jadi Stop saat inferensi).
-6. Pemilih Keahlian berada di Header Atas secara rapi, tidak membuat bilah ketik keyboard sesak.
-7. Nama sidebar tetap ringkas asli: Chat Baru, Studio kode, Proyek, Koleksi, Konektor, Artefak.
-8. Lembar lampiran (+) bersih dari duplikasi seksi Studio.
-9. Studio kode dan Artefak terpasang dengan fungsionalitas rekayasa dan kolaborasi dokumen penuh.Fungsi: Menyesuaikan persona penalaran (Umum, Analis Data, Auditor Kode, Penulis Teknis, Peneliti).
-Cara Pakai: Diklik untuk memunculkan modal sheet pemilihan keahlian tanpa memakan ruang pengetikan pesan.
-5. Tombol Obrolan Baru (Ikon Pena Edit): Membuka percakapan baru yang segar.
-6. Tombol Menu Opsi (⋮): Opsi ekspor obrolan, hapus sesi, dan info sistem.
-C. SIDEBAR DRAWER (#sidebar — NAVIGASI UTAMA STANDAR INDUSTRI)
-Penamaan di sidebar mempertahankan nama asli yang ringkas dan berwibawa:
-1. Chat Baru: Membuka sesi obrolan baru.
-2. Studio kode:
-Fungsi: Lingkungan rekayasa perangkat lunak mandiri (setara Claude Code / Codex).
-Cara Pakai: Membuka studio editor kode lengkap, mendukung integrasi folder lokal di komputer via File System Access API (tombol [ Folder lokal ]), melihat perbedaan revisi kode (tombol [ Tinjau Perubahan ] Diff merah/hijau), dan mengeksekusi skrip di Web Worker lokal (tombol [ Jalankan ]).
-3. Proyek:
-Fungsi: Ruang kerja berbasis topik khusus dengan berkas rujukan permanen (PDF/DOCX) dan instruksi sistem permanen.
-Cara Pakai: Masuk ke menu Proyek -> Buat proyek dari template atau nama baru -> Lampirkan berkas rujukan -> Klik "Buka di Obrolan ->".
-4. Koleksi: Galeri penyimpanan catatan, kutipan, dan memo hasil percakapan.
-5. Konektor: Rumah bagi 33 alat lokal berdaulat (Client-Side Tool Dispatcher: kalkulus, vision OCR, audio overview, agenda rutin, dan vault).
-6. Artefak:
-Fungsi: Galeri penampung seluruh naskah, laporan kerja, dokumen proposal, dan slide hasil kerja kolaboratif (Cowork).
-Cara Pakai: Mengklik artefak yang tersimpan untuk melihat, mengedit ulang, atau mengunduhnya kembali.
-7. Riwayat Chat: Daftar riwayat obrolan masa lalu lengkap dengan kolom pencarian cepat.
-8. Profil Pengguna (Footer): Avatar melingkar, Nama Pengguna, Email, meter penyimpanan lokal, dan tombol Pengaturan (⚙️).
-D. KANVAS ARTEFAK / COWORK (SAAT INTERAKSI CHAT BERLANGSUNG)
-Tata Letak:
-Layar Desktop (>= 1024px): Split-screen otomatis di sebelah kanan obrolan saat dokumen/naskah panjang dihasilkan AI.
-Layar Ponsel: Tab alih cepat di header [ 💬 Chat | 📄 Kanvas ].
-Fungsi: Meja kerja dokumen hidup. Pengguna bisa langsung membaca, mengedit teks secara live, menyorot bagian teks untuk minta revisi ke AI, serta mengunduh berkas sebagai Markdown (.md), Word (.docx), atau Cetak (.pdf).
-E. LEMBAR LAMPIRAN (#attach-sheet — POPUP TOMBOL +)
-Tata Letak: Muncul saat tombol (+) diklik.
-Isi Resmi:
-1. Seksi Media (4 Orb Ber-SVG Nyata 44x44px): Kamera, Foto, Dokumen, Memo Suara.
-2. Seksi Mode Penalaran: Pencarian Web, Berpikir lebih keras, Riset mendalam, Mode kilat.
-3. Baris Aksi Berkas: [ Hubungkan Folder Lokal ] (File System Access API).
-DILARANG ADA: Seksi "Studio", tombol "Studio Kode", tombol "Kaitkan ke Proyek", dan "Belajar terpandu" (karena fitur ini berada di Sidebar & Proyek).
-
-# BAB 2: PROTOKOL KERJA OTONOM & SANITASI PRE-FLIGHT (CONTINUOUS RUN ENGINE)
+4. Tidak ada berkas di raget/raget-agents/ yang melebihi 400 baris (agent-tools.js dan agent.js berhasil dipecah menjadi modul independen).
+5. Berkas shared/filter-tabs.js aktif digunakan di collection.js dan memory-capsule.js, memangkas seluruh duplikasi toggle tab.
+6. Ikon Chip CPU Model (#btn-model) dan Tombol Kirim (#btn-send) tampil harmonis di bilah pengetikan.
+7. Pemilih Keahlian berada di Header Atas secara rapi, tidak membuat bilah ketik keyboard sesak.
+8. Nama sidebar tetap ringkas asli: Chat Baru, Studio kode, Proyek, Koleksi, Konektor, Artefak.
+9. PRD 1.0 §38.1 dikunci sebagai SELESAI & DITUTUP.
