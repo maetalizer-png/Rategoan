@@ -59,6 +59,13 @@ function paint() {
     open.type = 'button';
     open.textContent = 'Pratinjau';
     open.onclick = () => {
+      const body = String(item.markdown || item.code || '');
+      const frame = $('artifact-inline');
+      if (frame && /<\s*(svg|html|div|p|table)\b/i.test(body)) {
+        frame.hidden = false;
+        frame.srcdoc = body;
+        return;
+      }
       if (item.type === 'code' || item.type === 'document' || item.type === 'table' || item.type === 'chart' || item.type === 'diagram' || item.type === 'report') artifact.open(item);
       else artifact.open(item.outline, item.title, item.fileName);
       router.go('chat');
