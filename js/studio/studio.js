@@ -105,6 +105,19 @@ export const studioPage = {
       const text = codeText();
       if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => toast.show('Kode disalin'));
     };
+    const editorBox = $('studio-editor');
+    if (editorBox) editorBox.addEventListener('keydown', (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+        event.preventDefault();
+        if (run) run.click();
+      }
+    });
+    const toArt = $('studio-to-artifact');
+    if (toArt) toArt.onclick = () => {
+      artifact.open({ type: 'code', code: codeText(), title: 'Cuplikan studio', fileName: 'studio.js' }, 'Cuplikan studio', 'studio.js');
+      toast.show('Kode dibuka sebagai artefak');
+      router.go('chat');
+    };
     const clear = $('studio-clear');
     if (clear) clear.onclick = () => showConsole('', null);
     const py = $('studio-py');
