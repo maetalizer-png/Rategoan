@@ -8,6 +8,7 @@ import { drawer } from '../ui/drawer.js';
 import { quote } from '../ui/quote.js';
 import { history } from '../history/history.js';
 import { chat } from './chat.js';
+import { abortGeneration } from './chat.js';
 import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
@@ -456,8 +457,10 @@ export const composer = {
       if (fast) fast.setAttribute('aria-checked', hemat.enabled() ? 'true' : 'false');
       attach.open();
     };
-    const stop = $('btn-stop');
-    if (stop) stop.onclick = () => cancelAgent();
+    document.addEventListener('rategoan:stop-generation', () => {
+      abortGeneration();
+      cancelAgent();
+    });
     document.addEventListener('rategoan:command', (event) => {
       if (event.detail === 'think') {
         this.thinkActive = true;

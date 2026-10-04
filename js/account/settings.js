@@ -2,7 +2,6 @@ import { $ } from '../../shared/dom.js';
 import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
-import { store } from '../state/store.js';
 import { auth } from '../state/auth.js';
 import { theme } from '../state/theme.js';
 import { font } from '../state/font.js';
@@ -18,6 +17,7 @@ import { pdfReader } from '../../vault/pdf/reader.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 import { llmMode } from '../state/llm-mode.js';
+import { enginePreference } from '../state/engine-preference.js';
 import { memoryPreference } from '../state/memory-preference.js';
 import { paintMemoryBadge } from '../ui/memory-capsule.js';
 import { memory } from '../ai/memory.js';
@@ -86,7 +86,7 @@ const TEMPLATE = `
           <div class="profile-avatar" id="profile-avatar"></div>
           <div class="profile-name" id="profile-name"></div>
           <div class="profile-mail" id="profile-mail"></div>
-          <div class="profile-badge">Akun lokal berdaulat</div>
+          <div class="profile-badge">Ruang Kerja Mandiri</div>
           <div class="storage-meter" aria-hidden="true"><span id="storage-meter-bar"></span></div>
         </div>
         <hr class="divider" id="profile-divider" hidden>
@@ -106,7 +106,7 @@ const TEMPLATE = `
                   </svg>
                   Mode Gelap
                 </span>
-                <span class="font-btns">
+                <span class="theme-segmented">
                   <button class="theme-btn" data-theme="light">Terang</button>
                   <button class="theme-btn" data-theme="auto">Sistem</button>
                   <button class="theme-btn" data-theme="dark">Gelap</button>
@@ -123,10 +123,10 @@ const TEMPLATE = `
                   </svg>
                   Ukuran Teks
                 </span>
-                <span class="font-btns">
-                  <button class="font-btn" data-font="small">K</button>
-                  <button class="font-btn" data-font="normal">N</button>
-                  <button class="font-btn" data-font="large">B</button>
+                <span class="theme-segmented">
+                  <button class="font-btn" data-font="small">Kecil</button>
+                  <button class="font-btn" data-font="normal">Normal</button>
+                  <button class="font-btn" data-font="large">Besar</button>
                 </span>
               </div>
             </div>
@@ -301,6 +301,32 @@ export const settings = {
     const memoriRow = buildSwitchRow('row-memori', MEMORY_ICON, 'Memori');
     const hapusMemoriRow = buildRow('row-hapus-memori', ERASE_ICON, 'Hapus memori tersimpan');
     const eksporLogRow = buildRow('row-riwayat-ekspor', EXPORT_LOG_ICON, 'Riwayat ekspor');
+    const hub = document.createElement('div');
+    hub.className = 'model-hub';
+    hub.innerHTML = '<button type="button" data-engine="template">Raget Template<small>Jawaban instan di perangkat</small></button><button type="button" data-engine="neural">Raget Neural<small>Model bahasa lokal</small></button><button type="button" data-engine="ollama">Server Mandiri<small>Ollama di localhost:11434</small></button>';
+    hub.querySelectorAll('button').forEach((btn) => {
+      btn.onclick = () => {
+        const pick = btn.getAttribute('data-engine');
+        if (pick === 'ollama') {
+          if (!llmMode.serverUrl()) llmMode.setServerUrl('http://localhost:11434');
+          llmMode.setMode('server');
+          enginePreference.set('neural');
+          toast.show('Server mandiri: ' + llmMode.serverUrl());
+        } else {
+          llmMode.setMode('lokal');
+          enginePreference.set(pick);
+          toast.show(pick === 'neural' ? 'Raget Neural' : 'Raget Template');
+        }
+        this.refreshLlmModeStatus();
+        paintHub();
+      };
+    });
+    const paintHub = () => {
+      const on = llmMode.mode() === 'server' ? 'ollama' : enginePreference.get();
+      hub.querySelectorAll('button').forEach((btn) => btn.classList.toggle('on', btn.getAttribute('data-engine') === on));
+    };
+    paintHub();
+    aiSection.appendChild(hub);
     const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
     aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
@@ -479,10 +505,9 @@ export const settings = {
     }
     const info = $('storage-info');
     if (info) {
-      const sessions = store.get().sessions;
       const kb = Math.max(1, Math.round(storage.usage() / 1024));
       const pct = storage.percent();
-      info.textContent = sessions.length + ' chat • ' + kb + ' KB (' + pct + '%)';
+      info.textContent = 'Penyimpanan lokal: ' + kb + ' KB (' + pct + '%) · IndexedDB aktif';
       const bar = $('storage-meter-bar');
       if (bar) bar.style.width = Math.min(100, pct) + '%';
       if (pct >= 80 && !this._warned) {

@@ -177,6 +177,7 @@ function createNamed(name) {
   const clean = String(name || '').trim();
   if (!clean) return;
   const found = workspace.findByName(clean) || workspace.create(clean);
+  if (TEMPLATES[clean] && !found.systemPrompt) workspace.update(found.id, { systemPrompt: TEMPLATES[clean] });
   remember(found);
   toast.show('Proyek: ' + found.name);
   paint();
@@ -200,9 +201,16 @@ export const projectPage = {
     document.querySelectorAll('[data-template]').forEach((btn) => {
       btn.onclick = () => {
         const name = btn.getAttribute('data-template');
-        const found = workspace.findByName(name) || workspace.create(name);
-        workspace.update(found.id, { systemPrompt: TEMPLATES[name] || '' });
-        activate(found);
+        const input = $('project-name-sheet');
+        if (input) {
+          input.value = name;
+          input.focus();
+        }
+        const box = $('project-create-box');
+        if (box) {
+          box.hidden = false;
+          box.dataset.open = '1';
+        }
       };
     });
     const prompt = $('project-prompt');

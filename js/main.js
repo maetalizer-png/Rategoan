@@ -93,6 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
     composer.autoGrow();
   });
   login.bind();
+  const paintNet = () => {
+    const pill = $('offline-pill');
+    if (pill) pill.hidden = navigator.onLine;
+  };
+  paintNet();
+  window.addEventListener('online', paintNet);
+  window.addEventListener('offline', paintNet);
   try { window.__rategoanMesin = mesin.list(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   try {

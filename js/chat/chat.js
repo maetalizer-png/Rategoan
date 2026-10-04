@@ -22,6 +22,11 @@ import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 
 const URL_RE = /https?:\/\/\S+/i;
+let generation = null;
+
+export function abortGeneration() {
+  if (generation) generation.abort();
+}
 
 function appendCitations(parent, text) {
   const found = String(text || '').match(/https?:\/\/[^\s)]+/g);
@@ -401,7 +406,7 @@ export const chat = {
       body.addEventListener('pointerdown', onTap, { once: true });
       const long = text.length > 400;
       let i = 0;
-      while (i < text.length && !skip) {
+      while (i < text.length && !skip && !(opts && opts.signal && opts.signal.aborted)) {
         const step = long ? 4 + Math.floor(Math.random() * 3) : 1 + Math.floor(Math.random() * 2);
         i += step;
         body.innerHTML = markdown.render(text.slice(0, i));
@@ -440,6 +445,8 @@ export const chat = {
     }
     $('messages').appendChild(typing);
     scrollBottom();
+    generation = new AbortController();
+    document.body.classList.add('is-generating');
     const searchStart = Date.now();
     let reply = null;
     let attempt = 0;
@@ -453,6 +460,8 @@ export const chat = {
           continue;
         }
         typing.remove();
+        document.body.classList.remove('is-generating');
+        generation = null;
         mountClarification($('messages'), {
           text: plan.text,
           actions: plan.actions.map((action) => ({
@@ -473,9 +482,20 @@ export const chat = {
       if (elapsed < 700) await sleep(700 - elapsed);
     }
     typing.remove();
-    if (reply == null) return null;
+    const stoppedEarly = generation && generation.signal.aborted;
+    if (reply == null || stoppedEarly) {
+      document.body.classList.remove('is-generating');
+      generation = null;
+      return reply;
+    }
     s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts });
-    await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts });
+    const signal = generation ? generation.signal : null;
+    try {
+      await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts, signal });
+    } finally {
+      document.body.classList.remove('is-generating');
+      generation = null;
+    }
     if (voice.speakNext) {
       voice.speak(stripForSpeech(reply));
       voice.speakNext = false;

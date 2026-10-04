@@ -112,16 +112,20 @@ async function generateServer(prompt, url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), SERVER_TIMEOUT_MS);
   try {
-    const res = await fetch(url.replace(/\/+$/, '') + '/generate', {
+    const root = url.replace(/\/+$/, '');
+    const ollama = /:11434\b/.test(root);
+    const res = await fetch(ollama ? root + '/api/generate' : root + '/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: String(prompt || ''), maxNewTokens: 60, temperature: 0.9 }),
+      body: JSON.stringify(ollama
+        ? { model: localStorage.getItem('raget_ollama_model') || 'llama3.2', prompt: String(prompt || ''), stream: false }
+        : { prompt: String(prompt || ''), maxNewTokens: 60, temperature: 0.9 }),
       signal: controller.signal,
     });
     if (!res.ok) return null;
     const data = await res.json();
-    const text = data && typeof data.text === 'string' ? data.text.trim() : '';
-    return text || null;
+    const text = data && (typeof data.response === 'string' ? data.response : data.text);
+    return text && text.trim() ? text.trim() : null;
   } catch (e) {
     return null;
   } finally {

@@ -35,6 +35,7 @@
       </svg>
     </button>
     <div id="model-status" hidden></div>
+    <span id="offline-pill" class="offline-pill" hidden>Mandiri (Offline)</span>
     <span class="row-spacer"></span>
     <div class="topbar-actions">
       <button class="icon-btn plain" id="btn-new-chat-top" aria-label="Obrolan baru">
@@ -244,7 +245,13 @@
             <button class="attach-plain" id="project-create-sheet" type="button">Buat proyek</button>
           </div>
         </div>
-        <div id="project-empty-state" class="project-create-card">
+        <div id="project-empty-state" class="project-hero-card">
+          <div class="project-hero-mark" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h2>Ruang Kerja Proyek</h2>
+          <p>Fokuskan AI dengan instruksi khusus dan berkas rujukan permanen untuk topik tertentu.</p>
+          <p class="project-label">Mulai dari template:</p>
           <div class="project-templates">
             <button type="button" data-template="Riset akademik">Riset akademik</button>
             <button type="button" data-template="Pengembangan web">Pengembangan web</button>
@@ -312,26 +319,26 @@
     </div>
     <p class="attach-kicker">Media</p>
     <div class="attach-grid">
-      <button class="attach-card" id="sheet-camera" type="button">Kamera</button>
-      <button class="attach-card" id="sheet-photo" type="button">Foto</button>
-      <button class="attach-card" id="sheet-file" type="button">Dokumen</button>
-      <button class="attach-card" id="sheet-voice" type="button">Memo Suara</button>
+      <button class="attach-card tone-blue" id="sheet-camera" type="button"><span class="attach-orb"></span>Kamera</button>
+      <button class="attach-card tone-violet" id="sheet-photo" type="button"><span class="attach-orb"></span>Foto</button>
+      <button class="attach-card tone-green" id="sheet-file" type="button"><span class="attach-orb"></span>Dokumen</button>
+      <button class="attach-card tone-orange" id="sheet-voice" type="button"><span class="attach-orb"></span>Memo Suara</button>
     </div>
     <p class="attach-kicker">Mode penalaran</p>
     <button class="attach-plain" id="sheet-websearch" type="button" role="switch" aria-checked="false">
-      <span class="attach-plain-label">Pencarian Web<small>Jawaban memakai sumber web</small></span>
+      <span class="attach-plain-label">Pencarian Web<small>Menelusuri informasi mutakhir di internet</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
     <button class="attach-plain" id="sheet-think" type="button" role="switch" aria-checked="false">
-      <span class="attach-plain-label">Berpikir lebih keras<small>Jejak langkah sebelum jawaban</small></span>
+      <span class="attach-plain-label">Berpikir lebih keras<small>Menampilkan proses penalaran bertahap</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
     <button class="attach-plain" id="sheet-research" type="button" role="switch" aria-checked="false">
-      <span class="attach-plain-label">Riset mendalam<small>Beberapa kueri lalu dirangkum</small></span>
+      <span class="attach-plain-label">Riset mendalam<small>Investigasi multi-sumber lalu dirangkum</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
     <button class="attach-plain" id="sheet-fast" type="button" role="switch" aria-checked="false">
-      <span class="attach-plain-label">Mode kilat<small>Jawaban lebih hemat</small></span>
+      <span class="attach-plain-label">Mode kilat<small>Jawaban ringkas, cepat, hemat daya</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
     <p class="attach-kicker">Studio</p>

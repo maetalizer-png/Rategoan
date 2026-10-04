@@ -82,7 +82,10 @@ export const voice = {
     }
   },
   bind() {
-    $('btn-stop').onclick = () => this.stop();
+    $('btn-stop').onclick = () => {
+      this.stop();
+      document.dispatchEvent(new CustomEvent('rategoan:stop-generation'));
+    };
     const btn = $('btn-voice-input');
     if (!btn) return;
     btn.onclick = (event) => {

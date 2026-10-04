@@ -469,3 +469,21 @@ html, body { overflow-x: hidden; }
   #view-artifacts .settings-header, #view-artifacts .coll-tab-desc, #artifact-filters { grid-column: 1 / -1; }
   #artifact-inline { min-height: 360px; }
 }
+
+body.is-generating #btn-stop { display: flex; }
+body.is-generating #btn-send { display: none; }
+.offline-pill { font-size: 12px; font-weight: 600; color: #146c43; background: #e8f6ee; border-radius: 999px; padding: 4px 10px; }
+.offline-pill[hidden] { display: none !important; }
+.attach-card { display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 88px; }
+.attach-orb { width: 44px; height: 44px; border-radius: 999px; display: block; }
+.tone-blue .attach-orb { background: #eff6ff; box-shadow: inset 0 0 0 8px #2563eb22; }
+.tone-violet .attach-orb { background: #f5f3ff; }
+.tone-green .attach-orb { background: #f0fdf4; }
+.tone-orange .attach-orb { background: #fff7ed; }
+.project-hero-card { border: 1px solid var(--rg-line); border-radius: 18px; padding: 18px 16px; background: var(--rg-surface); }
+.project-hero-card h2 { margin: 8px 0 4px; font-size: 18px; }
+.project-hero-mark { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: #eff6ff; color: #1a4b8c; }
+.model-hub { display: grid; gap: 8px; margin: 8px 0 12px; }
+.model-hub button { text-align: left; border: 1px solid var(--rg-line); border-radius: 14px; padding: 10px 12px; background: var(--rg-surface); min-height: 44px; }
+.model-hub button small { display: block; color: var(--rg-muted); font-weight: 400; }
+.model-hub button.on { border-color: #1a4b8c; box-shadow: inset 0 0 0 1px #1a4b8c; }
