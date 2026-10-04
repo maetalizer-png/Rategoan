@@ -94,13 +94,13 @@
                 <line x1="1" y1="14" x2="4" y2="14"/>
               </svg>
             </button>
-            <button id="btn-quick-web" class="icon-btn quick-toggle" type="button" aria-label="Pencarian web" aria-pressed="false">
+            <button id="btn-quick-web" class="icon-btn quick-toggle" type="button" aria-label="Pencarian web" aria-pressed="false" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
             </button>
-            <button id="btn-quick-slide" class="icon-btn quick-toggle" type="button" aria-label="Mode slide" aria-pressed="false">
+            <button id="btn-quick-slide" class="icon-btn quick-toggle" type="button" aria-label="Mode slide" aria-pressed="false" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
             </button>
-            <button id="btn-quick-think" class="icon-btn quick-toggle" type="button" aria-label="Berpikir keras" aria-pressed="false">
+            <button id="btn-quick-think" class="icon-btn quick-toggle" type="button" aria-label="Berpikir keras" aria-pressed="false" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>
             </button>
             <span class="row-spacer"></span>
@@ -161,6 +161,12 @@
             <button type="button" id="studio-tab-js" class="on">JavaScript</button>
             <button type="button" id="studio-tab-py">Python</button>
           </div>
+          <div class="studio-files" id="studio-files">
+            <button type="button" data-studio-file="index.html">index.html</button>
+            <button type="button" data-studio-file="style.css">style.css</button>
+            <button type="button" data-studio-file="script.js" class="on">script.js</button>
+          </div>
+          <button type="button" id="studio-zip" class="plain">Ekspor zip</button>
           <button type="button" id="studio-copy" class="plain">Salin kode</button>
         </div>
         <textarea id="studio-editor" class="studio-editor" rows="14" spellcheck="false"></textarea>

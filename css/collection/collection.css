@@ -56,9 +56,14 @@
 .coll-filters {
   display: flex;
   gap: 6px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   margin-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+
+.coll-filters::-webkit-scrollbar { display: none; }
 
 .coll-filter-chip {
   font-size: 11.5px;
@@ -66,6 +71,8 @@
   border-radius: var(--rg-pill);
   border: 1px solid var(--rg-line);
   color: var(--rg-muted);
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .coll-filter-chip.on {
@@ -93,6 +100,32 @@
   color: var(--rg-muted);
   opacity: 0.7;
 }
+
+.coll-empty-note, #coll-new-note.coll-head-note {
+  width: auto;
+  background: var(--rg-surface);
+  color: var(--rg-text);
+  border: 1px solid var(--rg-line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.coll-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--rg-surface-2);
+  color: var(--rg-muted);
+}
+.coll-badge-pdf { color: #9f1239; background: #ffe4e6; }
+.coll-badge-notion, .coll-badge-evernote { color: #3f3f46; background: #e4e4e7; }
+.coll-badge-whatsapp { color: #065f46; background: #d1fae5; }
+.coll-badge-fact, .coll-badge-learned, .coll-badge-web { color: #1e3a8a; background: #dbeafe; }
 
 .coll-empty-title {
   font-size: 14.5px;

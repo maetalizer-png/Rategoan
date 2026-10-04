@@ -30,8 +30,7 @@
 // bukan exit-fail, karena deteksi berbasis regex tidak selalu presisi -
 // tetap butuh keputusan manusia).
 
-import { readFileSync } from 'fs';
-import { globSync } from 'fs';
+import { readFileSync, readdirSync, statSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { llmEngine } from '../raget-template/llm-engine.js';
@@ -115,6 +114,15 @@ function checkSapaanBucket(entry, index, filePath) {
   return [];
 }
 
+function listJson(dir, out = []) {
+  for (const name of readdirSync(dir)) {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) listJson(full, out);
+    else if (name.endsWith('.json')) out.push(full);
+  }
+  return out;
+}
+
 function main() {
   const args = process.argv.slice(2);
   const allDomains = args.includes('--all-domains');
@@ -123,7 +131,7 @@ function main() {
     console.error('Pakai: node raget/raget-tools/validate-entry.mjs <file.json> [...] | --all-domains');
     process.exit(1);
   }
-  let files = patterns.flatMap((p) => (p.includes('*') ? globSync(p) : [p]));
+  let files = patterns.flatMap((p) => (p.includes('*') ? listJson(DATA_ROOT) : [p]));
   if (allDomains) files = files.filter((f) => !isPengetahuan(f));
   if (!files.length) {
     console.error('Tidak ada file cocok dengan pola:', patterns.join(' '));

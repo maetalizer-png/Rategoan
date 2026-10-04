@@ -8,6 +8,18 @@ export const voice = {
   rec: null,
   speak(text) {
     if (!('speechSynthesis' in window)) return;
+    const synth = window.speechSynthesis;
+    if (synth.speaking && this._last === text) {
+      if (synth.paused) {
+        synth.resume();
+        toast.show('Suara lanjut');
+      } else {
+        synth.pause();
+        toast.show('Suara dijeda');
+      }
+      return;
+    }
+    this._last = text;
     const u = new SpeechSynthesisUtterance(text.replace(/[*_#`~]/g, ''));
     u.lang = 'id-ID';
     u.onstart = () => $('btn-stop').classList.add('active');

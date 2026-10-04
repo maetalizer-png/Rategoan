@@ -2,13 +2,21 @@ import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
+import { previewSrcdoc, zipStore } from './sandbox-runner.js';
 import { toast } from '../core/toast.js';
 import { drawer } from '../ui/drawer.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
+const WEB = {
+  'index.html': '<!doctype html>\n<html>\n<head></head>\n<body>\n  <h1>Halo</h1>\n</body>\n</html>\n',
+  'style.css': 'body { font-family: sans-serif; margin: 24px; }\nh1 { color: #1a4b8c; }\n',
+  'script.js': SAMPLE,
+};
 let cm = null;
 let pyPromise = null;
 let lang = 'javascript';
+let webFile = 'script.js';
+let pythonCode = 'print("halo")\n';
 
 function editor() {
   return $('studio-editor');
@@ -59,6 +67,20 @@ function showConsole(text, ms) {
   out.textContent = text;
 }
 
+function rememberEditor() {
+  const text = codeText();
+  if (lang === 'python') pythonCode = text;
+  else WEB[webFile] = text;
+}
+
+function writeEditor(text, mode) {
+  const area = editor();
+  if (cm) {
+    cm.setValue(text);
+    cm.setOption('mode', mode);
+  } else if (area) area.value = text;
+}
+
 function codeText() {
   if (cm) return cm.getValue();
   const area = editor();
@@ -68,7 +90,7 @@ function codeText() {
 export const studioPage = {
   paint() {
     const el = editor();
-    if (el && !el.value.trim()) el.value = SAMPLE;
+    if (el && !el.value.trim()) el.value = WEB[webFile] || SAMPLE;
     ensureEditor();
   },
   bind() {
@@ -83,7 +105,8 @@ export const studioPage = {
         if (status) status.textContent = 'Selesai dalam ' + Math.round(performance.now() - started) + ' ms';
         return;
       }
-      const code = codeText();
+      rememberEditor();
+      const code = WEB['script.js'] || codeText();
       const res = await jsSandbox.run(code);
       const body = res.ok
         ? ((res.logs || []).join('\n') + (res.value ? '\n\u2192 ' + res.value : '')).trim() || 'Selesai.'
@@ -93,13 +116,41 @@ export const studioPage = {
     const tabJs = $('studio-tab-js');
     const tabPy = $('studio-tab-py');
     const pick = (next) => {
+      rememberEditor();
       lang = next;
       if (tabJs) tabJs.classList.toggle('on', next === 'javascript');
       if (tabPy) tabPy.classList.toggle('on', next === 'python');
-      if (cm) cm.setOption('mode', next === 'python' ? 'python' : 'javascript');
+      writeEditor(next === 'python' ? pythonCode : (WEB[webFile] || ''), next === 'python' ? 'python' : 'javascript');
     };
     if (tabJs) tabJs.onclick = () => pick('javascript');
     if (tabPy) tabPy.onclick = () => pick('python');
+    document.querySelectorAll('[data-studio-file]').forEach((btn) => {
+      btn.onclick = () => {
+        rememberEditor();
+        lang = 'javascript';
+        webFile = btn.dataset.studioFile;
+        if (tabJs) tabJs.classList.add('on');
+        if (tabPy) tabPy.classList.remove('on');
+        document.querySelectorAll('[data-studio-file]').forEach((other) => other.classList.toggle('on', other === btn));
+        const mode = webFile.endsWith('.css') ? 'css' : (webFile.endsWith('.html') ? 'htmlmixed' : 'javascript');
+        writeEditor(WEB[webFile] || '', mode);
+      };
+    });
+    const zipBtn = $('studio-zip');
+    if (zipBtn) zipBtn.onclick = () => {
+      rememberEditor();
+      const bytes = zipStore(WEB);
+      const blob = new Blob([bytes], { type: 'application/zip' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'studio-rategoan.zip';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 500);
+      toast.show('Zip proyek diunduh');
+    };
     const copyBtn = $('studio-copy');
     if (copyBtn) copyBtn.onclick = () => {
       const text = codeText();
@@ -124,11 +175,11 @@ export const studioPage = {
     if (py) py.onclick = () => this.runPython();
     const preview = $('studio-preview');
     if (preview) preview.onclick = () => {
+      rememberEditor();
       const frame = $('studio-preview-frame');
-      const code = codeText();
       if (!frame) return;
       frame.hidden = false;
-      frame.srcdoc = /<\w+/.test(code) ? code : '<pre>' + code.replace(/</g, '<') + '</pre>';
+      frame.srcdoc = previewSrcdoc(WEB);
     };
     const open = $('studio-open-panel');
     if (open) open.onclick = () => {

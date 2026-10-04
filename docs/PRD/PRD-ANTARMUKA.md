@@ -769,6 +769,27 @@ Sumber Drive yang sama. Bab yang lebih baru menimpa bab sebelumnya: kapsul memor
 | 140 | Geser sidebar ikut kecepatan jari | SUDAH SELESAI |
 | 141–144 | Studio banyak berkas, cowork, skill, dan penjadwal latar | BELUM. Ini fondasi besar, bukan tombol kosong |
 
+# 31–35. Antrean 4 Oktober 2026 02:38 UTC
+
+Sumber: PRD antarmuka di Google Drive, diubah 2026-10-04T02:38:21Z. Bab 33 menimpa bab 29: pintasan komposer tidak lagi selalu terlihat.
+
+| No | Tugas | Status |
+| --- | --- | --- |
+| 161, 166 | Web, slide, dan berpikir keras tersembunyi sampai dinyalakan. Ketuk lagi untuk mematikan dan menyembunyikan | SUDAH SELESAI |
+| 162, 163, 167 | Saringan koleksi satu baris geser. Tombol catatan pindah ke header dan kartu kosong. Hitungan tag hanya dari item tersimpan, bukan hasil web | SUDAH SELESAI |
+| 164 | Lencana PDF, Notion, WhatsApp, dan memori di perpustakaan. Hasil pencarian web punya kelompok sendiri | SUDAH SELESAI |
+| 146, 154, 170, 171 | Mesin cari lokal BM25 + trigram, disimpan di IndexedDB, dipakai saat cari koleksi tidak ketemu ejaan persis | SUDAH SELESAI |
+| 147, 152, 168, 169 | Kamera memakai OCR yang sudah ada. Teks masuk ke kotak tulis kalau paket OCR sudah diunduh | SUDAH SELESAI |
+| 158, 172, 173 | Studio punya tiga berkas virtual, pratinjau gabungan, dan unduh zip | SUDAH SELESAI |
+| 174, 178 | Token GitHub dan Drive diuji ke layanan asli sebelum disimpan | SUDAH SELESAI |
+| 179 | Bilah proyek aktif terlihat di obrolan | SUDAH SELESAI |
+| 176 | globSync diganti baca folder biasa agar validasi data tidak jatuh di Node lama | SUDAH SELESAI |
+| 180 | Tombol baca menjeda dan melanjutkan suara yang sama | SUDAH SELESAI |
+| 181 | Cadangan mencakup obrolan dan data lokal, berkas .rategoan.json, tanpa token konektor | SUDAH SELESAI |
+| 156, 157, 159, 160, 142, 143, 144 | Kanvas cowork, skill, dan penjadwal latar | BELUM. Bukan tombol kosong |
+| 182 | 45 berkas arsip alat tidak dihapus. Tidak dipakai aplikasi | DIBIARKAN |
+
+
 
 
 

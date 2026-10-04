@@ -3,7 +3,7 @@ import { fmtTime } from '../../shared/format.js';
 import { reduceMotion, haptics } from '../../shared/haptics.js';
 import { markdown } from '../../shared/markdown.js';
 import { copy } from '../../shared/clipboard.js';
-import { store } from '../state/store.js';
+import { workspace } from '../state/workspace.js';
 import { scrolldown } from '../ui/scrolldown.js';
 import { toast } from '../core/toast.js';
 import { voice } from './voice.js';
@@ -214,8 +214,12 @@ export const chat = {
     if (empty) empty.hidden = has;
     box.style.display = has ? '' : 'none';
     const bar = document.getElementById('thread-bar');
+    const project = workspace.current();
     if (bar) {
-      if (s && s.project && s.project.goal) {
+      if (project) {
+        bar.hidden = false;
+        bar.textContent = 'Proyek aktif: ' + project.name;
+      } else if (s && s.project && s.project.goal) {
         bar.hidden = false;
         bar.textContent = s.project.goal;
       } else {

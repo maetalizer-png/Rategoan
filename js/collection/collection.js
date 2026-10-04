@@ -10,7 +10,7 @@ import { drawer } from '../ui/drawer.js';
 import { whatsappImporter } from '../../vault/whatsapp/importer.js';
 import { evernoteImporter } from '../../vault/evernote/importer.js';
 import { notionImporter } from '../../vault/notion/importer.js';
-import { icsParser } from '../../vault/calendar/ics-parser.js';
+import { searchDocs, indexDocs } from '../../raget/raget-vault/local-rag.js';
 
 const TEMPLATE = `
       <div class="settings-page">
@@ -23,6 +23,7 @@ const TEMPLATE = `
           </button>
           <h1>Koleksi</h1>
           <span class="row-spacer"></span>
+          <button type="button" id="coll-new-note" class="coll-head-note" data-open-note="1">+ Catatan</button>
           <button id="coll-more" class="icon-btn" aria-label="Menu lainnya">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
           </button>
@@ -38,7 +39,6 @@ const TEMPLATE = `
           <input id="coll-search" type="search" placeholder="Cari di koleksi…" autocomplete="off">
         </div>
         <div id="coll-filters" class="coll-filters"></div>
-        <button type="button" id="coll-new-note" class="btn-run-primary">Buat catatan koleksi</button>
         <div id="coll-note-modal" class="app-modal" hidden>
           <form id="coll-note-form" class="app-modal-card">
             <h2>Catatan koleksi</h2>
@@ -96,6 +96,21 @@ const TAB_DESC = {
 let state = { tab: 'tersimpan', filter: null, query: '' };
 let renderGen = 0;
 
+function badgeFor(kind) {
+  const key = String(kind || 'catatan');
+  const label = {
+    pdf: 'PDF',
+    notion: 'Notion',
+    evernote: 'Evernote',
+    whatsapp: 'WhatsApp',
+    fact: 'Memori',
+    learned: 'Memori',
+    note: 'Catatan',
+    web: 'Web',
+  }[key] || key;
+  return '<span class="coll-badge coll-badge-' + escapeHtml(key) + '">' + escapeHtml(label) + '</span>';
+}
+
 function chipCaption(f) {
   if (f.key === 'pinned') return ic('pin') + ' Pin';
   if (f.key === 'archived') return ic('archive') + ' Arsip';
@@ -133,13 +148,18 @@ async function renderTersimpan() {
   const withArchivedForCount = await collectionStore.allItems({ includeArchived: true });
   if (myGen !== renderGen) return;
   const archivedCount = withArchivedForCount.filter((it) => it.archived && it.kind === 'chat').length;
+  const tagCounts = new Map();
+  chatItems.forEach((it) => {
+    if (!it.tag || it.tag === 'prompt' || it.tag === 'kode' || it.tag === 'riset') return;
+    tagCounts.set(it.tag, (tagCounts.get(it.tag) || 0) + 1);
+  });
   const filterChips = [
     { key: null, label: 'Semua', count: chatItems.length },
     { key: 'prompt', label: 'Prompt favorit', count: chatItems.filter((it) => it.tag === 'prompt').length },
     { key: 'kode', label: 'Kutipan kode', count: chatItems.filter((it) => it.tag === 'kode').length },
     { key: 'riset', label: 'Ringkasan riset', count: chatItems.filter((it) => it.tag === 'riset').length },
     { key: 'pinned', label: ic('pin') + ' Pin', count: chatItems.filter((it) => it.pinned).length },
-    ...stats.topTags.filter((t) => t.tag !== 'artefak').map((t) => ({ key: t.tag, label: t.tag, count: t.count })),
+    ...Array.from(tagCounts.entries()).map(([tag, count]) => ({ key: tag, label: tag, count })),
     { key: 'archived', label: ic('archive') + ' Arsip', count: archivedCount },
   ];
   $('coll-tab-desc').textContent = TAB_DESC.tersimpan;
@@ -162,8 +182,14 @@ async function renderTersimpan() {
   let matchInfo = new Map();
   if (state.query.trim()) {
     const results = collectionSearch.fuzzySearch(list, state.query, 100);
-    list = results.map((r) => r.item);
-    results.forEach((r) => matchInfo.set(r.item.id, r.matched));
+    if (results.length) {
+      list = results.map((r) => r.item);
+      results.forEach((r) => matchInfo.set(r.item.id, r.matched));
+    } else {
+      const ranked = searchDocs(list.map((it) => ({ id: it.id, text: [it.text, it.note, it.tag, it.chatTitle].filter(Boolean).join(' ') })), state.query, 20);
+      const ids = new Set(ranked.map((hit) => hit.id));
+      list = list.filter((it) => ids.has(it.id));
+    }
   }
 
   list.sort((a, b) => (b.pinned - a.pinned) || (b.time - a.time));
@@ -178,7 +204,8 @@ async function renderTersimpan() {
     content.innerHTML = (chatItems.length ? statsRow : '') +
       '<div class="coll-empty">' + ic('bookmark') +
       '<div class="coll-empty-title">Koleksi ini masih sepi</div>' +
-      '<div class="coll-empty-body">Simpan balasan dari obrolan, atau tulis catatan sendiri dengan tombol di atas. Contoh: prompt yang sering dipakai, potongan kode, atau ringkasan riset.</div></div>';
+      '<div class="coll-empty-body">Simpan balasan dari obrolan, atau tulis catatan sendiri. Contoh: prompt yang sering dipakai, potongan kode, atau ringkasan riset.</div>' +
+      '<button type="button" class="coll-empty-note" data-open-note="1">+ Catatan</button></div>';
     return;
   }
 
@@ -283,7 +310,7 @@ function libGroupHtml(title, items, emptyText) {
     ' <span class="coll-lib-group-count">(' + items.length + ')</span></div>' +
     items.map((x) => (
       '<div class="coll-item" data-lib-id="' + x.id + '" data-lib-kind="' + x.kind + '">' +
-      '<div class="coll-item-head"><span class="coll-item-tag">' + x.kind + '</span>' +
+      '<div class="coll-item-head">' + badgeFor(x.kind) +
       (x.time ? '<span class="coll-item-time">' + fmtDate(x.time) + '</span>' : '') + '</div>' +
       '<div class="coll-item-text">' + collectionSearch.highlightText(x.text, x._matched) + '</div>' +
       '<div class="coll-item-actions"><button type="button" class="danger" data-lib-del="' + x.id + '" data-lib-del-kind="' + x.kind + '" data-lib-del-store="' + (x.store || '') + '">' + ic('trash') + ' Hapus</button></div>' +
@@ -335,10 +362,14 @@ async function renderPerpustakaan() {
     return items.filter((x) => matchedIds.has(x.id)).map((x) => ({ ...x, _matched: matchedIds.get(x.id) }));
   };
 
+  const savedWeb = (await collectionStore.allItems()).filter((it) => it.kind === 'web');
+  if (myGen !== renderGen) return;
   const notesQ = applyQuery(notes).sort((a, b) => b.time - a.time);
   const factsQ = applyQuery(facts).sort((a, b) => a.key.localeCompare(b.key));
   const learnedQ = applyQuery(learned).sort((a, b) => b.time - a.time);
   const vaultQ = applyQuery(vaultItems).sort((a, b) => b.time - a.time);
+  const webQ = applyQuery(savedWeb.map((it) => ({ id: it.id, kind: 'web', store: 'collection', text: it.text, time: it.time }))).sort((a, b) => b.time - a.time);
+  indexDocs([...notesQ, ...factsQ, ...learnedQ, ...vaultQ, ...webQ].map((item) => ({ id: item.kind + ':' + item.id, text: item.text, kind: item.kind }))).catch(() => {});
 
   const q = state.query.trim().toLowerCase();
   const knowledgeMatches = !q || 'pengetahuan faq umum'.includes(q);
@@ -348,6 +379,7 @@ async function renderPerpustakaan() {
     libGroupHtml('Fakta tentang saya', factsQ, 'Belum ada fakta pribadi tersimpan. Muncul otomatis kalau kamu cerita, mis. "nama saya Dinda".') +
     libGroupHtml('Fakta diajarkan', learnedQ, 'Belum ada fakta yang diajarkan. Ajari Raget lewat chat, mis. "ulang tahunku itu 5 Mei".') +
     libGroupHtml('Chunk impor (PDF/Notion/Evernote/WhatsApp)', vaultQ, 'Belum ada file diimpor. Kirim PDF di chat, ketik: baca pdf ini.') +
+    libGroupHtml('Hasil pencarian web', webQ, 'Belum ada hasil pencarian yang disimpan.') +
     '<div class="coll-lib-group"><div class="coll-lib-group-head">Pengetahuan (umum &amp; FAQ)</div>' +
     (knowledgeMatches
       ? '<div class="coll-stats-row"><span>Topik umum <b>' + knowStats.umumCount + '</b></span><span>FAQ <b>' + knowStats.faqCount + '</b></span></div>' +
@@ -367,6 +399,8 @@ async function renderPerpustakaan() {
     } else if (kind === 'learned') {
       const f = learned.find((x) => x.id === id);
       if (f) memoryLong.forgetLearned(f.subject);
+    } else if (b.dataset.libDelStore === 'collection') {
+      await collectionStore.removeItem(id);
     } else {
       const storeName = b.dataset.libDelStore;
       try {
@@ -624,6 +658,11 @@ export const collectionPage = {
     };
     const noteBtn = $('coll-new-note');
     const modal = $('coll-note-modal');
+    const openNote = () => { if (modal) modal.hidden = false; };
+    if (noteBtn) noteBtn.onclick = openNote;
+    $('view-collection').addEventListener('click', (event) => {
+      if (event.target.closest('[data-open-note]') && event.target !== noteBtn) openNote();
+    });
     const chosenTag = () => {
       const on = document.querySelector('#coll-note-tags button.on');
       return (on && on.dataset.collTag) || 'prompt';
@@ -633,7 +672,6 @@ export const collectionPage = {
         document.querySelectorAll('#coll-note-tags button').forEach((other) => other.classList.toggle('on', other === btn));
       };
     });
-    if (noteBtn && modal) noteBtn.onclick = () => { modal.hidden = false; };
     const cancel = $('coll-note-cancel');
     if (cancel) cancel.onclick = () => { modal.hidden = true; };
     const form = $('coll-note-form');

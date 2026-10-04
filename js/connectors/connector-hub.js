@@ -38,6 +38,22 @@ function el(tag, className, text) {
   return node;
 }
 
+async function verifyToken(id, token) {
+  const url = id === 'github'
+    ? 'https://api.github.com/user'
+    : 'https://www.googleapis.com/drive/v3/about?fields=user';
+  const res = await fetch(url, {
+    headers: {
+      Authorization: 'Bearer ' + token,
+      Accept: 'application/json',
+    },
+  });
+  if (!res.ok) throw new Error('Token ditolak (' + res.status + ')');
+  const data = await res.json();
+  if (id === 'github') return data.login || '';
+  return (data.user && (data.user.emailAddress || data.user.displayName)) || '';
+}
+
 async function startOAuth(id) {
   const path = AUTH[id];
   if (!path) return;
@@ -189,6 +205,15 @@ export const connectorHub = {
         startOAuth(id);
       };
       side.appendChild(connect);
+      if (id === 'github' || id === 'google_drive') {
+        const tokenBtn = el('button', 'hub-btn-connect', 'Token');
+        tokenBtn.type = 'button';
+        tokenBtn.onclick = (event) => {
+          event.stopPropagation();
+          this.askToken(root, id);
+        };
+        side.appendChild(tokenBtn);
+      }
     }
     card.appendChild(mark);
     card.appendChild(body);
@@ -201,6 +226,57 @@ export const connectorHub = {
       this.openExplorer(root, id);
     };
     return card;
+  },
+  askToken(root, id) {
+    const old = document.getElementById('pat-modal');
+    if (old) old.remove();
+    const modal = document.createElement('div');
+    modal.id = 'pat-modal';
+    modal.className = 'app-modal';
+    const card = document.createElement('form');
+    card.className = 'app-modal-card';
+    const title = document.createElement('h2');
+    title.textContent = id === 'github' ? 'Token GitHub' : 'Token Google Drive';
+    const note = document.createElement('p');
+    note.textContent = 'Tempel token akses. Token diuji langsung ke layanan itu, lalu disimpan terenkripsi di perangkat ini.';
+    const input = document.createElement('input');
+    input.type = 'password';
+    input.autocomplete = 'off';
+    input.placeholder = id === 'github' ? 'github_pat_…' : 'ya29.…';
+    const actions = document.createElement('div');
+    actions.className = 'app-modal-actions';
+    const cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.textContent = 'Batal';
+    const save = document.createElement('button');
+    save.type = 'submit';
+    save.textContent = 'Uji dan simpan';
+    actions.appendChild(cancel);
+    actions.appendChild(save);
+    card.appendChild(title);
+    card.appendChild(note);
+    card.appendChild(input);
+    card.appendChild(actions);
+    modal.appendChild(card);
+    cancel.onclick = () => modal.remove();
+    card.onsubmit = async (event) => {
+      event.preventDefault();
+      const token = input.value.trim();
+      if (!token) return;
+      save.disabled = true;
+      try {
+        const account = await verifyToken(id, token);
+        connectorState.markConnected(id, { access_token: token, account, expiresIn: 60 * 60 * 24 * 30 });
+        toast.show(account ? ('Terhubung: ' + account) : 'Token diterima');
+        modal.remove();
+        this.paint(root);
+      } catch (e) {
+        toast.show(e && e.message ? e.message : 'Token ditolak');
+        save.disabled = false;
+      }
+    };
+    document.body.appendChild(modal);
+    input.focus();
   },
   openExplorer(root, id) {
     mountExplorer(root, id, () => this.paint(root));

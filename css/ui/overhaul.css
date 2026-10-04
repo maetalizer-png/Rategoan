@@ -75,8 +75,9 @@
 }
 #view-studio .CodeMirror-linenumber { color: #6e7681 !important; padding: 0 8px 0 4px !important; }
 #view-studio .CodeMirror-cursor { border-left: 2px solid #58a6ff !important; }
-.studio-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 10px 0; gap: 8px; }
+.studio-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 10px 0; gap: 8px; flex-wrap: wrap; }
 .studio-tabs { display: inline-flex; background: var(--rg-surface-2, #f0f2f5); padding: 3px; border-radius: 999px; gap: 2px; }
+.quick-toggle[hidden] { display: none !important; }
 .studio-tabs button {
   padding: 5px 14px;
   border: 0;
@@ -86,7 +87,16 @@
   color: var(--rg-muted);
   border-radius: 999px;
 }
-.studio-tabs button.on { background: #1a4b8c; color: #fff; }
+.studio-files { display: flex; gap: 6px; overflow-x: auto; margin: 0 0 8px; }
+.studio-files button, #studio-zip {
+  flex: 0 0 auto;
+  border: 1px solid var(--rg-line);
+  background: var(--rg-surface);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.studio-files button.on { background: #1a4b8c; color: #fff; border-color: #1a4b8c; }
 #studio-copy, #studio-clear {
   font-size: 12px;
   color: #1a4b8c;

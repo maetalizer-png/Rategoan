@@ -2,6 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { attach } from './attach.js';
 import { sheets } from './sheets.js';
 import { toast } from '../core/toast.js';
+import { visionOcr } from '../multimodal/vision-ocr.js';
 
 export const camera = {
   stream: null,
@@ -56,6 +57,15 @@ export const camera = {
     if (!blob) return;
     const file = new File([blob], 'kamera-' + Date.now() + '.jpg', { type: 'image/jpeg' });
     this.close();
+    const ocr = await visionOcr.recognize(file);
+    const inp = $('chat-input');
+    if (ocr.ok && ocr.text && inp) {
+      inp.value = (inp.value ? inp.value + '\n' : '') + ocr.text;
+      inp.dispatchEvent(new Event('input'));
+      toast.show('Teks kamera masuk ke kotak tulis');
+    } else if (ocr && ocr.message) {
+      toast.show(ocr.message);
+    }
     await attach.handleFile(file);
   },
   bind() {

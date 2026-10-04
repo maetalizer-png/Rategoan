@@ -10,13 +10,21 @@ import { exportLog } from '../../raget/raget-memory/export-log.js';
 export const backup = {
   export() {
     const st = store.get();
+    const local = {};
+    const skip = new Set(['rategoan_connectors_vault', 'rategoan_connectors_aes']);
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (!key || skip.has(key)) continue;
+      if (/^(rategoan_|raget_|travel_)/.test(key)) local[key] = localStorage.getItem(key);
+    }
     const payload = {
       app: 'rategoan',
-      version: 1,
+      version: 2,
       exportedAt: Date.now(),
       sessions: st.sessions,
+      local,
     };
-    download('rategoan-backup-' + new Date().toISOString().slice(0, 10) + '.json', JSON.stringify(payload, null, 2));
+    download('rategoan-' + new Date().toISOString().slice(0, 10) + '.rategoan.json', JSON.stringify(payload, null, 2));
     haptics.tap(10);
     exportLog.logExport('backup', 'rategoan-backup');
     toast.show('Cadangan diunduh');
@@ -31,6 +39,11 @@ export const backup = {
         const data = JSON.parse(r.result);
         if (!data || !Array.isArray(data.sessions)) throw new Error('format');
         store.set({ sessions: data.sessions, currentId: null });
+        if (data.local && typeof data.local === 'object') {
+          Object.keys(data.local).forEach((key) => {
+            if (/^(rategoan_|raget_|travel_)/.test(key)) localStorage.setItem(key, data.local[key]);
+          });
+        }
         store.save();
         history.render();
         chat.renderMessages();

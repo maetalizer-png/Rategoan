@@ -415,14 +415,17 @@ export const composer = {
     const think = $('btn-quick-think');
     const slide = $('btn-quick-slide');
     if (web) {
+      web.hidden = !this.websearchActive;
       web.classList.toggle('on', !!this.websearchActive);
       web.setAttribute('aria-pressed', String(!!this.websearchActive));
     }
     if (think) {
+      think.hidden = !this.thinkActive;
       think.classList.toggle('on', !!this.thinkActive);
       think.setAttribute('aria-pressed', String(!!this.thinkActive));
     }
     if (slide) {
+      slide.hidden = !this.slideActive;
       slide.classList.toggle('on', !!this.slideActive);
       slide.setAttribute('aria-pressed', String(!!this.slideActive));
     }

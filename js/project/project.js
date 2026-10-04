@@ -22,8 +22,21 @@ function remember(project) {
   }
 }
 
+function showProjectBar(project) {
+  const bar = document.getElementById('thread-bar');
+  if (!bar) return;
+  if (!project) {
+    bar.hidden = true;
+    bar.textContent = '';
+    return;
+  }
+  bar.hidden = false;
+  bar.textContent = 'Proyek aktif: ' + project.name;
+}
+
 function activate(project) {
   remember(project);
+  showProjectBar(project);
   toast.show('Proyek: ' + project.name);
   paint();
   router.go('chat');
@@ -71,6 +84,7 @@ function paint() {
   const curLabel = $('project-current');
   const cur = workspace.current();
   if (curLabel) curLabel.textContent = cur ? ('Aktif: ' + cur.name) : 'Belum ada proyek aktif';
+  showProjectBar(cur);
   let prompt = $('project-prompt');
   if (!prompt && curLabel && curLabel.parentNode) {
     prompt = document.createElement('textarea');
