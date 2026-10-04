@@ -3,6 +3,7 @@ import { fmtTime } from '../../shared/format.js';
 import { reduceMotion, haptics } from '../../shared/haptics.js';
 import { markdown } from '../../shared/markdown.js';
 import { copy } from '../../shared/clipboard.js';
+import { store } from '../state/store.js';
 import { workspace } from '../state/workspace.js';
 import { scrolldown } from '../ui/scrolldown.js';
 import { toast } from '../core/toast.js';
@@ -196,7 +197,8 @@ function buildActions(text) {
 export const chat = {
   current() {
     const st = store.get();
-    return st.sessions.find((s) => s.id === st.currentId) || null;
+    const sessions = Array.isArray(st && st.sessions) ? st.sessions : [];
+    return sessions.find((s) => s.id === st.currentId) || null;
   },
   dayLabel(t) {
     const d = new Date(t).toDateString();
@@ -208,6 +210,7 @@ export const chat = {
   renderMessages() {
     const box = $('messages');
     const empty = $('empty-state');
+    if (!box) return;
     box.innerHTML = '';
     const s = this.current();
     const has = !!(s && s.messages.length);

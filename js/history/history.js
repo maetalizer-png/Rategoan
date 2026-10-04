@@ -62,11 +62,13 @@ export const history = {
   render() {
     const list = $('history-list');
     const emptyEl = $('history-empty');
+    if (!list || !emptyEl) return;
     list.innerHTML = '';
     const st = store.get();
+    const sessions = Array.isArray(st.sessions) ? st.sessions : [];
     const q = this.query;
     const pid = workspace.currentId();
-    let all = q ? st.sessions.filter((s) => (s.title || '').toLowerCase().includes(q)) : st.sessions.slice();
+    let all = q ? sessions.filter((s) => (s.title || '').toLowerCase().includes(q)) : sessions.slice();
     if (pid) all = all.filter((s) => !s.projectId || s.projectId === pid);
     emptyEl.style.display = all.length ? 'none' : 'flex';
     emptyEl.textContent = q ? 'Tidak ada hasil' : 'Belum ada chat';
@@ -126,14 +128,16 @@ export const history = {
     toast.show('Semua chat dihapus');
   },
   bind() {
-    $('btn-new-chat').onclick = () => {
+    const fresh = $('btn-new-chat');
+    if (fresh) fresh.onclick = () => {
       store.set({ currentId: null });
       this.render();
       chat.renderMessages();
       drawer.close();
       router.go('chat');
     };
-    $('history-search').addEventListener('input', (e) => {
+    const search = $('history-search');
+    if (search) search.addEventListener('input', (e) => {
       this.query = e.target.value.trim().toLowerCase();
       this.render();
     });

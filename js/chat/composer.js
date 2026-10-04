@@ -432,9 +432,11 @@ export const composer = {
   },
   bind() {
     const inp = $('chat-input');
+    if (!inp) return;
     inp.addEventListener('input', () => this.autoGrow());
     inp.addEventListener('focus', () => setTimeout(scrollBottom, 250));
-    $('btn-send').onclick = () => {
+    const send = $('btn-send');
+    if (send) send.onclick = () => {
       let t = inp.value.trim();
       if (!t && !attach.current && !quote.current) return;
       if (this.slideActive && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
@@ -442,7 +444,8 @@ export const composer = {
       this.autoGrow();
       this.send(t);
     };
-    $('btn-plus').onclick = () => attach.open();
+    const plus = $('btn-plus');
+    if (plus) plus.onclick = () => attach.open();
     const stop = $('btn-stop');
     if (stop) stop.onclick = () => cancelAgent();
     document.addEventListener('rategoan:command', (event) => {
