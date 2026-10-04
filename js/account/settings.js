@@ -19,6 +19,7 @@ import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 import { llmMode } from '../state/llm-mode.js';
 import { memoryPreference } from '../state/memory-preference.js';
+import { paintMemoryBadge } from '../ui/memory-capsule.js';
 import { memory } from '../ai/memory.js';
 import { exportLog } from '../../raget/raget-memory/export-log.js';
 import { sheets } from '../sheets/sheets.js';
@@ -198,6 +199,7 @@ const TEMPLATE = `
                   ${MEMORY_ICON}
                   Kapsul Memori
                 </span>
+                <span id="memory-fact-badge" class="memory-count-badge">0 fakta</span>
                 ${CHEVRON_ICON}
               </div>
               <div id="set-section-data"></div>
@@ -445,6 +447,7 @@ export const settings = {
     return CATEGORIES.find((c) => c.key === sub) || null;
   },
   refresh() {
+    paintMemoryBadge();
     const st = auth.state;
     const head = $('profile-head');
     const divider = $('profile-divider');

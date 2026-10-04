@@ -87,11 +87,20 @@ function paint() {
   showProjectBar(cur);
   let prompt = $('project-prompt');
   if (!prompt && curLabel && curLabel.parentNode) {
+    const box = document.createElement('div');
+    box.className = 'project-instruction-box';
+    const label = document.createElement('label');
+    label.className = 'project-label';
+    label.htmlFor = 'project-prompt';
+    label.textContent = 'Instruksi proyek';
     prompt = document.createElement('textarea');
     prompt.id = 'project-prompt';
+    prompt.className = 'project-textarea';
     prompt.rows = 4;
     prompt.placeholder = 'Instruksi khusus proyek ini';
-    curLabel.parentNode.appendChild(prompt);
+    box.appendChild(label);
+    box.appendChild(prompt);
+    curLabel.parentNode.appendChild(box);
     prompt.onchange = () => {
       const active = workspace.current();
       if (!active) return;

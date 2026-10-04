@@ -16,6 +16,27 @@ function kindOf(item) {
   return type;
 }
 
+function extOf(item) {
+  const name = String(item.fileName || '');
+  const match = name.match(/\.([a-z0-9]+)$/i);
+  if (match) return match[1].toUpperCase();
+  const kind = kindOf(item);
+  if (kind === 'slide') return 'PPTX';
+  if (kind === 'code') return 'CODE';
+  if (kind === 'document') return 'DOCX';
+  if (kind === 'chart') return 'SVG';
+  if (kind === 'table') return 'CSV';
+  return 'FILE';
+}
+
+function relTime(time) {
+  if (!time) return '';
+  const delta = Date.now() - time;
+  if (delta < 60000) return 'Baru saja';
+  if (delta < 3600000) return Math.floor(delta / 60000) + ' mnt lalu';
+  return new Date(time).toLocaleString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+
 function paint() {
   const ul = $('artifact-page-list');
   const filters = $('artifact-filters');
@@ -44,7 +65,8 @@ function paint() {
   const shown = list.filter((item) => filter === 'semua' || kindOf(item) === filter);
   if (!shown.length) {
     const li = document.createElement('li');
-    li.textContent = 'Belum ada artefak di saringan ini.';
+    li.className = 'coll-empty-card';
+    li.innerHTML = '<strong>Belum ada artefak</strong><p>Minta slide, dokumen, atau kode di obrolan, atau simpan cuplikan dari Studio kode.</p>';
     ul.appendChild(li);
     return;
   }
@@ -53,8 +75,9 @@ function paint() {
     li.className = 'artifact-card-page';
     const title = document.createElement('strong');
     title.textContent = item.title || item.fileName || 'Berkas';
-    const badge = document.createElement('span');
-    badge.textContent = kindOf(item);
+    const meta = document.createElement('span');
+    meta.className = 'artifact-meta';
+    meta.textContent = [extOf(item), relTime(item.time)].filter(Boolean).join(' · ');
     const open = document.createElement('button');
     open.type = 'button';
     open.textContent = 'Pratinjau';
@@ -74,7 +97,7 @@ function paint() {
     save.type = 'button';
     save.textContent = 'Unduh';
     save.onclick = () => open.click();
-    li.appendChild(badge);
+    li.appendChild(meta);
     li.appendChild(title);
     li.appendChild(open);
     li.appendChild(save);

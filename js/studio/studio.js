@@ -52,7 +52,14 @@ async function ensureEditor() {
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js');
     await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js');
     if (!globalThis.CodeMirror) return;
-    cm = globalThis.CodeMirror.fromTextArea(area, { lineNumbers: true, mode: lang });
+    cm = globalThis.CodeMirror.fromTextArea(area, {
+      lineNumbers: true,
+      mode: lang,
+      extraKeys: {
+        'Ctrl-Enter': () => { const run = $('studio-run'); if (run) run.click(); },
+        'Cmd-Enter': () => { const run = $('studio-run'); if (run) run.click(); },
+      },
+    });
   } catch (e) {
     cm = null;
   }
@@ -61,7 +68,10 @@ async function ensureEditor() {
 function showConsole(text, ms) {
   const out = $('studio-console');
   const status = $('studio-terminal-status');
-  if (status) status.textContent = ms == null ? 'Konsol' : 'Selesai dalam ' + ms + ' ms';
+  if (status) {
+    status.textContent = ms == null ? 'Konsol' : 'Selesai dalam ' + ms + ' ms';
+    status.classList.toggle('studio-status-ok', ms != null);
+  }
   if (!out) return;
   out.hidden = false;
   out.textContent = text;
@@ -120,6 +130,10 @@ export const studioPage = {
       lang = next;
       if (tabJs) tabJs.classList.toggle('on', next === 'javascript');
       if (tabPy) tabPy.classList.toggle('on', next === 'python');
+      const files = $('studio-files');
+      const zip = $('studio-zip');
+      if (files) files.hidden = next !== 'javascript';
+      if (zip) zip.hidden = next !== 'javascript';
       writeEditor(next === 'python' ? pythonCode : (WEB[webFile] || ''), next === 'python' ? 'python' : 'javascript');
     };
     if (tabJs) tabJs.onclick = () => pick('javascript');

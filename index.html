@@ -161,13 +161,15 @@
             <button type="button" id="studio-tab-js" class="on">JavaScript</button>
             <button type="button" id="studio-tab-py">Python</button>
           </div>
-          <div class="studio-files" id="studio-files">
-            <button type="button" data-studio-file="index.html">index.html</button>
-            <button type="button" data-studio-file="style.css">style.css</button>
-            <button type="button" data-studio-file="script.js" class="on">script.js</button>
+          <div class="studio-filebar">
+            <div class="studio-files" id="studio-files">
+              <button type="button" data-studio-file="index.html">index.html</button>
+              <button type="button" data-studio-file="style.css">style.css</button>
+              <button type="button" data-studio-file="script.js" class="on">script.js</button>
+            </div>
+            <button type="button" id="studio-copy" class="plain">Salin kode</button>
+            <button type="button" id="studio-zip" class="plain">Ekspor zip</button>
           </div>
-          <button type="button" id="studio-zip" class="plain">Ekspor zip</button>
-          <button type="button" id="studio-copy" class="plain">Salin kode</button>
         </div>
         <textarea id="studio-editor" class="studio-editor" rows="14" spellcheck="false"></textarea>
         <div class="studio-actions">
@@ -239,8 +241,10 @@
           <button type="button" data-template="Naskah">Naskah</button>
           <button type="button" data-template="Dokumen bisnis">Dokumen bisnis</button>
         </div>
-        <input id="project-name-sheet" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
-        <button class="attach-plain" id="project-create-sheet">Buat proyek</button>
+        <div class="project-create-row">
+          <input id="project-name-sheet" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
+          <button class="attach-plain" id="project-create-sheet" type="button">Buat proyek</button>
+        </div>
         <div id="project-drop" class="project-drop">Sematkan berkas dari obrolan. Berkas itu ikut ke instruksi proyek.</div>
         <ul id="project-list-sheet" class="project-grid"></ul>
       </div>

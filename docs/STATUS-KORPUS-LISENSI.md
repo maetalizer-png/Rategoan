@@ -2,7 +2,7 @@
 
 Diperbarui: 2026-10-03.
 
-Spesifikasi yang berlaku: `docs/PRD/PRD-RELEASE.md` (dokumen Drive, 2 Oktober 2026). Salinan yang sama ada di Release tag `prd-data-release`, aset `PRD-RELEASE.md`.
+Spesifikasi yang berlaku: `docs/PRD/PRD-RELEASE.md` (dokumen Drive, 4 Oktober 2026). Salinan yang sama ada di Release tag `prd-data-release`, aset `PRD-RELEASE.md`.
 
 Enam tag, tiga tingkat. Tag GitHub tanpa spasi.
 
