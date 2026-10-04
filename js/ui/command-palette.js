@@ -17,7 +17,7 @@ function score(hay, needle) {
 
 function commands() {
   const list = [
-    { label: 'Buka Studio Kode', run: () => router.go('studio') },
+    { label: 'Buka Studio kode', run: () => router.go('studio') },
     { label: 'Buka Konektor', run: () => router.go('connect') },
     { label: 'Buka Pengaturan', run: () => router.go('settings') },
     { label: 'Buka Koleksi', run: () => router.go('collection') },

@@ -518,3 +518,9 @@ body.is-generating #btn-send { display: none; }
   #view-chat.pane-chat #cowork-editor,
   #view-chat.pane-chat .cowork-bar { display: none; }
 }
+
+body:not(.has-draft):not(.is-generating) #btn-send { display: none !important; }
+body.has-draft:not(.is-generating) #btn-voice-input { display: none !important; }
+body.is-generating #btn-voice-input { display: none !important; }
+#studio-diff-view { margin: 8px 0; max-height: 280px; overflow: auto; }
+#studio-folder-list button { min-height: 36px; }

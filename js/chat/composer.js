@@ -442,15 +442,14 @@ export const composer = {
   bind() {
     const inp = $('chat-input');
     if (!inp) return;
-    const skillPick = $('skill-select');
-    if (skillPick) {
-      skillPick.value = skill.get();
-      skillPick.onchange = () => {
-        skill.set(skillPick.value);
-        toast.show('Keahlian: ' + skill.all[skill.get()].label);
-      };
-    }
-    inp.addEventListener('input', () => this.autoGrow());
+    const paintSlot = () => {
+      const draft = !!(inp.value.trim() || (attach.current) || (quote.current));
+      document.body.classList.toggle('has-draft', draft);
+    };
+    inp.addEventListener('input', () => {
+      this.autoGrow();
+      paintSlot();
+    });
     inp.addEventListener('focus', () => setTimeout(scrollBottom, 250));
     const send = $('btn-send');
     if (send) send.onclick = () => {
@@ -459,6 +458,7 @@ export const composer = {
       if (this.slideActive && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
       inp.value = '';
       this.autoGrow();
+      document.body.classList.remove('has-draft');
       this.send(t);
     };
     const plus = $('btn-plus');
