@@ -86,7 +86,7 @@ export const studioPage = {
       const code = codeText();
       const res = await jsSandbox.run(code);
       const body = res.ok
-        ? ((res.logs || []).join('\n') + (res.value ? '\n→ ' + res.value : '')).trim() || 'Selesai.'
+        ? ((res.logs || []).join('\n') + (res.value ? '\n\u2192 ' + res.value : '')).trim() || 'Selesai.'
         : ('Gagal: ' + (res.error || 'error'));
       showConsole(body, Math.round(performance.now() - started));
     };
@@ -147,7 +147,7 @@ export const studioPage = {
     const code = codeText();
     if (out) {
       out.hidden = false;
-      out.textContent = 'Memuat Python…';
+      out.textContent = 'Memuat Python\u2026';
     }
     try {
       if (!pyPromise) {
@@ -157,7 +157,7 @@ export const studioPage = {
       if (pyodide.setStdout) pyodide.setStdout({ batched: (text) => { if (out) out.textContent = text; } });
       const value = await pyodide.runPythonAsync(code);
       const shown = value == null ? '' : String(value);
-      if (out) out.textContent = ((out.textContent && out.textContent !== 'Memuat Python…') ? out.textContent + '\n' : '') + (shown || 'Selesai.');
+      if (out) out.textContent = ((out.textContent && out.textContent !== 'Memuat Python\u2026') ? out.textContent + '\n' : '') + (shown || 'Selesai.');
       toast.show('Python selesai');
     } catch (e) {
       if (out) out.textContent = 'Gagal: ' + (e && e.message ? e.message : 'Python tidak termuat');
