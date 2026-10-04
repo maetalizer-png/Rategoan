@@ -177,20 +177,20 @@
         <div class="studio-toolbar">
           <div class="studio-topbar">
             <div class="studio-tabs" role="tablist">
-              <button type="button" id="studio-tab-js" class="on">JavaScript</button>
-              <button type="button" id="studio-tab-py">Python</button>
+              <button type="button" id="studio-tab-js" class="on">Web App</button>
+              <button type="button" id="studio-tab-py">Skrip Python</button>
             </div>
             <div class="studio-util">
-              <button type="button" id="studio-copy" class="plain">Salin</button>
-              <button type="button" id="studio-diff" class="plain">Tinjau Perubahan</button>
-              <button type="button" id="studio-folder" class="plain">Folder lokal</button>
+              <button type="button" id="studio-folder" class="plain">Buka Folder / ZIP</button>
               <button type="button" id="studio-zip" class="plain">Ekspor ZIP</button>
+              <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
             </div>
           </div>
           <div class="studio-files" id="studio-files">
-            <button type="button" data-studio-file="index.html">index.html</button>
-            <button type="button" data-studio-file="style.css">style.css</button>
-            <button type="button" data-studio-file="script.js" class="on">script.js</button>
+            <button type="button" data-studio-file="index.html" data-studio-kind="web">index.html</button>
+            <button type="button" data-studio-file="style.css" data-studio-kind="web">style.css</button>
+            <button type="button" data-studio-file="script.js" data-studio-kind="web" class="on">script.js</button>
+            <button type="button" data-studio-file="main.py" data-studio-kind="python" hidden>main.py</button>
           </div>
           <div id="studio-folder-list" class="studio-files" hidden></div>
         </div>
@@ -199,8 +199,10 @@
         <div class="studio-actions">
           <button type="button" id="studio-run" class="btn-run-primary">Jalankan</button>
           <button type="button" id="studio-preview">Pratinjau</button>
-          <button type="button" id="studio-open-panel">Buka di panel</button>
-          <button type="button" id="studio-to-artifact">Jadikan artefak</button>
+          <span class="studio-side">
+            <button type="button" id="studio-copy" class="plain">Salin</button>
+            <button type="button" id="studio-diff" class="plain">Tinjau Perubahan</button>
+          </span>
         </div>
         <div id="studio-terminal" class="studio-terminal">
           <div class="studio-terminal-head">

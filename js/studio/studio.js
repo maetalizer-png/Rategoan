@@ -5,6 +5,7 @@ import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { previewSrcdoc, zipStore } from './sandbox-runner.js';
 import { toast } from '../core/toast.js';
 import { drawer } from '../ui/drawer.js';
+import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
 const WEB = {
@@ -172,7 +173,12 @@ export const studioPage = {
       if (tabPy) tabPy.classList.toggle('on', next === 'python');
       const files = $('studio-files');
       const previewBtn = $('studio-preview');
-      if (files) files.hidden = next !== 'javascript';
+      if (files) files.hidden = false;
+      document.querySelectorAll('[data-studio-file]').forEach((btn) => {
+        const py = btn.dataset.studioKind === 'python';
+        btn.hidden = next === 'python' ? !py : py;
+        if (next === 'python') btn.classList.toggle('on', py);
+      });
       if (previewBtn) previewBtn.hidden = next === 'python';
       writeEditor(next === 'python' ? pythonCode : (WEB[webFile] || ''), next === 'python' ? 'python' : 'javascript');
     };
@@ -181,6 +187,10 @@ export const studioPage = {
     document.querySelectorAll('[data-studio-file]').forEach((btn) => {
       btn.onclick = () => {
         rememberEditor();
+        if (btn.dataset.studioKind === 'python') {
+          pick('python');
+          return;
+        }
         lang = 'javascript';
         webFile = btn.dataset.studioFile;
         if (tabJs) tabJs.classList.add('on');
@@ -220,9 +230,40 @@ export const studioPage = {
       view.innerHTML = rows.map((row) => '<span class="md-diff-line ' + row.kind + '">' + escapeHtml(row.text) + '</span>').join('');
     };
     const folderBtn = $('studio-folder');
+    const openZip = $('studio-open-zip');
+    const showZipList = async (file) => {
+      const list = $('studio-folder-list');
+      if (!list || !file) return;
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const entries = listZipEntries(bytes).filter((entry) => entry.name && !entry.name.endsWith('/')).slice(0, 24);
+      list.innerHTML = '';
+      list.hidden = false;
+      entries.forEach((entry) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = entry.name;
+        btn.onclick = async () => {
+          try {
+            const text = await readZipText(bytes, entry.name);
+            const name = entry.name;
+            const mode = name.endsWith('.py') ? 'python' : (name.endsWith('.css') ? 'css' : (name.endsWith('.html') ? 'htmlmixed' : 'javascript'));
+            writeEditor(text, mode);
+            toast.show(name);
+          } catch (e) { console.warn('[Rategoan Fallback] Studio:', e); }
+        };
+        list.appendChild(btn);
+      });
+      if (!entries.length) toast.show('ZIP tidak berisi berkas teks');
+    };
+    if (openZip) openZip.onchange = () => {
+      const file = openZip.files && openZip.files[0];
+      if (file) showZipList(file);
+      openZip.value = '';
+    };
     if (folderBtn) folderBtn.onclick = async () => {
       if (typeof window.showDirectoryPicker !== 'function') {
-        toast.show('Peramban ini tidak membuka folder lokal');
+        if (openZip) openZip.click();
+        else toast.show('Peramban ini tidak membuka folder lokal');
         return;
       }
       let dir;

@@ -471,8 +471,7 @@ export const composer = {
       const label = $('sheet-project-label');
       const cur = workspace.current();
       if (label) label.textContent = cur ? ('Kaitkan ke Proyek · ' + cur.name) : 'Kaitkan ke Proyek';
-      const fast = $('sheet-fast');
-      if (fast) fast.setAttribute('aria-checked', hemat.enabled() ? 'true' : 'false');
+      this._toggleSwitch('sheet-fast', hemat.enabled());
       attach.open();
     };
     document.addEventListener('rategoan:stop-generation', () => {
@@ -641,7 +640,7 @@ export const composer = {
     const fastCard = $('sheet-fast');
     if (fastCard) fastCard.onclick = () => {
       const on = hemat.toggle();
-      fastCard.setAttribute('aria-checked', on ? 'true' : 'false');
+      this._toggleSwitch('sheet-fast', on);
       toast.show(on ? 'Mode kilat hidup' : 'Mode kilat mati');
     };
     const docCard = $('sheet-doc');

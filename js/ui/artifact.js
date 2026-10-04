@@ -209,7 +209,7 @@ function normalize(first, title, fileName) {
 function renderCurrent() {
   setChrome(current.type);
   if (current.type === 'code') renderCode(current.code, current.title);
-  else if (current.type === 'document' || current.type === 'docx') renderDocument(current.markdown, current.title);
+  else if (current.type === 'document' || current.type === 'docx' || current.type === 'report') renderDocument(current.markdown, current.title);
   else if (current.type === 'zip') renderDocument(current.markdown, current.title);
   else if (current.type === 'table') renderTable(current.rows, current.title);
   else if (current.type === 'chart') renderChart(current);

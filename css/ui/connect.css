@@ -194,7 +194,18 @@
   max-height: 180px;
   overflow: auto;
 }
-.think-trace summary { cursor: pointer; font-size: 13px; }
+.think-trace summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+.think-trace {
+  background: var(--rg-surface-2, #f6f6f6);
+  padding: 12px;
+}
+.think-trace pre {
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--rg-muted, #5c6570);
+  background: transparent;
+}
 #studio-preview-frame {
   width: 100%;
   min-height: 180px;
