@@ -41,7 +41,7 @@ export const voice = {
     if (this.listening) {
       try {
         this.rec && this.rec.stop();
-      } catch (e) {}
+      } catch (e) { console.warn('[Rategoan Fallback]', e); }
       return;
     }
     try {
@@ -88,7 +88,7 @@ export const voice = {
     btn.onclick = (event) => {
       event.preventDefault();
       if (this.listening) {
-        try { this.rec && this.rec.stop(); } catch (e) {}
+        try { this.rec && this.rec.stop(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
       } else this.listen();
     };
   },

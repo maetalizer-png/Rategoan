@@ -80,36 +80,71 @@ function cardList(ul) {
   });
 }
 
+function renderPinned(project) {
+  const ul = $('project-file-list');
+  if (!ul) return;
+  ul.innerHTML = '';
+  const files = (project && project.pinnedFiles) || [];
+  if (!files.length) {
+    const li = document.createElement('li');
+    li.className = 'project-file-empty';
+    li.textContent = 'Belum ada berkas tersemat.';
+    ul.appendChild(li);
+    return;
+  }
+  files.forEach((file, index) => {
+    const li = document.createElement('li');
+    const name = document.createElement('span');
+    const kb = file.size ? ' · ' + Math.max(1, Math.round(file.size / 1024)) + ' KB' : '';
+    name.textContent = (file.name || 'berkas') + kb;
+    const del = document.createElement('button');
+    del.type = 'button';
+    del.textContent = 'Hapus';
+    del.onclick = () => {
+      const next = files.filter((_, i) => i !== index);
+      workspace.update(project.id, { pinnedFiles: next });
+      paint();
+    };
+    li.appendChild(name);
+    li.appendChild(del);
+    ul.appendChild(li);
+  });
+}
+
+function readFileText(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || '').slice(0, 8000));
+    reader.onerror = () => resolve('');
+    if (file.type && file.type.indexOf('text') < 0 && !/\.(txt|md|csv|json)$/i.test(file.name || '')) {
+      resolve('');
+      return;
+    }
+    reader.readAsText(file);
+  });
+}
+
 function paint() {
   const curLabel = $('project-current');
   const cur = workspace.current();
-  if (curLabel) curLabel.textContent = cur ? ('Aktif: ' + cur.name) : 'Belum ada proyek aktif';
+  const list = workspace.list();
+  const emptyView = $('project-empty-state');
+  const activeView = $('project-active-panel');
   showProjectBar(cur);
-  let prompt = $('project-prompt');
-  if (!prompt && curLabel && curLabel.parentNode) {
-    const box = document.createElement('div');
-    box.className = 'project-instruction-box';
-    const label = document.createElement('label');
-    label.className = 'project-label';
-    label.htmlFor = 'project-prompt';
-    label.textContent = 'Instruksi proyek';
-    prompt = document.createElement('textarea');
-    prompt.id = 'project-prompt';
-    prompt.className = 'project-textarea';
-    prompt.rows = 4;
-    prompt.placeholder = 'Instruksi khusus proyek ini';
-    box.appendChild(label);
-    box.appendChild(prompt);
-    curLabel.parentNode.appendChild(box);
-    prompt.onchange = () => {
-      const active = workspace.current();
-      if (!active) return;
-      workspace.update(active.id, { systemPrompt: prompt.value });
-      toast.show('Instruksi proyek disimpan');
-    };
+  if (!list.length) {
+    if (curLabel) curLabel.textContent = 'Kelola ruang kerja terisolasi dengan instruksi mandiri.';
+    if (emptyView) emptyView.hidden = false;
+    if (activeView) activeView.hidden = true;
+    const ul = $('project-list-sheet');
+    if (ul) ul.innerHTML = '';
+    return;
   }
-  if (prompt) prompt.value = cur && cur.systemPrompt ? cur.systemPrompt : '';
-  cardList($('project-list'));
+  if (emptyView) emptyView.hidden = true;
+  if (activeView) activeView.hidden = !cur;
+  if (curLabel) curLabel.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Pilih proyek untuk mengaktifkan.';
+  const prompt = $('project-prompt');
+  if (prompt && document.activeElement !== prompt) prompt.value = cur && cur.systemPrompt ? cur.systemPrompt : '';
+  renderPinned(cur);
   cardList($('project-list-sheet'));
 }
 
@@ -145,6 +180,38 @@ export const projectPage = {
         activate(found);
       };
     });
+    const prompt = $('project-prompt');
+    if (prompt) prompt.onchange = () => {
+      const active = workspace.current();
+      if (!active) return;
+      workspace.update(active.id, { systemPrompt: prompt.value });
+      toast.show('Instruksi proyek disimpan');
+    };
+    const pin = $('project-pin-btn');
+    const picker = $('project-file-pick');
+    if (pin && picker) pin.onclick = () => picker.click();
+    if (picker) picker.onchange = async () => {
+      const active = workspace.current();
+      if (!active) {
+        toast.show('Buat proyek dulu');
+        picker.value = '';
+        return;
+      }
+      const incoming = [];
+      const chosen = Array.from(picker.files || []);
+      for (let i = 0; i < chosen.length; i += 1) {
+        const file = chosen[i];
+        incoming.push({
+          name: file.name,
+          size: file.size,
+          textContent: await readFileText(file),
+        });
+      }
+      workspace.update(active.id, { pinnedFiles: (active.pinnedFiles || []).concat(incoming).slice(0, 12) });
+      picker.value = '';
+      toast.show(incoming.length + ' berkas disematkan');
+      paint();
+    };
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('project') >= 0) paint();
     });

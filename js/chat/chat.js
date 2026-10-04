@@ -183,9 +183,29 @@ function buildActions(text) {
     toast.show('Dicatat, makasih');
     menu.hidden = true;
   };
+  const pinProjBtn = document.createElement('button');
+  pinProjBtn.type = 'button';
+  pinProjBtn.textContent = 'Sematkan ke Proyek';
+  pinProjBtn.onclick = () => {
+    const cur = workspace.current();
+    if (!cur) {
+      toast.show('Pilih atau buat proyek dulu');
+      menu.hidden = true;
+      return;
+    }
+    const files = (cur.pinnedFiles || []).concat([{
+      name: 'Kutipan obrolan',
+      textContent: text.slice(0, 1000),
+      size: text.length,
+    }]);
+    workspace.update(cur.id, { pinnedFiles: files.slice(-12) });
+    toast.show('Disematkan ke proyek ' + cur.name);
+    menu.hidden = true;
+  };
   menu.appendChild(shareBtn);
   menu.appendChild(upBtn);
   menu.appendChild(downBtn);
+  menu.appendChild(pinProjBtn);
   row.appendChild(copyBtn);
   row.appendChild(speakBtn);
   row.appendChild(saveBtn);

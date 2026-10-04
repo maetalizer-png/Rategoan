@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     composer.autoGrow();
   });
   login.bind();
-  try { window.__rategoanMesin = mesin.list(); } catch (e) {}
+  try { window.__rategoanMesin = mesin.list(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   try {
     const params = new URLSearchParams(location.search);
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         inp.focus();
       }
     }
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback]', e); }
   if (window.visualViewport) {
     const setVvh = () => {
       document.documentElement.style.setProperty('--vvh', window.visualViewport.height + 'px');
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   try {
     localStorage.setItem('raget_boot_ms', String(Math.round(performance.now() - bootStart)));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback]', e); }
   const warmup = () => {
     dataries.loadRegion('country', 'asian-tenggara').catch(() => {});
     dataries.loadRegion('country', 'eropan-barat').catch(() => {});

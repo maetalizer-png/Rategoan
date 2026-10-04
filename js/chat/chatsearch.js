@@ -14,7 +14,7 @@ function fuzzyTextMatch(haystack, query) {
 function markText(root, query) {
   const safe = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const re = new RegExp(safe, 'ig');
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const walker = document.createTreeWalker(root, window.NodeFilter.SHOW_TEXT);
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach((node) => {

@@ -1,4 +1,5 @@
-<!-- Sumber: Google Drive "PRD antarmuka" file 19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw, diubah 2026-10-04T10:58:25Z. Bab 39 menimpa model geser Studio dan Proyek. -->
+<!-- Sumber: Google Drive "PRD antarmuka 1.0" file 19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw, diubah 2026-10-04T12:58:34Z. -->
+[STATUS: VERSI 1.0 KANONIKAL - DISEGEL TUNTAS (SEALED)]
 
 # 38. SPESIFIKASI PEROMBAKAN TOTAL KAPSUL MEMORI & MASTER PEMOLESAN EKOSISTEM ANTARMUKA (KERJA BESAR OKTOBER 2026)
 ## 38.1 Latar Belakang & Analisis Forensik Halaman Kapsul Memori (Tangkapan Layar 11:45 WIB)
@@ -243,10 +244,9 @@ Perbarui js/ui/memory-capsule.js dan css/ui/overhaul.css sesuai cetak biru DOM &
 Tambahkan dialog konfirmasi pengaman if (!confirm('Kosongkan seluruh fakta yang tersimpan di Kapsul Memori?')) return; pada event klik tombol #memory-clear.
 Di js/account/settings.js, suntikkan indikator jumlah fakta aktif pada baris #btn-settings-memory.
 Jalankan npm test (17 test lulus) dan npm run lint (100% lulus tanpa error).
-PRD ANTARMUKA & EKOSISTEM MESIN OPERASIONAL RATEGOAN
+PRD ANTARMUKA 1.0 — ARSIP KANONIKAL EVOLUSI SISTEM (BAB 1 s/d 43)
 Spesifikasi Kebutuhan Produk (Product Requirements Document) — Cetak Biru Master Arsitektur UI/UX, Harness Operasional 100% Nyata, dan Ekosistem Konektor Terpadu
-Status: Disahkan sebagai Dokumen Acuan Kanonikal Pengembangan Antarmuka Rategoan
-Versi: 2.0.0 (Master Consolidated Blueprint) | Tanggal: Oktober 2026
+Status: Dokumen Acuan Kanonikal Versi 1.0 (Disegel Menuju Konsolidasi Versi 2.0) | Tanggal: Oktober 2026
 
 # 1. LATAR BELAKANG, PENDAHULUAN & FILOSOFI ARSITEKTURAL FUNDAMENTAL
 ## 1.1 Latar Belakang Masalah & Lanskap Disrupsi AI Agenik
@@ -2744,6 +2744,159 @@ Siap Dikerjakan
 docs/PRD/PRD-ANTARMUKA.md
 Sinkronisasi Master PRD Bab 27 ke Repositori Lokal
 Siap Dikerjakan
+# 43. MANDAT RESMI AUDIT TOTAL, KRITIK TAJAM, DAN PENUTUPAN SELURUH CELAH OLEH GROK BUILD: GERBANG KONSOLIDASI MENUJU PRD ANTARMUKA VERSI 2.0 (OKTOBER 2026)
+## 43.1 Latar Belakang & Urgensi Mandat Audit Menyeluruh
+Dokumen PRD Antarmuka telah berkembang menjadi cetak biru berskala besar yang merekam evolusi arsitektur Rategoan dari Bab 1 hingga Bab 42. Sebelum seluruh spesifikasi ini dikonsolidasikan dan disegel ke dalam dokumen bersih PRD ANTARMUKA VERSI 2.0 (Fresh Master Blueprint), agen pelaksana utama—Grok Build—secara resmi diberikan mandat untuk melakukan peninjauan kritis menyeluruh (comprehensive system review & sharp critique).
+Grok Build diwajibkan memeriksa seluruh pekerjaan yang telah diselesaikan, mencari celah sekecil apa pun, menemukan kelemahan arsitektur, dan menyempurnakan seluruh titik friksi sebelum tongkat estafet beralih ke Versi 2.0.
+## 43.2 Lima Dimensi Audit & Kritik Tajam yang Wajib Dieksekusi Grok Build
+Grok Build diwajibkan membedah basis kode melalui 5 lensa kritis berikut:
+                  5 DIMENSI AUDIT KRITIS OLEH GROK BUILD
+┌─────────────────────────────────┬─────────────────────────────────┬─────────────────────────────────┐
+│ 1. ERGONOMI PONSEL (MOBILE UX)  │ 2. KELENGKAPAN FITUR (NO STUB)  │ 3. KEAMANAN & RETENSI DATA      │
+├─────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+│ • Pastikan zero horizontal      │ • Dilarang ada tombol pajangan! │ • Audit sanitasi escapeHtml() di│
+│   scroll di seluruh halaman.    │ • Fitur sematkan berkas proyek  │   semua tampilan teks dinamis.  │
+│ • Proyek wajib model 2-state.   │   harus fungsional (bisa pilih  │ • Karantina token konektor agar │
+│ • Koleksi bebas dari deretan    │   file dan masuk ke context).   │   tidak bocor ke berkas cadangan│
+│   filter (0) saat kosong.       │ • Tombol Pratinjau Studio wajib │   obrolan (.rategoan.json).     │
+│ • Komposer 100% zero-chip teks. │   sembunyi saat di tab Python.  │                                 │
+├─────────────────────────────────┴─────────────────────────────────┴─────────────────────────────────┤
+│ 4. KEBERSIHAN KODE & RESILIENSI                                   │ 5. GERBANG PENGUJIAN MUTLAK     │
+├───────────────────────────────────────────────────────────────────┼─────────────────────────────────┤
+│ • Bersihkan 32 blok silent catch (e) {} dengan logging terukur.   │ • Wajib 17/17 subtest npm test  │
+│ • Pastikan kode bersih total dari sisa komentar usang (zero-comm).│   lulus tanpa kegagalan.        │
+│ • Pastikan tidak ada variabel global tak terdefinisi.             │ • Wajib npm run lint 100% hijau │
+│                                                                   │   (208 file, 3934 entri valid). │
+└───────────────────────────────────────────────────────────────────┴─────────────────────────────────┘
+## 43.3 Matriks Penugasan Audit & Penyempurnaan Akhir (Tugas No. 211 s/d 215)
+No
+Fokus Pemeriksaan
+Pertanyaan Uji Kritis untuk Grok Build
+Standar Kelulusan yang Wajib Dicapai
+Status
+211
+Audit Total Halaman Proyek
+Apakah textarea instruksi masih mengambang saat proyek kosong? Apakah tombol sematkan berkas sudah bisa memilih file nyata?
+Terapkan 2-state murni: State Kosong hanya menampilkan kartu buat proyek + template; State Aktif menampilkan instruksi & daftar berkas tersemat fungsional.
+MANDAT WAJIB
+212
+Audit Total Halaman Koleksi
+Apakah masih ada dua tombol "+ Catatan"? Apakah filter chips masih memuat angka nol saat kosong?
+Sembunyikan baris filter chips saat koleksi kosong; satukan tombol catatan; pastikan transisi tab segmented control mulus.
+MANDAT WAJIB
+213
+Audit Studio Kode & Konektor
+Apakah Studio Kode benar-benar terkunci dari geser kiri-kanan? Apakah tombol Hubungkan dan Token sudah sejajar horizontal?
+Kunci #view-studio: overflow-x: hidden;; grid 3 berkas pas 100%; .hub-card-side sejajar horizontal berdampingan.
+MANDAT WAJIB
+214
+Audit Resiliensi & Silent Catch
+Apakah masih ada error yang ditelan mentah-mentah oleh blok catch (e) {} kosong?
+Ganti seluruh blok silent catch kritis di main.js, composer.js, dan voice.js dengan console.warn('[Rategoan Fallback]', e).
+MANDAT WAJIB
+215
+Audit Integritas Linter & Tes
+Apakah seluruh pengujian dan skema data lulus sempurna sebelum komit?
+Jalankan npm test (17 pass) dan npm run lint (100% lulus, 0 warning/error).
+MANDAT WAJIB
+## 43.4 Protokol Transisi Menuju PRD ANTARMUKA VERSI 2.0 (The Fresh Blueprint)
+Setelah Grok Build mengeksekusi peninjauan kritis ini, menutup seluruh celah di atas, dan memastikan hasil kerja di egoan.vercel.app tampil sempurna tanpa cacat, alur transisi dilaksanakan secara ketat berdasarkan protokol dua tahap berikut:
+Tahap 1: Penyegelan & Perubahan Nama "PRD antarmuka 1.0":
+Tahap 2: Penerbitan "PRD ANTARMUKA VERSI 2.0":Setelah seluruh pekerjaan audit dan perbaikan pada Bab 43 ini dituntaskan secara sempurna oleh Grok Build dan diverifikasi pada egoan.vercel.app, dokumen ini secara resmi diberi tanda dan diubah nama berkasnya menjadi "PRD antarmuka 1.0" (baik judul dokumen di Google Drive maupun lokasi berkas di repositori docs/PRD/PRD-ANTARMUKA-1.0.md).
+Di bagian header dokumen ditandai segel permanen: [STATUS: VERSI 1.0 KANONIKAL - DISEGEL TUNTAS (SEALED)].
+
+Baru setelah penyegelan dan perubahan nama berkas "PRD antarmuka 1.0" tersebut selesai, kita resmi membuka lembaran baru dan menerbitkan dokumen bersih: "PRD ANTARMUKA VERSI 2.0" yang fresh, padat, dan bebas dari riwayat per-bab masa lalu.
+# 42. MASTER AUDIT CELAH SISTEM, KONTROL KUALITAS KODE (QC), DAN REKOMENDASI ARSITEKTUR APLIKASI AI MODERN (OKTOBER 2026)
+## 42.1 Latar Belakang & Audit Mendalam Sistem Terpadu
+Audit rekayasa menyeluruh terhadap basis kode Rategoan (292 berkas JS/MJS, CSS overhaul, dan pipeline data) mengidentifikasi 4 celah teknis, 3 potensi titik kegagalan (code smells), serta peluang adopsi standar industri AI modern terkini:
+Celah Pematrian Berkas Proyek (Missing Pinned-Files UI): Logika penyuntikan berkas rujukan proyek ke prompt sistem di composer.js:328 telah aktif, namun antarmuka #project-drop tidak memiliki tombol file picker atau drag-and-drop nyata.
+Celah Tombol Pratinjau Studio pada Mode Python: Tombol [ Pratinjau ] tetap aktif saat tab Python dipilih, padahal Python berjalan via konsol terminal Pyodide dan tidak menghasilkan pratinjau HTML.
+Celah Retensi Data Lokal (Ephemeral Storage Risk): Ketiadaan peringatan pencadangan .rategoan.json membuat pengguna berisiko kehilangan seluruh proyek dan catatan emas jika browser melakukan pembersihan cache atau berada di mode privat/incognito.
+Penyakit Silent Catch (32 Blok Kosong): Terdapat 32 blok catch (e) {} tanpa pencatatan peringatan di main.js, composer.js, dan voice.js yang menyulitkan diagnosa kegagalan pada peramban bergerak tertentu.
+## 42.2 Lima Rekomendasi Fitur Frontier AI Modern untuk Rategoan (Zero-Cost & Sovereign)
+Untuk menempatkan Rategoan sejajar dengan platform AI global terdepan (Claude 3.5, ChatGPT 4o, Cursor AI, Perplexity Pro, dan NotebookLM) dengan tetap menjaga kedaulatan 100% lokal dan bebas biaya API:
+                  REKOMENDASI 5 FITUR APLIKASI AI MODERN
+┌─────────────────────────────────┬─────────────────────────────────┬─────────────────────────────────┐
+│ FITUR & STANDAR INDUSTRI        │ KONSEP & NILAI PENGGUNA         │ MEKANISME REKAYASA DI RATEGOAN  │
+├─────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+│ 1. Split-Screen Artifact Canvas │ Layar membelah interaktif untuk │ Memanfaatkan iframe sandbox     │
+│    (Standar Claude Artifacts)   │ melihat kode, web app, dan slide│ #artifact-inline menjadi panel  │
+│                                 │ live berdampingan dengan chat.  │ geser split-screen mulus.       │
+├─────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+│ 2. "Pin to Project" Sekali Klik │ Menyematkan teks/jawaban emas   │ Menambahkan tombol aksi pada    │
+│    (Standar Claude Projects)    │ dari chat langsung ke memori    │ menu balasan: "Sematkan ke      │
+│                                 │ permanen proyek aktif.          │ Proyek" -> project.pinnedFiles. │
+├─────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+│ 3. Deep Research Visual Trace   │ Garis waktu visual proses riset │ Memanfaatkan #thought-accordion │
+│    (Standar Perplexity / Manus) │ multi-langkah (kueri -> baca web│ untuk menampilkan progres riset │
+│                                 │ -> QC filter -> sintesis akhir).│ transparan yang dapat dilipat.  │
+├─────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+│ 4. Percabangan Obrolan (Fork)   │ Mengedit pesan lama dan membuat │ Menambahkan tombol edit pesan   │
+│    (Standar ChatGPT Branching)  │ cabang eksplorasi baru tanpa    │ untuk memicu sesi duplikat baru │
+│                                 │ merusak riwayat utama.          │ dari titik pesan tersebut.      │
+├─────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+│ 5. Ringkasan Audio Berdaulat    │ Mengubah dokumen/chat panjang   │ Memanfaatkan Web Speech API     │
+│    (Standar NotebookLM Audio)   │ menjadi intisari audio suara    │ native di voice.js tanpa butuh  │
+│                                 │ yang bisa dijeda dan dilanjut.  │ server TTS komersial berbayar.  │
+└─────────────────────────────────┴─────────────────────────────────┴─────────────────────────────────┘
+## 42.3 Matriks Penugasan Rekayasa Kode & QC (Tugas No. 206 s/d 210)
+No
+Modul Target
+Masalah / Kebutuhan
+Rekayasa QC & Peningkatan Kode
+Status
+206
+Proyek: Realisasi Pematrian Berkas Lengkap
+Pinned files belum punya antarmuka unggah berkas.
+Sediakan tombol [+ Sematkan Berkas] dengan <input type="file" id="project-file-pick">. Simpan nama dan cuplikan teks ke project.pinnedFiles agar otomatis terinjeksi ke chat.
+MANDAT WAJIB
+207
+Koleksi: Desain Segmented Tab & Smart Header
+Tab kaku dan tombol ganda.
+Perhalus tab Tersimpan vs Perpustakaan menjadi segmented control bersudut membulat halus; sembunyikan filter chips saat item = 0; satukan aksi tombol catatan.
+MANDAT WAJIB
+208
+Studio Kode: Isolasi Pratinjau Python
+Tombol Pratinjau aktif di Python.
+Sembunyikan #studio-preview secara dinamis saat lang === 'python'; hanya tampil di javascript.
+MANDAT WAJIB
+209
+QC Kode: Pembersihan Silent Catch & Logging Terukur
+32 blok catch (e) {} menelan potensi eror.
+Ganti blok kosong kritis dengan console.warn('[Rategoan Fallback]', e) di main.js, composer.js, dan voice.js untuk memudahkan pelacakan stabilitas.
+MANDAT WAJIB
+210
+Fitur Cepat: Tombol "Sematkan ke Proyek" di Balasan Chat
+Sulit memindahkan teks obrolan ke proyek.
+Di menu titik tiga balasan AI (buildActions), tambahkan opsi Sematkan ke Proyek Aktif yang langsung memasukkan kutipan ke pinnedFiles proyek.
+MANDAT WAJIB
+## 42.4 Panduan Langkah Implementasi untuk Grok Build
+js/project/project.js & index.html:
+Tambahkan input berkas: <input type="file" id="project-file-pick" hidden multiple accept=".txt,.md,.pdf,.csv,.json">.
+Di project.js, buat fungsi bindProjectFiles(): ketika pengguna memilih berkas, ekstrak teksnya (menggunakan attach.handleFile atau FileReader) dan masukkan objek { name: f.name, textContent: text, size: f.size } ke cur.pinnedFiles, lalu simpan via workspace.update().
+Render daftar berkas tersemat dalam kartu bersih dengan tombol silang hapus.
+js/chat/chat.js (Sematkan ke Proyek dari Chat):
+Pada buildActions(text):
+const pinProjBtn = document.createElement('button');
+pinProjBtn.type = 'button';
+pinProjBtn.textContent = 'Sematkan ke Proyek';
+pinProjBtn.onclick = () => {
+const cur = workspace.current();
+if (!cur) return toast.show('Pilih atau buat proyek dulu');
+cur.pinnedFiles = cur.pinnedFiles || [];
+cur.pinnedFiles.push({ name: 'Kutipan Obrolan', textContent: text.slice(0, 1000), size: text.length });
+workspace.update(cur.id, { pinnedFiles: cur.pinnedFiles });
+toast.show('Disematkan ke proyek ' + cur.name);
+menu.hidden = true;
+};
+menu.appendChild(pinProjBtn);
+js/studio/studio.js:
+Di fungsi pick(next):
+const prev = $('studio-preview');
+if (prev) prev.hidden = (next === 'python');
+Kepatuhan Gerbang Uji Mutlak:
+Jalankan npm test (17/17 lulus).
+Jalankan npm run lint (100% lulus, validasi skema 208 berkas 3.934 entri OK).
 ## 27.3 Standar Operasional Prosedur (SOP) GROK BUILD: Audit Visual Live, Real-Time Browser Testing, dan Verifikasi Screenshot via Playwright
 ### Latar Belakang Mandat
 Pengujian sebelumnya membuktikan bahwa lulus uji unit test berbasis Node.js (14/14 unit test) tidak menjamin antarmuka bebas cacat visual. Tes logika headless tidak dapat mendeteksi masalah tata letak CSS seperti kebocoran modal overlay (z-index / position: fixed), pemotongan kontainer flexbox, scrollbar ganda liar di sidebar, kegagalan event layar sentuh mobile (pointerup vs click), atau fenomena double-counting viewport saat keyboard virtual muncul.
@@ -3458,3 +3611,107 @@ Kecepatan tinggi Grok Build diakui sebagai keunggulan masif proyek ini. Namun, u
 Menjadikan Bab 37, Bab 38, dan Bab 39 sebagai checklist verifikasi visual sebelum melakukan komit kode.
 Memastikan gerbang pengujian npm test (17/17 lulus) dan npm run lint (100% lulus) selalu hijau sebelum melakukan publikasi rilis.
 P2 (Strategis): Item 141, 142 — Fondasi Canvas Live Preview & Multi-file Coder Sandbox.
+# 41. MASTER RESTRUKTURISASI HALAMAN PROYEK BERJENJANG, PEMBERSIHAN REDUNDANSI KOLEKSI, DAN PENUTUPAN CELAH ARSITEKTUR TINGKAT LANJUT (OKTOBER 2026)
+## 41.1 Latar Belakang & Hasil Audit Lapangan (Tangkapan Layar 19:21 WIB)
+Audit antarmuka seluler terkini membuktikan bahwa perbaikan Bab 39 telah berhasil:
+Komposer telah 100% bersih tanpa chip teks mengambang di atas keyboard (1000003892.jpg).
+Studio Kode telah bebas dari bug geser layar horizontal dengan grid berkas 3 kolom simetris yang pas (1000003894.jpg).
+Kartu Artefak telah rapi dengan pemisahan lencana format dan tanggal alami (1000003895.jpg).
+Namun, dua halaman ruang kerja utama—Halaman Proyek (1000003898.jpg) dan Halaman Koleksi (1000003896.jpg)—masih mengalami kekacauan tata letak dan redundansi elemen yang membutuhkan penyempurnaan tingkat lanjut:
+Kekacauan Visual Halaman Proyek: Elemen-elemen bertumpuk secara acak tanpa hierarki yang jelas. Textarea instruksi proyek muncul secara aktif padahal belum ada proyek yang dipilih atau dibuat, menyebabkan pengguna bingung ke mana instruksi tersebut akan tersimpan. Tombol "Buat proyek" berupa blok biru kaku, dan kartu penyematan berkas (#project-drop) hanya berupa teks pasif tanpa mekanisme interaksi nyata.
+Redundansi & Clutter Halaman Koleksi: Tombol "+ Catatan" muncul dua kali sekaligus di layar yang sama (di header dan di dalam kartu kosong). Deretan filter chip menampilkan "(0)" saat koleksi masih kosong, memakan ruang vertikal secara sia-sia.
+Celah Fungsional Pinned Files: Sistem belum menyediakan tombol atau antarmuka untuk mengunggah dan menyematkan berkas rujukan ke dalam proyek (pinnedFiles), padahal logika penyuntikan instruksinya ke chat sudah siap di composer.js.
+Tombol Pratinjau Studio pada Mode Python: Tombol "Pratinjau" tetap aktif saat tab Python dipilih, padahal Python berjalan via konsol terminal Pyodide dan tidak menghasilkan pratinjau HTML.
+## 41.2 Matriks Rekayasa Penyempurnaan Tingkat Lanjut (Tugas No. 201 s/d 205)
+No
+Modul Target
+Kondisi Eksisting
+Rekayasa Baru yang Wajib Diterapkan
+Status
+201
+Halaman Proyek: Restrukturisasi State Berjenjang
+Seluruh elemen (input, template, teks kosong, instruksi) bertumpuk acak; textarea muncul saat proyek kosong.
+Terapkan Model 2 State Jelas:
+1. State Belum Ada Proyek: Tampilkan Kartu Buat Proyek terpadu (.project-create-card) berisi input nama, 4 chip template cepat, dan tombol pil [+ Buat Proyek]. Textarea instruksi DISEMBUNYIKAN.
+2. State Ada Proyek Aktif: Tampilkan Kartu Proyek Aktif, daftar proyek, formulir Instruksi Sistem khusus proyek tersebut, dan seksi Berkas Tersemat.
+MANDAT WAJIB
+202
+Halaman Proyek: Realisasi Fitur Pematrian Berkas (Pinned Files)
+#project-drop hanya teks statis abu-abu tanpa tombol atau aksi nyata.
+Tambahkan tombol interaktif [+ Sematkan Berkas] (<input type="file" id="project-file-pick">) dan daftar berkas tersemat (.project-file-list) dengan nama berkas, ukuran, dan tombol hapus sematan.
+MANDAT WAJIB
+203
+Halaman Koleksi: Eliminasi Redundansi & Smart Filter
+Dua tombol "+ Catatan" tampil berdampingan; chip filter menampilkan deretan (0) saat kosong.
+1. Saat koleksi kosong (0 item), sembunyikan baris filter chips (#coll-filters.hidden = true) agar tampilan lega.
+2. Hapus duplikasi tombol: saat koleksi kosong, tombol aksi dipusatkan pada kartu kosong; tombol header disederhanakan.
+3. Perhalus transisi tab Tersimpan vs Perpustakaan menjadi segmented pill modern.
+MANDAT WAJIB
+204
+Studio Kode: Penyesuaian Tombol Aksi Kontekstual
+Tombol "Pratinjau" tetap muncul di tab Python.
+Sembunyikan tombol #studio-preview saat tab Python aktif (karena eksekusi Pyodide mencetak ke konsol terminal), dan tampilkan kembali saat tab JavaScript aktif.
+MANDAT WAJIB
+205
+Mitigasi Keamanan & Retensi Data Lokal
+Data proyek dan koleksi berisiko hilang saat browser dibersihkan; token rentan XSS.
+1. Tambahkan banner/pengingat cadangan di Pengaturan & Proyek (.project-backup-hint).
+2. Pastikan seluruh render teks proyek dan koleksi melalui escapeHtml() mutlak sebelum disuntikkan ke DOM.
+MANDAT WAJIB
+## 41.3 Panduan Implementasi Berkas Kode untuk Grok Build
+### 1. Rekayasa js/project/project.js & index.html (Proyek Berjenjang)
+Ubah logika paint() pada project.js:
+function paint() {
+const cur = workspace.current();
+const list = workspace.list();
+const curLabel = $('project-current');
+const emptyView = $('project-empty-state');
+const activeView = $('project-active-panel');
+const listContainer = $('project-list-sheet');
+
+showProjectBar(cur);
+
+if (!list.length) {
+// State 1: Belum ada proyek sama sekali
+if (curLabel) curLabel.textContent = 'Kelola ruang kerja terisolasi dengan instruksi mandiri.';
+if (emptyView) emptyView.hidden = false;
+if (activeView) activeView.hidden = true;
+if (listContainer) listContainer.innerHTML = '';
+} else {
+// State 2: Ada proyek
+if (emptyView) emptyView.hidden = true;
+if (activeView) activeView.hidden = !cur;
+if (curLabel) curLabel.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Pilih proyek untuk mengaktifkan:';
+
+// Render detail proyek aktif
+if (cur) {
+const promptArea = $('project-prompt');
+if (promptArea) promptArea.value = cur.systemPrompt || '';
+renderPinnedFiles(cur);
+}
+cardList(listContainer);
+}
+}
+### 2. Rekayasa js/collection/collection.js (Pembersihan Koleksi)
+Pada fungsi renderTersimpan():
+  if (!chatItems.length) {
+// Sembunyikan filter chips yang berisi (0) saat koleksi kosong
+$('coll-filters').innerHTML = '';
+$('coll-filters').hidden = true;
+content.innerHTML =
+'<div class="coll-empty">' + ic('bookmark') +
+'<div class="coll-empty-title">Koleksi ini masih sepi</div>' +
+'<div class="coll-empty-body">Simpan balasan dari obrolan, atau tulis catatan sendiri untuk prompt favorit dan cuplikan kode.</div>' +
+'<button type="button" class="coll-empty-note" data-open-note="1">+ Catatan Baru</button></div>';
+return;
+}
+$('coll-filters').hidden = false;
+### 3. Rekayasa js/studio/studio.js (Konteks Python)
+Pada fungsi pick(next):
+  const previewBtn = $('studio-preview');
+if (previewBtn) previewBtn.hidden = (next === 'python');
+## 41.4 Standar Integritas & Verifikasi
+Setelah Grok Build mengimplementasikan Bab 41:
+Jalankan npm test dan pastikan seluruh 17 unit test lulus tanpa cacat.
+Jalankan npm run lint dan pastikan gerbang linter lolos 100%.
+Verifikasi pada tampilan ponsel bahwa halaman Proyek dan Koleksi tampil bersih, elegan, dan profesional.

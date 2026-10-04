@@ -11,6 +11,7 @@ import { whatsappImporter } from '../../vault/whatsapp/importer.js';
 import { evernoteImporter } from '../../vault/evernote/importer.js';
 import { notionImporter } from '../../vault/notion/importer.js';
 import { searchDocs, indexDocs } from '../../raget/raget-vault/local-rag.js';
+import { icsParser } from '../../vault/calendar/ics-parser.js';
 
 const TEMPLATE = `
       <div class="settings-page">
@@ -162,6 +163,24 @@ async function renderTersimpan() {
     ...Array.from(tagCounts.entries()).map(([tag, count]) => ({ key: tag, label: tag, count })),
     { key: 'archived', label: ic('archive') + ' Arsip', count: archivedCount },
   ];
+  const noteBtn = $('coll-new-note');
+  if (!chatItems.length) {
+    if ($('coll-filters')) {
+      $('coll-filters').innerHTML = '';
+      $('coll-filters').hidden = true;
+    }
+    if (noteBtn) noteBtn.hidden = true;
+    $('coll-tab-desc').textContent = TAB_DESC.tersimpan;
+    if (myGen !== renderGen) return;
+    content.innerHTML =
+      '<div class="coll-empty">' + ic('bookmark') +
+      '<div class="coll-empty-title">Koleksi ini masih sepi</div>' +
+      '<div class="coll-empty-body">Simpan balasan dari obrolan, atau tulis catatan sendiri untuk prompt favorit dan cuplikan kode.</div>' +
+      '<button type="button" class="coll-empty-note" data-open-note="1">+ Catatan Baru</button></div>';
+    return;
+  }
+  if ($('coll-filters')) $('coll-filters').hidden = false;
+  if (noteBtn) noteBtn.hidden = false;
   $('coll-tab-desc').textContent = TAB_DESC.tersimpan;
   $('coll-filters').innerHTML = filterChips
     .map((f) => '<button type="button" class="coll-filter-chip' + (state.filter === f.key ? ' on' : '') + '" data-filter="' + escapeHtml(String(f.key)) + '">' + chipCaption(f) + ' (' + f.count + ')</button>')

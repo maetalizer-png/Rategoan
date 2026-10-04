@@ -246,7 +246,7 @@ export const composer = {
     if (WORK_RE.test(text) && !s.project) {
       s.project = { goal: titleFrom(text), started: Date.now() };
     }
-    try { memoryLong.learnFromText(text); } catch (e) {}
+    try { memoryLong.learnFromText(text); } catch (e) { console.warn('[Rategoan Fallback]', e); }
     const att = attach.consume();
     const q = quote.consume();
     s.messages.push({
@@ -378,7 +378,7 @@ export const composer = {
             projectId: s.projectId || workspace.currentId(),
           });
         }
-      } catch (e) {}
+      } catch (e) { console.warn('[Rategoan Fallback]', e); }
     }
     store.save();
     history.render();
@@ -455,7 +455,7 @@ export const composer = {
         this.paintQuick();
         this.syncModes();
       } else if (event.detail === 'neural') {
-        try { localStorage.setItem('rategoan_engine', 'neural'); } catch (e) {}
+        try { localStorage.setItem('rategoan_engine', 'neural'); } catch (e) { console.warn('[Rategoan Fallback]', e); }
       } else if (event.detail === 'docx') {
         $('chat-input').value = 'Buatkan dokumen Word dari percakapan ini';
       } else if (event.detail === 'slide') {

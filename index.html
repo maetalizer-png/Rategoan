@@ -237,17 +237,30 @@
           <h1>Proyek</h1>
         </header>
         <p id="project-current" class="coll-tab-desc"></p>
-        <div class="project-templates">
-          <button type="button" data-template="Riset akademik">Riset akademik</button>
-          <button type="button" data-template="Pengembangan web">Pengembangan web</button>
-          <button type="button" data-template="Naskah">Naskah</button>
-          <button type="button" data-template="Dokumen bisnis">Dokumen bisnis</button>
+        <div id="project-empty-state" class="project-create-card">
+          <div class="project-templates">
+            <button type="button" data-template="Riset akademik">Riset akademik</button>
+            <button type="button" data-template="Pengembangan web">Pengembangan web</button>
+            <button type="button" data-template="Naskah">Naskah</button>
+            <button type="button" data-template="Dokumen bisnis">Dokumen bisnis</button>
+          </div>
+          <div class="project-create-row">
+            <input id="project-name-sheet" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
+            <button class="attach-plain" id="project-create-sheet" type="button">Buat proyek</button>
+          </div>
         </div>
-        <div class="project-create-row">
-          <input id="project-name-sheet" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
-          <button class="attach-plain" id="project-create-sheet" type="button">Buat proyek</button>
+        <div id="project-active-panel" hidden>
+          <div class="project-instruction-box">
+            <label class="project-label" for="project-prompt">Instruksi proyek</label>
+            <textarea id="project-prompt" class="project-textarea" rows="4" placeholder="Instruksi khusus proyek ini"></textarea>
+          </div>
+          <div class="project-files">
+            <button type="button" id="project-pin-btn">+ Sematkan Berkas</button>
+            <input type="file" id="project-file-pick" hidden multiple accept=".txt,.md,.csv,.json,.pdf,text/plain">
+            <ul id="project-file-list" class="project-file-list"></ul>
+          </div>
+          <p class="project-backup-hint">Data proyek ada di perangkat ini. Cadangkan dari Pengaturan supaya tidak hilang saat cache dibersihkan.</p>
         </div>
-        <div id="project-drop" class="project-drop">Sematkan berkas dari obrolan. Berkas itu ikut ke instruksi proyek.</div>
         <ul id="project-list-sheet" class="project-grid"></ul>
       </div>
     </section>
