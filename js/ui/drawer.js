@@ -18,7 +18,7 @@ export const drawer = {
     let mode = null;
     if (!isOpen && x <= 24) mode = 'open';
     else if (isOpen) mode = 'close';
-    this.s = { x, y, mode, dragging: false, pos: 0 };
+    this.s = { x, y, mode, dragging: false, pos: 0, lastX: x, lastT: Date.now(), vx: 0 };
   },
   onMove(e) {
     const t = this.s;
@@ -41,6 +41,11 @@ export const drawer = {
     const w = $('sidebar').offsetWidth;
     let pos = t.mode === 'open' ? dx : w + dx;
     pos = Math.max(0, Math.min(w, pos));
+    const now = Date.now();
+    const dt = Math.max(1, now - t.lastT);
+    t.vx = (e.touches[0].clientX - t.lastX) / dt;
+    t.lastX = e.touches[0].clientX;
+    t.lastT = now;
     t.pos = pos;
     $('sidebar').style.transform = 'translateX(' + (pos - w) + 'px)';
     $('backdrop').style.opacity = String(pos / w);
@@ -59,7 +64,9 @@ export const drawer = {
     sb.style.transform = '';
     bd.style.opacity = '';
     bd.style.pointerEvents = '';
-    if (t.pos > w / 2) this.open();
+    const flickOpen = t.vx > 0.45;
+    const flickClose = t.vx < -0.45;
+    if (t.mode === 'open' ? (t.pos > w * 0.38 || flickOpen) : (t.pos > w * 0.62 && !flickClose)) this.open();
     else this.close();
   },
   bind() {

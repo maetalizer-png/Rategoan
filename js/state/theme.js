@@ -37,6 +37,9 @@ export const theme = {
   set(v) {
     this.value = v;
     localStorage.setItem(this.KEY, v);
-    this.applyWithVeil();
+    const run = () => this.apply();
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && document.startViewTransition) document.startViewTransition(run);
+    else run();
   },
 };
