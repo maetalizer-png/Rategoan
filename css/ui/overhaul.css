@@ -215,3 +215,84 @@
 @media (max-width: 640px) {
   #btn-command-palette { display: none !important; }
 }
+.quick-toggle { position: relative; }
+.quick-toggle.on { color: #1a4b8c; }
+.quick-toggle.on::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #1a4b8c;
+}
+.msg-actions { display: flex; align-items: center; gap: 2px; position: relative; max-width: 100%; }
+.msg-action-btn.icon-only {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.msg-action-btn.icon-only.on { color: #1a4b8c; }
+.msg-more-pop {
+  position: absolute;
+  right: 0;
+  bottom: 36px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  border-radius: 12px;
+  box-shadow: var(--rg-shadow);
+}
+.msg-more-pop[hidden] { display: none !important; }
+.msg-more-pop button { text-align: left; padding: 10px 12px; background: transparent; border: 0; }
+.coll-item-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.coll-item-tag[data-tag], .coll-note-tags button.on { background: #1a4b8c; color: #fff; }
+.coll-note-tags { display: flex; gap: 6px; overflow-x: auto; }
+.coll-note-tags button { border-radius: 999px; border: 1px solid var(--rg-line); padding: 6px 10px; background: var(--rg-surface); }
+.app-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  background: rgba(10, 12, 16, 0.45);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+}
+.app-modal[hidden] { display: none !important; }
+.app-modal-card {
+  width: 100%;
+  background: var(--rg-surface);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.app-modal-card input, .app-modal-card textarea, .memory-form input, .memory-form select {
+  width: 100%;
+  border: 1px solid var(--rg-line);
+  border-radius: 10px;
+  padding: 10px;
+  background: var(--rg-bg);
+  color: inherit;
+}
+.app-modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.memory-tabs, .memory-form { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.memory-tabs button { border-radius: 999px; border: 1px solid var(--rg-line); padding: 6px 10px; background: transparent; }
+.memory-tabs button.on { background: #1a4b8c; color: #fff; }
+.project-card.on { border-color: #1a4b8c; }
+#artifact-inline { width: 100%; min-height: 180px; border: 0; border-radius: 12px; background: #fff; margin-top: 8px; }
+#messages, .settings-page { -webkit-overflow-scrolling: touch; }
