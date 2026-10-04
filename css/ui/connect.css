@@ -107,7 +107,8 @@
   border: 1px solid var(--rg-line, #e5e7eb);
   color: var(--rg-muted, #5c6570);
 }
-.hub-card-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex: none; }
+.hub-card-side { display: flex; flex-direction: row; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; flex: none; }
+.hub-btn-token { background: var(--rg-surface, #fff); color: #1a73e8; border: 1px solid #cce1fb; border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 600; }
 .hub-btn-connect, .hub-btn-manage, .hub-tag-builtin, .hub-btn-disconnect {
   border-radius: 999px;
   font-size: 12px;

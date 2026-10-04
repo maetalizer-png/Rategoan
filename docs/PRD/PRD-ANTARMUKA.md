@@ -1,4 +1,4 @@
-<!-- Sumber: Google Drive "PRD antarmuka" file 19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw, diubah 2026-10-04T04:54:29Z. Bab 38 adalah mandat terbaru. -->
+<!-- Sumber: Google Drive "PRD antarmuka" file 19hZU_nAuS0-ITciFeNFtAu_W8AqtPLs_kG_YHXwGwuw, diubah 2026-10-04T10:58:25Z. Bab 39 menimpa model geser Studio dan Proyek. -->
 
 # 38. SPESIFIKASI PEROMBAKAN TOTAL KAPSUL MEMORI & MASTER PEMOLESAN EKOSISTEM ANTARMUKA (KERJA BESAR OKTOBER 2026)
 ## 38.1 Latar Belakang & Analisis Forensik Halaman Kapsul Memori (Tangkapan Layar 11:45 WIB)
@@ -3027,6 +3027,62 @@ Siap Dikerjakan
 docs/PRD/PRD-ANTARMUKA.md
 Sinkronisasi Master PRD Bab 29 ke repositori lokal
 Siap Dikerjakan
+# 39. SPESIFIKASI ELIMINASI BUG GESER LAYAR STUDIO, RESTRUKTURISASI TEMPLATE PROYEK TANPA SLIDE, PERAPIAN TIPOGRAFI ARTEFAK, DAN PENEGASAN ZERO-CHIP KOMPOSER (OKTOBER 2026)
+## 39.1 Latar Belakang & Analisis Hasil Uji Nyata Ponsel (Tangkapan Layar 17:28–17:40 WIB)
+Berdasarkan audit hasil uji coba langsung pengguna pada perangkat bergerak (tangkapan layar pukul 17:28–17:40 WIB di egoan.vercel.app), ditemukan lima titik friksi visual dan interaksi yang mendesak untuk disempurnakan:
+Komposer Masih Memunculkan Chip Teks (1000003873.jpg): Saat toggle Pencarian Web dinyalakan, chip teks "[Pencarian Web x]" dan placeholder "Cari di internet…" masih muncul di dalam kotak input keyboard, belum dihapus dari berkas attach.js dan composer.js.
+Bug Geser Kiri-Kanan & Kepadatan Ekstrem di Studio Kode (1000003874.jpg & 1000003875.jpg): Baris berkas virtual (.studio-files) dipadukan dengan tombol aksi (#studio-copy dan #studio-zip) pada satu baris sempit dengan overflow-x: auto;. Akibatnya, tombol script.js terpotong menjadi "s...", tombol Ekspor zip terpotong sebagian di kanan, dan seluruh halaman terasa bergoyang/bisa digeser horizontal ke kiri-kanan layaknya bug. Pengguna secara tegas menginstruksikan: tidak usah dibuat model geser/slide untuk pilihan berkas HTML/JS dan hilangkan kesan sesak di bagian atas!
+Template Halaman Proyek Terpotong Model Geser (1000003877.jpg): Template proyek (.project-templates) dijadikan baris horizontal geser (overflow-x: auto; white-space: nowrap;), menyebabkan template "Naskah" dan "Dokumen bisnis" terpotong di tepi kanan layar. Pengguna secara eksplisit meminta: jangan pakai model geser untuk bagian atas proyek!
+Tipografi Kartu Artefak Berantakan (1000003876.jpg): Teks metadata waktu dan format disatukan ke dalam satu pill badge sebelah kiri (JS · 4 OKT, 06.49) dengan huruf kapital semua (text-transform: uppercase;). Akibatnya teks melipat menjadi dua baris kaku ("JS · 4 OKT," di baris 1 dan "06.49" di baris 2), terlihat sesak dan tidak rapi.
+Tombol Konektor Masih Bertumpuk Vertikal (1000003880.jpg): Tombol Hubungkan dan Token pada kartu Google Drive dan GitHub masih bertumpuk vertikal (flex-direction: column) di sisi kanan, belum diperbaiki menjadi horizontal berdampingan.
+## 39.2 Matriks Spesifikasi & Solusi Rekayasa Antarmuka (Tugas No. 196 s/d 200)
+No
+Modul Target
+Kondisi Eksisting
+Rekayasa Baru yang Wajib Diterapkan
+Status
+196
+Komposer: Eliminasi Total Chip Teks
+modeRow masih dirender di attach.js; placeholder berubah ke "Cari di internet…".
+Hapus total blok modeRow dari renderChip() di attach.js. #attach-row HANYA untuk berkas fisik (foto/file). Placeholder dikunci mutlak "Tanya Rategoan". Indikator aktif HANYA ikon menyala di baris bawah (.quick-toggle.on).
+MANDAT WAJIB
+197
+Studio Kode: Zero Horizontal Scroll & Anti-Sesak
+.studio-filebar bergeser horizontal (overflow-x: auto), tombol terpotong ("s..."), sesak 3 baris.
+Hilangkan overflow-x: auto dan model geser! Kunci #view-studio dengan overflow-x: hidden;. Pisahkan toolbar menjadi 2 baris rapi: Baris 1: Tab Bahasa [ JavaScript | Python ] (kiri) + tombol aksi [ Salin ] & [ Ekspor ZIP ] (kanan). Baris 2 (saat JS aktif): 3 tab berkas web (index.html, style.css, script.js) dibuat pas 100% selebar layar tanpa geser (grid 3 kolom: 1fr 1fr 1fr).
+MANDAT WAJIB
+198
+Proyek: Template Statis Tanpa Geser
+.project-templates menggunakan overflow-x: auto; white-space: nowrap;, teks terpotong.
+Hapus overflow-x: auto dan white-space: nowrap! Ubah menjadi flex-wrap: wrap; gap: 8px;. Keempat template (Riset akademik, Pengembangan web, Naskah, Dokumen bisnis) langsung tampil penuh dan mudah disentuh tanpa perlu digeser.
+MANDAT WAJIB
+199
+Artefak: Restrukturisasi Kartu Elegan
+Metadata disatukan dalam pil sempit (JS · 4 OKT, 06.49) melipat 2 baris kapital.
+Pisahkan badge format dengan waktu! Kiri: hanya lencana format ringkas ([ JS ], [ PPTX ]). Tengah: judul tebal di atas (Kode), waktu dan detail di bawahnya dengan teks natural (4 Okt, 06:49 · JavaScript). Kanan: tombol aksi [ Pratinjau ] dan [ Unduh ].
+MANDAT WAJIB
+200
+Konektor: Sejajarkan Tombol Aksi
+Tombol Hubungkan dan Token bertumpuk vertikal (flex-col).
+Ubah .hub-card-side menjadi flex-direction: row; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end;. Tombol Token menggunakan gaya outline sekunder .hub-btn-token.
+MANDAT WAJIB
+## 39.3 Panduan Implementasi Berkas Kode untuk Grok Build
+js/sheets/attach.js & js/chat/composer.js:
+Di attach.js fungsi renderChip(): Hapus variabel modes, active, dan blok if (active.length) { ... modeRow ... }. Hanya jalankan perenderan jika this.files.length > 0. Jika kosong, langsung row.hidden = true; return;.
+Di composer.js fungsi setWebsearch(active): Pastikan inp.placeholder = 'Tanya Rategoan'; (jangan diubah ke teks pencarian web).
+index.html & css/ui/overhaul.css (Studio Kode):
+Strukturkan #view-studio .studio-toolbar menjadi:
+Baris atas (.studio-topbar): tab bahasa di kiri, tombol Salin kode & Ekspor zip di kanan.
+Baris berkas (.studio-files-grid): index.html, style.css, script.js dalam grid 3 kolom simetris tanpa overflow-x.
+Di CSS: #view-studio wajib memiliki overflow-x: hidden; untuk mencegah layar bergeser kiri-kanan.
+css/ui/overhaul.css (Proyek):
+Pada .project-templates: ganti overflow-x: auto dan white-space: nowrap dengan display: flex; flex-wrap: wrap; gap: 8px;.
+js/artifacts/artifacts.js & css/ui/overhaul.css (Artefak):
+Ubah struktur item kartu: Lencana format di kiri (.artifact-format), kontainer judul dan waktu di tengah (.artifact-info), serta tombol Pratinjau & Unduh di kanan (.artifact-actions).
+Format waktu relTime() ditampilkan dalam huruf normal tanpa ALL CAPS di bawah judul.
+css/ui/connect.css (Konektor):
+Pastikan .hub-card-side: display: flex; flex-direction: row; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; flex: none;.
+Tombol Token menggunakan kelas .hub-btn-token dengan gaya outline sekunder yang rapi.
 # 36. TONGGAK STABILISASI COMMIT 2c1bd30 DAN BLUEPRINT PEMBANGUNAN 3 MESIN KOGNISI UTAMA (COWORK CANVAS, SKILLS ENGINE, & BACKGROUND SCHEDULER)
 Bab ini meratifikasi pencapaian besar pada commit 2c1bd30 (17 unit test lulus), memvalidasi tuntasnya perbaikan ergonomi antarmuka, serta merumuskan arsitektur spesifik untuk 3 mesin besar yang akan dibangun pada tahap berikutnya: Cowork Canvas, Modular Skills Engine, dan Background Scheduler Daemon.
 ## 36.1 Ratifikasi Keberhasilan Implementasi Commit 2c1bd30
@@ -3362,4 +3418,43 @@ Konektor dengan Token Manual (Sovereign PAT Connect) — Opsi input Personal Acc
 174: js/connectors/connector-hub.js — Modal Input Token Pribadi (PAT) untuk Konektor Berdaulat
 175: docs/PRD/PRD-ANTARMUKA.md — Sinkronisasi Master PRD Bab 34 ke Repositori Lokal
 P1 (Tinggi): Item 127, 128 — Hapus window.prompt(), bangun modal dialog pembuatan catatan koleksi.
+# 40. SINTESIS AUDIT STRATEGIS CLAUDE: TATA KELOLA OTENTIKASI DUAL-TRACK, MITIGASI KEAMANAN TOKEN, DAN INTEGRITAS PATH REPOSITORI (OKTOBER 2026)
+## 40.1 Latar Belakang & Pengakuan Hasil Audit Lapangan Claude
+Dokumen PRD dan repositori Rategoan telah melalui audit independen menyeluruh oleh Claude dengan kesimpulan faktual tingkat tinggi:
+Integritas Pengujian Terbukti 100% Nyata: Seluruh unit test pada repositori terkonfirmasi nyata dan lulus penuh menggunakan runtime Node.js ESM (.test.mjs), membuktikan bahwa mesin Raget (BM25, penguncian bahasa, router intent, dan syntax validator) bukan klaim kosong.
+Koreksi Typo Path Dokumen: Path berkas indeks semantik yang sebelumnya salah tertulis vault/rag/semantic-index.js resmi dikoreksi ke alamat fisik aslinya: raget/raget-retrieval/semantic-index.js.
+Peringatan Kritis Konektor: Claude memberikan 3 catatan arsitektur mendasar mengenai modul Konektor yang wajib diintegrasikan ke dalam cetak biru PRD: batas kedaulatan lokal vs OAuth cloud, status kredensial CLIENT_ID, dan mitigasi keamanan penyimpanan token.
+
+## 40.2 Spesifikasi Arsitektur Otentikasi Dual-Track (Sovereign Token vs Cloud OAuth)
+Untuk menjawab pertentangan antara klaim "100% lokal mandiri" dan kebutuhan integrasi awan (Google Drive, GitHub, Gmail, Calendar), PRD menetapkan standar Arsitektur Dual-Track:
+                          ARSITEKTUR DUAL-TRACK KONEKTOR
+┌──────────────────────────────────────┬──────────────────────────────────────┐
+│ JALUR A: SOVEREIGN TOKEN (MANDIRI)   │ JALUR B: CLOUD OAUTH (SERVERLESS)    │
+├──────────────────────────────────────┼──────────────────────────────────────┤
+│ • Tombol: [ Token ]                  │ • Tombol: [ Hubungkan ]              │
+│ • Mekanisme: Personal Access Token   │ • Mekanisme: OAuth 2.0 PKCE via      │
+│   (PAT) dimasukkan langsung pengguna.│   Vercel Serverless Function.        │
+│ • Dependensi: 0% Server Luar.        │ • Dependensi: Google Cloud Console & │
+│ • Validasi: Langsung peramban ke API │   GitHub Developer App Credentials.  │
+│   resmi (api.github.com, googleapis).│ • Status: Memerlukan GOOGLE_CLIENT_ID│
+│ • Filosofi: 100% Kedaulatan Pribadi. │   & GITHUB_CLIENT_ID di Vercel env.  │
+└──────────────────────────────────────┴──────────────────────────────────────┘
+Jalur Utama Berdaulat (Sovereign PAT):  
+Pengguna dapat menghubungkan Google Drive atau GitHub secara langsung tanpa bergantung pada server pihak ketiga mana pun melalui tombol [ Token ]. Token langsung diuji keabsahannya ke endpoint profil pengguna sebelum disimpan di perangkat.
+Jalur Eksternal OAuth (Managed OAuth):  
+Tombol [ Hubungkan ] disediakan bagi pengguna yang menginginkan kemudahan otorisasi sekali klik. Jika variabel lingkungan GOOGLE_CLIENT_ID atau GITHUB_CLIENT_ID belum dikonfigurasi di server Vercel, sistem wajib merespons secara anggun dengan status 501 oauth_not_configured dan mengarahkan pengguna untuk menggunakan Jalur Token Mandiri.
+
+## 40.3 Standar Mitigasi Keamanan Token (Anti-XSS & Storage Hardening)
+Menjawab peringatan Claude mengenai kerentanan penyimpanan token mentah pada localStorage:
+Isolasi Brankas Kriptografis (Encrypted Vault):  
+Token akses konektor tidak disimpan dalam bentuk string mentah terbuka di localStorage. Token wajib dienkripsi menggunakan Web Crypto API (AES-GCM 256-bit) dan disimpan dalam brankas terisolasi rategoan_connectors_vault.
+Karantina Ekspor Cadangan (Backup Sanitization):  
+Kunci brankas dan token konektor DILARANG KERAS diikutsertakan ke dalam berkas cadangan obrolan (.rategoan.json). Saat pengguna mencadangkan data, seluruh kredensial konektor otomatis disaring dan ditinggalkan di perangkat lokal.
+Pembersihan Celah XSS (Zero-Unescaped HTML):  
+Setiap tampilan yang merender masukan pengguna (Koleksi, Artefak, Obrolan, Kapsul Memori) wajib melewati sanitasi escapeHtml() guna menjamin tidak ada skrip pihak ketiga yang dapat mengeksekusi pencurian kredensial di sisi klien.
+
+## 40.4 Pengendalian Kecepatan vs Presisi Eksekusi Grok Build
+Kecepatan tinggi Grok Build diakui sebagai keunggulan masif proyek ini. Namun, untuk mencegah timbulnya regresi antarmuka (seperti bug geser layar Studio atau pemotongan template Proyek), Grok Build diwajibkan:
+Menjadikan Bab 37, Bab 38, dan Bab 39 sebagai checklist verifikasi visual sebelum melakukan komit kode.
+Memastikan gerbang pengujian npm test (17/17 lulus) dan npm run lint (100% lulus) selalu hijau sebelum melakukan publikasi rilis.
 P2 (Strategis): Item 141, 142 — Fondasi Canvas Live Preview & Multi-file Coder Sandbox.

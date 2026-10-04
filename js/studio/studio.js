@@ -131,9 +131,7 @@ export const studioPage = {
       if (tabJs) tabJs.classList.toggle('on', next === 'javascript');
       if (tabPy) tabPy.classList.toggle('on', next === 'python');
       const files = $('studio-files');
-      const zip = $('studio-zip');
       if (files) files.hidden = next !== 'javascript';
-      if (zip) zip.hidden = next !== 'javascript';
       writeEditor(next === 'python' ? pythonCode : (WEB[webFile] || ''), next === 'python' ? 'python' : 'javascript');
     };
     if (tabJs) tabJs.onclick = () => pick('javascript');

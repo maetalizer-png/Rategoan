@@ -145,12 +145,8 @@
 .artifact-card-page strong { flex: 1; font-size: 14px; }
 .artifact-card-page span {
   font-size: 11px;
-  text-transform: uppercase;
   font-weight: 600;
   color: var(--rg-muted);
-  background: var(--rg-surface-2);
-  padding: 2px 8px;
-  border-radius: 999px;
 }
 .artifact-card-page button, .project-card button {
   padding: 6px 12px;
@@ -308,10 +304,12 @@
 #messages, .settings-page { -webkit-overflow-scrolling: touch; }
 
 .studio-toolbar { flex-direction: column; align-items: stretch; }
-.studio-filebar { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.studio-filebar .studio-files { flex: 1; margin: 0; }
-.studio-filebar #studio-copy, .studio-filebar #studio-zip { flex: 0 0 auto; }
+.studio-topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.studio-util { display: flex; gap: 6px; flex: none; }
+.studio-files { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; overflow: hidden; margin: 0; }
+.studio-files button { min-width: 0; text-align: center; }
 .studio-files[hidden], #studio-zip[hidden] { display: none !important; }
+#view-studio, #view-studio .settings-page { overflow-x: hidden; max-width: 100%; }
 #studio-terminal-status.studio-status-ok {
   background: #e8f6ee;
   color: #146c43;
@@ -319,8 +317,8 @@
   padding: 2px 10px;
   font-weight: 600;
 }
-.project-templates { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.project-templates button { flex: 0 0 auto; white-space: nowrap; }
+.project-templates { display: flex; flex-wrap: wrap; overflow: visible; gap: 8px; }
+.project-templates button { flex: 0 1 auto; white-space: normal; }
 .project-create-row { display: flex; gap: 8px; align-items: center; margin: 8px 0 12px; }
 .project-create-row input { flex: 1; min-width: 0; }
 .project-instruction-box { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 14px; }
@@ -354,7 +352,19 @@
 }
 .coll-empty-card strong { display: block; color: var(--rg-text); margin-bottom: 6px; }
 .memory-badge { align-self: flex-start; text-transform: capitalize; }
-.artifact-meta { font-size: 11px; color: var(--rg-muted); font-weight: 600; letter-spacing: 0.02em; }
+.artifact-format {
+  flex: none;
+  text-transform: uppercase;
+  background: var(--rg-surface-2);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.artifact-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.artifact-time { text-transform: none; font-weight: 500; }
+.artifact-actions { display: flex; gap: 6px; flex: none; }
+.artifact-meta { font-size: 11px; color: var(--rg-muted); font-weight: 600; }
 #memory-capsule {
   position: fixed;
   inset: 0;

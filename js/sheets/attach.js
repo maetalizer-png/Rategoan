@@ -123,38 +123,11 @@ export const attach = {
     const row = $('attach-row');
     if (!row) return;
     row.innerHTML = '';
-    const modes = this.modes || {};
-    const active = [
-      modes.websearch ? ['websearch', 'Pencarian Web'] : null,
-      modes.think ? ['think', 'Berpikir lebih keras'] : null,
-      modes.research ? ['research', 'Riset mendalam'] : null,
-    ].filter(Boolean);
-    if (!this.files.length && !active.length) {
+    if (!this.files.length) {
       row.hidden = true;
       return;
     }
     row.hidden = false;
-    if (active.length) {
-      const modeRow = document.createElement('div');
-      modeRow.className = 'mode-row';
-      active.forEach((pair) => {
-        const chip = document.createElement('span');
-        chip.className = 'mode-chip' + (pair[0] === 'websearch' ? ' web' : '');
-        const label = document.createElement('span');
-        label.textContent = pair[1];
-        const x = document.createElement('button');
-        x.type = 'button';
-        x.setAttribute('aria-label', 'Tutup ' + pair[1]);
-        x.textContent = 'x';
-        x.onclick = () => {
-          if (this.onModeOff) this.onModeOff(pair[0]);
-        };
-        chip.appendChild(label);
-        chip.appendChild(x);
-        modeRow.appendChild(chip);
-      });
-      row.appendChild(modeRow);
-    }
     this.files.forEach((file, index) => {
       const chip = document.createElement('div');
       chip.className = 'attach-chip';

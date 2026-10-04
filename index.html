@@ -157,18 +157,20 @@
         </header>
         <p class="coll-tab-desc">JavaScript dan Python di perangkat ini.</p>
         <div class="studio-toolbar">
-          <div class="studio-tabs" role="tablist">
-            <button type="button" id="studio-tab-js" class="on">JavaScript</button>
-            <button type="button" id="studio-tab-py">Python</button>
-          </div>
-          <div class="studio-filebar">
-            <div class="studio-files" id="studio-files">
-              <button type="button" data-studio-file="index.html">index.html</button>
-              <button type="button" data-studio-file="style.css">style.css</button>
-              <button type="button" data-studio-file="script.js" class="on">script.js</button>
+          <div class="studio-topbar">
+            <div class="studio-tabs" role="tablist">
+              <button type="button" id="studio-tab-js" class="on">JavaScript</button>
+              <button type="button" id="studio-tab-py">Python</button>
             </div>
-            <button type="button" id="studio-copy" class="plain">Salin kode</button>
-            <button type="button" id="studio-zip" class="plain">Ekspor zip</button>
+            <div class="studio-util">
+              <button type="button" id="studio-copy" class="plain">Salin</button>
+              <button type="button" id="studio-zip" class="plain">Ekspor ZIP</button>
+            </div>
+          </div>
+          <div class="studio-files" id="studio-files">
+            <button type="button" data-studio-file="index.html">index.html</button>
+            <button type="button" data-studio-file="style.css">style.css</button>
+            <button type="button" data-studio-file="script.js" class="on">script.js</button>
           </div>
         </div>
         <textarea id="studio-editor" class="studio-editor" rows="14" spellcheck="false"></textarea>

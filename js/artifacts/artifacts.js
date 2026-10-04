@@ -73,11 +73,19 @@ function paint() {
   shown.forEach((item) => {
     const li = document.createElement('li');
     li.className = 'artifact-card-page';
+    const format = document.createElement('span');
+    format.className = 'artifact-format';
+    format.textContent = extOf(item);
+    const info = document.createElement('div');
+    info.className = 'artifact-info';
     const title = document.createElement('strong');
     title.textContent = item.title || item.fileName || 'Berkas';
-    const meta = document.createElement('span');
-    meta.className = 'artifact-meta';
-    meta.textContent = [extOf(item), relTime(item.time)].filter(Boolean).join(' · ');
+    const time = document.createElement('span');
+    time.className = 'artifact-time';
+    const names = { slide: 'Presentasi', document: 'Dokumen', code: 'Kode', chart: 'Grafik', table: 'Tabel' };
+    time.textContent = [relTime(item.time), names[kindOf(item)] || ''].filter(Boolean).join(' · ');
+    info.appendChild(title);
+    info.appendChild(time);
     const open = document.createElement('button');
     open.type = 'button';
     open.textContent = 'Pratinjau';
@@ -97,10 +105,13 @@ function paint() {
     save.type = 'button';
     save.textContent = 'Unduh';
     save.onclick = () => open.click();
-    li.appendChild(meta);
-    li.appendChild(title);
-    li.appendChild(open);
-    li.appendChild(save);
+    const actions = document.createElement('div');
+    actions.className = 'artifact-actions';
+    actions.appendChild(open);
+    actions.appendChild(save);
+    li.appendChild(format);
+    li.appendChild(info);
+    li.appendChild(actions);
     ul.appendChild(li);
   });
 }

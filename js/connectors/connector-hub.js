@@ -206,7 +206,7 @@ export const connectorHub = {
       };
       side.appendChild(connect);
       if (id === 'github' || id === 'google_drive') {
-        const tokenBtn = el('button', 'hub-btn-connect', 'Token');
+        const tokenBtn = el('button', 'hub-btn-token', 'Token');
         tokenBtn.type = 'button';
         tokenBtn.onclick = (event) => {
           event.stopPropagation();

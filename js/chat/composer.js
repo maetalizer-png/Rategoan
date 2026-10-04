@@ -406,7 +406,7 @@ export const composer = {
       card.classList.toggle('active', active);
       card.setAttribute('aria-checked', String(active));
     }
-    if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
+    if (inp) inp.placeholder = 'Tanya Rategoan';
     this.paintQuick();
     this.syncModes();
   },
