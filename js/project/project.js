@@ -3,6 +3,8 @@ import { router } from '../core/router.js';
 import { workspace } from '../state/workspace.js';
 import { store } from '../state/store.js';
 import { toast } from '../core/toast.js';
+import { extractPdfText } from '../../shared/pdf-extract.js';
+import { readZipText } from '../../shared/zip-local.js';
 
 const TEMPLATES = {
   'Riset akademik': 'Tulis dengan kutipan, bandingkan sumber, dan pisahkan fakta dari tafsiran.',
@@ -39,7 +41,6 @@ function activate(project) {
   showProjectBar(project);
   toast.show('Proyek: ' + project.name);
   paint();
-  router.go('chat');
 }
 
 function cardList(ul) {
@@ -112,14 +113,32 @@ function renderPinned(project) {
 }
 
 function readFileText(file) {
+  const name = file.name || '';
+  if (/\.pdf$/i.test(name)) {
+    return file.arrayBuffer().then((buf) => extractPdfText(buf).then((text) => String(text || '').slice(0, 8000))).catch((e) => {
+      console.warn('[Rategoan Fallback] Proyek:', e);
+      return '';
+    });
+  }
+  if (/\.docx$/i.test(name)) {
+    return file.arrayBuffer().then((buf) => readZipText(buf, 'word/document.xml').then((xml) => String(xml || '')
+      .replace(/<w:p\b[^>]*>/g, '\n')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim()
+      .slice(0, 8000))).catch((e) => {
+      console.warn('[Rategoan Fallback] Proyek:', e);
+      return '';
+    });
+  }
   return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result || '').slice(0, 8000));
-    reader.onerror = () => resolve('');
-    if (file.type && file.type.indexOf('text') < 0 && !/\.(txt|md|csv|json)$/i.test(file.name || '')) {
+    if (file.type && file.type.indexOf('text') < 0 && !/\.(txt|md|csv|json)$/i.test(name)) {
       resolve('');
       return;
     }
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || '').slice(0, 8000));
+    reader.onerror = () => resolve('');
     reader.readAsText(file);
   });
 }
@@ -130,17 +149,23 @@ function paint() {
   const list = workspace.list();
   const emptyView = $('project-empty-state');
   const activeView = $('project-active-panel');
+  const toggle = $('project-new-toggle');
+  const createBox = $('project-create-box');
   showProjectBar(cur);
   if (!list.length) {
     if (curLabel) curLabel.textContent = 'Kelola ruang kerja terisolasi dengan instruksi mandiri.';
     if (emptyView) emptyView.hidden = false;
     if (activeView) activeView.hidden = true;
+    if (toggle) toggle.hidden = true;
+    if (createBox) createBox.hidden = false;
     const ul = $('project-list-sheet');
     if (ul) ul.innerHTML = '';
     return;
   }
   if (emptyView) emptyView.hidden = true;
   if (activeView) activeView.hidden = !cur;
+  if (toggle) toggle.hidden = false;
+  if (createBox && !createBox.dataset.open) createBox.hidden = true;
   if (curLabel) curLabel.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Pilih proyek untuk mengaktifkan.';
   const prompt = $('project-prompt');
   if (prompt && document.activeElement !== prompt) prompt.value = cur && cur.systemPrompt ? cur.systemPrompt : '';
@@ -189,6 +214,14 @@ export const projectPage = {
     };
     const pin = $('project-pin-btn');
     const picker = $('project-file-pick');
+    const toggle = $('project-new-toggle');
+    const createBox = $('project-create-box');
+    const openChat = $('project-open-chat');
+    if (toggle && createBox) toggle.onclick = () => {
+      createBox.hidden = !createBox.hidden;
+      createBox.dataset.open = createBox.hidden ? '' : '1';
+    };
+    if (openChat) openChat.onclick = () => router.go('chat');
     if (pin && picker) pin.onclick = () => picker.click();
     if (picker) picker.onchange = async () => {
       const active = workspace.current();

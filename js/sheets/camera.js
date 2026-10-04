@@ -58,15 +58,16 @@ export const camera = {
     const file = new File([blob], 'kamera-' + Date.now() + '.jpg', { type: 'image/jpeg' });
     this.close();
     const ocr = await visionOcr.recognize(file);
-    const inp = $('chat-input');
-    if (ocr.ok && ocr.text && inp) {
-      inp.value = (inp.value ? inp.value + '\n' : '') + ocr.text;
-      inp.dispatchEvent(new Event('input'));
-      toast.show('Teks kamera masuk ke kotak tulis');
-    } else if (ocr && ocr.message) {
-      toast.show(ocr.message);
-    }
     await attach.handleFile(file);
+    const last = attach.files[attach.files.length - 1];
+    if (last && ocr && ocr.ok && ocr.text) {
+      last.fileText = ocr.text;
+      last.ocrNote = 'Teks gambar terbaca';
+      attach.renderChip();
+      toast.show('Foto siap. Teks gambar ikut ke jawaban.');
+    } else {
+      toast.show('Foto dilampirkan.');
+    }
   },
   bind() {
     $('sheet-camera').onclick = () => this.open();

@@ -101,7 +101,7 @@ async function evaluate() {
   const result = computeQuality(notes);
   try {
     localStorage.setItem(QUALITY_KEY, JSON.stringify(Object.assign({ updatedAt: Date.now() }, result)));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] quality:', e); }
   return result;
 }
 

@@ -42,7 +42,7 @@ export function splitRich(text) {
     try {
       const parsed = JSON.parse(body);
       if (parsed && parsed.name) tools.push({ name: String(parsed.name), parameters: parsed.parameters || {} });
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] artifact-card:', e); }
     return '';
   });
   const clean = source
@@ -133,7 +133,7 @@ function download(item) {
     try {
       const parsed = JSON.parse(item.body);
       if (Array.isArray(parsed) && parsed.length) files = parsed;
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] artifact-card:', e); }
     downloadBytes(name, buildZip(files), 'application/zip');
     return;
   }

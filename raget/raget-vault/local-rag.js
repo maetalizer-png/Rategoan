@@ -77,4 +77,17 @@ export async function indexDocs(docs) {
   return docs.length;
 }
 
-export const localRag = Object.freeze({ searchDocs, indexDocs, tokenize });
+export async function listDocs() {
+  const db = await openDb();
+  if (!db) return [];
+  const rows = await new Promise((resolve) => {
+    const tx = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => resolve([]);
+  });
+  db.close();
+  return rows;
+}
+
+export const localRag = Object.freeze({ searchDocs, indexDocs, listDocs, tokenize });

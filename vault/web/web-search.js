@@ -126,11 +126,11 @@ async function fetchSummaryByTitle(title, lang) {
   try {
     const longer = await fetchExtractByTitle(summary.title || title, lang);
     if (longer && longer.length > extract.length) extract = longer;
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] web-search:', e); }
   let outline = [];
   try {
     outline = await fetchOutline(summary.title || title, lang);
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] web-search:', e); }
   return { title: summary.title, extract, outline, url: page || wikiPageUrl(summary.title || title, lang), lang, source: 'wikipedia' };
 }
 

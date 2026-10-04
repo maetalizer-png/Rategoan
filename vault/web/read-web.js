@@ -34,13 +34,11 @@ async function read(url) {
   try {
     const text = await fetchDirect(url);
     if (text) return { ok: true, text: await answerComposer.lockAnswer('', text) };
-  } catch (e) {
-  }
+  } catch (e) { console.warn('[Rategoan Fallback] read-web:', e); }
   try {
     const text = await fetchViaJina(url);
     if (text) return { ok: true, text: await answerComposer.lockAnswer('', text), viaJina: true };
-  } catch (e) {
-  }
+  } catch (e) { console.warn('[Rategoan Fallback] read-web:', e); }
   return { ok: false, stub: true, message: CORS_MESSAGE };
 }
 

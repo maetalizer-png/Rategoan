@@ -5,7 +5,7 @@ export const haptics = {
     if (hemat.enabled()) return;
     try {
       if (navigator.vibrate) navigator.vibrate(ms || 10);
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] haptics:', e); }
   },
 };
 

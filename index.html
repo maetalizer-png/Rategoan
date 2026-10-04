@@ -203,7 +203,7 @@
           <h1>Artefak</h1>
         </header>
         <p class="coll-tab-desc">Slide, kode, dokumen, dan tabel yang sudah dibuat.</p>
-        <div id="artifact-filters" class="coll-filters"></div>
+        <div id="artifact-filters" class="artifact-filters"></div>
         <ul id="artifact-page-list" class="artifact-gallery"></ul>
         <iframe id="artifact-inline" title="Pratinjau artefak" hidden sandbox="allow-scripts"></iframe>
       </div>
@@ -235,8 +235,15 @@
             </svg>
           </button>
           <h1>Proyek</h1>
+          <button type="button" id="project-new-toggle" class="project-new-btn" hidden>+ Proyek Baru</button>
         </header>
         <p id="project-current" class="coll-tab-desc"></p>
+        <div id="project-create-box">
+          <div class="project-create-row">
+            <input id="project-name-sheet" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
+            <button class="attach-plain" id="project-create-sheet" type="button">Buat proyek</button>
+          </div>
+        </div>
         <div id="project-empty-state" class="project-create-card">
           <div class="project-templates">
             <button type="button" data-template="Riset akademik">Riset akademik</button>
@@ -244,19 +251,16 @@
             <button type="button" data-template="Naskah">Naskah</button>
             <button type="button" data-template="Dokumen bisnis">Dokumen bisnis</button>
           </div>
-          <div class="project-create-row">
-            <input id="project-name-sheet" class="hist-search-input" type="text" placeholder="Nama proyek baru" autocomplete="off">
-            <button class="attach-plain" id="project-create-sheet" type="button">Buat proyek</button>
-          </div>
         </div>
         <div id="project-active-panel" hidden>
+          <button type="button" id="project-open-chat" class="project-new-btn">Buka di Obrolan</button>
           <div class="project-instruction-box">
             <label class="project-label" for="project-prompt">Instruksi proyek</label>
             <textarea id="project-prompt" class="project-textarea" rows="4" placeholder="Instruksi khusus proyek ini"></textarea>
           </div>
           <div class="project-files">
             <button type="button" id="project-pin-btn">+ Sematkan Berkas</button>
-            <input type="file" id="project-file-pick" hidden multiple accept=".txt,.md,.csv,.json,.pdf,text/plain">
+            <input type="file" id="project-file-pick" hidden multiple accept=".txt,.md,.csv,.json,.pdf,.docx,text/plain">
             <ul id="project-file-list" class="project-file-list"></ul>
           </div>
           <p class="project-backup-hint">Data proyek ada di perangkat ini. Cadangkan dari Pengaturan supaya tidak hilang saat cache dibersihkan.</p>
@@ -306,84 +310,44 @@
         </svg>
       </button>
     </div>
-    <p class="attach-kicker">Unggah berkas</p>
+    <p class="attach-kicker">Media</p>
     <div class="attach-grid">
-      <button class="attach-card" id="sheet-camera">
-        <span class="attach-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
-        </span>
-        Kamera
-      </button>
-      <button class="attach-card" id="sheet-photo">
-        <span class="attach-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
-          </svg>
-        </span>
-        Foto
-      </button>
-      <button class="attach-card" id="sheet-file">
-        <span class="attach-ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-        </span>
-        File
-      </button>
+      <button class="attach-card" id="sheet-camera" type="button">Kamera</button>
+      <button class="attach-card" id="sheet-photo" type="button">Foto</button>
+      <button class="attach-card" id="sheet-file" type="button">Dokumen</button>
+      <button class="attach-card" id="sheet-voice" type="button">Memo Suara</button>
     </div>
     <p class="attach-kicker">Mode penalaran</p>
-    <button class="attach-plain" id="sheet-websearch" role="switch" aria-checked="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/>
-      </svg>
-      <span class="attach-plain-label">Pencarian Web</span>
+    <button class="attach-plain" id="sheet-websearch" type="button" role="switch" aria-checked="false">
+      <span class="attach-plain-label">Pencarian Web<small>Jawaban memakai sumber web</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
-    <button class="attach-plain" id="sheet-slide">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="4" width="20" height="13" rx="2"/>
-        <line x1="6" y1="8" x2="14" y2="8"/>
-        <line x1="6" y1="11.5" x2="18" y2="11.5"/>
-        <line x1="8" y1="21" x2="16" y2="21"/>
-        <line x1="12" y1="17" x2="12" y2="21"/>
-      </svg>
+    <button class="attach-plain" id="sheet-think" type="button" role="switch" aria-checked="false">
+      <span class="attach-plain-label">Berpikir lebih keras<small>Jejak langkah sebelum jawaban</small></span>
+      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
+    </button>
+    <button class="attach-plain" id="sheet-research" type="button" role="switch" aria-checked="false">
+      <span class="attach-plain-label">Riset mendalam<small>Beberapa kueri lalu dirangkum</small></span>
+      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
+    </button>
+    <button class="attach-plain" id="sheet-fast" type="button" role="switch" aria-checked="false">
+      <span class="attach-plain-label">Mode kilat<small>Jawaban lebih hemat</small></span>
+      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
+    </button>
+    <p class="attach-kicker">Studio</p>
+    <button class="attach-plain" id="sheet-slide" type="button">
       <span class="attach-plain-label">Buat Slide (.pptx)</span>
     </button>
-    <button class="attach-plain" id="sheet-think" role="switch" aria-checked="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M9 10h.01M15 10h.01M8 15c1.2 1.3 2.5 2 4 2s2.8-.7 4-2"/>
-      </svg>
-      <span class="attach-plain-label">Berpikir lebih keras</span>
-      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
+    <button class="attach-plain" id="sheet-doc" type="button">
+      <span class="attach-plain-label">Buat Dokumen (.docx)</span>
     </button>
-    <button class="attach-plain" id="sheet-research" role="switch" aria-checked="false">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="7"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <span class="attach-plain-label">Riset mendalam</span>
-      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
+    <button class="attach-plain" id="sheet-code-studio" type="button">
+      <span class="attach-plain-label">Studio Kode</span>
     </button>
-    <button class="attach-plain" id="sheet-project">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-      </svg>
-      <span class="attach-plain-label">Masukkan ke proyek</span>
+    <button class="attach-plain" id="sheet-project" type="button">
+      <span class="attach-plain-label" id="sheet-project-label">Kaitkan ke Proyek</span>
     </button>
-    <button class="attach-plain" id="sheet-learn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-      </svg>
+    <button class="attach-plain" id="sheet-learn" type="button">
       <span class="attach-plain-label">Belajar terpandu</span>
     </button>
 
@@ -536,5 +500,9 @@
   <div id="theme-veil" aria-hidden="true"></div>
 
   <script type="module" src="js/main.js"></script>
+  <div id="image-lightbox" class="image-lightbox" hidden>
+    <button type="button" id="image-lightbox-close" aria-label="Tutup">Tutup</button>
+    <img id="image-lightbox-img" alt="Foto">
+  </div>
 </body>
 </html>

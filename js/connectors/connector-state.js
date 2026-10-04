@@ -7,6 +7,12 @@ const CATALOG = {
   google_calendar: { display_name: 'Google Calendar', tools_count: 6, scopes: ['calendar'] },
   web_search_reader: { display_name: 'Web Search & Reader', tools_count: 4, system_native: true, connected: true },
   local_sandbox: { display_name: 'Sandbox Komputer & Kode', tools_count: 5, system_native: true, connected: true },
+  local_document_vault: { display_name: 'Vault Dokumen', tools_count: 6, system_native: true, connected: true },
+  local_vision_ocr: { display_name: 'Mata & OCR', tools_count: 4, system_native: true, connected: true },
+  local_voice_audio: { display_name: 'Suara & Audio', tools_count: 4, system_native: true, connected: true },
+  local_math_compute: { display_name: 'Hitung & Data', tools_count: 5, system_native: true, connected: true },
+  local_artifact_canvas: { display_name: 'Kanvas Artefak', tools_count: 5, system_native: true, connected: true },
+  local_agenda_routine: { display_name: 'Agenda Lokal', tools_count: 5, system_native: true, connected: true },
 };
 
 function blank() {

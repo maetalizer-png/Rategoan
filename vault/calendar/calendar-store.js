@@ -14,7 +14,7 @@ function readAll() {
 function writeAll(list) {
   try {
     localStorage.setItem(KEY, JSON.stringify(list));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] calendar-store:', e); }
 }
 
 function addAll(events) {

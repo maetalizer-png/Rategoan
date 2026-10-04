@@ -20,7 +20,7 @@ export const attach = {
     $('pick-' + kind).click();
   },
   makeThumb(file, max) {
-    max = max || 96;
+    max = max || 800;
     return new Promise((resolve) => {
       const url = URL.createObjectURL(file);
       const img = new Image();
@@ -33,8 +33,9 @@ export const attach = {
           canvas.width = w;
           canvas.height = h;
           canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL('image/jpeg', 0.7));
+          resolve(canvas.toDataURL('image/jpeg', 0.85));
         } catch (e) {
+          console.warn('[Rategoan Fallback] Lampiran:', e);
           resolve(null);
         }
         URL.revokeObjectURL(url);
@@ -151,6 +152,12 @@ export const attach = {
         this.renderChip();
       };
       chip.appendChild(name);
+      if (file.ocrNote) {
+        const note = document.createElement('span');
+        note.className = 'attach-ocr';
+        note.textContent = file.ocrNote;
+      chip.appendChild(note);
+      }
       chip.appendChild(x);
       row.appendChild(chip);
     });

@@ -365,7 +365,7 @@ async function renderPerpustakaan() {
       ...evernote.map((it) => ({ id: it.id, kind: 'evernote', store: 'evernote', text: (it.title || 'Evernote') + ' — ' + (it.text || '').slice(0, 140), time: it.addedAt || 0 })),
       ...whatsapp.map((it) => ({ id: it.id, kind: 'whatsapp', store: 'whatsapp', text: (it.text || '').slice(0, 140), time: it.addedAt || 0 })),
     ];
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] collection:', e); }
   if (myGen !== renderGen) return;
 
   const memoryImport = await import('../../raget/raget-memory/memory-index.js');
@@ -426,7 +426,7 @@ async function renderPerpustakaan() {
         const mod = await import('../../vault/' + storeName + '/' + storeName + '-store.js');
         const storeObj = mod[storeName + 'Store'];
         if (storeObj && storeObj.removeItem) await storeObj.removeItem(id);
-      } catch (e) {}
+      } catch (e) { console.warn('[Rategoan Fallback] collection:', e); }
     }
     toast.show('Dihapus');
     renderPerpustakaan();

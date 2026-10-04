@@ -277,8 +277,7 @@ async function deleteCheckpoint(name) {
             tx.onerror = () => reject(tx.error || new Error('Gagal menghapus checkpoint'));
         });
         db.close();
-    } catch (e) {
-    }
+    } catch (e) { console.warn('[Rategoan Fallback] llm-checkpoint:', e); }
 }
 
 export const LLMCheckpoint = {

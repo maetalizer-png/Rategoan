@@ -31,7 +31,7 @@ function subjectWords(s) {
 function write(data) {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] memory-long:', e); }
 }
 
 function remember(key, value) {

@@ -17,7 +17,7 @@ function notify(reminder) {
   if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
     try {
       new Notification(title, { body });
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] scheduler:', e); }
   }
   if (onDueCallback) onDueCallback(reminder);
 }

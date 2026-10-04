@@ -148,7 +148,7 @@ async function main() {
     const prevCount = await page.locator('.msg.ai').count();
     await page.fill('#chat-input', q);
     await page.click('#btn-send');
-    try { await waitForNewStableReply(page, prevCount); } catch (e) {}
+    try { await waitForNewStableReply(page, prevCount); } catch (e) { console.warn('[Rategoan Fallback] measure-kv:', e); }
   }
   const elapsed = Date.now() - t0;
 

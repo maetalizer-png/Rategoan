@@ -1,5 +1,6 @@
 import { connectorState } from './connector-state.js';
 import { emitConnector } from './connector-events.js';
+import { isLocalTool, runLocalTool } from './local-tools.js';
 
 const ROUTES = [
   ['drive_', '/api/connectors/drive', 'google_drive'],
@@ -35,6 +36,7 @@ export function toolLevel(name) {
 }
 
 export async function runConnectorTool(name, parameters) {
+  if (isLocalTool(name)) return runLocalTool(name, parameters);
   const route = toolRoute(name);
   if (!route) return { ok: false, error: 'alat_tidak_dikenal' };
   const headers = { 'content-type': 'application/json' };

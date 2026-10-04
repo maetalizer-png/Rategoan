@@ -86,6 +86,8 @@ const TEMPLATE = `
           <div class="profile-avatar" id="profile-avatar"></div>
           <div class="profile-name" id="profile-name"></div>
           <div class="profile-mail" id="profile-mail"></div>
+          <div class="profile-badge">Akun lokal berdaulat</div>
+          <div class="storage-meter" aria-hidden="true"><span id="storage-meter-bar"></span></div>
         </div>
         <hr class="divider" id="profile-divider" hidden>
 
@@ -105,9 +107,9 @@ const TEMPLATE = `
                   Mode Gelap
                 </span>
                 <span class="font-btns">
-                  <button class="theme-btn" data-theme="light">T</button>
-                  <button class="theme-btn" data-theme="auto">A</button>
-                  <button class="theme-btn" data-theme="dark">G</button>
+                  <button class="theme-btn" data-theme="light">Terang</button>
+                  <button class="theme-btn" data-theme="auto">Sistem</button>
+                  <button class="theme-btn" data-theme="dark">Gelap</button>
                 </span>
               </div>
               <div class="set-hint" id="theme-hint"></div>
@@ -481,6 +483,8 @@ export const settings = {
       const kb = Math.max(1, Math.round(storage.usage() / 1024));
       const pct = storage.percent();
       info.textContent = sessions.length + ' chat • ' + kb + ' KB (' + pct + '%)';
+      const bar = $('storage-meter-bar');
+      if (bar) bar.style.width = Math.min(100, pct) + '%';
       if (pct >= 80 && !this._warned) {
         this._warned = true;
         toast.show('Penyimpanan hampir penuh (' + pct + '%)');

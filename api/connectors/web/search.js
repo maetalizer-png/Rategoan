@@ -13,7 +13,7 @@ function decodeDuckLink(href) {
     const url = new URL(raw, 'https://duckduckgo.com');
     const uddg = url.searchParams.get('uddg');
     if (uddg) return uddg;
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] search:', e); }
   if (raw.indexOf('http') === 0) return raw;
   return '';
 }

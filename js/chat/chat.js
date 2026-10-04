@@ -23,6 +23,25 @@ import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 
 const URL_RE = /https?:\/\/\S+/i;
 
+function appendCitations(parent, text) {
+  const found = String(text || '').match(/https?:\/\/[^\s)]+/g);
+  if (!found || !found.length) return;
+  const row = document.createElement('div');
+  row.className = 'cite-row';
+  found.slice(0, 3).forEach((url) => {
+    let host = url;
+    try { host = new URL(url).hostname.replace(/^www\./, ''); } catch (e) { console.warn('[Rategoan Fallback] Chat:', e); }
+    const chip = document.createElement('a');
+    chip.className = 'cite-chip';
+    chip.href = url;
+    chip.target = '_blank';
+    chip.rel = 'noopener';
+    chip.textContent = host;
+    row.appendChild(chip);
+  });
+  parent.appendChild(row);
+}
+
 function buildSourceBadge() {
   const badge = document.createElement('div');
   badge.className = 'msg-source-badge';
@@ -193,8 +212,9 @@ function buildActions(text) {
       menu.hidden = true;
       return;
     }
+    const snippet = text.slice(0, 28).trim().replace(/\s+/g, ' ');
     const files = (cur.pinnedFiles || []).concat([{
-      name: 'Kutipan obrolan',
+      name: 'Kutipan: ' + snippet + (text.length > 28 ? '...' : ''),
       textContent: text.slice(0, 1000),
       size: text.length,
     }]);
@@ -231,6 +251,11 @@ export const chat = {
     const box = $('messages');
     const empty = $('empty-state');
     if (!box) return;
+    const closer = $('image-lightbox-close');
+    if (closer && !closer.dataset.bound) {
+      closer.dataset.bound = '1';
+      closer.onclick = () => { const light = $('image-lightbox'); if (light) light.hidden = true; };
+    }
     box.innerHTML = '';
     const s = this.current();
     const has = !!(s && s.messages.length);
@@ -284,15 +309,22 @@ export const chat = {
         if (isRich(m.text)) mountRich(b, m.text);
         else b.innerHTML = markdown.render(m.text);
         d.appendChild(b);
+        appendCitations(d, m.text);
       }
-      if (m.attach) {
-        if (m.attach.thumb) {
-          const img = document.createElement('img');
-          img.className = 'msg-thumb';
-          img.src = m.attach.thumb;
-          img.alt = m.attach.name || 'lampiran';
-          d.appendChild(img);
-        }
+      if (m.attach && (m.attach.full || m.attach.thumb)) {
+        const img = document.createElement('img');
+        img.className = 'msg-photo';
+        img.src = m.attach.full || m.attach.thumb;
+        img.alt = 'Foto';
+        img.onclick = () => {
+          const box = $('image-lightbox');
+          const view = $('image-lightbox-img');
+          if (!box || !view) return;
+          view.src = img.src;
+          box.hidden = false;
+        };
+        d.appendChild(img);
+      } else if (m.attach && m.attach.name) {
         const a = document.createElement('span');
         a.className = 'msg-attach';
         a.innerHTML = ic('paperclip');
@@ -300,6 +332,28 @@ export const chat = {
         d.appendChild(a);
       }
       d.appendChild(buildMetaRow(m.time));
+      if (m.role === 'user') {
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.className = 'msg-edit';
+        edit.textContent = 'Ubah';
+        edit.onclick = () => {
+          const session = this.current();
+          if (!session) return;
+          session.forks = session.forks || [];
+          session.forks.push(session.messages.slice(idx));
+          session.forkIndex = session.forks.length;
+          session.messages = session.messages.slice(0, idx);
+          store.save();
+          const inp = $('chat-input');
+          if (inp) {
+            inp.value = m.text;
+            inp.focus();
+          }
+          this.renderMessages();
+        };
+        d.appendChild(edit);
+      }
       if (m.role === 'user' && m.attach && m.attach.full) {
         const row = document.createElement('div');
         row.className = 'msg-actions';

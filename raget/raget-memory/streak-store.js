@@ -15,7 +15,7 @@ function read() {
 function write(data) {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] streak-store:', e); }
 }
 
 function bump() {

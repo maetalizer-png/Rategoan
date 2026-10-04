@@ -12,6 +12,6 @@ export const memoryPreference = {
   set(active) {
     try {
       localStorage.setItem(KEY, active ? 'on' : 'off');
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] memory-preference:', e); }
   },
 };

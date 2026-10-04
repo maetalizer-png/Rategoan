@@ -707,7 +707,7 @@ async function bagikanKartu(query) {
     try {
       await navigator.share({ text: card });
       return 'Kartu ' + meta.name + ' siap dibagikan.';
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] agent-tools:', e); }
   }
   try {
     await navigator.clipboard.writeText(card);

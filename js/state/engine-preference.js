@@ -8,6 +8,6 @@ export const enginePreference = {
   set(pref) {
     try {
       localStorage.setItem(KEY, pref === 'neural' ? 'neural' : 'template');
-    } catch (e) {}
+    } catch (e) { console.warn('[Rategoan Fallback] engine-preference:', e); }
   },
 };

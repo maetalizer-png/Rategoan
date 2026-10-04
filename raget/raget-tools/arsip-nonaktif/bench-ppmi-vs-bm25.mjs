@@ -123,10 +123,10 @@ async function main() {
   let randomBaseline = null;
   try {
     bm25Baseline = JSON.parse(readFileSync(path.join(__dirname, 'retrieval-bench-report.json'), 'utf8'));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] bench-ppmi-vs-bm25:', e); }
   try {
     randomBaseline = JSON.parse(readFileSync(path.join(__dirname, 'semantic-vs-bm25-report.json'), 'utf8'));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] bench-ppmi-vs-bm25:', e); }
 
   console.log('\n=== PEMBANDING ===');
   console.log('BM25 produksi:', bm25Baseline ? JSON.stringify(bm25Baseline.overall) : '(tidak ada laporan)');

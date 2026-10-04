@@ -64,7 +64,7 @@ async function setList(key, list) {
         }
       }
     }
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] idb-gateway:', e); }
 }
 
 export const idbGateway = Object.freeze({ getList, setList });

@@ -50,8 +50,7 @@ async function initialize(options) {
                 const learningRate = typeof options.autoTrainLearningRate === 'number' ? options.autoTrainLearningRate : 1e-3;
                 await LLMTrainer.trainOnCorpus(activeModel, sequences, { epochs, learningRate, optimizer: 'adam' });
             }
-        } catch (e) {
-        }
+        } catch (e) { console.warn('[Rategoan Fallback] llm-core:', e); }
     }
     return activeModel;
 }

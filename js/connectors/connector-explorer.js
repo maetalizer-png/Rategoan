@@ -1,6 +1,7 @@
 import { connectorState } from './connector-state.js';
 import { emitConnector } from './connector-events.js';
 import { runConnectorTool } from './tool-card.js';
+import { toolsForService } from './local-tools.js';
 
 function field(label, id) {
   const wrap = document.createElement('label');
@@ -68,6 +69,11 @@ export function mountExplorer(root, serviceId, onBack) {
   } else if (serviceId === 'web_search_reader') {
     root.appendChild(field('Kueri web', 'hub-q'));
     root.appendChild(button('Cari', () => run('web_search', { q: root.querySelector('#hub-q').value })));
+  } else if (toolsForService(serviceId).length) {
+    root.appendChild(field('Teks atau kueri', 'hub-q'));
+    toolsForService(serviceId).forEach((name) => {
+      root.appendChild(button(name, () => run(name, { text: root.querySelector('#hub-q').value, query: root.querySelector('#hub-q').value, expression: root.querySelector('#hub-q').value, q: root.querySelector('#hub-q').value })));
+    });
   } else {
     const note = document.createElement('p');
     note.className = 'hub-note';

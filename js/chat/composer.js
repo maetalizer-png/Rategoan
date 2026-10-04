@@ -29,6 +29,8 @@ import { parseChartAsk, buildChartSvg } from '../../shared/charts-local.js';
 import { parseDiagramAsk, buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { printReport } from '../../shared/report-export.js';
 import { cancelAgent } from '../agent/worker-bridge.js';
+import { hemat } from '../state/hemat.js';
+import { voice } from './voice.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
@@ -353,7 +355,8 @@ export const composer = {
       thoughts = plan.steps;
       live.remove();
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [projectPrefix, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    const imageNote = att && att.fileText ? '[Isi gambar atau berkas]\n' + String(att.fileText).slice(0, 4000) : '';
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
@@ -445,7 +448,14 @@ export const composer = {
       this.send(t);
     };
     const plus = $('btn-plus');
-    if (plus) plus.onclick = () => attach.open();
+    if (plus) plus.onclick = () => {
+      const label = $('sheet-project-label');
+      const cur = workspace.current();
+      if (label) label.textContent = cur ? ('Kaitkan ke Proyek · ' + cur.name) : 'Kaitkan ke Proyek';
+      const fast = $('sheet-fast');
+      if (fast) fast.setAttribute('aria-checked', hemat.enabled() ? 'true' : 'false');
+      attach.open();
+    };
     const stop = $('btn-stop');
     if (stop) stop.onclick = () => cancelAgent();
     document.addEventListener('rategoan:command', (event) => {
@@ -574,6 +584,22 @@ export const composer = {
       toast.show('Proyek: ' + found.name);
       sheets.close();
     };
+    const voiceCard = $('sheet-voice');
+    if (voiceCard) voiceCard.onclick = () => { sheets.close(); voice.listen(); };
+    const fastCard = $('sheet-fast');
+    if (fastCard) fastCard.onclick = () => {
+      const on = hemat.toggle();
+      fastCard.setAttribute('aria-checked', on ? 'true' : 'false');
+      toast.show(on ? 'Mode kilat hidup' : 'Mode kilat mati');
+    };
+    const docCard = $('sheet-doc');
+    if (docCard) docCard.onclick = () => {
+      sheets.close();
+      const inp = $('chat-input');
+      if (inp) inp.value = 'Buatkan dokumen Word dari percakapan ini';
+    };
+    const studioCard = $('sheet-code-studio');
+    if (studioCard) studioCard.onclick = () => { sheets.close(); router.go('studio'); };
     const slideCard = $('sheet-slide');
     if (slideCard) {
       slideCard.onclick = async () => {

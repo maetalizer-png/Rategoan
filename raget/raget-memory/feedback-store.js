@@ -7,14 +7,14 @@ function read() {
     if (parsed && typeof parsed.up === 'number' && typeof parsed.down === 'number' && Array.isArray(parsed.events)) {
       return parsed;
     }
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] feedback-store:', e); }
   return { up: 0, down: 0, events: [] };
 }
 
 function write(data) {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] feedback-store:', e); }
 }
 
 function statsOf(data) {

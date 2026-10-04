@@ -14,7 +14,7 @@ function readAll() {
 function writeAll(list) {
   try {
     localStorage.setItem(KEY, JSON.stringify(list.slice(-MAX_ITEMS)));
-  } catch (e) {}
+  } catch (e) { console.warn('[Rategoan Fallback] fewshot-local:', e); }
 }
 
 function apply(candidates) {

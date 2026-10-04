@@ -42,14 +42,14 @@ function paint() {
   const filters = $('artifact-filters');
   if (!ul) return;
   const list = allArtifacts();
-  const tabs = [
-    ['semua', 'Semua'],
+  const present = new Set(list.map((item) => kindOf(item)));
+  const tabs = [['semua', 'Semua']].concat([
     ['slide', 'Presentasi'],
     ['document', 'Dokumen'],
     ['code', 'Kode'],
     ['chart', 'Grafik'],
     ['table', 'Tabel'],
-  ];
+  ].filter(([key]) => present.has(key)));
   if (filters) {
     filters.innerHTML = '';
     tabs.forEach(([key, label]) => {
@@ -74,7 +74,7 @@ function paint() {
     const li = document.createElement('li');
     li.className = 'artifact-card-page';
     const format = document.createElement('span');
-    format.className = 'artifact-format';
+    format.className = 'artifact-format ' + extOf(item).toLowerCase();
     format.textContent = extOf(item);
     const info = document.createElement('div');
     info.className = 'artifact-info';

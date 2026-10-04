@@ -50,8 +50,7 @@ async function latest(topic) {
         items = items.concat(feedItems);
         sourcesTried.push(feed.name);
       }
-    } catch (e) {
-    }
+    } catch (e) { console.warn('[Rategoan Fallback] news:', e); }
   }
   if (!items.length) return { ok: false, message: NETWORK_FAIL_MESSAGE };
   let filtered = items;
