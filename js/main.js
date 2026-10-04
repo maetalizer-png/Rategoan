@@ -27,6 +27,7 @@ import { settings } from './account/settings.js';
 import { login } from './account/login.js';
 import { collectionPage } from './collection/collection.js';
 import { projectPage } from './project/project.js';
+import { cowork } from './ui/cowork.js';
 import { studioPage } from './studio/studio.js';
 import { artifactsPage } from './artifacts/artifacts.js';
 import { connectPage } from './connect/connect.js';
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   step(() => settings.bind());
   step(() => collectionPage.bind());
   step(() => projectPage.bind());
+  step(() => cowork.bind());
   step(() => studioPage.bind());
   step(() => artifactsPage.bind());
   step(() => connectPage.bind());

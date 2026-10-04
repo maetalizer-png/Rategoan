@@ -1,158 +1,135 @@
-<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-04T17:51:07Z. Versi 2.3.0. -->
+<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-04T18:49:14Z. Versi 2.5.0. -->
 
-PRD ANTARMUKA 2.0 — MASTER CETAK BIRU REKAYASA & KEDAULATAN SISTEM (EDISI STANDAR INDUSTRI LENGKAP)
+PRD ANTARMUKA 2.0 — MASTER CETAK BIRU REKAYASA & KEDAULATAN SISTEM (EDISI STANDAR INDUSTRI KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Enterprise-Grade Sovereign AI Workstation)
-Versi: 2.3.0-DEFINITIVE-MASTER | Tanggal: Oktober 2026
+Versi: 2.5.0-CANONICAL-SOVEREIGN | Tanggal: Oktober 2026
 Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0
 Repositori Sasaran: Rategoan (egoan.vercel.app / rategoan-main)
 
-# BAB 1: FILOSOFI KEDAULATAN & PRINSIP DESAIN STANDAR INDUSTRI
-## 1.1 Kedaulatan Sistem & Desain Berkelas Industri
-Standar Aplikasi Profesional: Antarmuka Rategoan harus memancarkan estetika standar industri setara Apple, Google, dan OpenAI. Dilarang menggunakan teks slogan amatir/indie (seperti "akun lokal berdaulat") pada kartu profil pengguna. Seluruh elemen identitas disajikan secara bersih, elegan, dan profesional.
-Zero Cloud Dependency for Core UI: Seluruh antarmuka inti, editor studio, lembar lampiran, dan mesin inferensi lokal beroperasi 100% mandiri di peramban tanpa ketergantungan API pihak ketiga.
-Zero Bloatware: Tetap menggunakan Vanilla JavaScript modern (ES Modules) murni tanpa framework raksasa yang memperlambat rendering ponsel.
-Kedaulatan Data Terenkripsi: Data percakapan, instruksi proyek, berkas tersemat, dan kredensial OAuth disimpan secara lokal di peramban (IndexedDB dan LocalStorage terenkripsi AES-GCM 256-bit).
+# BAB 1: FILOSOFI KEDAULATAN MUTLAK & ANATOMI SISTEM
+## 1.1 Kedaulatan Mutlak Tanpa Model Asing (Strict Sovereign Mandate)
+Larangan Mutlak Model AI Pihak Ketiga: Sistem Rategoan DILARANG KERAS mencolok atau mengintegrasikan model AI eksternal pihak ketiga (seperti OpenAI, Gemini, Claude) maupun runtime model luar seperti Ollama. Rategoan adalah sistem AI berdaulat penuh yang beroperasi murni di atas dua otak ciptaan sendiri: Raget Template (otak deterministik instan berbasis data & FAQ kanonikal) dan Raget Neural (otak jaringan saraf tiruan lokal berdaulat milik Rategoan yang dilatih dari nol menggunakan korpus rilis Rategoan).
+Purge Total Entitas Asing: Segala opsi pemilih "Server Mandiri (Ollama)" yang sempat muncul di js/account/settings.js wajib dihapus tuntas. Hanya boleh ada dua mesin sah: Raget Template dan Raget Neural.
+Desain Berkelas Industri Bersih: Menghilangkan seluruh teks slogan indie/amatir (seperti "akun lokal berdaulat" atau "ruang kerja mandiri") dari profil pengguna. Tampilan profil disajikan bersih, elegan, dan profesional setara aplikasi kelas dunia: Avatar melingkar, Nama Pengguna tebal, dan Alamat Email abu-abu.
+Zero Cloud Dependency for Core UI: Seluruh antarmuka inti, editor studio, lembar lampiran, kanvas kerja, dan mesin inferensi lokal beroperasi 100% mandiri di peramban tanpa ketergantungan API pihak ketiga.
+1.3 Standar Ergonomi Seluler & Segmented ControlsKedaulatan Data Terenkripsi: Data percakapan, instruksi proyek, berkas tersemat, dan memori disimpan secara lokal di peramban (IndexedDB dan LocalStorage terenkripsi AES-GCM 256-bit).
+## 1.2 Anatomi 4 Pilar Perakitan Rategoan
+Rumah (Wadah & Casing): Antarmuka PWA responsif mobile-first, bersih, modern, dan bebas dari animasi atau tata letak canggung.
+Kerangka (Sasis & Struktur): Arsitektur penyimpanan bertingkat (LocalStorage untuk preferensi mikro <500KB; IndexedDB idb-gateway.js untuk chat, lampiran, berkas proyek, dan kanvas) serta event bus lokal.
+Kabel-Kabel (Wiring Harness & Konektor Aksi): Sistem Client-Side Tool Dispatcher lokal yang menghubungkan otak AI dengan 33 alat lokal nyata (File System, Sensor, Coder Sandbox, Pengolah Data, dan Agenda).
+Mesin (Otak AI Siap Colok): Dua slot modular: Raget Template (aktif default, <10ms, deterministik) dan Raget Neural (sedang training korpus rilis, siap dicolok tanpa ubah kerangka).
 
 Batas Sentuh Ramah Jempol: Seluruh tombol aksi, tab, dan chip interaktif wajib memiliki area sentuh minimal 44 × 44 piksel.
 Desain Segmented Control Standar Industri: Pemilih opsi biner atau multi-opsi (seperti tema Terang/Sistem/Gelap dan ukuran font) dilarang menggunakan tombol berlebar kaku 34px yang menyebabkan teks meluber. Wajib menggunakan wadah segmented pill control berlatar lembut (background: var(--rg-surface-2)), tombol fleksibel (min-width: 60px; padding: 6px 14px;), dengan tombol aktif berlatar putih/kartu dan bayangan halus (subtle shadow).
 Anti-Luber Horizontal Mutlak: Container utama wajib terkunci (overflow-x: hidden). Scrolling horizontal HANYA diperbolehkan pada komponen khusus yang secara eksplisit membutuhkan geser (seperti riwayat obrolan .recent-chips), sedangkan daftar filter artefak wajib menggunakan tata letak adaptif (flex-wrap).
 Stabilitas Viewport Seluler (Virtual Keyboard Pinning): Saat keyboard virtual muncul di ponsel, area tulis (composer-box) wajib melekat mulus tepat di atas keyboard menggunakan CSS variable --vvh berbasis window.visualViewport, tanpa menggeser atau memotong header aplikasi.
-## 1.3 Hukum Dua Keadaan (The Two-State UI Law)
+## 1.4 Hukum Dua Keadaan (The Two-State UI Law)
 State Kosong (Empty State): Wajib berupa Hero Card terintegrasi dengan ikon SVG berlatar warna pastel, penjelasan ramah, tombol template cerdas, dan form pembuatan yang menyatu rapi.
 State Aktif (Active State): Menampilkan panel kerja terstruktur, daftar berkas tersemat, dan kontrol manajemen tanpa menyembunyikan tombol pembuatan entitas baru.
-## 1.4 Standar Mutu Kode, Observabilitas & Kontrol Pembatalan (QC & AbortController)
+## 1.5 Standar Mutu Kode, Observabilitas & Kontrol Pembatalan (QC & AbortController)
 Nol Blok Catch Kosong: Dilarang keras menulis blok catch (e) {} yang menelan galat dalam diam. Seluruh penanganan galat wajib mencatat konteks secara transparan: console.warn('[Rategoan Fallback] <NamaModul>:', e).
-Arsitektur Penyimpanan Bertingkat (Tiered Storage Architecture):
-LocalStorage: Dibatasi HANYA untuk preferensi konfigurasi mikro (< 500 KB, misal: tema, id sesi aktif, setting suara).
-IndexedDB (idb-gateway.js): Digunakan untuk seluruh muatan data berat (riwayat chat lengkap, lampiran foto, teks berkas pinnedFiles proyek, dan basis pengetahuan RAG). Ini menjamin aplikasi kebal dari galat fatal peramban QuotaExceededError.
 Kendali Pembatalan Inferensi (Abortable Inference): Setiap siklus penjawab AI wajib memiliki objek AbortController. Pengguna berhak menghentikan proses generasi jawaban yang sedang berjalan sewaktu-waktu.
 Kelulusan Uji Mutlak: Setiap commit wajib mempertahankan 100% kelulusan pada seluruh unit test (npm test) dan zero error/warning pada linter (npm run lint).
+
 # BAB 2: PROTOKOL KERJA OTONOM & SANITASI PRE-FLIGHT (CONTINUOUS RUN ENGINE)
-Mengadopsi metodologi eksekusi latar belakang otonom (sebagaimana diterapkan pada Manus AI), agen pengembang (Grok Build) wajib mematuhi protokol maraton 2–5 jam tanpa henti berikut:
-## 2.2 Prosedur Sanitasi Pra-Eksekusi (Pre-Flight Clean Run)
 ## 2.1 Pola Sesi Maraton Otonom (Deep Sprint Engine)
-Eksekusi Mandiri Terpadu: Agen dilarang berhenti sepotong-sepotong di setiap berkas. Seluruh paket pekerjaan harus diselesaikan dalam satu putaran kerja utuh.
+Eksekusi Mandiri Terpadu: Agen (Grok Build) diwajibkan menyelesaikan seluruh paket pekerjaan besar dalam satu putaran kerja utuh tanpa berhenti sepotong-sepotong di setiap berkas.
 Protokol Anti-Bawel (Zero Premature Chatter): Dilarang memotong alur kerja hanya untuk menanyakan konfirmasi gaya CSS atau penamaan variabel minor. Agen memiliki otoritas teknis penuh selama berada dalam koridor PRD 2.0.
 Lingkaran Verifikasi Mandiri (Self-Healing Loop): Agen wajib menjalankan npm test dan npm run lint secara otomatis. Jika ditemukan kegagalan kode, agen wajib memperbaikinya sendiri hingga 100% hijau sebelum melapor.
 Catatan Detak Jantung (Heartbeat Ledger): Dokumentasi status berkala dicatat ke berkas log lokal sprint-run.log tanpa memutus aliran kerja.
+## 2.2 Prosedur Sanitasi Pra-Eksekusi (Pre-Flight Clean Run)
 Sebelum memulai sesi maraton, Grok Build WAJIB membersihkan lingkungan kerja untuk mencegah kegagalan akibat disk penuh atau proses zombie:
-*Catatan Keamanan*: Dilarang keras mereset atau menghapus direktori .git/, berkas konfigurasi inti (package.json), berkas dokumentasi (docs/PRD/), atau data korpus rilis (raget-data/).
-# 1. Hentikan proses zombie liar di latar belakang
-pkill -f "node.*test" || true
-
-# 2. Bersihkan sampah disk dan cache temporer
-rm -rf /tmp/rategoan_* .eslintcache
-npm cache clean --force 2>/dev/null || true
-
-# 3. Pastikan working tree git bersih
-git status --porcelain
-
-# 4. Verifikasi baseline awal (wajib 100% hijau sebelum modifikasi dimulai)
-npm test
-npm run lint
+Catatan Keamanan*: Dilarang keras mereset atau menghapus direktori .git/, berkas konfigurasi inti (package.json), berkas dokumentasi (docs/PRD/), atau data korpus rilis (raget-data/).
+1. Hentikan proses zombie liar: pkill -f "node.*test" || true
+2. Bersihkan sampah disk dan cache: rm -rf /tmp/rategoan_* .eslintcache && npm cache clean --force 2>/dev/null || true
+3. Pastikan working tree git bersih: git status --porcelain
+4. Verifikasi baseline awal: npm test && npm run lint
 
 # BAB 3: REKAYASA TAMPILAN & PENGALAMAN PENGGUNA (COMPREHENSIVE UX OVERHAUL)
-## 3.1 Perbaikan Segmented Control Mode Gelap & Tampilan (js/account/settings.js & css/account/settings.css)
-Akar Masalah: Tombol tema saat ini menggunakan fixed width 34px dengan teks penuh (Terang, Sistem, Gelap), sehingga teks meluber dan tombol bertumpuk kaku.
-Rekayasa Solusi:
-Ubah wadah .font-btns untuk tema menjadi .theme-segmented:
-3.2 Transformasi Lembar Lampirkan (#attach-sheet — Kaya Ikon & Anti-Polos)
-.theme-segmented {
-display: flex;
-background: var(--rg-surface-2, #f1f5f9);
-padding: 3px;
-border-radius: 12px;
-gap: 2px;
-border: 1px solid var(--rg-line);
-}
-.theme-btn {
-flex: 1;
-min-width: 64px;
-height: 32px;
-border: none;
-border-radius: 9px;
-font-size: 12.5px;
-font-weight: 600;
-color: var(--rg-muted);
-background: transparent;
-cursor: pointer;
-transition: all 0.15s ease;
-text-align: center;
-}
-.theme-btn.active {
-background: var(--rg-card, #ffffff);
-color: var(--rg-text, #0f172a);
-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-font-weight: 700;
-}
-Terapkan struktur segmented control serupa pada baris Ukuran Teks (Kecil, Normal, Besar).
+## 3.1 Perbaikan Tata Letak Halaman Tampilan & Segmented Control (css/account/settings.css)
+Akar Masalah: Pada layar ponsel (360px), wadah .theme-segmented memakan ruang horizontal lebar sehingga label di sebelah kiri (Mode Gelap dan Ukuran Teks) tertekan ke 84px dan patah menjadi 2 baris kaku ("Mode" lalu "Gelap").
+Rekayasa Solusi: Terapkan tata letak bertumpuk rapi (Stacked Layout) pada .set-row-theme dan .set-row-font dengan header terpisah dan bar kontrol segmented membentang 100% lebar layar secara fleksibel.
+## 3.2 Transformasi Lembar Lampirkan (Ikon SVG Nyata & Anti-Polos)
 
-Akar Masalah: Lembar lampiran saat ini tampak kosong dan polos (hanya teks di dalam kotak putih tanpa ikon dan tanpa warna penegas).
-Rekayasa Solusi (Arsitektur 3 Zona Kaya Visual):
-Zona 1: Media Masukan Ber-Ikon Lingkaran Pastel:
-Zona 2: Mode Penalaran Ber-Ikon & Saklar Switch:Kamera: Lingkaran biru lembut (#eff6ff), ikon SVG kamera biru (#2563eb).
-Foto/Galeri: Lingkaran ungu lembut (#f5f3ff), ikon SVG galeri ungu (#7c3aed).
-Dokumen: Lingkaran hijau lembut (#f0fdf4), ikon SVG berkas hijau (#16a34a).
-Memo Suara: Lingkaran oranye lembut (#fff7ed), ikon SVG mikrofon oranye (#ea580c).
-
-Zona 3: Studio Pembuatan & Ruang Kerja Berpanah Chevron:Setiap baris memiliki ikon berwarna di sebelah kiri, label tebal, subteks deskripsi abu-abu, dan saklar switch iOS di sebelah kanan.
-🌐 Pencarian Web (Ikon Bola Dunia Biru, subteks: "Menelusuri informasi mutakhir di internet").
-🧠 Berpikir Lebih Keras (Ikon Otak/Bohlam Oranye, subteks: "Menampilkan proses penalaran bertahap (CoT)").
-🔬 Riset Mendalam (Ikon Kaca Pembesar Ungu, subteks: "Investigasi multi-sumber & laporan komprehensif").
-⚡ Mode Kilat (Ikon Petir Kuning, subteks: "Jawaban ringkas cepat hemat daya").
-
-*Penting*: Seluruh ID elemen DOM eksisting (#sheet-camera, #sheet-photo, #sheet-file, #sheet-websearch, #sheet-think, #sheet-research, #sheet-slide, #sheet-project, #sheet-learn) wajib dipertahankan.📊 Buat Slide Presentasi (.pptx).
-📄 Buat Dokumen Word (.docx).
-💻 Buka Studio Kode (JS/Python).
-📁 Kaitkan ke Proyek (dengan badge pill nama proyek aktif).
-📖 Belajar Terpandu (Socratic Tutor).
-
+Akar Masalah: Tombol media saat ini hanya berupa lingkaran warna kosong tanpa ikon di dalamnya (<span class="attach-orb"></span>).
+Rekayasa Solusi: Pasang IKON SVG NYATA di dalam lingkaran warna pastel pada index.html dengan ukuran orb 44 × 44 piksel:
+Kamera (Orb Biru): SVG kamera presisi (viewBox="0 0 24 24", path aperture + flash).
+Foto & Galeri (Orb Ungu): SVG lanskap gambar (viewBox="0 0 24 24", path frame foto + gunung).
+Dokumen (Orb Hijau): SVG lembar berkas (viewBox="0 0 24 24", path dokumen berlipat sudut).
+Memo Suara (Orb Oranye): SVG mikrofon (viewBox="0 0 24 24", path kapsul mic + tiang penyangga).
 ## 3.3 Penataan Ulang Halaman Proyek (#view-project — Hero Workspace Card)
-Akar Masalah: Form input mengambang kaku di atas kartu template, menyisakan ruang putih kosong yang masif.
-Rekayasa Solusi:
-Keadaan Kosong (Empty State):
-Keadaan Aktif (Active State):Bungkus menjadi satu Hero Creation Card berbingkai halus (.project-hero-card):
+Keadaan Kosong (Empty State): Bungkus menjadi satu Hero Creation Card berbingkai halus (.project-hero-card):
 Ikon Koper/Folder besar berlatar biru lembut.
 Judul: "Ruang Kerja Proyek".
 Deskripsi: "Fokuskan AI dengan instruksi khusus dan berkas rujukan permanen untuk topik tertentu."
 Bagian Template Cepat: "Mulai dari template:" diikuti chip pills horizontal (Riset akademik, Pengembangan web, Naskah, Dokumen bisnis). Mengklik chip otomatis mengisi nama proyek.
 Baris Pembuatan Terpadu: Kolom input nama proyek menyatu elegan dengan tombol pil Buat Proyek.
-
-Header menampilkan tombol + Proyek Baru di sisi kanan yang membuka dialog/accordion pembuatan proyek baru tanpa menghapus proyek yang ada.
+Keadaan Aktif (Active State):
+Header menampilkan tombol + Proyek Baru di sisi kanan yang membuka form pembuatan proyek baru tanpa menghapus proyek yang ada.
 Panel Aktif: Menampilkan nama proyek aktif, textarea instruksi bersudut halus, daftar berkas PDF/DOCX tersemat (dengan ukuran KB dan tombol hapus), serta tombol aksi utama Buka di Obrolan →.
-## 3.4 Standarisasi Industri Halaman Pengaturan & Model Hub (#view-settings)
-Profil Profesional Bersih:
-Meteran Kapasitas Penyimpanan:Avatar melingkar berbingkai halus, nama pengguna tebal, dan alamat email abu-abu.
-Hapus teks slogan "akun lokal berdaulat". Ganti dengan lencana profesional ramping di samping nama: [ Ruang Kerja Mandiri ].
-
-Meteran Kapasitas Penyimpanan: Di bawah profil, sediakan bar kapasitas visual yang bersih: Penyimpanan Lokal: 2.1 MB / 50 MB (IndexedDB Aktif) dengan bar progres hijau lembut.
-
-Model Hub di Pengaturan (Kategori data-cat="ai"): Jangan hanya menampilkan baris server kustom! Sediakan kartu pemilih mesin inferensi visual: Raget Template (mesin penalaran deterministik instan), Raget Neural (model bahasa jaringan saraf tiruan lokal berdaulat), dan Server Mandiri (Ollama / Localhost API) untuk koneksi langsung ke endpoint AI lokal komputer pengguna.
+## 3.4 Standarisasi Industri Halaman Pengaturan & Eliminasi Teks Amatir (#view-settings)
+Profil Bersih Tanpa Slogan: Di js/account/settings.js, HAPUS TOTAL elemen lencana profil mengambang (<div class="profile-badge">Ruang Kerja Mandiri</div> ataupun "akun lokal berdaulat"). Profil disajikan murni standar industri: Avatar melingkar berbingkai halus, Nama Pengguna tebal, dan Alamat Email abu-abu.
+Meteran Kapasitas Penyimpanan: Sediakan bar kapasitas visual penyimpanan peramban yang bersih: Penyimpanan: 2.1 MB / 50 MB dengan bar progres hijau lembut.
+Model Hub Murni Rategoan (Kategori data-cat="ai"): Hapus total opsi "Server Mandiri (Ollama)". Tampilkan kartu pemilih DUA OTAK RESMI RATEGOAN: ⚡ Raget Template (penalaran instan, deterministik, tanpa halusinasi, dan hemat daya - Aktif Default) dan 🧠 Raget Neural (model bahasa jaringan saraf tiruan lokal berdaulat milik Rategoan sendiri yang sedang dalam proses pelatihan).
 ## 3.5 Pengalaman Chat Modern: Tombol Hentikan Generasi, Lightbox & Indikator Offline
 Tombol Hentikan Generasi (Stop Generating Pill): Saat AI sedang menghasilkan jawaban atau menalar, tombol kirim panah biru otomatis berubah menjadi tombol merah/hitam dengan ikon kotak berhenti [ ⏹️ Berhenti ]. Menekannya memicu abortController.abort() dan menghentikan pengetikan seketika.
 Foto Obrolan Modern & Lightbox: Render gambar tajam (minimal 800px) ber-border-radius 16px, lenyapkan nama file teks kamera-xxx.jpg, pasang modal lightbox untuk perbesar layar penuh, dan hilangkan tooltip bulat OCR mengambang.
 Indikator Ketenangan Mode Mandiri Offline: Ketika perangkat tidak memiliki internet, tampilkan pil status halus di header obrolan: [ ⚡ Mandiri (Offline) ] untuk meyakinkan pengguna bahwa seluruh kemampuan inti Rategoan tetap bekerja 100%.
 Artefak Tanpa Efek Geser (No-Slide): Ganti wadah #artifact-filters menjadi display: flex; flex-wrap: wrap; gap: 8px; overflow-x: visible;. Tampilkan lencana format berkas berwarna (PPTX oranye, DOCX biru, CODE ungu, CSV toska).
 Split-Screen Artifact Canvas: Di desktop/tablet, kode dan dokumen terbuka berdampingan dengan obrolan; di ponsel tampil sebagai lembar bawah geser dengan tab alih cepat [ Chat | Kanvas ].
-# BAB 4: EKOSISTEM KONEKTOR BAWAAN LOKAL & HYBRID GOOGLE
-## 4.1 Client-Side Tool Dispatcher di tool-card.js
-Fungsi runConnectorTool(name, parameters) di js/connectors/tool-card.js wajib disuntikkan percabangan eksekusi lokal sebelum pemanggilan fetch():
-Jika nama alat berawalan math_, vault_, vision_, canvas_, audio_, atau agenda_: Sistem langsung mengeksekusi fungsi JavaScript lokal di peramban tanpa melempar permintaan ke server backend.
-## 4.2 Katalog 6 Ekosistem Bawaan Baru (33 Alat Lokal Nyata)
-Daftarkan ke dalam CATALOG di js/connectors/connector-state.js dengan konfigurasi system_native: true, connected: true:
-Vault Dokumen & RAG Pribadi (local_document_vault — 6 Alat): Penyimpanan dan pencarian semantik dokumen (PDF, DOCX, TXT, MD, CSV) 100% offline via IndexedDB dan local-rag.js (vault_index_document, vault_semantic_search, vault_summarize_doc, vault_qna_document, vault_compare_docs, vault_export_knowledge).
-Mata & Vision OCR Mandiri (local_vision_ocr — 4 Alat): Ekstraksi teks foto struk/naskah via Tesseract WebAssembly lokal, deteksi tabel gambar ke CSV/Markdown, ekstraksi palet warna, dan pembacaan QR/Barcode (vision_extract_text, vision_parse_table, vision_color_palette, vision_qr_barcode).
-Asisten Suara & Audio Overview (local_voice_audio — 4 Alat): Transkripsi suara pengguna tanpa jeda server, pembacaan TTS suara alami, pembuatan naskah audio rangkuman dokumen bergaya podcast, dan memo suara (audio_speech_to_text, audio_text_to_speech, audio_generate_overview, audio_voice_notes).
-Mesin Kalkulus, Finansial & Data (local_math_compute — 5 Alat): Kalkulasi aljabar/matriks presisi tinggi via math-engine.js, ringkasan statistik tabel, konversi mata uang ter-cache, kalkulator tanggal/hari kerja, dan konversi satuan ilmiah (math_calculate_expression, math_statistics_summary, math_currency_converter, math_date_calculator, math_unit_conversion).
-Penyusun Artefak & Visualisasi Grafis (local_artifact_canvas — 5 Alat): Render grafik batang/garis/pai interaktif di chat, generator diagram alir logika Mermaid, ekspor presentasi (.pptx), ekspor dokumen (.docx/.pdf cetak), dan ekspor data (.csv) (canvas_render_chart, canvas_generate_diagram, canvas_export_presentation, canvas_export_document, canvas_export_data).
-Agenda, Pengingat & Rutinitas Kedaulatan (local_agenda_routine — 5 Alat): Manajemen tugas lokal, pengingat jadwal peramban, parser kalender universal .ics, ekspor kalender, dan Daily Briefing pagi cerdas (agenda_add_task, agenda_list_upcoming, agenda_parse_ics, agenda_export_calendar, agenda_daily_briefing).
-## 4.3 Jembatan Google Workspace Dual-Mode & Server Lokal Eksternal (Ollama)
-Mode Terhubung (Online): Menghubungkan Google Drive, Google Calendar, dan Gmail secara langsung dari peramban pengguna menggunakan Google Identity Services (GIS) token client murni tanpa server perantara. Token disimpan terenkripsi AES-GCM 256-bit di rategoan_connectors_vault.
-Mode Ketahanan Mandiri (Offline): Jika perangkat kehilangan koneksi, sistem secara otomatis beralih ke padanan lokal (Drive → Vault Dokumen Lokal; Calendar → Kalender ICS Lokal; Gmail → Draf Kapsul Memori Lokal) tanpa memutus produktivitas pengguna.
-Dukungan Ollama / Localhost (Server Mandiri): Memungkinkan pengguna mengarahkan konektor eksternal ke http://localhost:11434 untuk mengeksekusi model lokal berdaya besar di mesin lokal mereka secara aman.
+
+# BAB 4: SKENARIO OPERASIONAL FITUR AI MODERN & KABEL-KABEL KONEKTOR
+## 4.1 Skenario Cowork (Kanvas Kolaborasi / Split-Screen Workspace)
+Konsep & Alur Kerja:
+Pengguna meminta pembuatan naskah, laporan kerja, dokumen hukum, atau tabel perencanaan.
+Rategoan TIDAK menimbun teks panjang di dalam gelembung obrolan, melainkan secara otomatis membuka panel kanvas artefak di sisi kanan (Split-Screen pada layar >= 1024px, atau tab [ Chat | Kanvas ] pada layar seluler).
+Teks dokumen dialirkan (streamed) langsung ke dalam editor kanvas.
+Kolaborasi Langsung (Interactive Coworking):
+Pengguna dapat mengklik dan mengedit teks kanvas secara langsung (live contentEditable / rich-text).
+Pengguna dapat memilih blok teks di kanvas dan menekan tombol kontekstual: "Minta AI Perbaiki Bagian Ini" / "Perluas Pembahasan", yang otomatis mengirim instruksi kembali ke panel obrolan kiri untuk memperbarui kanvas.
+Ekspor Dokumen Mandiri:
+Toolbar kanvas menyediakan tombol ekspor instan 1-klik: Salin Teks, Unduh Markdown (.md), Unduh Dokumen (.docx), dan Cetak Rapi (.pdf). Seluruh berkas kanvas tersimpan otomatis di IndexedDB.
+## 4.2 Skenario Coder (Studio Koding, Syntax Highlighting, Diff Viewer, & Sandbox Eksekusi)
+Konsep & Alur Kerja:
+Pengguna meminta solusi koding, pembuatan skrip data, atau perbaikan algoritma.
+Blok kode dirender dengan penomoran baris (line numbers), syntax highlighting presisi, dan lencana bahasa (JavaScript, Python, HTML/CSS, SQL, JSON).
+Tampilan Perbandingan Kode (Diff Viewer):
+Ketika AI merevisi fungsi atau berkas kode yang sudah ada, tampilan otomatis menyediakan tab alih: [ Kode Final | Tinjau Perubahan (Diff) ].
+Tab Diff menampilkan baris yang dihapus dengan latar merah muda (- baris) dan baris baru dengan latar hijau muda (+ baris), memberi transparansi penuh bagi programmer.
+Sandbox Eksekusi Lokal Terisolasi (Web Worker Execution):
+Setiap blok kode JavaScript/JSON dilengkapi tombol [ ▶️ Uji Kode (Run) ].
+Menekan tombol ini mengirim kode ke dalam Web Worker lokal terisolasi (sandbox).
+Hasil keluaran skrip (stdout, nilai kembalian, atau galat) dirender langsung pada konsol mini di bawah blok kode secara instan tanpa internet dan tanpa membahayakan sesi utama peramban.
+## 4.3 Skenario Sistem Skills (Modul Keahlian Mandiri & Sovereign Skill Registry)
+Konsep & Alur Kerja:
+Mengadopsi arsitektur keahlian modular, Rategoan menyediakan pemilih Skill aktif di samping bar composer: [ 🎯 Keahlian: Umum ▾ ].
+Pengguna dapat memilih paket keahlian spesifik:
+Skill Analis Data & Finansial: Fokus pada angka, validasi tabel CSV, dan kalkulasi presisi math-engine.
+Skill Auditor Kode & Coder: Fokus pada arsitektur perangkat lunak, refactoring aman, dan unit testing.
+Skill Penulis Teknis & PRD: Mengunci format baku spesifikasi industri, use-case, dan diagram alir.
+Skill Peneliti & RAG Vault: Fokus pada ekstraksi fakta dari dokumen tersemat tanpa spekulasi.
+Mekanisme Kerja Saraf Lokal:
+Penggantian Skill secara instan menyuntikkan template prompt sistem ke dalam memori sesi lokal dan membatasi set alat lokal (local tools) yang relevan untuk meminimalkan latensi dan menjaga akurasi respons.
+## 4.4 Skenario Kendali Komputer & Akses Berkas Lokal (Local OS Bridge)
+Integrasi File System Access API:
+Pengguna di desktop/laptop dapat menekan tombol [ 📂 Hubungkan Folder Lokal ] di menu Proyek atau Lampiran.
+Peramban memanggil window.showDirectoryPicker() untuk mendapatkan izin akses ke folder kerja pengguna di hard drive lokal.
+Rategoan memetakan struktur berkas secara aman di memori sesi lokal, membaca isi berkas kode/naskah tanpa mengirimnya ke jaringan, dan dapat menyimpan kembali hasil revisi langsung ke berkas fisik atas konfirmasi pengguna.
+Penghubung Perangkat Keras Lokal:
+Jembatan Web APIs lokal (Web Audio API untuk perekaman mikrofon, MediaDevices API untuk kamera, dan Clipboard API untuk pertukaran teks cepat) disatukan di bawah satu protokol izin ramah privasi.
+## 4.5 Katalog 6 Ekosistem Bawaan Baru (33 Alat Lokal Nyata)
+Daftarkan ke dalam CATALOG di js/connectors/connector-state.js dengan konfigurasi system_native: true, connected: true, dieksekusi via Client-Side Tool Dispatcher di tool-card.js tanpa fetch server backend:
+Vault Dokumen & RAG Pribadi (local_document_vault — 6 Alat): vault_index_document, vault_semantic_search, vault_summarize_doc, vault_qna_document, vault_compare_docs, vault_export_knowledge.
+Mata & Vision OCR Mandiri (local_vision_ocr — 4 Alat): vision_extract_text, vision_parse_table, vision_color_palette, vision_qr_barcode.
+Asisten Suara & Audio Overview (local_voice_audio — 4 Alat): audio_speech_to_text, audio_text_to_speech, audio_generate_overview, audio_voice_notes.
+Mesin Kalkulus, Finansial & Data (local_math_compute — 5 Alat): math_calculate_expression, math_statistics_summary, math_currency_converter, math_date_calculator, math_unit_conversion.
+Penyusun Artefak & Visualisasi Grafis (local_artifact_canvas — 5 Alat): canvas_render_chart, canvas_generate_diagram, canvas_export_presentation, canvas_export_document, canvas_export_data.
+Agenda, Pengingat & Rutinitas Kedaulatan (local_agenda_routine — 5 Alat): agenda_add_task, agenda_list_upcoming, agenda_parse_ics, agenda_export_calendar, agenda_daily_briefing.
 
 # BAB 5: BLUEPRINT EKSEKUSI MEGA SPRINT & VERIFIKASI AKHIR
 Grok Build diwajibkan mengeksekusi seluruh pekerjaan dalam 5 fase linier terpadu tanpa interupsi:
+
+Kriteria Kelulusan Akhir (Definition of Done):
 Fase
 Fokus Modul
 Berkas Sasaran
@@ -162,28 +139,37 @@ Sanitasi Lingkungan
 Lingkungan Terminal / Sandbox
 Bunuh proses zombie (pkill -f node), bersihkan /tmp/ dan .eslintcache, pastikan npm test & npm run lint 100% hijau.
 Fase 2
-Struktur HTML & Gaya CSS
-index.html, css/ui/overhaul.css, css/account/settings.css
-Pasang .theme-segmented pada tombol tema dan font, pasang kartu media ber-ikon lingkaran pastel dan ber-subteks pada #attach-sheet, rancang Hero Card terpadu pada Proyek, pasang wadah #image-lightbox, tombol Stop Generasi di composer, ubah filter artefak jadi flex-wrap, pasang gaya Grouped Cards pada Pengaturan tanpa teks amatir.
+Perbaikan UI & 5 Poin Instan
+index.html, css/account/settings.css, css/ui/overhaul.css, js/account/settings.js
+1. Pasang ikon SVG nyata di dalam .attach-orb (Kamera, Foto, Dokumen, Mic).
+2. Terapkan tata letak bertumpuk .set-row-theme agar label 'Mode Gelap' dan 'Ukuran Teks' utuh 1 baris.
+3. Satukan form Proyek ke dalam Hero Creation Card (.project-hero-card).
+4. Hapus lencana profil mengambang 'Ruang Kerja Mandiri' di profil Pengaturan.
+5. Hapus tuntas opsi Ollama dari pemilih mesin AI di settings.js.
 Fase 3
-Refaktor Logika Frontend
-js/project/, js/chat/, js/sheets/, js/artifacts/, js/account/, js/state/
-Naikkan resolusi foto ke 800px di attach.js, lenyapkan teks nama file kamera mentah dan pasang klik lightbox di chat.js, integrasi AbortController pada pengetikan obrolan, hubungkan ekstraksi nyata PDF/DOCX di project.js, alihkan berkas besar ke IndexedDB, render Pengaturan profesional dengan Model Hub dan meteran kuota penyimpanan.
+Kanvas Cowork & Studio Coder
+js/artifacts/, js/chat/, css/ui/overhaul.css
+1. Bangun split-screen live kanvas untuk dokumen/naskah panjang dengan tombol ekspor (.md/.docx/.pdf).
+2. Pasang syntax highlighter, penomoran baris, dan komponen Diff Viewer (perubahan merah/hijau).
+3. Integrasikan Web Worker terisolasi untuk tombol [ ▶️ Uji Kode (Run) ] lokal.
 Fase 4
-Engine Konektor Lokal
-js/connectors/connector-state.js, js/connectors/tool-card.js
-Daftarkan 6 Ekosistem Bawaan Baru di CATALOG dan pasang Client-Side Tool Dispatcher di tool-card.js untuk mengeksekusi seluruh 33 alat lokal di peramban.
+Sistem Skills & Akses Berkas Lokal
+js/connectors/, js/state/, js/project/
+1. Daftarkan 6 Ekosistem Bawaan Baru (33 Alat Lokal) di connector-state.js dan pasang Client-Side Tool Dispatcher di tool-card.js.
+2. Pasang pemilih Skill aktif di bar obrolan.
+3. Hubungkan File System Access API untuk integrasi folder kerja lokal di Proyek.
 Fase 5
-Pembersihan QC & Verifikasi
-Seluruh 15 berkas modul teridentifikasi
-Ganti seluruh 29 blok catch (e) {} kosong menjadi console.warn('[Rategoan Fallback]...', e), jalankan npm test (wajib 17/17 lulus) dan npm run lint (wajib 0 error).
-## Kriteria Kelulusan Akhir (Definition of Done):
-Seluruh 17 pengujian unit lulus 100% tanpa kegagalan (npm test).
-Linter kode menghasilkan 0 error dan 0 warning (npm run lint).
-Sintaks seluruh 292 berkas JavaScript valid tanpa galat sintaks (node --check).
-Pemindaian regex catch\s*\([^\)]*\)\s*\{\s*\} menghasilkan angka 0 di seluruh repositori.
-Seluruh tombol pemilih tema dan ukuran teks tampil rapi dalam segmented control tanpa teks terpotong atau tumpang tindih.
-Lembar lampiran menampilkan ikon berwarna elegan dan subteks penjelas pada setiap butirnya.
-Halaman Proyek menyajikan Hero Creation Card yang rapi tanpa ruang putih canggung.
-Profil Pengaturan berpenampilan bersih standar industri tanpa teks amatir.
-Tersedia tombol Hentikan Generasi yang aktif saat AI sedang mengetik.
+Pembersihan QC & Verifikasi Mandiri
+Seluruh berkas JavaScript & Unit Test
+Ganti seluruh 29 blok catch kosong dengan log transparan console.warn, jalankan npm test (wajib 17/17 lulus) dan npm run lint (wajib 0 error).
+
+1. Seluruh 17 pengujian unit lulus 100% tanpa kegagalan (npm test).
+2. Linter kode menghasilkan 0 error dan 0 warning (npm run lint).
+3. Sintaks seluruh berkas JavaScript valid tanpa galat sintaks (node --check).
+4. Pemindaian regex catch\s*\([^\)]*\)\s*\{\s*\} menghasilkan angka 0 di seluruh repositori.
+5. Tombol pemilih tema tampil rapi dengan label "Mode Gelap" dan "Ukuran Teks" utuh dalam 1 baris tanpa patah kata.
+6. Lembar lampiran menampilkan 4 ikon SVG nyata yang jelas di dalam lingkaran warna pastel (Kamera, Foto, Dokumen, Memo Suara).
+7. Halaman Proyek menyajikan Hero Creation Card yang rapi tanpa ruang putih canggung.
+8. Profil Pengaturan berpenampilan bersih standar industri murni: Avatar, Nama, dan Email, bebas dari teks slogan amatir.
+9. Tidak ada lagi sebutan atau opsi Ollama maupun model pihak ketiga di seluruh antarmuka aplikasi.
+10. Kanvas Cowork, Coder Diff/Run, dan 33 Alat Lokal terhubung penuh dan siap dioperasikan.

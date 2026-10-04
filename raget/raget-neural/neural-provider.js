@@ -1,7 +1,6 @@
 
 import { llmMode } from '../../js/state/llm-mode.js';
 
-const SERVER_TIMEOUT_MS = 8000;
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
   // Semua checkpoint ada di Hugging Face, bukan git dan bukan GitHub
@@ -108,39 +107,8 @@ async function generateLocal(prompt) {
   return generateWithTier('ringan', prompt);
 }
 
-async function generateServer(prompt, url) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), SERVER_TIMEOUT_MS);
-  try {
-    const root = url.replace(/\/+$/, '');
-    const ollama = /:11434\b/.test(root);
-    const res = await fetch(ollama ? root + '/api/generate' : root + '/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(ollama
-        ? { model: localStorage.getItem('raget_ollama_model') || 'llama3.2', prompt: String(prompt || ''), stream: false }
-        : { prompt: String(prompt || ''), maxNewTokens: 60, temperature: 0.9 }),
-      signal: controller.signal,
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    const text = data && (typeof data.response === 'string' ? data.response : data.text);
-    return text && text.trim() ? text.trim() : null;
-  } catch (e) {
-    return null;
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 async function generate(messages, prompt) {
-  if (llmMode.mode() === 'server') {
-    const url = llmMode.serverUrl();
-    if (url) {
-      const serverText = await generateServer(prompt, url);
-      if (serverText) return serverText;
-    }
-  }
+  if (llmMode.mode() === 'server') llmMode.setMode('lokal');
   return generateLocal(prompt);
 }
 

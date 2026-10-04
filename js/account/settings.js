@@ -86,7 +86,6 @@ const TEMPLATE = `
           <div class="profile-avatar" id="profile-avatar"></div>
           <div class="profile-name" id="profile-name"></div>
           <div class="profile-mail" id="profile-mail"></div>
-          <div class="profile-badge">Ruang Kerja Mandiri</div>
           <div class="storage-meter" aria-hidden="true"><span id="storage-meter-bar"></span></div>
         </div>
         <hr class="divider" id="profile-divider" hidden>
@@ -99,7 +98,7 @@ const TEMPLATE = `
         <div id="settings-content" hidden>
           <div class="settings-category" data-cat="tampilan">
             <div class="set-section">
-              <div class="set-row">
+              <div class="set-row set-row-theme set-row-stack">
                 <span>
                   <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -113,7 +112,7 @@ const TEMPLATE = `
                 </span>
               </div>
               <div class="set-hint" id="theme-hint"></div>
-              <div class="set-row">
+              <div class="set-row set-row-font set-row-stack">
                 <span>
                   <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="4 7 4 5 20 5 20 7"/>
@@ -303,32 +302,23 @@ export const settings = {
     const eksporLogRow = buildRow('row-riwayat-ekspor', EXPORT_LOG_ICON, 'Riwayat ekspor');
     const hub = document.createElement('div');
     hub.className = 'model-hub';
-    hub.innerHTML = '<button type="button" data-engine="template">Raget Template<small>Jawaban instan di perangkat</small></button><button type="button" data-engine="neural">Raget Neural<small>Model bahasa lokal</small></button><button type="button" data-engine="ollama">Server Mandiri<small>Ollama di localhost:11434</small></button>';
+    hub.innerHTML = '<button type="button" data-engine="template">Raget Template<small>Penalaran instan di perangkat. Ini mesin bawaan.</small></button><button type="button" data-engine="neural">Raget Neural<small>Model bahasa lokal Rategoan.</small></button>';
     hub.querySelectorAll('button').forEach((btn) => {
       btn.onclick = () => {
         const pick = btn.getAttribute('data-engine');
-        if (pick === 'ollama') {
-          if (!llmMode.serverUrl()) llmMode.setServerUrl('http://localhost:11434');
-          llmMode.setMode('server');
-          enginePreference.set('neural');
-          toast.show('Server mandiri: ' + llmMode.serverUrl());
-        } else {
-          llmMode.setMode('lokal');
-          enginePreference.set(pick);
-          toast.show(pick === 'neural' ? 'Raget Neural' : 'Raget Template');
-        }
-        this.refreshLlmModeStatus();
+        llmMode.setMode('lokal');
+        enginePreference.set(pick);
+        toast.show(pick === 'neural' ? 'Raget Neural' : 'Raget Template');
         paintHub();
       };
     });
     const paintHub = () => {
-      const on = llmMode.mode() === 'server' ? 'ollama' : enginePreference.get();
+      if (llmMode.mode() === 'server') llmMode.setMode('lokal');
+      const on = enginePreference.get();
       hub.querySelectorAll('button').forEach((btn) => btn.classList.toggle('on', btn.getAttribute('data-engine') === on));
     };
     paintHub();
     aiSection.appendChild(hub);
-    const llmModeRow = buildRow('row-llm-mode', SERVER_MODE_ICON, 'Server Kustom (opsional)');
-    aiSection.appendChild(llmModeRow);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);
@@ -342,10 +332,8 @@ export const settings = {
     this.refreshHematStatus();
     this.refreshMemoriStatus();
     this.refreshExportLogStatus();
-    this.refreshLlmModeStatus();
     downloadRow.onclick = () => this.handleUnduhanFitur();
     dataHealthRow.onclick = () => sheets.openDataHealth();
-    llmModeRow.onclick = () => this.handleLlmModeToggle();
     ttsRow.onclick = () => {
       const on = tts.toggle();
       toast.show(on ? 'Baca otomatis diaktifkan' : 'Baca otomatis dinonaktifkan');
@@ -505,11 +493,13 @@ export const settings = {
     }
     const info = $('storage-info');
     if (info) {
-      const kb = Math.max(1, Math.round(storage.usage() / 1024));
-      const pct = storage.percent();
-      info.textContent = 'Penyimpanan lokal: ' + kb + ' KB (' + pct + '%) · IndexedDB aktif';
+      const used = Math.max(1, storage.usage());
+      const cap = 50 * 1024 * 1024;
+      const mb = (used / (1024 * 1024)).toFixed(1);
+      const pct = Math.min(100, Math.round((used / cap) * 100));
+      info.textContent = 'Penyimpanan: ' + mb + ' MB / 50 MB';
       const bar = $('storage-meter-bar');
-      if (bar) bar.style.width = Math.min(100, pct) + '%';
+      if (bar) bar.style.width = pct + '%';
       if (pct >= 80 && !this._warned) {
         this._warned = true;
         toast.show('Penyimpanan hampir penuh (' + pct + '%)');

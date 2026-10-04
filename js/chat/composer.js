@@ -9,6 +9,8 @@ import { quote } from '../ui/quote.js';
 import { history } from '../history/history.js';
 import { chat } from './chat.js';
 import { abortGeneration } from './chat.js';
+import { skill } from '../state/skill.js';
+import { cowork } from '../ui/cowork.js';
 import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
@@ -357,11 +359,14 @@ export const composer = {
       live.remove();
     }
     const imageNote = att && att.fileText ? '[Isi gambar atau berkas]\n' + String(att.fileText).slice(0, 4000) : '';
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    const skillNote = skill.prompt();
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
     }
+    if (cowork.expectsEdit()) cowork.applyReply(reply);
+    else if (/naskah|laporan|dokumen|surat|kontrak|spesifikasi/i.test(text) && String(reply).length > 280) cowork.open(reply);
     if (deep && reply) {
       const body = '<h2>Abstrak</h2><p>' + String(reply).replace(/</g, '').slice(0, 4000) + '</p><h2>Cabang kueri</h2><pre>' + flowHub.researchPlan(text).replace(/</g, '') + '</pre>';
       artifact.open({ type: 'report', markdown: body, title: 'Berkas riset', fileName: 'riset.html' }, 'Berkas riset');
@@ -437,6 +442,14 @@ export const composer = {
   bind() {
     const inp = $('chat-input');
     if (!inp) return;
+    const skillPick = $('skill-select');
+    if (skillPick) {
+      skillPick.value = skill.get();
+      skillPick.onchange = () => {
+        skill.set(skillPick.value);
+        toast.show('Keahlian: ' + skill.all[skill.get()].label);
+      };
+    }
     inp.addEventListener('input', () => this.autoGrow());
     inp.addEventListener('focus', () => setTimeout(scrollBottom, 250));
     const send = $('btn-send');

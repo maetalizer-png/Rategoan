@@ -313,6 +313,7 @@ export const chat = {
         const b = document.createElement('div');
         if (isRich(m.text)) mountRich(b, m.text);
         else b.innerHTML = markdown.render(m.text);
+        markdown.decorate(b);
         d.appendChild(b);
         appendCitations(d, m.text);
       }
@@ -417,6 +418,7 @@ export const chat = {
       body.removeEventListener('pointerdown', onTap);
     }
     if (!isRich(text)) body.innerHTML = markdown.render(text);
+    markdown.decorate(body);
     d.appendChild(buildMetaRow(Date.now()));
     const actions = buildActions(text);
     if (URL_RE.test(text)) {

@@ -6,6 +6,7 @@ import { buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
 import { buildPptxBytes, downloadBytes } from '../../shared/pptx-local.js';
 import { ocrReader } from '../../vault/ocr/reader.js';
+import { skill } from '../state/skill.js';
 
 const UNITS = {
   km_m: 1000, m_km: 0.001, kg_g: 1000, g_kg: 0.001,
@@ -222,6 +223,7 @@ export function toolsForService(serviceId) {
 export async function runLocalTool(name, parameters) {
   const fn = TOOLS[name];
   if (!fn) return { ok: false, error: 'alat_tidak_dikenal' };
+  if (!skill.allows(name)) return { ok: false, error: 'di luar keahlian aktif' };
   try {
     const data = await fn(parameters || {});
     return { ok: true, data };

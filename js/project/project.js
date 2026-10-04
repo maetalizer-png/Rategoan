@@ -1,6 +1,7 @@
 import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { workspace } from '../state/workspace.js';
+import { folderBridge } from './folder-bridge.js';
 import { store } from '../state/store.js';
 import { toast } from '../core/toast.js';
 import { extractPdfText } from '../../shared/pdf-extract.js';
@@ -148,12 +149,14 @@ function paint() {
   const cur = workspace.current();
   const list = workspace.list();
   const emptyView = $('project-empty-state');
+  const hero = $('project-hero');
   const activeView = $('project-active-panel');
   const toggle = $('project-new-toggle');
   const createBox = $('project-create-box');
   showProjectBar(cur);
   if (!list.length) {
     if (curLabel) curLabel.textContent = 'Kelola ruang kerja terisolasi dengan instruksi mandiri.';
+    if (hero) hero.hidden = false;
     if (emptyView) emptyView.hidden = false;
     if (activeView) activeView.hidden = true;
     if (toggle) toggle.hidden = true;
@@ -163,6 +166,8 @@ function paint() {
     return;
   }
   if (emptyView) emptyView.hidden = true;
+  if (createBox && !createBox.dataset.open) createBox.hidden = true;
+  if (hero) hero.hidden = !createBox || createBox.hidden;
   if (activeView) activeView.hidden = !cur;
   if (toggle) toggle.hidden = false;
   if (createBox && !createBox.dataset.open) createBox.hidden = true;
@@ -179,6 +184,8 @@ function createNamed(name) {
   const found = workspace.findByName(clean) || workspace.create(clean);
   if (TEMPLATES[clean] && !found.systemPrompt) workspace.update(found.id, { systemPrompt: TEMPLATES[clean] });
   remember(found);
+  const box = $('project-create-box');
+  if (box) box.dataset.open = '';
   toast.show('Proyek: ' + found.name);
   paint();
 }
@@ -230,6 +237,10 @@ export const projectPage = {
       createBox.dataset.open = createBox.hidden ? '' : '1';
     };
     if (openChat) openChat.onclick = () => router.go('chat');
+    const folderBtn = $('project-folder-btn');
+    if (folderBtn) folderBtn.onclick = () => folderBridge.pick().then(() => paint());
+    const folderSave = $('project-folder-save');
+    if (folderSave) folderSave.onclick = () => folderBridge.saveNote();
     if (pin && picker) pin.onclick = () => picker.click();
     if (picker) picker.onchange = async () => {
       const active = workspace.current();
@@ -256,6 +267,7 @@ export const projectPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('project') >= 0) paint();
     });
+    window.addEventListener('rategoan:project-refresh', () => paint());
   },
   open() {
     paint();

@@ -487,3 +487,34 @@ body.is-generating #btn-send { display: none; }
 .model-hub button { text-align: left; border: 1px solid var(--rg-line); border-radius: 14px; padding: 10px 12px; background: var(--rg-surface); min-height: 44px; }
 .model-hub button small { display: block; color: var(--rg-muted); font-weight: 400; }
 .model-hub button.on { border-color: #1a4b8c; box-shadow: inset 0 0 0 1px #1a4b8c; }
+
+.attach-orb { display: grid; place-items: center; }
+.attach-orb svg { display: block; }
+.skill-pick { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--rg-muted); min-height: 44px; }
+.skill-pick select { border: 1px solid var(--rg-line); border-radius: 999px; background: transparent; color: inherit; min-height: 36px; padding: 0 8px; }
+.md-fence { margin: 8px 0; border: 1px solid var(--rg-line); border-radius: 12px; overflow: hidden; }
+.md-fence-bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 6px 8px; }
+.md-fence-bar button, .cowork-bar button, .cowork-tabs button { min-height: 36px; border-radius: 999px; border: 1px solid var(--rg-line); background: transparent; padding: 4px 10px; }
+.md-lang { font-size: 12px; font-weight: 700; }
+.md-pre { margin: 0; padding: 8px 10px; overflow: auto; white-space: pre; }
+.md-ln { display: inline-block; width: 2.2em; color: var(--rg-muted); }
+.md-diff { padding: 8px 10px; font-family: ui-monospace, monospace; font-size: 13px; }
+.md-diff-line { display: block; }
+.md-diff-line.add { background: #e8f6ee; }
+.md-diff-line.del { background: #fde8e8; }
+.md-console { margin: 0; padding: 8px 10px; background: #0f172a; color: #e2e8f0; }
+#cowork[hidden] { display: none !important; }
+#cowork { display: flex; flex-direction: column; min-height: 220px; border-top: 1px solid var(--rg-line); background: var(--rg-surface); }
+#cowork-editor { min-height: 180px; padding: 12px; outline: none; white-space: pre-wrap; overflow: auto; }
+.cowork-bar, .cowork-tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px; }
+.cowork-tabs button.on { border-color: #1a4b8c; color: #1a4b8c; }
+@media (min-width: 1024px) {
+  #view-chat.with-cowork { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 42%); }
+  #view-chat.with-cowork #cowork { grid-column: 2; grid-row: 1 / span 4; border-top: 0; border-left: 1px solid var(--rg-line); }
+}
+@media (max-width: 1023px) {
+  #view-chat.pane-canvas #messages,
+  #view-chat.pane-canvas #empty-state { display: none; }
+  #view-chat.pane-chat #cowork-editor,
+  #view-chat.pane-chat .cowork-bar { display: none; }
+}

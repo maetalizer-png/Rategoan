@@ -191,6 +191,7 @@ export function mountRich(container, text) {
   if (parts.text) {
     const prose = document.createElement('div');
     prose.innerHTML = markdown.render(parts.text);
+    markdown.decorate(prose);
     container.appendChild(prose);
   }
   parts.artifacts.forEach((item) => mountCard(container, item));

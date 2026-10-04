@@ -1,5 +1,6 @@
 import { $ } from '../../shared/dom.js';
 import { sheets } from './sheets.js';
+import { folderBridge } from '../project/folder-bridge.js';
 import { extractPdfText } from '../../shared/pdf-extract.js';
 import { readZipText } from '../../shared/zip-local.js';
 import { toast } from '../core/toast.js';
@@ -190,5 +191,10 @@ export const attach = {
     $('pick-camera').onchange = (e) => this.onPick(e.target);
     $('pick-photo').onchange = (e) => this.onPick(e.target);
     $('pick-file').onchange = (e) => this.onPick(e.target);
+    const folder = $('sheet-folder');
+    if (folder) folder.onclick = () => {
+      sheets.close();
+      folderBridge.pick();
+    };
   },
 };
