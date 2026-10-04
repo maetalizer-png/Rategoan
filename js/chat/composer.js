@@ -224,6 +224,7 @@ async function tryTableRequest(text, session) {
 export const composer = {
   websearchActive: false,
   thinkActive: false,
+  slideActive: false,
   researchActive: false,
   autoGrow() {
     const inp = $('chat-input');
@@ -406,15 +407,34 @@ export const composer = {
       card.setAttribute('aria-checked', String(active));
     }
     if (inp) inp.placeholder = active ? 'Cari di internet…' : 'Tanya Rategoan';
+    this.paintQuick();
     this.syncModes();
+  },
+  paintQuick() {
+    const web = $('btn-quick-web');
+    const think = $('btn-quick-think');
+    const slide = $('btn-quick-slide');
+    if (web) {
+      web.classList.toggle('on', !!this.websearchActive);
+      web.setAttribute('aria-pressed', String(!!this.websearchActive));
+    }
+    if (think) {
+      think.classList.toggle('on', !!this.thinkActive);
+      think.setAttribute('aria-pressed', String(!!this.thinkActive));
+    }
+    if (slide) {
+      slide.classList.toggle('on', !!this.slideActive);
+      slide.setAttribute('aria-pressed', String(!!this.slideActive));
+    }
   },
   bind() {
     const inp = $('chat-input');
     inp.addEventListener('input', () => this.autoGrow());
     inp.addEventListener('focus', () => setTimeout(scrollBottom, 250));
     $('btn-send').onclick = () => {
-      const t = inp.value.trim();
+      let t = inp.value.trim();
       if (!t && !attach.current && !quote.current) return;
+      if (this.slideActive && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
       inp.value = '';
       this.autoGrow();
       this.send(t);
@@ -426,6 +446,7 @@ export const composer = {
       if (event.detail === 'think') {
         this.thinkActive = true;
         this._toggleSwitch('sheet-think', true);
+        this.paintQuick();
         this.syncModes();
       } else if (event.detail === 'neural') {
         try { localStorage.setItem('rategoan_engine', 'neural'); } catch (e) {}
@@ -447,6 +468,7 @@ export const composer = {
       else if (key === 'think') {
         this.thinkActive = false;
         this._toggleSwitch('sheet-think', false);
+        this.paintQuick();
         this.syncModes();
       } else if (key === 'research') {
         this.researchActive = false;
@@ -456,6 +478,22 @@ export const composer = {
     };
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
+    const quickWeb = $('btn-quick-web');
+    if (quickWeb) quickWeb.onclick = () => this.setWebsearch(!this.websearchActive);
+    const quickThink = $('btn-quick-think');
+    if (quickThink) quickThink.onclick = () => {
+      this.thinkActive = !this.thinkActive;
+      this._toggleSwitch('sheet-think', this.thinkActive);
+      this.paintQuick();
+      this.syncModes();
+      toast.show(this.thinkActive ? 'Berpikir keras nyala' : 'Berpikir keras mati');
+    };
+    const quickSlide = $('btn-quick-slide');
+    if (quickSlide) quickSlide.onclick = () => {
+      this.slideActive = !this.slideActive;
+      this.paintQuick();
+      toast.show(this.slideActive ? 'Pesan berikutnya dijadikan slide' : 'Mode slide mati');
+    };
     const websearchCard = $('sheet-websearch');
     if (websearchCard) {
       websearchCard.onclick = () => {
@@ -466,6 +504,7 @@ export const composer = {
     if (thinkCard) thinkCard.onclick = () => {
       this.thinkActive = !this.thinkActive;
       this._toggleSwitch('sheet-think', this.thinkActive);
+      this.paintQuick();
       this.syncModes();
     };
     const researchCard = $('sheet-research');
