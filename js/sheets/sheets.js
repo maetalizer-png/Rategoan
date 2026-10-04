@@ -6,6 +6,8 @@ export const sheets = {
   close() {
     $('attach-sheet').hidden = true;
     $('model-sheet').hidden = true;
+    const skill = $('skill-sheet');
+    if (skill) skill.hidden = true;
     $('data-health-sheet').hidden = true;
     const ps = $('project-sheet');
     if (ps) ps.hidden = true;
@@ -39,6 +41,8 @@ export const sheets = {
     $('sheet-backdrop').onclick = () => this.close();
     $('attach-close').onclick = () => this.close();
     $('model-close').onclick = () => this.close();
+    const skillClose = $('skill-close');
+    if (skillClose) skillClose.onclick = () => this.close();
     $('data-health-close').onclick = () => this.close();
     const pc = $('project-close');
     if (pc) pc.onclick = () => this.close();

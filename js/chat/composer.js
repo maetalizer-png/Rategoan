@@ -443,8 +443,13 @@ export const composer = {
     const inp = $('chat-input');
     if (!inp) return;
     const paintSlot = () => {
-      const draft = !!(inp.value.trim() || (attach.current) || (quote.current));
+      const draft = !!(inp.value.trim() || attach.current || quote.current);
       document.body.classList.toggle('has-draft', draft);
+      const sendBtn = $('btn-send');
+      if (sendBtn) {
+        sendBtn.disabled = !draft;
+        sendBtn.classList.toggle('is-idle', !draft);
+      }
     };
     inp.addEventListener('input', () => {
       this.autoGrow();
@@ -508,6 +513,37 @@ export const composer = {
         this.syncModes();
       }
     };
+    paintSlot();
+    const skillPill = $('header-skill-pill');
+    const paintSkill = () => {
+      if (!skillPill) return;
+      const current = skill.all[skill.get()];
+      skillPill.textContent = (current ? current.label : 'Umum') + ' \u25BE';
+    };
+    const skillList = $('skill-list');
+    if (skillList && !skillList.dataset.ready) {
+      skillList.dataset.ready = '1';
+      Object.keys(skill.all).forEach((id) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'model-item';
+        btn.textContent = skill.all[id].label;
+        btn.onclick = () => {
+          skill.set(id);
+          paintSkill();
+          sheets.close();
+          toast.show('Keahlian: ' + skill.all[id].label);
+        };
+        skillList.appendChild(btn);
+      });
+    }
+    if (skillPill) skillPill.onclick = () => {
+      const box = $('skill-sheet');
+      if (!box) return;
+      box.hidden = false;
+      $('sheet-backdrop').classList.add('show');
+    };
+    paintSkill();
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
     const quickWeb = $('btn-quick-web');

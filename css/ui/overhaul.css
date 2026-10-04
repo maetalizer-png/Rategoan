@@ -519,8 +519,9 @@ body.is-generating #btn-send { display: none; }
   #view-chat.pane-chat .cowork-bar { display: none; }
 }
 
-body:not(.has-draft):not(.is-generating) #btn-send { display: none !important; }
-body.has-draft:not(.is-generating) #btn-voice-input { display: none !important; }
 body.is-generating #btn-voice-input { display: none !important; }
+#btn-send.is-idle,
+#btn-send:disabled { opacity: 0.45; cursor: default; }
+.header-pill { min-height: 36px; border-radius: 999px; border: 1px solid var(--rg-line); background: transparent; padding: 4px 12px; font-size: 13px; font-weight: 600; }
 #studio-diff-view { margin: 8px 0; max-height: 280px; overflow: auto; }
 #studio-folder-list button { min-height: 36px; }
