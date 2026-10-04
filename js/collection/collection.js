@@ -39,6 +39,25 @@ const TEMPLATE = `
         </div>
         <div id="coll-filters" class="coll-filters"></div>
         <button type="button" id="coll-new-note" class="btn-run-primary">Buat catatan koleksi</button>
+        <div id="coll-note-modal" class="app-modal" hidden>
+          <form id="coll-note-form" class="app-modal-card">
+            <h2>Catatan koleksi</h2>
+            <input id="coll-note-title" type="text" placeholder="Judul catatan" autocomplete="off">
+            <div class="coll-note-tags" id="coll-note-tags">
+              <button type="button" data-coll-tag="prompt" class="on">Prompt</button>
+              <button type="button" data-coll-tag="kode">Kode</button>
+              <button type="button" data-coll-tag="riset">Riset</button>
+              <button type="button" data-coll-tag="fakta">Fakta</button>
+              <button type="button" data-coll-tag="web">Web</button>
+              <button type="button" data-coll-tag="dokumen">Dokumen</button>
+            </div>
+            <textarea id="coll-note-body" rows="5" placeholder="Catatan atau kutipan"></textarea>
+            <div class="app-modal-actions">
+              <button type="button" id="coll-note-cancel">Batal</button>
+              <button type="submit" id="coll-note-save">Simpan ke koleksi</button>
+            </div>
+          </form>
+        </div>
         <input type="file" id="coll-import-file" accept="application/json,.json" hidden>
         <div id="coll-content"></div>
       </div>
@@ -89,6 +108,17 @@ function escapeHtml(s) {
 
 function fmtDate(t) {
   return new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function relTime(t) {
+  const mins = Math.round((Date.now() - Number(t || 0)) / 60000);
+  if (mins < 1) return 'baru saja';
+  if (mins < 60) return mins + ' menit lalu';
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return hours + ' jam lalu';
+  const days = Math.round(hours / 24);
+  if (days < 14) return days + ' hari lalu';
+  return fmtDate(t);
 }
 
 async function renderTersimpan() {
@@ -166,7 +196,7 @@ function itemCardHtml(it, matched) {
     '<div class="coll-item" data-id="' + it.id + '">' +
     '<div class="coll-item-head">' +
     '<button type="button" class="coll-item-tag" data-tag-btn="' + it.id + '">' + escapeHtml(it.tag) + '</button>' +
-    '<span class="coll-item-time">' + fmtDate(it.time) + '</span>' +
+    '<span class="coll-item-time">' + relTime(it.time) + '</span>' +
     '<button type="button" class="coll-item-pin' + (it.pinned ? ' on' : '') + '" data-pin="' + it.id + '" aria-label="Pin">' + ic('pin') + '</button>' +
     '</div>' +
     '<div class="coll-item-text">' + highlighted + '</div>' +
@@ -177,6 +207,7 @@ function itemCardHtml(it, matched) {
     '<div class="coll-item-actions">' +
     '<button type="button" data-remind="' + it.id + '">' + ic('bell') + ' Ingatkan</button>' +
     '<button type="button" data-copy="' + it.id + '">' + ic('copy') + ' Salin</button>' +
+    '<button type="button" data-chat="' + it.id + '">Kirim ke chat</button>' +
     (it.archived ? '<button type="button" data-restore="' + it.id + '">' + ic('archive') + ' Pulihkan</button>' : '') +
     '<button type="button" class="danger" data-del="' + it.id + '">' + ic('trash') + ' Hapus</button>' +
     '</div></div>'
@@ -202,6 +233,15 @@ function bindItemCards(list, rerender) {
   content.querySelectorAll('[data-copy]').forEach((b) => b.onclick = () => {
     const item = list.find((x) => x.id === b.dataset.copy);
     if (item && navigator.clipboard) navigator.clipboard.writeText(item.text).then(() => toast.show('Disalin'));
+  });
+  content.querySelectorAll('[data-chat]').forEach((b) => b.onclick = () => {
+    const item = list.find((x) => x.id === b.dataset.chat);
+    const inp = $('chat-input');
+    if (!item || !inp) return;
+    inp.value = item.text;
+    inp.dispatchEvent(new Event('input'));
+    router.go('chat');
+    toast.show('Catatan masuk ke kotak tulis');
   });
   content.querySelectorAll('[data-remind]').forEach((b) => b.onclick = () => {
     const item = list.find((x) => x.id === b.dataset.remind);
@@ -583,11 +623,36 @@ export const collectionPage = {
       downloadFile(JSON.stringify(items, null, 2), 'application/json', 'koleksi-backup-' + new Date().toISOString().slice(0, 10) + '.json');
     };
     const noteBtn = $('coll-new-note');
-    if (noteBtn) noteBtn.onclick = async () => {
-      const text = window.prompt('Catatan koleksi');
-      if (!text || !text.trim()) return;
-      const tag = window.prompt('Tag: prompt, kode, atau riset', 'prompt') || 'prompt';
-      await collectionStore.addItem({ kind: 'chat', role: 'user', text: text.trim(), tag: tag.trim() || 'prompt', chatTitle: 'Catatan' });
+    const modal = $('coll-note-modal');
+    const chosenTag = () => {
+      const on = document.querySelector('#coll-note-tags button.on');
+      return (on && on.dataset.collTag) || 'prompt';
+    };
+    document.querySelectorAll('#coll-note-tags button').forEach((btn) => {
+      btn.onclick = () => {
+        document.querySelectorAll('#coll-note-tags button').forEach((other) => other.classList.toggle('on', other === btn));
+      };
+    });
+    if (noteBtn && modal) noteBtn.onclick = () => { modal.hidden = false; };
+    const cancel = $('coll-note-cancel');
+    if (cancel) cancel.onclick = () => { modal.hidden = true; };
+    const form = $('coll-note-form');
+    if (form) form.onsubmit = async (event) => {
+      event.preventDefault();
+      const title = ($('coll-note-title').value || '').trim();
+      const text = ($('coll-note-body').value || '').trim();
+      if (!text && !title) return;
+      await collectionStore.addItem({
+        kind: 'chat',
+        role: 'user',
+        text: text || title,
+        tag: chosenTag(),
+        chatTitle: title || 'Catatan',
+        note: title,
+      });
+      $('coll-note-title').value = '';
+      $('coll-note-body').value = '';
+      modal.hidden = true;
       toast.show('Catatan masuk koleksi');
       renderTab();
     };
