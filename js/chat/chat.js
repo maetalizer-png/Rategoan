@@ -1,6 +1,6 @@
 import { $, sleep, scrollBottom } from '../../shared/dom.js';
 import { fmtTime } from '../../shared/format.js';
-import { reduceMotion } from '../../shared/haptics.js';
+import { reduceMotion, haptics } from '../../shared/haptics.js';
 import { markdown } from '../../shared/markdown.js';
 import { copy } from '../../shared/clipboard.js';
 import { store } from '../state/store.js';
@@ -100,45 +100,34 @@ function buildMetaRow(time) {
   return row;
 }
 
+function iconAction(label, iconName, onClick) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'msg-action-btn icon-only';
+  btn.setAttribute('aria-label', label);
+  btn.innerHTML = ic(iconName);
+  btn.onclick = (event) => {
+    event.stopPropagation();
+    haptics.tap(10);
+    onClick(btn);
+  };
+  return btn;
+}
+
 function buildActions(text) {
   const row = document.createElement('div');
   row.className = 'msg-actions';
+  const menu = document.createElement('div');
+  menu.className = 'msg-more-pop';
+  menu.hidden = true;
 
-  const copyBtn = document.createElement('button');
-  copyBtn.type = 'button';
-  copyBtn.className = 'msg-action-btn';
-  copyBtn.innerHTML = ic('copy') + ' Salin';
-  copyBtn.onclick = () => {
+  const copyBtn = iconAction('Salin', 'copy', () => {
     copy(text)
       .then(() => toast.show('Disalin'))
       .catch(() => toast.show('Gagal menyalin'));
-  };
-
-  const speakBtn = document.createElement('button');
-  speakBtn.type = 'button';
-  speakBtn.className = 'msg-action-btn';
-  speakBtn.innerHTML = ic('speaker') + ' Baca';
-  speakBtn.onclick = () => voice.speak(text);
-
-  const shareBtn = document.createElement('button');
-  shareBtn.type = 'button';
-  shareBtn.className = 'msg-action-btn';
-  shareBtn.innerHTML = ic('share') + ' Bagikan';
-  shareBtn.onclick = () => {
-    if (navigator.share) {
-      navigator.share({ text }).catch(() => {});
-    } else {
-      copy(text)
-        .then(() => toast.show('Disalin'))
-        .catch(() => toast.show('Gagal menyalin'));
-    }
-  };
-
-  const saveBtn = document.createElement('button');
-  saveBtn.type = 'button';
-  saveBtn.className = 'msg-action-btn';
-  saveBtn.innerHTML = ic('bookmark') + ' Simpan';
-  saveBtn.onclick = async () => {
+  });
+  const speakBtn = iconAction('Baca suara', 'speaker', () => voice.speak(text));
+  const saveBtn = iconAction('Simpan', 'bookmark', async (btn) => {
     if (await collectionStore.existsByText(text)) {
       toast.show('Sudah ada di Koleksi');
       return;
@@ -148,60 +137,59 @@ function buildActions(text) {
     const tag = collectionStore.tagFromIntent(match ? match.intent : null);
     const current = chat.current();
     await collectionStore.addItem({ text, role: 'ai', tag, chatTitle: (current && current.title) || '' });
-    saveBtn.innerHTML = ic('bookmarkFilled') + ' Tersimpan';
-    saveBtn.disabled = true;
+    btn.classList.add('on');
+    btn.setAttribute('aria-label', 'Tersimpan');
     toast.show('Disimpan ke Koleksi');
-    if (!row.querySelector('.coll-view-chip')) {
-      const viewChip = buildExtraChip('Lihat Koleksi', () => router.go('collection'), 'bookmark');
-      viewChip.classList.add('coll-view-chip');
-      row.appendChild(viewChip);
-    }
+  });
+  const more = buildMoreBtn();
+  more.onclick = (event) => {
+    event.stopPropagation();
+    menu.hidden = !menu.hidden;
   };
 
+  const shareBtn = document.createElement('button');
+  shareBtn.type = 'button';
+  shareBtn.textContent = 'Bagikan';
+  shareBtn.onclick = () => {
+    menu.hidden = true;
+    if (navigator.share) navigator.share({ text }).catch(() => {});
+    else copy(text).then(() => toast.show('Disalin')).catch(() => toast.show('Gagal menyalin'));
+  };
   const upBtn = document.createElement('button');
   upBtn.type = 'button';
-  upBtn.className = 'msg-action-btn';
-  upBtn.innerHTML = ic('thumbUp');
-  upBtn.setAttribute('aria-label', 'Balasan bagus');
+  upBtn.textContent = 'Balasan bagus';
   const downBtn = document.createElement('button');
   downBtn.type = 'button';
-  downBtn.className = 'msg-action-btn';
-  downBtn.innerHTML = ic('thumbDown');
-  downBtn.setAttribute('aria-label', 'Balasan kurang tepat');
+  downBtn.textContent = 'Balasan kurang tepat';
   async function noteOfAnswer() {
     const notes = await ragetDb.allNotes();
     const match = notes.slice().reverse().find((n) => n.answer.trim() === text.trim());
     return { intent: match ? match.intent : null, sourceEntryId: match ? match.sourceEntryId || null : null };
   }
-
   upBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, true);
     const note = await noteOfAnswer();
     feedbackStore.record(true, note.intent, note.sourceEntryId);
     upBtn.classList.add('rated');
-    downBtn.classList.remove('rated');
     toast.show('Makasih atas masukannya');
-    if (!(await collectionStore.existsByText(text)) && !row.querySelector('.coll-suggest-chip')) {
-      const suggestChip = buildExtraChip('Simpan ke Koleksi?', () => saveBtn.click(), 'bookmark');
-      suggestChip.classList.add('coll-suggest-chip');
-      row.appendChild(suggestChip);
-    }
+    menu.hidden = true;
   };
   downBtn.onclick = async () => {
     await ragetDb.rateByAnswer(text, false);
     const note = await noteOfAnswer();
     feedbackStore.record(false, note.intent, note.sourceEntryId);
     downBtn.classList.add('rated');
-    upBtn.classList.remove('rated');
     toast.show('Dicatat, makasih');
+    menu.hidden = true;
   };
-
+  menu.appendChild(shareBtn);
+  menu.appendChild(upBtn);
+  menu.appendChild(downBtn);
   row.appendChild(copyBtn);
   row.appendChild(speakBtn);
-  row.appendChild(shareBtn);
   row.appendChild(saveBtn);
-  row.appendChild(upBtn);
-  row.appendChild(downBtn);
+  row.appendChild(more);
+  row.appendChild(menu);
   return row;
 }
 
