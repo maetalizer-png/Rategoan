@@ -371,7 +371,7 @@ export const settings = {
     }
     const last = items[0];
     const when = last.time ? new Date(last.time).toLocaleString('id-ID') : '';
-    val.textContent = (last.label || last.kind || 'ekspor') + (when ? ' \u00b7 ' + when : '');
+    val.textContent = (last.label || last.kind || 'ekspor') + (when ? ' · ' + when : '');
   },
   refreshLlmModeStatus() {
     const val = $('row-llm-mode-value');
@@ -408,11 +408,11 @@ export const settings = {
     const ocrStatus = ocrReader.isReady() ? 'OCR siap' : 'OCR belum';
     const trStatus = translator.isReady() ? 'Terjemahan siap' : 'Terjemahan belum';
     const pdfStatus = pdfReader.isReady() ? 'PDF siap' : 'PDF belum';
-    val.textContent = ocrStatus + ' \u2022 ' + trStatus + ' \u2022 ' + pdfStatus;
+    val.textContent = ocrStatus + ' • ' + trStatus + ' • ' + pdfStatus;
   },
   async handleUnduhanFitur() {
     if (!ocrReader.isReady()) {
-      const wantOcr = confirm('Unduh paket OCR/baca gambar (\u00b1' + ocrReader.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
+      const wantOcr = confirm('Unduh paket OCR/baca gambar (±' + ocrReader.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
       if (wantOcr) {
         toast.show('Mengunduh paket OCR...');
         const ok = await ocrReader.downloadPackage();
@@ -421,7 +421,7 @@ export const settings = {
       }
     }
     if (!translator.isReady()) {
-      const wantTr = confirm('Unduh paket Terjemahan (\u00b1' + translator.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
+      const wantTr = confirm('Unduh paket Terjemahan (±' + translator.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
       if (wantTr) {
         toast.show('Mengunduh paket Terjemahan...');
         const ok = await translator.downloadPackage();
@@ -430,7 +430,7 @@ export const settings = {
       }
     }
     if (!pdfReader.isReady()) {
-      const wantPdf = confirm('Unduh paket baca PDF (\u00b1' + pdfReader.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
+      const wantPdf = confirm('Unduh paket baca PDF (±' + pdfReader.packageSizeMB + ' MB)? Butuh internet sekali, setelah itu bisa dipakai offline.');
       if (wantPdf) {
         toast.show('Mengunduh paket PDF...');
         const ok = await pdfReader.downloadPackage();
@@ -477,7 +477,7 @@ export const settings = {
       const sessions = store.get().sessions;
       const kb = Math.max(1, Math.round(storage.usage() / 1024));
       const pct = storage.percent();
-      info.textContent = sessions.length + ' chat \u2022 ' + kb + ' KB (' + pct + '%)';
+      info.textContent = sessions.length + ' chat • ' + kb + ' KB (' + pct + '%)';
       if (pct >= 80 && !this._warned) {
         this._warned = true;
         toast.show('Penyimpanan hampir penuh (' + pct + '%)');
