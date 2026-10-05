@@ -1,4 +1,3 @@
-import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { store } from '../state/store.js';
 import { workspace } from '../state/workspace.js';

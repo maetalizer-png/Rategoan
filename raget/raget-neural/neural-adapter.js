@@ -31,7 +31,7 @@ async function ask(prompt, context) {
 
 export const neuralAdapter = Object.freeze({
   id: 'neural',
-  label: 'Raget 1.0',
+  label: 'Raget 1.0 Cerdas',
   init,
   ask,
   status,

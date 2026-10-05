@@ -91,10 +91,29 @@ function outlineFrom(body, title) {
   return [{ kind: 'body', title: lines[0] || title || 'Slide', bullets: lines.slice(1, 6) }];
 }
 
+function splitCsvLine(line) {
+  const cells = [];
+  let cur = '';
+  let quote = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (quote) {
+      if (ch === '"') {
+        if (line[i + 1] === '"') { cur += '"'; i += 1; }
+        else quote = false;
+      } else cur += ch;
+    } else if (ch === '"') quote = true;
+    else if (ch === ',') { cells.push(cur.trim()); cur = ''; }
+    else cur += ch;
+  }
+  cells.push(cur.trim());
+  return cells;
+}
+
 function rowsFrom(body) {
   const lines = String(body || '').split('\n').filter((line) => line.trim());
   if (!lines.length) return [['Kolom'], ['']];
-  return lines.map((line) => line.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/).map((cell) => cell.replace(/^"|"$/g, '').trim()));
+  return lines.map(splitCsvLine);
 }
 
 function preview(item) {

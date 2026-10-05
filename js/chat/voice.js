@@ -64,11 +64,20 @@ export const voice = {
       inp.value += (inp.value ? ' ' : '') + t;
       inp.dispatchEvent(new Event('input'));
       composer.autoGrow();
-      if (inp.value.trim()) {
-        this.speakNext = true;
+      toast.show('Periksa teks suara. Terkirim sendiri dalam 2 detik.');
+      clearTimeout(this.confirmTimer);
+      const cancel = () => {
+        inp.dataset.voiceEdited = '1';
+        clearTimeout(this.confirmTimer);
+        inp.removeEventListener('input', cancel);
+      };
+      inp.addEventListener('input', cancel);
+      this.confirmTimer = setTimeout(() => {
+        inp.removeEventListener('input', cancel);
         const btn = $('btn-send');
-        if (btn) btn.click();
-      }
+        if (btn && inp.value.trim() && !inp.dataset.voiceEdited) btn.click();
+        delete inp.dataset.voiceEdited;
+      }, 2000);
     };
     this.rec.onerror = (e) => toast.show('Suara: ' + (e.error || 'gagal'));
     this.rec.onend = () => {

@@ -380,7 +380,6 @@ async function research(query) {
   const first = await search(query);
   if (!first.ok) return first;
   const extras = [];
-  const bag = [];
   const seeds = entityQueries(first.extract, query);
   (first.related || []).slice(0, 2).forEach((r) => { if (r && r.title) seeds.push(r.title); });
   const seen = {};

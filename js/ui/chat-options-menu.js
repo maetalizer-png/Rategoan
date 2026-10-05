@@ -48,7 +48,7 @@ export function mountChatOptions() {
   const menu = document.createElement('div');
   menu.id = 'chat-options-menu';
   menu.hidden = true;
-  menu.innerHTML = '<button type="button" data-act="search">Cari di obrolan</button><button type="button" data-act="share">Bagi tautan</button><button type="button" data-act="md">Ekspor Markdown</button><button type="button" data-act="pdf">Ekspor siap cetak</button><button type="button" data-act="clear">Bersihkan percakapan</button>';
+  menu.innerHTML = '<button type="button" data-act="search">Cari di obrolan</button><button type="button" data-act="share">Salin Obrolan</button><button type="button" data-act="md">Ekspor Markdown</button><button type="button" data-act="pdf">Ekspor siap cetak</button><button type="button" data-act="clear">Bersihkan percakapan</button>';
   btn.parentElement.appendChild(menu);
   const close = () => { menu.hidden = true; };
   btn.onclick = (event) => {
@@ -64,9 +64,9 @@ export function mountChatOptions() {
     const s = session();
     if (act === 'search') chatsearch.toggle();
     else if (act === 'share') {
-      const url = location.origin + location.pathname + '#/chat';
-      if (navigator.share) navigator.share({ title: 'Rategoan', url }).catch(() => {});
-      else if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => toast.show('Tautan disalin'));
+      const text = markdownOf(s);
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => toast.show('Obrolan disalin'));
+      else toast.show('Tidak bisa menyalin');
     } else if (act === 'md') {
       const blob = new Blob([markdownOf(s)], { type: 'text/markdown' });
       const a = document.createElement('a');

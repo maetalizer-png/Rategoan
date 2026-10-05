@@ -67,13 +67,18 @@ export const msgmenu = {
       quote.set(m);
       $('chat-input').focus();
     } else if (kind === 'edit') {
-      const t = prompt('Ubah pesan:', m.text);
-      if (t !== null && t.trim() && t !== m.text) {
-        m.text = t.trim();
-        store.save();
-        chat.renderMessages();
-        toast.show('Pesan diubah');
+      s.forks = s.forks || [];
+      s.forks.push(s.messages.slice(this.idx));
+      s.forkIndex = s.forks.length;
+      s.messages = s.messages.slice(0, this.idx);
+      store.save();
+      const inp = $('chat-input');
+      if (inp) {
+        inp.value = m.text;
+        inp.focus();
       }
+      chat.renderMessages();
+      toast.show('Pesan dikembalikan ke kolom tulis');
     } else if (kind === 'resend') {
       composer.send(m.text);
     } else if (kind === 'speak') {

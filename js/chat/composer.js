@@ -17,7 +17,10 @@ import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
-import { buildOutline, exportSlides, previewOutline, rememberSlide, allArtifacts } from '../../shared/slides-export.js';
+import { chunker } from '../../vault/chunk.js';
+import { buildDocxBytes } from '../../shared/docx-local.js';
+import { memoryPreference } from '../state/memory-preference.js';
+import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../../shared/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
@@ -331,7 +334,7 @@ export const composer = {
     if (project) workspace.linkSession(project.id, s.id);
     let projectPrefix = '';
     if (project && (project.systemPrompt || (project.pinnedFiles && project.pinnedFiles.length))) {
-      projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + (project.pinnedFiles || []).map((file) => file.name + ': ' + String(file.textContent || '').slice(0, 400)).join('\n');
+      projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + (project.pinnedFiles || []).map((file) => file.name + ': ' + (chunker.chunkText(file.textContent || '', 1500)[0] || '')).join('\n');
     }
     let thoughts = null;
     if (this.thinkActive || this.researchActive) {
@@ -360,7 +363,8 @@ export const composer = {
     }
     const imageNote = att && att.fileText ? '[Isi gambar atau berkas]\n' + String(att.fileText).slice(0, 4000) : '';
     const skillNote = skill.prompt();
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;
@@ -370,6 +374,47 @@ export const composer = {
     if (deep && reply) {
       const report = await flowHub.buildResearch(text, reply);
       artifact.open({ type: 'report', markdown: report, title: 'Berkas riset', fileName: 'riset.md' }, 'Berkas riset');
+      const card = document.createElement('div');
+      card.className = 'msg ai research-card';
+      const title = document.createElement('strong');
+      title.textContent = 'Berkas riset';
+      const summary = document.createElement('p');
+      summary.textContent = String(reply).replace(/\s+/g, ' ').trim().slice(0, 180);
+      const actions = document.createElement('div');
+      actions.className = 'research-actions';
+      const open = document.createElement('button');
+      open.type = 'button';
+      open.textContent = 'Buka di Kanvas';
+      open.onclick = () => artifact.open({ type: 'report', markdown: report, title: 'Berkas riset', fileName: 'riset.md' }, 'Berkas riset');
+      const docx = document.createElement('button');
+      docx.type = 'button';
+      docx.textContent = 'Unduh DOCX';
+      docx.onclick = () => {
+        const bytes = buildDocxBytes(report);
+        const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'riset.docx';
+        a.click();
+      };
+      const md = document.createElement('button');
+      md.type = 'button';
+      md.textContent = 'Unduh MD';
+      md.onclick = () => {
+        const blob = new Blob([report], { type: 'text/markdown' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'riset.md';
+        a.click();
+      };
+      actions.appendChild(open);
+      actions.appendChild(docx);
+      actions.appendChild(md);
+      card.appendChild(title);
+      card.appendChild(summary);
+      card.appendChild(actions);
+      const host = $('messages');
+      if (host) host.appendChild(card);
     }
     if (plan.route === 'tool' || toolsKode.isCodeQuestion(text)) {
       await tryCodeArtifact(text);
@@ -526,7 +571,12 @@ export const composer = {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'model-item';
-        btn.textContent = skill.all[id].label;
+        const title = document.createElement('strong');
+        title.textContent = skill.all[id].label;
+        const note = document.createElement('small');
+        note.textContent = skill.all[id].help || '';
+        btn.appendChild(title);
+        btn.appendChild(note);
         btn.onclick = () => {
           skill.set(id);
           paintSkill();
@@ -571,6 +621,10 @@ export const composer = {
     if (thinkCard) thinkCard.onclick = () => {
       this.thinkActive = !this.thinkActive;
       this._toggleSwitch('sheet-think', this.thinkActive);
+      if (this.thinkActive && hemat.enabled()) {
+        hemat.toggle();
+        this._toggleSwitch('sheet-fast', false);
+      }
       this.paintQuick();
       this.syncModes();
     };
@@ -578,6 +632,10 @@ export const composer = {
     if (researchCard) researchCard.onclick = () => {
       this.researchActive = !this.researchActive;
       this._toggleSwitch('sheet-research', this.researchActive);
+      if (this.researchActive && hemat.enabled()) {
+        hemat.toggle();
+        this._toggleSwitch('sheet-fast', false);
+      }
       if (this.researchActive) this.setWebsearch(true);
       else this.syncModes();
     };
@@ -635,12 +693,46 @@ export const composer = {
       toast.show('Proyek: ' + found.name);
       sheets.close();
     };
+    const toolsRow = $('sheet-tools');
+    if (toolsRow) toolsRow.onclick = () => { sheets.close(); router.go('connect'); };
+    const memoryRow = $('sheet-memory');
+    if (memoryRow) {
+      this._toggleSwitch('sheet-memory', memoryPreference.get());
+      memoryRow.onclick = () => {
+        const on = !memoryPreference.get();
+        memoryPreference.set(on);
+        this._toggleSwitch('sheet-memory', on);
+        toast.show(on ? 'Memori personal nyala' : 'Memori personal mati');
+      };
+    }
+    document.querySelectorAll('[data-starter]').forEach((btn) => {
+      btn.onclick = () => {
+        const box = $('chat-input');
+        if (!box) return;
+        box.value = btn.dataset.starter || '';
+        box.focus();
+        paintSlot();
+      };
+    });
+    const memoryPill = $('header-memory-pill');
+    if (memoryPill) memoryPill.onclick = () => {
+      const opener = document.querySelector('[data-open-memory]');
+      if (opener) opener.click();
+      else router.go('settings');
+    };
     const voiceCard = $('sheet-voice');
     if (voiceCard) voiceCard.onclick = () => { sheets.close(); voice.listen(); };
     const fastCard = $('sheet-fast');
     if (fastCard) fastCard.onclick = () => {
       const on = hemat.toggle();
       this._toggleSwitch('sheet-fast', on);
+      if (on) {
+        this.thinkActive = false;
+        this.researchActive = false;
+        this._toggleSwitch('sheet-think', false);
+        this._toggleSwitch('sheet-research', false);
+        this.syncModes();
+      }
       toast.show(on ? 'Mode kilat hidup' : 'Mode kilat mati');
     };
     const docCard = $('sheet-doc');

@@ -43,7 +43,6 @@ function linearBackward(x, W, dY) {
 }
 
 function linearWithBiasBackward(x, W, dY) {
-    const { E } = requireDeps();
     const lin = linearBackward(x, W, dY);
     const dB = new Array(dY[0].length).fill(0);
     for (let i = 0; i < dY.length; i++) {
@@ -224,7 +223,7 @@ function transformerBlockForwardWithCache(x, blockWeights, config, mask) {
 }
 
 function transformerBlockBackward(cache, blockWeights, config, mask, dOutput) {
-    const { E, T } = requireDeps();
+    const { E } = requireDeps();
 
     
     const dFfnOut = dOutput;
@@ -287,7 +286,7 @@ function forwardWithCache(tokenIds, model, config) {
 }
 
 function backward(cache, dLogits, model, config) {
-    const { E, T } = requireDeps();
+    const { E } = requireDeps();
 
     const outProjLin = linearBackward(cache.finalHidden, model.decoderWeights.outputProjection, dLogits);
     const dFinalHidden = outProjLin.dX;
@@ -521,8 +520,6 @@ async function trainOnCorpus(model, tokenizedSequences, options) {
     const totalSteps = tokenizedSequences.filter(function (s) { return s.length >= 2; }).length * epochs;
 
     for (let epoch = 0; epoch < epochs; epoch++) {
-        let epochLoss = 0;
-        let count = 0;
         for (let s = 0; s < tokenizedSequences.length; s++) {
             const seq = tokenizedSequences[s];
             if (seq.length < 2) continue;
@@ -533,8 +530,6 @@ async function trainOnCorpus(model, tokenizedSequences, options) {
                 : baseLearningRate;
 
             const loss = trainStep(model, seq, lr, options.maxGradNorm, options);
-            epochLoss += loss;
-            count += 1;
             history.push({ step: step, epoch: epoch, loss: loss, learningRate: lr });
 
             

@@ -46,7 +46,7 @@ function slugify(s) {
 
 function toSchema(item, regionId, usedIds) {
   const m = item.metadata || {};
-  const { category, region, name, tags, ...restMeta } = m;
+  const { category: _category, region: _region, name, tags, ...restMeta } = m;
   let id = 'marplace-' + slugify(name);
   if (usedIds.has(id)) id = id + '-' + regionId;
   let n = 2;

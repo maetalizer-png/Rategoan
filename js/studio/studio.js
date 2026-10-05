@@ -191,7 +191,22 @@ export const studioPage = {
         ? ((res.logs || []).join('\n') + (res.value ? '\n\u2192 ' + res.value : '')).trim() || 'Selesai.'
         : ('Gagal: ' + (res.error || 'error'));
       showConsole(body, Math.round(performance.now() - started));
+      const studioView = $('view-studio');
+      if (studioView && window.matchMedia('(max-width: 1023px)').matches) {
+        studioView.classList.remove('pane-editor', 'pane-preview');
+        studioView.classList.add('pane-console');
+      }
     };
+    const view = $('view-studio');
+    document.querySelectorAll('#studio-panes button').forEach((btn) => {
+      btn.onclick = () => {
+        if (!view) return;
+        view.classList.remove('pane-editor', 'pane-preview', 'pane-console');
+        view.classList.add('pane-' + btn.dataset.pane);
+        document.querySelectorAll('#studio-panes button').forEach((other) => other.classList.toggle('on', other === btn));
+      };
+    });
+    if (view && !view.classList.contains('pane-editor')) view.classList.add('pane-editor');
     const tabJs = $('studio-tab-js');
     const tabPy = $('studio-tab-py');
     const pick = (next) => {
@@ -379,6 +394,12 @@ export const studioPage = {
       if (!frame) return;
       frame.hidden = false;
       frame.srcdoc = previewSrcdoc(WEB);
+      const studioView = $('view-studio');
+      if (studioView && window.matchMedia('(max-width: 1023px)').matches) {
+        studioView.classList.remove('pane-editor', 'pane-console');
+        studioView.classList.add('pane-preview');
+        document.querySelectorAll('#studio-panes button').forEach((other) => other.classList.toggle('on', other.dataset.pane === 'preview'));
+      }
     };
     const open = $('studio-open-panel');
     if (open) open.onclick = () => {

@@ -36,7 +36,7 @@ function slugify(s) {
 
 function toSchema(item, regionId, usedIds) {
   const m = item.metadata || {};
-  const { category, region, name, tags, ...restMeta } = m;
+  const { category: _category, region: _region, name, tags, ...restMeta } = m;
   let id = 'kota-' + slugify(name) + (m.country ? '-' + slugify(m.country) : '');
   if (usedIds.has(id)) id = id + '-2';
   usedIds.add(id);

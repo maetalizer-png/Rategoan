@@ -66,7 +66,19 @@ function paint() {
   if (!shown.length) {
     const li = document.createElement('li');
     li.className = 'coll-empty-card';
-    li.innerHTML = '<strong>Belum ada artefak</strong><p>Minta slide, dokumen, atau kode di obrolan, atau simpan cuplikan dari Studio kode.</p>';
+    li.innerHTML = '<strong>Belum ada artefak</strong><p>Mulai dari salah satu ini.</p>';
+    [['Buat dokumen Word', 'Buatkan dokumen Word: '], ['Buat presentasi', 'Buatkan slide: '], ['Buat tabel data', 'Buatkan tabel: ']].forEach(([label, text]) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'starter-chip';
+      btn.textContent = label;
+      btn.onclick = () => {
+        const box = $('chat-input');
+        if (box) box.value = text;
+        router.go('chat');
+      };
+      li.appendChild(btn);
+    });
     ul.appendChild(li);
     return;
   }

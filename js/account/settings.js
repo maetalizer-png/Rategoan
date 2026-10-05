@@ -302,13 +302,13 @@ export const settings = {
     const eksporLogRow = buildRow('row-riwayat-ekspor', EXPORT_LOG_ICON, 'Riwayat ekspor');
     const hub = document.createElement('div');
     hub.className = 'model-hub';
-    hub.innerHTML = '<button type="button" data-engine="template">Raget Template<small>Penalaran instan di perangkat. Ini mesin bawaan.</small></button><button type="button" data-engine="neural">Raget Neural<small>Model bahasa lokal Rategoan.</small></button>';
+    hub.innerHTML = '<button type="button" data-engine="auto">Auto<small>Memilih jalur kilat atau penalaran sendiri.</small></button><button type="button" data-engine="template">Raget 1.0 Kilat<small>Jawaban instan di perangkat.</small></button><button type="button" data-engine="neural">Raget 1.0 Cerdas<small>Penalaran, naskah, dan kode.</small></button>';
     hub.querySelectorAll('button').forEach((btn) => {
       btn.onclick = () => {
         const pick = btn.getAttribute('data-engine');
         llmMode.setMode('lokal');
         enginePreference.set(pick);
-        toast.show(pick === 'neural' ? 'Raget Neural' : 'Raget Template');
+        toast.show(pick === 'neural' ? 'Raget 1.0 Cerdas' : (pick === 'template' ? 'Raget 1.0 Kilat' : 'Auto'));
         paintHub();
       };
     });
@@ -596,8 +596,11 @@ export const settings = {
         const p = prompt('Buat PIN (4-6 digit):');
         if (p === null) return;
         if (/^\d{4,6}$/.test(p)) {
-          pin.set(p);
-          toast.show('Kunci diaktifkan');
+          pin.set(p).then(() => {
+            toast.show('Kunci diaktifkan');
+            this.refresh();
+          });
+          return;
         } else {
           toast.show('PIN harus 4-6 digit');
         }

@@ -48,7 +48,7 @@ function slugify(s) {
 
 function toSchema(item, regionId) {
   const m = item.metadata || {};
-  const { category, region, name, ...restMeta } = m;
+  const { category: _category, region: _region, name: _name, ...restMeta } = m;
   return {
     id: 'negara-' + slugify(m.name),
     kategori: 'negara',

@@ -3,11 +3,14 @@ const KEY = 'raget_engine_preference';
 export const enginePreference = {
   KEY,
   get() {
-    return localStorage.getItem(KEY) === 'neural' ? 'neural' : 'template';
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'neural' || saved === 'template' || saved === 'auto') return saved;
+    return 'auto';
   },
   set(pref) {
+    const next = pref === 'neural' || pref === 'template' ? pref : 'auto';
     try {
-      localStorage.setItem(KEY, pref === 'neural' ? 'neural' : 'template');
+      localStorage.setItem(KEY, next);
     } catch (e) { console.warn('[Rategoan Fallback] engine-preference:', e); }
   },
 };

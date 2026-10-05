@@ -3,21 +3,13 @@ import { engineRouter } from '../../raget/raget-agents/engine-router.js';
 import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
-const VISIBLE_ENGINE_IDS = ['template', 'neural'];
-let picking = false;
+const CHOICES = [
+  { id: 'auto', label: 'Auto', note: 'Memilih jalur kilat atau penalaran sesuai pertanyaan.' },
+  { id: 'template', label: 'Raget 1.0 Kilat', note: 'Jawaban instan di perangkat.' },
+  { id: 'neural', label: 'Raget 1.0 Cerdas', note: 'Penalaran, naskah, dan kode.' },
+];
 
-function renderItem(info, selected) {
-  const item = document.createElement('div');
-  const blocked = !info.ready && info.id !== 'neural';
-  item.className = 'model-item' + (selected ? ' active' : '') + (blocked ? ' disabled' : '');
-  item.dataset.engine = info.id;
-  if (blocked) item.setAttribute('aria-disabled', 'true');
-  const name = document.createElement('span');
-  name.className = 'model-name';
-  name.textContent = info.label;
-  item.appendChild(name);
-  return item;
-}
+let picking = false;
 
 function statusOf(id) {
   return engineRouter.statusAll().find((info) => info.id === id) || null;
@@ -27,33 +19,49 @@ function render() {
   const sheet = $('model-sheet');
   const list = sheet && sheet.querySelector('.model-list');
   if (!list) return;
-  const statusById = {};
-  engineRouter.statusAll().forEach((info) => { statusById[info.id] = info; });
   const pref = enginePreference.get();
   list.innerHTML = '';
-  VISIBLE_ENGINE_IDS.forEach((id) => {
-    const info = statusById[id] || { id, label: id, ready: false };
-    const item = renderItem(info, pref === id);
+  CHOICES.forEach((choice) => {
+    const info = choice.id === 'auto' ? { ready: true } : (statusOf(choice.id) || { ready: false });
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'model-item' + (pref === choice.id ? ' active' : '');
+    item.dataset.engine = choice.id;
+    const name = document.createElement('strong');
+    name.textContent = choice.label;
+    const note = document.createElement('small');
+    note.textContent = choice.note;
+    item.appendChild(name);
+    item.appendChild(note);
     item.onclick = async () => {
       if (picking) return;
-      if (!info.ready && id !== 'neural') return;
-      picking = true;
-      let chosen = id;
-      if (id === 'neural' && !info.ready) {
+      if (choice.id === 'neural' && !info.ready) {
+        picking = true;
         await new Promise((resolve) => setTimeout(resolve, 3000));
         const again = statusOf('neural');
+        picking = false;
         if (!again || !again.ready) {
-          chosen = 'template';
-          toast.show('Mengalihkan sementara ke Raget Template...');
+          enginePreference.set('auto');
+          toast.show('Raget 1.0 Cerdas belum siap. Tetap di Auto.');
+          render();
+          return;
         }
       }
-      enginePreference.set(chosen);
-      window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: chosen, fallback: chosen !== id } }));
-      picking = false;
+      enginePreference.set(choice.id);
+      window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: choice.id } }));
       render();
     };
     list.appendChild(item);
   });
+  const think = document.createElement('button');
+  think.type = 'button';
+  think.className = 'model-item';
+  think.textContent = 'Berpikir lebih keras';
+  think.onclick = () => {
+    document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' }));
+    toast.show('Berpikir lebih keras nyala');
+  };
+  list.appendChild(think);
 }
 
 export const modelSheet = { render };

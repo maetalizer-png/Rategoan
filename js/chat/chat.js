@@ -338,27 +338,14 @@ export const chat = {
         d.appendChild(a);
       }
       d.appendChild(buildMetaRow(m.time));
-      if (m.role === 'user') {
-        const edit = document.createElement('button');
-        edit.type = 'button';
-        edit.className = 'msg-edit';
-        edit.textContent = 'Ubah';
-        edit.onclick = () => {
-          const session = this.current();
-          if (!session) return;
-          session.forks = session.forks || [];
-          session.forks.push(session.messages.slice(idx));
-          session.forkIndex = session.forks.length;
-          session.messages = session.messages.slice(0, idx);
-          store.save();
-          const inp = $('chat-input');
-          if (inp) {
-            inp.value = m.text;
-            inp.focus();
-          }
-          this.renderMessages();
-        };
-        d.appendChild(edit);
+      const live = this.current();
+      if (m.role === 'user' && live && live.forks && live.forks.length && idx === live.messages.length - 1) {
+        const nav = document.createElement('div');
+        nav.className = 'fork-nav';
+        const total = live.forks.length + 1;
+        const at = Math.min(total, (live.forkIndex || total));
+        nav.textContent = '< ' + at + ' / ' + total + ' >';
+        d.appendChild(nav);
       }
       if (m.role === 'user' && m.attach && m.attach.full) {
         const row = document.createElement('div');

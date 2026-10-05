@@ -2,9 +2,9 @@ import { buildZip } from './zip-local.js';
 
 function xmlEscape(value) {
   return String(value == null ? '' : value)
-    .replace(/&/g, '&')
-    .replace(/</g, '<')
-    .replace(/>/g, '>');
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
 
 function paragraphs(text) {

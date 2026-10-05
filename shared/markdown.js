@@ -1,10 +1,10 @@
 export const markdown = {
   escape(s) {
     return String(s)
-      .replace(/&/g, '&')
-      .replace(/</g, '<')
-      .replace(/>/g, '>')
-      .replace(/"/g, '"');
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
   },
   fence(lang, code) {
     const names = { js: 'JavaScript', javascript: 'JavaScript', json: 'JSON', py: 'Python', python: 'Python', html: 'HTML', css: 'CSS', sql: 'SQL', md: 'Markdown' };
@@ -58,7 +58,8 @@ export const markdown = {
     term.textContent = 'Menjalankan…';
     const source = lang === 'json'
       ? 'postMessage({ ok: true, text: JSON.stringify(JSON.parse(' + JSON.stringify(code) + '), null, 2) });'
-      : 'self.onmessage = function (event) {'
+      : 'self.indexedDB = undefined; self.fetch = undefined; self.XMLHttpRequest = undefined; self.importScripts = undefined;'
+        + 'self.onmessage = function (event) {'
         + 'var logs = [];'
         + 'var console = { log: function () { logs.push([].join.call(arguments, " ")); }, error: function () { logs.push([].join.call(arguments, " ")); } };'
         + 'try { var result = Function("\\"use strict\\";\\n" + event.data)();'
@@ -111,7 +112,7 @@ export const markdown = {
         code = code.slice(cut + 1);
       }
       fences.push(this.fence(lang, code));
-      return ' F' + (fences.length - 1) + ' ';
+      return '\u0000__RATEGOAN_FENCE_' + (fences.length - 1) + '__\u0000';
     });
     let out = this.escape(src);
     out = out.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
@@ -140,7 +141,7 @@ export const markdown = {
       if (!url) return m;
       return '<a class="md-link" href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>' + rest;
     });
-    out = out.replace(/ F(\d+) /g, (m, i) => fences[Number(i)]);
+    out = out.replace(/\u0000__RATEGOAN_FENCE_(\d+)__\u0000/g, (m, i) => fences[Number(i)] || '');
     return out;
   },
 };

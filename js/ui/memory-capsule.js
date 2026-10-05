@@ -32,9 +32,11 @@ function rows() {
 }
 
 export function paintMemoryBadge() {
+  const n = rows().length;
   const badge = $('memory-fact-badge');
-  if (!badge) return;
-  badge.textContent = rows().length + ' fakta';
+  if (badge) badge.textContent = n + ' fakta';
+  const pill = $('header-memory-pill');
+  if (pill) pill.textContent = 'Memori: ' + n + ' fakta';
 }
 
 function paint(host) {

@@ -39,16 +39,27 @@ const ADAPTERS_BY_ID = Object.freeze({
   template: registerAdapter(templateAdapter),
 });
 
-function orderedAdapters() {
-  const pref = enginePreference.get(); // 'template' (default) | 'neural'
-  return pref === 'neural'
-    ? [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template]
-    : [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
+function isFastQuery(prompt) {
+  const t = String(prompt || '').trim();
+  if (!t) return true;
+  if (t.length < 80 && /^(halo|hai|hei|selamat\s+(pagi|siang|sore|malam)|terima kasih|makasih)\b/i.test(t)) return true;
+  if (/^(hitung|berapa)\b/i.test(t) && t.length < 160) return true;
+  if (/^[\d\s+\-*/().,=]+$/.test(t)) return true;
+  return false;
+}
+
+function orderedAdapters(prompt) {
+  const pref = enginePreference.get();
+  if (pref === 'neural') return [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
+  if (pref === 'template') return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
+  return isFastQuery(prompt)
+    ? [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural]
+    : [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
 }
 
 async function ask(prompt, context) {
   const tried = [];
-  for (const adapter of orderedAdapters()) {
+  for (const adapter of orderedAdapters(prompt)) {
     if (!engineContract.isValidAdapter(adapter)) {
       tried.push({ id: (adapter && adapter.id) || '?', ready: false, reason: 'gagal isValidAdapter()' });
       continue;
@@ -72,13 +83,13 @@ async function ask(prompt, context) {
     }
   }
   throw new Error(
-    'Semua adapter otak AI gagal termasuk Raget Template - seharusnya tidak pernah terjadi. Riwayat percobaan: ' +
+    'Semua adapter otak AI gagal termasuk Raget 1.0 Kilat - seharusnya tidak pernah terjadi. Riwayat percobaan: ' +
       JSON.stringify(tried)
   );
 }
 
 function statusAll() {
-  return orderedAdapters().map((a) => {
+  return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural].map((a) => {
     let st;
     try {
       st = a.status();

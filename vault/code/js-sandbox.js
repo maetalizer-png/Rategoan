@@ -2,6 +2,10 @@ const TIMEOUT_MS = 1200;
 
 function workerSrc() {
   return (
+    'self.indexedDB = undefined;' +
+    'self.fetch = undefined;' +
+    'self.XMLHttpRequest = undefined;' +
+    'self.importScripts = undefined;' +
     'self.onmessage = function (ev) {' +
     '  let code = String(ev.data && ev.data.code || "");' +
     '  let logs = [];' +
