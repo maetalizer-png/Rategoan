@@ -368,8 +368,8 @@ export const composer = {
     if (cowork.expectsEdit()) cowork.applyReply(reply);
     else if (/naskah|laporan|dokumen|surat|kontrak|spesifikasi/i.test(text) && String(reply).length > 280) cowork.open(reply);
     if (deep && reply) {
-      const body = '<h2>Abstrak</h2><p>' + String(reply).replace(/</g, '').slice(0, 4000) + '</p><h2>Cabang kueri</h2><pre>' + flowHub.researchPlan(text).replace(/</g, '') + '</pre>';
-      artifact.open({ type: 'report', markdown: body, title: 'Berkas riset', fileName: 'riset.html' }, 'Berkas riset');
+      const report = await flowHub.buildResearch(text, reply);
+      artifact.open({ type: 'report', markdown: report, title: 'Berkas riset', fileName: 'riset.md' }, 'Berkas riset');
     }
     if (plan.route === 'tool' || toolsKode.isCodeQuestion(text)) {
       await tryCodeArtifact(text);

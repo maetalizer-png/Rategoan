@@ -5,6 +5,7 @@ import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { previewSrcdoc, zipStore } from './sandbox-runner.js';
 import { toast } from '../core/toast.js';
 import { drawer } from '../ui/drawer.js';
+import { workspace } from '../state/workspace.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
@@ -62,6 +63,7 @@ async function ensureEditor() {
         'Cmd-Enter': () => { const run = $('studio-run'); if (run) run.click(); },
       },
     });
+    cm.on('change', paintDirty);
   } catch (e) {
     cm = null;
   }
@@ -85,6 +87,29 @@ function rememberEditor() {
   else WEB[webFile] = text;
 }
 
+const clean = {};
+
+function activeFileName() {
+  return lang === 'python' ? 'main.py' : webFile;
+}
+
+function storedFile(name) {
+  return name === 'main.py' ? pythonCode : (WEB[name] || '');
+}
+
+function paintDirty() {
+  const live = activeFileName();
+  document.querySelectorAll('#studio-files [data-studio-file]').forEach((btn) => {
+    const name = btn.dataset.studioFile;
+    const label = btn.querySelector('.studio-file-name');
+    if (!label) return;
+    const value = name === live ? codeText() : storedFile(name);
+    const dirty = clean[name] != null && value !== clean[name];
+    btn.classList.toggle('is-dirty', dirty);
+    label.textContent = name + (dirty ? '*' : '');
+  });
+}
+
 function writeEditor(text, mode) {
   const area = editor();
   baseline = String(text || '');
@@ -92,6 +117,9 @@ function writeEditor(text, mode) {
     cm.setValue(text);
     cm.setOption('mode', mode);
   } else if (area) area.value = text;
+  const name = activeFileName();
+  if (clean[name] == null) clean[name] = String(text || '');
+  paintDirty();
 }
 
 function escapeHtml(value) {
@@ -185,7 +213,14 @@ export const studioPage = {
     if (tabJs) tabJs.onclick = () => pick('javascript');
     if (tabPy) tabPy.onclick = () => pick('python');
     document.querySelectorAll('[data-studio-file]').forEach((btn) => {
-      btn.onclick = () => {
+      btn.onclick = (event) => {
+        if (event.target.closest('[data-close]')) {
+          const visible = Array.from(document.querySelectorAll('#studio-files [data-studio-file]')).filter((other) => other !== btn && !other.hidden);
+          if (!visible.length) return;
+          btn.hidden = true;
+          if (btn.classList.contains('on')) visible[0].click();
+          return;
+        }
         rememberEditor();
         if (btn.dataset.studioKind === 'python') {
           pick('python');
@@ -295,11 +330,37 @@ export const studioPage = {
       } catch (e) { console.warn('[Rategoan Fallback] Studio:', e); }
     };
     const editorBox = $('studio-editor');
-    if (editorBox) editorBox.addEventListener('keydown', (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
-        event.preventDefault();
-        if (run) run.click();
+    if (editorBox) {
+      editorBox.addEventListener('input', paintDirty);
+      editorBox.addEventListener('keydown', (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+          event.preventDefault();
+          if (run) run.click();
+        }
+      });
+    }
+    const pin = $('studio-pin-project');
+    if (pin) pin.onclick = () => {
+      const cur = workspace.current();
+      if (!cur) {
+        toast.show('Pilih atau buat proyek dulu');
+        return;
       }
+      const name = activeFileName();
+      const text = codeText();
+      const pinned = (cur.pinnedFiles || []).filter((item) => item.name !== name);
+      pinned.push({ name, textContent: text.slice(0, 4000), size: text.length });
+      workspace.update(cur.id, { pinnedFiles: pinned.slice(-12) });
+      toast.show('Disematkan ke proyek ' + cur.name);
+    };
+    document.addEventListener('rategoan:studio-code', (event) => {
+      const code = (event.detail && event.detail.code) || '';
+      const codeLang = (event.detail && event.detail.lang) || '';
+      router.go('studio');
+      if (codeLang === 'python' || codeLang === 'py') pick('python');
+      else if (lang === 'python') pick('javascript');
+      writeEditor(code, codeLang === 'python' || codeLang === 'py' ? 'python' : 'javascript');
+      toast.show('Kode dibuka di Studio');
     });
     const toArt = $('studio-to-artifact');
     if (toArt) toArt.onclick = () => {

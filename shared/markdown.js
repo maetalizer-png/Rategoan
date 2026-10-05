@@ -20,6 +20,7 @@ export const markdown = {
       + '<div class="md-fence-bar"><span class="md-lang">' + this.escape(label) + '</span>'
       + '<button type="button" data-act="code">Kode Final</button>'
       + '<button type="button" data-act="diff">Tinjau Perubahan</button>'
+      + '<button type="button" data-act="studio">Buka di Studio kode</button>'
       + (runnable ? '<button type="button" data-act="run">Uji Kode</button>' : '')
       + '</div><pre class="md-pre">' + body + '</pre><div class="md-diff" hidden>' + diff + '</div><pre class="md-console" hidden></pre>'
       + '<textarea class="md-raw" hidden>' + this.escape(code) + '</textarea></div>';
@@ -36,6 +37,10 @@ export const markdown = {
       box.querySelectorAll('button').forEach((btn) => {
         btn.onclick = () => {
           const act = btn.getAttribute('data-act');
+          if (act === 'studio') {
+            document.dispatchEvent(new CustomEvent('rategoan:studio-code', { detail: { code: raw ? raw.value : '', lang: box.dataset.lang || '' } }));
+            return;
+          }
           if (act === 'code') {
             pre.hidden = false;
             diff.hidden = true;
@@ -111,7 +116,17 @@ export const markdown = {
     let out = this.escape(src);
     out = out.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
     out = out.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
-    out = out.replace(/^#{1,3}\s+(.+)$/gm, '<strong class="md-h">$1</strong>');
+    out = out.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+    out = out.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+    out = out.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+    out = out.replace(/(^|\n)((?:\|.+\|\n?){2,})/g, (block, lead, table) => {
+      const lines = table.trim().split('\n').filter((line) => !/^\|\s*:?-{3,}/.test(line));
+      if (lines.length < 2) return block;
+      const cells = (line) => line.replace(/^\||\|$/g, '').split('|').map((cell) => cell.trim());
+      const head = cells(lines[0]);
+      const body = lines.slice(1).map((line) => '<tr>' + cells(line).map((cell) => '<td>' + cell + '</td>').join('') + '</tr>').join('');
+      return lead + '<table><thead><tr>' + head.map((cell) => '<th>' + cell + '</th>').join('') + '</tr></thead><tbody>' + body + '</tbody></table>';
+    });
     out = out.replace(/(^|\n)[ \t]*[-•][ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">•</span> $2</div>');
     out = out.replace(/(^|\n)[ \t]*(\d+)\.[ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">$2.</span> $3</div>');
     out = out.replace(/(^|\n)Sumber::([^|\n]+)\|(https?:\/\/\S+)/g, '$1<div class="md-cite"><span class="md-cite-k">Sumber</span><a class="md-link" href="$3" target="_blank" rel="noopener noreferrer">$2</a></div>');

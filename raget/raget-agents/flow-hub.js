@@ -1,4 +1,4 @@
-import { queryTree } from './deep-research.js';
+import { queryTree, buildResearch } from './deep-research.js';
 
 function cleanLeak(text) {
   return String(text || '')
@@ -45,15 +45,61 @@ function wantsLesson(text) {
   return /\b(belajar terpandu|ajarin langkah|langkah demi langkah)\b/i.test(text || '');
 }
 
-function thinkBlock(topic) {
-  const t = String(topic || '').replace(/\b(pikirkan|berpikir keras|mode berpikir|pikir dulu)\b/gi, '').trim();
+function domainOf(text) {
+  const t = String(text || '').toLowerCase();
+  if (/\b(hitung|berapa|persamaan|turunan|integral|persen|angka)\b/.test(t)) return 'matematika';
+  if (/\b(banding\w*|versus|vs|kelebihan|kekurangan|dibanding\w*)\b/.test(t)) return 'perbandingan';
+  if (/\b(kode|bug|javascript|python|algoritma|fungsi|error|skrip)\b/.test(t)) return 'koding';
+  return 'konsep';
+}
+
+function focusOf(text) {
+  const words = String(text || '').split(/\s+/).filter((word) => word.length > 3).slice(0, 5);
+  return words.join(', ') || String(text || 'pertanyaan').slice(0, 80);
+}
+
+function generateCoT(query, domain) {
+  const q = String(query || '').replace(/\b(pikirkan|berpikir keras|mode berpikir|pikir dulu)\b/gi, '').trim() || 'pertanyaan';
+  const kind = domain || domainOf(q);
+  const focus = focusOf(q);
+  if (kind === 'matematika') {
+    return [
+      'Proses berpikir',
+      '1. Besaran yang disebut: ' + focus + '.',
+      '2. Rumus dipilih dari besaran itu, lalu satuan dicek sebelum dihitung.',
+      '3. Hitung langkah demi langkah hanya dengan angka yang ada di pertanyaan.',
+      '4. Cek batas hasil: nol, negatif, dan satuan tidak boleh tertukar.',
+    ].join('\n');
+  }
+  if (kind === 'perbandingan') {
+    return [
+      'Proses berpikir',
+      '1. Dua sisi yang dibandingkan diambil dari: ' + focus + '.',
+      '2. Parameter yang sama dipakai untuk keduanya, bukan daftar pujian terpisah.',
+      '3. Kelebihan dan kekurangan ditulis berdampingan.',
+      '4. Kesimpulan menyebut kapan sisi yang satu lebih cocok daripada yang lain.',
+    ].join('\n');
+  }
+  if (kind === 'koding') {
+    return [
+      'Proses berpikir',
+      '1. Masukan dan keluaran yang diminta: ' + focus + '.',
+      '2. Algoritma disusun dari kasus normal, lalu kasus kosong dan kasus salah.',
+      '3. Kompleksitas disebut hanya jika jumlah data di pertanyaan mempengaruhinya.',
+      '4. Galat yang mungkin: masukan kosong, tipe salah, dan batas angka.',
+    ].join('\n');
+  }
   return [
     'Proses berpikir',
-    '1. Baca pertanyaan: ' + (t || 'pertanyaan pengguna'),
-    '2. Ambil fakta yang sudah ada di Raget.',
-    '3. Susun jawaban berurutan.',
-    '4. Baru buka web jika saklar riset/web nyala.',
+    '1. Istilah inti dari pertanyaan: ' + focus + '.',
+    '2. Definisi dibatasi dulu supaya jawaban tidak melebar.',
+    '3. Premis yang dipakai harus muncul di pertanyaan atau di fakta yang sudah ada.',
+    '4. Jawaban disusun dari definisi itu, lalu contoh yang masih tentang "' + q.slice(0, 80) + '".',
   ].join('\n');
+}
+
+function thinkBlock(topic) {
+  return generateCoT(topic, domainOf(topic));
 }
 
 function researchPlan(topic) {
@@ -91,4 +137,5 @@ export const flowHub = Object.freeze({
   thinkBlock,
   researchPlan,
   lesson,
+  buildResearch,
 });

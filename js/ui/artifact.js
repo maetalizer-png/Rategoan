@@ -8,6 +8,7 @@ import { buildChartSvg } from '../../shared/charts-local.js';
 import { buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { translator } from '../../vault/translate/translator.js';
 import { printReport } from '../../shared/report-export.js';
+import { markdown as markdownView } from '../../shared/markdown.js';
 
 let current = { type: 'slide', title: 'Slide', fileName: 'slide.pptx', outline: [], code: '', lang: 'js', markdown: '' };
 
@@ -161,16 +162,17 @@ function readTable() {
   );
 }
 
-function renderDocument(markdown, title) {
+function renderDocument(content, title) {
   const stage = $('artifact-stage');
   const head = $('artifact-title');
   if (head) head.textContent = title || 'Dokumen';
   if (!stage) return;
   stage.innerHTML = '';
   const box = document.createElement('div');
-  box.className = 'art-doc';
+  box.className = 'art-doc markdown-body';
   box.contentEditable = 'true';
-  box.textContent = markdown || '';
+  box.innerHTML = markdownView.render(content || '');
+  markdownView.decorate(box);
   stage.appendChild(box);
 }
 

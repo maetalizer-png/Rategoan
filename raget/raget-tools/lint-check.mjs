@@ -17,7 +17,7 @@
 // Pakai: node raget/raget-tools/lint-check.mjs
 
 import { execFileSync } from 'child_process';
-import { readdirSync, statSync } from 'fs';
+import { readdirSync, readFileSync, statSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -84,6 +84,38 @@ function runDataValidation() {
   }
 }
 
+function checkPlaceholders(files) {
+  const hits = [];
+  const fnRe = /(?:export\s+)?(?:async\s+)?function\s+([A-Za-z0-9_]+)\s*\(([^)]*)\)\s*\{/g;
+  for (const file of files) {
+    if (file.endsWith('lint-check.mjs')) continue;
+    const text = readFileSync(file, 'utf8');
+    let match;
+    while ((match = fnRe.exec(text))) {
+      const name = match[1];
+      const params = match[2].split(',').map((part) => part.trim().split(/[=\s]/)[0]).filter(Boolean);
+      if (!params.length) continue;
+      const start = match.index + match[0].length;
+      let depth = 1;
+      let i = start;
+      while (i < text.length && depth > 0) {
+        if (text[i] === '{') depth += 1;
+        else if (text[i] === '}') depth -= 1;
+        i += 1;
+      }
+      const body = text.slice(start, i - 1);
+      const returned = body.match(/return\s+(\[[\s\S]*?\])\s*;/);
+      if (!returned) continue;
+      const array = returned[1];
+      if (!/['"`]/.test(array)) continue;
+      if (/[+]/.test(array) || /\$\{/.test(array)) continue;
+      const usesArg = params.some((param) => new RegExp('\\b' + param + '\\b').test(body));
+      if (!usesArg) hits.push(path.relative(ROOT, file) + ':' + name);
+    }
+  }
+  return hits;
+}
+
 function main() {
   console.log('=== raget_lint_check: gerbang lint/build minimal ===\n');
 
@@ -128,7 +160,11 @@ function main() {
     console.log(dataCheck.out.split('\n').filter((l) => l.startsWith('  ✗')).join('\n'));
   }
 
-  const failed = syntaxFailures.length > 0 || lint.errorCount > 0 || lint.errorCount === -1 || dataCheck.failed;
+  const placeholders = checkPlaceholders(files);
+  console.log('\nAnti-placeholder:', placeholders.length ? placeholders.length + ' fungsi dummy' : '0');
+  placeholders.forEach((hit) => console.log('  ' + hit));
+
+  const failed = syntaxFailures.length > 0 || lint.errorCount > 0 || lint.errorCount === -1 || dataCheck.failed || placeholders.length > 0;
   console.log('\n=== HASIL: ' + (failed ? 'GAGAL - perbaiki sebelum lanjut ke bench' : 'LOLOS') + ' ===');
   process.exit(failed ? 1 : 0);
 }
