@@ -20,7 +20,6 @@ import { recoverAttempt } from '../../raget/raget-agents/turn-pipeline.js';
 import { ragetDb } from '../../raget/raget-database/raget-db.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
-import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { indexPinned } from '../project/pin-index.js';
 
 const URL_RE = /https?:\/\/\S+/i;
@@ -242,27 +241,6 @@ function buildActions(text) {
   return row;
 }
 
-function paintBriefing(empty) {
-  let card = empty.querySelector('.daily-brief');
-  if (!card) {
-    card = document.createElement('div');
-    card.className = 'daily-brief';
-    empty.appendChild(card);
-  }
-  const items = remindersStore.allActive().slice(0, 4);
-  const projects = workspace.list().slice(0, 3);
-  card.replaceChildren();
-  const title = document.createElement('strong');
-  title.textContent = 'Ringkasan hari ini';
-  const agenda = document.createElement('p');
-  agenda.textContent = items.length ? 'Agenda: ' + items.map((item) => item.text).join('; ') : 'Agenda: tidak ada janji tersimpan.';
-  const tasks = document.createElement('p');
-  tasks.textContent = projects.length ? 'Tugas proyek: ' + projects.map((item) => item.name).join(', ') : 'Tugas proyek: belum ada proyek terbuka.';
-  const sky = document.createElement('p');
-  sky.textContent = 'Cuaca: tidak diambil dari luar, supaya catatan harian tetap di perangkat.';
-  card.append(title, agenda, tasks, sky);
-}
-
 export const chat = {
   current() {
     const st = store.get();
@@ -288,10 +266,7 @@ export const chat = {
     box.innerHTML = '';
     const s = this.current();
     const has = !!(s && s.messages.length);
-    if (empty) {
-      empty.hidden = has;
-      if (!has) paintBriefing(empty);
-    }
+    if (empty) empty.hidden = has;
     box.style.display = has ? '' : 'none';
     const bar = document.getElementById('thread-bar');
     const project = workspace.current();

@@ -208,19 +208,19 @@ parameter model**. Melatih model besar di atas data yang sama dengan
 model kecil = model besar UNDERTRAINED, sering PPL-nya malah lebih
 buruk daripada model kecil yang lebih "pas" dengan data yang tersedia.
 
-**Nyata di Raget**: `raget-tools/audit-corpus-tokens.mjs` (dibangun
-dan dijalankan — lihat `PRD-RAGET-NEURAL.md`) mengukur korpus kanonik
-riil = **543.202.593 token**. Dicocokkan ke rasio 20:1:
+**Nyata di Raget**: lantai resmi di `docs/STATUS-KORPUS-LISENSI.md`
+adalah **17.651.050.443 token BPE** dari 91.395.436 dokumen
+(K1 = 2,20 miliar, K2 = 0,43 miliar, K3 = 15,01 miliar).
+Dicocokkan ke rasio 20:1:
 
 | Preset | Param | Token ideal | Token tersedia | Tercukupi |
 |---|---:|---:|---:|---:|
-| massive50m | 49.999.872 | 1,00 miliar | 543,2 juta | 54,3% |
-| massive100m | 103.325.184 | 2,07 miliar | 543,2 juta | 26,3% |
-| massive200m | 200.709.120 | 4,01 miliar | 543,2 juta | 13,5% |
+| massive50m | 49.999.872 | 1,00 miliar | 17,65 miliar | tertutup |
+| massive100m | 103.325.184 | 2,07 miliar | 17,65 miliar | tertutup |
+| massive200m | 200.709.120 | 4,01 miliar | 17,65 miliar | tertutup |
 
-Urutan kecukupan data (54,3% > 26,3% > 13,5%) PERSIS SAMA dengan urutan
-kualitas PPL (141,90 < 525,05 < 825,55, dari kecil ke besar) — bukti
-kuantitatif langsung, bukan dugaan.
+Urutan lama yang memakai ratusan juta token tidak berlaku.
+Korpus resmi 17,65 miliar menutup ketiga preset di tabel ini.
 
 ### 1.9 Kompresi model — kuantisasi
 

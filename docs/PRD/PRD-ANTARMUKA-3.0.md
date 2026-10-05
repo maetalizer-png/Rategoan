@@ -1,4 +1,4 @@
-<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T21:56:32Z. -->
+<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T22:49:18Z. -->
 
 PRD ANTARMUKA 3.0 — MASTER CETAK BIRU REKAYASA KEDAULATAN & KEDALAMAN MESIN FITUR (EDISI FINAL KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Sovereign AI Workstation)
@@ -214,7 +214,7 @@ Ringkasan Eksekutif 3 Paragraf.
 Keluaran: Hasil notulensi dapat langsung diekspor menjadi berkas naskah Word (.docx) melalui satu ketukan.
 Briefing Agenda Harian & Pengingat Tugas Otonom (Local Daily Briefing & Task Scheduler):
 Teknologi: Mengaktifkan modul agenda_daily_briefing dan tools-reminder.js yang terhubung dengan Service Worker Notification API.
-Fungsionalitas: Setiap pagi, Rategoan memunculkan kartu ringkasan harian di beranda obrolan:
+Fungsionalitas: Rategoan mengelola agenda harian dan pengingat tugas. Beranda obrolan (#empty-state) dipertahankan murni, tenang, dan bersih (hanya merek 'Rategoan' tanpa kotak ringkasan info yang mengotori layar). Briefing agenda harian hanya disajikan saat pengguna memintanya via percakapan (on-demand query seperti 'apa agendaku hari ini?') atau di dalam panel Agenda terpisah di Ruang Kerja:
 Agenda dan janji temu dari kalender lokal.
 Catatan tugas tertunda dari ruang kerja Proyek dan Koleksi.
 Prakiraan cuaca lokal singkat.
@@ -222,3 +222,46 @@ Keluaran: Pengguna mendapatkan gambaran prioritas kerja harian secara jernih tan
 ## 8.3 Kriteria Kualitas & Jaminan Kedaulatan
 Seluruh pemrosesan spreadsheet, OCR struk, RAG dokumen tebal, notulensi rapat, dan briefing agenda wajib berjalan 100% lokal di perangkat pengguna tanpa transmisi data ke cloud eksternal.
 Pertahankan 100% kelulusan 17 unit test (npm test) dan linter 0 error (npm run lint).
+# BAB 9: RESOLUSI FATAL ERGONOMI MODE GELAP, REFORMASI ALUR SLIDE INTERAKTIF, ELIMINASI KOTAK BERANDA, DAN AUDIT REPO ANTI-HALUSINASI
+## 9.1 Resolusi Fatal Ergonomi & Kontras Mode Gelap (Dark Mode Contrast Fix)
+Penyebab Utama Tulisan Hilang di Mode Gelap:
+Elemen <button> dan <select> pada peramban seluler (WebKit/Blink Android) tidak mewarisi color dari body secara default (color: ButtonText = hitam/gelap), sehingga ketika berada di atas latar belakang gelap (--rg-bg: #05080c atau --rg-surface-2: #0d1420), teks menjadi tidak terbaca (hitam di atas gelap).
+Di css/reset.css, elemen button, select, input, textarea wajib ditambahkan deklarasi eksplisit: color: inherit;.
+Di css/ui/artifact.css, tombol .studio-actions button dan .artifact-actions button wajib memiliki aturan kontras eksplisit: background: var(--rg-surface-2); color: var(--rg-text); border: 1px solid var(--rg-line);. Tombol aksi utama (seperti .btn-run-primary atau aksi aktif) menggunakan background: #1a4b8c; color: #ffffff;.
+Di css/ui/overhaul.css, tombol tab .studio-panes button, pemilih mode .model-speed, .model-speed-label select, dan tombol kartu artefak wajib memiliki color: var(--rg-text);. Saat aktif (.on), gunakan latar kontras tinggi dengan teks yang kontras tajam.
+Di js/artifacts/artifacts.js, pembuatan tombol Pratinjau dan Unduh pada kartu artefak wajib menyematkan kelas CSS terstandarisasi (.btn-art-open dan .btn-art-save atau kelas utilitas tombol sistem) dengan kontras tinggi yang jelas terlihat di mode gelap dan terang.
+Seluruh teks sekunder/deskripsi (subtitel Koleksi, Proyek, Konektor, Lampiran) wajib memenuhi standar rasio kontras WCAG AA (minimal 4.5:1 terhadap latar belakang gelap).
+## 9.2 Penegakan Beranda Obrolan Murni Tanpa Kotak Mengganggu (Zen Clean Empty State)
+Eliminasi Kotak Besar 'Ringkasan hari ini':
+Dilarang keras merender kartu kotak besar .daily-brief di dalam #empty-state pada halaman utama chat (js/chat/chat.js:paintBriefing).
+Beranda obrolan saat belum ada pesan aktif wajib kembali ke filosofi desain Zen: bersih, tenang, berwibawa, dan lapang — hanya menampilkan tipografi kanonikal merek Rategoan di tengah dan bilah komposer input di bawah.
+Fungsi paintBriefing(empty) dihapus dari pemanggilan di renderMessages(). Data agenda dan pengingat tetap tersimpan di modul lokal tanpa mengotori ruang visual obrolan baru.
+## 9.3 Reformasi Alur Pembuatan Slide (.pptx) Interaktif Tanpa Auto-Download
+Eliminasi Auto-Download Instan: Dilarang keras memicu unduhan berkas biner .pptx secara otomatis saat tombol Buat Slide (.pptx) (#sheet-slide) diklik di lembar lampiran. Perilaku unduh otomatis seketika adalah cacat ergonomi serius.
+Alur Kerja Interaktif Standar Industri:
+Langkah 1 (Aktivasi Mode Slide): Saat pengguna mengetuk Buat Slide (.pptx), tutup lembar lampiran, aktifkan status slideActive = true, tampilkan lencana/pill Slide di atas komposer, dan isi input chat dengan panduan topik: "Buatkan slide presentasi tentang: " dengan kursor terfokus.
+Langkah 2 (Instruksi & Dialog Percakapan): Pengguna mengetik atau melengkapi topik presentasi, audiens sasaran, atau poin-poin yang diinginkan, lalu menekan tombol kirim. (Jika ada pesan atau materi yang sedang dibahas di sesi chat, pengguna cukup mengonfirmasi pembuatan presentasi).
+Langkah 3 (Penyusunan & Pratinjau Interaktif): Raget 1.0 menyusun naskah presentasi, memecah bab dan poin menjadi outline terstruktur, dan menampilkannya sebagai Kartu Pratinjau Slide (Visual Carousel di Kanvas Artefak / chat split).
+Langkah 4 (Unduh Manual Sesuai Keinginan): Berkas biner PowerPoint .pptx HANYA diunduh ke penyimpanan perangkat ketika pengguna secara sadar menekan tombol [ 📥 Unduh PPTX ] yang tersemat pada kartu artefak atau panel pratinjau slide.
+## 9.4 Pembersihan Teks Relik Usang Pencegah Halusinasi Model AI Luar
+Akar Masalah Keracunan Dokumen (567M Token Relic):
+Ditemukan relik catatan audit tanggal 9 September 2026 di dalam docs/PRD/PRD-RAGET-NEURAL.md (bagian §2 dan §FASE A.1) yang mencatat angka lama "567.121.195 token (2,84% dari kebutuhan 1B)" dan di docs/PRD/FONDASI-TEORI-RAGET.md yang mencatat "543.202.593 token".
+Catatan usang tersebut membuat model AI eksternal (seperti Qwen, Claude, Grok) yang membaca repositori mengalami halusinasi dan salah menyimpulkan bahwa korpus Rategoan belum cukup untuk melatih model 1B.
+Tindakan Penyelarasan Mutlak:
+Selaraskan seluruh isi docs/PRD/PRD-RAGET-NEURAL.md dan docs/PRD/FONDASI-TEORI-RAGET.md dengan dokumen kanonikal resmi terkini docs/STATUS-KORPUS-LISENSI.md dan docs/PRD/PRD-RELEASE.md:
+Total Korpus Rilis Produksi Resmi: 17.651.050.443 Token BPE Bersih (17,65 Miliar token) dari 91.395.436 dokumen berkualitas tinggi (K-dataset-Indonesian: K1 = 2,20B, K2 = 0,43B, K3 = 15,01B token BPE).
+Angka 567M dan 543M wajib dihapus total agar tidak ada lagi ambiguitas atau informasi yang bertentangan.
+## 9.5 Hasil Quality Control (QC) Kode, Pipa Arsitektur, dan Pembersihan Jalur Mati
+QC Kode & Fungsionalitas Jalur:
+Seluruh 17 unit test lulus 100% (npm test).
+Linter 0 error, 0 warning, dan Anti-placeholder: 0 (npm run lint).
+Sanitasi DOM pada fungsi escape() di shared/markdown.js berjalan solid mencegah XSS.
+Pipa penyimpanan terindeks di shared/idb-gateway.js mengelola sesi percakapan besar dengan aman tanpa membebani LocalStorage.
+Pembersihan Kode Mati & Penangan Yatim:
+Menghapus panggilan fungsi paintBriefing yang menginjeksi kotak harian ke #empty-state.
+Menghapus sisa-sisa tombol usang #sheet-doc, #sheet-learn, #sheet-tools, #sheet-memory yang tidak terdaftar di DOM kanonikal.
+Memastikan seluruh tombol antarmuka memiliki penangan event aktif dan penanda visual yang jelas.
+Titik Prioritas Pengembangan Selanjutnya:
+Penyempurnaan pipeline biner PPTX agar mendukung tata letak multi-kolom dan tema visual yang dapat dipilih pengguna.
+Optimalisasi inferensi WebGPU / Wasm untuk akselerasi neural Raget 1.0 di perangkat seluler.
+Integrasi penuh kanvas belah adaptif (Split-Canvas) pada layar tablet/desktop untuk kolaborasi pembuatan dokumen dan kode secara real-time.

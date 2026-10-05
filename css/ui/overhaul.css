@@ -99,7 +99,7 @@
 .studio-files button.on { background: #1a4b8c; color: #fff; border-color: #1a4b8c; }
 #studio-copy, #studio-clear {
   font-size: 12px;
-  color: #1a4b8c;
+  color: var(--rg-text);
   background: var(--rg-surface-2);
   border: 1px solid var(--rg-line);
   padding: 5px 12px;
@@ -222,7 +222,7 @@
   #btn-command-palette { display: none !important; }
 }
 .quick-toggle { position: relative; }
-.quick-toggle.on { color: #1a4b8c; }
+.quick-toggle.on { color: var(--rg-accent); }
 .quick-toggle.on::after {
   content: "";
   position: absolute;
@@ -243,7 +243,7 @@
   justify-content: center;
   border-radius: 8px;
 }
-.msg-action-btn.icon-only.on { color: #1a4b8c; }
+.msg-action-btn.icon-only.on { color: var(--rg-accent); }
 .msg-more-pop {
   position: absolute;
   right: 0;
@@ -363,7 +363,8 @@
 }
 .artifact-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .artifact-time { text-transform: none; font-weight: 500; }
-.artifact-actions { display: flex; gap: 6px; flex: none; }
+.artifact-actions button, .btn-art-open, .btn-art-save { color: var(--rg-text); background: var(--rg-surface-2); border: 1px solid var(--rg-line); }
+.artifact-actions .btn-art-save { background: #1a4b8c; color: #ffffff; border-color: #1a4b8c; }
 .artifact-meta { font-size: 11px; color: var(--rg-muted); font-weight: 600; }
 #memory-capsule {
   position: fixed;
@@ -459,8 +460,8 @@ html, body { overflow-x: hidden; }
 .attach-ocr { display: block; font-size: 12px; color: var(--rg-muted); }
 .cite-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .cite-chip { font-size: 12px; border: 1px solid var(--rg-line); border-radius: 999px; padding: 4px 10px; text-decoration: none; color: inherit; }
-.msg-edit { font-size: 12px; color: #1a4b8c; background: transparent; border: 0; min-height: 44px; }
-.profile-badge { font-size: 12px; font-weight: 600; color: #1a4b8c; }
+.msg-edit { font-size: 12px; color: var(--rg-accent); background: transparent; border: 0; min-height: 44px; }
+.profile-badge { font-size: 12px; font-weight: 600; color: var(--rg-accent); }
 .storage-meter { height: 6px; border-radius: 999px; background: var(--rg-surface-2, #eceff3); overflow: hidden; margin-top: 8px; }
 #storage-meter-bar { display: block; height: 100%; width: 0; background: #1a4b8c; }
 .attach-plain-label small { display: block; font-weight: 400; color: var(--rg-muted); }
@@ -507,7 +508,7 @@ body.is-generating #btn-send { display: none; }
 #cowork { display: flex; flex-direction: column; min-height: 220px; border-top: 1px solid var(--rg-line); background: var(--rg-surface); }
 #cowork-editor { min-height: 180px; padding: 12px; outline: none; white-space: pre-wrap; overflow: auto; }
 .cowork-bar, .cowork-tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px; }
-.cowork-tabs button.on { border-color: #1a4b8c; color: #1a4b8c; }
+.cowork-tabs button.on { border-color: var(--rg-text); color: var(--rg-text); }
 @media (max-width: 1023px) {
   #cowork { max-height: 70vh; }
 }
@@ -536,6 +537,7 @@ body.is-generating #btn-voice-input { display: none !important; }
   border-radius: 12px;
   border: 1px solid var(--rg-line);
   background: transparent;
+  color: var(--rg-text);
   font-weight: 650;
   text-align: left;
   padding: 0 14px;
@@ -556,9 +558,10 @@ body.is-generating #btn-voice-input { display: none !important; }
   border: 0;
   border-radius: 9px;
   background: transparent;
+  color: var(--rg-text);
   font-weight: 650;
 }
-.studio-panes button.on { background: var(--rg-bg, #fff); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
+.studio-panes button.on { background: var(--rg-bg, #fff); color: var(--rg-text); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
 #studio-diff-view { margin: 8px 0; max-height: 280px; overflow: auto; }
 .msg.user { max-width: 75%; padding: 8px 14px; }
 @media (min-width: 1024px) { .msg.user { max-width: 65%; } }

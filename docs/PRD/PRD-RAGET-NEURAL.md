@@ -69,32 +69,27 @@ dengan output projection.
 
 ## 2. Kenyataan teknis yang harus dihadapi jujur SEBELUM bicara 1B–40B
 
-1. **Data — SUDAH DIAUDIT (`raget-tools/audit-corpus-tokens.mjs`)**:
-   korpus kanonik hari ini (K1+K2+K3, `korpus-manifest-total.json`, token
-   BPE resmi vocab 30.368, dihitung ulang penuh 2026-09-09 setelah K1/K2/K3
-   digabung lagi dengan penampung tersaring) = **567.121.195 token** dari
-   1.513.933 dokumen. Dengan rasio scaling ~20 token/parameter:
+1. **Data — angka resmi mengikuti `docs/STATUS-KORPUS-LISENSI.md` dan `PRD-RELEASE.md`**:
+   korpus rilis produksi hari ini = **17.651.050.443 token BPE bersih** dari
+   91.395.436 dokumen (K1 = 2,20 miliar, K2 = 0,43 miliar, K3 = 15,01 miliar).
+   Audit September 2026 yang menyebut ratusan juta token sudah diganti dan tidak berlaku.
+   Dengan rasio ~20 token/parameter, 17,65 miliar menutup preset 50M–500M
+   dan menutup sekitar 88% kebutuhan 20 miliar untuk model 1B.
 
-   | Target | Token ideal | % tercukupi hari ini | Korpus harus tumbuh |
-   |---|---:|---:|---:|
-   | massive50m (ada) | 1,00 miliar | 56,7% | - |
-   | massive100m (ada) | 2,07 miliar | 27,4% | - |
-   | massive200m (ada) | 4,01 miliar | 14,1% | - |
-   | 500M | 10 miliar | 5,67% | 17,6x |
-   | 1B | 20 miliar | 2,84% | 35,3x |
-   | 4B | 80 miliar | 0,71% | 141,1x |
-   | 10B | 200 miliar | 0,28% | 352,7x |
-   | 20B | 400 miliar | 0,14% | 705,3x |
-   | 40B | 800 miliar | 0,07% | 1.410,6x |
+   | Target | Token ideal | Posisi terhadap korpus 17,65 miliar |
+   |---|---:|---|
+   | massive50m (ada) | 1,00 miliar | tertutup |
+   | massive100m (ada) | 2,07 miliar | tertutup |
+   | massive200m (ada) | 4,01 miliar | tertutup |
+   | 500M | 10 miliar | tertutup |
+   | 1B | 20 miliar | sekitar 88% |
+   | 4B | 80 miliar | masih kurang |
+   | 10B | 200 miliar | masih kurang |
+   | 20B | 400 miliar | masih kurang |
+   | 40B | 800 miliar | masih kurang |
 
-   **Ini bukti kuantitatif, bukan dugaan lagi**, untuk temuan PPL di §1:
-   massive200m (14,1% tercukupi) jauh lebih kekurangan data secara
-   proporsional daripada massive50m (56,7% tercukupi) - urutan
-   kecukupan data PERSIS SAMA dengan urutan kualitas PPL. **Korpus,
-   bukan compute, adalah penghambat DOMINAN** — bahkan lompatan
-   terdekat (500M) butuh korpus 17,6x lebih besar dari hari ini. Enam
-   rilis data mentah baru (~46GB, HuggingFace) ditemukan di Release
-   2026-09-09, belum diproses — lihat `PRD-MANUS-DATA-MENTAH.md` §4.2.
+   Angka lama ratusan juta token tidak dipakai lagi. Kekurangan yang tersisa
+   baru muncul di target di atas 1B, bukan di preset yang sudah ada.
 2. **Compute**: Colab gratis (kuota harian, sesi terbatas ~12 jam) SUDAH
    jadi batas nyata di preset 200M (lihat temuan PPL di atas — 200M
    dengan compute yang sama saja belum konvergen baik). Melatih 1B+ dari
@@ -137,10 +132,9 @@ GitHub API (bukan browser_download_url yang 404 di sandbox ini — lihat
 Estimasi kasar token (gzip teks Indonesia biasanya rasio kompresi
 ~3-3,5x, BPE vocab proyek ini ~3,5-4 karakter/token — **ESTIMASI, bukan
 angka pasti**, butuh tokenisasi nyata untuk kepastian): gabungan kedua
-Release ini paling banter setara **5-9 juta token**. Dibanding
-kekurangan 9,46 miliar token untuk target 500M (10 miliar - 543,2 juta
-yang sudah ada), ini **~0,05-0,1% dari gap** — kontribusi nyata tapi
-jauh dari cukup untuk jadi solusi utama.
+Release ini paling banter setara beberapa juta token pada masanya. Terhadap
+korpus resmi 17,65 miliar token BPE hari ini, sumbangan penampung kecil itu
+sudah tidak menjadi batas.
 
 **(c) Kesimpulan growth plan**: satu-satunya jalur yang secara matematis
 bisa menutup gap 18,4x adalah korpus berskala Common Crawl/OSCAR (ratusan
@@ -167,25 +161,17 @@ bukan dengan mengeksekusinya.
 
 | # | Syarat/Pekerjaan | Detail |
 |---|---|---|
-| A.1 ✅ SELESAI (diperbarui 2026-09-09) | Audit token count korpus nyata (`raget-tools/audit-corpus-tokens.mjs`, laporan di `raget-devlog/neural/corpus-token-audit.md`) | Hasil terbaru: korpus 567,1 juta token (naik dari 543,2 juta — K1/K2/K3 digabung ulang dengan penampung tersaring 2026-09-09, dihitung ulang penuh Claude dengan tokenizer BPE resmi + verifikasi SHA256), 5,67% dari kebutuhan 500M (17,6x kurang) dan 2,84% dari kebutuhan 1B (35,3x kurang) — lihat tabel §2. **Kesimpulan tegas tidak berubah: TIDAK BOLEH melatih preset ≥500M sampai korpus tumbuh signifikan** — kenaikan 4,4% ini jauh dari cukup |
-| A.1b ✅ SELESAI (analisis, diperbarui 2026-09-09) | Growth plan korpus konkret menuju 10 miliar token (target 500M) | Ringkas (detail §2b): (a) Wikipedia ID **BUKAN** peluang belum-tergarap — sudah di-crawl sampai habis dua kali, sumur nyaris kering. (b) Dua Release "penampung" lama (`korpus-sejarah-indonesia-bersih`, `korpus-mentah-id`) **sudah digabung ke K1/K2/K3** 2026-09-09 — kenaikan cuma 4,4% (543,2jt→567,1jt token), sesuai dugaan awal skalanya kecil. (c) **Temuan baru 2026-09-09**: 6 rilis data mentah HuggingFace (~46GB — Indo4B, Indo4B-Plus, indonesian-corpus-2b-deepclean-indo4b, garuda-indonesian, dll) ditemukan di Release, SEMUA eksplisit belum dedupe/belum siap training — lihat `PRD-MANUS-DATA-MENTAH.md` §4.2 untuk klasifikasi dan risiko tiap sumber (termasuk potensi overlap dengan K1, dan risiko spam mirip preseden gagal `panen-madlad400-id`). **Kesimpulan tegas tidak berubah**: satu-satunya jalur realistis menutup gap besar adalah korpus skala Common Crawl/OSCAR dengan filter ketat — kandidat konkretnya sekarang SUDAH ada di Release (poin c), tapi belum diproses/difilter. **A.2-A.4 tetap diblokir** sampai proses itu selesai |
+| A.1 ✅ SELESAI (diselaraskan Oktober 2026) | Audit token count korpus | Angka resmi: **17.651.050.443 token BPE** dari 91.395.436 dokumen (K1 = 2,20 miliar, K2 = 0,43 miliar, K3 = 15,01 miliar), lihat `docs/STATUS-KORPUS-LISENSI.md`. Audit September 2026 yang menyebut ratusan juta token dicabut. Preset sampai 500M tertutup; model 1B butuh 20 miliar dan saat ini sekitar 88%. |
+| A.1b ✅ SELESAI (diselaraskan Oktober 2026) | Growth plan korpus | Penampung lama sudah masuk rak. Angka ratusan juta token dari September 2026 tidak berlaku. Lantai resmi ada di `docs/STATUS-KORPUS-LISENSI.md`: 17.651.050.443 token BPE. |
 | A.2 | Pindahkan training andalan preset ≥500M ke jalur PyTorch | `train-massive50m-torch.py` sudah preseden — preset besar TIDAK dilatih lagi lewat JS murni di Colab (terlalu lambat/rawan limit sesi), JS murni tetap dipakai khusus preset kecil (tiny/compact) untuk eksperimen cepat. **Belum dikerjakan** — menunggu korpus BENAR-BENAR tumbuh (A.1b sudah SELESAI sebagai analisis/jalur, tapi eksekusi crawl-nya sendiri belum terjadi) |
 | A.3 | Evaluasi arsitektur training: mixed precision, gradient checkpointing | Perlu di jalur PyTorch supaya training preset besar muat di memori GPU Colab/cloud yang terbatas. **Belum dikerjakan** |
 | A.4 | Verifikasi ulang kuantisasi int8 pada model lebih dalam/lebar | Checkpoint format (`llm-quantization.js`) dipertahankan, tapi error kuantisasi HARUS diukur ulang — model lebih dalam bisa lebih sensitif terhadap presisi rendah. **Belum dikerjakan** |
 
-**Kenapa A.2-A.4 belum dikerjakan sekarang**: A.1 membuktikan korpus
-adalah penghambat dominan (18,4x kurang untuk lompatan TERDEKAT), dan
-A.1b (analisis, sudah selesai — lihat §2b) mengidentifikasi JALUR yang
-benar (Common Crawl/OSCAR skala besar dengan filter ketat) tapi BELUM
-mengeksekusi crawl itu — korpus hari ini masih 543,2 juta token, belum
-tumbuh sama sekali dari angka yang diaudit A.1. Mengerjakan pipeline
-training PyTorch/mixed-precision/kuantisasi sebelum korpus benar-benar
-tumbuh membuang usaha di infrastruktur untuk data yang belum ada —
-urutan yang benar adalah eksekusi growth plan A.1b dulu (di luar cakupan
-realistis satu sesi kerja, butuh infrastruktur crawl+filter terpisah),
-baru A.2-A.4. Ini juga alasan kenapa PRD ini TIDAK mengklaim training
-run baru sudah dilakukan — training preset ≥500M di atas data hari ini
-akan mengulang pola undertraining massive200m, bukan kemajuan.
+**Kenapa A.2-A.4 belum dikerjakan sekarang**: korpus resmi sudah
+17.651.050.443 token BPE, cukup untuk preset sampai 500M. Pekerjaan
+berikutnya adalah pipeline pelatihan, bukan menunggu angka ratusan juta
+yang sudah tidak berlaku. Dokumen ini tidak mengklaim ada training run
+baru; yang diselaraskan hanya angka korpus resminya.
 
 Gate keluar Fase A: preset baru (500M–1B) punya held-out PPL yang
 BENAR-BENAR lebih baik dari massive200m (bukan cuma "lebih besar

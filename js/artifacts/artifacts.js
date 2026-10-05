@@ -1,7 +1,7 @@
 import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
-import { allArtifacts } from '../../shared/slides-export.js';
+import { allArtifacts, exportSlides } from '../../shared/slides-export.js';
 import { drawer } from '../ui/drawer.js';
 
 let filter = 'semua';
@@ -100,6 +100,7 @@ function paint() {
     info.appendChild(time);
     const open = document.createElement('button');
     open.type = 'button';
+    open.className = 'btn-art-open';
     open.textContent = 'Pratinjau';
     open.onclick = () => {
       const body = String(item.markdown || item.code || '');
@@ -115,8 +116,22 @@ function paint() {
     };
     const save = document.createElement('button');
     save.type = 'button';
+    save.className = 'btn-art-save';
     save.textContent = 'Unduh';
-    save.onclick = () => open.click();
+    save.onclick = () => {
+      if (item.outline) {
+        exportSlides(item.outline, item.fileName || 'slide.pptx');
+        return;
+      }
+      const rows = Array.isArray(item.rows) ? item.rows : null;
+      const body = rows ? rows.map((row) => row.join(',')).join('\n') : String(item.markdown || item.code || '');
+      const blob = new Blob([body], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = item.fileName || 'berkas.txt';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    };
     const actions = document.createElement('div');
     actions.className = 'artifact-actions';
     actions.appendChild(open);

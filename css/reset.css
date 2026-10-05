@@ -69,8 +69,11 @@ ul {
 }
 
 textarea,
-input {
+input,
+button,
+select {
   font-family: inherit;
+  color: inherit;
 }
 
 [hidden] {

@@ -23,13 +23,14 @@ import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
 import { receiptTable } from '../../shared/receipt-extract.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
-import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../../shared/slides-export.js';
+import { buildOutline, previewOutline, rememberSlide } from '../../shared/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
 import { toolsKode } from '../../raget/raget-agents/tools-kode.js';
 import { artifact } from '../ui/artifact.js';
 import { workspace } from '../state/workspace.js';
+import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { projectPage } from '../project/project.js';
 import { runAgentPlan } from '../agent/worker-bridge.js';
 import { mountThought } from '../ui/thought-card.js';
@@ -250,6 +251,15 @@ async function tryMeeting(text) {
   return 'Notulensi disusun dari rekaman di perangkat ini. Berkas Word sudah diunduh.';
 }
 
+function tryAgenda(text) {
+  if (!/\b(agenda|jadwal|pengingat)\b/i.test(text)) return null;
+  const items = remindersStore.allActive().slice(0, 6);
+  const projects = workspace.list().slice(0, 4);
+  const agenda = items.length ? items.map((item) => '- ' + item.text).join('\n') : '- Tidak ada janji tersimpan.';
+  const tasks = projects.length ? projects.map((item) => '- ' + item.name).join('\n') : '- Belum ada proyek terbuka.';
+  return 'Agenda:\n' + agenda + '\n\nTugas proyek:\n' + tasks;
+}
+
 async function tryReportRequest(text) {
   if (!/\b(cetak|siap cetak|laporan pdf|simpan pdf)\b/i.test(text)) return null;
   const body = '<p>' + text.replace(/</g, '').slice(0, 4000) + '</p>';
@@ -367,6 +377,7 @@ export const composer = {
     if (directReply == null) directReply = await tryWorkbook(text, s);
     if (directReply == null) directReply = await tryReceipt(text, s);
     if (directReply == null) directReply = await tryMeeting(text);
+    if (directReply == null) directReply = tryAgenda(text);
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
@@ -738,43 +749,16 @@ export const composer = {
     if (studioCard) studioCard.onclick = () => { sheets.close(); router.go('studio'); };
     const slideCard = $('sheet-slide');
     if (slideCard) {
-      slideCard.onclick = async () => {
+      slideCard.onclick = () => {
         sheets.close();
-        const s = this.ensure();
-        const att = attach.consume();
-        const typed = (($('chat-input') || {}).value || '').trim();
-        const picked = (await pickSlideMaterial(s, att)) || (typed ? { text: typed, title: 'Slide' } : null);
-        if (!picked || !String(picked.text || '').trim()) {
-          const box = $('chat-input');
-          if (box) {
-            box.value = 'Buat slide tentang: ';
-            box.focus();
-            box.dispatchEvent(new Event('input'));
-          }
-          this.slideActive = true;
-          toast.show('Tulis topik slide dulu, lalu kirim.');
-          return;
-        }
+        this.slideActive = true;
         const box = $('chat-input');
-        if (box && box.value.trim()) {
-          box.value = '';
+        if (box && !box.value.trim()) box.value = 'Buatkan slide presentasi tentang: ';
+        if (box) {
+          box.focus();
           box.dispatchEvent(new Event('input'));
         }
-        try {
-          const outline = buildOutline(picked.text, picked.title);
-          const stamp = Date.now().toString(36);
-          const fileName = (picked.title.replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'slide') + '-' + stamp + '.pptx';
-          rememberSlide(outline, fileName);
-          await exportSlides(outline, fileName);
-          artifact.open(outline, picked.title, fileName);
-          const reply = artifactTag('slide', picked.title, fileName, previewOutline(outline)) + '\n\nSlide siap.';
-          s.messages.push({ role: 'ai', text: reply, time: Date.now() });
-          store.save();
-          history.render();
-          chat.renderMessages();
-        } catch (e) {
-          toast.show('Gagal merangkai slide');
-        }
+        this.paintQuick();
       };
     }
     $('btn-login').onclick = () => {
