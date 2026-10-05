@@ -219,6 +219,15 @@ function renderCurrent() {
   else renderSlide(current.outline, current.title);
 }
 
+function isolatedFrame(markup) {
+  const frame = document.createElement('iframe');
+  frame.setAttribute('sandbox', 'allow-scripts');
+  frame.title = 'Pratinjau terisolasi';
+  frame.style.cssText = 'width:100%;min-height:260px;border:0;background:transparent';
+  frame.srcdoc = '<!doctype html><meta charset="utf-8"><style>html,body{margin:0;background:transparent}</style>' + String(markup || '');
+  return frame;
+}
+
 function renderDiagram(item) {
   const stage = $('artifact-stage');
   const head = $('artifact-title');
@@ -228,9 +237,8 @@ function renderDiagram(item) {
   const wrap = document.createElement('div');
   wrap.className = 'diagram-view';
   let scale = 1;
-  const board = document.createElement('div');
-  board.innerHTML = item.markdown || buildDiagramSvg(item.spec || {});
-  const paint = () => { board.style.transform = 'scale(' + scale + ')'; };
+  const board = isolatedFrame(item.markdown || buildDiagramSvg(item.spec || {}));
+  const paint = () => { board.style.transform = 'scale(' + scale + ')'; board.style.transformOrigin = 'top left'; };
   const bar = document.createElement('div');
   bar.className = 'slide-nav';
   const zoomOut = document.createElement('button');
@@ -254,7 +262,8 @@ function renderChart(item) {
   const head = $('artifact-title');
   if (head) head.textContent = item.title || 'Grafik';
   if (!stage) return;
-  stage.innerHTML = item.markdown || buildChartSvg({ type: 'bar', title: item.title, labels: [], datasets: [{ data: [] }] });
+  stage.replaceChildren();
+  stage.appendChild(isolatedFrame(item.markdown || buildChartSvg({ type: 'bar', title: item.title, labels: [], datasets: [{ data: [] }] })));
 }
 
 function paintVersions() {

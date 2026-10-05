@@ -10,18 +10,8 @@
   <link rel="apple-touch-icon" href="icon.svg">
   <link rel="manifest" href="manifest.webmanifest">
   <title>Rategoan</title>
-  <script>
-    (function () {
-      try {
-        var v = localStorage.getItem('rategoan_theme') || 'auto';
-        var dark = v === 'auto'
-          ? !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-          : v === 'dark';
-        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
-      } catch (e) {}
-    })();
-  </script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+  <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>

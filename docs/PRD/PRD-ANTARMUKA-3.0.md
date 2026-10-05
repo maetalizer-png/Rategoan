@@ -1,4 +1,4 @@
-<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T22:49:18Z. -->
+<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T23:51:03Z. -->
 
 PRD ANTARMUKA 3.0 — MASTER CETAK BIRU REKAYASA KEDAULATAN & KEDALAMAN MESIN FITUR (EDISI FINAL KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Sovereign AI Workstation)
@@ -85,30 +85,59 @@ Gerbang Kualitas Wajib (Definition of Done):
 Linter wajib 0 error, 0 warning, dan Anti-placeholder: 0 (npm run lint).
 Tidak ada elemen HTML berstatus yatim atau tombol tanpa penangan event.
 # BAB 5: MATRIKS PENYEMPURNAAN BERKAS SEKALI JALAN (SINGLE-PASS MASTER CHECKLIST)
+
 No
 Modul Target
-Tindakan Refaktoring / Penyempurnaan
+Tindakan Refaktoring / Rekayasa
 Kriteria Keberhasilan
 1
-js/chat/composer.js
-Pembersihan kode mati & handler deprecated
-Menghapus referensi #sheet-doc, #sheet-learn, #sheet-fast, #sheet-think, #sheet-tools, #sheet-memory.
+css/account/settings.css
+Perbaikan kontras tombol segmented pengaturan tampilan
+Tombol aktif .theme-btn.active dan .font-btn.active menggunakan background: var(--rg-accent); color: var(--rg-accent-ink);. Hapus selektor penimpa baris 210-213. Teks hitam pekat di atas pil putih di mode gelap.
 2
-js/chat/composer.js:763
-Penanganan kasus chat kosong pada fitur slide
-Mencegah unduhan berkas hampa; mengarahkan fokus ke #chat-input dengan preset teks panduan dan toast UI.
+js/chat/composer.js
+Reformasi alur slide interaktif & eliminasi auto-download
+Tombol #sheet-slide murni mengaktifkan slideActive = true dan panduan prompt. Hapus panggilan instan exportSlides. Pada baris 584, reset this.slideActive = false; dan panggil this.paintQuick() segera setelah pesan dikirim.
 3
+js/chat/chat.js
+Eliminasi kotak ringkasan beranda chat kosong
+Hapus fungsi paintBriefing(empty) dari pemanggilan di renderMessages(). Beranda chat #empty-state murni Zen (hanya tipografi Rategoan).
+4
+js/ui/artifact.js
+Sanitasi celah DOM XSS pada render diagram & chart
+Amankan baris 232 (renderDiagram) dan baris 257 (renderChart) dengan markdown.escape() atau isolasi di dalam iframe #artifact-inline.
+5
+shared/markdown.js
+Penguncian sandbox Web Worker anti-eskalasi
+Kunci self.indexedDB dengan Object.defineProperty(..., { configurable: false }), bekukan prototipe, dan nonaktifkan WebSocket, EventSource, BroadcastChannel.
+6
+index.html
+Pemasangan Content Security Policy (CSP) ketat
+Pasang meta tag CSP di <head> yang mengunci koneksi hanya ke 'self' dan blob: demi kedaulatan data 100% lokal.
+7
 js/account/settings.js
 Penyelarasan mode eksekusi
 Memastikan sinkronisasi dua arah opsi Cepat dan Mendalam dengan model-sheet.js.
-4
+8
 shared/idb-gateway.js
 Optimasi kuota penyimpanan lokal
 Mengalirkan riwayat percakapan besar dan artefak ke IndexedDB guna menghindari limit 5MB LocalStorage.
-5
+9
 js/chat/voice.js
 Penanganan gracefully-degrade izin mikrofon
 Menampilkan toast pemberitahuan yang ramah saat akses mikrofon ditolak oleh browser.
+10
+docs/PRD/
+Pembersihan relik usang & sinkronisasi korpus resmi
+Hapus dokumen usang (PRD 1.0, 2.0, audit token 5.2B). Selaraskan angka korpus di PRD-RAGET-NEURAL.md dan FONDASI-TEORI-RAGET.md menjadi resmi 17,65 Miliar token BPE.
+11
+docs/PRD/PRD-ANTARMUKA-3.0.md
+Sinkronisasi master PRD ke repositori
+Salin seluruh 10 Bab kanonikal dari dokumen Google Drive ini ke docs/PRD/PRD-ANTARMUKA-3.0.md.
+12
+Verifikasi Mutlak
+Pengujian otomatis tanpa regresi
+Menjalankan npm test (17/17 lulus) dan npm run lint (0 error, 0 warning, Anti-placeholder: 0).
 
 # BAB 6: MANDAT PEMBERSIHAN DOKUMEN REPOSITORI DARI KERACUNAN TEKS USANG (DOCUMENTATION HYGIENE & REPO CLEANUP)
 ## 6.1 Latar Belakang & Urgensi Pembersihan
@@ -231,6 +260,20 @@ Di css/ui/artifact.css, tombol .studio-actions button dan .artifact-actions butt
 Di css/ui/overhaul.css, tombol tab .studio-panes button, pemilih mode .model-speed, .model-speed-label select, dan tombol kartu artefak wajib memiliki color: var(--rg-text);. Saat aktif (.on), gunakan latar kontras tinggi dengan teks yang kontras tajam.
 Di js/artifacts/artifacts.js, pembuatan tombol Pratinjau dan Unduh pada kartu artefak wajib menyematkan kelas CSS terstandarisasi (.btn-art-open dan .btn-art-save atau kelas utilitas tombol sistem) dengan kontras tinggi yang jelas terlihat di mode gelap dan terang.
 Seluruh teks sekunder/deskripsi (subtitel Koleksi, Proyek, Konektor, Lampiran) wajib memenuhi standar rasio kontras WCAG AA (minimal 4.5:1 terhadap latar belakang gelap).
+Kasus Tombol Tampilan Putih di Atas Putih (Settings Appearance):
+Pada css/account/settings.css, tombol segmented .theme-segmented .theme-btn.active dan .font-btn.active saat ini mengalami cacat teks tidak terbaca karena background: var(--rg-card, #ffffff) (variabel --rg-card tidak terdefinisi di tokens.css sehingga fallback ke #ffffff) dipadukan dengan aturan penimpa .theme-btn.active { color: var(--rg-accent); } di mana --rg-accent bernilai #ffffff pada mode gelap. Akibatnya teks putih berada di atas pil tombol putih.
+Solusi baku: Ubah styling tombol aktif menjadi:
+.theme-segmented .theme-btn.active,
+.theme-segmented .font-btn.active {
+background: var(--rg-accent);
+color: var(--rg-accent-ink);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+border-color: transparent;
+}
+Hapus total aturan selektor .theme-btn.active { border-color: var(--rg-accent); color: var(--rg-accent); } pada baris 210-213.
+Dengan aturan ini:
+Pada Mode Gelap: Tombol aktif berlatar putih (--rg-accent: #ffffff) dengan teks hitam pekat berwibawa (--rg-accent-ink: #05080c).
+Pada Mode Terang: Tombol aktif berlatar biru tua (--rg-accent: #1a4b8c) dengan teks putih tajam (--rg-accent-ink: #ffffff).
 ## 9.2 Penegakan Beranda Obrolan Murni Tanpa Kotak Mengganggu (Zen Clean Empty State)
 Eliminasi Kotak Besar 'Ringkasan hari ini':
 Dilarang keras merender kartu kotak besar .daily-brief di dalam #empty-state pada halaman utama chat (js/chat/chat.js:paintBriefing).
@@ -243,6 +286,7 @@ Langkah 1 (Aktivasi Mode Slide): Saat pengguna mengetuk Buat Slide (.pptx), tutu
 Langkah 2 (Instruksi & Dialog Percakapan): Pengguna mengetik atau melengkapi topik presentasi, audiens sasaran, atau poin-poin yang diinginkan, lalu menekan tombol kirim. (Jika ada pesan atau materi yang sedang dibahas di sesi chat, pengguna cukup mengonfirmasi pembuatan presentasi).
 Langkah 3 (Penyusunan & Pratinjau Interaktif): Raget 1.0 menyusun naskah presentasi, memecah bab dan poin menjadi outline terstruktur, dan menampilkannya sebagai Kartu Pratinjau Slide (Visual Carousel di Kanvas Artefak / chat split).
 Langkah 4 (Unduh Manual Sesuai Keinginan): Berkas biner PowerPoint .pptx HANYA diunduh ke penyimpanan perangkat ketika pengguna secara sadar menekan tombol [ 📥 Unduh PPTX ] yang tersemat pada kartu artefak atau panel pratinjau slide.
+Pembersihan Siklus Status slideActive: Pada js/chat/composer.js:584, saat pesan slide dikirim, status this.slideActive wajib langsung di-reset kembali ke false dan memanggil this.paintQuick(). Ini mencegah pesan percakapan berikutnya (misal ucapan terima kasih atau pertanyaan umum) secara keliru terus ditempeli awalan "Buatkan slide: ".
 ## 9.4 Pembersihan Teks Relik Usang Pencegah Halusinasi Model AI Luar
 Akar Masalah Keracunan Dokumen (567M Token Relic):
 Ditemukan relik catatan audit tanggal 9 September 2026 di dalam docs/PRD/PRD-RAGET-NEURAL.md (bagian §2 dan §FASE A.1) yang mencatat angka lama "567.121.195 token (2,84% dari kebutuhan 1B)" dan di docs/PRD/FONDASI-TEORI-RAGET.md yang mencatat "543.202.593 token".
@@ -265,3 +309,156 @@ Titik Prioritas Pengembangan Selanjutnya:
 Penyempurnaan pipeline biner PPTX agar mendukung tata letak multi-kolom dan tema visual yang dapat dipilih pengguna.
 Optimalisasi inferensi WebGPU / Wasm untuk akselerasi neural Raget 1.0 di perangkat seluler.
 Integrasi penuh kanvas belah adaptif (Split-Canvas) pada layar tablet/desktop untuk kolaborasi pembuatan dokumen dan kode secara real-time.
+## 9.6 Audit Keamanan Siber Luring, Titik Rawan Pemrograman, dan Penguatan Rekayasa Perangkat Lunak (Hardening & Security Audit)
+Pencegahan Celah DOM XSS pada Kanvas Artefak (js/ui/artifact.js:232, 257):
+Titik Rawan: Pemanggilan board.innerHTML = item.markdown pada renderDiagram dan stage.innerHTML = item.markdown pada renderChart langsung merender markup ke DOM utama tanpa sanitasi. Jika artefak mengandung muatan skrip atau tag SVG/IMG berbahaya, skrip dapat tereksekusi pada origin utama.
+Penguatan: Seluruh perenderan visual dinamis wajib disanitasi menggunakan markdown.escape() atau dialihkan untuk dirender secara aman di dalam iframe terisolasi (#artifact-inline) yang memiliki atribut sandbox="allow-scripts" tanpa allow-same-origin.
+Penguatan Isolasi Sandbox Web Worker (shared/markdown.js:61):
+Titik Rawan: Di dalam markdown.run(), isolasi worker hanya menimpa objek dengan self.indexedDB = undefined. Skrip yang dijalankan pengguna dapat memulihkan akses basis data melalui penghapusan properti (delete self.indexedDB) yang mengekspos WorkerGlobalScope.prototype.indexedDB, atau mengeksfiltrasi data menggunakan WebSocket, EventSource, BroadcastChannel, maupun navigator.sendBeacon.
+Penguatan: Kunci properti global worker menggunakan Object.defineProperty(self, 'indexedDB', { get: () => undefined, configurable: false }), bekukan prototipe lingkungan worker, dan netralisasi seluruh antarmuka jaringan luring (self.WebSocket = undefined; self.EventSource = undefined; self.BroadcastChannel = undefined;).
+Penerapan Kebijakan Keamanan Konten Ketat (Strict Content Security Policy):
+Titik Rawan: Berkas index.html belum menyertakan meta tag Content-Security-Policy.
+Penguatan: Pasang meta tag CSP ketat di <head> index.html:
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+Ini mengunci peramban agar 100% menolak koneksi transmisi data ke domain luar manapun, menjamin kedaulatan data lokal secara mutlak.
+Validasi Alur Kerja Fitur Modern (Modern AI Workspace Simulation):
+# BAB 10: CETAK BIRU ADOPSI 15 TEKNOLOGI FRONTIER AI, ARSITEKTUR MESIN NEURAL RAGET 1.0, DAN 4 STUDI KASUS REKAYASA END-TO-END
+## 10.1 Arsitektur Jaringan Saraf Tiruan Modern Raget 1.0 (Frontier Neural Core)
+Rotary Position Embedding (RoPE):
+Menggantikan embedding posisi absolut sinusoidal lama. Menggunakan rotasi matriks 2D ortogonal pada pasangan dimensi query dan key.
+Dampak: Memungkinkan Raget 1.0 melakukan ekstrapolasi panjang konteks melampaui ukuran jendela pelatihan (dari 2.048 token hingga 16.384 token) secara stabil tanpa distorsi atensi.
+Grouped-Query Attention (GQA):
+Mengelompokkan Q head ke dalam subset K/V head bersama (misal 16 Query head berbagi 4 Key/Value head, rasio 4:1).
+Dampak: Memangkas konsumsi RAM untuk memori inferensi KV-Cache hingga 75% di perangkat seluler pengguna tanpa mengorbankan kualitas representasi semantik multi-head.
+SwiGLU Activation Function:
+Menerapkan fungsi aktivasi terbobot non-linear Swish-Gated Linear Unit pada lapisan Feed-Forward Network: SwiGLU(x) = (xW_gate * sigmoid(beta * xW_gate)) * (xW_up).
+Dampak: Memberikan konvergensi gradien yang jauh lebih cepat dan peningkatan efisiensi representasi parameter sebesar 15–20% dibandingkan aktivasi GeLU lama.
+Compact Mixture-of-Experts (MoE 4x250M):
+Membagi lapisan FFN menjadi 4 jaringan ahli independen berkapasitas 250M parameter, di mana router gating hanya mengaktifkan 2 ahli paling relevan per token secara dinamis.
+Dampak: Memberikan kapasitas wawasan setara model 1 Miliar parameter dengan beban komputasi dan kecepatan eksekusi seringan model 500M parameter saat dijalankan luring.
+## 10.2 Mesin Inferensi Cepat & Akselerasi Perangkat Klien (Edge Runtime Engine)
+Paged KV-Cache Memory Management:
+Mengalokasikan memori Key-Value cache secara modular dalam blok-blok halaman virtual (mirip paging pada sistem operasi memori virtual), mencegah fragmentasi heap memori RAM di JavaScript dan WebAssembly.
+Speculative Decoding Berjenjang (Dual-Brain Speculative Pipeline):
+Memanfaatkan Jalur Cepat Sistem 1 atau sub-model neural mini (Raget 50M) untuk memprediksi draf kandidat 4–5 token berikutnya dalam hitungan mikrodetik, kemudian model neural utama (Raget 1B) memverifikasi seluruh batch kandidat tersebut dalam satu lintasan komputasi paralel. Menghasilkan peningkatan kecepatan ketik balasan (tokens/second) sebesar 2x–3x lipat di layar ponsel.
+Akselerasi Perangkat Keras WebGPU via WGSL Compute Shaders:
+Memindahkan perkalian matriks tensor (GEMM) dari CPU JavaScript ke chip grafis terintegrasi (GPU ponsel) melalui WebGPU Compute Shaders (WGSL), menghasilkan inferensi hingga 15x lebih responsif dan hemat daya baterai.
+Kuantisasi Ekstrem BitNet b1.58 / Int4 Matriks:
+Mengompresi bobot safetensors ke dalam representasi terkuantisasi 4-bit (int4) dan arsitektur ternary BitNet {-1, 0, 1}. Menghilangkan kebutuhan perkalian titik kambang (floating-point multiply) yang rakus daya, digantikan operasi penjumlahan biner murni.
+## 10.3 Penyelarasan Pasca-Pelatihan & Kurasi Data Sintetis (Post-Training & Alignment)
+Direct Preference Optimization (DPO):
+Menyelaraskan model instruksi Raget 1.0 langsung menggunakan pasangan respons terpilih (chosen) dan tertolak (rejected) melalui fungsi rugi cross-entropy implisit, meniadakan kerumitan pelatihan model reward terpisah (RLHF/PPO).
+Evol-Instruct & Textbook-Quality Synthetic Data Pipeline:
+Menerapkan algoritma mutasi instruksi terpandu (meningkatkan kompleksitas nalar, studi kasus hukum, penalaran matematika bertingkat) pada data penampungan (Tingkat 2) untuk menghasilkan dataset instruksi bahasa Indonesia berstandar buku teks tertinggi.
+## 10.4 Memori Berjenjang & Temu Kembali Generasi Baru (Advanced Hybrid RAG)
+Pencarian Hibrida Mandiri (Hybrid Search: BM25 + Dense Vector Reranking via RRF):
+Mengombinasikan kekuatan pencarian leksikal eksak BM25 (untuk nama orang, kode pasal, tanggal, istilah teknis) dengan pencarian makna semantik vektor kosinus. Skor digabungkan menggunakan Reciprocal Rank Fusion: RRF_Score = 1/(60 + Rank_BM25) + 1/(60 + Rank_Vector). Menghilangkan kesalahan temu kembali dan halusinasi kutipan.
+GraphRAG Entitas Lokal (Local Knowledge Graph):
+Mengekstrak simpul entitas (Nama, Organisasi, Dokumen, Regulasi) dan sisi relasi antar-entitas dari dokumen yang disematkan ke Proyek, membentuk graf pengetahuan relasional yang tersimpan di IndexedDB.
+Hierarchical Memory Architecture (Arsitektur Memori 3-Tingkat):
+Membagi memori sistem menjadi 3 lapisan: Working Memory (sesi chat aktif), Episodic Memory (arsip ringkasan percakapan masa lalu), dan Semantic/Core Memory (fakta permanen pengguna di Kapsul Memori).
+## 10.5 Orkestrasi Agenik Otonom & Dekode Terstruktur (Autonomous Agentic & Constrained Output)
+Siklus Penalaran & Tindakan ReAct (Reasoning + Acting):
+Mengendalikan pipa alur kerja turn-based: AI memetakan pikiran (Thought), menentukan aksi alat (Action), mengamati keluaran (Observation), dan menyusun simpulan akhir (Final Answer). Seluruh tahapan diproyeksikan langsung ke Zen Agentic Timeline Stepper.
+Constrained Decoding / JSON Schema Enforcement:
+Mengunci probabilitas keluaran model menggunakan grammar sampling berbasis regex dan skema JSON terkunci, menjamin pemanggilan fungsi alat perangkat (tools) dan pembentukan berkas artefak tidak pernah mengalami kegagalan sintaksis (100% valid JSON/markup).
+## 10.6 Empat Studi Kasus Rekayasa End-to-End (4 Real-World Case Studies)
+### Studi Kasus 1: Pembedah Dokumen Regulasi Hukum Tebal (PDF 100+ Halaman)
+Skenario Pengguna: Pengguna mengunggah draf UU/Perpres 80 halaman ke Proyek dan bertanya: "Pasal berapa saja yang mengatur sanksi administrasi bagi platform digital dan bagaimana perbandingannya dengan aturan lama?"
+Alur Kerja Pipa di Balik Layar:
+Ingestion & Chunking: Dokumen dipecah menjadi unit paragraf semantik (500 karakter dengan overlap 50 karakter).
+Hybrid Indexing: Sistem membuat indeks leksikal BM25 dan vektor sparse TF-IDF di memori RAM dan mencatat relasi pasal ke GraphRAG lokal.
+ReAct Orchestration: Agent planner memecah kueri menjadi 2 sub-tugas: Temu kembali pasal sanksi dan Ekstraksi pasal pembanding.
+Zen Stepper: Menampilkan simpul aktif: 📄 [Membaca Dokumen] -> 🧠 [Menganalisis Pasal Sanksi] -> 📊 [Menyusun Tabel Perbandingan].
+Keluaran & Artefak: Jawaban disajikan dengan sitasi akurat (nomor pasal dan halaman) lengkap dengan tabel komparatif di obrolan, serta opsi satu ketukan: [ Simpan sebagai Naskah Kajian (.docx) ] ke Galeri Artefak.
+### Studi Kasus 2: Digitalisasi Struk Belanja & Pembukuan Kas Otomatis (.xlsx)
+Skenario Pengguna: Pengguna memotret struk belanja fisik yang kusut menggunakan tombol kamera di lembar lampiran dan memberi instruksi: "Rekap ke pembukuan bulanan."
+Alur Kerja Pipa di Balik Layar:
+Sensor Capture: Modul kamera mengambil foto beresolusi optimal dan menjalankan OCR lokal sisi klien.
+Constrained JSON Extraction: Model memetakan teks mentah OCR ke dalam skema JSON baku: { tanggal, vendor, items: [{ nama, harga, qty, subtotal }], total }.
+Math Engine Verification: Mesin toolsMath memvalidasi apakah jumlah subtotal barang sama persis dengan total pembayaran.
+Binary XLSX Compilation: Modul xlsx-local.js mengompilasi lembar kerja Excel biner asli dengan rumus =SUM(D2:D10) dan header bergaya profesional.
+Keluaran & Artefak: Obrolan menyajikan ringkasan total biaya, kartu pratinjau tabel interaktif, dan tombol [ 📥 Unduh Pembukuan.xlsx ] di Galeri Artefak.
+### Studi Kasus 3: Agen Pembuat Slide Presentasi Bisnis Terpandu (.pptx)
+Skenario Pengguna: Pengguna mengetuk tombol [ 📊 ] Buat Slide (.pptx) di lembar lampiran untuk menyiapkan materi pitching bisnis.
+Alur Kerja Pipa di Balik Layar:
+Mode Activation: Lembar lampiran tertutup, status slideActive = true aktif, dan kotak input chat menampilkan panduan: "Buatkan slide presentasi tentang: " tanpa unduh otomatis.
+Interactive Dialog: Pengguna melengkapi: "Pitching Startup Kopi Berkelanjutan, 5 slide, audiens investor."
+Outline Structuring: AI merancang kerangka 5 slide: Judul & Visi, Masalah Pasar, Solusi Unik, Model Bisnis, dan Proyeksi Traksi.
+Visual Carousel Canvas: Kanvas Artefak / Split Screen menampilkan pratinjau slide bergaya editorial interaktif (dapat diedit langsung per poin oleh pengguna).
+Manual Export: Berkas biner .pptx asli hanya diunduh ketika pengguna menekan tombol [ 📥 Unduh PPTX ] pada kartu artefak slide. Status slideActive otomatis kembali ke false.
+### Studi Kasus 4: Lingkungan Koding Mandiri Luring di Studio WebApp/Python
+Skenario Pengguna: Pengguna membuka Studio Kode dan meminta AI membuatkan aplikasi visualisasi kalkulator bunga pinjaman interaktif.
+Alur Kerja Pipa di Balik Layar:
+Code Generation: Raget 1.0 menghasilkan berkas HTML5, CSS3, dan logika JavaScript modern yang bersih.
+Multi-Tab Editor: Berkas otomatis dipetakan ke tab index.html, style.css, dan app.js di CodeMirror.
+Secure Sandboxing: Pratinjau langsung dijalankan di dalam iframe terisolasi (#studio-preview-frame) dengan atribut sandbox="allow-scripts" tanpa akses origin parent.
+Export & Rujukan: Pengguna dapat menekan [ Jalankan ], menguji di tab Konsol, mengekspor berkas proyek ke format arsip [ Unduh ZIP ], atau menekan [ Jadikan Rujukan Proyek ] untuk memasukkannya ke basis pengetahuan proyek aktif.
+## 10.7 Matriks Perintah Eksekusi Grok Build Sekali Jalan
+css/account/settings.css:
+Ganti baris 202–213 dengan penataan kontras token:
+.theme-segmented .theme-btn.active,
+.theme-segmented .font-btn.active {
+background: var(--rg-accent);
+color: var(--rg-accent-ink);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+border-color: transparent;
+}
+Hapus selektor penimpa .theme-btn.active { border-color: var(--rg-accent); color: var(--rg-accent); }.
+js/chat/composer.js:
+Pada penanganan pengiriman pesan (baris 584), pastikan status this.slideActive di-reset ke false setelah pesan slide disubmit dan panggil this.paintQuick().
+js/ui/artifact.js:
+Amankan fungsi renderDiagram (baris 232) dan renderChart (baris 257) dengan sanitasi markdown.escape() atau perenderan aman di dalam iframe #artifact-inline.
+shared/markdown.js:
+Perkuat isolasi Web Worker di markdown.run() dengan mengunci prototipe dan menonaktifkan seluruh antarmuka jaringan luring (WebSocket, EventSource, BroadcastChannel).
+index.html:
+Sematkan meta tag Content Security Policy ketat di bagian <head>.
+Verifikasi Mutlak:
+Jalankan npm test (wajib 17/17 lulus) dan npm run lint (wajib 0 error, 0 warning, Anti-placeholder: 0).
+Sinkronisasikan seluruh isi dokumen Drive ini ke repositori docs/PRD/PRD-ANTARMUKA-3.0.md.
+Alur pipeline turn-based: Kueri Pengguna → Fast-Path / Agent Planner → Zen Timeline Stepper Telemetri → Keluaran Kanvas Belah Adaptif (Split-Screen pada layar >=1024px) → Aksi Berkas Mandiri (.docx, .pptx, .xlsx) tanpa auto-download agresif.
+## 10.8 Spesifikasi Profil Rekayasa Perangkat Keras (Hardware Profiling) & Batas Komputasi Seluler (Edge Device Constraints)
+Profil Batas Perangkat Sasaran (Target Hardware Baseline):
+Arsitektur CPU: ARM64 (Octa-core: Cortex-A78/A55 atau setara pada chipset Qualcomm Snapdragon 680/778G/8-series dan MediaTek Dimensity 700/8000).
+Kapasitas RAM Fisik: 4 GB hingga 8 GB LPDDR4X/LPDDR5.
+Alokasi Batas Heap Browser (V8 Engine Memory Ceiling): Maksimal 1.2 GB RAM untuk tab PWA Rategoan agar peramban tidak mengalami crash Out-of-Memory (OOM) oleh sistem operasi Android/iOS.
+Manajemen Termal & Throttling: Algoritma inferensi wajib menyertakan interval jeda mikro (micro-yield await new Promise(r => setTimeout(r, 0)) setiap 16 token) untuk mencegah panas berlebih dan pelambatan termal pada baterai ponsel.
+Arsitektur Pemetaan GPU Bergerak (Mobile GPU Tile-Based Rendering via WebGPU):
+GPU Target: Adreno 610/642L/730 dan Mali-G57/G77/G710 yang mendukung WebGPU.
+Ukuran Workgroup WGSL: Menggunakan ukuran workgroup @workgroup_size(64, 1, 1) yang optimal untuk arsitektur Tile-Based Deferred Rendering (TBDR) pada ponsel pintar.
+Penyimpanan Buffer Bobot: Menggunakan GPUBuffer bertipe STORAGE | COPY_DST dengan format terkuantisasi uint32 untuk menghemat bandwidth memori VRAM seluler.
+## 10.9 Formulasi Matematika & Spesifikasi Rekayasa 15 Teknologi Inti
+Formulasi Rotary Position Embedding (RoPE):
+Matriks rotasi ortogonal diaplikasikan pada vektor query q dan key k pada posisi indeks m:
+R_{Θ, m}^d = diag(R_{θ_1, m}, R_{θ_2, m}, ..., R_{θ_{d/2}, m})
+di mana R_{θ_i, m} = [[cos(mθ_i), -sin(mθ_i)], [sin(mθ_i), cos(mθ_i)]] dengan frekuensi basis θ_i = 10000^{-2(i-1)/d}.
+Memastikan atensi antara token pada posisi m dan n murni bergantung pada jarak relatif (m - n), menjamin stabilitas ekstrapolasi konteks hingga 16K token.
+Formulasi Grouped-Query Attention (GQA) & Ukuran KV-Cache:
+Jika H_Q adalah jumlah kepala query (16) dan H_{KV} adalah jumlah kepala key-value (4), maka rasio kelompok adalah G = H_Q / H_{KV} = 4.
+Kebutuhan memori KV-Cache per token (presisi 16-bit):
+Memori per token = 2 × L × H_{KV} × d_{head} × 2 bytes
+Untuk model 24 layer dengan d_{head} = 64: pemakaian RAM terpangkas dari 196 KB/token (MHA) menjadi 49 KB/token (GQA 4:1), menghemat 75% RAM ponsel.
+Dimensi Feed-Forward Network dengan SwiGLU:
+Lapisan FFN SwiGLU menggunakan dimensi tersembunyi:
+d_{ffn} = floor((8 / 3) * d_{model})
+diikuti kuantisasi kelipatan 256 terdekat untuk efisiensi komputasi SIMD Wasm/WebGPU.
+Formulasi Direct Preference Optimization (DPO):
+Penyelarasan preferensi model π_θ terhadap model referensi π_{ref} dihitung dengan meminimalkan fungsi rugi:
+L_{DPO}(θ; π_{ref}) = -E_{(x, y_w, y_l)} [ log σ ( β log(π_θ(y_w|x) / π_{ref}(y_w|x)) - β log(π_θ(y_l|x) / π_{ref}(y_l|x)) ) ]
+di mana y_w adalah jawaban terpilih (bahasa Indonesia santun, faktual, tanpa halusinasi) dan y_l adalah jawaban tertolak.
+Algoritma Reciprocal Rank Fusion (RRF) untuk Hybrid Search:
+Peringkat akhir dokumen d dari hasil BM25 dan Dense Vector digabungkan melalui:
+RRF(d) = 1 / (k + Rank_{BM25}(d)) + 1 / (k + Rank_{Vector}(d))
+dengan konstanta perataan baku k = 60.
+## 10.10 Skenario Tahapan Implementasi Berkelanjutan (Engine Scaffolding Roadmap)
+Tahap 1: Stabilisasi Sasis & Ergonomi UI Kritis (Sprint Sekarang):
+Memperbaiki kontras tombol tampilan pada css/account/settings.css.
+Mengunci alur slide interaktif dan reset slideActive pada js/chat/composer.js.
+Menerapkan sanitasi DOM XSS pada js/ui/artifact.js dan pembatasan isolasi Web Worker pada shared/markdown.js.
+Memasang Content Security Policy ketat pada index.html.
+Tahap 2: Pipa Hybrid Search & Paged RAG Lokal:
+Mengintegrasikan modul raget/raget-vault/hybrid-search.js yang menggabungkan indeks BM25 dengan inverted index TF-IDF di IndexedDB.
+Menghubungkan ekstraksi entitas GraphRAG pada berkas rujukan proyek aktif di js/project/pin-index.js.
+Tahap 3: Runtime WebGPU & Penyatuan Raget 1.0 Neural:
+Membangun modul raget/raget-neural/runtime/webgpu-runner.js dengan shader WGSL untuk akselerasi komputasi bobot safetensors di peramban.
+Menerapkan Paged KV-Cache untuk streaming token teks berkecepatan tinggi luring di perangkat seluler.

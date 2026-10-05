@@ -17,7 +17,7 @@ import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
-import { searchDocs } from '../../raget/raget-vault/local-rag.js';
+import { hybridRank } from '../../raget/raget-vault/hybrid-search.js';
 import { planSubgoals } from '../../raget/raget-agents/core/agent-planner.js';
 import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
@@ -396,7 +396,7 @@ export const composer = {
     let projectPrefix = '';
     if (project && (project.systemPrompt || (project.pinnedFiles && project.pinnedFiles.length))) {
       const docs = (project.pinnedFiles || []).map((file, index) => ({ id: index, name: file.name, text: file.textContent || '' }));
-      const hits = searchDocs(docs, text, 3);
+      const hits = hybridRank(docs, text, 3);
       const picked = hits.length ? hits : docs.slice(0, 2);
       projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n');
     }
@@ -581,7 +581,12 @@ export const composer = {
     if (send) send.onclick = () => {
       let t = inp.value.trim();
       if (!t && !attach.current && !quote.current) return;
-      if (this.slideActive && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
+      const wasSlide = this.slideActive;
+      if (wasSlide && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
+      if (wasSlide) {
+        this.slideActive = false;
+        this.paintQuick();
+      }
       inp.value = '';
       this.autoGrow();
       document.body.classList.remove('has-draft');

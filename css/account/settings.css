@@ -172,9 +172,14 @@
   font-weight: 700;
 }
 
-.font-btn.active {
-  border-color: var(--rg-accent);
-  color: var(--rg-accent);
+.font-btn.active,
+.theme-btn.active,
+.theme-segmented .theme-btn.active,
+.theme-segmented .font-btn.active {
+  background: var(--rg-accent);
+  color: var(--rg-accent-ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  border-color: transparent;
 }
 
 .theme-segmented {
@@ -198,18 +203,6 @@
   color: var(--rg-muted);
   background: transparent;
   padding: 6px 14px;
-}
-.theme-segmented .theme-btn.active,
-.theme-segmented .font-btn.active {
-  background: var(--rg-card, #ffffff);
-  color: var(--rg-text, #0f172a);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  border-color: transparent;
-}
-
-.theme-btn.active {
-  border-color: var(--rg-accent);
-  color: var(--rg-accent);
 }
 
 .profile-head {
