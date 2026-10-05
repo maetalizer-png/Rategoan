@@ -19,7 +19,6 @@ import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { chunker } from '../../vault/chunk.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
-import { memoryPreference } from '../state/memory-preference.js';
 import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../../shared/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
@@ -30,7 +29,6 @@ import { workspace } from '../state/workspace.js';
 import { projectPage } from '../project/project.js';
 import { runAgentPlan } from '../agent/worker-bridge.js';
 import { mountThought } from '../ui/thought-card.js';
-import { mountQuiz } from '../ui/quiz-card.js';
 import { parseChartAsk, buildChartSvg } from '../../shared/charts-local.js';
 import { parseDiagramAsk, buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { printReport } from '../../shared/report-export.js';
@@ -517,7 +515,6 @@ export const composer = {
       const cur = workspace.current();
       if (label) label.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek terpilih (Pilih)';
       this._toggleSwitch('sheet-research', this.researchActive);
-      this._toggleSwitch('sheet-fast', hemat.enabled());
       attach.open();
     };
     document.addEventListener('rategoan:stop-generation', () => {
@@ -527,12 +524,10 @@ export const composer = {
     document.addEventListener('rategoan:command', (event) => {
       if (event.detail === 'think') {
         this.thinkActive = true;
-        this._toggleSwitch('sheet-think', true);
         this.paintQuick();
         this.syncModes();
       } else if (event.detail === 'think-off') {
         this.thinkActive = false;
-        this._toggleSwitch('sheet-think', false);
         this.paintQuick();
         this.syncModes();
       } else if (event.detail === 'neural') {
@@ -554,7 +549,6 @@ export const composer = {
       if (key === 'websearch') this.setWebsearch(false);
       else if (key === 'think') {
         this.thinkActive = false;
-        this._toggleSwitch('sheet-think', false);
         this.paintQuick();
         this.syncModes();
       } else if (key === 'research') {
@@ -606,7 +600,6 @@ export const composer = {
     const quickThink = $('btn-quick-think');
     if (quickThink) quickThink.onclick = () => {
       this.thinkActive = !this.thinkActive;
-      this._toggleSwitch('sheet-think', this.thinkActive);
       this.paintQuick();
       this.syncModes();
       toast.show(this.thinkActive ? 'Berpikir keras nyala' : 'Berpikir keras mati');
@@ -623,25 +616,11 @@ export const composer = {
         this.setWebsearch(!this.websearchActive);
       };
     }
-    const thinkCard = $('sheet-think');
-    if (thinkCard) thinkCard.onclick = () => {
-      this.thinkActive = !this.thinkActive;
-      this._toggleSwitch('sheet-think', this.thinkActive);
-      if (this.thinkActive && hemat.enabled()) {
-        hemat.toggle();
-        this._toggleSwitch('sheet-fast', false);
-      }
-      this.paintQuick();
-      this.syncModes();
-    };
     const researchCard = $('sheet-research');
     if (researchCard) researchCard.onclick = () => {
       this.researchActive = !this.researchActive;
       this._toggleSwitch('sheet-research', this.researchActive);
-      if (this.researchActive && hemat.enabled()) {
-        hemat.toggle();
-        this._toggleSwitch('sheet-fast', false);
-      }
+      if (this.researchActive && hemat.enabled()) hemat.toggle();
       if (this.researchActive) this.setWebsearch(true);
       else this.syncModes();
     };
@@ -669,19 +648,6 @@ export const composer = {
       sheets.close();
       projectPage.open();
     };
-    const learnCard = $('sheet-learn');
-    if (learnCard) learnCard.onclick = async () => {
-      sheets.close();
-      const s = this.ensure();
-      const material = lastAiText(s);
-      if (!material) { toast.show('Tanya dulu, baru tap Belajar'); return; }
-      const reply = flowHub.lesson(material, s.title) + '\n\nCek pemahaman: jelaskan langkah 1 dengan kata sendiri.\nKetik kuis kalau mau soal pilihan. Mesin menilai lewat quiz-session, dan hitungan eksak lewat stem-engine.';
-      s.messages.push({ role: 'ai', text: reply, time: Date.now() });
-      store.save();
-      history.render();
-      chat.renderMessages();
-      mountQuiz($('messages'), material);
-    };
     const projectCard = $('sheet-project');
     if (projectCard) projectCard.onclick = () => openProjectSheet();
     const sideProj = $('btn-project');
@@ -699,58 +665,8 @@ export const composer = {
       toast.show('Proyek: ' + found.name);
       sheets.close();
     };
-    const toolsRow = $('sheet-tools');
-    if (toolsRow) toolsRow.onclick = () => { sheets.close(); router.go('connect'); };
-    const memoryRow = $('sheet-memory');
-    if (memoryRow) {
-      this._toggleSwitch('sheet-memory', memoryPreference.get());
-      memoryRow.onclick = () => {
-        const on = !memoryPreference.get();
-        memoryPreference.set(on);
-        this._toggleSwitch('sheet-memory', on);
-        toast.show(on ? 'Memori personal nyala' : 'Memori personal mati');
-      };
-    }
-    document.querySelectorAll('[data-starter]').forEach((btn) => {
-      btn.onclick = () => {
-        const box = $('chat-input');
-        if (!box) return;
-        box.value = btn.dataset.starter || '';
-        box.focus();
-        paintSlot();
-      };
-    });
-    const memoryPill = $('header-memory-pill');
-    if (memoryPill) memoryPill.onclick = () => {
-      const opener = document.querySelector('[data-open-memory]');
-      if (opener) opener.click();
-      else router.go('settings');
-    };
     const voiceCard = $('sheet-voice');
     if (voiceCard) voiceCard.onclick = () => { sheets.close(); voice.listen(); };
-    const fastCard = $('sheet-fast');
-    if (fastCard) fastCard.onclick = () => {
-      const on = hemat.toggle();
-      this._toggleSwitch('sheet-fast', on);
-      if (on) {
-        this.thinkActive = false;
-        this.researchActive = false;
-        this._toggleSwitch('sheet-think', false);
-        this._toggleSwitch('sheet-research', false);
-        this.syncModes();
-      }
-      toast.show(on ? 'Mode kilat hidup' : 'Mode kilat mati');
-    };
-    const docCard = $('sheet-doc');
-    if (docCard) docCard.onclick = () => {
-      sheets.close();
-      const box = $('chat-input');
-      if (box) {
-        box.value = 'Buatkan dokumen Word dari percakapan ini';
-        box.dispatchEvent(new Event('input'));
-        box.focus();
-      }
-    };
     const studioCard = $('sheet-code-studio');
     if (studioCard) studioCard.onclick = () => { sheets.close(); router.go('studio'); };
     const slideCard = $('sheet-slide');
@@ -759,7 +675,19 @@ export const composer = {
         sheets.close();
         const s = this.ensure();
         const att = attach.consume();
-        const picked = (await pickSlideMaterial(s, att)) || { text: (($('chat-input') || {}).value || '').trim() || 'Slide', title: 'Slide' };
+        const typed = (($('chat-input') || {}).value || '').trim();
+        const picked = (await pickSlideMaterial(s, att)) || (typed ? { text: typed, title: 'Slide' } : null);
+        if (!picked || !String(picked.text || '').trim()) {
+          const box = $('chat-input');
+          if (box) {
+            box.value = 'Buat slide tentang: ';
+            box.focus();
+            box.dispatchEvent(new Event('input'));
+          }
+          this.slideActive = true;
+          toast.show('Tulis topik slide dulu, lalu kirim.');
+          return;
+        }
         const box = $('chat-input');
         if (box && box.value.trim()) {
           box.value = '';

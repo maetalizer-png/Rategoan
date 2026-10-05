@@ -87,4 +87,8 @@ function render() {
   list.appendChild(menu);
 }
 
+if (typeof window !== 'undefined') {
+  window.addEventListener('rategoan:model-switched', () => render());
+}
+
 export const modelSheet = { render, pickSpeed };

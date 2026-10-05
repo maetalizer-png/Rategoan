@@ -47,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const step = (fn) => {
     try { fn(); } catch (e) { console.error(e); }
   };
+  document.addEventListener('rategoan:sessions-restored', () => {
+    chatHistory.render();
+    chat.renderMessages();
+  });
   step(() => store.init());
   step(() => theme.init());
   step(() => auth.init());

@@ -79,7 +79,14 @@ export const voice = {
         delete inp.dataset.voiceEdited;
       }, 2000);
     };
-    this.rec.onerror = (e) => toast.show('Suara: ' + (e.error || 'gagal'));
+    this.rec.onerror = (e) => {
+      const code = (e && e.error) || '';
+      if (code === 'not-allowed' || code === 'service-not-allowed') {
+        toast.show('Mikrofon ditolak. Izinkan mikrofon di peramban untuk mendikte.');
+        return;
+      }
+      toast.show('Suara: ' + (code || 'gagal'));
+    };
     this.rec.onend = () => {
       this.listening = false;
       $('btn-voice-input').classList.remove('listening');

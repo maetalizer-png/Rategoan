@@ -1,5 +1,6 @@
 import { exportLog } from '../raget/raget-memory/export-log.js';
 import { buildPptxBytes, downloadBytes } from './pptx-local.js';
+import { idbGateway } from './idb-gateway.js';
 
 const MAX_BODY = 4;
 
@@ -119,16 +120,32 @@ export async function exportSlides(slides, fileName) {
 
 let held = null;
 const ART_KEY = 'rategoan_artifacts';
+let artCache = null;
 
 function readArts() {
-  try { return JSON.parse(localStorage.getItem(ART_KEY) || '[]'); } catch (err) { return []; }
+  if (artCache) return artCache;
+  try { artCache = JSON.parse(localStorage.getItem(ART_KEY) || '[]'); } catch (err) { artCache = []; }
+  return artCache;
+}
+
+function writeArts(list) {
+  const kept = list.slice(0, 40);
+  artCache = kept;
+  idbGateway.setList('artifacts', kept);
+  try {
+    localStorage.setItem(ART_KEY, JSON.stringify(kept.slice(0, 20)));
+  } catch (err) {
+    try {
+      localStorage.setItem(ART_KEY, JSON.stringify(kept.slice(0, 8).map((a) => ({ title: a.title, fileName: a.fileName, type: a.type, time: a.time }))));
+    } catch (again) { /* kuota penuh, salinan penuh ada di IndexedDB */ }
+  }
 }
 
 export function rememberSlide(outline, fileName) {
   held = { outline, fileName, title: (outline && outline[0] && outline[0].title) || fileName, time: Date.now() };
   const list = readArts().filter((a) => a.fileName !== fileName);
   list.unshift({ title: held.title, fileName, outline, time: held.time });
-  localStorage.setItem(ART_KEY, JSON.stringify(list.slice(0, 20)));
+  writeArts(list);
   return held;
 }
 
@@ -148,7 +165,7 @@ export function rememberArtifact(item) {
     markdown: item.markdown || '',
     time: Date.now(),
   });
-  localStorage.setItem(ART_KEY, JSON.stringify(list.slice(0, 20)));
+  writeArts(list);
 }
 
 export function allArtifacts() {
