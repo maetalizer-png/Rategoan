@@ -3,16 +3,48 @@ import { engineRouter } from '../../raget/raget-agents/engine-router.js';
 import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
-const CHOICES = [
-  { id: 'auto', label: 'Auto', note: 'Memilih jalur kilat atau penalaran sesuai pertanyaan.' },
-  { id: 'template', label: 'Raget 1.0 Kilat', note: 'Jawaban instan di perangkat.' },
-  { id: 'neural', label: 'Raget 1.0 Cerdas', note: 'Penalaran, naskah, dan kode.' },
+const SPEEDS = [
+  { id: 'auto', label: 'Otomatis', note: 'Cepat untuk sapaan dan hitungan, mendalam untuk analisis.' },
+  { id: 'template', label: 'Cepat', note: 'Respons instan, hemat daya.' },
+  { id: 'neural', label: 'Mendalam', note: 'Berpikir keras untuk tugas rumit.' },
 ];
 
 let picking = false;
+let menuOpen = false;
 
 function statusOf(id) {
   return engineRouter.statusAll().find((info) => info.id === id) || null;
+}
+
+function labelOf(id) {
+  const found = SPEEDS.find((item) => item.id === id);
+  return found ? found.label : 'Otomatis';
+}
+
+async function pickSpeed(id) {
+  if (picking) return;
+  if (id === 'neural') {
+    const info = statusOf('neural') || { ready: false };
+    if (!info.ready) {
+      picking = true;
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      const again = statusOf('neural');
+      picking = false;
+      if (!again || !again.ready) {
+        enginePreference.set('auto');
+        toast.show('Raget 1.0 belum siap untuk mode mendalam. Tetap otomatis.');
+        window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'auto' } }));
+        document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' }));
+        render();
+        return;
+      }
+    }
+  }
+  enginePreference.set(id);
+  document.dispatchEvent(new CustomEvent('rategoan:command', { detail: id === 'neural' ? 'think' : 'think-off' }));
+  window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id } }));
+  menuOpen = false;
+  render();
 }
 
 function render() {
@@ -21,47 +53,42 @@ function render() {
   if (!list) return;
   const pref = enginePreference.get();
   list.innerHTML = '';
-  CHOICES.forEach((choice) => {
-    const info = choice.id === 'auto' ? { ready: true } : (statusOf(choice.id) || { ready: false });
+  const card = document.createElement('div');
+  card.className = 'model-solo';
+  const name = document.createElement('strong');
+  name.textContent = 'Raget 1.0 (Aktif)';
+  const note = document.createElement('small');
+  note.textContent = 'Satu model. Kecepatan menyesuaikan tugas.';
+  card.appendChild(name);
+  card.appendChild(note);
+  const speed = document.createElement('button');
+  speed.type = 'button';
+  speed.className = 'model-speed';
+  speed.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+  speed.textContent = labelOf(pref) + ' \u25BE';
+  speed.onclick = () => {
+    menuOpen = !menuOpen;
+    render();
+  };
+  list.appendChild(card);
+  list.appendChild(speed);
+  if (!menuOpen) return;
+  const menu = document.createElement('div');
+  menu.className = 'model-speed-menu';
+  SPEEDS.forEach((choice) => {
     const item = document.createElement('button');
     item.type = 'button';
     item.className = 'model-item' + (pref === choice.id ? ' active' : '');
-    item.dataset.engine = choice.id;
-    const name = document.createElement('strong');
-    name.textContent = choice.label;
-    const note = document.createElement('small');
-    note.textContent = choice.note;
-    item.appendChild(name);
-    item.appendChild(note);
-    item.onclick = async () => {
-      if (picking) return;
-      if (choice.id === 'neural' && !info.ready) {
-        picking = true;
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        const again = statusOf('neural');
-        picking = false;
-        if (!again || !again.ready) {
-          enginePreference.set('auto');
-          toast.show('Raget 1.0 Cerdas belum siap. Tetap di Auto.');
-          render();
-          return;
-        }
-      }
-      enginePreference.set(choice.id);
-      window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: choice.id } }));
-      render();
-    };
-    list.appendChild(item);
+    const title = document.createElement('strong');
+    title.textContent = choice.label;
+    const detail = document.createElement('small');
+    detail.textContent = choice.note;
+    item.appendChild(title);
+    item.appendChild(detail);
+    item.onclick = () => pickSpeed(choice.id);
+    menu.appendChild(item);
   });
-  const think = document.createElement('button');
-  think.type = 'button';
-  think.className = 'model-item';
-  think.textContent = 'Berpikir lebih keras';
-  think.onclick = () => {
-    document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' }));
-    toast.show('Berpikir lebih keras nyala');
-  };
-  list.appendChild(think);
+  list.appendChild(menu);
 }
 
-export const modelSheet = { render };
+export const modelSheet = { render, pickSpeed };

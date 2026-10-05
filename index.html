@@ -35,9 +35,7 @@
       </svg>
     </button>
     <div id="model-status" hidden></div>
-    <span id="offline-pill" class="offline-pill" hidden>Mandiri (Offline)</span>
-    <button type="button" id="header-skill-pill" class="header-pill">Umum</button>
-    <button type="button" id="header-memory-pill" class="header-pill">Memori: 0 fakta</button>
+    <span id="header-model-name" class="header-model-name">Raget 1.0</span>
     <span class="row-spacer"></span>
     <div class="topbar-actions">
       <button class="icon-btn plain" id="btn-new-chat-top" aria-label="Obrolan baru">
@@ -62,12 +60,6 @@
       </div>
       <div id="empty-state" class="empty-state" hidden>
         <div class="empty-brand">Rategoan</div>
-        <div class="starter-grid">
-          <button type="button" data-starter="Riset mendalam tentang ">Riset mendalam</button>
-          <button type="button" data-starter="Buatkan slide: ">Buat slide</button>
-          <button type="button" data-starter="Analisis berkas ini: ">Analisis berkas</button>
-          <button type="button" data-starter="Tulis kode untuk ">Koding di Studio</button>
-        </div>
       </div>
       <div id="messages"></div>
       <div id="cowork" class="cowork" hidden>
@@ -180,7 +172,6 @@
           </button>
           <h1>Studio kode</h1>
         </header>
-        <p class="coll-tab-desc">1. Tulis kode. 2. Uji di konsol. 3. Lihat pratinjau web.</p>
         <div class="studio-panes" id="studio-panes">
           <button type="button" data-pane="editor" class="on">Editor</button>
           <button type="button" data-pane="preview">Pratinjau</button>
@@ -363,7 +354,7 @@
 
   <div id="attach-sheet" class="sheet" hidden>
     <div class="sheet-head">
-      <div class="sheet-title">Tambahkan ke chat</div>
+      <div class="sheet-title">Lampiran</div>
       <button class="hist-del" id="attach-close" aria-label="Tutup">
         <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -371,38 +362,16 @@
         </svg>
       </button>
     </div>
-    <p class="attach-kicker">Media</p>
     <div class="attach-grid">
       <button class="attach-card tone-blue" id="sheet-camera" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>Kamera</button>
       <button class="attach-card tone-violet" id="sheet-photo" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>Foto</button>
       <button class="attach-card tone-green" id="sheet-file" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Dokumen</button>
-      <button class="attach-card tone-orange" id="sheet-voice" type="button" hidden><span class="attach-orb" aria-hidden="true"></span>Memo Suara</button>
     </div>
-    <p class="attach-kicker">Konteks</p>
     <button class="attach-plain" id="sheet-project" type="button">
       <span class="attach-plain-label">Kaitkan ke Proyek<small id="sheet-project-label">Tidak ada</small></span>
     </button>
     <button class="attach-plain" id="sheet-websearch" type="button" role="switch" aria-checked="false">
       <span class="attach-plain-label">Pencarian Web<small>Menelusuri informasi mutakhir di internet</small></span>
-      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
-    </button>
-    <button class="attach-plain" id="sheet-think" type="button" role="switch" aria-checked="false" hidden>
-      <span class="attach-plain-label">Berpikir lebih keras<small>Menampilkan proses penalaran bertahap</small></span>
-      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
-    </button>
-    <button class="attach-plain" id="sheet-research" type="button" role="switch" aria-checked="false" hidden>
-      <span class="attach-plain-label">Riset mendalam<small>Investigasi multi-sumber lalu dirangkum</small></span>
-      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
-    </button>
-    <button class="attach-plain" id="sheet-fast" type="button" role="switch" aria-checked="false">
-      <span class="attach-plain-label">Mode kilat<small>Jawaban ringkas, cepat, hemat daya</small></span>
-      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
-    </button>
-    <button class="attach-plain" id="sheet-tools" type="button">
-      <span class="attach-plain-label">Alat mandiri<small>29 alat lokal aktif</small></span>
-    </button>
-    <button class="attach-plain" id="sheet-memory" type="button" role="switch" aria-checked="true">
-      <span class="attach-plain-label">Kapsul memori<small>Gunakan fakta memori personal</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
     <button class="attach-plain" id="sheet-folder" type="button">

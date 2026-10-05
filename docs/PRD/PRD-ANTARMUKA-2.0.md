@@ -1,12 +1,43 @@
-<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-05T15:37:23Z. Versi 6.2.0. -->
+<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-05T16:42:49Z. Versi 7.0.0. -->
 
 PRD ANTARMUKA 2.0 — MASTER CETAK BIRU REKAYASA & KEDAULATAN SISTEM (EDISI STANDAR INDUSTRI KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Enterprise-Grade Sovereign AI Workstation)
-Versi: 6.2.0-SOVEREIGN-PRISTINE-CANONICAL | Tanggal: Oktober 2026
-Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0 & PRD antarmuka 2.0 v6.0.0 (STATUS: DITINGKATKAN)
+Versi: 7.0.0-SOVEREIGN-RADICAL-SIMPLIFICATION | Tanggal: Oktober 2026
+Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0 & PRD antarmuka 2.0 v6.2.0 (STATUS: DITINGKATKAN)
 Repositori Sasaran: Rategoan (egoan.vercel.app / rategoan-main)
 
 # BAB 1: IDENTITAS KEDAULATAN, DOKTRIN MODEL RAGET 1.0 & KEAMANAN SIBER
+## 1.0 BAB 1.0: TINDAKAN DARURAT & PEMBUANGAN TOTAL 11 CACAT FATAL (AUDIT TANGKAPAN LAYAR 23:00 WIB)
+Cacat Fatal 1 - Teks Mentah 'Muat ulang' di Seluruh Halaman:
+Akar Masalah: Pada js/main.js baris 159-163, skrip service worker mengeksekusi document.body.appendChild(btn) dengan teks 'Muat ulang' tanpa CSS, sehingga tombol mentah tercecer di bagian bawah setiap layar.
+Solusi: HAPUS TOTAL document.body.appendChild(btn) dari js/main.js. Pemberitahuan pembaruan cukup memakai toast.show('Versi baru tersedia. Ketuk untuk memuat ulang', { onClick: () => location.reload() }).
+Cacat Fatal 2 & 8 - Pembersihan Header Topbar (Hilangkan 'Memori: 0 fakta' dan 'Umum'):
+Akar Masalah: Header dipenuhi gelembung #header-memory-pill ('Memori: 0 fakta') dan #header-skill-pill ('Umum') yang membuat tampilan sesak, berantakan, dan amatir. Padahal kecerdasan sudah tertanam di otak Raget 1.0.
+Solusi: HAPUS TOTAL elemen #header-memory-pill dan #header-skill-pill dari header di index.html dan chat.js. Header atas obrolan HANYA memuat: [ ☰ Menu ] | Raget 1.0 (nama model) | [ ✏️ Chat Baru ] [ ⋮ Menu Tindakan ]. Tampilan seketika menjadi lega, luas, dan bersih berkelas dunia.
+Cacat Fatal 3, 5, & 10 - Penyatuan Model Tunggal Raget 1.0 & Penghapusan Tumpukan Kartu Model:
+Akar Masalah: Pada #model-sheet dan Pengaturan > Model (settings.js:305), Grok Build menumpuk kartu Auto, Raget 1.0 Kilat, Raget 1.0 Cerdas, dan Berpikir keras seolah-olah ada banyak model berbeda.
+Solusi: Model HANYA SATU: 'Raget 1.0'.
+Di #model-sheet: Tampilkan nama model 'Raget 1.0 (Aktif)'. Di bawahnya sediakan satu tombol kontrol kecepatan/upaya terpadu: [ 🚀 Otomatis ▾ ]. Ketika diklik, baru muncul pilihan dropdown:
+🚀 Otomatis (Rekomendasi - cepat untuk sapaan/math, mendalam untuk analisis).
+⚡ Cepat (Respons instan <10ms, hemat daya).
+🧠 Mendalam (Berpikir keras untuk tugas rumit).
+Di Pengaturan > Model: Cukup tampilkan satu kartu status: 'Model Utama: Raget 1.0' dengan pengaturan kecepatan aktif. DILARANG mendaftar banyak model terpisah.
+Cacat Fatal 4 - Pembuangan Teks Cakar Ayam di Halaman Konektor:
+Akar Masalah: Pada js/connectors/connector-hub.js:93, Grok Build mencetak string mentah 'Vault dokumen', 'OCR', 'Suara', 'Kalkulus', 'Kanvas', 'Agenda' ke dalam elemen p tanpa CSS sehingga tampil berantakan.
+Solusi: HAPUS TOTAL blok perulangan teks mentah tersebut dari connector-hub.js. Tampilkan kartu konektor resmi yang sudah tertata rapi.
+Cacat Fatal 6 & 7 - Eliminasi Duplikasi & Pembersihan Lembar Lampiran (#attach-sheet):
+Kunci nama permanen lembar tombol plus (+): 'Lampiran' (Hapus nama gonta-ganti 'Konteks', 'Tambahkan ke chat', 'MEDIA').
+Hapus tombol duplikasi 'Alat mandiri' dari lembar lampiran (yang hanya membuka halaman konektor).
+Hapus tombol duplikasi 'Kapsul memori' dari lembar lampiran.
+Lembar Lampiran HANYA memuat:
+Media: [ 📷 Kamera ] [ 🖼️ Foto ] [ 📄 Dokumen ]
+[ 🗂️ Kaitkan ke Proyek ] (Menampilkan status proyek aktif)
+[ 🌐 Pencarian Web ] (Toggle switch ON/OFF)
+[ 📁 Hubungkan Folder Lokal ]
+Cacat Fatal 9 - Pembersihan Tombol Mengambang di Layar Chat Kosong:
+Hapus 4 tombol pil mengambang (.starter-grid: Riset mendalam, Buat slide, Analisis berkas, Koding di Studio) yang mengotori tengah layar obrolan di index.html:65-75. Biarkan layar chat bersih dan tenang.
+Cacat Fatal di Studio Kode:
+Hapus teks cakar ayam unstyled '1. Tulis kode... Editor Pratinjau Konsol' dari index.html:183. Rapikan navigasi 3 zona dengan CSS yang layak.
 ## 1.1 Doktrin Kedaulatan & Penyatuan Otak Raget 1.0 (Auto-Router: Fast-Path Sistem 1 & Neural Sistem 2)
 Standardisasi Pemilihan Model Berdasarkan Benchmark Industri Nyata (Audit 5 Tangkapan Layar Global):
 Bukti Nyata Screenshot Industri: Evaluasi antarmuka model AI global terkemuka mengonfirmasi pola baku:
@@ -205,7 +236,7 @@ Solusi: Tambahkan 4 kartu starter interaktif di atas composer: [ Riset Mendalam 
 Masalah Nyata: Kapsul Memori tersembunyi jauh di dalam sub-menu, padahal memori pribadi adalah fitur kedaulatan utama.
 Solusi: Angkat Kapsul Memori ke baris teratas Pengaturan dengan indikator jumlah fakta langsung.
 # BAB 5: BLUEPRINT EKSEKUSI 38 BUTIR REKAYASA PRESISI & KRITERIA KELULUSAN AKHIR
-## 5.1 Matriks Tugas Menyeluruh Sektor A s.d. Sektor H (38 Butir Rekayasa Presisi)
+## 5.1 Matriks Tugas Menyeluruh Sektor A s.d. Sektor H (38 Butir Rekayasa Presisi & Prioritas Pembersihan 11 Cacat Fatal)
 ## 4.10 Benchmark Komparatif 6 Model Global (Claude, Gemini, Grok, Qwen, ChatGPT, Manus) & 4 Pilar Repackaging UX
 Evaluasi objektif dan jujur membandingkan Rategoan terhadap 6 ekosistem AI terkemuka dunia di 6 dimensi utama antarmuka dan kedaulatan sistem:
 Dimensi
@@ -271,7 +302,17 @@ ZONA 2 (Konteks Kerja & Alat Lokal - Baris Interaktif Seperti Claude):
 Sektor
 Cakup Pekerjaan
 Berkas Utama
-32 Poin Pekerjaan Konkret + Penyatuan Model Raget 1.0
+32 Poin Pekerjaan Konkret + Prioritas Pembersihan 11 Cacat Fatal
+Sektor Utama (Prioritas 1)
+Pembersihan Total 11 Cacat Fatal UI & Penyatuan Model
+js/main.js, index.html, js/chat/chat.js, js/sheets/model-sheet.js, js/account/settings.js, js/connectors/connector-hub.js, js/ui/attach-sheet.js
+1. [PRIORITAS UTAMA COMMIT NEXT] Hapus document.body.appendChild(btn) 'Muat ulang' di main.js & ganti dengan toast.
+2. Hapus total #header-memory-pill & #header-skill-pill dari header obrolan.
+3. Satukan model menjadi 'Raget 1.0' dengan kontrol kecepatan [🚀 Otomatis ▾] di #model-sheet & Pengaturan.
+4. Hapus string mentah unstyled p di connector-hub.js.
+5. Kunci nama 'Lampiran', hapus tombol duplikasi 'Alat mandiri' & 'Kapsul memori' dari #attach-sheet.
+6. Hapus 4 tombol starter-grid mengambang dari layar chat kosong.
+7. Hapus teks unstyled di Studio Kode index.html:183 & rapikan navigasi 3 zona dengan CSS.
 Sektor A
 Pertahanan & Keamanan Siber
 shared/markdown.js, vault/code/js-sandbox.js, js/state/pin.js
@@ -296,8 +337,8 @@ js/chat/chat.js, css/chat/messages.css, js/history/msgmenu.js, js/ui/attach-shee
 13. Pindahkan aksi "Ubah" ke menu titik tiga (⋮).
 14. Konsolidasi CoT ke akordeon tunggal.
 15. Integrasi Mode Kilat (2-3 kalimat padat).
-16. UX Lampiran (#attach-sheet): Restrukturisasi 2 Zona Rapi (Zona 1: 3 Media Input + Zona 2: Konteks & Alat Lokal) serta pemindahan toggle Berpikir Lebih Keras & Riset Mendalam ke selector model/composer.
-17. UX Obrolan: Starter prompts & 'Salin Obrolan'.
+16. UX Lampiran (#attach-sheet): Restrukturisasi 2 Zona Rapi.
+17. UX Obrolan: 'Salin Obrolan'.
 Sektor D
 Mesin Riset Mandiri, Kanvas Dokumen & Artefak
 js/chat/research.js, js/ui/artifact-card.js, shared/docx-local.js, js/artifacts/artifacts.js
@@ -319,7 +360,7 @@ Proyek, Penyatuan Model Raget 1.0 & Kapsul Memori
 js/project/project.js, js/sheets/model-sheet.js, raget/raget-template/template-adapter.js, js/settings/settings.js
 28. Redesain #view-project carousel 1 baris.
 29. Formulir input nama + tombol "Buat" terpadu.
-30. Penyatuan model & Auto-Router di js/sheets/model-sheet.js, js/account/settings.js (baris 305-320) & engine-router.js (Opsi [🚀 Auto | ⚡ Kilat | 🧠 Cerdas] + Toggle Extended Thinking; Hapus label 'Template' total dari seluruh UI).
+30. Penyatuan model & Auto-Router di js/sheets/model-sheet.js, js/account/settings.js (Opsi [🚀 Auto | ⚡ Kilat | 🧠 Cerdas]).
 31. Angkat Kapsul Memori ke baris teratas Pengaturan.
 Sektor G
 Optimalisasi Konektor 29 Alat Lokal & Suara

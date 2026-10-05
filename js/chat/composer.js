@@ -529,6 +529,11 @@ export const composer = {
         this._toggleSwitch('sheet-think', true);
         this.paintQuick();
         this.syncModes();
+      } else if (event.detail === 'think-off') {
+        this.thinkActive = false;
+        this._toggleSwitch('sheet-think', false);
+        this.paintQuick();
+        this.syncModes();
       } else if (event.detail === 'neural') {
         try { localStorage.setItem('rategoan_engine', 'neural'); } catch (e) { console.warn('[Rategoan Fallback]', e); }
       } else if (event.detail === 'docx') {

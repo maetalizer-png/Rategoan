@@ -302,22 +302,39 @@ export const settings = {
     const eksporLogRow = buildRow('row-riwayat-ekspor', EXPORT_LOG_ICON, 'Riwayat ekspor');
     const hub = document.createElement('div');
     hub.className = 'model-hub';
-    hub.innerHTML = '<button type="button" data-engine="auto">Auto<small>Memilih jalur kilat atau penalaran sendiri.</small></button><button type="button" data-engine="template">Raget 1.0 Kilat<small>Jawaban instan di perangkat.</small></button><button type="button" data-engine="neural">Raget 1.0 Cerdas<small>Penalaran, naskah, dan kode.</small></button>';
-    hub.querySelectorAll('button').forEach((btn) => {
-      btn.onclick = () => {
-        const pick = btn.getAttribute('data-engine');
-        llmMode.setMode('lokal');
-        enginePreference.set(pick);
-        toast.show(pick === 'neural' ? 'Raget 1.0 Cerdas' : (pick === 'template' ? 'Raget 1.0 Kilat' : 'Auto'));
-        paintHub();
-      };
+    const card = document.createElement('div');
+    card.className = 'model-solo';
+    const title = document.createElement('strong');
+    title.textContent = 'Model Utama: Raget 1.0';
+    const speed = document.createElement('label');
+    speed.className = 'model-speed-label';
+    speed.textContent = 'Kecepatan';
+    const select = document.createElement('select');
+    select.id = 'engine-speed';
+    [['auto', 'Otomatis'], ['template', 'Cepat'], ['neural', 'Mendalam']].forEach((pair) => {
+      const opt = document.createElement('option');
+      opt.value = pair[0];
+      opt.textContent = pair[1];
+      select.appendChild(opt);
     });
+    speed.appendChild(select);
+    card.appendChild(title);
+    card.appendChild(speed);
+    hub.appendChild(card);
+    select.onchange = () => {
+      const pick = select.value;
+      llmMode.setMode('lokal');
+      enginePreference.set(pick);
+      document.dispatchEvent(new CustomEvent('rategoan:command', { detail: pick === 'neural' ? 'think' : 'think-off' }));
+      window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: pick } }));
+      toast.show(pick === 'neural' ? 'Kecepatan: Mendalam' : (pick === 'template' ? 'Kecepatan: Cepat' : 'Kecepatan: Otomatis'));
+    };
     const paintHub = () => {
       if (llmMode.mode() === 'server') llmMode.setMode('lokal');
-      const on = enginePreference.get();
-      hub.querySelectorAll('button').forEach((btn) => btn.classList.toggle('on', btn.getAttribute('data-engine') === on));
+      select.value = enginePreference.get();
     };
     paintHub();
+    window.addEventListener('rategoan:model-switched', paintHub);
     aiSection.appendChild(hub);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);

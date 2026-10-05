@@ -89,11 +89,6 @@ export const connectorHub = {
     root.innerHTML = '';
     const intro = el('p', 'hub-intro', 'Alat mandiri perangkat. Dua puluh sembilan alat lokal berjalan di peranti ini, tanpa server.');
     root.appendChild(intro);
-    const local = el('div', 'hub-local');
-    ['Vault dokumen', 'OCR', 'Suara', 'Kalkulus', 'Kanvas', 'Agenda'].forEach((name) => {
-      local.appendChild(el('p', 'hub-local-item', name));
-    });
-    root.appendChild(local);
     if (expired.length) {
       const banner = el('div', 'hub-banner');
       const msg = el('p', null, 'Perlu dihubungkan ulang: ' + expired.map((id) => state.services[id].display_name).join(', ') + '.');

@@ -153,14 +153,7 @@ if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
         if (!worker) return;
         worker.addEventListener('statechange', () => {
           if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-            toast.show('Versi baru Rategoan tersedia. Ketuk untuk memuat ulang.');
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.textContent = 'Muat ulang';
-            btn.style.marginLeft = '8px';
-            btn.onclick = () => location.reload();
-            const host = document.body;
-            if (host) host.appendChild(btn);
+            toast.show('Versi baru tersedia. Ketuk untuk memuat ulang.', { onClick: () => location.reload() });
           }
         });
       });
