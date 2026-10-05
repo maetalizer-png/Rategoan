@@ -1,6 +1,7 @@
 import { $ } from '../../shared/dom.js';
 import { toast } from '../core/toast.js';
 import { composer } from './composer.js';
+import { idbGateway } from '../../shared/idb-gateway.js';
 
 export const voice = {
   listening: false,
@@ -96,6 +97,30 @@ export const voice = {
     } catch (e) {
       toast.show('Input suara tidak dapat dimulai');
     }
+  },
+  meetingText: '',
+  captureMeeting() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { toast.show('Perekam suara tidak didukung di peramban ini'); return; }
+    if (this.listening && this.rec) {
+      try { this.rec.stop(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+    }
+    try { this.rec = new SR(); } catch (e) { toast.show('Rekaman rapat gagal dimulai'); return; }
+    this.rec.lang = 'id-ID';
+    this.rec.continuous = true;
+    this.rec.interimResults = false;
+    this.rec.onstart = () => { this.listening = true; toast.show('Rekaman rapat berjalan'); };
+    this.rec.onresult = (e) => {
+      const last = e.results[e.results.length - 1];
+      if (!last || !last.isFinal || !last[0]) return;
+      this.meetingText += (this.meetingText ? ' ' : '') + last[0].transcript;
+      idbGateway.setList('meeting-audio', [{ text: this.meetingText, time: Date.now() }]);
+    };
+    this.rec.onerror = (e) => {
+      if (e && (e.error === 'not-allowed' || e.error === 'service-not-allowed')) toast.show('Mikrofon ditolak. Izinkan mikrofon untuk notulensi.');
+    };
+    this.rec.onend = () => { this.listening = false; };
+    try { this.rec.start(); } catch (e) { toast.show('Rekaman rapat tidak dapat dimulai'); }
   },
   bind() {
     $('btn-stop').onclick = () => {

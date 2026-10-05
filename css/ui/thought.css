@@ -3,7 +3,7 @@
   border: 1px solid var(--rg-line, #e4e4e4);
   border-radius: 12px;
   background: var(--rg-surface, #fff);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .thought-accordion summary {
@@ -14,26 +14,68 @@
 
 .thought-accordion summary::-webkit-details-marker { display: none; }
 
-.thought-accordion.running summary::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 6px;
-  border-radius: 50%;
-  background: #184e9e;
-  animation: thought-pulse 1s infinite;
-}
-
-.thought-accordion ol {
+.agentic-stepper {
+  position: relative;
+  list-style: none;
   margin: 0;
-  padding: 0 12px 10px 28px;
-  max-height: 180px;
-  overflow: auto;
+  padding: 4px 10px 10px 8px;
 }
 
-.thought-accordion li { margin: 4px 0; }
+.agentic-stepper::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 12px;
+  bottom: 16px;
+  width: 1px;
+  background: var(--rg-line, #e4e4e4);
+}
+
+.stepper-node {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  position: relative;
+  margin: 8px 0;
+}
+
+.stepper-orb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background: var(--rg-surface, #fff);
+  border: 1px solid var(--rg-line, #e4e4e4);
+}
+
+.lane-web .stepper-orb { background: #eff6ff; }
+.lane-file .stepper-orb { background: #f0fdf4; }
+.lane-tool .stepper-orb { background: #f8fafc; }
+.lane-mind .stepper-orb { background: #f5f3ff; }
+.lane-slide .stepper-orb { background: #fff7ed; }
+
+.stepper-copy { line-height: 1.35; }
+.stepper-copy small { display: block; color: var(--rg-muted, #6b6b6b); }
+
+.stepper-node.is-live .stepper-orb {
+  animation: thought-pulse 1.6s ease-in-out infinite;
+}
 
 @keyframes thought-pulse {
-  50% { opacity: 0.35; }
+  50% { opacity: 0.45; }
 }
+
+.daily-brief {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--rg-line, #e4e4e4);
+  border-radius: 14px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.daily-brief p { margin: 6px 0 0; }

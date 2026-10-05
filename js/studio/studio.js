@@ -6,6 +6,7 @@ import { previewSrcdoc, zipStore } from './sandbox-runner.js';
 import { toast } from '../core/toast.js';
 import { drawer } from '../ui/drawer.js';
 import { workspace } from '../state/workspace.js';
+import { indexPinned } from '../project/pin-index.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
@@ -366,6 +367,7 @@ export const studioPage = {
       const pinned = (cur.pinnedFiles || []).filter((item) => item.name !== name);
       pinned.push({ name, textContent: text.slice(0, 4000), size: text.length });
       workspace.update(cur.id, { pinnedFiles: pinned.slice(-12) });
+      indexPinned(cur, pinned);
       toast.show('Disematkan ke proyek ' + cur.name);
     };
     document.addEventListener('rategoan:studio-code', (event) => {

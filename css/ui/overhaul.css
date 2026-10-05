@@ -508,8 +508,11 @@ body.is-generating #btn-send { display: none; }
 #cowork-editor { min-height: 180px; padding: 12px; outline: none; white-space: pre-wrap; overflow: auto; }
 .cowork-bar, .cowork-tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px; }
 .cowork-tabs button.on { border-color: #1a4b8c; color: #1a4b8c; }
+@media (max-width: 1023px) {
+  #cowork { max-height: 70vh; }
+}
 @media (min-width: 1024px) {
-  #view-chat.with-cowork { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 42%); }
+  #view-chat.with-cowork { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   #view-chat.with-cowork #cowork { grid-column: 2; grid-row: 1 / span 4; border-top: 0; border-left: 1px solid var(--rg-line); }
 }
 @media (max-width: 1023px) {

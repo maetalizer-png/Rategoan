@@ -17,7 +17,11 @@ import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
-import { chunker } from '../../vault/chunk.js';
+import { searchDocs } from '../../raget/raget-vault/local-rag.js';
+import { planSubgoals } from '../../raget/raget-agents/core/agent-planner.js';
+import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
+import { downloadBytes } from '../../shared/pptx-local.js';
+import { receiptTable } from '../../shared/receipt-extract.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
 import { buildOutline, exportSlides, previewOutline, rememberSlide } from '../../shared/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
@@ -201,6 +205,51 @@ async function tryDiagramRequest(text) {
   return 'Diagram terbuka di panel. Bisa diperbesar dan diunduh sebagai SVG.';
 }
 
+async function tryWorkbook(text, session) {
+  if (!/\b(excel|xlsx|rekap|pembukuan|anggaran|kas)\b/i.test(text)) return null;
+  const material = lastAiText(session) || text;
+  const rows = sheetFromText(material);
+  const mode = /\brata-rata|average\b/i.test(text) ? 'rata' : (/\bjika\b/i.test(text) ? 'jika' : 'jumlah');
+  const bytes = buildXlsxBytes(rows, mode);
+  downloadBytes(bytes, 'rekap.xlsx');
+  artifact.open({ type: 'table', rows, title: 'Rekap', fileName: 'rekap.xlsx' }, 'Rekap');
+  return 'Rekap tersusun. Berkas Excel sudah diunduh dan tabelnya ada di kanvas.';
+}
+
+async function tryReceipt(text, session) {
+  if (!/\b(struk|nota|kuitansi|invoice|kartu nama)\b/i.test(text)) return null;
+  const file = lastAttachedFile(session);
+  const material = (file && file.fileText) || lastAiText(session) || text;
+  if (!/\d{2,}/.test(material)) return 'Lampirkan foto struk atau tempel teksnya, lalu minta ekstrak.';
+  const rows = receiptTable(material);
+  artifact.open({ type: 'table', rows, title: 'Struk', fileName: 'struk.csv' }, 'Struk');
+  return 'Rincian struk: ' + rows.map((row) => row[0] + ' = ' + row[1]).join('; ');
+}
+
+function minutesOf(src) {
+  const bits = String(src || '').split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter((s) => s.length > 8);
+  const decisions = bits.filter((s) => /putus|sepakat|keputusan|setuju/i.test(s)).slice(0, 4);
+  const actions = bits.filter((s) => /harus|akan|tugas|tolong|kerjakan|lanjut/i.test(s)).slice(0, 4);
+  const summary = bits.slice(0, 3);
+  return '# Notulensi\n\n## Keputusan\n' + (decisions.length ? decisions.map((s) => '- ' + s).join('\n') : '- Belum ada kalimat keputusan yang tegas.') + '\n\n## Tindak lanjut\n' + (actions.length ? actions.map((s) => '- ' + s).join('\n') : '- Belum ada tugas yang disebut.') + '\n\n## Ringkasan\n' + (summary.length ? summary.join(' ') : src.slice(0, 400));
+}
+
+async function tryMeeting(text) {
+  if (!/\b(rapat|notulensi|perkuliahan)\b/i.test(text)) return null;
+  if (/\b(rekam|mulai)\b/i.test(text) && !/\b(notulensi|selesai|rangkum)\b/i.test(text)) {
+    voice.captureMeeting();
+    return 'Rekaman rapat dimulai di perangkat ini. Ketik "buat notulensi" saat selesai.';
+  }
+  if (!/\b(notulensi|selesai|rangkum)\b/i.test(text)) return null;
+  const src = voice.meetingText;
+  if (!src || src.length < 20) return 'Belum ada rekaman rapat. Ketik "rekam rapat", lalu bicara.';
+  const minutes = minutesOf(src);
+  const bytes = buildDocxBytes(minutes);
+  downloadBytes(bytes, 'notulensi.docx');
+  artifact.open({ type: 'document', markdown: minutes, title: 'Notulensi', fileName: 'notulensi.docx' }, 'Notulensi');
+  return 'Notulensi disusun dari rekaman di perangkat ini. Berkas Word sudah diunduh.';
+}
+
 async function tryReportRequest(text) {
   if (!/\b(cetak|siap cetak|laporan pdf|simpan pdf)\b/i.test(text)) return null;
   const body = '<p>' + text.replace(/</g, '').slice(0, 4000) + '</p>';
@@ -315,6 +364,9 @@ export const composer = {
     if (directReply == null) directReply = await tryChartRequest(text);
     if (directReply == null) directReply = await tryDiagramRequest(text);
     if (directReply == null) directReply = await tryReportRequest(text);
+    if (directReply == null) directReply = await tryWorkbook(text, s);
+    if (directReply == null) directReply = await tryReceipt(text, s);
+    if (directReply == null) directReply = await tryMeeting(text);
     if (directReply == null && plan.route === 'collection') {
       directReply = await toolsKoleksi.run('cari_koleksi', text);
     }
@@ -332,13 +384,27 @@ export const composer = {
     if (project) workspace.linkSession(project.id, s.id);
     let projectPrefix = '';
     if (project && (project.systemPrompt || (project.pinnedFiles && project.pinnedFiles.length))) {
-      projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + (project.pinnedFiles || []).map((file) => file.name + ': ' + (chunker.chunkText(file.textContent || '', 1500)[0] || '')).join('\n');
+      const docs = (project.pinnedFiles || []).map((file, index) => ({ id: index, name: file.name, text: file.textContent || '' }));
+      const hits = searchDocs(docs, text, 3);
+      const picked = hits.length ? hits : docs.slice(0, 2);
+      projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n');
     }
+    const subgoals = planSubgoals(text);
     let thoughts = null;
+    let livePlan = null;
+    if (subgoals.length >= 2 && !(this.thinkActive || this.researchActive)) {
+      thoughts = subgoals;
+      livePlan = document.createElement('div');
+      livePlan.className = 'msg ai';
+      livePlan.dataset.thoughtStart = String(Date.now());
+      mountThought(livePlan, subgoals, 'berjalan');
+      $('messages').appendChild(livePlan);
+    }
     if (this.thinkActive || this.researchActive) {
       const live = document.createElement('div');
       live.className = 'msg ai';
-      const card = mountThought(live, [{ kind: 'EMIT_THOUGHT', text: 'Menyiapkan jejak…' }], 'berjalan');
+      const seed = subgoals.length ? subgoals : [{ kind: 'EMIT_THOUGHT', text: 'Menyiapkan ' + text.slice(0, 80) }];
+      const card = mountThought(live, seed, 'berjalan');
       $('messages').appendChild(live);
       const plan = await runAgentPlan({
         text,
@@ -363,6 +429,7 @@ export const composer = {
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
     let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    if (livePlan && livePlan.parentNode) livePlan.remove();
     if (reply == null) {
       toast.show('AI belum terpasang');
       return;

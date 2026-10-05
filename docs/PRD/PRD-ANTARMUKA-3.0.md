@@ -1,4 +1,4 @@
-<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T20:36:04Z. -->
+<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T21:56:32Z. -->
 
 PRD ANTARMUKA 3.0 — MASTER CETAK BIRU REKAYASA KEDAULATAN & KEDALAMAN MESIN FITUR (EDISI FINAL KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Sovereign AI Workstation)
@@ -144,3 +144,81 @@ Verifikasi Kualitas:
 Jalankan npm test dan pastikan 17/17 lulus.
 Jalankan npm run lint dan pastikan 0 error, 0 warning, serta Anti-placeholder: 0.
 Commit perubahan dengan pesan: docs: adopsi PRD-ANTARMUKA-3.0 dan bersihkan dokumen usang lalu push ke repositori.
+# BAB 7: SPESIFIKASI ARSITEKTUR VISUALISASI PROSES AGENIK MODERN (ZEN AGENTIC TIMELINE STEPPER), PERENCANA SUB-GOAL OTONOM & KANVAS BELAH ADAPTIF
+## 7.1 Latar Belakang & Tolok Ukur Visual Frontier AI Modern
+Berdasarkan evaluasi komparatif terhadap aplikasi AI frontier dunia (Gemini Spark, Manus AI, Grok Build, dan Claude), interaksi manusia-AI modern tidak lagi menyajikan proses berpikir sebagai daftar teks mentah. Pengguna membutuhkan pengalaman visual yang hidup, terstruktur, dan transparan saat AI mengeksekusi tugas multi-langkah di balik layar.
+Rategoan wajib merombak modul telemetri visualnya dari <details> polos menjadi Zen Agentic Timeline Stepper, sebuah garis waktu vertikal berantai dengan simpul-simpul berikon tematik yang mencerminkan kecerdasan mandiri berkelas dunia.
+## 7.2 Spesifikasi Rekayasa Zen Agentic Timeline Stepper (js/ui/thought-card.js & css/ui/thought.css)
+Struktur Garis Waktu Vertikal (Connected Timeline Track):
+Kontainer utama menggunakan .agentic-stepper dengan garis vertikal tipis penghubung (::before track line berwarna lembut var(--rg-line)).
+Setiap aksi direpresentasikan sebagai simpul .stepper-node yang tertambat pada garis waktu.
+Lencana Simpul Ikon Berwarnai SVG (Action-Specific Orbs):
+Setiap langkah memiliki ikon SVG lingkaran tematik berdiameter 24px:
+🌐 Web / Riset: Ikon bola dunia berlingkar biru lembut (#2563eb).
+📄 Berkas / RAG: Ikon dokumen berlingkar hijau (#16a34a).
+💻 Alat / Terminal / Sandbox: Ikon layar komputer berlingkar slate (#475569).
+🧠 Nalar / Refleksi / CoT: Ikon otak/jam berlingkar ungu (#7c3aed).
+📊 Slide / Artefak: Ikon presentasi berlingkar oranye (#ea580c).
+Simpul Aktif Berpendar (Live Shimmer / Pulse Indicator):
+Tahap yang sedang berjalan menampilkan ikon bintang/sparkle dengan animasi denyut napas halus (breathing pulse) dan teks: "Sedang memproses...".
+Penutupan Bersih Otomatis (Graceful Auto-Collapse):
+Saat seluruh proses selesai dan jawaban akhir siap, garis waktu terlipat otomatis menjadi kartu ringkas elegan: ▸ Selesai · [X] langkah eksekusi · [Y] detik (Ketuk untuk detail)
+Pengguna dapat mengetuk kartu tersebut kapan saja untuk membuka kembali riwayat tahapan eksekusi secara penuh.
+## 7.3 Jalur Perencana Sub-Goal Otonom (raget/raget-agents/core/agent-planner.js)
+Dekomposisi Kueri Majemuk:
+Jika kueri pengguna memerlukan beberapa tindakan berurutan (contoh: "Cari data inflasi terbaru, rangkum analisanya, lalu buatkan slide"), modul planner secara otonom memecahnya menjadi tahapan:
+Tahap 1: Eksekusi penelusuran web & ekstraksi data.
+Tahap 2: Sintesis penalaran & pembuatan draf naskah.
+Tahap 3: Perancangan kerangka dan kompilasi berkas Slide PowerPoint (.pptx).
+Proyeksi Dinamis ke Timeline:
+Setiap sub-tugas otomatis terproyeksikan menjadi simpul baru pada Zen Agentic Stepper secara berurutan, memberikan umpan balik langsung kepada pengguna tentang kemajuan tugas.
+## 7.4 Jalur Kanvas Belah Adaptif (Adaptive Split-Canvas Workspace)
+Tata Letak Desktop & Tablet (Lebar Layar >= 1024px):
+Saat pengguna membuka Artefak, Slide, atau Studio Kode, antarmuka otomatis membelah menjadi tata letak berdampingan 50%/50%:
+Sisi Kiri: Ruang percakapan chat aktif dan riwayat pesan.
+Sisi Kanan: Kanvas interaktif untuk pratinjau slide, dokumen Word, atau editor kode.
+Pengguna dapat terus mengobrol atau meminta revisi di sisi kiri sambil melihat hasil berkas diperbarui secara langsung di sisi kanan.
+Tata Letak Ponsel (< 1024px):
+Kanvas tetap beroperasi sebagai lembar geser bawah (bottom sheet) yang ergonomis dan mudah ditutup.
+## 7.5 Jalur Indeks Vektor Otomatis Berkas Proyek (Auto-Vectorization RAG)
+Ekstraksi & Vektorisasi Latar Belakang:
+Saat pengguna menyematkan berkas (PDF, DOCX, TXT) ke dalam Proyek, pipa latar belakang langsung mengekstrak teks dan membuat indeks semantik vektor lokal (TF-IDF + Cosine di local-rag.js).
+Penyuntikan Konteks Proyek Otomatis:
+Pertanyaan di dalam ruang kerja proyek secara otomatis diperkaya dengan kutipan paling relevan dari berkas rujukan tanpa perlu instruksi berulang dari pengguna.
+## 7.6 Standar Kualitas & Kriteria Kelulusan (Definition of Done)
+Seluruh 17 unit test wajib lulus 100% (npm test).
+Pemeriksaan linter wajib 0 error, 0 warning, dan Anti-placeholder: 0 (npm run lint).
+Animasi timeline stepper berjalan mulus pada 60 FPS di peramban seluler tanpa menyebabkan getaran tata letak (layout shift).
+# BAB 8: SPESIFIKASI 5 MESIN PRODUKTIVITAS HARIAN NYATA (PENGOLAH EXCEL LOKAL, EKSTRAKSI STRUK/FORMULIR, Q&A DOKUMEN TEBAL, SEKRETARIS RAPAT, DAN BRIEFING AGENDA HARIAN)
+## 8.1 Prinsip Desain: Produktivitas Nyata Tanpa Merusak Ketenangan Antarmuka
+Seluruh 5 kapabilitas produktivitas harian di bawah ini beroperasi murni di balik layar (encapsulated engine). Sistem TIDAK menambah tombol baru yang mengotori antarmuka luar; seluruh mesin dipicu secara alami melalui teks kueri pengguna, berkas lampiran, kamera, atau audio yang sudah ada di antarmuka kanonikal.
+## 8.2 Rincian 5 Mesin Produktivitas Harian
+Mesin Pengolah Spreadsheet & Tabel Cerdas Lokal (.xlsx Engine):
+Teknologi: Menggunakan modul kompilasi spreadsheet biner sisi klien terintegrasi dengan mesin perhitungan toolsMath.
+Fungsionalitas: Saat pengguna meminta rekap penjualan, pembukuan kas, anggaran biaya, atau analisis data tabel, sistem secara otonom menyusun tabel berumus (SUM, AVERAGE, IF) dan mengompilasi berkas Excel asli format .xlsx.
+Keluaran: Menampilkan pratinjau tabel interaktif di obrolan dan menyimpan berkas .xlsx siap unduh ke Galeri Artefak.
+Mesin Ekstraksi Nota, Struk & Formulir Terstruktur (Smart Document & Receipt Extractor):
+Teknologi: Mengintegrasikan modul camera-overlay dan OCR lokal dengan pemroses pola semantik di raget-agents.
+Fungsionalitas: Saat pengguna memotret struk belanja, kuitansi fisik, nota warung, invoice, atau kartu nama, AI secara otomatis mengekstrak entitas kunci: Tanggal Transaksi, Nama Toko/Vendor, Rincian Barang & Harga Satuan, serta Total Pembayaran.
+Keluaran: Disajikan dalam format tabel rapi atau CSV terstruktur yang siap disalin ke pembukuan atau diekspor ke Excel.
+Mesin Pembedah & Penjawab Dokumen PDF Tebal Instan (High-Speed Offline PDF Q&A):
+Teknologi: Mengoptimalkan mesin pencarian semantik vektor lokal raget/raget-vault/local-rag.js (algoritma BM25 + TF-IDF Cosine Similarity di memori RAM).
+Fungsionalitas: Pengguna melampirkan berkas PDF dokumen tebal (skripsi, jurnal ilmiah, laporan tahunan keuangan, atau regulasi hukum UU/Perpres 50–100 halaman). Pengguna dapat langsung menanyakan rincian pasal, metodologi riset, atau perbandingan data.
+Keluaran: AI merespons instan (<2 detik) dengan menyertakan sitasi nomor halaman dan paragraf aslinya secara akurat, dengan kerahasiaan 100% luring (Zero Cloud Leakage).
+Sekretaris Suara Rapat & Perkuliahan Luring (Segmented Meeting & Lecture Summarizer):
+Teknologi: Mengembangkan modul audio js/chat/voice.js untuk perekaman kontinu bertahap (segmented audio chunking) yang tersimpan aman di IndexedDB.
+Fungsionalitas: Merekam jalannya rapat kerja atau perkuliahan, lalu secara otomatis menyusun notulensi terstruktur:
+Butir-butir Keputusan Kunci (Key Decisions).
+Daftar Tindak Lanjut (Action Items & Penanggung Jawab).
+Ringkasan Eksekutif 3 Paragraf.
+Keluaran: Hasil notulensi dapat langsung diekspor menjadi berkas naskah Word (.docx) melalui satu ketukan.
+Briefing Agenda Harian & Pengingat Tugas Otonom (Local Daily Briefing & Task Scheduler):
+Teknologi: Mengaktifkan modul agenda_daily_briefing dan tools-reminder.js yang terhubung dengan Service Worker Notification API.
+Fungsionalitas: Setiap pagi, Rategoan memunculkan kartu ringkasan harian di beranda obrolan:
+Agenda dan janji temu dari kalender lokal.
+Catatan tugas tertunda dari ruang kerja Proyek dan Koleksi.
+Prakiraan cuaca lokal singkat.
+Keluaran: Pengguna mendapatkan gambaran prioritas kerja harian secara jernih tanpa harus membuka banyak aplikasi terpisah.
+## 8.3 Kriteria Kualitas & Jaminan Kedaulatan
+Seluruh pemrosesan spreadsheet, OCR struk, RAG dokumen tebal, notulensi rapat, dan briefing agenda wajib berjalan 100% lokal di perangkat pengguna tanpa transmisi data ke cloud eksternal.
+Pertahankan 100% kelulusan 17 unit test (npm test) dan linter 0 error (npm run lint).

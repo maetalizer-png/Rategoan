@@ -41,6 +41,10 @@ export function answerFromFile(text, query, filename) {
   if (!scored.length) {
     return 'Di "' + name + '" tidak ketemu bagian yang nyambung dengan "' + query + '". Coba kata kunci lain, atau minta "ringkas file ini".';
   }
-  const pick = scored.slice(0, 3).map((x) => x.s);
+  const pick = scored.slice(0, 3).map((x) => {
+    const at = clean.indexOf(x.s);
+    const page = at < 0 ? 0 : Math.floor(at / 1800) + 1;
+    return page > 1 || clean.length > 1800 ? x.s + ' (hlm. ' + page + ')' : x.s;
+  });
   return 'Dari "' + name + '":\n\n' + pick.join(' ');
 }
