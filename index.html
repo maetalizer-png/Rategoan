@@ -35,7 +35,7 @@
       </svg>
     </button>
     <div id="model-status" hidden></div>
-    <span id="header-model-name" class="header-model-name">Raget 1.0</span>
+    <h1 id="header-model-name" class="header-model-name">Raget 1.0</h1>
     <span class="row-spacer"></span>
     <div class="topbar-actions">
       <button class="icon-btn plain" id="btn-new-chat-top" aria-label="Obrolan baru">
@@ -203,6 +203,7 @@
           <button type="button" id="studio-run" class="btn-run-primary">Jalankan</button>
           <button type="button" id="studio-preview">Pratinjau</button>
           <button type="button" id="studio-pin-project">Jadikan Rujukan Proyek</button>
+          <button type="button" id="studio-to-artifact" class="plain">Simpan ke Artefak</button>
           <span class="studio-side">
             <button type="button" id="studio-copy" class="plain">Salin</button>
             <button type="button" id="studio-diff" class="plain">Tinjau Perubahan</button>
@@ -366,16 +367,30 @@
       <button class="attach-card tone-blue" id="sheet-camera" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>Kamera</button>
       <button class="attach-card tone-violet" id="sheet-photo" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>Foto</button>
       <button class="attach-card tone-green" id="sheet-file" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Dokumen</button>
+      <button class="attach-card tone-orange" id="sheet-voice" type="button"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="1.8"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span>Memo Suara</button>
     </div>
+    <button class="attach-plain" id="sheet-slide" type="button">
+      <span class="attach-plain-label">Rancang Slide Presentasi (.pptx)<small>Rangkai materi percakapan atau topik baru menjadi berkas PowerPoint</small></span>
+    </button>
+    <button class="attach-plain" id="sheet-doc" type="button">
+      <span class="attach-plain-label">Buatkan Dokumen (.docx)<small>Susun naskah percakapan menjadi berkas Word</small></span>
+    </button>
+    <button class="attach-plain" id="sheet-learn" type="button">
+      <span class="attach-plain-label">Belajar dan Kuis Interaktif<small>Ubah jawaban terakhir menjadi latihan dan soal</small></span>
+    </button>
     <button class="attach-plain" id="sheet-project" type="button">
-      <span class="attach-plain-label">Kaitkan ke Proyek<small id="sheet-project-label">Tidak ada</small></span>
+      <span class="attach-plain-label">Kaitkan ke Proyek<small id="sheet-project-label">Belum ada proyek terpilih (Pilih)</small></span>
     </button>
     <button class="attach-plain" id="sheet-websearch" type="button" role="switch" aria-checked="false">
       <span class="attach-plain-label">Pencarian Web<small>Menelusuri informasi mutakhir di internet</small></span>
       <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
     </button>
+    <button class="attach-plain" id="sheet-research" type="button" role="switch" aria-checked="false">
+      <span class="attach-plain-label">Riset Mendalam<small>Investigasi multi-sudut dan susun laporan kanvas</small></span>
+      <span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span>
+    </button>
     <button class="attach-plain" id="sheet-folder" type="button">
-      <span class="attach-plain-label">Hubungkan Folder Lokal<small>Baca berkas di komputer ini, tanpa unggah</small></span>
+      <span class="attach-plain-label">Hubungkan Folder Lokal<small>Baca berkas di perangkat ini, tanpa unggah</small></span>
     </button>
 
   </div>

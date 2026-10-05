@@ -515,7 +515,8 @@ export const composer = {
     if (plus) plus.onclick = () => {
       const label = $('sheet-project-label');
       const cur = workspace.current();
-      if (label) label.textContent = cur ? ('Kaitkan ke Proyek · ' + cur.name) : 'Kaitkan ke Proyek';
+      if (label) label.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek terpilih (Pilih)';
+      this._toggleSwitch('sheet-research', this.researchActive);
       this._toggleSwitch('sheet-fast', hemat.enabled());
       attach.open();
     };
@@ -743,8 +744,12 @@ export const composer = {
     const docCard = $('sheet-doc');
     if (docCard) docCard.onclick = () => {
       sheets.close();
-      const inp = $('chat-input');
-      if (inp) inp.value = 'Buatkan dokumen Word dari percakapan ini';
+      const box = $('chat-input');
+      if (box) {
+        box.value = 'Buatkan dokumen Word dari percakapan ini';
+        box.dispatchEvent(new Event('input'));
+        box.focus();
+      }
     };
     const studioCard = $('sheet-code-studio');
     if (studioCard) studioCard.onclick = () => { sheets.close(); router.go('studio'); };
@@ -756,7 +761,14 @@ export const composer = {
         const att = attach.consume();
         const picked = await pickSlideMaterial(s, att);
         if (!picked) {
-          toast.show('Tanya topiknya dulu, atau simpan ke Koleksi, baru tap Slide');
+          this.slideActive = true;
+          const box = $('chat-input');
+          if (box) {
+            box.value = 'Buatkan slide presentasi tentang: ';
+            box.focus();
+            box.dispatchEvent(new Event('input'));
+          }
+          this.paintQuick();
           return;
         }
         try {

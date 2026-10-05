@@ -306,6 +306,10 @@ export const settings = {
     card.className = 'model-solo';
     const title = document.createElement('strong');
     title.textContent = 'Model Utama: Raget 1.0';
+    const sub = document.createElement('small');
+    sub.textContent = 'Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.';
+    card.appendChild(title);
+    card.appendChild(sub);
     const speed = document.createElement('label');
     speed.className = 'model-speed-label';
     speed.textContent = 'Kecepatan';
@@ -318,7 +322,6 @@ export const settings = {
       select.appendChild(opt);
     });
     speed.appendChild(select);
-    card.appendChild(title);
     card.appendChild(speed);
     hub.appendChild(card);
     select.onchange = () => {

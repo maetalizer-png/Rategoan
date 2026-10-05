@@ -56,9 +56,9 @@ function render() {
   const card = document.createElement('div');
   card.className = 'model-solo';
   const name = document.createElement('strong');
-  name.textContent = 'Raget 1.0 (Aktif)';
+  name.textContent = 'Raget 1.0';
   const note = document.createElement('small');
-  note.textContent = 'Satu model. Kecepatan menyesuaikan tugas.';
+  note.textContent = 'Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.';
   card.appendChild(name);
   card.appendChild(note);
   const speed = document.createElement('button');

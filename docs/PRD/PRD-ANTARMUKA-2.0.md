@@ -1,12 +1,42 @@
-<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-05T16:42:49Z. Versi 7.0.0. -->
+<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-05T18:10:23Z. Versi 8.0.0. -->
 
 PRD ANTARMUKA 2.0 — MASTER CETAK BIRU REKAYASA & KEDAULATAN SISTEM (EDISI STANDAR INDUSTRI KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Enterprise-Grade Sovereign AI Workstation)
-Versi: 7.0.0-SOVEREIGN-RADICAL-SIMPLIFICATION | Tanggal: Oktober 2026
-Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0 & PRD antarmuka 2.0 v6.2.0 (STATUS: DITINGKATKAN)
+Versi: 8.0.0-SOVEREIGN-CANONICAL-FINAL-SEAL | Tanggal: Oktober 2026
+Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0 & PRD antarmuka 2.0 v7.5.0 (STATUS: DITINGKATKAN)
 Repositori Sasaran: Rategoan (egoan.vercel.app / rategoan-main)
 
 # BAB 1: IDENTITAS KEDAULATAN, DOKTRIN MODEL RAGET 1.0 & KEAMANAN SIBER
+## 1.0 DOKTRIN KANONIKAL TATA KELOLA ANTARMUKA RATEGOAN (BATAS WILAYAH MUTLAK)
+1. Koreksi Teks Model: HAPUS KATA '(Aktif)':
+Di kartu model (#model-sheet dan halaman Pengaturan), teks resmi adalah murni 'Raget 1.0' (DILARANG mencantumkan kata '(Aktif)').
+Subtitle resmi: 'Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.'
+2. Batas Wilayah Tanggung Jawab 4 Area Utama:
+A. ICON MODEL (Chip CPU di Composer) — KHUSUS URUSAN OTAK AI:
+Menampilkan satu model: 'Raget 1.0'.
+Di bawahnya terdapat satu tombol pengatur upaya/kecepatan otak: [ Cepat ▾ ] dengan 3 tingkatan murni:
+'Otomatis' (Menyeimbangkan kecepatan dan kedalaman sesuai tugas).
+'Cepat' (Respons instan <10ms, hemat daya baterai).
+'Tinggi' (Berpikir keras untuk tugas rumit, riset, dan penalaran analitis mendalam).
+Di balik layar:
+Mode Cepat menghubungkan 'kabel' ke Fast-Path Sistem 1 (<10ms).
+Mode Tinggi menghubungkan 'kabel' ke Sistem 2 Neural + CoT + Deep Research synthesizer.
+Seluruh detail rekayasa rumit ini bekerja otonom di balik layar tanpa perlu tombol/tulisan bertumpuk di layar pengguna.
+B. ICON + (Lembar Lampiran) — KHUSUS URUSAN KONTEKS MASUKAN PESAN:
+Judul permanen: 'Lampiran' dengan tombol tutup (×).
+ZONA 1 (Media Berkas): [ 📷 Kamera ] [ 🖼️ Foto ] [ 📄 Dokumen ].
+ZONA 2 (Konteks Kerja):
+[ 🗂️ Kaitkan ke Proyek ]: Perbaiki bug teks ganda di composer.js:518 agar menampilkan 'Belum ada proyek terpilih (Pilih)' jika kosong, atau 'Proyek aktif: [Nama Proyek]' jika aktif.
+[ 🌐 Pencarian Web ]: Sakelar ON/OFF untuk mencari informasi segar di internet jika data lokal kurang.
+[ 📁 Hubungkan Folder Lokal ]: Membaca berkas di komputer/perangkat lokal tanpa unggah.
+LARANGAN MUTLAK DI ICON +:
+Dilarang menaruh tombol 'Alat mandiri' (karena Konektor sudah ada di Sidebar).
+Dilarang menaruh tombol 'Kapsul Memori' (karena memori sudah tertanam di otak Raget 1.0 dan diatur di Pengaturan).
+Dilarang menaruh tombol penalaran/kecepatan di sini (karena itu milik Icon Model).
+C. SIDEBAR DRAWER — KHUSUS URUSAN NAVIGASI RUANG KERJA:
+Menampung 6 pilar workstation: Chat Baru, Studio kode, Proyek, Koleksi, Konektor, Artefak, serta Riwayat Chat dan Profil Akun.
+D. PENGATURAN — KHUSUS PREFERENSI & DATA SISTEM:
+Menampilkan profil pengguna, Tampilan, Model Aktif (Raget 1.0), Kapsul Memori, dan Pencadangan Data.
 ## 1.0 BAB 1.0: TINDAKAN DARURAT & PEMBUANGAN TOTAL 11 CACAT FATAL (AUDIT TANGKAPAN LAYAR 23:00 WIB)
 Cacat Fatal 1 - Teks Mentah 'Muat ulang' di Seluruh Halaman:
 Akar Masalah: Pada js/main.js baris 159-163, skrip service worker mengeksekusi document.body.appendChild(btn) dengan teks 'Muat ulang' tanpa CSS, sehingga tombol mentah tercecer di bagian bawah setiap layar.
@@ -51,7 +81,7 @@ Di js/sheets/model-sheet.js dan js/account/settings.js:305, terapkan susunan mod
 🚀 Auto (Direkomendasikan): Otomatis memilih Jalur Kilat (<10ms) atau Penalaran Mendalam sesuai kompleksitas kueri.
 ⚡ Raget 1.0 Kilat (Flash): Jawaban instan di perangkat, hemat daya, dan bebas halusinasi.
 🧠 Raget 1.0 Cerdas (Pro / Neural): Model bahasa lokal mandiri untuk penalaran mendalam, koding, dan penulisan naskah.
-[Garis Pembatas / Divider]
+Kapabilitas Riset Mendalam (Deep Research): Riset Mendalam BUKAN lampiran berkas, sehingga TIDAK BOLEH diletakkan sebagai toggle di lembar icon (+) Lampiran. Riset Mendalam adalah kapabilitas penalaran tingkat tinggi bawaan dari Otak AI (Raget 1.0) yang bekerja secara otonom di balik layar via pemicu alami: (1) Pengaturan Otak saat memilih tingkat upaya 'Tinggi' atau 'Otomatis' pada kueri kompleks, atau (2) Bahasa Alami (Intent-Based) ketika kueri meminta investigasi/kajian/riset mendalam. Dengan demikian, lembar icon (+) Lampiran tetap bersih 100% untuk berkas fisik.
 Toggle 'Berpikir Lebih Keras' (Extended Thinking): Penalaran bertahap transparan untuk tugas kompleks.
 Struktur di Balik Layar (Behind-the-Scenes Compound AI): Raget 1.0 mengadopsi standar arsitektur kognitif industri AI modern (Sistem 1 & Sistem 2):
 ⚡ Sistem 1 (Refleks Cepat / Fast-Path <10ms): Bertugas menjawab sapaan ("Halo", "Selamat malam"), hitungan matematika eksak (toolsMath/kalkulator), konversi kurs/unit, dan 260 database pengetahuan kanonikal (JSON sains/sejarah/wisata). Bekerja instan (<20ms), hemat daya baterai, dan 100% bebas halusinasi.
@@ -186,7 +216,7 @@ Mode Perangkat Seluler (Mobile): Tab segmentasi eksplisit [ 📝 Editor ] [ 👁
 Mode Desktop (>= 1024px): Split pane 55% Editor di kiri, 45% Pratinjau/Konsol di kanan.
 Panduan Langkah Jelas di Header Studio: '1. Tulis kode → 2. Uji di Konsol → 3. Lihat Pratinjau Web'.
 ## 4.4 Resolusi Output Riset Mendalam (Kartu Laporan Riset Interaktif di Chat)
-Cegah naskah riset menghilang ke panel tersembunyi dengan menampilkan Kartu Laporan Riset Interaktif di dalam percakapan chat yang mencakup:
+Riset Mendalam (Deep Research) bekerja secara otonom di balik layar sebagai bagian dari kecerdasan bawaan Raget 1.0 (aktif via tingkat upaya 'Tinggi'/'Otomatis' atau instruksi bahasa alami). Ketika aktif, sistem mengeksekusi alur multi-sudut dan menyematkan Kartu Laporan Riset Interaktif langsung di dalam percakapan chat yang mencakup:
 1. Judul Laporan & Estimasi Baca.
 2. Ringkasan Eksekutif Temuan Kunci.
 3. Tombol Aksi Nyata: [ 📖 Buka di Kanvas ], [ 📥 Unduh DOCX ], [ 📥 Unduh MD ].
@@ -236,7 +266,8 @@ Solusi: Tambahkan 4 kartu starter interaktif di atas composer: [ Riset Mendalam 
 Masalah Nyata: Kapsul Memori tersembunyi jauh di dalam sub-menu, padahal memori pribadi adalah fitur kedaulatan utama.
 Solusi: Angkat Kapsul Memori ke baris teratas Pengaturan dengan indikator jumlah fakta langsung.
 # BAB 5: BLUEPRINT EKSEKUSI 38 BUTIR REKAYASA PRESISI & KRITERIA KELULUSAN AKHIR
-## 5.1 Matriks Tugas Menyeluruh Sektor A s.d. Sektor H (38 Butir Rekayasa Presisi & Prioritas Pembersihan 11 Cacat Fatal)
+## 5.1 Blueprint Eksekusi Standardisasi Kanonikal & Penguncian Doktrin Batas Wilayah
+Penguncian Standar Final Grok Build: Grok Build dikunci untuk mematuhi Doktrin Kanonikal Tata Kelola Antarmuka Rategoan secara permanen. Dilarang melakukan perubahan acak pada struktur 4 area utama (Icon Model, Icon +, Sidebar, Pengaturan) atau menambahkan kata '(Aktif)' pada nama model Raget 1.0.
 ## 4.10 Benchmark Komparatif 6 Model Global (Claude, Gemini, Grok, Qwen, ChatGPT, Manus) & 4 Pilar Repackaging UX
 Evaluasi objektif dan jujur membandingkan Rategoan terhadap 6 ekosistem AI terkemuka dunia di 6 dimensi utama antarmuka dan kedaulatan sistem:
 Dimensi
@@ -284,16 +315,43 @@ Pilar 4: Guided Empty States: Eliminasi total layar kosong mati dengan menghadir
 3. Screenshot 3 (Claude): Standar emas tata kelola konteks 'Tambahkan ke chat' (3 Media atas: Kamera, Foto, File + Pengait Proyek langsung + Toggle Pencarian Web + Akses Konektor + Status Memori).
 4. Screenshot 4 (Grok): Menu mengambang ringkas (Camera, Gallery, Files, Skills, Connectors) langsung dari tombol plus (+).
 5. Screenshot 5 (Perplexity): Menu aksi ringkas bertingkat dengan pemisahan plugin dan tombol berpikir lebih keras.
-## 4.2 Desain Ulang Lembar Aksi Lampiran (#attach-sheet: 2 Zona Rapi Berbasis Claude & Qwen)
-Strukturkan ulang #attach-sheet menjadi 2 Zona Rapi:
-Tajuk: 'Tambahkan ke chat' lengkap dengan handle geser dan tombol tutup (×).
-ZONA 1 (Media Input - 3 Kotak Rapi): [ 📷 Kamera ] [ 🖼️ Galeri / Foto ] [ 📄 Berkas Dokumen ] (Eliminasi tombol memo suara ganda karena tombol mic sudah ada di composer utama).
-ZONA 2 (Konteks Kerja & Alat Lokal - Baris Interaktif Seperti Claude):
-🗂️ Kaitkan ke Proyek: Menampilkan status proyek aktif ('Proyek: Nama Proyek >' atau 'Tidak ada >'). Ketuk langsung membuka pemilih proyek.
-🌐 Pencarian Web: Toggle switch ON/OFF mandiri ('Cari di internet saat butuh informasi mutakhir').
-🔗 Alat Mandiri (Konektor): Menampilkan pintasan ('29 alat lokal aktif >').
-🧠 Kapsul Memori: Toggle switch ON/OFF ('Gunakan fakta memori personal').
-📁 Hubungkan Folder Lokal: Baris tombol bersih ('Buka folder di perangkat ini tanpa unggah').
+## 4.2 Rekonstruksi Presisi Lembar Lampiran (Icon +) & Batas Wilayah Antarmuka Kanonikal
+1. Evaluasi Keberhasilan Pembersihan Terakhir:
+Topbar bersih total: Gelumbung 'Memori: 0 fakta' dan tombol 'Umum' telah hilang. Header kini lega dan profesional ([ ☰ ] | Raget 1.0 | [ ✏️ ] [ ⋮ ]).
+Teks mentah 'Muat ulang' di bagian bawah layar telah berhasil dieliminasi.
+Model Sheet telah rapi mengadopsi model tunggal Raget 1.0 (Aktif) dengan dropdown kecepatan [ Cepat ▾ ] (Otomatis, Cepat, Mendalam).
+Layar chat bersih dari 4 tombol pil mengambang.
+2. Identifikasi Fitur Kritis yang HILANG di Icon + dan Sangat Dibutuhkan Pengguna:
+Saat Grok Build membersihkan lembar Lampiran (#attach-sheet), terjadi pemangkasan yang terlalu agresif sehingga fitur-fitur vital hilang tanpa alternatif akses:
+KEHILANGAN 1: Toggle 'Riset Mendalam' (Deep Research):
+Dampak: Pengguna kehilangan kendali visual untuk mengaktifkan mode riset multi-sumber sebelum bertanya.
+Solusi: Kembalikan toggle 'Riset Mendalam' dengan deskripsi jelas: 'Investigasi multi-sudut dan susun laporan kanvas'.
+KEHILANGAN 2: Toggle 'Kapsul Memori' (Gunakan Memori Personal):
+Dampak: Pengguna tidak bisa mematikan/menyalakan memori personal untuk obrolan privat (incognito).
+Solusi: Kembalikan toggle 'Kapsul Memori' dengan deskripsi: 'Gunakan fakta memori personal di obrolan ini' (Default: ON).
+KEHILANGAN 3: Akses 'Alat Mandiri' (Konektor 29 Alat Lokal):
+Dampak: Pengguna tidak bisa melihat status 29 perkakas lokal dari dalam obrolan.
+Solusi: Sediakan baris 'Alat Mandiri' ('29 perkakas lokal aktif >') yang membuka sheet daftar alat lokal secara anggun.
+KEHILANGAN 4: Tombol 'Rancang Slide Presentasi (.pptx)':
+Akar Masalah: Mesin pembuatan presentasi (shared/pptx-local.js, buildOutline, exportSlides di composer.js:751) masih aktif 100%, namun elemen tombol visualnya (#sheet-slide) terhapus dari index.html saat pembersihan lembar lampiran, sehingga pengguna kehilangan akses tombol pembuatan slide di icon (+).
+Solusi Rekayasa: Kembalikan tombol visual 'Rancang Slide' di lembar Lampiran (#attach-sheet) dengan baris aksi '📊 Rancang Slide Presentasi (.pptx)', subtitle 'Rangkai materi percakapan atau topik baru menjadi berkas PowerPoint'. Saat diketuk, mengaktifkan mode slide (this.slideActive = true) dan menyiapkan input 'Buatkan slide presentasi tentang: ' atau memproses materi chat aktif ke kanvas slide.
+BUG TEKS: Pengulangan Teks 'Kaitkan ke Proyek' dua kali di tombol proyek:
+Perbaikan: Perbaiki composer.js baris 518: Jika cur kosong, tulis 'Belum ada proyek terpilih (Pilih)'. Jika ada, tulis 'Proyek aktif: ' + cur.name.
+3. Doktrin Batas Wilayah 4 Area Utama Antarmuka:
+1. Icon Model (Chip CPU): Khusus pengaturan model tunggal 'Raget 1.0' dan selector kecepatan [ Otomatis | Cepat | Tinggi ].
+2. Icon + (Lampiran): Khusus media (Kamera, Foto, Dokumen) dan konteks masukan (Proyek, Pencarian Web, Folder Lokal). Dilarang memasukkan tombol Alat Mandiri, Kapsul Memori, atau pengatur kecepatan.
+3. Sidebar Drawer: Navigasi utama 6 pilar workstation, riwayat obrolan, dan profil pengguna.
+4. Pengaturan: Preferensi sistem, profil, status model Raget 1.0, Kapsul Memori, dan backup data.
+Tajuk: 'Lampiran' dengan tombol tutup (×).
+Media Input (3 Kotak Atas): [ 📷 Kamera ] [ 🖼️ Foto ] [ 📄 Dokumen ].
+Opsi Kerja & Konteks:
+1. [ 🗂️ Kaitkan ke Proyek ] -> 'Belum ada proyek terpilih (Pilih) >' (atau 'Proyek aktif: Nama >').
+2. [ 🌐 Pencarian Web ] -> [Toggle ON/OFF] ('Menelusuri informasi mutakhir di internet').
+3. [ 🔬 Riset Mendalam ] -> [Toggle ON/OFF] ('Investigasi multi-sudut dan susun laporan kanvas').
+4. [ 🧠 Kapsul Memori ] -> [Toggle ON/OFF] ('Gunakan fakta memori personal di obrolan ini').
+5. [ 📊 Rancang Slide Presentasi (.pptx) ] -> 'Rangkai materi percakapan atau topik baru menjadi berkas PowerPoint'.
+7. [ 📁 Hubungkan Folder Lokal ] -> 'Baca berkas di perangkat ini, tanpa unggah'.6. [ 🔗 Alat Mandiri ] -> '29 perkakas lokal aktif >'.
+
 1. Seluruh 17 pengujian unit lulus 100% tanpa kegagalan (npm test).
 2. Linter kode menghasilkan 0 error dan 0 warning (npm run lint).
 ## 5.2 Kriteria Kelulusan Akhir (Definition of Done)
@@ -334,11 +392,11 @@ Ruang Kerja Obrolan, Bubble, Lampiran & CoT
 js/chat/chat.js, css/chat/messages.css, js/history/msgmenu.js, js/ui/attach-sheet.js
 11. Rampingkan bubble pengguna (.msg.user).
 12. Hapus tombol mentah "Ubah" dari bubble.
-13. Pindahkan aksi "Ubah" ke menu titik tiga (⋮).
+13. Pindahkan aksi "Ubah" to menu titik tiga (⋮).
 14. Konsolidasi CoT ke akordeon tunggal.
 15. Integrasi Mode Kilat (2-3 kalimat padat).
-16. UX Lampiran (#attach-sheet): Restrukturisasi 2 Zona Rapi.
-17. UX Obrolan: 'Salin Obrolan'.
+16. UX Lampiran (#attach-sheet): Restrukturisasi Presisi, pemulihan elemen #sheet-slide ('Rancang Slide Presentasi (.pptx)'), terhubung ke composer.js:751, serta Pemulihan Toggle Riset Mendalam, Kapsul Memori, & Alat Mandiri.
+17. Perbaikan bug teks proyek ganda di composer.js.
 Sektor D
 Mesin Riset Mandiri, Kanvas Dokumen & Artefak
 js/chat/research.js, js/ui/artifact-card.js, shared/docx-local.js, js/artifacts/artifacts.js
@@ -387,3 +445,65 @@ sw.js, test/unit/*.test.js
 13. Output Deep Research menampilkan Kartu Laporan Riset Interaktif langsung di obrolan dengan tombol aksi [ 📖 Buka di Kanvas ], [ 📥 Unduh DOCX ], dan [ 📥 Unduh MD ].
 14. Mode Kilat menyisipkan arahan respons ringkas maks 3 kalimat, serta tampilan CoT disatukan ke dalam satu akordeon tunggal yang bersih.
 15. Seluruh 29 alat lokal otonom di Konektor (termasuk agenda_daily_briefing), fitur navigasi cabang `[ < 1 / 2 > ]`, dan indikator memori sesi terintegrasi serta berfungsi stabil 100%.
+
+# BAB 8.3: SPESIFIKASI RESTORASI FITUR HILANG (MEMO SUARA, SLIDE PPTX, DOKUMEN DOCX, KUIS INTERAKTIF, DAN INTEGRITAS KONTROL MODEL)
+## 1. Analisis Forensik Tangkapan Layar Historis (Pukul 22.29 WIB)
+1. Header Obrolan Lama: Kapsul menu [Umum ▾] di header dihapus permanen. Header resmi: [ ☰ Menu ] | Raget 1.0 | [ ✏️ Chat Baru ] [ ⋮ Menu Tindakan ].
+2. Fungsi Kartu 'Memo Suara' (#sheet-voice): Menggunakan Web Speech API browser (SpeechRecognition id-ID) via js/chat/voice.js. Mengubah ucapan suara pengguna langsung menjadi teks di #chat-input dan mengirim otomatis setelah jeda 2 detik. Pulihkan tombol #sheet-voice ke Grid Media di #attach-sheet sehingga menjadi 4 kartu bulat: Kamera (Biru), Foto (Ungu), Dokumen (Hijau), dan Memo Suara (Oranye).
+3. Penataan Mode Penalaran: Sakelar 'Berpikir lebih keras' dan 'Mode kilat' dipindahkan ke kontrol upaya Ikon Model Raget 1.0. 'Pencarian Web' dan 'Riset Mendalam' dipertahankan di lembar lampiran sebagai kontrol konteks penelusuran.
+## 2. Restorasi Aksi Pembuatan Berkas di Lembar Lampiran (#attach-sheet)
+Grok Build wajib memulihkan tombol berikut di index.html karena handler JavaScript-nya di js/chat/composer.js sudah aktif:
+#sheet-slide: [Rancang Slide Presentasi (.pptx)] terhubung ke composer.js:751 dan shared/pptx-local.js.
+#sheet-doc: [Buatkan Dokumen (.docx)] terhubung ke composer.js:743 dan shared/docx-local.js.
+#sheet-learn: [Belajar & Kuis Interaktif] terhubung ke composer.js:671 dan quiz-session.js.
+## 3. Perbaikan Bug Teks Ganda Proyek di js/chat/composer.js:518
+Perbaiki label proyek: jika kosong tampilkan 'Belum ada proyek terpilih (Pilih)', jika ada proyek aktif tampilkan 'Proyek aktif: [Nama Proyek]'.
+## 4. Pembersihan Nama Model Raget 1.0
+Di js/sheets/model-sheet.js:62, hapus kata '(Aktif)', gunakan murni 'Raget 1.0'. Subtitle: 'Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.' Pilihan kecepatan: Otomatis, Cepat, Mendalam.
+## 5. Pemulihan Tombol Simpan ke Artefak di Studio Kode (#studio-to-artifact)
+Tambahkan kembali tombol <button type="button" id="studio-to-artifact" class="plain">Simpan ke Artefak</button> pada toolbar aksi Studio Kode di index.html.
+## 6. Standar Kualitas
+Pertahankan 100% kelulusan npm test (17/17) dan npm run lint (0 error, 0 warning, Anti-placeholder: 0).
+# BAB 8.4: MATRIKS PENYELARASAN TOTAL, REKONSILIASI KONTRAK ANTARMUKA & CHECKLIST EKSEKUSI TUNGGAL SEKALI JALAN (GROK BUILD MASTER SPRINT DIRECTIVE)
+## 1. Klausul Harmonisasi & Resolusi Kontradiksi Internal Dokumen
+Instruksi pada bab ini secara resmi MENYELARASKAN dan MENGGANTIKAN (override) seluruh klausul parsial terdahulu yang sempat bertentangan, agar Grok Build tidak mengalami keraguan atau salah hapus:
+1. Penyelarasan Lembar Lampiran (#attach-sheet):
+Klausul awal yang menyatakan 'Lembar Lampiran HANYA memuat 3 media + Proyek + Web + Folder' resmi diperluas menjadi format kanonikal utuh yang menampung 4 Media (termasuk Memo Suara), 3 Aksi Berkas Deliverables (Slide PPTX, Dokumen DOCX, Kuis Interaktif), dan 4 Konteks/Alat (Proyek, Web, Riset Mendalam, Folder Lokal).
+Larangan pada lembar lampiran HANYA berlaku untuk:
+a. DILARANG menaruh tombol 'Alat mandiri' (karena Konektor sudah ada di Sidebar).
+b. DILARANG menaruh tombol 'Kapsul Memori' (karena memori sudah diatur di Pengaturan).
+c. DILARANG menaruh sakelar kecepatan/upaya model seperti 'Berpikir lebih keras' dan 'Mode kilat' (karena kedua hal ini adalah urusan Otak AI di Ikon Model).
+2. Penyelarasan Teks Model Raget 1.0:
+Seluruh teks di #model-sheet dan Pengaturan dikunci murni: 'Raget 1.0' (HAPUS kata '(Aktif)' secara mutlak).
+Bentuk antarmuka model HANYA SATU: satu kartu model 'Raget 1.0' dengan satu tombol dropdown kecepatan [ Otomatis ▾ ] berisi: Otomatis, Cepat, Mendalam. DILARANG menumpuk 3 kartu terpisah.
+## 2. Checklist Eksekusi Berkas demi Berkas Sekali Jalan (Single-Pass Directives)
+### Berkas A: index.html
+1. Lembar Lampiran (#attach-sheet):
+Grid Media (4 tombol): #sheet-camera (Kamera), #sheet-photo (Foto), #sheet-file (Dokumen), dan #sheet-voice (Memo Suara).
+Baris Aksi Berkas: #sheet-slide (Rancang Slide Presentasi .pptx), #sheet-doc (Buatkan Dokumen .docx), dan #sheet-learn (Belajar & Kuis Interaktif).
+Baris Konteks & Alat: #sheet-project (Kaitkan ke Proyek), #sheet-websearch (Pencarian Web - switch), #sheet-research (Riset Mendalam - switch), dan #sheet-folder (Hubungkan Folder Lokal).
+2. Bilah Aksi Studio Kode (#view-studio .studio-actions):
+Tambahkan tombol: <button type="button" id="studio-to-artifact" class="plain">Simpan ke Artefak</button>.
+3. Bilah Atas Obrolan (#topbar):
+Pastikan bersih: <button id="btn-menu">, <h1>Raget 1.0</h1>, <button id="btn-new-chat-top">, dan <button id="btn-chat-more">.
+### Berkas B: js/chat/composer.js
+1. Perbaikan Teks Ganda Proyek:
+Baris 518: Ganti label.textContent = cur ? ('Kaitkan ke Proyek · ' + cur.name) : 'Kaitkan ke Proyek'; menjadi:
+label.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek terpilih (Pilih)';
+2. Pengikatan Event Aksi Berkas:
+Pastikan #sheet-slide, #sheet-doc, #sheet-learn, dan #sheet-voice terikat rapi ke fungsinya masing-masing dan menutup sheet saat diklik.
+### Berkas C: js/sheets/model-sheet.js
+1. Pembersihan Kata (Aktif):
+Baris 62: Ubah name.textContent = 'Raget 1.0 (Aktif)'; menjadi murni name.textContent = 'Raget 1.0';.
+2. Penegasan Dropdown:
+Tetap gunakan tombol dropdown kecepatan tunggal: Otomatis, Cepat, Mendalam.
+### Berkas D: js/account/settings.js
+1. Kartu Model di Pengaturan:
+Pastikan kartu status model menampilkan 'Model Utama: Raget 1.0' dengan dropdown kecepatan yang selaras dengan model-sheet.
+### Berkas E: css/ui/overhaul.css
+1. Ergonomi Layar Ponsel untuk #attach-sheet:
+Pastikan modal #attach-sheet memiliki max-height: 80vh dan overflow-y: auto agar di ponsel berlayar kecil seluruh 11 elemen dapat di-scroll dengan mulus tanpa terpotong.
+## 3. Gerbang Validasi Akhir (Definition of Done)
+1. npm test: 17/17 unit test lulus 100%.
+2. npm run lint: 0 error, 0 warning, Anti-placeholder: 0.
+3. Seluruh elemen HTML yang memiliki penangan JavaScript terpasang utuh tanpa ada yang berstatus yatim (orphaned handler).
