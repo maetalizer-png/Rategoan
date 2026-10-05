@@ -759,17 +759,11 @@ export const composer = {
         sheets.close();
         const s = this.ensure();
         const att = attach.consume();
-        const picked = await pickSlideMaterial(s, att);
-        if (!picked) {
-          this.slideActive = true;
-          const box = $('chat-input');
-          if (box) {
-            box.value = 'Buatkan slide presentasi tentang: ';
-            box.focus();
-            box.dispatchEvent(new Event('input'));
-          }
-          this.paintQuick();
-          return;
+        const picked = (await pickSlideMaterial(s, att)) || { text: (($('chat-input') || {}).value || '').trim() || 'Slide', title: 'Slide' };
+        const box = $('chat-input');
+        if (box && box.value.trim()) {
+          box.value = '';
+          box.dispatchEvent(new Event('input'));
         }
         try {
           const outline = buildOutline(picked.text, picked.title);
@@ -778,7 +772,7 @@ export const composer = {
           rememberSlide(outline, fileName);
           await exportSlides(outline, fileName);
           artifact.open(outline, picked.title, fileName);
-          const reply = artifactTag('slide', picked.title, fileName, previewOutline(outline)) + '\n\nFile PPTX sudah diunduh. Kartu di obrolan bisa mengunduh ulang.';
+          const reply = artifactTag('slide', picked.title, fileName, previewOutline(outline)) + '\n\nSlide siap.';
           s.messages.push({ role: 'ai', text: reply, time: Date.now() });
           store.save();
           history.render();

@@ -1,4 +1,4 @@
-<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-05T18:10:23Z. Versi 8.0.0. -->
+<!-- Sumber: Google Drive "PRD antarmuka 2.0" file 1Hu5wUEcHnFUMCu0vwwo05Z19rV881Xz6qb2QKQSomUE, diubah 2026-10-05T19:03:00Z. Versi 8.0 bab 8.5. -->
 
 PRD ANTARMUKA 2.0 — MASTER CETAK BIRU REKAYASA & KEDAULATAN SISTEM (EDISI STANDAR INDUSTRI KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Enterprise-Grade Sovereign AI Workstation)
@@ -507,3 +507,42 @@ Pastikan modal #attach-sheet memiliki max-height: 80vh dan overflow-y: auto agar
 1. npm test: 17/17 unit test lulus 100%.
 2. npm run lint: 0 error, 0 warning, Anti-placeholder: 0.
 3. Seluruh elemen HTML yang memiliki penangan JavaScript terpasang utuh tanpa ada yang berstatus yatim (orphaned handler).
+# BAB 8.5: RESOLUSI FATAL AUDIT REPOSITORI (RESTORASI IKON LAMPIRAN, ELIMINASI PENUMPUKAN TEKS SLIDE, PENYEDERHANAAN KONTROL MODE MODEL 'CEPAT & MENDALAM', DAN AUDIT KELAYAKAN SEMUA SEKTOR)
+## 1. Resolusi Fatal 1 & 2: Restorasi Ikon SVG & Eliminasi Penumpukan Teks di Lembar Lampiran (#attach-sheet)
+1. Restorasi Ikon SVG Mutlak: Grok Build DILARANG KERAS menampilkan baris lampiran berupa teks mentah tanpa ikon. Setiap baris tombol (.attach-plain) WAJIB memiliki elemen <svg width="20" height="20"> di sebelah kiri teks label.
+2. Eliminasi Penumpukan Teks & Pemecahan Berlebih: Hapus pemecahan teks panjang dan paragraf deskripsi berlebih yang membuat antarmuka sesak dan membingungkan pengguna. Kembalikan ke nama menu yang ringkas, bersih, dan fungsional seperti sebelumnya:
+Grid Atas Media (4 tombol bulat): [ 📷 Kamera ] [ 🖼️ Foto ] [ 📄 Dokumen ] [ 🎙️ Memo Suara ].
+Baris di Bawah Media (Wajib Berikon SVG & Bersih Tanpa Paragraf Panjang):
+a. <button class="attach-plain" id="sheet-slide" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="6" y1="8" x2="14" y2="8"/><line x1="6" y1="11.5" x2="18" y2="11.5"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="attach-plain-label">Buat Slide (.pptx)</span></button>
+b. <button class="attach-plain" id="sheet-project" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span class="attach-plain-label">Kaitkan ke Proyek<small id="sheet-project-label">Belum ada proyek terpilih (Pilih)</small></span></button>
+c. <button class="attach-plain" id="sheet-websearch" type="button" role="switch" aria-checked="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg><span class="attach-plain-label">Pencarian Web</span><span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span></button>
+d. <button class="attach-plain" id="sheet-research" type="button" role="switch" aria-checked="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="attach-plain-label">Riset mendalam</span><span class="switch" aria-hidden="true"><span class="switch-thumb"></span></span></button>
+e. <button class="attach-plain" id="sheet-folder" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span class="attach-plain-label">Hubungkan Folder Lokal</span></button>
+## 2. Resolusi Fatal 4: Penyederhanaan Model Raget 1.0 (Hapus Slogan & Hapus Opsi Otomatis)
+1. Hapus Total Slogan di Bawah Raget 1.0:
+Di js/sheets/model-sheet.js:63 dan js/account/settings.js, HAPUS TOTAL elemen <small>Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.</small>.
+Cukup tampilkan nama model bersih dan elegan: Raget 1.0.
+2. Ubah Tombol Menjadi Berlabel 'Mode' & Hapus Opsi 'Otomatis':
+Tombol pengatur mode wajib diberi label jelas, bukan hanya nama kecepatan mengambang: tampilkan Mode: Cepat ▾ atau Mode: Mendalam ▾.
+HAPUS opsi Otomatis dari SPEEDS di model-sheet.js, dari select di settings.js, dan dari js/state/engine-preference.js.
+Pilihan murni dua opsi yang tegas dan tidak membuat pusing:
+a. Cepat (Respons instan, hemat daya - default).
+b. Mendalam (Berpikir keras untuk tugas rumit).
+## 3. Matriks Audit & Penutupan Celah di Semua Sektor (File-by-File Sprint)
+1. index.html: Terapkan markup #attach-sheet bersih berikon SVG di atas. Pastikan #header-model-name tetap ramping dan tombol #studio-to-artifact tetap aktif.
+2. js/sheets/model-sheet.js: Hapus subteks slogan, ubah daftar SPEEDS hanya berisi template (label: 'Cepat') dan neural (label: 'Mendalam'), serta ubah tombol menjadi 'Mode: ' + labelOf(pref) + ' ▾'.
+3. js/state/engine-preference.js: Set nilai default menjadi 'template'. Validasi nilai hanya mengizinkan 'template' atau 'neural'.
+4. js/account/settings.js: Hapus subteks slogan pada kartu model dan hapus <option value="auto"> dari select #engine-speed.
+5. js/chat/composer.js: Pastikan klik sheet-slide langsung memicu pembuatan slide tanpa teks berbelit-belit.
+6. css/ui/overhaul.css: Pastikan ruang vertikal #attach-sheet lega, tinggi ikon pas 20x20px, dan tidak memicu overflow sempit.
+## 4. Gerbang Kualitas (Definition of Done)
+npm test: 17/17 lulus.
+npm run lint: 0 error, 0 warning, Anti-placeholder: 0.
+Tidak ada teks slogan indie di kartu model.
+Tidak ada tombol lampiran tanpa ikon SVG.
+## 5. Prinsip Enkapsulasi Fitur Tunggal (Eliminasi Tombol Dokumen & Kuis dari Lampiran)
+1. Fitur Slide adalah satu kesatuan utuh yang di dalamnya sudah mampu menyusun naskah, merancang tata letak, dan mengekspor berkas PPTX.
+2. Dilarang memecah fitur menjadi deretan tombol teks panjang seperti 'Rancang Slide', 'Buatkan Dokumen (.docx)', dan 'Belajar dan Kuis Interaktif' di lembar lampiran (+).
+3. Hapus tombol '#sheet-doc' dan '#sheet-learn' dari index.html.
+4. Cukup tampilkan satu tombol berwibawa: 'Buat Slide (.pptx)' dengan ikon SVG asli.
+5. Lembar lampiran terkunci hanya berisi: 4 Media di atas (Kamera, Foto, Dokumen, Memo Suara) dan 5 Baris berikon SVG di bawah: Buat Slide (.pptx), Kaitkan ke Proyek, Pencarian Web, Riset mendalam, dan Hubungkan Folder Lokal. Bebas dari penumpukan teks.

@@ -306,16 +306,13 @@ export const settings = {
     card.className = 'model-solo';
     const title = document.createElement('strong');
     title.textContent = 'Model Utama: Raget 1.0';
-    const sub = document.createElement('small');
-    sub.textContent = 'Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.';
     card.appendChild(title);
-    card.appendChild(sub);
     const speed = document.createElement('label');
     speed.className = 'model-speed-label';
-    speed.textContent = 'Kecepatan';
+    speed.textContent = 'Mode';
     const select = document.createElement('select');
     select.id = 'engine-speed';
-    [['auto', 'Otomatis'], ['template', 'Cepat'], ['neural', 'Mendalam']].forEach((pair) => {
+    [['template', 'Cepat'], ['neural', 'Mendalam']].forEach((pair) => {
       const opt = document.createElement('option');
       opt.value = pair[0];
       opt.textContent = pair[1];
@@ -330,7 +327,7 @@ export const settings = {
       enginePreference.set(pick);
       document.dispatchEvent(new CustomEvent('rategoan:command', { detail: pick === 'neural' ? 'think' : 'think-off' }));
       window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: pick } }));
-      toast.show(pick === 'neural' ? 'Kecepatan: Mendalam' : (pick === 'template' ? 'Kecepatan: Cepat' : 'Kecepatan: Otomatis'));
+      toast.show(pick === 'neural' ? 'Mode: Mendalam' : 'Mode: Cepat');
     };
     const paintHub = () => {
       if (llmMode.mode() === 'server') llmMode.setMode('lokal');

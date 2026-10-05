@@ -4,11 +4,10 @@ export const enginePreference = {
   KEY,
   get() {
     const saved = localStorage.getItem(KEY);
-    if (saved === 'neural' || saved === 'template' || saved === 'auto') return saved;
-    return 'auto';
+    return saved === 'neural' ? 'neural' : 'template';
   },
   set(pref) {
-    const next = pref === 'neural' || pref === 'template' ? pref : 'auto';
+    const next = pref === 'neural' ? 'neural' : 'template';
     try {
       localStorage.setItem(KEY, next);
     } catch (e) { console.warn('[Rategoan Fallback] engine-preference:', e); }

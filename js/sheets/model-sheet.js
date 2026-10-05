@@ -4,7 +4,6 @@ import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
 const SPEEDS = [
-  { id: 'auto', label: 'Otomatis', note: 'Cepat untuk sapaan dan hitungan, mendalam untuk analisis.' },
   { id: 'template', label: 'Cepat', note: 'Respons instan, hemat daya.' },
   { id: 'neural', label: 'Mendalam', note: 'Berpikir keras untuk tugas rumit.' },
 ];
@@ -18,7 +17,7 @@ function statusOf(id) {
 
 function labelOf(id) {
   const found = SPEEDS.find((item) => item.id === id);
-  return found ? found.label : 'Otomatis';
+  return found ? found.label : 'Cepat';
 }
 
 async function pickSpeed(id) {
@@ -31,9 +30,9 @@ async function pickSpeed(id) {
       const again = statusOf('neural');
       picking = false;
       if (!again || !again.ready) {
-        enginePreference.set('auto');
-        toast.show('Raget 1.0 belum siap untuk mode mendalam. Tetap otomatis.');
-        window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'auto' } }));
+        enginePreference.set('template');
+        toast.show('Mode mendalam belum siap. Tetap di Cepat.');
+        window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'template' } }));
         document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' }));
         render();
         return;
@@ -57,15 +56,12 @@ function render() {
   card.className = 'model-solo';
   const name = document.createElement('strong');
   name.textContent = 'Raget 1.0';
-  const note = document.createElement('small');
-  note.textContent = 'Satu model berdaulat penuh. Kecepatan menyesuaikan tugas.';
   card.appendChild(name);
-  card.appendChild(note);
   const speed = document.createElement('button');
   speed.type = 'button';
   speed.className = 'model-speed';
   speed.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
-  speed.textContent = labelOf(pref) + ' \u25BE';
+  speed.textContent = 'Mode: ' + labelOf(pref) + ' \u25BE';
   speed.onclick = () => {
     menuOpen = !menuOpen;
     render();

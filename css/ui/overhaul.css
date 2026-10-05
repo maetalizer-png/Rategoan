@@ -565,6 +565,7 @@ body.is-generating #btn-voice-input { display: none !important; }
 .research-card { padding: 12px 14px; }
 .research-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 #attach-sheet { max-height: 80vh; overflow-y: auto; padding-bottom: 24px; }
+#attach-sheet .attach-plain svg { width: 20px; height: 20px; flex: none; }
 .model-item { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; text-align: left; }
 .model-item small, .hub-local-item { color: var(--rg-muted, #5c6570); font-size: 12px; }
 #view-studio.pane-preview .studio-toolbar,
