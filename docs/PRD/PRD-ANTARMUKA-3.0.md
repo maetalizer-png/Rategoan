@@ -1131,6 +1131,15 @@ Berkas proyek disimpan berjalur di VFS (`/index.html`, `/css/style.css`, `/js/sc
 Diff baris hijau/merah ada di tab Pohon Berkas. Konsol menerima log pratinjau lewat postMessage ke origin induk, bukan target liar.
 Cuplikan echo di bagian 18.4 dokumen Drive tidak dipasang: itu placeholder, dan dilarang oleh bagian 18.8.
 
+## Revisi Drive 2026-10-06 20:21 — Studio tiga kolom
+
+Kolom chat tidak lagi meniru beranda Rategoan. Sambutan kosong bertuliskan Studio Kode, placeholder `Tanya Studio Kode…`.
+Desktop memakai tiga kolom: riwayat proyek 240px, obrolan lentur, kanvas 45 persen. Ponsel menyembunyikan riwayat di laci dan kanvas di lembar bawah.
+Saat kosong, judul, kartu inspirasi, dan komposer duduk di tengah. Setelah pesan pertama, komposer menempel di bawah.
+Kartu inspirasi hanya mengisi draf. Tombol tambah membuka konektor (folder, ZIP, unduh, terbitkan), bukan merakit otomatis.
+Cuplikan echo dan `alert` di dokumen Drive tidak dipasang. Racikan tetap lewat mesin yang sudah ada.
+
+
 ## Revisi Drive 2026-10-06 19:39 — Chat Studio sama dengan chat utama
 
 Kolom obrolan Studio memakai kulit halaman utama: merek Rategoan di tengah, kartu komposer "Tanya Rategoan", dan token terang/gelap.

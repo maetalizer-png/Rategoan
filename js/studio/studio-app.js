@@ -8,12 +8,13 @@ import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
 import { folderBridge } from '../project/folder-bridge.js';
 
-const vfs = createVfs({
+const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
   '/css/style.css': 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n',
   '/js/script.js': 'console.log("siap");\n',
   '/main.py': 'print("halo")\n',
-});
+};
+const vfs = createVfs(SEED);
 let viewPath = '/js/script.js';
 let lastBefore = vfs.flat();
 let busy = false;
@@ -126,7 +127,8 @@ function paintHistory(rows) {
       if (Array.isArray(row.files)) vfs.load(row.files);
       else if (row.files) Object.keys(row.files).forEach((path) => vfs.write(path, row.files[path]));
       $('studio-app').classList.add('is-active');
-      $('studio-history').classList.remove('is-open');
+      const side = $('studio-sidebar');
+      if (side) side.classList.remove('is-open');
       $('studio-project-name').textContent = row.title || 'Proyek';
       lastBefore = vfs.flat();
       paintTree();
@@ -134,6 +136,12 @@ function paintHistory(rows) {
     };
     box.appendChild(btn);
   });
+  if (!box.childElementCount) {
+    const empty = document.createElement('p');
+    empty.className = 'project-empty';
+    empty.textContent = 'Belum ada proyek';
+    box.appendChild(empty);
+  }
 }
 
 async function rememberSession(title) {
@@ -292,17 +300,41 @@ async function applyCraft(text) {
   }
 }
 
+function closePlus() {
+  const sheet = $('studio-plus-sheet');
+  if (sheet) sheet.hidden = true;
+}
+
+function blankProject() {
+  Object.keys(SEED).forEach((path) => vfs.write(path, SEED[path]));
+  projectId = 'studio-' + Date.now().toString(36);
+  sessionStorage.setItem('rategoan_studio_project', projectId);
+  const log = $('messages');
+  if (log) log.textContent = '';
+  $('studio-app').classList.remove('is-active');
+  const side = $('studio-sidebar');
+  if (side) side.classList.remove('is-open');
+  $('studio-project-name').textContent = 'Proyek';
+  const box = $('chat-input');
+  if (box) box.value = '';
+  lastBefore = vfs.flat();
+  paintTree();
+  mountPreview($('studio-preview-frame'), vfs.flat());
+}
+
 function bind() {
   if (!localStorage.getItem('rategoan_auth')) {
     location.replace('index.html#/login');
     return;
   }
   projectKey();
-  document.querySelectorAll('[data-studio-ask]').forEach((btn) => {
-    btn.onclick = () => {
-      const sheet = $('studio-plus-sheet');
-      if (sheet) sheet.hidden = true;
-      applyCraft(btn.getAttribute('data-studio-ask') || '');
+  document.querySelectorAll('.insp-card').forEach((card) => {
+    card.onclick = () => {
+      const spec = card.getAttribute('data-spec') || '';
+      const box = $('chat-input');
+      if (!box || !spec) return;
+      box.value = spec;
+      box.focus();
     };
   });
   const plus = $('btn-plus');
@@ -311,14 +343,23 @@ function bind() {
     if (sheet) sheet.hidden = !sheet.hidden;
   };
   const hist = $('btn-studio-history');
-  if (hist) hist.onclick = () => $('studio-history').classList.toggle('is-open');
+  if (hist) hist.onclick = () => $('studio-sidebar').classList.toggle('is-open');
+  const fresh = $('btn-new-project');
+  if (fresh) fresh.onclick = () => blankProject();
+  const toggle = $('btn-toggle-canvas');
+  if (toggle) toggle.onclick = () => {
+    const narrow = window.matchMedia('(max-width: 1023px)').matches;
+    if (narrow) $('studio-canvas-pane').classList.toggle('is-sheet-open');
+    else $('studio-app').classList.toggle('is-canvas-hidden');
+  };
+  const zipBtn = $('btn-studio-zip');
+  if (zipBtn) zipBtn.onclick = () => { closePlus(); $('studio-open-zip').click(); };
   $('btn-send').onclick = () => {
     const box = $('chat-input');
     const text = box.value.trim();
     if (!text) return;
     box.value = '';
-    const sheet = $('studio-plus-sheet');
-    if (sheet) sheet.hidden = true;
+    closePlus();
     applyCraft(text);
   };
   $('chat-input').addEventListener('keydown', (event) => {
@@ -327,13 +368,14 @@ function bind() {
       $('btn-send').click();
     }
   });
-  $('btn-studio-export').onclick = downloadZip;
-  $('btn-studio-push').onclick = () => applyCraft('Terbitkan ke GitHub');
+  $('btn-studio-export').onclick = () => { closePlus(); downloadZip(); };
+  $('btn-studio-push').onclick = () => { closePlus(); applyCraft('Terbitkan ke GitHub'); };
   $('studio-sheet-close').onclick = () => $('studio-canvas-pane').classList.remove('is-sheet-open');
   document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.onclick = () => showTab(btn.dataset.tab);
   });
   $('studio-voice-btn').onclick = () => {
+    closePlus();
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) return;
     const rec = new SR();
@@ -346,6 +388,7 @@ function bind() {
     try { rec.start(); } catch (e) { console.warn('[Rategoan Fallback] dikte:', e); }
   };
   $('btn-studio-folder').onclick = async () => {
+    closePlus();
     const imported = await folderBridge.importTexts();
     if (!imported || imported.unsupported) {
       $('studio-open-zip').click();
@@ -395,10 +438,13 @@ function bind() {
     } catch (e) { console.warn('[Rategoan Fallback] seed:', e); }
   }
   idbGateway.getList('studio-vfs').then((rows) => {
-    if (touched) return;
-    if (rows && rows.length) vfs.load(rows);
+    if (!touched && rows && rows.length) vfs.load(rows);
     paintTree();
-  }).catch(() => paintTree());
+    mountPreview($('studio-preview-frame'), vfs.flat());
+  }).catch(() => {
+    paintTree();
+    mountPreview($('studio-preview-frame'), vfs.flat());
+  });
   idbGateway.getList('studio-sessions').then(paintHistory).catch(() => {});
   showTab('preview');
 }

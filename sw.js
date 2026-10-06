@@ -9,7 +9,7 @@ const CDN_PACKAGE_ORIGINS = [
 ];
 // Shell aplikasi sendiri (index.html/js/css) - tanpa ini, app tidak
 // benar-benar bisa dibuka offline walau CDN package sudah di-cache.
-const APP_SHELL_CACHE = 'raget-app-shell-v7';
+const APP_SHELL_CACHE = 'raget-app-shell-v8';
 const DATA_CACHE = 'raget-knowledge-json-v1';
 
 self.addEventListener('install', (e) => {
