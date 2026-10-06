@@ -77,7 +77,7 @@ export function mountExplorer(root, serviceId, onBack) {
   } else {
     const note = document.createElement('p');
     note.className = 'hub-note';
-    note.textContent = 'Sandbox berjalan di Studio kode pada perangkat ini. Tidak ada panggilan server.';
+    note.textContent = 'Sandbox berjalan di Studio Kode pada perangkat ini. Tidak ada panggilan server.';
     root.appendChild(note);
   }
   const ping = button('Uji sambungan', async () => {

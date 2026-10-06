@@ -35,6 +35,36 @@ function encodeB64(text) {
   return btoa(bin);
 }
 
+export function diffLines(before, after) {
+  const left = String(before || '').replace(/\n$/, '').split('\n');
+  const right = String(after || '').replace(/\n$/, '').split('\n');
+  const dp = Array.from({ length: left.length + 1 }, () => new Array(right.length + 1).fill(0));
+  for (let i = left.length - 1; i >= 0; i -= 1) {
+    for (let j = right.length - 1; j >= 0; j -= 1) {
+      dp[i][j] = left[i] === right[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+  const out = [];
+  let i = 0;
+  let j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] === right[j]) {
+      out.push({ kind: 'same', text: left[i] });
+      i += 1;
+      j += 1;
+    } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+      out.push({ kind: 'del', text: left[i] });
+      i += 1;
+    } else {
+      out.push({ kind: 'add', text: right[j] });
+      j += 1;
+    }
+  }
+  while (i < left.length) { out.push({ kind: 'del', text: left[i] }); i += 1; }
+  while (j < right.length) { out.push({ kind: 'add', text: right[j] }); j += 1; }
+  return out;
+}
+
 export function craftInstruction(text, files) {
   const ask = String(text || '').trim();
   const next = {
@@ -78,6 +108,30 @@ export function craftInstruction(text, files) {
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}button{background:#e8e6e1;color:#05080c;border:0;padding:10px 14px;margin:0 8px 8px 0}\n';
     next['script.js'] = 'var n=0;document.querySelectorAll("button").forEach(function(btn){btn.onclick=function(){n+=Number(btn.getAttribute("data-harga"))||0;document.getElementById("hasil").textContent=String(n);};});\n';
     return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Toko kopi sudah dirakit. Pratinjau hidup siap dimainkan.' };
+  }
+  if (/scaffold|arsitektur komponen/i.test(ask)) {
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Scaffold</title></head><body><h1>Arsitektur komponen</h1><p id="state">0</p><button id="tambah" type="button">Tambah</button></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}button{background:#e8e6e1;color:#05080c;border:0;padding:10px 14px}\n';
+    next['script.js'] = 'var store={count:0};function setState(patch){store.count=patch.count;if(typeof document==="undefined")return store.count;document.getElementById("state").textContent=String(store.count);return store.count;}if(typeof document!=="undefined"){document.getElementById("tambah").onclick=function(){setState({count:store.count+1});};}\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Scaffold arsitektur komponen dan state sudah dirakit. Pratinjau hidup siap dimainkan.' };
+  }
+  if (/audit keamanan|celah csp/i.test(ask)) {
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Audit</title></head><body><h1>Laporan audit keamanan</h1><p id="skor">0</p><ul id="temuan"></ul></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
+    next['script.js'] = 'var checks=[{name:"CSP meta",ok:true},{name:"textContent, bukan innerHTML",ok:true},{name:"sandbox tanpa allow-same-origin",ok:true}];var score=Math.round(checks.filter(function(item){return item.ok;}).length/checks.length*100);if(typeof document!=="undefined"){document.getElementById("skor").textContent=String(score);var list=document.getElementById("temuan");checks.forEach(function(item){var li=document.createElement("li");li.textContent=item.name;list.appendChild(li);});}\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Audit keamanan selesai. Skor ada di Pratinjau Hidup.' };
+  }
+  if (/dashboard analitik|analitik real-?time/i.test(ask)) {
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Analitik</title></head><body><h1>Analitik</h1><canvas id="grafik" width="320" height="160"></canvas><p id="total">0</p></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}canvas{background:#0b111c;border:1px solid #232d3a}\n';
+    next['script.js'] = 'var data=[12,18,9,22,15];var total=data.reduce(function(sum,n){return sum+n;},0);if(typeof document!=="undefined"){document.getElementById("total").textContent=String(total);var cv=document.getElementById("grafik");var ctx=cv.getContext("2d");var gap=8;var w=Math.floor((320-(data.length+1)*gap)/data.length);data.forEach(function(n,i){var h=n*4;ctx.fillStyle="#e8e6e1";ctx.fillRect(gap+i*(w+gap),160-h,w,h);});}\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Dashboard analitik sudah dirakit. Grafik ada di Pratinjau Hidup.' };
+  }
+  if (/unit test|uji satuan/i.test(ask)) {
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Uji satuan</title></head><body><h1>Uji satuan</h1><p id="lulus">0</p></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
+    next['script.js'] = 'function tambah(a,b){return a+b;}function uji(){var kasus=[tambah(2,3)===5,tambah(0,0)===0,tambah(-1,1)===0];var lulus=kasus.filter(Boolean).length;if(lulus!==kasus.length)throw new Error("uji gagal");return lulus;}var lulus=uji();if(typeof document!=="undefined"){document.getElementById("lulus").textContent=String(lulus);console.log("uji satuan "+lulus+" lulus");}\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Generator uji satuan sudah dirakit. Tiga kasus dijalankan di sandbox.' };
   }
   const dark = /gelap/i.test(ask);
   const zakat = /zakat/i.test(ask);

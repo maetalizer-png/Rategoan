@@ -1121,3 +1121,12 @@ Hapus seksi <section id="view-studio"> yang berjejal 22 tombol dari index.html.
 Tombol 'Studio kode' di bilah samping drawer index.html diarahkan langsung membuka studio.html (<a href="studio.html" class="drawer-item">).
 3. Pendaftaran Pre-Cache Service Worker (sw.js):
 Tambahkan './studio.html' dan './css/ui/studio.css' ke dalam daftar APP_SHELL_CACHE di sw.js agar Studio Rekayasa 100% tahan luring sejak detik pertama pemasangan PWA.
+
+## Revisi Drive 2026-10-06 18:54 — Studio Kode
+
+Identitas halaman mandiri berganti dari Studio Rekayasa menjadi Studio Kode.
+Layar awal menampilkan empat pil rekayasa: scaffold state, audit CSP, dashboard analitik, dan generator uji satuan.
+Desktop aktif membelah 40 persen obrolan dan 60 persen kanvas. Ponsel memakai lembar bawah 80vh.
+Berkas proyek disimpan berjalur di VFS (`/index.html`, `/css/style.css`, `/js/script.js`) pada IndexedDB `studio-vfs`, terpisah dari riwayat chat utama, bertanda `type: studio`.
+Diff baris hijau/merah ada di tab Pohon Berkas. Konsol menerima log pratinjau lewat postMessage ke origin induk, bukan target liar.
+Cuplikan echo di bagian 18.4 dokumen Drive tidak dipasang: itu placeholder, dan dilarang oleh bagian 18.8.

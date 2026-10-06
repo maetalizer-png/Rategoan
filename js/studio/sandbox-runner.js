@@ -53,7 +53,7 @@ export function previewSrcdoc(files) {
   const js = String((files && files['script.js']) || '');
   const origin = (typeof location !== 'undefined' && location.origin) ? location.origin : '*';
   const csp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data: blob:;">';
-  const trap = '<script>window.onerror=function(msg,url,line,col){parent.postMessage({type:"studio:error",error:{msg:String(msg),line:line,col:col}},' + JSON.stringify(origin) + ');};<\/script>';
+  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});})();<\/script>';
   const style = csp + trap + '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
   const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>';
   if (/<html[\s>]/i.test(html)) {
@@ -68,12 +68,18 @@ export function previewSrcdoc(files) {
 export function mountPreview(frame, files) {
   if (!frame) return;
   const html = previewSrcdoc(files);
-  // Iframe sandbox tanpa allow-same-origin ber-origin buram. Chrome menolak
-  // postMessage(..., "null"), dan location.origin tidak sampai ke jendela itu.
-  // Induk menulis srcdoc langsung. Galat anak tetap dikirim ke origin induk,
-  // bukan ke target '*'.
-  frame.removeAttribute('src');
-  frame.srcdoc = html;
+  const host = (typeof location !== 'undefined' && location.origin) ? location.origin : '';
+  let posted = false;
+  frame.onload = () => {
+    if (posted || !frame.contentWindow) return;
+    posted = true;
+    // Jendela sandbox ber-origin buram. Chrome menolak target "null", dan
+    // srcdoc mewarisi CSP induk yang tidak mengizinkan skrip sebaris.
+    // Target '*' hanya sampai ke iframe ini; penerima menolak origin selain host.
+    frame.contentWindow.postMessage({ type: 'studio:srcdoc', html }, '*');
+  };
+  frame.removeAttribute('srcdoc');
+  frame.src = 'studio-preview.html?host=' + encodeURIComponent(host) + '&run=' + Date.now();
 }
 
 export function zipStore(files) {

@@ -25,6 +25,22 @@ async function rememberDir(dir) {
   });
 }
 
+async function readTree(dir, prefix, out) {
+  for await (const [name, handle] of dir.entries()) {
+    if (out.length >= 40) return;
+    const rel = prefix ? prefix + '/' + name : name;
+    if (handle.kind === 'directory') {
+      if (rel.split('/').length >= 3) continue;
+      await readTree(handle, rel, out);
+      continue;
+    }
+    if (!isText(name)) continue;
+    const file = await handle.getFile();
+    if (file.size >= 200000) continue;
+    out.push({ name: rel, text: await file.text() });
+  }
+}
+
 export const folderBridge = {
   async pick() {
     if (typeof window.showDirectoryPicker !== 'function') {
@@ -66,6 +82,20 @@ export const folderBridge = {
       });
     }
     toast.show(names.length ? names.length + ' berkas di folder lokal' : 'Folder kosong');
+  },
+  async importTexts() {
+    if (typeof window.showDirectoryPicker !== 'function') return { unsupported: true, files: [] };
+    try {
+      const dir = await window.showDirectoryPicker({ mode: 'read' });
+      directory = dir;
+      try { await rememberDir(dir); } catch (e) { console.warn('[Rategoan Fallback] Folder:', e); }
+      const files = [];
+      await readTree(dir, '', files);
+      return { unsupported: false, files };
+    } catch (e) {
+      console.warn('[Rategoan Fallback] Folder:', e);
+      return { unsupported: false, files: [] };
+    }
   },
   async pin(name) {
     const handle = handles.get(name);

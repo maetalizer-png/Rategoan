@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#05080c">
-  <title>Studio Rekayasa</title>
+  <title>Studio Kode</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
   <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/tokens.css">
@@ -13,56 +13,63 @@
 </head>
 <body>
   <div id="studio-app" class="studio-shell">
-    <header class="studio-head">
-      <a class="studio-back" href="index.html#/chat">Kembali ke Chat</a>
-      <h1>Studio Rekayasa</h1>
-      <div class="studio-head-actions">
-        <button type="button" id="studio-folder">Buka Folder</button>
-        <button type="button" id="studio-zip">Unduh ZIP</button>
+    <header id="studio-topbar" class="studio-topbar">
+      <div class="topbar-left">
+        <a class="btn-back" href="index.html#/chat">Kembali ke Chat</a>
+        <h1 class="studio-title">Studio Kode</h1>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" id="btn-studio-folder" class="btn-studio-ghost">Buka Folder</button>
+        <button type="button" id="btn-studio-export" class="btn-studio-ghost">Unduh ZIP</button>
+        <button type="button" id="btn-studio-push" class="btn-studio-accent">Terbitkan</button>
         <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
       </div>
     </header>
-    <div class="studio-body">
-      <section class="studio-left">
-        <aside id="studio-history" class="studio-history"></aside>
-        <div id="studio-chat-col">
+    <div class="studio-workspace">
+      <aside id="studio-history"></aside>
+      <main class="studio-layout">
+        <section id="studio-chat-pane" class="studio-chat-pane">
           <div id="studio-landing">
-            <h2>Studio Rekayasa</h2>
-            <p>Mitra rekayasa mandiri Anda. Merakit web app, skrip hitungan, dan ekspor proyek.</p>
+            <h2>Studio Kode</h2>
+            <p>Mitra rekayasa mandiri Anda. Merakit arsitektur komponen, audit keamanan, analitik real-time, dan otomasi unit test.</p>
           </div>
-          <div id="studio-messages"></div>
+          <div id="studio-messages" class="studio-messages"></div>
           <div class="studio-presets" id="studio-presets">
-            <button type="button" data-studio-ask="Buatkan web toko kopi">Web Toko Kopi</button>
-            <button type="button" data-studio-ask="Buatkan game ular di web">Game Ular Web</button>
-            <button type="button" data-studio-ask="Buatkan kalkulator zakat dengan tema gelap">Kalkulator Zakat / Diskon</button>
-            <button type="button" id="studio-load-folder">Muat dari Folder / ZIP</button>
+            <button type="button" data-studio-ask="Rancang scaffold arsitektur komponen dan state">Scaffold Arsitektur & State</button>
+            <button type="button" data-studio-ask="Audit keamanan dan celah CSP">Audit Keamanan & CSP</button>
+            <button type="button" data-studio-ask="Buatkan dashboard analitik real-time">Dashboard Analitik Real-time</button>
+            <button type="button" data-studio-ask="Buatkan generator unit test">Generator Unit Test</button>
           </div>
-          <form id="studio-composer">
-            <textarea id="studio-ask" rows="3" placeholder="Ketik ide aplikasi atau instruksi koding Anda di sini…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-            <button type="button" id="studio-mic">Dikte</button>
-            <button type="submit">Kirim</button>
-          </form>
-          <button type="button" id="studio-open-sheet">Pratinjau Hidup</button>
-        </div>
-      </section>
-      <section id="studio-canvas" class="studio-canvas">
-        <header class="studio-canvas-head">
-          <strong id="studio-project-name">Proyek</strong>
-          <button type="button" id="studio-publish">Terbitkan ke GitHub</button>
-          <button type="button" id="studio-sheet-close">Tutup</button>
-        </header>
-        <div class="studio-tabs" id="studio-tabs">
-          <button type="button" data-pane="preview" class="on">Pratinjau Hidup</button>
-          <button type="button" data-pane="diff">Tinjau Suntingan</button>
-          <button type="button" data-pane="console">Papan Konsol</button>
-        </div>
-        <iframe id="studio-preview-frame" title="Pratinjau hidup" sandbox="allow-scripts"></iframe>
-        <div id="studio-diff-pane" hidden>
-          <div id="studio-files"></div>
-          <pre id="studio-code-view"></pre>
-        </div>
-        <pre id="studio-console" hidden>Belum ada keluaran konsol.</pre>
-      </section>
+          <footer id="studio-composer" class="studio-composer">
+            <textarea id="studio-input" rows="3" placeholder="Ketik spesifikasi rekayasa, arsitektur sistem, atau instruksi koding Anda di sini…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            <button type="button" id="studio-voice-btn" class="btn-icon">Dikte</button>
+            <button type="button" id="studio-send-btn" class="btn-primary">Kirim</button>
+          </footer>
+        </section>
+        <section id="studio-canvas-pane" class="studio-canvas-pane">
+          <header class="canvas-head">
+            <strong id="studio-project-name">Proyek</strong>
+            <button type="button" id="studio-sheet-close">Tutup</button>
+          </header>
+          <nav class="canvas-tabs">
+            <button type="button" class="tab-btn active" data-tab="preview">Pratinjau Hidup</button>
+            <button type="button" class="tab-btn" data-tab="files">Pohon Berkas</button>
+            <button type="button" class="tab-btn" data-tab="logs">Konsol Log</button>
+          </nav>
+          <div class="canvas-content">
+            <div id="tab-preview" class="tab-panel active">
+              <iframe id="studio-preview-frame" sandbox="allow-scripts" title="Pratinjau hidup"></iframe>
+            </div>
+            <div id="tab-files" class="tab-panel">
+              <div class="vfs-tree" id="vfs-tree"></div>
+              <pre class="code-editor" id="code-editor" spellcheck="false"></pre>
+            </div>
+            <div id="tab-logs" class="tab-panel">
+              <div class="console-output" id="console-output">Studio Kode siap. Tidak ada galat.</div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   </div>
   <script type="module" src="js/studio/studio-app.js"></script>
