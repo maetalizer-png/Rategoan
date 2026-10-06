@@ -104,11 +104,17 @@ async function getList(key) {
   }
 }
 
+export function keepSealed(row, held) {
+  return !!(row && row.enc && !held);
+}
+
 async function setList(key, list) {
   try {
     const payload = fitMedia(list);
     const db = await openDb();
     const held = vaultKey.current();
+    const existing = await readRow(key);
+    if (keepSealed(existing, held)) return;
     const record = held ? { key, ...(await packList(held, payload)) } : { key, list: payload };
     try {
       await putRecord(db, record);
@@ -157,4 +163,4 @@ async function unsealAll() {
   return count;
 }
 
-export const idbGateway = Object.freeze({ getList, setList, sealAll, unsealAll });
+export const idbGateway = Object.freeze({ getList, setList, sealAll, unsealAll, keepSealed });

@@ -8,6 +8,8 @@ import { drawer } from '../ui/drawer.js';
 import { workspace } from '../state/workspace.js';
 import { indexPinned } from '../project/pin-index.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
+import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
+import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote } from './studio-agent.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
 const WEB = {
@@ -124,7 +126,7 @@ function writeEditor(text, mode) {
 }
 
 function escapeHtml(value) {
-  return String(value).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+  return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function diffLines(before, after) {
@@ -205,6 +207,18 @@ export const studioPage = {
         view.classList.remove('pane-editor', 'pane-preview', 'pane-console');
         view.classList.add('pane-' + btn.dataset.pane);
         document.querySelectorAll('#studio-panes button').forEach((other) => other.classList.toggle('on', other === btn));
+        if (btn.dataset.pane === 'preview') {
+          rememberEditor();
+          const frame = $('studio-preview-frame');
+          if (frame) {
+            frame.hidden = false;
+            mountPreview(frame, WEB);
+          }
+        }
+        if (btn.dataset.pane === 'console') {
+          const out = $('studio-console');
+          if (out && !out.textContent.trim()) out.textContent = 'Belum ada keluaran konsol. Ketuk Jalankan untuk mengeksekusi kode.';
+        }
       };
     });
     if (view && !view.classList.contains('pane-editor')) view.classList.add('pane-editor');
@@ -427,6 +441,153 @@ export const studioPage = {
       this.paint();
       router.go('studio');
     };
+    const log = $('studio-messages');
+    const say = (cls, text) => {
+      if (!log) return;
+      const line = document.createElement('div');
+      line.className = cls;
+      line.textContent = text;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    };
+    const persist = () => idbGateway.setList('studio-vfs', Object.keys(WEB).concat(['main.py']).filter((path, index, all) => all.indexOf(path) === index).map((path) => ({
+      path,
+      content: path === 'main.py' ? pythonCode : (WEB[path] || ''),
+    })));
+    const applyCraft = async (text) => {
+      say('studio-line', text);
+      const token = localStorage.getItem('rategoan_github_token') || '';
+      const repo = localStorage.getItem('rategoan_github_repo') || '';
+      if (wantsPull(text)) {
+        say('studio-step', 'Baca berkas');
+        const pulled = await pullGithub(token, repo);
+        if (!pulled.ok) {
+          say('studio-line', 'Repositori belum bisa dimuat. Tautkan token dan pemilik/repo sekali di Pengaturan.');
+          return;
+        }
+        Object.keys(pulled.files).forEach((path) => {
+          if (path === 'main.py') pythonCode = pulled.files[path];
+          else if (Object.prototype.hasOwnProperty.call(WEB, path)) WEB[path] = pulled.files[path];
+        });
+        if (pulled.files['main.py'] && !pulled.files['script.js']) pick('python');
+        else {
+          if (lang === 'python') pick('javascript');
+          writeEditor(WEB[webFile] || '', 'javascript');
+          rememberEditor();
+          const frame = $('studio-preview-frame');
+          if (frame) {
+            frame.hidden = false;
+            mountPreview(frame, WEB);
+          }
+        }
+        say('studio-line', 'Berkas repositori sudah masuk pohon kerja Studio.');
+        try { await persist(); } catch (e) { console.warn('[Rategoan Fallback] studio-vfs:', e); }
+        return;
+      }
+      const before = Object.assign({ 'main.py': pythonCode }, WEB);
+      const plan = publishOnly(text)
+        ? { files: before, lang: lang === 'python' ? 'python' : 'web', steps: ['Baca berkas'], reply: 'Berkas proyek siap diterbitkan.' }
+        : craftInstruction(text, before);
+      plan.steps.forEach((step) => say('studio-step', step));
+      const changed = Object.keys(plan.files).filter((path) => String(before[path] || '') !== String(plan.files[path] || ''));
+      if (changed.length) say('studio-step', 'Berkas berubah: ' + changed.join(', '));
+      Object.keys(plan.files).forEach((path) => {
+        if (path === 'main.py') pythonCode = plan.files[path];
+        else WEB[path] = plan.files[path];
+      });
+      if (plan.lang === 'python') pick('python');
+      else {
+        if (lang === 'python') pick('javascript');
+        let healed = WEB['script.js'] || '';
+        for (let i = 0; healed && i < 3; i += 1) {
+          const res = await jsSandbox.run(healed);
+          if (res.ok) break;
+          const next = healScript(healed, { msg: res.error || '' });
+          if (!next || next === healed) break;
+          healed = next;
+          say('studio-step', 'Perbaikan mandiri ' + (i + 1));
+        }
+        WEB['script.js'] = healed;
+        writeEditor(WEB[webFile] || healed, 'javascript');
+        rememberEditor();
+        const frame = $('studio-preview-frame');
+        if (frame) {
+          frame.hidden = false;
+          mountPreview(frame, WEB);
+        }
+      }
+      let note = plan.reply;
+      if (wantsPublish(text)) {
+        say('studio-step', 'Kemas');
+        const bundle = Object.assign({}, WEB, { 'main.py': pythonCode });
+        const pushed = token ? await pushGithub(token, repo, bundle, commitNote(text)) : { ok: false, reason: 'token', sha: '' };
+        if (!pushed.ok) {
+          const zip = $('studio-zip');
+          if (zip) zip.click();
+          note += ' Aplikasi sudah selesai dan saya kemas dalam berkas ZIP studio-rategoan.zip. Untuk push otomatis ke repositori di masa depan, tautkan token GitHub Anda sekali saja di Pengaturan.';
+        } else {
+          say('studio-step', 'Push');
+          note += ' Perubahan sudah dikirim ke GitHub' + (pushed.sha ? ' (' + pushed.sha.slice(0, 7) + ').' : '.');
+        }
+      }
+      say('studio-line', note);
+      try { await persist(); } catch (e) { console.warn('[Rategoan Fallback] studio-vfs:', e); }
+    };
+    document.querySelectorAll('[data-studio-ask]').forEach((btn) => {
+      btn.onclick = () => applyCraft(btn.dataset.studioAsk || '');
+    });
+    const form = $('studio-composer');
+    if (form) form.onsubmit = (event) => {
+      event.preventDefault();
+      const box = $('studio-ask');
+      const text = box ? box.value.trim() : '';
+      if (!text) return;
+      box.value = '';
+      applyCraft(text);
+    };
+    const mic = $('studio-mic');
+    if (mic) mic.onclick = () => {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const box = $('studio-ask');
+      if (!SR || !box) {
+        toast.show('Dikte suara tidak didukung di peramban ini');
+        return;
+      }
+      let rec;
+      try { rec = new SR(); } catch (e) {
+        toast.show('Dikte suara gagal dimulai');
+        return;
+      }
+      rec.lang = 'id-ID';
+      rec.onresult = (event) => {
+        const last = event.results && event.results[event.results.length - 1];
+        const said = last && last[0] ? last[0].transcript : '';
+        if (said) box.value = (box.value ? box.value + ' ' : '') + said;
+      };
+      rec.onerror = (event) => {
+        const code = (event && event.error) || '';
+        toast.show(code === 'not-allowed' ? 'Mikrofon ditolak. Izinkan mikrofon di peramban untuk mendikte.' : 'Dikte suara gagal');
+      };
+      try { rec.start(); toast.show('Dikte suara berjalan'); } catch (e) { toast.show('Dikte suara gagal dimulai'); }
+    };
+    const publish = $('studio-publish');
+    if (publish) publish.onclick = () => applyCraft('Terbitkan ke GitHub');
+    const load = $('studio-load-project');
+    if (load) load.onclick = () => {
+      const cur = workspace.current();
+      if (!cur) {
+        toast.show('Pilih atau buat proyek dulu');
+        return;
+      }
+      say('studio-line', 'Proyek aktif: ' + cur.name);
+    };
+    idbGateway.getList('studio-vfs').then((rows) => {
+      (rows || []).forEach((row) => {
+        if (!row || !row.path) return;
+        if (row.path === 'main.py') pythonCode = row.content || pythonCode;
+        else if (Object.prototype.hasOwnProperty.call(WEB, row.path)) WEB[row.path] = row.content || '';
+      });
+    }).catch(() => {});
   },
   async runPython() {
     const out = $('studio-console');

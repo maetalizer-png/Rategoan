@@ -1,7 +1,6 @@
 const BANNED = [
   /\b(csam|child\s+porn|pornografi\s+anak|eksploitasi\s+anak|konten\s+seksual\s+anak)\b/i,
-  /\b(cara\s+membuat\s+bom|buat(?:kan)?\s+bom|how\s+to\s+make\s+a\s+bomb|racik\s+bahan\s+peledak)\b/i,
-  /\b(ujaran\s+kebencian|genocide|basmi\s+suku)\b/i,
+  /\b(cara\s+membuat\s+bom|buat(?:kan)?\s+bom|how\s+to\s+make\s+a\s+bomb|racik\s+bahan\s+peledak|instruksi\s+kekerasan|bikin\s+ujaran\s+kebencian)\b/i,
 ];
 
 export function refuseProhibited(text) {

@@ -33,7 +33,13 @@ function zipStore(files) {
   const center = concat(centrals);
   return concat(locals.concat([center, concat([u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length), u32(center.length), u32(offset), u16(0)])]));
 }
-function xml(s) { return String(s || '').replace(/&/g, '&').replace(/</g, '<'); }
+function xml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 export function sheetFromText(text) {
   const lines = String(text || '').split(/\n+/).map((line) => line.trim()).filter(Boolean).slice(0, 24);

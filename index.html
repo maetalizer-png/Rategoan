@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="icon.svg">
   <link rel="manifest" href="manifest.webmanifest">
   <title>Rategoan</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
   <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -160,12 +160,25 @@
               <polyline points="12 19 5 12 12 5"/>
             </svg>
           </button>
-          <h1>Studio kode</h1>
+          <h1>Studio Rekayasa</h1>
         </header>
+        <div id="studio-chat-pane">
+          <div id="studio-messages"></div>
+          <div class="studio-presets">
+            <button type="button" data-studio-ask="Buatkan web app interaktif dengan penghitung ketukan">Web App Interaktif</button>
+            <button type="button" data-studio-ask="Tulis skrip Python yang menjumlahkan 2 dan 3">Skrip Python</button>
+            <button type="button" id="studio-load-project">Muat Proyek</button>
+          </div>
+          <form id="studio-composer">
+            <textarea id="studio-ask" rows="2" placeholder="Perintah dalam bahasa biasa" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            <button type="button" id="studio-mic">Dikte</button>
+            <button type="submit">Kirim</button>
+          </form>
+        </div>
         <div class="studio-panes" id="studio-panes">
-          <button type="button" data-pane="editor" class="on">Editor</button>
-          <button type="button" data-pane="preview">Pratinjau</button>
-          <button type="button" data-pane="console">Konsol</button>
+          <button type="button" data-pane="editor" class="on">Pohon Berkas</button>
+          <button type="button" data-pane="preview">Pratinjau Hidup</button>
+          <button type="button" data-pane="console">Papan Konsol</button>
         </div>
         <div class="studio-toolbar">
           <div class="studio-topbar">
@@ -176,6 +189,7 @@
             <div class="studio-util">
               <button type="button" id="studio-folder" class="plain">Buka Folder / ZIP</button>
               <button type="button" id="studio-zip" class="plain">Ekspor ZIP</button>
+              <button type="button" id="studio-publish" class="plain">Terbitkan ke GitHub</button>
               <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
             </div>
           </div>

@@ -15,6 +15,7 @@ import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js';
+import { searchDocs } from '../../raget/raget-vault/local-rag.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { hybridRank, cosineText } from '../../raget/raget-vault/hybrid-search.js';
@@ -456,7 +457,9 @@ export const composer = {
         if (FILE_READ_RE.test(text) && !/\b(apa|jelaskan|tentang)\b/i.test(text)) {
           directReply = summarizeFileText(fileSrc.fileText, fileSrc.name);
         } else {
-          directReply = answerFromFile(fileSrc.fileText, text, fileSrc.name);
+          const chunks = String(fileSrc.fileText).split(/\n{2,}|(?<=[.!?])\s+/).map((part) => part.trim()).filter((part) => part.length > 12).slice(0, 80);
+          const hits = searchDocs(chunks.map((part, index) => ({ id: index, text: part })), text, 3);
+          directReply = hits.length ? ('Dari "' + (fileSrc.name || 'berkas') + '":\n\n' + hits.map((hit) => hit.text).join('\n\n')) : answerFromFile(fileSrc.fileText, text, fileSrc.name);
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }

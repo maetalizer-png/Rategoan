@@ -785,3 +785,186 @@ Pada kategori Pengaturan > Privasi (data-cat="privasi"), tambahkan baris navigas
 Mandat Google Play untuk Hak Hapus Data:
 Google Play mewajibkan aplikasi yang menyimpan data pengguna menyediakan opsi penghapusan data secara menyeluruh dari dalam aplikasi.
 Di Pengaturan > Data (js/account/settings.js), pastikan tombol [ 🗑️ Bersihkan Seluruh Data & Riwayat ] menghapus seluruh database IndexedDB (raget_idb), kunci vault, dan preferensi LocalStorage secara atomik dengan konfirmasi dialog sadar dari pengguna.
+
+# BAB 17: RESOLUSI TITIK RAWAN ARSITEKTUR, KEAMANAN DATA BRANKAS, VALIDASI FORMAT BINER (XLSX/PPTX), DAN OPTIMASI PERFORMA SELULER
+## 17.1 Latar Belakang Studi Kasus Komprehensif
+Audit menyeluruh terhadap repositori Rategoan-main membuktikan bahwa fondasi 17 unit test dan linter 0 error telah tercapai. Namun, inspeksi baris demi baris pada mesin internal menemukan sejumlah titik rawan laten (silent bugs) yang dapat merusak integritas berkas keluaran biner (.xlsx/.pptx) dan memicu hilangnya data brankas terenkripsi saat terjadi race-condition di perangkat seluler. Bab 17 menetapkan standar rekayasa baku untuk menutup seluruh celah tersebut.
+## 17.2 Spesifikasi Resolusi Berkas demi Berkas
+Pengamanan Format Spreadsheet Biner (shared/xlsx-local.js):
+Masalah: Fungsi xml(s) mengalami typo logika di mana replace(/&/g, '&') dan replace(/</g, '<') tidak mengubah karakter apa pun. Teks seperti 'ATK & Buku' menghasilkan XML cacat di sharedStrings.xml.
+Solusi: Terapkan sanitasi entitas XML ketat: replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').
+Penguncian Status Brankas Terenkripsi Anti-Timpa (raget/raget-database/idb-gateway.js):
+Masalah: vaultKey disimpan secara in-memory (hilang saat reload). Jika pengguna mengirim pesan sebelum membuka PIN brankas, setList() menimpa baris enc: 1 dengan baris teks polos baru yang terpotong.
+Solusi: Tambahkan pemeriksaan pra-tulis pada setList(): Jika row di IndexedDB memiliki row.enc === 1 sedangkan held === null, operasi tulis ke kunci tersebut wajib dibatalkan atau ditolak agar arsip brankas pengguna tidak terhapus.
+Kepatuhan Spesifikasi ECMA-376 OpenXML PowerPoint (shared/pptx-local.js):
+Masalah: Fungsi textBox() menggunakan id statis 2. Pada slide sampul dengan subjudul, terjadi duplikasi <p:cNvPr id="2"/> ganda yang memicu peringatan korup di Microsoft Office desktop.
+Solusi: Parameterisasi ID bentuk secara inkremental (id 2 untuk judul, id 3 untuk subjudul/konten) agar setiap elemen memiliki identitas unik per slide.
+Penyatuan Mesin RAG Hibrida Obrolan (js/chat/composer.js & raget/raget-vault/local-rag.js):
+Masalah: Penjawab dokumen lampiran di composer.js masih menggunakan answerFromFile() naif (pencocokan kata biasa), sementara mesin cerdas local-rag.js (BM25 + Trigram Cosine) tidak dimanfaatkan.
+Solusi: Sambungkan ekstraksi teks dokumen lampiran di obrolan chat langsung ke searchDocs() di local-rag.js sehingga penjawab dokumen mampu menemukan jawaban relevan berbasis semantik.
+Kalibrasi Niat Berbahaya pada Safety Guard (shared/safety-guard.js):
+Masalah: Regex BANNED memblokir kata tunggal 'genocide' atau 'ujaran kebencian', mengakibatkan pertanyaan edukatif dan sejarah hukum ikut terblokir.
+Solusi: Alihkan pencocokan dari kata benda tunggal ke frasa instruksi bahaya aktif (misal: 'cara membuat bom', 'instruksi kekerasan', 'bikin ujaran kebencian untuk menyerang').
+Jaminan Tahan Luring Penuh PWA (sw.js):
+Masalah: APP_SHELL_CACHE hanya mem-precache shell.css dan main.js saat install event.
+Solusi: Tambahkan seluruh berkas gaya inti (css/main.css, css/tokens.css, css/chat/messages.css, css/account/settings.css) ke dalam precache install agar tampilan aplikasi tidak berantakan saat dibuka luring pertama kali.
+Resolusi Kontras Fatal Editor Studio Kode di Mode Gelap & Aktivasi Tab Pratinjau (css/ui/artifact.css & js/studio/studio.js):
+Masalah Nyata di Lapangan (Tangkapan Layar Pengguna):
+Pada mode gelap, kotak editor kode textarea (.studio-editor) tidak memiliki deklarasi background maupun color secara eksplisit.
+Mesin peramban (Chrome/Blink di Android) menerapkan latar belakang bawaan putih (#ffffff) pada elemen <textarea>, sementara CSS reset menerapkan color: inherit yang mewarisi var(--rg-text) (#f2f5f7 / putih terang).
+Akibatnya terjadi cacat teks putih di atas kotak putih (white-on-white text), sehingga baris kode JavaScript/Python menjadi tidak terbaca sama sekali.
+Selain itu, saat tab atas 'Pratinjau' di #studio-panes diklik oleh pengguna di ponsel, iframe (#studio-preview-frame) masih berstatus atribut hidden dan fungsi mountPreview() tidak dipicu, sehingga layar hanya menampilkan bidang kosong hitam pekat.
+Solusi Rekayasa Baku:
+Di css/ui/artifact.css pada kelas .studio-editor, tetapkan palet permukaan gelap IDE:background: var(--rg-surface, #0b111c);color: var(--rg-text, #f2f5f7);border: 1px solid var(--rg-line, #232d3a);caret-color: var(--rg-accent);
+Di js/studio/studio.js pada penangan klik tombol #studio-panes button:Saat btn.dataset.pane === 'preview', otomatis hilangkan atribut hidden (frame.hidden = false), panggil rememberEditor(), dan jalankan mountPreview(frame, WEB) agar pratinjau web app langsung tampil hidup.Saat btn.dataset.pane === 'console', jika konsol masih kosong, tampilkan panduan: 'Belum ada keluaran konsol. Ketuk Jalankan untuk mengeksekusi kode.'
+## 17.3 Standar Kualitas & Kriteria Kelulusan (Definition of Done)
+Seluruh 17 unit test lulus 100% tanpa regresi (npm test).
+Linter wajib 0 error, 0 warning, dan Anti-placeholder: 0 (npm run lint).
+Berkas .xlsx yang memuat karakter ampersand (&) lolos validasi XML dan dapat dibuka mulus tanpa pesan korup di aplikasi spreadsheet.
+Baris data brankas terenkripsi (enc: 1) terlindungi 100% dari penimpaan tidak sengaja.
+17.4 Pipeline CI/CD Kompilasi Otomatis Android TWA (.github/workflows/build-twa.yml)
+Solusi 0 Biaya Tanpa Komputer Fisik:
+Karena peracikan dilakukan langsung dari perangkat seluler tanpa akses Android Studio PC, repositori dilengkapi alur kerja GitHub Actions otomatis: .github/workflows/build-twa.yml.
+Pemicu: Setiap pembuatan tag rilis baru (v*.*.*) atau eksekusi manual via workflow_dispatch.
+Tugas Otomatisasi:
+Mengunduh repositori dan membaca manifest.webmanifest serta .well-known/assetlinks.json.
+Menjalankan Bubblewrap CLI (@bubblewrap/cli) di dalam kontainer Ubuntu Runner gratis.
+Mengompilasi proyek menjadi paket Android resmi: Android App Bundle (.aab) siap rilis Google Play Store dan berkas APK (.apk) siap pasang langsung di ponsel.
+Menandatangani berkas dengan keystore rilis aman via GitHub Secrets.
+Mengunggah artefak .aab dan .apk ke GitHub Releases secara otomatis sehingga dapat diunduh langsung dari ponsel pengguna.
+17.5 Peta Prioritas Eksekusi Terpilih (Sasis & Distribusi Dahulu, Penundaan Konten)
+Penundaan Pengayaan Database Konten (Deferred):
+Pengayaan 260 database pengetahuan kanonikal ditunda ke fase berikutnya. Fokus penuh saat ini diletakkan pada kestabilan sasis, integritas berkas biner, dan jalur distribusi Google Play Store.
+Urutan Sprint Terkunci:
+Tahap 1: Eksekusi Resolusi Celah Biner Bab 17 (XML xlsx, anti-timpa idb-gateway, unik ID pptx, RAG BM25 composer).
+Tahap 2: Pemasangan alur kerja CI/CD Bubblewrap TWA (.github/workflows/build-twa.yml).
+Tahap 3: Optimasi memori penyimpanan media (Blob IndexedDB terpisah) dan virtualisasi render DOM pesan chat (25-30 pesan terakhir).
+# BAB 18: EVOLUSI STUDIO KODE SEBAGAI MITRA CODING AGENTIK PERCAKAPAN (CONVERSATIONAL AGENTIC CODING WORKSTATION)
+## 18.1 Latar Belakang & Filosofi Rekayasa
+Berdasarkan studi komparasi antarmuka AI frontier terkini (Claude Code dan coder.qwen.ai), menyodorkan pengguna awam ke dalam halaman editor teks manual kosong (<textarea>) adalah anti-pola UX yang membingungkan. Pengguna mobile dan non-programmer tidak boleh dipaksa mengetik sintaks kodingan dari nol.
+Studio Kode Rategoan berevolusi menjadi Mitra Coding Agentik: seluruh perakitan aplikasi web, penulisan fungsi JavaScript, dan eksekusi skrip Python disetir 100% melalui percakapan bahasa manusia yang ramah, sementara agen AI bertindak sebagai teknisi yang membaca berkas, menulis kode, memburu bug, dan menyajikan pratinjau live secara otonom.
+Doktrin Identitas Mandiri & Orisinalitas (Anti-Jiplak Mentah):
+Aplikasi frontier luar (Claude Code, Qwen Coder, dsb.) murni digunakan sebagai rujukan komparatif rekayasa, BUKAN untuk dijiplak secara mentah.
+Rategoan wajib mempertahankan bahasa, jiwa, dan tata nama (nomenklatur) berdaulat sendiri yang berakar pada budaya dan bahasa Indonesia yang berwibawa, lugas, dan bersahaja:
+1. Penamaan Fitur Asli: Menggunakan istilah kanonikal Rategoan seperti 'Studio Rekayasa', 'Pratinjau Hidup', 'Pohon Berkas', 'Papan Konsol', 'Artefak', dan 'Proyek', bukan mengadopsi istilah asing secara membabi buta.
+2. Gaya Bahasa Percakapan Agen: Nada tutur agen koding Rategoan berciri khas asisten profesional Indonesia: santun, tenang, ringkas, solutif, to-the-point, dan tanpa basa-basi korporat asing yang berlebihan.
+3. Kedaulatan Antarmuka: Seluruh elemen visual, kartu langkah aksi, dan keterangan status menggunakan Bahasa Indonesia baku yang elegan, sehingga pengguna merasa memiliki karya teknologi asli bangsa sendiri yang mandiri dan berkelas dunia.
+## 18.2 Arsitektur Antarmuka Dua Pilar (Conversational Split-Canvas)
+Struktur Header Atas Studio (#studio-topbar):
+[ ← Kembali ] | Studio Rekayasa | [ 📁 Buka Folder/ZIP ] [ 📦 Ekspor ZIP ]
+Wilayah Kiri: Chat Mitra Koding Agentik (#studio-chat-pane):
+Aliran Pesan Percakapan (#studio-messages): Menampilkan obrolan interaktif dan kartu langkah rekayasa transparan (Membaca berkas, Menyunting kode, Uji coba sandbox, Selesai).
+Komposer Input Mandiri (#studio-composer): Kolom teks instruksi dilengkapi tombol kirim dan tombol dikte suara Web Speech API.
+Kartu Pemicu Cepat Awal: Tombol preset eksplorasi [ 📱 Web App Interaktif ], [ 🐍 Skrip Python ], dan [ 📁 Muat Proyek ].
+Wilayah Kanan: Kanvas Hasil Proyek (#studio-canvas-pane):
+Tab [ Pratinjau Hidup ]: Iframe live web app interaktif yang langsung aktif dan dilengkapi tombol muat ulang/segarkan.
+Tab [ Pohon Berkas & Suntingan ]: Tab berkas aktif (index.html, style.css, script.js, main.py) dengan editor gelap kontras tinggi (var(--rg-surface, #0b111c)) serta visualisasi diff hijau/merah.
+Tab [ Papan Konsol & Log ]: Terminal rekaman hasil eksekusi program, kecepatan komputasi milidetik, dan uji coba.
+Adaptasi Seluler Ponsel (< 1024px):
+Fokus utama pada percakapan chat. Bilah mengambang di atas komposer menyediakan pintasan cepat [ 👁️ Pratinjau Hidup ] dan [ 📋 Berkas Proyek ] yang membuka lembar bawah (bottom sheet) ergonomis tanpa menutup percakapan obrolan.
+Kolom Utama: Chat Mitra Koding Agentik (Conversational Driver):
+Pengguna berinteraksi melalui kolom obrolan santai: 'Buatkan aplikasi kalkulator diskon dengan tema gelap', 'Tambahkan animasi tombol', atau 'Perbaiki galat hitungan'.
+Agen AI menampilkan kartu langkah eksekusi transparan:
+Read / Membaca struktur berkas proyek.
+Edit / Menyunting berkas dengan visualisasi diff hijau/merah.
+Run & Test / Menjalankan pengujian di sandbox lokal.
+Kolom Pendamping: Kanvas Hasil Proyek Adaptif:
+Pada Layar Lebar/Desktop (>= 1024px): Layar membelah otomatis 50%/50% berdampingan dengan chat.
+Pada Layar Ponsel (< 1024px): Fokus pada chat agen, dengan tombol aksi 'Buka Pratinjau' yang membuka kanvas hasil via lembar geser bawah (bottom sheet) ergonomis.
+3 Tab Dinamis Kanvas:
+Tab [ Pratinjau ]: Menampilkan wujud aplikasi web interaktif nyata di dalam iframe terisolasi yang langsung aktif dan bisa dimainkan.
+Tab [ Berkas & Diff ]: Pohon berkas (index.html, style.css, script.js, main.py) dengan editor gelap kontras tinggi (var(--rg-surface)) dan penanda baris modifikasi.
+Tab [ Konsol & Log ]: Terminal rekaman hasil eksekusi program, kecepatan komputasi milidetik, dan status bersih tanpa error.
+## 18.3 Siklus Perbaikan Mandiri Tanpa Error (Self-Healing Code Loop)
+Uji Coba Latar Belakang Otomatis:
+Setiap kali agen meracik kode baru, sistem langsung mengeksekusinya di dalam sandbox tersembunyi (jsSandbox.run() untuk JavaScript atau Pyodide untuk Python).
+Auto-Patching Galat:
+Jika terdeteksi galat sintaksis atau runtime, fungsi healScript() secara otomatis membaca pesan error dan membetulkan baris kodenya sendiri (maksimal 3 iterasi perbaikan) sebelum hasil akhir disajikan kepada pengguna.
+Pengguna dijamin tidak pernah disodori pesan galat teknis mentah yang membingungkan.
+## 18.4 Integrasi Lingkungan Proyek & Ekspor Biner Mandiri
+Ekspor Bundel ZIP Seketika: Tombol [ Ekspor ZIP ] mengompilasi seluruh berkas proyek menjadi studio-rategoan.zip murni di memori browser pengguna.
+Penautan Folder Perangkat: Tombol [ Buka Folder / ZIP ] terhubung ke penyimpanan lokal via folder-bridge.js (File System Access API).
+Penyelarasan Proyek: Tombol [ Jadikan Rujukan Proyek ] mengalirkan berkas kodingan ke IndexedDB ruang kerja aktif untuk rujukan jangka panjang.
+## 18.5 Standar Kualitas & Kriteria Kelulusan (Definition of Done)
+## 18.6 Alur Kerja Pengguna Baku (Standard Operating Workflow)
+Tahap 1 (Inisiasi): Pengguna masuk ke Studio Rekayasa dan disambut oleh agen koding dengan opsi pemicu cepat.
+Tahap 2 (Perintah Bahasa Manusia): Pengguna memberi instruksi natural (misal: "Buatkan kalkulator zakat dengan tema gelap").
+Tahap 3 (Peracikan & Uji Sandbox Mandiri): Agen menyusun index.html, style.css, script.js, mengujinya di sandbox latar belakang, dan memperbaiki galat otomatis (self-healing) jika ada bug.
+Tahap 4 (Sajian Pratinjau Hidup): Hasil visual langsung aktif dan bisa dimainkan di tab Pratinjau Hidup.
+Tahap 5 (Iterasi Percakapan): Pengguna meminta revisi di chat ("tambahkan tombol reset"), agen langsung memperbarui kode dan pratinjau secara live.
+Tahap 6 (Ekspor & Penyimpanan): Pengguna mengunduh arsip zip utuh via [ Ekspor ZIP ] atau menyematkannya ke [ Proyek ].
+Mempertahankan 100% kelulusan 17 unit test (npm test) dan linter 0 error (npm run lint).
+18.7 Stratifikasi Integrasi GitHub: Chat Utama (Makro) vs Studio Rekayasa (Mikro & Git-Ops Penuh)
+1. Integrasi GitHub di Chat Utama (Tingkat Makro / Pemantauan Eksekutif):
+Bersifat pasif dan informasional: Membaca status repositori, mengecek riwayat commit terbaru, membaca daftar issue/PR, atau mengambil cuplikan berkas tertentu untuk dijawab dalam obrolan chat.
+Sifat kerja: Sekali panggil untuk rujukan obrolan umum tanpa memanipulasi struktur pohon berkas.
+2. Integrasi GitHub di Studio Rekayasa (Tingkat Mikro / Rekayasa Penuh & Siklus Git-Ops):
+Bersifat aktif, kompleks, dan operasional dua arah:
+Klon & Muat Proyek: Mengimpor seluruh struktur repositori GitHub ke dalam memori kerja pohon berkas Studio.
+Pelacakan Suntingan Multi-Berkas: Memantau perubahan baris per baris di banyak berkas sekaligus dengan diff hijau/merah.
+Commit & Push Otomatis: Menyusun pesan commit terstruktur dan mengeksekusi push pembaruan ke repositori GitHub.
+Penerbitan Satu Ketukan: Menyediakan tombol resmi [ 🚀 Terbitkan ke GitHub ] (Publish to GitHub) di bilah atas studio untuk sinkronisasi proyek instan tanpa terminal manual.
+Tampilan Studio Kode diakses secara alami melalui obrolan percakapan tanpa mengharuskan pengguna mengetik kode manual.
+Seluruh eksekusi dan pratinjau web app beroperasi 100% luring di sisi klien tanpa biaya server luar.
+## 18.8 Pagar Anti-Halusinasi & Protokol Anti-Ambiguitas untuk Grok Build
+18.9 Arsitektur Fondasi Tiga Lapisan & Sistem Berkas Virtual (VFS) Studio Rekayasa
+1. Sistem Berkas Virtual Terpadu (Virtual File System / VFS):
+Struktur Data: Menggantikan peta datar objek statis dengan VFS hierarkis berbasis jalur (path-to-content map) yang mendukung multi-berkas dan subfolder: { '/index.html': { content, mime, updatedAt }, '/css/style.css': { ... }, '/js/script.js': { ... } }.
+Persistensi Luring Otomatis: VFS disinkronkan secara atomik ke IndexedDB (raget_idb/stores: studio-vfs) sehingga proyek kodingan pengguna tidak hilang saat peramban ponsel di-refresh.
+Jembatan Dua Arah: Terhubung langsung ke kompresor zip-local.js (ekspor/impor ZIP) dan folder-bridge.js (folder fisik perangkat).
+2. Tiga Lapisan Sandbox Isolasi Peramban (Three-Layer Client Sandbox):
+Lapisan 1: Pratinjau Web App (Iframe Sandbox Ketat):
+Iframe pratinjau wajib menggunakan atribut sandbox="allow-scripts" TANPA allow-same-origin untuk mencegah kode buatan AI mengakses penyimpanan IndexedDB/LocalStorage aplikasi induk Rategoan.
+Runtime Bridge Internal: Menyuntikkan jembatan komunikasi kecil berbasis postMessage di dalam srcdoc pratinjau untuk menangkap console.log, console.error, dan window.onerror, lalu mengalirkannya secara real-time ke Papan Konsol Studio.
+Lapisan 2: Eksekusi Logika Cepat (Web Worker Sandbox):
+Pengujian algoritma dan fungsi JavaScript dieksekusi di dalam Web Worker mandiri (jsSandbox) dengan membekukan akses jaringan (fetch, WebSocket = null) demi kedaulatan data 100% luring.
+Lapisan 3: Lingkungan Komputasi Python WebAssembly (Pyodide):
+Dimuat secara lazy hanya saat tab Python aktif, mengeksekusi perhitungan saintifik/data murni di CPU/RAM peramban ponsel.
+3. Protokol Tindakan Agen Koding Percakapan (Agent Action Protocol Loop):
+Siklus 4 Tahap Agen:
+1. Analisis & Pembacaan (Read): Mengidentifikasi berkas sasaran dari VFS berdasarkan instruksi pengguna.
+2. Penyuntingan Terarah (Edit & Patch): Menyusun kode baru atau melakukan suntingan baris terarah (targeted patch).
+3. Pengujian Rahasia Mandiri (Silent Run & Self-Healing): Menguji kode di sandbox tersembunyi; jika terjadi galat, fungsi healScript() otomatis memperbaiki kode hingga 3 kali percobaan sebelum hasil ditampilkan.
+4. Pelaporan & Pratinjau (Deliver): Menyajikan kartu laporan ringkas di obrolan dengan tombol cepat untuk membuka Pratinjau Hidup atau mengunduh berkas proyek.
+1. Batasan Lingkungan Peramban Klien (Zero Native Git CLI):
+Grok Build dilarang berhalusinasi menggunakan perintah terminal native seperti child_process atau git CLI di dalam kode peramban klien.
+Fitur [ Terbitkan ke GitHub ] di peramban murni memanfaatkan GitHub REST API via token OAuth atau GitHub Personal Access Token (PAT) dari Pengaturan.
+Protokol Fallback Anggun: Jika pengguna belum menautkan token GitHub, tombol [ Terbitkan ke GitHub ] secara otomatis memunculkan dialog ramah: 'Tautkan token GitHub di Pengaturan untuk push langsung, atau unduh berkas ZIP proyek sekarang', lalu mengarahkan ke fungsi unduh ZIP.
+2. Pemisahan Sesi Obrolan Studio (Anti-Pencemaran Riwayat Chat Utama):
+Percakapan di dalam Chat Studio Rekayasa wajib ditandai metadata { type: 'studio', projectId: currentProjectId }.
+Riwayat percakapan teknis koding di Studio tidak boleh mencemari atau bercampur dengan daftar riwayat sesi obrolan harian di Chat Utama (#hist-list).
+3. Pembatasan Siklus Perbaikan Mandiri (Hard Cap Anti-Looping):
+Siklus perbaikan otomatis (self-healing loop) via healScript() wajib dibatasi maksimal 3 kali percobaan (healTries <= 3).
+Dilarang keras melakukan perulangan tanpa henti (infinite loop) yang dapat membekukan (freeze) memori peramban ponsel. Jika percobaan ke-3 gagal, tampilkan laporan ringkas di konsol dan serahkan kendali kepada pengguna.
+4. Pembagian Fase Eksekusi Bertahap (Sprint Phasing):
+Fase 1 (Prioritas Utama Segera): Eksekusi Matriks Bab 17 (Poin 23 s/d 29: perbaikan sanitasi XML xlsx-local.js, anti-timpa brankas idb-gateway.js, unik ID pptx-local.js, RAG BM25 composer.js, perbaikan kontras gelap .studio-editor di artifact.css, dan precache sw.js).
+Fase 2: Eksekusi Perombakan Antarmuka Studio Rekayasa Bab 18 (Poin 30).
+Pembagian ini mencegah kegagalan eksekusi akibat beban refaktorisasi berlebih dalam satu kali rilis.
+5. Kepatuhan Nol Toleransi (Zero Placeholder & Test Integrity):
+Dilarang keras menyisipkan kode pura-pura (placeholder, // TODO, dummy function).
+Wajib mempertahankan 100% kelulusan 17 unit test (npm test) dan 0 error linter (npm run lint).
+18.10 Skenario Otomatisasi Mandiri Penuh Berbasis Perintah Tunggal (Zero-Friction Autonomous Workflows)
+1. Prinsip Otorisasi Awal Ekosistem (One-Time Delegated Authorization):
+Menghilangkan friksi tombol manual bertahap: Pengguna cukup memberikan izin otorisasi token GitHub sekali saja di menu Pengaturan Akun.
+Setelah izin awal aktif, seluruh instruksi lanjutan cukup dikendalikan murni melalui perintah teks percakapan tunggal tanpa memerlukan klik tombol persetujuan atau tombol publikasi manual berulang kali.
+2. Skenario 1: Pembuatan Fitur Penuh + Uji Sandbox + Auto-Push GitHub:
+Perintah Pengguna: 'Buatkan kalkulator diskon dengan tema gelap, lalu langsung commit dan push ke GitHub'.
+Rantai Tindakan Otonom Agen:
+1. Analisis kebutuhan & penentuan struktur berkas proyek mandiri.
+2. Menulis /index.html, /css/style.css (palet tema gelap #05080c), dan logika /js/script.js ke VFS.
+3. Mengeksekusi verifikasi sintaksis di sandbox lokal dan self-healing otomatis jika ada galat.
+4. Mengompilasi berkas ke Pratinjau Hidup.
+5. Menhitung delta hash berkas, menyusun pesan commit terstruktur ('feat: implementasi kalkulator diskon tema gelap'), dan mengeksekusi push otomatis via GitHub REST API.
+6. Melaporkan hasil kerja di chat dengan menyertakan hash commit resmi tanpa mengharuskan pengguna memencet tombol apa pun.
+3. Skenario 2: Suntingan Terarah + Auto-Commit Pembaruan:
+Perintah Pengguna: 'Ubah warna tombol menjadi oranye, dan sinkronkan ke github'.
+Rantai Tindakan Otonom Agen:
+1. Membaca /css/style.css dari VFS.
+2. Melakukan suntingan terarah (targeted patch) pada kelas tombol ke warna #ea580c dan menghasilkan catatan diff.
+3. Memperbarui Pratinjau Hidup secara seketika.
+4. Menyusun commit pembaruan baru dan mem-push otomatis ke cabang aktif repositori GitHub.
+4. Skenario 3: Penanganan Anggun Tanpa Token (Graceful Auto-Fallback):
+Jika pengguna meminta 'push ke github' namun belum menautkan token di Pengaturan, agen tidak boleh memunculkan galat teknis mentah.
+Agen secara otonom mengemas seluruh VFS menjadi berkas ZIP siap unduh dan membalas santun: 'Aplikasi sudah selesai dan saya kemas dalam berkas ZIP studio-rategoan.zip. Untuk push otomatis ke repositori di masa depan, tautkan token GitHub Anda sekali saja di Pengaturan.'
+5. Protokol Pelaporan Jejak Tindakan Otonom (Transparent Action Stepper):
+Setiap tahapan pengerjaan otonom wajib menampilkan lencana tindakan mikro di obrolan (🔍 Baca ➔ ✏️ Racik ➔ ⚡ Uji ➔ 📦 Kemas ➔ 🚀 Push) agar pengguna tetap memiliki kendali visibilitas penuh terhadap apa yang dikerjakan agen di balik layar.

@@ -195,6 +195,10 @@ const TEMPLATE = `
               <div class="set-row clickable" id="row-vault-restore">
                 <span>Pulihkan Cadangan Brankas</span>
               </div>
+              <div class="set-row" id="row-github">
+                <label>Token GitHub <input id="github-token" type="password" autocomplete="off"></label>
+                <label>Repo <input id="github-repo" autocomplete="off" placeholder="pemilik/repo"></label>
+              </div>
               <div class="set-row clickable" id="row-install" hidden>
                 <span>
                   <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -644,6 +648,18 @@ export const settings = {
     };
     $('row-backup').onclick = () => backup.export();
     $('row-restore').onclick = () => $('pick-restore').click();
+    const githubToken = $('github-token');
+    const githubRepo = $('github-repo');
+    if (githubToken && githubRepo) {
+      githubToken.value = localStorage.getItem('rategoan_github_token') || '';
+      githubRepo.value = localStorage.getItem('rategoan_github_repo') || '';
+      const saveGithub = () => {
+        localStorage.setItem('rategoan_github_token', githubToken.value.trim());
+        localStorage.setItem('rategoan_github_repo', githubRepo.value.trim());
+      };
+      githubToken.onchange = saveGithub;
+      githubRepo.onchange = saveGithub;
+    }
     const vaultExport = $('row-vault-export');
     if (vaultExport) vaultExport.onclick = async () => {
       if (!window.confirm('Unduh cadangan brankas perangkat ini?')) return;

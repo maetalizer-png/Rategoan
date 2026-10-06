@@ -71,9 +71,10 @@ function esc(s) {
     .replace(/>/g, '&gt;');
 }
 
-function textBox(x, y, w, h, text, size, bold) {
+function textBox(x, y, w, h, text, size, bold, id) {
+  const shape = id || 2;
   return (
-    '<p:sp><p:nvSpPr><p:cNvPr id="2" name="t"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>' +
+    '<p:sp><p:nvSpPr><p:cNvPr id="' + shape + '" name="t' + shape + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>' +
     '<p:spPr><a:xfrm><a:off x="' + x + '" y="' + y + '"/><a:ext cx="' + w + '" cy="' + h + '"/></a:xfrm>' +
     '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr>' +
     '<p:txBody><a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0"/><a:lstStyle/>' +
@@ -101,9 +102,9 @@ function bulletsBox(x, y, w, h, items) {
 function slideXml(slide) {
   const bg =
     '<p:bg><p:bgPr><a:solidFill><a:srgbClr val="0B0C0E"/></a:solidFill><a:effectLst/></p:bgPr></p:bg>';
-  let body = textBox(685800, 457200, 7772400, 914400, slide.title || '', slide.kind === 'cover' ? 3200 : 2400, true);
+  let body = textBox(685800, 457200, 7772400, 914400, slide.title || '', slide.kind === 'cover' ? 3200 : 2400, true, 2);
   if (slide.kind === 'cover' && slide.bullets && slide.bullets[0]) {
-    body += textBox(685800, 1600200, 7772400, 914400, slide.bullets[0], 1600, false);
+    body += textBox(685800, 1600200, 7772400, 914400, slide.bullets[0], 1600, false, 3);
   } else if (slide.kind !== 'cover') {
     body += bulletsBox(685800, 1371600, 7772400, 3657600, slide.bullets || []);
   }
