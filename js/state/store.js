@@ -1,5 +1,24 @@
 import { idbGateway } from '../../shared/idb-gateway.js';
 
+const MEDIA_CAP = 50 * 1024 * 1024;
+
+function sweepLooseMedia(sessions) {
+  const loose = [];
+  sessions.forEach((session) => {
+    if (session.projectId) return;
+    (session.messages || []).forEach((message) => {
+      if (message.attach && message.attach.full) loose.push(message);
+    });
+  });
+  let total = loose.reduce((sum, message) => sum + String(message.attach.full).length, 0);
+  loose.sort((a, b) => (a.time || 0) - (b.time || 0));
+  loose.forEach((message) => {
+    if (total <= MEDIA_CAP) return;
+    total -= String(message.attach.full).length;
+    message.attach = { ...message.attach, full: message.attach.thumb || '' };
+  });
+}
+
 export const store = {
   KEY: 'rategoan_sessions',
   state: { sessions: [], currentId: null },
@@ -27,6 +46,7 @@ export const store = {
         return { ...message, attach };
       }),
     }));
+    sweepLooseMedia(sessions);
     const json = JSON.stringify(sessions);
     const heavy = json.length > 80000;
     if (heavy) idbGateway.setList('chat-sessions', sessions);

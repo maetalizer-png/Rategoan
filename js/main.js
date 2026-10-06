@@ -156,6 +156,11 @@ document.addEventListener('rategoan:vault-open', () => store.init());
 
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => {
+    const hadController = !!navigator.serviceWorker.controller;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!hadController) return;
+      toast.show('Versi baru tersedia. Muat ulang', { onClick: () => location.reload() });
+    });
     navigator.serviceWorker.register('sw.js').then((reg) => {
       reg.addEventListener('updatefound', () => {
         const worker = reg.installing;

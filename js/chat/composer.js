@@ -41,8 +41,6 @@ import { cancelAgent } from '../agent/worker-bridge.js';
 import { hemat } from '../state/hemat.js';
 import { voice } from './voice.js';
 
-const PERSONA = 'Jawab langsung pada baris pertama. Jangan mulai dengan basa-basi seperti tentu, pertanyaan bagus, atau baik mari kita bahas. Bahasa Indonesia baku dan ringkas.';
-
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
 const WORK_RE = /\b(tugas|skripsi|makalah|rencana|langkah|proyek|pekerjaan|kerjakan)\b/i;
@@ -235,10 +233,37 @@ async function tryDiagramRequest(text) {
   return 'Diagram terbuka di panel. Bisa diperbesar dan diunduh sebagai SVG.';
 }
 
+function rowsOffThread(text) {
+  return new Promise((resolve) => {
+    let worker;
+    try {
+      worker = new Worker(new URL('../../raget/raget-agents/raget-worker.js', import.meta.url), { type: 'module' });
+    } catch (e) {
+      resolve(sheetFromText(text));
+      return;
+    }
+    const timer = setTimeout(() => {
+      worker.terminate();
+      resolve(sheetFromText(text));
+    }, 4000);
+    worker.onmessage = (event) => {
+      clearTimeout(timer);
+      worker.terminate();
+      resolve((event.data && event.data.rows) || sheetFromText(text));
+    };
+    worker.onerror = () => {
+      clearTimeout(timer);
+      worker.terminate();
+      resolve(sheetFromText(text));
+    };
+    worker.postMessage({ type: 'sheet', text });
+  });
+}
+
 async function tryWorkbook(text, session) {
   if (!/\b(excel|xlsx|rekap|pembukuan|anggaran|kas)\b/i.test(text)) return null;
   const material = lastAiText(session) || text;
-  const rows = sheetFromText(material);
+  const rows = String(material).length > 4000 ? await rowsOffThread(material) : sheetFromText(material);
   const mode = /\brata-rata|average\b/i.test(text) ? 'rata' : (/\bjika\b/i.test(text) ? 'jika' : 'jumlah');
   const bytes = buildXlsxBytes(rows, mode);
   downloadBytes(bytes, 'rekap.xlsx');
@@ -469,7 +494,7 @@ export const composer = {
     const imageNote = att && att.fileText ? '[Isi gambar atau berkas]\n' + String(att.fileText).slice(0, 4000) : '';
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [PERSONA, skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (livePlan && livePlan.parentNode) livePlan.remove();
     if (reply == null) {
       toast.show('AI belum terpasang');

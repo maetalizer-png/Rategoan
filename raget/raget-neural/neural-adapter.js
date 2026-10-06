@@ -18,9 +18,11 @@ function status() {
   };
 }
 
+const PERSONA = 'Jawab langsung pada baris pertama. Jangan mulai dengan basa-basi. Bahasa Indonesia baku dan ringkas.\n';
+
 async function ask(prompt, context) {
   const messages = (context && context.messages) || [];
-  const work = neuralProvider.generate(messages, prompt);
+  const work = neuralProvider.generate(messages, PERSONA + prompt);
   const reply = await Promise.race([
     work,
     new Promise((_, rej) => setTimeout(() => rej(new Error('Raget 1.0 timeout')), ASK_MS)),

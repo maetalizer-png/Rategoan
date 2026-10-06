@@ -1,3 +1,5 @@
+import { haptics } from './haptics.js';
+
 export function setActiveTab(container, isActive) {
   if (!container) return;
   container.querySelectorAll('button').forEach((b) => {
@@ -13,6 +15,7 @@ export function bindFilterTabs(container, onSelect) {
   container.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn || !container.contains(btn)) return;
+    haptics.tap(10);
     container.querySelectorAll('button').forEach((b) => {
       const isActive = b === btn;
       b.classList.toggle('on', isActive);

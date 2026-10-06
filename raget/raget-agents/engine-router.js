@@ -45,16 +45,16 @@ function isFastQuery(prompt) {
   if (t.length < 80 && /^(halo|hai|hei|selamat\s+(pagi|siang|sore|malam)|terima kasih|makasih)\b/i.test(t)) return true;
   if (/^(hitung|berapa)\b/i.test(t) && t.length < 160) return true;
   if (/^[\d\s+\-*/().,=]+$/.test(t)) return true;
+  if (/\b(km|meter|celsius|fahrenheit|rupiah|dolar|kg)\b/i.test(t) && /\d/.test(t) && t.length < 160) return true;
   return false;
 }
 
 function orderedAdapters(prompt) {
+  if (isFastQuery(prompt)) return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
   const pref = enginePreference.get();
   if (pref === 'neural') return [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
   if (pref === 'template') return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
-  return isFastQuery(prompt)
-    ? [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural]
-    : [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
+  return [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
 }
 
 async function ask(prompt, context) {
@@ -103,5 +103,6 @@ function statusAll() {
 export const engineRouter = Object.freeze({
   ask,
   statusAll,
+  isFastQuery,
   adapters: ADAPTERS_BY_ID,
 });

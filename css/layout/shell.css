@@ -68,6 +68,11 @@
   border-radius: 2px;
 }
 
+#view-chat {
+  max-height: var(--vvh, 100%);
+  min-height: 0;
+}
+
 #composer {
   flex-shrink: 0;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
