@@ -1147,3 +1147,10 @@ Hero, subjudul panjang, dan empat pil di layar kosong dihapus. Empat jalur rekay
 Riwayat sesi pindah ke laci, tidak lagi menjadi kolom yang menimpa obrolan.
 Desktop aktif membelah 42 persen obrolan dan 58 persen kanvas. Ponsel tetap satu kolom chat; kanvas adalah lembar 85vh.
 Cuplikan echo "Modul Aplikasi Siap" tidak dipasang. Perakitan scaffold, audit, analitik, dan uji satuan tetap jalan.
+
+## Revisi Drive 2026-10-06 23:12 — Studio Level 2 dan kanvas 50 persen
+
+Ponsel tidak memakai hamburger. Bilah atas berisi tombol kembali ke chat, judul Studio Kode di tengah, dan sesi baru. Komposer menempel di dasar sejak layar kosong. Kanvas adalah lembar 86vh yang hanya naik lewat kartu Buka Pratinjau.
+Desktop memakai sidebar tetap 260px (tautan enam pilar dan riwayat sesi sungguhan) serta header 56px. Kanvas tersembunyi sampai racikan, lalu mengambil 50 persen lebar aplikasi.
+Dua kartu inspirasi merakit dashboard keuangan (jumlah 760) dan skrip CSV Python. Telemetri menampilkan status sandbox, jumlah berkas, dan durasi, bukan angka FPS palsu.
+Cuplikan echo, alert, dan judul proyek palsu di dokumen Drive tidak dipasang.

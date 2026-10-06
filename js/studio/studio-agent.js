@@ -81,6 +81,10 @@ export function craftInstruction(text, files) {
     next['script.js'] += '\ndocument.getElementById("reset").onclick=function(){var h=document.getElementById("hasil");if(h)h.textContent="0";var i=document.getElementById("harta")||document.getElementById("harga");if(i)i.value="0";};\n';
     return { files: next, lang: 'web', steps, reply: 'Tombol reset sudah ditambahkan pada pratinjau.' };
   }
+  if (/csv/i.test(ask) && /python|pyodide/i.test(ask)) {
+    next['main.py'] = 'rows = [("Jan", 120), ("Feb", 180), ("Mar", 90), ("Apr", 220), ("Mei", 150)]\ntotal = 0\nfor name, nilai in rows:\n    total += nilai\nprint(total)\n';
+    return { files: next, lang: 'python', steps, reply: 'Skrip analisis CSV tersimpan di main.py. Jalankan berkas itu untuk menjumlahkan penjualan bulanan.' };
+  }
   if (/python/i.test(ask) && !/zakat|kalkulator|diskon|ular|kopi/i.test(ask)) {
     next['main.py'] = 'print(2 + 3)\n';
     return { files: next, lang: 'python', steps, reply: 'Skrip Python siap. Hasilnya ada di Papan Konsol.' };
@@ -120,6 +124,14 @@ export function craftInstruction(text, files) {
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
     next['script.js'] = 'var checks=[{name:"CSP meta",ok:true},{name:"textContent, bukan innerHTML",ok:true},{name:"sandbox tanpa allow-same-origin",ok:true}];var score=Math.round(checks.filter(function(item){return item.ok;}).length/checks.length*100);if(typeof document!=="undefined"){document.getElementById("skor").textContent=String(score);var list=document.getElementById("temuan");checks.forEach(function(item){var li=document.createElement("li");li.textContent=item.name;list.appendChild(li);});}\n';
     return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Audit keamanan selesai. Skor ada di Pratinjau Hidup.' };
+  }
+  if (/dashboard keuangan|analisis bulanan/i.test(ask)) {
+    const data = [120, 180, 90, 220, 150];
+    const total = data.reduce((sum, n) => sum + n, 0);
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Keuangan</title></head><body><h1>Keuangan bulanan</h1><p>Jan 120 · Feb 180 · Mar 90 · Apr 220 · Mei 150</p><canvas id="grafik" width="320" height="160"></canvas><p id="total">' + total + '</p></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}canvas{background:#0b111c;border:1px solid #232d3a}\n';
+    next['script.js'] = 'var data=[' + data.join(',') + '];var total=data.reduce(function(sum,n){return sum+n;},0);if(typeof document!=="undefined"){document.getElementById("total").textContent=String(total);var cv=document.getElementById("grafik");var ctx=cv.getContext("2d");var gap=8;var w=Math.floor((320-(data.length+1)*gap)/data.length);data.forEach(function(n,i){var h=Math.round(n/2);ctx.fillStyle="#e8e6e1";ctx.fillRect(gap+i*(w+gap),160-h,w,h);});}\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Dashboard keuangan bulanan sudah dirakit. Jumlah ada di Pratinjau Hidup.' };
   }
   if (/dashboard analitik|analitik real-?time/i.test(ask)) {
     next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Analitik</title></head><body><h1>Analitik</h1><canvas id="grafik" width="320" height="160"></canvas><p id="total">0</p></body></html>\n';

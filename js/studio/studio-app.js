@@ -37,8 +37,28 @@ function showTab(name) {
 
 function openSheet() {
   const canvas = $('studio-canvas-pane');
-  if (canvas) canvas.classList.add('is-sheet-open');
+  const narrow = window.matchMedia('(max-width: 1023px)').matches;
+  if (narrow) {
+    if (canvas) canvas.classList.add('is-sheet-open');
+  } else {
+    $('studio-app').classList.add('is-split');
+  }
   showTab('preview');
+}
+
+function revealDesktop() {
+  if (window.matchMedia('(min-width: 1024px)').matches) $('studio-app').classList.add('is-split');
+}
+
+function paintTelemetry(status, ms) {
+  const sandbox = $('stat-sandbox');
+  if (sandbox && status) sandbox.textContent = status;
+  const files = $('stat-files');
+  if (files) files.textContent = String(vfs.list().length);
+  const dur = $('stat-ms');
+  if (dur && ms != null) dur.textContent = ms + ' ms';
+  const runtime = $('stat-runtime');
+  if (runtime && status) runtime.textContent = status;
 }
 
 function appendConsole(line) {
@@ -132,6 +152,7 @@ function paintHistory(rows) {
       $('studio-project-name').textContent = row.title || 'Proyek';
       lastBefore = vfs.flat();
       paintTree();
+      revealDesktop();
       mountPreview($('studio-preview-frame'), vfs.flat());
     };
     box.appendChild(btn);
@@ -194,6 +215,7 @@ async function finish(slot, thoughts, started, note) {
   slot.appendChild(line);
   slot.appendChild(actions);
   appendConsole('Selesai dalam ' + (Date.now() - started) + ' ms.');
+  paintTelemetry('Selesai', Date.now() - started);
 }
 
 async function applyCraft(text) {
@@ -202,6 +224,7 @@ async function applyCraft(text) {
   touched = true;
   const started = Date.now();
   $('studio-app').classList.add('is-active');
+  paintTelemetry('Meracik');
   const log = $('messages');
   const user = document.createElement('div');
   user.className = 'msg user';
@@ -231,6 +254,7 @@ async function applyCraft(text) {
       Object.keys(pulled.files).forEach((path) => vfs.write(path, pulled.files[path]));
       await finish(slot, thoughts, started, 'Berkas repositori sudah masuk ke jendela pemantauan.');
       paintTree();
+      revealDesktop();
       mountPreview($('studio-preview-frame'), vfs.flat());
       showTab('preview');
       return;
@@ -266,11 +290,13 @@ async function applyCraft(text) {
         await step('Perbaikan mandiri ' + (i + 1));
       }
       vfs.write('/js/script.js', healed);
+      revealDesktop();
       mountPreview($('studio-preview-frame'), vfs.flat());
       showTab('preview');
     } else {
       appendConsole('Skrip Python tersimpan di main.py.');
       viewPath = '/main.py';
+      revealDesktop();
       showTab('files');
     }
     let note = plan.reply;
@@ -293,6 +319,9 @@ async function applyCraft(text) {
     if (changed) viewPath = changed;
     paintTree();
     $('studio-project-name').textContent = text.slice(0, 42);
+    const crumb = $('crumb-project');
+    if (crumb) crumb.textContent = text.slice(0, 42);
+    paintTelemetry('Selesai', Date.now() - started);
     await rememberSession(text);
   } finally {
     busy = false;
@@ -312,6 +341,9 @@ function blankProject() {
   const log = $('messages');
   if (log) log.textContent = '';
   $('studio-app').classList.remove('is-active');
+  $('studio-app').classList.remove('is-split');
+  const canvas = $('studio-canvas-pane');
+  if (canvas) canvas.classList.remove('is-sheet-open');
   const side = $('studio-sidebar');
   if (side) side.classList.remove('is-open');
   $('studio-project-name').textContent = 'Proyek';
@@ -342,16 +374,8 @@ function bind() {
     const sheet = $('studio-plus-sheet');
     if (sheet) sheet.hidden = !sheet.hidden;
   };
-  const hist = $('btn-studio-history');
-  if (hist) hist.onclick = () => $('studio-sidebar').classList.toggle('is-open');
-  const fresh = $('btn-new-project');
+  const fresh = $('btn-new-chat');
   if (fresh) fresh.onclick = () => blankProject();
-  const toggle = $('btn-toggle-canvas');
-  if (toggle) toggle.onclick = () => {
-    const narrow = window.matchMedia('(max-width: 1023px)').matches;
-    if (narrow) $('studio-canvas-pane').classList.toggle('is-sheet-open');
-    else $('studio-app').classList.toggle('is-canvas-hidden');
-  };
   const zipBtn = $('btn-studio-zip');
   if (zipBtn) zipBtn.onclick = () => { closePlus(); $('studio-open-zip').click(); };
   $('btn-send').onclick = () => {
