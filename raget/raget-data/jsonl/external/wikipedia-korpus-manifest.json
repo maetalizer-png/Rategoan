@@ -50,5 +50,5 @@
     "idwiki-chunks-128.txt (~1 GB) - hasil tokenisasi+chunking siap training",
     "bpe-tokenizer.json - merges/vocab BPE (disimpan ULANG di dalam checkpoint .safetensors final via metadata, jadi tidak hilang meski file ini sendiri tidak dikomit terpisah)"
   ],
-  "sampelDikomit": "raget-data/jsonl/external/wikipedia-korpus-sample-20-artikel.jsonl (20 artikel pertama hasil extract+clean, bukti kualitas nyata)"
+  "sampelDikomit": "dihapus dari repo klien; korpus resmi ada di STATUS-KORPUS-LISENSI.md"
 }

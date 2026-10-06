@@ -210,6 +210,15 @@ export const LOCAL_SERVICES = {
   local_agenda_routine: 'agenda_',
 };
 
+export function toolContract() {
+  return Object.keys(TOOLS).map((name) => ({
+    name,
+    description: name.replace(/_/g, ' '),
+    parameters: ['payload'],
+    execute: (payload) => TOOLS[name](payload || {}),
+  }));
+}
+
 export function isLocalTool(name) {
   return Object.prototype.hasOwnProperty.call(TOOLS, name);
 }

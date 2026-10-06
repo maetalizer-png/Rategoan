@@ -1,8 +1,34 @@
+import { vaultKey } from '../../shared/vault-key.js';
+
 const DB_NAME = 'raget_idb';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const OBJECT_STORE = 'stores';
+const MEDIA_CAP = 50 * 1024 * 1024;
 
 let dbPromise = null;
+
+function b64(bytes) {
+  let out = '';
+  bytes.forEach((n) => { out += String.fromCharCode(n); });
+  return btoa(out);
+}
+
+function unb64(text) {
+  return Uint8Array.from(atob(text), (ch) => ch.charCodeAt(0));
+}
+
+export async function packList(key, list) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const raw = new TextEncoder().encode(JSON.stringify(list));
+  const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, raw));
+  return { enc: 1, iv: b64(iv), data: b64(cipher) };
+}
+
+export async function unpackList(key, row) {
+  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(row.iv) }, key, unb64(row.data));
+  const parsed = JSON.parse(new TextDecoder().decode(plain));
+  return Array.isArray(parsed) ? parsed : [];
+}
 
 function openDb() {
   if (dbPromise) return dbPromise;
@@ -24,40 +50,75 @@ function openDb() {
   return dbPromise;
 }
 
-async function getList(key) {
-  try {
-    const db = await openDb();
-    return await new Promise((resolve, reject) => {
-      const tx = db.transaction(OBJECT_STORE, 'readonly');
-      const req = tx.objectStore(OBJECT_STORE).get(key);
-      req.onsuccess = () => resolve((req.result && req.result.list) || []);
-      req.onerror = () => reject(req.error);
-    });
-  } catch (e) {
-    return [];
+function fitMedia(list) {
+  let payload = Array.isArray(list) ? list : [];
+  let raw = JSON.stringify(payload);
+  while (raw.length > MEDIA_CAP && payload.length > 1) {
+    payload = payload.slice(Math.ceil(payload.length / 2));
+    raw = JSON.stringify(payload);
   }
+  return payload;
 }
 
-function putList(db, key, list) {
+async function readRow(key) {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(OBJECT_STORE, 'readonly');
+    const req = tx.objectStore(OBJECT_STORE).get(key);
+    req.onsuccess = () => resolve(req.result || null);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function putRecord(db, record) {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(OBJECT_STORE, 'readwrite');
-    tx.objectStore(OBJECT_STORE).put({ key, list });
+    tx.objectStore(OBJECT_STORE).put(record);
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);
   });
 }
 
+async function allRows() {
+  const db = await openDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(OBJECT_STORE, 'readonly');
+    const req = tx.objectStore(OBJECT_STORE).getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function getList(key) {
+  try {
+    const row = await readRow(key);
+    if (!row) return [];
+    if (row.enc) {
+      const held = vaultKey.current();
+      if (!held) return [];
+      return await unpackList(held, row);
+    }
+    return row.list || [];
+  } catch (e) {
+    return [];
+  }
+}
+
 async function setList(key, list) {
   try {
+    const payload = fitMedia(list);
     const db = await openDb();
+    const held = vaultKey.current();
+    const record = held ? { key, ...(await packList(held, payload)) } : { key, list: payload };
     try {
-      await putList(db, key, list);
+      await putRecord(db, record);
     } catch (e) {
-      let shrunk = list;
+      let shrunk = payload;
       while (shrunk.length > 1) {
         shrunk = shrunk.slice(Math.ceil(shrunk.length / 2));
+        const next = held ? { key, ...(await packList(held, shrunk)) } : { key, list: shrunk };
         try {
-          await putList(db, key, shrunk);
+          await putRecord(db, next);
           return;
         } catch (e2) {
           continue;
@@ -67,4 +128,33 @@ async function setList(key, list) {
   } catch (e) { console.warn('[Rategoan Fallback] idb-gateway:', e); }
 }
 
-export const idbGateway = Object.freeze({ getList, setList });
+async function sealAll() {
+  const held = vaultKey.current();
+  if (!held) return 0;
+  const db = await openDb();
+  const rows = await allRows();
+  let count = 0;
+  for (const row of rows) {
+    if (!row || row.enc) continue;
+    await putRecord(db, { key: row.key, ...(await packList(held, row.list || [])) });
+    count += 1;
+  }
+  return count;
+}
+
+async function unsealAll() {
+  const held = vaultKey.current();
+  if (!held) return 0;
+  const db = await openDb();
+  const rows = await allRows();
+  let count = 0;
+  for (const row of rows) {
+    if (!row || !row.enc) continue;
+    const list = await unpackList(held, row);
+    await putRecord(db, { key: row.key, list });
+    count += 1;
+  }
+  return count;
+}
+
+export const idbGateway = Object.freeze({ getList, setList, sealAll, unsealAll });

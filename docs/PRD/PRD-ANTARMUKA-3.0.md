@@ -1,11 +1,16 @@
-<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-05T23:51:03Z. -->
+<!-- Sumber: Google Drive "PRD antarmuka 3.0" file 1mpemubzthUoDt3Hp3FaWXGoW47tz21RqwLA1wG5_5iw, diubah 2026-10-06T02:34:27Z. -->
 
 PRD ANTARMUKA 3.0 — MASTER CETAK BIRU REKAYASA KEDAULATAN & KEDALAMAN MESIN FITUR (EDISI FINAL KANONIKAL)
 Status: Cetak Biru Induk Tunggal Aktif (Sovereign AI Workstation)
 Versi: 3.0.0-CANONICAL-SOVEREIGN-MASTER | Tanggal: Oktober 2026
 Dokumen Kanonikal Terdahulu: PRD antarmuka 1.0 & PRD antarmuka 2.0 (STATUS: DIKONSOLIDASI & DISEGEL)
 Repositori Sasaran: Rategoan (egoan.vercel.app / rategoan-main)
-# BAB 1: DOKTRIN KEDAULATAN MUTLAK & PONDASI FUNDAMENTAL ARSITEKTUR
+# BAB 1: DOKTRIN KEDAULATAN MUTLAK & PONDASI FUNDAMENTAL ARSITEKTUR WORKSTATION
+## 1.0 Batasan Wilayah & Ruang Lingkup PRD Antarmuka 3.0
+Eksklusivitas Repositori Aplikasi: Dokumen ini MURNI dan EKSKLUSIF mengatur wilayah REPOSITORI APLIKASI (Rategoan PWA, casing UI/UX, sasis workstation, komposer, lembar lampiran, 6 pilar workstation, 8 mesin fitur sisi klien, enkripsi database lokal, dan runtime peramban pengonsumsi bobot).
+Pemisahan Batas Domain Eksklusif:
+Sains Neural & Pelatihan GPU Cloud: Urusan arsitektur pre-training, formula loss DPO, mutasi Evol-Instruct, dan cluster pelatihan GPU adalah ranah eksklusif dari PRD-RAGET-NEURAL.md dan FONDASI-TEORI-RAGET.md.
+Penambangan Data & Rilis Korpus: Urusan penambangan data mentah, kurasi lantai korpus, hosting rilis, dan lisensi adalah ranah eksklusif dari PRD-RELEASE.md dan STATUS-KORPUS-LISENSI.md.
 ## 1.1 Doktrin Kedaulatan Tanpa Model Pihak Ketiga (Zero External AI API)
 Satu Model Berdaulat: Rategoan beroperasi murni di atas model ciptaan sendiri bernama Raget 1.0. Dilarang keras menghubungkan API pihak ketiga (OpenAI, Gemini, Claude) maupun runtime luar seperti Ollama.
 Pondasi Arsitektur Dual-Brain (Dua Mesin di Balik Layar):
@@ -322,8 +327,8 @@ Penguatan: Pasang meta tag CSP ketat di <head> index.html:
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
 Ini mengunci peramban agar 100% menolak koneksi transmisi data ke domain luar manapun, menjamin kedaulatan data lokal secara mutlak.
 Validasi Alur Kerja Fitur Modern (Modern AI Workspace Simulation):
-# BAB 10: CETAK BIRU ADOPSI 15 TEKNOLOGI FRONTIER AI, ARSITEKTUR MESIN NEURAL RAGET 1.0, DAN 4 STUDI KASUS REKAYASA END-TO-END
-## 10.1 Arsitektur Jaringan Saraf Tiruan Modern Raget 1.0 (Frontier Neural Core)
+# BAB 10: CETAK BIRU ENGINE RUNTIME SISI KLIEN RAGET 1.0 & 4 STUDI KASUS REKAYASA END-TO-END
+## 10.1 Arsitektur Runtime Peramban Sisi Klien (Client-Side Neural Core Runtime)
 Rotary Position Embedding (RoPE):
 Menggantikan embedding posisi absolut sinusoidal lama. Menggunakan rotasi matriks 2D ortogonal pada pasangan dimensi query dan key.
 Dampak: Memungkinkan Raget 1.0 melakukan ekstrapolasi panjang konteks melampaui ukuran jendela pelatihan (dari 2.048 token hingga 16.384 token) secara stabil tanpa distorsi atensi.
@@ -337,7 +342,7 @@ Compact Mixture-of-Experts (MoE 4x250M):
 Membagi lapisan FFN menjadi 4 jaringan ahli independen berkapasitas 250M parameter, di mana router gating hanya mengaktifkan 2 ahli paling relevan per token secara dinamis.
 Dampak: Memberikan kapasitas wawasan setara model 1 Miliar parameter dengan beban komputasi dan kecepatan eksekusi seringan model 500M parameter saat dijalankan luring.
 ## 10.2 Mesin Inferensi Cepat & Akselerasi Perangkat Klien (Edge Runtime Engine)
-Paged KV-Cache Memory Management:
+Pipelining Memori KV-Cache Terhalaman (Paged KV-Cache):
 Mengalokasikan memori Key-Value cache secara modular dalam blok-blok halaman virtual (mirip paging pada sistem operasi memori virtual), mencegah fragmentasi heap memori RAM di JavaScript dan WebAssembly.
 Speculative Decoding Berjenjang (Dual-Brain Speculative Pipeline):
 Memanfaatkan Jalur Cepat Sistem 1 atau sub-model neural mini (Raget 50M) untuk memprediksi draf kandidat 4–5 token berikutnya dalam hitungan mikrodetik, kemudian model neural utama (Raget 1B) memverifikasi seluruh batch kandidat tersebut dalam satu lintasan komputasi paralel. Menghasilkan peningkatan kecepatan ketik balasan (tokens/second) sebesar 2x–3x lipat di layar ponsel.
@@ -345,11 +350,6 @@ Akselerasi Perangkat Keras WebGPU via WGSL Compute Shaders:
 Memindahkan perkalian matriks tensor (GEMM) dari CPU JavaScript ke chip grafis terintegrasi (GPU ponsel) melalui WebGPU Compute Shaders (WGSL), menghasilkan inferensi hingga 15x lebih responsif dan hemat daya baterai.
 Kuantisasi Ekstrem BitNet b1.58 / Int4 Matriks:
 Mengompresi bobot safetensors ke dalam representasi terkuantisasi 4-bit (int4) dan arsitektur ternary BitNet {-1, 0, 1}. Menghilangkan kebutuhan perkalian titik kambang (floating-point multiply) yang rakus daya, digantikan operasi penjumlahan biner murni.
-## 10.3 Penyelarasan Pasca-Pelatihan & Kurasi Data Sintetis (Post-Training & Alignment)
-Direct Preference Optimization (DPO):
-Menyelaraskan model instruksi Raget 1.0 langsung menggunakan pasangan respons terpilih (chosen) dan tertolak (rejected) melalui fungsi rugi cross-entropy implisit, meniadakan kerumitan pelatihan model reward terpisah (RLHF/PPO).
-Evol-Instruct & Textbook-Quality Synthetic Data Pipeline:
-Menerapkan algoritma mutasi instruksi terpandu (meningkatkan kompleksitas nalar, studi kasus hukum, penalaran matematika bertingkat) pada data penampungan (Tingkat 2) untuk menghasilkan dataset instruksi bahasa Indonesia berstandar buku teks tertinggi.
 ## 10.4 Memori Berjenjang & Temu Kembali Generasi Baru (Advanced Hybrid RAG)
 Pencarian Hibrida Mandiri (Hybrid Search: BM25 + Dense Vector Reranking via RRF):
 Mengombinasikan kekuatan pencarian leksikal eksak BM25 (untuk nama orang, kode pasal, tanggal, istilah teknis) dengan pencarian makna semantik vektor kosinus. Skor digabungkan menggunakan Reciprocal Rank Fusion: RRF_Score = 1/(60 + Rank_BM25) + 1/(60 + Rank_Vector). Menghilangkan kesalahan temu kembali dan halusinasi kutipan.
@@ -427,25 +427,7 @@ Arsitektur Pemetaan GPU Bergerak (Mobile GPU Tile-Based Rendering via WebGPU):
 GPU Target: Adreno 610/642L/730 dan Mali-G57/G77/G710 yang mendukung WebGPU.
 Ukuran Workgroup WGSL: Menggunakan ukuran workgroup @workgroup_size(64, 1, 1) yang optimal untuk arsitektur Tile-Based Deferred Rendering (TBDR) pada ponsel pintar.
 Penyimpanan Buffer Bobot: Menggunakan GPUBuffer bertipe STORAGE | COPY_DST dengan format terkuantisasi uint32 untuk menghemat bandwidth memori VRAM seluler.
-## 10.9 Formulasi Matematika & Spesifikasi Rekayasa 15 Teknologi Inti
-Formulasi Rotary Position Embedding (RoPE):
-Matriks rotasi ortogonal diaplikasikan pada vektor query q dan key k pada posisi indeks m:
-R_{Θ, m}^d = diag(R_{θ_1, m}, R_{θ_2, m}, ..., R_{θ_{d/2}, m})
-di mana R_{θ_i, m} = [[cos(mθ_i), -sin(mθ_i)], [sin(mθ_i), cos(mθ_i)]] dengan frekuensi basis θ_i = 10000^{-2(i-1)/d}.
-Memastikan atensi antara token pada posisi m dan n murni bergantung pada jarak relatif (m - n), menjamin stabilitas ekstrapolasi konteks hingga 16K token.
-Formulasi Grouped-Query Attention (GQA) & Ukuran KV-Cache:
-Jika H_Q adalah jumlah kepala query (16) dan H_{KV} adalah jumlah kepala key-value (4), maka rasio kelompok adalah G = H_Q / H_{KV} = 4.
-Kebutuhan memori KV-Cache per token (presisi 16-bit):
-Memori per token = 2 × L × H_{KV} × d_{head} × 2 bytes
-Untuk model 24 layer dengan d_{head} = 64: pemakaian RAM terpangkas dari 196 KB/token (MHA) menjadi 49 KB/token (GQA 4:1), menghemat 75% RAM ponsel.
-Dimensi Feed-Forward Network dengan SwiGLU:
-Lapisan FFN SwiGLU menggunakan dimensi tersembunyi:
-d_{ffn} = floor((8 / 3) * d_{model})
-diikuti kuantisasi kelipatan 256 terdekat untuk efisiensi komputasi SIMD Wasm/WebGPU.
-Formulasi Direct Preference Optimization (DPO):
-Penyelarasan preferensi model π_θ terhadap model referensi π_{ref} dihitung dengan meminimalkan fungsi rugi:
-L_{DPO}(θ; π_{ref}) = -E_{(x, y_w, y_l)} [ log σ ( β log(π_θ(y_w|x) / π_{ref}(y_w|x)) - β log(π_θ(y_l|x) / π_{ref}(y_l|x)) ) ]
-di mana y_w adalah jawaban terpilih (bahasa Indonesia santun, faktual, tanpa halusinasi) dan y_l adalah jawaban tertolak.
+## 10.9 Spesifikasi Rekayasa Codebase & Parameter Runtime Aplikasi
 Algoritma Reciprocal Rank Fusion (RRF) untuk Hybrid Search:
 Peringkat akhir dokumen d dari hasil BM25 dan Dense Vector digabungkan melalui:
 RRF(d) = 1 / (k + Rank_{BM25}(d)) + 1 / (k + Rank_{Vector}(d))
@@ -462,3 +444,104 @@ Menghubungkan ekstraksi entitas GraphRAG pada berkas rujukan proyek aktif di js/
 Tahap 3: Runtime WebGPU & Penyatuan Raget 1.0 Neural:
 Membangun modul raget/raget-neural/runtime/webgpu-runner.js dengan shader WGSL untuk akselerasi komputasi bobot safetensors di peramban.
 Menerapkan Paged KV-Cache untuk streaming token teks berkecepatan tinggi luring di perangkat seluler.
+# BAB 11: DOKTRIN POSISIONING DUAL-ANCHOR, STANDAR PERSONA TAKTIS ANTI-FILLER, ENKRIPSI DATABASE PIN, DAN INFRASTRUKTUR SISI KLIEN AGNOSTIK PARAMETER 1B–2B
+## 11.1 Doktrin Posisioning Pasar "Dual-Anchor" (Dua Senjata Kedaulatan)
+## 11.0 Penegakan Batasan Wilayah Workstation
+Fokus Tajam Repositori Aplikasi: Bab ini menegaskan aturan operasi dan arsitektur pengonsumsi bobot di dalam repositori aplikasi. Pengembangan model neural eksternal dan pipelines data dilarang mencampuri implementasi di repositori ini.
+Jangkar 1: Kerahasiaan Dokumen Sensitif 100% Luring (Zero Cloud Leakage):
+Rategoan diposisikan sebagai ruang kerja aman mutlak bagi kalangan profesional (pengacara, akuntan, dokter, peneliti, mahasiswa, aparatur sipil) yang menangani dokumen rahasia (kontrak bisnis, putusan pengadilan, rekam medis, skripsi/tesis, laporan keuangan).
+Seluruh pemrosesan, ekstraksi, dan temu kembali dokumen (Hybrid RAG) berjalan murni di memori RAM perangkat tanpa ada sebutir data pun yang keluar ke server internet pihak ketiga.
+Jangkar 2: Generator Berkas Fisik Nyata Sekali Ketuk (Bukan Sekadar Chatbot Teks):
+Rategoan bukan chatbot percakapan biasa yang hanya memuntahkan teks obrolan mentah untuk disalin-tempel manual.
+Rategoan adalah workstation yang memproduksi berkas fisik siap pakai: presentasi PowerPoint biner asli (.pptx), lembar kerja berumus Excel (.xlsx), naskah kajian Word (.docx), dan arsip proyek (.zip).
+## 11.2 Standar Persona & Gaya Tutur Kata AI (Pragmatic Executive & Anti-Filler Policy)
+Kebijakan Nol Basa-Basi (Zero Conversational Filler):
+Model Raget dilarang keras membuka respons dengan kalimat pembuka klise yang membuang ruang layar ponsel dan memboroskan token (contoh dilarang: "Tentu saja! Saya sangat senang bisa membantu Anda...", "Pertanyaan yang sangat bagus sekali...", "Baik, mari kita bahas hal ini...").
+Prinsip Jawaban Langsung ke Solusi (Lead-with-Solution / Answer-First):
+Setiap balasan wajib langsung mengemukakan kesimpulan inti atau solusi utama pada baris pertama, kemudian diikuti oleh penjabaran terstruktur:
+Butir-butir poin bernomor urut logis.
+Tabel perbandingan komparatif jika menyangkut multi-faktor.
+Blok kode atau rumus matematika yang bersih tanpa pengantar berlebihan.
+Bahasa Indonesia Formal-Modern Berwibawa:
+Tutur bahasa menggunakan bahasa Indonesia baku, jernih, tajam, dan percaya diri; tidak menggunakan bahasa kaku perundang-undangan kuno, dan tidak menggunakan bahasa gaul santai yang mengurangi kredibilitas workstation profesional.
+## 11.3 Infrastruktur Skalabel Agnostik Parameter (Rentang Fleksibel 1B, 1.5B, hingga 2B)
+Prinsip Rekayasa: Kesiapan Jalur Rel Sebelum Menentukan Ukuran Lokomotif:
+Sistem tidak mengunci secara kaku ukuran model akhir, melainkan membangun infrastruktur peramban yang fleksibel dan tangguh untuk menampung rentang parameter 1 Miliar (1B), 1.5 Miliar (1.5B), hingga 2 Miliar (2B) parameter.
+Ukuran model final akan ditentukan berdasarkan hasil pengujian termal, kelancaran FPS, dan latensi komputasi nyata pada peramban ponsel.
+Batas Anggaran Memori (Memory Budgeting per Tier):
+Tier 1B (Kuantisasi Int4): Kebutuhan bobot ~600 MB VRAM. Sangat ringan, responsivitas tinggi pada ponsel kelas menengah (RAM 4 GB).
+Tier 1.5B (Kuantisasi Int4): Kebutuhan bobot ~900 MB VRAM. Keseimbangan optimal antara penalaran analitis dan kecepatan ketik.
+Tier 2B (Kuantisasi Int4): Kebutuhan bobot ~1.2 GB VRAM. Batas atas performa maksimal di bawah batas V8 heap ceiling ponsel kelas atas (RAM 6 GB–8 GB).
+Pondasi Arsitektur Universal Bersama:
+Seluruh varian ukuran (1B, 1.5B, 2B) menggunakan cetak biru arsitektur yang sama persis: RoPE (Rotary Position Embedding) untuk konteks panjang hingga 16K token, GQA 4:1 (Grouped-Query Attention) untuk memangkas 75% KV-cache, aktivasi SwiGLU, dan eksekusi GPU lokal via WebGPU WGSL shaders.
+## 11.5 Penguatan Enkripsi Database Berbasis PIN (Database-Level AES-GCM 256)
+Evolusi dari Kunci UI Menjadi Kunci Data Riil:
+Mengubah mekanisme penguncian PIN dari sekadar penutup antarmuka (pin-overlay.hidden) menjadi enkripsi simetris nyata pada data persisten.
+Mekanisme Kriptografi Database Lokal:
+Saat pengguna mengaktifkan PIN, sistem membangkitkan kunci enkripsi simetris AES-GCM 256-bit menggunakan fungsi derivasi kunci PBKDF2 (SHA-256, 100.000 iterasi dengan salt acak 16 byte).
+Seluruh payload sesi percakapan, dokumen lampiran, dan artefak yang ditulis ke IndexedDB (raget_idb) dienkripsi menjadi ciphertext sebelum disimpan.
+Saat aplikasi dibuka kembali, data hanya dapat didekripsi ke dalam memori kerja setelah pengguna memasukkan PIN yang valid. Jika peramban dibuka oleh pihak lain melalui Developer Tools, seluruh data di IndexedDB berstatus terenkripsi dan tidak dapat dibaca.
+# BAB 12: PENYEMPURNAAN 4 PILAR WORKSTATION (RUMAH, KERANGKA, LISTRIK, MESIN) & MANDAT PEMBERSIHAN DOKUMEN ARSIP FOLDER RAGET (ANTI-HALUSINASI AI)
+## 12.1 Penyempurnaan 4 Pilar Utama Rekayasa Workstation
+### 1. Pilar 1: Rumah (Casing, Antarmuka, Ergonomi PWA & Layar Seluler)
+Sinkronisasi Dinamis Keyboard Virtual (Visual Viewport API):
+Pada js/main.js dan css/layout/shell.css, kunci variabel --vvh dan posisi bilah komposer input secara real-time terhadap window.visualViewport.height.
+Mencegah pergeseran tata letak canggung (layout jump) atau komposer tertutup keyboard saat mengetik di peramban seluler Android dan iOS.
+Respon Sentuhan Mikro (Tactile Haptic Feedback):
+Integrasikan getaran mikro peramban (navigator.vibrate(10)) pada event pengiriman pesan, penyalinan teks/kode, dan penggantian tab/filter untuk sensasi aplikasi native yang solid.
+Pemberitahuan Pembaruan PWA yang Anggun (Graceful Service Worker Lifecycle):
+Di sw.js, tangani event controllerchange dengan menampilkan toast pembaruan non-intrusif: "Versi baru tersedia. [Muat Ulang]", tanpa pernah memaksa refresh otomatis di tengah interaksi pengguna.
+### 2. Pilar 2: Kerangka (Sasis, Kriptografi Database & Retensi Memori)
+Kriptografi Nyata Database Lokal (AES-GCM 256 di idb-gateway.js):
+Hubungkan modul pin.js dengan idb-gateway.js. Jika PIN aktif, seluruh payload sesi percakapan, dokumen lampiran, dan artefak dienkripsi simetris menggunakan AES-GCM 256-bit dengan kunci turunan PBKDF2 sebelum ditulis ke IndexedDB (raget_idb).
+Menghilangkan celah di mana data masih berstatus plain-text saat dibuka via browser Developer Tools.
+Manajemen Kuota Lampiran & Pembersihan Otomatis (Attachment Garbage Collection):
+Batasi total kuota lampiran media sementara di IndexedDB maksimal 50 MB. Berkas media lama yang tidak disematkan ke Proyek otomatis dibersihkan secara berkala agar tidak memenuhi kapasitas penyimpanan internal perangkat pengguna.
+Pipa Migrasi Skema Aman (Zero-Data-Loss IDB Versioning):
+Standardisasi event onupgradeneeded pada IndexedDB dengan versioning bertingkat untuk menjamin data sesi lama pengguna tidak pernah korup saat terjadi pembaruan rilis aplikasi.
+### 3. Pilar 3: Instalasi Listrik (Wiring Harness, Dedicated Web Worker & Tool Contract)
+Offloading Komputasi Berat ke Dedicated Background Worker (raget-worker.js):
+Pindahkan komputasi berat (pencarian Hybrid RAG, pemindaian BM25 dokumen tebal, ekstraksi tabel Excel, dan kompresi ZIP) dari main UI thread ke Web Worker di latar belakang.
+Memastikan thread antarmuka peramban tetap berjalan konstan pada 60 FPS tanpa getaran atau pembekuan layar (zero stutter).
+Standarisasi Kontrak Antarmuka Alat Klien (Client-Side Tool Contract):
+Standardisasi 29 alat mandiri di connector-hub.js ke dalam format skema ketat { name, description, parameters, execute } agar siap diintegrasikan secara instan dengan mesin model AI mana pun (Sistem 1 maupun model neural 1B–2B) tanpa perombakan kode.
+### 4. Pilar 4: Mesin (Ruang Runtime Klien WebGPU & Paged KV-Cache di Repositori)
+Modul Pemuat Bobot WebGPU (raget/raget-neural/runtime/webgpu-runner.js):
+Siapkan sasis runtime WebGPU WGSL yang mampu membaca dan memetakan bobot terkuantisasi (int4) langsung ke dalam memori VRAM GPU ponsel (Adreno/Mali).
+Buffer Atensi Paged KV-Cache:
+Bangun struktur virtual page table (16 token per blok) di JavaScript/Wasm agar sesi percakapan panjang tidak memicu fragmentasi atau kebocoran memori heap RAM.
+Penajaman Logika Dual-Brain Router:
+Sapaan, konversi, kalkulus, dan 260 database pengetahuan JSON diselesaikan 100% di Sistem 1 (<10ms, hemat baterai), sedangkan kueri penalaran mendalam dialirkan ke Sistem 2.
+## 12.2 Mandat Pembersihan & Pelabelan Arsip Folder raget/ (Anti-Halusinasi AI Pengamat)
+### 1. Akar Masalah Keracunan Konteks di Folder raget/
+Model AI eksternal (seperti Claude dan Qwen) membaca berkas-berkas catatan masa lalu di dalam repositori dan mengalami halusinasi parah:
+Di raget/raget-devlog/neural/: Terdapat laporan kuno seperti training-report-massive200m-round8-colab-gpu.json bertanggal 3 September 2026 dengan held-out perplexity 825.55 dan teks keluaran rusak, serta compute-budget-report.json bertanggal 22 Agustus 2026. Hal ini membuat AI luar menyimpulkan bahwa model Rategoan mandek di "Round 8" dan keluarannya tidak koheren.
+Di raget/raget-data/jsonl/external/: Terdapat manifest dan sampel artikel korpus lama yang menimbulkan ambiguitas terhadap status resmi 17,65 Miliar BPE token.
+Di raget/raget-tools/arsip-nonaktif/: Berisi laporan benchmark usang.
+### 2. Tindakan Eksekusi Berkas demi Berkas untuk Grok Build
+Pemasangan Dokumen Pelindung di raget/README.md:
+Buat berkas raget/README.md dengan deklarasi tegas:
+# PANDUAN STRUKTUR MODUL RAGET
+
+Folder ini menampung modul kecerdasan berdaulat Rategoan:
+- `raget-data/json/` : 260 Database Pengetahuan Deterministik Kanonikal Aktif (Sistem 1 Fast-Path <10ms).
+- `raget-vault/`     : Mesin RAG Hibrida Lokal (BM25 + TF-IDF Cosine via RRF).
+- `raget-agents/`    : Orkestrasi Agenik, Sub-goal Planner, dan Tool Dispatcher.
+- `raget-neural/`    : Runtime Pemuat Bobot Model Sisi Klien (WebGPU / Wasm).
+- `raget-devlog/`    : ARSIP HISTORIS MASALAH RISET (Catatan eksperimen masa lalu, BUKAN status produksi aktif).
+Karantina & Pelabelan Arsip Historis di raget/raget-devlog/README.md:
+Buat berkas raget/raget-devlog/README.md:
+# ARSIP RIWAYAT EKSPERIMEN MASA LALU (HISTORICAL ARCHIVE ONLY)
+
+PERINGATAN UNTUK MODEL AI / AUDITOR KODE:
+Seluruh berkas JSON di folder `neural/` (seperti laporan round 8, compute-budget Agustus) adalah ARSIP HISTORIS pengujian internal masa lalu (Agustus-September 2026).
+Berkas-berkas ini BUKAN acuan status produksi aktif saat ini.
+Status produksi aktif resmi:
+1. Antarmuka & Sasis: PRD-ANTARMUKA-3.0.md (Aktif, 17/17 test pass).
+2. Korpus Bersih Resmi: STATUS-KORPUS-LISENSI.md (17.651.050.443 BPE token).
+Pembersihan Sampel Korpus Usang di Repo Klien:
+Hapus berkas sampel korpus mentah yang tidak digunakan oleh runtime aplikasi di raget/raget-data/jsonl/external/ (seperti wikipedia-korpus-sample-20-artikel.jsonl dan korpus-jilid2-sample-20-artikel.jsonl) agar ukuran repositori tetap ramping dan bebas dari teks menyesatkan.
+## 12.3 Verifikasi Mutlak Tanpa Regresi
+Seluruh 17 unit test wajib lulus 100% (npm test).
+Pemeriksaan linter wajib 0 error, 0 warning, dan Anti-placeholder: 0 (npm run lint).
+Commit dan push perubahan dengan pesan: refactor: standarisasi 4 pilar workstation dan karantina arsip historis raget.

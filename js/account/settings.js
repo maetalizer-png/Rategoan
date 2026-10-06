@@ -586,6 +586,7 @@ export const settings = {
     document.querySelectorAll('.theme-btn').forEach((b) => {
       b.onclick = () => {
         theme.set(b.dataset.theme);
+        haptics.tap(10);
         this.refresh();
       };
     });
@@ -607,8 +608,11 @@ export const settings = {
     $('row-restore').onclick = () => $('pick-restore').click();
     $('row-pin').onclick = () => {
       if (pin.has()) {
-        pin.clear();
-        toast.show('Kunci dinonaktifkan');
+        pin.clear().then(() => {
+          toast.show('Kunci dinonaktifkan');
+          this.refresh();
+        });
+        return;
       } else {
         const p = prompt('Buat PIN (4-6 digit):');
         if (p === null) return;

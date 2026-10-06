@@ -4,6 +4,7 @@ import { theme } from './state/theme.js';
 import { auth } from './state/auth.js';
 import { font } from './state/font.js';
 import { pin } from './state/pin.js';
+import { probeGpu } from '../raget/raget-neural/runtime/webgpu-runner.js';
 import { router } from './core/router.js';
 import { chat } from './chat/chat.js';
 import { chatsearch } from './chat/chatsearch.js';
@@ -144,10 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   if ('requestIdleCallback' in window) {
     requestIdleCallback(warmup, { timeout: 3000 });
+    requestIdleCallback(() => { probeGpu().catch(() => {}); }, { timeout: 4000 });
   } else {
     setTimeout(warmup, 1500);
+    setTimeout(() => { probeGpu().catch(() => {}); }, 2000);
   }
 });
+
+document.addEventListener('rategoan:vault-open', () => store.init());
 
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => {
@@ -156,7 +161,7 @@ if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
         const worker = reg.installing;
         if (!worker) return;
         worker.addEventListener('statechange', () => {
-          if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+          if (worker.state === 'activated' && navigator.serviceWorker.controller) {
             toast.show('Versi baru tersedia. Ketuk untuk memuat ulang.', { onClick: () => location.reload() });
           }
         });

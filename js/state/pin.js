@@ -1,12 +1,16 @@
 import { $ } from '../../shared/dom.js';
 import { toast } from '../core/toast.js';
+import { vaultKey } from '../../shared/vault-key.js';
+import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 
 export const pin = {
   KEY: 'rategoan_pin',
   has() {
     return !!localStorage.getItem(this.KEY);
   },
-  clear() {
+  async clear() {
+    try { await idbGateway.unsealAll(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+    vaultKey.drop();
     localStorage.removeItem(this.KEY);
   },
   FAIL_KEY: 'rategoan_pin_fail',
@@ -26,22 +30,28 @@ export const pin = {
   unb64(text) {
     return Uint8Array.from(atob(text), (ch) => ch.charCodeAt(0));
   },
-  async deriveKey(value, salt) {
+  async deriveKey(value, salt, iterations) {
     const base = await crypto.subtle.importKey('raw', this.bytes(value), 'PBKDF2', false, ['deriveKey']);
     return crypto.subtle.deriveKey(
-      { name: 'PBKDF2', salt, iterations: 20000, hash: 'SHA-256' },
+      { name: 'PBKDF2', salt, iterations: iterations || 100000, hash: 'SHA-256' },
       base,
       { name: 'AES-GCM', length: 256 },
       false,
       ['encrypt', 'decrypt']
     );
   },
+  async hold(value, salt, iterations) {
+    const key = await this.deriveKey(value, salt, iterations);
+    vaultKey.hold(key);
+    return key;
+  },
   async set(p) {
     const salt = crypto.getRandomValues(new Uint8Array(16));
     const iv = crypto.getRandomValues(new Uint8Array(12));
-    const key = await this.deriveKey(p, salt);
+    const key = await this.hold(p, salt, 100000);
     const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, this.bytes('rategoan-pin')));
-    localStorage.setItem(this.KEY, 'v2:' + this.b64(salt) + ':' + this.b64(iv) + ':' + this.b64(cipher));
+    localStorage.setItem(this.KEY, 'v3:' + this.b64(salt) + ':' + this.b64(iv) + ':' + this.b64(cipher));
+    await idbGateway.sealAll();
   },
   lockedUntil() {
     const raw = sessionStorage.getItem(this.FAIL_KEY) || '';
@@ -61,14 +71,18 @@ export const pin = {
     const until = this.lockedUntil();
     if (until > Date.now()) return false;
     const raw = localStorage.getItem(this.KEY) || '';
-    if (raw.indexOf('v2:') === 0) {
+    if (raw.indexOf('v3:') === 0 || raw.indexOf('v2:') === 0) {
       try {
+        const iterations = raw.indexOf('v3:') === 0 ? 100000 : 20000;
         const parts = raw.slice(3).split(':');
-        const key = await this.deriveKey(p, this.unb64(parts[0]));
+        const salt = this.unb64(parts[0]);
+        const key = await this.hold(p, salt, iterations);
         await crypto.subtle.decrypt({ name: 'AES-GCM', iv: this.unb64(parts[1]) }, key, this.unb64(parts[2]));
         this.clearFail();
+        await idbGateway.sealAll();
         return true;
       } catch (e) {
+        vaultKey.drop();
         this.noteFail();
         return false;
       }
@@ -82,6 +96,7 @@ export const pin = {
     return false;
   },
   lock() {
+    vaultKey.drop();
     const ov = $('pin-overlay');
     if (!ov) return;
     ov.hidden = false;
@@ -96,6 +111,7 @@ export const pin = {
   bind() {
     const submit = $('pin-submit');
     if (!submit) return;
+    if (this.has()) this.lock();
     submit.onclick = async () => {
       const v = $('pin-input').value.trim();
       const until = this.lockedUntil();
@@ -105,6 +121,7 @@ export const pin = {
       }
       if (await this.verify(v)) {
         this.unlock();
+        document.dispatchEvent(new CustomEvent('rategoan:vault-open'));
         toast.show('Terbuka');
       } else {
         toast.show(this.lockedUntil() > Date.now() ? 'PIN salah. Terkunci 30 detik' : 'PIN salah');

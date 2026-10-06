@@ -80,5 +80,5 @@
     "korpus-jilid2-clean.jsonl (629.343 baris, ~2GB) - hasil FASE 3",
     "jilid2-chunks-126.txt (3.562.741 chunk, ~2,1GB) - hasil FASE 4, dipakai training via Colab (regenerasi dari Release, pola sama seperti jilid 1)"
   ],
-  "sampelDikomit": "raget-data/jsonl/external/korpus-jilid2-sample-20-artikel.jsonl"
+  "sampelDikomit": "dihapus dari repo klien; korpus resmi ada di STATUS-KORPUS-LISENSI.md"
 }

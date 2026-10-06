@@ -41,9 +41,38 @@ import { cancelAgent } from '../agent/worker-bridge.js';
 import { hemat } from '../state/hemat.js';
 import { voice } from './voice.js';
 
+const PERSONA = 'Jawab langsung pada baris pertama. Jangan mulai dengan basa-basi seperti tentu, pertanyaan bagus, atau baik mari kita bahas. Bahasa Indonesia baku dan ringkas.';
+
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
 const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
 const WORK_RE = /\b(tugas|skripsi|makalah|rencana|langkah|proyek|pekerjaan|kerjakan)\b/i;
+
+function rankOffThread(docs, text) {
+  return new Promise((resolve) => {
+    let worker;
+    try {
+      worker = new Worker(new URL('../../raget/raget-agents/raget-worker.js', import.meta.url), { type: 'module' });
+    } catch (e) {
+      resolve(hybridRank(docs, text, 3));
+      return;
+    }
+    const timer = setTimeout(() => {
+      worker.terminate();
+      resolve(hybridRank(docs, text, 3));
+    }, 4000);
+    worker.onmessage = (event) => {
+      clearTimeout(timer);
+      worker.terminate();
+      resolve((event.data && event.data.hits) || []);
+    };
+    worker.onerror = () => {
+      clearTimeout(timer);
+      worker.terminate();
+      resolve(hybridRank(docs, text, 3));
+    };
+    worker.postMessage({ type: 'hybrid', docs, query: text, limit: 3 });
+  });
+}
 
 function wrapTrace(title, body) {
   if (!body) return '';
@@ -396,7 +425,8 @@ export const composer = {
     let projectPrefix = '';
     if (project && (project.systemPrompt || (project.pinnedFiles && project.pinnedFiles.length))) {
       const docs = (project.pinnedFiles || []).map((file, index) => ({ id: index, name: file.name, text: file.textContent || '' }));
-      const hits = hybridRank(docs, text, 3);
+      const bulk = docs.reduce((sum, file) => sum + String(file.text || '').length, 0);
+      const hits = bulk > 12000 ? await rankOffThread(docs, text) : hybridRank(docs, text, 3);
       const picked = hits.length ? hits : docs.slice(0, 2);
       projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n');
     }
@@ -439,7 +469,7 @@ export const composer = {
     const imageNote = att && att.fileText ? '[Isi gambar atau berkas]\n' + String(att.fileText).slice(0, 4000) : '';
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [PERSONA, skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (livePlan && livePlan.parentNode) livePlan.remove();
     if (reply == null) {
       toast.show('AI belum terpasang');
