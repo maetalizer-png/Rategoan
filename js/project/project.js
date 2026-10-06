@@ -72,6 +72,7 @@ function cardList(ul) {
     del.textContent = 'Hapus';
     del.onclick = (event) => {
       event.stopPropagation();
+      if (!window.confirm('Hapus proyek "' + project.name + '" dari perangkat ini?')) return;
       workspace.remove(project.id);
       paint();
     };

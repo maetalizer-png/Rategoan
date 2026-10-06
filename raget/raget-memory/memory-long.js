@@ -86,8 +86,8 @@ function learnFromText(text) {
 
   const toneMatch = t.match(/saya (lebih )?(suka|mau) (gaya|bahasa) (formal|santai)/i);
   if (toneMatch) remember('gaya', toneMatch[4].toLowerCase());
-  const slideMatch = t.match(/slide (saya )?suka ([a-zA-Z\s]{3,40})/i);
-  if (slideMatch) remember('slide_pref', slideMatch[2].trim());
+  const ruleMatch = t.match(/format\s+\w+\s+selalu\s+(.{8,180})/i);
+  if (ruleMatch) remember('aturan', ruleMatch[1].trim());
 
 }
 
@@ -164,12 +164,22 @@ function clear() {
   write({ facts: {}, notes: [], learned: [] });
 }
 
+function preferenceDocs() {
+  const data = read();
+  return Object.keys(data.facts || {}).map((key) => ({
+    id: key,
+    name: key,
+    text: key + ': ' + data.facts[key],
+  }));
+}
+
 export const memoryLong = Object.freeze({
   remember,
   recall,
   allFacts,
   forgetFact,
   learnFromText,
+  preferenceDocs,
   rememberNote,
   forgetNote,
   allNotes,

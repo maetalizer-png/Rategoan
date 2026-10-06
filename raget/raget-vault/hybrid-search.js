@@ -32,6 +32,10 @@ function ranks(scores) {
   return out;
 }
 
+export function cosineText(left, right) {
+  return cosine(counts(tokenize(left)), counts(tokenize(right)));
+}
+
 export function extractEntities(text) {
   const src = String(text || '');
   const pasal = src.match(/pasal\s+\d+[a-z]?(?:\s+ayat\s*\(\d+\))?/gi) || [];

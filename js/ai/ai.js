@@ -5,7 +5,7 @@ import { memoryPreference } from '../state/memory-preference.js';
 
 const NEURAL_ANSWERS_ENABLED = true;
 
-async function generate(messages, prompt) {
+async function generate(messages, prompt, extra) {
   await engine.ensureReady();
   const useMem = memoryPreference.get();
   const result = await engineRouter.ask(prompt, {
@@ -14,6 +14,7 @@ async function generate(messages, prompt) {
     memoryOn: useMem,
     facts: useMem ? memory.recallFacts() : {},
     recent: useMem ? memory.recentContext(messages, 6) : [],
+    modelPrefix: extra && extra.modelPrefix ? extra.modelPrefix : '',
   });
   return result.reply;
 }

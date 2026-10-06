@@ -145,12 +145,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   if ('requestIdleCallback' in window) {
     requestIdleCallback(warmup, { timeout: 3000 });
-    requestIdleCallback(() => { probeGpu().catch(() => {}); }, { timeout: 4000 });
+    requestIdleCallback(() => { probeGpu().catch(() => {}); watchStorage(); }, { timeout: 4000 });
   } else {
     setTimeout(warmup, 1500);
-    setTimeout(() => { probeGpu().catch(() => {}); }, 2000);
+    setTimeout(() => { probeGpu().catch(() => {}); watchStorage(); }, 2000);
   }
 });
+
+async function watchStorage() {
+  if (!navigator.storage || typeof navigator.storage.estimate !== 'function') return;
+  try {
+    const est = await navigator.storage.estimate();
+    if (est.quota && est.usage / est.quota > 0.8) store.save();
+  } catch (e) { console.warn('[Rategoan Fallback]', e); }
+}
 
 document.addEventListener('rategoan:vault-open', () => store.init());
 

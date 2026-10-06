@@ -117,6 +117,7 @@ export const history = {
     toast.show('Chat dihapus');
   },
   clearAll() {
+    if (typeof window !== 'undefined' && !window.confirm('Hapus semua obrolan di perangkat ini?')) return;
     store.set({ sessions: [], currentId: null });
     store.save();
     this.query = '';

@@ -443,7 +443,7 @@ export const chat = {
     let attempt = 0;
     while (attempt < 2 && reply == null) {
       try {
-        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt) : null;
+        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt, { modelPrefix: opts && opts.modelPrefix }) : null;
       } catch (error) {
         const plan = recoverAttempt(error, attempt);
         if (plan.retry) {

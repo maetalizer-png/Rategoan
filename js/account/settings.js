@@ -10,6 +10,8 @@ import { pin } from '../state/pin.js';
 import { drawer } from '../ui/drawer.js';
 import { history } from '../history/history.js';
 import { backup } from '../system/backup.js';
+import { exportVaultBytes, restoreVaultBytes } from '../../shared/vault-backup.js';
+import { downloadBytes } from '../../shared/pptx-local.js';
 import { account } from './account.js';
 import { ocrReader } from '../../vault/ocr/reader.js';
 import { translator } from '../../vault/translate/translator.js';
@@ -185,6 +187,12 @@ const TEMPLATE = `
                   </svg>
                   Pulihkan Chat
                 </span>
+              </div>
+              <div class="set-row clickable" id="row-vault-export">
+                <span>Ekspor Cadangan Brankas</span>
+              </div>
+              <div class="set-row clickable" id="row-vault-restore">
+                <span>Pulihkan Cadangan Brankas</span>
               </div>
               <div class="set-row clickable" id="row-install" hidden>
                 <span>
@@ -606,6 +614,32 @@ export const settings = {
     };
     $('row-backup').onclick = () => backup.export();
     $('row-restore').onclick = () => $('pick-restore').click();
+    const vaultExport = $('row-vault-export');
+    if (vaultExport) vaultExport.onclick = async () => {
+      if (!window.confirm('Unduh cadangan brankas perangkat ini?')) return;
+      try {
+        downloadBytes(await exportVaultBytes(), 'cadangan.rategoan');
+        toast.show('Cadangan brankas diunduh');
+      } catch (e) {
+        toast.show('Gagal mengekspor brankas');
+      }
+    };
+    const vaultRestore = $('row-vault-restore');
+    const vaultPick = $('pick-vault');
+    if (vaultRestore && vaultPick) {
+      vaultRestore.onclick = () => vaultPick.click();
+      vaultPick.onchange = async (event) => {
+        const file = event.target.files && event.target.files[0];
+        event.target.value = '';
+        if (!file) return;
+        try {
+          await restoreVaultBytes(new Uint8Array(await file.arrayBuffer()));
+          toast.show('Cadangan digabung');
+        } catch (e) {
+          toast.show(e && e.message ? e.message : 'Gagal memulihkan');
+        }
+      };
+    }
     $('row-pin').onclick = () => {
       if (pin.has()) {
         pin.clear().then(() => {

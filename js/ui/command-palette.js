@@ -2,6 +2,7 @@ import { router } from '../core/router.js';
 import { store } from '../state/store.js';
 import { workspace } from '../state/workspace.js';
 import { chat } from '../chat/chat.js';
+import { theme } from '../state/theme.js';
 import { drawer } from './drawer.js';
 
 function score(hay, needle) {
@@ -16,7 +17,12 @@ function score(hay, needle) {
 
 function commands() {
   const list = [
-    { label: 'Buka Studio kode', run: () => router.go('studio') },
+    { label: '> chat Obrolan baru', run: () => { store.set({ currentId: null }); chat.renderMessages(); router.go('chat'); } },
+    { label: '> studio Studio Kode', run: () => router.go('studio') },
+    { label: '> proyek Beralih proyek', run: () => router.go('project') },
+    { label: '> slide Presentasi', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'slide' })) },
+    { label: '> tema Ganti tema', run: () => theme.set(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark') },
+    { label: '> cari obrolan', run: () => { router.go('chat'); const box = document.getElementById('history-search'); if (box) box.focus(); } },
     { label: 'Buka Konektor', run: () => router.go('connect') },
     { label: 'Buka Pengaturan', run: () => router.go('settings') },
     { label: 'Buka Koleksi', run: () => router.go('collection') },
@@ -81,6 +87,7 @@ export function mountCommandPalette() {
     });
   };
   const open = () => {
+    drawer.close();
     root.hidden = false;
     input.value = '';
     active = 0;
@@ -100,6 +107,18 @@ export function mountCommandPalette() {
       event.preventDefault();
       if (root.hidden) open();
       else close();
+      return;
+    }
+    if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key.toLowerCase() === 's') {
+      event.preventDefault();
+      router.go('studio');
+      return;
+    }
+    if ((event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === 'n') {
+      event.preventDefault();
+      store.set({ currentId: null });
+      chat.renderMessages();
+      router.go('chat');
     }
   });
   let touches = [];

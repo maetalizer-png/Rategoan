@@ -22,7 +22,8 @@ const PERSONA = 'Jawab langsung pada baris pertama. Jangan mulai dengan basa-bas
 
 async function ask(prompt, context) {
   const messages = (context && context.messages) || [];
-  const work = neuralProvider.generate(messages, PERSONA + prompt);
+  const passive = context && context.modelPrefix ? String(context.modelPrefix) + '\n' : '';
+  const work = neuralProvider.generate(messages, PERSONA + passive + prompt);
   const reply = await Promise.race([
     work,
     new Promise((_, rej) => setTimeout(() => rej(new Error('Raget 1.0 timeout')), ASK_MS)),

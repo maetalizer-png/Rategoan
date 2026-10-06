@@ -22,11 +22,32 @@ function u32(view, offset, value) {
   view.setUint32(offset, value, true);
 }
 
+export function healScript(code, error) {
+  const src = String(code || '');
+  const msg = String((error && error.msg) || error || '');
+  const defined = [...src.matchAll(/function\s+([A-Za-z_]\w*)/g)].map((match) => match[1]);
+  const missing = msg.match(/([A-Za-z_]\w*) is not defined/);
+  if (!missing) return src;
+  const bad = missing[1];
+  const hit = defined.find((name) => {
+    if (Math.abs(name.length - bad.length) > 1) return false;
+    if (bad.startsWith(name) || name.startsWith(bad)) return true;
+    let diff = 0;
+    const limit = Math.max(name.length, bad.length);
+    for (let i = 0; i < limit; i += 1) if (name[i] !== bad[i]) diff += 1;
+    return diff <= 1;
+  });
+  if (!hit || hit === bad) return src;
+  return src.replace(new RegExp('\\b' + bad + '\\b', 'g'), hit);
+}
+
 export function previewSrcdoc(files) {
   const html = String((files && files['index.html']) || '');
   const css = String((files && files['style.css']) || '');
   const js = String((files && files['script.js']) || '');
-  const style = '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
+  const csp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data: blob:;">';
+  const trap = '<script>window.onerror=function(msg,url,line,col){parent.postMessage({type:"studio:error",error:{msg:String(msg),line:line,col:col}},"*");};<\/script>';
+  const style = csp + trap + '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
   const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>';
   if (/<html[\s>]/i.test(html)) {
     let page = html;
@@ -35,6 +56,15 @@ export function previewSrcdoc(files) {
     return page;
   }
   return '<!doctype html><html><head>' + style + '</head><body>' + html + script + '</body></html>';
+}
+
+export function mountPreview(frame, files) {
+  if (!frame) return;
+  const html = previewSrcdoc(files);
+  frame.onload = () => {
+    if (frame.contentWindow) frame.contentWindow.postMessage({ type: 'studio:srcdoc', html }, '*');
+  };
+  frame.src = 'studio-preview.html?run=' + Date.now();
 }
 
 export function zipStore(files) {

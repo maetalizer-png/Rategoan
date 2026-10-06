@@ -2,7 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
-import { previewSrcdoc, zipStore } from './sandbox-runner.js';
+import { zipStore, healScript, mountPreview } from './sandbox-runner.js';
 import { toast } from '../core/toast.js';
 import { drawer } from '../ui/drawer.js';
 import { workspace } from '../state/workspace.js';
@@ -389,13 +389,26 @@ export const studioPage = {
     if (clear) clear.onclick = () => showConsole('', null);
     const py = $('studio-py');
     if (py) py.onclick = () => this.runPython();
+    let healTries = 0;
+    window.addEventListener('message', (event) => {
+      const data = event.data || {};
+      if (data.type !== 'studio:error' || healTries >= 3) return;
+      const now = codeText();
+      const next = healScript(now, data.error || {});
+      if (!next || next === now) return;
+      healTries += 1;
+      writeEditor(next, 'javascript');
+      rememberEditor();
+      const frame = $('studio-preview-frame');
+      if (frame) mountPreview(frame, WEB);
+    });
     const preview = $('studio-preview');
     if (preview) preview.onclick = () => {
       rememberEditor();
       const frame = $('studio-preview-frame');
       if (!frame) return;
       frame.hidden = false;
-      frame.srcdoc = previewSrcdoc(WEB);
+      mountPreview(frame, WEB);
       const studioView = $('view-studio');
       if (studioView && window.matchMedia('(max-width: 1023px)').matches) {
         studioView.classList.remove('pane-editor', 'pane-console');

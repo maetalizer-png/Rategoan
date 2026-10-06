@@ -92,6 +92,14 @@ function renderSlide(outline, title) {
   deck.appendChild(frame);
   deck.appendChild(bar);
   stage.appendChild(deck);
+  frame.addEventListener('input', () => {
+    const card = frame.querySelector('article');
+    if (!card || !slides[index]) return;
+    const heading = card.querySelector('h3');
+    slides[index].title = String(heading ? heading.textContent : '').replace(/^\d+\.\s*/, '');
+    slides[index].bullets = Array.from(card.querySelectorAll('li')).map((li) => li.textContent.trim()).filter(Boolean);
+    current.outline = slides;
+  });
   slides.forEach((s, i) => {
     const hidden = document.createElement('article');
     hidden.className = 'art-slide';
@@ -154,6 +162,7 @@ function renderTable(rows, title) {
     table.appendChild(tr);
   });
   stage.appendChild(table);
+  table.addEventListener('input', () => { current.rows = readTable(); });
 }
 
 function readTable() {
@@ -173,6 +182,21 @@ function renderDocument(content, title) {
   box.contentEditable = 'true';
   box.innerHTML = markdownView.render(content || '');
   markdownView.decorate(box);
+  const bar = document.createElement('div');
+  bar.className = 'doc-tools';
+  [['Tebal', 'bold'], ['Miring', 'italic'], ['Judul', 'formatBlock']].forEach(([label, cmd]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = label;
+    btn.onclick = () => {
+      box.focus();
+      document.execCommand(cmd, false, cmd === 'formatBlock' ? 'h3' : null);
+      current.markdown = box.innerText;
+    };
+    bar.appendChild(btn);
+  });
+  box.addEventListener('input', () => { current.markdown = box.innerText; });
+  stage.appendChild(bar);
   stage.appendChild(box);
 }
 

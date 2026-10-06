@@ -8,6 +8,23 @@ function isText(name) {
   return /\.(txt|md|json|csv|js|mjs|py|html|css|sql)$/i.test(name);
 }
 
+async function rememberDir(dir) {
+  if (typeof indexedDB === 'undefined') return;
+  await new Promise((resolve, reject) => {
+    const req = indexedDB.open('raget_folder', 1);
+    req.onupgradeneeded = () => {
+      if (!req.result.objectStoreNames.contains('handles')) req.result.createObjectStore('handles');
+    };
+    req.onerror = () => reject(req.error);
+    req.onsuccess = () => {
+      const tx = req.result.transaction('handles', 'readwrite');
+      tx.objectStore('handles').put(dir, 'dir');
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    };
+  });
+}
+
 export const folderBridge = {
   async pick() {
     if (typeof window.showDirectoryPicker !== 'function') {
@@ -23,6 +40,7 @@ export const folderBridge = {
     }
     handles.clear();
     directory = dir;
+    try { await rememberDir(dir); } catch (e) { console.warn('[Rategoan Fallback] Folder:', e); }
     const names = [];
     try {
       for await (const [name, handle] of dir.entries()) {

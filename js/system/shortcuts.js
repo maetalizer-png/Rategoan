@@ -16,15 +16,8 @@ export const shortcuts = {
       }
     });
     document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
-        e.preventDefault();
-        drawer.open();
-        const s = $('history-search');
-        if (s) s.focus();
-        return;
-      }
       if (isTypingTarget(e.target)) return;
-      if (e.key === 'k') {
+      if (e.key === 'k' && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         drawer.close();
         router.go('collection');

@@ -9,6 +9,7 @@ import { exportLog } from '../../raget/raget-memory/export-log.js';
 
 export const backup = {
   export() {
+    if (typeof window !== 'undefined' && !window.confirm('Unduh cadangan obrolan perangkat ini?')) return;
     const st = store.get();
     const local = {};
     const skip = new Set(['rategoan_connectors_vault', 'rategoan_connectors_aes']);

@@ -17,7 +17,8 @@ import { googleAuth } from '../state/google-auth.js';
 import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
-import { hybridRank } from '../../raget/raget-vault/hybrid-search.js';
+import { hybridRank, cosineText } from '../../raget/raget-vault/hybrid-search.js';
+import { fenceUntrusted, GUARDRAIL } from '../../shared/untrusted.js';
 import { planSubgoals } from '../../raget/raget-agents/core/agent-planner.js';
 import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
@@ -453,7 +454,7 @@ export const composer = {
       const bulk = docs.reduce((sum, file) => sum + String(file.text || '').length, 0);
       const hits = bulk > 12000 ? await rankOffThread(docs, text) : hybridRank(docs, text, 3);
       const picked = hits.length ? hits : docs.slice(0, 2);
-      projectPrefix = '[Instruksi proyek ' + project.name + ']\n' + (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n');
+      projectPrefix = GUARDRAIL + '\n' + fenceUntrusted(project.name, (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n'));
     }
     const subgoals = planSubgoals(text);
     let thoughts = null;
@@ -491,10 +492,14 @@ export const composer = {
       thoughts = plan.steps;
       live.remove();
     }
-    const imageNote = att && att.fileText ? '[Isi gambar atau berkas]\n' + String(att.fileText).slice(0, 4000) : '';
+    const imageNote = att && att.fileText ? fenceUntrusted(att.name, String(att.fileText).slice(0, 4000)) : '';
+    const prefDocs = memoryLong.preferenceDocs();
+    const prefHit = prefDocs.map((doc) => ({ ...doc, sim: cosineText(text, doc.text) })).sort((a, b) => b.sim - a.sim)[0];
+    const prefNote = prefHit && prefHit.sim >= 0.2 ? 'Aturan pengguna: ' + prefHit.text : '';
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, preamble: [skillNote, flashNote, projectPrefix, imageNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    const modelPrefix = [GUARDRAIL, prefNote, projectPrefix, imageNote].filter(Boolean).join('\n\n');
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (livePlan && livePlan.parentNode) livePlan.remove();
     if (reply == null) {
       toast.show('AI belum terpasang');
