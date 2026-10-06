@@ -243,6 +243,10 @@ export const connectorHub = {
     input.type = 'password';
     input.autocomplete = 'off';
     input.placeholder = id === 'github' ? 'github_pat_…' : 'ya29.…';
+    const repo = document.createElement('input');
+    repo.autocomplete = 'off';
+    repo.placeholder = 'pemilik/repo';
+    if (id === 'github') repo.value = ((connectorState.read().services.github || {}).repo) || '';
     const actions = document.createElement('div');
     actions.className = 'app-modal-actions';
     const cancel = document.createElement('button');
@@ -256,6 +260,7 @@ export const connectorHub = {
     card.appendChild(title);
     card.appendChild(note);
     card.appendChild(input);
+    if (id === 'github') card.appendChild(repo);
     card.appendChild(actions);
     modal.appendChild(card);
     cancel.onclick = () => modal.remove();
@@ -267,6 +272,11 @@ export const connectorHub = {
       try {
         const account = await verifyToken(id, token);
         connectorState.markConnected(id, { access_token: token, account, expiresIn: 60 * 60 * 24 * 30 });
+        if (id === 'github') {
+          const state = connectorState.read();
+          state.services.github.repo = repo.value.trim();
+          connectorState.write(state);
+        }
         toast.show(account ? ('Terhubung: ' + account) : 'Token diterima');
         modal.remove();
         this.paint(root);

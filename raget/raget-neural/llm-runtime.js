@@ -91,7 +91,7 @@ function isStopped(options) {
         return !!s();
     }
     if (typeof s === 'object') {
-        return !!s.stopped;
+        return !!(s.stopped || s.aborted);
     }
     return false;
 }

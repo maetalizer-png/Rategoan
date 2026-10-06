@@ -22,9 +22,11 @@ export function loadPkce(req) {
 
 export function redirectWithToken(res, returnTo, fields) {
   const url = new URL(returnTo);
+  const hash = new URLSearchParams();
   Object.keys(fields).forEach((key) => {
-    if (fields[key] != null && fields[key] !== '') url.searchParams.set(key, String(fields[key]));
+    if (fields[key] != null && fields[key] !== '') hash.set(key, String(fields[key]));
   });
+  url.hash = hash.toString();
   res.statusCode = 302;
   res.setHeader('Location', url.toString());
   res.end();

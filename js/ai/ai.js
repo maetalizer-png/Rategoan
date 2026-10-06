@@ -15,6 +15,7 @@ async function generate(messages, prompt, extra) {
     facts: useMem ? memory.recallFacts() : {},
     recent: useMem ? memory.recentContext(messages, 6) : [],
     modelPrefix: extra && extra.modelPrefix ? extra.modelPrefix : '',
+    signal: extra && extra.signal,
   });
   return result.reply;
 }

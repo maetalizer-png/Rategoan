@@ -471,8 +471,14 @@ export const chat = {
     let attempt = 0;
     while (attempt < 2 && reply == null) {
       try {
-        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt, { modelPrefix: opts && opts.modelPrefix }) : null;
+        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt, { modelPrefix: opts && opts.modelPrefix, signal: generation.signal }) : null;
       } catch (error) {
+        if (generation && generation.signal.aborted) {
+          typing.remove();
+          document.body.classList.remove('is-generating');
+          generation = null;
+          return null;
+        }
         const plan = recoverAttempt(error, attempt);
         if (plan.retry) {
           attempt += 1;

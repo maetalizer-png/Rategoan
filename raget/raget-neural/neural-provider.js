@@ -24,12 +24,43 @@ async function loadEngine() {
   return cache;
 }
 
+function reportProgress(tier, loaded, total) {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new CustomEvent('rategoan:neural-progress', { detail: { tier, loaded, total } }));
+}
+
+async function readCheckpoint(res, tier) {
+  const total = Number(res.headers.get('content-length')) || 0;
+  if (!res.body || !res.body.getReader) {
+    const buffer = await res.arrayBuffer();
+    reportProgress(tier, buffer.byteLength, total || buffer.byteLength);
+    return buffer;
+  }
+  const reader = res.body.getReader();
+  const chunks = [];
+  let loaded = 0;
+  while (true) {
+    const step = await reader.read();
+    if (step.done) break;
+    chunks.push(step.value);
+    loaded += step.value.length;
+    reportProgress(tier, loaded, total || loaded);
+  }
+  const out = new Uint8Array(loaded);
+  let offset = 0;
+  chunks.forEach((chunk) => {
+    out.set(chunk, offset);
+    offset += chunk.length;
+  });
+  return out.buffer;
+}
+
 async function doInitTier(tier) {
   try {
     const { RATEGOAN } = await loadEngine();
     const res = await fetch(new URL(CHECKPOINT_BY_TIER[tier], import.meta.url));
     if (!res.ok) throw new Error('checkpoint fetch gagal (' + tier + '): HTTP ' + res.status);
-    const buffer = await res.arrayBuffer();
+    const buffer = await readCheckpoint(res, tier);
     RATEGOAN.restoreFromCheckpointSafetensors(buffer);
     loadedTier = tier;
     return true;
@@ -64,7 +95,7 @@ function deviceCanHandleBerat() {
 // belum/gagal, cascade turun ke tier lebih ringan tanpa pengguna
 // sadar ada percobaan unduhan sama sekali.
 function prefetchBest() {
-  ensureTier('super').catch(() => {});
+  return Promise.resolve(false);
 }
 
 function ready() {
@@ -75,7 +106,7 @@ function tierReady(tier) {
   return loadedTier === tier;
 }
 
-async function generateWithTier(tier, prompt) {
+async function generateWithTier(tier, prompt, options) {
   const ok = await ensureTier(tier);
   if (!ok) return null;
   try {
@@ -84,7 +115,9 @@ async function generateWithTier(tier, prompt) {
       maxNewTokens: 60,
       temperature: 0.9,
       greedy: false,
+      stopSignal: options && options.signal,
     });
+    if (options && options.signal && options.signal.aborted) return null;
     const text = out && out.text ? out.text.trim() : '';
     return text || null;
   } catch (e) {
@@ -92,24 +125,21 @@ async function generateWithTier(tier, prompt) {
   }
 }
 
-// Cascade otomatis: pakai mesin terbaik yang SUDAH siap tanpa memicu
-// unduhan baru di tengah chat (200M cuma dipakai kalau prefetchBest()
-// sudah selesai duluan) - super -> berat -> ringan.
-async function generateLocal(prompt) {
+async function generateLocal(prompt, options) {
   if (tierReady('super')) {
-    const superText = await generateWithTier('super', prompt);
+    const superText = await generateWithTier('super', prompt, options);
     if (superText) return superText;
   }
   if (deviceCanHandleBerat()) {
-    const heavyText = await generateWithTier('berat', prompt);
+    const heavyText = await generateWithTier('berat', prompt, options);
     if (heavyText) return heavyText;
   }
-  return generateWithTier('ringan', prompt);
+  return generateWithTier('ringan', prompt, options);
 }
 
-async function generate(messages, prompt) {
+async function generate(messages, prompt, options) {
   if (llmMode.mode() === 'server') llmMode.setMode('lokal');
-  return generateLocal(prompt);
+  return generateLocal(prompt, options || {});
 }
 
 async function getStats() {

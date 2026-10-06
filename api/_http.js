@@ -12,20 +12,27 @@ export function queryOf(req) {
   return Object.fromEntries(url.searchParams.entries());
 }
 
+function invalidJson() {
+  const err = new Error('invalid_json');
+  err.statusCode = 400;
+  err.payload = { error: 'invalid_json' };
+  return err;
+}
+
 export function readBody(req) {
   if (req.body && typeof req.body === 'object') return Promise.resolve(req.body);
   if (typeof req.body === 'string' && req.body) {
-    try { return Promise.resolve(JSON.parse(req.body)); } catch (e) { return Promise.resolve({}); }
+    try { return Promise.resolve(JSON.parse(req.body)); } catch (e) { return Promise.reject(invalidJson()); }
   }
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const chunks = [];
     req.on('data', (chunk) => chunks.push(chunk));
     req.on('end', () => {
       const raw = Buffer.concat(chunks.map((chunk) => Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk))).toString('utf8');
       if (!raw) { resolve({}); return; }
-      try { resolve(JSON.parse(raw)); } catch (e) { resolve({}); }
+      try { resolve(JSON.parse(raw)); } catch (e) { reject(invalidJson()); }
     });
-    req.on('error', () => resolve({}));
+    req.on('error', () => reject(invalidJson()));
   });
 }
 

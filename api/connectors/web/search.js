@@ -67,7 +67,13 @@ export default async function handler(req, res) {
     sendJson(res, 200, { tools: WEB_TOOLS });
     return;
   }
-  const body = req.method === 'GET' ? {} : await readBody(req);
+  let body = {};
+  if (req.method !== 'GET') {
+    try { body = await readBody(req); } catch (e) {
+      sendJson(res, (e && e.statusCode) || 400, (e && e.payload) || { error: 'invalid_json' });
+      return;
+    }
+  }
   const name = body.name || 'web_search';
   const params = body.parameters || {};
   const q = query.q || params.q || params.query || '';

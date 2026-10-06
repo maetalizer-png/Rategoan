@@ -968,3 +968,156 @@ Jika pengguna meminta 'push ke github' namun belum menautkan token di Pengaturan
 Agen secara otonom mengemas seluruh VFS menjadi berkas ZIP siap unduh dan membalas santun: 'Aplikasi sudah selesai dan saya kemas dalam berkas ZIP studio-rategoan.zip. Untuk push otomatis ke repositori di masa depan, tautkan token GitHub Anda sekali saja di Pengaturan.'
 5. Protokol Pelaporan Jejak Tindakan Otonom (Transparent Action Stepper):
 Setiap tahapan pengerjaan otonom wajib menampilkan lencana tindakan mikro di obrolan (🔍 Baca ➔ ✏️ Racik ➔ ⚡ Uji ➔ 📦 Kemas ➔ 🚀 Push) agar pengguna tetap memiliki kendali visibilitas penuh terhadap apa yang dikerjakan agen di balik layar.
+
+18.11 Resolusi Arsitektur Mandiri studio.html & Kanvas Pemantauan Murni (Eliminasi Tombol Berjejal)
+1. Mandat Berkas Mandiri studio.html:
+Dilarang menjejalkan antarmuka studio ke dalam index.html di dalam container settings-page.
+Buat berkas mandiri baru di root: studio.html dengan tata letak bersih dan mandiri.
+Tautan menu navigasi 'Studio kode' di bilah samping drawer index.html langsung membuka/mengarahkan ke studio.html.
+18.16 Integrasi Kartu Proses Berpikir Latar Belakang & Indikator Kerja Hidup (Live Agentic Stepper in Studio)
+1. Kebutuhan Visual Umpan Balik Nyata (Live Working Indicator):
+Saat agen koding di Studio Rekayasa sedang memproses tugas (membaca berkas, meracik CSS/JS, menguji sandbox, atau auto-patching), dilarang membiarkan layar hening atau tiba-tiba memunculkan teks jadi tanpa proses.
+Studio Rekayasa wajib mengadopsi kartu proses berpikir latar belakang persis seperti yang bekerja di Chat Utama (Bab 7.2) dan standar Claude: kontainer kartu berlatar lembut (.thought-accordion running) dengan animasi denyut pendar halus (breathing pulse) dan teks: 'Sedang memproses...'.
+2. Visualisasi Garis Waktu Berantai (Connected Stepper Nodes):
+Menampilkan simpul aksi berikon warna-warni yang aktif bergerak saat proses berlangsung:
+📄 Baca berkas: Simpul hijau lembut.
+✏️ Sunting kode: Simpul ungu/oranye.
+⚡ Uji sandbox: Simpul slate/biru.
+3. Penutupan Anggun Otomatis (Graceful Auto-Collapse):
+Begitu perakitan kode selesai dan teruji bebas galat, kartu proses berpikir secara otomatis melipat diri menjadi kartu ringkas yang elegan: ▸ Selesai · [X] langkah eksekusi · [Y] detik.
+Tepat di bawahnya, agen menyajikan balasan santun bersama kartu pintasan [ 👁️ Buka Pratinjau Hidup ] dan [ 📦 Unduh ZIP ]. Pengguna dapat mengetuk kartu lipatan kapan saja untuk meninjau kembali riwayat log proses di balik layar.
+2. Tampilan Utama Studio adalah Obrolan Chat Bersih (Mirip Chat Utama):
+Begitu masuk ke studio.html, layar utama adalah ruang percakapan lapang yang tenang dan elegan.
+Komposer input berada di bawah dengan placeholder 'Ketik instruksi aplikasi...' dilengkapi tombol kirim dan mikrofon.
+Pengguna tidak disodori kotak kodingan manual di awal.
+3. Eliminasi 15 Tombol Manual yang Membingungkan:
+Hapus tumpukan tombol manual yang mengotori layar seluler (tombol Jalankan, Salin, Tinjau Perubahan, Simpan ke Artefak, Web App, Skrip Python ganda, dsb.).
+Pengguna adalah arsitek/pengarah, bukan operator pengetik tombol. AI yang secara otonom menjalankan, menguji, dan menyunting berkas.
+4. Kanvas Belah Murni untuk Pemantauan (Pure Monitoring Split Panel):
+Panel belah (split canvas) di sisi kanan (desktop) atau lembar bawah geser (ponsel) murni berfungsi sebagai LAYAR PEMANTAUAN (Monitoring Window):
+
+32
+js/account/settings.js & css/account/settings.css
+Pembersihan Kebocoran Input Token GitHub yang Nyasar di Pengaturan Data
+Menghapus elemen mentah #row-github yang nyasar di Pengaturan > Data. Memindahkan konfigurasi kredensial GitHub ke Pilar Konektor resmi (connector-hub.js) dan kartu akun rapi, serta memperbaiki CSS agar input tidak luber melampaui kartu kontainer di layar ponsel.
+33
+studio.html & css/ui/studio.css
+Penyempurnaan Struktur Visual Desktop Studio Rekayasa (Rujukan Fisik Coder)
+Menerapkan tata letak visual desktop yang elegan: Layar awal berpusat Zen di tengah dengan kotak input melayang dan kartu pemicu cepat; saat percakapan aktif otomatis membelah 45% (Chat Kiri) dan 55% (Jendela Pemantauan Kanan bertab Pratinjau, Diff, dan Log Konsol).
+Matriks Eksekusi Sprint Penguatan Keamanan & Keandalan Runtime (Bab 19):
+No
+Modul Target
+Tindakan Rekayasa / Penguatan
+Kriteria Keberhasilan
+34
+js/main.js
+Eliminasi Penelan Galat Global (unhandledrejection.preventDefault)
+Menghapus e.preventDefault() pada event listener unhandledrejection global. Menggantinya dengan pencatatan terstruktur dan penanganan kegagalan bertingkat (kritis vs terdegradasi anggun) agar galat asinkronus tidak tersembunyi.
+35
+studio-preview.html & js/studio/sandbox-runner.js
+Pengetatan Validasi Asal Pesan Iframe (Origin Verification)
+Mengganti target liar '*' pada postMessage dengan location.origin eksplisit. Menambahkan validasi if (event.origin !== location.origin || event.source !== window.parent) return; untuk menangkal serangan pemalsuan pesan (cross-origin message spoofing).
+36
+api/_http.js
+Penolakan Permintaan JSON Cacat/Malformed (HTTP 400)
+Menghapus penelanan JSON rusak menjadi objek kosong {}. Mengembalikan respons baku HTTP 400 Bad Request { error: &apos;invalid_json&apos; } agar diagnosis permintaan API valid dan terukur.
+37
+raget/raget-neural/neural-provider.js
+Penghentian Prefetch Otomatis Model 200M (On-Demand Loading)
+Menghapus pemanggilan otomatis ensureTier(&apos;super&apos;) pada prefetchBest() saat aplikasi dibuka. Unduhan checkpoint neural model besar (50M/100M/200M) wajib bersifat on-demand (hanya saat mode Neural aktif), mencegah kuota tersedot dan OOM di ponsel RAM kecil.
+38
+raget/raget-neural/neural-adapter.js
+Pemasangan Kontrak Pembatalan Inferensi Aktif (AbortController)
+Mengganti pola pasif Promise.race() dengan AbortController aktif yang benar-benar membatalkan komputasi inferensi latar belakang saat timeout tercapai, menghemat baterai dan siklus CPU/GPU ponsel.
+39
+js/connectors/connector-state.js & api/_oauth.js
+Sanitasi Alur Pengiriman Token OAuth Tanpa Query String
+Menghentikan eksposur ?access_token= pada URL query string yang rawan tercatat di riwayat peramban. Mengalihkannya menggunakan protokol OAuth Authorization Code dengan PKCE atau pembersihan hash fragment aman di sisi klien.
+40
+js/connectors/connector-state.js
+Pengamanan Kunci Kredensial Konektor dari LocalStorage Terbuka
+Menghapus penyimpanan kunci mentah AES di localStorage terbuka. Mengalirkan kredensial konektor ke dalam penyimpanan terenkripsi IndexedDB terpadu berbasis vaultKey yang terproteksi.
+Pengguna hanya melihat pergerakan dan perkembangan kode yang sedang diracik AI.
+Tab 1: [ Pratinjau Hidup ] ➔ Menampilkan aplikasi web yang sedang aktif.
+Tab 2: [ Kode & Berkas ] ➔ Menampilkan teks kode dan diff penambahan/penghapusan.
+Tab 3: [ Papan Konsol / Log ] ➔ Menampilkan terminal pengujian dan status uji.
+Di bilah atas pemantauan, cukup sediakan dua aksi esensial: [ 📁 Buka Folder ] dan [ 📦 Unduh ZIP ].
+18.12 Doktrin Adaptasi Responsif Kritis: Seluler Murni Chat vs Desktop Layar Belah (Split Canvas)
+1. Penalaran Ergonomi Seluler vs Desktop:
+Di perangkat seluler (aplikasi Play Store dan peramban ponsel dengan lebar layar < 1024px), memaksakan layar belah atau menjejalkan panel monitoring bersamaan dengan chat adalah anti-pola UX yang membuat layar sesak dan membingungkan.
+Di ponsel, tampilan Studio Rekayasa wajib 100% berwujud obrolan chat bersih dan lapang seperti Chat Utama, di mana pengguna mengarahkan AI lewat percakapan santai.
+2. Pengaktifan Layar Belah Otomatis Khusus Desktop (>= 1024px):
+Layar belah (Split-Screen Canvas) dua kolom hanya aktif secara alami ketika aplikasi dibuka di komputer desktop, laptop, atau monitor lebar:
+Kolom Kiri (45% lebar): Ruang percakapan chat dengan Agen Koding.
+Kolom Kanan (55% lebar): Jendela pemantauan visual (Pratinjau Hidup, Pohon Berkas, Log Konsol).
+3. Demokratisasi Akses Tanpa Dinding Berbayar (Paywall):
+Pada platform AI komersial global (Claude Pro, ChatGPT Canvas, Cursor), pengalaman split-screen coder desktop ini dikunci di balik langganan mahal ($20 USD/bulan).
+Rategoan menghadirkan pengalaman kelas dunia ini secara berdaulat dan gratis (Rp 0) bagi seluruh masyarakat, adaptif di ponsel maupun komputer.
+18.13 Pembersihan Kebocoran Konektor GitHub yang Nyasar di Pengaturan Data (js/account/settings.js)
+1. Akar Masalah Cacat Visual & Struktur:
+Pada commit b1b7b24 di js/account/settings.js baris 199-201, disisipkan elemen mentah <div class="set-row" id="row-github"><label>Token GitHub <input id="github-token"></label><label>Repo <input id="github-repo"></label></div> di dalam kategori Pengaturan Data.
+Cacat Ruang Lingkup: Kredensial GitHub adalah konektor eksternal, bukan urusan cadangan data lokal perangkat (seperti cadangan chat atau brankas). Penempatannya di menu Data adalah kekeliruan struktur.
+Cacat CSS Luber Horizontal: .set-row bertata letak flex sebaris. Dua buah elemen input teks tanpa pembatasan lebar memakan ruang lebih dari 440px, sehingga di layar ponsel (lebar 360-390px) kotak input 'pemilik/repo' menembus keluar (overflow) dari kartu putih kontainer.
+2. Solusi Rekayasa Baku:
+Hapus elemen mentah #row-github dari kategori data di js/account/settings.js.
+Penautan token GitHub dikembalikan ke rumah aslinya: Pilar Konektor resmi di js/connectors/connector-hub.js yang sudah memiliki modal khusus 'Token GitHub' ber-placeholder 'github_pat_…'.
+Jika disediakan di Pengaturan, wajib diletakkan di kategori 'Konektor / Akun' dengan kelas .set-row-stack (tata letak tumpuk vertikal berjarak rapi dan lebar 100% terkunci).
+18.14 Spesifikasi Presisi Antarmuka Desktop Studio Rekayasa (Berdasarkan Rujukan Fisik)
+1. Keadaan 1: Beranda Awal Studio Rekayasa di Layar Lebar (Desktop Landing State):
+Filosofi Zen Berwibawa: Tampilan lapang berpusat di tengah monitor desktop:
+Judul Utama: 'Studio Rekayasa'
+Subjudul: 'Mitra rekayasa mandiri Anda. Merakit web app, skrip hitungan, dan ekspor proyek.'
+Kotak Input Utama Mengambang (Floating Hero Composer): Kotak ketik berukuran lapang di tengah layar dengan placeholder 'Ketik ide aplikasi atau instruksi koding Anda di sini…'
+Pil Pemicu Cepat di Bawah Input: [ ☕ Web Toko Kopi ] [ 🐍 Game Ular Web ] [ 📊 Kalkulator Zakat / Diskon ] [ 📁 Muat dari Folder / ZIP ]
+Sidebar Kiri: Menampilkan riwayat sesi rekayasa sebelumnya.
+2. Keadaan 2: Layar Belah Percakapan Aktif di Desktop (Desktop Active Split Screen):
+Begitu instruksi dikirim, tampilan otomatis bertransisi mulus menjadi 2 kolom berdampingan:
+Kolom Kiri (45% lebar): Aliran pesan percakapan chat dengan agen koding, lengkap dengan jejak langkah mikro transparan (Baca, Racik, Uji, Selesai) dan komposer di bawah.
+Kolom Kanan (55% lebar): Jendela pemantauan gelap berkelas dengan 3 tab:
+Tab [ Pratinjau Hidup ]: Menampilkan visual web app interaktif live.
+Tab [ Tinjau Suntingan (Diff) ]: Menampilkan pohon berkas dan kode dengan penanda baris hijau (+)/merah (-).
+Tab [ Papan Konsol / Log ]: Menampilkan log terminal dan kecepatan eksekusi milidetik.
+Bilah Header Kanan: Menampilkan nama proyek aktif, tombol [ 📦 Unduh ZIP ], dan tombol [ 🚀 Terbitkan ke GitHub ].
+BAB 19: PENGUATAN KEAMANAN SIBER TINGKAT LANJUT & KEANDALAN RUNTIME SISTEM (ADVANCED SECURITY HARDENING & ERROR OBSERVABILITY)
+19.1 Latar Belakang Audit Statis Mendalam
+Audit keamanan statis independen berbasis pembacaan kode riil commit b1b7b24 mengonfirmasi bahwa kendala utama sistem bukan pada kurangnya kapabilitas, melainkan pada batas kepercayaan (trust boundary) yang terlalu lebar dan praktik penelanan galat (error swallowing) yang dapat menyamarkan kegagalan sistemik. Bab 19 menetapkan standar hardening baku untuk menutup celah keamanan data, mengamankan komunikasi antar-jendela (postMessage), dan memastikan seluruh kegagalan teramati secara transparan.
+19.2 Spesifikasi Hardening Berkas demi Berkas
+Observabilitas Galat Global & Eliminasi Penelanan Asinkronus (js/main.js):
+Masalah: Event listener window.addEventListener(&apos;unhandledrejection&apos;, (e) =&gt; e.preventDefault()) menelan kegagalan promise secara global. Akibatnya, kegagalan fatal pada IndexedDB, konektor, atau inisialisasi modul dapat terjadi tanpa terdeteksi di konsol.
+Solusi: Hapus e.preventDefault(). Terapkan penanganan galat terstruktur yang mencatat galat asinkronus ke konsol pengembang dan menampilkan pemberitahuan ramah jika subsistem kritis mengalami kegagalan.
+Pengamanan Komunikasi Antar-Jendela Iframe Studio (studio-preview.html & js/studio/sandbox-runner.js):
+Masalah: studio-preview.html dan sandbox-runner.js menggunakan target broadcast liar &apos;*&apos; pada postMessage dan tidak memeriksa event.origin maupun event.source pada listener pesan.
+Solusi:
+Pengirim wajib menetapkan target origin: postMessage(payload, location.origin).
+Penerima wajib memvalidasi: if (event.origin !== location.origin) return; dan memastikan sumber pengirim berasal dari jendela yang sah.
+Standar Diagnosis API Dispatcher Ketat (api/_http.js):
+Masalah: Fungsi readBody() menangkap galat JSON.parse() lalu mengembalikan objek kosong {}. Request yang cacat sintaksis diperlakukan sama dengan request kosong, menyulitkan diagnosis kebijakan API.
+Solusi: Jika parsing body gagal pada payload yang ada, fungsi wajib mengembalikan respons HTTP 400 Bad Request dengan payload JSON { error: &apos;invalid_json&apos; }.
+Pengelolaan Sumber Daya Model Neural On-Demand (raget/raget-neural/neural-provider.js):
+Masalah: Fungsi prefetchBest() secara agresif memanggil ensureTier(&apos;super&apos;) (mengunduh berkas safetensors 200M) secara otomatis di latar belakang saat aplikasi baru dibuka. Pada perangkat seluler dengan kuota terbatas atau RAM kecil, ini memicu pemborosan data seluler dan ancaman crash OOM.
+Solusi: Jadikan unduhan checkpoint bersifat on-demand murni. Model hanya dimuat ketika pengguna secara sadar mengaktifkan mode Neural atau memilih tier tertentu. Sediakan indikator kemajuan unduhan yang transparan.
+Pembatalan Nyata Inferensi Neural via AbortController (raget/raget-neural/neural-adapter.js):
+Masalah: Penggunaan Promise.race([work, timeoutPromise]) hanya menghentikan penantian pemanggil, tetapi eksekusi inferensi di latar belakang tetap berjalan memakan daya CPU/GPU.
+Solusi: Terapkan kontrak pembatalan berbasis AbortController yang dihubungkan ke loop generasi model, sehingga saat timeout tercapai atau pengguna mengetuk tombol Stop, komputasi inferensi langsung dibatalkan seketika.
+Sanitasi Transportasi Token OAuth (js/connectors/connector-state.js & api/_oauth.js):
+Masalah: redirectWithToken() mengirimkan access_token melalui URL query string (?access_token=...). Parameter query rentan terekspos di riwayat peramban dan log server perantara sebelum sempat dibersihkan via history.replaceState().
+Solusi: Beralih menggunakan protokol OAuth Authorization Code dengan PKCE (Proof Key for Code Exchange) atau pembersihan hash fragment (#access_token=...) yang tidak pernah ditransmisikan ke log server web.
+Proteksi Penyimpanan Rahasia Kredensial Konektor (js/connectors/connector-state.js):
+Masalah: Kunci AES rategoan_connectors_aes disimpan dalam bentuk teks mentah di localStorage berdampingan dengan ciphertext.
+Solusi: Migrasikan penyimpanan kredensial konektor ke dalam IndexedDB terpadu raget_idb yang diamankan oleh modul enkripsi vaultKey (AES-GCM in-memory), meniadakan penyimpanan kunci mentah di localStorage terbuka.
+19.3 Standar Kualitas & Kriteria Kelulusan (Definition of Done)
+100% kelulusan 17 unit test (npm test) dan 0 error linter (npm run lint).
+Iframe studio-preview.html menolak seluruh pesan yang tidak berasal dari location.origin yang valid.
+Permintaan API dengan JSON cacat secara konsisten menerima respons HTTP 400.
+Aplikasi tidak lagi mengunduh berkas model 200MB di latar belakang saat startup tanpa izin sadar pengguna.
+18.15 Cetak Biru Berkas Lengkap studio.html & Pembersihan Total index.html
+1. Penempatan Berkas Mandiri studio.html di Root:
+File baru studio.html dibuat mandiri di root repositori dengan struktur responsif:
+Header atas: [ ← Kembali ke Chat ] | Studio Rekayasa | [ 📁 Buka Folder ] [ 📦 Unduh ZIP ]
+Area Obrolan (#studio-chat-col): Lapang dan bersih di ponsel (< 1024px) dengan kartu pembuka, starter chips, dan komposer di bawah (#studio-composer).
+Area Pemantauan (#studio-canvas-col): Murni sebagai jendela pemantauan tanpa tombol kontrol manual ganda. Di ponsel meluncur naik sebagai bottom sheet (.is-sheet-open) saat [ 👁️ Pratinjau Hidup ] diketuk. Di desktop (>= 1024px) otomatis menjadi layar belah permanen (45% Chat : 55% Kanvas).
+2. Pembersihan index.html:
+Hapus seksi <section id="view-studio"> yang berjejal 22 tombol dari index.html.
+Tombol 'Studio kode' di bilah samping drawer index.html diarahkan langsung membuka studio.html (<a href="studio.html" class="drawer-item">).
+3. Pendaftaran Pre-Cache Service Worker (sw.js):
+Tambahkan './studio.html' dan './css/ui/studio.css' ke dalam daftar APP_SHELL_CACHE di sw.js agar Studio Rekayasa 100% tahan luring sejak detik pertama pemasangan PWA.

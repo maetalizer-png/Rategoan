@@ -80,6 +80,7 @@
   letter-spacing: 0.2px;
   text-align: left;
   padding: 8px 10px;
+  text-decoration: none;
 }
 
 .side-link:active {

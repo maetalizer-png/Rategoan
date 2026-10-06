@@ -41,12 +41,19 @@ export function healScript(code, error) {
   return src.replace(new RegExp('\\b' + bad + '\\b', 'g'), hit);
 }
 
+export function acceptStudioMessage(event, expectedOrigin, expectedSource) {
+  if (!event || !expectedOrigin) return false;
+  if (expectedSource && event.source !== expectedSource) return false;
+  return event.origin === expectedOrigin;
+}
+
 export function previewSrcdoc(files) {
   const html = String((files && files['index.html']) || '');
   const css = String((files && files['style.css']) || '');
   const js = String((files && files['script.js']) || '');
+  const origin = (typeof location !== 'undefined' && location.origin) ? location.origin : '*';
   const csp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data: blob:;">';
-  const trap = '<script>window.onerror=function(msg,url,line,col){parent.postMessage({type:"studio:error",error:{msg:String(msg),line:line,col:col}},"*");};<\/script>';
+  const trap = '<script>window.onerror=function(msg,url,line,col){parent.postMessage({type:"studio:error",error:{msg:String(msg),line:line,col:col}},' + JSON.stringify(origin) + ');};<\/script>';
   const style = csp + trap + '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
   const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>';
   if (/<html[\s>]/i.test(html)) {
@@ -61,10 +68,12 @@ export function previewSrcdoc(files) {
 export function mountPreview(frame, files) {
   if (!frame) return;
   const html = previewSrcdoc(files);
-  frame.onload = () => {
-    if (frame.contentWindow) frame.contentWindow.postMessage({ type: 'studio:srcdoc', html }, '*');
-  };
-  frame.src = 'studio-preview.html?run=' + Date.now();
+  // Iframe sandbox tanpa allow-same-origin ber-origin buram. Chrome menolak
+  // postMessage(..., "null"), dan location.origin tidak sampai ke jendela itu.
+  // Induk menulis srcdoc langsung. Galat anak tetap dikirim ke origin induk,
+  // bukan ke target '*'.
+  frame.removeAttribute('src');
+  frame.srcdoc = html;
 }
 
 export function zipStore(files) {

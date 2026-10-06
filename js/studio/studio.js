@@ -387,11 +387,8 @@ export const studioPage = {
     document.addEventListener('rategoan:studio-code', (event) => {
       const code = (event.detail && event.detail.code) || '';
       const codeLang = (event.detail && event.detail.lang) || '';
-      router.go('studio');
-      if (codeLang === 'python' || codeLang === 'py') pick('python');
-      else if (lang === 'python') pick('javascript');
-      writeEditor(code, codeLang === 'python' || codeLang === 'py' ? 'python' : 'javascript');
-      toast.show('Kode dibuka di Studio');
+      sessionStorage.setItem('rategoan_studio_seed', JSON.stringify({ code, lang: codeLang }));
+      location.href = 'studio.html';
     });
     const toArt = $('studio-to-artifact');
     if (toArt) toArt.onclick = () => {
@@ -405,6 +402,9 @@ export const studioPage = {
     if (py) py.onclick = () => this.runPython();
     let healTries = 0;
     window.addEventListener('message', (event) => {
+      const frame = $('studio-preview-frame');
+      if (!frame || event.source !== frame.contentWindow) return;
+      if (event.origin !== 'null' && event.origin !== location.origin) return;
       const data = event.data || {};
       if (data.type !== 'studio:error' || healTries >= 3) return;
       const now = codeText();
@@ -413,8 +413,7 @@ export const studioPage = {
       healTries += 1;
       writeEditor(next, 'javascript');
       rememberEditor();
-      const frame = $('studio-preview-frame');
-      if (frame) mountPreview(frame, WEB);
+      mountPreview(frame, WEB);
     });
     const preview = $('studio-preview');
     if (preview) preview.onclick = () => {

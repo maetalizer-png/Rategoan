@@ -19,6 +19,10 @@ export const router = {
       hash = 'login';
       full = 'login';
     }
+    if (authed && hash === 'studio') {
+      location.href = 'studio.html';
+      return;
+    }
     this.sub = full.split('/').slice(1).join('/');
     if (location.hash !== '#/' + full) {
       history.replaceState({ rg: 1, view: hash }, '', '#/' + full);
@@ -39,6 +43,10 @@ export const router = {
   go(to) {
     const full = String(to || 'chat');
     const view = full.split('/')[0] || 'chat';
+    if (view === 'studio') {
+      location.href = 'studio.html';
+      return;
+    }
     history.pushState({ rg: 1, view }, '', '#/' + full);
     this.render();
   },

@@ -183,6 +183,20 @@ if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   });
 }
 
-window.addEventListener('unhandledrejection', (e) => {
-  e.preventDefault();
+window.addEventListener('unhandledrejection', (event) => {
+  const reason = event.reason;
+  const message = reason && reason.message ? reason.message : String(reason || 'galat');
+  console.error('[Rategoan] janji gagal', reason);
+  if (/indexedDB|QuotaExceeded|IDBDatabase|raget_idb/i.test(message)) {
+    toast.show('Penyimpanan perangkat gagal. Yang sudah tampil di layar tidak dihapus.');
+  }
+});
+window.addEventListener('rategoan:neural-progress', (event) => {
+  const detail = (event && event.detail) || {};
+  const total = Number(detail.total) || 0;
+  const loaded = Number(detail.loaded) || 0;
+  if (!total) return;
+  const pct = Math.min(100, Math.round((loaded / total) * 100));
+  if (pct !== 100 && pct % 25 !== 0) return;
+  toast.show('Mengunduh Raget ' + (detail.tier || '') + ' ' + pct + '%');
 });

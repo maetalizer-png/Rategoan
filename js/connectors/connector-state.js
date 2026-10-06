@@ -1,3 +1,5 @@
+import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
+
 const KEY = 'rategoan_connectors_state';
 
 const CATALOG = {
@@ -105,11 +107,17 @@ function fromB64(raw) {
 }
 
 async function aesKey() {
-  let raw = localStorage.getItem(KEYID);
-  if (!raw) {
-    raw = b64(crypto.getRandomValues(new Uint8Array(32)));
-    localStorage.setItem(KEYID, raw);
+  let raw = '';
+  try {
+    const rows = await idbGateway.getList('connector-aes');
+    raw = rows && rows[0] && rows[0].raw ? rows[0].raw : '';
+  } catch (e) {
+    raw = '';
   }
+  if (!raw) raw = localStorage.getItem(KEYID) || '';
+  if (raw) localStorage.removeItem(KEYID);
+  if (!raw) raw = b64(crypto.getRandomValues(new Uint8Array(32)));
+  try { await idbGateway.setList('connector-aes', [{ raw }]); } catch (e) { console.warn('[Rategoan Fallback] connector-aes:', e); }
   return crypto.subtle.importKey('raw', fromB64(raw), 'AES-GCM', false, ['encrypt', 'decrypt']);
 }
 
@@ -123,22 +131,33 @@ async function persistVault(state) {
   const key = await aesKey();
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(tokens)));
-  localStorage.setItem(VAULT, JSON.stringify({ iv: b64(iv), data: b64(new Uint8Array(cipher)) }));
+  const pack = { iv: b64(iv), data: b64(new Uint8Array(cipher)) };
+  try { await idbGateway.setList('connector-vault', [pack]); } catch (e) { console.warn('[Rategoan Fallback] connector-vault:', e); }
+  localStorage.removeItem(VAULT);
 }
 
 export async function hydrateConnectorSecrets() {
   const stored = read();
   cache = stored;
-  const packRaw = localStorage.getItem(VAULT);
-  if (!packRaw || !crypto.subtle) return stored;
+  let pack = null;
   try {
-    const pack = JSON.parse(packRaw);
+    const rows = await idbGateway.getList('connector-vault');
+    pack = rows && rows[0] ? rows[0] : null;
+  } catch (e) {
+    pack = null;
+  }
+  if (!pack) {
+    try { pack = JSON.parse(localStorage.getItem(VAULT) || 'null'); } catch (e) { pack = null; }
+  }
+  if (!pack || !crypto.subtle) return stored;
+  try {
     const key = await aesKey();
     const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(pack.iv) }, key, fromB64(pack.data));
     const tokens = JSON.parse(new TextDecoder().decode(plain));
     Object.keys(tokens).forEach((id) => {
       if (cache.services[id]) cache.services[id].access_token = tokens[id];
     });
+    if (localStorage.getItem(VAULT)) await persistVault(cache);
   } catch (e) {
     return stored;
   }
@@ -182,7 +201,9 @@ export const connectorState = {
     return write(state);
   },
   absorbReturn() {
-    const params = new URLSearchParams(location.search);
+    const hash = location.hash.startsWith('#') ? location.hash.slice(1) : '';
+    const fromHash = hash.includes('access_token=');
+    const params = new URLSearchParams(fromHash ? hash : location.search);
     const token = params.get('access_token');
     const service = params.get('connector');
     if (!token || !service) return false;
@@ -191,12 +212,16 @@ export const connectorState = {
       account: params.get('account') || '',
       expiresIn: Number(params.get('expires_in') || 3600),
     });
-    params.delete('access_token');
-    params.delete('connector');
-    params.delete('expires_in');
-    params.delete('account');
-    const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
-    history.replaceState(null, '', next);
+    if (fromHash) {
+      history.replaceState(null, '', location.pathname + location.search);
+    } else {
+      params.delete('access_token');
+      params.delete('connector');
+      params.delete('expires_in');
+      params.delete('account');
+      const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+      history.replaceState(null, '', next);
+    }
     return true;
   },
 };

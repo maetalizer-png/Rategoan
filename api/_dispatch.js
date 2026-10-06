@@ -14,9 +14,15 @@ export async function dispatchTools(req, res, spec) {
     sendJson(res, 401, { error: 'missing_token' });
     return;
   }
-  const body = req.method === 'GET'
-    ? { name: query.name || spec.defaultName, parameters: query }
-    : await readBody(req);
+  let body;
+  try {
+    body = req.method === 'GET'
+      ? { name: query.name || spec.defaultName, parameters: query }
+      : await readBody(req);
+  } catch (e) {
+    sendJson(res, (e && e.statusCode) || 400, (e && e.payload) || { error: 'invalid_json' });
+    return;
+  }
   const params = body.parameters || {};
   const tool = spec.tools.find((item) => item.name === body.name);
   if (!tool) {

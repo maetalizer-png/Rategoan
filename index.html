@@ -151,79 +151,6 @@
     </section>
 
 
-    <section id="view-studio" class="view" hidden>
-      <div class="settings-page">
-        <header class="settings-header">
-          <button id="studio-back" class="back-btn plain" aria-label="Kembali">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"/>
-              <polyline points="12 19 5 12 12 5"/>
-            </svg>
-          </button>
-          <h1>Studio Rekayasa</h1>
-        </header>
-        <div id="studio-chat-pane">
-          <div id="studio-messages"></div>
-          <div class="studio-presets">
-            <button type="button" data-studio-ask="Buatkan web app interaktif dengan penghitung ketukan">Web App Interaktif</button>
-            <button type="button" data-studio-ask="Tulis skrip Python yang menjumlahkan 2 dan 3">Skrip Python</button>
-            <button type="button" id="studio-load-project">Muat Proyek</button>
-          </div>
-          <form id="studio-composer">
-            <textarea id="studio-ask" rows="2" placeholder="Perintah dalam bahasa biasa" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
-            <button type="button" id="studio-mic">Dikte</button>
-            <button type="submit">Kirim</button>
-          </form>
-        </div>
-        <div class="studio-panes" id="studio-panes">
-          <button type="button" data-pane="editor" class="on">Pohon Berkas</button>
-          <button type="button" data-pane="preview">Pratinjau Hidup</button>
-          <button type="button" data-pane="console">Papan Konsol</button>
-        </div>
-        <div class="studio-toolbar">
-          <div class="studio-topbar">
-            <div class="studio-tabs" role="tablist">
-              <button type="button" id="studio-tab-js" class="on">Web App</button>
-              <button type="button" id="studio-tab-py">Skrip Python</button>
-            </div>
-            <div class="studio-util">
-              <button type="button" id="studio-folder" class="plain">Buka Folder / ZIP</button>
-              <button type="button" id="studio-zip" class="plain">Ekspor ZIP</button>
-              <button type="button" id="studio-publish" class="plain">Terbitkan ke GitHub</button>
-              <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
-            </div>
-          </div>
-          <div class="studio-files" id="studio-files">
-            <button type="button" data-studio-file="index.html" data-studio-kind="web"><span class="studio-file-name">index.html</span><span class="studio-file-x" data-close="1">×</span></button>
-            <button type="button" data-studio-file="style.css" data-studio-kind="web"><span class="studio-file-name">style.css</span><span class="studio-file-x" data-close="1">×</span></button>
-            <button type="button" data-studio-file="script.js" data-studio-kind="web" class="on"><span class="studio-file-name">script.js</span><span class="studio-file-x" data-close="1">×</span></button>
-            <button type="button" data-studio-file="main.py" data-studio-kind="python" hidden><span class="studio-file-name">main.py</span><span class="studio-file-x" data-close="1">×</span></button>
-          </div>
-          <div id="studio-folder-list" class="studio-files" hidden></div>
-        </div>
-        <textarea id="studio-editor" class="studio-editor" rows="14" spellcheck="false"></textarea>
-        <pre id="studio-diff-view" class="md-diff" hidden></pre>
-        <div class="studio-actions">
-          <button type="button" id="studio-run" class="btn-run-primary">Jalankan</button>
-          <button type="button" id="studio-preview">Pratinjau</button>
-          <button type="button" id="studio-pin-project">Jadikan Rujukan Proyek</button>
-          <button type="button" id="studio-to-artifact" class="plain">Simpan ke Artefak</button>
-          <span class="studio-side">
-            <button type="button" id="studio-copy" class="plain">Salin</button>
-            <button type="button" id="studio-diff" class="plain">Tinjau Perubahan</button>
-          </span>
-        </div>
-        <div id="studio-terminal" class="studio-terminal">
-          <div class="studio-terminal-head">
-            <span id="studio-terminal-status">Konsol</span>
-            <button type="button" id="studio-clear" class="plain">Bersihkan</button>
-          </div>
-          <pre id="studio-console" class="art-console"></pre>
-        </div>
-        <iframe id="studio-preview-frame" title="Pratinjau studio" hidden sandbox="allow-scripts"></iframe>
-      </div>
-    </section>
-
     <section id="view-artifacts" class="view" hidden>
       <div class="settings-page">
         <header class="settings-header">
@@ -447,13 +374,13 @@
         </svg>
         Chat Baru
       </button>
-      <button id="btn-studio" class="side-link" data-route="studio">
+      <a id="btn-studio" class="side-link" href="studio.html">
         <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="16 18 22 12 16 6"/>
           <polyline points="8 6 2 12 8 18"/>
         </svg>
         Studio kode
-      </button>
+      </a>
       <button id="btn-project" class="side-link" data-route="project">
         <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>

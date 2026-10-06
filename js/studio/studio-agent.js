@@ -51,7 +51,7 @@ export function craftInstruction(text, files) {
     next['script.js'] += '\ndocument.getElementById("reset").onclick=function(){var h=document.getElementById("hasil");if(h)h.textContent="0";var i=document.getElementById("harta")||document.getElementById("harga");if(i)i.value="0";};\n';
     return { files: next, lang: 'web', steps, reply: 'Tombol reset sudah ditambahkan pada pratinjau.' };
   }
-  if (/python/i.test(ask) && !/zakat|kalkulator|diskon/i.test(ask)) {
+  if (/python/i.test(ask) && !/zakat|kalkulator|diskon|ular|kopi/i.test(ask)) {
     next['main.py'] = 'print(2 + 3)\n';
     return { files: next, lang: 'python', steps, reply: 'Skrip Python siap. Hasilnya ada di Papan Konsol.' };
   }
@@ -66,6 +66,18 @@ export function craftInstruction(text, files) {
       next['style.css'] += '\nbutton { background: #ea580c; color: #fff; border: 0; padding: 10px 14px; }\n';
     }
     return { files: next, lang: 'web', steps, reply: 'Warna tombol diubah menjadi oranye.' };
+  }
+  if (/ular/i.test(ask)) {
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Ular</title></head><body><h1>Ular</h1><canvas id="papan" width="320" height="320"></canvas><p id="hasil">0</p></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}canvas{background:#0b111c;border:1px solid #232d3a}\n';
+    next['script.js'] = 'var cv=document.getElementById("papan");var ctx=cv.getContext("2d");var s=16,dir={x:1,y:0},snake=[{x:5,y:5}],food={x:8,y:8},n=0;function tick(){var head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0||head.y<0||head.x>=20||head.y>=20)return;snake.unshift(head);if(head.x===food.x&&head.y===food.y){n+=1;food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};document.getElementById("hasil").textContent=String(n);}else snake.pop();ctx.fillStyle="#05080c";ctx.fillRect(0,0,320,320);ctx.fillStyle="#e8e6e1";snake.forEach(function(p){ctx.fillRect(p.x*s,p.y*s,s-1,s-1);});ctx.fillStyle="#ea580c";ctx.fillRect(food.x*s,food.y*s,s-1,s-1);}document.addEventListener("keydown",function(e){if(e.key==="ArrowLeft")dir={x:-1,y:0};if(e.key==="ArrowRight")dir={x:1,y:0};if(e.key==="ArrowUp")dir={x:0,y:-1};if(e.key==="ArrowDown")dir={x:0,y:1};});setInterval(tick,180);\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Game ular sudah dirakit. Mainkan di Pratinjau Hidup dengan tombol panah.' };
+  }
+  if (/kopi/i.test(ask)) {
+    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Toko kopi</title></head><body><h1>Toko kopi</h1><button type="button" data-harga="18000">Espresso</button><button type="button" data-harga="25000">Susu</button><p id="hasil">0</p></body></html>\n';
+    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}button{background:#e8e6e1;color:#05080c;border:0;padding:10px 14px;margin:0 8px 8px 0}\n';
+    next['script.js'] = 'var n=0;document.querySelectorAll("button").forEach(function(btn){btn.onclick=function(){n+=Number(btn.getAttribute("data-harga"))||0;document.getElementById("hasil").textContent=String(n);};});\n';
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Toko kopi sudah dirakit. Pratinjau hidup siap dimainkan.' };
   }
   const dark = /gelap/i.test(ask);
   const zakat = /zakat/i.test(ask);
