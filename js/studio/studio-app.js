@@ -126,6 +126,7 @@ function paintHistory(rows) {
       if (Array.isArray(row.files)) vfs.load(row.files);
       else if (row.files) Object.keys(row.files).forEach((path) => vfs.write(path, row.files[path]));
       $('studio-app').classList.add('is-active');
+      $('studio-history').classList.remove('is-open');
       $('studio-project-name').textContent = row.title || 'Proyek';
       lastBefore = vfs.flat();
       paintTree();
@@ -156,7 +157,7 @@ function beat(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 
 function say(log, text) {
   const line = document.createElement('div');
-  line.className = 'studio-msg';
+  line.className = 'msg ai';
   line.textContent = text;
   log.appendChild(line);
 }
@@ -166,7 +167,7 @@ async function finish(slot, thoughts, started, note) {
   slot.innerHTML = '';
   mountThought(slot, thoughts, 'selesai');
   const line = document.createElement('div');
-  line.className = 'studio-msg';
+  line.className = 'msg ai';
   line.textContent = note;
   const actions = document.createElement('div');
   actions.className = 'studio-action-chips';
@@ -193,12 +194,13 @@ async function applyCraft(text) {
   touched = true;
   const started = Date.now();
   $('studio-app').classList.add('is-active');
-  const log = $('studio-messages');
+  const log = $('messages');
   const user = document.createElement('div');
-  user.className = 'studio-msg user';
+  user.className = 'msg user';
   user.textContent = text;
   log.appendChild(user);
   const slot = document.createElement('div');
+  slot.className = 'studio-turn';
   log.appendChild(slot);
   const thoughts = [];
   const step = async (label) => {
@@ -297,19 +299,32 @@ function bind() {
   }
   projectKey();
   document.querySelectorAll('[data-studio-ask]').forEach((btn) => {
-    btn.onclick = () => applyCraft(btn.getAttribute('data-studio-ask') || '');
+    btn.onclick = () => {
+      const sheet = $('studio-plus-sheet');
+      if (sheet) sheet.hidden = true;
+      applyCraft(btn.getAttribute('data-studio-ask') || '');
+    };
   });
-  $('studio-send-btn').onclick = () => {
-    const box = $('studio-input');
+  const plus = $('btn-plus');
+  if (plus) plus.onclick = () => {
+    const sheet = $('studio-plus-sheet');
+    if (sheet) sheet.hidden = !sheet.hidden;
+  };
+  const hist = $('btn-studio-history');
+  if (hist) hist.onclick = () => $('studio-history').classList.toggle('is-open');
+  $('btn-send').onclick = () => {
+    const box = $('chat-input');
     const text = box.value.trim();
     if (!text) return;
     box.value = '';
+    const sheet = $('studio-plus-sheet');
+    if (sheet) sheet.hidden = true;
     applyCraft(text);
   };
-  $('studio-input').addEventListener('keydown', (event) => {
+  $('chat-input').addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
-      $('studio-send-btn').click();
+      $('btn-send').click();
     }
   });
   $('btn-studio-export').onclick = downloadZip;
@@ -326,7 +341,7 @@ function bind() {
     rec.onresult = (event) => {
       const last = event.results[event.results.length - 1];
       const said = last && last[0] ? last[0].transcript : '';
-      if (said) $('studio-input').value = ($('studio-input').value ? $('studio-input').value + ' ' : '') + said;
+      if (said) $('chat-input').value = ($('chat-input').value ? $('chat-input').value + ' ' : '') + said;
     };
     try { rec.start(); } catch (e) { console.warn('[Rategoan Fallback] dikte:', e); }
   };

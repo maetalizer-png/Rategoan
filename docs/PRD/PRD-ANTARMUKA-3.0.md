@@ -1130,3 +1130,11 @@ Desktop aktif membelah 40 persen obrolan dan 60 persen kanvas. Ponsel memakai le
 Berkas proyek disimpan berjalur di VFS (`/index.html`, `/css/style.css`, `/js/script.js`) pada IndexedDB `studio-vfs`, terpisah dari riwayat chat utama, bertanda `type: studio`.
 Diff baris hijau/merah ada di tab Pohon Berkas. Konsol menerima log pratinjau lewat postMessage ke origin induk, bukan target liar.
 Cuplikan echo di bagian 18.4 dokumen Drive tidak dipasang: itu placeholder, dan dilarang oleh bagian 18.8.
+
+## Revisi Drive 2026-10-06 19:39 — Chat Studio sama dengan chat utama
+
+Kolom obrolan Studio memakai kulit halaman utama: merek Rategoan di tengah, kartu komposer "Tanya Rategoan", dan token terang/gelap.
+Hero, subjudul panjang, dan empat pil di layar kosong dihapus. Empat jalur rekayasa tetap ada di tombol tambah, bukan di beranda.
+Riwayat sesi pindah ke laci, tidak lagi menjadi kolom yang menimpa obrolan.
+Desktop aktif membelah 42 persen obrolan dan 58 persen kanvas. Ponsel tetap satu kolom chat; kanvas adalah lembar 85vh.
+Cuplikan echo "Modul Aplikasi Siap" tidak dipasang. Perakitan scaffold, audit, analitik, dan uji satuan tetap jalan.
