@@ -18,7 +18,8 @@ import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js'
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { hybridRank, cosineText } from '../../raget/raget-vault/hybrid-search.js';
-import { fenceUntrusted, GUARDRAIL } from '../../shared/untrusted.js';
+import { fenceUntrusted, GUARDRAIL, buriedOrder } from '../../shared/untrusted.js';
+import { refuseProhibited } from '../../shared/safety-guard.js';
 import { planSubgoals } from '../../raget/raget-agents/core/agent-planner.js';
 import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
@@ -367,6 +368,16 @@ export const composer = {
       s.project = { goal: titleFrom(text), started: Date.now() };
     }
     try { memoryLong.learnFromText(text); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+    const blocked = refuseProhibited(text);
+    if (blocked) {
+      s.messages.push({ role: 'user', text, time: Date.now() });
+      store.save();
+      history.render();
+      chat.renderMessages();
+      await chat.ask(text, { directReply: blocked });
+      store.save();
+      return;
+    }
     const att = attach.consume();
     const q = quote.consume();
     s.messages.push({
@@ -380,6 +391,9 @@ export const composer = {
     history.render();
     chat.renderMessages();
     haptics.tap(10);
+    if (att && att.fileText && buriedOrder(fenceUntrusted(att.name, att.fileText)).inside && !buriedOrder(text).outside) {
+      toast.show('Perintah tersembunyi di berkas diabaikan');
+    }
     const projNew = text.match(/^proyek baru\s+(.+)$/i);
     if (projNew) {
       const p = workspace.create(projNew[1]);

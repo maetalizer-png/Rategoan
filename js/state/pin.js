@@ -129,13 +129,14 @@ export const pin = {
     };
   },
   bindAutoLock() {
-    let hiddenAt = 0;
+    let timer = 0;
     document.addEventListener('visibilitychange', () => {
       if (!this.has()) return;
       if (document.hidden) {
-        hiddenAt = Date.now();
-      } else if (hiddenAt && Date.now() - hiddenAt > 5 * 60 * 1000) {
-        this.lock();
+        timer = window.setTimeout(() => this.lock(), 5 * 60 * 1000);
+      } else if (timer) {
+        window.clearTimeout(timer);
+        timer = 0;
       }
     });
   },

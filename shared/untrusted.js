@@ -11,7 +11,7 @@ export function buriedOrder(text) {
   const outside = src.replace(/<untrusted_document_context>[\s\S]*?<\/untrusted_document_context>/gi, ' ');
   const inner = src.match(/<untrusted_document_context>([\s\S]*?)<\/untrusted_document_context>/i);
   return {
-    inside: !!(inner && /hapus|timpa|ekspor data/i.test(inner[1])),
+    inside: !!(inner && /hapus semua|timpa berkas|ekspor data sensitif/i.test(inner[1])),
     outside: /hapus semua|timpa berkas/i.test(outside),
   };
 }

@@ -7,6 +7,7 @@ import { theme } from '../state/theme.js';
 import { font } from '../state/font.js';
 import { storage } from '../state/storage.js';
 import { pin } from '../state/pin.js';
+import { vaultKey } from '../../shared/vault-key.js';
 import { drawer } from '../ui/drawer.js';
 import { history } from '../history/history.js';
 import { backup } from '../system/backup.js';
@@ -245,6 +246,9 @@ const TEMPLATE = `
                   </svg>
                   Hapus Semua Chat
                 </span>
+              </div>
+              <div class="set-row clickable danger" id="row-wipe-all">
+                <span>Bersihkan Seluruh Data & Riwayat</span>
               </div>
               <div class="set-row clickable danger" id="row-logout">
                 <span>
@@ -605,6 +609,32 @@ export const settings = {
       };
     });
     $('row-clear-chat').onclick = () => history.clearAll();
+    const wipe = $('row-wipe-all');
+    if (wipe) wipe.onclick = async () => {
+      if (!window.confirm('Hapus seluruh data, riwayat, dan kunci di perangkat ini? Tindakan ini tidak bisa dibatalkan.')) return;
+      vaultKey.drop();
+      try { localStorage.clear(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+      await Promise.all(['raget_idb', 'raget_folder'].map((name) => new Promise((resolve) => {
+        const req = indexedDB.deleteDatabase(name);
+        req.onsuccess = () => resolve();
+        req.onerror = () => resolve();
+        req.onblocked = () => resolve();
+      })));
+      location.reload();
+    };
+    if (!$('row-privacy')) {
+      const privacyRow = document.createElement('div');
+      privacyRow.className = 'set-row clickable';
+      privacyRow.id = 'row-privacy';
+      const privacyLabel = document.createElement('span');
+      privacyLabel.textContent = 'Kebijakan Privasi Publik';
+      privacyRow.appendChild(privacyLabel);
+      const privasiSection = $('set-section-privasi');
+      if (privasiSection) {
+        privasiSection.appendChild(privacyRow);
+        privacyRow.onclick = () => window.open('privacy.html', '_blank', 'noopener');
+      }
+    }
     $('row-logout').onclick = () => {
       auth.logout();
       account.refresh();

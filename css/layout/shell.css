@@ -81,6 +81,13 @@
   gap: 6px;
 }
 
+.composer-disclaimer {
+  font-size: 11px;
+  color: var(--rg-muted);
+  text-align: center;
+  margin-top: 4px;
+}
+
 #composer-card {
   background: var(--rg-surface);
   border: 1px solid var(--rg-line);

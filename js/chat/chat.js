@@ -229,9 +229,23 @@ function buildActions(text) {
     toast.show('Disematkan ke proyek ' + cur.name);
     menu.hidden = true;
   };
+  const reportBtn = document.createElement('button');
+  reportBtn.type = 'button';
+  reportBtn.textContent = 'Laporkan balasan tidak pantas';
+  reportBtn.onclick = () => {
+    const key = 'rategoan_reports';
+    let list = [];
+    try { list = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { list = []; }
+    if (!Array.isArray(list)) list = [];
+    list.push({ time: Date.now(), text: String(text).slice(0, 240) });
+    try { localStorage.setItem(key, JSON.stringify(list.slice(-50))); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+    toast.show('Laporan dicatat secara lokal. Terima kasih.');
+    menu.hidden = true;
+  };
   menu.appendChild(shareBtn);
   menu.appendChild(upBtn);
   menu.appendChild(downBtn);
+  menu.appendChild(reportBtn);
   menu.appendChild(pinProjBtn);
   row.appendChild(copyBtn);
   row.appendChild(speakBtn);
