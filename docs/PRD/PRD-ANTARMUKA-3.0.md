@@ -173,9 +173,9 @@ Akselerasi pintasan global Ctrl + K / Cmd + K
 Mengaktifkan peluncur perintah mengambang universal (Ctrl + K, Ctrl + N untuk chat baru, > studio, > slide) dengan penanganan preventDefault() tanpa bentrok dengan shortcut browser.
 
 20
-index.html & css/layout/shell.css
+index.html, js/chat/chat.js & css/chat/messages.css
 Pemasangan disclaimer AI wajib Google Play AIGC
-Menambahkan caption mikro <div class="composer-disclaimer">Rategoan dapat membuat kekeliruan. Verifikasi kembali informasi penting.</div> di bawah komposer input.
+Disclaimer tidak diletakkan di bawah komposer. Teks muncul di bawah riwayat pesan lewat .chat-stream-disclaimer agar bilah ketik tetap menempel di atas papan ketik.
 21
 js/chat/chat.js
 Tombol pelaporan konten AI di menu pesan
@@ -752,11 +752,12 @@ Web App Manifest Penuh: Berkas manifest.webmanifest wajib memiliki ikon beresolu
 Service Worker Offline Fallback: Seluruh aset inti (CSS, JS, ikon, font) tercatat di cache Service Worker (sw.js) agar aplikasi lolos verifikasi PWA offline Play Store.
 Keamanan CSP & HTTPS: Kepatuhan penuh terhadap kebijakan keamanan Android WebView dan TWA.
 16.4 Kepatuhan Kebijakan Konten Buatan AI Google Play (Google Play AIGC Policy Compliance)
-Pemasangan Teks Peringatan/Disclaimer AI Wajib:
+Pemasangan Teks Peringatan/Disclaimer AI Wajib (Ergonomis di Bawah Obrolan):
 Sesuai regulasi resmi Google Play Developer Policy untuk aplikasi AI Generatif, pengguna wajib diberi tahu bahwa keluaran dibuat oleh kecerdasan buatan dan dapat memiliki kekeliruan.
-Di bawah bilah komposer input (#composer) di index.html dan css/layout/shell.css, tambahkan teks disclaimer mikro elegan:
-<div class="composer-disclaimer">Rategoan dapat membuat kekeliruan. Verifikasi kembali informasi penting.</div>
-Dengan penataan gaya minimalis: font-size: 11px; color: var(--rg-muted); text-align: center; margin-top: 4px;.
+Dilarang menempatkan teks disclaimer sebagai elemen statis di bawah bilah komposer. Penempatan itu mengangkat bilah input di atas papan ketik virtual.
+Hapus .composer-disclaimer dari footer #composer. Di js/chat/chat.js, sematkan disclaimer di bagian paling bawah kontainer pesan hanya saat obrolan sudah berisi pesan. Kelas: chat-stream-disclaimer. Teks: Rategoan dapat membuat kekeliruan. Verifikasi kembali informasi penting.
+Gaya di css/chat/messages.css: font-size 11px, line-height 1.4, color var(--rg-muted), text-align center, padding 16px 12px 6px.
+Beranda kosong tetap bersih. Bilah ketik menempel di atas keyboard. Disclaimer tampil di bawah riwayat pesan.
 Mekanisme Pelaporan Konten AI di Dalam Aplikasi (In-App Reporting Mechanism):
 Google Play mewajibkan aplikasi memiliki mekanisme bagi pengguna untuk menandai atau melaporkan konten AI yang tidak pantas, menyinggung, atau bermasalah.
 Pada menu tindakan pesan AI (#msg-menu di js/chat/chat.js), selain tombol "Balasan bagus" dan "Balasan kurang tepat", tambahkan tombol tindakan resmi:

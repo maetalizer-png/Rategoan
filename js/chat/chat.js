@@ -105,6 +105,17 @@ function detectQuickChips(text) {
   return [];
 }
 
+function pinStreamDisclaimer(box) {
+  if (!box) return;
+  let note = box.querySelector('.chat-stream-disclaimer');
+  if (!note) {
+    note = document.createElement('div');
+    note.className = 'chat-stream-disclaimer';
+    note.textContent = 'Rategoan dapat membuat kekeliruan. Verifikasi kembali informasi penting.';
+  }
+  box.appendChild(note);
+}
+
 function buildMoreBtn() {
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -389,6 +400,7 @@ export const chat = {
       }
       box.appendChild(d);
     });
+    pinStreamDisclaimer(box);
     scrollBottom();
     scrolldown.update();
   },
@@ -431,6 +443,7 @@ export const chat = {
       actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
     });
     d.appendChild(actions);
+    pinStreamDisclaimer($('messages'));
     if (follow) {
       scrollBottom();
     } else {
@@ -449,6 +462,7 @@ export const chat = {
       typing.innerHTML = '<span class="zen-dot"></span>';
     }
     $('messages').appendChild(typing);
+    pinStreamDisclaimer($('messages'));
     scrollBottom();
     generation = new AbortController();
     document.body.classList.add('is-generating');

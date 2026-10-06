@@ -296,6 +296,18 @@
   color: var(--rg-muted);
 }
 
+.chat-stream-disclaimer {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--rg-muted);
+  text-align: center;
+  padding: 16px 12px 6px;
+  user-select: none;
+  opacity: 0.85;
+  max-width: none;
+  white-space: normal;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .msg-action-btn:hover {
     background: var(--rg-ring);
