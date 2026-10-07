@@ -1155,6 +1155,12 @@ Desktop menyembunyikan kanvas sampai racikan atau tombol belah, lalu kanvas mema
 Jejak alat menampilkan grep, baca, sunting, dan hasil sandbox yang benar-benar dijalankan. Angka telemetri diukur dari ukuran berkas, bukan 1,2 ms atau 2,4 MB tetap.
 Ikon gembok dan anak kunci dipasang pada baris brankas di Pengaturan Data. Token GitHub tetap di konektor, bukan di halaman itu.
 
+## Revisi Drive 2026-10-07 03:39 — PRD 4.0 ponsel
+
+Judul ponsel hanya "Studio Kode", tanpa label sandbox. Kartu inspirasi pindah ke area konten, tidak menempel di bawah komposer.
+Laci mengembalikan pilar Rategoan, plus hapus sesi dan bersihkan semua. Lembar tambah hanya folder, ZIP, dan GitHub, dengan latar permukaan dan tombol tutup.
+
+
 
 ## Revisi Drive 2026-10-06 23:12 — Studio Level 2 dan kanvas 50 persen
 

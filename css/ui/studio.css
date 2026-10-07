@@ -90,13 +90,15 @@ body.studio-page {
 }
 .project-list { flex: 1; min-width: 0; min-height: 0; overflow: auto; padding: 4px 8px 12px; }
 .project-empty { margin: 8px; color: var(--rg-muted); font-size: 13px; }
-#studio-history button {
+.sidebar-nav { margin-top: auto; }
+#studio-history > button,
+.history-title {
   display: block;
   width: 100%;
   max-width: 100%;
   min-width: 0;
   min-height: 40px;
-  margin: 0 0 4px;
+  margin: 0;
   padding: 8px 10px;
   text-align: left;
   color: var(--rg-text);
@@ -107,7 +109,18 @@ body.studio-page {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-#studio-history button:hover { background: var(--rg-surface-2); }
+.history-row { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.history-row .history-title { flex: 1; }
+.history-del {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--rg-muted);
+  font-size: 18px;
+}
 .studio-chat-col {
   flex: 1 1 auto;
   min-width: 0;
@@ -191,11 +204,17 @@ body.studio-page #topbar.studio-topbar {
 .drawer-primary { margin-top: 8px; font-weight: 650; background: var(--rg-surface-2); }
 .drawer-connectors { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--rg-line); }
 .drawer-exit { margin-top: auto; margin-bottom: 12px; border-top: 1px solid var(--rg-line); border-radius: 0; padding-top: 8px; }
-#studio-drawer-backdrop, #sheet-backdrop {
+#studio-drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(5, 8, 12, 0.45);
-  z-index: 45;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 70;
+}
+#sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 120;
 }
 #studio-drawer-backdrop[hidden], #sheet-backdrop[hidden] { display: none !important; }
 .studio-content-area {
@@ -268,30 +287,33 @@ body.studio-page #composer-card {
 body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 120px; font-size: 16px; }
 #studio-plus-sheet {
   position: fixed;
-  z-index: 60;
-  left: 12px;
-  right: 12px;
-  bottom: calc(92px + env(safe-area-inset-bottom) + var(--kb-inset, 0px));
+  z-index: 130;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 8px;
-  border: 1px solid #1e293b;
-  border-radius: 16px;
-  background: rgba(9, 13, 22, 0.92);
-  color: #f8fafc;
+  padding: 8px 8px calc(12px + env(safe-area-inset-bottom));
+  border: 0;
+  border-top: 1px solid var(--rg-line);
+  border-radius: 16px 16px 0 0;
+  background: var(--rg-surface);
+  color: var(--rg-text);
   box-shadow: var(--rg-shadow);
-  backdrop-filter: blur(16px);
 }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 8px; }
+#btn-plus-close { width: 44px; height: 44px; border: 0; background: transparent; color: var(--rg-text); font-size: 22px; }
 #studio-plus-sheet[hidden] { display: none !important; }
 #studio-plus-sheet button {
   min-height: 44px;
   text-align: left;
   padding: 8px 12px;
   border-radius: 10px;
-  color: #f8fafc;
+  color: var(--rg-text);
   background: transparent;
 }
+#btn-plus-close { text-align: center; min-height: 44px; padding: 0; }
 .studio-turn { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; max-width: 100%; min-width: 0; }
 .studio-action-chips {
   display: flex;
@@ -416,15 +438,18 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
     padding: 0 0 12px;
     background: transparent;
   }
-  #studio-plus-sheet { left: 276px; right: auto; width: min(360px, calc(100% - 300px)); }
-  .studio-app.is-split #studio-plus-sheet { left: 276px; }
+  .studio-app:not(.is-active) #empty-state { display: contents; }
+  .studio-app:not(.is-active) .studio-welcome-title { order: 1; }
+  .studio-app:not(.is-active) #composer { order: 2; }
+  .studio-app:not(.is-active) .inspiration-cards { order: 3; width: min(680px, calc(100% - 48px)); }
+  #studio-plus-sheet { left: 260px; right: 0; width: auto; }
 }
 @media (max-width: 1023px) {
   #btn-toggle-canvas { display: none !important; }
   .studio-sidebar-col {
     display: flex !important;
     position: fixed;
-    z-index: 50;
+    z-index: 90;
     top: 0;
     bottom: 0;
     left: 0;
@@ -434,11 +459,22 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
     transition: transform 0.2s ease;
   }
   .studio-sidebar-col.is-open { transform: none; }
-  #composer { flex-direction: column-reverse; }
-  .inspiration-cards { margin-top: 0; margin-bottom: 8px; }
+  .studio-chat-body { padding-bottom: calc(104px + env(safe-area-inset-bottom) + var(--kb-inset, 0px)); }
+  body.studio-page #composer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: var(--kb-inset, 0px);
+    z-index: 60;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    background: var(--rg-surface);
+  }
   .studio-app:not(.is-active) .studio-empty-state {
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -448,7 +484,7 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
     left: 0; right: 0; bottom: 0;
     width: 100%;
     height: 86vh;
-    z-index: 55;
+    z-index: 140;
     transform: translateY(110%);
     pointer-events: none;
     border-top-left-radius: 16px;

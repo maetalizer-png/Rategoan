@@ -25,7 +25,15 @@
       </div>
       <div class="sidebar-history-title">Sesi Rekayasa</div>
       <div id="studio-history" class="project-list" aria-label="Riwayat proyek"></div>
-      <a class="drawer-exit" href="index.html#/chat">Kembali ke Chat Utama Rategoan</a>
+      <nav class="sidebar-nav" aria-label="Pilar workstation">
+        <a class="nav-item" href="index.html#/chat">Chat Utama</a>
+        <a class="nav-item active" href="studio.html">Studio Kode</a>
+        <a class="nav-item" href="index.html#/project">Proyek</a>
+        <a class="nav-item" href="index.html#/collection">Koleksi</a>
+        <a class="nav-item" href="index.html#/connect">Konektor</a>
+        <a class="nav-item" href="index.html#/artifacts">Artefak</a>
+        <a class="nav-item" href="index.html#/settings">Pengaturan</a>
+      </nav>
     </aside>
     <div id="studio-drawer-backdrop" class="drawer-backdrop" hidden></div>
     <main class="studio-chat-col">
@@ -35,7 +43,6 @@
         </button>
         <div class="topbar-center">
           <h1 id="header-model-name" class="topbar-title">Studio Kode</h1>
-          <span id="runtime-pill" class="runtime-pill">Sandbox lokal aktif</span>
         </div>
         <div class="desktop-crumb">
           <span id="crumb-project">Proyek Aktif</span>
@@ -52,16 +59,24 @@
       <div id="studio-chat-body" class="studio-chat-body studio-content-area">
         <div id="empty-state" class="studio-empty-state">
           <h2 class="studio-welcome-title">Studio Kode</h2>
+          <div class="inspiration-cards">
+            <button type="button" class="insp-card" data-spec="Rancang scaffold arsitektur komponen dan state">Scaffold Arsitektur</button>
+            <button type="button" class="insp-card" data-spec="Audit keamanan dan celah CSP">Audit Keamanan</button>
+            <button type="button" class="insp-card" data-spec="Rakit dasbor analitik telemetri runtime">Dasbor Analitik</button>
+            <button type="button" class="insp-card" data-spec="Buatkan generator unit test">Generator Unit Test</button>
+          </div>
         </div>
         <div id="messages" class="studio-messages-box"></div>
         <footer id="composer" class="studio-composer-dock">
           <div id="sheet-backdrop" class="sheet-backdrop" hidden></div>
           <div id="studio-plus-sheet" class="studio-plus-sheet" hidden>
-            <button type="button" id="btn-studio-folder">Buka Folder</button>
-            <button type="button" id="btn-studio-zip">Buka ZIP</button>
-            <button type="button" id="btn-studio-export">Unduh ZIP</button>
-            <button type="button" id="btn-studio-push">Terbitkan</button>
-            <button type="button" id="studio-voice-btn">Dikte</button>
+            <div class="sheet-head">
+              <span>Lampiran</span>
+              <button type="button" id="btn-plus-close" aria-label="Tutup">×</button>
+            </div>
+            <button type="button" id="btn-studio-folder">Buka Folder Proyek</button>
+            <button type="button" id="btn-studio-zip">Buka Berkas ZIP</button>
+            <button type="button" id="btn-studio-push">Sinkronisasi GitHub</button>
             <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
           </div>
           <div id="composer-card">
@@ -75,19 +90,13 @@
               </button>
             </div>
           </div>
-          <div class="inspiration-cards">
-            <button type="button" class="insp-card" data-spec="Rancang scaffold arsitektur komponen dan state">Scaffold Arsitektur</button>
-            <button type="button" class="insp-card" data-spec="Audit keamanan dan celah CSP">Audit Keamanan</button>
-            <button type="button" class="insp-card" data-spec="Rakit dasbor analitik telemetri runtime">Dasbor Analitik</button>
-            <button type="button" class="insp-card" data-spec="Buatkan generator unit test">Generator Unit Test</button>
-          </div>
         </footer>
       </div>
     </main>
     <aside id="studio-canvas-pane" class="studio-canvas-pane">
       <header class="canvas-head">
         <strong id="studio-project-name">Proyek</strong>
-        <button type="button" id="studio-sheet-close" aria-label="Tutup kanvas">Tutup</button>
+        <button type="button" id="studio-sheet-close" aria-label="Tutup kanvas">×</button>
       </header>
       <nav class="canvas-tabs">
         <button type="button" class="tab-btn active" data-tab="preview">Pratinjau Hidup</button>

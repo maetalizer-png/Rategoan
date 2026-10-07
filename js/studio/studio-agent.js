@@ -69,7 +69,9 @@ export function sessionTitle(text) {
   let title = String(text || '').replace(/\s+/g, ' ').trim();
   const prefix = /^(tolong|mohon|coba|please|buatkan|buatlah|buat|rancang|rancanglah|bikinkan|susun)\s+/i;
   for (let i = 0; i < 4 && prefix.test(title); i += 1) title = title.replace(prefix, '');
-  title = title.replace(/[.?!]+$/g, '').trim();
+  title = title.replace(/[.?!]+$/g, '');
+  title = title.replace(/\b(buatkan\s+zakat|kalkulator\s+zakat|game\s+ular|toko\s+kopi|analisis\s+data\s+csv|dashboard\s+keuangan)\b/ig, '');
+  title = title.replace(/\s+/g, ' ').trim();
   if (!title) title = 'Sesi rekayasa';
   return (title.charAt(0).toUpperCase() + title.slice(1)).slice(0, 64);
 }

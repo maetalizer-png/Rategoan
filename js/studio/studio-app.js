@@ -20,6 +20,7 @@ let lastBefore = vfs.flat();
 let busy = false;
 let projectId = '';
 let touched = false;
+let sessionRows = [];
 
 function $(id) { return document.getElementById(id); }
 
@@ -140,37 +141,69 @@ async function githubCreds() {
 }
 
 function paintHistory(rows) {
+  sessionRows = (rows || []).filter((row) => row && (!row.type || row.type === 'studio'));
   const box = $('studio-history');
   if (!box) return;
   box.textContent = '';
-  (rows || []).forEach((row) => {
-    if (!row || row.type && row.type !== 'studio') return;
+  const clear = document.createElement('button');
+  clear.type = 'button';
+  clear.id = 'btn-clear-sessions';
+  clear.textContent = 'Bersihkan semua';
+  clear.onclick = () => { clearSessions(); };
+  box.appendChild(clear);
+  if (!sessionRows.length) {
+    const empty = document.createElement('p');
+    empty.className = 'project-empty';
+    empty.textContent = 'Belum ada proyek';
+    box.appendChild(empty);
+    return;
+  }
+  sessionRows.forEach((row) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'history-row';
     const btn = document.createElement('button');
     btn.type = 'button';
+    btn.className = 'history-title';
     btn.textContent = row.title || 'Sesi';
     btn.onclick = () => {
       touched = true;
       if (Array.isArray(row.files)) vfs.load(row.files);
       else if (row.files) Object.keys(row.files).forEach((path) => vfs.write(path, row.files[path]));
       $('studio-app').classList.add('is-active');
-      const side = $('studio-sidebar');
-      if (side) side.classList.remove('is-open');
-      const backdrop = $('studio-drawer-backdrop');
-      if (backdrop) backdrop.hidden = true;
+      closeDrawer();
       $('studio-project-name').textContent = row.title || 'Proyek';
       lastBefore = vfs.flat();
       paintTree();
       revealDesktop();
       mountPreview($('studio-preview-frame'), vfs.flat());
     };
-    box.appendChild(btn);
+    const del = document.createElement('button');
+    del.type = 'button';
+    del.className = 'history-del';
+    del.setAttribute('aria-label', 'Hapus sesi');
+    del.textContent = '×';
+    del.onclick = (event) => {
+      event.stopPropagation();
+      deleteSession(row.id);
+    };
+    wrap.appendChild(btn);
+    wrap.appendChild(del);
+    box.appendChild(wrap);
   });
-  if (!box.childElementCount) {
-    const empty = document.createElement('p');
-    empty.className = 'project-empty';
-    empty.textContent = 'Belum ada proyek';
-    box.appendChild(empty);
-  }
+}
+
+async function writeSessions(rows) {
+  sessionRows = rows.slice(0, 12);
+  try { await idbGateway.setList('studio-sessions', sessionRows); } catch (e) { console.warn('[Rategoan Fallback] studio-sessions:', e); }
+  paintHistory(sessionRows);
+}
+
+async function deleteSession(id) {
+  await writeSessions(sessionRows.filter((row) => row && row.id !== id));
+}
+
+async function clearSessions() {
+  await writeSessions([]);
 }
 
 async function rememberSession(title) {
@@ -184,10 +217,9 @@ async function rememberSession(title) {
   };
   let rows = [];
   try { rows = await idbGateway.getList('studio-sessions'); } catch (e) { rows = []; }
-  rows = [row].concat(rows || []).filter((item) => !item || !item.type || item.type === 'studio').slice(0, 12);
-  try { await idbGateway.setList('studio-sessions', rows); } catch (e) { console.warn('[Rategoan Fallback] studio-sessions:', e); }
+  rows = [row].concat(rows || []).filter((item) => item && (!item.type || item.type === 'studio')).slice(0, 12);
   try { await idbGateway.setList('studio-vfs', vfs.snapshot()); } catch (e) { console.warn('[Rategoan Fallback] studio-vfs:', e); }
-  paintHistory(rows);
+  await writeSessions(rows);
 }
 
 function beat(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
@@ -539,6 +571,8 @@ function bind() {
   });
   const plus = $('btn-plus');
   if (plus) plus.onclick = () => togglePlus();
+  const plusClose = $('btn-plus-close');
+  if (plusClose) plusClose.onclick = () => closePlus();
   const sheetBackdrop = $('sheet-backdrop');
   if (sheetBackdrop) sheetBackdrop.onclick = () => closePlus();
   const menu = $('btn-toggle-sidebar');
@@ -583,13 +617,15 @@ function bind() {
       $('btn-send').click();
     }
   });
-  $('btn-studio-export').onclick = () => { closePlus(); downloadZip(); };
   $('btn-studio-push').onclick = () => { closePlus(); applyCraft('Terbitkan ke GitHub'); };
+  const exporter = $('btn-studio-export');
+  if (exporter) exporter.onclick = () => { closePlus(); downloadZip(); };
   $('studio-sheet-close').onclick = () => $('studio-canvas-pane').classList.remove('is-sheet-open');
   document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.onclick = () => showTab(btn.dataset.tab);
   });
-  $('studio-voice-btn').onclick = () => {
+  const voice = $('studio-voice-btn');
+  if (voice) voice.onclick = () => {
     closePlus();
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) return;
