@@ -14,26 +14,22 @@
   <div id="studio-app" class="studio-app is-canvas-hidden">
     <aside id="studio-sidebar" class="studio-sidebar-col">
       <div class="sidebar-header">
-        <a class="brand-link" href="index.html#/chat">Rategoan</a>
-        <span class="badge-studio">Studio</span>
+        <a href="index.html#/chat" class="sidebar-back-link">← Rategoan</a>
+        <span class="sidebar-badge">Studio</span>
+        <button type="button" id="btn-close-sidebar" class="icon-btn mini mobile-only" title="Tutup sidebar" aria-label="Tutup sidebar">×</button>
       </div>
-      <button type="button" id="btn-drawer-new" class="drawer-primary">+ Sesi Koding Baru</button>
-      <div class="drawer-connectors">
-        <button type="button" id="btn-drawer-github">Sinkronisasi GitHub</button>
-        <button type="button" id="btn-drawer-folder">Buka Folder Lokal</button>
-        <button type="button" id="btn-drawer-zip">Impor Berkas ZIP</button>
+      <div class="sidebar-action">
+        <button type="button" id="btn-side-new-session" class="drawer-primary">+ Proyek Baru</button>
       </div>
-      <div class="sidebar-history-title">Sesi Rekayasa</div>
-      <div id="studio-history" class="project-list" aria-label="Riwayat proyek"></div>
-      <nav class="sidebar-nav" aria-label="Pilar workstation">
-        <a class="nav-item" href="index.html#/chat">Chat Utama</a>
-        <a class="nav-item active" href="studio.html">Studio Kode</a>
-        <a class="nav-item" href="index.html#/project">Proyek</a>
-        <a class="nav-item" href="index.html#/collection">Koleksi</a>
-        <a class="nav-item" href="index.html#/connect">Konektor</a>
-        <a class="nav-item" href="index.html#/artifacts">Artefak</a>
-        <a class="nav-item" href="index.html#/settings">Pengaturan</a>
-      </nav>
+      <div class="sidebar-history-container">
+        <div class="sidebar-history-header">
+          <span class="history-label">Riwayat</span>
+          <button type="button" id="btn-clear-history" class="icon-btn mini" title="Bersihkan semua" aria-label="Bersihkan semua">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div>
+        <div id="studio-history" class="project-list" aria-label="Riwayat proyek"></div>
+      </div>
     </aside>
     <div id="studio-drawer-backdrop" class="drawer-backdrop" hidden></div>
     <main class="studio-chat-col">
@@ -69,15 +65,25 @@
         <div id="messages" class="studio-messages-box"></div>
         <footer id="composer" class="studio-composer-dock">
           <div id="sheet-backdrop" class="sheet-backdrop" hidden></div>
-          <div id="studio-plus-sheet" class="studio-plus-sheet" hidden>
+          <div id="studio-attach-sheet" class="sheet attach-sheet" hidden>
             <div class="sheet-head">
-              <span>Lampiran</span>
-              <button type="button" id="btn-plus-close" aria-label="Tutup">×</button>
+              <div class="sheet-title">Lampirkan dan Lingkungan</div>
+              <button type="button" id="btn-close-sheet" class="sheet-close" aria-label="Tutup">×</button>
             </div>
-            <button type="button" id="btn-studio-folder">Buka Folder Proyek</button>
-            <button type="button" id="btn-studio-zip">Buka Berkas ZIP</button>
-            <button type="button" id="btn-studio-push">Sinkronisasi GitHub</button>
+            <div class="attach-grid">
+              <button type="button" id="btn-attach-camera" class="attach-card tone-blue"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>Kamera</button>
+              <button type="button" id="btn-attach-photo" class="attach-card tone-violet"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>Foto</button>
+              <button type="button" id="btn-attach-doc" class="attach-card tone-green"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Dokumen</button>
+            </div>
+            <div class="sheet-dev-connectors">
+              <button type="button" id="btn-studio-folder" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Buka Folder Proyek Lokal</span></button>
+              <button type="button" id="btn-studio-zip" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg><span>Buka Berkas ZIP Proyek</span></button>
+              <button type="button" id="btn-studio-push" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg><span>Sinkronisasi Repositori GitHub</span></button>
+            </div>
             <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
+            <input type="file" id="studio-pick-camera" accept="image/*" capture="environment" hidden>
+            <input type="file" id="studio-pick-photo" accept="image/*" hidden>
+            <input type="file" id="studio-pick-doc" hidden>
           </div>
           <div id="composer-card">
             <div class="card-row">

@@ -1160,6 +1160,11 @@ Ikon gembok dan anak kunci dipasang pada baris brankas di Pengaturan Data. Token
 Judul ponsel hanya "Studio Kode", tanpa label sandbox. Kartu inspirasi pindah ke area konten, tidak menempel di bawah komposer.
 Laci mengembalikan pilar Rategoan, plus hapus sesi dan bersihkan semua. Lembar tambah hanya folder, ZIP, dan GitHub, dengan latar permukaan dan tombol tutup.
 
+## Revisi Drive 2026-10-07 12:47 — laci tiga blok dan lembar lampiran
+
+Laci ponsel lebarnya min(310px, 86vw) dan hanya berisi kembali ke Rategoan, proyek baru, serta riwayat. Pilar dan konektor duplikat diturunkan dari laci. Sapuan ke kiri menutup laci.
+Lembar tambah memakai kisi Kamera, Foto, dan Dokumen plus folder, ZIP, dan GitHub. Komposer ponsel transparan; hanya kapsul input yang mengambang. Angka telemetri tetap diukur, bukan contoh 1,2 ms.
+
 
 
 ## Revisi Drive 2026-10-06 23:12 — Studio Level 2 dan kanvas 50 persen

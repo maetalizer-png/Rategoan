@@ -145,12 +145,6 @@ function paintHistory(rows) {
   const box = $('studio-history');
   if (!box) return;
   box.textContent = '';
-  const clear = document.createElement('button');
-  clear.type = 'button';
-  clear.id = 'btn-clear-sessions';
-  clear.textContent = 'Bersihkan semua';
-  clear.onclick = () => { clearSessions(); };
-  box.appendChild(clear);
   if (!sessionRows.length) {
     const empty = document.createElement('p');
     empty.className = 'project-empty';
@@ -481,15 +475,19 @@ async function applyCraft(text) {
   }
 }
 
+function attachSheet() {
+  return $('studio-attach-sheet') || $('studio-plus-sheet');
+}
+
 function closePlus() {
-  const sheet = $('studio-plus-sheet');
+  const sheet = attachSheet();
   const backdrop = $('sheet-backdrop');
   if (sheet) sheet.hidden = true;
   if (backdrop) backdrop.hidden = true;
 }
 
 function togglePlus() {
-  const sheet = $('studio-plus-sheet');
+  const sheet = attachSheet();
   const backdrop = $('sheet-backdrop');
   if (!sheet) return;
   const open = sheet.hidden;
@@ -499,7 +497,11 @@ function togglePlus() {
 
 function closeDrawer() {
   const side = $('studio-sidebar');
-  if (side) side.classList.remove('is-open');
+  if (side) {
+    side.style.transition = '';
+    side.style.transform = '';
+    side.classList.remove('is-open');
+  }
   const backdrop = $('studio-drawer-backdrop');
   if (backdrop) backdrop.hidden = true;
 }
@@ -554,6 +556,84 @@ function blankProject() {
   mountPreview($('studio-preview-frame'), vfs.flat());
 }
 
+function bindSwipeClose() {
+  const side = $('studio-sidebar');
+  if (!side) return;
+  let tracking = false;
+  let dragging = false;
+  let startX = 0;
+  let startY = 0;
+  let lastX = 0;
+  let lastT = 0;
+  let vx = 0;
+  side.addEventListener('touchstart', (event) => {
+    if (!side.classList.contains('is-open')) return;
+    if (window.matchMedia('(min-width: 1024px)').matches) return;
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    tracking = true;
+    dragging = false;
+    startX = lastX = touch.clientX;
+    startY = touch.clientY;
+    lastT = Date.now();
+    vx = 0;
+  }, { passive: true });
+  side.addEventListener('touchmove', (event) => {
+    if (!tracking) return;
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+    if (!dragging) {
+      if (Math.abs(dx) < 12) return;
+      if (Math.abs(dy) > Math.abs(dx) || dx > 0) {
+        tracking = false;
+        return;
+      }
+      dragging = true;
+      side.style.transition = 'none';
+    }
+    const width = side.offsetWidth || 1;
+    const pos = Math.max(0, Math.min(width, width + dx));
+    const now = Date.now();
+    vx = (touch.clientX - lastX) / Math.max(1, now - lastT);
+    lastX = touch.clientX;
+    lastT = now;
+    side.style.transform = 'translateX(' + (pos - width) + 'px)';
+    if (event.cancelable) event.preventDefault();
+  }, { passive: false });
+  const end = () => {
+    if (!tracking) return;
+    const moved = lastX - startX;
+    tracking = false;
+    if (!dragging) return;
+    dragging = false;
+    side.style.transition = '';
+    side.style.transform = '';
+    if (vx < -0.35 || moved < -(side.offsetWidth || 1) * 0.38) closeDrawer();
+  };
+  side.addEventListener('touchend', end, { passive: true });
+  side.addEventListener('touchcancel', end, { passive: true });
+}
+
+function appendPrompt(line) {
+  const box = $('chat-input');
+  if (!box || !line) return;
+  box.value = box.value ? (box.value.replace(/\s+$/, '') + '\n' + line) : line;
+  box.focus();
+}
+
+async function takePromptFile(file, label) {
+  if (!file) return;
+  const textual = /^text\/|json|xml|javascript|csv|html|yaml/.test(file.type || '')
+    || /\.(txt|md|js|mjs|css|html|json|py|csv|svg|xml|ya?ml)$/i.test(file.name || '');
+  if (textual && file.size < 200000) {
+    const text = await file.text();
+    appendPrompt(label + ': ' + file.name + '\n' + text.slice(0, 4000));
+    return;
+  }
+  appendPrompt(label + ': ' + file.name);
+}
 function bind() {
   if (!localStorage.getItem('rategoan_auth')) {
     location.replace('index.html#/login');
@@ -571,7 +651,7 @@ function bind() {
   });
   const plus = $('btn-plus');
   if (plus) plus.onclick = () => togglePlus();
-  const plusClose = $('btn-plus-close');
+  const plusClose = $('btn-close-sheet') || $('btn-plus-close');
   if (plusClose) plusClose.onclick = () => closePlus();
   const sheetBackdrop = $('sheet-backdrop');
   if (sheetBackdrop) sheetBackdrop.onclick = () => closePlus();
@@ -583,14 +663,26 @@ function bind() {
   if (canvasToggle) canvasToggle.onclick = () => toggleCanvas();
   const fresh = $('btn-new-chat');
   if (fresh) fresh.onclick = () => blankProject();
-  const drawerNew = $('btn-drawer-new');
+  const drawerNew = $('btn-side-new-session') || $('btn-drawer-new');
   if (drawerNew) drawerNew.onclick = () => { closeDrawer(); blankProject(); };
-  const drawerGithub = $('btn-drawer-github');
-  if (drawerGithub) drawerGithub.onclick = () => { closeDrawer(); closePlus(); applyCraft('Terbitkan ke GitHub'); };
-  const drawerFolder = $('btn-drawer-folder');
-  if (drawerFolder) drawerFolder.onclick = () => { closeDrawer(); $('btn-studio-folder').click(); };
-  const drawerZip = $('btn-drawer-zip');
-  if (drawerZip) drawerZip.onclick = () => { closeDrawer(); $('btn-studio-zip').click(); };
+  const closer = $('btn-close-sidebar');
+  if (closer) closer.onclick = () => closeDrawer();
+  const clearer = $('btn-clear-history');
+  if (clearer) clearer.onclick = () => { clearSessions(); };
+  bindSwipeClose();
+  const pick = (id, label) => {
+    const input = $(id);
+    const button = $(id.replace('studio-pick-', 'btn-attach-'));
+    if (button && input) button.onclick = () => { closePlus(); input.click(); };
+    if (input) input.onchange = async () => {
+      const file = input.files && input.files[0];
+      input.value = '';
+      await takePromptFile(file, label);
+    };
+  };
+  pick('studio-pick-camera', 'Lampiran kamera');
+  pick('studio-pick-photo', 'Lampiran foto');
+  pick('studio-pick-doc', 'Lampiran dokumen');
   const vv = window.visualViewport;
   if (vv) {
     const syncInset = () => {
@@ -696,7 +788,8 @@ function bind() {
     paintTree();
     mountPreview($('studio-preview-frame'), vfs.flat());
   });
-  idbGateway.getList('studio-sessions').then(paintHistory).catch(() => {});
+  paintHistory([]);
+  idbGateway.getList('studio-sessions').then(paintHistory).catch(() => paintHistory([]));
   showTab('preview');
 }
 

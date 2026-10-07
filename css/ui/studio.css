@@ -43,17 +43,17 @@ body.studio-page {
   padding: 0 14px;
   border-bottom: 1px solid var(--rg-line);
 }
-.brand-link {
+.sidebar-back-link {
   color: var(--rg-text);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: none;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.badge-studio {
+.sidebar-badge {
   flex-shrink: 0;
   font-size: 11px;
   padding: 2px 8px;
@@ -61,6 +61,27 @@ body.studio-page {
   border: 1px solid var(--rg-line);
   color: var(--rg-accent);
   background: var(--rg-surface-2);
+}
+.sidebar-action { padding: 12px 0 4px; }
+.sidebar-history-container { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.sidebar-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 2px;
+  color: var(--rg-muted);
+  font-size: 13px;
+}
+#btn-close-sidebar, #btn-clear-history, #btn-close-sheet {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--rg-text);
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .sidebar-nav {
   display: flex;
@@ -186,35 +207,36 @@ body.studio-page #topbar.studio-topbar {
 .row-spacer { flex: 1; min-width: 8px; }
 #btn-toggle-sidebar { width: 44px; height: 44px; flex: 0 0 44px; }
 #btn-new-chat, #btn-toggle-canvas { flex: 0 0 auto; }
-.drawer-primary, .drawer-connectors button, .drawer-exit {
+.drawer-primary {
   display: flex;
   align-items: center;
+  width: 100%;
   min-height: 44px;
-  margin: 0 8px;
-  padding: 0 10px;
+  margin: 0;
+  padding: 0 12px;
   border: 0;
   border-radius: 8px;
-  background: transparent;
+  background: var(--rg-surface-2);
   color: var(--rg-text);
-  text-decoration: none;
   text-align: left;
   font: inherit;
+  font-weight: 650;
   cursor: pointer;
 }
-.drawer-primary { margin-top: 8px; font-weight: 650; background: var(--rg-surface-2); }
-.drawer-connectors { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--rg-line); }
-.drawer-exit { margin-top: auto; margin-bottom: 12px; border-top: 1px solid var(--rg-line); border-radius: 0; padding-top: 8px; }
 #studio-drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 70;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 89;
+  transition: opacity 0.32s;
 }
 #sheet-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.55);
   z-index: 120;
+  opacity: 1;
+  pointer-events: auto;
 }
 #studio-drawer-backdrop[hidden], #sheet-backdrop[hidden] { display: none !important; }
 .studio-content-area {
@@ -285,35 +307,12 @@ body.studio-page #composer-card {
   box-shadow: var(--rg-shadow);
 }
 body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 120px; font-size: 16px; }
-#studio-plus-sheet {
-  position: fixed;
-  z-index: 130;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px 8px calc(12px + env(safe-area-inset-bottom));
-  border: 0;
-  border-top: 1px solid var(--rg-line);
-  border-radius: 16px 16px 0 0;
-  background: var(--rg-surface);
-  color: var(--rg-text);
-  box-shadow: var(--rg-shadow);
+#studio-attach-sheet {
+  z-index: 131;
 }
-.sheet-head { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 8px; }
-#btn-plus-close { width: 44px; height: 44px; border: 0; background: transparent; color: var(--rg-text); font-size: 22px; }
-#studio-plus-sheet[hidden] { display: none !important; }
-#studio-plus-sheet button {
-  min-height: 44px;
-  text-align: left;
-  padding: 8px 12px;
-  border-radius: 10px;
-  color: var(--rg-text);
-  background: transparent;
-}
-#btn-plus-close { text-align: center; min-height: 44px; padding: 0; }
+#studio-attach-sheet[hidden] { display: none !important; }
+#studio-attach-sheet .sheet-dev-connectors { display: flex; flex-direction: column; gap: 2px; }
+#studio-attach-sheet .attach-plain { margin-top: 0; text-align: left; }
 .studio-turn { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; max-width: 100%; min-width: 0; }
 .studio-action-chips {
   display: flex;
@@ -414,8 +413,9 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
 .diff-line.add { color: #4ade80; }
 .diff-line.del { color: #f87171; }
 @media (min-width: 1024px) {
-  #btn-toggle-sidebar, .topbar-center, #studio-sheet-close, .row-spacer { display: none; }
+  #btn-toggle-sidebar, .topbar-center, #studio-sheet-close, .row-spacer, #btn-close-sidebar { display: none; }
   .desktop-crumb { display: flex; }
+  #studio-attach-sheet { left: 260px; }
   .studio-app.is-split:not(.is-canvas-hidden) .studio-canvas-pane {
     display: flex;
     width: 48%;
@@ -442,7 +442,6 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
   .studio-app:not(.is-active) .studio-welcome-title { order: 1; }
   .studio-app:not(.is-active) #composer { order: 2; }
   .studio-app:not(.is-active) .inspiration-cards { order: 3; width: min(680px, calc(100% - 48px)); }
-  #studio-plus-sheet { left: 260px; right: 0; width: auto; }
 }
 @media (max-width: 1023px) {
   #btn-toggle-canvas { display: none !important; }
@@ -453,10 +452,12 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
     top: 0;
     bottom: 0;
     left: 0;
-    width: 260px;
-    max-width: 260px;
+    width: min(310px, 86vw);
+    max-width: min(310px, 86vw);
+    flex-basis: min(310px, 86vw);
+    padding: 12px 12px 0;
     transform: translateX(-105%);
-    transition: transform 0.2s ease;
+    transition: transform 0.32s cubic-bezier(0.1, 0.9, 0.2, 1);
   }
   .studio-sidebar-col.is-open { transform: none; }
   .studio-chat-body { padding-bottom: calc(104px + env(safe-area-inset-bottom) + var(--kb-inset, 0px)); }
@@ -469,7 +470,9 @@ body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 1
     width: 100%;
     max-width: none;
     margin: 0;
-    background: var(--rg-surface);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   .studio-app:not(.is-active) .studio-empty-state {
     flex: 1;
