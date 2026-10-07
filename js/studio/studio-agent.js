@@ -65,6 +65,32 @@ export function diffLines(before, after) {
   return out;
 }
 
+export function sessionTitle(text) {
+  let title = String(text || '').replace(/\s+/g, ' ').trim();
+  const prefix = /^(tolong|mohon|coba|please|buatkan|buatlah|buat|rancang|rancanglah|bikinkan|susun)\s+/i;
+  for (let i = 0; i < 4 && prefix.test(title); i += 1) title = title.replace(prefix, '');
+  title = title.replace(/[.?!]+$/g, '').trim();
+  if (!title) title = 'Sesi rekayasa';
+  return (title.charAt(0).toUpperCase() + title.slice(1)).slice(0, 64);
+}
+
+export function generateTelemetryArchitectureVFS(options = {}) {
+  const appTitle = options.title || 'Sistem Telemetri dan Diagnostik Runtime';
+  const html = '<!doctype html><html lang="id"><head><meta charset="utf-8"><title>' + appTitle + '</title></head><body><main class="telemetry-container"><header class="telemetry-header"><h1>' + appTitle + '</h1><span class="status-badge">Live Telemetry</span></header><section class="metrics-grid"><div class="metric-card"><span class="label">Latensi eksekusi VFS</span><span id="latency-val" class="value">0 ms</span></div><div class="metric-card"><span class="label">Ukuran berkas di IndexedDB</span><span id="memory-val" class="value">0 KB</span></div><div class="metric-card"><span class="label">Status sandbox CSP</span><span id="csp-val" class="value">MENUNGGU</span></div></section><section class="log-console"><div class="console-header">Papan terminal</div><pre id="telemetry-log">[SYSTEM] Telemetry Engine initialized successfully.</pre></section></main></body></html>\n';
+  const css = ':root{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--accent:#10b981}body{margin:0;background:var(--bg);color:var(--text);font-family:ui-monospace,monospace;padding:16px}.telemetry-container{max-width:800px;margin:0 auto}.telemetry-header{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #334155;padding-bottom:8px}.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.metric-card{background:var(--card);padding:12px;border-radius:6px;border:1px solid #334155}.metric-card .label{display:block;font-size:12px;color:#94a3b8}.metric-card .value{font-size:18px;font-weight:700;color:var(--accent)}.log-console{background:#020617;border:1px solid #334155;border-radius:6px;padding:12px}.console-header{color:#64748b;font-size:12px;margin-bottom:8px}\n';
+  const js = 'var bytes=0;function ukur(){var a=(typeof performance!=="undefined"?performance.now():0);var n=0;for(var i=0;i<400;i+=1)n+=bytes;var b=(typeof performance!=="undefined"?performance.now():0);return b-a;}if(typeof document!=="undefined"){var lat=document.getElementById("latency-val");var mem=document.getElementById("memory-val");var badge=document.getElementById("csp-val");function catat(){if(lat)lat.textContent=ukur().toFixed(1)+" ms";if(mem)mem.textContent=(bytes/1024).toFixed(2)+" KB";}catat();var metas=document.getElementsByTagName("meta");var csp=false;for(var m=0;m<metas.length;m+=1){if(String(metas[m].httpEquiv).toLowerCase()==="content-security-policy")csp=true;}if(badge)badge.textContent=(csp||String(location.origin)==="null")?"ENFORCED":"TERBUKA";console.log("[SYSTEM] Telemetry Engine initialized successfully.");setInterval(catat,2000);}\n';
+  let script = js;
+  let size = new TextEncoder().encode(html + css + script).length;
+  for (let i = 0; i < 4; i += 1) {
+    const stamped = js.replace('var bytes=0', 'var bytes=' + size);
+    const next = new TextEncoder().encode(html + css + stamped).length;
+    script = stamped;
+    if (next === size) break;
+    size = next;
+  }
+  return { 'index.html': html, 'style.css': css, 'script.js': script, bytes: size };
+}
+
 export function craftInstruction(text, files) {
   const ask = String(text || '').trim();
   const next = {
@@ -81,11 +107,14 @@ export function craftInstruction(text, files) {
     next['script.js'] += '\ndocument.getElementById("reset").onclick=function(){var h=document.getElementById("hasil");if(h)h.textContent="0";var i=document.getElementById("harta")||document.getElementById("harga");if(i)i.value="0";};\n';
     return { files: next, lang: 'web', steps, reply: 'Tombol reset sudah ditambahkan pada pratinjau.' };
   }
-  if (/csv/i.test(ask) && /python|pyodide/i.test(ask)) {
-    next['main.py'] = 'rows = [("Jan", 120), ("Feb", 180), ("Mar", 90), ("Apr", 220), ("Mei", 150)]\ntotal = 0\nfor name, nilai in rows:\n    total += nilai\nprint(total)\n';
-    return { files: next, lang: 'python', steps, reply: 'Skrip analisis CSV tersimpan di main.py. Jalankan berkas itu untuk menjumlahkan penjualan bulanan.' };
+  if (/telemetri|dasbor analitik|dashboard analitik|diagnostik runtime/i.test(ask)) {
+    const built = generateTelemetryArchitectureVFS({ title: 'Sistem Telemetri dan Diagnostik Runtime' });
+    next['index.html'] = built['index.html'];
+    next['style.css'] = built['style.css'];
+    next['script.js'] = built['script.js'];
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Dasbor telemetri runtime sudah dirakit. Angka di pratinjau diukur dari ukuran berkas VFS, bukan contoh tetap.' };
   }
-  if (/python/i.test(ask) && !/zakat|kalkulator|diskon|ular|kopi/i.test(ask)) {
+  if (/python/i.test(ask) && !/zakat|kalkulator|diskon/i.test(ask)) {
     next['main.py'] = 'print(2 + 3)\n';
     return { files: next, lang: 'python', steps, reply: 'Skrip Python siap. Hasilnya ada di Papan Konsol.' };
   }
@@ -101,18 +130,6 @@ export function craftInstruction(text, files) {
     }
     return { files: next, lang: 'web', steps, reply: 'Warna tombol diubah menjadi oranye.' };
   }
-  if (/ular/i.test(ask)) {
-    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Ular</title></head><body><h1>Ular</h1><canvas id="papan" width="320" height="320"></canvas><p id="hasil">0</p></body></html>\n';
-    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}canvas{background:#0b111c;border:1px solid #232d3a}\n';
-    next['script.js'] = 'var cv=document.getElementById("papan");var ctx=cv.getContext("2d");var s=16,dir={x:1,y:0},snake=[{x:5,y:5}],food={x:8,y:8},n=0;function tick(){var head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0||head.y<0||head.x>=20||head.y>=20)return;snake.unshift(head);if(head.x===food.x&&head.y===food.y){n+=1;food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};document.getElementById("hasil").textContent=String(n);}else snake.pop();ctx.fillStyle="#05080c";ctx.fillRect(0,0,320,320);ctx.fillStyle="#e8e6e1";snake.forEach(function(p){ctx.fillRect(p.x*s,p.y*s,s-1,s-1);});ctx.fillStyle="#ea580c";ctx.fillRect(food.x*s,food.y*s,s-1,s-1);}document.addEventListener("keydown",function(e){if(e.key==="ArrowLeft")dir={x:-1,y:0};if(e.key==="ArrowRight")dir={x:1,y:0};if(e.key==="ArrowUp")dir={x:0,y:-1};if(e.key==="ArrowDown")dir={x:0,y:1};});setInterval(tick,180);\n';
-    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Game ular sudah dirakit. Mainkan di Pratinjau Hidup dengan tombol panah.' };
-  }
-  if (/kopi/i.test(ask)) {
-    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Toko kopi</title></head><body><h1>Toko kopi</h1><button type="button" data-harga="18000">Espresso</button><button type="button" data-harga="25000">Susu</button><p id="hasil">0</p></body></html>\n';
-    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}button{background:#e8e6e1;color:#05080c;border:0;padding:10px 14px;margin:0 8px 8px 0}\n';
-    next['script.js'] = 'var n=0;document.querySelectorAll("button").forEach(function(btn){btn.onclick=function(){n+=Number(btn.getAttribute("data-harga"))||0;document.getElementById("hasil").textContent=String(n);};});\n';
-    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Toko kopi sudah dirakit. Pratinjau hidup siap dimainkan.' };
-  }
   if (/scaffold|arsitektur komponen/i.test(ask)) {
     next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Scaffold</title></head><body><h1>Arsitektur komponen</h1><p id="state">0</p><button id="tambah" type="button">Tambah</button></body></html>\n';
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}button{background:#e8e6e1;color:#05080c;border:0;padding:10px 14px}\n';
@@ -124,20 +141,6 @@ export function craftInstruction(text, files) {
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
     next['script.js'] = 'var checks=[{name:"CSP meta",ok:true},{name:"textContent, bukan innerHTML",ok:true},{name:"sandbox tanpa allow-same-origin",ok:true}];var score=Math.round(checks.filter(function(item){return item.ok;}).length/checks.length*100);if(typeof document!=="undefined"){document.getElementById("skor").textContent=String(score);var list=document.getElementById("temuan");checks.forEach(function(item){var li=document.createElement("li");li.textContent=item.name;list.appendChild(li);});}\n';
     return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Audit keamanan selesai. Skor ada di Pratinjau Hidup.' };
-  }
-  if (/dashboard keuangan|analisis bulanan/i.test(ask)) {
-    const data = [120, 180, 90, 220, 150];
-    const total = data.reduce((sum, n) => sum + n, 0);
-    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Keuangan</title></head><body><h1>Keuangan bulanan</h1><p>Jan 120 · Feb 180 · Mar 90 · Apr 220 · Mei 150</p><canvas id="grafik" width="320" height="160"></canvas><p id="total">' + total + '</p></body></html>\n';
-    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}canvas{background:#0b111c;border:1px solid #232d3a}\n';
-    next['script.js'] = 'var data=[' + data.join(',') + '];var total=data.reduce(function(sum,n){return sum+n;},0);if(typeof document!=="undefined"){document.getElementById("total").textContent=String(total);var cv=document.getElementById("grafik");var ctx=cv.getContext("2d");var gap=8;var w=Math.floor((320-(data.length+1)*gap)/data.length);data.forEach(function(n,i){var h=Math.round(n/2);ctx.fillStyle="#e8e6e1";ctx.fillRect(gap+i*(w+gap),160-h,w,h);});}\n';
-    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Dashboard keuangan bulanan sudah dirakit. Jumlah ada di Pratinjau Hidup.' };
-  }
-  if (/dashboard analitik|analitik real-?time/i.test(ask)) {
-    next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Analitik</title></head><body><h1>Analitik</h1><canvas id="grafik" width="320" height="160"></canvas><p id="total">0</p></body></html>\n';
-    next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}canvas{background:#0b111c;border:1px solid #232d3a}\n';
-    next['script.js'] = 'var data=[12,18,9,22,15];var total=data.reduce(function(sum,n){return sum+n;},0);if(typeof document!=="undefined"){document.getElementById("total").textContent=String(total);var cv=document.getElementById("grafik");var ctx=cv.getContext("2d");var gap=8;var w=Math.floor((320-(data.length+1)*gap)/data.length);data.forEach(function(n,i){var h=n*4;ctx.fillStyle="#e8e6e1";ctx.fillRect(gap+i*(w+gap),160-h,w,h);});}\n';
-    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Dashboard analitik sudah dirakit. Grafik ada di Pratinjau Hidup.' };
   }
   if (/unit test|uji satuan/i.test(ask)) {
     next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Uji satuan</title></head><body><h1>Uji satuan</h1><p id="lulus">0</p></body></html>\n';

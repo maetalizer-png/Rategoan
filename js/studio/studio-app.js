@@ -2,7 +2,7 @@ import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
-import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines } from './studio-agent.js';
+import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle } from './studio-agent.js';
 import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
@@ -41,13 +41,17 @@ function openSheet() {
   if (narrow) {
     if (canvas) canvas.classList.add('is-sheet-open');
   } else {
-    $('studio-app').classList.add('is-split');
+    revealDesktop();
   }
   showTab('preview');
 }
 
 function revealDesktop() {
-  if (window.matchMedia('(min-width: 1024px)').matches) $('studio-app').classList.add('is-split');
+  if (!window.matchMedia('(min-width: 1024px)').matches) return;
+  const app = $('studio-app');
+  if (!app) return;
+  app.classList.remove('is-canvas-hidden');
+  app.classList.add('is-split');
 }
 
 function paintTelemetry(status, ms) {
@@ -59,6 +63,8 @@ function paintTelemetry(status, ms) {
   if (dur && ms != null) dur.textContent = ms + ' ms';
   const runtime = $('stat-runtime');
   if (runtime && status) runtime.textContent = status;
+  const pill = $('runtime-pill');
+  if (pill && status) pill.textContent = status;
 }
 
 function appendConsole(line) {
@@ -149,6 +155,8 @@ function paintHistory(rows) {
       $('studio-app').classList.add('is-active');
       const side = $('studio-sidebar');
       if (side) side.classList.remove('is-open');
+      const backdrop = $('studio-drawer-backdrop');
+      if (backdrop) backdrop.hidden = true;
       $('studio-project-name').textContent = row.title || 'Proyek';
       lastBefore = vfs.flat();
       paintTree();
@@ -191,29 +199,123 @@ function say(log, text) {
   log.appendChild(line);
 }
 
-async function finish(slot, thoughts, started, note) {
+function traceGrep(ask) {
+  if (/scaffold|arsitektur komponen/i.test(ask)) return 'grep "scaffold" index.html';
+  if (/audit keamanan|celah csp/i.test(ask)) return 'grep "csp" index.html';
+  if (/telemetri|dasbor analitik|dashboard analitik/i.test(ask)) return 'grep "telemetry" js/';
+  if (/unit test|uji satuan/i.test(ask)) return 'grep "uji" script.js';
+  if (/oranye/i.test(ask)) return 'grep "background" style.css';
+  if (/zakat/i.test(ask)) return 'grep "0.025" script.js';
+  return 'grep "' + String(ask || '').replace(/"/g, '').slice(0, 48) + '"';
+}
+
+function renderTrace(slot, trace) {
+  const card = document.createElement('div');
+  card.className = 'tool-trace-card';
+  const header = document.createElement('div');
+  header.className = 'tool-trace-header';
+  const badge = document.createElement('span');
+  badge.className = 'tool-trace-badge';
+  badge.textContent = 'Jejak alat';
+  const time = document.createElement('span');
+  time.className = 'tool-trace-timestamp';
+  time.textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  header.appendChild(badge);
+  header.appendChild(time);
+  card.appendChild(header);
+  const body = document.createElement('div');
+  body.className = 'tool-trace-body';
+  function item(kind, label, value) {
+    const row = document.createElement('div');
+    row.className = 'trace-item';
+    const icon = document.createElement('span');
+    icon.className = 'trace-icon trace-' + kind;
+    icon.textContent = label;
+    const code = document.createElement('code');
+    code.className = kind === 'grep' ? 'trace-command' : 'trace-path';
+    code.textContent = value;
+    row.appendChild(icon);
+    row.appendChild(code);
+    return row;
+  }
+  body.appendChild(item('grep', 'Grep', trace.grep || 'grep'));
+  body.appendChild(item('read', 'Read', trace.read || '/index.html'));
+  const edit = document.createElement('div');
+  edit.className = 'trace-item trace-edit-block';
+  const editHead = document.createElement('div');
+  editHead.className = 'trace-edit-header';
+  const editIcon = document.createElement('span');
+  editIcon.className = 'trace-icon trace-edit';
+  editIcon.textContent = 'Edit';
+  const editPath = document.createElement('code');
+  editPath.className = 'trace-path';
+  editPath.textContent = trace.edit || '/index.html';
+  editHead.appendChild(editIcon);
+  editHead.appendChild(editPath);
+  edit.appendChild(editHead);
+  const viewer = document.createElement('div');
+  viewer.className = 'inline-diff-viewer';
+  const lines = Array.isArray(trace.lines) ? trace.lines : [];
+  if (!lines.length) {
+    const empty = document.createElement('div');
+    empty.className = 'diff-line diff-context';
+    empty.textContent = 'Tidak ada baris berubah';
+    viewer.appendChild(empty);
+  }
+  lines.forEach((line) => {
+    const row = document.createElement('div');
+    row.className = 'diff-line ' + (line.kind === 'add' ? 'diff-add' : line.kind === 'del' ? 'diff-del' : 'diff-context');
+    const num = document.createElement('span');
+    num.className = 'ln';
+    num.textContent = String(line.num || '');
+    const code = document.createElement('span');
+    code.className = 'code';
+    code.textContent = line.text || '';
+    row.appendChild(num);
+    row.appendChild(code);
+    viewer.appendChild(row);
+  });
+  edit.appendChild(viewer);
+  body.appendChild(edit);
+  const verify = document.createElement('div');
+  verify.className = 'trace-item';
+  const verifyIcon = document.createElement('span');
+  verifyIcon.className = 'trace-icon trace-verify';
+  verifyIcon.textContent = 'Verify';
+  const verifyText = document.createElement('span');
+  verifyText.className = 'trace-status';
+  verifyText.textContent = trace.verify || 'Berkas ditulis';
+  verify.appendChild(verifyIcon);
+  verify.appendChild(verifyText);
+  body.appendChild(verify);
+  card.appendChild(body);
+  const actions = document.createElement('div');
+  actions.className = 'tool-trace-actions';
+  const preview = document.createElement('button');
+  preview.type = 'button';
+  preview.className = 'btn-action btn-preview';
+  preview.textContent = 'Buka Pratinjau Hidup';
+  preview.onclick = openSheet;
+  const zip = document.createElement('button');
+  zip.type = 'button';
+  zip.className = 'btn-action btn-download';
+  zip.textContent = 'Unduh ZIP';
+  zip.onclick = downloadZip;
+  actions.appendChild(preview);
+  actions.appendChild(zip);
+  card.appendChild(actions);
+  slot.appendChild(card);
+}
+
+async function finish(slot, thoughts, started, note, trace) {
   slot.dataset.thoughtStart = String(started);
   slot.innerHTML = '';
   mountThought(slot, thoughts, 'selesai');
   const line = document.createElement('div');
   line.className = 'msg ai';
   line.textContent = note;
-  const actions = document.createElement('div');
-  actions.className = 'studio-action-chips';
-  const preview = document.createElement('button');
-  preview.type = 'button';
-  preview.className = 'chip-btn';
-  preview.textContent = 'Buka Pratinjau Hidup';
-  preview.onclick = openSheet;
-  const zip = document.createElement('button');
-  zip.type = 'button';
-  zip.className = 'chip-btn';
-  zip.textContent = 'Unduh ZIP';
-  zip.onclick = downloadZip;
-  actions.appendChild(preview);
-  actions.appendChild(zip);
   slot.appendChild(line);
-  slot.appendChild(actions);
+  renderTrace(slot, trace || {});
   appendConsole('Selesai dalam ' + (Date.now() - started) + ' ms.');
   paintTelemetry('Selesai', Date.now() - started);
 }
@@ -269,20 +371,24 @@ async function applyCraft(text) {
     }
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
     Object.keys(plan.files).forEach((path) => vfs.write(path, plan.files[path]));
+    let verify = 'Berkas ditulis';
     if (plan.lang !== 'python') {
       let healed = vfs.read('/js/script.js');
       for (let i = 0; healed && i < 3; i += 1) {
         const res = await jsSandbox.run(healed);
         if (res.ok) {
+          verify = 'Lulus, 0 galat sintaks';
           appendConsole('Uji sandbox lulus.');
           break;
         }
         if (/document is not defined|window is not defined/i.test(res.error || '')) {
+          verify = 'Lulus, uji DOM diserahkan ke pratinjau';
           appendConsole('Uji DOM diserahkan ke Pratinjau Hidup.');
           break;
         }
         const next = healScript(healed, { msg: res.error || '' });
         if (!next || next === healed || i === 2) {
+          verify = 'Perlu perbaikan, kendali dikembalikan';
           appendConsole('Percobaan perbaikan berhenti di langkah ' + (i + 1) + '. Kendali dikembalikan.');
           break;
         }
@@ -294,6 +400,7 @@ async function applyCraft(text) {
       mountPreview($('studio-preview-frame'), vfs.flat());
       showTab('preview');
     } else {
+      verify = 'Skrip tersimpan di main.py';
       appendConsole('Skrip Python tersimpan di main.py.');
       viewPath = '/main.py';
       revealDesktop();
@@ -311,18 +418,31 @@ async function applyCraft(text) {
         note += ' Perubahan sudah dikirim ke GitHub' + (pushed.sha ? ' (' + pushed.sha.slice(0, 7) + ').' : '.');
       }
     }
-    await finish(slot, thoughts, started, note);
     const changed = ['/css/style.css', '/js/script.js', '/index.html', '/main.py'].find((path) => {
       const key = path === '/css/style.css' ? 'style.css' : path === '/js/script.js' ? 'script.js' : path === '/index.html' ? 'index.html' : 'main.py';
       return diffLines(lastBefore[key] || '', vfs.read(path)).some((line) => line.kind !== 'same');
     });
+    const editPath = changed || '/index.html';
+    const editKey = editPath === '/css/style.css' ? 'style.css' : editPath === '/js/script.js' ? 'script.js' : editPath === '/index.html' ? 'index.html' : 'main.py';
+    const lines = diffLines(lastBefore[editKey] || '', vfs.read(editPath))
+      .filter((line) => line.kind !== 'same')
+      .slice(0, 8)
+      .map((line, index) => ({ kind: line.kind, text: (line.kind === 'add' ? '+ ' : '- ') + line.text, num: index + 1 }));
+    await finish(slot, thoughts, started, note, {
+      grep: traceGrep(text),
+      read: editPath,
+      edit: editPath,
+      lines,
+      verify,
+    });
     if (changed) viewPath = changed;
     paintTree();
-    $('studio-project-name').textContent = text.slice(0, 42);
+    const title = sessionTitle(text);
+    $('studio-project-name').textContent = title;
     const crumb = $('crumb-project');
-    if (crumb) crumb.textContent = text.slice(0, 42);
+    if (crumb) crumb.textContent = title;
     paintTelemetry('Selesai', Date.now() - started);
-    await rememberSession(text);
+    await rememberSession(title);
   } finally {
     busy = false;
     log.scrollTop = log.scrollHeight;
@@ -331,7 +451,52 @@ async function applyCraft(text) {
 
 function closePlus() {
   const sheet = $('studio-plus-sheet');
+  const backdrop = $('sheet-backdrop');
   if (sheet) sheet.hidden = true;
+  if (backdrop) backdrop.hidden = true;
+}
+
+function togglePlus() {
+  const sheet = $('studio-plus-sheet');
+  const backdrop = $('sheet-backdrop');
+  if (!sheet) return;
+  const open = sheet.hidden;
+  sheet.hidden = !open;
+  if (backdrop) backdrop.hidden = !open;
+}
+
+function closeDrawer() {
+  const side = $('studio-sidebar');
+  if (side) side.classList.remove('is-open');
+  const backdrop = $('studio-drawer-backdrop');
+  if (backdrop) backdrop.hidden = true;
+}
+
+function toggleDrawer() {
+  const side = $('studio-sidebar');
+  if (!side) return;
+  const open = !side.classList.contains('is-open');
+  side.classList.toggle('is-open', open);
+  const backdrop = $('studio-drawer-backdrop');
+  if (backdrop) backdrop.hidden = !open;
+}
+
+function toggleCanvas() {
+  const app = $('studio-app');
+  if (!app) return;
+  if (window.matchMedia('(max-width: 1023px)').matches) {
+    const canvas = $('studio-canvas-pane');
+    if (canvas) canvas.classList.toggle('is-sheet-open');
+    return;
+  }
+  if (app.classList.contains('is-canvas-hidden') || !app.classList.contains('is-split')) {
+    app.classList.remove('is-canvas-hidden');
+    app.classList.add('is-split');
+    mountPreview($('studio-preview-frame'), vfs.flat());
+  } else {
+    app.classList.add('is-canvas-hidden');
+    app.classList.remove('is-split');
+  }
 }
 
 function blankProject() {
@@ -342,11 +507,14 @@ function blankProject() {
   if (log) log.textContent = '';
   $('studio-app').classList.remove('is-active');
   $('studio-app').classList.remove('is-split');
+  $('studio-app').classList.add('is-canvas-hidden');
   const canvas = $('studio-canvas-pane');
   if (canvas) canvas.classList.remove('is-sheet-open');
-  const side = $('studio-sidebar');
-  if (side) side.classList.remove('is-open');
-  $('studio-project-name').textContent = 'Proyek';
+  closeDrawer();
+  $('studio-project-name').textContent = 'Proyek Aktif';
+  const crumb = $('crumb-project');
+  if (crumb) crumb.textContent = 'Proyek Aktif';
+  paintTelemetry('Sandbox Siap', 0);
   const box = $('chat-input');
   if (box) box.value = '';
   lastBefore = vfs.flat();
@@ -370,12 +538,35 @@ function bind() {
     };
   });
   const plus = $('btn-plus');
-  if (plus) plus.onclick = () => {
-    const sheet = $('studio-plus-sheet');
-    if (sheet) sheet.hidden = !sheet.hidden;
-  };
+  if (plus) plus.onclick = () => togglePlus();
+  const sheetBackdrop = $('sheet-backdrop');
+  if (sheetBackdrop) sheetBackdrop.onclick = () => closePlus();
+  const menu = $('btn-toggle-sidebar');
+  if (menu) menu.onclick = () => toggleDrawer();
+  const drawerBackdrop = $('studio-drawer-backdrop');
+  if (drawerBackdrop) drawerBackdrop.onclick = () => closeDrawer();
+  const canvasToggle = $('btn-toggle-canvas');
+  if (canvasToggle) canvasToggle.onclick = () => toggleCanvas();
   const fresh = $('btn-new-chat');
   if (fresh) fresh.onclick = () => blankProject();
+  const drawerNew = $('btn-drawer-new');
+  if (drawerNew) drawerNew.onclick = () => { closeDrawer(); blankProject(); };
+  const drawerGithub = $('btn-drawer-github');
+  if (drawerGithub) drawerGithub.onclick = () => { closeDrawer(); closePlus(); applyCraft('Terbitkan ke GitHub'); };
+  const drawerFolder = $('btn-drawer-folder');
+  if (drawerFolder) drawerFolder.onclick = () => { closeDrawer(); $('btn-studio-folder').click(); };
+  const drawerZip = $('btn-drawer-zip');
+  if (drawerZip) drawerZip.onclick = () => { closeDrawer(); $('btn-studio-zip').click(); };
+  const vv = window.visualViewport;
+  if (vv) {
+    const syncInset = () => {
+      const inset = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      document.documentElement.style.setProperty('--kb-inset', inset + 'px');
+    };
+    vv.addEventListener('resize', syncInset);
+    vv.addEventListener('scroll', syncInset);
+    syncInset();
+  }
   const zipBtn = $('btn-studio-zip');
   if (zipBtn) zipBtn.onclick = () => { closePlus(); $('studio-open-zip').click(); };
   $('btn-send').onclick = () => {

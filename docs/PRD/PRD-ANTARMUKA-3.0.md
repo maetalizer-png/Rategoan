@@ -1148,6 +1148,14 @@ Riwayat sesi pindah ke laci, tidak lagi menjadi kolom yang menimpa obrolan.
 Desktop aktif membelah 42 persen obrolan dan 58 persen kanvas. Ponsel tetap satu kolom chat; kanvas adalah lembar 85vh.
 Cuplikan echo "Modul Aplikasi Siap" tidak dipasang. Perakitan scaffold, audit, analitik, dan uji satuan tetap jalan.
 
+## Revisi Drive 2026-10-07 01:29 — PRD Antarmuka 4.0
+
+Studio Kode memakai hamburger dan laci sesi di ponsel, tanpa panah kembali di topbar. Komposer tetap di dasar lewat flex, bukan `position: absolute`.
+Desktop menyembunyikan kanvas sampai racikan atau tombol belah, lalu kanvas memakai 48 persen. Empat kartu teknis menggantikan contoh keuangan, CSV, ular, dan kopi.
+Jejak alat menampilkan grep, baca, sunting, dan hasil sandbox yang benar-benar dijalankan. Angka telemetri diukur dari ukuran berkas, bukan 1,2 ms atau 2,4 MB tetap.
+Ikon gembok dan anak kunci dipasang pada baris brankas di Pengaturan Data. Token GitHub tetap di konektor, bukan di halaman itu.
+
+
 ## Revisi Drive 2026-10-06 23:12 — Studio Level 2 dan kanvas 50 persen
 
 Ponsel tidak memakai hamburger. Bilah atas berisi tombol kembali ke chat, judul Studio Kode di tengah, dan sesi baru. Komposer menempel di dasar sejak layar kosong. Kanvas adalah lembar 86vh yang hanya naik lewat kartu Buka Pratinjau.

@@ -49,6 +49,8 @@ const MOON_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
 const LOCK_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+const KEY_ICON =
+  '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-1.5 1.5l-3 3m-2 2l-3 3m-2 2a5 5 0 1 1-7.07-7.07 5 5 0 0 1 7.07 0z"/><path d="M15 5l4 4"/></svg>';
 const STORAGE_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>';
 const INFO_ICON =
@@ -190,10 +192,10 @@ const TEMPLATE = `
                 </span>
               </div>
               <div class="set-row clickable" id="row-vault-export">
-                <span>Ekspor Cadangan Brankas</span>
+                <span>${LOCK_ICON} Ekspor Cadangan Brankas</span>
               </div>
               <div class="set-row clickable" id="row-vault-restore">
-                <span>Pulihkan Cadangan Brankas</span>
+                <span>${KEY_ICON} Pulihkan Cadangan Brankas</span>
               </div>
               <div class="set-row clickable" id="row-install" hidden>
                 <span>
