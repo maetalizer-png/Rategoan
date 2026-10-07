@@ -93,6 +93,10 @@ export function generateTelemetryArchitectureVFS(options = {}) {
   return { 'index.html': html, 'style.css': css, 'script.js': script, bytes: size };
 }
 
+function hasEngineeringIntent(ask) {
+  return /buat(kan)?|rakit|rancang|tambah|ubah|ganti|komponen|fungsi|script|style|css|html|python|button|tombol|halaman|form|telemetri|audit|uji|pengujian|scaffold|oranye|reset|warna|dasbor|sandbox/i.test(ask);
+}
+
 export function craftInstruction(text, files) {
   const ask = String(text || '').trim();
   const next = {
@@ -117,8 +121,8 @@ export function craftInstruction(text, files) {
     return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Dasbor telemetri runtime sudah dirakit. Angka di pratinjau diukur dari ukuran berkas VFS, bukan contoh tetap.' };
   }
   if (/python/i.test(ask) && !/zakat|kalkulator|diskon/i.test(ask)) {
-    next['main.py'] = 'print(2 + 3)\n';
-    return { files: next, lang: 'python', steps, reply: 'Skrip Python siap. Hasilnya ada di Papan Konsol.' };
+    next['main.py'] = 'def ukur(teks):\n    return len(teks)\n\ndef laporkan(ukuran):\n    return "byte " + str(ukuran)\n\nprint(laporkan(ukur("studio")))\n';
+    return { files: next, lang: 'python', steps, reply: 'Modul Python untuk mengukur panjang teks sudah dirakit.' };
   }
   if (/oranye/i.test(ask)) {
     if (/button\s*\{[^}]*\}/i.test(next['style.css'])) {
@@ -136,39 +140,36 @@ export function craftInstruction(text, files) {
     next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Scaffold</title></head><body><h1>Arsitektur komponen</h1><p id="state">0</p><button id="tambah" type="button">Tambah</button></body></html>\n';
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}button{background:#e8e6e1;color:#05080c;border:0;padding:10px 14px}\n';
     next['script.js'] = 'var store={count:0};function setState(patch){store.count=patch.count;if(typeof document==="undefined")return store.count;document.getElementById("state").textContent=String(store.count);return store.count;}if(typeof document!=="undefined"){document.getElementById("tambah").onclick=function(){setState({count:store.count+1});};}\n';
-    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Scaffold arsitektur komponen dan state sudah dirakit. Pratinjau hidup siap dimainkan.' };
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau']), reply: 'Scaffold komponen reaktif sudah dirakit. StateStore menulis ulang judul dan panel di pratinjau.' };
   }
   if (/audit keamanan|celah csp/i.test(ask)) {
     next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Audit</title></head><body><h1>Laporan audit keamanan</h1><p id="skor">0</p><ul id="temuan"></ul></body></html>\n';
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
     next['script.js'] = 'var checks=[{name:"CSP meta",ok:true},{name:"textContent, bukan innerHTML",ok:true},{name:"sandbox tanpa allow-same-origin",ok:true}];var score=Math.round(checks.filter(function(item){return item.ok;}).length/checks.length*100);if(typeof document!=="undefined"){document.getElementById("skor").textContent=String(score);var list=document.getElementById("temuan");checks.forEach(function(item){var li=document.createElement("li");li.textContent=item.name;list.appendChild(li);});}\n';
-    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Audit keamanan selesai. Skor ada di Pratinjau Hidup.' };
+    return { files: next, lang: 'web', steps: steps.concat(['Pratinjau']), reply: 'Audit keamanan selesai. Skor ada di pratinjau.' };
   }
-  if (/unit test|uji satuan/i.test(ask)) {
+  if (/unit test|uji satuan|pengujian satuan/i.test(ask)) {
     next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>Uji satuan</title></head><body><h1>Uji satuan</h1><p id="lulus">0</p></body></html>\n';
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
     next['script.js'] = 'function tambah(a,b){return a+b;}function uji(){var kasus=[tambah(2,3)===5,tambah(0,0)===0,tambah(-1,1)===0];var lulus=kasus.filter(Boolean).length;if(lulus!==kasus.length)throw new Error("uji gagal");return lulus;}var lulus=uji();if(typeof document!=="undefined"){document.getElementById("lulus").textContent=String(lulus);console.log("uji satuan "+lulus+" lulus");}\n';
     return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Generator uji satuan sudah dirakit. Tiga kasus dijalankan di sandbox.' };
   }
-  const dark = /gelap/i.test(ask);
-  const zakat = /zakat/i.test(ask);
-  const diskon = /diskon/i.test(ask);
-  const bg = dark ? '#05080c' : '#f7f4ee';
-  const fg = dark ? '#f2f5f7' : '#1c1a16';
-  const title = zakat ? 'Kalkulator zakat' : (diskon ? 'Kalkulator diskon' : 'Web app');
-  const body = zakat
-    ? '<label>Harta</label><input id="harta" type="number" value="1000000"><button id="go" type="button">Hitung zakat</button><p id="hasil"></p>'
-    : (diskon
-      ? '<label>Harga</label><input id="harga" type="number" value="100000"><label>Diskon %</label><input id="persen" type="number" value="10"><button id="go" type="button">Hitung diskon</button><p id="hasil"></p>'
-      : '<h1>' + title + '</h1><button id="go" type="button">Ketuk</button><p id="hasil">0</p>');
-  next['index.html'] = '<!doctype html><html><head><meta charset="utf-8"><title>' + title + '</title></head><body>' + body + '</body></html>\n';
-  next['style.css'] = 'body{background:' + bg + ';color:' + fg + ';font-family:sans-serif;margin:24px}button{background:' + (dark ? '#e8e6e1' : '#1c1a16') + ';color:' + (dark ? '#05080c' : '#fff') + ';border:0;padding:10px 14px}\n';
-  next['script.js'] = zakat
-    ? 'function hitung(){var n=Number(document.getElementById("harta").value)||0;document.getElementById("hasil").textContent=String(Math.round(n*0.025));}\ndocument.getElementById("go").onclick=hitung;\n'
-    : (diskon
-      ? 'function hitung(){var n=Number(document.getElementById("harga").value)||0;var p=Number(document.getElementById("persen").value)||0;document.getElementById("hasil").textContent=String(Math.round(n*(1-p/100)));}\ndocument.getElementById("go").onclick=hitung;\n'
-      : 'var n=0;function ketuk(){n+=1;document.getElementById("hasil").textContent=String(n);}document.getElementById("go").onclick=ketuk;\n');
-  return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: title + ' sudah dirakit. Pratinjau hidup siap dimainkan.' };
+  if (!hasEngineeringIntent(ask)) {
+    return {
+      ok: false,
+      error: 'unrecognized_instruction',
+      files: files || {},
+      steps: [],
+      reply: 'Instruksi "' + ask.slice(0, 32) + '" tidak memuat perintah rekayasa atau koding yang dapat dipahami. Berikan instruksi yang spesifik.',
+    };
+  }
+  return {
+    ok: false,
+    error: 'unrecognized_instruction',
+    files: files || {},
+    steps: [],
+    reply: 'Instruksi "' + ask.slice(0, 32) + '" belum cukup spesifik untuk diubah menjadi berkas. Sebutkan komponen, berkas, atau perubahan yang diinginkan.',
+  };
 }
 
 export async function pushGithub(token, repo, files, message) {

@@ -181,6 +181,91 @@ async function multiHeadAttentionCachedAsync(x, weights, nHeads, cache) {
     return { output: output, cache: { K: nextK, V: nextV } };
 }
 
+function kvHeadForQuery(queryHead, queryHeads, kvHeads) {
+    const groups = Math.max(1, Math.floor(Math.max(1, queryHeads) / Math.max(1, kvHeads)));
+    const head = Math.floor(queryHead / groups);
+    return head < kvHeads ? head : kvHeads - 1;
+}
+
+function gqaKvBytes(tokens, kvHeads, dHead) {
+    return Math.max(0, tokens) * Math.max(1, kvHeads) * Math.max(1, dHead) * 4 * 2;
+}
+
+function takeColumns(matrix, cols) {
+    const width = Math.max(1, cols);
+    return matrix.map(function (row) { return row.slice(0, width); });
+}
+
+function splitHeadsSized(X, nHeads, dHead) {
+    const seqLen = X.length;
+    const heads = new Array(nHeads);
+    for (let h = 0; h < nHeads; h++) {
+        const head = new Array(seqLen);
+        for (let t = 0; t < seqLen; t++) {
+            head[t] = X[t].slice(h * dHead, (h + 1) * dHead);
+        }
+        heads[h] = head;
+    }
+    return heads;
+}
+
+function groupedQueryAttention(x, weights, queryHeads, kvHeads, mask) {
+    const E = requireEmbedding();
+    const dModel = x[0].length;
+    const qh = Math.max(1, queryHeads | 0);
+    const kh = Math.max(1, Math.min(qh, kvHeads | 0));
+    const dHead = dModel / qh;
+    const kvDim = kh * dHead;
+    const Q = E.matmul(x, weights.Wq);
+    const K = E.matmul(x, takeColumns(weights.Wk, kvDim));
+    const V = E.matmul(x, takeColumns(weights.Wv, kvDim));
+    const Qh = splitHeads(Q, qh);
+    const Kh = splitHeadsSized(K, kh, dHead);
+    const Vh = splitHeadsSized(V, kh, dHead);
+    const headOutputs = new Array(qh);
+    for (let h = 0; h < qh; h++) {
+        const kv = kvHeadForQuery(h, qh, kh);
+        headOutputs[h] = scaledDotProductAttention(Qh[h], Kh[kv], Vh[kv], mask).output;
+    }
+    return {
+        output: E.matmul(mergeHeads(headOutputs), weights.Wo),
+        queryHeads: qh,
+        kvHeads: kh
+    };
+}
+
+function groupedQueryAttentionCached(x, weights, queryHeads, kvHeads, cache) {
+    const E = requireEmbedding();
+    const dModel = x[0].length;
+    const qh = Math.max(1, queryHeads | 0);
+    const kh = Math.max(1, Math.min(qh, kvHeads | 0));
+    const dHead = dModel / qh;
+    const kvDim = kh * dHead;
+    const Q = E.matmul(x, weights.Wq);
+    const K = E.matmul(x, takeColumns(weights.Wk, kvDim));
+    const V = E.matmul(x, takeColumns(weights.Wv, kvDim));
+    const Qh = splitHeads(Q, qh);
+    const Kh = splitHeadsSized(K, kh, dHead);
+    const Vh = splitHeadsSized(V, kh, dHead);
+    const cacheLen = cache && cache.K && cache.K[0] ? cache.K[0].length : 0;
+    const mask = createCausalMaskWithCache(x.length, cacheLen);
+    const nextK = new Array(kh);
+    const nextV = new Array(kh);
+    for (let k = 0; k < kh; k++) {
+        nextK[k] = cache && cache.K ? cache.K[k].concat(Kh[k]) : Kh[k];
+        nextV[k] = cache && cache.V ? cache.V[k].concat(Vh[k]) : Vh[k];
+    }
+    const headOutputs = new Array(qh);
+    for (let h = 0; h < qh; h++) {
+        const kv = kvHeadForQuery(h, qh, kh);
+        headOutputs[h] = scaledDotProductAttention(Qh[h], nextK[kv], nextV[kv], mask).output;
+    }
+    return {
+        output: E.matmul(mergeHeads(headOutputs), weights.Wo),
+        cache: { K: nextK, V: nextV, queryHeads: qh, kvHeads: kh }
+    };
+}
+
 export const LLMAttention = {
     createAttentionWeights: createAttentionWeights,
     createCausalMask: createCausalMask,
@@ -191,5 +276,9 @@ export const LLMAttention = {
     multiHeadAttentionCached: multiHeadAttentionCached,
     multiHeadAttentionCachedAsync: multiHeadAttentionCachedAsync,
     splitHeads: splitHeads,
-    mergeHeads: mergeHeads
+    mergeHeads: mergeHeads,
+    kvHeadForQuery: kvHeadForQuery,
+    gqaKvBytes: gqaKvBytes,
+    groupedQueryAttention: groupedQueryAttention,
+    groupedQueryAttentionCached: groupedQueryAttentionCached
 };

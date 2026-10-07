@@ -1171,6 +1171,10 @@ Header laci hanya merek Rategoan plus tutup, tanpa panah dan badge. Lembar tamba
 Di desktop, lembar tambah muncul di atas komposer, tombol pratinjau di obrolan disembunyikan saat kanvas terbuka, dan jejak alat memakai warna permukaan.
 Alat tingkat tiga menolak jalan tanpa persetujuan, token OAuth ditolak bila state tidak cocok, dan berkas berisi injeksi perintah tidak dikirim.
 
+## Revisi Drive 2026-10-07 20:43 — PRD 5.0
+
+Teks acak tidak lagi dirakit menjadi aplikasi palsu. Menghapus riwayat terakhir ikut mengosongkan obrolan. Kanvas desktop tidak membuka diri lagi setelah pengguna menutupnya. Lembar tambah memakai satu pintu Konektor Ekosistem, dan Google Drive membuka pemilih berkas yang jujur bila belum tertaut.
+
 
 
 ## Revisi Drive 2026-10-06 23:12 — Studio Level 2 dan kanvas 50 persen

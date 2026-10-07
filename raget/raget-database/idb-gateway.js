@@ -1,7 +1,7 @@
 import { vaultKey } from '../../shared/vault-key.js';
 
 const DB_NAME = 'raget_idb';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 const OBJECT_STORE = 'stores';
 const MEDIA_CAP = 50 * 1024 * 1024;
 
@@ -42,6 +42,9 @@ function openDb() {
       const db = req.result;
       if (!db.objectStoreNames.contains(OBJECT_STORE)) {
         db.createObjectStore(OBJECT_STORE, { keyPath: 'key' });
+      }
+      if (!db.objectStoreNames.contains('rag_index')) {
+        db.createObjectStore('rag_index', { keyPath: 'id' });
       }
     };
     req.onsuccess = () => resolve(req.result);

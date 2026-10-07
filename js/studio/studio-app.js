@@ -7,6 +7,7 @@ import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
 import { folderBridge } from '../project/folder-bridge.js';
+import { reduceStream, chooseDoor } from './sse-door.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -47,12 +48,54 @@ function openSheet() {
   showTab('preview');
 }
 
+let userClosedCanvas = false;
+
 function revealDesktop() {
+  if (userClosedCanvas) return;
   if (!window.matchMedia('(min-width: 1024px)').matches) return;
   const app = $('studio-app');
   if (!app) return;
   app.classList.remove('is-canvas-hidden');
   app.classList.add('is-split');
+}
+
+function paintDoor() {
+  const pill = $('door-pill');
+  if (!pill) return;
+  const online = typeof navigator === 'undefined' ? true : navigator.onLine;
+  const door = chooseDoor(online);
+  pill.dataset.door = door;
+  pill.textContent = door === 'local' ? 'Pintu A · Lokal' : 'Pintu B · Pusat';
+}
+
+function paintSse(raw) {
+  const state = reduceStream(raw);
+  const log = $('messages');
+  if (!log) return state;
+  $('studio-app').classList.add('is-active');
+  const line = document.createElement('div');
+  line.className = 'msg ai';
+  line.dataset.stream = 'sse';
+  line.textContent = state.text;
+  log.appendChild(line);
+  state.tools.forEach((tool) => {
+    const card = document.createElement('div');
+    card.className = 'tool-trace-card';
+    card.dataset.stream = 'tool';
+    const head = document.createElement('div');
+    head.className = 'tool-trace-header';
+    head.textContent = (tool.name || 'alat') + (tool.path ? ' ' + tool.path : '');
+    card.appendChild(head);
+    log.appendChild(card);
+  });
+  state.diffs.forEach((diff) => {
+    const pre = document.createElement('pre');
+    pre.className = 'inline-diff-viewer';
+    pre.dataset.stream = 'diff';
+    pre.textContent = diff.patch || '';
+    log.appendChild(pre);
+  });
+  return state;
 }
 
 function paintTelemetry(status, ms) {
@@ -165,7 +208,7 @@ function paintHistory(rows) {
       else if (row.files) Object.keys(row.files).forEach((path) => vfs.write(path, row.files[path]));
       $('studio-app').classList.add('is-active');
       closeDrawer();
-      $('studio-project-name').textContent = row.title || 'Proyek';
+      $('studio-project-name').textContent = 'Pratinjau Rekayasa';
       lastBefore = vfs.flat();
       paintTree();
       revealDesktop();
@@ -193,11 +236,14 @@ async function writeSessions(rows) {
 }
 
 async function deleteSession(id) {
-  await writeSessions(sessionRows.filter((row) => row && row.id !== id));
+  const nextRows = sessionRows.filter((row) => row && row.id !== id);
+  await writeSessions(nextRows);
+  if (!nextRows.length) blankProject();
 }
 
 async function clearSessions() {
   await writeSessions([]);
+  blankProject();
 }
 
 async function rememberSession(title) {
@@ -320,7 +366,7 @@ function renderTrace(slot, trace) {
   const preview = document.createElement('button');
   preview.type = 'button';
   preview.className = 'btn-action btn-preview';
-  preview.textContent = 'Buka Pratinjau Hidup';
+  preview.textContent = 'Buka pratinjau';
   preview.onclick = openSheet;
   const zip = document.createElement('button');
   zip.type = 'button';
@@ -395,6 +441,15 @@ async function applyCraft(text) {
     } else {
       plan = craftInstruction(text, before);
     }
+    if (plan.ok === false || plan.error) {
+      slot.innerHTML = '';
+      const line = document.createElement('div');
+      line.className = 'msg ai';
+      line.textContent = plan.reply || 'Instruksi tidak dapat dikerjakan.';
+      slot.appendChild(line);
+      paintTelemetry('Siap');
+      return;
+    }
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
     Object.keys(plan.files).forEach((path) => vfs.write(path, plan.files[path]));
     let verify = 'Berkas ditulis';
@@ -463,12 +518,12 @@ async function applyCraft(text) {
     });
     if (changed) viewPath = changed;
     paintTree();
-    const title = sessionTitle(text);
-    $('studio-project-name').textContent = title;
+    $('studio-project-name').textContent = 'Pratinjau Rekayasa';
     const crumb = $('crumb-project');
-    if (crumb) crumb.textContent = title;
+    const short = sessionTitle(text);
+    if (crumb) crumb.textContent = short && short.length <= 24 ? short : 'Sesi Aktif';
     paintTelemetry('Selesai', Date.now() - started);
-    await rememberSession(title);
+    await rememberSession(short || 'Sesi Aktif');
   } finally {
     busy = false;
     log.scrollTop = log.scrollHeight;
@@ -511,6 +566,13 @@ function paintConnectorStatus() {
     drive.classList.toggle('connected', driveOn);
     drive.classList.toggle('action', !driveOn);
   }
+  const badge = $('status-connectors');
+  if (badge) {
+    const count = (githubOn ? 1 : 0) + (driveOn ? 1 : 0);
+    badge.textContent = count ? (count + ' terhubung') : 'Kelola';
+    badge.classList.toggle('connected', count > 0);
+    badge.classList.toggle('action', count === 0);
+  }
 }
 
 function closeDrawer() {
@@ -547,10 +609,12 @@ function toggleCanvas() {
     return;
   }
   if (app.classList.contains('is-canvas-hidden') || !app.classList.contains('is-split')) {
+    userClosedCanvas = false;
     app.classList.remove('is-canvas-hidden');
     app.classList.add('is-split');
     mountPreview($('studio-preview-frame'), vfs.flat());
   } else {
+    userClosedCanvas = true;
     app.classList.add('is-canvas-hidden');
     app.classList.remove('is-split');
   }
@@ -565,10 +629,11 @@ function blankProject() {
   $('studio-app').classList.remove('is-active');
   $('studio-app').classList.remove('is-split');
   $('studio-app').classList.add('is-canvas-hidden');
+  userClosedCanvas = false;
   const canvas = $('studio-canvas-pane');
   if (canvas) canvas.classList.remove('is-sheet-open');
   closeDrawer();
-  $('studio-project-name').textContent = 'Proyek Aktif';
+  $('studio-project-name').textContent = 'Pratinjau Rekayasa';
   const crumb = $('crumb-project');
   if (crumb) crumb.textContent = 'Proyek Aktif';
   paintTelemetry('Sandbox Siap', 0);
@@ -665,35 +730,107 @@ function dirtySessionTitle(title) {
   return /^(buatkan|tolong buat|dummy|sample)\b/i.test(String(title || '').trim());
 }
 
-async function openDrive() {
-  if (connectorState.token('google_drive')) {
-    appendConsole('Google Drive terhubung. Daftar berkas diminta lewat konektor.');
-    try {
-      const res = await fetch('/api/connectors/drive', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          authorization: 'Bearer ' + connectorState.token('google_drive'),
-        },
-        body: JSON.stringify({ name: 'drive_list_children', parameters: { folder_id: 'root' } }),
-      });
-      appendConsole(res.ok ? 'Google Drive menjawab.' : 'Google Drive menolak permintaan.');
-    } catch (e) {
-      appendConsole('Google Drive tidak terjangkau.');
-    }
+let driveStack = ['root'];
+let driveSelection = null;
+
+function closeDriveModal() {
+  const modal = $('modal-gdrive-picker');
+  if (modal) modal.hidden = true;
+  driveSelection = null;
+}
+
+function paintDriveList(files, note) {
+  const list = $('gdrive-file-list');
+  if (!list) return;
+  list.textContent = '';
+  if (note) {
+    const line = document.createElement('div');
+    line.className = 'list-loading';
+    line.textContent = note;
+    list.appendChild(line);
+  }
+  (files || []).forEach((file) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gdrive-row';
+    const folder = file.mimeType === 'application/vnd.google-apps.folder';
+    btn.textContent = (folder ? 'Folder ' : 'Berkas ') + (file.name || file.id || '');
+    btn.onclick = () => {
+      if (folder) {
+        driveStack.push(file.id);
+        loadDriveFolder(file.id);
+        return;
+      }
+      driveSelection = file;
+      const importBtn = $('btn-import-gdrive');
+      if (importBtn) importBtn.disabled = false;
+      list.querySelectorAll('.gdrive-row').forEach((row) => row.classList.remove('is-on'));
+      btn.classList.add('is-on');
+    };
+    list.appendChild(btn);
+  });
+}
+
+async function loadDriveFolder(id) {
+  const path = $('gdrive-current-path');
+  if (path) path.textContent = !id || id === 'root' ? 'Root /' : 'Folder / ' + id.slice(0, 8);
+  const importBtn = $('btn-import-gdrive');
+  if (importBtn) importBtn.disabled = true;
+  driveSelection = null;
+  if (!connectorState.token('google_drive')) {
+    paintDriveList([], 'Google Drive belum terhubung. Buka hub konektor untuk menautkan akun.');
     return;
   }
+  paintDriveList([], 'Memuat direktori Google Drive…');
   try {
-    const res = await fetch('/api/auth/google?service=google_drive&format=json&action=start', { credentials: 'same-origin' });
+    const res = await fetch('/api/connectors/drive', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: 'Bearer ' + connectorState.token('google_drive'),
+      },
+      body: JSON.stringify({ name: 'drive_list_children', parameters: { folder_id: id || 'root' } }),
+    });
     const data = await res.json().catch(() => ({}));
-    if (data.state) sessionStorage.setItem('rategoan_oauth_state', data.state);
-    if (res.ok && data.url) {
-      location.href = data.url;
-      return;
-    }
-  } catch (e) { /* server OAuth boleh belum ada */ }
-  appendConsole('Google Drive belum terhubung. Hubungkan dulu di Konektor.');
+    const files = data.files || (data.data && data.data.files) || [];
+    paintDriveList(files, files.length ? '' : (res.ok ? 'Folder kosong.' : 'Google Drive menolak permintaan.'));
+  } catch (e) {
+    paintDriveList([], 'Google Drive tidak terjangkau.');
+  }
 }
+
+function openDrive() {
+  const modal = $('modal-gdrive-picker');
+  if (!modal) return;
+  driveStack = ['root'];
+  modal.hidden = false;
+  loadDriveFolder('root');
+}
+
+async function importDriveSelection() {
+  if (!driveSelection || !connectorState.token('google_drive')) return;
+  const res = await fetch('/api/connectors/drive', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      authorization: 'Bearer ' + connectorState.token('google_drive'),
+    },
+    body: JSON.stringify({ name: 'drive_read_content', parameters: { file_id: driveSelection.id } }),
+  });
+  const data = await res.json().catch(() => ({}));
+  const payload = data.data || data;
+  const text = typeof payload.content === 'string' ? payload.content : (typeof payload.text === 'string' ? payload.text : '');
+  if (!text) {
+    appendConsole('Berkas itu tidak berisi teks yang bisa disalin ke VFS.');
+    return;
+  }
+  const name = String(driveSelection.name || 'berkas.txt').replace(/[\\/]/g, '_');
+  vfs.write('/' + name, text);
+  paintTree();
+  appendConsole('Disalin ke VFS: /' + name);
+  closeDriveModal();
+}
+
 function bind() {
   if (!localStorage.getItem('rategoan_auth')) {
     location.replace('index.html#/login');
@@ -770,11 +907,34 @@ function bind() {
     }
   });
   $('btn-studio-github').onclick = () => { closePlus(); applyCraft('Terbitkan ke GitHub'); };
+  const connectors = $('btn-studio-connectors');
+  const panel = $('studio-connector-panel');
+  if (connectors && panel) {
+    connectors.onclick = () => { panel.hidden = !panel.hidden; };
+  }
   const driveBtn = $('btn-studio-gdrive');
   if (driveBtn) driveBtn.onclick = () => { closePlus(); openDrive(); };
-  const exporter = $('btn-studio-export');
-  if (exporter) exporter.onclick = () => { closePlus(); downloadZip(); };
-  $('studio-sheet-close').onclick = () => $('studio-canvas-pane').classList.remove('is-sheet-open');
+  const closeDrive = $('btn-close-gdrive-modal');
+  const cancelDrive = $('btn-cancel-gdrive');
+  if (closeDrive) closeDrive.onclick = closeDriveModal;
+  if (cancelDrive) cancelDrive.onclick = closeDriveModal;
+  const importDrive = $('btn-import-gdrive');
+  if (importDrive) importDrive.onclick = () => importDriveSelection();
+  const upDrive = $('btn-gdrive-up');
+  if (upDrive) upDrive.onclick = () => {
+    if (driveStack.length > 1) driveStack.pop();
+    loadDriveFolder(driveStack[driveStack.length - 1] || 'root');
+  };
+  $('studio-sheet-close').onclick = () => {
+    if (window.matchMedia('(max-width: 1023px)').matches) {
+      $('studio-canvas-pane').classList.remove('is-sheet-open');
+      return;
+    }
+    userClosedCanvas = true;
+    const app = $('studio-app');
+    app.classList.add('is-canvas-hidden');
+    app.classList.remove('is-split');
+  };
   document.querySelectorAll('.tab-btn').forEach((btn) => {
     btn.onclick = () => showTab(btn.dataset.tab);
   });
@@ -858,6 +1018,10 @@ function bind() {
     else paintHistory(clean);
   }).catch(() => paintHistory([]));
   showTab('preview');
+  paintDoor();
+  window.addEventListener('online', paintDoor);
+  window.addEventListener('offline', paintDoor);
+  window.RagetStream = { reduceStream, paint: paintSse, chooseDoor };
 }
 
 bind();

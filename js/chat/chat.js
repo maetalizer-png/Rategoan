@@ -292,6 +292,20 @@ export const chat = {
     const s = this.current();
     const has = !!(s && s.messages.length);
     if (empty) empty.hidden = has;
+    document.querySelectorAll('.chat-insp-card').forEach((card) => {
+      if (card.dataset.bound) return;
+      card.dataset.bound = '1';
+      card.onclick = () => {
+        const act = card.getAttribute('data-act');
+        if (act === 'studio') { location.href = 'studio.html'; return; }
+        if (act === 'docs') { router.go('collection'); return; }
+        if (act === 'agenda') { router.go('project'); return; }
+        const input = $('chat-input');
+        if (!input) return;
+        input.value = 'Tolong bantu menelusuri fakta. ';
+        input.focus();
+      };
+    });
     box.style.display = has ? '' : 'none';
     const bar = document.getElementById('thread-bar');
     const project = workspace.current();

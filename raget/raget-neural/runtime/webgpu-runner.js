@@ -1,3 +1,5 @@
+import { LLMQuantization } from '../llm-quantization.js';
+
 const PAGE = 16;
 
 export function kvPages(tokenCount, pageSize = PAGE) {
@@ -79,75 +81,115 @@ async function sharedDevice() {
   return gpuDevice;
 }
 
-async function dequantOnGpu(packed, length) {
+export const DEQUANT_BLOCK_SHADER = '@group(0) @binding(0) var<storage, read> packed: array<u32>;'
+  + '@group(0) @binding(1) var<storage, read_write> out: array<f32>;'
+  + '@group(0) @binding(2) var<storage, read> scales: array<f32>;'
+  + '@group(0) @binding(3) var<storage, read> zeros: array<f32>;'
+  + '@compute @workgroup_size(64) fn main(@builtin(global_invocation_id) id: vec3<u32>) {'
+  + 'let i = id.x; if (i >= arrayLength(&out)) { return; }'
+  + 'let byteIndex = i / 2u; let word = packed[byteIndex / 4u];'
+  + 'let shift = (byteIndex % 4u) * 8u; let byte = (word >> shift) & 0xffu;'
+  + 'let nibble = select(byte >> 4u, byte & 0xfu, (i & 1u) == 0u);'
+  + 'let block = i / 32u; out[i] = (f32(nibble) - zeros[block]) * scales[block]; }';
+
+async function dequantBlocksOnGpu(packed) {
   const device = await sharedDevice();
   if (!device) return null;
+  const nibbles = packInt4(packed.nibbles);
+  const scales = packed.scales;
+  const zeros = packed.zeros;
+  const length = packed.length;
   let inBuf = null;
   let outBuf = null;
   let readBuf = null;
+  let scaleBuf = null;
+  let zeroBuf = null;
   try {
-    const module = device.createShaderModule({
-    code: '@group(0) @binding(0) var<storage, read> packed: array<u32>;'
-      + '@group(0) @binding(1) var<storage, read_write> out: array<f32>;'
-      + '@compute @workgroup_size(64) fn main(@builtin(global_invocation_id) id: vec3<u32>) {'
-      + 'let i = id.x; if (i >= arrayLength(&out)) { return; }'
-      + 'let byteIndex = i / 2u; let word = packed[byteIndex / 4u];'
-      + 'let shift = (byteIndex % 4u) * 8u; let byte = (word >> shift) & 0xffu;'
-      + 'let nibble = select(byte >> 4u, byte & 0xfu, (i & 1u) == 0u);'
-      + 'out[i] = f32(nibble); }',
-  });
-  const words = Math.ceil(packed.length / 4);
-  const src = new Uint8Array(words * 4);
-  src.set(packed);
-  inBuf = device.createBuffer({ size: src.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-  outBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
-  readBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
-  device.queue.writeBuffer(inBuf, 0, src);
-  const layout = device.createBindGroupLayout({
-    entries: [
-      { binding: 0, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
-      { binding: 1, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'storage' } },
-    ],
-  });
-  const bind = device.createBindGroup({
-    layout,
-    entries: [
-      { binding: 0, resource: { buffer: inBuf } },
-      { binding: 1, resource: { buffer: outBuf } },
-    ],
-  });
-  const pipeline = device.createComputePipeline({
-    layout: device.createPipelineLayout({ bindGroupLayouts: [layout] }),
-    compute: { module, entryPoint: 'main' },
-  });
-  const encoder = device.createCommandEncoder();
-  const pass = encoder.beginComputePass();
-  pass.setPipeline(pipeline);
-  pass.setBindGroup(0, bind);
-  pass.dispatchWorkgroups(Math.ceil(length / 64));
-  pass.end();
-  encoder.copyBufferToBuffer(outBuf, 0, readBuf, 0, length * 4);
-  device.queue.submit([encoder.finish()]);
-  await readBuf.mapAsync(GPUMapMode.READ);
-  const values = Array.from(new Float32Array(readBuf.getMappedRange()));
-  readBuf.unmap();
-  return values;
+    const module = device.createShaderModule({ code: DEQUANT_BLOCK_SHADER });
+    const words = Math.ceil(nibbles.length / 4);
+    const src = new Uint8Array(words * 4);
+    src.set(nibbles);
+    inBuf = device.createBuffer({ size: src.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    scaleBuf = device.createBuffer({ size: Math.max(4, scales.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    zeroBuf = device.createBuffer({ size: Math.max(4, zeros.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    outBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
+    readBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
+    device.queue.writeBuffer(inBuf, 0, src);
+    device.queue.writeBuffer(scaleBuf, 0, scales);
+    device.queue.writeBuffer(zeroBuf, 0, zeros);
+    const layout = device.createBindGroupLayout({
+      entries: [
+        { binding: 0, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
+        { binding: 1, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'storage' } },
+        { binding: 2, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
+        { binding: 3, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
+      ],
+    });
+    const bind = device.createBindGroup({
+      layout,
+      entries: [
+        { binding: 0, resource: { buffer: inBuf } },
+        { binding: 1, resource: { buffer: outBuf } },
+        { binding: 2, resource: { buffer: scaleBuf } },
+        { binding: 3, resource: { buffer: zeroBuf } },
+      ],
+    });
+    const pipeline = device.createComputePipeline({
+      layout: device.createPipelineLayout({ bindGroupLayouts: [layout] }),
+      compute: { module, entryPoint: 'main' },
+    });
+    const encoder = device.createCommandEncoder();
+    const pass = encoder.beginComputePass();
+    pass.setPipeline(pipeline);
+    pass.setBindGroup(0, bind);
+    pass.dispatchWorkgroups(Math.ceil(length / 64));
+    pass.end();
+    encoder.copyBufferToBuffer(outBuf, 0, readBuf, 0, length * 4);
+    device.queue.submit([encoder.finish()]);
+    await readBuf.mapAsync(GPUMapMode.READ);
+    const values = Array.from(new Float32Array(readBuf.getMappedRange()));
+    readBuf.unmap();
+    return values;
   } finally {
     if (inBuf) inBuf.destroy();
     if (outBuf) outBuf.destroy();
     if (readBuf) readBuf.destroy();
+    if (scaleBuf) scaleBuf.destroy();
+    if (zeroBuf) zeroBuf.destroy();
   }
 }
 
+export function planLayerPasses(layerCount) {
+  const count = Math.max(0, layerCount | 0);
+  const bytes = 26 * 1024 * 1024;
+  const passes = [];
+  for (let i = 0; i < count; i += 1) passes.push({ layer: i, bytes });
+  return passes;
+}
+
+export function executeLayerPasses(layerCount, run) {
+  const passes = planLayerPasses(layerCount);
+  let peak = 0;
+  let live = 0;
+  for (let i = 0; i < passes.length; i += 1) {
+    const buf = { layer: passes[i].layer, bytes: passes[i].bytes, destroyed: false };
+    live = buf.bytes;
+    if (live > peak) peak = live;
+    if (typeof run === 'function') run(buf);
+    buf.destroyed = true;
+    live = 0;
+  }
+  return { peak: peak, live: live, passes: passes.length, bytes: passes.length ? passes[0].bytes : 0 };
+}
+
 export async function dequantInt4(values) {
-  const src = values || [];
-  const packed = packInt4(src);
-  const cpu = Array.from(unpackInt4(packed, src.length));
+  const packed = LLMQuantization.quantizeInt4Blocks(values || []);
+  const cpu = Array.from(LLMQuantization.dequantizeInt4Blocks(packed));
   try {
-    const gpuValues = await dequantOnGpu(packed, src.length);
-    if (gpuValues && gpuValues.length === cpu.length) return { device: 'gpu', values: gpuValues };
+    const gpuValues = await dequantBlocksOnGpu(packed);
+    if (gpuValues && gpuValues.length === cpu.length) return { device: 'gpu', values: gpuValues, packed: packed };
   } catch (e) { /* CPU tetap benar bila GPU tidak ada. */ }
-  return { device: 'cpu', values: cpu };
+  return { device: 'cpu', values: cpu, packed: packed };
 }
 
 export async function probeGpu() {

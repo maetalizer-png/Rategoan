@@ -22,7 +22,8 @@ function importWhatsApp(text) {
   const messages = [];
   let current = null;
   lines.forEach((line) => {
-    const m = line.match(WA_LINE_RE);
+    const sample = line.length > 4000 ? '' : line;
+    const m = sample ? sample.match(WA_LINE_RE) : null;
     if (m) {
       if (current) messages.push(current);
       const time = parseTimestamp(m[1], m[2]);

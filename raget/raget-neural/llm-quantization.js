@@ -109,9 +109,55 @@ function dequantizeModel(quantizedModel) {
     };
 }
 
+const INT4_BLOCK = 32;
+
+function quantizeInt4Blocks(values) {
+    const src = Array.from(values || []);
+    const blocks = Math.ceil(src.length / INT4_BLOCK) || 0;
+    const scales = new Float32Array(blocks);
+    const zeros = new Float32Array(blocks);
+    const nibbles = new Uint8Array(src.length);
+    for (let b = 0; b < blocks; b += 1) {
+        const start = b * INT4_BLOCK;
+        const end = Math.min(src.length, start + INT4_BLOCK);
+        let min = Infinity;
+        let max = -Infinity;
+        for (let i = start; i < end; i += 1) {
+            if (src[i] < min) min = src[i];
+            if (src[i] > max) max = src[i];
+        }
+        if (min === max) {
+            min -= 0.5;
+            max += 0.5;
+        }
+        const scale = (max - min) / 15;
+        const zeroPoint = -min / scale;
+        scales[b] = scale;
+        zeros[b] = zeroPoint;
+        for (let i = start; i < end; i += 1) {
+            let q = Math.round((src[i] - min) / scale);
+            if (q < 0) q = 0;
+            if (q > 15) q = 15;
+            nibbles[i] = q;
+        }
+    }
+    return { nibbles: nibbles, scales: scales, zeros: zeros, length: src.length, block: INT4_BLOCK };
+}
+
+function dequantizeInt4Blocks(packed) {
+    const out = new Float32Array(packed.length);
+    for (let i = 0; i < packed.length; i += 1) {
+        const b = Math.floor(i / packed.block);
+        out[i] = (packed.nibbles[i] - packed.zeros[b]) * packed.scales[b];
+    }
+    return out;
+}
+
 export const LLMQuantization = {
     quantizeMatrix: quantizeMatrix,
     dequantizeMatrix: dequantizeMatrix,
     quantizeModel: quantizeModel,
-    dequantizeModel: dequantizeModel
+    dequantizeModel: dequantizeModel,
+    quantizeInt4Blocks: quantizeInt4Blocks,
+    dequantizeInt4Blocks: dequantizeInt4Blocks
 };

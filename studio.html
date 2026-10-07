@@ -41,6 +41,7 @@
         </div>
         <div class="desktop-crumb">
           <span id="crumb-project">Proyek Aktif</span>
+          <span id="door-pill" class="door-pill" data-door="center">Pintu B · Pusat</span>
           <span id="stat-runtime">Sandbox Siap</span>
         </div>
         <span class="row-spacer"></span>
@@ -55,10 +56,10 @@
         <div id="empty-state" class="studio-empty-state">
           <h2 class="studio-welcome-title">Studio Kode</h2>
           <div class="inspiration-cards">
-            <button type="button" class="insp-card" data-spec="Rancang scaffold arsitektur komponen dan state">Scaffold Arsitektur</button>
-            <button type="button" class="insp-card" data-spec="Audit keamanan dan celah CSP">Audit Keamanan</button>
-            <button type="button" class="insp-card" data-spec="Rakit dasbor analitik telemetri runtime">Dasbor Analitik</button>
-            <button type="button" class="insp-card" data-spec="Buatkan generator unit test">Generator Unit Test</button>
+            <button type="button" class="insp-card" data-spec="Rancang scaffold komponen reaktif">Scaffold Komponen Reaktif</button>
+            <button type="button" class="insp-card" data-spec="Evaluasi audit keamanan sandbox">Audit Keamanan Sandbox</button>
+            <button type="button" class="insp-card" data-spec="Rakit dasbor telemetri runtime">Dasbor Telemetri Runtime</button>
+            <button type="button" class="insp-card" data-spec="Suite pengujian satuan terstruktur">Pengujian Satuan</button>
           </div>
         </div>
         <div id="messages" class="studio-messages-box"></div>
@@ -66,21 +67,23 @@
           <div id="sheet-backdrop" class="sheet-backdrop" hidden></div>
           <div id="studio-attach-sheet" class="sheet attach-sheet" hidden>
             <div class="sheet-head">
-              <div class="sheet-title">Lampirkan dan Lingkungan Proyek</div>
+              <div class="sheet-title">Lampiran & Konektor</div>
               <button type="button" id="btn-close-sheet" class="sheet-close" aria-label="Tutup">×</button>
             </div>
-            <div class="sheet-section-label">Lampiran Berkas Konteks</div>
             <div class="attach-grid">
               <button type="button" id="btn-attach-camera" class="attach-card tone-blue"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>Kamera</button>
               <button type="button" id="btn-attach-photo" class="attach-card tone-violet"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>Foto</button>
               <button type="button" id="btn-attach-doc" class="attach-card tone-green"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Dokumen</button>
             </div>
-            <div class="sheet-section-label">Ruang Kerja Proyek Utuh</div>
             <div class="sheet-dev-connectors">
-              <button type="button" id="btn-studio-folder" class="attach-plain"><span>Folder Proyek Lokal</span><span id="status-folder" class="status-pill">Siap Buka</span></button>
-              <button type="button" id="btn-studio-zip" class="attach-plain"><span>Berkas ZIP Proyek</span><span id="status-zip" class="status-pill">Siap Impor</span></button>
-              <button type="button" id="btn-studio-github" class="attach-plain"><span>Repositori GitHub</span><span id="status-github" class="status-pill action">Hubungkan</span></button>
-              <button type="button" id="btn-studio-gdrive" class="attach-plain"><span>Google Drive Workspace</span><span id="status-gdrive" class="status-pill action">Hubungkan</span></button>
+              <button type="button" id="btn-studio-folder" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Folder Proyek Lokal</span><span id="status-folder" class="status-pill">Siap Buka</span></button>
+              <button type="button" id="btn-studio-zip" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg><span>Berkas ZIP Proyek</span><span id="status-zip" class="status-pill">Siap Impor</span></button>
+              <button type="button" id="btn-studio-connectors" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7v4a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3V7"/><path d="M12 14v3"/><path d="M8 20h8"/><path d="M4 10h2"/><path d="M18 10h2"/></svg><span>Konektor Ekosistem</span><span id="status-connectors" class="status-pill action">Kelola</span></button>
+            </div>
+            <div id="studio-connector-panel" class="connector-panel" hidden>
+              <button type="button" id="btn-studio-github" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>Repositori GitHub</span><span id="status-github" class="status-pill action">Hubungkan</span></button>
+              <button type="button" id="btn-studio-gdrive" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 14H4z"/><path d="M4 17h16"/><path d="M8 17l4 4 4-4"/></svg><span>Google Drive</span><span id="status-gdrive" class="status-pill action">Hubungkan</span></button>
+              <a class="hub-link" href="index.html#/connect">Kelola di hub</a>
             </div>
             <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
             <input type="file" id="studio-pick-camera" accept="image/*" capture="environment" hidden>
@@ -103,29 +106,26 @@
     </main>
     <aside id="studio-canvas-pane" class="studio-canvas-pane">
       <header class="canvas-head">
-        <strong id="studio-project-name">Proyek</strong>
+        <strong id="studio-project-name">Pratinjau Rekayasa</strong>
+        <nav class="canvas-tabs">
+          <button type="button" class="tab-btn active" data-tab="preview">Pratinjau</button>
+          <button type="button" class="tab-btn" data-tab="files">Struktur Berkas</button>
+          <button type="button" class="tab-btn" data-tab="logs">Terminal</button>
+        </nav>
+        <span class="sandbox-pill">Sandbox <strong id="stat-sandbox">Siap</strong> · <strong id="stat-files">4</strong></span>
+        <span id="stat-ms" hidden>0 ms</span>
         <button type="button" id="studio-sheet-close" aria-label="Tutup kanvas">×</button>
       </header>
-      <nav class="canvas-tabs">
-        <button type="button" class="tab-btn active" data-tab="preview">Pratinjau Hidup</button>
-        <button type="button" class="tab-btn" data-tab="files">Pohon Berkas</button>
-        <button type="button" class="tab-btn" data-tab="logs">Konsol Log</button>
-      </nav>
-      <div class="telemetry-bar">
-        <span>Sandbox <strong id="stat-sandbox">Siap</strong></span>
-        <span>Berkas <strong id="stat-files">4</strong></span>
-        <span>Durasi <strong id="stat-ms">0 ms</strong></span>
-      </div>
       <div class="canvas-content">
         <div id="tab-preview" class="tab-panel active">
           <div id="studio-diagnostics" class="studio-diagnostics">
-            <h2>Diagnostik runtime PWA</h2>
-            <p>Studio Kode 4.0</p>
+            <h2>Diagnostik runtime</h2>
+            <p>Studio Kode 5.0</p>
             <ul>
-              <li>Integritas pengujian: 17 uji satuan pada gerbang rilis</li>
-              <li>Kebersihan linter: 0 galat dan 0 peringatan</li>
-              <li>Penyimpanan lokal: brankas IndexedDB terenkripsi, aktif</li>
-              <li>Isolasi sandbox: CSP anti-eksfiltrasi, enforced</li>
+              <li>Pintu A lokal: Int4 blok 32 dan lapisan 26 MB</li>
+              <li>Pintu B pusat: aliran token, jejak alat, dan diff</li>
+              <li>Penyimpanan lokal: indeks rag_index di IndexedDB</li>
+              <li>Isolasi sandbox: CSP anti-eksfiltrasi</li>
             </ul>
           </div>
           <iframe id="studio-preview-frame" sandbox="allow-scripts allow-forms" title="Pratinjau hidup"></iframe>
@@ -139,6 +139,23 @@
         </div>
       </div>
     </aside>
+    <div id="modal-gdrive-picker" class="studio-modal-backdrop" hidden>
+      <div class="studio-modal-box" role="dialog" aria-labelledby="gdrive-title">
+        <div class="studio-modal-header">
+          <span id="gdrive-title" class="modal-title">Pilih Berkas Google Drive</span>
+          <button type="button" id="btn-close-gdrive-modal" class="sheet-close" aria-label="Tutup">×</button>
+        </div>
+        <div class="studio-modal-breadcrumb">
+          <button type="button" id="btn-gdrive-up">Naik</button>
+          <span id="gdrive-current-path">Root /</span>
+        </div>
+        <div id="gdrive-file-list" class="studio-modal-list"></div>
+        <div class="studio-modal-footer">
+          <button type="button" id="btn-cancel-gdrive" class="btn btn-secondary">Batal</button>
+          <button type="button" id="btn-import-gdrive" class="btn btn-primary" disabled>Impor ke VFS</button>
+        </div>
+      </div>
+    </div>
   </div>
   <script type="module" src="js/studio/studio-app.js"></script>
 </body>

@@ -17,6 +17,8 @@
   color: var(--rg-text);
 }
 
+.chat-inspiration-grid { display: none; }
+
 
 .msg {
   max-width: 90%;
