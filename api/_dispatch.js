@@ -29,6 +29,10 @@ export async function dispatchTools(req, res, spec) {
     sendJson(res, 404, { error: 'unknown_tool', name: body.name || '' });
     return;
   }
+  if (tool.level === 3 && !req.headers['x-rategoan-confirm-nonce']) {
+    sendJson(res, 403, { error: 'konfirmasi_diperlukan', tool: tool.name });
+    return;
+  }
   if (spec.special) {
     const handled = await spec.special(tool, params, token, res);
     if (handled) return;

@@ -493,6 +493,24 @@ function togglePlus() {
   const open = sheet.hidden;
   sheet.hidden = !open;
   if (backdrop) backdrop.hidden = !open;
+  if (open) paintConnectorStatus();
+}
+
+function paintConnectorStatus() {
+  const githubOn = !!connectorState.token('github');
+  const driveOn = !!connectorState.token('google_drive');
+  const github = $('status-github');
+  const drive = $('status-gdrive');
+  if (github) {
+    github.textContent = githubOn ? 'Terhubung' : 'Hubungkan';
+    github.classList.toggle('connected', githubOn);
+    github.classList.toggle('action', !githubOn);
+  }
+  if (drive) {
+    drive.textContent = driveOn ? 'Terhubung' : 'Hubungkan';
+    drive.classList.toggle('connected', driveOn);
+    drive.classList.toggle('action', !driveOn);
+  }
 }
 
 function closeDrawer() {
@@ -508,7 +526,12 @@ function closeDrawer() {
 
 function toggleDrawer() {
   const side = $('studio-sidebar');
-  if (!side) return;
+  const app = $('studio-app');
+  if (!side || !app) return;
+  if (window.matchMedia('(min-width: 1024px)').matches) {
+    app.classList.toggle('is-sidebar-collapsed');
+    return;
+  }
   const open = !side.classList.contains('is-open');
   side.classList.toggle('is-open', open);
   const backdrop = $('studio-drawer-backdrop');
@@ -629,10 +652,47 @@ async function takePromptFile(file, label) {
     || /\.(txt|md|js|mjs|css|html|json|py|csv|svg|xml|ya?ml)$/i.test(file.name || '');
   if (textual && file.size < 200000) {
     const text = await file.text();
+    if (/ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i.test(text)) {
+      appendConsole('Berkas ditolak. Isinya berisi instruksi tersembunyi, jadi tidak masuk ke komposer.');
+      return;
+    }
     appendPrompt(label + ': ' + file.name + '\n' + text.slice(0, 4000));
     return;
   }
   appendPrompt(label + ': ' + file.name);
+}
+function dirtySessionTitle(title) {
+  return /^(buatkan|tolong buat|dummy|sample)\b/i.test(String(title || '').trim());
+}
+
+async function openDrive() {
+  if (connectorState.token('google_drive')) {
+    appendConsole('Google Drive terhubung. Daftar berkas diminta lewat konektor.');
+    try {
+      const res = await fetch('/api/connectors/drive', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: 'Bearer ' + connectorState.token('google_drive'),
+        },
+        body: JSON.stringify({ name: 'drive_list_children', parameters: { folder_id: 'root' } }),
+      });
+      appendConsole(res.ok ? 'Google Drive menjawab.' : 'Google Drive menolak permintaan.');
+    } catch (e) {
+      appendConsole('Google Drive tidak terjangkau.');
+    }
+    return;
+  }
+  try {
+    const res = await fetch('/api/auth/google?service=google_drive&format=json&action=start', { credentials: 'same-origin' });
+    const data = await res.json().catch(() => ({}));
+    if (data.state) sessionStorage.setItem('rategoan_oauth_state', data.state);
+    if (res.ok && data.url) {
+      location.href = data.url;
+      return;
+    }
+  } catch (e) { /* server OAuth boleh belum ada */ }
+  appendConsole('Google Drive belum terhubung. Hubungkan dulu di Konektor.');
 }
 function bind() {
   if (!localStorage.getItem('rategoan_auth')) {
@@ -709,7 +769,9 @@ function bind() {
       $('btn-send').click();
     }
   });
-  $('btn-studio-push').onclick = () => { closePlus(); applyCraft('Terbitkan ke GitHub'); };
+  $('btn-studio-github').onclick = () => { closePlus(); applyCraft('Terbitkan ke GitHub'); };
+  const driveBtn = $('btn-studio-gdrive');
+  if (driveBtn) driveBtn.onclick = () => { closePlus(); openDrive(); };
   const exporter = $('btn-studio-export');
   if (exporter) exporter.onclick = () => { closePlus(); downloadZip(); };
   $('studio-sheet-close').onclick = () => $('studio-canvas-pane').classList.remove('is-sheet-open');
@@ -789,7 +851,12 @@ function bind() {
     mountPreview($('studio-preview-frame'), vfs.flat());
   });
   paintHistory([]);
-  idbGateway.getList('studio-sessions').then(paintHistory).catch(() => paintHistory([]));
+  idbGateway.getList('studio-sessions').then(async (rows) => {
+    const list = rows || [];
+    const clean = list.filter((row) => row && !dirtySessionTitle(row.title));
+    if (clean.length !== list.length) await writeSessions(clean);
+    else paintHistory(clean);
+  }).catch(() => paintHistory([]));
   showTab('preview');
 }
 

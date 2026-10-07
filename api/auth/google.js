@@ -55,6 +55,7 @@ export default async function handler(req, res) {
       access_token: token.access_token,
       expires_in: token.expires_in || 3600,
       account,
+      state: saved.state,
     });
     return;
   }

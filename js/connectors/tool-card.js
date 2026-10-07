@@ -35,11 +35,15 @@ export function toolLevel(name) {
   return LEVEL3[name] ? 3 : (name.indexOf('create') >= 0 || name.indexOf('update') >= 0 || name.indexOf('draft') >= 0 ? 2 : 1);
 }
 
-export async function runConnectorTool(name, parameters) {
+export async function runConnectorTool(name, parameters, approvalToken) {
+  if (toolLevel(name) === 3 && !approvalToken) {
+    return { ok: false, error: 'konfirmasi_diperlukan', tool: name };
+  }
   if (isLocalTool(name)) return runLocalTool(name, parameters);
   const route = toolRoute(name);
   if (!route) return { ok: false, error: 'alat_tidak_dikenal' };
   const headers = { 'content-type': 'application/json' };
+  if (approvalToken) headers['x-rategoan-confirm-nonce'] = approvalToken;
   if (route.service !== 'web_search_reader') {
     const token = connectorState.token(route.service);
     if (!token) return { ok: false, error: 'belum_terhubung' };
@@ -96,8 +100,11 @@ export function mountToolCalls(container, tools) {
     run.onclick = async () => {
       status.textContent = 'Menjalankan…';
       run.disabled = true;
+      const nonce = level === 3
+        ? (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()))
+        : '';
       try {
-        const result = await runConnectorTool(tool.name, tool.parameters);
+        const result = await runConnectorTool(tool.name, tool.parameters, nonce);
         status.textContent = summary(tool.name, result);
         log.hidden = false;
         log.textContent = JSON.stringify(result.data, null, 2).slice(0, 4000);

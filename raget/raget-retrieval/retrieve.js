@@ -14,10 +14,20 @@ import { bm25 } from './bm25.js';
 const AUGMENT_THRESHOLD = 0.35;
 const LIST_THRESHOLD = 0.25;
 
+const corpusTokenCache = new WeakMap();
+
+function tokensFor(corpus, getText) {
+  const cached = corpusTokenCache.get(corpus);
+  if (cached && cached.getText === getText && cached.length === corpus.length) return cached.tokens;
+  const tokens = corpus.map((item) => scorer.tokenize(getText(item)));
+  corpusTokenCache.set(corpus, { getText, length: corpus.length, tokens });
+  return tokens;
+}
+
 function scoreCorpus(queryTokens, corpus, textOf, entryPenalty, idOf) {
   const getText = textOf || ((item) => item.text || '');
   const getId = idOf || ((item) => item.id);
-  const tokensList = corpus.map((item) => scorer.tokenize(getText(item)));
+  const tokensList = tokensFor(corpus, getText);
   const scores = bm25.scoreAll(queryTokens, tokensList);
   return corpus.map((item, i) => {
     const penalty = entryPenalty && entryPenalty.size ? entryPenalty.get(getId(item)) : null;

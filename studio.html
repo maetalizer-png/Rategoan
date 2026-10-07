@@ -14,8 +14,7 @@
   <div id="studio-app" class="studio-app is-canvas-hidden">
     <aside id="studio-sidebar" class="studio-sidebar-col">
       <div class="sidebar-header">
-        <a href="index.html#/chat" class="sidebar-back-link">← Rategoan</a>
-        <span class="sidebar-badge">Studio</span>
+        <a href="index.html#/chat" class="sidebar-brand-link">Rategoan</a>
         <button type="button" id="btn-close-sidebar" class="icon-btn mini mobile-only" title="Tutup sidebar" aria-label="Tutup sidebar">×</button>
       </div>
       <div class="sidebar-action">
@@ -67,18 +66,21 @@
           <div id="sheet-backdrop" class="sheet-backdrop" hidden></div>
           <div id="studio-attach-sheet" class="sheet attach-sheet" hidden>
             <div class="sheet-head">
-              <div class="sheet-title">Lampirkan dan Lingkungan</div>
+              <div class="sheet-title">Lampirkan dan Lingkungan Proyek</div>
               <button type="button" id="btn-close-sheet" class="sheet-close" aria-label="Tutup">×</button>
             </div>
+            <div class="sheet-section-label">Lampiran Berkas Konteks</div>
             <div class="attach-grid">
               <button type="button" id="btn-attach-camera" class="attach-card tone-blue"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>Kamera</button>
               <button type="button" id="btn-attach-photo" class="attach-card tone-violet"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>Foto</button>
               <button type="button" id="btn-attach-doc" class="attach-card tone-green"><span class="attach-orb" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Dokumen</button>
             </div>
+            <div class="sheet-section-label">Ruang Kerja Proyek Utuh</div>
             <div class="sheet-dev-connectors">
-              <button type="button" id="btn-studio-folder" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Buka Folder Proyek Lokal</span></button>
-              <button type="button" id="btn-studio-zip" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg><span>Buka Berkas ZIP Proyek</span></button>
-              <button type="button" id="btn-studio-push" class="attach-plain"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M6 9v12"/></svg><span>Sinkronisasi Repositori GitHub</span></button>
+              <button type="button" id="btn-studio-folder" class="attach-plain"><span>Folder Proyek Lokal</span><span id="status-folder" class="status-pill">Siap Buka</span></button>
+              <button type="button" id="btn-studio-zip" class="attach-plain"><span>Berkas ZIP Proyek</span><span id="status-zip" class="status-pill">Siap Impor</span></button>
+              <button type="button" id="btn-studio-github" class="attach-plain"><span>Repositori GitHub</span><span id="status-github" class="status-pill action">Hubungkan</span></button>
+              <button type="button" id="btn-studio-gdrive" class="attach-plain"><span>Google Drive Workspace</span><span id="status-gdrive" class="status-pill action">Hubungkan</span></button>
             </div>
             <input type="file" id="studio-open-zip" accept=".zip,application/zip" hidden>
             <input type="file" id="studio-pick-camera" accept="image/*" capture="environment" hidden>

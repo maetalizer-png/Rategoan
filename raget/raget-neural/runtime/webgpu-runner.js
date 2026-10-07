@@ -66,13 +66,27 @@ export function unpackInt4(packed, length) {
   return out;
 }
 
-async function dequantOnGpu(packed, length) {
+let gpuDevice = null;
+
+async function sharedDevice() {
+  if (gpuDevice) return gpuDevice;
   const gpu = typeof navigator !== 'undefined' ? navigator.gpu : null;
   if (!gpu || typeof gpu.requestAdapter !== 'function') return null;
   const adapter = await gpu.requestAdapter();
   if (!adapter) return null;
-  const device = await adapter.requestDevice();
-  const module = device.createShaderModule({
+  gpuDevice = await adapter.requestDevice();
+  gpuDevice.lost.then(() => { gpuDevice = null; });
+  return gpuDevice;
+}
+
+async function dequantOnGpu(packed, length) {
+  const device = await sharedDevice();
+  if (!device) return null;
+  let inBuf = null;
+  let outBuf = null;
+  let readBuf = null;
+  try {
+    const module = device.createShaderModule({
     code: '@group(0) @binding(0) var<storage, read> packed: array<u32>;'
       + '@group(0) @binding(1) var<storage, read_write> out: array<f32>;'
       + '@compute @workgroup_size(64) fn main(@builtin(global_invocation_id) id: vec3<u32>) {'
@@ -85,9 +99,9 @@ async function dequantOnGpu(packed, length) {
   const words = Math.ceil(packed.length / 4);
   const src = new Uint8Array(words * 4);
   src.set(packed);
-  const inBuf = device.createBuffer({ size: src.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-  const outBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
-  const readBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
+  inBuf = device.createBuffer({ size: src.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+  outBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
+  readBuf = device.createBuffer({ size: length * 4, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
   device.queue.writeBuffer(inBuf, 0, src);
   const layout = device.createBindGroupLayout({
     entries: [
@@ -118,6 +132,11 @@ async function dequantOnGpu(packed, length) {
   const values = Array.from(new Float32Array(readBuf.getMappedRange()));
   readBuf.unmap();
   return values;
+  } finally {
+    if (inBuf) inBuf.destroy();
+    if (outBuf) outBuf.destroy();
+    if (readBuf) readBuf.destroy();
+  }
 }
 
 export async function dequantInt4(values) {

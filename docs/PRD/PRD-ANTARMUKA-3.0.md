@@ -1165,6 +1165,12 @@ Laci mengembalikan pilar Rategoan, plus hapus sesi dan bersihkan semua. Lembar t
 Laci ponsel lebarnya min(310px, 86vw) dan hanya berisi kembali ke Rategoan, proyek baru, serta riwayat. Pilar dan konektor duplikat diturunkan dari laci. Sapuan ke kiri menutup laci.
 Lembar tambah memakai kisi Kamera, Foto, dan Dokumen plus folder, ZIP, dan GitHub. Komposer ponsel transparan; hanya kapsul input yang mengambang. Angka telemetri tetap diukur, bukan contoh 1,2 ms.
 
+## Revisi Drive 2026-10-07 17:03 — laci merek, popover, dan gerbang alat
+
+Header laci hanya merek Rategoan plus tutup, tanpa panah dan badge. Lembar tambah memisahkan lampiran konteks dari ruang kerja, dengan status konektor yang jujur dan tombol Google Drive.
+Di desktop, lembar tambah muncul di atas komposer, tombol pratinjau di obrolan disembunyikan saat kanvas terbuka, dan jejak alat memakai warna permukaan.
+Alat tingkat tiga menolak jalan tanpa persetujuan, token OAuth ditolak bila state tidak cocok, dan berkas berisi injeksi perintah tidak dikirim.
+
 
 
 ## Revisi Drive 2026-10-06 23:12 — Studio Level 2 dan kanvas 50 persen

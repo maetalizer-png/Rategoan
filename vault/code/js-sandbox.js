@@ -2,10 +2,8 @@ const TIMEOUT_MS = 1200;
 
 function workerSrc() {
   return (
-    'self.indexedDB = undefined;' +
-    'self.fetch = undefined;' +
-    'self.XMLHttpRequest = undefined;' +
-    'self.importScripts = undefined;' +
+    'function lock(name){try{Object.defineProperty(self,name,{configurable:false,get:function(){throw new DOMException("diblokir sandbox","SecurityError");}});}catch(e){try{self[name]=undefined;}catch(e2){}}}' +
+    '["indexedDB","fetch","XMLHttpRequest","WebSocket","EventSource","importScripts","BroadcastChannel"].forEach(lock);' +
     'self.onmessage = function (ev) {' +
     '  let code = String(ev.data && ev.data.code || "");' +
     '  let logs = [];' +
@@ -19,7 +17,8 @@ function workerSrc() {
     '  } catch (e) {' +
     '    self.postMessage({ ok: false, logs: logs, error: e && e.message ? e.message : String(e) });' +
     '  }' +
-    '};'
+    '};' +
+    'try{Object.freeze(Object.getPrototypeOf(self));}catch(e){}'
   );
 }
 

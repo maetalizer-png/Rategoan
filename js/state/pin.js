@@ -14,11 +14,6 @@ export const pin = {
     localStorage.removeItem(this.KEY);
   },
   FAIL_KEY: 'rategoan_pin_fail',
-  legacyHash(s) {
-    let h = 5381;
-    for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
-    return String(h);
-  },
   bytes(text) {
     return new TextEncoder().encode(text);
   },
@@ -54,18 +49,18 @@ export const pin = {
     await idbGateway.sealAll();
   },
   lockedUntil() {
-    const raw = sessionStorage.getItem(this.FAIL_KEY) || '';
+    const raw = localStorage.getItem(this.FAIL_KEY) || '';
     return Number(raw.split(':')[0] || 0);
   },
   noteFail() {
-    const raw = sessionStorage.getItem(this.FAIL_KEY) || '0';
+    const raw = localStorage.getItem(this.FAIL_KEY) || '0';
     const count = raw.indexOf(':') > 0 ? Number(raw.split(':')[1]) : 0;
     const next = count + 1;
-    if (next >= 5) sessionStorage.setItem(this.FAIL_KEY, String(Date.now() + 30000) + ':' + next);
-    else sessionStorage.setItem(this.FAIL_KEY, '0:' + next);
+    if (next >= 5) localStorage.setItem(this.FAIL_KEY, String(Date.now() + 30000) + ':' + next);
+    else localStorage.setItem(this.FAIL_KEY, '0:' + next);
   },
   clearFail() {
-    sessionStorage.removeItem(this.FAIL_KEY);
+    localStorage.removeItem(this.FAIL_KEY);
   },
   async verify(p) {
     const until = this.lockedUntil();
@@ -86,11 +81,6 @@ export const pin = {
         this.noteFail();
         return false;
       }
-    }
-    if (raw && this.legacyHash(p) === raw) {
-      await this.set(p);
-      this.clearFail();
-      return true;
     }
     if (raw) this.noteFail();
     return false;

@@ -70,16 +70,16 @@ export function mountPreview(frame, files) {
   const html = previewSrcdoc(files);
   const host = (typeof location !== 'undefined' && location.origin) ? location.origin : '';
   let posted = false;
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  const nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
   frame.onload = () => {
     if (posted || !frame.contentWindow) return;
     posted = true;
-    // Jendela sandbox ber-origin buram. Chrome menolak target "null", dan
-    // srcdoc mewarisi CSP induk yang tidak mengizinkan skrip sebaris.
-    // Target '*' hanya sampai ke iframe ini; penerima menolak origin selain host.
-    frame.contentWindow.postMessage({ type: 'studio:srcdoc', html }, '*');
+    frame.contentWindow.postMessage({ type: 'studio:srcdoc', html, nonce }, '*');
   };
   frame.removeAttribute('srcdoc');
-  frame.src = 'studio-preview.html?host=' + encodeURIComponent(host) + '&run=' + Date.now();
+  frame.src = 'studio-preview.html?host=' + encodeURIComponent(host) + '&nonce=' + encodeURIComponent(nonce) + '&run=' + Date.now();
 }
 
 export function zipStore(files) {

@@ -380,6 +380,10 @@ export const composer = {
       return;
     }
     const att = attach.consume();
+    if (att && att.fileText && /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i.test(att.fileText)) {
+      toast.show('Berkas berisi injeksi perintah. Pengiriman dibatalkan.');
+      return;
+    }
     const q = quote.consume();
     s.messages.push({
       role: 'user',

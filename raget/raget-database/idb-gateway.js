@@ -50,12 +50,19 @@ function openDb() {
   return dbPromise;
 }
 
+function signalStorage(key, error) {
+  if (typeof window !== 'undefined' && window.dispatchEvent) {
+    window.dispatchEvent(new CustomEvent('rategoan:storage-error', { detail: { key, error: String((error && (error.name || error.message)) || error || 'quota') } }));
+  }
+}
+
 function fitMedia(list) {
-  let payload = Array.isArray(list) ? list : [];
-  let raw = JSON.stringify(payload);
-  while (raw.length > MEDIA_CAP && payload.length > 1) {
-    payload = payload.slice(Math.ceil(payload.length / 2));
-    raw = JSON.stringify(payload);
+  const payload = Array.isArray(list) ? list : [];
+  if (JSON.stringify(payload).length > MEDIA_CAP) {
+    const err = new Error('QuotaExceededError');
+    err.name = 'QuotaExceededError';
+    signalStorage('media', err);
+    throw err;
   }
   return payload;
 }
@@ -117,19 +124,18 @@ async function setList(key, list) {
     if (keepSealed(existing, held)) return;
     const record = held ? { key, ...(await packList(held, payload)) } : { key, list: payload };
     try {
-      await putRecord(db, record);
-    } catch (e) {
-      let shrunk = payload;
-      while (shrunk.length > 1) {
-        shrunk = shrunk.slice(Math.ceil(shrunk.length / 2));
-        const next = held ? { key, ...(await packList(held, shrunk)) } : { key, list: shrunk };
-        try {
-          await putRecord(db, next);
+      if (typeof navigator !== 'undefined' && navigator.storage && navigator.storage.estimate) {
+        const est = await navigator.storage.estimate();
+        const size = JSON.stringify(record).length;
+        if (est.quota && est.usage != null && est.usage + size > est.quota) {
+          signalStorage(key, 'QuotaExceededError');
           return;
-        } catch (e2) {
-          continue;
         }
       }
+      await putRecord(db, record);
+    } catch (e) {
+      signalStorage(key, e);
+      console.warn('[Rategoan Fallback] idb-gateway:', e);
     }
   } catch (e) { console.warn('[Rategoan Fallback] idb-gateway:', e); }
 }

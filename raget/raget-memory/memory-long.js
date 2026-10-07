@@ -1,5 +1,16 @@
 const KEY = 'raget_memory';
 
+function stamp(data) {
+  return {
+    facts: data.facts || {},
+    notes: data.notes || [],
+    learned: data.learned || [],
+    source: 'user',
+    confidence: 1,
+    timestamp: Date.now(),
+  };
+}
+
 function read() {
   try {
     const raw = localStorage.getItem(KEY);
@@ -32,6 +43,9 @@ function write(data) {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch (e) { console.warn('[Rategoan Fallback] memory-long:', e); }
+  import('../../raget/raget-database/idb-gateway.js').then((mod) => {
+    mod.idbGateway.setList('raget_idb.memories', [stamp(data)]).catch(() => {});
+  }).catch(() => {});
 }
 
 function remember(key, value) {

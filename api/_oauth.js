@@ -35,7 +35,7 @@ export function redirectWithToken(res, returnTo, fields) {
 export function beginOrJson(req, res, query, authorizeUrl, payload) {
   savePkce(res, payload);
   if (query.format === 'json') {
-    sendJson(res, 200, { url: authorizeUrl });
+    sendJson(res, 200, { url: authorizeUrl, state: payload && payload.state ? payload.state : '' });
     return;
   }
   res.statusCode = 302;

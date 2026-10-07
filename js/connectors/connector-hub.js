@@ -69,6 +69,7 @@ async function startOAuth(id) {
       toast.show('Gagal membuka halaman izin.');
       return;
     }
+    if (data.state) sessionStorage.setItem('rategoan_oauth_state', data.state);
     location.href = data.url;
   } catch (e) {
     toast.show('Jaringan OAuth tidak terjangkau.');
@@ -294,8 +295,13 @@ export const connectorHub = {
 };
 
 export function bindConnectorReturn() {
-  if (connectorState.absorbReturn()) {
-    const root = $('connect-hub');
-    if (root) connectorHub.mount(root);
+  try {
+    if (connectorState.absorbReturn()) {
+      const root = $('connect-hub');
+      if (root) connectorHub.mount(root);
+    }
+  } catch (e) {
+    if (!/CSRF/.test(String(e && e.message))) throw e;
+    toast.show('Masuk ditolak: state tidak cocok.');
   }
 }

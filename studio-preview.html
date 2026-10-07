@@ -7,7 +7,11 @@
 <body>
 <script>
 var host = '';
-try { host = new URLSearchParams(location.search).get('host') || ''; } catch (e) { host = ''; }
+var nonce = '';
+try {
+  host = new URLSearchParams(location.search).get('host') || '';
+  nonce = new URLSearchParams(location.search).get('nonce') || '';
+} catch (e) { host = ''; }
 window.onerror = function (msg, url, line, col) {
   if (!host) return;
   parent.postMessage({ type: 'studio:error', error: { msg: String(msg), line: line, col: col } }, host);
@@ -17,6 +21,7 @@ window.addEventListener('message', function (event) {
   if (!host || event.origin !== host) return;
   var data = event.data;
   if (!data || data.type !== 'studio:srcdoc' || typeof data.html !== 'string') return;
+  if (!nonce || data.nonce !== nonce) return;
   document.open();
   document.write(data.html);
   document.close();

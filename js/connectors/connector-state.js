@@ -207,21 +207,32 @@ export const connectorState = {
     const token = params.get('access_token');
     const service = params.get('connector');
     if (!token || !service) return false;
+    const state = params.get('state') || '';
+    const expected = sessionStorage.getItem('rategoan_oauth_state') || '';
+    const scrub = () => {
+      if (fromHash) {
+        history.replaceState(null, '', location.pathname + location.search);
+      } else {
+        params.delete('access_token');
+        params.delete('connector');
+        params.delete('expires_in');
+        params.delete('account');
+        params.delete('state');
+        const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+        history.replaceState(null, '', next);
+      }
+    };
+    if (!state || state !== expected) {
+      scrub();
+      throw new Error('CSRF Attack Detected');
+    }
+    sessionStorage.removeItem('rategoan_oauth_state');
     this.markConnected(service, {
       access_token: token,
       account: params.get('account') || '',
       expiresIn: Number(params.get('expires_in') || 3600),
     });
-    if (fromHash) {
-      history.replaceState(null, '', location.pathname + location.search);
-    } else {
-      params.delete('access_token');
-      params.delete('connector');
-      params.delete('expires_in');
-      params.delete('account');
-      const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
-      history.replaceState(null, '', next);
-    }
+    scrub();
     return true;
   },
 };
