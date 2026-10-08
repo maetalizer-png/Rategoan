@@ -1,6 +1,7 @@
 {
   "generatedAt": "2026-10-08",
   "parent": "9b391de",
+  "implementation": "5586ff1",
   "checks": {
     "studioUnsafeEval": false,
     "indexUnsafeEval": false,
