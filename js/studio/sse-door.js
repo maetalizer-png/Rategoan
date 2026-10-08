@@ -21,6 +21,36 @@ export function routeDoor(online) {
   return chooseDoor(online === true, online === true ? 'center' : 'local');
 }
 
+export function failoverStream(state, event) {
+  const phase = (state && state.phase) || 'DOOR_B_STREAMING';
+  const seq = (state && state.seq) || 0;
+  const door = (state && state.door) || 'center';
+  if (event === 'NETWORK_FAILURE' && phase === 'DOOR_B_STREAMING') {
+    return { phase: 'RESUME_CURSOR', seq, door: 'local' };
+  }
+  if ((event === 'resume' || event === 'RESUME_CURSOR') && phase === 'RESUME_CURSOR') {
+    return { phase: 'DOOR_A_LOCAL_WEBGPU', seq, door: 'local' };
+  }
+  if (event === 'verify' && phase === 'DOOR_A_LOCAL_WEBGPU') {
+    return { phase: 'VERIFY', seq, door: 'local' };
+  }
+  if (event === 'commit' && phase === 'VERIFY') {
+    return { phase: 'ATOMIC_COMMIT', seq, door: 'local' };
+  }
+  return { phase, seq, door };
+}
+
+export function resumeCursor(prior) {
+  const seen = (prior && prior.seen) || [];
+  let seq = 0;
+  seen.forEach((key) => {
+    const part = String(key).split(':').pop();
+    const n = Number(part);
+    if (n > seq) seq = n;
+  });
+  return seq;
+}
+
 export function reduceStream(raw, prior) {
   const seen = new Set((prior && prior.seen) || []);
   const state = {

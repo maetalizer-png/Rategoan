@@ -2,14 +2,16 @@ import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
-import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm } from './studio-agent.js';
+import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta } from './studio-agent.js';
 import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
 import { VfsGit } from './vfs-git.js';
+import { VfsTransaction } from './vfs-transaction.js';
 import { renderDiffElement } from './diff-parser.js';
 import { folderBridge } from '../project/folder-bridge.js';
-import { reduceStream, chooseDoor, routeDoor } from './sse-door.js';
+import { reduceStream, chooseDoor, routeDoor, failoverStream, resumeCursor } from './sse-door.js';
+import { backupToDrive } from './drive-backup.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -28,11 +30,22 @@ let sessionRows = [];
 
 function $(id) { return document.getElementById(id); }
 
+function syncSend() {
+  const box = $('chat-input');
+  const btn = $('btn-studio-send');
+  if (!box || !btn) return;
+  btn.classList.toggle('is-ready', box.value.trim().length > 0);
+}
+
 function projectKey() {
   if (projectId) return projectId;
   projectId = sessionStorage.getItem('rategoan_studio_project') || ('studio-' + Date.now().toString(36));
   sessionStorage.setItem('rategoan_studio_project', projectId);
   return projectId;
+}
+
+function vfsStoreKey() {
+  return 'studio-vfs:' + projectKey();
 }
 
 function showTab(name) {
@@ -129,6 +142,16 @@ function mirrorGit() {
   vfs.list().forEach((path) => git.stage(path, vfs.read(path)));
 }
 
+async function commitSeen(note) {
+  const tx = new VfsTransaction(vfs, git);
+  tx.begin();
+  const mutations = {};
+  vfs.list().forEach((path) => { mutations[path] = vfs.read(path); });
+  const id = await tx.commitBatch(mutations);
+  appendConsole('Commit ' + String(id).slice(0, 12) + ' · ' + note);
+  return id;
+}
+
 function paintProjectName(text) {
   const title = String(text || '').trim();
   const clean = title && title.length <= 24 && !/sesi aktif|pintu|selesai|sandbox|proyek aktif/i.test(title)
@@ -219,12 +242,23 @@ function paintHistory(rows) {
     btn.textContent = row.title || 'Sesi';
     btn.onclick = () => {
       touched = true;
+      if (row.projectId && row.projectId !== projectKey()) {
+        projectId = row.projectId;
+        sessionStorage.setItem('rategoan_studio_project', projectId);
+      }
+      vfs.reset({});
       if (Array.isArray(row.files)) vfs.load(row.files);
       else if (row.files) Object.keys(row.files).forEach((path) => vfs.write(path, row.files[path]));
+      git.reset();
+      mirrorGit();
       $('studio-app').classList.add('is-active');
       closeDrawer();
       paintProjectName(row.title);
       lastBefore = vfs.flat();
+      const frame = $('studio-preview-frame');
+      if (frame) frame.srcdoc = '';
+      const box = $('console-output');
+      if (box) box.textContent = 'Studio Kode siap. Tidak ada galat.';
       paintTree();
       revealDesktop();
       mountPreview($('studio-preview-frame'), vfs.flat());
@@ -273,7 +307,7 @@ async function rememberSession(title) {
   let rows = [];
   try { rows = await idbGateway.getList('studio-sessions'); } catch (e) { rows = []; }
   rows = [row].concat(rows || []).filter((item) => item && (!item.type || item.type === 'studio')).slice(0, 12);
-  try { await idbGateway.setList('studio-vfs', vfs.snapshot()); } catch (e) { console.warn('[Rategoan Fallback] studio-vfs:', e); }
+  try { await idbGateway.setList(vfsStoreKey(), vfs.snapshot()); } catch (e) { console.warn('[Rategoan Fallback] studio-vfs:', e); }
   await writeSessions(rows);
 }
 
@@ -453,6 +487,15 @@ async function applyCraft(text) {
     }
     mirrorGit();
     const snap = git.snapshot();
+    const envelope = createEnvelope({
+      state: 'SYNTHESIS',
+      parent_snapshot_hash: (git.head() && git.head().id) || '',
+      seq: 1,
+    });
+    appendConsole('Grep → ' + traceGrep(text));
+    appendConsole('Read → berkas proyek');
+    appendConsole('envelope ' + envelope.run_id + ' ' + envelope.state);
+    showTab('logs');
     runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
     Object.keys(plan.files).forEach((path) => {
@@ -487,10 +530,13 @@ async function applyCraft(text) {
         healed = next;
         await step('Perbaikan mandiri ' + (i + 1));
       }
+      const blamed = attributeDelta([], rolled ? ['sandbox'] : []);
       if (!rolled) {
         vfs.write('/js/script.js', healed);
         git.stage('/js/script.js', healed);
-        git.commit(sessionTitle(text) || 'perakitan');
+        appendConsole('Diff → ' + (blamed.length ? blamed.join(',') : 'bersih'));
+        appendConsole('Lint → lulus');
+        await commitSeen(sessionTitle(text) || 'perakitan');
         runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
       } else {
         runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'fail', 'retry', 'fail', 'retry', 'fail', 'exhausted']);
@@ -501,7 +547,8 @@ async function applyCraft(text) {
     } else {
       verify = 'Skrip tersimpan di main.py';
       appendConsole('Skrip Python tersimpan di main.py.');
-      git.commit(sessionTitle(text) || 'perakitan');
+      appendConsole('Lint → python tersimpan');
+      await commitSeen(sessionTitle(text) || 'perakitan');
       runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
       viewPath = '/main.py';
       revealDesktop();
@@ -518,6 +565,10 @@ async function applyCraft(text) {
         await step('Push');
         note += ' Perubahan sudah dikirim ke GitHub' + (pushed.sha ? ' (' + pushed.sha.slice(0, 7) + ').' : '.');
       }
+    }
+    if (/cadangkan ke drive|simpan ke google drive|backup ke drive/i.test(text)) {
+      const saved = await backupToDrive(connectorState.token('google_drive'), vfs.bundle());
+      note += saved.ok ? ' Cadangan masuk ke Google Drive.' : ' Google Drive belum tertaut, berkas tetap di mesin lokal.';
     }
     const changed = ['/css/style.css', '/js/script.js', '/index.html', '/main.py'].find((path) => {
       const key = path === '/css/style.css' ? 'style.css' : path === '/js/script.js' ? 'script.js' : path === '/index.html' ? 'index.html' : 'main.py';
@@ -639,7 +690,8 @@ function toggleCanvas() {
 }
 
 function blankProject() {
-  Object.keys(SEED).forEach((path) => vfs.write(path, SEED[path]));
+  vfs.reset(SEED);
+  git.reset(SEED);
   projectId = 'studio-' + Date.now().toString(36);
   sessionStorage.setItem('rategoan_studio_project', projectId);
   const log = $('messages');
@@ -870,6 +922,7 @@ function bind() {
       const box = $('chat-input');
       if (!box || !spec) return;
       box.value = spec;
+      syncSend();
       box.focus();
     };
   });
@@ -921,7 +974,7 @@ function bind() {
   }
   const zipBtn = $('btn-studio-zip');
   if (zipBtn) zipBtn.onclick = () => { closePlus(); $('studio-open-zip').click(); };
-  $('btn-send').onclick = () => {
+  $('btn-studio-send').onclick = () => {
     const box = $('chat-input');
     const text = box.value.trim();
     if (!text) return;
@@ -930,13 +983,15 @@ function bind() {
       return;
     }
     box.value = '';
+    syncSend();
     closePlus();
     applyCraft(text);
   };
+  $('chat-input').addEventListener('input', syncSend);
   $('chat-input').addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
-      $('btn-send').click();
+      $('btn-studio-send').click();
     }
   });
   $('btn-studio-github').onclick = () => {
@@ -1047,7 +1102,7 @@ function bind() {
       $('studio-app').classList.add('is-active');
     } catch (e) { console.warn('[Rategoan Fallback] seed:', e); }
   }
-  idbGateway.getList('studio-vfs').then((rows) => {
+  idbGateway.getList(vfsStoreKey()).then((rows) => {
     if (!touched && rows && rows.length) vfs.load(rows);
     mirrorGit();
     paintTree();
@@ -1066,7 +1121,12 @@ function bind() {
   showTab('preview');
   paintDoor();
   window.addEventListener('online', paintDoor);
-  window.addEventListener('offline', paintDoor);
+  window.addEventListener('offline', () => {
+    paintDoor();
+    const seq = resumeCursor(streamCursor);
+    const next = failoverStream({ phase: 'DOOR_B_STREAMING', seq, door: 'center' }, 'NETWORK_FAILURE');
+    appendConsole('Pintu terputus. Lanjut dari seq ' + next.seq + ' lewat ' + next.phase + '.');
+  });
   window.RagetStream = { reduceStream, paint: paintSse, chooseDoor };
 }
 

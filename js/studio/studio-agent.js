@@ -28,11 +28,37 @@ function decodeB64(b64) {
   return new TextDecoder().decode(bytes);
 }
 
-function encodeB64(text) {
-  const bytes = new TextEncoder().encode(String(text || ''));
-  let bin = '';
-  for (let i = 0; i < bytes.length; i += 1) bin += String.fromCharCode(bytes[i]);
-  return btoa(bin);
+export const AGENT_STAGES = [
+  'INTENT_CLASSIFY',
+  'REPO_SCAN',
+  'TARGETED_INGEST',
+  'SYNTHESIS',
+  'VERIFICATION',
+  'BACKTRACK_LOOP',
+  'INTERACTIVE_APPROVAL',
+  'ATOMIC_COMMIT',
+];
+
+export function createEnvelope(partial) {
+  const src = partial || {};
+  let runId = src.run_id || '';
+  if (!runId) {
+    runId = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : ('run-' + Date.now().toString(36));
+  }
+  return {
+    run_id: runId,
+    state: src.state || 'SYNTHESIS',
+    parent_snapshot_hash: src.parent_snapshot_hash || '',
+    tool_budget: src.tool_budget == null ? 32 : src.tool_budget,
+    policy_level: src.policy_level == null ? 3 : src.policy_level,
+    abort_signal: src.abort_signal || null,
+    seq: src.seq || 1,
+  };
+}
+
+export function attributeDelta(baselineFailures, afterFailures) {
+  const base = new Set(baselineFailures || []);
+  return (afterFailures || []).filter((item) => !base.has(item));
 }
 
 export function diffLines(before, after) {
@@ -217,26 +243,50 @@ export async function pushGithub(token, repo, files, message) {
     Accept: 'application/vnd.github+json',
     'Content-Type': 'application/json',
   };
-  const root = 'https://api.github.com/repos/' + pair[0] + '/' + pair[1] + '/contents/';
+  const api = 'https://api.github.com/repos/' + pair[0] + '/' + pair[1];
+  const refRes = await fetch(api + '/git/ref/heads/main', { headers });
+  if (!refRes.ok) return { ok: false, reason: 'api', sha: '' };
+  const refBody = await refRes.json();
+  const parentSha = refBody.object && refBody.object.sha;
+  if (!parentSha) return { ok: false, reason: 'api', sha: '' };
+  const parentRes = await fetch(api + '/git/commits/' + parentSha, { headers });
+  if (!parentRes.ok) return { ok: false, reason: 'api', sha: '' };
+  const parent = await parentRes.json();
+  const baseTree = parent.tree && parent.tree.sha;
   const names = Object.keys(files || {});
-  let sha = '';
-  for (let i = 0; i < names.length; i += 1) {
-    const path = names[i];
-    const content = encodeB64(files[path]);
-    let existing = '';
-    const found = await fetch(root + path, { headers });
-    if (found.ok) {
-      const body = await found.json();
-      existing = body.sha || '';
-    }
-    const payload = { message: message || 'feat: pembaruan studio rekayasa', content, branch: 'main' };
-    if (existing) payload.sha = existing;
-    const sent = await fetch(root + path, { method: 'PUT', headers, body: JSON.stringify(payload) });
-    if (!sent.ok) return { ok: false, reason: 'api', sha: '' };
-    const saved = await sent.json();
-    sha = (saved.commit && saved.commit.sha) || sha;
-  }
-  return { ok: true, reason: '', sha };
+  const treeRes = await fetch(api + '/git/trees', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      base_tree: baseTree,
+      tree: names.map((path) => ({
+        path: String(path).replace(/^\//, ''),
+        mode: '100644',
+        type: 'blob',
+        content: String(files[path] == null ? '' : files[path]),
+      })),
+    }),
+  });
+  if (!treeRes.ok) return { ok: false, reason: 'api', sha: '' };
+  const tree = await treeRes.json();
+  const commitRes = await fetch(api + '/git/commits', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      message: message || 'feat: pembaruan studio rekayasa',
+      tree: tree.sha,
+      parents: [parentSha],
+    }),
+  });
+  if (!commitRes.ok) return { ok: false, reason: 'api', sha: '' };
+  const commit = await commitRes.json();
+  const update = await fetch(api + '/git/refs/heads/main', {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ sha: commit.sha, force: false }),
+  });
+  if (!update.ok) return { ok: false, reason: 'cas', sha: '' };
+  return { ok: true, reason: '', sha: commit.sha || '' };
 }
 
 export async function pullGithub(token, repo) {

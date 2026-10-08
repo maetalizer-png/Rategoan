@@ -8,6 +8,33 @@ function levelOf(name) {
   return 0;
 }
 
+const BANNED = /^(token|access_token|secret|password|authorization|cookie|api_key|apikey|auth)$/i;
+
+const DEFAULT_ALLOW = [
+  'per_page', 'page', 'sort', 'direction', 'state', 'q', 'type', 'since', 'until',
+  'pageToken', 'fields', 'orderBy', 'query', 'ref', 'sha', 'branch', 'message',
+  'content', 'title', 'body', 'name', 'description', 'color', 'public', 'folder_id',
+  'file_id', 'parent_id', 'path', 'mimeType', 'parents', 'add_parents', 'remove_parents',
+  'alt', 'pageSize', 'base', 'head', 'draft', 'labels', 'assignees',
+];
+
+export function filterParams(params, allow, used) {
+  const permit = new Set(allow && allow.length ? allow : DEFAULT_ALLOW);
+  const skip = used || new Set();
+  const kept = {};
+  const banned = [];
+  Object.keys(params || {}).forEach((key) => {
+    if (skip.has(key)) return;
+    if (BANNED.test(key)) {
+      banned.push(key);
+      return;
+    }
+    if (!permit.has(key)) return;
+    kept[key] = params[key];
+  });
+  return { kept, banned };
+}
+
 export class PolicyEngine {
   constructor(opts = {}) {
     this.confirmed = typeof opts.confirmed === 'function' ? opts.confirmed : () => false;
@@ -24,6 +51,12 @@ export class PolicyEngine {
     }
     if (level >= 3 && !this.confirmed(name, payload)) {
       const err = new Error('Konfirmasi diff diperlukan');
+      err.level = level;
+      throw err;
+    }
+    const screened = filterParams(payload);
+    if (screened.banned.length) {
+      const err = new Error('parameter_ditolak');
       err.level = level;
       throw err;
     }

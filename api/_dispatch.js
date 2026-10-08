@@ -1,4 +1,5 @@
-import { allowOptions, bearer, fillPath, forward, queryOf, readBody, restParams, sendJson } from './_http.js';
+import { allowOptions, bearer, fillPath, forward, queryOf, readBody, sendJson } from './_http.js';
+import { filterParams } from '../js/connectors/policy-engine.js';
 
 export async function dispatchTools(req, res, spec) {
   if (allowOptions(req, res)) return;
@@ -33,13 +34,18 @@ export async function dispatchTools(req, res, spec) {
     sendJson(res, 403, { error: 'konfirmasi_diperlukan', tool: tool.name });
     return;
   }
+  const screened = filterParams(params);
+  if (screened.banned.length) {
+    sendJson(res, 400, { error: 'parameter_ditolak', keys: screened.banned });
+    return;
+  }
   if (spec.special) {
     const handled = await spec.special(tool, params, token, res);
     if (handled) return;
   }
   const used = new Set();
   const path = fillPath(tool.path, params, used);
-  const rest = restParams(params, used);
+  const rest = filterParams(params, tool.allow, used).kept;
   let url = spec.base + path;
   let payload = null;
   if (tool.method === 'GET' || tool.method === 'DELETE') {

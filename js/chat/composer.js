@@ -375,6 +375,12 @@ export const composer = {
       toast.show('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
       return;
     }
+    const att = attach.consume();
+    const fenced = att && att.fileText ? buriedOrder(fenceUntrusted(att.name, att.fileText)) : { inside: false };
+    if (att && att.fileText && (hiddenOrder(att.fileText) || fenced.inside)) {
+      toast.show('Berkas berisi injeksi perintah. Pengiriman dibatalkan.');
+      return;
+    }
     const s = this.ensure();
     if (!s.messages.length) s.title = titleFrom(text);
     if (WORK_RE.test(text) && !s.project) {
@@ -391,11 +397,6 @@ export const composer = {
       store.save();
       return;
     }
-    const att = attach.consume();
-    if (att && att.fileText && hiddenOrder(att.fileText)) {
-      toast.show('Berkas berisi injeksi perintah. Pengiriman dibatalkan.');
-      return;
-    }
     const q = quote.consume();
     s.messages.push({
       role: 'user',
@@ -408,9 +409,6 @@ export const composer = {
     history.render();
     chat.renderMessages();
     haptics.tap(10);
-    if (att && att.fileText && buriedOrder(fenceUntrusted(att.name, att.fileText)).inside && !buriedOrder(text).outside) {
-      toast.show('Perintah tersembunyi di berkas diabaikan');
-    }
     const projNew = text.match(/^proyek baru\s+(.+)$/i);
     if (projNew) {
       const p = workspace.create(projNew[1]);

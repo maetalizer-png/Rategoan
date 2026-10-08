@@ -122,15 +122,35 @@ export class VfsGit {
     return hash;
   }
 
-  commit(msg) {
+  casRef(refName, expectedCommit, newCommit) {
+    const current = this.refs.get(refName) || '';
+    if (expectedCommit !== null && current !== expectedCommit) {
+      throw new Error('CAS Ref Conflict on ' + refName + ': expected ' + expectedCommit + ', got ' + current);
+    }
+    this.refs.set(refName, newCommit);
+    return true;
+  }
+
+  reset(seed = {}) {
+    this.blobs = new Map();
+    this.trees = new Map();
+    this.commits = new Map();
+    this.refs = new Map([['HEAD', ''], ['main', '']]);
+    this.worktree = new Map();
+    Object.keys(seed).forEach((path) => this.stage(path, seed[path]));
+  }
+
+  commit(msg, opts) {
     const tree = this.treeHash();
     const parent = this.refs.get('HEAD') || '';
     const time = Date.now();
     const note = String(msg || '');
     const id = sha256Sync(JSON.stringify({ tree, parent, msg: note, time }));
     this.commits.set(id, { id, msg: note, tree, parent, time });
-    this.refs.set('HEAD', id);
-    this.refs.set('main', id);
+    if (!(opts && opts.moveRefs === false)) {
+      this.refs.set('HEAD', id);
+      this.refs.set('main', id);
+    }
     return id;
   }
 

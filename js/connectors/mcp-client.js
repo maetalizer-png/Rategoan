@@ -16,8 +16,12 @@ export class McpClient {
   }
 
   async request(method, params) {
+    if (!method || typeof method !== 'string') throw new Error('JSON-RPC tidak sah');
     const id = ++this.seq;
-    const res = await this.transport.send({ jsonrpc: '2.0', id, method, params });
+    const message = { jsonrpc: '2.0', id, method, params: params == null ? {} : params };
+    const res = await this.transport.send(message);
+    if (res && res.jsonrpc && res.jsonrpc !== '2.0') throw new Error('JSON-RPC tidak sah');
+    if (res && res.id != null && res.id !== id) throw new Error('JSON-RPC id tidak cocok');
     if (res && res.error) throw new Error(res.error.message || 'MCP error');
     return res && Object.prototype.hasOwnProperty.call(res, 'result') ? res.result : res;
   }

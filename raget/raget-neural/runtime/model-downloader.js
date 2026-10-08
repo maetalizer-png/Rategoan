@@ -37,8 +37,18 @@ function concat(parts) {
 
 export async function digestSha256(bytes) {
   const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-  const buf = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  let subtle = null;
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
+    subtle = crypto.subtle;
+  } else if (typeof globalThis !== 'undefined' && globalThis.crypto && globalThis.crypto.subtle) {
+    subtle = globalThis.crypto.subtle;
+  }
+  if (subtle) {
+    const buf = await subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+  }
+  const { createHash } = await import('node:crypto');
+  return createHash('sha256').update(data).digest('hex');
 }
 
 export async function downloadModel(options) {

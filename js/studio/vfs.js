@@ -61,6 +61,10 @@ export function createVfs(seed) {
       updatedAt: rows[path].updatedAt,
     }));
   }
+  function reset(seed) {
+    Object.keys(rows).forEach((key) => { delete rows[key]; });
+    Object.keys(seed || {}).forEach((path) => write(path, seed[path]));
+  }
   Object.keys(seed || {}).forEach((path) => write(path, seed[path]));
-  return { write, read, list, load, flat, bundle, snapshot };
+  return { write, read, list, load, flat, bundle, snapshot, reset };
 }
