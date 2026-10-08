@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#fafaf8">
   <title>Studio Kode — Rategoan</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
   <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/ui/studio.css">
@@ -15,6 +15,9 @@
     <aside id="studio-sidebar" class="studio-sidebar-col">
       <div class="sidebar-header">
         <a href="index.html#/chat" class="sidebar-brand-link">Rategoan</a>
+        <button type="button" id="btn-collapse-sidebar" class="icon-btn mini" title="Ciutkan" aria-label="Ciutkan">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
         <button type="button" id="btn-close-sidebar" class="icon-btn mini mobile-only" title="Tutup sidebar" aria-label="Tutup sidebar">×</button>
       </div>
       <div class="sidebar-action">
@@ -40,9 +43,7 @@
           <h1 id="header-model-name" class="topbar-title">Studio Kode</h1>
         </div>
         <div class="desktop-crumb">
-          <span id="crumb-project">Proyek Aktif</span>
-          <span id="door-pill" class="door-pill" data-door="center">Pintu B · Pusat</span>
-          <span id="stat-runtime">Sandbox Siap</span>
+          <span id="crumb-project">Studio Kode</span>
         </div>
         <span class="row-spacer"></span>
         <button type="button" id="btn-new-chat" class="icon-btn plain" aria-label="Sesi Koding Baru" title="Sesi Koding Baru">
@@ -106,27 +107,25 @@
     </main>
     <aside id="studio-canvas-pane" class="studio-canvas-pane">
       <header class="canvas-head">
-        <strong id="studio-project-name">Pratinjau Rekayasa</strong>
         <nav class="canvas-tabs">
           <button type="button" class="tab-btn active" data-tab="preview">Pratinjau</button>
-          <button type="button" class="tab-btn" data-tab="files">Struktur Berkas</button>
+          <button type="button" class="tab-btn" data-tab="files">Berkas</button>
           <button type="button" class="tab-btn" data-tab="logs">Terminal</button>
         </nav>
-        <span class="sandbox-pill">Sandbox <strong id="stat-sandbox">Siap</strong> · <strong id="stat-files">4</strong></span>
-        <span id="stat-ms" hidden>0 ms</span>
-        <button type="button" id="studio-sheet-close" aria-label="Tutup kanvas">×</button>
+        <div class="canvas-head-right">
+          <span class="sandbox-pill">● <strong id="stat-sandbox">Siap</strong> · <strong id="stat-files">4</strong> Berkas</span>
+          <span id="stat-ms" hidden>0 ms</span>
+          <button type="button" id="studio-sheet-close" class="sheet-close" aria-label="Tutup kanvas">×</button>
+        </div>
       </header>
       <div class="canvas-content">
         <div id="tab-preview" class="tab-panel active">
-          <div id="studio-diagnostics" class="studio-diagnostics">
-            <h2>Diagnostik runtime</h2>
-            <p>Studio Kode 5.0</p>
-            <ul>
-              <li>Pintu A lokal: Int4 blok 32 dan lapisan 26 MB</li>
-              <li>Pintu B pusat: aliran token, jejak alat, dan diff</li>
-              <li>Penyimpanan lokal: indeks rag_index di IndexedDB</li>
-              <li>Isolasi sandbox: CSP anti-eksfiltrasi</li>
-            </ul>
+          <div id="studio-diagnostics" class="studio-empty-canvas">
+            <div class="empty-canvas-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Ruang Kerja Siap</h3>
+            <p>Kirim instruksi koding di panel obrolan untuk mulai merakit dan menguji aplikasi web secara live.</p>
           </div>
           <iframe id="studio-preview-frame" sandbox="allow-scripts allow-forms" title="Pratinjau hidup"></iframe>
         </div>
@@ -153,6 +152,18 @@
         <div class="studio-modal-footer">
           <button type="button" id="btn-cancel-gdrive" class="btn btn-secondary">Batal</button>
           <button type="button" id="btn-import-gdrive" class="btn btn-primary" disabled>Impor ke VFS</button>
+        </div>
+      </div>
+    </div>
+    <div id="modal-git-sync" class="studio-modal-backdrop" hidden>
+      <div class="studio-modal-box" role="dialog" aria-labelledby="git-sync-title">
+        <div class="studio-modal-header">
+          <span id="git-sync-title" class="modal-title">Sinkronisasi GitHub</span>
+          <button type="button" id="btn-close-git-sync" class="sheet-close" aria-label="Tutup">×</button>
+        </div>
+        <p class="studio-modal-note">Repositori sudah tertaut. Perintah koding tetap dikirim lewat obrolan. Konektor ini hanya gerbang sinkronisasi, bukan instruksi perakitan.</p>
+        <div class="studio-modal-footer">
+          <button type="button" id="btn-cancel-git-sync" class="btn btn-secondary">Tutup</button>
         </div>
       </div>
     </div>

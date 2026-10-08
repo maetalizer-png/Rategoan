@@ -1,7 +1,11 @@
+:root {
+  --rg-sidebar-width: 260px;
+}
+
 @media (min-width: 860px) {
   body {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: var(--rg-sidebar-width) 1fr;
     grid-template-rows: 60px 1fr;
     grid-template-areas: 'sidebar topbar' 'sidebar app';
     position: fixed;
@@ -116,6 +120,19 @@
     width: 100%;
     max-width: 820px;
     margin: 0 auto;
+  }
+
+  .back-btn,
+  #project-back,
+  #connect-back,
+  #artifact-page-back,
+  #coll-back,
+  #btn-back {
+    display: none !important;
+  }
+  .settings-header,
+  .view-header {
+    padding-left: 0;
   }
 
   .sheet {

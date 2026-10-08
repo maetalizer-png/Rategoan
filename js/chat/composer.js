@@ -343,6 +343,12 @@ async function tryTableRequest(text, session) {
   return 'Tabel terbuka di panel kanan. Bisa diunduh CSV.';
 }
 
+const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i;
+
+export function hiddenOrder(text) {
+  return HIDDEN_ORDER.test(String(text || ''));
+}
+
 export const composer = {
   websearchActive: false,
   thinkActive: false,
@@ -363,6 +369,10 @@ export const composer = {
     return s;
   },
   async send(text) {
+    if (hiddenOrder(text)) {
+      toast.show('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
+      return;
+    }
     const s = this.ensure();
     if (!s.messages.length) s.title = titleFrom(text);
     if (WORK_RE.test(text) && !s.project) {
@@ -380,7 +390,7 @@ export const composer = {
       return;
     }
     const att = attach.consume();
-    if (att && att.fileText && /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i.test(att.fileText)) {
+    if (att && att.fileText && hiddenOrder(att.fileText)) {
       toast.show('Berkas berisi injeksi perintah. Pengiriman dibatalkan.');
       return;
     }

@@ -78,8 +78,19 @@ export function readCookie(req, name) {
   return '';
 }
 
+const ALLOWED_ORIGINS = new Set([
+  'https://rategoan.vercel.app',
+  'http://localhost:8080',
+  'http://127.0.0.1:8080',
+]);
+
 export function allowOptions(req, res) {
-  res.setHeader('access-control-allow-origin', originOf(req));
+  const origin = (req.headers && req.headers.origin) || originOf(req);
+  if (ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('access-control-allow-origin', origin);
+  } else {
+    res.setHeader('access-control-allow-origin', 'null');
+  }
   res.setHeader('access-control-allow-headers', 'authorization, content-type');
   res.setHeader('access-control-allow-methods', 'GET, POST, OPTIONS');
   if (req.method === 'OPTIONS') {

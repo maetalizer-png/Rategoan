@@ -13,13 +13,67 @@ const UNITS = {
   c_f: null, f_c: null,
 };
 
+function tokenize(expr) {
+  const tokens = [];
+  const regex = /\s*([0-9]+(?:\.[0-9]+)?|\*\*|[+\-*/()])\s*/g;
+  let match;
+  while ((match = regex.exec(expr)) !== null) {
+    if (match[1]) tokens.push(match[1]);
+  }
+  return tokens;
+}
+
+export function parseArithmeticAST(expr) {
+  const source = String(expr || '').replace(/\s+/g, '');
+  const tokens = tokenize(source);
+  if (tokens.join('') !== source) throw new Error('Ekspresi tidak aman');
+  let pos = 0;
+  function parsePrimary() {
+    const token = tokens[pos++];
+    if (token === '(') {
+      const val = parseExpr();
+      if (tokens[pos++] !== ')') throw new Error('Kurung tidak seimbang');
+      return val;
+    }
+    const num = Number(token);
+    if (!Number.isFinite(num)) throw new Error('Bukan angka valid: ' + token);
+    return num;
+  }
+  function parsePower() {
+    let left = parsePrimary();
+    while (tokens[pos] === '**') {
+      pos += 1;
+      left = Math.pow(left, parsePower());
+    }
+    return left;
+  }
+  function parseMulDiv() {
+    let left = parsePower();
+    while (tokens[pos] === '*' || tokens[pos] === '/') {
+      const op = tokens[pos++];
+      const right = parsePower();
+      left = op === '*' ? left * right : left / right;
+    }
+    return left;
+  }
+  function parseExpr() {
+    let left = parseMulDiv();
+    while (tokens[pos] === '+' || tokens[pos] === '-') {
+      const op = tokens[pos++];
+      const right = parseMulDiv();
+      left = op === '+' ? left + right : left - right;
+    }
+    return left;
+  }
+  const result = parseExpr();
+  if (pos !== tokens.length) throw new Error('Galat sintaksis matematika');
+  if (!Number.isFinite(result)) throw new Error('Bukan angka');
+  return result;
+}
+
 function calc(expr) {
   const raw = String(expr || '').replace(/\s+/g, '').replace(/\^/g, '**');
-  const gate = raw.replace(/\*\*/g, '');
-  if (!raw || !/^[\d.+\-*/()]+$/.test(gate)) throw new Error('Ekspresi tidak aman');
-  const value = Function('"use strict"; return (' + raw + ')')();
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error('Bukan angka');
-  return value;
+  return parseArithmeticAST(raw);
 }
 
 function stats(values) {

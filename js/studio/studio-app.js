@@ -37,17 +37,6 @@ function showTab(name) {
   document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.id === 'tab-' + name));
 }
 
-function openSheet() {
-  const canvas = $('studio-canvas-pane');
-  const narrow = window.matchMedia('(max-width: 1023px)').matches;
-  if (narrow) {
-    if (canvas) canvas.classList.add('is-sheet-open');
-  } else {
-    revealDesktop();
-  }
-  showTab('preview');
-}
-
 let userClosedCanvas = false;
 
 function revealDesktop() {
@@ -71,44 +60,55 @@ function paintDoor() {
 function paintSse(raw) {
   const state = reduceStream(raw);
   const log = $('messages');
-  if (!log) return state;
-  $('studio-app').classList.add('is-active');
-  const line = document.createElement('div');
-  line.className = 'msg ai';
-  line.dataset.stream = 'sse';
-  line.textContent = state.text;
-  log.appendChild(line);
-  state.tools.forEach((tool) => {
-    const card = document.createElement('div');
-    card.className = 'tool-trace-card';
-    card.dataset.stream = 'tool';
-    const head = document.createElement('div');
-    head.className = 'tool-trace-header';
-    head.textContent = (tool.name || 'alat') + (tool.path ? ' ' + tool.path : '');
-    card.appendChild(head);
-    log.appendChild(card);
-  });
-  state.diffs.forEach((diff) => {
-    const pre = document.createElement('pre');
-    pre.className = 'inline-diff-viewer';
-    pre.dataset.stream = 'diff';
-    pre.textContent = diff.patch || '';
-    log.appendChild(pre);
-  });
+  const box = $('console-output');
+  if (log) {
+    $('studio-app').classList.add('is-active');
+    const line = document.createElement('div');
+    line.className = 'msg ai';
+    line.dataset.stream = 'sse';
+    line.textContent = state.text;
+    log.appendChild(line);
+  }
+  if (box) {
+    state.tools.forEach((tool) => {
+      const card = document.createElement('div');
+      card.className = 'tool-trace-card';
+      card.dataset.stream = 'tool';
+      const head = document.createElement('div');
+      head.className = 'tool-trace-header';
+      head.textContent = (tool.name || 'alat') + (tool.path ? ' ' + tool.path : '');
+      card.appendChild(head);
+      box.appendChild(card);
+    });
+    state.diffs.forEach((diff) => {
+      const pre = document.createElement('pre');
+      pre.className = 'inline-diff-viewer';
+      pre.dataset.stream = 'diff';
+      pre.textContent = diff.patch || '';
+      box.appendChild(pre);
+    });
+  }
   return state;
 }
 
+function hudStatus(status) {
+  if (!status) return status;
+  if (/selesai|sandbox|proyek aktif|sesi aktif|pintu/i.test(status)) return 'Siap';
+  return status;
+}
+
 function paintTelemetry(status, ms) {
+  const shown = hudStatus(status);
   const sandbox = $('stat-sandbox');
-  if (sandbox && status) sandbox.textContent = status;
+  if (sandbox && shown) sandbox.textContent = shown;
   const files = $('stat-files');
   if (files) files.textContent = String(vfs.list().length);
   const dur = $('stat-ms');
   if (dur && ms != null) dur.textContent = ms + ' ms';
   const runtime = $('stat-runtime');
-  if (runtime && status) runtime.textContent = status;
+  if (runtime && shown) runtime.textContent = shown;
   const pill = $('runtime-pill');
-  if (pill && status) pill.textContent = status;
+  if (pill && shown) pill.textContent = shown;
 }
 
 function appendConsole(line) {
@@ -117,6 +117,17 @@ function appendConsole(line) {
   const row = document.createElement('div');
   row.textContent = line;
   box.appendChild(row);
+}
+
+function paintProjectName(text) {
+  const title = String(text || '').trim();
+  const clean = title && title.length <= 24 && !/sesi aktif|pintu|selesai|sandbox|proyek aktif/i.test(title)
+    ? title
+    : 'Studio Kode';
+  const crumb = $('crumb-project');
+  if (crumb) crumb.textContent = clean;
+  const name = $('studio-project-name');
+  if (name) name.textContent = clean;
 }
 
 function paintDiff(path) {
@@ -128,12 +139,43 @@ function paintDiff(path) {
         : path === '/main.py' ? 'main.py' : '';
   const before = key ? (lastBefore[key] || '') : '';
   const after = vfs.read(path);
+  const lines = diffLines(before, after);
   pre.textContent = '';
-  diffLines(before, after).forEach((line) => {
+  const oldLen = lines.filter((line) => line.kind !== 'add').length;
+  const newLen = lines.filter((line) => line.kind !== 'del').length;
+  const hunk = document.createElement('div');
+  hunk.className = 'diff-hunk';
+  hunk.textContent = '@@ -' + (oldLen ? 1 : 0) + ',' + oldLen + ' +' + (newLen ? 1 : 0) + ',' + newLen + ' @@';
+  pre.appendChild(hunk);
+  let oldN = oldLen ? 1 : 0;
+  let newN = newLen ? 1 : 0;
+  lines.forEach((line) => {
     const row = document.createElement('div');
     row.className = 'diff-line ' + line.kind;
+    const oldSpan = document.createElement('span');
+    oldSpan.className = 'ln ln-old';
+    const newSpan = document.createElement('span');
+    newSpan.className = 'ln ln-new';
+    if (line.kind === 'add') {
+      oldSpan.textContent = '';
+      newSpan.textContent = String(newN);
+      newN += 1;
+    } else if (line.kind === 'del') {
+      oldSpan.textContent = String(oldN);
+      newSpan.textContent = '';
+      oldN += 1;
+    } else {
+      oldSpan.textContent = String(oldN);
+      newSpan.textContent = String(newN);
+      oldN += 1;
+      newN += 1;
+    }
+    const body = document.createElement('span');
     const mark = line.kind === 'add' ? '+ ' : (line.kind === 'del' ? '- ' : '  ');
-    row.textContent = mark + line.text;
+    body.textContent = mark + line.text;
+    row.appendChild(oldSpan);
+    row.appendChild(newSpan);
+    row.appendChild(body);
     pre.appendChild(row);
   });
 }
@@ -208,7 +250,7 @@ function paintHistory(rows) {
       else if (row.files) Object.keys(row.files).forEach((path) => vfs.write(path, row.files[path]));
       $('studio-app').classList.add('is-active');
       closeDrawer();
-      $('studio-project-name').textContent = 'Pratinjau Rekayasa';
+      paintProjectName(row.title);
       lastBefore = vfs.flat();
       paintTree();
       revealDesktop();
@@ -361,22 +403,8 @@ function renderTrace(slot, trace) {
   verify.appendChild(verifyText);
   body.appendChild(verify);
   card.appendChild(body);
-  const actions = document.createElement('div');
-  actions.className = 'tool-trace-actions';
-  const preview = document.createElement('button');
-  preview.type = 'button';
-  preview.className = 'btn-action btn-preview';
-  preview.textContent = 'Buka pratinjau';
-  preview.onclick = openSheet;
-  const zip = document.createElement('button');
-  zip.type = 'button';
-  zip.className = 'btn-action btn-download';
-  zip.textContent = 'Unduh ZIP';
-  zip.onclick = downloadZip;
-  actions.appendChild(preview);
-  actions.appendChild(zip);
-  card.appendChild(actions);
-  slot.appendChild(card);
+  const box = $('console-output');
+  if (box) box.appendChild(card);
 }
 
 async function finish(slot, thoughts, started, note, trace) {
@@ -518,12 +546,10 @@ async function applyCraft(text) {
     });
     if (changed) viewPath = changed;
     paintTree();
-    $('studio-project-name').textContent = 'Pratinjau Rekayasa';
-    const crumb = $('crumb-project');
     const short = sessionTitle(text);
-    if (crumb) crumb.textContent = short && short.length <= 24 ? short : 'Sesi Aktif';
+    paintProjectName(short);
     paintTelemetry('Selesai', Date.now() - started);
-    await rememberSession(short || 'Sesi Aktif');
+    await rememberSession(short || 'Sesi rekayasa');
   } finally {
     busy = false;
     log.scrollTop = log.scrollHeight;
@@ -633,10 +659,8 @@ function blankProject() {
   const canvas = $('studio-canvas-pane');
   if (canvas) canvas.classList.remove('is-sheet-open');
   closeDrawer();
-  $('studio-project-name').textContent = 'Pratinjau Rekayasa';
-  const crumb = $('crumb-project');
-  if (crumb) crumb.textContent = 'Proyek Aktif';
-  paintTelemetry('Sandbox Siap', 0);
+  paintProjectName('');
+  paintTelemetry('Siap', 0);
   const box = $('chat-input');
   if (box) box.value = '';
   lastBefore = vfs.flat();
@@ -799,6 +823,16 @@ async function loadDriveFolder(id) {
   }
 }
 
+function openGitSyncModal() {
+  const modal = $('modal-git-sync');
+  if (modal) modal.hidden = false;
+}
+
+function closeGitSyncModal() {
+  const modal = $('modal-git-sync');
+  if (modal) modal.hidden = true;
+}
+
 function openDrive() {
   const modal = $('modal-gdrive-picker');
   if (!modal) return;
@@ -864,6 +898,8 @@ function bind() {
   if (drawerNew) drawerNew.onclick = () => { closeDrawer(); blankProject(); };
   const closer = $('btn-close-sidebar');
   if (closer) closer.onclick = () => closeDrawer();
+  const collapse = $('btn-collapse-sidebar');
+  if (collapse) collapse.onclick = () => toggleDrawer();
   const clearer = $('btn-clear-history');
   if (clearer) clearer.onclick = () => { clearSessions(); };
   bindSwipeClose();
@@ -896,6 +932,10 @@ function bind() {
     const box = $('chat-input');
     const text = box.value.trim();
     if (!text) return;
+    if (/ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i.test(text)) {
+      appendConsole('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
+      return;
+    }
     box.value = '';
     closePlus();
     applyCraft(text);
@@ -906,7 +946,15 @@ function bind() {
       $('btn-send').click();
     }
   });
-  $('btn-studio-github').onclick = () => { closePlus(); applyCraft('Terbitkan ke GitHub'); };
+  $('btn-studio-github').onclick = () => {
+    closePlus();
+    const token = connectorState.token('github');
+    if (!token) {
+      window.location.href = 'index.html#/connect';
+      return;
+    }
+    openGitSyncModal();
+  };
   const connectors = $('btn-studio-connectors');
   const panel = $('studio-connector-panel');
   if (connectors && panel) {
@@ -918,6 +966,10 @@ function bind() {
   const cancelDrive = $('btn-cancel-gdrive');
   if (closeDrive) closeDrive.onclick = closeDriveModal;
   if (cancelDrive) cancelDrive.onclick = closeDriveModal;
+  const closeGit = $('btn-close-git-sync');
+  const cancelGit = $('btn-cancel-git-sync');
+  if (closeGit) closeGit.onclick = closeGitSyncModal;
+  if (cancelGit) cancelGit.onclick = closeGitSyncModal;
   const importDrive = $('btn-import-gdrive');
   if (importDrive) importDrive.onclick = () => importDriveSelection();
   const upDrive = $('btn-gdrive-up');
