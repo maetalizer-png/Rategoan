@@ -1,0 +1,5 @@
+{"t":"fsm","state":"SYNTHESIS","steps":["Plan","Grep","Read","Synthesize","Lint & Test","Commit"],"commit":"c4d6732817d90ab7bb184c5371c1586aa63c57b5"}
+{"t":"door","online":"center","offline":"local","sample":"pintu lokal"}
+{"t":"preview","targetOrigin":"host","wildcard":false,"nonceBytes":16}
+{"t":"policy","unknown":5,"catalog":0}
+{"t":"vault","extractable":false,"iterations":100000}

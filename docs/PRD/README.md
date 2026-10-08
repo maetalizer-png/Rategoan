@@ -3,7 +3,7 @@
 Repositori ini dikelola secara ketat dengan pemisahan wilayah dokumentasi kanonikal:
 
 1. **Antarmuka, Casing & Mesin Aplikasi**:
-- `PRD-ANTARMUKA-8.0.md` — Cetak biru eksekusi aktif (Oktober 2026): sasis observasi otonom, transaksi VFS, dan konektor.
+- `PRD-ANTARMUKA-9.0.md` — Cetak biru eksekusi aktif (Oktober 2026): tema terang, sintesis bebas, dan kanvas observasi.
 - `PRD-ANTARMUKA-3.0.md` — Arsip fondasi UI/UX, Komposer, Lembar Lampiran, dan mesin fitur.
 2. **Data, Rilis Korpus & Lisensi**:
 - `PRD-RELEASE.md` — Standar baku tata kelola rilis 3 tingkat (Data Baru, Penampungan, Rak K & R).
