@@ -1,0 +1,5 @@
+{"t":"fsm","state":"SYNTHESIS","steps":["Plan","Grep","Read","Synthesize","Lint & Test","Commit"],"commit":"55ec5a4399f2d90fbf986733d365520499483ba6"}
+{"t":"preview","channel":"MessageChannel","allowSameOrigin":false,"nonceBytes":16,"wildcardLiteral":false}
+{"t":"vault","extractable":false,"iterations":100000,"webcrypto":true}
+{"t":"telemetry","pii":false,"alertKind":"parse","alertAboveMs":20}
+{"t":"seal","algorithm":"SHA-256","digest":"e2c194036f55e3681f674ea58578629bc9e06d9913cd4a3071da8f1c6574a5ba","gpg":false}

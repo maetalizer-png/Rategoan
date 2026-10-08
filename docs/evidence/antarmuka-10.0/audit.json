@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-10-09",
+  "parent": "3c9dde02451d70b6e551c2749fa633fd3d8db765",
+  "implementation": "55ec5a4399f2d90fbf986733d365520499483ba6",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit 55ec5a4399f2d90fbf986733d365520499483ba6",
+    "digest": "e2c194036f55e3681f674ea58578629bc9e06d9913cd4a3071da8f1c6574a5ba",
+    "gpg": false
+  },
+  "tag": "10.0.0-GA",
+  "neuralCoreUntouched": [
+    "raget/raget-neural/core/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/core/llm-quantization.js"
+  ],
+  "checks": {
+    "lightBoot": "rgb(250, 250, 248)",
+    "topbar": "rgb(255, 255, 255)",
+    "sandbox": "allow-scripts allow-forms",
+    "allowSameOriginWarning": 0,
+    "popoverOffsetPx": 9,
+    "chatPopoverOffsetPx": 9,
+    "backdrop": "rgba(0, 0, 0, 0)",
+    "animation": "0.15s",
+    "canvasMaxWidthPx": 920,
+    "canvasPadding": "32px 40px",
+    "gallery": "minmax(260px, 1fr)",
+    "mobileSheetPx": 263,
+    "messageChannelForm": true,
+    "playwright": "15/15",
+    "playwright9": "15/15",
+    "browser": "Chromium",
+    "unit": "78/78",
+    "lintErrors": 0,
+    "lintWarnings": 0
+  }
+}
