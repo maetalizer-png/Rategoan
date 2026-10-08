@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-10-08",
+  "parent": "fcac972c41dfc4a0c3a73df5f0663cb923a9a32e",
+  "implementation": "967b434ce574d5846cd9a688b637d4e7a5e19eff",
+  "neuralCoreUntouched": [
+    "raget/raget-neural/core/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/core/llm-quantization.js"
+  ],
+  "checks": {
+    "topbarSurfaceImportant": true,
+    "popoverOffset8": true,
+    "attachGap10": true,
+    "digestFallbackNode": true,
+    "vfsCas": true,
+    "diffFailClosed": true,
+    "policyAllowlist": true,
+    "githubAtomicTree": true,
+    "driveMultipart": true,
+    "injectionBeforeMemory": true,
+    "playwright": "14/14",
+    "unit": "58/58",
+    "lintErrors": 0,
+    "lintWarnings": 0
+  }
+}
