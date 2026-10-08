@@ -2,12 +2,14 @@ import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
-import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle } from './studio-agent.js';
+import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm } from './studio-agent.js';
 import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
+import { VfsGit } from './vfs-git.js';
+import { renderDiffElement } from './diff-parser.js';
 import { folderBridge } from '../project/folder-bridge.js';
-import { reduceStream, chooseDoor } from './sse-door.js';
+import { reduceStream, chooseDoor, routeDoor } from './sse-door.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -16,6 +18,7 @@ const SEED = {
   '/main.py': 'print("halo")\n',
 };
 const vfs = createVfs(SEED);
+const git = new VfsGit(SEED);
 let viewPath = '/js/script.js';
 let lastBefore = vfs.flat();
 let busy = false;
@@ -52,16 +55,19 @@ function paintDoor() {
   const pill = $('door-pill');
   if (!pill) return;
   const online = typeof navigator === 'undefined' ? true : navigator.onLine;
-  const door = chooseDoor(online);
+  const door = routeDoor(online);
   pill.dataset.door = door;
   pill.textContent = door === 'local' ? 'Pintu A · Lokal' : 'Pintu B · Pusat';
 }
 
+let streamCursor = null;
+
 function paintSse(raw) {
-  const state = reduceStream(raw);
+  const state = reduceStream(raw, streamCursor);
+  streamCursor = { seen: state.seen, runId: state.runId, door: state.door };
   const log = $('messages');
   const box = $('console-output');
-  if (log) {
+  if (log && state.text) {
     $('studio-app').classList.add('is-active');
     const line = document.createElement('div');
     line.className = 'msg ai';
@@ -119,6 +125,10 @@ function appendConsole(line) {
   box.appendChild(row);
 }
 
+function mirrorGit() {
+  vfs.list().forEach((path) => git.stage(path, vfs.read(path)));
+}
+
 function paintProjectName(text) {
   const title = String(text || '').trim();
   const clean = title && title.length <= 24 && !/sesi aktif|pintu|selesai|sandbox|proyek aktif/i.test(title)
@@ -140,44 +150,7 @@ function paintDiff(path) {
   const before = key ? (lastBefore[key] || '') : '';
   const after = vfs.read(path);
   const lines = diffLines(before, after);
-  pre.textContent = '';
-  const oldLen = lines.filter((line) => line.kind !== 'add').length;
-  const newLen = lines.filter((line) => line.kind !== 'del').length;
-  const hunk = document.createElement('div');
-  hunk.className = 'diff-hunk';
-  hunk.textContent = '@@ -' + (oldLen ? 1 : 0) + ',' + oldLen + ' +' + (newLen ? 1 : 0) + ',' + newLen + ' @@';
-  pre.appendChild(hunk);
-  let oldN = oldLen ? 1 : 0;
-  let newN = newLen ? 1 : 0;
-  lines.forEach((line) => {
-    const row = document.createElement('div');
-    row.className = 'diff-line ' + line.kind;
-    const oldSpan = document.createElement('span');
-    oldSpan.className = 'ln ln-old';
-    const newSpan = document.createElement('span');
-    newSpan.className = 'ln ln-new';
-    if (line.kind === 'add') {
-      oldSpan.textContent = '';
-      newSpan.textContent = String(newN);
-      newN += 1;
-    } else if (line.kind === 'del') {
-      oldSpan.textContent = String(oldN);
-      newSpan.textContent = '';
-      oldN += 1;
-    } else {
-      oldSpan.textContent = String(oldN);
-      newSpan.textContent = String(newN);
-      oldN += 1;
-      newN += 1;
-    }
-    const body = document.createElement('span');
-    const mark = line.kind === 'add' ? '+ ' : (line.kind === 'del' ? '- ' : '  ');
-    body.textContent = mark + line.text;
-    row.appendChild(oldSpan);
-    row.appendChild(newSpan);
-    row.appendChild(body);
-    pre.appendChild(row);
-  });
+  renderDiffElement(pre, lines);
 }
 
 function paintTree() {
@@ -478,9 +451,16 @@ async function applyCraft(text) {
       paintTelemetry('Siap');
       return;
     }
+    mirrorGit();
+    const snap = git.snapshot();
+    runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
-    Object.keys(plan.files).forEach((path) => vfs.write(path, plan.files[path]));
+    Object.keys(plan.files).forEach((path) => {
+      vfs.write(path, plan.files[path]);
+      git.stage(path, plan.files[path]);
+    });
     let verify = 'Berkas ditulis';
+    let rolled = false;
     if (plan.lang !== 'python') {
       let healed = vfs.read('/js/script.js');
       for (let i = 0; healed && i < 3; i += 1) {
@@ -497,20 +477,32 @@ async function applyCraft(text) {
         }
         const next = healScript(healed, { msg: res.error || '' });
         if (!next || next === healed || i === 2) {
-          verify = 'Perlu perbaikan, kendali dikembalikan';
-          appendConsole('Percobaan perbaikan berhenti di langkah ' + (i + 1) + '. Kendali dikembalikan.');
+          rolled = true;
+          git.rollback(snap);
+          snap.forEach((content, path) => vfs.write(path, content));
+          verify = 'Dikembalikan ke snapshot stabil';
+          appendConsole('Perbaikan mandiri berhenti. Worktree dikembalikan ke snapshot stabil.');
           break;
         }
         healed = next;
         await step('Perbaikan mandiri ' + (i + 1));
       }
-      vfs.write('/js/script.js', healed);
+      if (!rolled) {
+        vfs.write('/js/script.js', healed);
+        git.stage('/js/script.js', healed);
+        git.commit(sessionTitle(text) || 'perakitan');
+        runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
+      } else {
+        runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'fail', 'retry', 'fail', 'retry', 'fail', 'exhausted']);
+      }
       revealDesktop();
       mountPreview($('studio-preview-frame'), vfs.flat());
       showTab('preview');
     } else {
       verify = 'Skrip tersimpan di main.py';
       appendConsole('Skrip Python tersimpan di main.py.');
+      git.commit(sessionTitle(text) || 'perakitan');
+      runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
       viewPath = '/main.py';
       revealDesktop();
       showTab('files');
@@ -665,6 +657,7 @@ function blankProject() {
   if (box) box.value = '';
   lastBefore = vfs.flat();
   paintTree();
+  mirrorGit();
   mountPreview($('studio-preview-frame'), vfs.flat());
 }
 
@@ -751,7 +744,7 @@ async function takePromptFile(file, label) {
   appendPrompt(label + ': ' + file.name);
 }
 function dirtySessionTitle(title) {
-  return /^(buatkan|tolong buat|dummy|sample)\b/i.test(String(title || '').trim());
+  return /^(buatkan|tolong buat|dummy|sample|scaffold|ujicoba|test|demo)\b/i.test(String(title || '').trim());
 }
 
 let driveStack = ['root'];
@@ -1056,6 +1049,7 @@ function bind() {
   }
   idbGateway.getList('studio-vfs').then((rows) => {
     if (!touched && rows && rows.length) vfs.load(rows);
+    mirrorGit();
     paintTree();
     mountPreview($('studio-preview-frame'), vfs.flat());
   }).catch(() => {

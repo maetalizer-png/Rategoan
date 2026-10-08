@@ -22,11 +22,22 @@ export function loadPkce(req) {
 
 export function redirectWithToken(res, returnTo, fields) {
   const url = new URL(returnTo);
-  const hash = new URLSearchParams();
-  Object.keys(fields).forEach((key) => {
-    if (fields[key] != null && fields[key] !== '') hash.set(key, String(fields[key]));
-  });
-  url.hash = hash.toString();
+  const bag = fields || {};
+  const token = bag.access_token ? String(bag.access_token) : '';
+  if (token) {
+    const payload = Buffer.from(JSON.stringify({
+      connector: bag.connector || '',
+      access_token: token,
+      expires_in: bag.expires_in || '',
+      account: bag.account || '',
+      state: bag.state || '',
+    })).toString('base64url');
+    const secure = process.env.VERCEL ? '; Secure' : '';
+    res.setHeader('Set-Cookie', 'rg_oauth=' + encodeURIComponent(payload) + '; Path=/; HttpOnly; SameSite=Lax; Max-Age=28800' + secure);
+  }
+  if (bag.connector) url.searchParams.set('connector', String(bag.connector));
+  url.searchParams.set('oauth', 'cookie');
+  url.hash = '';
   res.statusCode = 302;
   res.setHeader('Location', url.toString());
   res.end();

@@ -202,37 +202,32 @@ export const connectorState = {
   },
   absorbReturn() {
     const hash = location.hash.startsWith('#') ? location.hash.slice(1) : '';
-    const fromHash = hash.includes('access_token=');
-    const params = new URLSearchParams(fromHash ? hash : location.search);
-    const token = params.get('access_token');
-    const service = params.get('connector');
-    if (!token || !service) return false;
-    const state = params.get('state') || '';
-    const expected = sessionStorage.getItem('rategoan_oauth_state') || '';
-    const scrub = () => {
-      if (fromHash) {
-        history.replaceState(null, '', location.pathname + location.search);
-      } else {
-        params.delete('access_token');
-        params.delete('connector');
-        params.delete('expires_in');
-        params.delete('account');
-        params.delete('state');
-        const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
-        history.replaceState(null, '', next);
-      }
-    };
-    if (!state || state !== expected) {
-      scrub();
-      throw new Error('CSRF Attack Detected');
+    if (hash.includes('access_token=')) {
+      history.replaceState(null, '', location.pathname + location.search);
+      throw new Error('Token fragmen URL ditolak');
     }
-    sessionStorage.removeItem('rategoan_oauth_state');
-    this.markConnected(service, {
-      access_token: token,
-      account: params.get('account') || '',
-      expiresIn: Number(params.get('expires_in') || 3600),
-    });
-    scrub();
-    return true;
+    const params = new URLSearchParams(location.search);
+    if (params.get('access_token')) {
+      history.replaceState(null, '', location.pathname + location.hash);
+      throw new Error('Token URL ditolak');
+    }
+    if (params.get('oauth') === 'cookie' && params.get('connector')) {
+      const id = params.get('connector');
+      const state = read();
+      const svc = state.services[id];
+      if (svc && !svc.system_native) {
+        svc.connected = true;
+        svc.reconnect_required = false;
+        svc.access_token = '';
+        svc.cookie_session = true;
+        write(state);
+      }
+      params.delete('oauth');
+      params.delete('connector');
+      const next = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+      history.replaceState(null, '', next);
+      return true;
+    }
+    return false;
   },
 };

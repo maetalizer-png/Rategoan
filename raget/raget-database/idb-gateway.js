@@ -118,29 +118,42 @@ export function keepSealed(row, held) {
   return !!(row && row.enc && !held);
 }
 
+function quotaError(key) {
+  const err = new Error('QuotaExceededError');
+  err.name = 'QuotaExceededError';
+  err.code = 'quota_exceeded';
+  err.key = key;
+  return err;
+}
+
 async function setList(key, list) {
-  try {
-    const payload = fitMedia(list);
-    const db = await openDb();
-    const held = vaultKey.current();
-    const existing = await readRow(key);
-    if (keepSealed(existing, held)) return;
-    const record = held ? { key, ...(await packList(held, payload)) } : { key, list: payload };
-    try {
-      if (typeof navigator !== 'undefined' && navigator.storage && navigator.storage.estimate) {
-        const est = await navigator.storage.estimate();
-        const size = JSON.stringify(record).length;
-        if (est.quota && est.usage != null && est.usage + size > est.quota) {
-          signalStorage(key, 'QuotaExceededError');
-          return;
-        }
-      }
-      await putRecord(db, record);
-    } catch (e) {
-      signalStorage(key, e);
-      console.warn('[Rategoan Fallback] idb-gateway:', e);
+  const payload = fitMedia(list);
+  const db = await openDb();
+  const held = vaultKey.current();
+  const existing = await readRow(key);
+  if (keepSealed(existing, held)) return;
+  const record = held ? { key, ...(await packList(held, payload)) } : { key, list: payload };
+  if (typeof navigator !== 'undefined' && navigator.storage && navigator.storage.estimate) {
+    const est = await navigator.storage.estimate();
+    const size = JSON.stringify(record).length;
+    if (est.quota && est.usage != null && est.usage + size > est.quota) {
+      const err = quotaError(key);
+      signalStorage(key, err);
+      throw err;
     }
-  } catch (e) { console.warn('[Rategoan Fallback] idb-gateway:', e); }
+  }
+  try {
+    await putRecord(db, record);
+  } catch (e) {
+    const name = String((e && e.name) || '');
+    if (name === 'QuotaExceededError' || /quota/i.test(String((e && e.message) || e || ''))) {
+      const err = quotaError(key);
+      signalStorage(key, err);
+      throw err;
+    }
+    signalStorage(key, e);
+    throw e;
+  }
 }
 
 async function sealAll() {

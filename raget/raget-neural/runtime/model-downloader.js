@@ -35,6 +35,12 @@ function concat(parts) {
   return out;
 }
 
+export async function digestSha256(bytes) {
+  const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 export async function downloadModel(options) {
   const url = String((options && options.url) || '');
   const size = Math.max(0, Math.floor(Number(options && options.size) || 0));
@@ -42,8 +48,10 @@ export async function downloadModel(options) {
   const cacheName = (options && options.cacheName) || MODEL_CACHE;
   const fetchImpl = (options && options.fetchImpl) || fetch;
   const store = (options && options.store) || memoryStore();
+  const expected = (options && options.chunkHashes) || [];
   const ranges = planRanges(size, chunk);
   const parts = [];
+  const digests = [];
   let fetched = 0;
   for (let i = 0; i < ranges.length; i += 1) {
     const range = ranges[i];
@@ -52,11 +60,21 @@ export async function downloadModel(options) {
     if (!bytes) {
       const res = await fetchImpl(url, { headers: { Range: 'bytes=' + range.start + '-' + range.end } });
       const raw = new Uint8Array(await res.arrayBuffer());
+      const digest = await digestSha256(raw);
+      if (expected[i] && expected[i] !== digest) {
+        const err = new Error('checksum_mismatch');
+        err.name = 'ChecksumError';
+        err.index = i;
+        throw err;
+      }
       bytes = raw;
       await store.put(cacheName, key, bytes);
       fetched += 1;
+      digests.push(digest);
+    } else {
+      digests.push(await digestSha256(bytes));
     }
     parts.push(bytes);
   }
-  return { bytes: concat(parts), ranges: ranges.length, fetched, cache: cacheName };
+  return { bytes: concat(parts), ranges: ranges.length, fetched, cache: cacheName, digests };
 }

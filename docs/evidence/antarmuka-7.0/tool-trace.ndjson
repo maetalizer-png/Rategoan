@@ -1,0 +1,5 @@
+{"t":"fsm","state":"IDLE","trace":["IDLE","INTENT_CLASSIFY","REPO_SCAN","TARGETED_INGEST","SYNTHESIS","VERIFICATION","INTERACTIVE_APPROVAL","ATOMIC_COMMIT","IDLE"]}
+{"t":"door","online":"center","offline":"local"}
+{"t":"stream","text":"fungsi","tools":1,"runId":"run-7"}
+{"t":"mcp","method":"tools/call","level":"read"}
+{"t":"policy","destructive":"Otentikasi ulang diperlukan"}

@@ -1,0 +1,17 @@
+{
+  "head": "9186d36b10e11d6d9e3d6261df8c54ebc6dfac81087056cb6a4fe94e9da61f08",
+  "main": "9186d36b10e11d6d9e3d6261df8c54ebc6dfac81087056cb6a4fe94e9da61f08",
+  "blobs": 3,
+  "trees": 1,
+  "commits": [
+    {
+      "id": "9186d36b10e11d6d9e3d6261df8c54ebc6dfac81087056cb6a4fe94e9da61f08",
+      "msg": "snapshot stabil",
+      "tree": "721cc05b3d8245ba3f99fe71bc68d25f1d065191b5d045c3558e194ee6c20dc3",
+      "parent": "",
+      "time": 1791438032429
+    }
+  ],
+  "rollbackRestored": true,
+  "headCommit": "9186d36b10e11d6d9e3d6261df8c54ebc6dfac81087056cb6a4fe94e9da61f08"
+}

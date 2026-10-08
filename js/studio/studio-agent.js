@@ -93,6 +93,41 @@ export function generateTelemetryArchitectureVFS(options = {}) {
   return { 'index.html': html, 'style.css': css, 'script.js': script, bytes: size };
 }
 
+export function nextStudioState(state, event) {
+  const table = {
+    IDLE: { start: 'INTENT_CLASSIFY' },
+    INTENT_CLASSIFY: { classified: 'REPO_SCAN', reject: 'IDLE' },
+    REPO_SCAN: { scanned: 'TARGETED_INGEST' },
+    TARGETED_INGEST: { ingested: 'SYNTHESIS' },
+    SYNTHESIS: { synthesized: 'VERIFICATION' },
+    VERIFICATION: { pass: 'INTERACTIVE_APPROVAL', fail: 'BACKTRACK_LOOP' },
+    BACKTRACK_LOOP: { retry: 'SYNTHESIS', exhausted: 'IDLE' },
+    INTERACTIVE_APPROVAL: { approved: 'ATOMIC_COMMIT' },
+    ATOMIC_COMMIT: { committed: 'IDLE' },
+  };
+  const row = table[state] || {};
+  return row[event] || state;
+}
+
+export function runStudioFsm(events) {
+  let state = 'IDLE';
+  const trace = [state];
+  let backtracks = 0;
+  (events || []).forEach((event) => {
+    if (state === 'BACKTRACK_LOOP' && event === 'retry') {
+      backtracks += 1;
+      if (backtracks > 3) {
+        state = 'IDLE';
+        trace.push(state);
+        return;
+      }
+    }
+    state = nextStudioState(state, event);
+    trace.push(state);
+  });
+  return { state, trace, backtracks };
+}
+
 function hasEngineeringIntent(ask) {
   return /buat(kan)?|rakit|rancang|tambah|ubah|ganti|komponen|fungsi|script|style|css|html|python|button|tombol|halaman|form|telemetri|audit|uji|pengujian|scaffold|oranye|reset|warna|dasbor|sandbox/i.test(ask);
 }

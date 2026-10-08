@@ -301,7 +301,10 @@ export function bindConnectorReturn() {
       if (root) connectorHub.mount(root);
     }
   } catch (e) {
-    if (!/CSRF/.test(String(e && e.message))) throw e;
-    toast.show('Masuk ditolak: state tidak cocok.');
+    if (/CSRF|Token/.test(String(e && e.message))) {
+      toast.show('Masuk ditolak. Token tidak boleh menempel di URL.');
+      return;
+    }
+    throw e;
   }
 }

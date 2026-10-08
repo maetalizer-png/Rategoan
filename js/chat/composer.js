@@ -346,7 +346,8 @@ async function tryTableRequest(text, session) {
 const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i;
 
 export function hiddenOrder(text) {
-  return HIDDEN_ORDER.test(String(text || ''));
+  const norm = String(text || '').normalize('NFKC');
+  return HIDDEN_ORDER.test(norm);
 }
 
 export const composer = {
@@ -369,6 +370,7 @@ export const composer = {
     return s;
   },
   async send(text) {
+    text = String(text == null ? '' : text).normalize('NFKC');
     if (hiddenOrder(text)) {
       toast.show('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
       return;

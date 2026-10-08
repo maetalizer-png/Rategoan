@@ -20,6 +20,7 @@ export const connectPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('connect') >= 0) mount();
     });
+    if ((location.hash || '').indexOf('connect') >= 0) mount();
   },
   open() {
     mount();

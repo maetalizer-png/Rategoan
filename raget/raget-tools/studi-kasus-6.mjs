@@ -29,7 +29,6 @@ await studio.goto(base + '/studio.html', { waitUntil: 'networkidle' });
 await studio.waitForSelector('#btn-collapse-sidebar', { timeout: 8000 });
 
 const quiet = await studio.evaluate(() => {
-  const app = document.getElementById('studio-app');
   const side = document.getElementById('studio-sidebar').getBoundingClientRect();
   const crumb = document.getElementById('crumb-project').textContent;
   const top = document.getElementById('topbar').innerText;
