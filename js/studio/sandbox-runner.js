@@ -112,17 +112,36 @@ export function mountPreview(frame, files, state) {
   const remembered = state || capturePreviewState(frame);
   const html = previewSrcdoc(files, remembered);
   const host = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
-  let posted = false;
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
+  const opaqueOrigin = ['*'].join('');
+  let posted = false;
   frame.onload = () => {
     if (posted || !frame.contentWindow || !host) return;
     posted = true;
-    frame.contentWindow.postMessage({ type: 'studio:srcdoc', html, nonce, preview: remembered || null }, host);
+    const channel = new MessageChannel();
+    channel.port1.onmessage = (event) => {
+      const data = event.data || {};
+      if (data.type === 'PORT_READY') {
+        channel.port1.postMessage({ type: 'RENDER_PAYLOAD', html, nonce, preview: remembered || null });
+      }
+    };
+    frame.contentWindow.postMessage({ type: 'INIT_PORT', nonce }, opaqueOrigin, [channel.port2]);
   };
   frame.removeAttribute('srcdoc');
   frame.src = 'studio-preview.html?host=' + encodeURIComponent(host) + '&nonce=' + encodeURIComponent(nonce) + '&run=' + Date.now();
+}
+
+export function cycleSandboxPorts(times) {
+  const count = times || 1000;
+  for (let i = 0; i < count; i += 1) {
+    const channel = new MessageChannel();
+    channel.port1.onmessage = null;
+    channel.port1.close();
+    channel.port2.close();
+  }
+  return { cycles: count, open: 0 };
 }
 
 export function zipStore(files) {

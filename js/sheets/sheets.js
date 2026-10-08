@@ -5,6 +5,9 @@ import { dataHealthSheet } from './data-health-sheet.js';
 export const sheets = {
   close() {
     $('attach-sheet').hidden = true;
+    const anchored = $('attach-sheet');
+    if (anchored) anchored.classList.remove('is-anchored');
+    document.body.classList.remove('attach-open');
     $('model-sheet').hidden = true;
     const skill = $('skill-sheet');
     if (skill) skill.hidden = true;
@@ -48,5 +51,26 @@ export const sheets = {
     if (pc) pc.onclick = () => this.close();
     const ac = $('artifact-sheet-close');
     if (ac) ac.onclick = () => this.close();
+    document.addEventListener('keydown', (event) => {
+      const sheet = $('attach-sheet');
+      if (!sheet || sheet.hidden) {
+        if (event.key === 'Escape') this.close();
+        return;
+      }
+      if (event.key === 'Escape') {
+        this.close();
+        return;
+      }
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+      const buttons = Array.from(sheet.querySelectorAll('button'));
+      if (!buttons.length) return;
+      const index = buttons.indexOf(document.activeElement);
+      const step = event.key === 'ArrowDown' ? 1 : -1;
+      const next = buttons[(index + step + buttons.length) % buttons.length];
+      if (next) {
+        event.preventDefault();
+        next.focus();
+      }
+    });
   },
 };

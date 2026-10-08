@@ -20,8 +20,11 @@
 }
 
 .settings-header h1 {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
 }
 
 #settings-menu {

@@ -3,8 +3,9 @@ import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
 import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop } from './studio-agent.js';
-import { synthesizeCode } from './neural-synthesizer.js';
+import { recordTelemetry } from './telemetry.js';
 import { healSyntax } from './ast-heal.js';
+import { synthesizeCode } from './neural-synthesizer.js';
 import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
@@ -145,6 +146,7 @@ function paintTelemetry(status, ms, meta) {
   if (runtime && shown) runtime.textContent = shown;
   const pill = $('runtime-pill');
   if (pill && shown) pill.textContent = shown;
+  recordTelemetry(projectKey(), { ms: Number(ms) || 0, ok: true, kind: 'render' });
 }
 
 function showPreview() {
@@ -1046,6 +1048,18 @@ function bind() {
       $('btn-studio-send').click();
     }
     if (event.key === 'Escape') closePlus();
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+    const sheet = attachSheet();
+    if (!sheet || sheet.hidden) return;
+    const buttons = Array.from(sheet.querySelectorAll('button'));
+    if (!buttons.length) return;
+    const index = buttons.indexOf(document.activeElement);
+    const step = event.key === 'ArrowDown' ? 1 : -1;
+    const next = buttons[(index + step + buttons.length) % buttons.length];
+    if (next) {
+      event.preventDefault();
+      next.focus();
+    }
   });
   $('btn-studio-github').onclick = () => {
     closePlus();

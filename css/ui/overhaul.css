@@ -131,7 +131,16 @@
   background: var(--rg-surface);
   border: 1px solid var(--rg-line);
 }
-.project-grid, .artifact-gallery { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.project-grid { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.artifact-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .project-card, .artifact-card-page {
   display: flex;
   align-items: center;
@@ -466,8 +475,7 @@ html, body { overflow-x: hidden; }
 #storage-meter-bar { display: block; height: 100%; width: 0; background: #1a4b8c; }
 .attach-plain-label small { display: block; font-weight: 400; color: var(--rg-muted); }
 @media (min-width: 960px) {
-  #view-artifacts .settings-page { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
-  #view-artifacts .settings-header, #view-artifacts .coll-tab-desc, #artifact-filters { grid-column: 1 / -1; }
+  #view-artifacts .settings-page { display: flex; flex-direction: column; max-width: 920px; }
   #artifact-inline { min-height: 360px; }
 }
 

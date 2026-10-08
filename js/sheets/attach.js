@@ -14,8 +14,26 @@ export const attach = {
   modes: { websearch: false, think: false, research: false },
   onModeOff: null,
   open() {
-    $('attach-sheet').hidden = false;
+    const sheet = $('attach-sheet');
+    sheet.hidden = false;
+    sheet.classList.add('is-anchored');
+    document.body.classList.add('attach-open');
     $('sheet-backdrop').classList.add('show');
+    if (window.matchMedia('(min-width: 860px)').matches) {
+      const plus = $('btn-plus');
+      if (plus) {
+        const box = plus.getBoundingClientRect();
+        const width = Math.min(340, window.innerWidth - 16);
+        const left = Math.max(8, Math.min(box.left, window.innerWidth - width - 8));
+        sheet.style.position = 'fixed';
+        sheet.style.width = width + 'px';
+        sheet.style.left = left + 'px';
+        sheet.style.right = 'auto';
+        sheet.style.top = 'auto';
+        sheet.style.transform = 'none';
+        sheet.style.bottom = (window.innerHeight - box.top + 8) + 'px';
+      }
+    }
   },
   pick(kind) {
     $('pick-' + kind).click();

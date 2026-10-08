@@ -1,4 +1,6 @@
 import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
+import { getWebCrypto } from '../crypto/get-web-crypto.js';
+import { auditEvent } from '../studio/telemetry.js';
 
 const KEY = 'rategoan_connectors_state';
 
@@ -128,15 +130,17 @@ function boxSet(box, key, value) {
 }
 
 export async function deriveVaultKey(storage) {
+  const cryptoImpl = await getWebCrypto();
   const box = storage || memoryBox();
   let saltRaw = boxGet(box, SALT_KEY);
   if (!saltRaw) {
-    saltRaw = b64(crypto.getRandomValues(new Uint8Array(16)));
+    saltRaw = b64(cryptoImpl.getRandomValues(new Uint8Array(16)));
     boxSet(box, SALT_KEY, saltRaw);
   }
   const salt = fromB64(saltRaw);
-  const material = await crypto.subtle.importKey('raw', salt, 'PBKDF2', false, ['deriveKey']);
-  return crypto.subtle.deriveKey(
+  const material = await cryptoImpl.subtle.importKey('raw', salt, 'PBKDF2', false, ['deriveKey']);
+  auditEvent('vault_derive');
+  return cryptoImpl.subtle.deriveKey(
     { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
     material,
     { name: 'AES-GCM', length: 256 },
@@ -190,7 +194,8 @@ async function aesKey() {
     if (existing && existing.extractable === false) return existing;
   } catch (e) { /* kunci turunan dipakai di bawah */ }
   try {
-    const key = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    const cryptoImpl = await getWebCrypto();
+    const key = await cryptoImpl.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
     await writeCryptoKey(key);
     try { await idbGateway.setList('connector-aes', []); } catch (err) { /* brankas lama dikosongkan */ }
     try { memoryBox().removeItem(KEYID); } catch (err) { /* tidak ada localStorage */ }
@@ -201,15 +206,18 @@ async function aesKey() {
 }
 
 async function persistVault(state) {
-  if (!globalThis.crypto || !crypto.subtle) return;
+  let cryptoImpl;
+  try { cryptoImpl = await getWebCrypto(); } catch (e) { return; }
   const tokens = {};
   Object.keys(state.services || {}).forEach((id) => {
     const token = state.services[id] && state.services[id].access_token;
     if (token) tokens[id] = token;
   });
   const key = await aesKey();
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(tokens)));
+  const iv = cryptoImpl.getRandomValues(new Uint8Array(12));
+  const cipher = await cryptoImpl.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(tokens)));
+  Object.keys(tokens).forEach((id) => { tokens[id] = ''; });
+  auditEvent('vault_wipe');
   const pack = { iv: b64(iv), data: b64(new Uint8Array(cipher)) };
   try { await idbGateway.setList('connector-vault', [pack]); } catch (e) { console.warn('[Rategoan Fallback] connector-vault:', e); }
   localStorage.removeItem(VAULT);

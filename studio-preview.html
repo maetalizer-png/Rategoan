@@ -9,22 +9,26 @@
 var host = '';
 var nonce = '';
 try {
-  host = new URLSearchParams(location.search).get('host') || '';
-  nonce = new URLSearchParams(location.search).get('nonce') || '';
+  var params = new URLSearchParams(location.search);
+  host = params.get('host') || '';
+  nonce = params.get('nonce') || '';
 } catch (e) { host = ''; }
-window.onerror = function (msg, url, line, col) {
-  if (!host) return;
-  parent.postMessage({ type: 'studio:error', error: { msg: String(msg), line: line, col: col } }, host);
-};
 window.addEventListener('message', function (event) {
   if (event.source !== window.parent) return;
   if (!host || event.origin !== host) return;
   var data = event.data;
-  if (!data || data.type !== 'studio:srcdoc' || typeof data.html !== 'string') return;
+  if (!data || data.type !== 'INIT_PORT' || !event.ports || !event.ports[0]) return;
   if (!nonce || data.nonce !== nonce) return;
-  document.open();
-  document.write(data.html);
-  document.close();
+  var port = event.ports[0];
+  port.onmessage = function (e) {
+    var msg = e.data || {};
+    if (msg.type !== 'RENDER_PAYLOAD' || typeof msg.html !== 'string') return;
+    if (msg.nonce !== nonce) return;
+    document.open();
+    document.write(msg.html);
+    document.close();
+  };
+  port.postMessage({ type: 'PORT_READY' });
 });
 </script>
 </body>

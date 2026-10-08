@@ -214,3 +214,13 @@ export function createStreamDiff() {
     },
   };
 }
+
+export function mergeLines(base, ours, theirs) {
+  const left = String(ours == null ? '' : ours);
+  const right = String(theirs == null ? '' : theirs);
+  const origin = String(base == null ? '' : base);
+  if (left === right) return { ok: true, text: left, conflict: false };
+  if (left === origin) return { ok: true, text: right, conflict: false };
+  if (right === origin) return { ok: true, text: left, conflict: false };
+  return { ok: false, text: left, conflict: true };
+}

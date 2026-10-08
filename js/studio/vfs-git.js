@@ -100,6 +100,26 @@ export class VfsGit {
     this.restore(snap);
   }
 
+  recover(snap) {
+    this.rollback(snap);
+    return this.verifyIntegrity();
+  }
+
+  verifyIntegrity() {
+    const hash = this.treeHash();
+    const tree = this.trees.get(hash);
+    if (!tree) return false;
+    const names = Object.keys(tree);
+    for (let i = 0; i < names.length; i += 1) {
+      const path = names[i];
+      if (!this.worktree.has(path)) return false;
+      const body = String(this.worktree.get(path));
+      if (sha256Sync(body) !== tree[path]) return false;
+      if (!this.blobs.has(tree[path])) return false;
+    }
+    return true;
+  }
+
   stage(path, content) {
     const body = String(content == null ? '' : content);
     const hash = sha256Sync(body);

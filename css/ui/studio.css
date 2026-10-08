@@ -695,6 +695,12 @@ body.studio-page .attach-plain span:first-of-type {
     width: 32px;
     height: 32px;
   }
+  body.studio-page #sheet-backdrop {
+    background: transparent !important;
+  }
+  body.studio-page #studio-attach-sheet:not([hidden]) {
+    animation: studio-pop 150ms ease;
+  }
   .studio-app.is-split:not(.is-canvas-hidden) .studio-canvas-pane {
     display: flex;
     flex: 1 1 58%;
@@ -831,6 +837,11 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 .trace-verify { color: #34d399; }
 .trace-command, .trace-path { color: var(--rg-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hud-chips { display: inline-flex; align-items: center; gap: 8px; margin-left: 8px; font-size: 11px; color: var(--rg-muted); font-variant-numeric: tabular-nums; }
+
+@keyframes studio-pop {
+  from { opacity: 0; transform: translateY(4px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
 .trace-edit-block { display: block; background: var(--rg-bg); border: 1px solid var(--rg-line); border-radius: 6px; padding: 8px; margin: 8px 0; }
 .trace-edit-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .inline-diff-viewer { font-size: 12px; line-height: 1.4; overflow: auto; }
