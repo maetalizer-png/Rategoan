@@ -108,6 +108,10 @@ export class VfsGit {
     return hash;
   }
 
+  stageDelete(path) {
+    this.worktree.delete(String(path));
+  }
+
   treeHash() {
     const names = Array.from(this.worktree.keys()).sort();
     const tree = {};
@@ -151,7 +155,60 @@ export class VfsGit {
       this.refs.set('HEAD', id);
       this.refs.set('main', id);
     }
+    this.gc();
     return id;
+  }
+
+  gc(limit) {
+    const maxCommits = (limit && limit.commits) || 50;
+    const ordered = Array.from(this.commits.values()).sort((a, b) => a.time - b.time || String(a.id).localeCompare(String(b.id)));
+    while (ordered.length > maxCommits) {
+      const old = ordered.shift();
+      this.commits.delete(old.id);
+    }
+    const tip = ordered[ordered.length - 1];
+    if (this.refs.get('HEAD') && !this.commits.has(this.refs.get('HEAD'))) {
+      this.refs.set('HEAD', tip ? tip.id : '');
+      this.refs.set('main', tip ? tip.id : '');
+    }
+    const live = new Set();
+    this.worktree.forEach((body) => live.add(sha256Sync(String(body))));
+    this.commits.forEach((commit) => {
+      const tree = this.trees.get(commit.tree);
+      if (tree) Object.keys(tree).forEach((path) => live.add(tree[path]));
+    });
+    Array.from(this.blobs.keys()).forEach((hash) => {
+      if (!live.has(hash)) this.blobs.delete(hash);
+    });
+    const treesLive = new Set();
+    this.commits.forEach((commit) => treesLive.add(commit.tree));
+    Array.from(this.trees.keys()).forEach((hash) => {
+      if (!treesLive.has(hash)) this.trees.delete(hash);
+    });
+    let bytes = 0;
+    this.blobs.forEach((body) => { bytes += String(body).length; });
+    const budget = (limit && limit.bytes) || (30 * 1024 * 1024);
+    while (bytes > budget && ordered.length > 1) {
+      const old = ordered.shift();
+      this.commits.delete(old.id);
+      const keepTrees = new Set();
+      this.commits.forEach((commit) => keepTrees.add(commit.tree));
+      Array.from(this.trees.keys()).forEach((hash) => {
+        if (!keepTrees.has(hash)) this.trees.delete(hash);
+      });
+      const keepBlobs = new Set();
+      this.worktree.forEach((body) => keepBlobs.add(sha256Sync(String(body))));
+      this.commits.forEach((commit) => {
+        const tree = this.trees.get(commit.tree);
+        if (tree) Object.keys(tree).forEach((path) => keepBlobs.add(tree[path]));
+      });
+      Array.from(this.blobs.keys()).forEach((hash) => {
+        if (!keepBlobs.has(hash)) this.blobs.delete(hash);
+      });
+      bytes = 0;
+      this.blobs.forEach((body) => { bytes += String(body).length; });
+    }
+    return { commits: this.commits.size, blobs: this.blobs.size, bytes };
   }
 
   head() {

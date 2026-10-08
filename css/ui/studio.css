@@ -3,12 +3,6 @@
 }
 
 body.studio-page {
-  --rg-bg: #05080c;
-  --rg-surface: #0b111c;
-  --rg-surface-2: #0d1420;
-  --rg-line: #232d3a;
-  --rg-text: #f2f5f7;
-  --rg-muted: #8a97a5;
   display: flex !important;
   grid-template-columns: unset !important;
   grid-template-rows: unset !important;
@@ -21,6 +15,14 @@ body.studio-page {
   overflow: hidden;
   background: var(--rg-bg);
   color: var(--rg-text);
+}
+:root[data-theme='dark'] body.studio-page {
+  --rg-bg: #05080c;
+  --rg-surface: #0b111c;
+  --rg-surface-2: #0d1420;
+  --rg-line: #232d3a;
+  --rg-text: #f2f5f7;
+  --rg-muted: #8a97a5;
 }
 .studio-app {
   display: flex;
@@ -739,11 +741,22 @@ body.studio-page .attach-plain span:first-of-type {
     top: auto;
     bottom: var(--kb-inset, 0px);
     width: 100% !important;
-    height: 86vh;
-    max-height: 86vh;
-    border-radius: 16px 16px 0 0 !important;
+    height: auto !important;
+    max-height: 75vh;
+    border-radius: 18px 18px 0 0 !important;
+    padding: 8px 12px 10px !important;
     overflow-y: auto !important;
     z-index: 140;
+  }
+  body.studio-page #studio-attach-sheet .attach-card {
+    min-height: 0;
+    padding: 6px 4px;
+    gap: 4px;
+  }
+  body.studio-page #studio-attach-sheet .attach-plain {
+    margin-top: 0;
+    padding: 6px 4px;
+    min-height: 0;
   }
   .studio-sidebar-col {
     display: flex !important;
@@ -817,6 +830,7 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 .trace-edit { color: #93c5fd; }
 .trace-verify { color: #34d399; }
 .trace-command, .trace-path { color: var(--rg-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hud-chips { display: inline-flex; align-items: center; gap: 8px; margin-left: 8px; font-size: 11px; color: var(--rg-muted); font-variant-numeric: tabular-nums; }
 .trace-edit-block { display: block; background: var(--rg-bg); border: 1px solid var(--rg-line); border-radius: 6px; padding: 8px; margin: 8px 0; }
 .trace-edit-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .inline-diff-viewer { font-size: 12px; line-height: 1.4; overflow: auto; }

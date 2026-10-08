@@ -1,26 +1,50 @@
-export async function backupToDrive(token, files, fetchImpl) {
+function wait(ms, hooks) {
+  if (hooks && typeof hooks.delay === 'function') return hooks.delay(ms);
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function backupToDrive(token, files, fetchImpl, hooks) {
   const fetchFn = fetchImpl || fetch;
-  if (!token) return { ok: false, reason: 'token', id: '' };
+  const notify = hooks && hooks.notify;
+  if (!token) {
+    if (notify) notify('Google Drive belum tertaut');
+    return { ok: false, reason: 'token', id: '' };
+  }
   const payload = JSON.stringify(files || {});
-  const meta = {
-    name: 'studio-rategoan.json',
-    mimeType: 'application/json',
-  };
-  const boundary = 'rategoan8';
+  const meta = { name: 'studio-rategoan.json', mimeType: 'application/json' };
+  const boundary = 'rategoan9';
   const body = '--' + boundary + '\r\n'
     + 'Content-Type: application/json; charset=UTF-8\r\n\r\n'
     + JSON.stringify(meta) + '\r\n--' + boundary + '\r\n'
     + 'Content-Type: application/json\r\n\r\n'
     + payload + '\r\n--' + boundary + '--';
-  const res = await fetchFn('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-    method: 'POST',
-    headers: {
-      authorization: 'Bearer ' + token,
-      'content-type': 'multipart/related; boundary=' + boundary,
-    },
-    body,
-  });
-  if (!res.ok) return { ok: false, reason: 'api', id: '' };
-  const saved = await res.json();
-  return { ok: true, reason: '', id: saved.id || '' };
+  let pause = 40;
+  let last = { ok: false, reason: 'api', id: '' };
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const res = await fetchFn('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+        method: 'POST',
+        headers: {
+          authorization: 'Bearer ' + token,
+          'content-type': 'multipart/related; boundary=' + boundary,
+        },
+        body,
+      });
+      if (res && res.ok) {
+        const saved = await res.json();
+        if (notify) notify('Cadangan Drive tersimpan');
+        return { ok: true, reason: '', id: saved.id || '', attempts: attempt + 1 };
+      }
+      last = { ok: false, reason: 'api', id: '' };
+      if (res && res.status && res.status < 500 && res.status !== 429) break;
+    } catch (e) {
+      last = { ok: false, reason: 'network', id: '' };
+    }
+    if (attempt < 2) {
+      await wait(pause, hooks);
+      pause *= 2;
+    }
+  }
+  if (notify) notify('Cadangan Drive gagal');
+  return last;
 }

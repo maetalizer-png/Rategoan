@@ -1,11 +1,13 @@
 function levelOf(name) {
   const key = String(name || '').toLowerCase();
+  if (!key) return 5;
   if (/delet|reset|destroy|revoke|hapus/.test(key)) return 5;
   if (/github|drive|gmail|fetch|network|http|push/.test(key)) return 4;
   if (/write|edit|stage|commit|vfs/.test(key)) return 3;
   if (/draft/.test(key)) return 2;
   if (/read|get|list|grep/.test(key)) return 1;
-  return 0;
+  if (/info|meta|symbol|catalog|status/.test(key)) return 0;
+  return 5;
 }
 
 const BANNED = /^(token|access_token|secret|password|authorization|cookie|api_key|apikey|auth)$/i;

@@ -47,15 +47,57 @@ export function acceptStudioMessage(event, expectedOrigin, expectedSource) {
   return event.origin === expectedOrigin;
 }
 
-export function previewSrcdoc(files) {
-  const html = String((files && files['index.html']) || '');
-  const css = String((files && files['style.css']) || '');
-  const js = String((files && files['script.js']) || '');
-  const origin = (typeof location !== 'undefined' && location.origin) ? location.origin : '*';
+export function collectPreview(files) {
+  const map = Object.assign({}, files || {});
+  const js = String(map['script.js'] || '');
+  const re = /(?:import\s+[^'"\n]*from\s+|import\s+)['"](?:\.\/)?([^'"]+)['"]\s*;?/g;
+  const chunks = [];
+  const next = js.replace(re, (full, spec) => {
+    const key = String(spec || '').replace(/^\.\//, '');
+    if (key !== 'script.js' && Object.prototype.hasOwnProperty.call(map, key)) {
+      chunks.push(String(map[key]));
+      return '';
+    }
+    return full;
+  });
+  if (chunks.length) map['script.js'] = chunks.join('\n') + '\n' + next;
+  return map;
+}
+
+export function capturePreviewState(frame) {
+  try {
+    const doc = frame && frame.contentDocument;
+    if (!doc || !doc.querySelectorAll) return null;
+    const fields = [];
+    doc.querySelectorAll('input, textarea, select').forEach((el) => {
+      const key = el.id || el.name;
+      if (!key) return;
+      fields.push({ key, value: String(el.value || '') });
+    });
+    const scroller = doc.scrollingElement || doc.documentElement;
+    return { fields, scrollY: scroller ? scroller.scrollTop : 0 };
+  } catch (e) {
+    return null;
+  }
+}
+
+function stateScript(state) {
+  if (!state || !Array.isArray(state.fields) || !state.fields.length && !state.scrollY) return '';
+  const payload = JSON.stringify({ fields: state.fields, scrollY: Number(state.scrollY) || 0 });
+  return '<script>try{var st=' + payload + ';st.fields.forEach(function(f){var el=document.getElementById(f.key);if(!el&&f.key)el=document.querySelector("[name="+JSON.stringify(f.key)+"]");if(el)el.value=f.value;});window.scrollTo(0,st.scrollY||0);}catch(e){}<\/script>';
+}
+
+export function previewSrcdoc(files, state) {
+  const packed = collectPreview(files);
+  const html = String((packed && packed['index.html']) || '');
+  const css = String((packed && packed['style.css']) || '');
+  const js = String((packed && packed['script.js']) || '');
+  const origin = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
   const csp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data: blob:;">';
-  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});})();<\/script>';
+  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){if(!target)return;try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});function publish(){var fields=[];document.querySelectorAll("input,textarea,select").forEach(function(el){var key=el.id||el.name;if(!key)return;fields.push({key:key,value:String(el.value||"")});});var y=(document.scrollingElement&&document.scrollingElement.scrollTop)||0;send("studio:state",{preview:{fields:fields,scrollY:y}});}document.addEventListener("input",publish);document.addEventListener("change",publish);window.addEventListener("scroll",publish,true);})();<\/script>';
   const style = csp + trap + '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
-  const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>';
+  const restore = stateScript(state);
+  const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>' + restore;
   if (/<html[\s>]/i.test(html)) {
     let page = html;
     page = /<\/head>/i.test(page) ? page.replace(/<\/head>/i, style + '</head>') : style + page;
@@ -65,18 +107,19 @@ export function previewSrcdoc(files) {
   return '<!doctype html><html><head>' + style + '</head><body>' + html + script + '</body></html>';
 }
 
-export function mountPreview(frame, files) {
+export function mountPreview(frame, files, state) {
   if (!frame) return;
-  const html = previewSrcdoc(files);
-  const host = (typeof location !== 'undefined' && location.origin) ? location.origin : '';
+  const remembered = state || capturePreviewState(frame);
+  const html = previewSrcdoc(files, remembered);
+  const host = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
   let posted = false;
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   const nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
   frame.onload = () => {
-    if (posted || !frame.contentWindow) return;
+    if (posted || !frame.contentWindow || !host) return;
     posted = true;
-    frame.contentWindow.postMessage({ type: 'studio:srcdoc', html, nonce }, '*');
+    frame.contentWindow.postMessage({ type: 'studio:srcdoc', html, nonce, preview: remembered || null }, host);
   };
   frame.removeAttribute('srcdoc');
   frame.src = 'studio-preview.html?host=' + encodeURIComponent(host) + '&nonce=' + encodeURIComponent(nonce) + '&run=' + Date.now();

@@ -233,6 +233,22 @@ export function craftInstruction(text, files) {
   };
 }
 
+export function shouldSynthesize(text) {
+  return hasEngineeringIntent(String(text || ''));
+}
+
+export async function selfHealLoop(code, probe, limit) {
+  const max = limit || 3;
+  let current = String(code || '');
+  for (let i = 0; i < max; i += 1) {
+    const res = await probe(current, i);
+    if (res && res.ok) return { ok: true, code: current, cycles: i, verify: res.verify || '' };
+    if (res && res.stop) return { ok: false, code: current, cycles: i + 1, verify: res.verify || '' };
+    if (!res || !res.next || res.next === current) return { ok: false, code: current, cycles: i + 1, verify: (res && res.verify) || '' };
+    current = res.next;
+  }
+  return { ok: false, code: current, cycles: max, verify: '' };
+}
 export async function pushGithub(token, repo, files, message) {
   const pair = String(repo || '').split('/');
   if (!token || pair.length !== 2 || !pair[0] || !pair[1]) {
@@ -244,7 +260,11 @@ export async function pushGithub(token, repo, files, message) {
     'Content-Type': 'application/json',
   };
   const api = 'https://api.github.com/repos/' + pair[0] + '/' + pair[1];
-  const refRes = await fetch(api + '/git/ref/heads/main', { headers });
+  const metaRes = await fetch(api, { headers });
+  const meta = metaRes.ok ? await metaRes.json() : {};
+  const branch = (meta && meta.default_branch) || 'main';
+  const refUrl = branch === 'main' ? (api + '/git/refs/heads/main') : (api + '/git/refs/heads/' + branch);
+  const refRes = await fetch(api + '/git/ref/heads/' + branch, { headers });
   if (!refRes.ok) return { ok: false, reason: 'api', sha: '' };
   const refBody = await refRes.json();
   const parentSha = refBody.object && refBody.object.sha;
@@ -259,12 +279,16 @@ export async function pushGithub(token, repo, files, message) {
     headers,
     body: JSON.stringify({
       base_tree: baseTree,
-      tree: names.map((path) => ({
-        path: String(path).replace(/^\//, ''),
-        mode: '100644',
-        type: 'blob',
-        content: String(files[path] == null ? '' : files[path]),
-      })),
+      tree: names.map((path) => {
+        const rel = String(path).replace(/^\//, '');
+        if (files[path] == null) return { path: rel, sha: null };
+        return {
+          path: rel,
+          mode: '100644',
+          type: 'blob',
+          content: String(files[path]),
+        };
+      }),
     }),
   });
   if (!treeRes.ok) return { ok: false, reason: 'api', sha: '' };
@@ -280,7 +304,7 @@ export async function pushGithub(token, repo, files, message) {
   });
   if (!commitRes.ok) return { ok: false, reason: 'api', sha: '' };
   const commit = await commitRes.json();
-  const update = await fetch(api + '/git/refs/heads/main', {
+  const update = await fetch(refUrl, {
     method: 'PATCH',
     headers,
     body: JSON.stringify({ sha: commit.sha, force: false }),

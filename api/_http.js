@@ -5,6 +5,10 @@ export function sendJson(res, code, body) {
   res.end(JSON.stringify(body));
 }
 
+export function sendRpcError(res, status, code, message) {
+  sendJson(res, status, { jsonrpc: '2.0', error: { code, message: String(message || '') }, id: null });
+}
+
 export function queryOf(req) {
   if (req.query && typeof req.query === 'object' && Object.keys(req.query).length) return req.query;
   const host = req.headers.host || 'localhost';
@@ -15,7 +19,7 @@ export function queryOf(req) {
 function invalidJson() {
   const err = new Error('invalid_json');
   err.statusCode = 400;
-  err.payload = { error: 'invalid_json' };
+  err.payload = { jsonrpc: '2.0', error: { code: -32700, message: 'invalid_json' }, id: null };
   return err;
 }
 
@@ -80,6 +84,7 @@ export function readCookie(req, name) {
 
 const ALLOWED_ORIGINS = new Set([
   'https://rategoan.vercel.app',
+  'https://egoan.vercel.app',
   'http://localhost:8080',
   'http://127.0.0.1:8080',
 ]);
@@ -91,7 +96,7 @@ export function allowOptions(req, res) {
   } else {
     res.setHeader('access-control-allow-origin', 'null');
   }
-  res.setHeader('access-control-allow-headers', 'authorization, content-type');
+  res.setHeader('access-control-allow-headers', 'authorization, content-type, x-rategoan-confirm-nonce');
   res.setHeader('access-control-allow-methods', 'GET, POST, OPTIONS');
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
@@ -130,7 +135,7 @@ export async function forward(res, url, token, method, body, extraHeaders) {
   try {
     upstream = await fetch(url, init);
   } catch (e) {
-    sendJson(res, 502, { error: 'upstream_unreachable' });
+    sendRpcError(res, 502, -32603, 'upstream_unreachable');
     return;
   }
   const text = await upstream.text();

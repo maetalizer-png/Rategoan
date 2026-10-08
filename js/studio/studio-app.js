@@ -2,7 +2,9 @@ import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
-import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta } from './studio-agent.js';
+import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop } from './studio-agent.js';
+import { synthesizeCode } from './neural-synthesizer.js';
+import { healSyntax } from './ast-heal.js';
 import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
@@ -49,7 +51,11 @@ function vfsStoreKey() {
 }
 
 function showTab(name) {
-  document.querySelectorAll('.tab-btn').forEach((btn) => btn.classList.toggle('active', btn.dataset.tab === name));
+  document.querySelectorAll('.tab-btn').forEach((btn) => {
+    const on = btn.dataset.tab === name;
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
   document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.id === 'tab-' + name));
 }
 
@@ -74,6 +80,7 @@ function paintDoor() {
 }
 
 let streamCursor = null;
+let previewMemory = null;
 
 function paintSse(raw) {
   const state = reduceStream(raw, streamCursor);
@@ -116,18 +123,32 @@ function hudStatus(status) {
   return status;
 }
 
-function paintTelemetry(status, ms) {
+function paintTelemetry(status, ms, meta) {
   const shown = hudStatus(status);
   const sandbox = $('stat-sandbox');
   if (sandbox && shown) sandbox.textContent = shown;
   const files = $('stat-files');
   if (files) files.textContent = String(vfs.list().length);
   const dur = $('stat-ms');
-  if (dur && ms != null) dur.textContent = ms + ' ms';
+  if (dur) {
+    dur.hidden = false;
+    if (ms != null) dur.textContent = ms + ' ms';
+  }
+  const kb = $('stat-kb');
+  if (kb) {
+    const bytes = vfs.list().reduce((sum, path) => sum + vfs.read(path).length, 0);
+    kb.textContent = Math.max(1, Math.ceil(bytes / 1024)) + ' KB';
+  }
+  const model = $('stat-model');
+  if (model) model.textContent = (meta && meta.model) || 'lokal';
   const runtime = $('stat-runtime');
   if (runtime && shown) runtime.textContent = shown;
   const pill = $('runtime-pill');
   if (pill && shown) pill.textContent = shown;
+}
+
+function showPreview() {
+  mountPreview($('studio-preview-frame'), vfs.previewMap(), previewMemory);
 }
 
 function appendConsole(line) {
@@ -180,9 +201,13 @@ function paintTree() {
   const box = $('vfs-tree');
   if (!box) return;
   box.textContent = '';
+  box.setAttribute('role', 'tablist');
+  box.setAttribute('aria-label', 'Berkas');
   vfs.list().forEach((path) => {
     const btn = document.createElement('button');
     btn.type = 'button';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', path === viewPath ? 'true' : 'false');
     btn.textContent = path;
     if (path === viewPath) btn.classList.add('on');
     btn.onclick = () => { viewPath = path; paintTree(); paintDiff(path); showTab('files'); };
@@ -261,7 +286,7 @@ function paintHistory(rows) {
       if (box) box.textContent = 'Studio Kode siap. Tidak ada galat.';
       paintTree();
       revealDesktop();
-      mountPreview($('studio-preview-frame'), vfs.flat());
+      showPreview();
     };
     const del = document.createElement('button');
     del.type = 'button';
@@ -451,6 +476,7 @@ async function applyCraft(text) {
   };
   const box = $('console-output');
   if (box) box.textContent = '';
+  appendConsole('[Plan]');
   try {
     const creds = await githubCreds();
     if (wantsPull(text)) {
@@ -464,7 +490,7 @@ async function applyCraft(text) {
       await finish(slot, thoughts, started, 'Berkas repositori sudah masuk ke jendela pemantauan.');
       paintTree();
       revealDesktop();
-      mountPreview($('studio-preview-frame'), vfs.flat());
+      showPreview();
       showTab('preview');
       return;
     }
@@ -477,13 +503,18 @@ async function applyCraft(text) {
       plan = craftInstruction(text, before);
     }
     if (plan.ok === false || plan.error) {
-      slot.innerHTML = '';
-      const line = document.createElement('div');
-      line.className = 'msg ai';
-      line.textContent = plan.reply || 'Instruksi tidak dapat dikerjakan.';
-      slot.appendChild(line);
-      paintTelemetry('Siap');
-      return;
+      if (!shouldSynthesize(text)) {
+        slot.innerHTML = '';
+        const line = document.createElement('div');
+        line.className = 'msg ai';
+        line.textContent = plan.reply || 'Instruksi tidak dapat dikerjakan.';
+        slot.appendChild(line);
+        paintTelemetry('Siap');
+        return;
+      }
+      plan = await synthesizeCode(text, before, {
+        onToken: (token) => appendConsole('Sintesis → ' + token),
+      });
     }
     mirrorGit();
     const snap = git.snapshot();
@@ -492,8 +523,11 @@ async function applyCraft(text) {
       parent_snapshot_hash: (git.head() && git.head().id) || '',
       seq: 1,
     });
+    appendConsole('[Grep]');
     appendConsole('Grep → ' + traceGrep(text));
+    appendConsole('[Read]');
     appendConsole('Read → berkas proyek');
+    appendConsole('[Synthesize]');
     appendConsole('envelope ' + envelope.run_id + ' ' + envelope.state);
     showTab('logs');
     runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
@@ -505,30 +539,38 @@ async function applyCraft(text) {
     let verify = 'Berkas ditulis';
     let rolled = false;
     if (plan.lang !== 'python') {
-      let healed = vfs.read('/js/script.js');
-      for (let i = 0; healed && i < 3; i += 1) {
-        const res = await jsSandbox.run(healed);
-        if (res.ok) {
-          verify = 'Lulus, 0 galat sintaks';
-          appendConsole('Uji sandbox lulus.');
-          break;
-        }
-        if (/document is not defined|window is not defined/i.test(res.error || '')) {
-          verify = 'Lulus, uji DOM diserahkan ke pratinjau';
-          appendConsole('Uji DOM diserahkan ke Pratinjau Hidup.');
-          break;
-        }
-        const next = healScript(healed, { msg: res.error || '' });
-        if (!next || next === healed || i === 2) {
-          rolled = true;
-          git.rollback(snap);
-          snap.forEach((content, path) => vfs.write(path, content));
-          verify = 'Dikembalikan ke snapshot stabil';
+      appendConsole('[Lint & Test]');
+      const loop = await selfHealLoop(vfs.read('/js/script.js'), async (current, i) => {
+        const syntax = healSyntax(current);
+        if (!syntax.ok) {
           appendConsole('Perbaikan mandiri berhenti. Worktree dikembalikan ke snapshot stabil.');
-          break;
+          return { stop: true, verify: 'Dikembalikan ke snapshot stabil' };
         }
-        healed = next;
+        if (syntax.healed && syntax.code !== current) return { next: syntax.code, verify: '' };
+        const res = await jsSandbox.run(syntax.code);
+        if (res.ok) {
+          appendConsole('Uji sandbox lulus.');
+          return { ok: true, verify: 'Lulus, 0 galat sintaks' };
+        }
+        if (/document is not defined|window is not defined|unsafe-eval|Content Security Policy|Evaluating a string/i.test(res.error || '')) {
+          appendConsole('Uji DOM diserahkan ke Pratinjau Hidup.');
+          return { ok: true, verify: 'Lulus, uji DOM diserahkan ke pratinjau' };
+        }
+        const next = healScript(syntax.code, { msg: res.error || '' });
+        if (!next || next === syntax.code || i === 2) {
+          appendConsole('Perbaikan mandiri berhenti. Worktree dikembalikan ke snapshot stabil.');
+          return { stop: true, verify: 'Dikembalikan ke snapshot stabil' };
+        }
         await step('Perbaikan mandiri ' + (i + 1));
+        return { next, verify: '' };
+      }, 3);
+      let healed = loop.code;
+      verify = loop.verify || verify;
+      if (!loop.ok) {
+        rolled = true;
+        git.rollback(snap);
+        snap.forEach((content, path) => vfs.write(path, content));
+        verify = loop.verify || 'Dikembalikan ke snapshot stabil';
       }
       const blamed = attributeDelta([], rolled ? ['sandbox'] : []);
       if (!rolled) {
@@ -536,18 +578,21 @@ async function applyCraft(text) {
         git.stage('/js/script.js', healed);
         appendConsole('Diff → ' + (blamed.length ? blamed.join(',') : 'bersih'));
         appendConsole('Lint → lulus');
+        appendConsole('[Commit]');
         await commitSeen(sessionTitle(text) || 'perakitan');
         runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
       } else {
         runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'fail', 'retry', 'fail', 'retry', 'fail', 'exhausted']);
       }
       revealDesktop();
-      mountPreview($('studio-preview-frame'), vfs.flat());
+      showPreview();
       showTab('preview');
     } else {
       verify = 'Skrip tersimpan di main.py';
+      appendConsole('[Lint & Test]');
       appendConsole('Skrip Python tersimpan di main.py.');
       appendConsole('Lint → python tersimpan');
+      appendConsole('[Commit]');
       await commitSeen(sessionTitle(text) || 'perakitan');
       runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
       viewPath = '/main.py';
@@ -591,7 +636,7 @@ async function applyCraft(text) {
     paintTree();
     const short = sessionTitle(text);
     paintProjectName(short);
-    paintTelemetry('Selesai', Date.now() - started);
+    paintTelemetry('Selesai', Date.now() - started, { model: plan.door === 'center' ? 'pusat' : 'lokal' });
     await rememberSession(short || 'Sesi rekayasa');
   } finally {
     busy = false;
@@ -681,7 +726,7 @@ function toggleCanvas() {
     userClosedCanvas = false;
     app.classList.remove('is-canvas-hidden');
     app.classList.add('is-split');
-    mountPreview($('studio-preview-frame'), vfs.flat());
+    showPreview();
   } else {
     userClosedCanvas = true;
     app.classList.add('is-canvas-hidden');
@@ -710,7 +755,7 @@ function blankProject() {
   lastBefore = vfs.flat();
   paintTree();
   mirrorGit();
-  mountPreview($('studio-preview-frame'), vfs.flat());
+  showPreview();
 }
 
 function bindSwipeClose() {
@@ -975,6 +1020,7 @@ function bind() {
   const zipBtn = $('btn-studio-zip');
   if (zipBtn) zipBtn.onclick = () => { closePlus(); $('studio-open-zip').click(); };
   $('btn-studio-send').onclick = () => {
+    if (busy) return;
     const box = $('chat-input');
     const text = box.value.trim();
     if (!text) return;
@@ -989,10 +1035,17 @@ function bind() {
   };
   $('chat-input').addEventListener('input', syncSend);
   $('chat-input').addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey && !event.ctrlKey && !event.metaKey) {
       event.preventDefault();
       $('btn-studio-send').click();
     }
+  });
+  document.addEventListener('keydown', (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+      event.preventDefault();
+      $('btn-studio-send').click();
+    }
+    if (event.key === 'Escape') closePlus();
   });
   $('btn-studio-github').onclick = () => {
     closePlus();
@@ -1059,12 +1112,15 @@ function bind() {
       $('studio-open-zip').click();
       return;
     }
-    imported.files.forEach((file) => vfs.write(file.name, file.text));
+    imported.files.forEach((file) => {
+      try { vfs.write(file.name, file.text); }
+      catch (e) { appendConsole('Path ditolak: ' + file.name); }
+    });
     if (!imported.files.length) return;
     touched = true;
     $('studio-app').classList.add('is-active');
     paintTree();
-    mountPreview($('studio-preview-frame'), vfs.flat());
+    showPreview();
   };
   $('studio-open-zip').onchange = async () => {
     const file = $('studio-open-zip').files && $('studio-open-zip').files[0];
@@ -1073,13 +1129,17 @@ function bind() {
     const bytes = new Uint8Array(await file.arrayBuffer());
     const entries = listZipEntries(bytes).filter((entry) => entry.name && !entry.name.endsWith('/'));
     for (let i = 0; i < entries.length; i += 1) {
-      const text = await readZipText(bytes, entries[i].name);
-      vfs.write(entries[i].name, text);
+      try {
+        const text = await readZipText(bytes, entries[i].name);
+        vfs.write(entries[i].name, text);
+      } catch (e) {
+        appendConsole('Path ditolak: ' + entries[i].name);
+      }
     }
     touched = true;
     $('studio-app').classList.add('is-active');
     paintTree();
-    mountPreview($('studio-preview-frame'), vfs.flat());
+    showPreview();
   };
   window.addEventListener('message', (event) => {
     const frame = $('studio-preview-frame');
@@ -1088,6 +1148,7 @@ function bind() {
     const fromSame = acceptStudioMessage(event, location.origin, frame.contentWindow);
     if (!fromSandbox && !fromSame) return;
     const data = event.data || {};
+    if (data.type === 'studio:state' && data.preview) previewMemory = data.preview;
     if (data.type === 'studio:error') appendConsole('Galat: ' + ((data.error && data.error.msg) || 'pratinjau'));
     if (data.type === 'studio:log') appendConsole((data.level || 'log') + ': ' + (data.text || ''));
   });
@@ -1106,10 +1167,10 @@ function bind() {
     if (!touched && rows && rows.length) vfs.load(rows);
     mirrorGit();
     paintTree();
-    mountPreview($('studio-preview-frame'), vfs.flat());
+    showPreview();
   }).catch(() => {
     paintTree();
-    mountPreview($('studio-preview-frame'), vfs.flat());
+    showPreview();
   });
   paintHistory([]);
   idbGateway.getList('studio-sessions').then(async (rows) => {

@@ -170,3 +170,47 @@ export function renderDiffElement(parent, lines) {
   });
   return parsed;
 }
+
+export function createStreamDiff() {
+  let buf = '';
+  let current = null;
+  const hunks = [];
+  function take(line) {
+    const match = line.match(HUNK);
+    if (match) {
+      current = {
+        oldStart: Number(match[1]),
+        oldLen: match[2] == null ? 1 : Number(match[2]),
+        newStart: Number(match[3]),
+        newLen: match[4] == null ? 1 : Number(match[4]),
+        lines: [],
+      };
+      hunks.push(current);
+      return;
+    }
+    if (!current || !line) return;
+    if (line.startsWith('\\')) return;
+    if (line.startsWith('+')) current.lines.push({ kind: 'add', text: line.slice(1) });
+    else if (line.startsWith('-')) current.lines.push({ kind: 'del', text: line.slice(1) });
+    else current.lines.push({ kind: 'same', text: line.startsWith(' ') ? line.slice(1) : line });
+  }
+  return {
+    push(chunk) {
+      buf += String(chunk || '');
+      if (buf.length > DIFF_CAP) throw new Error('Diff terlalu besar');
+      const parts = buf.split('\n');
+      buf = parts.pop();
+      parts.forEach(take);
+      return { hunks, pending: buf };
+    },
+    finish() {
+      if (buf) {
+        take(buf);
+        buf = '';
+      }
+      if (!hunks.length) throw new Error('Header hunk tidak sah');
+      hunks.forEach((hunk) => validateHunkLineCount(hunk));
+      return { hunks };
+    },
+  };
+}

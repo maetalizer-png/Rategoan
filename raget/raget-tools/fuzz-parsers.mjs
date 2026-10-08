@@ -5,6 +5,8 @@ import { whatsappImporter } from '../../vault/whatsapp/importer.js';
 import { icsParser } from '../../vault/calendar/ics-parser.js';
 import { parseArithmeticAST } from '../../js/connectors/local-tools.js';
 import { parseUnifiedDiff } from '../../js/studio/diff-parser.js';
+import { vfsPath } from '../../js/studio/vfs.js';
+import { scanDelimiters } from '../../js/studio/ast-heal.js';
 
 function hostile(bytes) {
   return '[01/01/2026 12:00] ' + 'A'.repeat(bytes);
@@ -56,4 +58,17 @@ test('parser WhatsApp dan ICS menolak muatan 10MB tanpa backtracking', () => {
   assert.throws(() => parseUnifiedDiff(bigDiff), /terlalu besar|tidak sah/);
   const diffMs = performance.now() - diffStart;
   assert.ok(diffMs < 50, 'Diff terlalu lambat ' + diffMs.toFixed(1));
+});
+
+test('path 10MB, null byte, unicode, dan kurung bersarang tetap di bawah 200ms', () => {
+  const start = performance.now();
+  assert.throws(() => vfsPath('z'.repeat(10 * 1024 * 1024)), /terlalu besar|tidak sah|null byte/);
+  assert.throws(() => vfsPath('ok\0' + '../.env'), /null byte|terlarang/);
+  assert.equal(vfsPath('/catatan-\u0430.html').includes('catatan-'), true);
+  const decoy = 'var s="' + '{'.repeat(4000) + '"; // ' + '{'.repeat(4000) + '\n/* ' + '}'.repeat(200) + ' */';
+  assert.equal(scanDelimiters(decoy).length, 0);
+  const nested = 'function z(){' + '{'.repeat(80);
+  assert.equal(scanDelimiters(nested).length, 81);
+  const ms = performance.now() - start;
+  assert.ok(ms < 200, 'terlalu lambat ' + ms.toFixed(1));
 });

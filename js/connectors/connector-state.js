@@ -106,19 +106,98 @@ function fromB64(raw) {
   return out;
 }
 
-async function aesKey() {
-  let raw = '';
-  try {
-    const rows = await idbGateway.getList('connector-aes');
-    raw = rows && rows[0] && rows[0].raw ? rows[0].raw : '';
-  } catch (e) {
-    raw = '';
+const SALT_KEY = 'rategoan_vault_salt';
+const ITERATIONS = 100000;
+
+function memoryBox() {
+  if (typeof localStorage !== 'undefined') return localStorage;
+  if (!memoryBox.fallback) memoryBox.fallback = new Map();
+  return memoryBox.fallback;
+}
+
+function boxGet(box, key) {
+  if (!box) return '';
+  if (typeof box.getItem === 'function') return box.getItem(key) || '';
+  return box.get(key) || '';
+}
+
+function boxSet(box, key, value) {
+  if (!box) return;
+  if (typeof box.setItem === 'function') box.setItem(key, value);
+  else box.set(key, value);
+}
+
+export async function deriveVaultKey(storage) {
+  const box = storage || memoryBox();
+  let saltRaw = boxGet(box, SALT_KEY);
+  if (!saltRaw) {
+    saltRaw = b64(crypto.getRandomValues(new Uint8Array(16)));
+    boxSet(box, SALT_KEY, saltRaw);
   }
-  if (!raw) raw = localStorage.getItem(KEYID) || '';
-  if (raw) localStorage.removeItem(KEYID);
-  if (!raw) raw = b64(crypto.getRandomValues(new Uint8Array(32)));
-  try { await idbGateway.setList('connector-aes', [{ raw }]); } catch (e) { console.warn('[Rategoan Fallback] connector-aes:', e); }
-  return crypto.subtle.importKey('raw', fromB64(raw), 'AES-GCM', false, ['encrypt', 'decrypt']);
+  const salt = fromB64(saltRaw);
+  const material = await crypto.subtle.importKey('raw', salt, 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
+    material,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt'],
+  );
+}
+
+function openKeyDb() {
+  return new Promise((resolve, reject) => {
+    if (typeof indexedDB === 'undefined') {
+      reject(new Error('indexedDB'));
+      return;
+    }
+    const req = indexedDB.open('rategoan_vault_keys', 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains('keys')) db.createObjectStore('keys');
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function readCryptoKey() {
+  const db = await openKeyDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('keys', 'readonly');
+    const req = tx.objectStore('keys').get('aes');
+    req.onsuccess = () => {
+      const row = req.result;
+      resolve(row && row.algorithm && row.extractable === false ? row : null);
+    };
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function writeCryptoKey(key) {
+  const db = await openKeyDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('keys', 'readwrite');
+    tx.objectStore('keys').put(key, 'aes');
+    tx.oncomplete = () => resolve(true);
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function aesKey() {
+  try {
+    const existing = await readCryptoKey();
+    if (existing && existing.extractable === false) return existing;
+  } catch (e) { /* kunci turunan dipakai di bawah */ }
+  try {
+    const key = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    await writeCryptoKey(key);
+    try { await idbGateway.setList('connector-aes', []); } catch (err) { /* brankas lama dikosongkan */ }
+    try { memoryBox().removeItem(KEYID); } catch (err) { /* tidak ada localStorage */ }
+    return key;
+  } catch (e) {
+    return deriveVaultKey();
+  }
 }
 
 async function persistVault(state) {

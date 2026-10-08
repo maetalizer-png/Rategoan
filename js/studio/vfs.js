@@ -1,3 +1,5 @@
+const FORBIDDEN_SEGMENTS = new Set(['..', '.', '.git', '.env', 'node_modules', '__pycache__']);
+
 function mimeOf(path) {
   if (/\.html?$/i.test(path)) return 'text/html';
   if (/\.css$/i.test(path)) return 'text/css';
@@ -5,12 +7,25 @@ function mimeOf(path) {
   return 'text/javascript';
 }
 
-export function vfsPath(path) {
-  const raw = String(path || '').replace(/\\/g, '/').replace(/^\.?\//, '');
-  if (raw === 'style.css') return '/css/style.css';
-  if (raw === 'script.js') return '/js/script.js';
-  if (!raw) return '/';
-  return '/' + raw;
+export function vfsPath(rawPath) {
+  const str = String(rawPath || '').replace(/\\/g, '/');
+  if (str.indexOf('\0') >= 0) throw new Error('Path memuat null byte terlarang');
+  if (str.length > 4096) throw new Error('Path terlalu besar');
+  const segments = str.split('/').filter(Boolean);
+  const safe = [];
+  for (let i = 0; i < segments.length; i += 1) {
+    const seg = segments[i];
+    if (FORBIDDEN_SEGMENTS.has(seg.toLowerCase())) {
+      throw new Error('Segmen path terlarang: "' + seg + '"');
+    }
+    const clean = seg.replace(/[\x00-\x1f\x7f]/g, '');
+    if (clean) safe.push(clean);
+  }
+  const normalized = safe.join('/');
+  if (normalized === 'style.css') return '/css/style.css';
+  if (normalized === 'script.js') return '/js/script.js';
+  if (!normalized) return '/';
+  return '/' + normalized;
 }
 
 export function createVfs(seed) {
@@ -27,6 +42,9 @@ export function createVfs(seed) {
   function read(path) {
     const row = rows[vfsPath(path)];
     return row ? row.content : '';
+  }
+  function remove(path) {
+    delete rows[vfsPath(path)];
   }
   function list() {
     return Object.keys(rows).filter((path) => path !== '/').sort();
@@ -53,6 +71,15 @@ export function createVfs(seed) {
     });
     return out;
   }
+  function previewMap() {
+    const out = flat();
+    list().forEach((path) => {
+      const rel = path.replace(/^\//, '');
+      if (rel === 'index.html' || rel === 'css/style.css' || rel === 'js/script.js' || rel === 'main.py') return;
+      out[rel] = read(path);
+    });
+    return out;
+  }
   function snapshot() {
     return list().map((path) => ({
       path,
@@ -61,10 +88,10 @@ export function createVfs(seed) {
       updatedAt: rows[path].updatedAt,
     }));
   }
-  function reset(seed) {
+  function reset(next) {
     Object.keys(rows).forEach((key) => { delete rows[key]; });
-    Object.keys(seed || {}).forEach((path) => write(path, seed[path]));
+    Object.keys(next || {}).forEach((path) => write(path, next[path]));
   }
   Object.keys(seed || {}).forEach((path) => write(path, seed[path]));
-  return { write, read, list, load, flat, bundle, snapshot, reset };
+  return { write, read, remove, list, load, flat, bundle, previewMap, snapshot, reset };
 }

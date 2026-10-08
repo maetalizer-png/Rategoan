@@ -343,11 +343,24 @@ async function tryTableRequest(text, session) {
   return 'Tabel terbuka di panel kanan. Bisa diunduh CSV.';
 }
 
-const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif/i;
+const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif|jailbreak|you are now|system prompt/i;
+
+export function scrubInjection(text) {
+  return String(text || '')
+    .replace(/[\u200B-\u200D\uFEFF\u2060\u180E]/g, '')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .normalize('NFKC')
+    .replace(/[\u0430\u0410]/g, 'a')
+    .replace(/[\u0435\u0415]/g, 'e')
+    .replace(/[\u043E\u041E]/g, 'o')
+    .replace(/[\u0440\u0420]/g, 'p')
+    .replace(/[\u0441\u0421]/g, 'c')
+    .replace(/[\u0445\u0425]/g, 'x')
+    .replace(/[\u0456\u0406]/g, 'i');
+}
 
 export function hiddenOrder(text) {
-  const norm = String(text || '').normalize('NFKC');
-  return HIDDEN_ORDER.test(norm);
+  return HIDDEN_ORDER.test(scrubInjection(text));
 }
 
 export const composer = {
@@ -370,7 +383,7 @@ export const composer = {
     return s;
   },
   async send(text) {
-    text = String(text == null ? '' : text).normalize('NFKC');
+    text = scrubInjection(text);
     if (hiddenOrder(text)) {
       toast.show('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
       return;

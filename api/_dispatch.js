@@ -1,4 +1,4 @@
-import { allowOptions, bearer, fillPath, forward, queryOf, readBody, sendJson } from './_http.js';
+import { allowOptions, bearer, fillPath, forward, queryOf, readBody, sendJson, sendRpcError } from './_http.js';
 import { filterParams } from '../js/connectors/policy-engine.js';
 
 export async function dispatchTools(req, res, spec) {
@@ -12,7 +12,7 @@ export async function dispatchTools(req, res, spec) {
   }
   const token = bearer(req);
   if (spec.auth !== false && !token) {
-    sendJson(res, 401, { error: 'missing_token' });
+    sendRpcError(res, 401, -32600, 'missing_token');
     return;
   }
   let body;
@@ -27,16 +27,16 @@ export async function dispatchTools(req, res, spec) {
   const params = body.parameters || {};
   const tool = spec.tools.find((item) => item.name === body.name);
   if (!tool) {
-    sendJson(res, 404, { error: 'unknown_tool', name: body.name || '' });
+    sendRpcError(res, 404, -32601, 'unknown_tool');
     return;
   }
   if (tool.level === 3 && !req.headers['x-rategoan-confirm-nonce']) {
-    sendJson(res, 403, { error: 'konfirmasi_diperlukan', tool: tool.name });
+    sendRpcError(res, 403, -32602, 'konfirmasi_diperlukan');
     return;
   }
   const screened = filterParams(params);
   if (screened.banned.length) {
-    sendJson(res, 400, { error: 'parameter_ditolak', keys: screened.banned });
+    sendRpcError(res, 400, -32602, 'parameter_ditolak');
     return;
   }
   if (spec.special) {

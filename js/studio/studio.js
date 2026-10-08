@@ -10,6 +10,7 @@ import { indexPinned } from '../project/pin-index.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote } from './studio-agent.js';
+import { connectorState } from '../connectors/connector-state.js';
 
 const SAMPLE = 'function jumlah(a, b) {\n  return a + b;\n}\n\nconsole.log(jumlah(2, 3));\njumlah(2, 3);';
 const WEB = {
@@ -455,7 +456,7 @@ export const studioPage = {
     })));
     const applyCraft = async (text) => {
       say('studio-line', text);
-      const token = localStorage.getItem('rategoan_github_token') || '';
+      const token = connectorState.token('github') || '';
       const repo = localStorage.getItem('rategoan_github_repo') || '';
       if (wantsPull(text)) {
         say('studio-step', 'Baca berkas');
