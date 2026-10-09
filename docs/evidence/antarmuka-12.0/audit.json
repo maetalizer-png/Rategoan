@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-10-09",
+  "parent": "191bb4ef1c49e48abe44179102eaf6ce1e429eb5",
+  "implementation": "47d61acda068e9eedebbc4cf0bab03484ef3d8d8",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit 47d61acda068e9eedebbc4cf0bab03484ef3d8d8",
+    "digest": "8b97bb3773b05055d6bc1c52bbb4a5ac7caf75362e2c856f66c85ddb00183946",
+    "gpg": false
+  },
+  "tag": "12.0.0-PRODUCTION-GA",
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "lightBoot": "rgb(250, 250, 248)",
+    "desktopTitleTopPx": 40,
+    "desktopGridRows": "768px",
+    "desktopHeader": "static transparent",
+    "canvasMaxWidthPx": 960,
+    "canvasPadding": "40px 48px 64px",
+    "mobileHeader": {
+      "top": 0,
+      "left": 0,
+      "width": 390,
+      "height": 60,
+      "font": "17px",
+      "weight": "650",
+      "blur": "blur(14px)",
+      "radius": "50%",
+      "back": 36
+    },
+    "scrollProbe": "HEADER",
+    "sandbox": "allow-scripts allow-forms",
+    "allowSameOriginWarning": 0,
+    "mobileSheetPx": 263,
+    "playwright": "16/16",
+    "browser": "Chromium",
+    "unit": "104/104",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 363,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "tematikLines": 63,
+    "ringkasBytes": 2090,
+    "corpusLines": 5330,
+    "journal": "memory PREPARE/COMMITTED/ROLLED_BACK",
+    "speculative": "synthetic step >30 tok/s, not a 1.5B model"
+  }
+}

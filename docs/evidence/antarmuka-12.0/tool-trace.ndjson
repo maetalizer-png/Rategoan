@@ -1,0 +1,6 @@
+{"t":"fsm","state":"SYNTHESIS","steps":["Plan","Grep","Read","Synthesize","Lint & Test","Commit"],"commit":"47d61acda068e9eedebbc4cf0bab03484ef3d8d8"}
+{"t":"preview","channel":"MessageChannel","allowSameOrigin":false,"sandbox":"allow-scripts allow-forms"}
+{"t":"vault","extractable":false,"iterations":100000,"webcrypto":true,"perWorkspace":true}
+{"t":"policy","screenedArgs":true,"nonceBytes":16,"auditCap":80}
+{"t":"journal","store":"memory","states":["PREPARE","COMMITTED","ROLLED_BACK"],"autosaveMs":30000}
+{"t":"seal","algorithm":"SHA-256","digest":"8b97bb3773b05055d6bc1c52bbb4a5ac7caf75362e2c856f66c85ddb00183946","gpg":false}
