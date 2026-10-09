@@ -1,0 +1,19 @@
+{
+  "head": "aaca5da3979c514c2f1382ce83a8a47b5d935a09538d7b88c6fb3476c6bfbd15",
+  "main": "aaca5da3979c514c2f1382ce83a8a47b5d935a09538d7b88c6fb3476c6bfbd15",
+  "blobs": 1,
+  "trees": 1,
+  "commits": [
+    {
+      "id": "aaca5da3979c514c2f1382ce83a8a47b5d935a09538d7b88c6fb3476c6bfbd15",
+      "msg": "sintesis lokal",
+      "tree": "1d61e63996a0726f976234d2647d217d230f15dd015630f2d1f750897ecdfada",
+      "parent": "",
+      "time": 1791551559841
+    }
+  ],
+  "memoryBudget": 31457280,
+  "maxCommits": 50,
+  "integrity": true,
+  "implementation": "63c40bdd5e944beb55234d8724709d9b53db376c"
+}

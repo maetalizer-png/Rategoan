@@ -1,0 +1,30 @@
+{
+  "implementation": "63c40bdd5e944beb55234d8724709d9b53db376c",
+  "browser": "Chromium",
+  "pass": 18,
+  "fail": 0,
+  "total": 18,
+  "lightBoot": "rgb(250, 250, 248)",
+  "desktopTitleTopPx": 40,
+  "desktopGridRows": "768px",
+  "canvasMaxWidthPx": 960,
+  "canvasPadding": "40px 48px 64px",
+  "modelBackdrop": "rgba(0, 0, 0, 0)",
+  "sidebar": "rgb(250, 250, 248)",
+  "canvasGapPx": 8,
+  "canvasOverflow": "auto",
+  "canvasMinWidth": "0px",
+  "sandbox": "allow-scripts allow-forms",
+  "mobileHeader": {
+    "top": 0,
+    "left": 0,
+    "width": 390,
+    "height": 60,
+    "radius": "50%",
+    "back": 36
+  },
+  "storage": "0.0 MB / 50 MB",
+  "storageOverlap": false,
+  "mobileSheetPx": 263,
+  "warnings": 0
+}

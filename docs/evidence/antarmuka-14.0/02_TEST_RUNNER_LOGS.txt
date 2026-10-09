@@ -1,0 +1,794 @@
+
+> test
+> node --test raget/raget-tools/unit/*.test.mjs raget/raget-tools/fuzz-parsers.mjs
+
+TAP version 13
+# Subtest: parser WhatsApp menolak baris 1MB tanpa titik dua di bawah 200ms
+ok 1 - parser WhatsApp menolak baris 1MB tanpa titik dua di bawah 200ms
+  ---
+  duration_ms: 1.544871
+  type: 'test'
+  ...
+# Subtest: parser WhatsApp menolak baris 5MB tanpa lonjakan waktu
+ok 2 - parser WhatsApp menolak baris 5MB tanpa lonjakan waktu
+  ---
+  duration_ms: 4.192729
+  type: 'test'
+  ...
+# Subtest: parser ICS melewati baris panjang tanpa titik dua
+ok 3 - parser ICS melewati baris panjang tanpa titik dua
+  ---
+  duration_ms: 2.088445
+  type: 'test'
+  ...
+# Subtest: parser WhatsApp dan ICS menolak muatan 10MB tanpa backtracking
+ok 4 - parser WhatsApp dan ICS menolak muatan 10MB tanpa backtracking
+  ---
+  duration_ms: 27.679109
+  type: 'test'
+  ...
+# Subtest: path 10MB, null byte, unicode, dan kurung bersarang tetap di bawah 200ms
+ok 5 - path 10MB, null byte, unicode, dan kurung bersarang tetap di bawah 200ms
+  ---
+  duration_ms: 8.10781
+  type: 'test'
+  ...
+# Subtest: teks Indonesia tidak dianggap Inggris
+ok 6 - teks Indonesia tidak dianggap Inggris
+  ---
+  duration_ms: 1.182393
+  type: 'test'
+  ...
+# Subtest: kunci bahasa tidak mengubah jawaban kalau paket terjemahan belum siap
+ok 7 - kunci bahasa tidak mengubah jawaban kalau paket terjemahan belum siap
+  ---
+  duration_ms: 0.271742
+  type: 'test'
+  ...
+# Subtest: blok kode tidak dikunci
+ok 8 - blok kode tidak dikunci
+  ---
+  duration_ms: 1.073667
+  type: 'test'
+  ...
+# Subtest: DOD-10.01 getWebCrypto dan deriveVaultKey tidak melempar ReferenceError
+ok 9 - DOD-10.01 getWebCrypto dan deriveVaultKey tidak melempar ReferenceError
+  ---
+  duration_ms: 22.705465
+  type: 'test'
+  ...
+# Subtest: DOD-10.03 iframe pratinjau tidak membawa allow-same-origin
+ok 10 - DOD-10.03 iframe pratinjau tidak membawa allow-same-origin
+  ---
+  duration_ms: 0.505593
+  type: 'test'
+  ...
+# Subtest: DOD-10.06 sintesis tidak memakai templat daftar belanja kaku
+ok 11 - DOD-10.06 sintesis tidak memakai templat daftar belanja kaku
+  ---
+  duration_ms: 0.210386
+  type: 'test'
+  ...
+# Subtest: DOD-10.07 IntentNode menjadi AST dan halaman daftar tetap punya formulir
+ok 12 - DOD-10.07 IntentNode menjadi AST dan halaman daftar tetap punya formulir
+  ---
+  duration_ms: 2.53125
+  type: 'test'
+  ...
+# Subtest: DOD-10.08 fragmen stream tidak utuh tetap merender di bawah 20ms
+ok 13 - DOD-10.08 fragmen stream tidak utuh tetap merender di bawah 20ms
+  ---
+  duration_ms: 0.564548
+  type: 'test'
+  ...
+# Subtest: DOD-10.11 seribu siklus port tidak menyisakan saluran terbuka
+ok 14 - DOD-10.11 seribu siklus port tidak menyisakan saluran terbuka
+  ---
+  duration_ms: 26.519549
+  type: 'test'
+  ...
+# Subtest: DOD-10.13 dan 10.14 sasis 920, galeri, dan backdrop lampiran transparan
+ok 15 - DOD-10.13 dan 10.14 sasis 920, galeri, dan backdrop lampiran transparan
+  ---
+  duration_ms: 0.566771
+  type: 'test'
+  ...
+# Subtest: Merkle VFS utuh dan merge baris menandai konflik
+ok 16 - Merkle VFS utuh dan merge baris menandai konflik
+  ---
+  duration_ms: 1.448731
+  type: 'test'
+  ...
+# Subtest: payload MCP menolak token dan telemetri terisolasi tanpa PII
+ok 17 - payload MCP menolak token dan telemetri terisolasi tanpa PII
+  ---
+  duration_ms: 0.887162
+  type: 'test'
+  ...
+# Subtest: DOD-11.01 geometri popover tidak menembus tepi atas
+ok 18 - DOD-11.01 geometri popover tidak menembus tepi atas
+  ---
+  duration_ms: 1.266514
+  type: 'test'
+  ...
+# Subtest: DOD-11.02 chat dan studio memakai helper yang sama
+ok 19 - DOD-11.02 chat dan studio memakai helper yang sama
+  ---
+  duration_ms: 0.570994
+  type: 'test'
+  ...
+# Subtest: DOD-11.03 dan 11.04 sasis 960 dan kartu artefak bertingkat
+ok 20 - DOD-11.03 dan 11.04 sasis 960 dan kartu artefak bertingkat
+  ---
+  duration_ms: 0.461187
+  type: 'test'
+  ...
+# Subtest: DOD-11.06 ikon pindah dan tautan ikut
+ok 21 - DOD-11.06 ikon pindah dan tautan ikut
+  ---
+  duration_ms: 0.594306
+  type: 'test'
+  ...
+# Subtest: DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada
+ok 22 - DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada
+  ---
+  duration_ms: 0.329596
+  type: 'test'
+  ...
+# Subtest: DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi
+ok 23 - DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi
+  ---
+  duration_ms: 5.738959
+  type: 'test'
+  ...
+# Subtest: DOD-11.13 sampai 11.15 korpus, sejarah, dan laporan diringkas
+ok 24 - DOD-11.13 sampai 11.15 korpus, sejarah, dan laporan diringkas
+  ---
+  duration_ms: 5.979557
+  type: 'test'
+  ...
+# Subtest: DOD-11.08 sampai 11.10 sandbox, brankas, dan kebijakan tetap tertutup
+ok 25 - DOD-11.08 sampai 11.10 sandbox, brankas, dan kebijakan tetap tertutup
+  ---
+  duration_ms: 21.6605
+  type: 'test'
+  ...
+# Subtest: DOD-11.38 muatan 10MB dan kurung bersarang di bawah 50ms
+ok 26 - DOD-11.38 muatan 10MB dan kurung bersarang di bawah 50ms
+  ---
+  duration_ms: 7.974626
+  type: 'test'
+  ...
+# Subtest: DOD-12.04 hunk yang ditolak tidak masuk ke teks
+ok 27 - DOD-12.04 hunk yang ditolak tidak masuk ke teks
+  ---
+  duration_ms: 1.536955
+  type: 'test'
+  ...
+# Subtest: DOD-12.05 dua penyunting tidak saling menghapus lewat CRDT
+ok 28 - DOD-12.05 dua penyunting tidak saling menghapus lewat CRDT
+  ---
+  duration_ms: 0.384133
+  type: 'test'
+  ...
+# Subtest: DOD-12.06 klik pratinjau dan tangkapan layar mengisi selektor
+ok 29 - DOD-12.06 klik pratinjau dan tangkapan layar mengisi selektor
+  ---
+  duration_ms: 0.538483
+  type: 'test'
+  ...
+# Subtest: DOD-12.09 pencarian hibrida BM25 dan HNSW di bawah 15ms
+ok 30 - DOD-12.09 pencarian hibrida BM25 dan HNSW di bawah 15ms
+  ---
+  duration_ms: 8.59453
+  type: 'test'
+  ...
+# Subtest: DOD-12.10 jabat tangan MCP lokal menolak token dan host asing
+ok 31 - DOD-12.10 jabat tangan MCP lokal menolak token dan host asing
+  ---
+  duration_ms: 0.281131
+  type: 'test'
+  ...
+# Subtest: DOD-12.11 paket proyek antar-perangkat tersegel AES-GCM
+ok 32 - DOD-12.11 paket proyek antar-perangkat tersegel AES-GCM
+  ---
+  duration_ms: 10.230067
+  type: 'test'
+  ...
+# Subtest: sasis 12 menyatukan header ponsel dan meruntuhkan track hantu
+ok 33 - sasis 12 menyatukan header ponsel dan meruntuhkan track hantu
+  ---
+  duration_ms: 0.791295
+  type: 'test'
+  ...
+# Subtest: klaim angka, evaluasi, termal, suara, dan plugin
+ok 34 - klaim angka, evaluasi, termal, suara, dan plugin
+  ---
+  duration_ms: 3.892004
+  type: 'test'
+  ...
+# Subtest: lora, templat, diagram, grid, terminal, dan dampak tes
+ok 35 - lora, templat, diagram, grid, terminal, dan dampak tes
+  ---
+  duration_ms: 3.648918
+  type: 'test'
+  ...
+# Subtest: DOD-13.05 namespace tunggal dan alias RG
+ok 36 - DOD-13.05 namespace tunggal dan alias RG
+  ---
+  duration_ms: 1.617513
+  type: 'test'
+  ...
+# Subtest: DOD-13.06 kriptografi tidak memakai crypto tak terikat
+ok 37 - DOD-13.06 kriptografi tidak memakai crypto tak terikat
+  ---
+  duration_ms: 11.678117
+  type: 'test'
+  ...
+# Subtest: DOD-13.07 jurnal PREPARE tersimpan di vfs_tx_journal
+ok 38 - DOD-13.07 jurnal PREPARE tersimpan di vfs_tx_journal
+  ---
+  duration_ms: 1.378624
+  type: 'test'
+  ...
+# Subtest: DOD-13.08 tombol terima dan tolak per hunk
+ok 39 - DOD-13.08 tombol terima dan tolak per hunk
+  ---
+  duration_ms: 1.694308
+  type: 'test'
+  ...
+# Subtest: DOD-13.09 header safetensors dan unduhan 20MB berhash
+ok 40 - DOD-13.09 header safetensors dan unduhan 20MB berhash
+  ---
+  duration_ms: 3.824963
+  type: 'test'
+  ...
+# Subtest: DOD-13.10 atensi maju lewat kernel samping, inti tidak disunting
+ok 41 - DOD-13.10 atensi maju lewat kernel samping, inti tidak disunting
+  ---
+  duration_ms: 1.038868
+  type: 'test'
+  ...
+# Subtest: DOD-13.11 graf HNSW 384 dimensi di bawah 12ms
+ok 42 - DOD-13.11 graf HNSW 384 dimensi di bawah 12ms
+  ---
+  duration_ms: 119.323594
+  type: 'test'
+  ...
+# Subtest: DOD-13.12 suara dan angka tanpa bobot model
+ok 43 - DOD-13.12 suara dan angka tanpa bobot model
+  ---
+  duration_ms: 0.506227
+  type: 'test'
+  ...
+# Subtest: jantung MCP lokal, mesh, matriks tes, dan asal null
+ok 44 - jantung MCP lokal, mesh, matriks tes, dan asal null
+  ---
+  duration_ms: 1.236999
+  type: 'test'
+  ...
+# Subtest: jejak izin tampil di pengaturan
+ok 45 - jejak izin tampil di pengaturan
+  ---
+  duration_ms: 0.623368
+  type: 'test'
+  ...
+# Subtest: DOD-13.13 shell v19 dan penyimpanan terisolasi
+ok 46 - DOD-13.13 shell v19 dan penyimpanan terisolasi
+  ---
+  duration_ms: 0.298557
+  type: 'test'
+  ...
+# Subtest: DOD-14.01 kripto isomorfik sinkron tanpa pengenal telanjang
+ok 47 - DOD-14.01 kripto isomorfik sinkron tanpa pengenal telanjang
+  ---
+  duration_ms: 3.362356
+  type: 'test'
+  ...
+# Subtest: DOD-14.02 pencarian SQ8 10000x384 di bawah 9ms
+ok 48 - DOD-14.02 pencarian SQ8 10000x384 di bawah 9ms
+  ---
+  duration_ms: 121.811555
+  type: 'test'
+  ...
+# Subtest: DOD-14.03 kunci level 5 kedaluwarsa lewat jam monoton
+ok 49 - DOD-14.03 kunci level 5 kedaluwarsa lewat jam monoton
+  ---
+  duration_ms: 1.58489
+  type: 'test'
+  ...
+# Subtest: DOD-14.04 mutex WAL dan pemulihan PREPARE
+ok 50 - DOD-14.04 mutex WAL dan pemulihan PREPARE
+  ---
+  duration_ms: 16.682002
+  type: 'test'
+  ...
+# Subtest: DOD-14.05 soket safetensors tanpa model luar dan inti tidak disunting
+ok 51 - DOD-14.05 soket safetensors tanpa model luar dan inti tidak disunting
+  ---
+  duration_ms: 0.807689
+  type: 'test'
+  ...
+# Subtest: DOD-14.06 partisi hnsw_nodes 500 simpul
+ok 52 - DOD-14.06 partisi hnsw_nodes 500 simpul
+  ---
+  duration_ms: 1.199575
+  type: 'test'
+  ...
+# Subtest: DOD-14.07 suara tanpa bobot luar di bawah 300ms
+ok 53 - DOD-14.07 suara tanpa bobot luar di bawah 300ms
+  ---
+  duration_ms: 0.587283
+  type: 'test'
+  ...
+# Subtest: DOD-14.08 hunk, nonce, asal null, dan anggaran memori
+ok 54 - DOD-14.08 hunk, nonce, asal null, dan anggaran memori
+  ---
+  duration_ms: 1.07522
+  type: 'test'
+  ...
+# Subtest: DOD-14.09 namespace, kanvas, dan jejak izin
+ok 55 - DOD-14.09 namespace, kanvas, dan jejak izin
+  ---
+  duration_ms: 5.351158
+  type: 'test'
+  ...
+# Subtest: DOD-14.10 dokumen aktif menunjuk 14.0 dan sejarah 13 tetap ada
+ok 56 - DOD-14.10 dokumen aktif menunjuk 14.0 dan sejarah 13 tetap ada
+  ---
+  duration_ms: 0.714226
+  type: 'test'
+  ...
+# Subtest: GQA 4:1 berbagi 2 KV untuk 8 query dan cache tidak membesar
+ok 57 - GQA 4:1 berbagi 2 KV untuk 8 query dan cache tidak membesar
+  ---
+  duration_ms: 5.285777
+  type: 'test'
+  ...
+# Subtest: dekuantisasi blok 32 lewat runner menyimpang di bawah 1.5 persen
+ok 58 - dekuantisasi blok 32 lewat runner menyimpang di bawah 1.5 persen
+  ---
+  duration_ms: 1.064835
+  type: 'test'
+  ...
+# Subtest: lapisan transformer dialirkan satu buffer, puncak tetap 26MB
+ok 59 - lapisan transformer dialirkan satu buffer, puncak tetap 26MB
+  ---
+  duration_ms: 0.290107
+  type: 'test'
+  ...
+# Subtest: pengunduh model memecah 20MB dan melanjutkan dari cache
+ok 60 - pengunduh model memecah 20MB dan melanjutkan dari cache
+  ---
+  duration_ms: 93.713484
+  type: 'test'
+  ...
+# Subtest: aliran SSE merakit token, jejak alat, dan diff
+ok 61 - aliran SSE merakit token, jejak alat, dan diff
+  ---
+  duration_ms: 0.739382
+  type: 'test'
+  ...
+# Subtest: indeks hibrida 384 dimensi tersimpan dan menemukan dokumen yang tepat
+ok 62 - indeks hibrida 384 dimensi tersimpan dan menemukan dokumen yang tepat
+  ---
+  duration_ms: 1.31879
+  type: 'test'
+  ...
+# Subtest: sidebar terkunci 260px di desktop.css dan studio.css
+ok 63 - sidebar terkunci 260px di desktop.css dan studio.css
+  ---
+  duration_ms: 1.781055
+  type: 'test'
+  ...
+# Subtest: tombol kembali disembunyikan pada desktop 860px
+ok 64 - tombol kembali disembunyikan pada desktop 860px
+  ---
+  duration_ms: 0.563995
+  type: 'test'
+  ...
+# Subtest: header kanvas lebih sempit dari 340px dan tanpa judul redundan
+ok 65 - header kanvas lebih sempit dari 340px dan tanpa judul redundan
+  ---
+  duration_ms: 1.457588
+  type: 'test'
+  ...
+# Subtest: riwayat sidebar berjarak minimal 12px dari tepi kiri
+ok 66 - riwayat sidebar berjarak minimal 12px dari tepi kiri
+  ---
+  duration_ms: 0.501918
+  type: 'test'
+  ...
+# Subtest: tombol GitHub tidak memanggil applyCraft
+ok 67 - tombol GitHub tidak memanggil applyCraft
+  ---
+  duration_ms: 1.471637
+  type: 'test'
+  ...
+# Subtest: CSP studio dan beranda bebas unsafe-eval
+ok 68 - CSP studio dan beranda bebas unsafe-eval
+  ---
+  duration_ms: 0.49507
+  type: 'test'
+  ...
+# Subtest: parser aritmatika AST presisi tanpa Function
+ok 69 - parser aritmatika AST presisi tanpa Function
+  ---
+  duration_ms: 1.0266
+  type: 'test'
+  ...
+# Subtest: hard-abort menolak perintah tersembunyi sebelum pesan disimpan
+ok 70 - hard-abort menolak perintah tersembunyi sebelum pesan disimpan
+  ---
+  duration_ms: 87.170167
+  type: 'test'
+  ...
+# Subtest: DOD-7.01: konektor mount langsung saat boot jika URL memuat connect
+ok 71 - DOD-7.01: konektor mount langsung saat boot jika URL memuat connect
+  ---
+  duration_ms: 0.992584
+  type: 'test'
+  ...
+# Subtest: DOD-7.02: popover attach-sheet desktop bebas dari max-height kaku dan scrollbar
+ok 72 - DOD-7.02: popover attach-sheet desktop bebas dari max-height kaku dan scrollbar
+  ---
+  duration_ms: 0.511872
+  type: 'test'
+  ...
+# Subtest: DOD-7.03: bilah atas studio topbar menggunakan warna latar surface yang selaras
+ok 73 - DOD-7.03: bilah atas studio topbar menggunakan warna latar surface yang selaras
+  ---
+  duration_ms: 1.152045
+  type: 'test'
+  ...
+# Subtest: DOD-7.04: tautan duplikat kelola di hub dihapus dari studio.html
+ok 74 - DOD-7.04: tautan duplikat kelola di hub dihapus dari studio.html
+  ---
+  duration_ms: 0.339114
+  type: 'test'
+  ...
+# Subtest: DOD-7.05: dirtySessionTitle memfilter scaffold, ujicoba, test, dan demo
+ok 75 - DOD-7.05: dirtySessionTitle memfilter scaffold, ujicoba, test, dan demo
+  ---
+  duration_ms: 0.482519
+  type: 'test'
+  ...
+# Subtest: DOD-8.01 topbar menyatu dengan permukaan, tanpa balok terpisah
+ok 76 - DOD-8.01 topbar menyatu dengan permukaan, tanpa balok terpisah
+  ---
+  duration_ms: 1.555869
+  type: 'test'
+  ...
+# Subtest: DOD-8.02 popover lampiran menempel 8px di atas tombol
+ok 77 - DOD-8.02 popover lampiran menempel 8px di atas tombol
+  ---
+  duration_ms: 1.651418
+  type: 'test'
+  ...
+# Subtest: DOD-8.03 jarak ikon dan label lampiran 10px
+ok 78 - DOD-8.03 jarak ikon dan label lampiran 10px
+  ---
+  duration_ms: 0.330942
+  type: 'test'
+  ...
+# Subtest: DOD-8.04 digest SHA-256 tidak melempar ReferenceError dan punya fallback node
+ok 79 - DOD-8.04 digest SHA-256 tidak melempar ReferenceError dan punya fallback node
+  ---
+  duration_ms: 7.278637
+  type: 'test'
+  ...
+# Subtest: DOD-8.05 VFS Git CAS menolak ref usang dan rollback bila sintaks pincang
+ok 80 - DOD-8.05 VFS Git CAS menolak ref usang dan rollback bila sintaks pincang
+  ---
+  duration_ms: 6.516096
+  type: 'test'
+  ...
+# Subtest: DOD-8.05 diff menolak hunk cacat, menerapkan yang sah, dan menolak ganda
+ok 81 - DOD-8.05 diff menolak hunk cacat, menerapkan yang sah, dan menolak ganda
+  ---
+  duration_ms: 1.150927
+  type: 'test'
+  ...
+# Subtest: DOD-8.06 policy menolak parameter terlarang dan MCP memakai JSON-RPC 2.0
+ok 82 - DOD-8.06 policy menolak parameter terlarang dan MCP memakai JSON-RPC 2.0
+  ---
+  duration_ms: 2.775391
+  type: 'test'
+  ...
+# Subtest: DOD-8.07 pushGithub satu transaksi Git Data API, bukan PUT per berkas
+ok 83 - DOD-8.07 pushGithub satu transaksi Git Data API, bukan PUT per berkas
+  ---
+  duration_ms: 0.417018
+  type: 'test'
+  ...
+# Subtest: failover pintu tengah menyambung ke pintu lokal tanpa mengulang token
+ok 84 - failover pintu tengah menyambung ke pintu lokal tanpa mengulang token
+  ---
+  duration_ms: 0.765989
+  type: 'test'
+  ...
+# Subtest: envelope agen 8 tahap dan utang lama tidak dituduhkan
+ok 85 - envelope agen 8 tahap dan utang lama tidak dituduhkan
+  ---
+  duration_ms: 0.855659
+  type: 'test'
+  ...
+# Subtest: penyembuhan kurung dan watchdog memutus kerja yang menggantung
+ok 86 - penyembuhan kurung dan watchdog memutus kerja yang menggantung
+  ---
+  duration_ms: 20.717924
+  type: 'test'
+  ...
+# Subtest: cadangan Drive menolak tanpa token dan mengirim multipart bila ada token
+ok 87 - cadangan Drive menolak tanpa token dan mengirim multipart bila ada token
+  ---
+  duration_ms: 0.693056
+  type: 'test'
+  ...
+# Subtest: pemeriksaan injeksi lampiran terjadi sebelum memori jangka panjang
+ok 88 - pemeriksaan injeksi lampiran terjadi sebelum memori jangka panjang
+  ---
+  duration_ms: 0.307979
+  type: 'test'
+  ...
+# Subtest: DOD-9.01 studio menyala terang dan token gelap hanya di tema gelap
+ok 89 - DOD-9.01 studio menyala terang dan token gelap hanya di tema gelap
+  ---
+  duration_ms: 1.459933
+  type: 'test'
+  ...
+# Subtest: DOD-9.02 vfsPath menolak null byte, zip slip, dan path raksasa
+ok 90 - DOD-9.02 vfsPath menolak null byte, zip slip, dan path raksasa
+  ---
+  duration_ms: 0.649966
+  type: 'test'
+  ...
+# Subtest: DOD-9.03 alat tak dikenal gagal tertutup di tingkat 5
+ok 91 - DOD-9.03 alat tak dikenal gagal tertutup di tingkat 5
+  ---
+  duration_ms: 3.926168
+  type: 'test'
+  ...
+# Subtest: DOD-9.04 injeksi homoglif dan spasi nol disaring sebelum perintah tersembunyi
+ok 92 - DOD-9.04 injeksi homoglif dan spasi nol disaring sebelum perintah tersembunyi
+  ---
+  duration_ms: 0.834921
+  type: 'test'
+  ...
+# Subtest: DOD-9.05 pushGithub membaca cabang bawaan dan menghapus dengan sha null
+ok 93 - DOD-9.05 pushGithub membaca cabang bawaan dan menghapus dengan sha null
+  ---
+  duration_ms: 0.473352
+  type: 'test'
+  ...
+# Subtest: DOD-9.06 sintesis lokal merakit halaman bebas, omong kosong tetap ditolak
+ok 94 - DOD-9.06 sintesis lokal merakit halaman bebas, omong kosong tetap ditolak
+  ---
+  duration_ms: 2.352302
+  type: 'test'
+  ...
+# Subtest: DOD-9.07 diff mengalir per potongan dan kurung di string tidak ditutup palsu
+ok 95 - DOD-9.07 diff mengalir per potongan dan kurung di string tidak ditutup palsu
+  ---
+  duration_ms: 1.474889
+  type: 'test'
+  ...
+# Subtest: DOD-9.08 perbaikan mandiri berhenti di tiga putaran
+ok 96 - DOD-9.08 perbaikan mandiri berhenti di tiga putaran
+  ---
+  duration_ms: 0.282963
+  type: 'test'
+  ...
+# Subtest: DOD-9.09 pratinjau menyatukan modul dan tidak menembak bintang
+ok 97 - DOD-9.09 pratinjau menyatukan modul dan tidak menembak bintang
+  ---
+  duration_ms: 1.372826
+  type: 'test'
+  ...
+# Subtest: DOD-9.10 brankas, CORS, HUD, dan anggaran memori
+ok 98 - DOD-9.10 brankas, CORS, HUD, dan anggaran memori
+  ---
+  duration_ms: 20.948231
+  type: 'test'
+  ...
+# Subtest: zip store diawali header PK dan menyimpan nama berkas
+ok 99 - zip store diawali header PK dan menyimpan nama berkas
+  ---
+  duration_ms: 1.790841
+  type: 'test'
+  ...
+# Subtest: docx memuat word/document.xml beserta teks
+ok 100 - docx memuat word/document.xml beserta teks
+  ---
+  duration_ms: 1.139553
+  type: 'test'
+  ...
+# Subtest: katalog alat konektor sesuai kontrak jumlah
+ok 101 - katalog alat konektor sesuai kontrak jumlah
+  ---
+  duration_ms: 0.188067
+  type: 'test'
+  ...
+# Subtest: dokumen yang berisi kata kueri mengalahkan dokumen kosong
+ok 102 - dokumen yang berisi kata kueri mengalahkan dokumen kosong
+  ---
+  duration_ms: 1.126301
+  type: 'test'
+  ...
+# Subtest: kueri kosong menghasilkan nol
+ok 103 - kueri kosong menghasilkan nol
+  ---
+  duration_ms: 0.626445
+  type: 'test'
+  ...
+# Subtest: pencarian lokal mengutamakan dokumen yang memuat makna kueri
+ok 104 - pencarian lokal mengutamakan dokumen yang memuat makna kueri
+  ---
+  duration_ms: 1.677298
+  type: 'test'
+  ...
+# Subtest: pratinjau studio menyatukan html css dan javascript
+ok 105 - pratinjau studio menyatukan html css dan javascript
+  ---
+  duration_ms: 0.690927
+  type: 'test'
+  ...
+# Subtest: zip studio berisi nama berkas dan tanda PK
+ok 106 - zip studio berisi nama berkas dan tanda PK
+  ---
+  duration_ms: 0.465807
+  type: 'test'
+  ...
+# Subtest: tab kanvas tidak meluber: overflow dan min-width nol
+ok 107 - tab kanvas tidak meluber: overflow dan min-width nol
+  ---
+  duration_ms: 1.103943
+  type: 'test'
+  ...
+# Subtest: backdrop desktop transparan dan di atas sidebar
+ok 108 - backdrop desktop transparan dan di atas sidebar
+  ---
+  duration_ms: 0.283199
+  type: 'test'
+  ...
+# Subtest: nilai penyimpanan tidak mengulang label dan menempel kanan
+ok 109 - nilai penyimpanan tidak mengulang label dan menempel kanan
+  ---
+  duration_ms: 1.668993
+  type: 'test'
+  ...
+# Subtest: token desain resmi tetap ada
+ok 110 - token desain resmi tetap ada
+  ---
+  duration_ms: 0.357465
+  type: 'test'
+  ...
+# Subtest: cuaca live mengambil nama kota
+ok 111 - cuaca live mengambil nama kota
+  ---
+  duration_ms: 1.397839
+  type: 'test'
+  ...
+# Subtest: jenis jawaban definisi dan daftar
+ok 112 - jenis jawaban definisi dan daftar
+  ---
+  duration_ms: 0.27005
+  type: 'test'
+  ...
+# Subtest: classifyIntent hitung
+ok 113 - classifyIntent hitung
+  ---
+  duration_ms: 0.145255
+  type: 'test'
+  ...
+# Subtest: serangan parameter terlarang dan properti asing ditolak
+ok 114 - serangan parameter terlarang dan properti asing ditolak
+  ---
+  duration_ms: 6.661563
+  type: 'test'
+  ...
+# Subtest: kunci AES ruang kerja tidak saling membuka
+ok 115 - kunci AES ruang kerja tidak saling membuka
+  ---
+  duration_ms: 39.411266
+  type: 'test'
+  ...
+# Subtest: jurnal VFS yang tertahan di PREPARE dipulihkan
+ok 116 - jurnal VFS yang tertahan di PREPARE dipulihkan
+  ---
+  duration_ms: 0.77961
+  type: 'test'
+  ...
+# Subtest: traversal path dan alat tanpa kapabilitas jaringan ditolak
+ok 117 - traversal path dan alat tanpa kapabilitas jaringan ditolak
+  ---
+  duration_ms: 0.356758
+  type: 'test'
+  ...
+# Subtest: lima belas skenario serangan tertutup
+ok 118 - lima belas skenario serangan tertutup
+  ---
+  duration_ms: 7.695676
+  type: 'test'
+  ...
+# Subtest: teks acak tidak merakit berkas dan tidak memalsukan jejak
+ok 119 - teks acak tidak merakit berkas dan tidak memalsukan jejak
+  ---
+  duration_ms: 1.582461
+  type: 'test'
+  ...
+# Subtest: kuantisasi int4 per blok 32 menyimpang di bawah 1.5 persen
+ok 120 - kuantisasi int4 per blok 32 menyimpang di bawah 1.5 persen
+  ---
+  duration_ms: 0.471544
+  type: 'test'
+  ...
+# Subtest: GQA 4:1 memetakan 16 query ke 4 kv dan cache di bawah 120MB
+ok 121 - GQA 4:1 memetakan 16 query ke 4 kv dan cache di bawah 120MB
+  ---
+  duration_ms: 0.164817
+  type: 'test'
+  ...
+# Subtest: cacah dokumen 1500 dengan tumpang tindih 150
+ok 122 - cacah dokumen 1500 dengan tumpang tindih 150
+  ---
+  duration_ms: 0.868236
+  type: 'test'
+  ...
+# Subtest: aliran sse dan pintu lokal
+ok 123 - aliran sse dan pintu lokal
+  ---
+  duration_ms: 0.408918
+  type: 'test'
+  ...
+# Subtest: kurung seimbang lolos, yang pincang tidak
+ok 124 - kurung seimbang lolos, yang pincang tidak
+  ---
+  duration_ms: 1.645555
+  type: 'test'
+  ...
+# Subtest: tag script ditolak
+ok 125 - tag script ditolak
+  ---
+  duration_ms: 0.242316
+  type: 'test'
+  ...
+# Subtest: pagar ganjil ditolak
+ok 126 - pagar ganjil ditolak
+  ---
+  duration_ms: 0.248309
+  type: 'test'
+  ...
+# Subtest: softmax daring menyimpang di bawah 1.25e-8 tanpa matriks penuh
+ok 127 - softmax daring menyimpang di bawah 1.25e-8 tanpa matriks penuh
+  ---
+  duration_ms: 1.292545
+  type: 'test'
+  ...
+# Subtest: bitnet ternary menambah dan mengurangi, bukan mengalikan FP16
+ok 128 - bitnet ternary menambah dan mengurangi, bukan mengalikan FP16
+  ---
+  duration_ms: 0.244389
+  type: 'test'
+  ...
+# Subtest: prefill dan decode memakai workgroup berbeda, subgroup hanya di perangkat yang dikenal
+ok 129 - prefill dan decode memakai workgroup berbeda, subgroup hanya di perangkat yang dikenal
+  ---
+  duration_ms: 0.885704
+  type: 'test'
+  ...
+# Subtest: jendela KV menahan 10000 token tanpa menyimpan semuanya dan draf melewati 30 token per detik
+ok 130 - jendela KV menahan 10000 token tanpa menyimpan semuanya dan draf melewati 30 token per detik
+  ---
+  duration_ms: 2.66677
+  type: 'test'
+  ...
+1..130
+# tests 130
+# suites 0
+# pass 130
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2177.39926

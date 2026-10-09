@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-10-09",
+  "parent": "763de160b07cb07a8f69ea0320d91d412ffc989e",
+  "implementation": "63c40bdd5e944beb55234d8724709d9b53db376c",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit 63c40bdd5e944beb55234d8724709d9b53db376c",
+    "digest": "13c06924ab7366a9c1b9695c5dc82b1bb3832bee95bc4d3d73754ad9755b4636",
+    "gpg": false
+  },
+  "tag": "14.0.0-PRODUCTION-GA",
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "unit": "130/130",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 377,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "playwright": "18/18",
+    "sq8Ms": 0.305,
+    "voiceWeights": false,
+    "externalModels": false,
+    "tematikLines": 63,
+    "ringkasBytes": 2090,
+    "corpusLines": 5330,
+    "journal": "vfs_tx_journal plus navigator.locks; node memakai antrean memori"
+  }
+}
