@@ -299,7 +299,15 @@ function decoupleWeightTie(header) {
     return { tied: true, shared: 'embedding.weight', head: 'lm_head.weight' };
 }
 
-export { parseSafetensorsHeader, decoupleWeightTie };
+function readArchitecture(header) {
+    const meta = (header && header.__metadata__) || {};
+    const hidden = Number(meta.hidden_size || meta.hiddenSize || 0);
+    const layers = Number(meta.n_layers || meta.nLayers || 0);
+    const gqa = Number(meta.num_key_value_heads || meta.gqa || 0);
+    return { hidden, layers, gqa, flex: hidden > 0 };
+}
+
+export { parseSafetensorsHeader, decoupleWeightTie, readArchitecture };
 
 export const LLMCheckpoint = {
     createCheckpointSafetensors,
@@ -310,4 +318,5 @@ export const LLMCheckpoint = {
     deleteCheckpoint,
     parseSafetensorsHeader,
     decoupleWeightTie,
+    readArchitecture,
 };

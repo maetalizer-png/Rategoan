@@ -4,6 +4,17 @@ import { JOURNAL_STORE, putRow, allRows } from '../../raget/raget-database/durab
 export const AUTOSAVE_MS = 30000;
 const journal = new Map();
 const autosave = new Map();
+let lockChain = Promise.resolve();
+
+export function withVfsLock(fn) {
+  const locks = globalThis.navigator && globalThis.navigator.locks;
+  if (locks && typeof locks.request === 'function') {
+    return locks.request('rategoan-vfs-wal', { mode: 'exclusive' }, () => fn());
+  }
+  const run = lockChain.then(() => fn());
+  lockChain = run.then(() => {}, () => {});
+  return run;
+}
 
 function plainFiles(git) {
   const files = {};
@@ -96,6 +107,10 @@ export class VfsTransaction {
   }
 
   async commitBatch(mutations) {
+    return withVfsLock(() => this.applyCommit(mutations));
+  }
+
+  async applyCommit(mutations) {
     if (!this.snapshot) this.begin();
     const txId = 'tx-' + Date.now().toString(36) + '-' + journal.size;
     remember({

@@ -1,4 +1,5 @@
 import { sha256Sync } from '../studio/vfs-git.js';
+import { getSecureRandomBytesSync } from '../core/isomorphic-crypto.js';
 
 function levelOf(name) {
   const key = String(name || '').toLowerCase();
@@ -24,17 +25,34 @@ const DEFAULT_ALLOW = [
 ];
 
 export const NONCE_CAP = 1000;
+export const NONCE_TTL = 300000;
 export const LOCK_MS = 120000;
 const nonceLedger = new Map();
 const lockUntil = new Map();
 const policyAudit = [];
+let clockOffset = 0;
+
+export function __setClockOffsetForTesting(ms) {
+  clockOffset = Number(ms) || 0;
+}
+
+export function monotonicNow() {
+  const base = typeof performance !== 'undefined' ? performance.now() : Date.now();
+  return base + clockOffset;
+}
 
 function isPlainObject(val) {
   return Object.prototype.toString.call(val) === '[object Object]';
 }
 
+function severityOf(status) {
+  if (status === 'ditolak' || status === 'nonce_ulang') return 'CRITICAL';
+  if (status === 'izin') return 'INFO';
+  return 'WARN';
+}
+
 function rememberAudit(row) {
-  policyAudit.push(row);
+  policyAudit.push(Object.assign({ severity: severityOf(row.status) }, row));
   if (policyAudit.length > 80) policyAudit.shift();
 }
 
@@ -42,10 +60,33 @@ export function readPolicyAudit() {
   return policyAudit.slice();
 }
 
-export function claimNonce(nonce) {
+export function filterPolicyAudit(query, severity) {
+  const q = String(query || '').toLowerCase();
+  const sev = String(severity || '').toUpperCase();
+  return policyAudit.filter((row) => {
+    const text = (row.name + ' ' + row.status + ' ' + row.severity).toLowerCase();
+    if (q && text.indexOf(q) < 0) return false;
+    if (sev && row.severity !== sev) return false;
+    return true;
+  });
+}
+
+export function exportPolicyAudit(format) {
+  const rows = readPolicyAudit();
+  if (String(format || 'json').toLowerCase() === 'csv') {
+    return 'name,status,severity,level\n' + rows.map((row) => [row.name, row.status, row.severity, row.level].join(',')).join('\n');
+  }
+  return JSON.stringify(rows);
+}
+
+export function claimNonce(nonce, now) {
   const key = String(nonce || '');
+  const t = now == null ? Date.now() : now;
+  nonceLedger.forEach((at, item) => {
+    if (t - at > NONCE_TTL) nonceLedger.delete(item);
+  });
   if (!key || nonceLedger.has(key)) return false;
-  nonceLedger.set(key, Date.now());
+  nonceLedger.set(key, t);
   while (nonceLedger.size > NONCE_CAP) {
     const oldest = nonceLedger.keys().next().value;
     nonceLedger.delete(oldest);
@@ -104,10 +145,7 @@ export function filterParams(params, allow, used) {
 }
 
 function freshNonce() {
-  const bytes = new Uint8Array(16);
-  const box = globalThis.crypto;
-  if (!box || typeof box.getRandomValues !== 'function') throw new Error('WebCrypto tidak tersedia');
-  box.getRandomValues(bytes);
+  const bytes = getSecureRandomBytesSync(16);
   return Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
 }
 
@@ -115,7 +153,7 @@ export class PolicyEngine {
   constructor(opts = {}) {
     this.confirmed = typeof opts.confirmed === 'function' ? opts.confirmed : () => false;
     this.reauth = typeof opts.reauth === 'function' ? opts.reauth : () => false;
-    this.now = typeof opts.now === 'function' ? opts.now : () => Date.now();
+    this.now = typeof opts.now === 'function' ? opts.now : () => monotonicNow();
   }
 
   assert(name, args) {

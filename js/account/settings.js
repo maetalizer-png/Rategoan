@@ -26,7 +26,7 @@ import { paintMemoryBadge } from '../ui/memory-capsule.js';
 import { memory } from '../ai/memory.js';
 import { exportLog } from '../../raget/raget-memory/export-log.js';
 import { sheets } from '../sheets/sheets.js';
-import { readPolicyAudit } from '../connectors/policy-engine.js';
+import { readPolicyAudit, filterPolicyAudit, exportPolicyAudit } from '../connectors/policy-engine.js';
 
 const DOWNLOAD_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -177,6 +177,13 @@ const TEMPLATE = `
                 <span class="set-value" id="policy-audit-info">0</span>
               </div>
               <pre id="policy-audit-log" class="policy-audit-log" hidden></pre>
+              <div id="policy-audit-tools" class="policy-audit-tools" hidden>
+                <input id="policy-audit-q" type="search" aria-label="Saring jejak izin">
+                <button type="button" data-sev="INFO">INFO</button>
+                <button type="button" data-sev="WARN">WARN</button>
+                <button type="button" data-sev="CRITICAL">CRITICAL</button>
+                <button type="button" id="policy-audit-export">JSON</button>
+              </div>
               <div class="set-row clickable" id="row-backup">
                 <span>
                   <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -549,9 +556,12 @@ export const settings = {
     const audit = readPolicyAudit();
     const auditInfo = $('policy-audit-info');
     const auditLog = $('policy-audit-log');
+    const auditQ = $('policy-audit-q');
+    const auditTools = $('policy-audit-tools');
     if (auditInfo) auditInfo.textContent = String(audit.length);
     if (auditLog) {
-      auditLog.textContent = audit.map((row) => row.name + ' ' + row.status).join('\n');
+      const shown = filterPolicyAudit(auditQ ? auditQ.value : '', auditTools ? auditTools.dataset.sev : '');
+      auditLog.textContent = shown.map((row) => row.severity + ' ' + row.name + ' ' + row.status).join('\n');
     }
     document.querySelectorAll('.font-btn').forEach((b) => {
       b.classList.toggle('active', b.dataset.font === font.value);
@@ -610,9 +620,30 @@ export const settings = {
     if (auditRow) {
       auditRow.onclick = () => {
         const log = $('policy-audit-log');
+        const tools = $('policy-audit-tools');
         if (!log) return;
         log.hidden = !log.hidden;
+        if (tools) tools.hidden = log.hidden;
         this.refresh();
+      };
+    }
+    const auditQ = $('policy-audit-q');
+    if (auditQ) auditQ.oninput = () => this.refresh();
+    document.querySelectorAll('#policy-audit-tools [data-sev]').forEach((btn) => {
+      btn.onclick = () => {
+        const host = btn.parentElement;
+        host.dataset.sev = host.dataset.sev === btn.dataset.sev ? '' : btn.dataset.sev;
+        this.refresh();
+      };
+    });
+    const auditExport = $('policy-audit-export');
+    if (auditExport) {
+      auditExport.onclick = () => {
+        const log = $('policy-audit-log');
+        if (log) {
+          log.hidden = false;
+          log.textContent = exportPolicyAudit('json');
+        }
       };
     }
     window.addEventListener('hashchange', () => {

@@ -5,6 +5,8 @@ export function meshOffer(id) {
     id: String(id || 'peer'),
     transport: 'webrtc-datachannel',
     signaling: 'serverless',
+    passkey: true,
+    qr: true,
   };
 }
 

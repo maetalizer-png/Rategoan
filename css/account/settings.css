@@ -155,6 +155,18 @@
   white-space: pre-wrap;
 }
 
+.policy-audit-tools {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0 6px 8px;
+}
+
+.policy-audit-tools input {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+
 .set-hint {
   font-size: 11px;
   color: var(--rg-muted);

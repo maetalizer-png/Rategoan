@@ -8,6 +8,11 @@ export function mse(left, right) {
   return sum / n;
 }
 
+export function adjustScale(scale, guard) {
+  if (guard && guard.ok) return scale;
+  return Number(scale) * 0.5;
+}
+
 export function accuracyGuard(left, right, limit) {
   const err = mse(left, right);
   const cap = limit == null ? 0.015 : limit;

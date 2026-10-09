@@ -1,10 +1,11 @@
 export const JOURNAL_STORE = 'vfs_tx_journal';
 export const HNSW_STORE = 'hnsw_vectors';
+export const HNSW_NODES = 'hnsw_nodes';
 export const SHADER_STORE = 'shader_cache';
 
 const DB_NAME = 'rategoan_durable';
-const DB_VERSION = 1;
-const STORES = [JOURNAL_STORE, HNSW_STORE, SHADER_STORE];
+const DB_VERSION = 2;
+const STORES = [JOURNAL_STORE, HNSW_STORE, HNSW_NODES, SHADER_STORE];
 const memory = new Map();
 let opening = null;
 

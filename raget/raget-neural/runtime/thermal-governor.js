@@ -6,3 +6,15 @@ export function nextBatch(state) {
   if (battery < 0.2 || hot) return Math.max(1, Math.floor(batch / 2));
   return batch;
 }
+
+export function thermalGovernor(sample) {
+  const temp = Number(sample && sample.tempC) || 0;
+  const battery = sample && sample.battery != null ? Number(sample.battery) : 1;
+  const hot = temp >= 42 || battery <= 0.2;
+  return {
+    throttle: hot,
+    hz: hot ? 4 : 12,
+    batch: nextBatch({ battery, celsius: temp, batch: hot ? 4 : 12 }),
+    reason: hot ? (battery <= 0.2 ? 'baterai' : 'suhu') : 'normal',
+  };
+}

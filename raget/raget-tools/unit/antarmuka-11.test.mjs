@@ -88,7 +88,8 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   assert.match(read('docs/HISTORY-ANTARMUKA.md'), /11\.0/);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-11.0.md'), false);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-12.0.md'), false);
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-13\.0\.md/);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-13.0.md'), false);
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-14\.0\.md/);
 });
 
 test('DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi', () => {

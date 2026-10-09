@@ -103,7 +103,7 @@ export function buildVectorIndex(rows) {
     }
     champions[i] = best;
   }
-  return { kind: 'hnsw', dim, count, data, next, leaderNext, leaders, champions, span: SPAN };
+  return { kind: 'hnsw', dim, count, data, qdata: quantizeBlock(data, count, dim), next, leaderNext, leaders, champions, span: SPAN, quant: 'int8' };
 }
 
 export function searchKnn(index, vector, k) {
@@ -161,4 +161,117 @@ export function partitionIndex(index, shard) {
     });
   }
   return parts;
+}
+
+function quantizeBlock(data, count, dim) {
+  const qdata = new Int8Array(count * dim);
+  for (let i = 0; i < count; i += 1) {
+    const base = i * dim;
+    let max = 0;
+    for (let d = 0; d < dim; d += 1) {
+      const abs = Math.abs(data[base + d]);
+      if (abs > max) max = abs;
+    }
+    const scale = max === 0 ? 1 : 127 / max;
+    for (let d = 0; d < dim; d += 1) {
+      let value = Math.round(data[base + d] * scale);
+      if (value > 127) value = 127;
+      else if (value < -128) value = -128;
+      qdata[base + d] = value;
+    }
+  }
+  return qdata;
+}
+
+export function quantizeQuery(vector) {
+  const src = vector instanceof Float32Array ? vector : Float32Array.from(vector);
+  return quantizeBlock(src, 1, src.length);
+}
+
+function sqDist(qdata, dim, index, q) {
+  const base = index * dim;
+  let sum = 0;
+  let d = 0;
+  for (; d + 8 <= dim; d += 8) {
+    const a0 = qdata[base + d] - q[d];
+    const a1 = qdata[base + d + 1] - q[d + 1];
+    const a2 = qdata[base + d + 2] - q[d + 2];
+    const a3 = qdata[base + d + 3] - q[d + 3];
+    const a4 = qdata[base + d + 4] - q[d + 4];
+    const a5 = qdata[base + d + 5] - q[d + 5];
+    const a6 = qdata[base + d + 6] - q[d + 6];
+    const a7 = qdata[base + d + 7] - q[d + 7];
+    sum += a0 * a0 + a1 * a1 + a2 * a2 + a3 * a3 + a4 * a4 + a5 * a5 + a6 * a6 + a7 * a7;
+  }
+  for (; d < dim; d += 1) {
+    const diff = qdata[base + d] - q[d];
+    sum += diff * diff;
+  }
+  return sum;
+}
+
+export function searchSq8(index, vector, k) {
+  const q = quantizeQuery(vector);
+  const limit = k || 5;
+  const dim = index.dim;
+  const qdata = index.qdata;
+  const probe = Math.min(16, dim);
+  const shortlist = [];
+  for (let i = 0; i < index.leaders.length; i += 1) {
+    const node = index.champions ? index.champions[i] : index.leaders[i];
+    let hint = 0;
+    const base = node * dim;
+    for (let d = 0; d < probe; d += 1) {
+      const diff = qdata[base + d] - q[d];
+      hint += diff * diff;
+    }
+    if (shortlist.length < 4) {
+      shortlist.push({ leader: index.leaders[i], hint });
+      if (shortlist.length === 4) shortlist.sort((a, b) => a.hint - b.hint);
+    } else if (hint < shortlist[3].hint) {
+      shortlist[3] = { leader: index.leaders[i], hint };
+      shortlist.sort((a, b) => a.hint - b.hint);
+    }
+  }
+  const top = [];
+  for (let s = 0; s < shortlist.length; s += 1) {
+    for (let node = shortlist[s].leader; node >= 0; node = index.next[node]) {
+      const distance = sqDist(qdata, dim, node, q);
+      if (top.length < limit) {
+        top.push({ id: node, distance });
+        if (top.length === limit) top.sort((a, b) => a.distance - b.distance);
+      } else if (distance < top[limit - 1].distance) {
+        top[limit - 1] = { id: node, distance };
+        top.sort((a, b) => a.distance - b.distance);
+      }
+    }
+  }
+  return top;
+}
+
+export function partitionNodes(index, shard) {
+  const size = shard || 500;
+  const parts = [];
+  for (let start = 0; start < index.count; start += size) {
+    parts.push({
+      id: 'node-' + start,
+      store: 'hnsw_nodes',
+      start,
+      end: Math.min(index.count, start + size),
+      dim: index.dim,
+      kind: 'hnsw',
+    });
+  }
+  return parts;
+}
+
+export function reciprocalRankFusion(lists, k) {
+  const damp = k || 60;
+  const score = new Map();
+  (lists || []).forEach((list) => {
+    (list || []).forEach((id, rank) => {
+      score.set(id, (score.get(id) || 0) + 1 / (damp + rank + 1));
+    });
+  });
+  return Array.from(score.entries()).sort((a, b) => b[1] - a[1]).map(([id, rrf]) => ({ id, rrf }));
 }

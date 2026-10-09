@@ -9,6 +9,14 @@ export function verifyClaims(text, facts) {
   return { ok: issues.length === 0, issues };
 }
 
+export function checkClaim(claim, source) {
+  const numeric = numericConsistent(claim);
+  const src = String(source || '');
+  const nums = (String(claim || '').match(/\d+(?:[.,]\d+)?/g) || []).map((item) => item.replace(',', '.'));
+  const missing = nums.filter((item) => src.indexOf(item) < 0 && src.indexOf(item.replace('.', ',')) < 0);
+  return { ok: numeric.ok && missing.length === 0, numeric, missing };
+}
+
 export function numericConsistent(text) {
   const found = String(text || '').match(/(\d+(?:[.,]\d+)?)\s*%/g) || [];
   const values = found.map((item) => Number(String(item).replace('%', '').replace(',', '.').trim()));

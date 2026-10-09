@@ -1,4 +1,5 @@
 export const MODEL_CACHE = 'rategoan-model-v5';
+export const NEURAL_CACHE = 'rategoan-neural-v4';
 export const MODEL_CHUNK = 20 * 1024 * 1024;
 
 export function planRanges(size, chunk) {

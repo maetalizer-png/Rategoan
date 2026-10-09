@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { getUniversalCryptoSync } from '../../../js/core/isomorphic-crypto.js';
 import { filterParams, PolicyEngine, claimNonce, NONCE_CAP } from '../../../js/connectors/policy-engine.js';
 import { getWorkspaceAesKey } from '../../../js/connectors/connector-state.js';
 import { VfsGit } from '../../../js/studio/vfs-git.js';
@@ -29,11 +30,12 @@ test('kunci AES ruang kerja tidak saling membuka', async () => {
   assert.equal(left.extractable, false);
   assert.equal(right.extractable, false);
   assert.notEqual(left, right);
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, left, new TextEncoder().encode('halo'));
-  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, left, cipher);
+  const box = getUniversalCryptoSync();
+  const iv = box.getRandomValues(new Uint8Array(12));
+  const cipher = await box.subtle.encrypt({ name: 'AES-GCM', iv }, left, new TextEncoder().encode('halo'));
+  const plain = await box.subtle.decrypt({ name: 'AES-GCM', iv }, left, cipher);
   assert.equal(new TextDecoder().decode(plain), 'halo');
-  await assert.rejects(crypto.subtle.decrypt({ name: 'AES-GCM', iv }, right, cipher));
+  await assert.rejects(box.subtle.decrypt({ name: 'AES-GCM', iv }, right, cipher));
 });
 
 test('jurnal VFS yang tertahan di PREPARE dipulihkan', () => {

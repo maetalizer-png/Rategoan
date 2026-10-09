@@ -1,3 +1,5 @@
+import { getSecureRandomBytesSync } from '../core/isomorphic-crypto.js';
+
 const CRC_TABLE = (() => {
   const table = new Uint32Array(256);
   for (let n = 0; n < 256; n += 1) {
@@ -112,8 +114,7 @@ export function mountPreview(frame, files, state) {
   const remembered = state || capturePreviewState(frame);
   const html = previewSrcdoc(files, remembered);
   const host = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
-  const bytes = new Uint8Array(16);
-  crypto.getRandomValues(bytes);
+  const bytes = getSecureRandomBytesSync(16);
   const nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
   const opaqueOrigin = ['*'].join('');
   let posted = false;
@@ -225,10 +226,13 @@ export function groundScreenshot(box, elements) {
 }
 
 export function nullOriginHandshake() {
+  const bytes = getSecureRandomBytesSync(16);
+  const token = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
   return {
     sandbox: 'allow-scripts allow-forms',
     channel: 'MessageChannel',
     origin: 'null',
     sameOrigin: false,
+    token,
   };
 }
