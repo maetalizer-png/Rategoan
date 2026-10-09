@@ -118,6 +118,36 @@
     box-sizing: border-box !important;
   }
 
+  body:has(#topbar[hidden]),
+  body.no-topbar {
+    grid-template-rows: 1fr;
+    grid-template-areas: 'sidebar app';
+  }
+
+  .settings-header,
+  .view-header {
+    position: static !important;
+    height: auto !important;
+    min-height: auto !important;
+    background: transparent !important;
+    padding: 0 0 16px 0 !important;
+    margin: 0 0 8px 0 !important;
+    top: auto !important;
+    z-index: auto !important;
+    box-shadow: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+  }
+  .settings-header h1,
+  .view-header h1 {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.25 !important;
+    margin: 0 !important;
+    color: var(--rg-text) !important;
+  }
+
   #view-collection,
   #view-connect,
   #view-project,
@@ -171,7 +201,51 @@
 
 @media (max-width: 859px) {
   .settings-page {
-    padding: 16px;
-    box-sizing: border-box;
+    padding: 0 16px 32px !important;
+    box-sizing: border-box !important;
   }
+  .settings-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 30 !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    width: calc(100% + 32px) !important;
+    margin: 0 -16px 16px -16px !important;
+    padding: 0 14px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background: var(--rg-bg-glass) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid var(--rg-line) !important;
+  }
+  .settings-header h1,
+  .view-header h1 {
+    font-size: 17px !important;
+    font-weight: 650 !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    color: var(--rg-text) !important;
+  }
+  .settings-header .back-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--rg-text) !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .settings-header + .divider { display: none !important; }
 }

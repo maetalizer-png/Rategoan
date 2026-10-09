@@ -11,5 +11,6 @@ Satu berkas ini menggantikan studi kasus dan PRD antarmuka yang sudah usang. Ang
 | 9.0 | Tema terang `rgb(250, 250, 248)`, lembar ponsel 263px, sintesis halaman bebas |
 | 10.0 | Kanal pesan antar-bingkai, sasis 920px, tanpa peringatan `allow-same-origin` |
 | 11.0 | Popover adaptif, sasis tunggal 960px, ikon di `assets/icons/`, data faktual dibersihkan |
+| 12.0 | Header kaca ponsel setinggi 60px tanpa celah gulir, sasis desktop tanpa track hantu, kanvas hidup, dan gerbang kebijakan tersaring |
 
-Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 11.
+Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 12.

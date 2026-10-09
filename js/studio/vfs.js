@@ -95,3 +95,17 @@ export function createVfs(seed) {
   Object.keys(seed || {}).forEach((path) => write(path, seed[path]));
   return { write, read, remove, list, load, flat, bundle, previewMap, snapshot, reset };
 }
+
+export function createEphemeralWorkspace(seed) {
+  const vfs = createVfs(seed);
+  let alive = true;
+  return {
+    vfs,
+    read(path) { return alive ? vfs.read(path) : ''; },
+    write(path, body) { return alive ? vfs.write(path, body) : null; },
+    close() {
+      alive = false;
+      vfs.reset({});
+    },
+  };
+}

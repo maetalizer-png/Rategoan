@@ -1,6 +1,15 @@
+import { sha256Sync } from './vfs-git.js';
+
 function wait(ms, hooks) {
   if (hooks && typeof hooks.delay === 'function') return hooks.delay(ms);
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function checksumManifest(files) {
+  const names = Object.keys(files || {}).sort();
+  return {
+    files: names.map((name) => ({ name, sha256: sha256Sync(String(files[name])) })),
+  };
 }
 
 export async function backupToDrive(token, files, fetchImpl, hooks) {
@@ -10,7 +19,8 @@ export async function backupToDrive(token, files, fetchImpl, hooks) {
     if (notify) notify('Google Drive belum tertaut');
     return { ok: false, reason: 'token', id: '' };
   }
-  const payload = JSON.stringify(files || {});
+  const manifest = checksumManifest(files);
+  const payload = JSON.stringify({ files: files || {}, manifest });
   const meta = { name: 'studio-rategoan.json', mimeType: 'application/json' };
   const boundary = 'rategoan9';
   const body = '--' + boundary + '\r\n'

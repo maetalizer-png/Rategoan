@@ -23,6 +23,7 @@ import { fenceUntrusted, GUARDRAIL, buriedOrder } from '../../shared/untrusted.j
 import { refuseProhibited } from '../../shared/safety-guard.js';
 import { planSubgoals } from '../../raget/raget-agents/core/agent-planner.js';
 import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
+import { groundScreenshot } from '../studio/sandbox-runner.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
 import { receiptTable } from '../../shared/receipt-extract.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
@@ -881,3 +882,7 @@ export const composer = {
     };
   },
 };
+
+export function groundBugShot(box, elements) {
+  return groundScreenshot(box, elements);
+}

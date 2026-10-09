@@ -1,3 +1,5 @@
+import { sha256Sync } from './vfs-git.js';
+
 export function parseSseBlock(block) {
   const lines = String(block || '').split('\n');
   let event = 'message';
@@ -66,6 +68,11 @@ export function reduceStream(raw, prior) {
     const msg = parseSseBlock(block);
     const payload = msg.payload && typeof msg.payload === 'object' ? msg.payload : {};
     if (payload.run_id) state.runId = String(payload.run_id);
+    if (payload.idempotency_key) {
+      const mark = 'idem:' + payload.idempotency_key;
+      if (seen.has(mark)) return;
+      seen.add(mark);
+    }
     if (payload.seq != null) {
       const key = (state.runId || '') + ':' + msg.event + ':' + payload.seq;
       if (seen.has(key)) return;
@@ -78,5 +85,17 @@ export function reduceStream(raw, prior) {
   });
   state.seen = Array.from(seen);
   return state;
+}
+
+export function stampToolCall(name, args) {
+  const body = Object.assign({}, args || {});
+  delete body.nonce;
+  delete body.idempotency_key;
+  const key = sha256Sync(String(name || '') + '\n' + JSON.stringify(body));
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  body.idempotency_key = key;
+  body.nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
+  return body;
 }
 

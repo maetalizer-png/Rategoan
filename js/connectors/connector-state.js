@@ -109,7 +109,9 @@ function fromB64(raw) {
 }
 
 const SALT_KEY = 'rategoan_vault_salt';
+const SECRET_KEY = 'rategoan_vault_secret';
 const ITERATIONS = 100000;
+const workspaceKeys = new Map();
 
 function memoryBox() {
   if (typeof localStorage !== 'undefined') return localStorage;
@@ -137,8 +139,14 @@ export async function deriveVaultKey(storage) {
     saltRaw = b64(cryptoImpl.getRandomValues(new Uint8Array(16)));
     boxSet(box, SALT_KEY, saltRaw);
   }
+  let secretRaw = boxGet(box, SECRET_KEY);
+  if (!secretRaw) {
+    secretRaw = b64(cryptoImpl.getRandomValues(new Uint8Array(32)));
+    boxSet(box, SECRET_KEY, secretRaw);
+  }
   const salt = fromB64(saltRaw);
-  const material = await cryptoImpl.subtle.importKey('raw', salt, 'PBKDF2', false, ['deriveKey']);
+  const secret = fromB64(secretRaw);
+  const material = await cryptoImpl.subtle.importKey('raw', secret, 'PBKDF2', false, ['deriveKey']);
   auditEvent('vault_derive');
   return cryptoImpl.subtle.deriveKey(
     { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
@@ -186,6 +194,25 @@ async function writeCryptoKey(key) {
     tx.oncomplete = () => resolve(true);
     tx.onerror = () => reject(tx.error);
   });
+}
+
+export async function getWorkspaceAesKey(workspaceId, secret) {
+  const id = String(workspaceId || 'default').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 64) || 'default';
+  const alias = 'vault_key_' + id;
+  if (workspaceKeys.has(alias)) return workspaceKeys.get(alias);
+  const cryptoImpl = await getWebCrypto();
+  const salt = cryptoImpl.getRandomValues(new Uint8Array(16));
+  const secretBytes = new TextEncoder().encode(String(secret || ('rahasia-ruang:' + id)));
+  const material = await cryptoImpl.subtle.importKey('raw', secretBytes, 'PBKDF2', false, ['deriveKey']);
+  const key = await cryptoImpl.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
+    material,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt'],
+  );
+  workspaceKeys.set(alias, key);
+  return key;
 }
 
 async function aesKey() {

@@ -3,7 +3,7 @@
 Repositori ini dikelola secara ketat dengan pemisahan wilayah dokumentasi kanonikal:
 
 1. **Antarmuka, Casing & Mesin Aplikasi**:
-- `PRD-ANTARMUKA-11.0.md` — Cetak biru eksekusi aktif (Oktober 2026): popover adaptif, sasis 960, dan sanitasi data.
+- `PRD-ANTARMUKA-12.0.md` — Cetak biru eksekusi aktif (Oktober 2026): header kaca 1:1, kanvas hidup, dan gerbang kebijakan.
 - Riwayat rilis antarmuka: `../HISTORY-ANTARMUKA.md`
 2. **Data, Rilis Korpus & Lisensi**:
 - `PRD-RELEASE.md` — Standar baku tata kelola rilis 3 tingkat (Data Baru, Penampungan, Rak K & R).

@@ -33,6 +33,7 @@ export const router = {
     });
     const tb = $('topbar');
     if (tb) tb.hidden = hash !== 'chat';
+    document.body.classList.toggle('no-topbar', hash !== 'chat');
     const sidebar = $('sidebar');
     if (sidebar) sidebar.hidden = hash === 'login';
     document.body.classList.toggle('auth-gate', hash === 'login');

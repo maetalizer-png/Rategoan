@@ -1,3 +1,5 @@
+import { sha256Sync } from '../js/studio/vfs-git.js';
+
 function utf8(value) {
   return new TextEncoder().encode(String(value));
 }
@@ -150,4 +152,15 @@ export async function readZipText(buffer, wanted) {
     return new TextDecoder().decode(concat(chunks.length ? chunks : [new Uint8Array(0)]));
   }
   throw new Error('zip_method_' + hit.method);
+}
+
+export function exportProjectZip(files) {
+  const manifest = {
+    files: Object.keys(files || {}).sort().map((name) => ({
+      name,
+      sha256: sha256Sync(String(files[name])),
+    })),
+  };
+  const packed = Object.assign({}, files || {}, { 'manifest.json': JSON.stringify(manifest) });
+  return buildZip(packed);
 }

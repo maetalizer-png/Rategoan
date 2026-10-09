@@ -862,3 +862,21 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 .tool-trace-actions .btn-action { flex: 1; min-height: 40px; padding: 8px 12px; border: 0; border-radius: 6px; font-weight: 650; font-size: 13px; cursor: pointer; }
 .tool-trace-actions .btn-preview { background: #2563eb; color: #fff; }
 .tool-trace-actions .btn-download { background: #334155; color: #f8fafc; }
+
+@media (min-width: 1024px) {
+  .studio-app.is-focus .studio-canvas-pane { display: none !important; }
+  .studio-app.is-focus .studio-chat-col {
+    flex: 1 1 auto !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+  .studio-app.is-expanded .studio-chat-col {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+    min-width: 0 !important;
+  }
+  .studio-app.is-expanded .studio-canvas-pane {
+    flex: 1 1 80% !important;
+    min-width: 0 !important;
+  }
+}

@@ -249,6 +249,31 @@ export async function selfHealLoop(code, probe, limit) {
   }
   return { ok: false, code: current, cycles: max, verify: '' };
 }
+
+export function selectImpactedTests(changed, graph) {
+  const seen = new Set();
+  const stack = (changed || []).slice();
+  const tests = [];
+  while (stack.length) {
+    const file = stack.pop();
+    if (!file || seen.has(file)) continue;
+    seen.add(file);
+    if (/\.test\.mjs$/.test(file)) tests.push(file);
+    ((graph && graph[file]) || []).forEach((next) => stack.push(next));
+  }
+  return tests;
+}
+
+export async function lintGuidedHeal(code, probe) {
+  return selfHealLoop(code, async (current, cycle) => {
+    const res = await probe(current, cycle);
+    if (!res) return { stop: true, verify: 'rollback' };
+    if (res.ok) return res;
+    if (cycle >= 2) return { stop: true, verify: res.verify || 'rollback' };
+    return res;
+  }, 3);
+}
+
 export async function pushGithub(token, repo, files, message) {
   const pair = String(repo || '').split('/');
   if (!token || pair.length !== 2 || !pair[0] || !pair[1]) {

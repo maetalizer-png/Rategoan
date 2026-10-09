@@ -28,8 +28,9 @@ export class McpClient {
 
   async callTool(name, args = {}) {
     if (!this.policy || typeof this.policy.assert !== 'function') throw new Error('Policy engine kosong');
-    this.policy.assert(name, args);
-    return this.request('tools/call', { name, arguments: args });
+    const gate = this.policy.assert(name, args);
+    const clean = gate && gate.args ? gate.args : {};
+    return this.request('tools/call', { name, arguments: clean });
   }
 
   async request(method, params) {

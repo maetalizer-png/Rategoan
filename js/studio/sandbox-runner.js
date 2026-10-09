@@ -197,3 +197,29 @@ export function zipStore(files) {
   out.set(end, cursor);
   return out;
 }
+
+export function describePick(meta) {
+  const src = meta || {};
+  const tag = String(src.tag || 'div').toLowerCase();
+  const classes = String(src.className || '').trim().split(/\s+/).filter(Boolean);
+  const selector = tag + (src.id ? '#' + src.id : '') + classes.map((name) => '.' + name).join('');
+  return { tag, classes, selector, path: src.path || '' };
+}
+
+export function groundScreenshot(box, elements) {
+  const shot = box || { x: 0, y: 0, w: 0, h: 0 };
+  let best = null;
+  let bestArea = 0;
+  (elements || []).forEach((el) => {
+    const x = Math.max(shot.x, el.x);
+    const y = Math.max(shot.y, el.y);
+    const right = Math.min(shot.x + shot.w, el.x + el.w);
+    const bottom = Math.min(shot.y + shot.h, el.y + el.h);
+    const area = Math.max(0, right - x) * Math.max(0, bottom - y);
+    if (area > bestArea) {
+      bestArea = area;
+      best = el;
+    }
+  });
+  return best;
+}

@@ -1,3 +1,5 @@
+import { sha256Sync } from '../studio/vfs-git.js';
+
 function levelOf(name) {
   const key = String(name || '').toLowerCase();
   if (!key) return 5;
@@ -18,7 +20,60 @@ const DEFAULT_ALLOW = [
   'content', 'title', 'body', 'name', 'description', 'color', 'public', 'folder_id',
   'file_id', 'parent_id', 'path', 'mimeType', 'parents', 'add_parents', 'remove_parents',
   'alt', 'pageSize', 'base', 'head', 'draft', 'labels', 'assignees',
+  'idempotency_key', 'nonce',
 ];
+
+const nonceLedger = new Set();
+const policyAudit = [];
+
+function isPlainObject(val) {
+  return Object.prototype.toString.call(val) === '[object Object]';
+}
+
+function rememberAudit(row) {
+  policyAudit.push(row);
+  if (policyAudit.length > 80) policyAudit.shift();
+}
+
+export function readPolicyAudit() {
+  return policyAudit.slice();
+}
+
+export function claimNonce(nonce) {
+  const key = String(nonce || '');
+  if (!key || nonceLedger.has(key)) return false;
+  nonceLedger.add(key);
+  return true;
+}
+
+function screenValue(key, val, banned, kept) {
+  if (typeof val === 'function' || typeof val === 'symbol') {
+    banned.push(key);
+    return;
+  }
+  if (Array.isArray(val)) {
+    const next = [];
+    val.forEach((item, index) => {
+      const box = {};
+      const label = key + '[' + index + ']';
+      screenValue(label, item, banned, box);
+      if (Object.prototype.hasOwnProperty.call(box, label)) next.push(box[label]);
+    });
+    kept[key] = next;
+    return;
+  }
+  if (isPlainObject(val)) {
+    const inner = filterParams(val);
+    inner.banned.forEach((name) => banned.push(key + '.' + name));
+    kept[key] = inner.kept;
+    return;
+  }
+  if (val == null || typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean') {
+    kept[key] = val;
+    return;
+  }
+  banned.push(key);
+}
 
 export function filterParams(params, allow, used) {
   const permit = new Set(allow && allow.length ? allow : DEFAULT_ALLOW);
@@ -32,9 +87,15 @@ export function filterParams(params, allow, used) {
       return;
     }
     if (!permit.has(key)) return;
-    kept[key] = params[key];
+    screenValue(key, params[key], banned, kept);
   });
   return { kept, banned };
+}
+
+function freshNonce() {
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
 }
 
 export class PolicyEngine {
@@ -58,10 +119,24 @@ export class PolicyEngine {
     }
     const screened = filterParams(payload);
     if (screened.banned.length) {
+      rememberAudit({ name: String(name || ''), level, status: 'ditolak', at: Date.now() });
       const err = new Error('parameter_ditolak');
       err.level = level;
       throw err;
     }
-    return { name: String(name || ''), level, args: payload };
+    const clean = Object.assign({}, screened.kept);
+    const basis = Object.assign({}, clean);
+    delete basis.nonce;
+    delete basis.idempotency_key;
+    clean.idempotency_key = sha256Sync(String(name || '') + '\n' + JSON.stringify(basis));
+    if (!clean.nonce) clean.nonce = freshNonce();
+    if (!claimNonce(clean.nonce)) {
+      rememberAudit({ name: String(name || ''), level, status: 'nonce_ulang', at: Date.now() });
+      const err = new Error('nonce_ulang');
+      err.level = level;
+      throw err;
+    }
+    rememberAudit({ name: String(name || ''), level, status: 'izin', at: Date.now() });
+    return { name: String(name || ''), level, args: clean };
   }
 }

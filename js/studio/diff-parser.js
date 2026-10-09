@@ -230,3 +230,13 @@ export function mergeLines(base, ours, theirs) {
   if (right === origin) return { ok: true, text: left, conflict: false };
   return { ok: false, text: left, conflict: true };
 }
+
+export function stageHunks(source, patch, decisions) {
+  const parsed = parseUnifiedDiff(patch);
+  const picks = decisions || [];
+  const chosen = parsed.hunks.filter((hunk, index) => picks[index] !== 'reject');
+  const rejected = parsed.hunks.length - chosen.length;
+  if (!chosen.length) return { text: String(source || ''), accepted: 0, rejected };
+  const next = chosen.map((hunk) => linesToPatch(hunk.lines)).join('\n');
+  return { text: applyUnifiedDiff(source, next), accepted: chosen.length, rejected };
+}

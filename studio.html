@@ -110,6 +110,8 @@
       <header class="canvas-head">
         <nav class="canvas-tabs" role="tablist" aria-label="Kanvas">
           <button type="button" class="tab-btn active" role="tab" aria-selected="true" data-tab="preview">Pratinjau</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="dokumen">Dokumen</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="sheet">Spreadsheet</button>
           <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="files">Berkas</button>
           <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="logs">Terminal</button>
         </nav>
@@ -133,6 +135,12 @@
         <div id="tab-files" class="tab-panel">
           <div class="vfs-tree" id="vfs-tree"></div>
           <pre class="code-editor" id="code-editor" spellcheck="false"></pre>
+        </div>
+        <div id="tab-dokumen" class="tab-panel">
+          <article id="living-doc" class="code-editor">Dokumen hidup.</article>
+        </div>
+        <div id="tab-sheet" class="tab-panel">
+          <div id="living-sheet" class="code-editor">Spreadsheet hidup.</div>
         </div>
         <div id="tab-logs" class="tab-panel">
           <div class="console-output" id="console-output">Studio Kode siap. Tidak ada galat.</div>

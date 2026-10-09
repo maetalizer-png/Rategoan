@@ -697,3 +697,11 @@ export const settings = {
     this.renderRoute();
   },
 };
+
+export function armIncognito(on) {
+  try {
+    if (on) sessionStorage.setItem('rategoan_incognito', '1');
+    else sessionStorage.removeItem('rategoan_incognito');
+  } catch (e) { /* sesi tertutup */ }
+  return !!on;
+}
