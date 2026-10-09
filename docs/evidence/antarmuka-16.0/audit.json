@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-10-10",
+  "parent": "99b5df5802542509811814ce8ec1c17ffae8074a",
+  "implementation": "de7675ca5c2447d15a1425650d8caf41607ee10f",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit de7675ca5c2447d15a1425650d8caf41607ee10f",
+    "digest": "3fac60632c7660b49fd2e9ea436072e18413f76d51b7fb34e80144218cc6eefd",
+    "gpg": false
+  },
+  "tag": "16.0.0-PRODUCTION-GA",
+  "node": "v22.23.2",
+  "node18": false,
+  "coverageMeasured": false,
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "unit": "131/131",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 377,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "playwright": "21/21",
+    "sq8SamplesMs": [
+      0.252,
+      0.242,
+      0.216,
+      0.233,
+      0.212
+    ],
+    "voiceWeights": false,
+    "externalModels": false,
+    "tematikLines": 63,
+    "ringkasBytes": 2090,
+    "corpusLines": 5330,
+    "journal": "putRow ditunggu bila IndexedDB ada; uji node memakai peta memori",
+    "deadCode": "tidak ada penghapusan massal ekspor. Jumlah 14 ekspor mati tidak diklaim."
+  }
+}

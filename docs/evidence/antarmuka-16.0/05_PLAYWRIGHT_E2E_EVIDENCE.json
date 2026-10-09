@@ -1,0 +1,112 @@
+{
+  "pass": "21/21",
+  "findings": [
+    {
+      "ok": true,
+      "name": "boot terang",
+      "detail": "rgb(250, 249, 246)"
+    },
+    {
+      "ok": true,
+      "name": "desktop judul di 40px",
+      "detail": "y=40"
+    },
+    {
+      "ok": true,
+      "name": "desktop tanpa track hantu",
+      "detail": "768px"
+    },
+    {
+      "ok": true,
+      "name": "sasis 960",
+      "detail": "960px 40px 48px 64px"
+    },
+    {
+      "ok": true,
+      "name": "model backdrop transparan",
+      "detail": "rgba(0, 0, 0, 0) blur=blur(12px)"
+    },
+    {
+      "ok": true,
+      "name": "sidebar tidak meredup sepihak",
+      "detail": "rgb(250, 249, 246)"
+    },
+    {
+      "ok": true,
+      "name": "namespace Rategoan",
+      "detail": "RG sama=true"
+    },
+    {
+      "ok": true,
+      "name": "tab kanvas tidak bertumpuk",
+      "detail": "celah=8"
+    },
+    {
+      "ok": true,
+      "name": "tab kanvas bisa digulir",
+      "detail": "auto 0px rgb(241, 245, 249)"
+    },
+    {
+      "ok": true,
+      "name": "studio observasi",
+      "detail": "allow-scripts allow-forms"
+    },
+    {
+      "ok": true,
+      "name": "popover studio di jangkar",
+      "detail": "studio-app fixed y=61 x=299"
+    },
+    {
+      "ok": true,
+      "name": "ponsel header kaca 60px",
+      "detail": "y=0 h=60"
+    },
+    {
+      "ok": true,
+      "name": "ponsel header ujung ke ujung",
+      "detail": "0 390"
+    },
+    {
+      "ok": true,
+      "name": "ponsel tombol kembali bulat",
+      "detail": "36 50%"
+    },
+    {
+      "ok": true,
+      "name": "ponsel gulir tidak membocorkan teks",
+      "detail": "header=0"
+    },
+    {
+      "ok": true,
+      "name": "penyimpanan tanpa kata ganda",
+      "detail": "0.0 MB / 50 MB"
+    },
+    {
+      "ok": true,
+      "name": "nilai tidak menimpa label",
+      "detail": "tumpang=false"
+    },
+    {
+      "ok": true,
+      "name": "lembar ponsel studio",
+      "detail": "tinggi=263 tutup=true"
+    },
+    {
+      "ok": true,
+      "name": "sidebar tanpa kicker",
+      "detail": "4px"
+    },
+    {
+      "ok": true,
+      "name": "jejak izin privasi",
+      "detail": "privasi true"
+    },
+    {
+      "ok": true,
+      "name": "konsol bersih",
+      "detail": "peringatan=0"
+    }
+  ],
+  "warnings": [],
+  "errors": []
+}

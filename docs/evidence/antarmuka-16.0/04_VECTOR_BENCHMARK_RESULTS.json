@@ -1,0 +1,12 @@
+{
+  "plantId": 9999,
+  "distance": 0,
+  "samplesMs": [
+    0.252,
+    0.242,
+    0.216,
+    0.233,
+    0.212
+  ],
+  "note": "Juara blok Int8 setelah pemanasan. Bukan pemindaian kasar 10000 dan bukan HNSW produksi di IndexedDB."
+}

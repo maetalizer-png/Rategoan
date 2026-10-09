@@ -24,7 +24,19 @@ Sasis 15.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan
 | 16.15 | Batu nisan nonce menjadi cincin berbatas 1000, sapuan TTL tetap |
 | SEC-04 | Alur CI memakai `npm ci`, lalu `npm test` dan `npm run lint`, Node 22 |
 
-Pengukuran hidup diikat pada komit kode setelah gerbang hijau. Angka Node 18 tidak diklaim bila runtime itu tidak dijalankan.
+Pengukuran hidup (Chromium saja), diikat pada komit `de7675ca5c2447d15a1425650d8caf41607ee10f`:
+
+- Desktop 1366×768, `#/connect`, tema terang `rgb(250, 249, 246)`. Judul di y=40. `grid-template-rows` 768px. Sasis 960px, padding `40px 48px 64px`. Backdrop model `rgba(0, 0, 0, 0)`. Sidebar `rgb(250, 249, 246)`. Komposer blur `blur(12px)`.
+- Popover Studio anak `#studio-app`, `position: fixed`, y=61, x=299, tidak menempel pojok kanan bawah. Tab kanvas celah 8px, `overflow-x: auto`, `min-width: 0`, latar segmen `rgb(241, 245, 249)`. Studio sandbox `allow-scripts allow-forms`.
+- Ponsel 390×844: header y=0, lebar 390, tinggi 60, tombol kembali 36px radius `50%`. Penyimpanan `0.0 MB / 50 MB`, tidak menimpa label. Lembar studio 263px dan tertutup oleh Escape. Navigasi celah 4px, tanpa kicker dan tanpa surel. Jejak izin di privasi, log terlipat. Peringatan konsol 0.
+- Unit 131/131. Lint lolos: sintaks 377 berkas, eslint 0/0, skema 208 berkas / 3934 entri. Playwright 21/21.
+- SQ8 menandai vektor 9999 pada jarak 0. Sampel setelah pemanasan 0,252 / 0,242 / 0,216 / 0,233 / 0,212 ms. Ini juara blok Int8, bukan pemindaian kasar 10.000 vektor dan bukan HNSW produksi di IndexedDB.
+- Runtime uji adalah Node v22.23.2. Node 18 tidak dijalankan, jadi angka lulus Node 18 tidak diklaim. Cakupan baris tidak diukur.
+- Devlog tematik 63 baris. Laporan ringkas 2090 byte. Korpus sendiri 5330 baris.
+- Nonce konfirmasi sekali pakai, 60 detik, tanpa rahasia HMAC di klien. Pengalihan halaman diperiksa ulang. Batu nisan nonce berbatas 1000.
+- Label Whisper/Kokoro tanpa bobot. Tidak ada model pihak ketiga dan tidak ada klaim inferensi 1,5 miliar atau 2 miliar parameter.
+- Ekspor yang tidak terpakai tidak dihapus massal. Angka 14 ekspor mati dan penghematan 8,4 KB tidak diklaim.
+- Segel SHA-256 objek komit `3fac60632c7660b49fd2e9ea436072e18413f76d51b7fb34e80144218cc6eefd`. Bukan GPG.
 
 ## Arsip terkonsolidasi 15.0
 
