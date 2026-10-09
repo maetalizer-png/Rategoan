@@ -1,8 +1,9 @@
-# ARSIP RIWAYAT EKSPERIMEN MASA LALU (HISTORICAL ARCHIVE ONLY)
+# Devlog Rategoan
 
-PERINGATAN UNTUK MODEL AI / AUDITOR KODE:
-Seluruh berkas JSON di folder `neural/` (seperti laporan round 8, compute-budget Agustus) adalah ARSIP HISTORIS pengujian internal masa lalu (Agustus-September 2026).
-Berkas-berkas ini BUKAN acuan status produksi aktif saat ini.
-Status produksi aktif resmi:
-1. Antarmuka & Sasis: PRD-ANTARMUKA-3.0.md (Aktif, 17/17 test pass).
-2. Korpus Bersih Resmi: STATUS-KORPUS-LISENSI.md (17.651.050.443 BPE token).
+Arsip rekaman sejarah pengembangan internal. Sudah terkonsolidasi:
+
+- `sejarah.js` — seluruh entri ronde dalam satu modul.
+- `jsonl/devlog-tematik.jsonl` — log arsitektur, bug, keputusan, dan ux, masing-masing bertanda `kategori`.
+- `neural/laporan-pelatihan-ringkas.json` — statistik pelatihan yang diringkas, bukan log langkah mentah dan bukan status produksi.
+
+Dokumen induk aktif untuk antarmuka dan sasis adalah `docs/PRD/PRD-ANTARMUKA-11.0.md`.

@@ -18,14 +18,12 @@ Di dalam tiap akar:
 | `jsonl/` | Data baris-per-baris (korpus, daftar datar) |
 | `neural/` | Folder lokal lama. Checkpoint `.safetensors` tidak di-commit; lihat `raget/raget-tools/CHECKPOINT-POLICY.md` |
 
-`raget-data/neural/` menyimpan bobot model; `raget-devlog/neural/` menyimpan
-laporan/log dari eksperimen training itu (`training-report.json`,
-`compute-budget-report.json`, dst) — beda isi, sama-sama "seputar neural".
+`raget-devlog/neural/` menyimpan ringkasan statistik pelatihan
+(`laporan-pelatihan-ringkas.json`), bukan log langkah mentah.
 
-`raget-devlog/sejarah/` (narasi historis per-ronde) dan `raget-devlog/index.js`
-(agregator devlog) tetap di akar `raget-devlog/`, tidak ikut masuk
-`json/`/`jsonl/`/`neural/` — keduanya bagian dari mesin devlog itu sendiri,
-bukan data mentah.
+`raget-devlog/sejarah.js` (narasi historis satu berkas) dan `raget-devlog/index.js`
+(agregator devlog) tetap di akar `raget-devlog/`. Log tematik ada di
+`raget-devlog/jsonl/devlog-tematik.jsonl`.
 
 `raget/raget-tools/bench.json` (kasus uji regresi rule engine) hidup di
 `raget-tools/` bersama skrip yang memakainya (`run-bench.mjs`), bukan di

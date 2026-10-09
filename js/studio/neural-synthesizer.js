@@ -218,6 +218,23 @@ export function parseFenceFiles(raw) {
   return files;
 }
 
+async function readEventStream(res) {
+  const body = res && res.body;
+  if (body && typeof body.getReader === 'function') {
+    const reader = body.getReader();
+    const decoder = new TextDecoder();
+    let out = '';
+    for (;;) {
+      const step = await reader.read();
+      if (step.done) break;
+      out += decoder.decode(step.value || new Uint8Array(), { stream: true });
+    }
+    return out + decoder.decode();
+  }
+  if (res && typeof res.text === 'function') return res.text();
+  return '';
+}
+
 export async function synthesizeCode(text, files, hooks) {
   const opts = hooks || {};
   const online = opts.online !== false;
@@ -231,7 +248,7 @@ export async function synthesizeCode(text, files, hooks) {
         body: JSON.stringify({ prompt: String(text || ''), files: files || {} }),
       });
       if (!res || !res.ok) throw new Error('door');
-      streamed = typeof res.text === 'function' ? await res.text() : '';
+      streamed = await readEventStream(res);
     } catch (e) {
       const failed = failoverStream({ phase: 'DOOR_B_STREAMING', seq: 1, door: 'center' }, 'NETWORK_FAILURE');
       door = failed.door || 'local';

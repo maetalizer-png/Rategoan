@@ -51,7 +51,7 @@ const SMALLTALK_FALLBACK = {
   terima_kasih: ['Sama-sama. Kalau masih ada yang kurang jelas, tanya lagi saja.'],
   jumpa: ['Sampai jumpa. Saya di sini kalau kamu butuh lagi.'],
   kemampuan: ['Saya bisa ngobrol, bantu layanan, hitung, ringkas, dan jawab dari data terstruktur di perangkatmu.'],
-  bantu: ['Siap, saya bantu. Ceritakan singkat keperluannya.'],
+  bantu: ['Tentu, saya siap membantu. Silakan ceritakan apa yang Anda butuhkan.'],
   maaf: ['Tidak apa-apa. Lanjut saja, saya masih di sini.'],
   lagi_apa: ['Saya di sini, siap ngobrol atau bantu urusan. Kamu sendiri lagi ngapain?'],
   sekolah: ['Silakan. PR, ulangan, atau izin kelas — pecah dulu jadi satu langkah.'],
@@ -253,10 +253,9 @@ function isBareGreeting(text, re) {
   return /^(semua|kawan|teman|bro|sis|gan|kak|min|admin|raget|juga|ya|dong|nih|deh)?[\s!.]*$/i.test(rest);
 }
 
-function mirrorTemplates(statedPeriod, devicePeriod) {
+function mirrorTemplates(statedPeriod) {
   return [
-    'Selamat ' + statedPeriod + ' juga! (Di sini masih ' + devicePeriod + ', tapi tetap semangat ya)',
-    statedPeriod.charAt(0).toUpperCase() + statedPeriod.slice(1) + ' juga! (Waktu di perangkatku sih masih ' + devicePeriod + ')',
+    'Selamat ' + statedPeriod + '! Ada yang bisa saya bantu?',
   ];
 }
 

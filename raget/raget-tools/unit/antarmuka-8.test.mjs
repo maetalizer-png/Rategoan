@@ -26,7 +26,9 @@ test('DOD-8.01 topbar menyatu dengan permukaan, tanpa balok terpisah', () => {
 
 test('DOD-8.02 popover lampiran menempel 8px di atas tombol', () => {
   const css = read('css/ui/studio.css');
-  assert.match(css, /bottom:\s*calc\(100% \+ 8px\)\s*!important/);
+  const app = read('js/studio/studio-app.js');
+  assert.match(app, /positionDesktopPopover\(sheet, \$\('btn-plus'\)\)/);
+  assert.doesNotMatch(css, /bottom:\s*calc\(100% \+ 8px\)\s*!important/);
   assert.doesNotMatch(css, /bottom:\s*calc\(100% \+ 12px\)/);
 });
 

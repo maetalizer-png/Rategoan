@@ -20,7 +20,7 @@ function replySejarah() {
   return (
     'Riwayat pengembangan saya tercatat di ' + all.length + ' entri devlog, ' + devlogIndex.totalKomit() + ' commit sejak awal.\n\n' +
     'Lima ronde terbaru:\n' + lines.join('\n') + '\n\n' +
-    'Ronde paling baru: ' + latest.judul + '. Sumber: raget-devlog/sejarah/.'
+    'Ronde paling baru: ' + latest.judul + '. Sumber: raget-devlog/sejarah.js.'
   );
 }
 
@@ -28,7 +28,7 @@ function replyCaraKerja() {
   return (
     'Saya (Raget) adalah mesin template/rule-based, bukan model bahasa besar — 100% berjalan lokal di perangkat kamu, tanpa server dan tanpa API key.\n\n' +
     'Alur jawab: pola pesan dicocokkan lewat router intent, lalu dicoba berurutan lewat tool khusus (matematika, pengingat, impor), jawaban faktual dari dataries (data terstruktur negara/wisata/tokoh/dll), pencarian retrieval satu pintu (TF-IDF) di catatan & pengetahuan tersimpan, dan mesin template lokal sebagai fallback terakhir.\n\n' +
-    'Sumber: raget-devlog/jsonl/arsitektur.jsonl (retrieval satu pintu, Jilid 13) dan refactor agent.js/dataries-bridge.js (Trisula Final v2).'
+    'Sumber: raget-devlog/jsonl/devlog-tematik.jsonl (kategori arsitektur) dan refactor agent.js/dataries-bridge.js (Trisula Final v2).'
   );
 }
 
@@ -60,13 +60,13 @@ function replyBugTersulit() {
   const top = [...bugs].sort((a, b) => b.bug.length - a.bug.length)[0];
   return (
     'Bug paling rumit yang tercatat di devlog saya:\n\n"' + top.bug + '"\n\n' +
-    'Ditemukan & ditutup di ronde: ' + top.judul + '. Sumber: raget-devlog/jsonl/bug.jsonl.'
+    'Ditemukan & ditutup di ronde: ' + top.judul + '. Sumber: raget-devlog/jsonl/devlog-tematik.jsonl.'
   );
 }
 
 function replyPembuat() {
   return (
-    'Saya (Raget) dibuat dan dikembangkan lewat serangkaian ronde kerja yang terdokumentasi penuh — bukan sekali jadi, tapi proses iteratif yang tercatat di raget-devlog/sejarah (' +
+    'Saya (Raget) dibuat dan dikembangkan lewat serangkaian ronde kerja yang terdokumentasi penuh — bukan sekali jadi, tapi proses iteratif yang tercatat di raget-devlog/sejarah.js (' +
     devlogIndex.all().length +
     ' entri ronde, dari commit awal sampai sekarang). Setiap fitur dan bug punya jejak commit-nya sendiri.'
   );

@@ -75,10 +75,10 @@ test('DOD-10.13 dan 10.14 sasis 920, galeri, dan backdrop lampiran transparan', 
   const desktop = read('css/layout/desktop.css');
   const overhaul = read('css/ui/overhaul.css');
   const studio = read('css/ui/studio.css');
-  assert.match(desktop, /max-width:\s*920px/);
-  assert.match(desktop, /padding:\s*32px 40px/);
+  assert.match(desktop, /max-width:\s*960px/);
+  assert.match(desktop, /padding:\s*40px 48px 64px/);
   assert.match(desktop, /body\.attach-open \.sheet-backdrop\.show[\s\S]*background:\s*transparent/);
-  assert.match(overhaul, /minmax\(260px,\s*1fr\)/);
+  assert.match(overhaul, /minmax\(280px,\s*1fr\)/);
   assert.doesNotMatch(overhaul, /#view-artifacts \.settings-page \{ display: grid; grid-template-columns: 1fr 1fr/);
   assert.match(studio, /#sheet-backdrop[\s\S]*background:\s*transparent !important/);
   assert.match(studio, /studio-pop 150ms/);

@@ -12,7 +12,7 @@
   { "id": "Q1", "rule": "KAYA: factoid = jawaban langsung + rotasi opsional 1 kalimat konteks/trivia terkait, jangan selalu tampil bersamaan." },
   { "id": "Q2", "rule": "ADAPTASI PANJANG: 'jelaskan/ceritakan/ulas' -> mode detail (heading + poin); pertanyaan pendek -> mode ringkas (<=2 kalimat)." },
   { "id": "Q3", "rule": "ADAPTASI NADA: user pakai 'anda' -> balasan agak formal; user pakai 'lu/gw/bro/kak' -> balasan santai. Sediakan varian template per nada untuk intent utama." },
-  { "id": "Q4", "rule": "JUJUR SUMBER: angka dibulatkan manusiawi dengan prefiks '±' (mis. '±277 juta jiwa'); data yang bisa berubah diberi keterangan 'per data terakhir'." },
+  { "id": "Q4", "rule": "JUJUR SUMBER: angka dibulatkan manusiawi dengan prefiks '±' (mis. '±282 juta jiwa'); data yang bisa berubah diberi keterangan 'per data terakhir'." },
   { "id": "Q5", "rule": "MULTI-HOP: relasi bertingkat (mis. 'makanan khas negara yang ibukotanya X') dijawab berantai: cari entitas perantara dulu, baru jawab relasi yang diminta." },
   { "id": "Q6", "rule": "MAJEMUK: pertanyaan 'X dan Y' dijawab untuk kedua entitas sekaligus, digabung sebagai bullet per entitas." },
   { "id": "Q7", "rule": "ANAFORA: kata ganti 'nya/itu/tersebut' atau pertanyaan pendek tanpa entitas eksplisit di-resolve ke entitas terakhir (lastEntity) dari giliran sebelumnya." },

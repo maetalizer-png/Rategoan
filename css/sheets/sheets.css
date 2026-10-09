@@ -13,6 +13,22 @@
   pointer-events: auto;
 }
 
+#attach-sheet {
+  max-height: calc(100vh - 100px) !important;
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rg-line) transparent;
+}
+
+#attach-sheet::-webkit-scrollbar {
+  width: 5px;
+}
+
+#attach-sheet::-webkit-scrollbar-thumb {
+  background: var(--rg-line);
+  border-radius: 5px;
+}
+
 .sheet {
   position: fixed;
   left: 0;

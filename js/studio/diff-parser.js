@@ -171,6 +171,11 @@ export function renderDiffElement(parent, lines) {
   return parsed;
 }
 
+export function progressiveGutter(text) {
+  const rows = String(text || '').split('\n');
+  return rows.map((line, index) => ({ n: index + 1, text: line }));
+}
+
 export function createStreamDiff() {
   let buf = '';
   let current = null;
@@ -201,7 +206,8 @@ export function createStreamDiff() {
       const parts = buf.split('\n');
       buf = parts.pop();
       parts.forEach(take);
-      return { hunks, pending: buf };
+      const shown = hunks.map((hunk) => hunk.lines.map((line) => line.text).join('\n')).join('\n');
+      return { hunks, pending: buf, gutter: progressiveGutter(shown) };
     },
     finish() {
       if (buf) {

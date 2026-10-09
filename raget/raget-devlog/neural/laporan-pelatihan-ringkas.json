@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-10-09",
+  "catatan": "Statistik historis yang diringkas. Bukan status produksi aktif.",
+  "laporan": [
+    {
+      "id": "anggaran-komputasi",
+      "generatedAt": "2026-08-22T10:27:00.000Z"
+    },
+    {
+      "id": "pelatihan-cpu",
+      "generatedAt": "2026-09-05T10:22:34.207Z",
+      "totalSteps": 488,
+      "actualMinutes": 85.2,
+      "budgetMinutes": 85,
+      "corpusSize": 5354,
+      "lossAwal": 10.5599,
+      "lossAkhir": 9.6783,
+      "langkah": 488
+    },
+    {
+      "id": "pelatihan-ringan",
+      "generatedAt": "2026-08-22T21:49:45.975Z",
+      "preset": "tiny",
+      "parameterCount": 2839296,
+      "totalSteps": 7634,
+      "actualMinutes": 40,
+      "budgetMinutes": 40,
+      "secPerStepAvg": 0.314,
+      "lossAwal": 8.9123,
+      "lossAkhir": 8.4108,
+      "langkah": 7634
+    },
+    {
+      "id": "pelatihan-50m",
+      "generatedAt": "2026-08-27T18:58:15Z",
+      "preset": "massive50m",
+      "device": "cpu",
+      "parameterCount": 49999872,
+      "stopReason": "budget_habis",
+      "stepsThisSession": 1063,
+      "minutesThisSession": 60.02,
+      "totalStepsAccumulated": 9294,
+      "totalMinutesAccumulated": 743.16,
+      "tokenPerSecAvg": 1067.1,
+      "secPerStepAvg": 3.3875
+    },
+    {
+      "id": "pelatihan-100m",
+      "generatedAt": "2026-09-01T10:54:42Z",
+      "preset": "massive100m",
+      "device": "cpu",
+      "parameterCount": 103325184,
+      "stopReason": "budget_habis",
+      "stepsThisSession": 527,
+      "minutesThisSession": 90.05,
+      "totalStepsAccumulated": 3514,
+      "totalMinutesAccumulated": 557.3,
+      "tokenPerSecAvg": 330.0,
+      "secPerStepAvg": 10.2525
+    },
+    {
+      "id": "pelatihan-200m",
+      "generatedAt": "2026-09-03T07:36:37Z",
+      "preset": "massive200m",
+      "device": "cpu",
+      "parameterCount": 200709120,
+      "stopReason": "budget_habis",
+      "stepsThisSession": 186,
+      "minutesThisSession": 90.0,
+      "totalStepsAccumulated": 3511,
+      "totalMinutesAccumulated": 966.41,
+      "tokenPerSecAvg": 123.7,
+      "secPerStepAvg": 29.0327
+    }
+  ]
+}

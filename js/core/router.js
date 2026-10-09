@@ -55,8 +55,10 @@ export const router = {
     history.replaceState({ rg: 1, view: hash }, '', location.hash || '#/chat');
     window.addEventListener('hashchange', () => this.render());
     window.addEventListener('popstate', () => {
+      const name = (location.hash || '').replace(/^#\/?/, '').split('/')[0];
       if (!history.state || !history.state.rg) {
-        history.pushState({ rg: 1, view: 'chat' }, '', '#/chat');
+        if (this.routes[name]) history.replaceState({ rg: 1, view: name }, '', location.hash);
+        else history.pushState({ rg: 1, view: 'chat' }, '', '#/chat');
       }
       this.render();
     });

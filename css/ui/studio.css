@@ -665,20 +665,27 @@ body.studio-page .attach-plain span:first-of-type {
     margin-right: auto !important;
   }
   body.studio-page #studio-attach-sheet {
-    position: absolute;
+    position: fixed;
     top: auto;
-    left: 8px;
+    left: auto;
     right: auto;
-    bottom: calc(100% + 8px) !important;
+    bottom: auto;
     transform: none;
-    width: min(340px, calc(100% - 16px)) !important;
+    width: min(360px, calc(100vw - 32px));
     height: auto !important;
-    max-height: none !important;
-    overflow-y: visible !important;
+    max-height: calc(100vh - 100px) !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rg-line) transparent;
     border-radius: 12px !important;
     padding: 10px 12px !important;
     box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.36), 0 0 0 1px var(--rg-line) !important;
     z-index: 140;
+  }
+  body.studio-page #studio-attach-sheet::-webkit-scrollbar { width: 5px; }
+  body.studio-page #studio-attach-sheet::-webkit-scrollbar-thumb {
+    background: var(--rg-line);
+    border-radius: 5px;
   }
   body.studio-page #studio-attach-sheet .attach-grid {
     display: grid;

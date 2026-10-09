@@ -37,6 +37,31 @@ function relTime(time) {
   return new Date(time).toLocaleString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 }
 
+function previewMark(kind) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 280 110');
+  svg.setAttribute('width', '100%');
+  svg.setAttribute('height', '110');
+  svg.setAttribute('aria-hidden', 'true');
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', '18');
+  rect.setAttribute('y', '22');
+  rect.setAttribute('width', '244');
+  rect.setAttribute('height', '66');
+  rect.setAttribute('rx', '8');
+  rect.setAttribute('fill', 'none');
+  rect.setAttribute('stroke', 'currentColor');
+  svg.appendChild(rect);
+  const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  label.setAttribute('x', '32');
+  label.setAttribute('y', '62');
+  label.setAttribute('fill', 'currentColor');
+  label.setAttribute('font-size', '16');
+  label.textContent = kind;
+  svg.appendChild(label);
+  return svg;
+}
+
 function paint() {
   const ul = $('artifact-page-list');
   const filters = $('artifact-filters');
@@ -85,11 +110,15 @@ function paint() {
   shown.forEach((item) => {
     const li = document.createElement('li');
     li.className = 'artifact-card-page';
+    const preview = document.createElement('div');
+    preview.className = 'artifact-preview';
     const format = document.createElement('span');
     format.className = 'artifact-format ' + extOf(item).toLowerCase();
     format.textContent = extOf(item);
+    preview.appendChild(previewMark(extOf(item)));
+    preview.appendChild(format);
     const info = document.createElement('div');
-    info.className = 'artifact-info';
+    info.className = 'artifact-card-body';
     const title = document.createElement('strong');
     title.textContent = item.title || item.fileName || 'Berkas';
     const time = document.createElement('span');
@@ -136,7 +165,7 @@ function paint() {
     actions.className = 'artifact-actions';
     actions.appendChild(open);
     actions.appendChild(save);
-    li.appendChild(format);
+    li.appendChild(preview);
     li.appendChild(info);
     li.appendChild(actions);
     ul.appendChild(li);
@@ -156,6 +185,7 @@ export const artifactsPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('artifacts') >= 0) paint();
     });
+    if ((location.hash || '').indexOf('artifacts') >= 0) paint();
   },
   open() {
     paint();

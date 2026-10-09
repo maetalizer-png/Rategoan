@@ -112,10 +112,10 @@
 
   .settings-page {
     width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 32px 40px;
-    box-sizing: border-box;
+    max-width: 960px !important;
+    margin: 0 auto !important;
+    padding: 40px 48px 64px !important;
+    box-sizing: border-box !important;
   }
 
   #view-collection,
@@ -124,8 +124,9 @@
   #view-settings,
   #view-artifacts {
     width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
   }
 
   body.attach-open .sheet-backdrop.show {

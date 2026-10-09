@@ -25,6 +25,8 @@ jobs:
           else
             echo "ready=yes" >> "$GITHUB_OUTPUT"
           fi
+      - name: Ikon PWA
+        run: test -f assets/icons/icon-512.png && test -f assets/icons/icon-192.png
       - name: Susun paket Android
         if: steps.gate.outputs.ready == 'yes'
         env:

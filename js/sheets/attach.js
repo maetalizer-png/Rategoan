@@ -4,6 +4,7 @@ import { folderBridge } from '../project/folder-bridge.js';
 import { extractPdfText } from '../../shared/pdf-extract.js';
 import { readZipText } from '../../shared/zip-local.js';
 import { toast } from '../core/toast.js';
+import { positionDesktopPopover } from '../../shared/popover.js';
 
 const X_SVG =
   '<svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
@@ -19,21 +20,7 @@ export const attach = {
     sheet.classList.add('is-anchored');
     document.body.classList.add('attach-open');
     $('sheet-backdrop').classList.add('show');
-    if (window.matchMedia('(min-width: 860px)').matches) {
-      const plus = $('btn-plus');
-      if (plus) {
-        const box = plus.getBoundingClientRect();
-        const width = Math.min(340, window.innerWidth - 16);
-        const left = Math.max(8, Math.min(box.left, window.innerWidth - width - 8));
-        sheet.style.position = 'fixed';
-        sheet.style.width = width + 'px';
-        sheet.style.left = left + 'px';
-        sheet.style.right = 'auto';
-        sheet.style.top = 'auto';
-        sheet.style.transform = 'none';
-        sheet.style.bottom = (window.innerHeight - box.top + 8) + 'px';
-      }
-    }
+    if (window.innerWidth >= 860) positionDesktopPopover(sheet, $('btn-plus'));
   },
   pick(kind) {
     $('pick-' + kind).click();

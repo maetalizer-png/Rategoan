@@ -453,7 +453,7 @@
   {
     "prompt": "berapa penduduk indonesia",
     "expect": "factoid",
-    "contains": "277 juta",
+    "contains": "282 juta",
     "noNoise": true
   },
   {
@@ -2503,7 +2503,7 @@
   {
     "prompt": "bagaimana dengan populasinya",
     "expect": "kg_followup",
-    "contains": "277 juta",
+    "contains": "282 juta",
     "note": "Bagian 4: follow-up ID populasi"
   },
   {

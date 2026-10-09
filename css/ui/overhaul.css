@@ -134,14 +134,14 @@
 .project-grid { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
 .artifact-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 20px !important;
   width: 100%;
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.project-card, .artifact-card-page {
+.project-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -151,12 +151,39 @@
   padding: 12px 16px;
   background: var(--rg-surface);
 }
-.artifact-card-page strong { flex: 1; font-size: 14px; }
-.artifact-card-page span {
-  font-size: 11px;
-  font-weight: 600;
+.artifact-card-page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid var(--rg-line);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  background: var(--rg-surface);
+}
+.artifact-preview {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rg-surface-2, #f3f3f0);
   color: var(--rg-muted);
 }
+.artifact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px 8px;
+}
+.artifact-card-page strong { font-size: 15px; font-weight: 650; }
+.artifact-time { font-size: 12px; font-weight: 500; color: var(--rg-muted); }
+.artifact-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+.artifact-actions button { flex: 1 1 0; }
 .artifact-card-page button, .project-card button {
   padding: 6px 12px;
   border-radius: 8px;
@@ -475,7 +502,7 @@ html, body { overflow-x: hidden; }
 #storage-meter-bar { display: block; height: 100%; width: 0; background: #1a4b8c; }
 .attach-plain-label small { display: block; font-weight: 400; color: var(--rg-muted); }
 @media (min-width: 960px) {
-  #view-artifacts .settings-page { display: flex; flex-direction: column; max-width: 920px; }
+  #view-artifacts .settings-page { display: flex; flex-direction: column; }
   #artifact-inline { min-height: 360px; }
 }
 

@@ -11,7 +11,7 @@
     "teks": "Permisi, saya siap membantu. Silakan.",
     "meta": {
       "variants": [
-        "Permisi ya."
+        "Tentu, saya siap membantu. Silakan ceritakan apa yang Anda butuhkan."
       ],
       "jenis": "sopan"
     }
@@ -23,15 +23,14 @@
     "nama": "Maaf gangguan",
     "tags": [
       "sopan",
-      "maaf",
-      "bantu"
+      "maaf"
     ],
-    "teks": "Maaf mengganggu. Ada yang bisa dibantu?",
+    "teks": "Mohon maaf atas gangguannya.",
     "meta": {
       "variants": [
-        "Maaf sebelumnya."
+        "Mohon maaf atas gangguannya."
       ],
-      "jenis": "sopan"
+      "jenis": "maaf"
     }
   },
   {
@@ -62,7 +61,7 @@
     "teks": "Siap. Mohon detailnya supaya saya bisa bantu tepat.",
     "meta": {
       "variants": [
-        "Silakan detailkan."
+        "Siap, ada yang bisa saya bantu?"
       ],
       "jenis": "sopan"
     }

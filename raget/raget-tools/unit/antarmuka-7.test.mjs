@@ -13,9 +13,10 @@ test('DOD-7.01: konektor mount langsung saat boot jika URL memuat connect', () =
 test('DOD-7.02: popover attach-sheet desktop bebas dari max-height kaku dan scrollbar', () => {
   const css = read('css/ui/studio.css');
   assert.ok(css.indexOf('#studio-attach-sheet') >= 0);
-  assert.match(css, /max-height:\s*none\s*!important/);
-  assert.match(css, /overflow-y:\s*visible\s*!important/);
+  assert.match(css, /max-height:\s*calc\(100vh - 100px\)\s*!important/);
+  assert.match(css, /overflow-y:\s*auto\s*!important/);
   assert.doesNotMatch(css, /max-height:\s*220px/);
+  assert.doesNotMatch(css, /max-height:\s*none\s*!important/);
 });
 
 test('DOD-7.03: bilah atas studio topbar menggunakan warna latar surface yang selaras', () => {

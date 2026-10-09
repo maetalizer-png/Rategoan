@@ -63,8 +63,8 @@
 .set-section:not(.set-section-danger) {
   background: var(--rg-surface);
   border: 1px solid var(--rg-line);
-  border-radius: var(--rg-radius);
-  padding: 4px 8px;
+  border-radius: 16px;
+  padding: 16px 18px;
 }
 
 .set-section:not(.set-section-danger) .set-section-title {
