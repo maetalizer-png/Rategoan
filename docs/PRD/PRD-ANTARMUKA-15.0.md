@@ -28,7 +28,19 @@ Perbaikan keamanan yang ikut:
 - Plugin hanya lolos jika kunci publiknya ada di trust store sesi. `signPlugin` mendaftarkan kunci yang baru dibuatnya.
 - `spec.special` menerima `screened.kept`, bukan parameter mentah.
 
-Pengukuran hidup diikat pada komit kode setelah segel, di bukti rilis. Lingkungan ini Node 22. Node 18.20.4 tidak dijalankan di sini karena `process.getBuiltinModule` tidak ada pada Node 18.
+Pengukuran hidup (Chromium saja), diikat pada komit `add244eff5f122d7c49346a5b461370d10a3bb66`:
+
+- Desktop 1366×768, `#/connect`, tema terang `rgb(250, 249, 246)`. Judul di y=40. `grid-template-rows` 768px. Sasis 960px, padding `40px 48px 64px`. Backdrop model `rgba(0, 0, 0, 0)`. Sidebar `rgb(250, 249, 246)`. Komposer blur `blur(12px)`.
+- Tab kanvas celah 8px, `overflow-x: auto`, `min-width: 0`, latar segmen `rgb(241, 245, 249)`. Studio sandbox `allow-scripts allow-forms`.
+- Ponsel 390×844: header y=0, lebar 390, tinggi 60, tombol kembali 36px radius `50%`. Gulir tetap di header. Penyimpanan `0.0 MB / 50 MB`, tidak menimpa label. Lembar studio 263px dan tertutup oleh Escape. Peringatan konsol 0.
+- Unit 131/131. Lint lolos: sintaks 371 berkas, eslint 0/0, skema 208 berkas / 3934 entri. Playwright 18/18.
+- SQ8 menandai vektor 9999 pada jarak 0. Sampel setelah pemanasan 0,234 / 0,232 / 0,288 / 0,233 / 0,231 ms. Ini juara blok Int8, bukan pemindaian kasar 10.000 vektor dan bukan HNSW produksi di IndexedDB.
+- Runtime uji adalah Node v22.23.2. Node 18.20.4 tidak dijalankan: `process.getBuiltinModule` tidak ada di Node 18, jadi angka 123/125 dan 1,329 ms dari naskah PRD tidak diklaim.
+- Devlog tematik 63 baris. Laporan ringkas 2090 byte. Korpus sendiri 5330 baris.
+- Jurnal menunggu `putRow` bila IndexedDB ada. Uji node memakai peta memori. `navigator.locks` dipakai di peramban.
+- Label Whisper/Kokoro tanpa bobot. Tidak ada model pihak ketiga dan tidak ada klaim inferensi 1,5 miliar atau 2 miliar parameter.
+- Ekspor yang tidak terpakai tidak dihapus massal. Yang dihapus hanya nama dan berkas sisa yang memang diganti.
+- Segel SHA-256 objek komit `43e55d7258d3cfa54ffc396e25cd1d3bc2e14d38f5d275baa04b53b8cbefb551`. Bukan GPG.
 
 ## Arsip terkonsolidasi 11.0 sampai 14.0
 

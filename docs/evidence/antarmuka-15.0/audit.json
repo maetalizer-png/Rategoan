@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-10-09",
+  "parent": "c4ace6568e26c738c8aae33f3fcf494df6c1f814",
+  "implementation": "add244eff5f122d7c49346a5b461370d10a3bb66",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit add244eff5f122d7c49346a5b461370d10a3bb66",
+    "digest": "43e55d7258d3cfa54ffc396e25cd1d3bc2e14d38f5d275baa04b53b8cbefb551",
+    "gpg": false
+  },
+  "tag": "15.0.0-PRODUCTION-GA",
+  "node": "v22.23.2",
+  "node18": false,
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "unit": "131/131",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 371,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "playwright": "18/18",
+    "sq8Ms": 0.234,
+    "sq8SamplesMs": [
+      0.234,
+      0.232,
+      0.288,
+      0.233,
+      0.231
+    ],
+    "voiceWeights": false,
+    "externalModels": false,
+    "tematikLines": 63,
+    "ringkasBytes": 2090,
+    "corpusLines": 5330,
+    "journal": "putRow ditunggu bila IndexedDB ada; uji node memakai peta memori",
+    "deadCode": "tidak ada penghapusan massal ekspor. Sisa yang tidak terpakai tidak dihitung nol."
+  }
+}

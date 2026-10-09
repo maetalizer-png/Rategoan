@@ -1,0 +1,33 @@
+{
+  "implementation": "add244eff5f122d7c49346a5b461370d10a3bb66",
+  "browser": "Chromium",
+  "pass": 18,
+  "fail": 0,
+  "total": 18,
+  "lightBoot": "rgb(250, 249, 246)",
+  "desktopTitleTopPx": 40,
+  "desktopGridRows": "768px",
+  "canvasMaxWidthPx": 960,
+  "canvasPadding": "40px 48px 64px",
+  "modelBackdrop": "rgba(0, 0, 0, 0)",
+  "composerBlur": "blur(12px)",
+  "sidebar": "rgb(250, 249, 246)",
+  "canvasGapPx": 8,
+  "canvasOverflow": "auto",
+  "canvasMinWidth": "0px",
+  "canvasSegment": "rgb(241, 245, 249)",
+  "sandbox": "allow-scripts allow-forms",
+  "mobileHeader": {
+    "top": 0,
+    "left": 0,
+    "width": 390,
+    "height": 60,
+    "radius": "50%",
+    "back": 36
+  },
+  "storage": "0.0 MB / 50 MB",
+  "storageOverlap": false,
+  "mobileSheetPx": 263,
+  "escapeClosesSheet": true,
+  "warnings": 0
+}

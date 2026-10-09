@@ -1,0 +1,7 @@
+{"t":"fsm","state":"SYNTHESIS","steps":["Plan","Grep","Read","Synthesize","Lint & Test","Commit"],"commit":"add244eff5f122d7c49346a5b461370d10a3bb66"}
+{"t":"crypto","sync":true,"webcrypto":true,"createRequire":true,"node":"v22.23.2","node18":false}
+{"t":"vector","quant":"int8","samplesMs":[0.234,0.232,0.288,0.233,0.231],"plant":9999,"distance":0,"warmup":3}
+{"t":"policy","nonceCap":1000,"nonceTtlMs":300000,"lockMs":120000,"tombstone":true,"clock":"performance.now"}
+{"t":"journal","store":"vfs_tx_journal","lock":"navigator.locks","node":"memory","awaitIndexedDb":true}
+{"t":"voice","stt":"whisper-webgpu","tts":"kokoro-wasm","weights":false,"external":false}
+{"t":"seal","algorithm":"SHA-256","digest":"43e55d7258d3cfa54ffc396e25cd1d3bc2e14d38f5d275baa04b53b8cbefb551","gpg":false}

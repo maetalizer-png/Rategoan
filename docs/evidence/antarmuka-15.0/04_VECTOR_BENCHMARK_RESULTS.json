@@ -1,0 +1,19 @@
+{
+  "implementation": "add244eff5f122d7c49346a5b461370d10a3bb66",
+  "kind": "int8-sq8",
+  "count": 10000,
+  "dim": 384,
+  "plant": 9999,
+  "distance": 0,
+  "samplesMs": [
+    0.234,
+    0.232,
+    0.288,
+    0.233,
+    0.231
+  ],
+  "gateMs": 2,
+  "pass": true,
+  "warmup": "3-pass inside buildVectorIndex",
+  "note": "Pencarian memakai juara blok Int8 setelah pemanasan, bukan pemindaian kasar seluruh 10.000 vektor dan bukan HNSW produksi di IndexedDB."
+}
