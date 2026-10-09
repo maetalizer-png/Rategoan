@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { filterParams, PolicyEngine } from '../../../js/connectors/policy-engine.js';
+import { filterParams, PolicyEngine, claimNonce, NONCE_CAP } from '../../../js/connectors/policy-engine.js';
 import { getWorkspaceAesKey } from '../../../js/connectors/connector-state.js';
 import { VfsGit } from '../../../js/studio/vfs-git.js';
 import { crashAfterPrepare, recoverOpenJournal } from '../../../js/studio/vfs-transaction.js';
@@ -51,4 +51,43 @@ test('traversal path dan alat tanpa kapabilitas jaringan ditolak', () => {
   const box = createToolSandbox(['fs:read']);
   assert.equal(box.can('fs:read'), true);
   assert.throws(() => box.fetch('https://example.test'), /kapabilitas/);
+});
+
+test('lima belas skenario serangan tertutup', () => {
+  const scenarios = [];
+  function scene(name, ok) {
+    scenarios.push(name);
+    assert.equal(ok, true, name);
+  }
+  const banned = filterParams({ q: 'a', access_token: 'x' });
+  scene('token terlarang', banned.banned.includes('access_token') && banned.kept.q === 'a');
+  const nested = filterParams({ q: { q: 'dalam', password: 'x' } });
+  scene('sandi bersarang', nested.banned.some((name) => name.indexOf('password') >= 0));
+  const extra = filterParams({ q: 'ok', liar: 1 });
+  scene('properti asing dibuang', extra.kept.liar === undefined && extra.kept.q === 'ok');
+  scene('proto tidak lolos', filterParams({ q: 'ok', __proto__: { admin: true } }).kept.admin === undefined);
+  let now = 5000;
+  const locked = new PolicyEngine({ reauth: () => false, confirmed: () => true, now: () => now });
+  let message = '';
+  try { locked.assert('hapus', { q: 'x' }); } catch (err) { message = err.message; }
+  scene('level 5 menolak', message === 'Otentikasi ulang diperlukan');
+  now += 1000;
+  const still = new PolicyEngine({ reauth: () => true, confirmed: () => true, now: () => now });
+  try { still.assert('hapus', { q: 'x' }); message = 'lolos'; } catch (err) { message = err.message; }
+  scene('kunci 120 detik', message === 'kunci_120');
+  now += 120001;
+  let opened = false;
+  try { still.assert('hapus', { q: 'y' }); opened = true; } catch (err) { opened = false; }
+  scene('kunci berakhir', opened);
+  for (let i = 0; i < NONCE_CAP; i += 1) claimNonce('nonce-' + i);
+  scene('nonce masih menolak ulang', claimNonce('nonce-0') === false);
+  scene('nonce lru menerima baru', claimNonce('nonce-baru') === true);
+  scene('nonce terbuang boleh kembali', claimNonce('nonce-0') === true);
+  scene('path traversal', (() => { try { vfsPath('../etc/passwd'); return false; } catch (e) { return /terlarang/.test(e.message); } })());
+  scene('null byte', (() => { try { vfsPath('/a/\0b'); return false; } catch (e) { return /null byte/.test(e.message); } })());
+  scene('zip slip', (() => { try { vfsPath('arsip/../../rahasia'); return false; } catch (e) { return /terlarang/.test(e.message); } })());
+  const box = createToolSandbox(['fs:read']);
+  scene('tanpa jaringan', (() => { try { box.fetch('https://example.test'); return false; } catch (e) { return /kapabilitas/.test(e.message); } })());
+  scene('baca diizinkan', box.can('fs:read') === true && box.can('net:fetch') === false);
+  assert.equal(scenarios.length, 15);
 });

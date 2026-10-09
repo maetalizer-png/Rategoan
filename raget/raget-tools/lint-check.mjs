@@ -116,6 +116,17 @@ function checkPlaceholders(files) {
   return hits;
 }
 
+function checkStrayGlobals(files) {
+  const hits = [];
+  const strayStream = 'window.' + 'RagetStream';
+  const strayMesin = 'window.' + '__rategoanMesin';
+  for (const file of files) {
+    const text = readFileSync(file, 'utf8');
+    if (text.includes(strayStream) || text.includes(strayMesin)) hits.push(path.relative(ROOT, file));
+  }
+  return hits;
+}
+
 function main() {
   console.log('=== raget_lint_check: gerbang lint/build minimal ===\n');
 
@@ -164,7 +175,10 @@ function main() {
   console.log('\nAnti-placeholder:', placeholders.length ? placeholders.length + ' fungsi dummy' : '0');
   placeholders.forEach((hit) => console.log('  ' + hit));
 
-  const failed = syntaxFailures.length > 0 || lint.errorCount > 0 || lint.errorCount === -1 || dataCheck.failed || placeholders.length > 0;
+  const stray = checkStrayGlobals(files);
+  console.log('Global liar:', stray.length ? stray.join(', ') : '0');
+
+  const failed = syntaxFailures.length > 0 || lint.errorCount > 0 || lint.errorCount === -1 || dataCheck.failed || placeholders.length > 0 || stray.length > 0;
   console.log('\n=== HASIL: ' + (failed ? 'GAGAL - perbaiki sebelum lanjut ke bench' : 'LOLOS') + ' ===');
   process.exit(failed ? 1 : 0);
 }

@@ -223,3 +223,12 @@ export function groundScreenshot(box, elements) {
   });
   return best;
 }
+
+export function nullOriginHandshake() {
+  return {
+    sandbox: 'allow-scripts allow-forms',
+    channel: 'MessageChannel',
+    origin: 'null',
+    sameOrigin: false,
+  };
+}

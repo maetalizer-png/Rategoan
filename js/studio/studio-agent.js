@@ -264,6 +264,20 @@ export function selectImpactedTests(changed, graph) {
   return tests;
 }
 
+export function parseImpactMatrix(text) {
+  const graph = {};
+  String(text || '').split('\n').forEach((line) => {
+    const parts = line.split('->');
+    if (parts.length !== 2) return;
+    const from = parts[0].trim();
+    const to = parts[1].trim();
+    if (!from || !to) return;
+    if (!graph[from]) graph[from] = [];
+    graph[from].push(to);
+  });
+  return graph;
+}
+
 export async function lintGuidedHeal(code, probe) {
   return selfHealLoop(code, async (current, cycle) => {
     const res = await probe(current, cycle);

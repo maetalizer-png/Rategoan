@@ -1,3 +1,5 @@
+import { mountNamespace } from '../core/namespace.js';
+
 const FORBIDDEN_SEGMENTS = new Set(['..', '.', '.git', '.env', 'node_modules', '__pycache__']);
 
 function mimeOf(path) {
@@ -108,4 +110,8 @@ export function createEphemeralWorkspace(seed) {
       vfs.reset({});
     },
   };
+}
+
+if (typeof window !== 'undefined') {
+  mountNamespace('vfs', { createVfs, createEphemeralWorkspace, vfsPath });
 }

@@ -10,6 +10,7 @@
   "isolated_storage": true,
   "handle_links": "preferred",
   "launch_handler": { "client_mode": "navigate-existing" },
+  "prefer_related_applications": false,
   "background_color": "#05080c",
   "theme_color": "#05080c",
   "share_target": {

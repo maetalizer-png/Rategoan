@@ -11,11 +11,12 @@ import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
 import { VfsGit } from './vfs-git.js';
-import { VfsTransaction } from './vfs-transaction.js';
+import { VfsTransaction, bootRecover } from './vfs-transaction.js';
 import { renderDiffElement } from './diff-parser.js';
 import { folderBridge } from '../project/folder-bridge.js';
 import { reduceStream, chooseDoor, routeDoor, failoverStream, resumeCursor } from './sse-door.js';
 import { backupToDrive } from './drive-backup.js';
+import { mountNamespace } from '../core/namespace.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -1198,6 +1199,14 @@ function bind() {
     else paintHistory(clean);
   }).catch(() => paintHistory([]));
   showTab('preview');
+  const hunkStage = $('hunk-stage');
+  if (hunkStage) {
+    hunkStage.addEventListener('click', (event) => {
+      const btn = event.target.closest('button');
+      if (!btn) return;
+      btn.dataset.decision = btn.classList.contains('hunk-accept') ? 'accept' : 'reject';
+    });
+  }
   paintDoor();
   window.addEventListener('online', paintDoor);
   window.addEventListener('offline', () => {
@@ -1206,7 +1215,8 @@ function bind() {
     const next = failoverStream({ phase: 'DOOR_B_STREAMING', seq, door: 'center' }, 'NETWORK_FAILURE');
     appendConsole('Pintu terputus. Lanjut dari seq ' + next.seq + ' lewat ' + next.phase + '.');
   });
-  window.RagetStream = { reduceStream, paint: paintSse, chooseDoor };
+  mountNamespace('stream', { reduceStream, paint: paintSse, chooseDoor });
+  bootRecover(git).catch(() => {});
 }
 
 bind();

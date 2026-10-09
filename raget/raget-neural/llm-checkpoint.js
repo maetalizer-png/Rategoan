@@ -280,6 +280,27 @@ async function deleteCheckpoint(name) {
     } catch (e) { console.warn('[Rategoan Fallback] llm-checkpoint:', e); }
 }
 
+function parseSafetensorsHeader(bytes) {
+    const buf = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+    const len = view.getUint32(0, true);
+    const json = new TextDecoder().decode(buf.subarray(8, 8 + len));
+    const header = JSON.parse(json);
+    const names = Object.keys(header).filter((name) => name !== '__metadata__');
+    return { header, names, bytes: len };
+}
+
+function decoupleWeightTie(header) {
+    const embed = header['embedding.weight'];
+    const head = header['lm_head.weight'];
+    if (!embed || !head || !embed.data_offsets || !head.data_offsets) return { tied: false, shared: '' };
+    const same = embed.data_offsets[0] === head.data_offsets[0] && embed.data_offsets[1] === head.data_offsets[1];
+    if (!same) return { tied: false, shared: '' };
+    return { tied: true, shared: 'embedding.weight', head: 'lm_head.weight' };
+}
+
+export { parseSafetensorsHeader, decoupleWeightTie };
+
 export const LLMCheckpoint = {
     createCheckpointSafetensors,
     restoreModelFromCheckpointSafetensors,
@@ -287,4 +308,6 @@ export const LLMCheckpoint = {
     loadCheckpointFromStorage,
     listCheckpoints,
     deleteCheckpoint,
+    parseSafetensorsHeader,
+    decoupleWeightTie,
 };

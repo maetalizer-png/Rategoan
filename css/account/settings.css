@@ -96,10 +96,21 @@
   padding: 4px 2px;
 }
 
-.set-row span {
+.set-row > span:first-child {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.set-row > .set-value {
+  margin-left: auto;
+  text-align: right;
+  flex: 1 1 auto;
+  line-height: 1.35;
+  display: block;
+  min-width: 0;
 }
 
 .set-row-stack {
@@ -131,6 +142,17 @@
 .set-value {
   font-size: 12px;
   color: var(--rg-muted);
+}
+
+.policy-audit-log {
+  margin: 0 6px 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--rg-line);
+  border-radius: 8px;
+  background: var(--rg-surface);
+  color: var(--rg-muted);
+  font-size: 11px;
+  white-space: pre-wrap;
 }
 
 .set-hint {

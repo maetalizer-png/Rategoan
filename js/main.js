@@ -41,6 +41,7 @@ import { reminderScheduler } from '../vault/reminders/scheduler.js';
 import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
 import { mesin } from '../raget/raget-runtime/mesin.js';
+import { mountNamespace } from './core/namespace.js';
 
 const bootStart = performance.now();
 
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   paintNet();
   window.addEventListener('online', paintNet);
   window.addEventListener('offline', paintNet);
-  try { window.__rategoanMesin = mesin.list(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+  try { mountNamespace('mesin', mesin.list()); } catch (e) { console.warn('[Rategoan Fallback]', e); }
   reminderScheduler.start((reminder) => toast.show('Pengingat: ' + reminder.action));
   try {
     const params = new URLSearchParams(location.search);

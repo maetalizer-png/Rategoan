@@ -1,5 +1,6 @@
 import { llmEngine } from '../../raget/raget-template/llm-engine.js';
 import { $ } from '../../shared/dom.js';
+import { mountNamespace } from '../core/namespace.js';
 
 function setStatus(text) {
   const el = $('model-status');
@@ -24,7 +25,4 @@ export const engine = Object.freeze({
   },
 });
 
-if (typeof window !== 'undefined') {
-  window.RG = window.RG || {};
-  window.RG.llm = engine;
-}
+if (typeof window !== 'undefined') mountNamespace('llm', engine);

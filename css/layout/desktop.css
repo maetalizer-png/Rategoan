@@ -160,8 +160,16 @@
   }
 
   body.attach-open .sheet-backdrop.show {
-    background: transparent;
+    background: transparent !important;
     transition: none;
+  }
+  .sheet-backdrop,
+  .sheet-backdrop.show {
+    background: transparent !important;
+    z-index: 70 !important;
+  }
+  body.model-open #model-sheet {
+    z-index: 80;
   }
 
   #attach-sheet.sheet.is-anchored {

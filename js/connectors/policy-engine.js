@@ -23,7 +23,10 @@ const DEFAULT_ALLOW = [
   'idempotency_key', 'nonce',
 ];
 
-const nonceLedger = new Set();
+export const NONCE_CAP = 1000;
+export const LOCK_MS = 120000;
+const nonceLedger = new Map();
+const lockUntil = new Map();
 const policyAudit = [];
 
 function isPlainObject(val) {
@@ -42,8 +45,16 @@ export function readPolicyAudit() {
 export function claimNonce(nonce) {
   const key = String(nonce || '');
   if (!key || nonceLedger.has(key)) return false;
-  nonceLedger.add(key);
+  nonceLedger.set(key, Date.now());
+  while (nonceLedger.size > NONCE_CAP) {
+    const oldest = nonceLedger.keys().next().value;
+    nonceLedger.delete(oldest);
+  }
   return true;
+}
+
+export function level5Locked(name, now) {
+  return (lockUntil.get(String(name || '')) || 0) > now;
 }
 
 function screenValue(key, val, banned, kept) {
@@ -94,7 +105,9 @@ export function filterParams(params, allow, used) {
 
 function freshNonce() {
   const bytes = new Uint8Array(16);
-  crypto.getRandomValues(bytes);
+  const box = globalThis.crypto;
+  if (!box || typeof box.getRandomValues !== 'function') throw new Error('WebCrypto tidak tersedia');
+  box.getRandomValues(bytes);
   return Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
 }
 
@@ -102,12 +115,20 @@ export class PolicyEngine {
   constructor(opts = {}) {
     this.confirmed = typeof opts.confirmed === 'function' ? opts.confirmed : () => false;
     this.reauth = typeof opts.reauth === 'function' ? opts.reauth : () => false;
+    this.now = typeof opts.now === 'function' ? opts.now : () => Date.now();
   }
 
   assert(name, args) {
     const level = levelOf(name);
     const payload = args && typeof args === 'object' ? args : {};
+    const now = this.now();
+    if (level >= 5 && level5Locked(name, now)) {
+      const err = new Error('kunci_120');
+      err.level = level;
+      throw err;
+    }
     if (level >= 5 && !this.reauth(name, payload)) {
+      lockUntil.set(String(name || ''), now + LOCK_MS);
       const err = new Error('Otentikasi ulang diperlukan');
       err.level = level;
       throw err;

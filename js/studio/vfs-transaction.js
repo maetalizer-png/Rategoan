@@ -1,8 +1,26 @@
 import { prepareSource } from './ast-heal.js';
+import { JOURNAL_STORE, putRow, allRows } from '../../raget/raget-database/durable-store.js';
 
 export const AUTOSAVE_MS = 30000;
 const journal = new Map();
 const autosave = new Map();
+
+function plainFiles(git) {
+  const files = {};
+  if (git && typeof git.snapshot === 'function') {
+    git.snapshot().forEach((value, path) => { files[path] = value; });
+  }
+  return files;
+}
+
+function remember(row) {
+  journal.set(row.id, row);
+  putRow(JOURNAL_STORE, {
+    id: row.id,
+    status: row.status,
+    files: row.files || null,
+  }).catch(() => {});
+}
 
 export function readVfsJournal() {
   return Array.from(journal.values()).map((row) => ({
@@ -22,11 +40,12 @@ export function readAutosave(key) {
 
 export function crashAfterPrepare(git) {
   const id = 'crash-' + journal.size;
-  journal.set(id, {
+  remember({
     id,
     status: 'PREPARE',
     snap: git.snapshot(),
     refs: new Map(git.refs),
+    files: plainFiles(git),
   });
   return id;
 }
@@ -36,11 +55,24 @@ export function recoverOpenJournal(git) {
   journal.forEach((row) => {
     if (row.status !== 'PREPARE') return;
     if (git && row.snap && typeof git.rollback === 'function') git.rollback(row.snap);
+    else if (git && row.files) {
+      Object.keys(row.files).forEach((path) => git.stage(path, row.files[path]));
+    }
     if (git && row.refs) row.refs.forEach((value, ref) => git.refs.set(ref, value));
     row.status = 'ROLLED_BACK';
+    remember(row);
     recovered += 1;
   });
   return recovered;
+}
+
+export async function bootRecover(git) {
+  const rows = await allRows(JOURNAL_STORE);
+  rows.forEach((row) => {
+    if (!row || journal.has(row.id)) return;
+    journal.set(row.id, row);
+  });
+  return recoverOpenJournal(git);
 }
 
 export class VfsTransaction {
@@ -66,11 +98,12 @@ export class VfsTransaction {
   async commitBatch(mutations) {
     if (!this.snapshot) this.begin();
     const txId = 'tx-' + Date.now().toString(36) + '-' + journal.size;
-    journal.set(txId, {
+    remember({
       id: txId,
       status: 'PREPARE',
       snap: this.snapshot,
       refs: new Map(this.refSnap || []),
+      files: plainFiles({ snapshot: () => this.snapshot }),
     });
     const prevHead = this.git.refs.get('HEAD') || '';
     const prevMain = this.git.refs.get('main') || '';
@@ -89,14 +122,20 @@ export class VfsTransaction {
       this.git.casRef('HEAD', prevHead, commitId);
       this.git.casRef('main', prevMain, commitId);
       const row = journal.get(txId);
-      if (row) row.status = 'COMMITTED';
+      if (row) {
+        row.status = 'COMMITTED';
+        remember(row);
+      }
       writeAutosave('aktif', this.git.snapshot());
       return commitId;
     } catch (err) {
       this.git.rollback(this.snapshot);
       this.restoreRefs();
       const row = journal.get(txId);
-      if (row) row.status = 'ROLLED_BACK';
+      if (row) {
+        row.status = 'ROLLED_BACK';
+        remember(row);
+      }
       if (this.vfsSnap && this.vfs && typeof this.vfs.reset === 'function') {
         this.vfs.reset({});
         this.vfs.load(this.vfsSnap);

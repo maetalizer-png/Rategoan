@@ -112,7 +112,7 @@ const closed = await studio.evaluate(() => document.getElementById('studio-app')
 note(closed, 'kanvas tidak membelah sendiri', 'tersembunyi=' + closed);
 
 await studio.evaluate(() => {
-  window.RagetStream.paint([
+  window.Rategoan.stream.paint([
     'event: token',
     'data: {"text":"fungsi ukur"}',
     '',

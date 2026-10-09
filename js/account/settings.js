@@ -26,6 +26,7 @@ import { paintMemoryBadge } from '../ui/memory-capsule.js';
 import { memory } from '../ai/memory.js';
 import { exportLog } from '../../raget/raget-memory/export-log.js';
 import { sheets } from '../sheets/sheets.js';
+import { readPolicyAudit } from '../connectors/policy-engine.js';
 
 const DOWNLOAD_ICON =
   '<svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -171,6 +172,11 @@ const TEMPLATE = `
                 </span>
                 <span class="set-value" id="storage-info">—</span>
               </div>
+              <div class="set-row clickable" id="row-policy-audit">
+                <span>Jejak izin</span>
+                <span class="set-value" id="policy-audit-info">0</span>
+              </div>
+              <pre id="policy-audit-log" class="policy-audit-log" hidden></pre>
               <div class="set-row clickable" id="row-backup">
                 <span>
                   <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -528,7 +534,7 @@ export const settings = {
       const cap = 50 * 1024 * 1024;
       const mb = (used / (1024 * 1024)).toFixed(1);
       const pct = Math.min(100, Math.round((used / cap) * 100));
-      info.textContent = 'Penyimpanan: ' + mb + ' MB / 50 MB';
+      info.textContent = mb + ' MB / 50 MB';
       const bar = $('storage-meter-bar');
       if (bar) bar.style.width = pct + '%';
       if (pct >= 80 && !this._warned) {
@@ -540,6 +546,13 @@ export const settings = {
     if (out) out.hidden = !st;
     const pinInfo = $('pin-info');
     if (pinInfo) pinInfo.textContent = pin.has() ? 'Aktif' : 'Nonaktif';
+    const audit = readPolicyAudit();
+    const auditInfo = $('policy-audit-info');
+    const auditLog = $('policy-audit-log');
+    if (auditInfo) auditInfo.textContent = String(audit.length);
+    if (auditLog) {
+      auditLog.textContent = audit.map((row) => row.name + ' ' + row.status).join('\n');
+    }
     document.querySelectorAll('.font-btn').forEach((b) => {
       b.classList.toggle('active', b.dataset.font === font.value);
     });
@@ -593,6 +606,15 @@ export const settings = {
         this.renderRoute();
       };
     });
+    const auditRow = $('row-policy-audit');
+    if (auditRow) {
+      auditRow.onclick = () => {
+        const log = $('policy-audit-log');
+        if (!log) return;
+        log.hidden = !log.hidden;
+        this.refresh();
+      };
+    }
     window.addEventListener('hashchange', () => {
       const top = (location.hash || '').replace(/^#\/?/, '').split('/')[0];
       if (top === 'settings') this.renderRoute();

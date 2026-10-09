@@ -240,3 +240,10 @@ export function stageHunks(source, patch, decisions) {
   const next = chosen.map((hunk) => linesToPatch(hunk.lines)).join('\n');
   return { text: applyUnifiedDiff(source, next), accepted: chosen.length, rejected };
 }
+
+export function hunkStageModel(count) {
+  const n = Math.max(0, count | 0);
+  const rows = [];
+  for (let i = 0; i < n; i += 1) rows.push({ index: i, accept: 'Terima', reject: 'Tolak' });
+  return rows;
+}

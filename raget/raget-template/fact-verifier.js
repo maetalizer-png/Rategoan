@@ -8,3 +8,10 @@ export function verifyClaims(text, facts) {
   });
   return { ok: issues.length === 0, issues };
 }
+
+export function numericConsistent(text) {
+  const found = String(text || '').match(/(\d+(?:[.,]\d+)?)\s*%/g) || [];
+  const values = found.map((item) => Number(String(item).replace('%', '').replace(',', '.').trim()));
+  const bad = values.filter((n) => n > 100);
+  return { ok: bad.length === 0, values };
+}

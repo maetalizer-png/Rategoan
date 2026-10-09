@@ -17,11 +17,13 @@ export const sheets = {
     const as = $('artifact-sheet');
     if (as) as.hidden = true;
     $('sheet-backdrop').classList.remove('show');
+    document.body.classList.remove('model-open');
   },
   openModel() {
     modelSheet.render();
     $('model-sheet').hidden = false;
     $('sheet-backdrop').classList.add('show');
+    document.body.classList.add('model-open');
   },
   openProject() {
     const ps = $('project-sheet');

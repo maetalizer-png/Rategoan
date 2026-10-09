@@ -2,6 +2,7 @@ import { engine } from './engine.js';
 import { engineRouter } from '../../raget/raget-agents/engine-router.js';
 import { memory } from './memory.js';
 import { memoryPreference } from '../state/memory-preference.js';
+import { mountNamespace } from '../core/namespace.js';
 
 const NEURAL_ANSWERS_ENABLED = true;
 
@@ -33,7 +34,4 @@ export const ai = Object.freeze({
   },
 });
 
-if (typeof window !== 'undefined') {
-  window.RG = window.RG || {};
-  window.RG.ai = ai;
-}
+if (typeof window !== 'undefined') mountNamespace('ai', ai);

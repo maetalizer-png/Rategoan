@@ -93,7 +93,9 @@ export function stampToolCall(name, args) {
   delete body.idempotency_key;
   const key = sha256Sync(String(name || '') + '\n' + JSON.stringify(body));
   const bytes = new Uint8Array(16);
-  crypto.getRandomValues(bytes);
+  const box = globalThis.crypto;
+  if (!box || typeof box.getRandomValues !== 'function') throw new Error('WebCrypto tidak tersedia');
+  box.getRandomValues(bytes);
   body.idempotency_key = key;
   body.nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
   return body;
