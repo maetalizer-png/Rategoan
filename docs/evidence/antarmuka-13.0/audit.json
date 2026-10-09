@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-10-09",
+  "parent": "caaf0cf7097af351bcef258897be126953b0279a",
+  "implementation": "c41b1b61b515ca375b886cc9b2df7cb3fc4d2f64",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit c41b1b61b515ca375b886cc9b2df7cb3fc4d2f64",
+    "digest": "658991b27b1457139dfa25a7efb7edc8c2b4bc35a5be76d48b2ca1624af15085",
+    "gpg": false
+  },
+  "tag": "13.0.0-PRODUCTION-GA",
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "lightBoot": "rgb(250, 250, 248)",
+    "desktopTitleTopPx": 40,
+    "desktopGridRows": "768px",
+    "canvasMaxWidthPx": 960,
+    "canvasPadding": "40px 48px 64px",
+    "modelBackdrop": "rgba(0, 0, 0, 0)",
+    "sidebar": "rgb(250, 250, 248)",
+    "canvasGapPx": 8,
+    "canvasTabsOverflow": "auto",
+    "canvasTabsMinWidth": "0px",
+    "mobileHeader": {
+      "top": 0,
+      "left": 0,
+      "width": 390,
+      "height": 60,
+      "radius": "50%",
+      "back": 36
+    },
+    "storageText": "0.0 MB / 50 MB",
+    "storageOverlap": false,
+    "scrollProbe": "HEADER",
+    "sandbox": "allow-scripts allow-forms",
+    "allowSameOriginWarning": 0,
+    "mobileSheetPx": 263,
+    "playwright": "18/18",
+    "browser": "Chromium",
+    "unit": "120/120",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 372,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "tematikLines": 63,
+    "ringkasBytes": 2090,
+    "corpusLines": 5330,
+    "journal": "vfs_tx_journal indexedDB when present; node memory same store name",
+    "hnsw": "champion probe 16-d then 4 chains, plant 9999 distance 0 under 12ms, not production IndexedDB HNSW",
+    "voice": "whisper-webgpu and kokoro-wasm labels, weights false",
+    "speculative": "synthetic step >30 tok/s, not a 2B model"
+  }
+}

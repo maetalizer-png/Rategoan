@@ -1,0 +1,8 @@
+{"t":"fsm","state":"SYNTHESIS","steps":["Plan","Grep","Read","Synthesize","Lint & Test","Commit"],"commit":"c41b1b61b515ca375b886cc9b2df7cb3fc4d2f64"}
+{"t":"preview","channel":"MessageChannel","allowSameOrigin":false,"sandbox":"allow-scripts allow-forms"}
+{"t":"vault","extractable":false,"iterations":100000,"webcrypto":true,"perWorkspace":true}
+{"t":"policy","screenedArgs":true,"nonceBytes":16,"nonceCap":1000,"lockMs":120000}
+{"t":"journal","store":"vfs_tx_journal","db":"rategoan_durable","node":"memory","states":["PREPARE","COMMITTED","ROLLED_BACK"]}
+{"t":"hnsw","kind":"hnsw","dim":384,"probe":16,"champions":true,"indexedDbProduction":false}
+{"t":"voice","stt":"whisper-webgpu","tts":"kokoro-wasm","weights":false,"budgetMs":300}
+{"t":"seal","algorithm":"SHA-256","digest":"658991b27b1457139dfa25a7efb7edc8c2b4bc35a5be76d48b2ca1624af15085","gpg":false}
