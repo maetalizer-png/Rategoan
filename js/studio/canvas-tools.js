@@ -124,6 +124,19 @@ export function hotReloadPlan(state) {
   return { fullReload: false, preserve: true, state: state || null };
 }
 
+export function hotReloadDiff(prev, next) {
+  const started = typeof performance !== 'undefined' ? performance.now() : Date.now();
+  const before = prev || {};
+  const after = next || {};
+  const names = new Set(Object.keys(before).concat(Object.keys(after)));
+  const changed = [];
+  names.forEach((name) => {
+    if (before[name] !== after[name]) changed.push(name);
+  });
+  const elapsed = (typeof performance !== 'undefined' ? performance.now() : Date.now()) - started;
+  return { fullReload: false, preserve: true, changed, elapsed };
+}
+
 export async function createWasmTerminal(vfs) {
   const wasm = await globalThis.WebAssembly.instantiate(WASM_ADD);
   return {

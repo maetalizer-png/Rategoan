@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <title>Rategoan</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob: 'sha256-F/16auHvU8rnnFFjvUge7U2l7HcZHWpC5EqFt2bli10='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
   <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -371,7 +371,7 @@
       <div class="side-head">
         <div class="side-title">Rategoan</div>
       </div>
-      <p class="side-kicker">Utama</p>
+      <nav class="side-nav" aria-label="Navigasi utama">
       <button id="btn-new-chat" class="side-link" type="button">
         <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -393,7 +393,6 @@
         </svg>
         Proyek
       </button>
-      <p class="side-kicker">Ruang kerja</p>
       <button id="btn-collection" class="side-link" data-route="collection">
         <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 21 12 16l-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
@@ -413,12 +412,13 @@
         </svg>
         Artefak
       </button>
+      </nav>
     </div>
 
     <hr class="divider">
 
     <div class="zone zone-bottom">
-      <div class="hist-head">
+      <button type="button" id="hist-toggle" class="hist-head" aria-expanded="true" aria-controls="history-panel">
         <span>
           <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9"/>
@@ -426,19 +426,19 @@
           </svg>
           Riwayat Chat
         </span>
-      </div>
+      </button>
+      <div id="history-panel">
       <div class="hist-search">
         <input id="history-search" class="hist-search-input" type="search" placeholder="Cari riwayat…" autocomplete="off">
       </div>
       <ul id="history-list"></ul>
       <div id="history-empty">Belum ada chat</div>
+      </div>
     </div>
     <div class="sidebar-footer">
       <div id="sidebar-user-card" class="sidebar-user-card">
-        <div class="user-avatar" id="sidebar-user-avatar">?</div>
-        <div class="user-info">
-          <strong class="user-name" id="sidebar-user-name">Tamu</strong>
-          <span class="user-email" id="sidebar-user-email">Belum masuk</span>
+        <div class="user-avatar" id="sidebar-user-avatar" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <button id="btn-settings" class="user-settings-btn" aria-label="Pengaturan">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -461,6 +461,7 @@
 
   <div id="theme-veil" aria-hidden="true"></div>
 
+  <script type="importmap">{"imports":{"node:module":"./js/core/node-module-stub.js"}}</script>
   <script type="module" src="js/main.js"></script>
   <div id="image-lightbox" class="image-lightbox" hidden>
     <button type="button" id="image-lightbox-close" aria-label="Tutup">Tutup</button>

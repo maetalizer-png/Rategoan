@@ -4,7 +4,7 @@ import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
 import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop } from './studio-agent.js';
 import { recordTelemetry } from './telemetry.js';
-import { positionDesktopPopover } from '../../shared/popover.js';
+import { positionDesktopPopover, clearDesktopPopover } from '../../shared/popover.js';
 import { healSyntax } from './ast-heal.js';
 import { synthesizeCode } from './neural-synthesizer.js';
 import { mountThought } from '../ui/thought-card.js';
@@ -668,7 +668,8 @@ function togglePlus() {
   if (backdrop) backdrop.hidden = !open;
   if (open) {
     paintConnectorStatus();
-    if (window.innerWidth >= 860) positionDesktopPopover(sheet, $('btn-plus'));
+    if (window.innerWidth >= 1024) positionDesktopPopover(sheet, $('btn-plus'));
+    else clearDesktopPopover(sheet);
   }
 }
 

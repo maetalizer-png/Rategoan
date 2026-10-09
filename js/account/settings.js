@@ -156,6 +156,23 @@ const TEMPLATE = `
                 <span class="set-value" id="pin-info">Nonaktif</span>
               </div>
               <div id="set-section-privasi"></div>
+              <div class="set-row clickable" id="row-policy-audit" data-cat="privasi">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  Log Jejak Izin
+                </span>
+                <span class="set-value" id="policy-audit-info">0</span>
+              </div>
+              <pre id="policy-audit-log" class="policy-audit-log" hidden></pre>
+              <div id="policy-audit-tools" class="policy-audit-tools" hidden>
+                <input id="policy-audit-q" type="search" aria-label="Saring jejak izin">
+                <button type="button" data-sev="INFO">INFO</button>
+                <button type="button" data-sev="WARN">WARN</button>
+                <button type="button" data-sev="CRITICAL">CRITICAL</button>
+                <button type="button" id="policy-audit-export">JSON</button>
+              </div>
             </div>
           </div>
 
@@ -171,18 +188,6 @@ const TEMPLATE = `
                   Penyimpanan
                 </span>
                 <span class="set-value" id="storage-info">—</span>
-              </div>
-              <div class="set-row clickable" id="row-policy-audit">
-                <span>Jejak izin</span>
-                <span class="set-value" id="policy-audit-info">0</span>
-              </div>
-              <pre id="policy-audit-log" class="policy-audit-log" hidden></pre>
-              <div id="policy-audit-tools" class="policy-audit-tools" hidden>
-                <input id="policy-audit-q" type="search" aria-label="Saring jejak izin">
-                <button type="button" data-sev="INFO">INFO</button>
-                <button type="button" data-sev="WARN">WARN</button>
-                <button type="button" data-sev="CRITICAL">CRITICAL</button>
-                <button type="button" id="policy-audit-export">JSON</button>
               </div>
               <div class="set-row clickable" id="row-backup">
                 <span>

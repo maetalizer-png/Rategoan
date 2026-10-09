@@ -42,6 +42,12 @@
   gap: 6px;
 }
 
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .zone-top {
   flex: 0 0 auto;
 }
@@ -49,8 +55,17 @@
 .zone-bottom {
   flex: 1 1 auto;
   min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-y: visible;
+}
+
+button.hist-head {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
 }
 
 .side-head {

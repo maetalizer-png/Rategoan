@@ -1,4 +1,6 @@
-import { quantizeAffine, sqDist16 } from '../../js/core/vector-sq8.js';
+import { quantizeAffine, sqDist16, scheduleVectorWarmup } from '../../js/core/vector-sq8.js';
+
+scheduleVectorWarmup();
 
 function tokensOf(text) {
   return String(text || '').toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);

@@ -23,7 +23,10 @@ export const account = {
     if (!st) {
       if (name) name.textContent = 'Tamu';
       if (email) email.textContent = 'Belum masuk';
-      if (avatar) avatar.textContent = '?';
+      if (avatar) {
+        avatar.textContent = '';
+        avatar.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+      }
       btn.classList.remove('logged');
       btn.setAttribute('aria-label', 'Masuk');
       btn.innerHTML = MAIL_SVG;

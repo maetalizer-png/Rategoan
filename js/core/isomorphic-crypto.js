@@ -1,10 +1,8 @@
+import { createRequire } from 'node:module';
+
 function loadNodeCrypto() {
   if (typeof window !== 'undefined') return null;
-  const proc = globalThis.process;
-  if (!proc || typeof proc.getBuiltinModule !== 'function') return null;
   try {
-    const createRequire = proc.getBuiltinModule('node:module').createRequire;
-    if (typeof createRequire !== 'function') return null;
     return createRequire(import.meta.url)('node:crypto');
   } catch (err) {
     return null;

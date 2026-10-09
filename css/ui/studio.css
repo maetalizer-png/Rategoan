@@ -687,6 +687,7 @@ body.studio-page .attach-plain span:first-of-type {
     padding: 10px 12px !important;
     box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.36), 0 0 0 1px var(--rg-line) !important;
     z-index: 140;
+    opacity: 1;
   }
   body.studio-page #studio-attach-sheet::-webkit-scrollbar { width: 5px; }
   body.studio-page #studio-attach-sheet::-webkit-scrollbar-thumb {

@@ -1,6 +1,6 @@
 import { allowOptions, bearer, fillPath, forward, queryOf, readBody, sendJson, sendRpcError } from './_http.js';
 import { filterParams } from '../js/connectors/policy-engine.js';
-import { verifyConfirm } from '../js/connectors/confirm-mac.js';
+import { verifyConfirm } from './confirm-challenge.js';
 
 export async function dispatchTools(req, res, spec) {
   if (allowOptions(req, res)) return;

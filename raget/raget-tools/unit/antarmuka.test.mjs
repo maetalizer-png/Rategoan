@@ -60,7 +60,14 @@ import { accuracyGuard, adjustScale } from '../../raget-neural/runtime/quant-gua
 import { draftContract } from '../../raget-neural/runtime/speculative-engine.js';
 import { getSecureRandomBytesSync, getUniversalCryptoSync } from '../../../js/core/isomorphic-crypto.js';
 import { MEMORY_BUDGET, withinBudget, packText, unpackText } from '../../../js/studio/memory-budget.js';
-import { mermaidToSvg, bindSheetChart, scaffoldProject, indexSymbols, parseImports, synthesizeTool, passAt1, iwaManifest, backupManifest, verifyBackupManifest, splitAxis, hotReloadPlan, createWasmTerminal } from '../../../js/studio/canvas-tools.js';
+import { mermaidToSvg, bindSheetChart, scaffoldProject, indexSymbols, parseImports, synthesizeTool, passAt1, iwaManifest, backupManifest, verifyBackupManifest, splitAxis, hotReloadPlan, hotReloadDiff, createWasmTerminal } from '../../../js/studio/canvas-tools.js';
+import { issueConfirmChallenge, verifyConfirm, CONFIRM_TTL_MS, __resetConfirmLedgerForTesting } from '../../../api/confirm-challenge.js';
+import { ipIsPrivate, resolvePublicHttpUrl } from '../../../api/_http.js';
+import { compareVectorClock, VFS_CHANNEL } from '../../../js/studio/vfs-sync.js';
+import { trackBlob, sweepBlobs } from '../../../js/studio/blob-gc.js';
+import { pageInt8, kvFootprint, PAGE_TOKENS } from '../../../js/core/kv-page.js';
+import { shouldPaint, FRAME_MS } from '../../../js/core/frame-throttle.js';
+import { warmupVectorEngine } from '../../../js/core/vector-sq8.js';
 
 const root = new URL('../../../', import.meta.url);
 function read(rel) { return readFileSync(new URL(rel, root), 'utf8'); }
@@ -769,8 +776,9 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-12.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-13.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-14.0.md'), true);
-  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-15.0.md'), false);
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-15\.0\.md/);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-15.0.md'), true);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-16.0.md'), false);
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-16\.0\.md/);
 });
 
 test('DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi', () => {
@@ -1334,9 +1342,10 @@ test('DOD-14.09 namespace, kanvas, dan jejak izin', async () => {
   assert.equal(planHeartbeat('rahasia', 'rahasia', 'ws://127.0.0.1:9/mcp').intervalMs, 15000);
 });
 
-test('DOD-14.10 dokumen aktif menunjuk 14.0 dan sejarah 13 tetap ada', () => {
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-15\.0\.md/);
-  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /15\.0/);
+test('DOD-14.10 dokumen aktif menunjuk 16.0 dan sejarah 13 tetap ada', () => {
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-16\.0\.md/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /16\.0/);
+  assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('15.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('14.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('13.0'), true);
   assert.match(read('docs/HISTORY-ANTARMUKA.md'), /11\.0/);
@@ -1350,22 +1359,26 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   const cryptoSrc = read('js/core/isomorphic-crypto.js');
   assert.match(cryptoSrc, /createRequire\(import\.meta\.url\)\('node:crypto'\)/);
   assert.equal(cryptoSrc.includes("getBuiltinModule('node:crypto')"), false);
-  assert.equal(cryptoSrc.includes("from 'node:module'"), false);
+  assert.match(cryptoSrc, /from 'node:module'/);
   const box = getUniversalCryptoSync();
   const createRequire = process.getBuiltinModule('node:module').createRequire;
   const node = createRequire(import.meta.url)('node:crypto');
   assert.equal(box.subtle, node.webcrypto.subtle);
   assert.equal(typeof box.subtle.digest, 'function');
   const banned = ['rategoan-model-' + 'v5', 'rategoan-neural-' + 'v4', 'pack-' + 'v1.jsonl', 'verify-' + 'ronde-' + 'v3', 'ronde-' + 'v3', 'ronde-' + 'v4', 'ronde-' + 'v5', 'ronde-' + 'v6', 'ronde-' + 'v7'];
-  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-15.0.md');
+  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-16.0.md');
   banned.forEach((word) => assert.equal(scan.includes(word), false, word));
   assert.equal(existsSync(new URL('raget/raget-data/jsonl/kode/code-pack.jsonl', root)), true);
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif/verify-build-pipeline.mjs', root)), true);
-  const { signConfirm, verifyConfirm } = await import('../../../js/connectors/confirm-mac.js');
-  const mac = signConfirm('github_commit_changes', { message: 'halo' }, 1000);
-  assert.equal(verifyConfirm(mac, 'github_commit_changes', { message: 'halo' }, 1000), true);
+  __resetConfirmLedgerForTesting();
+  const nonce = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000);
+  assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000), true);
+  assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000), false);
   assert.equal(verifyConfirm('ada', 'github_commit_changes', { message: 'halo' }, 1000), false);
-  assert.equal(verifyConfirm(mac, 'github_commit_changes', { message: 'lain' }, 1000), false);
+  const again = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000);
+  assert.equal(verifyConfirm(again, 'github_commit_changes', { message: 'lain' }, 1000), false);
+  assert.equal(read('js/connectors/confirm-mac.js').includes('rategoan-confirm'), false);
+  assert.equal(CONFIRM_TTL_MS, 60000);
   const { signPlugin, verifyPlugin } = await import('../../../js/connectors/plugin-verifier.js');
   const { getWebCrypto } = await import('../../../js/crypto/get-web-crypto.js');
   const signed = await signPlugin('resmi');
@@ -1380,4 +1393,36 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(read('studio-preview.html').includes('location.search'), false);
   assert.match(read('api/_dispatch.js'), /screened\.kept/);
   assert.match(read('api/_dispatch.js'), /verifyConfirm/);
+  assert.equal(ipIsPrivate('::ffff:127.0.0.1'), true);
+  assert.equal(ipIsPrivate('::ffff:10.1.2.3'), true);
+  assert.equal(ipIsPrivate('1.1.1.1'), false);
+  const open = await resolvePublicHttpUrl('https://contoh.test/a', async () => [{ address: '1.1.1.1' }]);
+  assert.match(open, /^https:\/\/contoh\.test/);
+  const closed = await resolvePublicHttpUrl('https://dalam.test/a', async () => [{ address: '::ffff:10.0.0.8' }]);
+  assert.equal(closed, null);
+  assert.equal(compareVectorClock({ a: 1 }, { a: 2 }), -1);
+  assert.equal(VFS_CHANNEL, 'rategoan-vfs-sync');
+  const revoked = [];
+  trackBlob('blob:satu', 0);
+  assert.deepEqual(sweepBlobs(1000, (url) => revoked.push(url)), []);
+  assert.deepEqual(sweepBlobs(300001, (url) => revoked.push(url)), ['blob:satu']);
+  assert.deepEqual(revoked, ['blob:satu']);
+  assert.equal(PAGE_TOKENS, 16);
+  assert.equal(pageInt8(new Int8Array(32)).length, 2);
+  assert.equal(kvFootprint(1536).smaller, true);
+  assert.equal(kvFootprint(1536).saved, 0.75);
+  assert.equal(shouldPaint(0, FRAME_MS - 1), false);
+  assert.equal(shouldPaint(0, FRAME_MS), true);
+  assert.equal(typeof warmupVectorEngine(), 'number');
+  const diff = hotReloadDiff({ a: '1' }, { a: '2', b: '3' });
+  assert.equal(diff.fullReload, false);
+  assert.equal(diff.elapsed < 50, true);
+  assert.deepEqual(diff.changed.sort(), ['a', 'b']);
+  assert.match(read('js/account/settings.js'), /data-cat="privasi"/);
+  assert.match(read('js/account/settings.js'), /Log Jejak Izin/);
+  assert.match(read('index.html'), /class="side-nav"/);
+  assert.equal(read('index.html').includes('>Utama<'), false);
+  assert.match(read('.github/workflows/lint.yml'), /npm ci/);
+  assert.match(read('.github/workflows/lint.yml'), /npm test/);
+  assert.match(read('package.json'), /16\.0\.0-PRODUCTION-GA/);
 });

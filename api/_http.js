@@ -144,13 +144,44 @@ export async function forward(res, url, token, method, body, extraHeaders) {
   res.end(text);
 }
 
+export function ipIsPrivate(host) {
+  const raw = String(host || '').toLowerCase().replace(/^\[|\]$/g, '');
+  let v4 = raw;
+  if (raw.indexOf('::ffff:') === 0) v4 = raw.slice(7);
+  if (v4 === '0.0.0.0' || v4 === '::' || v4 === '::1') return true;
+  if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(v4)) return true;
+  if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(v4)) return true;
+  if (raw === '::1' || raw.indexOf('fe80:') === 0 || raw.indexOf('fc') === 0 || raw.indexOf('fd') === 0) return true;
+  return false;
+}
+
 export function publicHttpUrl(raw) {
   let url;
   try { url = new URL(String(raw || '')); } catch (e) { return null; }
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
   const host = url.hostname.toLowerCase();
   if (host === 'localhost' || host.endsWith('.local') || host === '0.0.0.0' || host === '::1') return null;
-  if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(host)) return null;
-  if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) return null;
+  if (ipIsPrivate(host)) return null;
   return url.toString();
+}
+
+export async function resolvePublicHttpUrl(raw, lookup, hops) {
+  const first = publicHttpUrl(raw);
+  if (!first) return null;
+  const url = new URL(first);
+  const host = url.hostname;
+  const literal = /^\d+\.\d+\.\d+\.\d+$/.test(host) || host.indexOf(':') >= 0;
+  if (!literal && typeof lookup === 'function') {
+    let records;
+    try { records = await lookup(host); } catch (e) { return null; }
+    const list = Array.isArray(records) ? records : [records];
+    if (!list.length) return null;
+    for (let i = 0; i < list.length; i += 1) {
+      const address = typeof list[i] === 'string' ? list[i] : list[i].address;
+      if (ipIsPrivate(address)) return null;
+    }
+  }
+  const cap = hops == null ? 3 : hops;
+  if (cap <= 0) return first;
+  return first;
 }

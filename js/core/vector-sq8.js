@@ -52,3 +52,25 @@ export function sqDist16(qdata, dim, index, q) {
   }
   return sum;
 }
+
+export function warmupVectorEngine() {
+  const q = new Int8Array(16);
+  const row = new Int8Array(16);
+  for (let i = 0; i < 16; i += 1) {
+    q[i] = i - 8;
+    row[i] = 8 - i;
+  }
+  let acc = 0;
+  for (let n = 0; n < 10; n += 1) acc += sqDist16(row, 16, 0, q);
+  return acc;
+}
+
+let warmed = false;
+export function scheduleVectorWarmup() {
+  if (warmed) return;
+  warmed = true;
+  const run = () => { warmupVectorEngine(); };
+  const idle = globalThis.requestIdleCallback;
+  if (typeof idle === 'function') idle(run);
+  else run();
+}

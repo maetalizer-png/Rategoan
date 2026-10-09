@@ -1,3 +1,33 @@
+# PRD Antarmuka 16.0 — catatan eksekusi
+
+Sumber resmi: dokumen Drive "PRD Antarmuka 16.0 — Sovereign Production Mastery, Deterministic Popover Geometry & Node 18 Universal Isomorphism (Definitive Master)".
+Baseline: `add244eff5f122d7c49346a5b461370d10a3bb66` (tag `15.0.0-PRODUCTION-GA`).
+
+Sasis 15.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak disunting. Bobot Whisper, Kokoro, dan model pihak ketiga tidak dipasang. Bukan HNSW produksi di IndexedDB. Cakupan baris tidak diukur.
+
+| DOD | Hasil |
+| --- | --- |
+| 16.01 | Impor statis `createRequire` dari `node:module`, lalu `createRequire(import.meta.url)('node:crypto')`. Peramban memakai peta impor ke stub sama-asal. Hash skrip peta ada di CSP |
+| 16.02 | Lembar lampiran Studio anak langsung `#studio-app`. Jangkar desktop pada 1024px, `position: fixed` penting, z-index 9999. Di bawah 1024 gaya inline dibersihkan |
+| 16.03 | Pemanasan kecil 10 kali jarak Int8 16 jalur saat modul dimuat, plus tiga lolos di dalam indeks. Bukan pemindaian 10.000 saat impor |
+| 16.04 | Kanal `rategoan-vfs-sync` dan pembanding jam vektor. Kunci VFS yang ada tidak diubah |
+| 16.05 | Halaman KV 16 token. Jejak Int8 terhadap float32 75% lebih kecil sebagai hitungan byte, bukan profil RAM peramban |
+| 16.06 | Diff muat ulang inkremental, `fullReload` tetap false, iframe tidak dimuat ulang |
+| 16.07 | URL blob yang tidak disentuh lebih dari 5 menit dicabut. Jam diuji suntik |
+| 16.08 | Kunci AES-GCM ruang kerja tetap PBKDF2, tidak terekstrak. Tidak diklaim bahwa seluruh muatan lokal terenkripsi |
+| 16.09 | Gerbang mutu adalah rangkaian unit. Cakupan 95% tidak dipalsukan |
+| 16.10 | Uji tetap satu berkas `antarmuka.test.mjs`. Bukti di `docs/evidence/antarmuka-16.0/` |
+| 16.11 | Kicker "Utama" dan "Ruang kerja" hilang. Navigasi enam butir celah 4px. Footer tanpa nama dan surel |
+| 16.12 | Jejak izin pindah ke kategori privasi, label "Log Jejak Izin", perisai, log tetap terlipat |
+| 16.13 | Nonce konfirmasi acak, 60 detik, sekali pakai, terikat nama alat dan muatan. Rahasia klien dihapus |
+| 16.14 | `ipIsPrivate` menutup IPv4 terselubung. Pengambilan halaman memeriksa DNS dan setiap pengalihan |
+| 16.15 | Batu nisan nonce menjadi cincin berbatas 1000, sapuan TTL tetap |
+| SEC-04 | Alur CI memakai `npm ci`, lalu `npm test` dan `npm run lint`, Node 22 |
+
+Pengukuran hidup diikat pada komit kode setelah gerbang hijau. Angka Node 18 tidak diklaim bila runtime itu tidak dijalankan.
+
+## Arsip terkonsolidasi 15.0
+
 # PRD Antarmuka 15.0 — catatan eksekusi
 
 Sumber resmi: dokumen Drive "PRD Antarmuka 15.0 — Sovereign Neo-Workstation, Unified Test Suite, Zero-Deadcode & Ergonomic Desktop Harmony" (diubah 2026-10-09T16:48:15Z).

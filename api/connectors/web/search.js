@@ -1,4 +1,5 @@
-import { allowOptions, publicHttpUrl, queryOf, readBody, sendJson } from '../../_http.js';
+import { allowOptions, queryOf, readBody, resolvePublicHttpUrl, sendJson } from '../../_http.js';
+import { lookup } from 'node:dns/promises';
 
 export const WEB_TOOLS = [
   { name: 'web_search', level: 1 },
@@ -79,12 +80,29 @@ export default async function handler(req, res) {
   const q = query.q || params.q || params.query || '';
   try {
     if (name === 'web_fetch_page') {
-      const url = publicHttpUrl(params.url || q);
+      const lookupHost = (host) => lookup(host, { all: true });
+      let url = await resolvePublicHttpUrl(params.url || q, lookupHost);
       if (!url) {
         sendJson(res, 400, { error: 'url_tidak_valid' });
         return;
       }
-      const page = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (compatible; Rategoan/1.0)' } });
+      let page;
+      let hops = 0;
+      while (hops < 3) {
+        page = await fetch(url, {
+          redirect: 'manual',
+          headers: { 'user-agent': 'Mozilla/5.0 (compatible; Rategoan/1.0)' },
+        });
+        if (page.status < 300 || page.status >= 400) break;
+        const next = page.headers.get('location');
+        const resolved = await resolvePublicHttpUrl(new URL(next || '', url).toString(), lookupHost);
+        if (!resolved) {
+          sendJson(res, 400, { error: 'url_tidak_valid' });
+          return;
+        }
+        url = resolved;
+        hops += 1;
+      }
       const text = stripPage(await page.text());
       sendJson(res, 200, { url, text, status: page.status });
       return;

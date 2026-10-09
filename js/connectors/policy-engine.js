@@ -29,6 +29,7 @@ export const NONCE_TTL = 300000;
 export const LOCK_MS = 120000;
 const nonceLedger = new Map();
 const nonceTomb = new Map();
+const tombRing = [];
 const lockUntil = new Map();
 const policyAudit = [];
 let clockOffset = 0;
@@ -86,15 +87,25 @@ export function claimNonce(nonce, now) {
   nonceLedger.forEach((at, item) => {
     if (t - at > NONCE_TTL) nonceLedger.delete(item);
   });
-  nonceTomb.forEach((at, item) => {
-    if (t - at > NONCE_TTL) nonceTomb.delete(item);
-  });
+  for (let i = tombRing.length - 1; i >= 0; i -= 1) {
+    const item = tombRing[i];
+    const at = nonceTomb.get(item);
+    if (at == null || t - at > NONCE_TTL) {
+      nonceTomb.delete(item);
+      tombRing.splice(i, 1);
+    }
+  }
   if (!key || nonceLedger.has(key) || nonceTomb.has(key)) return false;
   nonceLedger.set(key, t);
   while (nonceLedger.size > NONCE_CAP) {
     const oldest = nonceLedger.keys().next().value;
     nonceTomb.set(oldest, nonceLedger.get(oldest));
+    tombRing.push(oldest);
     nonceLedger.delete(oldest);
+    while (tombRing.length > NONCE_CAP) {
+      const drop = tombRing.shift();
+      nonceTomb.delete(drop);
+    }
   }
   return true;
 }

@@ -142,5 +142,20 @@ export const history = {
       this.query = e.target.value.trim().toLowerCase();
       this.render();
     });
+    const toggle = $('hist-toggle');
+    const panel = $('history-panel');
+    if (toggle && panel && !toggle.dataset.bound) {
+      toggle.dataset.bound = '1';
+      let open = true;
+      try { open = localStorage.getItem('rategoan_hist_open') !== '0'; } catch (err) { open = true; }
+      const paint = (next) => {
+        open = next;
+        panel.hidden = !open;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        try { localStorage.setItem('rategoan_hist_open', open ? '1' : '0'); } catch (err) { /* perangkat menolak penyimpanan */ }
+      };
+      paint(open);
+      toggle.addEventListener('click', () => paint(!open));
+    }
   },
 };
