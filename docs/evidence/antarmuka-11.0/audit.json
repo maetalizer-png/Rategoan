@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-10-09",
+  "parent": "9b014e020f51725ed9c4aba95d5c5a3911fdaaae",
+  "implementation": "c79b12a78e9cb060691348ac504a407070f068db",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit c79b12a78e9cb060691348ac504a407070f068db",
+    "digest": "ffc20e6309f967b7ebea65e5012fb06b82d352c1fdec0ea477234209ca2e1534",
+    "gpg": false
+  },
+  "tag": "11.0.0-PRODUCTION-GA",
+  "neuralCoreUntouched": [
+    "raget/raget-neural/core/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/core/llm-quantization.js"
+  ],
+  "checks": {
+    "lightBoot": "rgb(250, 250, 248)",
+    "topbar": "rgb(255, 255, 255)",
+    "sandbox": "allow-scripts allow-forms",
+    "allowSameOriginWarning": 0,
+    "studioPopoverTopPx": 61,
+    "studioPopoverOptions": 7,
+    "emptyChatPopoverTopPx": 125,
+    "emptyChatOptions": 10,
+    "activeChatGapPx": 10,
+    "activeChatSheetTopPx": 176,
+    "topbarBottomPx": 60,
+    "backdrop": "rgba(0, 0, 0, 0)",
+    "animation": "0.15s",
+    "canvasMaxWidthPx": 960,
+    "canvasPadding": "40px 48px 64px",
+    "galleryDeclared": "minmax(280px, 1fr)",
+    "galleryComputed": "422px 422px",
+    "previewHeightPx": 110,
+    "hubColumns": 2,
+    "mobileSheetPx": 263,
+    "messageChannelForm": true,
+    "playwright": "16/16",
+    "browser": "Chromium",
+    "unit": "87/87",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 332,
+    "tematikLines": 63,
+    "sejarahEntries": 21,
+    "ringkasBytes": 2090
+  }
+}
