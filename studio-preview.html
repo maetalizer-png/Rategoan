@@ -6,24 +6,19 @@
 </head>
 <body>
 <script>
-var host = '';
-var nonce = '';
-try {
-  var params = new URLSearchParams(location.search);
-  host = params.get('host') || '';
-  nonce = params.get('nonce') || '';
-} catch (e) { host = ''; }
+var sessionNonce = '';
 window.addEventListener('message', function (event) {
   if (event.source !== window.parent) return;
-  if (!host || event.origin !== host) return;
+  if (!event.origin) return;
   var data = event.data;
   if (!data || data.type !== 'INIT_PORT' || !event.ports || !event.ports[0]) return;
-  if (!nonce || data.nonce !== nonce) return;
+  if (!data.nonce) return;
+  sessionNonce = String(data.nonce);
   var port = event.ports[0];
   port.onmessage = function (e) {
     var msg = e.data || {};
     if (msg.type !== 'RENDER_PAYLOAD' || typeof msg.html !== 'string') return;
-    if (msg.nonce !== nonce) return;
+    if (!sessionNonce || msg.nonce !== sessionNonce) return;
     document.open();
     document.write(msg.html);
     document.close();

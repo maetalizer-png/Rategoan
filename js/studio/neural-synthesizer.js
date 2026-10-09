@@ -169,7 +169,7 @@ function renderFiles(ast, ask) {
     const id = plainActions[0];
     script = 'var btn=document.getElementById("' + id + '");if(btn){btn.onclick=function(){var s=document.getElementById("status");if(s)s.textContent="Berjalan";};}\n';
   }
-  const css = 'body{font-family:sans-serif;margin:24px;background:#fafaf8;color:#141619}h1{font-size:28px;margin:0 0 12px}button{background:' + color + ';color:#fff;border:0;padding:10px 14px;border-radius:8px}input{padding:8px;margin:0 8px 8px 0;border:1px solid #e8e8e3;border-radius:8px}ul{padding-left:18px}\n';
+  const css = 'body{font-family:sans-serif;margin:24px;background:#FAF9F6;color:#0F172A}h1{font-size:28px;margin:0 0 12px}button{background:' + color + ';color:#fff;border:0;padding:10px 14px;border-radius:8px}input{padding:8px;margin:0 8px 8px 0;border:1px solid #E2E8F0;border-radius:8px}ul{padding-left:18px}\n';
   return {
     'index.html': '<!doctype html><html><head><meta charset="utf-8"><title>' + title + '</title></head><body>' + parts.join('') + '</body></html>\n',
     'style.css': css,

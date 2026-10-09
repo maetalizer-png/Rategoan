@@ -365,7 +365,7 @@ export const SEJARAH = Object.freeze([
     }
   },
   {
-    "id": "ronde-v3-gabungan-final",
+    "id": "catatan-3-gabungan-final",
     "judul": "Ronde v3 Gabungan Final — Fix Chat, Devlog Total, K, Stub",
     "tanggal": "2026-08-15",
     "komit": [
@@ -405,7 +405,7 @@ export const SEJARAH = Object.freeze([
     }
   },
   {
-    "id": "ronde-v4-trisula-deca",
+    "id": "catatan-4-trisula-deca",
     "judul": "Ronde v4 - mesin matematika nyata, dukungan bilingual, knowledge graph, toleransi typo, A akurat",
     "tanggal": "2026-08-15",
     "komit": [
@@ -445,7 +445,7 @@ export const SEJARAH = Object.freeze([
     }
   },
   {
-    "id": "ronde-v5-trisula-deca-plus",
+    "id": "catatan-5-trisula-deca-plus",
     "judul": "Ronde v5 TRISULA DECA++ — 6 mesin baru (STEM, sosial, konteks, dunia, kerangka berpikir, tokoh)",
     "tanggal": "2026-08-16",
     "komit": [
@@ -494,7 +494,7 @@ export const SEJARAH = Object.freeze([
     }
   },
   {
-    "id": "ronde-v6-tata-tubuh-data-rasa-trisula",
+    "id": "catatan-6-tata-tubuh-data-rasa-trisula",
     "judul": "Ronde v6 — TATA TUBUH, TATA DATA, TATA RASA, + KELANJUTAN TRISULA",
     "tanggal": "2026-08-16",
     "komit": [
@@ -528,14 +528,14 @@ export const SEJARAH = Object.freeze([
     ],
     "kpi": {
       "bench": "841 -> 1063 (+222: +22 demo TATA RASA, +50 tokoh, +150 KELANJUTAN TRISULA), core-suite 100% di setiap Bagian dan verifikasi akhir",
-      "kv_baku": "ronde-v5-final Q=81 -> ronde-v6-final Q=82 (A=70 A_feedbackStore=belum ada rating n=0 default 70% K=68 U=100 D=100 V=100, n_K=57/60 - 12 kueri baku dirotasi mencerminkan kapasitas baru v6, 48 tetap untuk kontinuitas historis)",
+      "kv_baku": "catatan-5-final Q=81 -> catatan-6-final Q=82 (A=70 A_feedbackStore=belum ada rating n=0 default 70% K=68 U=100 D=100 V=100, n_K=57/60 - 12 kueri baku dirotasi mencerminkan kapasitas baru catatan-6, 48 tetap untuk kontinuitas historis)",
       "verifikasi_akhir": "23/23 checklist lolos (melebihi target 16+) mencakup seluruh 5 Bagian + smoke test Jalanin travel sub-app, 0 error konsol, 0 404 di server lokal (deployment Vercel tidak bisa diverifikasi langsung - URL produksi tidak diketahui sesi ini)",
       "data_tokoh": "145/400 entri (36.25%) - +100 ditambahkan bertahap tanpa fabrikasi, memperdalam entri ringkas lama (penjelajah, pemimpin, perempuan berpengaruh, sains, seni, teknologi) + tokoh terkenal lain berfakta mapan",
       "hari_internasional": "105 -> 146 (+41, jujur di bawah target ronde +95 - sebagian tanggal dari pencarian saling bertentangan/tergeser, sengaja tidak ditebak daripada berisiko salah tanggal)"
     }
   },
   {
-    "id": "ronde-v7-lanjutan-data-kecerdasan-ui",
+    "id": "catatan-7-lanjutan-data-kecerdasan-ui",
     "judul": "Ronde v7 — Lanjutan Data (Tokoh, Hari, Kuliner) + Kecerdasan (Emosi Positif, 5 Whys/SWOT) + Perbaikan UI",
     "tanggal": "2026-08-20",
     "komit": [
@@ -564,7 +564,7 @@ export const SEJARAH = Object.freeze([
     ],
     "kpi": {
       "bench": "1063 -> 1190 (+127: +52 tokoh, +12 hari internasional, +35 kuliner, +9 kontinuitas emosi, +19 5 Whys/SWOT), core-suite 100% di setiap Bagian dan verifikasi akhir",
-      "kv_baku": "ronde-v6-final Q=82 -> ronde-v7-final Q=82 (stabil, tidak regresi) - A=70 (A_feedbackStore belum ada rating n=0 default 70%) K=68 U=100 D=100 V=100, n_K=57/60",
+      "kv_baku": "catatan-6-final Q=82 -> catatan-7-final Q=82 (stabil, tidak regresi) - A=70 (A_feedbackStore belum ada rating n=0 default 70%) K=68 U=100 D=100 V=100, n_K=57/60",
       "verifikasi_akhir": "17/17 checklist lolos (melebihi target 16+) mencakup seluruh 5 Bagian + 4 perbaikan UI + smoke test Jalanin travel sub-app, 0 error konsol, 0 404 di server lokal",
       "deployment_vercel": "PERTAMA KALI diverifikasi langsung lewat Vercel MCP (menutup celah yang diakui di laporan Ronde v6): project rategoan (prj_e792RV9zig2hon42JXsgVeax5BIO) ditemukan, deployment production terkini (commit merge Bagian 5) berstatus READY, 0 runtime error 7 hari terakhir, HTML live rategoan.vercel.app diambil langsung dan dikonfirmasi memuat perbaikan UI (panel chip contoh sudah hilang)",
       "data_tokoh": "236/400 entri (59%) - +91 ditambahkan bertahap tanpa fabrikasi, 8 duplikat tak sengaja ditemukan & dihapus sebelum masuk",

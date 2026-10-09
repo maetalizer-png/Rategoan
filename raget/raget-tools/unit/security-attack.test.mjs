@@ -36,6 +36,11 @@ test('kunci AES ruang kerja tidak saling membuka', async () => {
   const plain = await box.subtle.decrypt({ name: 'AES-GCM', iv }, left, cipher);
   assert.equal(new TextDecoder().decode(plain), 'halo');
   await assert.rejects(box.subtle.decrypt({ name: 'AES-GCM', iv }, right, cipher));
+  const again = await getWorkspaceAesKey('ruang-a', 'rahasia-pengguna');
+  assert.equal(again, left);
+  const slash = await getWorkspaceAesKey('team/a', 'rahasia-pengguna');
+  const flat = await getWorkspaceAesKey('teama', 'rahasia-pengguna');
+  assert.notEqual(slash, flat);
 });
 
 test('jurnal VFS yang tertahan di PREPARE dipulihkan', () => {
@@ -84,7 +89,7 @@ test('lima belas skenario serangan tertutup', () => {
   for (let i = 0; i < NONCE_CAP; i += 1) claimNonce('nonce-' + i);
   scene('nonce masih menolak ulang', claimNonce('nonce-0') === false);
   scene('nonce lru menerima baru', claimNonce('nonce-baru') === true);
-  scene('nonce terbuang boleh kembali', claimNonce('nonce-0') === true);
+  scene('nonce terbuang tetap tertolak', claimNonce('nonce-0') === false);
   scene('path traversal', (() => { try { vfsPath('../etc/passwd'); return false; } catch (e) { return /terlarang/.test(e.message); } })());
   scene('null byte', (() => { try { vfsPath('/a/\0b'); return false; } catch (e) { return /null byte/.test(e.message); } })());
   scene('zip slip', (() => { try { vfsPath('arsip/../../rahasia'); return false; } catch (e) { return /terlarang/.test(e.message); } })());

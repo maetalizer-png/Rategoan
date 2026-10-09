@@ -1,5 +1,7 @@
 import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
+import { VAULT_KEYS, putRow, allRows } from '../../raget/raget-database/durable-store.js';
 import { getWebCrypto } from '../crypto/get-web-crypto.js';
+import { sha256Sync } from '../studio/vfs-git.js';
 import { auditEvent } from '../studio/telemetry.js';
 
 const KEY = 'rategoan_connectors_state';
@@ -112,6 +114,7 @@ const SALT_KEY = 'rategoan_vault_salt';
 const SECRET_KEY = 'rategoan_vault_secret';
 const ITERATIONS = 100000;
 const workspaceKeys = new Map();
+const saltMemo = new Map();
 
 function memoryBox() {
   if (typeof localStorage !== 'undefined') return localStorage;
@@ -196,13 +199,29 @@ async function writeCryptoKey(key) {
   });
 }
 
-export async function getWorkspaceAesKey(workspaceId, secret) {
-  const id = String(workspaceId || 'default').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 64) || 'default';
-  const alias = 'vault_key_' + id;
-  if (workspaceKeys.has(alias)) return workspaceKeys.get(alias);
-  const cryptoImpl = await getWebCrypto();
+async function vaultSalt(id, cryptoImpl) {
+  if (saltMemo.has(id)) return saltMemo.get(id);
+  const rows = await allRows(VAULT_KEYS);
+  const found = (rows || []).find((row) => row && row.id === id && row.salt);
+  if (found) {
+    const saved = fromB64(found.salt);
+    saltMemo.set(id, saved);
+    return saved;
+  }
   const salt = cryptoImpl.getRandomValues(new Uint8Array(16));
-  const secretBytes = new TextEncoder().encode(String(secret || ('rahasia-ruang:' + id)));
+  saltMemo.set(id, salt);
+  await putRow(VAULT_KEYS, { id, salt: b64(salt) });
+  return salt;
+}
+
+export async function getWorkspaceAesKey(workspaceId, secret) {
+  const raw = String(workspaceId || 'default');
+  const id = sha256Sync(raw);
+  if (workspaceKeys.has(id)) return workspaceKeys.get(id);
+  if (secret == null || secret === '') throw new Error('rahasia ruang kosong');
+  const cryptoImpl = await getWebCrypto();
+  const salt = await vaultSalt(id, cryptoImpl);
+  const secretBytes = new TextEncoder().encode(String(secret));
   const material = await cryptoImpl.subtle.importKey('raw', secretBytes, 'PBKDF2', false, ['deriveKey']);
   const key = await cryptoImpl.subtle.deriveKey(
     { name: 'PBKDF2', salt, iterations: ITERATIONS, hash: 'SHA-256' },
@@ -211,7 +230,7 @@ export async function getWorkspaceAesKey(workspaceId, secret) {
     false,
     ['encrypt', 'decrypt'],
   );
-  workspaceKeys.set(alias, key);
+  workspaceKeys.set(id, key);
   return key;
 }
 

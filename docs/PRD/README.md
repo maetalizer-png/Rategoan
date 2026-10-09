@@ -3,7 +3,7 @@
 Repositori ini dikelola secara ketat dengan pemisahan wilayah dokumentasi kanonikal:
 
 1. **Antarmuka, Casing & Mesin Aplikasi**:
-- `PRD-ANTARMUKA-14.0.md` — Cetak biru eksekusi aktif (Oktober 2026): kripto isomorfik, SQ8, dan jurnal terkunci.
+- `PRD-ANTARMUKA-15.0.md` — Cetak biru eksekusi aktif (Oktober 2026): kripto isomorfik, SQ8 stabil, nama semantik, dan meja kerja terang. PRD 11 sampai 14 terkonsolidasi di berkas yang sama.
 - Riwayat rilis antarmuka: `../HISTORY-ANTARMUKA.md`
 2. **Data, Rilis Korpus & Lisensi**:
 - `PRD-RELEASE.md` — Standar baku tata kelola rilis 3 tingkat (Data Baru, Penampungan, Rak K & R).

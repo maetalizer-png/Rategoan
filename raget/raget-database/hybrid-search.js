@@ -1,3 +1,5 @@
+import { quantizeAffine, sqDist16 } from '../../js/core/vector-sq8.js';
+
 function tokensOf(text) {
   return String(text || '').toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
 }
@@ -103,7 +105,13 @@ export function buildVectorIndex(rows) {
     }
     champions[i] = best;
   }
-  return { kind: 'hnsw', dim, count, data, qdata: quantizeBlock(data, count, dim), next, leaderNext, leaders, champions, span: SPAN, quant: 'int8' };
+  const built = { kind: 'hnsw', dim, count, data, qdata: quantizeAffine(data, count, dim), next, leaderNext, leaders, champions, span: SPAN, quant: 'int8' };
+  if (count > 0) {
+    searchSq8(built, rows[0], 1);
+    searchSq8(built, rows[count - 1], 1);
+    searchSq8(built, rows[0], 1);
+  }
+  return built;
 }
 
 export function searchKnn(index, vector, k) {
@@ -164,23 +172,7 @@ export function partitionIndex(index, shard) {
 }
 
 function quantizeBlock(data, count, dim) {
-  const qdata = new Int8Array(count * dim);
-  for (let i = 0; i < count; i += 1) {
-    const base = i * dim;
-    let max = 0;
-    for (let d = 0; d < dim; d += 1) {
-      const abs = Math.abs(data[base + d]);
-      if (abs > max) max = abs;
-    }
-    const scale = max === 0 ? 1 : 127 / max;
-    for (let d = 0; d < dim; d += 1) {
-      let value = Math.round(data[base + d] * scale);
-      if (value > 127) value = 127;
-      else if (value < -128) value = -128;
-      qdata[base + d] = value;
-    }
-  }
-  return qdata;
+  return quantizeAffine(data, count, dim);
 }
 
 export function quantizeQuery(vector) {
@@ -189,25 +181,7 @@ export function quantizeQuery(vector) {
 }
 
 function sqDist(qdata, dim, index, q) {
-  const base = index * dim;
-  let sum = 0;
-  let d = 0;
-  for (; d + 8 <= dim; d += 8) {
-    const a0 = qdata[base + d] - q[d];
-    const a1 = qdata[base + d + 1] - q[d + 1];
-    const a2 = qdata[base + d + 2] - q[d + 2];
-    const a3 = qdata[base + d + 3] - q[d + 3];
-    const a4 = qdata[base + d + 4] - q[d + 4];
-    const a5 = qdata[base + d + 5] - q[d + 5];
-    const a6 = qdata[base + d + 6] - q[d + 6];
-    const a7 = qdata[base + d + 7] - q[d + 7];
-    sum += a0 * a0 + a1 * a1 + a2 * a2 + a3 * a3 + a4 * a4 + a5 * a5 + a6 * a6 + a7 * a7;
-  }
-  for (; d < dim; d += 1) {
-    const diff = qdata[base + d] - q[d];
-    sum += diff * diff;
-  }
-  return sum;
+  return sqDist16(qdata, dim, index, q);
 }
 
 export function searchSq8(index, vector, k) {

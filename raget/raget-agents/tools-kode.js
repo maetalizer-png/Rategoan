@@ -1,7 +1,7 @@
 import { llmCodeParser } from '../raget-neural/llm-code-parser.js';
 import { syntaxValidator } from './syntax-validator.js';
 
-const PACK_URL = new URL('../raget-data/jsonl/kode/pack-v1.jsonl', import.meta.url);
+const PACK_URL = new URL('../raget-data/jsonl/kode/code-pack.jsonl', import.meta.url);
 
 let packCache = null;
 

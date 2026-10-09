@@ -29,18 +29,19 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --rg-bg: #fafaf8;
-  --rg-surface: #ffffff;
-  --rg-surface-2: #f3f1ea;
-  --rg-line: #e8e8e3;
-  --rg-line-accent: rgba(20, 22, 25, 0.28);
+  --rg-bg: #FAF9F6;
+  --rg-surface: #FFFFFF;
+  --rg-surface-2: #F8FAFC;
+  --rg-line: #E2E8F0;
+  --rg-line-accent: rgba(15, 23, 42, 0.28);
   --rg-accent: #1a4b8c;
   --rg-accent-ink: #ffffff;
   --rg-ring: rgba(26, 75, 140, 0.16);
-  --rg-text: #141619;
+  --rg-text: #0F172A;
   --rg-muted: #5b6673;
   --rg-danger: #d33131;
-  --rg-shadow: 0 1px 2px rgba(20, 20, 15, 0.06), 0 8px 20px -8px rgba(20, 20, 15, 0.12), 0 24px 48px -24px rgba(20, 20, 15, 0.16);
+  --rg-accent-subtle: #F1F5F9;
+  --rg-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 16px -4px rgba(0, 0, 0, 0.06);
 
   --rg-brand: #e69100;
   --rg-brand-strong: #b87400;
@@ -48,5 +49,5 @@
   --rg-brand-ring: rgba(230, 145, 0, 0.25);
   --rg-brand-glow: 0 6px 20px -8px rgba(230, 145, 0, 0.38);
 
-  --rg-bg-glass: rgba(255, 255, 255, 0.72);
+  --rg-bg-glass: rgba(255, 255, 255, 0.85);
 }

@@ -21,7 +21,7 @@ Penempatan data training mengikuti [docs/PRD/PRD-RELEASE.md](docs/PRD/PRD-RELEAS
 `K-dataset-Indonesian`, `R-dataset-english`. Angka rak ada di
 [docs/STATUS-KORPUS-LISENSI.md](docs/STATUS-KORPUS-LISENSI.md).
 Riwayat antarmuka: [docs/HISTORY-ANTARMUKA.md](docs/HISTORY-ANTARMUKA.md).
-Cetak biru aktif: [docs/PRD/PRD-ANTARMUKA-14.0.md](docs/PRD/PRD-ANTARMUKA-14.0.md).
+Cetak biru aktif: [docs/PRD/PRD-ANTARMUKA-15.0.md](docs/PRD/PRD-ANTARMUKA-15.0.md).
 
 Repo ini adalah **RATEGOAN**, kerangka chat inti dengan **Raget**, mesin
 balasan template/rule-based (bukan model bahasa besar).

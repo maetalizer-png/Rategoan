@@ -1,7 +1,7 @@
 // Verifikasi konsolidasi Ronde v3 (Fix Chat + Devlog Total + K + Stub):
 // 3 assert chat (1.1/1.2/1.3), 6 tool devlog + 2 guard anti-narsis, PDF
 // nyata ekstrak teks, nol emoji, nol error konsol.
-// Jalankan: node tools/verify-ronde-v3.mjs [base-url]
+// Jalankan: node tools/verify-build-pipeline.mjs [base-url]
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { readFileSync } from 'fs';
 

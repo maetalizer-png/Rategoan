@@ -1,5 +1,6 @@
 import { allowOptions, bearer, fillPath, forward, queryOf, readBody, sendJson, sendRpcError } from './_http.js';
 import { filterParams } from '../js/connectors/policy-engine.js';
+import { verifyConfirm } from '../js/connectors/confirm-mac.js';
 
 export async function dispatchTools(req, res, spec) {
   if (allowOptions(req, res)) return;
@@ -30,9 +31,16 @@ export async function dispatchTools(req, res, spec) {
     sendRpcError(res, 404, -32601, 'unknown_tool');
     return;
   }
-  if (tool.level === 3 && !req.headers['x-rategoan-confirm-nonce']) {
-    sendRpcError(res, 403, -32602, 'konfirmasi_diperlukan');
-    return;
+  if (tool.level === 3) {
+    const header = req.headers['x-rategoan-confirm-nonce'];
+    if (!header) {
+      sendRpcError(res, 403, -32602, 'konfirmasi_diperlukan');
+      return;
+    }
+    if (!verifyConfirm(header, tool.name || body.name, params)) {
+      sendRpcError(res, 403, -32602, 'konfirmasi_ditolak');
+      return;
+    }
   }
   const screened = filterParams(params);
   if (screened.banned.length) {
@@ -40,7 +48,7 @@ export async function dispatchTools(req, res, spec) {
     return;
   }
   if (spec.special) {
-    const handled = await spec.special(tool, params, token, res);
+    const handled = await spec.special(tool, screened.kept, token, res);
     if (handled) return;
   }
   const used = new Set();

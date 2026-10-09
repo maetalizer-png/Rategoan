@@ -1,6 +1,7 @@
 import { connectorState } from './connector-state.js';
 import { emitConnector } from './connector-events.js';
 import { isLocalTool, runLocalTool } from './local-tools.js';
+import { signConfirm } from './confirm-mac.js';
 
 const ROUTES = [
   ['drive_', '/api/connectors/drive', 'google_drive'],
@@ -100,9 +101,7 @@ export function mountToolCalls(container, tools) {
     run.onclick = async () => {
       status.textContent = 'Menjalankan…';
       run.disabled = true;
-      const nonce = level === 3
-        ? (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()))
-        : '';
+      const nonce = level === 3 ? signConfirm(tool.name, tool.parameters || {}) : '';
       try {
         const result = await runConnectorTool(tool.name, tool.parameters, nonce);
         status.textContent = summary(tool.name, result);

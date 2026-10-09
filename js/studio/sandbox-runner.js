@@ -131,7 +131,7 @@ export function mountPreview(frame, files, state) {
     frame.contentWindow.postMessage({ type: 'INIT_PORT', nonce }, opaqueOrigin, [channel.port2]);
   };
   frame.removeAttribute('srcdoc');
-  frame.src = 'studio-preview.html?host=' + encodeURIComponent(host) + '&nonce=' + encodeURIComponent(nonce) + '&run=' + Date.now();
+  frame.src = 'studio-preview.html?run=' + Date.now();
 }
 
 export function cycleSandboxPorts(times) {

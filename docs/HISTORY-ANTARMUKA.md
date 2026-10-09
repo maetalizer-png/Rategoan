@@ -14,5 +14,6 @@ Satu berkas ini menggantikan studi kasus dan PRD antarmuka yang sudah usang. Ang
 | 12.0 | Header kaca ponsel setinggi 60px tanpa celah gulir, sasis desktop tanpa track hantu, kanvas hidup, dan gerbang kebijakan tersaring |
 | 13.0 | Tab kanvas tidak bertumpuk, modal model transparan, penyimpanan rapi, namespace `window.Rategoan` |
 | 14.0 | Kripto isomorfik, pencarian vektor Int8, kunci monoton 120 detik, dan mutex jurnal antar-tab |
+| 15.0 | Satu berkas uji, kripto lewat createRequire, SQ8 dengan pemanasan, nama cache semantik, dan meja kerja terang |
 
-Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 14.
+Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 15.

@@ -1,8 +1,11 @@
-function nodeCrypto() {
+function loadNodeCrypto() {
+  if (typeof window !== 'undefined') return null;
   const proc = globalThis.process;
   if (!proc || typeof proc.getBuiltinModule !== 'function') return null;
   try {
-    return proc.getBuiltinModule('node:crypto');
+    const createRequire = proc.getBuiltinModule('node:module').createRequire;
+    if (typeof createRequire !== 'function') return null;
+    return createRequire(import.meta.url)('node:crypto');
   } catch (err) {
     return null;
   }
@@ -10,39 +13,49 @@ function nodeCrypto() {
 
 export function getSecureRandomBytesSync(len) {
   const n = Math.max(0, Number(len) || 0);
+  const node = loadNodeCrypto();
+  if (node && typeof node.randomFillSync === 'function') {
+    const buf = new Uint8Array(n);
+    node.randomFillSync(buf);
+    return buf;
+  }
   const web = globalThis.crypto;
   if (web && typeof web.getRandomValues === 'function') {
     const buf = new Uint8Array(n);
     web.getRandomValues(buf);
     return buf;
   }
-  const node = nodeCrypto();
-  if (!node) throw new Error('WebCrypto tidak tersedia');
-  return new Uint8Array(node.randomBytes(n));
+  if (node && typeof node.randomBytes === 'function') return new Uint8Array(node.randomBytes(n));
+  throw new Error('WebCrypto tidak tersedia');
 }
 
 export function getUniversalCryptoSync() {
+  const node = loadNodeCrypto();
+  if (node && node.webcrypto && node.webcrypto.subtle) {
+    const subtle = node.webcrypto.subtle;
+    const web = node.webcrypto;
+    return {
+      getRandomValues(buf) {
+        if (web && typeof web.getRandomValues === 'function') return web.getRandomValues(buf);
+        node.randomFillSync(buf);
+        return buf;
+      },
+      subtle,
+      randomUUID: typeof web.randomUUID === 'function' ? () => web.randomUUID() : undefined,
+    };
+  }
   const web = globalThis.crypto;
   if (web && typeof web.getRandomValues === 'function' && web.subtle) return web;
-  const node = nodeCrypto();
-  if (!node) throw new Error('WebCrypto tidak tersedia');
-  return {
-    getRandomValues(buf) {
-      buf.set(node.randomBytes(buf.length));
-      return buf;
-    },
-    subtle: web && web.subtle ? web.subtle : null,
-    randomUUID: node.randomUUID ? () => node.randomUUID() : undefined,
-  };
+  throw new Error('WebCrypto tidak tersedia');
 }
 
 export async function digestSha256(bytes) {
-  const web = globalThis.crypto;
-  if (web && web.subtle) {
-    const raw = await web.subtle.digest('SHA-256', bytes);
+  const box = getUniversalCryptoSync();
+  if (box.subtle) {
+    const raw = await box.subtle.digest('SHA-256', bytes);
     return Array.from(new Uint8Array(raw), (n) => n.toString(16).padStart(2, '0')).join('');
   }
-  const node = nodeCrypto();
+  const node = loadNodeCrypto();
   if (!node) throw new Error('WebCrypto tidak tersedia');
   return node.createHash('sha256').update(bytes).digest('hex');
 }

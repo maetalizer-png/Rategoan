@@ -24,13 +24,15 @@ function plainFiles(git) {
   return files;
 }
 
-function remember(row) {
+async function remember(row) {
   journal.set(row.id, row);
-  putRow(JOURNAL_STORE, {
+  const pending = putRow(JOURNAL_STORE, {
     id: row.id,
     status: row.status,
     files: row.files || null,
-  }).catch(() => {});
+  });
+  if (typeof indexedDB !== 'undefined') await pending;
+  return row.id;
 }
 
 export function readVfsJournal() {
@@ -113,7 +115,7 @@ export class VfsTransaction {
   async applyCommit(mutations) {
     if (!this.snapshot) this.begin();
     const txId = 'tx-' + Date.now().toString(36) + '-' + journal.size;
-    remember({
+    await remember({
       id: txId,
       status: 'PREPARE',
       snap: this.snapshot,
