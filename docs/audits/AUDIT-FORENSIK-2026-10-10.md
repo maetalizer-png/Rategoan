@@ -100,6 +100,15 @@ Workflow yang terlihat menjalankan unit test, lint, dan Playwright, tetapi pemer
 - Commit final kode yang saat ini diaudit: `5a7bfd0a2e98cab875456b953bfb54d73d30afa9`. Run GitHub Actions [38015930144](https://github.com/maetalizer-png/Rategoan/actions/runs/38015930144) berstatus **success** untuk kelima job: unit test Node 18/20/22, lint, dan Playwright. Log menunjukkan **LULUS 21/21**, konsol bersih (0 peringatan), dan artifact `playwright-screenshots` berhasil diunggah (ID `11656131578`).
 - Uji Playwright saat ini menjalankan server statis lokal pada runner. Belum ada klaim pengujian browser terhadap domain deployment produksi, audit penetrasi eksternal, atau uji hardware fisik.
 
+### F-11 — Endpoint pencarian web dapat dipakai tanpa autentikasi efektif
+**Severity:** sedang–tinggi untuk penyalahgunaan resource; dampak bergantung pada limit dan proteksi deployment.
+
+Handler `api/connectors/web/search.js` memproses pencarian DuckDuckGo dan `web_fetch_page` tanpa memanggil `bearer()` atau `dispatchTools()`. Endpoint katalog memang dapat dibuka publik, tetapi jalur pencarian/fetch juga tidak memeriksa token atau otorisasi. CORS allowlist bukan autentikasi: klien non-browser tetap dapat mengirim HTTP langsung. Karena itu, endpoint ini berpotensi menjadi proxy pencarian/fetch publik yang dapat menghabiskan kuota, CPU, dan concurrency serverless.
+
+**Catatan:** meminta header Bearer saja tidak cukup bila server hanya memeriksa bahwa nilainya ada; token harus diverifikasi sebagai kredensial yang benar. Menambahkan string token palsu sebagai “auth” akan memberi rasa aman yang keliru.
+
+**Rekomendasi:** terapkan proteksi di edge atau gateway (rate limit persisten, batas per-IP/per-session yang tidak mempercayai header kiriman klien, batas concurrency dan kuota), autentikasi server-side yang sungguh diverifikasi, serta alert atas lonjakan penggunaan. Pertahankan validasi SSRF dan batas respons saat menambahkan kontrol ini.
+
 ## Urutan remediasi
 
 1. **P0 / sebelum rilis:** pastikan seluruh job CI hijau pada commit yang sama; pastikan SSRF regression tests dan request body limit tests lulus pada Node 18/20/22.
