@@ -63,7 +63,7 @@ import { getSecureRandomBytesSync, getUniversalCryptoSync } from '../../../js/co
 import { MEMORY_BUDGET, withinBudget, packText, unpackText } from '../../../js/studio/memory-budget.js';
 import { mermaidToSvg, bindSheetChart, scaffoldProject, indexSymbols, parseImports, synthesizeTool, passAt1, iwaManifest, backupManifest, verifyBackupManifest, splitAxis, hotReloadPlan, hotReloadDiff, createWasmTerminal } from '../../../js/studio/canvas-tools.js';
 import { issueConfirmChallenge, verifyConfirm, CONFIRM_TTL_MS, CONFIRM_CAP, allowConfirmRate, __resetConfirmLedgerForTesting } from '../../../api/confirm-challenge.js';
-import { ipIsPrivate, resolvePublicHttpUrl, pinPublicHttp, rpcBodyOk, BODY_LIMIT, UPSTREAM_LIMIT } from '../../../api/_http.js';
+import { ipIsPrivate, resolvePublicHttpUrl, pinPublicHttp, rpcBodyOk, readBody, BODY_LIMIT, UPSTREAM_LIMIT } from '../../../api/_http.js';
 import { compareVectorClock, VFS_CHANNEL } from '../../../js/studio/vfs-sync.js';
 import { trackBlob, sweepBlobs } from '../../../js/studio/blob-gc.js';
 import { pageInt8, kvFootprint, PAGE_TOKENS } from '../../../js/core/kv-page.js';
@@ -1462,6 +1462,7 @@ test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
   assert.equal(rpcBodyOk({ name: 4 }), false);
   assert.equal(rpcBodyOk({ parameters: ['q'] }), false);
   assert.equal(BODY_LIMIT, 1048576);
+  await assert.rejects(readBody({ body: { payload: 'x'.repeat(BODY_LIMIT) } }), (err) => err.statusCode === 413);
   assert.equal(UPSTREAM_LIMIT, 2097152);
   const pin = await pinPublicHttp('https://contoh.test/a', async () => [{ address: '1.1.1.1' }]);
   assert.equal(pin.address, '1.1.1.1');
