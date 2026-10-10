@@ -566,6 +566,7 @@ body.is-generating #btn-voice-input { display: none !important; }
 .header-model-name { font-size: 15px; font-weight: 650; letter-spacing: -0.01em; white-space: nowrap; }
 #model-status, #model-status.active { display: none !important; }
 .model-solo { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1px solid var(--rg-line); border-radius: 14px; }
+.model-experimental { font-size: 11px; letter-spacing: 0.04em; color: var(--rg-muted); }
 .model-speed, .model-speed-label select {
   width: 100%;
   min-height: 44px;

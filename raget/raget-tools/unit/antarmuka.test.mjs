@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import { readFileSync, existsSync } from 'node:fs';
 import { performance } from 'node:perf_hooks';
 import { LLMAttention } from '../../raget-neural/llm-attention.js';
@@ -23,7 +24,7 @@ import { backupToDrive, checksumManifest } from '../../../js/studio/drive-backup
 import { hiddenOrder, scrubInjection } from '../../../js/chat/composer.js';
 import { synthesizeCode, parseIntentGraph, synthesizeAST, renderPartial, createStreamSynthesizer } from '../../../js/studio/neural-synthesizer.js';
 import { deriveVaultKey } from '../../../js/connectors/connector-state.js';
-import { collectPreview, previewSrcdoc, cycleSandboxPorts, describePick, groundScreenshot, nullOriginHandshake } from '../../../js/studio/sandbox-runner.js';
+import { collectPreview, previewSrcdoc, cycleSandboxPorts, describePick, groundScreenshot, nullOriginHandshake, acceptStudioMessage, zipStore } from '../../../js/studio/sandbox-runner.js';
 import { getWebCrypto } from '../../../js/crypto/get-web-crypto.js';
 import { recordTelemetry, publicMetrics, auditEvent } from '../../../js/studio/telemetry.js';
 import { positionDesktopPopover } from '../../../shared/popover.js';
@@ -38,7 +39,7 @@ import { verifyClaims, numericConsistent, checkClaim } from '../../raget-templat
 import { humanevalPassAt1 } from '../benchmark/browser-humaneval.mjs';
 import { nextBatch, thermalGovernor } from '../../raget-neural/runtime/thermal-governor.js';
 import { signPlugin, verifyPlugin } from '../../../js/connectors/plugin-verifier.js';
-import { createVoicePipeline } from '../../../js/voice/voice-pipeline.js';
+import { createVoicePipeline, melBins, bargeIn, voiceRoute, VOICE_CACHE } from '../../../js/voice/voice-pipeline.js';
 import { applyLora } from '../../raget-neural/runtime/lora-adapter.js';
 import { scaffoldProject as scaffoldTemplate } from '../../../js/studio/template-generator.js';
 import { renderMermaid } from '../../../js/artifacts/mermaid-renderer.js';
@@ -61,13 +62,16 @@ import { draftContract } from '../../raget-neural/runtime/speculative-engine.js'
 import { getSecureRandomBytesSync, getUniversalCryptoSync } from '../../../js/core/isomorphic-crypto.js';
 import { MEMORY_BUDGET, withinBudget, packText, unpackText } from '../../../js/studio/memory-budget.js';
 import { mermaidToSvg, bindSheetChart, scaffoldProject, indexSymbols, parseImports, synthesizeTool, passAt1, iwaManifest, backupManifest, verifyBackupManifest, splitAxis, hotReloadPlan, hotReloadDiff, createWasmTerminal } from '../../../js/studio/canvas-tools.js';
-import { issueConfirmChallenge, verifyConfirm, CONFIRM_TTL_MS, __resetConfirmLedgerForTesting } from '../../../api/confirm-challenge.js';
-import { ipIsPrivate, resolvePublicHttpUrl } from '../../../api/_http.js';
+import { issueConfirmChallenge, verifyConfirm, CONFIRM_TTL_MS, CONFIRM_CAP, allowConfirmRate, __resetConfirmLedgerForTesting } from '../../../api/confirm-challenge.js';
+import { ipIsPrivate, resolvePublicHttpUrl, pinPublicHttp, rpcBodyOk, BODY_LIMIT, UPSTREAM_LIMIT } from '../../../api/_http.js';
 import { compareVectorClock, VFS_CHANNEL } from '../../../js/studio/vfs-sync.js';
 import { trackBlob, sweepBlobs } from '../../../js/studio/blob-gc.js';
 import { pageInt8, kvFootprint, PAGE_TOKENS } from '../../../js/core/kv-page.js';
 import { shouldPaint, FRAME_MS } from '../../../js/core/frame-throttle.js';
 import { warmupVectorEngine } from '../../../js/core/vector-sq8.js';
+import { buildLayeredGraph, searchLayeredGraph, syntheticInt8, shardGraph, recallAtK, ndcgAtK, releaseGraph, HNSW_SHARD } from '../../../js/core/hnsw-graph.js';
+import { gcWorktree, WORKTREE_BUDGET } from '../../../js/studio/vfs-gc.js';
+import { crdtMerge } from '../../../js/studio/crdt-lite.js';
 
 const root = new URL('../../../', import.meta.url);
 function read(rel) { return readFileSync(new URL(rel, root), 'utf8'); }
@@ -777,8 +781,9 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-13.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-14.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-15.0.md'), true);
-  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-16.0.md'), false);
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-16\.0\.md/);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-16.0.md'), true);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-17.0.md'), false);
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-17\.0\.md/);
 });
 
 test('DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi', () => {
@@ -1342,9 +1347,10 @@ test('DOD-14.09 namespace, kanvas, dan jejak izin', async () => {
   assert.equal(planHeartbeat('rahasia', 'rahasia', 'ws://127.0.0.1:9/mcp').intervalMs, 15000);
 });
 
-test('DOD-14.10 dokumen aktif menunjuk 16.0 dan sejarah 13 tetap ada', () => {
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-16\.0\.md/);
-  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /16\.0/);
+test('DOD-14.10 dokumen aktif menunjuk 17.0 dan sejarah 13 tetap ada', () => {
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-17\.0\.md/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /17\.0/);
+  assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('16.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('15.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('14.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('13.0'), true);
@@ -1361,22 +1367,21 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(cryptoSrc.includes("getBuiltinModule('node:crypto')"), false);
   assert.match(cryptoSrc, /from 'node:module'/);
   const box = getUniversalCryptoSync();
-  const createRequire = process.getBuiltinModule('node:module').createRequire;
   const node = createRequire(import.meta.url)('node:crypto');
   assert.equal(box.subtle, node.webcrypto.subtle);
   assert.equal(typeof box.subtle.digest, 'function');
   const banned = ['rategoan-model-' + 'v5', 'rategoan-neural-' + 'v4', 'pack-' + 'v1.jsonl', 'verify-' + 'ronde-' + 'v3', 'ronde-' + 'v3', 'ronde-' + 'v4', 'ronde-' + 'v5', 'ronde-' + 'v6', 'ronde-' + 'v7'];
-  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-16.0.md');
+  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-17.0.md');
   banned.forEach((word) => assert.equal(scan.includes(word), false, word));
   assert.equal(existsSync(new URL('raget/raget-data/jsonl/kode/code-pack.jsonl', root)), true);
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif/verify-build-pipeline.mjs', root)), true);
   __resetConfirmLedgerForTesting();
-  const nonce = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000);
-  assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000), true);
-  assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000), false);
-  assert.equal(verifyConfirm('ada', 'github_commit_changes', { message: 'halo' }, 1000), false);
-  const again = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000);
-  assert.equal(verifyConfirm(again, 'github_commit_changes', { message: 'lain' }, 1000), false);
+  const nonce = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000, 'tok-uji');
+  assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000, 'tok-uji'), true);
+  assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000, 'tok-uji'), false);
+  assert.equal(verifyConfirm('ada', 'github_commit_changes', { message: 'halo' }, 1000, 'tok-uji'), false);
+  const again = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000, 'tok-uji');
+  assert.equal(verifyConfirm(again, 'github_commit_changes', { message: 'lain' }, 1000, 'tok-uji'), false);
   assert.equal(read('js/connectors/confirm-mac.js').includes('rategoan-confirm'), false);
   assert.equal(CONFIRM_TTL_MS, 60000);
   const { signPlugin, verifyPlugin } = await import('../../../js/connectors/plugin-verifier.js');
@@ -1424,5 +1429,82 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(read('index.html').includes('>Utama<'), false);
   assert.match(read('.github/workflows/lint.yml'), /npm ci/);
   assert.match(read('.github/workflows/lint.yml'), /npm test/);
-  assert.match(read('package.json'), /16\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /17\.0\.0-PRODUCTION-GA/);
+});
+
+test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
+  assert.equal(read('raget/raget-tools/unit/antarmuka.test.mjs').includes('process.' + 'getBuiltinModule'), false);
+  assert.match(read('js/history/history.js'), /rategoan_hist_open/);
+  assert.match(read('js/state/engine-preference.js'), /'template'/);
+  assert.equal(issueConfirmChallenge('alat', { q: 1 }, 50, ''), '');
+  const milik = issueConfirmChallenge('alat', { q: 1 }, 50, 'sesi-a');
+  assert.equal(verifyConfirm(milik, 'alat', { q: 1 }, 50, 'sesi-b'), false);
+  const ulang = issueConfirmChallenge('alat', { q: 1 }, 50, 'sesi-a');
+  assert.equal(verifyConfirm(ulang, 'alat', { q: 1 }, 50, 'sesi-a'), true);
+  assert.equal(verifyConfirm(ulang, 'alat', { q: 1 }, 50, 'sesi-a'), false);
+  __resetConfirmLedgerForTesting();
+  const tertua = issueConfirmChallenge('t', { i: 0 }, 80, 's');
+  for (let i = 1; i < CONFIRM_CAP; i += 1) issueConfirmChallenge('t', { i }, 80, 's');
+  const lebih = issueConfirmChallenge('t', { i: CONFIRM_CAP }, 80, 's');
+  assert.equal(verifyConfirm(tertua, 't', { i: 0 }, 80, 's'), false);
+  assert.equal(verifyConfirm(lebih, 't', { i: CONFIRM_CAP }, 80, 's'), true);
+  __resetConfirmLedgerForTesting();
+  let lolos = true;
+  for (let i = 0; i < 30; i += 1) lolos = allowConfirmRate('203.0.113.8', 90) && lolos;
+  assert.equal(lolos, true);
+  assert.equal(allowConfirmRate('203.0.113.8', 90), false);
+  assert.equal(allowConfirmRate('203.0.113.8', 90 + 60000), true);
+  assert.equal(rpcBodyOk({ name: 'web_search', parameters: { q: 'jakarta' } }), true);
+  assert.equal(rpcBodyOk({ jsonrpc: '1.0', name: 'web_search' }), false);
+  assert.equal(rpcBodyOk({ name: 4 }), false);
+  assert.equal(rpcBodyOk({ parameters: ['q'] }), false);
+  assert.equal(BODY_LIMIT, 1048576);
+  assert.equal(UPSTREAM_LIMIT, 2097152);
+  const pin = await pinPublicHttp('https://contoh.test/a', async () => [{ address: '1.1.1.1' }]);
+  assert.equal(pin.address, '1.1.1.1');
+  assert.equal(pin.host, 'contoh.test');
+  assert.equal(await pinPublicHttp('https://dalam.test/a', async () => [{ address: '10.1.1.1' }]), null);
+  assert.equal(await pinPublicHttp('https://lambat.test/a', () => new Promise(() => {}), 20), null);
+  assert.equal(acceptStudioMessage({ origin: 'null', source: 1, data: { nonce: 'ab' } }, 'null', 1, 'ab'), true);
+  assert.equal(acceptStudioMessage({ origin: 'null', source: 1, data: { nonce: 'zz' } }, 'null', 1, 'ab'), false);
+  const packed = zipStore({ 'catatan.txt': 'halo' });
+  assert.equal(packed[0], 0x50);
+  assert.equal(packed[1], 0x4b);
+  assert.match(read('vault/code/js-sandbox.js'), /SANDBOX_WATCH_MS = 2000/);
+  assert.match(read('vault/code/js-sandbox.js'), /Object\.freeze\(Object\.prototype\)/);
+  assert.match(read('js/studio/vfs-transaction.js'), /await remember/);
+  assert.equal(voiceRoute(false).engine, 'web-speech');
+  assert.equal(voiceRoute(false).weights, false);
+  assert.equal(voiceRoute(true).cache, VOICE_CACHE);
+  assert.equal(melBins(new Float32Array(160), 80).length, 80);
+  const tBarge = performance.now();
+  assert.equal(bargeIn(0.2, 0.02), true);
+  assert.equal(bargeIn(0.001, 0.02), false);
+  assert.equal(performance.now() - tBarge < 150, true);
+  const kecil = syntheticInt8(240, 16, 4);
+  kecil.set(kecil.subarray(0, 16), 239 * 16);
+  const graf = buildLayeredGraph(kecil, 240, 16, 4);
+  const dekat = searchLayeredGraph(graf, Int8Array.from(kecil.subarray(0, 16)), 5).map((row) => row.id);
+  assert.equal(recallAtK(dekat, [0, 239], 5) > 0.85, true);
+  assert.equal(ndcgAtK(dekat, { 0: 3, 239: 3 }, 5) > 0.8, true);
+  assert.equal(shardGraph(graf, HNSW_SHARD).every((part) => part.count <= 500 && part.store === 'hnsw_nodes'), true);
+  releaseGraph(graf);
+  const besar = syntheticInt8(10000, 16, 11);
+  besar.set(besar.subarray(0, 16), 9999 * 16);
+  const indeks = buildLayeredGraph(besar, 10000, 16, 11);
+  const t0 = performance.now();
+  const puncak = searchLayeredGraph(indeks, Int8Array.from(besar.subarray(0, 16)), 5);
+  const ms = performance.now() - t0;
+  assert.equal(ms < 5, true);
+  assert.equal(puncak.some((row) => row.distance === 0), true);
+  releaseGraph(indeks);
+  const rapat = gcWorktree({ a: 'x'.repeat(90), b: 'y'.repeat(40) }, 80);
+  assert.equal(rapat.bytes <= 80, true);
+  assert.equal(WORKTREE_BUDGET, 30 * 1024 * 1024);
+  const gabung = crdtMerge(
+    { judul: { value: 'lama', clock: 1, replica: 'a' } },
+    { judul: { value: 'baru', clock: 2, replica: 'b' } },
+  );
+  assert.equal(gabung.judul.value, 'baru');
+  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-17/);
 });

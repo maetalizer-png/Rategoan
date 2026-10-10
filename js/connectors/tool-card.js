@@ -101,7 +101,9 @@ export function mountToolCalls(container, tools) {
     run.onclick = async () => {
       status.textContent = 'Menjalankan…';
       run.disabled = true;
-      const nonce = level === 3 ? await requestConfirmNonce(tool.name, tool.parameters || {}) : '';
+      const route = toolRoute(tool.name);
+      const token = route && route.service !== 'web_search_reader' ? connectorState.token(route.service) : '';
+      const nonce = level === 3 ? await requestConfirmNonce(tool.name, tool.parameters || {}, token) : '';
       try {
         const result = await runConnectorTool(tool.name, tool.parameters, nonce);
         status.textContent = summary(tool.name, result);

@@ -6,10 +6,12 @@ export function canonicalPayload(value) {
   return JSON.stringify(value == null ? null : value);
 }
 
-export async function requestConfirmNonce(tool, params) {
+export async function requestConfirmNonce(tool, params, token) {
+  const headers = { 'content-type': 'application/json' };
+  if (token) headers.authorization = 'Bearer ' + token;
   const res = await fetch('/api/confirm-challenge', {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers,
     body: JSON.stringify({ tool: String(tool || ''), parameters: params || {} }),
   });
   if (!res.ok) return '';

@@ -1,9 +1,10 @@
 import { createRequire } from 'node:module';
 
 function loadNodeCrypto() {
-  if (typeof window !== 'undefined') return null;
   try {
-    return createRequire(import.meta.url)('node:crypto');
+    const node = createRequire(import.meta.url)('node:crypto');
+    if (!node || typeof node.randomFillSync !== 'function') return null;
+    return node;
   } catch (err) {
     return null;
   }

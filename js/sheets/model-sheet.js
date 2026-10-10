@@ -56,7 +56,11 @@ function render() {
   card.className = 'model-solo';
   const name = document.createElement('strong');
   name.textContent = 'Raget 1.0';
+  const badge = document.createElement('span');
+  badge.className = 'model-experimental';
+  badge.textContent = 'Eksperimental';
   card.appendChild(name);
+  card.appendChild(badge);
   const speed = document.createElement('button');
   speed.type = 'button';
   speed.className = 'model-speed';

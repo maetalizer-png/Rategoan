@@ -43,9 +43,10 @@ export function healScript(code, error) {
   return src.replace(new RegExp('\\b' + bad + '\\b', 'g'), hit);
 }
 
-export function acceptStudioMessage(event, expectedOrigin, expectedSource) {
+export function acceptStudioMessage(event, expectedOrigin, expectedSource, expectedNonce) {
   if (!event || !expectedOrigin) return false;
   if (expectedSource && event.source !== expectedSource) return false;
+  if (expectedNonce && (!event.data || event.data.nonce !== expectedNonce)) return false;
   return event.origin === expectedOrigin;
 }
 

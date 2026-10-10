@@ -1,3 +1,45 @@
+# PRD Antarmuka 17.0 — catatan eksekusi
+
+Sumber resmi: dokumen Drive "PRD Antarmuka 17.0 — Universal Node 18/22 Parity, Physical IndexedDB HNSW Partitioning & Whisper WebGPU Voice Engine (Definitive Master)" (diubah 2026-10-10T00:52:16Z).
+Baseline: `de7675ca5c2447d15a1425650d8caf41607ee10f` (bukti `dae091ff81db6fb4bc8cf2bdbe41d48774470fd6`, tag `16.0.0-PRODUCTION-GA`).
+
+Sasis 16.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak disunting. Bobot Whisper, Kokoro, dan ONNX tidak diunduh. Bukan mesin HNSW produksi di IndexedDB. Cakupan baris tidak diukur.
+
+| DOD | Hasil |
+| --- | --- |
+| 17.01 | Uji kanonik memakai `import { createRequire } from 'node:module'`, tanpa `process.getBuiltinModule`. Node 18 dicoba bila biner ada; jika tidak, yang dijalankan hanya Node 22 |
+| 17.02 | Alur CI menjalankan `npm test` pada Node 18, 20, dan 22. Lint ESLint 10 tetap di Node 22 karena mesinnya tidak mendukung Node 18 |
+| 17.03 | `npm run lint` harus 0/0. Jumlah berkas sintaks adalah yang terhitung, bukan angka 378 yang dikunci di naskah |
+| 17.04 | `shardGraph` memotong simpul menjadi blok paling banyak 500 untuk toko `hnsw_nodes`. Ini deskriptor partisi, bukan profil DevTools |
+| 17.05 | Pencarian graf berlapis pada 10.000 vektor Int8 diukur di bawah 5 ms. Pembangunan indeks tidak masuk jam itu |
+| 17.06 | Recall@5 dan NDCG@5 pada vektor sintetis yang ditanam, bukan korpus IR eksternal |
+| 17.07 | Label Whisper tetap tanpa bobot. Berkas ONNX 39 MB tidak dipasang |
+| 17.08 | Nama cache `rategoan-voice-cache` disiapkan. Tidak ada byte model yang ditulis |
+| 17.09 | `melBins` 80 saluran adalah energi log pada bingkai pendek, bukan AudioWorklet yang diukur di peramban |
+| 17.10 | `bargeIn` adalah pembanding energi. Ambang 150 ms diuji pada fungsi itu, bukan pada mikrofon |
+| 17.11 | Tanpa WebGPU, jalur suara jatuh ke `web-speech` |
+| 17.12 | Kunci `navigator.locks` dan kanal `rategoan-vfs-sync` dari rilis sebelumnya tetap |
+| 17.13 | Status `COMMITTED` dan `ROLLED_BACK` menunggu `remember` sebelum selesai |
+| 17.14 | `gcWorktree` memangkas teks sampai di bawah anggaran. Bukan profil heap |
+| 17.15 | Nonce konfirmasi menolak sesi kosong, mengikat bearer, dan HMAC ada di server saja |
+| 17.16 | Ledger konfirmasi berbatas 1000. Lebih dari 30 permintaan per menit dari kunci yang sama ditolak |
+| 17.17 | Pengambilan halaman mengunci IP hasil DNS lewat `lookup` soket. Pengalihan diperiksa ulang |
+| 17.18 | Pengawas worker 2000 ms dan `Object.freeze(Object.prototype)` hanya di dalam worker |
+| 17.19 | Pesan pratinjau menolak nonce yang tidak cocok bila nonce diharapkan. Asal `null` tetap |
+| 17.20 | Badan permintaan 1 MB, respons hulu 2 MB |
+| 17.21 | Skor retrieval di atas adalah fixture sintetis. Tidak diklaim pada korpus dunia nyata |
+| 17.22 | Playwright tetap gerbang. Naskah CI menjalankan `studi-kasus-17.mjs` |
+| 17.23 | Bukti di `docs/evidence/antarmuka-17.0/` pada komit bukti, bukan di komit kode |
+
+Pengukuran hidup diikat pada komit kode. Angka final dan segel ditulis saat bukti direkam.
+
+- Mesin bawaan tetap template. Lencana "Eksperimental" ada pada kartu model.
+- Akordeon riwayat memakai `rategoan_hist_open`, terbuka bila kunci belum ada.
+- Empat belas ekspor mati dan penghematan 8,4 KB tidak dihapus dan tidak diklaim.
+- Label Whisper/Kokoro tanpa bobot. Tidak ada model pihak ketiga.
+
+## Arsip terkonsolidasi 16.0
+
 # PRD Antarmuka 16.0 — catatan eksekusi
 
 Sumber resmi: dokumen Drive "PRD Antarmuka 16.0 — Sovereign Production Mastery, Deterministic Popover Geometry & Node 18 Universal Isomorphism (Definitive Master)".

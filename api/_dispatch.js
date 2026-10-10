@@ -1,4 +1,4 @@
-import { allowOptions, bearer, fillPath, forward, queryOf, readBody, sendJson, sendRpcError } from './_http.js';
+import { allowOptions, bearer, fillPath, forward, queryOf, readBody, rpcBodyOk, sendJson, sendRpcError } from './_http.js';
 import { filterParams } from '../js/connectors/policy-engine.js';
 import { verifyConfirm } from './confirm-challenge.js';
 
@@ -26,6 +26,10 @@ export async function dispatchTools(req, res, spec) {
     return;
   }
   const params = body.parameters || {};
+  if (req.method !== 'GET' && !rpcBodyOk(body)) {
+    sendRpcError(res, 400, -32600, 'invalid_request');
+    return;
+  }
   const tool = spec.tools.find((item) => item.name === body.name);
   if (!tool) {
     sendRpcError(res, 404, -32601, 'unknown_tool');
@@ -37,7 +41,7 @@ export async function dispatchTools(req, res, spec) {
       sendRpcError(res, 403, -32602, 'konfirmasi_diperlukan');
       return;
     }
-    if (!verifyConfirm(header, tool.name || body.name, params)) {
+    if (!verifyConfirm(header, tool.name || body.name, params, undefined, token)) {
       sendRpcError(res, 403, -32602, 'konfirmasi_ditolak');
       return;
     }

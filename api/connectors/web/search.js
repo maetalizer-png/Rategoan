@@ -1,4 +1,4 @@
-import { allowOptions, queryOf, readBody, resolvePublicHttpUrl, sendJson } from '../../_http.js';
+import { allowOptions, fetchPinned, pinPublicHttp, queryOf, readBody, sendJson } from '../../_http.js';
 import { lookup } from 'node:dns/promises';
 
 export const WEB_TOOLS = [
@@ -81,30 +81,27 @@ export default async function handler(req, res) {
   try {
     if (name === 'web_fetch_page') {
       const lookupHost = (host) => lookup(host, { all: true });
-      let url = await resolvePublicHttpUrl(params.url || q, lookupHost);
-      if (!url) {
+      let pin = await pinPublicHttp(params.url || q, lookupHost);
+      if (!pin) {
         sendJson(res, 400, { error: 'url_tidak_valid' });
         return;
       }
       let page;
       let hops = 0;
       while (hops < 3) {
-        page = await fetch(url, {
-          redirect: 'manual',
-          headers: { 'user-agent': 'Mozilla/5.0 (compatible; Rategoan/1.0)' },
-        });
+        page = await fetchPinned(pin, { maxBytes: 2097152 });
         if (page.status < 300 || page.status >= 400) break;
         const next = page.headers.get('location');
-        const resolved = await resolvePublicHttpUrl(new URL(next || '', url).toString(), lookupHost);
+        const resolved = await pinPublicHttp(new URL(next || '', pin.href).toString(), lookupHost);
         if (!resolved) {
           sendJson(res, 400, { error: 'url_tidak_valid' });
           return;
         }
-        url = resolved;
+        pin = resolved;
         hops += 1;
       }
       const text = stripPage(await page.text());
-      sendJson(res, 200, { url, text, status: page.status });
+      sendJson(res, 200, { url: pin.href, text, status: page.status });
       return;
     }
     let searchQuery = q;

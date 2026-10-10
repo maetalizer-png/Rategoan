@@ -1,4 +1,4 @@
-const TIMEOUT_MS = 1200;
+export const SANDBOX_WATCH_MS = 2000;
 
 function workerSrc() {
   return (
@@ -18,7 +18,7 @@ function workerSrc() {
     '    self.postMessage({ ok: false, logs: logs, error: e && e.message ? e.message : String(e) });' +
     '  }' +
     '};' +
-    'try{Object.freeze(Object.getPrototypeOf(self));}catch(e){}'
+    'try{Object.freeze(Object.prototype);}catch(e){}'
   );
 }
 
@@ -35,8 +35,8 @@ function run(code) {
       done = true;
       worker.terminate();
       URL.revokeObjectURL(url);
-      resolve({ ok: false, error: 'Timeout ' + TIMEOUT_MS + ' ms.' });
-    }, TIMEOUT_MS);
+      resolve({ ok: false, error: 'Timeout ' + SANDBOX_WATCH_MS + ' ms.' });
+    }, SANDBOX_WATCH_MS);
     worker.onmessage = (ev) => {
       if (done) return;
       done = true;

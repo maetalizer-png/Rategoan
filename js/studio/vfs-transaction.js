@@ -141,7 +141,7 @@ export class VfsTransaction {
       const row = journal.get(txId);
       if (row) {
         row.status = 'COMMITTED';
-        remember(row);
+        await remember(row);
       }
       writeAutosave('aktif', this.git.snapshot());
       return commitId;
@@ -151,7 +151,7 @@ export class VfsTransaction {
       const row = journal.get(txId);
       if (row) {
         row.status = 'ROLLED_BACK';
-        remember(row);
+        await remember(row);
       }
       if (this.vfsSnap && this.vfs && typeof this.vfs.reset === 'function') {
         this.vfs.reset({});
