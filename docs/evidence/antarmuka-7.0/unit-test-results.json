@@ -1,7 +1,0 @@
-{
-  "command": "npm test",
-  "pass": 45,
-  "fail": 0,
-  "total": 45,
-  "antarmuka7": "5/5"
-}

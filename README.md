@@ -20,8 +20,8 @@ Penempatan data training mengikuti [docs/PRD/PRD-RELEASE.md](docs/PRD/PRD-RELEAS
 `data-baru-English`, `penampungan-Indonesian`, `penampungan-English`,
 `K-dataset-Indonesian`, `R-dataset-english`. Angka rak ada di
 [docs/STATUS-KORPUS-LISENSI.md](docs/STATUS-KORPUS-LISENSI.md).
-Riwayat antarmuka: [docs/HISTORY-ANTARMUKA.md](docs/HISTORY-ANTARMUKA.md).
-Cetak biru aktif: [docs/PRD/PRD-ANTARMUKA-20.0.md](docs/PRD/PRD-ANTARMUKA-20.0.md).
+Ledger korpus: [docs/STATUS-KORPUS-LISENSI.md](docs/STATUS-KORPUS-LISENSI.md).
+Jalur jawaban chat memakai adapter neural. Checkpoint Safetensors tidak dibundel di git.
 
 Repo ini adalah **RATEGOAN**, kerangka chat inti dengan **Raget**, mesin
 balasan template/rule-based (bukan model bahasa besar).
@@ -88,8 +88,8 @@ js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
   raget-agents/                   router intent + orkestrasi tool + mesin khusus + kontrak/router adapter otak
-  raget-template/                 otak rule-based/template, default aplikasi (llm-engine.js, fuzzy-smalltalk.js)
-  raget-neural/                   otak neural RATEGOAN sendiri, aktif tapi belum koheren (transformer JS murni + neural-provider.js)
+  raget-template/                 mesin template tetap ada di disk, bukan jalur chat
+  raget-neural/                   adapter neural. Checkpoint Safetensors tidak dibundel di git
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian BM25 satu pintu lintas sumber
@@ -97,12 +97,11 @@ raget/                            induk seluruh otak AI Raget
   raget-devlog/                   log pengembangan & laporan training (termasuk neural/)
   raget-tools/                    skrip verifikasi: bench runner, pengukuran kualitas, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-docs/                             struktur data, lisensi korpus, dan peta arsitektur (lihat docs/ARSITEKTUR.md)
+docs/                             ledger lisensi korpus (`STATUS-KORPUS-LISENSI.md`)
 ```
 
-Peta lengkap dua otak Raget — Template dan Neural, dua-duanya milik
-Rategoan sendiri — kontrak adapter `init()/ask()/status()`, dan aturan
-router ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
+Jalur chat adalah `engine-router.js`, dan antreannya hanya adapter neural.
+Checkpoint tidak ada di git. Kalau bobot belum termuat, balasan menyatakan itu, bukan tabel sapaan.
 
 ### Alur satu pesan
 
@@ -110,7 +109,7 @@ router ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
 Pesan pengguna
   → raget-memory (konteks percakapan + fakta jangka panjang)
   → raget-agents (router intent → deret mesin khusus, lihat di bawah)
-  → raget-agents/engine-router.js (template ↔ neural — lihat docs/ARSITEKTUR.md)
+  → raget-agents/engine-router.js (hanya adapter neural)
   → post-processing (rapikan teks, jawaban jujur bila kosong)
   → tampil sebagai balasan + tersimpan ke raget-database
 ```
@@ -145,24 +144,13 @@ peluang, penemuan, alam, seni-budaya, mata pelajaran sekolah & kuliah, dan
 
 Skema data seragam di seluruh domain: `{id, kategori, wilayah, nama, tags,
 teks, meta}` — file `.json` biasa, gampang ditambah/diedit tanpa menyentuh
-kode aplikasi. Lihat [`docs/DATA-STRUCTURE.md`](docs/DATA-STRUCTURE.md) untuk
-cara menambah domain data sendiri.
+kode aplikasi. Domain ditambah dengan berkas `.json` di `raget/raget-data/json/`.
 
-## RAGET Neural (aktif, belum koheren)
+## RAGET Neural (jalur chat, bobot tidak dibundel)
 
-Panel Model di UI menampilkan dua pilihan, dua-duanya bisa benar-benar
-dipilih: **Raget Template** (default aplikasi) dan **Raget Neural**
-(ditandai eksperimental). Di balik layar Raget Neural adalah jaringan
-neural buatan sendiri (transformer kecil yang ditulis dari nol dalam
-JavaScript murni, bukan wrapper provider apa pun) di
-`raget/raget-neural/`. Bobotnya sudah dilatih nyata di GPU Colab, tapi
-output generasinya **masih belum koheren secara gramatikal**. Berbeda
-dari sebelumnya, lapis ini sekarang **AKTIF** (`status().ready === true`
-di `raget-neural/neural-adapter.js`) — memilih Raget Neural di panel
-Model betul-betul menampilkan hasil generasinya apa adanya, bukan
-dikunci jadi pajangan. Template tetap jadi default dan fallback aman
-kalau Neural gagal memuat. Detail kontrak adapter dan cara melanjutkan
-tiap lapis ada di [`docs/ARSITEKTUR.md`](docs/ARSITEKTUR.md).
+Panel Model tetap menampilkan kartu eksperimental. Jalur chat memakai adapter neural.
+Berkas Safetensors 1,5 miliar parameter tidak ada di repositori ini dan tidak diunduh pada rilis ini.
+Kalau checkpoint belum termuat, balasan berbunyi bahwa bobot belum terpasang.
 
 ## Kualitas & Pengujian
 
@@ -200,7 +188,6 @@ Lalu buka `http://localhost:8099/index.html`.
 Rategoan dirancang agar bisa diubah jadi produk lain hanya lewat file data,
 tanpa menyentuh kode:
 
-- **Identitas & gaya bicara** → `raget/raget-devlog/json/persona.json`
 - **Basis pengetahuan** → `raget/raget-data/json/` (domain terstruktur) dan `raget/raget-data/json/pengetahuan/`
 
 ## Lisensi

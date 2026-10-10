@@ -36,7 +36,7 @@ async function ask(prompt, context) {
     const reply = await neuralProvider.generate(messages, PERSONA + passive + prompt, { signal: ctrl.signal });
     if (external && external.aborted) throw new Error('dibatalkan');
     if (ctrl.signal.aborted) throw new Error('Raget 1.0 timeout');
-    if (!reply) throw new Error('Raget 1.0: checkpoint belum termuat.');
+    if (!reply) return 'Bobot neural belum terpasang di perangkat ini.';
     return reply;
   } finally {
     clearTimeout(timer);

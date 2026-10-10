@@ -23,7 +23,6 @@
 // generasinya apa adanya, termasuk kalau masih acak.
 import { neuralAdapter } from '../raget-neural/neural-adapter.js';
 import { templateAdapter } from '../raget-template/template-adapter.js';
-import { enginePreference } from '../../js/state/engine-preference.js';
 import { engineContract } from './engine-contract.js';
 
 function registerAdapter(adapter) {
@@ -39,39 +38,12 @@ const ADAPTERS_BY_ID = Object.freeze({
   template: registerAdapter(templateAdapter),
 });
 
-function isFastQuery(prompt) {
-  const t = String(prompt || '').trim();
-  if (!t) return true;
-  if (t.length < 80 && /^(halo|hai|hei|selamat\s+(pagi|siang|sore|malam)|terima kasih|makasih)\b/i.test(t)) return true;
-  if (/^(hitung|berapa)\b/i.test(t) && t.length < 160) return true;
-  if (/^[\d\s+\-*/().,=]+$/.test(t)) return true;
-  if (/\b(km|meter|celsius|fahrenheit|rupiah|dolar|kg)\b/i.test(t) && /\d/.test(t) && t.length < 160) return true;
-  return false;
+function routePlan() {
+  return { engine: 'neural', fast: false, weights: false, download: false };
 }
 
-function routePlan(prompt) {
-  const fast = isFastQuery(prompt);
-  if (fast) return { engine: 'template', fast: true, weights: false, download: false };
-  let pref = 'template';
-  try {
-    pref = enginePreference.get();
-  } catch (e) {
-    pref = 'template';
-  }
-  return {
-    engine: pref === 'neural' ? 'neural' : 'template',
-    fast: false,
-    weights: false,
-    download: false,
-  };
-}
-
-function orderedAdapters(prompt) {
-  if (isFastQuery(prompt)) return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
-  const pref = enginePreference.get();
-  if (pref === 'neural') return [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
-  if (pref === 'template') return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
-  return [ADAPTERS_BY_ID.neural, ADAPTERS_BY_ID.template];
+function orderedAdapters() {
+  return [ADAPTERS_BY_ID.neural];
 }
 
 async function ask(prompt, context) {
@@ -120,7 +92,6 @@ function statusAll() {
 export const engineRouter = Object.freeze({
   ask,
   statusAll,
-  isFastQuery,
   routePlan,
   adapters: ADAPTERS_BY_ID,
 });
