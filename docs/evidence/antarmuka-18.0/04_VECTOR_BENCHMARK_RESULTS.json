@@ -1,0 +1,16 @@
+{
+  "plantId": 9999,
+  "distance": 0,
+  "samplesMs": [
+    0.225,
+    0.225,
+    0.22,
+    0.26,
+    0.217
+  ],
+  "note": "Juara blok Int8 setelah pemanasan. Bukan pemindaian kasar 10000 dan bukan HNSW produksi di IndexedDB.",
+  "layeredGraph": {
+    "unchangedSince": "854e5e11bebacf9408ff452a787a0f4a815b3335",
+    "note": "js/core/hnsw-graph.js tidak berubah pada rilis ini. Pengukuran 17 tetap: cari di bawah 5 ms, recall@5 dan ndcg@5 = 1 pada salinan sintetis, 20 pecahan hnsw_nodes berbatas 500."
+  }
+}

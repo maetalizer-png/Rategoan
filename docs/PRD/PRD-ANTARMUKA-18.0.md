@@ -18,7 +18,17 @@ Sasis 17.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan
 | 18.09 | `window.Rategoan` dan alias `window.RG` tetap |
 | 18.10 | Uji tetap satu berkas `antarmuka.test.mjs`. Jumlah lulus adalah yang terhitung, bukan angka 135 yang dikunci di naskah jika hitungannya berbeda. Lint ESLint 10 tetap di Node 22 |
 
-Pengukuran hidup diikat pada komit kode. Angka final dan segel ditulis saat bukti direkam.
+Pengukuran hidup (Chromium saja), diikat pada komit `2d00348e7862e6db506e3a8ab4638fec3ae9cdb9`:
+
+- Desktop 1366×768, `#/connect`, tema terang `rgb(250, 249, 246)`. Judul di y=40. `grid-template-rows` 768px. Sasis 960px, padding `40px 48px 64px`. Backdrop model `rgba(0, 0, 0, 0)` dan blur `blur(12px)`. Lencana kartu model "Eksperimental". Sidebar `rgb(250, 249, 246)`.
+- Popover Studio anak `#studio-app`, `position: fixed`, y=61, x=299. Tab kanvas celah 8px, `overflow-x: auto`, `min-width: 0`, latar segmen `rgb(241, 245, 249)`. Studio sandbox `allow-scripts allow-forms`.
+- Ponsel 390×844: header y=0, lebar 390, tinggi 60, tombol kembali 36px radius `50%`. Penyimpanan `0.0 MB / 50 MB`, tidak menimpa label. Lembar studio 263px dan tertutup oleh Escape. Navigasi celah 4px, tanpa kicker dan tanpa surel. Jejak izin di privasi, log terlipat. Peringatan konsol 0.
+- Unit 135/135 pada Node v22.23.2 dan 135/135 pada Node v18.20.8. Lint lolos di Node 22: sintaks 384 berkas, eslint 0/0, skema 208 berkas / 3934 entri. ESLint 10 tidak dijalankan di Node 18. Playwright 21/21.
+- `vfsPath` menolak `/etc/shadow`, `/var/log/syslog`, dan `/root/.ssh/id_rsa`. Jurnal menolak mutasi yang sama. Kunci virtual `/index.html` tetap.
+- IPv6 `FC00::1`, `fc00:0000::1`, `fd12:3456::1`, dan `FE80::1` privat lewat bitmask. `2001:4860:4860::8888` dan `8.8.8.8` tidak. Nama host `forecast.example` tidak ikut tertolak.
+- Kunci `__proto__` bersarang masuk daftar tolak. `Object.prototype` tidak tercemar.
+- SQ8 menandai vektor 9999 pada jarak 0. Sampel ada di bukti vektor. Graf berlapis tidak diukur ulang karena `js/core/hnsw-graph.js` tidak berubah sejak 17.0.
+- Segel SHA-256 objek komit kode, bukan GPG.
 
 - Mesin bawaan tetap template. Lencana "Eksperimental" tetap pada kartu model.
 - Empat belas ekspor mati dan penghematan 8,4 KB tidak dihapus dan tidak diklaim.

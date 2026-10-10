@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-10-10",
+  "parent": "ce76d4c20836c3c601d17c191553cb8698eb76b7",
+  "implementation": "2d00348e7862e6db506e3a8ab4638fec3ae9cdb9",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit 2d00348e7862e6db506e3a8ab4638fec3ae9cdb9",
+    "digest": "a70b9e0942b2619a04d02136735fc896846f928a743d583c4bb69966fa8b7a89",
+    "gpg": false
+  },
+  "tag": "18.0.0-PRODUCTION-GA",
+  "node": "v22.23.2",
+  "node18": "v18.20.8",
+  "eslintOnNode18": false,
+  "coverageMeasured": false,
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "unit": "135/135",
+    "unitNode18": "135/135",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 384,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "playwright": "21/21",
+    "voiceWeights": false,
+    "externalModels": false,
+    "indexedDbHnsw": false,
+    "vfsSystemRoot": "ditolak",
+    "ipv6Ula": "bitmask",
+    "prototypeKeys": "ditolak"
+  }
+}
