@@ -97,7 +97,7 @@ Workflow yang terlihat menjalankan unit test, lint, dan Playwright, tetapi pemer
 
 - Baseline commit `ce76d4c`: unit test lulus pada Node 18/20/22 dan lint lulus, tetapi Playwright gagal saat membuat direktori screenshot karena `EACCES`. [Log run](https://github.com/maetalizer-png/Rategoan/actions/runs/38012354429).
 - Commit perbaikan path `d0446097`: GitHub Actions melaporkan job Playwright sukses dan log berisi **LULUS 21/21**; unit test dan lint juga sukses pada run itu. [Run CI](https://github.com/maetalizer-png/Rategoan/actions/runs/38015659926).
-- Pengujian lanjutan setelah perubahan SSRF, body-limit, dan benchmark harus dinilai dari run untuk commit final branch, bukan dari hasil commit sebelumnya.
+- Commit final kode yang saat ini diaudit: `5a7bfd0a2e98cab875456b953bfb54d73d30afa9`. Run GitHub Actions [38015930144](https://github.com/maetalizer-png/Rategoan/actions/runs/38015930144) berstatus **success** untuk kelima job: unit test Node 18/20/22, lint, dan Playwright. Log menunjukkan **LULUS 21/21**, konsol bersih (0 peringatan), dan artifact `playwright-screenshots` berhasil diunggah (ID `11656131578`).
 - Uji Playwright saat ini menjalankan server statis lokal pada runner. Belum ada klaim pengujian browser terhadap domain deployment produksi, audit penetrasi eksternal, atau uji hardware fisik.
 
 ## Urutan remediasi
