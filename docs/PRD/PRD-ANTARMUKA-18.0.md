@@ -1,3 +1,31 @@
+# PRD Antarmuka 18.0 — catatan eksekusi
+
+Sumber resmi: dokumen Drive "PRD Antarmuka 18.0 — Hardened VFS Boundaries, Comprehensive Cybersecurity Parity & Industrialized WebGPU Neural Runtime (Definitive Master)" (diubah 2026-10-10T02:09:07Z).
+Baseline: `854e5e11bebacf9408ff452a787a0f4a815b3335` (bukti `ce76d4c20836c3c601d17c191553cb8698eb76b7`, tag `17.0.0-PRODUCTION-GA`).
+
+Sasis 17.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak disunting. Bobot Whisper, Kokoro, dan ONNX tidak diunduh. Bukan mesin HNSW produksi di IndexedDB. Cakupan baris tidak diukur. Pohon virtual tidak dipindah ke prefiks host `/workspace/`; nama akar sistem ditolak, berkas proyek tetap di kunci virtual yang sudah ada.
+
+| DOD | Hasil |
+| --- | --- |
+| 18.01 | `vfsPath` menolak segmen akar sistem (`etc`, `var`, `usr`, `bin`, `sbin`, `proc`, `sys`, `root`, `dev`, `home`, `boot`, `opt`). Mutasi jurnal memakai jalur yang sama |
+| 18.02 | Alamat IPv6 diurai menjadi 8 hextet. ULA `fc00::/7` dan link-local `fe80::/10` ditutup lewat bitmask, termasuk huruf besar dan bentuk yang diperluas. Nama host tidak dianggap privat hanya karena awalan huruf |
+| 18.03 | `filterParams` menolak kunci `__proto__`, `constructor`, dan `prototype`, termasuk yang bersarang di luar daftar izin |
+| 18.04 | Alat tak terdaftar tetap level 5. Kunci 120 detik tetap memakai jam monoton yang sudah ada |
+| 18.05 | Pecahan `hnsw_nodes` maksimal 500 tetap deskriptor di memori. Bukan profil IndexedDB produksi |
+| 18.06 | Tidak ada unduhan Safetensors dan tidak ada forward pass 1,5 miliar parameter. Inti WebGPU tidak disunting |
+| 18.07 | Label suara tetap tanpa bobot. `bargeIn` tetap pembanding energi, bukan mikrofon |
+| 18.08 | Tab kanvas yang sudah ada tidak diubah geometrinya |
+| 18.09 | `window.Rategoan` dan alias `window.RG` tetap |
+| 18.10 | Uji tetap satu berkas `antarmuka.test.mjs`. Jumlah lulus adalah yang terhitung, bukan angka 135 yang dikunci di naskah jika hitungannya berbeda. Lint ESLint 10 tetap di Node 22 |
+
+Pengukuran hidup diikat pada komit kode. Angka final dan segel ditulis saat bukti direkam.
+
+- Mesin bawaan tetap template. Lencana "Eksperimental" tetap pada kartu model.
+- Empat belas ekspor mati dan penghematan 8,4 KB tidak dihapus dan tidak diklaim.
+- Label Whisper/Kokoro tanpa bobot. Tidak ada model pihak ketiga.
+
+## Arsip terkonsolidasi 17.0
+
 # PRD Antarmuka 17.0 — catatan eksekusi
 
 Sumber resmi: dokumen Drive "PRD Antarmuka 17.0 — Universal Node 18/22 Parity, Physical IndexedDB HNSW Partitioning & Whisper WebGPU Voice Engine (Definitive Master)" (diubah 2026-10-10T00:52:16Z).

@@ -180,15 +180,64 @@ export async function forward(res, url, token, method, body, extraHeaders) {
   res.end(text);
 }
 
-export function ipIsPrivate(host) {
-  const raw = String(host || '').toLowerCase().replace(/^\[|\]$/g, '');
-  let v4 = raw;
-  if (raw.indexOf('::ffff:') === 0) v4 = raw.slice(7);
-  if (v4 === '0.0.0.0' || v4 === '::' || v4 === '::1') return true;
+function ipv4Private(v4) {
+  if (v4 === '0.0.0.0') return true;
   if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(v4)) return true;
   if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(v4)) return true;
-  if (raw === '::1' || raw.indexOf('fe80:') === 0 || raw.indexOf('fc') === 0 || raw.indexOf('fd') === 0) return true;
   return false;
+}
+
+function ipv6Hextets(raw) {
+  const text = String(raw || '');
+  if (text.indexOf(':') < 0) return null;
+  let body = text;
+  let tail = null;
+  const dotted = body.match(/(.*:)(\d{1,3}(?:\.\d{1,3}){3})$/);
+  if (dotted) {
+    const nums = dotted[2].split('.').map((n) => Number(n));
+    if (nums.length !== 4 || nums.some((n) => n > 255)) return null;
+    tail = [(nums[0] << 8) | nums[1], (nums[2] << 8) | nums[3]];
+    body = dotted[1].replace(/:$/, '');
+  }
+  const halves = body.split('::');
+  if (halves.length > 2) return null;
+  const parseSide = (side) => {
+    if (!side) return [];
+    const parts = side.split(':');
+    if (parts.some((part) => !/^[0-9a-f]{1,4}$/.test(part))) return null;
+    return parts.map((part) => parseInt(part, 16));
+  };
+  const left = parseSide(halves[0]);
+  if (!left) return null;
+  const right = halves.length === 2 ? parseSide(halves[1]) : [];
+  if (!right) return null;
+  const need = 8 - (tail ? 2 : 0);
+  if (halves.length === 1) {
+    if (left.length !== need) return null;
+    return left.concat(tail || []);
+  }
+  const fill = need - left.length - right.length;
+  if (fill < 0) return null;
+  const zeros = [];
+  for (let i = 0; i < fill; i += 1) zeros.push(0);
+  return left.concat(zeros, right, tail || []);
+}
+
+export function ipIsPrivate(host) {
+  const raw = String(host || '').toLowerCase().replace(/^\[|\]$/g, '').split('%')[0];
+  const hextets = ipv6Hextets(raw);
+  if (hextets && hextets.length === 8) {
+    const first = hextets[0];
+    if ((first & 0xfe00) === 0xfc00) return true;
+    if ((first & 0xffc0) === 0xfe80) return true;
+    if (hextets.every((n) => n === 0) || hextets.every((n, i) => n === (i === 7 ? 1 : 0))) return true;
+    if (hextets[0] === 0 && hextets[1] === 0 && hextets[2] === 0 && hextets[3] === 0 && hextets[4] === 0 && hextets[5] === 0xffff) {
+      const v4 = (hextets[6] >> 8) + '.' + (hextets[6] & 255) + '.' + (hextets[7] >> 8) + '.' + (hextets[7] & 255);
+      return ipv4Private(v4);
+    }
+    return false;
+  }
+  return ipv4Private(raw) || raw === '::' || raw === '::1';
 }
 
 export function rpcBodyOk(body) {

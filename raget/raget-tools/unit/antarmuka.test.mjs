@@ -782,8 +782,9 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-14.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-15.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-16.0.md'), true);
-  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-17.0.md'), false);
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-17\.0\.md/);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-17.0.md'), true);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-18.0.md'), false);
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-18\.0\.md/);
 });
 
 test('DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi', () => {
@@ -1347,9 +1348,10 @@ test('DOD-14.09 namespace, kanvas, dan jejak izin', async () => {
   assert.equal(planHeartbeat('rahasia', 'rahasia', 'ws://127.0.0.1:9/mcp').intervalMs, 15000);
 });
 
-test('DOD-14.10 dokumen aktif menunjuk 17.0 dan sejarah 13 tetap ada', () => {
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-17\.0\.md/);
-  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /17\.0/);
+test('DOD-14.10 dokumen aktif menunjuk 18.0 dan sejarah 13 tetap ada', () => {
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-18\.0\.md/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /18\.0/);
+  assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('17.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('16.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('15.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('14.0'), true);
@@ -1371,7 +1373,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(box.subtle, node.webcrypto.subtle);
   assert.equal(typeof box.subtle.digest, 'function');
   const banned = ['rategoan-model-' + 'v5', 'rategoan-neural-' + 'v4', 'pack-' + 'v1.jsonl', 'verify-' + 'ronde-' + 'v3', 'ronde-' + 'v3', 'ronde-' + 'v4', 'ronde-' + 'v5', 'ronde-' + 'v6', 'ronde-' + 'v7'];
-  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-17.0.md');
+  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-18.0.md');
   banned.forEach((word) => assert.equal(scan.includes(word), false, word));
   assert.equal(existsSync(new URL('raget/raget-data/jsonl/kode/code-pack.jsonl', root)), true);
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif/verify-build-pipeline.mjs', root)), true);
@@ -1429,7 +1431,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(read('index.html').includes('>Utama<'), false);
   assert.match(read('.github/workflows/lint.yml'), /npm ci/);
   assert.match(read('.github/workflows/lint.yml'), /npm test/);
-  assert.match(read('package.json'), /17\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /18\.0\.0-PRODUCTION-GA/);
 });
 
 test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
@@ -1506,5 +1508,56 @@ test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
     { judul: { value: 'baru', clock: 2, replica: 'b' } },
   );
   assert.equal(gabung.judul.value, 'baru');
-  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-17/);
+  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-18/);
+});
+
+test('DOD-18.01 path absolut sistem ditolak di batas vfs', async () => {
+  assert.throws(() => vfsPath('/etc/shadow'), /terlarang/);
+  assert.throws(() => vfsPath('/var/log/syslog'), /terlarang/);
+  assert.throws(() => vfsPath('/root/.ssh/id_rsa'), /terlarang/);
+  assert.throws(() => vfsPath('\\\\etc\\\\shadow'), /terlarang/);
+  assert.equal(vfsPath('/index.html'), '/index.html');
+  assert.equal(vfsPath('/workspace/catatan.html'), '/workspace/catatan.html');
+  assert.equal(vfsPath('style.css'), '/css/style.css');
+  const git = new VfsGit({ '/a.js': 'function ok(){ return 1; }' });
+  const vfs = createVfs({ '/a.js': 'function ok(){ return 1; }' });
+  const tx = new VfsTransaction(vfs, git);
+  tx.begin();
+  await assert.rejects(() => tx.commitBatch({ '/etc/shadow': 'rahasia' }), /terlarang/);
+  assert.equal(vfs.read('/a.js'), 'function ok(){ return 1; }');
+  assert.equal(git.snapshot().has('/etc/shadow'), false);
+});
+
+test('DOD-18.02 alamat ipv6 ula dan link-local ditolak', async () => {
+  assert.equal(ipIsPrivate('FC00::1'), true);
+  assert.equal(ipIsPrivate('fc00:0000::1'), true);
+  assert.equal(ipIsPrivate('fd12:3456::1'), true);
+  assert.equal(ipIsPrivate('FE80::1'), true);
+  assert.equal(ipIsPrivate('[fe80::1]'), true);
+  assert.equal(ipIsPrivate('::ffff:10.1.2.3'), true);
+  assert.equal(ipIsPrivate('::ffff:a01:203'), true);
+  assert.equal(ipIsPrivate('2001:4860:4860::8888'), false);
+  assert.equal(ipIsPrivate('8.8.8.8'), false);
+  assert.equal(ipIsPrivate('forecast.example'), false);
+  assert.equal(await pinPublicHttp('https://ula.test/a', async () => [{ address: 'FC00::1' }]), null);
+  const publik = await pinPublicHttp('https://publik.test/a', async () => [{ address: '2001:4860:4860::8888' }]);
+  assert.equal(publik.address, '2001:4860:4860::8888');
+});
+
+test('DOD-18.03 prototipe bersarang ditolak dan dokumen menunjuk 18', () => {
+  const nested = filterParams(JSON.parse('{"config":{"__proto__":{"polluted":true},"q":"aman"}}'));
+  assert.equal(nested.banned.some((name) => name.indexOf('__proto__') >= 0), true);
+  assert.equal(nested.kept.polluted, undefined);
+  assert.equal({}.polluted, undefined);
+  const top = filterParams(JSON.parse('{"q":"ok","constructor":{"prototype":{"admin":true}}}'));
+  assert.equal(top.banned.indexOf('constructor') >= 0, true);
+  assert.equal(top.kept.q, 'ok');
+  assert.equal(top.kept.admin, undefined);
+  const dalam = filterParams(JSON.parse('{"q":{"q":"dalam","prototype":{"admin":true}}}'));
+  assert.equal(dalam.banned.some((name) => name.indexOf('prototype') >= 0), true);
+  assert.equal(dalam.kept.q.admin, undefined);
+  assert.match(read('package.json'), /18\.0\.0-PRODUCTION-GA/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /18\.0/);
+  assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);
+  assert.match(read('sw.js'), /raget-app-shell-v19/);
 });

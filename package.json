@@ -1,6 +1,6 @@
 {
   "name": "rategoan",
-  "version": "17.0.0-PRODUCTION-GA",
+  "version": "18.0.0-PRODUCTION-GA",
   "private": true,
   "description": "Chat AI 100% local-first berbasis rule/template - PWA HTML/CSS/JavaScript murni, tanpa build step untuk aplikasi itu sendiri. package.json ini HANYA untuk tooling dev (lint, bench, pengukuran KV) - tidak ada langkah build untuk menjalankan aplikasi, lihat README.md bagian Menjalankan.",
   "type": "module",

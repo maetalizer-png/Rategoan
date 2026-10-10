@@ -13,6 +13,20 @@ function levelOf(name) {
   return 5;
 }
 
+const PROTO_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
+function harvestProto(val, prefix, banned) {
+  if (!val || typeof val !== 'object') return;
+  Object.keys(val).forEach((key) => {
+    const next = prefix ? prefix + '.' + key : key;
+    if (PROTO_KEYS.has(key)) {
+      banned.push(next);
+      return;
+    }
+    harvestProto(val[key], next, banned);
+  });
+}
+
 const BANNED = /^(token|access_token|secret|password|authorization|cookie|api_key|apikey|auth)$/i;
 
 const DEFAULT_ALLOW = [
@@ -150,11 +164,18 @@ export function filterParams(params, allow, used) {
   const banned = [];
   Object.keys(params || {}).forEach((key) => {
     if (skip.has(key)) return;
+    if (PROTO_KEYS.has(key)) {
+      banned.push(key);
+      return;
+    }
     if (BANNED.test(key)) {
       banned.push(key);
       return;
     }
-    if (!permit.has(key)) return;
+    if (!permit.has(key)) {
+      harvestProto(params[key], key, banned);
+      return;
+    }
     screenValue(key, params[key], banned, kept);
   });
   return { kept, banned };

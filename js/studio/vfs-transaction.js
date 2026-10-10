@@ -1,4 +1,5 @@
 import { prepareSource } from './ast-heal.js';
+import { vfsPath } from './vfs.js';
 import { JOURNAL_STORE, putRow, allRows } from '../../raget/raget-database/durable-store.js';
 
 export const AUTOSAVE_MS = 30000;
@@ -127,10 +128,11 @@ export class VfsTransaction {
     const staged = [];
     try {
       Object.keys(mutations || {}).forEach((path) => {
-        const prepared = prepareSource(path, mutations[path]);
+        const safe = vfsPath(path);
+        const prepared = prepareSource(safe, mutations[path]);
         const body = prepared.code;
-        this.git.stage(path, body);
-        staged.push([path, body]);
+        this.git.stage(safe, body);
+        staged.push([safe, body]);
       });
       staged.forEach(([path, body]) => {
         if (this.vfs && typeof this.vfs.write === 'function') this.vfs.write(path, body);

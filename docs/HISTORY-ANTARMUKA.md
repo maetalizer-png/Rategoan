@@ -17,5 +17,6 @@ Satu berkas ini menggantikan studi kasus dan PRD antarmuka yang sudah usang. Ang
 | 15.0 | Satu berkas uji, kripto lewat createRequire, SQ8 dengan pemanasan, nama cache semantik, dan meja kerja terang |
 | 16.0 | Popover Studio 1024, nonce sekali pakai, dan impor kripto statis yang aman di peramban |
 | 17.0 | Graf vektor berlapis terpartisi 500, nonce terikat sesi, dan lencana eksperimental |
+| 18.0 | Batas jalur virtual menolak akar sistem, IPv6 privat dinormalisasi, dan kunci prototipe ditolak |
 
-Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 17.
+Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 18.

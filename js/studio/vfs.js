@@ -1,6 +1,7 @@
 import { mountNamespace } from '../core/namespace.js';
 
 const FORBIDDEN_SEGMENTS = new Set(['..', '.', '.git', '.env', 'node_modules', '__pycache__']);
+const SYSTEM_ROOT_DIRS = new Set(['etc', 'var', 'usr', 'bin', 'sbin', 'proc', 'sys', 'root', 'dev', 'home', 'boot', 'opt']);
 
 function mimeOf(path) {
   if (/\.html?$/i.test(path)) return 'text/html';
@@ -19,6 +20,9 @@ export function vfsPath(rawPath) {
     const seg = segments[i];
     if (FORBIDDEN_SEGMENTS.has(seg.toLowerCase())) {
       throw new Error('Segmen path terlarang: "' + seg + '"');
+    }
+    if (i === 0 && SYSTEM_ROOT_DIRS.has(seg.toLowerCase())) {
+      throw new Error('Akses direktori sistem terlarang');
     }
     const clean = seg.replace(/[\x00-\x1f\x7f]/g, '');
     if (clean) safe.push(clean);
