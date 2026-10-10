@@ -1196,12 +1196,20 @@ test('DOD-14.02 pencarian SQ8 10000x384 di bawah 9ms', () => {
   assert.equal(index.quant, 'int8');
   assert.equal(index.qdata.length, 10000 * 384);
   assert.ok(index.qdata.byteLength < rows.length * 384 * 4);
-  const t0 = performance.now();
-  const hits = searchSq8(index, rows[plant], 1);
-  const ms = performance.now() - t0;
+  // Warm the hot path, then use the median to reduce runner/GC noise.
+  searchSq8(index, rows[plant], 1);
+  const samples = [];
+  let hits;
+  for (let i = 0; i < 5; i += 1) {
+    const t0 = performance.now();
+    hits = searchSq8(index, rows[plant], 1);
+    samples.push(performance.now() - t0);
+  }
+  samples.sort((a, b) => a - b);
+  const ms = samples[2];
   assert.equal(hits[0].id, plant);
   assert.equal(hits[0].distance, 0);
-  assert.ok(ms < 2, 'ms ' + ms);
+  assert.ok(ms < 9, 'median ms ' + ms);
 });
 
 test('DOD-14.03 kunci level 5 kedaluwarsa lewat jam monoton', () => {
