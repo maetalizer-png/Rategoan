@@ -1,0 +1,23 @@
+{
+  "plantId": 9999,
+  "distance": 0,
+  "samplesMs": [
+    0.256,
+    0.245,
+    0.217,
+    0.205,
+    0.225
+  ],
+  "note": "Juara blok Int8 setelah pemanasan. Bukan pemindaian kasar 10000 dan bukan HNSW produksi di IndexedDB.",
+  "localDoc": {
+    "store": "memory",
+    "onnx": false,
+    "indexedDb": false,
+    "dim": 384,
+    "note": "Fixture embed384 pada teks lokal. Bukan profil IndexedDB."
+  },
+  "layeredGraph": {
+    "unchangedSince": "854e5e11bebacf9408ff452a787a0f4a815b3335",
+    "note": "js/core/hnsw-graph.js tidak berubah pada rilis 18.0 dan 19.0. Pengukuran 17 tetap: cari di bawah 5 ms, recall@5 dan ndcg@5 = 1 pada salinan sintetis, 20 pecahan hnsw_nodes berbatas 500."
+  }
+}

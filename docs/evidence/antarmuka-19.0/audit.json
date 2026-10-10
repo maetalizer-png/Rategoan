@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-10-10",
+  "parent": "954b014193f7a8d5d361ccd2dd771307a45ea53d",
+  "implementation": "62610d4e752abddc8297c6f9a519b0df62a9fe28",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit 62610d4e752abddc8297c6f9a519b0df62a9fe28",
+    "digest": "fd677f22683d0bc65f8a073f1741fe410ce9ef4691de3c9ce5bd1246543b8983",
+    "gpg": false
+  },
+  "tag": "19.0.0-PRODUCTION-GA",
+  "node": "v22.23.2",
+  "node18": "v18.20.8",
+  "eslintOnNode18": false,
+  "coverageMeasured": false,
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "unit": "139/139",
+    "unitNode18": "139/139",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 386,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "playwright": "21/21",
+    "voiceWeights": false,
+    "externalModels": false,
+    "indexedDbHnsw": false,
+    "localDocStore": "memory",
+    "templateDefault": true
+  }
+}
