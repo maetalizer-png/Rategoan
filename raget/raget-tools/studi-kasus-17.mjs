@@ -1,8 +1,9 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
+import path from 'node:path';
 
 const base = process.env.STUDI_BASE || 'http://127.0.0.1:8080';
-const outDir = '/workspace/screenshots';
+const outDir = process.env.STUDI_OUTPUT_DIR || path.join(process.cwd(), 'artifacts', 'screenshots');
 fs.mkdirSync(outDir, { recursive: true });
 
 const findings = [];
