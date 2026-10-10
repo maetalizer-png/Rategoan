@@ -291,12 +291,16 @@ function parseSafetensorsHeader(bytes) {
 }
 
 function decoupleWeightTie(header) {
-    const embed = header['embedding.weight'];
-    const head = header['lm_head.weight'];
-    if (!embed || !head || !embed.data_offsets || !head.data_offsets) return { tied: false, shared: '' };
+    const src = header || {};
+    const embed = src['embedding.weight'];
+    const head = src['lm_head.weight'];
+    const headName = head && head.data_offsets ? 'lm_head.weight' : '';
+    if (!embed || !head || !embed.data_offsets || !head.data_offsets) {
+        return { tied: false, shared: '', head: headName, independent: headName !== '' && !(embed && embed.data_offsets) };
+    }
     const same = embed.data_offsets[0] === head.data_offsets[0] && embed.data_offsets[1] === head.data_offsets[1];
-    if (!same) return { tied: false, shared: '' };
-    return { tied: true, shared: 'embedding.weight', head: 'lm_head.weight' };
+    if (!same) return { tied: false, shared: '', head: 'lm_head.weight', independent: true };
+    return { tied: true, shared: 'embedding.weight', head: 'lm_head.weight', independent: false };
 }
 
 function readArchitecture(header) {

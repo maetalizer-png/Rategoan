@@ -249,11 +249,16 @@ async function run(kind, prompt) {
   return out && out.text;
 }
 
+function source() {
+  return { table: true, weights: false, download: false };
+}
+
 export const toolsKode = Object.freeze({
   isCodeQuestion,
   detectLang,
   retrieve,
   compose,
   run,
+  source,
   handles: (kind) => kind === 'kode',
 });

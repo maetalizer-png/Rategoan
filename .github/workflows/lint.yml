@@ -44,4 +44,4 @@ jobs:
             curl -sf -o /dev/null http://127.0.0.1:8080/ && break
             sleep 0.5
           done
-          node raget/raget-tools/studi-kasus-19.mjs
+          node raget/raget-tools/studi-kasus-20.mjs

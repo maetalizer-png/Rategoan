@@ -19,5 +19,6 @@ Satu berkas ini menggantikan studi kasus dan PRD antarmuka yang sudah usang. Ang
 | 17.0 | Graf vektor berlapis terpartisi 500, nonce terikat sesi, dan lencana eksperimental |
 | 18.0 | Batas jalur virtual menolak akar sistem, IPv6 privat dinormalisasi, dan kunci prototipe ditolak |
 | 19.0 | Teks dokumen lokal dipecah di memori, injeksi ditahan, dan mesin bawaan tetap template |
+| 20.0 | Bentuk tier 1B/1,5B/2B dibaca dari header tanpa bobot, dan jawaban sapaan tetap di template |
 
-Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 19.
+Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak diubah pada rilis 8 sampai 20.

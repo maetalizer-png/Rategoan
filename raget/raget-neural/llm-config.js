@@ -108,6 +108,36 @@ const MASSIVE200M = Object.freeze({
     initStd: 0.02
 });
 
+const TIER_SHAPES = Object.freeze({
+    '1.0B': Object.freeze({ id: '1.0B', dModel: 1536, nLayers: 24, dFF: 0, layerMiB: 19.2 }),
+    '1.5B': Object.freeze({ id: '1.5B', dModel: 2048, nLayers: 28, dFF: 5632, layerMiB: 26.87 }),
+    '2.0B': Object.freeze({ id: '2.0B', dModel: 2560, nLayers: 32, dFF: 6912, layerMiB: 34.5 })
+});
+
+function bindTier(meta) {
+    const src = meta || {};
+    const named = TIER_SHAPES[src.id] || null;
+    const hidden = Number(src.hidden_size || src.dModel || (named && named.dModel) || 0);
+    const layers = Number(src.n_layers || src.nLayers || (named && named.nLayers) || 0);
+    const hit = Object.keys(TIER_SHAPES).map((key) => TIER_SHAPES[key]).find((row) => row.dModel === hidden && row.nLayers === layers) || null;
+    const shape = hit || named;
+    const ffnRaw = src.intermediate_size != null ? src.intermediate_size : src.dFF;
+    const ffn = Number(ffnRaw != null ? ffnRaw : ((shape && shape.dFF) || 0));
+    const layerMiB = shape ? shape.layerMiB : 0;
+    return {
+        id: shape ? shape.id : '',
+        dModel: hidden,
+        nLayers: layers,
+        dFF: ffn,
+        layerBytes: layerMiB ? Math.round(layerMiB * 1024 * 1024) : 0,
+        weights: false,
+        installed: false,
+        download: false
+    };
+}
+
+export { bindTier, TIER_SHAPES };
+
 const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL, massive50m: MASSIVE50M, massive100m: MASSIVE100M, massive200m: MASSIVE200M });
 
 const BACKENDS = Object.freeze({
@@ -208,6 +238,8 @@ export const LLMConfig = {
     createConfig: createConfig,
     createRuntimeConfig: createRuntimeConfig,
     PRESETS: PRESETS,
+    TIER_SHAPES: TIER_SHAPES,
+    bindTier: bindTier,
     SPECIAL_TOKENS: SPECIAL_TOKENS,
     SPECIAL_TOKEN_IDS: SPECIAL_TOKEN_IDS
 };

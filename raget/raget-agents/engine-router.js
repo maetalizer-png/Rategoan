@@ -49,6 +49,23 @@ function isFastQuery(prompt) {
   return false;
 }
 
+function routePlan(prompt) {
+  const fast = isFastQuery(prompt);
+  if (fast) return { engine: 'template', fast: true, weights: false, download: false };
+  let pref = 'template';
+  try {
+    pref = enginePreference.get();
+  } catch (e) {
+    pref = 'template';
+  }
+  return {
+    engine: pref === 'neural' ? 'neural' : 'template',
+    fast: false,
+    weights: false,
+    download: false,
+  };
+}
+
 function orderedAdapters(prompt) {
   if (isFastQuery(prompt)) return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural];
   const pref = enginePreference.get();
@@ -104,5 +121,6 @@ export const engineRouter = Object.freeze({
   ask,
   statusAll,
   isFastQuery,
+  routePlan,
   adapters: ADAPTERS_BY_ID,
 });

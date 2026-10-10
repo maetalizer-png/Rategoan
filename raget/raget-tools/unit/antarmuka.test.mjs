@@ -11,6 +11,10 @@ import { downloadModel, memoryStore, planRanges, MODEL_CACHE, MODEL_CHUNK, diges
 import { reduceStream, chooseDoor, failoverStream, stampToolCall } from '../../../js/studio/sse-door.js';
 import { embed384, EMBED_DIM, hybridRank, indexRecord, savePostings, loadPostings } from '../../raget-retrieval/rag-index.js';
 import { readLocalText, chunkParagraphs, sanitizeDocContext, searchLocalMemory, prepareLocalContext } from '../../raget-retrieval/local-doc.js';
+import { bindTier } from '../../raget-neural/llm-config.js';
+import { engineRouter } from '../../raget-agents/engine-router.js';
+import { toolsKode } from '../../raget-agents/tools-kode.js';
+import { enginePreference } from '../../../js/state/engine-preference.js';
 import { parseArithmeticAST } from '../../../js/connectors/local-tools.js';
 import { VfsGit } from '../../../js/studio/vfs-git.js';
 import { createVfs, vfsPath, createEphemeralWorkspace } from '../../../js/studio/vfs.js';
@@ -785,8 +789,9 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-16.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-17.0.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-18.0.md'), true);
-  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-19.0.md'), false);
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-19\.0\.md/);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-19.0.md'), true);
+  assert.equal(gone('docs/PRD/PRD-ANTARMUKA-20.0.md'), false);
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-20\.0\.md/);
 });
 
 test('DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi', () => {
@@ -1350,9 +1355,10 @@ test('DOD-14.09 namespace, kanvas, dan jejak izin', async () => {
   assert.equal(planHeartbeat('rahasia', 'rahasia', 'ws://127.0.0.1:9/mcp').intervalMs, 15000);
 });
 
-test('DOD-14.10 dokumen aktif menunjuk 19.0 dan sejarah 18 tetap ada', () => {
-  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-19\.0\.md/);
-  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /19\.0/);
+test('DOD-14.10 dokumen aktif menunjuk 20.0 dan sejarah 19 tetap ada', () => {
+  assert.match(read('docs/PRD/README.md'), /PRD-ANTARMUKA-20\.0\.md/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /20\.0/);
+  assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('19.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('18.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('17.0'), true);
   assert.equal(read('docs/HISTORY-ANTARMUKA.md').includes('16.0'), true);
@@ -1376,7 +1382,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(box.subtle, node.webcrypto.subtle);
   assert.equal(typeof box.subtle.digest, 'function');
   const banned = ['rategoan-model-' + 'v5', 'rategoan-neural-' + 'v4', 'pack-' + 'v1.jsonl', 'verify-' + 'ronde-' + 'v3', 'ronde-' + 'v3', 'ronde-' + 'v4', 'ronde-' + 'v5', 'ronde-' + 'v6', 'ronde-' + 'v7'];
-  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-19.0.md');
+  const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js') + read('docs/PRD/PRD-ANTARMUKA-20.0.md');
   banned.forEach((word) => assert.equal(scan.includes(word), false, word));
   assert.equal(existsSync(new URL('raget/raget-data/jsonl/kode/code-pack.jsonl', root)), true);
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif/verify-build-pipeline.mjs', root)), true);
@@ -1434,7 +1440,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(read('index.html').includes('>Utama<'), false);
   assert.match(read('.github/workflows/lint.yml'), /npm ci/);
   assert.match(read('.github/workflows/lint.yml'), /npm test/);
-  assert.match(read('package.json'), /19\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /20\.0\.0-PRODUCTION-GA/);
 });
 
 test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
@@ -1511,7 +1517,7 @@ test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
     { judul: { value: 'baru', clock: 2, replica: 'b' } },
   );
   assert.equal(gabung.judul.value, 'baru');
-  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-19/);
+  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-20/);
 });
 
 test('DOD-18.01 path absolut sistem ditolak di batas vfs', async () => {
@@ -1559,8 +1565,8 @@ test('DOD-18.03 prototipe bersarang ditolak dan dokumen menunjuk 18', () => {
   const dalam = filterParams(JSON.parse('{"q":{"q":"dalam","prototype":{"admin":true}}}'));
   assert.equal(dalam.banned.some((name) => name.indexOf('prototype') >= 0), true);
   assert.equal(dalam.kept.q.admin, undefined);
-  assert.match(read('package.json'), /19\.0\.0-PRODUCTION-GA/);
-  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /19\.0/);
+  assert.match(read('package.json'), /20\.0\.0-PRODUCTION-GA/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /20\.0/);
   assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);
   assert.match(read('sw.js'), /raget-app-shell-v19/);
 });
@@ -1622,3 +1628,76 @@ test('DOD-19.04 pencarian memori memakai embed 384 dan bukan indeks produksi', (
   assert.match(read('js/chat/composer.js'), /sanitizeDocContext/);
   assert.match(read('js/state/engine-preference.js'), /saved === 'neural' \? 'neural' : 'template'/);
 });
+
+test('DOD-20.01 bentuk tier dibaca dari header tanpa bobot', () => {
+  const satu = bindTier({ hidden_size: 1536, n_layers: 24 });
+  assert.equal(satu.id, '1.0B');
+  assert.equal(satu.dModel, 1536);
+  assert.equal(satu.nLayers, 24);
+  assert.equal(satu.dFF, 0);
+  assert.equal(satu.layerBytes, Math.round(19.2 * 1024 * 1024));
+  const inti = bindTier({ id: '1.5B' });
+  assert.equal(inti.dModel, 2048);
+  assert.equal(inti.nLayers, 28);
+  assert.equal(inti.dFF, 5632);
+  assert.equal(inti.layerBytes, Math.round(26.87 * 1024 * 1024));
+  const dua = bindTier({ hidden_size: 2560, n_layers: 32, intermediate_size: 6912 });
+  assert.equal(dua.id, '2.0B');
+  assert.equal(dua.dFF, 6912);
+  assert.equal(dua.layerBytes, Math.round(34.5 * 1024 * 1024));
+  [satu, inti, dua].forEach((row) => {
+    assert.equal(row.weights, false);
+    assert.equal(row.installed, false);
+    assert.equal(row.download, false);
+  });
+  assert.equal(bindTier({ hidden_size: 32, n_layers: 2 }).id, '');
+  assert.match(read('raget/raget-neural/neural-provider.js'), /raget-neural-massive200m\.safetensors/);
+  assert.equal(read('raget/raget-neural/neural-provider.js').includes('1.5b.safetensors'), false);
+});
+
+test('DOD-20.02 kepala tensor mandiri tidak diikat ke embedding', () => {
+  const lepas = decoupleWeightTie({
+    'embedding.weight': { data_offsets: [0, 8] },
+    'lm_head.weight': { data_offsets: [8, 16] },
+  });
+  assert.equal(lepas.tied, false);
+  assert.equal(lepas.independent, true);
+  assert.equal(lepas.head, 'lm_head.weight');
+  assert.equal(lepas.shared, '');
+  const sendiri = decoupleWeightTie({ 'lm_head.weight': { data_offsets: [0, 8] } });
+  assert.equal(sendiri.tied, false);
+  assert.equal(sendiri.independent, true);
+  assert.equal(sendiri.head, 'lm_head.weight');
+  const kosong = decoupleWeightTie({});
+  assert.equal(kosong.independent, false);
+  assert.equal(kosong.head, '');
+});
+
+test('DOD-20.03 sapaan tetap template dan tabel kode tidak dihapus', async () => {
+  const halo = engineRouter.routePlan('halo');
+  assert.equal(halo.engine, 'template');
+  assert.equal(halo.fast, true);
+  assert.equal(halo.weights, false);
+  assert.equal(halo.download, false);
+  assert.equal(typeof engineRouter.isFastQuery, 'function');
+  assert.equal(enginePreference.weightsInstalled(), false);
+  assert.match(read('js/state/engine-preference.js'), /saved === 'neural' \? 'neural' : 'template'/);
+  const kode = await toolsKode.compose('fungsi palindrome');
+  assert.match(kode.text, /function palindrome/);
+  assert.equal(toolsKode.source().table, true);
+  assert.equal(toolsKode.source().weights, false);
+  assert.equal(toolsKode.source().download, false);
+});
+
+test('DOD-20.04 ledger korpus dan cetak biru lama tetap ada', () => {
+  assert.equal(existsSync(new URL('docs/STATUS-KORPUS-LISENSI.md', root)), true);
+  assert.equal(gone('docs/PRD/PRD-RAGET-TEMPLATE.md'), false);
+  assert.equal(gone('raget/raget-tools/CHECKPOINT-POLICY.md'), false);
+  assert.equal(gone('docs/evidence'), false);
+  assert.match(read('package.json'), /berbasis rule\/template/);
+  assert.match(read('package.json'), /20\.0\.0-PRODUCTION-GA/);
+  assert.match(read('docs/HISTORY-ANTARMUKA.md'), /20\.0/);
+  assert.match(read('sw.js'), /raget-app-shell-v19/);
+  assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);
+});
+

@@ -1,5 +1,6 @@
 
 import { llmMode } from '../../js/state/llm-mode.js';
+import { bindTier, TIER_SHAPES } from './llm-config.js';
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -153,9 +154,14 @@ async function getStats() {
   }
 }
 
+function shapeTiers() {
+  return Object.keys(TIER_SHAPES).map((id) => bindTier({ id }));
+}
+
 export const neuralProvider = Object.freeze({
   prefetchBest,
   ready,
   generate,
   getStats,
+  shapeTiers,
 });

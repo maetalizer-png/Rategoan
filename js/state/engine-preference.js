@@ -12,4 +12,7 @@ export const enginePreference = {
       localStorage.setItem(KEY, next);
     } catch (e) { console.warn('[Rategoan Fallback] engine-preference:', e); }
   },
+  weightsInstalled() {
+    return false;
+  },
 };
