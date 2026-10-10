@@ -187,14 +187,14 @@ export async function forward(res, url, token, method, body, extraHeaders) {
 
 function parseIPv4(raw) {
   const parts = String(raw || '').split('.');
-  if (parts.length !== 4 || parts.some((part) => !/^\\d{1,3}$/.test(part))) return null;
+  if (parts.length !== 4 || parts.some((part) => !/^\d{1,3}$/.test(part))) return null;
   const octets = parts.map(Number);
   if (octets.some((part) => part < 0 || part > 255)) return null;
   return octets;
 }
 
 function parseIPv6Words(raw) {
-  let value = String(raw || '').toLowerCase().replace(/^\\[|\\]$/g, '').split('%')[0];
+  let value = String(raw || '').toLowerCase().replace(/^\[|\]$/g, '').split('%')[0];
   if (!value.includes(':')) return null;
   if (value.includes('.')) {
     const cut = value.lastIndexOf(':');
