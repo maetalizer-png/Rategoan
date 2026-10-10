@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: serangan parameter terlarang dan properti asing ditolak
+ok 1 - serangan parameter terlarang dan properti asing ditolak
+  ---
+  duration_ms: 8.143096
+  type: 'test'
+  ...
+# Subtest: kunci AES ruang kerja tidak saling membuka
+ok 2 - kunci AES ruang kerja tidak saling membuka
+  ---
+  duration_ms: 75.412106
+  type: 'test'
+  ...
+# Subtest: jurnal VFS yang tertahan di PREPARE dipulihkan
+ok 3 - jurnal VFS yang tertahan di PREPARE dipulihkan
+  ---
+  duration_ms: 0.684283
+  type: 'test'
+  ...
+# Subtest: traversal path dan alat tanpa kapabilitas jaringan ditolak
+ok 4 - traversal path dan alat tanpa kapabilitas jaringan ditolak
+  ---
+  duration_ms: 0.346456
+  type: 'test'
+  ...
+# Subtest: lima belas skenario serangan tertutup
+ok 5 - lima belas skenario serangan tertutup
+  ---
+  duration_ms: 8.41202
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 164.42818

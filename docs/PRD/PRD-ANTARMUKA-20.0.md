@@ -18,7 +18,18 @@ Sasis 19.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan
 | 20.09 | Label suara tetap tanpa bobot. Cache shell tetap `raget-app-shell-v19` |
 | 20.10 | Uji tetap satu berkas `antarmuka.test.mjs`. Playwright tetap 21 catatan. Naskah CI menjalankan `studi-kasus-20.mjs` |
 
-Pengukuran hidup menyusul pada komit bukti.
+Pengukuran hidup (Chromium saja), diikat pada komit `fb27ea8ada65c7f3e37369352b7bff324cd339c6`:
+
+- Desktop 1366×768, `#/connect`, tema terang `rgb(250, 249, 246)`. Judul di y=40. `grid-template-rows` 768px. Sasis 960px, padding `40px 48px 64px`. Backdrop model `rgba(0, 0, 0, 0)` dan blur `blur(12px)`. Lencana kartu model "Eksperimental". Sidebar `rgb(250, 249, 246)`.
+- Popover Studio anak `#studio-app`, `position: fixed`, y=61, x=299. Tab kanvas celah 8px, `overflow-x: auto`, `min-width: 0`, latar segmen `rgb(241, 245, 249)`. Studio sandbox `allow-scripts allow-forms`.
+- Ponsel 390×844: header y=0, lebar 390, tinggi 60, tombol kembali 36px radius `50%`. Penyimpanan `0.0 MB / 50 MB`, tidak menimpa label. Lembar studio 263px dan tertutup oleh Escape. Navigasi celah 4px, tanpa kicker dan tanpa surel. Jejak izin di privasi, log terlipat. Peringatan konsol 0.
+- Unit 143/143 pada Node v22.23.2 dan 143/143 pada Node v18.20.8. Lint lolos di Node 22: sintaks 387 berkas, eslint 0/0, skema 208 berkas / 3934 entri. ESLint 10 tidak dijalankan di Node 18. Playwright 21/21.
+- Bentuk 1.0B adalah 1536×24, 1.5B adalah 2048×28 dengan dFF 5632, 2.0B adalah 2560×32 dengan dFF 6912. Ketiganya `weights: false` dan tidak diunduh.
+- `lm_head.weight` dengan offset berbeda tidak diikat. Offset yang sama tetap terikat.
+- Sapaan "halo" tetap template. Fungsi palindrome tetap dari tabel kode. `weightsInstalled()` false.
+- SQ8 menandai vektor 9999 pada jarak 0. Sampel 0,238 / 0,255 / 0,282 / 0,226 / 0,220 ms. Graf berlapis tidak diukur ulang karena `js/core/hnsw-graph.js` tidak berubah sejak 17.0.
+- Segel SHA-256 objek komit kode: `6f77741c164460d7147ff6c92821e2c69c0f4b2629dd403de4dc7e3822333937`. Bukan GPG.
+- Devlog tematik 63 baris. Laporan ringkas 2090 byte. Korpus sendiri 5330 baris.
 
 - Mesin bawaan tetap template. Lencana "Eksperimental" tetap pada kartu model.
 - Empat belas ekspor mati dan penghematan 8,4 KB tidak dihapus dan tidak diklaim.

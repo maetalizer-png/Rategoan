@@ -1,0 +1,20 @@
+
+> rategoan@20.0.0-PRODUCTION-GA lint
+> node raget/raget-tools/lint-check.mjs
+
+=== raget_lint_check: gerbang lint/build minimal ===
+
+Syntax check (node --check): 387 file .js/.mjs
+Syntax check: 0 error.
+
+ESLint (eslint.config.mjs, aturan correctness-only):
+  Error: 0 | Warning: 0 (warning tidak menggagalkan gerbang)
+
+Validasi skema data (validate-entry.mjs --all-domains):
+  File dicek: 208 | Entri dicek: 3934
+  HASIL: SKEMA OK
+
+Anti-placeholder: 0
+Global liar: 0
+
+=== HASIL: LOLOS ===
