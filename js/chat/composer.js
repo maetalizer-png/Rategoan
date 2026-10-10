@@ -20,6 +20,7 @@ import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { hybridRank, cosineText } from '../../raget/raget-vault/hybrid-search.js';
 import { fenceUntrusted, GUARDRAIL, buriedOrder } from '../../shared/untrusted.js';
+import { sanitizeDocContext } from '../../raget/raget-retrieval/local-doc.js';
 import { refuseProhibited } from '../../shared/safety-guard.js';
 import { planSubgoals } from '../../raget/raget-agents/core/agent-planner.js';
 import { sheetFromText, buildXlsxBytes } from '../../shared/xlsx-local.js';
@@ -482,12 +483,13 @@ export const composer = {
     const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
     if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
       if (fileSrc.fileText) {
+        const safeFile = sanitizeDocContext(fileSrc.fileText).text;
         if (FILE_READ_RE.test(text) && !/\b(apa|jelaskan|tentang)\b/i.test(text)) {
-          directReply = summarizeFileText(fileSrc.fileText, fileSrc.name);
+          directReply = summarizeFileText(safeFile, fileSrc.name);
         } else {
-          const chunks = String(fileSrc.fileText).split(/\n{2,}|(?<=[.!?])\s+/).map((part) => part.trim()).filter((part) => part.length > 12).slice(0, 80);
+          const chunks = String(safeFile).split(/\n{2,}|(?<=[.!?])\s+/).map((part) => part.trim()).filter((part) => part.length > 12).slice(0, 80);
           const hits = searchDocs(chunks.map((part, index) => ({ id: index, text: part })), text, 3);
-          directReply = hits.length ? ('Dari "' + (fileSrc.name || 'berkas') + '":\n\n' + hits.map((hit) => hit.text).join('\n\n')) : answerFromFile(fileSrc.fileText, text, fileSrc.name);
+          directReply = hits.length ? ('Dari "' + (fileSrc.name || 'berkas') + '":\n\n' + hits.map((hit) => hit.text).join('\n\n')) : answerFromFile(safeFile, text, fileSrc.name);
         }
       } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
     }
@@ -495,7 +497,10 @@ export const composer = {
     if (project) workspace.linkSession(project.id, s.id);
     let projectPrefix = '';
     if (project && (project.systemPrompt || (project.pinnedFiles && project.pinnedFiles.length))) {
-      const docs = (project.pinnedFiles || []).map((file, index) => ({ id: index, name: file.name, text: file.textContent || '' }));
+      const docs = (project.pinnedFiles || []).map((file, index) => {
+        const clean = sanitizeDocContext(file.textContent || '');
+        return { id: index, name: file.name, text: clean.text };
+      });
       const bulk = docs.reduce((sum, file) => sum + String(file.text || '').length, 0);
       const hits = bulk > 12000 ? await rankOffThread(docs, text) : hybridRank(docs, text, 3);
       const picked = hits.length ? hits : docs.slice(0, 2);

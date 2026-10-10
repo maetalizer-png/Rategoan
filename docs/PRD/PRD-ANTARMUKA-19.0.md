@@ -1,3 +1,31 @@
+# PRD Antarmuka 19.0 — catatan eksekusi
+
+Sumber resmi: dokumen Drive "PRD Antarmuka 19.0 — Pure Neural Engine, Physical Zero-Template Architecture & Full Autonomous WebGPU Rigor (Definitive Master)" (diubah 2026-10-10T07:43:39Z).
+Baseline: `2d00348e7862e6db506e3a8ab4638fec3ae9cdb9` (bukti `954b014193f7a8d5d361ccd2dd771307a45ea53d`, tag `18.0.0-PRODUCTION-GA`).
+
+Sasis 18.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan `llm-quantization.js` tidak disunting. Mesin bawaan tetap template. Bobot Whisper, Kokoro, Safetensors, dan ONNX tidak diunduh. Bukan mesin HNSW produksi di IndexedDB. Cakupan baris tidak diukur. Berkas bukti dan cetak biru markdown tetap di git.
+
+| DOD | Hasil |
+| --- | --- |
+| 19.01 | `readLocalText` menerima txt dan md. PDF dan DOCX tidak diekstrak di jalur ini. Ekstraksi biner yang sudah ada di lampiran tidak diubah menjadi klaim ONNX |
+| 19.02 | Paragraf pendek tetap utuh. Paragraf yang lebih panjang dari jendela dipecah lewat `chunkText` yang sudah ada |
+| 19.03 | Frasa injeksi di dokumen diganti `[ditahan]`, lalu dibungkus sebagai konteks tak tepercaya. Kalimat fakta di sekitarnya tetap |
+| 19.04 | Pencarian memori memakai `embed384` yang sudah ada. Hasilnya fixture. Bukan profil IndexedDB dan bukan graf produksi |
+| 19.05 | Kuota dihitung di memori terhadap 50 MB. Tidak ada toko `hnsw_nodes` baru |
+| 19.06 | `sanitizeDocContext` dipanggil pada berkas sematan proyek dan pada kutipan jawaban berkas. Penolakan kirim bila berkas memuat perintah tersembunyi tetap |
+| 19.07 | Preferensi mesin tetap template kecuali pengguna menyimpan neural. Jawaban sapaan dan fakta tidak dipaksa lewat forward pass |
+| 19.08 | Inti WebGPU tidak disunting. Tidak ada unduhan 1,5 miliar parameter |
+| 19.09 | Label suara tetap tanpa bobot. Cache shell tetap `raget-app-shell-v19` |
+| 19.10 | Uji tetap satu berkas `antarmuka.test.mjs`. Playwright tetap 21 catatan. Naskah CI menjalankan `studi-kasus-19.mjs` |
+
+Pengukuran hidup menyusul pada komit bukti.
+
+- Mesin bawaan tetap template. Lencana "Eksperimental" tetap pada kartu model.
+- Empat belas ekspor mati dan penghematan 8,4 KB tidak dihapus dan tidak diklaim.
+- Label Whisper/Kokoro tanpa bobot. Tidak ada model pihak ketiga.
+
+## Arsip terkonsolidasi 18.0
+
 # PRD Antarmuka 18.0 — catatan eksekusi
 
 Sumber resmi: dokumen Drive "PRD Antarmuka 18.0 — Hardened VFS Boundaries, Comprehensive Cybersecurity Parity & Industrialized WebGPU Neural Runtime (Definitive Master)" (diubah 2026-10-10T02:09:07Z).

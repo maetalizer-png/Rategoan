@@ -3,7 +3,7 @@
 Repositori ini dikelola secara ketat dengan pemisahan wilayah dokumentasi kanonikal:
 
 1. **Antarmuka, Casing & Mesin Aplikasi**:
-- `PRD-ANTARMUKA-18.0.md` — Cetak biru eksekusi aktif (Oktober 2026): batas jalur virtual, IPv6 privat, dan penolakan prototipe. PRD 11 sampai 17 terkonsolidasi di berkas yang sama.
+- `PRD-ANTARMUKA-19.0.md` — Cetak biru eksekusi aktif (Oktober 2026): teks dokumen lokal di memori, sanitasi injeksi, dan mesin template tetap bawaan. PRD 11 sampai 18 terkonsolidasi di berkas yang sama.
 - Riwayat rilis antarmuka: `../HISTORY-ANTARMUKA.md`
 2. **Data, Rilis Korpus & Lisensi**:
 - `PRD-RELEASE.md` — Standar baku tata kelola rilis 3 tingkat (Data Baru, Penampungan, Rak K & R).
