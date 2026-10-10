@@ -38,7 +38,12 @@ function tooBig() {
 }
 
 export function readBody(req) {
-  if (req.body && typeof req.body === 'object') return Promise.resolve(req.body);
+  if (req.body && typeof req.body === 'object') {
+    let encoded;
+    try { encoded = JSON.stringify(req.body); } catch (e) { return Promise.reject(invalidJson()); }
+    if (Buffer.byteLength(encoded || '') > BODY_LIMIT) return Promise.reject(tooBig());
+    return Promise.resolve(req.body);
+  }
   if (typeof req.body === 'string' && req.body) {
     if (Buffer.byteLength(req.body) > BODY_LIMIT) return Promise.reject(tooBig());
     try { return Promise.resolve(JSON.parse(req.body)); } catch (e) { return Promise.reject(invalidJson()); }
