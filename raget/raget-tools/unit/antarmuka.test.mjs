@@ -1400,6 +1400,9 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.match(read('api/_dispatch.js'), /verifyConfirm/);
   assert.equal(ipIsPrivate('::ffff:127.0.0.1'), true);
   assert.equal(ipIsPrivate('::ffff:10.1.2.3'), true);
+  assert.equal(ipIsPrivate('::ffff:7f00:1'), true);
+  assert.equal(ipIsPrivate('::ffff:0a00:1'), true);
+  assert.equal(await pinPublicHttp('http://[::ffff:7f00:1]/', async () => [{ address: '1.1.1.1' }]), null);
   assert.equal(ipIsPrivate('1.1.1.1'), false);
   const open = await resolvePublicHttpUrl('https://contoh.test/a', async () => [{ address: '1.1.1.1' }]);
   assert.match(open, /^https:\/\/contoh\.test/);
