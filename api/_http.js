@@ -180,14 +180,60 @@ export async function forward(res, url, token, method, body, extraHeaders) {
   res.end(text);
 }
 
+function parseIPv4(raw) {
+  const parts = String(raw || '').split('.');
+  if (parts.length !== 4 || parts.some((part) => !/^\\d{1,3}$/.test(part))) return null;
+  const octets = parts.map(Number);
+  if (octets.some((part) => part < 0 || part > 255)) return null;
+  return octets;
+}
+
+function parseIPv6Words(raw) {
+  let value = String(raw || '').toLowerCase().replace(/^\\[|\\]$/g, '').split('%')[0];
+  if (!value.includes(':')) return null;
+  if (value.includes('.')) {
+    const cut = value.lastIndexOf(':');
+    const octets = parseIPv4(value.slice(cut + 1));
+    if (!octets) return null;
+    const first = ((octets[0] << 8) | octets[1]).toString(16);
+    const second = ((octets[2] << 8) | octets[3]).toString(16);
+    value = value.slice(0, cut + 1) + first + ':' + second;
+  }
+  const halves = value.split('::');
+  if (halves.length > 2) return null;
+  const left = halves[0] ? halves[0].split(':') : [];
+  const right = halves.length === 2 && halves[1] ? halves[1].split(':') : [];
+  const missing = 8 - left.length - right.length;
+  if ((halves.length === 1 && missing !== 0) || (halves.length === 2 && missing < 1)) return null;
+  const groups = [...left, ...Array(missing).fill('0'), ...right];
+  if (groups.length !== 8 || groups.some((group) => !/^[0-9a-f]{1,4}$/.test(group))) return null;
+  return groups.map((group) => parseInt(group, 16));
+}
+
 export function ipIsPrivate(host) {
-  const raw = String(host || '').toLowerCase().replace(/^\[|\]$/g, '');
-  let v4 = raw;
-  if (raw.indexOf('::ffff:') === 0) v4 = raw.slice(7);
-  if (v4 === '0.0.0.0' || v4 === '::' || v4 === '::1') return true;
-  if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(v4)) return true;
-  if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(v4)) return true;
-  if (raw === '::1' || raw.indexOf('fe80:') === 0 || raw.indexOf('fc') === 0 || raw.indexOf('fd') === 0) return true;
+  const raw = String(host || '').toLowerCase().replace(/^\\[|\\]$/g, '');
+  const v4 = parseIPv4(raw);
+  if (v4) {
+    const [a, b] = v4;
+    return a === 0 || a === 10 || a === 127 || (a === 169 && b === 254) ||
+      (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) ||
+      (a === 100 && b >= 64 && b <= 127) || (a === 198 && (b === 18 || b === 19)) ||
+      (a >= 224) || (a === 255 && b === 255);
+  }
+  const words = parseIPv6Words(raw);
+  if (!words) return raw.includes(':');
+  if (words.every((word) => word === 0)) return true;
+  if (words.slice(0, 7).every((word) => word === 0) && words[7] === 1) return true;
+  if (words.slice(0, 5).every((word) => word === 0) && words[5] === 0xffff) {
+    const mapped = [words[6] >> 8, words[6] & 255, words[7] >> 8, words[7] & 255].join('.');
+    return ipIsPrivate(mapped);
+  }
+  const first = words[0];
+  if ((first & 0xfe00) === 0xfc00) return true;
+  if ((first & 0xffc0) === 0xfe80 || (first & 0xffc0) === 0xfec0) return true;
+  if ((first & 0xff00) === 0xff00) return true;
+  if (first === 0x2001 && words[1] === 0x0db8) return true;
+  if (first === 0x0064 && words[1] === 0xff9b) return true;
   return false;
 }
 
