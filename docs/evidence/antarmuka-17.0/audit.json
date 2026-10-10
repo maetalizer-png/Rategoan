@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-10-10",
+  "parent": "dae091ff81db6fb4bc8cf2bdbe41d48774470fd6",
+  "implementation": "854e5e11bebacf9408ff452a787a0f4a815b3335",
+  "seal": {
+    "algorithm": "SHA-256",
+    "subject": "git cat-file commit 854e5e11bebacf9408ff452a787a0f4a815b3335",
+    "digest": "f89a3576b7fe20a1ee152139524d504c24793b21562edacce98c3713cc96bfa9",
+    "gpg": false
+  },
+  "tag": "17.0.0-PRODUCTION-GA",
+  "node": "v22.23.2",
+  "node18": "v18.20.8 132/132",
+  "coverageMeasured": false,
+  "neuralCoreUntouched": [
+    "raget/raget-neural/llm-attention.js",
+    "raget/raget-neural/runtime/webgpu-runner.js",
+    "raget/raget-neural/llm-quantization.js"
+  ],
+  "checks": {
+    "unit": "132/132",
+    "node18": "132/132",
+    "lintErrors": 0,
+    "lintWarnings": 0,
+    "syntaxFiles": 383,
+    "schemaFiles": 208,
+    "schemaEntries": 3934,
+    "playwright": "21/21",
+    "sq8SamplesMs": [
+      0.415,
+      0.39,
+      0.473,
+      0.438,
+      0.389
+    ],
+    "graphSearchMs": [
+      0.293,
+      0.081,
+      0.076,
+      0.071,
+      0.092
+    ],
+    "graphRecallAt5": 1,
+    "graphNdcgAt5": 1,
+    "voiceWeights": false,
+    "externalModels": false,
+    "tematikLines": 63,
+    "ringkasBytes": 2090,
+    "corpusLines": 5330,
+    "journal": "COMMITTED dan ROLLED_BACK menunggu remember",
+    "deadCode": "tidak ada penghapusan massal ekspor. Jumlah 14 ekspor mati dan 8,4 KB tidak diklaim."
+  }
+}

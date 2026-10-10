@@ -1,0 +1,30 @@
+{
+  "plantId": 9999,
+  "distance": 0,
+  "samplesMs": [
+    0.415,
+    0.39,
+    0.473,
+    0.438,
+    0.389
+  ],
+  "note": "Juara blok Int8 setelah pemanasan. Bukan pemindaian kasar 10000 dan bukan HNSW produksi di IndexedDB.",
+  "layeredGraph": {
+    "vectors": 10000,
+    "dim": 16,
+    "buildMs": 3914.7,
+    "searchMs": [
+      0.293,
+      0.081,
+      0.076,
+      0.071,
+      0.092
+    ],
+    "recallAt5": 1,
+    "ndcgAt5": 1,
+    "fixture": "salinan sintetis vektor 0 pada id 10, 200, 4000",
+    "shards": 20,
+    "store": "hnsw_nodes",
+    "shardCap": 500
+  }
+}

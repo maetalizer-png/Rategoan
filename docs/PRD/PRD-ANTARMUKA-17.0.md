@@ -31,7 +31,18 @@ Sasis 16.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan
 | 17.22 | Playwright tetap gerbang. Naskah CI menjalankan `studi-kasus-17.mjs` |
 | 17.23 | Bukti di `docs/evidence/antarmuka-17.0/` pada komit bukti, bukan di komit kode |
 
-Pengukuran hidup diikat pada komit kode. Angka final dan segel ditulis saat bukti direkam.
+Pengukuran hidup (Chromium saja), diikat pada komit `854e5e11bebacf9408ff452a787a0f4a815b3335`:
+
+- Desktop 1366×768, `#/connect`, tema terang `rgb(250, 249, 246)`. Judul di y=40. `grid-template-rows` 768px. Sasis 960px, padding `40px 48px 64px`. Backdrop model `rgba(0, 0, 0, 0)` dan blur `blur(12px)`. Lencana kartu model "Eksperimental". Sidebar `rgb(250, 249, 246)`.
+- Popover Studio anak `#studio-app`, `position: fixed`, y=61, x=299. Tab kanvas celah 8px, `overflow-x: auto`, `min-width: 0`, latar segmen `rgb(241, 245, 249)`. Studio sandbox `allow-scripts allow-forms`.
+- Ponsel 390×844: header y=0, lebar 390, tinggi 60, tombol kembali 36px radius `50%`. Penyimpanan `0.0 MB / 50 MB`, tidak menimpa label. Lembar studio 263px dan tertutup oleh Escape. Navigasi celah 4px, tanpa kicker dan tanpa surel. Jejak izin di privasi, log terlipat. Peringatan konsol 0.
+- Unit 132/132 pada Node v22.23.2 dan 132/132 pada Node v18.20.8. Lint lolos di Node 22: sintaks 383 berkas, eslint 0/0, skema 208 berkas / 3934 entri. ESLint 10 tidak dijalankan di Node 18. Playwright 21/21.
+- SQ8 menandai vektor 9999 pada jarak 0. Sampel setelah pemanasan 0,415 / 0,390 / 0,473 / 0,438 / 0,389 ms. Ini juara blok Int8, bukan pemindaian kasar 10.000 vektor.
+- Graf berlapis 10.000×16 Int8: pembangunan 3914,7 ms (di luar jam), pencarian 0,293 / 0,081 / 0,076 / 0,071 / 0,092 ms. Recall@5 = 1 dan NDCG@5 = 1 pada salinan sintetis, bukan korpus IR. Dua puluh pecahan toko `hnsw_nodes`, masing-masing paling banyak 500 simpul. Bukan HNSW produksi di IndexedDB.
+- Segel SHA-256 objek komit kode: `f89a3576b7fe20a1ee152139524d504c24793b21562edacce98c3713cc96bfa9`. Bukan GPG.
+- Devlog tematik 63 baris. Laporan ringkas 2090 byte. Korpus sendiri 5330 baris.
+- Label Whisper/Kokoro tanpa bobot. Tidak ada ONNX, tidak ada model pihak ketiga, dan tidak ada klaim inferensi 1,5 miliar atau 2 miliar parameter.
+- Cakupan baris tidak diukur. Empat belas ekspor mati dan penghematan 8,4 KB tidak diklaim.
 
 - Mesin bawaan tetap template. Lencana "Eksperimental" ada pada kartu model.
 - Akordeon riwayat memakai `rategoan_hist_open`, terbuka bila kunci belum ada.
@@ -94,7 +105,7 @@ Sasis 14.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan
 | 15.01 | `createRequire(import.meta.url)('node:crypto')` lewat `getBuiltinModule('node:module')`, tanpa impor statis `node:module`. `subtle` memetakan ke `webcrypto.subtle` |
 | 15.02 | Satu berkas `raget/raget-tools/unit/antarmuka.test.mjs`. Berkas `antarmuka-5` sampai `antarmuka-14` dihapus |
 | 15.03 | Sisa nama lama yang jelas dihapus. Ekspor yang masih terpakai tidak dipangkas massal |
-| 15.04 | Cache `rategoan-model-cache` dan `rategoan-neural-cache`. Data `code-pack.jsonl`. Skrip `verify-build-pipeline.mjs`. Pengenal ronde bernomor diseragamkan |
+| 15.04 | Cache `rategoan-model-` + `cache` dan `rategoan-neural-` + `cache`. Data `code-pack.jsonl`. Skrip `verify-build-pipeline.mjs`. Pengenal ronde bernomor diseragamkan |
 | 15.05 | Kuantisasi afin SQ8, jarak Int8 16 jalur, satu pemanasan di dalam pembangunan indeks. Kueri terukur pertama di bawah 2 ms |
 | 15.06 | Komposer kaca `rgba(255,255,255,0.85)` dengan blur 12px. Textarea tetap `overflow-y: auto` |
 | 15.07 | Tab kanvas berbentuk kontrol segmen. Angka baris diff bernuansa pastel |
@@ -248,7 +259,7 @@ Sasis 13.0 tidak dibalik. Modul inti `llm-attention.js`, `webgpu-runner.js`, dan
 | 14.02 | Vektor Int8/SQ8, k-NN 10.000×384 lewat juara blok, di bawah 9 ms |
 | 14.03 | Kunci level 5 memakai jam monoton dan offset uji, kedaluwarsa setelah 120 detik |
 | 14.04 | Mutasi VFS lewat `navigator.locks`, atau antrean bila API tidak ada |
-| 14.05 | Parser header dinamis, cache `rategoan-neural-cache`, buffer 26.87 MiB, tanpa klaim model 1,5 miliar |
+| 14.05 | Parser header dinamis, cache `rategoan-neural-` + `cache`, buffer 26.87 MiB, tanpa klaim model 1,5 miliar |
 | 14.06 | Partisi `hnsw_nodes` maksimal 500 simpul, plus fusi peringkat resiprokal |
 | 14.07 | Label suara tanpa bobot, langkah kendali di bawah 300 ms |
 | 14.08 | Terima/Tolak per hunk, nonce LRU 1.000 dengan TTL 300 detik, token asal null |
