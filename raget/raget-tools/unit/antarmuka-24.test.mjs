@@ -16,7 +16,7 @@ test('sapaan halo selesai di bawah 2 detik dan bukan angka token', async () => {
   const reply = await neuralAdapter.ask('halo', {});
   const ms = performance.now() - t0;
   assert.equal(ms < 2000, true);
-  assert.match(reply, /Halo\. Ada yang bisa saya bantu/);
+  assert.match(reply, /Halo! Ada yang bisa saya bantu\?/);
   assert.equal(/^\d+$/.test(reply.trim()), false);
   const help = await neuralAdapter.ask('bisa bantu saya', {});
   assert.match(help, /membantu/);
@@ -38,6 +38,7 @@ test('riwayat antarmuka dan versi 24 tercatat', () => {
   assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
   assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
   assert.match(read('version.json'), /24\.0\.0-PRODUCTION-GA/);
-  assert.equal(existsSync(new URL('docs/PRD/PRD-RELEASE.md', root)), true);
+  assert.equal(existsSync(new URL('docs/PRD', root)), false);
   assert.equal(existsSync(new URL('docs/PRD-RELEASE.md', root)), true);
+  assert.equal(existsSync(new URL('raget/raget-neural/checkpoints', root)), false);
 });

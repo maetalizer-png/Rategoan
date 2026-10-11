@@ -322,12 +322,16 @@ export async function laporanOtak() {
     parts.push(formatter.bullets(autoFewshotCandidates.map((n) => n.question)));
   }
 
-  const latestRonde = devlogIndex.latest();
-  parts.push(formatter.h('Memori Pengembangan', 3));
-  parts.push(
-    'Tercatat ' + devlogIndex.all().length + ' ronde pengembangan, ' + devlogIndex.totalKomit() +
-    ' commit. Ronde terakhir: ' + latestRonde.judul + ' (' + latestRonde.tanggal + '). Tanya "sejarahmu" atau "cara kerjamu" untuk detail.'
-  );
+  const devlogRows = typeof devlogIndex.all === 'function' ? devlogIndex.all() : [];
+  const latestRonde = devlogRows.length && typeof devlogIndex.latest === 'function' ? devlogIndex.latest() : null;
+  if (latestRonde && latestRonde.judul) {
+    const commits = typeof devlogIndex.totalKomit === 'function' ? devlogIndex.totalKomit() : 0;
+    parts.push(formatter.h('Memori Pengembangan', 3));
+    parts.push(
+      'Tercatat ' + devlogRows.length + ' ronde pengembangan, ' + commits +
+      ' commit. Ronde terakhir: ' + latestRonde.judul + ' (' + latestRonde.tanggal + ').'
+    );
+  }
 
   parts.push(formatter.h('Rekomendasi', 3));
   const rekomendasi = [];

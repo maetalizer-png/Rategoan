@@ -33,7 +33,6 @@ import { collectPreview, previewSrcdoc, cycleSandboxPorts, describePick, groundS
 import { getWebCrypto } from '../../../js/crypto/get-web-crypto.js';
 import { recordTelemetry, publicMetrics, auditEvent } from '../../../js/studio/telemetry.js';
 import { positionDesktopPopover } from '../../../shared/popover.js';
-import { devlogIndex } from '../../../raget/raget-devlog/index.js';
 import { llmEngine } from '../../../raget/raget-deterministic/llm-engine.js';
 import { whatsappImporter } from '../../../vault/whatsapp/importer.js';
 import { createReplica, insertAt, applyOps, readDoc } from '../../../js/artifacts/canvas-editor.js';
@@ -782,9 +781,9 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   removed.forEach((rel) => assert.equal(gone(rel), true, rel));
   assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-20.0.md'), true);
-  assert.equal(existsSync(new URL('docs/PRD/PRD-RELEASE.md', root)), true);
+  assert.equal(gone('docs/PRD'), true);
   assert.equal(existsSync(new URL('docs/PRD-RELEASE.md', root)), true);
-  assert.equal(existsSync(new URL('docs/evidence/antarmuka-22.0/audit.json', root)), true);
+  assert.equal(gone('docs/evidence'), true);
   assert.equal(existsSync(new URL('docs/STATUS-KORPUS-LISENSI.md', root)), true);
 });
 
@@ -825,13 +824,11 @@ test('DOD-11.13 sampai 11.15 korpus, sejarah, dan laporan diringkas', () => {
   assert.equal(/segera pindah ke IKN/.test(corpus), false);
   assert.match(corpus, /282 juta/);
   assert.equal(gone('raget/raget-devlog/sejarah'), true);
-  assert.equal(devlogIndex.all().length, 21);
-  assert.equal(typeof devlogIndex.latest().judul, 'string');
-  const tematik = read('raget/raget-devlog/jsonl/devlog-tematik.jsonl').trim().split('\n');
-  assert.ok(tematik.length >= 60);
-  assert.match(tematik[0], /"kategori":/);
-  assert.equal(gone('raget/raget-devlog/neural/training-report-tiny.json'), true);
-  assert.equal(existsSync(new URL('raget/raget-devlog/neural/laporan-pelatihan-ringkas.json', root)), true);
+  assert.equal(gone('raget/raget-devlog/sejarah.js'), true);
+  assert.equal(gone('raget/raget-devlog/jsonl'), true);
+  assert.equal(gone('raget/raget-devlog/neural'), true);
+  assert.equal(gone('raget/raget-neural/checkpoints'), true);
+  assert.match(read('raget/raget-devlog/index.js'), /export const devlogIndex = \{\};/);
   assert.equal(gone('raget/raget-devlog/json/metadata/answer-rules.json'), true);
   assert.equal(gone('raget/raget-devlog/json/fewshot.json'), true);
   assert.equal(gone('raget/raget-devlog/json/persona.json'), true);
@@ -1689,7 +1686,7 @@ test('DOD-20.04 ledger korpus tetap dan jangkar usang hilang', () => {
   assert.equal(existsSync(new URL('docs/STATUS-KORPUS-LISENSI.md', root)), true);
   assert.equal(gone('docs/PRD/PRD-RAGET-TEMPLATE.md'), true);
   assert.equal(gone('raget/raget-tools/CHECKPOINT-POLICY.md'), true);
-  assert.equal(existsSync(new URL('docs/evidence/antarmuka-22.0/audit.json', root)), true);
+  assert.equal(gone('docs/evidence'), true);
   assert.equal(read('package.json').includes('berbasis rule/template'), false);
   assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
   assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);

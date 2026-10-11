@@ -1,9 +1,0 @@
-{
-  "version": "24.0.0-PRODUCTION-GA",
-  "unit": "175/175",
-  "halo": "Halo. Ada yang bisa saya bantu?",
-  "parameterCount": 185856,
-  "steps": 1820,
-  "trained": true,
-  "checkpoint": "raget/raget-neural/checkpoints/raget-neural-compact.safetensors"
-}

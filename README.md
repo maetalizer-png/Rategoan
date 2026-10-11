@@ -90,10 +90,10 @@ raget/                            induk seluruh otak AI Raget
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
   raget-retrieval/                pencarian BM25 satu pintu lintas sumber
   raget-data/                     sumber data resmi — json/ (domain terstruktur), jsonl/ (korpus), neural/ (checkpoint)
-  raget-devlog/                   log pengembangan & laporan training (termasuk neural/)
+  raget-devlog/                   stub impor kosong. Arsip ronde tidak disimpan di klien
   raget-tools/                    skrip verifikasi: bench runner, pengukuran kualitas, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-docs/                             ledger lisensi korpus dan standar rilis (`STATUS-KORPUS-LISENSI.md`, `PRD/PRD-RELEASE.md`)
+docs/                             ledger lisensi korpus dan standar rilis (`STATUS-KORPUS-LISENSI.md`, `PRD-RELEASE.md`)
 ```
 
 Jalur chat adalah `engine-router.js`, dan antreannya hanya adapter neural.
@@ -145,8 +145,8 @@ kode aplikasi. Domain ditambah dengan berkas `.json` di `raget/raget-data/json/`
 ## RAGET Neural (jalur chat, bobot tidak dibundel)
 
 Panel Model tetap menampilkan kartu eksperimental. Jalur chat memakai adapter neural.
-Nama kanonik di Hugging Face adalah `raget-neural-1.0b.safetensors`, `raget-neural-1.5b.safetensors`, dan `raget-neural-2.0b.safetensors`.
-Berkas itu tidak ada di repositori ini dan tidak diunggah pada rilis ini.
+Tidak ada berkas `.safetensors` terlatih di repositori ini maupun di Hugging Face.
+Nama `raget-neural-1.0b`, `raget-neural-1.5b`, dan `raget-neural-2.0b` bukan bobot yang sudah dilatih.
 Kalau checkpoint belum termuat, balasan berbunyi bahwa bobot belum terpasang.
 
 ## Kualitas & Pengujian

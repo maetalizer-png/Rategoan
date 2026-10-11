@@ -1,9 +1,0 @@
-{
-  "trained": true,
-  "parameterCount": 185856,
-  "dModel": 96,
-  "nLayers": 2,
-  "steps": 1820,
-  "bukan45Juta": true,
-  "faktaIndonesia": "dua baris raget_own_corpus.jsonl, karena kamus model tidak memuat digit 1, 4, 6, dan 9"
-}

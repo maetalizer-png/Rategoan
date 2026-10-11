@@ -25,6 +25,25 @@ import os
 import sys
 
 
+
+def assert_trained(path):
+    """Tolak matriks acak. Hanya checkpoint dengan metadata trained=true yang boleh naik."""
+    import json
+    import struct
+    with open(path, 'rb') as f:
+        raw_len = f.read(8)
+        if len(raw_len) < 8:
+            raise SystemExit('DITOLAK — berkas bukan safetensors.')
+        header_len = struct.unpack('<Q', raw_len)[0]
+        if header_len <= 0 or header_len > 64 * 1024 * 1024:
+            raise SystemExit('DITOLAK — header safetensors tidak sah.')
+        header = json.loads(f.read(header_len).decode('utf-8'))
+    meta = header.get('__metadata__') or {}
+    trained = str(meta.get('trained', '')).strip().lower()
+    if trained not in ('true', '1', 'yes'):
+        raise SystemExit('DITOLAK — berkas bukan hasil pelatihan nyata (trained!=true). Matriks kosong atau inisialisasi acak tidak diunggah.')
+
+
 def sha256_file(path):
     h = hashlib.sha256()
     with open(path, 'rb') as f:
@@ -49,6 +68,7 @@ def main():
         raise SystemExit('HF_TOKEN belum di-set di environment.')
     if not os.path.exists(ckpt_path):
         raise SystemExit('File tidak ditemukan: ' + ckpt_path)
+    assert_trained(ckpt_path)
 
     try:
         from huggingface_hub import HfApi

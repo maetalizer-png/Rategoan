@@ -12,13 +12,13 @@ const root = new URL('../../../', import.meta.url);
 function read(rel) { return readFileSync(new URL(rel, root), 'utf8'); }
 function gone(rel) { return !existsSync(new URL(rel, root)); }
 
-test('PRD rilis ada di dua jalur dan README menyebutkannya', () => {
-  assert.equal(existsSync(new URL('docs/PRD/PRD-RELEASE.md', root)), true);
+test('PRD rilis hanya satu salinan kanonik', () => {
+  assert.equal(existsSync(new URL('docs/PRD', root)), false);
   assert.equal(existsSync(new URL('docs/PRD-RELEASE.md', root)), true);
   const readme = read('README.md');
   assert.match(readme, /PRD-RELEASE\.md/);
   assert.equal(readme.includes('template'), false);
-  assert.match(read('docs/PRD/PRD-RELEASE.md'), /Pagar Lisensi/);
+  assert.match(read('docs/PRD-RELEASE.md'), /Pagar Lisensi/);
 });
 
 test('warisan skrip dan studi kasus lama sudah tidak ada', () => {
@@ -33,12 +33,11 @@ test('warisan skrip dan studi kasus lama sudah tidak ada', () => {
   assert.equal(existsSync(new URL('raget/raget-tools/train-raget-1b-2b.py', root)), true);
 });
 
-test('devlog dan pengetahuan tidak memakai frasa yang dilarang', () => {
-  const sejarah = read('raget/raget-devlog/sejarah.js');
-  const tematik = read('raget/raget-devlog/jsonl/devlog-tematik.jsonl');
+test('devlog lama sudah dibongkar dan pengetahuan tidak memakai frasa yang dilarang', () => {
+  assert.equal(gone('raget/raget-devlog/sejarah.js'), true);
+  assert.equal(gone('raget/raget-devlog/jsonl/devlog-tematik.jsonl'), true);
   for (const phrase of ['rule-based', 'bukan LLM', 'template chatbot', 'massive200m round 8', 'fragmen kata acak']) {
-    assert.equal(sejarah.includes(phrase), false, phrase);
-    assert.equal(tematik.includes(phrase), false, phrase);
+    assert.equal(read('README.md').includes(phrase), false, phrase);
   }
   for (const rel of [
     'raget/raget-data/json/pengetahuan/raget-diri.json',
@@ -100,11 +99,10 @@ test('tiga berkas inti neural tidak memuat rumus baru ini', () => {
   }
 });
 
-test('bukti 23 tidak mengklaim bobot terpasang', () => {
-  const audit = JSON.parse(read('docs/evidence/antarmuka-23.0/audit.json'));
-  assert.equal(audit.version, '23.0.0-PRODUCTION-GA');
-  assert.equal(audit.weightsInstalled, false);
-  assert.equal(audit.gpg, false);
-  assert.equal(audit.hfWeightsUploaded, true);
-  assert.equal(audit.hfOldWeightsDeleted, true);
+test('bukti 23 sudah dibongkar dan bobot tidak diklaim terpasang', () => {
+  assert.equal(gone('docs/evidence'), true);
+  assert.equal(gone('raget/raget-neural/checkpoints'), true);
+  const pref = read('js/state/engine-preference.js');
+  assert.equal(pref.includes('return false'), true);
+  assert.equal(pref.includes('hfWeightsUploaded'), false);
 });

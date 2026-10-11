@@ -1,5 +1,6 @@
 
 import { llmMode } from '../../js/state/llm-mode.js';
+import { llmEngine } from '../raget-deterministic/llm-engine.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
 import { openInt4Checkpoint } from './runtime/int4-session.js';
 
@@ -268,6 +269,10 @@ async function generate(messages, prompt, options) {
     const fact = await answerIndonesia();
     if (fact) return fact;
   }
+  const greeted = llmEngine.tryGreeting(text, {});
+  if (greeted) return greeted;
+  const daily = llmEngine.tryDailyTalk(text, {});
+  if (daily) return daily;
   const neural = await generateCompact(prompt, options);
   if (neural && !replyBroken(neural)) return neural;
   return retrieveFact(text);

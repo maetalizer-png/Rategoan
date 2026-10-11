@@ -118,9 +118,7 @@ test('readme tidak menurunkan produk dan versi paket 22', () => {
   assert.match(read('sw.js'), /raget-app-shell-v19/);
 });
 
-test('bukti 22 ada dan tidak mengklaim bobot terpasang', () => {
-  const audit = JSON.parse(read('docs/evidence/antarmuka-22.0/audit.json'));
-  assert.equal(audit.version, '22.0.0-PRODUCTION-GA');
-  assert.equal(audit.weightsInstalled, false);
-  assert.equal(audit.gpg, false);
+test('bukti 22 sudah dibongkar dan bobot tidak diklaim terpasang', () => {
+  assert.equal(existsSync(new URL('docs/evidence', root)), false);
+  assert.equal(read('js/state/engine-preference.js').includes('return false'), true);
 });
