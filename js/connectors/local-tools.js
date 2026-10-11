@@ -24,7 +24,9 @@ function tokenize(expr) {
 }
 
 export function parseArithmeticAST(expr) {
-  const source = String(expr || '').replace(/\s+/g, '');
+  const raw = String(expr || '');
+  if (raw.length > 12000) throw new Error('Ekspresi terlalu panjang');
+  const source = raw.replace(/\s+/g, '');
   if (source.length > 10000) throw new Error('Ekspresi terlalu panjang');
   const tokens = tokenize(source);
   if (tokens.join('') !== source) throw new Error('Ekspresi tidak aman');

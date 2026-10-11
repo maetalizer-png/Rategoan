@@ -53,5 +53,42 @@ export function createVoicePipeline() {
       if (!live) return { barged: true, ms, budget: 300 };
       return { barged: false, ms, budget: 300 };
     },
+    frame(pcm) {
+      const t0 = performance.now();
+      const bins = melBins(pcm, 80);
+      let energy = 0;
+      for (let i = 0; i < bins.length; i += 1) energy += bins[i];
+      energy = bins.length ? energy / bins.length : 0;
+      const hit = bargeIn(energy, 0.02);
+      if (hit) live = false;
+      return { energy, bins: bins.length, barged: hit, ms: performance.now() - t0, weights: false };
+    },
+    transcribe(pcm) {
+      const t0 = performance.now();
+      const heard = this.frame(pcm);
+      return {
+        text: '',
+        engine: 'whisper-webgpu',
+        weights: false,
+        fallback: 'web-speech',
+        barged: heard.barged,
+        ms: performance.now() - t0,
+      };
+    },
+    speak(text) {
+      const t0 = performance.now();
+      const utter = String(text || '');
+      const synth = globalThis.speechSynthesis;
+      const Utter = globalThis.SpeechSynthesisUtterance;
+      if (synth && Utter && utter) {
+        try {
+          synth.cancel();
+          synth.speak(new Utter(utter));
+        } catch (e) {
+          return { engine: 'kokoro-wasm', weights: false, fallback: 'web-speech', ms: performance.now() - t0, chars: utter.length };
+        }
+      }
+      return { engine: 'kokoro-wasm', weights: false, fallback: 'web-speech', ms: performance.now() - t0, chars: utter.length };
+    },
   };
 }

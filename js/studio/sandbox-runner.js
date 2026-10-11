@@ -78,16 +78,32 @@ export function capturePreviewState(frame) {
       fields.push({ key, value: String(el.value || '') });
     });
     const scroller = doc.scrollingElement || doc.documentElement;
-    return { fields, scrollY: scroller ? scroller.scrollTop : 0 };
+    const session = [];
+    try {
+      const box = doc.defaultView && doc.defaultView.sessionStorage;
+      if (box) {
+        for (let i = 0; i < box.length; i += 1) {
+          const key = box.key(i);
+          session.push({ key, value: String(box.getItem(key) || '') });
+        }
+      }
+    } catch (err) {
+      return { fields, scrollY: scroller ? scroller.scrollTop : 0, session };
+    }
+    return { fields, scrollY: scroller ? scroller.scrollTop : 0, session };
   } catch (e) {
     return null;
   }
 }
 
 function stateScript(state) {
-  if (!state || !Array.isArray(state.fields) || !state.fields.length && !state.scrollY) return '';
-  const payload = JSON.stringify({ fields: state.fields, scrollY: Number(state.scrollY) || 0 });
-  return '<script>try{var st=' + payload + ';st.fields.forEach(function(f){var el=document.getElementById(f.key);if(!el&&f.key)el=document.querySelector("[name="+JSON.stringify(f.key)+"]");if(el)el.value=f.value;});window.scrollTo(0,st.scrollY||0);}catch(e){}<\/script>';
+  if (!state) return '';
+  const fields = Array.isArray(state.fields) ? state.fields : [];
+  const session = Array.isArray(state.session) ? state.session : [];
+  const scrollY = Number(state.scrollY) || 0;
+  if (!fields.length && !session.length && !scrollY) return '';
+  const payload = JSON.stringify({ fields, scrollY, session });
+  return '<script>try{var st=' + payload + ';st.fields.forEach(function(f){var el=document.getElementById(f.key);if(!el&&f.key)el=document.querySelector("[name="+JSON.stringify(f.key)+"]");if(el)el.value=f.value;});(st.session||[]).forEach(function(row){try{sessionStorage.setItem(row.key,row.value);}catch(e){}});window.scrollTo(0,st.scrollY||0);}catch(e){}<\/script>';
 }
 
 export function previewSrcdoc(files, state) {
@@ -97,7 +113,7 @@ export function previewSrcdoc(files, state) {
   const js = String((packed && packed['script.js']) || '');
   const origin = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
   const csp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data: blob:;">';
-  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){if(!target)return;try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});function publish(){var fields=[];document.querySelectorAll("input,textarea,select").forEach(function(el){var key=el.id||el.name;if(!key)return;fields.push({key:key,value:String(el.value||"")});});var y=(document.scrollingElement&&document.scrollingElement.scrollTop)||0;send("studio:state",{preview:{fields:fields,scrollY:y}});}document.addEventListener("input",publish);document.addEventListener("change",publish);window.addEventListener("scroll",publish,true);})();<\/script>';
+  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){if(!target)return;try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});function publish(){var fields=[];document.querySelectorAll("input,textarea,select").forEach(function(el){var key=el.id||el.name;if(!key)return;fields.push({key:key,value:String(el.value||"")});});var session=[];try{for(var i=0;i<sessionStorage.length;i++){var k=sessionStorage.key(i);session.push({key:k,value:String(sessionStorage.getItem(k)||"")});}}catch(e){}var y=(document.scrollingElement&&document.scrollingElement.scrollTop)||0;send("studio:state",{preview:{fields:fields,scrollY:y,session:session}});}document.addEventListener("input",publish);document.addEventListener("change",publish);window.addEventListener("scroll",publish,true);})();<\/script>';
   const style = csp + trap + '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
   const restore = stateScript(state);
   const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>' + restore;

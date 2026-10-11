@@ -147,7 +147,8 @@ kode aplikasi. Domain ditambah dengan berkas `.json` di `raget/raget-data/json/`
 Panel Model tetap menampilkan kartu eksperimental. Jalur chat memakai adapter neural.
 Tidak ada berkas `.safetensors` terlatih di repositori ini maupun di Hugging Face.
 Nama `raget-neural-1.0b`, `raget-neural-1.5b`, dan `raget-neural-2.0b` bukan bobot yang sudah dilatih.
-Kalau checkpoint belum termuat, balasan berbunyi bahwa bobot belum terpasang.
+Kalau checkpoint belum termuat, sapaan tetap dijawab di perangkat. Generasi token baru hanya jalan kalau ada forward pass, lalu teks UTF-8 mengalir sampai token henti. Angka identitas token tidak ditampilkan.
+Folder `docs/` hanya memuat `docs/PRD-RELEASE.md` dan `docs/STATUS-KORPUS-LISENSI.md`.
 
 ## Kualitas & Pengujian
 

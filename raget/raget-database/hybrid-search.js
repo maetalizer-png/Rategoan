@@ -252,6 +252,19 @@ export function reciprocalRankFusion(lists, k) {
   return Array.from(score.entries()).sort((a, b) => b[1] - a[1]).map(([id, rrf]) => ({ id, rrf }));
 }
 
+export function meanReciprocalRank(ranked, relevant) {
+  const gold = new Set(relevant || []);
+  let sum = 0;
+  let n = 0;
+  (ranked || []).forEach((list) => {
+    n += 1;
+    const ids = (list || []).map((row) => (row && row.id != null ? row.id : row));
+    const at = ids.findIndex((id) => gold.has(id));
+    if (at >= 0) sum += 1 / (at + 1);
+  });
+  return n ? sum / n : 0;
+}
+
 export function dotInt8Unrolled(matrix, base, query, dim) {
   let acc = 0;
   let i = 0;

@@ -19,7 +19,11 @@ function parseICS(text) {
   let current = null;
 
   lines.forEach((line) => {
-    const trimmed = line.trim();
+    if (line.length > 4096) {
+      const head = line.slice(0, 48);
+      if (head.indexOf('BEGIN:VEVENT') < 0 && head.indexOf('END:VEVENT') < 0) return;
+    }
+    const trimmed = line.length > 4096 ? line.slice(0, 64).trim() : line.trim();
     if (trimmed === 'BEGIN:VEVENT') {
       current = {};
       return;

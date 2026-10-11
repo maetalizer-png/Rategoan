@@ -35,9 +35,9 @@ test('simd128 menghitung dot i32x4 dan tidak memakai sum4', () => {
 });
 
 test('riwayat antarmuka dan versi 24 tercatat', () => {
-  assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
-  assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
-  assert.match(read('version.json'), /24\.0\.0-PRODUCTION-GA/);
+  assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), false);
+  assert.match(read('package.json'), /25\.0\.0-PRODUCTION-GA/);
+  assert.match(read('version.json'), /25\.0\.0-PRODUCTION-GA/);
   assert.equal(existsSync(new URL('docs/PRD', root)), false);
   assert.equal(existsSync(new URL('docs/PRD-RELEASE.md', root)), true);
   assert.equal(existsSync(new URL('raget/raget-neural/checkpoints', root)), false);

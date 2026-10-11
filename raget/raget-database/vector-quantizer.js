@@ -1,3 +1,5 @@
+import { searchInt8Rows } from './simd128.js';
+
 export function quantizeSymmetric(values) {
   const src = values instanceof Float32Array ? values : Float32Array.from(values || []);
   const data = new Int8Array(src.length);
@@ -46,6 +48,10 @@ export function dotInt8x8(matrix, base, query, dim) {
 }
 
 export function searchInt8Top1(matrix, count, dim, query) {
+  if (dim % 16 === 0) {
+    const hit = searchInt8Rows(matrix, count, dim, query);
+    if (hit) return hit;
+  }
   let best = 0;
   let bestScore = -1e15;
   for (let row = 0; row < count; row += 1) {

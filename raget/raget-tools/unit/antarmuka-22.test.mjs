@@ -110,8 +110,8 @@ test('readme tidak menurunkan produk dan versi paket 22', () => {
   assert.equal(readme.includes('template'), false);
   assert.equal(readme.includes('rule-based'), false);
   assert.equal(readme.includes('bukan model bahasa besar'), false);
-  assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
-  assert.match(read('version.json'), /24\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /25\.0\.0-PRODUCTION-GA/);
+  assert.match(read('version.json'), /25\.0\.0-PRODUCTION-GA/);
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif', root)), false);
   assert.equal(existsSync(new URL('raget/raget-tools/train-massive-colab-gpu.py', root)), false);
   assert.equal(existsSync(new URL('raget/raget-tools/train-raget-1b-2b.py', root)), true);

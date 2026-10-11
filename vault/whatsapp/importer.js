@@ -18,7 +18,13 @@ function parseTimestamp(dateStr, timeStr) {
 }
 
 function importWhatsApp(text) {
-  const lines = String(text || '').split('\n');
+  const src = String(text || '');
+  const nl = src.indexOf('\n');
+  const firstEnd = nl < 0 ? src.length : nl;
+  if (firstEnd > 4000 && src.slice(0, 180).indexOf(':') < 0) {
+    return { ok: false, message: 'Tidak ditemukan format pesan WhatsApp yang dikenali di file ini.' };
+  }
+  const lines = src.split('\n');
   const messages = [];
   let current = null;
   lines.forEach((line) => {

@@ -167,6 +167,34 @@ function sample(logits, options) {
     }
 }
 
+function sampleAdaptive(logits, options) {
+    options = options || {};
+    const temperature = typeof options.temperature === 'number' ? options.temperature : 0.7;
+    const k = Math.max(1, options.topK || options.k || 40);
+    const p = typeof options.topP === 'number' ? options.topP : 0.9;
+    const penalty = typeof options.repetitionPenalty === 'number' ? options.repetitionPenalty : 1.12;
+    let row = applyRepetitionPenalty(logits.slice(), options.recentTokenIds, penalty);
+    if (options.jsonGrammarState && options.vocab) {
+        row = constrainLogitsToJSON(row, options.vocab, options.jsonGrammarState, options.eosId, options.wordBoundaryPending).logits;
+    }
+    const indexed = [];
+    for (let i = 0; i < row.length; i += 1) indexed.push({ v: row[i], i: i });
+    indexed.sort(function (a, b) { return b.v - a.v; });
+    const keep = new Set();
+    const limit = Math.min(k, indexed.length);
+    for (let n = 0; n < limit; n += 1) keep.add(indexed[n].i);
+    const masked = [];
+    for (let i = 0; i < row.length; i += 1) masked.push(keep.has(i) ? row[i] : -Infinity);
+    return topPSample(masked, p, temperature);
+}
+
+const SAMPLE_DEFAULTS = Object.freeze({
+    topK: 40,
+    topP: 0.9,
+    temperature: 0.7,
+    repetitionPenalty: 1.12,
+});
+
 export const LLMSampler = {
     softmax: softmax,
     argmax: argmax,
@@ -177,5 +205,7 @@ export const LLMSampler = {
     applyRepetitionPenalty: applyRepetitionPenalty,
     constrainLogitsToJSON: constrainLogitsToJSON,
     advanceJSONGrammar: advanceJSONGrammar,
-    sample: sample
+    sample: sample,
+    sampleAdaptive: sampleAdaptive,
+    SAMPLE_DEFAULTS: SAMPLE_DEFAULTS
 };

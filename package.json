@@ -1,6 +1,6 @@
 {
   "name": "rategoan",
-  "version": "24.0.0-PRODUCTION-GA",
+  "version": "25.0.0-PRODUCTION-GA",
   "private": true,
   "description": "Rategoan — stasiun kerja dan runtime neural di peramban. Checkpoint Safetensors tidak dibundel di git.",
   "type": "module",

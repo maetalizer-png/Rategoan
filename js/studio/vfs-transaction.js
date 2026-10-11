@@ -3,6 +3,7 @@ import { vfsPath } from './vfs.js';
 import { JOURNAL_STORE, putRow, allRows } from '../../raget/raget-database/durable-store.js';
 
 export const AUTOSAVE_MS = 30000;
+export const WAL_PHASES = Object.freeze(['PREPARE', 'COMMIT', 'PURGE']);
 const journal = new Map();
 const autosave = new Map();
 let lockChain = Promise.resolve();
@@ -26,10 +27,16 @@ function plainFiles(git) {
 }
 
 async function remember(row) {
+  const phaseName = { PREPARE: 'PREPARE', COMMITTED: 'COMMIT', PURGED: 'PURGE', ROLLED_BACK: 'ROLLED_BACK' };
+  row.phase = phaseName[row.status] || row.status;
+  if (!row.phases) row.phases = [];
+  row.phases.push(row.phase);
   journal.set(row.id, row);
   const pending = putRow(JOURNAL_STORE, {
     id: row.id,
     status: row.status,
+    phase: row.phase,
+    phases: row.phases.slice(),
     files: row.files || null,
   });
   if (typeof indexedDB !== 'undefined') await pending;
