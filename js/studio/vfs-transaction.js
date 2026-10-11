@@ -144,6 +144,9 @@ export class VfsTransaction {
       if (row) {
         row.status = 'COMMITTED';
         await remember(row);
+        row.status = 'PURGED';
+        await remember(row);
+        journal.delete(txId);
       }
       writeAutosave('aktif', this.git.snapshot());
       return commitId;

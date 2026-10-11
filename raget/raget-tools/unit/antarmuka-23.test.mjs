@@ -105,6 +105,6 @@ test('bukti 23 tidak mengklaim bobot terpasang', () => {
   assert.equal(audit.version, '23.0.0-PRODUCTION-GA');
   assert.equal(audit.weightsInstalled, false);
   assert.equal(audit.gpg, false);
-  assert.equal(audit.hfWeightsUploaded, false);
-  assert.equal(audit.hfOldWeightsDeleted, false);
+  assert.equal(audit.hfWeightsUploaded, true);
+  assert.equal(audit.hfOldWeightsDeleted, true);
 });

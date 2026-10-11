@@ -2,7 +2,7 @@
 import { neuralProvider } from './neural-provider.js';
 import { enginePreference } from '../../js/state/engine-preference.js';
 
-const ASK_MS = 8000;
+const ASK_MS = 300000;
 
 async function init() {
   if (typeof neuralProvider.prefetchBest === 'function') {

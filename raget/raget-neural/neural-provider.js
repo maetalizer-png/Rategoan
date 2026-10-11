@@ -1,6 +1,7 @@
 
 import { llmMode } from '../../js/state/llm-mode.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
+import { openInt4Checkpoint } from './runtime/int4-session.js';
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -11,6 +12,7 @@ const CHECKPOINT_BY_TIER = {
 
 let cache = null;
 let loadedTier = null;
+let session = null;
 let initPromises = {};
 
 async function loadEngine() {
@@ -57,7 +59,7 @@ async function doInitTier(tier) {
     const res = await fetch(new URL(CHECKPOINT_BY_TIER[tier], import.meta.url));
     if (!res.ok) throw new Error('checkpoint fetch gagal (' + tier + '): HTTP ' + res.status);
     const buffer = await readCheckpoint(res, tier);
-    RATEGOAN.restoreFromCheckpointSafetensors(buffer);
+    session = openInt4Checkpoint(buffer);
     loadedTier = tier;
     return true;
   } catch (e) {
@@ -97,14 +99,11 @@ function tierReady(tier) {
 
 async function generateWithTier(tier, prompt, options) {
   const ok = await ensureTier(tier);
-  if (!ok) return null;
+  if (!ok || !session) return null;
   try {
-    const { RATEGOAN } = await loadEngine();
-    const out = await RATEGOAN.generateText(String(prompt || ''), {
-      maxNewTokens: 60,
-      temperature: 0.9,
-      greedy: false,
-      stopSignal: options && options.signal,
+    const out = await session.generate(String(prompt || ''), {
+      maxNewTokens: 2,
+      signal: options && options.signal,
     });
     if (options && options.signal && options.signal.aborted) return null;
     const text = out && out.text ? out.text.trim() : '';
