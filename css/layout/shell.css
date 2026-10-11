@@ -95,6 +95,58 @@
   box-shadow: 0 0 0 3px var(--rg-ring), var(--rg-shadow);
 }
 
+.weight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 4px 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rg-line);
+}
+
+.weight-card[hidden] {
+  display: none;
+}
+
+#btn-weight {
+  align-self: flex-start;
+  border: 1px solid var(--rg-line);
+  background: transparent;
+  color: var(--rg-text);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#btn-weight:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.weight-bar {
+  height: 4px;
+  background: var(--rg-line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#weight-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--rg-text);
+}
+
+#weight-status {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--rg-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
 #chat-input {
   width: 100%;
   background: transparent;

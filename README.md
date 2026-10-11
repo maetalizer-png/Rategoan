@@ -146,7 +146,7 @@ kode aplikasi. Domain ditambah dengan berkas `.json` di `raget/raget-data/json/`
 
 Panel Model menampilkan Raget 1.0 dengan Mode Cepat dan Mode Mendalam. Keduanya dijawab berkas yang sama. Jalur chat memakai adapter neural.
 Checkpoint `raget-neural-1.5b.safetensors` ada di Hugging Face: hasil pelatihan Adam, loss paket 10,72 turun ke 0,81, 256 token, format int4 block-32. Berkas itu tidak dibundel di git. `raget-neural-1.0b` dan `raget-neural-2.0b` tidak diunggah.
-Mode Cepat mengambil satu token baru. Mode Mendalam mengambil sampai empat token. Keduanya forward pass Raget 1.0, bukan kalimat yang disiapkan di luar bobot. Kalau checkpoint belum termuat, balasan mengatakan bobot belum terpasang. Generasi token baru hanya jalan kalau ada forward pass, lalu teks UTF-8 mengalir sampai token henti. Angka identitas token tidak ditampilkan.
+Mode Cepat menghasilkan sampai 32 token baru. Mode Mendalam menghasilkan sampai 96 token baru. Keduanya berhenti lebih awal pada token henti, memakai BPE 32.000, dan forward pass yang sama pada bobot Raget 1.0. Bukan kalimat yang disiapkan di luar bobot. Unduhan 997 MB dipecah 20 MB, diverifikasi SHA-256 per potongan, lalu disimpan di Cache API. Kartu unduhan ada di komposer dan tidak mulai sendiri saat halaman dibuka. Kalau checkpoint belum termuat, balasan mengatakan bobot belum terpasang. Teks UTF-8 mengalir sampai token henti. Angka identitas token tidak ditampilkan.
 Folder `docs/` hanya memuat `docs/PRD-RELEASE.md` dan `docs/STATUS-KORPUS-LISENSI.md`.
 
 ## Kualitas & Pengujian

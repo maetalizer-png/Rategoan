@@ -365,6 +365,51 @@ export function hiddenOrder(text) {
   return HIDDEN_ORDER.test(scrubInjection(text));
 }
 
+function bindWeightCard() {
+  const card = $('weight-card');
+  const btn = $('btn-weight');
+  const fill = $('weight-fill');
+  const status = $('weight-status');
+  if (!card || !btn || btn.dataset.bound) return;
+  btn.dataset.bound = '1';
+  const paint = (loaded, total, seal) => {
+    const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
+    if (fill) fill.style.width = pct + '%';
+    if (status) {
+      const tail = seal ? (' · sha256 ' + String(seal).slice(0, 12)) : '';
+      status.textContent = 'Mengunduh bobot ' + pct + '%' + tail;
+    }
+  };
+  window.addEventListener('rategoan:neural-progress', (event) => {
+    const detail = (event && event.detail) || {};
+    paint(detail.loaded || 0, detail.total || 0, detail.seal || '');
+  });
+  import('../../raget/raget-neural/neural-provider.js').then((mod) => {
+    const neuralProvider = mod.neuralProvider;
+    if (neuralProvider.ready()) {
+      card.hidden = true;
+      return;
+    }
+    card.hidden = false;
+    if (status) status.textContent = 'Bobot belum di perangkat.';
+    btn.onclick = () => {
+      btn.disabled = true;
+      if (status) status.textContent = 'Mengunduh bobot 0%';
+      neuralProvider.loadWeights().then((ok) => {
+        if (ok && neuralProvider.ready()) {
+          card.hidden = true;
+          return;
+        }
+        btn.disabled = false;
+        if (status) status.textContent = 'Unduhan gagal. ' + (neuralProvider.weightError() || 'Coba lagi.');
+      });
+    };
+  }).catch(() => {
+    card.hidden = false;
+    if (status) status.textContent = 'Kartu bobot gagal dimuat.';
+  });
+}
+
 export const composer = {
   websearchActive: false,
   thinkActive: false,
@@ -671,6 +716,7 @@ export const composer = {
     }
   },
   bind() {
+    bindWeightCard();
     const inp = $('chat-input');
     if (!inp) return;
     const paintSlot = () => {

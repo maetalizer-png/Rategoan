@@ -483,6 +483,16 @@ export const chat = {
     const searchStart = Date.now();
     let reply = null;
     let attempt = 0;
+    const onPiece = (event) => {
+      const piece = event && event.detail ? String(event.detail) : '';
+      if (!piece) return;
+      const span = typing.querySelector('.zen-dot') || typing.querySelector('span');
+      if (!span) return;
+      if (span.classList.contains('zen-dot')) span.className = 'token-stream';
+      span.textContent = (span.textContent || '') + piece;
+    };
+    window.addEventListener('rategoan:neural-token', onPiece);
+    try {
     while (attempt < 2 && reply == null) {
       try {
         reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt, { modelPrefix: opts && opts.modelPrefix, signal: generation.signal }) : null;
@@ -514,6 +524,9 @@ export const chat = {
         return null;
       }
       attempt += 1;
+    }
+    } finally {
+      window.removeEventListener('rategoan:neural-token', onPiece);
     }
     if (reply != null && opts && opts.preamble) reply = String(opts.preamble) + '\n\n' + reply;
     if (searching) {

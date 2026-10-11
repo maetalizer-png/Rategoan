@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <title>Rategoan</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob: 'sha256-F/16auHvU8rnnFFjvUge7U2l7HcZHWpC5EqFt2bli10='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob: 'sha256-F/16auHvU8rnnFFjvUge7U2l7HcZHWpC5EqFt2bli10='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com https://huggingface.co https://*.hf.co; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
   <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -77,6 +77,11 @@
       </button>
       <footer id="composer">
         <div id="composer-card">
+          <div id="weight-card" class="weight-card" hidden>
+            <button type="button" id="btn-weight">Unduh Bobot Raget 1.0 (997 MB)</button>
+            <div id="weight-bar" class="weight-bar"><span id="weight-fill"></span></div>
+            <p id="weight-status">Bobot belum di perangkat.</p>
+          </div>
           <div id="quote-row" class="attach-row" hidden></div>
           <div id="attach-row" class="attach-row" hidden></div>
           <textarea id="chat-input" rows="1" placeholder="Tanya Rategoan" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-gramm="false" data-enable-grammarly="false"></textarea>

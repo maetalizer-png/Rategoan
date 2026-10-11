@@ -1,4 +1,6 @@
-const VOCAB_CAP = 260;
+import { bpeShell } from '../bpe-shell.js';
+import { LLMSampler } from '../llm-sampler.js';
+import { executeLayerPasses, probeGpu } from './webgpu-runner.js';
 
 function parseSafetensors(buffer) {
   const view = new DataView(buffer);
@@ -70,27 +72,30 @@ function addInto(dst, src) {
 }
 
 function encodePrompt(text, limit) {
-  const bytes = new TextEncoder().encode(String(text || ''));
-  const ids = [2];
-  const cap = Math.max(1, limit || 8);
-  const start = Math.max(0, bytes.length - (cap - 1));
-  for (let i = start; i < bytes.length && ids.length < cap; i += 1) ids.push(4 + bytes[i]);
-  return ids;
+  const ids = bpeShell.encodeBytes(String(text || ''));
+  const cap = Math.max(1, limit || 256);
+  if (ids.length <= cap) return ids;
+  return ids.slice(ids.length - cap);
 }
 
-function decodeIds(ids) {
-  const bytes = [];
-  ids.forEach((id) => {
-    if (id >= 4 && id < VOCAB_CAP) bytes.push(id - 4);
+function pickToken(logits, opts, recent) {
+  const row = Array.from(logits);
+  const temperature = Number(opts && opts.temperature);
+  if (!(temperature > 0)) return LLMSampler.greedySample(row);
+  return LLMSampler.sampleAdaptive(row, {
+    temperature: temperature,
+    topK: (opts && opts.topK) || LLMSampler.SAMPLE_DEFAULTS.topK,
+    topP: opts && typeof opts.topP === 'number' ? opts.topP : LLMSampler.SAMPLE_DEFAULTS.topP,
+    repetitionPenalty: opts && typeof opts.repetitionPenalty === 'number' ? opts.repetitionPenalty : LLMSampler.SAMPLE_DEFAULTS.repetitionPenalty,
+    recentTokenIds: recent,
   });
-  if (!bytes.length) return '';
-  const utf = new TextDecoder('utf-8', { fatal: false }).decode(Uint8Array.from(bytes));
-  if (utf && !/^[\uFFFD\s]*$/.test(utf)) return utf;
-  return bytes.map((b) => String.fromCharCode(b)).join('');
 }
 
 export function openInt4Checkpoint(input) {
-  const buffer = input instanceof ArrayBuffer ? input : input.buffer.slice(input.byteOffset, input.byteOffset + input.byteLength);
+  let buffer;
+  if (input instanceof ArrayBuffer) buffer = input;
+  else if (input && input.byteOffset === 0 && input.byteLength === input.buffer.byteLength) buffer = input.buffer;
+  else buffer = input.buffer.slice(input.byteOffset, input.byteOffset + input.byteLength);
   const parsed = parseSafetensors(buffer);
   const d = Number(parsed.meta.d_model);
   const layers = Number(parsed.meta.n_layers);
@@ -98,8 +103,11 @@ export function openInt4Checkpoint(input) {
   const nKv = Number(parsed.meta.n_kv_heads);
   const dk = Number(parsed.meta.head_dim);
   const ff = Number(parsed.meta.intermediate_size);
-  const vocab = Number(parsed.meta.vocab);
-  const scratch = new Float32Array(Math.max(vocab * d, ff * d));
+  const packedHead = viewOf(parsed, 'lm_head.weight');
+  const fromTensor = d > 0 ? Math.floor((packedHead.length * 2) / d) : 0;
+  const fromMeta = Number(parsed.meta.vocab) || 0;
+  const vocab = Math.max(8, fromMeta && fromTensor ? Math.min(fromMeta, fromTensor) : (fromMeta || fromTensor || bpeShell.VOCAB_SIZE));
+  const scratch = new Float32Array(Math.max(ff * d, nHeads * dk * d, 1));
   const gammaFinal = viewOf(parsed, 'final_norm.gamma');
 
   function project(name, rows, cols, x, y) {
@@ -110,25 +118,24 @@ export function openInt4Checkpoint(input) {
 
   function embed(id, y) {
     const cols = d;
-    const n = cols;
     const packed = viewOf(parsed, 'embedding.weight');
     const scales = viewOf(parsed, 'embedding.weight.scale');
     const zeros = viewOf(parsed, 'embedding.weight.zero');
     const base = id * cols;
     for (let c = 0; c < cols; c += 1) {
       const i = base + c;
-      const byte = packed[i >> 1];
+      const byte = packed[i >> 1] || 0;
       const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
-      y[c] = (q - zeros[i >> 5]) * scales[i >> 5];
+      y[c] = (q - (zeros[i >> 5] || 0)) * (scales[i >> 5] || 0);
     }
-    return n;
   }
 
   function step(id, cache) {
     const x = new Float32Array(d);
     const h = new Float32Array(d);
     embed(id, x);
-    for (let layer = 0; layer < layers; layer += 1) {
+    executeLayerPasses(layers, (pass) => {
+      const layer = pass.layer;
       const p = 'layers.' + layer + '.';
       rmsNorm(x, viewOf(parsed, p + 'ln1.gamma'), h);
       const q = new Float32Array(nHeads * dk);
@@ -178,66 +185,72 @@ export function openInt4Checkpoint(input) {
       const down = new Float32Array(d);
       project(p + 'ffn.Wdown', d, ff, hidden, down);
       addInto(x, down);
-    }
+    });
     rmsNorm(x, gammaFinal, h);
-    const logits = new Float32Array(VOCAB_CAP);
-    const head = new Float32Array(d);
-    for (let idOut = 4; idOut < VOCAB_CAP; idOut += 1) {
+    const logits = new Float32Array(vocab);
+    const packed = viewOf(parsed, 'lm_head.weight');
+    const scales = viewOf(parsed, 'lm_head.weight.scale');
+    const zeros = viewOf(parsed, 'lm_head.weight.zero');
+    for (let idOut = 0; idOut < vocab; idOut += 1) {
       let acc = 0;
       const base = idOut * d;
-      const packed = viewOf(parsed, 'lm_head.weight');
-      const scales = viewOf(parsed, 'lm_head.weight.scale');
-      const zeros = viewOf(parsed, 'lm_head.weight.zero');
       for (let c = 0; c < d; c += 1) {
         const i = base + c;
-        const byte = packed[i >> 1];
+        const byte = packed[i >> 1] || 0;
         const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
-        head[c] = (q - zeros[i >> 5]) * scales[i >> 5];
-        acc += head[c] * h[c];
+        acc += ((q - (zeros[i >> 5] || 0)) * (scales[i >> 5] || 0)) * h[c];
       }
       logits[idOut] = acc;
     }
-    let best = 4;
-    let bestVal = logits[4];
-    for (let i = 5; i < VOCAB_CAP; i += 1) {
-      if (logits[i] > bestVal) {
-        bestVal = logits[i];
-        best = i;
-      }
-    }
-    return best;
+    return logits;
   }
 
   return {
     trained: parsed.meta.trained === 'true',
     tier: parsed.meta.tier,
+    vocab: vocab,
     async generate(text, options) {
       const opts = options || {};
-      const maxNew = Math.max(1, Math.min(4, opts.maxNewTokens || 2));
-      const ids = encodePrompt(text, 8);
+      const requested = Number(opts.maxNewTokens) > 0 ? Number(opts.maxNewTokens) : 32;
+      const maxNew = Math.max(1, Math.min(128, requested));
+      const promptCap = Number(opts.maxPromptTokens) > 0 ? Number(opts.maxPromptTokens) : 256;
+      const ids = encodePrompt(text, promptCap);
+      if (!ids.length) ids.push(1);
       const cache = [];
       for (let i = 0; i < layers; i += 1) cache.push({ k: [], v: [] });
+      const gpu = await probeGpu();
+      const device = gpu && gpu.ok ? 'webgpu-jadwal+cpu-gemv' : 'cpu-gemv';
+      const eos = new Set(bpeShell.eosIds());
+      let logits = null;
       for (let i = 0; i < ids.length; i += 1) {
         if (opts.signal && opts.signal.aborted) break;
-        step(ids[i], cache);
+        logits = step(ids[i], cache);
+        await new Promise((resolve) => setTimeout(resolve, 0));
       }
       const generated = [];
-      let next = null;
-      for (let i = 0; i < ids.length; i += 1) {
+      const recent = ids.slice();
+      let shown = '';
+      for (let n = 0; n < maxNew; n += 1) {
         if (opts.signal && opts.signal.aborted) break;
-        next = step(ids[i], cache);
-        await new Promise((resolve) => setTimeout(resolve, 0));
-      }
-      if (next != null) generated.push(next);
-      for (let n = 1; n < maxNew; n += 1) {
-        if (opts.signal && opts.signal.aborted) break;
-        if (next === 3) break;
-        next = step(generated[generated.length - 1], cache);
+        if (!logits) break;
+        const next = pickToken(logits, opts, recent);
+        if (!Number.isInteger(next) || next < 0 || next >= vocab || eos.has(next)) break;
         generated.push(next);
+        recent.push(next);
+        const full = bpeShell.decodeIds(generated);
+        const piece = full.slice(shown.length);
+        shown = full;
+        if (piece && typeof opts.onToken === 'function') opts.onToken(piece, next);
+        logits = step(next, cache);
         await new Promise((resolve) => setTimeout(resolve, 0));
       }
-      const textOut = decodeIds(generated);
-      return { text: textOut, tokenIds: generated, trained: false };
+      return {
+        text: shown,
+        tokenIds: generated,
+        trained: parsed.meta.trained === 'true',
+        device: device,
+        vocab: vocab,
+      };
     },
   };
 }
