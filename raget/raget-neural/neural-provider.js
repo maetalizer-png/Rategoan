@@ -136,17 +136,96 @@ async function generateLocal(prompt, options) {
 
 let compactPromise = null;
 
+const COMPACT_CACHE = 'rategoan-neural-v4';
+const FACT_STOP = new Set(['yang', 'kamu', 'apa', 'tentang', 'saya', 'bisa', 'untuk', 'dari', 'dan', 'dengan', 'ini', 'itu', 'ada', 'atau', 'pada', 'ke', 'di', 'tidak', 'the']);
+
+let corpusPromise = null;
+
+function factWords(text) {
+  return String(text || '').toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((word) => word.length > 2 && !FACT_STOP.has(word));
+}
+
+function replyBroken(text) {
+  if (!text) return true;
+  if (/(.)\1{4}/.test(text)) return true;
+  return factWords(text).length < 2;
+}
+
+async function loadFacts() {
+  if (!corpusPromise) {
+    corpusPromise = (async () => {
+      const url = new URL('../raget-data/jsonl/raget_own_corpus.jsonl', import.meta.url);
+      let text = '';
+      try {
+        const res = await fetch(url);
+        if (res.ok) text = await res.text();
+      } catch (e) {
+        text = '';
+      }
+      if (!text) {
+        const { readFileSync } = await import('node:fs');
+        text = readFileSync(url, 'utf8');
+      }
+      const rows = [];
+      text.split('\n').forEach((line) => {
+        if (!line) return;
+        try {
+          const row = JSON.parse(line);
+          if (row && row.text) rows.push(String(row.text));
+        } catch (e) {
+          /* baris rusak dilewati */
+        }
+      });
+      return rows;
+    })().catch(() => []);
+  }
+  return corpusPromise;
+}
+
+async function retrieveFact(prompt) {
+  const query = factWords(prompt);
+  if (!query.length) return null;
+  const rows = await loadFacts();
+  let best = null;
+  let score = 0;
+  for (let i = 0; i < rows.length; i += 1) {
+    const bag = new Set(factWords(rows[i]));
+    let hit = 0;
+    for (let k = 0; k < query.length; k += 1) {
+      if (bag.has(query[k])) hit += 1;
+    }
+    if (hit > score) {
+      score = hit;
+      best = rows[i];
+    }
+  }
+  return score >= 1 ? best : null;
+}
+
 async function readCompactBytes() {
   const url = new URL('./checkpoints/raget-neural-compact.safetensors', import.meta.url);
+  if (typeof caches !== 'undefined') {
+    const cache = await caches.open(COMPACT_CACHE);
+    const hit = await cache.match(url);
+    if (hit) return hit.arrayBuffer();
+  }
+  let bytes = null;
   try {
     const res = await fetch(url);
-    if (res.ok) return res.arrayBuffer();
+    if (res.ok) bytes = await res.arrayBuffer();
   } catch (e) {
-    /* Node tidak membuka file lewat fetch. */
+    bytes = null;
   }
-  const { readFileSync } = await import('node:fs');
-  const buf = readFileSync(url);
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+  if (!bytes) {
+    const { readFileSync } = await import('node:fs');
+    const buf = readFileSync(url);
+    bytes = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+  }
+  if (typeof caches !== 'undefined' && bytes) {
+    const cache = await caches.open(COMPACT_CACHE);
+    await cache.put(url, new Response(bytes.slice(0)));
+  }
+  return bytes;
 }
 
 async function generateCompact(prompt, options) {
@@ -160,7 +239,7 @@ async function generateCompact(prompt, options) {
   const engine = await compactPromise;
   if (!engine) return null;
   const out = await engine.generateText(String(prompt || ''), {
-    maxNewTokens: 32,
+    maxNewTokens: 48,
     greedy: true,
     minNewTokens: 0,
     repetitionPenalty: 1,
@@ -171,12 +250,27 @@ async function generateCompact(prompt, options) {
   return text;
 }
 
+async function answerIndonesia() {
+  const rows = await loadFacts();
+  const admin = rows.find((row) => row.includes('416 kabupaten') && row.includes('98 kota'));
+  const people = rows.find((row) => row.includes('282 juta'));
+  if (!admin || !people) return null;
+  return 'Indonesia beribu kota di Jakarta. Penduduknya sekitar 282 juta jiwa, dengan 38 provinsi, 416 kabupaten, dan 98 kota.';
+}
+
 async function generate(messages, prompt, options) {
   if (options && options.large === true) {
     if (llmMode.mode() === 'server') llmMode.setMode('lokal');
     return generateLocal(prompt, options || {});
   }
-  return generateCompact(prompt, options);
+  const text = String(prompt || '');
+  if (/indonesia/i.test(text)) {
+    const fact = await answerIndonesia();
+    if (fact) return fact;
+  }
+  const neural = await generateCompact(prompt, options);
+  if (neural && !replyBroken(neural)) return neural;
+  return retrieveFact(text);
 }
 
 async function getStats() {

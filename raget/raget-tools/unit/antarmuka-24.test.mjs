@@ -24,6 +24,8 @@ test('sapaan halo selesai di bawah 2 detik dan bukan angka token', async () => {
   assert.match(negara, /Jakarta/);
   assert.match(negara, /282 juta/);
   assert.match(negara, /38 provinsi/);
+  assert.match(negara, /416 kabupaten/);
+  assert.match(negara, /98 kota/);
 });
 
 test('simd128 menghitung dot i32x4 dan tidak memakai sum4', () => {
