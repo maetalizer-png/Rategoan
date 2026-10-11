@@ -4,6 +4,7 @@ import { workspace } from '../state/workspace.js';
 import { chat } from '../chat/chat.js';
 import { theme } from '../state/theme.js';
 import { drawer } from './drawer.js';
+import { enginePreference } from '../state/engine-preference.js';
 
 function score(hay, needle) {
   const h = hay.toLowerCase();
@@ -29,7 +30,8 @@ function commands() {
     { label: 'Buka Riwayat', run: () => router.go('chat') },
     { label: 'Buat Proyek Baru', run: () => router.go('project') },
     { label: 'Ganti ke Mode Penalaran Berpikir Keras', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' })) },
-    { label: 'Ganti Model ke Raget Neural', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'neural' })) },
+    { label: 'Mode Cepat', run: () => { enginePreference.set('cloud'); document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' })); } },
+    { label: 'Mode Mendalam', run: () => { enginePreference.set('neural'); document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' })); } },
     { label: 'Buat Dokumen Word Baru', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'docx' })) },
     { label: 'Buat Presentasi Baru', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'slide' })) },
   ];

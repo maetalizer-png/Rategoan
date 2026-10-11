@@ -1,19 +1,14 @@
 import { $ } from '../../shared/dom.js';
-import { engineRouter } from '../../raget/raget-agents/engine-router.js';
 import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
 const SPEEDS = [
-  { id: 'neural', label: 'Neural', note: 'Jalur obrolan di perangkat.' },
-  { id: 'cloud', label: 'Cloud', note: 'Tier jarak jauh belum disambungkan.' },
+  { id: 'cloud', label: 'Cepat', note: 'Respons instan, hemat daya di perangkat.' },
+  { id: 'neural', label: 'Mendalam', note: 'Nalar neural mendalam untuk tugas rumit.' },
 ];
 
 let picking = false;
 let menuOpen = false;
-
-function statusOf(id) {
-  return engineRouter.statusAll().find((info) => info.id === id) || null;
-}
 
 function labelOf(id) {
   const found = SPEEDS.find((item) => item.id === id);
@@ -22,26 +17,13 @@ function labelOf(id) {
 
 async function pickSpeed(id) {
   if (picking) return;
-  if (id === 'neural') {
-    const info = statusOf('neural') || { ready: false };
-    if (!info.ready) {
-      picking = true;
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      const again = statusOf('neural');
-      picking = false;
-      if (!again || !again.ready) {
-        enginePreference.set('neural');
-        toast.show('Mode mendalam belum siap.');
-        window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'neural' } }));
-        document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' }));
-        render();
-        return;
-      }
-    }
-  }
-  enginePreference.set(id);
-  document.dispatchEvent(new CustomEvent('rategoan:command', { detail: id === 'neural' ? 'think' : 'think-off' }));
-  window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id } }));
+  picking = true;
+  const mode = id === 'neural' ? 'neural' : 'cloud';
+  enginePreference.set(mode);
+  document.dispatchEvent(new CustomEvent('rategoan:command', { detail: mode === 'neural' ? 'think' : 'think-off' }));
+  window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: mode } }));
+  toast.show(mode === 'neural' ? 'Mode: Mendalam aktif' : 'Mode: Cepat aktif');
+  picking = false;
   menuOpen = false;
   render();
 }

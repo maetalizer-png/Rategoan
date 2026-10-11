@@ -723,8 +723,10 @@ export const composer = {
         this.thinkActive = false;
         this.paintQuick();
         this.syncModes();
-      } else if (event.detail === 'neural') {
-        try { localStorage.setItem('rategoan_engine', 'neural'); } catch (e) { console.warn('[Rategoan Fallback]', e); }
+      } else if (event.detail === 'mendalam' || event.detail === 'cepat') {
+        this.thinkActive = event.detail === 'mendalam';
+        this.paintQuick();
+        this.syncModes();
       } else if (event.detail === 'docx') {
         $('chat-input').value = 'Buatkan dokumen Word dari percakapan ini';
       } else if (event.detail === 'slide') {

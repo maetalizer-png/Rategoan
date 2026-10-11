@@ -78,13 +78,6 @@ function ensureTier(tier) {
   return initPromises[tier];
 }
 
-function deviceCanHandleLarge() {
-  const mem = typeof navigator !== 'undefined' ? navigator.deviceMemory : undefined;
-  return typeof mem === 'number' && mem >= 8;
-}
-
-// Tidak mengunduh saat aplikasi dibuka. Unduhan hanya terjadi kalau
-// generate() dipanggil, dan gagal diam-diam kalau berkas belum ada.
 function prefetchBest() {
   return Promise.resolve(false);
 }
@@ -93,16 +86,12 @@ function ready() {
   return loadedTier !== null;
 }
 
-function tierReady(tier) {
-  return loadedTier === tier;
-}
-
 async function generateWithTier(tier, prompt, options) {
   const ok = await ensureTier(tier);
   if (!ok || !session) return null;
   try {
     const out = await session.generate(String(prompt || ''), {
-      maxNewTokens: 2,
+      maxNewTokens: options && options.mode === 'mendalam' ? 4 : 1,
       signal: options && options.signal,
     });
     if (options && options.signal && options.signal.aborted) return null;
@@ -114,25 +103,8 @@ async function generateWithTier(tier, prompt, options) {
 }
 
 async function generateLocal(prompt, options) {
-  if (deviceCanHandleLarge() && tierReady('tier_2_0b')) {
-    const top = await generateWithTier('tier_2_0b', prompt, options);
-    if (top) return top;
-  }
-  if (deviceCanHandleLarge() && tierReady('tier_1_5b')) {
-    const mid = await generateWithTier('tier_1_5b', prompt, options);
-    if (mid) return mid;
-  }
-  if (tierReady('tier_1_0b')) {
-    const base = await generateWithTier('tier_1_0b', prompt, options);
-    if (base) return base;
-  }
-  if (deviceCanHandleLarge()) {
-    const top = await generateWithTier('tier_2_0b', prompt, options);
-    if (top) return top;
-    const mid = await generateWithTier('tier_1_5b', prompt, options);
-    if (mid) return mid;
-  }
-  return generateWithTier('tier_1_0b', prompt, options);
+  const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
+  return generateWithTier('tier_1_5b', prompt, Object.assign({}, options, { mode }));
 }
 
 let compactPromise = null;
@@ -260,6 +232,11 @@ async function answerIndonesia() {
 }
 
 async function generate(messages, prompt, options) {
+  const mode = options && options.mode;
+  if (mode === 'cepat' || mode === 'mendalam') {
+    if (options.signal && options.signal.aborted) return null;
+    return generateLocal(prompt, options);
+  }
   if (options && options.large === true) {
     if (llmMode.mode() === 'server') llmMode.setMode('lokal');
     return generateLocal(prompt, options || {});
