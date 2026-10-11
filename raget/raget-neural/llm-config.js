@@ -20,7 +20,7 @@ const TIER_RUNTIME = Object.freeze({
         nLayers: 24,
         nHeads: 12,
         nKvHeads: 3,
-        dFF: 6144,
+        dFF: 4096,
         maxContextLength: 1024,
         dropoutRate: 0,
         initStd: 0.02
@@ -52,9 +52,9 @@ const TIER_RUNTIME = Object.freeze({
 });
 
 const TIER_SHAPES = Object.freeze({
-    '1.0B': Object.freeze({ id: '1.0B', dModel: 1536, nLayers: 24, dFF: 0, layerMiB: 19.2 }),
+    '1.0B': Object.freeze({ id: '1.0B', dModel: 1536, nLayers: 24, dFF: 4096, layerMiB: 19.2 }),
     '1.5B': Object.freeze({ id: '1.5B', dModel: 2048, nLayers: 28, dFF: 5632, layerMiB: 26.87 }),
-    '2.0B': Object.freeze({ id: '2.0B', dModel: 2560, nLayers: 32, dFF: 6912, layerMiB: 34.5 })
+    '2.0B': Object.freeze({ id: '2.0B', dModel: 2560, nLayers: 32, dFF: 6912, layerMiB: 41.40 })
 });
 
 function bindTier(meta) {

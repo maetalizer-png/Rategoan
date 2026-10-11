@@ -23,7 +23,7 @@ test('preset aktif hanya tiga tier dan bentuk 1.0B tetap 24 lapis', () => {
   assert.equal(LLMConfig.PRESETS['1.5B'].dModel, 2048);
   assert.equal(LLMConfig.PRESETS['2.0B'].nHeads, 20);
   assert.equal(LLMConfig.PRESETS.tiny, undefined);
-  assert.equal(LLMConfig.TIER_SHAPES['1.0B'].dFF, 0);
+  assert.equal(LLMConfig.TIER_SHAPES['1.0B'].dFF, 4096);
   assert.equal(LLMConfig.TIER_SHAPES['1.5B'].layerMiB, 26.87);
 });
 
@@ -110,8 +110,8 @@ test('readme tidak menurunkan produk dan versi paket 22', () => {
   assert.equal(readme.includes('template'), false);
   assert.equal(readme.includes('rule-based'), false);
   assert.equal(readme.includes('bukan model bahasa besar'), false);
-  assert.match(read('package.json'), /22\.0\.0-PRODUCTION-GA/);
-  assert.match(read('version.json'), /22\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /23\.0\.0-PRODUCTION-GA/);
+  assert.match(read('version.json'), /23\.0\.0-PRODUCTION-GA/);
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif', root)), false);
   assert.equal(existsSync(new URL('raget/raget-tools/train-massive-colab-gpu.py', root)), false);
   assert.equal(existsSync(new URL('raget/raget-tools/train-raget-1b-2b.py', root)), true);

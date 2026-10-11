@@ -4,8 +4,8 @@ import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
 const SPEEDS = [
-  { id: 'template', label: 'Cepat', note: 'Respons instan, hemat daya.' },
-  { id: 'neural', label: 'Mendalam', note: 'Berpikir keras untuk tugas rumit.' },
+  { id: 'neural', label: 'Neural', note: 'Jalur obrolan di perangkat.' },
+  { id: 'cloud', label: 'Cloud', note: 'Tier jarak jauh belum disambungkan.' },
 ];
 
 let picking = false;
@@ -30,9 +30,9 @@ async function pickSpeed(id) {
       const again = statusOf('neural');
       picking = false;
       if (!again || !again.ready) {
-        enginePreference.set('template');
-        toast.show('Mode mendalam belum siap. Tetap di Cepat.');
-        window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'template' } }));
+        enginePreference.set('neural');
+        toast.show('Mode mendalam belum siap.');
+        window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'neural' } }));
         document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' }));
         render();
         return;

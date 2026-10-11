@@ -51,7 +51,7 @@ const head = await desktop.evaluate(() => {
 note(head.titleTop >= 36 && head.titleTop <= 48, 'desktop judul di 40px', 'y=' + head.titleTop);
 note(light.hidden && light.noTop && !/^60px/.test(light.rows), 'desktop tanpa track hantu', light.rows);
 note(head.chassis === '960px 40px 48px 64px', 'sasis 960', head.chassis);
-await desktop.screenshot({ path: outDir + '/kasus17-desktop.png' });
+await desktop.screenshot({ path: outDir + '/kasus23-desktop.png' });
 
 await desktop.goto(base + '/index.html#/chat', { waitUntil: 'networkidle' });
 const before = await desktop.evaluate(() => getComputedStyle(document.getElementById('sidebar')).backgroundColor);
@@ -76,7 +76,7 @@ const model = await desktop.evaluate((sideBefore) => {
 note(model.open && (model.alpha === 'rgba(0, 0, 0, 0)' || model.alpha === 'transparent') && /blur\(12px\)/.test(model.blur || '') && /0\.85/.test(model.card || '') && model.experimental, 'model backdrop transparan', model.alpha + ' blur=' + model.blur);
 note(model.same, 'sidebar tidak meredup sepihak', model.side);
 note(model.ns, 'namespace Rategoan', 'RG sama=' + model.ns);
-await desktop.screenshot({ path: outDir + '/kasus17-model.png' });
+await desktop.screenshot({ path: outDir + '/kasus23-model.png' });
 
 const studio = await browser.newPage({ viewport: { width: 1366, height: 768 } });
 await boot(studio);
@@ -122,7 +122,7 @@ const pop = await studio.evaluate(() => {
 });
 const stuck = pop.right > 1300 && pop.bottom > 700;
 note(pop.parent === 'studio-app' && pop.position === 'fixed' && !stuck && pop.top < 700 && pop.left < 1200, 'popover studio di jangkar', pop.parent + ' ' + pop.position + ' y=' + pop.top + ' x=' + pop.left);
-await studio.screenshot({ path: outDir + '/kasus17-studio.png' });
+await studio.screenshot({ path: outDir + '/kasus23-studio.png' });
 
 const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 await boot(phone);
@@ -163,7 +163,7 @@ note(store.back === 36 && (/^50%$/.test(store.radius) || /^18px/.test(store.radi
 note(store.leak && store.headerTop <= 1, 'ponsel gulir tidak membocorkan teks', 'header=' + store.headerTop);
 note(store.text.indexOf('Penyimpanan:') !== 0 && /MB \/ 50 MB/.test(store.text), 'penyimpanan tanpa kata ganda', store.text);
 note(!store.overlap, 'nilai tidak menimpa label', 'tumpang=' + store.overlap);
-await phone.screenshot({ path: outDir + '/kasus17-ponsel.png' });
+await phone.screenshot({ path: outDir + '/kasus23-ponsel.png' });
 
 const narrow = await browser.newPage({ viewport: { width: 390, height: 844 } });
 await boot(narrow);
@@ -191,11 +191,31 @@ const audit = await phone.evaluate(() => {
 });
 note(audit.cat === 'privasi' && audit.label.includes('Log Jejak Izin') && audit.shield && audit.hidden, 'jejak izin privasi', audit.cat + ' ' + audit.hidden);
 note(warnings.length === 0 && errors.filter((err) => !/localStorage|SecurityError/.test(err)).length === 0, 'konsol bersih', 'peringatan=' + warnings.length);
+const versi = await desktop.evaluate(async (origin) => {
+  const res = await fetch(origin + '/version.json');
+  return res.text();
+}, base);
+note(versi.includes('23.0.0-PRODUCTION-GA'), 'versi 23', versi.trim());
+const readme = await desktop.evaluate(async (origin) => {
+  const res = await fetch(origin + '/README.md');
+  return res.text();
+}, base);
+note(!readme.includes('bukan model bahasa besar') && !readme.includes('rule-based'), 'readme tanpa kalimat lama', String(readme.includes('Workstation')));
+const provider = await desktop.evaluate(async (origin) => {
+  const res = await fetch(origin + '/raget/raget-neural/neural-provider.js');
+  return res.text();
+}, base);
+note(provider.includes('raget-neural-1.5b.safetensors') && !provider.includes('massive200m'), 'soket bobot 1.5b', 'ada=' + provider.includes('raget-neural-1.5b.safetensors'));
+const shell = await desktop.evaluate(async (origin) => {
+  const res = await fetch(origin + '/sw.js');
+  return res.text();
+}, base);
+note(shell.includes('raget-app-shell-v19'), 'kulit cache v19', 'v19=' + shell.includes('raget-app-shell-v19'));
 await browser.close();
-fs.writeFileSync(outDir + '/kasus17-hasil.json', JSON.stringify({ findings, warnings, errors }, null, 2));
+fs.writeFileSync(outDir + '/kasus23-hasil.json', JSON.stringify({ findings, warnings, errors }, null, 2));
 const failed = findings.filter((item) => !item.ok);
-if (findings.length !== 21 || failed.length) {
+if (findings.length !== 25 || failed.length) {
   console.log('GAGAL ' + (findings.length - failed.length) + '/' + findings.length);
   process.exit(1);
 }
-console.log('LULUS 21/21');
+console.log('LULUS 25/25');

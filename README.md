@@ -93,7 +93,7 @@ raget/                            induk seluruh otak AI Raget
   raget-devlog/                   log pengembangan & laporan training (termasuk neural/)
   raget-tools/                    skrip verifikasi: bench runner, pengukuran kualitas, migrasi data
 vault/                            fitur opt-in: pengingat, kalender, ekspor, importer
-docs/                             ledger lisensi korpus (`STATUS-KORPUS-LISENSI.md`)
+docs/                             ledger lisensi korpus dan standar rilis (`STATUS-KORPUS-LISENSI.md`, `PRD/PRD-RELEASE.md`)
 ```
 
 Jalur chat adalah `engine-router.js`, dan antreannya hanya adapter neural.

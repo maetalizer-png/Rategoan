@@ -26,8 +26,8 @@ function replySejarah() {
 
 function replyCaraKerja() {
   return (
-    'Saya (Raget) adalah mesin template/rule-based, bukan model bahasa besar — 100% berjalan lokal di perangkat kamu, tanpa server dan tanpa API key.\n\n' +
-    'Alur jawab: pola pesan dicocokkan lewat router intent, lalu dicoba berurutan lewat tool khusus (matematika, pengingat, impor), jawaban faktual dari dataries (data terstruktur negara/wisata/tokoh/dll), pencarian retrieval satu pintu (TF-IDF) di catatan & pengetahuan tersimpan, dan mesin template lokal sebagai fallback terakhir.\n\n' +
+    'Saya (Raget) berjalan di perangkat kamu, tanpa server dan tanpa API key. Jalur obrolan memakai adapter neural; kalau bobot belum termuat, balasan mengatakan itu.\n\n' +
+    'Alur jawab: pola pesan dicocokkan lewat router intent, lalu dicoba berurutan lewat tool khusus (matematika, pengingat, impor), jawaban faktual dari dataries (data terstruktur negara/wisata/tokoh/dll), pencarian retrieval satu pintu (TF-IDF) di catatan & pengetahuan tersimpan, dan mesin lokal sebagai cadangan terakhir.\n\n' +
     'Sumber: raget-devlog/jsonl/devlog-tematik.jsonl (kategori arsitektur) dan refactor agent.js/dataries-bridge.js (Trisula Final v2).'
   );
 }

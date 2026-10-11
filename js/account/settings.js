@@ -344,7 +344,7 @@ export const settings = {
     speed.textContent = 'Mode';
     const select = document.createElement('select');
     select.id = 'engine-speed';
-    [['template', 'Cepat'], ['neural', 'Mendalam']].forEach((pair) => {
+    [['neural', 'Neural'], ['cloud', 'Cloud']].forEach((pair) => {
       const opt = document.createElement('option');
       opt.value = pair[0];
       opt.textContent = pair[1];
@@ -359,7 +359,7 @@ export const settings = {
       enginePreference.set(pick);
       document.dispatchEvent(new CustomEvent('rategoan:command', { detail: pick === 'neural' ? 'think' : 'think-off' }));
       window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: pick } }));
-      toast.show(pick === 'neural' ? 'Mode: Mendalam' : 'Mode: Cepat');
+      toast.show(pick === 'neural' ? 'Mode: Neural' : 'Mode: Cloud belum disambungkan');
     };
     const paintHub = () => {
       if (llmMode.mode() === 'server') llmMode.setMode('lokal');

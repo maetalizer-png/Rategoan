@@ -13,12 +13,12 @@ export const SEJARAH = Object.freeze([
       "cd2dc05",
       "587ddae"
     ],
-    "ringkasan": "Titik nol repo Rategoan: commit awal, pemisahan folder css/js, modularisasi JavaScript ke ES6 modules, dan migrasi CSS ke namespace tunggal --rg-*. Pertengahan hari yang sama, dump proyek sebelumnya (proyek lain, tidak terkait) diganti total dengan mesin AI Raget sesuai spesifikasi rule-based/template lokal, lalu langsung di-upgrade ke \"Raget 1.0\" dengan intent router lengkap.",
+    "ringkasan": "Titik nol repo Rategoan: commit awal, pemisahan folder css/js, modularisasi JavaScript ke ES6 modules, dan migrasi CSS ke namespace tunggal --rg-*. Pertengahan hari yang sama, dump proyek sebelumnya (proyek lain, tidak terkait) diganti total dengan mesin AI Raget sesuai spesifikasi mesin lokal lokal, lalu langsung di-upgrade ke \"Raget 1.0\" dengan intent router lengkap.",
     "fitur_baru": [
       "Struktur folder css/ dan js/ terpisah",
       "Modularisasi JavaScript ES6 modules",
       "Namespace CSS tunggal --rg-*",
-      "Mesin AI Raget rule-based/template (bukan LLM, tanpa API key)",
+      "Mesin AI Raget mesin lokal (tanpa API key)",
       "Raget 1.0: intent router lengkap, tools dasar, personalisasi, feedback loop"
     ],
     "bug_ditutup": [],
@@ -56,7 +56,7 @@ export const SEJARAH = Object.freeze([
     "komit": [
       "4295f0a"
     ],
-    "ringkasan": "Kelahiran folder dataries/: dataset negara, kota, dan sapaan dunia pertama, disambungkan ke Raget lewat bridge factoid. Ini adalah fondasi arsitektur yang sampai sekarang masih dipakai — bridge terpisah (kini ai-agent/dataries-bridge.js) sebagai jalur khusus jawaban berbasis data terstruktur, terpisah dari mesin template rategoan-llm.",
+    "ringkasan": "Kelahiran folder dataries/: dataset negara, kota, dan sapaan dunia pertama, disambungkan ke Raget lewat bridge factoid. Ini adalah fondasi arsitektur yang sampai sekarang masih dipakai — bridge terpisah (kini ai-agent/dataries-bridge.js) sebagai jalur khusus jawaban berbasis data terstruktur, terpisah dari mesin lokal rategoan-llm.",
     "fitur_baru": [
       "dataries/ dengan data negara, kota, sapaan",
       "Bridge factoid pertama (cikal-bakal dataries-bridge.js)"
@@ -344,7 +344,7 @@ export const SEJARAH = Object.freeze([
       "Koleksi: race-guard renderGen, 4 grup Perpustakaan (Catatan/Fakta diajarkan/Chunk impor/Pengetahuan), CTA Artefak 3 tombol",
       "Jelajah: kartu dikelompokkan per negara, dropdown kota, baris aksi gabungan",
       "Trip: panel \"Rencana siap\", label tanggal terlihat, ekspor PDF/MD/WA, kartu tersimpan",
-      "Tab ke-5 Asisten Travel: chat perencana rule-based + ekspor PDF (raget_exports)",
+      "Tab ke-5 Asisten Travel: chat perencana lokal + ekspor PDF (raget_exports)",
       "Fix --vvh (garis keyboard hilang), :focus-visible (outline hanya untuk keyboard nav)",
       "Refactor: agent.js 885→393 baris (8 modul satelit tools-*), dataries-bridge.js 1046→156 baris (5 modul satelit bridge-*)",
       "+60 dataries (30 tokoh perempuan berpengaruh, 30 minuman Timur Tengah), tools/measure-kv.mjs — skrip pengukuran K/V baku pertama",

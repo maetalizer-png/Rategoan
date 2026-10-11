@@ -1,5 +1,5 @@
 // Kontrak "SATU KONTRAK, DUA OTAK RATEGOAN" (lihat docs/ARSITEKTUR.md).
-// Setiap otak AI - rule-based/template yang sudah jalan, neural yang
+// Setiap otak AI - mesin lokal yang sudah jalan, neural yang
 // sudah dilatih dan aktif (meski belum koheren), dan otak baru apa pun
 // di masa depan - HARUS diekspos lewat bentuk objek yang SAMA PERSIS,
 // supaya raget-agents/engine-router.js bisa mencoba salah satu tanpa

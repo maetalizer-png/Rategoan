@@ -135,7 +135,7 @@ function tryOpiniUmum(text) {
   }
   return naturalize({
     body:
-      'Aku nggak punya preferensi atau selera pribadi karena aku mesin rule-based, bukan yang benar-benar merasakan sesuatu — jadi nggak adil kalau aku klaim satu jawaban sebagai "terbaik" secara subjektif.',
+      'Aku nggak punya preferensi atau selera pribadi karena aku mesin lokal, bukan yang benar-benar merasakan sesuatu — jadi nggak adil kalau aku klaim satu jawaban sebagai "terbaik" secara subjektif.',
     followup: 'Kalau kamu kasih tahu kriteria yang penting buat kamu (misalnya biaya, keamanan, atau kenyamanan), aku bisa bantu cari fakta relevan biar kamu bisa nilai sendiri.',
   });
 }
