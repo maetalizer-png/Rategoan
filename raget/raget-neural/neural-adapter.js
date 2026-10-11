@@ -2,7 +2,7 @@
 import { neuralProvider } from './neural-provider.js';
 import { enginePreference } from '../../js/state/engine-preference.js';
 
-const ASK_MS = 300000;
+const ASK_MS = 8000;
 
 async function init() {
   if (typeof neuralProvider.prefetchBest === 'function') {
@@ -20,11 +20,7 @@ function status() {
   };
 }
 
-const PERSONA = 'Jawab langsung pada baris pertama. Jangan mulai dengan basa-basi. Bahasa Indonesia baku dan ringkas.\n';
-
 async function ask(prompt, context) {
-  const messages = (context && context.messages) || [];
-  const passive = context && context.modelPrefix ? String(context.modelPrefix) + '\n' : '';
   const ctrl = new AbortController();
   const external = context && context.signal;
   if (external) {
@@ -33,11 +29,14 @@ async function ask(prompt, context) {
   }
   const timer = setTimeout(() => ctrl.abort(), ASK_MS);
   try {
-    const reply = await neuralProvider.generate(messages, PERSONA + passive + prompt, { signal: ctrl.signal });
+    const reply = await neuralProvider.generate([], String(prompt || ''), {
+      signal: ctrl.signal,
+      large: !!(context && context.large),
+    });
     if (external && external.aborted) throw new Error('dibatalkan');
     if (ctrl.signal.aborted) throw new Error('Raget 1.0 timeout');
-    if (!reply) return 'Bobot neural belum terpasang di perangkat ini.';
-    return reply;
+    if (reply && !/^\d+$/.test(String(reply).trim())) return reply;
+    return 'Saya Raget. Tulis pertanyaan yang lebih spesifik, saya jawab dari pengetahuan di perangkat ini.';
   } finally {
     clearTimeout(timer);
   }

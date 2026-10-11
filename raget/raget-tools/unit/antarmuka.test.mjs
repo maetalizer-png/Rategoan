@@ -780,7 +780,7 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
     'docs/PRD/PRD-PENAMBANGAN-DATA.md',
   ];
   removed.forEach((rel) => assert.equal(gone(rel), true, rel));
-  assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
+  assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-20.0.md'), true);
   assert.equal(existsSync(new URL('docs/PRD/PRD-RELEASE.md', root)), true);
   assert.equal(existsSync(new URL('docs/PRD-RELEASE.md', root)), true);
@@ -831,7 +831,7 @@ test('DOD-11.13 sampai 11.15 korpus, sejarah, dan laporan diringkas', () => {
   assert.ok(tematik.length >= 60);
   assert.match(tematik[0], /"kategori":/);
   assert.equal(gone('raget/raget-devlog/neural/training-report-tiny.json'), true);
-  assert.equal(gone('raget/raget-devlog/neural/laporan-pelatihan-ringkas.json'), true);
+  assert.equal(existsSync(new URL('raget/raget-devlog/neural/laporan-pelatihan-ringkas.json', root)), true);
   assert.equal(gone('raget/raget-devlog/json/metadata/answer-rules.json'), true);
   assert.equal(gone('raget/raget-devlog/json/fewshot.json'), true);
   assert.equal(gone('raget/raget-devlog/json/persona.json'), true);
@@ -1352,17 +1352,17 @@ test('DOD-14.09 namespace, kanvas, dan jejak izin', async () => {
 
 test('DOD-14.10 ledger korpus tetap dan riwayat markdown hilang', () => {
   assert.equal(existsSync(new URL('docs/STATUS-KORPUS-LISENSI.md', root)), true);
-  assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
+  assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
   assert.equal(gone('docs/PRD/README.md'), true);
   assert.equal(gone('docs/ARSITEKTUR.md'), true);
-  assert.match(read('package.json'), /23\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
 });
 
 
 test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => {
   const { readdirSync } = await import('node:fs');
   const names = readdirSync(new URL('.', import.meta.url)).filter((name) => /^antarmuka.*\.test\.mjs$/.test(name));
-  assert.deepEqual(names, ['antarmuka-22.test.mjs', 'antarmuka-23.test.mjs', 'antarmuka.test.mjs']);
+  assert.deepEqual(names, ['antarmuka-22.test.mjs', 'antarmuka-23.test.mjs', 'antarmuka-24.test.mjs', 'antarmuka.test.mjs']);
   const cryptoSrc = read('js/core/isomorphic-crypto.js');
   assert.match(cryptoSrc, /createRequire\(import\.meta\.url\)\('node:crypto'\)/);
   assert.equal(cryptoSrc.includes("getBuiltinModule('node:crypto')"), false);
@@ -1430,7 +1430,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(read('index.html').includes('>Utama<'), false);
   assert.match(read('.github/workflows/lint.yml'), /npm ci/);
   assert.match(read('.github/workflows/lint.yml'), /npm test/);
-  assert.match(read('package.json'), /23\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
 });
 
 test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
@@ -1555,8 +1555,8 @@ test('DOD-18.03 prototipe bersarang ditolak dan dokumen menunjuk 18', () => {
   const dalam = filterParams(JSON.parse('{"q":{"q":"dalam","prototype":{"admin":true}}}'));
   assert.equal(dalam.banned.some((name) => name.indexOf('prototype') >= 0), true);
   assert.equal(dalam.kept.q.admin, undefined);
-  assert.match(read('package.json'), /23\.0\.0-PRODUCTION-GA/);
-  assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
+  assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
+  assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
   assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);
   assert.match(read('sw.js'), /raget-app-shell-v19/);
 });
@@ -1691,8 +1691,8 @@ test('DOD-20.04 ledger korpus tetap dan jangkar usang hilang', () => {
   assert.equal(gone('raget/raget-tools/CHECKPOINT-POLICY.md'), true);
   assert.equal(existsSync(new URL('docs/evidence/antarmuka-22.0/audit.json', root)), true);
   assert.equal(read('package.json').includes('berbasis rule/template'), false);
-  assert.match(read('package.json'), /23\.0\.0-PRODUCTION-GA/);
-  assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
+  assert.match(read('package.json'), /24\.0\.0-PRODUCTION-GA/);
+  assert.equal(existsSync(new URL('docs/HISTORY-ANTARMUKA.md', root)), true);
   assert.match(read('sw.js'), /raget-app-shell-v19/);
   assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);
 });

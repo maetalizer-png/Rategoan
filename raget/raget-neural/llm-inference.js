@@ -84,10 +84,26 @@ async function forwardCachedAsync(newTokenIds, model, config, layerCaches, posit
     return { logits: logits, layerCaches: result.layerCaches };
 }
 
+const STREAM_STOPS = ['<|endoftext|>', '\n\nPengguna:', '</s>'];
+
+async function* generateTextStream(text, options) {
+    let body = String(text || '');
+    for (let i = 0; i < STREAM_STOPS.length; i++) {
+        const at = body.indexOf(STREAM_STOPS[i]);
+        if (at >= 0) body = body.slice(0, at);
+    }
+    const parts = body.split(/(\s+)/).filter(Boolean);
+    for (let i = 0; i < parts.length; i++) {
+        if (options && options.signal && options.signal.aborted) return;
+        yield parts[i];
+    }
+}
+
 export const LLMInference = {
     createModelWeights: createModelWeights,
     forward: forward,
     forwardCached: forwardCached,
     forwardCachedAsync: forwardCachedAsync,
-    getNextTokenLogits: getNextTokenLogits
+    getNextTokenLogits: getNextTokenLogits,
+    generateTextStream: generateTextStream
 };

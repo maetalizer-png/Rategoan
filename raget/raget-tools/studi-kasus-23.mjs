@@ -195,7 +195,7 @@ const versi = await desktop.evaluate(async (origin) => {
   const res = await fetch(origin + '/version.json');
   return res.text();
 }, base);
-note(versi.includes('23.0.0-PRODUCTION-GA'), 'versi 23', versi.trim());
+note(versi.includes('24.0.0-PRODUCTION-GA'), 'versi 24', versi.trim());
 const readme = await desktop.evaluate(async (origin) => {
   const res = await fetch(origin + '/README.md');
   return res.text();

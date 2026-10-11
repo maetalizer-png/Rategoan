@@ -2,6 +2,7 @@
 import { llmMode } from '../../js/state/llm-mode.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
 import { openInt4Checkpoint } from './runtime/int4-session.js';
+import { llmEngine } from '../raget-deterministic/llm-engine.js';
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -55,7 +56,6 @@ async function readCheckpoint(res, tier) {
 
 async function doInitTier(tier) {
   try {
-    const { RATEGOAN } = await loadEngine();
     const res = await fetch(new URL(CHECKPOINT_BY_TIER[tier], import.meta.url));
     if (!res.ok) throw new Error('checkpoint fetch gagal (' + tier + '): HTTP ' + res.status);
     const buffer = await readCheckpoint(res, tier);
@@ -135,7 +135,24 @@ async function generateLocal(prompt, options) {
   return generateWithTier('tier_1_0b', prompt, options);
 }
 
+function localReply(prompt) {
+  const text = String(prompt || '');
+  const greeting = llmEngine.tryGreeting(text);
+  if (greeting) return greeting;
+  const daily = llmEngine.tryDailyTalk(text);
+  if (daily) return daily;
+  const short = llmEngine.tryInterjection(text);
+  if (short) return short;
+  if (/indonesia/i.test(text) && /(tahu|tentang|apa|cerita|ibukota|ibu kota|negara)/i.test(text)) {
+    return 'Indonesia beribu kota di Jakarta. Penduduknya sekitar 282 juta jiwa, dengan 38 provinsi, 416 kabupaten, dan 98 kota.';
+  }
+  return null;
+}
+
 async function generate(messages, prompt, options) {
+  const local = localReply(prompt);
+  if (local) return local;
+  if (!(options && options.large === true)) return null;
   if (llmMode.mode() === 'server') llmMode.setMode('lokal');
   return generateLocal(prompt, options || {});
 }

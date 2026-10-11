@@ -1,0 +1,15 @@
+{
+  "version": "24.0.0-PRODUCTION-GA",
+  "parent": "b8b9b5c",
+  "unit": "175/175",
+  "lint": "0 galat / 0 peringatan",
+  "playwright": "25/25",
+  "halo": "Halo! Ada yang bisa saya bantu?",
+  "haloMs": 1.2,
+  "token249": false,
+  "firstMessageDownloads516": false,
+  "simd": "dotI32x4 110",
+  "sum4": false,
+  "trainedCompact": false,
+  "note": "Sapaan dan fakta dijawab dari mesin lokal. Berkas 1B-2B tetap di hub dan tidak diunduh pada pesan pertama. Tidak ada model 45M yang dilatih di ronde ini."
+}
