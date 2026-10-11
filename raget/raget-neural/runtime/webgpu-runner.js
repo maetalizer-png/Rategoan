@@ -217,6 +217,8 @@ export const GEMV_INT4_SHADER = '@group(0) @binding(0) var<storage, read> packed
   + 'acc = acc + w * vecx[c]; } y[row] = acc; }';
 
 let gemvPipe = null;
+let gemvArena = null;
+let gemvArenaDevice = null;
 
 function pad4(bytes) {
   const src = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength);
@@ -226,6 +228,44 @@ function pad4(bytes) {
   return out;
 }
 
+function dropArena() {
+  if (!gemvArena) return;
+  const box = gemvArena;
+  gemvArena = null;
+  gemvArenaDevice = null;
+  Object.keys(box).forEach((key) => {
+    try { box[key].destroy(); } catch (e) { /* buffer sudah lepas */ }
+  });
+}
+
+function ensureArena(device, need) {
+  const packedSize = Math.max(32768000, need.packed);
+  const scaleSize = Math.max(8192000, need.scale, need.zero);
+  const xSize = Math.max(5632 * 4, need.x);
+  const ySize = Math.max(32000 * 4, need.y);
+  if (gemvArena && gemvArenaDevice === device
+    && gemvArena.packed.size >= packedSize
+    && gemvArena.x.size >= xSize
+    && gemvArena.scale.size >= scaleSize
+    && gemvArena.zero.size >= need.zero
+    && gemvArena.y.size >= ySize
+    && gemvArena.read.size >= ySize) {
+    return gemvArena;
+  }
+  dropArena();
+  gemvArenaDevice = device;
+  gemvArena = {
+    packed: device.createBuffer({ size: packedSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    x: device.createBuffer({ size: xSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    scale: device.createBuffer({ size: scaleSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    zero: device.createBuffer({ size: Math.max(scaleSize, need.zero), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    y: device.createBuffer({ size: ySize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC }),
+    read: device.createBuffer({ size: ySize, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST }),
+    dim: device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST }),
+  };
+  return gemvArena;
+}
+
 export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
   const device = await sharedDevice();
   if (!device || !rows || !cols) return null;
@@ -233,42 +273,37 @@ export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
   const scaleSrc = scales instanceof Float32Array ? scales : new Float32Array(scales);
   const zeroSrc = zeros instanceof Float32Array ? zeros : new Float32Array(zeros);
   const xSrc = x instanceof Float32Array ? x : new Float32Array(x);
-  let packedBuf = null;
-  let xBuf = null;
-  let scaleBuf = null;
-  let zeroBuf = null;
-  let yBuf = null;
-  let readBuf = null;
-  let dimBuf = null;
+  const yBytes = rows * 4;
   try {
-    if (!gemvPipe || gemvDeviceLost()) {
+    if (!gemvPipe || gemvDeviceLost() || gemvArenaDevice !== device) {
+      if (gemvArenaDevice && gemvArenaDevice !== device) dropArena();
       const module = device.createShaderModule({ code: GEMV_INT4_SHADER });
       gemvPipe = device.createComputePipeline({
         layout: 'auto',
         compute: { module: module, entryPoint: 'main' },
       });
     }
-    packedBuf = device.createBuffer({ size: packed.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-    xBuf = device.createBuffer({ size: Math.max(4, xSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-    scaleBuf = device.createBuffer({ size: Math.max(4, scaleSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-    zeroBuf = device.createBuffer({ size: Math.max(4, zeroSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-    yBuf = device.createBuffer({ size: rows * 4, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
-    readBuf = device.createBuffer({ size: rows * 4, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
-    dimBuf = device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
-    device.queue.writeBuffer(packedBuf, 0, packed);
-    device.queue.writeBuffer(xBuf, 0, xSrc);
-    device.queue.writeBuffer(scaleBuf, 0, scaleSrc);
-    device.queue.writeBuffer(zeroBuf, 0, zeroSrc);
-    device.queue.writeBuffer(dimBuf, 0, new Uint32Array([rows, cols, 0, 0]));
+    const arena = ensureArena(device, {
+      packed: packed.byteLength,
+      x: Math.max(4, xSrc.byteLength),
+      scale: Math.max(4, scaleSrc.byteLength),
+      zero: Math.max(4, zeroSrc.byteLength),
+      y: yBytes,
+    });
+    device.queue.writeBuffer(arena.packed, 0, packed);
+    device.queue.writeBuffer(arena.x, 0, xSrc);
+    device.queue.writeBuffer(arena.scale, 0, scaleSrc);
+    device.queue.writeBuffer(arena.zero, 0, zeroSrc);
+    device.queue.writeBuffer(arena.dim, 0, new Uint32Array([rows, cols, 0, 0]));
     const bind = device.createBindGroup({
       layout: gemvPipe.getBindGroupLayout(0),
       entries: [
-        { binding: 0, resource: { buffer: packedBuf } },
-        { binding: 1, resource: { buffer: xBuf } },
-        { binding: 2, resource: { buffer: scaleBuf } },
-        { binding: 3, resource: { buffer: zeroBuf } },
-        { binding: 4, resource: { buffer: yBuf } },
-        { binding: 5, resource: { buffer: dimBuf } },
+        { binding: 0, resource: { buffer: arena.packed } },
+        { binding: 1, resource: { buffer: arena.x } },
+        { binding: 2, resource: { buffer: arena.scale } },
+        { binding: 3, resource: { buffer: arena.zero } },
+        { binding: 4, resource: { buffer: arena.y } },
+        { binding: 5, resource: { buffer: arena.dim } },
       ],
     });
     const encoder = device.createCommandEncoder();
@@ -277,23 +312,16 @@ export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
     pass.setBindGroup(0, bind);
     pass.dispatchWorkgroups(Math.ceil(rows / 64));
     pass.end();
-    encoder.copyBufferToBuffer(yBuf, 0, readBuf, 0, rows * 4);
+    encoder.copyBufferToBuffer(arena.y, 0, arena.read, 0, yBytes);
     device.queue.submit([encoder.finish()]);
-    await readBuf.mapAsync(GPUMapMode.READ);
-    const out = new Float32Array(readBuf.getMappedRange().slice(0));
-    readBuf.unmap();
+    await arena.read.mapAsync(GPUMapMode.READ);
+    const out = new Float32Array(arena.read.getMappedRange(0, yBytes).slice(0));
+    arena.read.unmap();
     return out;
   } catch (e) {
     gemvPipe = null;
+    dropArena();
     return null;
-  } finally {
-    if (packedBuf) packedBuf.destroy();
-    if (xBuf) xBuf.destroy();
-    if (scaleBuf) scaleBuf.destroy();
-    if (zeroBuf) zeroBuf.destroy();
-    if (yBuf) yBuf.destroy();
-    if (readBuf) readBuf.destroy();
-    if (dimBuf) dimBuf.destroy();
   }
 }
 

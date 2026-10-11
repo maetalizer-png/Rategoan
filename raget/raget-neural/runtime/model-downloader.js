@@ -89,3 +89,120 @@ export async function downloadModel(options) {
   }
   return { bytes: concat(parts), ranges: ranges.length, fetched, cache: cacheName, digests };
 }
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export async function downloadConcurrentChunks(options) {
+  const url = String((options && options.url) || '');
+  const size = Math.max(0, Math.floor(Number(options && options.size) || 0));
+  const chunk = (options && options.chunk) || MODEL_CHUNK;
+  const cacheName = (options && options.cacheName) || MODEL_CACHE;
+  const fetchImpl = (options && options.fetchImpl) || fetch;
+  const store = (options && options.store) || memoryStore();
+  const control = (options && options.control) || { paused: false, cancelled: false };
+  const onProgress = options && options.onProgress;
+  const onEarlyReady = options && options.onEarlyReady;
+  const concurrency = Math.max(1, Math.min(4, Math.floor(Number(options && options.concurrency) || 4)));
+  const ranges = planRanges(size, chunk);
+  const earlyBytes = Math.min(size, Math.max(0, Math.floor(Number(options && options.earlyBytes) || 0)));
+  let earlyAt = -1;
+  if (earlyBytes > 0) {
+    for (let i = 0; i < ranges.length; i += 1) {
+      if (ranges[i].end + 1 >= earlyBytes) {
+        earlyAt = i;
+        break;
+      }
+    }
+  }
+  const done = new Array(ranges.length).fill(false);
+  let next = 0;
+  let loaded = 0;
+  let peak = 0;
+  let networkHits = 0;
+  let earlyFired = false;
+  let stopError = null;
+  const t0 = Date.now();
+
+  function report(index, seal) {
+    const sec = Math.max(0.001, (Date.now() - t0) / 1000);
+    const speed = loaded / sec;
+    const eta = speed > 0 ? Math.max(0, (size - loaded) / speed) : 0;
+    if (onProgress) {
+      onProgress({
+        loaded: loaded,
+        total: size,
+        seal: seal,
+        speed: speed,
+        eta: eta,
+        parts: ranges.length,
+        index: index,
+        source: networkHits > 0 ? 'network' : 'cache',
+        early: earlyFired,
+      });
+    }
+  }
+
+  function checkEarly() {
+    if (earlyFired || earlyAt < 0) return;
+    for (let i = 0; i <= earlyAt; i += 1) {
+      if (!done[i]) return;
+    }
+    earlyFired = true;
+    if (onEarlyReady) onEarlyReady({ parts: earlyAt + 1, bytes: ranges[earlyAt].end + 1 });
+  }
+
+  async function pull(i) {
+    const range = ranges[i];
+    const key = url + '#' + range.start + '-' + range.end;
+    const expect = range.end - range.start + 1;
+    let bytes = await store.get(cacheName, key);
+    const fromCache = !!bytes;
+    if (!bytes) {
+      const res = await fetchImpl(url, { headers: { Range: 'bytes=' + range.start + '-' + range.end } });
+      if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
+        throw new Error('HTTP ' + res.status);
+      }
+      const raw = new Uint8Array(await res.arrayBuffer());
+      bytes = raw.length === expect ? raw : raw.slice(0, expect);
+      if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
+      await store.put(cacheName, key, bytes);
+      networkHits += 1;
+    }
+    if (bytes.length > peak) peak = bytes.length;
+    loaded += bytes.length;
+    const seal = fromCache ? '' : await digestSha256(bytes);
+    bytes = null;
+    done[i] = true;
+    checkEarly();
+    report(i, seal);
+  }
+
+  async function worker() {
+    while (!stopError) {
+      while (control.paused && !control.cancelled && !stopError) await sleep(40);
+      if (stopError) return;
+      if (control.cancelled) {
+        stopError = new Error('dibatalkan');
+        return;
+      }
+      const i = next;
+      next += 1;
+      if (i >= ranges.length) return;
+      try {
+        await pull(i);
+      } catch (e) {
+        if (!stopError) stopError = e instanceof Error ? e : new Error('gagal');
+        return;
+      }
+    }
+  }
+
+  const runners = [];
+  const workers = ranges.length === 0 ? 0 : Math.min(concurrency, ranges.length);
+  for (let k = 0; k < workers; k += 1) runners.push(worker());
+  await Promise.all(runners);
+  if (stopError) throw stopError;
+  return { parts: ranges.length, bytesHeld: 0, peakChunk: peak, size: size, early: earlyFired };
+}

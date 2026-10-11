@@ -3,6 +3,7 @@ import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
 import { store } from '../state/store.js';
 import { auth } from '../state/auth.js';
+import { enginePreference } from '../state/engine-preference.js';
 import { router } from '../core/router.js';
 import { drawer } from '../ui/drawer.js';
 import { quote } from '../ui/quote.js';
@@ -379,20 +380,39 @@ function bindWeightCard() {
     const total = detail.total || 0;
     const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
     if (fill) fill.style.width = pct + '%';
+    const cepat = $('mode-cepat');
+    if (detail.early && loaded < total && cepat) {
+      cepat.hidden = false;
+      cepat.disabled = false;
+    }
     if (!status) return;
+    if (detail.early && loaded < total) {
+      status.textContent = 'Mode Cepat Siap (Mengunduh Mode Mendalam di Latar Belakang: ' + pct + '%...)';
+      return;
+    }
+    if (detail.source === 'cache') {
+      status.textContent = 'Memuat model dari penyimpanan lokal (Cache API)... ' + pct + '%';
+      return;
+    }
     const speed = detail.speed > 0 ? ((detail.speed / (1024 * 1024)).toFixed(1) + ' MB/s') : '';
     let eta = '';
     if (detail.eta > 0 && detail.loaded < detail.total) {
       eta = detail.eta < 60 ? ('~' + Math.ceil(detail.eta) + ' dtk') : ('~' + Math.ceil(detail.eta / 60) + ' menit');
     }
     const seal = detail.seal ? ('sha256 ' + String(detail.seal).slice(0, 12)) : '';
-    status.textContent = ['Mengunduh bobot ' + pct + '%', speed, eta, seal].filter(Boolean).join(' · ');
+    status.textContent = ['Mengunduh dari Hugging Face ' + pct + '%', speed, eta, seal].filter(Boolean).join(' · ');
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});
   });
-  import('../../raget/raget-neural/neural-provider.js').then((mod) => {
+  import('../../raget/raget-neural/neural-provider.js').then(async (mod) => {
     const neuralProvider = mod.neuralProvider;
+    const cepatBtn = $('mode-cepat');
+    if (cepatBtn) cepatBtn.onclick = () => {
+      enginePreference.set('cloud');
+      window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'cloud' } }));
+    };
+    try { await neuralProvider.bootWeights(); } catch (e) { /* kartu tetap tampil */ }
     if (neuralProvider.ready()) {
       card.hidden = true;
       return;
@@ -423,7 +443,7 @@ function bindWeightCard() {
         pauseBtn.textContent = 'Jeda';
       }
       if (cancelBtn) cancelBtn.hidden = false;
-      if (status) status.textContent = 'Mengunduh bobot 0%';
+      if (status) status.textContent = 'Mengunduh dari Hugging Face 0%';
       neuralProvider.loadWeights().then((ok) => {
         if (pauseBtn) pauseBtn.hidden = true;
         if (cancelBtn) cancelBtn.hidden = true;

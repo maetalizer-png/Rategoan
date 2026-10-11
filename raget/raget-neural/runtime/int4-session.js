@@ -23,12 +23,12 @@ function asF32(raw) {
   return new Float32Array(copy.buffer);
 }
 
-function dequantInto(packed, scales, zeros, n, dest) {
-  for (let i = 0; i < n; i += 1) {
+function dequantRange(packed, scales, zeros, start, count, dest) {
+  for (let k = 0; k < count; k += 1) {
+    const i = start + k;
     const byte = packed[i >> 1] || 0;
     const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
-    const b = i >> 5;
-    dest[i] = (q - (zeros[b] || 0)) * (scales[b] || 0);
+    dest[k] = (q - (zeros[i >> 5] || 0)) * (scales[i >> 5] || 0);
   }
 }
 
@@ -143,7 +143,6 @@ function buildSession(parsed, readBytes) {
   }
 
   async function project(name, rows, cols, x, y, signal) {
-    const n = rows * cols;
     const packed = await tensorU8(name);
     const scales = await tensorF32(name + '.scale');
     const zeros = await tensorF32(name + '.zero');
@@ -153,8 +152,18 @@ function buildSession(parsed, readBytes) {
       usedGpu = true;
       return true;
     }
-    dequantInto(packed, scales, zeros, n, scratch);
-    return gemvLive(scratch, rows, cols, x, y, signal);
+    const n = rows * cols;
+    if (cols > 0 && n <= scratch.length) {
+      dequantRange(packed, scales, zeros, 0, n, scratch);
+      return gemvLive(scratch, rows, cols, x, y, signal);
+    }
+    const tile = Math.max(1, Math.floor(scratch.length / Math.max(1, cols)));
+    for (let row0 = 0; row0 < rows; row0 += tile) {
+      const rowsNow = Math.min(tile, rows - row0);
+      dequantRange(packed, scales, zeros, row0 * cols, rowsNow * cols, scratch);
+      if (!await gemvLive(scratch, rowsNow, cols, x, y.subarray(row0, row0 + rowsNow), signal)) return false;
+    }
+    return true;
   }
 
   async function embed(id, y) {
@@ -240,24 +249,7 @@ function buildSession(parsed, readBytes) {
     if (signal && signal.aborted) return null;
     rmsNorm(x, await tensorF32('final_norm.gamma'), h);
     const logits = new Float32Array(vocab);
-    const packed = await tensorU8('lm_head.weight');
-    const scales = await tensorF32('lm_head.weight.scale');
-    const zeros = await tensorF32('lm_head.weight.zero');
-    for (let idOut = 0; idOut < vocab; idOut += 1) {
-      if ((idOut & 255) === 0) {
-        if (signal && signal.aborted) return null;
-        await yieldThread();
-      }
-      let acc = 0;
-      const base = idOut * d;
-      for (let c = 0; c < d; c += 1) {
-        const i = base + c;
-        const byte = packed[i >> 1] || 0;
-        const qn = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
-        acc += ((qn - (zeros[i >> 5] || 0)) * (scales[i >> 5] || 0)) * h[c];
-      }
-      logits[idOut] = acc;
-    }
+    if (!await project('lm_head.weight', vocab, d, h, logits, signal)) return null;
     return logits;
   }
 

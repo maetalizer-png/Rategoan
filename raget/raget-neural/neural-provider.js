@@ -6,9 +6,11 @@ import { openInt4Stream } from './runtime/int4-session.js';
 import {
   WEIGHT_ROOM,
   WEIGHT_SPEC,
-  downloadWeightChunks,
+  EARLY_READY_BYTES,
+  downloadConcurrentChunks,
   createRangeReader,
   openCacheStore,
+  cacheHas,
   storageFree,
 } from './runtime/weight-cache.js';
 
@@ -44,6 +46,10 @@ let weightReader = null;
 const control = { paused: false, cancelled: false };
 let worker = null;
 let workerJob = 0;
+let earlyFlag = false;
+let bootPromise = null;
+const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
+const PARTS_KEY = 'rategoan_weights_1_5b_parts';
 
 function weightError() {
   return lastWeightError;
@@ -64,6 +70,52 @@ function resumeWeights() {
 function cancelWeights() {
   control.cancelled = true;
   control.paused = false;
+  earlyFlag = false;
+}
+
+function installedFlag() {
+  try {
+    return typeof localStorage !== 'undefined' && localStorage.getItem(INSTALL_KEY) === 'true';
+  } catch (e) {
+    return false;
+  }
+}
+
+function sealInstalled(parts) {
+  try {
+    if (typeof localStorage === 'undefined') return;
+    localStorage.setItem(INSTALL_KEY, 'true');
+    localStorage.setItem(PARTS_KEY, String(parts || 50));
+  } catch (e) {
+    /* penyimpanan pribadi ditolak */
+  }
+}
+
+function clearInstalled() {
+  try {
+    if (typeof localStorage === 'undefined') return;
+    localStorage.removeItem(INSTALL_KEY);
+    localStorage.removeItem(PARTS_KEY);
+  } catch (e) {
+    /* penyimpanan pribadi ditolak */
+  }
+}
+
+async function bootWeights() {
+  if (loadedTier && weightReader) return true;
+  if (!installedFlag()) return false;
+  const url = CHECKPOINT_BY_TIER.tier_1_5b;
+  const size = WEIGHT_SPEC.size;
+  const end = Math.min(size, WEIGHT_SPEC.chunk) - 1;
+  const present = await cacheHas(WEIGHT_SPEC.cache, url + '#0-' + end);
+  if (!present) {
+    clearInstalled();
+    return false;
+  }
+  weightReader = createRangeReader(openCacheStore(), url, size, WEIGHT_SPEC.chunk, WEIGHT_SPEC.cache);
+  loadedTier = 'tier_1_5b';
+  earlyFlag = true;
+  return true;
 }
 
 function haltInference() {
@@ -92,27 +144,35 @@ async function doInitTier(tier) {
     if (!size) throw new Error('ukuran checkpoint tidak diketahui');
     const store = openCacheStore();
     const chunk = WEIGHT_SPEC.chunk;
-    const packed = await downloadWeightChunks({
+    weightReader = createRangeReader(store, url, size, chunk, WEIGHT_SPEC.cache);
+    session = null;
+    const packed = await downloadConcurrentChunks({
       url: url,
       size: size,
       chunk: chunk,
       cacheName: WEIGHT_SPEC.cache,
       store: store,
       control: control,
+      concurrency: 4,
       roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
+      earlyBytes: tier === 'tier_1_5b' ? EARLY_READY_BYTES : 0,
+      onEarlyReady: () => {
+        earlyFlag = true;
+      },
       onProgress: (detail) => reportProgress(Object.assign({ tier: tier }, detail)),
     });
     if (packed.bytesHeld !== 0) throw new Error('buffer monolitik tidak boleh dibuat');
-    weightReader = createRangeReader(store, url, size, chunk, WEIGHT_SPEC.cache);
-    session = null;
     loadedTier = tier;
-    reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts });
+    earlyFlag = true;
+    sealInstalled(packed.parts);
+    reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts, source: 'cache', early: false });
     return true;
   } catch (e) {
     lastWeightError = e && e.message ? String(e.message) : 'gagal';
+    earlyFlag = false;
+    session = null;
     if (loadedTier === tier) {
       loadedTier = null;
-      session = null;
       weightReader = null;
     }
     return false;
@@ -195,10 +255,13 @@ function runOnWorker(prompt, genOpts, signal) {
 }
 
 async function generateWithTier(tier, prompt, options) {
-  if (loadedTier !== tier && !initPromises[tier]) return null;
-  const ok = await ensureTier(tier);
-  if (!ok || !weightReader) return null;
   const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
+  const partial = mode === 'cepat' && earlyFlag && weightReader && loadedTier !== tier;
+  if (!partial) {
+    if (loadedTier !== tier && !initPromises[tier]) return null;
+    const ok = await ensureTier(tier);
+    if (!ok || !weightReader) return null;
+  }
   const signal = options && options.signal;
   const genOpts = {
     maxNewTokens: mode === 'mendalam' ? 96 : 32,
@@ -395,6 +458,10 @@ function shapeTiers() {
   return Object.keys(TIER_SHAPES).map((id) => bindTier({ id }));
 }
 
+function cepatReady() {
+  return earlyFlag;
+}
+
 function loadWeights() {
   control.cancelled = false;
   control.paused = false;
@@ -415,4 +482,6 @@ export const neuralProvider = Object.freeze({
   weightPaused,
   weightError,
   storageFree,
+  bootWeights,
+  cepatReady,
 });
