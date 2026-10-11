@@ -1,4 +1,7 @@
 {
-  "catatan": "Berkas besar laporan pelatihan lama sudah dihapus. Model 1B-2B di hub berinisialisasi Int4, bukan hasil latihan korpus. Sapaan produksi memakai mesin lokal.",
-  "trainedCompact": false
+  "trained": true,
+  "parameterCount": 185856,
+  "steps": 1820,
+  "lossAkhir": 0.1217,
+  "berkas": "raget/raget-neural/checkpoints/raget-neural-compact.safetensors"
 }

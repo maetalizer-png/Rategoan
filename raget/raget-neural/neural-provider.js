@@ -2,7 +2,6 @@
 import { llmMode } from '../../js/state/llm-mode.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
 import { openInt4Checkpoint } from './runtime/int4-session.js';
-import { llmEngine } from '../raget-deterministic/llm-engine.js';
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -135,26 +134,49 @@ async function generateLocal(prompt, options) {
   return generateWithTier('tier_1_0b', prompt, options);
 }
 
-function localReply(prompt) {
-  const text = String(prompt || '');
-  const greeting = llmEngine.tryGreeting(text);
-  if (greeting) return greeting;
-  const daily = llmEngine.tryDailyTalk(text);
-  if (daily) return daily;
-  const short = llmEngine.tryInterjection(text);
-  if (short) return short;
-  if (/indonesia/i.test(text) && /(tahu|tentang|apa|cerita|ibukota|ibu kota|negara)/i.test(text)) {
-    return 'Indonesia beribu kota di Jakarta. Penduduknya sekitar 282 juta jiwa, dengan 38 provinsi, 416 kabupaten, dan 98 kota.';
+let compactPromise = null;
+
+async function readCompactBytes() {
+  const url = new URL('./checkpoints/raget-neural-compact.safetensors', import.meta.url);
+  try {
+    const res = await fetch(url);
+    if (res.ok) return res.arrayBuffer();
+  } catch (e) {
+    /* Node tidak membuka file lewat fetch. */
   }
-  return null;
+  const { readFileSync } = await import('node:fs');
+  const buf = readFileSync(url);
+  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+}
+
+async function generateCompact(prompt, options) {
+  if (!compactPromise) {
+    compactPromise = (async () => {
+      const { RATEGOAN } = await loadEngine();
+      RATEGOAN.restoreFromCheckpointSafetensors(await readCompactBytes());
+      return RATEGOAN;
+    })().catch(() => null);
+  }
+  const engine = await compactPromise;
+  if (!engine) return null;
+  const out = await engine.generateText(String(prompt || ''), {
+    maxNewTokens: 32,
+    greedy: true,
+    minNewTokens: 0,
+    repetitionPenalty: 1,
+    signal: options && options.signal,
+  });
+  const text = out && out.text ? String(out.text).trim() : '';
+  if (!text || /^\d+$/.test(text)) return null;
+  return text;
 }
 
 async function generate(messages, prompt, options) {
-  const local = localReply(prompt);
-  if (local) return local;
-  if (!(options && options.large === true)) return null;
-  if (llmMode.mode() === 'server') llmMode.setMode('lokal');
-  return generateLocal(prompt, options || {});
+  if (options && options.large === true) {
+    if (llmMode.mode() === 'server') llmMode.setMode('lokal');
+    return generateLocal(prompt, options || {});
+  }
+  return generateCompact(prompt, options);
 }
 
 async function getStats() {

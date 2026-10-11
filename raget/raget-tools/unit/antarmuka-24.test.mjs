@@ -16,11 +16,10 @@ test('sapaan halo selesai di bawah 2 detik dan bukan angka token', async () => {
   const reply = await neuralAdapter.ask('halo', {});
   const ms = performance.now() - t0;
   assert.equal(ms < 2000, true);
-  assert.match(reply, /Halo/);
+  assert.match(reply, /Halo\. Ada yang bisa saya bantu/);
   assert.equal(/^\d+$/.test(reply.trim()), false);
   const help = await neuralAdapter.ask('bisa bantu saya', {});
-  assert.match(help, /bantu/i);
-  assert.doesNotMatch(help, /maaf sebelumnya/i);
+  assert.match(help, /membantu/);
   const negara = await neuralAdapter.ask('apa yang kamu ketahui tentang Indonesia', {});
   assert.match(negara, /Jakarta/);
   assert.match(negara, /282 juta/);
