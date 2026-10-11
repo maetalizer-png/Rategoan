@@ -34,13 +34,13 @@ import { getWebCrypto } from '../../../js/crypto/get-web-crypto.js';
 import { recordTelemetry, publicMetrics, auditEvent } from '../../../js/studio/telemetry.js';
 import { positionDesktopPopover } from '../../../shared/popover.js';
 import { devlogIndex } from '../../../raget/raget-devlog/index.js';
-import { llmEngine } from '../../../raget/raget-template/llm-engine.js';
+import { llmEngine } from '../../../raget/raget-deterministic/llm-engine.js';
 import { whatsappImporter } from '../../../vault/whatsapp/importer.js';
 import { createReplica, insertAt, applyOps, readDoc } from '../../../js/artifacts/canvas-editor.js';
 import { hybridSearch, buildHnsw, syntheticCorpus, buildVectorIndex, searchKnn, partitionIndex, searchSq8, partitionNodes, reciprocalRankFusion } from '../../raget-database/hybrid-search.js';
 import { handshakeMcp, planHeartbeat } from '../../../js/connectors/mcp-bridge.js';
 import { createSyncKey, sealProject, openProject, meshOffer } from '../../../js/sync/p2p-sync.js';
-import { verifyClaims, numericConsistent, checkClaim } from '../../raget-template/fact-verifier.js';
+import { verifyClaims, numericConsistent, checkClaim } from '../../raget-deterministic/fact-verifier.js';
 import { humanevalPassAt1 } from '../benchmark/browser-humaneval.mjs';
 import { nextBatch, thermalGovernor } from '../../raget-neural/runtime/thermal-governor.js';
 import { signPlugin, verifyPlugin } from '../../../js/connectors/plugin-verifier.js';
@@ -783,7 +783,7 @@ test('DOD-11.07 dokumen usang hilang dan sejarah antarmuka ada', () => {
   assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
   assert.equal(gone('docs/PRD/PRD-ANTARMUKA-20.0.md'), true);
   assert.equal(gone('docs/PRD'), true);
-  assert.equal(gone('docs/evidence'), true);
+  assert.equal(existsSync(new URL('docs/evidence/antarmuka-22.0/audit.json', root)), true);
   assert.equal(existsSync(new URL('docs/STATUS-KORPUS-LISENSI.md', root)), true);
 });
 
@@ -1354,14 +1354,14 @@ test('DOD-14.10 ledger korpus tetap dan riwayat markdown hilang', () => {
   assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
   assert.equal(gone('docs/PRD/README.md'), true);
   assert.equal(gone('docs/ARSITEKTUR.md'), true);
-  assert.match(read('package.json'), /21\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /22\.0\.0-PRODUCTION-GA/);
 });
 
 
 test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => {
   const { readdirSync } = await import('node:fs');
   const names = readdirSync(new URL('.', import.meta.url)).filter((name) => /^antarmuka.*\.test\.mjs$/.test(name));
-  assert.deepEqual(names, ['antarmuka.test.mjs']);
+  assert.deepEqual(names, ['antarmuka-22.test.mjs', 'antarmuka.test.mjs']);
   const cryptoSrc = read('js/core/isomorphic-crypto.js');
   assert.match(cryptoSrc, /createRequire\(import\.meta\.url\)\('node:crypto'\)/);
   assert.equal(cryptoSrc.includes("getBuiltinModule('node:crypto')"), false);
@@ -1374,7 +1374,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   const scan = read('raget/raget-neural/runtime/model-downloader.js') + read('raget/raget-agents/tools-kode.js');
   banned.forEach((word) => assert.equal(scan.includes(word), false, word));
   assert.equal(existsSync(new URL('raget/raget-data/jsonl/kode/code-pack.jsonl', root)), true);
-  assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif/verify-build-pipeline.mjs', root)), true);
+  assert.equal(gone('raget/raget-tools/arsip-nonaktif'), true);
   __resetConfirmLedgerForTesting();
   const nonce = issueConfirmChallenge('github_commit_changes', { message: 'halo' }, 1000, 'tok-uji');
   assert.equal(verifyConfirm(nonce, 'github_commit_changes', { message: 'halo' }, 1000, 'tok-uji'), true);
@@ -1429,7 +1429,7 @@ test('DOD-15 berkas kanonik, nama bersih, dan konfirmasi bertanda', async () => 
   assert.equal(read('index.html').includes('>Utama<'), false);
   assert.match(read('.github/workflows/lint.yml'), /npm ci/);
   assert.match(read('.github/workflows/lint.yml'), /npm test/);
-  assert.match(read('package.json'), /21\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /22\.0\.0-PRODUCTION-GA/);
 });
 
 test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
@@ -1506,7 +1506,7 @@ test('DOD-17 paritas node, graf berlapis, dan batas keamanan', async () => {
     { judul: { value: 'baru', clock: 2, replica: 'b' } },
   );
   assert.equal(gabung.judul.value, 'baru');
-  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-21/);
+  assert.match(read('.github/workflows/lint.yml'), /studi-kasus-22/);
 });
 
 test('DOD-18.01 path absolut sistem ditolak di batas vfs', async () => {
@@ -1554,7 +1554,7 @@ test('DOD-18.03 prototipe bersarang ditolak dan dokumen menunjuk 18', () => {
   const dalam = filterParams(JSON.parse('{"q":{"q":"dalam","prototype":{"admin":true}}}'));
   assert.equal(dalam.banned.some((name) => name.indexOf('prototype') >= 0), true);
   assert.equal(dalam.kept.q.admin, undefined);
-  assert.match(read('package.json'), /21\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /22\.0\.0-PRODUCTION-GA/);
   assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
   assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);
   assert.match(read('sw.js'), /raget-app-shell-v19/);
@@ -1640,8 +1640,12 @@ test('DOD-20.01 bentuk tier dibaca dari header tanpa bobot', () => {
     assert.equal(row.download, false);
   });
   assert.equal(bindTier({ hidden_size: 32, n_layers: 2 }).id, '');
-  assert.match(read('raget/raget-neural/neural-provider.js'), /raget-neural-massive200m\.safetensors/);
-  assert.equal(read('raget/raget-neural/neural-provider.js').includes('1.5b.safetensors'), false);
+  assert.match(read('raget/raget-neural/neural-provider.js'), /raget-neural-1\.0b\.safetensors/);
+  assert.match(read('raget/raget-neural/neural-provider.js'), /raget-neural-1\.5b\.safetensors/);
+  assert.match(read('raget/raget-neural/neural-provider.js'), /raget-neural-2\.0b\.safetensors/);
+  assert.equal(read('raget/raget-neural/neural-provider.js').includes('massive50m'), false);
+  assert.equal(read('raget/raget-neural/neural-provider.js').includes('massive100m'), false);
+  assert.equal(read('raget/raget-neural/neural-provider.js').includes('massive200m'), false);
 });
 
 test('DOD-20.02 kepala tensor mandiri tidak diikat ke embedding', () => {
@@ -1684,9 +1688,9 @@ test('DOD-20.04 ledger korpus tetap dan jangkar usang hilang', () => {
   assert.equal(existsSync(new URL('docs/STATUS-KORPUS-LISENSI.md', root)), true);
   assert.equal(gone('docs/PRD/PRD-RAGET-TEMPLATE.md'), true);
   assert.equal(gone('raget/raget-tools/CHECKPOINT-POLICY.md'), true);
-  assert.equal(gone('docs/evidence'), true);
+  assert.equal(existsSync(new URL('docs/evidence/antarmuka-22.0/audit.json', root)), true);
   assert.equal(read('package.json').includes('berbasis rule/template'), false);
-  assert.match(read('package.json'), /21\.0\.0-PRODUCTION-GA/);
+  assert.match(read('package.json'), /22\.0\.0-PRODUCTION-GA/);
   assert.equal(gone('docs/HISTORY-ANTARMUKA.md'), true);
   assert.match(read('sw.js'), /raget-app-shell-v19/);
   assert.match(read('js/voice/voice-pipeline.js'), /weights:\s*false/);

@@ -1,8 +1,8 @@
 {
   "name": "rategoan",
-  "version": "21.0.0-PRODUCTION-GA",
+  "version": "22.0.0-PRODUCTION-GA",
   "private": true,
-  "description": "Rategoan — PWA lokal. Jalur jawaban lewat adapter neural. Checkpoint Safetensors tidak dibundel di git.",
+  "description": "Rategoan — stasiun kerja dan runtime neural di peramban. Checkpoint Safetensors tidak dibundel di git.",
   "type": "module",
   "scripts": {
     "lint": "node raget/raget-tools/lint-check.mjs",

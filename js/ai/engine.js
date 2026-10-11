@@ -1,4 +1,4 @@
-import { llmEngine } from '../../raget/raget-template/llm-engine.js';
+import { llmEngine } from '../../raget/raget-deterministic/llm-engine.js';
 import { $ } from '../../shared/dom.js';
 import { mountNamespace } from '../core/namespace.js';
 

@@ -11,7 +11,7 @@ globalThis.fetch = async (url, opts) => {
   return origFetch(url, opts);
 };
 
-const { llmEngine } = await import('../raget-template/llm-engine.js');
+const { llmEngine } = await import('../raget-deterministic/llm-engine.js');
 const { socialEngine } = await import('../raget-agents/social-engine.js');
 const { planner } = await import('../raget-agents/planner.js');
 const { mathEngine } = await import('../raget-agents/math-engine.js');

@@ -1,6 +1,6 @@
 export function createKvWindow(opts) {
   const sinks = (opts && opts.sinks) || 4;
-  const span = (opts && opts.span) || 256;
+  const span = (opts && opts.span) || 1024;
   const head = [];
   const tail = [];
   let seen = 0;

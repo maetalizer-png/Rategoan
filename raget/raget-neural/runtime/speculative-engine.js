@@ -1,5 +1,5 @@
 export function draftContract() {
-  return { draft: '15M-50M', target: '1.5B', parallel: true, weights: false };
+  return { draft: 'draft-100M', target: '1.5B', parallel: true, weights: false };
 }
 
 export function verifyDraft(step, prefix, draft) {

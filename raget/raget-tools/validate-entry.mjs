@@ -33,7 +33,7 @@
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { llmEngine } from '../raget-template/llm-engine.js';
+import { llmEngine } from '../raget-deterministic/llm-engine.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_ROOT = join(__dirname, '../raget-data/json');

@@ -39,7 +39,7 @@ const DEFAULT_ALLOW = [
 ];
 
 export const NONCE_CAP = 1000;
-export const NONCE_TTL = 300000;
+export const NONCE_TTL = 60000;
 export const LOCK_MS = 120000;
 const nonceLedger = new Map();
 const nonceTomb = new Map();

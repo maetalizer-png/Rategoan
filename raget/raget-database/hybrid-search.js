@@ -251,3 +251,23 @@ export function reciprocalRankFusion(lists, k) {
   });
   return Array.from(score.entries()).sort((a, b) => b[1] - a[1]).map(([id, rrf]) => ({ id, rrf }));
 }
+
+export function dotInt8Unrolled(matrix, base, query, dim) {
+  let acc = 0;
+  let i = 0;
+  const end = dim - (dim % 8);
+  for (; i < end; i += 8) {
+    const o = base + i;
+    acc += matrix[o] * query[i]
+      + matrix[o + 1] * query[i + 1]
+      + matrix[o + 2] * query[i + 2]
+      + matrix[o + 3] * query[i + 3]
+      + matrix[o + 4] * query[i + 4]
+      + matrix[o + 5] * query[i + 5]
+      + matrix[o + 6] * query[i + 6]
+      + matrix[o + 7] * query[i + 7];
+  }
+  for (; i < dim; i += 1) acc += matrix[base + i] * query[i];
+  return acc;
+}
+

@@ -8,23 +8,21 @@
   <img alt="License" src="https://img.shields.io/badge/license-RATEGOAN%20v1.0-blue?style=flat-square">
 </p>
 
-Chat AI 100% local-first — tanpa server, tanpa API key, tanpa biaya per-pesan.
+Chat AI lokal di peramban — tanpa server wajib untuk jalur inti.
 Seluruh percakapan, memori, dan basis pengetahuan berjalan langsung di
 perangkat pengguna lewat Progressive Web App (PWA) murni HTML/CSS/JavaScript
 modular (ES6 Modules), tanpa framework dan tanpa build step.
 
+Rategoan adalah Sovereign Client-Side AI Software Engineering Workstation dan Neural Runtime berdaulat, berjalan 100% lokal di peramban web pengguna berbasis WebGPU modern, bukan sekadar chatbot.
+
 ## Korpus
 
-Penempatan data training mengikuti [docs/PRD/PRD-RELEASE.md](docs/PRD/PRD-RELEASE.md)
-(spesifikasi Drive, 2 Oktober 2026). Enam tag: `Data-baru-Indonesian`,
-`data-baru-English`, `penampungan-Indonesian`, `penampungan-English`,
-`K-dataset-Indonesian`, `R-dataset-english`. Angka rak ada di
+Penempatan data training mengikuti ledger
 [docs/STATUS-KORPUS-LISENSI.md](docs/STATUS-KORPUS-LISENSI.md).
-Ledger korpus: [docs/STATUS-KORPUS-LISENSI.md](docs/STATUS-KORPUS-LISENSI.md).
+Angka rak ada di berkas yang sama.
 Jalur jawaban chat memakai adapter neural. Checkpoint Safetensors tidak dibundel di git.
 
-Repo ini adalah **RATEGOAN**, kerangka chat inti dengan **Raget**, mesin
-balasan template/rule-based (bukan model bahasa besar).
+Repo ini adalah **RATEGOAN**, stasiun kerja rekayasa dan runtime neural di peramban.
 
 ## Daftar Isi
 
@@ -41,9 +39,7 @@ balasan template/rule-based (bukan model bahasa besar).
 
 - **100% lokal** — tidak ada panggilan API AI berbayar untuk fitur inti; data
   percakapan tidak pernah meninggalkan perangkat.
-- **Deterministik & jujur** — balasan dihasilkan dari pencocokan pola dan data
-  terstruktur, bukan generasi probabilistik; saat tidak tahu, mengaku tidak
-  tahu alih-alih mengarang.
+- **Jujur tentang bobot** — jalur chat tidak mengarang jawaban dari tabel tetap; kalau checkpoint belum termuat, balasan mengatakan bobot belum terpasang.
 - **Data terpisah dari kode** — kepribadian, gaya bicara, dan basis
   pengetahuan sepenuhnya ada di file `.json` di `raget-data/json/`, bisa diganti tanpa
   menyentuh logic aplikasi.
@@ -88,7 +84,7 @@ js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
   raget-agents/                   router intent + orkestrasi tool + mesin khusus + kontrak/router adapter otak
-  raget-template/                 mesin template tetap ada di disk, bukan jalur chat
+  raget-deterministic/            mesin lokal selain jalur chat
   raget-neural/                   adapter neural. Checkpoint Safetensors tidak dibundel di git
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
@@ -140,7 +136,7 @@ loader tipis `raget-agents/dataries-registry.js` (fetch JSON → bentuk
 `{text, metadata}`). Domain mencakup: negara, kota, bahasa, tokoh, sains,
 sejarah, wisata, kuliner/makanan, olahraga, etika, minuman, platform, ekonomi,
 peluang, penemuan, alam, seni-budaya, mata pelajaran sekolah & kuliah, dan
-`sapaan/` (smalltalk harian, dimuat langsung oleh `raget-template/llm-engine.js`).
+`sapaan/` (smalltalk harian, dimuat langsung oleh `raget-deterministic/llm-engine.js`).
 
 Skema data seragam di seluruh domain: `{id, kategori, wilayah, nama, tags,
 teks, meta}` — file `.json` biasa, gampang ditambah/diedit tanpa menyentuh
@@ -149,7 +145,8 @@ kode aplikasi. Domain ditambah dengan berkas `.json` di `raget/raget-data/json/`
 ## RAGET Neural (jalur chat, bobot tidak dibundel)
 
 Panel Model tetap menampilkan kartu eksperimental. Jalur chat memakai adapter neural.
-Berkas Safetensors 1,5 miliar parameter tidak ada di repositori ini dan tidak diunduh pada rilis ini.
+Nama kanonik di Hugging Face adalah `raget-neural-1.0b.safetensors`, `raget-neural-1.5b.safetensors`, dan `raget-neural-2.0b.safetensors`.
+Berkas itu tidak ada di repositori ini dan tidak diunggah pada rilis ini.
 Kalau checkpoint belum termuat, balasan berbunyi bahwa bobot belum terpasang.
 
 ## Kualitas & Pengujian

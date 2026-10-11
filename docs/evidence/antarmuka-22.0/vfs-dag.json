@@ -1,0 +1,5 @@
+{
+  "store": "vfs_tx_journal",
+  "lock": "rategoan_vfs_wal",
+  "states": ["PREPARE", "COMMIT", "PURGE"]
+}

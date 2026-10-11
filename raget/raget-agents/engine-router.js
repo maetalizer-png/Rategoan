@@ -1,28 +1,7 @@
-// SATU KONTRAK, DUA OTAK RATEGOAN (lihat docs/ARSITEKTUR.md untuk peta
-// lengkap):
-//
-//   [ UI chat ]              <- gak pernah berubah
-//         |
-//   [ router ini ]           <- satu tempat aturan: siapa jawab dulu, fallback ke mana
-//    +- rule-based (adapter)   -> data inti: harga, stok, FAQ -> instan & pasti benar
-//    +- neural (adapter)       -> otak RATEGOAN sendiri, dilatih dari nol, AKTIF
-//
-// Cuma dua otak, keduanya MILIK RATEGOAN SENDIRI - tidak ada model
-// pihak ketiga yang disematkan. Preferensi pengguna (dipilih di
-// #model-sheet, disimpan js/state/engine-preference.js) menentukan
-// siapa dicoba duluan: Template atau Neural. Tiap adapter dicek
-// status().ready dulu sebelum ask() dipanggil; kalau tidak ready ATAU
-// ask() melempar Error, router jatuh ke adapter berikutnya - pengguna
-// tidak pernah melihat error mentah selama Template (baseline) tetap
-// ready.
-//
-// Neural AKTIF (status().ready: true) meski outputnya belum koheren
-// secara gramatikal - pilihan produk yang sengaja: biar kelihatan
-// jalan/berkembang, bukan dikunci jadi pajangan mati. Pengguna yang
-// memilih "Raget Neural" di panel Model betul-betul melihat hasil
-// generasinya apa adanya, termasuk kalau masih acak.
+// Jalur chat hanya adapter neural. Adapter deterministik tetap terdaftar
+// untuk status panel, tetapi orderedAdapters() tidak memanggilnya.
 import { neuralAdapter } from '../raget-neural/neural-adapter.js';
-import { templateAdapter } from '../raget-template/template-adapter.js';
+import { deterministicAdapter } from '../raget-deterministic/deterministic-adapter.js';
 import { engineContract } from './engine-contract.js';
 
 function registerAdapter(adapter) {
@@ -35,7 +14,7 @@ function registerAdapter(adapter) {
 
 const ADAPTERS_BY_ID = Object.freeze({
   neural: registerAdapter(neuralAdapter),
-  template: registerAdapter(templateAdapter),
+  template: registerAdapter(deterministicAdapter),
 });
 
 function routePlan() {

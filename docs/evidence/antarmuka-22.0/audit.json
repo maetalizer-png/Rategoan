@@ -1,0 +1,9 @@
+{
+  "version": "22.0.0-PRODUCTION-GA",
+  "weightsInstalled": false,
+  "weightsUploaded": false,
+  "huggingfaceDeleted": false,
+  "gpg": false,
+  "cacheShell": "raget-app-shell-v19",
+  "note": "Berkas bobot 1B-2B tidak dibuat dan tidak diunggah. Berkas lama di Hugging Face tidak dihapus. Jalur unduhan menunjuk nama kanonik raget-neural-1.0b, 1.5b, dan 2.0b."
+}

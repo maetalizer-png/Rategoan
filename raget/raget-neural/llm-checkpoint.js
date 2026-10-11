@@ -305,10 +305,21 @@ function decoupleWeightTie(header) {
 
 function readArchitecture(header) {
     const meta = (header && header.__metadata__) || {};
-    const hidden = Number(meta.hidden_size || meta.hiddenSize || 0);
-    const layers = Number(meta.n_layers || meta.nLayers || 0);
-    const gqa = Number(meta.num_key_value_heads || meta.gqa || 0);
-    return { hidden, layers, gqa, flex: hidden > 0 };
+    let extra = {};
+    if (typeof meta.rategoan === 'string') {
+        try { extra = JSON.parse(meta.rategoan) || {}; } catch (e) { extra = {}; }
+    } else if (meta.rategoan && typeof meta.rategoan === 'object') {
+        extra = meta.rategoan;
+    }
+    const src = Object.assign({}, extra, meta);
+    const hidden = Number(src.hidden_size || src.hiddenSize || src.d_model || src.dModel || 0);
+    const layers = Number(src.n_layers || src.nLayers || 0);
+    const heads = Number(src.n_heads || src.nHeads || src.num_attention_heads || 0);
+    const kv = Number(src.num_key_value_heads || src.n_kv_heads || src.nKvHeads || 0);
+    const gqa = kv > 0 ? kv : Number(src.gqa || 0);
+    const ratio = kv > 0 && heads > 0 ? heads / kv : 0;
+    const tier = LLMConfig.bindTier({ hidden_size: hidden, n_layers: layers });
+    return { hidden, layers, heads, kv, gqa, ratio, tier: tier.id, flex: hidden > 0 };
 }
 
 export { parseSafetensorsHeader, decoupleWeightTie, readArchitecture };

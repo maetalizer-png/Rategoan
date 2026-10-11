@@ -4,14 +4,9 @@ import { bindTier, TIER_SHAPES } from './llm-config.js';
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
-  // Semua checkpoint ada di Hugging Face, bukan git dan bukan GitHub
-  // Release. Asset Release tidak mengirim Access-Control-Allow-Origin,
-  // jadi fetch() browser gagal diam-diam. HF resolve/main mengirim
-  // access-control-allow-origin: *. URL absolut tetap valid untuk
-  // `new URL(..., import.meta.url)`.
-  ringan: HF + 'raget-neural-massive50m.safetensors',
-  berat: HF + 'raget-neural-massive100m.safetensors',
-  super: HF + 'raget-neural-massive200m.safetensors',
+  tier_1_0b: HF + 'raget-neural-1.0b.safetensors',
+  tier_1_5b: HF + 'raget-neural-1.5b.safetensors',
+  tier_2_0b: HF + 'raget-neural-2.0b.safetensors',
 };
 
 let cache = null;
@@ -81,20 +76,13 @@ function ensureTier(tier) {
   return initPromises[tier];
 }
 
-// Perangkat lemah (RAM<4GB terdeteksi) dilewati dari tier "berat"
-// (100M) supaya tidak macet/OOM di HP low-end - bukan pilihan
-// pengguna, murni penjaga keamanan runtime.
-function deviceCanHandleBerat() {
+function deviceCanHandleLarge() {
   const mem = typeof navigator !== 'undefined' ? navigator.deviceMemory : undefined;
-  return !(typeof mem === 'number' && mem < 4);
+  return typeof mem === 'number' && mem >= 8;
 }
 
-// Diambil sekali secara diam-diam saat app dibuka (lihat main.js) -
-// TIDAK PERNAH menunggu ini sebelum membalas chat. Kalau sampai
-// selesai sebelum pesan berikutnya dikirim, cascade generate() di
-// bawah otomatis memakainya (tierReady('super') jadi true); kalau
-// belum/gagal, cascade turun ke tier lebih ringan tanpa pengguna
-// sadar ada percobaan unduhan sama sekali.
+// Tidak mengunduh saat aplikasi dibuka. Unduhan hanya terjadi kalau
+// generate() dipanggil, dan gagal diam-diam kalau berkas belum ada.
 function prefetchBest() {
   return Promise.resolve(false);
 }
@@ -127,15 +115,25 @@ async function generateWithTier(tier, prompt, options) {
 }
 
 async function generateLocal(prompt, options) {
-  if (tierReady('super')) {
-    const superText = await generateWithTier('super', prompt, options);
-    if (superText) return superText;
+  if (deviceCanHandleLarge() && tierReady('tier_2_0b')) {
+    const top = await generateWithTier('tier_2_0b', prompt, options);
+    if (top) return top;
   }
-  if (deviceCanHandleBerat()) {
-    const heavyText = await generateWithTier('berat', prompt, options);
-    if (heavyText) return heavyText;
+  if (deviceCanHandleLarge() && tierReady('tier_1_5b')) {
+    const mid = await generateWithTier('tier_1_5b', prompt, options);
+    if (mid) return mid;
   }
-  return generateWithTier('ringan', prompt, options);
+  if (tierReady('tier_1_0b')) {
+    const base = await generateWithTier('tier_1_0b', prompt, options);
+    if (base) return base;
+  }
+  if (deviceCanHandleLarge()) {
+    const top = await generateWithTier('tier_2_0b', prompt, options);
+    if (top) return top;
+    const mid = await generateWithTier('tier_1_5b', prompt, options);
+    if (mid) return mid;
+  }
+  return generateWithTier('tier_1_0b', prompt, options);
 }
 
 async function generate(messages, prompt, options) {

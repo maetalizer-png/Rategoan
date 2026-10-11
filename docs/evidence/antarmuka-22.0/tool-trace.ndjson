@@ -1,0 +1,2 @@
+{"tool":"train-raget-1b-2b","weights_written":false}
+{"tool":"publish-checkpoint-huggingface","ran":false,"reason":"tidak ada berkas bobot terlatih baru"}

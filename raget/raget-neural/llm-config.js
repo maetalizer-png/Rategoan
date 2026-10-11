@@ -12,100 +12,43 @@ const SPECIAL_TOKEN_IDS = Object.freeze({
     EOS: 3
 });
 
-const TINY = Object.freeze({
-    name: 'tiny',
-    vocabSize: 8000,
-    dModel: 128,
-    nLayers: 4,
-    nHeads: 4,
-    dFF: 512,
-    maxContextLength: 256,
-    dropoutRate: 0.0,
-    initStd: 0.02
-});
-
-const SMALL = Object.freeze({
-    name: 'small',
-    vocabSize: 32000,
-    dModel: 512,
-    nLayers: 8,
-    nHeads: 8,
-    dFF: 2048,
-    maxContextLength: 1024,
-    dropoutRate: 0.1,
-    initStd: 0.02
-});
-
-const COMPACT = Object.freeze({
-    name: 'compact',
-    vocabSize: 4000,
-    dModel: 256,
-    nLayers: 6,
-    nHeads: 8,
-    dFF: 1024,
-    maxContextLength: 512,
-    dropoutRate: 0.05,
-    initStd: 0.02
-});
-
-const MEDIUM = Object.freeze({
-    name: 'medium',
-    vocabSize: 16000,
-    dModel: 384,
-    nLayers: 14,
-    nHeads: 8,
-    dFF: 1536,
-    maxContextLength: 512,
-    dropoutRate: 0.1,
-    initStd: 0.02
-});
-
-const LARGE = Object.freeze({
-    name: 'large',
-    vocabSize: 16000,
-    dModel: 640,
-    nLayers: 8,
-    nHeads: 8,
-    dFF: 2560,
-    maxContextLength: 512,
-    dropoutRate: 0.1,
-    initStd: 0.02
-});
-
-const MASSIVE50M = Object.freeze({
-    name: 'massive50m',
-    vocabSize: 30368,
-    dModel: 512,
-    nLayers: 6,
-    nHeads: 8,
-    dFF: 2048,
-    maxContextLength: 512,
-    dropoutRate: 0.1,
-    initStd: 0.02
-});
-
-const MASSIVE100M = Object.freeze({
-    name: 'massive100m',
-    vocabSize: 30368,
-    dModel: 768,
-    nLayers: 8,
-    nHeads: 12,
-    dFF: 3072,
-    maxContextLength: 512,
-    dropoutRate: 0.1,
-    initStd: 0.02
-});
-
-const MASSIVE200M = Object.freeze({
-    name: 'massive200m',
-    vocabSize: 30368,
-    dModel: 1024,
-    nLayers: 11,
-    nHeads: 16,
-    dFF: 4096,
-    maxContextLength: 512,
-    dropoutRate: 0.1,
-    initStd: 0.02
+const TIER_RUNTIME = Object.freeze({
+    '1.0B': Object.freeze({
+        name: '1.0B',
+        vocabSize: 30368,
+        dModel: 1536,
+        nLayers: 24,
+        nHeads: 12,
+        nKvHeads: 3,
+        dFF: 6144,
+        maxContextLength: 1024,
+        dropoutRate: 0,
+        initStd: 0.02
+    }),
+    '1.5B': Object.freeze({
+        name: '1.5B',
+        vocabSize: 30368,
+        dModel: 2048,
+        nLayers: 28,
+        nHeads: 16,
+        nKvHeads: 4,
+        dFF: 5632,
+        maxContextLength: 1024,
+        dropoutRate: 0,
+        initStd: 0.02
+    }),
+    '2.0B': Object.freeze({
+        name: '2.0B',
+        vocabSize: 30368,
+        dModel: 2560,
+        nLayers: 32,
+        nHeads: 20,
+        nKvHeads: 5,
+        dFF: 6912,
+        maxContextLength: 1024,
+        dropoutRate: 0,
+        initStd: 0.02
+    })
 });
 
 const TIER_SHAPES = Object.freeze({
@@ -138,7 +81,11 @@ function bindTier(meta) {
 
 export { bindTier, TIER_SHAPES };
 
-const PRESETS = Object.freeze({ tiny: TINY, compact: COMPACT, medium: MEDIUM, large: LARGE, small: SMALL, massive50m: MASSIVE50M, massive100m: MASSIVE100M, massive200m: MASSIVE200M });
+const PRESETS = Object.freeze({
+    '1.0B': TIER_RUNTIME['1.0B'],
+    '1.5B': TIER_RUNTIME['1.5B'],
+    '2.0B': TIER_RUNTIME['2.0B']
+});
 
 const BACKENDS = Object.freeze({
     CPU_JS: 'cpu-js',  
@@ -215,7 +162,7 @@ function deepFreeze(obj) {
 
 function createConfig(options) {
     options = options || {};
-    const presetName = options.preset || 'tiny';
+    const presetName = options.preset || '1.0B';
     const preset = PRESETS[presetName];
     if (!preset) {
         throw new Error('[LLMConfig] Preset "' + presetName + '" tidak dikenal. Tersedia: ' + Object.keys(PRESETS).join(', '));

@@ -10,7 +10,7 @@ let lockChain = Promise.resolve();
 export function withVfsLock(fn) {
   const locks = globalThis.navigator && globalThis.navigator.locks;
   if (locks && typeof locks.request === 'function') {
-    return locks.request('rategoan-vfs-wal', { mode: 'exclusive' }, () => fn());
+    return locks.request('rategoan_vfs_wal', { mode: 'exclusive' }, () => fn());
   }
   const run = lockChain.then(() => fn());
   lockChain = run.then(() => {}, () => {});
