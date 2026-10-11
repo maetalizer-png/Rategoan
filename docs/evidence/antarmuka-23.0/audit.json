@@ -1,0 +1,22 @@
+{
+  "version": "23.0.0-PRODUCTION-GA",
+  "weightsInstalled": false,
+  "weightsUploaded": false,
+  "huggingfaceDeleted": false,
+  "hfWeightsUploaded": false,
+  "hfOldWeightsDeleted": false,
+  "gpg": false,
+  "cacheShell": "raget-app-shell-v19",
+  "note": "Token Hugging Face dipakai untuk membaca Maetalizer19/rategoan-neural. Enam berkas lama tetap ada. Bobot 1B-2B tidak diunggah karena tidak ada checkpoint terlatih. Tiga berkas inti neural tidak disunting.",
+  "codeSha": "793aa3c4d2665b3995239ee28c4bd0374f51ed7d",
+  "parent": "c2d5ed3fd6553678cf74f919dd84e56e5bb70404",
+  "seal": "9f1d4902e21b700907ba9751f6b53cc4d73e137d0e40b6e09ba6e5d2baa3a0ec",
+  "sealOf": "git cat-file commit",
+  "playwright": "25/25",
+  "unit": "172/172",
+  "node18": "29/29 pada berkas waktu",
+  "lintSyntax": 328,
+  "eslint": "0/0",
+  "schema": "208/3934",
+  "liveBackground": "rgb(250, 249, 246)"
+}
