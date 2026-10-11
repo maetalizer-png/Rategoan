@@ -5,5 +5,15 @@
   "huggingfaceDeleted": false,
   "gpg": false,
   "cacheShell": "raget-app-shell-v19",
-  "note": "Berkas bobot 1B-2B tidak dibuat dan tidak diunggah. Berkas lama di Hugging Face tidak dihapus. Jalur unduhan menunjuk nama kanonik raget-neural-1.0b, 1.5b, dan 2.0b."
+  "note": "Berkas bobot 1B-2B tidak dibuat dan tidak diunggah. Berkas lama di Hugging Face tidak dihapus. Jalur unduhan menunjuk nama kanonik raget-neural-1.0b, 1.5b, dan 2.0b.",
+  "codeSha": "94c223c49c7bf5a5e129800422c9b4de603f005b",
+  "parent": "ddf1419ee923ff11fb31a9465ee80f4c391b8c80",
+  "seal": "88c1d7ffcdde1d55d7292dc5e1ab1bfa386740460fe17aa7d470d074d13b909e",
+  "sealOf": "git cat-file commit",
+  "playwright": "25/25",
+  "unit": "165/165",
+  "lintSyntax": 372,
+  "eslint": "0/0",
+  "schema": "208/3934",
+  "liveBackground": "rgb(250, 249, 246)"
 }
