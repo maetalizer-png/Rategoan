@@ -368,21 +368,28 @@ export function hiddenOrder(text) {
 function bindWeightCard() {
   const card = $('weight-card');
   const btn = $('btn-weight');
+  const pauseBtn = $('btn-weight-pause');
+  const cancelBtn = $('btn-weight-cancel');
   const fill = $('weight-fill');
   const status = $('weight-status');
   if (!card || !btn || btn.dataset.bound) return;
   btn.dataset.bound = '1';
-  const paint = (loaded, total, seal) => {
+  const paint = (detail) => {
+    const loaded = detail.loaded || 0;
+    const total = detail.total || 0;
     const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
     if (fill) fill.style.width = pct + '%';
-    if (status) {
-      const tail = seal ? (' · sha256 ' + String(seal).slice(0, 12)) : '';
-      status.textContent = 'Mengunduh bobot ' + pct + '%' + tail;
+    if (!status) return;
+    const speed = detail.speed > 0 ? ((detail.speed / (1024 * 1024)).toFixed(1) + ' MB/s') : '';
+    let eta = '';
+    if (detail.eta > 0 && detail.loaded < detail.total) {
+      eta = detail.eta < 60 ? ('~' + Math.ceil(detail.eta) + ' dtk') : ('~' + Math.ceil(detail.eta / 60) + ' menit');
     }
+    const seal = detail.seal ? ('sha256 ' + String(detail.seal).slice(0, 12)) : '';
+    status.textContent = ['Mengunduh bobot ' + pct + '%', speed, eta, seal].filter(Boolean).join(' · ');
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
-    const detail = (event && event.detail) || {};
-    paint(detail.loaded || 0, detail.total || 0, detail.seal || '');
+    paint((event && event.detail) || {});
   });
   import('../../raget/raget-neural/neural-provider.js').then((mod) => {
     const neuralProvider = mod.neuralProvider;
@@ -392,16 +399,45 @@ function bindWeightCard() {
     }
     card.hidden = false;
     if (status) status.textContent = 'Bobot belum di perangkat.';
+    if (pauseBtn) pauseBtn.onclick = () => {
+      if (neuralProvider.weightPaused()) {
+        neuralProvider.resumeWeights();
+        pauseBtn.textContent = 'Jeda';
+      } else {
+        neuralProvider.pauseWeights();
+        pauseBtn.textContent = 'Lanjut';
+        if (status) status.textContent = 'Unduhan dijeda.';
+      }
+    };
+    if (cancelBtn) cancelBtn.onclick = () => {
+      neuralProvider.cancelWeights();
+      if (pauseBtn) pauseBtn.hidden = true;
+      cancelBtn.hidden = true;
+      btn.disabled = false;
+      if (status) status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
+    };
     btn.onclick = () => {
       btn.disabled = true;
+      if (pauseBtn) {
+        pauseBtn.hidden = false;
+        pauseBtn.textContent = 'Jeda';
+      }
+      if (cancelBtn) cancelBtn.hidden = false;
       if (status) status.textContent = 'Mengunduh bobot 0%';
       neuralProvider.loadWeights().then((ok) => {
+        if (pauseBtn) pauseBtn.hidden = true;
+        if (cancelBtn) cancelBtn.hidden = true;
         if (ok && neuralProvider.ready()) {
           card.hidden = true;
           return;
         }
         btn.disabled = false;
-        if (status) status.textContent = 'Unduhan gagal. ' + (neuralProvider.weightError() || 'Coba lagi.');
+        const err = neuralProvider.weightError() || '';
+        if (err === 'dibatalkan') {
+          if (status) status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
+          return;
+        }
+        if (status) status.textContent = 'Unduhan gagal. ' + (err || 'Coba lagi.');
       });
     };
   }).catch(() => {
@@ -759,6 +795,9 @@ export const composer = {
     document.addEventListener('rategoan:stop-generation', () => {
       abortGeneration();
       cancelAgent();
+      import('../../raget/raget-neural/neural-provider.js').then((mod) => {
+        if (mod.neuralProvider.haltInference) mod.neuralProvider.haltInference();
+      });
     });
     document.addEventListener('rategoan:command', (event) => {
       if (event.detail === 'think') {

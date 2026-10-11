@@ -2,8 +2,15 @@
 import { llmMode } from '../../js/state/llm-mode.js';
 import { llmEngine } from '../raget-deterministic/llm-engine.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
-import { downloadModel, memoryStore, MODEL_CACHE, MODEL_CHUNK, digestSha256 } from './runtime/model-downloader.js';
-import { openInt4Checkpoint } from './runtime/int4-session.js';
+import { openInt4Stream } from './runtime/int4-session.js';
+import {
+  WEIGHT_ROOM,
+  WEIGHT_SPEC,
+  downloadWeightChunks,
+  createRangeReader,
+  openCacheStore,
+  storageFree,
+} from './runtime/weight-cache.js';
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -12,7 +19,7 @@ const CHECKPOINT_BY_TIER = {
   tier_2_0b: HF + 'raget-neural-2.0b.safetensors',
 };
 const WEIGHT_BYTES = {
-  tier_1_5b: 1045697920,
+  tier_1_5b: WEIGHT_SPEC.size,
 };
 
 let cache = null;
@@ -27,87 +34,55 @@ async function loadEngine() {
   return cache;
 }
 
-function reportProgress(tier, loaded, total, seal) {
+function reportProgress(detail) {
   if (typeof window === 'undefined' || typeof CustomEvent === 'undefined') return;
-  window.dispatchEvent(new CustomEvent('rategoan:neural-progress', {
-    detail: { tier: tier, loaded: loaded, total: total, seal: seal || '' },
-  }));
+  window.dispatchEvent(new CustomEvent('rategoan:neural-progress', { detail: detail }));
 }
 
 let lastWeightError = '';
+let weightReader = null;
+const control = { paused: false, cancelled: false };
+let worker = null;
+let workerJob = 0;
 
-function cacheKey(key) {
-  return 'https://rategoan.local/model-cache?k=' + encodeURIComponent(key);
+function weightError() {
+  return lastWeightError;
 }
 
-function cacheStore() {
-  if (typeof caches === 'undefined') return null;
-  return {
-    async get(cacheName, key) {
-      try {
-        const box = await caches.open(cacheName);
-        const hit = await box.match(cacheKey(key));
-        if (!hit) return null;
-        return new Uint8Array(await hit.arrayBuffer());
-      } catch (e) {
-        lastWeightError = 'cache-baca: ' + (e && e.message ? e.message : e);
-        return null;
-      }
-    },
-    async put(cacheName, key, bytes) {
-      try {
-        const box = await caches.open(cacheName);
-        const copy = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-        const body = copy.buffer.slice(copy.byteOffset, copy.byteOffset + copy.byteLength);
-        await box.put(cacheKey(key), new Response(body));
-      } catch (e) {
-        lastWeightError = 'cache-tulis: ' + (e && e.message ? e.message : e);
-      }
-    },
-  };
+function weightPaused() {
+  return control.paused;
 }
 
-function progressStore(inner, tier, total) {
-  let loaded = 0;
-  return {
-    async get(cacheName, key) {
-      const hit = await inner.get(cacheName, key);
-      if (hit) {
-        loaded += hit.length;
-        reportProgress(tier, Math.min(loaded, total), total);
-      }
-      return hit;
-    },
-    async put(cacheName, key, bytes) {
-      await inner.put(cacheName, key, bytes);
-      loaded += bytes.length;
-      const seal = await digestSha256(bytes);
-      reportProgress(tier, Math.min(loaded, total), total, seal);
-    },
-  };
+function pauseWeights() {
+  control.paused = true;
 }
 
-async function rangedFetch(url, init) {
-  const res = await fetch(url, init);
-  if (!(res.status === 200 || res.status === 206)) {
-    throw new Error('HTTP ' + res.status);
+function resumeWeights() {
+  control.paused = false;
+}
+
+function cancelWeights() {
+  control.cancelled = true;
+  control.paused = false;
+}
+
+function haltInference() {
+  if (worker) {
+    worker.terminate();
+    worker = null;
   }
-  const raw = new Uint8Array(await res.arrayBuffer());
-  const header = init && init.headers && (init.headers.Range || init.headers.range);
-  let expected = raw.length;
-  if (header) {
-    const pair = String(header).replace(/^bytes=/i, '').split('-').map(Number);
-    if (Number.isFinite(pair[0]) && Number.isFinite(pair[1])) expected = pair[1] - pair[0] + 1;
-  }
-  const slice = raw.length === expected ? raw : raw.slice(0, expected);
-  if (slice.length !== expected) throw new Error('potongan pendek ' + slice.length + '/' + expected);
-  const body = slice.buffer.slice(slice.byteOffset, slice.byteOffset + slice.byteLength);
-  return { ok: true, status: res.status, arrayBuffer: async () => body };
+}
+
+function ensureWorker() {
+  if (worker) return worker;
+  worker = new Worker(new URL('./runtime/raget-worker.js', import.meta.url), { type: 'module' });
+  return worker;
 }
 
 async function doInitTier(tier) {
   try {
     lastWeightError = '';
+    control.cancelled = false;
     const url = CHECKPOINT_BY_TIER[tier];
     let size = WEIGHT_BYTES[tier] || 0;
     if (!size) {
@@ -115,37 +90,37 @@ async function doInitTier(tier) {
       size = Number(head.headers.get('content-length') || head.headers.get('x-linked-size')) || 0;
     }
     if (!size) throw new Error('ukuran checkpoint tidak diketahui');
-    const base = cacheStore() || memoryStore();
-    const store = progressStore(base, tier, size);
-    const packed = await downloadModel({
+    const store = openCacheStore();
+    const chunk = WEIGHT_SPEC.chunk;
+    const packed = await downloadWeightChunks({
       url: url,
       size: size,
-      chunk: MODEL_CHUNK,
-      cacheName: MODEL_CACHE,
+      chunk: chunk,
+      cacheName: WEIGHT_SPEC.cache,
       store: store,
-      fetchImpl: rangedFetch,
+      control: control,
+      roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
+      onProgress: (detail) => reportProgress(Object.assign({ tier: tier }, detail)),
     });
-    if (packed.bytes.length !== size) throw new Error('ukuran akhir tidak cocok');
-    session = openInt4Checkpoint(packed.bytes);
+    if (packed.bytesHeld !== 0) throw new Error('buffer monolitik tidak boleh dibuat');
+    weightReader = createRangeReader(store, url, size, chunk, WEIGHT_SPEC.cache);
+    session = null;
     loadedTier = tier;
-    reportProgress(tier, size, size, packed.digests[packed.digests.length - 1] || '');
+    reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts });
     return true;
   } catch (e) {
     lastWeightError = e && e.message ? String(e.message) : 'gagal';
     if (loadedTier === tier) {
       loadedTier = null;
       session = null;
+      weightReader = null;
     }
     return false;
   }
 }
 
-function weightError() {
-  return lastWeightError;
-}
-
 function ensureTier(tier) {
-  if (loadedTier === tier) return Promise.resolve(true);
+  if (loadedTier === tier && !control.cancelled) return Promise.resolve(true);
   if (!initPromises[tier]) {
     initPromises[tier] = doInitTier(tier).finally(() => {
       initPromises[tier] = null;
@@ -162,32 +137,91 @@ function ready() {
   return loadedTier !== null;
 }
 
+function textFrom(out, options) {
+  if (options && options.signal && options.signal.aborted) return null;
+  const text = out && out.text ? String(out.text).trim() : '';
+  if (text && !/^\d+$/.test(text)) return text;
+  if (out && Array.isArray(out.tokenIds) && out.tokenIds.length === 0) {
+    return 'Raget 1.0 berhenti pada token henti tanpa teks.';
+  }
+  if (text && /^\d+$/.test(text)) return 'Raget 1.0 menghasilkan angka token, bukan kalimat.';
+  return null;
+}
+
+function runOnWorker(prompt, genOpts, signal) {
+  const id = workerJob + 1;
+  workerJob = id;
+  const live = ensureWorker();
+  return new Promise((resolve) => {
+    const finish = (value) => {
+      live.removeEventListener('message', onMsg);
+      live.removeEventListener('error', onErr);
+      if (signal) signal.removeEventListener('abort', onAbort);
+      resolve(value);
+    };
+    const onAbort = () => {
+      haltInference();
+      finish(null);
+    };
+    const onErr = () => finish(null);
+    const onMsg = (ev) => {
+      const data = ev.data || {};
+      if (data.id !== id) return;
+      if (data.type === 'token' && data.piece && genOpts.onToken) genOpts.onToken(data.piece);
+      if (data.type === 'done') finish(data);
+      if (data.type === 'error') finish(null);
+    };
+    if (signal) {
+      if (signal.aborted) {
+        onAbort();
+        return;
+      }
+      signal.addEventListener('abort', onAbort, { once: true });
+    }
+    live.addEventListener('message', onMsg);
+    live.addEventListener('error', onErr);
+    live.postMessage({
+      id: id,
+      op: 'generate',
+      prompt: prompt,
+      maxNewTokens: genOpts.maxNewTokens,
+      maxLayers: genOpts.maxLayers,
+      temperature: genOpts.temperature,
+      topK: genOpts.topK,
+      topP: genOpts.topP,
+      repetitionPenalty: genOpts.repetitionPenalty,
+    });
+  });
+}
+
 async function generateWithTier(tier, prompt, options) {
   if (loadedTier !== tier && !initPromises[tier]) return null;
   const ok = await ensureTier(tier);
-  if (!ok || !session) return null;
+  if (!ok || !weightReader) return null;
+  const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
+  const signal = options && options.signal;
+  const genOpts = {
+    maxNewTokens: mode === 'mendalam' ? 96 : 32,
+    maxLayers: mode === 'mendalam' ? 0 : 4,
+    temperature: 0.7,
+    topK: 40,
+    topP: 0.9,
+    repetitionPenalty: 1.12,
+    signal: signal,
+    onToken: (piece) => {
+      if (typeof window === 'undefined' || typeof CustomEvent === 'undefined' || !piece) return;
+      window.dispatchEvent(new CustomEvent('rategoan:neural-token', { detail: piece }));
+    },
+  };
   try {
-    const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
-    const out = await session.generate(String(prompt || ''), {
-      maxNewTokens: mode === 'mendalam' ? 96 : 32,
-      temperature: 0.7,
-      topK: 40,
-      topP: 0.9,
-      repetitionPenalty: 1.12,
-      signal: options && options.signal,
-      onToken: (piece) => {
-        if (typeof window === 'undefined' || typeof CustomEvent === 'undefined' || !piece) return;
-        window.dispatchEvent(new CustomEvent('rategoan:neural-token', { detail: piece }));
-      },
-    });
-    if (options && options.signal && options.signal.aborted) return null;
-    const text = out && out.text ? String(out.text).trim() : '';
-    if (text && !/^\d+$/.test(text)) return text;
-    if (out && Array.isArray(out.tokenIds) && out.tokenIds.length === 0) {
-      return 'Raget 1.0 berhenti pada token henti tanpa teks.';
+    if (signal && signal.aborted) return null;
+    if (typeof Worker === 'function' && typeof window !== 'undefined') {
+      const out = await runOnWorker(String(prompt || ''), genOpts, signal);
+      return textFrom(out, options);
     }
-    if (text && /^\d+$/.test(text)) return 'Raget 1.0 menghasilkan angka token, bukan kalimat.';
-    return null;
+    if (!session) session = await openInt4Stream(weightReader);
+    const out = await session.generate(String(prompt || ''), genOpts);
+    return textFrom(out, options);
   } catch (e) {
     return null;
   }
@@ -362,6 +396,8 @@ function shapeTiers() {
 }
 
 function loadWeights() {
+  control.cancelled = false;
+  control.paused = false;
   return ensureTier('tier_1_5b');
 }
 
@@ -372,5 +408,11 @@ export const neuralProvider = Object.freeze({
   getStats,
   shapeTiers,
   loadWeights,
+  pauseWeights,
+  resumeWeights,
+  cancelWeights,
+  haltInference,
+  weightPaused,
   weightError,
+  storageFree,
 });

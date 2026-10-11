@@ -199,3 +199,105 @@ export async function probeGpu() {
   if (!adapter) return { ok: false, reason: 'Adapter tidak ditemukan' };
   return { ok: true, reason: '' };
 }
+
+export const GEMV_INT4_SHADER = '@group(0) @binding(0) var<storage, read> packed: array<u32>;'
+  + '@group(0) @binding(1) var<storage, read> vecx: array<f32>;'
+  + '@group(0) @binding(2) var<storage, read> scales: array<f32>;'
+  + '@group(0) @binding(3) var<storage, read> zeros: array<f32>;'
+  + '@group(0) @binding(4) var<storage, read_write> y: array<f32>;'
+  + '@group(0) @binding(5) var<uniform> dims: vec2<u32>;'
+  + '@compute @workgroup_size(64) fn main(@builtin(global_invocation_id) gid: vec3<u32>) {'
+  + 'let row = gid.x; if (row >= dims.x) { return; }'
+  + 'let cols = dims.y; var acc = 0.0; let rowBase = row * cols;'
+  + 'for (var c = 0u; c < cols; c = c + 1u) {'
+  + 'let i = rowBase + c; let byteIndex = i / 2u; let word = packed[byteIndex / 4u];'
+  + 'let shift = (byteIndex % 4u) * 8u; let byte = (word >> shift) & 0xffu;'
+  + 'let nibble = select(byte >> 4u, byte & 0xfu, (i & 1u) == 0u);'
+  + 'let block = i / 32u; let w = (f32(nibble) - zeros[block]) * scales[block];'
+  + 'acc = acc + w * vecx[c]; } y[row] = acc; }';
+
+let gemvPipe = null;
+
+function pad4(bytes) {
+  const src = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const words = Math.ceil(src.byteLength / 4);
+  const out = new Uint8Array(words * 4);
+  out.set(src);
+  return out;
+}
+
+export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
+  const device = await sharedDevice();
+  if (!device || !rows || !cols) return null;
+  const packed = pad4(packedBytes);
+  const scaleSrc = scales instanceof Float32Array ? scales : new Float32Array(scales);
+  const zeroSrc = zeros instanceof Float32Array ? zeros : new Float32Array(zeros);
+  const xSrc = x instanceof Float32Array ? x : new Float32Array(x);
+  let packedBuf = null;
+  let xBuf = null;
+  let scaleBuf = null;
+  let zeroBuf = null;
+  let yBuf = null;
+  let readBuf = null;
+  let dimBuf = null;
+  try {
+    if (!gemvPipe || gemvDeviceLost()) {
+      const module = device.createShaderModule({ code: GEMV_INT4_SHADER });
+      gemvPipe = device.createComputePipeline({
+        layout: 'auto',
+        compute: { module: module, entryPoint: 'main' },
+      });
+    }
+    packedBuf = device.createBuffer({ size: packed.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    xBuf = device.createBuffer({ size: Math.max(4, xSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    scaleBuf = device.createBuffer({ size: Math.max(4, scaleSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    zeroBuf = device.createBuffer({ size: Math.max(4, zeroSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+    yBuf = device.createBuffer({ size: rows * 4, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
+    readBuf = device.createBuffer({ size: rows * 4, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
+    dimBuf = device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
+    device.queue.writeBuffer(packedBuf, 0, packed);
+    device.queue.writeBuffer(xBuf, 0, xSrc);
+    device.queue.writeBuffer(scaleBuf, 0, scaleSrc);
+    device.queue.writeBuffer(zeroBuf, 0, zeroSrc);
+    device.queue.writeBuffer(dimBuf, 0, new Uint32Array([rows, cols, 0, 0]));
+    const bind = device.createBindGroup({
+      layout: gemvPipe.getBindGroupLayout(0),
+      entries: [
+        { binding: 0, resource: { buffer: packedBuf } },
+        { binding: 1, resource: { buffer: xBuf } },
+        { binding: 2, resource: { buffer: scaleBuf } },
+        { binding: 3, resource: { buffer: zeroBuf } },
+        { binding: 4, resource: { buffer: yBuf } },
+        { binding: 5, resource: { buffer: dimBuf } },
+      ],
+    });
+    const encoder = device.createCommandEncoder();
+    const pass = encoder.beginComputePass();
+    pass.setPipeline(gemvPipe);
+    pass.setBindGroup(0, bind);
+    pass.dispatchWorkgroups(Math.ceil(rows / 64));
+    pass.end();
+    encoder.copyBufferToBuffer(yBuf, 0, readBuf, 0, rows * 4);
+    device.queue.submit([encoder.finish()]);
+    await readBuf.mapAsync(GPUMapMode.READ);
+    const out = new Float32Array(readBuf.getMappedRange().slice(0));
+    readBuf.unmap();
+    return out;
+  } catch (e) {
+    gemvPipe = null;
+    return null;
+  } finally {
+    if (packedBuf) packedBuf.destroy();
+    if (xBuf) xBuf.destroy();
+    if (scaleBuf) scaleBuf.destroy();
+    if (zeroBuf) zeroBuf.destroy();
+    if (yBuf) yBuf.destroy();
+    if (readBuf) readBuf.destroy();
+    if (dimBuf) dimBuf.destroy();
+  }
+}
+
+function gemvDeviceLost() {
+  return false;
+}
+

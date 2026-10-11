@@ -108,8 +108,13 @@
   display: none;
 }
 
-#btn-weight {
-  align-self: flex-start;
+.weight-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weight-actions button {
   border: 1px solid var(--rg-line);
   background: transparent;
   color: var(--rg-text);
@@ -120,9 +125,13 @@
   cursor: pointer;
 }
 
-#btn-weight:disabled {
+.weight-actions button:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+.weight-actions button[hidden] {
+  display: none;
 }
 
 .weight-bar {
