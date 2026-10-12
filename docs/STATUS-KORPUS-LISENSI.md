@@ -23,7 +23,7 @@ K4 ada di rak yang sama, belum masuk lantai BPE di atas. Audio tidak diubah.
 
 Penampungan adalah calon, bukan rak. BPE calon belum dihitung. Angka di bawah adalah berkas yang sudah ada di tag rilis pada 2026-10-12.
 
-`penampungan-Indonesian`: K1 4 berkas / 2939166211 byte, K2 2 berkas / 2281383426 byte, K3 5 berkas / 2714515597 byte, K4 1 berkas / 167485879 byte. `K3-calon-pelengkap-part5.jsonl.gz` 420054189 byte, 309600 dok, SHA-256 `010b63642cee8e908c06f67d0a9e6a31442c02814df2472dab85c20e681aa513`.
+`penampungan-Indonesian`: K1 4 berkas / 2939166211 byte, K2 2 berkas / 2281383426 byte, K3 6 berkas / 3134045008 byte, K4 1 berkas / 167485879 byte. `K3-calon-pelengkap-part5.jsonl.gz` SHA-256 `010b63642cee8e908c06f67d0a9e6a31442c02814df2472dab85c20e681aa513`. `K3-calon-pelengkap-part6.jsonl.gz` 419529411 byte, SHA-256 `4e8a1b44b82516098dd27910435b279a7b0cd2d2f74af27d7888e46af5fbae47`.
 
 `penampungan-English`: R1 21 berkas / 11426267803 byte / 9173600 dok di `manifest.json`. Dua berkas lama `textbook-en-part01.jsonl.gz` dan `textbook-en-part02.jsonl.gz` tetap di tag yang sama, bukan nama kanonik `R1-calon-`. R2, R3, dan R4 belum punya partisi penuh.
 
