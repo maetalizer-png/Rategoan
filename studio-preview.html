@@ -19,12 +19,56 @@ window.addEventListener('message', function (event) {
     var msg = e.data || {};
     if (msg.type !== 'RENDER_PAYLOAD' || typeof msg.html !== 'string') return;
     if (!sessionNonce || msg.nonce !== sessionNonce) return;
-    document.open();
-    document.write(msg.html);
-    document.close();
+    paintLive(msg.html);
   };
   port.postMessage({ type: 'PORT_READY' });
 });
+function snapshotFields() {
+  var fields = [];
+  document.querySelectorAll('#live-root input, #live-root textarea, #live-root select').forEach(function (el) {
+    var key = el.id || el.name;
+    if (key) fields.push({ key: key, value: el.value });
+  });
+  return fields;
+}
+function restoreFields(fields) {
+  fields.forEach(function (row) {
+    var el = document.getElementById(row.key);
+    if (el) el.value = row.value;
+  });
+}
+function runScripts(root) {
+  root.querySelectorAll('script').forEach(function (old) {
+    var next = document.createElement('script');
+    next.textContent = old.textContent;
+    old.replaceWith(next);
+  });
+}
+function paintLive(html) {
+  var kept = snapshotFields();
+  var parsed = new DOMParser().parseFromString(html, 'text/html');
+  var slot = document.getElementById('live-root');
+  if (!slot) {
+    slot = document.createElement('div');
+    slot.id = 'live-root';
+    document.body.appendChild(slot);
+  }
+  var style = document.getElementById('live-style');
+  if (style) style.remove();
+  parsed.querySelectorAll('style').forEach(function (node) {
+    var copy = document.createElement('style');
+    copy.id = 'live-style';
+    copy.textContent = node.textContent;
+    document.head.appendChild(copy);
+  });
+  slot.replaceChildren();
+  Array.prototype.slice.call(parsed.body.childNodes).forEach(function (node) {
+    if (node.nodeName === 'SCRIPT' && /PORT_READY|sessionNonce/.test(node.textContent || '')) return;
+    slot.appendChild(document.importNode(node, true));
+  });
+  restoreFields(kept);
+  runScripts(slot);
+}
 </script>
 </body>
 </html>

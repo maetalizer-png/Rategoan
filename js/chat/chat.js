@@ -560,7 +560,8 @@ export const chat = {
     const signal = generation ? generation.signal : null;
     try {
       await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts, signal });
-      if (typeof navigator !== 'undefined' && navigator.vibrate) haptics.tap(12);
+      if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') navigator.vibrate(8);
+      else haptics.tap(8);
     } finally {
       document.body.classList.remove('is-generating');
       generation = null;

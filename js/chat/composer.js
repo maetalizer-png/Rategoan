@@ -348,6 +348,26 @@ async function tryTableRequest(text, session) {
 
 const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif|jailbreak|you are now|system prompt/i;
 
+const subgoalLru = new Map();
+
+export function cachedSubgoals(text, plan) {
+  const key = String(text || '').trim();
+  const build = typeof plan === 'function' ? plan : planSubgoals;
+  if (subgoalLru.has(key)) {
+    const hit = subgoalLru.get(key);
+    subgoalLru.delete(key);
+    subgoalLru.set(key, hit);
+    return hit;
+  }
+  const built = build(key);
+  subgoalLru.set(key, built);
+  while (subgoalLru.size > 48) {
+    const oldest = subgoalLru.keys().next().value;
+    subgoalLru.delete(oldest);
+  }
+  return built;
+}
+
 export function scrubInjection(text) {
   return String(text || '')
     .replace(/[\u200B-\u200D\uFEFF\u2060\u180E]/g, '')
@@ -607,7 +627,7 @@ export const composer = {
       const picked = hits.length ? hits : docs.slice(0, 2);
       projectPrefix = GUARDRAIL + '\n' + fenceUntrusted(project.name, (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n'));
     }
-    const subgoals = planSubgoals(text);
+    const subgoals = cachedSubgoals(text, planSubgoals);
     let thoughts = null;
     let livePlan = null;
     if (subgoals.length >= 2 && !(this.thinkActive || this.researchActive)) {

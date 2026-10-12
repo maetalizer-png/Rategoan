@@ -113,7 +113,7 @@ export function previewSrcdoc(files, state) {
   const js = String((packed && packed['script.js']) || '');
   const origin = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
   const csp = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data: blob:;">';
-  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){if(!target)return;try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});function publish(){var fields=[];document.querySelectorAll("input,textarea,select").forEach(function(el){var key=el.id||el.name;if(!key)return;fields.push({key:key,value:String(el.value||"")});});var session=[];try{for(var i=0;i<sessionStorage.length;i++){var k=sessionStorage.key(i);session.push({key:k,value:String(sessionStorage.getItem(k)||"")});}}catch(e){}var y=(document.scrollingElement&&document.scrollingElement.scrollTop)||0;send("studio:state",{preview:{fields:fields,scrollY:y,session:session}});}document.addEventListener("input",publish);document.addEventListener("change",publish);window.addEventListener("scroll",publish,true);})();<\/script>';
+  const trap = '<script>(function(){var target=' + JSON.stringify(origin) + ';function send(kind,extra){if(!target)return;try{parent.postMessage(Object.assign({type:kind},extra||{}),target);}catch(e){}}window.onerror=function(msg,url,line,col){send("studio:error",{error:{msg:String(msg),line:line,col:col}});};document.addEventListener("click",function(ev){var el=ev.target;if(!el||!el.tagName)return;send("studio:pick",{tag:String(el.tagName).toLowerCase(),id:String(el.id||""),cls:typeof el.className==="string"?el.className:""});});["log","warn","error"].forEach(function(level){var prev=console[level];console[level]=function(){var text=Array.prototype.slice.call(arguments).map(String).join(" ");send("studio:log",{level:level,text:text});if(prev)prev.apply(console,arguments);};});function publish(){var fields=[];document.querySelectorAll("input,textarea,select").forEach(function(el){var key=el.id||el.name;if(!key)return;fields.push({key:key,value:String(el.value||"")});});var session=[];try{for(var i=0;i<sessionStorage.length;i++){var k=sessionStorage.key(i);session.push({key:k,value:String(sessionStorage.getItem(k)||"")});}}catch(e){}var y=(document.scrollingElement&&document.scrollingElement.scrollTop)||0;send("studio:state",{preview:{fields:fields,scrollY:y,session:session}});}document.addEventListener("input",publish);document.addEventListener("change",publish);window.addEventListener("scroll",publish,true);})();<\/script>';
   const style = csp + trap + '<style>' + css.replace(/<\/style/gi, '<\\/style') + '</style>';
   const restore = stateScript(state);
   const script = '<script>' + js.replace(/<\/script/gi, '<\\/script') + '</script>' + restore;
@@ -131,6 +131,11 @@ export function mountPreview(frame, files, state) {
   const remembered = state || capturePreviewState(frame);
   const html = previewSrcdoc(files, remembered);
   const host = (typeof location !== 'undefined' && location.origin && location.origin !== 'null') ? location.origin : '';
+  const srcNow = frame.getAttribute('src') || '';
+  if (frame.__rgPort && srcNow.indexOf('studio-preview.html') === 0) {
+    frame.__rgPort.postMessage({ type: 'RENDER_PAYLOAD', html, nonce: frame.__rgNonce, preview: remembered || null });
+    return;
+  }
   const bytes = getSecureRandomBytesSync(16);
   const nonce = Array.from(bytes, (n) => n.toString(16).padStart(2, '0')).join('');
   const opaqueOrigin = ['*'].join('');
@@ -142,6 +147,8 @@ export function mountPreview(frame, files, state) {
     channel.port1.onmessage = (event) => {
       const data = event.data || {};
       if (data.type === 'PORT_READY') {
+        frame.__rgPort = channel.port1;
+        frame.__rgNonce = nonce;
         channel.port1.postMessage({ type: 'RENDER_PAYLOAD', html, nonce, preview: remembered || null });
       }
     };

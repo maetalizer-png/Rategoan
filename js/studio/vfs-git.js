@@ -235,6 +235,26 @@ export class VfsGit {
     return this.commits.get(this.refs.get('HEAD') || '') || null;
   }
 
+  filesAt(id) {
+    const commit = this.commits.get(String(id || ''));
+    if (!commit) return null;
+    const tree = this.trees.get(commit.tree) || {};
+    const out = {};
+    Object.keys(tree).forEach((path) => {
+      out[path] = String(this.blobs.get(tree[path]) || '');
+    });
+    return out;
+  }
+
+  checkout(id) {
+    const files = this.filesAt(id);
+    if (!files) return null;
+    this.worktree = new Map();
+    Object.keys(files).forEach((path) => this.worktree.set(path, files[path]));
+    this.refs.set('HEAD', id);
+    return files;
+  }
+
   toJSON() {
     return {
       head: this.refs.get('HEAD') || '',

@@ -66,8 +66,28 @@ export function recoverAttempt(error, attempt) {
   };
 }
 
+export async function guardWorkerTurn(run, history) {
+  const kept = Array.isArray(history) ? history.map((row) => Object.assign({}, row)) : [];
+  try {
+    const result = await run();
+    return { ok: true, result, history: kept };
+  } catch (error) {
+    return {
+      ok: false,
+      recovered: true,
+      history: kept,
+      message: error && error.message ? String(error.message) : 'worker',
+      card: {
+        title: 'Pemulihan',
+        text: 'Worker terhenti. Riwayat obrolan tetap ada.',
+      },
+    };
+  }
+}
+
 export const turnPipeline = Object.freeze({
   stages: Object.freeze(['intent', 'context', 'route', 'compose', 'qc', 'act']),
   inspect,
   recoverAttempt,
+  guardWorkerTurn,
 });

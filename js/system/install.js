@@ -11,8 +11,13 @@ export const install = {
     });
     window.addEventListener('appinstalled', () => {
       if (row) row.hidden = true;
-      
+      if (navigator.storage && typeof navigator.storage.persist === 'function') {
+        navigator.storage.persist().catch(() => {});
+      }
     });
+    if (navigator.storage && typeof navigator.storage.persist === 'function') {
+      navigator.storage.persist().catch(() => {});
+    }
     if (row) {
       row.onclick = async () => {
         if (!this.evt) {

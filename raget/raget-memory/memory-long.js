@@ -86,8 +86,15 @@ function rememberList(key, value) {
 
 function learnFromText(text) {
   const t = String(text || '')
-    .replace(/[\u200B-\u200D\uFEFF]/g, '')
-    .replace(/[\u0430\u0435\u043E\u0440\u0441\u0445]/g, (ch) => ({ '\u0430': 'a', '\u0435': 'e', '\u043E': 'o', '\u0440': 'p', '\u0441': 'c', '\u0445': 'x' }[ch] || ch));
+    .replace(/[\u200B-\u200D\uFEFF\u2060\u180E]/g, '')
+    .normalize('NFKC')
+    .replace(/[\u0430\u0410]/g, 'a')
+    .replace(/[\u0435\u0415]/g, 'e')
+    .replace(/[\u043E\u041E]/g, 'o')
+    .replace(/[\u0440\u0420]/g, 'p')
+    .replace(/[\u0441\u0421]/g, 'c')
+    .replace(/[\u0445\u0425]/g, 'x')
+    .replace(/[\u0456\u0406]/g, 'i');
   const nameMatch = t.match(/(?:nama\s+saya|panggil\s+saya)\s+([a-zA-Z]{2,20})/i);
   if (nameMatch) remember('nama', nameMatch[1]);
 

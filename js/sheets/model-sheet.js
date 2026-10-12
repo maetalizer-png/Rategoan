@@ -3,8 +3,8 @@ import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
 const SPEEDS = [
-  { id: 'cloud', label: 'Raget Cepat [4 Lapis · Instan]', note: 'Respons instan, 4 lapis awal.' },
-  { id: 'neural', label: 'Raget Mendalam [28 Lapis · 1.5B]', note: 'Nalar 28 lapis pada bobot 1.5B.' },
+  { id: 'cloud', label: 'Cepat', note: 'Respons instan, efisien daya.' },
+  { id: 'neural', label: 'Mendalam', note: 'Penalaran komprehensif untuk analisis mendalam.' },
 ];
 
 let picking = false;
@@ -46,7 +46,7 @@ function render() {
   const status = $('model-status');
   if (status) {
     status.hidden = false;
-    status.textContent = pref === 'neural' ? 'Raget Mendalam [28 Lapis · 1.5B]' : 'Raget Cepat [4 Lapis · Instan]';
+    status.textContent = pref === 'neural' ? 'Mendalam' : 'Cepat';
     status.classList.add('active');
   }
   const speed = document.createElement('button');

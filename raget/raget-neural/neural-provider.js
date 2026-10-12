@@ -255,6 +255,10 @@ function runOnWorker(prompt, genOpts, signal) {
 }
 
 async function generateWithTier(tier, prompt, options) {
+  if (globalThis.__RG_MODEL_FOLLOWER__ && globalThis.__RG_MODEL_BUS__ && typeof globalThis.__RG_MODEL_BUS__.ask === 'function') {
+    const remote = await globalThis.__RG_MODEL_BUS__.ask(String(prompt || ''));
+    if (remote) return remote;
+  }
   const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
   const partial = mode === 'cepat' && earlyFlag && weightReader && loadedTier !== tier;
   if (!partial) {

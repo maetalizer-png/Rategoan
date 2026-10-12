@@ -1,13 +1,17 @@
 import { openInt4Stream } from './int4-session.js';
-import { createRangeReader, openCacheStore, WEIGHT_SPEC } from './weight-cache.js';
+import { createRangeReader, openCacheStore, WEIGHT_SPEC, openSyncWeight } from './weight-cache.js';
 
 let sessionPromise = null;
 
 function session() {
   if (!sessionPromise) {
-    const store = openCacheStore();
-    const reader = createRangeReader(store, WEIGHT_SPEC.url, WEIGHT_SPEC.size, WEIGHT_SPEC.chunk, WEIGHT_SPEC.cache);
-    sessionPromise = openInt4Stream(reader);
+    sessionPromise = (async () => {
+      const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
+      if (sync && sync.size > 8) return openInt4Stream(sync);
+      const store = openCacheStore();
+      const reader = createRangeReader(store, WEIGHT_SPEC.url, WEIGHT_SPEC.size, WEIGHT_SPEC.chunk, WEIGHT_SPEC.cache, 4);
+      return openInt4Stream(reader);
+    })();
   }
   return sessionPromise;
 }

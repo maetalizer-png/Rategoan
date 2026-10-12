@@ -1,5 +1,18 @@
 import { getWebCrypto } from '../crypto/get-web-crypto.js';
 
+export function relayChunk(channel, index, bytes) {
+  const payload = {
+    kind: 'model-chunk',
+    index: Math.max(0, Math.floor(Number(index) || 0)),
+    bytes: bytes ? bytes.byteLength || bytes.length || 0 : 0,
+  };
+  if (channel && typeof channel.send === 'function' && channel.readyState === 'open') {
+    channel.send(JSON.stringify(payload));
+    return { ok: true, local: false, index: payload.index, bytes: payload.bytes };
+  }
+  return { ok: false, local: true, index: payload.index, bytes: payload.bytes };
+}
+
 export function meshOffer(id) {
   return {
     id: String(id || 'peer'),

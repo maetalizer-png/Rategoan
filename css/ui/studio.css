@@ -901,3 +901,44 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 @container kanvas (max-width: 699px) {
   .sandbox-pill, .hud-chips { display: none; }
 }
+
+.file-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 12px;
+  align-items: center;
+}
+.file-actions button,
+.file-actions input {
+  min-height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--rg-line);
+  background: var(--rg-surface);
+  color: var(--rg-text);
+  padding: 4px 8px;
+}
+.editor-manual {
+  display: grid;
+  grid-template-columns: 3ch 1fr;
+  gap: 8px;
+  min-height: 180px;
+}
+#code-manual, #code-gutter, #code-highlight {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0;
+}
+#code-highlight { grid-column: 2; white-space: pre-wrap; }
+.tok-key { color: #9ecbff; }
+.vfs-tree button.is-dirty::after { content: " ●"; }
+.console-error { display: flex; gap: 8px; align-items: center; }
+.heal-once { min-height: 32px; }
+
+@media (horizontal-viewport-segments: 2) {
+  #studio-app.is-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

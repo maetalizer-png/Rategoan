@@ -1,6 +1,19 @@
 export const MODEL_CACHE = 'rategoan-model-cache';
 export const NEURAL_CACHE = 'rategoan-neural-cache';
 export const MODEL_CHUNK = 20 * 1024 * 1024;
+export const PREFETCH_AHEAD = 4;
+
+export function deltaChunkPlan(previous, next) {
+  const oldH = previous || [];
+  const neu = next || [];
+  const changed = [];
+  const n = Math.max(oldH.length, neu.length);
+  for (let i = 0; i < n; i += 1) {
+    if (oldH[i] !== neu[i]) changed.push(i);
+  }
+  const kept = n - changed.length;
+  return { changed, kept, ratio: n ? changed.length / n : 0 };
+}
 
 export function planRanges(size, chunk) {
   const total = Math.max(0, Math.floor(Number(size) || 0));
@@ -125,6 +138,30 @@ export async function downloadConcurrentChunks(options) {
   let stopError = null;
   const t0 = Date.now();
   const samples = [{ t: t0, loaded: 0 }];
+  const primed = new Map();
+
+  function prime(i) {
+    if (i < 0 || i >= ranges.length) return null;
+    if (primed.has(i)) return primed.get(i);
+    const range = ranges[i];
+    const key = url + '#' + range.start + '-' + range.end;
+    const expect = range.end - range.start + 1;
+    const job = (async () => {
+      const cached = await store.get(cacheName, key);
+      if (cached) return { bytes: cached, fromCache: true, key, expect };
+      const res = await fetchImpl(url, { headers: { Range: 'bytes=' + range.start + '-' + range.end } });
+      if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
+        throw new Error('HTTP ' + res.status);
+      }
+      const raw = new Uint8Array(await res.arrayBuffer());
+      const bytes = raw.length === expect ? raw : raw.slice(0, expect);
+      if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
+      return { bytes, fromCache: false, key, expect };
+    })();
+    const tracked = job.then((value) => value, (err) => ({ __err: err }));
+    primed.set(i, tracked);
+    return tracked;
+  }
 
   function windowSpeed() {
     const now = Date.now();
@@ -176,30 +213,24 @@ export async function downloadConcurrentChunks(options) {
   }
 
   async function pull(i) {
+    prime(i + PREFETCH_AHEAD);
+    const got = await prime(i);
+    if (!got || got.__err) throw (got && got.__err) || new Error('gagal');
     const range = ranges[i];
-    const key = url + '#' + range.start + '-' + range.end;
-    const expect = range.end - range.start + 1;
-    let bytes = await store.get(cacheName, key);
-    const fromCache = !!bytes;
-    if (!bytes) {
-      const res = await fetchImpl(url, { headers: { Range: 'bytes=' + range.start + '-' + range.end } });
-      if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
-        throw new Error('HTTP ' + res.status);
-      }
-      const raw = new Uint8Array(await res.arrayBuffer());
-      bytes = raw.length === expect ? raw : raw.slice(0, expect);
-      if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
-      await store.put(cacheName, key, bytes);
+    if (!got.fromCache) {
+      const writing = store.put(cacheName, got.key, got.bytes);
+      prime(i + PREFETCH_AHEAD);
+      await writing;
       networkHits += 1;
       markChunk(i);
     }
-    if (bytes.length > peak) peak = bytes.length;
-    loaded += bytes.length;
-    const seal = fromCache ? '' : await digestSha256(bytes);
-    bytes = null;
+    if (got.bytes.length > peak) peak = got.bytes.length;
+    loaded += got.bytes.length;
+    const seal = got.fromCache ? '' : await digestSha256(got.bytes);
     done[i] = true;
     checkEarly();
     report(i, seal);
+    if (range.end < range.start) throw new Error('rentang kosong');
   }
 
   async function worker() {

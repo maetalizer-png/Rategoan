@@ -75,6 +75,27 @@ export async function downloadWeightChunks(options) {
   return downloadConcurrentChunks(options);
 }
 
+export async function openSyncWeight(name) {
+  const nav = globalThis.navigator;
+  if (!nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return null;
+  try {
+    const root = await nav.storage.getDirectory();
+    const handle = await root.getFileHandle(String(name || 'raget-neural-1.5b.safetensors'));
+    const sync = await handle.createSyncAccessHandle();
+    return {
+      size: sync.getSize(),
+      read(offset, length) {
+        const buf = new Uint8Array(length);
+        const n = sync.read(buf, { at: offset });
+        return n === length ? buf : buf.subarray(0, Math.max(0, n));
+      },
+      close() { sync.close(); },
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
 export function createRangeReader(store, url, size, chunk, cacheName, slots) {
   const step = chunk || MODEL_CHUNK;
   const name = cacheName || MODEL_CACHE;

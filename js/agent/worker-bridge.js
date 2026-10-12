@@ -1,3 +1,5 @@
+import { guardWorkerTurn } from '../../raget/raget-agents/turn-pipeline.js';
+
 const DB = 'rategoan_db';
 const STORE = 'agent_runs';
 let activeCancel = null;
@@ -83,7 +85,12 @@ export function runAgentPlan(detail) {
       steps.push(msg);
       if (detail.onStep) detail.onStep(steps.slice());
     };
-    worker.onerror = () => finish('galat');
+    worker.onerror = () => {
+      guardWorkerTurn(() => Promise.reject(new Error('worker')), steps.slice()).then((guarded) => {
+        steps.push({ kind: 'RECOVER', text: guarded.card ? guarded.card.text : 'Worker terhenti. Riwayat tetap disimpan.' });
+        finish('pulih');
+      });
+    };
     arm();
     worker.postMessage({
       text: detail.text || '',

@@ -2,6 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { toast } from '../core/toast.js';
 import { composer } from './composer.js';
 import { idbGateway } from '../../shared/idb-gateway.js';
+import { mountEnergyVad, voiceActive } from '../voice/energy-vad.js';
 
 export const voice = {
   listening: false,
@@ -35,6 +36,14 @@ export const voice = {
   },
   listen() {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx && !this._vad) {
+      try {
+        const ctx = new AudioCtx();
+        this._vad = mountEnergyVad(ctx);
+        this._vadActive = voiceActive;
+      } catch (e) { this._vad = null; }
+    }
     if (!SR) {
       toast.show('Input suara tidak didukung');
       return;

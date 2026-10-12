@@ -17,6 +17,7 @@ import { folderBridge } from '../project/folder-bridge.js';
 import { reduceStream, chooseDoor, routeDoor, failoverStream, resumeCursor } from './sse-door.js';
 import { backupToDrive } from './drive-backup.js';
 import { mountNamespace } from '../core/namespace.js';
+import { mountStudioFrontier } from './studio-frontier.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -190,6 +191,21 @@ function paintProjectName(text) {
 
 function paintDiff(path) {
   const pre = $('code-editor');
+  const manual = $('code-manual');
+  const wrap = $('editor-manual');
+  if (document.body.dataset.editorMode === 'edit' && manual) {
+    if (pre) pre.hidden = true;
+    if (wrap) wrap.hidden = false;
+    manual.hidden = false;
+    if (manual.dataset.path !== path) {
+      manual.value = vfs.read(path);
+      manual.dataset.path = path;
+    }
+    return;
+  }
+  if (manual) manual.hidden = true;
+  if (wrap) wrap.hidden = true;
+  if (pre) pre.hidden = false;
   if (!pre) return;
   const key = path === '/css/style.css' ? 'style.css'
     : path === '/js/script.js' ? 'script.js'
@@ -213,6 +229,11 @@ function paintTree() {
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-selected', path === viewPath ? 'true' : 'false');
     btn.textContent = path;
+    if (git && typeof git.filesAt === 'function') {
+      const head = git.head();
+      const past = head ? git.filesAt(head.id) : null;
+      if (past && past[path] !== undefined && past[path] !== vfs.read(path)) btn.classList.add('is-dirty');
+    }
     if (path === viewPath) btn.classList.add('on');
     btn.onclick = () => { viewPath = path; paintTree(); paintDiff(path); showTab('files'); };
     box.appendChild(btn);
@@ -1169,7 +1190,50 @@ function bind() {
     if (!fromSandbox && !fromSame) return;
     const data = event.data || {};
     if (data.type === 'studio:state' && data.preview) previewMemory = data.preview;
-    if (data.type === 'studio:error') appendConsole('Galat: ' + ((data.error && data.error.msg) || 'pratinjau'));
+    if (data.type === 'studio:error') {
+      const msg = (data.error && data.error.msg) || 'pratinjau';
+      const box = $('console-output');
+      if (!box) return;
+      const row = document.createElement('div');
+      row.className = 'console-error';
+      const text = document.createElement('span');
+      text.textContent = 'Galat: ' + msg;
+      const heal = document.createElement('button');
+      heal.type = 'button';
+      heal.className = 'heal-once';
+      heal.textContent = 'Perbaiki';
+      heal.onclick = async () => {
+        const code = vfs.read('/js/script.js');
+        const loop = await selfHealLoop(code, async (current) => {
+          const healed = healScript(current, { msg: msg });
+          if (healed !== current) return { next: healed };
+          return { stop: true, verify: 'tetap' };
+        }, 1);
+        if (loop.code && loop.code !== code) {
+          vfs.write('/js/script.js', loop.code);
+          paintTree();
+          showPreview();
+        }
+        appendConsole(loop.ok ? 'Perbaikan selesai' : 'Perbaikan satu siklus');
+      };
+      row.appendChild(text);
+      row.appendChild(heal);
+      box.appendChild(row);
+      showTab('logs');
+    }
+    if (data.type === 'studio:pick') {
+      const id = data.id ? String(data.id) : '';
+      const tag = data.tag ? String(data.tag) : '';
+      const html = vfs.read('/index.html');
+      const needle = id ? 'id="' + id + '"' : '<' + tag;
+      const at = needle ? html.indexOf(needle) : -1;
+      viewPath = '/index.html';
+      document.body.dataset.editorMode = 'edit';
+      paintTree();
+      showTab('files');
+      const manual = $('code-manual');
+      if (manual && at >= 0) manual.setSelectionRange(at, at + needle.length);
+    }
     if (data.type === 'studio:log') appendConsole((data.level || 'log') + ': ' + (data.text || ''));
   });
   const seedRaw = sessionStorage.getItem('rategoan_studio_seed');
@@ -1218,6 +1282,18 @@ function bind() {
   });
   mountNamespace('stream', { reduceStream, paint: paintSse, chooseDoor });
   bootRecover(git).catch(() => {});
+  mountStudioFrontier({
+    vfs,
+    git,
+    $,
+    getPath: () => viewPath,
+    setPath: (path) => { viewPath = path; },
+    showPreview,
+    paintTree,
+    appendConsole,
+    selfHealLoop,
+    healScript,
+  });
 }
 
 bind();

@@ -42,6 +42,8 @@ import { toast } from './core/toast.js';
 import { dataries } from '../raget/raget-agents/dataries-registry.js';
 import { mesin } from '../raget/raget-runtime/mesin.js';
 import { mountNamespace } from './core/namespace.js';
+import { bootModelCoordinator } from './system/tab-coordinator.js';
+import { createSovereignPolicy } from './system/trusted-policy.js';
 
 const bootStart = performance.now();
 
@@ -75,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
   step(() => histmenu.bind());
   step(() => netmon.bind());
   step(() => install.bind());
+  step(() => bootModelCoordinator());
+  step(() => createSovereignPolicy());
   step(() => backup.bind());
   step(() => shortcuts.bind());
   step(() => pin.bind());

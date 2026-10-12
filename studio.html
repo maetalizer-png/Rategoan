@@ -133,12 +133,33 @@
           <iframe id="studio-preview-frame" sandbox="allow-scripts allow-forms" title="Pratinjau hidup"></iframe>
         </div>
         <div id="tab-files" class="tab-panel">
+          <div class="file-actions" id="file-actions">
+            <button type="button" id="btn-mode-diff">Diff</button>
+            <button type="button" id="btn-mode-edit">Sunting</button>
+            <input id="file-name" type="text" placeholder="nama berkas" aria-label="Nama berkas">
+            <button type="button" id="btn-file-add">Berkas baru</button>
+            <button type="button" id="btn-file-rename">Ubah nama</button>
+            <button type="button" id="btn-file-del">Hapus berkas</button>
+            <button type="button" id="btn-view-390">390</button>
+            <button type="button" id="btn-view-768">768</button>
+            <button type="button" id="btn-view-1200">1200</button>
+            <button type="button" id="btn-view-rotate">Putar</button>
+            <button type="button" id="btn-export-html">Ekspor HTML</button>
+            <button type="button" id="btn-pwa-pack">Paket PWA</button>
+            <label class="commit-slider-label">Linimasa <input id="commit-slider" type="range" min="0" max="0" value="0"></label>
+            <button type="button" id="btn-rollback">Kembalikan</button>
+          </div>
           <div id="hunk-stage" class="hunk-stage">
             <button type="button" class="hunk-accept" data-hunk="0">Terima</button>
             <button type="button" class="hunk-reject" data-hunk="0">Tolak</button>
           </div>
           <div class="vfs-tree" id="vfs-tree"></div>
           <pre class="code-editor" id="code-editor" spellcheck="false"></pre>
+          <div class="editor-manual" id="editor-manual" hidden>
+            <pre class="code-gutter" id="code-gutter" aria-hidden="true">1</pre>
+            <textarea id="code-manual" spellcheck="false" aria-label="Editor berkas"></textarea>
+            <pre class="code-highlight" id="code-highlight" aria-hidden="true"></pre>
+          </div>
         </div>
         <div id="tab-dokumen" class="tab-panel">
           <article id="living-doc" class="code-editor">Dokumen hidup.</article>

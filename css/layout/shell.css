@@ -205,3 +205,10 @@
   color: var(--rg-muted);
   padding: 0 4px;
 }
+
+@media (horizontal-viewport-segments: 2) {
+  #view-chat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

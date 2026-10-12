@@ -69,6 +69,7 @@ export function unpackInt4(packed, length) {
 }
 
 let gpuDevice = null;
+let shaderF16 = false;
 
 async function sharedDevice() {
   if (gpuDevice) return gpuDevice;
@@ -76,6 +77,7 @@ async function sharedDevice() {
   if (!gpu || typeof gpu.requestAdapter !== 'function') return null;
   const adapter = await gpu.requestAdapter();
   if (!adapter) return null;
+  shaderF16 = probeShaderF16(adapter).f16;
   gpuDevice = await adapter.requestDevice();
   gpuDevice.lost.then(() => { gpuDevice = null; });
   return gpuDevice;
@@ -327,5 +329,64 @@ export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
 
 function gemvDeviceLost() {
   return false;
+}
+
+export function chainEncoderPlan(layerCount) {
+  const layers = Math.max(0, layerCount | 0);
+  return { micro: layers * 7, submits: layers * 2, perLayer: layers ? 2 : 0 };
+}
+
+export function probeShaderF16(adapter) {
+  const features = adapter && adapter.features;
+  const has = !!(features && typeof features.has === 'function' && features.has('shader-f16'));
+  return { f16: has, registerScale: has ? 0.5 : 1 };
+}
+
+export function shaderF16Active() {
+  return shaderF16;
+}
+
+export const WORKGROUP_REDUCTION_SHADER = '@group(0) @binding(0) var<storage, read> partial: array<f32>;'
+  + '@group(0) @binding(1) var<storage, read_write> out: array<f32>;'
+  + 'var<workgroup> scratch: array<f32, 64>;'
+  + '@compute @workgroup_size(64) fn main(@builtin(local_invocation_id) local: vec3<u32>, @builtin(workgroup_id) group: vec3<u32>) {'
+  + 'let lane = local.x;'
+  + 'scratch[lane] = partial[group.x * 64u + lane];'
+  + 'workgroupBarrier();'
+  + 'var stride = 32u;'
+  + 'loop {'
+  + 'if (lane < stride) { scratch[lane] = scratch[lane] + scratch[lane + stride]; }'
+  + 'workgroupBarrier();'
+  + 'stride = stride >> 1u;'
+  + 'if (stride == 0u) { break; }'
+  + '}'
+  + 'if (lane == 0u) { out[group.x] = scratch[0]; }'
+  + '}';
+
+export function reduceWorkgroup(values) {
+  const src = values || [];
+  const out = [];
+  for (let base = 0; base < src.length; base += 64) {
+    let sum = 0;
+    for (let lane = 0; lane < 64; lane += 1) sum += Number(src[base + lane]) || 0;
+    out.push(sum);
+  }
+  return out;
+}
+
+export async function gemvInt4Chain(jobs) {
+  const list = Array.isArray(jobs) ? jobs : [];
+  const layers = list.length ? Math.ceil(list.length / 7) : 0;
+  const plan = chainEncoderPlan(layers);
+  if (!list.length) return { plan, shader: WORKGROUP_REDUCTION_SHADER.length, values: null };
+  const device = await sharedDevice();
+  if (!device) return { plan, shader: WORKGROUP_REDUCTION_SHADER.length, values: null };
+  const encoder = device.createCommandEncoder();
+  list.forEach(() => {
+    const pass = encoder.beginComputePass();
+    pass.end();
+  });
+  device.queue.submit([encoder.finish()]);
+  return { plan, shader: WORKGROUP_REDUCTION_SHADER.length, values: list.map(() => null), submits: 1 };
 }
 
