@@ -246,6 +246,7 @@ function runOnWorker(prompt, genOpts, signal) {
       prompt: prompt,
       maxNewTokens: genOpts.maxNewTokens,
       maxLayers: genOpts.maxLayers,
+      draft: genOpts.draft === true,
       temperature: genOpts.temperature,
       topK: genOpts.topK,
       topP: genOpts.topP,
@@ -270,6 +271,7 @@ async function generateWithTier(tier, prompt, options) {
   const genOpts = {
     maxNewTokens: mode === 'mendalam' ? 96 : 32,
     maxLayers: mode === 'mendalam' ? 0 : 4,
+    draft: mode === 'mendalam',
     temperature: 0.7,
     topK: 40,
     topP: 0.9,

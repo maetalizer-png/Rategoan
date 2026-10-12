@@ -24,6 +24,7 @@ self.onmessage = async (event) => {
     const out = await live.generate(String(msg.prompt || ''), {
       maxNewTokens: msg.maxNewTokens,
       maxLayers: msg.maxLayers,
+      draft: msg.draft === true,
       temperature: msg.temperature,
       topK: msg.topK,
       topP: msg.topP,

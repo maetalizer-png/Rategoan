@@ -208,15 +208,21 @@ export const GEMV_INT4_SHADER = '@group(0) @binding(0) var<storage, read> packed
   + '@group(0) @binding(3) var<storage, read> zeros: array<f32>;'
   + '@group(0) @binding(4) var<storage, read_write> y: array<f32>;'
   + '@group(0) @binding(5) var<uniform> dims: vec2<u32>;'
-  + '@compute @workgroup_size(64) fn main(@builtin(global_invocation_id) gid: vec3<u32>) {'
-  + 'let row = gid.x; if (row >= dims.x) { return; }'
-  + 'let cols = dims.y; var acc = 0.0; let rowBase = row * cols;'
-  + 'for (var c = 0u; c < cols; c = c + 1u) {'
+  + 'var<workgroup> red: array<f32, 64>;'
+  + '@compute @workgroup_size(64) fn main(@builtin(local_invocation_id) lid: vec3<u32>, @builtin(workgroup_id) wid: vec3<u32>) {'
+  + 'let row = wid.x; let lane = lid.x; let cols = dims.y; var acc = 0.0;'
+  + 'if (row < dims.x) { let rowBase = row * cols;'
+  + 'for (var c = lane; c < cols; c = c + 64u) {'
   + 'let i = rowBase + c; let byteIndex = i / 2u; let word = packed[byteIndex / 4u];'
   + 'let shift = (byteIndex % 4u) * 8u; let byte = (word >> shift) & 0xffu;'
   + 'let nibble = select(byte >> 4u, byte & 0xfu, (i & 1u) == 0u);'
-  + 'let block = i / 32u; if (block >= arrayLength(&scales) || block >= arrayLength(&zeros)) { return; } let w = (f32(nibble) - zeros[block]) * scales[block];'
-  + 'acc = acc + w * vecx[c]; } y[row] = acc; }';
+  + 'let block = i / 32u;'
+  + 'if (block < arrayLength(&scales) && block < arrayLength(&zeros)) {'
+  + 'let w = (f32(nibble) - zeros[block]) * scales[block]; acc = acc + w * vecx[c]; } } }'
+  + 'red[lane] = acc; workgroupBarrier();'
+  + 'var offset = 32u;'
+  + 'loop { if (offset == 0u) { break; } if (lane < offset) { red[lane] = red[lane] + red[lane + offset]; } workgroupBarrier(); offset = offset >> 1u; }'
+  + 'if (lane == 0u && row < dims.x) { y[row] = red[0]; } }';
 
 let gemvPipe = null;
 let gemvArena = null;
@@ -312,7 +318,7 @@ export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
     const pass = encoder.beginComputePass();
     pass.setPipeline(gemvPipe);
     pass.setBindGroup(0, bind);
-    pass.dispatchWorkgroups(Math.ceil(rows / 64));
+    pass.dispatchWorkgroups(rows);
     pass.end();
     encoder.copyBufferToBuffer(arena.y, 0, arena.read, 0, yBytes);
     device.queue.submit([encoder.finish()]);
@@ -374,19 +380,89 @@ export function reduceWorkgroup(values) {
   return out;
 }
 
+async function submitWave(device, wave) {
+  if (!gemvPipe || gemvDeviceLost()) {
+    const module = device.createShaderModule({ code: GEMV_INT4_SHADER });
+    gemvPipe = device.createComputePipeline({
+      layout: 'auto',
+      compute: { module: module, entryPoint: 'main' },
+    });
+  }
+  const slots = [];
+  for (let i = 0; i < wave.length; i += 1) {
+    const job = wave[i];
+    const packed = pad4(job.packed);
+    const scaleSrc = job.scales instanceof Float32Array ? job.scales : new Float32Array(job.scales);
+    const zeroSrc = job.zeros instanceof Float32Array ? job.zeros : new Float32Array(job.zeros);
+    const xSrc = job.x instanceof Float32Array ? job.x : new Float32Array(job.x);
+    const rows = job.rows | 0;
+    const cols = job.cols | 0;
+    const yBytes = Math.max(4, rows * 4);
+    const slot = {
+      rows: rows,
+      yBytes: yBytes,
+      packedBuf: device.createBuffer({ size: Math.max(4, packed.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+      xBuf: device.createBuffer({ size: Math.max(4, xSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+      scaleBuf: device.createBuffer({ size: Math.max(4, scaleSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+      zeroBuf: device.createBuffer({ size: Math.max(4, zeroSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+      yBuf: device.createBuffer({ size: yBytes, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC }),
+      readBuf: device.createBuffer({ size: yBytes, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST }),
+      dimBuf: device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST }),
+    };
+    device.queue.writeBuffer(slot.packedBuf, 0, packed);
+    device.queue.writeBuffer(slot.xBuf, 0, xSrc);
+    device.queue.writeBuffer(slot.scaleBuf, 0, scaleSrc);
+    device.queue.writeBuffer(slot.zeroBuf, 0, zeroSrc);
+    device.queue.writeBuffer(slot.dimBuf, 0, new Uint32Array([rows, cols, 0, 0]));
+    slots.push(slot);
+  }
+  const encoder = device.createCommandEncoder();
+  for (let i = 0; i < slots.length; i += 1) {
+    const slot = slots[i];
+    const bind = device.createBindGroup({
+      layout: gemvPipe.getBindGroupLayout(0),
+      entries: [
+        { binding: 0, resource: { buffer: slot.packedBuf } },
+        { binding: 1, resource: { buffer: slot.xBuf } },
+        { binding: 2, resource: { buffer: slot.scaleBuf } },
+        { binding: 3, resource: { buffer: slot.zeroBuf } },
+        { binding: 4, resource: { buffer: slot.yBuf } },
+        { binding: 5, resource: { buffer: slot.dimBuf } },
+      ],
+    });
+    const pass = encoder.beginComputePass();
+    pass.setPipeline(gemvPipe);
+    pass.setBindGroup(0, bind);
+    pass.dispatchWorkgroups(slot.rows);
+    pass.end();
+    encoder.copyBufferToBuffer(slot.yBuf, 0, slot.readBuf, 0, slot.yBytes);
+  }
+  device.queue.submit([encoder.finish()]);
+  const outs = [];
+  for (let i = 0; i < slots.length; i += 1) {
+    const slot = slots[i];
+    await slot.readBuf.mapAsync(GPUMapMode.READ);
+    outs.push(new Float32Array(slot.readBuf.getMappedRange(0, slot.yBytes).slice(0)));
+    slot.readBuf.unmap();
+    ['packedBuf', 'xBuf', 'scaleBuf', 'zeroBuf', 'yBuf', 'readBuf', 'dimBuf'].forEach((key) => {
+      try { slot[key].destroy(); } catch (e) { /* lepas */ }
+    });
+  }
+  return outs;
+}
+
 export async function gemvInt4Chain(jobs) {
   const list = Array.isArray(jobs) ? jobs : [];
-  const layers = list.length ? Math.ceil(list.length / 7) : 0;
-  const plan = chainEncoderPlan(layers);
-  if (!list.length) return { plan, shader: WORKGROUP_REDUCTION_SHADER.length, values: null };
+  const plan = chainEncoderPlan(list.length ? 1 : 0);
+  if (!list.length) return { ok: false, submits: 0, plan: plan, values: null };
   const device = await sharedDevice();
-  if (!device) return { plan, shader: WORKGROUP_REDUCTION_SHADER.length, values: null };
-  const encoder = device.createCommandEncoder();
-  list.forEach(() => {
-    const pass = encoder.beginComputePass();
-    pass.end();
-  });
-  device.queue.submit([encoder.finish()]);
-  return { plan, shader: WORKGROUP_REDUCTION_SHADER.length, values: list.map(() => null), submits: 1 };
+  if (!device) return { ok: false, submits: 0, plan: plan, values: null };
+  try {
+    const values = await submitWave(device, list);
+    return { ok: true, submits: 1, plan: plan, values: values };
+  } catch (e) {
+    gemvPipe = null;
+    return { ok: false, submits: 0, plan: plan, values: null };
+  }
 }
 

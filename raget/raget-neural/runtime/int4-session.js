@@ -183,6 +183,45 @@ function buildSession(parsed, readBytes) {
     return view;
   }
 
+  async function projectMany(specs, signal) {
+    if (signal && signal.aborted) return false;
+    const jobs = [];
+    for (let i = 0; i < specs.length; i += 1) {
+      const spec = specs[i];
+      jobs.push({
+        packed: await tensorU8(spec[0]),
+        scales: await tensorF32(spec[0] + '.scale'),
+        zeros: await tensorF32(spec[0] + '.zero'),
+        rows: spec[1],
+        cols: spec[2],
+        x: spec[3],
+        y: spec[4],
+      });
+    }
+    const chained = await gemvInt4Chain(jobs);
+    if (chained && chained.ok && chained.values && chained.values.length === jobs.length) {
+      let good = true;
+      for (let i = 0; i < jobs.length; i += 1) {
+        const gpuY = chained.values[i];
+        if (!gpuY || gpuY.length < jobs[i].rows) {
+          good = false;
+          break;
+        }
+        for (let r = 0; r < jobs[i].rows; r += 1) jobs[i].y[r] = gpuY[r];
+        if (activeLora) applyLoraDelta(jobs[i].y, jobs[i].x, activeLora);
+      }
+      if (good) {
+        usedGpu = true;
+        return true;
+      }
+    }
+    for (let i = 0; i < jobs.length; i += 1) {
+      const job = jobs[i];
+      if (!gemvFusedInt4(job.packed, job.scales, job.zeros, job.rows, job.cols, job.x, job.y, signal, activeLora)) return false;
+    }
+    return true;
+  }
+
   async function project(name, rows, cols, x, y, signal) {
     const packed = await tensorU8(name);
     const scales = await tensorF32(name + '.scale');
@@ -290,8 +329,7 @@ function buildSession(parsed, readBytes) {
     await embed(id, x);
     const passes = planLayerPasses(limit);
     const chain = chainEncoderPlan(passes.length);
-    if (chain.micro < 0) return null;
-    await gemvInt4Chain(null);
+    if (chain.submits < 0) return null;
     for (let p = 0; p < passes.length; p += 1) {
       if (signal && signal.aborted) return null;
       const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
@@ -302,9 +340,11 @@ function buildSession(parsed, readBytes) {
       const q = new Float32Array(nHeads * dk);
       const k = new Float32Array(nKv * dk);
       const v = new Float32Array(nKv * dk);
-      if (!await project(prefix + 'attention.Wq', nHeads * dk, d, h, q, signal)) return null;
-      if (!await project(prefix + 'attention.Wk', nKv * dk, d, h, k, signal)) return null;
-      if (!await project(prefix + 'attention.Wv', nKv * dk, d, h, v, signal)) return null;
+      if (!await projectMany([
+        [prefix + 'attention.Wq', nHeads * dk, d, h, q],
+        [prefix + 'attention.Wk', nKv * dk, d, h, k],
+        [prefix + 'attention.Wv', nKv * dk, d, h, v],
+      ], signal)) return null;
       cache[layer].k = cache[layer].k || [];
       cache[layer].v = cache[layer].v || [];
       commitKv(cache[layer], k, v, kvInt8);
@@ -317,8 +357,10 @@ function buildSession(parsed, readBytes) {
       const gate = new Float32Array(ff);
       const up = new Float32Array(ff);
       const hidden = new Float32Array(ff);
-      if (!await project(prefix + 'ffn.Wgate', ff, d, h, gate, signal)) return null;
-      if (!await project(prefix + 'ffn.Wup', ff, d, h, up, signal)) return null;
+      if (!await projectMany([
+        [prefix + 'ffn.Wgate', ff, d, h, gate],
+        [prefix + 'ffn.Wup', ff, d, h, up],
+      ], signal)) return null;
       siluMul(gate, up, hidden);
       const down = new Float32Array(d);
       if (!await project(prefix + 'ffn.Wdown', d, ff, hidden, down, signal)) return null;
@@ -359,8 +401,7 @@ function buildSession(parsed, readBytes) {
       const generated = [];
       const recent = ids.slice();
       let shown = '';
-      const temperature = Number(opts.temperature);
-      const allowDraft = limit > 4 && opts.draft !== false && !(temperature > 0) && !opts.grammar;
+      const allowDraft = opts.draft === true && limit > 4 && !opts.grammar;
       const f16 = probeShaderF16(null);
       const chain = chainEncoderPlan(limit);
 
