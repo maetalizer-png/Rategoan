@@ -1,5 +1,25 @@
 import { getWebCrypto } from '../crypto/get-web-crypto.js';
 
+const mesh = { peers: 0, saved: 0 };
+
+export function meshSnapshot() {
+  return {
+    status: mesh.peers > 0 ? 'aktif' : 'mencari',
+    peers: mesh.peers,
+    saved: mesh.saved,
+  };
+}
+
+export function noteMeshPeer() {
+  mesh.peers += 1;
+  return meshSnapshot();
+}
+
+export function noteMeshSaved(bytes) {
+  mesh.saved += Math.max(0, Number(bytes) || 0);
+  return meshSnapshot();
+}
+
 export function relayChunk(channel, index, bytes) {
   const payload = {
     kind: 'model-chunk',
@@ -8,6 +28,7 @@ export function relayChunk(channel, index, bytes) {
   };
   if (channel && typeof channel.send === 'function' && channel.readyState === 'open') {
     channel.send(JSON.stringify(payload));
+    noteMeshSaved(payload.bytes);
     return { ok: true, local: false, index: payload.index, bytes: payload.bytes };
   }
   return { ok: false, local: true, index: payload.index, bytes: payload.bytes };

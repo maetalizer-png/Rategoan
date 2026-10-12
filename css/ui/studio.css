@@ -936,6 +936,8 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 .console-error { display: flex; gap: 8px; align-items: center; }
 .heal-once { min-height: 32px; }
 
+.preview-tools { display: flex; gap: 8px; padding: 8px 12px; }
+.preview-tools button { min-height: 32px; }
 @media (horizontal-viewport-segments: 2) {
   #studio-app.is-split {
     display: grid;

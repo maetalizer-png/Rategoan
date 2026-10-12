@@ -58,7 +58,12 @@ export function buildVirtualImportMap(files, createUrl) {
   const make = typeof createUrl === 'function'
     ? createUrl
     : (body, spec) => 'blob:rategoan/' + spec + '/' + String(body || '').length;
-  const imports = {};
+  const imports = {
+    react: 'blob:rategoan/vendor/react',
+    tailwindcss: 'blob:rategoan/vendor/tailwind',
+    lucide: 'blob:rategoan/vendor/lucide',
+    'chart.js': 'blob:rategoan/vendor/chart',
+  };
   Object.keys(map).forEach((path) => {
     if (!/\.js$/i.test(path)) return;
     const spec = './' + String(path).replace(/^\//, '');
@@ -187,6 +192,12 @@ export function mountStudioFrontier(ctx) {
   bindClick('btn-view-390', () => setWidth(390));
   bindClick('btn-view-768', () => setWidth(768));
   bindClick('btn-view-1200', () => setWidth(1200));
+  bindClick('btn-view-full', () => {
+    if (!frame) return;
+    frame.style.width = '100%';
+    frame.style.maxWidth = '100%';
+    frame.style.height = '100%';
+  });
   bindClick('btn-view-rotate', () => {
     if (!frame) return;
     const w = parseInt(frame.style.width, 10) || 390;

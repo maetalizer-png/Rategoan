@@ -1,4 +1,5 @@
 
+import { personaLora } from '../../js/chat/persona.js';
 import { llmMode } from '../../js/state/llm-mode.js';
 import { llmEngine } from '../raget-deterministic/llm-engine.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
@@ -247,6 +248,7 @@ function runOnWorker(prompt, genOpts, signal) {
       maxNewTokens: genOpts.maxNewTokens,
       maxLayers: genOpts.maxLayers,
       draft: genOpts.draft === true,
+      lora: genOpts.lora || null,
       temperature: genOpts.temperature,
       topK: genOpts.topK,
       topP: genOpts.topP,
@@ -272,6 +274,7 @@ async function generateWithTier(tier, prompt, options) {
     maxNewTokens: mode === 'mendalam' ? 96 : 32,
     maxLayers: mode === 'mendalam' ? 0 : 4,
     draft: mode === 'mendalam',
+    lora: personaLora(),
     temperature: 0.7,
     topK: 40,
     topP: 0.9,

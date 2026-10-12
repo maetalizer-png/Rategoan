@@ -212,21 +212,40 @@ export async function downloadConcurrentChunks(options) {
     if (onEarlyReady) onEarlyReady({ parts: earlyAt + 1, bytes: ranges[earlyAt].end + 1 });
   }
 
+  async function mirrorOpfs(offset, bytes) {
+    const nav = globalThis.navigator;
+    if (!bytes || !nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return;
+    try {
+      const root = await nav.storage.getDirectory();
+      const handle = await root.getFileHandle('raget-neural-1.5b.safetensors', { create: true });
+      const sync = await handle.createSyncAccessHandle();
+      sync.write(bytes, { at: offset });
+      sync.flush();
+      sync.close();
+    } catch (e) { /* Cache API tetap sumber bila OPFS ditolak */ }
+  }
+
   async function pull(i) {
-    prime(i + PREFETCH_AHEAD);
     const got = await prime(i);
     if (!got || got.__err) throw (got && got.__err) || new Error('gagal');
     const range = ranges[i];
+    const ahead = i + PREFETCH_AHEAD;
     if (!got.fromCache) {
       const writing = store.put(cacheName, got.key, got.bytes);
-      prime(i + PREFETCH_AHEAD);
+      if (ahead < ranges.length && primed.size < 4) prime(ahead);
       await writing;
+      await mirrorOpfs(range.start, got.bytes);
       networkHits += 1;
       markChunk(i);
+    } else if (ahead < ranges.length && primed.size < 4) {
+      prime(ahead);
     }
-    if (got.bytes.length > peak) peak = got.bytes.length;
-    loaded += got.bytes.length;
-    const seal = got.fromCache ? '' : await digestSha256(got.bytes);
+    const held = got.bytes ? got.bytes.length : 0;
+    if (held > peak) peak = held;
+    loaded += held;
+    const seal = !got.bytes || got.fromCache ? '' : await digestSha256(got.bytes);
+    primed.delete(i);
+    got.bytes = null;
     done[i] = true;
     checkEarly();
     report(i, seal);

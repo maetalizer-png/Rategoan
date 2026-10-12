@@ -25,6 +25,7 @@ self.onmessage = async (event) => {
       maxNewTokens: msg.maxNewTokens,
       maxLayers: msg.maxLayers,
       draft: msg.draft === true,
+      lora: msg.lora || null,
       temperature: msg.temperature,
       topK: msg.topK,
       topP: msg.topP,

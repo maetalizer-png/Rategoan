@@ -2,7 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { toast } from '../core/toast.js';
 import { composer } from './composer.js';
 import { idbGateway } from '../../shared/idb-gateway.js';
-import { mountEnergyVad, voiceActive } from '../voice/energy-vad.js';
+import { mountEnergyVad, voiceActive, silenceElapsed } from '../voice/energy-vad.js';
 
 export const voice = {
   listening: false,
@@ -103,9 +103,40 @@ export const voice = {
     };
     try {
       this.rec.start();
+      this.armMic();
     } catch (e) {
       toast.show('Input suara tidak dapat dimulai');
     }
+  },
+  armMic() {
+    const media = navigator.mediaDevices;
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!media || typeof media.getUserMedia !== 'function' || !AudioCtx) return;
+    media.getUserMedia({ audio: true }).then((stream) => {
+      const ctx = new AudioCtx();
+      const source = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 1024;
+      source.connect(analyser);
+      const buf = new Float32Array(analyser.fftSize);
+      let lastVoice = 0;
+      let heard = false;
+      this._micTimer = setInterval(() => {
+        analyser.getFloatTimeDomainData(buf);
+        const now = performance.now();
+        if (voiceActive(buf)) {
+          heard = true;
+          lastVoice = now;
+          return;
+        }
+        if (heard && silenceElapsed(lastVoice, now)) {
+          clearInterval(this._micTimer);
+          stream.getTracks().forEach((track) => track.stop());
+          try { ctx.close(); } catch (e) { /* konteks sudah tutup */ }
+          try { this.rec && this.rec.stop(); } catch (e) { /* pengenal sudah berhenti */ }
+        }
+      }, 100);
+    }).catch(() => {});
   },
   meetingText: '',
   captureMeeting() {

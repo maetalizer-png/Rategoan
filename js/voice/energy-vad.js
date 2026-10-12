@@ -6,6 +6,14 @@ export function rmsEnergy(samples) {
   return Math.sqrt(sum / src.length);
 }
 
+export const SILENCE_MS = 600;
+
+export function silenceElapsed(lastVoiceAt, now, limit) {
+  if (!lastVoiceAt) return false;
+  const gate = limit == null ? SILENCE_MS : Number(limit);
+  return (Number(now) || 0) - Number(lastVoiceAt) >= gate;
+}
+
 export function voiceActive(samples, threshold) {
   const gate = threshold == null ? 0.02 : Number(threshold);
   return rmsEnergy(samples) >= gate;

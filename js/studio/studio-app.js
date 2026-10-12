@@ -197,8 +197,20 @@ function paintDiff(path) {
     if (pre) pre.hidden = true;
     if (wrap) wrap.hidden = false;
     manual.hidden = false;
-    if (manual.dataset.path !== path) {
-      manual.value = vfs.read(path);
+    if (manual.dataset.path !== path || document.body.dataset.streaming === '1') {
+      const next = vfs.read(path);
+      if (document.body.dataset.streaming === '1' && manual.dataset.path === path) {
+        const target = String(next || '');
+        let i = 0;
+        const step = () => {
+          i = Math.min(target.length, i + 48);
+          manual.value = target.slice(0, i);
+          if (i < target.length) requestAnimationFrame(step);
+        };
+        step();
+      } else {
+        manual.value = next;
+      }
       manual.dataset.path = path;
     }
     return;
@@ -1201,7 +1213,7 @@ function bind() {
       const heal = document.createElement('button');
       heal.type = 'button';
       heal.className = 'heal-once';
-      heal.textContent = 'Perbaiki';
+      heal.textContent = 'Perbaiki Otomatis';
       heal.onclick = async () => {
         const code = vfs.read('/js/script.js');
         const loop = await selfHealLoop(code, async (current) => {
@@ -1209,11 +1221,13 @@ function bind() {
           if (healed !== current) return { next: healed };
           return { stop: true, verify: 'tetap' };
         }, 1);
+        document.body.dataset.streaming = '1';
         if (loop.code && loop.code !== code) {
           vfs.write('/js/script.js', loop.code);
           paintTree();
           showPreview();
         }
+        document.body.dataset.streaming = '0';
         appendConsole(loop.ok ? 'Perbaikan selesai' : 'Perbaikan satu siklus');
       };
       row.appendChild(text);
@@ -1221,7 +1235,7 @@ function bind() {
       box.appendChild(row);
       showTab('logs');
     }
-    if (data.type === 'studio:pick') {
+    if ((data.type === 'studio:pick' || data.type === 'studio:inspect') && document.body.dataset.inspect === '1') {
       const id = data.id ? String(data.id) : '';
       const tag = data.tag ? String(data.tag) : '';
       const html = vfs.read('/index.html');
@@ -1282,6 +1296,14 @@ function bind() {
   });
   mountNamespace('stream', { reduceStream, paint: paintSse, chooseDoor });
   bootRecover(git).catch(() => {});
+  const inspect = $('btn-inspect-dom');
+  if (inspect) {
+    inspect.onclick = () => {
+      const on = document.body.dataset.inspect !== '1';
+      document.body.dataset.inspect = on ? '1' : '0';
+      inspect.setAttribute('aria-pressed', on ? 'true' : 'false');
+    };
+  }
   mountStudioFrontier({
     vfs,
     git,
