@@ -154,7 +154,7 @@ async function doInitTier(tier) {
       cacheName: WEIGHT_SPEC.cache,
       store: store,
       control: control,
-      concurrency: 4,
+      concurrency: 1,
       roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
       earlyBytes: tier === 'tier_1_5b' ? EARLY_READY_BYTES : 0,
       onEarlyReady: () => {
@@ -273,7 +273,7 @@ async function generateWithTier(tier, prompt, options) {
   const genOpts = {
     maxNewTokens: mode === 'mendalam' ? 96 : 32,
     maxLayers: mode === 'mendalam' ? 0 : 4,
-    draft: mode === 'mendalam',
+    draft: false,
     lora: personaLora(),
     temperature: 0.7,
     topK: 40,

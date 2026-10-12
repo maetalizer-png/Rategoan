@@ -22,14 +22,18 @@ await page.addInitScript(() => {
 await page.goto(base + '/index.html#/chat', { waitUntil: 'domcontentloaded' });
 await page.waitForSelector('#btn-model', { timeout: 15000 });
 await page.click('#btn-model');
-await page.waitForSelector('#persona-select', { timeout: 15000 });
+await page.waitForSelector('#model-sheet:not([hidden])');
 const chat = await page.evaluate(() => {
-  const select = document.getElementById('persona-select');
-  const labels = Array.from(select.options).map((opt) => opt.textContent);
+  const row = document.querySelector('.card-row');
   const status = document.getElementById('model-status');
-  return { labels, status: status ? status.textContent : '' };
+  const sheet = document.getElementById('model-sheet');
+  return {
+    personaInRow: !!row && !!row.querySelector('select'),
+    status: status ? status.textContent : '',
+    sheet: sheet ? sheet.innerText.replace(/\s+/g, ' ') : '',
+  };
 });
-note(chat.labels.indexOf('Umum') >= 0 && chat.labels.indexOf('Koding & Algoritma') >= 0, 'pemilih persona', chat.labels.join(' | '));
+note(!chat.personaInRow, 'baris kirim tanpa dropdown', chat.sheet.slice(0, 120));
 note(chat.status === 'Cepat' || chat.status === 'Mendalam', 'status bar', chat.status);
 await page.screenshot({ path: outDir + '/antrine6-chat.png' });
 

@@ -1,5 +1,4 @@
 import { $, scrollBottom } from '../../shared/dom.js';
-import { mountPersonaSelect } from './persona.js';
 import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
 import { store } from '../state/store.js';
@@ -825,8 +824,6 @@ export const composer = {
     });
     inp.addEventListener('focus', () => setTimeout(scrollBottom, 250));
     const send = $('btn-send');
-    const voiceBtn = $('btn-voice-input');
-    if (voiceBtn && voiceBtn.parentElement) mountPersonaSelect(voiceBtn.parentElement, 'persona-select');
     if (send) send.onclick = () => {
       let t = inp.value.trim();
       if (!t && !attach.current && !quote.current) return;
