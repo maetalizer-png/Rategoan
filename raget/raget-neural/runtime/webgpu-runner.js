@@ -213,7 +213,7 @@ export const GEMV_INT4_SHADER = '@group(0) @binding(0) var<storage, read> packed
   + 'let i = rowBase + c; let byteIndex = i / 2u; let word = packed[byteIndex / 4u];'
   + 'let shift = (byteIndex % 4u) * 8u; let byte = (word >> shift) & 0xffu;'
   + 'let nibble = select(byte >> 4u, byte & 0xfu, (i & 1u) == 0u);'
-  + 'let block = i / 32u; let w = (f32(nibble) - zeros[block]) * scales[block];'
+  + 'let block = i / 32u; if (block >= arrayLength(&scales) || block >= arrayLength(&zeros)) { return; } let w = (f32(nibble) - zeros[block]) * scales[block];'
   + 'acc = acc + w * vecx[c]; } y[row] = acc; }';
 
 let gemvPipe = null;

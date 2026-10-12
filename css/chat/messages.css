@@ -27,6 +27,8 @@
   word-wrap: break-word;
   white-space: pre-wrap;
   min-width: 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 72px;
 }
 
 .msg-meta {

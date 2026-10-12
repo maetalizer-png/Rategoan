@@ -42,11 +42,16 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k === CDN_PACKAGE_CACHE || k === APP_SHELL_CACHE || k === DATA_CACHE ? Promise.resolve() : caches.delete(k))))
+      Promise.all(keys.map((k) => (
+        k === CDN_PACKAGE_CACHE || k === APP_SHELL_CACHE || k === DATA_CACHE || k.indexOf('rategoan-') === 0
+          ? Promise.resolve()
+          : caches.delete(k)
+      )))
     ).then(() => self.clients.claim())
   );
 });
 self.addEventListener('fetch', (e) => {
+  if (e.request.headers && e.request.headers.has('range')) return;
   const url = e.request.url;
   if (url.indexOf('/raget-data/json/') >= 0 || url.indexOf('/raget/raget-data/json/') >= 0) {
     e.respondWith(

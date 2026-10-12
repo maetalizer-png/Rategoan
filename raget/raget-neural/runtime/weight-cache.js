@@ -23,8 +23,7 @@ export function cacheStore() {
     async put(cacheName, key, bytes) {
       const box = await caches.open(cacheName);
       const copy = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-      const body = copy.buffer.slice(copy.byteOffset, copy.byteOffset + copy.byteLength);
-      await box.put(cacheKey(key), new Response(body));
+      await box.put(cacheKey(key), new Response(copy));
     },
   };
 }

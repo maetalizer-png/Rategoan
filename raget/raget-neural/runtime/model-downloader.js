@@ -124,10 +124,32 @@ export async function downloadConcurrentChunks(options) {
   let earlyFired = false;
   let stopError = null;
   const t0 = Date.now();
+  const samples = [{ t: t0, loaded: 0 }];
+
+  function windowSpeed() {
+    const now = Date.now();
+    samples.push({ t: now, loaded: loaded });
+    const cut = now - 5000;
+    while (samples.length > 2 && samples[0].t < cut) samples.shift();
+    const a = samples[0];
+    const dt = Math.max(0.001, (now - a.t) / 1000);
+    const delta = loaded - a.loaded;
+    if (delta > 0) return delta / dt;
+    return loaded / Math.max(0.001, (now - t0) / 1000);
+  }
+
+  function markChunk(index) {
+    try {
+      if (typeof localStorage === 'undefined') return;
+      const raw = localStorage.getItem('rategoan_chunks_mask') || '';
+      const bits = raw ? raw.split(',') : [];
+      bits[index] = '1';
+      localStorage.setItem('rategoan_chunks_mask', bits.join(','));
+    } catch (e) { /* penyimpanan tidak ada */ }
+  }
 
   function report(index, seal) {
-    const sec = Math.max(0.001, (Date.now() - t0) / 1000);
-    const speed = loaded / sec;
+    const speed = windowSpeed();
     const eta = speed > 0 ? Math.max(0, (size - loaded) / speed) : 0;
     if (onProgress) {
       onProgress({
@@ -169,6 +191,7 @@ export async function downloadConcurrentChunks(options) {
       if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
       await store.put(cacheName, key, bytes);
       networkHits += 1;
+      markChunk(i);
     }
     if (bytes.length > peak) peak = bytes.length;
     loaded += bytes.length;

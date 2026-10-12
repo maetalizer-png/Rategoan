@@ -643,6 +643,20 @@ export const composer = {
       thoughts = plan.steps;
       live.remove();
     }
+    if (!this.thinkActive && !this.researchActive) {
+      thoughts = [
+        { kind: 'EMIT_THOUGHT', text: 'Pemahaman inti pertanyaan' },
+        { kind: 'EMIT_THOUGHT', text: 'Pencocokan fakta kilat' },
+        { kind: 'EMIT_THOUGHT', text: 'Perumusan jawaban padat' },
+      ];
+      if (!livePlan) {
+        livePlan = document.createElement('div');
+        livePlan.className = 'msg ai';
+        $('messages').appendChild(livePlan);
+      }
+      livePlan.innerHTML = '';
+      mountThought(livePlan, thoughts, 'berjalan');
+    }
     const imageNote = att && att.fileText ? fenceUntrusted(att.name, String(att.fileText).slice(0, 4000)) : '';
     const prefDocs = memoryLong.preferenceDocs();
     const prefHit = prefDocs.map((doc) => ({ ...doc, sim: cosineText(text, doc.text) })).sort((a, b) => b.sim - a.sim)[0];

@@ -66,23 +66,89 @@ function buildShell() {
 function encodeBytes(text) {
   const shell = buildShell();
   const raw = new TextEncoder().encode(String(text));
-  const word = new Array(raw.length);
-  for (let i = 0; i < raw.length; i += 1) word[i] = shell.byteToChar[raw[i]];
-  while (word.length > 1) {
-    let best = -1;
-    let bestRank = Infinity;
-    for (let i = 0; i < word.length - 1; i += 1) {
-      const key = word[i] + ' ' + word[i + 1];
-      const got = shell.rank.get(key);
-      if (got != null && got < bestRank) {
-        bestRank = got;
-        best = i;
-      }
-    }
-    if (best < 0) break;
-    word.splice(best, 2, word[best] + word[best + 1]);
+  if (raw.length < 2) {
+    const out = new Array(raw.length);
+    for (let i = 0; i < raw.length; i += 1) out[i] = shell.tokenToId.get(shell.byteToChar[raw[i]]);
+    return out;
   }
-  return word.map((tok) => shell.tokenToId.get(tok));
+  const tok = new Array(raw.length);
+  const prev = new Array(raw.length);
+  const next = new Array(raw.length);
+  const alive = new Array(raw.length);
+  const ver = new Array(raw.length).fill(0);
+  for (let i = 0; i < raw.length; i += 1) {
+    tok[i] = shell.byteToChar[raw[i]];
+    prev[i] = i - 1;
+    next[i] = i + 1 < raw.length ? i + 1 : -1;
+    alive[i] = 1;
+  }
+  const heap = [];
+  function better(a, b) {
+    if (a.rank !== b.rank) return a.rank < b.rank;
+    return a.i < b.i;
+  }
+  function up(n) {
+    while (n > 0) {
+      const p = (n - 1) >> 1;
+      if (!better(heap[n], heap[p])) break;
+      const swap = heap[n];
+      heap[n] = heap[p];
+      heap[p] = swap;
+      n = p;
+    }
+  }
+  function down(n) {
+    for (;;) {
+      let m = n;
+      const l = n * 2 + 1;
+      const r = l + 1;
+      if (l < heap.length && better(heap[l], heap[m])) m = l;
+      if (r < heap.length && better(heap[r], heap[m])) m = r;
+      if (m === n) break;
+      const swap = heap[n];
+      heap[n] = heap[m];
+      heap[m] = swap;
+      n = m;
+    }
+  }
+  function push(i) {
+    if (i < 0 || next[i] < 0 || !alive[i] || !alive[next[i]]) return;
+    const got = shell.rank.get(tok[i] + ' ' + tok[next[i]]);
+    if (got == null) return;
+    ver[i] += 1;
+    heap.push({ rank: got, i: i, v: ver[i] });
+    up(heap.length - 1);
+  }
+  function pop() {
+    if (!heap.length) return null;
+    const top = heap[0];
+    const last = heap.pop();
+    if (heap.length) {
+      heap[0] = last;
+      down(0);
+    }
+    return top;
+  }
+  for (let i = 0; i < raw.length - 1; i += 1) push(i);
+  while (heap.length) {
+    const item = pop();
+    if (!item) break;
+    const i = item.i;
+    const j = next[i];
+    if (j < 0 || !alive[i] || !alive[j] || item.v !== ver[i]) continue;
+    if (shell.rank.get(tok[i] + ' ' + tok[j]) !== item.rank) continue;
+    tok[i] = tok[i] + tok[j];
+    alive[j] = 0;
+    next[i] = next[j];
+    if (next[i] >= 0) prev[next[i]] = i;
+    if (prev[i] >= 0) push(prev[i]);
+    push(i);
+  }
+  const out = [];
+  for (let i = 0; i >= 0; i = next[i]) {
+    if (alive[i]) out.push(shell.tokenToId.get(tok[i]));
+  }
+  return out;
 }
 
 function pieceBytes(shell, token) {

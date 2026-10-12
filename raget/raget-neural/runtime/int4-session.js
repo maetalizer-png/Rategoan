@@ -1,7 +1,6 @@
 import { bpeShell } from '../bpe-shell.js';
 import { LLMSampler } from '../llm-sampler.js';
 import { gemvInt4, planLayerPasses, probeGpu } from './webgpu-runner.js';
-import { onlineAttention } from './flash-decoding.js';
 
 function parseHeader(bytes) {
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
@@ -23,47 +22,14 @@ function asF32(raw) {
   return new Float32Array(copy.buffer);
 }
 
-function dequantRange(packed, scales, zeros, start, count, dest) {
-  for (let k = 0; k < count; k += 1) {
-    const i = start + k;
-    const byte = packed[i >> 1] || 0;
-    const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
-    dest[k] = (q - (zeros[i >> 5] || 0)) * (scales[i >> 5] || 0);
-  }
-}
-
 async function yieldThread() {
+  if (typeof document === 'undefined') return;
   const host = globalThis.scheduler;
   if (host && typeof host.yield === 'function') {
     await host.yield();
     return;
   }
   await new Promise((resolve) => setTimeout(resolve, 0));
-}
-
-async function gemvLive(weight, rows, cols, x, y, signal) {
-  for (let r = 0; r < rows; r += 1) {
-    if ((r & 255) === 0) {
-      if (signal && signal.aborted) return false;
-      await yieldThread();
-    }
-    let acc = 0;
-    const row = r * cols;
-    let c = 0;
-    for (; c + 8 <= cols; c += 8) {
-      acc += weight[row + c] * x[c]
-        + weight[row + c + 1] * x[c + 1]
-        + weight[row + c + 2] * x[c + 2]
-        + weight[row + c + 3] * x[c + 3]
-        + weight[row + c + 4] * x[c + 4]
-        + weight[row + c + 5] * x[c + 5]
-        + weight[row + c + 6] * x[c + 6]
-        + weight[row + c + 7] * x[c + 7];
-    }
-    for (; c < cols; c += 1) acc += weight[row + c] * x[c];
-    y[r] = acc;
-  }
-  return true;
 }
 
 function rmsNorm(x, gamma, y) {
@@ -114,6 +80,33 @@ function locate(parsed, name) {
   };
 }
 
+function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal) {
+  for (let r = 0; r < rows; r += 1) {
+    if ((r & 511) === 0 && signal && signal.aborted) return false;
+    let acc = 0;
+    const rBase = r * cols;
+    let c = 0;
+    for (; c + 8 <= cols; c += 8) {
+      for (let k = 0; k < 8; k += 1) {
+        const i = rBase + c + k;
+        const byte = packed[i >> 1] || 0;
+        const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
+        const blk = i >> 5;
+        acc += (q - (zeros[blk] || 0)) * (scales[blk] || 0) * x[c + k];
+      }
+    }
+    for (; c < cols; c += 1) {
+      const i = rBase + c;
+      const byte = packed[i >> 1] || 0;
+      const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
+      const blk = i >> 5;
+      acc += (q - (zeros[blk] || 0)) * (scales[blk] || 0) * x[c];
+    }
+    y[r] = acc;
+  }
+  return true;
+}
+
 function buildSession(parsed, readBytes) {
   const d = Number(parsed.meta.d_model);
   const layers = Number(parsed.meta.n_layers);
@@ -125,7 +118,6 @@ function buildSession(parsed, readBytes) {
   const headLoc = locate(parsed, 'lm_head.weight');
   const fromTensor = d > 0 ? Math.floor((headLoc.len * 2) / d) : 0;
   const vocab = Math.max(8, fromMeta && fromTensor ? Math.min(fromMeta, fromTensor) : (fromMeta || fromTensor || bpeShell.VOCAB_SIZE));
-  const scratch = new Float32Array(Math.max(ff * d, nHeads * dk * d, 1));
   const small = new Map();
   let usedGpu = false;
 
@@ -152,18 +144,8 @@ function buildSession(parsed, readBytes) {
       usedGpu = true;
       return true;
     }
-    const n = rows * cols;
-    if (cols > 0 && n <= scratch.length) {
-      dequantRange(packed, scales, zeros, 0, n, scratch);
-      return gemvLive(scratch, rows, cols, x, y, signal);
-    }
-    const tile = Math.max(1, Math.floor(scratch.length / Math.max(1, cols)));
-    for (let row0 = 0; row0 < rows; row0 += tile) {
-      const rowsNow = Math.min(tile, rows - row0);
-      dequantRange(packed, scales, zeros, row0 * cols, rowsNow * cols, scratch);
-      if (!await gemvLive(scratch, rowsNow, cols, x, y.subarray(row0, row0 + rowsNow), signal)) return false;
-    }
-    return true;
+    if (signal && signal.aborted) return false;
+    return gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal);
   }
 
   async function embed(id, y) {
@@ -184,40 +166,67 @@ function buildSession(parsed, readBytes) {
     }
   }
 
+  function atKv(vec, index) {
+    if (vec && vec.q) return vec.min + (vec.q[index] + 128) * vec.scale;
+    return vec[index];
+  }
+
+  function packKv(vec) {
+    let min = Infinity;
+    let max = -Infinity;
+    for (let i = 0; i < vec.length; i += 1) {
+      if (vec[i] < min) min = vec[i];
+      if (vec[i] > max) max = vec[i];
+    }
+    if (!Number.isFinite(min)) min = 0;
+    if (!Number.isFinite(max)) max = 0;
+    const scale = (max - min) / 255 || 1;
+    const q = new Int8Array(vec.length);
+    for (let i = 0; i < vec.length; i += 1) {
+      const u = Math.round((vec[i] - min) / scale);
+      q[i] = Math.max(-128, Math.min(127, u - 128));
+    }
+    return { q: q, scale: scale, min: min };
+  }
+
   function attend(q, cache, layer, mixed) {
     const seq = cache[layer].k.length;
     const scale = 1 / Math.sqrt(dk);
     const group = nHeads / nKv;
     for (let head = 0; head < nHeads; head += 1) {
       const kv = Math.floor(head / group);
-      const qh = new Array(dk);
-      for (let j = 0; j < dk; j += 1) qh[j] = q[head * dk + j] * scale;
-      const keys = new Array(seq);
-      const vals = new Array(seq);
+      const base = head * dk;
+      const kBase = kv * dk;
+      let max = -Infinity;
+      let sum = 0;
+      for (let j = 0; j < dk; j += 1) mixed[base + j] = 0;
       for (let s = 0; s < seq; s += 1) {
         const kk = cache[layer].k[s];
         const vv = cache[layer].v[s];
-        const key = new Array(dk);
-        const val = new Array(dk);
-        for (let j = 0; j < dk; j += 1) {
-          key[j] = kk[kv * dk + j];
-          val[j] = vv[kv * dk + j];
-        }
-        keys[s] = key;
-        vals[s] = val;
+        let score = 0;
+        for (let j = 0; j < dk; j += 1) score += q[base + j] * scale * atKv(kk, kBase + j);
+        const next = score > max ? score : max;
+        const alpha = max === -Infinity ? 0 : Math.exp(max - next);
+        const weight = Math.exp(score - next);
+        sum = sum * alpha + weight;
+        for (let j = 0; j < dk; j += 1) mixed[base + j] = mixed[base + j] * alpha + weight * atKv(vv, kBase + j);
+        max = next;
       }
-      const mixedHead = onlineAttention(qh, keys, vals);
-      for (let j = 0; j < dk; j += 1) mixed[head * dk + j] = mixedHead[j];
+      const inv = sum ? 1 / sum : 0;
+      for (let j = 0; j < dk; j += 1) mixed[base + j] *= inv;
     }
   }
 
-  async function step(id, cache, signal, limit) {
+  async function step(id, cache, signal, limit, kvInt8) {
     const x = new Float32Array(d);
     const h = new Float32Array(d);
+    const started = typeof performance !== 'undefined' ? performance.now() : Date.now();
     await embed(id, x);
     const passes = planLayerPasses(limit);
     for (let p = 0; p < passes.length; p += 1) {
       if (signal && signal.aborted) return null;
+      const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
+      if (now - started > 120000) return null;
       const layer = passes[p].layer;
       const prefix = 'layers.' + layer + '.';
       rmsNorm(x, await tensorF32(prefix + 'ln1.gamma'), h);
@@ -227,8 +236,8 @@ function buildSession(parsed, readBytes) {
       if (!await project(prefix + 'attention.Wq', nHeads * dk, d, h, q, signal)) return null;
       if (!await project(prefix + 'attention.Wk', nKv * dk, d, h, k, signal)) return null;
       if (!await project(prefix + 'attention.Wv', nKv * dk, d, h, v, signal)) return null;
-      cache[layer].k.push(k);
-      cache[layer].v.push(v);
+      cache[layer].k.push(kvInt8 ? packKv(k) : k);
+      cache[layer].v.push(kvInt8 ? packKv(v) : v);
       const mixed = new Float32Array(nHeads * dk);
       attend(q, cache, layer, mixed);
       const attn = new Float32Array(d);
@@ -273,7 +282,7 @@ function buildSession(parsed, readBytes) {
       let logits = null;
       for (let i = 0; i < ids.length; i += 1) {
         if (opts.signal && opts.signal.aborted) break;
-        logits = await step(ids[i], cache, opts.signal, limit);
+        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true);
         if (!logits) break;
       }
       const generated = [];

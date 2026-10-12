@@ -22,6 +22,18 @@ import { collectionStore } from '../../raget/raget-memory/collection-store.js';
 import { feedbackStore } from '../../raget/raget-memory/feedback-store.js';
 import { indexPinned } from '../project/pin-index.js';
 
+function pruneHistory(messages, query) {
+  const words = new Set(String(query || '').toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 3));
+  const head = messages.slice(0, 2);
+  const tail = messages.slice(-8);
+  const mid = messages.slice(2, -8).filter((m) => {
+    const t = String((m && m.text) || '').toLowerCase();
+    for (const w of words) if (t.includes(w)) return true;
+    return false;
+  }).slice(-12);
+  return head.concat(mid, tail);
+}
+
 const URL_RE = /https?:\/\/\S+/i;
 let generation = null;
 
@@ -442,7 +454,11 @@ export const chat = {
         body.innerHTML = markdown.render(text.slice(0, i));
         scrollBottom();
         const wait = long ? 16 : 18 + Math.floor(Math.random() * 7);
-        await sleep(wait);
+        if (typeof requestAnimationFrame === 'function') {
+          await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+        } else {
+          await sleep(wait);
+        }
       }
       body.removeEventListener('pointerdown', onTap);
     }
@@ -495,7 +511,7 @@ export const chat = {
     try {
     while (attempt < 2 && reply == null) {
       try {
-        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages, prompt, { modelPrefix: opts && opts.modelPrefix, signal: generation.signal }) : null;
+        reply = hasDirectReply ? opts.directReply : ai ? await ai.generate(s.messages.length > 48 ? pruneHistory(s.messages, prompt) : s.messages, prompt, { modelPrefix: opts && opts.modelPrefix, signal: generation.signal }) : null;
       } catch (error) {
         if (generation && generation.signal.aborted) {
           typing.remove();
@@ -544,6 +560,7 @@ export const chat = {
     const signal = generation ? generation.signal : null;
     try {
       await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts, signal });
+      if (typeof navigator !== 'undefined' && navigator.vibrate) haptics.tap(12);
     } finally {
       document.body.classList.remove('is-generating');
       generation = null;

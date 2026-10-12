@@ -38,6 +38,7 @@ export function createVfs(seed) {
   const rows = Object.create(null);
   function write(path, content) {
     const key = vfsPath(path);
+    if (!rows[key] && Object.keys(rows).length >= 5000) throw new Error('kuota VFS 5000');
     rows[key] = {
       content: String(content == null ? '' : content),
       mime: mimeOf(key),

@@ -189,6 +189,13 @@ const TEMPLATE = `
                 </span>
                 <span class="set-value" id="storage-info">—</span>
               </div>
+              <div class="set-row">
+                <span>Cache model</span>
+                <span class="set-value" id="weight-cache-info">~1 GB</span>
+              </div>
+              <div class="set-row clickable" id="row-purge-weights">
+                <span>Hapus cache bobot</span>
+              </div>
               <div class="set-row clickable" id="row-backup">
                 <span>
                   <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -344,7 +351,7 @@ export const settings = {
     speed.textContent = 'Mode';
     const select = document.createElement('select');
     select.id = 'engine-speed';
-    [['cloud', 'Cepat'], ['neural', 'Mendalam']].forEach((pair) => {
+    [['cloud', 'Raget Cepat [4 Lapis · Instan]'], ['neural', 'Raget Mendalam [28 Lapis · 1.5B]']].forEach((pair) => {
       const opt = document.createElement('option');
       opt.value = pair[0];
       opt.textContent = pair[1];
@@ -703,6 +710,18 @@ export const settings = {
       router.go('chat');
     };
     $('row-backup').onclick = () => backup.export();
+    const purge = $('row-purge-weights');
+    if (purge) purge.onclick = async () => {
+      if (typeof caches !== 'undefined' && caches.keys) {
+        const keys = await caches.keys();
+        await Promise.all(keys.filter((k) => k.indexOf('rategoan-') === 0).map((k) => caches.delete(k)));
+      }
+      try {
+        localStorage.removeItem('rategoan_weights_1_5b_installed');
+        localStorage.removeItem('rategoan_chunks_mask');
+      } catch (e) { /* kosong */ }
+      toast.show('Cache bobot model dihapus dari perangkat ini.');
+    };
     $('row-restore').onclick = () => $('pick-restore').click();
     const vaultExport = $('row-vault-export');
     if (vaultExport) vaultExport.onclick = async () => {
