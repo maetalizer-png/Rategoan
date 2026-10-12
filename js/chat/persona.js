@@ -34,24 +34,24 @@ export function personaLora(id) {
   return { id: pick, rank: 16, gamma: 1, a: a, b: b };
 }
 
-export function mountPersonaSelect(parent, id) {
-  if (!parent || typeof document === 'undefined') return null;
-  const existing = document.getElementById(id);
-  if (existing) return existing;
-  const label = document.createElement('label');
-  label.className = 'model-speed-label';
-  label.textContent = 'Persona';
-  const select = document.createElement('select');
-  select.id = id;
-  PERSONAS.forEach((row) => {
-    const opt = document.createElement('option');
-    opt.value = row.id;
-    opt.textContent = row.label;
-    select.appendChild(opt);
-  });
-  select.value = personaId();
-  select.addEventListener('change', () => setPersona(select.value));
-  label.appendChild(select);
-  parent.appendChild(label);
-  return select;
+export const LORA_MAX_BYTES = 15 * 1024 * 1024;
+
+const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
+
+export const LORA_ASSETS = {
+  koding: { bytes: 10 * 1024 * 1024, url: HF + 'lora-koding-int4.safetensors' },
+  matematika: { bytes: 10 * 1024 * 1024, url: HF + 'lora-matematika-int4.safetensors' },
+};
+
+export async function pullLora(id, fetchImpl) {
+  const spec = LORA_ASSETS[id];
+  if (!spec || spec.bytes > LORA_MAX_BYTES) return null;
+  const fn = fetchImpl || globalThis.fetch;
+  if (typeof fn !== 'function') return null;
+  const res = await fn(spec.url, { headers: { Range: 'bytes=0-' + (spec.bytes - 1) } });
+  if (!res || typeof res.arrayBuffer !== 'function') return null;
+  const raw = new Uint8Array(await res.arrayBuffer());
+  if (raw.byteLength === 0 || raw.byteLength > LORA_MAX_BYTES) return null;
+  const base = personaLora(id);
+  return { id: id, rank: base.rank, bytes: raw.byteLength, a: base.a, b: base.b, gamma: base.gamma };
 }

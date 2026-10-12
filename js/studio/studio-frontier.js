@@ -1,10 +1,11 @@
 export function highlightCode(source, lang) {
   const text = String(source || '');
   const kind = String(lang || 'txt');
-  const escaped = text
-    .replace(/&/g, '&')
-    .replace(/</g, '<')
-    .replace(/>/g, '>');
+  const escaped = text.replace(/[&<>]/g, (ch) => {
+    if (ch === '&') return '&' + 'amp;';
+    if (ch === '<') return '&' + 'lt;';
+    return '&' + 'gt;';
+  });
   let html = escaped;
   if (kind === 'js' || kind === 'javascript') {
     html = escaped.replace(/\b(const|let|function|return|if|else)\b/g, '<span class="tok-key">$1</span>');
@@ -74,6 +75,36 @@ export function buildVirtualImportMap(files, createUrl) {
 
 export function importMapTag(imports) {
   return '<script type="importmap">' + JSON.stringify({ imports: imports || {} }) + '<\/script>';
+}
+
+export function astOutline(source) {
+  const text = String(source || '');
+  const nodes = [];
+  const re = /\bfunction\s+([A-Za-z_$][\w$]*)|\bclass\s+([A-Za-z_$][\w$]*)/g;
+  let match = re.exec(text);
+  while (match) {
+    nodes.push(match[1] || match[2]);
+    match = re.exec(text);
+  }
+  return nodes;
+}
+
+export function streamCode(state, token) {
+  const previous = state && state.text ? state.text : '';
+  const next = previous + String(token || '');
+  return {
+    text: next,
+    plan: morphPlan(previous, next),
+    outline: astOutline(next),
+    blanked: false,
+  };
+}
+
+export function paintStream(manual, highlight, state) {
+  if (!manual || !state) return state;
+  if (manual.value !== state.text) manual.value = state.text;
+  if (highlight) highlight.innerHTML = highlightCode(state.text, 'js').html;
+  return state;
 }
 
 export function quotaAllows(freeBytes, needBytes) {

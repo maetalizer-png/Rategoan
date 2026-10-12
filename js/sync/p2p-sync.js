@@ -1,4 +1,5 @@
 import { getWebCrypto } from '../crypto/get-web-crypto.js';
+import { encode as encodeQr } from './qr-encoder.js';
 
 const mesh = { peers: 0, saved: 0 };
 
@@ -89,4 +90,140 @@ export function createPeerLink(id) {
       return sealProject(key, project);
     },
   };
+}
+
+const MESH_NAME = 'rategoan-mesh-sync';
+const meshIndex = new Set();
+const meshBytes = new Map();
+let meshBus = null;
+
+export function openMeshBus() {
+  if (meshBus) return meshBus;
+  if (typeof BroadcastChannel !== 'function') return null;
+  meshBus = new BroadcastChannel(MESH_NAME);
+  meshBus.onmessage = (event) => {
+    const msg = event.data || {};
+    if (msg.kind !== 'model-chunk') return;
+    meshIndex.add(msg.index);
+    if (msg.payload) meshBytes.set(msg.index, msg.payload);
+    noteMeshSaved(msg.bytes);
+  };
+  return meshBus;
+}
+
+export function publishMeshChunk(index, bytes) {
+  const key = Math.max(0, Math.floor(Number(index) || 0));
+  const len = bytes ? (bytes.byteLength || bytes.length || 0) : 0;
+  meshIndex.add(key);
+  if (bytes) meshBytes.set(key, bytes);
+  const channel = openMeshBus();
+  if (channel) channel.postMessage({ kind: 'model-chunk', index: key, bytes: len, payload: bytes || null });
+  noteMeshSaved(len);
+  return { ok: true, local: true, index: key, bytes: len, channel: MESH_NAME };
+}
+
+export function closeMeshBus() {
+  if (!meshBus) return;
+  meshBus.close();
+  meshBus = null;
+}
+
+export function meshHasChunk(index) {
+  return meshIndex.has(Math.max(0, Math.floor(Number(index) || 0)));
+}
+
+export function takeMeshChunk(index) {
+  const key = Math.max(0, Math.floor(Number(index) || 0));
+  const hit = meshBytes.get(key) || null;
+  if (hit) meshBytes.delete(key);
+  return hit;
+}
+
+export function encodeSdp(desc) {
+  const body = JSON.stringify({ type: desc && desc.type, sdp: desc && desc.sdp });
+  return btoa(unescape(encodeURIComponent(body)));
+}
+
+export function decodeSdp(text) {
+  const body = decodeURIComponent(escape(atob(String(text || '').replace(/\s+/g, ''))));
+  const obj = JSON.parse(body);
+  if (!obj || (obj.type !== 'offer' && obj.type !== 'answer') || typeof obj.sdp !== 'string') {
+    throw new Error('sdp');
+  }
+  return obj;
+}
+
+export function sdpQr(text) {
+  const payload = String(text || '').slice(0, 1800);
+  return encodeQr(payload, { border: 1 }).data;
+}
+
+export function paintSdpQr(canvas, text) {
+  if (!canvas || typeof canvas.getContext !== 'function') return false;
+  const modules = sdpQr(text);
+  const n = modules.length;
+  const scale = 3;
+  canvas.width = n * scale;
+  canvas.height = n * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#111111';
+  for (let y = 0; y < n; y += 1) {
+    for (let x = 0; x < n; x += 1) {
+      if (modules[y][x]) ctx.fillRect(x * scale, y * scale, scale, scale);
+    }
+  }
+  return true;
+}
+
+export function mountMeshPanel(parent) {
+  if (!parent || typeof document === 'undefined' || document.getElementById('btn-mesh-sdp')) return;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.id = 'btn-mesh-sdp';
+  btn.className = 'mesh-sync-btn';
+  btn.textContent = 'Tukar SDP';
+  const box = document.createElement('div');
+  box.id = 'mesh-sdp-box';
+  box.hidden = true;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'mesh-sdp-qr';
+  const area = document.createElement('textarea');
+  area.id = 'mesh-sdp-text';
+  area.rows = 4;
+  const copy = document.createElement('button');
+  copy.type = 'button';
+  copy.id = 'btn-mesh-copy';
+  copy.textContent = 'Salin teks';
+  const apply = document.createElement('button');
+  apply.type = 'button';
+  apply.id = 'btn-mesh-apply';
+  apply.textContent = 'Impor SDP';
+  box.append(canvas, area, copy, apply);
+  btn.addEventListener('click', async () => {
+    box.hidden = false;
+    const opened = await createPeerLink('perangkat').open({ iceServers: [] });
+    if (!opened || !opened.ok || !opened.local) {
+      area.value = '';
+      return;
+    }
+    const packed = encodeSdp(opened.local);
+    area.value = packed;
+    try { paintSdpQr(canvas, packed); } catch (e) { /* teks tetap sumber impor */ }
+    copy.onclick = () => {
+      const clip = navigator.clipboard;
+      if (clip && clip.writeText) clip.writeText(packed).catch(() => area.select());
+      else area.select();
+    };
+  });
+  apply.addEventListener('click', () => {
+    try {
+      const desc = decodeSdp(area.value);
+      box.dataset.sdpType = desc.type;
+    } catch (e) {
+      box.dataset.sdpType = '';
+    }
+  });
+  parent.append(btn, box);
 }

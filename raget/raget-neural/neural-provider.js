@@ -1,13 +1,14 @@
 
-import { personaLora } from '../../js/chat/persona.js';
+import { personaLora, pullLora } from '../../js/chat/persona.js';
 import { llmMode } from '../../js/state/llm-mode.js';
+import { hudBudget } from '../../js/studio/telemetry.js';
 import { llmEngine } from '../raget-deterministic/llm-engine.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
 import { openInt4Stream } from './runtime/int4-session.js';
 import {
   WEIGHT_ROOM,
   WEIGHT_SPEC,
-  EARLY_READY_BYTES,
+  EARLY_PROGRESS_BYTES,
   downloadConcurrentChunks,
   createRangeReader,
   openCacheStore,
@@ -48,6 +49,7 @@ const control = { paused: false, cancelled: false };
 let worker = null;
 let workerJob = 0;
 let earlyFlag = false;
+const earlyWaiters = [];
 let bootPromise = null;
 const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
 const PARTS_KEY = 'rategoan_weights_1_5b_parts';
@@ -155,39 +157,60 @@ async function doInitTier(tier) {
       store: store,
       control: control,
       concurrency: 1,
+      mesh: typeof window !== 'undefined',
       roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
-      earlyBytes: tier === 'tier_1_5b' ? EARLY_READY_BYTES : 0,
+      earlyBytes: tier === 'tier_1_5b' ? EARLY_PROGRESS_BYTES : 0,
       onEarlyReady: () => {
-        earlyFlag = true;
+        markEarly(tier);
       },
       onProgress: (detail) => reportProgress(Object.assign({ tier: tier }, detail)),
     });
     if (packed.bytesHeld !== 0) throw new Error('buffer monolitik tidak boleh dibuat');
-    loadedTier = tier;
-    earlyFlag = true;
+    markEarly(tier);
     sealInstalled(packed.parts);
     reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts, source: 'cache', early: false });
     return true;
   } catch (e) {
     lastWeightError = e && e.message ? String(e.message) : 'gagal';
-    earlyFlag = false;
-    session = null;
-    if (loadedTier === tier) {
-      loadedTier = null;
-      weightReader = null;
+    if (!earlyFlag) {
+      session = null;
+      if (loadedTier === tier) {
+        loadedTier = null;
+        weightReader = null;
+      }
+      failEarly();
+      return false;
     }
-    return false;
+    return true;
   }
 }
 
+function markEarly(tier) {
+  earlyFlag = true;
+  loadedTier = tier;
+  const list = earlyWaiters.splice(0);
+  list.forEach((fn) => fn(true));
+}
+
+function failEarly() {
+  const list = earlyWaiters.splice(0);
+  list.forEach((fn) => fn(false));
+}
+
+function untilEarly() {
+  if (earlyFlag && weightReader) return Promise.resolve(true);
+  return new Promise((resolve) => earlyWaiters.push(resolve));
+}
+
 function ensureTier(tier) {
-  if (loadedTier === tier && !control.cancelled) return Promise.resolve(true);
+  if (earlyFlag && weightReader && loadedTier === tier && !control.cancelled) return Promise.resolve(true);
   if (!initPromises[tier]) {
     initPromises[tier] = doInitTier(tier).finally(() => {
       initPromises[tier] = null;
     });
   }
-  return initPromises[tier];
+  const pending = initPromises[tier];
+  return Promise.race([untilEarly(), pending]);
 }
 
 function prefetchBest() {
@@ -270,11 +293,18 @@ async function generateWithTier(tier, prompt, options) {
     if (!ok || !weightReader) return null;
   }
   const signal = options && options.signal;
+  let lora = personaLora();
+  if (lora) {
+    try {
+      const packed = await pullLora(lora.id);
+      if (packed) lora = packed;
+    } catch (e) { /* adapter di memori tetap dipakai */ }
+  }
   const genOpts = {
-    maxNewTokens: mode === 'mendalam' ? 96 : 32,
+    maxNewTokens: mode === 'mendalam' ? hudBudget() : 32,
     maxLayers: mode === 'mendalam' ? 0 : 4,
     draft: false,
-    lora: personaLora(),
+    lora: lora,
     temperature: 0.7,
     topK: 40,
     topP: 0.9,

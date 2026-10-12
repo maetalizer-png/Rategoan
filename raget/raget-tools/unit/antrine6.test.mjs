@@ -40,7 +40,8 @@ test('detik nol hanya meminta partisi yang sedang ditarik', async () => {
   assert.ok(before.length <= 4, 'banjir ' + before.length);
   assert.ok(before.some((row) => row.header.startsWith('bytes=0-')));
   assert.match(read('raget/raget-neural/runtime/model-downloader.js'), /primed\.delete\(i\)/);
-  assert.match(read('raget/raget-neural/runtime/model-downloader.js'), /createSyncAccessHandle/);
+  assert.match(read('raget/raget-neural/runtime/opfs-writer-worker.js'), /createSyncAccessHandle/);
+  assert.match(read('raget/raget-neural/runtime/model-downloader.js'), /opfs-writer-worker/);
 });
 
 test('hening 600 milidetik, persona, mesh, dan crypto universal', async () => {

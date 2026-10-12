@@ -1,6 +1,5 @@
 import { $ } from '../../shared/dom.js';
-import { meshSnapshot } from '../sync/p2p-sync.js';
-import { mountPersonaSelect } from '../chat/persona.js';
+import { meshSnapshot, mountMeshPanel } from '../sync/p2p-sync.js';
 import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
@@ -361,7 +360,7 @@ export const settings = {
     });
     speed.appendChild(select);
     card.appendChild(speed);
-    mountPersonaSelect(card, 'persona-select-settings');
+    mountMeshPanel(card);
     const mesh = document.createElement('div');
     mesh.id = 'mesh-status';
     mesh.className = 'model-note';

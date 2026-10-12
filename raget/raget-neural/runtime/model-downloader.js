@@ -1,3 +1,5 @@
+import { meshHasChunk, publishMeshChunk, takeMeshChunk } from '../../../js/sync/p2p-sync.js';
+
 export const MODEL_CACHE = 'rategoan-model-cache';
 export const NEURAL_CACHE = 'rategoan-neural-cache';
 export const MODEL_CHUNK = 20 * 1024 * 1024;
@@ -138,7 +140,48 @@ export async function downloadConcurrentChunks(options) {
   let stopError = null;
   const t0 = Date.now();
   const samples = [{ t: t0, loaded: 0 }];
+  const mesh = options && options.mesh === true;
   const primed = new Map();
+  let opfsPort = null;
+  let opfsSeq = 0;
+
+  function opfsWorker() {
+    if (opfsPort) return opfsPort;
+    if (typeof Worker !== 'function') return null;
+    try {
+      opfsPort = new Worker(new URL('./opfs-writer-worker.js', import.meta.url));
+    } catch (e) {
+      opfsPort = null;
+    }
+    return opfsPort;
+  }
+
+  function mirrorOpfs(offset, bytes) {
+    const port = opfsWorker();
+    if (!port || !bytes) return Promise.resolve();
+    const id = opfsSeq + 1;
+    opfsSeq = id;
+    const copy = bytes.slice();
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        port.removeEventListener('message', onMsg);
+        resolve();
+      }, 4000);
+      function onMsg(event) {
+        if (!event.data || event.data.id !== id) return;
+        clearTimeout(timer);
+        port.removeEventListener('message', onMsg);
+        resolve();
+      }
+      port.addEventListener('message', onMsg);
+      try {
+        port.postMessage({ op: 'write', id: id, offset: offset, bytes: copy });
+      } catch (e) {
+        clearTimeout(timer);
+        resolve();
+      }
+    });
+  }
 
   function prime(i) {
     if (i < 0 || i >= ranges.length) return null;
@@ -149,6 +192,10 @@ export async function downloadConcurrentChunks(options) {
     const job = (async () => {
       const cached = await store.get(cacheName, key);
       if (cached) return { bytes: cached, fromCache: true, key, expect };
+      if (mesh && meshHasChunk(i)) {
+        const shared = takeMeshChunk(i);
+        if (shared && shared.length === expect) return { bytes: shared, fromCache: true, key, expect };
+      }
       const res = await fetchImpl(url, { headers: { Range: 'bytes=' + range.start + '-' + range.end } });
       if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
         throw new Error('HTTP ' + res.status);
@@ -212,17 +259,8 @@ export async function downloadConcurrentChunks(options) {
     if (onEarlyReady) onEarlyReady({ parts: earlyAt + 1, bytes: ranges[earlyAt].end + 1 });
   }
 
-  async function mirrorOpfs(offset, bytes) {
-    const nav = globalThis.navigator;
-    if (!bytes || !nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return;
-    try {
-      const root = await nav.storage.getDirectory();
-      const handle = await root.getFileHandle('raget-neural-1.5b.safetensors', { create: true });
-      const sync = await handle.createSyncAccessHandle();
-      sync.write(bytes, { at: offset });
-      sync.flush();
-      sync.close();
-    } catch (e) { /* Cache API tetap sumber bila OPFS ditolak */ }
+  async function mirrorToWorker(offset, bytes) {
+    await mirrorOpfs(offset, bytes);
   }
 
   async function pull(i) {
@@ -234,7 +272,8 @@ export async function downloadConcurrentChunks(options) {
       const writing = store.put(cacheName, got.key, got.bytes);
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
       await writing;
-      await mirrorOpfs(range.start, got.bytes);
+      if (mesh) publishMeshChunk(i, got.bytes);
+      await mirrorToWorker(range.start, got.bytes);
       networkHits += 1;
       markChunk(i);
     } else if (ahead < ranges.length && primed.size < 4) {
@@ -243,12 +282,11 @@ export async function downloadConcurrentChunks(options) {
     const held = got.bytes ? got.bytes.length : 0;
     if (held > peak) peak = held;
     loaded += held;
-    const seal = !got.bytes || got.fromCache ? '' : await digestSha256(got.bytes);
     primed.delete(i);
     got.bytes = null;
     done[i] = true;
     checkEarly();
-    report(i, seal);
+    report(i, '');
     if (range.end < range.start) throw new Error('rentang kosong');
   }
 

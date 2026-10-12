@@ -2,6 +2,7 @@ import { memoryStore, MODEL_CACHE, MODEL_CHUNK, downloadConcurrentChunks as fetc
 
 export const WEIGHT_ROOM = Math.floor(1.5 * 1024 * 1024 * 1024);
 export const EARLY_READY_BYTES = 233706880;
+export const EARLY_PROGRESS_BYTES = 80 * 1024 * 1024;
 export const RANGE_SLOTS = 4;
 export const DOWNLOAD_STREAMS = 4;
 export const WEIGHT_SPEC = Object.freeze({
@@ -75,6 +76,12 @@ export async function downloadWeightChunks(options) {
   return downloadConcurrentChunks(options);
 }
 
+export function readSyncBlock(sync, offset, length) {
+  const buf = new Uint8Array(length);
+  const n = sync.read(buf, { at: offset });
+  return n === length ? buf : buf.subarray(0, Math.max(0, n));
+}
+
 export async function openSyncWeight(name) {
   const nav = globalThis.navigator;
   if (!nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return null;
@@ -85,9 +92,7 @@ export async function openSyncWeight(name) {
     return {
       size: sync.getSize(),
       read(offset, length) {
-        const buf = new Uint8Array(length);
-        const n = sync.read(buf, { at: offset });
-        return n === length ? buf : buf.subarray(0, Math.max(0, n));
+        return readSyncBlock(sync, offset, length);
       },
       close() { sync.close(); },
     };

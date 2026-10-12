@@ -2,7 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { toast } from '../core/toast.js';
 import { composer } from './composer.js';
 import { idbGateway } from '../../shared/idb-gateway.js';
-import { mountEnergyVad, voiceActive, silenceElapsed } from '../voice/energy-vad.js';
+import { mountEnergyVad } from '../voice/energy-vad.js';
 
 export const voice = {
   listening: false,
@@ -41,7 +41,6 @@ export const voice = {
       try {
         const ctx = new AudioCtx();
         this._vad = mountEnergyVad(ctx);
-        this._vadActive = voiceActive;
       } catch (e) { this._vad = null; }
     }
     if (!SR) {
@@ -112,30 +111,27 @@ export const voice = {
     const media = navigator.mediaDevices;
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (!media || typeof media.getUserMedia !== 'function' || !AudioCtx) return;
-    media.getUserMedia({ audio: true }).then((stream) => {
+    media.getUserMedia({ audio: true }).then(async (stream) => {
       const ctx = new AudioCtx();
       const source = ctx.createMediaStreamSource(stream);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 1024;
-      source.connect(analyser);
-      const buf = new Float32Array(analyser.fftSize);
-      let lastVoice = 0;
-      let heard = false;
-      this._micTimer = setInterval(() => {
-        analyser.getFloatTimeDomainData(buf);
-        const now = performance.now();
-        if (voiceActive(buf)) {
-          heard = true;
-          lastVoice = now;
-          return;
-        }
-        if (heard && silenceElapsed(lastVoice, now)) {
-          clearInterval(this._micTimer);
-          stream.getTracks().forEach((track) => track.stop());
-          try { ctx.close(); } catch (e) { /* konteks sudah tutup */ }
-          try { this.rec && this.rec.stop(); } catch (e) { /* pengenal sudah berhenti */ }
-        }
-      }, 100);
+      const vad = await mountEnergyVad(ctx);
+      if (!vad.ok || !vad.node) {
+        stream.getTracks().forEach((track) => track.stop());
+        try { ctx.close(); } catch (e) { /* konteks ditolak */ }
+        return;
+      }
+      const mute = ctx.createGain();
+      mute.gain.value = 0;
+      source.connect(vad.node);
+      vad.node.connect(mute);
+      mute.connect(ctx.destination);
+      vad.node.port.onmessage = (event) => {
+        const data = event.data || {};
+        if (data.voice !== false || Number(data.duration) < 600) return;
+        stream.getTracks().forEach((track) => track.stop());
+        try { ctx.close(); } catch (e) { /* konteks sudah tutup */ }
+        try { this.rec && this.rec.stop(); } catch (e) { /* pengenal sudah berhenti */ }
+      };
     }).catch(() => {});
   },
   meetingText: '',

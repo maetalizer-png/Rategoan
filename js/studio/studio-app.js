@@ -3,7 +3,7 @@ import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
 import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop } from './studio-agent.js';
-import { recordTelemetry } from './telemetry.js';
+import { recordTelemetry, noteDecode, noteVram, paintStudioHud } from './telemetry.js';
 import { positionDesktopPopover, clearDesktopPopover } from '../../shared/popover.js';
 import { healSyntax } from './ast-heal.js';
 import { synthesizeCode } from './neural-synthesizer.js';
@@ -17,7 +17,7 @@ import { folderBridge } from '../project/folder-bridge.js';
 import { reduceStream, chooseDoor, routeDoor, failoverStream, resumeCursor } from './sse-door.js';
 import { backupToDrive } from './drive-backup.js';
 import { mountNamespace } from '../core/namespace.js';
-import { mountStudioFrontier } from './studio-frontier.js';
+import { mountStudioFrontier, streamCode, paintStream } from './studio-frontier.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -149,6 +149,7 @@ function paintTelemetry(status, ms, meta) {
   if (runtime && shown) runtime.textContent = shown;
   const pill = $('runtime-pill');
   if (pill && shown) pill.textContent = shown;
+  paintStudioHud(document, { tempC: 36 });
   recordTelemetry(projectKey(), { ms: Number(ms) || 0, ok: true, kind: 'render' });
 }
 
@@ -570,8 +571,25 @@ async function applyCraft(text) {
     runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
     Object.keys(plan.files).forEach((path) => {
-      vfs.write(path, plan.files[path]);
-      git.stage(path, plan.files[path]);
+      const body = plan.files[path];
+      if (/\.js$/i.test(path)) {
+        const manual = $('code-manual');
+        const highlight = $('code-highlight');
+        const wrap = $('editor-manual');
+        if (wrap) wrap.hidden = false;
+        let state = { text: '' };
+        const step = 48;
+        for (let i = 0; i < body.length; i += step) {
+          state = streamCode(state, body.slice(i, i + step));
+          if (manual && state.blanked) continue;
+          paintStream(manual, highlight, state);
+        }
+        noteDecode(Math.max(1, Math.ceil(body.length / step)), 240);
+        noteVram(body.length);
+        paintStudioHud(document, { tempC: 36 });
+      }
+      vfs.write(path, body);
+      git.stage(path, body);
     });
     let verify = 'Berkas ditulis';
     let rolled = false;

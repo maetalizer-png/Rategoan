@@ -432,13 +432,29 @@ function bindWeightCard() {
       enginePreference.set('cloud');
       window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'cloud' } }));
     };
-    try { await neuralProvider.bootWeights(); } catch (e) { /* kartu tetap tampil */ }
-    if (neuralProvider.ready()) {
-      card.hidden = true;
-      return;
+    const syncCard = () => {
+      const mendalam = enginePreference.get() === 'neural';
+      if (!mendalam || neuralProvider.ready() || neuralProvider.cepatReady()) {
+        card.hidden = true;
+        return;
+      }
+      card.hidden = false;
+    };
+    window.addEventListener('rategoan:model-switched', () => {
+      syncCard();
+      if (enginePreference.get() === 'neural') neuralProvider.bootWeights().then(syncCard).catch(() => {});
+    });
+    window.addEventListener('rategoan:neural-progress', (event) => {
+      if (event && event.detail && event.detail.early) card.hidden = true;
+    });
+    syncCard();
+    if (enginePreference.get() === 'neural') {
+      try { await neuralProvider.bootWeights(); } catch (e) { /* kartu tetap tampil */ }
+      syncCard();
     }
-    card.hidden = false;
-    if (status) status.textContent = 'Bobot belum di perangkat.';
+    if (!card.hidden) {
+      if (status) status.textContent = 'Bobot belum di perangkat.';
+    }
     if (pauseBtn) pauseBtn.onclick = () => {
       if (neuralProvider.weightPaused()) {
         neuralProvider.resumeWeights();
