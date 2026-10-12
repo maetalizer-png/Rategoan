@@ -1,6 +1,6 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-10-11.
+Diperbarui: 2026-10-12.
 
 Spesifikasi yang berlaku: `docs/PRD-RELEASE.md` (dokumen Drive, 4 Oktober 2026). Salinan yang sama ada di Release tag `prd-data-release`, aset `PRD-RELEASE.md`.
 
@@ -21,6 +21,12 @@ K2 2717091 dok / 434724058 BPE.
 K3 81288308 dok / 15011217697 BPE.
 K4 ada di rak yang sama, belum masuk lantai BPE di atas. Audio tidak diubah.
 
-Rak R dan penampungan English masih kosong. Mentah Inggris (PubMed, peS2o, StackExchange, Cosmopedia) tinggal di `data-baru-English`. Belum disaring, jadi belum naik.
+Penampungan adalah calon, bukan rak. BPE calon belum dihitung. Angka di bawah adalah berkas yang sudah ada di tag rilis pada 2026-10-12.
+
+`penampungan-Indonesian`: K1 4 berkas / 2939166211 byte, K2 2 berkas / 2281383426 byte, K3 5 berkas / 2714515597 byte, K4 1 berkas / 167485879 byte. `K3-calon-pelengkap-part5.jsonl.gz` 420054189 byte, 309600 dok, SHA-256 `010b63642cee8e908c06f67d0a9e6a31442c02814df2472dab85c20e681aa513`.
+
+`penampungan-English`: R1 21 berkas / 11426267803 byte / 9173600 dok di `manifest.json`. Dua berkas lama `textbook-en-part01.jsonl.gz` dan `textbook-en-part02.jsonl.gz` tetap di tag yang sama, bukan nama kanonik `R1-calon-`. R2, R3, dan R4 belum punya partisi penuh.
+
+Saringan calon masih berjalan dari mentah. Ekor di bawah 400MB belum masuk angka di atas. Rak R final masih kosong.
 
 Tag korpus lama (`korpus-*-bersih`, `penampung`, `data-baru`, `data-baru-20261002`) dipensiunkan setelah asetnya pindah. Jangan dipakai training.
