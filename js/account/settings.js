@@ -360,15 +360,37 @@ export const settings = {
     });
     speed.appendChild(select);
     card.appendChild(speed);
-    mountMeshPanel(card);
+    const weightNote = document.createElement('p');
+    weightNote.id = 'model-weight-note';
+    weightNote.className = 'model-note';
+    weightNote.textContent = 'Mode Cepat: Siap pakai (Respons instan, nol unduhan). Mode Mendalam: Membutuhkan bobot offline (1.0 GB).';
+    const downloadWeight = document.createElement('button');
+    downloadWeight.type = 'button';
+    downloadWeight.id = 'btn-unduh-mendalam';
+    downloadWeight.textContent = 'Unduh Bobot Mode Mendalam (1.0 GB)';
+    downloadWeight.onclick = () => {
+      import('../../raget/raget-neural/neural-provider.js').then((mod) => {
+        toast.show('Unduhan Mode Mendalam dimulai');
+        mod.neuralProvider.loadWeights();
+      }).catch(() => toast.show('Unduhan Mode Mendalam gagal dimulai'));
+    };
+    card.appendChild(weightNote);
+    card.appendChild(downloadWeight);
+    hub.appendChild(card);
+    const meshCard = document.createElement('div');
+    meshCard.id = 'mesh-sync-card';
+    meshCard.className = 'model-solo';
+    const meshTitle = document.createElement('strong');
+    meshTitle.textContent = 'Sinkronisasi Perangkat Lokal (P2P Mesh)';
+    meshCard.appendChild(meshTitle);
+    mountMeshPanel(meshCard);
     const mesh = document.createElement('div');
     mesh.id = 'mesh-status';
     mesh.className = 'model-note';
     const snap = meshSnapshot();
     const meshLabel = snap.status === 'aktif' ? 'Aktif' : 'Mencari Teman Lokal';
     mesh.textContent = 'Rategoan Mesh P2P · Status: ' + meshLabel + ' · Peer Terhubung: ' + snap.peers + ' · Kuota Dihemat: ' + snap.saved;
-    card.appendChild(mesh);
-    hub.appendChild(card);
+    meshCard.appendChild(mesh);
     select.onchange = () => {
       const pick = select.value;
       llmMode.setMode('lokal');
@@ -384,6 +406,7 @@ export const settings = {
     paintHub();
     window.addEventListener('rategoan:model-switched', paintHub);
     aiSection.appendChild(hub);
+    aiSection.appendChild(meshCard);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);

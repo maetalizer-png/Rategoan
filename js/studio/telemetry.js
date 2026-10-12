@@ -76,7 +76,11 @@ export function hudBudget(sample) {
 
 export function paintStudioHud(root, sample) {
   const row = sampleHud(sample);
-  const box = root && root.querySelector ? root.querySelector('#studio-hud') : null;
+  const scope = root && root.querySelector ? root : (typeof document !== 'undefined' ? document : null);
+  if (!scope || typeof scope.querySelector !== 'function') return row;
+  const tab = scope.querySelector('#tab-logs');
+  if (tab && !tab.classList.contains('active')) return row;
+  const box = scope.querySelector('#studio-hud');
   const host = box || (typeof document !== 'undefined' ? document.getElementById('studio-hud') : null);
   if (!host) return row;
   const tps = host.querySelector('#hud-tps');

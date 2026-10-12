@@ -4,8 +4,7 @@ export const enginePreference = {
   KEY,
   get() {
     const saved = localStorage.getItem(KEY);
-    if (saved === 'neural') return 'neural';
-    return 'cloud';
+    return saved === 'neural' ? 'neural' : 'cloud';
   },
   set(pref) {
     const next = pref === 'cloud' ? 'cloud' : 'neural';

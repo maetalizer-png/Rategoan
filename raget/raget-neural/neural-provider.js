@@ -286,12 +286,12 @@ async function generateWithTier(tier, prompt, options) {
     if (remote) return remote;
   }
   const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
-  const partial = mode === 'cepat' && earlyFlag && weightReader && loadedTier !== tier;
-  if (!partial) {
+  if (!(earlyFlag && weightReader && loadedTier === tier)) {
     if (loadedTier !== tier && !initPromises[tier]) return null;
     const ok = await ensureTier(tier);
     if (!ok || !weightReader) return null;
   }
+  const progressive = !!(earlyFlag && weightReader && !installedFlag());
   const signal = options && options.signal;
   let lora = personaLora();
   if (lora) {
@@ -301,8 +301,8 @@ async function generateWithTier(tier, prompt, options) {
     } catch (e) { /* adapter di memori tetap dipakai */ }
   }
   const genOpts = {
-    maxNewTokens: mode === 'mendalam' ? hudBudget() : 32,
-    maxLayers: mode === 'mendalam' ? 0 : 4,
+    maxNewTokens: mode === 'mendalam' && !progressive ? hudBudget() : 32,
+    maxLayers: mode === 'mendalam' && !progressive ? 0 : 4,
     draft: false,
     lora: lora,
     temperature: 0.7,
@@ -458,9 +458,29 @@ async function answerIndonesia() {
   return 'Indonesia beribu kota di Jakarta. Penduduknya sekitar 282 juta jiwa, dengan 38 provinsi, 416 kabupaten, dan 98 kota.';
 }
 
+async function answerFast(prompt, options) {
+  const text = String(prompt || '').trim();
+  if (/^hallo+[\s!.]*$/i.test(text)) return 'Halo! Ada yang bisa saya bantu?';
+  if (/indonesia/i.test(text)) {
+    const fact = await answerIndonesia();
+    if (fact) return fact;
+  }
+  const greeted = llmEngine.tryGreeting(text, {});
+  if (greeted) return greeted;
+  const daily = llmEngine.tryDailyTalk(text, {});
+  if (daily) return daily;
+  const neural = await generateCompact(prompt, options);
+  if (neural && !replyBroken(neural)) return neural;
+  return retrieveFact(text);
+}
+
 async function generate(messages, prompt, options) {
   const mode = options && options.mode;
-  if (mode === 'cepat' || mode === 'mendalam') {
+  if (mode === 'cepat') {
+    if (options.signal && options.signal.aborted) return null;
+    return answerFast(prompt, options);
+  }
+  if (mode === 'mendalam') {
     if (options.signal && options.signal.aborted) return null;
     return generateLocal(prompt, options);
   }

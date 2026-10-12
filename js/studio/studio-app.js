@@ -61,6 +61,7 @@ function showTab(name) {
     btn.setAttribute('aria-selected', on ? 'true' : 'false');
   });
   document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.id === 'tab-' + name));
+  if (name === 'logs') paintStudioHud(document, { tempC: 36 });
 }
 
 let userClosedCanvas = false;
@@ -149,7 +150,8 @@ function paintTelemetry(status, ms, meta) {
   if (runtime && shown) runtime.textContent = shown;
   const pill = $('runtime-pill');
   if (pill && shown) pill.textContent = shown;
-  paintStudioHud(document, { tempC: 36 });
+  const logs = document.getElementById('tab-logs');
+  if (logs && logs.classList.contains('active')) paintStudioHud(document, { tempC: 36 });
   recordTelemetry(projectKey(), { ms: Number(ms) || 0, ok: true, kind: 'render' });
 }
 
@@ -1320,6 +1322,7 @@ function bind() {
       const on = document.body.dataset.inspect !== '1';
       document.body.dataset.inspect = on ? '1' : '0';
       inspect.setAttribute('aria-pressed', on ? 'true' : 'false');
+      inspect.classList.toggle('is-on', on);
     };
   }
   mountStudioFrontier({

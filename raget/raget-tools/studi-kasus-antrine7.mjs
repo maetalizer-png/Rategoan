@@ -75,17 +75,29 @@ await studio.addInitScript(() => {
   } catch (e) { /* bingkai terkunci */ }
 });
 await studio.goto(base + '/studio.html', { waitUntil: 'domcontentloaded' });
-await studio.waitForSelector('#studio-hud', { timeout: 15000 });
+await studio.waitForSelector('#studio-app', { timeout: 15000 });
+await studio.evaluate(() => {
+  const app = document.getElementById('studio-app');
+  app.classList.remove('is-canvas-hidden');
+  app.classList.add('is-split');
+});
+await studio.click('[data-tab="logs"]');
+await studio.waitForSelector('#tab-logs.active #studio-hud', { timeout: 15000 });
 const hud = await studio.evaluate(() => {
   const box = document.getElementById('studio-hud');
+  const input = document.getElementById('chat-input');
   const style = box ? getComputedStyle(box) : null;
+  const a = box ? box.getBoundingClientRect() : { top: 0, bottom: 0, left: 0, right: 0 };
+  const b = input ? input.getBoundingClientRect() : { top: 0, bottom: 0, left: 0, right: 0 };
+  const overlap = a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom;
   return {
     text: box ? box.innerText.replace(/\s+/g, ' ') : '',
-    bottom: style ? style.bottom : '',
+    position: style ? style.position : '',
+    overlap,
   };
 });
-note(hud.text.includes('Decode') && hud.text.includes('VRAM'), 'hud studio', hud.text);
-note(hud.bottom === '12px', 'hud pojok bawah', hud.bottom);
+note(hud.text.includes('Decode') && hud.text.includes('VRAM'), 'hud di tab log', hud.text);
+note(hud.position !== 'fixed' && !hud.overlap, 'hud tidak menutup kotak ketik', hud.position);
 await studio.screenshot({ path: outDir + '/antrine7-studio.png' });
 note(errors.length === 0, 'konsol tanpa galat', errors.join(' | ') || 'bersih');
 const failed = findings.filter((row) => !row.ok);

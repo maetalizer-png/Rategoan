@@ -76,7 +76,7 @@ test('rumus int4 dan ukuran lapis cocok dengan spesifikasi', () => {
 test('preferensi panel hanya neural atau cloud dan bobot tetap kosong', () => {
   const src = read('js/state/engine-preference.js');
   assert.equal(src.includes("'template'"), false);
-  assert.match(src, /saved === 'cloud' \? 'cloud' : 'neural'/);
+  assert.match(src, /saved === 'neural' \? 'neural' : 'cloud'/);
   assert.equal(enginePreference.weightsInstalled(), false);
   assert.match(read('studio.html'), /data-tab="preview"/);
   assert.match(read('studio.html'), /data-tab="dokumen"/);

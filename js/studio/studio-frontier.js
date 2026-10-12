@@ -155,13 +155,24 @@ export function mountStudioFrontier(ctx) {
     highlight.innerHTML = painted.html;
   }
 
+  function releaseInspect() {
+    if (document.body.dataset.inspect !== '1') return;
+    document.body.dataset.inspect = '0';
+    const inspect = q('btn-inspect-dom');
+    if (!inspect) return;
+    inspect.setAttribute('aria-pressed', 'false');
+    inspect.classList.remove('is-on');
+  }
+
   function setMode(mode) {
     document.body.dataset.editorMode = mode === 'edit' ? 'edit' : 'diff';
+    if (mode === 'edit') releaseInspect();
     if (typeof root.paintTree === 'function') root.paintTree();
   }
 
   if (manual) {
     manual.addEventListener('input', () => {
+      releaseInspect();
       paintGutter(manual.value);
       paintHighlight();
     });

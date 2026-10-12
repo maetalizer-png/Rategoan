@@ -49,6 +49,7 @@ const browserGlobals = {
   CustomEvent: 'readonly',
   Event: 'readonly',
   MessageChannel: 'readonly',
+  BroadcastChannel: 'readonly',
   Worker: 'readonly',
   SharedWorker: 'readonly',
   WebSocket: 'readonly',

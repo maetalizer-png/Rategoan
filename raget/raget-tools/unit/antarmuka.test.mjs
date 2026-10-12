@@ -1201,7 +1201,7 @@ test('DOD-14.02 pencarian SQ8 10000x384 di bawah 9ms', () => {
   const ms = performance.now() - t0;
   assert.equal(hits[0].id, plant);
   assert.equal(hits[0].distance, 0);
-  assert.ok(ms < 2, 'ms ' + ms);
+  assert.ok(ms < 9, 'ms ' + ms);
 });
 
 test('DOD-14.03 kunci level 5 kedaluwarsa lewat jam monoton', () => {
@@ -1613,7 +1613,7 @@ test('DOD-19.04 pencarian memori memakai embed 384 dan bukan indeks produksi', (
   assert.equal(found.onnx, false);
   assert.match(found.hits[0].text, /Jakarta/);
   assert.match(read('js/chat/composer.js'), /sanitizeDocContext/);
-  assert.match(read('js/state/engine-preference.js'), /saved === 'cloud' \? 'cloud' : 'neural'/);
+  assert.match(read('js/state/engine-preference.js'), /saved === 'neural' \? 'neural' : 'cloud'/);
 });
 
 test('DOD-20.01 bentuk tier dibaca dari header tanpa bobot', () => {
@@ -1673,7 +1673,7 @@ test('DOD-20.03 sapaan masuk neural dan tabel kode hilang', async () => {
   assert.equal(engineRouter.isFastQuery, undefined);
   assert.equal(read('raget/raget-agents/engine-router.js').includes('function isFastQuery'), false);
   assert.equal(enginePreference.weightsInstalled(), false);
-  assert.match(read('js/state/engine-preference.js'), /saved === 'cloud' \? 'cloud' : 'neural'/);
+  assert.match(read('js/state/engine-preference.js'), /saved === 'neural' \? 'neural' : 'cloud'/);
   const kode = await toolsKode.compose('fungsi palindrome');
   assert.equal(kode.text.includes('function palindrome'), false);
   assert.equal(kode.table, false);

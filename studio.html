@@ -172,6 +172,11 @@
           <div id="living-sheet" class="code-editor">Spreadsheet hidup.</div>
         </div>
         <div id="tab-logs" class="tab-panel">
+          <div id="studio-hud" class="studio-hud" aria-live="polite">
+            <span id="hud-tps">Prefill 0 · Decode 0 tok/d</span>
+            <span id="hud-vram">VRAM 0 MB</span>
+            <span id="hud-thermal">Suhu normal</span>
+          </div>
           <div class="console-output" id="console-output">Studio Kode siap. Tidak ada galat.</div>
         </div>
       </div>
@@ -205,11 +210,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div id="studio-hud" class="studio-hud" aria-live="polite">
-    <span id="hud-tps">Prefill 0 · Decode 0 tok/d</span>
-    <span id="hud-vram">VRAM 0 MB</span>
-    <span id="hud-thermal">Suhu normal</span>
   </div>
   <script type="importmap">{"imports":{"node:module":"./js/core/node-module-stub.js"}}</script>
   <script type="module" src="js/studio/studio-app.js"></script>
