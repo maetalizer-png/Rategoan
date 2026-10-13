@@ -16,7 +16,12 @@ self.onmessage = async (event) => {
     const bytes = msg.bytes instanceof Uint8Array ? msg.bytes : new Uint8Array(msg.bytes || 0);
     io.write(bytes, { at: msg.offset || 0 });
     io.flush();
-    self.postMessage({ id: msg.id, ok: true });
+    let digest = '';
+    if (msg.hash && self.crypto && crypto.subtle) {
+      const buf = await crypto.subtle.digest('SHA-256', bytes);
+      digest = Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+    }
+    self.postMessage({ id: msg.id, ok: true, digest: digest });
   } catch (e) {
     self.postMessage({ id: msg.id, ok: false });
   }

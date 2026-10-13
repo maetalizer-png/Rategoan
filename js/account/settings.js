@@ -1,5 +1,4 @@
 import { $ } from '../../shared/dom.js';
-import { meshSnapshot, mountMeshPanel } from '../sync/p2p-sync.js';
 import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
 import { router } from '../core/router.js';
@@ -21,7 +20,6 @@ import { pdfReader } from '../../vault/pdf/reader.js';
 import { tts } from '../state/tts.js';
 import { hemat } from '../state/hemat.js';
 import { llmMode } from '../state/llm-mode.js';
-import { enginePreference } from '../state/engine-preference.js';
 import { memoryPreference } from '../state/memory-preference.js';
 import { paintMemoryBadge } from '../ui/memory-capsule.js';
 import { memory } from '../ai/memory.js';
@@ -190,12 +188,18 @@ const TEMPLATE = `
                 </span>
                 <span class="set-value" id="storage-info">—</span>
               </div>
-              <div class="set-row">
-                <span>Cache model</span>
-                <span class="set-value" id="weight-cache-info">~1 GB</span>
+              <div class="set-row" id="row-cache">
+                <span>
+                  <svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+                  Cache model
+                </span>
+                <span class="set-value" id="weight-cache-info">997 MB</span>
               </div>
-              <div class="set-row clickable" id="row-purge-weights">
-                <span>Hapus cache bobot</span>
+              <div class="set-row clickable" id="row-clear-cache">
+                <span>
+                  ${ERASE_ICON}
+                  Hapus cache bobot
+                </span>
               </div>
               <div class="set-row clickable" id="row-backup">
                 <span>
@@ -344,69 +348,61 @@ export const settings = {
     hub.className = 'model-hub';
     const card = document.createElement('div');
     card.className = 'model-solo';
+    card.id = 'model-main-card';
     const title = document.createElement('strong');
-    title.textContent = 'Model Utama: Raget 1.0';
+    title.textContent = 'Raget 1.0 (997 MB)';
     card.appendChild(title);
-    const speed = document.createElement('label');
-    speed.className = 'model-speed-label';
-    speed.textContent = 'Mode';
-    const select = document.createElement('select');
-    select.id = 'engine-speed';
-    [['cloud', 'Cepat'], ['neural', 'Mendalam']].forEach((pair) => {
-      const opt = document.createElement('option');
-      opt.value = pair[0];
-      opt.textContent = pair[1];
-      select.appendChild(opt);
-    });
-    speed.appendChild(select);
-    card.appendChild(speed);
     const weightNote = document.createElement('p');
-    weightNote.id = 'model-weight-note';
+    weightNote.id = 'model-weight-status';
     weightNote.className = 'model-note';
-    weightNote.textContent = 'Mode Cepat: Siap pakai (Respons instan, nol unduhan). Mode Mendalam: Membutuhkan bobot offline (1.0 GB).';
-    const downloadWeight = document.createElement('button');
-    downloadWeight.type = 'button';
-    downloadWeight.id = 'btn-unduh-mendalam';
-    downloadWeight.textContent = 'Unduh Bobot Mode Mendalam (1.0 GB)';
-    downloadWeight.onclick = () => {
+    const action = document.createElement('button');
+    action.type = 'button';
+    action.id = 'btn-unduh-offline';
+    action.className = 'model-download';
+    function weightsOn() {
+      try { return localStorage.getItem('rategoan_weights_1_5b_installed') === 'true'; }
+      catch (e) { return false; }
+    }
+    function paintHub(pct) {
+      if (typeof pct === 'number' && pct >= 0 && pct < 100 && !weightsOn()) {
+        weightNote.textContent = 'Sedang Mengunduh (' + pct + '%)';
+        action.textContent = 'Unduh Bobot Offline';
+        return;
+      }
+      if (weightsOn()) {
+        weightNote.textContent = 'Terpasang di Perangkat (997 MB)';
+        action.textContent = 'Hapus Bobot dari Perangkat';
+        return;
+      }
+      weightNote.textContent = 'Belum Terpasang';
+      action.textContent = 'Unduh Bobot Offline';
+    }
+    action.onclick = () => {
+      if (weightsOn()) {
+        try {
+          localStorage.removeItem('rategoan_weights_1_5b_installed');
+          localStorage.removeItem('rategoan_weights_1_5b_parts');
+          localStorage.removeItem('rategoan_chunks_mask');
+        } catch (e) { /* penyimpanan ditolak */ }
+        toast.show('Bobot dihapus dari perangkat');
+        paintHub();
+        return;
+      }
       import('../../raget/raget-neural/neural-provider.js').then((mod) => {
-        toast.show('Unduhan Mode Mendalam dimulai');
+        toast.show('Unduhan bobot dimulai');
         mod.neuralProvider.loadWeights();
-      }).catch(() => toast.show('Unduhan Mode Mendalam gagal dimulai'));
+      }).catch(() => toast.show('Unduhan bobot gagal dimulai'));
     };
-    card.appendChild(weightNote);
-    card.appendChild(downloadWeight);
+    card.append(weightNote, action);
     hub.appendChild(card);
-    const meshCard = document.createElement('div');
-    meshCard.id = 'mesh-sync-card';
-    meshCard.className = 'model-solo';
-    const meshTitle = document.createElement('strong');
-    meshTitle.textContent = 'Sinkronisasi Perangkat Lokal (P2P Mesh)';
-    meshCard.appendChild(meshTitle);
-    mountMeshPanel(meshCard);
-    const mesh = document.createElement('div');
-    mesh.id = 'mesh-status';
-    mesh.className = 'model-note';
-    const snap = meshSnapshot();
-    const meshLabel = snap.status === 'aktif' ? 'Aktif' : 'Mencari Teman Lokal';
-    mesh.textContent = 'Rategoan Mesh P2P · Status: ' + meshLabel + ' · Peer Terhubung: ' + snap.peers + ' · Kuota Dihemat: ' + snap.saved;
-    meshCard.appendChild(mesh);
-    select.onchange = () => {
-      const pick = select.value;
-      llmMode.setMode('lokal');
-      enginePreference.set(pick);
-      document.dispatchEvent(new CustomEvent('rategoan:command', { detail: pick === 'neural' ? 'think' : 'think-off' }));
-      window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: pick } }));
-      toast.show(pick === 'neural' ? 'Mode: Mendalam aktif' : 'Mode: Cepat aktif');
-    };
-    const paintHub = () => {
-      if (llmMode.mode() === 'server') llmMode.setMode('lokal');
-      select.value = enginePreference.get();
-    };
+    window.addEventListener('rategoan:neural-progress', (event) => {
+      const detail = (event && event.detail) || {};
+      const total = detail.total || 0;
+      const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((detail.loaded || 0) / total * 100))) : 0;
+      paintHub(pct >= 100 ? undefined : pct);
+    });
     paintHub();
-    window.addEventListener('rategoan:model-switched', paintHub);
     aiSection.appendChild(hub);
-    aiSection.appendChild(meshCard);
     dataSection.appendChild(knowledgeRow);
     dataSection.appendChild(dataHealthRow);
     dataSection.appendChild(downloadRow);
@@ -725,9 +721,7 @@ export const settings = {
       const privacyRow = document.createElement('div');
       privacyRow.className = 'set-row clickable';
       privacyRow.id = 'row-privacy';
-      const privacyLabel = document.createElement('span');
-      privacyLabel.textContent = 'Kebijakan Privasi Publik';
-      privacyRow.appendChild(privacyLabel);
+      privacyRow.innerHTML = '<span><svg class="side-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Kebijakan Privasi Publik</span><svg class="set-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
       const privasiSection = $('set-section-privasi');
       if (privasiSection) {
         privasiSection.appendChild(privacyRow);
@@ -742,7 +736,7 @@ export const settings = {
       router.go('chat');
     };
     $('row-backup').onclick = () => backup.export();
-    const purge = $('row-purge-weights');
+    const purge = $('row-clear-cache');
     if (purge) purge.onclick = async () => {
       if (typeof caches !== 'undefined' && caches.keys) {
         const keys = await caches.keys();

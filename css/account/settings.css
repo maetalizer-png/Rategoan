@@ -187,7 +187,8 @@
   background: var(--rg-accent-ink);
 }
 
-.chevron-icon {
+.chevron-icon,
+.set-arrow {
   width: 16px;
   height: 16px;
   flex-shrink: 0;

@@ -400,27 +400,14 @@ function bindWeightCard() {
     const total = detail.total || 0;
     const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
     if (fill) fill.style.width = pct + '%';
-    const cepat = $('mode-cepat');
-    if (detail.early && loaded < total && cepat) {
-      cepat.hidden = false;
-      cepat.disabled = false;
-    }
     if (!status) return;
-    if (detail.early && loaded < total) {
-      status.textContent = 'Mode Cepat Siap (Mengunduh Mode Mendalam di Latar Belakang: ' + pct + '%...)';
+    if (total > 0 && loaded >= total) {
+      status.textContent = 'Terpasang di Perangkat (997 MB)';
+      card.hidden = true;
       return;
     }
-    if (detail.source === 'cache') {
-      status.textContent = 'Memuat model dari penyimpanan lokal (Cache API)... ' + pct + '%';
-      return;
-    }
-    const speed = detail.speed > 0 ? ((detail.speed / (1024 * 1024)).toFixed(1) + ' MB/s') : '';
-    let eta = '';
-    if (detail.eta > 0 && detail.loaded < detail.total) {
-      eta = detail.eta < 60 ? ('~' + Math.ceil(detail.eta) + ' dtk') : ('~' + Math.ceil(detail.eta / 60) + ' menit');
-    }
-    const seal = detail.seal ? ('sha256 ' + String(detail.seal).slice(0, 12)) : '';
-    status.textContent = ['Mengunduh dari Hugging Face ' + pct + '%', speed, eta, seal].filter(Boolean).join(' · ');
+    status.dataset.busy = '1';
+    status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%). Menjawab menggunakan partisi terunduh...';
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});
@@ -433,28 +420,15 @@ function bindWeightCard() {
       window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: 'cloud' } }));
     };
     const syncCard = () => {
-      const mendalam = enginePreference.get() === 'neural';
-      if (!mendalam || neuralProvider.ready() || neuralProvider.cepatReady()) {
-        card.hidden = true;
-        return;
-      }
-      card.hidden = false;
+      const installed = typeof neuralProvider.weightsInstalled === 'function' && neuralProvider.weightsInstalled();
+      card.hidden = !!installed;
+      if (!installed && status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
     };
     window.addEventListener('rategoan:model-switched', () => {
       syncCard();
-      if (enginePreference.get() === 'neural') neuralProvider.bootWeights().then(syncCard).catch(() => {});
-    });
-    window.addEventListener('rategoan:neural-progress', (event) => {
-      if (event && event.detail && event.detail.early) card.hidden = true;
     });
     syncCard();
-    if (enginePreference.get() === 'neural') {
-      try { await neuralProvider.bootWeights(); } catch (e) { /* kartu tetap tampil */ }
-      syncCard();
-    }
-    if (!card.hidden) {
-      if (status) status.textContent = 'Bobot belum di perangkat.';
-    }
+    if (!card.hidden && status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
     if (pauseBtn) pauseBtn.onclick = () => {
       if (neuralProvider.weightPaused()) {
         neuralProvider.resumeWeights();
@@ -479,7 +453,7 @@ function bindWeightCard() {
         pauseBtn.textContent = 'Jeda';
       }
       if (cancelBtn) cancelBtn.hidden = false;
-      if (status) status.textContent = 'Mengunduh dari Hugging Face 0%';
+      if (status) status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%). Menjawab menggunakan partisi terunduh...';
       neuralProvider.loadWeights().then((ok) => {
         if (pauseBtn) pauseBtn.hidden = true;
         if (cancelBtn) cancelBtn.hidden = true;
@@ -703,7 +677,8 @@ export const composer = {
     let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (livePlan && livePlan.parentNode) livePlan.remove();
     if (reply == null) {
-      toast.show('AI belum terpasang');
+      const live = $('weight-status');
+      toast.show(live && live.dataset.busy ? live.textContent : 'Bobot Raget 1.0 sedang diunduh secara progresif (0%). Menjawab menggunakan partisi terunduh...');
       return;
     }
     if (cowork.expectsEdit()) cowork.applyReply(reply);

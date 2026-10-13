@@ -119,7 +119,7 @@ export async function downloadConcurrentChunks(options) {
   const control = (options && options.control) || { paused: false, cancelled: false };
   const onProgress = options && options.onProgress;
   const onEarlyReady = options && options.onEarlyReady;
-  const concurrency = Math.max(1, Math.min(4, Math.floor(Number(options && options.concurrency) || 4)));
+  const concurrency = Math.max(1, Math.min(6, Math.floor(Number(options && options.concurrency) || 6)));
   const ranges = planRanges(size, chunk);
   const earlyBytes = Math.min(size, Math.max(0, Math.floor(Number(options && options.earlyBytes) || 0)));
   let earlyAt = -1;
@@ -171,11 +171,11 @@ export async function downloadConcurrentChunks(options) {
         if (!event.data || event.data.id !== id) return;
         clearTimeout(timer);
         port.removeEventListener('message', onMsg);
-        resolve();
+        resolve(event.data.digest || '');
       }
       port.addEventListener('message', onMsg);
       try {
-        port.postMessage({ op: 'write', id: id, offset: offset, bytes: copy });
+        port.postMessage({ op: 'write', id: id, offset: offset, bytes: copy, hash: true });
       } catch (e) {
         clearTimeout(timer);
         resolve();
@@ -260,7 +260,7 @@ export async function downloadConcurrentChunks(options) {
   }
 
   async function mirrorToWorker(offset, bytes) {
-    await mirrorOpfs(offset, bytes);
+    return mirrorOpfs(offset, bytes);
   }
 
   async function pull(i) {
@@ -268,12 +268,13 @@ export async function downloadConcurrentChunks(options) {
     if (!got || got.__err) throw (got && got.__err) || new Error('gagal');
     const range = ranges[i];
     const ahead = i + PREFETCH_AHEAD;
+    let seal = '';
     if (!got.fromCache) {
       const writing = store.put(cacheName, got.key, got.bytes);
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
       await writing;
       if (mesh) publishMeshChunk(i, got.bytes);
-      await mirrorToWorker(range.start, got.bytes);
+      seal = (await mirrorToWorker(range.start, got.bytes)) || '';
       networkHits += 1;
       markChunk(i);
     } else if (ahead < ranges.length && primed.size < 4) {
@@ -286,7 +287,7 @@ export async function downloadConcurrentChunks(options) {
     got.bytes = null;
     done[i] = true;
     checkEarly();
-    report(i, '');
+    report(i, seal);
     if (range.end < range.start) throw new Error('rentang kosong');
   }
 

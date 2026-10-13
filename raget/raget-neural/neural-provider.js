@@ -2,7 +2,6 @@
 import { personaLora, pullLora } from '../../js/chat/persona.js';
 import { llmMode } from '../../js/state/llm-mode.js';
 import { hudBudget } from '../../js/studio/telemetry.js';
-import { llmEngine } from '../raget-deterministic/llm-engine.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
 import { openInt4Stream } from './runtime/int4-session.js';
 import {
@@ -156,7 +155,7 @@ async function doInitTier(tier) {
       cacheName: WEIGHT_SPEC.cache,
       store: store,
       control: control,
-      concurrency: 1,
+      concurrency: 6,
       mesh: typeof window !== 'undefined',
       roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
       earlyBytes: tier === 'tier_1_5b' ? EARLY_PROGRESS_BYTES : 0,
@@ -334,172 +333,19 @@ async function generateLocal(prompt, options) {
   return generateWithTier('tier_1_5b', prompt, Object.assign({}, options, { mode }));
 }
 
-let compactPromise = null;
-
-const COMPACT_CACHE = 'rategoan-neural-v4';
-const FACT_STOP = new Set(['yang', 'kamu', 'apa', 'tentang', 'saya', 'bisa', 'untuk', 'dari', 'dan', 'dengan', 'ini', 'itu', 'ada', 'atau', 'pada', 'ke', 'di', 'tidak', 'the']);
-
-let corpusPromise = null;
-
-function factWords(text) {
-  return String(text || '').toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((word) => word.length > 2 && !FACT_STOP.has(word));
-}
-
-function replyBroken(text) {
-  if (!text) return true;
-  if (/(.)\1{4}/.test(text)) return true;
-  return factWords(text).length < 2;
-}
-
-async function loadFacts() {
-  if (!corpusPromise) {
-    corpusPromise = (async () => {
-      const url = new URL('../raget-data/jsonl/raget_own_corpus.jsonl', import.meta.url);
-      let text = '';
-      try {
-        const res = await fetch(url);
-        if (res.ok) text = await res.text();
-      } catch (e) {
-        text = '';
-      }
-      if (!text) {
-        const { readFileSync } = await import('node:fs');
-        text = readFileSync(url, 'utf8');
-      }
-      const rows = [];
-      text.split('\n').forEach((line) => {
-        if (!line) return;
-        try {
-          const row = JSON.parse(line);
-          if (row && row.text) rows.push(String(row.text));
-        } catch (e) {
-          /* baris rusak dilewati */
-        }
-      });
-      return rows;
-    })().catch(() => []);
-  }
-  return corpusPromise;
-}
-
-async function retrieveFact(prompt) {
-  const query = factWords(prompt);
-  if (!query.length) return null;
-  const rows = await loadFacts();
-  let best = null;
-  let score = 0;
-  for (let i = 0; i < rows.length; i += 1) {
-    const bag = new Set(factWords(rows[i]));
-    let hit = 0;
-    for (let k = 0; k < query.length; k += 1) {
-      if (bag.has(query[k])) hit += 1;
-    }
-    if (hit > score) {
-      score = hit;
-      best = rows[i];
-    }
-  }
-  return score >= 1 ? best : null;
-}
-
-async function readCompactBytes() {
-  const url = new URL('./checkpoints/raget-neural-compact.safetensors', import.meta.url);
-  if (typeof caches !== 'undefined') {
-    const cache = await caches.open(COMPACT_CACHE);
-    const hit = await cache.match(url);
-    if (hit) return hit.arrayBuffer();
-  }
-  let bytes = null;
-  try {
-    const res = await fetch(url);
-    if (res.ok) bytes = await res.arrayBuffer();
-  } catch (e) {
-    bytes = null;
-  }
-  if (!bytes) {
-    const { readFileSync } = await import('node:fs');
-    const buf = readFileSync(url);
-    bytes = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
-  }
-  if (typeof caches !== 'undefined' && bytes) {
-    const cache = await caches.open(COMPACT_CACHE);
-    await cache.put(url, new Response(bytes.slice(0)));
-  }
-  return bytes;
-}
-
-async function generateCompact(prompt, options) {
-  if (!compactPromise) {
-    compactPromise = (async () => {
-      const { RATEGOAN } = await loadEngine();
-      RATEGOAN.restoreFromCheckpointSafetensors(await readCompactBytes());
-      return RATEGOAN;
-    })().catch(() => null);
-  }
-  const engine = await compactPromise;
-  if (!engine) return null;
-  const out = await engine.generateText(String(prompt || ''), {
-    maxNewTokens: 48,
-    greedy: true,
-    minNewTokens: 0,
-    repetitionPenalty: 1,
-    signal: options && options.signal,
-  });
-  const text = out && out.text ? String(out.text).trim() : '';
-  if (!text || /^\d+$/.test(text)) return null;
-  return text;
-}
-
-async function answerIndonesia() {
-  const rows = await loadFacts();
-  const admin = rows.find((row) => row.includes('416 kabupaten') && row.includes('98 kota'));
-  const people = rows.find((row) => row.includes('282 juta'));
-  if (!admin || !people) return null;
-  return 'Indonesia beribu kota di Jakarta. Penduduknya sekitar 282 juta jiwa, dengan 38 provinsi, 416 kabupaten, dan 98 kota.';
-}
-
-async function answerFast(prompt, options) {
-  const text = String(prompt || '').trim();
-  if (/^hallo+[\s!.]*$/i.test(text)) return 'Halo! Ada yang bisa saya bantu?';
-  if (/indonesia/i.test(text)) {
-    const fact = await answerIndonesia();
-    if (fact) return fact;
-  }
-  const greeted = llmEngine.tryGreeting(text, {});
-  if (greeted) return greeted;
-  const daily = llmEngine.tryDailyTalk(text, {});
-  if (daily) return daily;
-  const neural = await generateCompact(prompt, options);
-  if (neural && !replyBroken(neural)) return neural;
-  return retrieveFact(text);
-}
-
 async function generate(messages, prompt, options) {
-  const mode = options && options.mode;
-  if (mode === 'cepat') {
-    if (options.signal && options.signal.aborted) return null;
-    return answerFast(prompt, options);
-  }
-  if (mode === 'mendalam') {
-    if (options.signal && options.signal.aborted) return null;
-    return generateLocal(prompt, options);
-  }
-  if (options && options.large === true) {
-    if (llmMode.mode() === 'server') llmMode.setMode('lokal');
-    return generateLocal(prompt, options || {});
-  }
-  const text = String(prompt || '');
-  if (/indonesia/i.test(text)) {
-    const fact = await answerIndonesia();
-    if (fact) return fact;
-  }
-  const greeted = llmEngine.tryGreeting(text, {});
-  if (greeted) return greeted;
-  const daily = llmEngine.tryDailyTalk(text, {});
-  if (daily) return daily;
-  const neural = await generateCompact(prompt, options);
-  if (neural && !replyBroken(neural)) return neural;
-  return retrieveFact(text);
+  if (options && options.signal && options.signal.aborted) return null;
+  if (options && options.large === true && llmMode.mode() === 'server') llmMode.setMode('lokal');
+  if ((earlyFlag && weightReader) || installedFlag()) return generateLocal(prompt, options);
+  loadWeights().catch(() => {});
+  reportProgress({
+    loaded: 0,
+    total: WEIGHT_BYTES.tier_1_5b || 0,
+    early: false,
+    pending: true,
+    tier: 'tier_1_5b',
+  });
+  return null;
 }
 
 async function getStats() {
@@ -543,4 +389,5 @@ export const neuralProvider = Object.freeze({
   storageFree,
   bootWeights,
   cepatReady,
+  weightsInstalled: installedFlag,
 });

@@ -45,6 +45,7 @@ async function ask(prompt, context) {
     try {
       const reply = await adapter.ask(prompt, context);
       if (reply) return { reply, engine: adapter.id, tried };
+      if (adapter.id === 'neural') return { reply: null, engine: adapter.id, tried };
       tried.push({ id: adapter.id, ready: true, error: 'ask() mengembalikan kosong' });
     } catch (e) {
       tried.push({ id: adapter.id, ready: true, error: e && e.message });

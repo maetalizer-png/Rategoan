@@ -22,6 +22,10 @@ await page.addInitScript(() => {
 });
 await page.goto(base + '/index.html#/chat', { waitUntil: 'domcontentloaded' });
 await page.waitForSelector('#btn-model', { timeout: 15000 });
+await page.waitForFunction(() => {
+  const card = document.getElementById('weight-card');
+  return card && !card.hidden;
+}, { timeout: 15000 });
 const chat = await page.evaluate(() => {
   const card = document.getElementById('weight-card');
   const row = document.querySelector('.card-row');
@@ -31,7 +35,7 @@ const chat = await page.evaluate(() => {
     rowSelect: !!(row && row.querySelector('select')),
   };
 });
-note(chat.weightHidden, 'mode cepat tanpa kartu unduhan', String(chat.weightHidden));
+note(!chat.weightHidden, 'banner unduh di beranda', String(chat.weightHidden));
 note(!chat.persona && !chat.rowSelect, 'tidak ada pemilih persona', String(chat.persona));
 await page.click('#btn-model');
 await page.waitForSelector('#model-sheet:not([hidden])');
@@ -48,23 +52,18 @@ await page.click('#btn-menu');
 await page.click('#btn-settings');
 await page.waitForSelector('#view-settings:not([hidden]) .cat-row[data-cat="ai"]', { timeout: 15000 });
 await page.click('.cat-row[data-cat="ai"]');
-await page.waitForSelector('#btn-mesh-sdp', { state: 'visible', timeout: 15000 });
-await page.click('#btn-mesh-sdp');
-await page.waitForFunction(() => {
-  const area = document.getElementById('mesh-sdp-text');
-  return area && area.value.length > 20;
-}, { timeout: 8000 });
+await page.waitForSelector('#btn-unduh-offline', { state: 'visible', timeout: 15000 });
 const mesh = await page.evaluate(() => {
-  const area = document.getElementById('mesh-sdp-text');
-  const canvas = document.getElementById('mesh-sdp-qr');
+  const hub = document.querySelector('.model-hub');
   return {
-    len: area ? area.value.length : 0,
-    qr: canvas ? canvas.width : 0,
+    len: 0,
+    qr: 0,
+    text: hub ? hub.innerText : '',
     persona: !!document.getElementById('persona-select-settings'),
   };
 });
-note(mesh.len > 20, 'sdp teks', String(mesh.len));
-note(mesh.qr > 20, 'sdp qr', String(mesh.qr));
+note(!mesh.text.includes('Tukar SDP'), 'model tanpa sdp', mesh.text.slice(0, 120));
+note(mesh.text.includes('997'), 'model tunggal', mesh.text.slice(0, 120));
 note(!mesh.persona, 'pengaturan tanpa persona', String(mesh.persona));
 
 const studio = await browser.newPage({ viewport: { width: 1280, height: 800 } });

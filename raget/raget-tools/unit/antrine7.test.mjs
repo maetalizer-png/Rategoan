@@ -23,7 +23,7 @@ test('antarmuka model hanya Cepat dan Mendalam', () => {
   assert.equal(composer.includes('persona-select'), false);
   assert.match(sheet, /Cepat/);
   assert.match(sheet, /Mendalam/);
-  assert.match(composer, /enginePreference\.get\(\) === 'neural'/);
+  assert.match(composer, /weightsInstalled/);
   assert.match(read('raget/raget-neural/neural-provider.js'), /EARLY_PROGRESS_BYTES/);
   assert.equal(EARLY_PROGRESS_BYTES, 80 * 1024 * 1024);
   assert.equal(read('js/chat/voice.js').includes('setInterval'), false);

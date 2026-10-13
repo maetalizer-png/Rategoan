@@ -28,8 +28,13 @@ test('label mode bersih tanpa lapis dan tanpa kata mode kotor', () => {
   assert.match(sheet, /label: 'Cepat'/);
   assert.match(sheet, /label: 'Mendalam'/);
   assert.match(sheet, /Respons instan, efisien daya/);
-  assert.match(settings, /\['cloud', 'Cepat'\]/);
-  assert.match(settings, /\['neural', 'Mendalam'\]/);
+  assert.equal(settings.includes("['cloud', 'Cepat']"), false);
+  assert.equal(settings.includes('mountMeshPanel'), false);
+  assert.equal(settings.includes('nol unduhan'), false);
+  assert.match(settings, /Raget 1\.0 \(997 MB\)/);
+  assert.match(settings, /Belum Terpasang/);
+  assert.match(settings, /Terpasang di Perangkat \(997 MB\)/);
+  assert.match(settings, /Unduh Bobot Offline/);
   assert.match(read('js/chat/chat.js'), /navigator\.vibrate\(8\)/);
 });
 

@@ -11,21 +11,24 @@ function read(rel) {
   return readFileSync(new URL(rel, root), 'utf8');
 }
 
-test('sapaan halo selesai di bawah 2 detik dan bukan angka token', async () => {
-  const t0 = performance.now();
-  const reply = await neuralAdapter.ask('halo', {});
-  const ms = performance.now() - t0;
-  assert.equal(ms < 2000, true);
-  assert.match(reply, /Halo! Ada yang bisa saya bantu\?/);
-  assert.equal(/^\d+$/.test(reply.trim()), false);
-  const help = await neuralAdapter.ask('bisa bantu saya', {});
-  assert.match(help, /membantu/);
-  const negara = await neuralAdapter.ask('apa yang kamu ketahui tentang Indonesia', {});
-  assert.match(negara, /Jakarta/);
-  assert.match(negara, /282 juta/);
-  assert.match(negara, /38 provinsi/);
-  assert.match(negara, /416 kabupaten/);
-  assert.match(negara, /98 kota/);
+test('sapaan tidak memakai template dan tidak mencetak galat bobot', async () => {
+  const src = read('raget/raget-neural/neural-provider.js');
+  const adapter = read('raget/raget-neural/neural-adapter.js');
+  assert.equal(src.includes('tryGreeting'), false);
+  assert.equal(src.includes('tryDailyTalk'), false);
+  assert.equal(src.includes('retrieveFact'), false);
+  assert.equal(/hallo\+/.test(src), false);
+  assert.equal(adapter.includes('Bobot Raget 1.0 belum termuat'), false);
+  const orig = globalThis.fetch;
+  globalThis.fetch = async () => { throw new Error('offline'); };
+  try {
+    const t0 = performance.now();
+    const reply = await neuralAdapter.ask('halo', {});
+    assert.equal(performance.now() - t0 < 2000, true);
+    assert.equal(reply, null);
+  } finally {
+    globalThis.fetch = orig;
+  }
 });
 
 test('simd128 menghitung dot i32x4 dan tidak memakai sum4', () => {

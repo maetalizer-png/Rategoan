@@ -56,8 +56,7 @@ async function ask(prompt, context) {
     if (external && external.aborted) throw new Error('dibatalkan');
     if (ctrl.signal.aborted) throw new Error('Raget 1.0 timeout');
     if (reply && !/^\d+$/.test(String(reply).trim())) return reply;
-    if (mode === 'mendalam') return 'Bobot Raget 1.0 belum termuat di perangkat.';
-    return 'Saya Raget. Tulis pertanyaan yang lebih spesifik, saya jawab dari pengetahuan di perangkat ini.';
+    return null;
   } finally {
     if (timer) clearTimeout(timer);
   }

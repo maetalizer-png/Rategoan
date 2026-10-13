@@ -4,7 +4,7 @@ export const WEIGHT_ROOM = Math.floor(1.5 * 1024 * 1024 * 1024);
 export const EARLY_READY_BYTES = 233706880;
 export const EARLY_PROGRESS_BYTES = 80 * 1024 * 1024;
 export const RANGE_SLOTS = 4;
-export const DOWNLOAD_STREAMS = 4;
+export const DOWNLOAD_STREAMS = 6;
 export const WEIGHT_SPEC = Object.freeze({
   url: 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/raget-neural-1.5b.safetensors',
   size: 1045697920,
