@@ -36,6 +36,18 @@
       </button>
     </div>
   </header>
+  <div id="top-download-bar">
+    <div id="weight-card" class="weight-card" hidden>
+      <div class="weight-actions">
+        <button type="button" id="btn-weight">Unduh Bobot Raget 1.0 (997 MB)</button>
+        <button type="button" id="btn-weight-pause" hidden>Jeda</button>
+        <button type="button" id="btn-weight-cancel" hidden>Batal</button>
+        <button type="button" id="mode-cepat" hidden disabled>Mode Cepat</button>
+      </div>
+      <div id="weight-bar" class="weight-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Unduhan bobot"><span id="weight-fill"></span></div>
+      <p id="weight-status">Bobot belum di perangkat.</p>
+    </div>
+  </div>
   <div id="thread-bar" hidden></div>
 
   <main id="app">
@@ -77,16 +89,6 @@
       </button>
       <footer id="composer">
         <div id="composer-card">
-          <div id="weight-card" class="weight-card" hidden>
-            <div class="weight-actions">
-              <button type="button" id="btn-weight">Unduh Bobot Raget 1.0 (997 MB)</button>
-              <button type="button" id="btn-weight-pause" hidden>Jeda</button>
-              <button type="button" id="btn-weight-cancel" hidden>Batal</button>
-              <button type="button" id="mode-cepat" hidden disabled>Mode Cepat</button>
-            </div>
-            <div id="weight-bar" class="weight-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Unduhan bobot, ambang Mode Cepat 22 persen"><span id="weight-fill"></span></div>
-            <p id="weight-status">Bobot belum di perangkat.</p>
-          </div>
           <div id="quote-row" class="attach-row" hidden></div>
           <div id="attach-row" class="attach-row" hidden></div>
           <textarea id="chat-input" rows="1" placeholder="Tanya Rategoan" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-gramm="false" data-enable-grammarly="false"></textarea>

@@ -395,25 +395,39 @@ function bindWeightCard() {
   const status = $('weight-status');
   if (!card || !btn || btn.dataset.bound) return;
   btn.dataset.bound = '1';
+  let providerRef = null;
   const paint = (detail) => {
-    const loaded = detail.loaded || 0;
-    const total = detail.total || 0;
+    const loaded = detail && detail.committedVerifiedBytes != null ? detail.committedVerifiedBytes : ((detail && detail.loaded) || 0);
+    const total = (detail && detail.total) || 0;
     const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
-    if (fill) fill.style.width = pct + '%';
-    if (!status) return;
-    if (total > 0 && loaded >= total) {
-      status.textContent = 'Terpasang di Perangkat (997 MB)';
+    const installed = providerRef && typeof providerRef.weightsInstalled === 'function' && providerRef.weightsInstalled();
+    if (installed) {
       card.hidden = true;
       return;
     }
+    if (fill) fill.style.width = pct + '%';
+    const bar = $('weight-bar');
+    if (bar) bar.setAttribute('aria-valuenow', String(pct));
+    if (!status) return;
+    const speed = Number(detail && detail.speed) || 0;
+    const eta = Number(detail && detail.eta) || 0;
+    const mb = speed / (1024 * 1024);
+    const mbText = mb >= 0.05 ? mb.toFixed(1) + ' MB/s' : (speed > 0 ? Math.round(speed / 1024) + ' KB/s' : '0 MB/s');
+    const etaText = eta > 0 ? (eta >= 60 ? Math.ceil(eta / 60) + ' mnt' : Math.ceil(eta) + ' dtk') : '—';
     status.dataset.busy = '1';
-    status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%).';
+    card.hidden = false;
+    if (total > 0 && loaded >= total) {
+      status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%). Memeriksa berkas.';
+      return;
+    }
+    status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%). ' + mbText + ' · ETA ' + etaText;
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});
   });
   import('../../raget/raget-neural/neural-provider.js').then(async (mod) => {
     const neuralProvider = mod.neuralProvider;
+    providerRef = neuralProvider;
     const cepatBtn = $('mode-cepat');
     if (cepatBtn) cepatBtn.onclick = () => {
       enginePreference.set('cloud');
@@ -421,12 +435,13 @@ function bindWeightCard() {
     };
     const syncCard = () => {
       const installed = typeof neuralProvider.weightsInstalled === 'function' && neuralProvider.weightsInstalled();
-      card.hidden = !!installed;
-      if (!installed && status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
+      if (installed) {
+        card.hidden = true;
+        return;
+      }
+      card.hidden = false;
+      if (status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
     };
-    window.addEventListener('rategoan:model-switched', () => {
-      syncCard();
-    });
     syncCard();
     if (!card.hidden && status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
     if (pauseBtn) pauseBtn.onclick = () => {
@@ -473,6 +488,26 @@ function bindWeightCard() {
   }).catch(() => {
     card.hidden = false;
     if (status) status.textContent = 'Kartu bobot gagal dimuat.';
+  });
+}
+
+let pendingAnswerBound = false;
+function bindPendingAnswer() {
+  if (pendingAnswerBound || typeof window === 'undefined') return;
+  pendingAnswerBound = true;
+  window.addEventListener('rategoan:pending-reply', (event) => {
+    const reply = event && event.detail ? event.detail.reply : '';
+    if (!reply) return;
+    document.querySelectorAll('#messages .msg.ai').forEach((node) => {
+      if (node.dataset && (node.dataset.state === 'queued' || node.dataset.state === 'failed')) node.remove();
+    });
+    const s = composer.ensure();
+    const last = s.messages[s.messages.length - 1];
+    if (!last || last.role !== 'ai' || last.text !== String(reply)) {
+      s.messages.push({ role: 'ai', text: String(reply), time: Date.now() });
+      store.save();
+    }
+    chat.renderMessages();
   });
 }
 
@@ -813,6 +848,7 @@ export const composer = {
   },
   bind() {
     bindWeightCard();
+    bindPendingAnswer();
     const inp = $('chat-input');
     if (!inp) return;
     const paintSlot = () => {

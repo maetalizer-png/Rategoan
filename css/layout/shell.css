@@ -108,6 +108,13 @@
   display: none;
 }
 
+#top-download-bar .weight-card {
+  margin: 0;
+  padding: 8px 14px 10px;
+  border-bottom: 1px solid var(--rg-line);
+  background: var(--rg-bg);
+}
+
 .weight-actions {
   display: flex;
   flex-wrap: wrap;

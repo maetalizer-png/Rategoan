@@ -51,9 +51,9 @@ note(!/keepalive:\s*true/.test(pipe) && pipe.includes('res.status !== 206'), 'ta
 note(pipe.includes("rategoan_chunks_mask:") && pipe.includes("op: 'close'") && pipe.includes('ack.ok !== true'), 'topeng revisi dan tutup OPFS', 'mask');
 note(sources.down.includes('OPFS_ACK_MS = 20000') && sources.down.includes('READ_IDLE_MS = 15000'), 'jaga baca dan ack panjang', 'timer');
 note(sources.worker.includes('sync.flush()') && sources.worker.includes('sync.close()'), 'writer menutup gagang', 'close');
-note(sources.provider.includes('NOT_DOWNLOADED') && sources.provider.includes('safetensorsHeaderOk') && sources.provider.includes('INFERENCE_MS = 30000'), 'status dan header', 'provider');
-note(sources.adapter.includes('INFERENCE_MS = 30000') && !/mode \? null : setTimeout/.test(sources.adapter), 'batas 30 detik selalu', 'adapter');
-note(sources.raget.includes('nalar timeout') && sources.raget.includes('safetensorsHeaderOk'), 'worker menolak header buruk', 'worker');
+note(sources.provider.includes('NOT_DOWNLOADED') && sources.provider.includes('safetensorsHeaderOk') && !/setTimeout\(fire,\s*INFERENCE_MS\)/.test(sources.provider), 'status dan header', 'provider');
+note(!/setTimeout\(\(\) => ctrl\.abort\(\)/.test(sources.adapter) && !/mode \? null : setTimeout/.test(sources.adapter), 'abort hanya dari pengguna', 'adapter');
+note(sources.raget.includes('nalar timeout') && sources.raget.includes('safetensorsHeaderOk') && sources.raget.includes('90000'), 'worker 90 detik', 'worker');
 await page.fill('#chat-input', 'hallo');
 await page.click('#btn-send');
 await page.waitForTimeout(1200);

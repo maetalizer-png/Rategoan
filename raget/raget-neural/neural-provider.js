@@ -13,6 +13,7 @@ import {
   storageFree,
   safetensorsHeaderOk,
 } from './runtime/weight-cache.js';
+import { safetensorsPayloadOk } from './runtime/safetensors-validator.js';
 
 export const MODEL_STATUS = Object.freeze({
   NOT_DOWNLOADED: 'NOT_DOWNLOADED',
@@ -20,7 +21,12 @@ export const MODEL_STATUS = Object.freeze({
   READY: 'READY',
   FAILED: 'FAILED',
 });
-export const INFERENCE_MS = 30000;
+export const PIPELINE_PHASE = Object.freeze({
+  TRANSFERRING: 'TRANSFERRING',
+  WRITING_OPFS: 'WRITING_OPFS',
+  VERIFYING_PAYLOAD: 'VERIFYING_PAYLOAD',
+  INFERENCE_READY: 'INFERENCE_READY',
+});
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -69,6 +75,9 @@ const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
 const PARTS_KEY = 'rategoan_weights_1_5b_parts';
 let modelStatus = MODEL_STATUS.NOT_DOWNLOADED;
 let lastEnvelope = { ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null };
+let pendingPrompt = null;
+let pipelinePhase = '';
+const readyWaiters = [];
 
 function remember(patch) {
   if (patch && patch.status) modelStatus = patch.status;
@@ -109,6 +118,7 @@ function cancelWeights() {
   control.cancelled = true;
   control.paused = false;
   earlyFlag = false;
+  if (typeof control.abortNetwork === 'function') control.abortNetwork();
 }
 
 function installedFlag() {
@@ -129,11 +139,92 @@ function sealInstalled(parts) {
   }
 }
 
+function payloadTrusted(file) {
+  return safetensorsHeaderOk(file) && safetensorsPayloadOk(file);
+}
+
+async function probeWeightBytes() {
+  const nav = globalThis.navigator;
+  if (!nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return null;
+  try {
+    const root = await nav.storage.getDirectory();
+    const handle = await root.getFileHandle('raget-neural-1.5b.safetensors');
+    const file = await handle.getFile();
+    return Math.max(0, Number(file.size) || 0);
+  } catch (e) {
+    return null;
+  }
+}
+
+async function quarantineCorrupt() {
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(INSTALL_KEY);
+      localStorage.removeItem(PARTS_KEY);
+      localStorage.removeItem('rategoan_chunks_mask:' + WEIGHT_SPEC.revision);
+    }
+  } catch (e) { /* penyimpanan ditolak */ }
+  try {
+    const nav = globalThis.navigator;
+    if (nav && nav.storage && typeof nav.storage.getDirectory === 'function') {
+      const root = await nav.storage.getDirectory();
+      if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
+    }
+  } catch (e) { /* berkas sudah tidak ada */ }
+  weightReader = null;
+  loadedTier = null;
+  earlyFlag = false;
+  pipelinePhase = '';
+  remember({ ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: 'berkas bobot rusak, unduh ulang', reply: null });
+}
+
+function releaseReady() {
+  const list = readyWaiters.splice(0);
+  list.forEach((fn) => fn());
+}
+
+function untilReady(ms) {
+  if (pipelinePhase === PIPELINE_PHASE.INFERENCE_READY && installedFlag()) return Promise.resolve(true);
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      resolve(value);
+    };
+    const onReady = () => finish(pipelinePhase === PIPELINE_PHASE.INFERENCE_READY && installedFlag());
+    const timer = setTimeout(() => {
+      const at = readyWaiters.indexOf(onReady);
+      if (at >= 0) readyWaiters.splice(at, 1);
+      finish(false);
+    }, ms);
+    readyWaiters.push(onReady);
+  });
+}
+
+async function flushPending() {
+  const job = pendingPrompt;
+  if (!job) return;
+  pendingPrompt = null;
+  const reply = await generateLocal(job.prompt, job.options || {});
+  if (!reply || typeof window === 'undefined' || typeof CustomEvent === 'undefined') return;
+  window.dispatchEvent(new CustomEvent('rategoan:pending-reply', { detail: { prompt: job.prompt, reply: reply } }));
+}
+
+async function markInferenceReady() {
+  pipelinePhase = PIPELINE_PHASE.INFERENCE_READY;
+  remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
+  const waiting = readyWaiters.length;
+  releaseReady();
+  if (!waiting) await flushPending();
+}
+
 async function bootWeights() {
   if (bootPromise) return bootPromise;
   bootPromise = (async () => {
-    if (loadedTier && weightReader && safetensorsHeaderOk(weightReader)) {
-      remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
+    if (loadedTier && weightReader && payloadTrusted(weightReader)) {
+      await markInferenceReady();
       return true;
     }
     if (!installedFlag()) {
@@ -141,17 +232,18 @@ async function bootWeights() {
       return false;
     }
     const file = await inspectWeightFile('raget-neural-1.5b.safetensors');
-    if (!safetensorsHeaderOk(file)) {
-      weightReader = null;
-      loadedTier = null;
-      earlyFlag = false;
+    if (!file) {
       remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'header safetensors rusak', reply: null });
+      return false;
+    }
+    if (!payloadTrusted(file)) {
+      await quarantineCorrupt();
       return false;
     }
     weightReader = file;
     loadedTier = 'tier_1_5b';
     earlyFlag = false;
-    remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
+    await markInferenceReady();
     return true;
   })();
   try {
@@ -178,6 +270,7 @@ async function doInitTier(tier) {
   try {
     lastWeightError = '';
     control.cancelled = false;
+    pipelinePhase = PIPELINE_PHASE.TRANSFERRING;
     remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: '', reply: null });
     const url = CHECKPOINT_BY_TIER[tier];
     let size = WEIGHT_BYTES[tier] || 0;
@@ -201,26 +294,44 @@ async function doInitTier(tier) {
       onEarlyReady: () => {
         markEarly(tier);
       },
-      onProgress: (detail) => reportProgress(Object.assign({ tier: tier }, detail)),
+      onProgress: (detail) => {
+        if (detail && detail.phase && pipelinePhase !== PIPELINE_PHASE.VERIFYING_PAYLOAD && pipelinePhase !== PIPELINE_PHASE.INFERENCE_READY) {
+          pipelinePhase = detail.phase;
+        }
+        reportProgress(Object.assign({ tier: tier }, detail));
+      },
     });
     if (packed.bytesHeld !== 0) throw new Error('buffer monolitik tidak boleh dibuat');
+    pipelinePhase = PIPELINE_PHASE.VERIFYING_PAYLOAD;
+    progressLoaded = size;
+    progressTotal = size;
     const sealed = await inspectWeightFile('raget-neural-1.5b.safetensors');
-    if (!safetensorsHeaderOk(sealed)) throw new Error('header safetensors rusak');
+    if (!sealed) throw new Error('berkas bobot belum terbaca');
+    if (!payloadTrusted(sealed)) {
+      await quarantineCorrupt();
+      throw new Error('header safetensors rusak');
+    }
     weightReader = sealed;
     markEarly(tier);
     sealInstalled(packed.parts);
-    remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
+    await markInferenceReady();
     reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts, source: 'cache', early: false });
     return true;
   } catch (e) {
     lastWeightError = e && e.message ? String(e.message) : 'gagal';
     const badHeader = lastWeightError.indexOf('header safetensors') >= 0;
-    if (badHeader || !earlyFlag) {
-      if (badHeader || loadedTier === tier) {
+    if (badHeader) {
+      pipelinePhase = '';
+      failEarly();
+      return false;
+    }
+    if (!earlyFlag) {
+      if (loadedTier === tier) {
         loadedTier = null;
         weightReader = null;
         earlyFlag = false;
       }
+      pipelinePhase = '';
       remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError, reply: null });
       failEarly();
       return false;
@@ -257,10 +368,6 @@ function ensureTier(tier) {
   return Promise.race([untilEarly(), pending]);
 }
 
-function prefetchBest() {
-  return Promise.resolve(false);
-}
-
 function ready() {
   return loadedTier !== null;
 }
@@ -282,26 +389,14 @@ function runOnWorker(prompt, genOpts, signal) {
   const live = ensureWorker();
   return new Promise((resolve) => {
     let settled = false;
-    let cap = 0;
     const finish = (value) => {
       if (settled) return;
       settled = true;
-      clearTimeout(cap);
       live.removeEventListener('message', onMsg);
       live.removeEventListener('error', onErr);
       if (signal) signal.removeEventListener('abort', onAbort);
       resolve(value);
     };
-    const fire = () => {
-      haltInference();
-      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'nalar timeout', reply: null });
-      finish(null);
-    };
-    const arm = () => {
-      clearTimeout(cap);
-      cap = setTimeout(fire, INFERENCE_MS);
-    };
-    arm();
     const onAbort = () => {
       haltInference();
       if (!lastEnvelope.error) remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'dibatalkan', reply: null });
@@ -315,7 +410,6 @@ function runOnWorker(prompt, genOpts, signal) {
       const data = ev.data || {};
       if (data.id !== id) return;
       if (data.type === 'token') {
-        arm();
         if (data.piece && genOpts.onToken) genOpts.onToken(data.piece);
       }
       if (data.type === 'done') finish(data);
@@ -425,6 +519,30 @@ async function generate(messages, prompt, options) {
     }
     return reply;
   }
+  const text = String(prompt || '');
+  pendingPrompt = { prompt: text, options: options || null };
+  const atFull = pipelinePhase === PIPELINE_PHASE.VERIFYING_PAYLOAD
+    || (progressTotal > 0 && progressLoaded >= progressTotal && !!initPromises.tier_1_5b);
+  if (atFull) {
+    const ready = await untilReady(3000);
+    if (ready && installedFlag()) {
+      if (pendingPrompt && pendingPrompt.prompt === text) pendingPrompt = null;
+      const reply = await generateLocal(prompt, options);
+      if (reply == null) {
+        remember({
+          ok: false,
+          status: modelStatus === MODEL_STATUS.READY ? MODEL_STATUS.FAILED : modelStatus,
+          error: lastEnvelope.error || lastWeightError || 'nalar kosong',
+          reply: null,
+        });
+      } else {
+        remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: reply });
+      }
+      return reply;
+    }
+    remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: '', reply: null });
+    return null;
+  }
   loadWeights().catch(() => {});
   remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: queueLine(), reply: null });
   return null;
@@ -449,9 +567,12 @@ function cepatReady() {
   return earlyFlag;
 }
 
-function resumeProgress() {
+async function resumeProgress() {
   const total = WEIGHT_BYTES.tier_1_5b || WEIGHT_SPEC.size || 0;
-  const loaded = maskedBytes(total, WEIGHT_SPEC.chunk, WEIGHT_SPEC.revision);
+  let loaded = maskedBytes(total, WEIGHT_SPEC.chunk, WEIGHT_SPEC.revision);
+  const physical = await probeWeightBytes();
+  if (physical == null) return 0;
+  if (physical < total) loaded = Math.min(loaded, physical);
   if (loaded <= 0) return 0;
   reportProgress({
     loaded: loaded,
@@ -471,7 +592,6 @@ function loadWeights() {
 }
 
 export const neuralProvider = Object.freeze({
-  prefetchBest,
   ready,
   generate,
   getStats,

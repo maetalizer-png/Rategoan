@@ -1,8 +1,6 @@
-// Adapter 2/2 — Raget 1.0. Status mengikuti neural-provider, bukan ready palsu.
+// Adapter 2/2 — Raget 1.0. Abort hanya dari pengguna, bukan timer 30 detik.
 import { neuralProvider } from './neural-provider.js';
 import { enginePreference } from '../../js/state/engine-preference.js';
-
-const INFERENCE_MS = 30000;
 
 async function init() {
   if (typeof neuralProvider.prefetchBest === 'function') {
@@ -45,7 +43,6 @@ async function ask(prompt, context) {
     else external.addEventListener('abort', () => ctrl.abort(), { once: true });
   }
   const mode = uiMode();
-  const timer = setTimeout(() => ctrl.abort(), INFERENCE_MS);
   try {
     const opts = {
       signal: ctrl.signal,
@@ -57,8 +54,9 @@ async function ask(prompt, context) {
     if (ctrl.signal.aborted) return null;
     if (reply && !/^\d+$/.test(String(reply).trim())) return reply;
     return null;
-  } finally {
-    clearTimeout(timer);
+  } catch (e) {
+    if (external && external.aborted) throw new Error('dibatalkan');
+    return null;
   }
 }
 

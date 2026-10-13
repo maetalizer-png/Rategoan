@@ -1,5 +1,6 @@
 import { openInt4Stream } from './int4-session.js';
 import { openSyncWeight, safetensorsHeaderOk } from './weight-cache.js';
+import { safetensorsPayloadOk } from './safetensors-validator.js';
 
 let sessionPromise = null;
 
@@ -7,7 +8,7 @@ function session() {
   if (!sessionPromise) {
     sessionPromise = (async () => {
       const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
-      if (!safetensorsHeaderOk(sync)) {
+      if (!safetensorsHeaderOk(sync) || !safetensorsPayloadOk(sync)) {
         if (sync && typeof sync.close === 'function') {
           try { sync.close(); } catch (e) { /* gagang buruk */ }
         }
@@ -30,7 +31,7 @@ self.onmessage = async (event) => {
       timed = true;
       sessionPromise = null;
       self.postMessage({ id: msg.id, type: 'error', message: 'nalar timeout' });
-    }, 30000);
+    }, 90000);
   };
   arm();
   try {

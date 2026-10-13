@@ -85,14 +85,14 @@ test('DOD-35 header, revisi, dan batas waktu ada di sumber', () => {
   assert.match(provider, /READY/);
   assert.match(provider, /FAILED/);
   assert.match(provider, /safetensorsHeaderOk/);
-  assert.match(provider, /INFERENCE_MS = 30000/);
+  assert.equal(/setTimeout\(fire,\s*INFERENCE_MS\)/.test(provider), false);
   assert.match(provider, /bootWeights\(\)/);
   assert.equal(provider.includes('sync.size < 8'), false);
-  assert.match(adapter, /INFERENCE_MS = 30000/);
+  assert.equal(/setTimeout\(\(\) => ctrl\.abort\(\)/.test(adapter), false);
   assert.equal(/mode \? null : setTimeout/.test(adapter), false);
   assert.match(raget, /safetensorsHeaderOk/);
   assert.match(raget, /nalar timeout/);
-  assert.match(raget, /30000/);
+  assert.match(raget, /90000/);
   assert.equal(composer.includes('Menjawab menggunakan partisi terunduh'), false);
   assert.match(composer, /dataset\.state = 'failed'/);
   assert.match(composer, /lastEnvelope/);
@@ -185,6 +185,7 @@ test('tulis OPFS gagal tidak menandai topeng, revisi lain tidak memakai topeng l
       chunk: 16,
       concurrency: 1,
       revision: 'rev-a',
+      opfsSize: 16,
       sleepImpl: async () => {},
       fetchImpl: async () => { hits += 1; throw new Error('tidak boleh'); },
     });

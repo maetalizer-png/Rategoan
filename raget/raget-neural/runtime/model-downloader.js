@@ -151,10 +151,15 @@ export function headerValue(res, name) {
   return String(res.headers[wanted] || res.headers[name] || '');
 }
 
-export function contentRangeMatches(header, range) {
+export function contentRangeMatches(header, range, total) {
   const match = /bytes\s+(\d+)\s*-\s*(\d+)\s*\/\s*(\d+|\*)/i.exec(String(header || ''));
   if (!match || !range) return false;
-  return Number(match[1]) === range.start && Number(match[2]) === range.end;
+  if (Number(match[1]) !== range.start || Number(match[2]) !== range.end) return false;
+  if (typeof total === 'number') {
+    if (match[3] === '*') return false;
+    return Number(match[3]) === total;
+  }
+  return true;
 }
 
 function readSlice(reader, idleMs) {
@@ -173,14 +178,25 @@ function readSlice(reader, idleMs) {
   });
 }
 
-async function readResponseBytes(res, expect, onBytes, idleMs) {
+async function readResponseBytes(res, expect, onBytes, idleMs, signal) {
   const body = res && res.body;
   if (body && typeof body.getReader === 'function') {
     const reader = body.getReader();
+    const stop = () => {
+      try { reader.cancel(); } catch (e) { /* pembaca sudah lepas */ }
+    };
+    if (signal) {
+      if (signal.aborted) {
+        stop();
+        throw new Error('dibatalkan');
+      }
+      signal.addEventListener('abort', stop, { once: true });
+    }
     const parts = [];
     let got = 0;
     try {
       while (got < expect) {
+        if (signal && signal.aborted) throw new Error('dibatalkan');
         const step = await readSlice(reader, idleMs > 0 ? idleMs : READ_IDLE_MS);
         if (step.done) break;
         const value = step.value;
@@ -192,11 +208,13 @@ async function readResponseBytes(res, expect, onBytes, idleMs) {
         if (onBytes) onBytes(got);
       }
     } finally {
+      if (signal) signal.removeEventListener('abort', stop);
       try { reader.releaseLock(); } catch (e) { /* kunci sudah lepas */ }
     }
     if (got !== expect) throw new Error('potongan pendek ' + got + '/' + expect);
     return joinParts(parts, got);
   }
+  if (signal && signal.aborted) throw new Error('dibatalkan');
   const raw = new Uint8Array(await res.arrayBuffer());
   const bytes = raw.length === expect ? raw : raw.subarray(0, expect);
   if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
@@ -242,6 +260,12 @@ export async function downloadConcurrentChunks(options) {
   const cacheName = (options && options.cacheName) || MODEL_CACHE;
   const fetchImpl = (options && options.fetchImpl) || fetch;
   const control = (options && options.control) || { paused: false, cancelled: false };
+  const netAbort = new AbortController();
+  if (control && typeof control === 'object') {
+    control.abortNetwork = () => {
+      try { netAbort.abort(); } catch (e) { /* sudah batal */ }
+    };
+  }
   const onProgress = options && options.onProgress;
   const onEarlyReady = options && options.onEarlyReady;
   const wait = (options && options.sleepImpl) || sleep;
@@ -260,7 +284,7 @@ export async function downloadConcurrentChunks(options) {
   const done = new Array(ranges.length).fill(false);
   const inflight = new Map();
   let next = 0;
-  let committed = 0;
+  let committedVerifiedBytes = 0;
   let loaded = 0;
   let peak = 0;
   let networkHits = 0;
@@ -270,6 +294,7 @@ export async function downloadConcurrentChunks(options) {
   const samples = [{ t: t0, loaded: 0 }];
   const mesh = options && options.mesh === true;
   const revision = String((options && options.revision) || MODEL_REVISION);
+  const expectedHashes = (options && options.chunkHashes) || [];
   const maskKey = 'rategoan_chunks_mask:' + revision;
   const readIdle = Math.max(1, Math.floor(Number(options && options.readIdleMs) || 0) || READ_IDLE_MS);
   const primed = new Map();
@@ -279,7 +304,7 @@ export async function downloadConcurrentChunks(options) {
   function visibleLoaded() {
     let extra = 0;
     inflight.forEach((n) => { extra += n; });
-    return committed + extra;
+    return committedVerifiedBytes + extra;
   }
 
   function opfsWorker() {
@@ -348,7 +373,7 @@ export async function downloadConcurrentChunks(options) {
   async function fetchRange(range, expect, onBytes) {
     let last = null;
     for (let attempt = 0; attempt < DOWNLOAD_ATTEMPTS; attempt += 1) {
-      if (control.cancelled) throw new Error('dibatalkan');
+      if (control.cancelled || netAbort.signal.aborted) throw new Error('dibatalkan');
       try {
         const res = await fetchImpl(url, {
           method: 'GET',
@@ -356,20 +381,44 @@ export async function downloadConcurrentChunks(options) {
           cache: 'no-store',
           credentials: 'omit',
           redirect: 'follow',
+          signal: netAbort.signal,
         });
         if (!res || res.status !== 206) throw new Error('HTTP ' + (res && res.status));
-        if (!contentRangeMatches(headerValue(res, 'content-range'), range)) {
+        if (!contentRangeMatches(headerValue(res, 'content-range'), range, size)) {
           throw new Error('Content-Range tidak cocok');
         }
-        return await readResponseBytes(res, expect, onBytes, readIdle);
+        return await readResponseBytes(res, expect, onBytes, readIdle, netAbort.signal);
       } catch (e) {
         last = e instanceof Error ? e : new Error('gagal');
-        if (control.cancelled || attempt + 1 >= DOWNLOAD_ATTEMPTS) break;
+        if (control.cancelled || netAbort.signal.aborted) throw new Error('dibatalkan');
+        if (attempt + 1 >= DOWNLOAD_ATTEMPTS) break;
         if (onBytes) onBytes(0);
         await wait(downloadBackoffMs(attempt));
       }
     }
     throw last || new Error('gagal');
+  }
+
+  let verifiedSize = null;
+  function chunkCovered(index) {
+    if (verifiedSize == null) return false;
+    return verifiedSize >= ranges[index].end + 1;
+  }
+
+  async function probeOpfsBytes() {
+    if (options && typeof options.opfsSize === 'number' && Number.isFinite(options.opfsSize)) {
+      return Math.max(0, Math.floor(options.opfsSize));
+    }
+    const nav = globalThis.navigator;
+    if (!nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return null;
+    try {
+      const root = await nav.storage.getDirectory();
+      const handle = await root.getFileHandle(String((options && options.fileName) || 'raget-neural-1.5b.safetensors'));
+      const file = await handle.getFile();
+      return Math.max(0, Number(file.size) || 0);
+    } catch (e) {
+      return 0;
+    }
   }
 
   function prime(i) {
@@ -379,7 +428,7 @@ export async function downloadConcurrentChunks(options) {
     const key = url + '#' + range.start + '-' + range.end;
     const expect = range.end - range.start + 1;
     const job = (async () => {
-      if (maskBits()[i] === '1') return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
+      if (maskBits()[i] === '1' && chunkCovered(i)) return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
       if (mesh && meshHasChunk(i)) {
         const shared = takeMeshChunk(i);
         if (shared && shared.length === expect) return { bytes: shared, fromCache: true, key: key, expect: expect };
@@ -416,13 +465,20 @@ export async function downloadConcurrentChunks(options) {
   }
 
   function report(index, seal) {
-    loaded = visibleLoaded();
+    const seen = visibleLoaded();
+    const verified = committedVerifiedBytes;
+    let shown = seen;
+    if (size > 0 && verified < size && shown >= size) shown = size - 1;
+    if (size > 0 && verified >= size) shown = size;
+    loaded = shown;
     const speed = windowSpeed();
-    const eta = speed > 0 ? Math.max(0, (size - loaded) / speed) : 0;
+    const eta = speed > 0 ? Math.max(0, (size - verified) / speed) : 0;
     if (onProgress) {
       onProgress({
         loaded: loaded,
         total: size,
+        visibleLoaded: seen,
+        committedVerifiedBytes: verified,
         seal: seal,
         speed: speed,
         eta: eta,
@@ -430,6 +486,7 @@ export async function downloadConcurrentChunks(options) {
         index: index,
         source: networkHits > 0 ? 'network' : 'opfs',
         early: earlyFired,
+        phase: seal ? 'WRITING_OPFS' : 'TRANSFERRING',
       });
     }
   }
@@ -453,11 +510,26 @@ export async function downloadConcurrentChunks(options) {
   }
 
   async function persist(offset, bytes, key) {
+    const src = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes || 0);
+    const payload = new Uint8Array(src.byteLength);
+    payload.set(src);
     if (options && typeof options.diskWrite === 'function') {
-      await options.diskWrite(cacheName, key, bytes);
+      await options.diskWrite(cacheName, key, payload);
       return { ok: true, digest: '' };
     }
-    return mirrorOpfs(offset, bytes);
+    return mirrorOpfs(offset, payload);
+  }
+
+  async function matchManifest(index, bytes) {
+    const wanted = expectedHashes[index];
+    if (!wanted || !bytes) return;
+    const chunkBytes = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+    const digest = await digestSha256(chunkBytes);
+    if (digest !== wanted) {
+      const err = new Error('checksum_mismatch');
+      err.name = 'ChecksumError';
+      throw err;
+    }
   }
 
   async function pull(i) {
@@ -470,9 +542,19 @@ export async function downloadConcurrentChunks(options) {
     if (!got.sealed && !got.fromCache) {
       held = got.bytes ? got.bytes.length : 0;
       if (mesh && got.bytes) publishMeshChunk(i, got.bytes.slice());
-      const writing = persist(range.start, got.bytes, got.key);
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
-      const ack = await writing;
+      await matchManifest(i, got.bytes);
+      let writeAck = null;
+      for (let wAttempt = 0; wAttempt < 3; wAttempt += 1) {
+        try {
+          writeAck = await persist(range.start, got.bytes, got.key);
+          if (writeAck && writeAck.ok === true) break;
+        } catch (err) {
+          if (wAttempt === 2) throw err;
+          await wait(500 * (wAttempt + 1));
+        }
+      }
+      const ack = writeAck;
       if (!ack || ack.ok !== true) throw new Error('tulis OPFS gagal');
       seal = ack.digest || 'opfs';
       networkHits += 1;
@@ -483,8 +565,8 @@ export async function downloadConcurrentChunks(options) {
     }
     inflight.delete(i);
     if (held > peak) peak = held;
-    if (!got.sealed) committed += held;
-    loaded = committed;
+    if (!got.sealed) committedVerifiedBytes += held;
+    loaded = committedVerifiedBytes;
     primed.delete(i);
     if (got) got.bytes = null;
     done[i] = true;
@@ -498,6 +580,7 @@ export async function downloadConcurrentChunks(options) {
       while (control.paused && !control.cancelled && !stopError) await wait(40);
       if (stopError) return;
       if (control.cancelled) {
+        try { netAbort.abort(); } catch (e) { /* sudah batal */ }
         stopError = new Error('dibatalkan');
         return;
       }
@@ -545,12 +628,13 @@ export async function downloadConcurrentChunks(options) {
     }
   }
 
+  verifiedSize = await probeOpfsBytes();
   const preset = maskBits();
   for (let i = 0; i < ranges.length; i += 1) {
-    if (preset[i] === '1') committed += ranges[i].end - ranges[i].start + 1;
+    if (preset[i] === '1' && chunkCovered(i)) committedVerifiedBytes += ranges[i].end - ranges[i].start + 1;
   }
-  loaded = committed;
-  if (committed > 0) report(0, 'opfs');
+  loaded = committedVerifiedBytes;
+  if (committedVerifiedBytes > 0) report(0, 'opfs');
 
   const runners = [];
   const workers = ranges.length === 0 ? 0 : Math.min(concurrency, ranges.length);
