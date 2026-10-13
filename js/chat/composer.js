@@ -388,6 +388,7 @@ export function hiddenOrder(text) {
 
 function bindWeightCard() {
   const card = $('weight-card');
+  const bar = $('top-download-bar');
   const btn = $('btn-weight');
   const pauseBtn = $('btn-weight-pause');
   const cancelBtn = $('btn-weight-cancel');
@@ -396,15 +397,20 @@ function bindWeightCard() {
   if (!card || !btn || btn.dataset.bound) return;
   btn.dataset.bound = '1';
   let providerRef = null;
+  const reveal = (on) => {
+    if (bar) bar.hidden = !on;
+    card.hidden = !on;
+  };
   const paint = (detail) => {
     const loaded = detail && detail.committedVerifiedBytes != null ? detail.committedVerifiedBytes : ((detail && detail.loaded) || 0);
     const total = (detail && detail.total) || 0;
     const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
     const installed = providerRef && typeof providerRef.weightsInstalled === 'function' && providerRef.weightsInstalled();
     if (installed) {
-      card.hidden = true;
+      reveal(false);
       return;
     }
+    reveal(true);
     if (fill) fill.style.width = pct + '%';
     const bar = $('weight-bar');
     if (bar) bar.setAttribute('aria-valuenow', String(pct));
@@ -415,12 +421,12 @@ function bindWeightCard() {
     const mbText = mb >= 0.05 ? mb.toFixed(1) + ' MB/s' : (speed > 0 ? Math.round(speed / 1024) + ' KB/s' : '0 MB/s');
     const etaText = eta > 0 ? (eta >= 60 ? Math.ceil(eta / 60) + ' mnt' : Math.ceil(eta) + ' dtk') : '—';
     status.dataset.busy = '1';
-    card.hidden = false;
+    reveal(true);
     if (total > 0 && loaded >= total) {
-      status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%). Memeriksa berkas.';
+      status.textContent = pct + '% · memeriksa berkas';
       return;
     }
-    status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%). ' + mbText + ' · ETA ' + etaText;
+    status.textContent = pct + '% · ' + mbText + ' · ' + etaText;
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});
@@ -436,10 +442,10 @@ function bindWeightCard() {
     const syncCard = () => {
       const installed = typeof neuralProvider.weightsInstalled === 'function' && neuralProvider.weightsInstalled();
       if (installed) {
-        card.hidden = true;
+        reveal(false);
         return;
       }
-      card.hidden = false;
+      reveal(true);
       if (status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
     };
     syncCard();
@@ -468,12 +474,15 @@ function bindWeightCard() {
         pauseBtn.textContent = 'Jeda';
       }
       if (cancelBtn) cancelBtn.hidden = false;
-      if (status) status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%).';
+      if (status) {
+        status.dataset.busy = '1';
+        status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%).';
+      }
       neuralProvider.loadWeights().then((ok) => {
         if (pauseBtn) pauseBtn.hidden = true;
         if (cancelBtn) cancelBtn.hidden = true;
         if (ok && neuralProvider.ready()) {
-          card.hidden = true;
+          reveal(false);
           return;
         }
         btn.disabled = false;

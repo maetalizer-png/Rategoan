@@ -75,7 +75,9 @@ const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
 const PARTS_KEY = 'rategoan_weights_1_5b_parts';
 let modelStatus = MODEL_STATUS.NOT_DOWNLOADED;
 let lastEnvelope = { ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null };
-let pendingPrompt = null;
+let pendingPrompts = [];
+let promptSerial = 0;
+let smokePassed = false;
 let pipelinePhase = '';
 const readyWaiters = [];
 
@@ -203,29 +205,75 @@ function untilReady(ms) {
   });
 }
 
+async function smokeToken() {
+  if (smokePassed) return true;
+  if (typeof Worker !== 'function') return false;
+  try {
+    const out = await runOnWorker('ok', {
+      maxNewTokens: 1,
+      maxLayers: 0,
+      draft: false,
+      lora: null,
+      temperature: 0,
+      topK: 1,
+      topP: 1,
+      repetitionPenalty: 1,
+    }, null);
+    const ok = !!(out && ((out.text && String(out.text).length) || (Array.isArray(out.tokenIds) && out.tokenIds.length)));
+    if (ok) smokePassed = true;
+    return ok;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function flushPending() {
-  const job = pendingPrompt;
-  if (!job) return;
-  pendingPrompt = null;
-  const reply = await generateLocal(job.prompt, job.options || {});
-  if (!reply || typeof window === 'undefined' || typeof CustomEvent === 'undefined') return;
-  window.dispatchEvent(new CustomEvent('rategoan:pending-reply', { detail: { prompt: job.prompt, reply: reply } }));
+  while (pendingPrompts.length) {
+    const job = pendingPrompts.shift();
+    const reply = await generateLocal(job.prompt, job.options || {});
+    if (!reply || typeof window === 'undefined' || typeof CustomEvent === 'undefined') continue;
+    window.dispatchEvent(new CustomEvent('rategoan:pending-reply', {
+      detail: {
+        prompt: job.prompt,
+        reply: reply,
+        request_id: job.request_id,
+        message_id: job.message_id,
+      },
+    }));
+  }
+}
+
+function queuePrompt(prompt, options) {
+  promptSerial += 1;
+  const job = {
+    request_id: 'rq-' + promptSerial,
+    message_id: 'msg-' + promptSerial,
+    prompt: String(prompt || ''),
+    options: options || null,
+  };
+  pendingPrompts.push(job);
+  return job;
 }
 
 async function markInferenceReady() {
+  const smoked = await smokeToken();
+  if (!smoked) {
+    remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'smoke inferensi gagal', reply: null });
+    return false;
+  }
   pipelinePhase = PIPELINE_PHASE.INFERENCE_READY;
   remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
   const waiting = readyWaiters.length;
   releaseReady();
   if (!waiting) await flushPending();
+  return true;
 }
 
 async function bootWeights() {
   if (bootPromise) return bootPromise;
   bootPromise = (async () => {
     if (loadedTier && weightReader && payloadTrusted(weightReader)) {
-      await markInferenceReady();
-      return true;
+      return markInferenceReady();
     }
     if (!installedFlag()) {
       remember({ ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null });
@@ -243,8 +291,7 @@ async function bootWeights() {
     weightReader = file;
     loadedTier = 'tier_1_5b';
     earlyFlag = false;
-    await markInferenceReady();
-    return true;
+    return markInferenceReady();
   })();
   try {
     return await bootPromise;
@@ -287,7 +334,8 @@ async function doInitTier(tier) {
       revision: WEIGHT_SPEC.revision,
       cacheName: WEIGHT_SPEC.cache,
       control: control,
-      concurrency: 6,
+      concurrency: 4,
+      chunkHashes: Array.isArray(WEIGHT_SPEC.chunkHashes) ? WEIGHT_SPEC.chunkHashes : [],
       mesh: typeof window !== 'undefined',
       roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
       earlyBytes: tier === 'tier_1_5b' ? EARLY_PROGRESS_BYTES : 0,
@@ -314,7 +362,8 @@ async function doInitTier(tier) {
     weightReader = sealed;
     markEarly(tier);
     sealInstalled(packed.parts);
-    await markInferenceReady();
+    const smoked = await markInferenceReady();
+    if (!smoked) return false;
     reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts, source: 'cache', early: false });
     return true;
   } catch (e) {
@@ -520,15 +569,27 @@ async function generate(messages, prompt, options) {
     return reply;
   }
   const text = String(prompt || '');
-  pendingPrompt = { prompt: text, options: options || null };
+  const job = queuePrompt(text, options);
   const atFull = pipelinePhase === PIPELINE_PHASE.VERIFYING_PAYLOAD
     || (progressTotal > 0 && progressLoaded >= progressTotal && !!initPromises.tier_1_5b);
   if (atFull) {
     const ready = await untilReady(3000);
     if (ready && installedFlag()) {
-      if (pendingPrompt && pendingPrompt.prompt === text) pendingPrompt = null;
-      const reply = await generateLocal(prompt, options);
-      if (reply == null) {
+      const queue = pendingPrompts.splice(0, pendingPrompts.length);
+      let mine = null;
+      for (let i = 0; i < queue.length; i += 1) {
+        const row = queue[i];
+        const reply = await generateLocal(row.prompt, row.options || {});
+        if (row.request_id === job.request_id) {
+          mine = reply;
+          continue;
+        }
+        if (!reply || typeof window === 'undefined' || typeof CustomEvent === 'undefined') continue;
+        window.dispatchEvent(new CustomEvent('rategoan:pending-reply', {
+          detail: { prompt: row.prompt, reply: reply, request_id: row.request_id, message_id: row.message_id },
+        }));
+      }
+      if (mine == null) {
         remember({
           ok: false,
           status: modelStatus === MODEL_STATUS.READY ? MODEL_STATUS.FAILED : modelStatus,
@@ -536,9 +597,9 @@ async function generate(messages, prompt, options) {
           reply: null,
         });
       } else {
-        remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: reply });
+        remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: mine });
       }
-      return reply;
+      return mine;
     }
     remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: '', reply: null });
     return null;

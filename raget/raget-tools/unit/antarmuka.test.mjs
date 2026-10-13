@@ -1089,7 +1089,7 @@ test('DOD-13.09 header safetensors dan unduhan 20MB berhash', async () => {
   assert.equal(decoupleWeightTie(parsed.header).tied, true);
   assert.equal(decoupleWeightTie(parsed.header).shared, 'embedding.weight');
   const ranges = planRanges(40 * 1024 * 1024, MODEL_CHUNK);
-  assert.equal(ranges.length, 2);
+  assert.equal(ranges.length, 10);
   const payload = new Uint8Array([1, 2, 3, 4]);
   const hash = await digestSha256(payload);
   const got = await downloadModel({

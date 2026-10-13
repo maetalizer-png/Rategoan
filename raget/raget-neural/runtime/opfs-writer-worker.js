@@ -23,6 +23,24 @@ self.onmessage = async (event) => {
     }
     return;
   }
+  if (msg.op === 'digest') {
+    try {
+      const io = await handle();
+      const length = Math.max(0, msg.length | 0);
+      const buf = new Uint8Array(length);
+      const n = io.read(buf, { at: msg.offset || 0 });
+      const slice = typeof n === 'number' && n >= 0 ? buf.subarray(0, n) : buf;
+      let digest = '';
+      if (self.crypto && crypto.subtle) {
+        const hashed = await crypto.subtle.digest('SHA-256', slice);
+        digest = Array.from(new Uint8Array(hashed)).map((b) => b.toString(16).padStart(2, '0')).join('');
+      }
+      self.postMessage({ id: msg.id, op: 'digest', ok: true, digest: digest });
+    } catch (e) {
+      self.postMessage({ id: msg.id, op: 'digest', ok: false, digest: '' });
+    }
+    return;
+  }
   if (msg.op !== 'write') return;
   try {
     const io = await handle();

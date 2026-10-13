@@ -146,6 +146,7 @@ test('tulis OPFS gagal dua kali lalu berhasil, hash manifest dicek', async () =>
     diskWrite: async () => {
       writes += 1;
       if (writes < 3) throw new Error('OPFS gagal');
+      return { digest: good };
     },
     fetchImpl: async (_url, init) => ranged(init, 8),
   });
@@ -159,10 +160,13 @@ test('tulis OPFS gagal dua kali lalu berhasil, hash manifest dicek', async () =>
     concurrency: 1,
     chunkHashes: ['ab'],
     sleepImpl: async () => {},
-    diskWrite: async () => { badWrites += 1; },
+    diskWrite: async () => {
+      badWrites += 1;
+      return { digest: 'zz' };
+    },
     fetchImpl: async (_url, init) => ranged(init, 8),
   }), /checksum_mismatch/);
-  assert.equal(badWrites, 0);
+  assert.equal(badWrites, 1);
   await assert.rejects(() => downloadConcurrentChunks({
     url: 'https://model.local/rentang.bin',
     size: 8,

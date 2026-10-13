@@ -2,7 +2,7 @@ import { meshHasChunk, publishMeshChunk, takeMeshChunk } from '../../../js/sync/
 
 export const MODEL_CACHE = 'rategoan-model-cache';
 export const NEURAL_CACHE = 'rategoan-neural-cache';
-export const MODEL_CHUNK = 20 * 1024 * 1024;
+export const MODEL_CHUNK = 4 * 1024 * 1024;
 export const PREFETCH_AHEAD = 4;
 export const PROGRESS_GRAIN = 256 * 1024;
 export const DOWNLOAD_ATTEMPTS = 4;
@@ -428,7 +428,7 @@ export async function downloadConcurrentChunks(options) {
     const key = url + '#' + range.start + '-' + range.end;
     const expect = range.end - range.start + 1;
     const job = (async () => {
-      if (maskBits()[i] === '1' && chunkCovered(i)) return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
+      if (maskBits()[i] === '1' && chunkCovered(i) && await resumeDigestOk(i)) return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
       if (mesh && meshHasChunk(i)) {
         const shared = takeMeshChunk(i);
         if (shared && shared.length === expect) return { bytes: shared, fromCache: true, key: key, expect: expect };
@@ -514,21 +514,58 @@ export async function downloadConcurrentChunks(options) {
     const payload = new Uint8Array(src.byteLength);
     payload.set(src);
     if (options && typeof options.diskWrite === 'function') {
-      await options.diskWrite(cacheName, key, payload);
-      return { ok: true, digest: '' };
+      const noted = await options.diskWrite(cacheName, key, payload);
+      const digest = noted && noted.digest ? String(noted.digest) : '';
+      return { ok: true, digest: digest };
     }
     return mirrorOpfs(offset, payload);
   }
 
-  async function matchManifest(index, bytes) {
+  function askOpfs(message) {
+    const port = opfsWorker();
+    if (!port) return Promise.reject(new Error('OPFS tidak tersedia'));
+    const id = opfsSeq + 1;
+    opfsSeq = id;
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        port.removeEventListener('message', onMsg);
+        reject(new Error('OPFS timeout'));
+      }, OPFS_ACK_MS);
+      function onMsg(event) {
+        if (!event.data || event.data.id !== id) return;
+        clearTimeout(timer);
+        port.removeEventListener('message', onMsg);
+        if (event.data.ok !== true) {
+          reject(new Error('OPFS gagal'));
+          return;
+        }
+        resolve(event.data);
+      }
+      port.addEventListener('message', onMsg);
+      try {
+        port.postMessage(Object.assign({ id: id }, message));
+      } catch (e) {
+        clearTimeout(timer);
+        port.removeEventListener('message', onMsg);
+        reject(e instanceof Error ? e : new Error('OPFS gagal'));
+      }
+    });
+  }
+
+  async function resumeDigestOk(index) {
     const wanted = expectedHashes[index];
-    if (!wanted || !bytes) return;
-    const chunkBytes = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-    const digest = await digestSha256(chunkBytes);
-    if (digest !== wanted) {
-      const err = new Error('checksum_mismatch');
-      err.name = 'ChecksumError';
-      throw err;
+    if (!wanted) return true;
+    const range = ranges[index];
+    const expect = range.end - range.start + 1;
+    if (options && typeof options.opfsDigest === 'function') {
+      const got = await options.opfsDigest(range.start, expect);
+      return got === wanted;
+    }
+    try {
+      const row = await askOpfs({ op: 'digest', offset: range.start, length: expect });
+      return !!(row && row.digest === wanted);
+    } catch (e) {
+      return false;
     }
   }
 
@@ -543,7 +580,6 @@ export async function downloadConcurrentChunks(options) {
       held = got.bytes ? got.bytes.length : 0;
       if (mesh && got.bytes) publishMeshChunk(i, got.bytes.slice());
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
-      await matchManifest(i, got.bytes);
       let writeAck = null;
       for (let wAttempt = 0; wAttempt < 3; wAttempt += 1) {
         try {
@@ -556,6 +592,11 @@ export async function downloadConcurrentChunks(options) {
       }
       const ack = writeAck;
       if (!ack || ack.ok !== true) throw new Error('tulis OPFS gagal');
+      if (expectedHashes[i] && ack.digest !== expectedHashes[i]) {
+        const err = new Error('checksum_mismatch');
+        err.name = 'ChecksumError';
+        throw err;
+      }
       seal = ack.digest || 'opfs';
       networkHits += 1;
       markChunk(i);

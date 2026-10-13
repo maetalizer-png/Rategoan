@@ -108,11 +108,85 @@
   display: none;
 }
 
+#top-download-bar[hidden] {
+  display: none;
+}
+
+body.auth-gate #top-download-bar {
+  display: none;
+}
+
+#top-download-bar {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
 #top-download-bar .weight-card {
   margin: 0;
-  padding: 8px 14px 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--rg-line);
   border-bottom: 1px solid var(--rg-line);
+  border-radius: 12px;
   background: var(--rg-bg);
+  max-height: 67px;
+}
+
+#top-download-bar .dl-ico {
+  display: none;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  max-height: 36px;
+  padding: 0 8px 0 12px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) #btn-weight {
+  display: none;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .dl-ico {
+  display: inline-flex;
+  order: 0;
+  flex: 0 0 auto;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) #weight-status {
+  order: 1;
+  flex: 0 1 auto;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .weight-bar {
+  order: 2;
+  flex: 1 1 auto;
+  height: 3px;
+  min-width: 48px;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .weight-bar::after {
+  display: none;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .weight-actions {
+  order: 3;
+  flex: 0 0 auto;
+  gap: 6px;
+}
+
+#top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .weight-actions button {
+  padding: 4px 10px;
+  font-size: 12px;
 }
 
 .weight-actions {

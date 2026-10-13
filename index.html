@@ -36,23 +36,25 @@
       </button>
     </div>
   </header>
-  <div id="top-download-bar">
-    <div id="weight-card" class="weight-card" hidden>
-      <div class="weight-actions">
-        <button type="button" id="btn-weight">Unduh Bobot Raget 1.0 (997 MB)</button>
-        <button type="button" id="btn-weight-pause" hidden>Jeda</button>
-        <button type="button" id="btn-weight-cancel" hidden>Batal</button>
-        <button type="button" id="mode-cepat" hidden disabled>Mode Cepat</button>
-      </div>
-      <div id="weight-bar" class="weight-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Unduhan bobot"><span id="weight-fill"></span></div>
-      <p id="weight-status">Bobot belum di perangkat.</p>
-    </div>
-  </div>
   <div id="thread-bar" hidden></div>
 
   <main id="app">
 
     <section id="view-chat" class="view">
+      <div id="top-download-bar" class="top-download-bar" hidden>
+        <div id="weight-card" class="weight-card">
+          <span class="dl-ico" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          </span>
+          <p id="weight-status">Bobot belum di perangkat.</p>
+          <div id="weight-bar" class="weight-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Unduhan bobot"><span id="weight-fill"></span></div>
+          <div class="weight-actions">
+            <button type="button" id="btn-weight">Unduh Bobot Raget 1.0 (997 MB)</button>
+            <button type="button" id="btn-weight-pause" hidden>Jeda</button>
+            <button type="button" id="btn-weight-cancel" hidden>Batal</button>
+          </div>
+        </div>
+      </div>
       <div id="chat-search-bar" class="chat-search-bar" hidden>
         <input id="chat-search-input" class="hist-search-input" type="search" placeholder="Cari di obrolan ini…" autocomplete="off">
         <span id="chat-search-count">0</span>
