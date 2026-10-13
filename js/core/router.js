@@ -20,8 +20,9 @@ export const router = {
       full = 'login';
     }
     if (authed && hash === 'studio') {
-      location.href = 'studio.html';
-      return;
+      window.open('studio.html', '_blank', 'noopener');
+      hash = 'chat';
+      full = 'chat';
     }
     this.sub = full.split('/').slice(1).join('/');
     if (location.hash !== '#/' + full) {
@@ -45,7 +46,7 @@ export const router = {
     const full = String(to || 'chat');
     const view = full.split('/')[0] || 'chat';
     if (view === 'studio') {
-      location.href = 'studio.html';
+      window.open('studio.html', '_blank', 'noopener');
       return;
     }
     history.pushState({ rg: 1, view }, '', '#/' + full);

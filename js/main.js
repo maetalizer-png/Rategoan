@@ -156,7 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { probeGpu().catch(() => {}); watchStorage(); }, 2000);
   }
   import('../raget/raget-neural/neural-provider.js').then((mod) => {
-    if (mod.neuralProvider.weightsInstalled()) mod.neuralProvider.bootWeights();
+    const neural = mod.neuralProvider;
+    if (neural.weightsInstalled()) neural.bootWeights();
+    else if (typeof neural.resumeProgress === 'function') neural.resumeProgress();
   }).catch(() => {});
 });
 

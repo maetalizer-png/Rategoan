@@ -211,6 +211,29 @@ async function readResponseBytes(res, expect, onBytes, idleMs) {
   return bytes;
 }
 
+export function maskedBytes(size, chunk, revision) {
+  const total = Math.max(0, Math.floor(Number(size) || 0));
+  const step = chunk > 0 ? Math.floor(chunk) : MODEL_CHUNK;
+  if (!total || !step) return 0;
+  let bits = [];
+  try {
+    if (typeof localStorage === 'undefined') return 0;
+    const key = 'rategoan_chunks_mask:' + String(revision || MODEL_REVISION);
+    const raw = localStorage.getItem(key) || '';
+    bits = raw ? raw.split(',') : [];
+  } catch (e) {
+    return 0;
+  }
+  let sum = 0;
+  const n = Math.ceil(total / step);
+  for (let i = 0; i < n; i += 1) {
+    if (bits[i] !== '1') continue;
+    const start = i * step;
+    sum += Math.min(step, total - start);
+  }
+  return sum;
+}
+
 export async function downloadConcurrentChunks(options) {
   await lockPersistentStorage();
   const url = String((options && options.url) || '');
@@ -460,7 +483,7 @@ export async function downloadConcurrentChunks(options) {
     }
     inflight.delete(i);
     if (held > peak) peak = held;
-    committed += held;
+    if (!got.sealed) committed += held;
     loaded = committed;
     primed.delete(i);
     if (got) got.bytes = null;
@@ -521,6 +544,13 @@ export async function downloadConcurrentChunks(options) {
       opfsPort = null;
     }
   }
+
+  const preset = maskBits();
+  for (let i = 0; i < ranges.length; i += 1) {
+    if (preset[i] === '1') committed += ranges[i].end - ranges[i].start + 1;
+  }
+  loaded = committed;
+  if (committed > 0) report(0, 'opfs');
 
   const runners = [];
   const workers = ranges.length === 0 ? 0 : Math.min(concurrency, ranges.length);

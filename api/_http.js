@@ -151,6 +151,10 @@ export function restParams(params, used) {
 }
 
 export async function forward(res, url, token, method, body, extraHeaders) {
+  if (!publicHttpUrl(url)) {
+    sendRpcError(res, 400, -32602, 'url_ditolak');
+    return;
+  }
   const headers = Object.assign({
     authorization: 'Bearer ' + token,
     accept: 'application/json',

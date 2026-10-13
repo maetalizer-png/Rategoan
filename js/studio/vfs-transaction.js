@@ -28,10 +28,10 @@ function plainFiles(git) {
 
 async function remember(row) {
   const phaseName = { PREPARE: 'PREPARE', COMMITTED: 'COMMIT', PURGED: 'PURGE', ROLLED_BACK: 'ROLLED_BACK' };
-  row.phase = phaseName[row.status] || row.status;
+  const phase = phaseName[row.status] || row.status;
   if (!row.phases) row.phases = [];
-  row.phases.push(row.phase);
-  journal.set(row.id, row);
+  row.phases.push(phase);
+  row.phase = phase;
   const pending = putRow(JOURNAL_STORE, {
     id: row.id,
     status: row.status,
@@ -40,6 +40,7 @@ async function remember(row) {
     files: row.files || null,
   });
   if (typeof indexedDB !== 'undefined') await pending;
+  journal.set(row.id, row);
   return row.id;
 }
 
@@ -149,10 +150,9 @@ export class VfsTransaction {
       this.git.casRef('main', prevMain, commitId);
       const row = journal.get(txId);
       if (row) {
-        row.status = 'COMMITTED';
-        await remember(row);
-        row.status = 'PURGED';
-        await remember(row);
+        await remember(Object.assign({}, row, { status: 'COMMITTED', phases: (row.phases || []).slice() }));
+        const live = journal.get(txId);
+        await remember(Object.assign({}, live || row, { status: 'PURGED', phases: ((live || row).phases || []).slice() }));
         journal.delete(txId);
       }
       writeAutosave('aktif', this.git.snapshot());
@@ -162,8 +162,7 @@ export class VfsTransaction {
       this.restoreRefs();
       const row = journal.get(txId);
       if (row) {
-        row.status = 'ROLLED_BACK';
-        await remember(row);
+        await remember(Object.assign({}, row, { status: 'ROLLED_BACK', phases: (row.phases || []).slice() }));
       }
       if (this.vfsSnap && this.vfs && typeof this.vfs.reset === 'function') {
         this.vfs.reset({});

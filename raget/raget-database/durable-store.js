@@ -39,13 +39,18 @@ function openDb() {
 export function putRow(store, row) {
   const id = String((row && row.id) || '');
   const copy = Object.assign({}, row, { id });
-  box(store).set(id, copy);
+  const defer = store === JOURNAL_STORE && typeof indexedDB !== 'undefined';
+  if (!defer) box(store).set(id, copy);
   if (typeof indexedDB === 'undefined') return Promise.resolve(id);
   return openDb().then((db) => new Promise((resolve, reject) => {
     const tx = db.transaction(store, 'readwrite');
     tx.objectStore(store).put(copy);
-    tx.oncomplete = () => resolve(id);
+    tx.oncomplete = () => {
+      if (defer) box(store).set(id, copy);
+      resolve(id);
+    };
     tx.onerror = () => reject(tx.error || new Error('put'));
+    tx.onabort = () => reject(tx.error || new Error('put'));
   }));
 }
 

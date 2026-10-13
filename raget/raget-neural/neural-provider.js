@@ -3,13 +3,13 @@ import { personaLora, pullLora } from '../../js/chat/persona.js';
 import { llmMode } from '../../js/state/llm-mode.js';
 import { hudBudget } from '../../js/studio/telemetry.js';
 import { bindTier, TIER_SHAPES } from './llm-config.js';
-import { openInt4Stream } from './runtime/int4-session.js';
+import { maskedBytes } from './runtime/model-downloader.js';
 import {
   WEIGHT_ROOM,
   WEIGHT_SPEC,
   EARLY_PROGRESS_BYTES,
   downloadConcurrentChunks,
-  openSyncWeight,
+  inspectWeightFile,
   storageFree,
   safetensorsHeaderOk,
 } from './runtime/weight-cache.js';
@@ -34,8 +34,9 @@ const WEIGHT_BYTES = {
 
 let cache = null;
 let loadedTier = null;
-let session = null;
 let initPromises = {};
+let progressLoaded = 0;
+let progressTotal = 0;
 
 async function loadEngine() {
   if (cache) return cache;
@@ -45,8 +46,15 @@ async function loadEngine() {
 }
 
 function reportProgress(detail) {
+  if (detail && typeof detail.loaded === 'number' && detail.loaded >= 0) progressLoaded = detail.loaded;
+  if (detail && typeof detail.total === 'number' && detail.total > 0) progressTotal = detail.total;
   if (typeof window === 'undefined' || typeof CustomEvent === 'undefined') return;
   window.dispatchEvent(new CustomEvent('rategoan:neural-progress', { detail: detail }));
+}
+
+function queueLine() {
+  const pct = progressTotal > 0 ? Math.max(0, Math.min(100, Math.round((progressLoaded / progressTotal) * 100))) : 0;
+  return 'Bobot sedang diunduh (' + pct + '%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.';
 }
 
 let lastWeightError = '';
@@ -121,16 +129,6 @@ function sealInstalled(parts) {
   }
 }
 
-function clearInstalled() {
-  try {
-    if (typeof localStorage === 'undefined') return;
-    localStorage.removeItem(INSTALL_KEY);
-    localStorage.removeItem(PARTS_KEY);
-  } catch (e) {
-    /* penyimpanan pribadi ditolak */
-  }
-}
-
 async function bootWeights() {
   if (bootPromise) return bootPromise;
   bootPromise = (async () => {
@@ -142,21 +140,17 @@ async function bootWeights() {
       remember({ ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null });
       return false;
     }
-    const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
-    if (!safetensorsHeaderOk(sync)) {
-      if (sync && typeof sync.close === 'function') {
-        try { sync.close(); } catch (e) { /* gagang buruk */ }
-      }
+    const file = await inspectWeightFile('raget-neural-1.5b.safetensors');
+    if (!safetensorsHeaderOk(file)) {
       weightReader = null;
       loadedTier = null;
       earlyFlag = false;
-      clearInstalled();
       remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'header safetensors rusak', reply: null });
       return false;
     }
-    weightReader = sync;
+    weightReader = file;
     loadedTier = 'tier_1_5b';
-    earlyFlag = true;
+    earlyFlag = false;
     remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
     return true;
   })();
@@ -193,12 +187,6 @@ async function doInitTier(tier) {
     }
     if (!size) throw new Error('ukuran checkpoint tidak diketahui');
     const chunk = WEIGHT_SPEC.chunk;
-    const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
-    if (sync && typeof sync.close === 'function') {
-      try { sync.close(); } catch (e) { /* lepas kunci sebelum tulis */ }
-    }
-    weightReader = { size: size, read() { throw new Error('bobot belum tertulis di OPFS'); } };
-    session = null;
     const packed = await downloadConcurrentChunks({
       url: url,
       size: size,
@@ -216,13 +204,8 @@ async function doInitTier(tier) {
       onProgress: (detail) => reportProgress(Object.assign({ tier: tier }, detail)),
     });
     if (packed.bytesHeld !== 0) throw new Error('buffer monolitik tidak boleh dibuat');
-    const sealed = await openSyncWeight('raget-neural-1.5b.safetensors');
-    if (!safetensorsHeaderOk(sealed)) {
-      if (sealed && typeof sealed.close === 'function') {
-        try { sealed.close(); } catch (e) { /* gagang buruk */ }
-      }
-      throw new Error('header safetensors rusak');
-    }
+    const sealed = await inspectWeightFile('raget-neural-1.5b.safetensors');
+    if (!safetensorsHeaderOk(sealed)) throw new Error('header safetensors rusak');
     weightReader = sealed;
     markEarly(tier);
     sealInstalled(packed.parts);
@@ -233,13 +216,11 @@ async function doInitTier(tier) {
     lastWeightError = e && e.message ? String(e.message) : 'gagal';
     const badHeader = lastWeightError.indexOf('header safetensors') >= 0;
     if (badHeader || !earlyFlag) {
-      session = null;
       if (badHeader || loadedTier === tier) {
         loadedTier = null;
         weightReader = null;
         earlyFlag = false;
       }
-      if (badHeader) clearInstalled();
       remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError, reply: null });
       failEarly();
       return false;
@@ -301,6 +282,7 @@ function runOnWorker(prompt, genOpts, signal) {
   const live = ensureWorker();
   return new Promise((resolve) => {
     let settled = false;
+    let cap = 0;
     const finish = (value) => {
       if (settled) return;
       settled = true;
@@ -310,11 +292,16 @@ function runOnWorker(prompt, genOpts, signal) {
       if (signal) signal.removeEventListener('abort', onAbort);
       resolve(value);
     };
-    const cap = setTimeout(() => {
+    const fire = () => {
       haltInference();
       remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'nalar timeout', reply: null });
       finish(null);
-    }, INFERENCE_MS);
+    };
+    const arm = () => {
+      clearTimeout(cap);
+      cap = setTimeout(fire, INFERENCE_MS);
+    };
+    arm();
     const onAbort = () => {
       haltInference();
       if (!lastEnvelope.error) remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'dibatalkan', reply: null });
@@ -327,7 +314,10 @@ function runOnWorker(prompt, genOpts, signal) {
     const onMsg = (ev) => {
       const data = ev.data || {};
       if (data.id !== id) return;
-      if (data.type === 'token' && data.piece && genOpts.onToken) genOpts.onToken(data.piece);
+      if (data.type === 'token') {
+        arm();
+        if (data.piece && genOpts.onToken) genOpts.onToken(data.piece);
+      }
       if (data.type === 'done') finish(data);
       if (data.type === 'error') {
         remember({ ok: false, status: MODEL_STATUS.FAILED, error: data.message || 'gagal', reply: null });
@@ -365,21 +355,16 @@ async function generateWithTier(tier, prompt, options) {
     if (remote) return remote;
   }
   const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
-  if (installedFlag() && !(weightReader && loadedTier === tier && safetensorsHeaderOk(weightReader))) {
-    await bootWeights();
+  if (installedFlag() && modelStatus !== MODEL_STATUS.READY) await bootWeights();
+  if (!installedFlag() || modelStatus !== MODEL_STATUS.READY) {
+    remember({
+      ok: false,
+      status: installedFlag() ? MODEL_STATUS.FAILED : MODEL_STATUS.DOWNLOADING,
+      error: installedFlag() ? (lastEnvelope.error || 'header safetensors rusak') : queueLine(),
+      reply: null,
+    });
+    return null;
   }
-  if (!(earlyFlag && weightReader && loadedTier === tier)) {
-    if (loadedTier !== tier && !initPromises[tier]) {
-      remember({ ok: false, status: installedFlag() ? MODEL_STATUS.FAILED : modelStatus, error: lastWeightError || lastEnvelope.error || 'bobot belum siap', reply: null });
-      return null;
-    }
-    const ok = await ensureTier(tier);
-    if (!ok || !weightReader) {
-      remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError || 'bobot belum siap', reply: null });
-      return null;
-    }
-  }
-  const progressive = !!(earlyFlag && weightReader && !installedFlag());
   const signal = options && options.signal;
   let lora = personaLora();
   if (lora) {
@@ -389,11 +374,11 @@ async function generateWithTier(tier, prompt, options) {
     } catch (e) { /* adapter di memori tetap dipakai */ }
   }
   const genOpts = {
-    maxNewTokens: mode === 'mendalam' && !progressive ? hudBudget() : 32,
-    maxLayers: mode === 'mendalam' && !progressive ? 0 : 4,
+    maxNewTokens: mode === 'mendalam' ? hudBudget() : 32,
+    maxLayers: 0,
     draft: false,
     lora: lora,
-    temperature: 0.7,
+    temperature: mode === 'mendalam' ? 0.7 : 0,
     topK: 40,
     topP: 0.9,
     repetitionPenalty: 1.12,
@@ -405,16 +390,11 @@ async function generateWithTier(tier, prompt, options) {
   };
   try {
     if (signal && signal.aborted) return null;
-    if (typeof Worker === 'function' && typeof window !== 'undefined') {
-      const out = await runOnWorker(String(prompt || ''), genOpts, signal);
-      return textFrom(out, options);
-    }
-    if (!safetensorsHeaderOk(weightReader)) {
-      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'header safetensors rusak', reply: null });
+    if (typeof Worker !== 'function') {
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'worker inferensi tidak tersedia', reply: null });
       return null;
     }
-    if (!session) session = await openInt4Stream(weightReader);
-    const out = await session.generate(String(prompt || ''), genOpts);
+    const out = await runOnWorker(String(prompt || ''), genOpts, signal);
     return textFrom(out, options);
   } catch (e) {
     remember({ ok: false, status: MODEL_STATUS.FAILED, error: e && e.message ? e.message : 'gagal', reply: null });
@@ -430,8 +410,8 @@ async function generateLocal(prompt, options) {
 async function generate(messages, prompt, options) {
   if (options && options.signal && options.signal.aborted) return null;
   if (options && options.large === true && llmMode.mode() === 'server') llmMode.setMode('lokal');
-  if (installedFlag() && !(earlyFlag && weightReader && loadedTier)) await bootWeights();
-  if ((earlyFlag && weightReader) || installedFlag()) {
+  if (installedFlag()) {
+    await bootWeights();
     const reply = await generateLocal(prompt, options);
     if (reply == null) {
       remember({
@@ -446,14 +426,7 @@ async function generate(messages, prompt, options) {
     return reply;
   }
   loadWeights().catch(() => {});
-  remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: 'bobot belum terunduh', reply: null });
-  reportProgress({
-    loaded: 0,
-    total: WEIGHT_BYTES.tier_1_5b || 0,
-    early: false,
-    pending: true,
-    tier: 'tier_1_5b',
-  });
+  remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: queueLine(), reply: null });
   return null;
 }
 
@@ -474,6 +447,21 @@ function shapeTiers() {
 
 function cepatReady() {
   return earlyFlag;
+}
+
+function resumeProgress() {
+  const total = WEIGHT_BYTES.tier_1_5b || WEIGHT_SPEC.size || 0;
+  const loaded = maskedBytes(total, WEIGHT_SPEC.chunk, WEIGHT_SPEC.revision);
+  if (loaded <= 0) return 0;
+  reportProgress({
+    loaded: loaded,
+    total: total,
+    tier: 'tier_1_5b',
+    early: false,
+    source: 'opfs',
+    pending: loaded < total,
+  });
+  return loaded;
 }
 
 function loadWeights() {
@@ -501,4 +489,5 @@ export const neuralProvider = Object.freeze({
   weightsInstalled: installedFlag,
   lastEnvelope: currentEnvelope,
   modelStatus: currentStatus,
+  resumeProgress,
 });

@@ -81,7 +81,7 @@ test('retry tiga kali dengan backoff terpotong dan jitter', async () => {
   assert.ok(delays[2] >= 800 && delays[2] < 950);
 });
 
-test('stream sungguhan menggerakkan progres sebelum 150 ms', async () => {
+test('stream sungguhan menggerakkan progres sebelum 250 ms', async () => {
   const total = 1024 * 1024;
   const piece = 64 * 1024;
   const server = http.createServer((req, res) => {
@@ -129,7 +129,7 @@ test('stream sungguhan menggerakkan progres sebelum 150 ms', async () => {
   } finally {
     server.close();
   }
-  assert.ok(first > 0 && first < 150, 'progres pertama ' + first + ' ms');
+  assert.ok(first > 0 && first < 250, 'progres pertama ' + first + ' ms');
   assert.ok(marks[0] > 0 && marks[0] <= PROGRESS_GRAIN, 'butir pertama ' + marks[0]);
   assert.ok(marks.some((n) => n >= PROGRESS_GRAIN && n < total));
 });

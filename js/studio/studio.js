@@ -389,7 +389,7 @@ export const studioPage = {
       const code = (event.detail && event.detail.code) || '';
       const codeLang = (event.detail && event.detail.lang) || '';
       sessionStorage.setItem('rategoan_studio_seed', JSON.stringify({ code, lang: codeLang }));
-      location.href = 'studio.html';
+      window.open('studio.html', '_blank', 'noopener');
     });
     const toArt = $('studio-to-artifact');
     if (toArt) toArt.onclick = () => {
@@ -436,10 +436,10 @@ export const studioPage = {
       artifact.open({ type: 'code', code: code, lang: 'js', title: 'Studio', fileName: 'studio.js' }, 'Studio');
     };
     const side = $('btn-studio');
-    if (side) side.onclick = () => {
+    if (side) side.onclick = (event) => {
+      if (event && event.preventDefault) event.preventDefault();
       drawer.close();
-      this.paint();
-      router.go('studio');
+      window.open('studio.html', '_blank', 'noopener');
     };
     const log = $('studio-messages');
     const say = (cls, text) => {

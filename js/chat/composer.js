@@ -680,17 +680,19 @@ export const composer = {
         livePlan.dataset.state = 'failed';
         const note = document.createElement('p');
         note.className = 'thought-fail';
-        note.textContent = 'Tidak ada jawaban. Bobot belum siap atau nalar gagal.';
+        note.textContent = 'Bobot sedang diunduh (0%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.';
         livePlan.appendChild(note);
         import('../../raget/raget-neural/neural-provider.js').then((mod) => {
           const env = mod.neuralProvider && typeof mod.neuralProvider.lastEnvelope === 'function'
             ? mod.neuralProvider.lastEnvelope()
             : null;
+          if (env && env.status === 'DOWNLOADING') livePlan.dataset.state = 'queued';
           if (env && env.error) note.textContent = env.error;
           else if (env && env.status) note.textContent = 'Status bobot: ' + env.status + '. Tidak ada jawaban.';
+          toast.show(note.textContent);
         }).catch(() => {});
       }
-      toast.show('Tidak ada jawaban. Bobot belum siap atau nalar gagal.');
+      toast.show('Bobot sedang diunduh (0%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.');
       return;
     }
     if (livePlan && livePlan.parentNode) livePlan.remove();

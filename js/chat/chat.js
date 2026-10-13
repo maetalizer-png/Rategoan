@@ -309,7 +309,7 @@ export const chat = {
       card.dataset.bound = '1';
       card.onclick = () => {
         const act = card.getAttribute('data-act');
-        if (act === 'studio') { location.href = 'studio.html'; return; }
+        if (act === 'studio') { window.open('studio.html', '_blank', 'noopener'); return; }
         if (act === 'docs') { router.go('collection'); return; }
         if (act === 'agenda') { router.go('project'); return; }
         const input = $('chat-input');

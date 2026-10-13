@@ -2,7 +2,7 @@ import { createHash, createHmac, randomBytes } from 'node:crypto';
 import { allowOptions, bearer, readBody, sendJson } from './_http.js';
 
 export const CONFIRM_TTL_MS = 60000;
-export const CONFIRM_CAP = 1000;
+export const CONFIRM_CAP = 200;
 export const CONFIRM_RATE_CAP = 30;
 export const CONFIRM_RATE_WINDOW = 60000;
 const SERVER_SECRET = randomBytes(32);
@@ -45,6 +45,9 @@ export function issueConfirmChallenge(tool, params, now, session) {
 function sweep(t) {
   ledger.forEach((row, key) => {
     if (row.exp < t) ledger.delete(key);
+  });
+  rates.forEach((row, key) => {
+    if (t - row.start >= CONFIRM_RATE_WINDOW) rates.delete(key);
   });
 }
 

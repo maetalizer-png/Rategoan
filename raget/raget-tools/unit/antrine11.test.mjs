@@ -224,7 +224,14 @@ test('pembaca yang diam melempar dan diulang, header safetensors wajib', async (
     },
   }), /stream timeout/);
   assert.equal(tries, 4);
-  const json = '{"ok":true}';
+  const json = JSON.stringify({
+    __metadata__: { format: 'rategoan-int4-block32-affine' },
+    'embedding.weight': { dtype: 'U8', shape: [1], data_offsets: [0, 1] },
+    'lm_head.weight': { dtype: 'U8', shape: [1], data_offsets: [0, 1] },
+    'layers.0.attention.Wq': { dtype: 'U8', shape: [1], data_offsets: [0, 1] },
+    'layers.0.ln1.gamma': { dtype: 'F32', shape: [1], data_offsets: [0, 4] },
+    'layers.27.ffn.Wdown': { dtype: 'U8', shape: [1], data_offsets: [0, 1] },
+  });
   const head = new TextEncoder().encode(json);
   const buf = new Uint8Array(8 + head.length);
   new DataView(buf.buffer).setBigUint64(0, BigInt(head.length), true);

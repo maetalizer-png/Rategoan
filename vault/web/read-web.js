@@ -27,7 +27,20 @@ async function fetchViaJina(url) {
   return String(text || '').trim().slice(0, MAX_CHARS);
 }
 
+function blockedUrl(raw) {
+  let url;
+  try { url = new URL(String(raw || '')); } catch (e) { return true; }
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return true;
+  const host = url.hostname.toLowerCase().replace(/^\[|\]$/g, '').split('%')[0];
+  if (host === 'localhost' || host.endsWith('.local') || host === '0.0.0.0' || host === '::' || host === '::1') return true;
+  if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(host)) return true;
+  if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) return true;
+  if (host.indexOf(':') >= 0 && (/^f[cd]/.test(host) || host.startsWith('fe80'))) return true;
+  return false;
+}
+
 async function read(url) {
+  if (blockedUrl(url)) return { ok: false, stub: true, message: 'Alamat privat ditolak.' };
   if (typeof fetch !== 'function') {
     return { ok: false, stub: true, message: CORS_MESSAGE };
   }

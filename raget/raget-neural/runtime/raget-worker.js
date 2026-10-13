@@ -23,11 +23,16 @@ self.onmessage = async (event) => {
   const msg = event.data || {};
   if (msg.op !== 'generate') return;
   let timed = false;
-  const cap = setTimeout(() => {
-    timed = true;
-    sessionPromise = null;
-    self.postMessage({ id: msg.id, type: 'error', message: 'nalar timeout' });
-  }, 30000);
+  let cap = 0;
+  const arm = () => {
+    clearTimeout(cap);
+    cap = setTimeout(() => {
+      timed = true;
+      sessionPromise = null;
+      self.postMessage({ id: msg.id, type: 'error', message: 'nalar timeout' });
+    }, 30000);
+  };
+  arm();
   try {
     const live = await session();
     if (timed) return;
@@ -42,6 +47,7 @@ self.onmessage = async (event) => {
       repetitionPenalty: msg.repetitionPenalty,
       onToken(piece) {
         if (timed) return;
+        arm();
         self.postMessage({ id: msg.id, type: 'token', piece: piece });
       },
     });

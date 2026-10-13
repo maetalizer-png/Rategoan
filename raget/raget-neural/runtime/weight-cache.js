@@ -81,6 +81,15 @@ export function readSyncBlock(sync, offset, length) {
   return n === length ? buf : buf.subarray(0, Math.max(0, n));
 }
 
+const HEADER_CAP = 64 * 1024;
+const REQUIRED_TENSORS = [
+  'embedding.weight',
+  'lm_head.weight',
+  'layers.0.attention.Wq',
+  'layers.0.ln1.gamma',
+  'layers.27.ffn.Wdown',
+];
+
 export function safetensorsHeaderOk(sync) {
   try {
     if (!sync || typeof sync.read !== 'function') return false;
@@ -91,16 +100,41 @@ export function safetensorsHeaderOk(sync) {
     const view = new DataView(raw.buffer, raw.byteOffset || 0, raw.byteLength);
     let headerLen = 0;
     try { headerLen = Number(view.getBigUint64(0, true)); } catch (e) { return false; }
-    if (!headerLen || headerLen > 16 * 1024 * 1024) return false;
+    if (!headerLen || headerLen > HEADER_CAP) return false;
     if (size < 8 + headerLen) return false;
-    const slice = sync.read(8, Math.min(headerLen, 2048));
-    if (!slice || !slice.length || slice[0] !== 123) return false;
-    if (headerLen <= slice.length) {
-      JSON.parse(new TextDecoder().decode(slice));
+    const slice = sync.read(8, headerLen);
+    if (!slice || slice.length < headerLen) return false;
+    const header = JSON.parse(new TextDecoder().decode(slice));
+    const meta = header && header.__metadata__;
+    if (!meta || meta.format !== 'rategoan-int4-block32-affine') return false;
+    for (let i = 0; i < REQUIRED_TENSORS.length; i += 1) {
+      if (!header[REQUIRED_TENSORS[i]]) return false;
     }
     return true;
   } catch (e) {
     return false;
+  }
+}
+
+export async function inspectWeightFile(name) {
+  const nav = globalThis.navigator;
+  if (!nav || !nav.storage || typeof nav.storage.getDirectory !== 'function') return null;
+  try {
+    const root = await nav.storage.getDirectory();
+    const handle = await root.getFileHandle(String(name || 'raget-neural-1.5b.safetensors'));
+    const file = await handle.getFile();
+    const head = new Uint8Array(await file.slice(0, 65536).arrayBuffer());
+    return {
+      size: file.size,
+      read(offset, length) {
+        const start = Math.max(0, offset | 0);
+        const end = Math.min(head.length, start + Math.max(0, length | 0));
+        if (end <= start) return new Uint8Array(0);
+        return head.subarray(start, end);
+      },
+    };
+  } catch (e) {
+    return null;
   }
 }
 
