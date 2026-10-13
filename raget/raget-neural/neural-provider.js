@@ -9,9 +9,7 @@ import {
   WEIGHT_SPEC,
   EARLY_PROGRESS_BYTES,
   downloadConcurrentChunks,
-  createRangeReader,
-  openCacheStore,
-  cacheHas,
+  openSyncWeight,
   storageFree,
 } from './runtime/weight-cache.js';
 
@@ -106,15 +104,12 @@ function clearInstalled() {
 async function bootWeights() {
   if (loadedTier && weightReader) return true;
   if (!installedFlag()) return false;
-  const url = CHECKPOINT_BY_TIER.tier_1_5b;
-  const size = WEIGHT_SPEC.size;
-  const end = Math.min(size, WEIGHT_SPEC.chunk) - 1;
-  const present = await cacheHas(WEIGHT_SPEC.cache, url + '#0-' + end);
-  if (!present) {
+  const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
+  if (!sync || sync.size < 8) {
     clearInstalled();
     return false;
   }
-  weightReader = createRangeReader(openCacheStore(), url, size, WEIGHT_SPEC.chunk, WEIGHT_SPEC.cache);
+  weightReader = sync;
   loadedTier = 'tier_1_5b';
   earlyFlag = true;
   return true;
@@ -144,16 +139,15 @@ async function doInitTier(tier) {
       size = Number(head.headers.get('content-length') || head.headers.get('x-linked-size')) || 0;
     }
     if (!size) throw new Error('ukuran checkpoint tidak diketahui');
-    const store = openCacheStore();
     const chunk = WEIGHT_SPEC.chunk;
-    weightReader = createRangeReader(store, url, size, chunk, WEIGHT_SPEC.cache);
+    const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
+    weightReader = sync || { size: size, async read() { throw new Error('bobot belum tertulis di OPFS'); } };
     session = null;
     const packed = await downloadConcurrentChunks({
       url: url,
       size: size,
       chunk: chunk,
       cacheName: WEIGHT_SPEC.cache,
-      store: store,
       control: control,
       concurrency: 6,
       mesh: typeof window !== 'undefined',

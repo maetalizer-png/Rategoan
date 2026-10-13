@@ -13,13 +13,10 @@ function read(rel) { return readFileSync(new URL(rel, root), 'utf8'); }
 
 test('detik nol hanya meminta partisi yang sedang ditarik', async () => {
   const marks = [];
-  const store = {
-    async get() { return null; },
-    async put(_cache, key) {
-      marks.push({ kind: 'put-start', key, at: Date.now() });
-      await new Promise((resolve) => setTimeout(resolve, 30));
-      marks.push({ kind: 'put-end', key, at: Date.now() });
-    },
+  const diskWrite = async (_cache, key) => {
+    marks.push({ kind: 'put-start', key, at: Date.now() });
+    await new Promise((resolve) => setTimeout(resolve, 30));
+    marks.push({ kind: 'put-end', key, at: Date.now() });
   };
   const fetchImpl = async (_url, init) => {
     const header = init.headers.Range;
@@ -31,7 +28,7 @@ test('detik nol hanya meminta partisi yang sedang ditarik', async () => {
     url: 'https://model.local/w.bin',
     size: MODEL_CHUNK * 8,
     fetchImpl,
-    store,
+    diskWrite,
     concurrency: 4,
   });
   assert.equal(out.bytesHeld, 0);

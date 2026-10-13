@@ -1,4 +1,3 @@
-import { llmEngine } from '../../raget-deterministic/llm-engine.js';
 import { memoryLong } from '../../raget-memory/memory-long.js';
 import { ragetDb } from '../../raget-database/raget-db.js';
 import { datariesBridge } from '../dataries-bridge.js';
@@ -21,7 +20,7 @@ import { frameworkApply } from '../framework-apply.js';
 import { memoryPreference } from '../../../js/state/memory-preference.js';
 import { postProcess, tryMultiIntent } from './agent-stream.js';
 import { finishRespond } from './agent-stream.js';
-import {loadPersona, runTool, tryFactoid} from './agent-context.js';
+import { runTool, tryFactoid } from './agent-context.js';
 
 export async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
@@ -43,16 +42,6 @@ export async function respondCore(messages, prompt) {
     }
   }
 
-  const greetEarly = llmEngine.tryGreeting(text, { personaName: 'Raget' });
-  if (greetEarly) {
-    ragetDb.addNote(text, greetEarly, null, 'greeting');
-    return postProcess(greetEarly);
-  }
-  const dailyEarly = llmEngine.tryDailyTalk(text, { personaName: 'Raget' });
-  if (dailyEarly) {
-    ragetDb.addNote(text, dailyEarly, null, 'daily_talk');
-    return postProcess(dailyEarly);
-  }
   if (earlyToolKind === 'kode') {
     const kodeReply = await runTool('kode', text, messages);
     if (kodeReply) {
@@ -242,24 +231,6 @@ export async function respondCore(messages, prompt) {
   if (mataPelajaranReply) {
     ragetDb.addNote(text, mataPelajaranReply, null, 'mata_pelajaran');
     return postProcess(mataPelajaranReply);
-  }
-
-  const personaEarly = await loadPersona();
-  const tonePreferenceEarly = contextEngine.getStylePreference();
-  const greet = llmEngine.tryGreeting(text, { personaName: personaEarly.name, tonePreference: tonePreferenceEarly });
-  if (greet) {
-    ragetDb.addNote(text, greet, null, 'greeting');
-    return postProcess(greet);
-  }
-  const interject = llmEngine.tryInterjection(text);
-  if (interject) {
-    ragetDb.addNote(text, interject, null, 'interjection');
-    return postProcess(interject);
-  }
-  const dailyTalk = llmEngine.tryDailyTalk(text, { personaName: personaEarly.name, tonePreference: tonePreferenceEarly });
-  if (dailyTalk) {
-    ragetDb.addNote(text, dailyTalk, null, 'daily_talk');
-    return postProcess(dailyTalk);
   }
 
   const factoid = await tryFactoid(text, messages);

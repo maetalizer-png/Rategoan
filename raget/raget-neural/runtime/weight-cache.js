@@ -21,10 +21,8 @@ export function cacheStore() {
       if (!hit) return null;
       return new Uint8Array(await hit.arrayBuffer());
     },
-    async put(cacheName, key, bytes) {
-      const box = await caches.open(cacheName);
-      const copy = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-      await box.put(cacheKey(key), new Response(copy));
+    async put() {
+      return;
     },
   };
 }

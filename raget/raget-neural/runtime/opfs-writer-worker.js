@@ -13,7 +13,10 @@ self.onmessage = async (event) => {
   if (msg.op !== 'write') return;
   try {
     const io = await handle();
-    const bytes = msg.bytes instanceof Uint8Array ? msg.bytes : new Uint8Array(msg.bytes || 0);
+    const raw = msg.bytes;
+    const bytes = raw instanceof Uint8Array
+      ? raw
+      : new Uint8Array(raw instanceof ArrayBuffer ? raw : (raw || 0));
     io.write(bytes, { at: msg.offset || 0 });
     io.flush();
     let digest = '';

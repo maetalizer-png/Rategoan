@@ -1,5 +1,4 @@
-import { llmEngine } from '../../raget-deterministic/llm-engine.js';
-import { memoryShort } from '../../raget-memory/memory-short.js';
+import { neuralAdapter } from '../../raget-neural/neural-adapter.js';
 import { memoryIndex } from '../../raget-memory/memory-index.js';
 import { ragetDb } from '../../raget-database/raget-db.js';
 import { datariesBridge } from '../dataries-bridge.js';
@@ -10,7 +9,7 @@ import { routerIntent } from '../router-intent.js';
 import { answerComposer } from '../answer-composer.js';
 import { contextEngine } from '../context-engine.js';
 import { memoryPreference } from '../../../js/state/memory-preference.js';
-import { loadPersona, loadFewshot, matchFewshot, matchFewshotNearMiss, recallFromMemory, acknowledgeFact, tryFactoid, tooSimilar } from './agent-context.js';
+import { recallFromMemory, acknowledgeFact, tryFactoid, tooSimilar } from './agent-context.js';
 
 export function postProcess(text) {
   const cleaned = String(text || '').trim();
@@ -83,57 +82,31 @@ export async function finishRespond(text, messages) {
     }
   }
 
-  const persona = await loadPersona();
-  const shortContext = memoryShort.recent(messages, 10);
-  const tonePreference = contextEngine.getStylePreference();
-
   const preSearch = await memoryIndex.search(text, 5);
   const dataFallback = await datariesBridge.datariesFallback(text);
   const plannedFallback = planner.planFallback(text, preSearch.concat(dataFallback));
 
-  let reply;
-  let fewshotMatched = false;
+  let reply = '';
   if (plannedFallback) {
     reply = postProcess(plannedFallback.text);
     reply = await toolsKoleksi.personalize(reply, text);
   } else {
-    let raw = await llmEngine.generate(shortContext, text, { personaName: persona.name, tonePreference });
-
-    if (llmEngine.isWeak(raw)) {
-      const fewshot = await loadFewshot();
-      const example = matchFewshot(fewshot, text);
-      if (example && example.a) {
-        raw = example.a;
-        fewshotMatched = true;
-      } else {
-        const nearMiss = matchFewshotNearMiss(fewshot, text);
-        if (nearMiss && nearMiss.q) raw += '\n\n(Maksud kamu: "' + nearMiss.q + '"?)';
-      }
-    }
-
-    reply = postProcess(raw);
-    reply = await toolsKoleksi.personalize(reply, text);
+    const raw = await neuralAdapter.ask(text, { messages: messages });
+    reply = raw ? String(raw).trim() : '';
+    if (reply) reply = await toolsKoleksi.personalize(reply, text);
   }
 
-  if (!plannedFallback && !routerIntent.isClarifyReply(reply) && !llmEngine.isSmalltalkText(text)) {
+  if (!plannedFallback && reply && !routerIntent.isClarifyReply(reply)) {
     const candidate = preSearch.find((r) => !tooSimilar(text, r.text));
     if (candidate && candidate.score >= scorer.CONFIDENCE_THRESHOLD) {
       reply += '\n\n(Catatan terkait: ' + candidate.text.slice(0, 120) + ')';
     }
   }
 
-  // FR-5.1: query reached the very end of the fallback chain with truly nothing
-  // matched - every specific intent/tool above already failed, semantic retrieval
-  // (preSearch/dataFallback/planner) came up empty, no exact fewshot example fired,
-  // and llmEngine.craft() fell through to its own generic clarification prompt
-  // (llmEngine.isRealAnswer(text) mirrors exactly which of craft()'s early branches
-  // would have produced real content instead). Log it (read-only/additive - never
-  // changes what's returned to the user) so raget-tools/export-unmatched-queries.mjs
-  // can later export it for rule-writing.
-  if (!plannedFallback && !fewshotMatched && !llmEngine.isRealAnswer(text)) {
-    ragetDb.logUnmatched(text, ['preSearch', 'dataFallback', 'planner', 'llmEngine', 'fewshot']);
+  if (!plannedFallback && !reply) {
+    ragetDb.logUnmatched(text, ['preSearch', 'dataFallback', 'planner', 'neural']);
   }
 
   ragetDb.addNote(text, reply, null, 'chat_' + routerIntent.detectAnswerType(text), plannedFallback ? plannedFallback.sourceEntryId : null);
-  return reply;
+  return reply ? postProcess(reply) : reply;
 }

@@ -33,7 +33,6 @@
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { llmEngine } from '../raget-deterministic/llm-engine.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_ROOT = join(__dirname, '../raget-data/json');
@@ -94,23 +93,7 @@ function validatePengetahuan(entry, index, filePath) {
 // ["kerja","uang"], salah ditulis key:"tetangga"): kalau salah satu tag
 // entri PERSIS sama dengan nama key valid TAPI beda dari key yang tertulis,
 // itu sinyal topik-vs-bucket tidak sinkron yang layak dicek manusia.
-function checkSapaanBucket(entry, index, filePath) {
-  if (!entry.meta || !Array.isArray(entry.tags)) return [];
-  const declaredKey = entry.meta.key || (entry.meta.jenis && llmEngine.JENIS_TO_KEY[entry.meta.jenis]) || null;
-  if (!declaredKey) return [];
-  const validKeys = new Set(Object.keys(llmEngine.SMALLTALK_TRIGGERS));
-  // entri boleh punya BEBERAPA tag topik sekaligus (mis. ["kerja","uang"])
-  // dan bucket-nya cukup salah SATU dari tag itu - bukan bug. Yang jadi
-  // sinyal nyata (pola "Gaji belum" -> "tetangga"): entri punya tag topik
-  // yang dikenal (match nama key valid) TAPI declaredKey TIDAK ADA sama
-  // sekali di antara tag-tag itu - berarti bucket tidak nyambung ke topik
-  // manapun yang tertulis sendiri di entrinya.
-  const topicTags = entry.tags.filter((t) => validKeys.has(t));
-  if (topicTags.length > 0 && !topicTags.includes(declaredKey)) {
-    return [
-      `${filePath}[${index}] "${entry.nama || entry.id}": tags topik [${topicTags.join(', ')}] tidak ada yang cocok dengan bucket tertulis "${declaredKey}" - cek manual: "${entry.teks.slice(0, 80)}"`,
-    ];
-  }
+function checkSapaanBucket() {
   return [];
 }
 

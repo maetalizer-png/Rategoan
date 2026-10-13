@@ -84,7 +84,6 @@ js/ai/                            satu-satunya pintu integrasi ke otak AI
 utils/                            util murni bersama (dipakai lintas raget/)
 raget/                            induk seluruh otak AI Raget
   raget-agents/                   router intent + orkestrasi tool + mesin khusus + kontrak/router adapter otak
-  raget-deterministic/            mesin lokal selain jalur chat
   raget-neural/                   adapter neural. Checkpoint Safetensors tidak dibundel di git
   raget-memory/                   memori jangka pendek (konteks) & jangka panjang (fakta)
   raget-database/                 riwayat catatan Q&A lokal (untuk feedback loop)
@@ -136,7 +135,7 @@ loader tipis `raget-agents/dataries-registry.js` (fetch JSON → bentuk
 `{text, metadata}`). Domain mencakup: negara, kota, bahasa, tokoh, sains,
 sejarah, wisata, kuliner/makanan, olahraga, etika, minuman, platform, ekonomi,
 peluang, penemuan, alam, seni-budaya, mata pelajaran sekolah & kuliah, dan
-`sapaan/` (smalltalk harian, dimuat langsung oleh `raget-deterministic/llm-engine.js`).
+`sapaan/` (data sapaan di rak, tidak dipakai sebagai balasan chat).
 
 Skema data seragam di seluruh domain: `{id, kategori, wilayah, nama, tags,
 teks, meta}` — file `.json` biasa, gampang ditambah/diedit tanpa menyentuh
@@ -146,7 +145,7 @@ kode aplikasi. Domain ditambah dengan berkas `.json` di `raget/raget-data/json/`
 
 Panel Model menampilkan Raget 1.0 dengan Mode Cepat dan Mode Mendalam. Keduanya dijawab berkas yang sama. Jalur chat memakai adapter neural.
 Checkpoint `raget-neural-1.5b.safetensors` ada di Hugging Face: hasil pelatihan Adam, loss paket 10,72 turun ke 0,81, 256 token, format int4 block-32. Berkas itu tidak dibundel di git. `raget-neural-1.0b` dan `raget-neural-2.0b` tidak diunggah.
-Mode Cepat memakai 4 lapis awal dan berhenti paling lambat pada 32 token. Mode Mendalam memakai seluruh lapis dan berhenti paling lambat pada 96 token. Keduanya berhenti lebih awal pada token henti, memakai BPE 32.000, dan bobot yang sama. Perkalian matriks, termasuk kepala token, lewat WebGPU bila perangkat punya GPU; buffer GPU dipakai ulang antar token. Kalau GPU tidak ada, CPU menghitung INT4 langsung di register tanpa menyalin bobot ke float. Di worker tidak ada jeda timer antar baris. Di halaman utama CPU tetap mengalah tiap lapisan supaya layar tidak beku. Tombol berhenti memutus worker seketika. Bukan kalimat yang disiapkan di luar bobot. Unduhan 997 MB adalah 50 potongan 20 MB pada 4 aliran sekaligus, diverifikasi SHA-256 hanya untuk potongan yang baru datang dari jaringan, dan disimpan di Cache API tanpa menyatukan 1 GB di RAM. Kecepatan dihitung dari jendela 5 detik. Service worker tidak menghapus cache `rategoan-` dan tidak menahan permintaan Range. Pembaca bobot menahan 4 potongan. Mode Cepat bisa dipakai setelah byte yang benar-benar memuat 4 lapis pertama selesai, sementara sisa berkas masih mengalir. Boot berikutnya memakai tanda lokal dan tidak menghitung ulang SHA-256 seluruh berkas. Kartu unduh bisa dijeda atau dibatalkan, menampilkan kecepatan serta sisa waktu, dan tidak mulai sendiri saat halaman dibuka. Kalau ruang kosong di bawah 1,5 GB, unduhan tidak dimulai. Kalau checkpoint belum termuat, balasan mengatakan bobot belum terpasang. Teks UTF-8 mengalir sampai token henti. Angka identitas token tidak ditampilkan.
+Mode Cepat memakai 4 lapis awal dan berhenti paling lambat pada 32 token. Mode Mendalam memakai seluruh lapis dan berhenti paling lambat pada 96 token. Keduanya berhenti lebih awal pada token henti, memakai BPE 32.000, dan bobot yang sama. Perkalian matriks, termasuk kepala token, lewat WebGPU bila perangkat punya GPU; buffer GPU dipakai ulang antar token. Kalau GPU tidak ada, CPU menghitung INT4 langsung di register tanpa menyalin bobot ke float. Di worker tidak ada jeda timer antar baris. Di halaman utama CPU tetap mengalah tiap lapisan supaya layar tidak beku. Tombol berhenti memutus worker seketika. Bukan kalimat yang disiapkan di luar bobot. Unduhan 997 MB adalah 50 potongan 20 MB pada 6 aliran HTTP/2 satu koneksi, progres UI tiap 256 KB, diverifikasi SHA-256 di worker hanya untuk potongan yang baru datang dari jaringan, dan ditulis sekali ke OPFS lewat FileSystemSyncAccessHandle tanpa Cache API dan tanpa menyatukan 1 GB di RAM. Kecepatan dihitung dari jendela 5 detik. Service worker tidak menghapus cache `rategoan-` dan tidak menahan permintaan Range. Pembaca bobot menahan 4 potongan. Mode Cepat bisa dipakai setelah byte yang benar-benar memuat 4 lapis pertama selesai, sementara sisa berkas masih mengalir. Boot berikutnya memakai tanda lokal dan tidak menghitung ulang SHA-256 seluruh berkas. Kartu unduh bisa dijeda atau dibatalkan, menampilkan kecepatan serta sisa waktu, dan tidak mulai sendiri saat halaman dibuka. Kalau ruang kosong di bawah 1,5 GB, unduhan tidak dimulai. Kalau checkpoint belum termuat, balasan mengatakan bobot belum terpasang. Teks UTF-8 mengalir sampai token henti. Angka identitas token tidak ditampilkan.
 Folder `docs/` hanya memuat `docs/PRD-RELEASE.md` dan `docs/STATUS-KORPUS-LISENSI.md`.
 
 ## Kualitas & Pengujian

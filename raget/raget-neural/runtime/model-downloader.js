@@ -4,6 +4,8 @@ export const MODEL_CACHE = 'rategoan-model-cache';
 export const NEURAL_CACHE = 'rategoan-neural-cache';
 export const MODEL_CHUNK = 20 * 1024 * 1024;
 export const PREFETCH_AHEAD = 4;
+export const PROGRESS_GRAIN = 256 * 1024;
+export const DOWNLOAD_ATTEMPTS = 4;
 
 export function deltaChunkPlan(previous, next) {
   const oldH = previous || [];
@@ -109,16 +111,85 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export function downloadBackoffMs(attempt, rand) {
+  const n = Math.max(0, Math.floor(Number(attempt) || 0));
+  const exp = Math.min(2000, 200 * (2 ** n));
+  const unit = typeof rand === 'number' ? rand : Math.random();
+  const jitter = Math.floor(Math.max(0, Math.min(0.999, unit)) * 150);
+  return exp + jitter;
+}
+
+export async function lockPersistentStorage() {
+  const nav = globalThis.navigator;
+  if (!nav || !nav.storage || typeof nav.storage.persist !== 'function') return false;
+  try {
+    if (typeof nav.storage.persisted === 'function' && await nav.storage.persisted()) return true;
+    return !!(await nav.storage.persist());
+  } catch (e) {
+    return false;
+  }
+}
+
+function joinParts(parts, length) {
+  if (parts.length === 1 && parts[0].byteOffset === 0 && parts[0].byteLength === length) return parts[0];
+  const out = new Uint8Array(length);
+  let offset = 0;
+  parts.forEach((part) => {
+    out.set(part, offset);
+    offset += part.byteLength;
+  });
+  return out;
+}
+
+async function readResponseBytes(res, expect, onBytes) {
+  const body = res && res.body;
+  if (body && typeof body.getReader === 'function') {
+    const reader = body.getReader();
+    const parts = [];
+    let got = 0;
+    try {
+      while (got < expect) {
+        const step = await reader.read();
+        if (step.done) break;
+        const value = step.value;
+        if (!value || !value.byteLength) continue;
+        const take = Math.min(value.byteLength, expect - got);
+        const piece = take === value.byteLength ? value : value.subarray(0, take);
+        parts.push(piece);
+        got += piece.byteLength;
+        if (onBytes) onBytes(got);
+      }
+    } finally {
+      try { reader.releaseLock(); } catch (e) { /* kunci sudah lepas */ }
+    }
+    if (got !== expect) throw new Error('potongan pendek ' + got + '/' + expect);
+    return joinParts(parts, got);
+  }
+  const raw = new Uint8Array(await res.arrayBuffer());
+  const bytes = raw.length === expect ? raw : raw.subarray(0, expect);
+  if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
+  if (onBytes) {
+    let shown = 0;
+    const grain = PROGRESS_GRAIN > 0 ? PROGRESS_GRAIN : bytes.length;
+    while (shown < bytes.length) {
+      shown = Math.min(bytes.length, shown + grain);
+      onBytes(shown);
+    }
+  }
+  return bytes;
+}
+
 export async function downloadConcurrentChunks(options) {
+  await lockPersistentStorage();
   const url = String((options && options.url) || '');
   const size = Math.max(0, Math.floor(Number(options && options.size) || 0));
   const chunk = (options && options.chunk) || MODEL_CHUNK;
   const cacheName = (options && options.cacheName) || MODEL_CACHE;
   const fetchImpl = (options && options.fetchImpl) || fetch;
-  const store = (options && options.store) || memoryStore();
   const control = (options && options.control) || { paused: false, cancelled: false };
   const onProgress = options && options.onProgress;
   const onEarlyReady = options && options.onEarlyReady;
+  const wait = (options && options.sleepImpl) || sleep;
   const concurrency = Math.max(1, Math.min(6, Math.floor(Number(options && options.concurrency) || 6)));
   const ranges = planRanges(size, chunk);
   const earlyBytes = Math.min(size, Math.max(0, Math.floor(Number(options && options.earlyBytes) || 0)));
@@ -132,7 +203,9 @@ export async function downloadConcurrentChunks(options) {
     }
   }
   const done = new Array(ranges.length).fill(false);
+  const inflight = new Map();
   let next = 0;
+  let committed = 0;
   let loaded = 0;
   let peak = 0;
   let networkHits = 0;
@@ -145,6 +218,12 @@ export async function downloadConcurrentChunks(options) {
   let opfsPort = null;
   let opfsSeq = 0;
 
+  function visibleLoaded() {
+    let extra = 0;
+    inflight.forEach((n) => { extra += n; });
+    return committed + extra;
+  }
+
   function opfsWorker() {
     if (opfsPort) return opfsPort;
     if (typeof Worker !== 'function') return null;
@@ -156,16 +235,26 @@ export async function downloadConcurrentChunks(options) {
     return opfsPort;
   }
 
+  function ownBuffer(bytes) {
+    const raw = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes || 0);
+    if (raw.byteOffset === 0 && raw.byteLength === raw.buffer.byteLength) {
+      return { payload: raw, transferBuf: raw.buffer };
+    }
+    const payload = new Uint8Array(raw.byteLength);
+    payload.set(raw);
+    return { payload: payload, transferBuf: payload.buffer };
+  }
+
   function mirrorOpfs(offset, bytes) {
     const port = opfsWorker();
-    if (!port || !bytes) return Promise.resolve();
+    if (!port || !bytes) return Promise.resolve('');
     const id = opfsSeq + 1;
     opfsSeq = id;
-    const copy = bytes.slice();
+    const owned = ownBuffer(bytes);
     return new Promise((resolve) => {
       const timer = setTimeout(() => {
         port.removeEventListener('message', onMsg);
-        resolve();
+        resolve('');
       }, 4000);
       function onMsg(event) {
         if (!event.data || event.data.id !== id) return;
@@ -175,12 +264,49 @@ export async function downloadConcurrentChunks(options) {
       }
       port.addEventListener('message', onMsg);
       try {
-        port.postMessage({ op: 'write', id: id, offset: offset, bytes: copy, hash: true });
+        port.postMessage({ op: 'write', id: id, offset: offset, bytes: owned.payload, hash: true }, [owned.transferBuf]);
       } catch (e) {
         clearTimeout(timer);
-        resolve();
+        resolve('');
       }
     });
+  }
+
+  function maskBits() {
+    try {
+      if (typeof localStorage === 'undefined') return [];
+      const raw = localStorage.getItem('rategoan_chunks_mask') || '';
+      return raw ? raw.split(',') : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  async function fetchRange(range, expect, onBytes) {
+    let last = null;
+    for (let attempt = 0; attempt < DOWNLOAD_ATTEMPTS; attempt += 1) {
+      if (control.cancelled) throw new Error('dibatalkan');
+      try {
+        const res = await fetchImpl(url, {
+          method: 'GET',
+          headers: { Range: 'bytes=' + range.start + '-' + range.end },
+          cache: 'no-store',
+          credentials: 'omit',
+          keepalive: true,
+          redirect: 'follow',
+        });
+        if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
+          throw new Error('HTTP ' + res.status);
+        }
+        return await readResponseBytes(res, expect, onBytes);
+      } catch (e) {
+        last = e instanceof Error ? e : new Error('gagal');
+        if (control.cancelled || attempt + 1 >= DOWNLOAD_ATTEMPTS) break;
+        if (onBytes) onBytes(0);
+        await wait(downloadBackoffMs(attempt));
+      }
+    }
+    throw last || new Error('gagal');
   }
 
   function prime(i) {
@@ -190,20 +316,13 @@ export async function downloadConcurrentChunks(options) {
     const key = url + '#' + range.start + '-' + range.end;
     const expect = range.end - range.start + 1;
     const job = (async () => {
-      const cached = await store.get(cacheName, key);
-      if (cached) return { bytes: cached, fromCache: true, key, expect };
+      if (maskBits()[i] === '1') return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
       if (mesh && meshHasChunk(i)) {
         const shared = takeMeshChunk(i);
-        if (shared && shared.length === expect) return { bytes: shared, fromCache: true, key, expect };
+        if (shared && shared.length === expect) return { bytes: shared, fromCache: true, key: key, expect: expect };
       }
-      const res = await fetchImpl(url, { headers: { Range: 'bytes=' + range.start + '-' + range.end } });
-      if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
-        throw new Error('HTTP ' + res.status);
-      }
-      const raw = new Uint8Array(await res.arrayBuffer());
-      const bytes = raw.length === expect ? raw : raw.slice(0, expect);
-      if (bytes.length !== expect) throw new Error('potongan pendek ' + bytes.length + '/' + expect);
-      return { bytes, fromCache: false, key, expect };
+      const bytes = await fetchRange(range, expect, (got) => noteStream(i, got));
+      return { bytes: bytes, fromCache: false, key: key, expect: expect };
     })();
     const tracked = job.then((value) => value, (err) => ({ __err: err }));
     primed.set(i, tracked);
@@ -212,14 +331,15 @@ export async function downloadConcurrentChunks(options) {
 
   function windowSpeed() {
     const now = Date.now();
-    samples.push({ t: now, loaded: loaded });
+    const seen = visibleLoaded();
+    samples.push({ t: now, loaded: seen });
     const cut = now - 5000;
     while (samples.length > 2 && samples[0].t < cut) samples.shift();
     const a = samples[0];
     const dt = Math.max(0.001, (now - a.t) / 1000);
-    const delta = loaded - a.loaded;
+    const delta = seen - a.loaded;
     if (delta > 0) return delta / dt;
-    return loaded / Math.max(0.001, (now - t0) / 1000);
+    return seen / Math.max(0.001, (now - t0) / 1000);
   }
 
   function markChunk(index) {
@@ -233,6 +353,7 @@ export async function downloadConcurrentChunks(options) {
   }
 
   function report(index, seal) {
+    loaded = visibleLoaded();
     const speed = windowSpeed();
     const eta = speed > 0 ? Math.max(0, (size - loaded) / speed) : 0;
     if (onProgress) {
@@ -244,9 +365,18 @@ export async function downloadConcurrentChunks(options) {
         eta: eta,
         parts: ranges.length,
         index: index,
-        source: networkHits > 0 ? 'network' : 'cache',
+        source: networkHits > 0 ? 'network' : 'opfs',
         early: earlyFired,
       });
+    }
+  }
+
+  function noteStream(index, gotBytes) {
+    const prev = inflight.get(index) || 0;
+    const nextBytes = Math.max(0, gotBytes | 0);
+    inflight.set(index, nextBytes);
+    if (nextBytes < prev || prev === 0 || Math.floor(nextBytes / PROGRESS_GRAIN) > Math.floor(prev / PROGRESS_GRAIN)) {
+      report(index, '');
     }
   }
 
@@ -259,7 +389,11 @@ export async function downloadConcurrentChunks(options) {
     if (onEarlyReady) onEarlyReady({ parts: earlyAt + 1, bytes: ranges[earlyAt].end + 1 });
   }
 
-  async function mirrorToWorker(offset, bytes) {
+  async function persist(offset, bytes, key) {
+    if (options && typeof options.diskWrite === 'function') {
+      await options.diskWrite(cacheName, key, bytes);
+      return '';
+    }
     return mirrorOpfs(offset, bytes);
   }
 
@@ -269,31 +403,34 @@ export async function downloadConcurrentChunks(options) {
     const range = ranges[i];
     const ahead = i + PREFETCH_AHEAD;
     let seal = '';
-    if (!got.fromCache) {
-      const writing = store.put(cacheName, got.key, got.bytes);
+    let held = got.expect;
+    if (!got.sealed && !got.fromCache) {
+      held = got.bytes ? got.bytes.length : 0;
+      if (mesh && got.bytes) publishMeshChunk(i, got.bytes.slice());
+      const writing = persist(range.start, got.bytes, got.key);
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
-      await writing;
-      if (mesh) publishMeshChunk(i, got.bytes);
-      seal = (await mirrorToWorker(range.start, got.bytes)) || '';
+      seal = (await writing) || '';
       networkHits += 1;
       markChunk(i);
     } else if (ahead < ranges.length && primed.size < 4) {
       prime(ahead);
+      held = got.bytes ? got.bytes.length : got.expect;
     }
-    const held = got.bytes ? got.bytes.length : 0;
+    inflight.delete(i);
     if (held > peak) peak = held;
-    loaded += held;
+    committed += held;
+    loaded = committed;
     primed.delete(i);
-    got.bytes = null;
+    if (got) got.bytes = null;
     done[i] = true;
     checkEarly();
-    report(i, seal);
+    report(i, seal || 'opfs');
     if (range.end < range.start) throw new Error('rentang kosong');
   }
 
   async function worker() {
     while (!stopError) {
-      while (control.paused && !control.cancelled && !stopError) await sleep(40);
+      while (control.paused && !control.cancelled && !stopError) await wait(40);
       if (stopError) return;
       if (control.cancelled) {
         stopError = new Error('dibatalkan');

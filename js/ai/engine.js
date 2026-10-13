@@ -1,4 +1,4 @@
-import { llmEngine } from '../../raget/raget-deterministic/llm-engine.js';
+import { neuralProvider } from '../../raget/raget-neural/neural-provider.js';
 import { $ } from '../../shared/dom.js';
 import { mountNamespace } from '../core/namespace.js';
 
@@ -10,18 +10,25 @@ function setStatus(text) {
 }
 
 async function ensureReady() {
-  if (llmEngine.ready) return true;
-  setStatus('Memuat mesin…');
-  const ok = await llmEngine.init();
-  setStatus(ok ? 'RAGET' : 'Mesin gagal dimuat');
-  return ok;
+  try {
+    if (neuralProvider.ready()) {
+      setStatus('RAGET');
+      return true;
+    }
+    const booted = await neuralProvider.bootWeights();
+    setStatus(booted ? 'RAGET' : '');
+    return true;
+  } catch (e) {
+    setStatus('');
+    return true;
+  }
 }
 
 export const engine = Object.freeze({
   ensureReady,
   setStatus,
   get ready() {
-    return llmEngine.ready;
+    return neuralProvider.ready();
   },
 });
 

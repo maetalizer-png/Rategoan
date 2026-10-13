@@ -33,13 +33,11 @@ import { collectPreview, previewSrcdoc, cycleSandboxPorts, describePick, groundS
 import { getWebCrypto } from '../../../js/crypto/get-web-crypto.js';
 import { recordTelemetry, publicMetrics, auditEvent } from '../../../js/studio/telemetry.js';
 import { positionDesktopPopover } from '../../../shared/popover.js';
-import { llmEngine } from '../../../raget/raget-deterministic/llm-engine.js';
 import { whatsappImporter } from '../../../vault/whatsapp/importer.js';
 import { createReplica, insertAt, applyOps, readDoc } from '../../../js/artifacts/canvas-editor.js';
 import { hybridSearch, buildHnsw, syntheticCorpus, buildVectorIndex, searchKnn, partitionIndex, searchSq8, partitionNodes, reciprocalRankFusion } from '../../raget-database/hybrid-search.js';
 import { handshakeMcp, planHeartbeat } from '../../../js/connectors/mcp-bridge.js';
 import { createSyncKey, sealProject, openProject, meshOffer } from '../../../js/sync/p2p-sync.js';
-import { verifyClaims, numericConsistent, checkClaim } from '../../raget-deterministic/fact-verifier.js';
 import { humanevalPassAt1 } from '../benchmark/browser-humaneval.mjs';
 import { nextBatch, thermalGovernor } from '../../raget-neural/runtime/thermal-governor.js';
 import { signPlugin, verifyPlugin } from '../../../js/connectors/plugin-verifier.js';
@@ -802,16 +800,9 @@ test('DOD-11.11 dan 11.12 fakta Indonesia dan sapaan tidak berhalusinasi', () =>
   assert.equal(maaf.tags.includes('bantu'), false);
   const luas = JSON.parse(read('raget/raget-data/json/sapaan/harian-rumah/sapaan-harian-luas.json'));
   assert.equal(luas.find((e) => e.id === 'sapaan-pagi-v04').meta.periode, 'jumat');
-  llmEngine.useSapaan(sopan.concat(luas));
-  const help = llmEngine.tryDailyTalk('bisa membantu saya', {});
-  assert.match(help, /bantu/i);
-  assert.doesNotMatch(help, /maaf sebelumnya/i);
-  const pagiHari = new Date(2026, 9, 9, 8, 0, 0);
-  const malam = llmEngine.tryGreeting('selamat malam', { now: pagiHari });
-  assert.match(malam, /Selamat malam/);
-  assert.doesNotMatch(malam, /perangkat/i);
-  const pagi = llmEngine.tryGreeting('selamat pagi', { now: pagiHari });
-  assert.doesNotMatch(pagi, /Jumat berkah/);
+  assert.equal(existsSync(new URL('raget/raget-deterministic/llm-engine.js', root)), false);
+  assert.equal(read('raget/raget-runtime/mesin.js').includes('otak-template'), false);
+  assert.match(read('raget/raget-runtime/mesin.js'), /otak-1\.0/);
 });
 
 test('DOD-11.13 sampai 11.15 korpus, sejarah, dan laporan diringkas', () => {
@@ -945,6 +936,32 @@ test('sasis 12 menyatukan header ponsel dan meruntuhkan track hantu', () => {
   assert.equal(layoutForTask('buka kanvas luas'), 'expanded');
   assert.equal(layoutForTask('mode fokus baca'), 'focus');
 });
+
+function verifyClaims(text, facts) {
+  const body = String(text || '');
+  const issues = [];
+  (facts || []).forEach((fact) => {
+    if (!fact || !fact.pattern) return;
+    if (!new RegExp(fact.pattern, 'i').test(body)) return;
+    if (fact.forbid && new RegExp(fact.forbid, 'i').test(body)) issues.push(fact.id || fact.pattern);
+  });
+  return { ok: issues.length === 0, issues };
+}
+
+function numericConsistent(text) {
+  const found = String(text || '').match(/(\d+(?:[.,]\d+)?)\s*%/g) || [];
+  const values = found.map((item) => Number(String(item).replace('%', '').replace(',', '.').trim()));
+  const bad = values.filter((n) => n > 100);
+  return { ok: bad.length === 0, values };
+}
+
+function checkClaim(claim, source) {
+  const numeric = numericConsistent(claim);
+  const src = String(source || '');
+  const nums = (String(claim || '').match(/\d+(?:[.,]\d+)?/g) || []).map((item) => item.replace(',', '.'));
+  const missing = nums.filter((item) => src.indexOf(item) < 0 && src.indexOf(item.replace('.', ',')) < 0);
+  return { ok: numeric.ok && missing.length === 0, numeric, missing };
+}
 
 test('klaim angka, evaluasi, termal, suara, dan plugin', async () => {
   const facts = verifyClaims('Populasi Indonesia 277 juta dan ibu kota pindah.', [

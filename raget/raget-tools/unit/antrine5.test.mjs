@@ -42,13 +42,10 @@ test('prefetch partisi i+4 mulai sebelum tulis disk partisi i selesai', async ()
   assert.equal(PREFETCH_AHEAD, 4);
   const size = MODEL_CHUNK * 6;
   const marks = [];
-  const store = {
-    async get() { return null; },
-    async put(_cache, key) {
-      marks.push({ kind: 'put-start', key, at: Date.now() });
-      await new Promise((resolve) => setTimeout(resolve, 40));
-      marks.push({ kind: 'put-end', key, at: Date.now() });
-    },
+  const diskWrite = async (_cache, key) => {
+    marks.push({ kind: 'put-start', key, at: Date.now() });
+    await new Promise((resolve) => setTimeout(resolve, 40));
+    marks.push({ kind: 'put-end', key, at: Date.now() });
   };
   const fetchImpl = async (_url, init) => {
     const header = init.headers.Range;
@@ -61,7 +58,7 @@ test('prefetch partisi i+4 mulai sebelum tulis disk partisi i selesai', async ()
     url: 'https://model.local/w.bin',
     size,
     fetchImpl,
-    store,
+    diskWrite,
     concurrency: 1,
   });
   assert.equal(out.parts, 6);

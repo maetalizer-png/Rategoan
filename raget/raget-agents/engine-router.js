@@ -1,7 +1,5 @@
-// Jalur chat hanya adapter neural. Adapter deterministik tetap terdaftar
-// untuk status panel, tetapi orderedAdapters() tidak memanggilnya.
+// Jalur chat hanya adapter neural. Tidak ada otak template.
 import { neuralAdapter } from '../raget-neural/neural-adapter.js';
-import { deterministicAdapter } from '../raget-deterministic/deterministic-adapter.js';
 import { engineContract } from './engine-contract.js';
 
 function registerAdapter(adapter) {
@@ -14,7 +12,6 @@ function registerAdapter(adapter) {
 
 const ADAPTERS_BY_ID = Object.freeze({
   neural: registerAdapter(neuralAdapter),
-  template: registerAdapter(deterministicAdapter),
 });
 
 function routePlan() {
@@ -58,7 +55,7 @@ async function ask(prompt, context) {
 }
 
 function statusAll() {
-  return [ADAPTERS_BY_ID.template, ADAPTERS_BY_ID.neural].map((a) => {
+  return [ADAPTERS_BY_ID.neural].map((a) => {
     let st;
     try {
       st = a.status();

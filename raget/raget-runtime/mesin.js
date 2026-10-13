@@ -58,7 +58,6 @@ async function flushJobs() {
 }
 
 const MACHINES = [
-  { id: 'otak-template', host: 'client', ready: true, note: 'Raget Template' },
   { id: 'otak-1.0', host: 'client', ready: true, note: 'Raget 1.0 checkpoint' },
   { id: 'perencana', host: 'client', ready: true, note: 'flow-hub + turn-pipeline' },
   { id: 'bahan', host: 'client', ready: true, note: 'file, wiki, koleksi, chat' },
