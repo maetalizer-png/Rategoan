@@ -10,6 +10,19 @@ async function handle() {
 
 self.onmessage = async (event) => {
   const msg = event.data || {};
+  if (msg.op === 'close') {
+    try {
+      if (sync) {
+        sync.flush();
+        sync.close();
+        sync = null;
+      }
+      self.postMessage({ id: msg.id, op: 'closed', ok: true });
+    } catch (e) {
+      self.postMessage({ id: msg.id, op: 'closed', ok: false });
+    }
+    return;
+  }
   if (msg.op !== 'write') return;
   try {
     const io = await handle();
@@ -17,7 +30,11 @@ self.onmessage = async (event) => {
     const bytes = raw instanceof Uint8Array
       ? raw
       : new Uint8Array(raw instanceof ArrayBuffer ? raw : (raw || 0));
-    io.write(bytes, { at: msg.offset || 0 });
+    const written = io.write(bytes, { at: msg.offset || 0 });
+    if (typeof written === 'number' && written !== bytes.byteLength) {
+      self.postMessage({ id: msg.id, ok: false });
+      return;
+    }
     io.flush();
     let digest = '';
     if (msg.hash && self.crypto && crypto.subtle) {

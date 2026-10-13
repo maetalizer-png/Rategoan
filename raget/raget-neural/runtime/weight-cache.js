@@ -1,4 +1,4 @@
-import { memoryStore, MODEL_CACHE, MODEL_CHUNK, downloadConcurrentChunks as fetchConcurrent } from './model-downloader.js';
+import { memoryStore, MODEL_CACHE, MODEL_CHUNK, MODEL_REVISION, downloadConcurrentChunks as fetchConcurrent } from './model-downloader.js';
 
 export const WEIGHT_ROOM = Math.floor(1.5 * 1024 * 1024 * 1024);
 export const EARLY_READY_BYTES = 233706880;
@@ -10,6 +10,7 @@ export const WEIGHT_SPEC = Object.freeze({
   size: 1045697920,
   chunk: MODEL_CHUNK,
   cache: MODEL_CACHE,
+  revision: MODEL_REVISION,
 });
 
 export function cacheStore() {
@@ -78,6 +79,29 @@ export function readSyncBlock(sync, offset, length) {
   const buf = new Uint8Array(length);
   const n = sync.read(buf, { at: offset });
   return n === length ? buf : buf.subarray(0, Math.max(0, n));
+}
+
+export function safetensorsHeaderOk(sync) {
+  try {
+    if (!sync || typeof sync.read !== 'function') return false;
+    const size = Number(sync.size) || 0;
+    if (size < 16) return false;
+    const raw = sync.read(0, 8);
+    if (!raw || raw.length < 8 || !raw.buffer) return false;
+    const view = new DataView(raw.buffer, raw.byteOffset || 0, raw.byteLength);
+    let headerLen = 0;
+    try { headerLen = Number(view.getBigUint64(0, true)); } catch (e) { return false; }
+    if (!headerLen || headerLen > 16 * 1024 * 1024) return false;
+    if (size < 8 + headerLen) return false;
+    const slice = sync.read(8, Math.min(headerLen, 2048));
+    if (!slice || !slice.length || slice[0] !== 123) return false;
+    if (headerLen <= slice.length) {
+      JSON.parse(new TextDecoder().decode(slice));
+    }
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 export async function openSyncWeight(name) {

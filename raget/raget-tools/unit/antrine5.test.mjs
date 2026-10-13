@@ -52,7 +52,11 @@ test('prefetch partisi i+4 mulai sebelum tulis disk partisi i selesai', async ()
     marks.push({ kind: 'fetch', header, at: Date.now() });
     const pair = header.replace('bytes=', '').split('-').map(Number);
     const expect = pair[1] - pair[0] + 1;
-    return { status: 206, arrayBuffer: async () => new Uint8Array(expect).buffer };
+    return {
+      status: 206,
+      headers: { get: (name) => (String(name).toLowerCase() === 'content-range' ? ('bytes ' + pair[0] + '-' + pair[1] + '/' + size) : '') },
+      arrayBuffer: async () => new Uint8Array(expect).buffer,
+    };
   };
   const out = await downloadConcurrentChunks({
     url: 'https://model.local/w.bin',

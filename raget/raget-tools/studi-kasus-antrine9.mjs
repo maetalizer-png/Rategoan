@@ -1,8 +1,10 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const base = process.env.STUDI_BASE || 'http://127.0.0.1:8099';
-const outDir = '/workspace/screenshots';
+const outDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../screenshots');
 fs.mkdirSync(outDir, { recursive: true });
 const findings = [];
 function note(ok, name, detail) {

@@ -11,7 +11,16 @@ import {
   downloadConcurrentChunks,
   openSyncWeight,
   storageFree,
+  safetensorsHeaderOk,
 } from './runtime/weight-cache.js';
+
+export const MODEL_STATUS = Object.freeze({
+  NOT_DOWNLOADED: 'NOT_DOWNLOADED',
+  DOWNLOADING: 'DOWNLOADING',
+  READY: 'READY',
+  FAILED: 'FAILED',
+});
+export const INFERENCE_MS = 30000;
 
 const HF = 'https://huggingface.co/Maetalizer19/rategoan-neural/resolve/main/';
 const CHECKPOINT_BY_TIER = {
@@ -50,6 +59,27 @@ const earlyWaiters = [];
 let bootPromise = null;
 const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
 const PARTS_KEY = 'rategoan_weights_1_5b_parts';
+let modelStatus = MODEL_STATUS.NOT_DOWNLOADED;
+let lastEnvelope = { ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null };
+
+function remember(patch) {
+  if (patch && patch.status) modelStatus = patch.status;
+  lastEnvelope = {
+    ok: !!(patch && patch.ok === true),
+    status: modelStatus,
+    error: patch && patch.error ? String(patch.error) : '',
+    reply: patch && patch.reply != null ? String(patch.reply) : null,
+  };
+  return lastEnvelope;
+}
+
+function currentEnvelope() {
+  return lastEnvelope;
+}
+
+function currentStatus() {
+  return modelStatus;
+}
 
 function weightError() {
   return lastWeightError;
@@ -102,17 +132,39 @@ function clearInstalled() {
 }
 
 async function bootWeights() {
-  if (loadedTier && weightReader) return true;
-  if (!installedFlag()) return false;
-  const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
-  if (!sync || sync.size < 8) {
-    clearInstalled();
-    return false;
+  if (bootPromise) return bootPromise;
+  bootPromise = (async () => {
+    if (loadedTier && weightReader && safetensorsHeaderOk(weightReader)) {
+      remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
+      return true;
+    }
+    if (!installedFlag()) {
+      remember({ ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null });
+      return false;
+    }
+    const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
+    if (!safetensorsHeaderOk(sync)) {
+      if (sync && typeof sync.close === 'function') {
+        try { sync.close(); } catch (e) { /* gagang buruk */ }
+      }
+      weightReader = null;
+      loadedTier = null;
+      earlyFlag = false;
+      clearInstalled();
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'header safetensors rusak', reply: null });
+      return false;
+    }
+    weightReader = sync;
+    loadedTier = 'tier_1_5b';
+    earlyFlag = true;
+    remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
+    return true;
+  })();
+  try {
+    return await bootPromise;
+  } finally {
+    bootPromise = null;
   }
-  weightReader = sync;
-  loadedTier = 'tier_1_5b';
-  earlyFlag = true;
-  return true;
 }
 
 function haltInference() {
@@ -132,6 +184,7 @@ async function doInitTier(tier) {
   try {
     lastWeightError = '';
     control.cancelled = false;
+    remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: '', reply: null });
     const url = CHECKPOINT_BY_TIER[tier];
     let size = WEIGHT_BYTES[tier] || 0;
     if (!size) {
@@ -141,12 +194,16 @@ async function doInitTier(tier) {
     if (!size) throw new Error('ukuran checkpoint tidak diketahui');
     const chunk = WEIGHT_SPEC.chunk;
     const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
-    weightReader = sync || { size: size, async read() { throw new Error('bobot belum tertulis di OPFS'); } };
+    if (sync && typeof sync.close === 'function') {
+      try { sync.close(); } catch (e) { /* lepas kunci sebelum tulis */ }
+    }
+    weightReader = { size: size, read() { throw new Error('bobot belum tertulis di OPFS'); } };
     session = null;
     const packed = await downloadConcurrentChunks({
       url: url,
       size: size,
       chunk: chunk,
+      revision: WEIGHT_SPEC.revision,
       cacheName: WEIGHT_SPEC.cache,
       control: control,
       concurrency: 6,
@@ -159,18 +216,31 @@ async function doInitTier(tier) {
       onProgress: (detail) => reportProgress(Object.assign({ tier: tier }, detail)),
     });
     if (packed.bytesHeld !== 0) throw new Error('buffer monolitik tidak boleh dibuat');
+    const sealed = await openSyncWeight('raget-neural-1.5b.safetensors');
+    if (!safetensorsHeaderOk(sealed)) {
+      if (sealed && typeof sealed.close === 'function') {
+        try { sealed.close(); } catch (e) { /* gagang buruk */ }
+      }
+      throw new Error('header safetensors rusak');
+    }
+    weightReader = sealed;
     markEarly(tier);
     sealInstalled(packed.parts);
+    remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: null });
     reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts, source: 'cache', early: false });
     return true;
   } catch (e) {
     lastWeightError = e && e.message ? String(e.message) : 'gagal';
-    if (!earlyFlag) {
+    const badHeader = lastWeightError.indexOf('header safetensors') >= 0;
+    if (badHeader || !earlyFlag) {
       session = null;
-      if (loadedTier === tier) {
+      if (badHeader || loadedTier === tier) {
         loadedTier = null;
         weightReader = null;
+        earlyFlag = false;
       }
+      if (badHeader) clearInstalled();
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError, reply: null });
       failEarly();
       return false;
     }
@@ -230,23 +300,39 @@ function runOnWorker(prompt, genOpts, signal) {
   workerJob = id;
   const live = ensureWorker();
   return new Promise((resolve) => {
+    let settled = false;
     const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(cap);
       live.removeEventListener('message', onMsg);
       live.removeEventListener('error', onErr);
       if (signal) signal.removeEventListener('abort', onAbort);
       resolve(value);
     };
+    const cap = setTimeout(() => {
+      haltInference();
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'nalar timeout', reply: null });
+      finish(null);
+    }, INFERENCE_MS);
     const onAbort = () => {
       haltInference();
+      if (!lastEnvelope.error) remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'dibatalkan', reply: null });
       finish(null);
     };
-    const onErr = () => finish(null);
+    const onErr = () => {
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'worker gagal', reply: null });
+      finish(null);
+    };
     const onMsg = (ev) => {
       const data = ev.data || {};
       if (data.id !== id) return;
       if (data.type === 'token' && data.piece && genOpts.onToken) genOpts.onToken(data.piece);
       if (data.type === 'done') finish(data);
-      if (data.type === 'error') finish(null);
+      if (data.type === 'error') {
+        remember({ ok: false, status: MODEL_STATUS.FAILED, error: data.message || 'gagal', reply: null });
+        finish(null);
+      }
     };
     if (signal) {
       if (signal.aborted) {
@@ -279,10 +365,19 @@ async function generateWithTier(tier, prompt, options) {
     if (remote) return remote;
   }
   const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
+  if (installedFlag() && !(weightReader && loadedTier === tier && safetensorsHeaderOk(weightReader))) {
+    await bootWeights();
+  }
   if (!(earlyFlag && weightReader && loadedTier === tier)) {
-    if (loadedTier !== tier && !initPromises[tier]) return null;
+    if (loadedTier !== tier && !initPromises[tier]) {
+      remember({ ok: false, status: installedFlag() ? MODEL_STATUS.FAILED : modelStatus, error: lastWeightError || lastEnvelope.error || 'bobot belum siap', reply: null });
+      return null;
+    }
     const ok = await ensureTier(tier);
-    if (!ok || !weightReader) return null;
+    if (!ok || !weightReader) {
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError || 'bobot belum siap', reply: null });
+      return null;
+    }
   }
   const progressive = !!(earlyFlag && weightReader && !installedFlag());
   const signal = options && options.signal;
@@ -314,10 +409,15 @@ async function generateWithTier(tier, prompt, options) {
       const out = await runOnWorker(String(prompt || ''), genOpts, signal);
       return textFrom(out, options);
     }
+    if (!safetensorsHeaderOk(weightReader)) {
+      remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'header safetensors rusak', reply: null });
+      return null;
+    }
     if (!session) session = await openInt4Stream(weightReader);
     const out = await session.generate(String(prompt || ''), genOpts);
     return textFrom(out, options);
   } catch (e) {
+    remember({ ok: false, status: MODEL_STATUS.FAILED, error: e && e.message ? e.message : 'gagal', reply: null });
     return null;
   }
 }
@@ -330,8 +430,23 @@ async function generateLocal(prompt, options) {
 async function generate(messages, prompt, options) {
   if (options && options.signal && options.signal.aborted) return null;
   if (options && options.large === true && llmMode.mode() === 'server') llmMode.setMode('lokal');
-  if ((earlyFlag && weightReader) || installedFlag()) return generateLocal(prompt, options);
+  if (installedFlag() && !(earlyFlag && weightReader && loadedTier)) await bootWeights();
+  if ((earlyFlag && weightReader) || installedFlag()) {
+    const reply = await generateLocal(prompt, options);
+    if (reply == null) {
+      remember({
+        ok: false,
+        status: modelStatus === MODEL_STATUS.READY ? MODEL_STATUS.FAILED : modelStatus,
+        error: lastEnvelope.error || lastWeightError || 'nalar kosong',
+        reply: null,
+      });
+    } else {
+      remember({ ok: true, status: MODEL_STATUS.READY, error: '', reply: reply });
+    }
+    return reply;
+  }
   loadWeights().catch(() => {});
+  remember({ ok: false, status: MODEL_STATUS.DOWNLOADING, error: 'bobot belum terunduh', reply: null });
   reportProgress({
     loaded: 0,
     total: WEIGHT_BYTES.tier_1_5b || 0,
@@ -384,4 +499,6 @@ export const neuralProvider = Object.freeze({
   bootWeights,
   cepatReady,
   weightsInstalled: installedFlag,
+  lastEnvelope: currentEnvelope,
+  modelStatus: currentStatus,
 });

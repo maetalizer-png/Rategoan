@@ -1,5 +1,5 @@
 import { openInt4Stream } from './int4-session.js';
-import { openSyncWeight } from './weight-cache.js';
+import { openSyncWeight, safetensorsHeaderOk } from './weight-cache.js';
 
 let sessionPromise = null;
 
@@ -7,7 +7,12 @@ function session() {
   if (!sessionPromise) {
     sessionPromise = (async () => {
       const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
-      if (!sync || sync.size <= 8) throw new Error('bobot OPFS belum siap');
+      if (!safetensorsHeaderOk(sync)) {
+        if (sync && typeof sync.close === 'function') {
+          try { sync.close(); } catch (e) { /* gagang buruk */ }
+        }
+        throw new Error('header safetensors rusak');
+      }
       return openInt4Stream(sync);
     })();
   }
@@ -17,8 +22,15 @@ function session() {
 self.onmessage = async (event) => {
   const msg = event.data || {};
   if (msg.op !== 'generate') return;
+  let timed = false;
+  const cap = setTimeout(() => {
+    timed = true;
+    sessionPromise = null;
+    self.postMessage({ id: msg.id, type: 'error', message: 'nalar timeout' });
+  }, 30000);
   try {
     const live = await session();
+    if (timed) return;
     const out = await live.generate(String(msg.prompt || ''), {
       maxNewTokens: msg.maxNewTokens,
       maxLayers: msg.maxLayers,
@@ -29,9 +41,12 @@ self.onmessage = async (event) => {
       topP: msg.topP,
       repetitionPenalty: msg.repetitionPenalty,
       onToken(piece) {
+        if (timed) return;
         self.postMessage({ id: msg.id, type: 'token', piece: piece });
       },
     });
+    if (timed) return;
+    clearTimeout(cap);
     self.postMessage({
       id: msg.id,
       type: 'done',
@@ -41,7 +56,9 @@ self.onmessage = async (event) => {
       trained: out.trained,
     });
   } catch (e) {
+    clearTimeout(cap);
     sessionPromise = null;
+    if (timed) return;
     self.postMessage({ id: msg.id, type: 'error', message: e && e.message ? e.message : 'gagal' });
   }
 };

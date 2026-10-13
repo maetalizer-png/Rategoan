@@ -2,7 +2,7 @@
 import { neuralProvider } from './neural-provider.js';
 import { enginePreference } from '../../js/state/engine-preference.js';
 
-const ASK_MS = 8000;
+const INFERENCE_MS = 30000;
 
 async function init() {
   if (typeof neuralProvider.prefetchBest === 'function') {
@@ -45,7 +45,7 @@ async function ask(prompt, context) {
     else external.addEventListener('abort', () => ctrl.abort(), { once: true });
   }
   const mode = uiMode();
-  const timer = mode ? null : setTimeout(() => ctrl.abort(), ASK_MS);
+  const timer = setTimeout(() => ctrl.abort(), INFERENCE_MS);
   try {
     const opts = {
       signal: ctrl.signal,
@@ -54,11 +54,11 @@ async function ask(prompt, context) {
     if (mode) opts.mode = mode;
     const reply = await neuralProvider.generate([], String(prompt || ''), opts);
     if (external && external.aborted) throw new Error('dibatalkan');
-    if (ctrl.signal.aborted) throw new Error('Raget 1.0 timeout');
+    if (ctrl.signal.aborted) return null;
     if (reply && !/^\d+$/.test(String(reply).trim())) return reply;
     return null;
   } finally {
-    if (timer) clearTimeout(timer);
+    clearTimeout(timer);
   }
 }
 

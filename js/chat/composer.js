@@ -407,7 +407,7 @@ function bindWeightCard() {
       return;
     }
     status.dataset.busy = '1';
-    status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%). Menjawab menggunakan partisi terunduh...';
+    status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (' + pct + '%).';
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});
@@ -453,7 +453,7 @@ function bindWeightCard() {
         pauseBtn.textContent = 'Jeda';
       }
       if (cancelBtn) cancelBtn.hidden = false;
-      if (status) status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%). Menjawab menggunakan partisi terunduh...';
+      if (status) status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%).';
       neuralProvider.loadWeights().then((ok) => {
         if (pauseBtn) pauseBtn.hidden = true;
         if (cancelBtn) cancelBtn.hidden = true;
@@ -675,12 +675,25 @@ export const composer = {
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
     const modelPrefix = [GUARDRAIL, prefNote, projectPrefix, imageNote].filter(Boolean).join('\n\n');
     let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
-    if (livePlan && livePlan.parentNode) livePlan.remove();
     if (reply == null) {
-      const live = $('weight-status');
-      toast.show(live && live.dataset.busy ? live.textContent : 'Bobot Raget 1.0 sedang diunduh secara progresif (0%). Menjawab menggunakan partisi terunduh...');
+      if (livePlan) {
+        livePlan.dataset.state = 'failed';
+        const note = document.createElement('p');
+        note.className = 'thought-fail';
+        note.textContent = 'Tidak ada jawaban. Bobot belum siap atau nalar gagal.';
+        livePlan.appendChild(note);
+        import('../../raget/raget-neural/neural-provider.js').then((mod) => {
+          const env = mod.neuralProvider && typeof mod.neuralProvider.lastEnvelope === 'function'
+            ? mod.neuralProvider.lastEnvelope()
+            : null;
+          if (env && env.error) note.textContent = env.error;
+          else if (env && env.status) note.textContent = 'Status bobot: ' + env.status + '. Tidak ada jawaban.';
+        }).catch(() => {});
+      }
+      toast.show('Tidak ada jawaban. Bobot belum siap atau nalar gagal.');
       return;
     }
+    if (livePlan && livePlan.parentNode) livePlan.remove();
     if (cowork.expectsEdit()) cowork.applyReply(reply);
     else if (/naskah|laporan|dokumen|surat|kontrak|spesifikasi/i.test(text) && String(reply).length > 280) cowork.open(reply);
     if (deep && reply) {

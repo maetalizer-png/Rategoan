@@ -22,7 +22,11 @@ test('detik nol hanya meminta partisi yang sedang ditarik', async () => {
     const header = init.headers.Range;
     marks.push({ kind: 'fetch', header, at: Date.now() });
     const pair = header.replace('bytes=', '').split('-').map(Number);
-    return { status: 206, arrayBuffer: async () => new Uint8Array(pair[1] - pair[0] + 1).buffer };
+    return {
+      status: 206,
+      headers: { get: (name) => (String(name).toLowerCase() === 'content-range' ? ('bytes ' + pair[0] + '-' + pair[1] + '/' + (MODEL_CHUNK * 8)) : '') },
+      arrayBuffer: async () => new Uint8Array(pair[1] - pair[0] + 1).buffer,
+    };
   };
   const out = await downloadConcurrentChunks({
     url: 'https://model.local/w.bin',

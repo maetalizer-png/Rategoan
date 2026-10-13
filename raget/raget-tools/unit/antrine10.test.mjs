@@ -27,7 +27,7 @@ test('DOD-34.01 sampai 34.05 pipa 256 KB dan kerangka tanpa template', () => {
   assert.equal(DOWNLOAD_ATTEMPTS, 4);
   assert.match(down, /getReader/);
   assert.match(pipe, /readResponseBytes/);
-  assert.match(pipe, /keepalive:\s*true/);
+  assert.equal(/keepalive:\s*true/.test(pipe), false);
   assert.match(pipe, /\[owned\.transferBuf\]/);
   assert.equal(pipe.includes('store.put'), false);
   assert.equal(pipe.includes('const copy = bytes.slice()'), false);
@@ -104,7 +104,7 @@ test('stream sungguhan menggerakkan progres sebelum 150 ms', async () => {
         res.end();
         return;
       }
-      if (ok) setImmediate(pump);
+      if (ok) setTimeout(pump, 0);
       else res.once('drain', pump);
     };
     pump();
@@ -160,15 +160,24 @@ test('postMessage memakai ArrayBuffer yang bisa ditransfer', async () => {
       chunk: 128,
       concurrency: 1,
       sleepImpl: async () => {},
-      fetchImpl: async () => ({ status: 206, arrayBuffer: async () => new Uint8Array(128).buffer }),
+      fetchImpl: async (_url, init) => {
+        const pair = String(init.headers.Range).replace('bytes=', '').split('-').map(Number);
+        return {
+          status: 206,
+          headers: { get: (name) => (String(name).toLowerCase() === 'content-range' ? ('bytes ' + pair[0] + '-' + pair[1] + '/128') : '') },
+          arrayBuffer: async () => new Uint8Array(128).buffer,
+        };
+      },
     });
     assert.equal(out.parts, 1);
     assert.equal(out.bytesHeld, 0);
-    assert.equal(seen.length, 1);
-    assert.ok(seen[0].transfer.length === 1);
-    assert.ok(seen[0].transfer[0] instanceof ArrayBuffer);
-    assert.equal(seen[0].data.bytes.buffer, seen[0].transfer[0]);
-    assert.equal(seen[0].data.hash, true);
+    const writes = seen.filter((row) => !row.data || row.data.op !== 'close');
+    assert.equal(writes.length, 1);
+    assert.ok(writes[0].transfer.length === 1);
+    assert.ok(writes[0].transfer[0] instanceof ArrayBuffer);
+    assert.equal(writes[0].data.bytes.buffer, writes[0].transfer[0]);
+    assert.equal(writes[0].data.hash, true);
+    assert.ok(seen.some((row) => row.data && row.data.op === 'close'));
   } finally {
     if (prev) globalThis.Worker = prev;
     else delete globalThis.Worker;

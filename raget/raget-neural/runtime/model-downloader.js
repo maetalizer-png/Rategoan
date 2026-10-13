@@ -6,6 +6,9 @@ export const MODEL_CHUNK = 20 * 1024 * 1024;
 export const PREFETCH_AHEAD = 4;
 export const PROGRESS_GRAIN = 256 * 1024;
 export const DOWNLOAD_ATTEMPTS = 4;
+export const OPFS_ACK_MS = 20000;
+export const READ_IDLE_MS = 15000;
+export const MODEL_REVISION = '53c362a5d8b403d1983cf46151595c466ff8b095';
 
 export function deltaChunkPlan(previous, next) {
   const oldH = previous || [];
@@ -141,7 +144,36 @@ function joinParts(parts, length) {
   return out;
 }
 
-async function readResponseBytes(res, expect, onBytes) {
+export function headerValue(res, name) {
+  if (!res || !res.headers) return '';
+  const wanted = String(name || '').toLowerCase();
+  if (typeof res.headers.get === 'function') return String(res.headers.get(wanted) || res.headers.get(name) || '');
+  return String(res.headers[wanted] || res.headers[name] || '');
+}
+
+export function contentRangeMatches(header, range) {
+  const match = /bytes\s+(\d+)\s*-\s*(\d+)\s*\/\s*(\d+|\*)/i.exec(String(header || ''));
+  if (!match || !range) return false;
+  return Number(match[1]) === range.start && Number(match[2]) === range.end;
+}
+
+function readSlice(reader, idleMs) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error('stream timeout'));
+      try { reader.cancel(); } catch (e) { /* pembaca sudah lepas */ }
+    }, idleMs);
+    reader.read().then((value) => {
+      clearTimeout(timer);
+      resolve(value);
+    }, (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+  });
+}
+
+async function readResponseBytes(res, expect, onBytes, idleMs) {
   const body = res && res.body;
   if (body && typeof body.getReader === 'function') {
     const reader = body.getReader();
@@ -149,7 +181,7 @@ async function readResponseBytes(res, expect, onBytes) {
     let got = 0;
     try {
       while (got < expect) {
-        const step = await reader.read();
+        const step = await readSlice(reader, idleMs > 0 ? idleMs : READ_IDLE_MS);
         if (step.done) break;
         const value = step.value;
         if (!value || !value.byteLength) continue;
@@ -214,6 +246,9 @@ export async function downloadConcurrentChunks(options) {
   const t0 = Date.now();
   const samples = [{ t: t0, loaded: 0 }];
   const mesh = options && options.mesh === true;
+  const revision = String((options && options.revision) || MODEL_REVISION);
+  const maskKey = 'rategoan_chunks_mask:' + revision;
+  const readIdle = Math.max(1, Math.floor(Number(options && options.readIdleMs) || 0) || READ_IDLE_MS);
   const primed = new Map();
   let opfsPort = null;
   let opfsSeq = 0;
@@ -247,27 +282,32 @@ export async function downloadConcurrentChunks(options) {
 
   function mirrorOpfs(offset, bytes) {
     const port = opfsWorker();
-    if (!port || !bytes) return Promise.resolve('');
+    if (!port || !bytes) return Promise.reject(new Error('OPFS tidak tersedia'));
     const id = opfsSeq + 1;
     opfsSeq = id;
     const owned = ownBuffer(bytes);
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         port.removeEventListener('message', onMsg);
-        resolve('');
-      }, 4000);
+        reject(new Error('OPFS timeout'));
+      }, OPFS_ACK_MS);
       function onMsg(event) {
         if (!event.data || event.data.id !== id) return;
         clearTimeout(timer);
         port.removeEventListener('message', onMsg);
-        resolve(event.data.digest || '');
+        if (event.data.ok !== true) {
+          reject(new Error('OPFS gagal'));
+          return;
+        }
+        resolve({ ok: true, digest: event.data.digest || '' });
       }
       port.addEventListener('message', onMsg);
       try {
         port.postMessage({ op: 'write', id: id, offset: offset, bytes: owned.payload, hash: true }, [owned.transferBuf]);
       } catch (e) {
         clearTimeout(timer);
-        resolve('');
+        port.removeEventListener('message', onMsg);
+        reject(e instanceof Error ? e : new Error('OPFS gagal'));
       }
     });
   }
@@ -275,7 +315,7 @@ export async function downloadConcurrentChunks(options) {
   function maskBits() {
     try {
       if (typeof localStorage === 'undefined') return [];
-      const raw = localStorage.getItem('rategoan_chunks_mask') || '';
+      const raw = localStorage.getItem(maskKey) || '';
       return raw ? raw.split(',') : [];
     } catch (e) {
       return [];
@@ -292,13 +332,13 @@ export async function downloadConcurrentChunks(options) {
           headers: { Range: 'bytes=' + range.start + '-' + range.end },
           cache: 'no-store',
           credentials: 'omit',
-          keepalive: true,
           redirect: 'follow',
         });
-        if (typeof res.status === 'number' && res.status !== 200 && res.status !== 206) {
-          throw new Error('HTTP ' + res.status);
+        if (!res || res.status !== 206) throw new Error('HTTP ' + (res && res.status));
+        if (!contentRangeMatches(headerValue(res, 'content-range'), range)) {
+          throw new Error('Content-Range tidak cocok');
         }
-        return await readResponseBytes(res, expect, onBytes);
+        return await readResponseBytes(res, expect, onBytes, readIdle);
       } catch (e) {
         last = e instanceof Error ? e : new Error('gagal');
         if (control.cancelled || attempt + 1 >= DOWNLOAD_ATTEMPTS) break;
@@ -345,10 +385,10 @@ export async function downloadConcurrentChunks(options) {
   function markChunk(index) {
     try {
       if (typeof localStorage === 'undefined') return;
-      const raw = localStorage.getItem('rategoan_chunks_mask') || '';
+      const raw = localStorage.getItem(maskKey) || '';
       const bits = raw ? raw.split(',') : [];
       bits[index] = '1';
-      localStorage.setItem('rategoan_chunks_mask', bits.join(','));
+      localStorage.setItem(maskKey, bits.join(','));
     } catch (e) { /* penyimpanan tidak ada */ }
   }
 
@@ -392,7 +432,7 @@ export async function downloadConcurrentChunks(options) {
   async function persist(offset, bytes, key) {
     if (options && typeof options.diskWrite === 'function') {
       await options.diskWrite(cacheName, key, bytes);
-      return '';
+      return { ok: true, digest: '' };
     }
     return mirrorOpfs(offset, bytes);
   }
@@ -409,7 +449,9 @@ export async function downloadConcurrentChunks(options) {
       if (mesh && got.bytes) publishMeshChunk(i, got.bytes.slice());
       const writing = persist(range.start, got.bytes, got.key);
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
-      seal = (await writing) || '';
+      const ack = await writing;
+      if (!ack || ack.ok !== true) throw new Error('tulis OPFS gagal');
+      seal = ack.digest || 'opfs';
       networkHits += 1;
       markChunk(i);
     } else if (ahead < ranges.length && primed.size < 4) {
@@ -448,10 +490,46 @@ export async function downloadConcurrentChunks(options) {
     }
   }
 
+  async function releaseOpfs() {
+    const port = opfsPort;
+    if (!port) return;
+    const id = opfsSeq + 1;
+    opfsSeq = id;
+    try {
+      await new Promise((resolve) => {
+        const timer = setTimeout(() => {
+          port.removeEventListener('message', onMsg);
+          resolve();
+        }, 2000);
+        function onMsg(event) {
+          if (!event.data || event.data.id !== id) return;
+          clearTimeout(timer);
+          port.removeEventListener('message', onMsg);
+          resolve();
+        }
+        port.addEventListener('message', onMsg);
+        try {
+          port.postMessage({ op: 'close', id: id });
+        } catch (e) {
+          clearTimeout(timer);
+          port.removeEventListener('message', onMsg);
+          resolve();
+        }
+      });
+    } finally {
+      try { port.terminate(); } catch (e) { /* worker sudah tutup */ }
+      opfsPort = null;
+    }
+  }
+
   const runners = [];
   const workers = ranges.length === 0 ? 0 : Math.min(concurrency, ranges.length);
   for (let k = 0; k < workers; k += 1) runners.push(worker());
-  await Promise.all(runners);
-  if (stopError) throw stopError;
-  return { parts: ranges.length, bytesHeld: 0, peakChunk: peak, size: size, early: earlyFired };
+  try {
+    await Promise.all(runners);
+    if (stopError) throw stopError;
+    return { parts: ranges.length, bytesHeld: 0, peakChunk: peak, size: size, early: earlyFired };
+  } finally {
+    await releaseOpfs();
+  }
 }

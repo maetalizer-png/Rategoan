@@ -21,7 +21,7 @@
 // Jalankan penuh (satu proses - berisiko kena batas ~23 menit kalau
 // bench.json besar): node tools/run-bench.mjs [base-url]
 // Jalankan sebagian: node tools/run-bench.mjs [base-url] --start=0 --end=400
-import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import { chromium } from 'playwright';
 import { readFileSync, writeFileSync } from 'fs';
 
 const args = process.argv.slice(2);
@@ -51,7 +51,9 @@ function waitForNewStableReply(page, prevCount) {
 }
 
 async function main() {
-  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', headless: true });
+  const launchOpts = { headless: true };
+  if (process.env.PW_EXECUTABLE) launchOpts.executablePath = process.env.PW_EXECUTABLE;
+  const browser = await chromium.launch(launchOpts);
   const page = await browser.newPage();
   const consoleErrors = [];
   page.on('pageerror', (e) => consoleErrors.push('pageerror: ' + e.message));
@@ -60,9 +62,9 @@ async function main() {
   await page.waitForTimeout(500);
 
   const loginVisible = await page.locator('#view-login').isVisible().catch(() => false);
-  if (loginVisible) {
-    await page.fill('#login-email', 'maetalizer@gmail.com');
-    await page.fill('#login-password', 'bench1234');
+  if (loginVisible && process.env.BENCH_EMAIL && process.env.BENCH_PASSWORD) {
+    await page.fill('#login-email', process.env.BENCH_EMAIL);
+    await page.fill('#login-password', process.env.BENCH_PASSWORD);
     await page.click('#login-gmail-submit');
     await page.waitForTimeout(800);
   }

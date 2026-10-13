@@ -155,6 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(warmup, 1500);
     setTimeout(() => { probeGpu().catch(() => {}); watchStorage(); }, 2000);
   }
+  import('../raget/raget-neural/neural-provider.js').then((mod) => {
+    if (mod.neuralProvider.weightsInstalled()) mod.neuralProvider.bootWeights();
+  }).catch(() => {});
 });
 
 async function watchStorage() {
