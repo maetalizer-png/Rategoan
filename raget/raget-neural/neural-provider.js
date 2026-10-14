@@ -72,6 +72,7 @@ const earlyWaiters = [];
 let bootPromise = null;
 const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
 const PARTS_KEY = 'rategoan_weights_1_5b_parts';
+const ACTIVE_DL_KEY = 'rategoan_weights_downloading';
 let modelStatus = MODEL_STATUS.NOT_DOWNLOADED;
 let lastEnvelope = { ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null, request_id: '', message_id: '' };
 let pendingPrompts = [];
@@ -123,6 +124,7 @@ function cancelWeights() {
   control.cancelled = true;
   control.paused = false;
   earlyFlag = false;
+  try { if (typeof localStorage !== 'undefined') localStorage.removeItem(ACTIVE_DL_KEY); } catch (e) { /* abaikan */ }
   if (typeof control.abortNetwork === 'function') control.abortNetwork();
 }
 
@@ -139,6 +141,7 @@ function sealInstalled(parts) {
     if (typeof localStorage === 'undefined') return;
     localStorage.setItem(INSTALL_KEY, 'true');
     localStorage.setItem(PARTS_KEY, String(parts || 250));
+    localStorage.removeItem(ACTIVE_DL_KEY);
   } catch (e) {
     /* penyimpanan pribadi ditolak */
   }
@@ -726,23 +729,30 @@ async function resumeProgress() {
   const total = WEIGHT_BYTES.tier_1_5b || WEIGHT_SPEC.size || 0;
   let loaded = maskedBytes(total, WEIGHT_SPEC.chunk, WEIGHT_SPEC.revision);
   const physical = await probeWeightBytes();
-  if (physical == null) return 0;
-  if (physical < total) loaded = Math.min(loaded, physical);
-  if (loaded <= 0) return 0;
+  let wasActive = false;
+  try { wasActive = typeof localStorage !== 'undefined' && localStorage.getItem(ACTIVE_DL_KEY) === '1'; } catch (e) { wasActive = false; }
+  if (physical == null && !wasActive) return 0;
+  if (physical != null && physical < total) loaded = Math.min(loaded, physical);
+  if (loaded <= 0 && !wasActive) return 0;
+  const isPending = loaded < total && !installedFlag();
   reportProgress({
-    loaded: loaded,
+    loaded: Math.max(0, loaded),
     total: total,
     tier: 'tier_1_5b',
     early: false,
     source: 'opfs',
-    pending: loaded < total,
+    pending: isPending,
   });
-  return loaded;
+  if (isPending && !control.paused && !control.cancelled) {
+    loadWeights().catch(() => {});
+  }
+  return Math.max(0, loaded);
 }
 
 function loadWeights() {
   control.cancelled = false;
   control.paused = false;
+  try { if (typeof localStorage !== 'undefined' && !installedFlag()) localStorage.setItem(ACTIVE_DL_KEY, '1'); } catch (e) { /* abaikan */ }
   return ensureTier('tier_1_5b');
 }
 

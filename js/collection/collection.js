@@ -310,7 +310,7 @@ function bindItemCards(list, rerender) {
     const item = list.find((x) => x.id === id);
     const suggested = item ? collectionSearch.suggestTags(item.text, list, 2) : [];
     const tags = Array.from(new Set([...suggested, ...COMMON_TAGS]));
-    picker.innerHTML = tags.map((t) => '<button type="button" data-set-tag="' + escapeHtml(t) + '" data-set-tag-id="' + id + '">' + escapeHtml(t) + '</button>').join('');
+    picker.innerHTML = tags.map((t) => '<button type="button" data-set-tag="' + escapeHtml(t) + '" data-set-tag-id="' + escapeHtml(id) + '">' + escapeHtml(t) + '</button>').join('');
     picker.hidden = false;
     picker.querySelectorAll('[data-set-tag]').forEach((tb) => tb.onclick = async () => {
       await collectionStore.updateItem(tb.dataset.setTagId, { tag: tb.dataset.setTag });

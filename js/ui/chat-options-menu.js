@@ -29,13 +29,12 @@ export function mountChatOptions() {
   if (fresh) {
     fresh.onclick = (event) => {
       event.stopPropagation();
+      if (composer && typeof composer.resetForNewChat === 'function') {
+        composer.resetForNewChat();
+      }
       store.set({ currentId: null });
       const inp = $('chat-input');
-      if (inp) {
-        inp.value = '';
-        composer.autoGrow();
-        inp.focus();
-      }
+      if (inp) inp.focus();
       chat.renderMessages();
       history.render();
       drawer.close();
@@ -76,6 +75,9 @@ export function mountChatOptions() {
     } else if (act === 'pdf') {
       printReport({ title: 'Obrolan', body: '<pre>' + markdownOf(s).replace(/</g, '') + '</pre>' });
     } else if (act === 'clear' && s) {
+      if (composer && typeof composer.resetForNewChat === 'function') {
+        composer.resetForNewChat();
+      }
       s.messages = [];
       store.save();
       chat.renderMessages();

@@ -34,14 +34,18 @@ export const GMAIL_TOOLS = [
   { name: 'gmail_stop', method: 'POST', path: '/gmail/v1/users/me/stop', level: 2 },
 ];
 
-function rawEmail(params) {
+function cleanHeaderValue(val) {
+  return String(val || '').replace(/[\r\n\0]+/g, ' ').trim();
+}
+
+export function rawEmail(params) {
   if (params.raw) return String(params.raw);
   const lines = [
-    'To: ' + (params.to || ''),
-    'Subject: ' + (params.subject || ''),
+    'To: ' + cleanHeaderValue(params.to),
+    'Subject: ' + cleanHeaderValue(params.subject),
     'Content-Type: text/plain; charset=utf-8',
     '',
-    params.body || params.text || '',
+    String(params.body || params.text || ''),
   ];
   return Buffer.from(lines.join('\r\n')).toString('base64url');
 }

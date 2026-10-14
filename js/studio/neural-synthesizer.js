@@ -1,5 +1,6 @@
 import { routeDoor, failoverStream } from './sse-door.js';
 import { recordTelemetry } from './telemetry.js';
+import { applySurgicalPatch } from './studio-agent.js';
 
 const COLLECTION_WORDS = ['daftar', 'list', 'belanja', 'catatan', 'todo', 'koleksi'];
 const NUMBER_WORDS = ['hitung', 'kalkulator', 'jumlah', 'angka'];
@@ -208,14 +209,34 @@ export function parseFenceFiles(raw) {
   const text = String(raw || '');
   if (!text) return null;
   const files = {};
-  const re = /```(index\.html|style\.css|script\.js|main\.py)\n([\s\S]*?)```/g;
+  const re = /```(?:[a-zA-Z0-9_-]+:)?([a-zA-Z0-9_./-]+\.(?:html|css|js|mjs|py|json|md|csv|txt))\n([\s\S]*?)```/g;
   let match = re.exec(text);
   while (match) {
-    files[match[1]] = match[2];
+    const rawName = String(match[1] || '').trim();
+    if (rawName && !rawName.includes('..')) {
+      files[rawName] = match[2];
+    }
     match = re.exec(text);
   }
-  if (!files['index.html'] && !files['script.js'] && !files['main.py']) return null;
+  if (!Object.keys(files).length) return null;
   return files;
+}
+
+export function parseSurgicalBlocks(raw) {
+  const text = String(raw || '');
+  if (!text) return [];
+  const patches = [];
+  const re = /<<<FILE:([^\n>]+)>>>\n<<<SEARCH\n([\s\S]*?)\n===\n([\s\S]*?)\n>>>REPLACE/g;
+  let match = re.exec(text);
+  while (match) {
+    patches.push({
+      file: match[1].trim(),
+      search: match[2],
+      replace: match[3],
+    });
+    match = re.exec(text);
+  }
+  return patches;
 }
 
 async function readEventStream(res) {
@@ -265,17 +286,37 @@ export async function synthesizeCode(text, files, hooks) {
       }
     }
   }
-  const parsed = parseFenceFiles(streamed);
-  const drafted = parsed || renderPartial(text);
   const merged = Object.assign({}, files || {});
-  Object.keys(drafted).forEach((name) => { merged[name] = drafted[name]; });
+  const surgical = parseSurgicalBlocks(streamed);
+  let patchedAny = false;
+  surgical.forEach((p) => {
+    if (applySurgicalPatch(merged, p.file, p.search, p.replace)) {
+      patchedAny = true;
+    }
+  });
+  const parsed = parseFenceFiles(streamed);
+  if (parsed) {
+    Object.keys(parsed).forEach((name) => { merged[name] = parsed[name]; });
+  } else if (!patchedAny) {
+    const drafted = renderPartial(text);
+    Object.keys(drafted).forEach((name) => { merged[name] = drafted[name]; });
+  }
+  const cleanNote = streamed
+    .replace(/<<<FILE:[\s\S]*?>>>REPLACE/g, '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
   if (typeof opts.onToken === 'function') opts.onToken(door === 'local' ? 'pintu lokal' : 'pintu pusat');
   return {
     ok: true,
     files: merged,
-    lang: 'web',
+    lang: (parsed && parsed['main.py'] && !parsed['index.html']) ? 'python' : 'web',
     door,
+    brain: 'Raget 1.0',
+    neuralReply: cleanNote,
     steps: ['Baca berkas', 'Sintesis', 'Uji sandbox'],
-    reply: 'Halaman sudah dirakit dari instruksi itu.',
+    reply: cleanNote
+      ? ('Halaman sudah dirakit dari instruksi itu. Catatan Raget 1.0: ' + cleanNote.slice(0, 180))
+      : 'Halaman sudah dirakit dari instruksi itu.',
   };
 }

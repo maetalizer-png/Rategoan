@@ -374,11 +374,34 @@ body.studio-page #composer-card {
   box-shadow: var(--rg-shadow);
 }
 body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 120px; font-size: 16px; }
-.card-row { position: relative; }
-#studio-attach-sheet {
-  z-index: 131;
+.card-row { position: relative; display: flex; align-items: center; gap: 6px; }
+body.studio-page #btn-plus,
+body.studio-page #btn-model {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rg-muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
 }
-#studio-attach-sheet[hidden] { display: none !important; }
+body.studio-page #btn-plus:hover,
+body.studio-page #btn-model:hover,
+body.model-open #btn-model {
+  color: var(--rg-text);
+  background: var(--rg-surface-2);
+}
+#studio-attach-sheet,
+body.studio-page #model-sheet {
+  z-index: 140;
+}
+#studio-attach-sheet[hidden],
+body.studio-page #model-sheet[hidden] { display: none !important; }
 body.studio-page .sheet-dev-connectors {
   display: flex;
   flex-direction: column;
@@ -632,6 +655,12 @@ body.studio-page .attach-plain span:first-of-type {
   border: 1px solid var(--rg-line);
   background: transparent;
   color: var(--rg-text);
+  cursor: pointer;
+}
+#vfs-tree button.on {
+  background: var(--rg-surface-2);
+  border-color: var(--rg-accent);
+  font-weight: 650;
 }
 .code-editor, .console-output {
   flex: 1; margin: 0; min-height: 0; padding: 12px; overflow: auto;
@@ -639,6 +668,91 @@ body.studio-page .attach-plain span:first-of-type {
 }
 .code-editor { background: var(--rg-surface); color: var(--rg-text); border-top: 1px solid var(--rg-line); }
 .console-output { background: #000; color: #4ade80; }
+.terminal-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #05080c;
+  border-top: 1px solid var(--rg-line);
+  flex-shrink: 0;
+}
+.terminal-prompt {
+  color: #34d399;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 13px;
+}
+#terminal-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  color: #f8fafc;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px;
+  outline: none;
+}
+#btn-terminal-run {
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.living-doc-shell, .living-sheet-shell {
+  white-space: normal;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.55;
+}
+.living-doc-shell h2, .living-sheet-shell h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 650;
+}
+.living-doc-diagram {
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--rg-line);
+  background: var(--rg-bg);
+}
+.living-sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 8px;
+}
+.living-sheet-table th, .living-sheet-table td {
+  border: 1px solid var(--rg-line);
+  padding: 6px 10px;
+  text-align: left;
+}
+.living-sheet-table th {
+  background: var(--rg-surface-2);
+  font-weight: 650;
+}
+.living-sheet-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+.living-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.living-bar-fill {
+  height: 8px;
+  border-radius: 999px;
+  background: #2563eb;
+}
 .diff-line.add { background: rgba(154, 184, 168, 0.16); color: #c9ddd2; }
 .diff-line.del { background: rgba(196, 154, 154, 0.16); color: #e4cccc; }
 .diff-line { display: grid; grid-template-columns: 3.2ch 3.2ch minmax(0, 1fr); gap: 8px; }
@@ -670,7 +784,8 @@ body.studio-page .attach-plain span:first-of-type {
     margin-left: auto !important;
     margin-right: auto !important;
   }
-  body.studio-page #studio-attach-sheet {
+  body.studio-page #studio-attach-sheet,
+  body.studio-page #model-sheet {
     position: fixed;
     top: auto;
     left: auto;
@@ -712,7 +827,8 @@ body.studio-page .attach-plain span:first-of-type {
   body.studio-page #sheet-backdrop {
     background: transparent !important;
   }
-  body.studio-page #studio-attach-sheet:not([hidden]) {
+  body.studio-page #studio-attach-sheet:not([hidden]),
+  body.studio-page #model-sheet:not([hidden]) {
     animation: studio-pop 150ms ease;
   }
   .studio-app.is-split:not(.is-canvas-hidden) .studio-canvas-pane {
@@ -888,7 +1004,7 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   }
 }
 
-.hunk-stage { display: flex; gap: 8px; padding: 8px 12px; flex: 0 0 auto; }
+.hunk-stage { display: flex; gap: 8px; padding: 8px 12px; flex: 0 0 auto; align-items: center; }
 .hunk-accept, .hunk-reject {
   min-height: 32px;
   padding: 4px 10px;
@@ -896,6 +1012,15 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   border: 1px solid var(--rg-line);
   background: var(--rg-surface);
   color: var(--rg-text);
+  cursor: pointer;
+}
+.hunk-accept[data-decision="accept"] {
+  border-color: #16a34a;
+  color: #4ade80;
+}
+.hunk-reject[data-decision="reject"] {
+  border-color: #dc2626;
+  color: #f87171;
 }
 
 @container kanvas (max-width: 699px) {
@@ -936,7 +1061,29 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 .console-error { display: flex; gap: 8px; align-items: center; }
 .heal-once { min-height: 32px; }
 
-.preview-tools { display: flex; gap: 8px; padding: 8px 12px; }
+.preview-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--rg-line);
+  background: var(--rg-surface);
+}
+#btn-inspect-dom {
+  min-height: 32px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--rg-line);
+  background: var(--rg-surface-2);
+  color: var(--rg-text);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+#btn-inspect-dom:hover {
+  border-color: var(--rg-muted);
+}
 #btn-inspect-dom[aria-pressed="true"] {
   background: #1d4ed8;
   color: #fff;

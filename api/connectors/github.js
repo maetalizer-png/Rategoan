@@ -55,6 +55,11 @@ const GH_HEADERS = {
   'x-github-api-version': '2022-11-28',
 };
 
+export function cleanGitBranch(raw) {
+  const s = String(raw || '').replace(/^refs\/heads\//, '').replace(/[^a-zA-Z0-9._/-]/g, '').replace(/\.\.+/g, '').replace(/^\/+|\/+$/g, '');
+  return s || 'rategoan';
+}
+
 async function special(tool, params, token, res) {
   const headers = Object.assign({ authorization: 'Bearer ' + token, 'content-type': 'application/json' }, GH_HEADERS);
   if (tool.name === 'github_create_branch') {
@@ -62,7 +67,7 @@ async function special(tool, params, token, res) {
     const upstream = await fetch(url, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ ref: 'refs/heads/' + (params.branch || params.ref || 'rategoan'), sha: params.sha }),
+      body: JSON.stringify({ ref: 'refs/heads/' + cleanGitBranch(params.branch || params.ref || 'rategoan'), sha: params.sha }),
     });
     res.statusCode = upstream.status;
     res.setHeader('content-type', 'application/json');

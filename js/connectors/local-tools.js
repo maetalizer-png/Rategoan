@@ -87,7 +87,18 @@ function stats(values) {
   const sorted = nums.slice().sort((a, b) => a - b);
   const mid = Math.floor(sorted.length / 2);
   const median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-  return { count: nums.length, sum, mean, median, min: sorted[0], max: sorted[sorted.length - 1] };
+  const variance = nums.reduce((acc, n) => acc + Math.pow(n - mean, 2), 0) / nums.length;
+  const stdDev = Math.round(Math.sqrt(variance) * 10000) / 10000;
+  return {
+    count: nums.length,
+    sum,
+    mean: Math.round(mean * 10000) / 10000,
+    median,
+    min: sorted[0],
+    max: sorted[sorted.length - 1],
+    variance: Math.round(variance * 10000) / 10000,
+    stdDev,
+  };
 }
 
 const RATES = { USD: 1, IDR: 15500, EUR: 0.92, JPY: 149, SGD: 1.29 };

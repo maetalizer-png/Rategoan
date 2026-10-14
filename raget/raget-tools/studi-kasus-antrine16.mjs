@@ -146,12 +146,12 @@ try {
     document.getElementById('messages').appendChild(host);
     const box = mountThought(host, buildDynamicThoughts('hallo', { websearch: false }), 'berjalan');
     const defaultCollapsed = box.open === false;
-    const hasBrainIcon = !!box.querySelector('.thought-brain-ico.is-pulsing');
+    const hasBrainIcon = !!box.querySelector('.thought-dot.zen-dot.is-pulsing');
     const summaryText = box.querySelector('.thought-summary-label').textContent;
     box.querySelector('summary').click();
     const expandedAfterClick = box.open === true;
     const stepsCount = box.querySelectorAll('.stepper-node').length;
-    const telemetryCount = box.querySelectorAll('.stepper-telemetry').length;
+    const telemetryCount = box.querySelectorAll('.stepper-copy').length;
     const timerText = (box.querySelector('.thought-timer') || {}).textContent || '';
     host.remove();
     return { defaultCollapsed, hasBrainIcon, summaryText, timerText, expandedAfterClick, stepsCount, telemetryCount };

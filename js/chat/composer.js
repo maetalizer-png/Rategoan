@@ -1,5 +1,5 @@
 import { webSearch } from '../../vault/web/web-search.js';
-import { resolveAutonomousConnector, runConnectorTool } from '../connectors/tool-card.js';
+import { resolveAutonomousConnector, resolveLocalProductivityTool, runConnectorTool } from '../connectors/tool-card.js';
 import { $, scrollBottom } from '../../shared/dom.js';
 import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
@@ -454,38 +454,22 @@ function bindWeightCard() {
     };
     syncCard();
     if (!card.hidden && status && !status.dataset.busy) status.textContent = 'Belum Terpasang';
-    if (pauseBtn) pauseBtn.onclick = () => {
-      if (neuralProvider.weightPaused()) {
-        neuralProvider.resumeWeights();
-        pauseBtn.textContent = 'Jeda';
-      } else {
-        neuralProvider.pauseWeights();
-        pauseBtn.textContent = 'Lanjut';
-        if (status) status.textContent = 'Unduhan dijeda.';
-      }
-    };
-    if (cancelBtn) cancelBtn.onclick = () => {
-      neuralProvider.cancelWeights();
-      if (pauseBtn) pauseBtn.hidden = true;
-      cancelBtn.hidden = true;
-      btn.disabled = false;
-      if (status) {
-        delete status.dataset.busy;
-        status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
-      }
-    };
-    btn.onclick = () => {
+    let downloadAttached = false;
+    const startOrAttachDownload = (resetText) => {
       btn.disabled = true;
       if (pauseBtn) {
         pauseBtn.hidden = false;
-        pauseBtn.textContent = 'Jeda';
+        pauseBtn.textContent = neuralProvider.weightPaused() ? 'Lanjut' : 'Jeda';
       }
       if (cancelBtn) cancelBtn.hidden = false;
       if (status) {
         status.dataset.busy = '1';
-        status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%).';
+        if (resetText) status.textContent = 'Bobot Raget 1.0 sedang diunduh secara progresif (0%).';
       }
+      if (downloadAttached) return;
+      downloadAttached = true;
       neuralProvider.loadWeights().then((ok) => {
+        downloadAttached = false;
         if (pauseBtn) pauseBtn.hidden = true;
         if (cancelBtn) cancelBtn.hidden = true;
         if (ok && neuralProvider.ready()) {
@@ -503,6 +487,35 @@ function bindWeightCard() {
         if (status) status.textContent = 'Unduhan gagal. ' + (err || 'Coba lagi.');
       });
     };
+    window.addEventListener('rategoan:neural-progress', (ev) => {
+      const d = (ev && ev.detail) || {};
+      if (d.source === 'opfs' && d.pending && !neuralProvider.weightPaused()) {
+        startOrAttachDownload(false);
+      }
+    });
+    if (pauseBtn) pauseBtn.onclick = () => {
+      if (neuralProvider.weightPaused()) {
+        neuralProvider.resumeWeights();
+        pauseBtn.textContent = 'Jeda';
+        startOrAttachDownload(false);
+      } else {
+        neuralProvider.pauseWeights();
+        pauseBtn.textContent = 'Lanjut';
+        if (status) status.textContent = 'Unduhan dijeda.';
+      }
+    };
+    if (cancelBtn) cancelBtn.onclick = () => {
+      downloadAttached = false;
+      neuralProvider.cancelWeights();
+      if (pauseBtn) pauseBtn.hidden = true;
+      cancelBtn.hidden = true;
+      btn.disabled = false;
+      if (status) {
+        delete status.dataset.busy;
+        status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
+      }
+    };
+    btn.onclick = () => startOrAttachDownload(true);
   }).catch(() => {
     card.hidden = false;
     if (status) status.textContent = 'Kartu bobot gagal dimuat.';
@@ -574,6 +587,22 @@ export const composer = {
   thinkActive: false,
   slideActive: false,
   researchActive: false,
+  resetForNewChat() {
+    abortGeneration();
+    cancelAgent();
+    document.body.classList.remove('is-generating');
+    document.body.classList.remove('has-draft');
+    import('../../raget/raget-neural/neural-provider.js').then((mod) => {
+      if (mod.neuralProvider && mod.neuralProvider.haltInference) mod.neuralProvider.haltInference();
+    }).catch(() => {});
+    const inp = $('chat-input');
+    if (inp) {
+      inp.value = '';
+      this.autoGrow();
+    }
+    if (attach && typeof attach.consume === 'function') attach.consume();
+    if (quote && typeof quote.consume === 'function') quote.consume();
+  },
   autoGrow() {
     const inp = $('chat-input');
     inp.style.height = 'auto';
@@ -601,6 +630,7 @@ export const composer = {
       return;
     }
     const s = this.ensure();
+    const sendSessionId = s.id;
     if (!s.messages.length) s.title = titleFrom(text);
     if (WORK_RE.test(text) && !s.project) {
       s.project = { goal: titleFrom(text), started: Date.now() };
@@ -747,7 +777,7 @@ export const composer = {
       live.remove();
     }
     if (!this.thinkActive && !this.researchActive) {
-      thoughts = buildDynamicThoughts(text, { websearch: isWebsearch });
+      thoughts = buildDynamicThoughts(text, { websearch: isWebsearch, research: this.researchActive, files: att && att.name });
       if (!livePlan) {
         livePlan = document.createElement('div');
         livePlan.className = 'msg ai';
@@ -792,6 +822,28 @@ export const composer = {
         webNote = noteLines.slice(0, 8).join('\n');
       } catch (e) { /* offline */ }
     }
+    const localProd = directReply == null ? resolveLocalProductivityTool(text) : null;
+    if (localProd) {
+      try {
+        const prodOut = await runConnectorTool(localProd.name, localProd.parameters);
+        if (prodOut && prodOut.ok && prodOut.data) {
+          const d = prodOut.data;
+          if (localProd.name === 'math_calculate_expression') {
+            directReply = 'Hasil perhitungan: **' + d.value + '**';
+          } else if (localProd.name === 'math_currency_converter') {
+            directReply = 'Hasil konversi: **' + d.amount + ' ' + d.from + ' = ' + d.value + ' ' + d.to + '** (' + d.note + ')';
+          } else if (localProd.name === 'math_unit_conversion') {
+            directReply = 'Hasil konversi satuan: **' + d.value + ' ' + d.unit + '**';
+          } else if (localProd.name === 'math_date_calculator') {
+            directReply = 'Rentang tanggal: **' + d.days + ' hari kalender** (**' + d.workdays + ' hari kerja** Senin–Jumat).';
+          } else if (localProd.name === 'math_statistics_summary') {
+            directReply = 'Ringkasan statistik (' + d.count + ' data): Jumlah = **' + d.sum + '**, Rata-rata = **' + d.mean + '**, Median = **' + d.median + '**, Min = **' + d.min + '**, Maks = **' + d.max + '**, Simpangan Baku (σ) = **' + d.stdDev + '**.';
+          } else if (localProd.name === 'agenda_daily_briefing' && d.briefing) {
+            directReply = 'Ringkasan Agenda Hari Ini:\n' + d.briefing;
+          }
+        }
+      } catch (e) { /* lanjut ke mesin utama */ }
+    }
     const autoConn = directReply == null ? resolveAutonomousConnector(text) : null;
     if (autoConn) {
       try {
@@ -799,11 +851,24 @@ export const composer = {
         if (connOut && connOut.ok && connOut.data) {
           const summary = JSON.stringify(connOut.data).slice(0, 1200);
           webNote = [webNote, 'Data konektor (' + autoConn.name + '): ' + summary].filter(Boolean).join('\n');
+        } else if (connOut && connOut.error === 'belum_terhubung') {
+          const fallbackVault = await runConnectorTool('vault_semantic_search', { query: text, limit: 3 });
+          if (fallbackVault && fallbackVault.ok && fallbackVault.data && Array.isArray(fallbackVault.data.hits) && fallbackVault.data.hits.length) {
+            webNote = [webNote, 'Cadangan Brankas Lokal: ' + JSON.stringify(fallbackVault.data.hits).slice(0, 900)].filter(Boolean).join('\n');
+          }
         }
       } catch (e) { /* konektor offline */ }
     }
     const modelPrefix = [imageNote ? GUARDRAIL : '', prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
+    if ((store.get() && store.get().currentId) !== sendSessionId) {
+      if (livePlan && livePlan.parentNode) livePlan.remove();
+      return;
+    }
     let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, livePlan, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    if ((store.get() && store.get().currentId) !== sendSessionId) {
+      if (livePlan && livePlan.parentNode) livePlan.remove();
+      return;
+    }
     if (reply == null) {
       if (livePlan) {
         livePlan.dataset.state = 'failed';

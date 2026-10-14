@@ -38,7 +38,38 @@ const URL_RE = /https?:\/\/\S+/i;
 let generation = null;
 
 export function abortGeneration() {
-  if (generation) generation.abort();
+  if (generation) {
+    try { generation.abort(); } catch (e) { /* abaikan */ }
+    generation = null;
+  }
+  if (typeof document !== "undefined" && document.body) {
+    document.body.classList.remove("is-generating");
+    const box = document.getElementById("messages");
+    if (box) {
+      box.querySelectorAll(".msg.ai.typing, .thought-accordion.running").forEach((el) => {
+        const parentMsg = el.classList.contains("msg") ? el : el.closest(".msg.ai");
+        if (parentMsg && !parentMsg.dataset.idx) parentMsg.remove();
+        else el.remove();
+      });
+    }
+  }
+}
+
+if (typeof document !== "undefined") {
+  document.addEventListener("rategoan:studio-code", (event) => {
+    const detail = (event && event.detail) || {};
+    if (detail.code) {
+      try {
+        sessionStorage.setItem("rategoan_studio_seed", JSON.stringify({
+          lang: String(detail.lang || "js").toLowerCase(),
+          code: String(detail.code),
+        }));
+      } catch (e) { /* abaikan */ }
+    }
+    if (typeof window !== "undefined" && typeof window.open === "function") {
+      window.open("studio.html", "_blank", "noopener");
+    }
+  });
 }
 
 function appendCitations(parent, text) {
@@ -98,8 +129,15 @@ function fillAndSend(text) {
   if (btn) btn.click();
 }
 
+function extractCodeForStudio(text) {
+  const m = String(text || '').match(/```(python|py|js|javascript|html|css)?\n([\s\S]*?)```/i);
+  if (!m) return null;
+  return { lang: (m[1] || 'js').toLowerCase(), code: m[2] };
+}
+
 function detectQuickChips(text) {
   if (/Pratinjau slide/i.test(text)) return ['Unduh file slide'];
+  if (extractCodeForStudio(text)) return ['Buka di Studio Kode'];
   if (/Hasil pencarian web|Sumber:|Yang biasa dibahas/i.test(text) || text.length > 280) {
     if (!/sudah diunduh sebagai|Pratinjau slide/i.test(text)) return ['Buatkan slide dari ini'];
   }
@@ -364,6 +402,7 @@ export const chat = {
         d.appendChild(t);
       } else {
         if (m.source === 'websearch') d.appendChild(buildSourceBadge());
+        if (m.thoughtFrozenSec) d.dataset.thoughtFrozenSec = String(m.thoughtFrozenSec);
         if (m.thoughts) mountThought(d, m.thoughts, 'selesai');
         const b = document.createElement('div');
         if (isRich(m.text)) mountRich(b, m.text);
@@ -421,6 +460,12 @@ export const chat = {
               exportSlides(held.outline, held.fileName);
               return;
             }
+            if (label === 'Buka di Studio Kode') {
+              const seed = extractCodeForStudio(m.text);
+              if (seed) sessionStorage.setItem('rategoan_studio_seed', JSON.stringify(seed));
+              window.open('studio.html', '_blank', 'noopener');
+              return;
+            }
             fillAndSend(label);
           }));
         });
@@ -438,6 +483,7 @@ export const chat = {
     d.className = 'msg ai';
     d.dataset.idx = String(s.messages.length - 1);
     if (opts && opts.thoughtStart) d.dataset.thoughtStart = String(opts.thoughtStart);
+    if (opts && opts.thoughtFrozenSec) d.dataset.thoughtFrozenSec = String(opts.thoughtFrozenSec);
     if (opts && opts.userOpened) d.dataset.userOpened = String(opts.userOpened);
     if (opts && opts.searching) d.appendChild(buildSourceBadge());
     if (opts && opts.thoughts) mountThought(d, opts.thoughts, 'selesai');
@@ -451,7 +497,7 @@ export const chat = {
       let skip = false;
       const onTap = () => { skip = true; };
       body.addEventListener('pointerdown', onTap, { once: true });
-      const step = Math.max(28, Math.ceil(text.length / 12));
+      const step = Math.max(80, Math.ceil(text.length / 5));
       let i = 0;
       while (i < text.length && !skip && !(opts && opts.signal && opts.signal.aborted)) {
         i += step;
@@ -460,7 +506,7 @@ export const chat = {
         if (typeof requestAnimationFrame === 'function') {
           await new Promise((resolve) => requestAnimationFrame(() => resolve()));
         } else {
-          await sleep(12);
+          await sleep(8);
         }
       }
       body.removeEventListener('pointerdown', onTap);
@@ -473,7 +519,15 @@ export const chat = {
       actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0]), 'globe'));
     }
     detectQuickChips(text).slice(0, 1).forEach((label) => {
-      actions.appendChild(buildExtraChip(label, () => fillAndSend(label)));
+      actions.appendChild(buildExtraChip(label, () => {
+        if (label === 'Buka di Studio Kode') {
+          const seed = extractCodeForStudio(text);
+          if (seed) sessionStorage.setItem('rategoan_studio_seed', JSON.stringify(seed));
+          window.open('studio.html', '_blank', 'noopener');
+          return;
+        }
+        fillAndSend(label);
+      }));
     });
     d.appendChild(actions);
     pinStreamDisclaimer($('messages'));
@@ -485,6 +539,7 @@ export const chat = {
   },
   async ask(prompt, opts) {
     const s = this.current();
+    const askSessionId = s && s.id;
     const hasDirectReply = !!(opts && opts.directReply != null);
     const searching = !hasDirectReply && !!(opts && opts.searching);
     const lp = opts && opts.livePlan;
@@ -507,7 +562,10 @@ export const chat = {
     let attempt = 0;
     let streamedChars = 0;
     let streamAccum = '';
+    let rafPending = false;
     const onPiece = (event) => {
+      const cur = this.current();
+      if (!cur || cur.id !== askSessionId) return;
       const piece = event && event.detail ? String(event.detail) : '';
       if (!piece) return;
       streamedChars += piece.length;
@@ -523,8 +581,17 @@ export const chat = {
           streamBody.className = 'live-stream-body';
           lp.appendChild(streamBody);
         }
-        streamBody.innerHTML = markdown.render(streamAccum);
-        scrollBottom();
+        if (!rafPending) {
+          rafPending = true;
+          const flushStream = () => {
+            rafPending = false;
+            if (!streamBody.isConnected) return;
+            streamBody.innerHTML = markdown.render(streamAccum);
+            scrollBottom();
+          };
+          if (typeof requestAnimationFrame === 'function') requestAnimationFrame(flushStream);
+          else flushStream();
+        }
         return;
       }
       typing.hidden = false;
@@ -577,22 +644,26 @@ export const chat = {
       if (elapsed < 700) await sleep(700 - elapsed);
     }
     typing.remove();
-    const stoppedEarly = generation && generation.signal.aborted;
+    const sessionSwitched = !this.current() || (askSessionId && this.current().id !== askSessionId);
+    const stoppedEarly = (generation && generation.signal.aborted) || sessionSwitched;
     if (reply == null || stoppedEarly) {
+      if (lp && lp.parentNode) lp.remove();
       document.body.classList.remove('is-generating');
       generation = null;
-      return reply;
+      return null;
     }
-    s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts });
+    const thoughtStart = lp && lp.dataset ? lp.dataset.thoughtStart : '';
+    const thoughtFrozenSec = lp && lp.dataset ? lp.dataset.thoughtFrozenSec : '';
+    const userOpened = lp && lp.dataset ? lp.dataset.userOpened : '';
+    s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts, thoughtFrozenSec: thoughtFrozenSec || undefined });
     const signal = generation ? generation.signal : null;
     try {
-      const thoughtStart = lp && lp.dataset ? lp.dataset.thoughtStart : '';
-      const userOpened = lp && lp.dataset ? lp.dataset.userOpened : '';
       if (lp && lp.parentNode) lp.remove();
       await this.typeReply(reply, !scrolldown.isFar(), {
         searching,
         thoughts: opts && opts.thoughts,
         thoughtStart,
+        thoughtFrozenSec,
         userOpened,
         signal,
         alreadyStreamed: streamedChars > 0 && !(opts && opts.preamble),

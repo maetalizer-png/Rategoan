@@ -5,6 +5,7 @@ import { router } from '../core/router.js';
 import { auth } from '../state/auth.js';
 import { account } from './account.js';
 import { googleAuth } from '../state/google-auth.js';
+import { getSecureRandomBytesSync } from '../crypto/universal-crypto.js';
 
 const TEMPLATE = `
       <div class="gate">
@@ -47,6 +48,12 @@ const TEMPLATE = `
       </div>
 `;
 
+export function generateSecureOtp6() {
+  const rnd = getSecureRandomBytesSync(4);
+  const val = ((rnd[0] << 24) | (rnd[1] << 16) | (rnd[2] << 8) | rnd[3]) >>> 0;
+  return String(100000 + (val % 900000));
+}
+
 export const login = {
   pendingPhone: null,
   pendingCode: null,
@@ -80,7 +87,7 @@ export const login = {
       return;
     }
     this.pendingPhone = v;
-    this.pendingCode = String(Math.floor(100000 + Math.random() * 900000));
+    this.pendingCode = generateSecureOtp6();
     toast.show('Kode lokal Anda: ' + this.pendingCode, 8000);
     $('login-otp').value = '';
     $('login-otp-row').hidden = false;

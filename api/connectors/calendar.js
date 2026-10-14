@@ -1,6 +1,13 @@
 import { dispatchTools } from '../_dispatch.js';
 import { sendJson } from '../_http.js';
 
+export function cleanCalendarId(raw) {
+  const cleaned = String(raw || "primary")
+    .replace(/[\x00-\x1f\x7f"'\\<>\s]/g, "")
+    .replace(/\.\.+/g, "");
+  return cleaned || "primary";
+}
+
 export const CALENDAR_TOOLS = [
   { name: 'calendar_list_calendars', method: 'GET', path: '/users/me/calendarList', level: 1 },
   { name: 'calendar_list_events', method: 'GET', path: '/calendars/primary/events', level: 1 },
@@ -19,7 +26,7 @@ async function special(tool, params, token, res) {
     upstream = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
       method: 'POST',
       headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
-      body: JSON.stringify({ timeMin, timeMax, items: [{ id: params.calendar_id || 'primary' }] }),
+      body: JSON.stringify({ timeMin, timeMax, items: [{ id: cleanCalendarId(params.calendar_id) }] }),
     });
   } catch (e) {
     sendJson(res, 502, { error: 'upstream_unreachable' });

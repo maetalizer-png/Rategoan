@@ -30,9 +30,23 @@
   }
 
   body.auth-gate {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 'app';
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    grid-template-areas: 'app' !important;
+  }
+
+  body.auth-gate #sidebar,
+  body.auth-gate #topbar {
+    display: none !important;
+  }
+
+  body.auth-gate #app,
+  body.auth-gate #view-login,
+  body.auth-gate .gate {
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 
   #btn-menu {
@@ -188,8 +202,8 @@
     box-sizing: border-box !important;
   }
 
-  body:has(#topbar[hidden]),
-  body.no-topbar {
+  body:not(.auth-gate):has(#topbar[hidden]),
+  body.no-topbar:not(.auth-gate) {
     grid-template-rows: 1fr;
     grid-template-areas: 'sidebar app';
   }

@@ -38,6 +38,18 @@
       <input type="file" id="studio-pick-photo" accept="image/*" hidden>
       <input type="file" id="studio-pick-doc" hidden>
     </div>
+    <div id="model-sheet" class="sheet" role="dialog" aria-label="Model Raget 1.0" hidden>
+      <div class="sheet-head">
+        <div class="sheet-title">Model</div>
+        <button type="button" class="hist-del" id="model-close" aria-label="Tutup">
+          <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="model-list"></div>
+    </div>
     <aside id="studio-sidebar" class="studio-sidebar-col">
       <div class="sidebar-header">
         <a href="index.html#/chat" class="sidebar-brand-link">Rategoan</a>
@@ -96,6 +108,20 @@
             <div class="card-row">
               <button id="btn-plus" class="icon-btn" type="button" aria-label="Hubungkan konektor">
                 <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <button id="btn-model" class="icon-btn" type="button" aria-label="Model" title="Model Raget 1.0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2"/>
+                  <rect x="9" y="9" width="6" height="6"/>
+                  <line x1="9" y1="1" x2="9" y2="4"/>
+                  <line x1="15" y1="1" x2="15" y2="4"/>
+                  <line x1="9" y1="20" x2="9" y2="23"/>
+                  <line x1="15" y1="20" x2="15" y2="23"/>
+                  <line x1="20" y1="9" x2="23" y2="9"/>
+                  <line x1="20" y1="14" x2="23" y2="14"/>
+                  <line x1="1" y1="9" x2="4" y2="9"/>
+                  <line x1="1" y1="14" x2="4" y2="14"/>
+                </svg>
               </button>
               <textarea id="chat-input" rows="1" placeholder="Tanya Studio Kode…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-gramm="false" data-enable-grammarly="false"></textarea>
               <button id="btn-studio-send" class="send-plain" type="button" aria-label="Kirim">
@@ -178,6 +204,11 @@
             <span id="hud-thermal">Suhu normal</span>
           </div>
           <div class="console-output" id="console-output">Studio Kode siap. Tidak ada galat.</div>
+          <form id="terminal-form" class="terminal-form" autocomplete="off">
+            <span class="terminal-prompt" aria-hidden="true">$</span>
+            <input id="terminal-input" type="text" placeholder="Ketik perintah CLI (ls, tree, cat, grep, git status, python main.py, node script.js, help)…" aria-label="Perintah terminal" autocomplete="off" spellcheck="false">
+            <button type="submit" id="btn-terminal-run">Jalankan</button>
+          </form>
         </div>
       </div>
     </aside>

@@ -11,11 +11,17 @@ const SKILLS = {
 export const skill = {
   all: SKILLS,
   get() {
-    const id = localStorage.getItem(KEY);
-    return SKILLS[id] ? id : 'umum';
+    try {
+      const id = typeof localStorage !== 'undefined' ? localStorage.getItem(KEY) : null;
+      return SKILLS[id] ? id : 'umum';
+    } catch (e) {
+      return 'umum';
+    }
   },
   set(id) {
-    try { localStorage.setItem(KEY, SKILLS[id] ? id : 'umum'); } catch (e) { console.warn('[Rategoan Fallback] skill:', e); }
+    try {
+      if (typeof localStorage !== 'undefined') localStorage.setItem(KEY, SKILLS[id] ? id : 'umum');
+    } catch (e) { console.warn('[Rategoan Fallback] skill:', e); }
   },
   prompt() {
     return SKILLS[this.get()].prompt;

@@ -8,14 +8,14 @@ export const WEB_TOOLS = [
   { name: 'web_weather', level: 1 },
 ];
 
-function decodeDuckLink(href) {
+export function decodeDuckLink(href) {
   const raw = String(href || '');
   try {
     const url = new URL(raw, 'https://duckduckgo.com');
     const uddg = url.searchParams.get('uddg');
-    if (uddg) return uddg;
+    if (uddg) return /^https?:\/\//i.test(uddg) ? uddg : '';
   } catch (e) { console.warn('[Rategoan Fallback] search:', e); }
-  if (raw.indexOf('http') === 0) return raw;
+  if (/^https?:\/\//i.test(raw)) return raw;
   return '';
 }
 
@@ -27,7 +27,7 @@ function parseResults(html) {
     const href = match[1] || match[4] || '';
     const titleHtml = match[2] || match[5] || '';
     const snippetHtml = match[3] || match[6] || '';
-    const url = decodeDuckLink(href.replace(/&/g, '&'));
+    const url = decodeDuckLink(href.replace(/&amp;/g, '&'));
     const title = titleHtml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const snippet = snippetHtml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     if (url && title) results.push({ title, url, snippet });
@@ -55,7 +55,7 @@ function stripPage(html) {
     .replace(/<style[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;/g, ' ')
-    .replace(/&/g, '&')
+    .replace(/&amp;/g, '&')
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, 8000);

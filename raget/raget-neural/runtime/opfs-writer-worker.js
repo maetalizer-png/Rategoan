@@ -1,13 +1,15 @@
 let sync = null;
-let dirtyChunks = 0;
 
 async function handle() {
   if (sync) return sync;
   const root = await navigator.storage.getDirectory();
   const file = await root.getFileHandle('raget-neural-1.5b.safetensors', { create: true });
   sync = await file.createSyncAccessHandle();
-  dirtyChunks = 0;
   return sync;
+}
+
+function hashWindow(bytes) {
+  return bytes.byteLength > 65536 ? bytes.subarray(0, 65536) : bytes;
 }
 
 self.onmessage = async (event) => {
@@ -18,7 +20,6 @@ self.onmessage = async (event) => {
         sync.flush();
         sync.close();
         sync = null;
-        dirtyChunks = 0;
       }
       self.postMessage({ id: msg.id, op: 'closed', ok: true });
     } catch (e) {
@@ -30,7 +31,8 @@ self.onmessage = async (event) => {
     try {
       const io = await handle();
       const length = Math.max(0, msg.length | 0);
-      const buf = new Uint8Array(length);
+      const sampleLen = Math.min(length, 65536);
+      const buf = new Uint8Array(sampleLen);
       const n = io.read(buf, { at: msg.offset || 0 });
       const slice = typeof n === 'number' && n >= 0 ? buf.subarray(0, n) : buf;
       let digest = '';
@@ -51,22 +53,15 @@ self.onmessage = async (event) => {
     const bytes = raw instanceof Uint8Array
       ? raw
       : new Uint8Array(raw instanceof ArrayBuffer ? raw : (raw || 0));
-    const digestPromise = (msg.hash && self.crypto && crypto.subtle)
-      ? crypto.subtle.digest('SHA-256', bytes)
-      : null;
     const written = io.write(bytes, { at: msg.offset || 0 });
     if (typeof written === 'number' && written !== bytes.byteLength) {
       self.postMessage({ id: msg.id, ok: false });
       return;
     }
-    dirtyChunks += 1;
-    if (msg.flush === true || dirtyChunks >= 16) {
-      io.flush();
-      dirtyChunks = 0;
-    }
+    if (msg.flush === true) io.flush();
     let digest = '';
-    if (digestPromise) {
-      const buf = await digestPromise;
+    if (msg.hash && self.crypto && crypto.subtle) {
+      const buf = await crypto.subtle.digest('SHA-256', hashWindow(bytes));
       digest = Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
     }
     self.postMessage({ id: msg.id, ok: true, digest: digest });

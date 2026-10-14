@@ -37,11 +37,22 @@ function tooBig() {
   return err;
 }
 
+export function scrubProtoKeys(val) {
+  if (!val || typeof val !== "object") return val;
+  if (Array.isArray(val)) return val.map(scrubProtoKeys);
+  const out = {};
+  Object.keys(val).forEach((k) => {
+    if (k === "__proto__" || k === "constructor" || k === "prototype") return;
+    out[k] = scrubProtoKeys(val[k]);
+  });
+  return out;
+}
+
 export function readBody(req) {
-  if (req.body && typeof req.body === 'object') return Promise.resolve(req.body);
+  if (req.body && typeof req.body === 'object') return Promise.resolve(scrubProtoKeys(req.body));
   if (typeof req.body === 'string' && req.body) {
     if (Buffer.byteLength(req.body) > BODY_LIMIT) return Promise.reject(tooBig());
-    try { return Promise.resolve(JSON.parse(req.body)); } catch (e) { return Promise.reject(invalidJson()); }
+    try { return Promise.resolve(scrubProtoKeys(JSON.parse(req.body))); } catch (e) { return Promise.reject(invalidJson()); }
   }
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -63,7 +74,7 @@ export function readBody(req) {
       if (failed) return;
       const raw = Buffer.concat(chunks).toString('utf8');
       if (!raw) { resolve({}); return; }
-      try { resolve(JSON.parse(raw)); } catch (e) { reject(invalidJson()); }
+      try { resolve(scrubProtoKeys(JSON.parse(raw))); } catch (e) { reject(invalidJson()); }
     });
     req.on('error', () => { if (!failed) reject(invalidJson()); });
   });
@@ -207,7 +218,7 @@ function ipv6Hextets(raw) {
     const nums = dotted[2].split('.').map((n) => Number(n));
     if (nums.length !== 4 || nums.some((n) => n > 255)) return null;
     tail = [(nums[0] << 8) | nums[1], (nums[2] << 8) | nums[3]];
-    body = dotted[1].replace(/:$/, '');
+    body = dotted[1].endsWith('::') ? dotted[1] : dotted[1].replace(/:$/, '');
   }
   const halves = body.split('::');
   if (halves.length > 2) return null;
@@ -241,7 +252,17 @@ export function ipIsPrivate(host) {
     if ((first & 0xfe00) === 0xfc00) return true;
     if ((first & 0xffc0) === 0xfe80) return true;
     if (hextets.every((n) => n === 0) || hextets.every((n, i) => n === (i === 7 ? 1 : 0))) return true;
-    if (hextets[0] === 0 && hextets[1] === 0 && hextets[2] === 0 && hextets[3] === 0 && hextets[4] === 0 && hextets[5] === 0xffff) {
+    if ((first & 0xff00) === 0xff00) return true;
+    if (first === 0x2001 && hextets[1] === 0x0db8) return true;
+    if (first === 0x2002) {
+      const v46to4 = (hextets[1] >> 8) + '.' + (hextets[1] & 255) + '.' + (hextets[2] >> 8) + '.' + (hextets[2] & 255);
+      if (ipv4Private(v46to4)) return true;
+    }
+    if (first === 0x0064 && hextets[1] === 0xff9b && hextets[2] === 0 && hextets[3] === 0 && hextets[4] === 0 && hextets[5] === 0) {
+      const v4nat64 = (hextets[6] >> 8) + '.' + (hextets[6] & 255) + '.' + (hextets[7] >> 8) + '.' + (hextets[7] & 255);
+      if (ipv4Private(v4nat64)) return true;
+    }
+    if (hextets[0] === 0 && hextets[1] === 0 && hextets[2] === 0 && hextets[3] === 0 && hextets[4] === 0 && (hextets[5] === 0xffff || hextets[5] === 0)) {
       const v4 = (hextets[6] >> 8) + '.' + (hextets[6] & 255) + '.' + (hextets[7] >> 8) + '.' + (hextets[7] & 255);
       return ipv4Private(v4);
     }

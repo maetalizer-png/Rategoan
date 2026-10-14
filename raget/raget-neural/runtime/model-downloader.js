@@ -373,6 +373,19 @@ export async function downloadConcurrentChunks(options) {
     }
   }
 
+  function storedHashes() {
+    try {
+      if (typeof localStorage === 'undefined') return [];
+      const raw = localStorage.getItem(hashKey) || '';
+      return raw ? raw.split(',') : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  const bitsCache = maskBits();
+  const hashesCache = storedHashes();
+
   async function fetchRange(range, expect, onBytes) {
     let last = null;
     for (let attempt = 0; attempt < DOWNLOAD_ATTEMPTS; attempt += 1) {
@@ -431,7 +444,7 @@ export async function downloadConcurrentChunks(options) {
     const key = url + '#' + range.start + '-' + range.end;
     const expect = range.end - range.start + 1;
     const job = (async () => {
-      if (maskBits()[i] === '1' && chunkCovered(i) && await resumeDigestOk(i)) return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
+      if (bitsCache[i] === '1' && chunkCovered(i) && await resumeDigestOk(i)) return { bytes: null, fromCache: true, sealed: true, key: key, expect: expect };
       if (mesh && meshHasChunk(i)) {
         const shared = takeMeshChunk(i);
         if (shared && shared.length === expect) return { bytes: shared, fromCache: true, key: key, expect: expect };
@@ -458,28 +471,15 @@ export async function downloadConcurrentChunks(options) {
   }
 
   function markChunk(index, digest) {
+    bitsCache[index] = '1';
+    if (digest) hashesCache[index] = String(digest);
     try {
       if (typeof localStorage === 'undefined') return;
-      const raw = localStorage.getItem(maskKey) || '';
-      const bits = raw ? raw.split(',') : [];
-      bits[index] = '1';
-      localStorage.setItem(maskKey, bits.join(','));
+      localStorage.setItem(maskKey, bitsCache.join(','));
       if (digest) {
-        const hashes = storedHashes();
-        hashes[index] = String(digest);
-        localStorage.setItem(hashKey, hashes.join(','));
+        localStorage.setItem(hashKey, hashesCache.join(','));
       }
     } catch (e) { /* penyimpanan tidak ada */ }
-  }
-
-  function storedHashes() {
-    try {
-      if (typeof localStorage === 'undefined') return [];
-      const raw = localStorage.getItem(hashKey) || '';
-      return raw ? raw.split(',') : [];
-    } catch (e) {
-      return [];
-    }
   }
 
   function report(index, seal) {
@@ -571,7 +571,7 @@ export async function downloadConcurrentChunks(options) {
   }
 
   async function resumeDigestOk(index) {
-    const wanted = expectedHashes[index] || storedHashes()[index] || '';
+    const wanted = expectedHashes[index] || hashesCache[index] || '';
     if (!wanted) return true;
     const range = ranges[index];
     const expect = range.end - range.start + 1;
@@ -587,6 +587,8 @@ export async function downloadConcurrentChunks(options) {
     }
   }
 
+  const maxPrimed = concurrency + PREFETCH_AHEAD;
+
   async function pull(i) {
     const got = await prime(i);
     if (!got || got.__err) throw (got && got.__err) || new Error('gagal');
@@ -597,11 +599,16 @@ export async function downloadConcurrentChunks(options) {
     if (!got.sealed && !got.fromCache) {
       held = got.bytes ? got.bytes.length : 0;
       if (mesh && got.bytes && meshSnapshot().peers > 0) publishMeshChunk(i, got.bytes.slice());
-      if (ahead < ranges.length && primed.size < 4) prime(ahead);
       let writeAck = null;
       for (let wAttempt = 0; wAttempt < 3; wAttempt += 1) {
         try {
-          writeAck = await persist(range.start, got.bytes, got.key);
+          const writeJob = persist(range.start, got.bytes, got.key);
+          if (wAttempt === 0 && ahead < ranges.length && primed.size < maxPrimed) {
+            setTimeout(() => {
+              if (!stopError && !control.cancelled && primed.size < maxPrimed) prime(ahead);
+            }, 2);
+          }
+          writeAck = await writeJob;
           if (writeAck && writeAck.ok === true) break;
         } catch (err) {
           if (wAttempt === 2) throw err;
@@ -618,7 +625,7 @@ export async function downloadConcurrentChunks(options) {
       seal = ack.digest || 'opfs';
       networkHits += 1;
       markChunk(i, ack.digest || '');
-    } else if (ahead < ranges.length && primed.size < 4) {
+    } else if (ahead < ranges.length && primed.size < maxPrimed) {
       prime(ahead);
       held = got.bytes ? got.bytes.length : got.expect;
     }
@@ -688,9 +695,8 @@ export async function downloadConcurrentChunks(options) {
   }
 
   verifiedSize = await probeOpfsBytes();
-  const preset = maskBits();
   for (let i = 0; i < ranges.length; i += 1) {
-    if (preset[i] === '1' && chunkCovered(i)) committedVerifiedBytes += ranges[i].end - ranges[i].start + 1;
+    if (bitsCache[i] === '1' && chunkCovered(i)) committedVerifiedBytes += ranges[i].end - ranges[i].start + 1;
   }
   loaded = committedVerifiedBytes;
   if (committedVerifiedBytes > 0) report(0, 'opfs');

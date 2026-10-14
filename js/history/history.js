@@ -5,6 +5,7 @@ import { store } from '../state/store.js';
 import { drawer } from '../ui/drawer.js';
 import { router } from '../core/router.js';
 import { chat } from '../chat/chat.js';
+import { composer } from '../chat/composer.js';
 import { histmenu } from './histmenu.js';
 import { workspace } from '../state/workspace.js';
 
@@ -50,6 +51,9 @@ export const history = {
       if (histmenu.suppress) {
         histmenu.suppress = false;
         return;
+      }
+      if (composer && typeof composer.resetForNewChat === 'function') {
+        composer.resetForNewChat();
       }
       store.set({ currentId: s.id });
       this.render();
@@ -106,6 +110,9 @@ export const history = {
   },
   remove(id) {
     const st = store.get();
+    if (st.currentId === id && composer && typeof composer.resetForNewChat === 'function') {
+      composer.resetForNewChat();
+    }
     store.set({
       sessions: st.sessions.filter((s) => s.id !== id),
       currentId: st.currentId === id ? null : st.currentId,
@@ -118,6 +125,9 @@ export const history = {
   },
   clearAll() {
     if (typeof window !== 'undefined' && !window.confirm('Hapus semua obrolan di perangkat ini?')) return;
+    if (composer && typeof composer.resetForNewChat === 'function') {
+      composer.resetForNewChat();
+    }
     store.set({ sessions: [], currentId: null });
     store.save();
     this.query = '';
@@ -131,6 +141,9 @@ export const history = {
   bind() {
     const fresh = $('btn-new-chat');
     if (fresh) fresh.onclick = () => {
+      if (composer && typeof composer.resetForNewChat === 'function') {
+        composer.resetForNewChat();
+      }
       store.set({ currentId: null });
       this.render();
       chat.renderMessages();

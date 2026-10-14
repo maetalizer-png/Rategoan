@@ -21,6 +21,10 @@ async function googleGet(url, token) {
   return { ok: res.ok, status: res.status, text, type: res.headers.get('content-type') || 'application/json' };
 }
 
+export function cleanDriveId(raw) {
+  return String(raw || '').replace(/[^a-zA-Z0-9_-]/g, '') || 'root';
+}
+
 async function special(tool, params, token, res) {
   if (tool.name === 'drive_search_files') {
     const q = params.q || params.query || '';
@@ -32,8 +36,8 @@ async function special(tool, params, token, res) {
     return true;
   }
   if (tool.name === 'drive_list_children') {
-    const parent = params.folder_id || params.parent_id || 'root';
-    const q = "'" + parent.replace(/'/g, '') + "' in parents and trashed=false";
+    const parent = cleanDriveId(params.folder_id || params.parent_id || 'root');
+    const q = "'" + parent + "' in parents and trashed=false";
     const url = 'https://www.googleapis.com/drive/v3/files?pageSize=40&fields=files(id,name,mimeType)&q=' + encodeURIComponent(q);
     const upstream = await googleGet(url, token);
     res.statusCode = upstream.status;

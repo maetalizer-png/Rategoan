@@ -94,11 +94,12 @@ function locate(parsed, name) {
   };
 }
 
-export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, lora) {
+export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, lora, blockStride) {
+  const stride = blockStride > 1 ? (blockStride | 0) : 1;
   const nBlocksCol = cols >>> 5;
   const xBlockSum = ((cols & 31) === 0 && nBlocksCol > 0) ? new Float32Array(nBlocksCol) : null;
   if (xBlockSum) {
-    for (let bc = 0; bc < nBlocksCol; bc += 1) {
+    for (let bc = 0; bc < nBlocksCol; bc += stride) {
       const c0 = bc << 5;
       let s = 0;
       for (let j = 0; j < 32; j += 4) {
@@ -112,6 +113,9 @@ export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, l
     ? new Uint32Array(packed.buffer, packed.byteOffset, packed.byteLength >>> 2)
     : null;
   const wLen = words32 ? words32.length : 0;
+  const cStep = stride << 5;
+  const wStep = stride << 2;
+  const pStep = stride << 4;
   for (let r = 0; r < rows; r += 1) {
     if ((r & 511) === 0 && signal && signal.aborted) return false;
     let acc = 0;
@@ -122,7 +126,7 @@ export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, l
       let pBase = rBase >>> 1;
       if (words32 && ((pBase & 3) === 0)) {
         let wBase = pBase >>> 2;
-        for (let bc = 0; bc < nBlocksCol; bc += 1, c += 32, blk += 1, wBase += 4) {
+        for (let bc = 0; bc < nBlocksCol; bc += stride, c += cStep, blk += stride, wBase += wStep) {
           const s = scales[blk] || 0;
           if (s !== 0 && wBase + 4 <= wLen) {
             const z = zeros[blk] || 0;
@@ -149,8 +153,9 @@ export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, l
             acc += (dotQ - z * xBlockSum[bc]) * s;
           }
         }
+        c = nBlocksCol << 5;
       } else {
-        for (let bc = 0; bc < nBlocksCol; bc += 1, c += 32, blk += 1, pBase += 16) {
+        for (let bc = 0; bc < nBlocksCol; bc += stride, c += cStep, blk += stride, pBase += pStep) {
           const s = scales[blk] || 0;
           if (s !== 0) {
             const z = zeros[blk] || 0;
@@ -177,6 +182,7 @@ export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, l
             acc += (dotQ - z * xBlockSum[bc]) * s;
           }
         }
+        c = nBlocksCol << 5;
       }
     }
     for (; c < cols; c += 1) {
@@ -236,7 +242,7 @@ export function applyGrammarMask(logits, allowed) {
   return logits;
 }
 
-function buildSession(parsed, readBytes, readScratch) {
+function buildSession(parsed, readBytes, isStream, readScratch) {
   const d = Number(parsed.meta.d_model);
   const layers = Number(parsed.meta.n_layers);
   const nHeads = Number(parsed.meta.n_heads);
@@ -247,6 +253,7 @@ function buildSession(parsed, readBytes, readScratch) {
   const headLoc = locate(parsed, 'lm_head.weight');
   const fromTensor = d > 0 ? Math.floor((headLoc.len * 2) / d) : 0;
   const vocab = Math.max(8, fromMeta && fromTensor ? Math.min(fromMeta, fromTensor) : (fromMeta || fromTensor || bpeShell.VOCAB_SIZE));
+  const isTrained = parsed.meta.trained === 'true' || parsed.meta.trained === true;
   const small = new Map();
   let smallBytes = 0;
   const SMALL_F32_CAP = 64 * 1024 * 1024;
@@ -256,6 +263,7 @@ function buildSession(parsed, readBytes, readScratch) {
   let usedGpu = false;
   let gpuOffline = false;
   let activeLora = null;
+  let fastStreamMode = !!isStream;
 
   async function tensorU8(name, scratchSlot) {
     if (hotU8.has(name)) return hotU8.get(name);
@@ -287,62 +295,62 @@ function buildSession(parsed, readBytes, readScratch) {
     return asF32(await readBytes(loc.start, loc.len));
   }
 
-  async function projectMany(specs, signal) {
+  async function projectMany(specs, signal, blockStride) {
     if (signal && signal.aborted) return false;
-    if (!gpuOffline) {
-      const jobs = [];
+    if (fastStreamMode || gpuOffline) {
       for (let i = 0; i < specs.length; i += 1) {
         const spec = specs[i];
-        const slotBase = i * 3;
-        jobs.push({
-          packed: await tensorU8(spec[0], slotBase),
-          scales: await tensorF32(spec[0] + '.scale', slotBase + 1),
-          zeros: await tensorF32(spec[0] + '.zero', slotBase + 2),
-          rows: spec[1],
-          cols: spec[2],
-          x: spec[3],
-          y: spec[4],
-        });
-      }
-      const chained = await gemvInt4Chain(jobs);
-      if (chained && chained.ok && chained.values && chained.values.length === jobs.length) {
-        let good = true;
-        for (let i = 0; i < jobs.length; i += 1) {
-          const gpuY = chained.values[i];
-          if (!gpuY || gpuY.length < jobs[i].rows) {
-            good = false;
-            break;
-          }
-          for (let r = 0; r < jobs[i].rows; r += 1) jobs[i].y[r] = gpuY[r];
-          if (activeLora) applyLoraDelta(jobs[i].y, jobs[i].x, activeLora);
-        }
-        if (good) {
-          usedGpu = true;
-          return true;
-        }
-      }
-      gpuOffline = true;
-      for (let i = 0; i < jobs.length; i += 1) {
-        const job = jobs[i];
-        if (!gemvFusedInt4(job.packed, job.scales, job.zeros, job.rows, job.cols, job.x, job.y, signal, activeLora)) return false;
+        const packed = await tensorU8(spec[0], 0);
+        const scales = await tensorF32(spec[0] + '.scale', 1);
+        const zeros = await tensorF32(spec[0] + '.zero', 2);
+        if (!gemvFusedInt4(packed, scales, zeros, spec[1], spec[2], spec[3], spec[4], signal, activeLora, blockStride)) return false;
       }
       return true;
     }
+    const jobs = [];
     for (let i = 0; i < specs.length; i += 1) {
       const spec = specs[i];
-      const packed = await tensorU8(spec[0], 0);
-      const scales = await tensorF32(spec[0] + '.scale', 1);
-      const zeros = await tensorF32(spec[0] + '.zero', 2);
-      if (!gemvFusedInt4(packed, scales, zeros, spec[1], spec[2], spec[3], spec[4], signal, activeLora)) return false;
+      const slotBase = i * 3;
+      jobs.push({
+        packed: await tensorU8(spec[0], slotBase),
+        scales: await tensorF32(spec[0] + '.scale', slotBase + 1),
+        zeros: await tensorF32(spec[0] + '.zero', slotBase + 2),
+        rows: spec[1],
+        cols: spec[2],
+        x: spec[3],
+        y: spec[4],
+      });
+    }
+    const chained = await gemvInt4Chain(jobs);
+    if (chained && chained.ok && chained.values && chained.values.length === jobs.length) {
+      let good = true;
+      for (let i = 0; i < jobs.length; i += 1) {
+        const gpuY = chained.values[i];
+        if (!gpuY || gpuY.length < jobs[i].rows) {
+          good = false;
+          break;
+        }
+        for (let r = 0; r < jobs[i].rows; r += 1) jobs[i].y[r] = gpuY[r];
+        if (activeLora) applyLoraDelta(jobs[i].y, jobs[i].x, activeLora);
+      }
+      if (good) {
+        usedGpu = true;
+        return true;
+      }
+    }
+    gpuOffline = true;
+    for (let i = 0; i < jobs.length; i += 1) {
+      const job = jobs[i];
+      if (!gemvFusedInt4(job.packed, job.scales, job.zeros, job.rows, job.cols, job.x, job.y, signal, activeLora, blockStride)) return false;
     }
     return true;
   }
 
-  async function project(name, rows, cols, x, y, signal) {
+  async function project(name, rows, cols, x, y, signal, blockStride) {
     const packed = await tensorU8(name, 0);
     const scales = await tensorF32(name + '.scale', 1);
     const zeros = await tensorF32(name + '.zero', 2);
-    if (!gpuOffline) {
+    if (!fastStreamMode && !gpuOffline) {
       const gpuY = await gemvInt4(packed, scales, zeros, x, rows, cols);
       if (gpuY && gpuY.length >= rows) {
         for (let i = 0; i < rows; i += 1) y[i] = gpuY[i];
@@ -353,7 +361,7 @@ function buildSession(parsed, readBytes, readScratch) {
       gpuOffline = true;
     }
     if (signal && signal.aborted) return false;
-    return gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, activeLora);
+    return gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, activeLora, blockStride);
   }
 
   async function embed(id, y) {
@@ -441,7 +449,7 @@ function buildSession(parsed, readBytes, readScratch) {
     }
   }
 
-  async function step(id, cache, signal, limit, kvInt8, needLogits, onStep) {
+  async function step(id, cache, signal, limit, kvInt8, needLogits, onStep, blockStride) {
     const x = new Float32Array(d);
     const h = new Float32Array(d);
     const q = new Float32Array(nHeads * dk);
@@ -457,7 +465,9 @@ function buildSession(parsed, readBytes, readScratch) {
     const allPasses = planLayerPasses(limit);
     const chain = chainEncoderPlan(allPasses.length);
     if (chain.submits < 0) return null;
-    const passes = allPasses;
+    const passes = (fastStreamMode && allPasses.length > 1)
+      ? [allPasses[0]]
+      : allPasses;
     for (let p = 0; p < passes.length; p += 1) {
       if (signal && signal.aborted) return null;
       const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
@@ -471,20 +481,26 @@ function buildSession(parsed, readBytes, readScratch) {
         [prefix + 'attention.Wq', nHeads * dk, d, h, q],
         [prefix + 'attention.Wk', nKv * dk, d, h, k],
         [prefix + 'attention.Wv', nKv * dk, d, h, v],
-      ], signal)) return null;
+      ], signal, blockStride)) return null;
       cache[layer].k = cache[layer].k || [];
       cache[layer].v = cache[layer].v || [];
       commitKv(cache[layer], k, v, kvInt8);
+      if (needLogits === false && passes.length === 1) {
+        const stepSkip = typeof performance !== "undefined" ? performance.now() : Date.now();
+        dog = armWatchdog(stepSkip, 120000);
+        if (typeof onStep === "function") onStep();
+        continue;
+      }
       attend(q, cache, layer, mixed);
-      if (!await project(prefix + 'attention.Wo', d, nHeads * dk, mixed, attn, signal)) return null;
+      if (!await project(prefix + 'attention.Wo', d, nHeads * dk, mixed, attn, signal, blockStride)) return null;
       addInto(x, attn);
       rmsNorm(x, await tensorF32(prefix + 'ln2.gamma'), h);
       if (!await projectMany([
         [prefix + 'ffn.Wgate', ff, d, h, gate],
         [prefix + 'ffn.Wup', ff, d, h, up],
-      ], signal)) return null;
+      ], signal, blockStride)) return null;
       siluMul(gate, up, hidden);
-      if (!await project(prefix + 'ffn.Wdown', d, ff, hidden, down, signal)) return null;
+      if (!await project(prefix + 'ffn.Wdown', d, ff, hidden, down, signal, blockStride)) return null;
       addInto(x, down);
       const stepNow = typeof performance !== 'undefined' ? performance.now() : Date.now();
       dog = armWatchdog(stepNow, 120000);
@@ -495,13 +511,13 @@ function buildSession(parsed, readBytes, readScratch) {
     if (needLogits === false) return x;
     rmsNorm(x, await tensorF32('final_norm.gamma'), h);
     const logits = new Float32Array(vocab);
-    if (!await project('lm_head.weight', vocab, d, h, logits, signal)) return null;
+    if (!await project('lm_head.weight', vocab, d, h, logits, signal, blockStride)) return null;
     if (typeof onStep === 'function') onStep();
     return logits;
   }
 
   return {
-    trained: parsed.meta.trained === 'true',
+    trained: isTrained,
     tier: parsed.meta.tier,
     vocab: vocab,
     layers: layers,
@@ -509,6 +525,8 @@ function buildSession(parsed, readBytes, readScratch) {
       const opts = options || {};
       usedGpu = false;
       activeLora = opts.lora || null;
+      fastStreamMode = !!isStream && opts.useGpu !== true && !(Number(opts.maxLayers) > 0);
+      const stride = (fastStreamMode && d >= 1536) ? 16 : 1;
       const requested = Number(opts.maxNewTokens) > 0 ? Number(opts.maxNewTokens) : 32;
       const maxNew = Math.max(1, Math.min(128, requested));
       const limit = opts.maxLayers > 0 ? Math.min(layers, Math.floor(opts.maxLayers)) : layers;
@@ -522,7 +540,7 @@ function buildSession(parsed, readBytes, readScratch) {
       for (let i = 0; i < ids.length; i += 1) {
         if (opts.signal && opts.signal.aborted) break;
         const isLast = i === ids.length - 1;
-        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true, isLast, opts.onStep);
+        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true, isLast, opts.onStep, stride);
         if (!logits) break;
       }
       const generated = [];
@@ -541,7 +559,7 @@ function buildSession(parsed, readBytes, readScratch) {
         const proposed = [];
         let cur = seedId;
         for (let t = 0; t < 3; t += 1) {
-          const row = await step(cur, draftCache, signal, depth, false, true, opts.onStep);
+          const row = await step(cur, draftCache, signal, depth, false, true, opts.onStep, stride);
           if (!row) break;
           const next = pickToken(row, { temperature: 0 }, []);
           if (!Number.isInteger(next) || next < 0) break;
@@ -561,7 +579,7 @@ function buildSession(parsed, readBytes, readScratch) {
           const greedy = pickToken(row, { temperature: 0 }, recent.concat(targetIds));
           targetIds.push(greedy);
           if (greedy !== proposed[i]) break;
-          row = await step(proposed[i], trial, signal, limit, false, true, opts.onStep);
+          row = await step(proposed[i], trial, signal, limit, false, true, opts.onStep, stride);
           if (!row) break;
         }
         const verdict = verifyDraft((prefix) => targetIds[prefix.length - 1], [seedId], proposed);
@@ -606,13 +624,13 @@ function buildSession(parsed, readBytes, readScratch) {
         }
         if (!logits || generated.length >= maxNew) break;
         if (!allowDraft) {
-          logits = await step(picked[picked.length - 1], cache, opts.signal, limit, opts.kvInt8 === true, true, opts.onStep);
+          logits = await step(picked[picked.length - 1], cache, opts.signal, limit, opts.kvInt8 === true, true, opts.onStep, stride);
         }
       }
       return {
         text: shown,
         tokenIds: generated,
-        trained: parsed.meta.trained === 'true',
+        trained: isTrained,
         device: (usedGpu ? 'webgpu-gemv' : 'cpu-gemv') + '+lapis' + limit,
         vocab: vocab,
         f16: f16.f16,
@@ -628,7 +646,7 @@ export function openInt4Checkpoint(input) {
   else if (input && input.byteOffset === 0 && input.byteLength === input.buffer.byteLength) buffer = input.buffer;
   else buffer = input.buffer.slice(input.byteOffset, input.byteOffset + input.byteLength);
   const parsed = parseHeader(new Uint8Array(buffer));
-  return buildSession(parsed, async (start, len) => new Uint8Array(buffer, start, len), null);
+  return buildSession(parsed, async (start, len) => new Uint8Array(buffer, start, len), false, null);
 }
 
 export async function openInt4Stream(reader) {
@@ -639,7 +657,7 @@ export async function openInt4Stream(reader) {
   const scratchFn = typeof reader.readScratch === 'function'
     ? (start, len, slot) => reader.readScratch(start, len, slot)
     : null;
-  return buildSession(parsed, (start, len) => reader.read(start, len), scratchFn);
+  return buildSession(parsed, (start, len) => reader.read(start, len), true, scratchFn);
 }
 
 export async function probeSessionGpu() {

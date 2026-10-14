@@ -1,4 +1,4 @@
-import { createHash, createHmac, randomBytes } from 'node:crypto';
+import { createHash, createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
 import { allowOptions, bearer, readBody, sendJson } from './_http.js';
 
 export const CONFIRM_TTL_MS = 60000;
@@ -60,7 +60,10 @@ export function verifyConfirm(header, tool, params, now, session) {
   ledger.delete(nonce);
   if (row.exp < t) return false;
   if (row.session !== String(session || '')) return false;
-  if (row.mac !== macOf(row.session, row.tool, row.hash, row.exp)) return false;
+  const expectedMac = macOf(row.session, row.tool, row.hash, row.exp);
+  const leftBuf = Buffer.from(String(row.mac || ""), "hex");
+  const rightBuf = Buffer.from(String(expectedMac || ""), "hex");
+  if (leftBuf.length !== rightBuf.length || !timingSafeEqual(leftBuf, rightBuf)) return false;
   if (row.tool !== String(tool || '')) return false;
   return row.hash === payloadHash(params);
 }

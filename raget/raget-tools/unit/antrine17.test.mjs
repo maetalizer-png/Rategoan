@@ -1,0 +1,331 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { downloadConcurrentChunks, MODEL_CHUNK } from '../../raget-neural/runtime/model-downloader.js';
+import { gemvFusedInt4 } from '../../raget-neural/runtime/int4-session.js';
+import { buildDynamicThoughts, laneOf } from '../../../js/ui/thought-card.js';
+import { craftInstruction, shouldSynthesize, isWorkspaceContinuation } from '../../../js/studio/studio-agent.js';
+import { synthesizeCode, parseFenceFiles, parseSurgicalBlocks } from '../../../js/studio/neural-synthesizer.js';
+import { collectPreview } from '../../../js/studio/sandbox-runner.js';
+import { runTerminal, execStudioCli } from '../../../js/studio/wasm-terminal.js';
+import { createVfs } from '../../../js/studio/vfs.js';
+import { VfsGit } from '../../../js/studio/vfs-git.js';
+import { pySandbox } from '../../../vault/code/py-sandbox.js';
+import { jsSandbox } from '../../../vault/code/js-sandbox.js';
+import { rawEmail } from '../../../api/connectors/gmail.js';
+import { cleanDriveId } from '../../../api/connectors/drive.js';
+import { ipIsPrivate, scrubProtoKeys } from '../../../api/_http.js';
+import { issueConfirmChallenge, verifyConfirm } from '../../../api/confirm-challenge.js';
+import { cleanCalendarId } from '../../../api/connectors/calendar.js';
+import { safeMarkdownHref, markdown } from '../../../shared/markdown.js';
+import { resolveLocalProductivityTool, runConnectorTool } from '../../../js/connectors/tool-card.js';
+import { cleanGitBranch } from '../../../api/connectors/github.js';
+import { decodeDuckLink } from '../../../api/connectors/web/search.js';
+import { generateSecureOtp6 } from '../../../js/account/login.js';
+
+const root = new URL('../../../', import.meta.url);
+function read(rel) { return readFileSync(new URL(rel, root), 'utf8'); }
+
+test('DOD-41.01 prefetch paralel tetap aktif pada concurrency 4 tanpa memblokir aliran OPFS', async () => {
+  const down = read('raget/raget-neural/runtime/model-downloader.js');
+  const worker = read('raget/raget-neural/runtime/opfs-writer-worker.js');
+  assert.match(down, /const maxPrimed = concurrency \+ PREFETCH_AHEAD/);
+  assert.equal(down.includes('primed.size < 4'), false);
+  assert.equal(worker.includes('dirtyChunks >= 16'), false);
+  assert.match(worker, /function hashWindow\(bytes\)/);
+  assert.match(worker, /65536/);
+
+  const size = MODEL_CHUNK * 8;
+  const marks = [];
+  const diskWrite = async (_cache, key) => {
+    marks.push({ kind: 'put-start', key, at: Date.now() });
+    await new Promise((resolve) => setTimeout(resolve, 35));
+    marks.push({ kind: 'put-end', key, at: Date.now() });
+  };
+  const fetchImpl = async (_url, init) => {
+    const header = init.headers.Range;
+    marks.push({ kind: 'fetch', header, at: Date.now() });
+    const pair = header.replace('bytes=', '').split('-').map(Number);
+    return {
+      status: 206,
+      headers: { get: (name) => (String(name).toLowerCase() === 'content-range' ? ('bytes ' + pair[0] + '-' + pair[1] + '/' + size) : '') },
+      arrayBuffer: async () => new Uint8Array(pair[1] - pair[0] + 1).buffer,
+    };
+  };
+  const out = await downloadConcurrentChunks({
+    url: 'https://model.local/antrine17.bin',
+    size,
+    fetchImpl,
+    diskWrite,
+    concurrency: 4,
+  });
+  assert.equal(out.parts, 8);
+  const put0End = marks.find((row) => row.kind === 'put-end' && row.key.includes('#0-'));
+  const fetch4 = marks.find((row) => row.kind === 'fetch' && row.header.startsWith('bytes=' + (MODEL_CHUNK * 4) + '-'));
+  assert.ok(put0End && fetch4, 'partisi ke-4 harus diprefetch saat concurrency=4');
+  assert.ok(fetch4.at < put0End.at, 'fetch partisi ke-4 harus mulai sebelum tulis disk partisi ke-0 selesai');
+});
+
+test('DOD-41.02 gemvFusedInt4 blockStride mempercepat dekode aliran dan mempertahankan 32 token penuh', () => {
+  const sessionSrc = read('raget/raget-neural/runtime/int4-session.js');
+  const chatSrc = read('js/chat/chat.js');
+  assert.match(sessionSrc, /fastStreamMode/);
+  assert.match(sessionSrc, /const maxNew = Math\.max\(1, Math\.min\(128, requested\)\)/);
+  assert.equal(sessionSrc.includes('generated.length >= 2'), false);
+  assert.match(chatSrc, /Math\.max\(80, Math\.ceil\(text\.length \/ 5\)\)/);
+  assert.match(chatSrc, /rafPending/);
+
+  const rows = 64;
+  const cols = 2048;
+  const packed = new Uint8Array((rows * cols) / 2).fill(0x53);
+  const scales = new Float32Array((rows * cols) / 32).fill(0.02);
+  const zeros = new Float32Array((rows * cols) / 32).fill(4);
+  const x = new Float32Array(cols).fill(0.5);
+  const y = new Float32Array(rows);
+  const ok = gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, null, null, 16);
+  assert.equal(ok, true);
+  assert.ok(Number.isFinite(y[0]));
+});
+
+test('DOD-41.03 & 41.04 visualisasi proses kerja ala Grok tanpa kartu dengan titik biru zen-dot dan ikon kontekstual', () => {
+  const thoughtCard = read('js/ui/thought-card.js');
+  const thoughtCss = read('css/ui/thought.css');
+  assert.equal(thoughtCard.includes('BPE '), false);
+  assert.equal(thoughtCard.includes('INT4 affine'), false);
+  assert.equal(thoughtCard.includes('vektor 384-dim'), false);
+  assert.equal(thoughtCard.includes('thought-brain-ico'), false);
+  assert.equal(thoughtCard.includes('thought-step-badge'), false);
+  assert.match(thoughtCard, /zen-dot thought-dot/);
+  assert.match(thoughtCard, /Berpikir selama /);
+  assert.match(thoughtCss, /border:\s*none\s*!important/);
+  assert.match(thoughtCss, /background:\s*transparent\s*!important/);
+  assert.match(thoughtCss, /box-shadow:\s*none\s*!important/);
+  assert.match(thoughtCss, /-webkit-tap-highlight-color:\s*transparent\s*!important/);
+
+  const webSteps = buildDynamicThoughts('cari berita AI hari ini', { websearch: true });
+  assert.ok(webSteps.some((s) => laneOf(s) === 'web'));
+  const fileSteps = buildDynamicThoughts('ringkas dokumen ini', { files: 'laporan.pdf' });
+  assert.ok(fileSteps.some((s) => laneOf(s) === 'file'));
+  const connSteps = buildDynamicThoughts('cek repo github saya', {});
+  assert.ok(connSteps.some((s) => laneOf(s) === 'connect'));
+  const codeSteps = buildDynamicThoughts('buat fungsi python', {});
+  assert.ok(codeSteps.some((s) => laneOf(s) === 'tool'));
+  const slideSteps = buildDynamicThoughts('buatkan slide presentasi', {});
+  assert.ok(slideSteps.some((s) => laneOf(s) === 'slide'));
+});
+
+test('DOD-41.05 kartu login desktop berada di tengah layar (body.auth-gate tidak ditimpa body.no-topbar)', () => {
+  const desktopCss = read('css/layout/desktop.css');
+  assert.match(desktopCss, /body:not\(\.auth-gate\):has\(#topbar\[hidden\]\)/);
+  assert.match(desktopCss, /body\.no-topbar:not\(\.auth-gate\)/);
+  assert.match(desktopCss, /body\.auth-gate #sidebar/);
+});
+
+test('DOD-41.06 s/d 41.10 lima penguatan keamanan siber P0 Antrine 17', () => {
+  const raw = rawEmail({
+    to: 'korban@example.com\r\nBcc: penyerang@evil.com',
+    subject: 'Judul\r\nX-Injected: 1',
+    body: 'Isi pesan aman',
+  });
+  const decoded = Buffer.from(raw, 'base64url').toString('utf8');
+  assert.equal(decoded.includes('\r\nBcc:'), false);
+  assert.equal(decoded.includes('\r\nX-Injected:'), false);
+  assert.match(decoded, /^To: korban@example\.com Bcc: penyerang@evil\.com\r\n/);
+
+  assert.equal(cleanDriveId("root' or name contains 'rahasia"), 'rootornamecontainsrahasia');
+  assert.equal(cleanGitBranch('../../refs/tags/pwn'), 'refs/tags/pwn');
+  assert.equal(decodeDuckLink('https://duckduckgo.com/l/?uddg=' + encodeURIComponent('javascript:alert(1)')), '');
+  assert.equal(decodeDuckLink('https://duckduckgo.com/l/?uddg=' + encodeURIComponent('https://example.com/aman')), 'https://example.com/aman');
+
+  const otp = generateSecureOtp6();
+  assert.match(otp, /^\d{6}$/);
+  assert.equal(read('js/account/login.js').includes('Math.random'), false);
+  assert.match(read('js/collection/collection.js'), /data-set-tag-id="' \+ escapeHtml\(id\) \+ '"/);
+});
+
+test('DOD-41.11 Studio Kode terintegrasi penuh dengan otak Raget 1.0 dan tombol pemilihan model di samping ikon +', async () => {
+  const studioHtml = read('studio.html');
+  const studioApp = read('js/studio/studio-app.js');
+  assert.match(studioHtml, /id="btn-plus"[\s\S]{1,420}id="btn-model"/);
+  assert.match(studioHtml, /id="model-sheet"/);
+  assert.match(studioApp, /neuralAdapter/);
+  assert.match(studioApp, /neuralProvider/);
+  assert.match(studioApp, /modelSheet/);
+  assert.match(studioApp, /askStudioBrain/);
+  assert.match(studioApp, /toggleModelSheet/);
+
+  assert.equal(isWorkspaceContinuation('kerja'), true);
+  assert.equal(isWorkspaceContinuation('lanjutkan'), true);
+  assert.equal(shouldSynthesize('kerja'), true);
+  assert.equal(shouldSynthesize('lanjutkan'), true);
+  assert.equal(shouldSynthesize('hvgyfkvhjnn'), false);
+
+  const seed = {
+    'index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
+    'style.css': 'body{background:#05080c}\n',
+    'script.js': 'console.log("siap");\n',
+  };
+  const step1 = craftInstruction('kerja', seed);
+  assert.equal(step1.ok, true);
+  assert.doesNotMatch(step1.reply, /tidak memuat perintah rekayasa/);
+  assert.match(step1.files['index.html'], /Ruang Rekayasa Raget 1\.0/);
+
+  const step2 = craftInstruction('lanjutkan', step1.files);
+  assert.equal(step2.ok, true);
+  assert.doesNotMatch(step2.reply, /tidak memuat perintah rekayasa/);
+  assert.match(step2.files['index.html'], /iterasi-status/);
+
+  const synth = await synthesizeCode('buat modul kalkulator pajak', seed, {
+    online: false,
+    neuralGenerate: async () => 'Analisis kalkulator pajak selesai dirakit.',
+  });
+  assert.equal(synth.brain, 'Raget 1.0');
+  assert.match(synth.reply, /Catatan Raget 1\.0: Analisis kalkulator pajak selesai dirakit\./);
+});
+
+test('DOD-41.12 Penyempurnaan 6 Sektor Studio Kode: Multi-Berkas, Surgical Patch, Terminal CLI VFS, Python Sandbox, dan Kanvas Hidup', async () => {
+  // 1. Multi-file creation & ES6 import bundling without export SyntaxError
+  const seed = {
+    'index.html': '<!doctype html><html><head></head><body><h1>App</h1></body></html>\n',
+    'style.css': 'body{margin:0}\n',
+    'script.js': 'console.log("init");\n',
+    'main.py': 'print("halo")\n',
+  };
+  const modPlan = craftInstruction('buat modul components/kartu.js', seed);
+  assert.equal(modPlan.ok, true);
+  assert.ok(modPlan.files['/components/kartu.js']);
+  assert.match(modPlan.files['script.js'], /import "\.\/components\/kartu\.js"/);
+
+  const bundled = collectPreview(modPlan.files);
+  assert.match(bundled['script.js'], /function kartu/);
+  assert.doesNotMatch(bundled['script.js'], /\bexport\s+function\b/);
+
+  // 2. Arbitrary file fences & Surgical search-and-replace blocks
+  const fencedMulti = parseFenceFiles('Berikut modul:\n```js:src/helper.js\nexport const X = 42;\n```\n');
+  assert.ok(fencedMulti && fencedMulti['src/helper.js']);
+  const surgicalRaw = '<<<FILE:index.html>>>\n<<<SEARCH\n<h1>App</h1>\n===\n<h1>App Raget 1.0</h1>\n>>>REPLACE\nSelesai ditambal.';
+  const patches = parseSurgicalBlocks(surgicalRaw);
+  assert.equal(patches.length, 1);
+  const patchedSynth = await synthesizeCode('ubah judul', seed, {
+    online: false,
+    neuralGenerate: async () => surgicalRaw,
+  });
+  assert.match(patchedSynth.files['index.html'], /<h1>App Raget 1\.0<\/h1>/);
+
+  // 3. Python Sandbox execution
+  const pyPlan = craftInstruction('buat modul python ukur teks', seed);
+  const pyOut = await pySandbox.run(pyPlan.files['main.py']);
+  assert.equal(pyOut.ok, true);
+  assert.equal(pyOut.output, 'byte 6');
+
+  // 4. Interactive VFS CLI shell + math expression preservation
+  assert.equal(runTerminal('1+2*3'), 7);
+  const vfs = createVfs({
+    '/index.html': seed['index.html'],
+    '/css/style.css': seed['style.css'],
+    '/js/script.js': seed['script.js'],
+    '/main.py': pyPlan.files['main.py'],
+  });
+  const git = new VfsGit({
+    '/index.html': seed['index.html'],
+  });
+  git.commit('init');
+
+  const lsRes = await execStudioCli('ls', { vfs, git });
+  assert.equal(lsRes.ok, true);
+  assert.match(lsRes.output, /\/index\.html/);
+  assert.match(lsRes.output, /\/main\.py/);
+
+  const grepRes = await execStudioCli('grep ukur', { vfs, git });
+  assert.equal(grepRes.ok, true);
+  assert.match(grepRes.output, /\/main\.py/);
+
+  const pyCliRes = await execStudioCli('python /main.py', { vfs, git, pySandbox, jsSandbox });
+  assert.equal(pyCliRes.ok, true);
+  assert.equal(pyCliRes.output, 'byte 6');
+
+  const touchRes = await execStudioCli('touch /README.md', { vfs, git });
+  assert.equal(touchRes.ok, true);
+  assert.equal(touchRes.mutated, true);
+  assert.equal(vfs.list().includes('/README.md'), true);
+});
+
+test('DOD-41.13 Teori Working-Set OPFS int4-session dan Orkestrasi Produktivitas Harian Lokal', async () => {
+  const sessionSrc = read('raget/raget-neural/runtime/int4-session.js');
+  assert.match(sessionSrc, /const passes = \(fastStreamMode && allPasses\.length > 1\)/);
+  assert.match(sessionSrc, /const stride = \(fastStreamMode && d >= 1536\) \? 16 : 1/);
+  assert.match(sessionSrc, /if \(needLogits === false && passes\.length === 1\)/);
+
+  const calcTool = resolveLocalProductivityTool('hitung (1500000 * 11 / 100) + 1500000');
+  assert.ok(calcTool && calcTool.name === 'math_calculate_expression');
+  const calcOut = await runConnectorTool(calcTool.name, calcTool.parameters);
+  assert.equal(calcOut.ok, true);
+  assert.equal(calcOut.data.value, 1665000);
+
+  const currTool = resolveLocalProductivityTool('konversi 100 USD ke IDR');
+  assert.ok(currTool && currTool.name === 'math_currency_converter');
+  const currOut = await runConnectorTool(currTool.name, currTool.parameters);
+  assert.equal(currOut.ok, true);
+  assert.equal(currOut.data.value, 1550000);
+
+  const statTool = resolveLocalProductivityTool('statistik 10, 20, 30, 40, 50');
+  assert.ok(statTool && statTool.name === 'math_statistics_summary');
+  const statOut = await runConnectorTool(statTool.name, statTool.parameters);
+  assert.equal(statOut.ok, true);
+  assert.equal(statOut.data.mean, 30);
+  assert.equal(statOut.data.median, 30);
+  assert.ok(statOut.data.stdDev > 14.14 && statOut.data.stdDev < 14.15);
+});
+
+test('DOD-41.14 Isolasi Obrolan Baru (Stop Button & Input Keyboard Reset) serta Auto-Resume Unduhan Lintas-Halaman', () => {
+  const chatJs = read('js/chat/chat.js');
+  const compJs = read('js/chat/composer.js');
+  const histJs = read('js/history/history.js');
+  const menuJs = read('js/ui/chat-options-menu.js');
+  const provJs = read('raget/raget-neural/neural-provider.js');
+  const studioJs = read('js/studio/studio-app.js');
+
+  assert.match(compJs, /resetForNewChat\(\)/);
+  assert.match(compJs, /const sendSessionId = s\.id/);
+  assert.match(compJs, /startOrAttachDownload/);
+  assert.match(chatJs, /const askSessionId = s && s\.id/);
+  assert.match(chatJs, /const sessionSwitched = !this\.current\(\)/);
+  assert.match(histJs, /composer\.resetForNewChat\(\)/);
+  assert.match(menuJs, /composer\.resetForNewChat\(\)/);
+  assert.match(provJs, /rategoan_weights_downloading/);
+  assert.match(provJs, /if \(isPending && !control\.paused && !control\.cancelled\)/);
+  assert.match(studioJs, /neuralProvider\.resumeProgress\(\)/);
+});
+
+test('DOD-41.15 Lima Penguatan Keamanan Siber Tingkat Lanjut (Timing-Safe HMAC, IPv6 6to4/NAT64 SSRF, Proto Scrub, Safe Href, Calendar ID)', () => {
+  const ccJs = read('api/confirm-challenge.js');
+  assert.match(ccJs, /timingSafeEqual/);
+  const nonce = issueConfirmChallenge('drive_delete_file', { file_id: '123' }, 1000, 'tok-abc');
+  assert.equal(verifyConfirm(nonce, 'drive_delete_file', { file_id: '123' }, 1500, 'tok-abc'), true);
+  assert.equal(verifyConfirm(nonce, 'drive_delete_file', { file_id: '123' }, 1500, 'tok-abc'), false);
+
+  // IPv6 6to4, NAT64, IPv4-compatible, multicast, and doc prefix SSRF guards
+  assert.equal(ipIsPrivate('2002:7f00:0001::1'), true);
+  assert.equal(ipIsPrivate('2002:a9fe:a9fe::1'), true);
+  assert.equal(ipIsPrivate('64:ff9b::7f00:1'), true);
+  assert.equal(ipIsPrivate('::127.0.0.1'), true);
+  assert.equal(ipIsPrivate('ff02::1'), true);
+  assert.equal(ipIsPrivate('2001:db8::1'), true);
+  assert.equal(ipIsPrivate('2606:4700:4700::1111'), false);
+
+  // Prototype pollution key scrubber
+  const polluted = JSON.parse('{"aman":1,"__proto__":{"polluted":true},"nested":{"constructor":{"prototype":{"pwn":1}},"ok":2}}');
+  const cleanObj = scrubProtoKeys(polluted);
+  assert.equal(cleanObj.aman, 1);
+  assert.equal(cleanObj.nested.ok, 2);
+  assert.equal(Object.prototype.hasOwnProperty.call(cleanObj, '__proto__'), false);
+  assert.equal(Object.prototype.hasOwnProperty.call(cleanObj.nested, 'constructor'), false);
+
+  // Safe markdown href attribute breakout prevention
+  const html = markdown.render('[klik](https://example.com/a"onmouseover="alert(1))');
+  assert.equal(html.includes('"onmouseover="'), false);
+  assert.equal(safeMarkdownHref('javascript:alert(1)'), '#');
+
+  // Calendar ID traversal & control char sanitization
+  assert.equal(cleanCalendarId('../../primary"\r\n'), '//primary');
+});

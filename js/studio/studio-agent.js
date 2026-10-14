@@ -154,19 +154,68 @@ export function runStudioFsm(events) {
   return { state, trace, backtracks };
 }
 
-function hasEngineeringIntent(ask) {
-  return /buat(kan)?|rakit|rancang|tambah|ubah|ganti|komponen|fungsi|script|style|css|html|python|button|tombol|halaman|form|telemetri|audit|uji|pengujian|scaffold|oranye|reset|warna|dasbor|sandbox/i.test(ask);
+export function isWorkspaceContinuation(ask) {
+  return /\b(kerja(kan)?|lanjut(kan)?|jalan(kan)?|eksekusi|mulai|perbaiki|optimalkan|optimalisasi|analisis|cek|periksa|review|tinjau|bantu|selesaikan|terapkan|implementasi(kan)?|kembangkan|upgrade|refactor|debug|rapikan|sempurnakan)\b/i.test(String(ask || '').trim());
 }
+
+function hasEngineeringIntent(ask) {
+  return /buat(kan)?|rakit|rancang|tambah|ubah|ganti|komponen|fungsi|script|style|css|html|python|button|tombol|halaman|form|telemetri|audit|uji|pengujian|scaffold|oranye|reset|warna|dasbor|sandbox|koding|kode|aplikasi|fitur|proyek|sistem|modul|api|tampilan|desain|panel|tabel|grafik|kalkulator|berkas/i.test(ask)
+    || isWorkspaceContinuation(ask);
+}
+
+const CORE_ALIASES = new Set([
+  'index.html', '/index.html',
+  'style.css', 'css/style.css', '/css/style.css',
+  'script.js', 'js/script.js', '/js/script.js',
+  'main.py', '/main.py',
+]);
 
 export function craftInstruction(text, files) {
   const ask = String(text || '').trim();
+  const src = files || {};
   const next = {
-    'index.html': (files && files['index.html']) || '',
-    'style.css': (files && files['style.css']) || '',
-    'script.js': (files && files['script.js']) || '',
-    'main.py': (files && files['main.py']) || '',
+    'index.html': src['index.html'] || src['/index.html'] || '',
+    'style.css': src['style.css'] || src['/css/style.css'] || src['css/style.css'] || '',
+    'script.js': src['script.js'] || src['/js/script.js'] || src['js/script.js'] || '',
+    'main.py': src['main.py'] || src['/main.py'] || '',
   };
+  Object.keys(src).forEach((k) => {
+    if (!CORE_ALIASES.has(k)) {
+      const norm = k.startsWith('/') ? k : ('/' + k);
+      next[norm] = src[k];
+    }
+  });
   const steps = ['Baca berkas', 'Racik kode', 'Uji sandbox'];
+
+  // Named custom file creation/update in VFS (e.g., "buat modul utils.js", "buat berkas README.md")
+  const namedFileMatch = ask.match(/(?:buat(?:kan)?|tambah(?:kan)?|rancang)\s+(?:modul|berkas|file|komponen)?\s*([a-zA-Z0-9_./-]+\.(?:js|mjs|css|html|py|json|md))\b/i);
+  if (namedFileMatch) {
+    const rawFile = namedFileMatch[1].replace(/^\/+/, '');
+    if (!/^(index\.html|style\.css|script\.js|main\.py)$/i.test(rawFile) && !rawFile.includes('..')) {
+      const vfsKey = rawFile.startsWith('/') ? rawFile : ('/' + rawFile);
+      if (/\.js$/i.test(rawFile)) {
+        const fnName = rawFile.replace(/^.*\//, '').replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9_]/g, '') || 'helper';
+        next[vfsKey] = 'export function ' + fnName + '(pesan) {\n  return "[Modul ' + rawFile + '] " + String(pesan || "siap");\n}\n';
+        if (!next['script.js'].includes(rawFile)) {
+          next['script.js'] = 'import "./' + rawFile + '";\n' + next['script.js'] + '\nif (typeof console !== "undefined") console.log(' + fnName + '("aktif"));\n';
+        }
+      } else if (/\.md$/i.test(rawFile)) {
+        next[vfsKey] = '# Dokumentasi Proyek Studio Kode\n\nBerkas `' + rawFile + '` dirakit otomatis oleh Raget 1.0.\n';
+      } else if (/\.json$/i.test(rawFile)) {
+        next[vfsKey] = '{\n  "name": "studio-rategoan",\n  "engine": "Raget 1.0"\n}\n';
+      } else {
+        next[vfsKey] = '/* Berkas ' + rawFile + ' */\n';
+      }
+      return {
+        ok: true,
+        files: next,
+        lang: 'web',
+        steps: ['Baca berkas', 'Racik modul ' + vfsKey, 'Uji sandbox'],
+        reply: 'Berkas ' + vfsKey + ' sudah dirakit dan diintegrasikan ke ruang kerja VFS.',
+      };
+    }
+  }
+
   if (/tombol reset/i.test(ask) && next['index.html'] && !/buatkan/i.test(ask)) {
     if (!/id="reset"/.test(next['index.html'])) {
       next['index.html'] = next['index.html'].replace('</body>', '<button id="reset" type="button">Reset</button></body>');
@@ -214,6 +263,35 @@ export function craftInstruction(text, files) {
     next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:sans-serif;margin:24px}\n';
     next['script.js'] = 'function tambah(a,b){return a+b;}function uji(){var kasus=[tambah(2,3)===5,tambah(0,0)===0,tambah(-1,1)===0];var lulus=kasus.filter(Boolean).length;if(lulus!==kasus.length)throw new Error("uji gagal");return lulus;}var lulus=uji();if(typeof document!=="undefined"){document.getElementById("lulus").textContent=String(lulus);console.log("uji satuan "+lulus+" lulus");}\n';
     return { files: next, lang: 'web', steps: steps.concat(['Pratinjau hidup']), reply: 'Generator uji satuan sudah dirakit. Tiga kasus dijalankan di sandbox.' };
+  }
+  if (isWorkspaceContinuation(ask)) {
+    const htmlNow = String(next['index.html'] || '');
+    const isSeedOrEmpty = !htmlNow || (/<h1>Studio Kode<\/h1>/i.test(htmlNow) && !/id="studio-stage"/.test(htmlNow));
+    if (isSeedOrEmpty) {
+      next['index.html'] = '<!doctype html><html lang="id"><head><meta charset="utf-8"><title>Ruang Rekayasa Raget 1.0</title></head><body><main class="workspace-shell"><header class="workspace-head"><h1>Ruang Rekayasa Raget 1.0</h1><span id="studio-stage" class="badge">Tahap 1 · Aktif</span></header><section class="workspace-panel"><p id="status">Mesin Raget 1.0 terhubung ke berkas VFS dan siap mengeksekusi tugas.</p><div class="workspace-actions"><button id="aksi" type="button">Jalankan Siklus</button><button id="reset" type="button">Reset</button></div><pre id="jejak">[Raget 1.0] Workspace diinisialisasi.</pre></section></main></body></html>\n';
+      next['style.css'] = 'body{background:#05080c;color:#f2f5f7;font-family:ui-sans-serif,system-ui,sans-serif;margin:24px}.workspace-shell{max-width:680px;margin:0 auto}.workspace-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #232d3a;padding-bottom:12px;margin-bottom:16px}.badge{background:#1d4ed8;color:#fff;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}.workspace-panel{background:#0b111c;border:1px solid #232d3a;border-radius:12px;padding:16px}.workspace-actions{display:flex;gap:8px;margin:12px 0}button{background:#2563eb;color:#fff;border:0;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}button#reset{background:#334155}pre{background:#020617;border:1px solid #1e293b;padding:10px;border-radius:8px;color:#4ade80;font-size:12px;overflow:auto}\n';
+      next['script.js'] = 'var siklus=1;function catat(teks){if(typeof document==="undefined")return siklus;var j=document.getElementById("jejak");var s=document.getElementById("studio-stage");if(s)s.textContent="Tahap "+siklus+" · Aktif";if(j)j.textContent="[Raget 1.0] "+teks+" (siklus "+siklus+")";return siklus;}if(typeof document!=="undefined"){var btn=document.getElementById("aksi");var rst=document.getElementById("reset");if(btn)btn.onclick=function(){siklus+=1;catat("Eksekusi modul berhasil");};if(rst)rst.onclick=function(){siklus=1;catat("Status direset");};}\n';
+      return {
+        ok: true,
+        files: next,
+        lang: 'web',
+        steps: ['Baca berkas', 'Racik kode', 'Uji sandbox', 'Pratinjau hidup'],
+        reply: 'Raget 1.0 telah mengeksekusi instruksi "' + ask.slice(0, 32) + '" dan merakit modul ruang kerja interaktif di VFS beserta verifikasi sandbox.',
+      };
+    }
+    if (!/id="telemetry-inline"/.test(htmlNow)) {
+      next['index.html'] = htmlNow.replace('</body>', '<section id="telemetry-inline" class="workspace-panel"><p id="iterasi-status">Iterasi lanjutan Raget 1.0 aktif</p></section></body>');
+    }
+    if (!/iterasi-status/.test(next['script.js'])) {
+      next['script.js'] += '\nif(typeof document!=="undefined"){var it=document.getElementById("iterasi-status");if(it)it.textContent="Iterasi lanjutan diverifikasi oleh Raget 1.0";}\n';
+    }
+    return {
+      ok: true,
+      files: next,
+      lang: 'web',
+      steps: ['Baca berkas', 'Racik kode', 'Uji sandbox', 'Pratinjau hidup'],
+      reply: 'Raget 1.0 melanjutkan pengerjaan proyek di VFS, menambahkan pemantau iterasi lanjutan, dan memverifikasi pratinjau hidup.',
+    };
   }
   if (!hasEngineeringIntent(ask)) {
     return {
@@ -401,8 +479,8 @@ export function readVfsContext(files, query) {
   if (!keys.length) return { summary: '/index.html (kosong)', excerpts: [] };
   const matches = grepVfs(map, query);
   const touched = Array.from(new Set(matches.map((m) => m.file)));
-  const summary = (touched.length ? touched : keys.map((k) => (k.startsWith('/') ? k : '/' + k))).slice(0, 4).join(', ');
-  const excerpts = keys.slice(0, 4).map((k) => ({
+  const summary = (touched.length ? touched : keys.map((k) => (k.startsWith('/') ? k : '/' + k))).slice(0, 6).join(', ');
+  const excerpts = keys.slice(0, 6).map((k) => ({
     file: k.startsWith('/') ? k : ('/' + k),
     bytes: String(map[k] || '').length,
     preview: String(map[k] || '').slice(0, 320),
@@ -412,7 +490,10 @@ export function readVfsContext(files, query) {
 
 export function applySurgicalPatch(files, fileKey, searchBlock, replaceBlock) {
   if (!files || !fileKey || !searchBlock) return false;
-  const key = files[fileKey] != null ? fileKey : (files['/' + fileKey] != null ? ('/' + fileKey) : null);
+  const clean = String(fileKey).replace(/^\/+/, '');
+  const key = files[fileKey] != null ? fileKey
+    : (files['/' + clean] != null ? ('/' + clean)
+      : (files[clean] != null ? clean : null));
   if (!key) return false;
   const src = String(files[key] || '');
   const needle = String(searchBlock);

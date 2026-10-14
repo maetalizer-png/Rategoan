@@ -1,23 +1,30 @@
 import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
+import { pySandbox } from '../../vault/code/py-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
 import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop, grepVfs, readVfsContext } from './studio-agent.js';
 import { recordTelemetry, noteDecode, noteVram, paintStudioHud } from './telemetry.js';
 import { positionDesktopPopover, clearDesktopPopover } from '../../shared/popover.js';
 import { healSyntax } from './ast-heal.js';
-import { synthesizeCode } from './neural-synthesizer.js';
+import { synthesizeCode, parseFenceFiles } from './neural-synthesizer.js';
 import { mountThought } from '../ui/thought-card.js';
 import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { createVfs } from './vfs.js';
 import { VfsGit } from './vfs-git.js';
 import { VfsTransaction, bootRecover } from './vfs-transaction.js';
-import { renderDiffElement } from './diff-parser.js';
+import { renderDiffElement, linesToPatch, stageHunks } from './diff-parser.js';
 import { folderBridge } from '../project/folder-bridge.js';
 import { reduceStream, chooseDoor, routeDoor, failoverStream, resumeCursor } from './sse-door.js';
 import { backupToDrive } from './drive-backup.js';
 import { mountNamespace } from '../core/namespace.js';
 import { mountStudioFrontier, streamCode, paintStream } from './studio-frontier.js';
+import { mermaidToSvg, bindSheetChart, indexSymbols, parseImports } from './canvas-tools.js';
+import { execStudioCli } from './wasm-terminal.js';
+import { neuralAdapter } from '../../raget/raget-neural/neural-adapter.js';
+import { neuralProvider, MODEL_STATUS } from '../../raget/raget-neural/neural-provider.js';
+import { enginePreference } from '../state/engine-preference.js';
+import { modelSheet } from '../sheets/model-sheet.js';
 
 const SEED = {
   '/index.html': '<!doctype html><html><head><meta charset="utf-8"></head><body><h1>Studio Kode</h1></body></html>\n',
@@ -28,13 +35,201 @@ const SEED = {
 const vfs = createVfs(SEED);
 const git = new VfsGit(SEED);
 let viewPath = '/js/script.js';
-let lastBefore = vfs.flat();
+let lastBefore = captureBeforeMap();
 let busy = false;
 let projectId = '';
 let touched = false;
 let sessionRows = [];
+let studioChatHistory = [];
 
 function $(id) { return document.getElementById(id); }
+
+function toVfsPath(key) {
+  const clean = String(key || '').trim();
+  if (!clean) return '/index.html';
+  if (clean === 'index.html' || clean === '/index.html') return '/index.html';
+  if (clean === 'style.css' || clean === 'css/style.css' || clean === '/css/style.css') return '/css/style.css';
+  if (clean === 'script.js' || clean === 'js/script.js' || clean === '/js/script.js') return '/js/script.js';
+  if (clean === 'main.py' || clean === '/main.py') return '/main.py';
+  return clean.startsWith('/') ? clean : ('/' + clean);
+}
+
+function captureBeforeMap() {
+  const map = Object.assign({}, vfs.flat());
+  vfs.list().forEach((path) => {
+    map[path] = vfs.read(path);
+    map[path.replace(/^\//, '')] = vfs.read(path);
+  });
+  return map;
+}
+
+function beforeContentFor(path) {
+  const vfsPath = toVfsPath(path);
+  if (lastBefore[vfsPath] != null) return lastBefore[vfsPath];
+  const flatKey = vfsPath === '/css/style.css' ? 'style.css'
+    : vfsPath === '/js/script.js' ? 'script.js'
+      : vfsPath === '/index.html' ? 'index.html'
+        : vfsPath === '/main.py' ? 'main.py' : vfsPath.replace(/^\//, '');
+  return lastBefore[flatKey] || '';
+}
+
+function currentModelModeLabel() {
+  try {
+    return enginePreference.get() === 'neural' ? 'Mendalam' : 'Cepat';
+  } catch (e) {
+    return 'Cepat';
+  }
+}
+
+function syncStudioModelBadge() {
+  const modeLabel = currentModelModeLabel();
+  const modelEl = $('stat-model');
+  if (modelEl) {
+    modelEl.textContent = 'Raget 1.0 · ' + modeLabel;
+  }
+  const modelBtn = $('btn-model');
+  if (modelBtn) {
+    modelBtn.dataset.mode = modeLabel.toLowerCase();
+    modelBtn.setAttribute('title', 'Raget 1.0 · Mode ' + modeLabel);
+  }
+}
+
+async function askStudioBrain(prompt, files, onToken) {
+  const vfsCtx = readVfsContext(files || captureBeforeMap(), prompt);
+  const onNeuralToken = (ev) => {
+    const piece = ev && ev.detail ? String(ev.detail) : '';
+    if (piece && typeof onToken === 'function') onToken(piece);
+  };
+  if (typeof window !== 'undefined') {
+    window.addEventListener('rategoan:neural-token', onNeuralToken);
+  }
+  try {
+    const reply = await neuralAdapter.ask(String(prompt || ''), {
+      modelPrefix: 'Ruang Rekayasa Studio Kode — Raget 1.0 (' + currentModelModeLabel() + ')',
+      facts: {
+        berkas_vfs: vfsCtx.summary,
+        mode_nalar: currentModelModeLabel(),
+      },
+      recent: studioChatHistory.slice(-4),
+    });
+    if (reply && typeof reply === 'string' && reply.trim()) {
+      return reply.trim();
+    }
+    return '';
+  } catch (e) {
+    return '';
+  } finally {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('rategoan:neural-token', onNeuralToken);
+    }
+  }
+}
+
+function paintLivingCanvases() {
+  const docEl = $('living-doc');
+  const sheetEl = $('living-sheet');
+  const files = vfs.list();
+  if (docEl) {
+    docEl.classList.add('living-doc-shell');
+    docEl.textContent = '';
+    const title = document.createElement('h2');
+    title.textContent = 'Dokumen Arsitektur Hidup — ' + (($('crumb-project') && $('crumb-project').textContent) || 'Studio Kode');
+    docEl.appendChild(title);
+
+    const edges = ['index_html --> style_css', 'index_html --> script_js'];
+    const allSymbols = [];
+    files.forEach((p) => {
+      const body = String(vfs.read(p) || '');
+      const syms = indexSymbols(body);
+      syms.forEach((s) => allSymbols.push(p + ': ' + s.kind + ' ' + s.name + '()'));
+      const imps = parseImports(body);
+      const fromNode = p.replace(/^\/+/, '').replace(/[^a-zA-Z0-9_]/g, '_');
+      imps.forEach((imp) => {
+        const toNode = imp.replace(/^(\.\/|\/)+/, '').replace(/[^a-zA-Z0-9_]/g, '_');
+        if (fromNode && toNode) edges.push(fromNode + ' --> ' + toNode);
+      });
+    });
+
+    const diagWrap = document.createElement('div');
+    diagWrap.className = 'living-doc-diagram';
+    diagWrap.innerHTML = mermaidToSvg('flowchart TD\n' + edges.join('\n'));
+    docEl.appendChild(diagWrap);
+
+    const metaP = document.createElement('p');
+    metaP.textContent = 'Total Berkas VFS: ' + files.length + ' (' + files.join(', ') + ') · Simbol Terindeks: ' + (allSymbols.length ? allSymbols.join(', ') : 'global script');
+    docEl.appendChild(metaP);
+
+    const readme = vfs.read('/README.md');
+    if (readme) {
+      const pre = document.createElement('pre');
+      pre.textContent = readme;
+      docEl.appendChild(pre);
+    }
+  }
+
+  if (sheetEl) {
+    sheetEl.classList.add('living-sheet-shell');
+    sheetEl.textContent = '';
+    const head = document.createElement('h2');
+    head.textContent = 'Spreadsheet Telemetri & Struktur VFS';
+    sheetEl.appendChild(head);
+
+    const sizes = files.map((p) => String(vfs.read(p) || '').length);
+    const chartModel = bindSheetChart(sizes);
+    const maxBytes = Math.max(1, ...chartModel.bars());
+
+    const table = document.createElement('table');
+    table.className = 'living-sheet-table';
+    const thead = document.createElement('thead');
+    const htr = document.createElement('tr');
+    ['Berkas VFS', 'Baris', 'Ukuran (Byte)', 'Simbol', 'Status'].forEach((label) => {
+      const th = document.createElement('th');
+      th.textContent = label;
+      htr.appendChild(th);
+    });
+    thead.appendChild(htr);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    files.forEach((p, idx) => {
+      const content = String(vfs.read(p) || '');
+      const lineCount = content ? content.split('\n').length : 0;
+      const symCount = indexSymbols(content).length;
+      const isDirty = beforeContentFor(p) !== content;
+      const tr = document.createElement('tr');
+      [
+        p,
+        String(lineCount),
+        String(chartModel.bars()[idx] || 0),
+        String(symCount),
+        isDirty ? 'Diubah' : 'Stabil',
+      ].forEach((cellVal) => {
+        const td = document.createElement('td');
+        td.textContent = cellVal;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    sheetEl.appendChild(table);
+
+    const barsWrap = document.createElement('div');
+    barsWrap.className = 'living-sheet-bars';
+    files.forEach((p, idx) => {
+      const row = document.createElement('div');
+      row.className = 'living-bar-row';
+      const label = document.createElement('span');
+      label.textContent = p + ' (' + chartModel.bars()[idx] + ' B)';
+      const bar = document.createElement('div');
+      bar.className = 'living-bar-fill';
+      bar.style.width = Math.max(8, Math.round((chartModel.bars()[idx] / maxBytes) * 180)) + 'px';
+      row.appendChild(label);
+      row.appendChild(bar);
+      barsWrap.appendChild(row);
+    });
+    sheetEl.appendChild(barsWrap);
+  }
+}
 
 function syncSend() {
   const box = $('chat-input');
@@ -62,6 +257,7 @@ function showTab(name) {
   });
   document.querySelectorAll('.tab-panel').forEach((panel) => panel.classList.toggle('active', panel.id === 'tab-' + name));
   if (name === 'logs') paintStudioHud(document, { tempC: 36 });
+  if (name === 'dokumen' || name === 'sheet') paintLivingCanvases();
 }
 
 let userClosedCanvas = false;
@@ -145,7 +341,10 @@ function paintTelemetry(status, ms, meta) {
     kb.textContent = Math.max(1, Math.ceil(bytes / 1024)) + ' KB';
   }
   const model = $('stat-model');
-  if (model) model.textContent = (meta && meta.model) || 'lokal';
+  if (model) {
+    const modeLabel = currentModelModeLabel();
+    model.textContent = (meta && meta.model) ? ('Raget 1.0 · ' + modeLabel) : ('Raget 1.0 · ' + modeLabel);
+  }
   const runtime = $('stat-runtime');
   if (runtime && shown) runtime.textContent = shown;
   const pill = $('runtime-pill');
@@ -156,7 +355,13 @@ function paintTelemetry(status, ms, meta) {
 }
 
 function showPreview() {
-  mountPreview($('studio-preview-frame'), vfs.previewMap(), previewMemory);
+  const map = vfs.previewMap();
+  vfs.list().forEach((p) => {
+    const clean = p.replace(/^\//, '');
+    if (!map[clean]) map[clean] = vfs.read(p);
+  });
+  mountPreview($('studio-preview-frame'), map, previewMemory);
+  paintLivingCanvases();
 }
 
 function appendConsole(line) {
@@ -165,6 +370,7 @@ function appendConsole(line) {
   const row = document.createElement('div');
   row.textContent = line;
   box.appendChild(row);
+  box.scrollTop = box.scrollHeight;
 }
 
 function mirrorGit() {
@@ -222,11 +428,7 @@ function paintDiff(path) {
   if (wrap) wrap.hidden = true;
   if (pre) pre.hidden = false;
   if (!pre) return;
-  const key = path === '/css/style.css' ? 'style.css'
-    : path === '/js/script.js' ? 'script.js'
-      : path === '/index.html' ? 'index.html'
-        : path === '/main.py' ? 'main.py' : '';
-  const before = key ? (lastBefore[key] || '') : '';
+  const before = beforeContentFor(path);
   const after = vfs.read(path);
   const lines = diffLines(before, after);
   renderDiffElement(pre, lines);
@@ -254,6 +456,7 @@ function paintTree() {
     box.appendChild(btn);
   });
   paintDiff(viewPath);
+  paintLivingCanvases();
 }
 
 function downloadZip() {
@@ -319,7 +522,7 @@ function paintHistory(rows) {
       $('studio-app').classList.add('is-active');
       closeDrawer();
       paintProjectName(row.title);
-      lastBefore = vfs.flat();
+      lastBefore = captureBeforeMap();
       const frame = $('studio-preview-frame');
       if (frame) frame.srcdoc = '';
       const box = $('console-output');
@@ -498,6 +701,7 @@ async function applyCraft(text) {
   touched = true;
   const started = Date.now();
   $('studio-app').classList.add('is-active');
+  revealDesktop();
   paintTelemetry('Meracik');
   const log = $('messages');
   const user = document.createElement('div');
@@ -517,6 +721,7 @@ async function applyCraft(text) {
   const box = $('console-output');
   if (box) box.textContent = '';
   appendConsole('[Plan]');
+  appendConsole('Model → Raget 1.0 (' + currentModelModeLabel() + ')');
   try {
     const creds = await githubCreds();
     if (wantsPull(text)) {
@@ -526,7 +731,7 @@ async function applyCraft(text) {
         say(log, 'Repositori belum bisa dimuat. Tautkan token GitHub di Konektor.');
         return;
       }
-      Object.keys(pulled.files).forEach((path) => vfs.write(path, pulled.files[path]));
+      Object.keys(pulled.files).forEach((path) => vfs.write(toVfsPath(path), pulled.files[path]));
       await finish(slot, thoughts, started, 'Berkas repositori sudah masuk ke jendela pemantauan.');
       paintTree();
       revealDesktop();
@@ -534,7 +739,7 @@ async function applyCraft(text) {
       showTab('preview');
       return;
     }
-    const before = vfs.flat();
+    const before = captureBeforeMap();
     lastBefore = Object.assign({}, before);
     let plan;
     if (publishOnly(text)) {
@@ -544,17 +749,62 @@ async function applyCraft(text) {
     }
     if (plan.ok === false || plan.error) {
       if (!shouldSynthesize(text)) {
-        slot.innerHTML = '';
-        const line = document.createElement('div');
-        line.className = 'msg ai';
-        line.textContent = plan.reply || 'Instruksi tidak dapat dikerjakan.';
-        slot.appendChild(line);
-        paintTelemetry('Siap');
-        return;
+        await step('Menalar dengan Raget 1.0');
+        const neuralAnswer = await askStudioBrain(text, before, (tok) => appendConsole('Raget 1.0 → ' + tok));
+        if (neuralAnswer) {
+          const fenced = parseFenceFiles(neuralAnswer);
+          if (fenced) {
+            const merged = Object.assign({}, before, fenced);
+            plan = {
+              ok: true,
+              files: merged,
+              lang: (fenced['main.py'] && !fenced['index.html']) ? 'python' : 'web',
+              door: 'local',
+              brain: 'Raget 1.0',
+              steps: ['Baca berkas', 'Sintesis Raget 1.0', 'Uji sandbox'],
+              reply: neuralAnswer.replace(/```[\s\S]*?```/g, '').trim() || 'Kode telah dirakit oleh Raget 1.0.',
+            };
+          } else {
+            studioChatHistory.push({ role: 'user', text });
+            studioChatHistory.push({ role: 'assistant', text: neuralAnswer });
+            slot.dataset.thoughtStart = String(started);
+            slot.innerHTML = '';
+            mountThought(slot, thoughts, 'selesai');
+            const line = document.createElement('div');
+            line.className = 'msg ai';
+            line.textContent = neuralAnswer;
+            slot.appendChild(line);
+            paintTelemetry('Siap', Date.now() - started);
+            return;
+          }
+        } else {
+          const env = neuralProvider.lastEnvelope ? neuralProvider.lastEnvelope() : null;
+          const replyText = (env && env.status === MODEL_STATUS.DOWNLOADING && env.error)
+            ? env.error
+            : (plan.reply || 'Instruksi tidak dapat dikerjakan.');
+          slot.innerHTML = '';
+          const line = document.createElement('div');
+          line.className = 'msg ai';
+          line.textContent = replyText;
+          slot.appendChild(line);
+          paintTelemetry('Siap');
+          return;
+        }
+      } else {
+        plan = await synthesizeCode(text, before, {
+          neuralGenerate: (askPrompt, currentFiles) => askStudioBrain(askPrompt, currentFiles, (tok) => appendConsole('Raget 1.0 → ' + tok)),
+          onToken: (token) => appendConsole('Sintesis → ' + token),
+        });
       }
-      plan = await synthesizeCode(text, before, {
-        onToken: (token) => appendConsole('Sintesis → ' + token),
-      });
+    } else if (!plan.neuralReply) {
+      const brainNote = await askStudioBrain(text, plan.files || before, (tok) => appendConsole('Raget 1.0 → ' + tok));
+      if (brainNote) {
+        plan.neuralReply = brainNote;
+        const fenced = parseFenceFiles(brainNote);
+        if (fenced) {
+          Object.keys(fenced).forEach((k) => { plan.files[k] = fenced[k]; });
+        }
+      }
     }
     mirrorGit();
     const snap = git.snapshot();
@@ -571,30 +821,35 @@ async function applyCraft(text) {
     appendConsole('Read → ' + vfsCtx.summary);
     appendConsole('[Synthesize]');
     appendConsole('envelope ' + envelope.run_id + ' ' + envelope.state);
-    showTab('logs');
+    // Auto-Follow Canvas Mode: show files/diff while synthesizing
+    showTab('files');
     runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
-    Object.keys(plan.files).forEach((path) => {
-      const body = plan.files[path];
-      if (/\.js$/i.test(path)) {
+    Object.keys(plan.files).forEach((rawKey) => {
+      const body = plan.files[rawKey];
+      if (body == null) return;
+      const vfsTarget = toVfsPath(rawKey);
+      if (/\.js$/i.test(vfsTarget)) {
         const manual = $('code-manual');
         const highlight = $('code-highlight');
         const wrap = $('editor-manual');
         if (wrap) wrap.hidden = false;
         let state = { text: '' };
-        const step = 48;
-        for (let i = 0; i < body.length; i += step) {
-          state = streamCode(state, body.slice(i, i + step));
+        const chunkLen = 48;
+        for (let i = 0; i < body.length; i += chunkLen) {
+          state = streamCode(state, body.slice(i, i + chunkLen));
           if (manual && state.blanked) continue;
           paintStream(manual, highlight, state);
         }
-        noteDecode(Math.max(1, Math.ceil(body.length / step)), 240);
+        noteDecode(Math.max(1, Math.ceil(body.length / chunkLen)), 240);
         noteVram(body.length);
         paintStudioHud(document, { tempC: 36 });
       }
-      vfs.write(path, body);
-      git.stage(path, body);
+      vfs.write(vfsTarget, body);
+      git.stage(vfsTarget, body);
     });
+    // Auto-Follow Canvas Mode: switch to Terminal during Lint & Test
+    showTab('logs');
     let verify = 'Berkas ditulis';
     let rolled = false;
     if (plan.lang !== 'python') {
@@ -647,18 +902,29 @@ async function applyCraft(text) {
       showPreview();
       showTab('preview');
     } else {
-      verify = 'Skrip tersimpan di main.py';
       appendConsole('[Lint & Test]');
-      appendConsole('Skrip Python tersimpan di main.py.');
-      appendConsole('Lint → python tersimpan');
+      const pyRes = await pySandbox.run(vfs.read('/main.py'));
+      if (pyRes.ok) {
+        verify = 'Python lulus' + (pyRes.output ? (' · Output: ' + pyRes.output) : '');
+        appendConsole('Skrip Python dieksekusi di sandbox: ' + (pyRes.output || '0 galat'));
+        appendConsole('Lint → python lulus');
+      } else {
+        verify = 'Skrip tersimpan di main.py';
+        appendConsole('Skrip Python tersimpan di main.py.');
+        appendConsole('Lint → python tersimpan');
+      }
       appendConsole('[Commit]');
       await commitSeen(sessionTitle(text) || 'perakitan');
       runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized', 'pass', 'approved', 'committed']);
       viewPath = '/main.py';
       revealDesktop();
+      paintLivingCanvases();
       showTab('files');
     }
     let note = plan.reply;
+    if (plan.neuralReply && !note.includes(plan.neuralReply.slice(0, 32))) {
+      note += ' (Nalar Raget 1.0: ' + plan.neuralReply.slice(0, 160) + ')';
+    }
     if (wantsPublish(text)) {
       await step('Kemas');
       const pushed = creds.token ? await pushGithub(creds.token, creds.repo, vfs.bundle(), commitNote(text)) : { ok: false, reason: 'token' };
@@ -674,16 +940,17 @@ async function applyCraft(text) {
       const saved = await backupToDrive(connectorState.token('google_drive'), vfs.bundle());
       note += saved.ok ? ' Cadangan masuk ke Google Drive.' : ' Google Drive belum tertaut, berkas tetap di mesin lokal.';
     }
-    const changed = ['/css/style.css', '/js/script.js', '/index.html', '/main.py'].find((path) => {
-      const key = path === '/css/style.css' ? 'style.css' : path === '/js/script.js' ? 'script.js' : path === '/index.html' ? 'index.html' : 'main.py';
-      return diffLines(lastBefore[key] || '', vfs.read(path)).some((line) => line.kind !== 'same');
-    });
+    const allPaths = vfs.list();
+    const changed = allPaths.find((path) => (
+      diffLines(beforeContentFor(path), vfs.read(path)).some((line) => line.kind !== 'same')
+    ));
     const editPath = changed || '/index.html';
-    const editKey = editPath === '/css/style.css' ? 'style.css' : editPath === '/js/script.js' ? 'script.js' : editPath === '/index.html' ? 'index.html' : 'main.py';
-    const lines = diffLines(lastBefore[editKey] || '', vfs.read(editPath))
+    const lines = diffLines(beforeContentFor(editPath), vfs.read(editPath))
       .filter((line) => line.kind !== 'same')
       .slice(0, 8)
       .map((line, index) => ({ kind: line.kind, text: (line.kind === 'add' ? '+ ' : '- ') + line.text, num: index + 1 }));
+    studioChatHistory.push({ role: 'user', text });
+    studioChatHistory.push({ role: 'assistant', text: note });
     await finish(slot, thoughts, started, note, {
       grep: traceGrep(text),
       read: editPath,
@@ -707,20 +974,62 @@ function attachSheet() {
   return $('studio-attach-sheet') || $('studio-plus-sheet');
 }
 
+function closeModelSheet() {
+  const modelBox = $('model-sheet');
+  if (modelBox) {
+    modelBox.hidden = true;
+    clearDesktopPopover(modelBox);
+  }
+  document.body.classList.remove('model-open');
+}
+
 function closePlus() {
   const sheet = attachSheet();
   const backdrop = $('sheet-backdrop');
   if (sheet) sheet.hidden = true;
-  if (backdrop) backdrop.hidden = true;
+  closeModelSheet();
+  if (backdrop) {
+    backdrop.hidden = true;
+    backdrop.classList.remove('show');
+  }
+}
+
+function toggleModelSheet() {
+  const modelBox = $('model-sheet');
+  const backdrop = $('sheet-backdrop');
+  if (!modelBox) return;
+  const open = modelBox.hidden;
+  const attach = attachSheet();
+  if (attach) attach.hidden = true;
+  if (!open) {
+    closePlus();
+    return;
+  }
+  modelSheet.render();
+  modelBox.hidden = false;
+  document.body.classList.add('model-open');
+  if (backdrop) {
+    backdrop.hidden = false;
+    backdrop.classList.add('show');
+  }
+  if (window.innerWidth >= 1024 && $('btn-model')) {
+    positionDesktopPopover(modelBox, $('btn-model'));
+  } else {
+    clearDesktopPopover(modelBox);
+  }
 }
 
 function togglePlus() {
   const sheet = attachSheet();
   const backdrop = $('sheet-backdrop');
   if (!sheet) return;
+  closeModelSheet();
   const open = sheet.hidden;
   sheet.hidden = !open;
-  if (backdrop) backdrop.hidden = !open;
+  if (backdrop) {
+    backdrop.hidden = !open;
+    backdrop.classList.toggle('show', open);
+  }
   if (open) {
     paintConnectorStatus();
     if (window.innerWidth >= 1024) positionDesktopPopover(sheet, $('btn-plus'));
@@ -802,6 +1111,7 @@ function blankProject() {
   git.reset(SEED);
   projectId = 'studio-' + Date.now().toString(36);
   sessionStorage.setItem('rategoan_studio_project', projectId);
+  studioChatHistory = [];
   const log = $('messages');
   if (log) log.textContent = '';
   $('studio-app').classList.remove('is-active');
@@ -815,7 +1125,7 @@ function blankProject() {
   paintTelemetry('Siap', 0);
   const box = $('chat-input');
   if (box) box.value = '';
-  lastBefore = vfs.flat();
+  lastBefore = captureBeforeMap();
   paintTree();
   mirrorGit();
   showPreview();
@@ -1024,6 +1334,29 @@ function bind() {
     return;
   }
   projectKey();
+  syncStudioModelBadge();
+  if (neuralProvider.weightsInstalled()) {
+    neuralProvider.bootWeights().catch(() => {});
+  } else if (typeof neuralProvider.resumeProgress === "function") {
+    neuralProvider.resumeProgress().catch(() => {});
+  }
+  neuralAdapter.init().catch(() => {});
+  window.addEventListener("rategoan:neural-progress", (event) => {
+    const detail = (event && event.detail) || {};
+    const total = Number(detail.total) || 0;
+    const loaded = Number(detail.loaded) || 0;
+    const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
+    const modelEl = $("stat-model");
+    if (modelEl && pct < 100 && !neuralProvider.weightsInstalled()) {
+      modelEl.textContent = "Raget 1.0 · Unduh " + pct + "%";
+    } else if (pct >= 100) {
+      syncStudioModelBadge();
+    }
+  });
+  window.addEventListener('rategoan:model-switched', () => {
+    syncStudioModelBadge();
+    appendConsole('Model Raget 1.0 beralih ke mode ' + currentModelModeLabel() + '.');
+  });
   document.querySelectorAll('.insp-card').forEach((card) => {
     card.onclick = () => {
       const spec = card.getAttribute('data-spec') || '';
@@ -1036,6 +1369,10 @@ function bind() {
   });
   const plus = $('btn-plus');
   if (plus) plus.onclick = () => togglePlus();
+  const modelBtn = $('btn-model');
+  if (modelBtn) modelBtn.onclick = () => toggleModelSheet();
+  const modelClose = $('model-close');
+  if (modelClose) modelClose.onclick = () => closePlus();
   const plusClose = $('btn-close-sheet') || $('btn-plus-close');
   if (plusClose) plusClose.onclick = () => closePlus();
   const sheetBackdrop = $('sheet-backdrop');
@@ -1305,7 +1642,63 @@ function bind() {
     hunkStage.addEventListener('click', (event) => {
       const btn = event.target.closest('button');
       if (!btn) return;
-      btn.dataset.decision = btn.classList.contains('hunk-accept') ? 'accept' : 'reject';
+      const isAccept = btn.classList.contains('hunk-accept');
+      btn.dataset.decision = isAccept ? 'accept' : 'reject';
+      const beforeText = beforeContentFor(viewPath);
+      const afterText = vfs.read(viewPath);
+      if (isAccept) {
+        lastBefore[viewPath] = afterText;
+        const flatKey = viewPath === '/css/style.css' ? 'style.css'
+          : viewPath === '/js/script.js' ? 'script.js'
+            : viewPath === '/index.html' ? 'index.html'
+              : viewPath === '/main.py' ? 'main.py' : viewPath.replace(/^\//, '');
+        lastBefore[flatKey] = afterText;
+        git.stage(viewPath, afterText);
+        commitSeen('terima hunk ' + viewPath).catch(() => {});
+        paintTree();
+        showPreview();
+        appendConsole('Hunk diterima pada ' + viewPath + '.');
+      } else {
+        try {
+          const patch = linesToPatch(diffLines(beforeText, afterText));
+          const staged = stageHunks(beforeText, patch, ['reject']);
+          vfs.write(viewPath, staged.text);
+        } catch (e) {
+          vfs.write(viewPath, beforeText);
+        }
+        git.stage(viewPath, vfs.read(viewPath));
+        paintTree();
+        showPreview();
+        appendConsole('Hunk ditolak pada ' + viewPath + ' (dikembalikan ke versi sebelumnya).');
+      }
+    });
+  }
+  const termForm = $('terminal-form');
+  const termInput = $('terminal-input');
+  if (termForm && termInput) {
+    termForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const cmd = termInput.value.trim();
+      if (!cmd) return;
+      termInput.value = '';
+      appendConsole('$ ' + cmd);
+      const res = await execStudioCli(cmd, {
+        vfs,
+        git,
+        lastBefore,
+        jsSandbox,
+        pySandbox,
+      });
+      if (res.clear) {
+        const box = $('console-output');
+        if (box) box.textContent = '';
+        return;
+      }
+      if (res.output) appendConsole(res.output);
+      if (res.mutated) {
+        paintTree();
+        showPreview();
+      }
     });
   }
   paintDoor();

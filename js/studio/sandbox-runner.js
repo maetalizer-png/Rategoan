@@ -50,20 +50,67 @@ export function acceptStudioMessage(event, expectedOrigin, expectedSource, expec
   return event.origin === expectedOrigin;
 }
 
+function stripModuleExports(src) {
+  return String(src || '')
+    .replace(/^\s*export\s+default\s+/gm, '')
+    .replace(/^\s*export\s+(?=(?:async\s+)?function\b|const\b|let\b|var\b|class\b)/gm, '')
+    .replace(/^\s*export\s*\{[^}]*\}\s*;?\s*$/gm, '');
+}
+
+function resolveVfsModuleKey(map, rawSpec) {
+  const clean = String(rawSpec || '').replace(/^(\.\/|\/)+/, '');
+  if (!clean) return '';
+  const candidates = [
+    clean,
+    '/' + clean,
+    'js/' + clean,
+    '/js/' + clean,
+    clean.endsWith('.js') ? clean : (clean + '.js'),
+    clean.endsWith('.js') ? ('/' + clean) : ('/' + clean + '.js'),
+    clean.endsWith('.js') ? ('js/' + clean) : ('js/' + clean + '.js'),
+  ];
+  for (let i = 0; i < candidates.length; i += 1) {
+    const k = candidates[i];
+    if (k !== 'script.js' && k !== '/js/script.js' && Object.prototype.hasOwnProperty.call(map, k)) {
+      return k;
+    }
+  }
+  return '';
+}
+
 export function collectPreview(files) {
   const map = Object.assign({}, files || {});
-  const js = String(map['script.js'] || '');
-  const re = /(?:import\s+[^'"\n]*from\s+|import\s+)['"](?:\.\/)?([^'"]+)['"]\s*;?/g;
-  const chunks = [];
-  const next = js.replace(re, (full, spec) => {
-    const key = String(spec || '').replace(/^\.\//, '');
-    if (key !== 'script.js' && Object.prototype.hasOwnProperty.call(map, key)) {
-      chunks.push(String(map[key]));
-      return '';
+  const seen = new Set();
+  const re = /(?:import\s+[^'"\n]*from\s+|import\s+)['"]([^'"]+)['"]\s*;?/g;
+
+  function bundleJs(source, depth) {
+    if (depth > 8) return stripModuleExports(source);
+    const chunks = [];
+    const body = String(source || '').replace(re, (full, spec) => {
+      const key = resolveVfsModuleKey(map, spec);
+      if (key) {
+        if (!seen.has(key)) {
+          seen.add(key);
+          chunks.push(bundleJs(map[key], depth + 1));
+        }
+        return '';
+      }
+      return full;
+    });
+    const cleaned = stripModuleExports(body);
+    return chunks.length ? (chunks.join('\n') + '\n' + cleaned) : cleaned;
+  }
+
+  map['script.js'] = bundleJs(String(map['script.js'] || ''), 0);
+  const extraCss = [];
+  Object.keys(map).forEach((k) => {
+    if (k !== 'style.css' && k !== '/css/style.css' && k !== 'css/style.css' && /\.css$/i.test(k)) {
+      extraCss.push(String(map[k] || ''));
     }
-    return full;
   });
-  if (chunks.length) map['script.js'] = chunks.join('\n') + '\n' + next;
+  if (extraCss.length) {
+    map['style.css'] = String(map['style.css'] || '') + '\n' + extraCss.join('\n');
+  }
   return map;
 }
 

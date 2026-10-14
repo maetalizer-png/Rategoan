@@ -146,3 +146,61 @@ export function resolveAutonomousConnector(text) {
   }
   return null;
 }
+
+export function resolveLocalProductivityTool(text) {
+  const q = String(text || '').trim();
+  if (!q) return null;
+  const currMatch = q.match(/(?:konversi|ubah|kurs)?\s*(\d+(?:\.\d+)?)\s*(USD|IDR|EUR|JPY|SGD)\s*(?:ke|menjadi|to|in)\s*(USD|IDR|EUR|JPY|SGD)/i);
+  if (currMatch) {
+    return {
+      name: 'math_currency_converter',
+      parameters: {
+        amount: Number(currMatch[1]),
+        from: currMatch[2].toUpperCase(),
+        to: currMatch[3].toUpperCase(),
+      },
+    };
+  }
+  const unitMatch = q.match(/(?:konversi|ubah)\s*(-?\d+(?:\.\d+)?)\s*(km|m|kg|g|c|f)\s*(?:ke|menjadi|to)\s*(km|m|kg|g|c|f)\b/i);
+  if (unitMatch) {
+    return {
+      name: 'math_unit_conversion',
+      parameters: {
+        value: Number(unitMatch[1]),
+        from: unitMatch[2].toLowerCase(),
+        to: unitMatch[3].toLowerCase(),
+      },
+    };
+  }
+  const dateMatch = q.match(/hari\s+kerja\s+(?:dari\s+)?(\d{4}-\d{2}-\d{2})\s+(?:sampai|hingga|ke)\s+(\d{4}-\d{2}-\d{2})/i);
+  if (dateMatch) {
+    return {
+      name: 'math_date_calculator',
+      parameters: { start: dateMatch[1], end: dateMatch[2] },
+    };
+  }
+  const statMatch = q.match(/\b(?:statistik|rata-rata|median|simpangan)\b[^0-9-]*([0-9.,\s-]+)/i);
+  if (statMatch) {
+    const nums = statMatch[1].split(/[\s,]+/).map(Number).filter((n) => Number.isFinite(n));
+    if (nums.length >= 2) {
+      return {
+        name: 'math_statistics_summary',
+        parameters: { values: nums },
+      };
+    }
+  }
+  const mathMatch = q.match(/^(?:hitung|berapa(?:\s+hasil)?)\s+([0-9+\-*/().^\s]+)\??$/i);
+  if (mathMatch && /[+\-*/^]/.test(mathMatch[1])) {
+    return {
+      name: 'math_calculate_expression',
+      parameters: { expression: mathMatch[1].trim() },
+    };
+  }
+  if (/\b(briefing harian|ringkasan agenda hari ini|agenda hari ini)\b/i.test(q)) {
+    return {
+      name: 'agenda_daily_briefing',
+      parameters: {},
+    };
+  }
+  return null;
+}
