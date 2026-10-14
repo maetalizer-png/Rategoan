@@ -386,7 +386,7 @@ async function doInitTier(tier) {
       revision: WEIGHT_SPEC.revision,
       cacheName: WEIGHT_SPEC.cache,
       control: control,
-      concurrency: 4,
+      concurrency: 6,
       chunkHashes: Array.isArray(WEIGHT_SPEC.chunkHashes) ? WEIGHT_SPEC.chunkHashes : [],
       mesh: typeof window !== 'undefined',
       roomNeed: tier === 'tier_1_5b' ? WEIGHT_ROOM : 0,
@@ -426,18 +426,15 @@ async function doInitTier(tier) {
       failEarly();
       return false;
     }
-    if (!earlyFlag) {
-      if (loadedTier === tier) {
-        loadedTier = null;
-        weightReader = null;
-        earlyFlag = false;
-      }
-      pipelinePhase = '';
-      remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError, reply: null });
-      failEarly();
-      return false;
+    if (loadedTier === tier) {
+      loadedTier = null;
+      weightReader = null;
     }
-    return true;
+    earlyFlag = false;
+    pipelinePhase = '';
+    remember({ ok: false, status: MODEL_STATUS.FAILED, error: lastWeightError, reply: null });
+    failEarly();
+    return false;
   }
 }
 
@@ -459,14 +456,13 @@ function untilEarly() {
 }
 
 function ensureTier(tier) {
-  if (earlyFlag && weightReader && loadedTier === tier && !control.cancelled) return Promise.resolve(true);
+  if (installedFlag() && weightReader && loadedTier === tier && !control.cancelled) return Promise.resolve(true);
   if (!initPromises[tier]) {
     initPromises[tier] = doInitTier(tier).finally(() => {
       initPromises[tier] = null;
     });
   }
-  const pending = initPromises[tier];
-  return Promise.race([untilEarly(), pending]);
+  return initPromises[tier];
 }
 
 function ready() {
@@ -517,6 +513,11 @@ function runOnWorker(prompt, genOpts, signal) {
     const onMsg = (ev) => {
       const data = ev.data || {};
       if (data.id !== id) return;
+      if (data.type === 'step') {
+        if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('rategoan:neural-step', { detail: data }));
+        }
+      }
       if (data.type === 'token') {
         if (data.piece && genOpts.onToken) genOpts.onToken(data.piece);
       }

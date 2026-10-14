@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { downloadConcurrentChunks, MODEL_CHUNK } from '../../raget-neural/runtime/model-downloader.js';
-import { gemvFusedInt4 } from '../../raget-neural/runtime/int4-session.js';
+import { gemvFusedInt4, buildAnchorSet, shouldPinTensor, openInt4Stream } from '../../raget-neural/runtime/int4-session.js';
 import { buildDynamicThoughts, laneOf } from '../../../js/ui/thought-card.js';
 import { craftInstruction, shouldSynthesize, isWorkspaceContinuation } from '../../../js/studio/studio-agent.js';
 import { synthesizeCode, parseFenceFiles, parseSurgicalBlocks } from '../../../js/studio/neural-synthesizer.js';
@@ -252,9 +252,18 @@ test('DOD-41.12 Penyempurnaan 6 Sektor Studio Kode: Multi-Berkas, Surgical Patch
 
 test('DOD-41.13 Teori Working-Set OPFS int4-session dan Orkestrasi Produktivitas Harian Lokal', async () => {
   const sessionSrc = read('raget/raget-neural/runtime/int4-session.js');
-  assert.match(sessionSrc, /const passes = \(fastStreamMode && allPasses\.length > 1\)/);
-  assert.match(sessionSrc, /const stride = \(fastStreamMode && d >= 1536\) \? 16 : 1/);
-  assert.match(sessionSrc, /if \(needLogits === false && passes\.length === 1\)/);
+  assert.match(sessionSrc, /buildAnchorSet\(layers\)/);
+  assert.match(sessionSrc, /const passes = \(!fastStreamMode \|\| \(isPrefill && needLogits !== false\)\)/);
+  assert.match(sessionSrc, /const prefillStride = \(fastStreamMode && d >= 1536\)/);
+  assert.match(sessionSrc, /const decodeStride = \(fastStreamMode && d >= 1536\) \? 8 : 1/);
+  const anchors28 = buildAnchorSet(28);
+  assert.deepEqual(Array.from(anchors28), [0, 9, 18, 27]);
+  assert.equal(shouldPinTensor('layers.0.attention.Wq', anchors28), true);
+  assert.equal(shouldPinTensor('layers.9.ffn.Wdown', anchors28), true);
+  assert.equal(shouldPinTensor('layers.18.attention.Wo', anchors28), true);
+  assert.equal(shouldPinTensor('layers.27.ffn.Wup', anchors28), true);
+  assert.equal(shouldPinTensor('layers.5.attention.Wq', anchors28), false);
+  assert.equal(shouldPinTensor('lm_head.weight', anchors28), true);
 
   const calcTool = resolveLocalProductivityTool('hitung (1500000 * 11 / 100) + 1500000');
   assert.ok(calcTool && calcTool.name === 'math_calculate_expression');
@@ -328,4 +337,140 @@ test('DOD-41.15 Lima Penguatan Keamanan Siber Tingkat Lanjut (Timing-Safe HMAC, 
 
   // Calendar ID traversal & control char sanitization
   assert.equal(cleanCalendarId('../../primary"\r\n'), '//primary');
+});
+
+test('DOD-41.16 Prefill Penuh 28 Lapis + Decode 4 Lapis Jangkar RAM & Progres Stepper Hidup', async () => {
+  const d = 32;
+  const ff = 64;
+  const nLayers = 28;
+  const nHeads = 4;
+  const nKv = 2;
+  const dk = 8;
+  const vocab = 128;
+  const header = {
+    __metadata__: {
+      format: 'rategoan-int4-block32-affine',
+      trained: 'true',
+      tier: 'tier_1_5b',
+      d_model: String(d),
+      n_layers: String(nLayers),
+      n_heads: String(nHeads),
+      n_kv_heads: String(nKv),
+      head_dim: String(dk),
+      intermediate_size: String(ff),
+      vocab: String(vocab),
+    },
+  };
+  let offset = 0;
+  function addInt4(name, rows, cols) {
+    const packedLen = (rows * cols) / 2;
+    const blocks = (rows * cols) / 32;
+    header[name] = { dtype: 'U8', shape: [rows, cols / 2], data_offsets: [offset, offset + packedLen] };
+    offset += packedLen;
+    header[name + '.scale'] = { dtype: 'F32', shape: [blocks], data_offsets: [offset, offset + blocks * 4] };
+    offset += blocks * 4;
+    header[name + '.zero'] = { dtype: 'F32', shape: [blocks], data_offsets: [offset, offset + blocks * 4] };
+    offset += blocks * 4;
+  }
+  function addF32(name, len) {
+    header[name] = { dtype: 'F32', shape: [len], data_offsets: [offset, offset + len * 4] };
+    offset += len * 4;
+  }
+  addInt4('embedding.weight', vocab, d);
+  for (let l = 0; l < nLayers; l += 1) {
+    const pre = 'layers.' + l + '.';
+    addF32(pre + 'ln1.gamma', d);
+    addInt4(pre + 'attention.Wq', nHeads * dk, d);
+    addInt4(pre + 'attention.Wk', nKv * dk, d);
+    addInt4(pre + 'attention.Wv', nKv * dk, d);
+    addInt4(pre + 'attention.Wo', d, nHeads * dk);
+    addF32(pre + 'ln2.gamma', d);
+    addInt4(pre + 'ffn.Wgate', ff, d);
+    addInt4(pre + 'ffn.Wup', ff, d);
+    addInt4(pre + 'ffn.Wdown', d, ff);
+  }
+  addF32('final_norm.gamma', d);
+  addInt4('lm_head.weight', vocab, d);
+
+  const headBytes = new TextEncoder().encode(JSON.stringify(header));
+  const totalBytes = 8 + headBytes.length + offset;
+  const buf = new Uint8Array(totalBytes);
+  new DataView(buf.buffer).setBigUint64(0, BigInt(headBytes.length), true);
+  buf.set(headBytes, 8);
+  const dataStart = 8 + headBytes.length;
+  Object.keys(header).forEach((k) => {
+    if (k === '__metadata__') return;
+    const desc = header[k];
+    const start = dataStart + desc.data_offsets[0];
+    const len = desc.data_offsets[1] - desc.data_offsets[0];
+    if (desc.dtype === 'U8') {
+      buf.fill(0x99, start, start + len);
+    } else if (k.endsWith('.scale') || k.endsWith('.gamma')) {
+      const f = new Float32Array(len / 4).fill(0.05);
+      if (k === 'lm_head.weight.scale') {
+        f[0] = -1.0; f[1] = -1.0; f[2] = -1.0; f[3] = -1.0; f[4] = -1.0;
+        f[10] = 2.5;
+      }
+      buf.set(new Uint8Array(f.buffer), start);
+    }
+  });
+
+  const stream = await openInt4Stream({
+    size: buf.length,
+    async read(start, len) {
+      return buf.subarray(start, start + len);
+    },
+    async readScratch(start, len) {
+      return buf.subarray(start, start + len);
+    },
+  });
+
+  const prefillTotals = [];
+  const decodeTotals = [];
+  const out = await stream.generate('a', {
+    maxNewTokens: 4,
+    temperature: 0,
+    onStep(done, total, phase) {
+      if (phase === 'prefill' && done === total) prefillTotals.push(total);
+      if (phase === 'decode' && done === total) decodeTotals.push(total);
+    },
+  });
+  assert.ok(prefillTotals.includes(28), 'prefill token terakhir wajib mengeksekusi seluruh 28 lapis penuh');
+  assert.ok(decodeTotals.every((t) => t === 4), 'decode token berikutnya wajib memakai 4 lapis jangkar RAM');
+  assert.equal(out.tokenIds.length, 4);
+});
+
+test('DOD-41.17 Tata Letak Kartu Unduhan Desktop Simetris 760px, Progres Streaming Nyata, & Antrean OPFS Bebas Race Condition', () => {
+  const deskCss = read('css/layout/desktop.css');
+  const compJs = read('js/chat/composer.js');
+  const provJs = read('raget/raget-neural/neural-provider.js');
+  const opfsWorker = read('raget/raget-neural/runtime/opfs-writer-worker.js');
+  const mainJs = read('js/main.js');
+
+  assert.match(deskCss, /#view-chat \.top-download-bar \.weight-card:has\(#weight-status\[data-busy="1"\]\)[\s\S]*?width:\s*100%/);
+  assert.match(deskCss, /#view-chat:has\(#messages:empty\):has\(#top-download-bar:not\(\[hidden\]\)\)/);
+  assert.match(deskCss, /#view-chat \.top-download-bar \.weight-card #btn-weight/);
+  assert.match(compJs, /Number\(detail && detail\.visibleLoaded\)/);
+  assert.match(compJs, /pctText = \(loaded > 0 && pct === 0\)/);
+  assert.match(provJs, /concurrency:\s*6/);
+  assert.equal(provJs.includes('Promise.race([untilEarly(), pending])'), false);
+  assert.match(opfsWorker, /let handlePromise = null/);
+  assert.match(opfsWorker, /let opQueue = Promise\.resolve\(\)/);
+  assert.match(mainJs, /if \(pct <= 0 \|\| pct === lastToastPct\) return/);
+});
+
+test('DOD-41.18 Penyempurnaan 5 Panel Monitoring Studio Kode (Pratinjau, Dokumen SVG Flowchart, Spreadsheet KPI, Berkas IDE, Terminal Gelap)', () => {
+  const studioHtml = read('studio.html');
+  const studioCss = read('css/ui/studio.css');
+  const studioApp = read('js/studio/studio-app.js');
+  const canvasTools = read('js/studio/canvas-tools.js');
+
+  assert.match(studioHtml, /class="preview-viewport-group"/);
+  assert.match(studioHtml, /class="file-mode-group"/);
+  assert.match(studioHtml, /class="code-stage-box"/);
+  assert.match(studioCss, /#tab-logs \.tool-trace-card/);
+  assert.match(studioCss, /\.sheet-kpi-grid/);
+  assert.match(studioCss, /\.doc-module-grid/);
+  assert.match(studioApp, /function roleOfFile\(path\)/);
+  assert.match(canvasTools, /class="arch-node"/);
 });

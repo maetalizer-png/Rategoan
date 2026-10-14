@@ -199,3 +199,12 @@
 }
 
 .daily-brief p { margin: 6px 0 0; }
+
+.stepper-node.is-pending {
+  opacity: 0.48;
+}
+
+.stepper-node.is-live .stepper-copy {
+  color: #2563eb;
+  opacity: 1;
+}

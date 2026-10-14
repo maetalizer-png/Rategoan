@@ -144,6 +144,10 @@ export function mountThought(container, thoughts, status) {
     clearInterval(prevTimer);
     delete container.dataset.thoughtTimerId;
   }
+  if (container._onNeuralStep && typeof window !== 'undefined') {
+    window.removeEventListener('rategoan:neural-step', container._onNeuralStep);
+    delete container._onNeuralStep;
+  }
 
   const prevBox = container.querySelector(':scope > .thought-accordion');
   if (prevBox) prevBox.remove();
@@ -183,11 +187,16 @@ export function mountThought(container, thoughts, status) {
 
   const list = document.createElement('ol');
   list.className = 'agentic-stepper';
+  const nodes = [];
+  const initialActive = running ? Math.min(thoughts.length - 1, Number(container.dataset.thoughtActiveIdx) || 0) : thoughts.length;
+
   thoughts.forEach((step, index) => {
-    const live = running && index === thoughts.length - 1;
     const lane = laneOf(step);
+    const stateClass = !running
+      ? ' is-done'
+      : (index < initialActive ? ' is-done' : (index === initialActive ? ' is-live' : ' is-pending'));
     const li = document.createElement('li');
-    li.className = 'stepper-node lane-' + lane + (live ? ' is-live' : ' is-done');
+    li.className = 'stepper-node lane-' + lane + stateClass;
 
     const railCol = document.createElement('div');
     railCol.className = 'stepper-rail-col';
@@ -219,16 +228,47 @@ export function mountThought(container, thoughts, status) {
     li.appendChild(railCol);
     li.appendChild(bodyCol);
     list.appendChild(li);
+    nodes.push({ li, lane });
   });
+
+  const applyActiveStep = (activeIdx) => {
+    const clamped = Math.max(0, Math.min(thoughts.length - 1, activeIdx | 0));
+    container.dataset.thoughtActiveIdx = String(clamped);
+    for (let i = 0; i < nodes.length; i += 1) {
+      const state = i < clamped ? ' is-done' : (i === clamped ? ' is-live' : ' is-pending');
+      nodes[i].li.className = 'stepper-node lane-' + nodes[i].lane + state;
+    }
+  };
+
+  if (running && typeof window !== 'undefined') {
+    const onNeuralStep = (ev) => {
+      const d = (ev && ev.detail) || {};
+      const done = Number(d.doneLayers) || 0;
+      const total = Math.max(1, Number(d.totalLayers) || 28);
+      const ratio = Math.max(0, Math.min(0.999, done / total));
+      const layerIdx = Math.floor(ratio * thoughts.length);
+      const curIdx = Number(container.dataset.thoughtActiveIdx) || 0;
+      if (layerIdx > curIdx) applyActiveStep(layerIdx);
+    };
+    container._onNeuralStep = onNeuralStep;
+    window.addEventListener('rategoan:neural-step', onNeuralStep);
+  }
 
   if (running && typeof setInterval === 'function') {
     const tid = setInterval(() => {
       if (!box.isConnected) {
         clearInterval(tid);
+        if (container._onNeuralStep && typeof window !== 'undefined') {
+          window.removeEventListener('rategoan:neural-step', container._onNeuralStep);
+          delete container._onNeuralStep;
+        }
         return;
       }
       const nowSec = Math.max(0.1, (Date.now() - started) / 1000);
       timerNode.textContent = nowSec < 10 ? nowSec.toFixed(1) + ' dtk' : Math.round(nowSec) + ' dtk';
+      const timeIdx = Math.min(thoughts.length - 1, Math.floor(nowSec / 1.4));
+      const curIdx = Number(container.dataset.thoughtActiveIdx) || 0;
+      if (timeIdx > curIdx) applyActiveStep(timeIdx);
     }, 100);
     container.dataset.thoughtTimerId = String(tid);
   }

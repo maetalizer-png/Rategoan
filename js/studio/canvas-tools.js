@@ -9,7 +9,7 @@ const WASM_ADD = new Uint8Array([
 ]);
 
 function esc(text) {
-  return String(text || '').replace(/[&<>"]/g, (ch) => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[ch]));
+  return String(text || '').replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
 }
 
 export function mermaidToSvg(src) {
@@ -23,8 +23,40 @@ export function mermaidToSvg(src) {
     if (!nodes.includes(left)) nodes.push(left);
     if (!nodes.includes(right)) nodes.push(right);
   });
-  const body = nodes.map((name, index) => '<text x="16" y="' + (28 + index * 28) + '">' + esc(name) + '</text>').join('');
-  return '<svg xmlns="http://www.w3.org/2000/svg" data-edges="' + edges.length + '">' + body + '</svg>';
+  if (!nodes.length) nodes.push('index_html');
+  const boxW = 148;
+  const boxH = 34;
+  const gapX = 36;
+  const padX = 16;
+  const padY = 18;
+  const cols = Math.min(3, Math.max(1, nodes.length));
+  const rows = Math.ceil(nodes.length / cols);
+  const svgW = Math.max(360, padX * 2 + cols * boxW + (cols - 1) * gapX);
+  const svgH = Math.max(76, padY * 2 + rows * boxH + (rows - 1) * 28);
+  const coords = new Map();
+  const nodeRects = nodes.map((name, index) => {
+    const c = index % cols;
+    const r = Math.floor(index / cols);
+    const x = padX + c * (boxW + gapX);
+    const y = padY + r * (boxH + 28);
+    coords.set(name, { cx: x + boxW / 2, cy: y + boxH / 2, right: x + boxW, left: x, bottom: y + boxH, top: y });
+    const cleanLabel = esc(name.replace(/_/g, '.'));
+    return '<g class="arch-node">'
+      + '<rect x="' + x + '" y="' + y + '" width="' + boxW + '" height="' + boxH + '" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4"/>'
+      + '<text x="' + (x + boxW / 2) + '" y="' + (y + 21) + '" text-anchor="middle" fill="#1e3a8a" font-size="12" font-weight="600" font-family="ui-monospace, monospace">' + cleanLabel + '</text>'
+      + '</g>';
+  }).join('');
+  const edgeLines = edges.map(([from, to]) => {
+    const a = coords.get(from);
+    const b = coords.get(to);
+    if (!a || !b) return '';
+    const x1 = a.cx < b.cx ? a.right : (a.cx > b.cx ? a.left : a.cx);
+    const y1 = a.cy === b.cy ? a.cy : a.bottom;
+    const x2 = a.cx < b.cx ? b.left : (a.cx > b.cx ? b.right : b.cx);
+    const y2 = a.cy === b.cy ? b.cy : b.top;
+    return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3 2"/>';
+  }).join('');
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + svgW + ' ' + svgH + '" width="100%" height="' + svgH + '" data-edges="' + edges.length + '">' + edgeLines + nodeRects + '</svg>';
 }
 
 export function bindSheetChart(cells) {

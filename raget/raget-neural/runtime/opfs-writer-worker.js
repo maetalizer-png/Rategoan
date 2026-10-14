@@ -1,19 +1,28 @@
 let sync = null;
+let handlePromise = null;
+let opQueue = Promise.resolve();
 
 async function handle() {
   if (sync) return sync;
-  const root = await navigator.storage.getDirectory();
-  const file = await root.getFileHandle('raget-neural-1.5b.safetensors', { create: true });
-  sync = await file.createSyncAccessHandle();
-  return sync;
+  if (handlePromise) return handlePromise;
+  handlePromise = (async () => {
+    const root = await navigator.storage.getDirectory();
+    const file = await root.getFileHandle('raget-neural-1.5b.safetensors', { create: true });
+    sync = await file.createSyncAccessHandle();
+    return sync;
+  })();
+  try {
+    return await handlePromise;
+  } finally {
+    handlePromise = null;
+  }
 }
 
 function hashWindow(bytes) {
   return bytes.byteLength > 65536 ? bytes.subarray(0, 65536) : bytes;
 }
 
-self.onmessage = async (event) => {
-  const msg = event.data || {};
+async function processMessage(msg) {
   if (msg.op === 'close') {
     try {
       if (sync) {
@@ -23,6 +32,7 @@ self.onmessage = async (event) => {
       }
       self.postMessage({ id: msg.id, op: 'closed', ok: true });
     } catch (e) {
+      sync = null;
       self.postMessage({ id: msg.id, op: 'closed', ok: false });
     }
     return;
@@ -68,4 +78,9 @@ self.onmessage = async (event) => {
   } catch (e) {
     self.postMessage({ id: msg.id, ok: false });
   }
+}
+
+self.onmessage = (event) => {
+  const msg = (event && event.data) || {};
+  opQueue = opQueue.then(() => processMessage(msg)).catch(() => {});
 };

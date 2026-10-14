@@ -184,7 +184,7 @@ if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
         const worker = reg.installing;
         if (!worker) return;
         worker.addEventListener('statechange', () => {
-          if (worker.state === 'activated' && navigator.serviceWorker.controller) {
+          if (worker.state === 'activated' && hadController) {
             toast.show('Versi baru tersedia. Ketuk untuk memuat ulang.', { onClick: () => location.reload() });
           }
         });
@@ -201,12 +201,15 @@ window.addEventListener('unhandledrejection', (event) => {
     toast.show('Penyimpanan perangkat gagal. Yang sudah tampil di layar tidak dihapus.');
   }
 });
+let lastToastPct = 0;
 window.addEventListener('rategoan:neural-progress', (event) => {
   const detail = (event && event.detail) || {};
   const total = Number(detail.total) || 0;
   const loaded = Number(detail.loaded) || 0;
-  if (!total) return;
+  if (!total || loaded <= 0) return;
   const pct = Math.min(100, Math.round((loaded / total) * 100));
+  if (pct <= 0 || pct === lastToastPct) return;
   if (pct !== 100 && pct % 25 !== 0) return;
-  toast.show('Mengunduh Raget ' + (detail.tier || '') + ' ' + pct + '%');
+  lastToastPct = pct;
+  toast.show('Mengunduh Raget 1.0 · ' + pct + '%');
 });

@@ -99,6 +99,11 @@ try {
     const csBoxOpen = getComputedStyle(box);
     const boxOpenBackground = csBoxOpen.backgroundColor;
     const boxOpenBoxShadow = csBoxOpen.boxShadow;
+    const initialLiveIdx = Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
+    window.dispatchEvent(new CustomEvent('rategoan:neural-step', { detail: { doneLayers: 12, totalLayers: 28, phase: 'prefill' } }));
+    const midLiveIdx = Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
+    window.dispatchEvent(new CustomEvent('rategoan:neural-step', { detail: { doneLayers: 26, totalLayers: 28, phase: 'prefill' } }));
+    const finalLiveIdx = Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
     const nodeTexts = Array.from(box.querySelectorAll('.stepper-copy')).map((el) => el.textContent.trim());
     const hasJargon = nodeTexts.some((t) => /BPE|INT4|vektor 384-dim/i.test(t));
     const doneBox = mountThought(host, steps, 'selesai');
@@ -114,6 +119,9 @@ try {
       boxOpenBackground,
       boxOpenBoxShadow,
       summaryBackground,
+      initialLiveIdx,
+      midLiveIdx,
+      finalLiveIdx,
       nodeTexts,
       hasJargon,
       doneLabel,
@@ -184,6 +192,73 @@ try {
       autoTriggered: resumedBytes > 0 && progressEvents >= 1,
     };
   });
+
+
+  // 2D. Desktop (1366x768) & Mobile (390x844) Download Bar Layout & Live Streaming Progress Audit (DOD-41.17)
+  const deskChat = await browser.newPage({ viewport: { width: 1366, height: 768 } });
+  deskChat.on("pageerror", (err) => consoleErrors.push(String(err)));
+  await deskChat.addInitScript(() => {
+    try {
+      localStorage.setItem("rategoan_auth", JSON.stringify({ method: "gmail", id: "maetalizer@gmail.com", time: Date.now() }));
+      localStorage.removeItem("rategoan_weights_1_5b_installed");
+    } catch (e) { /* ignore */ }
+  });
+  await deskChat.route("**/*", (route) => {
+    if (route.request().url().includes("huggingface.co")) return route.abort();
+    return route.continue();
+  });
+  await deskChat.goto(baseUrl + "/index.html#/chat", { waitUntil: "networkidle" });
+  await deskChat.waitForSelector("#weight-card", { timeout: 15000 });
+
+  const desktopDownloadLayoutAudit = await deskChat.evaluate(() => {
+    const bar = document.getElementById("top-download-bar");
+    const card = document.getElementById("weight-card");
+    const hero = document.querySelector("#empty-state .empty-brand");
+    const comp = document.getElementById("composer");
+    bar.hidden = false;
+    card.hidden = false;
+    const barRect = bar.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const heroRect = hero.getBoundingClientRect();
+    const compRect = comp.getBoundingClientRect();
+    const idleCardWidthMatchesBar = Math.abs(cardRect.width - barRect.width) <= 2;
+    const barAlignedWithComposer = Math.abs((barRect.left + barRect.width / 2) - (compRect.left + compRect.width / 2)) <= 2;
+    const gapToHeroPx = Math.round(heroRect.top - barRect.bottom);
+
+    // Simulate active streaming at 3.5 MB/s where committedVerifiedBytes is still 0 but visibleLoaded is 3.5 MB
+    window.dispatchEvent(new CustomEvent("rategoan:neural-progress", {
+      detail: {
+        loaded: Math.round(3.5 * 1024 * 1024),
+        visibleLoaded: Math.round(3.5 * 1024 * 1024),
+        committedVerifiedBytes: 0,
+        total: 1045697920,
+        speed: 3.5 * 1024 * 1024,
+        eta: 295,
+      },
+    }));
+
+    const busyCardRect = card.getBoundingClientRect();
+    const trackRect = document.getElementById("weight-bar").getBoundingClientRect();
+    const fillStyleWidth = document.getElementById("weight-fill").style.width;
+    const busyStatusText = document.getElementById("weight-status").textContent.trim();
+
+    return {
+      barWidth: Math.round(barRect.width),
+      idleCardWidth: Math.round(cardRect.width),
+      busyCardWidth: Math.round(busyCardRect.width),
+      idleCardWidthMatchesBar,
+      busyCardWidthMatchesBar: Math.abs(busyCardRect.width - barRect.width) <= 2,
+      barAlignedWithComposer,
+      gapToHeroPx,
+      trackWidthPx: Math.round(trackRect.width),
+      fillStyleWidth,
+      busyStatusText,
+      showsNonZeroPercentOnStream: !busyStatusText.startsWith("0% ") && parseFloat(fillStyleWidth) >= 1.5,
+    };
+  });
+  await deskChat.screenshot({ path: "/tmp/desktop-download-busy.png" });
+  await deskChat.click("#btn-weight-cancel");
+  await deskChat.screenshot({ path: "/tmp/desktop-download-cancelled.png" });
 
   // 3. Desktop 1366x768 Studio Kode Full Live Audit:
   //    - #btn-model next to #btn-plus & #model-sheet switching (Cepat / Mendalam)
@@ -260,16 +335,22 @@ try {
     return msgs.length >= 3 && msgs[2].length > 0;
   }, { timeout: 15000 });
 
-  // Test Hunk Accept, Dokumen tab, Spreadsheet tab, and Interactive CLI Terminal
+  // Test Hunk Accept, Dokumen tab, Spreadsheet tab, and Interactive CLI Terminal + capture screenshots
+  await studioPage.click('.tab-btn[data-tab="preview"]');
+  await studioPage.screenshot({ path: '/tmp/studio-tab-preview.png' });
   await studioPage.click('.tab-btn[data-tab="files"]');
   await studioPage.click('#hunk-stage .hunk-accept');
+  await studioPage.screenshot({ path: '/tmp/studio-tab-files.png' });
   await studioPage.click('.tab-btn[data-tab="dokumen"]');
+  await studioPage.screenshot({ path: '/tmp/studio-tab-dokumen.png' });
   await studioPage.click('.tab-btn[data-tab="sheet"]');
+  await studioPage.screenshot({ path: '/tmp/studio-tab-sheet.png' });
   await studioPage.click('.tab-btn[data-tab="logs"]');
   await studioPage.fill('#terminal-input', 'ls');
   await studioPage.click('#btn-terminal-run');
   await studioPage.fill('#terminal-input', 'python /main.py');
   await studioPage.click('#btn-terminal-run');
+  await studioPage.screenshot({ path: '/tmp/studio-tab-logs.png' });
 
   const studioExecutionAudit = await studioPage.evaluate(() => {
     const aiMsgs = Array.from(document.querySelectorAll('#messages .msg.ai')).map((el) => el.textContent.trim());
@@ -307,6 +388,9 @@ try {
       && grokThoughtAudit.boxBackground === 'rgba(0, 0, 0, 0)'
       && grokThoughtAudit.boxOpenBackground === 'rgba(0, 0, 0, 0)'
       && grokThoughtAudit.boxOpenBoxShadow === 'none'
+      && grokThoughtAudit.initialLiveIdx === 0
+      && grokThoughtAudit.midLiveIdx === 1
+      && grokThoughtAudit.finalLiveIdx === 2
       && grokThoughtAudit.hasJargon === false
       && grokThoughtAudit.doneLabel.startsWith('Berpikir selama ')
       && studioLayoutAudit.hasBtnModel === true
@@ -335,11 +419,18 @@ try {
       && newChatIsolationAudit.afterSidebarNewChat.isGenerating === false
       && newChatIsolationAudit.afterSidebarNewChat.hasDraft === false
       && newChatIsolationAudit.afterSidebarNewChat.inputVal === ""
-      && crossPageDownloadAudit.autoTriggered === true,
+      && crossPageDownloadAudit.autoTriggered === true
+      && desktopDownloadLayoutAudit.idleCardWidthMatchesBar === true
+      && desktopDownloadLayoutAudit.busyCardWidthMatchesBar === true
+      && desktopDownloadLayoutAudit.barAlignedWithComposer === true
+      && desktopDownloadLayoutAudit.gapToHeroPx >= 24
+      && desktopDownloadLayoutAudit.trackWidthPx >= 200
+      && desktopDownloadLayoutAudit.showsNonZeroPercentOnStream === true,
     desktopLoginAudit,
     grokThoughtAudit,
     newChatIsolationAudit,
     crossPageDownloadAudit,
+    desktopDownloadLayoutAudit,
     studioLayoutAudit,
     studioModelSheetAudit,
     studioExecutionAudit,

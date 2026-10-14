@@ -165,8 +165,13 @@ export function mountStudioFrontier(ctx) {
   }
 
   function setMode(mode) {
-    document.body.dataset.editorMode = mode === 'edit' ? 'edit' : 'diff';
-    if (mode === 'edit') releaseInspect();
+    const isEdit = mode === 'edit';
+    document.body.dataset.editorMode = isEdit ? 'edit' : 'diff';
+    const diffBtn = q('btn-mode-diff');
+    const editBtn = q('btn-mode-edit');
+    if (diffBtn) diffBtn.classList.toggle('is-active', !isEdit);
+    if (editBtn) editBtn.classList.toggle('is-active', isEdit);
+    if (isEdit) releaseInspect();
     if (typeof root.paintTree === 'function') root.paintTree();
   }
 

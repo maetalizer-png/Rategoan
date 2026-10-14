@@ -404,16 +404,23 @@ function bindWeightCard() {
     card.hidden = !on;
   };
   const paint = (detail) => {
-    const loaded = detail && detail.committedVerifiedBytes != null ? detail.committedVerifiedBytes : ((detail && detail.loaded) || 0);
-    const total = (detail && detail.total) || 0;
-    const pct = total > 0 ? Math.max(0, Math.min(100, Math.round((loaded / total) * 100))) : 0;
+    const loaded = Math.max(
+      Number(detail && detail.loaded) || 0,
+      Number(detail && detail.visibleLoaded) || 0,
+      Number(detail && detail.committedVerifiedBytes) || 0
+    );
+    const total = Number(detail && detail.total) || 0;
+    const rawPct = total > 0 ? Math.max(0, Math.min(100, (loaded / total) * 100)) : 0;
+    const pct = Math.round(rawPct);
+    const pctText = (loaded > 0 && pct === 0) ? Math.max(0.1, rawPct).toFixed(1) + '%' : (pct + '%');
+    const fillPct = total > 0 ? Math.max(loaded > 0 ? 1.5 : 0, rawPct) : 0;
     const installed = providerRef && typeof providerRef.weightsInstalled === 'function' && providerRef.weightsInstalled();
     if (installed) {
       reveal(false);
       return;
     }
     reveal(true);
-    if (fill) fill.style.width = pct + '%';
+    if (fill) fill.style.width = fillPct.toFixed(1) + '%';
     const bar = $('weight-bar');
     if (bar) bar.setAttribute('aria-valuenow', String(pct));
     if (!status) return;
@@ -422,15 +429,17 @@ function bindWeightCard() {
     const mb = speed / (1024 * 1024);
     const mbText = mb >= 0.05 ? mb.toFixed(1) + ' MB/s' : (speed > 0 ? Math.round(speed / 1024) + ' KB/s' : '0 MB/s');
     const etaText = eta > 0 ? (eta >= 60 ? Math.ceil(eta / 60) + ' mnt' : Math.ceil(eta) + ' dtk') : '—';
+    const mbDone = (loaded / (1024 * 1024)).toFixed(loaded < 10 * 1024 * 1024 && loaded > 0 ? 1 : 0);
+    const mbTotal = total > 0 ? Math.round(total / (1024 * 1024)) : 997;
     status.dataset.busy = '1';
     if (pauseBtn) pauseBtn.hidden = false;
     if (cancelBtn) cancelBtn.hidden = false;
     reveal(true);
     if (total > 0 && loaded >= total) {
-      status.textContent = pct + '% · memeriksa berkas';
+      status.textContent = '100% (' + mbTotal + ' MB) · memeriksa berkas';
       return;
     }
-    status.textContent = pct + '% · ' + mbText + ' · ' + etaText;
+    status.textContent = pctText + ' (' + mbDone + '/' + mbTotal + ' MB) · ' + mbText + ' · ' + etaText;
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});

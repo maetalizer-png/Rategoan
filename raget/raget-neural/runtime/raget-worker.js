@@ -80,9 +80,18 @@ self.onmessage = async (event) => {
       topK: msg.topK,
       topP: msg.topP,
       repetitionPenalty: msg.repetitionPenalty,
-      onStep() {
+      onStep(doneLayers, totalLayers, phase) {
         if (timed) return;
         arm();
+        if (phase === 'prefill' && totalLayers > 1) {
+          self.postMessage({
+            id: msg.id,
+            type: 'step',
+            doneLayers: doneLayers || 0,
+            totalLayers: totalLayers || 28,
+            phase: phase,
+          });
+        }
       },
       onToken(piece) {
         if (timed) return;

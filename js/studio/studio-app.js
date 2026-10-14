@@ -125,16 +125,36 @@ async function askStudioBrain(prompt, files, onToken) {
   }
 }
 
+function roleOfFile(path) {
+  if (/\.html?$/i.test(path)) return 'Antarmuka HTML';
+  if (/\.css$/i.test(path)) return 'Tata Letak CSS';
+  if (/\.py$/i.test(path)) return 'Skrip Python';
+  if (/components\//i.test(path)) return 'Komponen UI';
+  if (/\.m?js$/i.test(path)) return 'Modul JavaScript';
+  if (/\.md$/i.test(path)) return 'Dokumentasi';
+  return 'Berkas Proyek';
+}
+
 function paintLivingCanvases() {
   const docEl = $('living-doc');
   const sheetEl = $('living-sheet');
   const files = vfs.list();
+  const projTitle = ($('crumb-project') && $('crumb-project').textContent) || 'Studio Kode';
+
   if (docEl) {
     docEl.classList.add('living-doc-shell');
     docEl.textContent = '';
+
+    const headBox = document.createElement('div');
+    headBox.className = 'monitor-section-head';
     const title = document.createElement('h2');
-    title.textContent = 'Dokumen Arsitektur Hidup — ' + (($('crumb-project') && $('crumb-project').textContent) || 'Studio Kode');
-    docEl.appendChild(title);
+    title.textContent = 'Dokumen Arsitektur Hidup — ' + projTitle;
+    const sub = document.createElement('p');
+    sub.className = 'monitor-section-sub';
+    sub.textContent = 'Memantau peta arsitektur modul, spesifikasi pekerjaan yang sedang berjalan, serta daftar fungsi/simbol yang terindeks di VFS.';
+    headBox.appendChild(title);
+    headBox.appendChild(sub);
+    docEl.appendChild(headBox);
 
     const edges = ['index_html --> style_css', 'index_html --> script_js'];
     const allSymbols = [];
@@ -150,39 +170,129 @@ function paintLivingCanvases() {
       });
     });
 
+    const diagCard = document.createElement('div');
+    diagCard.className = 'monitor-card';
+    const diagLabel = document.createElement('div');
+    diagLabel.className = 'monitor-card-title';
+    diagLabel.textContent = 'Peta Ketergantungan Modul (Live Dependency Graph)';
     const diagWrap = document.createElement('div');
     diagWrap.className = 'living-doc-diagram';
     diagWrap.innerHTML = mermaidToSvg('flowchart TD\n' + edges.join('\n'));
-    docEl.appendChild(diagWrap);
+    diagCard.appendChild(diagLabel);
+    diagCard.appendChild(diagWrap);
+    docEl.appendChild(diagCard);
+
+    const catalogCard = document.createElement('div');
+    catalogCard.className = 'monitor-card';
+    const catTitle = document.createElement('div');
+    catTitle.className = 'monitor-card-title';
+    catTitle.textContent = 'Katalog Berkas & Simbol Fungsi Terindeks';
+    catalogCard.appendChild(catTitle);
+
+    const modGrid = document.createElement('div');
+    modGrid.className = 'doc-module-grid';
+    files.forEach((p) => {
+      const body = String(vfs.read(p) || '');
+      const syms = indexSymbols(body).map((s) => s.name + '()');
+      const item = document.createElement('div');
+      item.className = 'doc-module-item';
+      const topRow = document.createElement('div');
+      topRow.className = 'doc-module-top';
+      const nameNode = document.createElement('strong');
+      nameNode.textContent = p;
+      const roleNode = document.createElement('span');
+      roleNode.className = 'doc-module-role';
+      roleNode.textContent = roleOfFile(p);
+      topRow.appendChild(nameNode);
+      topRow.appendChild(roleNode);
+      const symNode = document.createElement('div');
+      symNode.className = 'doc-module-syms';
+      symNode.textContent = syms.length ? ('Simbol: ' + syms.join(', ')) : ('Ukuran: ' + body.length + ' byte · Modul aktif');
+      item.appendChild(topRow);
+      item.appendChild(symNode);
+      modGrid.appendChild(item);
+    });
+    catalogCard.appendChild(modGrid);
 
     const metaP = document.createElement('p');
+    metaP.className = 'doc-summary-foot';
     metaP.textContent = 'Total Berkas VFS: ' + files.length + ' (' + files.join(', ') + ') · Simbol Terindeks: ' + (allSymbols.length ? allSymbols.join(', ') : 'global script');
-    docEl.appendChild(metaP);
+    catalogCard.appendChild(metaP);
+    docEl.appendChild(catalogCard);
 
     const readme = vfs.read('/README.md');
     if (readme) {
+      const readmeCard = document.createElement('div');
+      readmeCard.className = 'monitor-card';
+      const rTitle = document.createElement('div');
+      rTitle.className = 'monitor-card-title';
+      rTitle.textContent = 'Catatan Proyek (/README.md)';
       const pre = document.createElement('pre');
+      pre.className = 'doc-readme-pre';
       pre.textContent = readme;
-      docEl.appendChild(pre);
+      readmeCard.appendChild(rTitle);
+      readmeCard.appendChild(pre);
+      docEl.appendChild(readmeCard);
     }
   }
 
   if (sheetEl) {
     sheetEl.classList.add('living-sheet-shell');
     sheetEl.textContent = '';
+
+    const headBox = document.createElement('div');
+    headBox.className = 'monitor-section-head';
     const head = document.createElement('h2');
     head.textContent = 'Spreadsheet Telemetri & Struktur VFS';
-    sheetEl.appendChild(head);
+    const sub = document.createElement('p');
+    sub.className = 'monitor-section-sub';
+    sub.textContent = 'Matriks pemantauan kuantitatif berkas proyek, jumlah baris, distribusi ukuran byte, dan status mutasi kerja agen.';
+    headBox.appendChild(head);
+    headBox.appendChild(sub);
+    sheetEl.appendChild(headBox);
 
     const sizes = files.map((p) => String(vfs.read(p) || '').length);
     const chartModel = bindSheetChart(sizes);
-    const maxBytes = Math.max(1, ...chartModel.bars());
+    const bars = chartModel.bars();
+    const totalBytes = bars.reduce((a, b) => a + b, 0);
+    const maxBytes = Math.max(1, ...bars);
+    let totalLines = 0;
+    let totalSyms = 0;
+    files.forEach((p) => {
+      const c = String(vfs.read(p) || '');
+      totalLines += c ? c.split('\n').length : 0;
+      totalSyms += indexSymbols(c).length;
+    });
 
+    const kpiGrid = document.createElement('div');
+    kpiGrid.className = 'sheet-kpi-grid';
+    [
+      ['Total Berkas VFS', String(files.length) + ' Berkas'],
+      ['Total Baris Kode', String(totalLines) + ' Baris'],
+      ['Ukuran Bundel', String(totalBytes) + ' Byte'],
+      ['Simbol Terindeks', String(totalSyms) + ' Simbol'],
+    ].forEach(([kLabel, kVal]) => {
+      const card = document.createElement('div');
+      card.className = 'sheet-kpi-card';
+      const small = document.createElement('span');
+      small.className = 'sheet-kpi-label';
+      small.textContent = kLabel;
+      const big = document.createElement('strong');
+      big.className = 'sheet-kpi-val';
+      big.textContent = kVal;
+      card.appendChild(small);
+      card.appendChild(big);
+      kpiGrid.appendChild(card);
+    });
+    sheetEl.appendChild(kpiGrid);
+
+    const tableCard = document.createElement('div');
+    tableCard.className = 'monitor-card';
     const table = document.createElement('table');
     table.className = 'living-sheet-table';
     const thead = document.createElement('thead');
     const htr = document.createElement('tr');
-    ['Berkas VFS', 'Baris', 'Ukuran (Byte)', 'Simbol', 'Status'].forEach((label) => {
+    ['Berkas VFS', 'Peran', 'Baris', 'Byte', 'Simbol', 'Status'].forEach((label) => {
       const th = document.createElement('th');
       th.textContent = label;
       htr.appendChild(th);
@@ -199,19 +309,36 @@ function paintLivingCanvases() {
       const tr = document.createElement('tr');
       [
         p,
+        roleOfFile(p),
         String(lineCount),
-        String(chartModel.bars()[idx] || 0),
+        String(bars[idx] || 0),
         String(symCount),
         isDirty ? 'Diubah' : 'Stabil',
-      ].forEach((cellVal) => {
+      ].forEach((cellVal, colIdx) => {
         const td = document.createElement('td');
-        td.textContent = cellVal;
+        if (colIdx >= 2 && colIdx <= 4) td.className = 'num-col';
+        if (colIdx === 5) {
+          const badge = document.createElement('span');
+          badge.className = 'sheet-status-pill ' + (isDirty ? 'is-dirty' : 'is-stable');
+          badge.textContent = cellVal;
+          td.appendChild(badge);
+        } else {
+          td.textContent = cellVal;
+        }
         tr.appendChild(td);
       });
       tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    sheetEl.appendChild(table);
+    tableCard.appendChild(table);
+    sheetEl.appendChild(tableCard);
+
+    const barsCard = document.createElement('div');
+    barsCard.className = 'monitor-card';
+    const barsTitle = document.createElement('div');
+    barsTitle.className = 'monitor-card-title';
+    barsTitle.textContent = 'Proporsi Ukuran Byte per Berkas';
+    barsCard.appendChild(barsTitle);
 
     const barsWrap = document.createElement('div');
     barsWrap.className = 'living-sheet-bars';
@@ -219,15 +346,25 @@ function paintLivingCanvases() {
       const row = document.createElement('div');
       row.className = 'living-bar-row';
       const label = document.createElement('span');
-      label.textContent = p + ' (' + chartModel.bars()[idx] + ' B)';
+      label.className = 'living-bar-name';
+      label.textContent = p;
+      const track = document.createElement('div');
+      track.className = 'living-bar-track';
       const bar = document.createElement('div');
       bar.className = 'living-bar-fill';
-      bar.style.width = Math.max(8, Math.round((chartModel.bars()[idx] / maxBytes) * 180)) + 'px';
+      const pctWidth = Math.max(6, Math.round(((bars[idx] || 0) / maxBytes) * 100));
+      bar.style.width = pctWidth + '%';
+      track.appendChild(bar);
+      const val = document.createElement('span');
+      val.className = 'living-bar-val';
+      val.textContent = (bars[idx] || 0) + ' B';
       row.appendChild(label);
-      row.appendChild(bar);
+      row.appendChild(track);
+      row.appendChild(val);
       barsWrap.appendChild(row);
     });
-    sheetEl.appendChild(barsWrap);
+    barsCard.appendChild(barsWrap);
+    sheetEl.appendChild(barsCard);
   }
 }
 
@@ -455,6 +592,12 @@ function paintTree() {
     btn.onclick = () => { viewPath = path; paintTree(); paintDiff(path); showTab('files'); };
     box.appendChild(btn);
   });
+  const stageLabel = $('hunk-stage-label');
+  if (stageLabel) {
+    const content = String(vfs.read(viewPath) || '');
+    const lines = content ? content.split('\n').length : 0;
+    stageLabel.textContent = viewPath + ' · ' + lines + ' baris (' + content.length + ' B)';
+  }
   paintDiff(viewPath);
   paintLivingCanvases();
 }

@@ -94,6 +94,36 @@ function locate(parsed, name) {
   };
 }
 
+export function buildAnchorSet(totalLayers) {
+  const n = Math.max(1, totalLayers | 0);
+  if (n <= 4) {
+    const all = new Set();
+    for (let i = 0; i < n; i += 1) all.add(i);
+    return all;
+  }
+  return new Set([
+    0,
+    Math.floor((n - 1) / 3),
+    Math.floor(((n - 1) * 2) / 3),
+    n - 1,
+  ]);
+}
+
+export function shouldPinTensor(name, anchorSet) {
+  const key = String(name || '');
+  if (key === 'final_norm.gamma' || key.startsWith('lm_head.weight') || key.startsWith('embedding.') || key.endsWith('.gamma')) {
+    return true;
+  }
+  if (key.startsWith('layers.')) {
+    const dot = key.indexOf('.', 7);
+    if (dot > 7) {
+      const layerIdx = Number(key.slice(7, dot));
+      if (Number.isInteger(layerIdx)) return anchorSet ? anchorSet.has(layerIdx) : layerIdx < 3;
+    }
+  }
+  return false;
+}
+
 export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, lora, blockStride) {
   const stride = blockStride > 1 ? (blockStride | 0) : 1;
   const nBlocksCol = cols >>> 5;
@@ -254,12 +284,13 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
   const fromTensor = d > 0 ? Math.floor((headLoc.len * 2) / d) : 0;
   const vocab = Math.max(8, fromMeta && fromTensor ? Math.min(fromMeta, fromTensor) : (fromMeta || fromTensor || bpeShell.VOCAB_SIZE));
   const isTrained = parsed.meta.trained === 'true' || parsed.meta.trained === true;
+  const anchorSet = buildAnchorSet(layers);
   const small = new Map();
   let smallBytes = 0;
   const SMALL_F32_CAP = 64 * 1024 * 1024;
   const hotU8 = new Map();
   let hotU8Bytes = 0;
-  const HOT_U8_CAP = 96 * 1024 * 1024;
+  const HOT_U8_CAP = 128 * 1024 * 1024;
   let usedGpu = false;
   let gpuOffline = false;
   let activeLora = null;
@@ -268,7 +299,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
   async function tensorU8(name, scratchSlot) {
     if (hotU8.has(name)) return hotU8.get(name);
     const loc = locate(parsed, name);
-    if (hotU8Bytes + loc.len <= HOT_U8_CAP) {
+    if (shouldPinTensor(name, anchorSet) && hotU8Bytes + loc.len <= HOT_U8_CAP) {
       const bytes = await readBytes(loc.start, loc.len);
       hotU8.set(name, bytes);
       hotU8Bytes += bytes.byteLength;
@@ -283,7 +314,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
   async function tensorF32(name, scratchSlot) {
     if (small.has(name)) return small.get(name);
     const loc = locate(parsed, name);
-    if (loc.len <= 8 * 1024 * 1024 && smallBytes + loc.len <= SMALL_F32_CAP && small.size < 512) {
+    if (shouldPinTensor(name, anchorSet) && loc.len <= 8 * 1024 * 1024 && smallBytes + loc.len <= SMALL_F32_CAP && small.size < 512) {
       const view = asF32(await readBytes(loc.start, loc.len));
       small.set(name, view);
       smallBytes += view.byteLength;
@@ -449,7 +480,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
     }
   }
 
-  async function step(id, cache, signal, limit, kvInt8, needLogits, onStep, blockStride) {
+  async function step(id, cache, signal, limit, kvInt8, needLogits, onStep, blockStride, isPrefill) {
     const x = new Float32Array(d);
     const h = new Float32Array(d);
     const q = new Float32Array(nHeads * dk);
@@ -465,9 +496,10 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
     const allPasses = planLayerPasses(limit);
     const chain = chainEncoderPlan(allPasses.length);
     if (chain.submits < 0) return null;
-    const passes = (fastStreamMode && allPasses.length > 1)
-      ? [allPasses[0]]
-      : allPasses;
+    const anchorPasses = allPasses.filter((row) => anchorSet.has(row.layer));
+    const passes = (!fastStreamMode || (isPrefill && needLogits !== false))
+      ? allPasses
+      : (anchorPasses.length ? anchorPasses : [allPasses[0]]);
     for (let p = 0; p < passes.length; p += 1) {
       if (signal && signal.aborted) return null;
       const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
@@ -485,12 +517,6 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       cache[layer].k = cache[layer].k || [];
       cache[layer].v = cache[layer].v || [];
       commitKv(cache[layer], k, v, kvInt8);
-      if (needLogits === false && passes.length === 1) {
-        const stepSkip = typeof performance !== "undefined" ? performance.now() : Date.now();
-        dog = armWatchdog(stepSkip, 120000);
-        if (typeof onStep === "function") onStep();
-        continue;
-      }
       attend(q, cache, layer, mixed);
       if (!await project(prefix + 'attention.Wo', d, nHeads * dk, mixed, attn, signal, blockStride)) return null;
       addInto(x, attn);
@@ -504,7 +530,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       addInto(x, down);
       const stepNow = typeof performance !== 'undefined' ? performance.now() : Date.now();
       dog = armWatchdog(stepNow, 120000);
-      if (typeof onStep === 'function') onStep();
+      if (typeof onStep === 'function') onStep(p + 1, passes.length, isPrefill ? 'prefill' : 'decode');
       await yieldThread();
     }
     if (signal && signal.aborted) return null;
@@ -512,7 +538,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
     rmsNorm(x, await tensorF32('final_norm.gamma'), h);
     const logits = new Float32Array(vocab);
     if (!await project('lm_head.weight', vocab, d, h, logits, signal, blockStride)) return null;
-    if (typeof onStep === 'function') onStep();
+    if (typeof onStep === 'function') onStep(passes.length, passes.length, isPrefill ? 'prefill' : 'decode');
     return logits;
   }
 
@@ -526,7 +552,8 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       usedGpu = false;
       activeLora = opts.lora || null;
       fastStreamMode = !!isStream && opts.useGpu !== true && !(Number(opts.maxLayers) > 0);
-      const stride = (fastStreamMode && d >= 1536) ? 16 : 1;
+      const prefillStride = (fastStreamMode && d >= 1536) ? (Number(opts.temperature) > 0 ? 2 : 4) : 1;
+      const decodeStride = (fastStreamMode && d >= 1536) ? 8 : 1;
       const requested = Number(opts.maxNewTokens) > 0 ? Number(opts.maxNewTokens) : 32;
       const maxNew = Math.max(1, Math.min(128, requested));
       const limit = opts.maxLayers > 0 ? Math.min(layers, Math.floor(opts.maxLayers)) : layers;
@@ -540,7 +567,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       for (let i = 0; i < ids.length; i += 1) {
         if (opts.signal && opts.signal.aborted) break;
         const isLast = i === ids.length - 1;
-        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true, isLast, opts.onStep, stride);
+        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true, isLast, opts.onStep, prefillStride, true);
         if (!logits) break;
       }
       const generated = [];
@@ -559,7 +586,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
         const proposed = [];
         let cur = seedId;
         for (let t = 0; t < 3; t += 1) {
-          const row = await step(cur, draftCache, signal, depth, false, true, opts.onStep, stride);
+          const row = await step(cur, draftCache, signal, depth, false, true, opts.onStep, decodeStride, false);
           if (!row) break;
           const next = pickToken(row, { temperature: 0 }, []);
           if (!Number.isInteger(next) || next < 0) break;
@@ -579,7 +606,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
           const greedy = pickToken(row, { temperature: 0 }, recent.concat(targetIds));
           targetIds.push(greedy);
           if (greedy !== proposed[i]) break;
-          row = await step(proposed[i], trial, signal, limit, false, true, opts.onStep, stride);
+          row = await step(proposed[i], trial, signal, limit, false, true, opts.onStep, decodeStride, false);
           if (!row) break;
         }
         const verdict = verifyDraft((prefix) => targetIds[prefix.length - 1], [seedId], proposed);
@@ -624,7 +651,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
         }
         if (!logits || generated.length >= maxNew) break;
         if (!allowDraft) {
-          logits = await step(picked[picked.length - 1], cache, opts.signal, limit, opts.kvInt8 === true, true, opts.onStep, stride);
+          logits = await step(picked[picked.length - 1], cache, opts.signal, limit, opts.kvInt8 === true, true, opts.onStep, decodeStride, false);
         }
       }
       return {
