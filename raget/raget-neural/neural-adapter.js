@@ -43,13 +43,17 @@ async function ask(prompt, context) {
     else external.addEventListener('abort', () => ctrl.abort(), { once: true });
   }
   const mode = uiMode();
+  const messages = (context && Array.isArray(context.messages)) ? context.messages : [];
   try {
     const opts = {
       signal: ctrl.signal,
       large: !!(context && context.large),
+      modelPrefix: (context && context.modelPrefix) ? String(context.modelPrefix) : '',
+      recent: (context && Array.isArray(context.recent)) ? context.recent : [],
+      facts: (context && context.facts && typeof context.facts === 'object') ? context.facts : null,
     };
     if (mode) opts.mode = mode;
-    const reply = await neuralProvider.generate([], String(prompt || ''), opts);
+    const reply = await neuralProvider.generate(messages, String(prompt || ''), opts);
     if (external && external.aborted) throw new Error('dibatalkan');
     if (ctrl.signal.aborted) return null;
     if (reply && !/^\d+$/.test(String(reply).trim())) return reply;

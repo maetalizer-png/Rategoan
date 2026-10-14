@@ -377,13 +377,23 @@ export const settings = {
       weightNote.textContent = 'Belum Terpasang';
       action.textContent = 'Unduh Bobot Offline';
     }
-    action.onclick = () => {
+    action.onclick = async () => {
       if (weightsOn()) {
         try {
           localStorage.removeItem('rategoan_weights_1_5b_installed');
           localStorage.removeItem('rategoan_weights_1_5b_parts');
           localStorage.removeItem('rategoan_chunks_mask');
+          for (let i = localStorage.length - 1; i >= 0; i -= 1) {
+            const k = localStorage.key(i);
+            if (k && (k.indexOf('rategoan_chunks_mask:') === 0 || k.indexOf('rategoan_chunks_hashes:') === 0)) localStorage.removeItem(k);
+          }
         } catch (e) { /* penyimpanan ditolak */ }
+        try {
+          if (navigator.storage && typeof navigator.storage.getDirectory === 'function') {
+            const root = await navigator.storage.getDirectory();
+            if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
+          }
+        } catch (e) { /* berkas sudah tidak ada */ }
         toast.show('Bobot dihapus dari perangkat');
         paintHub();
         return;
@@ -744,8 +754,19 @@ export const settings = {
       }
       try {
         localStorage.removeItem('rategoan_weights_1_5b_installed');
+        localStorage.removeItem('rategoan_weights_1_5b_parts');
         localStorage.removeItem('rategoan_chunks_mask');
+        for (let i = localStorage.length - 1; i >= 0; i -= 1) {
+          const k = localStorage.key(i);
+          if (k && (k.indexOf('rategoan_chunks_mask:') === 0 || k.indexOf('rategoan_chunks_hashes:') === 0)) localStorage.removeItem(k);
+        }
       } catch (e) { /* kosong */ }
+      try {
+        if (navigator.storage && typeof navigator.storage.getDirectory === 'function') {
+          const root = await navigator.storage.getDirectory();
+          if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
+        }
+      } catch (e) { /* berkas sudah tidak ada */ }
       toast.show('Cache bobot model dihapus dari perangkat ini.');
     };
     $('row-restore').onclick = () => $('pick-restore').click();

@@ -11,6 +11,7 @@ export const WEIGHT_SPEC = Object.freeze({
   chunk: MODEL_CHUNK,
   cache: MODEL_CACHE,
   revision: MODEL_REVISION,
+  chunkHashes: Object.freeze([]),
 });
 
 export function cacheStore() {

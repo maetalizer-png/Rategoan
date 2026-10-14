@@ -539,6 +539,7 @@ export const chat = {
         });
         return null;
       }
+      if (reply == null) break;
       attempt += 1;
     }
     } finally {

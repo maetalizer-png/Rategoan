@@ -93,9 +93,24 @@ export function createPeerLink(id) {
 }
 
 const MESH_NAME = 'rategoan-mesh-sync';
+const MESH_BUFFER_CAP = 2;
 const meshIndex = new Set();
 const meshBytes = new Map();
 let meshBus = null;
+
+function setBoundedMesh(key, payload) {
+  if (!payload) return;
+  if (meshBytes.has(key)) meshBytes.delete(key);
+  meshBytes.set(key, payload);
+  while (meshBytes.size > MESH_BUFFER_CAP) {
+    const oldest = meshBytes.keys().next().value;
+    meshBytes.delete(oldest);
+  }
+}
+
+export function meshBufferCount() {
+  return meshBytes.size;
+}
 
 export function openMeshBus() {
   if (meshBus) return meshBus;
@@ -105,7 +120,7 @@ export function openMeshBus() {
     const msg = event.data || {};
     if (msg.kind !== 'model-chunk') return;
     meshIndex.add(msg.index);
-    if (msg.payload) meshBytes.set(msg.index, msg.payload);
+    setBoundedMesh(msg.index, msg.payload);
     noteMeshSaved(msg.bytes);
   };
   return meshBus;
@@ -115,7 +130,7 @@ export function publishMeshChunk(index, bytes) {
   const key = Math.max(0, Math.floor(Number(index) || 0));
   const len = bytes ? (bytes.byteLength || bytes.length || 0) : 0;
   meshIndex.add(key);
-  if (bytes) meshBytes.set(key, bytes);
+  setBoundedMesh(key, bytes);
   const channel = openMeshBus();
   if (channel) channel.postMessage({ kind: 'model-chunk', index: key, bytes: len, payload: bytes || null });
   noteMeshSaved(len);

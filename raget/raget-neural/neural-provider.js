@@ -74,20 +74,24 @@ let bootPromise = null;
 const INSTALL_KEY = 'rategoan_weights_1_5b_installed';
 const PARTS_KEY = 'rategoan_weights_1_5b_parts';
 let modelStatus = MODEL_STATUS.NOT_DOWNLOADED;
-let lastEnvelope = { ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null };
+let lastEnvelope = { ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null, request_id: '', message_id: '' };
 let pendingPrompts = [];
 let promptSerial = 0;
 let smokePassed = false;
 let pipelinePhase = '';
 const readyWaiters = [];
+const activeWorkerJobs = new Set();
 
 function remember(patch) {
   if (patch && patch.status) modelStatus = patch.status;
+  const prev = lastEnvelope || {};
   lastEnvelope = {
     ok: !!(patch && patch.ok === true),
     status: modelStatus,
     error: patch && patch.error ? String(patch.error) : '',
     reply: patch && patch.reply != null ? String(patch.reply) : null,
+    request_id: patch && patch.request_id ? String(patch.request_id) : (prev.request_id || ''),
+    message_id: patch && patch.message_id ? String(patch.message_id) : (prev.message_id || ''),
   };
   return lastEnvelope;
 }
@@ -135,7 +139,7 @@ function sealInstalled(parts) {
   try {
     if (typeof localStorage === 'undefined') return;
     localStorage.setItem(INSTALL_KEY, 'true');
-    localStorage.setItem(PARTS_KEY, String(parts || 50));
+    localStorage.setItem(PARTS_KEY, String(parts || 250));
   } catch (e) {
     /* penyimpanan pribadi ditolak */
   }
@@ -164,6 +168,11 @@ async function quarantineCorrupt() {
       localStorage.removeItem(INSTALL_KEY);
       localStorage.removeItem(PARTS_KEY);
       localStorage.removeItem('rategoan_chunks_mask:' + WEIGHT_SPEC.revision);
+      localStorage.removeItem('rategoan_chunks_hashes:' + WEIGHT_SPEC.revision);
+      for (let i = localStorage.length - 1; i >= 0; i -= 1) {
+        const k = localStorage.key(i);
+        if (k && k.indexOf('rategoan_chunks_hashes:') === 0) localStorage.removeItem(k);
+      }
     }
   } catch (e) { /* penyimpanan ditolak */ }
   try {
@@ -207,11 +216,13 @@ function untilReady(ms) {
 
 async function smokeToken() {
   if (smokePassed) return true;
-  if (typeof Worker !== 'function') return false;
+  if (typeof Worker !== 'function') return !!(weightReader && payloadTrusted(weightReader));
   try {
     const out = await runOnWorker('ok', {
+      op: 'verify_session',
       maxNewTokens: 1,
       maxLayers: 0,
+      timeoutMs: 5000,
       draft: false,
       lora: null,
       temperature: 0,
@@ -244,14 +255,36 @@ async function flushPending() {
 }
 
 function queuePrompt(prompt, options) {
+  const text = String(prompt || '');
+  const last = pendingPrompts[pendingPrompts.length - 1];
+  if (last && last.prompt === text && (Date.now() - (last.queuedAt || 0)) < 2000) {
+    remember({
+      ok: false,
+      status: MODEL_STATUS.DOWNLOADING,
+      error: queueLine(),
+      reply: null,
+      request_id: last.request_id,
+      message_id: last.message_id,
+    });
+    return last;
+  }
   promptSerial += 1;
   const job = {
-    request_id: 'rq-' + promptSerial,
-    message_id: 'msg-' + promptSerial,
-    prompt: String(prompt || ''),
+    request_id: (options && options.request_id) || ('rq-' + promptSerial),
+    message_id: (options && options.message_id) || ('msg-' + promptSerial),
+    prompt: text,
     options: options || null,
+    queuedAt: Date.now(),
   };
   pendingPrompts.push(job);
+  remember({
+    ok: false,
+    status: MODEL_STATUS.DOWNLOADING,
+    error: queueLine(),
+    reply: null,
+    request_id: job.request_id,
+    message_id: job.message_id,
+  });
   return job;
 }
 
@@ -276,7 +309,9 @@ async function bootWeights() {
       return markInferenceReady();
     }
     if (!installedFlag()) {
-      remember({ ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null });
+      if (modelStatus !== MODEL_STATUS.DOWNLOADING) {
+        remember({ ok: false, status: MODEL_STATUS.NOT_DOWNLOADED, error: '', reply: null });
+      }
       return false;
     }
     const file = await inspectWeightFile('raget-neural-1.5b.safetensors');
@@ -301,6 +336,11 @@ async function bootWeights() {
 }
 
 function haltInference() {
+  const jobs = Array.from(activeWorkerJobs);
+  activeWorkerJobs.clear();
+  jobs.forEach((fn) => {
+    try { fn(null); } catch (e) { /* sudah selesai */ }
+  });
   if (worker) {
     worker.terminate();
     worker = null;
@@ -361,9 +401,9 @@ async function doInitTier(tier) {
     }
     weightReader = sealed;
     markEarly(tier);
-    sealInstalled(packed.parts);
     const smoked = await markInferenceReady();
     if (!smoked) return false;
+    sealInstalled(packed.parts);
     reportProgress({ tier: tier, loaded: size, total: size, seal: '', speed: 0, eta: 0, parts: packed.parts, source: 'cache', early: false });
     return true;
   } catch (e) {
@@ -441,11 +481,13 @@ function runOnWorker(prompt, genOpts, signal) {
     const finish = (value) => {
       if (settled) return;
       settled = true;
+      activeWorkerJobs.delete(finish);
       live.removeEventListener('message', onMsg);
       live.removeEventListener('error', onErr);
       if (signal) signal.removeEventListener('abort', onAbort);
       resolve(value);
     };
+    activeWorkerJobs.add(finish);
     const onAbort = () => {
       haltInference();
       if (!lastEnvelope.error) remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'dibatalkan', reply: null });
@@ -461,7 +503,7 @@ function runOnWorker(prompt, genOpts, signal) {
       if (data.type === 'token') {
         if (data.piece && genOpts.onToken) genOpts.onToken(data.piece);
       }
-      if (data.type === 'done') finish(data);
+      if (data.type === 'done' || data.type === 'verified') finish(data);
       if (data.type === 'error') {
         remember({ ok: false, status: MODEL_STATUS.FAILED, error: data.message || 'gagal', reply: null });
         finish(null);
@@ -478,7 +520,7 @@ function runOnWorker(prompt, genOpts, signal) {
     live.addEventListener('error', onErr);
     live.postMessage({
       id: id,
-      op: 'generate',
+      op: genOpts && genOpts.op === 'verify_session' ? 'verify_session' : 'generate',
       prompt: prompt,
       maxNewTokens: genOpts.maxNewTokens,
       maxLayers: genOpts.maxLayers,
@@ -488,6 +530,7 @@ function runOnWorker(prompt, genOpts, signal) {
       topK: genOpts.topK,
       topP: genOpts.topP,
       repetitionPenalty: genOpts.repetitionPenalty,
+      timeoutMs: genOpts && genOpts.timeoutMs,
     });
   });
 }
@@ -545,17 +588,55 @@ async function generateWithTier(tier, prompt, options) {
   }
 }
 
+function composeNeuralInput(prompt, options) {
+  const base = String(prompt || '');
+  const opts = options || {};
+  const prefix = opts.modelPrefix ? String(opts.modelPrefix) : '';
+  const facts = opts.facts && typeof opts.facts === 'object' && !Array.isArray(opts.facts) ? opts.facts : null;
+  const recent = Array.isArray(opts.recent) ? opts.recent : [];
+  const messages = Array.isArray(opts.messages) ? opts.messages : [];
+  if (!prefix && !facts && !recent.length && !messages.length) return base;
+  const parts = [];
+  if (prefix) parts.push(prefix);
+  if (facts) {
+    const lines = [];
+    Object.keys(facts).forEach((key) => {
+      const value = facts[key];
+      if (value == null || value === '') return;
+      lines.push(key + ': ' + String(value));
+    });
+    if (lines.length) parts.push(lines.join('\n'));
+  }
+  const fold = (rows) => rows.map((row) => {
+    if (!row) return '';
+    if (typeof row === 'string') return row;
+    const role = row.role ? String(row.role) : 'user';
+    const text = row.text != null ? String(row.text) : '';
+    return text ? (role + ': ' + text) : '';
+  }).filter(Boolean);
+  const history = fold(recent);
+  const older = fold(messages);
+  if (history.length) parts.push(history.join('\n'));
+  if (older.length) parts.push(older.join('\n'));
+  parts.push(base);
+  return parts.join('\n\n');
+}
+
 async function generateLocal(prompt, options) {
   const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
-  return generateWithTier('tier_1_5b', prompt, Object.assign({}, options, { mode }));
+  const fullPrompt = composeNeuralInput(prompt, options);
+  return generateWithTier('tier_1_5b', fullPrompt, Object.assign({}, options, { mode }));
 }
 
 async function generate(messages, prompt, options) {
-  if (options && options.signal && options.signal.aborted) return null;
-  if (options && options.large === true && llmMode.mode() === 'server') llmMode.setMode('lokal');
+  const bundled = Object.assign({}, options || {}, {
+    messages: Array.isArray(messages) ? messages : [],
+  });
+  if (bundled.signal && bundled.signal.aborted) return null;
+  if (bundled.large === true && llmMode.mode() === 'server') llmMode.setMode('lokal');
   if (installedFlag()) {
     await bootWeights();
-    const reply = await generateLocal(prompt, options);
+    const reply = await generateLocal(prompt, bundled);
     if (reply == null) {
       remember({
         ok: false,
@@ -569,7 +650,7 @@ async function generate(messages, prompt, options) {
     return reply;
   }
   const text = String(prompt || '');
-  const job = queuePrompt(text, options);
+  const job = queuePrompt(text, bundled);
   const atFull = pipelinePhase === PIPELINE_PHASE.VERIFYING_PAYLOAD
     || (progressTotal > 0 && progressLoaded >= progressTotal && !!initPromises.tier_1_5b);
   if (atFull) {

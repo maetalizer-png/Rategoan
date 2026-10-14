@@ -1,4 +1,4 @@
-import { meshHasChunk, publishMeshChunk, takeMeshChunk } from '../../../js/sync/p2p-sync.js';
+import { meshHasChunk, meshSnapshot, publishMeshChunk, takeMeshChunk } from '../../../js/sync/p2p-sync.js';
 
 export const MODEL_CACHE = 'rategoan-model-cache';
 export const NEURAL_CACHE = 'rategoan-neural-cache';
@@ -296,6 +296,7 @@ export async function downloadConcurrentChunks(options) {
   const revision = String((options && options.revision) || MODEL_REVISION);
   const expectedHashes = (options && options.chunkHashes) || [];
   const maskKey = 'rategoan_chunks_mask:' + revision;
+  const hashKey = 'rategoan_chunks_hashes:' + revision;
   const readIdle = Math.max(1, Math.floor(Number(options && options.readIdleMs) || 0) || READ_IDLE_MS);
   const primed = new Map();
   let opfsPort = null;
@@ -454,14 +455,29 @@ export async function downloadConcurrentChunks(options) {
     return seen / Math.max(0.001, (now - t0) / 1000);
   }
 
-  function markChunk(index) {
+  function markChunk(index, digest) {
     try {
       if (typeof localStorage === 'undefined') return;
       const raw = localStorage.getItem(maskKey) || '';
       const bits = raw ? raw.split(',') : [];
       bits[index] = '1';
       localStorage.setItem(maskKey, bits.join(','));
+      if (digest) {
+        const hashes = storedHashes();
+        hashes[index] = String(digest);
+        localStorage.setItem(hashKey, hashes.join(','));
+      }
     } catch (e) { /* penyimpanan tidak ada */ }
+  }
+
+  function storedHashes() {
+    try {
+      if (typeof localStorage === 'undefined') return [];
+      const raw = localStorage.getItem(hashKey) || '';
+      return raw ? raw.split(',') : [];
+    } catch (e) {
+      return [];
+    }
   }
 
   function report(index, seal) {
@@ -511,14 +527,14 @@ export async function downloadConcurrentChunks(options) {
 
   async function persist(offset, bytes, key) {
     const src = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes || 0);
-    const payload = new Uint8Array(src.byteLength);
-    payload.set(src);
     if (options && typeof options.diskWrite === 'function') {
+      const payload = new Uint8Array(src.byteLength);
+      payload.set(src);
       const noted = await options.diskWrite(cacheName, key, payload);
       const digest = noted && noted.digest ? String(noted.digest) : '';
       return { ok: true, digest: digest };
     }
-    return mirrorOpfs(offset, payload);
+    return mirrorOpfs(offset, src);
   }
 
   function askOpfs(message) {
@@ -553,7 +569,7 @@ export async function downloadConcurrentChunks(options) {
   }
 
   async function resumeDigestOk(index) {
-    const wanted = expectedHashes[index];
+    const wanted = expectedHashes[index] || storedHashes()[index] || '';
     if (!wanted) return true;
     const range = ranges[index];
     const expect = range.end - range.start + 1;
@@ -578,7 +594,7 @@ export async function downloadConcurrentChunks(options) {
     let held = got.expect;
     if (!got.sealed && !got.fromCache) {
       held = got.bytes ? got.bytes.length : 0;
-      if (mesh && got.bytes) publishMeshChunk(i, got.bytes.slice());
+      if (mesh && got.bytes && meshSnapshot().peers > 0) publishMeshChunk(i, got.bytes.slice());
       if (ahead < ranges.length && primed.size < 4) prime(ahead);
       let writeAck = null;
       for (let wAttempt = 0; wAttempt < 3; wAttempt += 1) {
@@ -599,7 +615,7 @@ export async function downloadConcurrentChunks(options) {
       }
       seal = ack.digest || 'opfs';
       networkHits += 1;
-      markChunk(i);
+      markChunk(i, ack.digest || '');
     } else if (ahead < ranges.length && primed.size < 4) {
       prime(ahead);
       held = got.bytes ? got.bytes.length : got.expect;

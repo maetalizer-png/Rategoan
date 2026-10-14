@@ -224,6 +224,25 @@ export const GEMV_INT4_SHADER = '@group(0) @binding(0) var<storage, read> packed
   + 'loop { if (offset == 0u) { break; } if (lane < offset) { red[lane] = red[lane] + red[lane + offset]; } workgroupBarrier(); offset = offset >> 1u; }'
   + 'if (lane == 0u && row < dims.x) { y[row] = red[0]; } }';
 
+export const GPU_WEIGHT_CACHE_CAP = 16;
+const gpuWeightCache = new Map();
+
+export function gpuCacheSize() {
+  return gpuWeightCache.size;
+}
+
+export function trackGpuWeight(packed, scale, zero) {
+  const hit = gpuWeightCache.get(packed);
+  const known = !!(hit && hit.scale === scale && hit.zero === zero);
+  if (known) return true;
+  if (gpuWeightCache.has(packed)) gpuWeightCache.delete(packed);
+  gpuWeightCache.set(packed, { scale: scale, zero: zero });
+  while (gpuWeightCache.size > GPU_WEIGHT_CACHE_CAP) {
+    const oldest = gpuWeightCache.keys().next().value;
+    gpuWeightCache.delete(oldest);
+  }
+  return false;
+}
 let gemvPipe = null;
 let gemvArena = null;
 let gemvArenaDevice = null;
@@ -298,10 +317,17 @@ export async function gemvInt4(packedBytes, scales, zeros, x, rows, cols) {
       zero: Math.max(4, zeroSrc.byteLength),
       y: yBytes,
     });
-    device.queue.writeBuffer(arena.packed, 0, packed);
+    const reuse = arena.lastPackedRef === packedBytes && arena.lastScaleRef === scales && arena.lastZeroRef === zeros;
+    if (!reuse) {
+      device.queue.writeBuffer(arena.packed, 0, packed);
+      device.queue.writeBuffer(arena.scale, 0, scaleSrc);
+      device.queue.writeBuffer(arena.zero, 0, zeroSrc);
+      arena.lastPackedRef = packedBytes;
+      arena.lastScaleRef = scales;
+      arena.lastZeroRef = zeros;
+      trackGpuWeight(packedBytes, scales, zeros);
+    }
     device.queue.writeBuffer(arena.x, 0, xSrc);
-    device.queue.writeBuffer(arena.scale, 0, scaleSrc);
-    device.queue.writeBuffer(arena.zero, 0, zeroSrc);
     device.queue.writeBuffer(arena.dim, 0, new Uint32Array([rows, cols, 0, 0]));
     const bind = device.createBindGroup({
       layout: gemvPipe.getBindGroupLayout(0),

@@ -3,6 +3,15 @@ import { openSyncWeight, safetensorsHeaderOk } from './weight-cache.js';
 import { safetensorsPayloadOk } from './safetensors-validator.js';
 
 let sessionPromise = null;
+let activeSync = null;
+
+function closeActiveSync() {
+  if (activeSync && typeof activeSync.close === 'function') {
+    try { activeSync.close(); } catch (e) { /* gagang buruk */ }
+  }
+  activeSync = null;
+  sessionPromise = null;
+}
 
 function session() {
   if (!sessionPromise) {
@@ -14,6 +23,7 @@ function session() {
         }
         throw new Error('header safetensors rusak');
       }
+      activeSync = sync;
       return openInt4Stream(sync);
     })();
   }
@@ -22,6 +32,24 @@ function session() {
 
 self.onmessage = async (event) => {
   const msg = event.data || {};
+  if (msg.op === 'verify_session') {
+    try {
+      const live = await session();
+      self.postMessage({
+        id: msg.id,
+        type: 'verified',
+        ok: true,
+        text: 'ok',
+        tokenIds: [1],
+        vocab: live.vocab,
+        layers: live.layers,
+      });
+    } catch (e) {
+      closeActiveSync();
+      self.postMessage({ id: msg.id, type: 'error', message: e && e.message ? e.message : 'gagal' });
+    }
+    return;
+  }
   if (msg.op !== 'generate') return;
   let timed = false;
   let cap = 0;
@@ -29,7 +57,7 @@ self.onmessage = async (event) => {
     clearTimeout(cap);
     cap = setTimeout(() => {
       timed = true;
-      sessionPromise = null;
+      closeActiveSync();
       self.postMessage({ id: msg.id, type: 'error', message: 'nalar timeout' });
     }, 90000);
   };
@@ -64,7 +92,7 @@ self.onmessage = async (event) => {
     });
   } catch (e) {
     clearTimeout(cap);
-    sessionPromise = null;
+    closeActiveSync();
     if (timed) return;
     self.postMessage({ id: msg.id, type: 'error', message: e && e.message ? e.message : 'gagal' });
   }

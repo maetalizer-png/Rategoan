@@ -421,6 +421,8 @@ function bindWeightCard() {
     const mbText = mb >= 0.05 ? mb.toFixed(1) + ' MB/s' : (speed > 0 ? Math.round(speed / 1024) + ' KB/s' : '0 MB/s');
     const etaText = eta > 0 ? (eta >= 60 ? Math.ceil(eta / 60) + ' mnt' : Math.ceil(eta) + ' dtk') : '—';
     status.dataset.busy = '1';
+    if (pauseBtn) pauseBtn.hidden = false;
+    if (cancelBtn) cancelBtn.hidden = false;
     reveal(true);
     if (total > 0 && loaded >= total) {
       status.textContent = pct + '% · memeriksa berkas';
@@ -465,7 +467,10 @@ function bindWeightCard() {
       if (pauseBtn) pauseBtn.hidden = true;
       cancelBtn.hidden = true;
       btn.disabled = false;
-      if (status) status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
+      if (status) {
+        delete status.dataset.busy;
+        status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
+      }
     };
     btn.onclick = () => {
       btn.disabled = true;
@@ -482,10 +487,12 @@ function bindWeightCard() {
         if (pauseBtn) pauseBtn.hidden = true;
         if (cancelBtn) cancelBtn.hidden = true;
         if (ok && neuralProvider.ready()) {
+          if (status) delete status.dataset.busy;
           reveal(false);
           return;
         }
         btn.disabled = false;
+        if (status) delete status.dataset.busy;
         const err = neuralProvider.weightError() || '';
         if (err === 'dibatalkan') {
           if (status) status.textContent = 'Unduhan dibatalkan. Potongan yang sudah ada tetap di perangkat.';
@@ -505,18 +512,46 @@ function bindPendingAnswer() {
   if (pendingAnswerBound || typeof window === 'undefined') return;
   pendingAnswerBound = true;
   window.addEventListener('rategoan:pending-reply', (event) => {
-    const reply = event && event.detail ? event.detail.reply : '';
+    const detail = (event && event.detail) || {};
+    const reply = detail.reply || '';
+    const prompt = detail.prompt ? String(detail.prompt) : '';
     if (!reply) return;
     document.querySelectorAll('#messages .msg.ai').forEach((node) => {
       if (node.dataset && (node.dataset.state === 'queued' || node.dataset.state === 'failed')) node.remove();
     });
     const s = composer.ensure();
-    const last = s.messages[s.messages.length - 1];
-    if (!last || last.role !== 'ai' || last.text !== String(reply)) {
-      s.messages.push({ role: 'ai', text: String(reply), time: Date.now() });
-      store.save();
+    const item = {
+      role: 'ai',
+      text: String(reply),
+      time: Date.now(),
+      request_id: detail.request_id || '',
+      message_id: detail.message_id || '',
+    };
+    let inserted = false;
+    if (prompt) {
+      for (let i = 0; i < s.messages.length; i += 1) {
+        const cur = s.messages[i];
+        const next = s.messages[i + 1];
+        if (cur && cur.role === 'user' && cur.text === prompt && (!next || next.role !== 'ai')) {
+          s.messages.splice(i + 1, 0, item);
+          inserted = true;
+          break;
+        }
+      }
     }
+    if (!inserted) {
+      const last = s.messages[s.messages.length - 1];
+      if (!last || last.role !== 'ai' || last.text !== String(reply)) {
+        s.messages.push(item);
+      }
+    }
+    store.save();
     chat.renderMessages();
+    if (item.message_id) {
+      const nodes = document.querySelectorAll('#messages .msg.ai');
+      const tail = nodes[nodes.length - 1];
+      if (tail) tail.dataset.messageId = item.message_id;
+    }
   });
 }
 
@@ -717,7 +752,24 @@ export const composer = {
     const prefNote = prefHit && prefHit.sim >= 0.2 ? 'Aturan pengguna: ' + prefHit.text : '';
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
-    const modelPrefix = [GUARDRAIL, prefNote, projectPrefix, imageNote].filter(Boolean).join('\n\n');
+    let webNote = '';
+    if (isWebsearch && directReply == null) {
+      try {
+        const res = await fetch('/api/connectors/web/search?q=' + encodeURIComponent(text));
+        if (res && res.ok) {
+          const data = await res.json();
+          const rows = data && data.results;
+          if (Array.isArray(rows) && rows.length) {
+            webNote = rows.slice(0, 4).map((row) => {
+              const title = row && row.title ? String(row.title) : '';
+              const snippet = row && row.snippet ? String(row.snippet) : '';
+              return [title, snippet].filter(Boolean).join(' — ');
+            }).filter(Boolean).join('\n');
+          }
+        }
+      } catch (e) { /* offline */ }
+    }
+    const modelPrefix = [GUARDRAIL, prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
     let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       if (livePlan) {
@@ -731,6 +783,7 @@ export const composer = {
             ? mod.neuralProvider.lastEnvelope()
             : null;
           if (env && env.status === 'DOWNLOADING') livePlan.dataset.state = 'queued';
+          if (env && env.message_id) livePlan.dataset.messageId = env.message_id;
           if (env && env.error) note.textContent = env.error;
           else if (env && env.status) note.textContent = 'Status bobot: ' + env.status + '. Tidak ada jawaban.';
           toast.show(note.textContent);

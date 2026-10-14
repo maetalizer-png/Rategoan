@@ -70,7 +70,7 @@
     flex: 0 0 50px;
   }
 
-  #view-chat .top-download-bar .weight-card {
+  #view-chat .top-download-bar .weight-card:not(:has(#weight-status[data-busy="1"])) {
     width: 100%;
     height: 50px;
     max-height: 50px;
@@ -82,6 +82,10 @@
     padding: 0 12px;
     overflow: hidden;
     box-sizing: border-box;
+  }
+
+  #view-chat .top-download-bar .weight-card:not(:has(#weight-status[data-busy="1"])) .weight-bar {
+    display: none;
   }
 
   #view-chat .top-download-bar .weight-card .weight-bar {
@@ -102,8 +106,14 @@
     flex: 0 0 auto;
   }
 
+  #view-chat .top-download-bar .weight-card:has(#weight-status[data-busy="1"]) {
+    height: 50px;
+    max-height: 50px;
+    border-radius: 12px;
+  }
+
   #view-chat:not(:has(#messages:empty)):has(#top-download-bar:not([hidden])) {
-    padding-top: 43px;
+    padding-top: 0;
   }
 
   #view-chat:has(#messages:empty) {
