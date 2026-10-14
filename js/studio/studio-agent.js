@@ -376,3 +376,50 @@ export async function pullGithub(token, repo) {
   if (!Object.keys(files).length) return { ok: false, reason: 'api', files };
   return { ok: true, reason: '', files };
 }
+
+export function grepVfs(files, pattern) {
+  const map = files || {};
+  const raw = String(pattern || '').trim();
+  const terms = raw.toLowerCase().split(/\s+/).filter((w) => w.length >= 3);
+  const needle = terms[0] || raw.toLowerCase();
+  const hits = [];
+  Object.keys(map).forEach((file) => {
+    const lines = String(map[file] || '').split('\n');
+    lines.forEach((lineText, idx) => {
+      const lower = lineText.toLowerCase();
+      if ((needle && lower.includes(needle)) || terms.some((t) => lower.includes(t))) {
+        hits.push({ file: file.startsWith('/') ? file : ('/' + file), line: idx + 1, text: lineText.trim().slice(0, 120) });
+      }
+    });
+  });
+  return hits.slice(0, 12);
+}
+
+export function readVfsContext(files, query) {
+  const map = files || {};
+  const keys = Object.keys(map);
+  if (!keys.length) return { summary: '/index.html (kosong)', excerpts: [] };
+  const matches = grepVfs(map, query);
+  const touched = Array.from(new Set(matches.map((m) => m.file)));
+  const summary = (touched.length ? touched : keys.map((k) => (k.startsWith('/') ? k : '/' + k))).slice(0, 4).join(', ');
+  const excerpts = keys.slice(0, 4).map((k) => ({
+    file: k.startsWith('/') ? k : ('/' + k),
+    bytes: String(map[k] || '').length,
+    preview: String(map[k] || '').slice(0, 320),
+  }));
+  return { summary, matches, excerpts };
+}
+
+export function applySurgicalPatch(files, fileKey, searchBlock, replaceBlock) {
+  if (!files || !fileKey || !searchBlock) return false;
+  const key = files[fileKey] != null ? fileKey : (files['/' + fileKey] != null ? ('/' + fileKey) : null);
+  if (!key) return false;
+  const src = String(files[key] || '');
+  const needle = String(searchBlock);
+  const replacement = String(replaceBlock == null ? '' : replaceBlock);
+  if (src.includes(needle)) {
+    files[key] = src.replace(needle, replacement);
+    return true;
+  }
+  return false;
+}

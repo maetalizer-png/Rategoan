@@ -2,7 +2,7 @@ import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { connectorState } from '../connectors/connector-state.js';
 import { jsSandbox } from '../../vault/code/js-sandbox.js';
 import { zipStore, healScript, mountPreview, acceptStudioMessage } from './sandbox-runner.js';
-import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop } from './studio-agent.js';
+import { craftInstruction, wantsPublish, publishOnly, wantsPull, pushGithub, pullGithub, commitNote, diffLines, sessionTitle, runStudioFsm, createEnvelope, attributeDelta, shouldSynthesize, selfHealLoop, grepVfs, readVfsContext } from './studio-agent.js';
 import { recordTelemetry, noteDecode, noteVram, paintStudioHud } from './telemetry.js';
 import { positionDesktopPopover, clearDesktopPopover } from '../../shared/popover.js';
 import { healSyntax } from './ast-heal.js';
@@ -563,10 +563,12 @@ async function applyCraft(text) {
       parent_snapshot_hash: (git.head() && git.head().id) || '',
       seq: 1,
     });
+    const vfsHits = grepVfs(before, text);
+    const vfsCtx = readVfsContext(before, text);
     appendConsole('[Grep]');
-    appendConsole('Grep → ' + traceGrep(text));
+    appendConsole('Grep → ' + traceGrep(text) + (vfsHits.length ? (' (' + vfsHits.length + ' baris cocok)') : ''));
     appendConsole('[Read]');
-    appendConsole('Read → berkas proyek');
+    appendConsole('Read → ' + vfsCtx.summary);
     appendConsole('[Synthesize]');
     appendConsole('envelope ' + envelope.run_id + ' ' + envelope.state);
     showTab('logs');

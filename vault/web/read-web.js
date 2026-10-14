@@ -31,11 +31,16 @@ function blockedUrl(raw) {
   let url;
   try { url = new URL(String(raw || '')); } catch (e) { return true; }
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return true;
+  if (url.username || url.password) return true;
   const host = url.hostname.toLowerCase().replace(/^\[|\]$/g, '').split('%')[0];
-  if (host === 'localhost' || host.endsWith('.local') || host === '0.0.0.0' || host === '::' || host === '::1') return true;
+  if (host === 'localhost' || host === 'metadata' || host === 'metadata.google.internal' || host.endsWith('.local') || host.endsWith('.internal') || host === '0.0.0.0' || host === '255.255.255.255' || host === '::' || host === '::1') return true;
   if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(host)) return true;
   if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(host)) return true;
-  if (host.indexOf(':') >= 0 && (/^f[cd]/.test(host) || host.startsWith('fe80'))) return true;
+  if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(host)) return true;
+  if (/^198\.1[89]\./.test(host)) return true;
+  if (/^(192\.0\.0\.|192\.0\.2\.|198\.51\.100\.|203\.0\.113\.)/.test(host)) return true;
+  if (/^(22[4-9]|23\d|24\d|25[0-5])\./.test(host)) return true;
+  if (host.indexOf(':') >= 0 && (/^f[cd]/.test(host) || host.startsWith('fe80') || host.includes('ffff:'))) return true;
   return false;
 }
 

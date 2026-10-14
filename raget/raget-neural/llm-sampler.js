@@ -167,6 +167,29 @@ function sample(logits, options) {
     }
 }
 
+function selectTopK(row, k) {
+    const limit = Math.max(1, Math.min(k, row.length));
+    const top = [];
+    let minVal = -Infinity;
+    for (let i = 0; i < row.length; i += 1) {
+        const v = row[i];
+        if (v === -Infinity || Number.isNaN(v)) continue;
+        if (top.length < limit) {
+            top.push({ v: v, i: i });
+            if (top.length === limit) {
+                top.sort(function (a, b) { return b.v - a.v; });
+                minVal = top[top.length - 1].v;
+            }
+        } else if (v > minVal) {
+            top[top.length - 1] = { v: v, i: i };
+            top.sort(function (a, b) { return b.v - a.v; });
+            minVal = top[top.length - 1].v;
+        }
+    }
+    if (top.length < limit) top.sort(function (a, b) { return b.v - a.v; });
+    return top;
+}
+
 function sampleAdaptive(logits, options) {
     options = options || {};
     const temperature = typeof options.temperature === 'number' ? options.temperature : 0.7;
@@ -177,15 +200,29 @@ function sampleAdaptive(logits, options) {
     if (options.jsonGrammarState && options.vocab) {
         row = constrainLogitsToJSON(row, options.vocab, options.jsonGrammarState, options.eosId, options.wordBoundaryPending).logits;
     }
-    const indexed = [];
-    for (let i = 0; i < row.length; i += 1) indexed.push({ v: row[i], i: i });
-    indexed.sort(function (a, b) { return b.v - a.v; });
-    const keep = new Set();
-    const limit = Math.min(k, indexed.length);
-    for (let n = 0; n < limit; n += 1) keep.add(indexed[n].i);
-    const masked = [];
-    for (let i = 0; i < row.length; i += 1) masked.push(keep.has(i) ? row[i] : -Infinity);
-    return topPSample(masked, p, temperature);
+    const top = selectTopK(row, k);
+    if (!top.length) return 0;
+    const T = Math.max(1e-6, temperature);
+    const maxV = top[0].v / T;
+    let sumExp = 0;
+    const probs = new Array(top.length);
+    for (let i = 0; i < top.length; i += 1) {
+        const e = Math.exp((top[i].v / T) - maxV);
+        probs[i] = e;
+        sumExp += e;
+    }
+    let cumulative = 0;
+    const nucleus = [];
+    for (let i = 0; i < top.length; i += 1) {
+        const prob = sumExp > 0 ? probs[i] / sumExp : (1 / top.length);
+        nucleus.push({ prob: prob, i: top[i].i });
+        cumulative += prob;
+        if (cumulative >= p) break;
+    }
+    const nucleusSum = nucleus.reduce(function (s, e) { return s + e.prob; }, 0);
+    const renormalized = nucleus.map(function (e) { return e.prob / (nucleusSum || 1); });
+    const chosenLocal = sampleFromProbabilities(renormalized);
+    return nucleus[chosenLocal].i;
 }
 
 const SAMPLE_DEFAULTS = Object.freeze({

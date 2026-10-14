@@ -126,3 +126,23 @@ export function mountToolCalls(container, tools) {
     container.appendChild(card);
   });
 }
+
+export function resolveAutonomousConnector(text) {
+  const st = connectorState.read();
+  if (!st || st.autonomous_discovery === false) return null;
+  const q = String(text || '').trim();
+  if (!q) return null;
+  if (/\b(repo github|repositori github|commit github|pull request github|isu github)\b/i.test(q)) {
+    return { name: 'github_list_repos', service: 'github', parameters: { q } };
+  }
+  if (/\b(google drive|berkas drive|cari di drive|dokumen drive)\b/i.test(q)) {
+    return { name: 'drive_search', service: 'google_drive', parameters: { q } };
+  }
+  if (/\b(email gmail|kotak masuk gmail|pesan gmail|inbox gmail)\b/i.test(q)) {
+    return { name: 'gmail_list_messages', service: 'gmail', parameters: { q } };
+  }
+  if (/\b(google calendar|kalender google|jadwal google)\b/i.test(q)) {
+    return { name: 'calendar_list_events', service: 'google_calendar', parameters: { q } };
+  }
+  return null;
+}

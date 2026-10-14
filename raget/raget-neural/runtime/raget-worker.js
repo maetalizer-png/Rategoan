@@ -33,8 +33,13 @@ function session() {
 self.onmessage = async (event) => {
   const msg = event.data || {};
   if (msg.op === 'verify_session') {
+    const vCap = setTimeout(() => {
+      closeActiveSync();
+      self.postMessage({ id: msg.id, type: 'error', message: 'verify timeout' });
+    }, Number(msg.timeoutMs) > 0 ? Number(msg.timeoutMs) : 5000);
     try {
       const live = await session();
+      clearTimeout(vCap);
       self.postMessage({
         id: msg.id,
         type: 'verified',
@@ -45,6 +50,7 @@ self.onmessage = async (event) => {
         layers: live.layers,
       });
     } catch (e) {
+      clearTimeout(vCap);
       closeActiveSync();
       self.postMessage({ id: msg.id, type: 'error', message: e && e.message ? e.message : 'gagal' });
     }
@@ -74,6 +80,10 @@ self.onmessage = async (event) => {
       topK: msg.topK,
       topP: msg.topP,
       repetitionPenalty: msg.repetitionPenalty,
+      onStep() {
+        if (timed) return;
+        arm();
+      },
       onToken(piece) {
         if (timed) return;
         arm();

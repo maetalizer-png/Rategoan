@@ -192,6 +192,7 @@ async function readResponseBytes(res, expect, onBytes, idleMs, signal) {
       }
       signal.addEventListener('abort', stop, { once: true });
     }
+    const direct = expect > 0 ? new Uint8Array(expect) : null;
     const parts = [];
     let got = 0;
     try {
@@ -203,7 +204,8 @@ async function readResponseBytes(res, expect, onBytes, idleMs, signal) {
         if (!value || !value.byteLength) continue;
         const take = Math.min(value.byteLength, expect - got);
         const piece = take === value.byteLength ? value : value.subarray(0, take);
-        parts.push(piece);
+        if (direct) direct.set(piece, got);
+        else parts.push(piece);
         got += piece.byteLength;
         if (onBytes) onBytes(got);
       }
@@ -212,7 +214,7 @@ async function readResponseBytes(res, expect, onBytes, idleMs, signal) {
       try { reader.releaseLock(); } catch (e) { /* kunci sudah lepas */ }
     }
     if (got !== expect) throw new Error('potongan pendek ' + got + '/' + expect);
-    return joinParts(parts, got);
+    return direct || joinParts(parts, got);
   }
   if (signal && signal.aborted) throw new Error('dibatalkan');
   const raw = new Uint8Array(await res.arrayBuffer());

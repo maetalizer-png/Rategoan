@@ -350,6 +350,8 @@ export const chat = {
       const d = document.createElement('div');
       d.className = 'msg ' + (m.role === 'user' ? 'user' : 'ai');
       d.dataset.idx = String(idx);
+      if (m.message_id) d.dataset.messageId = String(m.message_id);
+      if (m.request_id) d.dataset.requestId = String(m.request_id);
       if (m.quote) {
         const q = document.createElement('span');
         q.className = 'msg-quote';
@@ -435,29 +437,30 @@ export const chat = {
     const d = document.createElement('div');
     d.className = 'msg ai';
     d.dataset.idx = String(s.messages.length - 1);
+    if (opts && opts.thoughtStart) d.dataset.thoughtStart = String(opts.thoughtStart);
+    if (opts && opts.userOpened) d.dataset.userOpened = String(opts.userOpened);
     if (opts && opts.searching) d.appendChild(buildSourceBadge());
     if (opts && opts.thoughts) mountThought(d, opts.thoughts, 'selesai');
     const body = document.createElement('div');
     d.appendChild(body);
     $('messages').appendChild(d);
+    const alreadyStreamed = !!(opts && opts.alreadyStreamed);
     if (isRich(text)) {
       mountRich(body, text);
-    } else if (follow && !reduceMotion() && text.length > 0) {
+    } else if (!alreadyStreamed && follow && !reduceMotion() && text.length > 0) {
       let skip = false;
       const onTap = () => { skip = true; };
       body.addEventListener('pointerdown', onTap, { once: true });
-      const long = text.length > 400;
+      const step = Math.max(28, Math.ceil(text.length / 12));
       let i = 0;
       while (i < text.length && !skip && !(opts && opts.signal && opts.signal.aborted)) {
-        const step = long ? 4 + Math.floor(Math.random() * 3) : 1 + Math.floor(Math.random() * 2);
         i += step;
         body.innerHTML = markdown.render(text.slice(0, i));
         scrollBottom();
-        const wait = long ? 16 : 18 + Math.floor(Math.random() * 7);
         if (typeof requestAnimationFrame === 'function') {
           await new Promise((resolve) => requestAnimationFrame(() => resolve()));
         } else {
-          await sleep(wait);
+          await sleep(12);
         }
       }
       body.removeEventListener('pointerdown', onTap);
@@ -484,12 +487,15 @@ export const chat = {
     const s = this.current();
     const hasDirectReply = !!(opts && opts.directReply != null);
     const searching = !hasDirectReply && !!(opts && opts.searching);
+    const lp = opts && opts.livePlan;
     const typing = document.createElement('div');
     typing.className = 'msg ai typing' + (searching ? ' searching' : '');
+    const hasRunningThought = !!(lp || $('messages').querySelector('.thought-accordion.running'));
     if (searching) {
       typing.innerHTML = ic('globe') + '<span>Mencari di internet…</span>';
     } else {
       typing.innerHTML = '<span class="zen-dot"></span>';
+      if (hasRunningThought) typing.hidden = true;
     }
     $('messages').appendChild(typing);
     pinStreamDisclaimer($('messages'));
@@ -499,9 +505,29 @@ export const chat = {
     const searchStart = Date.now();
     let reply = null;
     let attempt = 0;
+    let streamedChars = 0;
+    let streamAccum = '';
     const onPiece = (event) => {
       const piece = event && event.detail ? String(event.detail) : '';
       if (!piece) return;
+      streamedChars += piece.length;
+      streamAccum += piece;
+      if (lp && lp.isConnected) {
+        if (!lp.dataset.thoughtCompleted && opts && opts.thoughts) {
+          lp.dataset.thoughtCompleted = '1';
+          mountThought(lp, opts.thoughts, 'selesai');
+        }
+        let streamBody = lp.querySelector('.live-stream-body');
+        if (!streamBody) {
+          streamBody = document.createElement('div');
+          streamBody.className = 'live-stream-body';
+          lp.appendChild(streamBody);
+        }
+        streamBody.innerHTML = markdown.render(streamAccum);
+        scrollBottom();
+        return;
+      }
+      typing.hidden = false;
       const span = typing.querySelector('.zen-dot') || typing.querySelector('span');
       if (!span) return;
       if (span.classList.contains('zen-dot')) span.className = 'token-stream';
@@ -560,7 +586,17 @@ export const chat = {
     s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts });
     const signal = generation ? generation.signal : null;
     try {
-      await this.typeReply(reply, !scrolldown.isFar(), { searching, thoughts: opts && opts.thoughts, signal });
+      const thoughtStart = lp && lp.dataset ? lp.dataset.thoughtStart : '';
+      const userOpened = lp && lp.dataset ? lp.dataset.userOpened : '';
+      if (lp && lp.parentNode) lp.remove();
+      await this.typeReply(reply, !scrolldown.isFar(), {
+        searching,
+        thoughts: opts && opts.thoughts,
+        thoughtStart,
+        userOpened,
+        signal,
+        alreadyStreamed: streamedChars > 0 && !(opts && opts.preamble),
+      });
       if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') navigator.vibrate(8);
       else haptics.tap(8);
     } finally {

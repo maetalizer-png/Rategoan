@@ -1,43 +1,152 @@
 .thought-accordion {
-  margin: 0 0 8px;
-  border: 1px solid var(--rg-line, #e4e4e4);
-  border-radius: 12px;
-  background: var(--rg-surface, #fff);
+  margin: 0 0 10px;
+  border: 1px solid var(--rg-line, #e2e8f0);
+  border-radius: 999px;
+  background: var(--rg-surface-2, #f8fafc);
   font-size: 13px;
+  display: inline-block;
+  max-width: 100%;
+  transition: border-radius 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thought-accordion[open] {
+  display: block;
+  width: 100%;
+  border-radius: 16px;
+  background: var(--rg-surface, #ffffff);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
 }
 
 .thought-accordion summary {
   cursor: pointer;
-  padding: 8px 10px;
+  padding: 6px 11px 6px 8px;
   list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  user-select: none;
+  color: var(--rg-text, #1e293b);
+  font-weight: 500;
+}
+
+.thought-accordion[open] summary {
+  display: flex;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--rg-line, #f1f5f9);
 }
 
 .thought-accordion summary::-webkit-details-marker { display: none; }
+
+.thought-brain-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 100%);
+  color: #6d28d9;
+  flex-shrink: 0;
+}
+
+.thought-brain-ico.is-done {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.thought-brain-ico.is-pulsing {
+  animation: thought-brain-pulse 1.5s ease-in-out infinite;
+}
+
+.thought-summary-label {
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+.thought-summary-label.is-shimmer {
+  background: linear-gradient(90deg, #334155 0%, #7c3aed 50%, #334155 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: thought-shimmer 2.2s linear infinite;
+}
+
+.thought-step-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--rg-surface, #ffffff);
+  border: 1px solid var(--rg-line, #e2e8f0);
+  color: var(--rg-muted, #64748b);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.thought-timer {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11.5px;
+  color: var(--rg-muted, #64748b);
+  white-space: nowrap;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.thought-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rg-muted, #64748b);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.thought-accordion[open] .thought-chevron {
+  transform: rotate(180deg);
+}
+
+@keyframes thought-brain-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.28); }
+  50% { transform: scale(1.07); box-shadow: 0 0 0 5px rgba(109, 40, 217, 0); }
+}
+
+@keyframes thought-shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
 
 .agentic-stepper {
   position: relative;
   list-style: none;
   margin: 0;
-  padding: 4px 10px 10px 8px;
+  padding: 10px 12px 12px 12px;
 }
 
 .agentic-stepper::before {
   content: '';
   position: absolute;
-  left: 19px;
-  top: 12px;
-  bottom: 16px;
-  width: 1px;
-  background: var(--rg-line, #e4e4e4);
+  left: 23px;
+  top: 18px;
+  bottom: 20px;
+  width: 1.5px;
+  background: var(--rg-line, #e2e8f0);
 }
 
 .stepper-node {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: flex-start;
   position: relative;
-  margin: 8px 0;
+  margin: 10px 0;
 }
+
+.stepper-node:first-child { margin-top: 2px; }
+.stepper-node:last-child { margin-bottom: 2px; }
 
 .stepper-orb {
   width: 24px;
@@ -48,24 +157,73 @@
   justify-content: center;
   flex: none;
   background: var(--rg-surface, #fff);
-  border: 1px solid var(--rg-line, #e4e4e4);
+  border: 1px solid var(--rg-line, #e2e8f0);
+  z-index: 1;
 }
 
-.lane-web .stepper-orb { background: #eff6ff; }
-.lane-file .stepper-orb { background: #f0fdf4; }
-.lane-tool .stepper-orb { background: #f8fafc; }
-.lane-mind .stepper-orb { background: #f5f3ff; }
-.lane-slide .stepper-orb { background: #fff7ed; }
+.stepper-node.is-done .stepper-orb {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
 
-.stepper-copy { line-height: 1.35; }
-.stepper-copy small { display: block; color: var(--rg-muted, #6b6b6b); }
+.lane-web .stepper-orb { background: #eff6ff; border-color: #bfdbfe; }
+.lane-file .stepper-orb { background: #f0fdf4; border-color: #bbf7d0; }
+.lane-tool .stepper-orb { background: #f8fafc; border-color: #cbd5e1; }
+.lane-mind .stepper-orb { background: #f5f3ff; border-color: #ddd6fe; }
+.lane-slide .stepper-orb { background: #fff7ed; border-color: #fed7aa; }
+
+.stepper-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stepper-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stepper-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--rg-text, #1e293b);
+  line-height: 1.3;
+}
+
+.stepper-ms {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: var(--rg-muted, #64748b);
+  background: var(--rg-surface-2, #f8fafc);
+  padding: 1px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.stepper-telemetry {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: var(--rg-muted, #64748b);
+  background: var(--rg-surface-2, #f8fafc);
+  border: 1px solid var(--rg-line, #f1f5f9);
+  border-radius: 6px;
+  padding: 4px 7px;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.38;
+}
 
 .stepper-node.is-live .stepper-orb {
-  animation: thought-pulse 1.6s ease-in-out infinite;
+  animation: thought-pulse 1.4s ease-in-out infinite;
 }
 
 @keyframes thought-pulse {
-  50% { opacity: 0.45; }
+  50% { opacity: 0.45; transform: scale(0.94); }
 }
 
 .daily-brief {

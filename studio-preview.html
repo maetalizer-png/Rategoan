@@ -12,7 +12,7 @@ window.addEventListener('message', function (event) {
   if (!event.origin) return;
   var data = event.data;
   if (!data || data.type !== 'INIT_PORT' || !event.ports || !event.ports[0]) return;
-  if (!data.nonce) return;
+  if (!data.nonce || sessionNonce) return;
   sessionNonce = String(data.nonce);
   var port = event.ports[0];
   port.onmessage = function (e) {
@@ -62,6 +62,10 @@ function paintLive(html) {
     document.head.appendChild(copy);
   });
   slot.replaceChildren();
+  parsed.head.querySelectorAll('script').forEach(function (node) {
+    if (/PORT_READY|sessionNonce/.test(node.textContent || '')) return;
+    slot.appendChild(document.importNode(node, true));
+  });
   Array.prototype.slice.call(parsed.body.childNodes).forEach(function (node) {
     if (node.nodeName === 'SCRIPT' && /PORT_READY|sessionNonce/.test(node.textContent || '')) return;
     slot.appendChild(document.importNode(node, true));

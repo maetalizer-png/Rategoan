@@ -1,6 +1,6 @@
 export function rejectUnsafeHtml(raw) {
   const text = String(raw == null ? '' : raw);
-  if (/<script|javascript:|onerror\s*=|onload\s*=/i.test(text)) {
+  if (/<\/?(?:script|iframe|object|embed|base|meta)\b|javascript:|vbscript:|data:\s*text\/html|(?:^|[\s<\/"'\x00-\x20])on[a-z]+\s*=/i.test(text)) {
     throw new TypeError('trusted_types_ditolak');
   }
   return text;

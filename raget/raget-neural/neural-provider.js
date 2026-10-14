@@ -1,4 +1,3 @@
-
 import { personaLora, pullLora } from '../../js/chat/persona.js';
 import { llmMode } from '../../js/state/llm-mode.js';
 import { hudBudget } from '../../js/studio/telemetry.js';
@@ -216,7 +215,11 @@ function untilReady(ms) {
 
 async function smokeToken() {
   if (smokePassed) return true;
-  if (typeof Worker !== 'function') return !!(weightReader && payloadTrusted(weightReader));
+  if (typeof Worker !== 'function') {
+    const ok = !!(weightReader && payloadTrusted(weightReader));
+    if (ok) smokePassed = true;
+    return ok;
+  }
   try {
     const out = await runOnWorker('ok', {
       op: 'verify_session',
@@ -238,9 +241,15 @@ async function smokeToken() {
   }
 }
 
+async function clearPendingTimers(item) {
+  if (!item) return;
+  if (item.timer) { clearTimeout(item.timer); item.timer = 0; }
+}
+
 async function flushPending() {
   while (pendingPrompts.length) {
     const job = pendingPrompts.shift();
+    clearPendingTimers(job);
     const reply = await generateLocal(job.prompt, job.options || {});
     if (!reply || typeof window === 'undefined' || typeof CustomEvent === 'undefined') continue;
     window.dispatchEvent(new CustomEvent('rategoan:pending-reply', {
@@ -478,9 +487,11 @@ function runOnWorker(prompt, genOpts, signal) {
   const live = ensureWorker();
   return new Promise((resolve) => {
     let settled = false;
+    let timer = 0;
     const finish = (value) => {
       if (settled) return;
       settled = true;
+      if (timer) clearTimeout(timer);
       activeWorkerJobs.delete(finish);
       live.removeEventListener('message', onMsg);
       live.removeEventListener('error', onErr);
@@ -488,6 +499,9 @@ function runOnWorker(prompt, genOpts, signal) {
       resolve(value);
     };
     activeWorkerJobs.add(finish);
+    if (genOpts && Number(genOpts.timeoutMs) > 0) {
+      timer = setTimeout(() => finish(null), Number(genOpts.timeoutMs));
+    }
     const onAbort = () => {
       haltInference();
       if (!lastEnvelope.error) remember({ ok: false, status: MODEL_STATUS.FAILED, error: 'dibatalkan', reply: null });
@@ -581,6 +595,7 @@ async function generateWithTier(tier, prompt, options) {
       return null;
     }
     const out = await runOnWorker(String(prompt || ''), genOpts, signal);
+    if (signal && signal.aborted) return null;
     return textFrom(out, options);
   } catch (e) {
     remember({ ok: false, status: MODEL_STATUS.FAILED, error: e && e.message ? e.message : 'gagal', reply: null });
@@ -614,10 +629,8 @@ function composeNeuralInput(prompt, options) {
     const text = row.text != null ? String(row.text) : '';
     return text ? (role + ': ' + text) : '';
   }).filter(Boolean);
-  const history = fold(recent);
-  const older = fold(messages);
+  const history = fold(recent.length ? recent : messages.slice(-6));
   if (history.length) parts.push(history.join('\n'));
-  if (older.length) parts.push(older.join('\n'));
   parts.push(base);
   return parts.join('\n\n');
 }

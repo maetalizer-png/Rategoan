@@ -248,7 +248,8 @@ function isolatedFrame(markup) {
   frame.setAttribute('sandbox', 'allow-scripts');
   frame.title = 'Pratinjau terisolasi';
   frame.style.cssText = 'width:100%;min-height:260px;border:0;background:transparent';
-  frame.srcdoc = '<!doctype html><meta charset="utf-8"><style>html,body{margin:0;background:transparent}</style>' + String(markup || '');
+  const safeMarkup = String(markup || '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '');
+  frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src data: blob:;"><style>html,body{margin:0;background:transparent}</style>' + safeMarkup;
   return frame;
 }
 

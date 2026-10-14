@@ -76,8 +76,10 @@ export function bearer(req) {
 }
 
 export function originOf(req) {
-  const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost';
-  const proto = String(req.headers['x-forwarded-proto'] || 'https').split(',')[0];
+  const rawHost = String((req && req.headers && (req.headers['x-forwarded-host'] || req.headers.host)) || 'localhost').split(',')[0].trim();
+  const host = /^[a-zA-Z0-9.-]+(?::\d{1,5})?$/.test(rawHost) ? rawHost : 'localhost';
+  const rawProto = String((req && req.headers && req.headers['x-forwarded-proto']) || 'https').split(',')[0].trim().toLowerCase();
+  const proto = rawProto === 'http' ? 'http' : 'https';
   return proto + '://' + host;
 }
 
@@ -185,9 +187,13 @@ export async function forward(res, url, token, method, body, extraHeaders) {
 }
 
 function ipv4Private(v4) {
-  if (v4 === '0.0.0.0') return true;
+  if (v4 === '0.0.0.0' || v4 === '255.255.255.255') return true;
   if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(v4)) return true;
   if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(v4)) return true;
+  if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(v4)) return true;
+  if (/^198\.1[89]\./.test(v4)) return true;
+  if (/^(192\.0\.0\.|192\.0\.2\.|198\.51\.100\.|203\.0\.113\.)/.test(v4)) return true;
+  if (/^(22[4-9]|23\d|24\d|25[0-5])\./.test(v4)) return true;
   return false;
 }
 
@@ -350,8 +356,9 @@ export function publicHttpUrl(raw) {
   let url;
   try { url = new URL(String(raw || '')); } catch (e) { return null; }
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+  if (url.username || url.password) return null;
   const host = url.hostname.toLowerCase();
-  if (host === 'localhost' || host.endsWith('.local') || host === '0.0.0.0' || host === '::1') return null;
+  if (host === 'localhost' || host === 'metadata' || host === 'metadata.google.internal' || host.endsWith('.local') || host.endsWith('.internal') || host === '0.0.0.0' || host === '::1') return null;
   if (ipIsPrivate(host)) return null;
   return url.toString();
 }

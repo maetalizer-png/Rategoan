@@ -1,10 +1,12 @@
 let sync = null;
+let dirtyChunks = 0;
 
 async function handle() {
   if (sync) return sync;
   const root = await navigator.storage.getDirectory();
   const file = await root.getFileHandle('raget-neural-1.5b.safetensors', { create: true });
   sync = await file.createSyncAccessHandle();
+  dirtyChunks = 0;
   return sync;
 }
 
@@ -16,6 +18,7 @@ self.onmessage = async (event) => {
         sync.flush();
         sync.close();
         sync = null;
+        dirtyChunks = 0;
       }
       self.postMessage({ id: msg.id, op: 'closed', ok: true });
     } catch (e) {
@@ -48,15 +51,22 @@ self.onmessage = async (event) => {
     const bytes = raw instanceof Uint8Array
       ? raw
       : new Uint8Array(raw instanceof ArrayBuffer ? raw : (raw || 0));
+    const digestPromise = (msg.hash && self.crypto && crypto.subtle)
+      ? crypto.subtle.digest('SHA-256', bytes)
+      : null;
     const written = io.write(bytes, { at: msg.offset || 0 });
     if (typeof written === 'number' && written !== bytes.byteLength) {
       self.postMessage({ id: msg.id, ok: false });
       return;
     }
-    io.flush();
+    dirtyChunks += 1;
+    if (msg.flush === true || dirtyChunks >= 16) {
+      io.flush();
+      dirtyChunks = 0;
+    }
     let digest = '';
-    if (msg.hash && self.crypto && crypto.subtle) {
-      const buf = await crypto.subtle.digest('SHA-256', bytes);
+    if (digestPromise) {
+      const buf = await digestPromise;
       digest = Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
     }
     self.postMessage({ id: msg.id, ok: true, digest: digest });

@@ -82,6 +82,21 @@ export function readSyncBlock(sync, offset, length) {
   return n === length ? buf : buf.subarray(0, Math.max(0, n));
 }
 
+export function readScratchBlock(sync, offset, length, scratchSlots, slotIndex) {
+  const idx = Math.max(0, slotIndex | 0);
+  let backing = scratchSlots[idx];
+  if (!backing || backing.byteLength < length) {
+    const isPacked = (idx % 3) === 0;
+    const minCap = isPacked ? 8 * 1024 * 1024 : 2 * 1024 * 1024;
+    const cap = Math.max(minCap, (length + 4095) & ~4095);
+    backing = new Uint8Array(cap);
+    scratchSlots[idx] = backing;
+  }
+  const view = backing.subarray(0, length);
+  const n = sync.read(view, { at: offset });
+  return n === length ? view : backing.subarray(0, Math.max(0, n));
+}
+
 const HEADER_CAP = 64 * 1024;
 const REQUIRED_TENSORS = [
   'embedding.weight',
@@ -146,10 +161,14 @@ export async function openSyncWeight(name) {
     const root = await nav.storage.getDirectory();
     const handle = await root.getFileHandle(String(name || 'raget-neural-1.5b.safetensors'));
     const sync = await handle.createSyncAccessHandle();
+    const scratchSlots = new Array(9).fill(null);
     return {
       size: sync.getSize(),
       read(offset, length) {
         return readSyncBlock(sync, offset, length);
+      },
+      readScratch(offset, length, slotIndex) {
+        return readScratchBlock(sync, offset, length, scratchSlots, slotIndex);
       },
       close() { sync.close(); },
     };

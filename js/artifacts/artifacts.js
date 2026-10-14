@@ -136,7 +136,7 @@ function paint() {
       const frame = $('artifact-inline');
       if (frame && /<\s*(svg|html|div|p|table)\b/i.test(body)) {
         frame.hidden = false;
-        frame.srcdoc = body;
+        frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src data: blob:;">' + body.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '');
         return;
       }
       if (item.type === 'code' || item.type === 'document' || item.type === 'table' || item.type === 'chart' || item.type === 'diagram' || item.type === 'report') artifact.open(item);

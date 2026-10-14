@@ -12,12 +12,18 @@ const UNMATCHED_KEY = 'unmatched_queries';
 const MAX_UNMATCHED = 500;
 
 async function readAll() {
-  const list = await idbGateway.getList(KEY);
-  return Array.isArray(list) ? list.filter(ragetSchema.isValidNote) : [];
+  try {
+    const list = await idbGateway.getList(KEY);
+    return Array.isArray(list) ? list.filter(ragetSchema.isValidNote) : [];
+  } catch (e) {
+    return [];
+  }
 }
 
 async function writeAll(list) {
-  await idbGateway.setList(KEY, list.slice(-MAX_NOTES));
+  try {
+    await idbGateway.setList(KEY, list.slice(-MAX_NOTES));
+  } catch (e) { /* idb tidak tersedia */ }
 }
 
 async function addNote(question, answer, feedback, intent, sourceEntryId) {
@@ -77,12 +83,18 @@ async function removeByIds(ids) {
 }
 
 async function readAllUnmatched() {
-  const list = await idbGateway.getList(UNMATCHED_KEY);
-  return Array.isArray(list) ? list.filter(ragetSchema.isValidUnmatched) : [];
+  try {
+    const list = await idbGateway.getList(UNMATCHED_KEY);
+    return Array.isArray(list) ? list.filter(ragetSchema.isValidUnmatched) : [];
+  } catch (e) {
+    return [];
+  }
 }
 
 async function writeAllUnmatched(list) {
-  await idbGateway.setList(UNMATCHED_KEY, list.slice(-MAX_UNMATCHED));
+  try {
+    await idbGateway.setList(UNMATCHED_KEY, list.slice(-MAX_UNMATCHED));
+  } catch (e) { /* idb tidak tersedia */ }
 }
 
 // FR-5.1: called from agent.js#respondCore only when a query reached the very end

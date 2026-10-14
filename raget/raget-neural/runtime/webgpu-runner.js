@@ -239,6 +239,9 @@ export function trackGpuWeight(packed, scale, zero) {
   gpuWeightCache.set(packed, { scale: scale, zero: zero });
   while (gpuWeightCache.size > GPU_WEIGHT_CACHE_CAP) {
     const oldest = gpuWeightCache.keys().next().value;
+    const entry = gpuWeightCache.get(oldest);
+    if (entry && entry.bufA && typeof entry.bufA.destroy === 'function') entry.bufA.destroy();
+    if (entry && entry.bufB && typeof entry.bufB.destroy === 'function') entry.bufB.destroy();
     gpuWeightCache.delete(oldest);
   }
   return false;
@@ -246,23 +249,73 @@ export function trackGpuWeight(packed, scale, zero) {
 let gemvPipe = null;
 let gemvArena = null;
 let gemvArenaDevice = null;
+let waveArena = [];
+let waveArenaDevice = null;
 
 function pad4(bytes) {
   const src = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  if ((src.byteOffset % 4) === 0 && (src.byteLength % 4) === 0) return src;
   const words = Math.ceil(src.byteLength / 4);
   const out = new Uint8Array(words * 4);
   out.set(src);
   return out;
 }
 
+function dropWaveArena() {
+  if (!waveArena.length) return;
+  const list = waveArena.splice(0);
+  waveArenaDevice = null;
+  list.forEach((slot) => {
+    ['packedBuf', 'xBuf', 'scaleBuf', 'zeroBuf', 'yBuf', 'readBuf', 'dimBuf'].forEach((key) => {
+      try { if (slot[key]) slot[key].destroy(); } catch (e) { /* buffer sudah lepas */ }
+    });
+  });
+}
+
 function dropArena() {
+  dropWaveArena();
   if (!gemvArena) return;
   const box = gemvArena;
   gemvArena = null;
   gemvArenaDevice = null;
   Object.keys(box).forEach((key) => {
-    try { box[key].destroy(); } catch (e) { /* buffer sudah lepas */ }
+    try { if (box[key] && typeof box[key].destroy === 'function') box[key].destroy(); } catch (e) { /* buffer sudah lepas */ }
   });
+}
+
+function ensureWaveSlot(device, index, need) {
+  if (waveArenaDevice && waveArenaDevice !== device) dropWaveArena();
+  waveArenaDevice = device;
+  const packedSize = Math.max(8 * 1024 * 1024, need.packed);
+  const scaleSize = Math.max(2 * 1024 * 1024, need.scale, need.zero);
+  const xSize = Math.max(5632 * 4, need.x);
+  const ySize = Math.max(5632 * 4, need.y);
+  const prev = waveArena[index];
+  if (prev
+    && prev.packedBuf.size >= packedSize
+    && prev.xBuf.size >= xSize
+    && prev.scaleBuf.size >= scaleSize
+    && prev.zeroBuf.size >= scaleSize
+    && prev.yBuf.size >= ySize
+    && prev.readBuf.size >= ySize) {
+    return prev;
+  }
+  if (prev) {
+    ['packedBuf', 'xBuf', 'scaleBuf', 'zeroBuf', 'yBuf', 'readBuf', 'dimBuf'].forEach((key) => {
+      try { if (prev[key]) prev[key].destroy(); } catch (e) { /* lepas */ }
+    });
+  }
+  const slot = {
+    packedBuf: device.createBuffer({ size: packedSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    xBuf: device.createBuffer({ size: xSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    scaleBuf: device.createBuffer({ size: scaleSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    zeroBuf: device.createBuffer({ size: scaleSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
+    yBuf: device.createBuffer({ size: ySize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC }),
+    readBuf: device.createBuffer({ size: ySize, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST }),
+    dimBuf: device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST }),
+  };
+  waveArena[index] = slot;
+  return slot;
 }
 
 function ensureArena(device, need) {
@@ -424,21 +477,25 @@ async function submitWave(device, wave) {
     const rows = job.rows | 0;
     const cols = job.cols | 0;
     const yBytes = Math.max(4, rows * 4);
-    const slot = {
-      rows: rows,
-      yBytes: yBytes,
-      packedBuf: device.createBuffer({ size: Math.max(4, packed.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
-      xBuf: device.createBuffer({ size: Math.max(4, xSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
-      scaleBuf: device.createBuffer({ size: Math.max(4, scaleSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
-      zeroBuf: device.createBuffer({ size: Math.max(4, zeroSrc.byteLength), usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST }),
-      yBuf: device.createBuffer({ size: yBytes, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC }),
-      readBuf: device.createBuffer({ size: yBytes, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST }),
-      dimBuf: device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST }),
-    };
-    device.queue.writeBuffer(slot.packedBuf, 0, packed);
+    const slot = ensureWaveSlot(device, i, {
+      packed: Math.max(4, packed.byteLength),
+      x: Math.max(4, xSrc.byteLength),
+      scale: Math.max(4, scaleSrc.byteLength),
+      zero: Math.max(4, zeroSrc.byteLength),
+      y: yBytes,
+    });
+    slot.rows = rows;
+    slot.yBytes = yBytes;
+    const reuse = slot.lastPackedRef === job.packed && slot.lastScaleRef === job.scales && slot.lastZeroRef === job.zeros;
+    if (!reuse) {
+      device.queue.writeBuffer(slot.packedBuf, 0, packed);
+      device.queue.writeBuffer(slot.scaleBuf, 0, scaleSrc);
+      device.queue.writeBuffer(slot.zeroBuf, 0, zeroSrc);
+      slot.lastPackedRef = job.packed;
+      slot.lastScaleRef = job.scales;
+      slot.lastZeroRef = job.zeros;
+    }
     device.queue.writeBuffer(slot.xBuf, 0, xSrc);
-    device.queue.writeBuffer(slot.scaleBuf, 0, scaleSrc);
-    device.queue.writeBuffer(slot.zeroBuf, 0, zeroSrc);
     device.queue.writeBuffer(slot.dimBuf, 0, new Uint32Array([rows, cols, 0, 0]));
     slots.push(slot);
   }
@@ -470,9 +527,6 @@ async function submitWave(device, wave) {
     await slot.readBuf.mapAsync(GPUMapMode.READ);
     outs.push(new Float32Array(slot.readBuf.getMappedRange(0, slot.yBytes).slice(0)));
     slot.readBuf.unmap();
-    ['packedBuf', 'xBuf', 'scaleBuf', 'zeroBuf', 'yBuf', 'readBuf', 'dimBuf'].forEach((key) => {
-      try { slot[key].destroy(); } catch (e) { /* lepas */ }
-    });
   }
   return outs;
 }
@@ -488,7 +542,7 @@ export async function gemvInt4Chain(jobs) {
     return { ok: true, submits: 1, plan: plan, values: values };
   } catch (e) {
     gemvPipe = null;
+    dropWaveArena();
     return { ok: false, submits: 0, plan: plan, values: null };
   }
 }
-

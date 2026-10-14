@@ -719,7 +719,19 @@ export const settings = {
       if (!window.confirm('Hapus seluruh data, riwayat, dan kunci di perangkat ini? Tindakan ini tidak bisa dibatalkan.')) return;
       vaultKey.drop();
       try { localStorage.clear(); } catch (e) { console.warn('[Rategoan Fallback]', e); }
-      await Promise.all(['raget_idb', 'raget_folder'].map((name) => new Promise((resolve) => {
+      try {
+        if (navigator.storage && typeof navigator.storage.getDirectory === 'function') {
+          const root = await navigator.storage.getDirectory();
+          if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
+        }
+      } catch (e) { /* berkas sudah tidak ada */ }
+      if (typeof caches !== 'undefined' && caches.keys) {
+        try {
+          const keys = await caches.keys();
+          await Promise.all(keys.map((k) => caches.delete(k)));
+        } catch (e) { /* cache tertutup */ }
+      }
+      await Promise.all(['raget_idb', 'raget_folder', 'rategoan_db'].map((name) => new Promise((resolve) => {
         const req = indexedDB.deleteDatabase(name);
         req.onsuccess = () => resolve();
         req.onerror = () => resolve();

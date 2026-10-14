@@ -332,28 +332,135 @@ async function searchDuck(query) {
   }
 }
 
+async function searchOpenAlex(query) {
+  try {
+    const url = 'https://api.openalex.org/works?search=' + encodeURIComponent(query) + '&per-page=3';
+    const data = await fetchJson(url);
+    const rows = (data && data.results) || [];
+    if (!rows.length) return null;
+    const top = rows[0];
+    const title = top.display_name || top.title || query;
+    const year = top.publication_year ? (' (' + top.publication_year + ')') : '';
+    const cited = typeof top.cited_by_count === 'number' ? (' · Disitasi ' + top.cited_by_count + ' kali') : '';
+    const pageUrl = top.doi || top.id || 'https://openalex.org';
+    return {
+      title: title,
+      extract: title + year + cited + '.',
+      url: pageUrl,
+      lang: 'en',
+      source: 'openalex',
+      related: rows.slice(1, 3).map((r) => ({
+        title: r.display_name || r.title || '',
+        snippet: r.publication_year ? ('Publikasi ' + r.publication_year) : '',
+        url: r.doi || r.id || '',
+      })).filter((r) => r.title && r.url),
+      people: [],
+      mode: 'article',
+      weak: false,
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+async function searchHackerNews(query) {
+  try {
+    const url = 'https://hn.algolia.com/api/v1/search?query=' + encodeURIComponent(query) + '&hitsPerPage=3';
+    const data = await fetchJson(url);
+    const rows = ((data && data.hits) || []).filter((h) => h && (h.title || h.story_title) && (h.url || h.objectID));
+    if (!rows.length) return null;
+    const top = rows[0];
+    const title = top.title || top.story_title || query;
+    const itemUrl = top.url || ('https://news.ycombinator.com/item?id=' + top.objectID);
+    return {
+      title: title,
+      extract: title + (top.points ? (' (' + top.points + ' poin diskusi)') : '') + '.',
+      url: itemUrl,
+      lang: 'en',
+      source: 'hackernews',
+      related: rows.slice(1, 3).map((h) => ({
+        title: h.title || h.story_title || '',
+        snippet: h.author ? ('Diskusi oleh ' + h.author) : '',
+        url: h.url || ('https://news.ycombinator.com/item?id=' + h.objectID),
+      })),
+      people: [],
+      mode: 'web',
+      weak: false,
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+function mergeMultiSources(candidates) {
+  const valid = candidates.filter((item) => item && item.title && item.extract);
+  if (!valid.length) return null;
+  const primary = Object.assign({}, valid[0]);
+  const seenUrls = new Set();
+  const sources = [];
+  const related = [];
+  const addSource = (item) => {
+    const u = String(item.url || item.title || '').toLowerCase();
+    if (!u || seenUrls.has(u)) return;
+    seenUrls.add(u);
+    sources.push({
+      title: item.title || '',
+      extract: item.extract || item.snippet || '',
+      url: item.url || '',
+      source: item.source || 'web',
+    });
+  };
+  valid.forEach((item) => {
+    addSource(item);
+    (item.related || []).forEach((rel) => {
+      if (!rel || !rel.title) return;
+      const key = String(rel.url || rel.title).toLowerCase();
+      if (related.length < 6 && !related.some((r) => String(r.url || r.title).toLowerCase() === key)) {
+        related.push(rel);
+      }
+      if (sources.length < 8 && rel.url) {
+        addSource({ title: rel.title, extract: rel.snippet || rel.title, url: rel.url, source: item.source || 'web' });
+      }
+    });
+  });
+  primary.sources = sources.slice(0, 8);
+  primary.related = related.slice(0, 6);
+  return primary;
+}
+
 async function search(query) {
   const q = String(query || '').trim();
   if (!q) return { ok: false, message: 'Mau cari apa di internet?' };
   if (typeof fetch !== 'function') return { ok: false, message: NETWORK_FAIL_MESSAGE };
   try {
-    let result = await searchDuck(q);
-    if (!result) result = await searchWikipediaRanked(q, 'id');
-    if (!result) result = await searchWikipediaRanked(q, 'en');
+    const settled = await Promise.allSettled([
+      searchDuck(q),
+      searchWikipediaRanked(q, 'id'),
+      searchWikipediaRanked(q, 'en'),
+      searchWikidata(q),
+      searchOpenAlex(q),
+      searchHackerNews(q),
+    ]);
+    const hits = settled
+      .map((row) => (row.status === 'fulfilled' ? row.value : null))
+      .filter(Boolean);
+    let result = mergeMultiSources(hits);
     if (!result) result = await searchWiktionary(q, 'id');
     if (!result) result = await searchWiktionary(q, 'en');
-    if (!result) result = await searchWikidata(q);
     if (!result) {
       return {
         ok: false,
         message: 'Sudah dicari di Wikipedia, Wiktionary, dan Wikidata, tapi tidak ketemu yang relevan untuk "' + q + '".',
       };
     }
+    if (!Array.isArray(result.sources) || !result.sources.length) {
+      result.sources = [{ title: result.title, extract: result.extract, url: result.url, source: result.source }];
+    }
     if (result.extract && result.lang !== 'id') {
       const extract = await answerComposer.lockAnswer(q, result.extract);
       if (extract !== result.extract) result = { ...result, extract, translatedFrom: result.lang || 'en' };
     }
-    return { ok: true, related: result.related || [], people: result.people || [], mode: result.mode || 'article', weak: !!result.weak, ...result };
+    return { ok: true, related: result.related || [], people: result.people || [], sources: result.sources || [], mode: result.mode || 'article', weak: !!result.weak, ...result };
   } catch (e) {
     return { ok: false, message: NETWORK_FAIL_MESSAGE };
   }

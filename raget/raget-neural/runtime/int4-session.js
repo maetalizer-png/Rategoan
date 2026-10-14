@@ -61,8 +61,19 @@ function encodePrompt(text, limit) {
 }
 
 function pickToken(logits, opts, recent) {
-  const row = Array.from(logits);
   const temperature = Number(opts && opts.temperature);
+  if (!(temperature > 0) && (!recent || !recent.length || !(Number(opts && opts.repetitionPenalty) > 1))) {
+    let bestId = 0;
+    let bestVal = -Infinity;
+    for (let i = 0; i < logits.length; i += 1) {
+      if (logits[i] > bestVal) {
+        bestVal = logits[i];
+        bestId = i;
+      }
+    }
+    return bestId;
+  }
+  const row = Array.from(logits);
   if (!(temperature > 0)) return LLMSampler.greedySample(row);
   return LLMSampler.sampleAdaptive(row, {
     temperature: temperature,
@@ -83,19 +94,89 @@ function locate(parsed, name) {
   };
 }
 
-function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, lora) {
+export function gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, lora) {
+  const nBlocksCol = cols >>> 5;
+  const xBlockSum = ((cols & 31) === 0 && nBlocksCol > 0) ? new Float32Array(nBlocksCol) : null;
+  if (xBlockSum) {
+    for (let bc = 0; bc < nBlocksCol; bc += 1) {
+      const c0 = bc << 5;
+      let s = 0;
+      for (let j = 0; j < 32; j += 4) {
+        s += x[c0 + j] + x[c0 + j + 1] + x[c0 + j + 2] + x[c0 + j + 3];
+      }
+      xBlockSum[bc] = s;
+    }
+  }
+  const pLen = packed.length;
+  const words32 = (packed.byteOffset % 4 === 0 && (packed.byteLength & 3) === 0)
+    ? new Uint32Array(packed.buffer, packed.byteOffset, packed.byteLength >>> 2)
+    : null;
+  const wLen = words32 ? words32.length : 0;
   for (let r = 0; r < rows; r += 1) {
     if ((r & 511) === 0 && signal && signal.aborted) return false;
     let acc = 0;
     const rBase = r * cols;
     let c = 0;
-    for (; c + 8 <= cols; c += 8) {
-      for (let k = 0; k < 8; k += 1) {
-        const i = rBase + c + k;
-        const byte = packed[i >> 1] || 0;
-        const q = (i & 1) ? ((byte >>> 4) & 15) : (byte & 15);
-        const blk = i >> 5;
-        acc += (q - (zeros[blk] || 0)) * (scales[blk] || 0) * x[c + k];
+    if (xBlockSum && ((rBase & 31) === 0)) {
+      let blk = rBase >>> 5;
+      let pBase = rBase >>> 1;
+      if (words32 && ((pBase & 3) === 0)) {
+        let wBase = pBase >>> 2;
+        for (let bc = 0; bc < nBlocksCol; bc += 1, c += 32, blk += 1, wBase += 4) {
+          const s = scales[blk] || 0;
+          if (s !== 0 && wBase + 4 <= wLen) {
+            const z = zeros[blk] || 0;
+            const w0 = words32[wBase];
+            const w1 = words32[wBase + 1];
+            const w2 = words32[wBase + 2];
+            const w3 = words32[wBase + 3];
+            const dotQ = (w0 & 15) * x[c] + ((w0 >>> 4) & 15) * x[c + 1]
+              + ((w0 >>> 8) & 15) * x[c + 2] + ((w0 >>> 12) & 15) * x[c + 3]
+              + ((w0 >>> 16) & 15) * x[c + 4] + ((w0 >>> 20) & 15) * x[c + 5]
+              + ((w0 >>> 24) & 15) * x[c + 6] + (w0 >>> 28) * x[c + 7]
+              + (w1 & 15) * x[c + 8] + ((w1 >>> 4) & 15) * x[c + 9]
+              + ((w1 >>> 8) & 15) * x[c + 10] + ((w1 >>> 12) & 15) * x[c + 11]
+              + ((w1 >>> 16) & 15) * x[c + 12] + ((w1 >>> 20) & 15) * x[c + 13]
+              + ((w1 >>> 24) & 15) * x[c + 14] + (w1 >>> 28) * x[c + 15]
+              + (w2 & 15) * x[c + 16] + ((w2 >>> 4) & 15) * x[c + 17]
+              + ((w2 >>> 8) & 15) * x[c + 18] + ((w2 >>> 12) & 15) * x[c + 19]
+              + ((w2 >>> 16) & 15) * x[c + 20] + ((w2 >>> 20) & 15) * x[c + 21]
+              + ((w2 >>> 24) & 15) * x[c + 22] + (w2 >>> 28) * x[c + 23]
+              + (w3 & 15) * x[c + 24] + ((w3 >>> 4) & 15) * x[c + 25]
+              + ((w3 >>> 8) & 15) * x[c + 26] + ((w3 >>> 12) & 15) * x[c + 27]
+              + ((w3 >>> 16) & 15) * x[c + 28] + ((w3 >>> 20) & 15) * x[c + 29]
+              + ((w3 >>> 24) & 15) * x[c + 30] + (w3 >>> 28) * x[c + 31];
+            acc += (dotQ - z * xBlockSum[bc]) * s;
+          }
+        }
+      } else {
+        for (let bc = 0; bc < nBlocksCol; bc += 1, c += 32, blk += 1, pBase += 16) {
+          const s = scales[blk] || 0;
+          if (s !== 0) {
+            const z = zeros[blk] || 0;
+            let dotQ = 0;
+            if (pBase + 16 <= pLen) {
+              for (let b = 0; b < 16; b += 4) {
+                const b0 = packed[pBase + b];
+                const b1 = packed[pBase + b + 1];
+                const b2 = packed[pBase + b + 2];
+                const b3 = packed[pBase + b + 3];
+                const k = c + (b << 1);
+                dotQ += (b0 & 15) * x[k] + (b0 >>> 4) * x[k + 1]
+                  + (b1 & 15) * x[k + 2] + (b1 >>> 4) * x[k + 3]
+                  + (b2 & 15) * x[k + 4] + (b2 >>> 4) * x[k + 5]
+                  + (b3 & 15) * x[k + 6] + (b3 >>> 4) * x[k + 7];
+              }
+            } else {
+              for (let b = 0; b < 16; b += 1) {
+                const byte = packed[pBase + b] || 0;
+                const k = c + (b << 1);
+                dotQ += (byte & 15) * x[k] + ((byte >>> 4) & 15) * x[k + 1];
+              }
+            }
+            acc += (dotQ - z * xBlockSum[bc]) * s;
+          }
+        }
       }
     }
     for (; c < cols; c += 1) {
@@ -155,7 +236,7 @@ export function applyGrammarMask(logits, allowed) {
   return logits;
 }
 
-function buildSession(parsed, readBytes) {
+function buildSession(parsed, readBytes, readScratch) {
   const d = Number(parsed.meta.d_model);
   const layers = Number(parsed.meta.n_layers);
   const nHeads = Number(parsed.meta.n_heads);
@@ -167,70 +248,109 @@ function buildSession(parsed, readBytes) {
   const fromTensor = d > 0 ? Math.floor((headLoc.len * 2) / d) : 0;
   const vocab = Math.max(8, fromMeta && fromTensor ? Math.min(fromMeta, fromTensor) : (fromMeta || fromTensor || bpeShell.VOCAB_SIZE));
   const small = new Map();
+  let smallBytes = 0;
+  const SMALL_F32_CAP = 64 * 1024 * 1024;
+  const hotU8 = new Map();
+  let hotU8Bytes = 0;
+  const HOT_U8_CAP = 96 * 1024 * 1024;
   let usedGpu = false;
+  let gpuOffline = false;
   let activeLora = null;
 
-  async function tensorU8(name) {
+  async function tensorU8(name, scratchSlot) {
+    if (hotU8.has(name)) return hotU8.get(name);
     const loc = locate(parsed, name);
+    if (hotU8Bytes + loc.len <= HOT_U8_CAP) {
+      const bytes = await readBytes(loc.start, loc.len);
+      hotU8.set(name, bytes);
+      hotU8Bytes += bytes.byteLength;
+      return bytes;
+    }
+    if (typeof readScratch === 'function' && scratchSlot != null) {
+      return readScratch(loc.start, loc.len, scratchSlot);
+    }
     return readBytes(loc.start, loc.len);
   }
 
-  async function tensorF32(name) {
+  async function tensorF32(name, scratchSlot) {
     if (small.has(name)) return small.get(name);
     const loc = locate(parsed, name);
-    const view = asF32(await readBytes(loc.start, loc.len));
-    if (view.byteLength <= 65536) small.set(name, view);
-    return view;
+    if (loc.len <= 8 * 1024 * 1024 && smallBytes + loc.len <= SMALL_F32_CAP && small.size < 512) {
+      const view = asF32(await readBytes(loc.start, loc.len));
+      small.set(name, view);
+      smallBytes += view.byteLength;
+      return view;
+    }
+    if (typeof readScratch === 'function' && scratchSlot != null) {
+      return asF32(await readScratch(loc.start, loc.len, scratchSlot));
+    }
+    return asF32(await readBytes(loc.start, loc.len));
   }
 
   async function projectMany(specs, signal) {
     if (signal && signal.aborted) return false;
-    const jobs = [];
+    if (!gpuOffline) {
+      const jobs = [];
+      for (let i = 0; i < specs.length; i += 1) {
+        const spec = specs[i];
+        const slotBase = i * 3;
+        jobs.push({
+          packed: await tensorU8(spec[0], slotBase),
+          scales: await tensorF32(spec[0] + '.scale', slotBase + 1),
+          zeros: await tensorF32(spec[0] + '.zero', slotBase + 2),
+          rows: spec[1],
+          cols: spec[2],
+          x: spec[3],
+          y: spec[4],
+        });
+      }
+      const chained = await gemvInt4Chain(jobs);
+      if (chained && chained.ok && chained.values && chained.values.length === jobs.length) {
+        let good = true;
+        for (let i = 0; i < jobs.length; i += 1) {
+          const gpuY = chained.values[i];
+          if (!gpuY || gpuY.length < jobs[i].rows) {
+            good = false;
+            break;
+          }
+          for (let r = 0; r < jobs[i].rows; r += 1) jobs[i].y[r] = gpuY[r];
+          if (activeLora) applyLoraDelta(jobs[i].y, jobs[i].x, activeLora);
+        }
+        if (good) {
+          usedGpu = true;
+          return true;
+        }
+      }
+      gpuOffline = true;
+      for (let i = 0; i < jobs.length; i += 1) {
+        const job = jobs[i];
+        if (!gemvFusedInt4(job.packed, job.scales, job.zeros, job.rows, job.cols, job.x, job.y, signal, activeLora)) return false;
+      }
+      return true;
+    }
     for (let i = 0; i < specs.length; i += 1) {
       const spec = specs[i];
-      jobs.push({
-        packed: await tensorU8(spec[0]),
-        scales: await tensorF32(spec[0] + '.scale'),
-        zeros: await tensorF32(spec[0] + '.zero'),
-        rows: spec[1],
-        cols: spec[2],
-        x: spec[3],
-        y: spec[4],
-      });
-    }
-    const chained = await gemvInt4Chain(jobs);
-    if (chained && chained.ok && chained.values && chained.values.length === jobs.length) {
-      let good = true;
-      for (let i = 0; i < jobs.length; i += 1) {
-        const gpuY = chained.values[i];
-        if (!gpuY || gpuY.length < jobs[i].rows) {
-          good = false;
-          break;
-        }
-        for (let r = 0; r < jobs[i].rows; r += 1) jobs[i].y[r] = gpuY[r];
-        if (activeLora) applyLoraDelta(jobs[i].y, jobs[i].x, activeLora);
-      }
-      if (good) {
-        usedGpu = true;
-        return true;
-      }
-    }
-    for (let i = 0; i < jobs.length; i += 1) {
-      const job = jobs[i];
-      if (!gemvFusedInt4(job.packed, job.scales, job.zeros, job.rows, job.cols, job.x, job.y, signal, activeLora)) return false;
+      const packed = await tensorU8(spec[0], 0);
+      const scales = await tensorF32(spec[0] + '.scale', 1);
+      const zeros = await tensorF32(spec[0] + '.zero', 2);
+      if (!gemvFusedInt4(packed, scales, zeros, spec[1], spec[2], spec[3], spec[4], signal, activeLora)) return false;
     }
     return true;
   }
 
   async function project(name, rows, cols, x, y, signal) {
-    const packed = await tensorU8(name);
-    const scales = await tensorF32(name + '.scale');
-    const zeros = await tensorF32(name + '.zero');
-    const gpuY = await gemvInt4(packed, scales, zeros, x, rows, cols);
-    if (gpuY && gpuY.length >= rows) {
-      for (let i = 0; i < rows; i += 1) y[i] = gpuY[i];
-      usedGpu = true;
-      return true;
+    const packed = await tensorU8(name, 0);
+    const scales = await tensorF32(name + '.scale', 1);
+    const zeros = await tensorF32(name + '.zero', 2);
+    if (!gpuOffline) {
+      const gpuY = await gemvInt4(packed, scales, zeros, x, rows, cols);
+      if (gpuY && gpuY.length >= rows) {
+        for (let i = 0; i < rows; i += 1) y[i] = gpuY[i];
+        if (activeLora) applyLoraDelta(y, x, activeLora);
+        usedGpu = true;
+        return true;
+      }
+      gpuOffline = true;
     }
     if (signal && signal.aborted) return false;
     return gemvFusedInt4(packed, scales, zeros, rows, cols, x, y, signal, activeLora);
@@ -321,15 +441,23 @@ function buildSession(parsed, readBytes) {
     }
   }
 
-  async function step(id, cache, signal, limit, kvInt8) {
+  async function step(id, cache, signal, limit, kvInt8, needLogits, onStep) {
     const x = new Float32Array(d);
     const h = new Float32Array(d);
+    const q = new Float32Array(nHeads * dk);
+    const mixed = new Float32Array(nHeads * dk);
+    const attn = new Float32Array(d);
+    const gate = new Float32Array(ff);
+    const up = new Float32Array(ff);
+    const hidden = new Float32Array(ff);
+    const down = new Float32Array(d);
     const started = typeof performance !== 'undefined' ? performance.now() : Date.now();
-    const dog = armWatchdog(started, 120000);
+    let dog = armWatchdog(started, 120000);
     await embed(id, x);
-    const passes = planLayerPasses(limit);
-    const chain = chainEncoderPlan(passes.length);
+    const allPasses = planLayerPasses(limit);
+    const chain = chainEncoderPlan(allPasses.length);
     if (chain.submits < 0) return null;
+    const passes = allPasses;
     for (let p = 0; p < passes.length; p += 1) {
       if (signal && signal.aborted) return null;
       const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
@@ -337,7 +465,6 @@ function buildSession(parsed, readBytes) {
       const layer = passes[p].layer;
       const prefix = 'layers.' + layer + '.';
       rmsNorm(x, await tensorF32(prefix + 'ln1.gamma'), h);
-      const q = new Float32Array(nHeads * dk);
       const k = new Float32Array(nKv * dk);
       const v = new Float32Array(nKv * dk);
       if (!await projectMany([
@@ -348,29 +475,28 @@ function buildSession(parsed, readBytes) {
       cache[layer].k = cache[layer].k || [];
       cache[layer].v = cache[layer].v || [];
       commitKv(cache[layer], k, v, kvInt8);
-      const mixed = new Float32Array(nHeads * dk);
       attend(q, cache, layer, mixed);
-      const attn = new Float32Array(d);
       if (!await project(prefix + 'attention.Wo', d, nHeads * dk, mixed, attn, signal)) return null;
       addInto(x, attn);
       rmsNorm(x, await tensorF32(prefix + 'ln2.gamma'), h);
-      const gate = new Float32Array(ff);
-      const up = new Float32Array(ff);
-      const hidden = new Float32Array(ff);
       if (!await projectMany([
         [prefix + 'ffn.Wgate', ff, d, h, gate],
         [prefix + 'ffn.Wup', ff, d, h, up],
       ], signal)) return null;
       siluMul(gate, up, hidden);
-      const down = new Float32Array(d);
       if (!await project(prefix + 'ffn.Wdown', d, ff, hidden, down, signal)) return null;
       addInto(x, down);
+      const stepNow = typeof performance !== 'undefined' ? performance.now() : Date.now();
+      dog = armWatchdog(stepNow, 120000);
+      if (typeof onStep === 'function') onStep();
       await yieldThread();
     }
     if (signal && signal.aborted) return null;
+    if (needLogits === false) return x;
     rmsNorm(x, await tensorF32('final_norm.gamma'), h);
     const logits = new Float32Array(vocab);
     if (!await project('lm_head.weight', vocab, d, h, logits, signal)) return null;
+    if (typeof onStep === 'function') onStep();
     return logits;
   }
 
@@ -395,7 +521,8 @@ function buildSession(parsed, readBytes) {
       let logits = null;
       for (let i = 0; i < ids.length; i += 1) {
         if (opts.signal && opts.signal.aborted) break;
-        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true);
+        const isLast = i === ids.length - 1;
+        logits = await step(ids[i], cache, opts.signal, limit, opts.kvInt8 === true, isLast, opts.onStep);
         if (!logits) break;
       }
       const generated = [];
@@ -414,7 +541,7 @@ function buildSession(parsed, readBytes) {
         const proposed = [];
         let cur = seedId;
         for (let t = 0; t < 3; t += 1) {
-          const row = await step(cur, draftCache, signal, depth, false);
+          const row = await step(cur, draftCache, signal, depth, false, true, opts.onStep);
           if (!row) break;
           const next = pickToken(row, { temperature: 0 }, []);
           if (!Number.isInteger(next) || next < 0) break;
@@ -434,7 +561,7 @@ function buildSession(parsed, readBytes) {
           const greedy = pickToken(row, { temperature: 0 }, recent.concat(targetIds));
           targetIds.push(greedy);
           if (greedy !== proposed[i]) break;
-          row = await step(proposed[i], trial, signal, limit, false);
+          row = await step(proposed[i], trial, signal, limit, false, true, opts.onStep);
           if (!row) break;
         }
         const verdict = verifyDraft((prefix) => targetIds[prefix.length - 1], [seedId], proposed);
@@ -463,7 +590,6 @@ function buildSession(parsed, readBytes) {
           const next = pickToken(row, opts, recent);
           if (!Number.isInteger(next) || next < 0 || next >= vocab || eos.has(next)) break;
           picked = [next];
-          logits = await step(next, cache, opts.signal, limit, opts.kvInt8 === true);
         }
         for (let p = 0; p < picked.length && generated.length < maxNew; p += 1) {
           const next = picked[p];
@@ -477,6 +603,10 @@ function buildSession(parsed, readBytes) {
           const piece = full.slice(shown.length);
           shown = full;
           if (piece && typeof opts.onToken === 'function') opts.onToken(piece, next);
+        }
+        if (!logits || generated.length >= maxNew) break;
+        if (!allowDraft) {
+          logits = await step(picked[picked.length - 1], cache, opts.signal, limit, opts.kvInt8 === true, true, opts.onStep);
         }
       }
       return {
@@ -498,7 +628,7 @@ export function openInt4Checkpoint(input) {
   else if (input && input.byteOffset === 0 && input.byteLength === input.buffer.byteLength) buffer = input.buffer;
   else buffer = input.buffer.slice(input.byteOffset, input.byteOffset + input.byteLength);
   const parsed = parseHeader(new Uint8Array(buffer));
-  return buildSession(parsed, async (start, len) => new Uint8Array(buffer, start, len));
+  return buildSession(parsed, async (start, len) => new Uint8Array(buffer, start, len), null);
 }
 
 export async function openInt4Stream(reader) {
@@ -506,7 +636,10 @@ export async function openInt4Stream(reader) {
   const headerLen = Number(new DataView(prefix.buffer, prefix.byteOffset, prefix.byteLength).getBigUint64(0, true));
   const fileHead = await reader.read(0, 8 + headerLen);
   const parsed = parseHeader(fileHead);
-  return buildSession(parsed, (start, len) => reader.read(start, len));
+  const scratchFn = typeof reader.readScratch === 'function'
+    ? (start, len, slot) => reader.readScratch(start, len, slot)
+    : null;
+  return buildSession(parsed, (start, len) => reader.read(start, len), scratchFn);
 }
 
 export async function probeSessionGpu() {

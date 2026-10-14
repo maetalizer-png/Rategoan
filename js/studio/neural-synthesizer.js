@@ -208,13 +208,13 @@ export function parseFenceFiles(raw) {
   const text = String(raw || '');
   if (!text) return null;
   const files = {};
-  const re = /```(index\.html|style\.css|script\.js)\n([\s\S]*?)```/g;
+  const re = /```(index\.html|style\.css|script\.js|main\.py)\n([\s\S]*?)```/g;
   let match = re.exec(text);
   while (match) {
     files[match[1]] = match[2];
     match = re.exec(text);
   }
-  if (!files['index.html'] && !files['script.js']) return null;
+  if (!files['index.html'] && !files['script.js'] && !files['main.py']) return null;
   return files;
 }
 
@@ -256,6 +256,14 @@ export async function synthesizeCode(text, files, hooks) {
     }
   } else {
     door = 'local';
+    if (typeof opts.neuralGenerate === 'function') {
+      try {
+        const raw = await opts.neuralGenerate(String(text || ''), files || {});
+        if (raw) streamed = String(raw);
+      } catch (e) {
+        streamed = '';
+      }
+    }
   }
   const parsed = parseFenceFiles(streamed);
   const drafted = parsed || renderPartial(text);

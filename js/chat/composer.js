@@ -1,3 +1,5 @@
+import { webSearch } from '../../vault/web/web-search.js';
+import { resolveAutonomousConnector, runConnectorTool } from '../connectors/tool-card.js';
 import { $, scrollBottom } from '../../shared/dom.js';
 import { haptics } from '../../shared/haptics.js';
 import { toast } from '../core/toast.js';
@@ -39,7 +41,7 @@ import { workspace } from '../state/workspace.js';
 import { remindersStore } from '../../vault/reminders/reminders-store.js';
 import { projectPage } from '../project/project.js';
 import { runAgentPlan } from '../agent/worker-bridge.js';
-import { mountThought } from '../ui/thought-card.js';
+import { mountThought, buildDynamicThoughts } from '../ui/thought-card.js';
 import { parseChartAsk, buildChartSvg } from '../../shared/charts-local.js';
 import { parseDiagramAsk, buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { printReport } from '../../shared/report-export.js';
@@ -516,9 +518,21 @@ function bindPendingAnswer() {
     const reply = detail.reply || '';
     const prompt = detail.prompt ? String(detail.prompt) : '';
     if (!reply) return;
-    document.querySelectorAll('#messages .msg.ai').forEach((node) => {
-      if (node.dataset && (node.dataset.state === 'queued' || node.dataset.state === 'failed')) node.remove();
-    });
+    const msgId = detail.message_id ? String(detail.message_id) : '';
+    let removedById = false;
+    if (msgId) {
+      document.querySelectorAll('#messages .msg.ai').forEach((node) => {
+        if (node.dataset && node.dataset.messageId === msgId) {
+          node.remove();
+          removedById = true;
+        }
+      });
+    }
+    if (!removedById) {
+      document.querySelectorAll('#messages .msg.ai').forEach((node) => {
+        if (node.dataset && (node.dataset.state === 'queued' || node.dataset.state === 'failed')) node.remove();
+      });
+    }
     const s = composer.ensure();
     const item = {
       role: 'ai',
@@ -733,11 +747,7 @@ export const composer = {
       live.remove();
     }
     if (!this.thinkActive && !this.researchActive) {
-      thoughts = [
-        { kind: 'EMIT_THOUGHT', text: 'Pemahaman inti pertanyaan' },
-        { kind: 'EMIT_THOUGHT', text: 'Pencocokan fakta kilat' },
-        { kind: 'EMIT_THOUGHT', text: 'Perumusan jawaban padat' },
-      ];
+      thoughts = buildDynamicThoughts(text, { websearch: isWebsearch });
       if (!livePlan) {
         livePlan = document.createElement('div');
         livePlan.className = 'msg ai';
@@ -755,22 +765,45 @@ export const composer = {
     let webNote = '';
     if (isWebsearch && directReply == null) {
       try {
-        const res = await fetch('/api/connectors/web/search?q=' + encodeURIComponent(text));
-        if (res && res.ok) {
-          const data = await res.json();
+        const [apiRes, multiRes] = await Promise.allSettled([
+          fetch('/api/connectors/web/search?q=' + encodeURIComponent(text)),
+          deep ? webSearch.research(text) : webSearch.search(text),
+        ]);
+        const noteLines = [];
+        if (apiRes.status === 'fulfilled' && apiRes.value && apiRes.value.ok) {
+          const data = await apiRes.value.json();
           const rows = data && data.results;
           if (Array.isArray(rows) && rows.length) {
-            webNote = rows.slice(0, 4).map((row) => {
+            rows.slice(0, 4).forEach((row) => {
               const title = row && row.title ? String(row.title) : '';
               const snippet = row && row.snippet ? String(row.snippet) : '';
-              return [title, snippet].filter(Boolean).join(' — ');
-            }).filter(Boolean).join('\n');
+              const line = [title, snippet].filter(Boolean).join(' — ');
+              if (line) noteLines.push(line);
+            });
           }
         }
+        if (multiRes.status === 'fulfilled' && multiRes.value && multiRes.value.ok) {
+          const m = multiRes.value;
+          (m.sources || []).slice(0, 6).forEach((src) => {
+            const line = [src.title, src.extract, src.url ? ('(' + src.url + ')') : ''].filter(Boolean).join(' — ');
+            if (line && !noteLines.includes(line)) noteLines.push(line);
+          });
+        }
+        webNote = noteLines.slice(0, 8).join('\n');
       } catch (e) { /* offline */ }
     }
-    const modelPrefix = [GUARDRAIL, prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    const autoConn = directReply == null ? resolveAutonomousConnector(text) : null;
+    if (autoConn) {
+      try {
+        const connOut = await runConnectorTool(autoConn.name, autoConn.parameters);
+        if (connOut && connOut.ok && connOut.data) {
+          const summary = JSON.stringify(connOut.data).slice(0, 1200);
+          webNote = [webNote, 'Data konektor (' + autoConn.name + '): ' + summary].filter(Boolean).join('\n');
+        }
+      } catch (e) { /* konektor offline */ }
+    }
+    const modelPrefix = [imageNote ? GUARDRAIL : '', prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, livePlan, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
     if (reply == null) {
       if (livePlan) {
         livePlan.dataset.state = 'failed';
@@ -890,8 +923,14 @@ export const composer = {
   },
   paintQuick() {
     const web = $('btn-quick-web');
+    const research = $('btn-quick-research');
     const think = $('btn-quick-think');
     const slide = $('btn-quick-slide');
+    if (research) {
+      research.hidden = !this.researchActive;
+      research.classList.toggle('on', !!this.researchActive);
+      research.setAttribute('aria-pressed', String(!!this.researchActive));
+    }
     if (web) {
       web.hidden = !this.websearchActive;
       web.classList.toggle('on', !!this.websearchActive);
@@ -1034,7 +1073,20 @@ export const composer = {
     const modelBtn = $('btn-model');
     if (modelBtn) modelBtn.onclick = () => sheets.openModel();
     const quickWeb = $('btn-quick-web');
-    if (quickWeb) quickWeb.onclick = () => this.setWebsearch(!this.websearchActive);
+    if (quickWeb) quickWeb.onclick = () => {
+      if (this.researchActive) {
+        this.researchActive = false;
+        this._toggleSwitch('sheet-research', false);
+      }
+      this.setWebsearch(!this.websearchActive);
+    };
+    const quickResearch = $('btn-quick-research');
+    if (quickResearch) quickResearch.onclick = () => {
+      this.researchActive = !this.researchActive;
+      this._toggleSwitch('sheet-research', this.researchActive);
+      this.paintQuick();
+      this.syncModes();
+    };
     const quickThink = $('btn-quick-think');
     if (quickThink) quickThink.onclick = () => {
       this.thinkActive = !this.thinkActive;
@@ -1059,6 +1111,7 @@ export const composer = {
       this.researchActive = !this.researchActive;
       this._toggleSwitch('sheet-research', this.researchActive);
       if (this.researchActive && hemat.enabled()) hemat.toggle();
+      this.paintQuick();
       if (this.researchActive) this.setWebsearch(true);
       else this.syncModes();
     };

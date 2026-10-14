@@ -120,7 +120,7 @@ function chipCaption(f) {
 }
 
 function escapeHtml(s) {
-  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function fmtDate(t) {
@@ -494,8 +494,8 @@ async function renderArtefak() {
   }
 
   content.innerHTML = all.map((x) => (
-    '<div class="coll-item" data-art-id="' + x.id + '">' +
-    '<div class="coll-item-head"><span class="coll-item-tag">' + x.kind + '</span>' +
+    '<div class="coll-item" data-art-id="' + escapeHtml(x.id) + '">' +
+    '<div class="coll-item-head"><span class="coll-item-tag">' + escapeHtml(x.kind) + '</span>' +
     (x.time ? '<span class="coll-item-time">' + fmtDate(x.time) + '</span>' : '') + '</div>' +
     '<div class="coll-item-text">' + escapeHtml(x.text) + '</div>' +
     '<div class="coll-item-actions">' +

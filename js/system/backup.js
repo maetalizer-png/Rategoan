@@ -7,16 +7,33 @@ import { history } from '../history/history.js';
 import { chat } from '../chat/chat.js';
 import { exportLog } from '../../raget/raget-memory/export-log.js';
 
+export const SENSITIVE_STORAGE_KEYS = new Set([
+  'rategoan_connectors_vault',
+  'rategoan_connectors_aes',
+  'rategoan_pin',
+  'rategoan_pin_fail',
+  'rategoan_auth',
+  'rategoan_weights_1_5b_installed',
+  'rategoan_weights_1_5b_parts',
+  'rategoan_chunks_mask',
+]);
+
+export function isSafeBackupKey(key) {
+  const k = String(key || '');
+  if (!k || SENSITIVE_STORAGE_KEYS.has(k)) return false;
+  if (k.indexOf('rategoan_chunks_') === 0) return false;
+  return /^(rategoan_|raget_|travel_)/.test(k);
+}
+
 export const backup = {
   export() {
     if (typeof window !== 'undefined' && !window.confirm('Unduh cadangan obrolan perangkat ini?')) return;
     const st = store.get();
     const local = {};
-    const skip = new Set(['rategoan_connectors_vault', 'rategoan_connectors_aes']);
     for (let i = 0; i < localStorage.length; i += 1) {
       const key = localStorage.key(i);
-      if (!key || skip.has(key)) continue;
-      if (/^(rategoan_|raget_|travel_)/.test(key)) local[key] = localStorage.getItem(key);
+      if (!isSafeBackupKey(key)) continue;
+      local[key] = localStorage.getItem(key);
     }
     const payload = {
       app: 'rategoan',
@@ -42,7 +59,9 @@ export const backup = {
         store.set({ sessions: data.sessions, currentId: null });
         if (data.local && typeof data.local === 'object') {
           Object.keys(data.local).forEach((key) => {
-            if (/^(rategoan_|raget_|travel_)/.test(key)) localStorage.setItem(key, data.local[key]);
+            if (isSafeBackupKey(key) && typeof data.local[key] === 'string') {
+              localStorage.setItem(key, data.local[key]);
+            }
           });
         }
         store.save();

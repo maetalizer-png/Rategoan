@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <title>Rategoan</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob: 'sha256-F/16auHvU8rnnFFjvUge7U2l7HcZHWpC5EqFt2bli10='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com https://huggingface.co https://*.hf.co; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' blob: 'sha256-F/16auHvU8rnnFFjvUge7U2l7HcZHWpC5EqFt2bli10='; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' blob: https://api.github.com https://huggingface.co https://*.hf.co https://*.wikipedia.org https://*.wiktionary.org https://www.wikidata.org https://api.openalex.org https://hn.algolia.com https://*.open-meteo.com https://api.rss2json.com https://r.jina.ai; worker-src 'self' blob:; frame-src 'self' blob:; object-src 'none';">
   <script src="js/boot-theme.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -117,6 +117,9 @@
             </button>
             <button id="btn-quick-web" class="icon-btn quick-toggle" type="button" aria-label="Pencarian web" aria-pressed="false" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+            </button>
+            <button id="btn-quick-research" class="icon-btn quick-toggle" type="button" aria-label="Riset mendalam" aria-pressed="false" hidden>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
             </button>
             <button id="btn-quick-slide" class="icon-btn quick-toggle" type="button" aria-label="Mode slide" aria-pressed="false" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>

@@ -76,12 +76,12 @@ export const markdown = {
         + '};';
     let worker;
     try {
-      const url = URL.createObjectURL(new Blob([lang === 'json' ? '' : source], { type: 'text/javascript' }));
       if (lang === 'json') {
         const pretty = JSON.stringify(JSON.parse(code), null, 2);
         term.textContent = pretty;
         return;
       }
+      const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
       worker = new Worker(url);
       const timer = setTimeout(() => {
         worker.terminate();

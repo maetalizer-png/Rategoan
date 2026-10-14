@@ -242,3 +242,20 @@
   border-radius: 10px;
   background: #fff;
 }
+
+@media (max-width: 640px) {
+  .hub-card {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+  }
+  .hub-card-body {
+    flex: 1 1 calc(100% - 52px);
+    min-width: 180px;
+  }
+  .hub-card-side {
+    width: 100%;
+    padding-left: 48px;
+    justify-content: flex-start;
+    margin-top: 2px;
+  }
+}
