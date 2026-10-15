@@ -495,8 +495,9 @@ test('DOD-41.19 Desktop Overhaul (Artefak, Koleksi, Proyek, Pengaturan, Berkas S
   assert.match(artifactsJs, /artifact-empty-actions/);
   assert.match(attachJs, /visionOcr\.recognize\(f\)/);
   assert.match(attachJs, /extractArchiveSummary\(bytes\)/);
-  assert.match(indexHtml, /id="sheet-think"/);
-  assert.match(indexHtml, /id="sheet-code-studio"/);
+  assert.equal(indexHtml.includes('id="sheet-think"'), false);
+  assert.equal(indexHtml.includes('id="sheet-code-studio"'), false);
+  assert.equal(indexHtml.includes('id="btn-quick-think"'), false);
 
   assert.equal(MAX_ATTACH_BYTES, 25 * 1024 * 1024);
   assert.equal(MAX_ATTACH_TEXT_CHARS, 32000);

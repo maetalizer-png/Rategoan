@@ -615,8 +615,11 @@ export const composer = {
   },
   autoGrow() {
     const inp = $('chat-input');
+    if (!inp) return;
     inp.style.height = 'auto';
-    inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
+    const nextH = Math.min(inp.scrollHeight, 120);
+    inp.style.height = nextH + 'px';
+    inp.style.overflowY = inp.scrollHeight > 120 ? 'auto' : 'hidden';
   },
   ensure() {
     const st = store.get();
@@ -972,9 +975,10 @@ export const composer = {
     }
   },
   syncModes() {
+    this.thinkActive = enginePreference.get() === 'neural';
     attach.setModes({
       websearch: this.websearchActive,
-      think: this.thinkActive,
+      think: false,
       research: this.researchActive,
     });
   },
@@ -993,7 +997,6 @@ export const composer = {
   paintQuick() {
     const web = $('btn-quick-web');
     const research = $('btn-quick-research');
-    const think = $('btn-quick-think');
     const slide = $('btn-quick-slide');
     if (research) {
       research.hidden = !this.researchActive;
@@ -1005,11 +1008,6 @@ export const composer = {
       web.classList.toggle('on', !!this.websearchActive);
       web.setAttribute('aria-pressed', String(!!this.websearchActive));
     }
-    if (think) {
-      think.hidden = !this.thinkActive;
-      think.classList.toggle('on', !!this.thinkActive);
-      think.setAttribute('aria-pressed', String(!!this.thinkActive));
-    }
     if (slide) {
       slide.hidden = !this.slideActive;
       slide.classList.toggle('on', !!this.slideActive);
@@ -1017,6 +1015,10 @@ export const composer = {
     }
   },
   bind() {
+    this.thinkActive = enginePreference.get() === 'neural';
+    window.addEventListener('rategoan:model-switched', () => {
+      this.thinkActive = enginePreference.get() === 'neural';
+    });
     bindWeightCard();
     bindPendingAnswer();
     const inp = $('chat-input');
@@ -1057,7 +1059,6 @@ export const composer = {
       const cur = workspace.current();
       if (label) label.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek terpilih (Pilih)';
       this._toggleSwitch('sheet-research', this.researchActive);
-      this._toggleSwitch('sheet-think', this.thinkActive);
       this._toggleSwitch('sheet-websearch', this.websearchActive);
       attach.open();
     };
@@ -1096,12 +1097,7 @@ export const composer = {
     }
     attach.onModeOff = (key) => {
       if (key === 'websearch') this.setWebsearch(false);
-      else if (key === 'think') {
-        this.thinkActive = false;
-        this._toggleSwitch('sheet-think', false);
-        this.paintQuick();
-        this.syncModes();
-      } else if (key === 'research') {
+      else if (key === 'research') {
         this.researchActive = false;
         this._toggleSwitch('sheet-research', false);
         this.syncModes();
@@ -1160,13 +1156,6 @@ export const composer = {
       this.paintQuick();
       this.syncModes();
     };
-    const quickThink = $('btn-quick-think');
-    if (quickThink) quickThink.onclick = () => {
-      this.thinkActive = !this.thinkActive;
-      this.paintQuick();
-      this.syncModes();
-      toast.show(this.thinkActive ? 'Berpikir keras nyala' : 'Berpikir keras mati');
-    };
     const quickSlide = $('btn-quick-slide');
     if (quickSlide) quickSlide.onclick = () => {
       this.slideActive = !this.slideActive;
@@ -1179,13 +1168,6 @@ export const composer = {
         this.setWebsearch(!this.websearchActive);
       };
     }
-    const thinkCard = $('sheet-think');
-    if (thinkCard) thinkCard.onclick = () => {
-      this.thinkActive = !this.thinkActive;
-      this._toggleSwitch('sheet-think', this.thinkActive);
-      this.paintQuick();
-      this.syncModes();
-    };
     const researchCard = $('sheet-research');
     if (researchCard) researchCard.onclick = () => {
       this.researchActive = !this.researchActive;
@@ -1238,8 +1220,6 @@ export const composer = {
     };
     const voiceCard = $('sheet-voice');
     if (voiceCard) voiceCard.onclick = () => { sheets.close(); voice.listen(); };
-    const studioCard = $('sheet-code-studio');
-    if (studioCard) studioCard.onclick = () => { sheets.close(); router.go('studio'); };
     const slideCard = $('sheet-slide');
     if (slideCard) {
       slideCard.onclick = () => {

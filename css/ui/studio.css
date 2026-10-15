@@ -373,7 +373,7 @@ body.studio-page #composer-card {
   border-radius: 26px;
   box-shadow: var(--rg-shadow);
 }
-body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 120px; font-size: 16px; }
+body.studio-page #chat-input { flex: 1; min-width: 0; width: auto; max-height: 120px; font-size: 16px; resize: none !important; overflow-y: hidden; scrollbar-width: none !important; }
 .card-row { position: relative; display: flex; align-items: center; gap: 6px; }
 body.studio-page #btn-plus,
 body.studio-page #btn-model {

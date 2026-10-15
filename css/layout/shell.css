@@ -301,11 +301,25 @@ body.auth-gate #top-download-bar {
   font-size: 17px;
   line-height: 1.45;
   padding: 2px 4px;
-  resize: none;
+  resize: none !important;
   max-height: 120px;
-  overflow-y: auto;
+  overflow-y: hidden;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  -webkit-appearance: none;
+  appearance: none;
   -webkit-user-select: text;
   user-select: text;
+}
+
+#chat-input::-webkit-scrollbar,
+#chat-input::-webkit-resizer,
+#composer-card::-webkit-resizer,
+textarea::-webkit-resizer {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 #chat-input::placeholder {
