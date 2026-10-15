@@ -2,13 +2,13 @@ import { $ } from '../../shared/dom.js';
 import { attach } from './attach.js';
 import { sheets } from './sheets.js';
 import { toast } from '../core/toast.js';
-import { visionOcr } from '../multimodal/vision-ocr.js';
 
 export const camera = {
   stream: null,
   facing: 'environment',
   async open() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      sheets.close();
       $('pick-camera').click();
       return;
     }
@@ -25,7 +25,7 @@ export const camera = {
       });
       $('camera-video').srcObject = this.stream;
     } catch (e) {
-      toast.show('Kamera tidak bisa diakses, pakai file picker.');
+      toast.show('Membuka pemilih foto kamera…');
       this.close();
       $('pick-camera').click();
     }
@@ -49,7 +49,11 @@ export const camera = {
     const canvas = $('camera-canvas');
     const w = video.videoWidth;
     const h = video.videoHeight;
-    if (!w || !h) return;
+    if (!w || !h) {
+      this.close();
+      $('pick-camera').click();
+      return;
+    }
     canvas.width = w;
     canvas.height = h;
     canvas.getContext('2d').drawImage(video, 0, 0, w, h);
@@ -57,17 +61,8 @@ export const camera = {
     if (!blob) return;
     const file = new File([blob], 'kamera-' + Date.now() + '.jpg', { type: 'image/jpeg' });
     this.close();
-    const ocr = await visionOcr.recognize(file);
     await attach.handleFile(file);
-    const last = attach.files[attach.files.length - 1];
-    if (last && ocr && ocr.ok && ocr.text) {
-      last.fileText = ocr.text;
-      last.ocrNote = 'Teks gambar terbaca';
-      attach.renderChip();
-      toast.show('Foto siap. Teks gambar ikut ke jawaban.');
-    } else {
-      toast.show('Foto dilampirkan.');
-    }
+    toast.show('Foto siap dianalisis.');
   },
   bind() {
     $('sheet-camera').onclick = () => this.open();

@@ -434,3 +434,33 @@
   max-width: 100%;
   flex: 1 1 auto;
 }
+
+.attach-plain-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attach-plain-label small {
+  font-size: 11px;
+  font-weight: 450;
+  color: var(--rg-muted, #64748b);
+  line-height: 1.32;
+}
+
+.attach-plain-chev {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--rg-muted, #64748b);
+  padding: 0 4px;
+}
+
+#project-create {
+  justify-content: center;
+  background: var(--rg-accent, #2563eb);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}

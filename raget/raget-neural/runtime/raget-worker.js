@@ -71,6 +71,8 @@ self.onmessage = async (event) => {
   try {
     const live = await session();
     if (timed) return;
+    let decodedTokens = 0;
+    const targetTokens = Number(msg.maxNewTokens) > 0 ? Number(msg.maxNewTokens) : 32;
     const out = await live.generate(String(msg.prompt || ''), {
       maxNewTokens: msg.maxNewTokens,
       maxLayers: msg.maxLayers,
@@ -89,14 +91,31 @@ self.onmessage = async (event) => {
             type: 'step',
             doneLayers: doneLayers || 0,
             totalLayers: totalLayers || 28,
-            phase: phase,
+            phase: 'prefill',
+          });
+        } else if (phase === 'decode' && doneLayers === totalLayers) {
+          self.postMessage({
+            id: msg.id,
+            type: 'step',
+            doneLayers: doneLayers || 0,
+            totalLayers: totalLayers || 4,
+            decodedTokens: decodedTokens,
+            targetTokens: targetTokens,
+            phase: 'decode',
           });
         }
       },
       onToken(piece) {
         if (timed) return;
         arm();
-        self.postMessage({ id: msg.id, type: 'token', piece: piece });
+        decodedTokens += 1;
+        self.postMessage({
+          id: msg.id,
+          type: 'token',
+          piece: piece,
+          decodedTokens: decodedTokens,
+          targetTokens: targetTokens,
+        });
       },
     });
     if (timed) return;

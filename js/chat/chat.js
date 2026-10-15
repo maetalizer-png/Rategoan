@@ -139,19 +139,8 @@ function extractCodeForStudio(text) {
 function detectQuickChips(text) {
   if (/Pratinjau slide/i.test(text)) return ['Unduh file slide'];
   if (extractCodeForStudio(text)) return ['Buka di Studio Kode'];
-  if (/Hasil pencarian web|Sumber:|Yang biasa dibahas/i.test(text) || text.length > 280) {
-    if (!/sudah diunduh sebagai|Pratinjau slide/i.test(text)) return ['Buatkan slide dari ini'];
-  }
   if (/pengingat\b.*(dibatalkan|ditambahkan)|akan mengingatkan|sudah saya catat sebagai pengingat/i.test(text)) {
     return ['Batalkan pengingat'];
-  }
-  const capitalMatch = text.match(/[Ii]bukota\s+([A-Z][a-zA-Z\s]+?)\s+adalah/);
-  if (capitalMatch) {
-    const negara = capitalMatch[1].trim();
-    return ['Wisata ' + negara];
-  }
-  if (/^#{1,3}\s|\n- |\n\d+\.\s/.test(text)) {
-    return ['Ringkas hari saya'];
   }
   return [];
 }
@@ -471,12 +460,7 @@ export const chat = {
         nav.textContent = '< ' + at + ' / ' + total + ' >';
         d.appendChild(nav);
       }
-      if (m.role === 'user' && m.attach && m.attach.full) {
-        const row = document.createElement('div');
-        row.className = 'msg-actions';
-        row.appendChild(buildExtraChip('Baca Gambar Ini', () => fillAndSend('Baca foto ini'), 'search'));
-        d.appendChild(row);
-      }
+
       if (m.role !== 'user') {
         const actions = buildActions(m.text);
         if (URL_RE.test(m.text)) {

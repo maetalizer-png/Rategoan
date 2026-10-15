@@ -562,9 +562,9 @@ test('DOD-41.20 Ekstraksi PDF/ZIP/Visi Murni In-Browser, Kartu Lampiran Multi-Be
   const lowThoughts = buildDynamicThoughts('jelaskan arsitektur transformer', { think: false });
   const highThoughts = buildDynamicThoughts('jelaskan arsitektur transformer', { think: true });
   assert.equal(lowThoughts.length, 3);
-  assert.equal(highThoughts.length, 6);
-  assert.match(highThoughts[0].text, /Dekonstruksi semantik/);
-  assert.match(highThoughts[3].text, /Propagasi tensor Raget 1\.0 penuh/);
+  assert.ok(highThoughts.length > lowThoughts.length);
+  assert.match(highThoughts[0].text, /Menyiapkan konteks token/i);
+  assert.ok(highThoughts.some((s) => /28 lapis transformer/i.test(s.text)));
   const modelSheetSrc = read('js/sheets/model-sheet.js');
   assert.match(modelSheetSrc, /label: 'Rendah'/);
   assert.match(modelSheetSrc, /label: 'Tinggi'/);
@@ -613,4 +613,60 @@ test('DOD-41.21 Penyempurnaan Inti Otak Neural: Rotary Position Embedding (RoPE)
     bpeShell.resetVocabulary();
   }
   assert.equal(bpeShell.buildShell().idToToken.length, 32000);
+});
+
+test('DOD-41.22 Alur Pencarian Web & Riset Mendalam Inline Tanpa Pindah Halaman Paksa + Tabel Responsif .md-table-wrap', () => {
+  const compSrc = read('js/chat/composer.js');
+  assert.equal(compSrc.includes("title: 'Berkas riset'"), false);
+  assert.equal(compSrc.includes("textContent = 'Unduh DOCX'"), false);
+  assert.equal(compSrc.includes("textContent = 'Unduh MD'"), false);
+  assert.equal(compSrc.includes("textContent = 'Buka di Kanvas'"), false);
+  assert.match(compSrc, /web-sources-strip/);
+  assert.match(compSrc, /web-source-chip/);
+
+  const renderedTable = markdown.render([
+    'Berikut perbandingan cabang ilmu matematika:',
+    '',
+    '| Cabang | Fokus Kajian | Contoh Penerapan |',
+    '| --- | --- | --- |',
+    '| Aljabar | Struktur simbol, persamaan, dan operasi abstrak | Kriptografi dan pemodelan sistem |',
+    '| Geometri | Sifat ruang, bentuk, jarak, dan transformasi | Grafika komputer dan arsitektur |',
+  ].join('\n'));
+  assert.match(renderedTable, /<div class="md-table-wrap"><table class="md-table"><thead><tr><th>Cabang<\/th><th>Fokus Kajian<\/th><th>Contoh Penerapan<\/th><\/tr><\/thead>/);
+});
+
+test('DOD-41.23 Proses Bekerja Real-Time Spesifik, Ekstraksi Citra HSV/Berkas Murni, dan Penyempurnaan Semua Menu Ikon +', () => {
+  // 1. Pastikan int4-session.js murni mendekode token BPE dari Raget 1.0 tanpa modul template neural-grounding
+  const sessionSrc = read('raget/raget-neural/runtime/int4-session.js');
+  assert.equal(sessionSrc.includes('neural-grounding'), false);
+  assert.equal(sessionSrc.includes('groundNeuralOutput'), false);
+  assert.match(sessionSrc, /const full = bpeShell\.decodeIds\(generated\)/);
+
+  // 2. Dynamic thoughts spesifik terhadap setiap kueri/lampiran dan membedakan ikon per tahap
+  const imgSteps = buildDynamicThoughts('Baca dan ringkas lampiran ini', {
+    think: true,
+    files: 'kamera-1792061530652.jpg',
+    fileMeta: {
+      kind: 'image',
+      sizeLabel: '62 KB',
+      visionSummary: 'Foto objek / ilustrasi & motif berwarna · 460×1024 px · 62 KB',
+      paletteSummary: 'Warna dominan: Biru (54%), Putih / Terang (22%), Kuning (12%)',
+    },
+  });
+  const mathSteps = buildDynamicThoughts('apa itu ilmu matematika', { think: true, websearch: true, research: true });
+  assert.notEqual(imgSteps[0].text, mathSteps[0].text);
+  assert.match(imgSteps[0].text, /Memindai citra kamera-1792061530652\.jpg/);
+  assert.match(imgSteps[0].sub, /460×1024 px/);
+  assert.equal(laneOf(imgSteps[0]), 'file');
+  assert.equal(laneOf(imgSteps[1]), 'search');
+  assert.equal(laneOf(imgSteps[imgSteps.length - 1]), 'write');
+
+  // 3. Periksa penyempurnaan menu + dan penghapusan tombol redundan Baca Gambar Ini
+  const chatJs = read('js/chat/chat.js');
+  assert.equal(chatJs.includes("buildExtraChip('Baca Gambar Ini'"), false);
+  const indexHtml = read('index.html');
+  assert.match(indexHtml, /id="pick-folder"/);
+  assert.match(indexHtml, /id="pick-audio"/);
+  const attachJs = read('js/sheets/attach.js');
+  assert.match(attachJs, /async ensureReady\(consumed\)/);
 });

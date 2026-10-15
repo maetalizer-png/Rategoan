@@ -44,7 +44,13 @@ export const voice = {
       } catch (e) { this._vad = null; }
     }
     if (!SR) {
-      toast.show('Input suara tidak didukung');
+      const audioPick = $('pick-audio');
+      if (audioPick) {
+        toast.show('Pilih berkas rekaman atau memo suara');
+        audioPick.click();
+        return;
+      }
+      toast.show('Input suara tidak didukung di peramban ini');
       return;
     }
     if (this.listening) {
@@ -64,6 +70,7 @@ export const voice = {
     this.rec.onstart = () => {
       this.listening = true;
       $('btn-voice-input').classList.add('listening');
+      toast.show('Mendengarkan suara Anda…');
     };
     this.rec.onresult = (e) => {
       const result = e.results[0];
@@ -73,24 +80,17 @@ export const voice = {
       inp.value += (inp.value ? ' ' : '') + t;
       inp.dispatchEvent(new Event('input'));
       composer.autoGrow();
-      toast.show('Periksa teks suara. Terkirim sendiri dalam 2 detik.');
-      clearTimeout(this.confirmTimer);
-      const cancel = () => {
-        inp.dataset.voiceEdited = '1';
-        clearTimeout(this.confirmTimer);
-        inp.removeEventListener('input', cancel);
-      };
-      inp.addEventListener('input', cancel);
-      this.confirmTimer = setTimeout(() => {
-        inp.removeEventListener('input', cancel);
-        const btn = $('btn-send');
-        if (btn && inp.value.trim() && !inp.dataset.voiceEdited) btn.click();
-        delete inp.dataset.voiceEdited;
-      }, 2000);
+      inp.focus();
+      toast.show('Teks suara siap diperiksa atau dikirim.');
     };
     this.rec.onerror = (e) => {
       const code = (e && e.error) || '';
       if (code === 'not-allowed' || code === 'service-not-allowed') {
+        const audioPick = $('pick-audio');
+        if (audioPick) {
+          toast.show('Izin mikrofon belum aktif — pilih berkas memo suara atau izinkan mikrofon.');
+          return;
+        }
         toast.show('Mikrofon ditolak. Izinkan mikrofon di peramban untuk mendikte.');
         return;
       }

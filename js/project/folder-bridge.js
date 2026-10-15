@@ -44,6 +44,12 @@ async function readTree(dir, prefix, out) {
 export const folderBridge = {
   async pick() {
     if (typeof window.showDirectoryPicker !== 'function') {
+      const fallbackInput = typeof document !== 'undefined' ? (document.getElementById('pick-folder') || document.getElementById('pick-file')) : null;
+      if (fallbackInput) {
+        toast.show('Pilih berkas dari folder perangkat Anda');
+        fallbackInput.click();
+        return;
+      }
       toast.show('Peramban ini tidak membuka folder lokal');
       return;
     }

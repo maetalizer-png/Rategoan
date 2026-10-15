@@ -166,3 +166,26 @@
   outline: none;
 }
 .art-table th { background: var(--card, #f3f3f3); }
+
+.doc-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  margin-bottom: 10px;
+  background: var(--rg-surface-2, #f1f5f9);
+  border: 1px solid var(--rg-line, #e2e8f0);
+  border-radius: 10px;
+}
+.doc-tools button {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  background: var(--rg-surface, #ffffff);
+  color: var(--rg-text, #0f172a);
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}

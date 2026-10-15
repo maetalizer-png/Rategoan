@@ -2,23 +2,31 @@ self.onmessage = (event) => {
   const data = event.data || {};
   if (data.type === 'abort') return;
   const text = String(data.text || '').replace(/\s+/g, ' ').trim();
-  const words = text.split(' ').filter(Boolean);
-  const steps = [
-    { kind: 'EMIT_THOUGHT', text: 'Dekonstruksi semantik & ruang masalah: ' + (words.slice(0, 12).join(' ') || 'instruksi') },
-    { kind: 'EMIT_EXPLORE', text: 'Memetakan ' + words.length + ' token konteks & batasan implisit di utas latar.' },
-  ];
-  if (data.think) {
-    steps.push({ kind: 'EMIT_COMMAND', text: 'Penalaran Mode Tinggi: formulasi hipotesis & evaluasi multi-perspektif.' });
-    steps.push({ kind: 'EMIT_EXPLORE', text: 'Propagasi tensor 28 lapis penuh Raget 1.0 (GQA 16:4 · Top-K/Top-P adaptif).' });
+  const isGenericAttach = !text || /^baca dan ringkas lampiran ini$/i.test(text);
+  const shortFocus = isGenericAttach
+    ? (data.files ? String(data.files) : 'lampiran')
+    : (text.length > 42 ? text.slice(0, 42) + '…' : text);
+
+  const steps = [];
+  if (data.files) {
+    steps.push({ kind: 'EMIT_ACTION', text: 'Memindai berkas lampiran: ' + data.files });
+    steps.push({ kind: 'EMIT_EXPLORE', text: 'Mengekstrak isi & metadata dari ' + data.files });
+  } else {
+    steps.push({ kind: 'EMIT_THOUGHT', text: 'Menganalisis permintaan: "' + shortFocus + '"' });
   }
-  if (data.research) steps.push({ kind: 'EMIT_EXPLORE', text: 'Riset mendalam: korelasi silang multi-sumber & validasi fakta.' });
-  if (data.files) steps.push({ kind: 'EMIT_ACTION', text: 'Ekstraksi struktural & verifikasi lampiran: ' + data.files });
-  steps.push({ kind: 'EMIT_STATUS', text: 'Sintesis penalaran komprehensif siap dieksekusi.', progress: 1 });
+  if (data.research) {
+    steps.push({ kind: 'EMIT_EXPLORE', text: 'Menelusuri multi-sumber web & memvalidasi rujukan untuk ' + shortFocus });
+  }
+  if (data.think) {
+    steps.push({ kind: 'EMIT_COMMAND', text: 'Menjalankan penalaran mendalam Raget 1.0 (28 lapis transformer)' });
+  }
+  steps.push({ kind: 'EMIT_STATUS', text: 'Menyusun jawaban untuk ' + shortFocus, progress: 1 });
+
   let index = 0;
-  const delayMs = data.think ? 240 : 140;
+  const delayMs = data.think ? 90 : 50;
   const tick = () => {
     if (index >= steps.length) {
-      self.postMessage({ kind: 'FINAL_RESPONSE', words: words.length });
+      self.postMessage({ kind: 'FINAL_RESPONSE', words: text.split(' ').filter(Boolean).length });
       return;
     }
     self.postMessage(steps[index]);

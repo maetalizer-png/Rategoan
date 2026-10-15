@@ -35,7 +35,6 @@ import { buildOutline, previewOutline, rememberSlide } from '../../shared/slides
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
-import { toolsKode } from '../../raget/raget-agents/tools-kode.js';
 import { artifact } from '../ui/artifact.js';
 import { workspace } from '../state/workspace.js';
 import { remindersStore } from '../../vault/reminders/reminders-store.js';
@@ -174,8 +173,7 @@ async function trySlideRequest(text, att, session) {
   }
 }
 
-
-const DOC_RE = /\b(buat(?:kan)?|tulis|susun)\s+(dokumen|laporan|makalah|catatan)\b/i;
+const DOC_RE = /\b(buat(?:kan)?|ekspor|unduh)\s+(file\s+dokumen|berkas\s+dokumen|dokumen\s+word|file\s+word|file\s+markdown)\b/i;
 const WORD_RE = /\b(docx|dokumen word|file word|microsoft word)\b/i;
 
 function artifactTag(type, title, filename, body) {
@@ -197,35 +195,6 @@ async function tryDocumentRequest(text, session) {
   artifact.open({ type: 'document', markdown: md, title: title, fileName: fileName }, title);
   if (!wantsWord) return 'Dokumen terbuka di panel kanan. Bisa diedit lalu diunduh sebagai Markdown.';
   return artifactTag('document', title, fileName, md) + '\n\nDokumen Word siap di kartu obrolan. Ketuk Unduh berkas.';
-}
-
-async function tryCodeArtifact(text) {
-  if (!toolsKode.isCodeQuestion(text)) return false;
-  try {
-    const packed = await toolsKode.compose(text);
-    const m = packed && packed.text && packed.text.match(/```(\w+)?\n([\s\S]*?)```/);
-    if (!m) return false;
-    const lang = m[1] || packed.lang || 'js';
-    artifact.open({ type: 'code', code: m[2], lang: lang, title: 'Kode', fileName: 'cuplikan.' + (lang === 'python' || lang === 'py' ? 'py' : lang === 'html' ? 'html' : lang === 'css' ? 'css' : 'js') }, 'Kode');
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-
-const TABLE_RE = /\b(buat(kan)?|susun|jadikan)\s+tabel\b/i;
-
-function textToTable(text) {
-  const lines = String(text || '').split(/\n+/).map((l) => l.replace(/^\s*[-•]\s*/, '').trim()).filter((l) => l.length > 8).slice(0, 8);
-  const rows = [['Poin', 'Isi']];
-  lines.forEach((l, i) => {
-    const parts = l.split(/[—:\-]/);
-    if (parts.length >= 2) rows.push([parts[0].trim().slice(0, 40), parts.slice(1).join(':').trim().slice(0, 120)]);
-    else rows.push([String(i + 1), l.slice(0, 140)]);
-  });
-  if (rows.length < 2) rows.push(['1', String(text || '').slice(0, 140)]);
-  return rows;
 }
 
 async function tryDiagramRequest(text) {
@@ -334,15 +303,6 @@ async function tryChartRequest(text) {
   return 'Grafik terbuka di panel. Bisa diunduh sebagai SVG.';
 }
 
-async function tryTableRequest(text, session) {
-  if (!TABLE_RE.test(text)) return null;
-  const material = lastAiText(session) || text.replace(TABLE_RE, '').trim();
-  if (!material) return 'Tanya topiknya dulu, baru minta tabel.';
-  const rows = textToTable(material);
-  artifact.open({ type: 'table', rows: rows, title: 'Tabel', fileName: 'tabel.csv' }, 'Tabel');
-  return 'Tabel terbuka di panel kanan. Bisa diunduh CSV.';
-}
-
 const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif|jailbreak|you are now|system prompt/i;
 
 const subgoalLru = new Map();
@@ -381,6 +341,26 @@ export function scrubInjection(text) {
 
 export function hiddenOrder(text) {
   return HIDDEN_ORDER.test(scrubInjection(text));
+}
+
+function buildAttachmentTraceMeta(att) {
+  if (!att) return null;
+  const v = att.visionMeta;
+  let visionSummary = '';
+  let paletteSummary = '';
+  if (v) {
+    visionSummary = [v.kindLabel, v.width && v.height ? (v.width + '×' + v.height + ' px') : '', v.kb ? (v.kb + ' KB') : ''].filter(Boolean).join(' · ');
+    if (Array.isArray(v.topColors) && v.topColors.length) {
+      paletteSummary = 'Warna dominan: ' + v.topColors.slice(0, 3).map((c) => c.name + ' (' + c.pct + '%)').join(', ');
+    }
+  }
+  return {
+    kind: att.kind || (att.full || att.thumb ? 'image' : 'file'),
+    sizeLabel: att.sizeLabel || '',
+    statusLabel: att.statusLabel || '',
+    visionSummary,
+    paletteSummary,
+  };
 }
 
 function bindWeightCard() {
@@ -632,7 +612,10 @@ export const composer = {
       toast.show('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
       return;
     }
-    const att = attach.consume();
+    let att = attach.consume();
+    if (att && typeof attach.ensureReady === 'function') {
+      att = await attach.ensureReady(att);
+    }
     const fenced = att && att.fileText ? buriedOrder(fenceUntrusted(att.name, att.fileText)) : { inside: false };
     if (att && att.fileText && (hiddenOrder(att.fileText) || fenced.inside)) {
       toast.show('Berkas berisi injeksi perintah. Pengiriman dibatalkan.');
@@ -640,7 +623,7 @@ export const composer = {
     }
     const s = this.ensure();
     const sendSessionId = s.id;
-    if (!s.messages.length) s.title = titleFrom(text);
+    if (!s.messages.length) s.title = titleFrom(text || (att && att.name) || 'Chat');
     if (WORK_RE.test(text) && !s.project) {
       s.project = { goal: titleFrom(text), started: Date.now() };
     }
@@ -711,7 +694,6 @@ export const composer = {
     const directReply = null;
     let canvasNote = await trySlideRequest(text, att, s);
     if (canvasNote == null) canvasNote = await tryDocumentRequest(text, s);
-    if (canvasNote == null) canvasNote = await tryTableRequest(text, s);
     if (canvasNote == null) canvasNote = await tryChartRequest(text);
     if (canvasNote == null) canvasNote = await tryDiagramRequest(text);
     if (canvasNote == null) canvasNote = await tryReportRequest(text);
@@ -753,54 +735,41 @@ export const composer = {
       const picked = hits.length ? hits : docs.slice(0, 2);
       projectPrefix = GUARDRAIL + '\n' + fenceUntrusted(project.name, (project.systemPrompt || '') + '\n' + picked.map((file) => (file.name || 'berkas') + ': ' + String(file.text || '').slice(0, 500)).join('\n'));
     }
-    const subgoals = cachedSubgoals(text, planSubgoals);
-    let thoughts = null;
-    let livePlan = null;
-    if (subgoals.length >= 2 && !(this.thinkActive || this.researchActive)) {
-      thoughts = subgoals;
-      livePlan = document.createElement('div');
-      livePlan.className = 'msg ai';
-      livePlan.dataset.thoughtStart = String(Date.now());
-      mountThought(livePlan, subgoals, 'berjalan');
-      $('messages').appendChild(livePlan);
-    }
+
+    const attTraceMeta = buildAttachmentTraceMeta(att || fileSrc);
+    let thoughts = buildDynamicThoughts(text, {
+      think: this.thinkActive,
+      websearch: isWebsearch,
+      research: this.researchActive,
+      files: (att && att.name) || (fileSrc && FILE_ASK_RE.test(text) ? fileSrc.name : ''),
+      fileMeta: attTraceMeta,
+    });
+    const livePlan = document.createElement('div');
+    livePlan.className = 'msg ai';
+    livePlan.dataset.thoughtStart = String(Date.now());
+    mountThought(livePlan, thoughts, 'berjalan');
+    $('messages').appendChild(livePlan);
+
+    const refreshLiveThoughts = () => {
+      if (!livePlan.isConnected) return;
+      mountThought(livePlan, thoughts, 'berjalan');
+    };
+
     if (this.thinkActive || this.researchActive) {
-      livePlan = document.createElement('div');
-      livePlan.className = 'msg ai';
-      livePlan.dataset.thoughtStart = String(Date.now());
-      const deepThoughts = buildDynamicThoughts(text, { think: true, websearch: isWebsearch, research: this.researchActive, files: att && att.name });
-      const card = mountThought(livePlan, deepThoughts, 'berjalan');
-      $('messages').appendChild(livePlan);
-      const plan = await runAgentPlan({
+      const planRes = await runAgentPlan({
         text,
         think: this.thinkActive,
         research: this.researchActive,
         files: att && att.name,
         sessionId: s.id,
-        onStep: (steps) => {
-          if (!card) return;
-          livePlan.innerHTML = '';
-          mountThought(livePlan, deepThoughts.length >= steps.length ? deepThoughts : steps, 'berjalan');
-        },
+        onStep: () => refreshLiveThoughts(),
       });
-      if (plan.status === 'dibatalkan') {
+      if (planRes.status === 'dibatalkan') {
         livePlan.remove();
         return;
       }
-      thoughts = deepThoughts;
-      livePlan.innerHTML = '';
-      mountThought(livePlan, thoughts, 'berjalan');
     }
-    if (!this.thinkActive && !this.researchActive) {
-      thoughts = buildDynamicThoughts(text, { think: false, websearch: isWebsearch, research: this.researchActive, files: att && att.name });
-      if (!livePlan) {
-        livePlan = document.createElement('div');
-        livePlan.className = 'msg ai';
-        $('messages').appendChild(livePlan);
-      }
-      livePlan.innerHTML = '';
-      mountThought(livePlan, thoughts, 'berjalan');
-    }
+
     const rawAttachmentText = [att && att.fileText ? String(att.fileText).slice(0, 4000) : '', fileContextNote ? String(fileContextNote).slice(0, 3000) : ''].filter(Boolean).join('\n\n');
     const imageNote = rawAttachmentText ? fenceUntrusted((att && att.name) || (fileSrc && fileSrc.name) || 'lampiran', rawAttachmentText) : '';
     const prefDocs = memoryLong.preferenceDocs();
@@ -809,6 +778,7 @@ export const composer = {
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
     let webNote = canvasNote ? String(canvasNote) : '';
+    const webSources = [];
     if (isWebsearch) {
       try {
         const [apiRes, multiRes] = await Promise.allSettled([
@@ -823,8 +793,12 @@ export const composer = {
             rows.slice(0, 4).forEach((row) => {
               const title = row && row.title ? String(row.title) : '';
               const snippet = row && row.snippet ? String(row.snippet) : '';
+              const url = row && row.url ? String(row.url) : '';
               const line = [title, snippet].filter(Boolean).join(' — ');
               if (line) noteLines.push(line);
+              if (title && url && /^https?:\/\//i.test(url) && !webSources.some((s) => s.url === url)) {
+                webSources.push({ title, url });
+              }
             });
           }
         }
@@ -833,9 +807,22 @@ export const composer = {
           (m.sources || []).slice(0, 6).forEach((src) => {
             const line = [src.title, src.extract, src.url ? ('(' + src.url + ')') : ''].filter(Boolean).join(' — ');
             if (line && !noteLines.includes(line)) noteLines.push(line);
+            if (src && src.title && src.url && /^https?:\/\//i.test(src.url) && !webSources.some((s) => s.url === src.url)) {
+              webSources.push({ title: String(src.title), url: String(src.url) });
+            }
           });
         }
         webNote = [webNote, noteLines.slice(0, 8).join('\n')].filter(Boolean).join('\n');
+        if (webSources.length) {
+          const hosts = webSources.slice(0, 3).map((s) => {
+            try { return new URL(s.url).hostname.replace(/^www\./, ''); } catch (e) { return s.title; }
+          });
+          const webStep = thoughts.find((st) => st.kind === 'WEB_SEARCH');
+          if (webStep) {
+            webStep.sub = webSources.length + ' rujukan dipindai: ' + hosts.join(', ');
+            refreshLiveThoughts();
+          }
+        }
       } catch (e) { /* offline */ }
     }
     const localProd = resolveLocalProductivityTool(text);
@@ -895,54 +882,27 @@ export const composer = {
     }
     if (livePlan && livePlan.parentNode) livePlan.remove();
     if (cowork.expectsEdit()) cowork.applyReply(reply);
-    else if (/naskah|laporan|dokumen|surat|kontrak|spesifikasi/i.test(text) && String(reply).length > 280) cowork.open(reply);
-    if (deep && reply) {
-      const report = await flowHub.buildResearch(text, reply);
-      artifact.open({ type: 'report', markdown: report, title: 'Berkas riset', fileName: 'riset.md' }, 'Berkas riset');
-      const card = document.createElement('div');
-      card.className = 'msg ai research-card';
-      const title = document.createElement('strong');
-      title.textContent = 'Berkas riset';
-      const summary = document.createElement('p');
-      summary.textContent = String(reply).replace(/\s+/g, ' ').trim().slice(0, 180);
-      const actions = document.createElement('div');
-      actions.className = 'research-actions';
-      const open = document.createElement('button');
-      open.type = 'button';
-      open.textContent = 'Buka di Kanvas';
-      open.onclick = () => artifact.open({ type: 'report', markdown: report, title: 'Berkas riset', fileName: 'riset.md' }, 'Berkas riset');
-      const docx = document.createElement('button');
-      docx.type = 'button';
-      docx.textContent = 'Unduh DOCX';
-      docx.onclick = () => {
-        const bytes = buildDocxBytes(report);
-        const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'riset.docx';
-        a.click();
-      };
-      const md = document.createElement('button');
-      md.type = 'button';
-      md.textContent = 'Unduh MD';
-      md.onclick = () => {
-        const blob = new Blob([report], { type: 'text/markdown' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'riset.md';
-        a.click();
-      };
-      actions.appendChild(open);
-      actions.appendChild(docx);
-      actions.appendChild(md);
-      card.appendChild(title);
-      card.appendChild(summary);
-      card.appendChild(actions);
-      const host = $('messages');
-      if (host) host.appendChild(card);
-    }
-    if (plan.route === 'tool' || toolsKode.isCodeQuestion(text)) {
-      await tryCodeArtifact(text);
+    if (isWebsearch && webSources.length && typeof document !== 'undefined') {
+      const aiBubbles = document.querySelectorAll('#messages .msg.ai');
+      const lastAi = aiBubbles.length ? aiBubbles[aiBubbles.length - 1] : null;
+      if (lastAi && !lastAi.querySelector('.web-sources-strip')) {
+        const strip = document.createElement('div');
+        strip.className = 'web-sources-strip';
+        webSources.slice(0, 5).forEach((src) => {
+          const link = document.createElement('a');
+          link.className = 'web-source-chip';
+          link.href = src.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          let hostLabel = src.title;
+          try { hostLabel = new URL(src.url).hostname.replace(/^www\./, '') + ' · ' + src.title; } catch (e) { /* ignore */ }
+          link.textContent = hostLabel.slice(0, 48);
+          strip.appendChild(link);
+        });
+        const actionsBar = lastAi.querySelector('.msg-actions');
+        if (actionsBar) lastAi.insertBefore(strip, actionsBar);
+        else lastAi.appendChild(strip);
+      }
     }
     if (isWebsearch && reply) {
       try {
@@ -978,16 +938,28 @@ export const composer = {
       research: this.researchActive,
     });
   },
+  updatePlaceholder() {
+    const inp = $('chat-input');
+    if (!inp) return;
+    if (this.slideActive) {
+      inp.placeholder = 'Ketik topik untuk dibuatkan slide (.pptx)…';
+    } else if (this.researchActive) {
+      inp.placeholder = 'Tanya topik untuk riset mendalam…';
+    } else if (this.websearchActive) {
+      inp.placeholder = 'Telusuri web dengan Rategoan…';
+    } else {
+      inp.placeholder = 'Tanya Rategoan';
+    }
+  },
   setWebsearch(active) {
     this.websearchActive = active;
     const card = $('sheet-websearch');
-    const inp = $('chat-input');
     if (card) {
       card.classList.toggle('active', active);
       card.setAttribute('aria-checked', String(active));
     }
-    if (inp) inp.placeholder = 'Tanya Rategoan';
     this.paintQuick();
+    this.updatePlaceholder();
     this.syncModes();
   },
   paintQuick() {
@@ -1009,6 +981,8 @@ export const composer = {
       slide.classList.toggle('on', !!this.slideActive);
       slide.setAttribute('aria-pressed', String(!!this.slideActive));
     }
+    this._toggleSwitch('sheet-slide', !!this.slideActive);
+    this.updatePlaceholder();
   },
   bind() {
     this.thinkActive = enginePreference.get() === 'neural';
@@ -1037,7 +1011,7 @@ export const composer = {
     if (send) send.onclick = () => {
       let t = inp.value.trim();
       if (!t && !attach.current && !quote.current) return;
-      
+
       const wasSlide = this.slideActive;
       if (wasSlide && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
       if (wasSlide) {
@@ -1056,6 +1030,7 @@ export const composer = {
       if (label) label.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek terpilih (Pilih)';
       this._toggleSwitch('sheet-research', this.researchActive);
       this._toggleSwitch('sheet-websearch', this.websearchActive);
+      this._toggleSwitch('sheet-slide', this.slideActive);
       attach.open();
     };
     document.addEventListener('rategoan:stop-generation', () => {
@@ -1096,6 +1071,7 @@ export const composer = {
       else if (key === 'research') {
         this.researchActive = false;
         this._toggleSwitch('sheet-research', false);
+        this.updatePlaceholder();
         this.syncModes();
       }
     };
@@ -1156,7 +1132,7 @@ export const composer = {
     if (quickSlide) quickSlide.onclick = () => {
       this.slideActive = !this.slideActive;
       this.paintQuick();
-      toast.show(this.slideActive ? 'Pesan berikutnya dijadikan slide' : 'Mode slide mati');
+      toast.show(this.slideActive ? 'Mode Slide (.pptx) aktif' : 'Mode slide mati');
     };
     const websearchCard = $('sheet-websearch');
     if (websearchCard) {
@@ -1173,61 +1149,77 @@ export const composer = {
       if (this.researchActive) this.setWebsearch(true);
       else this.syncModes();
     };
+    const linkProjectToSession = (p) => {
+      workspace.setCurrent(p.id);
+      const sess = this.ensure();
+      sess.projectId = p.id;
+      sess.project = { goal: p.name, started: Date.now() };
+      store.save();
+      const label = $('sheet-project-label');
+      if (label) label.textContent = 'Proyek aktif: ' + p.name;
+      const bar = document.getElementById('thread-bar');
+      if (bar) {
+        bar.hidden = false;
+        bar.textContent = 'Proyek aktif: ' + p.name;
+      }
+      toast.show('Proyek aktif: ' + p.name);
+      sheets.close();
+    };
     const paintProjects = () => {
       const ul = $('project-list');
       if (!ul) return;
       ul.innerHTML = '';
-      workspace.list().forEach((p) => {
+      const list = workspace.list();
+      if (!list.length) {
+        const templates = ['Riset akademik', 'Pengembangan web', 'Naskah', 'Dokumen bisnis'];
+        templates.forEach((tplName) => {
+          const li = document.createElement('li');
+          li.textContent = '+ Template: ' + tplName;
+          li.onclick = () => {
+            const created = workspace.findByName(tplName) || workspace.create(tplName);
+            linkProjectToSession(created);
+          };
+          ul.appendChild(li);
+        });
+        return;
+      }
+      list.forEach((p) => {
         const li = document.createElement('li');
         li.textContent = p.name + (workspace.currentId() === p.id ? ' · aktif' : '');
-        li.onclick = () => {
-          workspace.setCurrent(p.id);
-          const sess = this.ensure();
-          sess.projectId = p.id;
-          sess.project = { goal: p.name, started: Date.now() };
-          store.save();
-          toast.show('Proyek: ' + p.name);
-          sheets.close();
-        };
+        li.onclick = () => linkProjectToSession(p);
         ul.appendChild(li);
       });
     };
-    const openProjectSheet = () => {
-      paintProjects();
+    const openProjectQuickSheet = () => {
       sheets.close();
-      projectPage.open();
+      paintProjects();
+      sheets.openProject();
     };
     const projectCard = $('sheet-project');
-    if (projectCard) projectCard.onclick = () => openProjectSheet();
+    if (projectCard) projectCard.onclick = () => openProjectQuickSheet();
     const sideProj = $('btn-project');
-    if (sideProj) sideProj.onclick = () => { drawer.close(); openProjectSheet(); };
+    if (sideProj) sideProj.onclick = () => { drawer.close(); projectPage.open(); };
     const makeP = $('project-create');
     if (makeP) makeP.onclick = () => {
-      const name = (($('project-name') || {}).value || '').trim();
-      if (!name) return;
+      const inpName = $('project-name');
+      const name = ((inpName || {}).value || '').trim();
+      if (!name) {
+        toast.show('Ketik nama proyek baru terlebih dahulu');
+        if (inpName) inpName.focus();
+        return;
+      }
       const found = workspace.findByName(name) || workspace.create(name);
-      workspace.setCurrent(found.id);
-      const sess = this.ensure();
-      sess.projectId = found.id;
-      sess.project = { goal: found.name, started: Date.now() };
-      store.save();
-      toast.show('Proyek: ' + found.name);
-      sheets.close();
+      if (inpName) inpName.value = '';
+      linkProjectToSession(found);
     };
     const voiceCard = $('sheet-voice');
     if (voiceCard) voiceCard.onclick = () => { sheets.close(); voice.listen(); };
     const slideCard = $('sheet-slide');
     if (slideCard) {
       slideCard.onclick = () => {
-        sheets.close();
-        this.slideActive = true;
-        const box = $('chat-input');
-        if (box && !box.value.trim()) box.value = 'Buatkan slide presentasi tentang: ';
-        if (box) {
-          box.focus();
-          box.dispatchEvent(new Event('input'));
-        }
+        this.slideActive = !this.slideActive;
         this.paintQuick();
+        toast.show(this.slideActive ? 'Mode Slide (.pptx) aktif — ketik topik presentasi Anda' : 'Mode slide mati');
       };
     }
     $('btn-login').onclick = () => {

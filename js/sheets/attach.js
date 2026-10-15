@@ -250,129 +250,140 @@ export const attach = {
       full: null,
       fileText: '',
       fileTextError: '',
+      visionMeta: null,
+      _readyPromise: null,
     };
     this.files.push(item);
     this.current = this.files[0];
     this.renderChip();
     sheets.close();
 
-    if (isSvg) {
-      const rawSvg = await this.readAsText(f);
-      if (hasXmlEntityBomb(rawSvg)) {
-        item.fileTextError = 'Berkas SVG ditolak karena mengandung entitas XML berbahaya (XXE).';
-        item.statusLabel = 'Ditolak (XXE)';
-        toast.show(item.fileTextError);
-      } else {
-        const cleanSvg = sanitizeSvgContent(rawSvg);
-        const textOnly = cleanSvg.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-        item.fileText = (textOnly || cleanSvg).slice(0, MAX_ATTACH_TEXT_CHARS);
-        const safeBlob = new Blob([cleanSvg], { type: 'image/svg+xml;charset=utf-8' });
-        item.thumb = await this.makeThumb(safeBlob);
-        item.full = item.thumb;
-        item.statusLabel = 'SVG siap';
-      }
-    } else if (f.type && f.type.indexOf('image/') === 0) {
-      item.thumb = await this.makeThumb(f);
-      item.full = await this.makeThumb(f, 1600);
-      item.statusLabel = 'Gambar siap';
-      this.renderChip();
-      try {
-        const ocrRes = await visionOcr.recognize(f);
-        if (ocrRes && ocrRes.text) {
-          item.fileText = String(ocrRes.text).slice(0, MAX_ATTACH_TEXT_CHARS);
-          item.ocrNote = 'Visi & OCR siap';
-          item.statusLabel = 'Visi & OCR siap';
+    const extractPromise = (async () => {
+      if (isSvg) {
+        const rawSvg = await this.readAsText(f);
+        if (hasXmlEntityBomb(rawSvg)) {
+          item.fileTextError = 'Berkas SVG ditolak karena mengandung entitas XML berbahaya (XXE).';
+          item.statusLabel = 'Ditolak (XXE)';
+          toast.show(item.fileTextError);
+        } else {
+          const cleanSvg = sanitizeSvgContent(rawSvg);
+          const textOnly = cleanSvg.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+          item.fileText = (textOnly || cleanSvg).slice(0, MAX_ATTACH_TEXT_CHARS);
+          const safeBlob = new Blob([cleanSvg], { type: 'image/svg+xml;charset=utf-8' });
+          item.thumb = await this.makeThumb(safeBlob);
+          item.full = item.thumb;
+          item.statusLabel = 'SVG siap';
         }
-      } catch (e) { /* OCR fallback */ }
-    } else if (TEXT_FILE_EXT_RE.test(f.name || '') || (f.type && f.type.indexOf('text/') === 0)) {
-      const rawText = await this.readAsText(f);
-      if (/\.xml$|\.enex$/i.test(f.name || '') && hasXmlEntityBomb(rawText)) {
-        item.fileTextError = 'Berkas XML ditolak karena mengandung deklarasi entitas berbahaya.';
-        item.statusLabel = 'Ditolak (XXE)';
-        toast.show(item.fileTextError);
-      } else {
-        item.fileText = rawText.slice(0, MAX_ATTACH_TEXT_CHARS);
-        const lines = item.fileText.split('\n').length;
-        item.statusLabel = lines + ' baris siap';
-      }
-    } else if (/\.docx$/i.test(f.name || '')) {
-      item.fileBinary = await this.readAsArrayBuffer(f);
-      if (item.fileBinary) {
+      } else if (meta.kind === 'image' || (f.type && f.type.indexOf('image/') === 0)) {
+        item.thumb = await this.makeThumb(f);
+        item.full = await this.makeThumb(f, 1600);
+        item.statusLabel = 'Gambar siap';
+        this.renderChip();
         try {
-          const xml = await readZipText(item.fileBinary, 'word/document.xml');
-          if (hasXmlEntityBomb(xml)) {
-            item.fileTextError = 'Dokumen DOCX ditolak karena mengandung entitas XML berbahaya.';
-            item.statusLabel = 'Ditolak (XXE)';
-          } else {
-            item.fileText = xml
-              .replace(/<w:p\b[^>]*>/g, '\n')
-              .replace(/<[^>]+>/g, '')
-              .replace(/&/g, '&')
-              .replace(/</g, '<')
-              .replace(/>/g, '>')
-              .replace(/\n{3,}/g, '\n\n')
-              .trim()
-              .slice(0, MAX_ATTACH_TEXT_CHARS);
-            const words = item.fileText.split(/\s+/).filter(Boolean).length;
-            item.statusLabel = words + ' kata siap';
+          const ocrRes = await visionOcr.recognize(f);
+          if (ocrRes && ocrRes.text) {
+            item.fileText = String(ocrRes.text).slice(0, MAX_ATTACH_TEXT_CHARS);
+            item.visionMeta = ocrRes.meta || null;
+            item.ocrNote = 'Visi & OCR siap';
+            item.statusLabel = 'Visi & OCR siap';
           }
-        } catch (e) {
-          item.fileTextError = 'Gagal membaca isi DOCX.';
-          item.statusLabel = 'Gagal ekstrak';
+        } catch (e) { /* OCR fallback */ }
+      } else if (meta.kind === 'audio') {
+        item.fileText = '[Memo suara / berkas audio terlampir: ' + (f.name || 'audio') + ' (' + meta.sizeLabel + ')]';
+        item.statusLabel = 'Audio siap';
+      } else if (TEXT_FILE_EXT_RE.test(f.name || '') || (f.type && f.type.indexOf('text/') === 0)) {
+        const rawText = await this.readAsText(f);
+        if (/\.xml$|\.enex$/i.test(f.name || '') && hasXmlEntityBomb(rawText)) {
+          item.fileTextError = 'Berkas XML ditolak karena mengandung deklarasi entitas berbahaya.';
+          item.statusLabel = 'Ditolak (XXE)';
+          toast.show(item.fileTextError);
+        } else {
+          item.fileText = rawText.slice(0, MAX_ATTACH_TEXT_CHARS);
+          const lines = item.fileText.split('\n').length;
+          item.statusLabel = lines + ' baris siap';
         }
-      }
-    } else if (/\.(pdf|zip|pptx|xlsx)$/i.test(f.name || '')) {
-      item.fileBinary = await this.readAsArrayBuffer(f);
-      if (item.fileBinary && /\.pdf$/i.test(f.name || '')) {
-        try {
-          item.fileText = String((await extractPdfText(item.fileBinary.slice(0))) || '').slice(0, MAX_ATTACH_TEXT_CHARS);
-          const pageHit = item.fileText.match(/(\d+)\s+halaman/);
-          item.statusLabel = (pageHit ? pageHit[1] + ' hlm · ' : '') + 'Teks siap';
-        } catch (e) {
-          item.fileTextError = 'Gagal membaca isi PDF: ' + (e && e.message ? e.message : 'error tidak diketahui');
-          item.statusLabel = 'Gagal ekstrak';
-        }
-      } else if (item.fileBinary && /\.zip$/i.test(f.name || '')) {
-        try {
-          const bytes = new Uint8Array(item.fileBinary);
-          const entries = listZipEntries(bytes).filter((e) => !String(e.name || e).endsWith('/'));
-          item.fileText = await extractArchiveSummary(bytes);
-          item.statusLabel = entries.length + ' berkas diekstrak';
-        } catch (e) {
-          item.fileTextError = 'Gagal mengekstrak arsip ZIP.';
-          item.statusLabel = 'Gagal ekstrak';
-        }
-      } else if (item.fileBinary && /\.pptx$/i.test(f.name || '')) {
-        try {
-          const bytes = new Uint8Array(item.fileBinary);
-          const entries = listZipEntries(bytes).filter((e) => /^ppt\/slides\/slide\d+\.xml$/i.test(e.name));
-          const slides = [];
-          for (let i = 0; i < entries.length && i < 30; i += 1) {
-            const xml = await readZipText(bytes, entries[i].name);
-            if (xml && !hasXmlEntityBomb(xml)) {
-              slides.push('Slide ' + (i + 1) + ': ' + xml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+      } else if (/\.docx$/i.test(f.name || '')) {
+        item.fileBinary = await this.readAsArrayBuffer(f);
+        if (item.fileBinary) {
+          try {
+            const xml = await readZipText(item.fileBinary, 'word/document.xml');
+            if (hasXmlEntityBomb(xml)) {
+              item.fileTextError = 'Dokumen DOCX ditolak karena mengandung entitas XML berbahaya.';
+              item.statusLabel = 'Ditolak (XXE)';
+            } else {
+              item.fileText = xml
+                .replace(/<w:p\b[^>]*>/g, '\n')
+                .replace(/<[^>]+>/g, '')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/\n{3,}/g, '\n\n')
+                .trim()
+                .slice(0, MAX_ATTACH_TEXT_CHARS);
+              const words = item.fileText.split(/\s+/).filter(Boolean).length;
+              item.statusLabel = words + ' kata siap';
             }
+          } catch (e) {
+            item.fileTextError = 'Gagal membaca isi DOCX.';
+            item.statusLabel = 'Gagal ekstrak';
           }
-          item.fileText = slides.join('\n').slice(0, MAX_ATTACH_TEXT_CHARS);
-          item.statusLabel = entries.length + ' slide siap';
-        } catch (e) {
-          item.fileTextError = 'Gagal membaca isi PPTX.';
-          item.statusLabel = 'Gagal ekstrak';
         }
-      } else if (item.fileBinary && /\.xlsx$/i.test(f.name || '')) {
-        try {
-          const sharedXml = await readZipText(item.fileBinary, 'xl/sharedStrings.xml');
-          const sheetXml = await readZipText(item.fileBinary, 'xl/worksheets/sheet1.xml');
-          const combined = [sharedXml, sheetXml].filter((x) => x && !hasXmlEntityBomb(x)).join('\n');
-          item.fileText = combined.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, MAX_ATTACH_TEXT_CHARS);
-          item.statusLabel = 'Tabel siap';
-        } catch (e) {
-          item.fileTextError = 'Gagal membaca isi XLSX.';
-          item.statusLabel = 'Gagal ekstrak';
+      } else if (/\.(pdf|zip|pptx|xlsx)$/i.test(f.name || '')) {
+        item.fileBinary = await this.readAsArrayBuffer(f);
+        if (item.fileBinary && /\.pdf$/i.test(f.name || '')) {
+          try {
+            item.fileText = String((await extractPdfText(item.fileBinary.slice(0))) || '').slice(0, MAX_ATTACH_TEXT_CHARS);
+            const pageHit = item.fileText.match(/(\d+)\s+halaman/);
+            item.statusLabel = (pageHit ? pageHit[1] + ' hlm · ' : '') + 'Teks siap';
+          } catch (e) {
+            item.fileTextError = 'Gagal membaca isi PDF: ' + (e && e.message ? e.message : 'error tidak diketahui');
+            item.statusLabel = 'Gagal ekstrak';
+          }
+        } else if (item.fileBinary && /\.zip$/i.test(f.name || '')) {
+          try {
+            const bytes = new Uint8Array(item.fileBinary);
+            const entries = listZipEntries(bytes).filter((e) => !String(e.name || e).endsWith('/'));
+            item.fileText = await extractArchiveSummary(bytes);
+            item.statusLabel = entries.length + ' berkas diekstrak';
+          } catch (e) {
+            item.fileTextError = 'Gagal mengekstrak arsip ZIP.';
+            item.statusLabel = 'Gagal ekstrak';
+          }
+        } else if (item.fileBinary && /\.pptx$/i.test(f.name || '')) {
+          try {
+            const bytes = new Uint8Array(item.fileBinary);
+            const entries = listZipEntries(bytes).filter((e) => /^ppt\/slides\/slide\d+\.xml$/i.test(e.name));
+            const slides = [];
+            for (let i = 0; i < entries.length && i < 30; i += 1) {
+              const xml = await readZipText(bytes, entries[i].name);
+              if (xml && !hasXmlEntityBomb(xml)) {
+                slides.push('Slide ' + (i + 1) + ': ' + xml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+              }
+            }
+            item.fileText = slides.join('\n').slice(0, MAX_ATTACH_TEXT_CHARS);
+            item.statusLabel = entries.length + ' slide siap';
+          } catch (e) {
+            item.fileTextError = 'Gagal membaca isi PPTX.';
+            item.statusLabel = 'Gagal ekstrak';
+          }
+        } else if (item.fileBinary && /\.xlsx$/i.test(f.name || '')) {
+          try {
+            const sharedXml = await readZipText(item.fileBinary, 'xl/sharedStrings.xml');
+            const sheetXml = await readZipText(item.fileBinary, 'xl/worksheets/sheet1.xml');
+            const combined = [sharedXml, sheetXml].filter((x) => x && !hasXmlEntityBomb(x)).join('\n');
+            item.fileText = combined.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, MAX_ATTACH_TEXT_CHARS);
+            item.statusLabel = 'Tabel siap';
+          } catch (e) {
+            item.fileTextError = 'Gagal membaca isi XLSX.';
+            item.statusLabel = 'Gagal ekstrak';
+          }
         }
       }
-    }
-    this.renderChip();
+      this.renderChip();
+    })();
+
+    item._readyPromise = extractPromise;
+    await extractPromise;
   },
   setVoiceBlob(blob) {
     if (!blob) return;
@@ -395,8 +406,12 @@ export const attach = {
   async onPick(input) {
     const chosen = Array.from((input && input.files) || []);
     if (input) input.value = '';
-    for (let i = 0; i < chosen.length; i += 1) {
+    const cap = Math.min(chosen.length, 5 - this.files.length);
+    for (let i = 0; i < cap; i += 1) {
       await this.handleFile(chosen[i]);
+    }
+    if (chosen.length > cap && cap > 0) {
+      toast.show(cap + ' berkas pertama dimuat (maksimal 5 berkas per pesan).');
     }
   },
   setModes(modes) {
@@ -474,35 +489,55 @@ export const attach = {
     this.current = null;
     this.renderChip();
     if (!files.length) return null;
-    const texts = files.map((file, index) => {
-      if (file.fileText) return '[Berkas ' + (index + 1) + ': ' + file.name + ' (' + (file.badge || 'FILE') + ', ' + (file.sizeLabel || '') + ')]\n' + file.fileText;
-      if (file.fileTextError) return '[Berkas ' + (index + 1) + ': ' + file.name + ']\n' + file.fileTextError;
-      return '[Berkas ' + (index + 1) + ': ' + file.name + ' (' + (file.badge || 'FILE') + ', ' + (file.sizeLabel || '') + ')]';
-    }).filter(Boolean);
-    const firstImg = files.find((f) => f.full || f.thumb) || files[0];
-    return {
-      name: files.map((file) => file.name).join(', '),
-      type: files[0].type,
-      size: files[0].size,
-      thumb: firstImg.thumb || null,
-      full: firstImg.full || firstImg.thumb || null,
-      files: files.map((f) => ({
-        name: f.name,
-        type: f.type,
-        size: f.size,
-        kind: f.kind,
-        badge: f.badge,
-        tone: f.tone,
-        sizeLabel: f.sizeLabel,
-        statusLabel: f.statusLabel,
-        thumb: f.thumb || null,
-        full: f.full || f.thumb || null,
-        fileText: f.fileText || '',
-        fileTextError: f.fileTextError || '',
-      })),
-      fileText: texts.join('\n\n'),
-      fileTextError: texts.length ? '' : (files[0].fileTextError || ''),
+    const buildPayload = () => {
+      const texts = files.map((file, index) => {
+        if (file.fileText) return '[Berkas ' + (index + 1) + ': ' + file.name + ' (' + (file.badge || 'FILE') + ', ' + (file.sizeLabel || '') + ')]\n' + file.fileText;
+        if (file.fileTextError) return '[Berkas ' + (index + 1) + ': ' + file.name + ']\n' + file.fileTextError;
+        return '[Berkas ' + (index + 1) + ': ' + file.name + ' (' + (file.badge || 'FILE') + ', ' + (file.sizeLabel || '') + ')]';
+      }).filter(Boolean);
+      const firstImg = files.find((f) => f.full || f.thumb) || files[0];
+      return {
+        name: files.map((file) => file.name).join(', '),
+        type: files[0].type,
+        size: files[0].size,
+        kind: files[0].kind,
+        sizeLabel: files[0].sizeLabel,
+        statusLabel: files[0].statusLabel,
+        visionMeta: firstImg.visionMeta || null,
+        thumb: firstImg.thumb || null,
+        full: firstImg.full || firstImg.thumb || null,
+        files: files.map((f) => ({
+          name: f.name,
+          type: f.type,
+          size: f.size,
+          kind: f.kind,
+          badge: f.badge,
+          tone: f.tone,
+          sizeLabel: f.sizeLabel,
+          statusLabel: f.statusLabel,
+          visionMeta: f.visionMeta || null,
+          thumb: f.thumb || null,
+          full: f.full || f.thumb || null,
+          fileText: f.fileText || '',
+          fileTextError: f.fileTextError || '',
+        })),
+        fileText: texts.join('\n\n'),
+        fileTextError: texts.length ? '' : (files[0].fileTextError || ''),
+      };
     };
+    const out = buildPayload();
+    out._sourceFiles = files;
+    out._refresh = () => Object.assign(out, buildPayload());
+    return out;
+  },
+  async ensureReady(consumed) {
+    if (!consumed || !Array.isArray(consumed._sourceFiles)) return consumed;
+    const pending = consumed._sourceFiles.map((f) => f && f._readyPromise).filter(Boolean);
+    if (pending.length) {
+      await Promise.allSettled(pending);
+      if (typeof consumed._refresh === 'function') consumed._refresh();
+    }
+    return consumed;
   },
   bind() {
     const photoBtn = $('sheet-photo');
@@ -515,7 +550,7 @@ export const attach = {
       const inp = $('pick-file') || $('file-input');
       if (inp) inp.click();
     };
-    ['pick-camera', 'pick-photo', 'pick-file', 'camera-input', 'photo-input', 'file-input'].forEach((id) => {
+    ['pick-camera', 'pick-photo', 'pick-file', 'pick-folder', 'pick-audio', 'camera-input', 'photo-input', 'file-input'].forEach((id) => {
       const inp = $(id);
       if (inp) inp.onchange = (e) => this.onPick(e.target);
     });

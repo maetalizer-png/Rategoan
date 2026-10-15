@@ -645,7 +645,9 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       const requested = Number(opts.maxNewTokens) > 0 ? Number(opts.maxNewTokens) : 32;
       const maxNew = Math.max(1, Math.min(128, requested));
       const limit = opts.maxLayers > 0 ? Math.min(layers, Math.floor(opts.maxLayers)) : layers;
-      const promptCap = Number(opts.maxPromptTokens) > 0 ? Number(opts.maxPromptTokens) : 256;
+      const promptCap = Number(opts.maxPromptTokens) > 0
+        ? Number(opts.maxPromptTokens)
+        : ((fastStreamMode && d >= 1536) ? 16 : 256);
       const ids = encodePrompt(text, promptCap);
       if (!ids.length) ids.push(1);
       const cache = [];

@@ -135,12 +135,16 @@ export const markdown = {
     out = out.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
     out = out.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
     out = out.replace(/(^|\n)((?:\|.+\|\n?){2,})/g, (block, lead, table) => {
-      const lines = table.trim().split('\n').filter((line) => !/^\|\s*:?-{3,}/.test(line));
+      const rawLines = table.trim().split('\n').map((l) => l.trim()).filter(Boolean);
+      const lines = rawLines.filter((line) => !/^\|[\s:|-]+\|$/.test(line) && !/^\|\s*:?-{2,}/.test(line));
       if (lines.length < 2) return block;
       const cells = (line) => line.replace(/^\||\|$/g, '').split('|').map((cell) => cell.trim());
       const head = cells(lines[0]);
-      const body = lines.slice(1).map((line) => '<tr>' + cells(line).map((cell) => '<td>' + cell + '</td>').join('') + '</tr>').join('');
-      return lead + '<table><thead><tr>' + head.map((cell) => '<th>' + cell + '</th>').join('') + '</tr></thead><tbody>' + body + '</tbody></table>';
+      const body = lines.slice(1).map((line) => {
+        const rowCells = cells(line);
+        return '<tr>' + head.map((_, idx) => '<td>' + (rowCells[idx] != null ? rowCells[idx] : '') + '</td>').join('') + '</tr>';
+      }).join('');
+      return lead + '<div class="md-table-wrap"><table class="md-table"><thead><tr>' + head.map((cell) => '<th>' + cell + '</th>').join('') + '</tr></thead><tbody>' + body + '</tbody></table></div>';
     });
     out = out.replace(/(^|\n)[ \t]*[-•][ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">•</span> $2</div>');
     out = out.replace(/(^|\n)[ \t]*(\d+)\.[ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">$2.</span> $3</div>');
@@ -156,6 +160,10 @@ export const markdown = {
       return '<a class="md-link" href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>' + rest;
     });
     out = out.replace(/\u0000__RATEGOAN_FENCE_(\d+)__\u0000/g, (m, i) => fences[Number(i)] || '');
+    out = out.replace(/(<\/h[1-3]>)\n+/g, "$1");
+    out = out.replace(/\n+(<h[1-3]>)/g, "\n$1");
+    out = out.replace(/\n+(<div class="md-table-wrap">)/g, "$1");
+    out = out.replace(/(<\/table><\/div>)\n+/g, "$1\n");
     return out;
   },
 };
