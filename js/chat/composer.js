@@ -80,11 +80,6 @@ function rankOffThread(docs, text) {
   });
 }
 
-function wrapTrace(title, body) {
-  if (!body) return '';
-  return '<trace title="' + String(title || 'Jejak').replace(/"/g, '') + '">\n' + body + '\n</trace>';
-}
-
 function titleFrom(text) {
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   if (!t) return 'Chat';
@@ -631,6 +626,7 @@ export const composer = {
     return s;
   },
   async send(text) {
+    this.thinkActive = enginePreference.get() === 'neural';
     text = scrubInjection(text);
     if (hiddenOrder(text)) {
       toast.show('Perintah tersembunyi ditolak. Pengiriman dibatalkan.');
@@ -866,12 +862,12 @@ export const composer = {
         }
       } catch (e) { /* konektor offline */ }
     }
-    const modelPrefix = [imageNote ? GUARDRAIL : '', prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
+    const modelPrefix = [imageNote ? GUARDRAIL : '', skillNote, flashNote, prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
     if ((store.get() && store.get().currentId) !== sendSessionId) {
       if (livePlan && livePlan.parentNode) livePlan.remove();
       return;
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, livePlan, modelPrefix, preamble: [skillNote, flashNote, wrapTrace('Langkah riset', (this.researchActive || flowHub.wantsResearch(text)) ? flowHub.researchPlan(text) : ''), wrapTrace('Proses berpikir', (this.thinkActive || flowHub.wantsThink(text)) ? flowHub.thinkBlock(text) : '')].filter(Boolean).join('\n\n') });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, livePlan, modelPrefix });
     if ((store.get() && store.get().currentId) !== sendSessionId) {
       if (livePlan && livePlan.parentNode) livePlan.remove();
       return;

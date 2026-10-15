@@ -5,7 +5,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { downloadConcurrentChunks, MODEL_CHUNK } from '../../raget-neural/runtime/model-downloader.js';
-import { gemvFusedInt4, buildAnchorSet, shouldPinTensor, openInt4Stream } from '../../raget-neural/runtime/int4-session.js';
+import { gemvFusedInt4, buildAnchorSet, shouldPinTensor, openInt4Stream, buildRopeFreqs, applyRoPE, pickToken } from '../../raget-neural/runtime/int4-session.js';
+import { bpeShell } from '../../raget-neural/bpe-shell.js';
 import { buildDynamicThoughts, laneOf } from '../../../js/ui/thought-card.js';
 import { craftInstruction, shouldSynthesize, isWorkspaceContinuation } from '../../../js/studio/studio-agent.js';
 import { synthesizeCode, parseFenceFiles, parseSurgicalBlocks } from '../../../js/studio/neural-synthesizer.js';
@@ -567,4 +568,49 @@ test('DOD-41.20 Ekstraksi PDF/ZIP/Visi Murni In-Browser, Kartu Lampiran Multi-Be
   const modelSheetSrc = read('js/sheets/model-sheet.js');
   assert.match(modelSheetSrc, /label: 'Rendah'/);
   assert.match(modelSheetSrc, /label: 'Tinggi'/);
+  assert.equal(compSrc.includes('wrapTrace('), false);
+  assert.equal(compSrc.includes('<trace title='), false);
+});
+
+test('DOD-41.21 Penyempurnaan Inti Otak Neural: Rotary Position Embedding (RoPE), Hidrasi Kosakata BPE Kustom, dan Penalti Repetisi Mode Rendah/Tinggi', () => {
+  // 1. RoPE norm preservation and positional rotation
+  const dk = 8;
+  const heads = 2;
+  const freqs = buildRopeFreqs(dk, 10000);
+  assert.equal(freqs.length, 4);
+  const q0 = new Float32Array([1, 2, 3, 4, 0.5, -1.5, 2.5, -0.5, 1, 0, 0, 1, 2, 2, -1, 3]);
+  const normBefore = q0.reduce((acc, v) => acc + v * v, 0);
+  const qPos0 = new Float32Array(q0);
+  applyRoPE(qPos0, heads, dk, 0, freqs);
+  for (let i = 0; i < q0.length; i += 1) {
+    assert.ok(Math.abs(qPos0[i] - q0[i]) < 1e-6);
+  }
+  const qPos5 = new Float32Array(q0);
+  applyRoPE(qPos5, heads, dk, 5, freqs);
+  const normAfter = qPos5.reduce((acc, v) => acc + v * v, 0);
+  assert.ok(Math.abs(normBefore - normAfter) < 1e-4);
+  assert.ok(Math.abs(qPos5[0] - q0[0]) > 1e-3);
+
+  // 2. Greedy + Frequency Repetition Penalty in pickToken (Mode Rendah temperature=0)
+  const logits = new Float32Array(32);
+  logits.fill(-5);
+  logits[10] = 4.0;
+  logits[11] = 3.8;
+  const pickedFresh = pickToken(new Float32Array(logits), { temperature: 0, repetitionPenalty: 1.2 }, []);
+  assert.equal(pickedFresh, 10);
+  const pickedPenalized = pickToken(new Float32Array(logits), { temperature: 0, repetitionPenalty: 1.2 }, [10, 10, 10]);
+  assert.equal(pickedPenalized, 11);
+
+  // 3. Custom BPE vocabulary hydration & reset
+  try {
+    const custom = bpeShell.loadCustomVocabulary({
+      vocab: ['<|endoftext|>', '<|bos|>', '<|pad|>', '</s>', '\n\nPengguna:', 'Halo', 'Raget'],
+      merges: [],
+    });
+    assert.equal(custom.custom, true);
+    assert.equal(bpeShell.decodeIds([5]), 'Halo');
+  } finally {
+    bpeShell.resetVocabulary();
+  }
+  assert.equal(bpeShell.buildShell().idToToken.length, 32000);
 });

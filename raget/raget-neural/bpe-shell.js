@@ -3,6 +3,7 @@ const SPECIALS = ['<|endoftext|>', '<|bos|>', '<|pad|>', '</s>', '\n\nPengguna:'
 const STOP = new Set(['<|endoftext|>', '</s>', '\n\nPengguna:']);
 
 let cached = null;
+let customShell = null;
 
 function bytesToUnicode() {
   const bs = [];
@@ -29,6 +30,7 @@ function bytesToUnicode() {
 }
 
 function buildShell() {
+  if (customShell) return customShell;
   if (cached) return cached;
   const { byteToChar, charToByte } = bytesToUnicode();
   const idToToken = [];
@@ -61,6 +63,52 @@ function buildShell() {
   merges.forEach((pair, index) => rank.set(pair, index));
   cached = { idToToken, tokenToId, merges, rank, byteToChar, charToByte };
   return cached;
+}
+
+function loadCustomVocabulary(spec) {
+  if (!spec || typeof spec !== 'object') return buildShell();
+  const { byteToChar, charToByte } = bytesToUnicode();
+  const idToToken = [];
+  const tokenToId = new Map();
+  if (Array.isArray(spec.vocab)) {
+    for (let i = 0; i < spec.vocab.length; i += 1) {
+      const tok = String(spec.vocab[i] ?? '');
+      idToToken.push(tok);
+      if (!tokenToId.has(tok)) tokenToId.set(tok, i);
+    }
+  } else if (spec.vocab && typeof spec.vocab === 'object') {
+    const entries = Object.entries(spec.vocab).sort((a, b) => Number(a[1]) - Number(b[1]));
+    for (let i = 0; i < entries.length; i += 1) {
+      const [tok, id] = entries[i];
+      const idx = Number.isInteger(Number(id)) ? Number(id) : idToToken.length;
+      idToToken[idx] = String(tok);
+      tokenToId.set(String(tok), idx);
+    }
+  }
+  if (!idToToken.length) return buildShell();
+  SPECIALS.forEach((tok) => {
+    if (!tokenToId.has(tok)) {
+      tokenToId.set(tok, idToToken.length);
+      idToToken.push(tok);
+    }
+  });
+  for (let b = 0; b < 256; b += 1) {
+    const tok = byteToChar[b];
+    if (!tokenToId.has(tok)) {
+      tokenToId.set(tok, idToToken.length);
+      idToToken.push(tok);
+    }
+  }
+  const merges = Array.isArray(spec.merges) ? spec.merges.map((m) => (Array.isArray(m) ? m.join(' ') : String(m))) : [];
+  const rank = new Map();
+  merges.forEach((pair, index) => rank.set(pair, index));
+  customShell = { idToToken, tokenToId, merges, rank, byteToChar, charToByte, custom: true };
+  return customShell;
+}
+
+function resetVocabulary() {
+  customShell = null;
+  return buildShell();
 }
 
 function encodeBytes(text) {
@@ -156,8 +204,12 @@ function pieceBytes(shell, token) {
   const out = [];
   for (const ch of token) {
     const b = shell.charToByte.get(ch);
-    if (b == null) return null;
-    out.push(b);
+    if (b == null) {
+      const utf8 = new TextEncoder().encode(ch);
+      for (let k = 0; k < utf8.length; k += 1) out.push(utf8[k]);
+    } else {
+      out.push(b);
+    }
   }
   return Uint8Array.from(out);
 }
@@ -227,6 +279,8 @@ export const bpeShell = Object.freeze({
   VOCAB_SIZE,
   SPECIALS,
   buildShell,
+  loadCustomVocabulary,
+  resetVocabulary,
   encodeBytes,
   decodeIds,
   eosIds,

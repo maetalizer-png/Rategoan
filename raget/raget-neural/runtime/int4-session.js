@@ -75,7 +75,38 @@ function getPrintableVocabMask() {
   return mask;
 }
 
-function pickToken(logits, opts, recent) {
+export function buildRopeFreqs(dk, base = 10000) {
+  const half = Math.max(1, (dk | 0) >>> 1);
+  const theta = Number(base) > 0 ? Number(base) : 10000;
+  const invFreq = new Float32Array(half);
+  for (let i = 0; i < half; i += 1) {
+    invFreq[i] = 1.0 / Math.pow(theta, (2 * i) / Math.max(2, dk));
+  }
+  return invFreq;
+}
+
+export function applyRoPE(vec, heads, dk, pos, invFreq) {
+  if (!vec || dk < 2 || !(pos >= 0)) return vec;
+  const half = dk >>> 1;
+  const freq = invFreq || buildRopeFreqs(dk);
+  for (let h = 0; h < heads; h += 1) {
+    const base = h * dk;
+    for (let j = 0; j < half; j += 1) {
+      const angle = pos * (freq[j] || 0);
+      const cos = Math.cos(angle);
+      const sin = Math.sin(angle);
+      const i0 = base + (j << 1);
+      const i1 = i0 + 1;
+      const v0 = vec[i0];
+      const v1 = vec[i1];
+      vec[i0] = v0 * cos - v1 * sin;
+      vec[i1] = v0 * sin + v1 * cos;
+    }
+  }
+  return vec;
+}
+
+export function pickToken(logits, opts, recent) {
   if (logits && logits.length >= 1000 && !(opts && opts.grammar)) {
     const mask = getPrintableVocabMask();
     const limit = Math.min(logits.length, mask.length);
@@ -89,8 +120,24 @@ function pickToken(logits, opts, recent) {
       }
     }
   }
+  const repPenalty = opts && typeof opts.repetitionPenalty === 'number' ? opts.repetitionPenalty : 1;
+  if (recent && recent.length && repPenalty > 1) {
+    const counts = new Map();
+    const windowIds = recent.slice(-64);
+    for (let i = 0; i < windowIds.length; i += 1) {
+      const id = windowIds[i];
+      counts.set(id, (counts.get(id) || 0) + 1);
+    }
+    counts.forEach((cnt, id) => {
+      if (id >= 0 && id < logits.length && logits[id] > -1e20) {
+        const v = logits[id];
+        const penalized = v > 0 ? (v / repPenalty) : (v * repPenalty);
+        logits[id] = penalized - (cnt - 1) * 0.08;
+      }
+    });
+  }
   const temperature = Number(opts && opts.temperature);
-  if (!(temperature > 0) && (!recent || !recent.length || !(Number(opts && opts.repetitionPenalty) > 1))) {
+  if (!(temperature > 0)) {
     let bestId = 0;
     let bestVal = -Infinity;
     for (let i = 0; i < logits.length; i += 1) {
@@ -102,13 +149,12 @@ function pickToken(logits, opts, recent) {
     return bestId;
   }
   const row = Array.from(logits);
-  if (!(temperature > 0)) return LLMSampler.greedySample(row);
   return LLMSampler.sampleAdaptive(row, {
     temperature: temperature,
     topK: (opts && opts.topK) || LLMSampler.SAMPLE_DEFAULTS.topK,
     topP: opts && typeof opts.topP === 'number' ? opts.topP : LLMSampler.SAMPLE_DEFAULTS.topP,
-    repetitionPenalty: opts && typeof opts.repetitionPenalty === 'number' ? opts.repetitionPenalty : LLMSampler.SAMPLE_DEFAULTS.repetitionPenalty,
-    recentTokenIds: recent,
+    repetitionPenalty: 1,
+    recentTokenIds: [],
   });
 }
 
@@ -312,6 +358,15 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
   const fromTensor = d > 0 ? Math.floor((headLoc.len * 2) / d) : 0;
   const vocab = Math.max(8, fromMeta && fromTensor ? Math.min(fromMeta, fromTensor) : (fromMeta || fromTensor || bpeShell.VOCAB_SIZE));
   const isTrained = parsed.meta.trained === 'true' || parsed.meta.trained === true;
+  if (parsed.meta && (parsed.meta.vocab_json || parsed.meta.merges_json)) {
+    try {
+      const customVocab = parsed.meta.vocab_json ? JSON.parse(parsed.meta.vocab_json) : null;
+      const customMerges = parsed.meta.merges_json ? JSON.parse(parsed.meta.merges_json) : null;
+      if (customVocab) bpeShell.loadCustomVocabulary({ vocab: customVocab, merges: customMerges });
+    } catch (e) { /* gunakan bpeShell bawaan */ }
+  }
+  const useRope = parsed.meta.rope !== 'false' && parsed.meta.rope !== false && dk >= 2;
+  const ropeInvFreq = useRope ? buildRopeFreqs(dk, Number(parsed.meta.rope_theta) || 10000) : null;
   const anchorSet = buildAnchorSet(layers);
   const small = new Map();
   let smallBytes = 0;
@@ -544,6 +599,11 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       ], signal, blockStride)) return null;
       cache[layer].k = cache[layer].k || [];
       cache[layer].v = cache[layer].v || [];
+      if (useRope) {
+        const pos = cache[layer].k.length;
+        applyRoPE(q, nHeads, dk, pos, ropeInvFreq);
+        applyRoPE(k, nKv, dk, pos, ropeInvFreq);
+      }
       commitKv(cache[layer], k, v, kvInt8);
       attend(q, cache, layer, mixed);
       if (!await project(prefix + 'attention.Wo', d, nHeads * dk, mixed, attn, signal, blockStride)) return null;
