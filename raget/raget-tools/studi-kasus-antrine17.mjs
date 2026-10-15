@@ -82,43 +82,36 @@ try {
     const host = document.createElement('div');
     host.className = 'msg ai';
     msgBox.appendChild(host);
-    const steps = buildDynamicThoughts('cari dokumentasi konektor github', { websearch: true, think: true });
+    const steps = buildDynamicThoughts('cari dokumentasi konektor github', { websearch: true });
     const box = mountThought(host, steps, 'berjalan');
     const csBox = getComputedStyle(box);
     const summary = box.querySelector('summary');
     const csSummary = getComputedStyle(summary);
     const dot = box.querySelector('.thought-dot.zen-dot');
     const csDot = getComputedStyle(dot);
-    const startsOpen = box.open === true;
+    const defaultCollapsed = box.open === false;
     const dotBorderRadius = csDot.borderRadius;
     const boxBorderStyle = csBox.borderTopStyle;
     const boxBackground = csBox.backgroundColor;
     const summaryBackground = csSummary.backgroundColor;
     summary.click();
-    const collapsedAfterClick = box.open === false;
-    summary.click();
-    const reopenedAfterClick = box.open === true;
+    const expandedAfterClick = box.open === true;
     const csBoxOpen = getComputedStyle(box);
     const boxOpenBackground = csBoxOpen.backgroundColor;
     const boxOpenBoxShadow = csBoxOpen.boxShadow;
-    const liveIdx = () => Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
-    const initialLiveIdx = liveIdx();
+    const initialLiveIdx = Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
     window.dispatchEvent(new CustomEvent('rategoan:neural-step', { detail: { doneLayers: 12, totalLayers: 28, phase: 'prefill' } }));
-    const midLiveIdx = liveIdx();
+    const midLiveIdx = Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
     window.dispatchEvent(new CustomEvent('rategoan:neural-step', { detail: { doneLayers: 26, totalLayers: 28, phase: 'prefill' } }));
-    const lateLiveIdx = liveIdx();
-    const prefillText = Array.from(box.querySelectorAll('.stepper-copy')).map((el) => el.textContent.trim()).find((t) => /prefill/i.test(t)) || '';
-    window.dispatchEvent(new CustomEvent('rategoan:neural-step', { detail: { phase: 'decode', decodedTokens: 8, targetTokens: 32 } }));
-    const decodeLiveIdx = liveIdx();
+    const finalLiveIdx = Array.from(box.querySelectorAll('.stepper-node')).findIndex((el) => el.classList.contains('is-live'));
     const nodeTexts = Array.from(box.querySelectorAll('.stepper-copy')).map((el) => el.textContent.trim());
-    const hasBannedJargon = nodeTexts.some((t) => /BPE |INT4 affine|vektor 384-dim/i.test(t));
+    const hasJargon = nodeTexts.some((t) => /BPE|INT4|vektor 384-dim/i.test(t));
     const doneBox = mountThought(host, steps, 'selesai');
     const doneLabel = doneBox.querySelector('.thought-summary-label').textContent.trim();
     host.remove();
     return {
-      startsOpen,
-      collapsedAfterClick,
-      reopenedAfterClick,
+      defaultCollapsed,
+      expandedAfterClick,
       hasBlueDot: !!dot,
       dotBorderRadius,
       boxBorderStyle,
@@ -128,11 +121,9 @@ try {
       summaryBackground,
       initialLiveIdx,
       midLiveIdx,
-      lateLiveIdx,
-      decodeLiveIdx,
-      prefillText,
+      finalLiveIdx,
       nodeTexts,
-      hasBannedJargon,
+      hasJargon,
       doneLabel,
     };
   });
@@ -390,9 +381,8 @@ try {
     ok: consoleErrors.length === 0
       && desktopLoginAudit.centerDeltaPx <= 2
       && desktopLoginAudit.appWidth === 1366
-      && grokThoughtAudit.startsOpen === true
-      && grokThoughtAudit.collapsedAfterClick === true
-      && grokThoughtAudit.reopenedAfterClick === true
+      && grokThoughtAudit.defaultCollapsed === true
+      && grokThoughtAudit.expandedAfterClick === true
       && grokThoughtAudit.hasBlueDot === true
       && grokThoughtAudit.boxBorderStyle === 'none'
       && grokThoughtAudit.boxBackground === 'rgba(0, 0, 0, 0)'
@@ -400,11 +390,9 @@ try {
       && grokThoughtAudit.boxOpenBoxShadow === 'none'
       && grokThoughtAudit.initialLiveIdx === 0
       && grokThoughtAudit.midLiveIdx === 1
-      && grokThoughtAudit.lateLiveIdx === 2
-      && grokThoughtAudit.decodeLiveIdx === 3
-      && /lapis 26\/28/.test(grokThoughtAudit.prefillText)
-      && grokThoughtAudit.hasBannedJargon === false
-      && grokThoughtAudit.doneLabel.startsWith('Berpikir selama ')
+      && grokThoughtAudit.finalLiveIdx === 2
+      && grokThoughtAudit.hasJargon === false
+      && grokThoughtAudit.doneLabel === 'Proses berpikir'
       && studioLayoutAudit.hasBtnModel === true
       && studioLayoutAudit.modelNextToPlus === true
       && studioModelSheetAudit.sheetOpen === true

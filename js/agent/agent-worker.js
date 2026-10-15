@@ -9,18 +9,18 @@ self.onmessage = (event) => {
 
   const steps = [];
   if (data.files) {
-    steps.push({ kind: 'EMIT_ACTION', text: 'Memindai berkas lampiran: ' + data.files });
-    steps.push({ kind: 'EMIT_EXPLORE', text: 'Mengekstrak isi & metadata dari ' + data.files });
+    steps.push({ kind: 'EMIT_ACTION', text: 'Membuka & membaca berkas: ' + data.files });
+    steps.push({ kind: 'EMIT_EXPLORE', text: 'Membedah isi & mengekstrak bagian penting dari ' + data.files });
   } else {
-    steps.push({ kind: 'EMIT_THOUGHT', text: 'Menganalisis permintaan: "' + shortFocus + '"' });
+    steps.push({ kind: 'EMIT_THOUGHT', text: 'Membedah permintaan: "' + shortFocus + '"' });
   }
   if (data.research) {
-    steps.push({ kind: 'EMIT_EXPLORE', text: 'Menelusuri multi-sumber web & memvalidasi rujukan untuk ' + shortFocus });
+    steps.push({ kind: 'EMIT_EXPLORE', text: 'Menelusuri sumber web & membandingkan temuan untuk "' + shortFocus + '"' });
   }
   if (data.think) {
-    steps.push({ kind: 'EMIT_COMMAND', text: 'Menjalankan penalaran mendalam Raget 1.0 (28 lapis transformer)' });
+    steps.push({ kind: 'EMIT_COMMAND', text: 'Menyusun alur pembahasan & memeriksa kelengkapan jawaban' });
   }
-  steps.push({ kind: 'EMIT_STATUS', text: 'Menyusun jawaban untuk ' + shortFocus, progress: 1 });
+  steps.push({ kind: 'EMIT_STATUS', text: 'Menyusun hasil akhir untuk "' + shortFocus + '"', progress: 1 });
 
   let index = 0;
   const delayMs = data.think ? 90 : 50;

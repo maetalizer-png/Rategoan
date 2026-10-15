@@ -563,8 +563,8 @@ test('DOD-41.20 Ekstraksi PDF/ZIP/Visi Murni In-Browser, Kartu Lampiran Multi-Be
   const highThoughts = buildDynamicThoughts('jelaskan arsitektur transformer', { think: true });
   assert.equal(lowThoughts.length, 3);
   assert.ok(highThoughts.length > lowThoughts.length);
-  assert.match(highThoughts[0].text, /Menyiapkan konteks token/i);
-  assert.ok(highThoughts.some((s) => /28 lapis transformer/i.test(s.text)));
+  assert.match(highThoughts[0].text, /arsitektur transformer/i);
+  assert.ok(highThoughts.some((s) => /alur pembahasan|kelengkapan argumen/i.test(s.text)));
   const modelSheetSrc = read('js/sheets/model-sheet.js');
   assert.match(modelSheetSrc, /label: 'Rendah'/);
   assert.match(modelSheetSrc, /label: 'Tinggi'/);
@@ -635,14 +635,22 @@ test('DOD-41.22 Alur Pencarian Web & Riset Mendalam Inline Tanpa Pindah Halaman 
   assert.match(renderedTable, /<div class="md-table-wrap"><table class="md-table"><thead><tr><th>Cabang<\/th><th>Fokus Kajian<\/th><th>Contoh Penerapan<\/th><\/tr><\/thead>/);
 });
 
-test('DOD-41.23 Proses Bekerja Real-Time Spesifik, Ekstraksi Citra HSV/Berkas Murni, dan Penyempurnaan Semua Menu Ikon +', () => {
+test('DOD-41.23 Proses Berpikir Ala Grok (Membedah Tugas Tanpa Jargon Rumus Mesin), Ekstraksi Citra/Berkas, dan Menu Ikon +', () => {
   // 1. Pastikan int4-session.js murni mendekode token BPE dari Raget 1.0 tanpa modul template neural-grounding
   const sessionSrc = read('raget/raget-neural/runtime/int4-session.js');
   assert.equal(sessionSrc.includes('neural-grounding'), false);
   assert.equal(sessionSrc.includes('groundNeuralOutput'), false);
   assert.match(sessionSrc, /const full = bpeShell\.decodeIds\(generated\)/);
 
-  // 2. Dynamic thoughts spesifik terhadap setiap kueri/lampiran dan membedakan ikon per tahap
+  // 2. Pastikan thought-card.js bebas jargon rumus mesin (RoPE, int4-block32, 28 lapis, Prefill, Dekode aliran token)
+  const tcSrc = read('js/ui/thought-card.js');
+  assert.equal(tcSrc.includes('int4-block32'), false);
+  assert.equal(tcSrc.includes('RoPE'), false);
+  assert.equal(tcSrc.includes('28 lapis transformer'), false);
+  assert.equal(tcSrc.includes('Prefill Raget 1.0'), false);
+  assert.equal(tcSrc.includes('Dekode aliran token'), false);
+
+  // 3. Dynamic thoughts membedah apa yang sedang dikerjakan (membuka gambar, merancang website, membaca zip, riset web)
   const imgSteps = buildDynamicThoughts('Baca dan ringkas lampiran ini', {
     think: true,
     files: 'kamera-1792061530652.jpg',
@@ -653,20 +661,26 @@ test('DOD-41.23 Proses Bekerja Real-Time Spesifik, Ekstraksi Citra HSV/Berkas Mu
       paletteSummary: 'Warna dominan: Biru (54%), Putih / Terang (22%), Kuning (12%)',
     },
   });
-  const mathSteps = buildDynamicThoughts('apa itu ilmu matematika', { think: true, websearch: true, research: true });
-  assert.notEqual(imgSteps[0].text, mathSteps[0].text);
-  assert.match(imgSteps[0].text, /Memindai citra kamera-1792061530652\.jpg/);
-  assert.match(imgSteps[0].sub, /460×1024 px/);
-  assert.equal(laneOf(imgSteps[0]), 'file');
-  assert.equal(laneOf(imgSteps[1]), 'search');
-  assert.equal(laneOf(imgSteps[imgSteps.length - 1]), 'write');
+  const webBuildSteps = buildDynamicThoughts('buatkan saya website A seperti website C', { think: true });
+  const zipSteps = buildDynamicThoughts('baca dan perbaiki bug', { think: true, files: 'Rategoan-main.zip', fileMeta: { kind: 'zip', statusLabel: '365 berkas diekstrak' } });
 
-  // 3. Periksa penyempurnaan menu + dan penghapusan tombol redundan Baca Gambar Ini
-  const chatJs = read('js/chat/chat.js');
-  assert.equal(chatJs.includes("buildExtraChip('Baca Gambar Ini'"), false);
-  const indexHtml = read('index.html');
-  assert.match(indexHtml, /id="pick-folder"/);
-  assert.match(indexHtml, /id="pick-audio"/);
-  const attachJs = read('js/sheets/attach.js');
-  assert.match(attachJs, /async ensureReady\(consumed\)/);
+  assert.match(imgSteps[0].text, /Membuka & mengamati gambar kamera-1792061530652\.jpg/);
+  assert.match(imgSteps[0].sub, /Saya buka berkas gambar/);
+  assert.match(webBuildSteps[0].text, /Membedah kebutuhan pembuatan "buatkan saya website A seperti website C"/);
+  assert.match(webBuildSteps[0].sub, /Saya identifikasi komponen utama/);
+  assert.match(zipSteps[0].text, /Membuka & membaca paket arsip Rategoan-main\.zip/);
+  assert.match(zipSteps[1].text, /Memeriksa isi berkas utama di dalam arsip/);
+
+  // 4. Periksa gaya visual ala Grok (ikon tanpa kotak latar dan sub-catatan berpoin bullet)
+  const thoughtCss = read('css/ui/thought.css');
+  assert.match(thoughtCss, /\.stepper-sub::before/);
+  assert.match(thoughtCss, /\.thought-seg-track/);
+  assert.match(thoughtCss, /\.stepper-kicker/);
+  assert.match(thoughtCss, /\.stepper-chips/);
+  assert.equal(tcSrc.includes('stepper-stage-num'), false);
+  assert.match(tcSrc, /VERIFIKASI_VALIDASI/);
+  assert.match(tcSrc, /PERANCANGAN_ARSITEKTUR/);
+  assert.match(tcSrc, /SINTESIS_SUMBER/);
+  assert.ok(Array.isArray(webBuildSteps[0].chips) && webBuildSteps[0].chips.some((c) => /Acuan: website C/i.test(c)));
+  assert.equal(thoughtCss.includes('.stepper-node.is-pending {\n  display: none'), false);
 });

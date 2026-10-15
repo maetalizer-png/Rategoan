@@ -814,12 +814,14 @@ export const composer = {
         }
         webNote = [webNote, noteLines.slice(0, 8).join('\n')].filter(Boolean).join('\n');
         if (webSources.length) {
-          const hosts = webSources.slice(0, 3).map((s) => {
-            try { return new URL(s.url).hostname.replace(/^www\./, ''); } catch (e) { return s.title; }
-          });
+          const uniqueHosts = Array.from(new Set(webSources.slice(0, 4).map((s) => {
+            try { return new URL(s.url).hostname.replace(/^www\./, ''); } catch (e) { return 'web'; }
+          })));
+          const titles = webSources.slice(0, 3).map((s) => '"' + String(s.title || 'rujukan').slice(0, 28) + '"');
           const webStep = thoughts.find((st) => st.kind === 'WEB_SEARCH');
           if (webStep) {
-            webStep.sub = webSources.length + ' rujukan dipindai: ' + hosts.join(', ');
+            webStep.sub = 'Saya baca ' + webSources.length + ' rujukan (' + uniqueHosts.join(', ') + ' — ' + titles.join(', ') + ') untuk mengambil poin-poin utamanya.';
+            webStep.chips = uniqueHosts.map((h) => 'Domain: ' + h).concat(webSources.slice(0, 2).map((s) => 'Artikel: ' + String(s.title || 'rujukan').slice(0, 22)));
             refreshLiveThoughts();
           }
         }

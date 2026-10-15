@@ -664,7 +664,7 @@ export const chat = {
     const sessionSwitched = !this.current() || (askSessionId && this.current().id !== askSessionId);
     const stoppedEarly = (generation && generation.signal.aborted) || sessionSwitched;
     if (reply == null || stoppedEarly) {
-      if (lp && lp.parentNode) lp.remove();
+      if (stoppedEarly && lp && lp.parentNode) lp.remove();
       document.body.classList.remove('is-generating');
       generation = null;
       return null;
