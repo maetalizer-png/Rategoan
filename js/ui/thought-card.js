@@ -45,6 +45,7 @@ function defaultSubNote(step, lane) {
 export function buildDynamicThoughts(query, opts) {
   const clean = String(query || '').replace(/\s+/g, ' ').trim();
   const shortQ = clean.length > 36 ? clean.slice(0, 36) + '…' : (clean || 'permintaan');
+  const isThink = !!(opts && opts.think);
   const isWeb = !!(opts && opts.websearch);
   const isResearch = !!(opts && opts.research);
   const fileName = opts && opts.files ? String(opts.files) : '';
@@ -54,18 +55,28 @@ export function buildDynamicThoughts(query, opts) {
   const isMath = /\b(hitung|rumus|integral|turunan|matriks|persamaan|\d+\s*[+*^/-]\s*\d+)\b/i.test(clean);
 
   const steps = [
-    {
-      kind: 'MIND',
-      text: 'Memahami maksud pertanyaan tentang "' + shortQ + '"',
-      sub: 'Saya sedang menganalisis fokus utama permintaan pengguna beserta detail konteksnya.',
-    },
+    isThink
+      ? {
+          kind: 'MIND',
+          text: 'Dekonstruksi semantik & pemetaan ruang masalah pada "' + shortQ + '"',
+          sub: 'Mengurai premis eksplisit, variabel tersembunyi, serta batasan domain dari instruksi pengguna secara menyeluruh.',
+        }
+      : {
+          kind: 'MIND',
+          text: 'Memahami maksud pertanyaan tentang "' + shortQ + '"',
+          sub: 'Saya sedang menganalisis fokus utama permintaan pengguna beserta detail konteksnya.',
+        },
   ];
 
   if (fileName) {
     steps.push({
       kind: 'FILE',
-      text: 'Membaca & mengekstrak isi berkas lampiran (' + fileName + ')',
-      sub: 'Memeriksa struktur dan isi berkas "' + fileName + '" untuk mengambil informasi kunci.',
+      text: isThink
+        ? ('Ekstraksi struktural & korelasi lintas-bagian berkas (' + fileName + ')')
+        : ('Membaca & mengekstrak isi berkas lampiran (' + fileName + ')'),
+      sub: isThink
+        ? ('Membedah hierarki dokumen, memvalidasi entitas kunci, dan menyusun indeks fakta dari "' + fileName + '".')
+        : ('Memeriksa struktur dan isi berkas "' + fileName + '" untuk mengambil informasi kunci.'),
     });
   }
 
@@ -101,27 +112,61 @@ export function buildDynamicThoughts(query, opts) {
   } else if (isCode) {
     steps.push({
       kind: 'TOOL_CODE',
-      text: 'Menyusun struktur kode & memeriksa validitas sintaks',
-      sub: 'Merancang implementasi modul dan memastikan tidak ada celah sintaks maupun logika.',
+      text: isThink
+        ? 'Analisis arsitektur AST, kompleksitas algoritma, & validasi sintaks kode'
+        : 'Menyusun struktur kode & memeriksa validitas sintaks',
+      sub: isThink
+        ? 'Memeriksa ketergantungan antar-modul, kompleksitas waktu/memori, serta keamanan eksekusi.'
+        : 'Merancang implementasi modul dan memastikan tidak ada celah sintaks maupun logika.',
     });
   } else if (isMath) {
     steps.push({
       kind: 'TOOL_MATH',
-      text: 'Menghitung ekspresi & memverifikasi langkah penyelesaian',
-      sub: 'Mengevaluasi operasi matematika langkah demi langkah untuk menjaga akurasi hasil.',
+      text: isThink
+        ? 'Derivasi simbolik multi-tahap & verifikasi pembuktian matematis'
+        : 'Menghitung ekspresi & memverifikasi langkah penyelesaian',
+      sub: isThink
+        ? 'Menurunkan rumus secara formal dan menguji ulang konsistensi numerik pada setiap tahap.'
+        : 'Mengevaluasi operasi matematika langkah demi langkah untuk menjaga akurasi hasil.',
     });
   } else {
     steps.push({
       kind: 'SEARCH',
-      text: 'Memeriksa konteks percakapan & catatan yang relevan',
-      sub: 'Meninjau alur obrolan dan pengetahuan relevan agar jawaban tepat sasaran.',
+      text: isThink
+        ? 'Korelasi memori jangka panjang & pemetaan konteks multi-dimensi'
+        : 'Memeriksa konteks percakapan & catatan yang relevan',
+      sub: isThink
+        ? 'Menghubungkan riwayat sesi, aturan preferensi pengguna, dan basis pengetahuan domain terkait.'
+        : 'Meninjau alur obrolan dan pengetahuan relevan agar jawaban tepat sasaran.',
+    });
+  }
+
+  if (isThink) {
+    steps.push({
+      kind: 'MIND',
+      text: 'Formulasi hipotesis & evaluasi jalur penalaran alternatif',
+      sub: 'Membandingkan beberapa sudut pandang penyelesaian serta mengeliminasi asumsi yang lemah atau ambigu.',
+    });
+    steps.push({
+      kind: 'TOOL_CODE',
+      text: 'Propagasi tensor Raget 1.0 penuh (28 lapis transformer · GQA 16:4 · Sampling Adaptif)',
+      sub: 'Mengeksekusi perhatian lintas-lapis mendalam dengan distribusi probabilitas Top-K/Top-P untuk presisi penalaran tinggi.',
+    });
+    steps.push({
+      kind: 'SEARCH',
+      text: 'Verifikasi kritis & audit koherensi argumen',
+      sub: 'Memastikan setiap kesimpulan memiliki landasan logis yang utuh dan bebas kontradiksi.',
     });
   }
 
   steps.push({
     kind: 'WRITE',
-    text: 'Menyusun jawaban akhir',
-    sub: 'Merapikan alur kalimat agar ringkas, jelas, dan siap ditampilkan.',
+    text: isThink
+      ? 'Sintesis komprehensif & penyusunan struktur jawaban akhir'
+      : 'Menyusun jawaban akhir',
+    sub: isThink
+      ? 'Merangkai paparan analitis yang mendalam, sistematis, dan menjawab seluruh dimensi pertanyaan.'
+      : 'Merapikan alur kalimat agar ringkas, jelas, dan siap ditampilkan.',
   });
 
   return steps;

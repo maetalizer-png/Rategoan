@@ -5,7 +5,8 @@ import { folderBridge } from './folder-bridge.js';
 import { store } from '../state/store.js';
 import { toast } from '../core/toast.js';
 import { extractPdfText } from '../../shared/pdf-extract.js';
-import { readZipText } from '../../shared/zip-local.js';
+import { listZipEntries, readZipText } from '../../shared/zip-local.js';
+import { hasXmlEntityBomb, isSafeZipEntryPath, MAX_ATTACH_BYTES, MAX_ATTACH_TEXT_CHARS } from '../sheets/attach.js';
 
 const TEMPLATES = {
   'Riset akademik': 'Tulis dengan kutipan, bandingkan sumber, dan pisahkan fakta dari tafsiran.',
@@ -115,31 +116,57 @@ function renderPinned(project) {
 }
 
 function readFileText(file) {
+  if (!file || Number(file.size) > MAX_ATTACH_BYTES) return Promise.resolve('');
   const name = file.name || '';
   if (/\.pdf$/i.test(name)) {
-    return file.arrayBuffer().then((buf) => extractPdfText(buf).then((text) => String(text || '').slice(0, 8000))).catch((e) => {
+    return file.arrayBuffer().then((buf) => extractPdfText(buf).then((text) => String(text || '').slice(0, MAX_ATTACH_TEXT_CHARS))).catch((e) => {
       console.warn('[Rategoan Fallback] Proyek:', e);
       return '';
     });
   }
   if (/\.docx$/i.test(name)) {
-    return file.arrayBuffer().then((buf) => readZipText(buf, 'word/document.xml').then((xml) => String(xml || '')
-      .replace(/<w:p\b[^>]*>/g, '\n')
-      .replace(/<[^>]+>/g, '')
-      .replace(/\n{3,}/g, '\n\n')
-      .trim()
-      .slice(0, 8000))).catch((e) => {
+    return file.arrayBuffer().then((buf) => readZipText(buf, 'word/document.xml').then((xml) => {
+      if (hasXmlEntityBomb(xml)) return '';
+      return String(xml || '')
+        .replace(/<w:p\b[^>]*>/g, '\n')
+        .replace(/<[^>]+>/g, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim()
+        .slice(0, MAX_ATTACH_TEXT_CHARS);
+    })).catch((e) => {
       console.warn('[Rategoan Fallback] Proyek:', e);
       return '';
     });
   }
+  if (/\.zip$/i.test(name)) {
+    return file.arrayBuffer().then(async (buf) => {
+      const bytes = new Uint8Array(buf);
+      const entries = listZipEntries(bytes);
+      const safeNames = entries.map((e) => (typeof e === 'string' ? e : e.name)).filter(isSafeZipEntryPath);
+      const chunks = ['Arsip ' + name + ' (' + safeNames.length + ' berkas)'];
+      for (let i = 0; i < safeNames.length && chunks.length < 12; i += 1) {
+        const entry = safeNames[i];
+        if (!/\.(txt|md|csv|json|js|mjs|ts|py|html?|css)$/i.test(entry)) continue;
+        const txt = await readZipText(bytes, entry);
+        if (txt && !hasXmlEntityBomb(txt)) chunks.push('[' + entry + ']\n' + txt.slice(0, 1500));
+      }
+      return chunks.join('\n\n').slice(0, MAX_ATTACH_TEXT_CHARS);
+    }).catch(() => '');
+  }
   return new Promise((resolve) => {
-    if (file.type && file.type.indexOf('text') < 0 && !/\.(txt|md|csv|json)$/i.test(name)) {
+    if (file.type && file.type.indexOf('text') < 0 && !/\.(txt|md|csv|tsv|json|xml|html?|css|js|mjs|ts|jsx|tsx|py|sql|sh|ya?ml)$/i.test(name)) {
       resolve('');
       return;
     }
     const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result || '').slice(0, 8000));
+    reader.onload = () => {
+      const raw = String(reader.result || '');
+      if (hasXmlEntityBomb(raw)) {
+        resolve('');
+        return;
+      }
+      resolve(raw.slice(0, MAX_ATTACH_TEXT_CHARS));
+    };
     reader.onerror = () => resolve('');
     reader.readAsText(file);
   });

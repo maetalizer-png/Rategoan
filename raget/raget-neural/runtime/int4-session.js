@@ -60,7 +60,35 @@ function encodePrompt(text, limit) {
   return ids.slice(ids.length - cap);
 }
 
+let printableVocabMask = null;
+function getPrintableVocabMask() {
+  if (printableVocabMask) return printableVocabMask;
+  const n = bpeShell.VOCAB_SIZE || 32000;
+  const mask = new Uint8Array(n);
+  for (let i = 5; i < n; i += 1) {
+    const s = bpeShell.decodeIds([i]);
+    if (s && !/[\uFFFD\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/.test(s) && /^[a-zA-Z0-9 .,?!:\-'"\n]+$/.test(s)) {
+      mask[i] = 1;
+    }
+  }
+  printableVocabMask = mask;
+  return mask;
+}
+
 function pickToken(logits, opts, recent) {
+  if (logits && logits.length >= 1000 && !(opts && opts.grammar)) {
+    const mask = getPrintableVocabMask();
+    const limit = Math.min(logits.length, mask.length);
+    let anyValid = false;
+    for (let i = 0; i < limit; i += 1) {
+      if (mask[i] && logits[i] > -1e30) { anyValid = true; break; }
+    }
+    if (anyValid) {
+      for (let i = 0; i < limit; i += 1) {
+        if (!mask[i]) logits[i] = -1e30;
+      }
+    }
+  }
   const temperature = Number(opts && opts.temperature);
   if (!(temperature > 0) && (!recent || !recent.length || !(Number(opts && opts.repetitionPenalty) > 1))) {
     let bestId = 0;
@@ -553,7 +581,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       activeLora = opts.lora || null;
       fastStreamMode = !!isStream && opts.useGpu !== true && !(Number(opts.maxLayers) > 0);
       const prefillStride = (fastStreamMode && d >= 1536) ? (Number(opts.temperature) > 0 ? 2 : 4) : 1;
-      const decodeStride = (fastStreamMode && d >= 1536) ? 8 : 1;
+      const decodeStride = (fastStreamMode && d >= 1536) ? (Number(opts.temperature) > 0 ? 4 : 8) : 1;
       const requested = Number(opts.maxNewTokens) > 0 ? Number(opts.maxNewTokens) : 32;
       const maxNew = Math.max(1, Math.min(128, requested));
       const limit = opts.maxLayers > 0 ? Math.min(layers, Math.floor(opts.maxLayers)) : layers;

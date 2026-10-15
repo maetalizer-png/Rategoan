@@ -397,8 +397,8 @@ try {
       && studioLayoutAudit.modelNextToPlus === true
       && studioModelSheetAudit.sheetOpen === true
       && studioModelSheetAudit.modelTitle === 'Raget 1.0'
-      && studioModelSheetAudit.options.join(',') === 'Cepat,Mendalam'
-      && studioModelSheetAudit.statModelAfterSwitch === 'Raget 1.0 · Mendalam'
+      && studioModelSheetAudit.options.join(',') === 'Rendah,Tinggi'
+      && studioModelSheetAudit.statModelAfterSwitch === 'Raget 1.0 · Tinggi'
       && studioExecutionAudit.rejected === false
       && studioExecutionAudit.aiMsgs.length === 3
       && studioExecutionAudit.hasRagetModelLog === true

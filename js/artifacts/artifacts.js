@@ -67,20 +67,21 @@ function paint() {
   const filters = $('artifact-filters');
   if (!ul) return;
   const list = allArtifacts();
-  const present = new Set(list.map((item) => kindOf(item)));
-  const tabs = [['semua', 'Semua']].concat([
+  const tabs = [
+    ['semua', 'Semua'],
     ['slide', 'Presentasi'],
     ['document', 'Dokumen'],
     ['code', 'Kode'],
     ['chart', 'Grafik'],
     ['table', 'Tabel'],
-  ].filter(([key]) => present.has(key)));
+  ];
   if (filters) {
     filters.innerHTML = '';
     tabs.forEach(([key, label]) => {
+      const count = key === 'semua' ? list.length : list.filter((item) => kindOf(item) === key).length;
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.textContent = label;
+      btn.textContent = count > 0 ? (label + ' (' + count + ')') : label;
       btn.className = filter === key ? 'on' : '';
       btn.onclick = () => { filter = key; paint(); };
       filters.appendChild(btn);
@@ -91,7 +92,12 @@ function paint() {
   if (!shown.length) {
     const li = document.createElement('li');
     li.className = 'coll-empty-card';
-    li.innerHTML = '<strong>Belum ada artefak</strong><p>Mulai dari salah satu ini.</p>';
+    li.innerHTML =
+      '<div class="coll-empty-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>' +
+      '<strong>Belum ada artefak</strong>' +
+      '<p>Mulai dari salah satu ini untuk membuat dokumen, presentasi, atau tabel data.</p>';
+    const actionsRow = document.createElement('div');
+    actionsRow.className = 'artifact-empty-actions';
     [['Buat dokumen Word', 'Buatkan dokumen Word: '], ['Buat presentasi', 'Buatkan slide: '], ['Buat tabel data', 'Buatkan tabel: ']].forEach(([label, text]) => {
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -102,8 +108,9 @@ function paint() {
         if (box) box.value = text;
         router.go('chat');
       };
-      li.appendChild(btn);
+      actionsRow.appendChild(btn);
     });
+    li.appendChild(actionsRow);
     ul.appendChild(li);
     return;
   }

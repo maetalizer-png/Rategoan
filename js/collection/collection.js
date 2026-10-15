@@ -165,12 +165,19 @@ async function renderTersimpan() {
     { key: 'archived', label: ic('archive') + ' Arsip', count: archivedCount },
   ];
   const noteBtn = $('coll-new-note');
+  if ($('coll-filters')) {
+    $('coll-filters').hidden = false;
+    $('coll-filters').innerHTML = filterChips
+      .map((f) => '<button type="button" class="coll-filter-chip' + (state.filter === f.key ? ' on' : '') + '" data-filter="' + escapeHtml(String(f.key)) + '">' + chipCaption(f) + ' (' + f.count + ')</button>')
+      .join('');
+    bindFilterTabs($('coll-filters'), (_id, btn) => {
+      const v = btn.dataset.filter;
+      state.filter = v === 'null' ? null : v;
+      renderTersimpan();
+    });
+  }
+  if (noteBtn) noteBtn.hidden = false;
   if (!chatItems.length) {
-    if ($('coll-filters')) {
-      $('coll-filters').innerHTML = '';
-      $('coll-filters').hidden = true;
-    }
-    if (noteBtn) noteBtn.hidden = true;
     $('coll-tab-desc').textContent = TAB_DESC.tersimpan;
     if (myGen !== renderGen) return;
     content.innerHTML =

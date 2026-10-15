@@ -1,3 +1,4 @@
+import { classifyFileMeta } from '../sheets/attach.js';
 import { $, sleep, scrollBottom } from '../../shared/dom.js';
 import { fmtTime } from '../../shared/format.js';
 import { reduceMotion, haptics } from '../../shared/haptics.js';
@@ -396,10 +397,59 @@ export const chat = {
         q.textContent = m.quote.name + ': ' + m.quote.text;
         d.appendChild(q);
       }
+      if (m.attach) {
+        const attFiles = Array.isArray(m.attach.files) && m.attach.files.length ? m.attach.files : [m.attach];
+        const listEl = document.createElement('div');
+        listEl.className = 'msg-attach-list';
+        attFiles.forEach((f) => {
+          if (f && (f.full || f.thumb)) {
+            const img = document.createElement('img');
+            img.className = 'msg-photo';
+            img.src = f.full || f.thumb;
+            img.alt = f.name || 'Foto';
+            img.onclick = () => {
+              const box = $('image-lightbox');
+              const view = $('image-lightbox-img');
+              if (!box || !view) return;
+              view.src = img.src;
+              box.hidden = false;
+            };
+            listEl.appendChild(img);
+          } else if (f && f.name) {
+            const meta = classifyFileMeta(f);
+            const badge = f.badge || meta.badge;
+            const tone = f.tone || meta.tone;
+            const sizeLabel = f.sizeLabel || meta.sizeLabel;
+            const statusLabel = f.statusLabel || (f.fileText ? 'Teks diekstrak' : 'Terlampir');
+            const card = document.createElement('div');
+            card.className = 'msg-doc-card msg-attach';
+            const bEl = document.createElement('div');
+            bEl.className = 'attach-type-badge tone-' + tone;
+            bEl.textContent = badge;
+            const infoEl = document.createElement('div');
+            infoEl.className = 'msg-doc-info';
+            const nm = document.createElement('strong');
+            nm.className = 'msg-doc-name';
+            nm.textContent = f.name;
+            const sub = document.createElement('small');
+            sub.className = 'msg-doc-meta';
+            sub.textContent = [badge, sizeLabel, statusLabel].filter(Boolean).join(' · ');
+            infoEl.appendChild(nm);
+            infoEl.appendChild(sub);
+            card.appendChild(bEl);
+            card.appendChild(infoEl);
+            listEl.appendChild(card);
+          }
+        });
+        if (listEl.childNodes.length) d.appendChild(listEl);
+      }
       if (m.role === 'user') {
-        const t = document.createElement('span');
-        t.textContent = m.text;
-        d.appendChild(t);
+        if (m.text) {
+          const t = document.createElement('span');
+          t.className = 'msg-user-text';
+          t.textContent = m.text;
+          d.appendChild(t);
+        }
       } else {
         if (m.source === 'websearch') d.appendChild(buildSourceBadge());
         if (m.thoughtFrozenSec) d.dataset.thoughtFrozenSec = String(m.thoughtFrozenSec);
@@ -410,26 +460,6 @@ export const chat = {
         markdown.decorate(b);
         d.appendChild(b);
         appendCitations(d, m.text);
-      }
-      if (m.attach && (m.attach.full || m.attach.thumb)) {
-        const img = document.createElement('img');
-        img.className = 'msg-photo';
-        img.src = m.attach.full || m.attach.thumb;
-        img.alt = 'Foto';
-        img.onclick = () => {
-          const box = $('image-lightbox');
-          const view = $('image-lightbox-img');
-          if (!box || !view) return;
-          view.src = img.src;
-          box.hidden = false;
-        };
-        d.appendChild(img);
-      } else if (m.attach && m.attach.name) {
-        const a = document.createElement('span');
-        a.className = 'msg-attach';
-        a.innerHTML = ic('paperclip');
-        a.appendChild(document.createTextNode(m.attach.name));
-        d.appendChild(a);
       }
       d.appendChild(buildMetaRow(m.time));
       const live = this.current();
@@ -444,7 +474,7 @@ export const chat = {
       if (m.role === 'user' && m.attach && m.attach.full) {
         const row = document.createElement('div');
         row.className = 'msg-actions';
-        row.appendChild(buildExtraChip('Baca Gambar Ini', () => fillComposer('baca foto ini'), 'search'));
+        row.appendChild(buildExtraChip('Baca Gambar Ini', () => fillAndSend('Baca foto ini'), 'search'));
         d.appendChild(row);
       }
       if (m.role !== 'user') {
@@ -642,6 +672,9 @@ export const chat = {
     if (searching) {
       const elapsed = Date.now() - searchStart;
       if (elapsed < 700) await sleep(700 - elapsed);
+    } else if (hasDirectReply && lp && !reduceMotion()) {
+      const elapsed = Date.now() - searchStart;
+      if (elapsed < 1200) await sleep(1200 - elapsed);
     }
     typing.remove();
     const sessionSwitched = !this.current() || (askSessionId && this.current().id !== askSessionId);

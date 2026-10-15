@@ -3,8 +3,8 @@ import { enginePreference } from '../state/engine-preference.js';
 import { toast } from '../core/toast.js';
 
 const SPEEDS = [
-  { id: 'cloud', label: 'Cepat', note: 'Respons instan, efisien daya.' },
-  { id: 'neural', label: 'Mendalam', note: 'Penalaran komprehensif untuk analisis mendalam.' },
+  { id: 'cloud', label: 'Rendah', note: 'Respons instan, efisien daya.' },
+  { id: 'neural', label: 'Tinggi', note: 'Penalaran kompleks untuk analisis mendalam.' },
 ];
 
 let picking = false;
@@ -12,7 +12,7 @@ let menuOpen = false;
 
 function labelOf(id) {
   const found = SPEEDS.find((item) => item.id === id);
-  return found ? found.label : 'Cepat';
+  return found ? found.label : 'Rendah';
 }
 
 async function pickSpeed(id) {
@@ -22,7 +22,7 @@ async function pickSpeed(id) {
   enginePreference.set(mode);
   document.dispatchEvent(new CustomEvent('rategoan:command', { detail: mode === 'neural' ? 'think' : 'think-off' }));
   window.dispatchEvent(new CustomEvent('rategoan:model-switched', { detail: { id: mode } }));
-  toast.show(mode === 'neural' ? 'Mode: Mendalam aktif' : 'Mode: Cepat aktif');
+  toast.show(mode === 'neural' ? 'Mode: Tinggi aktif' : 'Mode: Rendah aktif');
   picking = false;
   menuOpen = false;
   render();
@@ -46,7 +46,7 @@ function render() {
   const status = $('model-status');
   if (status) {
     status.hidden = false;
-    status.textContent = pref === 'neural' ? 'Mendalam' : 'Cepat';
+    status.textContent = pref === 'neural' ? 'Tinggi' : 'Rendah';
     status.classList.add('active');
   }
   const speed = document.createElement('button');

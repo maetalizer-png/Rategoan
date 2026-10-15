@@ -30,8 +30,8 @@ function commands() {
     { label: 'Buka Riwayat', run: () => router.go('chat') },
     { label: 'Buat Proyek Baru', run: () => router.go('project') },
     { label: 'Ganti ke Mode Penalaran Berpikir Keras', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' })) },
-    { label: 'Mode Cepat', run: () => { enginePreference.set('cloud'); document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' })); } },
-    { label: 'Mode Mendalam', run: () => { enginePreference.set('neural'); document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' })); } },
+    { label: 'Mode Rendah', run: () => { enginePreference.set('cloud'); document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think-off' })); } },
+    { label: 'Mode Tinggi', run: () => { enginePreference.set('neural'); document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'think' })); } },
     { label: 'Buat Dokumen Word Baru', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'docx' })) },
     { label: 'Buat Presentasi Baru', run: () => document.dispatchEvent(new CustomEvent('rategoan:command', { detail: 'slide' })) },
   ];

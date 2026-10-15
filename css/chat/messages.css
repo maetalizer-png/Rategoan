@@ -318,3 +318,46 @@
     color: var(--rg-text);
   }
 }
+
+.msg-attach-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 6px;
+  width: 100%;
+}
+.msg-doc-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: var(--rg-surface);
+  border: 1px solid var(--rg-line);
+  min-width: 0;
+}
+.msg-doc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+.msg-doc-name {
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--rg-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.msg-doc-meta {
+  font-size: 11px;
+  color: var(--rg-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.msg-user-text {
+  display: block;
+}

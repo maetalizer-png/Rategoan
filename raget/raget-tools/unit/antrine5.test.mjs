@@ -25,8 +25,8 @@ test('label mode bersih tanpa lapis dan tanpa kata mode kotor', () => {
   assert.equal(sheet.includes('28 Lapis'), false);
   assert.equal(sheet.includes('Raget Cepat'), false);
   assert.equal(sheet.includes('Raget Mendalam'), false);
-  assert.match(sheet, /label: 'Cepat'/);
-  assert.match(sheet, /label: 'Mendalam'/);
+  assert.match(sheet, /label: 'Rendah'/);
+  assert.match(sheet, /label: 'Tinggi'/);
   assert.match(sheet, /Respons instan, efisien daya/);
   assert.equal(settings.includes("['cloud', 'Cepat']"), false);
   assert.equal(settings.includes('mountMeshPanel'), false);

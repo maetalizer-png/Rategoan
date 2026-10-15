@@ -17,7 +17,7 @@ import { cowork } from '../ui/cowork.js';
 import { attach } from '../sheets/attach.js';
 import { sheets } from '../sheets/sheets.js';
 import { googleAuth } from '../state/google-auth.js';
-import { summarizeFileText, answerFromFile } from '../../shared/file-summary.js';
+import { summarizeFileText, answerFromFile, summarizeMultiAttachments } from '../../shared/file-summary.js';
 import { searchDocs } from '../../raget/raget-vault/local-rag.js';
 import { memoryLong } from '../../raget/raget-memory/memory-long.js';
 import { collectionStore } from '../../raget/raget-memory/collection-store.js';
@@ -50,7 +50,7 @@ import { hemat } from '../state/hemat.js';
 import { voice } from './voice.js';
 
 const FILE_READ_RE = /\b(baca|ringkas|rangkum|ekstrak|extract|impor|import)\b/i;
-const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang)|tentang\s+(file|dokumen|lampiran|pdf)|dokumen|lampiran)\b/i;
+const FILE_ASK_RE = /\b(baca|ringkas|rangkum|jelaskan|uraikan|apa\s+(isi|kata|yang|ini)|tentang\s+(file|dokumen|lampiran|pdf|foto|gambar)|dokumen|lampiran|foto|gambar|screenshot|arsip|zip|pdf)\b/i;
 const WORK_RE = /\b(tugas|skripsi|makalah|rencana|langkah|proyek|pekerjaan|kerjakan)\b/i;
 
 function rankOffThread(docs, text) {
@@ -439,7 +439,8 @@ function bindWeightCard() {
       status.textContent = '100% (' + mbTotal + ' MB) · memeriksa berkas';
       return;
     }
-    status.textContent = pctText + ' (' + mbDone + '/' + mbTotal + ' MB) · ' + mbText + ' · ' + etaText;
+    const isNarrowMobile = typeof window !== 'undefined' && Number(window.innerWidth) > 0 && Number(window.innerWidth) < 600;
+    status.textContent = isNarrowMobile ? (pctText + ' (' + mbDone + 'MB) · ' + mbText + ' · ' + etaText) : (pctText + ' (' + mbDone + '/' + mbTotal + ' MB) · ' + mbText + ' · ' + etaText);
   };
   window.addEventListener('rategoan:neural-progress', (event) => {
     paint((event && event.detail) || {});
@@ -655,10 +656,14 @@ export const composer = {
       store.save();
       return;
     }
+    const displayUserText = text;
+    if (!text.trim() && att) text = 'Baca dan ringkas lampiran ini';
+    if (!s.messages.length && displayUserText) s.title = titleFrom(displayUserText);
+    else if (!s.messages.length && att) s.title = titleFrom(att.name || 'Lampiran');
     const q = quote.consume();
     s.messages.push({
       role: 'user',
-      text: text,
+      text: displayUserText,
       time: Date.now(),
       attach: att,
       quote: q ? { name: q.role === 'user' ? 'Anda' : 'Rategoan', text: String(q.text).slice(0, 140) } : null,
@@ -692,12 +697,6 @@ export const composer = {
       store.save();
       return;
     }
-    if (flowHub.wantsLesson(text)) {
-      const material = lastAiText(s) || text;
-      await chat.ask(text, { directReply: flowHub.lesson(material, s.title) });
-      store.save();
-      return;
-    }
     if (this.researchActive || flowHub.wantsResearch(text)) this.setWebsearch(true);
     const plan = turnPipeline.inspect(text, {
       messages: s.messages,
@@ -710,31 +709,37 @@ export const composer = {
     if (plan.route === 'slide' && /^(lanjut|lanjutkan|dari ini)$/i.test(text.trim())) {
       text = 'buatkan slide dari ini';
     }
-    let directReply = await trySlideRequest(text, att, s);
-    if (directReply == null) directReply = await tryDocumentRequest(text, s);
-    if (directReply == null) directReply = await tryTableRequest(text, s);
-    if (directReply == null) directReply = await tryChartRequest(text);
-    if (directReply == null) directReply = await tryDiagramRequest(text);
-    if (directReply == null) directReply = await tryReportRequest(text);
-    if (directReply == null) directReply = await tryWorkbook(text, s);
-    if (directReply == null) directReply = await tryReceipt(text, s);
-    if (directReply == null) directReply = await tryMeeting(text);
-    if (directReply == null) directReply = tryAgenda(text);
-    if (directReply == null && plan.route === 'collection') {
-      directReply = await toolsKoleksi.run('cari_koleksi', text);
+    const directReply = null;
+    let canvasNote = await trySlideRequest(text, att, s);
+    if (canvasNote == null) canvasNote = await tryDocumentRequest(text, s);
+    if (canvasNote == null) canvasNote = await tryTableRequest(text, s);
+    if (canvasNote == null) canvasNote = await tryChartRequest(text);
+    if (canvasNote == null) canvasNote = await tryDiagramRequest(text);
+    if (canvasNote == null) canvasNote = await tryReportRequest(text);
+    if (canvasNote == null) canvasNote = await tryWorkbook(text, s);
+    if (canvasNote == null) canvasNote = await tryReceipt(text, s);
+    if (canvasNote == null) canvasNote = await tryMeeting(text);
+    if (canvasNote == null) canvasNote = tryAgenda(text);
+    if (canvasNote == null && plan.route === 'collection') {
+      canvasNote = await toolsKoleksi.run('cari_koleksi', text);
     }
-    const fileSrc = (att && (att.fileText || att.fileTextError)) ? att : lastAttachedFile(s);
-    if (directReply == null && fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
-      if (fileSrc.fileText) {
+    const fileSrc = (att && (att.fileText || att.fileTextError || (att.files && att.files.length))) ? att : lastAttachedFile(s);
+    let fileContextNote = '';
+    if (att && (att.fileText || att.fileTextError || (att.files && att.files.length))) {
+      fileContextNote = summarizeMultiAttachments(att, text) || '';
+    } else if (fileSrc && (FILE_ASK_RE.test(text) || FILE_READ_RE.test(text))) {
+      if (Array.isArray(fileSrc.files) && fileSrc.files.length > 1) {
+        fileContextNote = summarizeMultiAttachments(fileSrc, text) || '';
+      } else if (fileSrc.fileText) {
         const safeFile = sanitizeDocContext(fileSrc.fileText).text;
         if (FILE_READ_RE.test(text) && !/\b(apa|jelaskan|tentang)\b/i.test(text)) {
-          directReply = summarizeFileText(safeFile, fileSrc.name);
+          fileContextNote = summarizeFileText(safeFile, fileSrc.name);
         } else {
           const chunks = String(safeFile).split(/\n{2,}|(?<=[.!?])\s+/).map((part) => part.trim()).filter((part) => part.length > 12).slice(0, 80);
           const hits = searchDocs(chunks.map((part, index) => ({ id: index, text: part })), text, 3);
-          directReply = hits.length ? ('Dari "' + (fileSrc.name || 'berkas') + '":\n\n' + hits.map((hit) => hit.text).join('\n\n')) : answerFromFile(safeFile, text, fileSrc.name);
+          fileContextNote = hits.length ? ('Dari "' + (fileSrc.name || 'berkas') + '":\n\n' + hits.map((hit) => hit.text).join('\n\n')) : answerFromFile(safeFile, text, fileSrc.name);
         }
-      } else if (fileSrc.fileTextError) directReply = fileSrc.fileTextError;
+      } else if (fileSrc.fileTextError) fileContextNote = fileSrc.fileTextError;
     }
     const project = workspace.current();
     if (project) workspace.linkSession(project.id, s.id);
@@ -761,11 +766,12 @@ export const composer = {
       $('messages').appendChild(livePlan);
     }
     if (this.thinkActive || this.researchActive) {
-      const live = document.createElement('div');
-      live.className = 'msg ai';
-      const seed = subgoals.length ? subgoals : [{ kind: 'EMIT_THOUGHT', text: 'Menyiapkan ' + text.slice(0, 80) }];
-      const card = mountThought(live, seed, 'berjalan');
-      $('messages').appendChild(live);
+      livePlan = document.createElement('div');
+      livePlan.className = 'msg ai';
+      livePlan.dataset.thoughtStart = String(Date.now());
+      const deepThoughts = buildDynamicThoughts(text, { think: true, websearch: isWebsearch, research: this.researchActive, files: att && att.name });
+      const card = mountThought(livePlan, deepThoughts, 'berjalan');
+      $('messages').appendChild(livePlan);
       const plan = await runAgentPlan({
         text,
         think: this.thinkActive,
@@ -774,19 +780,20 @@ export const composer = {
         sessionId: s.id,
         onStep: (steps) => {
           if (!card) return;
-          live.innerHTML = '';
-          mountThought(live, steps, 'berjalan');
+          livePlan.innerHTML = '';
+          mountThought(livePlan, deepThoughts.length >= steps.length ? deepThoughts : steps, 'berjalan');
         },
       });
       if (plan.status === 'dibatalkan') {
-        live.remove();
+        livePlan.remove();
         return;
       }
-      thoughts = plan.steps;
-      live.remove();
+      thoughts = deepThoughts;
+      livePlan.innerHTML = '';
+      mountThought(livePlan, thoughts, 'berjalan');
     }
     if (!this.thinkActive && !this.researchActive) {
-      thoughts = buildDynamicThoughts(text, { websearch: isWebsearch, research: this.researchActive, files: att && att.name });
+      thoughts = buildDynamicThoughts(text, { think: false, websearch: isWebsearch, research: this.researchActive, files: att && att.name });
       if (!livePlan) {
         livePlan = document.createElement('div');
         livePlan.className = 'msg ai';
@@ -795,14 +802,15 @@ export const composer = {
       livePlan.innerHTML = '';
       mountThought(livePlan, thoughts, 'berjalan');
     }
-    const imageNote = att && att.fileText ? fenceUntrusted(att.name, String(att.fileText).slice(0, 4000)) : '';
+    const rawAttachmentText = [att && att.fileText ? String(att.fileText).slice(0, 4000) : '', fileContextNote ? String(fileContextNote).slice(0, 3000) : ''].filter(Boolean).join('\n\n');
+    const imageNote = rawAttachmentText ? fenceUntrusted((att && att.name) || (fileSrc && fileSrc.name) || 'lampiran', rawAttachmentText) : '';
     const prefDocs = memoryLong.preferenceDocs();
     const prefHit = prefDocs.map((doc) => ({ ...doc, sim: cosineText(text, doc.text) })).sort((a, b) => b.sim - a.sim)[0];
     const prefNote = prefHit && prefHit.sim >= 0.2 ? 'Aturan pengguna: ' + prefHit.text : '';
     const skillNote = skill.prompt();
     const flashNote = hemat.enabled() ? 'Jawab ringkas dalam maksimal 2-3 kalimat padat, to-the-point, tanpa basa-basi.' : '';
-    let webNote = '';
-    if (isWebsearch && directReply == null) {
+    let webNote = canvasNote ? String(canvasNote) : '';
+    if (isWebsearch) {
       try {
         const [apiRes, multiRes] = await Promise.allSettled([
           fetch('/api/connectors/web/search?q=' + encodeURIComponent(text)),
@@ -828,28 +836,15 @@ export const composer = {
             if (line && !noteLines.includes(line)) noteLines.push(line);
           });
         }
-        webNote = noteLines.slice(0, 8).join('\n');
+        webNote = [webNote, noteLines.slice(0, 8).join('\n')].filter(Boolean).join('\n');
       } catch (e) { /* offline */ }
     }
-    const localProd = directReply == null ? resolveLocalProductivityTool(text) : null;
+    const localProd = resolveLocalProductivityTool(text);
     if (localProd) {
       try {
         const prodOut = await runConnectorTool(localProd.name, localProd.parameters);
         if (prodOut && prodOut.ok && prodOut.data) {
-          const d = prodOut.data;
-          if (localProd.name === 'math_calculate_expression') {
-            directReply = 'Hasil perhitungan: **' + d.value + '**';
-          } else if (localProd.name === 'math_currency_converter') {
-            directReply = 'Hasil konversi: **' + d.amount + ' ' + d.from + ' = ' + d.value + ' ' + d.to + '** (' + d.note + ')';
-          } else if (localProd.name === 'math_unit_conversion') {
-            directReply = 'Hasil konversi satuan: **' + d.value + ' ' + d.unit + '**';
-          } else if (localProd.name === 'math_date_calculator') {
-            directReply = 'Rentang tanggal: **' + d.days + ' hari kalender** (**' + d.workdays + ' hari kerja** Senin–Jumat).';
-          } else if (localProd.name === 'math_statistics_summary') {
-            directReply = 'Ringkasan statistik (' + d.count + ' data): Jumlah = **' + d.sum + '**, Rata-rata = **' + d.mean + '**, Median = **' + d.median + '**, Min = **' + d.min + '**, Maks = **' + d.max + '**, Simpangan Baku (σ) = **' + d.stdDev + '**.';
-          } else if (localProd.name === 'agenda_daily_briefing' && d.briefing) {
-            directReply = 'Ringkasan Agenda Hari Ini:\n' + d.briefing;
-          }
+          webNote = [webNote, 'Data alat lokal (' + localProd.name + '): ' + JSON.stringify(prodOut.data).slice(0, 800)].filter(Boolean).join('\n');
         }
       } catch (e) { /* lanjut ke mesin utama */ }
     }
@@ -1044,6 +1039,7 @@ export const composer = {
     if (send) send.onclick = () => {
       let t = inp.value.trim();
       if (!t && !attach.current && !quote.current) return;
+      
       const wasSlide = this.slideActive;
       if (wasSlide && t && !SLIDE_NOUN_RE.test(t)) t = 'Buatkan slide: ' + t;
       if (wasSlide) {
@@ -1061,6 +1057,8 @@ export const composer = {
       const cur = workspace.current();
       if (label) label.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Belum ada proyek terpilih (Pilih)';
       this._toggleSwitch('sheet-research', this.researchActive);
+      this._toggleSwitch('sheet-think', this.thinkActive);
+      this._toggleSwitch('sheet-websearch', this.websearchActive);
       attach.open();
     };
     document.addEventListener('rategoan:stop-generation', () => {
@@ -1079,8 +1077,8 @@ export const composer = {
         this.thinkActive = false;
         this.paintQuick();
         this.syncModes();
-      } else if (event.detail === 'mendalam' || event.detail === 'cepat') {
-        this.thinkActive = event.detail === 'mendalam';
+      } else if (event.detail === 'tinggi' || event.detail === 'rendah' || event.detail === 'mendalam' || event.detail === 'cepat') {
+        this.thinkActive = event.detail === 'tinggi' || event.detail === 'mendalam';
         this.paintQuick();
         this.syncModes();
       } else if (event.detail === 'docx') {
@@ -1100,6 +1098,7 @@ export const composer = {
       if (key === 'websearch') this.setWebsearch(false);
       else if (key === 'think') {
         this.thinkActive = false;
+        this._toggleSwitch('sheet-think', false);
         this.paintQuick();
         this.syncModes();
       } else if (key === 'research') {
@@ -1180,6 +1179,13 @@ export const composer = {
         this.setWebsearch(!this.websearchActive);
       };
     }
+    const thinkCard = $('sheet-think');
+    if (thinkCard) thinkCard.onclick = () => {
+      this.thinkActive = !this.thinkActive;
+      this._toggleSwitch('sheet-think', this.thinkActive);
+      this.paintQuick();
+      this.syncModes();
+    };
     const researchCard = $('sheet-research');
     if (researchCard) researchCard.onclick = () => {
       this.researchActive = !this.researchActive;

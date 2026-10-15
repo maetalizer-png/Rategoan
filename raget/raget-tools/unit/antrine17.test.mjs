@@ -1,3 +1,6 @@
+import { hasXmlEntityBomb, sanitizeSvgContent, isSafeZipEntryPath, classifyFileMeta, formatBytesLabel, MAX_ATTACH_BYTES, MAX_ATTACH_TEXT_CHARS } from '../../../js/sheets/attach.js';
+import { extractPdfText } from '../../../shared/pdf-extract.js';
+import { summarizeMultiAttachments } from '../../../shared/file-summary.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -255,7 +258,7 @@ test('DOD-41.13 Teori Working-Set OPFS int4-session dan Orkestrasi Produktivitas
   assert.match(sessionSrc, /buildAnchorSet\(layers\)/);
   assert.match(sessionSrc, /const passes = \(!fastStreamMode \|\| \(isPrefill && needLogits !== false\)\)/);
   assert.match(sessionSrc, /const prefillStride = \(fastStreamMode && d >= 1536\)/);
-  assert.match(sessionSrc, /const decodeStride = \(fastStreamMode && d >= 1536\) \? 8 : 1/);
+  assert.match(sessionSrc, /const decodeStride = \(fastStreamMode && d >= 1536\) \? \(Number\(opts\.temperature\) > 0 \? 4 : 8\) : 1/);
   const anchors28 = buildAnchorSet(28);
   assert.deepEqual(Array.from(anchors28), [0, 9, 18, 27]);
   assert.equal(shouldPinTensor('layers.0.attention.Wq', anchors28), true);
@@ -473,4 +476,94 @@ test('DOD-41.18 Penyempurnaan 5 Panel Monitoring Studio Kode (Pratinjau, Dokumen
   assert.match(studioCss, /\.doc-module-grid/);
   assert.match(studioApp, /function roleOfFile\(path\)/);
   assert.match(canvasTools, /class="arch-node"/);
+});
+
+test('DOD-41.19 Desktop Overhaul (Artefak, Koleksi, Proyek, Pengaturan, Berkas Studio) & Keamanan Menu + Lampiran', () => {
+  const deskCss = read('css/layout/desktop.css');
+  const overhaulCss = read('css/ui/overhaul.css');
+  const studioCss = read('css/ui/studio.css');
+  const settingsJs = read('js/account/settings.js');
+  const artifactsJs = read('js/artifacts/artifacts.js');
+  const attachJs = read('js/sheets/attach.js');
+  const indexHtml = read('index.html');
+
+  assert.match(deskCss, /#view-settings #settings-menu \.set-section[\s\S]*?grid-template-columns:\s*repeat\(2/);
+  assert.match(deskCss, /#view-collection \.coll-tabs[\s\S]*?max-width:\s*360px/);
+  assert.match(overhaulCss, /\.coll-empty-card \{ grid-column: 1 \/ -1;[\s\S]*?flex-direction: column/);
+  assert.match(studioCss, /\.file-actions \{[\s\S]*?flex-wrap:\s*nowrap/);
+  assert.match(settingsJs, /class="cat-row-desc"/);
+  assert.match(artifactsJs, /artifact-empty-actions/);
+  assert.match(attachJs, /visionOcr\.recognize\(f\)/);
+  assert.match(attachJs, /extractArchiveSummary\(bytes\)/);
+  assert.match(indexHtml, /id="sheet-think"/);
+  assert.match(indexHtml, /id="sheet-code-studio"/);
+
+  assert.equal(MAX_ATTACH_BYTES, 25 * 1024 * 1024);
+  assert.equal(MAX_ATTACH_TEXT_CHARS, 32000);
+  assert.equal(hasXmlEntityBomb('<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>'), true);
+  assert.equal(hasXmlEntityBomb('<w:document><w:body><w:p>Aman</w:p></w:body></w:document>'), false);
+  const dirtySvg = '<svg onload="alert(1)"><script>evil()</script><text>Halo SVG</text></svg>';
+  const cleanSvg = sanitizeSvgContent(dirtySvg);
+  assert.equal(cleanSvg.includes('<script>'), false);
+  assert.equal(cleanSvg.includes('onload='), false);
+  assert.equal(cleanSvg.includes('Halo SVG'), true);
+  assert.equal(isSafeZipEntryPath('src/index.js'), true);
+  assert.equal(isSafeZipEntryPath('../../etc/passwd'), false);
+  assert.equal(isSafeZipEntryPath('/abs/path.js'), false);
+});
+
+test('DOD-41.20 Ekstraksi PDF/ZIP/Visi Murni In-Browser, Kartu Lampiran Multi-Berkas Modern, & Penapis Output Gibberish', async () => {
+  const rawPdf = new TextEncoder().encode(
+    '%PDF-1.4\n1 0 obj\n<< /Type /Page >>\nendobj\n2 0 obj\n<< /Length 68 >>\nstream\nBT /F1 12 Tf (PRD Buku Raget Coding Definitif Sinkron) Tj ET\nendstream\nendobj\n%%EOF'
+  );
+  const extractedPdf = await extractPdfText(rawPdf);
+  assert.match(extractedPdf, /\[Dokumen PDF · 1 halaman\]/);
+  assert.match(extractedPdf, /PRD Buku Raget Coding Definitif Sinkron/);
+
+  const zipMeta = classifyFileMeta({ name: 'Rategoan-main.zip', size: 1823376, type: 'application/zip' });
+  assert.equal(zipMeta.kind, 'zip');
+  assert.equal(zipMeta.badge, 'ZIP');
+  assert.equal(zipMeta.tone, 'amber');
+  assert.equal(formatBytesLabel(1823376), '1.7 MB');
+
+  const pdfMeta = classifyFileMeta({ name: 'PRD_Buku_Raget_Coding_Definitif_Sinkron.pdf', size: 420000, type: 'application/pdf' });
+  assert.equal(pdfMeta.kind, 'pdf');
+  assert.equal(pdfMeta.badge, 'PDF');
+  assert.equal(pdfMeta.tone, 'red');
+
+  const multiReport = summarizeMultiAttachments({
+    files: [
+      { name: 'Rategoan-main.zip', badge: 'ZIP', sizeLabel: '1.8 MB', statusLabel: '365 berkas diekstrak', fileText: 'Daftar berkas arsip ZIP (365 berkas):\n- index.html\n- js/main.js' },
+      { name: 'PRD_Buku_Raget_Coding.pdf', badge: 'PDF', sizeLabel: '410 KB', statusLabel: '12 hlm · Teks siap', fileText: extractedPdf },
+      { name: '1000001363.jpg', badge: 'JPG', sizeLabel: '142 KB', statusLabel: 'Visi & OCR siap', fileText: 'Ringkasan Visual Gambar (1000001363.jpg): Tangkapan layar antarmuka ponsel, resolusi 1080×2400 piksel.' },
+    ],
+  }, 'h');
+  assert.match(multiReport, /3 berkas lampiran/);
+  assert.match(multiReport, /Rategoan-main\.zip/);
+  assert.match(multiReport, /PRD_Buku_Raget_Coding\.pdf/);
+  assert.match(multiReport, /1000001363\.jpg/);
+
+  const provSrc = read('raget/raget-neural/neural-provider.js');
+  assert.equal(provSrc.includes('synthesizeGroundedNeuralResponse'), false);
+  assert.equal(provSrc.includes('Saya **Raget 1.0**, mesin kecerdasan lokal'), false);
+  const compSrc = read('js/chat/composer.js');
+  assert.equal(compSrc.includes('directReply = summarizeMultiAttachments'), false);
+  assert.equal(compSrc.includes('directReply = summarizeFileText'), false);
+  assert.equal(compSrc.includes("directReply = 'Hasil perhitungan:"), false);
+  const singleZipReport = summarizeMultiAttachments({
+    files: [
+      { name: 'Rategoan-main.zip', badge: 'ZIP', sizeLabel: '1.7 MB', statusLabel: '365 berkas diekstrak', fileText: 'Daftar berkas arsip ZIP (365 berkas — komposisi: .js (210), .json (120)):\n- `package.json`\n- `index.html`' },
+    ],
+  }, 'Baca dan ringkas lampiran ini');
+  assert.match(singleZipReport, /Hasil Ekstraksi Arsip `Rategoan-main\.zip`/);
+  assert.equal(singleZipReport.includes('*(hlm.'), false);
+  const lowThoughts = buildDynamicThoughts('jelaskan arsitektur transformer', { think: false });
+  const highThoughts = buildDynamicThoughts('jelaskan arsitektur transformer', { think: true });
+  assert.equal(lowThoughts.length, 3);
+  assert.equal(highThoughts.length, 6);
+  assert.match(highThoughts[0].text, /Dekonstruksi semantik/);
+  assert.match(highThoughts[3].text, /Propagasi tensor Raget 1\.0 penuh/);
+  const modelSheetSrc = read('js/sheets/model-sheet.js');
+  assert.match(modelSheetSrc, /label: 'Rendah'/);
+  assert.match(modelSheetSrc, /label: 'Tinggi'/);
 });

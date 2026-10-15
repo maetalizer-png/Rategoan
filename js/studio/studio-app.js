@@ -75,9 +75,9 @@ function beforeContentFor(path) {
 
 function currentModelModeLabel() {
   try {
-    return enginePreference.get() === 'neural' ? 'Mendalam' : 'Cepat';
+    return enginePreference.get() === 'neural' ? 'Tinggi' : 'Rendah';
   } catch (e) {
-    return 'Cepat';
+    return 'Rendah';
   }
 }
 

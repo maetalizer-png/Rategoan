@@ -21,8 +21,8 @@ test('antarmuka model hanya Cepat dan Mendalam', () => {
   assert.equal(settings.includes('persona-select'), false);
   assert.equal(settings.includes('mountPersonaSelect'), false);
   assert.equal(composer.includes('persona-select'), false);
-  assert.match(sheet, /Cepat/);
-  assert.match(sheet, /Mendalam/);
+  assert.match(sheet, /Rendah/);
+  assert.match(sheet, /Tinggi/);
   assert.match(composer, /weightsInstalled/);
   assert.match(read('raget/raget-neural/neural-provider.js'), /EARLY_PROGRESS_BYTES/);
   assert.equal(EARLY_PROGRESS_BYTES, 80 * 1024 * 1024);

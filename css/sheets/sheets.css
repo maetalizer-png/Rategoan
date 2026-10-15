@@ -193,21 +193,89 @@
 
 .attach-row {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 6px;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  margin-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.attach-row::-webkit-scrollbar {
+  display: none;
 }
 
 .attach-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  min-width: 192px;
+  max-width: 248px;
+  flex: 0 0 auto;
   border: 1px solid var(--rg-line);
-  border-radius: 10px;
-  padding: 6px 8px 6px 12px;
+  border-radius: 14px;
+  padding: 8px 10px;
   background: var(--rg-surface-2);
   font-size: 12px;
   color: var(--rg-text);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.attach-type-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  flex-shrink: 0;
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.attach-type-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.attach-type-badge.tone-red { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.attach-type-badge.tone-amber { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+.attach-type-badge.tone-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+.attach-type-badge.tone-green { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+.attach-type-badge.tone-orange { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+.attach-type-badge.tone-violet { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
+.attach-type-badge.tone-slate { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
+
+.attach-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.attach-meta-sub {
+  font-size: 10.5px;
+  color: var(--rg-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attach-rm-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--rg-muted);
 }
 
 .attach-thumb {
@@ -360,4 +428,9 @@
   padding: 10px 12px;
   border-radius: 12px;
   border: 1px solid var(--rg-line);
+}
+
+.attach-row .attach-chip:only-child {
+  max-width: 100%;
+  flex: 1 1 auto;
 }

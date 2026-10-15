@@ -130,6 +130,7 @@ export const markdown = {
     let out = this.escape(src);
     out = out.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
     out = out.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+    out = out.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em>$1</em>');
     out = out.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
     out = out.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
     out = out.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');

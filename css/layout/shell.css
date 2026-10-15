@@ -200,8 +200,11 @@ body.auth-gate #top-download-bar {
 #top-download-bar .weight-card:has(#weight-status[data-busy="1"]) #weight-status {
   order: 1;
   flex: 0 1 auto;
-  font-size: 12px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
   font-weight: 650;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -209,9 +212,9 @@ body.auth-gate #top-download-bar {
 
 #top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .weight-bar {
   order: 2;
-  flex: 1 1 auto;
+  flex: 1 1 24px;
   height: 3px;
-  min-width: 48px;
+  min-width: 20px;
 }
 
 #top-download-bar .weight-card:has(#weight-status[data-busy="1"]) .weight-bar::after {

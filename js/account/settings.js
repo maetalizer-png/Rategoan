@@ -59,18 +59,18 @@ const CHEVRON_ICON =
   '<svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
 
 const CATEGORIES = [
-  { key: 'tampilan', title: 'Tampilan', icon: MOON_ICON },
-  { key: 'ai', title: 'Model', icon: SERVER_MODE_ICON },
-  { key: 'privasi', title: 'Privasi & Keamanan', icon: LOCK_ICON },
-  { key: 'data', title: 'Data', icon: STORAGE_ICON },
-  { key: 'preferensi', title: 'Preferensi', icon: TTS_ICON },
-  { key: 'lainnya', title: 'Lainnya', icon: INFO_ICON },
+  { key: 'tampilan', title: 'Tampilan', desc: 'Tema terang/gelap & ukuran tipografi', icon: MOON_ICON },
+  { key: 'ai', title: 'Model', desc: 'Mesin lokal Raget 1.0, WebGPU & penghemat daya', icon: SERVER_MODE_ICON },
+  { key: 'privasi', title: 'Privasi & Keamanan', desc: 'Kunci PIN, brankas terenkripsi & jejak audit izin', icon: LOCK_ICON },
+  { key: 'data', title: 'Data', desc: 'Penyimpanan OPFS, cache bobot & cadangan obrolan', icon: STORAGE_ICON },
+  { key: 'preferensi', title: 'Preferensi', desc: 'Suara baca (TTS), memori jangka panjang & gaya bahasa', icon: TTS_ICON },
+  { key: 'lainnya', title: 'Lainnya', desc: 'Informasi Rategoan version 1.0 & pengaturan reset', icon: INFO_ICON },
 ];
 
 const MENU_ROWS = CATEGORIES.map(
   (c) => `
             <div class="set-row clickable cat-row" data-cat="${c.key}">
-              <span>${c.icon} ${c.title}</span>
+              <span class="cat-row-main">${c.icon} <span class="cat-row-text"><strong class="cat-row-title">${c.title}</strong><small class="cat-row-desc">${c.desc}</small></span></span>
               ${CHEVRON_ICON}
             </div>`
 ).join('');

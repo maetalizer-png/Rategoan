@@ -1160,13 +1160,18 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 
 .file-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 14px;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 6px 12px;
   background: var(--rg-surface);
   border-bottom: 1px solid var(--rg-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.file-actions::-webkit-scrollbar {
+  display: none;
 }
 
 .file-mode-group,
@@ -1175,8 +1180,12 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 .preview-viewport-group {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  gap: 5px;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+.file-git-group {
+  margin-left: auto;
 }
 
 .file-mode-group {
@@ -1208,33 +1217,37 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 
 .file-actions button,
 .file-actions input {
-  min-height: 30px;
-  border-radius: 8px;
+  min-height: 28px;
+  border-radius: 7px;
   border: 1px solid var(--rg-line);
   background: var(--rg-bg);
   color: var(--rg-text);
-  padding: 4px 10px;
-  font-size: 12px;
+  padding: 3px 8px;
+  font-size: 11.5px;
   font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 #file-name {
-  width: 140px;
+  width: 108px;
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 11.5px;
 }
 
 .commit-slider-label {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 4px;
+  font-size: 11.5px;
   color: var(--rg-muted);
-  padding: 0 4px;
+  padding: 0 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 #commit-slider {
-  width: 84px;
+  width: 52px;
   accent-color: #2563eb;
 }
 
@@ -1647,4 +1660,85 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
 #tab-logs .trace-edit-block {
   background: #0b111c;
   border: 1px solid #1e293b;
+}
+
+/* Compact 531px Fit for Studio Kode #tab-files Toolbar */
+#tab-files .file-actions {
+  gap: 4px;
+  padding: 6px 10px;
+  justify-content: space-between;
+}
+#tab-files .file-mode-group,
+#tab-files .file-crud-group,
+#tab-files .file-git-group {
+  gap: 3px;
+}
+#tab-files .file-mode-group button {
+  padding: 2px 7px !important;
+  font-size: 11px !important;
+  min-height: 24px !important;
+}
+#tab-files .file-actions button,
+#tab-files .file-actions input {
+  min-height: 26px;
+  padding: 2px 6px;
+  font-size: 11px;
+  border-radius: 6px;
+}
+#tab-files #file-name {
+  width: 82px;
+  font-size: 11px;
+}
+#tab-files .commit-slider-label {
+  font-size: 10.5px;
+  gap: 3px;
+  padding: 0 1px;
+}
+#tab-files #commit-slider {
+  width: 36px;
+}
+
+/* Structured 2-Bar IDE Toolbar for Studio Kode #tab-files (Zero Clipping at 531px) */
+#tab-files .file-actions {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 8px;
+  padding: 8px 12px;
+  overflow: visible;
+}
+#tab-files .file-mode-group {
+  grid-column: 1;
+  grid-row: 1;
+}
+#tab-files .file-crud-group {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+#tab-files #file-name {
+  width: 118px;
+}
+#tab-files .file-git-group {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  margin-left: 0;
+  padding-top: 6px;
+  border-top: 1px dashed var(--rg-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+#tab-files .commit-slider-label {
+  margin-right: auto;
+  font-size: 11.5px;
+  gap: 6px;
+}
+#tab-files #commit-slider {
+  width: 72px;
 }

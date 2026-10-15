@@ -558,7 +558,7 @@ async function generateWithTier(tier, prompt, options) {
     const remote = await globalThis.__RG_MODEL_BUS__.ask(String(prompt || ''));
     if (remote) return remote;
   }
-  const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
+  const mode = options && (options.mode === 'tinggi' || options.mode === 'mendalam') ? 'mendalam' : 'cepat';
   if (installedFlag() && modelStatus !== MODEL_STATUS.READY) await bootWeights();
   if (!installedFlag() || modelStatus !== MODEL_STATUS.READY) {
     remember({
@@ -640,7 +640,7 @@ function composeNeuralInput(prompt, options) {
 }
 
 async function generateLocal(prompt, options) {
-  const mode = options && options.mode === 'mendalam' ? 'mendalam' : 'cepat';
+  const mode = options && (options.mode === 'tinggi' || options.mode === 'mendalam') ? 'mendalam' : 'cepat';
   const fullPrompt = composeNeuralInput(prompt, options);
   return generateWithTier('tier_1_5b', fullPrompt, Object.assign({}, options, { mode }));
 }

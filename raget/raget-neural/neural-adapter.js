@@ -29,7 +29,7 @@ function status() {
 function uiMode() {
   if (typeof localStorage === 'undefined') return '';
   try {
-    return enginePreference.get() === 'neural' ? 'mendalam' : 'cepat';
+    return enginePreference.get() === 'neural' ? 'tinggi' : 'rendah';
   } catch (e) {
     return '';
   }
@@ -47,7 +47,7 @@ async function ask(prompt, context) {
   try {
     const opts = {
       signal: ctrl.signal,
-      large: !!(context && context.large),
+      large: !!(context && context.large) || mode === 'tinggi',
       modelPrefix: (context && context.modelPrefix) ? String(context.modelPrefix) : '',
       recent: (context && Array.isArray(context.recent)) ? context.recent : [],
       facts: (context && context.facts && typeof context.facts === 'object') ? context.facts : null,
