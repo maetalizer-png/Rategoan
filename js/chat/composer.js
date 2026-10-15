@@ -1,3 +1,4 @@
+import { scrolldown } from '../ui/scrolldown.js';
 import { webSearch } from '../../vault/web/web-search.js';
 import { resolveAutonomousConnector, resolveLocalProductivityTool, runConnectorTool } from '../connectors/tool-card.js';
 import { $, scrollBottom } from '../../shared/dom.js';
@@ -652,6 +653,7 @@ export const composer = {
     });
     store.save();
     history.render();
+    scrolldown.resetLock();
     chat.renderMessages();
     haptics.tap(10);
     const projNew = text.match(/^proyek baru\s+(.+)$/i);
@@ -1008,7 +1010,7 @@ export const composer = {
       this.autoGrow();
       paintSlot();
     });
-    inp.addEventListener('focus', () => setTimeout(scrollBottom, 250));
+    inp.addEventListener('focus', () => setTimeout(() => { if (scrolldown.shouldAutoScroll()) scrollBottom(); }, 250));
     const send = $('btn-send');
     if (send) send.onclick = () => {
       let t = inp.value.trim();
@@ -1065,7 +1067,7 @@ export const composer = {
       window.visualViewport.addEventListener('resize', () => {
         const offset = Math.max(0, window.innerHeight - window.visualViewport.height - (window.visualViewport.offsetTop || 0));
         document.documentElement.style.setProperty('--keyboard-offset', offset + 'px');
-        if (offset > 100) scrollBottom();
+        if (offset > 100 && scrolldown.shouldAutoScroll()) scrollBottom();
       });
     }
     attach.onModeOff = (key) => {

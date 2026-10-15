@@ -16,18 +16,40 @@
 #attach-sheet {
   max-height: 50vh !important;
   overflow-y: auto !important;
-  scrollbar-width: thin;
-  scrollbar-color: var(--rg-line) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: max-height 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#attach-sheet.is-expanded {
+  max-height: 88vh !important;
+}
+
+#attach-sheet::before {
+  content: "";
+  display: block;
+  width: 38px;
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--rg-muted, #64748b) 32%, transparent);
+  margin: 0 auto 2px;
+  flex-shrink: 0;
 }
 
 @media (min-width: 1024px) {
-  #attach-sheet {
+  #attach-sheet,
+  #attach-sheet.is-expanded {
     max-height: calc(100vh - 100px) !important;
+  }
+  #attach-sheet::before {
+    display: none;
   }
 }
 
 #attach-sheet::-webkit-scrollbar {
-  width: 5px;
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 #attach-sheet::-webkit-scrollbar-thumb {
@@ -44,14 +66,14 @@
   background: var(--rg-surface);
   border: 1px solid var(--rg-line);
   border-bottom: none;
-  border-radius: 22px 22px 0 0;
-  padding: 10px 14px calc(12px + env(safe-area-inset-bottom));
+  border-radius: 26px 26px 0 0;
+  padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
   box-shadow: var(--rg-shadow);
-  max-height: 52vh;
+  max-height: 70vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 12px;
 }
 
 .sheet-head {
@@ -76,12 +98,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 7px 6px;
+  gap: 8px;
+  padding: 14px 8px;
   border: 1px solid var(--rg-line);
-  border-radius: 12px;
+  border-radius: 14px;
   color: var(--rg-text);
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -94,11 +116,11 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  margin-top: 0;
-  padding: 5.5px 4px;
+  margin-top: 10px;
+  padding: 10px 4px;
   border-radius: 10px;
   color: var(--rg-text);
-  font-size: 12.8px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -444,19 +466,14 @@
 .attach-plain-label {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-  flex: 1;
+  gap: 2px;
 }
 
 .attach-plain-label small {
-  font-size: 10.8px;
+  font-size: 11px;
   font-weight: 450;
   color: var(--rg-muted, #64748b);
-  line-height: 1.24;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.32;
 }
 
 .attach-plain-chev {

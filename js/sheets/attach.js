@@ -172,9 +172,31 @@ export const attach = {
   open() {
     const sheet = $('attach-sheet');
     sheet.hidden = false;
+    sheet.classList.remove('is-expanded');
+    sheet.scrollTop = 0;
     sheet.classList.add('is-anchored');
     document.body.classList.add('attach-open');
     $('sheet-backdrop').classList.add('show');
+    if (!sheet.dataset.swipeBound) {
+      sheet.dataset.swipeBound = '1';
+      let startY = null;
+      sheet.addEventListener('touchstart', (ev) => {
+        if (ev.touches && ev.touches.length === 1) startY = ev.touches[0].clientY;
+      }, { passive: true });
+      sheet.addEventListener('touchmove', (ev) => {
+        if (startY == null || !ev.touches || ev.touches.length !== 1) return;
+        const dy = startY - ev.touches[0].clientY;
+        if (dy > 14) sheet.classList.add('is-expanded');
+        else if (dy < -24 && sheet.scrollTop <= 2) sheet.classList.remove('is-expanded');
+      }, { passive: true });
+      sheet.addEventListener('scroll', () => {
+        if (sheet.scrollTop > 8) sheet.classList.add('is-expanded');
+      }, { passive: true });
+      sheet.addEventListener('wheel', (ev) => {
+        if (ev.deltaY > 4) sheet.classList.add('is-expanded');
+        else if (ev.deltaY < -8 && sheet.scrollTop <= 2) sheet.classList.remove('is-expanded');
+      }, { passive: true });
+    }
     if (window.innerWidth >= 860) positionDesktopPopover(sheet, $('btn-plus'));
   },
   pick(kind) {

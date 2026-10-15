@@ -516,7 +516,8 @@ export const chat = {
       while (i < text.length && !skip && !(opts && opts.signal && opts.signal.aborted)) {
         i += step;
         body.innerHTML = markdown.render(text.slice(0, i));
-        scrollBottom();
+        if (scrolldown.shouldAutoScroll()) scrollBottom();
+        else scrolldown.update();
         if (typeof requestAnimationFrame === 'function') {
           await new Promise((resolve) => requestAnimationFrame(() => resolve()));
         } else {
@@ -545,10 +546,11 @@ export const chat = {
     });
     d.appendChild(actions);
     pinStreamDisclaimer($('messages'));
-    if (follow) {
+    if (follow && scrolldown.shouldAutoScroll()) {
       scrollBottom();
     } else {
       scrolldown.ping();
+      scrolldown.update();
     }
   },
   async ask(prompt, opts) {
@@ -601,7 +603,8 @@ export const chat = {
             rafPending = false;
             if (!streamBody.isConnected) return;
             streamBody.innerHTML = markdown.render(streamAccum);
-            scrollBottom();
+            if (scrolldown.shouldAutoScroll()) scrollBottom();
+            else scrolldown.update();
           };
           if (typeof requestAnimationFrame === 'function') requestAnimationFrame(flushStream);
           else flushStream();
@@ -675,8 +678,11 @@ export const chat = {
     s.messages.push({ role: 'ai', text: reply, time: Date.now(), source: searching ? 'websearch' : undefined, thoughts: opts && opts.thoughts, thoughtFrozenSec: thoughtFrozenSec || undefined });
     const signal = generation ? generation.signal : null;
     try {
+      const msgBox = $('messages');
+      const keepScroll = !scrolldown.shouldAutoScroll();
+      const savedTop = msgBox ? msgBox.scrollTop : 0;
       if (lp && lp.parentNode) lp.remove();
-      await this.typeReply(reply, !scrolldown.isFar(), {
+      await this.typeReply(reply, !keepScroll, {
         searching,
         thoughts: opts && opts.thoughts,
         thoughtStart,
@@ -685,6 +691,7 @@ export const chat = {
         signal,
         alreadyStreamed: streamedChars > 0 && !(opts && opts.preamble),
       });
+      if (keepScroll && msgBox) msgBox.scrollTop = savedTop;
       if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') navigator.vibrate(8);
       else haptics.tap(8);
     } finally {

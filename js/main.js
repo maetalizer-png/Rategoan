@@ -132,14 +132,22 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.setProperty('--vv-top', window.visualViewport.offsetTop + 'px');
     };
     setVvh();
+    let prevVvH = window.visualViewport.height;
     let vvTimer = null;
-    const onVvChange = () => {
+    const onVvResize = () => {
+      const curH = window.visualViewport.height;
+      const keyboardOpened = curH < prevVvH - 100;
+      prevVvH = curH;
       setVvh();
-      clearTimeout(vvTimer);
-      vvTimer = setTimeout(scrollBottom, 120);
+      if (keyboardOpened && !scrolldown.userLocked && !scrolldown.isFar()) {
+        clearTimeout(vvTimer);
+        vvTimer = setTimeout(() => {
+          if (scrolldown.shouldAutoScroll()) scrollBottom();
+        }, 120);
+      }
     };
-    visualViewport.addEventListener('resize', onVvChange);
-    visualViewport.addEventListener('scroll', onVvChange);
+    visualViewport.addEventListener('resize', onVvResize);
+    visualViewport.addEventListener('scroll', setVvh);
   }
   try {
     localStorage.setItem('raget_boot_ms', String(Math.round(performance.now() - bootStart)));

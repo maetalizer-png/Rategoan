@@ -6,5 +6,8 @@ export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const scrollBottom = () => {
   const m = $('messages');
-  if (m) m.scrollTop = m.scrollHeight;
+  if (m) {
+    m._progScrollTs = Date.now();
+    m.scrollTop = m.scrollHeight;
+  }
 };

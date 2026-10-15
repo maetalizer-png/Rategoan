@@ -31,7 +31,7 @@
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent !important;
-  color: var(--rg-muted, #64748b);
+  color: var(--rg-text, #111827);
   font-weight: 500;
   transition: none !important;
 }
@@ -48,19 +48,16 @@
   display: none;
 }
 
-/* Ikon proses berpikir yang bergerak saat bekerja dan tenang saat selesai */
+/* Ikon proses berpikir monokrom hitam yang bergerak saat bekerja dan tenang saat selesai */
 @keyframes rg-orbit-spin {
   0% {
     transform: rotate(0deg) scale(0.96);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18), 0 0 8px rgba(14, 165, 233, 0.35);
   }
   50% {
-    transform: rotate(180deg) scale(1.08);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), 0 0 12px rgba(37, 99, 235, 0.45);
+    transform: rotate(180deg) scale(1.06);
   }
   100% {
     transform: rotate(360deg) scale(0.96);
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18), 0 0 8px rgba(14, 165, 233, 0.35);
   }
 }
 
@@ -70,24 +67,24 @@
 }
 
 @keyframes rg-step-switch {
-  0% { opacity: 0.35; transform: translateY(3px); }
+  0% { opacity: 0.4; transform: translateY(2px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
 .thought-dot.zen-dot {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
   position: relative;
-  background: conic-gradient(from 0deg, #2563eb, #38bdf8, #818cf8, #2563eb);
+  background: conic-gradient(from 0deg, var(--rg-text, #111827), rgba(17, 24, 39, 0.2), var(--rg-text, #111827));
 }
 
 .thought-dot.zen-dot::after {
   content: "";
   position: absolute;
-  inset: 2.5px;
+  inset: 2.2px;
   border-radius: 50%;
   background: var(--rg-bg, #ffffff);
 }
@@ -97,11 +94,11 @@
 }
 
 .thought-dot.zen-dot.is-done {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   animation: none;
-  background: linear-gradient(135deg, #2563eb, #0284c7);
-  box-shadow: 0 0 0 2.5px color-mix(in srgb, #2563eb 14%, transparent);
+  background: var(--rg-text, #111827);
+  opacity: 0.75;
 }
 
 .thought-dot.zen-dot.is-done::after {
@@ -111,7 +108,7 @@
 .thought-summary-label {
   font-size: 13.5px;
   font-weight: 560;
-  color: var(--rg-text, #1e293b);
+  color: var(--rg-text, #111827);
   letter-spacing: -0.01em;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -120,27 +117,30 @@
 }
 
 .thought-summary-label.is-live-text {
-  background: linear-gradient(90deg, var(--rg-text, #0f172a) 15%, #2563eb 50%, var(--rg-text, #0f172a) 85%);
+  background: linear-gradient(90deg, var(--rg-text, #111827) 15%, rgba(17, 24, 39, 0.45) 50%, var(--rg-text, #111827) 85%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: rg-text-shimmer 2.8s linear infinite;
+  animation: rg-text-shimmer 2.6s linear infinite;
 }
 
 .thought-summary-label.is-switching {
-  animation: rg-step-switch 0.24s cubic-bezier(0.22, 1, 0.36, 1), rg-text-shimmer 2.8s linear infinite;
+  animation: rg-step-switch 0.22s ease, rg-text-shimmer 2.6s linear infinite;
 }
 
 .thought-accordion.completed .thought-summary-label {
-  color: var(--rg-muted, #64748b);
+  color: var(--rg-text, #111827);
+  opacity: 0.78;
   font-weight: 520;
   background: none;
   -webkit-text-fill-color: currentColor;
   animation: none;
 }
 
-.thought-seg-track {
+.thought-seg-track,
+.stepper-kicker,
+.stepper-chips {
   display: none;
 }
 
@@ -148,7 +148,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--rg-muted, #64748b);
+  color: var(--rg-text, #111827);
+  opacity: 0.65;
   transition: transform 0.18s ease;
   flex-shrink: 0;
 }
@@ -157,7 +158,7 @@
   transform: rotate(90deg);
 }
 
-/* Rategoan Timeline — Hanya satu garis penghubung vertikal pada kolom ikon */
+/* Alur Berpikir Monokrom 1 Warna Hitam — Hanya 1 garis vertikal pada kolom ikon */
 .agentic-stepper {
   list-style: none;
   margin: 8px 0 12px 2px;
@@ -171,13 +172,13 @@
 
 .stepper-node {
   display: flex;
-  gap: 12px;
+  gap: 11px;
   align-items: stretch;
   margin: 0;
   padding: 0;
   border: none !important;
   background: transparent !important;
-  color: var(--rg-muted, #64748b);
+  color: var(--rg-text, #111827);
   font-size: 13.5px;
   line-height: 1.45;
 }
@@ -186,50 +187,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20px;
-  flex: 0 0 20px;
+  width: 18px;
+  flex: 0 0 18px;
 }
 
 .stepper-orb {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
   background: transparent !important;
   border: none !important;
-  color: var(--rg-muted, #64748b);
+  color: var(--rg-text, #111827);
+  opacity: 0.78;
   margin-top: 1px;
-  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .stepper-rail-line {
   flex: 1;
   width: 1.5px;
-  min-height: 14px;
+  min-height: 12px;
   margin: 4px 0;
-  background: color-mix(in srgb, var(--rg-muted, #64748b) 22%, transparent);
+  background: color-mix(in srgb, var(--rg-text, #111827) 20%, transparent);
   border-radius: 999px;
 }
 
 .stepper-node.is-done .stepper-orb {
-  color: #0284c7;
-}
-
-.stepper-node.is-done .stepper-rail-line {
-  background: linear-gradient(180deg, #2563eb 0%, #0ea5e9 100%);
-  opacity: 0.6;
+  color: var(--rg-text, #111827);
+  opacity: 0.75;
 }
 
 .stepper-node.is-live .stepper-orb {
-  color: #2563eb;
-  transform: scale(1.06);
-  filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.28));
-}
-
-.stepper-node.is-live .stepper-rail-line {
-  background: linear-gradient(180deg, #2563eb 0%, color-mix(in srgb, var(--rg-muted, #64748b) 20%, transparent) 100%);
+  color: var(--rg-text, #111827);
+  opacity: 1;
 }
 
 .stepper-body {
@@ -237,178 +229,51 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-bottom: 14px;
+  gap: 3px;
+  padding-bottom: 12px;
 }
 
 .stepper-node:last-child .stepper-body {
   padding-bottom: 2px;
 }
 
-/* Kicker Tahapan Tanpa Nomor Urut */
-.stepper-kicker {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  line-height: 1.2;
-}
-
-.stepper-lane-tag {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 2px 6.5px;
-  border-radius: 5px;
-  color: #0369a1;
-  background: color-mix(in srgb, #0284c7 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-mind {
-  color: #4f46e5;
-  background: color-mix(in srgb, #4f46e5 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-search {
-  color: #0369a1;
-  background: color-mix(in srgb, #0284c7 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-analysis {
-  color: #7c3aed;
-  background: color-mix(in srgb, #7c3aed 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-verify {
-  color: #059669;
-  background: color-mix(in srgb, #059669 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-image {
-  color: #9333ea;
-  background: color-mix(in srgb, #9333ea 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-file {
-  color: #0284c7;
-  background: color-mix(in srgb, #0284c7 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-arch {
-  color: #d97706;
-  background: color-mix(in srgb, #d97706 12%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-tool {
-  color: #0f766e;
-  background: color-mix(in srgb, #0d9488 12%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-web {
-  color: #2563eb;
-  background: color-mix(in srgb, #2563eb 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-connect {
-  color: #16a34a;
-  background: color-mix(in srgb, #16a34a 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-slide {
-  color: #ea580c;
-  background: color-mix(in srgb, #ea580c 11%, transparent);
-}
-
-.stepper-lane-tag.lane-tag-write {
-  color: #2563eb;
-  background: color-mix(in srgb, #2563eb 10%, transparent);
-}
-
-.stepper-state-tag {
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--rg-muted, #64748b);
-  opacity: 0.75;
-}
-
-.stepper-node.is-live .stepper-state-tag {
-  color: #2563eb;
-  font-weight: 600;
-  opacity: 1;
-}
-
 .stepper-copy {
-  color: var(--rg-text, #1e293b);
-  opacity: 0.9;
+  color: var(--rg-text, #111827);
+  opacity: 0.92;
   font-size: 13.5px;
-  font-weight: 550;
+  font-weight: 560;
   line-height: 1.4;
   white-space: normal;
   word-break: break-word;
 }
 
 .thought-accordion.running .stepper-node.is-done .stepper-copy {
-  color: var(--rg-muted, #475569);
-  opacity: 0.82;
+  opacity: 0.72;
 }
 
 .stepper-node.is-live .stepper-copy {
-  color: var(--rg-text, #0f172a);
+  color: var(--rg-text, #111827);
   font-weight: 620;
   opacity: 1;
 }
 
-/* Sub-narasi bersih tanpa garis vertikal tambahan di kiri (cukup garis pada ikon) */
 .stepper-sub {
   position: relative;
   margin: 1px 0 0;
   padding: 0;
   border-left: none !important;
-  color: var(--rg-muted, #64748b);
-  font-size: 12.7px;
+  color: var(--rg-text, #111827);
+  opacity: 0.66;
+  font-size: 12.8px;
   font-weight: 400;
-  line-height: 1.48;
+  line-height: 1.46;
   white-space: normal;
   word-break: break-word;
-}
-
-.stepper-node.is-live .stepper-sub {
-  color: color-mix(in srgb, var(--rg-text, #1e293b) 78%, var(--rg-muted, #64748b));
 }
 
 .stepper-sub::before {
   content: none;
   display: none;
-}
-
-/* Micro-Chips Konteks Objek & Target Kerja */
-.stepper-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 3px;
-}
-
-.stepper-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-size: 11.2px;
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--rg-muted, #475569);
-  background: color-mix(in srgb, var(--rg-muted, #64748b) 10%, transparent);
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.stepper-node.is-live .stepper-chip {
-  color: #1d4ed8;
-  background: color-mix(in srgb, #2563eb 10%, transparent);
 }
 
 .daily-brief {
@@ -424,5 +289,5 @@
 .daily-brief p { margin: 6px 0 0; }
 
 .stepper-node.is-pending {
-  opacity: 0.46;
+  opacity: 0.44;
 }

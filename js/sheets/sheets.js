@@ -6,7 +6,7 @@ export const sheets = {
   close() {
     $('attach-sheet').hidden = true;
     const anchored = $('attach-sheet');
-    if (anchored) anchored.classList.remove('is-anchored');
+    if (anchored) { anchored.classList.remove('is-anchored'); anchored.classList.remove('is-expanded'); }
     document.body.classList.remove('attach-open');
     $('model-sheet').hidden = true;
     const skill = $('skill-sheet');
