@@ -132,23 +132,25 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.style.setProperty('--vv-top', window.visualViewport.offsetTop + 'px');
     };
     setVvh();
-    let prevVvH = window.visualViewport.height;
+    let kbOpen = false;
     let vvTimer = null;
-    const onVvResize = () => {
-      const curH = window.visualViewport.height;
-      const keyboardOpened = curH < prevVvH - 100 || (window.innerHeight - curH > 150);
-      prevVvH = curH;
+    const syncKeyboard = () => {
+      const vv = window.visualViewport;
       setVvh();
-      document.body.classList.toggle('keyboard-open', keyboardOpened);
-      if (keyboardOpened && !scrolldown.userLocked && !scrolldown.isFar()) {
+      const overlap = Math.max(0, Math.round(window.innerHeight - vv.height - (vv.offsetTop || 0)));
+      if (!kbOpen && overlap > 140) kbOpen = true;
+      else if (kbOpen && overlap < 70) kbOpen = false;
+      document.body.classList.toggle('keyboard-open', kbOpen);
+      document.documentElement.style.setProperty('--keyboard-offset', (kbOpen ? overlap : 0) + 'px');
+      if (kbOpen && !scrolldown.userLocked && !scrolldown.isFar()) {
         clearTimeout(vvTimer);
         vvTimer = setTimeout(() => {
           if (scrolldown.shouldAutoScroll()) scrollBottom();
         }, 120);
       }
     };
-    visualViewport.addEventListener('resize', onVvResize);
-    visualViewport.addEventListener('scroll', setVvh);
+    visualViewport.addEventListener('resize', syncKeyboard);
+    visualViewport.addEventListener('scroll', syncKeyboard);
   }
   try {
     localStorage.setItem('raget_boot_ms', String(Math.round(performance.now() - bootStart)));

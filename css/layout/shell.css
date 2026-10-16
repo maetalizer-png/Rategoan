@@ -37,7 +37,7 @@
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  padding: 16px 14px calc(115px + max(4px, env(safe-area-inset-bottom, 0px)));
+  padding: 16px 14px calc(128px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -85,7 +85,7 @@
   bottom: 0;
   z-index: 20;
   pointer-events: none;
-  padding: 8px 14px calc(14px + max(4px, env(safe-area-inset-bottom, 0px)));
+  padding: 8px 14px calc(16px + env(safe-area-inset-bottom, 0px));
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
@@ -98,14 +98,12 @@
   pointer-events: auto;
 }
 
-body.keyboard-open #composer,
-body:has(#chat-input:focus) #composer {
-  padding: 4px 14px 6px !important;
+body.keyboard-open #composer {
+  padding-bottom: 16px;
 }
 
-body.keyboard-open #messages,
-body:has(#chat-input:focus) #messages {
-  padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
+body.keyboard-open #messages {
+  padding-bottom: 128px;
 }
 
 #composer-card {
