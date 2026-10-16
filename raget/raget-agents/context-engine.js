@@ -102,17 +102,10 @@ function timeGreeting(hour) {
 
 function tryTimeGreeting(text) {
   const t = text.trim();
-  // "woy"/"woi" sengaja tidak dianggap sapaan ramah -- dalam pemakaian
-  // sehari-hari itu manggil/nyolot ("WOY!"), bukan padanan "hai"/"halo",
-  // jadi tidak pantas dibalas basa-basi "selamat pagi/malam".
   if (!/^(hai+|halo+|hi+|hey+|hoi+)[\s!.,]{0,3}$/i.test(t)) return null;
   return timeGreeting();
 }
 
-// (?<!dana\s) mengecualikan "dana darurat" (istilah finansial biasa, bukan
-// situasi darurat aktif) - satu-satunya frasa umum yang terbukti salah
-// picu; semua pemakaian "darurat" lain tetap dianggap darurat seperti biasa
-// supaya deteksi situasi darurat sungguhan tidak melemah.
 const EMERGENCY_RE =
   /(?<!dana\s)\bdarurat\b|\bini\s+darurat\b|\bsesak\s+napas\b|\bpendarahan\b|\b(pingsan|tidak\s+sadarkan\s+diri)\b|\bkecelakaan\b.*\btolong\b|\btolong\b.*\bkecelakaan\b|\bditangkap\s+polisi\b|\bbutuh\s+pengacara\s+sekarang\b|\bkebakaran\b.*\btolong\b|\btolong\b.*\bkebakaran\b/i;
 

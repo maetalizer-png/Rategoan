@@ -38,14 +38,25 @@ function cleanHeaderValue(val) {
   return String(val || '').replace(/[\r\n\0]+/g, ' ').trim();
 }
 
+export function sanitizeRawMime(rawEncoded) {
+  const decoded = Buffer.from(String(rawEncoded || ''), 'base64url').toString('utf8');
+  const splitMatch = decoded.match(/\r?\n\r?\n/);
+  const headText = splitMatch ? decoded.slice(0, splitMatch.index) : decoded;
+  const bodyText = splitMatch ? decoded.slice(splitMatch.index + splitMatch[0].length) : '';
+  const safeHeaders = headText
+    .split(/\r?\n/)
+    .filter((line) => !/^\s*(?:bcc|resent-bcc|resent-to|resent-cc)\s*:/i.test(line));
+  return Buffer.from(safeHeaders.join('\r\n') + '\r\n\r\n' + bodyText).toString('base64url');
+}
+
 export function rawEmail(params) {
-  if (params.raw) return String(params.raw);
+  if (params && params.raw) return sanitizeRawMime(params.raw);
   const lines = [
-    'To: ' + cleanHeaderValue(params.to),
-    'Subject: ' + cleanHeaderValue(params.subject),
+    'To: ' + cleanHeaderValue(params && params.to),
+    'Subject: ' + cleanHeaderValue(params && params.subject),
     'Content-Type: text/plain; charset=utf-8',
     '',
-    String(params.body || params.text || ''),
+    String((params && (params.body || params.text)) || ''),
   ];
   return Buffer.from(lines.join('\r\n')).toString('base64url');
 }

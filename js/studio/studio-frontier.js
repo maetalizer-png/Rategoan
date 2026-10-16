@@ -298,7 +298,7 @@ export function mountStudioFrontier(ctx) {
     const files = git.checkout(row.id);
     if (!files) return;
     Object.keys(files).forEach((path) => {
-      try { vfs.write(path, files[path]); } catch (e) { /* kuota */ }
+      try { vfs.write(path, files[path]); } catch (e) { void e; }
     });
     if (typeof root.paintTree === 'function') root.paintTree();
     if (typeof root.showPreview === 'function') root.showPreview();

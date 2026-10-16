@@ -363,7 +363,7 @@ function buildSession(parsed, readBytes, isStream, readScratch) {
       const customVocab = parsed.meta.vocab_json ? JSON.parse(parsed.meta.vocab_json) : null;
       const customMerges = parsed.meta.merges_json ? JSON.parse(parsed.meta.merges_json) : null;
       if (customVocab) bpeShell.loadCustomVocabulary({ vocab: customVocab, merges: customMerges });
-    } catch (e) { /* gunakan bpeShell bawaan */ }
+    } catch (e) { void e; }
   }
   const useRope = parsed.meta.rope !== 'false' && parsed.meta.rope !== false && dk >= 2;
   const ropeInvFreq = useRope ? buildRopeFreqs(dk, Number(parsed.meta.rope_theta) || 10000) : null;

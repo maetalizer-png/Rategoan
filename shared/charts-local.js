@@ -1,5 +1,10 @@
-function esc(value) {
-  return String(value || '').replace(/[&<>"]/g, (ch) => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[ch]));
+export function escapeChartText(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function nums(data) {
@@ -7,8 +12,8 @@ function nums(data) {
 }
 
 export function buildChartSvg(spec) {
-  const type = spec && spec.type || 'bar';
-  const title = spec && spec.title || 'Grafik';
+  const type = (spec && spec.type) || 'bar';
+  const title = (spec && spec.title) || 'Grafik';
   const labels = (spec && spec.labels) || [];
   const series = (spec && spec.datasets && spec.datasets[0]) || { label: '', data: [] };
   const data = nums(series.data);
@@ -48,9 +53,9 @@ export function buildChartSvg(spec) {
   labels.forEach((label, i) => {
     const x = type === 'pie' ? 360 : 50 + i * (560 / Math.max(1, labels.length));
     const y = type === 'pie' ? 70 + i * 22 : 330;
-    body += '<text x="' + x + '" y="' + y + '" font-size="12" fill="#243040">' + esc(label) + '</text>';
+    body += '<text x="' + x + '" y="' + y + '" font-size="12" fill="#243040">' + escapeChartText(label) + '</text>';
   });
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="100%"><rect width="100%" height="100%" fill="#fff"/><text x="24" y="32" font-size="16" font-weight="700" fill="#111">' + esc(title) + '</text>' + body + '</svg>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="100%"><rect width="100%" height="100%" fill="#fff"/><text x="24" y="32" font-size="16" font-weight="700" fill="#111">' + escapeChartText(title) + '</text>' + body + '</svg>';
 }
 
 export function parseChartAsk(text) {

@@ -40,7 +40,7 @@ let generation = null;
 
 export function abortGeneration() {
   if (generation) {
-    try { generation.abort(); } catch (e) { /* abaikan */ }
+    try { generation.abort(); } catch (e) { void e; }
     generation = null;
   }
   if (typeof document !== "undefined" && document.body) {
@@ -65,7 +65,7 @@ if (typeof document !== "undefined") {
           lang: String(detail.lang || "js").toLowerCase(),
           code: String(detail.code),
         }));
-      } catch (e) { /* abaikan */ }
+      } catch (e) { void e; }
     }
     if (typeof window !== "undefined" && typeof window.open === "function") {
       window.open("studio.html", "_blank", "noopener");

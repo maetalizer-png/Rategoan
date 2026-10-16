@@ -2,6 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
 import { allArtifacts, exportSlides } from '../../shared/slides-export.js';
+import { sanitizeReportBody } from '../../shared/report-export.js';
 import { drawer } from '../ui/drawer.js';
 
 let filter = 'semua';
@@ -143,7 +144,7 @@ function paint() {
       const frame = $('artifact-inline');
       if (frame && /<\s*(svg|html|div|p|table)\b/i.test(body)) {
         frame.hidden = false;
-        frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src data: blob:;">' + body.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '');
+        frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src data: blob:;">' + sanitizeReportBody(body);
         return;
       }
       if (item.type === 'code' || item.type === 'document' || item.type === 'table' || item.type === 'chart' || item.type === 'diagram' || item.type === 'report') artifact.open(item);
@@ -189,10 +190,6 @@ export const artifactsPage = {
       drawer.close();
       this.open();
     };
-    window.addEventListener('hashchange', () => {
-      if ((location.hash || '').indexOf('artifacts') >= 0) paint();
-    });
-    if ((location.hash || '').indexOf('artifacts') >= 0) paint();
   },
   open() {
     paint();

@@ -225,7 +225,7 @@ export function mountMeshPanel(parent) {
     }
     const packed = encodeSdp(opened.local);
     area.value = packed;
-    try { paintSdpQr(canvas, packed); } catch (e) { /* teks tetap sumber impor */ }
+    try { paintSdpQr(canvas, packed); } catch (e) { void e; }
     copy.onclick = () => {
       const clip = navigator.clipboard;
       if (clip && clip.writeText) clip.writeText(packed).catch(() => area.select());

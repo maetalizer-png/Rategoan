@@ -1,4 +1,3 @@
-// Struktur safetensors: offset tensor harus muat di payload, tanpa tumpang tindih.
 export function safetensorsPayloadOk(sync) {
   try {
     if (!sync || typeof sync.read !== 'function') return false;

@@ -60,6 +60,16 @@ export function cleanGitBranch(raw) {
   return s || 'rategoan';
 }
 
+export function cleanGitPath(raw) {
+  const segments = String(raw || '')
+    .replace(/\\/g, '/')
+    .replace(/[\r\n\0]/g, '')
+    .split('/')
+    .map((part) => part.trim())
+    .filter((part) => part && part !== '.' && part !== '..' && !/\.\./.test(part));
+  return segments.map(encodeURIComponent).join('/');
+}
+
 async function special(tool, params, token, res) {
   const headers = Object.assign({ authorization: 'Bearer ' + token, 'content-type': 'application/json' }, GH_HEADERS);
   if (tool.name === 'github_create_branch') {
@@ -75,16 +85,21 @@ async function special(tool, params, token, res) {
     return true;
   }
   if (tool.name === 'github_commit_changes') {
+    const safePath = cleanGitPath(params.path);
+    if (!safePath) {
+      sendJson(res, 400, { error: 'path_tidak_sah' });
+      return true;
+    }
     let content = String(params.content || '');
     if (!/^[A-Za-z0-9+/=\r\n]+$/.test(content)) content = Buffer.from(content).toString('base64');
-    const url = 'https://api.github.com/repos/' + encodeURIComponent(params.owner || '') + '/' + encodeURIComponent(params.repo || '') + '/contents/' + String(params.path || '').split('/').map(encodeURIComponent).join('/');
+    const url = 'https://api.github.com/repos/' + encodeURIComponent(params.owner || '') + '/' + encodeURIComponent(params.repo || '') + '/contents/' + safePath;
     const upstream = await fetch(url, {
       method: 'PUT',
       headers,
       body: JSON.stringify({
         message: params.message || 'Perubahan dari Rategoan',
         content: content.replace(/\s/g, ''),
-        branch: params.branch,
+        branch: params.branch ? cleanGitBranch(params.branch) : undefined,
         sha: params.sha,
       }),
     });

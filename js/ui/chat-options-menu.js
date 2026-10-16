@@ -8,6 +8,7 @@ import { drawer } from './drawer.js';
 import { printReport } from '../../shared/report-export.js';
 import { toast } from '../core/toast.js';
 import { composer } from '../chat/composer.js';
+import { cowork, escapeCoworkHtml } from './cowork.js';
 import { haptics } from '../../shared/haptics.js';
 
 function session() {
@@ -47,7 +48,7 @@ export function mountChatOptions() {
   const menu = document.createElement('div');
   menu.id = 'chat-options-menu';
   menu.hidden = true;
-  menu.innerHTML = '<button type="button" data-act="search">Cari di obrolan</button><button type="button" data-act="share">Salin Obrolan</button><button type="button" data-act="md">Ekspor Markdown</button><button type="button" data-act="pdf">Ekspor siap cetak</button><button type="button" data-act="clear">Bersihkan percakapan</button>';
+  menu.innerHTML = '<button type="button" data-act="search">Cari di obrolan</button><button type="button" data-act="cowork">Buka Kanvas Naskah</button><button type="button" data-act="share">Salin Obrolan</button><button type="button" data-act="md">Ekspor Markdown</button><button type="button" data-act="pdf">Ekspor siap cetak</button><button type="button" data-act="clear">Bersihkan percakapan</button>';
   btn.parentElement.appendChild(menu);
   const close = () => { menu.hidden = true; };
   btn.onclick = (event) => {
@@ -62,7 +63,17 @@ export function mountChatOptions() {
     close();
     const s = session();
     if (act === 'search') chatsearch.toggle();
-    else if (act === 'share') {
+    else if (act === 'cowork') {
+      const msgs = (s && s.messages) || [];
+      let lastAi = '';
+      for (let i = msgs.length - 1; i >= 0; i -= 1) {
+        if (msgs[i] && msgs[i].role !== 'user' && msgs[i].text) {
+          lastAi = String(msgs[i].text);
+          break;
+        }
+      }
+      cowork.open(lastAi || (msgs.length ? markdownOf(s) : null));
+    } else if (act === 'share') {
       const text = markdownOf(s);
       if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => toast.show('Obrolan disalin'));
       else toast.show('Tidak bisa menyalin');
@@ -73,7 +84,7 @@ export function mountChatOptions() {
       a.download = 'obrolan.md';
       a.click();
     } else if (act === 'pdf') {
-      printReport({ title: 'Obrolan', body: '<pre>' + markdownOf(s).replace(/</g, '') + '</pre>' });
+      printReport({ title: 'Obrolan', body: '<pre>' + escapeCoworkHtml(markdownOf(s)) + '</pre>' });
     } else if (act === 'clear' && s) {
       if (composer && typeof composer.resetForNewChat === 'function') {
         composer.resetForNewChat();

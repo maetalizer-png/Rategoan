@@ -7,7 +7,7 @@ let activeSync = null;
 
 function closeActiveSync() {
   if (activeSync && typeof activeSync.close === 'function') {
-    try { activeSync.close(); } catch (e) { /* gagang buruk */ }
+    try { activeSync.close(); } catch (e) { void e; }
   }
   activeSync = null;
   sessionPromise = null;
@@ -19,7 +19,7 @@ function session() {
       const sync = await openSyncWeight('raget-neural-1.5b.safetensors');
       if (!safetensorsHeaderOk(sync) || !safetensorsPayloadOk(sync)) {
         if (sync && typeof sync.close === 'function') {
-          try { sync.close(); } catch (e) { /* gagang buruk */ }
+          try { sync.close(); } catch (e) { void e; }
         }
         throw new Error('header safetensors rusak');
       }

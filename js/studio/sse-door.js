@@ -10,7 +10,7 @@ export function parseSseBlock(block) {
     else if (line.startsWith('data:')) data.push(line.slice(5).trim());
   });
   let payload = data.join('\n');
-  try { payload = JSON.parse(payload); } catch (e) { /* teks biasa tetap sah */ }
+  try { payload = JSON.parse(payload); } catch (e) { void e; }
   return { event, payload };
 }
 

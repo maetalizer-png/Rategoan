@@ -238,13 +238,13 @@ async function aesKey() {
   try {
     const existing = await readCryptoKey();
     if (existing && existing.extractable === false) return existing;
-  } catch (e) { /* kunci turunan dipakai di bawah */ }
+  } catch (e) { void e; }
   try {
     const cryptoImpl = await getWebCrypto();
     const key = await cryptoImpl.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
     await writeCryptoKey(key);
-    try { await idbGateway.setList('connector-aes', []); } catch (err) { /* brankas lama dikosongkan */ }
-    try { memoryBox().removeItem(KEYID); } catch (err) { /* tidak ada localStorage */ }
+    try { await idbGateway.setList('connector-aes', []); } catch (err) { void err; }
+    try { memoryBox().removeItem(KEYID); } catch (err) { void err; }
     return key;
   } catch (e) {
     return deriveVaultKey();

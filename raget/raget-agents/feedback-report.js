@@ -1,9 +1,3 @@
-// PRD-RAGET-TEMPLATE.md Fase 1.1/1.3: agregasi murni (tanpa DOM/Playwright)
-// dari entri unmatched (raget-database/raget-db.js#allUnmatched()) jadi daftar
-// kata kunci/pertanyaan paling sering gagal. Dipakai DUA tempat sekaligus
-// supaya logikanya tidak dobel: raget-tools/report-unmatched.mjs (skrip
-// laporan dev, Node) dan js/sheets/data-health-sheet.js (panel di app,
-// browser) - keduanya cuma beda cara MEMBACA entrinya, bukan cara MENGOLAHNYA.
 import { scorer } from './scorer.js';
 
 function normalizeQuery(q) {

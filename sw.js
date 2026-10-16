@@ -2,13 +2,8 @@
 const CDN_PACKAGE_CACHE = 'raget-cdn-packages-v1';
 const CDN_PACKAGE_ORIGINS = [
   'https://cdn.jsdelivr.net',
-  // huggingface.co menyajikan seluruh checkpoint neural (ringan, berat,
-  // super). Sekali diunduh, disajikan dari cache ini sampai versi cache
-  // di atas dinaikkan.
   'https://huggingface.co',
 ];
-// Shell aplikasi sendiri (index.html/js/css) - tanpa ini, app tidak
-// benar-benar bisa dibuka offline walau CDN package sudah di-cache.
 const APP_SHELL_CACHE = 'raget-app-shell-v19';
 const DATA_CACHE = 'raget-knowledge-json-v1';
 
@@ -35,7 +30,7 @@ self.addEventListener('install', (e) => {
       './js/studio/studio-app.js',
       './js/studio/studio-agent.js',
       './js/studio/vfs.js',
-    ].map((url) => cache.add(url).catch(() => {}))))
+    ].map((url) => cache.add(new Request(url, { cache: 'reload' })).catch(() => {}))))
   );
   self.skipWaiting();
 });
@@ -83,11 +78,8 @@ self.addEventListener('fetch', (e) => {
   }
 
   if (e.request.method !== 'GET' || new URL(url).origin !== self.location.origin) return;
-  // Shell aplikasi sendiri: network-first (supaya selalu dapat versi
-  // terbaru saat online) dengan cache ditulis ulang tiap sukses, jatuh
-  // ke cache (atau index.html untuk navigasi) kalau offline.
   e.respondWith(
-    fetch(e.request)
+    fetch(e.request, { cache: 'no-cache' })
       .then((res) => {
         if (res && res.ok) {
           const copy = res.clone();

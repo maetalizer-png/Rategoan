@@ -1,30 +1,3 @@
-// Kontrak "SATU KONTRAK, DUA OTAK RATEGOAN" (lihat docs/ARSITEKTUR.md).
-// Setiap otak AI - mesin lokal yang sudah jalan, neural yang
-// sudah dilatih dan aktif (meski belum koheren), dan otak baru apa pun
-// di masa depan - HARUS diekspos lewat bentuk objek yang SAMA PERSIS,
-// supaya raget-agents/engine-router.js bisa mencoba salah satu tanpa
-// tahu apa pun soal isinya, dan supaya menghidupkan/mematikan satu
-// lapis cukup mengubah ADAPTERS di router, bukan membongkar kode otak itu
-// sendiri:
-//
-//   {
-//     id: string,        // slug stabil dipakai router & preferensi UI ('template' | 'neural')
-//     label: string,      // nama tampil manusia ('Raget Template')
-//     async init(),        // siapkan resource (mis. load checkpoint) - idempotent, aman dipanggil berkali-kali
-//     async ask(prompt, context), // context = { messages, ... }; LEMPAR Error kalau gagal - JANGAN diam-diam
-//                                 // mengembalikan null/teks kosong, supaya router tahu harus fallback
-//     status(),            // SYNC (bukan async), minimal { ready: boolean, reason: string }
-//   }
-//
-// Contoh minimal:
-//
-//   export const contohAdapter = Object.freeze({
-//     id: 'contoh',
-//     label: 'Contoh Adapter',
-//     async init() { return true; },
-//     async ask(prompt, context) { return 'balasan untuk: ' + prompt; },
-//     status() { return { ready: true, reason: 'selalu siap' }; },
-//   });
 
 const REQUIRED_KEYS = ['id', 'label', 'init', 'ask', 'status'];
 

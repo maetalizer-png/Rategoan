@@ -7,13 +7,22 @@ const KEY = 'cowork_canvas';
 let openFlag = false;
 let pendingEdit = false;
 
+export function escapeCoworkHtml(raw) {
+  return String(raw == null ? '' : raw)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function editor() {
   return $('cowork-editor');
 }
 
 function textOf() {
   const node = editor();
-  return node ? node.innerText : '';
+  return node ? (node.innerText || node.textContent || '') : '';
 }
 
 function save() {
@@ -115,15 +124,20 @@ export const cowork = {
     if (pdf) pdf.onclick = () => {
       const frame = document.createElement('iframe');
       frame.setAttribute('title', 'Cetak kanvas');
+      frame.setAttribute('sandbox', 'allow-modals');
       frame.style.position = 'fixed';
       frame.style.left = '-9999px';
       document.body.appendChild(frame);
       const doc = frame.contentDocument;
-      doc.open();
-      doc.write('<pre style="font:16px/1.5 sans-serif;white-space:pre-wrap">' + textOf().replace(/[&<>]/g, (c) => ({ '&': '&', '<': '<', '>': '>' }[c])) + '</pre>');
-      doc.close();
-      frame.contentWindow.focus();
-      frame.contentWindow.print();
+      if (doc) {
+        doc.open();
+        doc.write('<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\';"><pre style="font:16px/1.5 sans-serif;white-space:pre-wrap">' + escapeCoworkHtml(textOf()) + '</pre>');
+        doc.close();
+      }
+      if (frame.contentWindow) {
+        frame.contentWindow.focus();
+        frame.contentWindow.print();
+      }
       setTimeout(() => frame.remove(), 1000);
     };
     const fix = $('cowork-fix');

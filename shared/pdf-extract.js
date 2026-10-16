@@ -146,9 +146,7 @@ async function decompressFlate(slice) {
         }
         return new TextDecoder('latin1').decode(merged);
       }
-    } catch (e) {
-      /* coba format berikutnya */
-    }
+    } catch (e) { void e; }
   }
   return null;
 }

@@ -166,7 +166,7 @@ function readSlice(reader, idleMs) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       reject(new Error('stream timeout'));
-      try { reader.cancel(); } catch (e) { /* pembaca sudah lepas */ }
+      try { reader.cancel(); } catch (e) { void e; }
     }, idleMs);
     reader.read().then((value) => {
       clearTimeout(timer);
@@ -183,7 +183,7 @@ async function readResponseBytes(res, expect, onBytes, idleMs, signal) {
   if (body && typeof body.getReader === 'function') {
     const reader = body.getReader();
     const stop = () => {
-      try { reader.cancel(); } catch (e) { /* pembaca sudah lepas */ }
+      try { reader.cancel(); } catch (e) { void e; }
     };
     if (signal) {
       if (signal.aborted) {
@@ -211,7 +211,7 @@ async function readResponseBytes(res, expect, onBytes, idleMs, signal) {
       }
     } finally {
       if (signal) signal.removeEventListener('abort', stop);
-      try { reader.releaseLock(); } catch (e) { /* kunci sudah lepas */ }
+      try { reader.releaseLock(); } catch (e) { void e; }
     }
     if (got !== expect) throw new Error('potongan pendek ' + got + '/' + expect);
     return direct || joinParts(parts, got);
@@ -265,7 +265,7 @@ export async function downloadConcurrentChunks(options) {
   const netAbort = new AbortController();
   if (control && typeof control === 'object') {
     control.abortNetwork = () => {
-      try { netAbort.abort(); } catch (e) { /* sudah batal */ }
+      try { netAbort.abort(); } catch (e) { void e; }
     };
   }
   const onProgress = options && options.onProgress;
@@ -479,7 +479,7 @@ export async function downloadConcurrentChunks(options) {
       if (digest) {
         localStorage.setItem(hashKey, hashesCache.join(','));
       }
-    } catch (e) { /* penyimpanan tidak ada */ }
+    } catch (e) { void e; }
   }
 
   function report(index, seal) {
@@ -646,7 +646,7 @@ export async function downloadConcurrentChunks(options) {
       while (control.paused && !control.cancelled && !stopError) await wait(40);
       if (stopError) return;
       if (control.cancelled) {
-        try { netAbort.abort(); } catch (e) { /* sudah batal */ }
+        try { netAbort.abort(); } catch (e) { void e; }
         stopError = new Error('dibatalkan');
         return;
       }
@@ -689,7 +689,7 @@ export async function downloadConcurrentChunks(options) {
         }
       });
     } finally {
-      try { port.terminate(); } catch (e) { /* worker sudah tutup */ }
+      try { port.terminate(); } catch (e) { void e; }
       opfsPort = null;
     }
   }

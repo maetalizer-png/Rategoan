@@ -87,10 +87,21 @@ export function filterPolicyAudit(query, severity) {
   });
 }
 
+export function safeCsvCell(val) {
+  const clean = String(val == null ? '' : val).replace(/[\r\n,]+/g, ' ').trim();
+  if (/^[=+\-@\t\r]/.test(clean)) return "'" + clean;
+  return clean;
+}
+
 export function exportPolicyAudit(format) {
   const rows = readPolicyAudit();
   if (String(format || 'json').toLowerCase() === 'csv') {
-    return 'name,status,severity,level\n' + rows.map((row) => [row.name, row.status, row.severity, row.level].join(',')).join('\n');
+    return 'name,status,severity,level\n' + rows.map((row) => [
+      safeCsvCell(row.name),
+      safeCsvCell(row.status),
+      safeCsvCell(row.severity),
+      safeCsvCell(row.level),
+    ].join(',')).join('\n');
   }
   return JSON.stringify(rows);
 }

@@ -831,7 +831,7 @@ export const composer = {
             refreshLiveThoughts();
           }
         }
-      } catch (e) { /* offline */ }
+      } catch (e) { void e; }
     }
     const localProd = resolveLocalProductivityTool(text);
     if (localProd) {
@@ -840,7 +840,7 @@ export const composer = {
         if (prodOut && prodOut.ok && prodOut.data) {
           webNote = [webNote, 'Data alat lokal (' + localProd.name + '): ' + JSON.stringify(prodOut.data).slice(0, 800)].filter(Boolean).join('\n');
         }
-      } catch (e) { /* lanjut ke mesin utama */ }
+      } catch (e) { void e; }
     }
     const autoConn = directReply == null ? resolveAutonomousConnector(text) : null;
     if (autoConn) {
@@ -855,7 +855,7 @@ export const composer = {
             webNote = [webNote, 'Cadangan Brankas Lokal: ' + JSON.stringify(fallbackVault.data.hits).slice(0, 900)].filter(Boolean).join('\n');
           }
         }
-      } catch (e) { /* konektor offline */ }
+      } catch (e) { void e; }
     }
     const modelPrefix = [imageNote ? GUARDRAIL : '', skillNote, flashNote, prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
     if ((store.get() && store.get().currentId) !== sendSessionId) {
@@ -903,7 +903,7 @@ export const composer = {
           link.target = '_blank';
           link.rel = 'noopener noreferrer';
           let hostLabel = src.title;
-          try { hostLabel = new URL(src.url).hostname.replace(/^www\./, '') + ' · ' + src.title; } catch (e) { /* ignore */ }
+          try { hostLabel = new URL(src.url).hostname.replace(/^www\./, '') + ' · ' + src.title; } catch (e) { void e; }
           link.textContent = hostLabel.slice(0, 48);
           strip.appendChild(link);
         });

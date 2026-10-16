@@ -194,9 +194,9 @@
 }
 .coll-filters, #artifact-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
-  white-space: nowrap;
+  max-width: 100%;
   padding-bottom: 8px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -354,7 +354,7 @@
   padding: 2px 10px;
   font-weight: 600;
 }
-.project-templates { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 8px; white-space: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.project-templates { display: flex; flex-wrap: wrap; max-width: 100%; gap: 8px; padding-bottom: 4px; }
 .project-templates button { flex: 0 0 auto; white-space: nowrap; }
 .project-create-row { display: flex; gap: 8px; align-items: center; margin: 8px 0 12px; }
 .project-create-row input { flex: 1; min-width: 0; }

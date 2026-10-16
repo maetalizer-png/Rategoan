@@ -20,7 +20,7 @@ export function setPersona(id) {
   const next = PERSONAS.some((row) => row.id === id) ? id : 'umum';
   try {
     if (globalThis.sessionStorage) sessionStorage.setItem(KEY, next);
-  } catch (e) { /* penyimpanan ditolak */ }
+  } catch (e) { void e; }
   return next;
 }
 

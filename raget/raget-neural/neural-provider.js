@@ -124,7 +124,7 @@ function cancelWeights() {
   control.cancelled = true;
   control.paused = false;
   earlyFlag = false;
-  try { if (typeof localStorage !== 'undefined') localStorage.removeItem(ACTIVE_DL_KEY); } catch (e) { /* abaikan */ }
+  try { if (typeof localStorage !== 'undefined') localStorage.removeItem(ACTIVE_DL_KEY); } catch (e) { void e; }
   if (typeof control.abortNetwork === 'function') control.abortNetwork();
 }
 
@@ -142,9 +142,7 @@ function sealInstalled(parts) {
     localStorage.setItem(INSTALL_KEY, 'true');
     localStorage.setItem(PARTS_KEY, String(parts || 250));
     localStorage.removeItem(ACTIVE_DL_KEY);
-  } catch (e) {
-    /* penyimpanan pribadi ditolak */
-  }
+  } catch (e) { void e; }
 }
 
 function payloadTrusted(file) {
@@ -176,14 +174,14 @@ async function quarantineCorrupt() {
         if (k && k.indexOf('rategoan_chunks_hashes:') === 0) localStorage.removeItem(k);
       }
     }
-  } catch (e) { /* penyimpanan ditolak */ }
+  } catch (e) { void e; }
   try {
     const nav = globalThis.navigator;
     if (nav && nav.storage && typeof nav.storage.getDirectory === 'function') {
       const root = await nav.storage.getDirectory();
       if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
     }
-  } catch (e) { /* berkas sudah tidak ada */ }
+  } catch (e) { void e; }
   weightReader = null;
   loadedTier = null;
   earlyFlag = false;
@@ -351,7 +349,7 @@ function haltInference() {
   const jobs = Array.from(activeWorkerJobs);
   activeWorkerJobs.clear();
   jobs.forEach((fn) => {
-    try { fn(null); } catch (e) { /* sudah selesai */ }
+    try { fn(null); } catch (e) { void e; }
   });
   if (worker) {
     worker.terminate();
@@ -575,7 +573,7 @@ async function generateWithTier(tier, prompt, options) {
     try {
       const packed = await pullLora(lora.id);
       if (packed) lora = packed;
-    } catch (e) { /* adapter di memori tetap dipakai */ }
+    } catch (e) { void e; }
   }
   const genOpts = {
     maxNewTokens: mode === 'mendalam' ? hudBudget() : 32,
@@ -753,7 +751,7 @@ async function resumeProgress() {
 function loadWeights() {
   control.cancelled = false;
   control.paused = false;
-  try { if (typeof localStorage !== 'undefined' && !installedFlag()) localStorage.setItem(ACTIVE_DL_KEY, '1'); } catch (e) { /* abaikan */ }
+  try { if (typeof localStorage !== 'undefined' && !installedFlag()) localStorage.setItem(ACTIVE_DL_KEY, '1'); } catch (e) { void e; }
   return ensureTier('tier_1_5b');
 }
 

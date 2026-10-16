@@ -1,11 +1,16 @@
-function esc(value) {
-  return String(value || '').replace(/[&<>"]/g, (ch) => ({ '&': '&', '<': '<', '>': '>', '"': '"' }[ch]));
+export function escapeSvgText(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 export function buildDiagramSvg(spec) {
   const nodes = (spec && spec.nodes) || [];
   const edges = (spec && spec.edges) || [];
-  const type = spec && spec.type || 'flowchart';
+  const type = (spec && spec.type) || 'flowchart';
   const w = 720;
   const h = Math.max(220, 80 + nodes.length * 72);
   let body = '';
@@ -21,14 +26,14 @@ export function buildDiagramSvg(spec) {
     } else {
       body += '<rect x="' + x + '" y="' + y + '" width="140" height="40" fill="#fff" stroke="#184e9e"/>';
     }
-    body += '<text x="' + (x + 70) + '" y="' + (y + 24) + '" text-anchor="middle" font-size="13" fill="#111">' + esc(node.label || node.id) + '</text>';
+    body += '<text x="' + (x + 70) + '" y="' + (y + 24) + '" text-anchor="middle" font-size="13" fill="#111">' + escapeSvgText(node.label || node.id) + '</text>';
   });
   edges.forEach((edge) => {
     const a = pos[edge.from];
     const b = pos[edge.to];
     if (!a || !b) return;
     body += '<line x1="' + (a.x + 140) + '" y1="' + (a.y + 20) + '" x2="' + b.x + '" y2="' + (b.y + 20) + '" stroke="#5c6570"/>';
-    if (edge.label) body += '<text x="' + ((a.x + b.x) / 2 + 70) + '" y="' + ((a.y + b.y) / 2 + 16) + '" font-size="11" fill="#5c6570">' + esc(edge.label) + '</text>';
+    if (edge.label) body += '<text x="' + ((a.x + b.x) / 2 + 70) + '" y="' + ((a.y + b.y) / 2 + 16) + '" font-size="11" fill="#5c6570">' + escapeSvgText(edge.label) + '</text>';
   });
   return '<svg xmlns="http://www.w3.org/2000/svg" class="rategoan-diagram" viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="100%">' + body + '</svg>';
 }

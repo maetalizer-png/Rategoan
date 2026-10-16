@@ -9,19 +9,10 @@ const SUPERLATIF_DESC_RE = /terbesar|terbanyak|terluas|terpadat/i;
 const PALING_KE_TER = { besar: 'terbesar', banyak: 'terbanyak', luas: 'terluas', kecil: 'terkecil', sempit: 'tersempit', padat: 'terpadat' };
 
 async function trySuperlatif(text) {
-  // Field eksplisit ("negara dengan populasi terbanyak") ATAU tanpa field
-  // ("negara terkecil di dunia") - yang kedua ini secara umum berarti luas
-  // wilayah, bukan populasi (begitu juga cara orang biasa nanya trivia ini).
   let m = text.match(/negara\s+(?:dengan\s+)?(?:(populasi|penduduk|luas|wilayah)\s+)?(terbesar|terbanyak|terluas|terkecil|tersempit|terpadat)\b/i);
   let fieldWord = m ? m[1] : null;
   let descWord = m ? m[2].toLowerCase() : null;
   if (!m) {
-    // Bentuk periphrastic "paling X" ("negara mana yang penduduknya paling
-    // banyak", "negara dengan populasi paling padat") - sama maknanya
-    // dengan sufiks "-ter" di atas, cuma beda gaya bahasa. "\s*nya" (bukan
-    // cuma "nya") karena splitPossessiveSuffix() di bridgeResolve sudah
-    // menyisipkan spasi sebelum "nya" ("penduduknya" -> "penduduk nya")
-    // sebelum text ini sampai ke sini (lihat bridge-extras.js extras()).
     const mp = text.match(/negara\s+(?:mana\s+)?(?:yang\s+)?(?:dengan\s+)?(populasi|penduduk|luas|wilayah)?(?:\s*nya)?\s+paling\s+(besar|banyak|luas|kecil|sempit|padat)\b/i);
     if (!mp) return null;
     fieldWord = mp[1];

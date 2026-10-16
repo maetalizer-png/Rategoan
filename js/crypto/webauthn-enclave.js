@@ -9,7 +9,7 @@ export async function enrollBiometric() {
   try {
     const uCrypto = getUniversalCryptoSync();
     if (uCrypto && uCrypto.getRandomValues) uCrypto.getRandomValues(challenge);
-  } catch (e) { /* tantangan tetap acak nol bila crypto tidak ada */ }
+  } catch (e) { void e; }
   try {
     const cred = await nav.credentials.create({
       publicKey: {

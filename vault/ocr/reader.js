@@ -77,7 +77,7 @@ function analyzeImageCanvas(file) {
             if (Array.isArray(blocks) && blocks.length) {
               nativeOcrLines = blocks.map((b) => String(b.rawValue || '').trim()).filter(Boolean);
             }
-          } catch (e) { /* lanjut ke analisis kanvas */ }
+          } catch (e) { void e; }
         }
         const sampleW = Math.min(360, origW);
         const sampleH = Math.max(1, Math.round((origH / origW) * sampleW));
@@ -221,7 +221,7 @@ async function recognize(file) {
       const result = await window.Tesseract.recognize(file, 'eng+ind');
       tesseractText = String((result && result.data && result.data.text) || '').trim();
     }
-  } catch (e) { /* lanjut ke mesin visi kanvas lokal */ }
+  } catch (e) { void e; }
 
   try {
     let embedded = [];

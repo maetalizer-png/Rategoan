@@ -119,7 +119,7 @@ export function passAt1(tasks) {
   rows.forEach((task) => {
     try {
       if (task.test(task.solution)) pass += 1;
-    } catch (err) { /* tugas lokal gagal tetap dihitung nol */ }
+    } catch (err) { void err; }
   });
   return { n: rows.length, pass, score: rows.length ? pass / rows.length : 0, offline: true, weights: false };
 }

@@ -137,7 +137,7 @@ function writeArts(list) {
   } catch (err) {
     try {
       localStorage.setItem(ART_KEY, JSON.stringify(kept.slice(0, 8).map((a) => ({ title: a.title, fileName: a.fileName, type: a.type, time: a.time }))));
-    } catch (again) { /* kuota penuh, salinan penuh ada di IndexedDB */ }
+    } catch (again) { void again; }
   }
 }
 

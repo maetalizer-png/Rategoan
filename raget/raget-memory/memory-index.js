@@ -60,13 +60,6 @@ async function search(query, limit) {
   knowledge.faq.forEach((item) => corpus.push({ type: 'faq', text: (item.q || '') + ' — ' + (item.a || '') }));
   knowledge.umum.forEach((item) => corpus.push({ type: 'umum', text: (item.title ? item.title + '. ' : '') + (item.text || '') }));
 
-  // Toggle "Memori" (js/state/memory-preference.js) - kalau dimatikan
-  // pengguna, fakta pribadi yang sudah tersimpan (nama, kota, dst) tidak
-  // boleh nongol lewat jalur pencarian umum ini juga, bukan cuma lewat
-  // recallFromMemory() di agent.js. Tanpa guard ini, toggle OFF gagal
-  // menyembunyikan fakta lama karena planFallback tetap ketemu fakta itu
-  // via corpus retrieval biasa (skor cocok kata kunci), bukan recall
-  // eksplisit - persis lubang yang ditemukan sewaktu verifikasi fitur ini.
   if (memoryPreference.get()) {
     const facts = memoryLong.allFacts();
     Object.keys(facts).forEach((key) => corpus.push({ type: 'fact', text: key + ': ' + facts[key] }));

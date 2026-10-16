@@ -165,7 +165,7 @@ export const history = {
         open = next;
         panel.hidden = !open;
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        try { localStorage.setItem('rategoan_hist_open', open ? '1' : '0'); } catch (err) { /* perangkat menolak penyimpanan */ }
+        try { localStorage.setItem('rategoan_hist_open', open ? '1' : '0'); } catch (err) { void err; }
       };
       paint(open);
       toggle.addEventListener('click', () => paint(!open));

@@ -127,9 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } catch (e) { console.warn('[Rategoan Fallback]', e); }
   if (window.visualViewport) {
+    let maxViewportHeight = Math.max(window.innerHeight || 0, window.visualViewport.height || 0);
     const setVvh = () => {
-      document.documentElement.style.setProperty('--vvh', window.visualViewport.height + 'px');
-      document.documentElement.style.setProperty('--vv-top', window.visualViewport.offsetTop + 'px');
+      const h = window.visualViewport.height;
+      if (h > maxViewportHeight) maxViewportHeight = h;
+      document.documentElement.style.setProperty('--vvh', h + 'px');
+      document.documentElement.style.setProperty('--vv-top', (window.visualViewport.offsetTop || 0) + 'px');
     };
     setVvh();
     let kbOpen = false;
@@ -137,11 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const syncKeyboard = () => {
       const vv = window.visualViewport;
       setVvh();
-      const overlap = Math.max(0, Math.round(window.innerHeight - vv.height - (vv.offsetTop || 0)));
-      if (!kbOpen && overlap > 140) kbOpen = true;
+      const layoutDiff = Math.max(0, Math.round(window.innerHeight - vv.height - (vv.offsetTop || 0)));
+      const shrinkDiff = Math.max(0, Math.round(maxViewportHeight - vv.height));
+      const overlap = Math.max(layoutDiff, shrinkDiff);
+      if (!kbOpen && overlap > 120) kbOpen = true;
       else if (kbOpen && overlap < 70) kbOpen = false;
       document.body.classList.toggle('keyboard-open', kbOpen);
-      document.documentElement.style.setProperty('--keyboard-offset', (kbOpen ? overlap : 0) + 'px');
+      document.documentElement.style.setProperty('--keyboard-offset', (kbOpen ? layoutDiff : 0) + 'px');
       if (kbOpen && !scrolldown.userLocked && !scrolldown.isFar()) {
         clearTimeout(vvTimer);
         vvTimer = setTimeout(() => {
@@ -164,7 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
     requestIdleCallback(() => { probeGpu().catch(() => {}); watchStorage(); }, { timeout: 4000 });
   } else {
     setTimeout(warmup, 1500);
-    setTimeout(() => { probeGpu().catch(() => {}); watchStorage(); }, 2000);
+    setTimeout(
+      () => { probeGpu().catch(() => {}); watchStorage(); },
+      2000
+    );
   }
   import('../raget/raget-neural/neural-provider.js').then((mod) => {
     const neural = mod.neuralProvider;

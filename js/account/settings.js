@@ -387,13 +387,13 @@ export const settings = {
             const k = localStorage.key(i);
             if (k && (k.indexOf('rategoan_chunks_mask:') === 0 || k.indexOf('rategoan_chunks_hashes:') === 0)) localStorage.removeItem(k);
           }
-        } catch (e) { /* penyimpanan ditolak */ }
+        } catch (e) { void e; }
         try {
           if (navigator.storage && typeof navigator.storage.getDirectory === 'function') {
             const root = await navigator.storage.getDirectory();
             if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
           }
-        } catch (e) { /* berkas sudah tidak ada */ }
+        } catch (e) { void e; }
         toast.show('Bobot dihapus dari perangkat');
         paintHub();
         return;
@@ -724,12 +724,12 @@ export const settings = {
           const root = await navigator.storage.getDirectory();
           if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
         }
-      } catch (e) { /* berkas sudah tidak ada */ }
+      } catch (e) { void e; }
       if (typeof caches !== 'undefined' && caches.keys) {
         try {
           const keys = await caches.keys();
           await Promise.all(keys.map((k) => caches.delete(k)));
-        } catch (e) { /* cache tertutup */ }
+        } catch (e) { void e; }
       }
       await Promise.all(['raget_idb', 'raget_folder', 'rategoan_db'].map((name) => new Promise((resolve) => {
         const req = indexedDB.deleteDatabase(name);
@@ -772,13 +772,13 @@ export const settings = {
           const k = localStorage.key(i);
           if (k && (k.indexOf('rategoan_chunks_mask:') === 0 || k.indexOf('rategoan_chunks_hashes:') === 0)) localStorage.removeItem(k);
         }
-      } catch (e) { /* kosong */ }
+      } catch (e) { void e; }
       try {
         if (navigator.storage && typeof navigator.storage.getDirectory === 'function') {
           const root = await navigator.storage.getDirectory();
           if (root && typeof root.removeEntry === 'function') await root.removeEntry('raget-neural-1.5b.safetensors');
         }
-      } catch (e) { /* berkas sudah tidak ada */ }
+      } catch (e) { void e; }
       toast.show('Cache bobot model dihapus dari perangkat ini.');
     };
     $('row-restore').onclick = () => $('pick-restore').click();
@@ -838,6 +838,6 @@ export function armIncognito(on) {
   try {
     if (on) sessionStorage.setItem('rategoan_incognito', '1');
     else sessionStorage.removeItem('rategoan_incognito');
-  } catch (e) { /* sesi tertutup */ }
+  } catch (e) { void e; }
   return !!on;
 }

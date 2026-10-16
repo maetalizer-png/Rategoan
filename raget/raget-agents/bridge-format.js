@@ -146,11 +146,6 @@ function summarizeItem(item, richness) {
   const count = richness === 'singkat' ? 1 : 3;
   const picked = sentences.slice(0, count);
   if (richness === 'singkat') return picked.join(' ');
-  // Kalimat "Ibu kota: X." / "Populasi: Y jiwa." sering sudah ikut ke-pick
-  // sebagai kalimat biasa (bukan cuma dicek via regex di summary utuh) -
-  // pisahkan dari paragraf prosa dan jadikan bullet, bukan dibiarkan
-  // menyatu jadi satu paragraf tanpa struktur ("mode detail" harus
-  // kelihatan terstruktur, bukan cuma parafrase teks aslinya).
   const prose = picked.filter((s) => !INLINE_KEY_FACT_RE.test(s.trim()));
   const bullets = picked.filter((s) => INLINE_KEY_FACT_RE.test(s.trim())).map((s) => '- ' + s.trim());
   const summary = prose.join(' ');

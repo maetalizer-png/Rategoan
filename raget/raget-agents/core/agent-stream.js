@@ -29,11 +29,6 @@ export async function tryMultiIntent(text, messages, respondCore) {
   return replyA + '\n\n---\n\n' + replyB;
 }
 
-// Sengaja TIDAK menyertakan "apa/siapa/kapan/berapa/ibukota/dimana" dkk atau
-// akhiran "?" polos di sini: lookup fakta singkat (ibukota, populasi, mata
-// uang, bio tokoh) tetap boleh dibuka dengan kalimat kontinuitas emosi -
-// hanya query naratif/panjang (ceritakan/jelaskan/sebutkan/resep/cara bikin)
-// yang terasa janggal kalau diawali basa-basi personal.
 export const FACTUAL_QUERY_RE =
   /\b(jelaskan|ceritakan|sebutkan|rekomendasi|kurs|resep)\b|\bcara\s+(bikin|buat|membuat)\b/i;
 

@@ -117,7 +117,7 @@ export const voice = {
       const vad = await mountEnergyVad(ctx);
       if (!vad.ok || !vad.node) {
         stream.getTracks().forEach((track) => track.stop());
-        try { ctx.close(); } catch (e) { /* konteks ditolak */ }
+        try { ctx.close(); } catch (e) { void e; }
         return;
       }
       const mute = ctx.createGain();
@@ -129,8 +129,8 @@ export const voice = {
         const data = event.data || {};
         if (data.voice !== false || Number(data.duration) < 600) return;
         stream.getTracks().forEach((track) => track.stop());
-        try { ctx.close(); } catch (e) { /* konteks sudah tutup */ }
-        try { this.rec && this.rec.stop(); } catch (e) { /* pengenal sudah berhenti */ }
+        try { ctx.close(); } catch (e) { void e; }
+        try { this.rec && this.rec.stop(); } catch (e) { void e; }
       };
     }).catch(() => {});
   },

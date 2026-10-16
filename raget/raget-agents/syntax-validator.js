@@ -1,4 +1,3 @@
-/** QC cuplikan kode sebelum tampil. Setara web-qc.js untuk hasil generate. */
 
 function stripFence(src) {
   const s = String(src || '').trim();

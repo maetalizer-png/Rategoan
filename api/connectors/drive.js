@@ -46,7 +46,12 @@ async function special(tool, params, token, res) {
     return true;
   }
   if (tool.name === 'drive_read_content') {
-    const id = params.file_id || params.id || '';
+    const rawId = params.file_id || params.id || '';
+    const id = cleanDriveId(rawId);
+    if (!rawId || !id) {
+      sendJson(res, 400, { error: 'file_id_wajib' });
+      return true;
+    }
     const meta = await googleGet('https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(id) + '?fields=mimeType,name', token);
     let mime = '';
     try { mime = JSON.parse(meta.text).mimeType || ''; } catch (e) { mime = ''; }
@@ -60,13 +65,14 @@ async function special(tool, params, token, res) {
     return true;
   }
   if (tool.name === 'drive_create_folder') {
+    const parentId = params.parent_id ? cleanDriveId(params.parent_id) : '';
     const upstream = await fetch('https://www.googleapis.com/drive/v3/files', {
       method: 'POST',
       headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
       body: JSON.stringify({
         name: params.name || 'Folder baru',
         mimeType: 'application/vnd.google-apps.folder',
-        parents: params.parent_id ? [params.parent_id] : undefined,
+        parents: parentId ? [parentId] : undefined,
       }),
     });
     res.statusCode = upstream.status;
@@ -75,8 +81,10 @@ async function special(tool, params, token, res) {
     return true;
   }
   if (tool.name === 'drive_move_file') {
-    const id = encodeURIComponent(params.file_id || '');
-    const url = 'https://www.googleapis.com/drive/v3/files/' + id + '?addParents=' + encodeURIComponent(params.add_parents || '') + '&removeParents=' + encodeURIComponent(params.remove_parents || '');
+    const id = encodeURIComponent(cleanDriveId(params.file_id || ''));
+    const addP = params.add_parents ? encodeURIComponent(cleanDriveId(params.add_parents)) : '';
+    const remP = params.remove_parents ? encodeURIComponent(cleanDriveId(params.remove_parents)) : '';
+    const url = 'https://www.googleapis.com/drive/v3/files/' + id + '?addParents=' + addP + '&removeParents=' + remP;
     const upstream = await fetch(url, {
       method: 'PATCH',
       headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },

@@ -7,7 +7,7 @@ import { buildZip } from '../../shared/zip-local.js';
 import { buildChartSvg } from '../../shared/charts-local.js';
 import { buildDiagramSvg } from '../../shared/diagrams-local.js';
 import { translator } from '../../vault/translate/translator.js';
-import { printReport } from '../../shared/report-export.js';
+import { printReport, sanitizeReportBody } from '../../shared/report-export.js';
 import { markdown as markdownView } from '../../shared/markdown.js';
 
 let current = { type: 'slide', title: 'Slide', fileName: 'slide.pptx', outline: [], code: '', lang: 'js', markdown: '' };
@@ -248,7 +248,7 @@ function isolatedFrame(markup) {
   frame.setAttribute('sandbox', 'allow-scripts');
   frame.title = 'Pratinjau terisolasi';
   frame.style.cssText = 'width:100%;min-height:260px;border:0;background:transparent';
-  const safeMarkup = String(markup || '').replace(/<script[\s\S]*?<\/script>/gi, '').replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '');
+  const safeMarkup = sanitizeReportBody(markup);
   frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src data: blob:;"><style>html,body{margin:0;background:transparent}</style>' + safeMarkup;
   return frame;
 }

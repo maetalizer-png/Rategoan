@@ -36,11 +36,6 @@ function stats() {
   return statsOf(read());
 }
 
-// PRD-RAGET-TEMPLATE.md Fase 1.2: events sudah membawa `intent` (dipassing dari
-// js/chat/chat.js lewat pencocokan jawaban ke ragetDb notes), tapi sebelumnya
-// tidak ada apa pun yang mengagregasinya per-intent - cuma angka up/down total
-// tanpa konteks. Ini yang dibaca panel Kesehatan Data (js/sheets/) dan nantinya
-// re-ranking Fase 2 untuk tahu intent MANA yang sering di-dislike.
 function statsByIntent() {
   const data = read();
   const byIntent = new Map();

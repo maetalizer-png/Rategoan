@@ -1,4 +1,3 @@
-/** Ambil cuplikan JS/Python/HTML dari teks. */
 
 const FENCE_RE = /```(\w+)?\s*\n([\s\S]*?)```/g;
 

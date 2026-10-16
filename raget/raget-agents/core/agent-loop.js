@@ -26,13 +26,6 @@ export async function respondCore(messages, prompt) {
   const text = String(prompt || '').trim();
   if (!text) return postProcess('');
 
-  // Dipicu eksplisit lewat tombol "Pencarian Web" di UI (composer.js kirim
-  // prefix "googling ") - langsung ke tool websearch TANPA lewat heuristik
-  // lain (teaching/factoid/tokoh/dst) dulu. Kalau tidak, kalimat seperti
-  // "googling apa itu fisika" bisa salah kena detectTeaching's "X itu Y"
-  // regex duluan (guard-nya cuma cek AWAL kalimat "apa/siapa/dst", dan di
-  // sini kalimat diawali "googling" jadi lolos guard itu) sebelum sempat
-  // ketemu detectTool('websearch') yang letaknya jauh di bawah.
   const earlyToolKind = routerIntent.detectTool(text);
   if (earlyToolKind === 'websearch' || earlyToolKind === 'cuaca_live' || earlyToolKind === 'berita_live') {
     const earlyReply = await runTool(earlyToolKind, text, messages);
@@ -50,11 +43,6 @@ export async function respondCore(messages, prompt) {
     }
   }
 
-  // File dilampirkan lewat tombol "File" di attach sheet cuma berlaku untuk
-  // SATU pesan ini (attach.consume() di composer.js mengosongkannya lagi
-  // setelah terkirim) - jadi cukup cek attach di pesan TERAKHIR. Sama
-  // seperti websearch di atas, ini aksi eksplisit user (pilih file lewat
-  // tombol) jadi harus menang duluan sebelum heuristik lain nyasar.
   const lastMsg = Array.isArray(messages) && messages.length ? messages[messages.length - 1] : null;
   if (lastMsg && lastMsg.attach && lastMsg.attach.fileText) {
     const fileReply = await runTool('file_qa', text, messages);

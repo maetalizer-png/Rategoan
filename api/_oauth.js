@@ -1,7 +1,35 @@
-import { createHash, randomBytes } from 'node:crypto';
+import { createHash, createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
 import { originOf, readCookie, sameOrigin, sendJson, setCookie } from './_http.js';
 
 const COOKIE = 'rg_pkce';
+const FALLBACK_KEY = randomBytes(32).toString('hex');
+
+function pkceSecret() {
+  return process.env.RATEGOAN_PKCE_SECRET || process.env.OAUTH_STATE_SECRET || FALLBACK_KEY;
+}
+
+export function signPkceValue(payload) {
+  const body = Buffer.from(JSON.stringify(payload || {})).toString('base64url');
+  const sig = createHmac('sha256', pkceSecret()).update(body).digest('base64url');
+  return body + '.' + sig;
+}
+
+export function verifyPkceValue(raw) {
+  const text = String(raw || '');
+  const dot = text.indexOf('.');
+  if (dot <= 0) return null;
+  const body = text.slice(0, dot);
+  const sig = text.slice(dot + 1);
+  const expected = createHmac('sha256', pkceSecret()).update(body).digest('base64url');
+  const bufA = Buffer.from(sig, 'utf8');
+  const bufB = Buffer.from(expected, 'utf8');
+  if (bufA.length !== bufB.length || !timingSafeEqual(bufA, bufB)) return null;
+  try {
+    return JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
+  } catch (e) {
+    return null;
+  }
+}
 
 export function pkcePair() {
   const verifier = randomBytes(32).toString('base64url');
@@ -11,13 +39,13 @@ export function pkcePair() {
 }
 
 export function savePkce(res, payload) {
-  setCookie(res, COOKIE, Buffer.from(JSON.stringify(payload)).toString('base64url'));
+  setCookie(res, COOKIE, signPkceValue(payload));
 }
 
 export function loadPkce(req) {
   const raw = readCookie(req, COOKIE);
   if (!raw) return null;
-  try { return JSON.parse(Buffer.from(raw, 'base64url').toString('utf8')); } catch (e) { return null; }
+  return verifyPkceValue(raw);
 }
 
 export function redirectWithToken(res, returnTo, fields) {
@@ -56,5 +84,6 @@ export function beginOrJson(req, res, query, authorizeUrl, payload) {
 
 export function callbackReturn(req, fallbackPath) {
   const pkce = loadPkce(req);
-  return (pkce && pkce.returnTo) || sameOrigin(req, originOf(req) + (fallbackPath || '/'));
+  const candidate = (pkce && pkce.returnTo) || (originOf(req) + (fallbackPath || '/'));
+  return sameOrigin(req, candidate);
 }

@@ -66,14 +66,6 @@ export function ringkas(text) {
 export const FILE_QA_TRIGGER_RE = /^(apa\s+isi|ringkas(kan)?|rangkum(kan)?|jelaskan|ceritakan)\b/i;
 export const FILE_QA_FILLER_RE = /\b(isi|isinya|file|dokumen|ini|itu|nya|dong|dari|tentang|soal)\b/gi;
 
-// Pertanyaan kayak "ringkas isi file ini" atau "apa isi file ini" itu
-// generik (mau ringkasan keseluruhan), beda dari "berapa anggaran
-// pemasaran" yang spesifik. Deteksinya: kalau setelah kata pemicu
-// (ringkas/jelaskan/dst) DAN semua kata pengisi umum (isi/file/ini/dst)
-// dibuang, sisa kalimatnya kosong - berarti tidak ada topik spesifik yang
-// ditanya, jadi anggap generik. Regex lama cuma cocok pola persis
-// "ringkas isi file ini" tanpa variasi urutan kata, gagal buat
-// "ringkas isi file ini" yang justru salah satu contoh paling umum.
 export function isGenericFileQuestion(q) {
   if (!FILE_QA_TRIGGER_RE.test(q)) return false;
   const cleaned = q
@@ -84,13 +76,6 @@ export function isGenericFileQuestion(q) {
   return cleaned.length === 0;
 }
 
-// File yang dilampirkan cuma dibaca ke memori (FileReader) tapi isinya gak
-// pernah dipakai jawab apa pun - lampiran cuma jadi chip nama file doang.
-// Fungsi ini yang menyambungkan: kalau pertanyaannya generik ("apa isi file
-// ini") pakai ringkas() ekstraktif yang sudah ada, kalau spesifik cari
-// paragraf paling cocok lewat overlap kata kunci sederhana (bukan makna
-// semantik - Rategoan gak punya model bahasa buat itu, tapi cukup buat
-// nemuin bagian relevan di file teks biasa).
 export function fileQa(fileText, fileName, question) {
   const text = String(fileText || '').trim();
   const name = fileName || 'file';

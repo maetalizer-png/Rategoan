@@ -190,7 +190,7 @@ export async function dequantInt4(values) {
   try {
     const gpuValues = await dequantBlocksOnGpu(packed);
     if (gpuValues && gpuValues.length === cpu.length) return { device: 'gpu', values: gpuValues, packed: packed };
-  } catch (e) { /* CPU tetap benar bila GPU tidak ada. */ }
+  } catch (e) { void e; }
   return { device: 'cpu', values: cpu, packed: packed };
 }
 
@@ -267,7 +267,7 @@ function dropWaveArena() {
   waveArenaDevice = null;
   list.forEach((slot) => {
     ['packedBuf', 'xBuf', 'scaleBuf', 'zeroBuf', 'yBuf', 'readBuf', 'dimBuf'].forEach((key) => {
-      try { if (slot[key]) slot[key].destroy(); } catch (e) { /* buffer sudah lepas */ }
+      try { if (slot[key]) slot[key].destroy(); } catch (e) { void e; }
     });
   });
 }
@@ -279,7 +279,7 @@ function dropArena() {
   gemvArena = null;
   gemvArenaDevice = null;
   Object.keys(box).forEach((key) => {
-    try { if (box[key] && typeof box[key].destroy === 'function') box[key].destroy(); } catch (e) { /* buffer sudah lepas */ }
+    try { if (box[key] && typeof box[key].destroy === 'function') box[key].destroy(); } catch (e) { void e; }
   });
 }
 
@@ -302,7 +302,7 @@ function ensureWaveSlot(device, index, need) {
   }
   if (prev) {
     ['packedBuf', 'xBuf', 'scaleBuf', 'zeroBuf', 'yBuf', 'readBuf', 'dimBuf'].forEach((key) => {
-      try { if (prev[key]) prev[key].destroy(); } catch (e) { /* lepas */ }
+      try { if (prev[key]) prev[key].destroy(); } catch (e) { void e; }
     });
   }
   const slot = {

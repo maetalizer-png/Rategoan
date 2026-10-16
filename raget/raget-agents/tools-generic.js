@@ -28,10 +28,6 @@ function cleanSnippet(s) {
 
 const SOURCE_NAMES = { wiktionary: 'Wiktionary', wikidata: 'Wikidata', wikipedia: 'Wikipedia' };
 
-// Ekstrak Wikipedia datang sebagai satu paragraf besar tanpa jeda - enak
-// dibaca mesin, tapi jadi tembok teks yang capek dibaca manusia. Pecah tiap
-// ~2 kalimat jadi paragraf sendiri supaya lebih mengalir dan gak monoton,
-// tanpa mengubah kata satu pun dari kontennya.
 function breakIntoParagraphs(text, sentencesPerPara) {
   const sentences = text.split(/(?<=[.!?])\s+(?=[A-Z0-9])/);
   if (sentences.length <= sentencesPerPara) return text;
@@ -42,11 +38,6 @@ function breakIntoParagraphs(text, sentencesPerPara) {
   return paras.join('\n\n');
 }
 
-// Gaya prosa Wikipedia sering nyelipin daftar di dalam satu kalimat panjang
-// (mis. "dibagi menjadi lima era: A, ...; B, ...; C, ...."). Enak buat mesin,
-// tapi jadi baris super panjang yang monoton buat dibaca manusia. Kalau nemu
-// pola "kalimat: item; item; item" dengan minimal 3 item, pecah jadi daftar
-// bullet betulan supaya strukturnya kelihatan, tanpa mengubah kata satu pun.
 const ENUM_SENTENCE_RE = /([^.!?]*:\s*)([^.!?]+(?:;\s*[^.!?]+){2,})([.!?])/;
 
 function extractEnumeration(text) {
@@ -62,9 +53,6 @@ function extractEnumeration(text) {
   };
 }
 
-// Judul artikel sebagai heading markdown + daftar bullet (kalau kalimatnya
-// memang berbentuk enumerasi) ngasih "identitas" visual ke rangkuman -
-// bukan cuma tembok teks rata kiri yang monoton kayak sebelumnya.
 function formatWikipediaExtract(title, extract) {
   const enumResult = extractEnumeration(extract);
   let body;

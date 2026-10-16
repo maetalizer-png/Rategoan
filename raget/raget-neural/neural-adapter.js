@@ -1,4 +1,3 @@
-// Adapter 2/2 — Raget 1.0. Abort hanya dari pengguna, bukan timer 30 detik.
 import { neuralProvider } from './neural-provider.js';
 import { enginePreference } from '../../js/state/engine-preference.js';
 

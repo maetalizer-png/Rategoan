@@ -144,7 +144,7 @@ async function extractArchiveSummary(buf) {
       if (cleaned) {
         textChunks.push('Cuplikan `' + name + '`:\n' + cleaned.slice(0, 1200));
       }
-    } catch (e) { /* skip unsupported compression */ }
+    } catch (e) { void e; }
   }
   return [headerLines.join('\n'), textChunks.join('\n\n')].filter(Boolean).join('\n\n').slice(0, MAX_ATTACH_TEXT_CHARS);
 }
@@ -287,7 +287,7 @@ export const attach = {
             item.ocrNote = 'Visi & OCR siap';
             item.statusLabel = 'Visi & OCR siap';
           }
-        } catch (e) { /* OCR fallback */ }
+        } catch (e) { void e; }
       } else if (meta.kind === 'audio') {
         item.fileText = '[Memo suara / berkas audio terlampir: ' + (f.name || 'audio') + ' (' + meta.sizeLabel + ')]';
         item.statusLabel = 'Audio siap';

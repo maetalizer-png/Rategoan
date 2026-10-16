@@ -19,6 +19,28 @@
 
 .chat-inspiration-grid { display: none; }
 
+@media (max-width: 859px) {
+  body:not(.keyboard-open) #view-chat:has(#messages:empty) .chat-inspiration-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: calc(100% - 28px);
+    max-width: 440px;
+    margin: 0 auto 128px;
+  }
+
+  .chat-insp-card {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--rg-surface);
+    border: 1px solid var(--rg-line);
+    border-radius: 12px;
+    color: var(--rg-text);
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
 .msg {
   max-width: 90%;
   font-size: 16px;

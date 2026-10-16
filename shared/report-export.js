@@ -9,9 +9,9 @@ function escapeReportText(raw) {
 
 export function sanitizeReportBody(raw) {
   return String(raw == null ? '' : raw)
-    .replace(/<(?:script|iframe|object|embed|base|meta|link|form)[\s\S]*?>[\s\S]*?<\/(?:script|iframe|object|embed|base|meta|link|form)>/gi, '')
-    .replace(/<\/?(?:script|iframe|object|embed|base|meta|link|form)\b[^>]*>/gi, '')
-    .replace(/\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+    .replace(/<(?:script|iframe|object|embed|applet|base|meta|link|form)\b[\s\S]*?(?:<\/(?:script|iframe|object|embed|applet|base|meta|link|form)>|$)/gi, '')
+    .replace(/<\/?(?:script|iframe|object|embed|applet|base|meta|link|form)\b[^>]*>/gi, '')
+    .replace(/(?:^|[\s/"'>])on[a-z0-9_-]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, ' ')
     .replace(/(?:href|src|xlink:href|action|formaction)\s*=\s*(['"]?)\s*(?:javascript|vbscript|data\s*:\s*text\/html)[^\s>'"]*\1/gi, 'href="#"');
 }
 

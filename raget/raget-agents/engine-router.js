@@ -1,4 +1,3 @@
-// Jalur chat hanya adapter neural. Tidak ada otak template.
 import { neuralAdapter } from '../raget-neural/neural-adapter.js';
 import { engineContract } from './engine-contract.js';
 
