@@ -97,10 +97,10 @@ export function applyRoPE(vec, heads, dk, pos, invFreq) {
       const sin = Math.sin(angle);
       const i0 = base + (j << 1);
       const i1 = i0 + 1;
-      const v0 = vec[i0];
-      const v1 = vec[i1];
-      vec[i0] = v0 * cos - v1 * sin;
-      vec[i1] = v0 * sin + v1 * cos;
+      const reVal = vec[i0];
+      const imVal = vec[i1];
+      vec[i0] = reVal * cos - imVal * sin;
+      vec[i1] = reVal * sin + imVal * cos;
     }
   }
   return vec;

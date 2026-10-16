@@ -20,7 +20,7 @@ await page.addInitScript(() => {
   try {
     localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
     localStorage.removeItem('rategoan_weights_1_5b_installed');
-  } catch (e) { /* bingkai terkunci */ }
+  } catch (e) { void e; }
 });
 await page.route('**/*', (route) => {
   const url = route.request().url();

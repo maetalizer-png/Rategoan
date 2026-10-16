@@ -22,7 +22,7 @@ async function boot(page, auth) {
       if (signed) localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
       else localStorage.removeItem('rategoan_auth');
       localStorage.removeItem('rategoan_weights_1_5b_installed');
-    } catch (e) { /* bingkai terkunci */ }
+    } catch (e) { void e; }
   }, auth);
   await page.route('**/*', (route) => {
     const url = route.request().url();

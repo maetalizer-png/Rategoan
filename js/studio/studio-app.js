@@ -368,10 +368,20 @@ function paintLivingCanvases() {
   }
 }
 
+function autoGrowStudioInput() {
+  const box = $('chat-input');
+  if (!box) return;
+  box.style.height = 'auto';
+  const nextH = Math.min(box.scrollHeight || 28, 120);
+  box.style.height = box.value ? (nextH + 'px') : 'auto';
+  box.style.overflowY = box.scrollHeight > 120 ? 'auto' : 'hidden';
+}
+
 function syncSend() {
   const box = $('chat-input');
   const btn = $('btn-studio-send');
   if (!box || !btn) return;
+  autoGrowStudioInput();
   btn.classList.toggle('is-ready', box.value.trim().length > 0);
 }
 
@@ -1550,9 +1560,19 @@ function bind() {
   pick('studio-pick-doc', 'Lampiran dokumen');
   const vv = window.visualViewport;
   if (vv) {
+    let maxVvHeight = Math.max(window.innerHeight || 0, vv.height || 0);
+    let kbOpen = false;
     const syncInset = () => {
-      const inset = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-      document.documentElement.style.setProperty('--kb-inset', inset + 'px');
+      if (vv.height > maxVvHeight) maxVvHeight = vv.height;
+      document.documentElement.style.setProperty('--vvh', vv.height + 'px');
+      document.documentElement.style.setProperty('--vv-top', (vv.offsetTop || 0) + 'px');
+      const inset = Math.max(0, window.innerHeight - vv.height - (vv.offsetTop || 0));
+      const shrinkDiff = Math.max(0, Math.round(maxVvHeight - vv.height));
+      const overlap = Math.max(inset, shrinkDiff);
+      if (!kbOpen && overlap > 120) kbOpen = true;
+      else if (kbOpen && overlap < 70) kbOpen = false;
+      document.body.classList.toggle('keyboard-open', kbOpen);
+      document.documentElement.style.setProperty('--kb-inset', (kbOpen ? inset : 0) + 'px');
     };
     vv.addEventListener('resize', syncInset);
     vv.addEventListener('scroll', syncInset);

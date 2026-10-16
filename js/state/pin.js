@@ -45,7 +45,7 @@ export const pin = {
     const iv = crypto.getRandomValues(new Uint8Array(12));
     const key = await this.hold(p, salt, 100000);
     const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, this.bytes('rategoan-pin')));
-    localStorage.setItem(this.KEY, 'v3:' + this.b64(salt) + ':' + this.b64(iv) + ':' + this.b64(cipher));
+    localStorage.setItem(this.KEY, 'kdf100k:' + this.b64(salt) + ':' + this.b64(iv) + ':' + this.b64(cipher));
     await idbGateway.sealAll();
   },
   lockedUntil() {
@@ -66,10 +66,10 @@ export const pin = {
     const until = this.lockedUntil();
     if (until > Date.now()) return false;
     const raw = localStorage.getItem(this.KEY) || '';
-    if (raw.indexOf('v3:') === 0 || raw.indexOf('v2:') === 0) {
+    if (raw.indexOf('kdf100k:') === 0 || raw.indexOf('kdf20k:') === 0) {
       try {
-        const iterations = raw.indexOf('v3:') === 0 ? 100000 : 20000;
-        const parts = raw.slice(3).split(':');
+        const iterations = raw.indexOf('kdf100k:') === 0 ? 100000 : 20000;
+        const parts = raw.slice(raw.indexOf(':') + 1).split(':');
         const salt = this.unb64(parts[0]);
         const key = await this.hold(p, salt, iterations);
         await crypto.subtle.decrypt({ name: 'AES-GCM', iv: this.unb64(parts[1]) }, key, this.unb64(parts[2]));

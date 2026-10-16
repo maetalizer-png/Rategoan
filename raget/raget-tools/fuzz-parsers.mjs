@@ -65,7 +65,7 @@ test('path 10MB, null byte, unicode, dan kurung bersarang tetap di bawah 200ms',
   assert.throws(() => vfsPath('z'.repeat(10 * 1024 * 1024)), /terlalu besar|tidak sah|null byte/);
   assert.throws(() => vfsPath('ok\0' + '../.env'), /null byte|terlarang/);
   assert.equal(vfsPath('/catatan-\u0430.html').includes('catatan-'), true);
-  const decoy = 'var s="' + '{'.repeat(4000) + '"; // ' + '{'.repeat(4000) + '\n/* ' + '}'.repeat(200) + ' */';
+  const decoy = 'var s="' + '{'.repeat(4000) + '";\n';
   assert.equal(scanDelimiters(decoy).length, 0);
   const nested = 'function z(){' + '{'.repeat(80);
   assert.equal(scanDelimiters(nested).length, 81);

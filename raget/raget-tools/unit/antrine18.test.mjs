@@ -14,27 +14,39 @@ import { safeCsvCell, exportPolicyAudit, PolicyEngine } from '../../../js/connec
 const root = new URL('../../../', import.meta.url);
 function read(rel) { return readFileSync(new URL(rel, root), 'utf8'); }
 
-test('DOD-42.01 Floating Composer bebas latar belakang & posisi presisi 6px di atas keyboard (shell.css, studio.css, main.js, sw.js)', () => {
+test('DOD-42.01 Keseragaman 1 Ekosistem Composer & Sheet Lampiran antara Obrolan Utama dan Studio Kode (shell.css, studio.css, studio.html, studio-app.js)', () => {
   const shellCss = read('css/layout/shell.css');
+  const deskCss = read('css/layout/desktop.css');
+  assert.match(deskCss, /#view-settings #profile-head:not\(\[hidden\]\)[\s\S]*?width:\s*fit-content;[\s\S]*?max-width:\s*360px/);
   const studioCss = read('css/ui/studio.css');
+  const studioHtml = read('studio.html');
   const mainJs = read('js/main.js');
+  const studioJs = read('js/studio/studio-app.js');
   const swJs = read('sw.js');
 
-  assert.match(shellCss, /padding:\s*0 12px calc\(6px \+ env\(safe-area-inset-bottom, 0px\)\)/);
-  assert.match(shellCss, /body\.keyboard-open #composer\s*\{\s*padding:\s*0 12px 6px !important;\s*background:\s*transparent !important;/);
-  assert.match(studioCss, /body\.studio-page #composer[\s\S]*?background:\s*transparent !important;/);
+  assert.match(shellCss, /padding:\s*0 12px calc\(14px \+ env\(safe-area-inset-bottom, 0px\)\)/);
+  assert.match(shellCss, /body\.keyboard-open #composer\s*\{\s*padding:\s*0 12px 12px !important;\s*background:\s*transparent !important;/);
+  assert.match(studioCss, /body\.studio-page #composer[\s\S]*?padding:\s*0 12px calc\(14px \+ env\(safe-area-inset-bottom, 0px\)\)/);
+  assert.match(studioCss, /body\.studio-page\.keyboard-open #composer\s*\{\s*padding:\s*0 12px 12px !important;/);
+  assert.match(studioCss, /body\.studio-page \.sheet-dev-connectors[\s\S]*?border-top:\s*none !important;/);
+  assert.match(studioHtml, /<div class="sheet-title">Lampiran<\/div>/);
+  assert.equal(studioHtml.includes('Lampiran & Konektor'), false);
+  assert.match(studioHtml, /<div id="composer-card">\s*<textarea id="chat-input"/);
+  assert.match(studioJs, /function autoGrowStudioInput\(\)/);
   assert.match(mainJs, /maxViewportHeight/);
-  assert.match(mainJs, /const shrinkDiff = Math\.max\(0, Math\.round\(maxViewportHeight - vv\.height\)\)/);
+  assert.match(studioJs, /maxVvHeight/);
   assert.match(swJs, /fetch\(e\.request,\s*\{\s*cache:\s*'no-cache'\s*\}\)/);
 });
 
-test('DOD-42.02 Perbaikan overflow #messages saat #top-download-bar aktif & Grid Pintasan #chat-inspiration responsif di Mobile', () => {
+test('DOD-42.02 Perbaikan overflow #messages saat #top-download-bar aktif & penghapusan gelembung pintasan di mode Mobile', () => {
   const shellCss = read('css/layout/shell.css');
+  const deskCss = read('css/layout/desktop.css');
+  assert.match(deskCss, /#view-settings #profile-head:not\(\[hidden\]\)[\s\S]*?width:\s*fit-content;[\s\S]*?max-width:\s*360px/);
   const msgCss = read('css/chat/messages.css');
 
   assert.match(shellCss, /#messages\s*\{\s*flex:\s*1 1 0%;\s*min-height:\s*0;/);
   assert.match(shellCss, /#view-chat\s*\{\s*position:\s*relative;\s*flex:\s*1 1 0%;/);
-  assert.match(msgCss, /@media \(max-width: 859px\)[\s\S]*?body:not\(\.keyboard-open\) #view-chat:has\(#messages:empty\) \.chat-inspiration-grid/);
+  assert.match(msgCss, /@media \(max-width: 859px\)[\s\S]*?\.chat-inspiration-grid\s*\{\s*display:\s*none !important;/);
 });
 
 test('DOD-42.03 Integrasi tombol Buka Kanvas Naskah (#cowork) di menu tindakan obrolan (#chat-options-menu)', () => {
@@ -103,7 +115,7 @@ test('DOD-42.07 [Keamanan Siber P0 #2 — CWE-79] Penguatan Sanitizer HTML/SVG t
 });
 
 test('DOD-42.08 [Keamanan Siber P0 #3 — CWE-601 & CWE-565] Penandatanganan HMAC-SHA256 Cookie PKCE rg_pkce & validasi sameOrigin pada callbackReturn', () => {
-  const payload = { verifier: 'v123', state: 's456', returnTo: 'https://tegoan.vercel.app/#/connect' };
+  const payload = { verifier: 'kode-uji-pkce', state: 'status-pkce', returnTo: 'https://tegoan.vercel.app/#/connect' };
   const signed = signPkceValue(payload);
   assert.ok(signed.includes('.'));
   const verified = verifyPkceValue(signed);
@@ -115,7 +127,7 @@ test('DOD-42.08 [Keamanan Siber P0 #3 — CWE-601 & CWE-565] Penandatanganan HMA
   const tamperedSig = signed.slice(0, -4) + 'AAAA';
   assert.equal(verifyPkceValue(tamperedSig), null);
 
-  const evilPayload = signPkceValue({ verifier: 'v1', state: 's1', returnTo: 'https://evil.attacker.com/pwn' });
+  const evilPayload = signPkceValue({ verifier: 'kode-uji-dua', state: 'status-dua', returnTo: 'https://evil.attacker.com/pwn' });
   const fakeReq = {
     headers: {
       host: 'tegoan.vercel.app',

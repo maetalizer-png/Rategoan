@@ -188,7 +188,6 @@ test('DOD-41.11 Studio Kode terintegrasi penuh dengan otak Raget 1.0 dan tombol 
 });
 
 test('DOD-41.12 Penyempurnaan 6 Sektor Studio Kode: Multi-Berkas, Surgical Patch, Terminal CLI VFS, Python Sandbox, dan Kanvas Hidup', async () => {
-  // 1. Multi-file creation & ES6 import bundling without export SyntaxError
   const seed = {
     'index.html': '<!doctype html><html><head></head><body><h1>App</h1></body></html>\n',
     'style.css': 'body{margin:0}\n',
@@ -204,7 +203,6 @@ test('DOD-41.12 Penyempurnaan 6 Sektor Studio Kode: Multi-Berkas, Surgical Patch
   assert.match(bundled['script.js'], /function kartu/);
   assert.doesNotMatch(bundled['script.js'], /\bexport\s+function\b/);
 
-  // 2. Arbitrary file fences & Surgical search-and-replace blocks
   const fencedMulti = parseFenceFiles('Berikut modul:\n```js:src/helper.js\nexport const X = 42;\n```\n');
   assert.ok(fencedMulti && fencedMulti['src/helper.js']);
   const surgicalRaw = '<<<FILE:index.html>>>\n<<<SEARCH\n<h1>App</h1>\n===\n<h1>App Raget 1.0</h1>\n>>>REPLACE\nSelesai ditambal.';
@@ -216,13 +214,11 @@ test('DOD-41.12 Penyempurnaan 6 Sektor Studio Kode: Multi-Berkas, Surgical Patch
   });
   assert.match(patchedSynth.files['index.html'], /<h1>App Raget 1\.0<\/h1>/);
 
-  // 3. Python Sandbox execution
   const pyPlan = craftInstruction('buat modul python ukur teks', seed);
   const pyOut = await pySandbox.run(pyPlan.files['main.py']);
   assert.equal(pyOut.ok, true);
   assert.equal(pyOut.output, 'byte 6');
 
-  // 4. Interactive VFS CLI shell + math expression preservation
   assert.equal(runTerminal('1+2*3'), 7);
   const vfs = createVfs({
     '/index.html': seed['index.html'],
@@ -317,7 +313,6 @@ test('DOD-41.15 Lima Penguatan Keamanan Siber Tingkat Lanjut (Timing-Safe HMAC, 
   assert.equal(verifyConfirm(nonce, 'drive_delete_file', { file_id: '123' }, 1500, 'tok-abc'), true);
   assert.equal(verifyConfirm(nonce, 'drive_delete_file', { file_id: '123' }, 1500, 'tok-abc'), false);
 
-  // IPv6 6to4, NAT64, IPv4-compatible, multicast, and doc prefix SSRF guards
   assert.equal(ipIsPrivate('2002:7f00:0001::1'), true);
   assert.equal(ipIsPrivate('2002:a9fe:a9fe::1'), true);
   assert.equal(ipIsPrivate('64:ff9b::7f00:1'), true);
@@ -326,7 +321,6 @@ test('DOD-41.15 Lima Penguatan Keamanan Siber Tingkat Lanjut (Timing-Safe HMAC, 
   assert.equal(ipIsPrivate('2001:db8::1'), true);
   assert.equal(ipIsPrivate('2606:4700:4700::1111'), false);
 
-  // Prototype pollution key scrubber
   const polluted = JSON.parse('{"aman":1,"__proto__":{"polluted":true},"nested":{"constructor":{"prototype":{"pwn":1}},"ok":2}}');
   const cleanObj = scrubProtoKeys(polluted);
   assert.equal(cleanObj.aman, 1);
@@ -334,12 +328,10 @@ test('DOD-41.15 Lima Penguatan Keamanan Siber Tingkat Lanjut (Timing-Safe HMAC, 
   assert.equal(Object.prototype.hasOwnProperty.call(cleanObj, '__proto__'), false);
   assert.equal(Object.prototype.hasOwnProperty.call(cleanObj.nested, 'constructor'), false);
 
-  // Safe markdown href attribute breakout prevention
   const html = markdown.render('[klik](https://example.com/a"onmouseover="alert(1))');
   assert.equal(html.includes('"onmouseover="'), false);
   assert.equal(safeMarkdownHref('javascript:alert(1)'), '#');
 
-  // Calendar ID traversal & control char sanitization
   assert.equal(cleanCalendarId('../../primary"\r\n'), '//primary');
 });
 
@@ -573,7 +565,6 @@ test('DOD-41.20 Ekstraksi PDF/ZIP/Visi Murni In-Browser, Kartu Lampiran Multi-Be
 });
 
 test('DOD-41.21 Penyempurnaan Inti Otak Neural: Rotary Position Embedding (RoPE), Hidrasi Kosakata BPE Kustom, dan Penalti Repetisi Mode Rendah/Tinggi', () => {
-  // 1. RoPE norm preservation and positional rotation
   const dk = 8;
   const heads = 2;
   const freqs = buildRopeFreqs(dk, 10000);
@@ -591,7 +582,6 @@ test('DOD-41.21 Penyempurnaan Inti Otak Neural: Rotary Position Embedding (RoPE)
   assert.ok(Math.abs(normBefore - normAfter) < 1e-4);
   assert.ok(Math.abs(qPos5[0] - q0[0]) > 1e-3);
 
-  // 2. Greedy + Frequency Repetition Penalty in pickToken (Mode Rendah temperature=0)
   const logits = new Float32Array(32);
   logits.fill(-5);
   logits[10] = 4.0;
@@ -601,7 +591,6 @@ test('DOD-41.21 Penyempurnaan Inti Otak Neural: Rotary Position Embedding (RoPE)
   const pickedPenalized = pickToken(new Float32Array(logits), { temperature: 0, repetitionPenalty: 1.2 }, [10, 10, 10]);
   assert.equal(pickedPenalized, 11);
 
-  // 3. Custom BPE vocabulary hydration & reset
   try {
     const custom = bpeShell.loadCustomVocabulary({
       vocab: ['<|endoftext|>', '<|bos|>', '<|pad|>', '</s>', '\n\nPengguna:', 'Halo', 'Raget'],
@@ -636,13 +625,11 @@ test('DOD-41.22 Alur Pencarian Web & Riset Mendalam Inline Tanpa Pindah Halaman 
 });
 
 test('DOD-41.23 Proses Berpikir Ala Grok (Membedah Tugas Tanpa Jargon Rumus Mesin), Ekstraksi Citra/Berkas, dan Menu Ikon +', () => {
-  // 1. Pastikan int4-session.js murni mendekode token BPE dari Raget 1.0 tanpa modul template neural-grounding
   const sessionSrc = read('raget/raget-neural/runtime/int4-session.js');
   assert.equal(sessionSrc.includes('neural-grounding'), false);
   assert.equal(sessionSrc.includes('groundNeuralOutput'), false);
   assert.match(sessionSrc, /const full = bpeShell\.decodeIds\(generated\)/);
 
-  // 2. Pastikan thought-card.js bebas jargon rumus mesin (RoPE, int4-block32, 28 lapis, Prefill, Dekode aliran token)
   const tcSrc = read('js/ui/thought-card.js');
   assert.equal(tcSrc.includes('int4-block32'), false);
   assert.equal(tcSrc.includes('RoPE'), false);
@@ -650,7 +637,6 @@ test('DOD-41.23 Proses Berpikir Ala Grok (Membedah Tugas Tanpa Jargon Rumus Mesi
   assert.equal(tcSrc.includes('Prefill Raget 1.0'), false);
   assert.equal(tcSrc.includes('Dekode aliran token'), false);
 
-  // 3. Dynamic thoughts membedah apa yang sedang dikerjakan (membuka gambar, merancang website, membaca zip, riset web)
   const imgSteps = buildDynamicThoughts('Baca dan ringkas lampiran ini', {
     think: true,
     files: 'kamera-1792061530652.jpg',
@@ -671,7 +657,6 @@ test('DOD-41.23 Proses Berpikir Ala Grok (Membedah Tugas Tanpa Jargon Rumus Mesi
   assert.match(zipSteps[0].text, /Membuka & membaca paket arsip Rategoan-main\.zip/);
   assert.match(zipSteps[1].text, /Memeriksa isi berkas utama di dalam arsip/);
 
-  // 4. Periksa gaya visual ala Grok (ikon tanpa kotak latar dan sub-catatan berpoin bullet)
   const thoughtCss = read('css/ui/thought.css');
   assert.match(thoughtCss, /\.stepper-sub::before/);
   assert.match(thoughtCss, /\.thought-seg-track/);

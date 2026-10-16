@@ -21,7 +21,7 @@ async function boot(page) {
     try {
       localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
       localStorage.removeItem('rategoan_weights_1_5b_installed');
-    } catch (e) { /* bingkai terkunci */ }
+    } catch (e) { void e; }
   });
   await page.route('**/*', (route) => {
     const url = route.request().url();
@@ -100,7 +100,7 @@ note(place.width === 820 && place.sideWidth === 260, 'lebar kolom chat 820 sideb
 const gate = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 gate.on('pageerror', (err) => errors.push(String(err)));
 await gate.addInitScript(() => {
-  try { localStorage.removeItem('rategoan_auth'); } catch (e) { /* kosong */ }
+  try { localStorage.removeItem('rategoan_auth'); } catch (e) { void e; }
 });
 await gate.goto(base + '/index.html#/login', { waitUntil: 'domcontentloaded' });
 await gate.waitForTimeout(400);

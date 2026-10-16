@@ -74,9 +74,10 @@ try {
       composerBorder: csComp.borderTopStyle,
       composerBoxShadow: csComp.boxShadow,
       composerBottomGapPx: Math.round(vcRect.bottom - cardRect.bottom),
+      cardWidth: Math.round(cardRect.width),
+      cardHeight: Math.round(cardRect.height),
       messagesFitsInsideViewChat: msgRect.bottom <= vcRect.bottom + 1,
-      inspirationVisibleOnMobile: csInsp.display === 'grid',
-      inspirationCardsCount: insp.querySelectorAll('.chat-insp-card').length,
+      inspirationHiddenOnMobile: csInsp.display === 'none',
       compLeft: Math.round(compRect.left),
       compWidth: Math.round(compRect.width),
     };
@@ -147,38 +148,84 @@ try {
   const studioMobileAudit = await phone.evaluate(() => {
     const comp = document.getElementById('composer');
     const card = document.getElementById('composer-card');
+    const inp = document.getElementById('chat-input');
+    const plus = document.getElementById('btn-plus');
+    const insp = document.querySelector('.inspiration-cards');
     const csComp = getComputedStyle(comp);
+    const csInsp = insp ? getComputedStyle(insp) : { display: 'none' };
     const cardRect = card.getBoundingClientRect();
+    const inpRectInitial = inp.getBoundingClientRect();
+    const plusRect = plus.getBoundingClientRect();
+    const inputOnTopRow = inpRectInitial.bottom <= plusRect.top + 4;
+    inp.value = 'Baris pertama pengujian panjang sekali supaya membungkus ke baris kedua\nBaris kedua pengujian\nBaris ketiga pengujian';
+    inp.dispatchEvent(new Event('input'));
+    const inpRectGrown = inp.getBoundingClientRect();
+    inp.value = '';
+    inp.dispatchEvent(new Event('input'));
     return {
       composerBg: csComp.backgroundColor,
       cardWidth: Math.round(cardRect.width),
       cardHeight: Math.round(cardRect.height),
       gapBottomPx: Math.round(window.innerHeight - cardRect.bottom),
+      inspirationHiddenOnMobile: csInsp.display === 'none',
+      inputOnTopRow,
+      initialInputHeight: Math.round(inpRectInitial.height),
+      grownInputHeight: Math.round(inpRectGrown.height),
+      autoGrowWorks: inpRectGrown.height > inpRectInitial.height + 16,
+    };
+  });
+
+  await phone.click('#btn-plus');
+  await phone.waitForSelector('#studio-attach-sheet:not([hidden])', { timeout: 10000 });
+  const studioAttachSheetAudit = await phone.evaluate(() => {
+    const sheet = document.getElementById('studio-attach-sheet');
+    const title = sheet.querySelector('.sheet-title')?.textContent.trim() || '';
+    const devConn = sheet.querySelector('.sheet-dev-connectors');
+    const csDevConn = getComputedStyle(devConn);
+    const camCard = document.getElementById('btn-attach-camera').getBoundingClientRect();
+    const orb = sheet.querySelector('.attach-orb').getBoundingClientRect();
+    const plain = document.getElementById('btn-studio-folder');
+    const csPlain = getComputedStyle(plain);
+    return {
+      sheetTitle: title,
+      noDoubleBorderTop: csDevConn.borderTopStyle === 'none' || csDevConn.borderTopWidth === '0px',
+      cardHeightPx: Math.round(camCard.height),
+      orbWidthPx: Math.round(orb.width),
+      plainFontSize: csPlain.fontSize,
     };
   });
 
   const report = {
     ok: consoleErrors.length === 0
       && mobileChatIdleAudit.composerBg === 'rgba(0, 0, 0, 0)'
-      && mobileChatIdleAudit.composerBottomGapPx <= 8
+      && mobileChatIdleAudit.composerBottomGapPx === 14
       && mobileChatIdleAudit.messagesFitsInsideViewChat === true
-      && mobileChatIdleAudit.inspirationVisibleOnMobile === true
-      && mobileChatIdleAudit.inspirationCardsCount === 4
+      && mobileChatIdleAudit.inspirationHiddenOnMobile === true
       && mobileKeyboardAudit.keyboardOpenClass === true
       && mobileKeyboardAudit.composerBg === 'rgba(0, 0, 0, 0)'
-      && mobileKeyboardAudit.gapAboveKeyboardPx <= 8
+      && mobileKeyboardAudit.gapAboveKeyboardPx === 12
       && coworkAudit.coworkOpenedFromMenu === true
       && coworkAudit.xssExecuted === false
       && collectionAudit.fitsWithin390Px === true
       && projectAudit.fitsWithin390Px === true
       && studioMobileAudit.composerBg === 'rgba(0, 0, 0, 0)'
-      && studioMobileAudit.cardWidth >= 340,
+      && studioMobileAudit.gapBottomPx === 14
+      && studioMobileAudit.inspirationHiddenOnMobile === true
+      && Math.abs(studioMobileAudit.cardWidth - mobileChatIdleAudit.cardWidth) <= 2
+      && Math.abs(studioMobileAudit.cardHeight - mobileChatIdleAudit.cardHeight) <= 2
+      && studioMobileAudit.inputOnTopRow === true
+      && studioMobileAudit.autoGrowWorks === true
+      && studioAttachSheetAudit.sheetTitle === 'Lampiran'
+      && studioAttachSheetAudit.noDoubleBorderTop === true
+      && studioAttachSheetAudit.cardHeightPx >= 88
+      && studioAttachSheetAudit.orbWidthPx === 44,
     mobileChatIdleAudit,
     mobileKeyboardAudit,
     coworkAudit,
     collectionAudit,
     projectAudit,
     studioMobileAudit,
+    studioAttachSheetAudit,
     consoleErrors,
   };
   console.log(JSON.stringify(report, null, 2));

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/** Gerbang lisensi + panjang cuplikan. SPDX allowlist. */
 
 const ALLOW = new Set([
   'mit',

@@ -115,7 +115,7 @@ test('readme tidak menurunkan produk dan versi paket 22', () => {
   assert.equal(existsSync(new URL('raget/raget-tools/arsip-nonaktif', root)), false);
   assert.equal(existsSync(new URL('raget/raget-tools/train-massive-colab-gpu.py', root)), false);
   assert.equal(existsSync(new URL('raget/raget-tools/train-raget-1b-2b.py', root)), true);
-  assert.match(read('sw.js'), /raget-app-shell-v19/);
+  assert.match(read('sw.js'), /raget-app-shell/);
 });
 
 test('bukti 22 sudah dibongkar dan bobot tidak diklaim terpasang', () => {

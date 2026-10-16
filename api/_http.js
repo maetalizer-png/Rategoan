@@ -197,14 +197,14 @@ export async function forward(res, url, token, method, body, extraHeaders) {
   res.end(text);
 }
 
-function ipv4Private(v4) {
-  if (v4 === '0.0.0.0' || v4 === '255.255.255.255') return true;
-  if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(v4)) return true;
-  if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(v4)) return true;
-  if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(v4)) return true;
-  if (/^198\.1[89]\./.test(v4)) return true;
-  if (/^(192\.0\.0\.|192\.0\.2\.|198\.51\.100\.|203\.0\.113\.)/.test(v4)) return true;
-  if (/^(22[4-9]|23\d|24\d|25[0-5])\./.test(v4)) return true;
+function ipv4Private(addr4) {
+  if (addr4 === '0.0.0.0' || addr4 === '255.255.255.255') return true;
+  if (/^(127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(addr4)) return true;
+  if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(addr4)) return true;
+  if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(addr4)) return true;
+  if (/^198\.1[89]\./.test(addr4)) return true;
+  if (/^(192\.0\.0\.|192\.0\.2\.|198\.51\.100\.|203\.0\.113\.)/.test(addr4)) return true;
+  if (/^(22[4-9]|23\d|24\d|25[0-5])\./.test(addr4)) return true;
   return false;
 }
 
@@ -263,8 +263,8 @@ export function ipIsPrivate(host) {
       if (ipv4Private(v4nat64)) return true;
     }
     if (hextets[0] === 0 && hextets[1] === 0 && hextets[2] === 0 && hextets[3] === 0 && hextets[4] === 0 && (hextets[5] === 0xffff || hextets[5] === 0)) {
-      const v4 = (hextets[6] >> 8) + '.' + (hextets[6] & 255) + '.' + (hextets[7] >> 8) + '.' + (hextets[7] & 255);
-      return ipv4Private(v4);
+      const addr4 = (hextets[6] >> 8) + '.' + (hextets[6] & 255) + '.' + (hextets[7] >> 8) + '.' + (hextets[7] & 255);
+      return ipv4Private(addr4);
     }
     return false;
   }

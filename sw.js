@@ -1,11 +1,11 @@
 'use strict';
-const CDN_PACKAGE_CACHE = 'raget-cdn-packages-v1';
+const CDN_PACKAGE_CACHE = 'raget-cdn-packages';
 const CDN_PACKAGE_ORIGINS = [
   'https://cdn.jsdelivr.net',
   'https://huggingface.co',
 ];
-const APP_SHELL_CACHE = 'raget-app-shell-v19';
-const DATA_CACHE = 'raget-knowledge-json-v1';
+const APP_SHELL_CACHE = 'raget-app-shell';
+const DATA_CACHE = 'raget-knowledge-json';
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

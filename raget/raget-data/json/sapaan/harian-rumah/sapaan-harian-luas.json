@@ -1,6 +1,6 @@
 [
   {
-    "id": "sapaan-pagi-v01",
+    "id": "sapaan-pagi-01",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi produktif",
@@ -17,7 +17,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v02",
+    "id": "sapaan-pagi-02",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi hujan",
@@ -35,7 +35,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v03",
+    "id": "sapaan-pagi-03",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi senin",
@@ -53,7 +53,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v04",
+    "id": "sapaan-pagi-04",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi jumat",
@@ -71,7 +71,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v05",
+    "id": "sapaan-pagi-05",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi weekend",
@@ -89,7 +89,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v06",
+    "id": "sapaan-pagi-06",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi olahraga",
@@ -107,7 +107,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v07",
+    "id": "sapaan-pagi-07",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi kopi",
@@ -124,7 +124,7 @@
     }
   },
   {
-    "id": "sapaan-pagi-v08",
+    "id": "sapaan-pagi-08",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Pagi terlambat",
@@ -141,7 +141,7 @@
     }
   },
   {
-    "id": "sapaan-siang-v01",
+    "id": "sapaan-siang-01",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Siang produktif",
@@ -158,7 +158,7 @@
     }
   },
   {
-    "id": "sapaan-siang-v02",
+    "id": "sapaan-siang-02",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Siang lapar",
@@ -176,7 +176,7 @@
     }
   },
   {
-    "id": "sapaan-siang-v03",
+    "id": "sapaan-siang-03",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Siang mengantuk",
@@ -193,7 +193,7 @@
     }
   },
   {
-    "id": "sapaan-siang-v04",
+    "id": "sapaan-siang-04",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Siang rapat",
@@ -211,7 +211,7 @@
     }
   },
   {
-    "id": "sapaan-sore-v01",
+    "id": "sapaan-sore-01",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Sore wrap-up",
@@ -229,7 +229,7 @@
     }
   },
   {
-    "id": "sapaan-sore-v02",
+    "id": "sapaan-sore-02",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Sore macet",
@@ -247,7 +247,7 @@
     }
   },
   {
-    "id": "sapaan-sore-v03",
+    "id": "sapaan-sore-03",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Sore olahraga",
@@ -265,7 +265,7 @@
     }
   },
   {
-    "id": "sapaan-sore-v04",
+    "id": "sapaan-sore-04",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Sore keluarga",
@@ -283,7 +283,7 @@
     }
   },
   {
-    "id": "sapaan-malam-v01",
+    "id": "sapaan-malam-01",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Malam review",
@@ -300,7 +300,7 @@
     }
   },
   {
-    "id": "sapaan-malam-v02",
+    "id": "sapaan-malam-02",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Malam gadget",
@@ -318,7 +318,7 @@
     }
   },
   {
-    "id": "sapaan-malam-v03",
+    "id": "sapaan-malam-03",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Malam belajar",
@@ -336,7 +336,7 @@
     }
   },
   {
-    "id": "sapaan-malam-v04",
+    "id": "sapaan-malam-04",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Malam doa",
@@ -353,7 +353,7 @@
     }
   },
   {
-    "id": "sapaan-malam-v05",
+    "id": "sapaan-malam-05",
     "kategori": "sapaan",
     "wilayah": null,
     "nama": "Malam overtime",

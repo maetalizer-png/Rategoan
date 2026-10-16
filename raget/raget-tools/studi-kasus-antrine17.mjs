@@ -41,7 +41,6 @@ const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] }
 try {
   const consoleErrors = [];
 
-  // 1. Desktop 1366x768 Login Card Centering Audit (Note #5)
   const desktopLogin = await browser.newPage({ viewport: { width: 1366, height: 768 } });
   desktopLogin.on('pageerror', (err) => consoleErrors.push(String(err)));
   await desktopLogin.goto(baseUrl + '/index.html#/login', { waitUntil: 'networkidle' });
@@ -64,13 +63,12 @@ try {
     };
   });
 
-  // 2. Mobile 390x844 Grok-Style Borderless Thinking & Blue Dot Audit (Notes #3 & #4)
   const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   phone.on('pageerror', (err) => consoleErrors.push(String(err)));
   await phone.addInitScript(() => {
     try {
       localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'maetalizer@gmail.com', time: Date.now() }));
-    } catch (e) { /* ignore */ }
+    } catch (e) { void e; }
   });
   await phone.goto(baseUrl + '/index.html#/chat', { waitUntil: 'networkidle' });
   await phone.waitForSelector('#chat-input', { timeout: 15000 });
@@ -128,11 +126,9 @@ try {
     };
   });
 
-  // 2B. Live Reproduction & Verification of Bug #1 (Stop button / in-flight generation leaking into New Chat) & Bug #2 (Keyboard draft text leaking into New Chat)
   const newChatIsolationAudit = await phone.evaluate(async () => {
     const inp = document.getElementById("chat-input");
     const msgBox = document.getElementById("messages");
-    // Simulate active generation (Stop button active) + in-flight typing indicator + user typing draft text in #chat-input
     document.body.classList.add("is-generating");
     const fakeTyping = document.createElement("div");
     fakeTyping.className = "msg ai typing";
@@ -147,7 +143,6 @@ try {
       inputVal: inp.value,
     };
 
-    // Click New Chat button (#btn-new-chat-top)
     document.getElementById("btn-new-chat-top").click();
 
     const afterTopNewChat = {
@@ -157,7 +152,6 @@ try {
       remainingMessages: msgBox.querySelectorAll(".msg").length,
     };
 
-    // Also test sidebar #btn-new-chat
     document.body.classList.add("is-generating");
     inp.value = "Ketikan kedua di sidebar";
     inp.dispatchEvent(new Event("input"));
@@ -173,7 +167,6 @@ try {
     return { beforeNewChat, afterTopNewChat, afterSidebarNewChat };
   });
 
-  // 2C. Live Verification of Bug #3: Cross-Page Model Download Auto-Resume (index.html -> studio.html -> index.html) without needing to click Batal
   const crossPageDownloadAudit = await phone.evaluate(async () => {
     const { neuralProvider } = await import("/raget/raget-neural/neural-provider.js");
     const { WEIGHT_SPEC } = await import("/raget/raget-neural/runtime/weight-cache.js");
@@ -194,14 +187,13 @@ try {
   });
 
 
-  // 2D. Desktop (1366x768) & Mobile (390x844) Download Bar Layout & Live Streaming Progress Audit (DOD-41.17)
   const deskChat = await browser.newPage({ viewport: { width: 1366, height: 768 } });
   deskChat.on("pageerror", (err) => consoleErrors.push(String(err)));
   await deskChat.addInitScript(() => {
     try {
       localStorage.setItem("rategoan_auth", JSON.stringify({ method: "gmail", id: "maetalizer@gmail.com", time: Date.now() }));
       localStorage.removeItem("rategoan_weights_1_5b_installed");
-    } catch (e) { /* ignore */ }
+    } catch (e) { void e; }
   });
   await deskChat.route("**/*", (route) => {
     if (route.request().url().includes("huggingface.co")) return route.abort();
@@ -225,7 +217,6 @@ try {
     const barAlignedWithComposer = Math.abs((barRect.left + barRect.width / 2) - (compRect.left + compRect.width / 2)) <= 2;
     const gapToHeroPx = Math.round(heroRect.top - barRect.bottom);
 
-    // Simulate active streaming at 3.5 MB/s where committedVerifiedBytes is still 0 but visibleLoaded is 3.5 MB
     window.dispatchEvent(new CustomEvent("rategoan:neural-progress", {
       detail: {
         loaded: Math.round(3.5 * 1024 * 1024),
@@ -260,19 +251,12 @@ try {
   await deskChat.click("#btn-weight-cancel");
   await deskChat.screenshot({ path: "/tmp/desktop-download-cancelled.png" });
 
-  // 3. Desktop 1366x768 Studio Kode Full Live Audit:
-  //    - #btn-model next to #btn-plus & #model-sheet switching (Cepat / Mendalam)
-  //    - "kerja" & "lanjutkan" execution with Raget 1.0 & Auto-Follow Split Canvas
-  //    - Multi-file creation ("buat modul components/kartu.js")
-  //    - Hunk Accept / Reject (#hunk-stage)
-  //    - Interactive VFS CLI Terminal (#terminal-form: ls, python /main.py)
-  //    - Live Dokumen (#living-doc SVG) & Live Spreadsheet (#living-sheet Table & Bars)
   const studioPage = await browser.newPage({ viewport: { width: 1366, height: 768 } });
   studioPage.on('pageerror', (err) => consoleErrors.push(String(err)));
   await studioPage.addInitScript(() => {
     try {
       localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'maetalizer@gmail.com', time: Date.now() }));
-    } catch (e) { /* ignore */ }
+    } catch (e) { void e; }
   });
   await studioPage.goto(baseUrl + '/studio.html', { waitUntil: 'networkidle' });
   await studioPage.waitForSelector('#btn-model', { timeout: 15000 });
@@ -286,14 +270,13 @@ try {
     const inputRect = input.getBoundingClientRect();
     return {
       hasBtnModel: !!model,
-      modelNextToPlus: modelRect.left >= plusRect.right - 2 && modelRect.left < inputRect.left,
+      modelNextToPlus: modelRect.left >= plusRect.right - 2 && modelRect.top >= inputRect.bottom - 4,
       plusRect: { left: Math.round(plusRect.left), right: Math.round(plusRect.right), top: Math.round(plusRect.top) },
       modelRect: { left: Math.round(modelRect.left), right: Math.round(modelRect.right), top: Math.round(modelRect.top) },
       initialStatModel: document.getElementById('stat-model').textContent.trim(),
     };
   });
 
-  // Click #btn-model to open #model-sheet and switch from Cepat to Mendalam
   await studioPage.click('#btn-model');
   await studioPage.waitForSelector('#model-sheet:not([hidden]) .model-speed', { timeout: 10000 });
   await studioPage.click('#model-sheet .model-speed');
@@ -303,7 +286,7 @@ try {
     const title = sheet.querySelector('.model-solo strong')?.textContent.trim() || '';
     const options = Array.from(sheet.querySelectorAll('.model-speed-menu .model-item strong')).map((el) => el.textContent.trim());
     const items = sheet.querySelectorAll('.model-speed-menu .model-item');
-    if (items[1]) items[1].click(); // Select Mendalam
+    if (items[1]) items[1].click();
     return {
       sheetOpen: !sheet.hidden,
       modelTitle: title,
@@ -313,7 +296,6 @@ try {
   });
   await studioPage.click('#model-close');
 
-  // Execute "kerja", "lanjutkan", and "buat modul components/kartu.js"
   await studioPage.fill('#chat-input', 'kerja');
   await studioPage.click('#btn-studio-send');
   await studioPage.waitForFunction(() => {
@@ -335,7 +317,6 @@ try {
     return msgs.length >= 3 && msgs[2].length > 0;
   }, { timeout: 15000 });
 
-  // Test Hunk Accept, Dokumen tab, Spreadsheet tab, and Interactive CLI Terminal + capture screenshots
   await studioPage.click('.tab-btn[data-tab="preview"]');
   await studioPage.screenshot({ path: '/tmp/studio-tab-preview.png' });
   await studioPage.click('.tab-btn[data-tab="files"]');

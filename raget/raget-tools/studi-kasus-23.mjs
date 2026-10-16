@@ -27,7 +27,7 @@ async function boot(page) {
     try {
       localStorage.removeItem('rategoan_theme');
       localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
-    } catch (e) { /* iframe */ }
+    } catch (e) { void e; }
   });
 }
 
@@ -212,7 +212,7 @@ const shell = await desktop.evaluate(async (origin) => {
   const res = await fetch(origin + '/sw.js');
   return res.text();
 }, base);
-note(shell.includes('raget-app-shell-v19'), 'kulit cache v19', 'v19=' + shell.includes('raget-app-shell-v19'));
+note(shell.includes('raget-app-shell'), 'kulit cache utama', 'shell=' + shell.includes('raget-app-shell'));
 await browser.close();
 fs.writeFileSync(outDir + '/kasus23-hasil.json', JSON.stringify({ findings, warnings, errors }, null, 2));
 const failed = findings.filter((item) => !item.ok);

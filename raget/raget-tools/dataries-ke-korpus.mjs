@@ -1,50 +1,3 @@
-// vNext Fase C (revisi v1.1, §4 roadmap): render korpus dialog/fakta MILIK
-// SENDIRI Rategoan - bukan dari raget-dataries/ (itu lapisan metadata
-// terstruktur untuk RETRIEVAL, bukan teks siap-latih), tapi dari
-// raget-devlog/json/{persona,fewshot} + raget-data/json/pengetahuan/* +
-// raget-data/json/*/*.json (domain yang sudah dimigrasi ke skema tunggal
-// Fase B) + raget-data/json/sapaan/ (sapaan/smalltalk, dimigrasi lewat
-// migrate-sapaan-domain.mjs).
-//
-// Output: raget/raget-data/jsonl/raget_own_corpus.jsonl - satu record JSON
-// per baris, field `type` menandai bentuknya:
-//   - "dialog"   {type,source,prompt,completion}  - prompt+balasan asli
-//   - "fact"     {type,source,text}                - kalimat faktual berdiri sendiri
-//   - "identity" {type,source,text}                - deskripsi identitas/gaya Raget
-//
-// KEPUTUSAN FILTER YANG DISENGAJA (didokumentasikan, bukan celah yang
-// terlewat):
-//   1. raget-tools/bench.json TIDAK dirender jadi dialog. File itu cuma
-//      berisi {prompt, expect-label} untuk uji klasifikasi rule engine -
-//      tidak ada teks balasan di dalamnya. Merender label jadi balasan
-//      buatan berarti MENGARANG data latih (melanggar prinsip kejujuran
-//      proyek), dan menjalankan live engine untuk memanen balasan asli
-//      berisiko tercemar state percakapan (mood/context continuity module
-//      yang memang didesain stateful) sehingga hasilnya tidak murni lagi
-//      mewakili prompt tunggal. bench.json tetap dipakai HANYA sebagai alat
-//      uji (run-bench.mjs), bukan sumber korpus.
-//   2. raget-devlog/json/metadata/answer-rules.json TIDAK dirender. Isinya
-//      instruksi gaya-jawab (meta-aturan), bukan sesuatu yang pernah
-//      benar-benar diucapkan Raget ke pengguna - memasukkannya berisiko
-//      instruksi format ikut "bocor" jadi gaya bicara kalau nanti dipakai
-//      untuk training.
-//   3. factoid.json ({subject,aliases,answer}) direndar jadi dialog dengan
-//      PERTANYAAN YANG DISINTESIS dari template "Apa itu <subject>?" -
-//      jawabannya asli dari data, cuma bentuk pertanyaannya templated. Ini
-//      teknik umum & jujur untuk mengubah factoid jadi pasangan QA, beda
-//      dengan mengarang jawaban.
-//   4. Field meta.trivia/meta.kutipan/meta.pencapaian/meta.bahanUtama pada
-//      domain raget-data/json/* (tokoh/kuliner) ikut dirender sebagai
-//      kalimat fact tambahan - semua bersumber dari field data yang sudah
-//      ada, bukan konten baru, cuma diformat jadi kalimat.
-//
-// Prinsip: "aditif, tidak merombak" - skrip ini HANYA membaca file JSON
-// yang sudah ada, tidak mengubah satu pun sumber data. Jangan mulai
-// training di sini - skrip ini cuma menghasilkan raget_own_corpus.jsonl,
-// build-neural-checkpoint.mjs (langkah training terpisah) belum diubah
-// untuk memakai output ini.
-//
-// Pakai: node raget/raget-tools/dataries-ke-korpus.mjs
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'fs';
 import path from 'path';
@@ -82,7 +35,6 @@ function pushIdentity(records, source, text) {
   records.push({ type: 'identity', source, text: t });
 }
 
-// ---------- 1) persona.json - identitas Raget, bukan dialog ----------
 function renderPersona(records) {
   const p = readJson(path.join(DEVLOG_JSON_DIR, 'persona.json'));
   if (p.gayaBicara) pushIdentity(records, 'persona', 'Gaya bicara ' + (p.name || 'Raget') + ': ' + p.gayaBicara);
@@ -90,13 +42,11 @@ function renderPersona(records) {
   for (const rule of p.batasan || []) pushIdentity(records, 'persona', rule);
 }
 
-// ---------- 2) fewshot.json - dialog contoh asli ----------
 function renderFewshot(records) {
   const list = readJson(path.join(DEVLOG_JSON_DIR, 'fewshot.json'));
   for (const item of list) pushDialog(records, 'fewshot', item.q, item.a);
 }
 
-// ---------- 3) pengetahuan/*.json - dua bentuk: {q,a} atau {subject,answer} atau {title,text} ----------
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
@@ -112,10 +62,6 @@ function renderKnowledge(records) {
       if (item.q && item.a) {
         pushDialog(records, source, item.q, item.a);
       } else if (item.subject && item.answer) {
-        // factoid {subject,aliases,answer} - pertanyaan disintesis dari
-        // subject, jawaban APA ADANYA dari data (lihat keputusan filter #3).
-        // "Siapa" dipakai kalau subjeknya jelas merujuk orang (pendiri,
-        // presiden, penemu, dst), "Apa itu" untuk subjek lainnya.
         const isPerson = PERSON_SUBJECT_RE.test(item.subject);
         pushDialog(records, source, (isPerson ? 'Siapa ' : 'Apa itu ') + item.subject + '?', item.answer);
         pushFact(records, source, capitalize(item.subject) + ': ' + item.answer);
@@ -128,10 +74,9 @@ function renderKnowledge(records) {
   }
 }
 
-// ---------- 4) raget-data/json/*/*.json - domain skema tunggal Fase B ----------
 function renderUnifiedDomain(records) {
   for (const domain of readdirSync(DATA_DIR, { withFileTypes: true }).filter((d) => d.isDirectory())) {
-    if (domain.name === 'pengetahuan') continue; // sudah dirender terpisah lewat renderKnowledge() - bentuknya {q,a}/{subject,answer}, bukan skema unified
+    if (domain.name === 'pengetahuan') continue;
     const domainDir = path.join(DATA_DIR, domain.name);
     for (const f of readdirSync(domainDir).filter((f) => f.endsWith('.json'))) {
       const data = readJson(path.join(domainDir, f));
@@ -163,7 +108,6 @@ function renderUnifiedDomain(records) {
   }
 }
 
-// ---------- 5) sapaan.json - dialog sapaan/smalltalk (§4 prasyarat terpenuhi) ----------
 function renderSapaanEntries(records, source, data) {
   for (const entry of data) {
     const m = entry.meta || {};
@@ -188,7 +132,6 @@ function renderSapaanEntries(records, source, data) {
       const occasion = String(m.occasion || '').replace(/-/g, ' ');
       pushDialog(records, source, 'Beri aku ucapan untuk ' + occasion, entry.teks);
     }
-    // entry followup dilewati - itu potongan kalimat sambungan, bukan balasan utuh berdiri sendiri.
   }
 }
 
@@ -200,7 +143,6 @@ const SMALLTALK_PROMPT_SAMPLE = {
   kemampuan: 'Kamu bisa apa?',
 };
 
-// ---------- estimasi token kasar (~4 karakter/token, aturan umum Bahasa Indonesia+Inggris campuran) ----------
 function estimateTokens(records) {
   let chars = 0;
   for (const r of records) {

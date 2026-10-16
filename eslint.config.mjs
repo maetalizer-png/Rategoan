@@ -1,14 +1,3 @@
-// Kontrak lint/build minimal (Fase A vNext, menutup temuan P0 audit teknis:
-// "No formal build/lint/type contract terlihat dari arsip - refactor besar
-// berisiko merusak import/export"). SENGAJA tanpa dependency npm apa pun
-// (tidak pakai @eslint/js atau paket `globals`) supaya tetap konsisten
-// dengan prinsip proyek "tanpa framework, tanpa build step" - ini murni
-// alat verifikasi dev-time, bukan bagian dari aplikasi yang dikirim.
-//
-// Cakupan SENGAJA dibatasi ke aturan yang menangkap BUG NYATA (variabel
-// tak terdefinisi, import/export salah, dead code tak sengaja), bukan gaya
-// penulisan (tidak ada aturan format/spasi/kutip) - supaya gerbang ini
-// tidak memicu perombakan besar-besaran di 300 file JS yang sudah berjalan.
 
 const browserGlobals = {
   window: 'readonly',

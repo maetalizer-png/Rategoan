@@ -49,7 +49,7 @@ async function flushJobs() {
   const left = [];
   for (const j of list) {
     if (j.sent) continue;
-    const r = await serverCall('/v1/outbox', j);
+    const r = await serverCall('/api/outbox', j);
     if (r.ok) j.sent = true;
     else left.push(j);
   }

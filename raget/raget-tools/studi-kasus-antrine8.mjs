@@ -20,7 +20,7 @@ await page.addInitScript(() => {
   try {
     localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
     localStorage.setItem('raget_engine_preference', 'cloud');
-  } catch (e) { /* bingkai terkunci */ }
+  } catch (e) { void e; }
 });
 await page.goto(base + '/index.html#/chat', { waitUntil: 'domcontentloaded' });
 await page.waitForSelector('#chat-input', { timeout: 15000 });
@@ -64,7 +64,7 @@ studio.on('pageerror', (err) => errors.push('studio ' + err));
 await studio.addInitScript(() => {
   try {
     localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
-  } catch (e) { /* bingkai terkunci */ }
+  } catch (e) { void e; }
 });
 await studio.goto(base + '/studio.html', { waitUntil: 'domcontentloaded' });
 await studio.waitForSelector('#chat-input', { timeout: 15000 });
@@ -87,7 +87,7 @@ desk.on('pageerror', (err) => errors.push('desktop ' + err));
 await desk.addInitScript(() => {
   try {
     localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
-  } catch (e) { /* bingkai terkunci */ }
+  } catch (e) { void e; }
 });
 await desk.goto(base + '/studio.html', { waitUntil: 'domcontentloaded' });
 await desk.waitForSelector('#chat-input', { timeout: 15000 });

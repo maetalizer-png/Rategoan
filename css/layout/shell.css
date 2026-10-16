@@ -86,7 +86,7 @@
   bottom: 0;
   z-index: 20;
   pointer-events: none;
-  padding: 0 12px calc(6px + env(safe-area-inset-bottom, 0px));
+  padding: 0 12px calc(14px + env(safe-area-inset-bottom, 0px));
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
@@ -100,7 +100,7 @@
 }
 
 body.keyboard-open #composer {
-  padding: 0 12px 6px !important;
+  padding: 0 12px 12px !important;
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;

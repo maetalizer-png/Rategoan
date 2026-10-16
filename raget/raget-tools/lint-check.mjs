@@ -1,20 +1,3 @@
-// Gerbang lint/build minimal (Fase A vNext) - tiga lapis:
-//   1. node --check di SETIAP file .js/.mjs (syntax gate tercepat, 0 dependency,
-//      menangkap error yang lolos deteksi editor tapi gagal total di runtime).
-//   2. eslint . lewat eslint.config.mjs di root (menangkap variabel tak
-//      terdefinisi, import/export salah, dead code jelas - bukan gaya penulisan).
-//   3. validate-entry.mjs --all-domains (PRD-RAGET-TEMPLATE.md Fase 4.4) -
-//      skema data raget-data/json/*/*.json (id/kategori/wilayah/nama/tags/
-//      teks/meta) dicek tiap kali, bukan cuma lewat audit manual sesekali -
-//      menutup celah nyata: 8 bug skema (field wilayah hilang) baru ketemu
-//      lewat audit satu kali 2026-09-09, sudah bertahun-tahun tidak ketahuan
-//      karena tidak ada gerbang otomatis sebelum ini.
-//
-// Dipakai sebelum bench (lihat README.md / docs), bukan pengganti bench -
-// bench menguji ISI jawaban, lint/syntax-check menguji apakah kodenya
-// valid dan bisa dimuat sama sekali.
-//
-// Pakai: node raget/raget-tools/lint-check.mjs
 
 import { execFileSync } from 'child_process';
 import { readdirSync, readFileSync, statSync } from 'fs';

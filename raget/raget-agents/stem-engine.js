@@ -158,11 +158,11 @@ const PHYSICS_FNS = [
   },
   function kinematics(t) {
     if (!/kecepatan\s*akhir/i.test(t)) return null;
-    const v0 = grab(t, ['kecepatan\\s*awal']);
+    const kecAwal = grab(t, ['kecepatan\\s*awal']);
     const a = grab(t, ['percepatan']);
     const time = grab(t, ['waktu']);
-    if (v0 == null || a == null || time == null) return null;
-    return fmtPhys('Kecepatan Akhir (Kinematika)', 'v = v0 + a × t', `v = ${tnum(v0)} + ${tnum(a)} × ${tnum(time)}`, v0 + a * time, 'm/s');
+    if (kecAwal == null || a == null || time == null) return null;
+    return fmtPhys('Kecepatan Akhir (Kinematika)', 'kecepatan akhir = kecepatan awal + a × t', `v = ${tnum(kecAwal)} + ${tnum(a)} × ${tnum(time)}`, kecAwal + a * time, 'm/s');
   },
 ];
 

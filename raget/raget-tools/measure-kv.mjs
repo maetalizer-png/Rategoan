@@ -1,11 +1,3 @@
-// Skrip pengukuran baku Kekayaan (K) & Variasi struktur (V) untuk Raget.
-// Komposisi TETAP: 60 factoid/extras + 20 pertanyaan terbuka + 20 smalltalk = 100 kueri.
-// Dijalankan di sesi bersih (localStorage kosong) agar hasil antar ronde bisa dibandingkan apel-ke-apel.
-// Pakai ulang skrip ini di setiap ronde; hasil dicatat ke tools/kv-baseline.json (kunci "raget_measure").
-//
-// Cara pakai: node tools/measure-kv.mjs [base-url] [label]
-//   base-url default: http://localhost:8099
-//   label    default: tanggal hari ini (dipakai sebagai catatan riwayat baseline)
 
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
@@ -17,13 +9,6 @@ const BASE = process.argv[2] || 'http://localhost:8099';
 const LABEL = process.argv[3] || new Date().toISOString().slice(0, 10);
 const BASELINE_FILE = join(__dirname, 'kv-baseline.json');
 
-// KOMPOSISI DIROTASI SEBAGIAN di Ronde v6 Bagian 4: 48/60 kueri di bawah ini TETAP sama
-// persis sejak ronde-ronde sebelumnya (demi kontinuitas historis, apel-ke-apel dengan
-// baseline lama di kv-baseline.json). 12/60 SENGAJA diganti dengan kueri yang menguji
-// kapasitas baru dari Ronde v6 (alias cina->china, presisi luas lautan, atribut suku,
-// definisi bidang sains, penanganan region benua, +100 entri tokoh) supaya metrik K
-// (Kekayaan, dihitung dari kueri factoid) ikut mencerminkan kemampuan terbaru, bukan
-// cuma kemampuan lama yang sudah lama stabil.
 const FACTOID_EXTRAS_60 = [
   'ibukota jepang', 'ibukota thailand', 'ibukota vietnam', 'ibukota mesir', 'ibukota brasil',
   'populasi jepang', 'populasi jerman', 'populasi india', 'mata uang jepang', 'mata uang inggris',
@@ -36,26 +21,22 @@ const FACTOID_EXTRAS_60 = [
   '100 dolar ke rupiah', '50 euro ke rupiah',
   'besok tanggal berapa', 'minggu depan tanggal berapa',
   'makanan khas jepang', 'makanan khas thailand', 'makanan khas korea',
-  'ibukota cina', 'populasi cina', // rotasi v6 B4: alias cina->china (v6 B3)
+  'ibukota cina', 'populasi cina',
   'etika di jepang', 'tabu di india', 'sopan santun di korea selatan',
   'wisata di jepang', 'wisata di thailand', 'wisata terkenal di prancis',
-  'suku di indonesia', // rotasi v6 B4: atribut suku/etnis (v6 B3)
-  'apa itu kimia', 'apa itu fisika', // rotasi v6 B4: definisi bidang sains (v6 B3)
-  'sejarah tembok besar china', 'sebutkan negara di afrika', // rotasi v6 B4: penanganan region (v6 B3)
-  'siapa penemu bola lampu', 'siapa penemu telepon', 'siapa itu marco polo', // rotasi v6 B4: kedalaman tokoh (v6 B4)
+  'suku di indonesia',
+  'apa itu kimia', 'apa itu fisika',
+  'sejarah tembok besar china', 'sebutkan negara di afrika',
+  'siapa penemu bola lampu', 'siapa penemu telepon', 'siapa itu marco polo',
   'apa itu fotosintesis', 'apa itu gravitasi',
   'ekonomi jepang', 'letak geografis jepang', 'jepang terletak di mana',
   'sapaan dalam bahasa jepang', 'terima kasih dalam bahasa jepang',
-  'luas lautan indonesia', // rotasi v6 B4: presisi luas lautan + jujur bila tiada (v6 B3)
+  'luas lautan indonesia',
   'kota terbesar di jepang',
   'kode telepon indonesia', 'jumlah provinsi indonesia',
   'siapa penjelajah terkenal yang menemukan jalur laut ke asia',
 ];
 
-// Kueri "terbuka" dirancang khusus agar TIDAK tertangkap oleh detectTool/factoid/extras
-// (yang punya jawaban deterministik), sehingga benar-benar sampai ke jalur fallback
-// LLM+planner tempat metrik V (Variasi struktur, dari keragaman detectAnswerType) dihitung.
-// Sebaran: 4 definisi, 4 daftar, 4 prosedur, 4 perbandingan, 2 matematika, 2 terbuka.
 const TERBUKA_20 = [
   'apa itu machine learning',
   'apa itu blockchain terdesentralisasi',

@@ -106,19 +106,17 @@ try {
   const gemvBench = benchGemvAndSampler();
   const consoleErrors = [];
 
-  // 1. Mobile 390x844 Full Audit (Thinking Pill UX, Attach Sheet Mode Chips, Connector Card Width, Sidebar & Settings)
   const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   phone.on('pageerror', (err) => consoleErrors.push(String(err)));
   await phone.addInitScript(() => {
     try {
       localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'maetalizer@gmail.com', time: Date.now() }));
       localStorage.removeItem('rategoan_weights_1_5b_installed');
-    } catch (e) { /* ignore */ }
+    } catch (e) { void e; }
   });
   await phone.goto(baseUrl + '/index.html#/chat', { waitUntil: 'domcontentloaded' });
   await phone.waitForSelector('#chat-input', { timeout: 15000 });
 
-  // Verify + Attach Sheet & Icon-Only Mode Toggle (NO text in #attach-row, only #btn-quick-web icon in keyboard bar)
   await phone.click('#btn-plus');
   await phone.waitForSelector('#attach-sheet:not([hidden])');
   await phone.click('#sheet-websearch');
@@ -138,7 +136,6 @@ try {
   await phone.click('#sheet-websearch');
   await phone.click('#attach-close');
 
-  // Verify Thinking Pill UX (Collapsed by default with Brain icon, expands on click, no duplicate orphan dot)
   const thoughtAudit = await phone.evaluate(async () => {
     const { mountThought, buildDynamicThoughts } = await import('/js/ui/thought-card.js');
     const host = document.createElement('div');
@@ -157,7 +154,6 @@ try {
     return { defaultCollapsed, hasBrainIcon, summaryText, timerText, expandedAfterClick, stepsCount, telemetryCount };
   });
 
-  // Verify Mobile Connector Card Width (Screenshots 6 & 7 fix)
   await phone.goto(baseUrl + '/index.html#/connect', { waitUntil: 'domcontentloaded' });
   await phone.waitForTimeout(250);
   const mobileConnectAudit = await phone.evaluate(() => {
@@ -170,7 +166,6 @@ try {
     };
   });
 
-  // Verify Settings Sub-Menus (Screenshot 8)
   await phone.goto(baseUrl + '/index.html#/settings', { waitUntil: 'domcontentloaded' });
   await phone.waitForTimeout(200);
   const settingsAudit = await phone.evaluate(() => {
@@ -178,13 +173,12 @@ try {
     return { categories: cats, count: cats.length };
   });
 
-  // 2. Desktop 1366x768 & Studio Kode Live Verification
   const studioPage = await browser.newPage({ viewport: { width: 1366, height: 768 } });
   studioPage.on('pageerror', (err) => consoleErrors.push(String(err)));
   await studioPage.addInitScript(() => {
     try {
       localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
-    } catch (e) { /* ignore */ }
+    } catch (e) { void e; }
   });
   await studioPage.goto(baseUrl + '/studio.html', { waitUntil: 'domcontentloaded' });
   await studioPage.waitForSelector('#chat-input', { timeout: 15000 });

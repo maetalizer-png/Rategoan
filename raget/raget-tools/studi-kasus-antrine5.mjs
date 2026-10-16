@@ -19,7 +19,7 @@ page.on('pageerror', (err) => errors.push(String(err)));
 await page.addInitScript(() => {
   try {
     localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
-  } catch (e) { /* iframe */ }
+  } catch (e) { void e; }
 });
 await page.goto(base + '/index.html#/chat', { waitUntil: 'domcontentloaded' });
 await page.waitForSelector('#btn-model', { timeout: 15000 });
@@ -44,7 +44,7 @@ studio.on('pageerror', (err) => errors.push(String(err)));
 await studio.addInitScript(() => {
   try {
     localStorage.setItem('rategoan_auth', JSON.stringify({ method: 'gmail', id: 'studi@rategoan.local', time: Date.now() }));
-  } catch (e) { /* iframe */ }
+  } catch (e) { void e; }
 });
 await studio.goto(base + '/studio.html', { waitUntil: 'domcontentloaded' });
 await studio.waitForSelector('#studio-app');

@@ -203,7 +203,7 @@ export function craftInstruction(text, files) {
       } else if (/\.json$/i.test(rawFile)) {
         next[vfsKey] = '{\n  "name": "studio-rategoan",\n  "engine": "Raget 1.0"\n}\n';
       } else {
-        next[vfsKey] = '/* Berkas ' + rawFile + ' */\n';
+        next[vfsKey] = 'export const berkas = "' + rawFile + '";\n';
       }
       return {
         ok: true,

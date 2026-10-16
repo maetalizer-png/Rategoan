@@ -18,7 +18,7 @@ function loadScript(url, globalCheck) {
 }
 
 function loadModule(url) {
-  return import(/* webpackIgnore: true */ url);
+  return import(url);
 }
 
 export const libLoader = Object.freeze({

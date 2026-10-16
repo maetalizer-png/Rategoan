@@ -1,26 +1,3 @@
-// Regresi bench penuh, dipecah core-suite (dihitung ke pass-rate resmi,
-// target >=97%) vs stub-suite (informatif - kasus yang butuh file terlampir
-// nyata seperti OCR/PDF/Notion/Evernote/WhatsApp/ICS, tidak bisa dipicu
-// dari prompt teks murni oleh runner headless sederhana ini).
-//
-// CATATAN JUJUR (ditemukan MEGA-BATCH ROUND 6): satu proses Chromium
-// headless di sandbox ini SELALU ditutup paksa ("Target page, context or
-// browser has been closed") pada elapsed ~1396-1397 detik PERSIS
-// (selisih <1 detik antar 5 percobaan independen) - diverifikasi BUKAN
-// disebabkan penumpukan DOM/riwayat chat (reset history.clearAll() tiap
-// N kasus tidak mengubah titik crash sama sekali), BUKAN leak proses Node
-// (RSS Node stabil ~90-110MB sepanjang run), BUKAN kasus bench tertentu
-// (subset kasus di sekitar titik crash lolos 100% kalau dijalankan
-// terpisah/segar), dan BUKAN kompositor GPU (--disable-gpu tidak mengubah
-// apa pun). Polanya konsisten dengan batas waktu proses level
-// infrastruktur/sandbox (~23 menit 17 detik) di LUAR kendali skrip ini.
-// Solusi: jalankan bench per-CHUNK (proses Chromium baru tiap chunk,
-// me-reset hitungan waktu tsb) lewat --start/--end, lalu gabungkan hasil -
-// lihat raget-tools/run-bench-chunked.mjs untuk orkestrasi otomatis.
-//
-// Jalankan penuh (satu proses - berisiko kena batas ~23 menit kalau
-// bench.json besar): node tools/run-bench.mjs [base-url]
-// Jalankan sebagian: node tools/run-bench.mjs [base-url] --start=0 --end=400
 import { chromium } from 'playwright';
 import { readFileSync, writeFileSync } from 'fs';
 
@@ -78,15 +55,6 @@ async function main() {
 
   const results = { core: { pass: 0, total: 0, fails: [] }, stub: { pass: 0, total: 0, fails: [] } };
   const t0 = Date.now();
-  // Bench 1180+ kasus dalam satu tab persisten (tanpa reset) membuat DOM
-  // riwayat chat menumpuk terus tanpa batas - diukur langsung: melambat
-  // progresif (0,7s/kasus di awal -> >2s/kasus di kasus ke-500+) lalu tab
-  // ditutup paksa (renderer crash diam-diam, tanpa event 'crash'/
-  // 'disconnected' - diverifikasi lewat listener khusus) sebelum kasus
-  // ke-1190 tercapai, di SETIAP percobaan (5x berturut-turut). Fix: kosongkan
-  // riwayat chat lewat history.clearAll() (API aplikasi sendiri, BUKAN
-  // reload halaman - tidak perlu login/onboarding ulang) tiap
-  // RESET_EVERY kasus supaya DOM tidak pernah menumpuk tak terbatas.
   const RESET_EVERY = 60;
   let casesSinceReset = 0;
   for (const c of bench) {
