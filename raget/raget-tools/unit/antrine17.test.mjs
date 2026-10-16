@@ -683,4 +683,6 @@ test('DOD-41.23 Proses Berpikir Ala Grok (Membedah Tugas Tanpa Jargon Rumus Mesi
   assert.match(tcSrc, /SINTESIS_SUMBER/);
   assert.ok(Array.isArray(webBuildSteps[0].chips) && webBuildSteps[0].chips.some((c) => /Acuan: website C/i.test(c)));
   assert.equal(thoughtCss.includes('.stepper-node.is-pending {\n  display: none'), false);
+  const compAfterAsk = read('js/chat/composer.js');
+  assert.match(compAfterAsk, /if \(livePlan && livePlan\.parentNode && !livePlan\.dataset\.idx\) livePlan\.remove\(\)/);
 });

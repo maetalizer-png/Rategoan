@@ -964,7 +964,6 @@ async function applyCraft(text) {
     appendConsole('Read → ' + vfsCtx.summary);
     appendConsole('[Synthesize]');
     appendConsole('envelope ' + envelope.run_id + ' ' + envelope.state);
-    // Auto-Follow Canvas Mode: show files/diff while synthesizing
     showTab('files');
     runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
@@ -991,7 +990,6 @@ async function applyCraft(text) {
       vfs.write(vfsTarget, body);
       git.stage(vfsTarget, body);
     });
-    // Auto-Follow Canvas Mode: switch to Terminal during Lint & Test
     showTab('logs');
     let verify = 'Berkas ditulis';
     let rolled = false;

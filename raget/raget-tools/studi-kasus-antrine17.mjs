@@ -392,7 +392,7 @@ try {
       && grokThoughtAudit.midLiveIdx === 1
       && grokThoughtAudit.finalLiveIdx === 2
       && grokThoughtAudit.hasJargon === false
-      && grokThoughtAudit.doneLabel === 'Proses berpikir'
+      && (grokThoughtAudit.doneLabel === 'Proses berpikir' || grokThoughtAudit.doneLabel.startsWith('Berpikir selama '))
       && studioLayoutAudit.hasBtnModel === true
       && studioLayoutAudit.modelNextToPlus === true
       && studioModelSheetAudit.sheetOpen === true

@@ -537,6 +537,7 @@ function bindPendingAnswer() {
       role: 'ai',
       text: String(reply),
       time: Date.now(),
+       thoughts: buildDynamicThoughts(prompt || 'permintaan pengguna', { think: true }),
       request_id: detail.request_id || '',
       message_id: detail.message_id || '',
     };
@@ -750,7 +751,10 @@ export const composer = {
     livePlan.className = 'msg ai';
     livePlan.dataset.thoughtStart = String(Date.now());
     mountThought(livePlan, thoughts, 'berjalan');
-    $('messages').appendChild(livePlan);
+    const msgBox = $('messages');
+    const discNode = msgBox ? msgBox.querySelector('.chat-stream-disclaimer') : null;
+    if (msgBox && discNode) msgBox.insertBefore(livePlan, discNode);
+    else if (msgBox) msgBox.appendChild(livePlan);
 
     const refreshLiveThoughts = () => {
       if (!livePlan.isConnected) return;
@@ -764,7 +768,7 @@ export const composer = {
         research: this.researchActive,
         files: att && att.name,
         sessionId: s.id,
-        onStep: () => refreshLiveThoughts(),
+        onStep: () => {},
       });
       if (planRes.status === 'dibatalkan') {
         livePlan.remove();
@@ -855,12 +859,12 @@ export const composer = {
     }
     const modelPrefix = [imageNote ? GUARDRAIL : '', skillNote, flashNote, prefNote, projectPrefix, imageNote, webNote].filter(Boolean).join('\n\n');
     if ((store.get() && store.get().currentId) !== sendSessionId) {
-      if (livePlan && livePlan.parentNode) livePlan.remove();
+      if (livePlan && livePlan.parentNode && !livePlan.dataset.idx) livePlan.remove();
       return;
     }
     let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, livePlan, modelPrefix });
     if ((store.get() && store.get().currentId) !== sendSessionId) {
-      if (livePlan && livePlan.parentNode) livePlan.remove();
+      if (livePlan && livePlan.parentNode && !livePlan.dataset.idx) livePlan.remove();
       return;
     }
     if (reply == null) {
@@ -884,7 +888,7 @@ export const composer = {
       toast.show('Bobot sedang diunduh (0%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.');
       return;
     }
-    if (livePlan && livePlan.parentNode) livePlan.remove();
+    if (livePlan && livePlan.parentNode && !livePlan.dataset.idx) livePlan.remove();
     if (cowork.expectsEdit()) cowork.applyReply(reply);
     if (isWebsearch && webSources.length && typeof document !== 'undefined') {
       const aiBubbles = document.querySelectorAll('#messages .msg.ai');
@@ -1221,9 +1225,11 @@ export const composer = {
     const slideCard = $('sheet-slide');
     if (slideCard) {
       slideCard.onclick = () => {
-        this.slideActive = !this.slideActive;
+        this.slideActive = true;
         this.paintQuick();
-        toast.show(this.slideActive ? 'Mode Slide (.pptx) aktif — ketik topik presentasi Anda' : 'Mode slide mati');
+        sheets.close();
+        toast.show('Mode Slide (.pptx) aktif — ketik topik presentasi Anda');
+        if (inp) inp.focus();
       };
     }
     $('btn-login').onclick = () => {

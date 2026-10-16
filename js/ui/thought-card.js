@@ -7,6 +7,7 @@ const ORB = {
   connect: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
   slide: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>',
   search: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.2" y2="16.2"/></svg>',
+  check: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
   write: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
 };
 
@@ -34,6 +35,7 @@ export function laneOf(step) {
   if (k === 'WEB_SEARCH') return 'web';
   if (k === 'SLIDE') return 'slide';
   if (k === 'TOOL_CODE' || k === 'TOOL_MATH') return 'tool';
+  if (k === 'CHECK') return 'check';
   if (k === 'SEARCH') return 'search';
   if (k === 'WRITE') return 'write';
   if (k === 'FILE') return 'file';
@@ -68,13 +70,13 @@ function extractBuildEntities(clean) {
   const refMatch = clean.match(/(?:buat(?:kan)?|bikin|rancang)\s+(?:saya\s+)?(.+?)\s+(?:seperti|mirip|ala|kayak)\s+([^,.?!]+)/i);
   if (refMatch) {
     return {
-      target: refMatch[1].trim().slice(0, 28),
-      ref: refMatch[2].trim().slice(0, 28),
+      target: refMatch[1].trim().slice(0, 32),
+      ref: refMatch[2].trim().slice(0, 32),
     };
   }
-  const targetMatch = clean.match(/(?:buat(?:kan)?|bikin|rancang)\s+(?:saya\s+)?(website|web|situs|aplikasi|app|landing\s*page|dashboard|toko(?:\s*online)?|portofolio)(?:\s+([^,.?!]+))?/i);
-  if (targetMatch) {
-    const label = [targetMatch[1], targetMatch[2] || ''].join(' ').trim().slice(0, 28);
+  const appMatch = clean.match(/(?:buat(?:kan)?|bikin|rancang)\s+(?:saya\s+)?(aplikasi|app|website|web|situs|landing\s*page|dashboard|toko(?:\s*online)?|jadwal(?:\s*perjalanan)?|itinerary|program|alat)(?:\s+([^,.?!]+))?/i);
+  if (appMatch) {
+    const label = [appMatch[1], appMatch[2] || ''].join(' ').trim().slice(0, 36);
     return { target: label, ref: '' };
   }
   return { target: '', ref: '' };
@@ -82,6 +84,7 @@ function extractBuildEntities(clean) {
 
 export function buildDynamicThoughts(query, opts) {
   const clean = String(query || '').replace(/\s+/g, ' ').trim();
+  const lower = clean.toLowerCase();
   const isGenericAttach = !clean || /^baca dan ringkas lampiran ini$/i.test(clean);
   const topic = extractKeyTopic(clean);
   const shortQ = clean.length > 44 ? clean.slice(0, 44) + '…' : (clean || 'permintaan pengguna');
@@ -97,12 +100,16 @@ export function buildDynamicThoughts(query, opts) {
   const isZipFile = /\.zip$/i.test(rawFileName) || (fileMeta && fileMeta.kind === 'zip');
   const isPdfFile = /\.pdf$/i.test(rawFileName) || (fileMeta && fileMeta.kind === 'pdf');
 
-  const isConnect = /\b(github|repo|drive|gmail|email|kotak masuk|calendar|kalender|jadwal)\b/i.test(clean);
+  const isWebBuild = /\b(website|web|situs|landing\s*page|aplikasi|app|toko\s*online|dashboard|portofolio|html|css|jadwal\s*perjalanan|itinerary)\b/i.test(clean) || (/\b(buatkan|bikin|rancang)\b/i.test(clean) && /\b(aplikasi|web|html)\b/i.test(clean));
+  const isCode = isWebBuild || /\b(kode|code|fungsi|function|script|python|js|bug|komponen|perbaiki|edit|ubah)\b/i.test(clean);
   const isSlide = /\b(slide|presentasi|powerpoint|pptx|deck)\b/i.test(clean);
-  const isWebBuild = /\b(website|web|situs|landing\s*page|aplikasi|app|toko\s*online|dashboard|portofolio|seperti\s+website)\b/i.test(clean);
-  const isCode = isWebBuild || /\b(kode|code|fungsi|function|script|html|css|python|js|bug|komponen|perbaiki|edit|ubah)\b/i.test(clean);
+  const isConnect = !isWebBuild && !isCode && /\b(github|repo|drive|gmail|email|kotak masuk|kalender|calendar)\b/i.test(clean);
   const isMath = /\b(hitung|rumus|integral|turunan|matriks|persamaan|\d+\s*[+*^/-]\s*\d+)\b/i.test(clean);
-  const isGreeting = /^(halo|hai|hi|hei|selamat\s+(pagi|siang|sore|malam)|assalamualaikum|tes|test|ping)\b/i.test(clean) && clean.split(/\s+/).length <= 5;
+  const isGreeting = /^(ha+l+o+|he+l+o+|hai+|hi+|hei+|hey+|p|pagi|siang|sore|malam|selamat\s+(pagi|siang|sore|malam)|assalamu'?alaikum|permisi|tes|test|ping|apa\s+kabar)\b/i.test(clean) && clean.split(/\s+/).length <= 5;
+
+  const isPhysics = /\b(fisika|mekanika|termodinamika|relativitas|optik|kuantum|kinematika|gravitasi)\b/i.test(lower);
+  const isBiology = /\b(biologi|hayati|organisme|sel|genetika|ekosistem|zoologi|botani|fisiologi)\b/i.test(lower);
+  const isMathTopic = !isMath && /\b(matematika|aljabar|geometri|kalkulus|trigonometri|statistika|aritmetika)\b/i.test(lower);
 
   const steps = [];
 
@@ -176,7 +183,7 @@ export function buildDynamicThoughts(query, opts) {
     }
     if (isThink) {
       steps.push({
-        kind: 'MIND',
+        kind: 'CHECK',
         liveLabel: 'Menyelaraskan temuan berkas dengan permintaan…',
         text: 'Menyelaraskan temuan berkas dengan permintaan pengguna',
         sub: 'Saya periksa kembali hasil pembacaan berkas agar penjelasan yang disusun runtut dan menjawab seluruh pertanyaan.',
@@ -214,28 +221,39 @@ export function buildDynamicThoughts(query, opts) {
 
   if (isWebBuild) {
     const buildEnt = extractBuildEntities(clean);
+    const targetDesc = buildEnt.target || topic;
+    const hasItinerary = /\b(jadwal|itinerary|perjalanan|agenda)\b/i.test(clean);
+
     steps.push({
       kind: 'MIND',
       liveLabel: 'Membedah kebutuhan pembuatan "' + shortQ + '"…',
       text: 'Membedah kebutuhan pembuatan "' + shortQ + '"',
-      sub: 'Saya identifikasi komponen utama, gaya tampilan, struktur navigasi, serta fitur referensi yang diperlukan.',
+      sub: buildEnt.ref
+        ? ('Saya identifikasi komponen utama, gaya tampilan, struktur navigasi, serta fitur referensi yang diperlukan.')
+        : hasItinerary
+        ? ('Saya petakan kebutuhan modul jadwal perjalanan: input destinasi, linimasa waktu, daftar kegiatan, dan kartu tampilan.')
+        : ('Saya petakan kebutuhan struktur ' + targetDesc + ': komponen utama, tata letak antarmuka, dan alur interaksinya.'),
       chips: [
         buildEnt.target ? ('Target: ' + buildEnt.target) : ('Proyek: ' + topic.slice(0, 22)),
-        buildEnt.ref ? ('Acuan: ' + buildEnt.ref) : 'Pemetaan Fitur Utama',
+        buildEnt.ref ? ('Acuan: ' + buildEnt.ref) : 'Struktur Modul',
       ].filter(Boolean),
     });
     steps.push({
       kind: 'TOOL_CODE',
       liveLabel: 'Merancang kerangka halaman & tata letak visual…',
       text: 'Merancang kerangka halaman, tata letak visual, & interaksi',
-      sub: 'Menentukan susunan bagian halaman (header, kartu konten, formulir, dan aturan responsif) beserta fungsi interaktifnya.',
+      sub: hasItinerary
+        ? 'Menyusun kerangka HTML5 semantik, penataan jadwal berbasis linimasa, serta gaya CSS yang rapi dan responsif.'
+        : 'Menentukan susunan bagian halaman (header, kartu konten, formulir, dan aturan responsif) beserta fungsi interaktifnya.',
     });
     if (isThink) {
       steps.push({
         kind: 'SEARCH',
         liveLabel: 'Meneliti kelengkapan fitur & alur pengguna…',
         text: 'Meneliti kelengkapan fitur & alur pengalaman pengguna',
-        sub: 'Saya pastikan setiap komponen yang dirancang saling terhubung dengan rapi dan sesuai spesifikasi yang diminta.',
+        sub: hasItinerary
+          ? 'Memastikan alur penambahan kegiatan, penanda waktu, dan keterbacaan jadwal perjalanan berjalan dengan lancar.'
+          : 'Saya pastikan setiap komponen yang dirancang saling terhubung dengan rapi dan sesuai spesifikasi yang diminta.',
       });
     }
     steps.push({
@@ -357,13 +375,102 @@ export function buildDynamicThoughts(query, opts) {
     return steps;
   }
 
-  // Pertanyaan Umum / Ilmu Pengetahuan / Riset / Analisis
+  if (isPhysics) {
+    steps.push({
+      kind: 'MIND',
+      liveLabel: 'Membedah ruang lingkup ilmu fisika…',
+      text: 'Membedah ruang lingkup materi ilmu fisika',
+      sub: 'Saya petakan konsep dasar fisika: hukum alam, interaksi materi dan energi, mekanika gerak, serta prinsip keteraturan alam.',
+    });
+    steps.push({
+      kind: 'SEARCH',
+      liveLabel: 'Menelusuri cabang fisika & contoh penerapannya…',
+      text: 'Menelusuri cabang fisika klasik & modern serta contoh terapannya',
+      sub: 'Mengelompokkan cabang utama (mekanika, termodinamika, elektromagnetisme, dan fisika modern) beserta aplikasinya dalam teknologi.',
+    });
+    if (isThink) {
+      steps.push({
+        kind: 'CHECK',
+        liveLabel: 'Menyusun kerangka penjelasan ilmiah fisika…',
+        text: 'Menyusun alur pembahasan ilmiah & memverifikasi ketepatan konsep',
+        sub: 'Menyusun sistematika penjelasan dari definisi, prinsip kunci, hingga manfaat nyata ilmu fisika agar terstruktur utuh.',
+      });
+    }
+    steps.push({
+      kind: 'WRITE',
+      liveLabel: 'Menyusun jawaban mengenai ilmu fisika…',
+      text: 'Menyusun jawaban komprehensif mengenai ilmu fisika',
+      sub: 'Merangkai penjelasan yang jernih, runtut, dan mudah dipahami.',
+    });
+    return steps;
+  }
+
+  if (isBiology) {
+    steps.push({
+      kind: 'MIND',
+      liveLabel: 'Membedah ruang lingkup ilmu biologi…',
+      text: 'Membedah ruang lingkup materi ilmu pengetahuan biologi',
+      sub: 'Saya petakan konsep dasar biologi: karakteristik makhluk hidup, tingkatan sel, genetika, serta interaksi dalam ekosistem.',
+    });
+    steps.push({
+      kind: 'SEARCH',
+      liveLabel: 'Menelusuri cabang biologi & perannya bagi kehidupan…',
+      text: 'Menelusuri pembagian cabang biologi & peranannya bagi kehidupan',
+      sub: 'Menguraikan ruang lingkup biologi (anatomi, fisiologi, ekologi, mikrobiologi) serta kontribusinya bagi kesehatan dan lingkungan.',
+    });
+    if (isThink) {
+      steps.push({
+        kind: 'CHECK',
+        liveLabel: 'Menyusun kerangka penjelasan biologi…',
+        text: 'Menyusun alur pembahasan terstruktur mengenai keanekaragaman hayati',
+        sub: 'Menyelaraskan urutan bahasan agar definisi, proses kehidupan, dan contoh nyata tersaji secara ilmiah dan mudah dipahami.',
+      });
+    }
+    steps.push({
+      kind: 'WRITE',
+      liveLabel: 'Menyusun jawaban mengenai ilmu biologi…',
+      text: 'Menyusun jawaban komprehensif mengenai ilmu pengetahuan biologi',
+      sub: 'Merangkai penjelasan yang terstruktur, padat, dan jelas.',
+    });
+    return steps;
+  }
+
+  if (isMathTopic) {
+    steps.push({
+      kind: 'MIND',
+      liveLabel: 'Membedah ruang lingkup ilmu matematika…',
+      text: 'Membedah ruang lingkup materi ilmu matematika',
+      sub: 'Saya petakan pilar dasar matematika: penalaran logis, hubungan kuantitatif, struktur bilangan, aljabar, dan geometri.',
+    });
+    steps.push({
+      kind: 'SEARCH',
+      liveLabel: 'Menelusuri cabang matematika & aplikasi praktisnya…',
+      text: 'Menelusuri cabang utama matematika & penerapannya dalam sains',
+      sub: 'Menguraikan fungsi matematika sebagai bahasa ilmu pengetahuan serta kegunaannya dalam teknologi dan kehidupan sehari-hari.',
+    });
+    if (isThink) {
+      steps.push({
+        kind: 'CHECK',
+        liveLabel: 'Menyusun alur pembahasan konsep matematika…',
+        text: 'Menyusun alur pembahasan konsep dari teori dasar hingga penerapan',
+        sub: 'Memastikan penjelasan terstruktur rapi dari pengertian dasar, cabang ilmu, hingga contoh peran matematika.',
+      });
+    }
+    steps.push({
+      kind: 'WRITE',
+      liveLabel: 'Menyusun jawaban mengenai ilmu matematika…',
+      text: 'Menyusun jawaban komprehensif mengenai ilmu matematika',
+      sub: 'Merangkai penjelasan yang runtut, jernih, dan mudah dipahami.',
+    });
+    return steps;
+  }
+
   steps.push({
     kind: 'MIND',
     liveLabel: 'Membedah fokus pertanyaan tentang "' + topic.slice(0, 26) + '"…',
     text: 'Membedah fokus pertanyaan tentang "' + shortQ + '"',
     sub: isThink
-      ? ('Saya petakan poin-poin inti mengenai ' + topic + ' yang perlu dijelaskan, mulai dari pengertian dasar, cara kerja/pembagian utama, hingga contoh penerapannya.')
+      ? ('Saya petakan poin-poin inti mengenai ' + topic + ' yang perlu dijelaskan secara terstruktur.')
       : ('Saya identifikasi inti informasi mengenai ' + topic + ' yang ditanyakan oleh pengguna.'),
   });
 
@@ -400,7 +507,7 @@ export function buildDynamicThoughts(query, opts) {
 
   if (isThink && !isResearch) {
     steps.push({
-      kind: 'TOOL_CODE',
+      kind: 'CHECK',
       liveLabel: 'Menyusun alur pembahasan & memeriksa kelengkapan…',
       text: 'Menyusun alur pembahasan & memeriksa kelengkapan argumen',
       sub: 'Saya susun urutan penjelasan dari konsep dasar hingga rincian mendalam agar terstruktur dan tidak ada bagian yang terlewat.',
@@ -423,6 +530,38 @@ export function mountThought(container, thoughts, status) {
   const started = Number(container.dataset.thoughtStart) || Date.now();
   const running = status === 'berjalan';
 
+  const prevBox = container.querySelector(':scope > .thought-accordion');
+  if (prevBox) {
+    const prevNodes = prevBox.querySelectorAll('.stepper-node');
+    if (prevNodes.length === thoughts.length) {
+      if (!running) {
+        const prevTimer = Number(container.dataset.thoughtTimerId) || 0;
+        if (prevTimer) {
+          clearInterval(prevTimer);
+          delete container.dataset.thoughtTimerId;
+        }
+        if (container._onNeuralStep && typeof window !== 'undefined') {
+          window.removeEventListener('rategoan:neural-step', container._onNeuralStep);
+          delete container._onNeuralStep;
+        }
+      }
+      prevBox.className = 'thought-accordion' + (running ? ' running' : ' completed');
+      const prevDot = prevBox.querySelector('.thought-dot');
+      if (prevDot) prevDot.className = 'zen-dot thought-dot' + (running ? ' is-pulsing' : ' is-done');
+      const curActive = running ? Math.min(thoughts.length - 1, Number(container.dataset.thoughtActiveIdx) || 0) : thoughts.length;
+      prevNodes.forEach((li, idx) => {
+        const step = thoughts[idx];
+        const lane = laneOf(step);
+        const stClass = !running ? ' is-done' : (idx < curActive ? ' is-done' : (idx === curActive ? ' is-live' : ' is-pending'));
+        li.className = 'stepper-node lane-' + lane + stClass;
+        const subEl = li.querySelector('.stepper-sub');
+        if (step && step.sub && subEl) subEl.textContent = String(step.sub).trim();
+      });
+      return prevBox;
+    }
+    prevBox.remove();
+  }
+
   const prevTimer = Number(container.dataset.thoughtTimerId) || 0;
   if (prevTimer) {
     clearInterval(prevTimer);
@@ -432,9 +571,6 @@ export function mountThought(container, thoughts, status) {
     window.removeEventListener('rategoan:neural-step', container._onNeuralStep);
     delete container._onNeuralStep;
   }
-
-  const prevBox = container.querySelector(':scope > .thought-accordion');
-  if (prevBox) prevBox.remove();
 
   const box = document.createElement('details');
   box.className = 'thought-accordion' + (running ? ' running' : ' completed');
@@ -452,20 +588,9 @@ export function mountThought(container, thoughts, status) {
   dot.className = 'zen-dot thought-dot' + (running ? ' is-pulsing' : ' is-done');
   dot.setAttribute('aria-hidden', 'true');
 
-  const resolveLiveSummaryText = (idx) => {
-    if (!running) return LEGACY_STATUS_FALLBACK.completed;
-    const st = thoughts[idx] || thoughts[0];
-    if (st && st.liveLabel) return String(st.liveLabel);
-    if (st && st.text) {
-      const t = String(st.text).trim();
-      return (t.length > 48 ? t.slice(0, 48) + '…' : t + '…');
-    }
-    return LEGACY_STATUS_FALLBACK.running;
-  };
-
   const label = document.createElement('span');
-  label.className = 'thought-summary-label' + (running ? ' is-live-text' : '');
-  label.textContent = resolveLiveSummaryText(initialActive);
+  label.className = 'thought-summary-label';
+  label.textContent = LEGACY_STATUS_FALLBACK.completed;
 
   const chev = document.createElement('span');
   chev.className = 'thought-chevron';
@@ -525,18 +650,10 @@ export function mountThought(container, thoughts, status) {
 
   const applyActiveStep = (activeIdx) => {
     const clamped = Math.max(0, Math.min(thoughts.length - 1, activeIdx | 0));
-    const prevIdx = Number(container.dataset.thoughtActiveIdx) || 0;
     container.dataset.thoughtActiveIdx = String(clamped);
     for (let i = 0; i < nodes.length; i += 1) {
       const state = i < clamped ? ' is-done' : (i === clamped ? ' is-live' : ' is-pending');
       nodes[i].li.className = 'stepper-node lane-' + nodes[i].lane + state;
-    }
-    const nextSummaryText = resolveLiveSummaryText(clamped);
-    if (label.textContent !== nextSummaryText || clamped !== prevIdx) {
-      label.classList.remove('is-switching');
-      void label.offsetWidth;
-      label.textContent = nextSummaryText;
-      label.classList.add('is-switching');
     }
   };
 
@@ -546,7 +663,7 @@ export function mountThought(container, thoughts, status) {
       const done = Number(d.doneLayers) || 0;
       const total = Math.max(1, Number(d.totalLayers) || 28);
       const ratio = Math.max(0, Math.min(0.999, done / total));
-      const layerIdx = Math.floor(ratio * thoughts.length);
+      const layerIdx = Math.min(thoughts.length - 1, Math.floor(ratio * thoughts.length));
       const curIdx = Number(container.dataset.thoughtActiveIdx) || 0;
       if (layerIdx > curIdx) applyActiveStep(layerIdx);
     };
@@ -565,10 +682,10 @@ export function mountThought(container, thoughts, status) {
         return;
       }
       const nowSec = Math.max(0.1, (Date.now() - started) / 1000);
-      const timeIdx = Math.min(thoughts.length - 1, Math.floor(nowSec / 1.3));
+      const timeIdx = Math.min(thoughts.length - 1, Math.floor(nowSec / 0.7));
       const curIdx = Number(container.dataset.thoughtActiveIdx) || 0;
       if (timeIdx > curIdx) applyActiveStep(timeIdx);
-    }, 120);
+    }, 150);
     container.dataset.thoughtTimerId = String(tid);
   }
 

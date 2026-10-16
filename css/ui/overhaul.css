@@ -254,7 +254,7 @@
 .memory-card { border: 1px solid var(--rg-line); border-radius: 12px; padding: 10px; margin: 8px 0; background: var(--rg-surface); }
 .quiz-card { border: 1px solid var(--rg-line); border-radius: 14px; padding: 12px; margin: 8px 0; background: var(--rg-surface); display: flex; flex-direction: column; gap: 8px; }
 .quiz-card button { text-align: left; border: 1px solid var(--rg-line); border-radius: 10px; padding: 8px 10px; background: var(--rg-surface-2); }
-#composer { padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
+#composer { padding: 8px 14px calc(24px + max(4px, env(safe-area-inset-bottom, 0px))) !important; background: transparent !important; box-shadow: none !important; border: none !important; }
 @media (max-width: 640px) {
   #btn-command-palette { display: none !important; }
 }
@@ -614,8 +614,8 @@ body.is-generating #btn-voice-input { display: none !important; }
 .starter-grid button, .starter-chip, .research-actions button { min-height: 44px; border-radius: 999px; border: 1px solid var(--rg-line); background: transparent; padding: 6px 12px; }
 .research-card { padding: 12px 14px; }
 .research-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-#attach-sheet { max-height: 50vh; overflow-y: auto; padding-bottom: 24px; transition: max-height 0.24s cubic-bezier(0.22, 1, 0.36, 1); }
-#attach-sheet.is-expanded { max-height: 88vh !important; }
+#attach-sheet { max-height: 75vh; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 16px; }
+html, body { overscroll-behavior-y: none; }
 #attach-sheet .attach-plain svg { width: 20px; height: 20px; flex: none; }
 .model-item { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; text-align: left; }
 .model-item small, .hub-local-item { color: var(--rg-muted, #5c6570); font-size: 12px; }

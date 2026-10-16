@@ -68,7 +68,6 @@ export const scrolldown = {
     box.addEventListener('touchmove', (ev) => {
       if (this._touchStartY != null && ev.touches && ev.touches.length === 1) {
         const dy = ev.touches[0].clientY - this._touchStartY;
-        // Jari menarik ke bawah = pengguna sedang scroll ke atas
         if (dy > 6) {
           this.userLocked = true;
           this.update();

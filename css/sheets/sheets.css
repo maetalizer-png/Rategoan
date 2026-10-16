@@ -14,36 +14,11 @@
 }
 
 #attach-sheet {
-  max-height: 50vh !important;
+  max-height: calc(100vh - 100px) !important;
   overflow-y: auto !important;
+  overscroll-behavior: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  transition: max-height 0.24s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-#attach-sheet.is-expanded {
-  max-height: 88vh !important;
-}
-
-#attach-sheet::before {
-  content: "";
-  display: block;
-  width: 38px;
-  height: 4px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--rg-muted, #64748b) 32%, transparent);
-  margin: 0 auto 2px;
-  flex-shrink: 0;
-}
-
-@media (min-width: 1024px) {
-  #attach-sheet,
-  #attach-sheet.is-expanded {
-    max-height: calc(100vh - 100px) !important;
-  }
-  #attach-sheet::before {
-    display: none;
-  }
 }
 
 #attach-sheet::-webkit-scrollbar {
@@ -66,14 +41,15 @@
   background: var(--rg-surface);
   border: 1px solid var(--rg-line);
   border-bottom: none;
-  border-radius: 26px 26px 0 0;
-  padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  padding: 16px 16px calc(20px + env(safe-area-inset-bottom));
   box-shadow: var(--rg-shadow);
   max-height: 70vh;
   overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 
 .sheet-head {
@@ -90,7 +66,10 @@
 
 .attach-grid {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  margin: 4px 0 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--rg-line, #e2e8f0) 80%, transparent);
+  padding-bottom: 12px;
 }
 
 .attach-card {
@@ -114,14 +93,19 @@
 .attach-plain {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   width: 100%;
-  margin-top: 10px;
-  padding: 10px 4px;
-  border-radius: 10px;
+  margin-top: 0;
+  padding: 12px 10px;
+  border-radius: 12px;
   color: var(--rg-text);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14.2px;
+  font-weight: 540;
+  transition: background 0.15s ease;
+}
+
+.attach-plain:hover, .attach-plain:active {
+  background: color-mix(in srgb, var(--rg-ring, #f1f5f9) 65%, transparent);
 }
 
 .attach-plain:active {

@@ -1110,7 +1110,6 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   }
 }
 
-/* === PENYEMPURNAAN 5 PANEL MONITORING STUDIO KODE (DOD-41.18) === */
 #tab-files,
 #tab-dokumen,
 #tab-sheet {
@@ -1368,7 +1367,6 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   color: #2563eb;
 }
 
-/* Dokumen & Spreadsheet Monitoring Cards */
 .living-doc-shell,
 .living-sheet-shell {
   padding: 16px;
@@ -1610,7 +1608,6 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   font-variant-numeric: tabular-nums;
 }
 
-/* Unified Dark Terminal & Tool Trace Styling */
 #tab-logs {
   background: #0b111c;
 }
@@ -1662,7 +1659,6 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   border: 1px solid #1e293b;
 }
 
-/* Compact 531px Fit for Studio Kode #tab-files Toolbar */
 #tab-files .file-actions {
   gap: 4px;
   padding: 6px 10px;
@@ -1698,7 +1694,6 @@ body.studio-page { bottom: var(--kb-inset, 0px); }
   width: 36px;
 }
 
-/* Structured 2-Bar IDE Toolbar for Studio Kode #tab-files (Zero Clipping at 531px) */
 #tab-files .file-actions {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);

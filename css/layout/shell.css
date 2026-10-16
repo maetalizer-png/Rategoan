@@ -75,7 +75,10 @@
 
 #composer {
   flex-shrink: 0;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  padding: 8px 14px calc(24px + max(4px, env(safe-area-inset-bottom, 0px)));
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
   display: flex;
   flex-direction: column;
   gap: 6px;

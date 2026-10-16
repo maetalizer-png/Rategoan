@@ -9,7 +9,6 @@ function evalPyExpr(rawExpr, env, fns) {
   if (/^-?\d+(\.\d+)?$/.test(expr)) {
     return Number(expr);
   }
-  // Handle top-level + concatenation or addition outside parentheses
   let depth = 0;
   let inQuote = '';
   for (let i = 0; i < expr.length; i += 1) {
@@ -36,7 +35,6 @@ function evalPyExpr(rawExpr, env, fns) {
       if (ch === '/') return (Number(right) || 0) === 0 ? 0 : (Number(left) || 0) / (Number(right) || 0);
     }
   }
-  // Function call: name(args...)
   const callMatch = expr.match(/^([A-Za-z_]\w*)\(([\s\S]*)\)$/);
   if (callMatch) {
     const fnName = callMatch[1];

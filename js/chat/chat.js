@@ -493,17 +493,23 @@ export const chat = {
   },
   async typeReply(text, follow, opts) {
     const s = this.current();
-    const d = document.createElement('div');
+    const reusing = !!(opts && opts.livePlan && opts.livePlan.isConnected);
+    const d = reusing ? opts.livePlan : document.createElement('div');
     d.className = 'msg ai';
     d.dataset.idx = String(s.messages.length - 1);
     if (opts && opts.thoughtStart) d.dataset.thoughtStart = String(opts.thoughtStart);
     if (opts && opts.thoughtFrozenSec) d.dataset.thoughtFrozenSec = String(opts.thoughtFrozenSec);
     if (opts && opts.userOpened) d.dataset.userOpened = String(opts.userOpened);
-    if (opts && opts.searching) d.appendChild(buildSourceBadge());
+    if (opts && opts.searching && !d.querySelector('.msg-source-badge')) {
+      d.insertBefore(buildSourceBadge(), d.firstChild);
+    }
     if (opts && opts.thoughts) mountThought(d, opts.thoughts, 'selesai');
-    const body = document.createElement('div');
-    d.appendChild(body);
-    $('messages').appendChild(d);
+    let body = d.querySelector('.live-stream-body');
+    if (!body) {
+      body = document.createElement('div');
+      d.appendChild(body);
+    }
+    if (!reusing) $('messages').appendChild(d);
     const alreadyStreamed = !!(opts && opts.alreadyStreamed);
     if (isRich(text)) {
       mountRich(body, text);
@@ -587,27 +593,39 @@ export const chat = {
       streamedChars += piece.length;
       streamAccum += piece;
       if (lp && lp.isConnected) {
-        if (!lp.dataset.thoughtCompleted && opts && opts.thoughts) {
-          lp.dataset.thoughtCompleted = '1';
-          mountThought(lp, opts.thoughts, 'selesai');
+        const lastIdx = opts && opts.thoughts ? opts.thoughts.length - 1 : 0;
+        const curActive = Number(lp.dataset.thoughtActiveIdx) || 0;
+        if (!lp.dataset.thoughtDrafting && curActive < lastIdx) {
+          const elapsed = Date.now() - searchStart;
+          if (elapsed >= 1100 || curActive >= lastIdx - 1) {
+            lp.dataset.thoughtDrafting = '1';
+            lp.dataset.thoughtActiveIdx = String(lastIdx);
+            mountThought(lp, opts.thoughts, 'berjalan');
+          }
+        } else if (!lp.dataset.thoughtDrafting) {
+          lp.dataset.thoughtDrafting = '1';
+          lp.dataset.thoughtActiveIdx = String(lastIdx);
+          mountThought(lp, opts.thoughts, 'berjalan');
         }
-        let streamBody = lp.querySelector('.live-stream-body');
-        if (!streamBody) {
-          streamBody = document.createElement('div');
-          streamBody.className = 'live-stream-body';
-          lp.appendChild(streamBody);
-        }
-        if (!rafPending) {
-          rafPending = true;
-          const flushStream = () => {
-            rafPending = false;
-            if (!streamBody.isConnected) return;
-            streamBody.innerHTML = markdown.render(streamAccum);
-            if (scrolldown.shouldAutoScroll()) scrollBottom();
-            else scrolldown.update();
-          };
-          if (typeof requestAnimationFrame === 'function') requestAnimationFrame(flushStream);
-          else flushStream();
+        if (lp.dataset.thoughtDrafting) {
+          let streamBody = lp.querySelector('.live-stream-body');
+          if (!streamBody) {
+            streamBody = document.createElement('div');
+            streamBody.className = 'live-stream-body';
+            lp.appendChild(streamBody);
+          }
+          if (!rafPending) {
+            rafPending = true;
+            const flushStream = () => {
+              rafPending = false;
+              if (!streamBody.isConnected) return;
+              streamBody.innerHTML = markdown.render(streamAccum);
+              if (scrolldown.shouldAutoScroll()) scrollBottom();
+              else scrolldown.update();
+            };
+            if (typeof requestAnimationFrame === 'function') requestAnimationFrame(flushStream);
+            else flushStream();
+          }
         }
         return;
       }
@@ -681,8 +699,8 @@ export const chat = {
       const msgBox = $('messages');
       const keepScroll = !scrolldown.shouldAutoScroll();
       const savedTop = msgBox ? msgBox.scrollTop : 0;
-      if (lp && lp.parentNode) lp.remove();
       await this.typeReply(reply, !keepScroll, {
+        livePlan: lp,
         searching,
         thoughts: opts && opts.thoughts,
         thoughtStart,

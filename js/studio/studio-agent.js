@@ -187,7 +187,6 @@ export function craftInstruction(text, files) {
   });
   const steps = ['Baca berkas', 'Racik kode', 'Uji sandbox'];
 
-  // Named custom file creation/update in VFS (e.g., "buat modul utils.js", "buat berkas README.md")
   const namedFileMatch = ask.match(/(?:buat(?:kan)?|tambah(?:kan)?|rancang)\s+(?:modul|berkas|file|komponen)?\s*([a-zA-Z0-9_./-]+\.(?:js|mjs|css|html|py|json|md))\b/i);
   if (namedFileMatch) {
     const rawFile = namedFileMatch[1].replace(/^\/+/, '');
