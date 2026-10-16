@@ -64,6 +64,10 @@
   }
 
   #composer {
+    position: relative;
+    left: auto;
+    right: auto;
+    transform: none;
     width: 100%;
     max-width: 820px;
     margin: 0 auto;

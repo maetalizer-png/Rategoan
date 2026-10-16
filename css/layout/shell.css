@@ -31,13 +31,13 @@
 }
 
 #messages {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  padding: 16px 14px 36px;
+  padding: 16px 14px calc(115px + max(4px, env(safe-area-inset-bottom, 0px)));
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -69,19 +69,43 @@
 }
 
 #view-chat {
+  position: relative;
+  height: 100%;
   max-height: var(--vvh, 100%);
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 #composer {
-  flex-shrink: 0;
-  padding: 8px 14px calc(24px + max(4px, env(safe-area-inset-bottom, 0px)));
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  pointer-events: none;
+  padding: 8px 14px calc(14px + max(4px, env(safe-area-inset-bottom, 0px)));
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+#composer > * {
+  pointer-events: auto;
+}
+
+body.keyboard-open #composer,
+body:has(#chat-input:focus) #composer {
+  padding: 4px 14px 6px !important;
+}
+
+body.keyboard-open #messages,
+body:has(#chat-input:focus) #messages {
+  padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
 }
 
 #composer-card {

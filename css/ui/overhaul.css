@@ -254,7 +254,7 @@
 .memory-card { border: 1px solid var(--rg-line); border-radius: 12px; padding: 10px; margin: 8px 0; background: var(--rg-surface); }
 .quiz-card { border: 1px solid var(--rg-line); border-radius: 14px; padding: 12px; margin: 8px 0; background: var(--rg-surface); display: flex; flex-direction: column; gap: 8px; }
 .quiz-card button { text-align: left; border: 1px solid var(--rg-line); border-radius: 10px; padding: 8px 10px; background: var(--rg-surface-2); }
-#composer { padding: 8px 14px calc(24px + max(4px, env(safe-area-inset-bottom, 0px))) !important; background: transparent !important; box-shadow: none !important; border: none !important; }
+#composer { background: transparent !important; box-shadow: none !important; border: none !important; }
 @media (max-width: 640px) {
   #btn-command-palette { display: none !important; }
 }

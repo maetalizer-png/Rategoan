@@ -136,9 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let vvTimer = null;
     const onVvResize = () => {
       const curH = window.visualViewport.height;
-      const keyboardOpened = curH < prevVvH - 100;
+      const keyboardOpened = curH < prevVvH - 100 || (window.innerHeight - curH > 150);
       prevVvH = curH;
       setVvh();
+      document.body.classList.toggle('keyboard-open', keyboardOpened);
       if (keyboardOpened && !scrolldown.userLocked && !scrolldown.isFar()) {
         clearTimeout(vvTimer);
         vvTimer = setTimeout(() => {
