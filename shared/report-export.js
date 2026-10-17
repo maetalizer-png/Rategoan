@@ -29,6 +29,21 @@ export function buildReportHtml(spec) {
 
 export function printReport(spec) {
   const html = buildReportHtml(spec);
+  if (typeof Blob !== 'undefined' && typeof URL !== 'undefined' && typeof URL.createObjectURL === 'function') {
+    const blobUrl = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+    const frame = window.open(blobUrl, '_blank', 'noopener,noreferrer');
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+    if (frame && frame.document) {
+      try {
+        frame.document.open();
+        frame.document.write(html);
+        frame.document.close();
+        frame.focus();
+        frame.print();
+      } catch (e) { void e; }
+    }
+    return true;
+  }
   const frame = window.open('', '_blank', 'noopener,noreferrer');
   if (!frame) return false;
   frame.document.open();

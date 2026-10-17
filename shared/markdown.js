@@ -1,5 +1,5 @@
 export function safeMarkdownHref(rawUrl) {
-  const clean = String(rawUrl || "").replace(/&quot;|&#39;|["'<>\r\n\t]/g, "").trim();
+  const clean = String(rawUrl || "").split(/&quot;|&#39;|["'<>\r\n\t\s]/)[0].trim();
   if (!/^https?:\/\/[a-zA-Z0-9]/i.test(clean)) return "#";
   return clean;
 }
@@ -148,17 +148,27 @@ export const markdown = {
     });
     out = out.replace(/(^|\n)[ \t]*[-•][ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">•</span> $2</div>');
     out = out.replace(/(^|\n)[ \t]*(\d+)\.[ \t]+(.*)/g, '<div class="md-li-row"><span class="md-li">$2.</span> $3</div>');
-    out = out.replace(/(^|\n)Sumber::([^|\n]+)\|(https?:\/\/\S+)/g, '$1<div class="md-cite"><span class="md-cite-k">Sumber</span><a class="md-link" href="$3" target="_blank" rel="noopener noreferrer">$2</a></div>');
+    const links = [];
+    const holdLink = (html) => {
+      links.push(html);
+      return '\u0000__RATEGOAN_LINK_' + (links.length - 1) + '__\u0000';
+    };
+    out = out.replace(/(^|\n)Sumber::([^|\n]+)\|(https?:\/\/\S+)/g, (_m, lead, label, u) => (
+      lead + holdLink('<div class="md-cite"><span class="md-cite-k">Sumber</span><a class="md-link" href="' + safeMarkdownHref(u) + '" target="_blank" rel="noopener noreferrer">' + label + '</a></div>')
+    ));
     out = out.replace(/(^|\n)\(Sumber:\s*([^)]+)\)/g, '$1<div class="md-cite"><span class="md-cite-k">Sumber</span><span>$2</span></div>');
-    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_m, label, u) => '<a class="md-link" href="' + safeMarkdownHref(u) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>');
-    out = out.replace(/\bhttps?:\/\/[^\s<]+/g, (m, off, str) => {
-      if (/href=["']$/.test(str.slice(Math.max(0, off - 6), off))) return m;
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_m, label, u) => (
+      holdLink('<a class="md-link" href="' + safeMarkdownHref(u) + '" target="_blank" rel="noopener noreferrer">' + label + '</a>')
+    ));
+    out = out.replace(/\bhttps?:\/\/[^\s<\u0000]+/g, (m) => {
       const trailing = m.match(/[).,;:!?]+$/);
       const url = trailing ? m.slice(0, -trailing[0].length) : m;
       const rest = trailing ? trailing[0] : '';
-      if (!url) return m;
-      return '<a class="md-link" href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>' + rest;
+      const safe = safeMarkdownHref(url);
+      if (!url || safe === '#') return m;
+      return '<a class="md-link" href="' + safe + '" target="_blank" rel="noopener noreferrer">' + safe + '</a>' + rest;
     });
+    out = out.replace(/\u0000__RATEGOAN_LINK_(\d+)__\u0000/g, (_m, idx) => links[Number(idx)] || '');
     out = out.replace(/\u0000__RATEGOAN_FENCE_(\d+)__\u0000/g, (m, i) => fences[Number(i)] || '');
     out = out.replace(/(<\/h[1-3]>)\n+/g, "$1");
     out = out.replace(/\n+(<h[1-3]>)/g, "\n$1");

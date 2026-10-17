@@ -16,6 +16,7 @@ function unzip(bytes) {
     const extra = view.getUint16(offset + 28, true);
     const size = view.getUint32(offset + 22, true);
     const start = offset + 30 + nameLen + extra;
+    if (start < offset + 30 || start > bytes.length || size > bytes.length - start) break;
     const name = new TextDecoder().decode(bytes.subarray(offset + 30, offset + 30 + nameLen));
     files.push({ name, data: bytes.subarray(start, start + size) });
     offset = start + size;
@@ -88,6 +89,21 @@ export async function restoreVaultBytes(bytes) {
   const st = store.get();
   store.set({ sessions: mergeByTime(st.sessions, data.sessions), currentId: st.currentId });
   store.save();
+  if (Array.isArray(data.projects) && data.projects.length) {
+    try {
+      const mergedProjects = mergeByTime(workspace.list(), data.projects);
+      const curId = workspace.currentId() || (mergedProjects[0] && mergedProjects[0].id) || null;
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('rategoan_workspace', JSON.stringify({ projects: mergedProjects, currentId: curId }));
+      }
+    } catch (e) { void e; }
+  }
+  if (Array.isArray(data.notes) && data.notes.length) {
+    data.notes.forEach((n) => {
+      const text = typeof n === 'string' ? n : (n && n.text);
+      if (text) memoryLong.rememberNote(text);
+    });
+  }
   if (typeof document !== 'undefined') document.dispatchEvent(new CustomEvent('rategoan:sessions-restored'));
   return data;
 }
