@@ -47,11 +47,13 @@ export async function runConnectorTool(name, parameters, approvalToken) {
   if (approvalToken) headers['x-rategoan-confirm-nonce'] = approvalToken;
   if (route.service !== 'web_search_reader') {
     const token = connectorState.token(route.service);
-    if (!token) return { ok: false, error: 'belum_terhubung' };
-    headers.authorization = 'Bearer ' + token;
+    const svc = (connectorState.read().services || {})[route.service] || {};
+    if (!token && !svc.cookie_session) return { ok: false, error: 'belum_terhubung' };
+    if (token) headers.authorization = 'Bearer ' + token;
   }
   const res = await fetch(route.url, {
     method: 'POST',
+    credentials: 'same-origin',
     headers,
     body: JSON.stringify({ name, parameters: parameters || {} }),
   });
