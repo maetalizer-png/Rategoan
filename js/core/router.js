@@ -32,6 +32,17 @@ export const router = {
       const el = $(this.routes[name]);
       if (el) el.hidden = name !== hash;
     });
+    if (hash !== 'chat') {
+      const artPanel = $('artifact-panel');
+      const appEl = $('app');
+      if (artPanel) {
+        artPanel.classList.remove('open');
+        artPanel.hidden = true;
+      }
+      if (appEl) appEl.classList.remove('split');
+    }
+    const msgMenu = $('msg-menu');
+    if (msgMenu) msgMenu.hidden = true;
     const tb = $('topbar');
     if (tb) tb.hidden = hash !== 'chat';
     document.body.classList.toggle('no-topbar', hash !== 'chat');
@@ -41,6 +52,9 @@ export const router = {
     document.querySelectorAll('[data-route]').forEach((el) => {
       el.classList.toggle('on', el.getAttribute('data-route') === hash);
     });
+    if (typeof window !== 'undefined' && typeof CustomEvent === 'function') {
+      window.dispatchEvent(new CustomEvent('rategoan:route', { detail: { view: hash, full } }));
+    }
   },
   go(to) {
     const full = String(to || 'chat');
