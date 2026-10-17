@@ -26,7 +26,7 @@ export function cleanDriveId(raw) {
 }
 
 async function special(tool, params, token, res) {
-  if (tool.name === 'drive_search_files') {
+  if (tool.name === 'drive_search_files' || tool.name === 'drive_search') {
     const q = params.q || params.query || '';
     const url = 'https://www.googleapis.com/drive/v3/files?pageSize=20&fields=files(id,name,mimeType,modifiedTime)&q=' + encodeURIComponent(q);
     const upstream = await googleGet(url, token);
