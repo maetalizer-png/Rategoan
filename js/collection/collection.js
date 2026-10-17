@@ -244,6 +244,8 @@ async function renderTersimpan() {
 
 function itemCardHtml(it, matched) {
   const highlighted = collectionSearch.highlightText(it.text, matched);
+  const hasCustomTitle = it.chatTitle && it.chatTitle !== 'Catatan' && it.chatTitle !== 'Percakapan' && it.chatTitle !== it.text;
+  const titleRow = hasCustomTitle ? ('<div class="coll-item-title"><strong>' + escapeHtml(it.chatTitle) + '</strong></div>') : '';
   return (
     '<div class="coll-item" data-id="' + it.id + '">' +
     '<div class="coll-item-head">' +
@@ -251,6 +253,7 @@ function itemCardHtml(it, matched) {
     '<span class="coll-item-time">' + relTime(it.time) + '</span>' +
     '<button type="button" class="coll-item-pin' + (it.pinned ? ' on' : '') + '" data-pin="' + it.id + '" aria-label="Pin">' + ic('pin') + '</button>' +
     '</div>' +
+    titleRow +
     '<div class="coll-item-text">' + highlighted + '</div>' +
     '<div class="coll-tag-picker" id="tagpick-' + it.id + '" hidden></div>' +
     '<div class="coll-item-note">' +
@@ -705,7 +708,7 @@ export const collectionPage = {
         text: text || title,
         tag: chosenTag(),
         chatTitle: title || 'Catatan',
-        note: title,
+        note: '',
       });
       $('coll-note-title').value = '';
       $('coll-note-body').value = '';
