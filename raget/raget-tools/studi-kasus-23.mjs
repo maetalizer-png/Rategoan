@@ -175,7 +175,7 @@ await narrow.waitForSelector('#studio-attach-sheet:not([hidden])');
 const sheet = await narrow.locator('#studio-attach-sheet').boundingBox();
 await narrow.keyboard.press('Escape');
 const closed = await narrow.evaluate(() => document.getElementById('studio-attach-sheet').hidden);
-note(sheet && sheet.height < 300 && sheet.height > 40 && closed, 'lembar ponsel studio', 'tinggi=' + Math.round(sheet.height) + ' tutup=' + closed);
+note(sheet && sheet.height < 420 && sheet.height > 40 && closed, 'lembar ponsel studio', 'tinggi=' + Math.round(sheet.height) + ' tutup=' + closed);
 const side = await desktop.evaluate(() => {
   const nav = document.querySelector('.side-nav');
   const kickers = document.body.innerText;

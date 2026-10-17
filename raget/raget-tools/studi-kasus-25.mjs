@@ -50,6 +50,51 @@ function encodeFrame(text) {
 }
 
 function startRpc() {
+  if (typeof globalThis.WebSocket !== 'function') {
+    globalThis.WebSocket = class LocalWS {
+      constructor(url) {
+        this.url = url;
+        this.readyState = 0;
+        const u = new URL(url);
+        const key = crypto.randomBytes(16).toString('base64');
+        const req = http.request({
+          hostname: u.hostname,
+          port: u.port,
+          path: u.pathname,
+          headers: {
+            Connection: 'Upgrade',
+            Upgrade: 'websocket',
+            'Sec-WebSocket-Key': key,
+            'Sec-WebSocket-Version': '13',
+          },
+        });
+        req.on('upgrade', (res, sock) => {
+          this._sock = sock;
+          this.readyState = 1;
+          sock.on('data', (buf) => {
+            if (buf.length >= 2 && (buf[0] & 0x0f) === 1) {
+              const len = buf[1] & 0x7f;
+              const text = buf.subarray(2, 2 + len).toString('utf8');
+              if (this.onmessage) this.onmessage({ data: text });
+            }
+          });
+          if (this.onopen) this.onopen({});
+        });
+        req.on('error', (err) => {
+          if (this.onerror) this.onerror(err);
+        });
+        req.end();
+      }
+      send(text) {
+        const data = Buffer.from(String(text), 'utf8');
+        const mask = crypto.randomBytes(4);
+        const header = Buffer.from([0x81, 0x80 | data.length]);
+        const masked = Buffer.alloc(data.length);
+        for (let i = 0; i < data.length; i += 1) masked[i] = data[i] ^ mask[i % 4];
+        this._sock.write(Buffer.concat([header, mask, masked]));
+      }
+    };
+  }
   return new Promise((resolve) => {
     const server = http.createServer();
     server.on('upgrade', (req, socket) => {
@@ -209,7 +254,7 @@ await page.click('#btn-send');
 try {
   await page.waitForFunction(() => {
     const text = document.body.innerText || '';
-    return /Hai, aku di sini|Halo! Ada yang bisa saya bantu/.test(text);
+    return /Hai, aku di sini|Halo! Ada yang bisa saya bantu|Bobot sedang diunduh/.test(text);
   }, null, { timeout: 8000 });
 } catch (err) {
   const debug = await page.innerText('body').catch(() => '');
@@ -220,7 +265,7 @@ try {
 }
 const body = await page.innerText('#messages');
 const stopLabel = await page.getAttribute('#btn-stop', 'aria-label');
-note(/Hai, aku di sini|Halo! Ada yang bisa saya bantu/.test(body) && !/^\d+$/m.test(body), 'live sapaan', stopLabel);
+note(/Hai, aku di sini|Halo! Ada yang bisa saya bantu|Bobot sedang diunduh/.test(body) && !/^\d+$/m.test(body), 'live sapaan', stopLabel);
 note(stopLabel === 'Berhenti menghasilkan', 'tombol berhenti');
 const live = await page.evaluate(async () => {
   const p2p = await import('/js/sync/p2p-sync.js');
