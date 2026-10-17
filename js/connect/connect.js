@@ -20,7 +20,10 @@ export const connectPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('connect') >= 0) mount();
     });
-    if ((location.hash || '').indexOf('connect') >= 0) mount();
+    window.addEventListener('rategoan:route', (ev) => {
+      if (ev && ev.detail && ev.detail.view === 'connect') mount();
+    });
+    mount();
   },
   open() {
     mount();
