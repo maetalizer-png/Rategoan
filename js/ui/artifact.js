@@ -206,6 +206,9 @@ function setChrome(type) {
   const name = current.fileName || '';
   let label = 'Unduh MD';
   if (type === 'slide') label = 'Unduh PPTX';
+  else if (type === 'chart' || type === 'diagram' || /\.svg$/i.test(name)) label = 'Unduh SVG';
+  else if (type === 'report') label = 'Cetak PDF';
+  else if (/\.xlsx$/i.test(name)) label = 'Unduh XLSX';
   else if (type === 'table') label = 'Unduh CSV';
   else if (type === 'zip') label = 'Unduh ZIP';
   else if (type === 'code') label = 'Unduh file';

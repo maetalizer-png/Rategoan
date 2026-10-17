@@ -103,6 +103,7 @@ export function buildDynamicThoughts(query, opts) {
   const isWebBuild = /\b(website|web|situs|landing\s*page|aplikasi|app|toko\s*online|dashboard|portofolio|html|css|jadwal\s*perjalanan|itinerary)\b/i.test(clean) || (/\b(buatkan|bikin|rancang)\b/i.test(clean) && /\b(aplikasi|web|html)\b/i.test(clean));
   const isCode = isWebBuild || /\b(kode|code|fungsi|function|script|python|js|bug|komponen|perbaiki|edit|ubah)\b/i.test(clean);
   const isSlide = /\b(slide|presentasi|powerpoint|pptx|deck)\b/i.test(clean);
+  const isChartOrDiagram = /\b(grafik|chart|diagram|flowchart|bagan)\b/i.test(clean);
   const isConnect = !isWebBuild && !isCode && /\b(github|repo|drive|gmail|email|kotak masuk|kalender|calendar)\b/i.test(clean);
   const isMath = /\b(hitung|rumus|integral|turunan|matriks|persamaan|\d+\s*[+*^/-]\s*\d+)\b/i.test(clean);
   const isGreeting = /^(ha+l+o+|he+l+o+|hai+|hi+|hei+|hey+|p|pagi|siang|sore|malam|selamat\s+(pagi|siang|sore|malam)|assalamu'?alaikum|permisi|tes|test|ping|apa\s+kabar)\b/i.test(clean) && clean.split(/\s+/).length <= 5;
@@ -261,6 +262,35 @@ export function buildDynamicThoughts(query, opts) {
       liveLabel: 'Menyusun rancangan kode & penjelasan implementasi…',
       text: 'Menyusun rancangan kode & penjelasan implementasi',
       sub: 'Saya rakit kode lengkap beserta panduan struktur dan bagian-bagian utamanya.',
+    });
+    return steps;
+  }
+
+  if (isChartOrDiagram) {
+    steps.push({
+      kind: 'MIND',
+      liveLabel: 'Memetakan pasangan data & kategori visualisasi…',
+      text: 'Memetakan pasangan data & kategori pada "' + shortQ + '"',
+      sub: 'Saya ekstrak label kategori, nilai numerik, serta jenis visualisasi yang paling tepat untuk menyajikan data tersebut.',
+    });
+    steps.push({
+      kind: 'SLIDE',
+      liveLabel: 'Merancang skala sumbu & merender kanvas vektor SVG…',
+      text: 'Merancang skala proporsional & merender kanvas vektor SVG',
+      sub: 'Menghitung proporsi tinggi batang/kurva, garis bantu, dan label nilai secara presisi ke dalam grafik SVG.',
+    });
+    if (isThink) {
+      steps.push({
+        kind: 'CHECK',
+        liveLabel: 'Memeriksa keterbacaan label & akurasi angka…',
+        text: 'Memeriksa keterbacaan label & ketepatan proporsi angka',
+        sub: 'Memastikan seluruh kategori dan angka tampil utuh tanpa tumpang tindih.',
+      });
+    }
+    steps.push({
+      kind: 'WRITE',
+      liveLabel: 'Menyajikan kartu grafik interaktif di ruang obrolan…',
+      text: 'Menyajikan kartu grafik interaktif siap unduh (.svg)',
     });
     return steps;
   }

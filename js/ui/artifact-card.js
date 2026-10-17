@@ -2,6 +2,7 @@ import { markdown } from '../../shared/markdown.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
 import { buildZip } from '../../shared/zip-local.js';
 import { exportSlides } from '../../shared/slides-export.js';
+import { sanitizeReportBody } from '../../shared/report-export.js';
 import { artifact } from './artifact.js';
 import { mountToolCalls } from '../connectors/tool-card.js';
 
@@ -122,6 +123,10 @@ function preview(item) {
     artifact.open(outlineFrom(item.body, item.title), item.title, item.filename || 'slide.pptx');
     return;
   }
+  if (type === 'chart' || type === 'diagram') {
+    artifact.open({ type, markdown: item.body, title: item.title, fileName: item.filename || (type + '.svg') }, item.title);
+    return;
+  }
   if (type === 'code' || type === 'html') {
     artifact.open({ type: 'code', code: item.body, lang: type === 'html' ? 'html' : 'js', title: item.title, fileName: item.filename }, item.title);
     return;
@@ -141,6 +146,10 @@ function download(item) {
   const name = item.filename || 'berkas.txt';
   if (item.type === 'slide' || /\.pptx$/i.test(name)) {
     exportSlides(outlineFrom(item.body, item.title), name.replace(/\.pptx$/i, '') + '.pptx');
+    return;
+  }
+  if (item.type === 'chart' || item.type === 'diagram' || /\.svg$/i.test(name)) {
+    downloadText(name, item.body, 'image/svg+xml;charset=utf-8');
     return;
   }
   if (item.type === 'docx' || /\.docx$/i.test(name) || (item.type === 'document' && /\.docx$/i.test(name))) {
@@ -166,12 +175,19 @@ function download(item) {
 function mountCard(container, item) {
   const card = document.createElement('div');
   card.className = 'artifact-card';
+  if ((item.type === 'chart' || item.type === 'diagram') && /<svg\b/i.test(item.body || '')) {
+    const stage = document.createElement('div');
+    stage.className = 'artifact-card-svg';
+    stage.innerHTML = sanitizeReportBody(item.body);
+    card.appendChild(stage);
+  }
   const head = document.createElement('div');
   head.className = 'artifact-card-head';
   const name = document.createElement('strong');
-  name.textContent = item.filename || item.title;
+  name.textContent = item.title || item.filename;
   const meta = document.createElement('span');
-  meta.textContent = (item.type || 'berkas') + ' · ' + sizeLabel(item.body);
+  const typeLabel = { chart: 'Grafik SVG', diagram: 'Diagram SVG', document: 'Dokumen', slide: 'Slide PPTX', table: 'Tabel', code: 'Kode' }[item.type] || item.type || 'berkas';
+  meta.textContent = typeLabel + ' · ' + sizeLabel(item.body);
   head.appendChild(name);
   head.appendChild(meta);
   const actions = document.createElement('div');
@@ -182,7 +198,7 @@ function mountCard(container, item) {
   view.onclick = () => preview(item);
   const save = document.createElement('button');
   save.type = 'button';
-  save.textContent = 'Unduh berkas';
+  save.textContent = (item.type === 'chart' || item.type === 'diagram') ? 'Unduh SVG' : 'Unduh berkas';
   save.onclick = () => download(item);
   actions.appendChild(view);
   actions.appendChild(save);
