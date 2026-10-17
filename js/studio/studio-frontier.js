@@ -276,7 +276,16 @@ export function mountStudioFrontier(ctx) {
   });
   bindClick('btn-pwa-pack', () => {
     const pack = buildPwaPack('Studio', filesFlat());
-    downloadText('manifest.json', JSON.stringify(pack.manifest, null, 2), 'application/json');
+    const manifestJson = JSON.stringify(pack.manifest, null, 2);
+    try {
+      vfs.write('/manifest.json', manifestJson);
+      vfs.write('/sw.js', pack.sw);
+      if (typeof root.paintTree === 'function') root.paintTree();
+      if (typeof root.appendConsole === 'function') {
+        root.appendConsole('Paket PWA disiapkan di VFS (/manifest.json & /sw.js) dan diunduh.');
+      }
+    } catch (e) { void e; }
+    downloadText('manifest.json', manifestJson, 'application/json');
   });
 
   function commits() {

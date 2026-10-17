@@ -977,10 +977,18 @@ async function applyCraft(text) {
     showTab('files');
     runStudioFsm(['start', 'classified', 'scanned', 'ingested', 'synthesized']);
     for (let i = 0; i < plan.steps.length; i += 1) await step(plan.steps[i]);
+    const resolvedFiles = {};
     Object.keys(plan.files).forEach((rawKey) => {
       const body = plan.files[rawKey];
       if (body == null) return;
       const vfsTarget = toVfsPath(rawKey);
+      const prevBody = beforeContentFor(vfsTarget);
+      if (resolvedFiles[vfsTarget] == null || body !== prevBody) {
+        resolvedFiles[vfsTarget] = body;
+      }
+    });
+    Object.keys(resolvedFiles).forEach((vfsTarget) => {
+      const body = resolvedFiles[vfsTarget];
       if (/\.js$/i.test(vfsTarget)) {
         const manual = $('code-manual');
         const highlight = $('code-highlight');
@@ -1481,6 +1489,7 @@ async function importDriveSelection() {
 
 function bind() {
   if (!localStorage.getItem('rategoan_auth')) {
+    try { sessionStorage.setItem('rg_login_redirect', 'studio.html'); } catch (e) { void e; }
     location.replace('index.html#/login');
     return;
   }
@@ -1516,6 +1525,7 @@ function bind() {
       box.value = spec;
       syncSend();
       box.focus();
+      if (!busy) applyCraft(spec);
     };
   });
   const plus = $('btn-plus');

@@ -454,13 +454,26 @@ export async function pullGithub(token, repo) {
   return { ok: true, reason: '', files };
 }
 
+function dedupeVfsKeys(map) {
+  const keys = Object.keys(map || {});
+  const hasSet = new Set(keys);
+  return keys.filter((k) => {
+    if (k === 'index.html' && hasSet.has('/index.html')) return false;
+    if ((k === 'style.css' || k === 'css/style.css') && hasSet.has('/css/style.css')) return false;
+    if ((k === 'script.js' || k === 'js/script.js') && hasSet.has('/js/script.js')) return false;
+    if (k === 'main.py' && hasSet.has('/main.py')) return false;
+    if (!k.startsWith('/') && hasSet.has('/' + k)) return false;
+    return true;
+  });
+}
+
 export function grepVfs(files, pattern) {
   const map = files || {};
   const raw = String(pattern || '').trim();
   const terms = raw.toLowerCase().split(/\s+/).filter((w) => w.length >= 3);
   const needle = terms[0] || raw.toLowerCase();
   const hits = [];
-  Object.keys(map).forEach((file) => {
+  dedupeVfsKeys(map).forEach((file) => {
     const lines = String(map[file] || '').split('\n');
     lines.forEach((lineText, idx) => {
       const lower = lineText.toLowerCase();
@@ -474,11 +487,11 @@ export function grepVfs(files, pattern) {
 
 export function readVfsContext(files, query) {
   const map = files || {};
-  const keys = Object.keys(map);
+  const keys = dedupeVfsKeys(map);
   if (!keys.length) return { summary: '/index.html (kosong)', excerpts: [] };
   const matches = grepVfs(map, query);
   const touched = Array.from(new Set(matches.map((m) => m.file)));
-  const summary = (touched.length ? touched : keys.map((k) => (k.startsWith('/') ? k : '/' + k))).slice(0, 6).join(', ');
+  const summary = (touched.length ? touched : Array.from(new Set(keys.map((k) => (k.startsWith('/') ? k : '/' + k))))).slice(0, 6).join(', ');
   const excerpts = keys.slice(0, 6).map((k) => ({
     file: k.startsWith('/') ? k : ('/' + k),
     bytes: String(map[k] || '').length,
