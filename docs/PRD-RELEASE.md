@@ -26,7 +26,7 @@ Untuk memastikan disiplin operasional dan mencegah perbedaan tafsir antar-AI mau
 
 Bab-bab lain wajib merujuk langsung ke bab kanonik tersebut tanpa mengubah atau mempersempit definisinya.
 
-## **0.1 Claude (Perumus Arsitektur & Auditor Kualitas)**
+## **0.2 Claude (Perumus Arsitektur & Auditor Kualitas)**
 
 * **Kewenangan & Tanggung Jawab:** Menyusun dokumen spesifikasi PRD, merancang skema taksonomi, menganalisis perbandingan data, mengaudit integritas skema manifest serta kemurnian mutu *textbook*, memverifikasi kepatuhan terhadap preseden kasus, serta menyortir keterangan usang.
 
@@ -54,7 +54,7 @@ Dokumen Product Requirements Document (PRD) ini menetapkan standar operasional b
 
 2. **Penerapan 5 Pemeriksaan 'Pagar' untuk data baru**, daftar lisensi yang diperbolehkan, serta 6 aturan kualitas mutu *textbook* yang deterministik.
 
-3. **Prinsip penyelamatkan data bersih (Deterministic In-Place Repair) dan akumulasi token terbuka tanpa batas atas**, agar data bermutu tidak terbuang sia-sia saat pembersihan dan volume token terus bertambah.
+3. **Prinsip penyelamatan data bersih (Deterministic In-Place Repair) dan akumulasi token terbuka tanpa batas atas**, agar data bermutu tidak terbuang sia-sia saat pembersihan dan volume token terus bertambah.
 
 4. **Standarisasi alur konversi data mentah menjadi token BPE resmi** melalui 12 tahapan berurutan tanpa ambiguitas urutan penerbitan.
 
@@ -103,7 +103,7 @@ Seluruh korpus data pada GitHub Releases dikelola menggunakan **tepat 6 nama tag
 |  -> Tempat seluruh data mentah yang baru masuk/diunduh ditaruh di sini.       |
 +----------------------------------------+--------------------------------------+
                                          |
-                                         v (Melewati 5 Pemeriksaan Pagar & Tahap 2–9)
+                                         v (Melewati 5 Pemeriksaan Pagar & Tahap 2–8, lalu unggah Tahap 9)
 +-------------------------------------------------------------------------------+
 |                     TINGKAT 2: PENAMPUNGAN (CALON KORPUS)                     |
 |  Tag 3: penampungan-Indonesian         |  Tag 4: penampungan-English          |
@@ -914,7 +914,7 @@ Eksekutor (**Grok Build / Manus AI / Dirigen**) wajib segera menjalankan tugas o
 
 1. **Alirkan Data-baru ke penampungan dan Promosikan penampungan ke Rak Final:**
 
-   * Proses seluruh arsip mentah di `Data-baru-Indonesian` (Tag 1) dan `data-baru-English` (Tag 2) melewati **Tahap 2 s/d Tahap 9** ke `penampungan-Indonesian` (Tag 3) dan `penampungan-English` (Tag 4).
+   * Proses seluruh arsip mentah di `Data-baru-Indonesian` (Tag 1) dan `data-baru-English` (Tag 2) melewati **Tahap 2 s/d Tahap 8**, lalu diunggah pada **Tahap 9** ke `penampungan-Indonesian` (Tag 3) dan `penampungan-English` (Tag 4).
 
    * Gabungkan berkas calon korpus yang telah siap di `penampungan-Indonesian` (`K1-calon` s/d `K4-calon`) dan `penampungan-English` (`R1-calon` s/d `R4-calon`, termasuk mengubah nama berkas lama `textbook-en-part01.jsonl.gz` dan `textbook-en-part02.jsonl.gz` menjadi nama kanonik `R1-pengetahuan-part*.jsonl.gz`) bersama partisi Rak Final di lokal VM sesuai **Tahap 10**, jalankan verifikasi fisik **Tahap 11 (Gerbang 2 & Gerbang 3)**, lalu terbitkan ke `K-dataset-Indonesian` (Tag 5) dan `R-dataset-english` (Tag 6) sesuai **Tahap 12**.
 
