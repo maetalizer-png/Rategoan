@@ -119,49 +119,29 @@ function readFileText(file) {
   if (!file || Number(file.size) > MAX_ATTACH_BYTES) return Promise.resolve('');
   const name = file.name || '';
   if (/\.pdf$/i.test(name)) {
-    return file.arrayBuffer().then((buf) => extractPdfText(buf).then((text) => String(text || '').slice(0, MAX_ATTACH_TEXT_CHARS))).catch((e) => {
-      console.warn('[Rategoan Fallback] Proyek:', e);
-      return '';
-    });
+    return file.arrayBuffer().then((buf) => extractPdfText(buf)).then((txt) => String(txt || '').slice(0, MAX_ATTACH_TEXT_CHARS)).catch(() => '');
   }
   if (/\.docx$/i.test(name)) {
-    return file.arrayBuffer().then((buf) => readZipText(buf, 'word/document.xml').then((xml) => {
-      if (hasXmlEntityBomb(xml)) return '';
-      return String(xml || '')
-        .replace(/<w:p\b[^>]*>/g, '\n')
-        .replace(/<[^>]+>/g, '')
-        .replace(/\n{3,}/g, '\n\n')
-        .trim()
-        .slice(0, MAX_ATTACH_TEXT_CHARS);
-    })).catch((e) => {
-      console.warn('[Rategoan Fallback] Proyek:', e);
-      return '';
-    });
+    return file.arrayBuffer().then(async (buf) => {
+      const xml = await readZipText(buf, 'word/document.xml');
+      if (!xml || hasXmlEntityBomb(xml)) return '';
+      return xml.replace(/<w:p\b[^>]*>/g, '\n').replace(/<[^>]+>/g, '').trim().slice(0, MAX_ATTACH_TEXT_CHARS);
+    }).catch(() => '');
   }
   if (/\.zip$/i.test(name)) {
-    return file.arrayBuffer().then(async (buf) => {
+    return file.arrayBuffer().then((buf) => {
       const bytes = new Uint8Array(buf);
-      const entries = listZipEntries(bytes);
-      const safeNames = entries.map((e) => (typeof e === 'string' ? e : e.name)).filter(isSafeZipEntryPath);
-      const chunks = ['Arsip ' + name + ' (' + safeNames.length + ' berkas)'];
-      for (let i = 0; i < safeNames.length && chunks.length < 12; i += 1) {
-        const entry = safeNames[i];
-        if (!/\.(txt|md|csv|json|js|mjs|ts|py|html?|css)$/i.test(entry)) continue;
-        const txt = await readZipText(bytes, entry);
-        if (txt && !hasXmlEntityBomb(txt)) chunks.push('[' + entry + ']\n' + txt.slice(0, 1500));
-      }
-      return chunks.join('\n\n').slice(0, MAX_ATTACH_TEXT_CHARS);
+      const entries = listZipEntries(bytes)
+        .map((e) => (typeof e === 'string' ? e : e.name))
+        .filter((n) => isSafeZipEntryPath(n) && !n.endsWith('/'));
+      return ('Arsip ZIP (' + entries.length + ' berkas): ' + entries.slice(0, 30).join(', ')).slice(0, MAX_ATTACH_TEXT_CHARS);
     }).catch(() => '');
   }
   return new Promise((resolve) => {
-    if (file.type && file.type.indexOf('text') < 0 && !/\.(txt|md|csv|tsv|json|xml|html?|css|js|mjs|ts|jsx|tsx|py|sql|sh|ya?ml)$/i.test(name)) {
-      resolve('');
-      return;
-    }
     const reader = new FileReader();
     reader.onload = () => {
       const raw = String(reader.result || '');
-      if (hasXmlEntityBomb(raw)) {
+      if (/\.xml$|\.svg$|\.enex$/i.test(name) && hasXmlEntityBomb(raw)) {
         resolve('');
         return;
       }
@@ -173,49 +153,35 @@ function readFileText(file) {
 }
 
 function paint() {
-  const curLabel = $('project-current');
-  const cur = workspace.current();
-  const list = workspace.list();
-  const emptyView = $('project-empty-state');
-  const hero = $('project-hero');
-  const activeView = $('project-active-panel');
-  const toggle = $('project-new-toggle');
-  const createBox = $('project-create-box');
-  showProjectBar(cur);
-  if (!list.length) {
-    if (curLabel) curLabel.textContent = 'Kelola ruang kerja terisolasi dengan instruksi mandiri.';
-    if (hero) hero.hidden = false;
-    if (emptyView) emptyView.hidden = false;
-    if (activeView) activeView.hidden = true;
-    if (toggle) toggle.hidden = true;
-    if (createBox) createBox.hidden = false;
-    const ul = $('project-list-sheet');
-    if (ul) ul.innerHTML = '';
-    return;
-  }
-  if (emptyView) emptyView.hidden = true;
-  if (createBox && !createBox.dataset.open) createBox.hidden = true;
-  if (hero) hero.hidden = !createBox || createBox.hidden;
-  if (activeView) activeView.hidden = !cur;
-  if (toggle) toggle.hidden = false;
-  if (createBox && !createBox.dataset.open) createBox.hidden = true;
-  if (curLabel) curLabel.textContent = cur ? ('Proyek aktif: ' + cur.name) : 'Pilih proyek untuk mengaktifkan.';
+  const ul = $('project-page-list');
   const prompt = $('project-prompt');
-  if (prompt && document.activeElement !== prompt) prompt.value = cur && cur.systemPrompt ? cur.systemPrompt : '';
-  renderPinned(cur);
-  cardList($('project-list-sheet'));
-}
-
-function createNamed(name) {
-  const clean = String(name || '').trim();
-  if (!clean) return;
-  const found = workspace.findByName(clean) || workspace.create(clean);
-  if (TEMPLATES[clean] && !found.systemPrompt) workspace.update(found.id, { systemPrompt: TEMPLATES[clean] });
-  remember(found);
-  const box = $('project-create-box');
-  if (box) box.dataset.open = '';
-  toast.show('Proyek: ' + found.name);
-  paint();
+  const active = workspace.current();
+  const panel = $('project-active-panel');
+  const createCard = $('project-create-box');
+  const toggle = $('project-new-toggle');
+  const activeName = $('project-active-name');
+  cardList(ul);
+  if (panel) panel.hidden = !active;
+  if (activeName) activeName.textContent = active ? active.name : '';
+  if (createCard && toggle) {
+    const open = !active || createCard.dataset.open === '1';
+    createCard.hidden = !open;
+    toggle.hidden = open;
+  }
+  if (prompt) {
+    prompt.disabled = !active;
+    prompt.value = (active && active.systemPrompt) || '';
+    prompt.placeholder = active
+      ? 'Instruksi khusus untuk proyek ' + active.name
+      : 'Pilih atau buat proyek dulu';
+  }
+  renderPinned(active);
+  const folderLabel = $('project-folder-label');
+  if (folderLabel) {
+    folderLabel.textContent = folderBridge.name
+      ? 'Folder lokal: ' + folderBridge.name + ' (' + folderBridge.files.length + ' berkas)'
+      : 'Belum ada folder lokal';
+  }
 }
 
 export const projectPage = {
@@ -223,20 +189,37 @@ export const projectPage = {
   bind() {
     const back = $('project-back');
     if (back) back.onclick = () => router.go('chat');
-    const make = $('project-create');
-    if (make) make.onclick = () => {
-      createNamed(($('project-name') || {}).value);
-      if ($('project-name')) $('project-name').value = '';
-    };
-    const makeSheet = $('project-create-sheet');
-    if (makeSheet) makeSheet.onclick = () => {
-      createNamed(($('project-name-sheet') || {}).value);
-      if ($('project-name-sheet')) $('project-name-sheet').value = '';
-    };
-    document.querySelectorAll('[data-template]').forEach((btn) => {
+    const create = $('project-create-page');
+    const input = $('project-name-page');
+    if (create && input) {
+      create.onclick = () => {
+        const name = input.value.trim();
+        if (!name) return;
+        const p = workspace.findByName(name) || workspace.create(name);
+        input.value = '';
+        const box = $('project-create-box');
+        if (box) box.dataset.open = '';
+        activate(p);
+      };
+    }
+    const tpl = $('project-templates');
+    if (tpl) {
+      tpl.innerHTML = '';
+      Object.keys(TEMPLATES).forEach((name) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = name;
+        b.onclick = () => {
+          const p = workspace.findByName(name) || workspace.create(name);
+          workspace.update(p.id, { systemPrompt: TEMPLATES[name] });
+          activate(p);
+        };
+        tpl.appendChild(b);
+      });
+    }
+    document.querySelectorAll('[data-project-tpl]').forEach((btn) => {
       btn.onclick = () => {
-        const name = btn.getAttribute('data-template');
-        const input = $('project-name-sheet');
+        const name = btn.getAttribute('data-project-tpl') || '';
         if (input) {
           input.value = name;
           input.focus();
@@ -295,7 +278,11 @@ export const projectPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('project') >= 0) paint();
     });
+    window.addEventListener('rategoan:route', (ev) => {
+      if (ev && ev.detail && ev.detail.view === 'project') paint();
+    });
     window.addEventListener('rategoan:project-refresh', () => paint());
+    paint();
   },
   open() {
     paint();
