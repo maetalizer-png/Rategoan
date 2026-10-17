@@ -6,6 +6,9 @@ import { buildChartSvg, escapeChartText } from '../../../shared/charts-local.js'
 import { escapeCoworkHtml } from '../../../js/ui/cowork.js';
 import { sanitizeReportBody } from '../../../shared/report-export.js';
 import { signPkceValue, verifyPkceValue, callbackReturn } from '../../../api/_oauth.js';
+import { fillPath, bearer } from '../../../api/_http.js';
+import { markdown } from '../../../shared/markdown.js';
+import { previewSrcdoc } from '../../../js/studio/sandbox-runner.js';
 import { cleanGitPath, cleanGitBranch } from '../../../api/connectors/github.js';
 import { cleanDriveId } from '../../../api/connectors/drive.js';
 import { sanitizeRawMime, rawEmail } from '../../../api/connectors/gmail.js';
@@ -186,4 +189,47 @@ test('DOD-42.10 [Keamanan Siber P0 #5 — CWE-93 & CWE-1236] Sanitasi Header MIM
   const csv = exportPolicyAudit('csv');
   assert.equal(csv.includes('\n=evil_tool_read,'), false);
   assert.match(csv, /'=evil_tool_read/);
+});
+
+test('DOD-42.11 Penguatan Keamanan Siber SEC-01 s/d SEC-05, Perbaikan Alur BUG-01 s/d BUG-06, dan Peningkatan ENH-01 s/d ENH-04', () => {
+  const settingsJs = read('js/account/settings.js');
+  assert.match(settingsJs, /Masukkan PIN saat ini untuk menonaktifkan kunci/);
+  assert.match(settingsJs, /await pin\.verify\(/);
+
+  const used = new Set();
+  const safePath = fillPath('/repos/{owner}/{repo}/contents/{path}', { owner: '..evil..', repo: '../user', path: '../js/main.js' }, used);
+  assert.equal(safePath.includes('..'), false);
+  assert.match(safePath, /\/contents\/js\/main\.js$/);
+
+  const cookiePayload = Buffer.from(JSON.stringify({ connector: 'github', access_token: 'gho_cookie_tok' })).toString('base64url');
+  const cookieToken = bearer({ headers: { cookie: 'rg_oauth=' + encodeURIComponent(cookiePayload) } });
+  assert.equal(cookieToken, 'gho_cookie_tok');
+
+  const srcdoc = previewSrcdoc(
+    { 'index.html': '<!doctype html><html><body><input id="x"></body></html>' },
+    { fields: [{ key: 'x', value: '</script><script>window.__pwn=1</script>' }], scrollY: 0, session: [] }
+  );
+  assert.equal(srcdoc.includes('"</script><script>window.__pwn=1</script>"'), false);
+  assert.match(srcdoc, /<\\\/script><script>window\.__pwn=1<\\\/script>/);
+
+  const mdHtml = markdown.render('Lihat [https://example.com](https://example.com) dan Sumber::Rujukan|https://example.org/"onclick="alert(1)');
+  assert.equal(/<a[^>]*><a/i.test(mdHtml), false);
+  assert.equal(mdHtml.includes('onclick='), false);
+
+  const artifactsJs = read('js/artifacts/artifacts.js');
+  assert.match(artifactsJs, /buildDocxBytes/);
+  assert.match(artifactsJs, /buildXlsxBytes/);
+  assert.match(artifactsJs, /addEventListener\('hashchange'/);
+
+  const histMenuJs = read('js/history/histmenu.js');
+  assert.match(histMenuJs, /m\.id = 'hist-menu'/);
+  assert.match(histMenuJs, /addEventListener\('contextmenu'/);
+
+  const studioHtml = read('studio.html');
+  assert.match(studioHtml, /id="btn-git-pull-now"/);
+  assert.match(studioHtml, /id="btn-git-push-now"/);
+
+  const previewHtml = read('studio-preview.html');
+  assert.match(previewHtml, /data-live-style/);
+  assert.match(previewHtml, /querySelector\('\[name='/);
 });
