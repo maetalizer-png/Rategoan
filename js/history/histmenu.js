@@ -14,7 +14,7 @@ export const histmenu = {
   build() {
     if (this.el) return this.el;
     const m = document.createElement('div');
-    m.id = 'msg-menu';
+    m.id = 'hist-menu';
     m.hidden = true;
     document.body.appendChild(m);
     this.el = m;
@@ -119,8 +119,21 @@ export const histmenu = {
     };
     list.addEventListener('touchend', cancel, { passive: true });
     list.addEventListener('touchcancel', cancel, { passive: true });
+    list.addEventListener('contextmenu', (e) => {
+      const item = e.target.closest('.hist-item');
+      if (!item || !item.dataset.id) return;
+      e.preventDefault();
+      this.show(e.clientX, e.clientY, item.dataset.id);
+    });
     document.addEventListener(
       'touchstart',
+      (e) => {
+        if (this.el && !this.el.hidden && !this.el.contains(e.target)) this.hide();
+      },
+      { passive: true, capture: true }
+    );
+    document.addEventListener(
+      'mousedown',
       (e) => {
         if (this.el && !this.el.hidden && !this.el.contains(e.target)) this.hide();
       },
