@@ -6,6 +6,7 @@ import { listZipEntries, readZipText } from '../../shared/zip-local.js';
 import { toast } from '../core/toast.js';
 import { positionDesktopPopover } from '../../shared/popover.js';
 import { visionOcr } from '../multimodal/vision-ocr.js';
+import { scrolldown } from '../ui/scrolldown.js';
 
 export const MAX_ATTACH_BYTES = 25 * 1024 * 1024;
 export const MAX_ATTACH_TEXT_CHARS = 32000;
@@ -80,7 +81,7 @@ export function classifyFileMeta(file) {
   return { kind: 'text', badge: (ext || 'TXT').toUpperCase().slice(0, 5), tone: 'slate', sizeLabel };
 }
 
-function fileTypeIconSvg(kind) {
+export function fileTypeIconSvg(kind) {
   if (kind === 'pdf') {
     return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15h6"/><path d="M9 11h6"/></svg>';
   }
@@ -95,6 +96,9 @@ function fileTypeIconSvg(kind) {
   }
   if (kind === 'code') {
     return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>';
+  }
+  if (kind === 'audio') {
+    return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>';
   }
   return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
 }
@@ -158,9 +162,13 @@ function syncComposerSendButton(hasFiles) {
   const sendBtn = $('btn-send');
   const hasDraft = !!((inp && inp.value && inp.value.trim()) || hasFiles);
   document.body.classList.toggle('has-draft', hasDraft);
+  document.body.classList.toggle('has-attach-draft', !!hasFiles);
   if (sendBtn) {
     sendBtn.disabled = !hasDraft;
     sendBtn.classList.toggle('is-idle', !hasDraft);
+  }
+  if (scrolldown && typeof scrolldown.update === 'function') {
+    scrolldown.update();
   }
 }
 
@@ -428,10 +436,12 @@ export const attach = {
     row.innerHTML = '';
     if (!this.files.length) {
       row.hidden = true;
+      row.classList.remove('is-multi');
       syncComposerSendButton(false);
       return;
     }
     row.hidden = false;
+    row.classList.toggle('is-multi', this.files.length > 1);
     this.files.forEach((file, index) => {
       const meta = classifyFileMeta(file);
       const kind = file.kind || meta.kind;
@@ -473,7 +483,8 @@ export const attach = {
       x.className = 'hist-del attach-rm-btn';
       x.setAttribute('aria-label', 'Hapus ' + file.name);
       x.innerHTML = X_SVG;
-      x.onclick = () => {
+      x.onclick = (ev) => {
+        if (ev && typeof ev.stopPropagation === 'function') ev.stopPropagation();
         this.files.splice(index, 1);
         this.current = this.files[0] || null;
         this.renderChip();
