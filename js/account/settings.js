@@ -398,10 +398,23 @@ export const settings = {
         paintHub();
         return;
       }
+      weightNote.textContent = 'Menyiapkan unduhan bobot Raget 1.0...';
+      action.textContent = 'Sedang Mengunduh...';
       import('../../raget/raget-neural/neural-provider.js').then((mod) => {
         toast.show('Unduhan bobot dimulai');
-        mod.neuralProvider.loadWeights();
-      }).catch(() => toast.show('Unduhan bobot gagal dimulai'));
+        return mod.neuralProvider.loadWeights();
+      }).then((res) => {
+        if (res && res.ok) {
+          paintHub(100);
+        } else if (!weightsOn()) {
+          weightNote.textContent = 'Mode ringan lokal aktif (bobot penuh 997 MB belum tersedia di peladen lokal)';
+          action.textContent = 'Unduh Bobot Offline';
+        }
+      }).catch(() => {
+        weightNote.textContent = 'Gagal mengunduh bobot — menggunakan mesin lokal ringan';
+        action.textContent = 'Unduh Bobot Offline';
+        toast.show('Unduhan bobot gagal dimulai');
+      });
     };
     card.append(weightNote, action);
     hub.appendChild(card);

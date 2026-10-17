@@ -78,6 +78,13 @@ export const login = {
     auth.login('gmail', v);
     account.refresh();
     haptics.tap(15);
+    try {
+      const redir = sessionStorage.getItem('rg_login_redirect');
+      if (redir) {
+        sessionStorage.removeItem('rg_login_redirect');
+        if (redir === 'studio.html') { location.replace('studio.html'); return; }
+      }
+    } catch (e) { void e; }
     router.go('chat');
   },
   submitPhone() {
@@ -101,6 +108,13 @@ export const login = {
     auth.login('phone', this.pendingPhone);
     account.refresh();
     haptics.tap(15);
+    try {
+      const redir = sessionStorage.getItem('rg_login_redirect');
+      if (redir) {
+        sessionStorage.removeItem('rg_login_redirect');
+        if (redir === 'studio.html') { location.replace('studio.html'); return; }
+      }
+    } catch (e) { void e; }
     router.go('chat');
   },
   bind() {
