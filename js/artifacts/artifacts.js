@@ -3,6 +3,8 @@ import { router } from '../core/router.js';
 import { artifact } from '../ui/artifact.js';
 import { allArtifacts, exportSlides } from '../../shared/slides-export.js';
 import { sanitizeReportBody } from '../../shared/report-export.js';
+import { buildDocxBytes } from '../../shared/docx-local.js';
+import { buildXlsxBytes, sheetFromText } from '../../shared/xlsx-local.js';
 import { drawer } from '../ui/drawer.js';
 
 let filter = 'semua';
@@ -160,12 +162,20 @@ function paint() {
         exportSlides(item.outline, item.fileName || 'slide.pptx');
         return;
       }
+      const fileName = item.fileName || 'berkas.txt';
       const rows = Array.isArray(item.rows) ? item.rows : null;
       const body = rows ? rows.map((row) => row.join(',')).join('\n') : String(item.markdown || item.code || '');
-      const blob = new Blob([body], { type: 'text/plain' });
+      let blob;
+      if (item.type === 'docx' || /\.docx$/i.test(fileName)) {
+        blob = new Blob([buildDocxBytes(body)], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      } else if (/\.xlsx$/i.test(fileName)) {
+        blob = new Blob([buildXlsxBytes(rows || sheetFromText(body), 'jumlah')], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      } else {
+        blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+      }
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = item.fileName || 'berkas.txt';
+      link.download = fileName;
       link.click();
       setTimeout(() => URL.revokeObjectURL(link.href), 1000);
     };
@@ -190,6 +200,10 @@ export const artifactsPage = {
       drawer.close();
       this.open();
     };
+    window.addEventListener('hashchange', () => {
+      if ((location.hash || '').indexOf('artifacts') >= 0) paint();
+    });
+    if ((location.hash || '').indexOf('artifacts') >= 0) paint();
   },
   open() {
     paint();
