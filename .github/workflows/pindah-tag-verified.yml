@@ -1,0 +1,39 @@
+name: Pindah tag rilis ke commit Verified
+
+on:
+  workflow_dispatch:
+    inputs:
+      dari:
+        description: Commit asal tag (untuk dasar commit baru)
+        default: 26cd59f9ccb857e4a2c2e88f1e02d898eeb8625b
+
+permissions:
+  contents: write
+
+jobs:
+  pindah:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Buat commit bertanda tangan GitHub lalu pindahkan tag K dan R
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          DARI: ${{ inputs.dari }}
+        run: |
+          set -eu
+          br=verifikasi-rak
+          echo "Tag asal sebelum diubah:"
+          for t in K-dataset-Indonesian R-dataset-english; do
+            echo "$t -> $(gh api repos/$REPO/git/ref/tags/$t --jq .object.sha)"
+          done
+          gh api -X POST repos/$REPO/git/refs -f ref="refs/heads/$br" -f sha="$DARI" >/dev/null 2>&1 || gh api -X PATCH repos/$REPO/git/refs/heads/$br -f sha="$DARI" -F force=true >/dev/null
+          printf 'Rak K dan R: SHA256 aset K dicocokkan dengan SHA256SUMS. Aset rilis tidak diubah.\n' > catatan.txt
+          content=$(base64 -w0 catatan.txt)
+          new=$(gh api -X PUT repos/$REPO/contents/.github/VERIFIKASI-RAK.md -f message="Tandai rak K dan R terverifikasi" -f content="$content" -f branch="$br" --jq .commit.sha)
+          ver=$(gh api repos/$REPO/commits/$new --jq .commit.verification.verified)
+          echo "commit baru $new verified=$ver"
+          [ "$ver" = true ] || { echo "Commit tidak Verified, tag tidak dipindah."; exit 1; }
+          for t in K-dataset-Indonesian R-dataset-english; do
+            gh api -X PATCH repos/$REPO/git/refs/tags/$t -f sha="$new" -F force=true --jq .object.sha
+          done
+          echo "Selesai. Tag lama ada di $DARI untuk rollback."
