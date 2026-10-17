@@ -862,7 +862,7 @@ export const composer = {
       if (livePlan && livePlan.parentNode && !livePlan.dataset.idx) livePlan.remove();
       return;
     }
-    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply, thoughts, livePlan, modelPrefix });
+    let reply = await chat.ask(routedText, { searching: isWebsearch, directReply: canvasNote || directReply, thoughts, livePlan, modelPrefix });
     if ((store.get() && store.get().currentId) !== sendSessionId) {
       if (livePlan && livePlan.parentNode && !livePlan.dataset.idx) livePlan.remove();
       return;

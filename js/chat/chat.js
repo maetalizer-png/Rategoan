@@ -456,8 +456,34 @@ export const chat = {
         const nav = document.createElement('div');
         nav.className = 'fork-nav';
         const total = live.forks.length + 1;
-        const at = Math.min(total, (live.forkIndex || total));
-        nav.textContent = '< ' + at + ' / ' + total + ' >';
+        const at = Math.max(1, Math.min(total, Number(live.forkIndex) || total));
+        const switchFork = (dir) => {
+          const nextAt = Math.max(1, Math.min(total, at + dir));
+          if (nextAt === at) return;
+          const allBranches = live.forks.concat([live.messages.slice(idx)]);
+          const chosen = allBranches[nextAt - 1];
+          if (!chosen) return;
+          live.forks = allBranches.filter((_, bi) => bi !== nextAt - 1);
+          live.forkIndex = nextAt;
+          live.messages = live.messages.slice(0, idx).concat(chosen);
+          store.save();
+          this.renderMessages();
+        };
+        const prevBtn = document.createElement('button');
+        prevBtn.type = 'button';
+        prevBtn.className = 'fork-btn';
+        prevBtn.textContent = '<';
+        prevBtn.disabled = at <= 1;
+        prevBtn.onclick = (ev) => { ev.stopPropagation(); switchFork(-1); };
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = ' ' + at + ' / ' + total + ' ';
+        const nextBtn = document.createElement('button');
+        nextBtn.type = 'button';
+        nextBtn.className = 'fork-btn';
+        nextBtn.textContent = '>';
+        nextBtn.disabled = at >= total;
+        nextBtn.onclick = (ev) => { ev.stopPropagation(); switchFork(1); };
+        nav.append(prevBtn, labelSpan, nextBtn);
         d.appendChild(nav);
       }
 
