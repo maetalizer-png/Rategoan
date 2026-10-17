@@ -2,6 +2,7 @@ import { $ } from '../../shared/dom.js';
 import { idbGateway } from '../../raget/raget-database/idb-gateway.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
+import { printReport } from '../../shared/report-export.js';
 
 const KEY = 'cowork_canvas';
 let openFlag = false;
@@ -122,21 +123,24 @@ export const cowork = {
     if (docx) docx.onclick = () => downloadBytes(buildDocxBytes(textOf()), 'kanvas.docx');
     const pdf = $('cowork-pdf');
     if (pdf) pdf.onclick = () => {
+      const safeBody = '<pre style="font:16px/1.5 sans-serif;white-space:pre-wrap">' + escapeCoworkHtml(textOf()) + '</pre>';
       const frame = document.createElement('iframe');
       frame.setAttribute('title', 'Cetak kanvas');
       frame.setAttribute('sandbox', 'allow-modals');
       frame.style.position = 'fixed';
       frame.style.left = '-9999px';
+      frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\';">' + safeBody;
       document.body.appendChild(frame);
-      const doc = frame.contentDocument;
-      if (doc) {
-        doc.open();
-        doc.write('<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\';"><pre style="font:16px/1.5 sans-serif;white-space:pre-wrap">' + escapeCoworkHtml(textOf()) + '</pre>');
-        doc.close();
-      }
-      if (frame.contentWindow) {
-        frame.contentWindow.focus();
-        frame.contentWindow.print();
+      try {
+        const doc = frame.contentDocument;
+        if (doc && frame.contentWindow) {
+          frame.contentWindow.focus();
+          frame.contentWindow.print();
+        } else {
+          printReport({ title: 'Kanvas Naskah', body: safeBody });
+        }
+      } catch (e) {
+        printReport({ title: 'Kanvas Naskah', body: safeBody });
       }
       setTimeout(() => frame.remove(), 1000);
     };
