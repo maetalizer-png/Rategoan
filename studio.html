@@ -254,9 +254,12 @@
           <span id="git-sync-title" class="modal-title">Sinkronisasi GitHub</span>
           <button type="button" id="btn-close-git-sync" class="sheet-close" aria-label="Tutup">×</button>
         </div>
-        <p class="studio-modal-note">Repositori sudah tertaut. Perintah koding tetap dikirim lewat obrolan. Konektor ini hanya gerbang sinkronisasi, bukan instruksi perakitan.</p>
+        <p class="studio-modal-note">Repositori sudah tertaut. Anda dapat menarik berkas dari repositori atau mengirim perubahan VFS langsung ke GitHub.</p>
+        <input id="git-sync-msg" class="auth-input" type="text" placeholder="Pesan commit (mis. feat: pembaruan studio)" autocomplete="off">
         <div class="studio-modal-footer">
           <button type="button" id="btn-cancel-git-sync" class="btn btn-secondary">Tutup</button>
+          <button type="button" id="btn-git-pull-now" class="btn btn-secondary">Tarik dari GitHub</button>
+          <button type="button" id="btn-git-push-now" class="btn btn-primary">Push ke GitHub</button>
         </div>
       </div>
     </div>

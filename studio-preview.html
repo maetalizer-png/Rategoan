@@ -34,6 +34,7 @@ function snapshotFields() {
 function restoreFields(fields) {
   fields.forEach(function (row) {
     var el = document.getElementById(row.key);
+    if (!el && row.key) el = document.querySelector('[name=' + JSON.stringify(row.key) + ']');
     if (el) el.value = row.value;
   });
 }
@@ -53,11 +54,13 @@ function paintLive(html) {
     slot.id = 'live-root';
     document.body.appendChild(slot);
   }
-  var style = document.getElementById('live-style');
-  if (style) style.remove();
-  parsed.querySelectorAll('style').forEach(function (node) {
+  document.querySelectorAll('#live-style, style[data-live-style]').forEach(function (oldStyle) {
+    oldStyle.remove();
+  });
+  parsed.querySelectorAll('style').forEach(function (node, idx) {
     var copy = document.createElement('style');
-    copy.id = 'live-style';
+    if (idx === 0) copy.id = 'live-style';
+    copy.setAttribute('data-live-style', '1');
     copy.textContent = node.textContent;
     document.head.appendChild(copy);
   });
