@@ -47,8 +47,13 @@ export const msgmenu = {
     mk('Hapus', 'danger', () => this.act('delete'));
     m.hidden = false;
     const r = m.getBoundingClientRect();
-    m.style.left = Math.min(Math.max(8, x - r.width / 2), window.innerWidth - r.width - 8) + 'px';
-    m.style.top = Math.min(Math.max(8, y - r.height - 12), window.innerHeight - r.height - 8) + 'px';
+    const leftPos = Math.min(Math.max(12, x - r.width + 16), window.innerWidth - r.width - 12);
+    const canFitAbove = (y - r.height - 10) >= 64;
+    const topPos = canFitAbove
+      ? (y - r.height - 8)
+      : Math.min(y + 22, window.innerHeight - r.height - 12);
+    m.style.left = leftPos + 'px';
+    m.style.top = Math.max(64, topPos) + 'px';
   },
   hide() {
     if (this.el) this.el.hidden = true;
