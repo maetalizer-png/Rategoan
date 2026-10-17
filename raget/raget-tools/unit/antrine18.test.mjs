@@ -233,3 +233,26 @@ test('DOD-42.11 Penguatan Keamanan Siber SEC-01 s/d SEC-05, Perbaikan Alur BUG-0
   assert.match(previewHtml, /data-live-style/);
   assert.match(previewHtml, /querySelector\('\[name='/);
 });
+
+test('DOD-42.12 Proteksi Tombol Scroll-Down terhadap Tombol Hapus Lampiran (X), Kartu Dokumen/Gambar Mandiri, & Gelembung Pesan User Modern', () => {
+  const scrollJs = read('js/ui/scrolldown.js');
+  const scrollCss = read('css/ui/scroll.css');
+  const attachJs = read('js/sheets/attach.js');
+  const sheetsCss = read('css/sheets/sheets.css');
+  const chatJs = read('js/chat/chat.js');
+  const msgCss = read('css/chat/messages.css');
+
+  assert.match(scrollJs, /hasComposerOverlay\(\)/);
+  assert.match(scrollJs, /syncPosition\(\)/);
+  assert.match(scrollCss, /body\.has-attach-draft \.scroll-down/);
+  assert.match(scrollCss, /body:has\(#attach-row:not\(\[hidden\]\)\) \.scroll-down/);
+  assert.match(attachJs, /export function fileTypeIconSvg/);
+  assert.match(attachJs, /has-attach-draft/);
+  assert.match(sheetsCss, /\.attach-row\.is-multi/);
+  assert.match(chatJs, /mediaCard\.className = 'msg-media-card'/);
+  assert.match(chatJs, /fileTypeIconSvg\(kind\)/);
+  assert.match(chatJs, /bubble\.className = 'msg-user-bubble'/);
+  assert.match(msgCss, /\.msg-user-bubble/);
+  assert.match(msgCss, /\.msg-media-card/);
+  assert.match(msgCss, /\.msg\.user:has\(\.msg-user-bubble\)/);
+});
