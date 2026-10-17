@@ -81,9 +81,18 @@ export function readBody(req) {
 }
 
 export function bearer(req) {
-  const header = String(req.headers.authorization || req.headers.Authorization || '');
+  const headers = (req && req.headers) || {};
+  const header = String(headers.authorization || headers.Authorization || '');
   const match = header.match(/^Bearer\s+(.+)$/i);
-  return match ? match[1].trim() : '';
+  if (match) return match[1].trim();
+  const rawCookie = readCookie(req, 'rg_oauth');
+  if (rawCookie) {
+    try {
+      const parsed = JSON.parse(Buffer.from(rawCookie, 'base64url').toString('utf8'));
+      if (parsed && parsed.access_token) return String(parsed.access_token).trim();
+    } catch (e) { void e; }
+  }
+  return '';
 }
 
 export function originOf(req) {
@@ -151,7 +160,20 @@ export function allowOptions(req, res) {
 export function fillPath(path, params, used) {
   return String(path || '').replace(/\{(\w+)\}/g, (_, key) => {
     used.add(key);
-    return encodeURIComponent(params && params[key] != null ? String(params[key]) : '');
+    const raw = params && params[key] != null ? String(params[key]) : '';
+    if (key === 'path') {
+      return raw
+        .replace(/\\/g, '/')
+        .replace(/[\r\n\0]/g, '')
+        .split('/')
+        .map((part) => part.trim())
+        .filter((part) => part && part !== '.' && part !== '..' && !/\.\./.test(part))
+        .map(encodeURIComponent)
+        .join('/');
+    }
+    const clean = raw.replace(/[\x00-\x1f/\\]/g, '').replace(/\.\.+/g, '').trim();
+    if (!clean || clean === '.') return '';
+    return encodeURIComponent(clean);
   });
 }
 

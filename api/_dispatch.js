@@ -30,7 +30,8 @@ export async function dispatchTools(req, res, spec) {
     sendRpcError(res, 400, -32600, 'invalid_request');
     return;
   }
-  const tool = spec.tools.find((item) => item.name === body.name);
+  const requestedName = body.name === 'drive_search' ? 'drive_search_files' : body.name;
+  const tool = spec.tools.find((item) => item.name === requestedName);
   if (!tool) {
     sendRpcError(res, 404, -32601, 'unknown_tool');
     return;
