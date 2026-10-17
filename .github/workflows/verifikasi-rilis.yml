@@ -1,0 +1,40 @@
+name: Verifikasi rilis
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag rilis K yang diverifikasi
+        default: K-dataset-Indonesian
+      sha:
+        description: Commit tempat status dipasang
+        default: 26cd59f9ccb857e4a2c2e88f1e02d898eeb8625b
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  verifikasi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cocokkan SHA256 tiap aset dengan SHA256SUMS
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          TAG: ${{ inputs.tag }}
+          SHA: ${{ inputs.sha }}
+        run: |
+          set -u
+          base="https://github.com/$REPO/releases/download/$TAG"
+          curl -fsSL "$base/SHA256SUMS" -o SUMS
+          ok=0; bad=0
+          while read -r want name; do
+            [ -z "$name" ] && continue
+            got=$(curl -fsSL "$base/$name" | sha256sum | cut -d' ' -f1)
+            if [ "$got" = "$want" ]; then echo "OK    $name"; ok=$((ok+1)); else echo "BEDA  $name"; bad=$((bad+1)); fi
+          done < SUMS
+          if [ "$bad" -eq 0 ] && [ "$ok" -gt 0 ]; then state=success; desc="$TAG: SHA256 cocok untuk $ok berkas"; else state=failure; desc="$TAG: $bad berkas tidak cocok"; fi
+          echo "$desc"
+          gh api -X POST "repos/$REPO/statuses/$SHA" -f state="$state" -f context="Data terverifikasi (SHA256)" -f description="$desc" -f target_url="https://github.com/$REPO/actions/runs/$GITHUB_RUN_ID"
+          [ "$state" = success ]
