@@ -1644,6 +1644,48 @@ function bind() {
   const cancelGit = $('btn-cancel-git-sync');
   if (closeGit) closeGit.onclick = closeGitSyncModal;
   if (cancelGit) cancelGit.onclick = closeGitSyncModal;
+  const pullGitBtn = $('btn-git-pull-now');
+  if (pullGitBtn) pullGitBtn.onclick = async () => {
+    const creds = await githubCreds();
+    if (!creds.token || !creds.repo) {
+      appendConsole('Token atau nama repositori GitHub belum lengkap di Konektor.');
+      closeGitSyncModal();
+      return;
+    }
+    pullGitBtn.disabled = true;
+    const pulled = await pullGithub(creds.token, creds.repo);
+    pullGitBtn.disabled = false;
+    closeGitSyncModal();
+    if (!pulled.ok) {
+      appendConsole('Gagal menarik berkas dari GitHub (' + (pulled.reason || 'api') + ').');
+      return;
+    }
+    Object.keys(pulled.files).forEach((path) => vfs.write(toVfsPath(path), pulled.files[path]));
+    paintTree();
+    revealDesktop();
+    showPreview();
+    appendConsole('Berkas repositori ' + creds.repo + ' berhasil ditarik ke VFS.');
+  };
+  const pushGitBtn = $('btn-git-push-now');
+  if (pushGitBtn) pushGitBtn.onclick = async () => {
+    const creds = await githubCreds();
+    if (!creds.token || !creds.repo) {
+      appendConsole('Token atau nama repositori GitHub belum lengkap di Konektor.');
+      closeGitSyncModal();
+      return;
+    }
+    const msgBox = $('git-sync-msg');
+    const note = (msgBox && msgBox.value.trim()) || 'feat: pembaruan studio rekayasa';
+    pushGitBtn.disabled = true;
+    const pushed = await pushGithub(creds.token, creds.repo, vfs.bundle(), note);
+    pushGitBtn.disabled = false;
+    closeGitSyncModal();
+    if (!pushed.ok) {
+      appendConsole('Gagal mengirim perubahan ke GitHub (' + (pushed.reason || 'api') + ').');
+      return;
+    }
+    appendConsole('Perubahan VFS berhasil dikirim ke GitHub' + (pushed.sha ? ' (' + pushed.sha.slice(0, 7) + ').' : '.'));
+  };
   const importDrive = $('btn-import-gdrive');
   if (importDrive) importDrive.onclick = () => importDriveSelection();
   const upDrive = $('btn-gdrive-up');

@@ -149,7 +149,7 @@ function stateScript(state) {
   const session = Array.isArray(state.session) ? state.session : [];
   const scrollY = Number(state.scrollY) || 0;
   if (!fields.length && !session.length && !scrollY) return '';
-  const payload = JSON.stringify({ fields, scrollY, session });
+  const payload = JSON.stringify({ fields, scrollY, session }).replace(/<\//g, '<\\/');
   return '<script>try{var st=' + payload + ';st.fields.forEach(function(f){var el=document.getElementById(f.key);if(!el&&f.key)el=document.querySelector("[name="+JSON.stringify(f.key)+"]");if(el)el.value=f.value;});(st.session||[]).forEach(function(row){try{sessionStorage.setItem(row.key,row.value);}catch(e){}});window.scrollTo(0,st.scrollY||0);}catch(e){}<\/script>';
 }
 
