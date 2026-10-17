@@ -808,26 +808,33 @@ export const settings = {
         }
       };
     }
-    $('row-pin').onclick = () => {
+    $('row-pin').onclick = async () => {
       if (pin.has()) {
-        pin.clear().then(() => {
-          toast.show('Kunci dinonaktifkan');
-          this.refresh();
-        });
-        return;
-      } else {
-        const p = prompt('Buat PIN (4-6 digit):');
-        if (p === null) return;
-        if (/^\d{4,6}$/.test(p)) {
-          pin.set(p).then(() => {
-            toast.show('Kunci diaktifkan');
-            this.refresh();
-          });
+        const until = pin.lockedUntil();
+        if (until > Date.now()) {
+          toast.show('Tunggu ' + Math.ceil((until - Date.now()) / 1000) + ' detik');
           return;
-        } else {
-          toast.show('PIN harus 4-6 digit');
         }
+        const cur = prompt('Masukkan PIN saat ini untuk menonaktifkan kunci:');
+        if (cur === null) return;
+        if (!(await pin.verify(String(cur).trim()))) {
+          toast.show(pin.lockedUntil() > Date.now() ? 'PIN salah. Terkunci 30 detik' : 'PIN salah');
+          return;
+        }
+        await pin.clear();
+        toast.show('Kunci dinonaktifkan');
+        this.refresh();
+        return;
       }
+      const p = prompt('Buat PIN (4-6 digit):');
+      if (p === null) return;
+      if (/^\d{4,6}$/.test(p)) {
+        await pin.set(p);
+        toast.show('Kunci diaktifkan');
+        this.refresh();
+        return;
+      }
+      toast.show('PIN harus 4-6 digit');
       this.refresh();
     };
     this.renderRoute();
