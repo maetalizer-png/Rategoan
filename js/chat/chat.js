@@ -1,4 +1,4 @@
-import { classifyFileMeta } from '../sheets/attach.js';
+import { classifyFileMeta, fileTypeIconSvg } from '../sheets/attach.js';
 import { $, sleep, scrollBottom } from '../../shared/dom.js';
 import { fmtTime } from '../../shared/format.js';
 import { reduceMotion, haptics } from '../../shared/haptics.js';
@@ -74,7 +74,8 @@ if (typeof document !== "undefined") {
 }
 
 function appendCitations(parent, text) {
-  const found = String(text || '').match(/https?:\/\/[^\s)]+/g);
+  const cleanText = stripForSpeech(text);
+  const found = String(cleanText || '').match(/https?:\/\/[^\s)]+/g);
   if (!found || !found.length) return;
   const row = document.createElement('div');
   row.className = 'cite-row';
@@ -397,7 +398,7 @@ export const chat = {
       d.dataset.idx = String(idx);
       if (m.message_id) d.dataset.messageId = String(m.message_id);
       if (m.request_id) d.dataset.requestId = String(m.request_id);
-      if (m.quote) {
+      if (m.role !== 'user' && m.quote) {
         const q = document.createElement('span');
         q.className = 'msg-quote';
         q.textContent = m.quote.name + ': ' + m.quote.text;
@@ -406,9 +407,11 @@ export const chat = {
       if (m.attach) {
         const attFiles = Array.isArray(m.attach.files) && m.attach.files.length ? m.attach.files : [m.attach];
         const listEl = document.createElement('div');
-        listEl.className = 'msg-attach-list';
+        listEl.className = 'msg-attach-list' + (attFiles.length > 1 ? ' is-multi' : '');
         attFiles.forEach((f) => {
           if (f && (f.full || f.thumb)) {
+            const mediaCard = document.createElement('div');
+            mediaCard.className = 'msg-media-card';
             const img = document.createElement('img');
             img.className = 'msg-photo';
             img.src = f.full || f.thumb;
@@ -420,18 +423,20 @@ export const chat = {
               view.src = img.src;
               box.hidden = false;
             };
-            listEl.appendChild(img);
+            mediaCard.appendChild(img);
+            listEl.appendChild(mediaCard);
           } else if (f && f.name) {
             const meta = classifyFileMeta(f);
+            const kind = f.kind || meta.kind;
             const badge = f.badge || meta.badge;
             const tone = f.tone || meta.tone;
             const sizeLabel = f.sizeLabel || meta.sizeLabel;
             const statusLabel = f.statusLabel || (f.fileText ? 'Teks diekstrak' : 'Terlampir');
             const card = document.createElement('div');
-            card.className = 'msg-doc-card msg-attach';
+            card.className = 'msg-doc-card msg-attach tone-' + tone;
             const bEl = document.createElement('div');
             bEl.className = 'attach-type-badge tone-' + tone;
-            bEl.textContent = badge;
+            bEl.innerHTML = fileTypeIconSvg(kind) + '<span>' + badge + '</span>';
             const infoEl = document.createElement('div');
             infoEl.className = 'msg-doc-info';
             const nm = document.createElement('strong');
@@ -450,11 +455,22 @@ export const chat = {
         if (listEl.childNodes.length) d.appendChild(listEl);
       }
       if (m.role === 'user') {
-        if (m.text) {
-          const t = document.createElement('span');
-          t.className = 'msg-user-text';
-          t.textContent = m.text;
-          d.appendChild(t);
+        if (m.quote || m.text) {
+          const bubble = document.createElement('div');
+          bubble.className = 'msg-user-bubble';
+          if (m.quote) {
+            const q = document.createElement('span');
+            q.className = 'msg-quote';
+            q.textContent = m.quote.name + ': ' + m.quote.text;
+            bubble.appendChild(q);
+          }
+          if (m.text) {
+            const t = document.createElement('span');
+            t.className = 'msg-user-text';
+            t.textContent = m.text;
+            bubble.appendChild(t);
+          }
+          d.appendChild(bubble);
         }
       } else {
         if (m.source === 'websearch') d.appendChild(buildSourceBadge());
@@ -506,8 +522,9 @@ export const chat = {
 
       if (m.role !== 'user') {
         const actions = buildActions(m.text);
-        if (URL_RE.test(m.text)) {
-          actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + m.text.match(URL_RE)[0]), 'globe'));
+        const cleanMsgText = stripForSpeech(m.text);
+        if (URL_RE.test(cleanMsgText)) {
+          actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + cleanMsgText.match(URL_RE)[0]), 'globe'));
         }
         detectQuickChips(m.text).slice(0, 1).forEach((label) => {
           actions.appendChild(buildExtraChip(label, () => {
@@ -579,8 +596,9 @@ export const chat = {
     markdown.decorate(body);
     d.appendChild(buildMetaRow(Date.now()));
     const actions = buildActions(text);
-    if (URL_RE.test(text)) {
-      actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + text.match(URL_RE)[0]), 'globe'));
+    const cleanReplyText = stripForSpeech(text);
+    if (URL_RE.test(cleanReplyText)) {
+      actions.appendChild(buildExtraChip('Bedah', () => fillComposer('bedah ' + cleanReplyText.match(URL_RE)[0]), 'globe'));
     }
     detectQuickChips(text).slice(0, 1).forEach((label) => {
       actions.appendChild(buildExtraChip(label, () => {

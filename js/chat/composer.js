@@ -32,7 +32,7 @@ import { groundScreenshot } from '../studio/sandbox-runner.js';
 import { downloadBytes } from '../../shared/pptx-local.js';
 import { receiptTable } from '../../shared/receipt-extract.js';
 import { buildDocxBytes } from '../../shared/docx-local.js';
-import { buildOutline, previewOutline, rememberSlide } from '../../shared/slides-export.js';
+import { buildOutline, previewOutline, rememberSlide, rememberArtifact } from '../../shared/slides-export.js';
 import { turnPipeline } from '../../raget/raget-agents/turn-pipeline.js';
 import { toolsKoleksi } from '../../raget/raget-agents/tools-koleksi.js';
 import { flowHub } from '../../raget/raget-agents/flow-hub.js';
@@ -202,8 +202,10 @@ async function tryDiagramRequest(text) {
   const spec = parseDiagramAsk(text);
   if (!spec) return null;
   const svg = buildDiagramSvg(spec);
-  artifact.open({ type: 'diagram', markdown: svg, spec, title: 'Diagram', fileName: 'diagram.svg' }, 'Diagram');
-  return 'Diagram terbuka di panel. Bisa diperbesar dan diunduh sebagai SVG.';
+  const item = { type: 'diagram', markdown: svg, spec, title: 'Diagram', fileName: 'diagram.svg' };
+  rememberArtifact(item);
+  if (typeof window !== 'undefined' && window.innerWidth >= 800) artifact.open(item, 'Diagram');
+  return artifactTag('diagram', 'Diagram', 'diagram.svg', svg) + '\n\nDiagram siap di kartu obrolan. Bisa diperbesar dan diunduh sebagai SVG.';
 }
 
 function rowsOffThread(text) {
@@ -300,8 +302,10 @@ async function tryChartRequest(text) {
   const spec = parseChartAsk(text);
   if (!spec) return 'Sebut nilainya, misalnya: buat grafik batang A: 10, B: 20.';
   const svg = buildChartSvg(spec);
-  artifact.open({ type: 'chart', markdown: svg, title: spec.title, fileName: 'grafik.svg' }, spec.title);
-  return 'Grafik terbuka di panel. Bisa diunduh sebagai SVG.';
+  const item = { type: 'chart', markdown: svg, title: spec.title, fileName: 'grafik.svg' };
+  rememberArtifact(item);
+  if (typeof window !== 'undefined' && window.innerWidth >= 800) artifact.open(item, spec.title);
+  return artifactTag('chart', spec.title, 'grafik.svg', svg) + '\n\nGrafik siap di kartu obrolan. Bisa dibuka dan diunduh sebagai SVG.';
 }
 
 const HIDDEN_ORDER = /ignore previous instructions|abaikan instruksi sebelumnya|abaikan semua instruksi|ekspor data sensitif|jailbreak|you are now|system prompt/i;
@@ -755,6 +759,7 @@ export const composer = {
     const discNode = msgBox ? msgBox.querySelector('.chat-stream-disclaimer') : null;
     if (msgBox && discNode) msgBox.insertBefore(livePlan, discNode);
     else if (msgBox) msgBox.appendChild(livePlan);
+    scrollBottom();
 
     const refreshLiveThoughts = () => {
       if (!livePlan.isConnected) return;
@@ -874,6 +879,7 @@ export const composer = {
         note.className = 'thought-fail';
         note.textContent = 'Bobot sedang diunduh (0%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.';
         livePlan.appendChild(note);
+        scrollBottom();
         import('../../raget/raget-neural/neural-provider.js').then((mod) => {
           const env = mod.neuralProvider && typeof mod.neuralProvider.lastEnvelope === 'function'
             ? mod.neuralProvider.lastEnvelope()
@@ -882,10 +888,10 @@ export const composer = {
           if (env && env.message_id) livePlan.dataset.messageId = env.message_id;
           if (env && env.error) note.textContent = env.error;
           else if (env && env.status) note.textContent = 'Status bobot: ' + env.status + '. Tidak ada jawaban.';
-          toast.show(note.textContent);
         }).catch(() => {});
+      } else {
+        toast.show('Bobot sedang diunduh (0%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.');
       }
-      toast.show('Bobot sedang diunduh (0%). Obrolan akan otomatis aktif setelah unduhan selesai 100%.');
       return;
     }
     if (livePlan && livePlan.parentNode && !livePlan.dataset.idx) livePlan.remove();
