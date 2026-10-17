@@ -1,6 +1,6 @@
 # Status Korpus & Lisensi — Rategoan
 
-Diperbarui: 2026-10-12.
+Diperbarui: 2026-10-17.
 
 Spesifikasi yang berlaku: `docs/PRD-RELEASE.md` (dokumen Drive, 4 Oktober 2026). Salinan yang sama ada di Release tag `prd-data-release`, aset `PRD-RELEASE.md`.
 
@@ -30,3 +30,10 @@ Penampungan adalah calon, bukan rak. BPE calon belum dihitung. Angka di bawah ad
 Saringan calon masih berjalan dari mentah. Ekor di bawah 400MB belum masuk angka di atas. Rak R final masih kosong.
 
 Tag korpus lama (`korpus-*-bersih`, `penampung`, `data-baru`, `data-baru-20261002`) dipensiunkan setelah asetnya pindah. Jangan dipakai training.
+
+## Catatan verifikasi rak final (2026-10-17)
+
+Tag `K-dataset-Indonesian` dan `R-dataset-english` sekarang menunjuk commit `e5adc3f7dd5e1c00fc04d9b78465120a7c2b6f46`, bertanda tangan GitHub (Verified). Sebelumnya `26cd59f9ccb857e4a2c2e88f1e02d898eeb8625b`. Nama tag, aset, dan isi data tidak berubah. Rujuk rak lewat nama tag atau tautan unduhan aset, bukan lewat nomor commit.
+
+SHA-256 seluruh 12 berkas di `SHA256SUMS` rak K (K1 sampai K4 dan `manifest.json`) dicocokkan dengan berkas di rilis pada 2026-10-17: semua cocok. Alurnya `.github/workflows/verifikasi-rilis.yml`. Rak R masih kosong, jadi centang Verified di R tidak berarti ada data.
+
