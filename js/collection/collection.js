@@ -640,6 +640,10 @@ export const collectionPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('collection') >= 0) this.open();
     });
+    window.addEventListener('rategoan:route', (ev) => {
+      if (ev && ev.detail && ev.detail.view === 'collection') this.open();
+    });
+    this.open();
     $('coll-back').onclick = () => router.go('chat');
     const collMenu = $('coll-menu');
     const moreBtn = $('coll-more');
