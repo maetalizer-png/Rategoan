@@ -338,11 +338,28 @@ export const chat = {
       card.onclick = () => {
         const act = card.getAttribute('data-act');
         if (act === 'studio') { window.open('studio.html', '_blank', 'noopener'); return; }
-        if (act === 'docs') { router.go('collection'); return; }
-        if (act === 'agenda') { router.go('project'); return; }
         const input = $('chat-input');
+        if (act === 'docs') {
+          if (input) {
+            input.value = 'Tolong ringkas dan bedah isi dokumen ini secara mendalam: ';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.focus();
+          }
+          const plusBtn = $('btn-plus');
+          if (plusBtn) plusBtn.click();
+          return;
+        }
+        if (act === 'agenda') {
+          if (input) {
+            input.value = 'Tolong susun agenda kerja, daftar prioritas, dan catatan tindak lanjut hari ini: ';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.focus();
+          }
+          return;
+        }
         if (!input) return;
         input.value = 'Tolong bantu menelusuri fakta. ';
+        input.dispatchEvent(new Event('input', { bubbles: true }));
         input.focus();
       };
     });
