@@ -1,22 +1,38 @@
 .scroll-down {
   position: fixed;
-  right: 16px;
-  bottom: 150px;
-  width: 44px;
-  height: 44px;
+  left: 50%;
+  right: auto;
+  bottom: var(--scroll-down-bottom, 152px);
+  transform: translateX(-50%);
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: var(--rg-surface);
+  background: var(--rg-bg-glass, var(--rg-surface));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--rg-line);
   color: var(--rg-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--rg-shadow);
-  z-index: 30;
+  box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.14), 0 1px 3px rgba(15, 23, 42, 0.06);
+  z-index: 18;
+  transition: bottom 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.16s ease, transform 0.16s ease;
+}
+
+.scroll-down[hidden],
+body.has-attach-draft .scroll-down,
+body.keyboard-open .scroll-down,
+body:has(#attach-row:not([hidden])) .scroll-down,
+body:has(#quote-row:not([hidden])) .scroll-down {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .scroll-down:active {
   background: var(--rg-ring);
+  transform: translateX(-50%) scale(0.95);
 }
 
 .scroll-badge {
