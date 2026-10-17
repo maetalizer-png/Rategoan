@@ -125,7 +125,15 @@ function paint() {
     const format = document.createElement('span');
     format.className = 'artifact-format ' + extOf(item).toLowerCase();
     format.textContent = extOf(item);
-    preview.appendChild(previewMark(extOf(item)));
+    const rawBody = String(item.markdown || '');
+    if ((item.type === 'chart' || item.type === 'diagram') && /<svg\b/i.test(rawBody)) {
+      const thumb = document.createElement('div');
+      thumb.className = 'artifact-preview-svg';
+      thumb.innerHTML = sanitizeReportBody(rawBody);
+      preview.appendChild(thumb);
+    } else {
+      preview.appendChild(previewMark(extOf(item)));
+    }
     preview.appendChild(format);
     const info = document.createElement('div');
     info.className = 'artifact-card-body';
@@ -149,9 +157,9 @@ function paint() {
         frame.srcdoc = '<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src data: blob:;">' + sanitizeReportBody(body);
         return;
       }
+      router.go('chat');
       if (item.type === 'code' || item.type === 'document' || item.type === 'table' || item.type === 'chart' || item.type === 'diagram' || item.type === 'report') artifact.open(item);
       else artifact.open(item.outline, item.title, item.fileName);
-      router.go('chat');
     };
     const save = document.createElement('button');
     save.type = 'button';
@@ -203,7 +211,10 @@ export const artifactsPage = {
     window.addEventListener('hashchange', () => {
       if ((location.hash || '').indexOf('artifacts') >= 0) paint();
     });
-    if ((location.hash || '').indexOf('artifacts') >= 0) paint();
+    window.addEventListener('rategoan:route', (ev) => {
+      if (ev && ev.detail && ev.detail.view === 'artifacts') paint();
+    });
+    paint();
   },
   open() {
     paint();
